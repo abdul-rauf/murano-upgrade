@@ -1,0 +1,38 @@
+{{!
+/*********************************************************************************
+* This GitHub repository is restricted to access and use by SugarCRM’s OEM partners only.  The installation and use of
+* files and any related documentation available in this particular repository (the “OEM GitHub Repository”) are subject
+* to the terms in the contract(s) between your company and SugarCRM.  If you have any questions about your usage rights
+* or any restrictions for what’s in the OEM GitHub Repository, please contact the person in your company is responsible
+* for the SugarCRM relationship.  They can help advise you on the relevant contract terms.
+*
+* Copyright 2004-2014 SugarCRM Inc.  All rights reserved.
+*********************************************************************************/
+}}
+<div class="welcome">
+    <div class="thumbnail login">
+        <div class="tcenter">
+            {{!
+                Include a custom OEM logo on the login page
+            }}
+            <img style='vertical-align: middle; 130px; height: 65px; padding-bottom: 10px;' src='custom/themes/default/images/clogo.png' alt='Logo'>
+        </div>
+        <form name='{{name}}' class="tcenter">
+            {{#each meta.panels}}
+                {{#each fields}}
+                    <div class="control-group">{{field ../../this model=../../model}}</div>
+                {{/each}}
+                <p class="help-block">
+                    {{#if ../showPasswordReset}}
+                        <a href="#forgotpassword" class="btn btn-link btn-invisible">{{str "LBL_LOGIN_FORGOT_PASSWORD"}}</a>
+                    {{/if}}
+                </p>
+            {{/each}}
+            <div class="login-footer">
+                {{#each meta.buttons}}
+                    {{field ../this model=../model}}
+                {{/each}}
+            </div>
+        </form>
+    </div>
+</div>

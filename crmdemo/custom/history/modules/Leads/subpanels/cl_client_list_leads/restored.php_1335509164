@@ -1,0 +1,50 @@
+<?php
+// created: 2012-04-27 07:45:59
+$layout_defs = array (
+  'client_name_c' => 
+  array (
+    'type' => 'relate',
+    'default' => true,
+    'studio' => 'visible',
+    'vname' => 'LBL_CLIENT_NAME',
+    'width' => '10%',
+    'widget_class' => 'SubPanelDetailViewLink',
+    'target_module' => 'mur_client_n_list',
+    'target_record_key' => 'mur_client_n_list_id_c',
+  ),
+  'hit_status' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'vname' => 'LBL_HIT_STATUS',
+    'width' => '10%',
+  ),
+  'date_sent' => 
+  array (
+    'type' => 'date',
+    'vname' => 'LBL_DATE_SENT',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'date_modified' => 
+  array (
+    'vname' => 'LBL_DATE_MODIFIED',
+    'width' => '45%',
+    'default' => true,
+  ),
+  'edit_button' => 
+  array (
+    'widget_class' => 'SubPanelEditButton',
+    'module' => 'cl_Client_list',
+    'width' => '4%',
+    'default' => true,
+  ),
+  'remove_button' => 
+  array (
+    'widget_class' => 'SubPanelRemoveButton',
+    'module' => 'cl_Client_list',
+    'width' => '5%',
+    'default' => true,
+  ),
+);

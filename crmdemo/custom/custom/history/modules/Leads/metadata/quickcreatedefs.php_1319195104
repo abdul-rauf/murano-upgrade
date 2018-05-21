@@ -1,0 +1,6 @@
+<?php
+// created: 2015-02-22 18:55:12
+$viewdefs['Leads']['base']['menu']['quickcreate'] = array (
+  'visible' => true,
+  'order' => 0,
+);

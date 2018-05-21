@@ -1,0 +1,50 @@
+<?xml version ='1.0' encoding ='UTF-8' ?> 
+<definitions name='Emp' 
+  targetNamespace='http://www.muranoconnect.com/master/emp'
+  xmlns:tns=' http://www.muranoconnect.com/master/emp '
+  xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' 
+  xmlns:xsd='http://www.w3.org/2001/XMLSchema' 
+  xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/'
+  xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/' 
+  xmlns='http://schemas.xmlsoap.org/wsdl/'> 
+
+<message name='getEmpRequest'> 
+  <part name='emp_id' type='xsd:string'/> 
+</message> 
+<message name='getEmpResponse'> 
+  <part name='Result' type='xsd:string'/> 
+</message> 
+
+<portType name='EmpPortType'> 
+  <operation name='getEmpInfo'> 
+    <input message='tns:getEmpRequest'/> 
+    <output message='tns:getEmpResponse'/> 
+  </operation> 
+</portType> 
+
+<binding name='EmpBinding' type=
+'tns:EmpPortType'> 
+  <soap:binding style='rpc' 
+    transport='http://schemas.xmlsoap.org/soap/http'
+  /> 
+  <operation name='getEmpInfo'> 
+    <soap:operation soapAction='urn:localhost/webservice/-emp#
+    getEmpInfo'/> 
+    <input> 
+      <soap:body use='encoded' namespace='urn:localhost/webservice-emp'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input> 
+    <output> 
+      <soap:body use='encoded' namespace='urn:localhost/webservice-emp'
+      encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output> 
+  </operation> 
+</binding> 
+
+<service name='EmpService'> 
+  <port name='EmpPort' binding=
+  'EmpBinding'> 
+    <soap:address location='http://www.muranoconnect.com/master/emp-server.php'/>
+  </port> 
+</service>
+</definitions>

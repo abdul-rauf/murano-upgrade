@@ -1,0 +1,19 @@
+.worked div.on {
+    background-position: 0 0;
+}
+
+.worked div {
+    background-image: url('http://muranoconnect.com/index.php?entryPoint=getImage&themeName=Amore&themeName=Sugar&imageName=tick.png');
+    float: left;
+    height: 18px;
+    width: 18px;
+	text-indent:-9999px;
+}
+.worked div.off {
+    background-position: 0 -18px;
+}
+.worked div:hover
+{
+	 background-position: 0 -18px;
+	 cursor:pointer;
+}

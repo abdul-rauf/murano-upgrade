@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!--
+ * Copyright (c) 2005, 2006 JasperSoft Corporation,  All rights reserved.
+ *
+ * This file is part of JasperReport for SugarCRM.
+ *
+ *  JasperReport for SugarCRM is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; version 2 of the License.
+ *
+ *  JasperReport for SugarCRM is distributed in the hope that it will be
+ *  useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with JasperReports for SugarCRM; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+-->
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="OpportunitiesByIndustry"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="842"
+		 pageHeight="595"
+		 columnWidth="802"
+		 columnSpacing="0"
+		 leftMargin="20"
+		 rightMargin="20"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="display.name" value="Opportunities By Industry"/>
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+	<queryString><![CDATA[select a.industry, u.first_name, u.last_name, sum(o.amount) sum, avg(o.amount) average from accounts a
+inner join accounts_opportunities ao on ao.account_id = a.id
+inner join opportunities o on ao.opportunity_id = o.id
+inner join users u on o.assigned_user_id = u.id
+group by o.assigned_user_id, a.industry
+order by o.assigned_user_id, a.industry]]></queryString>
+	<field name="industry" class="java.lang.String"/>
+	<field name="first_name" class="java.lang.String"/>
+	<field name="last_name" class="java.lang.String"/>
+	<field name="sum" class="java.lang.Double"/>
+	<field name="average" class="java.lang.Double"/>
+
+	<title>
+		<band height="25"  isSplitAllowed="true" >
+			<staticText>
+				<reportElement
+					mode="Transparent"
+					x="0"
+					y="0"
+					width="500"
+					height="25"
+					forecolor="#FF9900"
+					backcolor="#FFFFFF"
+					key="staticText-7"
+					stretchType="NoStretch"
+					positionType="FixRelativeToTop"
+					isPrintRepeatedValues="true"
+					isRemoveLineWhenBlank="false"
+					isPrintInFirstWholeBand="false"
+					isPrintWhenDetailOverflows="false"/>
+				<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+					<font fontName="Tahoma" pdfFontName="Helvetica" size="18" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
+				</textElement>
+			<text><![CDATA[Open Opportunities By Industry]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="500"  isSplitAllowed="true" >
+			<crosstab>
+				<reportElement x="0" y="0" width="802" height="500" mode="Opaque"/>
+				<crosstabDataset>
+					<dataset/>
+				</crosstabDataset>
+
+				<rowGroup name="SalesRepRow" width="80" totalPosition="End">
+					<bucket>
+						<bucketExpression class="java.lang.String">$F{last_name}</bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<box leftBorder="1Point" bottomBorder="1Point" leftPadding="5"/>
+							<textField>
+								<reportElement x="0" y="0" width="75" height="20"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true" pdfFontName="Helvetica-Bold"/>
+								</textElement>
+								<textFieldExpression>$V{SalesRepRow}</textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents>
+							<box leftBorder="1Point" bottomBorder="1Point" leftPadding="5"/>
+							<staticText>
+								<reportElement x="0" y="0" width="75" height="20"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true" pdfFontName="Helvetica-Bold"/>
+								</textElement>
+								<text>Total</text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+
+				<columnGroup name="IndustryColumn" height="20" totalPosition="End">
+					<bucket>
+						<bucketExpression class="java.lang.String">$F{industry}</bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents>
+							<box leftBorder="1Point" bottomBorder="1Point" topBorder="1Point"/>
+							<textField>
+								<reportElement x="0" y="0" width="80" height="20"/>
+								<textElement verticalAlignment="Middle" textAlignment="Center">
+									<font isBold="true" pdfFontName="Helvetica-Bold"/>
+								</textElement>
+								<textFieldExpression>$V{IndustryColumn}</textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents>
+							<box border="1Point"/>
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="20"/>
+								<textElement verticalAlignment="Middle" textAlignment="Center">
+									<font isBold="true" pdfFontName="Helvetica-Bold"/>
+								</textElement>
+								<text>Total</text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+
+				<measure name="IndustryAmount" class="java.lang.Double" calculation="Sum">
+					<measureExpression>$F{sum}</measureExpression>
+				</measure>
+
+				<crosstabCell width="80" height="20">
+					<cellContents>
+						<box leftBorder="1Point" bottomBorder="1Point" rightPadding="5"/>
+						<textField pattern="#,##0.00">
+							<reportElement x="0" y="0" width="75" height="20"/>
+							<textElement verticalAlignment="Middle" textAlignment="Right"/>
+							<textFieldExpression class="java.lang.Double">$V{IndustryAmount}</textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+
+				<crosstabCell width="80" height="20" columnTotalGroup="IndustryColumn">
+					<cellContents backcolor="#E0FFFF">
+						<box leftBorder="1Point" bottomBorder="1Point" rightBorder="1Point" rightPadding="5"/>
+						<textField pattern="#,##0.00">
+							<reportElement x="0" y="0" width="75" height="20"/>
+							<textElement verticalAlignment="Middle" textAlignment="Right">
+								<font isBold="true" pdfFontName="Helvetica-Bold"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double">$V{IndustryAmount}</textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+
+				<crosstabCell width="80" height="20" rowTotalGroup="SalesRepRow">
+					<cellContents backcolor="#E0FFC0">
+						<box leftBorder="1Point" bottomBorder="1Point" rightPadding="5"/>
+						<textField pattern="#,##0.00">
+							<reportElement x="0" y="0" width="75" height="20"/>
+							<textElement verticalAlignment="Middle" textAlignment="Right">
+								<font isBold="true" pdfFontName="Helvetica-Bold"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double">$V{IndustryAmount}</textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="80" height="20" rowTotalGroup="SalesRepRow" columnTotalGroup="IndustryColumn">
+					<cellContents backcolor="#60FFFF">
+						<box leftBorder="1Point" bottomBorder="1Point" rightBorder="1Point" rightPadding="5"/>
+						<textField pattern="#,##0.00">
+							<reportElement x="0" y="0" width="75" height="20"/>
+							<textElement verticalAlignment="Middle" textAlignment="Right">
+								<font isBold="true" pdfFontName="Helvetica-Bold"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double">$V{IndustryAmount}</textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

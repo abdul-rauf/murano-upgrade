@@ -1,0 +1,49 @@
+<?php 
+ // created: 2011-02-03 13:22:18
+$mod_strings['LBL_COMPANYTYPE'] = 'Company Type';
+$mod_strings['LBL_COMPANYBACKGROUND'] = 'Company Background';
+$mod_strings['LBL_REGIONALLOCATION'] = 'Regional Location';
+$mod_strings['LBL_CURRENTALLOCATIONTOHF'] = 'Current Allocation to HF';
+$mod_strings['LBL_TARGETALLOCATIONTOHF'] = 'Target Allocation to HF';
+$mod_strings['LBL_CURRENTLOCATIONOFINTEREST'] = 'Current Location of Interest';
+$mod_strings['LBL_CURRENTSTRATEGYOFINTEREST'] = 'Current Strategy of Interest';
+$mod_strings['LBL_MURANOINSIGHTS'] = 'Murano Insights';
+$mod_strings['LBL_RESEARCH'] = 'Research';
+$mod_strings['LBL_PANEL_ADVANCED'] = 'Further Information';
+$mod_strings['LBL_EDITVIEW_PANEL1'] = 'Investment Criteria Overview';
+$mod_strings['LBL_ANNUALISEDRETURN222'] = 'annualisedreturn222';
+$mod_strings['LBL_DETAILVIEW_PANEL1'] = 'Investment Criteria Overview';
+$mod_strings['LBL_AUM'] = 'Aum ($mil)';
+$mod_strings['LBL_MINIMUMTRACKRECORD'] = 'Minimum Track Record (Years)';
+$mod_strings['LBL_ANNUALISEDRETURN'] = 'Annualised Return (%)';
+$mod_strings['LBL_SORTINORATIO'] = 'Sortino Ratio';
+$mod_strings['LBL_SHARPERATIO'] = 'Sharpe Ratio';
+$mod_strings['LBL_ANNUALISEDSTANDARDDEVATION'] = 'Annualised Standard Deviation (%)';
+$mod_strings['LBL_MAXIMUMDRAWDOWN'] = 'Maximum Drawdown (%)';
+$mod_strings['LBL_ANNUALISEDTARGETRETURN'] = 'Annualised Target Return (%)';
+$mod_strings['LBL_FUNDSIZE'] = 'Fund Size (US$m)';
+$mod_strings['LBL_FUNDCAPACITY'] = 'Fund Capacity';
+$mod_strings['LBL_FIRMSTOTALASSET'] = 'Firm\'s Total Asset (US$m)';
+$mod_strings['LBL_ADVISORYCOMPANY'] = 'Advisory Company';
+$mod_strings['LBL_MANAGEMENTCOMPANY'] = 'Management Company';
+$mod_strings['LBL_OTHEROFFICES'] = 'Other Offices';
+$mod_strings['LBL_FSDVSD'] = 'fsdvsd';
+$mod_strings['LBL_LOCKUPTICKIFYES'] = 'Lockup-Tick if Yes';
+$mod_strings['LBL_LOCKUPIFYESGIVEDETAILS'] = 'Lock Up-If Yes Give Details';
+$mod_strings['LBL_LEVERAGE'] = 'Leverage-Tick box if Yes';
+$mod_strings['LBL_LEVERAGEYES'] = 'Leverage-Give Details if Yes';
+$mod_strings['LBL_PENALTY'] = 'Penalty-Tick Box if Yes';
+$mod_strings['LBL_PENALTYYES'] = 'Penalty-If Yes Give Details';
+$mod_strings['LBL_INCEPTIONDATE'] = 'Inception Date';
+$mod_strings['LBL_BASECURRENCY'] = 'Base Currency';
+$mod_strings['LBL_DOMICILE'] = 'Domicile';
+$mod_strings['LBL_MANAGEMENTFEE'] = 'Management Fee (%)';
+$mod_strings['LBL_PERFORMANCEFEE'] = 'Performance Fee (%)';
+$mod_strings['LBL_FURTHERFEEINFORMATION'] = 'Further Fee Information';
+$mod_strings['LBL_SUBSCRIPTIONFREQUENCY'] = 'Subscription Frequency';
+$mod_strings['LBL_SUBSCRIPTIONFREQUENCYDETAILS'] = 'Subscription Frequency Details';
+$mod_strings['LBL_REDEMPTIONFREQUENCYDETAILS'] = 'Redemption Frequency Details';
+$mod_strings['LBL_REDEMPTIONFREQUENCY'] = 'Redemption Frequency';
+$mod_strings['LBL_OPPORTUNITIES_SUBPANEL_TITLE'] = 'Opportunities';
+
+?>

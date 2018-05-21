@@ -1,0 +1,11 @@
+/*
+     * Your installation or use of this SugarCRM file is subject to the applicable
+     * terms available at
+     * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+     * If you do not agree to all of the applicable terms or do not have the
+     * authority to bind the entity as an authorized representative, then do not
+     * install or use this SugarCRM file.
+     *
+     * Copyright (C) SugarCRM Inc. All rights reserved.
+     */
+(function(app){app.events.on("app:init",function(){Handlebars.registerHelper('moduleIconLabel',function(module){var name=app.lang.getAppListStrings('moduleIconList')[module]||app.lang.getAppListStrings('moduleListSingular')[module]||app.lang.getAppListStrings('moduleList')[module]||module,space=name.indexOf(" ");return(space!=-1)?name.substring(0,1)+name.substring(space+1,space+2):name.substring(0,2);});Handlebars.registerHelper('moduleIconToolTip',function(module){return app.lang.getAppListStrings('moduleListSingular')[module]||module;});Handlebars.registerHelper('getDDLabel',function(value,key){return app.lang.getAppListStrings(key)[value]||value;});Handlebars.registerHelper('subViewTemplate',function(key,data,options){var frame,template;template=app.template.getView(key,options.hash.module);frame=_.extend(Handlebars.createFrame(options.data||{}),options.hash);return template?template(data,{data:frame}):'';});Handlebars.registerHelper('subFieldTemplate',function(fieldName,view,data,options){var frame,template;template=app.template.getField(fieldName,view,options.hash.module);frame=_.extend(Handlebars.createFrame(options.data||{}),options.hash);return template?template(data,{data:frame}):'';});Handlebars.registerHelper('subLayoutTemplate',function(key,data,options){var frame,template;template=app.template.getLayout(key,options.hash.module);frame=_.extend(Handlebars.createFrame(options.data||{}),options.hash);return template?template(data,{data:frame}):'';});Handlebars.registerHelper('buildUrl',function(options){return new Handlebars.SafeString(app.utils.buildUrl(options.hash.url));});});})(SUGAR.App);

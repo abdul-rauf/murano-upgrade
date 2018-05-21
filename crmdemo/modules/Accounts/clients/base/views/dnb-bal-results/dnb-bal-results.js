@@ -1,0 +1,23 @@
+/*
+     * Your installation or use of this SugarCRM file is subject to the applicable
+     * terms available at
+     * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+     * If you do not agree to all of the applicable terms or do not have the
+     * authority to bind the entity as an authorized representative, then do not
+     * install or use this SugarCRM file.
+     *
+     * Copyright (C) SugarCRM Inc. All rights reserved.
+     */
+({extendsFrom:'DnbBalResultsView',events:{'click .importDNBData':'importDNBData','click a.dnb-company-name':'getCompanyDetails','click .backToList':'backToCompanyList','click [data-action="show-more"]':'invokePagination'},selectors:{'load':'#dnb-bal-result-loading','rslt':'#dnb-bal-result'},balAcctDD:null,initialize:function(options){this._super('initialize',[options]);this.initDD();this.initDashlet();this.paginationCallback=this.baseAccountsBAL;},initDD:function(){this.balAcctDD={'name':this.searchDD.companyname,'duns_num':this.searchDD.duns_num,'billing_address_street':this.searchDD.streetaddr,'billing_address_city':this.searchDD.town,'billing_address_state':this.searchDD.territory,'billing_address_country':this.searchDD.ctrycd,'recordNum':{'json_path':'DisplaySequence'}};this.balAcctDD.locationtype=this.searchDD.locationtype;this.balAcctDD.isDupe=this.searchDD.isDupe;},loadData:function(options){this.checkConnector('ext_rest_dnb',_.bind(this.loadDataWithValidConnector,this),_.bind(this.handleLoadError,this),['test_passed']);},_render:function(){app.view.View.prototype._renderHtml.call(this);},buildAList:function(balParams){if(this.disposed){return;}
+this.template=app.template.getView(this.name+'.dnb-bal-acct-rslt',this.module);if(this.dnbBalRslt&&this.dnbBalRslt.count){delete this.dnbBalRslt['count'];}
+this.render();this.$(this.selectors.load).removeClass('hide');this.$(this.selectors.rslt).addClass('hide');this.baseAccountsBAL(balParams,this.renderBAL);},renderBAL:function(dnbBalApiRsp){var dnbBalRslt={};if(this.resetPaginationFlag){this.initPaginationParams();}
+if(dnbBalApiRsp.product){var apiCompanyList=this.getJsonNode(dnbBalApiRsp.product,this.commonJSONPaths.srchRslt);this.formattedRecordSet=this.formatSrchRslt(apiCompanyList,this.balAcctDD);this.recordCount=this.getJsonNode(dnbBalApiRsp.product,this.commonJSONPaths.srchCount);this.paginateRecords();dnbBalRslt.product=this.currentPage;if(this.recordCount){dnbBalRslt.count=this.recordCount;}}else if(dnbBalApiRsp.errmsg){dnbBalRslt.errmsg=dnbBalApiRsp.errmsg;}
+this.renderPage(dnbBalRslt);},renderPage:function(pageData){if(this.disposed){return;}
+this.template=this.template=app.template.getView(this.name+'.dnb-bal-acct-rslt',this.module);this.dnbBalRslt=pageData;if(_.isUndefined(pageData.count)){pageData.count=this.recordCount;}
+if(pageData.product){this.dnbBalRslt.count=app.lang.get('LBL_DNB_BAL_ACCT_HEADER')+" ("+this.formatSalesRevenue(pageData.count)+")";}else{delete this.dnbBalRslt['count'];}
+this.render();this.$(this.selectors.load).addClass('hide');this.$(this.selectors.rslt).removeClass('hide');if(pageData.product){this.renderPaginationControl();}},getCompanyDetails:function(evt){if(this.disposed){return;}
+var duns_num=evt.target.id;if(duns_num){this.template=app.template.getView(this.name+'.dnb-company-details',this.module);this.render();this.$('div#dnb-company-details').hide();this.$('.importDNBData').hide();this.baseCompanyInformation(duns_num,this.compInfoProdCD.std,app.lang.get('LBL_DNB_BAL_LIST'),this.renderCompanyDetails);}},renderCompanyDetails:function(companyDetails){if(this.disposed){return;}
+var formattedFirmographics,dnbFirmo={};if(companyDetails.errmsg){this.$('.importDNBData').hide();}else if(companyDetails.product){this.$('.importDNBData').show();formattedFirmographics=this.formatCompanyInfo(companyDetails.product,this.accountsDD);dnbFirmo.product=formattedFirmographics;dnbFirmo.backToListLabel=companyDetails.backToListLabel;this.currentCompany=companyDetails.product;}
+this.dnbFirmo=dnbFirmo;this.render();this.$('div#dnb-company-detail-loading').hide();this.$('div#dnb-company-details').show();},backToCompanyList:function(){if(this.disposed){return;}
+if(this.dnbBalRslt&&this.dnbBalRslt.count){delete this.dnbBalRslt['count'];}
+this.template=app.template.getView(this.name+'.dnb-bal-acct-rslt',this.module);this.render();this.$(this.selectors.load).removeClass('hide');this.$(this.selectors.rslt).addClass('hide');var dupeCheckParams={'type':'duns','apiResponse':this.currentPage,'module':'dunsPage'};this.baseDuplicateCheck(dupeCheckParams,this.renderPage);}})

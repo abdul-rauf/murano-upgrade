@@ -1,0 +1,22 @@
+/*
+     * Your installation or use of this SugarCRM file is subject to the applicable
+     * terms available at
+     * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+     * If you do not agree to all of the applicable terms or do not have the
+     * authority to bind the entity as an authorized representative, then do not
+     * install or use this SugarCRM file.
+     *
+     * Copyright (C) SugarCRM Inc. All rights reserved.
+     */
+({defaults:{editable:true},fieldTypeMap:{'datetime':'date','datetimecombo':'date'},buildSearchTermFilter:function(moduleName,searchTerm){var searchFilter=[],returnFilter=[],searchMeta,fieldNames,terms,filter;if(moduleName==='all_modules'){return[];}
+searchMeta=app.data.getBeanClass('Filters').prototype.getModuleQuickSearchMeta(moduleName);fieldNames=searchMeta.fieldNames;if(searchTerm){searchTerm=searchTerm.trim();if(fieldNames.length===2&&searchMeta.splitTerms){terms=searchTerm.split(' ');var firstTerm=_.first(terms.splice(0,1));var otherTerms=terms.join(' ');terms=otherTerms?[firstTerm,otherTerms]:null;}else if(fieldNames.length>2){app.logger.fatal('Filtering by 3 quicksearch fields is not yet supported.');}
+_.each(fieldNames,function(name,index){var o={};if(terms){o[name]={'$starts':terms[index]};}else{o[name]={'$starts':searchTerm};}
+searchFilter.push(o);});filter=searchFilter[0];if(searchFilter.length>1){filter=terms?{'$and':searchFilter}:{'$or':searchFilter};}
+returnFilter.push(filter);if(moduleName==='Users'||moduleName==='Employees'){returnFilter[0]=({'$and':[{'status':{'$not_equals':'Inactive'}},returnFilter[0]]});}}
+return returnFilter;},combineFilterDefinitions:function(baseFilter,searchTermFilter){var isBaseFilter=_.size(baseFilter)>0,isSearchTermFilter=_.size(searchTermFilter)>0;baseFilter=_.isArray(baseFilter)?baseFilter:[baseFilter];if(isBaseFilter&&isSearchTermFilter){baseFilter.push(searchTermFilter[0]);return[{'$and':baseFilter}];}else if(isBaseFilter){return baseFilter;}else if(isSearchTermFilter){return searchTermFilter;}
+return[];},getFilterableFields:function(moduleName){var moduleMeta=app.metadata.getModule(moduleName),operatorMap=app.metadata.getFilterOperators(),fieldMeta=moduleMeta.fields,fields={};if(moduleMeta.filters){_.each(moduleMeta.filters,function(templateMeta){if(templateMeta.meta&&templateMeta.meta.fields){fields=_.extend(fields,templateMeta.meta.fields);}});}
+_.each(fields,function(fieldFilterDef,fieldName){var fieldMetaData=app.utils.deepCopy(fieldMeta[fieldName]);if(_.isEmpty(fieldFilterDef)){fields[fieldName]=fieldMetaData||{};}else{fields[fieldName]=_.extend({name:fieldName},fieldMetaData,fieldFilterDef);}
+delete fields[fieldName]['readonly'];});var validFields={};_.each(fields,function(value,key){var type=this.fieldTypeMap[value.type]||value.type;var hasAccess=app.acl.hasAccess('detail',moduleName,null,key);if(hasAccess&&(operatorMap[type]||value.predefined_filter===true)){validFields[key]=value;}},this);return validFields;},getModuleQuickSearchMeta:function(moduleName){moduleName=moduleName||this.get('module_name');var prototype=app.data.getBeanClass('Filters').prototype;prototype._moduleQuickSearchMeta=prototype._moduleQuickSearchMeta||{};prototype._moduleQuickSearchMeta[moduleName]=prototype._moduleQuickSearchMeta[moduleName]||this._getQuickSearchMetaByPriority(moduleName);return prototype._moduleQuickSearchMeta[moduleName];},populateFilterDefinition:function(filterDef,populateObj){if(!populateObj){return filterDef;}
+filterDef=app.utils.deepCopy(filterDef);_.each(filterDef,function(row){_.each(row,function(filter,field){var hasNoOperator=(_.isString(filter)||_.isNumber(filter));if(hasNoOperator){filter={'$equals':filter};}
+var operator=_.keys(filter)[0],value=filter[operator],isValueEmpty=!_.isNumber(value)&&_.isEmpty(value);if(isValueEmpty&&populateObj&&!_.isUndefined(populateObj[field])){value=populateObj[field];}
+if(hasNoOperator){row[field]=value;}else{row[field][operator]=value;}});});return filterDef;},_getQuickSearchMetaByPriority:function(searchModule){var meta=app.metadata.getModule(searchModule),filters=meta?meta.filters:[],fieldNames=[],priority=0,splitTerms=false;_.each(filters,function(value){if(value&&value.meta&&value.meta.quicksearch_field&&priority<value.meta.quicksearch_priority){fieldNames=value.meta.quicksearch_field;priority=value.meta.quicksearch_priority;if(_.isBoolean(value.meta.quicksearch_split_terms)){splitTerms=value.meta.quicksearch_split_terms;}}});return{fieldNames:fieldNames,splitTerms:splitTerms};}})

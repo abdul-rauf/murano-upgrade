@@ -1,0 +1,50 @@
+<?xml version ='1.0' encoding ='UTF-8' ?> 
+<definitions name='A1' 
+  targetNamespace='http://www.muranoconnect.com/master/A1'
+  xmlns:tns=' http://www.muranoconnect.com/master/A1 '
+  xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' 
+  xmlns:xsd='http://www.w3.org/2001/XMLSchema' 
+  xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/'
+  xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/' 
+  xmlns='http://schemas.xmlsoap.org/wsdl/'> 
+
+<message name='getA1Request'> 
+  <part name='A1_id' type='xsd:string'/> 
+</message> 
+<message name='getA1Response'> 
+  <part name='Result' type='xsd:string'/> 
+</message> 
+
+<portType name='A1PortType'> 
+  <operation name='getA1Info'> 
+    <input message='tns:getA1Request'/> 
+    <output message='tns:getA1Response'/> 
+  </operation> 
+</portType> 
+
+<binding name='A1Binding' type=
+'tns:A1PortType'> 
+  <soap:binding style='rpc' 
+    transport='http://schemas.xmlsoap.org/soap/http'
+  /> 
+  <operation name='getA1Info'> 
+    <soap:operation soapAction='urn:http://www.muranoconnect.com/master/-A1#
+    getA1Info'/> 
+    <input> 
+      <soap:body use='encoded' namespace='urn:www.muranoconnect.com/master-A1'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input> 
+    <output> 
+      <soap:body use='encoded' namespace='urn:www.muranoconnect.com/master-A1'
+      encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output> 
+  </operation> 
+</binding> 
+
+<service name='A1Service'> 
+  <port name='A1Port' binding=
+  'A1Binding'> 
+    <soap:address location='http://www.muranoconnect.com/master/A1-server.php'/>
+  </port> 
+</service>
+</definitions>
