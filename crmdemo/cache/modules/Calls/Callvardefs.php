@@ -1,0 +1,1687 @@
+<?php 
+ $GLOBALS["dictionary"]["Call"]=array (
+  'table' => 'calls',
+  'comment' => 'A Call is an activity representing a phone call',
+  'activity_enabled' => true,
+  'unified_search' => true,
+  'full_text_search' => true,
+  'unified_search_default_enabled' => true,
+  'fields' => 
+  array (
+    'my_favorite' => 
+    array (
+      'massupdate' => false,
+      'name' => 'my_favorite',
+      'vname' => 'LBL_FAVORITE',
+      'type' => 'bool',
+      'source' => 'non-db',
+      'comment' => 'Favorite for the user',
+      'studio' => 
+      array (
+        'list' => false,
+        'recordview' => false,
+      ),
+      'link' => 'favorite_link',
+      'rname' => 'id',
+      'rname_exists' => true,
+    ),
+    'favorite_link' => 
+    array (
+      'name' => 'favorite_link',
+      'type' => 'link',
+      'relationship' => 'calls_favorite',
+      'source' => 'non-db',
+      'vname' => 'LBL_FAVORITE',
+    ),
+    'following' => 
+    array (
+      'massupdate' => false,
+      'name' => 'following',
+      'vname' => 'LBL_FOLLOWING',
+      'type' => 'bool',
+      'source' => 'non-db',
+      'comment' => 'Is user following this record',
+      'studio' => 'false',
+      'link' => 'following_link',
+      'rname' => 'id',
+      'rname_exists' => true,
+    ),
+    'following_link' => 
+    array (
+      'name' => 'following_link',
+      'type' => 'link',
+      'relationship' => 'calls_following',
+      'source' => 'non-db',
+      'vname' => 'LBL_FOLLOWING',
+    ),
+    'id' => 
+    array (
+      'name' => 'id',
+      'vname' => 'LBL_ID',
+      'type' => 'id',
+      'required' => true,
+      'reportable' => true,
+      'duplicate_on_record_copy' => 'no',
+      'comment' => 'Unique identifier',
+      'mandatory_fetch' => true,
+    ),
+    'name' => 
+    array (
+      'name' => 'name',
+      'vname' => 'LBL_SUBJECT',
+      'dbType' => 'varchar',
+      'type' => 'name',
+      'len' => '50',
+      'comment' => 'Brief description of the call',
+      'unified_search' => true,
+      'full_text_search' => 
+      array (
+        'enabled' => true,
+        'boost' => 3,
+      ),
+      'required' => true,
+      'importable' => 'required',
+    ),
+    'date_entered' => 
+    array (
+      'name' => 'date_entered',
+      'vname' => 'LBL_DATE_ENTERED',
+      'type' => 'datetime',
+      'group' => 'created_by_name',
+      'comment' => 'Date record created',
+      'enable_range_search' => true,
+      'options' => 'date_range_search_dom',
+      'studio' => 
+      array (
+        'portaleditview' => false,
+      ),
+      'duplicate_on_record_copy' => 'no',
+      'readonly' => true,
+      'massupdate' => false,
+    ),
+    'date_modified' => 
+    array (
+      'name' => 'date_modified',
+      'vname' => 'LBL_DATE_MODIFIED',
+      'type' => 'datetime',
+      'group' => 'modified_by_name',
+      'comment' => 'Date record last modified',
+      'enable_range_search' => true,
+      'studio' => 
+      array (
+        'portaleditview' => false,
+      ),
+      'options' => 'date_range_search_dom',
+      'duplicate_on_record_copy' => 'no',
+      'readonly' => true,
+      'massupdate' => false,
+    ),
+    'modified_user_id' => 
+    array (
+      'name' => 'modified_user_id',
+      'rname' => 'user_name',
+      'id_name' => 'modified_user_id',
+      'vname' => 'LBL_MODIFIED',
+      'type' => 'assigned_user_name',
+      'table' => 'users',
+      'isnull' => false,
+      'group' => 'modified_by_name',
+      'dbType' => 'id',
+      'reportable' => true,
+      'comment' => 'User who last modified record',
+      'massupdate' => false,
+      'duplicate_on_record_copy' => 'no',
+      'readonly' => true,
+    ),
+    'modified_by_name' => 
+    array (
+      'name' => 'modified_by_name',
+      'vname' => 'LBL_MODIFIED',
+      'type' => 'relate',
+      'reportable' => false,
+      'source' => 'non-db',
+      'rname' => 'full_name',
+      'table' => 'users',
+      'id_name' => 'modified_user_id',
+      'module' => 'Users',
+      'link' => 'modified_user_link',
+      'duplicate_merge' => 'disabled',
+      'massupdate' => false,
+      'duplicate_on_record_copy' => 'no',
+      'readonly' => true,
+      'sort_on' => 
+      array (
+        0 => 'last_name',
+      ),
+    ),
+    'created_by' => 
+    array (
+      'name' => 'created_by',
+      'rname' => 'user_name',
+      'id_name' => 'modified_user_id',
+      'vname' => 'LBL_CREATED',
+      'type' => 'assigned_user_name',
+      'table' => 'users',
+      'isnull' => false,
+      'dbType' => 'id',
+      'group' => 'created_by_name',
+      'comment' => 'User who created record',
+      'massupdate' => false,
+      'duplicate_on_record_copy' => 'no',
+      'readonly' => true,
+    ),
+    'created_by_name' => 
+    array (
+      'name' => 'created_by_name',
+      'vname' => 'LBL_CREATED',
+      'type' => 'relate',
+      'reportable' => false,
+      'link' => 'created_by_link',
+      'rname' => 'full_name',
+      'source' => 'non-db',
+      'table' => 'users',
+      'id_name' => 'created_by',
+      'module' => 'Users',
+      'duplicate_merge' => 'disabled',
+      'importable' => false,
+      'massupdate' => false,
+      'duplicate_on_record_copy' => 'no',
+      'readonly' => true,
+      'sort_on' => 
+      array (
+        0 => 'last_name',
+      ),
+    ),
+    'doc_owner' => 
+    array (
+      'name' => 'doc_owner',
+      'vname' => 'LBL_DOC_OWNER',
+      'type' => 'id',
+      'reportable' => false,
+      'source' => 'non-db',
+      'duplicate_merge' => 'disabled',
+      'importable' => 'false',
+      'massupdate' => false,
+      'full_text_search' => 
+      array (
+        'enabled' => true,
+      ),
+      'default' => '',
+    ),
+    'user_favorites' => 
+    array (
+      'name' => 'user_favorites',
+      'vname' => 'LBL_USER_FAVORITES',
+      'type' => 'id',
+      'reportable' => false,
+      'source' => 'non-db',
+      'duplicate_merge' => 'disabled',
+      'importable' => 'false',
+      'massupdate' => false,
+      'full_text_search' => 
+      array (
+        'enabled' => true,
+      ),
+      'default' => '',
+    ),
+    'description' => 
+    array (
+      'name' => 'description',
+      'vname' => 'LBL_DESCRIPTION',
+      'type' => 'text',
+      'comment' => 'Full text of the note',
+      'rows' => 6,
+      'cols' => 80,
+      'duplicate_on_record_copy' => 'always',
+    ),
+    'deleted' => 
+    array (
+      'name' => 'deleted',
+      'vname' => 'LBL_DELETED',
+      'type' => 'bool',
+      'default' => '0',
+      'reportable' => false,
+      'duplicate_on_record_copy' => 'no',
+      'comment' => 'Record deletion indicator',
+    ),
+    'created_by_link' => 
+    array (
+      'name' => 'created_by_link',
+      'type' => 'link',
+      'relationship' => 'calls_created_by',
+      'vname' => 'LBL_CREATED_BY_USER',
+      'link_type' => 'one',
+      'module' => 'Users',
+      'bean_name' => 'User',
+      'source' => 'non-db',
+    ),
+    'modified_user_link' => 
+    array (
+      'name' => 'modified_user_link',
+      'type' => 'link',
+      'relationship' => 'calls_modified_user',
+      'vname' => 'LBL_MODIFIED_BY_USER',
+      'link_type' => 'one',
+      'module' => 'Users',
+      'bean_name' => 'User',
+      'source' => 'non-db',
+    ),
+    'activities' => 
+    array (
+      'name' => 'activities',
+      'type' => 'link',
+      'relationship' => 'call_activities',
+      'vname' => 'LBL_ACTIVITY_STREAM',
+      'link_type' => 'many',
+      'module' => 'Activities',
+      'bean_name' => 'Activity',
+      'source' => 'non-db',
+    ),
+    'assigned_user_id' => 
+    array (
+      'name' => 'assigned_user_id',
+      'rname' => 'user_name',
+      'id_name' => 'assigned_user_id',
+      'vname' => 'LBL_ASSIGNED_TO_ID',
+      'group' => 'assigned_user_name',
+      'type' => 'relate',
+      'table' => 'users',
+      'module' => 'Users',
+      'reportable' => true,
+      'isnull' => 'false',
+      'dbType' => 'id',
+      'audited' => true,
+      'duplicate_on_record_copy' => 'always',
+      'comment' => 'User ID assigned to record',
+      'duplicate_merge' => 'disabled',
+      'mandatory_fetch' => true,
+      'massupdate' => false,
+    ),
+    'assigned_user_name' => 
+    array (
+      'name' => 'assigned_user_name',
+      'link' => 'assigned_user_link',
+      'vname' => 'LBL_ASSIGNED_TO',
+      'rname' => 'full_name',
+      'type' => 'relate',
+      'reportable' => false,
+      'source' => 'non-db',
+      'table' => 'users',
+      'id_name' => 'assigned_user_id',
+      'module' => 'Users',
+      'duplicate_merge' => 'disabled',
+      'duplicate_on_record_copy' => 'always',
+      'sort_on' => 
+      array (
+        0 => 'last_name',
+      ),
+      'exportable' => true,
+    ),
+    'assigned_user_link' => 
+    array (
+      'name' => 'assigned_user_link',
+      'type' => 'link',
+      'relationship' => 'calls_assigned_user',
+      'vname' => 'LBL_ASSIGNED_TO_USER',
+      'link_type' => 'one',
+      'module' => 'Users',
+      'bean_name' => 'User',
+      'source' => 'non-db',
+    ),
+    'team_id' => 
+    array (
+      'name' => 'team_id',
+      'vname' => 'LBL_TEAM_ID',
+      'group' => 'team_name',
+      'reportable' => false,
+      'dbType' => 'id',
+      'type' => 'team_list',
+      'audited' => true,
+      'duplicate_on_record_copy' => 'always',
+      'comment' => 'Team ID for the account',
+    ),
+    'team_set_id' => 
+    array (
+      'name' => 'team_set_id',
+      'rname' => 'id',
+      'id_name' => 'team_set_id',
+      'vname' => 'LBL_TEAM_SET_ID',
+      'type' => 'id',
+      'audited' => true,
+      'studio' => 'false',
+      'dbType' => 'id',
+      'duplicate_on_record_copy' => 'always',
+      'full_text_search' => 
+      array (
+        'enabled' => true,
+      ),
+    ),
+    'team_count' => 
+    array (
+      'name' => 'team_count',
+      'rname' => 'team_count',
+      'id_name' => 'team_id',
+      'vname' => 'LBL_TEAMS',
+      'join_name' => 'ts1',
+      'table' => 'teams',
+      'type' => 'relate',
+      'required' => 'true',
+      'isnull' => 'true',
+      'module' => 'Teams',
+      'link' => 'team_count_link',
+      'massupdate' => false,
+      'dbType' => 'int',
+      'source' => 'non-db',
+      'importable' => 'false',
+      'reportable' => false,
+      'duplicate_merge' => 'disabled',
+      'duplicate_on_record_copy' => 'always',
+      'studio' => 'false',
+      'hideacl' => true,
+    ),
+    'team_name' => 
+    array (
+      'name' => 'team_name',
+      'db_concat_fields' => 
+      array (
+        0 => 'name',
+        1 => 'name_2',
+      ),
+      'sort_on' => 'tj.name',
+      'join_name' => 'tj',
+      'rname' => 'name',
+      'id_name' => 'team_id',
+      'vname' => 'LBL_TEAMS',
+      'type' => 'relate',
+      'required' => 'true',
+      'table' => 'teams',
+      'isnull' => 'true',
+      'module' => 'Teams',
+      'link' => 'team_link',
+      'massupdate' => true,
+      'dbType' => 'varchar',
+      'source' => 'non-db',
+      'len' => 36,
+      'custom_type' => 'teamset',
+      'studio' => 
+      array (
+        'portallistview' => false,
+        'portalrecordview' => false,
+      ),
+      'duplicate_on_record_copy' => 'always',
+      'exportable' => true,
+    ),
+    'team_link' => 
+    array (
+      'name' => 'team_link',
+      'type' => 'link',
+      'relationship' => 'calls_team',
+      'vname' => 'LBL_TEAMS_LINK',
+      'link_type' => 'one',
+      'module' => 'Teams',
+      'bean_name' => 'Team',
+      'source' => 'non-db',
+      'duplicate_merge' => 'disabled',
+      'studio' => 'false',
+    ),
+    'team_count_link' => 
+    array (
+      'name' => 'team_count_link',
+      'type' => 'link',
+      'relationship' => 'calls_team_count_relationship',
+      'link_type' => 'one',
+      'module' => 'Teams',
+      'bean_name' => 'TeamSet',
+      'source' => 'non-db',
+      'duplicate_merge' => 'disabled',
+      'reportable' => false,
+      'studio' => 'false',
+    ),
+    'teams' => 
+    array (
+      'name' => 'teams',
+      'type' => 'link',
+      'relationship' => 'calls_teams',
+      'bean_filter_field' => 'team_set_id',
+      'rhs_key_override' => true,
+      'source' => 'non-db',
+      'vname' => 'LBL_TEAMS',
+      'link_class' => 'TeamSetLink',
+      'link_file' => 'modules/Teams/TeamSetLink.php',
+      'studio' => 'false',
+      'reportable' => false,
+    ),
+    'duration_hours' => 
+    array (
+      'name' => 'duration_hours',
+      'vname' => 'LBL_DURATION_HOURS',
+      'type' => 'int',
+      'len' => '2',
+      'comment' => 'Call duration, hours portion',
+      'required' => false,
+      'studio' => false,
+      'calculated' => false,
+    ),
+    'duration_minutes' => 
+    array (
+      'name' => 'duration_minutes',
+      'vname' => 'LBL_DURATION_MINUTES',
+      'type' => 'int',
+      'function' => 
+      array (
+        'name' => 'getDurationMinutesOptions',
+        'returns' => 'html',
+        'include' => 'modules/Calls/CallHelper.php',
+      ),
+      'len' => '2',
+      'group' => 'duration_hours',
+      'importable' => 'true',
+      'comment' => 'Call duration, minutes portion',
+      'studio' => false,
+      'calculated' => false,
+    ),
+    'date_start' => 
+    array (
+      'name' => 'date_start',
+      'vname' => 'LBL_DATE',
+      'type' => 'datetimecombo',
+      'dbType' => 'datetime',
+      'comment' => 'Date in which call is schedule to (or did) start',
+      'importable' => 'true',
+      'required' => false,
+      'enable_range_search' => true,
+      'options' => 'date_range_search_dom',
+      'validation' => 
+      array (
+        'type' => 'isbefore',
+        'compareto' => 'date_end',
+        'blank' => false,
+      ),
+      'calculated' => false,
+      'display_default' => 'now&06:00pm',
+    ),
+    'date_end' => 
+    array (
+      'name' => 'date_end',
+      'vname' => 'LBL_DATE_END',
+      'type' => 'datetimecombo',
+      'dbType' => 'datetime',
+      'massupdate' => false,
+      'comment' => 'Date is which call is scheduled to (or did) end',
+      'enable_range_search' => true,
+      'options' => 'date_range_search_dom',
+      'studio' => 
+      array (
+        'wirelesseditview' => false,
+      ),
+    ),
+    'parent_type' => 
+    array (
+      'name' => 'parent_type',
+      'vname' => 'LBL_PARENT_TYPE',
+      'type' => 'parent_type',
+      'dbType' => 'varchar',
+      'required' => false,
+      'group' => 'parent_name',
+      'options' => 'parent_type_display',
+      'len' => 255,
+      'studio' => 
+      array (
+        'wirelesslistview' => false,
+      ),
+      'comment' => 'The Sugar object to which the call is related',
+    ),
+    'parent_name' => 
+    array (
+      'name' => 'parent_name',
+      'parent_type' => 'record_type_display',
+      'type_name' => 'parent_type',
+      'id_name' => 'parent_id',
+      'vname' => 'LBL_LIST_RELATED_TO',
+      'type' => 'parent',
+      'group' => 'parent_name',
+      'source' => 'non-db',
+      'options' => 'parent_type_display',
+      'studio' => true,
+    ),
+    'status' => 
+    array (
+      'name' => 'status',
+      'vname' => 'LBL_STATUS',
+      'type' => 'enum',
+      'len' => 100,
+      'options' => 'call_status_dom',
+      'comment' => 'The status of the call (Held, Not Held, etc.)',
+      'required' => true,
+      'importable' => 'true',
+      'default' => 'Held',
+      'studio' => 
+      array (
+        'detailview' => false,
+      ),
+      'calculated' => false,
+      'dependency' => false,
+    ),
+    'direction' => 
+    array (
+      'name' => 'direction',
+      'vname' => 'LBL_DIRECTION',
+      'type' => 'enum',
+      'len' => 100,
+      'options' => 'call_direction_dom',
+      'comment' => 'Indicates whether call is inbound or outbound',
+      'default' => 'Outbound',
+      'calculated' => false,
+      'dependency' => false,
+    ),
+    'parent_id' => 
+    array (
+      'name' => 'parent_id',
+      'vname' => 'LBL_LIST_RELATED_TO_ID',
+      'type' => 'id',
+      'group' => 'parent_name',
+      'reportable' => false,
+      'comment' => 'The ID of the parent Sugar object identified by parent_type',
+    ),
+    'reminder_checked' => 
+    array (
+      'name' => 'reminder_checked',
+      'vname' => 'LBL_REMINDER',
+      'type' => 'bool',
+      'source' => 'non-db',
+      'comment' => 'checkbox indicating whether or not the reminder value is set (Meta-data only)',
+      'massupdate' => false,
+      'studio' => 
+      array (
+        'wirelesseditview' => false,
+      ),
+    ),
+    'reminder_time' => 
+    array (
+      'name' => 'reminder_time',
+      'vname' => 'LBL_REMINDER_TIME',
+      'type' => 'enum',
+      'dbType' => 'int',
+      'options' => 'reminder_time_options',
+      'reportable' => false,
+      'massupdate' => false,
+      'default' => -1,
+      'comment' => 'Specifies when a reminder alert should be issued; -1 means no alert; otherwise the number of seconds prior to the start',
+      'studio' => 
+      array (
+        'wirelesseditview' => false,
+      ),
+    ),
+    'email_reminder_checked' => 
+    array (
+      'name' => 'email_reminder_checked',
+      'vname' => 'LBL_EMAIL_REMINDER',
+      'type' => 'bool',
+      'source' => 'non-db',
+      'comment' => 'checkbox indicating whether or not the email reminder value is set (Meta-data only)',
+      'massupdate' => false,
+      'studio' => 
+      array (
+        'wirelesseditview' => false,
+      ),
+    ),
+    'email_reminder_time' => 
+    array (
+      'name' => 'email_reminder_time',
+      'vname' => 'LBL_EMAIL_REMINDER_TIME',
+      'type' => 'enum',
+      'dbType' => 'int',
+      'options' => 'reminder_time_options',
+      'reportable' => false,
+      'massupdate' => false,
+      'default' => -1,
+      'comment' => 'Specifies when a email reminder alert should be issued; -1 means no alert; otherwise the number of seconds prior to the start',
+      'studio' => 
+      array (
+        'wirelesseditview' => false,
+      ),
+    ),
+    'email_reminder_sent' => 
+    array (
+      'name' => 'email_reminder_sent',
+      'vname' => 'LBL_EMAIL_REMINDER_SENT',
+      'default' => 0,
+      'type' => 'bool',
+      'comment' => 'Whether email reminder is already sent',
+      'studio' => false,
+      'massupdate' => false,
+    ),
+    'outlook_id' => 
+    array (
+      'name' => 'outlook_id',
+      'vname' => 'LBL_OUTLOOK_ID',
+      'type' => 'varchar',
+      'len' => '255',
+      'reportable' => false,
+      'comment' => 'When the Sugar Plug-in for Microsoft Outlook syncs an Outlook appointment, this is the Outlook appointment item ID',
+    ),
+    'accept_status' => 
+    array (
+      'name' => 'accept_status',
+      'vname' => 'LBL_ACCEPT_STATUS',
+      'dbType' => 'varchar',
+      'type' => 'varchar',
+      'len' => '20',
+      'source' => 'non-db',
+    ),
+    'set_accept_links' => 
+    array (
+      'name' => 'set_accept_links',
+      'vname' => 'LBL_ACCEPT_LINK',
+      'dbType' => 'varchar',
+      'type' => 'varchar',
+      'len' => '20',
+      'source' => 'non-db',
+    ),
+    'contact_name' => 
+    array (
+      'name' => 'contact_name',
+      'rname' => 'name',
+      'db_concat_fields' => 
+      array (
+        0 => 'first_name',
+        1 => 'last_name',
+      ),
+      'id_name' => 'contact_id',
+      'massupdate' => false,
+      'vname' => 'LBL_CONTACT_NAME',
+      'type' => 'relate',
+      'link' => 'contacts',
+      'table' => 'contacts',
+      'isnull' => 'true',
+      'module' => 'Contacts',
+      'join_name' => 'contacts',
+      'dbType' => 'varchar',
+      'source' => 'non-db',
+      'len' => 36,
+      'importable' => 'false',
+      'studio' => 
+      array (
+        'required' => false,
+        'listview' => true,
+        'visible' => false,
+      ),
+    ),
+    'opportunities' => 
+    array (
+      'name' => 'opportunities',
+      'type' => 'link',
+      'relationship' => 'opportunity_calls',
+      'source' => 'non-db',
+      'link_type' => 'one',
+      'vname' => 'LBL_OPPORTUNITY',
+    ),
+    'leads' => 
+    array (
+      'name' => 'leads',
+      'type' => 'link',
+      'relationship' => 'calls_leads',
+      'source' => 'non-db',
+      'vname' => 'LBL_LEADS',
+    ),
+    'project' => 
+    array (
+      'name' => 'project',
+      'type' => 'link',
+      'relationship' => 'projects_calls',
+      'source' => 'non-db',
+      'vname' => 'LBL_PROJECTS',
+    ),
+    'cases' => 
+    array (
+      'name' => 'cases',
+      'type' => 'link',
+      'relationship' => 'case_calls',
+      'source' => 'non-db',
+      'link_type' => 'one',
+      'vname' => 'LBL_CASE',
+    ),
+    'accounts' => 
+    array (
+      'name' => 'accounts',
+      'type' => 'link',
+      'relationship' => 'account_calls',
+      'module' => 'Accounts',
+      'bean_name' => 'Account',
+      'source' => 'non-db',
+      'vname' => 'LBL_ACCOUNT',
+    ),
+    'revenuelineitems' => 
+    array (
+      'name' => 'revenuelineitems',
+      'type' => 'link',
+      'relationship' => 'revenuelineitem_calls',
+      'module' => 'RevenueLineItems',
+      'bean_name' => 'RevenueLineItem',
+      'source' => 'non-db',
+      'vname' => 'LBL_REVENUELINEITEMS',
+    ),
+    'products' => 
+    array (
+      'name' => 'products',
+      'type' => 'link',
+      'relationship' => 'product_calls',
+      'module' => 'Products',
+      'bean_name' => 'Product',
+      'source' => 'non-db',
+      'vname' => 'LBL_PRODUCTS',
+    ),
+    'bugs' => 
+    array (
+      'name' => 'bugs',
+      'type' => 'link',
+      'relationship' => 'bug_calls',
+      'source' => 'non-db',
+      'vname' => 'LBL_BUGS',
+      'module' => 'Bugs',
+    ),
+    'contacts' => 
+    array (
+      'name' => 'contacts',
+      'type' => 'link',
+      'relationship' => 'calls_contacts',
+      'source' => 'non-db',
+      'vname' => 'LBL_CONTACTS',
+    ),
+    'prospects' => 
+    array (
+      'name' => 'prospects',
+      'type' => 'link',
+      'relationship' => 'prospect_calls',
+      'source' => 'non-db',
+      'vname' => 'LBL_PROSPECTS',
+      'module' => 'Prospects',
+    ),
+    'quotes' => 
+    array (
+      'name' => 'quotes',
+      'type' => 'link',
+      'relationship' => 'quote_calls',
+      'source' => 'non-db',
+      'vname' => 'LBL_QUOTES',
+    ),
+    'users' => 
+    array (
+      'name' => 'users',
+      'type' => 'link',
+      'relationship' => 'calls_users',
+      'source' => 'non-db',
+      'vname' => 'LBL_USERS',
+    ),
+    'accept_status_users' => 
+    array (
+      'massupdate' => false,
+      'name' => 'accept_status_users',
+      'type' => 'enum',
+      'studio' => 'false',
+      'source' => 'non-db',
+      'vname' => 'LBL_ACCEPT_STATUS',
+      'options' => 'dom_meeting_accept_status',
+      'importable' => 'false',
+      'link' => 'users',
+      'rname_link' => 'accept_status',
+    ),
+    'notes' => 
+    array (
+      'name' => 'notes',
+      'type' => 'link',
+      'relationship' => 'calls_notes',
+      'module' => 'Notes',
+      'bean_name' => 'Note',
+      'source' => 'non-db',
+      'vname' => 'LBL_NOTES',
+    ),
+    'contact_id' => 
+    array (
+      'name' => 'contact_id',
+      'rname' => 'id',
+      'type' => 'id',
+      'link' => 'contacts',
+      'source' => 'non-db',
+    ),
+    'repeat_type' => 
+    array (
+      'name' => 'repeat_type',
+      'vname' => 'LBL_REPEAT_TYPE',
+      'type' => 'enum',
+      'len' => 36,
+      'options' => 'repeat_type_dom',
+      'comment' => 'Type of recurrence',
+      'importable' => 'false',
+      'massupdate' => false,
+      'reportable' => false,
+      'studio' => 'false',
+    ),
+    'repeat_interval' => 
+    array (
+      'name' => 'repeat_interval',
+      'vname' => 'LBL_REPEAT_INTERVAL',
+      'type' => 'int',
+      'len' => 3,
+      'default' => 1,
+      'comment' => 'Interval of recurrence',
+      'importable' => 'false',
+      'massupdate' => false,
+      'reportable' => false,
+      'studio' => 'false',
+    ),
+    'repeat_dow' => 
+    array (
+      'name' => 'repeat_dow',
+      'vname' => 'LBL_REPEAT_DOW',
+      'type' => 'varchar',
+      'len' => 7,
+      'comment' => 'Days of week in recurrence',
+      'importable' => 'false',
+      'massupdate' => false,
+      'reportable' => false,
+      'studio' => 'false',
+    ),
+    'repeat_until' => 
+    array (
+      'name' => 'repeat_until',
+      'vname' => 'LBL_REPEAT_UNTIL',
+      'type' => 'date',
+      'comment' => 'Repeat until specified date',
+      'importable' => 'false',
+      'massupdate' => false,
+      'reportable' => false,
+      'studio' => 'false',
+    ),
+    'repeat_count' => 
+    array (
+      'name' => 'repeat_count',
+      'vname' => 'LBL_REPEAT_COUNT',
+      'type' => 'int',
+      'len' => 7,
+      'comment' => 'Number of recurrence',
+      'importable' => 'false',
+      'massupdate' => false,
+      'reportable' => false,
+      'studio' => 'false',
+    ),
+    'repeat_parent_id' => 
+    array (
+      'name' => 'repeat_parent_id',
+      'vname' => 'LBL_REPEAT_PARENT_ID',
+      'type' => 'id',
+      'len' => 36,
+      'comment' => 'Id of the first element of recurring records',
+      'importable' => 'false',
+      'massupdate' => false,
+      'reportable' => false,
+      'studio' => 'false',
+    ),
+    'recurring_source' => 
+    array (
+      'name' => 'recurring_source',
+      'vname' => 'LBL_RECURRING_SOURCE',
+      'type' => 'varchar',
+      'len' => 36,
+      'comment' => 'Source of recurring call',
+      'importable' => false,
+      'massupdate' => false,
+      'reportable' => false,
+      'studio' => false,
+    ),
+    'send_invites' => 
+    array (
+      'name' => 'send_invites',
+      'vname' => 'LBL_SEND_INVITES',
+      'type' => 'bool',
+      'source' => 'non-db',
+      'comment' => 'checkbox indicating whether or not to send out invites (Meta-data only)',
+      'massupdate' => false,
+    ),
+    'calling_c' => 
+    array (
+      'duplicate_merge_dom_value' => '1',
+      'merge_filter' => 'disabled',
+      'labelValue' => 'Calling',
+      'unified_search' => false,
+      'full_text_search' => 
+      array (
+        'boost' => '0',
+        'enabled' => false,
+      ),
+      'calculated' => false,
+      'enforced' => '',
+      'dependency' => '',
+      'required' => false,
+      'source' => 'custom_fields',
+      'name' => 'calling_c',
+      'vname' => 'LBL_CALLING',
+      'type' => 'varchar',
+      'massupdate' => false,
+      'default' => '',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'audited' => false,
+      'reportable' => true,
+      'len' => '255',
+      'size' => '20',
+      'id' => 'Callscalling_c',
+      'custom_module' => 'Calls',
+    ),
+    'called_c' => 
+    array (
+      'duplicate_merge_dom_value' => '1',
+      'merge_filter' => 'disabled',
+      'labelValue' => 'Called',
+      'unified_search' => false,
+      'full_text_search' => 
+      array (
+        'boost' => '0',
+        'enabled' => false,
+      ),
+      'calculated' => false,
+      'enforced' => '',
+      'dependency' => '',
+      'required' => false,
+      'source' => 'custom_fields',
+      'name' => 'called_c',
+      'vname' => 'LBL_CALLED',
+      'type' => 'varchar',
+      'massupdate' => false,
+      'default' => '',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'audited' => false,
+      'reportable' => true,
+      'len' => '255',
+      'size' => '20',
+      'id' => 'Callscalled_c',
+      'custom_module' => 'Calls',
+    ),
+    'extension_c' => 
+    array (
+      'duplicate_merge_dom_value' => '1',
+      'merge_filter' => 'disabled',
+      'labelValue' => 'Extension',
+      'unified_search' => false,
+      'full_text_search' => 
+      array (
+        'boost' => '0',
+        'enabled' => false,
+      ),
+      'calculated' => false,
+      'enforced' => '',
+      'dependency' => '',
+      'required' => false,
+      'source' => 'custom_fields',
+      'name' => 'extension_c',
+      'vname' => 'LBL_EXTENSION',
+      'type' => 'varchar',
+      'massupdate' => false,
+      'default' => '',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'audited' => false,
+      'reportable' => true,
+      'len' => '255',
+      'size' => '20',
+      'id' => 'Callsextension_c',
+      'custom_module' => 'Calls',
+    ),
+    'ring_c' => 
+    array (
+      'duplicate_merge_dom_value' => '1',
+      'merge_filter' => 'disabled',
+      'labelValue' => 'Ring',
+      'unified_search' => false,
+      'full_text_search' => 
+      array (
+        'boost' => '0',
+        'enabled' => false,
+      ),
+      'calculated' => false,
+      'enforced' => '',
+      'dependency' => '',
+      'enable_range_search' => false,
+      'required' => false,
+      'source' => 'custom_fields',
+      'name' => 'ring_c',
+      'vname' => 'LBL_RING',
+      'type' => 'int',
+      'massupdate' => false,
+      'default' => '',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'audited' => false,
+      'reportable' => true,
+      'len' => '255',
+      'size' => '20',
+      'disable_num_format' => '',
+      'min' => false,
+      'max' => false,
+      'id' => 'Callsring_c',
+      'custom_module' => 'Calls',
+    ),
+    'wait_c' => 
+    array (
+      'duplicate_merge_dom_value' => '1',
+      'merge_filter' => 'disabled',
+      'labelValue' => 'Wait',
+      'unified_search' => false,
+      'full_text_search' => 
+      array (
+        'boost' => '0',
+        'enabled' => false,
+      ),
+      'calculated' => false,
+      'enforced' => '',
+      'dependency' => '',
+      'required' => false,
+      'source' => 'custom_fields',
+      'name' => 'wait_c',
+      'vname' => 'LBL_WAIT',
+      'type' => 'varchar',
+      'massupdate' => false,
+      'default' => '',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'audited' => false,
+      'reportable' => true,
+      'len' => '255',
+      'size' => '20',
+      'id' => 'Callswait_c',
+      'custom_module' => 'Calls',
+    ),
+    'answer_c' => 
+    array (
+      'duplicate_merge_dom_value' => '1',
+      'merge_filter' => 'disabled',
+      'labelValue' => 'Answer',
+      'unified_search' => false,
+      'calculated' => false,
+      'dependency' => '',
+      'visibility_grid' => '',
+      'required' => false,
+      'source' => 'custom_fields',
+      'name' => 'answer_c',
+      'vname' => 'LBL_ANSWER',
+      'type' => 'enum',
+      'massupdate' => true,
+      'default' => '',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'audited' => false,
+      'reportable' => true,
+      'len' => 100,
+      'size' => '20',
+      'options' => 'call_answer_list',
+      'studio' => 'visible',
+      'id' => 'Callsanswer_c',
+      'custom_module' => 'Calls',
+    ),
+    'site_c' => 
+    array (
+      'duplicate_merge_dom_value' => '1',
+      'merge_filter' => 'disabled',
+      'labelValue' => 'Site',
+      'unified_search' => false,
+      'full_text_search' => 
+      array (
+        'boost' => '0',
+        'enabled' => false,
+      ),
+      'calculated' => false,
+      'enforced' => '',
+      'dependency' => '',
+      'required' => false,
+      'source' => 'custom_fields',
+      'name' => 'site_c',
+      'vname' => 'LBL_SITE',
+      'type' => 'varchar',
+      'massupdate' => false,
+      'default' => '',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'audited' => false,
+      'reportable' => true,
+      'len' => '255',
+      'size' => '20',
+      'id' => 'Callssite_c',
+      'custom_module' => 'Calls',
+    ),
+    'cost_c' => 
+    array (
+      'duplicate_merge_dom_value' => '1',
+      'merge_filter' => 'disabled',
+      'labelValue' => 'Cost',
+      'unified_search' => false,
+      'calculated' => false,
+      'enforced' => '',
+      'dependency' => '',
+      'related_fields' => 
+      array (
+        0 => 'currency_id',
+        1 => 'base_rate',
+      ),
+      'enable_range_search' => false,
+      'required' => false,
+      'source' => 'custom_fields',
+      'name' => 'cost_c',
+      'vname' => 'LBL_COST',
+      'type' => 'currency',
+      'massupdate' => false,
+      'default' => '0',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'audited' => false,
+      'reportable' => true,
+      'len' => '26',
+      'size' => '20',
+      'precision' => 6,
+      'id' => 'Callscost_c',
+      'custom_module' => 'Calls',
+    ),
+    'charge_description_c' => 
+    array (
+      'duplicate_merge_dom_value' => '1',
+      'merge_filter' => 'disabled',
+      'labelValue' => 'Charge Description',
+      'unified_search' => false,
+      'full_text_search' => 
+      array (
+        'boost' => '0',
+        'enabled' => false,
+      ),
+      'calculated' => false,
+      'enforced' => '',
+      'dependency' => '',
+      'required' => false,
+      'source' => 'custom_fields',
+      'name' => 'charge_description_c',
+      'vname' => 'LBL_CHARGE_DESCRIPTION',
+      'type' => 'text',
+      'massupdate' => false,
+      'default' => '',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'audited' => false,
+      'reportable' => true,
+      'size' => '20',
+      'studio' => 'visible',
+      'rows' => '',
+      'cols' => '',
+      'id' => 'Callscharge_description_c',
+      'custom_module' => 'Calls',
+    ),
+    'call_source_c' => 
+    array (
+      'duplicate_merge_dom_value' => '1',
+      'merge_filter' => 'disabled',
+      'labelValue' => 'Source',
+      'unified_search' => false,
+      'full_text_search' => 
+      array (
+        'boost' => '0',
+        'enabled' => false,
+      ),
+      'calculated' => false,
+      'enforced' => '',
+      'dependency' => '',
+      'required' => false,
+      'source' => 'custom_fields',
+      'name' => 'call_source_c',
+      'vname' => 'LBL_CALL_SOURCE',
+      'type' => 'varchar',
+      'massupdate' => false,
+      'default' => '',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'audited' => false,
+      'reportable' => true,
+      'len' => '255',
+      'size' => '20',
+      'id' => 'Callscall_source_c',
+      'custom_module' => 'Calls',
+    ),
+    'talk_c' => 
+    array (
+      'duplicate_merge_dom_value' => '1',
+      'merge_filter' => 'disabled',
+      'labelValue' => 'Talk',
+      'unified_search' => false,
+      'full_text_search' => 
+      array (
+        'boost' => '0',
+        'enabled' => false,
+      ),
+      'calculated' => false,
+      'enforced' => '',
+      'dependency' => '',
+      'enable_range_search' => false,
+      'required' => false,
+      'source' => 'custom_fields',
+      'name' => 'talk_c',
+      'vname' => 'LBL_TALK',
+      'type' => 'int',
+      'massupdate' => false,
+      'default' => '',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'audited' => false,
+      'reportable' => true,
+      'len' => '255',
+      'size' => '20',
+      'disable_num_format' => '',
+      'min' => false,
+      'max' => false,
+      'id' => 'Callstalk_c',
+      'custom_module' => 'Calls',
+    ),
+    'call_hour_c' => 
+    array (
+      'duplicate_merge_dom_value' => '1',
+      'merge_filter' => 'disabled',
+      'labelValue' => 'Call Hour',
+      'unified_search' => false,
+      'full_text_search' => 
+      array (
+        'boost' => '0',
+        'enabled' => false,
+      ),
+      'calculated' => false,
+      'enforced' => '',
+      'dependency' => '',
+      'enable_range_search' => false,
+      'required' => false,
+      'source' => 'custom_fields',
+      'name' => 'call_hour_c',
+      'vname' => 'LBL_CALL_HOUR',
+      'type' => 'int',
+      'massupdate' => false,
+      'default' => '',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'audited' => false,
+      'reportable' => true,
+      'len' => '255',
+      'size' => '20',
+      'disable_num_format' => '',
+      'min' => false,
+      'max' => false,
+      'id' => 'Callscall_hour_c',
+      'custom_module' => 'Calls',
+    ),
+    'users_calls_1' => 
+    array (
+      'name' => 'users_calls_1',
+      'type' => 'link',
+      'relationship' => 'users_calls_1',
+      'source' => 'non-db',
+      'module' => 'Users',
+      'bean_name' => 'User',
+      'side' => 'right',
+      'vname' => 'LBL_USERS_CALLS_1_FROM_CALLS_TITLE',
+      'id_name' => 'users_calls_1users_ida',
+      'link-type' => 'one',
+    ),
+    'users_calls_1_name' => 
+    array (
+      'name' => 'users_calls_1_name',
+      'type' => 'relate',
+      'source' => 'non-db',
+      'vname' => 'LBL_USERS_CALLS_1_FROM_USERS_TITLE',
+      'save' => true,
+      'id_name' => 'users_calls_1users_ida',
+      'link' => 'users_calls_1',
+      'table' => 'users',
+      'module' => 'Users',
+      'rname' => 'name',
+    ),
+    'users_calls_1users_ida' => 
+    array (
+      'name' => 'users_calls_1users_ida',
+      'type' => 'id',
+      'source' => 'non-db',
+      'vname' => 'LBL_USERS_CALLS_1_FROM_CALLS_TITLE_ID',
+      'id_name' => 'users_calls_1users_ida',
+      'link' => 'users_calls_1',
+      'table' => 'users',
+      'module' => 'Users',
+      'rname' => 'id',
+      'reportable' => false,
+      'side' => 'right',
+      'massupdate' => false,
+      'duplicate_merge' => 'disabled',
+      'hideacl' => true,
+    ),
+  ),
+  'indices' => 
+  array (
+    'id' => 
+    array (
+      'name' => 'idx_calls_pk',
+      'type' => 'primary',
+      'fields' => 
+      array (
+        0 => 'id',
+      ),
+    ),
+    'date_modified' => 
+    array (
+      'name' => 'idx_calls_date_modfied',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'date_modified',
+      ),
+    ),
+    'deleted' => 
+    array (
+      'name' => 'idx_calls_id_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'id',
+        1 => 'deleted',
+      ),
+    ),
+    'date_entered' => 
+    array (
+      'name' => 'idx_calls_date_entered',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'date_entered',
+      ),
+    ),
+    'team_set_calls' => 
+    array (
+      'name' => 'idx_calls_tmst_id',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'team_set_id',
+      ),
+    ),
+    0 => 
+    array (
+      'name' => 'idx_call_name',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'name',
+      ),
+    ),
+    1 => 
+    array (
+      'name' => 'idx_status',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'status',
+      ),
+    ),
+    2 => 
+    array (
+      'name' => 'idx_calls_date_start',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'date_start',
+      ),
+    ),
+    3 => 
+    array (
+      'name' => 'idx_calls_date_start_reminder',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'date_start',
+        1 => 'reminder_time',
+      ),
+    ),
+    4 => 
+    array (
+      'name' => 'idx_calls_par_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'parent_id',
+        1 => 'parent_type',
+        2 => 'deleted',
+      ),
+    ),
+    5 => 
+    array (
+      'name' => 'idx_calls_assigned_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'deleted',
+        1 => 'assigned_user_id',
+      ),
+    ),
+    6 => 
+    array (
+      'name' => 'idx_call_direction',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'direction',
+      ),
+    ),
+  ),
+  'relationships' => 
+  array (
+    'calls_favorite' => 
+    array (
+      'lhs_module' => 'Calls',
+      'lhs_table' => 'calls',
+      'lhs_key' => 'id',
+      'rhs_module' => 'Users',
+      'rhs_table' => 'users',
+      'rhs_key' => 'id',
+      'relationship_type' => 'user-based',
+      'join_table' => 'sugarfavorites',
+      'join_key_lhs' => 'record_id',
+      'join_key_rhs' => 'modified_user_id',
+      'relationship_role_column' => 'module',
+      'relationship_role_column_value' => 'Calls',
+      'user_field' => 'created_by',
+    ),
+    'calls_following' => 
+    array (
+      'lhs_module' => 'Calls',
+      'lhs_table' => 'calls',
+      'lhs_key' => 'id',
+      'rhs_module' => 'Users',
+      'rhs_table' => 'users',
+      'rhs_key' => 'id',
+      'relationship_type' => 'user-based',
+      'join_table' => 'subscriptions',
+      'join_key_lhs' => 'parent_id',
+      'join_key_rhs' => 'created_by',
+      'relationship_role_column' => 'parent_type',
+      'relationship_role_column_value' => 'Calls',
+      'user_field' => 'created_by',
+    ),
+    'calls_modified_user' => 
+    array (
+      'lhs_module' => 'Users',
+      'lhs_table' => 'users',
+      'lhs_key' => 'id',
+      'rhs_module' => 'Calls',
+      'rhs_table' => 'calls',
+      'rhs_key' => 'modified_user_id',
+      'relationship_type' => 'one-to-many',
+    ),
+    'calls_created_by' => 
+    array (
+      'lhs_module' => 'Users',
+      'lhs_table' => 'users',
+      'lhs_key' => 'id',
+      'rhs_module' => 'Calls',
+      'rhs_table' => 'calls',
+      'rhs_key' => 'created_by',
+      'relationship_type' => 'one-to-many',
+    ),
+    'call_activities' => 
+    array (
+      'lhs_module' => 'Calls',
+      'lhs_table' => 'calls',
+      'lhs_key' => 'id',
+      'rhs_module' => 'Activities',
+      'rhs_table' => 'activities',
+      'rhs_key' => 'id',
+      'rhs_vname' => 'LBL_ACTIVITY_STREAM',
+      'relationship_type' => 'many-to-many',
+      'join_table' => 'activities_users',
+      'join_key_lhs' => 'parent_id',
+      'join_key_rhs' => 'activity_id',
+      'relationship_role_column' => 'parent_type',
+      'relationship_role_column_value' => 'Calls',
+    ),
+    'calls_assigned_user' => 
+    array (
+      'lhs_module' => 'Users',
+      'lhs_table' => 'users',
+      'lhs_key' => 'id',
+      'rhs_module' => 'Calls',
+      'rhs_table' => 'calls',
+      'rhs_key' => 'assigned_user_id',
+      'relationship_type' => 'one-to-many',
+    ),
+    'calls_team_count_relationship' => 
+    array (
+      'lhs_module' => 'Teams',
+      'lhs_table' => 'team_sets',
+      'lhs_key' => 'id',
+      'rhs_module' => 'Calls',
+      'rhs_table' => 'calls',
+      'rhs_key' => 'team_set_id',
+      'relationship_type' => 'one-to-many',
+    ),
+    'calls_teams' => 
+    array (
+      'lhs_module' => 'Calls',
+      'lhs_table' => 'calls',
+      'lhs_key' => 'team_set_id',
+      'rhs_module' => 'Teams',
+      'rhs_table' => 'teams',
+      'rhs_key' => 'id',
+      'relationship_type' => 'many-to-many',
+      'join_table' => 'team_sets_teams',
+      'join_key_lhs' => 'team_set_id',
+      'join_key_rhs' => 'team_id',
+    ),
+    'calls_team' => 
+    array (
+      'lhs_module' => 'Teams',
+      'lhs_table' => 'teams',
+      'lhs_key' => 'id',
+      'rhs_module' => 'Calls',
+      'rhs_table' => 'calls',
+      'rhs_key' => 'team_id',
+      'relationship_type' => 'one-to-many',
+    ),
+    'calls_notes' => 
+    array (
+      'lhs_module' => 'Calls',
+      'lhs_table' => 'calls',
+      'lhs_key' => 'id',
+      'rhs_module' => 'Notes',
+      'rhs_table' => 'notes',
+      'rhs_key' => 'parent_id',
+      'relationship_type' => 'one-to-many',
+      'relationship_role_column' => 'parent_type',
+      'relationship_role_column_value' => 'Calls',
+    ),
+  ),
+  'acls' => 
+  array (
+    'SugarACLOpi' => true,
+    'SugarACLStatic' => true,
+  ),
+  'optimistic_locking' => true,
+  'name_format_map' => 
+  array (
+  ),
+  'visibility' => 
+  array (
+    'TeamSecurity' => true,
+  ),
+  'templates' => 
+  array (
+    'team_security' => 'team_security',
+    'assignable' => 'assignable',
+    'basic' => 'basic',
+    'following' => 'following',
+    'favorite' => 'favorite',
+  ),
+  'duplicate_check' => 
+  array (
+    'enabled' => true,
+    'FilterDuplicateCheck' => 
+    array (
+      'filter_template' => 
+      array (
+        0 => 
+        array (
+          'name' => 
+          array (
+            '$starts' => '$name',
+          ),
+        ),
+      ),
+      'ranking_fields' => 
+      array (
+        0 => 
+        array (
+          'in_field_name' => 'name',
+          'dupe_field_name' => 'name',
+        ),
+      ),
+    ),
+  ),
+  'favorites' => true,
+  'related_calc_fields' => 
+  array (
+  ),
+  'custom_fields' => true,
+);

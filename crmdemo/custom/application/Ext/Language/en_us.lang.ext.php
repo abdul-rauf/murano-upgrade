@@ -1,139 +1,6 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
-//Merged from custom/Extension/application/Ext/Language/en_us.Murano2.php
- 
-
-//Merged from custom/Extension/application/Ext/Language/en_us.msa.php
-
-/*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
- */
-
-$app_list_strings['moduleList']['mur_msa'] = 'MSA';
-$app_list_strings['moduleListSingular']['mur_msa'] = 'MSA';
-$app_list_strings['mur_msa_type_dom']['Analyst'] = 'Analyst';
-$app_list_strings['mur_msa_type_dom']['Competitor'] = 'Competitor';
-$app_list_strings['mur_msa_type_dom']['Customer'] = 'Customer';
-$app_list_strings['mur_msa_type_dom']['Integrator'] = 'Integrator';
-$app_list_strings['mur_msa_type_dom']['Investor'] = 'Investor';
-$app_list_strings['mur_msa_type_dom']['Partner'] = 'Partner';
-$app_list_strings['mur_msa_type_dom']['Press'] = 'Press';
-$app_list_strings['mur_msa_type_dom']['Prospect'] = 'Prospect';
-$app_list_strings['mur_msa_type_dom']['Reseller'] = 'Reseller';
-$app_list_strings['mur_msa_type_dom']['Other'] = 'Other';
-$app_list_strings['mur_msa_type_dom'][''] = '';
-
-//Merged from custom/Extension/application/Ext/Language/en_us.tester.php
-
-/*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
- */
-$app_list_strings['moduleList']['A1234_murano'] = 'murano';
-$app_list_strings['moduleListSingular']['A1234_murano'] = 'murano';
-
-//Merged from custom/Extension/application/Ext/Language/en_us.Universal_Click2Call.php
-
-/*********************************************************************************
- * Name: Universal Click to Call by Epicom
- * Version: 1.0.0
- * Date: 2011-06-08
- * Author: Epicom Corp.
- * Maintainer: support@epicom.com
- * License: GPL version 2 or later
- ********************************************************************************/
-
-
-$app_list_strings['moduleList']['uc2ce_Click2Call'] = 'Universal Click to Call';
-
-//Merged from custom/Extension/application/Ext/Language/en_us.ZuckerReports2.php
-
-$app_list_strings['moduleList']['zr2_ReportParameter'] = 'Report Parameter';
-$app_list_strings['moduleList']['zr2_ReportTemplate'] = 'JasperReports Template';
-$app_list_strings['moduleList']['zr2_QueryTemplate'] = 'Query Template';
-$app_list_strings['moduleList']['zr2_ReportParameterLink'] = 'Parameter Bindings';
-$app_list_strings['moduleList']['zr2_Report'] = 'ZuckerReports';
-$app_list_strings['moduleList']['zr2_ReportContainer'] = 'Report Archive';
-
-$app_list_strings['PARAM_RANGE_TYPES']['SIMPLE'] = 'Direct Input';
-$app_list_strings['PARAM_RANGE_TYPES']['DATE'] = 'Date Input';
-$app_list_strings['PARAM_RANGE_TYPES']['DATE_NOW'] = 'Current Time and Date';
-$app_list_strings['PARAM_RANGE_TYPES']['DATE_ADD'] = 'Future Timestamp';
-$app_list_strings['PARAM_RANGE_TYPES']['DATE_SUB'] = 'Past Timestamp';
-$app_list_strings['PARAM_RANGE_TYPES']['SQL'] = 'User-Defined Query';
-$app_list_strings['PARAM_RANGE_TYPES']['LIST'] = 'User-Defined List';
-$app_list_strings['PARAM_RANGE_TYPES']['DROPDOWN'] = 'Drop-Down List';
-$app_list_strings['PARAM_RANGE_TYPES']['CURRENT_USER'] = 'Current User';
-$app_list_strings['PARAM_RANGE_TYPES']['SCRIPT'] = 'PHP Script';
-$app_list_strings['PARAM_DATE_TYPES']['MINUTE'] = 'Minute(s)';
-$app_list_strings['PARAM_DATE_TYPES']['HOUR'] = 'Hour(s)';
-$app_list_strings['PARAM_DATE_TYPES']['DAY'] = 'Day(s)';
-$app_list_strings['PARAM_DATE_TYPES']['WEEK'] = 'Week(s)';
-$app_list_strings['PARAM_DATE_TYPES']['MONTH'] = 'Month(s)';
-$app_list_strings['PARAM_DATE_TYPES']['YEAR'] = 'Year(s)';
-
-
-
-//Merged from custom/Extension/application/Ext/Language/en_us.approval_managment.php
-
-/*********************************************************************************
- * The contents of this file are subject to the SugarCRM Master Subscription
- * Agreement ("License") which can be viewed at
- * http://www.sugarcrm.com/crm/master-subscription-agreement
- * By installing or using this file, You have unconditionally agreed to the
- * terms and conditions of the License, and You may not use this file except in
- * compliance with the License.  Under the terms of the license, You shall not,
- * among other things: 1) sublicense, resell, rent, lease, redistribute, assign
- * or otherwise transfer Your rights to the Software, and 2) use the Software
- * for timesharing or service bureau purposes such as hosting the Software for
- * commercial gain and/or for the benefit of a third party.  Use of the Software
- * may be subject to applicable fees and any use of the Software without first
- * paying applicable fees is strictly prohibited.  You do not have the right to
- * remove SugarCRM copyrights from the source code or user interface.
- *
- * All copies of the Covered Code must include on each user interface screen:
- *  (i) the "Powered by SugarCRM" logo and
- *  (ii) the SugarCRM copyright notice
- * in the same form as they appear in the distribution.  See full license for
- * requirements.
- *
- * Your Warranty, Limitations of liability and Indemnity are expressly stated
- * in the License.  Please refer to the License for the specific language
- * governing these rights and limitations under the License.  Portions created
- * by SugarCRM are Copyright (C) 2004-2012 SugarCRM, Inc.; All Rights Reserved.
- ********************************************************************************/
-
-
-$app_list_strings['moduleList']['mur_approval_managment'] = 'Managment Approval';
-
-//Merged from custom/Extension/application/Ext/Language/en_us.mr.php
-
-/*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
- */
-$app_list_strings['moduleListSingular']['mr_consultant'] = 'Consultants';
-
 //Merged from custom/Extension/application/Ext/Language/en_us.Client_List.php
 
 /*********************************************************************************
@@ -194,41 +61,6 @@ $app_list_strings['Continent']['South_America'] = 'South America';
 $app_list_strings['Continent']['Australia'] = 'Australia';
 $app_list_strings['Continent']['Africa'] = 'Africa';
 
-//Merged from custom/Extension/application/Ext/Language/en_us.consultant.php
- 
-
-//Merged from custom/Extension/application/Ext/Language/en_us.Cosultants.php
-
-/*********************************************************************************
- * The contents of this file are subject to the SugarCRM Master Subscription
- * Agreement ("License") which can be viewed at
- * http://www.sugarcrm.com/crm/master-subscription-agreement
- * By installing or using this file, You have unconditionally agreed to the
- * terms and conditions of the License, and You may not use this file except in
- * compliance with the License.  Under the terms of the license, You shall not,
- * among other things: 1) sublicense, resell, rent, lease, redistribute, assign
- * or otherwise transfer Your rights to the Software, and 2) use the Software
- * for timesharing or service bureau purposes such as hosting the Software for
- * commercial gain and/or for the benefit of a third party.  Use of the Software
- * may be subject to applicable fees and any use of the Software without first
- * paying applicable fees is strictly prohibited.  You do not have the right to
- * remove SugarCRM copyrights from the source code or user interface.
- *
- * All copies of the Covered Code must include on each user interface screen:
- *  (i) the "Powered by SugarCRM" logo and
- *  (ii) the SugarCRM copyright notice
- * in the same form as they appear in the distribution.  See full license for
- * requirements.
- *
- * Your Warranty, Limitations of liability and Indemnity are expressly stated
- * in the License.  Please refer to the License for the specific language
- * governing these rights and limitations under the License.  Portions created
- * by SugarCRM are Copyright (C) 2004-2012 SugarCRM, Inc.; All Rights Reserved.
- ********************************************************************************/
-
-
-$app_list_strings['moduleList']['mr_consultant'] = 'Consultants';
-
 //Merged from custom/Extension/application/Ext/Language/en_us.EmailTracker.php
 
 /*********************************************************************************
@@ -263,6 +95,110 @@ $app_list_strings['moduleList']['mu_Enquriy_Tracker'] = 'Enquriy_Tracker';
 $app_list_strings['enq_status_list']['Active'] = 'Active';
 $app_list_strings['enq_status_list']['Clicked'] = 'Clicked';
 $app_list_strings['enq_status_list']['Expired'] = 'Expired';
+
+//Merged from custom/Extension/application/Ext/Language/en_us.approval_managment.php
+
+/*********************************************************************************
+ * The contents of this file are subject to the SugarCRM Master Subscription
+ * Agreement ("License") which can be viewed at
+ * http://www.sugarcrm.com/crm/master-subscription-agreement
+ * By installing or using this file, You have unconditionally agreed to the
+ * terms and conditions of the License, and You may not use this file except in
+ * compliance with the License.  Under the terms of the license, You shall not,
+ * among other things: 1) sublicense, resell, rent, lease, redistribute, assign
+ * or otherwise transfer Your rights to the Software, and 2) use the Software
+ * for timesharing or service bureau purposes such as hosting the Software for
+ * commercial gain and/or for the benefit of a third party.  Use of the Software
+ * may be subject to applicable fees and any use of the Software without first
+ * paying applicable fees is strictly prohibited.  You do not have the right to
+ * remove SugarCRM copyrights from the source code or user interface.
+ *
+ * All copies of the Covered Code must include on each user interface screen:
+ *  (i) the "Powered by SugarCRM" logo and
+ *  (ii) the SugarCRM copyright notice
+ * in the same form as they appear in the distribution.  See full license for
+ * requirements.
+ *
+ * Your Warranty, Limitations of liability and Indemnity are expressly stated
+ * in the License.  Please refer to the License for the specific language
+ * governing these rights and limitations under the License.  Portions created
+ * by SugarCRM are Copyright (C) 2004-2012 SugarCRM, Inc.; All Rights Reserved.
+ ********************************************************************************/
+
+
+$app_list_strings['moduleList']['mur_approval_managment'] = 'Managment Approval';
+
+//Merged from custom/Extension/application/Ext/Language/en_us.mr.php
+
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+$app_list_strings['moduleListSingular']['mr_consultant'] = 'Consultants';
+
+//Merged from custom/Extension/application/Ext/Language/en_us.msa.php
+
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+
+$app_list_strings['moduleList']['mur_msa'] = 'MSA';
+$app_list_strings['moduleListSingular']['mur_msa'] = 'MSA';
+$app_list_strings['mur_msa_type_dom']['Analyst'] = 'Analyst';
+$app_list_strings['mur_msa_type_dom']['Competitor'] = 'Competitor';
+$app_list_strings['mur_msa_type_dom']['Customer'] = 'Customer';
+$app_list_strings['mur_msa_type_dom']['Integrator'] = 'Integrator';
+$app_list_strings['mur_msa_type_dom']['Investor'] = 'Investor';
+$app_list_strings['mur_msa_type_dom']['Partner'] = 'Partner';
+$app_list_strings['mur_msa_type_dom']['Press'] = 'Press';
+$app_list_strings['mur_msa_type_dom']['Prospect'] = 'Prospect';
+$app_list_strings['mur_msa_type_dom']['Reseller'] = 'Reseller';
+$app_list_strings['mur_msa_type_dom']['Other'] = 'Other';
+$app_list_strings['mur_msa_type_dom'][''] = '';
+
+//Merged from custom/Extension/application/Ext/Language/en_us.consultant.php
+ 
+
+//Merged from custom/Extension/application/Ext/Language/en_us.ZuckerReports2.php
+
+$app_list_strings['moduleList']['zr2_ReportParameter'] = 'Report Parameter';
+$app_list_strings['moduleList']['zr2_ReportTemplate'] = 'JasperReports Template';
+$app_list_strings['moduleList']['zr2_QueryTemplate'] = 'Query Template';
+$app_list_strings['moduleList']['zr2_ReportParameterLink'] = 'Parameter Bindings';
+$app_list_strings['moduleList']['zr2_Report'] = 'ZuckerReports';
+$app_list_strings['moduleList']['zr2_ReportContainer'] = 'Report Archive';
+
+$app_list_strings['PARAM_RANGE_TYPES']['SIMPLE'] = 'Direct Input';
+$app_list_strings['PARAM_RANGE_TYPES']['DATE'] = 'Date Input';
+$app_list_strings['PARAM_RANGE_TYPES']['DATE_NOW'] = 'Current Time and Date';
+$app_list_strings['PARAM_RANGE_TYPES']['DATE_ADD'] = 'Future Timestamp';
+$app_list_strings['PARAM_RANGE_TYPES']['DATE_SUB'] = 'Past Timestamp';
+$app_list_strings['PARAM_RANGE_TYPES']['SQL'] = 'User-Defined Query';
+$app_list_strings['PARAM_RANGE_TYPES']['LIST'] = 'User-Defined List';
+$app_list_strings['PARAM_RANGE_TYPES']['DROPDOWN'] = 'Drop-Down List';
+$app_list_strings['PARAM_RANGE_TYPES']['CURRENT_USER'] = 'Current User';
+$app_list_strings['PARAM_RANGE_TYPES']['SCRIPT'] = 'PHP Script';
+$app_list_strings['PARAM_DATE_TYPES']['MINUTE'] = 'Minute(s)';
+$app_list_strings['PARAM_DATE_TYPES']['HOUR'] = 'Hour(s)';
+$app_list_strings['PARAM_DATE_TYPES']['DAY'] = 'Day(s)';
+$app_list_strings['PARAM_DATE_TYPES']['WEEK'] = 'Week(s)';
+$app_list_strings['PARAM_DATE_TYPES']['MONTH'] = 'Month(s)';
+$app_list_strings['PARAM_DATE_TYPES']['YEAR'] = 'Year(s)';
+
+
 
 //Merged from custom/Extension/application/Ext/Language/en_us.client_new_list.php
 
@@ -315,6 +251,70 @@ $app_list_strings['Continent']['Middle_East'] = 'Middle East';
 $app_list_strings['Continent']['South_America'] = 'South America';
 $app_list_strings['Continent']['Australia'] = 'Australia';
 $app_list_strings['Continent']['Africa'] = 'Africa';
+
+//Merged from custom/Extension/application/Ext/Language/en_us.Murano2.php
+ 
+
+//Merged from custom/Extension/application/Ext/Language/en_us.tester.php
+
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+$app_list_strings['moduleList']['A1234_murano'] = 'murano';
+$app_list_strings['moduleListSingular']['A1234_murano'] = 'murano';
+
+//Merged from custom/Extension/application/Ext/Language/en_us.Universal_Click2Call.php
+
+/*********************************************************************************
+ * Name: Universal Click to Call by Epicom
+ * Version: 1.0.0
+ * Date: 2011-06-08
+ * Author: Epicom Corp.
+ * Maintainer: support@epicom.com
+ * License: GPL version 2 or later
+ ********************************************************************************/
+
+
+$app_list_strings['moduleList']['uc2ce_Click2Call'] = 'Universal Click to Call';
+
+//Merged from custom/Extension/application/Ext/Language/en_us.Cosultants.php
+
+/*********************************************************************************
+ * The contents of this file are subject to the SugarCRM Master Subscription
+ * Agreement ("License") which can be viewed at
+ * http://www.sugarcrm.com/crm/master-subscription-agreement
+ * By installing or using this file, You have unconditionally agreed to the
+ * terms and conditions of the License, and You may not use this file except in
+ * compliance with the License.  Under the terms of the license, You shall not,
+ * among other things: 1) sublicense, resell, rent, lease, redistribute, assign
+ * or otherwise transfer Your rights to the Software, and 2) use the Software
+ * for timesharing or service bureau purposes such as hosting the Software for
+ * commercial gain and/or for the benefit of a third party.  Use of the Software
+ * may be subject to applicable fees and any use of the Software without first
+ * paying applicable fees is strictly prohibited.  You do not have the right to
+ * remove SugarCRM copyrights from the source code or user interface.
+ *
+ * All copies of the Covered Code must include on each user interface screen:
+ *  (i) the "Powered by SugarCRM" logo and
+ *  (ii) the SugarCRM copyright notice
+ * in the same form as they appear in the distribution.  See full license for
+ * requirements.
+ *
+ * Your Warranty, Limitations of liability and Indemnity are expressly stated
+ * in the License.  Please refer to the License for the specific language
+ * governing these rights and limitations under the License.  Portions created
+ * by SugarCRM are Copyright (C) 2004-2012 SugarCRM, Inc.; All Rights Reserved.
+ ********************************************************************************/
+
+
+$app_list_strings['moduleList']['mr_consultant'] = 'Consultants';
 
 //Merged from custom/Extension/application/Ext/Language/en_us.group_client_tasks.php
 
@@ -497,3 +497,45 @@ $app_list_strings['assigned_team_0']['team_G'] = 'Team G';
 $app_list_strings['assigned_team_0']['team_B'] = 'Team B';
 $app_list_strings['assigned_team_0']['team_S'] = 'Team S';
 $app_list_strings['assigned_team_0'][''] = '';
+
+//Merged from custom/Extension/application/Ext/Language/en_us.import_calls.php
+
+$app_list_strings['call_direction_list']=array (
+  '' => '',
+  'Inbound' => 'Inbound',
+  'Outbound' => 'Outbound',
+  'Internal' => 'Internal',
+);
+
+$app_list_strings['call_direction_dom']=array (
+  'Inbound' => 'Inbound',
+  'Outbound' => 'Outbound',
+  '' => '',
+  'Internal' => 'Internal',
+);
+
+$app_list_strings['answer_list']=array (
+  '' => '',
+  'Answered' => 'Answered',
+  'Unanswered' => 'Unanswered',
+);
+
+$app_list_strings['class_of_service_list']=array (
+  '' => '',
+  'Premium' => 'Premium',
+  'Operator Assisted' => 'Operator Assisted',
+  'Mobile' => 'Mobile',
+  'Emergency' => 'Emergency',
+  'National' => 'National',
+  'International' => 'International',
+  'None' => 'None',
+  'Freephone' => 'Freephone',
+);
+
+$app_list_strings['call_answer_list']=array (
+  '' => '',
+  'Answered' => 'Answered',
+  'Unanswered' => 'Unanswered',
+  'Voice Mail' => 'Voice Mail',
+  'Abandoned' => 'Abandoned',
+);

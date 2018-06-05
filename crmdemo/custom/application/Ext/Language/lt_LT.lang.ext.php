@@ -1,9 +1,6 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
-//Merged from custom/Extension/application/Ext/Language/lt_LT.Murano2.php
- 
-
 //Merged from custom/Extension/application/Ext/Language/lt_LT.msa.php
 
 /*
@@ -32,4 +29,7 @@ $app_list_strings['mur_msa_type_dom']['Prospect'] = 'Kandidatas';
 $app_list_strings['mur_msa_type_dom']['Reseller'] = 'Perpardavėjas';
 
 //Merged from custom/Extension/application/Ext/Language/lt_LT.consultant.php
+ 
+
+//Merged from custom/Extension/application/Ext/Language/lt_LT.Murano2.php
  

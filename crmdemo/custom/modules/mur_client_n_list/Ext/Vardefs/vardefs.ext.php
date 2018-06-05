@@ -1,84 +1,13 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
-//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_fund_type_c.php
+//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_email_address_c.php
 
- // created: 2013-09-23 14:21:18
-$dictionary['mur_client_n_list']['fields']['fund_type_c']['enforced']='';
-$dictionary['mur_client_n_list']['fields']['fund_type_c']['dependency']='';
-
- 
-//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_fund_manager_c.php
-
- // created: 2013-09-23 19:04:58
-$dictionary['mur_client_n_list']['fields']['fund_manager_c']['enforced']='';
-$dictionary['mur_client_n_list']['fields']['fund_manager_c']['dependency']='';
+ // created: 2013-09-23 16:12:51
+$dictionary['mur_client_n_list']['fields']['email_address_c']['enforced']='';
+$dictionary['mur_client_n_list']['fields']['email_address_c']['dependency']='';
 
  
-//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_fund_aum_c.php
-
- // created: 2013-09-23 14:58:31
-$dictionary['mur_client_n_list']['fields']['fund_aum_c']['enforced']='';
-$dictionary['mur_client_n_list']['fields']['fund_aum_c']['dependency']='';
-
- 
-//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_legal_structure_c.php
-
- // created: 2013-09-23 14:20:12
-$dictionary['mur_client_n_list']['fields']['legal_structure_c']['enforced']='';
-$dictionary['mur_client_n_list']['fields']['legal_structure_c']['dependency']='';
-
- 
-//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_liquidity_c.php
-
- // created: 2013-09-23 14:19:40
-$dictionary['mur_client_n_list']['fields']['liquidity_c']['enforced']='';
-$dictionary['mur_client_n_list']['fields']['liquidity_c']['dependency']='';
-
- 
-//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_track_record_c.php
-
- // created: 2013-09-23 14:19:18
-$dictionary['mur_client_n_list']['fields']['track_record_c']['enforced']='';
-$dictionary['mur_client_n_list']['fields']['track_record_c']['dependency']='';
-
- 
-//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_sent_counter_c.php
-
- // created: 2013-09-24 10:53:47
-$dictionary['mur_client_n_list']['fields']['sent_counter_c']['enforced']='';
-$dictionary['mur_client_n_list']['fields']['sent_counter_c']['dependency']='';
-
- 
-//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/active_on.php
-
-
-
-
-$dictionary['mur_client_n_list']['fields']['active_on']= array(
-
-  'name' => 'active_on',
-    'vname' => 'Active On Portal',
-    'type' => 'enum',
-	'studio'=>array("EditView"=>true,"DetailView"=>true),
-'options' => 'active_on_list',
-);
-$dictionary['mur_client_n_list']['fields']['active_on_portal']=
-  array (
-    'name' => 'active_on_portal',
-    'vname' => 'Active On Portal',
-    'type' => 'bool',
-  
-    'options' => 'bool_init_dom',
-	'audited'=>true,
-	'comment' => 'Status of the lead',
-    'merge_filter' => 'enabled',
-  );
-
-
-
-
-
 //Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_firm_aum_c.php
 
  // created: 2013-09-23 14:59:27
@@ -115,11 +44,82 @@ $dictionary['mur_client_n_list']['fields']['mur_client8cf1nt_list_idb']['vname']
 $dictionary['mur_client_n_list']['fields']['mur_client8cf1nt_list_idb']['link'] = 'mur_client_cl_client_list';
 $dictionary['mur_client_n_list']['fields']['mur_client8cf1nt_list_idb']['rname'] = 'id';
 
-//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_email_address_c.php
+//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_sent_counter_c.php
 
- // created: 2013-09-23 16:12:51
-$dictionary['mur_client_n_list']['fields']['email_address_c']['enforced']='';
-$dictionary['mur_client_n_list']['fields']['email_address_c']['dependency']='';
+ // created: 2013-09-24 10:53:47
+$dictionary['mur_client_n_list']['fields']['sent_counter_c']['enforced']='';
+$dictionary['mur_client_n_list']['fields']['sent_counter_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/active_on.php
+
+
+
+
+$dictionary['mur_client_n_list']['fields']['active_on']= array(
+
+  'name' => 'active_on',
+    'vname' => 'Active On Portal',
+    'type' => 'enum',
+	'studio'=>array("EditView"=>true,"DetailView"=>true),
+'options' => 'active_on_list',
+);
+$dictionary['mur_client_n_list']['fields']['active_on_portal']=
+  array (
+    'name' => 'active_on_portal',
+    'vname' => 'Active On Portal',
+    'type' => 'bool',
+  
+    'options' => 'bool_init_dom',
+	'audited'=>true,
+	'comment' => 'Status of the lead',
+    'merge_filter' => 'enabled',
+  );
+
+
+
+
+
+//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_fund_aum_c.php
+
+ // created: 2013-09-23 14:58:31
+$dictionary['mur_client_n_list']['fields']['fund_aum_c']['enforced']='';
+$dictionary['mur_client_n_list']['fields']['fund_aum_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_fund_manager_c.php
+
+ // created: 2013-09-23 19:04:58
+$dictionary['mur_client_n_list']['fields']['fund_manager_c']['enforced']='';
+$dictionary['mur_client_n_list']['fields']['fund_manager_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_fund_type_c.php
+
+ // created: 2013-09-23 14:21:18
+$dictionary['mur_client_n_list']['fields']['fund_type_c']['enforced']='';
+$dictionary['mur_client_n_list']['fields']['fund_type_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_legal_structure_c.php
+
+ // created: 2013-09-23 14:20:12
+$dictionary['mur_client_n_list']['fields']['legal_structure_c']['enforced']='';
+$dictionary['mur_client_n_list']['fields']['legal_structure_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_track_record_c.php
+
+ // created: 2013-09-23 14:19:18
+$dictionary['mur_client_n_list']['fields']['track_record_c']['enforced']='';
+$dictionary['mur_client_n_list']['fields']['track_record_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_liquidity_c.php
+
+ // created: 2013-09-23 14:19:40
+$dictionary['mur_client_n_list']['fields']['liquidity_c']['enforced']='';
+$dictionary['mur_client_n_list']['fields']['liquidity_c']['dependency']='';
 
  
 //Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_name.php
@@ -207,3 +207,20 @@ $dictionary["mur_client_n_list"]["fields"]["rt_client_reporting_mur_client_n_lis
   'link-type' => 'many',
   'side' => 'left',
 );
+
+//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_resend_c.php
+
+ // created: 2018-04-25 12:03:07
+$dictionary['mur_client_n_list']['fields']['resend_c']['labelValue']='Resend';
+$dictionary['mur_client_n_list']['fields']['resend_c']['enforced']='false';
+$dictionary['mur_client_n_list']['fields']['resend_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/mur_client_n_list/Ext/Vardefs/sugarfield_crm_tickers_c.php
+
+ // created: 2018-04-25 12:09:39
+$dictionary['mur_client_n_list']['fields']['crm_tickers_c']['labelValue']='crm tickers';
+$dictionary['mur_client_n_list']['fields']['crm_tickers_c']['enforced']='';
+$dictionary['mur_client_n_list']['fields']['crm_tickers_c']['dependency']='';
+
+ 

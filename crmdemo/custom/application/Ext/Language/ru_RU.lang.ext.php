@@ -1,9 +1,6 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
-//Merged from custom/Extension/application/Ext/Language/ru_RU.Murano2.php
- 
-
 //Merged from custom/Extension/application/Ext/Language/ru_RU.msa.php
 
 /*
@@ -28,4 +25,7 @@ $app_list_strings['mur_msa_type_dom']['Prospect'] = 'Потенциальный 
 $app_list_strings['mur_msa_type_dom']['Reseller'] = 'Посредник';
 
 //Merged from custom/Extension/application/Ext/Language/ru_RU.consultant.php
+ 
+
+//Merged from custom/Extension/application/Ext/Language/ru_RU.Murano2.php
  

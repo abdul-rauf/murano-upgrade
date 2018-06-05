@@ -1,9 +1,6 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
-//Merged from custom/Extension/application/Ext/Language/de_DE.Murano2.php
- 
-
 //Merged from custom/Extension/application/Ext/Language/de_DE.msa.php
 
 /*
@@ -32,4 +29,7 @@ $app_list_strings['mur_msa_type_dom']['Other'] = 'Andere';
 $app_list_strings['mur_msa_type_dom'][''] = '';
 
 //Merged from custom/Extension/application/Ext/Language/de_DE.consultant.php
+ 
+
+//Merged from custom/Extension/application/Ext/Language/de_DE.Murano2.php
  

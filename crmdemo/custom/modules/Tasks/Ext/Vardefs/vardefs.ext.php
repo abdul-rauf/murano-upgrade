@@ -15,11 +15,6 @@ $dictionary["Task"]["fields"]["prospectlists_tasks_1"] = array (
   'id_name' => 'prospectlists_tasks_1prospectlists_ida',
 );
 
-//Merged from custom/Extension/modules/Tasks/Ext/Vardefs/sugarfield_mur_client_n_list_id_c.php
-
- // created: 2015-12-07 03:52:13
-
- 
 //Merged from custom/Extension/modules/Tasks/Ext/Vardefs/sugarfield_client_c.php
 
  // created: 2015-12-07 03:52:13
@@ -29,5 +24,10 @@ $dictionary['Task']['fields']['client_c']['full_text_search']=array (
   'enabled' => false,
 );
 $dictionary['Task']['fields']['client_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/Tasks/Ext/Vardefs/sugarfield_mur_client_n_list_id_c.php
+
+ // created: 2015-12-07 03:52:13
 
  

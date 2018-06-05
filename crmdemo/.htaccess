@@ -28,7 +28,7 @@ AddType     application/javascript  .js
 <IfModule mod_rewrite.c>
     Options +FollowSymLinks
     RewriteEngine On
-    RewriteBase /crmdemo/crmdemo/
+    RewriteBase /murano-upgrade/crmdemo/
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^rest/(.*)$ api/rest.php?__sugar_url=$1 [L,QSA]

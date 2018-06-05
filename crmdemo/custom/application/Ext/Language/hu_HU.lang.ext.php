@@ -1,9 +1,6 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
-//Merged from custom/Extension/application/Ext/Language/hu_HU.Murano2.php
- 
-
 //Merged from custom/Extension/application/Ext/Language/hu_HU.msa.php
 
 /*
@@ -32,4 +29,7 @@ $app_list_strings['mur_msa_type_dom']['Prospect'] = 'Lehetséges vevő';
 $app_list_strings['mur_msa_type_dom']['Reseller'] = 'Viszonteladó';
 
 //Merged from custom/Extension/application/Ext/Language/hu_HU.consultant.php
+ 
+
+//Merged from custom/Extension/application/Ext/Language/hu_HU.Murano2.php
  

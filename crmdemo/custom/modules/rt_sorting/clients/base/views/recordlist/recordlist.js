@@ -11,14 +11,14 @@
 ({
     extendsFrom: 'RecordlistView',
     clientData: [],
-    initialize: function (options) { 
+    initialize: function (options) {
         this._super("initialize", [options]);
 
         if (this.layout) {
             this.layout.on('list:composeclients:fire', this.composeClientClicked, this);
         }
     },
-    composeClientClicked: function () { 
+    composeClientClicked: function () {
         var self = this;
         var sortingCollection = this.context.get('mass_collection');
         var sortingIds = [];
@@ -29,7 +29,7 @@
         app.api.call('read', getClients, null, {
             success: _.bind(function (data) {
                 var index = 0;
-                this.clientData = data; 
+                this.clientData = data;
                 if (data != "") {
                     self.closePopup(this.clientData[0], index, data.length);
                 } else {
@@ -60,7 +60,6 @@
                     client_id: record["id"],
                     subject: 'Murano Investor Report - ' + record["leadName"],
                     attachments: record['noteId'],
-                    attach_length:record['noteId'],// Added against Reportboard_bug_fixes
                     type: 'document',
                 },
                 module: 'Emails',

@@ -10,6 +10,8 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+ini_set('display_errors',0);
+error_reporting(E_ALL);
 
 define('ENTRY_POINT_TYPE', 'gui');
 include ('include/MVC/preDispatch.php');

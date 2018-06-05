@@ -1,0 +1,12 @@
+﻿"Date/Time","Direction","Calling","Called","Extension","Ring","Wait","Talk","Answer","Class of Service","Site","Account","Recording","Cost","Charge Description","Source",
+"02/01/2018 09:01:24","Outbound","02034053370","0096524813622","384","23",,"51","Answered","International","106 New Bond Street ",,"true","£0.122","Kuwait ","Desk Phone"
+"02/01/2018 09:03:16","Outbound","02034053378","0085226977001","378","19",,"14","Answered","International","106 New Bond Street ",,"true","£0.033","Hong Kong ","Desk Phone"
+"02/01/2018 09:04:18","Outbound","02034053370","006565311555","389","5",,"27","Answered","International","SIP Users",,"true","£0.032","Singapore ","Desk Phone"
+"02/01/2018 09:04:55","Outbound","02034053370","006565311555","389","3",,"77","Answered","International","SIP Users",,"true","£0.045","Singapore ","Desk Phone"
+"02/01/2018 09:05:50","Outbound","02034053370","004684113773","394","43",,"4","Answered","International","106 New Bond Street ",,"true","£0.027","Sweden ","Desk Phone"
+"02/01/2018 09:06:18","Outbound","02034053373","0097126515555","373","11",,"1","Answered","International","106 New Bond Street ",,"true","£0.029","United Arab Emirates ","Desk Phone"
+"02/01/2018 09:06:31","Outbound","02034053373","0097126515555","373","12",,"12","Answered","International","106 New Bond Street ",,"true","£0.077","United Arab Emirates ","Desk Phone"
+"02/01/2018 09:06:38","Outbound","02034053370","004684113770","394","12",,"38","Answered","International","106 New Bond Street ",,"true","£0.041","Sweden ","Desk Phone"
+"02/01/2018 09:07:13","Outbound","02034053373","0097317563333","373","22",,"78","Answered","International","106 New Bond Street ",,"true","£0.234","Bahrain ","Desk Phone"
+"02/01/2018 09:09:43","Outbound","02034053370","0097124155661","394","34",,"7","Answered","International","106 New Bond Street ",,"true","£0.055","United Arab Emirates ","Desk Phone"
+"02/01/2018 09:09:59","Outbound","02034053370","006565311555","389","2",,"61","Answered","International","SIP Users",,"true","£0.041","Singapore ","Desk Phone"

@@ -219,6 +219,14 @@ array (
         'default' => true,
         'name' => 'target_links',
       ),
+      'go_on_web_c' => 
+      array (
+        'type' => 'bool',
+        'default' => true,
+        'label' => 'LBL_GO_ON_WEB',
+        'width' => '10%',
+        'name' => 'go_on_web_c',
+      ),
       'title' => 
       array (
         'type' => 'varchar',

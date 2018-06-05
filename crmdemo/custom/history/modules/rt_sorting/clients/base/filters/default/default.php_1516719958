@@ -1,0 +1,39 @@
+<?php
+// created: 2018-01-22 16:20:59
+$viewdefs['rt_sorting']['base']['filter']['default'] = array (
+  'default_filter' => 'all_records',
+  'fields' => 
+  array (
+    'da_confirmed_clients_c' => 
+    array (
+    ),
+    'date_entered' => 
+    array (
+    ),
+    'date_modified' => 
+    array (
+    ),
+    'assigned_user_name' => 
+    array (
+    ),
+    '$owner' => 
+    array (
+      'predefined_filter' => true,
+      'vname' => 'LBL_CURRENT_USER_FILTER',
+    ),
+    '$favorite' => 
+    array (
+      'predefined_filter' => true,
+      'vname' => 'LBL_FAVORITES_FILTER',
+    ),
+    'feedback_date1_c' => 
+    array (
+    ),
+    'feedback_received_c' => 
+    array (
+    ),
+    'modified_by_name' => 
+    array (
+    ),
+  ),
+);

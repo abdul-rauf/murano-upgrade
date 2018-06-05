@@ -1,5 +1,5 @@
 <?php
-// created: 2018-02-07 13:22:50
+// created: 2017-12-19 14:30:31
 $unified_search_modules_display = array (
   'Accounts' => 
   array (
@@ -34,18 +34,6 @@ $unified_search_modules_display = array (
     'visible' => true,
   ),
   'Opportunities' => 
-  array (
-    'visible' => true,
-  ),
-  'Manufacturers' => 
-  array (
-    'visible' => true,
-  ),
-  'ProductCategories' => 
-  array (
-    'visible' => true,
-  ),
-  'Products' => 
   array (
     'visible' => true,
   ),

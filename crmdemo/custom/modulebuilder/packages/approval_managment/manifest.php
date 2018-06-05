@@ -31,9 +31,9 @@ $manifest = array (
   'icon' => '',
   'is_uninstallable' => true,
   'name' => 'approval_managment',
-  'published_date' => '2017-11-17 15:13:46',
+  'published_date' => '2018-01-29 12:46:13',
   'type' => 'module',
-  'version' => 1510931626,
+  'version' => 1517229974,
   'remove_tables' => 'prompt',
 );
 

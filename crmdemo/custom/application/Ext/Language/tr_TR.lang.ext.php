@@ -1,9 +1,6 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
-//Merged from custom/Extension/application/Ext/Language/tr_TR.Murano2.php
- 
-
 //Merged from custom/Extension/application/Ext/Language/tr_TR.msa.php
 
 /*
@@ -28,4 +25,7 @@ $app_list_strings['mur_msa_type_dom']['Prospect'] = 'Potansiyel Müşteri';
 $app_list_strings['mur_msa_type_dom']['Reseller'] = 'Bayii';
 
 //Merged from custom/Extension/application/Ext/Language/tr_TR.consultant.php
+ 
+
+//Merged from custom/Extension/application/Ext/Language/tr_TR.Murano2.php
  

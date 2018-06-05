@@ -1,5 +1,5 @@
 <?php
- // created: 2017-11-03 11:15:56
+ // created: 2018-02-20 14:27:04
 $dictionary['Lead']['fields']['trip7_c']['labelValue']='Trip 7';
 $dictionary['Lead']['fields']['trip7_c']['dependency']='';
 $dictionary['Lead']['fields']['trip7_c']['visibility_grid']='';

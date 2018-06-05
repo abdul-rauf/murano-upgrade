@@ -1,9 +1,6 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
-//Merged from custom/Extension/application/Ext/Language/bg_BG.Murano2.php
- 
-
 //Merged from custom/Extension/application/Ext/Language/bg_BG.msa.php
 
 /*
@@ -28,4 +25,7 @@ $app_list_strings['mur_msa_type_dom']['Reseller'] = 'Дистрибутор';
 $app_list_strings['mur_msa_type_dom'][''] = '';
 
 //Merged from custom/Extension/application/Ext/Language/bg_BG.consultant.php
+ 
+
+//Merged from custom/Extension/application/Ext/Language/bg_BG.Murano2.php
  

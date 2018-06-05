@@ -15,5 +15,32 @@ class save_changes{
 		$db->query($sql);
 
 	}
+	
+	
+	function update_last_spoke_date($bean,$event,$arguments){
+		global $db;
+		
+		if($bean->lead_id_c){
+     
+    
+	echo $sql="select first_name,last_name,last_spoke_c,description from leads inner join leads_cstm on leads_cstm.id_c = leads.id where leads_cstm.id_c ='".$bean->lead_id_c."' ";			
+     $result = $db->query($sql);
+      $row =$db->fetchByAssoc($result);
+     $bean->last_spoke_c =$row['last_spoke_c'];
+$bean->description =$row['description'];
+$name = $row['first_name']." ".$row['last_name'];
+echo $sql2 =" update mur_approval_managment set name = '".$name."',description='".$row['description']."' where id='".$bean->id."'";
+
+$sql3 =" update mur_approval_managment_cstm set last_spoke_c = '".$row['last_spoke_c']."' where id_c='".$bean->id."'"; 
+$db->query($sql2);
+// $db->query($sql2);
+    	}
+    	//print_r($bean);	
+	}
+	
+	
+	
+	
+	
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
- // created: 2017-11-03 11:18:14
+ // created: 2018-02-20 13:54:10
 $dictionary['Lead']['fields']['trips_suitable4_c']['labelValue']='Trip 4';
 $dictionary['Lead']['fields']['trips_suitable4_c']['dependency']='';
 $dictionary['Lead']['fields']['trips_suitable4_c']['visibility_grid']='';

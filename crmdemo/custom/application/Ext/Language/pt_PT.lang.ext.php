@@ -1,9 +1,6 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
-//Merged from custom/Extension/application/Ext/Language/pt_PT.Murano2.php
- 
-
 //Merged from custom/Extension/application/Ext/Language/pt_PT.msa.php
 
 /*
@@ -32,4 +29,7 @@ $app_list_strings['mur_msa_type_dom']['Reseller'] = 'Revendedor';
 $app_list_strings['mur_msa_type_dom']['Other'] = 'Outro';
 
 //Merged from custom/Extension/application/Ext/Language/pt_PT.consultant.php
+ 
+
+//Merged from custom/Extension/application/Ext/Language/pt_PT.Murano2.php
  

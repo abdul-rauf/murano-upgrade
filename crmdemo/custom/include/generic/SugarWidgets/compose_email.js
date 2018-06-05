@@ -16,7 +16,7 @@ function openPopups(module_name, record_id, leadId) {
             attachment[0] = o;
             var getClients = app.api.buildURL('Sorting/getConfirmedClients/' + record_id);
             app.api.call('read', getClients, null, {
-                success: _.bind(function (data) { 
+                success: _.bind(function (data) {
                     var index = 0;
                     clientData = data;
                     if (data != "") {
@@ -30,6 +30,7 @@ function openPopups(module_name, record_id, leadId) {
                     }
                 }, this)
             });
+//            console.log(o);
         },
         error: function (e) {
             app.error.handleHttpError(e, {});
@@ -53,7 +54,6 @@ function closePopup(record, index, length, attachment) {
                 bcc_addresses: bccAddress,
                 sorting_id: record[0]["sortingId"],
                 client_id: record[0]["id"],
-                attach_length: [1], // added against Reportboard_bug_fixes
                 subject: 'Murano Investor Report - ' + record[0]["leadName"],
                 attachments: attachment,
                 type: 'document',
@@ -62,7 +62,9 @@ function closePopup(record, index, length, attachment) {
         }
     },
             function () {
-               if (index < length) {
+                console.log("dsa");
+                if (index < length) {
+                    console.log("d133sa");
                     index++;
                     if (typeof clientData[index] != "undefined") {
                         closePopup(clientData[index], index, length, attachment);

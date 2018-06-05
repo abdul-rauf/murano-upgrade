@@ -1,9 +1,8 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
-//Merged from modules/RevenueLineItems/Ext/LogicHooks/SyncBestWorstWithLikely.php
+//Merged from modules/RevenueLineItems/Ext/LogicHooks/ResaveRLIForAccounts.php
 
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,15 +15,15 @@
  */
 
 /**
- * Before we save an RevenueLineItem, if the sales stage is in one of the Forecasts Closed States, then we need to
- * make sure we sync the values
+ * Resave RLI bean after the account_link relationship is removed. This will cause the RLI to pick up
+ * the account from it's associated Opportunity through sugarlogic
  */
-$hook_array['before_save'][] = array(
+$hook_array['after_relationship_delete'][] = array(
     1,
-    'setBestWorstEqualToLikelyAmount',
-    'modules/Forecasts/ForecastHooks.php',
-    'ForecastHooks',
-    'setBestWorstEqualToLikelyAmount',
+    'afterRelationshipDelete',
+    'modules/RevenueLineItems/RevenueLineItemHooks.php',
+    'RevenueLineItemHooks',
+    'afterRelationshipDelete',
 );
 
 //Merged from modules/RevenueLineItems/Ext/LogicHooks/SetForecastCommitStage.php
@@ -52,8 +51,9 @@ $hook_array['before_save'][] = array(
     'setCommitStageIfEmpty',
 );
 
-//Merged from modules/RevenueLineItems/Ext/LogicHooks/ResaveRLIForAccounts.php
+//Merged from modules/RevenueLineItems/Ext/LogicHooks/SyncBestWorstWithLikely.php
 
+ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -66,13 +66,13 @@ $hook_array['before_save'][] = array(
  */
 
 /**
- * Resave RLI bean after the account_link relationship is removed. This will cause the RLI to pick up
- * the account from it's associated Opportunity through sugarlogic
+ * Before we save an RevenueLineItem, if the sales stage is in one of the Forecasts Closed States, then we need to
+ * make sure we sync the values
  */
-$hook_array['after_relationship_delete'][] = array(
+$hook_array['before_save'][] = array(
     1,
-    'afterRelationshipDelete',
-    'modules/RevenueLineItems/RevenueLineItemHooks.php',
-    'RevenueLineItemHooks',
-    'afterRelationshipDelete',
+    'setBestWorstEqualToLikelyAmount',
+    'modules/Forecasts/ForecastHooks.php',
+    'ForecastHooks',
+    'setBestWorstEqualToLikelyAmount',
 );

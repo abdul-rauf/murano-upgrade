@@ -47,14 +47,13 @@ require_once('include/Sugarpdf/SugarpdfFactory.php');
         $this->templateLocation = $this->buildTemplateFile($pdfTemplate);
         $this->sugarpdfBean = SugarpdfFactory::loadSugarpdf('pdfmanager', 'Leads', $this->bean);
         $this->bean = $this->sugarpdfBean->bean;
-        $new = htmlspecialchars($this->bean, ENT_QUOTES);// added against Reportboard_bug_fixes
         $fields = PdfManagerHelper::parseBeanFields($this->bean, true);
         
         //assign values to merge fields
         require_once('vendor/tcpdf/tcpdf.php');
-        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, false, 'ISO-8859-15', false);
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-          $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor(PDF_AUTHOR);
         $pdf->SetTitle(PDF_TITLE);
         $pdf->SetSubject(PDF_SUBJECT);

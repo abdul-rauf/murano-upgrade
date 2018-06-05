@@ -1,6 +1,22 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
+//Merged from custom/Extension/modules/cl_Client_list/Ext/Vardefs/sugarfield_lead_id1_c.php
+
+ // created: 2012-03-05 15:48:29
+
+ 
+//Merged from custom/Extension/modules/cl_Client_list/Ext/Vardefs/sugarfield_client_name_c.php
+
+ // created: 2012-04-27 06:58:02
+$dictionary['cl_Client_list']['fields']['client_name_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/cl_Client_list/Ext/Vardefs/sugarfield_mur_client_n_list_id_c.php
+
+ // created: 2012-04-27 06:58:02
+
+ 
 //Merged from custom/Extension/modules/cl_Client_list/Ext/Vardefs/sugarfield_date_modified.php
 
  // created: 2012-10-03 17:20:46
@@ -10,27 +26,11 @@ $dictionary['cl_Client_list']['fields']['date_modified']['calculated']=false;
 $dictionary['cl_Client_list']['fields']['date_modified']['enable_range_search']='1';
 
  
-//Merged from custom/Extension/modules/cl_Client_list/Ext/Vardefs/sugarfield_client_name_c.php
-
- // created: 2012-04-27 06:58:02
-$dictionary['cl_Client_list']['fields']['client_name_c']['dependency']='';
-
- 
 //Merged from custom/Extension/modules/cl_Client_list/Ext/Vardefs/sugarfield_hit_status.php
 
  // created: 2014-04-14 14:20:02
 $dictionary['cl_Client_list']['fields']['hit_status']['default']='Lead_Sent';
 $dictionary['cl_Client_list']['fields']['hit_status']['merge_filter']='disabled';
-
- 
-//Merged from custom/Extension/modules/cl_Client_list/Ext/Vardefs/sugarfield_lead_id1_c.php
-
- // created: 2012-03-05 15:48:29
-
- 
-//Merged from custom/Extension/modules/cl_Client_list/Ext/Vardefs/sugarfield_mur_client_n_list_id_c.php
-
- // created: 2012-04-27 06:58:02
 
  
 //Merged from custom/Extension/modules/cl_Client_list/Ext/Vardefs/cl_client_list_accounts_cl_Client_list.php

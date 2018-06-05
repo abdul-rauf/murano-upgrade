@@ -1,9 +1,6 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
-//Merged from custom/Extension/application/Ext/Language/da_DK.Murano2.php
- 
-
 //Merged from custom/Extension/application/Ext/Language/da_DK.msa.php
 
 /*
@@ -28,4 +25,7 @@ $app_list_strings['mur_msa_type_dom']['Prospect'] = 'Potentiel kunde';
 $app_list_strings['mur_msa_type_dom']['Reseller'] = 'Forhandler';
 
 //Merged from custom/Extension/application/Ext/Language/da_DK.consultant.php
+ 
+
+//Merged from custom/Extension/application/Ext/Language/da_DK.Murano2.php
  

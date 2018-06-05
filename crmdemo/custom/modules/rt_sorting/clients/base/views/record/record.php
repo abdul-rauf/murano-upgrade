@@ -195,7 +195,9 @@ array (
               ),
               8 => 
               array (
-                'span' => 12,
+                'name' => 'da_confirmed_clients_c',
+                'studio' => 'visible',
+                'label' => 'LBL_DA_CONFIRMED_CLIENTS',
               ),
             ),
           ),

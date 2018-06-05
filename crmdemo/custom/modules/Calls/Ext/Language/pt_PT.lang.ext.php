@@ -18,3 +18,11 @@ $mod_strings['LBL_CALLS_A_ACONTACT_FROM_A_ACONTACT_TITLE'] = 'ACon';
 $mod_strings['LBL_CALLS_MEETINGS_FROM_MEETINGS_TITLE'] = 'Meetings';
 $mod_strings['LBL_CALLS_A_ACONTACT_FROM_A_ACONTACT_TITLE'] = 'ACon';
 $mod_strings['LBL_A_ACONTACT_CALLS_FROM_A_ACONTACT_TITLE'] = 'ACon';
+
+//Merged from custom/Extension/modules/Calls/Ext/Language/pt_PT.customleads_calls_1.php
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_USERS_CALLS_1_FROM_USERS_TITLE'] = 'Users';
+$mod_strings['LBL_USERS_CALLS_1_FROM_CALLS_TITLE_ID'] = 'Users ID';
+$mod_strings['LBL_LEADS_CALLS_1_FROM_LEADS_TITLE'] = 'Leads';
+$mod_strings['LBL_LEADS_CALLS_1_FROM_CALLS_TITLE_ID'] = 'Leads ID';

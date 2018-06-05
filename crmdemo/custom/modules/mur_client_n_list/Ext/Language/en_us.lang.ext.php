@@ -22,14 +22,16 @@ $mod_strings['LBL_PROSPECTLISTS_MUR_CLIENT_N_LIST_1_FROM_MUR_CLIENT_N_LIST_TITLE
 $mod_strings['LBL_NOTES_MUR_CLIENT_N_LIST_1_FROM_NOTES_TITLE'] = 'Notes';
 $mod_strings['LBL_NOTES_MUR_CLIENT_N_LIST_1_FROM_MUR_CLIENT_N_LIST_TITLE_ID'] = 'Notes ID';
 
-//Merged from custom/Extension/modules/mur_client_n_list/Ext/Language/en_us.lang.php
-
-// WARNING: The contents of this file are auto-generated.
-$mod_strings['LBL_NAME'] = 'Client Name';
-$mod_strings['ACTIVE ON PORTAL'] = 'Active On Portal';
-
 //Merged from custom/Extension/modules/mur_client_n_list/Ext/Language/en_us.ClientReporting.php
 
 //THIS FILE IS AUTO GENERATED, DO NOT MODIFY
 $mod_strings['LBL_RT_CLIENT_REPORTING_MUR_CLIENT_N_LIST_FROM_MUR_CLIENT_N_LIST_TITLE'] = 'Clients List';
 $mod_strings['LBL_RT_CLIENT_REPORTING_MUR_CLIENT_N_LIST_FROM_RT_CLIENT_REPORTING_TITLE'] = 'Client Reporting';
+
+//Merged from custom/Extension/modules/mur_client_n_list/Ext/Language/en_us.lang.php
+
+// WARNING: The contents of this file are auto-generated.
+$mod_strings['LBL_NAME'] = 'Client Name';
+$mod_strings['ACTIVE ON PORTAL'] = 'Active On Portal';
+$mod_strings['LBL_RESEND'] = 'Resend';
+$mod_strings['LBL_CRM_TICKERS'] = 'crm tickers';

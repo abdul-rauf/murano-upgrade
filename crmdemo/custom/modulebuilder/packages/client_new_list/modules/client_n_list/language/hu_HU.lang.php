@@ -1,56 +1,43 @@
 <?php
-/*********************************************************************************
- * The contents of this file are subject to the SugarCRM Master Subscription
- * Agreement ("License") which can be viewed at
- * http://www.sugarcrm.com/crm/en/msa/master_subscription_agreement_11_April_2011.pdf
- * By installing or using this file, You have unconditionally agreed to the
- * terms and conditions of the License, and You may not use this file except in
- * compliance with the License.  Under the terms of the license, You shall not,
- * among other things: 1) sublicense, resell, rent, lease, redistribute, assign
- * or otherwise transfer Your rights to the Software, and 2) use the Software
- * for timesharing or service bureau purposes such as hosting the Software for
- * commercial gain and/or for the benefit of a third party.  Use of the Software
- * may be subject to applicable fees and any use of the Software without first
- * paying applicable fees is strictly prohibited.  You do not have the right to
- * remove SugarCRM copyrights from the source code or user interface.
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
  *
- * All copies of the Covered Code must include on each user interface screen:
- *  (i) the "Powered by SugarCRM" logo and
- *  (ii) the SugarCRM copyright notice
- * in the same form as they appear in the distribution.  See full license for
- * requirements.
- *
- * Your Warranty, Limitations of liability and Indemnity are expressly stated
- * in the License.  Please refer to the License for the specific language
- * governing these rights and limitations under the License.  Portions created
- * by SugarCRM are Copyright (C) 2004-2011 SugarCRM, Inc.; All Rights Reserved.
- ********************************************************************************/
-
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
 $mod_strings = array (
   'LBL_TEAM' => 'Csoportok',
   'LBL_TEAMS' => 'Csoportok',
   'LBL_TEAM_ID' => 'Csoport azonosító',
   'LBL_ASSIGNED_TO_ID' => 'Hozzárendelt felhasználó azonosító',
   'LBL_ASSIGNED_TO_NAME' => 'Felhasználó',
-  'LBL_ID' => 'Azonosító',
+  'LBL_CREATED' => 'Létrehozta',
+  'LBL_CREATED_ID' => 'Létrehozó azonosítója',
+  'LBL_CREATED_USER' => 'Felhasználó által létrehozva',
   'LBL_DATE_ENTERED' => 'Dátum létrehozva',
   'LBL_DATE_MODIFIED' => 'Dátum módosítva',
+  'LBL_DELETED' => 'Törölve',
+  'LBL_DESCRIPTION' => 'Leírás',
+  'LBL_DOC_OWNER' => 'Dokumentum tulajdonosa',
+  'LBL_EDIT_BUTTON' => 'Szerkesztés',
+  'LBL_ID' => 'Azonosító',
+  'LBL_LIST_NAME' => 'Név',
   'LBL_MODIFIED' => 'Módosította',
   'LBL_MODIFIED_ID' => 'Módosította (azonosító szerint)',
   'LBL_MODIFIED_NAME' => 'Módosította (név szerint)',
-  'LBL_CREATED' => 'Létrehozta',
-  'LBL_CREATED_ID' => 'Létrehozó azonosítója',
-  'LBL_DESCRIPTION' => 'Leírás',
-  'LBL_DELETED' => 'Törölve',
-  'LBL_NAME' => 'Név',
-  'LBL_CREATED_USER' => 'Felhasználó által létrehozva',
   'LBL_MODIFIED_USER' => 'Felhasználó által módosítva',
-  'LBL_LIST_NAME' => 'Név',
+  'LBL_NAME' => 'Név',
+  'LBL_REMOVE' => 'Eltávolítás',
+  'LBL_USER_FAVORITES' => 'Felhasználók, akik kedvelték',
   'LBL_LIST_FORM_TITLE' => 'Clients List Lista',
   'LBL_MODULE_NAME' => 'Clients List',
   'LBL_MODULE_TITLE' => 'Clients List',
   'LBL_HOMEPAGE_TITLE' => 'Saját Clients List',
-  'LNK_NEW_RECORD' => 'Új létrehozás Clients List',
+  'LNK_NEW_RECORD' => 'Új létrehozása Clients List',
   'LNK_LIST' => 'Megtekintés Clients List',
   'LNK_IMPORT_MUR_CLIENT_N_LIST' => 'Import Clients List',
   'LBL_SEARCH_FORM_TITLE' => 'Keresés Clients List',
@@ -60,4 +47,8 @@ $mod_strings = array (
   'LBL_NEW_FORM_TITLE' => 'Új Clients List',
   'LBL_CLIENTS' => 'Clients',
   'LBL_CONTINENT' => 'Continent',
+  'LBL_MODULE_NAME_SINGULAR' => 'Clients List',
+  'LNK_IMPORT_VCARD' => 'Import Clients List vCard',
+  'LBL_IMPORT' => 'Import Clients List',
+  'LBL_IMPORT_VCARDTEXT' => 'Automatically create a new Clients List record by importing a vCard from your file system.',
 );

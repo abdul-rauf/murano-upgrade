@@ -107,21 +107,29 @@ array (
               ),
               11 => 
               array (
-                'name' => 'greenreport_c',
-                'label' => 'LBL_GREENREPORT_C',
+                'name' => 'da_confirmed_clients_c',
+                'label' => 'LBL_DA_CONFIRMED_CLIENTS',
                 'enabled' => true,
                 'width' => '10%',
-                'default' => true,
+                'default' => false,
               ),
               12 => 
               array (
-                'name' => 'total_point_c',
-                'label' => 'LBL_TOTAL_POINT',
+                'name' => 'da_qm_clients_c',
+                'label' => 'LBL_DA_QM_CLIENTS',
                 'enabled' => true,
                 'width' => '10%',
-                'default' => true,
+                'default' => false,
               ),
               13 => 
+              array (
+                'name' => 'da_feedback_clients_c',
+                'label' => 'LBL_DA_FEEDBACK_CLIENTS',
+                'enabled' => true,
+                'width' => '10%',
+                'default' => false,
+              ),
+              14 => 
               array (
                 'name' => 'amendments',
                 'label' => 'LBL_AMENDMENTS',
@@ -130,7 +138,7 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              14 => 
+              15 => 
               array (
                 'name' => 'last_amended_modified',
                 'label' => 'LBL_LAST_AMENDED_MODIFIED',
@@ -138,7 +146,15 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              15 => 
+              16 => 
+              array (
+                'name' => 'ref_id_c',
+                'label' => 'LBL_REF_ID',
+                'enabled' => true,
+                'width' => '10%',
+                'default' => false,
+              ),
+              17 => 
               array (
                 'name' => 'name',
                 'label' => 'LBL_NAME',
@@ -147,7 +163,7 @@ array (
                 'link' => true,
                 'width' => '10%',
               ),
-              16 => 
+              18 => 
               array (
                 'name' => 'potential_clients',
                 'label' => 'LBL_POTENTIAL_CLIENTS',
@@ -155,7 +171,7 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              17 => 
+              19 => 
               array (
                 'name' => 'last_spoke_date',
                 'label' => 'LBL_LAST_SPOKE_DATE',
@@ -163,15 +179,7 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              18 => 
-              array (
-                'name' => 'feedback_date1_c',
-                'label' => 'LBL_FEEDBACK_DATE1_C',
-                'enabled' => true,
-                'width' => '10%',
-                'default' => false,
-              ),
-              19 => 
+              20 => 
               array (
                 'name' => 'no_of_days_c',
                 'label' => 'LBL_NO_OF_DAYS_C',
@@ -179,7 +187,7 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              20 => 
+              21 => 
               array (
                 'name' => 'feedback_points1_c',
                 'label' => 'LBL_FEEDBACK_POINTS1_C',
@@ -187,7 +195,7 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              21 => 
+              22 => 
               array (
                 'name' => 'modified_by_name',
                 'label' => 'LBL_MODIFIED',
@@ -199,7 +207,15 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              22 => 
+              23 => 
+              array (
+                'name' => 'greenreport_c',
+                'label' => 'LBL_GREENREPORT_C',
+                'enabled' => true,
+                'width' => '10%',
+                'default' => false,
+              ),
+              24 => 
               array (
                 'name' => 'question_marks',
                 'label' => 'LBL_QUESTION_MARKS',
@@ -208,16 +224,31 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              23 => 
+              25 => 
               array (
-                'name' => 'description',
-                'label' => 'LBL_DESCRIPTION',
+                'name' => 'other_team_client_c',
+                'label' => 'LBL_OTHER_TEAM_CLIENT',
                 'enabled' => true,
-                'sortable' => false,
                 'width' => '10%',
                 'default' => false,
               ),
-              24 => 
+              26 => 
+              array (
+                'name' => 'feedback_date1_c',
+                'label' => 'LBL_FEEDBACK_DATE1_C',
+                'enabled' => true,
+                'width' => '10%',
+                'default' => false,
+              ),
+              27 => 
+              array (
+                'name' => 'total_point_c',
+                'label' => 'LBL_TOTAL_POINT',
+                'enabled' => true,
+                'width' => '10%',
+                'default' => false,
+              ),
+              28 => 
               array (
                 'name' => 'lead_status',
                 'label' => 'LBL_LEAD_STATUS',
@@ -225,7 +256,7 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              25 => 
+              29 => 
               array (
                 'name' => 'created_by_name',
                 'label' => 'LBL_CREATED',
@@ -237,7 +268,7 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              26 => 
+              30 => 
               array (
                 'name' => 'team_name',
                 'label' => 'LBL_TEAM',
@@ -245,7 +276,7 @@ array (
                 'default' => false,
                 'enabled' => true,
               ),
-              27 => 
+              31 => 
               array (
                 'name' => 'date_modified',
                 'label' => 'LBL_DATE_MODIFIED',
@@ -254,7 +285,7 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              28 => 
+              32 => 
               array (
                 'name' => 'points_c',
                 'label' => 'LBL_POINTS',
@@ -262,7 +293,7 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              29 => 
+              33 => 
               array (
                 'name' => 'green_point_c',
                 'label' => 'LBL_GREEN_POINT',
@@ -270,7 +301,7 @@ array (
                 'width' => '10%',
                 'default' => false,
               ),
-              30 => 
+              34 => 
               array (
                 'name' => 'amended_date',
                 'label' => 'LBL_RECENT_TIME_CHANGED',

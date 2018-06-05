@@ -106,56 +106,6 @@ $dictionary['rt_sorting']['fields']['green_point_c']['enforced']='true';
 $dictionary['rt_sorting']['fields']['green_point_c']['dependency']='';
 
  
-//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_total_point_c.php
-
- // created: 2017-12-15 15:11:16
-$dictionary['rt_sorting']['fields']['total_point_c']['duplicate_merge_dom_value']=0;
-$dictionary['rt_sorting']['fields']['total_point_c']['labelValue']='Total Point';
-$dictionary['rt_sorting']['fields']['total_point_c']['full_text_search']=array (
-  'boost' => '0',
-  'enabled' => false,
-);
-$dictionary['rt_sorting']['fields']['total_point_c']['calculated']='1';
-$dictionary['rt_sorting']['fields']['total_point_c']['formula']='ifElse(equal($greenreport_c,"3"),3,ifElse(
-and(equal($lead_status,"follow_up"),equal($greenreport_c,"Y")),
-add($feedback_points1_c,$green_point_c),
-add($feedback_points1_c,$green_point_c,$points_c)))';
-$dictionary['rt_sorting']['fields']['total_point_c']['enforced']='1';
-$dictionary['rt_sorting']['fields']['total_point_c']['dependency']='';
-
- 
-//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_feedback_points1_c.php
-
- // created: 2017-12-15 15:19:52
-$dictionary['rt_sorting']['fields']['feedback_points1_c']['duplicate_merge_dom_value']=0;
-$dictionary['rt_sorting']['fields']['feedback_points1_c']['labelValue']='Feedback Points';
-$dictionary['rt_sorting']['fields']['feedback_points1_c']['full_text_search']=array (
-  'boost' => '0',
-  'enabled' => false,
-);
-$dictionary['rt_sorting']['fields']['feedback_points1_c']['calculated']='1';
-$dictionary['rt_sorting']['fields']['feedback_points1_c']['formula']='ifElse(greaterThan($no_of_days_c,-1),ifElse(greaterThan($no_of_days_c,60),"0.00","0.25"),"0.00")';
-$dictionary['rt_sorting']['fields']['feedback_points1_c']['enforced']='1';
-$dictionary['rt_sorting']['fields']['feedback_points1_c']['dependency']='';
-
- 
-//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_no_of_days_c.php
-
- // created: 2017-12-15 15:42:31
-$dictionary['rt_sorting']['fields']['no_of_days_c']['duplicate_merge_dom_value']=0;
-$dictionary['rt_sorting']['fields']['no_of_days_c']['labelValue']='No of Days';
-$dictionary['rt_sorting']['fields']['no_of_days_c']['full_text_search']=array (
-  'boost' => '0',
-  'enabled' => false,
-);
-$dictionary['rt_sorting']['fields']['no_of_days_c']['calculated']='1';
-$dictionary['rt_sorting']['fields']['no_of_days_c']['formula']='ifElse(
-isAfter($feedback_date1_c,$date_entered),
-subtract(daysUntil($feedback_date1_c),daysUntil($date_entered)),-1)';
-$dictionary['rt_sorting']['fields']['no_of_days_c']['enforced']='1';
-$dictionary['rt_sorting']['fields']['no_of_days_c']['dependency']='';
-
- 
 //Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_feedback_received_c.php
 
  // created: 2017-12-15 16:12:22
@@ -181,13 +131,6 @@ $dictionary['rt_sorting']['fields']['name']['full_text_search']=array (
 
  // created: 2017-12-15 16:25:59
 $dictionary['rt_sorting']['fields']['spaces']['help']='*** Estimate how many spaces will this go to?';
-
- 
-//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_report_status.php
-
- // created: 2017-12-15 16:33:53
-$dictionary['rt_sorting']['fields']['report_status']['comments']='';
-$dictionary['rt_sorting']['fields']['report_status']['help']='***Not Ready - You do not want anyone to see it, but only yourself. ***Ready for Team ? -  You want Team ? to see it.  ***Ready to Amend - The report sorting is finished and you want the report owner to finalise it to send to client. ***Send - Report has been sent. ';
 
  
 //Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_potential_clients.php
@@ -277,5 +220,90 @@ $dictionary['rt_sorting']['fields']['date_modified']['duplicate_merge_dom_value'
 $dictionary['rt_sorting']['fields']['date_modified']['merge_filter']='disabled';
 $dictionary['rt_sorting']['fields']['date_modified']['unified_search']=false;
 $dictionary['rt_sorting']['fields']['date_modified']['calculated']=false;
+
+ 
+//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_da_confirmed_clients_c.php
+
+ // created: 2018-01-24 10:20:19
+$dictionary['rt_sorting']['fields']['da_confirmed_clients_c']['labelValue']='DA Confirmed Clients';
+$dictionary['rt_sorting']['fields']['da_confirmed_clients_c']['dependency']='';
+$dictionary['rt_sorting']['fields']['da_confirmed_clients_c']['visibility_grid']='';
+
+ 
+//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_da_qm_clients_c.php
+
+ // created: 2018-01-24 10:20:44
+$dictionary['rt_sorting']['fields']['da_qm_clients_c']['labelValue']='DA Question Marks';
+$dictionary['rt_sorting']['fields']['da_qm_clients_c']['dependency']='';
+$dictionary['rt_sorting']['fields']['da_qm_clients_c']['visibility_grid']='';
+
+ 
+//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_da_feedback_clients_c.php
+
+ // created: 2018-02-07 09:25:45
+$dictionary['rt_sorting']['fields']['da_feedback_clients_c']['labelValue']='DA Feedback Clients';
+$dictionary['rt_sorting']['fields']['da_feedback_clients_c']['dependency']='';
+$dictionary['rt_sorting']['fields']['da_feedback_clients_c']['visibility_grid']='';
+
+ 
+//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_other_team_client_c.php
+
+ // created: 2018-02-12 16:36:02
+$dictionary['rt_sorting']['fields']['other_team_client_c']['labelValue']='Other Team Client?';
+$dictionary['rt_sorting']['fields']['other_team_client_c']['enforced']='';
+$dictionary['rt_sorting']['fields']['other_team_client_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_ref_id_c.php
+
+ // created: 2018-02-13 13:40:56
+$dictionary['rt_sorting']['fields']['ref_id_c']['labelValue']='Ref';
+$dictionary['rt_sorting']['fields']['ref_id_c']['enforced']='1';
+$dictionary['rt_sorting']['fields']['ref_id_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_feedback_points1_c.php
+
+ // created: 2018-02-14 14:15:08
+$dictionary['rt_sorting']['fields']['feedback_points1_c']['duplicate_merge_dom_value']=0;
+$dictionary['rt_sorting']['fields']['feedback_points1_c']['labelValue']='Feedback Points';
+$dictionary['rt_sorting']['fields']['feedback_points1_c']['calculated']='1';
+$dictionary['rt_sorting']['fields']['feedback_points1_c']['formula']='ifElse(greaterThan($no_of_days_c,-1),ifElse(greaterThan($no_of_days_c,42),"0.00","0.25"),"0.00")';
+$dictionary['rt_sorting']['fields']['feedback_points1_c']['enforced']='1';
+$dictionary['rt_sorting']['fields']['feedback_points1_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_no_of_days_c.php
+
+ // created: 2018-02-14 14:15:31
+$dictionary['rt_sorting']['fields']['no_of_days_c']['duplicate_merge_dom_value']=0;
+$dictionary['rt_sorting']['fields']['no_of_days_c']['labelValue']='No of Days';
+$dictionary['rt_sorting']['fields']['no_of_days_c']['calculated']='1';
+$dictionary['rt_sorting']['fields']['no_of_days_c']['formula']='ifElse(
+isAfter($feedback_date1_c,$date_entered),
+subtract(daysUntil($feedback_date1_c),daysUntil($date_entered)),-1)';
+$dictionary['rt_sorting']['fields']['no_of_days_c']['enforced']='1';
+$dictionary['rt_sorting']['fields']['no_of_days_c']['dependency']='';
+
+ 
+//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_report_status.php
+
+ // created: 2018-02-15 16:55:23
+$dictionary['rt_sorting']['fields']['report_status']['comments']='';
+$dictionary['rt_sorting']['fields']['report_status']['help']='***Not Ready - You do not want anyone to see it, but only yourself. ***Ready for Team ? -  You want Team ? to see it.  ***Ready to Amend - The report sorting is finished and you want the report owner to finalise it to send to client. ***Send - Report has been sent. ';
+$dictionary['rt_sorting']['fields']['report_status']['audited']=true;
+
+ 
+//Merged from custom/Extension/modules/rt_sorting/Ext/Vardefs/sugarfield_total_point_c.php
+
+ // created: 2018-02-16 15:01:05
+$dictionary['rt_sorting']['fields']['total_point_c']['duplicate_merge_dom_value']=0;
+$dictionary['rt_sorting']['fields']['total_point_c']['labelValue']='Total Point';
+$dictionary['rt_sorting']['fields']['total_point_c']['calculated']='1';
+$dictionary['rt_sorting']['fields']['total_point_c']['formula']='ifElse(equal($greenreport_c,"3"),3,ifElse(equal($other_team_client_c,"O"),divide($points_c,2),ifElse(equal($report_status,"no_clients"),0.00,ifElse(equal($report_status,"on_hold"),0.00,ifElse(equal($report_status,"not_ready"),0.00,ifElse(and(equal($lead_status,"follow_up"),equal($greenreport_c,"Y")),
+add($green_point_c),
+add($green_point_c,$points_c)))))))';
+$dictionary['rt_sorting']['fields']['total_point_c']['enforced']='1';
+$dictionary['rt_sorting']['fields']['total_point_c']['dependency']='';
 
  

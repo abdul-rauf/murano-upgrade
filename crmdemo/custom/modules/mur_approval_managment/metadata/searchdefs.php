@@ -44,6 +44,15 @@ array (
         'default' => true,
         'width' => '10%',
       ),
+      'status_c' => 
+      array (
+        'type' => 'enum',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_STATUS',
+        'width' => '10%',
+        'name' => 'status_c',
+      ),
       'last_spoke_c' => 
       array (
         'type' => 'date',

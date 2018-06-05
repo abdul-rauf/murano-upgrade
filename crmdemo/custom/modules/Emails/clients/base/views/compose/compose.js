@@ -16,19 +16,17 @@
 ({
     extendsFrom: 'BaseEmailsComposeView',
     initialize: function (options) {
-        //console.log("test");
+        console.log("test");
         this._super("initialize", [options]);
     },
-    _render: function () { 
+    _render: function () {
         this._super("_render");
         this.documentAttach();
     },
     sortingId: "",
     clientId: "",
-    attachlength:[],// added against Reportboard_bug_fixes
     attachments: "",
     documentRevisionId: [],
-    attach_count:1,
     documentAttach: function () {
         var self = this;
         var attachmentsPop = this.context.get('prepopulate').attachments;
@@ -69,33 +67,25 @@
         this.setMainButtonsDisabled(true);
         app.alert.show('mail_call_status', {level: 'process', title: pendingMessage});
         sendModel.set('status', status);
+
         if (typeof sendModel.attributes.client_id != 'undefined') {
             var praentType = sendModel.attributes.parent_type;
             self.sortingId = sendModel.attributes.sorting_id;
             self.clientId = sendModel.attributes.client_id;
             self.attachments = sendModel.attributes.attachments;
-            // Start: Added against Reportboard_bug_fixes
-            self.attachlength = sendModel.attributes.attach_length;
-            if (typeof sendModel.attributes.attach_length != 'undefined'){
-                self.attachlength = sendModel.attributes.attach_length;
-                
-            }
             delete sendModel.attributes.sorting_id;
             delete sendModel.attributes.client_id;
-            delete sendModel.attributes.attach_length;
-            // End: Added against Reportboard_bug_fixes
-
+//            delete sendModel.attributes.attachments;
         }
-        
         myURL = app.api.buildURL('Mail');
-        app.api.call('create', myURL, sendModel, { 
-            success: function () { 
+        app.api.call('create', myURL, sendModel, {
+            success: function () {
                 if (self.sortingId != "") {
-                    if (sendModel.changed.status != 'draft') { 
-                        var updateTimestamp = app.api.buildURL('Sorting/emailTimestamp/' + self.sortingId + '/' + self.clientId + '/' +  self.attachlength.length);
+                    if (sendModel.changed.status != 'draft') {
+                        var updateTimestamp = app.api.buildURL('Sorting/emailTimestamp/' + self.sortingId + '/' + self.clientId + '/' +self.attachments.length);
                         app.api.call('read', updateTimestamp, null, {
                             success: _.bind(function (data) {
-
+//                                self.deleteAttachments(self.attachments);
                             }, this)
                         });
                     } else {
@@ -168,4 +158,3 @@
 
     
 })
-

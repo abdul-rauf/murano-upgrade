@@ -1,6 +1,11 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
 
+//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.Client_List.php
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_CL_CLIENT_LIST_LEADS_FROM_CL_CLIENT_LIST_TITLE'] = 'Client list';
+
 //Merged from custom/Extension/modules/Leads/Ext/Language/en_us.Murano2.php
  
  // created: 2011-05-12 19:35:31
@@ -8,10 +13,34 @@ $mod_strings['LBL_LAST_NAME'] = 'Last Name:';
 
 
 
-//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.Client_List.php
+//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.Perfecta1.php
+ 
+ // created: 2011-01-04 15:14:26
+$mod_strings['LBL_ACCOUNT_NAME'] = 'Account Name';
+$mod_strings['LBL_FSA'] = 'FSA';
+$mod_strings['LBL_LAST_NAME'] = 'Last Name:';
+
+
+
+//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.Cosultants.php
 
 //THIS FILE IS AUTO GENERATED, DO NOT MODIFY
-$mod_strings['LBL_CL_CLIENT_LIST_LEADS_FROM_CL_CLIENT_LIST_TITLE'] = 'Client list';
+$mod_strings['LBL_MR_CONSULTANT_LEADS_FROM_MR_CONSULTANT_TITLE'] = 'Consultants';
+$mod_strings['LBL_CONSULTANTS'] = 'Consultants';
+
+
+
+//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.quick_email.php
+ 
+ // created: 2011-05-12 19:35:31
+$mod_strings['LBL_SEND_QUICK_EMAIL'] = 'Enquire';
+
+
+
+//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.customleads_documents_1.php
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_LEADS_DOCUMENTS_1_FROM_DOCUMENTS_TITLE'] = 'Documents';
 
 //Merged from custom/Extension/modules/Leads/Ext/Language/en_us.Perfecta Leads.php
  
@@ -48,44 +77,10 @@ $mod_strings['LBL_ACCOUNT_NAME'] = 'Account Name';
 
 
 
-//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.Perfecta1.php
- 
- // created: 2011-01-04 15:14:26
-$mod_strings['LBL_ACCOUNT_NAME'] = 'Account Name';
-$mod_strings['LBL_FSA'] = 'FSA';
-$mod_strings['LBL_LAST_NAME'] = 'Last Name:';
-
-
-
-//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.quick_email.php
- 
- // created: 2011-05-12 19:35:31
-$mod_strings['LBL_SEND_QUICK_EMAIL'] = 'Enquire';
-
-
-
 //Merged from custom/Extension/modules/Leads/Ext/Language/en_us.customcl_client_list_leads_1.php
 
 //THIS FILE IS AUTO GENERATED, DO NOT MODIFY
 $mod_strings['LBL_CL_CLIENT_LIST_LEADS_1_FROM_CL_CLIENT_LIST_TITLE'] = 'Client list';
-
-//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.customleads_documents_1.php
-
-//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
-$mod_strings['LBL_LEADS_DOCUMENTS_1_FROM_DOCUMENTS_TITLE'] = 'Documents';
-
-//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.customaccounts_leads.php
-
-//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
-$mod_strings['LBL_ACCOUNTS_LEADS_FROM_ACCOUNTS_TITLE'] = 'Accounts';
-
-//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.Cosultants.php
-
-//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
-$mod_strings['LBL_MR_CONSULTANT_LEADS_FROM_MR_CONSULTANT_TITLE'] = 'Consultants';
-$mod_strings['LBL_CONSULTANTS'] = 'Consultants';
-
-
 
 //Merged from custom/Extension/modules/Leads/Ext/Language/en_us.customaccounts_leads_1.php
 
@@ -93,12 +88,10 @@ $mod_strings['LBL_CONSULTANTS'] = 'Consultants';
 $mod_strings['LBL_ACCOUNTS_LEADS_FROM_ACCOUNTS_TITLE'] = 'Accounts';
 $mod_strings['LBL_ACCOUNTS_LEADS_1_FROM_ACCOUNTS_TITLE'] = 'Accounts';
 
-//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.customaccounts_leads_2.php
+//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.customaccounts_leads.php
 
 //THIS FILE IS AUTO GENERATED, DO NOT MODIFY
 $mod_strings['LBL_ACCOUNTS_LEADS_FROM_ACCOUNTS_TITLE'] = 'Accounts';
-$mod_strings['LBL_ACCOUNTS_LEADS_1_FROM_ACCOUNTS_TITLE'] = 'Accounts';
-$mod_strings['LBL_ACCOUNTS_LEADS_2_FROM_ACCOUNTS_TITLE'] = 'Accounts';
 
 //Merged from custom/Extension/modules/Leads/Ext/Language/en_us.customcalls_leads_1.php
 
@@ -108,6 +101,13 @@ $mod_strings['LBL_ACCOUNTS_LEADS_1_FROM_ACCOUNTS_TITLE'] = 'Accounts';
 $mod_strings['LBL_ACCOUNTS_LEADS_2_FROM_ACCOUNTS_TITLE'] = 'Accounts';
 $mod_strings['LBL_CALLS_LEADS_FROM_CALLS_TITLE'] = 'Calls';
 $mod_strings['LBL_CALLS_LEADS_1_FROM_CALLS_TITLE'] = 'Calls';
+
+//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.customaccounts_leads_2.php
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_ACCOUNTS_LEADS_FROM_ACCOUNTS_TITLE'] = 'Accounts';
+$mod_strings['LBL_ACCOUNTS_LEADS_1_FROM_ACCOUNTS_TITLE'] = 'Accounts';
+$mod_strings['LBL_ACCOUNTS_LEADS_2_FROM_ACCOUNTS_TITLE'] = 'Accounts';
 
 //Merged from custom/Extension/modules/Leads/Ext/Language/en_us.custommur_group_client_tasks_leads_1.php
 
@@ -190,3 +190,15 @@ $mod_strings['LBL_NOTES'] = 'Notes';
 $mod_strings['LBL_RT_SORTING_LEADS_FROM_RT_SORTING_TITLE'] = 'Sorting (New Feature)';
 $mod_strings['LBL_MIN_TRACK1_C'] = 'Minimum Track Record (Extended)';
 $mod_strings['LBL_PREF_LIQUID_1C'] = 'Preferred Liquidity (Extended)';
+
+//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.custom_fields.php
+
+$mod_strings['LBL_DIFFICULTY_SCORE'] = 'Difficulty Score';
+//Merged from custom/Extension/modules/Leads/Ext/Language/en_us.customleads_calls_1.php
+
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_CL_CLIENT_LIST_LEADS_1_FROM_CL_CLIENT_LIST_TITLE'] = 'Client list';
+$mod_strings['LBL_MUR_GROUP_CLIENT_TASKS_LEADS_1_FROM_MUR_GROUP_CLIENT_TASKS_TITLE'] = 'Investor Group Tasks';
+$mod_strings['LBL_MUR_GROUP_CLIENT_TASKS_LEADS_1_FROM_LEADS_TITLE_ID'] = 'Investor Group Tasks ID';
+$mod_strings['LBL_LEADS_CALLS_1_FROM_LEADS_TITLE'] = 'Leads';
+$mod_strings['LBL_LEADS_CALLS_1_FROM_CALLS_TITLE'] = 'Call Log';
