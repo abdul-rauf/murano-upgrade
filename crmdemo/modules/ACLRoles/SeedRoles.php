@@ -1,4 +1,5 @@
 <?php
+
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -19,7 +20,6 @@ $mlaRoles = array(
          'Accounts'=>array('admin'=>100, 'access'=>89),
          'Contacts'=>array('admin'=>100, 'access'=>89),
          'Forecasts'=>array('admin'=>100, 'access'=>89),
-         'ForecastSchedule'=>array('admin'=>100, 'access'=>89),
          'Leads'=>array('admin'=>100, 'access'=>89),
          'Quotes'=>array('admin'=>100, 'access'=>89),
          'Opportunities'=>array('admin'=>100, 'access'=>89),
@@ -37,7 +37,7 @@ $mlaRoles = array(
          'Contacts'=>array('admin'=>100, 'access'=>89),
          'Bugs'=>array('admin'=>100, 'access'=>89),
          'Cases'=>array('admin'=>100, 'access'=>89),
-         'KBDocuments'=>array('admin'=>100, 'access'=>89),
+         'KBContents'=>array('admin'=>100, 'access'=>89),
         )
 );
 global $db;

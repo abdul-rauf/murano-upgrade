@@ -17,9 +17,11 @@ $step = isset($_REQUEST['confirm_id']) ? 2 : 0;
 <title>SugarCRM Upgrader</title>
 <meta name="viewport" content="initial-scale=1.0">
 <meta name="viewport" content="user-scalable=no, width=device-width">
-<link rel="stylesheet" href="styleguide/assets/css/upgrade.css?v=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="stylesheet" href="styleguide/assets/css/upgrade.css?v=<?php echo time();?>"/>
 <script src='include/javascript/jquery/jquery-min.js'></script>
 <script src='sidecar/lib/jquery/jquery.iframe.transport.js'></script>
+<script type="text/javascript" src="<?php echo getJSPath('cache/include/javascript/sugar_grp1.js'); ?>"></script>
 
 <script>
 if (top !== self) {
@@ -31,38 +33,52 @@ $(window).bind("load", function () {
         var uploader = {token: "<?php echo $token ?>"};
         uploader.hideError = function () {
             $('.alert-danger').hide();
+            $('.alert-success').hide();
         };
         uploader.displayError = function (error) {
             $('.alert-danger').show();
+            $('.alert-success').hide();
             $('.alert-danger span').text(error);
             $('#' + uploader.stages[uploader.stage] + ' .bar').width('100%').addClass('error').removeClass('in-progress');
             $('#' + uploader.stages[uploader.stage] + ' h1')
+                .removeClass('color_green')
                 .addClass('color_red')
                 .find('i')
-                .removeClass('icon-cog color_yellow icon-spin')
-                .addClass('icon-exclamation-sign')
+                .removeClass('fa-cog color_yellow fa-spin')
+                .removeClass('color_green')
+                .addClass('fa-exclamation-circle')
                 .addClass('color_red');
             $('#upload-indicator').hide();
             uploader.clearStatusUpdate();
         };
+
+        uploader.displaySuccess = function (error) {
+            $('.alert-danger').hide();
+            $('.alert-success').show();
+            $('.alert-success span').text(error);
+        };
+
         uploader.updateProgress = function (bar, percent) {
             if (uploader.stage == -1) {
                 return;
             }
-            $('#upgradeTitle').text('Upgrade Progress ' + uploader.stage + ' of ' + uploader.stages.length);
+            $('#upgradeTitle').text('Upgrade Progress ' + (uploader.stage + 1) + ' of ' + uploader.stages.length);
             var $bar = $('#' + bar + ' .bar');
             if (percent == 100) {
                 $bar.removeClass('in-progress');
+                $bar.removeClass('error');
                 $('#' + bar + ' h1')
+                    .removeClass('color_red')
                     .addClass('color_green')
                     .find('i')
-                    .removeClass('icon-cog color_yellow')
-                    .removeClass('icon-spin')
-                    .addClass('icon-ok-sign')
+                    .removeClass('fa-cog color_yellow')
+                    .removeClass('fa-spin')
+                    .addClass('fa-check-circle')
+                    .removeClass('color_red')
                     .addClass('color_green');
             } else {
                 $bar.addClass('in-progress');
-                $('#' + bar + ' h1 i').addClass('icon-spin');
+                $('#' + bar + ' h1 i').addClass('fa-spin');
             }
             $bar.width(percent + '%');
         };
@@ -70,7 +86,7 @@ $(window).bind("load", function () {
         uploader.statusUpdates = false;
         uploader.acceptedLicense = false;
         uploader.stage = 0;
-        uploader.stages = ['unpack', 'pre', 'commit', 'post', 'cleanup'];
+        uploader.stages = ['unpack', 'healthcheck', 'pre', 'commit', 'post', 'cleanup'];
         uploader.counterStages = ['pre', 'post'];
         uploader.updateStatus = function () {
             $.ajax({
@@ -113,6 +129,8 @@ $(window).bind("load", function () {
 
         uploader.executeStage = function () {
             uploader.hideError();
+            $('[data-step="2"] a[name="next_button"]').hide();
+            $('[data-step="2"] a[name="export_button"]').hide();
             $.ajax({
                 type: 'POST',
                 url: 'UpgradeWizard.php',
@@ -124,6 +142,11 @@ $(window).bind("load", function () {
                 success: function (e) {
                     if (e.status == 'error' || e.status == undefined) {
                         uploader.displayError(e.message || "A server error occurred, please check your logs");
+                        if (uploader.stages[uploader.stage] === 'healthcheck') {
+                            if(typeof e.healthcheck !== "undefined") {
+                                uploader.LoadHealthcheckResult(e.healthcheck, e.status);
+                            }
+                        }
                     } else {
                         if (e.data === true) {
                             uploader.clearStatusUpdate();
@@ -131,6 +154,12 @@ $(window).bind("load", function () {
                             $('#upgradeTitle').text('Upgrade Complete');
                             $('a.disabled').removeClass('disabled');
                             $('.modal-header .bar').removeClass('in-progress').width('100%');
+                        }
+                        else if (e.data == 'pre') {
+                            uploader.clearStatusUpdate();
+                            uploader.stage = uploader.stages.indexOf(e.data);
+                            uploader.LoadHealthcheckResult (e.healthcheck, e.status);
+
                         } else {
                             uploader.stage = uploader.stages.indexOf(e.data);
 
@@ -141,7 +170,7 @@ $(window).bind("load", function () {
                             }
                             var percentComplete = 0;
                             if (uploader.counterStages.indexOf(e.data) == -1) {
-                                percentComplete = 25;
+                                percentComplete = 20;
                             }
                             uploader.updateProgress(e.data, percentComplete);
                             uploader.executeStage();
@@ -160,6 +189,77 @@ $(window).bind("load", function () {
         }
         ;
 
+        uploader.LoadHealthcheckResult = function (data, status) {
+            if (data.length == 0) {
+                if (status == 'error' || status == undefined) {
+                    data = [
+                        { flag: 3, descr: "Cannot find health check scanner", title: "Error", displayNumber: false }
+                    ];
+                } else {
+                    data = [
+                        {flag: 1, descr: "Your instance is ready for upgrade!", title: "Success", displayNumber: false}
+                    ];
+                }
+            }
+            data = data.sort(uploader._sortByBucket);
+
+            $('[data-step="2"] a[name="export_button"]').show();
+
+            var hcResult = $("#hc-result-data");
+            var flagToIcon = [, 'fa-check-circle color_green', 'fa-ellipsis-h color_yellow', 'fa-exclamation-circle color_red'];
+            var flag = -1;
+
+            hcResult.html("");
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i];
+                var displayNumber = typeof item.displayNumber == 'undefined' ? true : item.displayNumber;
+                var html = ["<h1><i class='", flagToIcon[parseInt(item.flag)], "'></i> "];
+                if (displayNumber) {
+                    html.push(i + 1, ". ");
+                }
+                html.push(htmlentities(item.title, 'ENT_NOQUOTES'), "</h1><p>", htmlentities(item.descr, 'ENT_NOQUOTES'));
+                if (item.kb) {
+                    html.push("<a target='_blank' href='", item.kb, "'> Learn more...</a>");
+                }
+
+                if (item.flag > flag) {
+                    flag =  item.flag;
+                }
+
+                html.push("</p>");
+                hcResult.append(html.join(""));
+            }
+            hcResult.parent().scrollTop(hcResult.height());
+            if (flag < 3) {
+                $('[data-step="2"] a[name="next_button"]').show();
+                $('[data-step="2"] a[name="next_button"]').removeClass('disabled');
+                uploader.updateProgress('healthcheck', 100);
+            }
+
+        };
+
+        uploader.sendLogToSugar = function() {
+            $.ajax({
+                type: 'POST',
+                url: 'UpgradeWizard.php',
+                data: {
+                    token: uploader.token,
+                    action: 'sendlog'
+                },
+                dataType: 'json',
+                success: function (e) {
+                    if (e.status == 'error' || e.status == undefined) {
+                        uploader.displayError(e.message || "A server error occurred, please check your logs");
+                    } else {
+                        uploader.displaySuccess('Log was sent successfully.');
+                        $('a[name="send_to_sugar"]').hide();
+                    }
+                },
+                error: function (e) {
+                    uploader.displayError("A server error occurred, please check your logs");
+                }
+            })
+        };
 
         uploader.upload = function(evt) {
             uploader.hideError();
@@ -168,8 +268,12 @@ $(window).bind("load", function () {
                 uploader.displayError("Please select upgrade package file");
                 return;
             }
+
+            var $next = $('[data-step="1"] a[name=next_button]');
+            $next.addClass("disabled");
+
             uploader.stage = uploader.stages.indexOf('unpack');
-            uploader.updateProgress('unpack', 25);
+            uploader.updateProgress('unpack', 20);
 
             $('#upload-indicator').show();
 
@@ -183,6 +287,7 @@ $(window).bind("load", function () {
                     }
                 }
             ).complete(function (data) {
+                    $next.removeClass("disabled");
 
                     try {
                         var response = $.parseJSON(data.responseText);
@@ -233,6 +338,12 @@ $(window).bind("load", function () {
             }, false);
         };
 
+        uploader._sortByBucket = function (item1, item2) {
+            if (item1.bucket > item2.bucket) return 1;
+            if (item1.bucket < item2.bucket) return -1;
+            return 0;
+        };
+
         function showNextStep() {
             var nextStep = currentStep + 1;
             if (nextStep <= maxSteps) {
@@ -244,7 +355,7 @@ $(window).bind("load", function () {
         }
 
         var currentStep = 0,
-            maxSteps = 2,
+            maxSteps = 3,
             hashStep = parseInt(window.location.hash);
 
         if (hashStep > currentStep) {
@@ -255,8 +366,18 @@ $(window).bind("load", function () {
 
         $('#uploadForm').submit(uploader.upload);
 
-        $('a[name="next_button"]').on('click', function() {
-           $('#uploadForm').submit();
+        $('[data-step="1"] a[name="next_button"]').on('click', function() {
+            if (!$(this).hasClass("disabled")) {
+                $('#uploadForm').submit();
+            }
+        });
+
+        $('a[name="export_button"]').on('click', function() {
+            $('#exportForm').submit();
+        });
+
+        $('a[name="send_to_sugar"]').on('click', function() {
+            uploader.sendLogToSugar();
         });
 
         $('input[type="file"]').on('change', function() {
@@ -264,6 +385,12 @@ $(window).bind("load", function () {
                 text = ($this.val().split('\\').pop() || 'No file chosen...');
             $this.parent().parent().next().text(text);
         });
+
+        $('[data-step="2"] a[name="next_button"]')
+            .on('click', showNextStep)
+            .on('click', uploader.setNextStatusUpdate)
+            .on('click', uploader.executeStage);
+
     }
 );
 
@@ -280,6 +407,13 @@ $(window).bind("load", function () {
                 <button class="btn btn-link btn-invisible close" data-action="close">
                 </button>
                 <strong>Error</strong>
+                <span></span>
+            </div>
+            <div class="alert alert-success alert-block" data-send="ok">
+                <button class="btn btn-link btn-invisible close" data-action="close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <strong>Success</strong>
                 <span></span>
             </div>
         </div>
@@ -304,7 +438,7 @@ $(window).bind("load", function () {
         </div>
         <div class="modal-body record">
             <div id="unpack" class="row-fluid ">
-                <h1><i class="icon-cog color_yellow"></i>Upload the upgrade package</h1>
+                <h1><i class="fa fa-cog color_yellow"></i>Upload the upgrade package</h1>
 
                 <p>Please provide the upgrade package files. <a target="_blank" href="http://support.sugarcrm.com/03_Training/06_Upgrade_Training/" target="_blank">Learn more...</a></p>
                 <form id="uploadForm">
@@ -326,8 +460,9 @@ $(window).bind("load", function () {
             </div>
         </div>
         <div class="modal-footer">
+          <span class="version">Upgrader version <?php echo $upgraderVesion?></span>
           <span sfuuid="25" class="detail">
-            <a class="btn btn-invisible btn-link" href="index.php">Cancel</a>
+            <a class="btn btn-invisible btn-link" href="index.php#bwc/index.php?module=Administration&action=index">Cancel</a>
             <a class="btn btn-primary" href="javascript:void(0);" name="next_button">Upload</a>
           </span>
         </div>
@@ -336,7 +471,41 @@ $(window).bind("load", function () {
     <div class="modal" data-step="2">
         <div class="modal-header modal-header-upgrade row-fluid">
             <span class="step-circle">
-                <span><?php echo ($step + 2) ?></span>
+                <span>2</span>
+            </span>
+
+            <div class="upgrade-title span7">
+                <h3>Sugar Health Check</h3>
+                <span>Review health check results</span>
+            </div>
+            <div class="progress-section span5 pull-right">
+                <span><img src="themes/default/images/company_logo.png" alt="SugarCRM" class="logo"></span>
+
+                <div class="progress progress-success">
+                    <div class="bar in-progress" style="width: 33%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body record">
+            <div class="row-fluid" id="hc-result-data">
+                <h1><i class="fa fa-cog fa-spin color_yellow"></i>Performing health check. Please wait...</h1>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <span class="version">Upgrader version <?php echo $upgraderVesion?></span>
+          <span sfuuid="25" class="detail">
+            <a class="btn btn-invisible btn-link send-logs" href="javascript:void(0);" name="send_to_sugar">Send Log to Sugar</a>
+            <a class="btn btn-invisible btn-link" href="javascript:void(0);" name="export_button">Export Log</a>
+            <a class="btn btn-primary" href="index.php" data-action="gohome">Go to Home Page</a>
+            <a class="btn btn-primary disabled" href="javascript:void(0);" name="next_button">Confirm</a>
+          </span>
+        </div>
+    </div>
+
+    <div class="modal" data-step="3">
+        <div class="modal-header modal-header-upgrade row-fluid">
+            <span class="step-circle">
+                <span>3</span>
             </span>
 
             <div class="upgrade-title span8">
@@ -353,7 +522,7 @@ $(window).bind("load", function () {
         </div>
         <div class="modal-body record">
             <div id="unpack" class="row-fluid">
-                <h1 class="color_green"><i class="icon-ok-sign color_green"></i>Upload the upgrade package</h1>
+                <h1 class="color_green"><i class="fa fa-check-circle color_green"></i>Upload the upgrade package</h1>
 
                 <div class="upgrade-check">
                     <div class="progress progress-success ">
@@ -361,8 +530,18 @@ $(window).bind("load", function () {
                     </div>
                 </div>
             </div>
+            <div id="healthcheck" class="row-fluid">
+                <h1><i class="fa fa-cog color_yellow"></i>Healthcheck</h1>
+
+                <div class="healthcheck-check">
+                    <div class="progress progress-success ">
+                        <div class="bar in-progress" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="hc-result-data" class="row-fluid"></div>
             <div id="pre" class="row-fluid">
-                <h1><i class="icon-cog color_yellow"></i>Pre-upgrade</h1>
+                <h1><i class="fa fa-cog color_yellow fa-spin"></i>Pre-upgrade</h1>
 
                 <div class="upgrade-check">
                     <div class="progress progress-success ">
@@ -371,7 +550,7 @@ $(window).bind("load", function () {
                 </div>
             </div>
             <div id="commit" class="row-fluid ">
-                <h1><i class="icon-cog color_yellow"></i>Upgrade</h1>
+                <h1><i class="fa fa-cog color_yellow"></i>Upgrade</h1>
 
                 <div class="upgrade-check">
                     <div class="progress progress-success ">
@@ -380,7 +559,7 @@ $(window).bind("load", function () {
                 </div>
             </div>
             <div id="post" class="row-fluid ">
-                <h1><i class="icon-cog color_yellow"></i>Post-upgrade</h1>
+                <h1><i class="fa fa-cog color_yellow"></i>Post-upgrade</h1>
 
                 <div class="upgrade-check">
                     <div class="progress progress-success ">
@@ -389,7 +568,7 @@ $(window).bind("load", function () {
                 </div>
             </div>
             <div id="cleanup" class="row-fluid ">
-                <h1><i class="icon-cog color_yellow"></i>Cleanup</h1>
+                <h1><i class="fa fa-cog color_yellow"></i>Cleanup</h1>
 
                 <div class="upgrade-check">
                     <div class="progress progress-success ">
@@ -399,7 +578,13 @@ $(window).bind("load", function () {
             </div>
         </div>
         <div class="modal-footer">
+          <form id="exportForm" class="invisible">
+                <input type="hidden" name="action" value="exportlog">
+                <input type="hidden" name="token" value="<?php echo $token ?>">
+          </form>
+          <span class="version">Upgrader version <?php echo $upgraderVesion?></span>
           <span sfuuid="25" class="detail">
+            <a class="btn btn-invisible" href="javascript:void(0);" name="export_button">Export Log</a>
             <a class="btn btn-primary disabled" href="index.php" data-action="gohome">Go to Home Page</a>
           </span>
         </div>

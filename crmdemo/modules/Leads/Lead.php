@@ -128,18 +128,10 @@ class Lead extends Person {
 		global $current_user;
 		if(!empty($current_user)) {
 			$this->team_id = $current_user->default_team;	//default_team is a team id
+			$this->team_set_id = $current_user->team_set_id;
 		} else {
 			$this->team_id = 1; // make the item globally accessible
 		}
-		$res_options =array(0=>'');
-	 $sql ="SELECT id,name from mr_consultant where deleted =0 order by name";
-	$row =$GLOBALS['db']->query($sql);
-		while($result =$GLOBALS['db']->fetchByAssoc($row)){
-
-		$res_options[$result['id']] =$result['name'];
-		}
-	
-	$GLOBALS['app_list_strings']['blank_list'] =$res_options;
 	}
 
 	function get_account()
@@ -238,9 +230,31 @@ class Lead extends Person {
 		return $query;
 	}
 
-	function create_new_list_query($order_by, $where,$filter=array(),$params=array(), $show_deleted = 0,$join_type='', $return_array = false, $parentbean = null, $singleSelect = false){
+    public function create_new_list_query(
+        $order_by,
+        $where,
+        $filter = array(),
+        $params = array(),
+        $show_deleted = 0,
+        $join_type = '',
+        $return_array = false,
+        $parentbean = null,
+        $singleSelect = false,
+        $ifListForExport = false
+    ) {
 
-		$ret_array = parent::create_new_list_query($order_by, $where, $filter, $params, $show_deleted, $join_type, true, $parentbean, $singleSelect);
+        $ret_array = parent::create_new_list_query(
+            $order_by,
+            $where,
+            $filter,
+            $params,
+            $show_deleted,
+            $join_type,
+            true,
+            $parentbean,
+            $singleSelect,
+            $ifListForExport
+        );
 		if(strpos($ret_array['select'],"leads.account_name") == false && strpos($ret_array['select'],"leads.*") == false)
 			$ret_array['select'] .= " ,leads.account_name";
     	if ( !$return_array )
@@ -316,7 +330,9 @@ class Lead extends Person {
     	{
     		foreach ($fieldDefs as $name=>$properties)
     		{
-    			if ($name == 'oldmeetings' || $name == 'oldcalls') { continue; }
+                if ($name == 'meetings_parent' || $name == 'calls_parent') {
+                    continue;
+                }
     			elseif (array_search('link',$properties) === 'type')
     			{
     				$linked_fields[$name]=$properties;
@@ -490,8 +506,6 @@ class Lead extends Person {
 	}
 
 	function save($check_notify = false) {
-		if(empty($this->status))
-			$this->status = 'New';
 		// call save first so that $this->id will be set
 		$value = parent::save($check_notify);
 		return $value;

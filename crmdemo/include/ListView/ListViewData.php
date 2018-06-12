@@ -10,7 +10,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
+// $Id: ListViewData.php 57227 2010-06-30 23:02:27Z kjing $
 require_once('include/EditView/SugarVCR.php');
 /**
  * Data set for ListView
@@ -158,8 +158,7 @@ class ListViewData {
 		}else{
 	        $count_query = SugarBean::create_list_count_query($main_query);
 	    }
-		$result = $this->db->query($count_query);
-		if($row = $this->db->fetchByAssoc($result)){
+		if($row = $this->db->fetchOne($count_query)){
 			return $row['c'];
 		}
 		return 0;
@@ -289,8 +288,7 @@ class ListViewData {
 		if(empty($_REQUEST['action']) || $_REQUEST['action'] != 'Popup') {
           	   $_SESSION['export_where'] = $ret_array['where'];
 		}
-   		//echo $main_query;
-		if($limit < -1) {
+   		if($limit < -1) {
 			$result = $this->db->query($main_query);
 		}
 		else {
@@ -326,9 +324,10 @@ class ListViewData {
         {
    			if($count < $limit)
             {
+                $row = $seed->convertRow($row);
    				$id_list .= ',\''.$row[$id_field].'\'';
    				$idIndex[$row[$id_field]][] = count($rows);
-   				$rows[] = $seed->convertRow($row);
+                $rows[] = $row;
    			}
    			$count++;
    		}
@@ -433,42 +432,52 @@ class ListViewData {
                     }
                     $pageData['additionalDetails'][$dataIndex] = $ar['string'];
                     $pageData['additionalDetails']['fieldToAddTo'] = $ar['fieldToAddTo'];
-				}
-				next($rows);
-			}
-		}
-		$nextOffset = -1;
-		$prevOffset = -1;
-		$endOffset = -1;
-		if($count > $limit) {
-			$nextOffset = $offset + $limit;
-		}
+                }
+                next($rows);
+            }
+        }
+        $nextOffset = -1;
+        $prevOffset = -1;
+        $endOffset = -1;
+        if($count > $limit) {
+            $nextOffset = $offset + $limit;
+        }
 
-		if($offset > 0) {
-			$prevOffset = $offset - $limit;
-			if($prevOffset < 0)$prevOffset = 0;
-		}
-		$totalCount = $count + $offset;
+        if($offset > 0) {
+            $prevOffset = $offset - $limit;
+            if($prevOffset < 0)$prevOffset = 0;
+        }
+        $totalCount = $count + $offset;
 
-		if( $count >= $limit && $totalCounted){
-			$totalCount  = $this->getTotalCount($main_query);
-		}
-		SugarVCR::recordIDs($this->seed->module_dir, array_keys($idIndex), $offset, $totalCount);
+        if( $count >= $limit && $totalCounted){
+            $totalCount  = $this->getTotalCount($main_query);
+        }
+        SugarVCR::recordIDs($this->seed->module_dir, array_keys($idIndex), $offset, $totalCount);
         $module_names = array(
             'Prospects' => 'Targets'
         );
-		$endOffset = (floor(($totalCount - 1) / $limit)) * $limit;
-		$pageData['ordering'] = $order;
-		$pageData['ordering']['sortOrder'] = $this->getReverseSortOrder($pageData['ordering']['sortOrder']);
+        $endOffset = (floor(($totalCount - 1) / $limit)) * $limit;
+        $pageData['ordering'] = $order;
+        $pageData['ordering']['sortOrder'] = $this->getReverseSortOrder($pageData['ordering']['sortOrder']);
         //get url parameters as an array
         $pageData['queries'] = $this->generateQueries($pageData['ordering']['sortOrder'], $offset, $prevOffset, $nextOffset,  $endOffset, $totalCounted);
         //join url parameters from array to a string
         $pageData['urls'] = $this->generateURLS($pageData['queries']);
-		$pageData['offsets'] = array( 'current'=>$offset, 'next'=>$nextOffset, 'prev'=>$prevOffset, 'end'=>$endOffset, 'total'=>$totalCount, 'totalCounted'=>$totalCounted);
-		$pageData['bean'] = array('objectName' => $seed->object_name, 'moduleDir' => $seed->module_dir, 'moduleName' => strtr($seed->module_dir, $module_names), 'importable' => $seed->importable);
+        $pageData['offsets'] = array( 'current'=>$offset, 'next'=>$nextOffset, 'prev'=>$prevOffset, 'end'=>$endOffset, 'total'=>$totalCount, 'totalCounted'=>$totalCounted);
+        $pageData['bean'] = array(
+            'objectName' => $seed->object_name,
+            'moduleDir' => $seed->module_dir,
+            'moduleName' => strtr($seed->module_dir, $module_names),
+            'moduleTitle' => isset($seed->module_title) ? $seed->module_title : null,
+            'parentTitle' => isset($seed->parent_title) ? $seed->parent_title : null,
+            'parentModuleDir' => isset($seed->parent_module_dir) ? $seed->parent_module_dir : null,
+            'createAction' => isset($seed->create_action) ? $seed->create_action : 'EditView',
+            'showLink' => isset($seed->show_link) ? $seed->show_link : null,
+            'importable' => $seed->importable
+        );
         $pageData['stamp'] = $this->stamp;
         $pageData['access'] = array('view' => $this->seed->ACLAccess('DetailView'), 'edit' => $this->seed->ACLAccess('EditView'));
-		$pageData['idIndex'] = $idIndex;
+        $pageData['idIndex'] = $idIndex;
         if(!$seedACL['ListView']) {
             $pageData['error'] = 'ACL restricted access';
         }
@@ -483,8 +492,11 @@ class ListViewData {
         }
         else if (isset($_REQUEST["searchFormTab"]) && $_REQUEST["searchFormTab"] == "basic_search")
         {
-            if($seed->module_dir == "Reports") $searchMetaData = SearchFormReports::retrieveReportsSearchDefs();
-            else $searchMetaData = SearchForm::retrieveSearchDefs($seed->module_dir);
+            if ($seed->module_dir == "Reports") {
+                $searchMetaData = SearchFormReports::retrieveReportsSearchDefs();
+            } else {
+                $searchMetaData = method_exists('SearchForm','retrieveSearchDefs') ? SearchForm::retrieveSearchDefs($seed->module_dir) : array();
+            }
 
             $basicSearchFields = array();
 

@@ -139,6 +139,7 @@ eoq;
 
 		require_once('include/formbase.php');
 		global $current_user, $db, $disable_date_format, $timedate;
+        $retval = array();
 
 		foreach($_POST as $post=>$value){
 			if(is_array($value)){
@@ -256,6 +257,8 @@ eoq;
                     continue;
                 }
 				if(isset($_POST['Delete'])){
+					// disable row level security so that bean can be retrieved for checking ACL access.
+					$this->sugarbean->disable_row_level_security = true;
 					$this->sugarbean->retrieve($id);
 					if($this->sugarbean->ACLAccess('Delete')){
 					    if ($this->sugarbean->object_name == 'Team' && $this->sugarbean->has_records_in_modules()) {
@@ -270,7 +273,9 @@ eoq;
                         require_once('include/SugarSearchEngine/SugarSearchEngineFactory.php');
                         $searchEngine = SugarSearchEngineFactory::getInstance();
                         $searchEngine->delete($this->sugarbean);
-					}
+                    } else {
+                        $retval[] = $id;
+                    }
 				}
 				else {
 					if($this->sugarbean->object_name == 'Contact' && isset($_POST['Sync'])){ // special for contacts module
@@ -400,6 +405,7 @@ eoq;
 			}
 		}
 		$disable_date_format = $old_value;
+            return $retval;
 	}
 
     public static function setMassUpdateFielddefs(Array $fielddefs, $moduleName) {
@@ -409,13 +415,10 @@ eoq;
             // Readonly fields are NOT be massupdatable
             if (!empty($def['readonly'])) {
                 $def['massupdate'] = false;
-            // Calculated fields are NOT massupdatable
-            } elseif (isset($def['calculated'])) { 
-                // If calculated is set and is enforced and is some value of truthy...
-                if (self::isTrue($def['calculated']) && isset($def['enforced']) && self::isTrue($def['enforced'])) {
-                    // Then massupdate has to be false
-                    $def['massupdate'] = false;
-                }
+            // Calculated fields that are enforced are NOT massupdatable
+            } elseif (isset($def['calculated']) && self::isTrue($def['calculated']) && isset($def['enforced']) && self::isTrue($def['enforced'])) {
+                // Then massupdate has to be false
+                $def['massupdate'] = false;
             } elseif (isset($def['massupdate'])) {
                 // The massupdate value has to be boolean so the client can properly 
                 // handle it. A "0" false renders as a true to the client.
@@ -1153,15 +1156,18 @@ EOQ;
 		// cn: added "mass_" to the id tag to differentiate from the status id in StoreQuery
 		$html = '<td scope="row" width="15%">'.$displayname.'</td><td>';
 		if(is_array($options)){
-			if(!isset($options['']) && !isset($options['0'])){
+            if (!isset($options['']) && !isset($options['0'])) {
+                $emptyval = false;
 			   $new_options = array();
 			   $new_options[''] = '';
 			   foreach($options as $key=>$value) {
 			   	   $new_options[$key] = $value;
 			   }
 			   $options = $new_options;
-			}
-			$options = get_select_options_with_id_separate_key($options, $options, '', true);;
+            } else {
+                $emptyval = true;
+            }
+            $options = get_select_options_with_id_separate_key($options, $options, '', $emptyval);
 			$html .= '<select id="mass_'.$varname.'" name="'.$varname.'">'.$options.'</select>';
 		}else{
 			$html .= $options;
@@ -1409,7 +1415,7 @@ EOQ;
         }
 	/* bug 31271: using false to not add all bean fields since some beans - like SavedReports
 	   can have fields named 'module' etc. which may break the query */
-        $query = unserialize(base64_decode($query));
+        $query = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($query));
         $searchForm->populateFromArray($query, null, true);
         $this->searchFields = $searchForm->searchFields;
         $where_clauses = $searchForm->generateSearchWhere(true, $module);

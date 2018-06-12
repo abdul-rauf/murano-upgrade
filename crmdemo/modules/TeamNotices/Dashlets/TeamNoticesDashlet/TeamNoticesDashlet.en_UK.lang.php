@@ -11,9 +11,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: TeamNoticesDashlet.en_us.lang.php 16292 2006-08-22 20:57:23Z awu $
 
 
 $dashletStrings['TeamNoticesDashlet'] = array('LBL_TITLE'            => 'Team Notices',
                                               'LBL_DESCRIPTION'      => 'Displays team notices in a scrolling box');
- 
+?>

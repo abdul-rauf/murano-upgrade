@@ -10,8 +10,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Administration'] = array('table' => 'config', 'comment' => 'System table containing system-wide definitions'
-                               ,'fields' => array (
+$dictionary['Administration'] = array(
+    'table' => 'config',
+    'comment' => 'System table containing system-wide definitions',
+    'hidden_to_role_assignment' => true,
+    'fields' => array (
   'category' =>
   array (
     'name' => 'category',
@@ -106,6 +109,11 @@ $dictionary['UpgradeHistory'] = array(
                 'name' => 'manifest',
                 'type' => 'longtext',
     		    'comment' => 'A serialized copy of the manifest file.'
+        ),
+        'patch' => array (
+            'name' => 'patch',
+            'type' => 'text',
+            'comment' => 'A serialized copy of the patch applied to the package during installation'
         ),
         'date_entered' => array (
                 'name' => 'date_entered',

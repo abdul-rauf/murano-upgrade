@@ -10,9 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: workflow_utils.php 53057 2009-12-08 01:36:37Z mitani $
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 
 function get_module_map($start_none = false){
 	global $current_user;
@@ -161,14 +160,23 @@ function translate_label_from_module($target_module, $target_element){
 
 function translate_option_name_from_bean(& $target_bean, $target_element, $target_value){
 	global $app_list_strings;
-    $dom_name = array();
     # Bug #37487 We should use 'function' from var_def if it is specified.
     if (
         isset($target_bean->field_defs[$target_element]['function'])
         && $target_bean->field_defs[$target_element]['function'] != ''
     )
     {
-        $return = $target_bean->field_defs[$target_element]['function']();
+
+        $function = $target_bean->field_defs[$target_element]['function'];
+
+        // If we have function_bean defined, use it
+        if (!empty($target_bean->field_defs[$target_element]['function_bean'])) {
+            $functionBean = BeanFactory::getBean($target_bean->field_defs[$target_element]['function_bean']);
+            $return = $functionBean->$function();
+        } else {
+            $return = $function();
+        }
+        
         if (isset($return[$target_value]))
         {
             return $return[$target_value];
@@ -217,6 +225,7 @@ function write_workflow(& $workflow_object){
 		$fp = sugar_fopen($file, 'wb');
 		fwrite($fp,"<?php\n");
 		fwrite($fp,'
+use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 include_once("include/workflow/alert_utils.php");
 include_once("include/workflow/action_utils.php");
 include_once("include/workflow/time_utils.php");
@@ -314,7 +323,9 @@ function build_source_array($type, $field_value, $var_symbol=true){
             $condition = "empty(\$focus->fetched_row['id'])";
             if (isset($row['id']) && $row['id'] != false)
             {
-                $condition .= ' || (!empty($_SESSION["workflow_cron"]) && $_SESSION["workflow_cron"]=="Yes" && !empty($_SESSION["workflow_id_cron"]) && in_array("' . $row['id'] . '", $_SESSION["workflow_id_cron"]))';
+
+                $condition .= ' || (!empty($_SESSION["workflow_cron"]) && $_SESSION["workflow_cron"]=="Yes" && !empty($_SESSION["workflow_id_cron"]) && '
+                    . 'ArrayFunctions::in_array_access("' . $row['id'] . '", $_SESSION["workflow_id_cron"]))';
             }
             $eval_dump .= "if($condition){ \n ";
             return true;

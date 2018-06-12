@@ -8,4 +8,4 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({extendsFrom:'RecordView',alert:undefined,initialize:function(options){this.plugins=_.union(this.plugins||[],['HistoricalSummary']);this._super('initialize',[options]);},cancelClicked:function(){var changedAttributes=this.model.changedAttributes(this.model.getSyncedAttributes());this.model.set(changedAttributes);this._super('cancelClicked');},})
+({extendsFrom:'RecordView',alert:undefined,cancelClicked:function(){var changedAttributes=this.model.changedAttributes(this.model.getSynced());this.model.set(changedAttributes,{revert:true});this._super('cancelClicked');},initialize:function(options){this.plugins=_.union(this.plugins,['LinkedModel','HistoricalSummary','CommittedDeleteWarning']);this._super('initialize',[options]);app.utils.hideForecastCommitStageField(this.meta.panels);},})

@@ -19,6 +19,16 @@ class ViewHistory extends SugarView
     var $pageSize = 10 ;
 
     /**
+     * @var History
+     */
+    protected $history;
+
+    /**
+     * @var AbstractMetaDataParser
+     */
+    protected $parser;
+
+    /**
 	 * @see SugarView::_getModuleTitleParams()
 	 */
 	protected function _getModuleTitleParams($browserTitle = false)
@@ -44,8 +54,16 @@ class ViewHistory extends SugarView
         
         $packageName = (isset ( $_REQUEST [ 'view_package' ] ) && (strtolower ( $_REQUEST [ 'view_package' ] ) != 'studio')) ? $_REQUEST [ 'view_package' ] : null ;
         $this->module = $_REQUEST [ 'view_module' ] ;
-        
-        $this->parser = ParserFactory::getParser ( $this->layout, $this->module, $packageName, $subpanelName ) ;
+
+        $params = array();
+        $this->parser = ParserFactory::getParser(
+            $this->layout,
+            $this->module,
+            $packageName,
+            $subpanelName,
+            null,
+            $params
+        );
         $this->history = $this->parser->getHistory () ;
         $action = ! empty ( $_REQUEST [ 'histAction' ] ) ? $_REQUEST [ 'histAction' ] : 'browse' ;
         $GLOBALS['log']->debug( get_class($this)."->display(): performing History action {$action}" ) ;
@@ -73,13 +91,22 @@ class ViewHistory extends SugarView
         $snapshots = array ( ) ;
         for ( $i = 0 ; $i <= $this->pageSize && $ts > 0 ; $i ++ )
         {
-            $dbDate = $timedate->fromTimestamp($ts)->asDb();
-            $displayTS = $timedate->to_display_date_time ( $dbDate ) ;
-            if ($page * $this->pageSize + $i + 1 == $count)
-                $displayTS = translate("LBL_MB_DEFAULT_LAYOUT");
-            $snapshots [ $ts ] = $displayTS ;
+            if ($page * $this->pageSize + $i + 1 == $count) {
+                $label = translate('LBL_MB_DEFAULT_LAYOUT');
+                $isDefault = true;
+            } else {
+                $dbDate = $timedate->fromTimestamp($ts)->asDb();
+                $label = $timedate->to_display_date_time($dbDate);
+                $isDefault = false;
+            }
+            $snapshots[$ts] = array(
+                'label' => $label,
+                'isDefault' => $isDefault,
+            );
             $ts = $this->history->getNext () ;
         }
+
+
         if (count ( $snapshots ) > $this->pageSize)
         {
             $smarty->assign ( 'nextPage', true ) ;
@@ -103,14 +130,22 @@ class ViewHistory extends SugarView
         $subpanel = '';
         if (! empty ( $_REQUEST [ 'subpanel' ] ))
         {
-            $subpanel = ',"' . $_REQUEST [ 'subpanel' ] . '"' ;
+            $subpanel = $_REQUEST['subpanel'];
         }
-        echo "<input type='button' name='close$sid' value='". translate ( 'LBL_BTN_CLOSE' )."' " . 
+
+        $isDefault = $sid == $this->history->getLast();
+        echo "<input type='button' value='" . translate('LBL_BTN_CLOSE') . "' " .
                 "class='button' onclick='ModuleBuilder.tabPanel.removeTab(ModuleBuilder.tabPanel.get(\"activeTab\"));' style='margin:5px;'>" . 
-             "<input type='button' name='restore$sid' value='" . translate ( 'LBL_MB_RESTORE' ) . "' " .  
-                "class='button' onclick='ModuleBuilder.history.revert(\"$this->module\",\"{$this->layout}\",\"$sid\"$subpanel);' style='margin:5px;'>" ;
+             "<input type='button' value='" . translate('LBL_MB_RESTORE') . "' " .
+                "class='button' onclick='ModuleBuilder.history.revert("
+            . htmlspecialchars(json_encode($this->module))
+            . ', ' . htmlspecialchars(json_encode($this->layout))
+            . ', ' . htmlspecialchars(json_encode($sid))
+            . ', ' . htmlspecialchars(json_encode($subpanel))
+            . ', ' . htmlspecialchars(json_encode($isDefault))
+            . ");' style='margin:5px;'>";
         $this->history->restoreByTimestamp ( $sid ) ;
-        $view ;
+
         if ($this->layout == 'listview')
         {
             require_once ("modules/ModuleBuilder/views/view.listview.php") ;
@@ -146,6 +181,7 @@ class ViewHistory extends SugarView
         $sid = $_REQUEST [ 'sid' ] ;
         $this->history->restoreByTimestamp ( $sid ) ;
     }
+
 
 	/**
  	 * Restores a layout to its current customized state. 

@@ -37,16 +37,7 @@ if (isset($_REQUEST['offset']) or isset($_REQUEST['record'])) {
 } else {
 	header("Location: index.php?module=WorkFlow&action=index");
 }
-/*if(!empty($_REQUEST['record'])) {
-    $result = $focus->retrieve($_REQUEST['record']);
-    if($result == null)
-    {
-    sugar_die($app_strings['LBL_UNAUTH_ADMIN']);
-        }
-}
-else {
-	header("Location: index.php?module=WorkFlow&action=index");
-}*/
+
 $access = get_workflow_admin_modules_for_user($current_user);
 if ((!is_admin($current_user) && !is_admin_for_any_module($current_user)) || (!empty($focus->base_module) && empty($access[$focus->base_module])))
 {

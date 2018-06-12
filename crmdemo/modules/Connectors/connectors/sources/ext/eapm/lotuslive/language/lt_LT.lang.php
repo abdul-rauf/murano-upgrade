@@ -1,7 +1,6 @@
 <?php
+
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,11 +11,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
 $connector_strings = array (
-  'LBL_LICENSING_INFO' => 'OAuth vartotojo raktas ir slaptas raktas gauti iš LotusLive©.',
-  'oauth_consumer_key' => 'OAuth vartotojo raktas',
-  'oauth_consumer_secret' => 'OAuth slaptas raktas',
+    'LBL_LICENSING_INFO' => 'OAuth vartotojo raktas ir slaptas raktas gauti iš LotusLive©.',
+    'oauth_consumer_key' => 'OAuth vartotojo raktas',
+    'oauth_consumer_secret' => 'OAuth slaptas raktas',
 );
 

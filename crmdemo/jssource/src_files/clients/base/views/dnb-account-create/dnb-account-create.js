@@ -41,6 +41,12 @@
         'click [data-action="show-more"]': 'invokePagination'
     },
 
+    selectors: {
+        'load': 'div#dnb-company-list-loading',
+        'rslt': 'div#dnb-search-results',
+        'rsltList': 'ul#dnb-results-list'
+    },
+
     configuredKey: 'dnb:account:create:configured',
 
     initialize: function(options) {
@@ -48,13 +54,17 @@
         this.initDashlet();
         this.loadData();
         this.initPaginationParams();
-        this.paginationCallback = this.baseAccountsBAL;
+        this.rowTmpl = app.template.get('dnb.dnb-account-row');
+        this.resultTemplate = app.template.get(this.name);
+        this.resultCountTmpl = app.lang.get('LBL_DNB_BAL_ACCT_HEADER');
     },
 
     loadData: function() {
         if (this.disposed) {
             return;
         }
+        this.template = app.template.get(this.name + '.dnb-search-hint');
+        this.render();
         this.checkConnector('ext_rest_dnb',
             _.bind(this.loadDataWithValidConnector, this),
             _.bind(this.handleLoadError, this),
@@ -68,7 +78,9 @@
         if (this.disposed) return;
         this.template = app.template.get(this.name + '.dnb-search-hint');
         this.render();
-        this.context.on('input:name:keyup', this.dnbSearch, this);
+        // call .off first because loadDataWithValidConnector is called twice on account-create
+        // we don't want to set the event listener twice
+        this.context.off('update:account').on('update:account', this.dnbSearch, this);
         this.errmsg = null;
     },
 
@@ -81,7 +93,7 @@
         this.errmsg = 'LBL_DNB_NOT_CONFIGURED';
         this.template = app.template.get(this.name + '.dnb-need-configure');
         this.render();
-        this.context.off('input:name:keyup', this.dnbSearch);
+        this.context.off('update:account', this.dnbSearch);
     },
 
     /**
@@ -91,10 +103,13 @@
         if (this.disposed) {
             return;
         }
-        this.template = app.template.get(this.name);
+        this.template = this.resultTemplate;
+        if (this.listData && this.listData.count) {
+            delete this.listData['count'];
+        }
         this.render();
-        this.$('div#dnb-company-list-loading').show();
-        this.$('div#dnb-search-results').hide();
+        this.$(this.selectors.load).toggleClass('hide', false);
+        this.$(this.selectors.rslt).toggleClass('hide', true);
         this.$('.importDNBData').hide();
         var dupeCheckParams = {
             'type': 'duns',
@@ -109,7 +124,8 @@
      * @param  {Object} dnbSrchApiResponse
      */
     renderCompanyList: function(dnbSrchApiResponse) {
-        var dnbSrchResults = {};
+        var dnbSrchResults = {},
+            appendRecords = false;
         if (this.resetPaginationFlag) {
             this.initPaginationParams();
         }
@@ -121,46 +137,23 @@
             //setting the api recordCount to context
             //will be used to determine if the pagination controls must be displayed
             this.recordCount = this.getJsonNode(dnbSrchApiResponse.product, this.commonJSONPaths.srchCount);
-            this.paginateRecords();
-            dnbSrchResults.product = this.currentPage;
+            var nextPage = this.paginateRecords();
+            //currentPage is set to null by initPaginationParams
+            if (_.isNull(this.currentPage)) {
+                this.currentPage = nextPage;
+                dnbSrchResults.product = this.currentPage;
+            } else {
+                //this loop gets executed when api is called again to obtain more records
+                dnbSrchResults.product = nextPage;
+                appendRecords = true;
+            }
             if (this.recordCount) {
                 dnbSrchResults.count = this.recordCount;
             }
         } else if (dnbSrchApiResponse.errmsg) {
             dnbSrchResults.errmsg = dnbSrchApiResponse.errmsg;
         }
-        this.renderPage(dnbSrchResults);
-    },
-
-    /**
-     * Renders the currentPage
-     * @param {Object} pageData
-     */
-    renderPage: function(pageData) {
-        if (this.disposed) {
-            return;
-        }
-        this.template = app.template.get(this.name);
-        this.dnbSrchResults = pageData;
-        //pageData count is not defined when the page is being rendered after
-        //dupe check
-        //hence using the count from the context variable
-        if (_.isUndefined(pageData.count)) {
-            pageData.count = this.recordCount;
-        }
-        //if the api returns a success response then only set the count
-        if (pageData.product) {
-            this.dnbSrchResults.count = app.lang.get('LBL_DNB_BAL_ACCT_HEADER') + " (" + this.formatSalesRevenue(pageData.count) + ")";
-        } else {
-            delete this.dnbSrchResults['count'];
-        }
-        this.render();
-        this.$('div#dnb-company-list-loading').hide();
-        this.$('div#dnb-search-results').show();
-        //render pagination controls only if the api returns a success response
-        if (pageData.product) {
-            this.renderPaginationControl();
-        }
+        this.renderPage(dnbSrchResults, appendRecords);
     },
 
     /**
@@ -169,44 +162,35 @@
      * else invokes the D&B API to get the next page
      */
     invokePagination: function() {
-        this.displayPaginationLoading();
-        this.setPaginationParams();
-        //if the endRecord after pagination is greater than apiPageEndRecord
-        //we have to invoke the api with the pagination controls
-        if (this.endRecord > this.apiPageEndRecord) {
-            this.apiPageEndRecord = (this.startRecord + this.apiPageSize) - 1;
-            this.resetPaginationFlag = false;
-            //setting the apiPageOffset
-            this.apiPageOffset = this.startRecord;
-            this.paginationCallback(this.setApiPaginationParams(this.balParams), this.renderCompanyList);
-        } else {
-            this.paginateRecords();
-            var pageData = {
-                'product': this.currentPage,
-                'count': this.recordCount
-            };
-            this.renderPage(pageData);
-        }
+        this._super('invokePagination', [this.baseAccountsBAL, this.balParams, this.renderCompanyList]);
     },
 
     /** event listener for keyup / autocomplete feature
-     * @param {String} searchString
      */
-    dnbSearch: function(searchString) {
+    dnbSearch: function() {
         if (this.disposed) {
             return;
         }
+
+        //Value of input in name field
+        var searchString = this.closestComponent('sidebar').getComponent('main-pane').$('[data-fieldname=name] input').val()
+
+        //only search if the searchString is at least 3 characters
+        if (!searchString || searchString.length < 3) {
+            return;
+        }
+
         if (!this.keyword || (this.keyword && this.keyword !== searchString)) {
             this.keyword = searchString;
-            this.template = app.template.get(this.name);
+            this.template = this.resultTemplate;
             //deleting the count of the previous search results
-            if (this.dnbSrchResults && this.dnbSrchResults.count) {
-                delete this.dnbSrchResults['count'];
+            if (this.listData && this.listData.count) {
+                delete this.listData['count'];
             }
             this.render();
             this.$('table#dnb_company_list').empty(); //empty results table
-            this.$('div#dnb-search-results').hide(); //hide results div
-            this.$('div#dnb-company-list-loading').show(); //show loading text
+            this.$(this.selectors.load).toggleClass('hide', false);
+            this.$(this.selectors.rslt).toggleClass('hide', true);
             this.$('.clearDNBResults').attr('disabled', 'disabled'); //disable clear button
             this.$('.clearDNBResults').removeClass('enabled');
             this.$('.clearDNBResults').addClass('disabled');
@@ -241,7 +225,7 @@
             this.$('div#dnb-company-detail-loading').show();
             this.$('div#dnb-company-details').hide();
             this.$('.importDNBData').hide();
-            this.baseCompanyInformation(duns_num, this.compInfoProdCD.std,
+            this.baseCompanyInformation(duns_num, this.compInfoProdCD.lite,
             app.lang.get('LBL_DNB_BACK_TO_SRCH'), this.renderCompanyDetails);
         }
     },

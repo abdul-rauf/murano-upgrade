@@ -16,36 +16,15 @@ require_once "modules/OutboundEmailConfiguration/OutboundEmailConfigurationPeer.
 if(!is_admin($current_user)){
     sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
 }
-function clearPasswordSettings() {
-	    $_POST['passwordsetting_SystemGeneratedPasswordON'] = '';
-	    $_POST['passwordsetting_generatepasswordtmpl'] = '';
-	    $_POST['passwordsetting_lostpasswordtmpl'] = '';
-	    $_POST['passwordsetting_forgotpasswordON'] = '0';
-	    $_POST['passwordsetting_linkexpiration'] = '1';
-	    $_POST['passwordsetting_linkexpirationtime'] = '30';
-	    $_POST['passwordsetting_linkexpirationtype'] = '1';
-	    $_POST['passwordsetting_systexpiration'] = '0';
-	    $_POST['passwordsetting_systexpirationtime'] = '';
-	    $_POST['passwordsetting_systexpirationtype'] = '0';
-	    $_POST['passwordsetting_systexpirationlogin'] = '';
 
-	    $_POST['passwordsetting_minpwdlength'] = '';
-	    $_POST['passwordsetting_maxpwdlength'] = '';
-	    $_POST['passwordsetting_oneupper'] = '';
-	    $_POST['passwordsetting_onelower'] = '';
-	    $_POST['passwordsetting_onenumber'] = '';
-	    $_POST['passwordsetting_onespecial'] = '';
-	    $_POST['passwordsetting_customregex'] = '';
-	    $_POST['passwordsetting_regexcomment'] = '';
-	    $_POST['passwordsetting_userexpiration'] = '0';
-	    $_POST['passwordsetting_userexpirationtime'] = '';
-	    $_POST['passwordsetting_userexpirationtype'] = '1';
-	    $_POST['passwordsetting_userexpirationlogin'] = '';
-	    $_POST['passwordsetting_lockoutexpiration'] = '0';
-	    $_POST['passwordsetting_lockoutexpirationtime'] = '';
-	    $_POST['passwordsetting_lockoutexpirationtype'] = '1';
-	    $_POST['passwordsetting_lockoutexpirationlogin'] = '';
+/**
+ * clearPasswordSettings
+ * @deprecated as of 7.5
+ */
+function clearPasswordSettings() {
+    $GLOBALS['log']->deprecated("This method is no longer valid for use and will be removed in a future version of SugarCRM");
 }
+
 require_once('modules/Administration/Forms.php');
 echo getClassicModuleTitle(
         "Administration",
@@ -60,23 +39,28 @@ $configurator = new Configurator();
 $sugarConfig = SugarConfig::getInstance();
 $focus = BeanFactory::getBean('Administration');
 $configurator->parseLoggerSettings();
-$valid_public_key= true;
-if(!empty($_POST['saveConfig'])){
-    if ($_POST['captcha_on'] == '1'){
-		$handle = @fopen("http://api.recaptcha.net/challenge?k=".$_POST['captcha_public_key']."&cachestop=35235354", "r");
-		$buffer ='';
-		if ($handle) {
-		    while (!feof($handle)) {
-		        $buffer .= fgets($handle, 4096);
-		    }
-		    fclose($handle);
-		}
-		$valid_public_key= substr($buffer, 1, 4) == 'var '? true : false;
-	}
-	if ($valid_public_key){
+$config_strings = return_module_language($GLOBALS['current_language'], 'Configurator');
+$valid_public_key = true;
+if (!empty($_POST['saveConfig'])) {
+    do {
+        if ($_POST['captcha_on'] == '1') {
+    		$handle = @fopen("http://api.recaptcha.net/challenge?k=".$_POST['captcha_public_key']."&cachestop=35235354", "r");
+    		$buffer ='';
+    		if ($handle) {
+    		    while (!feof($handle)) {
+    		        $buffer .= fgets($handle, 4096);
+    		    }
+    		    fclose($handle);
+    		}
+    		if (substr($buffer, 1, 4) != 'var ') {
+    		    // skip save and go to display form
+    		    $valid_public_key = false;
+    		    break;
+    		}
+    	}
+
 		if (isset($_REQUEST['system_ldap_enabled']) && $_REQUEST['system_ldap_enabled'] == 'on') {
 			$_POST['system_ldap_enabled'] = 1;
-			clearPasswordSettings();
 		}
 		else
 			$_POST['system_ldap_enabled'] = 0;
@@ -106,11 +90,44 @@ if(!empty($_POST['saveConfig'])){
 		else
 		    $_POST['ldap_authentication'] = 0;
 
+        if (!empty($_POST['ldap_admin_password']) && $_POST['ldap_admin_password'] == Administration::$passwordPlaceholder) {
+            unset($_POST['ldap_admin_password']);
+        }
+
 		if( isset($_REQUEST['passwordsetting_lockoutexpirationtime']) && is_numeric($_REQUEST['passwordsetting_lockoutexpirationtime'])  )
 		    $_POST['passwordsetting_lockoutexpiration'] = 2;
 
-		$configurator->saveConfig();
+        // Check SAML settings
+        if (!empty($_POST['authenticationClass']) && $_POST['authenticationClass'] == 'SAMLAuthenticate') {
+            if (empty($_POST['SAML_loginurl'])) {
+                $configurator->addError($config_strings['ERR_EMPTY_SAML_LOGIN']);
+                break;
+            } else {
+                $_POST['SAML_loginurl'] = trim($_POST['SAML_loginurl']);
+                if (!filter_var($_POST['SAML_loginurl'], FILTER_VALIDATE_URL)) {
+                    $configurator->addError($config_strings['ERR_SAML_LOGIN_URL']);
+                    break;
+                }
+            }
+            if (!empty($_POST['SAML_SLO'])) {
+                $_POST['SAML_SLO'] = trim($_POST['SAML_SLO']);
+                if (!filter_var($_POST['SAML_SLO'], FILTER_VALIDATE_URL)) {
+                    $configurator->addError($config_strings['ERR_SAML_SLO_URL']);
+                    break;
+                }
+            }
+            if (empty($_POST['SAML_X509Cert'])) {
+                $configurator->addError($config_strings['ERR_EMPTY_SAML_CERT']);
+                break;
+            }
+            if (isset($_REQUEST['SAML_SAME_WINDOW'])) {
+                $_POST['SAML_SAME_WINDOW'] = true;
+            } else {
+                $_POST['SAML_SAME_WINDOW'] = false;
+            }            
+        }
 
+		$configurator->saveConfig();
 		$focus->saveConfig();
 
 		// Clean API cache since we may have changed the authentication settings
@@ -123,11 +140,17 @@ if(!empty($_POST['saveConfig'])){
             app.router.navigate('#bwc/index.php?module=Administration&action=index', {trigger:true, replace:true});
             </script>"
         );
-	}
+	} while (false);
+
+	// We did not succeed saving, but we still want to load data from post to display it
+	$configurator->populateFromPost();
 }
 
 $focus->retrieveSettings();
 
+if (!empty($focus->settings['ldap_admin_password'])) {
+    $focus->settings['ldap_admin_password'] = Administration::$passwordPlaceholder;
+}
 
 require_once('include/SugarLogger/SugarLogger.php');
 $sugar_smarty = new Sugar_Smarty();
@@ -135,7 +158,6 @@ $sugar_smarty = new Sugar_Smarty();
 // if no IMAP libraries available, disable Save/Test Settings
 if(!function_exists('imap_open')) $sugar_smarty->assign('IE_DISABLED', 'DISABLED');
 
-$config_strings=return_module_language($GLOBALS['current_language'],'Configurator');
 $sugar_smarty->assign('CONF', $config_strings);
 $sugar_smarty->assign('MOD', $mod_strings);
 $sugar_smarty->assign('APP', $app_strings);
@@ -185,7 +207,7 @@ $sugar_smarty->assign("SMTP_SERVER_NOT_SET", $smtpServerIsSet);
 
 $focus = BeanFactory::getBean('InboundEmail');
 $focus->checkImap();
-$storedOptions = unserialize(base64_decode($focus->stored_options));
+$storedOptions = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($focus->stored_options));
 $email_templates_arr = get_bean_select_array(true, 'EmailTemplate','name', '','name',true);
 $create_case_email_template = (isset($storedOptions['create_case_email_template'])) ? $storedOptions['create_case_email_template'] : "";
 $TMPL_DRPDWN_LOST =get_select_options_with_id($email_templates_arr, $res['lostpasswordtmpl']);
@@ -193,6 +215,7 @@ $TMPL_DRPDWN_GENERATE =get_select_options_with_id($email_templates_arr, $res['ge
 
 $sugar_smarty->assign("TMPL_DRPDWN_LOST", $TMPL_DRPDWN_LOST);
 $sugar_smarty->assign("TMPL_DRPDWN_GENERATE", $TMPL_DRPDWN_GENERATE);
+
 $LOGGED_OUT_DISPLAY= (isset($res['lockoutexpiration']) && $res['lockoutexpiration'] == '0') ? 'none' : '';
 $sugar_smarty->assign("LOGGED_OUT_DISPLAY_STATUS", $LOGGED_OUT_DISPLAY);
 

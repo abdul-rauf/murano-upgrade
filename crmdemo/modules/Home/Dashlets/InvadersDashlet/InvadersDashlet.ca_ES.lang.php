@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,16 +10,16 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$dashletStrings = array (
-  'InvadersDashlet' => 
-  array (
-    'LBL_START' => 'Feu clic per iniciar',
-    'LBL_GAME_OVER' => 'Game Over<br>(Feu clic per tornar a jugar)',
-    'LBL_TITLE' => '¡Invaders!',
-    'LBL_DESCRIPTION' => 'Una forma de pasar l´estona',
+ // $Id: JotPadDashlet.en_us.lang.php 24343 2007-07-15 21:24:15Z awu $
+
+
+$dashletStrings['InvadersDashlet'] = array(
+    'LBL_TITLE'         => 'Invaders!',
+    'LBL_DESCRIPTION'   => 'Una forma de pasar l´estona',
     'LBL_DBLCLICK_HELP' => 'Faci servir A i D per moure´s, S per disparar.',
-  ),
-);
+    'LBL_START'         => 'Feu clic per començar',
+    'LBL_GAME_OVER'     => 'Game Over<br>(Feu clic per tornar a jugar)',
 
+);
+?>

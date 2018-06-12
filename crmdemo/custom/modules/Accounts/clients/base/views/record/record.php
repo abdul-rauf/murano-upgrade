@@ -1,6 +1,5 @@
 <?php
-
-/* This file was updated by 7_CustomRecordViewHistorySummaryButton */
+// created: 2018-06-12 08:17:53
 $viewdefs['Accounts']['base']['view']['record'] = array (
   'buttons' => 
   array (
@@ -11,6 +10,10 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
       'label' => 'LBL_CANCEL_BUTTON_LABEL',
       'css_class' => 'btn-invisible btn-link',
       'showOn' => 'edit',
+      'events' => 
+      array (
+        'click' => 'button:cancel_button:click',
+      ),
     ),
     1 => 
     array (
@@ -135,7 +138,14 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
           'dismiss_label' => true,
           'readonly' => true,
         ),
-        1 => 'name',
+        1 => 
+        array (
+          'name' => 'name',
+          'events' => 
+          array (
+            'keyup' => 'update:account',
+          ),
+        ),
         2 => 
         array (
           'name' => 'favorite',
@@ -177,7 +187,7 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         3 => 
         array (
           'name' => 'phone_alternate',
-          'label' => 'LBL_OTHER_PHONE',
+          'label' => 'LBL_PHONE_ALT',
         ),
         4 => 
         array (
@@ -245,6 +255,7 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         array (
           'name' => 'date_modified_by',
           'readonly' => true,
+          'inline' => true,
           'type' => 'fieldset',
           'label' => 'LBL_DATE_MODIFIED',
           'fields' => 
@@ -287,6 +298,11 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         array (
           'name' => 'duns_num',
           'readonly' => true,
+        ),
+        14 => 
+        array (
+          'name' => 'tag',
+          'span' => 12,
         ),
       ),
       'newTab' => true,

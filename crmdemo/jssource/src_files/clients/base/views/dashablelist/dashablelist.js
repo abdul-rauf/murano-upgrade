@@ -82,6 +82,18 @@
     moduleBlacklist: ['Home', 'Forecasts', 'ProductCategories', 'ProductTemplates'],
 
     /**
+     * Module Additions
+     *
+     * When a specific module is allowed, we should add these other modules that are
+     * not first class modules.
+     *
+     * @property {Array}
+     */
+    additionalModules: {
+        'Project': ['ProjectTask']
+    },
+
+    /**
      * Cache of the modules a user is allowed to see.
      *
      * The keys are the module names and the values are the module names after
@@ -116,7 +128,7 @@
     moduleIsAvailable: true,
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Append lastStateID on metadata in order to active user cache.
      */
@@ -182,7 +194,7 @@
             this.settings.on('change:module', function(model, moduleName) {
                 var label = (model.get('filter_id') === 'assigned_to_me') ? 'TPL_DASHLET_MY_MODULE' : 'LBL_MODULE_NAME';
                 model.set('label', app.lang.get(label, moduleName, {
-                    module: app.lang.getAppListStrings('moduleList')[moduleName]
+                    module: app.lang.getModuleName(moduleName, {plural: true})
                 }));
 
                 // Re-initialize the filterpanel with the new module.
@@ -239,7 +251,7 @@
                 this.saveDashletFilter();
                 // NOTE: This prevents the drawer from closing prematurely.
                 return false;
-            }, null, this);
+            }, this);
 
         } else if (this.moduleIsAvailable) {
             var filterId = this.settings.get('filter_id');
@@ -252,11 +264,17 @@
             filters.setModuleName(this.settings.get('module'));
             filters.load({
                 success: _.bind(function() {
+                    if (this.disposed) {
+                        return;
+                    }
                     var filter = filters.collection.get(filterId);
                     var filterDef = filter && filter.get('filter_definition');
                     this._displayDashlet(filterDef);
                 }, this),
                 error: _.bind(function(err) {
+                    if (this.disposed) {
+                        return;
+                    }
                     this._displayDashlet();
                 }, this)
             });
@@ -267,19 +285,18 @@
      * Fetch the next pagination records.
      */
     showMoreRecords: function() {
-        //Show alerts for this request
-        // Override default collection options if they exist
-        this.getNextPagination(this.context.get('collectionOptions'));
+        // Show alerts for this request
+        this.getNextPagination();
     },
 
     /**
      * Returns a custom label for this dashlet.
      *
-     * @returns {String}
+     * @return {string}
      */
     getLabel: function() {
         var module = this.settings.get('module') || this.context.get('module'),
-            moduleName = app.lang.getAppListStrings('moduleList')[module];
+            moduleName = app.lang.getModuleName(module, {plural: true});
         return app.lang.get(this.settings.get('label'), module, {module: moduleName});
     },
 
@@ -502,7 +519,7 @@
             return;
         }
 
-        this.layout._addComponentsFromDef([{
+        this.layout.initComponents([{
             layout: 'dashablelist-filter'
         }]);
     },
@@ -521,10 +538,16 @@
             this._availableModules = {};
             var visibleModules = app.metadata.getModuleNames({filter: 'visible', access: 'read'}),
                 allowedModules = _.difference(visibleModules, this.moduleBlacklist);
+            
+            _.each(this.additionalModules, function(extraModules, module) {
+                if (_.contains(allowedModules, module)) {
+                    allowedModules = _.sortBy(_.union(allowedModules, extraModules), function(name) {return name});
+                }
+            });
             _.each(allowedModules, function(module) {
                 var hasListView = !_.isEmpty(this.getFieldMetaForView(app.metadata.getView(module, 'list')));
                 if (hasListView) {
-                    this._availableModules[module] = app.lang.get('LBL_MODULE_NAME', module);
+                    this._availableModules[module] = app.lang.getModuleName(module, {plural: true});
                 }
             }, this);
         }
@@ -629,13 +652,14 @@
      * preview and the default dashablelist's that are defined. All columns for
      * the selected module are shown in these cases.
      *
-     * @returns {Object[]} Array of objects defining the field metadata for
-     *                     each column.
+     * @return {Object[]} Array of objects defining the field metadata for
+     *   each column.
      * @private
      */
     _getColumnsForDisplay: function() {
-        var columns = [],
-            fields = this.getFieldMetaForView(this._getListMeta(this.settings.get('module')));
+        var columns = [];
+        var fields = this.getFieldMetaForView(this._getListMeta(this.settings.get('module')));
+        var moduleMeta = app.metadata.getModule(this.module);
         if (!this.settings.get('display_columns')) {
             this._updateDisplayColumns();
         }
@@ -646,12 +670,33 @@
             var field = _.find(fields, function(field) {
                 return field.name === name;
             }, this);
-            var column = _.extend({name: name, sortable: true}, field || {});
+            // It's possible that a column is on the dashlet and not on the
+            // main list view (thus was never patched by metadata-manager).
+            // We need to fix up the columns in that case.
+            // FIXME: This method should not be used as a public method (though
+            // it's being used everywhere in the app) this should be reviewed
+            // when SC-3607 gets in.
+            field = field || app.metadata._patchFields(this.module, moduleMeta, [name]);
+
+            // Handle setting of the sortable flag on the list. This will not
+            // always be true
+            var sortableFlag,
+                column,
+                fieldDef = app.metadata.getModule(this.module).fields[field.name];
+
+            // If the module's field def says nothing about the sortability, then
+            // assume it's ok to sort
+            if (_.isUndefined(fieldDef) || _.isUndefined(fieldDef.sortable)) {
+                sortableFlag = true;
+            } else {
+                // Get what the field def says it is supposed to do
+                sortableFlag = !!fieldDef.sortable;
+            }
+
+            column = _.extend({sortable: sortableFlag}, field);
+
             columns.push(column);
         }, this);
-        //Its possible that a column is on the dashlet and not on the main list view.
-        //We need to fix up the columns in that case.
-        columns = app.metadata._patchFields(this.module, app.metadata.getModule(this.module), columns);
         return columns;
     },
 
@@ -683,7 +728,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Calls {@link BaseDashablelistView#_stopAutoRefresh} so that the refresh will
      * not continue after the view is disposed.

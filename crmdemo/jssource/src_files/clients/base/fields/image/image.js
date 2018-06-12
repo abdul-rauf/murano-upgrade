@@ -11,13 +11,13 @@
 /**
  * @class View.Fields.Base.ImageField
  * @alias SUGAR.App.view.fields.BaseImageField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     fieldTag: 'input[type=file]',
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * This field doesn't support `showNoData`.
      */
@@ -31,6 +31,13 @@
     plugins: ['File', 'FieldDuplicate'],
 
     /**
+     * @inheritdoc
+     *
+     * The direction for this field should always be `ltr`.
+     */
+    direction: 'ltr',
+
+    /**
      * @override
      *
      * FIXME: The {@link #model} used by this view should be a {@link Data.Bean}
@@ -41,10 +48,16 @@
     initialize: function(options) {
         app.view.Field.prototype.initialize.call(this, options);
 
+        // FIXME: This needs an API instead. SC-3369 should address this.
+        // Also, this field should extend the file field to inherit these
+        // error properties.
+        app.error.errorName2Keys['tooBig'] = 'ERROR_MAX_FILESIZE_EXCEEDED';
+        app.error.errorName2Keys['uploadFailed'] = 'ERROR_UPLOAD_FAILED';
+
         // FIXME: we should have a {@link Da
-        if (_.isFunction(this.model.addValidationTask) && !this.model.hasImageRequiredValidator) {
+        if (_.isFunction(this.model.addValidationTask)) {
             this.model.hasImageRequiredValidator = true;
-            this.model.addValidationTask('image_required', _.bind(this._doValidateImageField, this));
+            this.model.addValidationTask('image_required_' + this.cid, _.bind(this._doValidateImageField, this));
         }
     },
 
@@ -55,7 +68,9 @@
     _dispose: function() {
         //Remove specific validation task from the model
         this.model.hasImageRequiredValidator = false;
-        this.model._validationTasks = _.omit(this.model._validationTasks, 'image_required');
+        if (this.model.removeValidationTask) {
+            this.model.removeValidationTask('image_required_' + this.cid);
+        }
         app.view.Field.prototype._dispose.call(this);
     },
 
@@ -100,7 +115,7 @@
     /**
      * @override
      * @param value
-     * @returns value
+     * @return value
      */
     format: function(value) {
         if (value) {
@@ -115,8 +130,10 @@
     bindDataChange: function() {
         //Keep empty for edit because you cannot set a value of an input type `file`
         var viewType = this.view.name || this.options.viewName;
-        var ignoreViewType = ["edit", "create", "create-actions"];
-        if (_.indexOf(ignoreViewType, viewType) < 0 && this.view.action !== "edit") {
+        var ignoreViewType = ["edit", "create"];
+        if ((_.indexOf(ignoreViewType, viewType) < 0)
+            && (this.view.action !== "edit")
+            && (this.view.name !== 'merge-duplicates')) {
             app.view.Field.prototype.bindDataChange.call(this);
         }
     },
@@ -158,20 +175,40 @@
                         id: 'temp',
                         field: self.name,
                         fileId: fileId
-                    });
+                    }, {keep: true});
                     // show image
                     var image = $('<img>').addClass('hide').attr('src', url).on('load', $.proxy(self.resizeWidget, self));
                     self.$('.image_preview').html(image);
 
+                    // Add the guid to the list of fields to set on the model.
+                    if (fileId) {
+                        if (!self.model.fields[self.name + '_guid']) {
+                            self.model.fields[self.name + '_guid'] = {
+                                type: 'file_temp',
+                                group: self.name
+                            };
+                        }
+                        self.model.unset(self.name);
+                        self.model.set(self.name + '_guid', fileId);
+                    }
+
                     //Trigger a change event with param "image" so the view can detect that the dom changed.
                     self.model.trigger("change", "image");
                 },
-                error: function(error) {
-                    var fieldError = {},
-                        errors = {};
-                    fieldError[error.responseText] = {};
-                    errors[self.name] = fieldError;
-                    self.model.trigger('error:validation:' + this.field, fieldError);
+                error: function(resp) {
+                    var errors = errors || {},
+                        fieldName = self.name;
+                    errors[fieldName] = {};
+
+                    switch (resp.error) {
+                        case 'request_too_large':
+                           errors[fieldName].tooBig = true;
+                           break;
+                        default:
+                            errors[fieldName].uploadFailed = true;
+                    }
+                    self.model.unset(fieldName + '_guid');
+                    self.model.trigger('error:validation:' + this.field, errors[fieldName]);
                     self.model.trigger('error:validation', errors);
                 }
             },
@@ -273,15 +310,15 @@
 
         image.removeClass('hide');
         this.$('.delete').remove();
-        var icon = this.preview === true ? 'remove' : 'trash';
-        image.closest('label, a').after('<span class="image_btn delete icon-' + icon + ' " />');
+        var icon = this.preview === true ? 'times' : 'trash-o';
+        image.closest('label, a').after('<span class="image_btn delete fa fa-' + icon + ' " />');
     },
 
     /**
      * Utility function to append px to an integer
      *
      * @param size
-     * @returns {string}
+     * @return {string}
      */
     formatPX: function(size) {
         size = parseInt(size, 10);
@@ -294,7 +331,7 @@
      */
     resizeHeight: function(height) {
         var $image_field = this.$('.image_field'),
-            isEditAndIcon = this.$('.icon-plus').length > 0;
+            isEditAndIcon = this.$('.fa-plus').length > 0;
 
         if (isEditAndIcon) {
             var $image_btn = $image_field.find('.image_btn');
@@ -305,7 +342,7 @@
             previewHeight -= edit_btn_height ? edit_btn_height : 0;
             previewHeight = this.formatPX(previewHeight);
 
-            $image_field.find('.icon-plus').css({lineHeight: previewHeight});
+            $image_field.find('.fa-plus').css({lineHeight: previewHeight});
         }
 
 
@@ -333,19 +370,20 @@
         }
     },
 
-    /****
-     * Custom requiredValidator for image field because we need to check if the input inside the view is empty or not.
+    /**
+     * Custom requiredValidator for image field because we need to check if the
+     * input inside the view is empty or not.
      *
-     + @param {Object} fields Hash of field definitions to validate.
-     + @param {Object} errors Error validation errors
-     + @param {Function} callback Async.js waterfall callback
+     * @param {Object} fields Hash of field definitions to validate.
+     * @param {Object} errors Error validation errors.
+     * @param {Function} callback Async.js waterfall callback.
      */
     _doValidateImageField: function(fields, errors, callback) {
-        var $input = this.$('input[type=file]');
-        if (this.def.required && (_.isEmpty($input) || _.isEmpty($input.val()))) {
+        if (this.def.required && !this.model.get(this.name + '_guid') && !this.model.get(this.name)) {
             errors[this.name] = errors[this.name] || {};
             errors[this.name].required = true;
         }
+
         callback(null, fields, errors);
     },
 
@@ -363,9 +401,9 @@
         }
 
         //Change the preview of the image widget
-        this.$('.image_preview').html('<i class="icon-remove"></i>');
+        this.$('.image_preview').html('<i class="fa fa-times"></i>');
         //Put the cancel icon
-        this.$('label').after('<span class="image_btn delete icon-remove" />');
+        this.$('label').after('<span class="image_btn delete fa fa-times" />');
 
         this.$el.closest('.record-cell').addClass("error");
         this.$el.addClass('input-append error');

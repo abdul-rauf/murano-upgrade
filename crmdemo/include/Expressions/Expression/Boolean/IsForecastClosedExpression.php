@@ -52,10 +52,13 @@ class isForecastClosedExpression extends BooleanExpression
 			}
 
 			var config = App.metadata.getModule('Forecasts', 'config'),
+			    status = ['Closed Won', 'Closed Lost'];
+            if (!_.isUndefined(config)) {
 			    status = _.union(
                     config.sales_stage_won,
                     config.sales_stage_lost
                 );
+            }
 
             if (status.indexOf(value) === -1) {
                 return SUGAR.expressions.Expression.FALSE

@@ -134,8 +134,9 @@ class ExtAPIWebEx extends ExternalAPIBase implements WebMeeting {
             $xp = new DOMXPath($join_reply['responseXML']);
             $bean->join_url = $xp->query('/serv:message/serv:body/serv:bodyContent/meet:joinMeetingURL')->item(0)->nodeValue;
             // Strip out the name parts of the join URL, make them type them in. Since we are storing the join_url per meeting
-            // we can't really use one first and last name for the whole site.
+            // we can't really use one name for the whole site. Handles FN/LN or AN if returned in the join_url.
             $bean->join_url = preg_replace('/&FN=.*&LN=.*/','',$bean->join_url);
+            $bean->join_url = preg_replace('/&AN=.*/','',$bean->join_url);
             $GLOBALS['log']->debug('Join URL: '.print_r($bean->join_url,true));
 
 
@@ -321,16 +322,28 @@ class ExtAPIWebEx extends ExternalAPIBase implements WebMeeting {
           } else {
               $reply['responseXML'] = $responseXML;
               $xpath = new DOMXPath($responseXML);
-              // $status = (string)$responseXML->header->response->result;
-              $status = (string)$xpath->query('/serv:message/serv:header/serv:response/serv:result')->item(0)->nodeValue;
-              if ( $status == 'SUCCESS' ) {
-                  $reply['success'] = TRUE;
-                  $reply['errorMessage'] = '';
+
+              // Get the base node of the xpath query result to see if there is
+              // something we can inspect further. NOTE: Casting a DomNodeList to
+              // a string will have unexpected consequences.
+              $baseNode = $xpath->query('/serv:message/serv:header/serv:response/serv:result');
+
+              // If there is no baseNode then we fail here. No base node is either
+              // an empty $baseNode var or a baseNode->length of 0
+              if (empty($baseNode) || $baseNode->length == 0) {
+                $reply['success'] = false;
+                $reply['errorMessage'] = translate('LBL_ERR_NO_RESPONSE', 'EAPM');
               } else {
-                  $GLOBALS['log']->debug("Status:\n".print_r($status,true));
-                  $reply['success'] = FALSE;
-                  // $reply['errorMessage'] = (string)$responseXML->header->response->reason;
-                  $reply['errorMessage'] = (string)$xpath->query('/serv:message/serv:header/serv:response/serv:reason')->item(0)->nodeValue;
+                // Otherwise carry on with what we were doing
+                $status = $baseNode->item(0)->nodeValue;
+                if ($status == 'SUCCESS') {
+                    $reply['success'] = true;
+                    $reply['errorMessage'] = '';
+                } else {
+                    $GLOBALS['log']->debug("Status:\n".print_r($status,true));
+                    $reply['success'] = false;
+                    $reply['errorMessage'] = '' . $xpath->query('/serv:message/serv:header/serv:response/serv:reason')->item(0)->nodeValue;
+                }
               }
           }
       }

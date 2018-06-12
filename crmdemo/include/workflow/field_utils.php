@@ -11,7 +11,7 @@
  */
 
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
+// $Id: field_utils.php 56426 2010-05-12 23:53:01Z smalyshev $
 
 include_once('include/workflow/workflow_utils.php');
 include_once('include/workflow/expression_utils.php');
@@ -82,16 +82,23 @@ include_once('include/workflow/expression_utils.php');
 		}
 
 		if(!empty($field_type)){
-
 			/*
 			One off check to see if this is duration_hours or duration_minutes
 			These two fields really should be enum, but they are chars.  This is a problem,
 			since the UI for calls is really enum in 15 minute increments
 			*/
+            $sorted_fields = array();
+
 			if($selector_array['target_field']=="duration_minutes"){
 
 				$target_field_array['options'] = "duration_intervals";
 				$field_type = "enum";
+
+                //if the module is calls, then populate sorted_fields array with minute values
+                if(get_class($temp_module) == 'Call' && isset($temp_module->minutes_values)) {
+                    $target_field_array['function'] = '';
+                    $sorted_fields = $temp_module->minutes_values;
+                }
 			//end if target_field is duration_minutes or duration_hours
 			}
 
@@ -115,7 +122,6 @@ include_once('include/workflow/expression_utils.php');
 				//check for multi_select and that this is the same dropdown as previous;
 
 				//Set the value select
-				$sorted_fields = array();
 				if(!empty($target_field_array['function'])){
 					$function = $target_field_array['function'];
 					if(is_array($function) && isset($function['name'])){
@@ -136,7 +142,11 @@ include_once('include/workflow/expression_utils.php');
                     }
 					$sorted_fields = call_user_func($function);
 				}else{
-					$sorted_fields = $app_list_strings[$target_field_array['options']];
+                    //get list of strings if sorted fields has not already been populated
+                    if(count($sorted_fields) == 0)
+                    {
+                        $sorted_fields = $app_list_strings[$target_field_array['options']];
+                    }
 				}
 				if (isset($sorted_fields)) {
 					asort($sorted_fields);
@@ -339,7 +349,7 @@ include_once('include/workflow/expression_utils.php');
 				//check for multi_select and that this is the same dropdown as previous;
 
 				//Set the value select
-				$user_array = get_user_array(TRUE, "Active", "", true, null, ' AND is_group=0 ');
+				$user_array = get_user_array(true, 'Active', '', true, null, ' AND is_group = 0 OR is_group IS NULL ');
 
 				//$column_select = get_select_options_with_id($app_list_strings[$target_field_array['options']], $selected_value);
 				$column_select = get_select_options_with_id($user_array, $selected_value);
@@ -631,6 +641,14 @@ function get_display_text($temp_module, $field, $field_value, $adv_type=null, $e
         return $currency->name;
     }
 
+    // display team name for team_id field
+    if ($field == 'team_id' && !empty($field_value)) {
+        $team = BeanFactory::getBean('Teams', $field_value, array('strict_retrieve'=>true));
+        if ($team) {
+            return Team::getDisplayName($team->name, $team->name_2);
+        }
+    }
+
 	if($target_type == "assigned_user_name"){
 
 		if($adv_type==null){
@@ -718,6 +736,9 @@ function process_advanced_actions(& $focus, $field, $meta_array, & $rel_this){
 				return 1;
 			}
 		//if value is current_user
+		}
+		else if ($meta_array['value'] == 'team_set_id'){
+		    $focus->team_set_id = $meta_array['value'];
 		}
 
 		if($meta_array['ext1']=="Self"){

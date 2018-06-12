@@ -1,5 +1,5 @@
 <?php
-// created: 2015-01-11 07:07:58
+// created: 2015-02-22 18:44:41
 $listViewDefs['Opportunities'] = array (
   'NAME' => 
   array (
@@ -65,8 +65,8 @@ $listViewDefs['Opportunities'] = array (
   ),
   'DATE_CLOSED' => 
   array (
-    'width' => '10%',
-    'label' => 'LBL_LIST_DATE_CLOSED',
+    'width' => '10',
+    'label' => 'LBL_DATE_CLOSED',
     'default' => true,
   ),
   'ASSIGNED_USER_NAME' => 

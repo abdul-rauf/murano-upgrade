@@ -63,19 +63,13 @@ class SugarBeanApiHelper
                 }
 
                 $type = !empty($properties['custom_type']) ? $properties['custom_type'] : $properties['type'];
-                if ($type == 'link') {
-                    // There is a different API to fetch linked records, don't try to encode all of the related data.
-                    continue;
-                }
-
                 $field = $sfh->getSugarField($type);
 
                 if(empty($field)) continue;
 
                 if (isset($bean->$fieldName)  || $type == 'relate') {
-                     $field->apiFormatField($data, $bean, $options, $fieldName, $properties);
+                     $field->apiFormatField($data, $bean, $options, $fieldName, $properties, $fieldList, $this->api);
                 }
-
             }
 
             // mark if its a favorite
@@ -96,7 +90,15 @@ class SugarBeanApiHelper
             } else {
                 if (isset($bean->date_modified) && !empty($bean->field_defs['date_modified'])) {
                     $field = $sfh->getSugarField($bean->field_defs['date_modified']['type']);
-                    $field->apiFormatField($data, $bean, array(), 'date_modified', $bean->field_defs['date_modified']);
+                    $field->apiFormatField(
+                        $data,
+                        $bean,
+                        array(),
+                        'date_modified',
+                        $bean->field_defs['date_modified'],
+                        $fieldList,
+                        $this->api
+                    );
                 }
             }
             if ($this->api->user->isAdmin()) {
@@ -253,9 +255,10 @@ class SugarBeanApiHelper
             }
             if ( !$bean->ACLFieldAccess($fieldName, $acl, $context) ) {
                 // No write access to this field, but they tried to edit it
-                throw new SugarApiExceptionNotAuthorized('Not allowed to edit field '.$fieldName.' in module: '.$submittedData['module']);
+                throw new SugarApiExceptionNotAuthorized(
+                    'Not allowed to edit field ' . $fieldName . ' in module: ' . $bean->module_name
+                );
             }
-
         }
 
         // now update the fields
@@ -267,8 +270,16 @@ class SugarBeanApiHelper
 
             $type = !empty($properties['custom_type']) ? $properties['custom_type'] : $properties['type'];
             $field = $sfh->getSugarField($type);
+            $field->setOptions($options);
 
             if ($field != null) {
+                // validate submitted data
+                if (!$field->apiValidate($bean, $submittedData, $fieldName, $properties)) {
+                    throw new SugarApiExceptionInvalidParameter(
+                        'Invalid field value: ' . $fieldName . ' in module: ' . $bean->module_name
+                    );
+                }
+
                 if (!empty($options['massUpdate'])) {
                     $field->apiMassUpdate($bean, $submittedData, $fieldName, $properties);
                 } else {
@@ -278,6 +289,34 @@ class SugarBeanApiHelper
         }
 
         return true;
+    }
+
+    /**
+     * This code replicates the behavior in Sugar_Controller::pre_save()
+     * @param SugarBean $bean
+     * @return boolean
+     */
+    public function checkNotify($bean)
+    {
+        $check_notify = TRUE;
+        // check update
+        // if Notifications are disabled for this module set check notify to false
+        if (!empty($GLOBALS['sugar_config']['exclude_notifications'][$bean->module_dir]) && $GLOBALS['sugar_config']['exclude_notifications'][$bean->module_dir] == true) {
+            $check_notify = FALSE;
+        } else {
+            // some modules, like Users don't have an assigned_user_id
+            if (isset($bean->assigned_user_id)) {
+                // if the assigned user hasn't changed, set check notify to false
+                if (!empty($bean->fetched_row['assigned_user_id']) && $bean->fetched_row['assigned_user_id'] == $bean->assigned_user_id) {
+                    $check_notify = FALSE;
+                    // if its the same user, don't send
+                } elseif ($bean->assigned_user_id == $GLOBALS['current_user']->id) {
+                    $check_notify = FALSE;
+                }
+            }
+        }
+
+        return $check_notify;
     }
 
     /**

@@ -1,5 +1,4 @@
 <?php
- // created: 2012-04-24 14:06:19
-$dictionary['Lead']['fields']['loc_pref_c']['dependency']='';
+ // created: 2018-06-12 08:16:06
+$dictionary['Lead']['fields']['loc_pref_c']['dependency'] = '';
 
- ?>

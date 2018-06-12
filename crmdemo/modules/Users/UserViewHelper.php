@@ -57,6 +57,21 @@ class UserViewHelper {
     }
 
     /**
+     * Factory method with custom override capability
+     *
+     * @param Sugar_Smarty $smarty Smarty template object
+     * @param SugarBean $bean Bean context
+     * @param string $viewType View type as in 'EditView', 'DetailView', ...
+     * @return UserViewHelper
+     */
+    public static function create(Sugar_Smarty $smarty, SugarBean $bean, $viewType)
+    {
+        SugarAutoLoader::requireWithCustom('modules/Users/UserViewHelper.php', true);
+        $className = SugarAutoLoader::customClass('UserViewHelper');
+        return new $className($smarty, $bean, $viewType);
+    }
+
+    /**
      * This function populates the smarty class that was passed in through the constructor
      */
     public function setupAdditionalFields() {
@@ -150,13 +165,13 @@ class UserViewHelper {
 
             //bug 48170
             $user_preference_url = "module=Users&action=resetPreferences";
-            if(isset($_REQUEST['record'])){
+            if (isset($_REQUEST['record'])
+                && ($_REQUEST['record'] == $current_user->id || $current_user->isAdminForModule('Users'))
+            ) {
                 $user_preference_url .= "&record=".$_REQUEST['record'];
+                $buttons_header[]="<input type='button' class='button' id='reset_user_preferences_header' onclick='if(confirm(\"{$reset_pref_warning}\"))window.location=\"".$_SERVER['PHP_SELF'] .'?'.$user_preference_url."&reset_preferences=true\";' value='".translate('LBL_RESET_PREFERENCES','Users')."' />";
+                $buttons_footer[]="<input type='button' class='button' id='reset_user_preferences_footer' onclick='if(confirm(\"{$reset_pref_warning}\"))window.location=\"".$_SERVER['PHP_SELF'] .'?'.$user_preference_url."&reset_preferences=true\";' value='".translate('LBL_RESET_PREFERENCES','Users')."' />";
             }
-            $buttons_header[]="<input type='button' class='button' id='reset_user_preferences_header' onclick='if(confirm(\"{$reset_pref_warning}\"))window.location=\"".$_SERVER['PHP_SELF'] .'?'.$user_preference_url."&reset_preferences=true\";' value='".translate('LBL_RESET_PREFERENCES','Users')."' />";
-
-            $buttons_footer[]="<input type='button' class='button' id='reset_user_preferences_footer' onclick='if(confirm(\"{$reset_pref_warning}\"))window.location=\"".$_SERVER['PHP_SELF'] .'?'.$user_preference_url."&reset_preferences=true\";' value='".translate('LBL_RESET_PREFERENCES','Users')."' />";
-
         }
         if (isset($buttons_header)) $this->ss->assign("BUTTONS_HEADER", $buttons_header);
         if (isset($buttons_footer)) $this->ss->assign("BUTTONS_FOOTER", $buttons_footer);
@@ -263,7 +278,9 @@ class UserViewHelper {
         }
 
         // If new regular user without system generated password or new portal user
-        if(((isset($enable_syst_generate_pwd) && !$enable_syst_generate_pwd && $this->usertype!='GROUP') || $this->usertype =='PORTAL_ONLY') && empty($this->bean->id)) {
+        if (((isset($enable_syst_generate_pwd) && !$enable_syst_generate_pwd && $this->usertype!='GROUP') ||
+        $this->usertype =='PORTAL_ONLY') && (empty($this->bean->id) || (isset($_REQUEST['Duplicate']) &&
+        $_REQUEST['Duplicate'] == "Copy"))) {
             $this->ss->assign('REQUIRED_PASSWORD','1');
         } else {
             $this->ss->assign('REQUIRED_PASSWORD','0');
@@ -274,6 +291,12 @@ class UserViewHelper {
             $this->ss->assign('CHANGE_PWD', '1');
         } else {
             $this->ss->assign('CHANGE_PWD', '0');
+        }
+
+        if (User::isTrialDemoUser($this->bean->user_name)) {
+            $this->ss->assign('DISABLED', 'disabled');
+        } else {
+            $this->ss->assign('DISABLED', '');
         }
 
         // Make sure group users don't get a password change prompt
@@ -377,14 +400,7 @@ class UserViewHelper {
             $publish_url .= '&user_name='.$this->bean->user_name;
         }
 
-        $ical_url = $sugar_config['site_url']."/ical_server.php?type=ics&key=<span id=\"ical_pub_key_span\">$publish_key</span>";
-        if (! empty($this->bean->email1))
-        {
-            $ical_url .= '&email='.$this->bean->email1;
-        } else
-        {
-            $ical_url .= '&user_name='.$this->bean->user_name;
-        }
+        $ical_url = $sugar_config['site_url']."/ical_server.php?type=ics&key=<span id=\"ical_pub_key_span\">$publish_key</span>&user_id=".$this->bean->id;
 
         $this->ss->assign("CALENDAR_PUBLISH_URL", $publish_url);
         $this->ss->assign("CALENDAR_SEARCH_URL", $sugar_config['site_url']."/vcal_server.php/type=vfb&key=<span id=\"search_pub_key_span\">$publish_key</span>&email=%NAME%@%SERVER%");
@@ -552,7 +568,7 @@ class UserViewHelper {
 
         if (!isset($currentFDOW)) {$currentFDOW = 0;}
         $this->ss->assign("FDOWCURRENT", $currentFDOW);
-        $this->ss->assign("FDOWDISPLAY", $app_list_strings['dom_cal_day_long'][$currentFDOW]);
+        $this->ss->assign("FDOWDISPLAY", $fdowDays[$currentFDOW]);
 
         //// Numbers and Currency display
         require_once('modules/Currencies/ListCurrency.php');

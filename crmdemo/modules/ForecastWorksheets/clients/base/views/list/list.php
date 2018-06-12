@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$listDefs = array(
+$viewdefs['ForecastWorksheets']['base']['view']['list'] = array(
     'panels' =>
     array(
         0 =>
@@ -30,14 +30,20 @@ $listDefs = array(
                 ),
                 array(
                     'name' => 'parent_name',
-                    'label' => 'LBL_NAME',
+                    'label' => 'LBL_OPPORTUNITY_NAME',
                     'link' => true,
                     'id' => 'parent_id',
                     'sortable' => true,
                     'default' => true,
                     'enabled' => true,
                     'type' => 'parent',
-                    'readonly' => true
+                    'readonly' => true,
+                    'related_fields' => array(
+                        'parent_id',
+                        'parent_type',
+                        'parent_deleted',
+                        'name'
+                    )
                 ),
                 array(
                     'name' => 'account_name'
@@ -50,7 +56,10 @@ $listDefs = array(
                     'enabled' => true,
                     'type' => 'date',
                     'view' => 'detail',
-                    'click_to_edit' => true
+                    'click_to_edit' => true,
+                    'related_fields' => array(
+                        'date_closed_timestamp'
+                    )
                 ),
                 array(
                     'name' => 'sales_stage',
@@ -61,7 +70,10 @@ $listDefs = array(
                     'sortable' => false,
                     'default' => true,
                     'enabled' => true,
-                    'click_to_edit' => true
+                    'click_to_edit' => true,
+                    'related_fields' => array(
+                        'probability'
+                    )
                 ),
                 array(
                     'name' => 'probability',
@@ -72,7 +84,9 @@ $listDefs = array(
                     'maxValue' => 100,
                     'minValue' => 0,
                     'align' => 'right',
-                    'width' => '7%'
+                    'related_fields' => array(
+                        'sales_stage'
+                    )
                 ),
                 array(
                     'name' => 'likely_case',
@@ -85,7 +99,12 @@ $listDefs = array(
                     'skip_preferred_conversion' => true,
                     'align' => 'right',
                     'click_to_edit' => true,
-                    'width' => '22%'
+                    'related_fields' => array(
+                        'base_rate',
+                        'currency_id',
+                        'best_case',
+                        'worst_case'
+                    ),
                 ),
                 array(
                     'name' => 'best_case',
@@ -98,19 +117,12 @@ $listDefs = array(
                     'skip_preferred_conversion' => true,
                     'align' => 'right',
                     'click_to_edit' => true,
-                    'width' => '22%'
+                    'related_fields' => array(
+                        'base_rate',
+                        'currency_id'
+                    ),
                 )
             )
         )
     )
 );
-
-
-// TODO this has been commented out due to the setting being hidden in the Admin
-// Note the above arrays need to be fixed as well.
-/*
-$admin = BeanFactory::getBean('Administration');
-$config = $admin->getConfigForModule('Forecasts');
-$viewdefs['ForecastWorksheets']['base']['view']['list'] = $viewdefArray[$config['forecast_by']];
-*/
-$viewdefs['ForecastWorksheets']['base']['view']['list'] = $listDefs;

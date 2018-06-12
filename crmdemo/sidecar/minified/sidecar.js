@@ -28,7 +28,7 @@
     
     include(sidecarUrl + 'lib/handlebars/handlebars.js');
     include(sidecarUrl + 'lib/jquery/jquery.min.js');
-    include(sidecarUrl + 'lib/jquery-ui/js/jquery-ui-1.8.18.custom.min.js');
+    include(sidecarUrl + 'lib/jquery-ui/js/jquery-ui-1.11.4.custom.min.js');
     include(sidecarUrl + 'lib/backbone/underscore.js');
     include(sidecarUrl + 'lib/backbone/backbone.js');
     include(sidecarUrl + 'lib/stash/stash.js');
@@ -37,6 +37,7 @@
     include(sidecarUrl + 'lib/jquery/jquery.tinymce.js');
     include(sidecarUrl + 'lib/php-js/version_compare.js');
     include(sidecarUrl + 'lib/momentjs/min/moment.min.js');
+    include(sidecarUrl + 'lib/crosstab/src/crosstab.js');
     include(sidecarUrl + 'lib/sugarapi/sugarapi.js');
     include(sidecarUrl + 'src/app.js');
     include(sidecarUrl + 'src/utils/utils.js');
@@ -46,6 +47,7 @@
     include(sidecarUrl + 'src/utils/currency.js');
     include(sidecarUrl + 'src/core/before-event.js');
     include(sidecarUrl + 'src/core/cache.js');
+    include(sidecarUrl + 'src/core/cookie.js');
     include(sidecarUrl + 'src/core/events.js');
     include(sidecarUrl + 'src/core/error.js');
     include(sidecarUrl + 'src/view/template.js');
@@ -74,7 +76,6 @@
     include(sidecarUrl + 'lib/sugaranalytics/sugaranalytics.js');
     include(sidecarUrl + 'lib/sugaranalytics/googleanalyticsconnector.js');
     include(sidecarUrl + 'lib/sugar/sugar.searchahead.js');
-    include(sidecarUrl + 'lib/sugar/sugar.timeago.js');
     include(sidecarUrl + 'lib/sugar/sugar.liverelativedate.js');
     include(sidecarUrl + 'lib/sugar/sugar.ajaxcallInprogress.js');
     include(sidecarUrl + 'lib/sugaraccessibility/sugaraccessibility.js');
@@ -82,4 +83,5 @@
     include(sidecarUrl + 'lib/sugaraccessibility/label.js');
     include(sidecarUrl + 'lib/mousetrap/mousetrap.min.js');
     include(sidecarUrl + 'src/utils/shortcuts.js');
+    include(sidecarUrl + 'src/utils/underscore-mixins.js');
 }());

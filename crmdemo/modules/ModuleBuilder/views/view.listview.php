@@ -14,6 +14,7 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
 
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 require_once ('include/SubPanel/SubPanel.php') ;
+require_once 'modules/ModuleBuilder/parsers/views/SidecarListLayoutMetaDataParser.php';
 
 class ViewListView extends SugarView
 {
@@ -23,7 +24,7 @@ class ViewListView extends SugarView
 	protected function _getModuleTitleParams($browserTitle = false)
 	{
 	    global $mod_strings;
-	    
+
     	return array(
     	   translate('LBL_MODULE_NAME','Administration'),
     	   ModuleBuilderController::getModuleTitle(),
@@ -158,6 +159,8 @@ class ViewListView extends SugarView
     function constructSmarty ($parser)
     {
         global $mod_strings;
+        $isModuleBWC = isModuleBWC($this->editModule) ;
+
         $smarty = new Sugar_Smarty ( ) ;
         $smarty->assign ( 'translate', true ) ;
         $smarty->assign ( 'language', $parser->getLanguage () ) ;
@@ -167,6 +170,7 @@ class ViewListView extends SugarView
         $smarty->assign ( 'field_defs', $parser->getFieldDefs () ) ;
         $smarty->assign ( 'action', 'listViewSave' ) ;
         $smarty->assign ( 'view_module', $this->editModule ) ;
+
         if (!empty ( $this->subpanel ) )
         {
             $smarty->assign ( 'subpanel', $this->subpanel ) ;
@@ -192,22 +196,37 @@ class ViewListView extends SugarView
             // properties are name, value, title (optional)
             $groups [ $GLOBALS [ 'mod_strings' ] [ $column ] ] = $parser->$function () ; // call the parser functions to populate the list view columns, by default 'default', 'available' and 'hidden'
         }
-        foreach ( $groups as $groupKey => $group )
-        {
-            foreach ( $group as $fieldKey => $field )
-            {
-                if (isset ( $field [ 'width' ] ))
-                {
-                    if (substr ( $field [ 'width' ], - 1, 1 ) == '%')
-                    {
-
-                        $groups [ $groupKey ] [ $fieldKey ] [ 'width' ] = substr ( $field [ 'width' ], 0, strlen ( $field [ 'width' ] ) - 1 ) ;
+        foreach ($groups as $groupKey => $group) {
+            foreach ($group as $fieldKey => $field) {
+                if (isset($field['width'])) {
+                    if ($isModuleBWC) {
+                        $width = intval($field['width']);
+                        $unit = '%';
+                    } else {
+                        $isPercentage = strrpos($field['width'], '%') !== false;
+                        if ($isPercentage) {
+                            // We won't be bringing over the % definitions from metadata
+                            $width = '';
+                            $unit = '';
+                        } else {
+                            $width = intval($field['width']);
+                            if ($width > 0) {
+                                $unit = 'px';
+                            } else {
+                                // check if it is a valid string
+                                $width = in_array($field['width'], SidecarListLayoutMetaDataParser::getDefaultWidths()) ?
+                                    $field['width'] : '';
+                                $unit = '';
+                            }
+                        }
                     }
+                    $groups[$groupKey][$fieldKey]['width'] = $width;
+                    $groups[$groupKey][$fieldKey]['units'] = $unit;
                 }
             }
         }
 
-        $smarty->assign ( 'groups', $groups ) ;
+        $smarty->assign('groups', $groups);
         $smarty->assign('from_mb', $this->fromModuleBuilder);
 
         global $image_path;
@@ -226,11 +245,16 @@ class ViewListView extends SugarView
         if ($this->subpanel)
             $restoreAction = "onclick='ModuleBuilder.history.revert(\"{$this->editModule}\", \"{$this->editLayout}\", \"{$history->getLast()}\", \"{$this->subpanel}\")'";
 
+        $smarty->assign(
+            'onsubmit',
+            'studiotabs.generateGroupForm("edittabs"); if (countListFields()==0)' .
+            '{ModuleBuilder.layoutValidation.popup();}else{ModuleBuilder.handleSave("edittabs");} return false;'
+        );
         $buttons = array ( ) ;
-        $buttons [] = array ( 'id' =>'savebtn', 'name' => 'savebtn' , 'image' => $imageSave , 'text' => (! $this->fromModuleBuilder)?$GLOBALS [ 'mod_strings' ] [ 'LBL_BTN_SAVEPUBLISH' ]: $GLOBALS [ 'mod_strings' ] [ 'LBL_BTN_SAVE' ], 'actionScript' => "onclick='studiotabs.generateGroupForm(\"edittabs\");if (countListFields()==0) ModuleBuilder.layoutValidation.popup() ; else ModuleBuilder.handleSave(\"edittabs\" )'" ) ;
+        $buttons [] = array ( 'id' =>'savebtn', 'name' => 'savebtn' , 'type' => 'submit', 'image' => $imageSave , 'text' => (! $this->fromModuleBuilder)?$GLOBALS [ 'mod_strings' ] [ 'LBL_BTN_SAVEPUBLISH' ]: $GLOBALS [ 'mod_strings' ] [ 'LBL_BTN_SAVE' ]);
         $buttons [] = array ( 'id' => 'spacer' , 'width' => '50px' ) ;
         $buttons [] = array ( 'id' =>'historyBtn',       'name' => 'historyBtn' , 'text' => translate ( 'LBL_HISTORY' ) , 'actionScript' => "onclick='$histaction'" ) ;
-        $buttons [] = array ( 'id' => 'historyDefault' , 'name' => 'historyDefault',  'text' => translate ( 'LBL_RESTORE_DEFAULT' ) , 'actionScript' => $restoreAction ) ;
+        $buttons [] = array ( 'id' => 'historyRestoreDefaultLayout' , 'name' => 'historyRestoreDefaultLayout',  'text' => translate ( 'LBL_RESTORE_DEFAULT_LAYOUT' ) , 'actionScript' => $restoreAction ) ;
 
         $smarty->assign ( 'buttons', $this->_buildImageButtons ( $buttons ) ) ;
 
@@ -314,18 +338,24 @@ class ViewListView extends SugarView
                 continue;
             }
 
+            $type = isset($button['type']) ? $button['type'] : 'button';
             if (! empty ( $button [ 'plain' ] ))
             {
                 $text .= <<<EOQ
-	             <td><input name={$button['name']} id={$button['id']} class="button" type="button" valign='center' {$button['actionScript']}
+                 <td><input name={$button['name']} id={$button['id']} class="button" type="{$type}" valign='center'
 EOQ;
 
             } else
             {
                 $text .= <<<EOQ
-	          <td><input name={$button['name']} id={$button['id']} class="button" type="button" valign='center' style='cursor:default'  {$button['actionScript']}
+                <td><input name={$button['name']} id={$button['id']} class="button" type="{$type}" valign='center' style='cursor:default'
 EOQ;
             }
+
+            if (isset($button['actionScript'])) {
+                $text .= ' ' . $button['actionScript'];
+            }
+
             $text .= "value=\"{$button['text']}\"/></td>" ;
         }
         $text .= '</tr></table>' ;

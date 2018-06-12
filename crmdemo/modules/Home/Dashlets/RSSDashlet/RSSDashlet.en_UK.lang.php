@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: RSSDashlet.en_us.lang.php,v 1.1 2006/10/11 00:53:31 clint Exp $
 
 
 $dashletStrings['RSSDashlet'] = array('LBL_TITLE'            => 'News Feed',
@@ -26,4 +26,4 @@ $dashletStrings['RSSDashlet'] = array('LBL_TITLE'            => 'News Feed',
                                          'LBL_DBLCLICK_HELP'    => '',
                                          'ERR_LOADING_FEED'     => 'Failed loading RSS Feed',
                                          );
- 
+?>

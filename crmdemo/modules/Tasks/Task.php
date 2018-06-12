@@ -12,6 +12,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 // Task is used to store customer information.
+
+/**
+ * @property Link2 $contacts
+ */
 class Task extends SugarBean {
         var $field_name_map;
 
@@ -59,15 +63,16 @@ class Task extends SugarBean {
 	var $additional_column_fields = Array('assigned_user_name', 'assigned_user_id', 'contact_name', 'contact_phone', 'contact_email', 'parent_name');
 
     /**
-     * This is a deprecated method, please start using __construct() as this
-     * method will be removed in a future version.
-     *
-     * @deprecated since 7.0.0. Use __construct() instead.
+     * This is deprecated since 7.0.0 and will be removed in 7.9.0.
+     * Please use __construct() instead.
+     * @deprecated 7.0.0
+     * @see __construct
      */
     public function Task()
     {
-        $GLOBALS['log']->deprecated('Calls to Task::Task() are deprecated.');
         self::__construct();
+        $GLOBALS['log']->deprecated('Task::Task() is deprecated since 7.0.0. and will be removed in 7.9.0. ' .
+            'Please use Task::__construct() instead.');
     }
 
 	public function __construct() {
@@ -137,7 +142,7 @@ class Task extends SugarBean {
 		if (is_subclass_of($parent, 'Person')) {
 			$query = "SELECT first_name, last_name, assigned_user_id parent_name_owner from $parent->table_name where id = '$this->parent_id'";
 		}
-		else if (is_subclass_of($parent, 'File')) {
+		else if (is_subclass_of($parent, 'File') || $parent->module_dir == 'Documents') {
 			$query = "SELECT document_name, assigned_user_id parent_name_owner from $parent->table_name where id = '$this->parent_id'";
 		}
 		else {
@@ -163,7 +168,7 @@ class Task extends SugarBean {
 		{
             $this->parent_name = $locale->formatName($this->parent_type, $row);
 		}
-		else if (is_subclass_of($parent, 'File') && $row != null) {
+		else if ((is_subclass_of($parent, 'File') || $parent->module_dir == 'Documents') && $row != null) {
 			$this->parent_name = $row['document_name'];
 		}
 		elseif($row != null)

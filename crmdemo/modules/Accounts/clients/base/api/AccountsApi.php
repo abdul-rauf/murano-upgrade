@@ -11,10 +11,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'clients/base/api/ListApi.php';
+require_once 'clients/base/api/ModuleApi.php';
 require_once 'data/BeanFactory.php';
 
-class AccountsApi extends ListApi
+class AccountsApi extends ModuleApi
 {
     public function registerApiRest()
     {
@@ -59,8 +59,7 @@ class AccountsApi extends ListApi
             return;
         }
 
-        // in pro versions, we need sales_stage
-        $status_field = 'sales_stage';
+        $status_field = $this->getOpportunityStatusField();
 
         $query = new SugarQuery();
         $query->select(array($status_field, 'amount_usdollar'));
@@ -97,5 +96,17 @@ class AccountsApi extends ListApi
             $data[$status]['count']++;
         }
         return $data;
+    }
+
+    /**
+     * Figure out which Opportunity Status Field To Use based on the `opps_view_by` setting
+     *
+     * @return string
+     */
+    protected function getOpportunityStatusField()
+    {
+        $status_field = 'sales_stage';
+
+        return $status_field;
     }
 }

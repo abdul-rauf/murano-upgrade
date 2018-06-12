@@ -89,6 +89,7 @@ class EmailUI {
 
 		$this->preflightUserCache();
 		$ie = BeanFactory::getBean('InboundEmail');
+        $ie->disable_row_level_security = true;
 
 		// focus listView
 		$list = array(
@@ -138,6 +139,12 @@ class EmailUI {
 		// settings: general
 		$e2UserPreferences = $this->getUserPrefsJS();
 		$emailSettings = $e2UserPreferences['emailSettings'];
+
+		$this->smarty->assign('disable_account_config',
+			SugarConfig::getInstance()->get("disable_user_email_config", false)
+			&& !$current_user->isAdminForModule("Emails") ? "true" : "false"
+		);
+
 
 		///////////////////////////////////////////////////////////////////////
 		////	USER SETTINGS
@@ -445,6 +452,7 @@ eoq;
         $this->smarty->assign('app_strings', $app_strings);
 		$this->smarty->assign('mod_strings', $email_mod_strings);
         $ie1 = BeanFactory::getBean('InboundEmail');
+        $ie1->disable_row_level_security = true;
 		$ie1->team_id = empty($current_user->default_team) ? $current_user->team_id : $current_user->default_team;
 		$ie1->team_set_id = $current_user->team_set_id;
 
@@ -501,6 +509,7 @@ eoq;
 		$return = array();
 
 		$ie1 = BeanFactory::getBean('InboundEmail');
+        $ie1->disable_row_level_security = true;
 		$ie1->team_set_id = '';
 		$teamSetField = new EmailSugarFieldTeamsetCollection($ie1, $ie1->field_defs, '', 'Distribute');
 		$code2 = $teamSetField->get_code(TRUE);
@@ -509,7 +518,6 @@ eoq;
 		//return $return;
 
 	} // fn
-
 
 	////	END CORE
 	///////////////////////////////////////////////////////////////////////////
@@ -1087,10 +1095,11 @@ eoq;
 		global $app_strings;
 
 		$tree = new Tree("frameFolders");
-		$tree->tree_style= 'vendor/ytree/TreeView/css/check/tree.css';
+		$tree->tree_style= getVersionedPath('vendor/ytree/TreeView/css/check/tree.css');
 
 		$nodes = array();
 		$ie = BeanFactory::getBean('InboundEmail');
+        $ie->disable_row_level_security = true;
 		$refreshOffset = $this->cacheTimeouts['folders']; // 5 mins.  this will be set via user prefs
 
 		$rootNode = new ExtNode($app_strings['LBL_EMAIL_HOME_FOLDER'], $app_strings['LBL_EMAIL_HOME_FOLDER']);
@@ -1428,11 +1437,13 @@ eoq;
 				}
 			}
 		} else {
+			// case & bug specific
+			$focus->source = 'InboundEmail';
 			// bugs, cases, tasks
 			$focus->name = trim($email->name);
 		}
 
-		$focus->description = trim(strip_tags($email->description));
+		$focus->description = trim(strip_tags(br2nl($email->description)));
 		$focus->assigned_user_id = $current_user->id;
 
 		$focus->team_id = $current_user->default_team;
@@ -1482,6 +1493,19 @@ eoq;
 		$EditView->view = 'EmailQCView';
 		$EditView->defs['templateMeta']['form']['headerTpl'] = 'include/EditView/header.tpl';
 		$EditView->defs['templateMeta']['form']['footerTpl'] = 'include/EditView/footer.tpl';
+
+        $json = new JSON(JSON_LOOSE_TYPE);
+        $prefillData = $json->encode($emailAddress);
+        $EditView->assignVar('prefillData', $prefillData);
+        $EditView->assignVar('prefillEmailAddresses', 'false');
+        
+        if ($module == 'Users') {
+            $EditView->assignVar('useReplyTo', true);
+        } else {
+            $EditView->assignVar('useOptOut', true);
+            $EditView->assignVar('useInvalid', true);
+        }
+
 		$meta = array();
 		$meta['html'] = $jsLanguage . $EditView->display(false, true);
 		$meta['html'] = str_replace("src='".getVersionedPath('include/SugarEmailAddress/SugarEmailAddress.js')."'", '', $meta['html']);
@@ -1533,7 +1557,6 @@ eoq;
 		$sqs_objects1 = $teamSetField->createQuickSearchCode(true);
 		//$sqs_objects = array_merge($sqs_objects, $sqs_objects1);
 		$smarty->assign("TEAM_SET_FIELD", $code . $sqs_objects1);
-
         $showAssignTo = false;
         if (!isset($vars['showAssignTo']) || $vars['showAssignTo'] == true) {
         	$showAssignTo = true;
@@ -1786,6 +1809,7 @@ eoq;
 			if(empty($ie)) {
 
 				$ie = BeanFactory::getBean('InboundEmail');
+                $ie->disable_row_level_security = true;
 			}
 			$ie->retrieve($ieId);
 			$ie->mailbox = $folder;
@@ -1839,6 +1863,7 @@ function doAssignment($distributeMethod, $ieid, $folder, $uids, $users) {
 		$emailIds = array();
 		$uids = explode($app_strings['LBL_EMAIL_DELIMITER'], $uids);
 		$ie = BeanFactory::getBean('InboundEmail', $ieid);
+        $ie->disable_row_level_security = true;
 		$messageIndex = 1;
 		// dealing with an inbound email data so we need to import an email and then
 		foreach($uids as $uid) {
@@ -2121,8 +2146,13 @@ function getSingleMessage($ie) {
 eoq;
 		}
 
-		 if(empty($out['meta']['email']['description']))
-                $out['meta']['email']['description'] = $mod_strings['LBL_EMPTY_EMAIL_BODY'];
+        if (!empty($out['meta']['email']['name'])) {
+            $out['meta']['email']['name'] = to_html($out['meta']['email']['name']);
+        }
+
+        if (empty($out['meta']['email']['description'])) {
+            $out['meta']['email']['description'] = $mod_strings['LBL_EMPTY_EMAIL_BODY'];
+        }
 
 		if($noCache) {
 			$GLOBALS['log']->debug("EMAILUI: getSingleMessage() NOT using cache file");
@@ -2147,6 +2177,7 @@ eoq;
 
 
 		$ie = BeanFactory::getBean('InboundEmail', $ieId);
+        $ie->disable_row_level_security = true;
 		$list = $ie->displayFolderContents($mbox, $forceRefresh);
 
 		return $list;
@@ -2290,7 +2321,7 @@ eoq;
 
 		$desc = (!empty($html)) ? $html : $plain;
 
-		$email->description = $header.$email->quoteHtmlEmailForNewEmailUI($desc);
+        $email->description = $header.$email->quoteHtmlEmail($desc);
 		return $email;
 
 	}
@@ -2784,7 +2815,7 @@ eoq;
 			$toArray = $ie->email->email2ParseAddressesForAddressesOnly($ret['to']);
 		} // else
         foreach($ieAccountsFull as $k => $v) {
-        	$storedOptions = unserialize(base64_decode($v->stored_options));
+        	$storedOptions = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($v->stored_options));
 			if (  array_search_insensitive($storedOptions['from_addr'], $toArray)) {
         		if ($v->is_personal) {
 					$foundInPersonalAccounts = true;
@@ -2795,8 +2826,10 @@ eoq;
 			} // if
         } // foreach
 
-	    $oe = new OutboundEmail();
-        $system = $oe->getSystemMailerSettings();
+        $oe = new OutboundEmail();
+        if ($oe ->isAllowUserAccessToSystemDefaultOutbound()) {
+            $system = $oe->getSystemMailerSettings();
+        }
 
         $return = $current_user->getUsersNameAndEmail();
 		$return['name'] = from_html($return['name']);
@@ -2829,7 +2862,7 @@ eoq;
 
         $ieAccountsFrom= array();
         foreach($ieAccountsFull as $k => $v) {
-        	$storedOptions = unserialize(base64_decode($v->stored_options));
+        	$storedOptions = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($v->stored_options));
         	$storedOptionsName = from_html($storedOptions['from_name']);
 
         	$selected = false;

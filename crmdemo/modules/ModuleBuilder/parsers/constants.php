@@ -20,6 +20,7 @@ define('MB_LISTLAYOUTMETADATA', 'listLayoutMetaData');
 define('MB_LISTVIEW', 'listview');
 define('MB_SIDECARLISTVIEW', 'list');
 define('MB_SIDECARPOPUPVIEW', 'selection-list');
+define('MB_SIDECARDUPECHECKVIEW', 'dupecheck-list');
 define('MB_SEARCHVIEW', 'searchview');
 define('MB_BASICSEARCH', 'basic_search' );
 define('MB_ADVANCEDSEARCH', 'advanced_search' );
@@ -46,6 +47,8 @@ define('MB_WIRELESSBASICSEARCH', 'wireless_basic_search' );
 define('MB_WIRELESSADVANCEDSEARCH', 'wireless_advanced_search' );
 define('MB_WIRELESS', 'mobile');
 define('MB_RECORDVIEW', 'recordview');
+define('MB_FILTERVIEW', 'filter');
+define('MB_BWCFILTERVIEW', 'searchfields');
 
 class MBConstants
 {

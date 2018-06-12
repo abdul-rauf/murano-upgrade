@@ -22,6 +22,9 @@ class EAPMController extends SugarController
 
     var $admin_actions = array('listview', 'index');
 
+    //use for check result of Connect
+    protected $failed = false;
+
 	public function process() {
 		if(!is_admin($GLOBALS['current_user']) && in_array(strtolower($this->action), $this->admin_actions)) {
 			$this->hasAccess = false;
@@ -37,6 +40,17 @@ class EAPMController extends SugarController
 
         if($this->return_module == 'Import'){
             $url .= "&application={$this->bean->application}&return_module={$this->return_module}&return_action={$this->return_action}";
+        } elseif ($this->failed && empty($this->bean->id) && $this->action === 'Save') {
+            //Save recently entered data, when creating a new record
+            $redirectArgs = array();
+            foreach (array('name', 'url', 'application') as $key) {
+                if (!empty($_POST[$key])) {
+                    $redirectArgs[$key] = $_POST[$key];
+                }
+            }
+            if (!empty($redirectArgs)) {
+                $url .= '&' . http_build_query($redirectArgs);
+            }
         }
         return $this->set_redirect($url);
     }
@@ -61,6 +75,21 @@ class EAPMController extends SugarController
         $this->bean->validated = false;
         $this->bean->save_cleanup();
         $this->api->loadEAPM($this->bean);
+
+        if (!$this->bean->deleted && $this->api->authMethod != 'oauth') {
+            // OAuth beans have to be handled specially.
+            $reply = $this->api->checkLogin();
+            if (!$reply['success']) {
+                $this->failed = true;
+            }
+        }
+    }
+
+    public function action_save(){
+        //Check result of the Connect
+        if (!$this->failed) {
+            $this->bean->save(!empty($this->bean->notify_on_save));
+        }
     }
 
     protected function post_save()
@@ -103,8 +132,16 @@ class EAPMController extends SugarController
             // To prevent the normal handler from issuing a header call and destroying our neat little javascript we'll
             // end right here.
             sugar_cleanup(true);
-        } else {
-            return;
+        } elseif ($this->api->authMethod == 'oauth2' && !$this->bean->deleted) {
+
+            $client = $this->api->getClient();
+            $loginUrl = $client->createAuthUrl();
+
+            echo '<script src="' . getJSPath('modules/EAPM/EAMPOauth.js') . '" type="text/javascript"></script><script type="text/javascript">EAMPOauth.startOauthAuthentication("' . $loginUrl . '","index.php?module=EAPM&action=oauth&record='.$this->bean->id . '");</script>';
+
+            // To prevent the normal handler from issuing a header call and destroying our neat little javascript we'll
+            // end right here.
+            sugar_cleanup(true);
         }
     }
 
@@ -182,6 +219,23 @@ class EAPMController extends SugarController
             $this->action_oauth();
         }
 	}
+
+    /** {@inheritdoc} */
+    protected function action_delete()
+    {
+        if ($this->bean->application == 'Google') {
+            require_once 'include/externalAPI/Google/ExtAPIGoogle.php';
+            $api = new ExtAPIGoogle();
+            $api->revokeToken();
+        } else {
+            parent::action_delete();
+        }
+    }
+
+    public function action_GoogleOauth2Redirect()
+    {
+        $this->view = 'googleoauth2redirect';
+    }
 
     protected function post_QuickSave(){
         $this->post_save();

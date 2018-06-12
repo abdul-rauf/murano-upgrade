@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
+ * $Id$
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
@@ -34,7 +34,7 @@ $viewdefs['ContractTypes']['EditView'] = array(
 	         ),
 	         array(array('name'=>'list_order',
 	                     'label'=>'LBL_LIST_ORDER',
-	                     'displayParams'=>array('required'=>true, 'size'=>4)
+	                     'displayParams'=>array('size'=>4)
 	               ),
 	         ),
          ),

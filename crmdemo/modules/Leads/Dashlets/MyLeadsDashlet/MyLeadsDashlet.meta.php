@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: MyLeadsDashlet.meta.php 29440 2007-11-09 20:04:52Z awu $
 
 $dashletMeta['MyLeadsDashlet'] = array('module'		=> 'Leads',
 									   'title'       => translate('LBL_LIST_MY_LEADS', 'Leads'), 

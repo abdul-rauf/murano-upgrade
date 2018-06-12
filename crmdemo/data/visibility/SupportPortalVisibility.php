@@ -83,6 +83,19 @@ class SupportPortalVisibility extends SugarVisibility
 
         // The Portal Rules Of Visibility:
         switch ($this->bean->module_dir) {
+            case 'Categories':
+                if ($query == '' && $queryType == 'where') {
+                    $queryPart = " $table_alias.is_external=1 ";
+                }
+                break;
+            case 'KBContents':
+                if ($queryType == 'where') {
+                    $status = KBContent::ST_PUBLISHED;
+                    $queryPart = " $table_alias.active_rev=1 AND"
+                                ." $table_alias.is_external=1 AND"
+                                ." ($table_alias.status = '{$status}') ";
+                }
+                break;
             case 'Contacts':
                 // Contacts: Any contact related to the account list
                 // Special case, if there are no accounts in the list, at least allow them access to their own contact
@@ -109,19 +122,9 @@ class SupportPortalVisibility extends SugarVisibility
                 }
 
                 break;
-            case 'KBDocuments':
-                // KBDocuments: Any KBDocument where is_external_article = 1 AND ( exp_date is empty or > today ) AND status_id = Published
-                if ( $queryType == 'where' ) { 
-                    $queryPart = " {$table_alias}.is_external_article = 1 "
-                        ."AND ( {$table_alias}.exp_date IS NULL OR {$table_alias}.exp_date > " . $GLOBALS['db']->now() . " ) "
-                        ."AND ( {$table_alias}.active_date = " . $GLOBALS['db']->emptyValue('date') . " OR {$table_alias}.active_date < " . $GLOBALS['db']->now() . " ) "
-                        ."AND {$table_alias}.status_id = 'Published' ";
-                }
-
-                break;
             case 'Notes':
                 // Notes: Notes that are connected to a Case or a Bug that is connected to one of our Accounts and has the portal_flag set to true
-                if ( $queryType == 'from' ) {
+                if ($queryType == 'from') {
                     if ( !empty($accountIds) ) {
                         // Only add in this join if the user can see bugs related to cases
                         $this->bean->load_relationship('cases');
@@ -138,13 +141,56 @@ class SupportPortalVisibility extends SugarVisibility
 
                     $queryPart .= " ".$this->bean->bugs->getJoin(array('join_table_alias'=>'bugs_pv','join_type'=>' LEFT JOIN '));
 
-                } else if ( $queryType == 'where' ) {
+                } elseif ($queryType == 'where') {
+                    $KBContentsCondition = "{$table_alias}.parent_type = 'KBContents' "
+                                    . "OR {$table_alias}.parent_type = 'KBContentsAttachments'";
+
                     if ( !empty($accountIds) ) {
-                        $queryPart = " {$table_alias}.portal_flag = 1 AND ( bugs_pv.id IS NOT NULL OR accounts_cases_pv.id IS NOT NULL ) ";
+                        $queryPart = " {$table_alias}.portal_flag = 1 AND ( bugs_pv.id IS NOT NULL OR accounts_cases_pv.id IS NOT NULL OR {$KBContentsCondition}) ";
                     } else {
-                        $queryPart = " {$table_alias}.portal_flag = 1 AND bugs_pv.id IS NOT NULL ";
+                        $queryPart = " {$table_alias}.portal_flag = 1 AND "
+                                    . "(bugs_pv.id IS NOT NULL OR {$KBContentsCondition}) ";
                     }
                 }
+                break;
+            case 'pmse_Inbox':
+            case 'pmse_Business_Rules':
+            case 'pmse_Emails_Templates':
+            case 'pmse_Project':
+            case 'pmse_Project/pmse_BpmAccessManagement':
+            case 'pmse_Project/pmse_BpmActivityDefinition':
+            case 'pmse_Project/pmse_BpmActivityStep':
+            case 'pmse_Project/pmse_BpmActivityUser':
+            case 'pmse_Project/pmse_BpmCaseData':
+            case 'pmse_Project/pmse_BpmDynaForm':
+            case 'pmse_Project/pmse_BpmEventDefinition':
+            case 'pmse_Project/pmse_BpmFlow':
+            case 'pmse_Project/pmse_BpmFormAction':
+            case 'pmse_Project/pmse_BpmGatewayDefinition':
+            case 'pmse_Project/pmse_BpmGroup':
+            case 'pmse_Project/pmse_BpmGroupUser':
+            case 'pmse_Project/pmse_BpmnActivity':
+            case 'pmse_Project/pmse_BpmnArtifact':
+            case 'pmse_Project/pmse_BpmnBound':
+            case 'pmse_Project/pmse_BpmnData':
+            case 'pmse_Project/pmse_BpmnDiagram':
+            case 'pmse_Project/pmse_BpmnDocumentation':
+            case 'pmse_Project/pmse_BpmnEvent':
+            case 'pmse_Project/pmse_BpmnExtension':
+            case 'pmse_Project/pmse_BpmnFlow':
+            case 'pmse_Project/pmse_BpmnGateway':
+            case 'pmse_Project/pmse_BpmnLane':
+            case 'pmse_Project/pmse_BpmnLaneset':
+            case 'pmse_Project/pmse_BpmnNotes':
+            case 'pmse_Project/pmse_BpmnParticipant':
+            case 'pmse_Project/pmse_BpmnProcess':
+            case 'pmse_Project/pmse_BpmProcessDefinition':
+            case 'pmse_Project/pmse_BpmRelatedDependency':
+            case 'pmse_Project/pmse_BpmThread':
+                // PA tables need to be visible in Portal without restrictions because they are acting globally
+            case 'pmse_Project/pmse_BpmConfig':
+                // This is absolutely needed otherwise PMSESettings cannot
+                // retrieve config and will end up in a infinite loop.
                 break;
             case 'Cases':
                 // Cases: Any case that has the portal_viewable flag set to true and is related to the account list

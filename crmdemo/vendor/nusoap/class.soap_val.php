@@ -52,7 +52,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 * xsd:anyType and user-defined types.
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
-
+* @version  $Id: class.soap_val.php 57813 2010-08-19 17:34:44Z kjing $
 * @access   public
 */
 class soapval extends nusoap_base {

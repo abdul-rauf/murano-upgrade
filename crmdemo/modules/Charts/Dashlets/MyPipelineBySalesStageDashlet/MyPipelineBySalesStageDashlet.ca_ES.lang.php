@@ -10,13 +10,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
- * Description:  Defines the Catalan language pack for the base application. 
 
- * Source: SugarCRM 5.2.0
- * Contributor(s): Ramón Feliu (ramon@slay.es).
- ********************************************************************************/
+ // $Id: MyPipelineBySalesStageDashlet.en_us.lang.php 29243 2007-11-06 20:04:35Z awu $
 
-$dashletStrings['MyPipelineBySalesStageDashlet'] = array('LBL_TITLE'       => 'El Meu Objectiu per Etapa de Vendes',
+
+$dashletStrings['MyPipelineBySalesStageDashlet'] = array('LBL_TITLE'       => 'La meva canalització per etapa de vendes',
                                                          'LBL_DESCRIPTION' => 'Gràfic de Barres Verticals amb el Meu Objectiu per Etapa de Vendes',
                                                          'LBL_REFRESH'     => 'Actualitzar Gràfic');
+?>

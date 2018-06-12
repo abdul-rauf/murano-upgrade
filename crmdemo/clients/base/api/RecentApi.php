@@ -54,6 +54,7 @@ class RecentApi extends SugarApi
             $options['limit'] = (int) $args['max_num'];
         }
 
+        $options['limit'] = $this->checkMaxListLimit($options['limit']);
         $options['offset'] = 0;
 
         if (!empty($args['offset'])) {

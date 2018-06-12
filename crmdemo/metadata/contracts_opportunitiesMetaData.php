@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: contracts_opportunitiesMetaData.php 55782 2010-04-02 21:07:20Z clee $
 
 
 $dictionary['contracts_opportunities'] = array (
@@ -29,17 +29,17 @@ $dictionary['contracts_opportunities'] = array (
 	),
 	'relationships' => array (
 		'contracts_opportunities' => array(
-			'lhs_module' => 'Contracts',
-			'lhs_table' => 'contracts',
-			'lhs_key' => 'id',
-			'rhs_module' => 'Opportunities',
-			'rhs_table' => 'opportunities',
-			'rhs_key' => 'id',
-			'relationship_type' => 'many-to-many',
-			'join_table' => 'contracts_opportunities',
-			'join_key_lhs' => 'contract_id',
-			'join_key_rhs' => 'opportunity_id'
-		),
-	),
+            'lhs_module' => 'Opportunities',
+            'lhs_table' => 'opportunities',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Contracts',
+            'rhs_table' => 'contracts',
+            'rhs_key' => 'id',
+            'relationship_type' => 'one-to-many',
+            'join_table' => 'contracts_opportunities',
+            'join_key_lhs' => 'opportunity_id',
+            'join_key_rhs' => 'contract_id',
+            'true_relationship_type' => 'one-to-many',
+        ),
+    ),
 );
-?>

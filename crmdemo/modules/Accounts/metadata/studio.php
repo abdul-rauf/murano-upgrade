@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: studio.php 16622 2006-09-05 23:03:50Z awu $
 
 $GLOBALS['studioDefs']['Accounts'] = array(
 	'LBL_DETAILVIEW'=>array(

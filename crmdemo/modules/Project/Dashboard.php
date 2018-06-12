@@ -1,4 +1,5 @@
 <?php
+
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -145,13 +146,20 @@ foreach ($projects as $project) {
     $project->load_relationship("contact_resources");
     $contacts = $project->contact_resources->getBeans($contactBean);
 
-    for ($i = 0; $i < count($users); $i++) {
-        if (!isset ($resources[$users[$i]->id]))
-            $resources[$users[$i]->id] = $users[$i]->full_name;
+    if (is_array($users)) {
+        foreach ($users as $item) {
+            if (!isset($resources[$item->id])) {
+                $resources[$item->id] = $item->full_name;
+            }
+        }
     }
-    for ($i = 0; $i < count($contacts); $i++) {
-        if (!isset ($resources[$contacts[$i]->id]))
-            $resources[$contacts[$i]->id] = $contacts[$i]->full_name;
+
+    if (is_array($contacts)) {
+        foreach ($contacts as $item) {
+            if (!isset($resources[$item->id])) {
+                $resources[$item->id] = $item->full_name;
+            }
+        }
     }
     /////////////////////////////////////////
 }

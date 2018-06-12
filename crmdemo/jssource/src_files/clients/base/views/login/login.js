@@ -17,21 +17,23 @@
  */
 ({
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     plugins: ['ErrorDecoration'],
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     fallbackFieldTemplate: 'edit',
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     events: {
         'click [name=login_button]': 'login',
-        'keypress': 'handleKeypress'
+        'keypress': 'handleKeypress',
+        "click [name=external_login_button]": "external_login",
+        "click [name=login_form_button]": "login_form"
     },
 
     /**
@@ -103,7 +105,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     initialize: function(options) {
         if (app.progress) {
@@ -121,28 +123,44 @@
         if (config && app.config.forgotpasswordON === true) {
             this.showPasswordReset = true;
         }
+        
+        if (config && 
+            app.config.externalLogin === true && 
+            app.config.externalLoginSameWindow === true &&
+            !_.isEmpty(app.config.externalLoginUrl)
+        ) {
+            this.externalLoginForm = true;
+            this.externalLoginUrl = app.config.externalLoginUrl;
+        }
 
         // Set the page title to 'SugarCRM' while on the login screen
         $(document).attr('title', 'SugarCRM');
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _render: function() {
         this.logoUrl = app.metadata.getLogoUrl();
+        //It's possible for errors to prevent the postLogin from triggering so contentEl may be hidden.
+        app.$contentEl.show();
 
         this._super('_render');
 
         this.refreshAdditionalComponents();
 
         if (!this._isSupportedBrowser()) {
+            var linkLabel = Handlebars.Utils.escapeExpression(app.lang.get('LBL_ALERT_SUPPORTED_PLATFORMS_LINK'));
+            var link = '<a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">' +  linkLabel + '</a>';
+            var safeLink = new Handlebars.SafeString(link);
+            var label = app.lang.get('TPL_ALERT_BROWSER_SUPPORT', null, {link: safeLink});
+
             app.alert.show(this._alertKeys.unsupportedBrowser, {
                 level: 'warning',
                 title: '',
                 messages: [
-                    app.lang.getAppString('LBL_ALERT_BROWSER_NOT_SUPPORTED'),
-                    app.lang.getAppString('LBL_ALERT_BROWSER_SUPPORT')
+                    app.lang.get('LBL_ALERT_BROWSER_NOT_SUPPORTED'),
+                    label
                 ]
             });
         }
@@ -156,7 +174,7 @@
                 title: '',
                 messages: [
                     '',
-                    app.lang.getAppString(config.system_status.message)
+                    app.lang.get(config.system_status.message)
                 ]
             });
         }
@@ -193,7 +211,7 @@
 
                     app.alert.show(this._alertKeys.login, {
                         level: 'process',
-                        title: app.lang.getAppString('LBL_LOADING'),
+                        title: app.lang.get('LBL_LOADING'),
                         autoClose: false
                     });
 
@@ -233,7 +251,7 @@
      * login setup we need to do prior to rendering the rest of the Sugar app.
      */
     postLogin: function() {
-        if (!app.user.get('show_wizard')) {
+        if (!app.user.get('show_wizard') && !app.user.get('is_password_expired')) {
 
             this.refreshAdditionalComponents();
 
@@ -265,10 +283,10 @@
             // For Safari & Chrome jQuery.Browser returns the webkit revision
             // instead of the browser version and it's hard to determine this
             // number.
-            msie : {min:9, max:11}, // IE 9, 10, 11
-            safari : {min:537}, // Safari 7.1
-            mozilla : {min:37}, // Firefox 37
-            chrome : {min:537.36} // Chrome 42
+            msie : {min:11}, // IE 11
+            safari : {min:600}, // Safari 8.0.8, 9.0.1
+            mozilla : {min:41}, // Firefox 41, 42
+            chrome : {min:537.36} // Chrome 47
         };
 
         var current = parseFloat($.browser.version);
@@ -280,6 +298,11 @@
         if ((/Trident\/7\./).test(navigator.userAgent)) {
             var supported = supportedBrowsers['msie'];
             return current >= supported.min;
+        // jquery $.browser returns 'safari' on a Chrome browser
+        // we want to make sure the right browser type to be checked
+        } else if ($.browser['safari'] && navigator.userAgent.indexOf('Chrome') != -1) {
+            var supported = supportedBrowsers['chrome'];
+            return current >= supported.min;
         } else {
             for (var b in supportedBrowsers) {
                 if ($.browser[b]) {
@@ -288,5 +311,24 @@
                 }
             }
         }
+    },
+    
+    /**
+     * Process Login
+     */
+    external_login: function() {
+        window.location.replace(this.externalLoginUrl);
+    },
+    
+    /**
+     * Show Login form
+     */
+    login_form: function() {
+        app.config.externalLogin = false;
+        app.controller.loadView({
+            module: "Login",
+            layout: "login",
+            create: true
+        });
     }
 })

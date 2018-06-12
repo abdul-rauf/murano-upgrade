@@ -12,7 +12,7 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: EmailAuthenticateUser.php 51443 2009-10-12 20:34:36Z jmertic $
 
 /**
  * This file is where the user authentication occurs. No redirection should happen in this file.

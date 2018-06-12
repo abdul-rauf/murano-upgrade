@@ -10,18 +10,20 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- 
-$dashletStrings['RSSDashlet'] = 
-  array(
-        'LBL_TITLE'            => 'Uutissyöte',
-        'LBL_DESCRIPTION'      => 'Uutissyöte',
-        'LBL_SAVING'           => 'Tallennetaan',
-        'LBL_SAVED'            => 'Tallennettu',
-        'LBL_AUTO_SCROLL' => 'Automaattinen vieritys',
-        'LBL_SCROLL_SPEED' => 'Vieritysnopeus (%)',
-        'LBL_CONFIGURE_TITLE' => 'Otsikko',
-        'LBL_CONFIGURE_HEIGHT' => 'Korkeus (1-300)',
-        'LBL_CONFIGURE_RSSURL' => 'RSS URL',
-        'LBL_DBLCLICK_HELP'    => '',
-        'ERR_LOADING_FEED' => 'RSS-syötteen lataaminen epäonnistui',
-        );
+
+ // $Id: RSSDashlet.en_us.lang.php,v 1.1 2006/10/11 00:53:31 clint Exp $
+
+
+$dashletStrings['RSSDashlet'] = array('LBL_TITLE'            => 'Uutissyötteet',
+                                         'LBL_DESCRIPTION'      => 'Uutissyötteet',
+                                         'LBL_SAVING'           => 'Tallennetaan',
+                                         'LBL_SAVED'            => 'Valmis',
+                                         'LBL_AUTO_SCROLL'      => 'Automaattinen vieritys',
+                                          'LBL_SCROLL_SPEED'      => 'Vieritysnopeus (%)',
+                                         'LBL_CONFIGURE_TITLE'  => 'Nimike',
+                                         'LBL_CONFIGURE_HEIGHT' => 'Korkeus (1-300)',
+                                         'LBL_CONFIGURE_RSSURL' => 'RSS URL',
+                                         'LBL_DBLCLICK_HELP'    => '',
+                                         'ERR_LOADING_FEED'     => 'RSS-syötteen lataaminen epäonnistui',
+                                         );
+?>

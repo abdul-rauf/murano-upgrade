@@ -17,20 +17,20 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'label' =>'LNK_NEW_QUOTE',
         'acl_action'=>'create',
         'acl_module'=>$module_name,
-        'icon' => 'icon-plus',
+        'icon' => 'fa-plus',
     ),
     array(
         'route'=>'#'.$module_name,
         'label' =>'LNK_QUOTE_LIST',
         'acl_action'=>'list',
         'acl_module'=>$module_name,
-        'icon' => 'icon-reorder',
+        'icon' => 'fa-bars',
     ),
     array(
         'route'=>'#bwc/index.php?module=Reports&action=index&view=quotes&query=true&report_module=Quotes',
         'label' =>'LNK_QUOTE_REPORTS',
         'acl_action'=>'list',
         'acl_module'=>$module_name,
-        'icon' => 'icon-bar-chart',
+        'icon' => 'fa-bar-chart-o',
     ),
 );

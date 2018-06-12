@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: UserDemoData.php 55581 2010-03-25 12:36:48Z jmertic $
 
 class UserDemoData {
 	var $_user;
@@ -85,7 +85,6 @@ class UserDemoData {
 		$u->employee_status = 'Active';
 		$u->is_admin = $is_admin;
         $u->is_group = 0;
-		//$u->user_password = $u->encrypt_password($user_name);
 		$u->user_hash = User::getPasswordHash($user_name);
 		$u->reports_to_id = $reports_to;
 		$u->reports_to_name = $reports_to_name;
@@ -112,6 +111,11 @@ class UserDemoData {
                 if($role['name'] == "Sales Administrator") {
                     $u->load_relationship('aclroles');
                     $u->aclroles->add($role['id']);
+
+                    // re-save user manually. otherwise the relation to role set will not be saved
+                    // because One2MBeanRelationship::add() doesn't call SugarRelationship::addToResaveList()
+                    // in workflow and during installation
+                    $u->save();
                     break;
                 }
             }

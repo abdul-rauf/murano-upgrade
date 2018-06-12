@@ -1,6 +1,5 @@
 <?php
-
-/*
+ /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
@@ -10,13 +9,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
+/*
+ * Created on Aug 14, 2007
+ *
+ * To change the template for this generated file go to
+ * Window - Preferences - PHPeclipse - PHP - Code Templates
+ */
 $object_name = strtolower($object_name);
  $app_list_strings = array (
 
   $object_name.'_type_dom' =>
   array (
-  	'Administration' => '管理员',
+  	'Administration' => 'Administration',
     'Product' => '产品',
     'User' => '用户',
   ),
@@ -25,9 +29,9 @@ $object_name = strtolower($object_name);
     'New' => '新建',
     'Assigned' => '已分配',
     'Closed' => '已关闭',
-    'Pending Input' => '等待输入',
+    'Pending Input' => '待输入',
     'Rejected' => '已拒绝',
-    'Duplicate' => '重复',
+    'Duplicate' => '复制',
   ),
   $object_name.'_priority_dom' =>
   array (
@@ -39,9 +43,9 @@ $object_name = strtolower($object_name);
   array (
   	'' => '',
   	'Accepted' => '已接受',
-    'Duplicate' => '重复',
+    'Duplicate' => '复制',
     'Closed' => '已关闭',
-    'Out of Date' => '已过期',
+    'Out of Date' => '过期',
     'Invalid' => '无效',
   ),
   );

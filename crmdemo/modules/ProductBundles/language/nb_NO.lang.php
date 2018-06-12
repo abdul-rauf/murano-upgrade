@@ -1,7 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,20 +9,21 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
 $mod_strings = array (
-  'LBL_BUNDLE_STAGE' => 'Gruppefase:',
-  'LBL_DEAL_TOT' => 'Total rabatt',
-  'LBL_DEAL_TOT_USDOLLAR' => 'Total rabatt (US Dollar)',
-  'LBL_NEW_SUB' => 'Rabattert subtotal:',
-  'LBL_SHIPPING' => 'Frakt:',
-  'LBL_SHIPPING_USDOLLAR' => 'Frakt (US Dollar)',
-  'LBL_SUBTOTAL' => 'Subtotal:',
-  'LBL_SUBTOTAL_USDOLLAR' => 'Subtotal (US Dollar)',
-  'LBL_TAX' => 'Skatt:',
-  'LBL_TAX_USDOLLAR' => 'Skatt (US Dollar)',
-  'LBL_TOTAL' => 'Total:',
-  'LBL_TOTAL_USDOLLAR' => 'Total (US Dollar)',
+    'LBL_BUNDLE_STAGE' => 'Gruppefase:',
+    'LBL_DEAL_TOT'=>'Total rabatt',
+    'LBL_DEAL_TOT_USDOLLAR'=>'Total rabatt (US Dollar)',
+    'LBL_NEW_SUB' => 'Rabattert subtotal:',
+    'LBL_SHIPPING' => 'Frakt:',
+    'LBL_SHIPPING_USDOLLAR'=>'Frakt (US Dollar)',
+    'LBL_SUBTOTAL_USDOLLAR'=>'Subtotal (US dollar)',
+    'LBL_SUBTOTAL' => 'Sumtotal:',
+    'LBL_TAX_USDOLLAR'=>'Skatt (US Dollar)',
+    'LBL_TAX' => 'Skatt:',
+    'LBL_TOTAL_USDOLLAR'=>'Total (US dollar)',
+    'LBL_TOTAL' => 'Total:',
+    'LBL_QUOTE_BUNDLE_POSITION' => 'Tilbuds Posisjoner',
+    'EXCEPTION_INVALID_QUOTE_ID' => 'Tilbuds ID Mangler',
+    'EXCEPTION_NOT_FOUND_QUOTE' =>  'Tilbudet er ikke funnet'
 );
-

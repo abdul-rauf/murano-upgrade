@@ -40,7 +40,7 @@
     showActions: true,
 
     /**
-     * @{inheritDoc}
+     * @inheritdoc
      */
     initialize: function(opts) {
         this._super('initialize', [opts]);
@@ -81,7 +81,7 @@
         this.listenTo(this.layout, 'filter:set:name', this.setFilterName);
         this.listenTo(this.context, 'change:filterOptions', this.render);
 
-        this.before('render', this.setShowActions, null, this);
+        this.before('render', this.setShowActions, this);
     },
 
     /**
@@ -101,7 +101,8 @@
      * @return {String} The value of the input.
      */
     getFilterName: function() {
-        return this.$('input').val();
+        var filterName = this.$('input').val();
+        return filterName.trim();
     },
 
     /**
@@ -128,7 +129,7 @@
             input.placeholder();
         }
         // We have this.context.editingFilter if we're setting the name.
-        this.toggleDelete(!_.isEmpty(name));
+        this.toggleDelete(!_.isUndefined(this.context.get('currentFilterId')));
     },
 
     /**
@@ -189,7 +190,7 @@
         var filter = this.context.editingFilter,
             filterLayout = this.layout.getComponent('filter'),
             id = filter.get('id'),
-            changedAttributes = filter.changedAttributes(filter.getSyncedAttributes());
+            changedAttributes = filter.changedAttributes(filter.getSynced());
             filter.revertAttributes();
 
         filterLayout.clearFilterEditState();

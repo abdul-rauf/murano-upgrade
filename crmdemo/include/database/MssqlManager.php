@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
+* $Id: MssqlManager.php 56825 2010-06-04 00:09:04Z smalyshev $
 * Description: This file handles the Data base functionality for the application.
 * It acts as the DB abstraction layer for the application. It depends on helper classes
 * which generate the necessary SQL. This sql is then passed to PEAR DB classes.
@@ -80,7 +80,6 @@ class MssqlManager extends DBManager
         "affected_rows" => true,
         "select_rows" => true,
         'fulltext' => true,
-        'limit_subquery' => true,
         "fix:expandDatabase" => true, // Support expandDatabase fix
         "create_user" => true,
         "create_db" => true,
@@ -237,6 +236,7 @@ class MssqlManager extends DBManager
         $this->connectOptions = $configOptions;
 
         $GLOBALS['log']->info("Connect:".$this->database);
+
         return true;
     }
 
@@ -293,9 +293,7 @@ class MssqlManager extends DBManager
         $this->query_time = microtime(true) - $this->query_time;
         $GLOBALS['log']->info('Query Execution Time:'.$this->query_time);
 
-        if($this->dump_slow_queries($sql)) {
-            $this->track_slow_queries($sql);
-        }
+        $this->dump_slow_queries($sql);
 
         $this->checkError($msg.' Query Failed: ' . $sql, $dieOnError);
 
@@ -321,17 +319,8 @@ class MssqlManager extends DBManager
 
         $this->lastsql = $sql;
 
-        //change the casing to lower for easier string comparison, and trim whitespaces
-        $sql = strtolower(trim($sql)) ;
-
-        //set default sql
-        $limitUnionSQL = $sql;
-        $order_by_str = 'order by';
-
         //make array of order by's.  substring approach was proving too inconsistent
-        $orderByArray = explode($order_by_str, $sql);
-        $unionOrderBy = '';
-        $rowNumOrderBy = '';
+        $orderByArray = preg_split('/order by/i', $sql);
 
         //count the number of array elements
         $unionOrderByCount = count($orderByArray);
@@ -357,7 +346,7 @@ class MssqlManager extends DBManager
 
             //if last element contains a "select", then this is part of the union query,
             //and there is no order by to use
-            if (strpos($unionOrderBy, "select")) {
+            if (stripos($unionOrderBy, "select")) {
                 $unionsql = $sql;
                 //with no guidance on what to use for required order by in rownumber function,
                 //resort to using name column.
@@ -446,7 +435,7 @@ class MssqlManager extends DBManager
             $GLOBALS['log']->debug(print_r(func_get_args(),true));
             $this->lastsql = $sql;
             $matches = array();
-            preg_match('/^(.*SELECT )(.*?FROM.*WHERE)(.*)$/isU',$sql, $matches);
+            preg_match('/^(.*SELECT\s+)(.*?FROM.*WHERE)(.*)$/isU', $sql, $matches);
             if (!empty($matches[3])) {
                 if ($start == 0) {
                     $match_two = strtolower($matches[2]);
@@ -455,7 +444,7 @@ class MssqlManager extends DBManager
                         preg_match('/^(.*)(ORDER BY)(.*)$/is',$matches[3], $orderByMatch);
                         if (!empty($orderByMatch[3])) {
                             $selectPart = array();
-                            preg_match('/^(.*)(\bFROM .*)$/isU', $matches[2], $selectPart);
+                            preg_match('/^(.*)(\bFROM\s+.*)$/isU', $matches[2], $selectPart);
                             $newSQL = "SELECT TOP $count * FROM
                                 (
                                     " . $matches[1] . $selectPart[1] . ", ROW_NUMBER()
@@ -717,9 +706,9 @@ class MssqlManager extends DBManager
 	private function getAliasFromSQL($sql, $alias)
     {
         $matches = array();
-        preg_match('/^(.*SELECT)(.*?FROM.*WHERE)(.*)$/isU',$sql, $matches);
+        preg_match('/SELECT(.*?)FROM/isU', $sql, $matches);
         //parse all single and double  quotes out of array
-        $sin_array = $this->removePatternFromSQL($matches[2], "'", "'","sin_");
+        $sin_array = $this->removePatternFromSQL($matches[1], "'", "'", "sin_");
         $new_sql = array_pop($sin_array);
         $dub_array = $this->removePatternFromSQL($new_sql, "\"", "\"","dub_");
         $new_sql = array_pop($dub_array);
@@ -810,6 +799,14 @@ class MssqlManager extends DBManager
     {
         $sql = strtolower($sql);
         $orig_order_match = trim($orig_order_match);
+        if (strpos($orig_order_match, ',') !== false) {
+            $parts = explode(',', $orig_order_match);
+            foreach ($parts as &$part) {
+                $part = $this->returnOrderBy($sql, $part);
+            }
+            return implode(',', $parts);
+        }
+
         if (strpos($orig_order_match, ".") != 0)
             //this has a tablename defined, pass in the order match
             return $orig_order_match;
@@ -824,7 +821,7 @@ class MssqlManager extends DBManager
 
         //split order by into column name and ascending/descending
         $orderMatch = " " . strtolower(substr($orig_order_match, 0, $firstSpace));
-        $asc_desc =  substr($orig_order_match,$firstSpace);
+        $asc_desc = substr($orig_order_match, $firstSpace + 1);
 
         //look for column name as an alias in sql string
         $found_in_sql = $this->findColumnByAlias($sql, $orderMatch);
@@ -1033,17 +1030,10 @@ class MssqlManager extends DBManager
         }
 
         $row = mssql_fetch_assoc($result);
-        //MSSQL returns a space " " when a varchar column is empty ("") and not null.
-        //We need to iterate through the returned row array and strip empty spaces
-        if(!empty($row)){
-            foreach($row as $key => $column) {
-               //notice we only strip if one space is returned.  we do not want to strip
-               //strings with intentional spaces (" foo ")
-               if (!empty($column) && $column ==" ") {
-                   $row[$key] = '';
-               }
-            }
+        if (empty($row)) {
+            return false;
         }
+
         return $row;
 	}
 
@@ -1058,7 +1048,7 @@ class MssqlManager extends DBManager
         return str_replace("'","''", $this->quoteInternal($string));
     }
 
-    /**
+    /**+
      * @see DBManager::tableExists()
      */
     public function tableExists($tableName)
@@ -1178,6 +1168,10 @@ class MssqlManager extends DBManager
         '%Y-%m-%d' => 10,
         '%Y-%m' => 7,
         '%Y' => 4,
+        '%v' => array(
+            'format' => 'isoww',
+            'function' => 'datepart',
+        ),
     );
 
     /**
@@ -1208,8 +1202,12 @@ class MssqlManager extends DBManager
                     $additional_parameters[0] = trim($additional_parameters[0], "'");
                 }
                 if(!empty($additional_parameters) && isset($this->date_formats[$additional_parameters[0]])) {
-                    $len = $this->date_formats[$additional_parameters[0]];
-                    return "LEFT(CONVERT(varchar($len),". $string . ",120),$len)";
+                    $parameters = $this->date_formats[$additional_parameters[0]];
+                    if (is_array($parameters) && isset($parameters['format']) && isset($parameters['function'])) {
+                        return "{$parameters['function']}({$parameters['format']}, $string)";
+                    } else {
+                        return "LEFT(CONVERT(varchar($parameters)," . $string . ",120),$parameters)";
+                    }
                 } else {
                    return "LEFT(CONVERT(varchar(10),". $string . ",120),10)";
                 }
@@ -1253,10 +1251,11 @@ class MssqlManager extends DBManager
     public function fromConvert($string, $type)
     {
         switch($type) {
+            case 'char': return rtrim($string, ' ');
             case 'datetimecombo':
             case 'datetime': return substr($string, 0,19);
             case 'date': return substr($string, 0, 10);
-            case 'time': return substr($string, 11);
+            case 'time': return substr($string, 11, 8);
 		}
 		return $string;
     }
@@ -1406,7 +1405,7 @@ class MssqlManager extends DBManager
                             'isnull' => true,
                         ));
                         unset($tmpColumnDef['default']);
-                        $sql .="SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''ALTER TABLE $tablename ADD " . $this->oneColumnSQLRep($tmpColumnDef, $ignoreRequired, $tablename, false) . "''';
+                        $sql .="SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''ALTER TABLE $tablename ADD " . str_replace("'", "''''", $this->oneColumnSQLRep($tmpColumnDef, $ignoreRequired, $tablename, false)) . "''';
                             EXEC (@sql_$sqlVarIndex);\n";
 
                         // copy data to temporary column
@@ -1419,9 +1418,7 @@ class MssqlManager extends DBManager
 
                         // create a new origin column
                         $sql .="SET @sql_$sqlVarIndex = @useDbSql_$sqlVarIndex + 'EXEC sp_executesql N''ALTER TABLE $tablename
-                                        ADD " . $this->oneColumnSQLRep(array_merge($def, array(
-                                    'isnull' => true,
-                                )), $ignoreRequired, $tablename, false) . "''';
+                                        ADD " . str_replace("'", "''''", $this->oneColumnSQLRep(array_merge($def, array('isnull' => true)), $ignoreRequired, $tablename, false)) . "''';
                             EXEC (@sql_$sqlVarIndex);\n";
 
                         // copy data into origin column from temporary column
@@ -1562,38 +1559,88 @@ class MssqlManager extends DBManager
         return $result;
     }
 
-    /**
-     * @see DBManager::get_indices()
-     */
-    public function get_indices($tableName)
+    /** {@inheritDoc} */
+    protected function get_index_data($table_name = null, $index_name = null)
     {
-        //find all unique indexes and primary keys.
-        $query = <<<EOSQL
-SELECT sys.tables.object_id, sys.tables.name as table_name, sys.columns.name as column_name,
-                sys.indexes.name as index_name, sys.indexes.is_unique, sys.indexes.is_primary_key
-            FROM sys.tables, sys.indexes, sys.index_columns, sys.columns
-            WHERE (sys.tables.object_id = sys.indexes.object_id
-                    AND sys.tables.object_id = sys.index_columns.object_id
-                    AND sys.tables.object_id = sys.columns.object_id
-                    AND sys.indexes.index_id = sys.index_columns.index_id
-                    AND sys.index_columns.column_id = sys.columns.column_id)
-                AND sys.tables.name = '$tableName'
-EOSQL;
+        $filterByTable = $table_name !== null;
+        $filterByIndex = $index_name !== null;
+
+        $columns = array();
+        if (!$filterByTable) {
+            $columns[] = 't.name AS table_name';
+        }
+
+        if (!$filterByIndex) {
+            $columns[] = 'i.name AS index_name';
+        }
+
+        $columns[] = 'i.is_unique';
+        $columns[] = 'i.is_primary_key';
+        $columns[] = 'c.name AS column_name';
+
+        $query = 'SELECT ' . implode(', ', $columns) . '
+FROM sys.tables AS t
+INNER JOIN sys.indexes AS i
+    ON i.object_id = t.object_id
+INNER JOIN sys.index_columns AS ic
+    ON ic.object_id = t.object_id
+        AND ic.index_id = i.index_id
+INNER JOIN sys.columns c
+    ON c.object_id = t.object_id
+        AND c.column_id = ic.column_id';
+
+        $where = array();
+        if ($filterByTable) {
+            $where[] = 't.name = ' . $this->quoted($table_name);
+        }
+
+        if ($filterByIndex) {
+            $query_index_name = strtoupper($this->getValidDBName($index_name, true, 'index'));
+            $where[] = 'i.name = ' . $this->quoted($query_index_name);
+        }
+
+        if ($where) {
+            $query .= ' WHERE ' . implode(' AND ', $where);
+        }
+
+        $order = array();
+        if (!$filterByTable) {
+            $order[] = 't.name';
+        }
+
+        if (!$filterByIndex) {
+            $order[] = 'i.name';
+        }
+
+        $order[] = 'ic.key_ordinal';
+        $query .= ' ORDER BY ' . implode(', ', $order);
+
         $result = $this->query($query);
 
-        $indices = array();
-        while (($row=$this->fetchByAssoc($result)) != null) {
-            $index_type = 'index';
-            if ($row['is_primary_key'] == '1')
-                $index_type = 'primary';
-            elseif ($row['is_unique'] == 1 )
-                $index_type = 'unique';
-            $name = strtolower($row['index_name']);
-            $indices[$name]['name']     = $name;
-            $indices[$name]['type']     = $index_type;
-            $indices[$name]['fields'][] = strtolower($row['column_name']);
+        $data = array();
+        while ($row = $this->fetchByAssoc($result)) {
+            if (!$filterByTable) {
+                $table_name = $row['table_name'];
+            }
+
+            if (!$filterByIndex) {
+                $index_name = $row['index_name'];
+            }
+
+            if ($row['is_primary_key']) {
+                $type = 'primary';
+            } elseif ($row['is_unique']) {
+                $type = 'unique';
+            } else {
+                $type = 'index';
+            }
+
+            $data[$table_name][$index_name]['name'] = $index_name;
+            $data[$table_name][$index_name]['type'] = $type;
+            $data[$table_name][$index_name]['fields'][] = $row['column_name'];
         }
-        return $indices;
+
+        return $data;
     }
 
     /**
@@ -1601,6 +1648,12 @@ EOSQL;
      */
     public function get_columns($tablename)
     {
+        // Sanity check for getting columns
+        if (empty($tablename)) {
+            $this->log->error(__METHOD__ . ' called with an empty tablename argument');
+            return array();
+        }        
+
         //find all unique indexes and primary keys.
         $result = $this->query("sp_columns $tablename");
 
@@ -1989,7 +2042,7 @@ EOQ;
      */
     protected function freeDbResult($dbResult)
     {
-        if(!empty($dbResult))
+        if(is_resource($dbResult))
             mssql_free_result($dbResult);
     }
 
@@ -2310,10 +2363,5 @@ EOQ;
     {
         $str = str_replace(array('['), array('[[]'), $str);
         return parent::sqlLikeString($str, $wildcard, $appendWildcard);
-    }
-
-    public function prepareStatement($sql, array $fieldDefs = array() )
-    {
-        return new MysqliPreparedStatement($this, $sql, $data);
     }
 }

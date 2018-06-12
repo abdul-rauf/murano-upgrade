@@ -44,6 +44,7 @@ $viewdefs['Prospects']['DetailView'] = array(
                         				'headerTpl'=>'modules/Prospects/tpls/DetailViewHeader.tpl',
                         ),
                         'maxColumns' => '2',
+
                         'useTabs' => true,
                         'widths' => array(
                                         array('label' => '10', 'field' => '30'), 
@@ -55,6 +56,7 @@ $viewdefs['Prospects']['DetailView'] = array(
   array (
     array (
     'name'=>'full_name',
+
     'displayParams' => array (
         'enableConnectors' => true,
         'module' => 'Prospects',
@@ -62,7 +64,7 @@ $viewdefs['Prospects']['DetailView'] = array(
         array (
             0 => 'ext_rest_twitter',
         ),
-    ),
+    ), 	    
     ),
   ),
 
@@ -82,13 +84,14 @@ $viewdefs['Prospects']['DetailView'] = array(
   array (
     array (
         'name' => 'account_name',
+
 	    'displayParams' => array (
 	       'enableConnectors' => true,
 	       'module' => 'Prospects',
 	       'connectors' => 
 	       array (
 	       ),
-	    ),
+	    ), 
     ),  
   	'phone_fax',
   ),
@@ -135,7 +138,8 @@ $viewdefs['Prospects']['DetailView'] = array(
   ),
   
   array (
-		'team_name', 
+
+		'team_name',
     array (
       'name' => 'created_by_name',
       'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value}&nbsp;',

@@ -1,8 +1,5 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
-/*
+ /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
@@ -12,39 +9,44 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
-
+/*
+ * Created on Aug 14, 2007
+ *
+ * To change the template for this generated file go to
+ * Window - Preferences - PHPeclipse - PHP - Code Templates
+ */
 $object_name = strtolower($object_name);
-$app_list_strings = array (
-  $object_name.'_priority_dom' => 
+ $app_list_strings = array (
+
+  $object_name.'_type_dom' =>
+  array (
+  	'Administration' => 'Administration',
+    'Product' => 'Termék',
+    'User' => 'Felhasználó',
+  ),
+   $object_name.'_status_dom' =>
+  array (
+    'New' => 'Új',
+    'Assigned' => 'Hozzárendelve',
+    'Closed' => 'Lezárt',
+    'Pending Input' => 'Függőben lévő bevitel',
+    'Rejected' => 'Elutasítva',
+    'Duplicate' => 'Kettőz',
+  ),
+  $object_name.'_priority_dom' =>
   array (
     'P1' => 'Magas',
     'P2' => 'Közepes',
     'P3' => 'Alacsony',
   ),
-  $object_name.'_resolution_dom' => 
+  $object_name.'_resolution_dom' =>
   array (
-    '' => '[-üres-]',
-    'Accepted' => 'Elfogadott',
+  	'' => '',
+  	'Accepted' => 'Elfogadott',
+    'Duplicate' => 'Kettőz',
     'Closed' => 'Lezárt',
-    'Duplicate' => 'Másolat',
-    'Invalid' => 'Érvénytelen',
     'Out of Date' => 'Lejárt',
+    'Invalid' => 'Érvénytelen',
   ),
-  $object_name.'_status_dom' => 
-  array (
-    'Assigned' => 'Hozzárendelve',
-    'Closed' => 'Zárva',
-    'Duplicate' => 'Másolat',
-    'New' => 'Új',
-    'Pending Input' => 'Függőben lévő bevitel',
-    'Rejected' => 'Elutasítva',
-  ),
-  $object_name.'_type_dom' => 
-  array (
-    'Administration' => 'Adminisztráció',
-    'Product' => 'Termék',
-    'User' => 'Felhasználó',
-  ),
-);
-
+  );
+?>

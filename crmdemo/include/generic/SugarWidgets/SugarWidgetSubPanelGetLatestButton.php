@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: SugarWidgetSubPanelGetLatestButton.php 40541 2008-10-14 17:42:09Z jmertic $
 //this widget is used only by the contracts module..
 
 

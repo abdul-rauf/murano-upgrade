@@ -10,9 +10,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
 /*********************************************************************************
-
+ * $Id$
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -29,4 +28,3 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   ),
 
   );
-?>

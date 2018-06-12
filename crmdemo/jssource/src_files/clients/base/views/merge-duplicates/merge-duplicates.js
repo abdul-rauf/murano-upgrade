@@ -136,7 +136,6 @@
     relatesBlacklist: [
         'assigned_user_link', 'modified_user_link', 'created_by_link',
         'teams', 'team_link', 'team_count_link',
-        'campaigns', 'campaign_link',
         'archived_emails', 'email_addresses', 'email_addresses_primary',
         'forecastworksheets',
         'currencies'
@@ -151,7 +150,7 @@
     relatesBlacklistForModule: {
         Accounts: ['revenuelineitems'],
         Opportunities: ['accounts'],
-        Leads: ['oldmeetings', 'oldcalls'],
+        Leads: ['meetings_parent', 'calls_parent'],
         Prospects: ['tasks'],
         Bugs: ['project'],
         RevenueLineItems: ['campaign_revenuelineitems']
@@ -200,7 +199,8 @@
         { type: 'parent' },
         { type: 'image' },
         { type: 'teamset' },
-        { type: 'email' }
+        { type: 'email' },
+        { type: 'tag' }
     ],
 
     /**
@@ -217,7 +217,7 @@
     generatedValues: null,
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Initialize merge collection as collection of selected records and
      * initialise fields that can be used in merge.
@@ -230,7 +230,20 @@
         this._initializeMergeCollection(this._prepareRecords());
 
         this.action = 'list';
+        this._delegateEvents();
+    },
+
+    /**
+     * Add event listeners
+     *
+     * @private
+     */
+    _delegateEvents: function() {
         this.layout.on('mergeduplicates:save:fire', this.triggerSave, this);
+
+        app.events.on('preview:open', _.bind(this.onPreviewToggle, this, true), this);
+        app.events.on('preview:close', _.bind(this.onPreviewToggle, this, false), this);
+        this.on('render', this._showAlertIfIdentical, this);
     },
 
     /**
@@ -356,7 +369,8 @@
         app.alert.show('merge_confirmation', {
             level: 'confirmation',
             messages: app.lang.get('LBL_MERGE_DUPLICATES_CONFIRM') + ' ' +
-                alternativeModelNames.join(', ') + '. ' +
+                // FIXME needs to be removed on SC-4494.
+                Handlebars.Utils.escapeExpression(alternativeModelNames.join(', ')) + '. ' +
                 app.lang.get('LBL_MERGE_DUPLICATES_PROCEED'),
             onConfirm: _.bind(this._savePrimary, this)
         });
@@ -425,11 +439,25 @@
             }});
         }, function() {
             self.primaryRecord.trigger('mergeduplicates:primary:merged');
+            self.hideMainPreviewPanel();
         });
     },
 
     /**
-     * {@inheritDoc}
+     * Hide the preview panel, from the main drawer
+     */
+    hideMainPreviewPanel: function() {
+        //Get main drawer
+        var $main_drawer = app.$contentEl.children().first();
+        if (!_.isUndefined($main_drawer) && $main_drawer.hasClass('drawer inactive')) {
+            var layout = $main_drawer.find('.sidebar-content');
+            layout.find('.side-pane').addClass('active');
+            layout.find('.dashboard-pane').show();
+            layout.find('.preview-pane').removeClass('active');
+        }
+    },
+    /**
+     * @inheritdoc
      *
      * Override fetching fields names. Use fields that are allowed to merge only.
      *
@@ -714,6 +742,16 @@
     },
 
     /**
+     * Event listeners for `preview:open` and `preview:close` events
+     *
+     * @param {boolean} open Flag indicating the desired state of the preview
+     */
+    onPreviewToggle: function(open) {
+        this.isPreviewOpen = open;
+        this.$('[data-mode=preview]').toggleClass('on', open);
+    },
+
+    /**
      * Toggles a Preview for the primary record.
      *
      * @param {Event} evt Mouse click event.
@@ -724,8 +762,6 @@
         } else {
             this.updatePreviewRecord(this.primaryRecord);
         }
-        this.isPreviewOpen = !this.isPreviewOpen;
-        $(evt.currentTarget).toggleClass('on', this.isPreviewOpen);
     },
 
     /**
@@ -749,7 +785,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Add additional fields for specific types like 'parent' and 'relate'.
      * Setup primary model editable.
@@ -769,7 +805,6 @@
         }, this);
         this.setPrimaryEditable(this.primaryRecord.id);
         this.setDraggable();
-        this._showAlertIfIdentical();
     },
 
     /**
@@ -841,7 +876,7 @@
 
         if (self.primaryRecord && self.primaryRecord.id !== droppedTo.data('record-id')) {
             var changedAttributes = self.primaryRecord.changedAttributes(
-                self.primaryRecord.getSyncedAttributes()
+                self.primaryRecord.getSynced()
             );
             if (!_.isEmpty(changedAttributes)) {
                 app.alert.show('change_primary_confirmation', {
@@ -1015,7 +1050,6 @@
     triggerCopy: function(evt) {
         var currentTarget = this.$(evt.currentTarget),
             recordId = currentTarget.data('record-id'),
-            recordItemId = currentTarget.data('record-item-id'),
             fieldName = currentTarget.data('field-name'),
             fieldDefs = app.metadata.getModule(this.module).fields,
             model;
@@ -1039,7 +1073,11 @@
             return;
         }
 
-        var data = _.extend({}, currentTarget.data(), {
+        var data = currentTarget.data();
+        // Unlike data(), attr() doesn't perform type conversions if possible.
+        // This is good because recordItemId can sometimes be numeric but must be type of string always.
+        data.recordItemId = currentTarget.attr('data-record-item-id');
+        data = _.extend({}, data, {
             checked: currentTarget.prop('type') === 'checkbox' ?
                 currentTarget.prop('checked') : true
         });
@@ -1083,7 +1121,7 @@
      * @param {String} fieldName Name of field to revert.
      */
     revert: function(fieldName) {
-        var syncedAttributes = this.primaryRecord.getSyncedAttributes();
+        var syncedAttributes = this.primaryRecord.getSynced();
 
         this._setRelatedFields(fieldName, this.primaryRecord, true);
         this.primaryRecord.set(
@@ -1111,7 +1149,6 @@
         var recordId = this.$(evt.currentTarget).closest('[data-record-id]').data('recordId'),
             model = this.collection.get(recordId),
             self = this;
-
         if (this.collection.length <= 2 || !recordId || !model) {
             return;
         }
@@ -1124,12 +1161,17 @@
                 return;
             }
         }
-
         app.alert.show('record-delete-confirm', {
             level: 'confirmation',
             messages: app.lang.get('LBL_MERGE_DUPLICATES_REMOVE', this.module),
             onConfirm: function() {
                 self.deleteFromMerge(model);
+                self.$('[data-container="merge-container"]').attr('class', function(){
+                    return $(this).attr('class').replace(
+                        /\b(num\-cols\-)(\d+)\b/g,
+                        '$1' + self.collection.length
+                    );
+                });
             }
         });
     },
@@ -1185,7 +1227,7 @@
 
         var fieldDefs = app.metadata.getModule(this.module).fields;
             defs = fieldDefs[fieldName],
-            syncedAttributes = synced ? model.getSyncedAttributes() : {},
+            syncedAttributes = synced ? model.getSynced() : {},
             fields = _.union(defs.populate_list, defs.related_fields);
 
         _.each(this.relatedFieldsMap, function(field) {
@@ -1409,7 +1451,7 @@
             attempt: 0,
 
             /**
-             * {@inheritDoc}
+             * @inheritdoc
              *
              * Sync added set of records and clear collection.
              */
@@ -1437,7 +1479,7 @@
             },
 
             /**
-             * {@inheritDoc}
+             * @inheritdoc
              *
              * Overrides default behaviour to use related API and send related
              * records into chunks.
@@ -1639,7 +1681,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Override 'reset' event for collection to setup first model ar primary.
      */
@@ -1662,7 +1704,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Off all events on primary model.
      */

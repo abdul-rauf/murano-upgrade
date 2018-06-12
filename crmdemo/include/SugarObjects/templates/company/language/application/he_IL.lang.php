@@ -10,13 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- /*********************************************************************************
- * Hebrew vertion by:
- * Menahem Lurie Consultancy and IT Management,SugarCRM partner - Israel
- * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
- * All Rights Reserved.
- * *******************************************************************************/
-
 /*
  * Created on Aug 14, 2007
  *
@@ -28,7 +21,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   strtolower($object_name).'_type_dom' =>
   array (
     '' => '',
-    'Analyst' => 'אנאליסט',
+    'Analyst' => 'אנליסט',
     'Competitor' => 'מתחרה',
     'Customer' => 'לקוח',
     'Integrator' => 'אינטגרטור',
@@ -41,5 +34,3 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   ),
 
   );
-
-

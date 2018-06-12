@@ -17,29 +17,43 @@
     extendsFrom: 'HeaderpaneView',
 
     initialize: function(options) {
+        this._super('initialize', [options]);
+
         var moduleMeta = app.metadata.getModule(options.module),
             isBwcEnabled = (moduleMeta && moduleMeta.isBwcEnabled),
+            multiSelect = options.context.get('isMultiSelect'),
             buttonsToRemove = [],
             additionalEvents = {};
 
-        if (isBwcEnabled) {
+        this.isMultiLink = options.context.has('recLink');
+
+        if (isBwcEnabled || multiSelect || this.isMultiLink) {
             buttonsToRemove.push('create_button');
         } else {
-            additionalEvents['click .btn[name=create_button]'] = 'createAndSelect';
+            additionalEvents['click [name=create_button]'] = 'createAndSelect';
             this.events = _.extend({}, this.events, additionalEvents);
         }
 
-        this.isMultiLink = options.context.has('recLink');
-        if (!this.isMultiLink) {
+
+        if (this.isMultiLink) {
+            //FIXME: This will be removed with SC-4073.
+            var linkTitleLabel = _.find(this.meta.fields, function(field) {
+                return field.name === 'title';
+            }, this);
+            linkTitleLabel.default_value = 'TPL_SEARCH_AND_ADD';
+        } else {
             buttonsToRemove.push('link_button');
         }
 
-        options = this._removeButtons(options, buttonsToRemove);
-        this._super('initialize', [options]);
+        if (!multiSelect) {
+            buttonsToRemove.push('select_button');
+        }
+
+        this._removeButtons(buttonsToRemove);
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _renderHtml: function() {
         this._super('_renderHtml');
@@ -57,7 +71,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _formatTitle: function(title) {
         var moduleName = app.lang.get('LBL_MODULE_NAME', this.module);
@@ -77,26 +91,32 @@
             }
         }, _.bind(function(context, model) {
             if (model) {
-                this.context.trigger('selection-list:select', model);
+                this.context.trigger('selection-list:select', context, model);
             }
         }, this));
     },
 
     /**
-     * Remove the specified buttons from the options metadata
+     * Removes buttons from main_dropdown
      *
-     * @param {object} options
-     * @param {array} buttons
-     * @return {*}
+     * @param {Array} buttons The names of the buttons to remove.
      * @private
      */
-    _removeButtons: function(options, buttons) {
-        if (options && options.meta && options.meta.buttons) {
-            options.meta.buttons = _.filter(options.meta.buttons, function(button) {
-                return !_.contains(buttons, button.name);
-            });
+    _removeButtons: function(buttons) {
+        if (!buttons.length) {
+            return;
         }
 
-        return options;
+        var mainDropdown = _.find(this.meta.buttons, function(button) {
+            return button.name === 'main_dropdown';
+        });
+
+        if (!mainDropdown) {
+            return;
+        }
+
+        mainDropdown.buttons = _.filter(mainDropdown.buttons, function(button) {
+            return !_.contains(buttons, button.name);
+        });
     }
 })

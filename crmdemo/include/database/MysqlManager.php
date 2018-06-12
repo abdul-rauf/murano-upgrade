@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
+* $Id: MysqlManager.php 53409 2010-01-04 03:31:15Z roger $
 * Description: This file handles the Data base functionality for the application.
 * It acts as the DB abstraction layer for the application. It depends on helper classes
 * which generate the necessary SQL. This sql is then passed to PEAR DB classes.
@@ -32,29 +32,29 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 *
 * name 		This represents name of the field. This is a required field.
 * type 		This represents type of the field. This is a required field and valid values are:
-*           �   int
-*           �   long
-*           �   varchar
-*           �   text
-*           �   date
-*           �   datetime
-*           �   double
-*           �   float
-*           �   uint
-*           �   ulong
-*           �   time
-*           �   short
-*           �   enum
+*           -   int
+*           -   long
+*           -   varchar
+*           -   text
+*           -   date
+*           -   datetime
+*           -   double
+*           -   float
+*           -   uint
+*           -   ulong
+*           -   time
+*           -   short
+*           -   enum
 * length    This is used only when the type is varchar and denotes the length of the string.
 *           The max value is 255.
 * enumvals  This is a list of valid values for an enum separated by "|".
-*           It is used only if the type is �enum�;
+*           It is used only if the type is -enum-;
 * required  This field dictates whether it is a required value.
-*           The default value is �FALSE�.
+*           The default value is -FALSE-.
 * isPrimary This field identifies the primary key of the table.
-*           If none of the fields have this flag set to �TRUE�,
+*           If none of the fields have this flag set to -TRUE-,
 *           the first field definition is assume to be the primary key.
-*           Default value for this field is �FALSE�.
+*           Default value for this field is -FALSE-.
 * default   This field sets the default value for the field definition.
 *
 *
@@ -119,6 +119,19 @@ class MysqlManager extends DBManager
 
 	);
 
+    /**
+     * Integer fields' min and max values
+     * @var array
+     */
+    protected $type_range = array(
+        'int'      => array('min_value'=>-2147483648, 'max_value'=>2147483647),
+        'uint'     => array('min_value'=>0, 'max_value'=>4294967295),
+        'ulong'    => array('min_value'=>0, 'max_value'=>18446744073709551615),
+        'long'     => array('min_value'=>-9223372036854775808, 'max_value'=>9223372036854775807),
+        'short'    => array('min_value'=>-32768, 'max_value'=>32767),
+        'tinyint'  => array('min_value'=>-128, 'max_value'=>127),
+    );
+
 	protected $capabilities = array(
 		"affected_rows" => true,
 		"select_rows" => true,
@@ -129,6 +142,7 @@ class MysqlManager extends DBManager
 	    "create_db" => true,
 	    "disable_keys" => true,
 	    "fix:report_as_condition" => true,
+        "short_group_by" => true, //set to true if not all the select fields are needed in the group by (currently mysql only)
 	);
 
 	/**
@@ -157,9 +171,7 @@ class MysqlManager extends DBManager
 		$this->query_time = microtime(true) - $this->query_time;
 		$GLOBALS['log']->info('Query Execution Time:'.$this->query_time);
 
-		if($this->dump_slow_queries($sql)) {
-		$this->track_slow_queries($sql);
-		}
+        $this->dump_slow_queries($sql);
 
 		if($keepResult)
 			$this->lastResult = $result;
@@ -212,7 +224,7 @@ class MysqlManager extends DBManager
 	 */
 	protected function freeDbResult($dbResult)
 	{
-		if(!empty($dbResult))
+		if(is_resource($dbResult))
 			mysql_free_result($dbResult);
 	}
 
@@ -299,6 +311,12 @@ class MysqlManager extends DBManager
 	 */
 	public function get_columns($tablename)
 	{
+        // Sanity check for getting columns
+        if (empty($tablename)) {
+            $this->log->error(__METHOD__ . ' called with an empty tablename argument');
+            return array();
+        }        
+
 		//find all unique indexes and primary keys.
 		$result = $this->query("DESCRIBE $tablename");
 
@@ -386,7 +404,7 @@ class MysqlManager extends DBManager
 		return $this->getOne("SELECT version() version");
 	}
 
-	/**
+	/**+
 	 * @see DBManager::tableExists()
 	 */
 	public function tableExists($tableName)
@@ -516,6 +534,7 @@ class MysqlManager extends DBManager
 		$this->connectOptions = $configOptions;
 
 		$GLOBALS['log']->info("Connect:".$this->database);
+
 		return true;
 	}
 
@@ -524,8 +543,14 @@ class MysqlManager extends DBManager
 	 *
 	 * For MySQL, we can write the ALTER TABLE statement all in one line, which speeds things
 	 * up quite a bit. So here, we'll parse the returned SQL into a single ALTER TABLE command.
+     * @param  string $tablename Table name
+     * @param  array  $fielddefs Field definitions, in vardef format
+     * @param  array  $indices   Index definitions, in vardef format
+     * @param  bool   $execute   optional, true if we want the queries executed instead of returned
+     * @param  string $engine    optional, MySQL engine
+     * @return string
 	 */
-	public function repairTableParams($tablename, $fielddefs, $indices, $execute = true, $engine = null)
+    public function repairTableParams($tablename, $fielddefs, array $indices, $execute = true, $engine = null)
 	{
         foreach ($indices as $key => $ind) {
             if (strtolower($ind['type']) == 'primary') {
@@ -890,30 +915,78 @@ class MysqlManager extends DBManager
 		return "";
 	}
 
-	/**
-	 * @see DBManager::get_indices()
-	 */
-	public function get_indices($tablename)
-	{
-		//find all unique indexes and primary keys.
-		$result = $this->query("SHOW INDEX FROM $tablename");
+    /** {@inheritDoc} */
+    protected function get_index_data($table_name = null, $index_name = null)
+    {
+        $filterByTable = $table_name !== null;
+        $filterByIndex = $index_name !== null;
 
-		$indices = array();
-		while (($row=$this->fetchByAssoc($result)) !=null) {
-			$index_type='index';
-			if ($row['Key_name'] =='PRIMARY') {
-				$index_type='primary';
-			}
-			elseif ( $row['Non_unique'] == '0' ) {
-				$index_type='unique';
-			}
-			$name = strtolower($row['Key_name']);
-			$indices[$name]['name']=$name;
-			$indices[$name]['type']=$index_type;
-			$indices[$name]['fields'][]=strtolower($row['Column_name']);
-		}
-		return $indices;
-	}
+        $columns = array();
+        if (!$filterByTable) {
+            $columns[] = 'table_name';
+        }
+
+        if (!$filterByIndex) {
+            $columns[] = 'index_name';
+        }
+
+        $columns[] = 'non_unique';
+        $columns[] = 'column_name';
+
+        $query = 'SELECT ' . implode(', ', $columns) . '
+FROM information_schema.statistics';
+
+        $schema = $this->getOne('SELECT DATABASE()');
+        $where = array('table_schema = ' . $this->quoted($schema));
+        if ($filterByTable) {
+            $where[] = 'table_name = ' . $this->quoted($table_name);
+        }
+
+        if ($filterByIndex) {
+            $query_index_name = strtoupper($this->getValidDBName($index_name, true, 'index'));
+            $where[] = 'index_name = ' . $this->quoted($query_index_name);
+        }
+        $query .= ' WHERE ' . implode(' AND ', $where);
+
+        $order = array();
+        if (!$filterByTable) {
+            $order[] = 'table_name';
+        }
+
+        if (!$filterByIndex) {
+            $order[] = 'index_name';
+        }
+
+        $order[] = 'seq_in_index';
+        $query .= ' ORDER BY ' . implode(', ', $order);
+
+        $result = $this->query($query);
+
+        $data = array();
+        while ($row = $this->fetchByAssoc($result)) {
+            if (!$filterByTable) {
+                $table_name = $row['table_name'];
+            }
+
+            if (!$filterByIndex) {
+                $index_name = $row['index_name'];
+            }
+
+            if ($index_name == 'PRIMARY') {
+                $type = 'primary';
+            } elseif ($row['non_unique'] == '0') {
+                $type = 'unique';
+            } else {
+                $type = 'index';
+            }
+
+            $data[$table_name][$index_name]['name'] = $index_name;
+            $data[$table_name][$index_name]['type'] = $type;
+            $data[$table_name][$index_name]['fields'][] = $row['column_name'];
+        }
+
+        return $data;
+    }
 
 	/**
 	 * @see DBManager::add_drop_constraint()
@@ -1182,18 +1255,31 @@ class MysqlManager extends DBManager
 
 	public function getDbInfo()
 	{
-		$charsets = $this->getCharsetInfo();
-		$charset_str = array();
-		foreach($charsets as $name => $value) {
-			$charset_str[] = "$name = $value";
-		}
-		return array(
-			"MySQL Version" => @mysql_get_client_info(),
-			"MySQL Host Info" => @mysql_get_host_info($this->database),
-			"MySQL Server Info" => @mysql_get_server_info($this->database),
-			"MySQL Client Encoding" =>  @mysql_client_encoding($this->database),
-			"MySQL Character Set Settings" => join(", ", $charset_str),
-		);
+        $charsets = $this->getCharsetInfo();
+        $charset_str = array();
+        foreach($charsets as $name => $value) {
+            $charset_str[] = "$name = $value";
+        }
+        $return = array(
+            'MySQL Version' => 'info is not present',
+            'MySQL Host Info' => 'info is not present',
+            'MySQL Server Info' => 'info is not present',
+            'MySQL Client Encoding' => 'info is not present',
+            'MySQL Character Set Settings' => implode(', ', $charset_str),
+        );
+        if (function_exists('mysql_get_client_info')) {
+            $return['MySQL Version'] = @mysql_get_client_info();
+        }
+        if (function_exists('mysql_get_host_info')) {
+            $return['MySQL Host Info'] = @mysql_get_host_info($this->database);
+        }
+        if (function_exists('mysql_get_server_info')) {
+            $return['MySQL Server Info'] = @mysql_get_server_info($this->database);
+        }
+        if (function_exists('mysql_client_encoding')) {
+            $return['MySQL Client Encoding'] = @mysql_client_encoding($this->database);
+        }
+        return $return;
 	}
 
 	public function validateQuery($query)
@@ -1473,6 +1559,26 @@ class MysqlManager extends DBManager
 	    return $this->query('ALTER TABLE '.$tableName.' ENABLE KEYS');
 	}
 
+    /**
+     * Updates all tables to match the specified collation
+     * @abstract
+     * @param string $collation Collation to set
+     */
+    public function setCollation($collation)
+    {
+        $charset = explode("_", $collation);
+        $charset = $charset[0];
+
+        $this->query("ALTER DATABASE {$this->connectOptions['db_name']} DEFAULT COLLATE {$collation}");
+        $res = $this->query("SHOW TABLES");
+
+        while ($row = $this->fetchRow($res)) {
+            foreach ($row as $key => $table) {
+                $this->query("ALTER TABLE {$table} COLLATE {$collation}");
+                $this->query("ALTER TABLE {$table} CONVERT TO CHARACTER SET {$charset} COLLATE {$collation}");
+            }
+        }
+    }
 
     /**
      * Returns a DB specific FROM clause which can be used to select against functions.

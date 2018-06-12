@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -35,12 +34,12 @@ $viewdefs['base']['layout']['records'] = array(
                                         'availableToggles' => array(
                                             array(
                                                 'name' => 'list',
-                                                'icon' => 'icon-table',
+                                                'icon' => 'fa-table',
                                                 'label' => 'LBL_LISTVIEW',
                                             ),
                                             array(
                                                 'name' => 'activitystream',
-                                                'icon' => 'icon-time',
+                                                'icon' => 'fa-clock-o',
                                                 'label' => 'LBL_ACTIVITY_STREAM',
                                             ),
                                         ),
@@ -48,15 +47,15 @@ $viewdefs['base']['layout']['records'] = array(
                                             array(
                                                 'layout' => 'filter',
                                                 'targetEl' => '.filter',
-                                                'position' => 'prepend'
+                                                'position' => 'prepend',
                                             ),
                                             array(
                                                 'view' => 'filter-rows',
-                                                "targetEl" => '.filter-options'
+                                                'targetEl' => '.filter-options',
                                             ),
                                             array(
                                                 'view' => 'filter-actions',
-                                                "targetEl" => '.filter-options'
+                                                'targetEl' => '.filter-options',
                                             ),
                                             array(
                                                 'layout' => 'activitystream',
@@ -74,18 +73,6 @@ $viewdefs['base']['layout']['records'] = array(
                             'type' => 'simple',
                             'name' => 'main-pane',
                             'span' => 8,
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
-                            'components' => array(
-                                array(
-                                    'layout' => 'list-sidebar',
-                                ),
-                            ),
-                            'type' => 'simple',
-                            'name' => 'side-pane',
-                            'span' => 4,
                         ),
                     ),
                     array(
@@ -113,7 +100,26 @@ $viewdefs['base']['layout']['records'] = array(
                         'layout' => array(
                             'components' => array(
                                 array(
-                                    'layout' => 'preview',
+                                    'layout' => array(
+                                        // FIXME MAR-2834 should fix inheriting components
+                                        'components' => array(
+                                            array(
+                                                'view' => 'preview-header',
+                                            ),
+                                            array(
+                                                'view' => 'preview',
+                                            ),
+                                            array(
+                                                'layout' => 'preview-activitystream',
+                                                'context' => array(
+                                                    'module' => 'Activities',
+                                                    'forceNew' => true,
+                                                ),
+                                            ),
+                                        ),
+                                        'type' => 'preview',
+                                        'editable' => true,
+                                    ),
                                 ),
                             ),
                             'type' => 'simple',

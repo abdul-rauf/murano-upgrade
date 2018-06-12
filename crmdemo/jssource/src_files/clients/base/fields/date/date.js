@@ -11,11 +11,11 @@
 /**
  * @class View.Fields.Base.DateField
  * @alias SUGAR.App.view.fields.BaseDateField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     plugins: [
         'EllipsisInline',
@@ -23,19 +23,26 @@
     ],
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     fieldTag: 'input[data-type=date]',
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     events: {
         'hide': 'handleHideDatePicker'
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
+     *
+     * The direction for this field should always be `ltr`.
+     */
+    direction: 'ltr',
+
+    /**
+     * @inheritdoc
      */
     initialize: function(options) {
         // FIXME: Remove this when SIDECAR-517 gets in
@@ -44,6 +51,24 @@
         this._initEvents();
         this._initDefaultValue();
         this._initPlaceholderAttribute();
+        /**
+         * Property to add or not the `ellipsis_inline` class when rendering the
+         * field in the `list` template. `true` to add the class, `false`
+         * otherwise.
+         *
+         * Defaults to `true`.
+         *
+         * @property {boolean}
+         */
+        this.ellipsis = _.isUndefined(this.def.ellipsis) || this.def.ellipsis;
+
+        /**
+         * If a date picker has been initialized on the field or not.
+         *
+         * @type {boolean}
+         * @private
+         */
+        this._hasDatePicker = false;
     },
 
     /**
@@ -93,8 +118,7 @@
             )
         );
 
-        this.model.set(this.name, value);
-        this.model.setDefaultAttribute(this.name, value);
+        this.model.setDefault(this.name, value);
 
         return this;
     },
@@ -158,7 +182,8 @@
             userDateFormat = this.getUserDateFormat(),
             options = {
                 format: app.date.toDatepickerFormat(userDateFormat),
-                languageDictionary: this._patchPickerMeta()
+                languageDictionary: this._patchPickerMeta(),
+                weekStart: parseInt(app.user.getPreference('first_day_of_week'), 10)
             };
 
         var appendToTarget = this._getAppendToTarget();
@@ -167,24 +192,25 @@
         }
 
         $field.datepicker(options);
+        this._hasDatePicker = true;
     },
 
     /**
-     * Retrieve a selector against which the date picker should be appended to.
+     * Retrieve an element against which the date picker should be appended to.
      *
      * FIXME: find a proper way to do this and avoid scrolling issues SC-2739
      *
-     * @return {String/undefined} Selector against which the date picker should
+     * @return {jQuery/undefined} Element against which the date picker should
      *   be appended to, `undefined` if none.
      * @private
      */
     _getAppendToTarget: function() {
-        if (this.$el.parents('div#drawers').length) {
-            return 'div#drawers > .drawer:last';
-        }
+        var component = this.closestComponent('main-pane') ||
+            this.closestComponent('drawer') ||
+            this.closestComponent('preview-pane');
 
-        if (this.$el.parents('div#content').length) {
-            return 'div#content .main-pane:first';
+        if (component) {
+            return component.$el;
         }
 
         return;
@@ -193,6 +219,11 @@
     /**
      * Date picker doesn't trigger a `change` event whenever the date value
      * changes we need to override this method and listen to the `hide` event.
+     *
+     * Plus, we're using the `hide` event instead of the `changeDate` event
+     * because the latter doesn't track copy/paste of dates whether from
+     * keyboard or mouse and it also doesn't track field clearance through
+     * keyboard, e.g.: selecting date text and press cmd+x.
      *
      * All invalid values are cleared from fields without triggering an event
      * because `this.model.set()` could have been already empty thus not
@@ -217,20 +248,41 @@
      * care of unformatting the value.
      */
     bindDomChange: function() {
+        if (this._inDetailMode()) {
+            return;
+        }
+
         var $field = this.$(this.fieldTag);
 
         $field.on('focus', _.bind(this.handleFocus, this));
 
         $('.main-pane, .flex-list-view-content').on('scroll.' + this.cid, _.bind(function() {
-            $field.datepicker('place');
+            // make sure the dom element exists before trying to place the datepicker
+            if (this._getAppendToTarget()) {
+                $field.datepicker('place');
+            }
         }, this));
     },
 
     /**
-     * @inheritDoc
+     * Determine if the field is currently in a read-only (detail) mode.
+     *
+     * @return {boolean}
+     * @protected
+     */
+    _inDetailMode: function() {
+        return this.action !== 'edit' && this.action !== 'massupdate';
+    },
+
+    /**
+     * @inheritdoc
      */
     unbindDom: function() {
         this._super('unbindDom');
+
+        if (this._inDetailMode()) {
+            return;
+        }
 
         $('.main-pane, .flex-list-view-content').off('scroll.' + this.cid);
 
@@ -340,12 +392,13 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _render: function() {
         this._super('_render');
 
         if (this.tplName !== 'edit' && this.tplName !== 'massupdate') {
+            this._hasDatePicker = false;
             return;
         }
 
@@ -353,15 +406,21 @@
     },
 
     /**
-     * @inheritDoc
+     * Focus on the date field.
+     */
+    focus: function() {
+        this.$(this.fieldTag).datepicker('focusShow');
+    },
+
+    /**
+     * @inheritdoc
      */
     _dispose: function() {
         // FIXME: new date picker versions have support for plugin removal/destroy
         // we should do the upgrade in order to prevent memory leaks
 
-        var $field = this.$(this.fieldTag);
-        if ($field.data('datepicker')) {
-            $(window).off('resize', $field.data('datepicker').place);
+        if (this._hasDatePicker) {
+            $(window).off('resize', this.$(this.fieldTag).data('datepicker').place);
         }
 
         this._super('_dispose');

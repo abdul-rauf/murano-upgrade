@@ -19,9 +19,19 @@
     onCloseCallback: null, //callbacks to be called once drawers are closed
     scrollTopPositions: [], //stores scroll positions for main and side pane
 
-    pixelsFromFooter: 60, //how many pixels from the footer the drawer will drop down to
+    pixelsFromFooter: 80, //how many pixels from the footer the drawer will drop down to
 
     initialize: function(options) {
+        var self = this;
+
+        /**
+         * The fragments queue of the open drawers.
+         *
+         * @property {Array}
+         * @private
+         */
+        this._fragments = [];
+
         if (!this.$el.is('#drawers')) {
             app.logger.error('Drawer layout can only be included as an Additional Component.');
             return;
@@ -30,34 +40,57 @@
         app.drawer = this;
         this.onCloseCallback = [];
 
+        // define the states the drawer can be in
+        this.STATES = {
+            IDLE: 'idle',
+            OPENING: 'opening',
+            CLOSING: 'closing'
+        };
+        // start in the IDLE state; the drawer will be IDLE most of the time
+        this._enterState(this.STATES.IDLE);
+
         //clear out drawers before routing to another page
         this.name = 'drawer';
-        app.routing.before("route", this.reset, this, true);
+
         app.view.Layout.prototype.initialize.call(this, options);
+
+        // Browser find functionality auto-scrolls even when overflow is set to hidden.
+        // Prevent scrolling only when there are active drawers.
+        $(window).on('scroll.prevent', function() {
+            self._preventScroll($(this));
+        });
+        app.$contentEl.on('scroll.prevent', function() {
+            self._preventScroll($(this));
+        });
+
+        app.before('app:view:load', function() {
+            return this.reset();
+        }, this);
     },
 
     /**
-     * Open the specified layout in a drawer.
+     * Open the specified layout or view in a drawer.
      *
      * You can pass the current context if you want the context created to be a
      * child of that current context. If you don't pass a `scope`, it will
      * create a child of the main context (`app.controller.context`).
      *
-     * @param {Object} layoutDef The component definition.
-     * @param {Core.Context/Object} [layoutDef.context] The context to pass to
+     * @param {Object} def The component definition.
+     * @param {Core.Context/Object} [def.context] The context to pass to
      *  the drawer.
-     * @param {Core.Context} [layoutDef.context.parent] The parent context of
+     * @param {Core.Context} [def.context.parent] The parent context of
      *  the context to pass to the drawer.
      * @param {Function} [onClose] Callback method when the drawer closes.
      */
-    open: function(layoutDef, onClose) {
-        var layout,
-            parentContext;
+    open: function(def, onClose) {
+        var component;
 
         app.shortcuts.saveSession();
         if (!app.triggerBefore('app:view:change')) {
             return;
         }
+
+        this._enterState(this.STATES.OPENING);
 
         //store the callback function to be called later
         if (_.isUndefined(onClose)) {
@@ -66,53 +99,37 @@
             this.onCloseCallback.push(onClose);
         }
 
-        if (_.isUndefined(layoutDef.context)) {
-            layoutDef.context = {};
-        }
-
-        if (_.isUndefined(layoutDef.context.forceNew)) {
-            layoutDef.context.forceNew = true;
-        }
-
-        if (!(layoutDef.context instanceof app.Context) && layoutDef.context.parent instanceof app.Context) {
-            parentContext = layoutDef.context.parent;
-            // Remove the `parent` property to not mess up with the context
-            // attributes.
-            delete layoutDef.context.parent;
-        }
-
         //initialize layout definition components
-        this._addComponentsFromDef([layoutDef], parentContext);
+        this._initializeComponentsFromDefinition(def);
 
-        layout = _.last(this._components);
+        component = _.last(this._components);
+
+        this._updateFragments();
 
         //scroll both main and sidebar to the top
         this._scrollToTop();
 
         //open the drawer
-        this._animateOpenDrawer(_.bind(function(){
-            // Forecasts config route uses the drawer but if user
-            // does not have access, initialize is never called so the
-            // context on the layout never gets set. Adding check to make
-            // sure there actually is a context to use on the layout
-            if (layout.context) {
-                //called after animation finished
-                app.trigger("app:view:change", layout.options.name, layout.context.attributes);
-            }
+        this._animateOpenDrawer(_.bind(function() {
+            this._afterOpenActions();
         }, this));
 
         //load and render new layout in drawer
-        layout.loadData();
-        layout.render();
+        component.loadData();
+        component.render();
     },
 
     /**
-     * Close the top-most drawer
-     * @param any parameters passed into the close method will be passed to the callback
+     * Closes the top-most drawer.
+     *
+     * @param any parameters passed into the close method will be passed to the
+     * callback.
      */
     close: function() {
         var self = this,
             args = Array.prototype.slice.call(arguments, 0);
+
+        this._updateFragments(true);
 
         if (!Modernizr.csstransitions) {
             this.closeImmediately.apply(this, args);
@@ -124,34 +141,50 @@
                 return;
             }
 
+            this._enterState(this.STATES.CLOSING);
+
             //close the drawer
             this._animateCloseDrawer(function() {
-                var layout;
-                var topDrawer = self._components.pop();
-                if(topDrawer && topDrawer.dispose) {
-                    topDrawer.dispose(); //dispose top-most drawer
-                }
-                layout = _.last(self._components);
-
-                //scroll both main and sidebar back its original position
-                self._scrollBackToOriginal(layout);
-
-                if (layout) { // still have layouts in the drawer
-                    app.trigger("app:view:change", layout.options.name, layout.context.attributes);
-                } else { //we've returned to base layout
-                    app.trigger("app:view:change", app.controller.context.get("layout"), app.controller.context.attributes);
-                }
-
-                app.shortcuts.restoreSession();
-
-                (self.onCloseCallback.pop()).apply(this, args); //execute callback
+                self._afterCloseActions(args);
             });
         }
     },
 
     /**
+     * Updates the fragments array according to the passed parameter.
+     *   - Adds the current fragment to the fragments queue if no
+     *   argument or `false` is passed.
+     *   - Navigates back to the previous fragment if `true` is passed.
+     *
+     * @param {boolean} goBack `true` to navigate back to the previous fragment.
+     *   No argument or `false` to add the current fragment to the queue.
+     * @private
+     */
+    _updateFragments: function(goBack) {
+        var component = _.last(this._components);
+        if (!component.context.get('fromRouter')) {
+            return;
+        }
+        if (goBack) {
+            this._fragments.pop();
+            app.router.navigate(_.last(this._fragments));
+            if (this.count() === 1) {
+                this._fragments = [];
+            }
+        } else {
+            if (this.count() === 1) {
+                this._fragments = [app.router.getPreviousFragment(), app.router.getFragment()];
+            } else {
+                this._fragments.push(app.router.getFragment());
+            }
+        }
+    },
+
+    /**
      * Close the top-most drawer immediately without transitions.
-     * @param any parameters passed into the close method will be passed to the callback
+     *
+     * @param any parameters passed into the close method will be passed to the
+     * callback
      */
     closeImmediately: function() {
         if (this._components.length > 0) {
@@ -159,16 +192,11 @@
                 drawers = this._getDrawers(false),
                 drawerHeight = this._determineDrawerHeight();
 
-            //temporarily remove transitions so that the drawer can be closed immediately
-            drawers.$top
-                .removeClass('transition active');
-            drawers.$bottom
-                .removeClass('transition inactive')
-                .addClass('active')
-                .removeAttr('aria-hidden');
-            if (drawers.$next) {
-                drawers.$next.removeClass('transition');
+            if (!app.triggerBefore('app:view:change')) {
+                return;
             }
+
+            this._enterState(this.STATES.CLOSING);
 
             //move the bottom drawer to the top and the next drawer to be viewed on the bottom.
             drawers.$bottom.css('top','');
@@ -176,41 +204,36 @@
                 drawers.$next.css('top', this._isMainAppContent(drawers.$next) ? drawerHeight : drawers.$next.offset().top - drawerHeight);
             }
 
+            this._removeTabAndBackdrop(drawers.$bottom);
             this._cleanUpAfterClose(drawers);
-
-            //add back transitions
-            drawers.$bottom.addClass('transition');
-            if (drawers.$next) {
-                drawers.$next.addClass('transition');
-            }
-
-            this._components.pop().dispose(); //dispose top-most drawer
-            this._scrollBackToOriginal(_.last(this._components)); //scroll both main and sidebar back its original position
-            (this.onCloseCallback.pop()).apply(window, args); //execute callback
+            this._afterCloseActions(args);
         }
     },
 
     /**
-     * Reload the current drawer with a new layout
-     * @param layoutDef
+     * Reload the current drawer with a new layout or view.
+     *
+     * @param def The layout or view definition.
      */
-    load: function(layoutDef) {
-        var layout = this._components.pop(),
-            top = layout.$el.css('top'),
-            height = layout.$el.css('height'),
+    load: function(def) {
+        var comp = this._components.pop(),
+            top = comp.$el.css('top'),
+            height = comp.$el.css('height'),
             drawers;
 
-        layout.dispose();
+        comp.dispose();
 
         if (!app.triggerBefore('app:view:change')) {
             return;
         }
 
-        this._addComponentsFromDef([layoutDef]);
+        this._enterState(this.STATES.OPENING);
+
+        this._initializeComponentsFromDefinition(def);
 
         drawers = this._getDrawers(true);
         drawers.$next
-            .addClass('drawer transition active')
+            .addClass('drawer active')
             .css({
                 top: top,
                 height: height
@@ -220,14 +243,17 @@
         this._removeTabAndBackdrop(drawers.$top);
         this._createTabAndBackdrop(drawers.$next, drawers.$top);
 
-        layout = _.last(this._components);
-        layout.loadData();
-        layout.render();
+        comp = _.last(this._components);
+        comp.loadData();
+        comp.render();
+
+        this._enterState(this.STATES.IDLE);
     },
 
     /**
-     * Retrieves the number of drawers in the stack
-     * @returns {Number}
+     * Retrieves the number of drawers in the stack.
+     *
+     * @return {Number}
      */
     count: function() {
         return this._components.length;
@@ -243,15 +269,25 @@
     },
 
     /**
+     * Gets the active drawer.
+     *
+     * @return {View.Component} The active drawer's component. `undefined` if
+     *   no drawer is open.
+     */
+    getActive: function() {
+        return _.last(this._components);
+    },
+
+    /**
      * Get currently active drawer layout.
-     * @returns {View.Layout}
+     *
+     * @return {View.Layout}
+     * @deprecated Since 7.7. Will be removed in 7.9.
      */
     getActiveDrawerLayout: function() {
-        if (this.count() === 0) {
-            return app.controller.layout;
-        } else {
-            return _.last(this._components);
-        }
+        app.logger.warn('Drawer\'s `getActiveDrawerLayout` is deprecated and will be removed in 7.9,' +
+            'please use `getActive` instead.');
+        return this.count() ? this.getActive() : app.controller.layout;
     },
 
     /**
@@ -266,6 +302,8 @@
 
         var $main = app.$contentEl.children().first();
 
+        this._enterState(this.STATES.CLOSING);
+
         _.each(this._components, function(component) {
             component.dispose();
         }, this);
@@ -275,7 +313,7 @@
 
         if ($main.hasClass('drawer')) {
             $main
-                .removeClass('drawer transition inactive')
+                .removeClass('drawer inactive')
                 .removeAttr('aria-hidden')
                 .css('top','');
             this._removeTabAndBackdrop($main);
@@ -283,20 +321,61 @@
 
         $('body').removeClass('noscroll');
         app.$contentEl.removeClass('noscroll');
+
+        this._enterState(this.STATES.IDLE);
     },
 
     /**
-     * Animate opening of a new drawer
+     * Force to create a new context and create components from the layout/view
+     * definition. If the parent context is defined, make the new context as a
+     * child of the parent context.
+     *
+     * @param {Object} def The layout or view definition.
      * @private
-     * @param {Function} callback Called when open animation is finished
+     */
+    _initializeComponentsFromDefinition: function(def) {
+        var parentContext;
+
+        if (_.isUndefined(def.context)) {
+            def.context = {};
+        }
+
+        if (_.isUndefined(def.context.forceNew)) {
+            def.context.forceNew = true;
+        }
+
+        if (!(def.context instanceof app.Context) && def.context.parent instanceof app.Context) {
+            parentContext = def.context.parent;
+            // Remove the `parent` property to not mess up with the context
+            // attributes.
+            delete def.context.parent;
+        }
+
+        this.initComponents([def], parentContext);
+    },
+
+    /**
+     * Animate opening of a new drawer.
+     *
+     * @private
+     * @param {Function} callback Called when open animation is finished.
      */
     _animateOpenDrawer: function(callback) {
         if (this._components.length === 0) {
+            this._enterState(this.STATES.IDLE);
             return;
         }
 
         var drawers = this._getDrawers(true),
-            drawerHeight = this._determineDrawerHeight();
+            drawerHeight = this._determineDrawerHeight(),
+            topDrawerCurrentTopPos = drawers.$top.offset().top,
+            aboveWindowTopPos = topDrawerCurrentTopPos - drawerHeight, //top position above the browser window
+            bottomDrawerTopPos = this._isMainAppContent(drawers.$top) ? drawerHeight : topDrawerCurrentTopPos + drawerHeight,
+            belowWindowTopPos; //top position below the browser window
+
+        if (drawers.$bottom) {
+            belowWindowTopPos = drawers.$bottom.offset().top + drawerHeight
+        }
 
         if (this._isMainAppContent(drawers.$top)) {
             //make sure that the main application content is set as a drawer
@@ -308,88 +387,94 @@
         //add the expand tab and the backdrop to the top drawer
         this._createTabAndBackdrop(drawers.$next, drawers.$top);
 
-        //indicate that it's a drawer
-        drawers.$next.addClass('drawer');
+        //indicate that it's an active drawer
+        drawers.$next.addClass('drawer active');
         //set the height of the new drawer
         drawers.$next.css('height', drawerHeight);
         //set the animation starting point for the new drawer
-        drawers.$next.css('top', drawers.$top.offset().top-drawerHeight);
+        drawers.$next.css('top', aboveWindowTopPos);
+        //mark the top drawer as inactive
+        drawers.$top
+            .addClass('inactive')
+            .removeClass('active')
+            .attr('aria-hidden', true); //accessibility
+        //prevent scrolling on drawer
+        drawers.$top.on('scroll.prevent', _.bind(function() {
+            this._preventScroll(drawers.$top);
+        }, this));
 
-        //start animation
+        // Need to do a defer so that transition can be applied when the drawer is coming down
+        // but not when it's being setup above browser window.
         _.defer(_.bind(function() {
+            this._setTransition(drawers);
+            this._onTransitionEnd(drawers.$next, function() {
+                this._removeTransition(drawers);
+                if (_.isFunction(callback)) {
+                    callback();
+                }
+                this.trigger('drawer:resize', drawerHeight);
+            });
+
+            //start animation to open the drawer
+            drawers.$next.css('top','');
+            drawers.$top.css('top', bottomDrawerTopPos);
             if (drawers.$bottom) {
-                drawers.$bottom
-                    .addClass('transition')
-                    .css('top', drawers.$bottom.offset().top + drawerHeight);
+                drawers.$bottom.css('top', belowWindowTopPos);
             }
-
-            drawers.$top
-                .addClass('transition inactive')
-                .removeClass('active')
-                .attr('aria-hidden', true)
-                .css('top', this._isMainAppContent(drawers.$top) ? drawerHeight : drawers.$top.offset().top + drawerHeight);
-
-            drawers.$next
-                .addClass('transition active')
-                .css('top','');
 
             //resize the visible drawer when the browser resizes
             if (this._components.length === 1) {
                 $(window).on('resize.drawer', _.bind(this._resizeDrawer, this));
             }
-            if (_.isFunction(callback)) {
-                callback();
-            }
         }, this));
-
-        this.trigger('drawer:resize', drawerHeight);
     },
 
     /**
-     * Animate closing of the top-most drawer
-     * @param callback
+     * Animate closing of the top-most drawer.
+     *
+     * @param {Function} callback Function to be called after drawer has been
+     * closed.
      * @private
      */
     _animateCloseDrawer: function(callback) {
         if (this._components.length === 0) {
+            this._enterState(this.STATES.IDLE);
             return;
         }
 
         var drawers = this._getDrawers(false),
             drawerHeight = this._determineDrawerHeight(),
-            transitionEndEvents = 'webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd';
-
-        //once the animation is done, reset to original state and execute callback parameter
-        drawers.$bottom.one(transitionEndEvents, _.bind(function() {
-            drawers.$bottom.off(transitionEndEvents); //some browsers fire multiple transitionend events
-            this._cleanUpAfterClose(drawers);
-            callback();
-        }, this));
-
-        //start the animation to close the drawer
-        drawers.$top
-            .removeClass('active')
-            .css('top', drawers.$top.offset().top-drawerHeight);
-        drawers.$bottom
-            .removeClass('inactive')
-            .addClass('active')
-            .removeAttr('aria-hidden')
-            .css('top','');
-
-        //this is a failsafe to ensure that drawer will always close
-        //in Chrome the css change to 'top' sometimes (randomly) doesn't actually change the css value
-        _.delay(function() {
-            drawers.$bottom.trigger('transitionend');
-        }, 400);
+            aboveWindowTopPos = drawers.$top.offset().top - drawerHeight, //top position above the browser window
+            bottomDrawerTopPos; //top position of the bottom drawer
 
         if (drawers.$next) {
-            drawers.$next.css('top', this._isMainAppContent(drawers.$next) ? drawerHeight : drawers.$next.offset().top - drawerHeight);
+            bottomDrawerTopPos = this._isMainAppContent(drawers.$next) ? drawerHeight : drawers.$next.offset().top - drawerHeight;
         }
+
+        this._setTransition(drawers);
+        this._onTransitionEnd(drawers.$bottom, function() {
+            this._removeTransition(drawers);
+            this._cleanUpAfterClose(drawers);
+            if (_.isFunction(callback)) {
+                callback();
+            }
+        });
+
+        //start the animation to close the drawer
+        drawers.$top.css('top', aboveWindowTopPos);
+        drawers.$bottom.css('top','');
+        if (drawers.$next) {
+            drawers.$next.css('top', bottomDrawerTopPos);
+        }
+
+        this._removeTabAndBackdrop(drawers.$bottom);
     },
 
     /**
-     * Get all (top, bottom, next) drawers layouts depending upon whether or not a drawer is being opened or closed
-     * @param open
+     * Get all (top, bottom, next) drawers layouts depending upon whether or not
+     * a drawer is being opened or closed.
+     *
+     * @param {boolean} open `true` if the drawer is being opened.
      * @return {Object}
      * @private
      */
@@ -481,7 +566,7 @@
 
         //add expand/collapse tab behavior
         $drawerTab.on('click', _.bind(function(event) {
-            if ($('i', event.currentTarget).hasClass('icon-chevron-up')) {
+            if ($('i', event.currentTarget).hasClass('fa-chevron-up')) {
                 this._collapseDrawer($top, $bottom);
             } else {
                 this._expandDrawer($top, $bottom);
@@ -512,18 +597,29 @@
 
     /**
      * Process clean up after the drawer has been closed.
+     * @param {Object} drawers Object of drawers ({@link #_getDrawers})
      * @private
      */
     _cleanUpAfterClose: function(drawers) {
-        this._removeTabAndBackdrop(drawers.$bottom);
+        drawers.$top.removeClass('active');
+
+        drawers.$bottom
+            .removeClass('inactive')
+            .addClass('active')
+            .removeAttr('aria-hidden') //accessibility
+            .off('scroll.prevent'); //remove event handler that prevents scrolling
+
         if (this._isMainAppContent(drawers.$bottom)) {
-            drawers.$bottom.removeClass('drawer transition active');
+            drawers.$bottom.removeClass('drawer active');
             $('body').removeClass('noscroll');
             app.$contentEl.removeClass('noscroll');
         } else {
             //refresh drawer position and height for collapsed or resized drawers
             this._expandDrawer(drawers.$bottom, drawers.$next);
         }
+
+        //set scrollable elements back its original position
+        this._scrollBackToOriginal(drawers.$bottom);
 
         //remove resize handler
         if (this._components.length === 1) {
@@ -532,55 +628,165 @@
     },
 
     /**
-     * Expand the drawer
-     * @param $top
-     * @param $bottom
+     * Trigger view change event and return to idle state.
+     *
+     * @private
+     */
+    _afterOpenActions: function() {
+        var layout = _.last(this._components);
+
+        // Forecasts config route uses the drawer but if user
+        // does not have access, initialize is never called so the
+        // context on the layout never gets set. Adding check to make
+        // sure there actually is a context to use on the layout
+        if (layout.context) {
+            app.trigger('app:view:change', layout.options.name, layout.context.attributes);
+        }
+
+        this._enterState(this.STATES.IDLE);
+    },
+
+    /**
+     * Trigger view change event and restore shortcuts session.
+     * @param {array} callbackArgs Arguments that will be passed to the callback
+     * @private
+     */
+    _afterCloseActions: function(callbackArgs) {
+        var layout;
+
+        this._components.pop().dispose(); //dispose top-most drawer
+
+        layout = _.last(this._components);
+        if (layout) { // still have layouts in the drawer
+            app.trigger("app:view:change", layout.options.name, layout.context.attributes);
+        } else { //we've returned to base layout
+            app.trigger("app:view:change", app.controller.context.get("layout"), app.controller.context.attributes);
+        }
+
+        this._enterState(this.STATES.IDLE);
+
+        app.shortcuts.restoreSession();
+
+        (this.onCloseCallback.pop()).apply(window, callbackArgs); //execute callback
+    },
+
+    /**
+     * Expand the drawer.
+     * @param {jQuery} $top The top drawer
+     * @param {jQuery} $bottom The bottom drawer
      * @private
      */
     _expandDrawer: function($top, $bottom) {
         var expandHeight = this._determineDrawerHeight();
         $top.css('height', expandHeight);
 
-        if ($bottom.closest('#drawers').length > 0) {
-            $bottom.css('top', expandHeight + $top.offset().top);
-        } else {
+        if (this._isMainAppContent($bottom)) {
             $bottom.css('top', expandHeight);
+        } else {
+            $bottom.css('top', expandHeight + $top.offset().top);
         }
 
         $bottom
             .find('.drawer-tab i')
-            .removeClass('icon-chevron-down')
-            .addClass('icon-chevron-up');
+            .removeClass('fa-chevron-down')
+            .addClass('fa-chevron-up');
 
         this.trigger('drawer:resize', expandHeight);
     },
 
     /**
-     * Collapse the drawer
-     * @param $top
-     * @param $bottom
+     * Collapse the drawer.
+     * @param {jQuery} $top The top drawer
+     * @param {jQuery} $bottom The bottom drawer
      * @private
      */
     _collapseDrawer: function($top, $bottom) {
         var collapseHeight = this._determineCollapsedHeight();
         $top.css('height', collapseHeight);
 
-        if ($bottom.closest('#drawers').length > 0) {
-            $bottom.css('top', collapseHeight + $top.offset().top);
-        } else {
+        if (this._isMainAppContent($bottom)) {
             $bottom.css('top', collapseHeight);
+        } else {
+            $bottom.css('top', collapseHeight + $top.offset().top);
         }
 
         $bottom
             .find('.drawer-tab i')
-            .removeClass('icon-chevron-up')
-            .addClass('icon-chevron-down');
+            .removeClass('fa-chevron-up')
+            .addClass('fa-chevron-down');
 
         this.trigger('drawer:resize', collapseHeight);
     },
 
     /**
-     * Scroll the content, main and sidebar divs to the top and save its position.
+     * Add transition to the drawers.
+     * @param {Object} drawers Object of drawers ({@link #_getDrawers})
+     * @private
+     */
+    _setTransition: function(drawers) {
+        drawers.$top.addClass('transition');
+
+        if (drawers.$next) {
+            drawers.$next.addClass('transition');
+        }
+
+        if (drawers.$bottom) {
+            drawers.$bottom.addClass('transition');
+        }
+    },
+
+    /**
+     * Remove transition from the drawers.
+     * @param {Object} drawers Object of drawers ({@link #_getDrawers})
+     * @private
+     */
+    _removeTransition: function(drawers) {
+        drawers.$top.removeClass('transition');
+
+        if (drawers.$next) {
+            drawers.$next.removeClass('transition');
+        }
+
+        if (drawers.$bottom) {
+            drawers.$bottom.removeClass('transition');
+        }
+    },
+
+    /**
+     * Is the drawer in a middle of a transition?
+     * @param {jQuery} drawer top, bottom, or next drawer layout
+     * @return {boolean}
+     * @private
+     */
+    _isInTransition: function(drawer) {
+        return drawer.hasClass('transition');
+    },
+
+    /**
+     * Attach transition end event handler for a given drawer.
+     * @param {jQuery} $drawer Drawer to attach the event
+     * @param {Function} callback Event handler
+     * @private
+     */
+    _onTransitionEnd: function($drawer, callback) {
+        var self = this,
+            transitionEndEvents = 'webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd';
+
+        //once the animation is done, reset to original state and execute callback parameter
+        $drawer.one(transitionEndEvents, function() {
+            $drawer.off(transitionEndEvents); //some browsers fire multiple transitionend events
+            callback.call(self);
+        });
+
+        //this is a failsafe to ensure that drawer will always close
+        //in Chrome the css change to 'top' sometimes (randomly) doesn't actually change the css value
+        _.delay(function() {
+            $drawer.trigger('transitionend');
+        }, 400);
+    },
+
+    /**
+     * Scroll the scrollable divs to the top and save its position.
      * Content needs to be scrolled as well because in small width screens,
      * the responsive layout changes the #content div to be a scrollable container
      * @private
@@ -594,35 +800,38 @@
         this.scrollTopPositions.push({
             main: $mainpane.scrollTop(),
             side: $sidepane.scrollTop(),
+            drawer: drawers.$top.scrollTop(),
             content: $content.scrollTop()
         });
 
+        drawers.$top.scrollTop(0);
         $mainpane.scrollTop(0);
         $sidepane.scrollTop(0);
         $content.scrollTop(0);
     },
 
     /**
-     * Scroll the content, main and sidebar elements back to its original position.
-     * @param drawerLayout
+     * Scroll the scrollable elements back to its original position.
+     * @param {jQuery} [$drawer] Drawer to scroll back
      * @private
      */
-    _scrollBackToOriginal: function(drawerLayout) {
+    _scrollBackToOriginal: function($drawer) {
         var scrollPositions = this.scrollTopPositions.pop();
-        if (!scrollPositions) return;
-        if (drawerLayout) {
-            drawerLayout.$('.main-pane').scrollTop(scrollPositions.main);
-            drawerLayout.$('.sidebar-content').scrollTop(scrollPositions.side);
+
+        if ($drawer) {
+            $drawer.scrollTop(scrollPositions.drawer);
         } else {
-            app.$contentEl.find('.main-pane').scrollTop(scrollPositions.main);
-            app.$contentEl.find('.sidebar-content').scrollTop(scrollPositions.side);
-            app.$contentEl.scrollTop(scrollPositions.content)
+            $drawer = app.$contentEl;
         }
+
+        $drawer.find('.main-pane').scrollTop(scrollPositions.main);
+        $drawer.find('.sidebar-content').scrollTop(scrollPositions.side);
+        app.$contentEl.scrollTop(scrollPositions.content);
     },
 
     /**
      * Get the current height of the active drawer
-     * @returns {Number}
+     * @return {Number}
      */
     getHeight: function(){
         if (_.isEmpty(this._components)) {
@@ -632,10 +841,26 @@
         return $top.height();
     },
 
+    /**
+     * Prevent scrolling when drawer is open.  This feature is needed because browsers
+     * automatically scroll when the Find feature is used (Ctrl+F) even when the scrollable
+     * elements have been set with hidden overflow.
+     * @param {jQuery} $scrollable Scrollable element that needs to be prevented from scrolling
+     * @private
+     */
+    _preventScroll: function($scrollable) {
+        // Preventing scrolls in iOS 7 causes AJAX calls to be paused (MAR-2768). No problems in iOS 8.
+        if (!Modernizr.touch && (app.drawer.count() > 0)) {
+            $scrollable.scrollTop(0);
+        }
+    },
+
     _dispose: function() {
-        app.routing.offBefore("route", this.reset, this);
         this.reset();
+        app.offBefore(null, null, this);
         $(window).off('resize.drawer');
+        $(window).off('scroll.prevent');
+        app.$contentEl.on('scroll.prevent');
         this._super('_dispose');
     },
 
@@ -644,8 +869,72 @@
      */
     _resizeDrawer: _.throttle(function() {
         var drawers = this._getDrawers(false);
-        if (drawers.$top) {
+        // Do not resize the drawer when the drawer is opening or closing.
+        if (drawers.$top && !this.isOpening() && !this.isClosing()) {
             this._expandDrawer(drawers.$top, drawers.$bottom);
         }
-    }, 300)
+    }, 300),
+
+    /**
+     * Enter the drawer into one of the allowed states.
+     *
+     * @param {string} state
+     * @return {string} If the returned state is the same as the previous
+     * state, then the parameter was not a valid state.
+     * @private
+     */
+    _enterState: function(state) {
+        if (_.contains(this.STATES, state)) {
+            this.state = state;
+        }
+
+        return this.state;
+    },
+
+    /**
+     * Confirms or denies that the current state of the drawer is the expected
+     * state.
+     *
+     * @param state
+     * @return {boolean}
+     */
+    isInState: function(state) {
+        return state === this.state;
+    },
+
+    /**
+     * Is the drawer currently in the idle state?
+     *
+     * The drawer will be in the IDLE state unless a drawer is currently
+     * opening or closing.
+     *
+     * @return {boolean}
+     */
+    isIdle: function() {
+        return this.isInState(this.STATES.IDLE);
+    },
+
+    /**
+     * Is the drawer currently opening?
+     *
+     * The drawer will be in the OPENING state while a drawer is opening. Once
+     * the open animation has completed, the drawer state is returned to IDLE.
+     *
+     * @return {boolean}
+     */
+    isOpening: function() {
+        return this.isInState(this.STATES.OPENING);
+    },
+
+    /**
+     * Is the drawer currently closing?
+     *
+     * The drawer will be in the CLOSING state while a drawer is closing. Once
+     * the close animation has completed, the drawer state is returned to IDLE.
+     *
+     * @return {boolean}
+     */
+    isClosing: function() {
+        return this.isInState(this.STATES.CLOSING);
+    }
 })

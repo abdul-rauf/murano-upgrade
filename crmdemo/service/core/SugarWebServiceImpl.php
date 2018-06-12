@@ -11,11 +11,15 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+
 /**
  * This class is an implemenatation class for all the web services
  */
 require_once('service/core/SoapHelperWebService.php');
 SugarWebServiceImpl::$helperObject = new SoapHelperWebServices();
+
+
 
 class SugarWebServiceImpl{
 
@@ -434,7 +438,25 @@ function set_entry($session,$module_name, $name_value_list){
     	return;
     } // if
 
-	$seed->save(self::$helperObject->checkSaveOnNotify());
+    try {
+	    $seed->save(self::$helperObject->checkSaveOnNotify());
+    } catch (SugarApiExceptionNotAuthorized $ex) {
+        $GLOBALS['log']->info('End: SugarWebServiceImpl->set_entry');
+        switch($ex->messageLabel) {
+            case 'ERR_USER_NAME_EXISTS':
+                $error_string = 'duplicates';
+                break;
+            case 'ERR_REPORT_LOOP':
+                $error_string = 'user_loop';
+                break;
+            default:
+                $error_string = 'error_user_create_update';
+        }
+        $error->set_error($error_string);
+        self::$helperObject->setFaultObject($error);
+        return;
+    }
+
 	if($seed->deleted == 1){
 		$seed->mark_deleted($seed->id);
 	}
@@ -668,7 +690,7 @@ function seamless_login($session){
 	if(!self::$helperObject->validate_authenticated($session)){
 		return 0;
 	}
-
+	$_SESSION['seamless_login'] = true;
 	$GLOBALS['log']->info('End: SugarWebServiceImpl->seamless_login');
 	return 1;
 }
@@ -1001,8 +1023,7 @@ function get_available_modules($session){
 		return;
 	} // if
 
-	$modules = array();
-	$modules = array_keys($_SESSION['avail_modules']);
+	$modules = ArrayFunctions::array_access_keys($_SESSION['avail_modules']);
 
 	$GLOBALS['log']->info('End: SugarWebServiceImpl->get_available_modules');
 	return array('modules'=> $modules);
@@ -1029,8 +1050,6 @@ function get_user_team_id($session){
 	$GLOBALS['log']->info('End: SugarWebServiceImpl->get_user_team_id');
 	return $current_user->default_team;
 } // fn
-
-
 
 /**
 *   Once we have successfuly done a mail merge on a campaign, we need to notify Sugar of the targets
@@ -1164,7 +1183,6 @@ function get_report_entries($session, $ids, $select_fields ){
 	$GLOBALS['log']->info('End: SugarWebServiceImpl->get_report_entries');
 	return array('field_list'=>$field_list, 'entry_list'=>$output_list);
 } // fn
-
 
 
 } // clazz

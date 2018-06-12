@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: uw_utils.php 58174 2010-09-14 18:18:39Z kjing $
 
 /**
  * Implodes some parts of version with specified delimiter, beta & rc parts are removed all time
@@ -3885,8 +3885,7 @@ function merge_config_si_settings($write_to_upgrade_log=false, $config_location=
 	$modified = false;
 	foreach($sugar_config_si as $key=>$value)
 	{
-		if(!preg_match('/^setup_/', $key) && !isset($sugar_config[$key]))
-		{
+        if (!preg_match('/^setup_/', $key)) {
 		   if($write_to_upgrade_log)
 		   {
 		      logThis('Merge key (' . $key . ') with value (' . $value . ')', $path);
@@ -4461,58 +4460,16 @@ function addPdfManagerTemplate() {
 
 
 /**
- *
- *
- * This function creates a job for to run the SugarJobUpdateOpportunities class
- *
+ * This is left here for legacy, just calling the new methods
+ * @deprecated
+ * @param int $perJob The Number of records to put in a job
+ * @return array|string An array of jobs ids that were created, unless
+ *      there is one, the it's just that single job id
  */
 function updateOpportunitiesForForecasting($perJob = 100)
 {
-    /* @var $db DBManager */
-    $db = DBManagerFactory::getInstance();
-    // get all the opps to break into groups of 100 and go newest to oldest
-    $sql = "select id from opportunities where deleted = 0 ORDER By date_closed DESC";
-    $results = $db->query($sql);
-
-    $jobs = array();
-
-    $toProcess = array();
-    while ($row = $db->fetchRow($results)) {
-        $toProcess[] = $row['id'];
-
-        if (count($toProcess) == $perJob) {
-            $jobs[] = createUpgradeOpportunitiesJob($toProcess);
-            $toProcess = array();
-        }
-    }
-
-    if (!empty($toProcess)) {
-        $jobs[] = createUpgradeOpportunitiesJob($toProcess);
-    }
-
-    // if only one job was created, just return that id
-    if (count($jobs) == 1) {
-        return array_shift($jobs);
-    }
-
-    return $jobs;
-}
-
-function createUpgradeOpportunitiesJob(array $data)
-{
-    global $current_user;
-
-    //Create an entry in the job queue to run UpdateOppsJob which handles updating all opportunities
-    /* @var $job SchedulersJob */
-    $job = BeanFactory::getBean('SchedulersJobs');
-    $job->name = "Update Old Opportunities";
-    $job->target = "class::SugarJobUpdateOpportunities";
-    $job->data = json_encode($data);
-    $job->retry_count = 0;
-    $job->assigned_user_id = $current_user->id;
-    require_once('include/SugarQueue/SugarJobQueue.php');
-    $job_queue = new SugarJobQueue();
-    return $job_queue->submitJob($job);
+    SugarAutoLoader::load('include/SugarQueue/jobs/SugarJobUpdateOpportunities.php');
+    return SugarJobUpdateOpportunities::updateOpportunitiesForForecasting($perJob);
 }
 
 /**

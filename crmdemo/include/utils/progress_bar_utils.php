@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: progress_bar_utils.php 53116 2009-12-10 01:24:37Z mitani $
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 function progress_bar_flush()

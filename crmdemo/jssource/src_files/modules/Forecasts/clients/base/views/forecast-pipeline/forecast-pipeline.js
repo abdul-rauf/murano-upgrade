@@ -19,11 +19,6 @@
     forecastSetup: 0,
 
     /**
-     * Is the user a forecast Admin? This is only used if forecasts is not setup
-     */
-    forecastAdmin: false,
-
-    /**
      * Holds the forecast isn't set up message if Forecasts hasn't been set up yet
      */
     forecastsNotSetUpMsg: undefined,
@@ -34,7 +29,7 @@
     isManager: false,
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     initialize: function(options) {
         this.isManager = app.user.get('is_manager');
@@ -43,16 +38,21 @@
 
         // check to make sure that forecast is configured
         this.forecastSetup = app.metadata.getModule('Forecasts', 'config').is_setup;
-        this.forecastAdmin = (_.isUndefined(app.user.getAcls()['Forecasts'].admin));
-        if (!this.forecastSetup) {
-            this.forecastsNotSetUpMsg = app.utils.getForecastNotSetUpMessage(this.forecastAdmin);
-        }
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     initDashlet: function(view) {
+        var userCurrency = app.metadata.getCurrency(app.user.getPreference('currency_id'));
+        var userConversionRate = (userCurrency ? (1 / userCurrency.conversion_rate) : 1);
+        var userCurrencyPreference = app.user.getPreference('currency_id');
+        var salesStageLabels = app.lang.getAppListStrings('sales_stage_dom');
+
+        function formatValue(d, precision) {
+            return app.currency.formatAmountLocale(app.currency.convertWithRate(d, userConversionRate), userCurrencyPreference, precision);
+        }
+
         if (!this.isManager && this.meta.config) {
             // FIXME: Dashlet's config page is rendered from meta.panels directly.
             // See the "dashletconfiguration-edit.hbs" file.
@@ -73,29 +73,30 @@
                 }, this),
                 complete: view.options ? view.options.complete : null
             });
+        } else {
+            this.settings.set({'selectedTimePeriod': 'current'}, {silent: true});
         }
         this.chart = nv.models.funnelChart()
             .showTitle(false)
             .tooltips(true)
             .margin({top: 0})
+            .direction(app.lang.direction)
             .tooltipContent(function(key, x, y, e, graph) {
-                var val = app.currency.formatAmountLocale(y, app.currency.getBaseCurrencyId());
-                var salesStageLabels = app.lang.getAppListStrings('sales_stage_dom');
                 return '<p>' + SUGAR.App.lang.get('LBL_SALES_STAGE', 'Forecasts') + ': <b>' + ((salesStageLabels && salesStageLabels[key]) ? salesStageLabels[key] : key) + '</b></p>' +
-                    '<p>' + SUGAR.App.lang.get('LBL_AMOUNT', 'Forecasts') + ': <b>' + val + '</b></p>' +
+                    '<p>' + SUGAR.App.lang.get('LBL_AMOUNT', 'Forecasts') + ': <b>' + formatValue(y) + '</b></p>' +
                     '<p>' + SUGAR.App.lang.get('LBL_PERCENT', 'Forecasts') + ': <b>' + x + '%</b></p>';
             })
             .colorData('class', {step: 2})
             .fmtValueLabel(function(d) {
-                var y = d.label || d;
-                return app.currency.formatAmountLocale(y, app.currency.getBaseCurrencyId()).replace(/\,00|\.00$/,'');
+                var y = d.value || (isNaN(d) ? 0 : d);
+                return formatValue(y, 0);
             })
             .strings({
                 legend: {
-                    close: app.lang.getAppString('LBL_CHART_LEGEND_CLOSE'),
-                    open: app.lang.getAppString('LBL_CHART_LEGEND_OPEN')
+                    close: app.lang.get('LBL_CHART_LEGEND_CLOSE'),
+                    open: app.lang.get('LBL_CHART_LEGEND_OPEN')
                 },
-                noData: app.lang.getAppString('LBL_CHART_NO_DATA')
+                noData: app.lang.get('LBL_CHART_NO_DATA')
             });
     },
 
@@ -117,7 +118,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     bindDataChange: function() {
         this.settings.on('change', function(model) {
@@ -153,18 +154,14 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     loadData: function(options) {
-        var timePeriod = this.settings.get('selectedTimePeriod');
-        if (!timePeriod) {
-            return;
-        }
+        var timeperiod = this.settings.get('selectedTimePeriod');
+        if (timeperiod) {
+            var forecastBy = app.metadata.getModule('Forecasts', 'config').forecast_by || 'Opportunities',
+                url_base = forecastBy + '/chart/pipeline/' + timeperiod + '/';
 
-        var forecastBy = app.metadata.getModule('Forecasts', 'config').forecast_by || 'Opportunities',
-            url_base = forecastBy + '/chart/pipeline';
-        if (this.settings.has('selectedTimePeriod')) {
-            url_base += '/' + timePeriod;
             if (this.isManager) {
                 url_base += '/' + this.getVisibility();
             }
@@ -175,8 +172,8 @@
                         var salesStageLabels = app.lang.getAppListStrings('sales_stage_dom');
 
                         // update sales stage labels to translated strings
-                        _.each(o.data, function(dataBlock){
-                            if(dataBlock && dataBlock.key && salesStageLabels && salesStageLabels[dataBlock.key]) {
+                        _.each(o.data, function(dataBlock) {
+                            if (dataBlock && dataBlock.key && salesStageLabels && salesStageLabels[dataBlock.key]) {
                                 dataBlock.key = salesStageLabels[dataBlock.key];
                             }
 
@@ -196,7 +193,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     unbind: function() {
         this.settings.off('change');

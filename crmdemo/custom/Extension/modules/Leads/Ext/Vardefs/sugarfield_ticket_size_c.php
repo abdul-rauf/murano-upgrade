@@ -1,6 +1,6 @@
 <?php
- // created: 2012-03-05 15:00:30
-$dictionary['Lead']['fields']['ticket_size_c']['enforced']='false';
-$dictionary['Lead']['fields']['ticket_size_c']['dependency']='';
+ // created: 2018-06-12 08:16:06
+$dictionary['Lead']['fields']['ticket_size_c']['enforced'] = 'false';
+$dictionary['Lead']['fields']['ticket_size_c']['dependency'] = '';
+$dictionary['Lead']['fields']['ticket_size_c']['full_text_search']['boost'] = 1;
 
- ?>

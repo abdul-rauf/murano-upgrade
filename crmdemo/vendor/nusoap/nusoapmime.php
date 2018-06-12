@@ -185,7 +185,7 @@ require_once('Mail/mimePart.php');
 *
 * @author   Scott Nichol <snichol@sourceforge.net>
 * @author	Thanks to Guillaume and Henning Reich for posting great attachment code to the mail list
-
+* @version  $Id: nusoapmime.php 39619 2008-09-09 20:41:34Z jmertic $
 * @access   public
 */
 class nusoapclientmime extends nusoapclient {
@@ -400,7 +400,7 @@ class nusoapclientmime extends nusoapclient {
 *
 * @author   Scott Nichol <snichol@sourceforge.net>
 * @author	Thanks to Guillaume and Henning Reich for posting great attachment code to the mail list
-
+* @version  $Id: nusoapmime.php 39619 2008-09-09 20:41:34Z jmertic $
 * @access   public
 */
 class nusoapservermime extends soap_server {

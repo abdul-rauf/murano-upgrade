@@ -145,7 +145,7 @@
              *
              * Since oauth server implementation might throw 401 (as well as 400)
              * we route this to the {@link Core.Error#_handleFineGrainedError}.
-             * If no match for oauth error then handleOAuthError will try to use 
+             * If no match for oauth error then handleOAuthError will try to use
              * handleInvalidRequestError if supplied.
              *
              * Provide custom `handleInvalidRequestError` handler.
@@ -404,29 +404,29 @@
             // TODO: Add corresponding language agnostic app strings for title/message and use that instead.
             switch(method) {
                 case '_renderHtml':
-                    title = app.lang.getAppString('ERR_RENDER_FAILED_TITLE');
-                    messages = [app.lang.getAppString('ERR_RENDER_FAILED_MSG'), 
-                                app.lang.getAppString('ERR_CONTACT_TECH_SUPPORT')];
+                    title = app.lang.get('ERR_RENDER_FAILED_TITLE');
+                    messages = [app.lang.get('ERR_RENDER_FAILED_MSG'),
+                                app.lang.get('ERR_CONTACT_TECH_SUPPORT')];
                     break;
                 case '_renderField':
-                    title = app.lang.getAppString('ERR_RENDER_FIELD_FAILED_TITLE');
-                    messages = [app.utils.formatString(app.lang.getAppString('ERR_RENDER_FIELD_FAILED_MSG'),
-                        [additionalInfo.name]), app.lang.getAppString('ERR_CONTACT_TECH_SUPPORT')];
+                    title = app.lang.get('ERR_RENDER_FIELD_FAILED_TITLE');
+                    messages = [app.utils.formatString(app.lang.get('ERR_RENDER_FIELD_FAILED_MSG'),
+                        [additionalInfo.name]), app.lang.get('ERR_CONTACT_TECH_SUPPORT')];
                     break;
                 case 'view_render_denied':
-                    title = app.lang.getAppString('ERR_NO_VIEW_ACCESS_TITLE');
+                    title = app.lang.get('ERR_NO_VIEW_ACCESS_TITLE');
                     level = "warning";  // This isn't an application error, this is ACL enforcement.
-                    messages = [app.utils.formatString(app.lang.getAppString('ERR_NO_VIEW_ACCESS_MSG'),[component.module])];
+                    messages = [app.utils.formatString(app.lang.get('ERR_NO_VIEW_ACCESS_MSG'),[component.module])];
                     break;
                 case 'layout_render':
-                    title = app.lang.getAppString('ERR_LAYOUT_RENDER_TITLE');
-                    messages = [app.lang.getAppString('ERR_LAYOUT_RENDER_MSG')];
+                    title = app.lang.get('ERR_LAYOUT_RENDER_TITLE');
+                    messages = [app.lang.get('ERR_LAYOUT_RENDER_MSG')];
                     break;
                 default:
                     // This shouldn't happen
-                    title = app.lang.getAppString('ERR_GENERIC_TITLE');
-                    messages = [app.lang.getAppString('ERR_INTERNAL_ERR_MSG'), 
-                                app.lang.getAppString('ERR_CONTACT_TECH_SUPPORT')];
+                    title = app.lang.get('ERR_GENERIC_TITLE');
+                    messages = [app.lang.get('ERR_INTERNAL_ERR_MSG'),
+                                app.lang.get('ERR_CONTACT_TECH_SUPPORT')];
                     app.logger.error('handleRenderError called for render error caught in ' + method +', but we have no corresponding handler!');
                     break;
             }

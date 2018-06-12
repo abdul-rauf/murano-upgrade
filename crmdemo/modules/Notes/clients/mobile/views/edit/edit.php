@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -11,7 +12,7 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
+ * $Id$
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
@@ -28,14 +29,11 @@ $viewdefs['Notes']['mobile']['view']['edit'] = array(
         array(
             'label' => 'LBL_PANEL_DEFAULT',
             'fields' => array(
-                array(
-                    'name' => 'name',
-                    'displayParams' => array(
-                        'required' => true,
-                        'wireless_edit_only' => true,)),
+                'name',
                 'description',
                 'contact_name',
                 'parent_name',
+                'filename',
                 'assigned_user_name',
                 'team_name',
             )

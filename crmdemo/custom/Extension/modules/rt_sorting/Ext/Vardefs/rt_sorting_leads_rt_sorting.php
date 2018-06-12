@@ -1,5 +1,5 @@
 <?php
-// created: 2017-11-23 11:10:41
+
 $dictionary["rt_sorting"]["fields"]["rt_sorting_leads"] = array (
   'name' => 'rt_sorting_leads',
   'type' => 'link',
@@ -22,7 +22,7 @@ $dictionary["rt_sorting"]["fields"]["rt_sorting_leads_name"] = array (
   'link' => 'rt_sorting_leads',
   'table' => 'leads',
   'module' => 'Leads',
-  'rname' => 'name',
+  'rname' => 'full_name',
   'db_concat_fields' => 
   array (
     0 => 'first_name',

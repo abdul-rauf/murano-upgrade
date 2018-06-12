@@ -289,14 +289,25 @@ class LanguageManager
             unlink($file);
         }
 
-        if( empty($GLOBALS['sugar_config']['js_lang_version']) )
-            $GLOBALS['sugar_config']['js_lang_version'] = 1;
-        else
-            $GLOBALS['sugar_config']['js_lang_version'] += 1;
-
-        write_array_to_file( "sugar_config", $GLOBALS['sugar_config'], "config.php");
+        self::invalidateJsLanguageCache();
     }
-    
+
+    /**
+     * Invalidates javascript language cache
+     */
+    public static function invalidateJsLanguageCache()
+    {
+        global $sugar_config, $sugar_version;
+
+        if (empty($sugar_config['js_lang_version'])) {
+            $sugar_config['js_lang_version'] = 1;
+        } else {
+            $sugar_config['js_lang_version']++;
+        }
+
+        rebuildConfigFile($sugar_config, $sugar_version);
+    }
+
 	/**
 	 * Gets an array of enabled and disabled languages
 	 * 

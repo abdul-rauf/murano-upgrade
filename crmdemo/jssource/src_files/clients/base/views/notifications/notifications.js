@@ -46,14 +46,14 @@
     _alertsCollections: {},
 
     /**
-     * @property {Number} Timestamp when we started pooling.
-     */
-    dateStarted: null,
-
-    /**
      * @property {Number} Interval ID for checking reminders.
      */
     _remindersIntervalId: null,
+
+    /**
+     * @property {Number} Timestamp of last time when we checked reminders.
+     */
+    _remindersIntervalStamp: 0,
 
     /**
      * Interval ID defined when the pulling mechanism is running.
@@ -69,13 +69,15 @@
      * Supported options:
      * - delay: How often (minutes) should the pulling mechanism run.
      * - limit: Limit imposed to the number of records pulled.
+     * - enable_favicon: Enables/disables notifications in favicon, enabled by default.
      *
      * @property {Object}
      * @protected
      */
     _defaultOptions: {
         delay: 5,
-        limit: 4
+        limit: 4,
+        enable_favicon: true
     },
 
     events: {
@@ -83,7 +85,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     initialize: function(options) {
         options.module = 'Notifications';
@@ -103,10 +105,10 @@
         this._initOptions();
         this._initCollection();
         this._initReminders();
+        this._initFavicon();
         this.startPulling();
 
         this.collection.on('change:is_read', this.render, this);
-
         return this;
     },
 
@@ -118,10 +120,11 @@
      * @protected
      */
     _initOptions: function() {
-        var options = _.extend(this._defaultOptions, this.meta || {});
+        var options = _.extend({}, this._defaultOptions, this.meta || {});
 
         this.delay = options.delay * 60 * 1000;
         this.limit = options.limit;
+        this.enableFavicon = options.enable_favicon;
 
         return this;
     },
@@ -146,25 +149,15 @@
                 'is_read',
                 'name',
                 'severity'
-            ]
+            ],
+            apiOptions: {
+                skipMetadataHash: true
+            }
         };
 
         this.collection.filterDef = [{
             is_read: {$equals: false}
         }];
-
-        this.collection.sync = _.wrap(
-            this.collection.sync,
-            function(sync, method, model, options) {
-                options = options || {};
-                options.endpoint = function(method, model, options, callbacks) {
-                    var url = app.api.buildURL(model.module, 'pull', {}, options.params);
-                    return app.api.call('read', url, {}, callbacks);
-                };
-
-                sync(method, model, options);
-            }
-        );
 
         return this;
     },
@@ -198,12 +191,42 @@
         _.each(['Calls', 'Meetings'], function(module) {
             this._alertsCollections[module] = app.data.createBeanCollection(module);
             this._alertsCollections[module].options = {
-                limit: this.meta.remindersLimit,
+                limit: this.meta && parseInt(this.meta.remindersLimit, 10) || 100,
                 fields: ['date_start', 'id', 'name', 'reminder_time', 'location', 'parent_name']
             };
         }, this);
 
         return this;
+    },
+
+    /**
+     * Initializes the favicon using the Favico library.
+     *
+     * This will listen to the collection reset and update the favicon badge to
+     * match the value of the notification element.
+     *
+     * @private
+     */
+    _initFavicon: function() {
+
+        if (!this.enableFavicon) {
+            return;
+        }
+
+        this.favicon = new Favico({animation: 'none'});
+        this.collection.on('reset', function() {
+            var badge = this.collection.length;
+            if (this.collection.next_offset > 0) {
+                badge = badge + '+';
+            }
+            this.favicon.badge(badge);
+        }, this);
+
+        this.on('render', function(){
+            if (!app.api.isAuthenticated() || app.config.appStatus === 'offline') {
+                this.favicon.reset();
+            }
+        });
     },
 
     /**
@@ -217,7 +240,7 @@
         if (!_.isNull(this._intervalId)) {
             return this;
         }
-        this.dateStarted = new Date().getTime();
+        this._remindersIntervalStamp = new Date().getTime();
 
         this.pull();
         this._pullReminders();
@@ -236,8 +259,8 @@
             this.stopPulling();
             return;
         }
-        var diff = this.delay - (new Date().getTime() - this.dateStarted) % this.delay;
-        this._intervalId = window.setTimeout(_.bind(this._pullAction, this), diff);
+
+        this._intervalId = window.setTimeout(_.bind(this._pullAction, this), this.delay);
 
         this.pull();
         this._pullReminders();
@@ -250,11 +273,11 @@
      */
     stopPulling: function() {
         if (!_.isNull(this._intervalId)) {
-            window.clearInterval(this._intervalId);
+            window.clearTimeout(this._intervalId);
             this._intervalId = null;
         }
         if (!_.isNull(this._remindersIntervalId)) {
-            window.clearInterval(this._remindersIntervalId);
+            window.clearTimeout(this._remindersIntervalId);
             this._remindersIntervalId = null;
         }
         return this;
@@ -337,17 +360,18 @@
             this.stopPulling();
             return this;
         }
-        var date = new Date(),
-            diff = this.reminderDelay - (date.getTime() - this.dateStarted) % this.reminderDelay;
+        var date = (new Date()).getTime(),
+            diff = this.reminderDelay - (date - this._remindersIntervalStamp) % this.reminderDelay;
         this._remindersIntervalId = window.setTimeout(_.bind(this.checkReminders, this), diff);
         _.each(this._alertsCollections, function(collection) {
             _.chain(collection.models)
                 .filter(function(model) {
-                    var needDate = new Date(model.get('date_start')) - parseInt(model.get('reminder_time'), 10) * 1000;
-                    return needDate > date && needDate - date <= diff;
+                    var needDate = (new Date(model.get('date_start'))).getTime() - parseInt(model.get('reminder_time'), 10) * 1000;
+                    return needDate > this._remindersIntervalStamp && needDate - this._remindersIntervalStamp <= diff;
                 }, this)
                 .each(this._showReminderAlert, this);
         }, this);
+        this._remindersIntervalStamp = date + diff;
         return this;
     },
 
@@ -364,13 +388,13 @@
             dateValue = app.date.format(new Date(model.get('date_start')), dateFormat),
             template = app.template.getView('notifications.notifications-alert'),
             message = template({
-                title: app.lang.get('LBL_REMINDER_TITLE', model.module),
+                title: new Handlebars.SafeString(app.lang.get('LBL_REMINDER_TITLE', model.module)),
                 module: model.module,
-                model: model,
-                location: model.get('location'),
+                name: new Handlebars.SafeString(model.get('name')),
+                location: new Handlebars.SafeString(model.get('location')),
                 description: model.get('description'),
                 dateStart: dateValue,
-                parentName: model.get('parent_name')
+                parentName: new Handlebars.SafeString(model.get('parent_name'))
             });
         _.defer(function() {
             if (confirm(message)) {
@@ -412,10 +436,12 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     _renderHtml: function() {
-        if (!app.api.isAuthenticated() || app.config.appStatus === 'offline') {
+        if (!app.api.isAuthenticated() ||
+            app.config.appStatus === 'offline' ||
+            !app.acl.hasAccess('view', this.module)) {
             return;
         }
 
@@ -423,7 +449,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Stops pulling for new notifications and disposes all reminders.
      */

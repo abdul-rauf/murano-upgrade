@@ -11,55 +11,54 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$moduleName = 'Accounts';
-$viewdefs[$moduleName]['base']['menu']['header'] = array(
+$module_name = 'Accounts';
+$viewdefs[$module_name]['base']['menu']['header'] = array(
     array(
         'label' =>'LNK_NEW_ACCOUNT',
         'acl_action'=>'create',
-        'acl_module'=>$moduleName,
-        'icon' => 'icon-plus',
-        'route'=>'#'.$moduleName.'/create',
+        'acl_module'=>$module_name,
+        'icon' => 'fa-plus',
+        'route'=>'#'.$module_name.'/create',
     ),
     array(
-        'label' => 'LBL_BAL',
-        'acl_action' => 'create',
-        'acl_module' => $moduleName,
-        'icon' => 'icon-plus',
-        'route' => '#'.$moduleName.'/layout/dnb-bal',
-    ),
-    array(
-        'route'=>'#'.$moduleName,
+        'route'=>'#'.$module_name,
         'label' =>'LNK_ACCOUNT_LIST',
         'acl_action'=>'list',
-        'acl_module'=>$moduleName,
-        'icon' => 'icon-reorder',
+        'acl_module'=>$module_name,
+        'icon' => 'fa-bars',
     ),
     array(
         'route' => '#bwc/index.php?' . http_build_query(
             array(
                 'module' => 'Reports',
                 'action' => 'index',
-                'view' => $moduleName,
+                'view' => $module_name,
                 'query' => 'true',
-                'report_module' => $moduleName,
+                'report_module' => $module_name,
             )
         ),
         'label' =>'LNK_ACCOUNT_REPORTS',
         'acl_action'=>'list',
-        'acl_module'=>$moduleName,
-        'icon' => 'icon-bar-chart',
+        'acl_module'=>$module_name,
+        'icon' => 'fa-bar-chart-o',
     ),
     array(
         'route' => '#bwc/index.php?' . http_build_query(
             array(
                 'module' => 'Import',
                 'action' => 'Step1',
-                'import_module' => $moduleName,
+                'import_module' => $module_name,
             )
         ),
         'label' =>'LNK_IMPORT_ACCOUNTS',
         'acl_action'=>'import',
-        'acl_module'=>$moduleName,
-        'icon' => 'icon-upload',
+        'acl_module'=>$module_name,
+        'icon' => 'fa-arrow-circle-o-up',
+    ),
+    array(
+        'type' => 'dnb-bal-import-menu-label',
+        'default_value' => 'LBL_BAL',
+        'icon' => 'fa-arrow-circle-o-up',
+        'route' => '#'.$module_name.'/layout/dnb-bal',
     ),
 );

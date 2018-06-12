@@ -37,9 +37,9 @@
 
     /**
      * Find callOnFocus value for the given key in the shortcuts object.
-     * @param {Object} shortcuts - shortcuts object
-     * @param {String} key - shortcut key combination or sequence
-     * @returns {Boolean}
+     * @param {Object} shortcuts Shortcuts object.
+     * @param {string} key Shortcut key combination or sequence.
+     * @return {boolean}
      */
     var findCallOnFocus = function(shortcuts, key) {
         var callOnFocus = false,
@@ -57,6 +57,8 @@
     /**
      * Should not execute callback function if it's focused inside an input field, unless
      * shortcuts are registered to be called on focus.
+     *
+     * Should not call shortcut callbacks if shortcuts are disabled.
      */
     var originalStopCallback = Mousetrap.stopCallback;
     Mousetrap.stopCallback = function(e, element, combo) {
@@ -65,6 +67,11 @@
                     || element.isContentEditable;
             };
 
+        // do not call callback if shortcuts have been disabled
+        if (!app.shortcuts.isEnabled()) {
+            return true;
+        }
+
         if (isInInputField() && app.shortcuts.shouldCallOnFocus(combo)) {
             $(element).blur();
             return false;
@@ -72,6 +79,16 @@
             return originalStopCallback(e, element);
         }
     };
+
+    /**
+     * Shortcuts should only be enabled when logged in.
+     */
+    app.events.on('app:login:success', function() {
+        app.shortcuts.enable();
+    });
+    app.events.on('app:logout:success', function() {
+        app.shortcuts.disable();
+    });
 
     /**
      * Clear active shortcut keys before any view change
@@ -115,6 +132,7 @@
         _currentSession: null, //current shortcut key session
         _savedSessions: [], //saved shortcut keys, which then can be restored.
         _globalShortcuts: {}, //global shortcut keys that can never be unregistered.
+        _enable: false, //are shortcuts enabled?
 
         /**
          * Make the given shortcuts active.
@@ -235,8 +253,30 @@
         },
 
         /**
+         * Enable shortcuts.
+         */
+        enable: function() {
+            this._enable = true;
+        },
+
+        /**
+         * Disable shortcuts.
+         */
+        disable: function() {
+            this._enable = false;
+        },
+
+        /**
+         * Is shortcuts enabled?
+         * @return {boolean}
+         */
+        isEnabled: function() {
+            return this._enable;
+        },
+
+        /**
          * Get the current shortcut session.
-         * @returns {ShortcutSession}
+         * @return {ShortcutSession}
          */
         getCurrentSession: function() {
             return this._currentSession;
@@ -244,7 +284,7 @@
 
         /**
          * Get the last saved shortcut session.
-         * @returns {ShortcutSession}
+         * @return {ShortcutSession}
          */
         getLastSavedSession: function() {
             return _.last(this._savedSessions);
@@ -273,7 +313,7 @@
 
         /**
          * Get global shortcut IDs and keys.
-         * @returns {Array}
+         * @return {Array}
          */
         getRegisteredGlobalShortcuts: function() {
             return _.map(this._globalShortcuts, function(shortcut, id) {
@@ -286,8 +326,8 @@
 
         /**
          * Should this key be called when on focus?
-         * @param {String} key
-         * @returns {Boolean}
+         * @param {string} key
+         * @return {boolean}
          */
         shouldCallOnFocus: function(key) {
             var shouldCall = false;
@@ -306,7 +346,7 @@
         /**
          * Get the shortcut session that is tied to component.
          * @param {View.Component} component - component that the shortcut keys are registered from
-         * @returns {ShortcutSession}
+         * @return {ShortcutSession}
          * @private
          */
         _getShortcutSessionForComponent: function(component) {
@@ -331,7 +371,7 @@
         /**
          * Are any of these keys a global shortcut key?
          * @param {Array} keys - an array of strings of shortcut key combinations and sequences
-         * @returns {boolean}
+         * @return {boolean}
          * @private
          */
         _isGlobalShortcutKey: function(keys) {
@@ -391,7 +431,7 @@
 
         /**
          * Is this session active?
-         * @returns {Boolean}
+         * @return {boolean}
          */
         isActive: function() {
             return this._active;
@@ -438,21 +478,27 @@
 
         /**
          * Get shortcut IDs and keys in this session.
-         * @returns {Array}
+         * @return {Array}
          */
         getRegisteredShortcuts: function() {
-            return _.map(this._shortcuts, function(shortcut, id) {
-                return {
-                    id: id,
-                    keys: shortcut.keys
-                };
+            var registeredShortcuts = [];
+
+            _.each(this._shortcuts, function(shortcut, id) {
+                if (!_.isEmpty(shortcut)) {
+                    registeredShortcuts.push({
+                        id: id,
+                        keys: shortcut.keys
+                    });
+                }
             });
+
+            return registeredShortcuts;
         },
 
         /**
          * Should this key be called when on focus?
-         * @param {String} key
-         * @returns {Boolean}
+         * @param {string} key
+         * @return {boolean}
          */
         shouldCallOnFocus: function(key) {
             var shouldCall = false;
@@ -492,7 +538,7 @@
 
         /**
          * Allow shortcut in this session.
-         * @param {String} id - unique ID of the shortcut
+         * @param {string} id Unique ID of the shortcut.
          * @private
          */
         _allowShortcut: function(id) {
@@ -501,8 +547,8 @@
 
         /**
          * Is shortcut allowed to be in this session?
-         * @param {String} id - unique ID of the shortcut
-         * @returns {Boolean}
+         * @param {string} id Unique ID of the shortcut.
+         * @return {boolean}
          * @private
          */
         _isShortcutAllowed: function(id) {
@@ -512,7 +558,7 @@
         /**
          * Is the component in a dashlet or a dashboard?
          * @param {View.Component} component
-         * @returns {Boolean}
+         * @return {boolean}
          * @private
          */
         _isInDashboard: function(component) {

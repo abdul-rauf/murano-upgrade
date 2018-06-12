@@ -11,7 +11,7 @@
 /**
  * @class View.Fields.Base.FileField
  * @alias SUGAR.App.view.fields.BaseFileField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     fieldTag: 'input[type=file]',
@@ -26,6 +26,140 @@
     },
     fileUrl: '',
     plugins: ['File', 'FieldDuplicate', 'EllipsisInline'],
+
+    /**
+     * @inheritdoc
+     */
+    initialize: function(options) {
+        this._super('initialize', [options]);
+
+        // FIXME: This needs an API instead. SC-3369 should address this.
+        app.error.errorName2Keys['tooBig'] = 'ERROR_MAX_FILESIZE_EXCEEDED';
+        app.error.errorName2Keys['uploadFailed'] = 'ERROR_UPLOAD_FAILED';
+
+        if (this.model) {
+            this.model.addValidationTask('file_upload_' + this.cid, _.bind(this._doValidateFile, this));
+        }
+    },
+
+    /**
+     * Validator for the file field. If the field is required and has no value,
+     * it will fail validation prior to performing a file upload. If there is a
+     * value, it will perform a file upload to the temporary folder (required in
+     * order to test uploads for files that are potentially larger than
+     * `upload_max_filesize` in php.ini).
+     *
+     * @param {Object} fields The list of fields to validate.
+     * @param {Object} errors The errors object during this validation task.
+     * @param {Function} callback The callback function to continue validation.
+     */
+    _doValidateFile: function(fields, errors, callback) {
+        var fieldName = this.name,
+            $field = this.$(this.fieldTag);
+
+        if ($field.length === 0) {
+            callback(null, fields, errors);
+            return;
+        }
+
+        var val = $field.val();
+        if (_.isEmpty(val)) {
+            if (this.def.required) {
+                errors[fieldName] = errors[fieldName] || {};
+                errors[fieldName].required = true;
+            }
+            callback(null, fields, errors);
+            return;
+        }
+
+        var ajaxParams = {
+            temp: true,
+            iframe: true,
+            deleteIfFails: false,
+            htmlJsonFormat: true
+        };
+
+        app.alert.show('upload', {
+            level: 'process',
+            title: app.lang.get('LBL_UPLOADING'),
+            autoclose: false
+        });
+
+        this.model.uploadFile(fieldName, $field, {
+            success:_.bind(this._doValidateFileSuccess, this, fields, errors, callback),
+            error:_.bind(this._doValidateFileError, this, fields, errors, callback)
+        }, ajaxParams);
+    },
+
+    /**
+     * Success callback for the {@link #_doValidateFile} function.
+     *
+     * @param {Object} fields The list of fields to validate.
+     * @param {Object} errors The errors object during this validation task.
+     * @param {Function} callback The callback function to continue validation.
+     * @param {Object} data File data returned from the successful file upload.
+     */
+    _doValidateFileSuccess: function(fields, errors, callback, data) {
+        app.alert.dismiss('upload');
+
+        var guid = data.record && data.record.id;
+        if (!guid) {
+            app.logger.error('Temporary file uploaded has no GUID.');
+            this._doValidateFileError(fields, errors, callback, data);
+            return;
+        }
+
+        var fieldName = this.name;
+        // Add the guid to the list of fields to set on the model.
+        if (!this.model.fields[fieldName + '_guid']) {
+            this.model.fields[fieldName + '_guid'] = {
+                type: 'file_temp',
+                group: fieldName
+            };
+        }
+        this.model.set(fieldName + '_guid', guid);
+
+        // Update filename of the model with the value from response,
+        // since it may have been modified on the server side
+        this.model.set(fieldName, data.record[fieldName]);
+
+        callback(null, fields, errors);
+    },
+
+    /**
+     * Error callback for the {@link #_doValidateFile} function.
+     *
+     * @param {Object} fields The list of fields to validate.
+     * @param {Object} errors The errors object during this validation task.
+     * @param {Function} callback The callback function to continue validation.
+     * @param {Object} resp Error object returned from the API.
+     */
+    _doValidateFileError: function(fields, errors, callback, resp) {
+        app.alert.dismiss('upload');
+
+        var errors = errors || {},
+            fieldName = this.name;
+        errors[fieldName] = {};
+
+        switch (resp.error) {
+            case 'request_too_large':
+                errors[fieldName].tooBig = true;
+                break;
+            default:
+                errors[fieldName].uploadFailed = true;
+        }
+        this.model.unset(fieldName + '_guid');
+        callback(null, fields, errors);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        // Remove specific validation task from the model.
+        this.model.removeValidationTask('file_upload_' + this.cid);
+        this._super('_dispose');
+    },
 
     /**
      * Handler for delete file control
@@ -87,7 +221,22 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
+     */
+    setMode: function(name) {
+        if (!_.isEmpty(this._errors)) {
+            if (this.action === 'edit') {
+                this.clearErrorDecoration();
+                this.decorateError(this._errors);
+                return;
+            }
+        }
+
+        this._super('setMode', [name]);
+    },
+
+    /**
+     * @inheritdoc
      *
      * Override field templates for merge-duplicate view.
      */
@@ -148,11 +297,16 @@
         // Cannot be a hard check against "list" since subpanel-list needs this too
         return attachments;
     },
+
     /**
-     * gets file object
-     * @param {String} value file name
-     * @param {Object} urlOpts url options
-     * @returns {{name: *, mimeType: string, url: (String|*)}}
+     * Creates a file object
+     * @param {string} value The file name
+     * @param {Object} urlOpts URL options
+     * @return {Object} The created file object
+     * @return {string} return.name The file name
+     * @return {string} return.docType The document type
+     * @return {string} return.mimeType The file's MIME type
+     * @return {string} return.url The file resource url
      * @private
      */
     _createFileObj: function (value, urlOpts) {
@@ -173,14 +327,16 @@
                 })
         };
     },
+
     /**
-     * This is overriden by portal in order to prepend site url
+     * This is overridden by portal in order to prepend site url
      * @param {String} uri
-     * @returns {String} formatted uri
+     * @return {string} formatted uri
      */
     formatUri: function(uri) {
         return uri;
     },
+
     startDownload: function(e) {
         var uri = this.$(e.currentTarget).data('url');
 
@@ -193,7 +349,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Overrides `change` event for file field.
      * We should call `render` method when change event is triggered if:
@@ -208,6 +364,9 @@
             return;
         }
         this.model.on('change:' + this.name, function() {
+            // Clear any errors on the field if we are changing the value.
+            this._errors = {};
+            this.clearErrorDecoration();
             if (_.isUndefined(this.options.viewName) || this.options.viewName !== 'edit') {
                 this.render();
             }
@@ -215,7 +374,7 @@
     },
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      * Because input file uses full local path to file as value,
      * value can contains directory names.

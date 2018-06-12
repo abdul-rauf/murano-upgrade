@@ -93,6 +93,7 @@ class SugarFieldDatetimecombo extends SugarFieldBase {
         return $this->fetch($this->findTemplate('SearchView'));
     }
 
+
     function getWirelessEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex) {
     	global $timedate;
     	$datetime_prefs = $GLOBALS['current_user']->getUserDateTimePreferences();
@@ -235,16 +236,23 @@ class SugarFieldDatetimecombo extends SugarFieldBase {
         return preg_replace('/([pm|PM|am|AM]+)/', ' \1', $value);
     }
 
-
     /**
-     * @see SugarFieldBase::apiFormatField
+     * {@inheritDoc}
      */
-    public function apiFormatField(array &$data, SugarBean $bean, array $args, $fieldName, $properties)
-    {
+    public function apiFormatField(
+        array &$data,
+        SugarBean $bean,
+        array $args,
+        $fieldName,
+        $properties,
+        array $fieldList = null,
+        ServiceBase $service = null
+    ) {
         global $timedate;
+        $this->ensureApiFormatFieldArguments($fieldList, $service);
 
         if(empty($bean->$fieldName)) {
-            $data[$fieldName] = null;
+            $data[$fieldName] = '';
             return;
         }
 

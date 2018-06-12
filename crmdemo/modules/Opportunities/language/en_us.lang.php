@@ -107,7 +107,6 @@ $mod_strings = array(
     'LBL_CREATED_USER' => 'Created User',
     'LBL_MODIFIED_USER' => 'Modified User',
     'LBL_CAMPAIGN_OPPORTUNITY' => 'Campaign Opportunity',
-    'LBL_CAMPAIGN_LINK' => 'Campaign Link',
     'LBL_PROJECT_SUBPANEL_TITLE' => 'Projects',
     'LABEL_PANEL_ASSIGNMENT' => 'Assignment',
     'LNK_IMPORT_OPPORTUNITIES' => 'Import Opportunities',
@@ -136,10 +135,15 @@ $mod_strings = array(
     'LBL_COMMITTED' => 'Committed',
     'LBL_FORECAST' => 'Include in Forecast',
     'LBL_COMMIT_STAGE' => 'Commit Stage',
+    'LBL_COMMIT_STAGE_FORECAST' => 'Forecast',
     'LBL_WORKSHEET' => 'Worksheet',
 
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Quotes',
+
+    // Config
+    'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Opportunity Hierarchy',
+    'LBL_OPPS_CONFIG_VIEW_BY_DATE_ROLLUP' => 'Set the Expected Close Date field on the resulting Opportunity records to be the earliest or latest close dates of the existing Revenue Line Items',
 
     //Dashlet
     'LBL_PIPELINE_TOTAL_IS' => 'Pipeline Total is ',
@@ -148,6 +152,14 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
 
     // Help Text
+    'LBL_OPPS_CONFIG_ALERT' => 'By clicking Confirm, you will be erasing ALL Forecasts data and changing your Opportunities View. If this is not what you intended, click cancel to return to previous settings.',
+    'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'If all Revenue Line Items are closed and at least one was won,',
+    'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'the Opportunity Sales Stage is set to "Closed Won".',
+    'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'If all Revenue Line Items are in the "Closed Lost" Sales Stage,',
+    'LBL_OPPS_CONFIG_SALES_STAGE_2b' => 'the Opportunity Sales Stage is set to "Closed Lost".',
+    'LBL_OPPS_CONFIG_SALES_STAGE_3a' => 'If any Revenue Line Items are still open,',
+    'LBL_OPPS_CONFIG_SALES_STAGE_3b' => 'the Opportunity will be marked with the least-advanced Sales Stage.',
+
 // BEGIN PRO/CORP
     // List View Help Text
     'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module allows you to track individual sales from start to finish. Each {{module_name}} record represents a prospective sale and includes relevant sale data as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc. An {{module_name}} will typically progress through several Sales Stages until it is marked either "Closed Won" or "Closed Lost". {{plural_module_name}} can be leveraged even further by using Sugar\'s {{forecasts_singular_module}}ing module to understand and predict sales trends as well as focus work to achieve sales quotas.',
@@ -168,13 +180,16 @@ To create an {{module_name}}:
 1. Provide values for the fields as desired.
  - Fields marked "Required" must be completed prior to saving.
  - Click "Show More" to expose additional fields if necessary.
-2. Click "Save" to finalize the new record and return to the previous page.
- - Choose "Save and view" to open the new {{module_name}} in record view.
- - Choose "Save and create new" to immediately create another new {{module_name}}.',
+2. Click "Save" to finalize the new record and return to the previous page.',
 
 // END PRO/CORP
 
     //Marketo
     'LBL_MKTO_SYNC' => 'Sync to Marketo&reg;',
     'LBL_MKTO_ID' => 'Marketo Lead ID',
+
+    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => 'Top 10 Sales Opportunities',
+    'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Displays top ten Opportunities in a bubble chart.',
+    'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'My Opportunities',
+    'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "My Team's Opportunities",
 );

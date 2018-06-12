@@ -23,7 +23,7 @@ abstract class SugarListApi extends SugarApi {
     /**
      * This function will parse arguments and hand them back in an array
      * The defaults are set as part of the class ($defaultLimit, $allowOffsetEnd, $defaultOrderBy, $addDefaultFields, $checkAcls)
-     * 
+     *
      * @param ServiceBase $api The API class (typically RestService)
      * @param array $args The argument array as passed in to the API call, currently checked variables are
      *        max_num, offset, fields, order_by
@@ -35,6 +35,8 @@ abstract class SugarListApi extends SugarApi {
         if ( isset($args['max_num']) ) {
             $limit = (int)$args['max_num'];
         }
+
+        $limit = $this->checkMaxListLimit($limit);
 
         $offset = 0;
         if ( isset($args['offset']) ) {
@@ -59,7 +61,7 @@ abstract class SugarListApi extends SugarApi {
                 $userFields[] = $defaultField;
             }
         }
-                    
+
         $orderBy = '';
         if ( isset($args['order_by']) ) {
             if ( strpos($args['order_by'],',') !== 0 ) {
@@ -91,10 +93,10 @@ abstract class SugarListApi extends SugarApi {
                         throw new SugarApiExceptionNotAuthorized('No access to view field: '.$column.' in module: '.$seed->module_dir);
                     }
                 }
-                
+
                 $orderByArray[$column] = $direction;
             }
-            
+
         } else {
             $orderByArray = $this->defaultOrderBy;
         }
@@ -104,7 +106,7 @@ abstract class SugarListApi extends SugarApi {
                      'fields' => $userFields,
                      'orderBy' => $orderByArray,
         );
-        
+
     }
 
     /**
@@ -117,7 +119,7 @@ abstract class SugarListApi extends SugarApi {
         foreach ( $orderByArray as $column => $direction ) {
             $sqlArray[] = $column." ".$direction;
         }
-        
+
         return implode(',',$sqlArray);
     }
 }

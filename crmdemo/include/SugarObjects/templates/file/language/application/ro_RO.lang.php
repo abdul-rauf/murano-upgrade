@@ -1,5 +1,5 @@
 <?php
-
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,47 +10,37 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$object_name = strtolower($object_name);
+/*********************************************************************************
+ * $Id$
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
+ 
 $app_list_strings = array (
-  $object_name.'_category_dom' => 
-  array (
-    '' => '[-gol-] ',
+strtolower($object_name).'_category_dom' =>
+    array (
+    '' => '',
     'Marketing' => 'Marketing',
     'Knowledege Base' => 'Baza de cunostinte',
     'Sales' => 'Vanzari',
   ),
-  $object_name.'_subcategory_dom' => 
-  array (
-    '' => '[-gol-] ',
+
+    strtolower($object_name).'_subcategory_dom' =>
+    array (
+    '' => '',
     'Marketing Collateral' => 'Colaterala de Marketing',
     'Product Brochures' => 'Brosuri ale produsului',
-    'FAQ' => 'Intrebari puse cel mai frecvent',
+    'FAQ' => 'Întrebări frecvente',
   ),
-  $object_name.'_status_dom' => 
-  array (
+
+    strtolower($object_name).'_status_dom' =>
+    array (
     'Active' => 'Activ',
     'Draft' => 'Schita',
-    'FAQ' => 'Intrebari puse cel mai frecvent',
+    'FAQ' => 'Întrebări frecvente',
     'Expired' => 'Expirat',
     'Under Review' => 'În curs de revizuire',
     'Pending' => 'In asteptare',
   ),
-);
-
+  );

@@ -13,8 +13,9 @@ if (!defined('sugarEntry') || !sugarEntry)
  */
 
 global $current_user, $beanFiles;
-set_time_limit(3600);
-
+if (ini_get('max_execution_time') > 0 && ini_get('max_execution_time') < 3600) {
+    ini_set('max_execution_time', 3600);
+}
 
 $db = DBManagerFactory::getInstance();
 
@@ -79,17 +80,33 @@ if (is_admin($current_user) || isset ($from_sync_client) || is_admin_for_any_mod
 		VardefManager::clearVardef();
 		$repairedTables = array();
 
+        $db->setOption('skip_index_rebuild', true);
+        $indices = $db->get_schema_indices();
+
 		foreach ($beanFiles as $bean => $file) {
 			if(file_exists($file)){
 				require_once ($file);
 				unset($GLOBALS['dictionary'][$bean]);
 				$focus = BeanFactory::newBeanByName($bean);
-				if (($focus instanceOf SugarBean) && !isset($repairedTables[$focus->table_name])) {
-				    $sql .= $db->repairTable($focus, $execute);
-				    $repairedTables[$focus->table_name] = true;
+                if ($focus instanceof SugarBean) {
+                    $tableName = $focus->getTableName();
+                    // Not all Beans are table based, so we need to check if there
+                    // is a table_name for this bean before proceeding
+                    // Example Beans are MergeRecord and EmptyBean
+                    if ($tableName && !isset($repairedTables[$tableName])) {
+                        $tableExists = $db->tableExists($tableName);
+                        $sql .= $db->repairTable($focus, $execute);
+                        // repair table indices only in case if the table previously existed, otherwise the table
+                        // has already been created with indices despite skip_index_rebuild
+                        if ($tableExists) {
+                            $compareIndices = isset($indices[$tableName]) ? $indices[$tableName] : array();
+                            $sql .= $db->alterTableIndices($tableName, $focus->getIndices(), $compareIndices, $execute);
+                        }
+                        $repairedTables[$focus->table_name] = true;
+                    }
 				}
                 //Repair Custom Fields
-                if (($focus instanceOf SugarBean) && $focus->hasCustomFields() && !isset($repairedTables[$focus->table_name . '_cstm'])) {
+                if (($focus instanceof SugarBean) && $focus->hasCustomFields() && !isset($repairedTables[$focus->table_name . '_cstm'])) {
 				    $df = new DynamicField($focus->module_dir);
                     //Need to check if the method exists as during upgrade an old version of Dynamic Fields may be loaded.
                     if (method_exists($df, "repairCustomFields"))
@@ -109,8 +126,9 @@ if (is_admin($current_user) || isset ($from_sync_client) || is_admin_for_any_mod
 
 		foreach ($dictionary as $meta) {
 
-			if ( !isset($meta['table']) || isset($repairedTables[$meta['table']]))
+            if (empty($meta['table']) || isset($repairedTables[$meta['table']])) {
                 continue;
+            }
 
             $tablename = $meta['table'];
 			$fielddefs = $meta['fields'];

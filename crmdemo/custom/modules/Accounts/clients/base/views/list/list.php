@@ -1,4 +1,5 @@
 <?php
+// created: 2018-06-12 08:18:14
 $viewdefs['Accounts']['base']['view']['list'] = array (
   'panels' => 
   array (
@@ -43,7 +44,6 @@ $viewdefs['Accounts']['base']['view']['list'] = array (
         4 => 
         array (
           'name' => 'phone_office',
-          'width' => '10%',
           'label' => 'LBL_LIST_PHONE',
           'enabled' => true,
           'default' => true,
@@ -58,11 +58,11 @@ $viewdefs['Accounts']['base']['view']['list'] = array (
         ),
         6 => 
         array (
-          'name' => 'email1',
+          'name' => 'email',
           'default' => true,
           'enabled' => true,
           'width' => '15%',
-          'label' => 'LBL_EMAIL_ADDRESS',
+          'label' => 'LBL_ANY_EMAIL',
           'sortable' => false,
           'link' => true,
           'customCode' => '{$EMAIL1_LINK}{$EMAIL1}</a>',
@@ -70,7 +70,6 @@ $viewdefs['Accounts']['base']['view']['list'] = array (
         7 => 
         array (
           'name' => 'assigned_user_name',
-          'width' => '10%',
           'label' => 'LBL_LIST_ASSIGNED_USER',
           'id' => 'ASSIGNED_USER_ID',
           'enabled' => true,

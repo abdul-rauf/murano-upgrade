@@ -1,12 +1,8 @@
 /*
-     YUI 3.15.0 (build 834026e)
-     Copyright 2014 Yahoo! Inc. All rights reserved.
-     Licensed under the BSD License.
-     http://yuilibrary.com/license/
-     */
-YUI.add('axis-time',function(Y,NAME){Y.TimeAxis=Y.Base.create("timeAxis",Y.Axis,[Y.TimeImpl],{_getLabelByIndex:function(i,l)
-{var min=this.get("minimum"),max=this.get("maximum"),increm,label;l-=1;increm=((max-min)/l)*i;label=min+increm;return label;},_getLabelData:function(constantVal,staticCoord,dynamicCoord,min,max,edgeOffset,layoutLength,count,dataValues)
-{var dataValue,i,points=[],values=[],point,offset=edgeOffset;dataValues=dataValues||this._getDataValuesByCount(count,min,max);for(i=0;i<count;i=i+1)
-{dataValue=this._getNumber(dataValues[i]);if(dataValue<=max&&dataValue>=min)
-{point={};point[staticCoord]=constantVal;point[dynamicCoord]=this._getCoordFromValue(min,max,layoutLength,dataValue,offset);points.push(point);values.push(dataValue);}}
-return{points:points,values:values};}});},'3.15.0',{"requires":["axis","axis-time-base"]});
+YUI 3.15.0 (build 834026e)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add("axis-time",function(e,t){e.TimeAxis=e.Base.create("timeAxis",e.Axis,[e.TimeImpl],{_getLabelByIndex:function(e,t){var n=this.get("minimum"),r=this.get("maximum"),i,s;return t-=1,i=(r-n)/t*e,s=n+i,s},_getLabelData:function(e,t,n,r,i,s,o,u,a){var f,l,c=[],h=[],p,d=s;a=a||this._getDataValuesByCount(u,r,i);for(l=0;l<u;l+=1)f=this._getNumber(a[l]),f<=i&&f>=r&&(p={},p[t]=e,p[n]=this._getCoordFromValue(r,i,o,f,d),c.push(p),h.push(f));return{points:c,values:h}}})},"3.15.0",{requires:["axis","axis-time-base"]});

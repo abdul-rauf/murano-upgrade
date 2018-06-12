@@ -44,27 +44,29 @@ class ForecastsSeedData
         foreach ($timeperiods as $timeperiod_id => $timeperiod) {
 
             foreach ($commit_order as $commit_type_array) {
-                //create forecast schedule for this timeperiod record and user.
-                //create forecast schedule using this record because there will be one
                 //direct entry per user, and some user will have a Rollup entry too.
 
                 $ratio = array('.8', '1', '1.2', '1.4');
                 $key = array_rand($ratio);
 
-                if ($commit_type_array[1] == 'Direct') {
+                if ($commit_type_array[1] === 'Direct') {
+                    $commitUserId = $commit_type_array[0];
                     // get the worksheet total for a given user
                     /* @var $worksheet ForecastWorksheet */
                     $worksheet = BeanFactory::getBean('ForecastWorksheets');
-                    $totals = $worksheet->worksheetTotals($timeperiod_id, $commit_type_array[0], $forecast_by, true);
+                    $totals = $worksheet->worksheetTotals($timeperiod_id, $commitUserId, $forecast_by, true);
 
                     if ($totals['total_opp_count'] == 0) {
                         continue;
                     }
 
+                    // output to the screen to keep the connection active
+                    echo '.';
+
                     /* @var $quota Quota */
                     $quota = BeanFactory::getBean('Quotas');
                     $quota->timeperiod_id = $timeperiod_id;
-                    $quota->user_id = $commit_type_array[0];
+                    $quota->user_id = $commitUserId;
                     $quota->quota_type = 'Direct';
                     $quota->currency_id = -99;
 
@@ -72,16 +74,16 @@ class ForecastsSeedData
                     $quota->amount_base_currency = $quota->amount;
                     $quota->committed = 1;
                     $quota->set_created_by = false;
-                    if ($commit_type_array[0] == 'seed_sarah_id' ||
-                        $commit_type_array[0] == 'seed_will_id' ||
-                        $commit_type_array[0] == 'seed_jim_id'
+                    if ($commitUserId === 'seed_sarah_id' ||
+                        $commitUserId === 'seed_will_id' ||
+                        $commitUserId === 'seed_jim_id'
                     ) {
                         $quota->created_by = 'seed_jim_id';
                     } else {
-                        if ($commit_type_array[0] == 'seed_sally_id' || $commit_type_array[0] == 'seed_max_id') {
+                        if ($commitUserId === 'seed_sally_id' || $commitUserId === 'seed_max_id') {
                             $quota->created_by = 'seed_sarah_id';
                         } else {
-                            if ($commit_type_array[0] == 'seed_chris_id') {
+                            if ($commitUserId === 'seed_chris_id') {
                                 $quota->created_by = 'seed_will_id';
                             } else {
                                 $quota->created_by = $current_user->id;
@@ -91,27 +93,27 @@ class ForecastsSeedData
 
                     $quota->save();
 
-                    if (!$user->isManager($commit_type_array[0])) {
+                    if (!$user->isManager($commitUserId)) {
                         /* @var $quotaRollup Quota */
                         $quotaRollup = BeanFactory::getBean('Quotas');
                         $quotaRollup->timeperiod_id = $timeperiod_id;
-                        $quotaRollup->user_id = $commit_type_array[0];
+                        $quotaRollup->user_id = $commitUserId;
                         $quotaRollup->quota_type = 'Rollup';
                         $quota->currency_id = -99;
                         $quotaRollup->amount = $quota->amount;
                         $quotaRollup->amount_base_currency = $quotaRollup->amount;
                         $quotaRollup->committed = 1;
                         $quotaRollup->set_created_by = false;
-                        if ($commit_type_array[0] == 'seed_sarah_id' ||
-                            $commit_type_array[0] == 'seed_will_id' ||
-                            $commit_type_array[0] == 'seed_jim_id'
+                        if ($commitUserId === 'seed_sarah_id' ||
+                            $commitUserId === 'seed_will_id' ||
+                            $commitUserId === 'seed_jim_id'
                         ) {
                             $quotaRollup->created_by = 'seed_jim_id';
                         } else {
-                            if ($commit_type_array[0] == 'seed_sally_id' || $commit_type_array[0] == 'seed_max_id') {
+                            if ($commitUserId === 'seed_sally_id' || $commitUserId === 'seed_max_id') {
                                 $quotaRollup->created_by = 'seed_sarah_id';
                             } else {
-                                if ($commit_type_array[0] == 'seed_chris_id') {
+                                if ($commitUserId === 'seed_chris_id') {
                                     $quotaRollup->created_by = 'seed_will_id';
                                 } else {
                                     $quotaRollup->created_by = $current_user->id;
@@ -126,10 +128,10 @@ class ForecastsSeedData
                     /* @var $forecast Forecast */
                     $forecast = BeanFactory::getBean('Forecasts');
                     $forecast->timeperiod_id = $timeperiod_id;
-                    $forecast->user_id = $commit_type_array[0];
+                    $forecast->user_id = $commitUserId;
                     $forecast->opp_count = $totals['included_opp_count'];
                     if ($totals['included_opp_count'] > 0) {
-                        $forecast->opp_weigh_value = SugarMath::init()->exp(
+                        $forecast->opp_weigh_value = SugarMath::init()->setScale(0)->exp(
                             '(?/?)/?',
                             array($totals['amount'], $ratio[$key], $totals['included_opp_count'])
                         )->result();
@@ -149,16 +151,16 @@ class ForecastsSeedData
                     );
                     $forecast->save();
 
-                    self::createManagerWorksheet($commit_type_array[0], $forecast->toArray());
+                    self::createManagerWorksheet($commitUserId, $forecast->toArray());
 
                     // create the current forecast
                     /* @var $forecast2 Forecast */
                     $forecast2 = BeanFactory::getBean('Forecasts');
                     $forecast2->timeperiod_id = $timeperiod_id;
-                    $forecast2->user_id = $commit_type_array[0];
+                    $forecast2->user_id = $commitUserId;
                     $forecast2->opp_count = $totals['included_opp_count'];
                     if ($totals['included_opp_count'] > 0) {
-                        $forecast2->opp_weigh_value = SugarMath::init()->exp(
+                        $forecast2->opp_weigh_value = SugarMath::init()->setScale(0)->exp(
                             '?/?',
                             array($totals['amount'], $totals['included_opp_count'])
                         )->result();
@@ -176,7 +178,7 @@ class ForecastsSeedData
                     );
                     $forecast2->save();
 
-                    self::createManagerWorksheet($commit_type_array[0], $forecast2->toArray());
+                    self::createManagerWorksheet($commitUserId, $forecast2->toArray());
 
                 } else {
 
@@ -187,6 +189,9 @@ class ForecastsSeedData
                     if ($totals['included_opp_count'] == 0) {
                         continue;
                     }
+
+                    // output to the screen to keep the connection active
+                    echo '.';
 
                     /* @var $quota Quota */
                     $quota = BeanFactory::getBean('Quotas');
@@ -204,7 +209,7 @@ class ForecastsSeedData
                     $forecast->timeperiod_id = $timeperiod_id;
                     $forecast->user_id = $commit_type_array[0];
                     $forecast->opp_count = $totals['included_opp_count'];
-                    $forecast->opp_weigh_value = SugarMath::init()->exp(
+                    $forecast->opp_weigh_value = SugarMath::init()->setScale(0)->exp(
                         '?/?',
                         array($totals['likely_adjusted'], $totals['included_opp_count'])
                     )->result();
@@ -232,13 +237,17 @@ class ForecastsSeedData
                 'seed_jim_id' // we do jim last since sarah and will will feed up into jim
             );
 
+            $cid = $current_user->id;
             foreach ($managers as $manager) {
                 /* @var $user User */
                 $user = BeanFactory::getBean('Users', $manager);
                 /* @var $worksheet ForecastManagerWorksheet */
                 $worksheet = BeanFactory::getBean('ForecastManagerWorksheets');
+                // set the current_user->id to the manager
+                $current_user->id = $manager;
                 $worksheet->commitManagerForecast($user, $timeperiod_id);
             }
+            $current_user->id = $cid;
         }
 
 
@@ -282,7 +291,7 @@ class ForecastsSeedData
         $link_name = ($forecast_by == 'RevenueLineItems') ? 'account_link' : 'accounts';
         $bean->load_relationship($link_name);
         $bean->$link_name->buildJoinSugarQuery($sq, array('joinTableAlias', 'account'));
-        $sq->select(array(array('account.id', 'account_id')));
+        $sq->select(array('account.id', 'account_id'));
 
         $beans = $sq->execute();
 

@@ -1,75 +1,30 @@
 <?php
-
-if (!defined('sugarEntry') || !sugarEntry)
-    die('Not A Valid Entry Point');
-/*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
- */
-
-$module_name = 'rt_sorting';
-$subpanel_layout = array(
-    'top_buttons' => array(
-        array('widget_class' => 'SubPanelTopCreateButton'),
-        array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => $module_name),
-    ),
-    'where' => '',
-    'list_fields' => array(
-        'name' => array(
-            'vname' => 'LBL_SUBJECT',
-            'widget_class' => 'SubPanelDetailViewLink',
-            'width' => '15%',
-        ),
-        'date_entered' => array(
-            'vname' => 'LBL_DATE_ENTERED',
-            'width' => '15%',
-
-        ),
-        'report_status' => array(
-            'vname' => 'LBL_REPORT_STATUS',
-            'width' => '15%',
-        ),
-        'spaces' => array(
-            'vname' => 'LBL_SPACES',
-            'width' => '15%',
-        ),
-        'last_amended_modified' => array(
-            'vname' => 'LBL_LAST_AMENDED_MODIFIED',
-            'width' => '15%',
-        ),
-        'amended_date' => array(
-            'vname' => 'LBL_RECENT_TIME_CHANGED',
-            'sortable' => false,
-            'width' => '15%',
-        ),
-        'date_modified' => array(
-            'vname' => 'LBL_DATE_MODIFIED',
-            'width' => '15%',
-        ),
-        'edit_button' => array(
-            'vname' => 'LBL_EDIT_BUTTON',
-            'widget_class' => 'SubPanelEditButton',
-            'module' => $module_name,
-            'width' => '4%',
-        ),
-        'remove_button' => array(
-            'vname' => 'LBL_REMOVE',
-            'widget_class' => 'SubPanelRemoveButton',
-            'module' => $module_name,
-            'width' => '5%',
-        ),
-        'close_button' => array(
-            'vname' => 'LBL_COMPOSE_CLIENT',
-            'widget_class' => 'SubPanelComposeButton',
-            'module' => $module_name,
-            'width' => '5%',
-        ),
-    ),
-);
-?>
+// created: ' . date('Y-m-d H:i:s')
+$subpanel_layout['top_buttons'][0]['widget_class'] = 'SubPanelTopCreateButton';
+$subpanel_layout['top_buttons'][1]['widget_class'] = 'SubPanelTopSelectButton';
+$subpanel_layout['top_buttons'][1]['popup_module'] = 'rt_sorting';
+$subpanel_layout['where'] = '';
+$subpanel_layout['list_fields']['name']['vname'] = 'LBL_SUBJECT';
+$subpanel_layout['list_fields']['name']['widget_class'] = 'SubPanelDetailViewLink';
+$subpanel_layout['list_fields']['name']['width'] = '15%';
+$subpanel_layout['list_fields']['date_entered']['vname'] = 'LBL_DATE_ENTERED';
+$subpanel_layout['list_fields']['date_entered']['width'] = '15%';
+$subpanel_layout['list_fields']['report_status']['vname'] = 'LBL_REPORT_STATUS';
+$subpanel_layout['list_fields']['report_status']['width'] = '15%';
+$subpanel_layout['list_fields']['spaces']['vname'] = 'LBL_SPACES';
+$subpanel_layout['list_fields']['spaces']['width'] = '15%';
+$subpanel_layout['list_fields']['last_amended_modified']['vname'] = 'LBL_LAST_AMENDED_MODIFIED';
+$subpanel_layout['list_fields']['last_amended_modified']['width'] = '15%';
+$subpanel_layout['list_fields']['amended_date']['vname'] = 'LBL_RECENT_TIME_CHANGED';
+$subpanel_layout['list_fields']['amended_date']['sortable'] = false;
+$subpanel_layout['list_fields']['amended_date']['width'] = '15%';
+$subpanel_layout['list_fields']['date_modified']['vname'] = 'LBL_DATE_MODIFIED';
+$subpanel_layout['list_fields']['date_modified']['width'] = '15%';
+$subpanel_layout['list_fields']['edit_button']['vname'] = 'LBL_EDIT_BUTTON';
+$subpanel_layout['list_fields']['edit_button']['widget_class'] = 'SubPanelEditButton';
+$subpanel_layout['list_fields']['edit_button']['module'] = 'rt_sorting';
+$subpanel_layout['list_fields']['edit_button']['width'] = '4%';
+$subpanel_layout['list_fields']['remove_button']['vname'] = 'LBL_REMOVE';
+$subpanel_layout['list_fields']['remove_button']['widget_class'] = 'SubPanelRemoveButton';
+$subpanel_layout['list_fields']['remove_button']['module'] = 'rt_sorting';
+$subpanel_layout['list_fields']['remove_button']['width'] = '5%';

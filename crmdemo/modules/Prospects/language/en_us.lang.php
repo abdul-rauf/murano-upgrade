@@ -145,6 +145,7 @@ $mod_strings = array (
   'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Campaign Log',
   'LBL_TRACKER_KEY'=>'Tracker Key',
   'LBL_LEAD_ID'=>'Lead Id',
+  'LBL_LEAD' => 'Lead',
   'LBL_CONVERTED_LEAD'=>'Converted Lead',
   'LBL_ACCOUNT_NAME'=>'Account Name',
   'LBL_EDIT_ACCOUNT_NAME'=>'Account Name:',
@@ -194,9 +195,7 @@ To create a {{module_name}}:
 1. Provide values for the fields as desired.
  - Fields marked "Required" must be completed prior to saving.
  - Click "Show More" to expose additional fields if necessary.
-2. Click "Save" to finalize the new record and return to the previous page.
- - Choose "Save and view" to open the new {{module_name}} in record view.
- - Choose "Save and create new" to immediately create another new {{module_name}}.',
+2. Click "Save" to finalize the new record and return to the previous page.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Targets\' reports',
 );

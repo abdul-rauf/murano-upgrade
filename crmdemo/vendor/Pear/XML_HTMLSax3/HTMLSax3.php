@@ -19,12 +19,12 @@
 // | Authors: Many @ Sitepointforums Advanced PHP Forums                  |
 // +----------------------------------------------------------------------+
 //
-
+// $Id: HTMLSax3.php 50752 2009-09-10 22:18:28Z dwong $
 //
 /**
 * Main parser components
 * @package XML_HTMLSax3
-
+* @version $Id: HTMLSax3.php 50752 2009-09-10 22:18:28Z dwong $
 */
 /**
 * Required classes

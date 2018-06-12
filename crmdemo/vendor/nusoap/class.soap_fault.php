@@ -49,7 +49,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 * Mainly used for returning faults from deployed functions
 * in a server instance.
 * @author   Dietrich Ayala <dietrich@ganx4.com>
-
+* @version  $Id: class.soap_fault.php 57813 2010-08-19 17:34:44Z kjing $
 * @access public
 */
 class nusoap_fault extends nusoap_base {

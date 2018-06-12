@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: wizard.php 18703 2006-12-15 09:42:43Z majed $
 
 require_once('modules/Studio/config.php');
 require_once('modules/Studio/wizards/StudioWizard.php');

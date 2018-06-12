@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -11,7 +12,7 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
+ * $Id$
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
@@ -27,12 +28,10 @@ $viewdefs['Reports']['mobile']['view']['list'] = array(
                     'default' => true,
                     'enabled' => true,
                     'link' => true,
-                    'width' => '10%',
                 ),
                 array(
                     'name' => 'module',
                     'enabled' => true,
-                    'width' => '10%',
                     'default' => true,
                     'type' => 'enum',
                     'options' => 'moduleList',
@@ -40,13 +39,11 @@ $viewdefs['Reports']['mobile']['view']['list'] = array(
                 array(
                     'name' => 'team_name',
                     'enabled' => true,
-                    'width' => '10%',
                     'default' => true,
                 ),
                 array(
                     'name' => 'report_type',
                     'enabled' => true,
-                    'width' => '10%',
                     'default' => true,
                     'type' => 'enum',
                     'options' => 'dom_report_types',

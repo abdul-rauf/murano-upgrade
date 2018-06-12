@@ -15,6 +15,33 @@ require_once('modules/Reports/config.php');
 class ReportsViewBuildreportmoduletree extends SugarView
 {
     /**
+     * Listing of modules that should not be reported on. This is a simple key
+     * value pair like 'module_name' => true.
+     *
+     * @var array
+     */
+    protected $nonReportableModules = array(
+        'Currencies' => true,
+    );
+
+    protected function isRelationshipReportable($rel)
+    {
+        global $beanList;
+
+        if (empty($rel)) {
+            return false;
+        }
+
+        if (empty($beanList[$rel->lhs_module]) || empty($beanList[$rel->rhs_module])) {
+            return false;
+        }
+
+        // Bug 37311 - Don't allow reporting on relationships to the currencies module
+        return empty($this->nonReportableModules[$rel->lhs_module]) &&
+               empty($this->nonReportableModules[$rel->rhs_module]);
+    }
+
+    /**
      * @see SugarView::display()
      */
     public function display()
@@ -40,12 +67,8 @@ class ReportsViewBuildreportmoduletree extends SugarView
                 continue;
             }
             $relationship = $module->$field->_relationship;
-            if(empty($relationship) || empty($beanList[$relationship->lhs_module]) || empty($beanList[$relationship->rhs_module]))
-            {
-                continue;
-            }
-            // Bug 37311 - Don't allow reporting on relationships to the currencies module
-            if($relationship->lhs_module == 'Currencies' || $relationship->rhs_module == 'Currencies') {
+
+            if ($this->isRelationshipReportable($relationship) === false) {
                 continue;
             }
 

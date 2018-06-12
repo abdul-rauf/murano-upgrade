@@ -155,7 +155,7 @@ class SugarFieldCurrency extends SugarFieldFloat
     public function unformatField($formattedField, $vardef)
     {
         if ($formattedField === '' || $formattedField === null) {
-            return null;
+            return '';
         }
         if (is_array($formattedField)) {
             $formattedField = array_shift($formattedField);
@@ -164,18 +164,19 @@ class SugarFieldCurrency extends SugarFieldFloat
     }
 
     /**
-     * Formats a field for the Sugar API, we need what the base does here since the SugarFieldFloat does the wrong
-     * thing and really currencies are not floats
-     *
-     * @param array     $data
-     * @param SugarBean $bean
-     * @param array     $args
-     * @param string    $fieldName
-     * @param array     $properties
+     * {@inheritDoc}
      */
-    public function apiFormatField(&$data, $bean, $args, $fieldName, $properties)
-    {
-        if (isset($bean->$fieldName)) {
+    public function apiFormatField(
+        array &$data,
+        SugarBean $bean,
+        array $args,
+        $fieldName,
+        $properties,
+        array $fieldList = null,
+        ServiceBase $service = null
+    ) {
+        $this->ensureApiFormatFieldArguments($fieldList, $service);
+        if (isset($bean->$fieldName) && $bean->$fieldName !== 'NULL') {
             $data[$fieldName] = $bean->$fieldName;
         } else {
             $data[$fieldName] = '';

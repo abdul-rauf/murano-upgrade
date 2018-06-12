@@ -1,5 +1,5 @@
 <?php
-
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,25 +10,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
+/*********************************************************************************
+ * $Id$
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
  
 $app_list_strings = array (
 strtolower($object_name).'_category_dom' =>
@@ -44,17 +31,16 @@ strtolower($object_name).'_category_dom' =>
     '' => '',
     'Marketing Collateral' => 'Impresos de Marketing',
     'Product Brochures' => 'Folletos de Producto',
-    'FAQ' => 'FAQ',
+    'FAQ' => 'Preguntas frecuentes',
   ),
 
     strtolower($object_name).'_status_dom' =>
     array (
     'Active' => 'Activo',
     'Draft' => 'Borrador',
-    'FAQ' => 'FAQ',
+    'FAQ' => 'Preguntas frecuentes',
     'Expired' => 'Caducado',
     'Under Review' => 'En Revisión',
     'Pending' => 'Pendiente',
   ),
   );
-?>

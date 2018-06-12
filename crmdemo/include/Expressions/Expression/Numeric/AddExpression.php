@@ -9,56 +9,71 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once("include/Expressions/Expression/Numeric/NumericExpression.php");
+require_once 'include/Expressions/Expression/Numeric/NumericExpression.php';
+
 /**
  * <b>add(Number n, ...)</b><br>
  * Returns the sum of the given numbers.<br/>
  * ex: <i>add(2, 1, 3)</i> = 6
  */
-class AddExpression extends NumericExpression {
-	/**
-	 * Returns itself when evaluating.
-	 */
-	function evaluate() {
-		// TODO: add caching of return values
-		$sum = 0;
-		foreach ( $this->getParameters() as $expr ) {
-			$sum += $expr->evaluate();
-		}
-		return $sum;
-	}
+class AddExpression extends NumericExpression
+{
+    /**
+     * The Logic for running in PHP, this uses SugarMath as to avoid potential floating-point errors
+     *
+     * @returns String
+     */
+    public function evaluate()
+    {
+        $sum = '0';
+        foreach ($this->getParameters() as $expr) {
+            $sum = SugarMath::init($sum, 6)->add($expr->evaluate())->result();
+        }
 
-	/**
-	 * Returns the JS Equivalent of the evaluate function.
-	 */
-	static function getJSEvaluate() {
-		return <<<EOQ
-			var params = this.getParameters();
-			var sum = 0;
-			for ( var i = 0; i < params.length; i++ )	sum += params[i].evaluate();
+        return (string)$sum;
+    }
+
+    /**
+     * Returns the JS Equivalent of the evaluate function, When in sidecar it uses SugarMath, but when outside of
+     * sidecar it uses a custom method to convert the values to a float and then back into a fixed `string` with a
+     * precision of 6
+     */
+    public static function getJSEvaluate()
+    {
+        return <<<JS
+			var params = this.getParameters(),
+			    sum = 0;
+			for (var i = 0; i < params.length; i++) {
+                sum = this.context.add(sum, params[i].evaluate());
+            }
 			return sum;
-EOQ;
-	}
+JS;
+    }
 
-	/**
-	 * Returns the opreation name that this Expression should be
-	 * called by.
-	 */
-	static function getOperationName() {
-		return "add";
-	}
+    /**
+     * Returns the operation name that this Expression should be
+     * called by.
+     */
+    public static function getOperationName()
+    {
+        return array('add', 'currencyAdd');
+    }
 
-	/**
-	 * Returns the String representation of this Expression.
-	 */
-	function toString() {
-		$str = "";
+    /**
+     * Returns the String representation of this Expression.
+     */
+    public function toString()
+    {
+        $str = "";
 
-		foreach ( $this->getParameters() as $expr ) {
-			if ( ! $expr instanceof ConstantExpression )	$str .= "(";
-			$str .= $expr->toString();
-			if ( ! $expr instanceof ConstantExpression )	$str .= ")";
-		}
-	}
+        foreach ($this->getParameters() as $expr) {
+            if (!$expr instanceof ConstantExpression) {
+                $str .= "(";
+            }
+            $str .= $expr->toString();
+            if (!$expr instanceof ConstantExpression) {
+                $str .= ")";
+            }
+        }
+    }
 }
-?>

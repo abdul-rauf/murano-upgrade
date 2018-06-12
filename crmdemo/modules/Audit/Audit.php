@@ -31,7 +31,7 @@ class Audit extends SugarBean
     public $genericAssocFieldsArray = array();
     public $moduleAssocFieldsArray = array();
     private $fieldDefs;
-    
+
     // This is used to retrieve related fields from form posts.
     public $additional_column_fields = Array();
 
@@ -130,7 +130,6 @@ class Audit extends SugarBean
         $return = array();
 
         while ($row = $db->fetchByAssoc($results)) {
-
             if (!ACLField::hasAccess(
                 $row['field_name'],
                 $bean->module_dir,
@@ -140,12 +139,14 @@ class Audit extends SugarBean
                 continue;
             }
 
+            //convert date
+            $dateCreated = $timedate->fromDbType($db->fromConvert($row['date_created'], 'datetime'), "datetime");
+            $row['date_created'] = $timedate->asIso($dateCreated);
+
             //If the team_set_id field has a log entry, we retrieve the list of teams to display
             if ($row['field_name'] == 'team_set_id') {
-                $row['field_name'] = 'team_name';
-                require_once 'modules/Teams/TeamSetManager.php';
-                $row['before_value_string'] = TeamSetManager::getCommaDelimitedTeams($row['before_value_string']);
-                $row['after_value_string'] = TeamSetManager::getCommaDelimitedTeams($row['after_value_string']);
+                $return[] = $this->handleTeamSetField($row);
+                continue;
             }
 
             // look for opportunities to relate ids to name values.
@@ -159,25 +160,10 @@ class Audit extends SugarBean
                     }
                 }
             }
+            
+            $row = $this->formatRowForApi($row);
 
-            // convert the date
-            $dateCreated = $timedate->fromDbType($db->fromConvert($row['date_created'], 'datetime'), "datetime");
-            $row['date_created'] = $timedate->asIso($dateCreated);
-
-            $row['before'] = $row['after'] = null;
-
-            if (empty($row['before_value_string']) && empty($row['after_value_string'])) {
-                $row['before'] = $row['before_value_text'];
-                $row['after'] = $row['after_value_text'];
-            } else {
-                $row['before'] = $row['before_value_string'];
-                $row['after'] = $row['after_value_string'];
-            }
-            unset($row['before_value_string']);
-            unset($row['after_value_string']);
-            unset($row['before_value_text']);
-            unset($row['after_value_text']);
-
+            $fieldName = $row['field_name'];
             $fieldType = $db->getFieldType($bean->field_defs[$row['field_name']]);
             switch ($fieldType) {
                 case 'date':
@@ -194,9 +180,10 @@ class Audit extends SugarBean
                 case 'relate':
                 case 'link':
                     // get the other side
-                    if (isset($bean->field_defs[$row['field_name']['module']])) {
-                        $otherSideBeanBefore = BeanFactory::getBean($bean->field_defs[$row['field_name']['module']], $row['before']);
-                        $otherSideBeanAfter = BeanFactory::getBean($bean->field_defs[$row['field_name']['module']], $row['after']);
+                    if (isset($bean->field_defs[$fieldName]['module'])) {
+                        $module = $bean->field_defs[$fieldName]['module'];
+                        $otherSideBeanBefore = BeanFactory::getBean($module, $row['before']);
+                        $otherSideBeanAfter = BeanFactory::getBean($module, $row['after']);
                         if ($otherSideBeanBefore instanceof SugarBean) {
                             $row['before'] = $otherSideBeanBefore->get_summary_text();
                         }
@@ -211,6 +198,58 @@ class Audit extends SugarBean
         }
 
         return $return;
+    }
+
+    /**
+     * Handles the special-cased `team_set_id` field when fetching rows for the
+     * Audit Log API. It is needed in order to prevent processing this field as
+     * type `relate`.
+     *
+     * @param array $row A row of database-queried audit table results.
+     * @return array The API-formatted $row.
+     */
+    protected function handleTeamSetField($row = array())
+    {
+        if (empty($row)) {
+            return $row;
+        }
+
+        $row['field_name'] = 'team_name';
+        require_once 'modules/Teams/TeamSetManager.php';
+        $row['before_value_string'] = TeamSetManager::getTeamsFromSet($row['before_value_string']);
+        $row['after_value_string'] = TeamSetManager::getTeamsFromSet($row['after_value_string']);
+
+        $row = $this->formatRowForApi($row);
+        return $row;
+    }
+
+    /**
+     * Formats a db-fetched row for the Audit Log API with `before` and `after`
+     * values.
+     *
+     * @param array $row A row of database-queried audit table results.
+     * @return array The API-formatted $row.
+     */
+    protected function formatRowForApi($row = array())
+    {
+        if (empty($row)) {
+            return $row;
+        }
+
+        if (empty($row['before_value_string']) && empty($row['after_value_string'])) {
+            $row['before'] = $row['before_value_text'];
+            $row['after'] = $row['after_value_text'];
+        } else {
+            $row['before'] = $row['before_value_string'];
+            $row['after'] = $row['after_value_string'];
+        }
+
+        unset($row['before_value_string']);
+        unset($row['before_value_text']);
+        unset($row['after_value_string']);
+        unset($row['after_value_text']);
+
+        return $row;
     }
 
     /**
@@ -233,12 +272,10 @@ class Audit extends SugarBean
         return $value;
     }
 
-    /**
-     * @Deprecated
-     */
-   public function get_audit_list()
+    // FIXME TY-987:  we need to decide if we actually want to deprecate
+    // this and what we want to replace it with
+    public function get_audit_list()
     {
-
         global $focus, $genericAssocFieldsArray, $moduleAssocFieldsArray, $current_user, $timedate, $app_strings;
         $audit_list = array();
         if (!empty($_REQUEST['record'])) {
@@ -267,7 +304,6 @@ class Audit extends SugarBean
                        $row['before_value_string'] = TeamSetManager::getCommaDelimitedTeams($row['before_value_string']);
                        $row['after_value_string'] = TeamSetManager::getCommaDelimitedTeams($row['after_value_string']);
                     }
-
                     $temp_list = array();
 
                     foreach ($fieldDefs as $field) {

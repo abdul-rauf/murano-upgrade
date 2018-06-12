@@ -12,11 +12,14 @@
  * @class View.Views.Base.PasswordmodalView
  * @alias SUGAR.App.view.views.BasePasswordmodalView
  * @extends View.Views.Base.BaseeditmodalView
+ * @deprecated 7.7 It will be removed in 7.8.
  */
 ({
     extendsFrom:'BaseeditmodalView',
     fallbackFieldTemplate: 'edit',
     initialize: function(options) {
+        app.logger.warn('The class `View.Views.Base.PasswordmodalView` has' +
+            ' been deprecated since 7.7.0.0 and will be removed in 7.8.0.0.');
         app.view.View.prototype.initialize.call(this, options);
         if (this.layout) {
             this.layout.on("app:view:password:editmodal", function() {
@@ -76,7 +79,7 @@
         field.find('.help-block').html("");
         field.find('.help-block').append(errorMsg);
         field.find('.add-on').remove();
-        field.find('input:last').after('<span class="add-on"><i class="icon-exclamation-sign"></i></span>');
+        field.find('input:last').after('<span class="add-on"><i class="fa fa-exclamation-circle"></i></span>');
     },
     setLoading: function() {
         this.$('[name=save_button]').attr('data-loading-text', app.lang.get('LBL_LOADING'));

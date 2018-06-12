@@ -1,6 +1,5 @@
 <?php
-
-/*
+ /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
@@ -10,31 +9,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
+/*
+ * Created on Aug 14, 2007
+ *
+ * To change the template for this generated file go to
+ * Window - Preferences - PHPeclipse - PHP - Code Templates
+ */
 $object_name = strtolower($object_name);
  $app_list_strings = array (
 
   $object_name.'_type_dom' =>
   array (
-  	'Administration' => 'Administración',
+  	'Administration' => 'Administration',
     'Product' => 'Producto',
     'User' => 'Usuario',
   ),
@@ -45,7 +31,7 @@ $object_name = strtolower($object_name);
     'Closed' => 'Cerrado',
     'Pending Input' => 'Pendiente de Información',
     'Rejected' => 'Rechazado',
-    'Duplicate' => 'Duplicado',
+    'Duplicate' => 'Duplicar',
   ),
   $object_name.'_priority_dom' =>
   array (
@@ -57,10 +43,10 @@ $object_name = strtolower($object_name);
   array (
   	'' => '',
   	'Accepted' => 'Aceptado',
-    'Duplicate' => 'Duplicado',
+    'Duplicate' => 'Duplicar',
     'Closed' => 'Cerrado',
     'Out of Date' => 'Caducado',
-    'Invalid' => 'No Válido',
+    'Invalid' => 'Invalido',
   ),
   );
 ?>

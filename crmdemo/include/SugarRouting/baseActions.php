@@ -1,4 +1,5 @@
 <?php
+
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -253,7 +254,7 @@ function copy_mail($action, $bean, $ie, $copy=true) {
 		}
 
 		$GLOBALS['log']->fatal("*** SUGARROUTING: baseActions:copy_email [ {$folder} ] [ {$ieId} ] [ {$bean->uid} ]");
-		$ie = BeanFactory::getBean('InboundEmail', $ieId);
+		$ie = BeanFactory::getBean('InboundEmail', $ieId, array('disable_row_level_security' => true));
 		$GLOBALS['log']->fatal("*** SUGARROUTING: dest folder is IMAP Folder");
 		// destination is an IMAP folder
 		/**

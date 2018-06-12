@@ -56,7 +56,7 @@ foreach ($admin_group_header as $key=>$values) {
     foreach ($module_index as $mod_key=>$mod_val) {
         if(
         (in_array($mod_val, $access) || (is_admin($current_user) && ($mod_val=='Administration')) ||
-        $mod_val=='studio'||($mod_val=='Forecasts' && in_array('ForecastSchedule', $access))) &&
+        $mod_val=='studio'||($mod_val=='Forecasts')) &&
         (!isset($addedHeaderGroups[$values[0]]))) {
             $admin_group_header_tab[]=$values;
             $group_header_value=get_form_header(translate($values[0],'Administration'),$values[1],$values[2]);

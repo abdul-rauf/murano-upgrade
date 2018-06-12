@@ -12,9 +12,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 require_once('soap/SoapHelperFunctions.php');
 require_once('soap/SoapTypes.php');
-
-
 require_once('modules/Reports/Report.php');
+
+use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+
 /*************************************************************************************
 
 THIS IS FOR SUGARCRM USERS
@@ -232,13 +233,20 @@ $server->register(
  * Perform a seamless login.  This is used internally during the sync process.
  *
  * @param String $session -- Session ID returned by a previous call to login.
+ * @param String $ip IP address of the client which is expected to login
  * @return true -- if the session was authenticated
  * @return false -- if the session could not be authenticated
  */
-function seamless_login($session){
+function seamless_login($session, $ip = null)
+{
 		if(!validate_authenticated($session)){
 			return 0;
 		}
+
+        $_SESSION['seamless_login'] = true;
+        if ($ip) {
+            $_SESSION['seamless_login_ip'] = $ip;
+        }
 
 		return 1;
 }
@@ -577,7 +585,23 @@ function set_entry($session,$module_name, $name_value_list){
             }
         }
     }
-	$seed->save();
+    try{
+        $seed->save();
+    } catch (SugarApiExceptionNotAuthorized $ex) {
+        $GLOBALS['log']->info('End: SoapSugarUsers->set_entry');
+        switch($ex->messageLabel) {
+            case 'ERR_USER_NAME_EXISTS':
+                $error_string = 'duplicates';
+                break;
+            case 'ERR_REPORT_LOOP':
+                $error_string = 'user_loop';
+                break;
+            default:
+                $error_string = 'error_user_create_update';
+        }
+        $error->set_error($error_string);
+        return array('id' => -1, 'error' => $error->get_soap_array());
+    }
 	if($seed->deleted == 1){
 			$seed->mark_deleted($seed->id);
 	}
@@ -905,7 +929,7 @@ function get_available_modules($session){
 		$error->set_error('invalid_session');
 		return array('modules'=> $modules, 'error'=>$error->get_soap_array());
 	}
-	$modules = array_keys($_SESSION['avail_modules']);
+	$modules = ArrayFunctions::array_access_keys($_SESSION['avail_modules']);
 
 	return array('modules'=> $modules, 'error'=>$error->get_soap_array());
 }
@@ -1488,6 +1512,9 @@ function search_by_module($user_name, $password, $search_string, $modules, $offs
                 'where' => array(
                     $module => array(
                         0 => "$namefield like '{0}%'"
+                    ),
+                    'EmailAddresses' => array(
+                        0 => "ea.email_address like '{0}%'"
                     )
                 ),
                 'fields' => "$lc_module.id, $namefield AS name"

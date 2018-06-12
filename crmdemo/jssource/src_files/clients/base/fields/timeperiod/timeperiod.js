@@ -30,11 +30,6 @@
     tooltipTemplate: '',
 
     /**
-     * Collection for fetching all the Timeperiods
-     */
-    tpCollection: undefined,
-
-    /**
      * Mapping of ID's with the start ane end dates formatted for use when the tooltip is displayed
      */
     tpTooltipMap: {},
@@ -50,22 +45,52 @@
     updateDefaultTooltip: false,
 
     /**
-     * {@inheritDoc}
+     * Tooltip placement direction for the template
+     */
+    tooltipDir: 'right',
+
+    /**
+     * @inheritdoc
      */
     initialize: function(options) {
-        this._super("initialize", [options]);
+        if (app.lang.direction === 'rtl') {
+            this.tooltipDir = 'left';
+        }
 
-        // get timeperiods list
-        this.tpCollection = app.data.createBeanCollection("TimePeriods");
+
+        var collectionParams = {
+            limit: 100,
+            params: {}
+        };
+
+        this._super('initialize', [options]);
+
+        if (this.def.use_generic_timeperiods) {
+            collectionParams.params.use_generic_timeperiods = true;
+        }
+
+        /**
+         * Collection for fetching all the Timeperiods.
+         *
+         * @property {Data.BeanCollection}
+         */
+        this.tpCollection = app.data.createBeanCollection('TimePeriods');
         this.tpCollection.once('reset', this.formatTooltips, this);
-        this.tpCollection.fetch({limit: 100});
+        this.tpCollection.on('sync', this.render, this);
+        this.tpCollection.fetch(collectionParams);
 
         // load the tooltip template
         this.tooltipTemplate = app.template.getField('timeperiod', 'tooltip', this.module);
+
+        // if forecast is not setup, then we need to use the generic options
+        var config = app.metadata.getModule('Forecasts', 'config');
+        if (!config || config.is_setup === 0) {
+            this.def.options = 'generic_timeperiod_options';
+        }
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Add a change event handler for initializing all the plugin tooltips again
      */
@@ -93,7 +118,7 @@
           }
         }, this);
         // since we don't need it any more, destroy it
-        this.tpCollection = undefined;
+        this._destroyTplCollection();
 
         if(this.updateDefaultTooltip) {
             this.updateDefaultTooltip = false;
@@ -104,7 +129,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     _render: function() {
         this._super("_render");
@@ -127,7 +152,7 @@
      */
     onSelectOpen: function() {
         var $el = $('div.' + this.cssClassSelector);
-        this.removePluginTooltips($el);
+        this.removePluginTooltips();
         this.addPluginTooltips($el);
     },
 
@@ -137,10 +162,11 @@
     onSelectClear: function() {
         var $el = $('div.' + this.cssClassSelector);
         this.removePluginTooltips($el);
+        this.addPluginTooltips();
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     getSelect2Options: function(optionsKeys) {
         var options = this._super("getSelect2Options", [optionsKeys]);
@@ -165,11 +191,35 @@
      * that gets output
      *
      * @param {Object} object
-     * @returns {string}
+     * @return {string}
      */
     formatOption: function(object) {
         // check once if the tpTooltipMap has been built yet
         this.updateDefaultTooltip = _.isUndefined(this.tpTooltipMap[object.id]);
-        return this.tooltipTemplate({tooltip: this.tpTooltipMap[object.id], value: object.text});
+        return this.tooltipTemplate({
+            tooltip: this.tpTooltipMap[object.id],
+            value: object.text,
+            tooltipDir: this.tooltipDir
+        });
+    },
+
+    /**
+     * Disposes the {@link #tplCollection} properly.
+     *
+     * @private
+     */
+    _destroyTplCollection: function() {
+        if (this.tpCollection) {
+            this.tpCollection.off(null, null, this);
+            this.tplCollection = null;
+        }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this._destroyTplCollection();
+        this._super('_dispose');
     }
 })

@@ -89,6 +89,22 @@ class Person extends Basic
         // If we are saving due to relationship changes, don't bother trying to
         // update the emails
         if (static::inOperation('saving_related')) {
+            // In workflow, it is possible to trigger a relationship save from a
+            // relationship save (for example, when creating a contact from an
+            // Opportunity when the sales status is Closed Won, but was set that
+            // way from an RLI status change). This fixes that.
+            if ($this->in_workflow) {
+                // If there was a newly created related record, save that relationship
+                // here since it will get skipped later on because of the opStage
+                // containing 'saving_related'. But set an id so that relationship
+                // changes will actually stick
+                if (empty($this->id)) {
+                    $this->id = create_guid();
+                    $this->new_with_id = true;
+                }
+                $this->save_relationship_changes($this->isUpdate());
+            }
+
             parent::save($check_notify);
             return $this->id;
         }
@@ -182,5 +198,55 @@ class Person extends Basic
             $newbean->shipping_address_postalcode = $this->alt_address_postalcode;
             $newbean->shipping_address_country = $this->alt_address_country;
         }
+    }
+
+    /**
+     * Retrieve a list of this person's calendar event start and end times ordered by start datetime
+     * @return array
+     */
+    public function getFreeBusySchedule(array $options = array())
+    {
+        global $timedate;
+        global $sugar_config;
+
+        //--- Explicit config can be used to force use of vCal Cache instead of RealTime Search
+        $useFreeBusyCache = !empty($sugar_config['freebusy_use_vcal_cache']);
+
+        $vcalBean = BeanFactory::getBean('vCals');
+        if (!$useFreeBusyCache && !empty($options['start']) && !empty($options['end'])) {
+            $sugarDateTimeStart = $timedate->fromIso($options['start']);
+            $sugarDateTimeEnd = $timedate->fromIso($options['end']);
+            $vcalData = $vcalBean->get_vcal_freebusy($this, false, $sugarDateTimeStart, $sugarDateTimeEnd);
+        } else {
+            $vcalData = $vcalBean->get_vcal_freebusy($this, true);
+        }
+
+        $vcalData = str_replace("\r\n", "\n", $vcalData);
+        $lines = explode("\n", $vcalData);
+        $utc = new DateTimeZone("UTC");
+
+        $activities = array();
+        foreach ($lines as $line) {
+            if (preg_match('/^FREEBUSY.*?:([^\/]+)\/([^\/]+)/i', $line, $matches)) {
+                $datesArray = array(
+                    SugarDateTime::createFromFormat(vCal::UTC_FORMAT, $matches[1], $utc),
+                    SugarDateTime::createFromFormat(vCal::UTC_FORMAT, $matches[2], $utc)
+                );
+                $act = new CalendarActivity($datesArray);
+                $startTime = $timedate->asIso($act->start_time);
+                $endTime = $timedate->asIso($act->end_time);
+                $activities[$startTime] = array(
+                    "start" => $startTime,
+                    "end" => $endTime,
+                );
+            }
+        }
+        ksort($activities); // order by start date
+        $freeBusySchedule = array();
+        foreach ($activities AS $startDate => $act) {
+            $freeBusySchedule[] = $act;
+        }
+
+        return $freeBusySchedule;
     }
 }

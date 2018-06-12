@@ -16,6 +16,7 @@ $mod_strings = array (
 	'LBL_ADD_INVITEE' => 'Add Invitees',
 	'LBL_COLON' => ':',
 	'LBL_CONTACT_NAME' => 'Contact:',
+    'LBL_CONTACT_ID'   => 'Contact Id',
 	'LBL_CONTACTS_SUBPANEL_TITLE' => 'Contacts',
 	'LBL_CREATED_BY'=>'Created by',
 	'LBL_DATE_END'=>'End Date',
@@ -47,6 +48,7 @@ $mod_strings = array (
 	'LBL_LIST_DUE_DATE'=>'Due Date',
 	'LBL_LIST_FORM_TITLE' => 'Meeting List',
 	'LBL_LIST_MY_MEETINGS' => 'My Meetings',
+    'LBL_MY_SCHEDULED_MEETINGS' => 'My Scheduled Meetings',
 	'LBL_LIST_RELATED_TO' => 'Related to',
 	'LBL_LIST_STATUS'=>'Status',
 	'LBL_LIST_SUBJECT' => 'Subject',
@@ -70,6 +72,8 @@ $mod_strings = array (
 	'LBL_REMINDER_POPUP' => 'Popup',
 	'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Email all invitees',
+    'LBL_POPUP_REMINDER' => 'Popup Reminder',
+    'LBL_POPUP_REMINDER_TIME' => 'Popup Reminder Time',
     'LBL_EMAIL_REMINDER' => 'Email Reminder',
     'LBL_EMAIL_REMINDER_TIME' => 'Email Reminder Time',
     'LBL_REMOVE' => 'rem',
@@ -106,8 +110,12 @@ $mod_strings = array (
 	'LBL_LIST_JOIN_MEETING' => 'Join Meeting',
 	'LBL_JOIN_EXT_MEETING' => 'Join Meeting',
 	'LBL_HOST_EXT_MEETING' => 'Start Meeting',
+    'LBL_JOIN_MEETING' => 'Join {{meetingType}}',
+    'LBL_START_MEETING' => 'Start {{meetingType}}',
     'LBL_ACCEPT_STATUS' => 'Accept Status',
     'LBL_ACCEPT_LINK' => 'Accept Link',
+    'LBL_ERROR_LAUNCH_MEETING_GENERAL' => 'There was an error launching this meeting. Please contact your Administrator.',
+    'LBL_EXTERNAL_MEETING_NO_URL' => 'The link to launch {{meetingType}} was not generated properly when the meeting was created. Please contact your Administrator.',
     // You are not invited to the meeting messages
     'LBL_EXTNOT_HEADER' => 'Error: Not Invited',
     'LBL_EXTNOT_MAIN' => 'You are not able to join this Meeting because you are not an Invitee.',
@@ -171,4 +179,37 @@ $mod_strings = array (
     'LBL_REVENUELINEITEMS' => 'Revenue Line Items',
 
     'LBL_MEETING_CLOSE_SUCCESS' => 'Meeting closed successfully.',
+
+    //record save
+    'LBL_RECORD_SAVED_SUCCESS' => 'You scheduled the {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> for {{formatDate date_start}}.',
+    'LBL_RECORD_SAVED_ACCESS_DENIED' => 'You scheduled the {{moduleSingularLower}} for {{formatDate date_start}}, but you do not have permission to access it.',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module consists of meeting records which may be in a status of "Scheduled", "Held", or "Canceled". Upcoming meetings scheduled within the next 24 hours show the start date highlighted in blue. Overdue meetings show the start date highlighted in red.
+
+From this {{plural_module_name}} list view, you can view and in-line edit meeting information. Additional actions are available in the menu at the end of each meeting\'s row. You can select "Close" from the menu on any scheduled meeting\'s row in order to mark it as held.
+
+Sugar users, contacts, and leads may be added as meeting invitees. {{plural_module_name}} may be created via the {{plural_module_name}} module, Calendar module, import, as well as via the Activities subpanel (for Legacy modules) or Planned Activities dashlet (for Sidecar modules) on related module records (e.g. Contacts, Accounts, etc.), which automatically creates a relationship between both records.',
+
+    // Record View Help Text
+    'LBL_HELP_RECORD' => 'The {{plural_module_name}} module consists of {{meetings_singular_module}} records logged by users in your organization. {{plural_module_name}} may be in a status of "Scheduled", "Held", or "Canceled". Sugar users as well as {{contacts_module}} and {{leads_module}} may be added as invitees.
+
+- Edit this record\'s fields by clicking an individual field or the Edit button.
+- View or modify links to other records in the subpanels by toggling the bottom left pane to "Data View".
+- Make and view user comments and record change history in the activity stream by toggling the bottom left pane to "Activity Stream".
+- Follow or favorite this record using the icons to the right of the record name.
+- Additional actions are available in the dropdown Actions menu to the right of the Edit button.',
+
+    // Create View Help Text
+    'LBL_HELP_CREATE' => 'The {{plural_module_name}} module consists of {{meetings_module}} records logged by users in your organization. {{plural_module_name}} may be in a status of "Scheduled", "Held", or "Canceled". Sugar users as well as {{contacts_module}} and {{leads_module}} may be added as invitees.
+
+To create a {{meetings_singular_module}}:
+1. Provide values for the fields as desired.
+    - Fields marked "Required" must be completed prior to saving.
+    - Click "Show More" to expose additional fields if necessary.
+2. Add invitees to the {{meetings_singular_module}}.
+    - Click "Select an Attendee" to add an existing user, contact, or lead to the {{meetings_singular_module}}.
+    - Click the plus icon to the right of "Select an Attendee" to create a {{meetings_singular_module}} attendee as a new Sugar record.
+3. Click "Save" to finalize the new record and return to the previous page.',
 );

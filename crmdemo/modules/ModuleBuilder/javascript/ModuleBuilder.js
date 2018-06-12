@@ -276,7 +276,7 @@ if (typeof(ModuleBuilder) == 'undefined') {
 					view_package: ModuleBuilder.MBpackage,
 					view_module: module,
 					view: layout,
-					subpanel: subpanel
+                    subpanel: subpanel
 				};
 				ModuleBuilder.history.popup_window.load(ModuleBuilder.paramsToUrl(ModuleBuilder.history.params));
 				ModuleBuilder.history.popup_window.show();
@@ -293,7 +293,7 @@ if (typeof(ModuleBuilder) == 'undefined') {
 						view_module: module,
 						view: layout,
 						sid: id,
-						subpanel: subpanel
+                        subpanel: subpanel
 					};
 					prevPanel = new YAHOO.SUGAR.ClosableTab({
 						dataSrc: Connect.url + "&" + ModuleBuilder.paramsToUrl(ModuleBuilder.history.params),
@@ -310,10 +310,10 @@ if (typeof(ModuleBuilder) == 'undefined') {
 				}
 				
 			},
-			revert: function(module, layout, id, subpanel){
+            revert: function(module, layout, id, subpanel, isDefault) {
 				var prevTab = ModuleBuilder.tabPanel.getTabIndex("preview:" + id);
 				if(prevTab) ModuleBuilder.tabPanel.removeTab(prevTab);
-				
+
 				ModuleBuilder.history.params = {
 					module: 'ModuleBuilder',
 					histAction: 'restore',
@@ -322,13 +322,22 @@ if (typeof(ModuleBuilder) == 'undefined') {
 					view_module: module,
 					view: layout,
 					sid: id,
-					subpanel: subpanel
-				}
+                    subpanel: subpanel
+				};
 				ModuleBuilder.asyncRequest(ModuleBuilder.history.params, function(){
 					ModuleBuilder.history.reverted = true;
-					ModuleBuilder.getContent(ModuleBuilder.contentURL);
-					ModuleBuilder.state.isDirty = true;
-				});
+                    ModuleBuilder.getContent(ModuleBuilder.paramsToUrl({
+                        module: "ModuleBuilder",
+                        action: "editLayout",
+                        view: layout,
+                        view_module: module,
+                        subpanel: subpanel,
+                        view_package: ModuleBuilder.MBpackage
+                    }), function(content) {
+                        ModuleBuilder.updateContent(content);
+                            ModuleBuilder.state.markAsDirty();
+                    });
+				}, false);
 			},
 			cleanup: function() {
 				if (ModuleBuilder.history.reverted && ModuleBuilder.history.params.histAction) {
@@ -351,6 +360,12 @@ if (typeof(ModuleBuilder) == 'undefined') {
 		},
 		state: {
 			isDirty: false,
+            markAsDirty: function() {
+                ModuleBuilder.state.isDirty = true;
+            },
+            markAsClean: function() {
+                ModuleBuilder.state.isDirty = false;
+            },
 			saving: false,
             hideFailedMesage: false,
 			intended_view: {
@@ -372,7 +387,7 @@ if (typeof(ModuleBuilder) == 'undefined') {
 				//set dirty = false
 				//call the save method of the current view.
 				//call the intended action.
-				ModuleBuilder.state.isDirty = false;
+                ModuleBuilder.state.markAsClean();
 				var saveBtn = document.getElementById("saveBtn");
 				if (!saveBtn) {
 					var mbForm = document.forms[1];
@@ -394,14 +409,16 @@ if (typeof(ModuleBuilder) == 'undefined') {
 				if (saveBtn) {
 					//After the save call completes, load the next page
 					ModuleBuilder.state.saving = true;
-					eval(saveBtn.getAttributeNode('onclick').value);
+                    saveBtn.click();
 				}
 				ModuleBuilder.state.popup_window.hide();
+
+				ModuleBuilder.getContent(ModuleBuilder.state.intended_view.url, ModuleBuilder.state.intended_view.successCall);
 			},
 			onDontSaveClick: function(){
 				//set dirty to false
 				//call the intended action.
-				ModuleBuilder.state.isDirty = false;
+                ModuleBuilder.state.markAsClean();
 				ModuleBuilder.history.cleanup();
 				ModuleBuilder.getContent(ModuleBuilder.state.intended_view.url, ModuleBuilder.state.intended_view.successCall);
 				ModuleBuilder.state.popup_window.hide();
@@ -428,6 +445,9 @@ if (typeof(ModuleBuilder) == 'undefined') {
                         isDefault:true,
                         handler: function(){
                             ModuleBuilder.state.popup_window.hide()
+                            if (ModuleBuilder.state.intended_view.cancelCall) {
+                                ModuleBuilder.state.intended_view.cancelCall();
+                            }
                         }
                      },{
                         text: SUGAR.language.get('ModuleBuilder', 'LBL_BTN_SAVE_CHANGES'),
@@ -455,7 +475,7 @@ if (typeof(ModuleBuilder) == 'undefined') {
             ModuleBuilder.getContent(url+"&copyFromEditView=true");
              ModuleBuilder.contentURL = url;
             ModuleBuilder.state.intended_view.url = url;
-            ModuleBuilder.state.isDirty = true;
+            ModuleBuilder.state.markAsDirty();
         },
 		//AJAX Navigation Functions
 		navigate : function(url) {
@@ -464,7 +484,7 @@ if (typeof(ModuleBuilder) == 'undefined') {
 				ModuleBuilder.getContent(url);
 			}
 		},
-		getContent: function(url, successCall){
+        getContent: function(url, successCall, cancelCall) {
 			if (!url) return;
 			
 			if (url.substring(0, 11) == "javascript:")
@@ -472,25 +492,23 @@ if (typeof(ModuleBuilder) == 'undefined') {
 				eval(url.substring(11));
 				return;
 			}
-			
+
 			//save a pointer to intended action
 			ModuleBuilder.state.intended_view.url = url;
 			ModuleBuilder.state.intended_view.successCall = successCall;
+            ModuleBuilder.state.intended_view.cancelCall = cancelCall;
 			if(ModuleBuilder.state.isDirty){ //prompt to save current data.
 				//check if we are editing a property of the current view (such views open up in new tabs)
 				//if so we leave the state dirty and return
-				temp_url = url.toLowerCase();
-				if(null == temp_url.match(/&action=editproperty/)){
-					ModuleBuilder.state.popup();
-					ModuleBuilder.state.popup_window.show();
-					return;
-				}
 
+				ModuleBuilder.state.popup();
+				ModuleBuilder.state.popup_window.show();
+				return;
 			}else{
 				ModuleBuilder.state.current_view.url = url;
 				ModuleBuilder.state.current_view.successCall = successCall;
 			}
-			
+			ModuleBuilder.centerContentURL = ModuleBuilder.contentURL || url;
 			ModuleBuilder.contentURL =  url;
 			if (typeof(successCall) != 'function') {
 				if (ModuleBuilder.callInProgress)
@@ -498,13 +516,37 @@ if (typeof(ModuleBuilder) == 'undefined') {
 				ModuleBuilder.callInProgress = true;
 				successCall = ModuleBuilder.updateContent;
 			}
-			ModuleBuilder.asyncRequest(url, successCall);
+
+            var requestUrl = url;
+
+            ModuleBuilder.asyncRequest(requestUrl, successCall);
 		},
+
+        /**
+         * Checks if the layout corresponding to the given URL is the same as current one
+         *
+         * @param {String} url The URL to be requested
+         * @returns {Boolean}
+         */
+        isLayoutTheSame: function(url) {
+            var params = ["view_module", "view"];
+            var values = ModuleBuilder.urlToParams(url);
+            var currentValues = ModuleBuilder.urlToParams(ModuleBuilder.centerContentURL);
+            for (var i = 0, param; i < params.length; i++) {
+                param = params[i];
+                if (values[param] && currentValues[param] && values[param] != currentValues[param]) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
+
 		updateContent: function(o){
+
 			ModuleBuilder.callInProgress = false;
 			//Check if a save action was called and now we need to move-on
 			if (ModuleBuilder.state.saving) {
-				ModuleBuilder.toggleButtons();
 				ModuleBuilder.state.loadOnSaveComplete();
 				return;
 			}
@@ -535,6 +577,11 @@ if (typeof(ModuleBuilder) == 'undefined') {
 				ModuleBuilder.tabPanel.getTab(0).set(t.exec(ajaxResponse.data));
 				SUGAR.util.evalScript(t.exec(ajaxResponse.data));
 				return true;
+			}
+			// If the center panel isn't being updated, revert the content URL since we only care about the center panel
+			// for reload purposes
+			if (!ajaxResponse.center) {
+				ModuleBuilder.contentURL = ModuleBuilder.centerContentURL;
 			}
 			
 			for (var maj in ajaxResponse) {
@@ -582,8 +629,8 @@ if (typeof(ModuleBuilder) == 'undefined') {
 						}
 					} else {
 						//Store Center pane changes in browser history
-						YAHOO.util.History.navigate('mbContent', ModuleBuilder.contentURL);
 						if (name == 'mbcenter') {
+							YAHOO.util.History.navigate('mbContent', ModuleBuilder.contentURL);
 							ModuleBuilder.closeAllTabs();
 							comp = ModuleBuilder.tabPanel.getTab(0);
 						}
@@ -655,7 +702,16 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			
 			// Capture aspects of the request in case the need to resend arises
 			ModuleBuilder.requestElements.fields = Connect.setForm(document.getElementById(formname) || document.forms[formname]);
-			ModuleBuilder.requestElements.callbacks = {success: successCall, failure: ModuleBuilder.failed};
+            ModuleBuilder.requestElements.callbacks = {
+                success: function() {
+                    ModuleBuilder.toggleButtons();
+                    successCall.apply(this, arguments);
+                },
+                failure: function() {
+                    ModuleBuilder.toggleButtons();
+                    ModuleBuilder.failed.apply(this, arguments);
+                }
+            };
 			Connect.asyncRequest(
 			    Connect.method, 
 			    Connect.url, 
@@ -855,7 +911,7 @@ if (typeof(ModuleBuilder) == 'undefined') {
 		},
 		handleSave: function(form, callBack){
 			if (check_form(form)) {
-				ModuleBuilder.state.isDirty=false;
+                ModuleBuilder.state.markAsClean();
 				ModuleBuilder.submitForm(form, callBack);
 			}
 		},
@@ -1071,6 +1127,10 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			ModuleBuilder.callLock = false;
 			ModuleBuilder.getContent('module=ModuleBuilder&MB=1&action=wizard&view_package=' + ModuleBuilder.MBpackage + '&view_module=' + ModuleBuilder.module);
 		},
+        moduleViewMobileLayouts: function(o){
+            ModuleBuilder.callLock = false;
+            ModuleBuilder.getContent('module=ModuleBuilder&MB=1&action=wizard&view=wirelesslayouts&view_package=' + ModuleBuilder.MBpackage + '&view_module=' + ModuleBuilder.module);
+        },
 		findTabById : function(id) {
 			var tabs = ModuleBuilder.tabPanel.get("tabs");
 			for (var i = 0; i < tabs.length; i++) {
@@ -1105,6 +1165,14 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			}
 			return url;
 		},
+        urlToParams: function(url) {
+            var params = {};
+            for (var pairs = url.split("&"), parts, i = 0, length = pairs.length; i < length; i++) {
+                parts = pairs[i].split("=", 2);
+                params[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
+            }
+            return params;
+        },
 		/**
 		 * Indicates whether the text presented shows that the request failed and
 		 * is requiring a login via redirect.
@@ -1172,12 +1240,13 @@ if (typeof(ModuleBuilder) == 'undefined') {
 				}
 			}
 		},
-		asyncRequest : function(params, callback) {
+		asyncRequest : function (params, callback, showLoading) {
 			// Used to normalize request arguments needed for the async request
 			// as well as for setting into the requestElements object
-			var url,
-				cUrl = Connect.url,
-				cMethod = Connect.method;
+            var url,
+                cUrl = Connect.url,
+                cMethod = Connect.method,
+                postFields = {};
 			
 			if (typeof params == "object") {
 				url = ModuleBuilder.paramsToUrl(params);
@@ -1186,6 +1255,11 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			}
 			
 			cUrl += '&' + url;
+
+            // attach CSRF token for POST, we don't want this in the url
+            if (cMethod == "POST") {
+                postFields['csrf_token'] = SUGAR.csrf.form_token;
+            }
 			
 			ModuleBuilder.requestElements.method = cMethod;
 			ModuleBuilder.requestElements.url = cUrl;
@@ -1193,12 +1267,17 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			
 			// Make sure the session cookie is always fresh if that is possible
 			ModuleBuilder.ensureSessionCookie();
-			ajaxStatus.showStatus(SUGAR.language.get('app_strings', 'LBL_LOADING_PAGE'));
-			Connect.asyncRequest(
-			    ModuleBuilder.requestElements.method, 
-			    ModuleBuilder.requestElements.url, 
-			    ModuleBuilder.requestElements.callbacks
-			);
+
+            if (typeof(showLoading) == 'undefined' || showLoading == true) {
+                ajaxStatus.showStatus(SUGAR.language.get('app_strings', 'LBL_LOADING_PAGE'));
+            }
+
+            Connect.asyncRequest(
+                ModuleBuilder.requestElements.method,
+                ModuleBuilder.requestElements.url,
+                ModuleBuilder.requestElements.callbacks,
+                SUGAR.util.paramsToUrl(postFields)
+            );
 		},
 		refreshGlobalDropDown: function(o){
 			// just clear the callLock; the convention is that this is done in a handler rather than in updateContent
@@ -1334,17 +1413,13 @@ if (typeof(ModuleBuilder) == 'undefined') {
                 mode:2,
                 mapping: Dom.get(targetId).value
             };
-            win.load("", "POST", function()
-            {
+            win.load(ModuleBuilder.paramsToUrl(win.params), "GET", function() {
                 SUGAR.util.evalScript(win.body.innerHTML);
                 //firefox will ignore the left panel size, so we need to manually force the windows height and width
                 win.body.style.height = "570px";
                 win.body.style.minWidth = "780px";
                 win.center();
-            },
-                //POST parameters
-                ModuleBuilder.paramsToUrl(win.params)
-            );
+            });
             win.show();
             win.center();
         },
@@ -1391,6 +1466,13 @@ if (typeof(ModuleBuilder) == 'undefined') {
             if(Dom.get('has_parent')){
                 Dom.get('has_parent').value = enable;
             }
+        },
+        toggleBoost: function() {
+            var display = "";
+            if (Dom.get("fts_field_config").value < 2) {
+                display = "none";
+            }
+            Dom.setStyle("ftsFieldBoostRow", "display", display);
         },
 		toggleCF: function(enable) {
             if (typeof(enable) == 'undefined') {

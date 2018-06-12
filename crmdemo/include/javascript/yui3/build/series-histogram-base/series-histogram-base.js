@@ -1,8 +1,46 @@
 /*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("series-histogram-base",function(e,t){function r(){}var n=e.Lang;r.prototype={drawSeries:function(){if(this.get("xcoords").length<1)return;var e=this._copyObject(this.get("styles").marker),t=this.get("graphic"),r,i,s=this.get("xcoords"),o=this.get("ycoords"),u=0,a=s.length,f=o[0],l=this.get("seriesTypeCollection"),c=l?l.length:0,h=0,p=0,d=0,v,m,g=this.get("order"),y=this.get("graphOrder"),b,w,E,S,x,T=null,N=null,C=[],k=[],L,A,O,M,_={width:[],height:[]},D=[],P=[],H=this.get("groupMarkers");n.isArray(e.fill.color)&&(T=e.fill.color.concat()),n.isArray(e.border.color)&&(N=e.border.color.concat()),this.get("direction")==="vertical"?(E="height",S="width"):(E="width",S="height"),r=e[E],i=e[S],this._createMarkerCache(),this._maxSize=t.get(E);if(l&&c>1){for(;u<c;++u)m=l[u],h+=m.get("styles").marker[E],g>u&&(d=h);p=a*h,p>this._maxSize&&(v=t.get(E)/p,h*=v,d*=v,r*=v,r=Math.max(r,1),this._maxSize=r)}else h=e[E],p=a*h,p>this._maxSize&&(h=this._maxSize/a,this._maxSize=h);d-=h/2;for(u=0;u<a;++u){L=s[u]-h/2,A=L+h,O=o[u]-h/2,M=O+h,C.push({start:L,end:A}),k.push({start:O,end:M});if(!H&&(isNaN(s[u])||isNaN(o[u]))){this._markers.push(null);continue}x=this._getMarkerDimensions(s[u],o[u],i,d),!isNaN(x.calculatedSize)&&x.calculatedSize>0?(f=x.top,b=x.left,H?(_[E][u]=r,_[S][u]=x.calculatedSize,D.push(b),P.push(f)):(e[E]=r,e[S]=x.calculatedSize,e.x=b,e.y=f,T&&(e.fill.color=T[u%T.length]),N&&(e.border.color=N[u%N.length]),w=this.getMarker(e,y,u))):H||this._markers.push(null)}this.set("xMarkerPlane",C),this.set("yMarkerPlane",k),H?this._createGroupMarker({fill:e.fill,border:e.border,dimensions:_,xvalues:D,yvalues:P,shape:e.shape}):this._clearMarkerCache()},_defaultFillColors:["#66007f","#a86f41","#295454","#996ab2","#e8cdb7","#90bdbd","#000000","#c3b8ca","#968373","#678585"],_getPlotDefaults:function(){var e={fill:{type:"solid",alpha:1,colors:null,alphas:null,ratios:null},border:{weight:0,alpha:1},width:12,height:12,shape:"rect",padding:{top:0,left:0,right:0,bottom:0}};return e.fill.color=this._getDefaultColor(this.get("graphOrder"),"fill"),e.border.color=this._getDefaultColor(this.get("graphOrder"),"border"),e}},e.Histogram=r},"3.15.0",{requires:["series-cartesian","series-plot-util"]});
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('series-histogram-base',function(Y,NAME){var Y_Lang=Y.Lang;function Histogram(){}
+Histogram.prototype={drawSeries:function()
+{if(this.get("xcoords").length<1)
+{return;}
+var style=this._copyObject(this.get("styles").marker),graphic=this.get("graphic"),setSize,calculatedSize,xcoords=this.get("xcoords"),ycoords=this.get("ycoords"),i=0,len=xcoords.length,top=ycoords[0],seriesTypeCollection=this.get("seriesTypeCollection"),seriesLen=seriesTypeCollection?seriesTypeCollection.length:0,seriesSize=0,totalSize=0,offset=0,ratio,renderer,order=this.get("order"),graphOrder=this.get("graphOrder"),left,marker,setSizeKey,calculatedSizeKey,config,fillColors=null,borderColors=null,xMarkerPlane=[],yMarkerPlane=[],xMarkerPlaneLeft,xMarkerPlaneRight,yMarkerPlaneTop,yMarkerPlaneBottom,dimensions={width:[],height:[]},xvalues=[],yvalues=[],groupMarkers=this.get("groupMarkers");if(Y_Lang.isArray(style.fill.color))
+{fillColors=style.fill.color.concat();}
+if(Y_Lang.isArray(style.border.color))
+{borderColors=style.border.color.concat();}
+if(this.get("direction")==="vertical")
+{setSizeKey="height";calculatedSizeKey="width";}
+else
+{setSizeKey="width";calculatedSizeKey="height";}
+setSize=style[setSizeKey];calculatedSize=style[calculatedSizeKey];this._createMarkerCache();this._maxSize=graphic.get(setSizeKey);if(seriesTypeCollection&&seriesLen>1)
+{for(;i<seriesLen;++i)
+{renderer=seriesTypeCollection[i];seriesSize+=renderer.get("styles").marker[setSizeKey];if(order>i)
+{offset=seriesSize;}}
+totalSize=len*seriesSize;if(totalSize>this._maxSize)
+{ratio=graphic.get(setSizeKey)/totalSize;seriesSize*=ratio;offset*=ratio;setSize*=ratio;setSize=Math.max(setSize,1);this._maxSize=setSize;}}
+else
+{seriesSize=style[setSizeKey];totalSize=len*seriesSize;if(totalSize>this._maxSize)
+{seriesSize=this._maxSize/len;this._maxSize=seriesSize;}}
+offset-=seriesSize/2;for(i=0;i<len;++i)
+{xMarkerPlaneLeft=xcoords[i]-seriesSize/2;xMarkerPlaneRight=xMarkerPlaneLeft+seriesSize;yMarkerPlaneTop=ycoords[i]-seriesSize/2;yMarkerPlaneBottom=yMarkerPlaneTop+seriesSize;xMarkerPlane.push({start:xMarkerPlaneLeft,end:xMarkerPlaneRight});yMarkerPlane.push({start:yMarkerPlaneTop,end:yMarkerPlaneBottom});if(!groupMarkers&&(isNaN(xcoords[i])||isNaN(ycoords[i])))
+{this._markers.push(null);continue;}
+config=this._getMarkerDimensions(xcoords[i],ycoords[i],calculatedSize,offset);if(!isNaN(config.calculatedSize)&&config.calculatedSize>0)
+{top=config.top;left=config.left;if(groupMarkers)
+{dimensions[setSizeKey][i]=setSize;dimensions[calculatedSizeKey][i]=config.calculatedSize;xvalues.push(left);yvalues.push(top);}
+else
+{style[setSizeKey]=setSize;style[calculatedSizeKey]=config.calculatedSize;style.x=left;style.y=top;if(fillColors)
+{style.fill.color=fillColors[i%fillColors.length];}
+if(borderColors)
+{style.border.color=borderColors[i%borderColors.length];}
+marker=this.getMarker(style,graphOrder,i);}}
+else if(!groupMarkers)
+{this._markers.push(null);}}
+this.set("xMarkerPlane",xMarkerPlane);this.set("yMarkerPlane",yMarkerPlane);if(groupMarkers)
+{this._createGroupMarker({fill:style.fill,border:style.border,dimensions:dimensions,xvalues:xvalues,yvalues:yvalues,shape:style.shape});}
+else
+{this._clearMarkerCache();}},_defaultFillColors:["#66007f","#a86f41","#295454","#996ab2","#e8cdb7","#90bdbd","#000000","#c3b8ca","#968373","#678585"],_getPlotDefaults:function()
+{var defs={fill:{type:"solid",alpha:1,colors:null,alphas:null,ratios:null},border:{weight:0,alpha:1},width:12,height:12,shape:"rect",padding:{top:0,left:0,right:0,bottom:0}};defs.fill.color=this._getDefaultColor(this.get("graphOrder"),"fill");defs.border.color=this._getDefaultColor(this.get("graphOrder"),"border");return defs;}};Y.Histogram=Histogram;},'3.15.0',{"requires":["series-cartesian","series-plot-util"]});

@@ -27,30 +27,29 @@ class SugarUpgradeRepairWorkflow extends UpgradeScript
         require_once('modules/WorkFlowTriggerShells/WorkFlowTriggerShell.php');
         require_once('include/workflow/glue.php');
 
-        // Disable time-elapsed workflows that don't have a proper Primary trigger
-        $query = "SELECT DISTINCT w.id as workflow_id, w.description as description
+        // Disable time-elapsed workflows that don't have a proper Primary trigger and change their description
+        $query = "SELECT DISTINCT w.id as workflow_id
                     FROM workflow w, workflow_triggershells wt
                     WHERE w.id = wt.parent_id
                     AND w.deleted = 0
                     AND wt.deleted = 0
                     AND w.type = 'Time'
                     AND wt.frame_type = 'Primary'
-                    AND wt.type NOT IN ('compare_any_time', 'compare_specific')
-                    AND w.status = 1";
+                    AND wt.type NOT IN ('compare_any_time', 'compare_specific')";
         $brokenWorkflows = $this->db->query($query);
         $descriptionFix = "THIS WORKFLOW WAS DEACTIVATED AUTOMATICALLY BY THE UPGRADE TO SUGAR 7 DUE TO INCOMPATIBILITY. PLEASE DELETE ALL CONDITIONS ON THE WORKFLOW AND RECREATE THEM.";
         while ($row = $this->db->fetchByAssoc($brokenWorkflows)) {
             $workflow = BeanFactory::getBean('WorkFlow', $row['workflow_id']);
             $workflow->status = 0;
-            if (strpos($row['description'], $descriptionFix) === false) {
+            if (strpos($workflow->description, $descriptionFix) === false) {
                 $workflow->description = "$descriptionFix\n"
-                    . $row['description'];
+                    . $workflow->description;
             }
             $workflow->save();
         }
 
     	// Call repair workflow
     	$workflow_object = new WorkFlow();
-    	$workflow_object->repair_workflow();
+    	$workflow_object->repair_workflow(true);
     }
 }

@@ -11,7 +11,7 @@
  */
 
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
+// $Id: action_utils.php 56841 2010-06-05 00:44:19Z smalyshev $
 
 include_once('include/workflow/workflow_utils.php');
 include_once('include/workflow/field_utils.php');
@@ -60,6 +60,8 @@ function process_action_update($focus, $action_array){
             if (in_array($focus->field_defs[$field]['type'], array('double', 'decimal','currency', 'float')))
             {
                 $new_value = (float)unformat_number($new_value);
+            } elseif ($focus->field_defs[$field]['type'] === 'multienum') {
+                $new_value = workflow_convert_multienum_value($new_value);
             }
 			$focus->$field = convert_bool($new_value, $focus->field_defs[$field]['type']);
 			execute_special_logic($field, $focus);
@@ -106,6 +108,11 @@ function process_action_update($focus, $action_array){
 		execute_special_logic($field, $focus);
 	}
     $focus->in_workflow = true;
+
+    if (!empty($focus->email1_set_in_workflow)) {
+        $focus->emailAddress->dontLegacySave = false;
+        $focus->emailAddress->handleLegacySave($focus);
+    }
 //end function process_action_update
 }
 
@@ -130,7 +137,9 @@ function process_action_update_rel($focus, $action_array){
             $check_notify = false;
             $old_owner = $rel_object->assigned_user_id;
 			foreach($action_array['basic'] as $field => $new_value){
-
+                if (isset($rel_object->field_defs[$field]['type']) && $rel_object->field_defs[$field]['type'] === 'multienum') {
+                    $new_value = workflow_convert_multienum_value($new_value);
+                }
 				if(empty($action_array['basic_ext'][$field])){
 					$rel_object->$field = convert_bool($new_value, $rel_object->field_defs[$field]['type']);
 				}
@@ -189,6 +198,9 @@ function process_action_new($focus, $action_array){
     }
 
 	foreach($action_array['basic'] as $field => $new_value){
+        if (isset($target_module->field_defs[$field]['type']) && $target_module->field_defs[$field]['type'] === 'multienum') {
+            $new_value = workflow_convert_multienum_value($new_value);
+        }
 			//rrs - bug 10466
 			$target_module->$field = convert_bool($new_value, $target_module->field_defs[$field]['type'], (empty($target_module->field_defs[$field]['dbType']) ? '' : $target_module->field_defs[$field]['dbType']));
             if($field == "email1") $target_module->email1_set_in_workflow = $target_module->email1;
@@ -230,15 +242,60 @@ function process_action_new($focus, $action_array){
     $target_module->not_use_rel_in_req = true;
     $target_module->new_rel_relname = $seed_object->rel_name;
     $target_module->new_rel_id = $focus->id;
-    if (!empty($focus->assigned_user_id) && empty($target_module->assigned_user_id)) {
-        $target_module->assigned_user_id = $focus->assigned_user_id;
+
+    // If the assigned_user_id isn't set by the workflow
+    if (empty($target_module->assigned_user_id)) {
+        // Assign current_user to the newly created record
+        $target_module->assigned_user_id = $GLOBALS['current_user']->id;
+        // If there is no current_user for some reason, use the assigned_user_id of the related record
+        if (empty($target_module->assigned_user_id) && !empty($focus->assigned_user_id)) {
+            $target_module->assigned_user_id = $focus->assigned_user_id;
+        }
     }
-	$target_module->save($check_notify);
+
+    // Not all beans should be saved, particularly when a workflow has already
+    // been triggered by a related save that has completed, but a related related
+    // save fires one again
+    $shouldSave = should_save_new_bean($focus, $action_array);
+    if ($shouldSave) {
+        $target_module->save($check_notify);
+        // Mark the focus bean so that it doesn't fire again downstream
+        mark_trigger_bean_with_trigger_id($focus, $action_array);
+    }
 
 //end function_action_new
 }
 
+/**
+ * Determines the save state of a bean created during a workflow process
+ * @param SugarBean $focus The primary bean
+ * @param Array $action_array The actions array that contains the meta for the workflow
+ * @return boolean
+ */
+function should_save_new_bean($focus, $action_array)
+{
+    if (!empty($action_array['trigger_id'])) {
+        if (isset($focus->workflow_trigger_guid) && $focus->workflow_trigger_guid == $action_array['trigger_id']) {
+            return false;
+        }
+    }
 
+    return true;
+}
+
+/**
+ * Marks a primary bean so that it doesn't save a second record in related realted
+ * workflows
+ * @param SugarBean $focus The primary bean
+ * @param Array $action_array The actions array that contains the meta for the workflow
+ * @return boolean
+ */
+function mark_trigger_bean_with_trigger_id($focus, $action_array)
+{
+    if (!empty($action_array['trigger_id'])) {
+        $focus->workflow_trigger_guid = $action_array['trigger_id'];
+    }
+}
 
 function process_action_new_rel($focus, $action_array){
 
@@ -275,6 +332,9 @@ function process_action_new_rel($focus, $action_array){
 			$target_module = & $rel_handler->rel2_bean;
 
 			foreach($action_array['basic'] as $field => $new_value){
+                if (isset($target_module->field_defs[$field]['type']) && $target_module->field_defs[$field]['type'] === 'multienum') {
+                    $new_value = workflow_convert_multienum_value($new_value);
+                }
 				$target_module->$field = convert_bool($new_value, $target_module->field_defs[$field]['type']);
                 if($field == "email1") $target_module->email1_set_in_workflow = $target_module->email1;
                 if($field == "email2") $target_module->email2_set_in_workflow = $target_module->email2;
@@ -447,4 +507,19 @@ function get_expiry_date($stamp_type, $time_interval, $user_format = false, $is_
 
 	$date->modify("+$time_interval seconds");
     return $timedate->asDbType($date, $stamp_type);
+}
+
+/**
+ * Creates proper representation of multienum value from actions_array.php
+ *
+ * @param string $value
+ * @return string
+ */
+function workflow_convert_multienum_value($value)
+{
+    // this is weird, but new value is stored in workflow definition as a partially
+    // encoded string — without leading and trailing ^s, but with delimiting ^s and commas.
+    // thus we pretend it's a single value and wrap it into array in order to get the leading and trailing ^s
+    // @see parse_multi_array()
+    return encodeMultienumValue(array($value));
 }

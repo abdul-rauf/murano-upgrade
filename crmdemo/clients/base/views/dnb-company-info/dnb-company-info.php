@@ -20,8 +20,12 @@ $viewdefs['base']['view']['dnb-company-info'] = array(
                 ),
                 'view' => 'record'
             ),
-            'config' => array(),
-            'preview' => array(),
+            'config' => array(
+                'pagesz' => '10',
+            ),
+            'preview' => array(
+                'pagesz' => '10',
+            ),
         ),
     ),
     'custom_toolbar' => array(
@@ -55,10 +59,26 @@ $viewdefs['base']['view']['dnb-company-info'] = array(
             array(
                 "type" => "dashletaction",
                 "css_class" => "dashlet-toggle btn btn-invisible minify",
-                "icon" => "icon-chevron-down",
+                "icon" => "fa-chevron-down",
                 "action" => "toggleMinify",
                 "tooltip" => "LBL_DASHLET_MAXIMIZE",
             )
         )
+    ),
+    'config' => array(
+        'fields' => array(
+            array(
+                'name' => 'pagesz',
+                'label' => 'LBL_DNB_PAGESZ',
+                'type' => 'enum',
+                'searchBarThreshold' => -1,
+                'options' => array(
+                    5 => 5,
+                    10 => 10,
+                    15 => 15,
+                    20 => 20
+                ),
+            ),
+        ),
     )
 );

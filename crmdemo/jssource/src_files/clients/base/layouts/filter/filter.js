@@ -23,7 +23,7 @@
     plugins: ['QuickSearchFilter'],
 
     events: {
-        'click .add-on.icon-remove': function() { this.trigger('filter:clear:quicksearch'); }
+        'click .add-on.fa-times': function() { this.trigger('filter:clear:quicksearch'); }
     },
 
     /**
@@ -48,7 +48,7 @@
 
         // Can't use getRelevantContextList here, because the context may not
         // have all the children we need.
-        if (this.layoutType === 'records') {
+        if (this.layoutType === 'records' || this.layoutType === 'activities') {
             // filters will handle data fetching so we skip the standard data fetch
             this.context.set('skipFetch', true);
         } else {
@@ -328,7 +328,8 @@
 
         this.$el.css('visibility', app.acl.hasAccess(this.aclToCheck, module) ? 'visible' : 'hidden');
         if(this.layoutType === 'record' && !this.showingActivities) {
-            module = link = app.user.lastState.get(app.user.lastState.key("subpanels-last", this)) || 'all_modules';
+            // FIXME: TY-499 will address removing the dependancy on this.layout
+            module = link = app.user.lastState.get(app.user.lastState.key('subpanels-last', this.layout)) || 'all_modules';
             if (link !== 'all_modules') {
                 module = app.data.getRelatedModule(this.module, link);
             }
@@ -378,7 +379,7 @@
         // actual search.
         var isTemplateFilter = filter.get('is_template');
 
-        var modelHasChanged = !_.isEmpty(filter.changedAttributes(filter.getSyncedAttributes()));
+        var modelHasChanged = !_.isEmpty(filter.changedAttributes(filter.getSynced()));
 
         if (editable &&
             (isIncompleteFilter || isTemplateFilter || editState || id === 'create' || modelHasChanged)
@@ -409,7 +410,7 @@
                 // It will be re-rendered on request response.
                 ctx.get('collection').reset(null, { silent: true });
             });
-            this.trigger('filter:clear:quicksearch');
+            this.trigger('filter:apply');
         }
     },
     /**
@@ -426,33 +427,84 @@
             return;
         }
 
+        // to make sure quick filter is handled properly
+        if (_.isEmpty(query)) {
+            var filterQuicksearchView = this.getComponent('filter-quicksearch');
+            query = filterQuicksearchView && filterQuicksearchView.$el.val() || '';
+        }
+
         //If the quicksearch field is not empty, append a remove icon so the user can clear the search easily
         this._toggleClearQuickSearchIcon(!_.isEmpty(query));
-        // reset the selected on filter apply
-        var massCollection = this.context.get('mass_collection');
-        if (massCollection && massCollection.models && massCollection.models.length > 0) {
-            massCollection.reset([],{silent: true});
-        }
-        var self = this,
-            ctxList = this.getRelevantContextList();
-        _.each(ctxList, function(ctx) {
-            var ctxCollection = ctx.get('collection'),
-                origFilterDef = dynamicFilterDef || ctxCollection.origFilterDef || [],
-                filterDef = self.buildFilterDef(origFilterDef, query, ctx),
-                options = {
-                    //Show alerts for this request
-                    showAlerts: true,
-                    success: function(collection, response, options) {
-                        // Close the preview pane to ensure that the preview
-                        // collection is in sync with the list collection.
-                        app.events.trigger('preview:close');
-                    }};
+        var self = this;
+        var ctxList = this.getRelevantContextList();
+
+        // Here we split the relevant contexts into two groups, 'count', and
+        // 'fetch'. For the 'count' contexts, we do a 'fetchOnlyIds' on their
+        // collection so we can update the count and highlight the subpanel
+        // icon, even though they are collapsed. For the 'fetch' group, we do a
+        // full collection fetch so the subpanel can render its list view.
+        var relevantCtx = _.groupBy(ctxList, function(ctx) {
+            return ctx.get('collapsed') ? 'count' : 'fetch';
+        });
+
+        var batchId = relevantCtx.count && relevantCtx.count.length > 1 ? _.uniqueId() : false;
+        _.each(relevantCtx.count, function(ctx) {
+            var ctxCollection = ctx.get('collection');
+            var origFilterDef = dynamicFilterDef || ctxCollection.origFilterDef || [];
+            var filterDef = self.buildFilterDef(origFilterDef, query, ctx);
+            var options = {
+                //Show alerts for this request
+                showAlerts: true,
+                apiOptions: {
+                    bulk: batchId
+                }
+            };
 
             ctxCollection.filterDef = filterDef;
             ctxCollection.origFilterDef = origFilterDef;
             ctxCollection.resetPagination();
 
             options = _.extend(options, ctx.get('collectionOptions'));
+            ctx.resetLoadFlag(false);
+            ctx.set('skipFetch', true);
+            ctx.loadData(options);
+
+            // We need to reset twice so we can trigger the other bulk call.
+            ctx.resetLoadFlag(false);
+            options.success = _.bind(function(hasAmount, properties) {
+                if (!this.disposed) {
+                    ctx.trigger('refresh:count', hasAmount, properties);
+                }
+            }, this);
+            ctxCollection.hasAtLeast(ctx.get('limit'), options);
+        });
+
+        // FIXME: Filters should not be triggering the bulk request and should
+        // be moved to subpanels instead. Will be fixed as part of SC-4533.
+        if (batchId) {
+            app.api.triggerBulkCall(batchId);
+        }
+
+        batchId = relevantCtx.fetch && relevantCtx.fetch.length > 1 ? _.uniqueId() : false;
+        _.each(relevantCtx.fetch, function(ctx) {
+            var ctxCollection = ctx.get('collection');
+            var origFilterDef = dynamicFilterDef || ctxCollection.origFilterDef || [];
+            var filterDef = self.buildFilterDef(origFilterDef, query, ctx);
+            var options = {
+                //Show alerts for this request
+                showAlerts: true,
+                apiOptions: {
+                    bulk: batchId
+                },
+                success: function(collection, response, options) {
+                    // Close the preview pane to ensure that the preview
+                    // collection is in sync with the list collection.
+                    app.events.trigger('preview:close');
+                }
+            };
+
+            ctxCollection.filterDef = filterDef;
+            ctxCollection.origFilterDef = origFilterDef;
 
             ctx.resetLoadFlag(false);
             if (!_.isEmpty(ctx._recordListFields)) {
@@ -461,6 +513,9 @@
             ctx.set('skipFetch', false);
             ctx.loadData(options);
         });
+        if (batchId) {
+            app.api.triggerBulkCall(batchId);
+        }
     },
 
     /**
@@ -469,7 +524,7 @@
      * - the list view context on records layout
      * - the selection list view context on records layout
      * - the contexts of the subpanels on record layout
-     * @returns {Array} array of contexts
+     * @return {Array} array of contexts
      */
     getRelevantContextList: function() {
         var contextList = [];
@@ -505,13 +560,14 @@
      * @param {Object} oSelectedFilter
      * @param {String} searchTerm
      * @param {Context} context
-     * @returns {Array} array containing filter def
+     * @return {Array} array containing filter def
      */
     buildFilterDef: function(oSelectedFilter, searchTerm, context) {
         var selectedFilter = app.utils.deepCopy(oSelectedFilter),
             isSelectedFilter = _.size(selectedFilter) > 0,
             module = context.get('module'),
-            searchFilter = this.getFilterDef(module, searchTerm),
+            filtersBeanPrototype = app.data.getBeanClass('Filters').prototype,
+            searchFilter = filtersBeanPrototype.buildSearchTermFilter(module, searchTerm),
             isSearchFilter = _.size(searchFilter) > 0;
 
         selectedFilter = _.isArray(selectedFilter) ? selectedFilter : [selectedFilter];
@@ -563,7 +619,8 @@
             moduleName = moduleName || this.module;
 
             if (this.layoutType === 'record') {
-                linkName = app.user.lastState.get(app.user.lastState.key('subpanels-last', this)) ||
+                // FIXME: TY-499 will address removing the dependancy on this.layout
+                linkName = app.user.lastState.get(app.user.lastState.key('subpanels-last', this.layout)) ||
                     linkName ||
                     'all_modules';
 
@@ -642,7 +699,7 @@
 
     /**
      * Utility function to know if the create filter panel is opened.
-     * @returns {Boolean} true if opened
+     * @return {boolean} `true` if opened, `false` otherwise
      */
     createPanelIsOpen: function() {
         return !this.layout.$(".filter-options").is(":hidden");
@@ -650,7 +707,7 @@
 
     /**
      * Determines whether a user can create a filter for the current module.
-     * @return {Boolean} true if creatable
+     * @return {boolean} `true` if creatable, `false` otherwise
      */
     canCreateFilter: function() {
         // Check for create in meta and make sure that we're only showing one
@@ -679,10 +736,10 @@
      * @param {Boolean} addIt TRUE if you want to add it, FALSO to remove
      */
     _toggleClearQuickSearchIcon: function(addIt) {
-        if (addIt && !this.$('.add-on.icon-remove')[0]) {
-            this.$el.append('<i class="add-on icon-remove"></i>');
+        if (addIt && !this.$('.fa-times.add-on')[0]) {
+            this.$el.append('<i class="fa fa-times add-on"></i>');
         } else if (!addIt) {
-            this.$('.add-on.icon-remove').remove();
+            this.$('.fa-times.add-on').remove();
         }
     },
 

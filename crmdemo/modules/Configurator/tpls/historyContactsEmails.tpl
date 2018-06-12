@@ -10,7 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
+<div class="moduleTitle">
+    <h2>{sugar_translate module='Administration' label='LBL_HISTORY_CONTACTS_EMAILS'}</h2>
+    <div class="clear"></div>
+</div>
 <form name="AdminSettings" method="POST">
+{sugar_csrf_form_token}
     <input type="hidden" name="action" value="historyContactsEmailsSave">
     <input type="hidden" name="module" value="Configurator">
 

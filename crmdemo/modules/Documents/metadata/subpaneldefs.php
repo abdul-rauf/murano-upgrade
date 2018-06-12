@@ -159,23 +159,6 @@ $layout_defs['Documents'] = array(
                     ),
                 ),
         ),
-        'revenuelineitems' => array(
-            'order' => 80,
-            'module' => 'RevenueLineItems',
-            'subpanel_name' => 'default',
-            'sort_order' => 'asc',
-            'sort_by' => 'id',
-            'title_key' => 'LBL_RLI_SUBPANEL_TITLE',
-            'get_subpanel_data' => 'revenuelineitems',
-            'top_buttons' => 
-            array (
-                0 => 
-                array (
-                    'widget_class' => 'SubPanelTopSelectButton',
-                    'mode' => 'MultiSelect',
-                    ),
-                ),
-        ),    
 	),
 );
 ?>

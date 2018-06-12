@@ -12,7 +12,7 @@
 
 
 /**
- * SugarQuery_Builder_Field_Orderby
+ * SugarQuery_Builder_Field_Raw
  * @api
  */
 
@@ -21,5 +21,13 @@ class SugarQuery_Builder_Field_Raw extends SugarQuery_Builder_Field
     public function __construct($field, SugarQuery $query)
     {
         $this->field = $field;
+    }
+
+    /**
+     * @param SugarQuery $query
+     */
+    public function setupField($query)
+    {
+        $this->query = $query;
     }
 }

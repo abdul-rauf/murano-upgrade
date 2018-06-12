@@ -22,14 +22,18 @@ class SugarUpgradeFixRliDealCalcValue extends UpgradeScript
         if (version_compare($this->from_version, '7.5.0.0', '<')) {
 
             $sql = "UPDATE revenue_line_items
-                SET deal_calc = CASE
-                        WHEN discount_select = 1 THEN (discount_price * quantity ) * (discount_amount / 100 )
-                        ELSE discount_amount
-                    END,
-                    deal_calc_usdollar = (CASE
-                        WHEN discount_select = 1 THEN (discount_price * quantity ) * (discount_amount / 100 )
-                        ELSE discount_amount
-                    END/base_rate)";
+                SET deal_calc =
+                  CASE
+                    WHEN discount_select = 1
+                    THEN (discount_price * quantity) * (discount_amount / 100)
+                    ELSE discount_amount
+                  END,
+                deal_calc_usdollar =
+                  (CASE
+                    WHEN discount_select = 1
+                    THEN (discount_price * quantity) * (discount_amount / 100)
+                    ELSE discount_amount
+                  END)/base_rate";
 
             $results = $this->db->query($sql);
             $total_updated = $this->db->getAffectedRowCount($results);

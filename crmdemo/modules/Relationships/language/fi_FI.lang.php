@@ -10,9 +10,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- 
-$mod_strings =
-array (
+ /*********************************************************************************
+
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
+
+$mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_RELATIONSHIP_NAME' => 'Yhteyden nimi',
   'LBL_LHS_MODULE' => 'LHS-moduulin nimi',
@@ -27,7 +33,8 @@ array (
   'LBL_RELATIONSHIP_TYPE' => 'Yhteyden tyyppi',
   'LBL_RELATIONSHIP_ROLE_COLUMN' => 'Yhteyden roolin sarakkeen nimi',
   'LBL_RELATIONSHIP_ROLE_COLUMN_VALUE' => 'Yhteyden roolin sarakkeen arvo',
-  'LBL_REVERSE' => 'Käänteinen',
+  'LBL_REVERSE' => 'Käänteinen' ,
   'LBL_DELETED' => 'Poistettu',
 );
-
+  
+?>

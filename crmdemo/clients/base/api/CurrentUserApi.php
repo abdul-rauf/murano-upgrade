@@ -15,6 +15,7 @@ require_once 'include/SugarFields/SugarFieldHandler.php';
 require_once 'include/MetaDataManager/MetaDataManager.php';
 require_once 'include/TimeDate.php';
 require_once 'include/api/SugarApi.php';
+require_once('modules/Users/password_utils.php');
 
 class CurrentUserApi extends SugarApi
 {
@@ -37,6 +38,10 @@ class CurrentUserApi extends SugarApi
         'signature_prepend' => 'signature_prepend',
         'email_link_type' => 'email_link_type',
         'default_locale_name_format' => 'default_locale_name_format',
+        'fdow' => 'first_day_of_week',
+        'sweetspot' => 'sweetspot',
+        'reminder_time' => 'reminder_time',
+        'email_reminder_time' => 'email_reminder_time',
     );
 
     const TYPE_ADMIN = "admin";
@@ -54,6 +59,7 @@ class CurrentUserApi extends SugarApi
                 'longHelp' => 'include/api/help/me_get_help.html',
                 'ignoreMetaHash' => true,
                 'ignoreSystemStatusError' => true,
+                'noEtag' => true,
             ),
             'update' => array(
                 'reqType' => 'PUT',
@@ -98,7 +104,6 @@ class CurrentUserApi extends SugarApi
                 'method' => 'userPreferencesSave',
                 'shortHelp' => "Mass Save Updated Preferences For a User",
                 'longHelp' => 'include/api/help/me_preferences_put_help.html',
-                'keepSession' => true,
             ),
 
             'userPreference' =>  array(
@@ -117,7 +122,6 @@ class CurrentUserApi extends SugarApi
                 'method' => 'userPreferenceSave',
                 'shortHelp' => "Create a preference for the current user",
                 'longHelp' => 'include/api/help/me_preference_preference_name_post_help.html',
-                'keepSession' => true,
             ),
             'userPreferenceUpdate' =>  array(
                 'reqType' => 'PUT',
@@ -126,7 +130,6 @@ class CurrentUserApi extends SugarApi
                 'method' => 'userPreferenceSave',
                 'shortHelp' => "Update a specific preference for the current user",
                 'longHelp' => 'include/api/help/me_preference_preference_name_put_help.html',
-                'keepSession' => true,
             ),
             'userPreferenceDelete' =>  array(
                 'reqType' => 'DELETE',
@@ -135,7 +138,6 @@ class CurrentUserApi extends SugarApi
                 'method' => 'userPreferenceDelete',
                 'shortHelp' => "Delete a specific preference for the current user",
                 'longHelp' => 'include/api/help/me_preference_preference_name_delete_help.html',
-                'keepSession' => true,
             ),
             'getMyFollowedRecords' => array(
                 'reqType' => 'GET',
@@ -158,61 +160,26 @@ class CurrentUserApi extends SugarApi
     public function retrieveCurrentUser($api, $args)
     {
         $current_user = $this->getUserBean();
-
-        // Get the basics
-        $category = isset($args['category']) ? $args['category'] : 'global';
-        $user_data = $this->getBasicUserInfo($api->platform, $category);
-
-        // Fill in the rest
-        $user_data['type'] = self::TYPE_USER;
-        if ($current_user->isAdmin()) {
-            $user_data['type'] = self::TYPE_ADMIN;
-        }
-        $user_data['show_wizard'] = $this->shouldShowWizard($category);
-        $user_data['id'] = $current_user->id;
-        $current_user->_create_proper_name_field();
-        $user_data['full_name'] = $current_user->full_name;
-        $user_data['user_name'] = $current_user->user_name;
-        $user_data = $this->setExpiredPassword($user_data);
-        $user_data['picture'] = $current_user->picture;
-        $user_data['acl'] = $this->getAcls($api->platform);
-        $user_data['is_manager'] = User::isManager($current_user->id);
-        $user_data['is_top_level_manager'] = false;
-        $user_data['reports_to_id'] = $current_user->reports_to_id;
-        $user_data['reports_to_name'] = $current_user->reports_to_name;
-        if($user_data['is_manager']) {
-            $user_data['is_top_level_manager'] = User::isTopLevelManager($current_user->id);
-        }
-
-        // Address information
-        $user_data['address_street'] = $current_user->address_street;
-        $user_data['address_city'] = $current_user->address_city;
-        $user_data['address_state'] = $current_user->address_state;
-        $user_data['address_country'] = $current_user->address_country;
-        $user_data['address_postalcode'] = $current_user->address_postalcode;
-
-        require_once 'modules/Teams/TeamSetManager.php';
-
-        $teams = $current_user->get_my_teams();
-        $my_teams = array();
-        foreach ($teams as $id => $name) {
-            $my_teams[] = array("id" => $id, "name" => $name,);
-        }
-        $user_data['my_teams'] = $my_teams;
-
-        $defaultTeams = TeamSetManager::getTeamsFromSet($current_user->team_set_id);
-        foreach ($defaultTeams as $id => $team) {
-            $defaultTeams[$id]['primary'] = false;
-            if ($team['id'] == $current_user->team_id) {
-                $defaultTeams[$id]['primary'] = true;
+        //If the users password is expired, don't generate an etag.
+        if (!hasPasswordExpired($current_user)) {
+            $hash = $this->getUserHash($current_user);
+            if ($api->generateETagHeader($hash, 3)) {
+                return;
             }
         }
-        $user_data['preferences']['default_teams'] = $defaultTeams;
 
-        // Send back a hash of this data for use by the client
-        $user_data['_hash'] = $current_user->getUserMDHash();
+        $data = $this->getUserData($api->platform, $args);
 
-        return array('current_user' => $user_data);
+        if (!empty($data['current_user']['preferences'])) {
+            $this->htmlDecodeReturn($data['current_user']['preferences']);
+        }
+
+        return $data;
+    }
+
+    protected function getUserHash($user)
+    {
+        return $user->getUserMDHash();
     }
 
     /**
@@ -301,9 +268,9 @@ class CurrentUserApi extends SugarApi
         $args['module'] = $bean->module_name;
         $args['record'] = $bean->id;
 
-        $id = $this->updateBean($bean, $api, $args);
+        $this->updateBean($bean, $api, $args);
 
-        return $this->retrieveCurrentUser($api, $args);
+        return $this->getUserData($api->platform, $args);
     }
 
     /**
@@ -610,6 +577,79 @@ class CurrentUserApi extends SugarApi
     }
 
     /**
+     * Returns all the user data to be sent in the REST API call for a normal
+     * `/me` call.
+     *
+     * This data is dependent on the platform used. Each own platform has a
+     * different data set to be sent in the response.
+     *
+     * @param string $platform The platform of the request.
+     * @param array $options A list of options like `category` to retrieve the
+     *   basic user info. Will use `global` if no `category` is supplied.
+     * @return array The user's data to be used in a `/me` request.
+     */
+    protected function getUserData($platform, array $options) {
+
+        $current_user = $this->getUserBean();
+
+        // Get the basics
+        $category = isset($options['category']) ? $options['category'] : 'global';
+        $user_data = $this->getBasicUserInfo($platform, $category);
+
+        // Fill in the rest
+        $user_data['type'] = self::TYPE_USER;
+        if ($current_user->isAdmin()) {
+            $user_data['type'] = self::TYPE_ADMIN;
+        }
+        $user_data['show_wizard'] = $this->shouldShowWizard($category);
+        $user_data['id'] = $current_user->id;
+        $current_user->_create_proper_name_field();
+        $user_data['full_name'] = $current_user->full_name;
+        $user_data['user_name'] = $current_user->user_name;
+        $user_data['roles'] = ACLRole::getUserRoles($current_user->id);
+        $user_data = $this->setExpiredPassword($user_data);
+        $user_data['picture'] = $current_user->picture;
+        $user_data['acl'] = $this->getAcls($platform);
+        $user_data['is_manager'] = User::isManager($current_user->id);
+        $user_data['is_top_level_manager'] = false;
+        $user_data['reports_to_id'] = $current_user->reports_to_id;
+        $user_data['reports_to_name'] = $current_user->reports_to_name;
+        if($user_data['is_manager']) {
+            $user_data['is_top_level_manager'] = User::isTopLevelManager($current_user->id);
+        }
+
+        // Address information
+        $user_data['address_street'] = $current_user->address_street;
+        $user_data['address_city'] = $current_user->address_city;
+        $user_data['address_state'] = $current_user->address_state;
+        $user_data['address_country'] = $current_user->address_country;
+        $user_data['address_postalcode'] = $current_user->address_postalcode;
+
+        require_once 'modules/Teams/TeamSetManager.php';
+
+        $teams = $current_user->get_my_teams();
+        $my_teams = array();
+        foreach ($teams as $id => $name) {
+            $my_teams[] = array('id' => $id, 'name' => $name,);
+        }
+        $user_data['my_teams'] = $my_teams;
+
+        $defaultTeams = TeamSetManager::getTeamsFromSet($current_user->team_set_id);
+        foreach ($defaultTeams as $id => $team) {
+            $defaultTeams[$id]['primary'] = false;
+            if ($team['id'] == $current_user->team_id) {
+                $defaultTeams[$id]['primary'] = true;
+            }
+        }
+        $user_data['preferences']['default_teams'] = $defaultTeams;
+
+        // Send back a hash of this data for use by the client
+        $user_data['_hash'] = $current_user->getUserMDHash();
+
+        return array('current_user' => $user_data);
+    }
+
+    /**
      * Gets the basic user data that all users that are logged in will need. Client
      * specific user information will be filled in within the client API class.
      *
@@ -716,7 +756,9 @@ class CurrentUserApi extends SugarApi
                         array();
         
         // Handle filtration of requested preferences
-        return $this->filterResults($prefs, $pref_filter);
+        $data = $this->filterResults($prefs, $pref_filter);
+        $this->htmlDecodeReturn($data);
+        return $data;
     }
     
     /**
@@ -799,9 +841,10 @@ class CurrentUserApi extends SugarApi
         // back an array keyed on the pref. This turns prefs like "m/d/Y" or ""
         // into {"datef": "m/d/Y"} on the client.
         if (!is_array($data) || !isset($data[$pref])) {
-            return array($pref => $data);
+            $data = array($pref => $data);
         }
 
+        $this->htmlDecodeReturn($data);
         return $data;
     }
 
@@ -878,19 +921,7 @@ class CurrentUserApi extends SugarApi
      */
     public function forceUserPreferenceReload($current_user)
     {
-        // If there is a unique_key in the session, save it and change it so that
-        // loadPreferences() on the user will be forced to collect a fresh set
-        // of preferences.
-        $uniqueKey = null;
-        if (isset($_SESSION['unique_key'])) {
-            $uniqueKey = $_SESSION['unique_key'];
-            $_SESSION['unique_key'] = 't_' . time();
-        }
-        
-        $current_user->loadPreferences();
-        
-        // Set this back to what it was
-        $_SESSION['unique_key'] = $uniqueKey;
+        $current_user->reloadPreferences();
     }
 
     /**

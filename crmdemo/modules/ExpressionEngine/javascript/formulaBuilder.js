@@ -11,7 +11,7 @@
 SUGAR.expressions.initFormulaBuilder=function(){var Dom=YAHOO.util.Dom,Connect=YAHOO.util.Connect,Msg=YAHOO.SUGAR.MessageBox;SUGAR.expressions.getFunctionList=function()
 {var typeMap=SUGAR.expressions.Expression.TYPE_MAP;var funcMap=SUGAR.FunctionMap;var funcList=[];for(var i in funcMap){if(typeof funcMap[i]=="function"&&funcMap[i].prototype){for(var j in typeMap){if(funcMap[i].prototype instanceof typeMap[j]){funcList[funcList.length]=[i,j];break;}}}}
 return funcList;};SUGAR.expressions.getDisplayFunctionList=function(){var functionsArray=SUGAR.expressions.getFunctionList();var usedClasses={};var ret=[];for(var i in functionsArray)
-{var fName=functionsArray[i][0];switch(fName){case"isValidTime":case"isAlpha":case"doBothExist":case"isValidPhone":case"isRequiredCollection":case"isNumeric":case"isValidDBName":case"isAlphaNumeric":case"stddev":case"charAt":case"formatName":case"sugarField":continue;break;}
+{var fName=functionsArray[i][0];switch(fName){case"isValidTime":case"isAlpha":case"doBothExist":case"isValidPhone":case"isRequiredCollection":case"isNumeric":case"isValidDBName":case"isAlphaNumeric":case"stddev":case"charAt":case"formatName":case"sugarField":case"forecastCommitStage":case"currencyRate":continue;break;}
 if(functionsArray[i][1]=="time")
 continue;if(usedClasses[SUGAR.FunctionMap[fName].prototype.className])
 continue;if(functionsArray[i][1]=="number")
@@ -29,6 +29,7 @@ if(t.type=="function")
 {SUGAR.expressions.setReturnTypes(t.args[i],vMap);}
 var fMap=SUGAR.FunctionMap;if(typeof(fMap[t.name])=="undefined")
 throw(t.name+": No such function defined");for(var j in see.TYPE_MAP){if(fMap[t.name].prototype instanceof see.TYPE_MAP[j]){t.returnType=j;break;}}
+if(t.name=="ifElse"){var args=t.args;if(args[1].returnType==args[2].returnType){t.returnType=args[1].returnType;}}
 if(!t.returnType)
 throw(t.name+": No known return type!");}}
 SUGAR.expressions.validateReturnTypes=function(t)
@@ -50,8 +51,7 @@ if(t.name!="related"&&def.type&&SU.arrayIndexOf(["decimal","int","float","curren
 {throw(t.name+": related field  "+t.args[1].value+" must be a number ");}
 return;}};SUGAR.expressions.validateCurrExpression=function(silent,matchType)
 {try{var varTypeMap={};for(var i=0;i<fieldsArray.length;i++){varTypeMap[fieldsArray[i][0]]=fieldsArray[i][1];}
-var expression=YAHOO.lang.trim(Dom.get('formulaInput').value);var tokens=new SUGAR.expressions.ExpressionParser().tokenize(expression);SUGAR.expressions.setReturnTypes(tokens,varTypeMap);SUGAR.expressions.validateReturnTypes(tokens);SUGAR.expressions.validateRelateFunctions(tokens);if(matchType&&tokens.returnType!='generic'&&matchType!=tokens.returnType)
-{Msg.show({type:"alert",title:SUGAR.language.get("ModuleBuilder","LBL_FORMULA_INVALID"),msg:SUGAR.language.get("ModuleBuilder","LBL_FORMULA_TYPE")+matchType});return false;}
+var expression=YAHOO.lang.trim(Dom.get('formulaInput').value);var tokens=new SUGAR.expressions.ExpressionParser().tokenize(expression);SUGAR.expressions.setReturnTypes(tokens,varTypeMap);SUGAR.expressions.validateReturnTypes(tokens);SUGAR.expressions.validateRelateFunctions(tokens);if(matchType&&matchType!=tokens.returnType){Msg.show({type:"alert",title:SUGAR.language.get("ModuleBuilder","LBL_FORMULA_INVALID"),msg:SUGAR.language.get("ModuleBuilder","LBL_FORMULA_TYPE")+matchType});return false;}
 if(typeof(silent)=='undefined'||!silent)
 Msg.show({msg:"Validation Sucessfull"});return true;}catch(e){Msg.show({type:"alert",title:SUGAR.language.get("ModuleBuilder","LBL_FORMULA_INVALID"),msg:YAHOO.lang.escapeHTML(e.message?e.message:e)});return false;}}
 SUGAR.expressions.saveCurrentExpression=function(target,returnType)
@@ -164,7 +164,7 @@ if(SUGAR.expressions.fb_ac_help_timer)
 window.clearTimeout(SUGAR.expressions.fb_ac_help_timer);SUGAR.expressions.fb_ac_help_timer=window.setTimeout(do_show,300);};var acMode="functions";$("#fb_ac_input").autocomplete({source:function(e,fn){var expectedType=getExpectedComponentType();if(expectedType===false)
 return false;if(e.term[0]=="$")
 {fn(getFieldsByType(expectedType,e.term.substr(1),10));acMode="fields";}
-else{fn(getFunctionsByType(expectedType,e.term,10));acMode="functions";}},appendTo:"#fb_ac_wrapper",position:{my:"left top",at:"left top"},open:function(event,ui){fb_ac_open=true;updateACSpacer();hideACHelp();},close:function(){fb_ac_open=false;hideACHelp();},select:function(event,ui){var target=$("#formulaInput"),el=target[0],val=target.val(),offset=el.selectionEnd,start=getCompStart(val,offset),end=getCompEnd(val,offset),comp=getComponentText(),selected=ui.item.value,cursorOffset=0;if(start>offset)
+else{fn(getFunctionsByType(expectedType,e.term,10));acMode="functions";}},appendTo:"#fb_ac_wrapper",position:{my:"left top",at:"left top"},open:function(event,ui){fb_ac_open=true;updateACSpacer();$('#fb_ac_wrapper ul.ui-autocomplete').addClass('fb_ac_menu');$('.fb_ac_menu').css('z-index',maxZ+3);var liDiff=$('.fb_ac_menu li').outerWidth()-$('.fb_ac_menu li').width();var ulDiff=parseInt($('.fb_ac_menu').css("border-left-width"))+parseInt($('.fb_ac_menu').css("border-right-width"));$('.fb_ac_menu li').width($('.fb_ac_menu li').width()-ulDiff-liDiff);hideACHelp();},close:function(){fb_ac_open=false;hideACHelp();},select:function(event,ui){var target=$("#formulaInput"),el=target[0],val=target.val(),offset=el.selectionEnd,start=getCompStart(val,offset),end=getCompEnd(val,offset),comp=getComponentText(),selected=ui.item.value,cursorOffset=0;if(start>offset)
 start=offset;if(comp[0]=="$")
 selected="$"+selected;else if(val[getCompEnd(val,offset)]!="("){selected+="(";cursorOffset=1;}
 var begin=val.substring(0,start);var ending=val.substring(end);var ws=new RegExp("^(\\s+)[!\s]*").exec(val.substring(start,end));if(ws)selected=ws[0]+selected;ws=new RegExp("[!\s]*(\\s+)$").exec(val.substring(start,end));if(ws)selected+=ws[0];target.val(begin+selected+ending);end=getCompEnd(target.val(),offset)+cursorOffset,el.setSelectionRange(end,end);fb_ac_open=false;hideACHelp();},focus:function(event,ui){hideACHelp();if(ui.item&&acMode=="functions")
@@ -175,5 +175,5 @@ if((e.keyCode!=37&&e.keyCode!=39)||fb_ac_open){$("#fb_ac_input").autocomplete("s
 $("#formulaInput").keydown(function(e){if((e.keyCode==38||e.keyCode==40)&&fb_ac_open){e.preventDefault();}
 if(fb_ac_open)
 $('#fb_ac_input').trigger(e);})
-$("body").mousedown(function(){$("#fb_ac_input").autocomplete("close");});$("#fb_ac_wrapper").mousedown(function(){return false});SUGAR.expressions.closeFormulaBuilder=function()
+$("body").mousedown(function(){var $input=$("#fb_ac_input");if($input.autocomplete("instance")){$input.autocomplete("close");}});$("#fb_ac_wrapper").mousedown(function(){return false});SUGAR.expressions.closeFormulaBuilder=function()
 {$('#fb_ac_input').autocomplete("destroy");$("#fb_ac_wrapper").remove();ModuleBuilder.formulaEditorWindow.hide();}};

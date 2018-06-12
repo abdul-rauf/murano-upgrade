@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,12 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/SugarObjects/templates/person/Person.php');
+
+use \Sugarcrm\Sugarcrm\Security\Password\Hash;
+use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+
+require_once 'include/SugarObjects/templates/person/Person.php';
+require_once 'modules/ACL/AclCache.php';
 
 /**
  * User is used to store customer information.
@@ -71,6 +75,30 @@ class User extends Person {
 	var $user_preferences;
 
 	var $importable = true;
+
+    static protected $demoUsers = array(
+        'jim',
+        'jane',
+        'charles',
+        'chris',
+        'sarah',
+        'regina',
+        'admin',
+    );
+
+    /**
+     * @param $userName
+     * @return bool
+     */
+    static public function isTrialDemoUser($userName)
+    {
+        if (!empty($GLOBALS['sugar_config']['disable_password_change']) && !empty($userName) && in_array($userName, self::$demoUsers)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @var UserPreference
      */
@@ -221,6 +249,7 @@ class User extends Person {
 	public function hasPersonalEmail()
 	{
 	    $focus = BeanFactory::getBean('InboundEmail');
+        $focus->disable_row_level_security = true;
 	    $focus->retrieve_by_string_fields(array('group_id' => $this->id));
 
 	    return !empty($focus->id);
@@ -477,7 +506,46 @@ class User extends Person {
         return $where;
     }
 
+    /**
+     * Gets the BWC theme for this user.
+     *
+     * There are only 2 supported themes at this time: `RTL` and `RacerX`.
+     * `RTL` is returned if the current language is an RTL language, `RacerX` is
+     * returned otherwise.
+     *
+     * @return string The theme currently set to this user.
+     */
+    public function getBWCTheme()
+    {
+        //FIXME: SC-3358 Should be getting the RTL languages from metadata.
+        static $rtlLanguages = array('he_IL', 'ar_SA');
+        $language = !empty($this->preferred_language) ? $this->preferred_language : $GLOBALS['current_language'];
+        $theme = in_array($language, $rtlLanguages) ? 'RTL' : 'RacerX';
+
+        return $theme;
+    }
+
+    /**
+     * Toggles this user's admin status and flushes the ACL cache.
+     *
+     * @param boolean $admin If `true`, then make this user an admin.
+     *   Otherwise, remove admin privileges.
+     */
+    public function setAdmin($admin)
+    {
+        $this->is_admin = $admin ? 1 : 0;
+
+        // When we change a user to or from admin status, we have to flush the ACL cache
+        // or else the user will not be able to access some admin modules.
+        AclCache::getInstance()->clear();
+        // FIXME TY-1094: investigate if we should enforce admin/portal API user/group mutual exclusivity here
+    }
+
 	function save($check_notify = false) {
+        // Check if data supplied is valid to save the record, return if not.
+        if (!$this->verify_data()) {
+            return $this->id;
+        }
 		$isUpdate = !empty($this->id) && !$this->new_with_id;
 
 		// this will cause the logged in admin to have the licensed user count refreshed
@@ -551,11 +619,23 @@ class User extends Person {
             $this->default_team = $this->team_id;
         }
 
-
         // track the current reports to id to be able to use it if it has changed
         $old_reports_to_id = isset($this->fetched_row['reports_to_id']) ? $this->fetched_row['reports_to_id'] : '';
 
 		parent::save($check_notify);
+
+        //if this is an import, make sure the related teams get added
+        //properly to the team membership
+        if($this->in_import){
+            $this->load_relationship('teams');
+            $relatedTeams = $this->teams->get();
+            $teamBean = null;
+            //add the user to each team
+            foreach($relatedTeams as $team_id ) {
+                $teamBean =  BeanFactory::getBean('Teams', $team_id);
+                $teamBean->add_user_to_team($this->id);
+            }
+        }
 
 		$GLOBALS['sugar_config']['disable_team_access_check'] = true;
         if($this->status != 'Reserved' && !$this->portal_only) {
@@ -566,7 +646,7 @@ class User extends Person {
                     $team = BeanFactory::getBean('Teams');
                     $team->new_user_created($this);
                 }
-            }else{
+            } else if (empty($GLOBALS['sugar_config']['noPrivateTeamUpdate'])) {
                 //if this is an update, then we need to ensure we keep the user's
                 //private team name and name_2 in sync with their name.
                 $team_id = $this->getPrivateTeamID();
@@ -648,31 +728,12 @@ class User extends Person {
 		}
 
 		// If the role doesn't exist in the list of the user's roles
-		if(!empty($role_array) && in_array($role_name, $role_array))
-			return true;
-		else
-			return false;
+        return (!empty($role_array) && ArrayFunctions::in_array_access($role_name, $role_array));
 	}
 
     function get_summary_text() {
         //$this->_create_proper_name_field();
         return $this->name;
-	}
-
-	/**
-	 * @deprecated
-	* @param string $user_name - Must be non null and at least 2 characters
-	* @param string $user_password - Must be non null and at least 1 character.
-	* @desc Take an unencrypted username and password and return the encrypted password
-	* @return string encrypted password for storage in DB and comparison against DB password.
-	*/
-	function encrypt_password($user_password)
-	{
-		// encrypt the password.
-		$salt = substr($this->user_name, 0, 2);
-		$encrypted_password = crypt($user_password, $salt);
-
-		return $encrypted_password;
 	}
 
 	/**
@@ -816,50 +877,37 @@ EOQ;
 		return $this;
 	}
 
-	/**
-	 * Generate a new hash from plaintext password
-	 * @param string $password
-	 */
-	public static function getPasswordHash($password)
-	{
-	    if(!defined('CRYPT_MD5') || !constant('CRYPT_MD5')) {
-	        // does not support MD5 crypt - leave as is
-	        if(defined('CRYPT_EXT_DES') && constant('CRYPT_EXT_DES')) {
-	            return crypt(strtolower(md5($password)),
-	            	"_.012".substr(str_shuffle('./ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), -4));
-	        }
-	        // plain crypt cuts password to 8 chars, which is not enough
-	        // fall back to old md5
-	        return strtolower(md5($password));
-	    }
-	    return crypt(strtolower(md5($password)));
-	}
+    /**
+     * Generate a new hash from plaintext password
+     * @param string $password
+     * @return string
+     */
+    public static function getPasswordHash($password)
+    {
+        return Hash::getInstance()->hash($password);
+    }
 
-	/**
-	 * Check that password matches existing hash
-	 * @param string $password Plaintext password
-	 * @param string $user_hash DB hash
-	 */
-	public static function checkPassword($password, $user_hash)
-	{
-	    return self::checkPasswordMD5(md5($password), $user_hash);
-	}
+    /**
+     * Check that password matches existing hash
+     * @param string $password Plaintext password
+     * @param string $user_hash DB hash
+     * @return boolean
+     */
+    public static function checkPassword($password, $user_hash)
+    {
+        return Hash::getInstance()->verify($password, $user_hash);
+    }
 
-	/**
-	 * Check that md5-encoded password matches existing hash
-	 * @param string $password MD5-encoded password
-	 * @param string $user_hash DB hash
-	 * @return bool Match or not?
-	 */
-	public static function checkPasswordMD5($password_md5, $user_hash)
-	{
-	    if(empty($user_hash)) return false;
-	    if($user_hash[0] != '$' && strlen($user_hash) == 32) {
-	        // Old way - just md5 password
-	        return strtolower($password_md5) === $user_hash;
-	    }
-	    return crypt(strtolower($password_md5), $user_hash) === $user_hash;
-	}
+    /**
+     * Check that md5-encoded password matches existing hash
+     * @param string $password MD5-encoded password
+     * @param string $user_hash DB hash
+     * @return boolean
+     */
+    public static function checkPasswordMD5($password, $user_hash)
+    {
+        return Hash::getInstance()->verifyMd5($password, $user_hash);
+    }
 
 	/**
 	 * Find user with matching password
@@ -899,10 +947,43 @@ EOQ;
 		$this->savePreferencesToDB();
         //set new password
         $now = TimeDate::getInstance()->nowDb();
-		$query = "UPDATE $this->table_name SET user_hash='$user_hash', system_generated_password='$system_generated', pwd_last_changed='$now' where id='$this->id'";
+        $query =
+            "UPDATE $this->table_name " .
+            "SET user_hash={$this->db->quoted($user_hash)}, " .
+                " system_generated_password={$this->db->quoted($system_generated)}, " .
+                " pwd_last_changed={$this->db->quoted($now)}, date_modified={$this->db->quoted($now)} " .
+            "WHERE id={$this->db->quoted($this->id)}";
 		$this->db->query($query, true, "Error setting new password for $this->user_name: ");
         $_SESSION['hasExpiredPassword'] = '0';
 	}
+
+    /**
+     * Attempt to rehash the current user_hash value
+     * @param string $password Clear text password
+     */
+    public function rehashPassword($password)
+    {
+        if (empty($this->id) || empty($this->user_hash) || empty($password)) {
+            return;
+        }
+
+        $hashBackend = Hash::getInstance();
+
+        if ($hashBackend->needsRehash($this->user_hash)) {
+            if ($newHash = $hashBackend->hash($password)) {
+                $update = sprintf(
+                    'UPDATE %s SET user_hash = %s WHERE id = %s',
+                    $this->table_name,
+                    $this->db->quoted($newHash),
+                    $this->db->quoted($this->id)
+                );
+                $this->db->query($update);
+                $GLOBALS['log']->info("Rehashed password for user id '{$this->id}'");
+            } else {
+                $GLOBALS['log']->warn("Error trying to rehash password for user id '{$this->id}'");
+            }
+        }
+    }
 
 	/**
 	 * Verify that the current password is correct and write the new password to the DB.
@@ -1035,7 +1116,6 @@ EOQ;
             $this->team_set_id = '';
         }
 
-
 		$this->_create_proper_name_field();
 	}
 
@@ -1054,6 +1134,8 @@ EOQ;
 	 * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc..
 	 * All Rights Reserved..
 	 * Contributor(s): ______________________________________..
+     * @throws SugarApiExceptionNotAuthorized - If coming from an API entry point and
+     * creating a duplicate user_name or when a user reports to himself.
 	 */
 	function verify_data($ieVerified=true) {
 		global $mod_strings, $current_user;
@@ -1079,24 +1161,35 @@ EOQ;
 				$query = "SELECT reports_to_id FROM users WHERE id='".$this->db->quote($check_user)."'";
 				$result = $this->db->query($query, true, "Error checking for reporting-loop");
 				$row = $this->db->fetchByAssoc($result);
-				echo ("fetched: ".$row['reports_to_id']." from ".$check_user."<br>");
 				$check_user = $row['reports_to_id'];
 			}
 
 			if ($reports_to_self == 1) {
 				$this->error_string .= $mod_strings['ERR_REPORT_LOOP'];
 				$verified = false;
+                // Due to the amount of legacy code and no clear separation between logic and presentation layers, this
+                // is a temporary fix to make sure that users don't report to themselves under API flows.
+                if (defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') === 'api') {
+                    throw new SugarApiExceptionNotAuthorized('ERR_REPORT_LOOP', null, $this->module_name);
+                }
 			}
 		}
 
-		$query = "SELECT user_name from users where user_name='$this->user_name' AND deleted=0";
+		$query = "SELECT user_name from users where user_name='".$this->db->quote($this->user_name)."' AND deleted=0";
 		if(!empty($this->id))$query .=  " AND id<>'$this->id'";
 		$result = $this->db->query($query, true, "Error selecting possible duplicate users: ");
 		$dup_users = $this->db->fetchByAssoc($result);
 
 		if (!empty($dup_users)) {
-			$this->error_string .= $mod_strings['ERR_USER_NAME_EXISTS_1'].$this->user_name.$mod_strings['ERR_USER_NAME_EXISTS_2'];
-			$verified = false;
+            // Due to the amount of legacy code and no clear separation between logic and presentation layers, this is
+            // a temporary fix in order to make sure that duplicate users are not created under API flows.
+            if (defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') === 'api') {
+                throw new SugarApiExceptionNotAuthorized('ERR_USER_NAME_EXISTS', array($this->user_name), $this->module_name);
+            }
+            $error = string_format(translate('ERR_USER_NAME_EXISTS', $this->module_name), array($this->user_name));
+            $this->error_string .= $error;
+
+            $verified = false;
 		}
 
 		if (is_admin($current_user)) {
@@ -1728,12 +1821,14 @@ EOQ;
      * @return array
      */
     public function getDeveloperModules() {
-        static $developerModules;
-        if (!isset($_SESSION[$this->user_name.'_get_developer_modules_for_user']) ) {
-            $_SESSION[$this->user_name.'_get_developer_modules_for_user'] = $this->_getModulesForACL('dev');
+        $cache = AclCache::getInstance();
+        $modules = $cache->retrieve($this->id, 'developer_modules');
+        if ($modules === null) {
+            $modules = $this->_getModulesForACL('dev');
+            $cache->store($this->id, 'developer_modules', $modules);
         }
 
-        return $_SESSION[$this->user_name.'_get_developer_modules_for_user'];
+        return $modules;
     }
     /**
      * Is this user a developer for the specified module
@@ -1768,11 +1863,14 @@ EOQ;
      * @return array
      */
     public function getAdminModules() {
-        if (!isset($_SESSION[$this->user_name.'_get_admin_modules_for_user']) ) {
-            $_SESSION[$this->user_name.'_get_admin_modules_for_user'] = $this->_getModulesForACL('admin');
+        $cache = AclCache::getInstance();
+        $modules = $cache->retrieve($this->id, 'admin_modules');
+        if ($modules === null) {
+            $modules = $this->_getModulesForACL('admin');
+            $cache->store($this->id, 'admin_modules', $modules);
         }
 
-        return $_SESSION[$this->user_name.'_get_admin_modules_for_user'];
+        return $modules;
     }
     /**
      * Is this user an admin for the specified module
@@ -1818,6 +1916,10 @@ EOQ;
             case 'WorkFlowAlerts':
             case 'WorkFlowAlertShells':
             case 'WorkFlowTriggerShells':
+            case 'pmse_Project':
+            case 'pmse_Inbox':
+            case 'pmse_Emails_Templates':
+            case 'pmse_Business_Rules':
                 return true;
         }
 
@@ -1839,9 +1941,30 @@ EOQ;
         }
 	}
 
-   function create_new_list_query($order_by, $where,$filter=array(),$params=array(), $show_deleted = 0,$join_type='', $return_array = false,$parentbean=null, $singleSelect = false)
-   {	//call parent method, specifying for array to be returned
-   	$ret_array = parent::create_new_list_query($order_by, $where,$filter,$params, $show_deleted,$join_type, true,$parentbean, $singleSelect);
+    public function create_new_list_query(
+        $order_by,
+        $where,
+        $filter = array(),
+        $params = array(),
+        $show_deleted = 0,
+        $join_type = '',
+        $return_array = false,
+        $parentbean = null,
+        $singleSelect = false,
+        $ifListForExport = false
+    ) {	//call parent method, specifying for array to be returned
+        $ret_array = parent::create_new_list_query(
+            $order_by,
+            $where,
+            $filter,
+            $params,
+            $show_deleted,
+            $join_type,
+            true,
+            $parentbean,
+            $singleSelect,
+            $ifListForExport
+        );
 
    	//if this is being called from webservices, then run additional code
    	if(!empty($GLOBALS['soap_server_object'])){
@@ -2172,7 +2295,7 @@ EOQ;
     {
         $db = DBManagerFactory::getInstance();
         $query = 'SELECT count(id) as total FROM users
-                WHERE reports_to_id = ' .  $db->quoted(clean_string($user_id)) . ' AND status = ' . $db->quoted(clean_string('Active'));
+                WHERE reports_to_id = ' .  $db->quoted($user_id) . ' AND status = ' . $db->quoted('Active');
         if (!$include_deleted) {
             $query .= " AND deleted=0";
         }
@@ -2208,7 +2331,7 @@ EOQ;
         if (!$include_deleted) {
             $query .= "AND u2.deleted = 0 ";
         }
-        $query .= "WHERE u.reports_to_id = {$db->quoted(clean_string($user_id))} ";
+        $query .= "WHERE u.reports_to_id = {$db->quoted($user_id)} ";
         if (!$include_deleted) {
             $query .= "AND u.deleted = {$deleted} AND u.status = 'Active' ";
         }
@@ -2281,7 +2404,7 @@ EOQ;
     {
         if(User::isManager($user_id, $include_deleted))
         {
-            $query = 'SELECT reports_to_id FROM users WHERE id = ' . $GLOBALS['db']->quoted(clean_string($user_id));
+            $query = 'SELECT reports_to_id FROM users WHERE id = ' . $GLOBALS['db']->quoted($user_id);
             $reports_to_id = $GLOBALS['db']->getOne($query);
             return empty($reports_to_id);
         }
@@ -2324,23 +2447,21 @@ EOQ;
         $body = str_replace('$config_site_url', $sugar_config['site_url'], $body);
 
         $body = str_replace('$contact_user_user_name', $this->user_name, $body);
-        $body = str_replace('$contact_user_pwd_last_changed', TimeDate::getInstance()->nowDb(), $body);
+        $usrTime = new TimeDate($this);
+        $body = str_replace('$contact_user_pwd_last_changed', $usrTime->getNow(true)->asDb(false), $body);
+
 
         return $body;
     }
 
     public function getUserMDHash() {
-        return md5($this->hashTS);
+        //Add the tab hash to include the change of tabs (e.g. module order) as a part of the user hash
+        $tabs = new TabController();
+        $tabHash = $tabs->getMySettingsTabHash();
+
+        return md5($this->hashTS . $tabHash);
     }
 
-    public function setupSession() {
-        if (!isset($_SESSION[$this->user_name.'_get_developer_modules_for_user'])) {
-            $this->getDeveloperModules();
-        }
-        if (!isset($_SESSION[$this->user_name.'_get_admin_modules_for_user'])) {
-            $this->getAdminModules();
-        }
-    }
     /**
      * Checks if the passed email is primary.
      *
@@ -2370,5 +2491,163 @@ EOQ;
 		$this->last_login = TimeDate::getInstance()->nowDb();
 		$db->query("UPDATE users SET last_login = '{$this->last_login}' WHERE id = '{$this->id}'");
 		return $this->last_login;
+	}
+
+    //TODO Update to use global cache
+    /**
+     * This is a helper function to return an Array of users depending on the parameters passed into the function.
+     * This function uses the get_register_value function by default to use a caching layer where supported.
+     *
+     * @param bool $add_blank Boolean value to add a blank entry to the array results, true by default
+     * @param string $status String value indicating the status to filter users by, "Active" by default
+     * @param string $user_id String value to specify a particular user id value (searches the id column of users table), blank by default
+     * @param bool $use_real_name Boolean value indicating whether or not results should include the full name or just user_name, false by default
+     * @param String $user_name_filter String value indicating the user_name filter (searches the user_name column of users table) to optionally search with, blank by default
+     * @param string $portal_filter String query filter for portal users (defaults to searching non-portal users), change to blank if you wish to search for all users including portal users
+     * @param bool $from_cache Boolean value indicating whether or not to use the get_register_value function for caching, true by default
+     * @param array $order_by array of (0 => 'field_name', 1 => 'order_direction')
+     * @return array Array of users matching the filter criteria that may be from cache (if similar search was previously run)
+     */
+    public function getUserArray(
+        $add_blank = true,
+        $status = "Active",
+        $user_id = '',
+        $use_real_name = false,
+        $user_name_filter = '',
+        $portal_filter = ' AND portal_only=0 ',
+        $from_cache = true,
+        $order_by = array()
+    ) {
+        global $locale, $dictionary, $current_user;
+
+        if (empty($locale)) {
+            $locale = Localization::getObject();
+        }
+
+        $db = DBManagerFactory::getInstance();
+
+        // Pre-build query for use as cache key
+        // Including deleted users for now.
+        if (empty($status)) {
+            $query = "SELECT id, first_name, last_name, user_name FROM users ";
+            $where = "1=1" . $portal_filter;
+        } else {
+            $query = "SELECT id, first_name, last_name, user_name FROM users ";
+            $where = "status='$status'" . $portal_filter;
+        }
+
+        $user = BeanFactory::getBean('Users');
+        $options = array('action' => 'list');
+        $user->addVisibilityFrom($query, $options);
+        $query .= " WHERE $where ";
+        $user->addVisibilityWhere($query, $options);
+
+        if (!empty($user_name_filter)) {
+            $user_name_filter = $db->quote($user_name_filter);
+            $query .= " AND user_name LIKE '$user_name_filter%' ";
+        }
+        if (!empty($user_id)) {
+            $query .= " OR id='{$user_id}'";
+        }
+
+        $orderQuery = array();
+        foreach ($order_by as $order) {
+            $field = $order[0];
+            if (empty($field) || empty($dictionary['User']['fields'][$field])) {
+                continue;
+            }
+            $direction = strtoupper($order[1]);
+            if (!in_array($direction, array('ASC', 'DESC'))) {
+                $direction = 'ASC';
+            }
+            $orderQuery[] = "$field $direction";
+        }
+
+        if (empty($orderQuery)) {
+            // get the user preference for name formatting, to be used in order by
+            if (!empty($current_user) && !empty($current_user->id)) {
+                $formatString = $current_user->getPreference('default_locale_name_format');
+
+                // create the order by string based on position of first and last name in format string
+                $firstNamePos = strpos($formatString, 'f');
+                $lastNamePos = strpos($formatString, 'l');
+                if ($firstNamePos !== false || $lastNamePos !== false) {
+                    // it is possible for first name to be skipped, check for this
+                    if ($firstNamePos === false) {
+                        $orderQuery[] =  'last_name ASC';
+                    } else {
+                        $orderQuery[] =  ($lastNamePos < $firstNamePos) ?
+                            'last_name, first_name ASC' : 'first_name, last_name ASC';
+                    }
+                }
+            } else {
+                $orderQuery[] = 'user_name ASC';
+            }
+        }
+
+        $query .= " ORDER BY " . implode(', ', $orderQuery);
+
+        if ($from_cache) {
+            $key_name = $query . $status . $user_id . $use_real_name . $user_name_filter . $portal_filter;
+            $key_name = md5($key_name);
+            $user_array = get_register_value('user_array', $key_name);
+        }
+
+        if (empty($user_array)) {
+            $temp_result = array();
+
+            $GLOBALS['log']->debug("get_user_array query: $query");
+            $result = $db->query($query, true, "Error filling in user array: ");
+
+            // Get the id and the name.
+            while ($row = $db->fetchByAssoc($result)) {
+                if ($use_real_name == true || showFullName()) {
+                    // We will ALWAYS have both first_name and last_name (empty value if blank in db)
+                    if (isset($row['last_name'])) {
+                        $temp_result[$row['id']] = $locale->formatName('Users', $row);
+                    } else {
+                        $temp_result[$row['id']] = $row['user_name'];
+                    }
+                } else {
+                    $temp_result[$row['id']] = $row['user_name'];
+                }
+            }
+
+            $user_array = $temp_result;
+            if ($from_cache) {
+                set_register_value('user_array', $key_name, $temp_result);
+            }
+        }
+
+        if ($add_blank) {
+            $user_array[''] = '';
+        }
+
+        return $user_array;
+    }
+
+    /**
+     * Filter list of fields and remove/blank fields that we can not access
+     * Modifies the list directly.
+     * @param array $list list of fields, keys are field names
+     * @param array $context
+     * @param array options Filtering options:
+     * - blank_value (bool) - instead of removing inaccessible field put '' there
+     * - add_acl (bool) - instead of removing fields add 'acl' value with access level
+     * - suffix (string) - strip suffix from field names
+     * - min_access (int) - require this level of access for field
+     * - use_value (bool) - look for field name in value, not in key of the list
+     */
+    public function ACLFilterFieldList(&$list, $context = array(), $options = array())
+    {
+        global $current_user;
+
+        parent::ACLFilterFieldList($list, $context, $options);
+        if (self::isTrialDemoUser($this->user_name)) {
+            if (isset($list['user_name']['acl']) && $list['user_name']['acl'] > 1) {
+                // make it read only for demo users
+                $list['user_name']['acl'] = 1;
+            }
+        }
     }
 }

@@ -23,23 +23,20 @@
      */
     secondaryFieldTag: 'input[data-type=time]',
 
-    /**
-     * @inheritDoc
-     *
-     * Add `FieldDuplicate` plugin to the list of required plugins.
-     */
-    _initPlugins: function() {
-        this._super('_initPlugins');
+    initialize: function(options) {
+        this._super('initialize', [options]);
 
-        this.plugins = _.union(this.plugins, [
-            'FieldDuplicate'
-        ]);
-
-        return this;
+        /**
+         * If a time picker has been initialized on the field or not.
+         *
+         * @type {boolean}
+         * @private
+         */
+        this._hasTimePicker = false;
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      *
      * Add `show-timepicker` on click listener.
      */
@@ -72,14 +69,13 @@
             )
         );
 
-        this.model.set(this.name, value);
-        this.model.setDefaultAttribute(this.name, value);
+        this.model.setDefault(this.name, value);
 
         return this;
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _initPlaceholderAttribute: function() {
         this._super('_initPlaceholderAttribute');
@@ -150,16 +146,67 @@
      * @protected
      */
     _setupTimePicker: function() {
-        var $field = this.$(this.secondaryFieldTag);
+        var options;
 
-        $field.timepicker({
+        this.def.time || (this.def.time = {});
+
+        options = {
             timeFormat: this.getUserTimeFormat(),
-            // FIXME: add metadata driven support for the following properties
-            scrollDefaultNow: true,
-            step: 15,
-            className: 'prevent-mousedown',
-            appendTo: this.view.$el
-        });
+            scrollDefaultNow: _.isUndefined(this.def.time.scroll_default_now) ?
+                true :
+                !!this.def.time.scroll_default_now,
+            step: this.def.time.step || 15,
+            disableTextInput: _.isUndefined(this.def.time.disable_text_input) ?
+                false :
+                !!this.def.time.disable_text_input,
+            className: this.def.time.css_class || 'prevent-mousedown',
+            appendTo: this.$el
+        };
+
+        this._enableDuration(options);
+
+        this.$(this.secondaryFieldTag).timepicker(options);
+        this._hasTimePicker = true;
+    },
+
+    /**
+     * Show duration on the timepicker dropdown if enabled in view definition.
+     * @param {Object} options - timepicker options
+     * @private
+     */
+    _enableDuration: function(options) {
+        var self = this;
+
+        if (this.def.time.duration) {
+            options.maxTime = 85500; //23.75 hours, which is 11:45pm
+
+            options.durationTime = function() {
+                var dateStartString = self.model.get(self.def.time.duration.relative_to),
+                    dateEndString = self.model.get(self.name),
+                    startDate,
+                    endDate;
+
+                this.minTime = null;
+                this.showDuration = false;
+
+                if (!dateStartString || !dateEndString) {
+                    return;
+                }
+
+                startDate = app.date(dateStartString);
+                endDate = app.date(dateEndString);
+
+                if ((startDate.years() === endDate.years()) && (startDate.months() === endDate.months()) && (startDate.days() === endDate.days())) {
+                    this.minTime = app.date.duration({
+                        hours: startDate.hours(),
+                        minutes: startDate.minutes()
+                    }).asSeconds();
+                    this.showDuration = true;
+                }
+
+                return this.minTime;
+            };
+        }
     },
 
     /**
@@ -204,15 +251,21 @@
      * @override
      */
     handleHideDatePicker: function() {
-        var t = this.$(this.secondaryFieldTag).val(),
-            d = this.$(this.fieldTag).val(),
+        var $dateField = this.$(this.fieldTag),
+            $timeField = this.$(this.secondaryFieldTag),
+            d = $dateField.val(),
+            t = $timeField.val(),
             datetime = this.unformat(this.handleDateTimeChanges(d, t));
 
+        if (!datetime) {
+            $dateField.val('');
+            $timeField.val('');
+        }
         this.model.set(this.name, datetime);
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      *
      * Bind time picker `changeTime` event expecting to set the default date if
      * not filled yet, see {@link #handleDateTimeChanges}.
@@ -220,10 +273,25 @@
     bindDomChange: function() {
         this._super('bindDomChange');
 
+        if (this._inDetailMode()) {
+            return;
+        }
+
         var $dateField = this.$(this.fieldTag),
-            $timeField = this.$(this.secondaryFieldTag);
+            $timeField = this.$(this.secondaryFieldTag),
+            selfView = this.view;
 
         $timeField.timepicker().on({
+            showTimepicker: function() {
+                // Remove 24:00 from the list since it does not make sense when used in conjunction with a date.
+                // Timepicker plugin specifically added 24:00 since it can be used by itself without a date and
+                // that is what the standard calls for. (https://github.com/jonthornton/jquery-timepicker/issues/149)
+                $(this).data('timepickerList').find('li:contains("24:00"), li:contains("24.00")').remove();
+                selfView.trigger('list:scrollLock', true);
+            },
+            hideTimepicker: function() {
+                selfView.trigger('list:scrollLock', false);
+            },
             change: _.bind(function() {
                 var t = $timeField.val().trim(),
                     datetime = '';
@@ -231,20 +299,30 @@
                 if (t) {
                     var d = $dateField.val();
                     datetime = this.unformat(this.handleDateTimeChanges(d, t));
+                    if (!datetime) {
+                        $dateField.val('');
+                        $timeField.val('');
+                    }
                 }
-
                 this.model.set(this.name, datetime);
+            }, this),
+            focus: _.bind(function() {
+                this.handleFocus();
             }, this)
         });
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      *
      * Add extra logic to unbind secondary field tag.
      */
     unbindDom: function() {
         this._super('unbindDom');
+
+        if (this._inDetailMode()) {
+            return;
+        }
 
         this.$(this.secondaryFieldTag).off();
     },
@@ -260,7 +338,11 @@
         }
 
         this.model.on('change:' + this.name, function(model, value) {
-            if (this.action !== 'edit' && this.action !== 'massupdate') {
+            if (this.disposed) {
+                return;
+            }
+            
+            if (this._inDetailMode()) {
                 this.render();
                 return;
             }
@@ -367,12 +449,12 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _render: function() {
         this._super('_render');
 
-        if (this.action !== 'edit' && this.action !== 'massupdate') {
+        if (this._inDetailMode()) {
             return;
         }
 
@@ -380,10 +462,10 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _dispose: function() {
-        if (this.$(this.secondaryFieldTag).timepicker) {
+        if (this._hasTimePicker) {
             this.$(this.secondaryFieldTag).timepicker('remove');
         }
 

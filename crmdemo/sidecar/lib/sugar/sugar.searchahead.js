@@ -337,7 +337,7 @@
         },
         blur: function (e) {
             var that = this;
-            setTimeout(function () { that.hide(); }, 150);
+            setTimeout(function () { that.hide(); }, 500);
         },
         mouseenter: function (e) {
             this.$menu.find('.active').removeClass('active');

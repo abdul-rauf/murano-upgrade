@@ -25,7 +25,17 @@ class ViewConfigureshortcutbar extends SugarView
      *
      * @var array
      */
-    private $blacklistedModules = array('EAPM', 'Users', 'Employees', 'PdfManager');
+    private $blacklistedModules = array(
+        'EAPM',
+        'Users',
+        'Employees',
+        'PdfManager',
+        'pmse_Project',
+        'pmse_Inbox',
+        'pmse_Business_Rules',
+        'pmse_Emails_Templates',
+    );
+
     /**
 	 * @see SugarView::_getModuleTitleParams()
 	 */
@@ -120,7 +130,7 @@ class ViewConfigureshortcutbar extends SugarView
      *
      * @return array
      */
-    protected function getQuickCreateModules()
+    public function getQuickCreateModules()
     {
         global $moduleList;
         $enabledModules = array();
@@ -179,7 +189,7 @@ class ViewConfigureshortcutbar extends SugarView
      * @param $modulesToEnable array
      * @return bool
      */
-    protected function saveChangesToQuickCreateMetadata($enabled, $disabled, $modulesToEnable)
+    public function saveChangesToQuickCreateMetadata($enabled, $disabled, $modulesToEnable)
     {
         $success = true;
 
@@ -228,7 +238,14 @@ class ViewConfigureshortcutbar extends SugarView
         }
 
         sugar_mkdir(dirname("custom/{$quickCreateFile}"), null, true);
-        return (write_array_to_file($arrayName, $metadata, "custom/{$quickCreateFile}"));
+        $result = write_array_to_file($arrayName, $metadata, "custom/{$quickCreateFile}");
+
+        //if custom file was written correctly, update the cached menu file
+        if ($result) {
+            MetaDataFiles::buildModuleClientCache(array('base'), 'menu', $module);
+        }
+
+        return $result;
     }
 
     /**

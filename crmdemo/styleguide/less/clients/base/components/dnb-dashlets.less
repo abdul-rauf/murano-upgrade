@@ -4,7 +4,6 @@
   TO DO: replace all these with a single class
 */
 #dnb-industry-info,
-#dnb-contact-list,
 #dnb-contact-details,
 #dnb-refresh-details,
 #dnb-std-company-details,
@@ -12,6 +11,11 @@
 #dnb-compinfo-details,
 #dnb-news-detail {
   display: none;
+}
+
+.dnb-dashlet-height {
+  max-height: 250px;
+  overflow: auto;
 }
 
 /* notifications in dashlets*/
@@ -25,11 +29,9 @@
 div.dnb-company-label {
   font-size: @fontSizeSmall;
   color: darken(@grayLight, 5%);
-  padding-bottom: 2px;
 }
-
 div.txt {
-  font-size: 12px;
+  font-size: 15px;
   color: #454545;
 }
 /*dnb mixins*/
@@ -56,7 +58,7 @@ div.dnb-company-title {
 }
 
 div.url-txt {
-  font-size: 13px;
+  font-size: 15px;
   color: #1571CE;
 }
 
@@ -71,7 +73,7 @@ div.dnb-show-less {
 }
 
 div.dnb-show-all {
-  height: auto;
+  .dnb-dashlet-height
 }
 
 div.dnb-show-more {
@@ -119,12 +121,6 @@ ul.dnb-results-list li {
 .dnb-checkbox-nav {
   .dnb-chk-box;
   margin: 10px 5px;
-}
-
-.btn-toolbar .dashlet-toolbar .label {
-  letter-spacing: normal;
-  font-size: 12px;
-  font-weight: normal;
 }
 
 .dnb-refresh {
@@ -272,6 +268,15 @@ div#dnb-contact-list {
 .dnb-result-list {
   border-top: 1px solid #eee;
 }
+.dnb-short-list {
+  .dnb-result-list;
+  max-height: 175px;
+  overflow: auto;
+}
+.dnb-medium-list {
+  max-height: 200px;
+  overflow: auto;
+}
 
 a.dnb-companyname {
   font-size: 13px;
@@ -321,14 +326,11 @@ li.txt {
 }
 
 /*Build A List Styles*/
-.dnb-bal-add-btn {
-  margin-top: -5px;
-}
 .dnb-bal-param-label {
   font-size: 14px;
 }
 .tagcontainer {
-  margin-left: 0px; !important;
+  margin-left: 0px !important;
 }
 #dnb_bal_accordian {
   .select2-chosen {
@@ -337,6 +339,7 @@ li.txt {
 }
 .dnb-bal-list {
   .common-font;
+  clear: right;
 }
 .dnb-bal-rslt {
   font-size: @fontSizeLarge;
@@ -346,112 +349,24 @@ li.txt {
   .common-font;
 }
 
-/*Build A List Styles*/
-.dnb-bal-add-btn {
-  margin-top: -5px;
-}
-.dnb-bal-param-label {
-  font-size: 14px;
-}
-.tagcontainer {
-  margin-left: 0px; !important;
-}
-#dnb_bal_accordian {
-  .select2-chosen {
-    font-size: 12px;
-  }
-}
-.dnb-bal-list {
-  .common-font;
-}
-.dnb-bal-rslt {
-  font-size: @fontSizeLarge;
-  font-weight: 500;
-}
-.dnb-params-header {
-  .common-font;
-}
-
-/*Build A List Styles*/
-.dnb-bal-add-btn {
-  margin-top: -5px;
-}
-.dnb-bal-param-label {
-  font-size: 14px;
-}
-.tagcontainer {
-  margin-left: 0px; !important;
-}
-#dnb_bal_accordian {
-  .select2-chosen {
-    font-size: 12px;
-  }
-}
-.dnb-bal-list {
-  .common-font;
-}
-.dnb-bal-rslt {
-  font-size: @fontSizeLarge;
-  font-weight: 500;
-}
-.dnb-params-header {
-  .common-font;
-}
-#dnb-results-list li {
+#dnb-results-list li, #dnb-contact-list li {
   padding: 8px 14px;
 }
-
-/*Build A List Styles*/
-.dnb-bal-add-btn {
-  margin-top: -5px;
+#dnb-page-ctrl {
+  text-align: left;
 }
-.dnb-bal-param-label {
-  font-size: 14px;
+#dnb-match-btn {
+  width: 20%;
+  padding: 2px;
 }
-.tagcontainer {
-  margin-left: 0px; !important;
+.dnb-rslt-chkbox {
+  .dnb-chk-box;
+  margin: 10px 10px 10px 0px;
 }
-#dnb_bal_accordian {
-  .select2-chosen {
-    font-size: 12px;
-  }
+.dnb-cntrl-chkbox {
+  .dnb-chk-box;
+  margin-right: 10px;
 }
-.dnb-bal-list {
-  .common-font;
-}
-.dnb-bal-rslt {
-  font-size: @fontSizeLarge;
-  font-weight: 500;
-}
-.dnb-params-header {
-  .common-font;
-}
-
-/*Build A List Styles*/
-.dnb-bal-add-btn {
-  margin-top: -5px;
-}
-.dnb-bal-param-label {
-  font-size: 14px;
-}
-.tagcontainer {
-  margin-left: 0px; !important;
-}
-#dnb_bal_accordian {
-  .select2-chosen {
-    font-size: 12px;
-  }
-}
-.dnb-bal-list {
-  .common-font;
-}
-.dnb-bal-rslt {
-  font-size: @fontSizeLarge;
-  font-weight: 500;
-}
-.dnb-params-header {
-  .common-font;
-}
-#dnb-results-list li {
-  padding: 8px 14px;
+#dnb-bal-result li:first-child {
+  background: @grayLighter;
 }

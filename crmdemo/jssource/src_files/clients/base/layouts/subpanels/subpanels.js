@@ -15,7 +15,7 @@
  */
 ({
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     className: 'subpanels-layout',
 
@@ -54,21 +54,12 @@
     _settings: {},
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     initialize: function(options) {
         this._super('initialize', [options]);
         this._initSettings();
-
-        if (this.layout) {
-            this.listenTo(this.layout, 'subpanel:change', this.showSubpanel);
-            this.listenTo(this.layout, 'filter:change', function(linkModuleName, linkName) {
-                // Broadcast on subpanels layout so subpanel-lists update.
-                this.trigger('filter:change', linkModuleName, linkName);
-            });
-        }
-
-        this.on('subpanels:reordered', this._saveNewOrder, this);
+        this._bindEvents();
     },
 
     /**
@@ -83,6 +74,19 @@
             this.meta && this.meta.settings || {}
         );
         return this;
+    },
+
+    /**
+     * Binds events that this layout uses.
+     *
+     * @protected
+     */
+    _bindEvents: function() {
+        if (this.layout) {
+            this.listenTo(this.layout, 'subpanel:change', this.showSubpanel);
+        }
+
+        this.on('subpanels:reordered', this._saveNewOrder, this);
     },
 
     /**
@@ -115,7 +119,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _render: function() {
         this._super('_render');
@@ -123,7 +127,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _dispose: function() {
         if (!_.isEmpty(this.$el.data('sortable'))) {
@@ -223,7 +227,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      *
      * We override this method which is called early in the Sidecar framework to
      * prune any hidden or acl prohibited components.
@@ -292,21 +296,28 @@
      * @param {String} linkName name of subpanel link
      */
     showSubpanel: function(linkName) {
-        var self = this,
-            //this.layout is the filter layout which subpanels is child of; we
-            //use it here as it has a last_state key in its meta
-            cacheKey = app.user.lastState.key('subpanels-last', this.layout);
-
-        if (linkName) {
-            app.user.lastState.set(cacheKey, linkName);
+        if (!app.config.collapseSubpanels) {
+            // this.layout is the filter layout which subpanels is child of; we
+            // use it here as it has a last_state key in its meta
+            // FIXME: TY-499 will address removing the dependancy on this.layout
+            var cacheKey = app.user.lastState.key('subpanels-last', this.layout);
+            if (linkName) {
+                app.user.lastState.set(cacheKey, linkName);
+            } else {
+                // Fixes SP-836; esentially, we need to clear subpanel-last-<module>
+                // anytime 'All' selected.
+                app.user.lastState.remove(cacheKey);
+            }
         }
+
         _.each(this._components, function(component) {
             var link = component.context.get('link');
-            if(!linkName || linkName === link) {
-                component.context.set("hidden", false);
+            if (!linkName) {
                 component.show();
+            } else if (linkName === link) {
+                component.show();
+                component.context.set('collapsed', false);
             } else {
-                component.context.set("hidden", true);
                 component.hide();
             }
         });

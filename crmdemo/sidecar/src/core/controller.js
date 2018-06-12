@@ -53,6 +53,7 @@
             this.context = app.context.getContext();
 
             app.events.on("app:sync:complete", function() {
+                app.api.setStateProperty("loadingAfterSync", true);
                 _.each(app.additionalComponents, function(component) {
                     if (component && _.isFunction(component._setLabels)) {
                         component._setLabels();
@@ -60,6 +61,7 @@
                     component.render();
                 });
                 app.router.start();
+                app.api.clearStateProperty("loadingAfterSync");
             });
 
             app.events.on("app:login:success", function() {
@@ -76,13 +78,14 @@
 
          * - id: ID of the record to load (optional)
          * - module: module name
-         * - layout: Name of the layout to .oad
+         * - layout: Name of the layout to load
          */
         loadView: function(params) {
 
-            var oldLayout =  this.layout;
+            var oldLayout = this.layout;
 
-            if (!app.triggerBefore('app:view:change')) {
+            //FIXME SC-5124 will remove 'app:view:load', to use 'app:view:change' instead.
+            if (!app.triggerBefore('app:view:change') || !app.triggerBefore('app:view:load')) {
                 return;
             }
 
@@ -113,6 +116,9 @@
             // additional cost for .empty().
             app.$contentEl.append(this.layout.$el);
 
+            //initialize subcomponents in the layout
+            this.layout.initComponents();
+
             // Fetch the data, the layout will be rendered when fetch completes
             if(!params || (params && !params.skipFetch)) {
                 this.layout.loadData();
@@ -142,22 +148,28 @@
             app.additionalComponents = {};
             _.each(components, function(component, name) {
                 if(component.target) {
+                    var $el = this.$(component.target);
                     if(component.layout) {
+                        if (!$el.get(0)) {
+                            app.logger.error('Unable to place additional component "' + name + '": the target specified does not exist.');
+                            return;
+                        }
                         app.additionalComponents[name] = app.view.createLayout({
                             context: this.context,
                             name: component.layout,
-                            el: this.$(component.target)
+                            el: $el
                         });
+                        app.additionalComponents[name].initComponents();
                     } else {
                         app.additionalComponents[name] = app.view.createView({
                             name: component.view || name,
                             context: this.context,
-                            el: this.$(component.target)
+                            el: $el
                         });
                     }
                     app.additionalComponents[name].render();
                 } else {
-                    app.logger.error("Unable to create Additional Component '" + name + "'; No target specified.");
+                    app.logger.error('Unable to place additional component "' + name + '": no target specified.');
                 }
             });
         }

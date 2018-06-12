@@ -20,7 +20,7 @@
  *     'resource_id' => array(
  *         'css_class' => 'resource-class',
  *         'color' => 'resource-color',
- *         'icon' => 'icon-resource-icon',
+ *         'icon' => 'fa-resource-icon',
  *         'url' => 'http://url.for.resource.com/',
  *         'link' => 'LBL_LEARNING_RESOURCES_RESOURCE_LINK',
  *         'teaser' => 'LBL_LEARNING_RESOURCES_RESOURCE_TEASER',
@@ -33,6 +33,8 @@
  * @class View.Views.Base.LearningResourcesView
  * @alias SUGAR.App.view.views.BaseLearningResourcesView
  * @extends View.View
+ *
+ * @deprecated Since 7.7. Will be removed in 7.9.
  */
 ({
     tagName: 'ul',
@@ -45,8 +47,13 @@
      */
     resources: {},
 
+    initialize: function(options) {
+        this._super('initialize', [options]);
+        app.logger.warn('View.Views.Base.LearningResourcesView is deprecated since 7.7. Will be removed in 7.9.');
+    },
+
     /**
-     * @inheritDoc
+     * @inheritdoc
      *
      * Define the {@link #resources} directly from the metadata.
      *

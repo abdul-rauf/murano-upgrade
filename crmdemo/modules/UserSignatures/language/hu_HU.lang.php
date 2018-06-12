@@ -1,7 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,17 +9,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$mod_strings = array (
-  'LBL_EMAIL_SIGNATURE_ERROR1' => 'Az aláíráshoz szükséges egy név.',
-  'LBL_MODULE_NAME' => 'Felhasználói aláírások',
-  'LBL_MODULE_NAME_SINGULAR' => 'Felhasználói aláírás',
-  'LBL_SIGNATURE' => 'Aláírás',
-  'LBL_SIGNATURES' => 'Aláírások',
-  'LBL_SIGNATURE_DEFAULT' => 'Használjon aláírást?',
-  'LBL_SIGNATURE_HTML' => 'HTML aláírás',
-  'LBL_SIGNATURE_NAME' => 'Név',
-  'LBL_SIGNATURE_PREPEND' => 'Aláírás a válasz felett?',
+$mod_strings = array(
+    'LBL_MODULE_NAME'			=> 'Felhasználói aláírások',
+    'LBL_MODULE_NAME_SINGULAR'		=> 'Felhasználói aláírás',
+    'LBL_EMAIL_SIGNATURE_ERROR1' => 'Az aláíráshoz szükséges egy név.',
+    'LBL_SIGNATURE_NAME'         => 'Név',
+    'LBL_SIGNATURE'              => 'Aláírás',
+    'LBL_SIGNATURE_HTML'         => 'HTML aláírás',
+    'LBL_SIGNATURE_DEFAULT'      => 'Használjon aláírást?',
+    'LBL_SIGNATURE_PREPEND'      => 'Aláírás a válasz felett?',
+    'LBL_SIGNATURES'             => 'Aláírások',
 );
-

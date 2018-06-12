@@ -11,8 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-
+// $Id: ProcessView.php 56786 2010-06-02 18:29:56Z jenny $
 
 
 class ProcessView {

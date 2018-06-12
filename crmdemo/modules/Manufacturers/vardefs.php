@@ -42,7 +42,16 @@ $dictionary['Manufacturer'] = array(
     'vname' => 'LBL_DATE_ENTERED',
     'type' => 'datetime',
     'required'=>true,
-    'comment' => 'Date record created'
+    'comment' => 'Date record created',
+    'full_text_search' => array(
+          'enabled' => true,
+          'searchable' => false,
+          'aggregations' => array(
+              'date_entered' => array(
+                  'type' => 'DateRange',
+              ),
+          ),
+    ),
   ),
   'date_modified' =>
   array (
@@ -50,7 +59,16 @@ $dictionary['Manufacturer'] = array(
     'vname' => 'LBL_DATE_MODIFIED',
     'type' => 'datetime',
     'required'=>true,
-    'comment' => 'Date record last modified'
+    'comment' => 'Date record last modified',
+    'full_text_search' => array(
+          'enabled' => true,
+          'searchable' => false,
+          'aggregations' => array(
+              'date_modified' => array(
+                  'type' => 'DateRange',
+              ),
+          ),
+    ),
   ),
     'modified_user_id' =>
   array (
@@ -63,7 +81,18 @@ $dictionary['Manufacturer'] = array(
     'isnull' => 'false',
     'dbType' => 'id',
     'reportable'=>true,
-    'comment' => 'User who last modified record'
+    'comment' => 'User who last modified record',
+    'full_text_search' => array(
+          'enabled' => true,
+          'searchable' => false,
+          'type' => 'id',
+          'aggregations' => array(
+              'modified_user_id' => array(
+                  'type' => 'MyItems',
+                  'label' => 'LBL_AGG_MODIFIED_BY_ME',
+              ),
+          ),
+    ),
   ),
   'created_by' =>
   array (
@@ -75,7 +104,18 @@ $dictionary['Manufacturer'] = array(
     'table' => 'users',
     'isnull' => 'false',
     'dbType' => 'id',
-    'comment' => 'User who created record'
+    'comment' => 'User who created record',
+    'full_text_search' => array(
+          'enabled' => true,
+          'searchable' => false,
+          'type' => 'id',
+          'aggregations' => array(
+              'created_by' => array(
+                  'type' => 'MyItems',
+                  'label' => 'LBL_AGG_CREATED_BY_ME',
+              ),
+          ),
+    ),
   ),
   'name' =>
   array (
@@ -88,7 +128,11 @@ $dictionary['Manufacturer'] = array(
     'comment' => 'Manufacturer name',
     'importable' => 'required',
     'unified_search' => true,
-    'full_text_search' => array('enabled' => true, 'boost' => 3),
+      'full_text_search' => array(
+          'enabled' => true,
+          'searchable' => true,
+          'boost' => 0.78,
+      ),
   ),
   'list_order' =>
   array (
@@ -116,9 +160,10 @@ $dictionary['Manufacturer'] = array(
       'relationship' => 'revenuelineitems_manufacturers',
       'source' => 'non-db',
       'vname' => 'LBL_REVENUELINEITEMS',
+      'workflow' => false
     ),
 ),
-'acls' => array('SugarACLDeveloperOrAdmin' => array('aclModule' => 'Products', 'allowUserRead' => true)),
+'acls' => array('SugarACLDeveloperOrAdmin' => array('aclModule' => 'Products', 'allowUserRead' => true), 'SugarACLStatic' => false),
 'indices' => array (
        array('name' =>'manufacturerspk', 'type' =>'primary', 'fields'=>array('id')),
        array('name' =>'idx_manufacturers', 'type'=>'index', 'fields'=>array('name','deleted'))

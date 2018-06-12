@@ -124,7 +124,6 @@ function getWideFormBody($prefix, $mod='',$formname='',  $contact = '', $portal 
 	$form .=  "<input type=hidden name=".$prefix."team_id value=".$team_id.">";
 
 
-
 	if ($formname == 'ConvertProspect') {
 		$lead_source_label = "<td scope='row'>&nbsp;</td>";
 		$lead_source_field = "<td >&nbsp;</td>";
@@ -403,15 +402,12 @@ return $the_form;
 
 }
 
-/**
- * @deprecated
- */
+// FIXME TY-986: decide if/how we're going to deprecate this
 function handleSave($prefix, $redirect=true, $useRequired=false){
     global $log;
-    $log->deprecated('This function handleSave() is no longer supported.');
+    $log->deprecated('ContactFormBase::handleSave() is deprecated since 7.0.0.');
 
     global $theme, $current_user;
-
 
 	require_once('include/formbase.php');
 

@@ -78,6 +78,7 @@ class EmailTemplate extends SugarBean {
 		'created_by_name',
 		'accept_status_id',
 		'accept_status_name',
+        'acl_role_set_id',
 	);
 
     protected $storedVariables = array();
@@ -150,7 +151,7 @@ class EmailTemplate extends SugarBean {
 						(in_array($field_def['name'], $this->badFields)) ) {
 				        continue;
 				    }
-                    
+
                     // Set a label if it doesn't exist
 				    if(!isset($field_def['vname'])) {
 				    	$field_def['vname'] = empty($field_def['name']) ? $key : $field_def['name'];
@@ -223,8 +224,9 @@ class EmailTemplate extends SugarBean {
                 if (!empty($template_text)) {
 
                     if(!isset($this->parsed_urls[$key]) || $this->parsed_urls[$key]['text'] != $template_text) {
-                        // Fix for bug52014.
-                        $template_text = urldecode($template_text);
+                        //the curly brackets we key come in encoded, search for and replace the encoded brackets
+                        $template_text = str_ireplace(array('%7B','%7D'), array('{', '}'), $template_text);
+
                         $matches = $this->_preg_match_tracker_url($template_text);
                         $count = count($matches[0]);
                         $this->parsed_urls[$key]=array('matches' => $matches, 'text' => $template_text);

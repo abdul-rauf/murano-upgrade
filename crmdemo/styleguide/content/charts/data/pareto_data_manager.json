@@ -1,7 +1,8 @@
 {
   "properties": {
     "name": " for Q3 2013",
-    "quota": 1823353,
+    "quota": 1023353,
+    "quotaLabel": "Quota (Adjusted)",
     "groupData": [
       {
         "group": 0,
@@ -18,7 +19,9 @@
         "l": "Jim Brennan",
         "t": 340156
       }
-    ]
+    ],
+    "targetQuota": 724390,
+    "targetQuotaLabel": "Quota"
   },
   "data": [
     {

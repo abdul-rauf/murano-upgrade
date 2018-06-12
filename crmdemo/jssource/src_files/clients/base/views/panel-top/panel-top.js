@@ -17,42 +17,51 @@
  */
 ({
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     className: 'subpanel-header',
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     attributes: {
         'data-sortable-subpanel': 'true'
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     events: {
         'click': 'togglePanel',
-        'click a[name=create_button]:not(".disabled")': 'createRelatedClicked',
+        'click a[name=create_button]:not(".disabled")': 'createRelatedClicked'
     },
 
-    plugins: ['LinkedModel'],
+    plugins: ['LinkedModel', 'Tooltip'],
 
     /**
-     * @override
-     * @param opts
+     * @inheritdoc
      */
-    initialize: function(opts) {
-        app.view.View.prototype.initialize.call(this, opts);
-        var context = this.context;
+    initialize: function(options) {
+        // FIXME: SC-3594 will address having child views extending metadata
+        // from its parent.
+        options.meta = _.extend(
+            {},
+            app.metadata.getView(null, 'panel-top'),
+            app.metadata.getView(options.module, 'panel-top'),
+            options.meta
+        );
+
+        this._super('initialize', [options]);
+
         // This is in place to get the lang strings from the right module. See
         // if there is a better way to do this later.
-        this.parentModule = context.parent.get('module');
-        context.parent.on('panel-top:refresh', function(link) {
-            if (context.get('link') === link) {
-                context.get('collection').fetch();
-            }
-        });
+        this.parentModule = this.context.parent.get('module');
+
+        // FIXME: Revisit with SC-4775.
+        this.on('linked-model:create', function() {
+            this.context.set('skipFetch', false);
+            this.context.reloadData();
+        }, this);
     },
 
     /**
@@ -61,34 +70,29 @@
      * @param {Event} event The click event.
      */
     createRelatedClicked: function(event) {
-        this.createRelatedRecord(this.module)
+        this.createRelatedRecord(this.module);
     },
 
     /**
-    * Event handler that closes the subpanel layout when the SubpanelHeader is clicked
-    * @param e DOM event
+    * Event handler that toggles the subpanel layout when the SubpanelHeader is
+    * clicked.
+    *
+    * Triggers the `panel:toggle` event to toggle the subpanel.
+    *
+    * @param {Event} The `click` event.
     */
-    togglePanel: function(e) {
-        // Make sure we aren't toggling the panel when the user clicks on a dropdown action.
-        var toggleSubpanel = !$(e.target).parents("span.actions").length;
-        if (toggleSubpanel) {
-            this._toggleSubpanel();
+    togglePanel: function(evt) {
+        if (_.isNull(this.$el)) {
+            return;
         }
-    },
 
-    _toggleSubpanel: function() {
-        if(!this.layout.disposed) {
-            var isHidden = this.layout.$(".subpanel").hasClass('closed');
-            this.layout.trigger('panel:toggle', isHidden);
-        }
-    },
+        var $target = this.$(evt.target),
+            isLink = $target.closest('a, button').length;
 
-    /**
-     * @override
-     */
-    bindDataChange: function() {
-        if (this.collection) {
-            this.listenTo(this.collection, 'reset', this.render);
+        if (isLink) {
+            return;
         }
+
+        this.context.set('collapsed', !this.context.get('collapsed'));
     }
 })

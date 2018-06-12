@@ -91,6 +91,9 @@ $mod_strings = array (
     'LBL_TWEETTOCASE_ON_DESC' => 'Allows users to create cases from Tweets',
     'LBL_TWEETTOCASE_ON' => 'Enable Tweet&reg; to case integration',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; to case',
+    'LBL_PREVIEW_SETTINGS' => 'Preview Pane Settings',
+    'LBL_PREVIEW_EDIT' => 'Enable edit in Preview pane',
+    'LBL_PREVIEW_EDIT_HELP' => 'Allows users to edit fields in the Preview pane',
 	'LBL_USE_REAL_NAMES'	=> 'Show Full Names',
 	'LBL_USE_REAL_NAMES_DESC'			=> 'Display users\' full names instead of their User Names in assignment fields.',
     'LBL_DISALBE_CONVERT_LEAD' => 'Disable convert lead action for converted leads',
@@ -98,8 +101,10 @@ $mod_strings = array (
     'LBL_ENABLE_ACTION_MENU' => 'Display actions within menus',
     'LBL_ENABLE_ACTION_MENU_DESC' => 'Select to display DetailView and subpanel actions within a dropdown menu. If un-selected, the actions will display as separate buttons. This setting applies to modules in legacy mode.',
     'LBL_LOCK_SUBPANELS_DESC' => 'This setting applies to modules in legacy mode.',
+    'LBL_COLLAPSE_SUBPANELS_DESC' => 'When selected, all subpanels in the record view will be collapsed by default to improve performance. Users wishing to view subpanel data will need to expand the subpanel each time they access the record. Note: this setting does not apply to Legacy modules.',
     'LIST_ENTRIES_PER_LISTVIEW'=>'Listview items per page',
     'TPL_LIST_ENTRIES_PER_LISTVIEW_HELP'=>'Recommended setting is below {{listEntriesNum}} for acceptable performance levels. As additional fields are added to the listview, this number should be at the lower end of the recommended setting.',
+    'LBL_LIST_ENTRIES_PER_SEARCH_HELP'=>'This setting is also used for the number of search results that display on the global search page.',
 	'LIST_ENTRIES_PER_SUBPANEL'=>'Subpanel items per page',
     'TPL_LIST_ENTRIES_PER_SUBPANEL_HELP'=>'Recommended setting is below {{subpanelEntriesNum}} for acceptable performance levels. As additional fields are added to the listview, this number should be at the lower end of the recommended setting.',
 	'LBL_WIRELESS_LIST_ENTRIES' => 'Listview items per page',
@@ -122,6 +127,7 @@ $mod_strings = array (
 	'VERIFY_CLIENT_IP'=>'Validate user IP address',
     'LOCK_HOMEPAGE' => 'Prevent user customizable Homepage layout',
     'LOCK_SUBPANELS' => 'Prevent user customizable subpanel layout',
+    'COLLAPSE_SUBPANELS' => 'Collapse all subpanels and disable sticky feature',
     'MAX_DASHLETS' => 'Maximum number of Sugar Dashlets on Homepage',
 	'SYSTEM_NAME'=>'System Name:',
 	'SYSTEM_NAME_WIZARD'=>'Name:',
@@ -196,11 +202,12 @@ $mod_strings = array (
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maximum log size',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Default date format',
 	'LBL_LOGGER_LOG_LEVEL'=>'Log Level',
-        'LBL_LEAD_CONV_OPTION' => 'Lead Conversion Options',
-        'LEAD_CONV_OPT_HELP' => "<b>Copy</b> - Creates and relates copies of all of the Lead's activities to new records that are selected by the user during conversion. Copies are created for each of the selected records.<br><br><b>Move</b> - Moves all of the Lead's activities to a new record that is selected by the user during conversion.<br><br><b>Do Nothing</b> - Does nothing with the Lead's activities during conversion. The activities remain related to the Lead only.",
+    'LBL_LEAD_CONV_OPTION' => 'Lead Conversion Options',
+    'LEAD_CONV_OPT_HELP' => "<b>Move</b> - Moves all of the Lead's activities to the Contact created during conversion.<br><br><b>Do Nothing</b> - Does nothing with the Lead's activities during conversion. The activities remain related to the Lead only.",
 	'LBL_LOGGER_MAX_LOGS'=>'Maximum number of logs (before rolling)',
 	'LBL_LOGGER_FILENAME_SUFFIX' =>'Append after filename',
 	'LBL_VCAL_PERIOD' => 'vCal Updates Time Period:',
+    'LBL_NO_PRIVATE_TEAM_UPDATE' => 'Prevent private team names from inheriting the user\'s name fields',
     'LBL_IMPORT_MAX_RECORDS' => 'Import - Maximum Number of Rows:',
     'LBL_IMPORT_MAX_RECORDS_HELP' => 'Specify how many rows are allowed within import files. If the number of rows <br>in an import file exceeds this number, the user will be alerted. If no number<br> is entered, an unlimited number of rows are allowed.',
 	'vCAL_HELP' => 'Use this setting to determine the number of months in advance of the current date that Free/Busy information for calls and meetings is published.<BR>To turn Free/Busy publishing off, enter "0".  The minimum is 1 month; the maximum is 12 months.',
@@ -423,7 +430,12 @@ To configure additional system settings, click <a href="index.php?module=Adminis
 	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* The Reports module is only available for the SugarCRM and Sugar Mobile native clients',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* The Reports module is not available for the browser-based mobile view.',
+
+// Password settings
+    'ERR_EMPTY_SAML_LOGIN' => 'SAML Login URL can not be empty',
+    'ERR_EMPTY_SAML_CERT' => 'SAML certificate can not be empty',
+    'ERR_SAML_LOGIN_URL' => 'SAML Login URL is not valid',
+    'ERR_SAML_SLO_URL' => 'SAML SLO URL is not valid',
 );
 
 
-?>

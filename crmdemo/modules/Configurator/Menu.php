@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: Menu.php 52272 2009-11-06 18:50:17Z jmertic $
 
 global $mod_strings;
 $module_menu[]=Array("index.php?module=Configurator&action=EditView",$mod_strings['LBL_CONFIGURE_SETTINGS_TITLE'], "Administration");

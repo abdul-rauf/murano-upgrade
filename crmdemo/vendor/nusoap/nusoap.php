@@ -3,6 +3,18 @@
 /*
 Modification information for LGPL compliance
 
+commit 1144e041b6075ac46197dbd601998f7977e84d91
+Author: csezheng <ezheng@sugarcrm.com>
+Date:   Wed Sep 2 23:45:08 2015 -0700
+
+    br3246: add http1.1 in curl skip headers
+
+commit d270030a6fa40cb9da7725f32f4f768e276fda9b
+Author: skymeyer <jelle.vink@gmail.com>
+Date:   Mon Nov 3 21:10:12 2014 -0800
+
+    BR-2177: Avoid php notices "array to string conversion"
+
 commit 5f3c903c0f801464e8cceb36f83b248edee3f963
 Author: Sergey Morozov <smorozov@sugarcrm.com>
 Date:   Sat Jul 12 13:34:44 2014 +0300
@@ -321,7 +333,7 @@ $GLOBALS['_transient']['static']['nusoap_base']['globalDebugLevel'] = 0;
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
 * @author   Scott Nichol <snichol@users.sourceforge.net>
-
+* @version  $Id: nusoap.php 58622 2010-10-23 01:18:59Z engsvnbuild $
 * @access   public
 */
 class nusoap_base {
@@ -1455,7 +1467,7 @@ r354 - 2004-08-02 23:00:37 -0700 (Mon, 02 Aug 2004) - sugarjacob - Adding Soap
 * Mainly used for returning faults from deployed functions
 * in a server instance.
 * @author   Dietrich Ayala <dietrich@ganx4.com>
-
+* @version  $Id: nusoap.php 58622 2010-10-23 01:18:59Z engsvnbuild $
 * @access public
 */
 class nusoap_fault extends nusoap_base {
@@ -1744,7 +1756,7 @@ r354 - 2004-08-02 23:00:37 -0700 (Mon, 02 Aug 2004) - sugarjacob - Adding Soap
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
 * @author   Scott Nichol <snichol@users.sourceforge.net>
-
+* @version  $Id: nusoap.php 58622 2010-10-23 01:18:59Z engsvnbuild $
 * @access   public
 */
 class nusoap_xmlschema extends nusoap_base  {
@@ -2924,7 +2936,7 @@ r354 - 2004-08-02 23:00:37 -0700 (Mon, 02 Aug 2004) - sugarjacob - Adding Soap
 * xsd:anyType and user-defined types.
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
-
+* @version  $Id: nusoap.php 58622 2010-10-23 01:18:59Z engsvnbuild $
 * @access   public
 */
 class soapval extends nusoap_base {
@@ -3227,7 +3239,7 @@ r354 - 2004-08-02 23:00:37 -0700 (Mon, 02 Aug 2004) - sugarjacob - Adding Soap
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
 * @author   Scott Nichol <snichol@users.sourceforge.net>
-
+* @version  $Id: nusoap.php 58622 2010-10-23 01:18:59Z engsvnbuild $
 * @access public
 */
 class soap_transport_http extends nusoap_base {
@@ -3827,7 +3839,8 @@ class soap_transport_http extends nusoap_base {
 								'HTTP/1.1 302',
 								'HTTP/1.0 401',
 								'HTTP/1.1 401',
-								'HTTP/1.0 200 Connection established');
+								'HTTP/1.0 200 Connection established',
+                                'HTTP/1.1 200 Connection established');
 		foreach ($skipHeaders as $hd) {
 			$prefix = substr($data, 0, strlen($hd));
 			if ($prefix == $hd) return true;
@@ -4186,6 +4199,7 @@ class soap_transport_http extends nusoap_base {
         	$err = 'cURL ERROR: '.curl_errno($this->ch).': '.$cErr.'<br>';
         	// TODO: there is a PHP bug that can cause this to SEGV for CURLINFO_CONTENT_TYPE
 			foreach(curl_getinfo($this->ch) as $k => $v){
+                $v = is_array($v) ? implode(',', $v) : $v;
 				$err .= "$k: $v<br>";
 			}
 			$this->debug($err);
@@ -4733,7 +4747,7 @@ r354 - 2004-08-02 23:00:37 -0700 (Mon, 02 Aug 2004) - sugarjacob - Adding Soap
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
 * @author   Scott Nichol <snichol@users.sourceforge.net>
-
+* @version  $Id: nusoap.php 58622 2010-10-23 01:18:59Z engsvnbuild $
 * @access   public
 */
 class nusoap_server extends nusoap_base {
@@ -6069,7 +6083,7 @@ r354 - 2004-08-02 23:00:37 -0700 (Mon, 02 Aug 2004) - sugarjacob - Adding Soap
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
 * @author   Scott Nichol <snichol@users.sourceforge.net>
-
+* @version  $Id: nusoap.php,v 1.123 2010/04/26 20:15:08 snichol Exp $
 * @access public
 */
 class wsdl extends nusoap_base {
@@ -8205,7 +8219,7 @@ r354 - 2004-08-02 23:00:37 -0700 (Mon, 02 Aug 2004) - sugarjacob - Adding Soap
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
 * @author   Scott Nichol <snichol@users.sourceforge.net>
-
+* @version  $Id: nusoap.php 58622 2010-10-23 01:18:59Z engsvnbuild $
 * @access   public
 */
 class nusoap_parser extends nusoap_base {
@@ -9057,7 +9071,7 @@ r354 - 2004-08-02 23:00:37 -0700 (Mon, 02 Aug 2004) - sugarjacob - Adding Soap
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
 * @author   Scott Nichol <snichol@users.sourceforge.net>
-
+* @version  $Id: nusoap.php 58622 2010-10-23 01:18:59Z engsvnbuild $
 * @access   public
 */
 class nusoap_client extends nusoap_base  {

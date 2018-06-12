@@ -25,6 +25,7 @@ $viewdefs['Forecasts']['base']['view']['list-headerpane'] = array(
             ),
             'type' => 'button',
             'label' => 'LBL_SAVE_DRAFT',
+            'css_class' => 'btn-group save-draft-button',
             'acl_action' => 'current_user',
         ),
         array(
@@ -40,8 +41,8 @@ $viewdefs['Forecasts']['base']['view']['list-headerpane'] = array(
                         'click' => 'button:commit_button:click',
                     ),
                     'tooltip' => 'LBL_COMMIT_TOOLTIP',
-                    'css_class' => 'btn-primary',
-                    'icon' => 'icon-upload',
+                    'css_class' => 'btn-primary disabled commit-button',
+                    'icon' => 'fa-arrow-circle-o-up',
                     'acl_action' => 'current_user',
                     'primary' => true
                 ),
@@ -49,7 +50,6 @@ $viewdefs['Forecasts']['base']['view']['list-headerpane'] = array(
                     'name' => 'assign_quota',
                     'type' => 'assignquota',
                     'label' => 'LBL_ASSIGN_QUOTA_BUTTON',
-                    'css_class' => 'disabled',
                     'events' => array(
                         'click' => 'button:assign_quota:click',
                     ),

@@ -1,4 +1,5 @@
 <?php
+
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -10,17 +11,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- /*********************************************************************************
- * Hebrew vertion by:
- * Menahem Lurie Consultancy and IT Management,SugarCRM partner - Israel
- * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
- * All Rights Reserved.
- * *******************************************************************************/
-
 
 $connector_strings = array (
-    'url' => 'URL כתובת',
+    'url' => 'כתובת URL',
 );
-
-
 

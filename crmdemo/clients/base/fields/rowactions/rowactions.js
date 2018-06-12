@@ -8,5 +8,4 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({extendsFrom:'ActiondropdownField',_loadTemplate:function(){app.view.Field.prototype._loadTemplate.call(this);var template=app.template._getField(this.type,this.tplName,this.module,null,true)[1];if(template){this.$el.attr('class','');this.$el.html(template(this));}
-if(this.view.action==='list'&&this.action==='edit'){this.$el.hide();}else{this.$el.show();}}})
+({extendsFrom:'ActiondropdownField',_render:function(){this._super('_render');var isCreate=this.context.get('isCreateSubpanel')||false,shouldHide=(this.view.action==='list'&&this.action==='edit');if(isCreate||!shouldHide){this.show();}else{this.hide();}}})

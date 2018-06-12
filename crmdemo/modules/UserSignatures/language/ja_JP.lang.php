@@ -1,7 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,17 +9,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$mod_strings = array (
-  'LBL_EMAIL_SIGNATURE_ERROR1' => 'シグニチャには名前が必要です。',
-  'LBL_MODULE_NAME' => 'ユーザシグニチャ',
-  'LBL_MODULE_NAME_SINGULAR' => 'ユーザシグニチャ',
-  'LBL_SIGNATURE' => 'シグニチャ',
-  'LBL_SIGNATURES' => 'シグニチャ',
-  'LBL_SIGNATURE_DEFAULT' => 'シグニチャを利用',
-  'LBL_SIGNATURE_HTML' => 'ＨＴＭＬシグニチャ',
-  'LBL_SIGNATURE_NAME' => '名前',
-  'LBL_SIGNATURE_PREPEND' => '返信時に上記シグネチャを利用',
+$mod_strings = array(
+    'LBL_MODULE_NAME'			=> 'ユーザ署名',
+    'LBL_MODULE_NAME_SINGULAR'		=> 'ユーザシグニチャ',
+    'LBL_EMAIL_SIGNATURE_ERROR1' => 'この署名には名前が必要です。',
+    'LBL_SIGNATURE_NAME'         => '名前',
+    'LBL_SIGNATURE'              => '署名',
+    'LBL_SIGNATURE_HTML'         => 'HTML 署名',
+    'LBL_SIGNATURE_DEFAULT'      => '署名の使用:',
+    'LBL_SIGNATURE_PREPEND'      => '署名を返信引用文の前に挿入?',
+    'LBL_SIGNATURES'             => '署名',
 );
-

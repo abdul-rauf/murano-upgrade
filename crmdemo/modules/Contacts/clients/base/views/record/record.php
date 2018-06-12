@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,6 +20,9 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
+            'events' => array(
+                'click' => 'button:cancel_button:click',
+            ),
         ),
         array(
             'type' => 'rowaction',
@@ -173,6 +177,10 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
                 'do_not_call',
                 'account_name',
                 'email',
+                array(
+                    'name' => 'tag',
+                    'span' => 12,
+                ),
             ),
         ),
         array(
@@ -283,6 +291,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
                 array(
                     'name' => 'date_modified_by',
                     'readonly' => true,
+                    'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_MODIFIED',
                     'fields' => array(
@@ -302,6 +311,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
                 array(
                     'name' => 'date_entered_by',
                     'readonly' => true,
+                    'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_ENTERED',
                     'fields' => array(

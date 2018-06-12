@@ -12,6 +12,8 @@
  * @class View.Views.Base.HelpDashletView
  * @alias SUGAR.App.view.views.BaseHelpDashletView
  * @extends View.View
+ *
+ * @deprecated Since 7.7. Will be removed in 7.9.
  */
 ({
     plugins: ['Dashlet'],
@@ -30,11 +32,19 @@
     helpObject: undefined,
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     initialize: function(options) {
         this._super('initialize', [options]);
+        app.logger.warn('View.Views.Base.HelpDashletView is deprecated since 7.7. Will be removed in 7.9.');
 
+        this.getHelpObject();
+    },
+
+    /**
+     * Method to fetch the help object from the app.help utility
+     */
+    getHelpObject: function() {
         var helpUrl = {
                 more_info_url: this.createMoreHelpLink(),
                 more_info_url_close: '</a>'
@@ -51,7 +61,7 @@
     },
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     initDashlet: function() {
         this.settings.set({
@@ -70,7 +80,7 @@
      * Collects server version, language, module, and route and returns an HTML link to be used
      * in the template
      *
-     * @returns {String} The HTML a-tag for the More Help link
+     * @return {string} The HTML a-tag for the More Help link
      */
     createMoreHelpLink: function() {
         var serverInfo = app.metadata.getServerInfo(),
@@ -95,7 +105,7 @@
     },
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      * Overriding to pass this.helpObject as the template model to use,
      * and this.options in case templateOptions get passed down

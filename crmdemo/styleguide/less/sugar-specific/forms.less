@@ -164,12 +164,12 @@ input[type=radio] {
   input[type="text"].datepicker {
     min-width: 0;
     width: 50%;
-    .calcWidth(~"55% - 15px");
+    .calcWidth(~"55% - 4px");
   }
   input[type="text"].ui-timepicker-input {
     min-width: 0;
     width: 40%;
-    .calcWidth(~"45% - 15px");
+    .calcWidth(~"45% - 4px");
   }
 }
 .datepicker {
@@ -196,6 +196,7 @@ input[type=radio] {
   vertical-align: top;
   width: 100%;
   margin-bottom: 0;
+  font-size: inherit;
   .add-on {
     top: 3px;
     left: -28px;
@@ -206,7 +207,8 @@ input[type=radio] {
     border: none;
     background: @white;
     line-height: 16px;
-    border-radius: 0;
+    .border-radius(0);
+    z-index: 2;
     i {
       line-height: 16px;
     }
@@ -230,13 +232,6 @@ input[type=radio] {
     left: 7px;
     display: inline;
   }
-
-  &.select,
-  &.textarea {
-    .add-on {
-      //position: absolute;
-    }
-  }
   &.widget {
     width: 100%;
     .add-on {
@@ -250,28 +245,41 @@ input[type=radio] {
     /* The size is defined in twitter-bootstrap/forms.less */
     padding: 4px 6px;
   }
+  input:focus,
+  select:focus,
+  .uneditable-input:focus {
+    z-index: inherit;
+    &+ .add-on {
+      visibility: hidden;
+      &+ .add-on {
+        visibility: hidden;
+      }
+    }
+  }
+
   .ui-timepicker-input {
-    margin-left: -24px;
+    margin-left: -22px;
   }
   .ui-timepicker-list {
-    margin-left: -24px;
+    margin-left: -22px;
     font-size: @baseFontSize;
     li {
       color: @gray;
     }
   }
   &.error {
+    font-size: @fontSizeLarge;
     .add-on {
-      left: -26px;
+      left: -23px;
       color: @errorText;
       z-index: 1;
-      [class^="icon-"] {
+      .fa {
         color: @errorText;
       }
     }
     .ui-timepicker-input,
     .ui-timepicker-list {
-      margin-left: -46px;
+      margin-left: -44px;
     }
     textarea,
     input[type="password"],
@@ -285,7 +293,7 @@ input[type=radio] {
       .add-on {
         left: -28px;
         &.error-tooltip {
-          left: -42px;
+          left: -41px;
           & + .add-on {
             left: -50px;
           }
@@ -308,8 +316,11 @@ input[type=radio] {
     margin-bottom: 0;
   }
   .btn-toolbar {
-    margin: 0 0 0 5px !important;
+    margin: 0 0 0 8px;
     display: inline;
+    .btn-group {
+      float: left;
+    }
   }
   .wide {
     text-align: left;
@@ -317,7 +328,6 @@ input[type=radio] {
   label {
     padding: 0 1em 0 0;
     cursor: default;
-    .rtlPadding(@direction,0 0 0 1em);
     display: inline-block;
     float: none;
     &.hide {
@@ -332,7 +342,7 @@ input[type=radio] {
     }
   }
   &.email {
-    padding-right: 142px;
+    padding-right: 127px;
     position: relative;
     &> span,
     &> del {
@@ -340,16 +350,15 @@ input[type=radio] {
     }
     input[type="text"] {
       width: 100%;
+      box-sizing: border-box;
+      height: 28px;
     }
     .btn-toolbar {
       position: absolute;
       right: 0;
       top: 0;
-      width: 120px;
+      width: 119px;
       padding: 0;
-      .btn-group {
-        float: left;
-      }
     }
   }
 }
@@ -368,25 +377,12 @@ input[type=radio] {
   }
 }
 
-//Generate fixed spanX modal widths
-.spanLabelX (@index) when (@index > 0) {
-  (~".form-horizontal .control-label.span@{index}") { .spanLabel(@index); }
-  .spanLabelX(@index - 1);
-}
-.spanLabelX (0) {}
-
-.spanLabel (@columns) {
-  width: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1));
-  *width: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1)) - (.5 / @gridRowWidth * 100 * 1%);
-}
-
-.spanLabelX (@gridColumns);
-
 // for use by controls not in form-horizontal
 .controls {
   padding: 0;
   &.btn-fit {
     position: relative;
+    box-sizing: border-box;
     &.controls-four {
       padding-right: 144px;
     }
@@ -419,6 +415,7 @@ input[type=radio] {
   }
   &.btn-group-fit {
     position: relative;
+    box-sizing: border-box;
     &.controls-four {
       padding-right: 118px;
     }
@@ -431,80 +428,17 @@ input[type=radio] {
     .btn-group {
       position: absolute;
       top: 0;
-      right: 5px;
-    }
-  }
-}
-
-.form-horizontal {
-  margin-left: 10px;
-
-  .row-fluid.control-group {
-    padding: 0;
-    margin-bottom: 0;
-  }
-  .control-group {
-    margin-bottom: 4px;
-    .controls {
-      margin-bottom: 4px;
-    }
-  }
-
-  .control-group:last-of-type {
-    margin-bottom: 0;
-  }
-
-  .controls {
-    margin-left: @fluidGridGutterWidth;
-    > span {
-      padding: 0;
-    }
-  }
-
-  .card2 .control-group:first-child .control-label-background ,
-  .card2 .control-group .control-label.begin-fieldgroup .control-label-background {
-    .border-radius(@baseBorderRadius @baseBorderRadius 0 0);
-    border-top: @borderWidget;
-  }
-  .card2 .control-group::last-of-type .control-label-background,
-  .card2 .control-group .control-label.end-fieldgroup .control-label-background {
-    padding-bottom: 5px;
-    .border-radius(0 0 @baseBorderRadius @baseBorderRadius);
-    border-bottom: @borderWidget;
-    height: auto;
-  }
-  .card2 .control-group.single .control-label .control-label-background {
-    height: 0;
-    .border-radius(@baseBorderRadius);
-    border-top: @borderWidget;
-    border-bottom: @borderWidget;
-  }
-
-  div.control-label {
-    padding-top: 0;
-    .control-label-background {
-      height: 100%;
-      position: absolute;
-      padding: 4px 0 12px;
-      text-align: right;
-      border-left: @borderWidget;
-      border-right: @borderWidget;
-      background-color: @grayLighter;
-    }
-    label {
-      color: @gray;
-      font-size: @fontSizeSmall;
-      margin-bottom: 0;
+      right: 0;
     }
   }
 }
 
 .help-block {
   font-size: 11px;
-  margin: 3px 0 0;
+  margin: 3px 0 0 7px;
   white-space: normal;
   line-height: 13px;
-  display: inline-block;
+  clear: both;
 }
 .form-actions {
   border: none;
@@ -514,6 +448,7 @@ input[type=radio] {
 .mu.extend .fieldPlaceHolder {
   margin-left: 4px;
 }
+
 
 textarea,
 input[type="text"],
@@ -544,4 +479,16 @@ input[type="color"],
 
 input.required {
   border: 1px solid @grayLight;
+}
+
+//flex-relate field
+.flex-relate-module {
+  float: left;
+  display: inline-block;
+  width: 40.425531911%;
+}
+.flex-relate-record {
+  width: 57.446808505%;
+  display: inline-block;
+  margin-left: @fluidGridGutterWidth;
 }

@@ -1,7 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,17 +9,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$mod_strings = array (
-  'LBL_EMAIL_SIGNATURE_ERROR1' => 'Aquesta firma requereix un nom.',
-  'LBL_MODULE_NAME' => 'Firmes d&#39;usuari',
-  'LBL_MODULE_NAME_SINGULAR' => 'Firma d&#39;usuari',
-  'LBL_SIGNATURE' => 'Firma',
-  'LBL_SIGNATURES' => 'Firmes',
-  'LBL_SIGNATURE_DEFAULT' => 'Usar firma?',
-  'LBL_SIGNATURE_HTML' => 'Signatura HTML',
-  'LBL_SIGNATURE_NAME' => 'Nom',
-  'LBL_SIGNATURE_PREPEND' => 'Firmar sobre la resposta?',
+$mod_strings = array(
+    'LBL_MODULE_NAME'			=> 'Firmes dels usuaris',
+    'LBL_MODULE_NAME_SINGULAR'		=> 'Firma de l&#39;usuari',
+    'LBL_EMAIL_SIGNATURE_ERROR1' => 'Aquesta firma requereix un nom.',
+    'LBL_SIGNATURE_NAME'         => 'Nom',
+    'LBL_SIGNATURE'              => 'Firma',
+    'LBL_SIGNATURE_HTML'         => 'Signatura HTML',
+    'LBL_SIGNATURE_DEFAULT'      => 'Usar firma?',
+    'LBL_SIGNATURE_PREPEND'      => 'Firmar sobre la resposta?',
+    'LBL_SIGNATURES'             => 'Firmes',
 );
-

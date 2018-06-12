@@ -1,5 +1,5 @@
 <?php
- // created: 2011-08-04 10:01:29
-$dictionary['Lead']['fields']['investor_rating_c']['dependency']='';
+ // created: 2018-06-12 08:16:06
+$dictionary['Lead']['fields']['investor_rating_c']['dependency'] = '';
+$dictionary['Lead']['fields']['investor_rating_c']['full_text_search']['boost'] = 1;
 
- ?>

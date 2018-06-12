@@ -1,6 +1,6 @@
 <?php
- // created: 2013-11-01 11:22:37
-$dictionary['Opportunity']['fields']['further_information_c']['enforced']='';
-$dictionary['Opportunity']['fields']['further_information_c']['dependency']='';
+ // created: 2018-06-12 08:16:06
+$dictionary['Opportunity']['fields']['further_information_c']['enforced'] = '';
+$dictionary['Opportunity']['fields']['further_information_c']['dependency'] = '';
+$dictionary['Opportunity']['fields']['further_information_c']['full_text_search']['boost'] = 1;
 
- ?>

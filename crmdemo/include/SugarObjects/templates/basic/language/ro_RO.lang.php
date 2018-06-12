@@ -1,7 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,24 +9,28 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$mod_strings = array (
-  'LBL_CREATED' => 'Creat de',
-  'LBL_CREATED_ID' => 'Creata de ID',
-  'LBL_CREATED_USER' => 'Creata de Utilizator',
-  'LBL_DATE_ENTERED' => 'Data Crearii',
-  'LBL_DATE_MODIFIED' => 'Data Modificarii',
-  'LBL_DELETED' => 'Sters',
-  'LBL_DESCRIPTION' => 'Descriere',
-  'LBL_EDIT_BUTTON' => 'Editeaza',
-  'LBL_ID' => 'ID',
-  'LBL_LIST_NAME' => 'Nume',
-  'LBL_MODIFIED' => 'Modificat de',
-  'LBL_MODIFIED_ID' => 'Modificata de ID',
-  'LBL_MODIFIED_NAME' => 'Modificata de Nume',
-  'LBL_MODIFIED_USER' => 'Modificata de Utilizator',
-  'LBL_NAME' => 'Nume',
-  'LBL_REMOVE' => 'Inlatura',
+$mod_strings = array(
+'LBL_ID'=>'ID',
+'LBL_DATE_ENTERED'=>'Data creării',
+'LBL_DATE_MODIFIED'=>'Data Modificarii', 
+'LBL_MODIFIED'=>'Modificat de',
+'LBL_MODIFIED_ID'=>'Modificat după Id',
+'LBL_MODIFIED_NAME'=>'Modificat după Nume',
+'LBL_CREATED'=>'Creat de',
+'LBL_CREATED_ID'=>'Creat de Id',
+'LBL_DOC_OWNER'=>'Proprietar document',
+'LBL_USER_FAVORITES'=>'Utilizatori cu setări favorite',
+'LBL_DESCRIPTION'=>'Descriere',
+'LBL_DELETED'=>'Şters',
+'LBL_NAME'=>'Nume',
+'LBL_CREATED_USER'=>'Creat de Utilizator',
+'LBL_MODIFIED_USER'=>'Modificat după Utilizator',
+'LBL_LIST_NAME'=>'Nume',
+'LBL_EDIT_BUTTON' => 'Editeaza',
+ 'LBL_REMOVE' => 'Eliminare',
+    //define label(s) to be used for overriding local values during import/export
+    'LBL_EXPORT_MODIFIED_BY_NAME' => 'Modificat după Nume',
+
+
 );
-

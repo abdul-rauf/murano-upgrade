@@ -51,6 +51,7 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
         $this->_viewdefs = $this->implementation->getViewdefs();
         $this->_paneldefs = $this->_viewdefs;
         $this->_fielddefs = $this->implementation->getFieldDefs();
+
         $this->columns = array('LBL_DEFAULT' => 'getDefaultFields', 'LBL_HIDDEN' => 'getAvailableFields');
 
         $filterBeanClass = BeanFactory::getBeanName('Filters');
@@ -97,6 +98,10 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
     {
         // Make a copy of the field defs array
         $fieldDefs = $this->_fielddefs;
+
+        // to include combo fields which are not in  _fielddefs
+        $comboFieldDefs = $this->implementation->getComboFieldDefs();
+        $fieldDefs = array_merge($fieldDefs, $comboFieldDefs);
 
         // Grab our original viewdefs since there are fields on here we'll need
         $viewDefs = $this->implementation->getOriginalViewdefs();
@@ -163,6 +168,24 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
     }
 
     /**
+     * Add a field to the Filters
+     *
+     * @param string $fieldName
+     * @param array $defs
+     * @return bool True if the field was added, false otherwise
+     */
+    public function addField($fieldName, $defs = array())
+    {
+        if (!$this->panelHasField($fieldName)) {
+            $this->_viewdefs['fields'][$fieldName] = $defs;
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /**
      * Populates the panel defs, and the view defs, from the request
      *
      * @return void
@@ -201,11 +224,24 @@ class SidecarFilterLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
 
         $lastGroup = isset($this->columns['LBL_AVAILABLE']) ? 2 : 1;
 
+        $comboFieldDefs = $this->implementation->getComboFieldDefs();
+
         for ($i = 0; isset($_POST['group_' . $i]) && $i < $lastGroup; $i++) {
             foreach ($_POST['group_' . $i] as $fieldname) {
                 $fieldname = strtolower($fieldname);
                 //Check if the field was previously on the layout
-                $newPaneldefs[$fieldname] = !empty($this->_viewdefs['fields'][$fieldname]) ? $this->_viewdefs['fields'][$fieldname] : array();
+                if (!empty($this->_viewdefs['fields'][$fieldname])) {
+                    $newPaneldefs[$fieldname] = $this->_viewdefs['fields'][$fieldname];
+                } elseif ((!empty($comboFieldDefs[$fieldname]) &&
+                        isset($comboFieldDefs[$fieldname]['dbFields'])) ||
+                    $fieldname === '$favorite'
+                ) {
+                    // combo fields such as address_street
+                    // Or condition is for special field found that should be added too
+                    $newPaneldefs[$fieldname] = $comboFieldDefs[$fieldname];
+                } else {
+                    $newPaneldefs[$fieldname] = array();
+                }
             }
         }
 

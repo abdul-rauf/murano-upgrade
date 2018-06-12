@@ -89,14 +89,15 @@ class SugarCleaner
         $config->set('Filter.Custom',  array(new HTMLPurifier_Filter_Xmp()));
         // for link
         $config->set('HTML.DefinitionID', 'Sugar HTML Def');
-        $config->set('HTML.DefinitionRev', 2);
+        $config->set('HTML.DefinitionRev', 3);
         $config->set('Cache.SerializerPath', sugar_cached('htmlclean/'));
         // IDs are namespaced
         $config->set('Attr.EnableID', true);
         $config->set('Attr.IDPrefix', 'sugar_text_');
 
         if ($def = $config->maybeGetRawHTMLDefinition()) {
-            $form = $def->addElement(
+            // Add link tag for custom CSS
+            $def->addElement(
       			'link',   // name
       			'Flow',  // content set
       			'Empty', // allowed children
@@ -107,6 +108,8 @@ class SugarCleaner
             		'type' => 'Enum#text/css' // only CSS supported here
     			)
             );
+
+            // Add iframe tag
             $iframe = $def->addElement(
       			'iframe',   // name
       			'Flow',  // content set
@@ -124,7 +127,52 @@ class SugarCleaner
                  )
             );
             $iframe->excludes=array('iframe');
+
+            // Add usemap attribute to img tag
+            $def->addAttribute('img', 'usemap', 'CDATA');
+
+            // Add map tag
+            $map = $def->addElement(
+                'map',
+                'Block',
+                'Flow',
+                'Common',
+                array(
+                    'name' => 'CDATA',
+                    'id' => 'ID',
+                    'title' => 'CDATA',
+                )
+            );
+            $map->excludes = array('map' => true);
+
+            // Add area tag
+            $area = $def->addElement(
+                'area',
+                'Block',
+                'Empty',
+                'Common',
+                array(
+                    'name' => 'CDATA',
+                    'id' => 'ID',
+                    'alt' => 'Text',
+                    'coords' => 'CDATA',
+                    'accesskey' => 'Character',
+                    'nohref' => new HTMLPurifier_AttrDef_Enum(
+                        array('nohref')
+                    ),
+                    'href' => 'URI',
+                    'shape' => new HTMLPurifier_AttrDef_Enum(
+                        array('rect', 'circle', 'poly', 'default')
+                    ),
+                    'tabindex' => 'Number',
+                    'target' => new HTMLPurifier_AttrDef_Enum(
+                        array('_blank', '_self', '_target', '_top')
+                    )
+                )
+            );
+            $area->excludes = array('area' => true);
         }
+
         $uri = $config->getDefinition('URI');
         $uri->addFilter(new SugarURIFilter(), $config);
         HTMLPurifier_URISchemeRegistry::instance()->register('cid', new HTMLPurifier_URIScheme_cid());
@@ -152,7 +200,15 @@ class SugarCleaner
      */
     static public function cleanHtml($html, $encoded = false)
     {
+        static $processed = array();
+        $key = md5($html);
+
         if(empty($html)) return $html;
+
+        if (in_array($key, $processed)) {
+            // mail is already clean, do not process again
+            return $html;
+        }
 
         if($encoded) {
             // take care of multiple html encodings by repeatedly decoding till there is nothing to decode
@@ -172,6 +228,7 @@ class SugarCleaner
         if($encoded) {
             $cleanhtml = to_html($cleanhtml);
         }
+        $processed[] = md5($cleanhtml);
         return $cleanhtml;
     }
 

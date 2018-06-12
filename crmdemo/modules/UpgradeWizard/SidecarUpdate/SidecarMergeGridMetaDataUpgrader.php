@@ -618,12 +618,7 @@ END;
         $customFields = array();
         foreach($this->legacyViewdefs as $lViewtype => $data) {
             // We will need a parser no matter what
-            if($this->sidecar) {
-                $legacyParser = ParserFactory::getParser($lViewtype, $this->module, $this->package, null, $this->client);
-            } else {
-                $legacyParser = ParserFactory::getParser($lViewtype, $this->module, $this->package);
-            }
-
+            $legacyParser = $this->getLegacyParser($lViewtype);
             // Step 1, handle tabDef changes
             $hasTabDefCustomizations = $this->hasTabDefCustomizations($lViewtype);
 
@@ -753,43 +748,51 @@ END;
             // email1 <=> email conversion
             foreach ($defaultDefs['panels'] as $panelIndex => $panel) {
                 foreach ($panel['fields'] as $fieldIndex => $fieldName) {
+
+                    // Turn a field name into a string for searching convenience
+                    if (is_array($fieldName)) {
+                        $lookupFieldName = (isset($fieldName['name'])) ? $fieldName['name'] : null;
+                    } else {
+                        $lookupFieldName = $fieldName;
+                    }
+
                     // Handle fields that are not meant to be here, like header
                     // fields, but only if we are not in the header panel
                     if ($panelIndex > 0) {
-                        $check1 = is_array($fieldName) && isset($fieldName['name']) && isset($headerFields[$fieldName['name']]);
-                        $check2 = is_string($fieldName) && isset($headerFields[$fieldName]);
-                        if ($check1 || $check2) {
+                        if (isset($lookupFieldName) && isset($headerFields[$lookupFieldName])) {
                             // Remove this field from the defs and move on
                             unset($defaultDefs['panels'][$panelIndex]['fields'][$fieldIndex]);
                             continue;
                         }
                     }
 
+                    // Delete 'team_name' from the layout if module doesn't implement team-security, otherwise leave it;
+                    // the field is a part of 'basic' template by default, but module may not implement team-security
+                    if (isset($lookupFieldName) && $lookupFieldName == 'team_name' && !$this->isValidField($fieldName)) {
+                        unset($defaultDefs['panels'][$panelIndex]['fields'][$fieldIndex]);
+                    }
+
                     // Hack email field into submission
-                    if ($fieldName == 'email1') {
-                        $defaultDefs['panels'][$panelIndex]['fields'][$fieldIndex] = 'email';
-                    } elseif (is_array($fieldName) && isset($fieldName['name']) && $fieldName['name'] === 'email1') {
-                        $fieldName['name'] = 'email';
-                        $defaultDefs['panels'][$panelIndex]['fields'][$fieldIndex] = $fieldName;
+                    if (isset($lookupFieldName) && $lookupFieldName == 'email1') {
+                        if (is_array($fieldName)) {
+                            $fieldName['name'] = 'email';
+                            $defaultDefs['panels'][$panelIndex]['fields'][$fieldIndex] = $fieldName;
+                        } else {
+                            $defaultDefs['panels'][$panelIndex]['fields'][$fieldIndex] = 'email';
+                        }
                     }
 
                     // Handle twitter_id to twitter renaming
-                    if ($fieldName == 'twitter_id' && $convertTwitter) {
-                        // If twitter is already on the defaults, remove twitter_id entirely
+                    if (isset($lookupFieldName) && $lookupFieldName == 'twitter_id' && $convertTwitter) {
+                        // If twitter is already on the defaults, remove twitter_id entirely,
+                        // otherwise rename twitter_id
                         if (isset($defaultDefsFields['twitter'])) {
                             unset($defaultDefs['panels'][$panelIndex]['fields'][$fieldIndex]);
-                        } else {
-                            // If twitter is not on the default layout, rename twitter_id
-                            $defaultDefs['panels'][$panelIndex]['fields'][$fieldIndex] = 'twitter';
-                        }
-                    } elseif (is_array($fieldName) && isset($fieldName['name']) && $fieldName['name'] === 'twitter_id' && $convertTwitter) {
-                        // If twitter is already on the defaults, remove twitter_id entirely
-                        if (isset($defaultDefsFields['twitter'])) {
-                            unset($defaultDefs['panels'][$panelIndex]['fields'][$fieldIndex]);
-                        } else {
-                            // If twitter is not on the default layout, rename twitter_id
+                        } elseif (is_array($fieldName)) {
                             $fieldName['name'] = 'twitter';
                             $defaultDefs['panels'][$panelIndex]['fields'][$fieldIndex] = $fieldName;
+                        } else {
+                            $defaultDefs['panels'][$panelIndex]['fields'][$fieldIndex] = 'twitter';
                         }
                     }
                 }
@@ -807,9 +810,9 @@ END;
             $origFields = array();
             // replace viewdefs with defaults, since parser's viewdefs can be already customized by other parts
             // of the upgrade
-            $parser->_viewdefs['panels'] = $parser->convertFromCanonicalForm($defaultDefs['panels'], $parser->_fielddefs);
+            $parser->_viewdefs['panels'] = $parser->convertFromCanonicalForm($defaultDefs['panels']);
             // get field list
-            $origData = $parser->getFieldsFromPanels($defaultDefs['panels'], $parser->_fielddefs);
+            $origData = $parser->getFieldsFromPanels($defaultDefs['panels']);
             // Go through existing fields and remove those not in the new data
             foreach($origData as $fname => $fielddef) {
                 if (!$this->isValidField($fname)) {
@@ -1108,21 +1111,17 @@ END;
     protected function addNewFieldsToLayout(array $newDefs) {
         $defaultDefs = $this->loadDefaultMetadata();
         $parser = ParserFactory::getParser($this->viewtype, $this->module, $this->package, null, $this->client);
-        $defaultFields = $parser->getFieldsFromPanels($defaultDefs['panels'], $parser->_fielddefs);
-        $currentFields = $parser->getFieldsFromPanels($newDefs['panels'], $parser->_fielddefs);
+        $defaultFields = $parser->getFieldsFromPanels($defaultDefs['panels']);
+        $currentFields = $parser->getFieldsFromPanels($newDefs['panels']);
         $origFields = array();
         foreach($this->originalLegacyViewdefs as $lViewtype => $data) {
             // We will need a parser no matter what
-            if($this->sidecar) {
-                $legacyParser = ParserFactory::getParser($lViewtype, $this->module, $this->package, null, $this->client);
-            } else {
-                $legacyParser = ParserFactory::getParser($lViewtype, $this->module, $this->package);
-            }
+            $legacyParser = $this->getLegacyParser($lViewtype);
             // replace viewdefs with defaults, since parser's viewdefs can be already customized by other parts
             // of the upgrade
-            $legacyParser->_viewdefs['panels'] = $legacyParser->convertFromCanonicalForm($data['panels'], $legacyParser->_fielddefs);
+            $legacyParser->_viewdefs['panels'] = $legacyParser->convertFromCanonicalForm($data['panels']);
             // get field list
-            $origData = $legacyParser->getFieldsFromPanels($data['panels'], $legacyParser->_fielddefs);
+            $origData = $legacyParser->getFieldsFromPanels($data['panels']);
             $origFields = array_merge($origFields, $origData);
         }
         //Add fields always defaults to the bottom of the first panel.
@@ -1290,5 +1289,25 @@ END;
 
         $data['panels'] = $panels;
         return $data;
+    }
+
+    /**
+     * Returns parser for parsing legacy layout
+     *
+     * @param string $lViewtype
+     * @return AbstractMetaDataParser
+     */
+    protected function getLegacyParser($lViewtype)
+    {
+        if ($this->sidecar) {
+            $parser = ParserFactory::getParser($lViewtype, $this->module, $this->package, null, $this->client);
+        } elseif ($this->client == 'portal') {
+            require_once 'modules/ModuleBuilder/parsers/parser.portallupgrade.php';
+            $parser = new ParserPortalUpgrade();
+        } else {
+            $parser = ParserFactory::getParser($lViewtype, $this->module, $this->package);
+        }
+
+        return $parser;
     }
 }

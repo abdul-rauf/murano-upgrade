@@ -11,9 +11,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: MyPipelineBySalesStageDashlet.en_us.lang.php 16286 2006-08-22 20:14:45Z wayne $
 
 
 $dashletStrings['CampaignROIChartDashlet'] = array('LBL_TITLE'       => 'Campaign ROI',
                                                      'LBL_DESCRIPTION' => 'ROI Chart',
                                                      'LBL_REFRESH'     => 'Refresh Chart');
+?>

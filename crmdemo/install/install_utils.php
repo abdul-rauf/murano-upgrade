@@ -13,6 +13,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('include/utils/zip_utils.php');
 require_once('include/upload_file.php');
 
+use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+
 ////////////////
 ////  GLOBAL utility
 /**
@@ -94,7 +96,7 @@ function commitLanguagePack($uninstall=false) {
     $zip_to_dir     = ".";
     $zip_force_copy = array();
 
-    if($uninstall == false && isset($_SESSION['INSTALLED_LANG_PACKS']) && in_array($zipFile, $_SESSION['INSTALLED_LANG_PACKS'])) {
+    if($uninstall == false && isset($_SESSION['INSTALLED_LANG_PACKS']) && ArrayFunctions::in_array_access($zipFile, $_SESSION['INSTALLED_LANG_PACKS'])) {
         return;
     }
 
@@ -166,7 +168,7 @@ function commitLanguagePack($uninstall=false) {
         }
 
         // remove session entry
-        if(isset($_SESSION['INSTALLED_LANG_PACKS']) && is_array($_SESSION['INSTALLED_LANG_PACKS'])) {
+        if(isset($_SESSION['INSTALLED_LANG_PACKS']) && ArrayFunctions::is_array_access($_SESSION['INSTALLED_LANG_PACKS'])) {
             foreach($_SESSION['INSTALLED_LANG_PACKS'] as $k => $langPack) {
                 if($langPack == $zipFile) {
                     unset($_SESSION['INSTALLED_LANG_PACKS'][$k]);
@@ -787,12 +789,12 @@ function handleSugarConfig() {
         $sugar_config['unique_key'] = $setup_site_guid;
     }
     if(empty($sugar_config['unique_key'])){
-        $sugar_config['unique_key'] = md5( create_guid() );
+        $sugar_config['unique_key'] = get_unique_key();
     }
 
     // add installed langs to config
     // entry in upgrade_history comes AFTER table creation
-    if(isset($_SESSION['INSTALLED_LANG_PACKS']) && is_array($_SESSION['INSTALLED_LANG_PACKS']) && !empty($_SESSION['INSTALLED_LANG_PACKS'])) {
+    if(isset($_SESSION['INSTALLED_LANG_PACKS']) && ArrayFunctions::is_array_access($_SESSION['INSTALLED_LANG_PACKS']) && !empty($_SESSION['INSTALLED_LANG_PACKS'])) {
         foreach($_SESSION['INSTALLED_LANG_PACKS'] as $langZip) {
             $lang = getSugarConfigLanguageArray($langZip);
             if(!empty($lang)) {
@@ -918,6 +920,7 @@ RedirectMatch 403 {$ignoreCase}/+cache/+diagnostic
 RedirectMatch 403 {$ignoreCase}/+files\.md5$
 RedirectMatch 403 {$ignoreCase}/+composer\.(json|lock)
 RedirectMatch 403 {$ignoreCase}/+vendor/composer/
+RedirectMatch 403 {$ignoreCase}.*/\.git
 
 # Fix mimetype for logo.svg (SP-1395)
 AddType     image/svg+xml     .svg
@@ -933,20 +936,20 @@ AddType     application/javascript  .js
     RewriteRule ^rest/(.*)$ api/rest.php?__sugar_url=$1 [L,QSA]
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^cache/api/metadata/lang_(.._..)_(.*)_public(_ordered)?\.json$ rest/v10/lang/public/$1?platform=$2&ordered=$3 [N,QSA]
+    RewriteRule ^cache/api/metadata/lang_(.._..)_(.*)_public(_ordered)?\.json$ rest/v10/lang/public/$1?platform=$2&ordered=$3 [N,QSA,DPI]
 
-    RewriteRule ^cache/api/metadata/lang_(.._..)_([^_]*)(_ordered)?\.json$ rest/v10/lang/$1?platform=$2&ordered=$3 [N,QSA]
+    RewriteRule ^cache/api/metadata/lang_(.._..)_([^_]*)(_ordered)?\.json$ rest/v10/lang/$1?platform=$2&ordered=$3 [N,QSA,DPI]
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^cache/Expressions/functions_cache(_debug)?.js$ rest/v10/ExpressionEngine/functions?debug=$1 [N,QSA]
-    RewriteRule ^cache/jsLanguage/(.._..).js$ index.php?entryPoint=jslang&module=app_strings&lang=$1 [L,QSA]
-    RewriteRule ^cache/jsLanguage/(\w*)/(.._..).js$ index.php?entryPoint=jslang&module=$1&lang=$2 [L,QSA]
+    RewriteRule ^cache/Expressions/functions_cache(_debug)?.js$ rest/v10/ExpressionEngine/functions?debug=$1 [N,QSA,DPI]
+    RewriteRule ^cache/jsLanguage/(.._..).js$ index.php?entryPoint=jslang&module=app_strings&lang=$1 [L,QSA,DPI]
+    RewriteRule ^cache/jsLanguage/(\w*)/(.._..).js$ index.php?entryPoint=jslang&module=$1&lang=$2 [L,QSA,DPI]
 </IfModule>
 
 <IfModule mod_mime.c>
     AddType application/x-font-woff .woff
 </IfModule>
-<FilesMatch "\.(jpg|png|gif|js|css|ico|woff)$">
+<FilesMatch "\.(jpg|png|gif|js|css|ico|woff|svg)$">
         <IfModule mod_headers.c>
                 Header set ETag ""
                 Header set Cache-Control "max-age=2592000"
@@ -961,6 +964,7 @@ AddType     application/javascript  .js
         ExpiresByType image/jpg "access plus 1 month"
         ExpiresByType image/png "access plus 1 month"
         ExpiresByType application/x-font-woff "access plus 1 month"
+        ExpiresByType image/svg "access plus 1 month"
 </IfModule>
 # END SUGARCRM RESTRICTIONS
 
@@ -998,10 +1002,12 @@ function handleHtaccess()
 
 /**
  * (re)write the web.config file to prevent browser access to the log file
+ *
+ * @param bool $iisCheck If upgrade running from CLI IIS_UrlRewriteModule not set. So for CliUpgrader can skip it
  */
-function handleWebConfig()
+function handleWebConfig($iisCheck = true)
 {
-    if ( !isset($_SERVER['IIS_UrlRewriteModule']) ) {
+    if (!isset($_SERVER['IIS_UrlRewriteModule']) && $iisCheck) {
         return;
     }
 
@@ -1028,22 +1034,22 @@ function handleWebConfig()
 
     $redirect_config_array = array(
     array('1'=> $prefix.str_replace('.','\\.',$setup_site_log_file).'\\.*' ,'2'=>'log_file_restricted.html'),
-    array('1'=> $prefix.'install.log' ,'2'=>'log_file_restricted.html'),
-    array('1'=> $prefix.'upgradeWizard.log' ,'2'=>'log_file_restricted.html'),
-    array('1'=> $prefix.'emailman.log' ,'2'=>'log_file_restricted.html'),
-    array('1'=>'not_imported_.*.txt' ,'2'=>'log_file_restricted.html'),
-    array('1'=>'vendor/XTemplate/(.*)/(.*).php' ,'2'=>'index.php'),
-    array('1'=>'data/(.*).php' ,'2'=>'index.php'),
-    array('1'=>'examples/(.*).php' ,'2'=>'index.php'),
-    array('1'=>'include/(.*).php' ,'2'=>'index.php'),
-    array('1'=>'include/(.*)/(.*).php' ,'2'=>'index.php'),
-    array('1'=>'vendor/log4php/(.*).php' ,'2'=>'index.php'),
+    array('1'=> $prefix.'install\.log' ,'2'=>'log_file_restricted.html'),
+    array('1'=> $prefix.'upgradeWizard\.log' ,'2'=>'log_file_restricted.html'),
+    array('1'=> $prefix.'emailman\.log' ,'2'=>'log_file_restricted.html'),
+    array('1'=>'not_imported_.*\.txt' ,'2'=>'log_file_restricted.html'),
+    array('1'=>'vendor/XTemplate/(.*)/(.*)\.php$' ,'2'=>'index.php'),
+    array('1'=>'data/(.*)\.php$' ,'2'=>'index.php'),
+    array('1'=>'examples/(.*)\.php$' ,'2'=>'index.php'),
+    array('1'=>'include/(.*)\.php$' ,'2'=>'index.php'),
+    array('1'=>'include/(.*)/(.*)\.php$' ,'2'=>'index.php'),
+    array('1'=>'vendor/log4php/(.*)\.php$' ,'2'=>'index.php'),
     array('1'=>'vendor/log4php/(.*)/(.*)' ,'2'=>'index.php'),
-    array('1'=>'metadata/(.*)/(.*).php' ,'2'=>'index.php'),
-    array('1'=>'modules/(.*)/(.*).php' ,'2'=>'index.php'),
-    array('1'=>'soap/(.*).php' ,'2'=>'index.php'),
-    array('1'=>'emailmandelivery.php' ,'2'=>'index.php'),
-    array('1'=>'cron.php' ,'2'=>'index.php'),
+    array('1'=>'metadata/(.*)/(.*)\.php$' ,'2'=>'index.php'),
+    array('1'=>'modules/(.*)/(.*)\.php$' ,'2'=>'index.php'),
+    array('1'=>'soap/(.*)\.php$' ,'2'=>'index.php'),
+    array('1'=>'emailmandelivery\.php' ,'2'=>'index.php'),
+    array('1'=>'cron\.php' ,'2'=>'index.php'),
     array('1'=> $sugar_config['upload_dir'].'.*' ,'2'=>'index.php'),
     array('1' => '^portal$', '2' => 'portal/'),
     );
@@ -1058,6 +1064,7 @@ function handleWebConfig()
             'action_params' => array(
                 'appendQueryString' => 'false',
             ),
+            'skip_file' => true
         ),
         array(
             '1' => '^cache/api/metadata/lang_(.._..)_([^_]*)(_ordered)?\.json',
@@ -1068,6 +1075,7 @@ function handleWebConfig()
             'action_params' => array(
                 'appendQueryString' => 'false',
             ),
+            'skip_file' => true
         ),
         array(
             '1' => '^cache/Expressions/functions_cache(_debug)?.js$',
@@ -1091,12 +1099,24 @@ function handleWebConfig()
 
     $xmldoc = new XMLWriter();
     $xmldoc->openURI('web.config');
+    echo "<p>Begin rebuilding web.config</p>\n";
     $xmldoc->setIndent(true);
     $xmldoc->setIndentString(' ');
     $xmldoc->startDocument('1.0','UTF-8');
+    echo "<p>Rebuilding UTF-8 document</p>\n";
     $xmldoc->startElement('configuration');
+    echo "<p>Rebuilding configuration element</p>\n";
         $xmldoc->startElement('system.webServer');
+        echo "<p>Rebuilding system.webServer element</p>\n";
+            $xmldoc->startElement('security');
+                $xmldoc->startElement('requestFiltering');
+                    $xmldoc->startElement('requestLimits');
+                        $xmldoc->writeAttribute('maxAllowedContentLength', 104857600);
+                    $xmldoc->endElement();
+                $xmldoc->endElement();
+            $xmldoc->endElement();
             $xmldoc->startElement('rewrite');
+            echo "<p>Rebuilding rewrite element</p>\n";
                 $xmldoc->startElement('rules');
                 for ($i = 0; $i < count($redirect_config_array); $i++) {
                     $xmldoc->startElement('rule');
@@ -1125,18 +1145,21 @@ function handleWebConfig()
                             $xmldoc->writeAttribute('url', $rewrite_config_array[$i]['1']);
                             $xmldoc->writeAttribute('ignoreCase', 'true');
                         $xmldoc->endElement();
-                        $xmldoc->startElement('conditions');
-                            $xmldoc->startElement('add');
-                                $xmldoc->writeAttribute('input', '{REQUEST_FILENAME}');
-                                $xmldoc->writeAttribute('matchType', 'IsFile');
-                                $xmldoc->writeAttribute('negate', 'true');
+                        if (empty($rewrite_config_array[$i]['skip_file'])) {
+                            $xmldoc->startElement('conditions');
+                               $xmldoc->startElement('add');
+                                   $xmldoc->writeAttribute('input', '{REQUEST_FILENAME}');
+                                   $xmldoc->writeAttribute('matchType', 'IsFile');
+                                   $xmldoc->writeAttribute('negate', 'true');
+                               $xmldoc->endElement();
+                               $xmldoc->startElement('add');
+                                   $xmldoc->writeAttribute('input', '{REQUEST_FILENAME}');
+                                   $xmldoc->writeAttribute('matchType', 'IsDirectory');
+                                   $xmldoc->writeAttribute('negate', 'true');
+                               $xmldoc->endElement();
                             $xmldoc->endElement();
-                            $xmldoc->startElement('add');
-                                $xmldoc->writeAttribute('input', '{REQUEST_FILENAME}');
-                                $xmldoc->writeAttribute('matchType', 'IsDirectory');
-                                $xmldoc->writeAttribute('negate', 'true');
-                            $xmldoc->endElement();
-                        $xmldoc->endElement();
+                        }
+
                         $xmldoc->startElement('action');
                             $xmldoc->writeAttribute('type', 'Rewrite');
                             $xmldoc->writeAttribute('url', $rewrite_config_array[$i]['2']);
@@ -1151,6 +1174,7 @@ function handleWebConfig()
                 $xmldoc->endElement();
             $xmldoc->endElement();
             $xmldoc->startElement('caching');
+            echo "<p>Rebuilding caching element</p>\n";
                 $xmldoc->startElement('profiles');
                     $xmldoc->startElement('remove');
                         $xmldoc->writeAttribute('extension', ".php");
@@ -1158,6 +1182,7 @@ function handleWebConfig()
                 $xmldoc->endElement();
             $xmldoc->endElement();
             $xmldoc->startElement('staticContent');
+            echo "<p>Rebuilding staticContent element</p>\n";
                 $xmldoc->startElement("clientCache");
                     $xmldoc->writeAttribute('cacheControlMode', 'UseMaxAge');
                     $xmldoc->writeAttribute('cacheControlMaxAge', '30.00:00:00');
@@ -1167,6 +1192,7 @@ function handleWebConfig()
     $xmldoc->endElement();
     $xmldoc->endDocument();
     $xmldoc->flush();
+    echo "<p>web.config is rebuilt</p>\n";
 }
 
 /**
@@ -1306,9 +1332,8 @@ function insert_default_settings(){
     $system_id = $system->retrieveNextKey(false, true);
     $db->query( "INSERT INTO config (category, name, value) VALUES ( 'system', 'system_id', '" . $system_id . "')" );
 
-
     $db->query( "INSERT INTO config (category, name, value) VALUES ( 'system', 'skypeout_on', '1')" );
-    $db->query( "INSERT INTO config (category, name, value) VALUES ( 'system', 'tweettocase_on', '0')" );
+    $db->query( "INSERT INTO config (category, name, value) VALUES ( 'system', 'tweettocase_on', '0' )");
 
 }
 
@@ -2315,7 +2340,7 @@ function addDefaultRoles($defaultRoles = array()) {
 
 function create_writable_dir($dirname)
 {
-    if ((is_dir($dirname)) || @sugar_mkdir($dirname,0755)) {
+    if ((is_dir($dirname)) || @sugar_mkdir($dirname,0755, true)) {
         $ok = make_writable($dirname);
     }
     if(empty($ok)) {
@@ -2384,4 +2409,15 @@ function handleMissingSmtpServerSettingsNotifications()
     $notification->severity = 'warning';
     $notification->assigned_user_id = $user->id;
     $notification->save();
+}
+
+/**
+ * Formats license text as HTML
+ *
+ * @param string $text Text
+ * @return string HTML
+ */
+function formatLicense($text)
+{
+    return preg_replace('/https?:\/\/\S*(?<!\.)/', '<a href="${0}" target="_blank">${0}</a>', $text);
 }

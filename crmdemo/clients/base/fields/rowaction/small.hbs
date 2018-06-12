@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<a class="rowaction" href="{{#if fullRoute}}#{{fullRoute}}{{else}}{{#if def.route}}#{{buildRoute context=context model=model action=def.route.action}}{{else}}javascript:void(0);{{/if}}{{/if}}"
+<a class="rowaction{{#if def.button}} btn{{/if}}{{#if def.primary}} btn-primary{{/if}}" href="{{#if fullRoute}}#{{fullRoute}}{{else}}{{#if def.route}}#{{buildRoute context=context model=model action=def.route.action}}{{else}}javascript:void(0);{{/if}}{{/if}}"
     {{#if def.event}}
    data-event="{{def.event}}"
     {{/if}}
@@ -26,4 +26,4 @@
         {{/if}}
     {{/if}}
    name="{{name}}" track="click:{{#if name}}{{name}}{{else}}{{label}}{{/if}}">
-    <i class="{{def.icon}}"></i></a>
+    <i class="fa {{def.icon}}"></i></a>

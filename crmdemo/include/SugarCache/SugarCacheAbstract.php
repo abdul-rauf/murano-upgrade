@@ -85,16 +85,24 @@ abstract class SugarCacheAbstract
     /**
      * PHP's magic __get() method, used here for getting the current value from the cache.
      *
-     * @param  string $key
+     * @param string $key
      * @return mixed
      */
     public function __get($key)
     {
-        if ( SugarCache::$isCacheReset )
-            return null;
+        return $this->get($key);
+    }
 
+    /**
+     * Get a value for a key from the cache. Returns NULL in case if the entry is not found
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function get($key)
+    {
         $this->_cacheRequests++;
-        if ( !$this->useLocalStore || !isset($this->_localStore[$key]) ) {
+        if ( !SugarCache::$isCacheReset && (!$this->useLocalStore || !isset($this->_localStore[$key]))) {
             $this->_localStore[$key] = $this->_getExternal($this->_keyPrefix.$key);
             if ( isset($this->_localStore[$key]) ) {
                 $this->_cacheExternalHits++;
@@ -128,7 +136,7 @@ abstract class SugarCacheAbstract
 
     /**
      *  Set a value for a key in the cache, optionally specify a ttl. A ttl value of zero
-     * will indicate that a value should only be stored per the request.
+     * will indicate that a value should never expire.
      *
      * @param $key
      * @param $value
@@ -150,9 +158,7 @@ abstract class SugarCacheAbstract
         if( $ttl === NULL )
         {
             $this->_setExternal($this->_keyPrefix.$key,$value);
-        }
-        else if( $ttl > 0 )
-        {
+        } else {
             //For BC reasons the setExternal signature will remain the same.
             $previousExpireTimeout = $this->_expireTimeout;
             $this->_expireTimeout = $ttl;

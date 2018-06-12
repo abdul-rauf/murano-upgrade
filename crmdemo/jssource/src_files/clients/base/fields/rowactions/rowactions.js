@@ -15,20 +15,23 @@
  */
 ({
     extendsFrom: 'ActiondropdownField',
-    _loadTemplate: function() {
-        app.view.Field.prototype._loadTemplate.call(this);
 
-        //override its container if it has own template
-        var template = app.template._getField(this.type, this.tplName, this.module, null, true)[1];
+    /**
+     * @inheritdoc
+     */
+    _render: function() {
+        this._super('_render');
 
-        if(template) {
-            this.$el.attr('class', '');
-            this.$el.html(template(this));
-        }
-        if(this.view.action === 'list' && this.action === 'edit') {
-            this.$el.hide();
+        //FIXME: SC-3372 Actions should not be based on `this.view.action`
+
+        // check to see if this is a create subpanel
+        var isCreate = this.context.get('isCreateSubpanel') || false,
+            shouldHide = (this.view.action === 'list' && this.action === 'edit');
+        // if this is a create subpanel, trump other logic as rowactions needs to be shown on edit
+        if (isCreate || !shouldHide) {
+            this.show();
         } else {
-            this.$el.show();
+            this.hide();
         }
     }
 })

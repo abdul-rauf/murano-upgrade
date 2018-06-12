@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id$
 
 require_once("include/SugarCharts/Jit/Jit.php");
 

@@ -8,10 +8,9 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({extendsFrom:'PreviewView',_renderPreview:function(model,collection,fetch,previewId){if(app.drawer&&!app.drawer.isActive(this.$el)){return;}
-if(this.model&&model&&(this.model.get("id")===model.get("id")&&previewId===this.previewId)){app.events.trigger("list:preview:decorate",false);app.events.trigger('preview:close');return;}
+({extendsFrom:'PreviewView',_renderPreview:function(model,collection,fetch,previewId){var self=this,newModel;if(app.drawer&&!app.drawer.isActive(this.$el)){return;}
+if(this.model&&model&&(this.model.get("id")==model.get("id")&&previewId==this.previewId)){app.events.trigger("list:preview:decorate",false);app.events.trigger('preview:close');return;}
 if(app.metadata.getModule(model.module).isBwcEnabled){return;}
-if(model){this.meta=_.extend({},app.metadata.getView(model.module,'record'),app.metadata.getView(model.module,'preview'));this.meta=this._previewifyMetadata(this.meta);}
-if(fetch){var recordUrl=app.api.serverUrl+'/'+model.module+'/'+model.get('id'),callbacks={success:_.bind(function(newModel){newModel=app.data.createBean(model.module,newModel);newModel.module=model.module;this.renderPreview(newModel);},this)}
-app.api.call('read',recordUrl,null,callbacks);}else{this.renderPreview(model,collection);}
+if(model){var viewName='preview',previewMeta=app.metadata.getView(model.module,'preview'),recordMeta=app.metadata.getView(model.module,'record');if(_.isEmpty(previewMeta)||_.isEmpty(previewMeta.panels)){viewName='record';}
+this.meta=this._previewifyMetadata(_.extend({},recordMeta,previewMeta));newModel=app.data.createBean(model.module);newModel.set('id',model.id);if(fetch){newModel.fetch({showAlerts:true,success:function(model){self.renderPreview(model,collection);},view:viewName});}else{newModel.copy(model);this.renderPreview(newModel,collection);}}
 this.previewId=previewId;}})

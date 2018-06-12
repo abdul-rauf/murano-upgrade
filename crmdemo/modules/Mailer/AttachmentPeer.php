@@ -12,8 +12,8 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once "MailerException.php"; // requires MailerException in order to throw exceptions of that type
-require_once "EmbeddedImage.php";   // requires Attachment and EmbeddedImage, which imports Attachment
+require_once "modules/Mailer/MailerException.php"; // requires MailerException in order to throw exceptions of that type
+require_once "modules/Mailer/EmbeddedImage.php";   // requires Attachment and EmbeddedImage, which imports Attachment
 
 /**
  * This class encapsulates properties and behavior of an attachment so that a common interface can be expected
@@ -60,7 +60,7 @@ class AttachmentPeer
         switch ($beanName) {
             case "Note":
             case "DocumentRevision":
-                $filePath = "upload/{$bean->id}";
+                $filePath = rtrim(SugarConfig::getInstance()->get('upload_dir', 'upload'), '/\\') . '/' . (method_exists($bean, 'getUploadId') ? $bean->getUploadId() : $bean->id);
                 $fileName = empty($bean->filename) ? $bean->name : $bean->filename;
                 $mimeType = empty($bean->file_mime_type) ? $mimeType : $bean->file_mime_type;
                 break;
@@ -104,7 +104,7 @@ class AttachmentPeer
 
         switch ($beanName) {
             case "Note":
-                $filePath = "upload/{$bean->id}";
+                $filePath = rtrim(SugarConfig::getInstance()->get('upload_dir', 'upload'), '/\\') . '/' . $bean->getUploadId();
                 $fileName = empty($bean->filename) ? $bean->name : $bean->filename;
                 $mimeType = empty($bean->file_mime_type) ? $mimeType : $bean->file_mime_type;
                 break;

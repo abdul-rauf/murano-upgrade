@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: logic_utils.php 45763 2009-04-01 19:16:18Z majed $
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 function get_hook_array($module_name){

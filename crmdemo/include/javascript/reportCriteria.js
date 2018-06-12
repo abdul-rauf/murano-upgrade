@@ -91,7 +91,7 @@ else if(field_type=='id'||field_type=='name'||field_type=='fullname'){if(qualifi
 else{addFilterInputText(row,filter);}}
 else if(field_type=='relate'){if(qualifier_name=='is'||qualifier_name=='is_not'){addFilterInputRelate(row,field,filter,true);}
 else{addFilterInputText(row,filter);}}
-else if((field_type=='user_name')||(field_type=='assigned_user_name')){if(users_array==""){loadXML();}
+else if(field_type=='username'||field_type=='assigned_user_name'){if(users_array==""){loadXML();}
 if(qualifier_name=='one_of'||qualifier_name=='not_one_of'){addFilterInputSelectMultiple(row,users_array,filter);}
 else{addFilterInputSelectSingle(row,users_array,filter);}}else if(field_type=='enum'||field_type=='multienum'||field_type=='parent_type'||field_type=='timeperiod'||field_type=='currency_id'){if(qualifier_name=='one_of'||qualifier_name=='not_one_of'){addFilterInputSelectMultiple(row,field.options,filter);}
 else{addFilterInputSelectSingle(row,field.options,filter);}}
@@ -165,8 +165,8 @@ text+=">"+option['text']+"</option>";}
 text+="</select>";return text;}
 function _sort_by_field_name(a,b){if(typeof(a['vname'])=='undefined'){a['vname']=a['name'];}
 else if(typeof(b['vname'])=='undefined'){b['vname']=b['name'];}
-if(a['type']=='name'||a['type']=='user_name'){return-1;}
-else if(b['type']=='name'||b['type']=='user_name'){return 1;}
+if(a['type']=='name'||a['type']=='username'){return-1;}
+else if(b['type']=='name'||b['type']=='username'){return 1;}
 else{return a['vname'].localeCompare(b['vname']);}}
 function save_filters(filters,returnObject){var operator=filters.operator;var i=0;while(filters[i]){current_filter=filters[i];if(current_filter.operator){save_filters(current_filter,returnObject);}
 else{validateFilterRow(current_filter,returnObject);}

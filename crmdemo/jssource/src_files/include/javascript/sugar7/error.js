@@ -16,6 +16,9 @@
 
     function backToLogin(bDismiss) {
         if(bDismiss) app.alert.dismissAll();
+        if (app.api.isAuthenticated()) {
+            app.api.resetAuth();
+        }
         app.router.login();
     }
 
@@ -35,11 +38,27 @@
     function alertUser(key,title,msg) {
         app.alert.show(key, {
             level: 'error',
-            messages: app.lang.getAppString(msg),
+            messages: app.lang.get(msg),
             title: app.lang.get(title)
         });
     }
-    
+
+    //Return the user to the login page when the sync fails
+    app.events.on('app:sync:error', function(error) {
+        if (error.status !== 0) {
+            backToLogin(true);
+        }
+        // Sync can fail for many reasons such as server error, bad cache, auth, etc.
+        // Server message to provides details.
+        alertUser('sync_failure' , 'ERR_SYNC_FAILED', (error && error.message) || 'LBL_INVALID_412_RESPONSE');
+    });
+
+    // Displays an error alert if the app fails during its initialization.
+    app.events.on('app:sync:public:error', function(error) {
+        app.alert.dismissAll();
+        alertUser('public_sync_failure', 'Unable to load the application.');
+    });
+
     /**
      * This is caused by attempt to login with invalid creds. 
      */
@@ -66,7 +85,7 @@
     };
 
     /**
-     * Invalid request handler for OAuth 
+     * invalid_request handler for OAuth
      */
     app.error.handleInvalidRequestError = function(error) {
         backToLogin(true);
@@ -80,7 +99,7 @@
         showErrorPage('400');
     };
 
-    /**    
+    /**
      * 0 Timeout error handler. If server doesn't respond within timeout.
      */
     app.error.handleTimeoutError = function(error) {
@@ -100,6 +119,7 @@
      * 403 Forbidden error handler. 
      */
     app.error.handleForbiddenError = function(error) {
+        var message;
         if(error.code != "not_authorized"){
             app.alert.dismissAll();
         }
@@ -107,7 +127,9 @@
         if(error.code == "portal_not_configured"){
             backToLogin(true);
         }
-        app.logger.error(app.lang.get(error.message ? error.message : "LBL_RESOURCE_UNAVAILABLE"));
+        //assume the server message should NOT be valid HTML and escape it.
+        message = Handlebars.Utils.escapeExpression(error.message) || "LBL_RESOURCE_UNAVAILABLE";
+        app.logger.error(app.lang.get(message));
     };
     
     /**
@@ -152,7 +174,8 @@
      * 422 Handle validation error
      */
     app.error.handleValidationError = function(error) {
-        var layout = app.controller.layout;
+        var layout = app.controller.layout,
+            message;
         if( !_.isObject(layout.error) ||
             !_.isFunction(layout.error.handleValidationError) ||
             layout.error.handleValidationError(error) !== false
@@ -161,7 +184,9 @@
             if (error instanceof app.data.beanModel) {
                 return;
             }
-            alertUser("validation_error", "LBL_PRECONDITION_MISSING_TITLE", error.message || "LBL_PRECONDITION_MISSING");
+            //assume the server message should NOT be valid HTML and escape it.
+            message = Handlebars.Utils.escapeExpression(error.message) || "LBL_PRECONDITION_MISSING";
+            alertUser("validation_error", "LBL_PRECONDITION_MISSING_TITLE", message);
             error.handled = true;
         }
     };
@@ -182,11 +207,15 @@
         if (!error || error.code !== 'metadata_out_of_date') {
             return;
         }
-        var responseText = JSON.parse(error.responseText),
-            newHash = responseText && responseText.metadata_hash,
-            userHash = responseText && responseText.user_hash;
+        var responseText = JSON.parse(error.responseText);
+        var newHash = responseText && responseText.metadata_hash;
+        var userHash = responseText && responseText.user_hash;
+        var afterSync = error.request.state && error.request.state.loadingAfterSync;
 
-        if (newHash === app.metadata.getHash() && (!userHash || userHash === app.user.get("_hash"))) {
+        if (
+            ((!newHash && afterSync) || newHash === app.metadata.getHash()) &&
+            ((!userHash && afterSync) || userHash === app.user.get("_hash"))
+        ) {
             app.logger.fatal('A request returned the error code "metadata_out_of_date" for no reason.');
             app.alert.show('invalid_412', {
                 level: 'error',
@@ -219,7 +248,7 @@
      * 500 Internal server error handler. 
      */
     app.error.handleServerError = function(error) {
-        if(error.payload.url) {
+        if(error.payload && error.payload.url) {
             // Redirect admins instead of loading the error view.
             if (app.acl.hasAccess('admin','Administration')) {
                 app.router.navigate(error.payload.url,{trigger: true, replace: true});
@@ -236,4 +265,3 @@
     };
 
 })(SUGAR.App);
-

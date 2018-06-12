@@ -8,6 +8,5 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({extendsFrom:'ButtonField',initialize:function(options){this.options.def.events=_.extend({},this.options.def.events,{'click .rowaction':'rowActionSelect'});this._super("initialize",[options]);},rowActionSelect:function(evt){if(this.isDisabled()){return;}
-if(this.preventClick(evt)!==false){var target=this.view.context;if(this.def.target==='view'){target=this.view;}else if(this.def.target==='layout'){target=this.view.layout;}
-if($(evt.currentTarget).data('event')){target.trigger($(evt.currentTarget).data('event'),this.model,this);}}}})
+({extendsFrom:'ButtonField',initialize:function(options){this.options.def.events=_.extend({},this.options.def.events,{'click .rowaction':'rowActionSelect'});this._super('initialize',[options]);},rowActionSelect:function(evt){var eventName=$(evt.currentTarget).data('event')||this.def.event;if(eventName){this.getTarget().trigger(eventName,this.model,this,evt);}},getTarget:function(){var target;switch(this.def.target){case'view':target=this.view;break;case'layout':target=this.view.layout;break;default:target=this.view.context;}
+return target;}})

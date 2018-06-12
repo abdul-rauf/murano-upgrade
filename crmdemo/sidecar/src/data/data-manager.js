@@ -221,6 +221,29 @@
                 this
             );
 
+            app.events.register(
+                /**
+                 * Fires when the sync operation was aborted.
+                 *
+                 * Four parameters are passed to the callback:
+                 *
+                 *  - operation name (`method`)
+                 *  - reference to the model/collection
+                 *  - options
+                 *  - request {@link SUGAR.Api.HttpRequest}
+                 *
+                 *     (function(app) {
+                 *         app.events.on("data:sync:abort", function(method, model, options, request) {
+                 *             app.logger.debug("Operation aborted " + method + " on " + model);
+                 *         });
+                 *     })(SUGAR.App);
+                 *
+                 * @event
+                 */
+                'data:sync:abort',
+                this
+            );
+
         },
 
         /**
@@ -403,7 +426,7 @@
                  * @member Data.BeanCollection
                  * @property {Number}
                  */
-                offset: 0,
+                offset: 0
             };
 
             var superCollection = _collections[platformNamespace + 'Collection'] ||
@@ -442,17 +465,17 @@
 
             var baseProperties = {
                 /**
-                 * @inheritDoc Data.Bean#_defaults
+                 * @inheritdoc Data.Bean#_defaults
                  */
                 _defaults: defaults,
 
                 /**
-                 * @inheritDoc Data.Bean#module
+                 * @inheritdoc Data.Bean#module
                  */
                 module: name,
 
                 /**
-                 * @inheritDoc Data.Bean#fields
+                 * @inheritdoc Data.Bean#fields
                  */
                 fields: fields
             };
@@ -658,6 +681,8 @@
                 }
             });
 
+            collection.setOption('relate', true);
+
             bean._setRelatedCollection(link, collection);
             return collection;
         },
@@ -821,10 +846,13 @@
          * Gets editable fields.
          * @param {Data.Bean/Data.BeanCollection} model to get fields from.
          * @param {Array} fields(optional) names to be checked.
+         * @param {Object} options
          * @return {Object} Hash of editable fields.
          */
-        getEditableFields: function(model, fields) {
-            var editableFields = {}, module = model.module, metadata, ignoreTypeList = ["parent", "relate"];
+        getEditableFields: function(model, fields, options) {
+            var editableFields = ['id'], //Always have the id included (without the id, the routing will not work correctly)
+                ignoreTypeList = ["parent", "relate"];
+
             fields = fields || [];
 
             // No fields were specified, try the model's attributes instead
@@ -832,34 +860,45 @@
                 fields = _.keys(model.attributes);
             }
 
-            if (module) {
-                var metadata = app.metadata.getModule(module);
-            }
-
-            // Always have the id included (without the id, the routing will now work correctly)
-            editableFields["id"] = model.get("id");
-
             // Editible fields are fields that are either DB fields, such as name, or related fields that do have a real DB field behind them, such as opportunity_role (contact_role), that the user has access to edit.
             // The following code will filter out fields such as assigned_user_name.
             _.each(fields, function(fieldName) {
+                var fieldValue;
+
                 if(model.has(fieldName) && // Model has that field AND
-                    (metadata && metadata.fields[fieldName] && // Field exists in the metadata AND
-                        (!metadata.fields[fieldName].source || // (The field does not have a source specified OR
-                            metadata.fields[fieldName].source !== 'non-db' || // the field's source is something other than 'non-db' OR
-                            !metadata.fields[fieldName].type || // The field does not have a field type specified OR
-                            ignoreTypeList.indexOf(metadata.fields[fieldName].type) === -1)) && // The field's source is 'non-db', but the field's type is not in our ignore list) AND
+                    (model.fields[fieldName] && // Field exists in the model AND
+                        (!model.fields[fieldName].source || // (The field does not have a source specified OR
+                            model.fields[fieldName].source !== 'non-db' || // the field's source is something other than 'non-db' OR
+                            !model.fields[fieldName].type || // The field does not have a field type specified OR
+                            ignoreTypeList.indexOf(model.fields[fieldName].type) === -1)) && // The field's source is 'non-db', but the field's type is not in our ignore list) AND
                     app.acl.hasAccessToModel("edit", model, fieldName)) { // The user has access to edit the field
-                    editableFields[fieldName] = model.get(fieldName);
+
+                    fieldValue = model.get(fieldName);
+                    if (fieldValue && (model.fields[fieldName].type === 'collection')) {
+                        _.each(fieldValue.links, function(link) {
+                            editableFields.push(link.link.name);
+                        });
+                    } else {
+                        editableFields.push(fieldName);
+                    }
                 }
             });
-            return editableFields;
+
+            return model.toJSON({
+                fields: editableFields
+            });
         },
 
         /**
-         * Custom implementation of <code>Backbone.sync</code> pattern. Syncs models with remote server using Sugar.Api lib.
-         * @param {String} method the CRUD method (<code>"create", "read", "update", or "delete"</code>)
-         * @param {Data.Bean/Data.BeanCollection} model the model to be synced (or collection to be read)
-         * @param options(optional) standard Backbone options as well as Sugar specific options
+         * Custom implementation of `Backbone.sync` pattern. Syncs models with
+         * the remote server using {@link SUGAR.Api}.
+         *
+         * @param {string} method The CRUD method: ('create', 'read', 'update',
+         *   or 'delete').
+         * @param {Data.Bean/Data.BeanCollection} model The model/collection to
+         *   be synced/read.
+         * @param {Object} [options] Standard Backbone options as well as
+         *   Sugar-specific options.
          */
         sync: function(method, model, options) {
             app.logger.trace('data-sync-' + (options.relate ? 'relate-' : '') + method + ": " + model);
@@ -898,7 +937,7 @@
                     callbacks
                 );
             }
-            else if (options.relate === true) {
+            else if (model.link && model.link.bean && options.relate === true) {
                 // Related data is an object should contain:
                 // - related bean (including relationship fields) in case of create method
                 // - just relationship fields in case of update method
@@ -952,7 +991,7 @@
                         options.apiOptions
                     );
                 }
-                else {
+                else if (model.module) {
                     request = app.api.records(
                         method,
                         model.module,
@@ -961,6 +1000,8 @@
                         callbacks,
                         options.apiOptions
                     );
+                } else {
+                    app.logger.error("Unable to sync model with no module");
                 }
             }
 
@@ -969,8 +1010,9 @@
 
         parseOptionsForSync: function(method, model, options) {
             options = options || {};
-            options.params = options.params || {};
-            model.filterDef = options.filter || model.filterDef;
+            options.params = _.extend({}, options.params);
+            options.filterDef = options.filter || model.filterDef;
+            options.method = method;
 
             if (options.view && _.isString(options.view) && method == "read") {
                 options.params.view = options.view;
@@ -1006,8 +1048,8 @@
                     options.params.favorites = "1";
                 }
 
-                if (!_.isEmpty(model.filterDef)) {
-                    var filterDef = app.utils.deepCopy(model.filterDef);
+                if (!_.isEmpty(options.filterDef)) {
+                    var filterDef = app.utils.deepCopy(options.filterDef);
 
                     // We want to assign to params.filter the filter definition
                     // itself (the value assigned to the "filter" key).
@@ -1047,7 +1089,8 @@
             return {
                 success: this.getSyncSuccessCallback(method, model, options),
                 error: this.getSyncErrorCallback(method, model, options),
-                complete: this.getSyncCompleteCallback(method, model, options)
+                complete: this.getSyncCompleteCallback(method, model, options),
+                abort: this.getSyncAbortCallback(method, model, options)
             };
         },
 
@@ -1065,34 +1108,17 @@
                         model.page = model.getPageNumber(options);
                     }
 
+                    model.total = _.isNumber(data.total) ? data.total : null;
 
+                    // We need `xmod_aggs` property which are the facets
+                    // for search.
+                    if (model instanceof app.MixedBeanCollection) {
+                        model.xmod_aggs = data.xmod_aggs || null;
+                        model.tags = data.tags || null;
+                    }
                     data = data.records || [];
 
-                    // Update collection filter/search properties on success
-                    /**
-                     * Flag indicating if a collection contains items assigned to the current user (read-only).
-                     * @member Data.BeanCollection
-                     * @property {Boolean}
-                     */
-                    model.myItems = options.myItems;
-                    /**
-                     * Flag indicating if a collection contains current user's favorite items (read-only).
-                     * @member Data.BeanCollection
-                     * @property {Boolean}
-                     */
-                    model.favorites = options.favorites;
-                    /**
-                     * Search query (read-only).
-                     * @member Data.BeanCollection
-                     * @property {String}
-                     */
-                    model.query = options.query;
-                    /**
-                     * List of modules searched (read-only).
-                     * @member Data.MixedBeanCollection
-                     * @property {String}
-                     */
-                    model.modelList = options.modelList;
+                    self._updateCollectionProperties(model, options);
                 }
 
                 if (options.relate === true) {
@@ -1102,7 +1128,7 @@
                     if (method != "read") {
                         // The response for create/update/delete relationship contains updated beans
                         if (model.link.bean) {
-                            var syncedAttributes = model.link.bean.getSyncedAttributes(),
+                            var syncedAttributes = model.link.bean.getSynced(),
                                 updatedAttributes = _.reduce(data.record, function(memo, val, key) {
                                     if (!_.isEqual(syncedAttributes[key], val)) {
                                         memo[key] = val;
@@ -1134,12 +1160,34 @@
 
         },
 
+        /**
+         * Returns the callback to the sync `error` event.
+         *
+         * Triggers the global `data:sync:complete` event (registered on
+         * {@link Core.Events app.events}), as well as on the `model`.
+         *
+         * Executes the abort callback if we are aborting from a previous
+         * collection fetch request.
+         *
+         * @param {string} method The CRUD method: ('create', 'read', 'update',
+         *   or 'delete').
+         * @param {Data.Bean/Data.BeanCollection} model The model/collection to
+         *   be synced/read.
+         * @param {Object} [options] Standard Backbone options as well as
+         *   Sugar-specific options.
+         * @param {Object} [options.error] Custom `error` callback
+         *   function to be executed.
+         * @return {Function} The wrapped `error` callback function.
+         */
         getSyncErrorCallback: function(method, model, options) {
-            var self = this;
-            return function(error) {
+            return _.bind(function(error) {
+                if (error.request.aborted) {
+                    var abortCallback = this.getSyncAbortCallback(method, model, options);
+                    return abortCallback(error.request);
+                }
+
                 app.error.handleHttpError(error, model, options);
-                // trigger global data:sync:error event
-                self.trigger("data:sync:error", method, model, options, error);
+                this.trigger('data:sync:error', method, model, options, error);
                 /**
                  * Fires on model when the sync operation ends unsuccessfully.
                  *
@@ -1147,29 +1195,44 @@
                  *
                  *  - operation name (`method`)
                  *  - options
-                 *  - error (SUGAR.Api.HttpError)
+                 *  - error {@link SUGAR.Api.HttpError}
                  *
-                 * <pre><code>
-                 * (function(app) {
-                 *     model.on("data:sync:error", function(method, options, error) {
-                 *         app.logger.debug("Operation failed:" + method + " on " + model);
-                 *     });
-                 * })(SUGAR.App);
-                 * </code></pre>
+                 *     (function(app) {
+                 *         model.on('data:sync:error', function(method, options, error) {
+                 *             app.logger.debug('Operation failed:' + method + ' on ' + model);
+                 *         });
+                 *     })(SUGAR.App);
+                 *
                  * @event
                  */
-                model.trigger("data:sync:error", method, options, error);
-                if (options.error) options.error(error);
-            };
+                model.trigger('data:sync:error', method, options, error);
+
+                if (_.isFunction(options.error)) {
+                    options.error(error);
+                }
+            }, this);
         },
 
+        /**
+         * Returns the callback to the `complete` event, which fires after
+         * either `success`, or `error`.
+         *
+         * Triggers the global `data:sync:complete` event (registered on
+         * {@link Core.Events app.events}), as well as on the `model`.
+         *
+         * @param {string} method The CRUD method: ('create', 'read', 'update',
+         *   or 'delete').
+         * @param {Data.Bean/Data.BeanCollection} model The model/collection to
+         *   be synced/read.
+         * @param {Object} [options] Standard Backbone options as well as
+         *   Sugar-specific options.
+         * @param {Object} [options.complete] Custom `complete` callback
+         *   function to be executed.
+         * @return {Function} The wrapped `complete` callback function.
+         */
         getSyncCompleteCallback: function(method, model, options) {
-            var self = this;
-
-            // 'complete' fires after success and error
-            return function(request) {
-                // trigger global data:sync:complete event
-                self.trigger("data:sync:complete", method, model, options, request);
+            return _.bind(function(request) {
+                this.trigger('data:sync:complete', method, model, options, request);
                 /**
                  * Fires on model when the sync operation ends.
                  *
@@ -1177,21 +1240,113 @@
                  *
                  *  - operation name (`method`)
                  *  - options
-                 *  - request (SUGAR.Api.HttpRequest)
+                 *  - request {@link SUGAR.Api.HttpRequest}
                  *
-                 * <pre><code>
-                 * (function(app) {
-                 *     model.on("data:sync:complete", function(method, options, request) {
-                 *         app.logger.debug("Finished operation " + method + " on " + model);
-                 *     });
-                 * })(SUGAR.App);
-                 * </code></pre>
+                 *     (function(app) {
+                 *         model.on('data:sync:complete', function(method, options, request) {
+                 *             app.logger.debug('Finished operation ' + method + ' on ' + model);
+                 *         });
+                 *     })(SUGAR.App);
+                 *
                  * @event
                  */
-                model.trigger("data:sync:complete", method, options, request);
-                if (options.complete) options.complete(request);
-            };
+                model.trigger('data:sync:complete', method, options, request);
 
+                if (_.isFunction(options.complete)) {
+                    options.complete(request);
+                }
+            }, this);
+        },
+
+        /**
+         * Returns the callback to the `abort` event, which fires after
+         * either `success`, or `error`.
+         *
+         * Triggers the global `data:sync:abort` event (registered on
+         * {@link Core.Events app.events}), as well as on the `model`.
+         *
+         * @param {string} method The CRUD method: ('create', 'read', 'update',
+         *   or 'delete').
+         * @param {Data.Bean/Data.BeanCollection} model The model/collection to
+         *   be synced/read.
+         * @param {Object} [options] Standard Backbone options as well as
+         *   Sugar-specific options.
+         * @param {Object} [options.abort] Custom `abort` callback
+         *   function to be executed.
+         * @return {Function} The wrapped `abort` callback function.
+         */
+        getSyncAbortCallback: function(method, model, options) {
+            return _.bind(function(request) {
+                this.trigger('data:sync:abort', method, model, options, request);
+                /**
+                 * Fires on model when the sync operation ends.
+                 *
+                 * Three parameters are passed to the callback:
+                 *
+                 *  - operation name (`method`)
+                 *  - options
+                 *  - request {@link SUGAR.Api.HttpRequest}
+                 *
+                 *     (function(app) {
+                 *         model.on('data:sync:abort', function(method, options, request) {
+                 *             app.logger.debug("Operation aborted " + method + " on " + model);
+                 *         });
+                 *     })(SUGAR.App);
+                 *
+                 * @event
+                 */
+                model.trigger('data:sync:abort', method, options, request);
+            }, this);
+        },
+
+        /**
+         * Updates various properties on the bean collection passed.
+         *
+         * @private
+         * @param {Data.BeanCollection} model The collection.
+         * @param {Object} [options] Standard Backbone options as well as
+         *   Sugar-specific options.
+         */
+        _updateCollectionProperties: function (model, options) {
+            options = options || {};
+
+            /**
+             * Flag indicating if a collection contains items assigned to the
+             * current user (read-only).
+             *
+             * @member Data.BeanCollection
+             * @property {boolean}
+             */
+            model.myItems = options.myItems;
+            /**
+             * Flag indicating if a collection contains current user's favorite
+             * items (read-only).
+             *
+             * @member Data.BeanCollection
+             * @property {boolean}
+             */
+            model.favorites = options.favorites;
+            /**
+             * Search query (read-only).
+             *
+             * @member Data.BeanCollection
+             * @property {string}
+             */
+            model.query = options.query;
+            /**
+             * List of modules searched (read-only).
+             *
+             * @member Data.MixedBeanCollection
+             * @property {string}
+             */
+            model.modelList = options.modelList;
+            /**
+             * Filter definition to filter the collection by.
+             *
+             * @member Data.BeanCollection
+             * @property {Array}
+             */
+            model.filterDef = options.filterDef;
         }
 
     }, Backbone.Events);

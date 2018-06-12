@@ -1,6 +1,6 @@
 <?php
- // created: 2014-05-27 11:55:42
-$dictionary['Lead']['fields']['req_aum_c']['enforced']='false';
-$dictionary['Lead']['fields']['req_aum_c']['dependency']='';
+ // created: 2018-06-12 08:16:06
+$dictionary['Lead']['fields']['req_aum_c']['enforced'] = 'false';
+$dictionary['Lead']['fields']['req_aum_c']['dependency'] = '';
+$dictionary['Lead']['fields']['req_aum_c']['full_text_search']['boost'] = 1;
 
- ?>

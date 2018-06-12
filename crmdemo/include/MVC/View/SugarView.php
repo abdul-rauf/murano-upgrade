@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,6 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
 
 /**
  * Base Sugar view
@@ -129,6 +130,10 @@ class SugarView
             $this->displayHeader();
         } else {
             $this->renderJavascript();
+        }
+
+        if (!empty($_REQUEST['updated_records'])) {
+            $this->errors[] = $_REQUEST['updated_records'];
         }
 
         $this->_buildModuleList();
@@ -563,10 +568,12 @@ class SugarView
             $GLOBALS['updateSilent'] = true;
             include("include/Expressions/updatecache.php");
         }
-        if(inDeveloperMode())
-            echo getVersionedScript('cache/Expressions/functions_cache_debug.js');
-        else
-            echo getVersionedScript('cache/Expressions/functions_cache.js');
+
+        $path = shouldResourcesBeMinified()
+            ? 'cache/Expressions/functions_cache.js'
+            : 'cache/Expressions/functions_cache_debug.js';
+        echo getVersionedScript($path);
+
         echo <<<EOQ
         <script>
             if ( typeof(SUGAR) == 'undefined' ) {SUGAR = {}};
@@ -659,6 +666,9 @@ EOHTML;
                 echo "<script>\n".implode("\n", $config_js)."</script>\n";
             }
 
+            // CSRF form token
+            echo $this->getCsrfFormTokenJscript();
+
             if ( isset($sugar_config['email_sugarclient_listviewmaxselect']) ) {
                 echo "<script>SUGAR.config.email_sugarclient_listviewmaxselect = {$GLOBALS['sugar_config']['email_sugarclient_listviewmaxselect']};</script>";
             }
@@ -682,10 +692,11 @@ EOHTML;
                 $GLOBALS['updateSilent'] = true;
                 include("include/Expressions/updatecache.php");
             }
-            if(inDeveloperMode())
-                echo getVersionedScript('cache/Expressions/functions_cache_debug.js');
-            else
-                echo getVersionedScript('cache/Expressions/functions_cache.js');
+
+            $path = shouldResourcesBeMinified()
+                ? 'cache/Expressions/functions_cache.js'
+                : 'cache/Expressions/functions_cache_debug.js';
+            echo getVersionedScript($path);
 
             require_once("include/Expressions/DependencyManager.php");
             echo "\n" . '<script type="text/javascript">' . DependencyManager::getJSUserVariables($GLOBALS['current_user']) . "</script>\n";
@@ -858,7 +869,7 @@ EOHTML;
             $label = (isset($GLOBALS['app_list_strings']['moduleList'][$this->module]) ?
                         $GLOBALS['app_list_strings']['moduleList'][$this->module] : $this->module). ' '.$app_strings['LNK_HELP'];
             $ss->assign('HELP_LINK',SugarThemeRegistry::current()->getLink($url, $label, "id='help_link_two'",
-                '', '',null,null,'','',"<i class='icon-question-sign icon'></i>"));
+                '', '',null,null,'','',"<i class='icon-question-circle icon'></i>"));
         }
         // end
 
@@ -931,31 +942,23 @@ EOHTML;
 
         if(!$trackerManager->isPaused())
         {
-	        $timeStamp = TimeDate::getInstance()->nowDb();
-	        //Track to tracker_perf
-	        if($monitor2 = $trackerManager->getMonitor('tracker_perf')){
-		        $monitor2->setValue('server_response_time', $this->responseTime);
-		        $dbManager = &DBManagerFactory::getInstance();
-		        $monitor2->db_round_trips = $dbManager->getQueryCount();
-		        $monitor2->setValue('date_modified', $timeStamp);
-		        $monitor2->setValue('db_round_trips', $dbManager->getQueryCount());
-		        $monitor2->setValue('files_opened', $this->fileResources);
-		        if (function_exists('memory_get_usage')) {
-		            $monitor2->setValue('memory_usage', memory_get_usage());
-		        }
-			}
+            // Track performance
+            if ($performanceMonitor = $trackerManager->getMonitor('tracker_perf')) {
+                $performanceMonitor->setValue('server_response_time', $this->responseTime);
+                $dbManager = DBManagerFactory::getInstance();
+                $performanceMonitor->db_round_trips = $dbManager->getQueryCount();
+                $performanceMonitor->setValue('date_modified', TimeDate::getInstance()->nowDb());
+                $performanceMonitor->setValue('db_round_trips', $dbManager->getQueryCount());
+                $performanceMonitor->setValue('files_opened', $this->fileResources);
+                if (function_exists('memory_get_usage')) {
+                    $performanceMonitor->setValue('memory_usage', memory_get_usage());
+                }
 
-			// Track to tracker_sessions
-		    if($monitor3 = $trackerManager->getMonitor('tracker_sessions')){
-		        $monitor3->setValue('date_end', $timeStamp);
-		        if ( !isset($monitor3->date_start) ) $monitor3->setValue('date_start', $timeStamp);
-		        $seconds = strtotime($monitor3->date_end) -strtotime($monitor3->date_start);
-		        $monitor3->setValue('seconds', $seconds);
-		        $monitor3->setValue('user_id', $GLOBALS['current_user']->id);
-			}
+                $trackerManager->saveMonitor($performanceMonitor);
+            }
+
+            SugarApplication::trackSession();
         }
-	    $trackerManager->save();
-
     }
 
     /**
@@ -1156,7 +1159,7 @@ EOHTML;
     * Return the "breadcrumbs" to display at the top of the page
     *
     * @param  bool $show_help optional, true if we show the help links
-    * @return HTML string containing breadcrumb title
+    * @return string HTML string containing breadcrumb title
     */
     public function getModuleTitle(
         $show_help = true
@@ -1217,11 +1220,12 @@ EOHTML;
      *
      * @return string File location of the metadata file.
      */
-    public function getMetaDataFile()
+    public function getMetaDataFile($type = null)
     {
-        $metadataFile = null;
-        $foundViewDefs = false;
-        $viewDef = strtolower($this->type) . 'viewdefs';
+        if ($type === null) {
+            $type = $this->type;
+        }
+        $viewDef = strtolower($type) . 'viewdefs';
         return SugarAutoLoader::loadWithMetafiles($this->module, $viewDef);
     }
 
@@ -1248,10 +1252,15 @@ EOHTML;
                     $params[] = $GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'];
                 break;
             case 'DetailView':
-                $beanName = $this->bean->get_summary_text();
-                if($this->bean->isFavoritesEnabled())
-                    $beanName .= '&nbsp;' . SugarFavorites::generateStar(SugarFavorites::isUserFavorite($this->module, $this->bean->id), $this->module, $this->bean->id);
-                $params[] = $beanName;
+                // We cannot assume we will always have a bean, especially in
+                // cases like hitting Administration and not having permission
+                if ($this->bean) {
+                    $beanName = $this->bean->get_summary_text();
+                    if($this->bean->isFavoritesEnabled()) {
+                        $beanName .= '&nbsp;' . SugarFavorites::generateStar(SugarFavorites::isUserFavorite($this->module, $this->bean->id), $this->module, $this->bean->id);
+                    }
+                    $params[] = $beanName;
+                }
                 break;
             }
         }
@@ -1527,5 +1536,15 @@ EOHTML;
         return false;
     }
 
-
+    /**
+     * Return CSRF form token jscript
+     * @return string
+     */
+    protected function getCsrfFormTokenJscript()
+    {
+        return sprintf(
+            '<script>SUGAR.csrf = {}; SUGAR.csrf.form_token = "%s";</script>',
+            CsrfAuthenticator::getInstance()->getFormToken()
+        );
+    }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,25 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-$mod_strings = array (
-  'LBL_TEAM' => 'Echipe',
-  'LBL_TEAMS' => 'Echipe',
-  'LBL_TEAM_ID' => 'Echipa ID',
+$mod_strings = array(
+'LBL_TEAM'=>'Echipe',
+'LBL_TEAMS'=>'Echipe',
+'LBL_TEAM_ID'=>'Id Echipă',
 );
-

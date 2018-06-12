@@ -42,7 +42,6 @@ $job_strings = array (
 	7 => 'processQueue',
     9 => 'updateTrackerSessions',
     12 => 'sendEmailReminders',
-    13 => 'performFullFTSIndex',
     15 => 'cleanJobQueue',
     //Add class to build additional TimePeriods as necessary
     16 => 'class::SugarJobCreateNextTimePeriod',
@@ -80,7 +79,7 @@ function pollMonitoredInboxes() {
 
 	while($a = $ie->db->fetchByAssoc($r)) {
 		$GLOBALS['log']->debug('In while loop of Inbound Emails');
-		$ieX = BeanFactory::getBean('InboundEmail', $a['id']);
+		$ieX = BeanFactory::getBean('InboundEmail', $a['id'], array('disable_row_level_security' => true));
         $GLOBALS['current_user']->team_id = $ieX->team_id;
         $GLOBALS['current_user']->team_set_id = $ieX->team_set_id;
 		$mailboxes = $ieX->mailboxarray;
@@ -134,7 +133,6 @@ function pollMonitoredInboxes() {
 							} // if
 							$users[] = $userObject->id;
 						} // foreach
-
 						$distributionMethod = $ieX->get_stored_options("distrib_method", "");
 						if ($distributionMethod != 'roundRobin') {
 							$counts = $emailUI->getAssignedEmailsCountForUsers($users);
@@ -405,7 +403,7 @@ function pollMonitoredInboxesForBouncedCampaignEmails() {
 	$r = $ie->db->query('SELECT id FROM inbound_email WHERE deleted=0 AND status=\'Active\' AND mailbox_type=\'bounce\'');
 
 	while($a = $ie->db->fetchByAssoc($r)) {
-		$ieX = BeanFactory::getBean('InboundEmail', $a['id']);
+		$ieX = BeanFactory::getBean('InboundEmail', $a['id'], array('disable_row_level_security' => true));
 		$ieX->connectMailserver();
         $GLOBALS['log']->info("Bounced campaign scheduler connected to mail server id: {$a['id']} ");
 		$newMsgs = array();
@@ -478,15 +476,6 @@ function sendEmailReminders(){
 	return $reminder->process();
 }
 
-function performFullFTSIndex()
-{
-    require_once('include/SugarSearchEngine/SugarSearchEngineFullIndexer.php');
-    $indexer = new SugarSearchEngineFullIndexer();
-    $indexer->initiateFTSIndexer();
-    $GLOBALS['log']->info("FTS Indexer initiated.");
-    return true;
-}
-
 /**
  * Job 20
  */
@@ -533,6 +522,11 @@ if (SugarAutoLoader::existing('custom/modules/Schedulers/_AddJobsHere.php')) {
 }
 
 $extfile = SugarAutoLoader::loadExtension('schedulers');
+if($extfile) {
+    require $extfile;
+}
+
+$extfile = SugarAutoLoader::loadExtension('app_schedulers');
 if($extfile) {
     require $extfile;
 }

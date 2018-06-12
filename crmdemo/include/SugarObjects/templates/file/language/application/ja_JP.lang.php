@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,32 +10,37 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
-
-$object_name = strtolower($object_name);
+/*********************************************************************************
+ * $Id$
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
+ 
 $app_list_strings = array (
-  $object_name.'_category_dom' => 
-  array (
+strtolower($object_name).'_category_dom' =>
+    array (
     '' => '',
-    'Knowledege Base' => 'ナレッジベース',
     'Marketing' => 'マーケティング',
+    'Knowledege Base' => 'ナレッジベース',
     'Sales' => '営業',
   ),
-  $object_name.'_status_dom' => 
-  array (
-    'Active' => 'アクティブ',
-    'Draft' => 'ドラフト',
-    'Expired' => '期限切れ',
-    'FAQ' => 'FAQ',
-    'Pending' => 'ペンディング',
-    'Under Review' => 'レビュー中',
-  ),
-  $object_name.'_subcategory_dom' => 
-  array (
+
+    strtolower($object_name).'_subcategory_dom' =>
+    array (
     '' => '',
-    'FAQ' => 'FAQ',
     'Marketing Collateral' => 'マーケティング資料',
     'Product Brochures' => '製品パンフレット',
+    'FAQ' => 'FAQ',
   ),
-);
 
+    strtolower($object_name).'_status_dom' =>
+    array (
+    'Active' => 'アクティブ',
+    'Draft' => 'ドラフト',
+    'FAQ' => 'FAQ',
+    'Expired' => '期限切れ',
+    'Under Review' => 'レビュー中',
+    'Pending' => '保留',
+  ),
+  );

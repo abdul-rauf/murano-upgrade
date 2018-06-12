@@ -416,7 +416,7 @@ $jsVars  = '';
 $jsVars .= "var showRaw = '{$mod_strings['LBL_BUTTON_RAW_LABEL']}';";
 $jsVars .= "var hideRaw = '{$mod_strings['LBL_BUTTON_RAW_LABEL_HIDE']}';";
 $xtpl->assign("JS_VARS", $jsVars);
-
+$xtpl->assign("JS_HREF", "$('#html_div [href^=\"http\"]').attr('target', '_blank');");
 
 // ADMIN EDIT
 if(is_admin($GLOBALS['current_user']) && $_REQUEST['module'] != 'DynamicLayout' && !empty($_SESSION['editinplace'])){
@@ -466,7 +466,7 @@ for($i=0; $i<count($notes_list); $i++) {
 }
 
 $xtpl->assign('DESCRIPTION', nl2br($focus->description));
-$xtpl->assign('DESCRIPTION_HTML', from_html($focus->description_html));
+$xtpl->assign('DESCRIPTION_HTML', SugarCleaner::cleanHtml(from_html($focus->description_html, false), false));
 $xtpl->assign("ATTACHMENTS", $attachments);
 $xtpl->parse("main");
 $xtpl->out("main");

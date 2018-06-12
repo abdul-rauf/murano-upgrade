@@ -20,7 +20,7 @@
     metricsCollection: null,
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     initialize: function(options) {
         this._super('initialize', [options]);
@@ -32,20 +32,24 @@
                 .y(function(d) {
                     return d.value;
                 })
-                .margin({top: 5, right: 20, bottom: 20, left: 20})
+                .margin({top: 0, right: 0, bottom: 5, left: 0})
                 .donut(true)
                 .donutLabelsOutside(true)
                 .donutRatio(0.447)
+                .rotateDegrees(0)
+                .arcDegrees(360)
+                .maxRadius(110)
                 .hole(this.total)
                 .showTitle(false)
                 .tooltips(true)
                 .showLegend(false)
-                .colorData('class')
+                .colorData('data')
+                .direction(app.lang.direction)
                 .tooltipContent(function(key, x, y, e, graph) {
                     return '<p><b>' + key + ' ' + parseInt(y, 10) + '</b></p>';
                 })
                 .strings({
-                    noData: app.lang.getAppString('LBL_CHART_NO_DATA')
+                    noData: app.lang.get('LBL_CHART_NO_DATA')
                 });
     },
 
@@ -74,17 +78,16 @@
      * and set general chart properties
      */
     evaluateResult: function(data) {
-        var total = 0;
-
+        var total = 0,
+            userConversionRate = 1 / app.metadata.getCurrency(app.user.getPreference('currency_id')).conversion_rate,
+            userCurrencyPreference = app.user.getPreference('currency_id');
         _.each(data, function(value, key) {
-            // parse currencies and attach the correct delimiters/symbols etc
-            data[key].formattedAmount = app.currency.formatAmountLocale(value.amount_usdollar, null, 0);
-
+            // parse currencies, format to user preference and attach the correct delimiters/symbols etc
+            data[key].formattedAmount = app.currency.formatAmountLocale(app.currency.convertWithRate(value.amount_usdollar, userConversionRate), userCurrencyPreference, 0);
             data[key].icon = key === 'won' ? 'caret-up' : (key === 'lost' ? 'caret-down' : 'minus');
             data[key].cssClass = key === 'won' ? 'won' : (key === 'lost' ? 'lost' : 'active');
             data[key].dealLabel = key;
             data[key].stageLabel = app.lang.getAppListStrings('opportunity_metrics_dom')[key];
-
             total += value.count;
         });
 
@@ -100,7 +103,7 @@
                 };
             }),
             properties: {
-                title: app.lang.getAppString('LBL_DASHLET_OPPORTUNITY_NAME'),
+                title: app.lang.get('LBL_DASHLET_OPPORTUNITY_NAME'),
                 value: 3,
                 label: total
             }
@@ -108,7 +111,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     loadData: function(options) {
         var self = this,

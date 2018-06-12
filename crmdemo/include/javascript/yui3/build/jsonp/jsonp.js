@@ -1,8 +1,17 @@
 /*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("jsonp",function(e,t){function r(){this._init.apply(this,arguments)}var n=e.Lang.isFunction;r.prototype={_init:function(t,r){this.url=t,this._requests={},this._timeouts={},r=n(r)?{on:{success:r}}:r||{};var i=r.on||{};i.success||(i.success=this._defaultCallback(t,r)),this._config=e.merge({context:this,args:[],format:this._format,allowCache:!1},r,{on:i})},_defaultCallback:function(){},send:function(){function u(e,r){return n(e)?function(n){var o=!0,u="_requests";r?(++t._timeouts[s],--t._requests[s]):(t._requests[s]||(o=!1,u="_timeouts"),--t[u][s]),!t._requests[s]&&!t._timeouts[s]&&delete YUI.Env.JSONP[s],o&&e.apply(i.context,[n].concat(i.args))}:null}var t=this,r=e.Array(arguments,0,!0),i=t._config,s=t._proxy||e.guid(),o;return i.allowCache&&(t._proxy=s),t._requests[s]===undefined&&(t._requests[s]=0),t._timeouts[s]===undefined&&(t._timeouts[s]=0),t._requests[s]++,r.unshift(t.url,"YUI.Env.JSONP."+s),o=i.format.apply(t,r),i.on.success?(YUI.Env.JSONP[s]=u(i.on.success),e.Get.js(o,{onFailure:u(i.on.failure),onTimeout:u(i.on.timeout,!0),timeout:i.timeout,charset:i.charset,attributes:i.attributes,async:i.async}).execute(),t):t},_format:function(e,t){return e.replace(/\{callback\}/,t)}},e.JSONPRequest=r,e.jsonp=function(t,n){var r=new e.JSONPRequest(t,n);return r.send.apply(r,e.Array(arguments,2,!0))},YUI.Env.JSONP||(YUI.Env.JSONP={})},"3.15.0",{requires:["get","oop"]});
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('jsonp',function(Y,NAME){var isFunction=Y.Lang.isFunction;function JSONPRequest(){this._init.apply(this,arguments);}
+JSONPRequest.prototype={_init:function(url,callback){this.url=url;this._requests={};this._timeouts={};callback=(isFunction(callback))?{on:{success:callback}}:callback||{};var subs=callback.on||{};if(!subs.success){subs.success=this._defaultCallback(url,callback);}
+this._config=Y.merge({context:this,args:[],format:this._format,allowCache:false},callback,{on:subs});},_defaultCallback:function(){},send:function(){var self=this,args=Y.Array(arguments,0,true),config=self._config,proxy=self._proxy||Y.guid(),url;if(config.allowCache){self._proxy=proxy;}
+if(self._requests[proxy]===undefined){self._requests[proxy]=0;}
+if(self._timeouts[proxy]===undefined){self._timeouts[proxy]=0;}
+self._requests[proxy]++;args.unshift(self.url,'YUI.Env.JSONP.'+proxy);url=config.format.apply(self,args);if(!config.on.success){return self;}
+function wrap(fn,isTimeout){return(isFunction(fn))?function(data){var execute=true,counter='_requests';if(isTimeout){++self._timeouts[proxy];--self._requests[proxy];}else{if(!self._requests[proxy]){execute=false;counter='_timeouts';}
+--self[counter][proxy];}
+if(!self._requests[proxy]&&!self._timeouts[proxy]){delete YUI.Env.JSONP[proxy];}
+if(execute){fn.apply(config.context,[data].concat(config.args));}}:null;}
+YUI.Env.JSONP[proxy]=wrap(config.on.success);Y.Get.js(url,{onFailure:wrap(config.on.failure),onTimeout:wrap(config.on.timeout,true),timeout:config.timeout,charset:config.charset,attributes:config.attributes,async:config.async}).execute();return self;},_format:function(url,proxy){return url.replace(/\{callback\}/,proxy);}};Y.JSONPRequest=JSONPRequest;Y.jsonp=function(url,c){var req=new Y.JSONPRequest(url,c);return req.send.apply(req,Y.Array(arguments,2,true));};if(!YUI.Env.JSONP){YUI.Env.JSONP={};}},'3.15.0',{"requires":["get","oop"]});

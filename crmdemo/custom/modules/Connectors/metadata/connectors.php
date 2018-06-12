@@ -1,10 +1,11 @@
 <?php
-// created: 2017-12-20 13:54:12
+// created: 2018-06-12 08:26:58
 $connectors = array (
   'ext_rest_twitter' => 
   array (
     'id' => 'ext_rest_twitter',
-    'name' => 'Twitter&#169;',
+    'configured' => false,
+    'name' => 'Twitter',
     'enabled' => true,
     'directory' => 'modules/Connectors/connectors/sources/ext/rest/twitter',
     'eapm' => 
@@ -22,7 +23,8 @@ $connectors = array (
   'ext_eapm_google' => 
   array (
     'id' => 'ext_eapm_google',
-    'name' => 'Google&#169;',
+    'configured' => false,
+    'name' => 'Google',
     'enabled' => true,
     'directory' => 'modules/Connectors/connectors/sources/ext/eapm/google',
     'eapm' => 
@@ -37,7 +39,8 @@ $connectors = array (
   'ext_eapm_gotomeeting' => 
   array (
     'id' => 'ext_eapm_gotomeeting',
-    'name' => 'GoToMeeting&#169;',
+    'configured' => false,
+    'name' => 'GoToMeeting',
     'enabled' => true,
     'directory' => 'modules/Connectors/connectors/sources/ext/eapm/gotomeeting',
     'eapm' => 
@@ -52,7 +55,8 @@ $connectors = array (
   'ext_eapm_ibmsmartcloud' => 
   array (
     'id' => 'ext_eapm_ibmsmartcloud',
-    'name' => 'IBM SmartCloud&#169;',
+    'configured' => false,
+    'name' => 'IBM SmartCloud',
     'enabled' => true,
     'directory' => 'modules/Connectors/connectors/sources/ext/eapm/ibmsmartcloud',
     'eapm' => 
@@ -67,7 +71,8 @@ $connectors = array (
   'ext_eapm_webex' => 
   array (
     'id' => 'ext_eapm_webex',
-    'name' => 'WebEx&#169;',
+    'configured' => true,
+    'name' => 'WebEx',
     'enabled' => true,
     'directory' => 'modules/Connectors/connectors/sources/ext/eapm/webex',
     'eapm' => 
@@ -82,7 +87,8 @@ $connectors = array (
   'ext_eapm_lotuslive' => 
   array (
     'id' => 'ext_eapm_lotuslive',
-    'name' => 'LotusLive&#169;',
+    'configured' => false,
+    'name' => 'LotusLive',
     'enabled' => true,
     'directory' => 'modules/Connectors/connectors/sources/ext/eapm/lotuslive',
     'eapm' => 
@@ -97,7 +103,8 @@ $connectors = array (
   'ext_rest_dnb' => 
   array (
     'id' => 'ext_rest_dnb',
-    'name' => 'D&B&#169;',
+    'configured' => false,
+    'name' => 'D&B',
     'enabled' => true,
     'directory' => 'modules/Connectors/connectors/sources/ext/rest/dnb',
     'eapm' => 

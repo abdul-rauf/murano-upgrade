@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: UpgradeHistory.php 45763 2009-04-01 19:16:18Z majed $
 
 
 // The history of upgrades on the system
@@ -32,6 +32,7 @@ class UpgradeHistory extends SugarBean
     var $description;
     var $id_name;
     var $manifest;
+    public $patch;
     var $enabled;
     var $tracker_visibility = false;
     var $table_name = "upgrade_history";

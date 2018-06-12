@@ -13,6 +13,7 @@
 class DropDownBrowser
 {
     // Restrict the full dropdown list to remove some options that shouldn't be edited by the end users
+    //TODO: this list needs to be kept in sync with $restrictedDropdowns in UpgradeDropdownsHelper::getDropdowns
     public static $restrictedDropdowns = array(
         'eapm_list',
         'eapm_list_documents',
@@ -24,12 +25,12 @@ class DropDownBrowser
         'commit_stage_binary_dom',
         'forecasts_config_ranges_options_dom',
         'forecasts_timeperiod_types_dom',
-        'forecast_schedule_status_dom',
         'forecasts_chart_options_group',
         'forecasts_config_worksheet_layout_forecast_by_options_dom',
         'forecasts_timeperiod_options_dom',
-        // 'moduleList', // We may want to put this in at a later date
-        // 'moduleListSingular', // Same with this
+        'generic_timeperiod_options',
+        'moduleList', // We may want to put this in at a later date
+        'moduleListSingular', // Same with this
     );
 
     function getNodes()

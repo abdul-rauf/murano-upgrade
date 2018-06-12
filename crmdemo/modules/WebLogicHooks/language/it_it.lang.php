@@ -1,7 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,17 +9,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$mod_strings = array (
-  'LBL_MODULE_NAME' => 'Web Logic Hooks',
-  'LBL_MODULE_NAME_SINGULAR' => 'Web Logic Hook',
-  'LBL_MODULE_TITLE' => 'Web Logic Hooks',
-  'LBL_REQUEST_METHOD' => 'Metodo Richiesto',
-  'LBL_TARGET_NAME' => 'Nome Modulo',
-  'LBL_TRIGGER_EVENT' => 'Trigger Event',
-  'LBL_URL' => 'URL',
-  'LNK_LOGIC_HOOK_LIST' => 'Visualizza Web Logic Hooks',
-  'LNK_NEW_LOGIC_HOOK' => 'Crea Web Logic Hook',
+$mod_strings = array(
+    'LBL_MODULE_NAME' => 'Ganci logica web',
+    'LBL_MODULE_NAME_SINGULAR' => 'Gancio logica web',
+    'LBL_MODULE_TITLE' => 'Ganci logica web',
+    'LNK_NEW_LOGIC_HOOK' => 'Crea Web Logic Hook',
+    'LNK_LOGIC_HOOK_LIST' => 'Visualizza Web Logic Hooks',
+    'LBL_TARGET_NAME' => 'Nome Modulo',
+    'LBL_REQUEST_METHOD' => 'Metodo Richiesto',
+    'LBL_TRIGGER_EVENT' => 'Innesca evento',
+    'LBL_URL' => 'URL',
 );
-

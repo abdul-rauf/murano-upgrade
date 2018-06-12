@@ -41,10 +41,10 @@ $mod_strings = array (
     'LBL_FORECAST_OPP_WORST'=>'Cel mai pesimist scenariu',
     'LBL_FORECAST_USER' => 'Utilizator',
     'LBL_DATE_COMMITTED'=> 'Data asumarii',
-    'LBL_DATE_ENTERED' => 'Data introducerii',
+    'LBL_DATE_ENTERED' => 'Data intrării',
     'LBL_DATE_MODIFIED' => 'Data modificarii',
     'LBL_CREATED_BY' => 'Creat de',
-    'LBL_DELETED' => 'Sters',
+    'LBL_DELETED' => 'Şters',
     'LBL_MODIFIED_USER_ID'=>'Modificat de',
     'LBL_WK_VERSION' => 'Versiune',
     'LBL_WK_REVISION' => 'Revizie',
@@ -75,34 +75,6 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Descriere',
     'LBL_OW_TYPE'=>'Tip',
 
-    //forecast schedule shortcuts
-    'LNK_NEW_TIMEPERIOD' => 'Creeaza perioada de timp',
-    'LNK_TIMEPERIOD_LIST' => 'Vezi perioadele de timp',
-
-    //Forecast schedule sub panel list view.
-    'LBL_SVFS_FORECASTDATE' => 'Programeaza data de start',
-    'LBL_SVFS_STATUS' => 'Status',
-    'LBL_SVFS_USER' => 'Pentru',
-    'LBL_SVFS_CASCADE' => 'Propaga in rapoarte?',
-    'LBL_SVFS_HEADER' => 'Program previziuni:',
-
-    //Forecast Schedule detail; view.....
-    'LB_FS_KEY' => 'ID',
-    'LBL_FS_TIMEPERIOD_ID' => 'ID perioada de timp',
-    'LBL_FS_USER_ID' => 'ID utilizator',
-    'LBL_FS_TIMEPERIOD' => 'Perioada de timp',
-    'LBL_FS_START_DATE' => 'Data de start',
-    'LBL_FS_END_DATE' => 'Data de incheiere',
-    'LBL_FS_FORECAST_START_DATE' => "Data de start previziuni",
-    'LBL_FS_STATUS' => 'Status',
-    'LBL_FS_FORECAST_FOR' => 'Programat pentru:',
-    'LBL_FS_CASCADE' =>'Propagare?',
-    'LBL_FS_MODULE_NAME' => 'Program previziuni',
-    'LBL_FS_CREATED_BY' =>'Creat de',
-    'LBL_FS_DATE_ENTERED' => 'Data introducerii',
-    'LBL_FS_DATE_MODIFIED' => 'Data modificarii',
-    'LBL_FS_DELETED' => 'Sters',
-
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Raport direct',
     'LBL_FDR_OPPORTUNITIES'=>'Oportunitati in previziune:',
@@ -129,7 +101,7 @@ $mod_strings = array (
 
     //list view
     'LBL_LV_TIMPERIOD'=> 'Perioada de timp',
-    'LBL_LV_TIMPERIOD_START_DATE'=> 'Data de start',
+    'LBL_LV_TIMPERIOD_START_DATE'=> 'Data Începerii',
     'LBL_LV_TIMPERIOD_END_DATE'=> 'Data de incheiere',
     'LBL_LV_TYPE'=> 'Tip previziune',
     'LBL_LV_COMMIT_DATE'=> 'Data asumarii',
@@ -139,11 +111,11 @@ $mod_strings = array (
 
     'LBL_COMMIT_NOTE' => 'Introdu sumele pe care ai vrea sa ti le asumi pentru perioada de timp selectata:',
     'LBL_COMMIT_TOOLTIP' => 'Pentru a activa functia Asumare: Modifica o valoare in tabel',
-    'LBL_COMMIT_MESSAGE'=> 'Vrei sa iti asumi aceste sume?',
+    'LBL_COMMIT_MESSAGE' => 'Vrei sa iti asumi aceste sume?',
     'ERR_FORECAST_AMOUNT' => 'Suma asumata este camp obligatoriu si trebuie sa fie formata doar din cifre.',
 
     // js error strings
-    'LBL_FC_START_DATE' => 'Data de start',
+    'LBL_FC_START_DATE' => 'Data Începerii',
     'LBL_FC_USER' => 'Programeaza pentru',
 
     'LBL_NO_ACTIVE_TIMEPERIOD'=>'Nu este activa nicio perioada de timp pentru modulul Previziuni.',
@@ -179,7 +151,7 @@ $mod_strings = array (
     'LBL_QUOTA' => 'Obiectiv',
     'LBL_QUOTA_ADJUSTED' => 'Obiectiv (ajustat)',
 
-    'LBL_FORECAST_FOR'=>'Tabel previziuni pentru: ',
+    'LBL_FORECAST_FOR'=>'Tabel previziuni pentru:',
     'LBL_FMT_ROLLUP_FORECAST'=>'(Adunare)',
     'LBL_FMT_DIRECT_FORECAST'=>'(Direct)',
 
@@ -241,6 +213,7 @@ $mod_strings = array (
     'LBL_TREE_PARENT' => 'Parinte',
 
     // Label for Current User Rep Worksheet Line
+    // &#x200E; tells the browser to interpret as left-to-right
     'LBL_MY_MANAGER_LINE' => '{0} (me)',
 
     //Labels for worksheet items
@@ -311,6 +284,8 @@ $mod_strings = array (
     'LBL_FORECASTS_ACLS_NO_ACCESS_TITLE' => 'Eroare acces previziuni:',
     'LBL_FORECASTS_ACLS_NO_ACCESS_MSG' => 'Nu ai acces la modulul Previziuni. Contacteaza administratorul de sistem.',
 
+    'LBL_FORECASTS_RECORDS_ACLS_NO_ACCESS_MSG' => 'Nu aveţi acces la înregistrările modulului Previziuni. Contactaţi administratorul.',
+
     // Panel and BreadCrumb Labels
     'LBL_FORECASTS_CONFIG_BREADCRUMB_WORKSHEET_LAYOUT' => 'Layout tabel',
     'LBL_FORECASTS_CONFIG_BREADCRUMB_RANGES' => 'Marje',
@@ -334,7 +309,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configureaza modul in care vrei sa categorisesti {{forecastByModule}}. <br><br>Atentie: Setarile pentru marja nu pot fi schimbate dupa prima asumare. Pentru instantele actualizate, setarea pentru marja este blocata cu datele existente in previziuni.<br><br>Poti selecta doua sau mai multe categorii pe baza marjelor de probabilitate sau poti crea categorii care nu se bazeaza pe probabilitate. <br><br>In partea stanga a categoriilor personalizate sunt casute ce pot fi bifate; foloseste-le pentru a decide ce marje vor fi incluse in suma asumata in previziuni si raportata catre manageri. <br><br>Un utilizator nu poate modifica manual statusul de includere/excludere si categoria {{forecastByModule}} manually din tabelele lor.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Selecteaza coloana pe care vrei ca utilizatorul sa o completeze pentru previziunile fiecarei {{forecastByModuleSingular}}. Atentie: Suma Previzibila este legata de suma afisata in {{forecastByModule}}; din acest motiv coloana Previzibil nu poate fi ascunsa.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Selecteaza coloanele pe care vrei sa le vizualizezi in modulul Previziuni. Lista campurilor va combina tabelul si va permite utilizatorilor sa aleaga felul in care vor sa isi configureze forma.',
-    'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'I am a placeholder for Forecast By how-to text!',
+    'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Sunt un substituent pentru Previziune după cum se trimit mesaje text!',
     'LBL_FORECASTS_CONFIG_SETTINGS_SAVED' => 'Setarile pentru configurarea modulului Previziuni au fost salvate.',
 
     // timeperiod config
@@ -343,11 +318,11 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TIMEPERIOD_DESC' => 'Configureaza perioadele de timp folosite pentru modulul Previziuni.',
     'LBL_FORECASTS_CONFIG_TIMEPERIOD_TYPE' => 'Selecteaza tipul de an pe care organizatia ta il foloseste pentru contabilitate.',
     'LBL_FORECASTS_CONFIG_TIMEPERIOD' => 'Alege tipul pentru perioada de timp',
-    'LBL_FORECASTS_CONFIG_LEAFPERIOD' => 'Choose the sub period that you want to view your Time Period over:',
-    'LBL_FORECASTS_CONFIG_START_DATE' => 'Alege data de inceput a anului fiscal',
+    'LBL_FORECASTS_CONFIG_LEAFPERIOD' => 'Alegeţi perioada secundară în care doriţi să vedeţi Perioada de timp:',
+    'LBL_FORECASTS_CONFIG_START_DATE' => 'Alege data începerii anului fiscal',
     'LBL_FORECASTS_CONFIG_TIMEPERIODS_FORWARD' => 'Alege numarul de perioade de timp viitoare pe care vrei sa le vizualizezi in tabel.<br><i>Acest numar se aplica la perioadele de timp de baza selectate. De exemplu, daca alegi 2 cu perioada de timp anuala se vor afisa 8 trimestre viitoare.</i>',
-    'LBL_FORECASTS_CONFIG_TIMEPERIODS_BACKWARD' => 'Alege numarul de perioade de timp trecute pe care vrei sa le vizualizezi in tabel.<br><i>Acest numar se aplica la perioadele de timp de baza selectate. De exemplu, daca alegi 2 cu perioada de timp lunare se vor afisa 6 luni trecute</i>',
-    'LBL_FORECASTS_CONFIG_TIMEPERIOD_FISCAL_YEAR' => 'Data de inceput aleasa indica faptul ca anul fiscal se intinde de-a lungul a doi ani. Alege anul care va fi folosit ca an fiscal:',
+    'LBL_FORECASTS_CONFIG_TIMEPERIODS_BACKWARD' => 'Alegeţi numărul de Perioade trecute de vizualizat în foaia de lucru.<br><i>Acest număr se aplică la Perioada de bază selectată. De exemplu, alegând 2 cu Perioadă trimestrială, se vor afişa ultimele 6 luni</i>',
+    'LBL_FORECASTS_CONFIG_TIMEPERIOD_FISCAL_YEAR' => 'Data începerii aleasă indică faptul că anul fiscal se întinde de-a lungul a doi ani. Alege anul care va fi folosit ca an fiscal:',
     'LBL_FISCAL_YEAR' => 'An fiscal',
 
     // worksheet layout config
@@ -435,6 +410,8 @@ $mod_strings = array (
     'LBL_QUOTA_ASSIGNED' => 'Obiectivele au fost alocate cu succes.',
     'LBL_FORECASTS_NO_ACCESS_TO_CFG_TITLE' => 'Eroare acces previziuni',
     'LBL_FORECASTS_NO_ACCESS_TO_CFG_MSG' => 'Nu ai acces sa configurezi modulul Previziuni. Contacteaza administratorul de sistem.',
+    'WARNING_DELETED_RECORD_RECOMMIT_1' => 'Această înregistrare a fost inclusă într-un ',
+    'WARNING_DELETED_RECORD_RECOMMIT_2' => 'Va fi eliminat şi va trebui să comiteţi din nou ',
 
     'LBL_DASHLET_MY_FORECAST' => 'Previziunea mea',
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "Previziunea echipei mele",
@@ -442,8 +419,7 @@ $mod_strings = array (
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'Ai efectuat modificari care nu au fost salvate. Esti sigur ca vrei sa sortezi tabelul si sa renunti la aceste modificari?',
 
     // Forecasts Records View Help Text
-    'LBL_HELP_RECORDS' => 'Modulul {{plural_module_name}} incorporeaza inregistrari de oportunitati pentru a construi tabele de {{module_name}}ing si pentru a prevedea vanzarile. Utilizatorii pot sa isi vada obiectivele la nivel individual, de echipa si de organizatie. Inainte ca utilizatorii sa poata accesa modulul {{plural_module_name}} pentru a incepe sa construiasca tabele de {{module_name}}ing, un utilizator cu drept de administrator trebuie sa configureze modulul {{plural_module_name}} completand perioadele de timp, marjele si scenariile agreate de organizatie.
+    'LBL_HELP_RECORDS' => 'Modulul {{plural_module_name}} este format din înregistrări {{opportunities_singular_module}} pentru a crea {{module_name}} {{worksheet_module}} şi previziona vânzările. Utilizatorii pot colabora pentru atingerea cotei de vânzări la nivel individual, de echipă sau de organizaţie de vânzări. Înainte ca utilizatorii să poate accesa modulul {{plural_module_name}} pentru a începe crearea de {{module_name}} {{worksheet_module}}, un utilizator cu acces de administrator trebuie să configureze modulul {{plural_module_name}} cu Perioadele de timp, Limitele şi Scenariile dorite de organizaţie.
 
-Reprezentantii de vanzari folosesc modulul {{plural_module_name}} pentru a lucra cu {{opportunities_module}} alocate lor pe masure ce perioada de timp actuala progreseaza. Acesti utilizatori isi vor asuma predictiile totale pentru vanzarile lor personale bazate pe {{opportunities_module}} pe care se asteapta sa le inchida. Managerii de vanzari lucreaza cu propriile lor inregistrari de {{opportunities_singular_module}} la fel ca ceilalti reprezentanti de vanzari. In plus, acestia agrega sumele de {{module_name}} asumate de raportori pentru a prevedea totalul echipei si pentru a lucra sa indeplineasca obiectivul echipei pentru fiecare perioada de timp. Informatii suplimentare sunt oferite de elementele din panoul expandabil Informatii, incluzand analiza pentru un tabel de {{opportunities_module}} individual si analiza pentru tabelele echipei unui manager.',
+Reprezentanţii de vânzări utilizează modulul {{plural_module_name}}pentru a lucra cu {{opportunities_module}} alocate pe măsură ce progresează perioada de timp curentă. Aceşti utilizatori vor efectua predicţii totale pentru vânzările personale pe baza {{opportunities_module}} pe care se aşteaptă să le închidă. Managerii de vânzări lucrează cu propriile înregistrări {{opportunities_singular_module}}, în mod similar cu ceilalţi reprezentanţi de vânzări. De asemenea, cumulează sumele {{module_name}} raportate pentru a previziona vânzările totale ale echipei şi colaborează pentru cota de vânzări pentru fiecare perioadă de timp. Informaţii suplimentare sunt oferite de elementele Intelligence Pane, inclusiv o analiză a fişei de lucru {{opportunities_module}} a unei persoane şi o analiză a fişelor de lucru ale echipei managerului.'
 );
-

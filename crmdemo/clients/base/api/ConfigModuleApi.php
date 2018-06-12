@@ -14,6 +14,14 @@ require_once('clients/base/api/ModuleApi.php');
 
 class ConfigModuleApi extends ModuleApi
 {
+
+    /**
+     * Set this to true in a subclass if this is being handled by the subclass in additional scripts
+     *
+     * @var bool
+     */
+    protected $skipMetadataRefresh = false;
+
     /**
      * Setup the endpoint that belong to this API EndPoint
      *
@@ -82,7 +90,7 @@ class ConfigModuleApi extends ModuleApi
         }
 
         if (!empty($args['module'])) {
-            return $adminBean->getConfigForModule($args['module'], $api->platform);
+            return $adminBean->getConfigForModule($args['module'], $this->getPlatform($api->platform));
         }
         return;
     }
@@ -122,18 +130,53 @@ class ConfigModuleApi extends ModuleApi
             );
         }
 
-        $admin = BeanFactory::getBean('Administration');
-
-        foreach ($args as $name => $value) {
-            if (is_array($value)) {
-                $admin->saveSetting($module, $name, json_encode($value), $api->platform);
-            } else {
-                $admin->saveSetting($module, $name, $value, $api->platform);
-            }
+        if ($args) {
+            $this->save($api, $args, $module);
         }
 
-        MetaDataManager::refreshModulesCache(array($module));
+        if ($this->skipMetadataRefresh === false) {
+            MetaDataManager::refreshModulesCache(array($module));
+        }
 
+        $admin = BeanFactory::getBean('Administration');
         return $admin->getConfigForModule($module, $api->platform, true);
+    }
+
+    /**
+     * Save config values.
+     *
+     * @param ServiceBase $api
+     * @param array $params 'module' is required, 'platform' is optional and defaults to 'base'
+     * @param string $module
+     */
+    protected function save(ServiceBase $api, $params, $module)
+    {
+        $admin = BeanFactory::getBean('Administration');
+        
+        $platform = $this->getPlatform($api->platform);
+
+        foreach ($params as $name => $value) {
+            $admin->saveSetting($module, $name, $value, $platform);
+        }
+    }
+
+    /**
+     * In using the config, the only values that should be stored are one that are for registered platforms.
+     *
+     * As such if the passed in platform is not registered, then it will return `base`
+     *
+     * @param string $platform The Platfrom from $api->platform
+     * @return string
+     */
+    protected function getPlatform($platform)
+    {
+        // if the platform is not a valid registered platform, default it back to base
+        $platforms = MetadataManager::getPlatformList();
+
+        if (!in_array($platform, $platforms)) {
+            $platform = 'base';
+        }
+
+        return $platform;
     }
 }

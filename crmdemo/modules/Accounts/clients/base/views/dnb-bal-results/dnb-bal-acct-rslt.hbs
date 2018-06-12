@@ -33,9 +33,16 @@
                             <div class="thumbnail dashlet dashlet-dnb-tall">
                                 <div data-dashlet="toolbar">
                                     <div class="dashlet-header">
+                                        <div class="btn-toolbar pull-right">
+                                            <span class="dashlet-toolbar">
+                                                <a onclick="return false;" href="javascript:void(0);" class="btn btn-primary bulkImport">
+                                                    {{str "LBL_DNB_IMPORT"}}
+                                                </a>
+                                            </span>
+                                        </div>
                                         <h4 data-toggle="dashlet">
-                                            {{#if dnbBalRslt.count}}
-                                                {{dnbBalRslt.count}}
+                                            {{#if listData.count}}
+                                                {{listData.count}}
                                             {{else}}
                                                 {{str "LBL_DNB_BAL_PREVIEW" this.module}}
                                             {{/if}}
@@ -47,21 +54,40 @@
                                         {{str "LBL_DNB_BAL_LOAD"}} ...
                                     </div>
                                     <div id="dnb-bal-result" class="hide">
-                                        {{#if dnbBalRslt.product}}
+                                        {{#if listData.product}}
                                             <ul class="unstyled listed" id="dnb-results-list">
-                                                {{#each dnbBalRslt.product}}
+                                                <li>
+                                                    <div class='dnb-cntrl-chkbox'>
+                                                        <input type="checkbox" name="dnb-bi-slctall"
+                                                               class="dnb_checkbox" {{#eq this.selectAll true}}checked{{/eq}}/>
+                                                    </div>
+                                                    <div class='record-label dnb-bal-list'>
+                                                        {{str "LBL_SHORTCUT_SELECT_ALL"}}
+                                                    </div>
+                                                </li>
+                                                {{#each listData.product}}
                                                     <li>
+                                                        <div class='dnb-rslt-chkbox'>
+                                                            <input type="checkbox" name="{{this.duns_num}}" id="{{this.duns_num}}"
+                                                                   class="dnb_checkbox dnb-bi-chk" {{#if this.isSelected}}checked{{/if}}
+                                                                    {{#if this.isDupe}}disabled{{/if}}/>
+                                                        </div>
                                                         <div class='dnb-bal-rslt'>
-                                                            <a class="dnb-company-name" id="{{this.duns_num}}">
-                                                                {{this.name}}
-                                                            </a>
                                                             {{#if this.locationtype}}
                                                                 <span class="label pull-right" data-placement="right">
                                                                     {{this.locationtype}}
                                                                 </span>
                                                             {{/if}}
+                                                            <a class="dnb-company-name" id="{{this.duns_num}}">
+                                                                {{this.name}}
+                                                            </a>
                                                         </div>
                                                         <div class="record-label dnb-bal-list">
+                                                            {{#if this.isDupe}}
+                                                                <span class="label label-important pull-right" data-placement="right">
+                                                                    {{str "LBL_DNB_DUPLICATE"}}
+                                                                </span>
+                                                            {{/if}}
                                                             {{#if this.billing_address_city}}
                                                                 {{this.billing_address_city}},
                                                             {{/if}}
@@ -71,19 +97,14 @@
                                                             {{#if this.billing_address_country}}
                                                                 {{this.billing_address_country}}
                                                             {{/if}}
-                                                            {{#if this.isDupe}}
-                                                                <span class="label label-important pull-right" data-placement="right">
-                                                                    {{str "LBL_DNB_DUPLICATE"}}
-                                                                </span>
-                                                            {{/if}}
                                                         </div>
                                                     </li>
                                                 {{/each}}
                                             </ul>
                                         {{else}}
                                             <aside class='create-no-data'>
-                                                {{#if dnbBalRslt.errmsg}}
-                                                    <em>{{dnbBalRslt.errmsg}}</em>
+                                                {{#if listData.errmsg}}
+                                                    <em>{{listData.errmsg}}</em>
                                                 {{else}}
                                                     <em>{{str "LBL_DNB_NO_DATA"}}</em>
                                                 {{/if}}
@@ -95,14 +116,9 @@
                                     <button data-action="show-more" class="btn btn-link btn-invisible more">
                                         {{str "LBL_DNB_MORE_SRCH_RES"}}
                                     </button>
-                                    <div class="loading">
-                                        {{str "LBL_ALERT_TITLE_LOADING"}}
-                                        <i class="l1 icon-circle"></i>
-                                        <i class="l2 icon-circle"></i>
-                                        <i class="l3 icon-circle"></i>
-                                    </div>
+                                    {{loading 'LBL_ALERT_TITLE_LOADING'}}
                                 </div>
-                                <div class="swappable-dashlet icon-download-alt"></div>
+                                <div class="swappable-dashlet fa fa-download"></div>
                             </div>
                         </div>
                     </li>

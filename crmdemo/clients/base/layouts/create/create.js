@@ -8,4 +8,4 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({plugins:['ShortcutSession'],shortcuts:['Sidebar:Toggle','Create:Save','Create:Cancel']})
+({plugins:['ShortcutSession'],shortcuts:['Sidebar:Toggle','Create:Save','Create:Cancel','Dropdown:More']})

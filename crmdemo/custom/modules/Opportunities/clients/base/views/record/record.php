@@ -1,6 +1,5 @@
 <?php
-
-/* This file was updated by 7_CustomRecordViewHistorySummaryButton */
+// created: 2018-06-12 08:17:54
 $viewdefs['Opportunities']['base']['view']['record'] = array (
   'buttons' => 
   array (
@@ -11,6 +10,10 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
       'label' => 'LBL_CANCEL_BUTTON_LABEL',
       'css_class' => 'btn-invisible btn-link',
       'showOn' => 'edit',
+      'events' => 
+      array (
+        'click' => 'button:cancel_button:click',
+      ),
     ),
     1 => 
     array (
@@ -238,6 +241,16 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
           'name' => 'insideview_opportunities_c',
           'studio' => 'visible',
           'label' => 'LBL_INSIDEVIEW',
+        ),
+        9 => 
+        array (
+          'name' => 'commit_stage',
+          'span' => 6,
+        ),
+        10 => 
+        array (
+          'name' => 'tag',
+          'span' => 12,
         ),
       ),
     ),

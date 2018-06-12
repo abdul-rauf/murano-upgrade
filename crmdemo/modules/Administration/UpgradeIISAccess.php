@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: UpgradeIISAccess.php 47240 2009-05-18 18:12:36Z xye $
 
 require_once('install/install_utils.php');
 

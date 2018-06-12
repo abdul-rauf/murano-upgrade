@@ -47,6 +47,8 @@
 @pacific:               #0f7799;
 @teal:                  #0d806c;
 @coral:                 #ff6fcf;
+@goldenRod:             #e5a117;
+@wheat:                 #f5d9a0;
 
 // Scaffolding
 // -------------------------
@@ -61,7 +63,7 @@
 
 // Typography
 // -------------------------
-@sansFontFamily:        Helvetica, Arial, sans-serif;
+@sansFontFamily:        "Helvetica Neue", Arial, sans-serif;
 @serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 @monoFontFamily:        Menlo, Monaco, Consolas, "Courier New", monospace;
 @baseFontSize:          12px;
@@ -71,6 +73,7 @@
 @headingsFontFamily:    inherit; // empty to use BS default, @baseFontFamily
 @headingsFontWeight:    bold;    // instead of browser default, bold
 @headingsColor:         inherit; // empty to use BS default, @textColor
+@fa-font-path:          "../../../../../styleguide/assets/fonts";
 
 //Shadows
 //--------------------------
@@ -103,6 +106,7 @@
 @tableBorderColor:                  darken(@grayLighter, 5%); // table and cell border
 @tableBorder:                       1px solid @tableBorderColor;
 @tableHeader:                       @gray; // table headers
+@tableBackgroundHover:              @gray;
 
 
 // Form states and alerts
@@ -112,7 +116,7 @@
 @success:				@green;
 @inform:				@pacific;
 
-@warningText:             darken(@warning, 40%);
+@warningText:             @grayDark;
 @warningBackground:       lighten(@warning, 47%);
 @warningBorder:           lighten(@warning, 30%);
 @errorText:               @error;
@@ -228,6 +232,7 @@
 @navbarButton:              	  darken(@NavigationBar, 10%);
 @navbarSearchPlaceholderColor:    @gray;
 @navbarBrandColor:                @navbarLinkColor;
+@navbarBorder:                    @gray;
 
 // Inverted navbar
 @navbarInverseBackground:                @grayDarker;
@@ -351,17 +356,18 @@
 
 // Default chart stroke colors
 // -------------------------
-@stroke0: @red;
-@stroke1: @orange;
-@stroke2: @yellow;
-@stroke3: @army;
-@stroke4: @green;
-@stroke5: @mint;
-@stroke6: @teal;
-@stroke7: @pacific;
-@stroke8: @ocean;
-@stroke9: @gray;
+@stroke00: @red;
+@stroke01: @orange;
+@stroke02: @yellow;
+@stroke03: @army;
+@stroke04: @green;
+@stroke05: @mint;
+@stroke06: @teal;
+@stroke07: @pacific;
+@stroke08: @ocean;
+@stroke09: @gray;
 @stroke10: @night;
 @stroke11: @purple;
 @stroke12: @pink;
 @stroke13: @coral;
+

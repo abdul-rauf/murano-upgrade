@@ -177,9 +177,10 @@
          * <pre><code>
          *     'template' => 'record',
          * </code></pre>
-         * @see View.View
-         * Look at {@link View.View} Particularly, the View.View#initialize and View.View#getTemplateFromMeta for more information on
-         * how the `meta.template` property can be used.
+         * Look at {@link View.View}, particularly the
+         * {@link View.View#initialize} and
+         * {@link View.View#getTemplateFromMeta} for more information on how the
+         * `meta.template` property can be used.
          *
          * @param params view parameters
          * @return {View.View} new instance of view.
@@ -344,7 +345,7 @@
         },
         /**
          *
-         * @deprecated Please use app.view.Component._super instead.
+         * @deprecated 7.2 and will be removed in 7.9. Use {@link View.Component#_super}.
          *
          * Wrapper around _getController that calls the specified method on controller's prototype method. Please note that it
          * is advised to only use this to call a "parent controller" from a controller that has extended the parent. If you want
@@ -503,7 +504,7 @@
                     cache[platformNamespace + className] ||
                     cache["BaseCustom" + className] ||
                     cache["Base" + className] ||
-                    // For backwards compatability, if they define app.view.views.MyView we should still find
+                    // For backwards compatibility, if they define app.view.views.MyView we should still find
                     cache[className] ||
                     cache["BaseBase" + ucType] ||
                     app.view["Custom" + customBaseClassName] ||

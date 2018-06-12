@@ -47,7 +47,8 @@ class SugarACLStatic extends SugarACLStrategy
             return true;
         }
 
-        $action = strtolower($action);
+        // make sure we have the correct action name
+        $action = !empty($_REQUEST['bwcFrame']) ? strtolower($action) : $this->fixUpActionName($action);
         if($action == "field") {
             return $this->fieldACL($module, $context['action'], $context);
         }

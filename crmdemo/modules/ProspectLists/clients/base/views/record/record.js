@@ -8,4 +8,4 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({extendsFrom:'RecordView',delegateButtonEvents:function(){this.context.on('button:export_button:click',this.exportListMembers,this);this._super("delegateButtonEvents");},exportListMembers:function(){app.alert.show('export_loading',{level:'process',title:app.lang.getAppString('LBL_LOADING')});app.api.exportRecords({module:this.module,uid:[this.model.id],members:true},this.$el,{complete:function(){app.alert.dismiss('export_loading');}});}})
+({extendsFrom:'RecordView',delegateButtonEvents:function(){this.context.on('button:export_button:click',this.exportListMembers,this);this._super("delegateButtonEvents");},exportListMembers:function(){app.alert.show('export_loading',{level:'process',title:app.lang.get('LBL_LOADING')});app.api.exportRecords({module:this.module,uid:[this.model.id],members:true},this.$el,{complete:function(){app.alert.dismiss('export_loading');}});}})

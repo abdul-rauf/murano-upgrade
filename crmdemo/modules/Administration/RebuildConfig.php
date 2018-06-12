@@ -48,7 +48,6 @@ if( !empty($_POST['perform_rebuild']) && $config_file_ready ){
     }
     require_once 'ModuleInstall/ModuleInstaller.php';
     ModuleInstaller::handleBaseConfig();
-    ModuleInstaller::handlePortalConfig();
 }
 
 /////////////////////////////////////////////////////////////////////

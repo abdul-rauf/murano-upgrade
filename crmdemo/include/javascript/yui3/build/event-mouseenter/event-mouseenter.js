@@ -1,10 +1,8 @@
 /*
-     YUI 3.15.0 (build 834026e)
-     Copyright 2014 Yahoo! Inc. All rights reserved.
-     Licensed under the BSD License.
-     http://yuilibrary.com/license/
-     */
-YUI.add('event-mouseenter',function(Y,NAME){var domEventProxies=Y.Env.evt.dom_wrappers,contains=Y.DOM.contains,toArray=Y.Array,noop=function(){},config={proxyType:"mouseover",relProperty:"fromElement",_notify:function(e,property,notifier){var el=this._node,related=e.relatedTarget||e[property];if(el!==related&&!contains(el,related)){notifier.fire(new Y.DOMEventFacade(e,el,domEventProxies['event:'+Y.stamp(el)+e.type]));}},on:function(node,sub,notifier){var el=Y.Node.getDOMNode(node),args=[this.proxyType,this._notify,el,null,this.relProperty,notifier];sub.handle=Y.Event._attach(args,{facade:false});},detach:function(node,sub){sub.handle.detach();},delegate:function(node,sub,notifier,filter){var el=Y.Node.getDOMNode(node),args=[this.proxyType,noop,el,null,notifier];sub.handle=Y.Event._attach(args,{facade:false});sub.handle.sub.filter=filter;sub.handle.sub.relProperty=this.relProperty;sub.handle.sub._notify=this._filterNotify;},_filterNotify:function(thisObj,args,ce){args=args.slice();if(this.args){args.push.apply(args,this.args);}
-var currentTarget=Y.delegate._applyFilter(this.filter,args,ce),related=args[0].relatedTarget||args[0][this.relProperty],e,i,len,ret,ct;if(currentTarget){currentTarget=toArray(currentTarget);for(i=0,len=currentTarget.length&&(!e||!e.stopped);i<len;++i){ct=currentTarget[0];if(!contains(ct,related)){if(!e){e=new Y.DOMEventFacade(args[0],ct,ce);e.container=Y.one(ce.el);}
-e.currentTarget=Y.one(ct);ret=args[1].fire(e);if(ret===false){break;}}}}
-return ret;},detachDelegate:function(node,sub){sub.handle.detach();}};Y.Event.define("mouseenter",config,true);Y.Event.define("mouseleave",Y.merge(config,{proxyType:"mouseout",relProperty:"toElement"}),true);},'3.15.0',{"requires":["event-synthetic"]});
+YUI 3.15.0 (build 834026e)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add("event-mouseenter",function(e,t){var n=e.Env.evt.dom_wrappers,r=e.DOM.contains,i=e.Array,s=function(){},o={proxyType:"mouseover",relProperty:"fromElement",_notify:function(t,i,s){var o=this._node,u=t.relatedTarget||t[i];o!==u&&!r(o,u)&&s.fire(new e.DOMEventFacade(t,o,n["event:"+e.stamp(o)+t.type]))},on:function(t,n,r){var i=e.Node.getDOMNode(t),s=[this.proxyType,this._notify,i,null,this.relProperty,r];n.handle=e.Event._attach(s,{facade:!1})},detach:function(e,t){t.handle.detach()},delegate:function(t,n,r,i){var o=e.Node.getDOMNode(t),u=[this.proxyType,s,o,null,r];n.handle=e.Event._attach(u,{facade:!1}),n.handle.sub.filter=i,n.handle.sub.relProperty=this.relProperty,n.handle.sub._notify=this._filterNotify},_filterNotify:function(t,n,s){n=n.slice(),this.args&&n.push.apply(n,this.args);var o=e.delegate._applyFilter(this.filter,n,s),u=n[0].relatedTarget||n[0][this.relProperty],a,f,l,c,h;if(o){o=i(o);for(f=0,l=o.length&&(!a||!a.stopped);f<l;++f){h=o[0];if(!r(h,u)){a||(a=new e.DOMEventFacade(n[0],h,s),a.container=e.one(s.el)),a.currentTarget=e.one(h),c=n[1].fire(a);if(c===!1)break}}}return c},detachDelegate:function(e,t){t.handle.detach()}};e.Event.define("mouseenter",o,!0),e.Event.define("mouseleave",e.merge(o,{proxyType:"mouseout",relProperty:"toElement"}),!0)},"3.15.0",{requires:["event-synthetic"]});

@@ -8,7 +8,7 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({extendsFrom:'FlexListView',activityModules:[],allActivityModules:['Calls','Emails','Meetings','Notes','Tasks'],baseModule:'',baseRecord:'',initialize:function(options){this.plugins=_.union(this.plugins,['ReorderableColumns','ListColumnEllipsis']);if(options.context.parent){this.baseModule=options.context.parent.get('module');this.baseRecord=options.context.parent.get('modelId');}
+({extendsFrom:'FlexListView',activityModules:[],allActivityModules:['Calls','Emails','Meetings','Notes','Tasks'],baseModule:'',baseRecord:'',initialize:function(options){this.plugins=_.union(this.plugins,['ReorderableColumns','ResizableColumns','ListColumnEllipsis']);if(options.context.parent){this.baseModule=options.context.parent.get('module');this.baseRecord=options.context.parent.get('modelId');}
 this.setActivityModulesToFetch();var HistoryCollection=app.BeanCollection.extend({module:'history',activityModules:this.activityModules,buildURL:_.bind(function(params){params=params||{};var url=app.api.serverUrl+'/'
 +this.baseModule+'/'
 +this.baseRecord+'/'
@@ -18,6 +18,6 @@ var url=this.buildURL(options.params),callbacks=app.data.getSyncCallbacks(method
 return _.extend({field:'',direction:'desc'},this.meta.orderBy,lastStateOrderBy);},setActivityModulesToFetch:function(){this.activityModules=this.allActivityModules;},loadData:function(options){if(this.collection.dataFetched){return;}
 this.collection.fetch(options);},_renderField:function(field){var fieldName=field.name,fieldModule=field.model.get('_module'),fieldType=field.def.type||'default';if(fieldName==='name'){field.model.module=fieldModule;}else if(fieldName==='module'){field.model.set({module:field.model.get('moduleNameSingular')});}else if(fieldName==='related_contact'){var contact,contactId;field.model.module='Contacts';switch(fieldModule){case'Emails':contact='';contactId='';break;case'Notes':case'Calls':case'Meetings':case'Tasks':contact=field.model.get('contact_name');contactId=field.model.get('contact_id');break;}
 field.model.set({related_contact:contact,related_contact_id:contactId});}else if(fieldName==='status'&&fieldModule==='Emails'){var fieldStatus=field.model.get('status'),emailStatusDom=app.lang.getAppListStrings('dom_email_status');if(!_.contains(emailStatusDom,fieldStatus)){fieldStatus=emailStatusDom[fieldStatus]}
-field.model.set({status:fieldStatus});}else if(fieldType==='preview-button'){field.model.module=fieldModule;}
-this._super("_renderField",[field]);},_setOrderBy:function(options){if(this.orderByLastStateKey){app.user.lastState.set(this.orderByLastStateKey,this.orderBy);}
+field.model.set({status:fieldStatus});}
+this._super('_renderField',[field]);},_render:function(){this._super('_render');this._sanitizeModels();},_sanitizeModels:function(){this.collection.map(function(model){model.module=model.get('_module');});},_setOrderBy:function(options){if(this.orderByLastStateKey){app.user.lastState.set(this.orderByLastStateKey,this.orderBy);}
 options.orderBy=this.orderBy;this.collection.dataFetched=false;this.collection.skipFetch=false;this.loadData(options);},_dispose:function(){$('html').removeClass('print-drawer');this._super('_dispose');}})

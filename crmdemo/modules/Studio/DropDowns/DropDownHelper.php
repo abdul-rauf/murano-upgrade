@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: DropDownHelper.php 19013 2007-01-04 02:15:22Z majed $
 require_once('modules/Administration/Common.php');
 require_once('modules/Administration/QuickRepairAndRebuild.php');
 class DropDownHelper
@@ -73,17 +73,17 @@ class DropDownHelper
      * Takes in the request params from a save request and processes
      * them for the save.
      *
-     * @param REQUEST params  $params
+     * @param array $params Request parameters
      */
-    public function saveDropDown($params)
+    public static function saveDropDown($params)
     {
         global $locale;
         $count = 0;
         $dropdown = array();
         $dropdown_name = $params['dropdown_name'];
 
-        if (!empty($_REQUEST['dropdown_lang'])) {
-            $selected_lang = $_REQUEST['dropdown_lang'];
+        if (!empty($params['dropdown_lang'])) {
+            $selected_lang = $params['dropdown_lang'];
         } else {
             $selected_lang = $locale->getAuthenticatedUserLanguage();
         }

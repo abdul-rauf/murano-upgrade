@@ -109,9 +109,14 @@
         },
 
         /**
-         * Attach plugin to view.
-         * @param component Component object (View, Field, or Layout, Model, Collection)
-         * @public
+         * Attaches plugin to view.
+         *
+         * @param {View.Component|Data.Bean|Data.BeanCollection} component The
+         *   component object ({@link View.View View},
+         *   {@link View.Field Field}, {@link View.Layout Layout},
+         *   {@link Data.Bean Bean}, {@link Data.BeanCollection Collection}).
+         * @param {string} type The component type (view, layout, or field,
+         *   model, collection).
          */
         attach: function(component, type) {
             _.each(component.plugins, function(pluginName, o) {
@@ -148,10 +153,14 @@
         },
 
         /**
-         * Detach plugins and call onDetach method
-         * @param component Component object (View, Field, or Layout, Model, Collection)
-         * @param type ('field', 'view', or 'layout')
-         * @public
+         * Detaches plugins and call `onDetach` method.
+         *
+         * @param {View.Component|Data.Bean|Data.BeanCollection} component The
+         *   component object ({@link View.View View},
+         *   {@link View.Field Field}, {@link View.Layout Layout},
+         *   {@link Data.Bean Bean}, {@link Data.BeanCollection Collection}).
+         * @param {string} type The component type (view, layout, or field,
+         *   model, collection).
          */
         detach: function(component, type) {
             _.each(component.plugins, function(name) {
@@ -176,10 +185,10 @@
 
         /**
          * Register plugin.
-         * @param name String Plugin name
-         * @param validTypes String|Array list of component types this plugin can be applied to (view, field, layout, model, collection)
-         * @param plugin String Plugin object
-         * @public
+         * @param {string} name The plugin name.
+         * @param {string|Array} validTypes The list of component types this
+         *   plugin can be applied to (view, field, layout, model, collection).
+         * @param {Object} plugin The plugin object.
          */
         register: function(name, validTypes, plugin) {
             if (!_.isArray(validTypes)) {

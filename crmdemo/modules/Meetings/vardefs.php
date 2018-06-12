@@ -22,7 +22,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'type' => 'name',
     'dbType' => 'varchar',
 	'unified_search' => true,
-	'full_text_search' => array('enabled' => true, 'boost' => 3),
+    'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 1.43),
     'len' => '50',
     'comment' => 'Meeting name',
     'importable' => 'required',
@@ -50,7 +50,8 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'vname' => 'LBL_LOCATION',
     'type' => 'varchar',
     'len' => '50',
-    'comment' => 'Meeting location'
+    'comment' => 'Meeting location',
+    'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 0.36),
   ),
   'password' =>
   array (
@@ -67,7 +68,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'name' => 'join_url',
     'vname' => 'LBL_URL',
     'type' => 'varchar',
-    'len' => '200',
+    'len' => '600',
     'comment' => 'Join URL',
     'studio' => 'false',
     'reportable' => false,
@@ -77,7 +78,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'name' => 'host_url',
     'vname' => 'LBL_HOST_URL',
     'type' => 'varchar',
-    'len' => '400',
+    'len' => '600',
     'comment' => 'Host URL',
     'studio' => 'false',
     'reportable' => false,
@@ -115,50 +116,60 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'name' => 'duration_hours',
     'vname' => 'LBL_DURATION_HOURS',
     'type' => 'int',
-    'group'=>'duration',
-    'len' => '3',
     'comment' => 'Duration (hours)',
     'importable' => 'required',
     'required' => true,
-    'studio' => array('wirelesseditview'=>false, 'wirelessdetailview'=>false, 'wirelesslistview'=>false, 'wireless_basic_search'=>false),
+    'massupdate' => false,
+    'studio' => false,
+    'processes' => true,
+    'default' => 0,
   ),
   'duration_minutes' =>
   array (
     'name' => 'duration_minutes',
     'vname' => 'LBL_DURATION_MINUTES',
     'type' => 'enum',
-    'options' => 'duration_intervals',    
-    'group'=>'duration',
+    'dbType' => 'int',
+    'options' => 'duration_intervals',
+    'group'=>'duration_hours',
     'len' => '2',
     'comment' => 'Duration (minutes)',
-    'studio' => array('wirelesseditview'=>false, 'wirelessdetailview'=>false, 'wirelesslistview'=>false, 'wireless_basic_search'=>false),
     'required' => true,
+    'massupdate' => false,
+    'studio' => false,
+    'processes' => true,
+    'default' => 0,
   ),
   'date_start' =>
   array (
     'name' => 'date_start',
-    'vname' => 'LBL_DATE',
+    'vname' => 'LBL_CALENDAR_START_DATE',
     'type' => 'datetimecombo',
     'dbType' => 'datetime',
     'comment' => 'Date of start of meeting',
     'importable' => 'required',
     'required' => true,
+    'massupdate' => false,
     'enable_range_search' => true,
     'options' => 'date_range_search_dom',
     'validation' => array('type' => 'isbefore', 'compareto' => 'date_end', 'blank' => false),
+    'studio' => array('recordview' => false, 'wirelesseditview'=>false),
+    'full_text_search' => array('enabled' => true, 'searchable' => false),
   ),
 
   'date_end' =>
   array (
     'name' => 'date_end',
-    'vname' => 'LBL_DATE_END',
+    'vname' => 'LBL_CALENDAR_END_DATE',
     'type' => 'datetimecombo',
     'dbType' => 'datetime',
-    'massupdate'=>false,
+    'massupdate' => false,
     'comment' => 'Date meeting ends',
     'enable_range_search' => true,
     'options' => 'date_range_search_dom',
-    'studio' => array('wirelesseditview'=>false), // date_end is computed by the server from date_start and duration
+    'studio' => array('recordview' => false, 'wirelesseditview'=>false), // date_end is computed by the server from date_start and duration
+	'readonly' => true,
+    'full_text_search' => array('enabled' => true, 'searchable' => false),
   ),
   'parent_type' =>
   array (
@@ -181,6 +192,8 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'options' => 'meeting_status_dom',
     'comment' => 'Meeting status (ex: Planned, Held, Not held)',
     'default' => 'Planned',
+    'duplicate_on_record_copy' => 'no',
+    'full_text_search' => array('enabled' => true, 'searchable' => false),
   ),
   'type' =>
    array (
@@ -222,17 +235,17 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
   ),
   'reminder_checked' => array(
     'name' => 'reminder_checked',
-    'vname' => 'LBL_REMINDER',
+    'vname' => 'LBL_POPUP_REMINDER',
     'type' => 'bool',
     'source' => 'non-db',
     'comment' => 'checkbox indicating whether or not the reminder value is set (Meta-data only)',
     'massupdate' => false,
-    'studio' => array('wirelesseditview'=>false),
+    'studio' => false,
    ),
   'reminder_time' =>
   array (
     'name' => 'reminder_time',
-    'vname' => 'LBL_REMINDER_TIME',
+    'vname' => 'LBL_POPUP_REMINDER_TIME',
     'type' => 'enum',
     'dbType' => 'int',
     'options' => 'reminder_time_options',
@@ -240,7 +253,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'massupdate' => false,
     'default'=> -1,
     'comment' => 'Specifies when a reminder alert should be issued; -1 means no alert; otherwise the number of seconds prior to the start',
-    'studio' => array('wirelesseditview'=>false),
+    'studio' => array('recordview' => false, 'wirelesseditview' => false),
   ),  
   'email_reminder_checked' => array(
     'name' => 'email_reminder_checked',
@@ -249,7 +262,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'source' => 'non-db',
     'comment' => 'checkbox indicating whether or not the email reminder value is set (Meta-data only)',
     'massupdate' => false,
-    'studio' => array('wirelesseditview'=>false),
+    'studio' => false,
    ),  
   'email_reminder_time' =>
   array (
@@ -262,7 +275,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'massupdate' => false,
     'default'=> -1,
     'comment' => 'Specifies when a email reminder alert should be issued; -1 means no alert; otherwise the number of seconds prior to the start',
-    'studio' => array('wirelesseditview'=>false),
+    'studio' => array('recordview' => false, 'wirelesseditview' => false),
   ),  
   'email_reminder_sent' => array( 
     'name' => 'email_reminder_sent',
@@ -280,7 +293,8 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'type' => 'varchar',
     'len' => '255',
     'reportable' => false,
-    'comment' => 'When the Sugar Plug-in for Microsoft Outlook syncs an Outlook appointment, this is the Outlook appointment item ID'
+      'comment' => 'When the Sugar Plug-in for Microsoft Outlook syncs an Outlook appointment, this is the Outlook appointment item ID',
+      'studio' => false,
   ),
    'sequence' =>
   array (
@@ -290,14 +304,9 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'len' => '11',
     'reportable' => false,
     'default'=>0,
-    'comment' => 'Meeting update sequence for meetings as per iCalendar standards',
-      'studio' => array(
-          'related' => false,
-          'formula' => false,
-          'rollup' => false,
-      ),
+    'comment' => 'Meeting update sequence for meetings as per iCalendar standards', 
+      'studio' => false,
   ),
-
   'contact_name' =>
   array (
     'name' => 'contact_name',
@@ -315,13 +324,15 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'dbType' => 'varchar',
     'source'=>'non-db',
     'len' => 36,
-    'studio' => array('required' => false, 'listview'=>true, 'visible' => false),
-	),
+    'importable' => 'false',
+    'studio' => false,
+    ),
 
   'contacts' =>
   array (
   	'name' => 'contacts',
     'type' => 'link',
+    'module' => 'Contacts',
     'relationship' => 'meetings_contacts',
     'source'=>'non-db',
 		'vname'=>'LBL_CONTACTS',
@@ -337,7 +348,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
 		'group'=>'parent_name',
 		'source'=>'non-db',
 		'options'=> 'parent_type_display',
-    'studio' => true,
+        'studio' => true,
 		),
   'users' =>
   array (
@@ -375,6 +386,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
             'bean_name' => 'RevenueLineItem',
             'source' => 'non-db',
             'vname' => 'LBL_REVENUELINEITEMS',
+            'workflow' => false
         ),
         'products' => array(
             'name' => 'products',
@@ -402,6 +414,13 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'source'=>'non-db',
         'vname'=>'LBL_LEADS',
   ),
+  'project'=> array (
+    'name' => 'project',
+    'type' => 'link',
+    'relationship' => 'projects_meetings',
+    'source' => 'non-db',
+    'vname' => 'LBL_PROJECTS'
+  ),
   'opportunity' =>
   array (
   	'name' => 'opportunity',
@@ -426,7 +445,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
       'relationship' => 'quote_meetings',
       'source'=>'non-db',
       'vname'=>'LBL_QUOTES',
-  ),    
+  ),
   'cases' =>
   array (
   	'name' => 'cases',
@@ -450,12 +469,14 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
         'type' => 'relate',
         'link' => 'contacts',
         'rname' => 'id',
+        'vname' => 'LBL_CONTACT_ID',
 		'source' => 'non-db',
+        'studio' => false,
 	),
 	'repeat_type' =>
 	array(
 		'name' => 'repeat_type',
-		'vname' => 'LBL_REPEAT_TYPE',
+		'vname' => 'LBL_CALENDAR_REPEAT_TYPE',
 		'type' => 'enum',
 		'len' => 36,
 		'options' => 'repeat_type_dom',
@@ -468,7 +489,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
 	'repeat_interval' =>
 	array(
 		'name' => 'repeat_interval',
-		'vname' => 'LBL_REPEAT_INTERVAL',
+		'vname' => 'LBL_CALENDAR_REPEAT_INTERVAL',
 		'type' => 'int',
 		'len' => 3,
 		'default' => 1,
@@ -481,7 +502,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
 	'repeat_dow' =>
 	array(
 		'name' => 'repeat_dow',
-		'vname' => 'LBL_REPEAT_DOW',
+		'vname' => 'LBL_CALENDAR_REPEAT_DOW',
 		'type' => 'varchar',
 		'len' => 7,
 		'comment' => 'Days of week in recurrence',
@@ -493,7 +514,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
 	'repeat_until' =>
 	array(
 		'name' => 'repeat_until',
-		'vname' => 'LBL_REPEAT_UNTIL',
+		'vname' => 'LBL_CALENDAR_REPEAT_UNTIL_DATE',
 		'type' => 'date',
 		'comment' => 'Repeat until specified date',
 		'importable' => 'false',
@@ -504,7 +525,7 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
 	'repeat_count' =>
 	array(
 		'name' => 'repeat_count',
-		'vname' => 'LBL_REPEAT_COUNT',
+		'vname' => 'LBL_CALENDAR_REPEAT_COUNT',
 		'type' => 'int',
 		'len' => 7,
 		'comment' => 'Number of recurrence',
@@ -537,18 +558,6 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
 		'reportable' => false,
 		'studio' => false,
 	),
-	'duration' =>
-	array(
-		'name' => 'duration',
-		'vname' => 'LBL_DURATION',
-		'type' => 'enum',
-		'options' => 'duration_dom',
-		'source' => 'non-db',
-		'comment' => 'Duration handler dropdown',
-		'massupdate' => false,
-		'reportable' => false,
-		'importable' => false,
-	),
   'send_invites' => array(
     'name' => 'send_invites',
     'vname' => 'LBL_SEND_INVITES',
@@ -557,6 +566,47 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
     'comment' => 'checkbox indicating whether or not to send out invites (Meta-data only)',
     'massupdate' => false,
    ),
+        'invitees' => array(
+            'name' => 'invitees',
+            'source' => 'non-db',
+            'type' => 'collection',
+            'vname' => 'LBL_INVITEES',
+            'links' => array(
+                'contacts',
+                'leads',
+                'users',
+            ),
+            'order_by' => 'name:asc',
+            'studio' => false,
+        ),
+    'auto_invite_parent' => array(
+        'name' => 'auto_invite_parent',
+        'type' => 'bool',
+        'source' => 'non-db',
+        'comment' => 'Flag to allow for turning off auto invite of parent record -  (Meta-data only)',
+        'massupdate' => false,
+    ),
+    'task_parent' => array(
+        'name' => 'task_parent',
+        'type' => 'link',
+        'relationship' => 'task_meetings_parent',
+        'source' => 'non-db',
+        'reportable' => false,
+    ),
+    'contact_parent' => array(
+        'name' => 'contact_parent',
+        'type' => 'link',
+        'relationship' => 'contact_meetings_parent',
+        'source' => 'non-db',
+        'reportable' => false,
+    ),
+    'lead_parent' => array(
+        'name' => 'lead_parent',
+        'type' => 'link',
+        'relationship' => 'lead_meetings',
+        'source' => 'non-db',
+        'reportable' => false
+    ),
 ),
  'relationships' => array (
 	  'meetings_assigned_user' =>
@@ -587,15 +637,28 @@ $dictionary['Meeting'] = array('table' => 'meetings','activity_enabled'=>true,
        array('name' =>'idx_meet_par_del', 'type'=>'index', 'fields'=>array('parent_id','parent_type','deleted')),
        array('name' => 'idx_meet_stat_del', 'type' => 'index', 'fields'=> array('assigned_user_id', 'status', 'deleted')),
        array('name' => 'idx_meet_date_start', 'type' => 'index', 'fields'=> array('date_start')),
+       array('name' => 'idx_meet_date_start_end_del', 'type' => 'index', 'fields'=> array('date_start', 'date_end', 'deleted')),
+       array(
+           'name' => 'idx_meet_repeat_parent_id',
+           'type' => 'index',
+           'fields' => array('repeat_parent_id', 'deleted'),
+       ),
        // due to pulls from client side to check if there are reminders to handle.
        array('name' => 'idx_meet_date_start_reminder', 'type' => 'index', 'fields'=> array('date_start', 'reminder_time')),
 
                                                    )
 //This enables optimistic locking for Saves From EditView
 	,'optimistic_locking'=>true,
-                            );
+
+    'duplicate_check' => array(
+        'enabled' => false
+    ),
+);
 
 VardefManager::createVardef('Meetings','Meeting', array('default', 'assignable',
 'team_security',
 ));
-?>
+
+//boost value for full text search
+$dictionary['Meeting']['fields']['description']['full_text_search']['boost'] = 0.55;
+

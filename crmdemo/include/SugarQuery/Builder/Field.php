@@ -25,6 +25,11 @@ require_once 'include/SugarQuery/Builder/Field/Select.php';
 class SugarQuery_Builder_Field
 {
     /**
+     * @var SugarQuery
+     */
+    public $query;
+
+    /**
      * @var string Field
      */
     public $field;
@@ -34,9 +39,14 @@ class SugarQuery_Builder_Field
      */
     public $table;
     /**
-     * @var bool|string field alias
+     * @var bool|string field alias (must be db compatible)
      */
     public $alias = false;
+
+    /**
+     * @var bool|string field alias when returning data as an array (abstracting away database alias length)
+     */
+    public $original_alias = false;
     /**
      * @var string the fields bean table
      */
@@ -79,6 +89,9 @@ class SugarQuery_Builder_Field
         if (is_array($field)) {
             $this->field = $field[0];
             $this->alias = $field[1];
+            if (!empty($field[2])) {
+                $this->original_alias = $field[2];
+            }
         } else {
             $this->field = $field;
         }
@@ -135,6 +148,10 @@ class SugarQuery_Builder_Field
             $this->table = $this->query->getFromAlias();
             $def = $bean->field_defs[$this->field];
             $this->moduleName = $bean->module_name;
+        }
+        else if ($bean && ($bean->getTableName().'_cstm') == $this->table && !empty($bean->field_defs[$this->field])) {
+            $def = $bean->field_defs[$this->field];
+            $this->moduleName = $bean->module_name;
         } else {
             $bean = $this->query->getTableBean($this->table);
 
@@ -156,17 +173,15 @@ class SugarQuery_Builder_Field
      */
     public function checkCustomField($bean = null)
     {
-        if (empty($bean)) {
-            $bean = BeanFactory::getBean($this->moduleName);
-        }
-        if (!empty($bean)) {
+        $defs = empty($bean->field_defs) ? VardefManager::getFieldDefs($this->moduleName) : $bean->field_defs;
+        if (!empty($defs)) {
             // Initialize def for now, in case $this->field isn't in field_defs
             $def = array();
-            if (isset($bean->field_defs[$this->field])) {
-                $def = $bean->field_defs[$this->field];
+            if (isset($defs[$this->field])) {
+                $def = $defs[$this->field];
             }
-
             if ((isset($def['source']) && $def['source'] == 'custom_fields') || $this->field == 'id_c') {
+                $bean = empty($bean) ? BeanFactory::getBean($this->moduleName) : $bean;
                 $this->custom = true;
                 $this->custom_bean_table = $bean->get_custom_table_name();
                 $this->bean_table = $bean->getTableName();
@@ -190,7 +205,16 @@ class SugarQuery_Builder_Field
         if(!isset($this->def['source']) || $this->def['source'] == 'db') {
             return false;
         }
-        if (isset($this->def['type']) && $this->def['type'] == 'relate'
+        $related = false;
+        $bean = $this->query->getFromBean();
+        if (isset($this->def['type'])) {
+            if ($bean instanceof SugarBean) {
+                $related = in_array($this->def['type'], $bean::$relateFieldTypes);
+            } else {
+                $related = ($this->def['type'] == 'related');
+            }
+        }
+        if ($related
             || (isset($this->def['source']) && $this->def['source'] == 'non-db'
                 // For some reason the full_name field has 'link' => true
                 && isset($this->def['link']) && $this->def['link'] !== true)
@@ -222,7 +246,7 @@ class SugarQuery_Builder_Field
                     //Now actually join the related table
                     $jta = $this->query->getJoinTableAlias($this->def['name']);
                     $join = $this->query->joinRaw(
-                        " LEFT JOIN {$farBean->table_name} {$jta} ON {$idField->table}.{$this->def['id_name']} = {$jta}.id ",
+                        " LEFT JOIN {$farBean->table_name} {$jta} ON ({$idField->table}.{$this->def['id_name']} = {$jta}.id AND {$jta}.deleted = 0) ",
                         array('alias' => $jta)
                     );
                     $join->bean = $farBean;
@@ -232,8 +256,17 @@ class SugarQuery_Builder_Field
                 if ($this instanceof SugarQuery_Builder_Field_Select) {
                     $params['team_security'] = false;
                 }
+                if (isset($this->def['id_name']) && $this->def['id_name'] != $this->def['name']) {
+                    //Custom relate fields may have the id field on the custom table, need to check for that.
+                    $idField = new SugarQuery_Builder_Field_Select($this->def['id_name'], $this->query);
+                    $idField->setupField($this->query);
+                    $idField->checkCustomField();
+                    if ($idField->custom) {
+                        $this->custom = true;
+                        $this->query->joinCustomTable($this->query->getFromBean());
+                    }
+                }
                 $join = $this->query->join($this->def['link'], $params);
-
                 $jta = $join->joinName();
             } elseif(!empty($this->def['link']) && $this->query->getJoinAlias($this->def['link'])) {
                 $jta = $this->query->getJoinAlias($this->def['link']);
@@ -241,6 +274,7 @@ class SugarQuery_Builder_Field
 
             if (!empty($this->def['rname_link'])) {
                 $jta = $this->query->getJoinAlias($this->def['link']);
+                $this->query->rname_link = $jta;
                 $this->table = !empty($this->query->join[$jta]->relationshipTableAlias) ? $this->query->join[$jta]->relationshipTableAlias : $jta;
             }
         }
@@ -269,7 +303,10 @@ class SugarQuery_Builder_Field
      */
     public function shouldMarkNonDb()
     {
-        if ((isset($this->def['source']) && $this->def['source'] == 'non-db') && empty($this->def['rname_link'])) {
+        if ((isset($this->def['source']) && $this->def['source'] == 'non-db')
+            && empty($this->def['rname_link'])
+            && empty($this->def['db_concat_fields'])
+        ) {
             $this->markNonDb();
         }
     }

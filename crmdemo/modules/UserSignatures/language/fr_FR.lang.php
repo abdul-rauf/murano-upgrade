@@ -1,7 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,17 +9,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$mod_strings = array (
-  'LBL_EMAIL_SIGNATURE_ERROR1' => 'Cette signature requière un nom.',
-  'LBL_MODULE_NAME' => 'Signatures utilisateur',
-  'LBL_MODULE_NAME_SINGULAR' => 'Signature utilisateur',
-  'LBL_SIGNATURE' => 'Signature',
-  'LBL_SIGNATURES' => 'Signatures',
-  'LBL_SIGNATURE_DEFAULT' => 'Utiliser les signatures ?',
-  'LBL_SIGNATURE_HTML' => 'Signature HTML',
-  'LBL_SIGNATURE_NAME' => 'Nom',
-  'LBL_SIGNATURE_PREPEND' => 'Signature avant le mail original ?',
+$mod_strings = array(
+    'LBL_MODULE_NAME'			=> 'Signatures utilisateur',
+    'LBL_MODULE_NAME_SINGULAR'		=> 'Signature utilisateur',
+    'LBL_EMAIL_SIGNATURE_ERROR1' => 'Cette signature requiert un nom.',
+    'LBL_SIGNATURE_NAME'         => 'Nom',
+    'LBL_SIGNATURE'              => 'Signature',
+    'LBL_SIGNATURE_HTML'         => 'Signature HTML',
+    'LBL_SIGNATURE_DEFAULT'      => 'Utiliser les signatures ?',
+    'LBL_SIGNATURE_PREPEND'      => 'Apposer la signature sur la réponse ?',
+    'LBL_SIGNATURES'             => 'Signatures',
 );
-

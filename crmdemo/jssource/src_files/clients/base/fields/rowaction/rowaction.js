@@ -17,32 +17,54 @@
  */
 ({
     extendsFrom: 'ButtonField',
+
+    /**
+     * @inheritdoc
+     */
     initialize: function(options) {
         this.options.def.events = _.extend({}, this.options.def.events, {
             'click .rowaction': 'rowActionSelect'
         });
-        this._super("initialize", [options]);
+        this._super('initialize', [options]);
     },
+
     /**
      * Triggers event provided at this.def.event on the view's context object by default.
      * Can be configured to trigger events on 'view' itself or the view's 'layout'.
-     * @param evt
+     *
+     * @see View.Fields.Base.RowactionField#getTarget
+     * @param {Event} evt The click event.
      */
     rowActionSelect: function(evt) {
-        if(this.isDisabled()){
-            return;
+        var eventName = $(evt.currentTarget).data('event') || this.def.event;
+
+        if (eventName) {
+            this.getTarget().trigger(eventName, this.model, this, evt);
         }
-        // make sure that we are not disabled first
-        if(this.preventClick(evt) !== false) {
-            var target = this.view.context;  // view's 'context' is target by default
-            if (this.def.target === 'view') {
+    },
+
+    /**
+     * Returns the target on which the event should be triggered.
+     *
+     * @return {Core.Context} By default, the event should be triggered on the
+     * context.
+     * @return {View.View} The event should be triggered on the view.
+     * @return {View.Layout} The event should be triggered on the layout.
+     */
+    getTarget: function() {
+        var target;
+
+        switch (this.def.target) {
+            case 'view':
                 target = this.view;
-            } else if (this.def.target === 'layout') {
+                break;
+            case 'layout':
                 target = this.view.layout;
-            }
-            if ($(evt.currentTarget).data('event')) {
-                target.trigger($(evt.currentTarget).data('event'), this.model, this);
-            }
+                break;
+            default:
+                target = this.view.context;
         }
+
+        return target;
     }
 })

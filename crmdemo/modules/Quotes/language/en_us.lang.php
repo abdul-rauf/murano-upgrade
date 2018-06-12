@@ -174,6 +174,7 @@ $mod_strings = array (
     'LBL_SHIPPING' => 'Shipping:',
     'LBL_DISCOUNT_TOTAL' => 'Discount:',
     'LBL_NEW_SUB' => 'Discounted Subtotal:',
+    'LBL_NEW_SUB_USDOLLAR' => 'Discounted Subtotal (US Dollar):',
     'LBL_SHOW_LINE_NUMS' => 'Display Line Numbers:',
     'LBL_STATE' => 'State:',
     'LBL_SUBTOTAL_USDOLLAR'=>'Subtotal (US Dollar)',
@@ -208,5 +209,6 @@ $mod_strings = array (
     'NTC_OVERWRITE_ADDRESS_PHONE_CONFIRM' => 'This record currently contains values in the Address fields. To overwrite these values with the following Address of the Account that you selected, click "OK". To keep the current values, click "Cancel".',
 	'LBL_EDITLAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
     'LBL_REVENUELINEITEMS' => 'Revenue Line Items',
+
+    'EXCEPTION_QUOTE_ALREADY_CONVERTED' => 'Quote Already Converted To Opportunity',
 );
-?>

@@ -1,12 +1,29 @@
+# Sidecar
 
-# Easy Install
+Sidecar is SugarCRM's client-side MVC framework. It extends [Backbone.js][backbone] and forms the core of
+both the SugarCRM web application and Sugar's mobile offerings.
 
-Sidecar requires [node.js](http://nodejs.org) to be installed.
+## Getting Started
 
-**Make sure you install it with the `npm` package.**
+Sidecar requires [Node.js][nodejs] version 4.2.0 or higher to be installed.
+**Make sure you also have the `npm` package.**
 
-Now install [uglify-js](https://github.com/mishoo/UglifyJS/) by running:
+If you use Homebrew, you can install Node.js like this:
+ 
+```bash
+$ brew update
+$ brew install node
+```
+
+Now install the dependencies by running:
 
 ```bash
-$ npm install uglify-js -g
+$ npm install
 ```
+
+## Committing Changes
+
+If you wish to submit changes to Sidecar, please see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+[backbone]: http://backbonejs.org/
+[nodejs]: http://nodejs.org

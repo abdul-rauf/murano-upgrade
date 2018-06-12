@@ -11,29 +11,36 @@
 /**
  * @class View.Fields.Base.NameField
  * @alias SUGAR.App.view.fields.BaseNameField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
-    plugins: ['EllipsisInline'],
-    'events': {
-        'keyup input[name=name]': 'handleKeyup'
+    plugins: ['EllipsisInline', 'MetadataEventDriven'],
+
+    /**
+     * @inheritdoc
+     */
+    initialize: function(options) {
+        this._super('initialize', [options]);
+        /**
+         * Property to add or not the `ellipsis_inline` class when rendering the
+         * field in the `list` template. `true` to add the class, `false`
+         * otherwise.
+         *
+         * Defaults to `true`.
+         *
+         * @property {boolean}
+         */
+        this.ellipsis = _.isUndefined(this.def.ellipsis) || this.def.ellipsis;
     },
+
     _render: function() {
         // FIXME: This will be cleaned up by SC-3478.
-        if (this.view.name === 'record') {
+        if (this.view.name === 'audit') {
             this.def.link = false;
         } else if (this.view.name === 'preview') {
             this.def.link = _.isUndefined(this.def.link) ? true : this.def.link;
+            this.def.events = false;
         }
         this._super('_render');
-    },
-    /**
-     * Handles the keyup event in the account create page
-     */
-    handleKeyup: _.throttle(function() {
-        var searchedValue = this.$('input.inherit-width').val();
-        if (searchedValue && searchedValue.length >= 3) {
-            this.context.trigger('input:name:keyup', searchedValue);
-        }
-    }, 1000, {leading: false})
+    }
 })

@@ -82,6 +82,16 @@ class ViewResetmodule extends SugarView
 		if (!empty($_REQUEST['extensions']))
             $out .= $this->removeCustomExtensions();
 
+        if($this->module === 'Opportunities') {
+            $opp_settings = Opportunity::getSettings();
+            if ($opp_settings['opps_view_by'] == 'RevenueLineItems') {
+                require_once 'modules/Opportunities/include/OpportunityWithRevenueLineItem.php';
+                $opp_setup = new OpportunityWithRevenueLineItem();
+                $opp_setup->doMetadataConvert();
+                $out .= 'Enabling Opportunities with RevenueLineItems<br />';
+            }
+        }
+
 
         $out .= "Complete!";
 
@@ -145,11 +155,18 @@ class ViewResetmodule extends SugarView
         $module = StudioModuleFactory::getStudioModule( $this->module ) ;
         $sources = $module->getViewMetadataSources();
 
+        // Add in search/filters here rather than in the StudioModule object
+        $sources[] = array('type'  => MB_FILTERVIEW);
+        $sources[] = array('type'  => MB_BWCFILTERVIEW);
+
         $out = "";
 
         // list of existing platforms including BWC
         $platforms = MetaDataManager::getPlatformList();
         array_unshift($platforms, '');
+
+        // Flag to tell the autoloader whether to save itself or not when done
+        $saveMap = false;
 
         foreach($sources as $view)
         {
@@ -161,9 +178,17 @@ class ViewResetmodule extends SugarView
                     $platform
                 );
 
-                if (file_exists($file)) {
+                // Ensure we are working on files that the autoloader knows about
+                if (SugarAutoLoader::fileExists($file)) {
+                    // Since we are in a loop inside of a loop do NOT send the
+                    // save flag as true to unlink() but be sure to save the file
+                    // map after the process is finished so that all changes to
+                    // the map are saved.
                     SugarAutoLoader::unlink($file);
                     $out .= "Removed layout {$view['type']}.php<br/>";
+
+                    // Tell the autoloader to save itself
+                    $saveMap = true;
                 }
             }
         }
@@ -171,6 +196,11 @@ class ViewResetmodule extends SugarView
         // now clear the cache
         include_once ('include/TemplateHandler/TemplateHandler.php') ;
         TemplateHandler::clearCache ( $this->module ) ;
+
+        // If the file map needs saving, handle that now
+        if ($saveMap) {
+            SugarAutoLoader::saveMap();
+        }
 
         return $out;
     }
@@ -210,9 +240,8 @@ class ViewResetmodule extends SugarView
             foreach ($files as $langFile) {
                 if (substr($langFile, 0 ,1) == '.') continue;
 				$language = substr($langFile, 0, strlen($langFile) - 9);
-				unlink($languageDir . "/" . $langFile);
+                SugarAutoLoader::unlink($languageDir . "/" . $langFile, true);
 
-				SugarAutoLoader::delFromMap($languageDir . "/" . $langFile);
 				LanguageManager::clearLanguageCache ( $this->module, $language ) ;
 				$out .= "Removed language file $langFile<br/>";
             }

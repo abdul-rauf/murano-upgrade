@@ -60,6 +60,21 @@ class SidecarSubpanelLayoutMetaDataParser extends SidecarListLayoutMetaDataParse
         // extensions for a subpanel are built.
     }
 
+    /**
+     * Return a specific panel if it exists, if it does not exist, `false` will be returned instead
+     *
+     * @param int $panel What panel are we looking for?
+     * @return array|bool
+     */
+    protected function getPanel($panel)
+    {
+        if (isset($this->_paneldefs[$panel])) {
+            return $this->_paneldefs[$panel];
+        }
+
+        return false;
+    }
+
     /*
      * Removes a field from the SubPanel Layout
      *
@@ -98,5 +113,53 @@ class SidecarSubpanelLayoutMetaDataParser extends SidecarListLayoutMetaDataParse
         }
 
         return $return;
+    }
+
+    /** {@inheritDoc} */
+    public function isValidField($key, array $def)
+    {
+        // allow only relationship fields based on the same relationship as the subpanel
+        if (!empty($def['rname_link']) &&
+            $this->getFieldRelationship($def) !== $this->getSubpanelRelationship()
+        ) {
+            return false;
+        }
+
+        return parent::isValidField($key, $def);
+    }
+
+    /**
+     * Returns the name of the relationship corresponding to the given field
+     *
+     * @param array $def
+     * @return string|null
+     */
+    protected function getFieldRelationship(array $def)
+    {
+        if (isset($def['link']) && isset($this->_fielddefs[$def['link']]['relationship'])) {
+            return $this->_fielddefs[$def['link']]['relationship'];
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the name of the relationship which the subpanel is built on
+     *
+     * @return string|null
+     */
+    protected function getSubpanelRelationship()
+    {
+        $linkName = $this->implementation->getLinkName();
+        if ($linkName) {
+            $moduleName = $this->implementation->getPrimaryModuleName();
+            $bean = BeanFactory::getBean($moduleName);
+            $def = $bean->getFieldDefinition($linkName);
+            if (isset($def['relationship'])) {
+                return $def['relationship'];
+            }
+        }
+
+        return null;
     }
 }

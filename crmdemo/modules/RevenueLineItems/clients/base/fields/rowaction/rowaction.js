@@ -8,9 +8,5 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({extendsFrom:"RowactionField",initialize:function(options){this.plugins=_.clone(this.plugins)||[];this.plugins.push('DisableDelete');this._super("initialize",[options]);this.context.on("record:deleted",function(){this.deleteCommitWarning();},this);},deleteCommitWarning:function(){var message=null
-if(this.model.get("commit_stage")=="include"){var forecastModuleSingular=app.lang.get('LBL_MODULE_NAME_SINGULAR','Forecasts');message=app.lang.get("WARNING_DELETED_RECORD_RECOMMIT_1","RevenueLineItems")
-+'<a href="#Forecasts">'+forecastModuleSingular+'</a>.  '
-+app.lang.get("WARNING_DELETED_RECORD_RECOMMIT_2","RevenueLineItems")
-+'<a href="#Forecasts">'+forecastModuleSingular+'</a>.';app.alert.show("included_delete_warning",{level:"warning",messages:message,onLinkClick:function(){app.alert.dismissAll();}});}
-return message;}})
+({extendsFrom:"RowactionField",initialize:function(options){this.plugins=_.clone(this.plugins)||[];if(!options.context.get('isCreateSubpanel')){this.plugins.push('DisableDelete');}
+this._super("initialize",[options]);}})

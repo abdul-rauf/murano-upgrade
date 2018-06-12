@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: layout_defs.php 13968 2006-06-12 22:00:08Z jacob $
 
 $layout_defs['Activities'] = array( // the key to the layout_defs must be the name of the module dir
 	'default_subpanel_define' => array(

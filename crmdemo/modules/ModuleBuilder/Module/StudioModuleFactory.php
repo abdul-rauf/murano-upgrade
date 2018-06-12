@@ -15,7 +15,7 @@ class StudioModuleFactory
 {
 	protected static $loadedMods = array();
 
-    public static function getStudioModule($module)
+    public static function getStudioModule($module, $seed = null)
 	{
 		if (!empty(self::$loadedMods[$module]))
             return self::$loadedMods[$module];
@@ -34,10 +34,28 @@ class StudioModuleFactory
 		}
 		else 
 		{
-			$sm = new StudioModule($module);
+			$sm = new StudioModule($module, $seed);
 		}
         self::$loadedMods[$module] = $sm;
         return $sm;
 	}
+
+    /**
+     * Ability to clean out the studio module cache.
+     *
+     * @param string $module
+     * @return bool
+     */
+    public static function clearModuleCache($module = '') {
+
+        if (empty($module)) {
+            self::$loadedMods = array();
+            return true;
+        } else if(isset(self::$loadedMods[$module]))  {
+            unset(self::$loadedMods[$module]);
+            return true;
+        }
+
+        return false;
+    }
 }
-?>

@@ -14,7 +14,8 @@ require_once("include/Expressions/Expression/Boolean/BooleanExpression.php");
 /**
  * <b>equal(Generic item1, Generic item2)</b><br>
  * Returns true if "item1" is equal to "item2".<br/>
- * ex: <i>equal("one", "one")</i> = true, <i>equal(1, "one")</i> = false
+ * ex: <i>equal("one", "one")</i> = true, <i>equal(1, "one")</i> = false<br/>
+ * Formula for checkbox fields: equal($checkbox_field_name, true)
  */
 class EqualExpression extends BooleanExpression
 {
@@ -52,10 +53,10 @@ class EqualExpression extends BooleanExpression
                 params = this.getParameters(),
                 a = params[0].evaluate(),
                 b = params[1].evaluate(),
-                hasBool = params[0] instanceof SUGAR.expressions.TrueExpression ||
-                    params[1] instanceof SUGAR.expressions.TrueExpression;
+                hasBool = params[0] instanceof SUGAR.expressions.BooleanExpression ||
+                    params[1] instanceof SUGAR.expressions.BooleanExpression;
 
-            if ( a == b  || (hasBool && SEE.isTruthy(a) && SEE.isTruthy(b))) {
+            if ( a == b  || (hasBool && ((SEE.isTruthy(a) && SEE.isTruthy(b)) || (!SEE.isTruthy(a) && !SEE.isTruthy(b))))) {
                return SEE.TRUE;
             }
             return SEE.FALSE;

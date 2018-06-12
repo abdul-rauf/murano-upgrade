@@ -88,14 +88,56 @@ SEE.prototype.init = function(params) {
  * Returns the parameter list for this Expression.
  */
 SEE.prototype.getParameters = function() {
-	return this.params;
+    if (!this.params) {
+        return this.params;
+    }
+
+    var params,
+        param,
+        result = [],
+        types = this.getParameterTypes(),
+        oneParam = this.getParamCount() == 1,
+        type,
+        i;
+
+    if (oneParam || (!_.isArray(this.params) && _.isObject(this.params))) {
+        params = [this.params];
+    } else {
+        params = this.params;
+    }
+
+    if (!(types instanceof Array)) {
+        type = types;
+        types = [];
+        for (i = 0; i < params.length; i++) {
+            types.push(type);
+        }
+    }
+
+    var map = this.constructor.TYPE_CAST_MAP;
+    for (i = 0; i < params.length; i++) {
+        param = params[i];
+        if (param instanceof SEE) {
+            type = SEP.prototype.getType(param);
+            if (type != types[i] && types[i] in map) {
+                param = new SUGAR.expressions[map[types[i]]](param, this.context);
+            }
+        }
+        result.push(param);
+    }
+
+    if (oneParam) {
+        result = result.shift();
+    }
+
+    return result;
 };
 
 /**
  * Validates the parameters and throws an Exception if invalid.
  */
 SEE.prototype.validateParameters = function() {
-	var params = this.getParameters();
+    var params = this.params;
 	var count  = this.getParamCount();
 	var types  = this.getParameterTypes();
 
@@ -218,6 +260,10 @@ SEE.prototype.isProperType = function(variable, type) {
         return true;
 
 	// now check for generics
+    if (variable instanceof see) {
+        variable = variable.evaluate();
+    }
+
 	switch(type) {
 		case see.STRING_TYPE:
 			return (typeof(variable) == 'string' || typeof(variable) == 'number'
@@ -227,9 +273,6 @@ SEE.prototype.isProperType = function(variable, type) {
 			return (typeof(variable) == 'number' || SUGAR.expressions.isNumeric(variable));
 			break;
         case see.BOOLEAN_TYPE:
-            if (variable instanceof see) {
-                variable = variable.evaluate();
-            }
             return variable == see.TRUE || variable == see.FALSE ||
                 variable === 1 || variable === 0 ||
                 variable === '1' || variable === '0' ||
@@ -237,10 +280,6 @@ SEE.prototype.isProperType = function(variable, type) {
             break;
         case see.DATE_TYPE:
         case see.TIME_TYPE:
-            if ( variable instanceof see ) {
-				variable = variable.evaluate();
-			}
-
             // Empty string and NULL are valid values of date fields.
             // The expressions using them should be responsible for proper handling of empty values.
             if (variable === null || variable === ''
@@ -426,7 +465,13 @@ SEE.TYPE_MAP	= {
 		"generic" 	: SUGAR.expressions.GenericExpression
 };
 
-
+/**
+ * The type to expression class map for implicit type casting.
+ */
+SEE.TYPE_CAST_MAP = {
+    "number": "ValueOfExpression",
+    "string": "DefineStringExpression"
+};
 
 /**
  * Construct a new ConstantExpression.
@@ -926,7 +971,7 @@ SEP.prototype.evaluate = function(expr, context)
 SEP.prototype.toConstant = function(expr) {
 
 	// a raw numeric constant
-	if ( (/^(\-)?[0-9]+(\.[0-9]+)?$/).exec(expr) != null ) {
+	if (isFinite(expr) && !isNaN(parseFloat(expr))) {
 		return new SUGAR.expressions.ConstantExpression( parseFloat(expr) );
 	}
 
@@ -1064,12 +1109,11 @@ SEC.prototype.getRelatedValue = function(linkField, relField)
 }
 
 SUGAR.expressions.isNumeric = function(str) {
-    if(typeof(str) != 'number' && typeof(str) != 'string')
+    if (typeof(str) != 'number' && typeof(str) != 'string') {
         return false;
-    var SE = SUGAR.expressions;
-    var numRegex = new RegExp("^(\\-)?[0-9\\,]+(\\.[0-9]+)?$");
-    str = SE.unFormatNumber(str);
-    return numRegex.exec(str) != null;
+    }
+    str = SUGAR.expressions.unFormatNumber(str);
+    return (isFinite(str) && !isNaN(parseFloat(str)));
 
 };
 
@@ -1321,7 +1365,8 @@ SUGAR.util.DateUtils = {
 	getUserTime: function()
 	{
 		var date = new Date();
-		if (typeof(SUGAR.expressions.userPrefs.gmt_offset) != "undefined")
+		if (SUGAR.expressions.userPrefs &&
+            typeof(SUGAR.expressions.userPrefs.gmt_offset) != 'undefined')
 		{
 			//Sugars TZ offset is negative compared with JS's offset, so adding is really subtracting;
 			var offset = SUGAR.expressions.userPrefs.gmt_offset;

@@ -22,19 +22,30 @@ $focus->retrieve($_POST['record']);
 
 $focus = populateFromPost('', $focus);
 
-if ($_REQUEST['return_module'] != 'Project'){
-	$focus->person_id = $_REQUEST['relate_id'];
-	$focus->person_type = "Users";
+if ($focus->id != $_REQUEST['relate_id']) {
+    if ($_REQUEST['return_module'] != 'Project') {
+        $focus->person_id = $_REQUEST['relate_id'];
+        $focus->person_type = "Users";
+    } elseif ($_REQUEST['return_module'] == 'Project') {
+        $focus->related_module = 'Project';
+        $focus->related_module_id = $_REQUEST['relate_id'];
+    }
 }
-else if ($_REQUEST['return_module'] == 'Project'){
-	$focus->related_module = 'Project';
-	$focus->related_module_id = $_REQUEST['relate_id'];
+
+if (!$focus->id && !empty($_REQUEST['duplicateId'])) {
+    $original_focus = BeanFactory::getBean('Holidays');
+    $original_focus->retrieve($_REQUEST['duplicateId']);
+
+    $focus->person_id = $original_focus->person_id;
+    $focus->person_type = $original_focus->person_type;
+    $focus->related_module = $original_focus->related_module;
+    $focus->related_module_id = $original_focus->related_module_id;
 }
 
 $check_notify = FALSE;
 
 $focus->save($check_notify);
-$return_id = $Document->id;
+$return_id = $focus->id;
 
 if(isset($_POST['return_module']) && $_POST['return_module'] != "") $return_module = $_POST['return_module'];
 else $return_module = "Holidays";

@@ -8,4 +8,4 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({plugins:['ShortcutSession'],shortcuts:['Sidebar:Toggle','Create:Save','Create:Cancel','Dropdown:More']})
+({plugins:['ShortcutSession'],shortcuts:['Sidebar:Toggle','Create:Save','Create:Cancel','Dropdown:More'],initialize:function(options){this._super('initialize',[options]);app.logger.warn('Warning: View.Layouts.Base.CreateActionsLayout is deprecated since 7.7.0 and will be '+'removed in 7.8.0. Use View.Layouts.Base.CreateLayout instead.');}})

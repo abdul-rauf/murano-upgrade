@@ -27,7 +27,6 @@ $viewdefs['Leads']['base']['view']['list'] = array(
                         'last_name',
                     ),
                     'link' => true,
-                    'css_class' => 'full-name',
                     'label' => 'LBL_LIST_NAME',
                     'enabled' => true,
                     'default' => true,
@@ -63,6 +62,11 @@ $viewdefs['Leads']['base']['view']['list'] = array(
                 array (
                     'name'  => 'assigned_user_name',
                     'label' => 'LBL_LIST_ASSIGNED_USER',
+                    'enabled' => true,
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'date_modified',
                     'enabled' => true,
                     'default' => true,
                 ),

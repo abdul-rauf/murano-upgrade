@@ -25,7 +25,7 @@
     tabClass: '',
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     initialize: function(options) {
         this._super('initialize', [options]);
@@ -37,20 +37,24 @@
                 .y(function(d) {
                     return d.value;
                 })
-                .margin({top: 10, right: 10, bottom: 15, left: 10})
+                .margin({top: 0, right: 0, bottom: 0, left: 0})
                 .donut(true)
                 .donutLabelsOutside(true)
                 .donutRatio(0.447)
+                .rotateDegrees(0)
+                .arcDegrees(360)
+                .maxRadius(110)
                 .hole(this.total)
                 .showTitle(false)
                 .tooltips(true)
                 .showLegend(false)
-                .colorData('class')
+                .direction(app.lang.direction)
+                .colorData('data')
                 .tooltipContent(function(key, x, y, e, graph) {
                     return '<p><b>' + key + ' ' + parseInt(y, 10) + '</b></p>';
                 })
                 .strings({
-                    noData: app.lang.getAppString('LBL_CHART_NO_DATA')
+                    noData: app.lang.get('LBL_CHART_NO_DATA')
                 });
 
     },
@@ -66,8 +70,7 @@
 
         // Set value of label inside donut chart
         this.chart.hole(this.total);
-
-        d3.select('svg#' + this.cid)
+        d3.select(this.el).select('svg#' + this.cid)
             .datum(this.chartCollection)
             .transition().duration(500)
             .call(this.chart);
@@ -113,18 +116,18 @@
         this.chartCollection = {
             data: [],
             properties: {
-                title: app.lang.getAppString('LBL_CASE_SUMMARY_CHART'),
+                title: app.lang.get('LBL_CASE_SUMMARY_CHART'),
                 value: 3,
                 label: this.total
             }
         };
         this.chartCollection.data.push({
-            key: app.lang.getAppString('LBL_DASHLET_CASESSUMMARY_CLOSE_CASES'),
+            key: app.lang.get('LBL_DASHLET_CASESSUMMARY_CLOSE_CASES'),
             classes: 'nv-fill-green',
             value: countClosedCases
         });
         this.chartCollection.data.push({
-            key: app.lang.getAppString('LBL_DASHLET_CASESSUMMARY_OPEN_CASES'),
+            key: app.lang.get('LBL_DASHLET_CASESSUMMARY_OPEN_CASES'),
             classes: 'nv-fill-red',
             value: countOpenCases
         });
@@ -165,7 +168,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     loadData: function(options) {
         var self = this,
@@ -194,7 +197,8 @@
             error: _.bind(function() {
                 this.displayNoData(true);
             }, this),
-            complete: options ? options.complete : null
+            complete: options ? options.complete : null,
+            limit: -1
         });
     }
 })

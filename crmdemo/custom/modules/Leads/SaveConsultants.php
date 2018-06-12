@@ -58,7 +58,7 @@ class SaveConsultant
     {
         $dbConfig = $this->getConnectaDBConfig();
         if ($bean->fetched_row['data_updated'] == 1 && $bean->data_updated != 1 && $dbConfig) {
-            $con = mysql_connect($dbConfig['db_host_name'], $dbConfig['db_user_name'], $dbConfig['db_password']) or die(mysql_error());
+            $con = mysql_connect($dbConfig['db_host_name'], $dbConfig['db_user_name'], $dbConfig['db_password']) or sugar_upgrade_die(mysql_error());
             mysql_select_db('crm');
             $sql = "delete from leads where id ='" . $bean->id . "'";
             $row = mysql_query($sql, $con);
@@ -69,7 +69,7 @@ class SaveConsultant
     {
         $dbConfig = $this->getConnectaDBConfig();
         if ($dbConfig) {
-            $con = mysql_connect($dbConfig['db_host_name'], $dbConfig['db_user_name'], $dbConfig['db_password']) or die(mysql_error());
+            $con = mysql_connect($dbConfig['db_host_name'], $dbConfig['db_user_name'], $dbConfig['db_password']) or sugar_upgrade_die(mysql_error());
             mysql_select_db('connecta');
             $sql = "delete from leads where id ='" . $bean->id . "'";
             $row = mysql_query($sql, $con);

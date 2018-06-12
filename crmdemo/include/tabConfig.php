@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: tabConfig.php 53116 2009-12-10 01:24:37Z mitani $
 
 $GLOBALS['tabStructure'] = array(
 );

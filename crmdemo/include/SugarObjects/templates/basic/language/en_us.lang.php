@@ -19,7 +19,7 @@ $mod_strings = array(
 'LBL_MODIFIED_NAME'=>'Modified By Name',
 'LBL_CREATED'=>'Created By',
 'LBL_CREATED_ID'=>'Created By Id',
-'LBL_DOC_OWNER'=>'Document Onwer',
+'LBL_DOC_OWNER'=>'Document Owner',
 'LBL_USER_FAVORITES'=>'Users Who Favorite',
 'LBL_DESCRIPTION'=>'Description',
 'LBL_DELETED'=>'Deleted',
@@ -29,6 +29,8 @@ $mod_strings = array(
 'LBL_LIST_NAME'=>'Name',
 'LBL_EDIT_BUTTON' => 'Edit',
  'LBL_REMOVE' => 'Remove',
+    //define label(s) to be used for overriding local values during import/export
+    'LBL_EXPORT_MODIFIED_BY_NAME' => 'Modified By Name',
 
 
 );

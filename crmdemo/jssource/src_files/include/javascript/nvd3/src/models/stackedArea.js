@@ -19,9 +19,9 @@ nv.models.stackedArea = function () {
     , y //can be accessed via chart.yScale()
     , delay = 200
     , scatter = nv.models.scatter()
-    , color = nv.utils.defaultColor()
+    , color = function (d, i) { return nv.utils.defaultColor()(d, d.series); }
     , fill = color
-    , classes = function (d,i) { return 'nv-area nv-area-'+ i; }
+    , classes = function (d,i) { return 'nv-area nv-area-' + d.series; }
     , dispatch =  d3.dispatch('tooltipShow', 'tooltipHide', 'tooltipMove', 'areaClick', 'areaMouseover', 'areaMouseout', 'areaMousemove')
     ;
 
@@ -156,7 +156,7 @@ nv.models.stackedArea = function () {
             dispatch.areaMouseover({
               point: d,
               series: d.key,
-              pos: [d3.event.pageX, d3.event.pageY],
+              pos: [d3.event.offsetX, d3.event.offsetY],
               seriesIndex: i
             });
             g.select('.nv-chart-' + chart.id() + ' .nv-area-' + i).classed('hover', true);
@@ -166,7 +166,7 @@ nv.models.stackedArea = function () {
             dispatch.areaMouseout({
               point: d,
               series: d.key,
-              pos: [d3.event.pageX, d3.event.pageY],
+              pos: [d3.event.offsetX, d3.event.offsetY],
               seriesIndex: i
             });
             g.select('.nv-chart-' + chart.id() + ' .nv-area-' + i).classed('hover', false);
@@ -175,7 +175,7 @@ nv.models.stackedArea = function () {
             dispatch.areaMousemove({
               point: d,
               pointIndex: i,
-              pos: [d3.event.pageX, d3.event.pageY],
+              pos: [d3.event.offsetX, d3.event.offsetY],
               seriesIndex: i
             });
           })
@@ -184,7 +184,7 @@ nv.models.stackedArea = function () {
             dispatch.areaClick({
               point: d,
               series: d.key,
-              pos: [d3.event.pageX, d3.event.pageY],
+              pos: [d3.event.offsetX, d3.event.offsetY],
               seriesIndex: i
             });
           });
@@ -193,9 +193,9 @@ nv.models.stackedArea = function () {
           .attr('d', function (d,i) { return zeroArea(d.values,i); })
           .remove();
       path
-          .attr('class', function (d,i) { return this.getAttribute('class') || classes(d,i); })
-          .attr('fill', function (d,i){ return d.color || fill(d,i); })
-          .attr('stroke', function (d,i){ return d.color || fill(d,i); });
+          .attr('class', classes)
+          .attr('fill', color)
+          .attr('stroke', color);
       //d3.transition(path)
       path
           .attr('d', function (d,i) { return area(d.values,i); });
@@ -211,6 +211,9 @@ nv.models.stackedArea = function () {
       scatter.dispatch.on('elementMouseout.area', function (e) {
         g.select('.nv-chart-' + chart.id() + ' .nv-area-' + e.seriesIndex).classed('hover', false);
       });
+      scatter.dispatch.on('elementClick.area', function (e) {
+        dispatch.areaClick(e);
+      });
 
       //============================================================
 
@@ -224,9 +227,6 @@ nv.models.stackedArea = function () {
   // Event Handling/Dispatching (out of chart's scope)
   //------------------------------------------------------------
 
-  scatter.dispatch.on('elementClick.area', function (e) {
-    dispatch.areaClick(e);
-  });
   scatter.dispatch.on('elementMouseover.tooltip', function (e) {
     e.pos = [e.pos[0] + margin.left, e.pos[1] + margin.top];
     dispatch.tooltipShow(e);
@@ -245,7 +245,7 @@ nv.models.stackedArea = function () {
   chart.dispatch = dispatch;
   chart.scatter = scatter;
 
-  d3.rebind(chart, scatter, 'interactive', 'size', 'id', 'xScale', 'yScale', 'zScale', 'xDomain', 'yDomain', 'sizeDomain', 'forceX', 'forceY', 'forceSize', 'clipVoronoi', 'clipRadius');
+  d3.rebind(chart, scatter, 'interactive', 'size', 'id', 'xScale', 'yScale', 'zScale', 'xDomain', 'yDomain', 'sizeDomain', 'forceX', 'forceY', 'forceSize', 'clipVoronoi', 'useVoronoi', 'clipRadius');
 
   chart.color = function (_) {
     if (!arguments.length) { return color; }
@@ -271,24 +271,6 @@ nv.models.stackedArea = function () {
     return chart;
   };
 
-  chart.x = function (_) {
-    if (!arguments.length) { return getX; }
-    getX = d3.functor(_);
-    return chart;
-  };
-
-  chart.y = function (_) {
-    if (!arguments.length) { return getY; }
-    getY = d3.functor(_);
-    return chart;
-  };
-
-  chart.delay = function (_) {
-    if (!arguments.length) { return delay; }
-    delay = _;
-    return chart;
-  };
-
   chart.margin = function (_) {
     if (!arguments.length) { return margin; }
     margin.top    = typeof _.top    != 'undefined' ? _.top    : margin.top;
@@ -307,6 +289,26 @@ nv.models.stackedArea = function () {
   chart.height = function (_) {
     if (!arguments.length) { return height; }
     height = _;
+    return chart;
+  };
+
+  chart.x = function (_) {
+    if (!arguments.length) { return getX; }
+    getX = _;
+    scatter.x(_);
+    return chart;
+  };
+
+  chart.y = function (_) {
+    if (!arguments.length) { return getY; }
+    getY = _;
+    scatter.y(_);
+    return chart;
+  };
+
+  chart.delay = function (_) {
+    if (!arguments.length) { return delay; }
+    delay = _;
     return chart;
   };
 

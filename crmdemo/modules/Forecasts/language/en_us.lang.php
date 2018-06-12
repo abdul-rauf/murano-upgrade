@@ -75,34 +75,6 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Description',
     'LBL_OW_TYPE'=>'Type',
 
-    //forecast schedule shortcuts
-    'LNK_NEW_TIMEPERIOD' => 'Create Time Period',
-    'LNK_TIMEPERIOD_LIST' => 'View Time Periods',
-
-    //Forecast schedule sub panel list view.
-    'LBL_SVFS_FORECASTDATE' => 'Schedule Start Date',
-    'LBL_SVFS_STATUS' => 'Status',
-    'LBL_SVFS_USER' => 'For',
-    'LBL_SVFS_CASCADE' => 'Cascade to Reports?',
-    'LBL_SVFS_HEADER' => 'Forecast Schedule:',
-
-    //Forecast Schedule detail; view.....
-    'LB_FS_KEY' => 'ID',
-    'LBL_FS_TIMEPERIOD_ID' => 'Time Period ID',
-    'LBL_FS_USER_ID' => 'User ID',
-    'LBL_FS_TIMEPERIOD' => 'Time Period',
-    'LBL_FS_START_DATE' => 'Start Date',
-    'LBL_FS_END_DATE' => 'End Date',
-    'LBL_FS_FORECAST_START_DATE' => "Forecast Start Date",
-    'LBL_FS_STATUS' => 'Status',
-    'LBL_FS_FORECAST_FOR' => 'Schedule For:',
-    'LBL_FS_CASCADE' =>'Cascade?',
-    'LBL_FS_MODULE_NAME' => 'Forecast Schedule',
-    'LBL_FS_CREATED_BY' =>'Created by',
-    'LBL_FS_DATE_ENTERED' => 'Date Entered',
-    'LBL_FS_DATE_MODIFIED' => 'Date Modified',
-    'LBL_FS_DELETED' => 'Deleted',
-
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Direct Report',
     'LBL_FDR_OPPORTUNITIES'=>'Opportunities in Forecast:',
@@ -241,7 +213,8 @@ $mod_strings = array (
     'LBL_TREE_PARENT' => 'Parent',
 
     // Label for Current User Rep Worksheet Line
-    'LBL_MY_MANAGER_LINE' => '{0} (me)',
+    // &#x200E; tells the browser to interpret as left-to-right
+    'LBL_MY_MANAGER_LINE' => '{0} (me)&#x200E;',
 
     //Labels for worksheet items
     'LBL_EXPECTED_OPPORTUNITIES' => 'Expected Opportunities',
@@ -311,6 +284,8 @@ $mod_strings = array (
     'LBL_FORECASTS_ACLS_NO_ACCESS_TITLE' => 'Forecasts Access Error:',
     'LBL_FORECASTS_ACLS_NO_ACCESS_MSG' => 'You do not have access to the Forecasts module. Please contact your Administrator.',
 
+    'LBL_FORECASTS_RECORDS_ACLS_NO_ACCESS_MSG' => 'You do not have access to the Forecasts module\'s records. Please contact your Administrator.',
+
     // Panel and BreadCrumb Labels
     'LBL_FORECASTS_CONFIG_BREADCRUMB_WORKSHEET_LAYOUT' => 'Worksheet Layout',
     'LBL_FORECASTS_CONFIG_BREADCRUMB_RANGES' => 'Ranges',
@@ -346,7 +321,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_LEAFPERIOD' => 'Choose the sub period that you want to view your Time Period over:',
     'LBL_FORECASTS_CONFIG_START_DATE' => 'Choose fiscal year start date',
     'LBL_FORECASTS_CONFIG_TIMEPERIODS_FORWARD' => 'Choose the number of future Time Periods to view in the worksheet.<br><i>This number applies to the base Time Period selected. For example, choosing 2 with Yearly Time Period will show 8 future Quarters</i>',
-    'LBL_FORECASTS_CONFIG_TIMEPERIODS_BACKWARD' => 'Choose the number of past Time Periods to view in the worksheet.<br><i>This number applies to the base Time Period selected. For example, choosing 2 with Monthly Time Period will show 6 past Months</i>',
+    'LBL_FORECASTS_CONFIG_TIMEPERIODS_BACKWARD' => 'Choose the number of past Time Periods to view in the worksheet.<br><i>This number applies to the base Time Period selected. For example, choosing 2 with Quarterly Time Period will show 6 past Months</i>',
     'LBL_FORECASTS_CONFIG_TIMEPERIOD_FISCAL_YEAR' => 'The chosen start date indicates the fiscal year may span across two years. Please choose which year to use as the Fiscal Year:',
     'LBL_FISCAL_YEAR' => 'Fiscal Year',
 
@@ -435,6 +410,8 @@ $mod_strings = array (
     'LBL_QUOTA_ASSIGNED' => 'Quotas have been successfully assigned.',
     'LBL_FORECASTS_NO_ACCESS_TO_CFG_TITLE' => 'Forecasts Access Error',
     'LBL_FORECASTS_NO_ACCESS_TO_CFG_MSG' => 'You do not have access to configure Forecasts. Please contact your Administrator.',
+    'WARNING_DELETED_RECORD_RECOMMIT_1' => 'This record was included in a ',
+    'WARNING_DELETED_RECORD_RECOMMIT_2' => 'It will be removed and you will need to re-commit your ',
 
     'LBL_DASHLET_MY_FORECAST' => 'My Forecast',
     'LBL_DASHLET_MY_TEAMS_FORECAST' => "My Team's Forecast",
@@ -442,7 +419,7 @@ $mod_strings = array (
     'LBL_WARN_UNSAVED_CHANGES_CONFIRM_SORT' => 'You have unsaved changes. Are you sure you want to sort the worksheet and discard changes?',
 
     // Forecasts Records View Help Text
-    'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module incorporates {{opportunities_singular_module}} records to build {{module_name}}ing {{worksheet_module}}s and predict sales. Users can work towards sales quotas at the individual, team, and sales organization level. Before users can access the {{plural_module_name}} module to begin building {{module_name}}ing {{worksheet_module}}s, a user with administrator access must configure the {{plural_module_name}} module with the organization\'s desired Time Periods, Ranges, and Scenarios.
+    'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module incorporates {{forecastby_singular_module}} records to build {{forecastworksheets_module}} and predict sales. Users can work towards sales {{quotas_module}} at the individual, team, and sales organization level. Before users can access the {{plural_module_name}} module, an administrator must select the organization\'s desired Time Periods, Ranges, and Scenarios.
 
-Sales representatives use the {{plural_module_name}} module to work with their assigned {{opportunities_module}} as the current time period progresses. These users will commit total predictions for their personal sales based on the {{opportunities_module}} they expect to close. Sales managers work with their own {{opportunities_singular_module}} records similarly to other sales representatives. In addition, they aggregate their reportee\'s committed {{module_name}} amounts to predict their total team\'s sales and work towards the team\'s quota for each time period. Additional insights are offered by the elements of the expandable Intelligence Pane including analysis for an individual\'s {{opportunities_module}} worksheet and analysis for a manager\'s team worksheets.',
+Sales representatives use the {{plural_module_name}} module to work with their assigned {{forecastby_module}} as the current time period progresses. These users will commit total predictions for their personal sales based on the {{forecastby_module}} they expect to close. Sales managers work with their own {{forecastby_singular_module}} records similarly to other sales representatives. In addition, they aggregate their reportee\'s committed amounts to predict their total team\'s sales and work towards the team\'s quota for each time period. Additional insights are offered by the elements of the expandable Intelligence Pane including analysis for an individual\'s worksheet and analysis for a manager\'s team worksheets.'
 );

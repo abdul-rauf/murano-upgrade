@@ -48,27 +48,29 @@ $content = '';
 
                 $content .= $line;
         }
-global $locale;
+global $locale, $sugar_config;
 
 $transContent = $GLOBALS['locale']->translateCharset($content, 'UTF-8', $GLOBALS['locale']->getExportCharset());
 
 ob_clean();
 header("Pragma: cache");
-/*Added by dileep*/
-header('Content-Encoding: UTF-8');
-header('Content-type: text/csv; charset=UTF-8');
+header("Content-type: application/octet-stream; charset=".$locale->getExportCharset());
 header("Content-Disposition: attachment; filename={$_REQUEST['module']}.csv");
-echo "\xEF\xBB\xBF"; // UTF-8 BOM
-/*End of adding and commented below*/
-
-//header("Content-type: application/octet-stream; charset=".$locale->getExportCharset());
-//header("Content-Disposition: attachment; filename={$_REQUEST['module']}.csv");
-//header("Content-transfer-encoding: binary");
-//header( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
-//header( "Last-Modified: " . TimeDate::httpTime() );
-//header( "Cache-Control: post-check=0, pre-check=0", false );
-//header("Content-Length: ".mb_strlen($transContent, '8bit'));
-
-print $transContent;
-
+header("Content-transfer-encoding: binary");
+header( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
+header( "Last-Modified: " . TimeDate::httpTime() );
+header( "Cache-Control: post-check=0, pre-check=0", false );
+header("Content-Length: ".mb_strlen($transContent, '8bit'));
+    if (!empty($sugar_config['export_excel_compatible'])) {
+        print $transContent;
+    } else {
+        $user_agent = (isset($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
+        if ($locale->getExportCharset() == 'UTF-8' &&
+            ! preg_match('/macintosh|mac os x|mac_powerpc/i', $user_agent)) {
+            $BOM = "\xEF\xBB\xBF";
+        } else {
+            $BOM = ''; // Mac Excel does not support utf-8
+        }
+        print $BOM . $transContent;
+    }
 }

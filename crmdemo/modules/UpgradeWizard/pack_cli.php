@@ -10,17 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once __DIR__ . '/../../modules/HealthCheck/pack_sortinghat.php';
+
+include_once dirname(__FILE__).'/UpgradeDriver.php';
 
 function packUpgradeWizardCli($phar, $params, $files = array())
 {
 
     $defaults = array(
-        'version' => '7.5.0.0',
-        'build' => '998'
+        'version' => '7.6.1.0',
+        'build' => '998',
     );
-
-    packSortingHat($phar, $params);
 
     $params = array_merge($defaults, $params);
 
@@ -34,10 +33,8 @@ function packUpgradeWizardCli($phar, $params, $files = array())
             "modules/UpgradeWizard/UpgradeDriver.php" => 'UpgradeDriver.php',
             "modules/UpgradeWizard/CliUpgrader.php" => 'CliUpgrader.php',
             "modules/UpgradeWizard/version.json" => 'version.json',
-            'modules/HealthCheck/HealthCheckClient.php' => 'HealthCheckClient.php',
             'include/SugarSystemInfo/SugarSystemInfo.php' => 'SugarSystemInfo.php',
             'include/SugarHeartbeat/SugarHeartbeatClient.php' => 'SugarHeartbeatClient.php',
-            'modules/HealthCheck/HealthCheckHelper.php' => 'HealthCheckHelper.php',
         ),
         $files
     );
@@ -84,7 +81,7 @@ $stub = <<<'STUB'
 <?php
 Phar::mapPhar();
 set_include_path('phar://' . __FILE__ . PATH_SEPARATOR . get_include_path());
-require_once "CliUpgrader.php"; CliUpgrader::start(); __HALT_COMPILER();
+require_once "CliUpgrader.php"; $upgrader = new CliUpgrader(); $upgrader->start(); __HALT_COMPILER();
 STUB;
 $phar->setStub($stub);
 

@@ -1,7 +1,6 @@
 <?php
- // created: 2010-12-10 16:45:51
-$dictionary['Opportunity']['fields']['amount']['required']=false;
-$dictionary['Opportunity']['fields']['amount']['calculated']=false;
-$dictionary['Opportunity']['fields']['amount']['importable']='true';
+ // created: 2018-06-12 08:16:06
+$dictionary['Opportunity']['fields']['amount']['required'] = false;
+$dictionary['Opportunity']['fields']['amount']['calculated'] = false;
+$dictionary['Opportunity']['fields']['amount']['importable'] = 'true';
 
- ?>

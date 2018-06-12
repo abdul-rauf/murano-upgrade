@@ -26,6 +26,22 @@
         getBaseCurrencyId: function() {
             return app.metadata.getBaseCurrencyId();
         },
+
+        /**
+         * Helper function that returns system's base currency
+         *
+         * @return {Object} The base currency data.
+         */
+        getBaseCurrency: function() {
+            var currId = app.metadata.getBaseCurrencyId(),
+                currencyObj = app.metadata.getCurrency(currId);
+
+            // add currency_id to returned data
+            currencyObj.currency_id = currId;
+
+            return currencyObj;
+        },
+
         /**
          * List of all currencies mapped by id and information based on the
          * template given.

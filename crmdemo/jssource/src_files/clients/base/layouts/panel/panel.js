@@ -15,12 +15,12 @@
  */
 ({
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     className: 'filtered tabbable tabs-left',
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     attributes: function() {
         return {
@@ -36,34 +36,72 @@
     },
 
     /**
-     * @override
-     * @param {Object} opts
+     * @inheritdoc
      */
-    initialize: function(opts) {
-        app.view.Layout.prototype.initialize.call(this, opts);
+    initialize: function(options) {
+        this._super('initialize', [options]);
+        this._initPanelState();
+    },
 
+    /**
+     * Sets the `collapsed` state of the panel's context, depending on if
+     * `app.config.collapseSubpanels` is configured or if the panel was
+     * previously shown/hidden.
+     *
+     * @protected
+     */
+    _initPanelState: function() {
+        var collapse;
         this.hideShowLastStateKey = app.user.lastState.key(this.HIDE_SHOW_KEY, this);
 
-        this.on("panel:toggle", this.togglePanel, this);
-        this.listenTo(this.collection, "reset", function() {
-            //Update the subpanel to be open or closed depending on how user left it last
+        if (app.config.collapseSubpanels) {
+            collapse = true;
+        } else {
             var hideShowLastState = app.user.lastState.get(this.hideShowLastStateKey);
-            if(_.isUndefined(hideShowLastState)) {
-                this.togglePanel(this.collection.length > 0, false);
-            } else {
-                this.togglePanel(hideShowLastState === this.HIDE_SHOW.SHOW, false);
+            collapse = _.isUndefined(hideShowLastState) || hideShowLastState !== this.HIDE_SHOW.SHOW;
+        }
+        this.context.set('collapsed', collapse);
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Decorate the subpanel based on if the collection is empty or not.
+     *
+     * When context is reloaded, we open the panel only if `skipFetch` is
+     * `false`.
+     *
+     * When the context's collapse attribute changes, we confirm that the
+     * panel's status is in sync with the flag (expanded/collapsed).
+     */
+    bindDataChange: function() {
+        this.listenTo(this.collection, 'reset add remove', function() {
+            this.$('.subpanel').toggleClass('empty', this.collection.length === 0);
+        }, this);
+
+        this.listenTo(this.context, 'refresh:count', function(hasAtLeast, properties) {
+            this.$('.subpanel').toggleClass('empty', !properties.length);
+        }, this);
+
+        this.listenTo(this.context.parent, 'panel-top:refresh', function(link) {
+            app.logger.warn('`panel-top:refresh` is deprecated. Use `context.reloadData()` to reload and expand.');
+            if (this.context.get('link') === link) {
+                this.context.resetLoadFlag();
+                this.toggle(true);
             }
         });
-        //Decorate the subpanel based on if the collection is empty or not
-        this.listenTo(this.collection, "reset add remove", this._checkIfSubpanelEmpty, this);
+
+        this.listenTo(this.context, 'reload', function() {
+            if (!this.context.get('skipFetch')) {
+                this.toggle(true);
+            }
+        });
+
+        this.listenTo(this.context, 'change:collapsed', function(context, collapsed) {
+            this.toggle(!collapsed);
+        });
     },
-    /**
-     * Check if subpanel collection is empty and decorate subpanel header appropriately
-     * @private
-     */
-    _checkIfSubpanelEmpty: function(){
-        this.$(".subpanel").toggleClass("empty", this.collection.length === 0);
-    },
+
     /**
      * Places layout component in the DOM.
      * @override
@@ -71,34 +109,107 @@
      */
     _placeComponent: function(component) {
         this.$(".subpanel").append(component.el);
-        this._hideComponent(component, false);
     },
+
     /**
-     * Toggles panel
-     * @param {Boolean} show TRUE to show, FALSE to hide
-     * @param {Boolean} saveState(optional) TRUE to save the current state
+     * Renders the `panel-top` component if the subpanel is in a collapsed
+     * state, otherwise renders the subpanel.
      */
-    togglePanel: function(show, saveState) {
-        this.$(".subpanel").toggleClass("closed", !show);
-        //check if there's second param then check it and save show/hide to user state
-        if(arguments.length === 1 || saveState) {
-            app.user.lastState.set(this.hideShowLastStateKey, show ? this.HIDE_SHOW.SHOW : this.HIDE_SHOW.HIDE);
+    _render: function() {
+        var collapsed = this.context.get('collapsed');
+        if (collapsed) {
+            // FIXME: We're assuming that the first component is always the
+            // panel-top. This should be fixed when panel-top-create is removed
+            // from core in SC-4535.
+            this._components[0].render();
+        } else {
+            /**
+             * Internal flag used to determine if we are rendering the
+             * component(s) in the panel layout for the first time.
+             *
+             * @protected
+             * @property {boolean}
+             */
+            this._canToggle = true;
+            this._super('_render');
         }
-        _.each(this._components, function(component) {
-            this._hideComponent(component, show);
-        }, this);
+
+        this.$('.subpanel').toggleClass('closed', collapsed);
     },
+
+    /**
+     * Saves the collapsed/expanded state of the subpanel in localStorage.
+     *
+     * @private
+     * @param {boolean} [show] `true` to expand, `false` to collapse. Collapses
+     *   by default.
+     */
+    _setCollapsedState: function(show) {
+        var state = show ? this.HIDE_SHOW.SHOW : this.HIDE_SHOW.HIDE;
+        app.user.lastState.set(this.hideShowLastStateKey, state);
+    },
+
+    /**
+     * Toggles the panel.
+     *
+     * @private
+     * @param {boolean} [show] `true` to show, `false` to hide, `undefined` to
+     *   toggle.
+     */
+    toggle: function(show) {
+        if (this.context.get('isCreateSubpanel')) {
+            // no toggle available on create
+            return;
+        }
+
+        show = _.isUndefined(show) ? this.context.get('collapsed') : show;
+
+        this.$('.subpanel').toggleClass('closed', !show);
+        this.context.set('collapsed', !show);
+        this._toggleComponents(show);
+
+        // no longer need to skip
+        this.context.set('skipFetch', false);
+        this.context.loadData();
+
+        this._setCollapsedState(show);
+    },
+
     /**
      * Show or hide component except `panel-top`(subpanel-header) component.
-     * @param {Component} component
+     *
+     * @private
+     * @param {boolean} [show] `true` to show, `false` to hide. Defaults to
+     *   `false`.
      */
-    _hideComponent: function(component, show) {
-        if (!component.$el.hasClass('subpanel-header')) {
-            if (show) {
+    _toggleComponents: function(show) {
+        _.each(this._components, function(component) {
+            // FIXME: The layout should not be responsible for this. Will be
+            // addressed as part of SC-4533.
+            if (this._stopComponentToggle(component)) {
+                return;
+            }
+            if (!this._canToggle) {
+                component.render();
+            } else if (show) {
                 component.show();
             } else {
                 component.hide();
             }
-        }
+        }, this);
+        this._canToggle = true;
+    },
+
+    /**
+     * Extensible check to see if this component should be allowed to be toggled.
+     * If this returns true: _toggleComponent will return without further render/show/hide checks
+     * If this returns false: _toggleComponent will continue through render/show/hide checks
+     *
+     * @param component
+     * @return {boolean}
+     * @private
+     */
+    _stopComponentToggle: function(component) {
+        return component.$el.hasClass('subpanel-header');
     }
 })

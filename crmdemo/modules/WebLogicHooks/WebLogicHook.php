@@ -96,6 +96,7 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
         $job->status = SchedulersJob::JOB_STATUS_QUEUED;
         $job->target = 'class::' . get_class($this);
         $job->data = serialize($jobData);
+        $job->execute_time = $GLOBALS['timedate']->nowDb();
         $job->save();
     }
 
@@ -182,19 +183,35 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
                 'bean' => $bean
             ));
 
+            $service = new RestService();
             foreach ($fieldList as $fieldName => $properties) {
                 $fieldType = !empty($properties['custom_type']) ? $properties['custom_type'] : $properties['type'];
                 $field = $sfh->getSugarField($fieldType);
                 if ('link' !== $fieldType && !empty($field) && (isset($bean->$fieldName)  || 'relate' === $fieldType)) {
-                    $field->apiFormatField($data, $bean, array(), $fieldName, $properties);
+                    $field->apiFormatField($data, $bean, array(), $fieldName, $properties, array(), $service);
                 }
             }
         }
 
-        $arguments['data'] = $data;
+        $arguments['data'] = $this->decodeHTML($data);
+        $arguments['dataChanges'] = $this->decodeHTML($arguments['dataChanges']);
         $arguments['event'] = $event;
 
         return $arguments;
     }
 
+    private function decodeHTML($data)
+    {
+        $returnData = array();
+
+        $db = DBManagerFactory::getInstance();
+        foreach ($data as $key => $value) {
+            $returnData[$key] = $db->decodeHTML($value);
+            if (is_array($value)) {
+                $returnData[$key] = $this->decodeHTML($value);
+            }
+        }
+
+        return $returnData;
+    }
 }

@@ -1,6 +1,5 @@
 <?php
-
-/* This file was updated by 7_CustomRecordViewHistorySummaryButton */
+// created: 2018-06-12 08:17:54
 $viewdefs['Prospects']['base']['view']['record'] = array (
   'buttons' => 
   array (
@@ -11,6 +10,10 @@ $viewdefs['Prospects']['base']['view']['record'] = array (
       'label' => 'LBL_CANCEL_BUTTON_LABEL',
       'css_class' => 'btn-invisible btn-link',
       'showOn' => 'edit',
+      'events' => 
+      array (
+        'click' => 'button:cancel_button:click',
+      ),
     ),
     1 => 
     array (
@@ -117,17 +120,9 @@ $viewdefs['Prospects']['base']['view']['record'] = array (
         ),
         12 => 
         array (
-          'type' => 'rowaction',
-          'event' => 'button:audit_button:click',
-          'name' => 'audit_button',
-          'label' => 'LNK_VIEW_CHANGE_LOG',
-          'acl_action' => 'view',
-        ),
-        13 => 
-        array (
           'type' => 'divider',
         ),
-        14 => 
+        13 => 
         array (
           'type' => 'rowaction',
           'event' => 'button:delete_button:click',
@@ -215,6 +210,11 @@ $viewdefs['Prospects']['base']['view']['record'] = array (
         array (
           'name' => 'dnb_principal_id',
           'readonly' => true,
+        ),
+        9 => 
+        array (
+          'name' => 'tag',
+          'span' => 12,
         ),
       ),
     ),
@@ -337,6 +337,7 @@ $viewdefs['Prospects']['base']['view']['record'] = array (
         array (
           'name' => 'date_modified_by',
           'readonly' => true,
+          'inline' => true,
           'type' => 'fieldset',
           'label' => 'LBL_DATE_MODIFIED',
           'fields' => 
@@ -361,6 +362,7 @@ $viewdefs['Prospects']['base']['view']['record'] = array (
         array (
           'name' => 'date_entered_by',
           'readonly' => true,
+          'inline' => true,
           'type' => 'fieldset',
           'label' => 'LBL_DATE_ENTERED',
           'fields' => 

@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -141,6 +140,7 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             'modules/Bugs/metadata/wireless.listviewdefs.php',
             'modules/Calls/metadata/wireless.listviewdefs.php',
             'modules/Calls/metadata/wireless.subpaneldefs.php',
+            'modules/Calls/clients/base/layouts/records/records.php',
             'modules/Cases/metadata/wireless.subpaneldefs.php',
             'modules/Contacts/metadata/wireless.subpaneldefs.php',
             'modules/Documents/metadata/wireless.editviewdefs.php',
@@ -148,6 +148,7 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             'modules/Leads/metadata/wireless.subpaneldefs.php',
             'modules/Meetings/metadata/wireless.listviewdefs.php',
             'modules/Meetings/metadata/wireless.subpaneldefs.php',
+            'modules/Meetings/clients/base/layouts/records/records.php',
             'modules/Notes/metadata/wireless.editviewdefs.php',
             'modules/Notes/metadata/wireless.listviewdefs.php',
             'modules/Opportunities/metadata/wireless.subpaneldefs.php',
@@ -177,6 +178,12 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             // BR-1574 Move Elastica library to composer (new path vendor/ruflin/elastica)
             'vendor/Elastica/',
             'modules/EmailMan/Save.php',
+            //CRYS-773 Delete version.json from upgrade wizard directory
+            'modules/UpgradeWizard/version.json',
+            // jira:MAR-2706 Move PHPMailer library to composer (new path vendor/phpmailer/phpmailer)
+            'vendor/PHPMailer/',
+            // PAT-2081 Move Google API library to composer
+            'include/google-api-php-client',
         );
 
         // must be upgrading from between 710 to 722
@@ -203,6 +210,14 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             $files[] = 'portal2/portal-ui.js';
         }
 
+        if (version_compare($this->from_version, '7.7', '<')) {
+            $files[] = 'include/Expressions/Expression/Numeric/CurrencyAddExpression.php';
+            $files[] = 'include/Expressions/Expression/Numeric/CurrencySubtractExpression.php';
+            $files[] = 'include/Expressions/Expression/Numeric/CurrencyMultiplyExpression.php';
+            $files[] = 'include/Expressions/Expression/Numeric/CurrencyDivideExpression.php';
+            $files[] = 'include/Expressions/Expression/Numeric/CurrencySumRelatedExpression.php';
+        }
+
         if (version_compare($this->from_version, '7.5', '<')) {
             $files[] = 'clients/portal/fields/date';
             $files[] = 'clients/portal/fields/datetimecombo';
@@ -214,6 +229,116 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             $files[] = 'include/MVC/View/views/view.wirelesssave.php';
             $files[] = 'include/SugarWireless';
             $files[] = 'modules/Notifications/Senders';
+            $files[] = 'modules/Notifications/clients/base/api/NotificationsApi.php';
+        }
+
+        if (version_compare($this->from_version, '7.6', '<')) {
+            $files[] = 'clients/base/fields/fieldset-with-labels';
+            $files[] = 'clients/base/views/create-nodupecheck/create-nodupecheck.php';
+            $files[] = 'modules/Contacts/clients/base/views/create-actions/create-actions.php';
+            $files[] = 'modules/ForecastWorksheets/clients/base/views/list-bottom';
+            $files[] = 'modules/Leads/clients/base/views/create-actions/create-actions.php';
+            $files[] = 'modules/Opportunities/clients/base/views/create-actions/create-actions.php';
+            $files[] = 'modules/Opportunities/clients/base/api/OpportunitiesApi.php';
+            $files[] = 'modules/Opportunities/clients/base/api/help/OpportunitiesPipelineChartApi.html';
+            $files[] = 'modules/Opportunities/Ext/LogicHooks/ProcessHiddenRevenueLineItem.php';
+            $files[] = 'modules/Products/clients/base/views/create-actions/create-actions.php';
+            $files[] = 'modules/RevenueLineItems/clients/base/views/create-actions/create-actions.php';
+            $files[] = 'modules/ForecastSchedule';
+            $files[] = 'modules/Reports/upgrade/scripts/post/2_FixOpportunityReports.php';
+            $files[] = 'modules/ProductBundles/Ext/LogicHooks/RelationshipChange.php';
+            $files[] = 'modules/ProductBundles/ProductBundleHooks.php';
+            $files[] = 'modules/ProductBundles/ProductBundlesApiHelper.php';
+            // UIUX-1687 Remove files orphaned by Font Awesome upgrade
+            $files[] = 'styleguide/assets/css/loader-sugarone.css';
+            $files[] = 'styleguide/less/twitter-bootstrap/font-awesome/bootstrap.less';
+            $files[] = 'styleguide/assets/font';
+            $files[] = 'vendor/lessphp/docs/docs.md';
+            $files[] = 'vendor/lessphp/plessc';
+        }
+
+        if (version_compare($this->from_version, '7.6', '<=')) {
+            $files[] = 'modules/RevenueLineItems/clients/base/api/RevenueLineItemsPipelineChartApi.php';
+            $files[] = 'modules/Products/clients/base/api/ProductsPipelineChartApi.php';
+            $files[] = 'modules/Opportunities/clients/base/api/OpportunitiesPipelineChartApi.php';
+            $files[] = 'modules/ForecastManagerWorksheets/clients/base/fields/rowactions';
+            $files[] = 'modules/Tasks/clients/base/fields/closebutton';
+            $files[] = 'include/SugarFields/Fields/Username';
+        }
+
+        //CRYS-806 Remove Healthcheck
+        if (version_compare($this->from_version, '7.5', '>=') && version_compare($this->from_version, '7.6', '<')) {
+            $files[] = 'modules/HealthCheck';
+            if (!$this->upgrader->context['case_insensitive_fs']) {
+                $files[] = 'vendor/OneLogin';
+            } else {
+                $files[] = 'vendor/OneLogin/Saml';
+            }
+        }
+        
+        if (version_compare($this->from_version, '7.7', '<')) {
+            $files[] = 'clients/base/views/interactionschart';
+            $files[] = 'include/javascript/sugar7/plugins/Timeago.js';
+            $files[] = 'sidecar/lib/sugar/sugar.timeago.js';
+            $files[] = 'sidecar/lib/jquery-ui/css/smoothness/images/calendar.gif';
+            $files[] = 'sidecar/lib/jquery-ui/css/smoothness/jquery-ui-1.8.18.custom.css';
+            $files[] = 'sidecar/lib/jquery-ui/js/jquery-ui-1.8.18.custom.min.js';
+            $files[] = 'modules/Accounts/clients/base/layouts/create-actions';
+            $files[] = 'modules/Accounts/clients/base/views/create-actions';
+            $files[] = 'modules/Calls/clients/base/views/create-actions';
+            $files[] = 'modules/Contacts/clients/base/views/create-actions';
+            $files[] = 'modules/Leads/clients/base/views/create-actions';
+            $files[] = 'modules/Meetings/clients/base/views/create-actions';
+            $files[] = 'modules/Opportunities/clients/base/fields/quickcreate';
+            $files[] = 'modules/Opportunities/clients/base/layouts/create-actions';
+            $files[] = 'modules/Opportunities/clients/base/views/create-actions';
+            $files[] = 'modules/Products/clients/base/views/create-actions';
+            $files[] = 'modules/RevenueLineItems/clients/base/views/create-actions';
+            $files[] = 'modules/Styleguide/clients/base/views/create-actions';
+            $files[] = 'modules/Tasks/clients/base/views/create-actions';
+            $files[] = 'modules/pmse_Business_Rules/clients/base/views/create-actions';
+            $files[] = 'modules/pmse_Emails_Templates/clients/base/views/create-actions';
+            $files[] = 'modules/pmse_Project/clients/base/views/create-actions';
+            $files[] = 'clients/base/views/globalsearch';
+            $files[] = 'clients/base/layouts/list-sidebar/list-sidebar.php';
+            $files[] = 'modules/Accounts/clients/base/layouts/list-sidebar/list-sidebar.php';
+            $files[] = 'modules/Bugs/clients/base/layouts/list-sidebar/list-sidebar.php';
+            $files[] = 'modules/Cases/clients/base/layouts/list-sidebar/list-sidebar.php';
+            $files[] = 'modules/Leads/clients/base/layouts/convert-sidebar/convert-sidebar.php';
+            $files[] = 'modules/Accounts/clients/base/layouts/new-sidebar/new-sidebar.php';
+            $files[] = 'modules/Accounts/clients/base/layouts/sidebar/sidebar.php';
+            $files[] = 'modules/Bugs/clients/base/layouts/new-sidebar/new-sidebar.php';
+            $files[] = 'modules/Bugs/clients/base/layouts/sidebar/sidebar.php';
+            $files[] = 'modules/Cases/clients/base/layouts/new-sidebar/new-sidebar.php';
+            $files[] = 'modules/Cases/clients/base/layouts/sidebar/sidebar.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/Facets/FacetAbstract.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/Facets/FacetFactory.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/Facets/FacetFilter.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/Facets/FacetHandler.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/Facets/FacetInterface.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/Facets/FacetMyitems.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/Facets/FacetRange.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/Facets/FacetTerms.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/SugarSearchEngineElasticIndexStrategyBase.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/SugarSearchEngineElasticIndexStrategyFactory.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/SugarSearchEngineElasticIndexStrategyInterface.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/SugarSearchEngineElasticIndexStrategyMulti.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/SugarSearchEngineElasticIndexStrategySingle.php';
+            $files[] = 'include/SugarSearchEngine/Elastic/SugarSearchEngineElasticMapping.php';
+            $files[] = 'include/SugarSearchEngine/SugarSearchEngineFullIndexer.php';
+            $files[] = 'include/SugarSearchEngine/SugarSearchEngineIndexerBase.php';
+            $files[] = 'silentFTSIndex.php';
+            $files[] = 'upgrade/scripts/post/5_FTSHook.php';
+            $files[] = 'modules/pmse_Business_Rules/clients/base/views/preview/preview.js';
+            $files[] = 'modules/pmse_Inbox/clients/base/fields/relate/relate.js';
+        }
+
+        // MACAROON-901... remove quickcreate files for PMSE modules
+        if (version_compare($this->to_version, '7.6.1', '>=')) {
+            $files[] = 'modules/pmse_Business_Rules/metadata/quickcreatedefs.php';
+            $files[] = 'modules/pmse_Emails_Templates/metadata/quickcreatedefs.php';
+            $files[] = 'modules/pmse_Inbox/metadata/quickcreatedefs.php';
+            $files[] = 'modules/pmse_Project/metadata/quickcreatedefs.php';
         }
 
         $this->fileToDelete($files);
@@ -227,6 +352,7 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
      */
     private function getStaleFilesBy7220()
     {
+        $files = array();
         if (version_compare($this->from_version, '7.2.2.0', '<')) {
             $files = array(
                 'clients/base/fields/date/detail.hbs',
@@ -236,12 +362,10 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
                 'clients/base/fields/listeditable',
                 'clients/base/fields/shareaction/detail.hbs',
                 'clients/base/layouts/link-selection',
-                'clients/base/layouts/search',
                 'clients/base/layouts/detail',
                 'clients/base/layouts/edit',
                 'clients/base/layouts/newrecord',
                 'clients/base/views/agenda',
-                'clients/base/views/detail',
                 'clients/base/views/activitystream-bottom/activitystream-bottom.php',
                 'clients/base/views/detail',
                 'clients/base/views/dnb-account-create/dnb-config.hbs',
@@ -493,7 +617,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
                 'jssource/src_files/include/javascript/yui3/build/yui/yui-throttle.js',
                 'jssource/src_files/modules/Forecasts/clients/base/plugins/DisableMassdelete.js',
                 'jssource/src_files/modules/Forecasts/forecast.js',
-                'jssource/src_files/modules/KBDocuments/clients/portal/views/subnav',
                 'jssource/src_files/modules/Notifications/clients/base/fields/datetimecombo',
                 'jssource/src_files/modules/Notifications/clients/base/views',
                 'jssource/src_files/modules/Styleguide/clients/base/views/docs',
@@ -514,12 +637,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
                 'modules/Forecasts/forecast.js',
                 'modules/History/clients/base/menus',
                 'modules/Home/index.php',
-                'modules/KBContents/clients',
-                'modules/KBDocumentKBTags/clients',
-                'modules/KBDocumentRevisions/clients',
-                'modules/KBDocuments/clients/portal/layouts/detail',
-                'modules/KBDocuments/clients/portal/views/subnav',
-                'modules/KBTags/clients',
                 'modules/ModuleBuilder/clients',
                 'modules/ModuleBuilder/tpls/portalpreview.tpl',
                 'modules/ModuleBuilder/views/view.portalpreview.php',
@@ -624,8 +741,7 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
                 'vendor/Elastica/Transport/Abstract.php',
                 'vendor/Elastica/Type/Abstract.php',
             );
-
-            return $files;
         }
+        return $files;
     }
 }

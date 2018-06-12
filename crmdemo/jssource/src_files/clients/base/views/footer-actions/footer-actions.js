@@ -85,6 +85,10 @@
             self.listenTo(app.router, 'route', self.handleRouteChange);
         });
 
+        app.events.on('app:help', function() {
+            this.help();
+        }, this);
+
         app.events.on('app:help:shown', function() {
             this.toggleHelpButton(true);
             this.disableHelpButton(false);
@@ -105,6 +109,12 @@
         app.shortcuts.register(app.shortcuts.GLOBAL + 'Help', '?', this.shortcuts, this);
 
         app.user.lastState.preserve(app.user.lastState.key('toggle-show-tutorial', this));
+
+        this.before('render', function() {
+            if (this._feedbackView) {
+                this._feedbackView.dispose();
+            }
+        }, this);
     },
 
     /**
@@ -152,11 +162,46 @@
 
     _renderHtml: function() {
         this.isAuthenticated = app.api.isAuthenticated();
+        this.isShortcutsEnabled = (this.isAuthenticated && app.shortcuts.isEnabled());
         app.view.View.prototype._renderHtml.call(this);
     },
-    feedback: function() {
-        window.open('http://www.sugarcrm.com/sugar7survey', '_blank');
+
+    /**
+     * Toggles feedback popup on click (open or close).
+     * TODO move this to a feedback field
+     *
+     * This currently sets and uses the internal `_feedbackIsOpen` flag to
+     * create and dispose the {@link FeedbackView}.
+     * FIXME this shouldn't work that way and should trigger an event that the
+     * additionalComponent (the feedback layout) is listening to and the toggle
+     * will simply trigger the event for the layout to show and hide.
+     * This will improve performance (no more layout being disposed and created
+     * on click).
+     *
+     * If the app isn't yet in sync (all metadata loaded to create the view)
+     * the button doesn't do anything.
+     *
+     * @param {Event} evt the `click` event.
+     */
+    feedback: function(evt) {
+        if (!app.isSynced) {
+            return;
+        }
+
+        if (!this._feedbackView || this._feedbackView.disposed) {
+            this._feedbackView = app.view.createView({
+                module: 'Feedbacks',
+                name: 'feedback',
+                button: this.$('[data-action="feedback"]')
+            });
+
+            this.listenTo(this._feedbackView, 'show hide', function(view, active) {
+                this.$('[data-action="feedback"]').toggleClass('active', active);
+            });
+        }
+        this._feedbackView.toggle();
     },
+
     support: function() {
         window.open('http://support.sugarcrm.com', '_blank');
     },
@@ -169,18 +214,18 @@
     help: function(event) {
         if (this.layoutName === 'bwc' || this.layoutName === 'about') {
             this.bwcHelpClicked();
-        } else {
-            var button = $(event.currentTarget),
-                buttonDisabled = button.hasClass('disabled'),
-                buttonAppEvent = button.hasClass('active') ? 'app:help:hide' : 'app:help:show';
+            return;
+        }
+        var button = this.$('[data-action="help"]');
+        var buttonDisabled = button.hasClass('disabled');
+        var buttonAppEvent = button.hasClass('active') ? 'app:help:hide' : 'app:help:show';
 
-            if (!buttonDisabled) {
-                // add the disabled so that way if it's clicked again, it won't triggered the events again,
-                // this will get removed below
-                button.addClass('disabled');
-                // trigger the app event to show and hide the help dashboard
-                app.events.trigger(buttonAppEvent);
-            }
+        if (!buttonDisabled) {
+            // add the disabled so that way if it's clicked again, it won't triggered the events again,
+            // this will get removed below
+            button.addClass('disabled');
+            // trigger the app event to show and hide the help dashboard
+            app.events.trigger(buttonAppEvent);
         }
     },
 
@@ -225,11 +270,18 @@
      * @param event
      */
     shortcuts: function(event) {
-        var activeDrawerLayout = app.drawer.getActiveDrawerLayout();
-        if (activeDrawerLayout.type !== 'shortcuts') {
+        var activeDrawerLayout = app.drawer.getActive(),
+            $shortcutButton = this.$('[data-action=shortcuts]');
+
+        if (!activeDrawerLayout || activeDrawerLayout.type !== 'shortcuts') {
+            $shortcutButton.addClass('active');
             app.drawer.open({
                 layout: 'shortcuts'
+            }, function() {
+                $shortcutButton.removeClass('active');
             });
+        } else {
+            app.drawer.close();
         }
     },
 
@@ -238,7 +290,10 @@
      * @param {Object} e click event.
      */
     showTutorialClick: function(e) {
-        this.showTutorial();
+        if (!app.tutorial.instance) {
+            this.showTutorial();
+            e.currentTarget.blur();
+        }
     },
 
     /**

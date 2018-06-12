@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: zip_utils.php 16276 2006-08-22 18:56:15Z awu $
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 if(class_exists("ZipArchive")) {
     require_once 'include/utils/php_zip_utils.php';

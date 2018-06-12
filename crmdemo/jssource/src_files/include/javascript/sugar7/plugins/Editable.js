@@ -40,15 +40,15 @@
                 this.on('init', function() {
                     //event register for preventing actions
                     // when user escapes the page without saving unsaved changes
-                    app.routing.before('route', this.beforeRouteChange, this, true);
+
+                    app.routing.before('route', this.beforeRouteChange, this);
                     $(window).on('beforeunload.' + this.cid, _.bind(this.warnUnsavedChangesOnRefresh, this));
 
-                    this.before('unsavedchange', this.beforeViewChange, this, true);
+                    this.before('unsavedchange', this.beforeViewChange, this);
                     //If drawer is initialized, bind addtional before handler to prevent closing creation view
                     if (_.isEmpty(app.additionalComponents['drawer'])) {
                         return;
                     }
-                    app.drawer.before('reset', this.beforeRouteChange, this, true);
 
                     //when user confirms exit with unsaved changes, unbind all listeners - no multiple warnings
                     app.events.on('editable:beforehandlers:off', this.unbindBeforeHandler, this);
@@ -157,15 +157,24 @@
              *
              * @param {Array} fields Fields that needs to be toggled.
              * @param {Boolean} isEdit True if it force into edit mode.
+             * @param {Function} [callback] Function that is called once all fields are toggled.
              */
-            toggleFields: function(fields, isEdit) {
-                var viewName = !!isEdit ? 'edit' : this.action;
+            toggleFields: function(fields, isEdit, callback) {
+                if (!_.isArray(fields)) {
+                    return;
+                }
+
+                var viewName = !!isEdit ? 'edit' : this.action,
+                    numOfToggledFields = fields.length;
+
                 _.each(fields, function(field) {
                     if (field.action === viewName) {
+                        numOfToggledFields--;
                         return; //don't toggle if it's the same
                     }
                     var meta = field.def;
                     if (meta && isEdit && meta.readonly) {
+                        numOfToggledFields--;
                         return;
                     }
 
@@ -174,6 +183,13 @@
                     _.defer(function(field) {
                         if (field.disposed !== true) {
                             field.setMode(viewName);
+                            field.$el.closest('.record-cell')
+                                .toggleClass('edit', (viewName === 'edit'));
+
+                            numOfToggledFields--;
+                            if ((numOfToggledFields === 0) && _.isFunction(callback)) {
+                                callback();
+                            }
                         }
                     }, field);
 
@@ -228,6 +244,10 @@
                     return false;
                 }
 
+                if (field.hasChanged() && viewName === 'detail') {
+                    return;
+                }
+
                 field.setMode(viewName);
 
                 if (viewName === 'edit') {
@@ -247,6 +267,8 @@
                     } else {
                         $(document).on('mousedown.record' + field.name, {field: field}, this.editableMouseClicked);
                     }
+                    field.$el.closest('.record-cell')
+                        .toggleClass('edit', true);
                 } else {
                     if (_.isFunction(field.unbindKeyDown)) {
                         field.unbindKeyDown();
@@ -254,6 +276,8 @@
                         field.$(field.fieldTag).off('keydown.record');
                     }
                     $(document).off('mousedown.record' + field.name);
+                    field.$el.closest('.record-cell')
+                        .toggleClass('edit', false);
                 }
             },
 
@@ -369,7 +393,7 @@
             },
 
             /**
-             * {@inheritDoc}
+             * @inheritdoc
              * Unbind anonymous functions for key and mouse handlers.
              * Unbind beforeHandlers.
              */

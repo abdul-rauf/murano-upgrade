@@ -96,6 +96,9 @@
 			<td valign="top">&nbsp;</td>
 			<td valign="top">&nbsp;</td>
 			<td valign="top">&nbsp;</td>
+			{if $product_bundle->deal_tot!= "0.00" && $product_bundle->deal_tot!= ""}
+			<td valign="top">&nbsp;</td>
+			{/if}
 			</tr>
 
         {/if}
@@ -203,8 +206,13 @@
             {if abs($bean->deal_tot) > 0.01}
             <td>&nbsp;</td>
             {/if}
+            {if $bean->taxrate_value == ''}
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            {else}
 			<td style="text-align: right;">{$MOD.LBL_TAXRATE}</td>
 			<td>{sugar_number_format precision=2 var=$bean->taxrate_value} {$APP.LBL_PERCENTAGE_SYMBOL}</td>
+			{/if}
 			<td NOWRAP style="text-align: right;">{$MOD.LBL_TAX}</td>
 			<td NOWRAP style="text-align: right;">{sugar_currency_format var=$bean->tax currency_id=$CURRENCY_ID}</td>
 		</tr><tr>

@@ -73,7 +73,8 @@
          * 'Y.m.d'
          * 'd.m.Y'
          * 'm.d.Y'
-         * // hours
+         *
+         * // time
          * 'H:i'
          * 'h:ia'
          * 'h:iA'
@@ -94,12 +95,14 @@
             }
 
             var convertTable = {
-                // dates
-                'd': 'DD',  // day of the month
-                'm': 'MM',  // numeric month leading zeros
+                // date
+                'd': 'DD',  // day of the month w\ leading zeros
+                'm': 'MM',  // numeric month w\ leading zeros
                 'Y': 'YYYY',  // full numeric year
-                // hours
-                'i': 'mm' // minutes
+                // time
+                'H': 'HH', // 24-hour format w\ leading zeros
+                'h': 'hh', // 12-hour format w\ leading zeros
+                'i': 'mm' // minutes w\ leading zeros
             };
 
             var client = server;
@@ -145,7 +148,7 @@
         /**
          * Get the date format preference for the given user.
          * @param {Data.Bean/Object} user
-         * @returns {String}
+         * @return {string}
          */
         getUserDateFormat: function(user) {
             user = user || app.user;
@@ -155,7 +158,7 @@
         /**
          * Get the time format preference for the given user.
          * @param {Data.Bean/Object} user
-         * @returns {String}
+         * @return {string}
          */
         getUserTimeFormat: function(user) {
             user = user || app.user;
@@ -964,8 +967,8 @@
         /**
          * Formats a date to a string according to server date format.
          *
-         * @param {Boolean} [dateOnly=false] Pass `true` to get date only.
-         * @returns {String} The formatted date according to server date format.
+         * @param {boolean} [dateOnly=false] Pass `true` to get date only.
+         * @return {string} The formatted date according to server date format.
          */
         formatServer: function(dateOnly) {
             var format = dateOnly && date._serverDateFormat;
@@ -1002,13 +1005,13 @@
         /**
          * Get the display string for the duration.
          * Note: It currently supports days, hours, and minutes, not months and years.
-         * @returns {string}
+         * @return {string}
          */
         format: function() {
             var duration = [],
                 minutes = this.minutes(),
                 hours = this.hours(),
-                days = this.days();
+                days = Math.floor(this.asDays());
 
             if (days > 0) {
                 duration.push(days);

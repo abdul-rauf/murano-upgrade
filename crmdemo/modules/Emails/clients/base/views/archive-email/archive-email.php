@@ -17,6 +17,9 @@ $viewdefs['Emails']['base']['view']['archive-email'] = array(
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
+            'events' => array(
+                'click' => 'button:cancel_button:click',
+            ),
         ),
         array(
             'type' => 'button',
@@ -90,8 +93,9 @@ $viewdefs['Emails']['base']['view']['archive-email'] = array(
                     'name' => 'actionbar',
                     'type' => 'compose-actionbar',
                     'span' => 12,
+                    'inline' => true,
                     'dismiss_label' => true,
-                    'buttonSections' => array(
+                    'fields' => array(
                         array(
                             'name' => 'attachments_dropdown',
                             'css_class' => 'btn-group',
@@ -100,7 +104,7 @@ $viewdefs['Emails']['base']['view']['archive-email'] = array(
                                 array(
                                     'name' => 'upload_new_button',
                                     'type' => 'attachment-button',
-                                    'icon' => 'icon-paper-clip',
+                                    'icon' => 'fa-paperclip',
                                     'label' => 'LBL_ATTACHMENT',
                                 ),
                                 array(
@@ -112,18 +116,20 @@ $viewdefs['Emails']['base']['view']['archive-email'] = array(
                         ),
                         array(
                             'name' => 'other_actions',
-                            'css_class' => 'pull-right',
-                            'buttons' => array(
+                            'type' => 'fieldset',
+                            'inline' => true,
+                            'css_class' => 'actions pull-right',
+                            'fields' => array(
                                 array(
                                     'name' => 'signature_button',
                                     'type' => 'button',
-                                    'icon' => 'icon-edit',
+                                    'icon' => 'fa-edit',
                                     'label' => 'LBL_EMAIL_SIGNATURES',
                                 ),
                                 array(
                                     'name' => 'template_button',
                                     'type' => 'button',
-                                    'icon' => 'icon-file-alt',
+                                    'icon' => 'fa-file-o',
                                     'label' => 'LBL_EMAIL_TEMPLATES',
                                 ),
                             ),
@@ -135,37 +141,15 @@ $viewdefs['Emails']['base']['view']['archive-email'] = array(
                     'type' => 'htmleditable_tinymce',
                     'dismiss_label' => true,
                     'span' => 12,
+                    'fieldSelector' => 'archive_html_body',
                     'tinyConfig' => array(
-                        // Location of TinyMCE script
-                        'script_url' => 'include/javascript/tiny_mce/tiny_mce.js',
                         'height' => '100%',
                         'width' => '100%',
-                        'browser_spellcheck' => true,
-                        // General options
-                        'theme' => 'advanced',
-                        'skin' => 'sugar7',
                         'plugins' => 'style,paste,inlinepopups',
-                        'entity_encoding' => 'raw',
                         'forced_root_block' => false,
-                        // Theme options
                         'theme_advanced_buttons1' => "code,separator,bold,italic,underline,strikethrough,separator,bullist,numlist,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,forecolor,backcolor,separator,fontsizeselect",
-                        'theme_advanced_toolbar_location' => "top",
-                        'theme_advanced_toolbar_align' => "left",
-                        'theme_advanced_statusbar_location' => "none",
+                        'theme_advanced_buttons2' => null,
                         'theme_advanced_resizing' => false,
-                        'schema' => 'html5',
-                        'template_external_list_url' => 'lists/template_list.js',
-                        'external_link_list_url' => 'lists/link_list.js',
-                        'external_image_list_url' => 'lists/image_list.js',
-                        'media_external_list_url' => 'lists/media_list.js',
-                        'theme_advanced_path' => false,
-                        'theme_advanced_source_editor_width' => 500,
-                        'theme_advanced_source_editor_height' => 400,
-                        'inlinepopups_skin' => 'sugar7modal',
-
-                        //Url options for links
-                        'relative_urls' => false,
-                        'remove_script_host' => false,
                     ),
                 ),
             ),

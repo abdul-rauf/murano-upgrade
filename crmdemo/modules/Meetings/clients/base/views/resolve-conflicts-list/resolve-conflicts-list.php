@@ -22,14 +22,6 @@ $viewdefs['Meetings']['base']['view']['resolve-conflicts-list'] = array(
                     'enabled' => true,
                 ),
                 array(
-                    'name' => 'contact_name',
-                    'label' => 'LBL_LIST_CONTACT',
-                    'link' => true,
-                    'id' => 'CONTACT_ID',
-                    'default' => true,
-                    'enabled' => true,
-                ),
-                array(
                     'name' => 'parent_name',
                     'label' => 'LBL_LIST_RELATED_TO',
                     'id' => 'PARENT_ID',
@@ -74,7 +66,6 @@ $viewdefs['Meetings']['base']['view']['resolve-conflicts-list'] = array(
                 ),
                 array(
                     'name' => 'date_entered',
-                    'width' => '10%',
                     'label' => 'LBL_DATE_ENTERED',
                     'default' => false,
                     'enabled' => true,

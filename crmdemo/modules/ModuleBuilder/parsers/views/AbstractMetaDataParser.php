@@ -69,6 +69,10 @@ abstract class AbstractMetaDataParser
         return $this->_paneldefs;
     }
 
+    public function getModuleName() {
+        return $this->_moduleName;
+    }
+
     function removeField ($fieldName)
     {
     	return false;
@@ -119,8 +123,8 @@ abstract class AbstractMetaDataParser
 			&& ( isset ( $def [ 'name' ] ) && strcmp ( $def [ 'name' ] , 'deleted' ) != 0 )
 		  ) // db and custom fields that aren't ID fields
           ||
-		  // exclude fields named *_name regardless of their type...just convention
-          (isset ( $def [ 'name' ] ) && substr ( $def [ 'name' ], -5 ) === '_name' ) ) ;
+          // exclude fields named *_name (just convention) and email1 regardless of their type
+          (isset($def['name']) && ($def['name'] === 'email1' || substr($def['name'], -5) === '_name')));
     }
 
 	protected function _standardizeFieldLabels ( &$fielddefs )
@@ -184,8 +188,13 @@ abstract class AbstractMetaDataParser
     /**
      * Cache killer, to be defined in child classes as needed.
      */
-    protected function _clearCaches() {}
-    
+    protected function _clearCaches()
+    {
+        if ($this->implementation->isDeployed()) {
+            SugarCache::cleanOpcodes();
+        }
+    }
+
     /**
      * Gets client specific vardef rules for a field for studio
      * 
@@ -213,4 +222,5 @@ abstract class AbstractMetaDataParser
         
         return null;
     }
+
 }

@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,17 +10,23 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
+/*********************************************************************************
+
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
 
 $mod_strings = array (
-  'LBL_CREATED_BY' => 'Loodud',
-  'LBL_US_DOLLAR' => 'U.S. Dollar',
   'LBL_MODULE_NAME' => 'Valuutad',
+  'LBL_MODULE_NAME_SINGULAR' => 'Currency',
   'LBL_LIST_FORM_TITLE' => 'Valuutad',
   'LBL_CURRENCY' => 'Valuuta',
   'LBL_ADD' => 'Lisa',
   'LBL_MERGE' => 'Mesti',
   'LBL_MERGE_TXT' => 'Vali valuuta, mida tahad märkida valitud valuutaks. See kustutab kõik valuutad',
+  'LBL_US_DOLLAR' => 'U.S. Dollar',
   'LBL_DELETE' => 'Kustuta',
   'LBL_LIST_SYMBOL' => 'Valuuta sümbol',
   'LBL_LIST_NAME' => 'Valuuta nimi',
@@ -48,5 +52,8 @@ $mod_strings = array (
     'Active' => 'Aktiivne',
     'Inactive' => 'Mitteaktiivne',
   ),
+  'LBL_CREATED_BY' => 'Loodud',
+  'LBL_EDIT_LAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
+  'LBL_ADMIN_ONLY' => 'Administrators Only',
 );
-
+?>

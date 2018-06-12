@@ -36,14 +36,11 @@ include("metadata/opportunities_contactsMetaData.php");
 include("metadata/user_feedsMetaData.php");
 include("metadata/users_passwordLinkMetaData.php");
 include("metadata/team_sets_teamsMetaData.php");
-include("metadata/tracker_perfMetaData.php");
-include("metadata/tracker_queriesMetaData.php");
-include("metadata/tracker_sessionsMetaData.php");
-include("metadata/tracker_tracker_queriesMetaData.php");
 include("metadata/prospect_list_campaignsMetaData.php");
 include("metadata/prospect_lists_prospectsMetaData.php");
 include("metadata/roles_modulesMetaData.php");
 include("metadata/roles_usersMetaData.php");
+include("metadata/acl_role_sets_acl_rolesMetaData.php");
 //include("metadata/project_relationMetaData.php");
 include("metadata/outboundEmailMetaData.php");
 include("metadata/addressBookMetaData.php");
@@ -77,9 +74,7 @@ include("metadata/contracts_quotesMetaData.php");
 include("metadata/contracts_productsMetaData.php");
 include("metadata/projects_quotesMetaData.php");
 include("metadata/projects_revenuelineitemsMetaData.php");
-include("metadata/kbdocuments_views_ratingsMetaData.php");
 include("metadata/users_holidaysMetaData.php");
-
 //ACL RELATIONSHIPS
 include("metadata/acl_roles_actionsMetaData.php");
 include("metadata/acl_roles_usersMetaData.php");
@@ -105,6 +100,12 @@ include("metadata/documents_quotesMetaData.php");
 include("metadata/forecast_treeMetaData.php");
 include("metadata/oauth_nonce.php");
 include("metadata/activities_usersMetaData.php");
+include("metadata/metadata_cacheMetaData.php");
+include("metadata/tag_bean_relMetaData.php");
+include("metadata/kbusefulnessMetaData.php");
+
+// SugarCacheDb
+include "metadata/key_value_cacheMetaData.php";
 
 $defs = SugarAutoLoader::loadExtension('tabledictionary');
 if($defs) {

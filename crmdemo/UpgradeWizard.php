@@ -1,4 +1,5 @@
 <?php
+if(!defined('sugarEntry'))define('sugarEntry', true);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,21 +12,36 @@
  */
 
 // if we're in upgrade, upgrade files will be preserved in special place
-if(empty($_REQUEST['action']) || empty($_REQUEST['token'])) {
-    $files_dir = 'modules/UpgradeWizard/';
-} else {
+$webUpgraderFile = 'modules/UpgradeWizard/WebUpgrader.php';
+if(!empty($_REQUEST['action']) && !empty($_REQUEST['token'])) {
     session_start();
-    if(!empty($_SESSION['upgrade_dir'])) {
-        $files_dir = $_SESSION['upgrade_dir'];
-    } else {
-        $files_dir = 'modules/UpgradeWizard/';
+    if (!empty($_SESSION['upgrade_dir']) && is_file($_SESSION['upgrade_dir'] . 'WebUpgrader.php')) {
+        $webUpgraderFile = $_SESSION['upgrade_dir'] . 'WebUpgrader.php';
     }
     session_write_close();
 }
 // we inlcude either original or the copy preserved so that upgrading won't mess it up
-require_once "{$files_dir}WebUpgrader.php";
+require_once $webUpgraderFile;
 $upg = new WebUpgrader(dirname(__FILE__));
 $upg->init();
+
+// handle log export
+if (!empty($_REQUEST['action']) && $_REQUEST['action'] == 'exportlog') {
+    if (!empty($_REQUEST['token']) && $upg->checkTokenAndAdmin($_REQUEST['token'])) {
+        $file = $upg->context['log'];
+        if (!file_exists($file)) {
+            die('Log file does not exist');
+        }
+        header('Content-Type: application/text');
+        header('Content-Disposition: attachment; filename=' . basename($file));
+        header('Content-Length: ' . filesize($file));
+        readfile($file);
+    } else {
+        die('Bad token. You can not export log file');
+    }
+    exit;
+}
+
 if(empty($_REQUEST['action']) || empty($_REQUEST['token'])) {
     $token = $upg->startUpgrade();
     if(!$token) {
@@ -35,10 +51,6 @@ if(empty($_REQUEST['action']) || empty($_REQUEST['token'])) {
             $errmsg = $upg->error;
         }
         die($errmsg);
-    }
-    if(!$upg->healthcheck()) {
-        header("Location: index.php?module=HealthCheck&referrer=UpgradeWizard");
-        exit;
     }
 	$upg->displayUpgradePage();
 	exit(0);
@@ -62,6 +74,16 @@ if($res !== false && $upg->success) {
     // error
     $reply = array("status" => "error", "message" => $upg->error?$upg->error:"Stage {$_REQUEST['action']} failed", 'data' => $res);
 }
+
+if ($_REQUEST['action'] == 'healthcheck') {
+    $upgState = $upg->getState();
+    if (!empty($upgState['healthcheck'])) {
+        $reply['healthcheck'] = $upgState['healthcheck'];
+    } else {
+        $reply['healthcheck'] = array();
+    }
+}
+
 $msg = ob_get_clean();
 
 if(!empty($msg)) {
@@ -71,5 +93,6 @@ if(!empty($msg)) {
         $reply['message'] = $msg;
     }
 }
+
 header("Content-Type: text/plain");
 echo json_encode($reply);

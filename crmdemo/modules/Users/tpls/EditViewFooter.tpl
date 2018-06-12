@@ -99,7 +99,7 @@
                                             {$MOD.LBL_OLD_PASSWORD}
                                         </td>
                                         <td >
-                                            <input name='old_password' id='old_password' type='password' tabindex='2' onkeyup="password_confirmation();" >
+                                            <input name='old_password' id='old_password' type='password' tabindex='2' {$DISABLED} onkeyup="password_confirmation();" >
                                         </td>
                                         <td width='40%'>
                                         </td>
@@ -114,7 +114,7 @@
                                 </td>
                                 <td class='dataField'>
 
-                                    <input name='new_password' id= "new_password" type='password' tabindex='2' onkeyup="password_confirmation();newrules('{$PWDSETTINGS.minpwdlength}','{$PWDSETTINGS.maxpwdlength}','{$REGEX}');" />
+                                    <input name='new_password' id= "new_password" type='password' tabindex='2' {$DISABLED} onkeyup="password_confirmation();newrules('{$PWDSETTINGS.minpwdlength}','{$PWDSETTINGS.maxpwdlength}','{$REGEX}');" />
                                 </td>
                                 <td width='40%'>
                                 </td>
@@ -124,7 +124,7 @@
                                     {$MOD.LBL_CONFIRM_PASSWORD}
                                 </td>
                                 <td class='dataField'>
-                                    <input name='confirm_new_password' id='confirm_pwd' style ='' type='password' tabindex='2' onkeyup="password_confirmation();"  >
+                                    <input name='confirm_new_password' id='confirm_pwd' style ='' type='password' tabindex='2' {$DISABLED} onkeyup="password_confirmation();"  >
                                 </td>
                                 <td width='40%'>
                                 <div id="comfirm_pwd_match" class="error" style="display: none;">{$MOD.ERR_PASSWORD_MISMATCH}</div>
@@ -297,7 +297,7 @@
                             <td ><slot><select tabindex='14' name='timeformat'>{$TIMEOPTIONS}</select></slot></td>
                             <!-- BEGIN: currency -->
                             <td width="17%" scope="row"><slot>
-                                {$MOD.LBL_CURRENCY_SIG_DIGITS}:
+                                {$MOD.LBL_SYSTEM_SIG_DIGITS}:
                             </slot></td>
                             <td ><slot>
                                 <select id='sigDigits' onchange='setSigDigits(this.value);' name='default_currency_significant_digits'>{$sigDigits}</select>
@@ -328,7 +328,8 @@
                             <td ><slot>
                                 <input tabindex='14' name='num_grp_sep' id='default_number_grouping_seperator'
                                     type='text' maxlength='1' size='1' value='{$NUM_GRP_SEP}'
-                                    onkeydown='setSigDigits();' onkeyup='setSigDigits();'>
+                                    onkeydown='this.value=this.value.replace(/[\w]+/g, "");setSigDigits();'
+                                    onkeyup='this.value=this.value.replace(/[\w]+/g, "");setSigDigits();'>
                             </slot></td></tr>
                         {capture name=SMARTY_LOCALE_NAME_FORMAT_DESC}&nbsp;{$MOD.LBL_LOCALE_NAME_FORMAT_DESC}{/capture}
                         <tr>
@@ -338,7 +339,8 @@
                             <td ><slot>
                                 <input tabindex='14' name='dec_sep' id='default_decimal_seperator'
                                     type='text' maxlength='1' size='1' value='{$DEC_SEP}'
-                                    onkeydown='setSigDigits();' onkeyup='setSigDigits();'>
+                                    onkeydown='this.value=this.value.replace(/[\w]+/g, "");setSigDigits();'
+                                    onkeyup='this.value=this.value.replace(/[\w]+/g, "");setSigDigits();'>
                             </slot></td>
                         </tr>
                     </table>
@@ -434,9 +436,9 @@ $(document).ready(function() {
 		if(key != '') {
 			$(".calendar_publish_ok").css('display', 'inline');
 			$(".calendar_publish_none").css('display', 'none');
-	        $('#cal_pub_key_span').html( key );
-	        $('#ical_pub_key_span').html( key );
-	        $('#search_pub_key_span').html( key );
+	        $('#cal_pub_key_span').text( key );
+	        $('#ical_pub_key_span').text( key );
+	        $('#search_pub_key_span').text( key );
 		} else {
 			$(".calendar_publish_ok").css('display', 'none');
 			$(".calendar_publish_none").css('display', 'inline');

@@ -1,5 +1,4 @@
 <?php
- // created: 2014-11-28 07:59:27
-$dictionary['mur_approval_managment']['fields']['lead_c']['dependency']='';
+ // created: 2018-06-12 08:16:06
+$dictionary['mur_approval_managment']['fields']['lead_c']['dependency'] = '';
 
- ?>

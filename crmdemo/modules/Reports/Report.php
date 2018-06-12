@@ -141,6 +141,13 @@ class Report
      */
     protected $group_order_by_arr = array();
 
+    /**
+     *
+     * SugarBeans in JOIN
+     * @var array
+     */
+    public $extModules = array();
+
     function Report($report_def_str = '', $filters_def_str = '', $panels_def_str = '')
     {
         global $current_user, $current_language, $app_list_strings;
@@ -626,6 +633,11 @@ class Report
             {
                 $tmp[$table_data['module']] = array();
             }
+
+            if (!isset($this->full_bean_list[$table_key])) {
+                continue;
+            }
+
             foreach ($this->full_bean_list[$table_key]->field_defs as $field_def)
             {
                 $tmp[$table_data['module']][$field_def['name']] = 0;
@@ -824,11 +836,7 @@ class Report
     {
         // FIXME: needs DB-independent code here
         if ($limit) {
-            $start_offset = $this->report_offset;
-            if (!$this->db->supports('select_rows')) {
-                if ($start_offset > 0) $start_offset++;
-            }
-            $this->$result_name = $this->db->limitQuery($this->$query_name, $start_offset, $this->report_max, true,
+            $this->$result_name = $this->db->limitQuery($this->$query_name, $this->report_offset, $this->report_max, true,
                                                         "Error executing query ");
         } else {
             $this->$result_name = $this->db->query($this->$query_name, true, "Error executing query ");
@@ -1066,6 +1074,11 @@ class Report
         }
 
         $layout_def['type'] = $field_def['type'];
+
+        if (isset($field_def['precision'])) {
+            $layout_def['precision'] = $field_def['precision'];
+        }
+
         if (isset($field_def['rel_field'])) {
             $layout_def['rel_field'] = $field_def['rel_field'];
         }
@@ -1203,6 +1216,7 @@ class Report
         // Bug63958 Go back to using where clause team restrictions instead of INNER JOINS for performance reasons on SugarInternal
         $options = $this->visibilityOpts;
         $options['where_condition'] = true;
+        $options['action'] = 'list';
         $where_clause = $this->focus->addVisibilityWhere($where_clause, $options);
         $this->where = $where_clause;
     }
@@ -1251,7 +1265,9 @@ class Report
                 $varDefLabel = $verdef_arr_for_filters[$columnKeyArray[sizeof($columnKeyArray) - 1]]['vname'];
                 $varDefLabel = translate($varDefLabel, $verdef_arr_for_filters[$columnKeyArray[sizeof($columnKeyArray) - 1]]['module']);
                 $finalDisplayName = $reportDisplayTableName . " > " . $varDefLabel;
-                $where_clause = str_replace($key, $finalDisplayName, $where_clause);
+                // Wrap the search and replace terms in spaces to ensure exact match
+                // and replace
+                $where_clause = str_replace(" $key ", " $finalDisplayName ", $where_clause);
             }
         } // foreach
         return $where_clause;
@@ -1858,6 +1874,13 @@ class Report
         $query .= $this->from . "\n";
 
         $where_auto = " " . $this->focus->table_name . ".deleted=0 \n";
+
+        foreach($this->extModules as $tableAlias => $extModule) {
+            if (isset($extModule->deleted)) {
+               $where_auto .= " AND " . $tableAlias . ".deleted=0 \n";             
+            }            
+        }
+        
         // Start ACL check
         global $current_user, $mod_strings;
         if (!is_admin($current_user)) {
@@ -2248,6 +2271,12 @@ class Report
                 $this->layout_manager->setAttribute('context', 'List');
             }
 
+            // Make sure 'AVG' aggregate is shown as float, regardless of the original field type
+            if (!empty($display_column['group_function']) && strtolower($display_column['group_function']) === 'avg'
+                && $display_column['type'] != 'currency') {
+                $display_column['type'] = 'float';
+            }
+
             if ($display_column['type'] != 'currency' || (substr_count($display_column['name'], '_usdoll') == 0 &&
                     (isset($display_column['group_function']) ?
                         ($display_column['group_function'] != 'weighted_amount' && $display_column['group_function'] != 'weighted_sum') :
@@ -2330,6 +2359,20 @@ class Report
                         $display = "";
                     }
                 } // if
+                
+                $module_bean = BeanFactory::getBean($this->module);
+                if (is_array($module_bean->field_defs)) {
+                    if (isset($module_bean->field_defs[$display_column['type']])) {
+                        if (isset($module_bean->field_defs[$display_column['type']]['options'])) {
+                            
+                            $trans_options = translate($module_bean->field_defs[$display_column['type']]['options']);
+                                                        
+                            if (isset($trans_options[$display_column['fields'][$field_name]])) {
+                                $display = $trans_options[$display_column['fields'][$field_name]];
+                            }
+                        }
+                    }
+                }
             } // if
 
             //  for charts
@@ -2456,6 +2499,19 @@ class Report
         return $result;
     }
 
+    /**
+     * Delete files cached by cache_modules_js()
+     * @param $user all if null
+     */
+    public static function clearCaches($user = null)
+    {
+        $md5 = !empty($user) ? '_'.md5($user->id) : '';
+
+        foreach (glob(sugar_cached('modules').'/modules_def_*'.$md5.'.js') as $file) {
+            unlink($file);
+        }
+    }
+
     function cache_modules_def_js()
     {
         global $current_language, $current_user;
@@ -2471,7 +2527,7 @@ class Report
             $fileName = $file[0];
             $function = $file[1];
 
-            if (!isset($_SESSION['reports_cache']) || !file_exists($fileName)) {
+            if (!file_exists($fileName)) {
                 require_once('modules/Reports/templates/templates_modules_def_js.php');
 
                 ob_start();
@@ -2480,13 +2536,6 @@ class Report
 
                 if (is_writable(sugar_cached('modules/'))) {
                     file_put_contents($fileName, $data);
-                }
-
-                // Only set this if we're not being called from the home page.
-                // Charts on the home page go through this code as well and
-                // _SESSION hasn't been initialized completely and this causes errors with global vars.
-                if (!isset($_REQUEST['module']) || $_REQUEST['module'] != 'Home') {
-                    $_SESSION['reports_cache'] = true;
                 }
             }
         }
@@ -2575,6 +2624,8 @@ class Report
         } else if (!empty($this->selected_loaded_custom_links) && !empty($this->selected_loaded_custom_links[$field_def['secondary_table']])) {
             $secondaryTableAlias = $this->selected_loaded_custom_links[$field_def['secondary_table']]['join_table_alias'];
         }
+
+        $this->extModules[$secondaryTableAlias] = $extModule;
 
         if (isset($extModule->field_defs['name']['db_concat_fields'])) {
             $select_piece = db_concat($secondaryTableAlias, $extModule->field_defs['name']['db_concat_fields']);

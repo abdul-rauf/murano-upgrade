@@ -132,6 +132,10 @@ abstract class source{
      */
     public function saveConfig()
     {
+        // Allow for hooks to be run in each child source as needed
+        $this->preSaveConfig();
+
+        // Handle the actual saving
         $config_str = "<?php\n/***CONNECTOR SOURCE***/\n";
 
         // Handle encryption
@@ -155,6 +159,15 @@ abstract class source{
             mkdir_recursive("custom/modules/Connectors/connectors/sources/{$dir}");
         }
         SugarAutoLoader::put("custom/modules/Connectors/connectors/sources/{$dir}/config.php", $config_str, true);
+
+        // Rebuild the connector cache now
+        ConnectorUtils::getConnectors(true);
+
+        // Handle after save tasks
+        $this->postSaveConfig();
+
+        // Force a metadata refresh if needed
+        MetaDataManager::refreshSectionCache(MetaDataManager::MM_CONFIG);
     }
 
     /**
@@ -163,7 +176,7 @@ abstract class source{
      * @param $val array value
      */
     public function getConfigString($key, $val) {
-        return override_value_to_string_recursive2('config', $key, $val, false);
+        return override_value_to_string_recursive2('config', $key, $val, true);
     }
 
  	/**
@@ -314,16 +327,16 @@ abstract class source{
  		return $this->_has_testing_enabled;
  	}
 
- 	/**
- 	 * test
- 	 * This method is called from the administration interface to run a test of the service
- 	 * It is up to subclasses to implement a test and set _has_testing_enabled to true so that
- 	 * a test button is rendered in the administration interface
- 	 *
- 	 * @return result boolean result of the test function
- 	 */
+    /**
+     * test
+     * This method is called from the administration interface to run a test of the service
+     * It is up to subclasses to implement a test and set _has_testing_enabled to true so that
+     * a test button is rendered in the administration interface
+     *
+     * @return result boolean result of the test function
+     */
     public function test() {
-    	return true;
+        return true;
     }
 
 
@@ -462,12 +475,13 @@ abstract class source{
      */
     public function isRequiredConfigFieldsForButtonSet() {
         //Check if required fields for button are set
-   		foreach($this->_required_config_fields_for_button as $field) {
-	    	if(empty($this->_config['properties'][$field])) {
-	    	   return false;
-	    	}
-   		}
-    	return true;
+        foreach ($this->_required_config_fields_for_button as $field) {
+            if (empty($this->_config['properties'][$field])) {
+               return false;
+            }
+        }
+
+        return true;
     }
 
 
@@ -520,4 +534,18 @@ abstract class source{
          // makes a call to this destructor.
 
      }
+
+     /**
+      * Handles actions at the beginning of saveConfig(). This should be defined
+      * in child classes if there are actions to carry out.
+      */
+     public function preSaveConfig()
+     {}
+
+     /**
+      * Handles actions and the end of saveConfig(). This should be defined
+      * in child classes if there are actions to carry out.
+      */
+     public function postSaveConfig()
+     {}
 }

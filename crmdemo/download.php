@@ -17,13 +17,17 @@ if((!isset($_REQUEST['isProfile']) && empty($_REQUEST['id'])) || empty($_REQUEST
 	die("Not a Valid Entry Point");
 }
 else {
-    require_once("data/BeanFactory.php");
+
     $file_type=''; // bug 45896
     require_once("data/BeanFactory.php");
     ini_set('zlib.output_compression','Off');//bug 27089, if use gzip here, the Content-Length in header may be incorrect.
     // cn: bug 8753: current_user's preferred export charset not being honored
-    $GLOBALS['current_user']->retrieve($_SESSION['authenticated_user_id']);
-    $GLOBALS['current_language'] = $_SESSION['authenticated_user_language'];
+    if (isset($_SESSION['authenticated_user_id'])) {
+        $GLOBALS['current_user']->retrieve($_SESSION['authenticated_user_id']);
+    }
+    if (isset($_SESSION['authenticated_user_language'])) {
+        $GLOBALS['current_language'] = $_SESSION['authenticated_user_language'];
+    }
     $app_strings = return_application_language($GLOBALS['current_language']);
     $mod_strings = return_module_language($GLOBALS['current_language'], 'ACL');
 	$file_type = strtolower($_REQUEST['type']);
@@ -84,7 +88,15 @@ else {
 		$local_location = sugar_cached("modules/Emails/{$_REQUEST['ieId']}/attachments/{$_REQUEST['id']}");
     } elseif(isset($_REQUEST['isTempFile']) && $file_type == "import") {
     	$local_location = "upload://import/{$_REQUEST['tempName']}";
-    } else {
+    } else if ($file_type == 'notes') {
+        $note = BeanFactory::newBean('Notes');
+        if (!$note->ACLAccess('view')) {
+            die($mod_strings['LBL_NO_ACCESS']);
+        } // if
+        $note->retrieve($_REQUEST['id']);
+        $local_location = "upload://".$note->getUploadId();
+    }
+    else {
 		$local_location = "upload://{$_REQUEST['id']}";
     }
 
@@ -109,13 +121,7 @@ else {
                 $focus->add_team_security_where_clause($query);
 			}
 			$query .= "WHERE document_revisions.id = '".$db->quote($_REQUEST['id'])."' ";
-		} elseif($file_type == 'kbdocuments') {
-				$query="SELECT document_revisions.filename name	FROM document_revisions INNER JOIN kbdocument_revisions ON document_revisions.id = kbdocument_revisions.document_revision_id INNER JOIN kbdocuments ON kbdocument_revisions.kbdocument_id = kbdocuments.id ";
-            if(!$focus->disable_row_level_security){
-                $focus->add_team_security_where_clause($query);
-            }
-            $query .= "WHERE document_revisions.id = '" . $db->quote($_REQUEST['id']) ."'";
-		}  elseif($file_type == 'notes') {
+		} elseif($file_type == 'notes') {
 			$query = "SELECT filename name FROM notes ";
             if(!$focus->disable_row_level_security){
                 $focus->add_team_security_where_clause($query);
@@ -139,14 +145,13 @@ else {
 		}
 
 		if($doQuery && isset($query)) {
-            $rs = $GLOBALS['db']->query($query);
-			$row = $GLOBALS['db']->fetchByAssoc($rs);
+            $row = $GLOBALS['db']->fetchOne($query);
 
 			if(empty($row)){
 				die($app_strings['ERROR_NO_RECORD']);
 			}
 			$name = $row['name'];
-			$download_location = "upload://{$_REQUEST['id']}";
+			$download_location = $file_type == 'notes' ? $local_location : "upload://{$_REQUEST['id']}";
 		} else if(isset(  $_REQUEST['tempName'] ) && isset($_REQUEST['isTempFile']) ){
 			// downloading a temp file (email 2.0)
 			$download_location = $local_location;
@@ -163,7 +168,7 @@ else {
 		}
 
 		header("Pragma: public");
-		header("Cache-Control: maxage=1, post-check=0, pre-check=0");
+		header("Cache-Control: max-age=1, post-check=0, pre-check=0");
 		if(isset($_REQUEST['isTempFile']) && ($_REQUEST['type']=="SugarFieldImage")) {
 			$mime = getimagesize($download_location);
 		   	if(!empty($mime)) {

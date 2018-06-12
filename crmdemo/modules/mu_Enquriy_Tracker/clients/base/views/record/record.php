@@ -1,4 +1,5 @@
 <?php
+// created: 2018-06-12 08:26:52
 $viewdefs['mu_Enquriy_Tracker']['base']['view']['record'] = array (
   'panels' => 
   array (
@@ -48,6 +49,11 @@ $viewdefs['mu_Enquriy_Tracker']['base']['view']['record'] = array (
       array (
         0 => 'assigned_user_name',
         1 => 'team_name',
+        2 => 
+        array (
+          'name' => 'tag',
+          'span' => 12,
+        ),
       ),
     ),
     2 => 

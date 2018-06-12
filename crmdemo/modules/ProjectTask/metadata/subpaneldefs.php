@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: layout_defs.php 13782 2006-06-06 17:58:55 +0000 (Tue, 06 Jun 2006) majed $
 
 $layout_defs['ProjectTask'] = array(
 	// list of what Subpanels to show in the DetailView

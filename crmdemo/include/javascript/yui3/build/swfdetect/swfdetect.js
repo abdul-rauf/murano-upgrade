@@ -1,8 +1,21 @@
 /*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("swfdetect",function(e,t){function c(e){return parseInt(e,10)}function h(e){i.isNumber(c(e[0]))&&(r.flashMajor=e[0]),i.isNumber(c(e[1]))&&(r.flashMinor=e[1]),i.isNumber(c(e[2]))&&(r.flashRev=e[2])}var n=0,r=e.UA,i=e.Lang,s="ShockwaveFlash",o,u,a,f,l;if(r.gecko||r.webkit||r.opera){if(o=navigator.mimeTypes["application/x-shockwave-flash"])if(u=o.enabledPlugin)a=u.description.replace(/\s[rd]/g,".").replace(/[A-Za-z\s]+/g,"").split("."),h(a)}else if(r.ie){try{f=new ActiveXObject(s+"."+s+".6"),f.AllowScriptAccess="always"}catch(p){f!==null&&(n=6)}if(n===0)try{l=new ActiveXObject(s+"."+s),a=l.GetVariable("$version").replace(/[A-Za-z\s]+/g,"").split(","),h(a)}catch(d){}}e.SWFDetect={getFlashVersion:function(){return String(r.flashMajor)+"."+String(r.flashMinor)+"."+String(r.flashRev)},isFlashVersionAtLeast:function(e,t,n){var i=c(r.flashMajor),s=c(r.flashMinor),o=c(r.flashRev);return e=c(e||0),t=c(t||0),n=c(n||0),e===i?t===s?n<=o:t<s:e<i}}},"3.15.0",{requires:["yui-base"]});
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('swfdetect',function(Y,NAME){var version=0,uA=Y.UA,lG=Y.Lang,sF="ShockwaveFlash",mF,eP,vS,ax6,ax;function makeInt(n){return parseInt(n,10);}
+function parseFlashVersion(flashVer){if(lG.isNumber(makeInt(flashVer[0]))){uA.flashMajor=flashVer[0];}
+if(lG.isNumber(makeInt(flashVer[1]))){uA.flashMinor=flashVer[1];}
+if(lG.isNumber(makeInt(flashVer[2]))){uA.flashRev=flashVer[2];}}
+if(uA.gecko||uA.webkit||uA.opera){if((mF=navigator.mimeTypes['application/x-shockwave-flash'])){if((eP=mF.enabledPlugin)){vS=eP.description.replace(/\s[rd]/g,'.').replace(/[A-Za-z\s]+/g,'').split('.');parseFlashVersion(vS);}}}
+else if(uA.ie){try
+{ax6=new ActiveXObject(sF+"."+sF+".6");ax6.AllowScriptAccess="always";}
+catch(e)
+{if(ax6!==null)
+{version=6.0;}}
+if(version===0){try
+{ax=new ActiveXObject(sF+"."+sF);vS=ax.GetVariable("$version").replace(/[A-Za-z\s]+/g,'').split(',');parseFlashVersion(vS);}catch(e2){}}}
+Y.SWFDetect={getFlashVersion:function(){return(String(uA.flashMajor)+"."+String(uA.flashMinor)+"."+String(uA.flashRev));},isFlashVersionAtLeast:function(flashMajor,flashMinor,flashRev){var uaMajor=makeInt(uA.flashMajor),uaMinor=makeInt(uA.flashMinor),uaRev=makeInt(uA.flashRev);flashMajor=makeInt(flashMajor||0);flashMinor=makeInt(flashMinor||0);flashRev=makeInt(flashRev||0);if(flashMajor===uaMajor){if(flashMinor===uaMinor){return flashRev<=uaRev;}
+return flashMinor<uaMinor;}
+return flashMajor<uaMajor;}};},'3.15.0',{"requires":["yui-base"]});

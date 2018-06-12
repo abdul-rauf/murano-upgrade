@@ -54,6 +54,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'collapsed',
+        ),
       ),
     ),
     'panels' => 
@@ -154,12 +159,6 @@ array (
             'name' => 'affiliate_c',
             'label' => 'LBL_AFFILIATE',
           ),
-          1 => 
-          array (
-            'name' => 'phone_fax',
-            'comment' => 'Contact fax number',
-            'label' => 'LBL_FAX_PHONE',
-          ),
         ),
         7 => 
         array (
@@ -169,15 +168,7 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_CONTINENT',
           ),
-          1 => 
-          array (
-            'name' => 'email1',
-            'studio' => 
-            array (
-              'editField' => true,
-            ),
-            'label' => 'LBL_EMAIL_ADDRESS',
-          ),
+          1 => 'email',
         ),
         8 => 
         array (
@@ -189,20 +180,6 @@ array (
             'displayParams' => 
             array (
               'key' => 'primary',
-              'rows' => 2,
-              'cols' => 30,
-              'maxlength' => 150,
-            ),
-          ),
-          1 => 
-          array (
-            'name' => 'alt_address_street',
-            'hideLabel' => true,
-            'type' => 'address',
-            'displayParams' => 
-            array (
-              'key' => 'alt',
-              'copy' => 'primary',
               'rows' => 2,
               'cols' => 30,
               'maxlength' => 150,
@@ -347,6 +324,19 @@ array (
         array (
           0 => 
           array (
+            'name' => 'min_track1_c',
+            'label' => 'LBL_MIN_TRACK1_C',
+          ),
+          1 => 
+          array (
+            'name' => 'pref_liquid_1c_c',
+            'label' => 'LBL_PREF_LIQUID_1C',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
             'name' => 'req_aum_c',
             'label' => 'LBL_REQ_AUM',
           ),
@@ -357,7 +347,7 @@ array (
             'label' => 'LBL_PREF_LIQUID',
           ),
         ),
-        8 => 
+        9 => 
         array (
           0 => 
           array (
@@ -382,34 +372,12 @@ array (
             'comment' => 'Status of the lead',
             'label' => 'LBL_STATUS',
           ),
-          1 => 
-          array (
-            'name' => 'lead_source_cp',
-            'comment' => 'Lead source (ex: Web, print)',
-            'studio' => 
-            array (
-              'detailview' => true,
-              'editview' => true,
-            ),
-            'label' => 'LBL_LEAD_SOURCE',
-          ),
         ),
         1 => 
         array (
           0 => 
           array (
             'name' => 'status_description',
-          ),
-          1 => 
-          array (
-            'name' => 'lead_source_description_cp',
-            'comment' => 'BUTTON FOR QUICK EMAIL',
-            'studio' => 
-            array (
-              'detailview' => true,
-              'editview' => true,
-            ),
-            'label' => 'LBL_LEAD_SOURCE_DESCRIPTION',
           ),
         ),
         2 => 
@@ -419,16 +387,18 @@ array (
             'name' => 'assigned_user_name',
             'label' => 'LBL_ASSIGNED_TO',
           ),
-          1 => 
-          array (
-            'name' => 'team_name',
-            'displayParams' => 
-            array (
-              'display' => true,
-            ),
-          ),
         ),
         3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tempanalyst_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TEMPANALYST',
+          ),
+          1 => '',
+        ),
+        4 => 
         array (
           0 => 
           array (
@@ -440,6 +410,99 @@ array (
             'name' => 'investor_rating_c',
             'studio' => 'visible',
             'label' => 'LBL_INVESTOR_RATING',
+          ),
+        ),
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'suitable_clients_2_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SUITABLE_CLIENTS_2',
+          ),
+          1 => 
+          array (
+            'name' => 'trips_suitable2_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIPS_SUITABLE2',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'trips_suitable3_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIPS_SUITABLE3',
+          ),
+          1 => 
+          array (
+            'name' => 'trips_suitable4_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIPS_SUITABLE4',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'trips_suitable5_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIPS_SUITABLE5',
+          ),
+          1 => 
+          array (
+            'name' => 'trip6_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIP6',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'trip7_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIP7',
+          ),
+          1 => 
+          array (
+            'name' => 'trip8_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIP8',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'trip9_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIP9',
+          ),
+          1 => 
+          array (
+            'name' => 'feedback_c',
+            'studio' => 'visible',
+            'label' => 'LBL_FEEDBACK',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'feedback2_c',
+            'studio' => 'visible',
+            'label' => 'LBL_FEEDBACK2',
+          ),
+          1 => 
+          array (
+            'name' => 'feedback3_c',
+            'studio' => 'visible',
+            'label' => 'LBL_FEEDBACK3',
           ),
         ),
       ),

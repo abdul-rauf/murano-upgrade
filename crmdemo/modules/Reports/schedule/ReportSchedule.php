@@ -24,13 +24,15 @@ function ReportSchedule(){
 }
 
 /**
- * @deprecated deprecated since this syntax is only supported by MySQL
+ * This is deprecated since 7.7.0 and will be removed in 7.9.0.
+ * Please use SugarBean::drop_tables() instead.
  * @return void
- * TODO THIS FUNCTIONALITY SHOULD BE REMOVED AFTER CONVERSION TO SUGARBEAN USE
+ * @deprecated 7.7.0
+ * @see SugarBean::drop_tables
  */
-function drop_tables ()
+function drop_tables()
 {
-    // TODO This code should never be used
+    // FIXME TY-793: This code should never be used
     $query = 'DROP TABLE IF EXISTS '.$this->table_name;
     $this->db->query($query);
 }
@@ -211,17 +213,15 @@ SELECT
 FROM
     $this->table_name rs
     INNER JOIN (
-        SELECT
-            {$this->db->convert('jq.job_group', 'substr', array(8))} report_id,
-            jq.execute_time
+        SELECT jq.job_group report_id, jq.execute_time
         FROM job_queue jq
         INNER JOIN (
             SELECT
                 max(execute_time) mt,
                 job_group
             FROM job_queue
+            WHERE target = 'class::SugarJobSendScheduledReport'
             GROUP BY job_group
-            HAVING job_group LIKE 'Report %'
         ) last
         ON last.mt = jq.execute_time AND last.job_group = jq.job_group
         WHERE resolution = '{$failure}'

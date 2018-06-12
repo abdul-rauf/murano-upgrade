@@ -15,22 +15,19 @@
     background: @grayLighter;
     border-top: @borderWidget;
   }
-  // toggle view
-  .controls.btn-group-fit .btn-group {
-    right: 0;
-  }
 }
 
 // search filter inputs
 .filter-view {
   border: @inputBorder;
   //display: table-row;
+  position: relative;
   white-space: nowrap;
   margin-left: 0;
   background-color: @white;
   margin-bottom: 0;
   overflow: hidden;
-  height: 28px;
+  min-height: 28px;
   .box-sizing(border-box);
   .table-cell {
     vertical-align: top;
@@ -56,7 +53,7 @@
     margin-top: 0;
     font-size: @fontSizeSmall;
     font-weight: bold;
-    line-height: 13px;
+    line-height: 11px;
     .choice-filter-label {
       vertical-align: top;
       margin-right: 2px;
@@ -85,6 +82,7 @@
   .choice-filter {
     background: @gray;
     color: @white;
+    cursor: text;
   }
   // select2 filter pills
   .select2-container {
@@ -95,13 +93,13 @@
     &.select2-container-disabled .select2-choice {
       .select2-arrow {
         background: none;
-        .icon-caret-down {
+        .fa-caret-down {
           display: none;
         }
       }
     }
     .select2-choices {
-      padding: 1px 4px 2px 0;
+      padding: 2px 4px 1px 0;
       border: none;
       background-image: none;
       background-color: transparent;
@@ -125,6 +123,8 @@
         display: inline-block;
         margin-right: 0;
         font-weight: 600;
+        vertical-align: top;
+        line-height: 11px;
       }
       .select2-arrow {
         display: none;
@@ -136,7 +136,7 @@
         line-height: 13px;
         height: 12px;
         background: @grayLighter;
-        i[class^="icon-"] {
+        i.fa {
           margin-left: 4px;
         }
         &:hover {
@@ -170,12 +170,17 @@
       }
     }
     &.select2-container-multi.select2-choices-pills-close .select2-search-choice {
-      padding: 3px 4px 2px 6px !important;
+      padding: 1px 0 0 4px !important;
+      height: 23px;
+      margin: 0;
       .box-sizing(border-box);
       div {
         span.select2-choice-type {
           margin-right: 2px;
           margin-top: 0;
+          &[disabled=disabled]:hover {
+            background: @grayLighter;
+          }
         }
       }
       a.select2-choice-filter {
@@ -200,6 +205,12 @@
       .select2-choices {
         padding-right: 0px;
       }
+
+      .select2-choice .select2-chosen {
+        &:hover {
+          background: @grayLighter;
+        }
+      }
     }
   }
   // search input field
@@ -219,9 +230,9 @@
     }
   }
   // clear search text
-  .add-on.icon-remove {
+  .add-on.fa-times {
     position: absolute;
-    right: 65px;
+    right: 0;
     top: 0;
     padding: 7px 10px;
     color: @gray;
@@ -284,6 +295,15 @@
         .datepicker {
           width: 70%;
         }
+      }
+      //For flex-relate field
+      .flex-relate-module {
+        float: left;
+        width: 48.5%;
+      }
+      .flex-relate-record {
+        width: 48.5%;
+        margin-left: 3%;
       }
     }
     .controls {
@@ -387,7 +407,7 @@
       }
     }
     .select2-select-legend {
-      .icon-plus {
+      .fa-plus {
         margin-top: 3px;
         line-height: 4px;
       }
@@ -428,17 +448,15 @@
 }
 
 // dropdown menu for filter pills
+.search-related-dropdown,
 .search-filter-dropdown {
   border: 0px none;
   width: auto;
   margin-top: 5px;
   &.select2-drop.select2-drop-active {
-    .box-shadow(0px 0px 1px 0px @gray);
+    border: 1px solid darken(@grayLighter, 10%);
+    .box-shadow(none);
     .border-radius(2px);
-  }
-  .result-selected {
-    display: block;
-    font-weight: bold;
   }
   .select2-results {
     margin: 0;
@@ -454,19 +472,31 @@
       color: @dropdownLinkColorHover;
     }
   }
-  .select2-result.select2-result-border-top {
-    border-top: 1px solid darken(@grayLighter, 20%);
-  }
-  .select2-result.select2-result-border-bottom {
-    border-bottom: 1px solid darken(@grayLighter, 20%);
+}
+
+.search-filter-dropdown {
+  .result-selected {//MOOT: this selector may be no longer used
+    display: block;
+    font-weight: bold;
   }
   .select2-result {
-    .select2-icon-prepend {
-        i.icon-ok { padding-right: 5px; }
-        i.icon-plus { padding-left: 1px; padding-right: 7px; }
+    &.select2-result-border-top {
+      border-top: 1px solid darken(@grayLighter, 20%);
+    }
+    &.select2-result-border-bottom {
+      border-bottom: 1px solid darken(@grayLighter, 20%);
+    }
+    .select2-fa-prepend {
+      i.fa-check {
+        padding-right: 5px;
+      }
+      i.fa-plus {
+        padding-left: 1px;
+        padding-right: 7px;
+      }
     }
     .select2-no-icon {
-        padding-left: 20px;
+      padding-left: 20px;
     }
   }
   &:before,
@@ -475,20 +505,14 @@
   }
 }
 
-.search-related-dropdown {
-  margin-top: 0;
-  .select2-drop-active {
-    border-top: 1px solid @linkColor;
-  }
-}
-
 .drawer .dashablelist-filter {
-  > div >.search-filter::before {
-    content: "Default Data Filter";
+  > label {
     position: relative;
     left: 20px;
     font-size: 11px;
     color: @grayLight;
+    cursor: text;
+    margin-bottom: 0;
   }
   .search-filter {
     .control-group {

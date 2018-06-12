@@ -36,11 +36,19 @@ var SourceTabs = {
 			        dataSrc: {/literal}'index.php?module=Connectors&action=SourceProperties&source_id={$source.id}&to_pdf=true'{literal},
 			        cacheData: true,
 			        {/literal}
-			        {if $source_count == 1}
-			        active: true
-			        {else}
-			        active: false
-			        {/if}
+			        {if $ACTIVE_TAB}
+                        {if $ACTIVE_TAB == $source.id}
+                    active: true
+                        {else}
+                    active: false
+                        {/if}
+                    {else}
+                        {if $source_count == 1}
+                    active: true
+                        {else}
+                    active: false
+                        {/if}
+                    {/if}
 			        {literal}
 			    });
 			    {/literal}
@@ -79,7 +87,8 @@ var SourceTabs = {
 YAHOO.util.Event.onDOMReady(SourceTabs.init);
 </script>
 {/literal}
-<form name="ModifyProperties" method="POST" action="index.php">
+<form name="ModifyProperties" method="POST" action="index.php" onsubmit="disable_submit('ModifyProperties');">
+{sugar_csrf_form_token}
 <input type="hidden" name="modify" value="true">
 <input type="hidden" name="module" value="Connectors">
 <input type="hidden" name="action" value="SaveModifyProperties">

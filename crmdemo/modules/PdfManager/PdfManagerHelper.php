@@ -293,6 +293,11 @@ class PdfManagerHelper
                 continue;
             }
 
+            // Description field is not used in KBContents module.
+            if ($moduleName == 'KBContents' && $def['name'] == 'description') {
+                continue;
+            }
+
             //Check the studio property of the field def.
             if (isset($def['studio']) && (self::isFalse($def['studio']) || (is_array($def['studio']) && (
                 (isset($def['studio']['formula']) && self::isFalse($def['studio']['formula'])) ||
@@ -492,7 +497,7 @@ class PdfManagerHelper
                 global $locale;
                 $format_number_array = array(
                     'currency_symbol' => true,
-                    'currency_id' => $module_instance->currency_id,
+                    'currency_id' => (!empty($module_instance->field_defs[$name]['currency_id']) ? $module_instance->field_defs[$name]['currency_id'] : $module_instance->currency_id),
                     'type' => 'sugarpdf',
                     'charset_convert' => true,
                 );

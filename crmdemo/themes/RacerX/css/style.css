@@ -550,6 +550,25 @@ line-height: 16px;
     display: none;
 }
 
+/* WorkFlow Sunset styles added in 7.6.1 */
+div.moduleTitle.workflow-sunset-title
+{
+    margin-bottom: 15px;
+}
+
+/* Brings the messaging up closer to the h2 element */
+.moduleTitle.workflow-sunset-title h2
+{
+    margin-bottom: -5px;
+}
+
+/* Increase the size of the notice of the message */
+.error.workflow-sunset
+{
+    font-size: 14px;
+}
+/* End WorkFlow Sunset styles */
+
 /* EditView/projects -> grid  */
 .sqsSelectedSmartInputItem
 {
@@ -1568,6 +1587,11 @@ background-image:url(../../../../index.php?entryPoint=getImage&imageName=form-bu
 {
     margin-bottom: 0;
 }
+.schedulers-editview-panel .collapseLink,
+.schedulers-editview-panel .expandLink
+{
+    display: none;
+}
 
 /* calendar module styles */
 .monthFooter td
@@ -1888,8 +1912,6 @@ table.reportlistView{
     background:White;
 }
 .reportGroupViewTable {
-    border-left: 1px solid Black;
-    border-top: 1px solid Black;
     background:LightGrey;
 }
 .reportGroup1ByTable {
@@ -1901,8 +1923,7 @@ table.reportlistView{
 }
 .reportGroupNByTable {
     font-size: 13px;
-    border-left: none;
-    border-right: 1px solid Black;
+    border: 1px solid Black;
     border-bottom: none;
     background:White;
 }
@@ -1919,21 +1940,20 @@ table.reportlistView{
     border-top: none;
     border-bottom: none;
     background:Black;
+    border-collapse: collapse;
 }
 table.reportDataChildtablelistView td {
     border-color: #ccc;
     background: white;
     padding:4px 5px;
+    border: 1px solid;
 }
 .reportGroupByDataChildTablelistViewThS1 {
     font-size: 11px;
     font-weight: bold;
     text-align: left;
     padding: 4px 5px 4px 5px;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    border-bottom: none;
+    border: 1px solid;
     background:White;
 }
 .reportGroupByDataEvenListRowS1, .reportGroupByDataOddListRowS1 {
@@ -2396,7 +2416,7 @@ left: -2px;
     margin-top: 0;
 }
 
-/* override some of the detail view styles for show more detail option (KBDocument detail view)*/
+/* override some of the detail view styles for show more detail option (KBOLDDocument detail view)*/
 .detail td.subdetail{
    padding:0px;
    border-bottom:medium none;
@@ -3105,6 +3125,16 @@ embed
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff');
     margin: 15px 0px;
 
+    }
+
+    .dashletPanelMenu.wizard .bd .screen .preset-settings {
+        width: auto;
+    }
+    .dashletPanelMenu.wizard .bd .screen .preset-settings .preset-row .preset-label {
+        padding: 10px 10px 10px 0px;
+    }
+    .dashletPanelMenu.wizard .bd .screen .preset-settings *[id^="custom_import_"] td[class^="preset-"] {
+        white-space: nowrap;
     }
 
     .dashletPanelMenu.wizard.import .bd {
@@ -7189,6 +7219,7 @@ p.submsg a{
 .ui-dialog {
     padding: 0px;
     box-shadow: 0 5px 10px #999999;
+    z-index: 1;
 }
 
 .ui-dialog .ui-dialog-titlebar {
@@ -7225,15 +7256,12 @@ p.submsg a{
 }
 
 .ui-dialog .ui-dialog-titlebar-close {
-    margin-top: -10px;
-    width: 18px;
-    padding: 0px;
-}
-
-.ui-dialog .ui-dialog-titlebar-close span {
     background: url(../../../../index.php?entryPoint=getImage&imageName=close.png) no-repeat center !important;
+    margin-top: -10px;
+    padding: 0px;
     height: 18px;
     width: 18px;
+    border: none;
 }
 
 .ui-dialog .ui-dialog-titlebar-close.ui-state-hover {

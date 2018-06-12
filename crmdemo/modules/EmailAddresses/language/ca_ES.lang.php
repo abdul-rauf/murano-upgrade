@@ -11,19 +11,20 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
- * Description:  Defines the Catalan language pack for the base application. 
 
- * Source: SugarCRM 5.2.0
- * Contributor(s): Ramón Feliu (ramon@slay.es).
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
  ********************************************************************************/
 
 $mod_strings = array (
-    'LBL_EMAIL_ADDRESS_ID' 			=> 'ID',
-    'LBL_EMAIL_ADDRESS' 			=> 'Direcció de Correu',
-    'LBL_EMAIL_ADDRESS_CAPS' 		=> 'Majúscules en Direcció de Correu',
-    'LBL_INVALID_EMAIL' 			=> 'Correu No Vàlid',
-    'LBL_OPT_OUT' 					=> 'Refusat',
-    'LBL_DATE_CREATE' 				=> 'Data de Creació',
-    'LBL_DATE_MODIFIED' 			=> 'Última Modificació',
-    'LBL_DELETED' 					=> 'Esborrar',
+    'LBL_EMAIL_ADDRESS_ID' => 'ID',
+    'LBL_EMAIL_ADDRESS' => 'Adreça electrònica',
+    'LBL_EMAIL_ADDRESS_CAPS' => 'Majúscules en Direcció de Correu',
+    'LBL_INVALID_EMAIL' => 'L&#39;adreça electrònica no és vàlida',
+    'LBL_OPT_OUT' => 'Refusat',
+    'LBL_DATE_CREATE' => 'Data de Creació',
+    'LBL_DATE_MODIFIED' => 'Última Modificació',
+    'LBL_DELETED' => 'Esborrar',
 );

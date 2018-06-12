@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
+ * $Id$
  * Description:
  ********************************************************************************/
  // hack to allow "&", "%" and "+" through a $_GET var
@@ -35,6 +35,13 @@ global $app_strings;
 global $app_list_strings;
 global $current_user;
 global $sugar_config;
+
+if (SugarConfig::getInstance()->get("disable_user_email_config", false)
+        && !$current_user->isAdminForModule("Emails")
+) {
+	ACLController::displayNoAccess(false);
+    sugar_cleanup(true);
+}
 
 $title				= '';
 $msg				= '';
@@ -84,6 +91,7 @@ if (!empty($searchField)) {
 
 $ie = BeanFactory::getBean('InboundEmail');
 if(!empty($_REQUEST['ie_id'])) {
+    $ie->disable_row_level_security = true;
     $ie->retrieve($_REQUEST['ie_id']);
 }
 $ie->email_user     = $_REQUEST['email_user'];

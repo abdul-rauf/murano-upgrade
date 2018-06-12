@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -37,6 +38,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
     protected $allowedViews = array(
         MB_SIDECARLISTVIEW,
         MB_SIDECARPOPUPVIEW,
+        MB_SIDECARDUPECHECKVIEW,
         MB_WIRELESSLISTVIEW,
     );
 
@@ -73,12 +75,9 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
                         $field['enabled'] = true;
                     }
                     if (!empty($field['name'])) {
-                        if (
-                            !empty($field['default']) && !empty($field['enabled']) &&
-                            (!isset($field['studio']) || ($field['studio'] !== false && $field['studio'] != 'false'))
-                        ) {
+                        if ($this->isDefaultField($field)) {
                             if (isset($this->_fielddefs[$field['name']])) {
-                                $defaultFields[$field['name']] = self::_trimFieldDefs($this->_fielddefs[$field['name']]);
+                                $defaultFields[$field['name']] = self::_trimFieldDefs(array_merge($this->_fielddefs[$field['name']], $field));
                                 if (!empty($field['label'])) {
                                     $defaultFields[$field['name']]['label'] = $field['label'];
                                 }
@@ -92,6 +91,42 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
         }
 
         return $defaultFields ;
+    }
+
+    /**
+     * Gets the list of predefined widths available for the list view columns.
+     *
+     * @return array The list of widths.
+     * @static
+     */
+    static public function getDefaultWidths() {
+        $widths = array(
+            'xxsmall',
+            'xsmall',
+            'small',
+            'medium',
+            'large',
+            'xlarge',
+            'xxlarge',
+        );
+        return $widths;
+    }
+
+    /**
+     * Detects if the field should be displayed in "Default" list
+     *
+     * @param array $field Field view definition
+     * @return bool
+     */
+    protected function isDefaultField(array $field)
+    {
+        return (!isset($field['default']) || $field['default'])
+            && (!isset($field['enabled']) || $field['enabled'])
+            // for studio we don't know all cases, value can be array or 'visible' etc.
+            // because of that we use expected studio not to be false or 'false'.
+            // when we'll know all values we should replace that condition with suitable one.
+            && (!isset($field['studio']) || ($field['studio'] !== false && $field['studio'] !== 'false')
+        );
     }
 
     /**
@@ -117,7 +152,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
                             continue;
                         }
 
-                        if (empty($field['default'])) {
+                        if ($this->isAdditionalField($field)) {
                             if (isset($this->_fielddefs[$field['name']])) {
                                 $additionalFields[$field['name']] = self::_trimFieldDefs($this->_fielddefs[$field['name']]);
                             } else {
@@ -130,6 +165,18 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
         }
 
         return $additionalFields ;
+    }
+
+    /**
+     * Detects if the field should be displayed in "Available" list
+     *
+     * @param array $field Field view definition
+     * @return bool
+     */
+    protected function isAdditionalField(array $field)
+    {
+        return isset($field['default']) && !$field['default']
+            && (!isset($field['enabled']) || $field['enabled']);
     }
 
     /**
@@ -164,8 +211,11 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
                             } else {
                                 $field['label'] = $this->_fielddefs[$field['name']]['vname'];
                             }
-                        }                        
-                        $availableFields[$field['name']] = $field;
+                        }
+                        // lets make sure that the field can still be in studio
+                        if ($this->isValidField($field['name'], $this->_fielddefs[$field['name']])) {
+                            $availableFields[$field['name']] = $field;
+                        }
                     }
                 }
             }
@@ -337,20 +387,20 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
                 }
 
                 if (isset($_REQUEST[strtolower($fieldname) . 'width'])) {
-                    $width = substr($_REQUEST[$fieldname . 'width'], 6, 3);
-                    if (strpos($width, "%") != false) {
-                        $width = substr($width, 0, 2);
-                    }
+                    $width = substr($_REQUEST[$fieldname . 'width'], 6);
+                    $isPercentage = strrpos($width, '%') !== false;
+                    $intWidth = intval($width);
+                    $isDefaultWidth = in_array($width, self::getDefaultWidths());
 
-                    if (!($width < 101 && $width > 0)) {
-                        $width = 10;
+                    if (!$isPercentage && ($intWidth > 0 || $isDefaultWidth)) {
+                        $newPaneldefs[$newPaneldefIndex]['width'] = $width;
+                    } else {
+                        unset($newPaneldefs[$newPaneldefIndex]['width']);
                     }
-
-                    $newPaneldefs[$newPaneldefIndex]['width'] = $width."%";
                 } elseif (($def = $this->panelGetField($fieldname)) && isset($def['field']['width'])) {
                     $newPaneldefs[$newPaneldefIndex]['width'] = $def['field']['width'];
                 } else {
-                    $newPaneldefs[$newPaneldefIndex]['width'] = "10%";
+                    unset($newPaneldefs[$newPaneldefIndex]['width']);
                 }
 
                 // Set the default flag to make it a default field
@@ -579,12 +629,13 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
             } else {
                 MetaDataManager::refreshModulesCache(array($this->_moduleName));
             }
+            parent::_clearCaches();
         }
     }
 
     /**
      * Sets the currency_format property of the fielddef
-     * 
+     *
      * @param string $fieldName  The name of the field being worked on
      * @param array $fieldDef The current fielddef collection for a field
      * @param bool $addDefault Flag that determines whether the default property is added
@@ -614,20 +665,23 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
 
     /**
      * Sets the id and link properties of the fielddef
-     * 
+     *
      * @param string $fieldName  The name of the field being worked on
      * @param array $fieldDef The current fielddef collection for a field
      * @return array The modified fielddef collection
      */
     public function setDefLink($fieldName, $fieldDef)
     {
-        // fixing bug #25640: Value of "Relate" custom field is not displayed as a link in list view
-        // we should set additional params such as 'link' and 'id' to be stored in custom listviewdefs.php
-        if (isset($this->_fielddefs[$fieldName]['type']) &&
-            ($this->_fielddefs[$fieldName]['type'] == 'relate' ||
+        if (isset($this->_fielddefs[$fieldName]['type'])) {
+            if (($this->_fielddefs[$fieldName]['type'] == 'relate' ||
+                // fixing bug #25640: Value of "Relate" custom field is not displayed as a link in list view
+                // we should set additional params such as 'link' and 'id' to be stored in custom listviewdefs.php
                 $this->_fielddefs[$fieldName]['type'] == 'parent')) {
-            $fieldDef['id'] = strtoupper($this->_fielddefs[$fieldName]['id_name']);
-            $fieldDef['link'] = true;
+                $fieldDef['id'] = strtoupper($this->_fielddefs[$fieldName]['id_name']);
+                $fieldDef['link'] = true;
+            } else if ($this->_fielddefs[$fieldName]['type'] == 'name') {
+                $fieldDef['link'] = true;
+            }
         }
 
         return $fieldDef;
@@ -635,7 +689,8 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
 
     /**
      * Sets the sortable property of the fielddef
-     * 
+     * Also see SidecarPortalListLayoutMetaDataParser::setDefSortable() for special handling on portal list view.
+     *
      * @param string $fieldName  The name of the field being worked on
      * @param array $fieldDef The current fielddef collection for a field
      * @return array The modified fielddef collection
@@ -645,8 +700,14 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
         // sorting fields of certain types will cause database engine problems
         $noSortByType = isset($this->_fielddefs[$fieldName]['type']) && isset($this->nonSortableTypes[$this->_fielddefs[$fieldName]['type']]);
         $noSortDBType = isset($this->_fielddefs[$fieldName]['dbType']) && $this->_fielddefs[$fieldName]['dbType'] == 'id';
-        if ($noSortByType || $noSortDBType) {
-            $fieldDef['sortable'] = false;
+        $sortable = (isset($this->_fielddefs[$fieldName]['sortable'])) ? isTruthy($this->_fielddefs[$fieldName]['sortable']) : false;
+        $relateSortable = false;
+        if (isset($this->_fielddefs[$fieldName]['type']) && $this->_fielddefs[$fieldName]['type'] === 'relate') {
+            $hasSortOn = isset($this->_fielddefs[$fieldName]['sort_on']) && is_array($this->_fielddefs[$fieldName]['sort_on']);
+            $relateSortable = !($hasSortOn);
+        }
+        if ($noSortByType || $noSortDBType || $relateSortable) {
+            $fieldDef['sortable'] = $sortable;
         }
 
         return $fieldDef;
@@ -654,7 +715,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
 
     /**
      * Sets the currency_format property of the fielddef
-     * 
+     *
      * @param string $fieldName  The name of the field being worked on
      * @param array $fieldDef The current fielddef collection for a field
      * @return array The modified fielddef collection
@@ -671,7 +732,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
 
     /**
      * Sets the align property of the fielddef
-     * 
+     *
      * @param string $fieldName  The name of the field being worked on
      * @param array $fieldDef The current fielddef collection for a field
      * @return array The modified fielddef collection
@@ -687,7 +748,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
 
     /**
      * Sets the readonly property of a fielddef
-     * 
+     *
      * @param array $rawDef   The raw field def from an initial def fetch
      * @param array $fieldDef The current fielddef collection for a field
      * @return array The modified fielddef collection
@@ -703,7 +764,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
 
     /**
      * Sets the relate_fields property of a fielddef
-     * 
+     *
      * @param array $rawDef   The raw field def from an initial def fetch
      * @param array $fieldDef The current fielddef collection for a field
      * @return array The modified fielddef collection
@@ -713,7 +774,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
         if (isset($rawDef['related_fields']) && !empty($rawDef['related_fields'])) {
             $fieldDef['related_fields'] = $rawDef['related_fields'];
         }
-        
+
         return $fieldDef;
     }
 }

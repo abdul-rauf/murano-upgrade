@@ -1,7 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,17 +9,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$mod_strings = array (
-  'LBL_EMAIL_SIGNATURE_ERROR1' => 'Această semnătură necesită un nume.',
-  'LBL_MODULE_NAME' => 'Semnatura utilizator',
-  'LBL_MODULE_NAME_SINGULAR' => 'Semnatura utilizator',
-  'LBL_SIGNATURE' => 'Semnatura',
-  'LBL_SIGNATURES' => 'Semnaturi',
-  'LBL_SIGNATURE_DEFAULT' => 'Utilizare semnătură?',
-  'LBL_SIGNATURE_HTML' => 'Semnatura HTML',
-  'LBL_SIGNATURE_NAME' => 'Nume',
-  'LBL_SIGNATURE_PREPEND' => 'Semnatura deasupra raspunsului',
+$mod_strings = array(
+    'LBL_MODULE_NAME'			=> 'Semnatura utilizator',
+    'LBL_MODULE_NAME_SINGULAR'		=> 'Semnatura utilizator',
+    'LBL_EMAIL_SIGNATURE_ERROR1' => 'Această semnătură necesită un nume.',
+    'LBL_SIGNATURE_NAME'         => 'Nume',
+    'LBL_SIGNATURE'              => 'Semnatura',
+    'LBL_SIGNATURE_HTML'         => 'Semnatura HTML',
+    'LBL_SIGNATURE_DEFAULT'      => 'Utilizare semnătură?',
+    'LBL_SIGNATURE_PREPEND'      => 'Semnatura deasupra raspunsului',
+    'LBL_SIGNATURES'             => 'Semnaturi',
 );
-

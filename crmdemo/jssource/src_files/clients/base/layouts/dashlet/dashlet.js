@@ -20,7 +20,7 @@
     dashboard: undefined,
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     initialize: function(options) {
         this.index = options.meta.index;
@@ -44,14 +44,14 @@
      *
      * @param {String} name the name of the layout you're looking for
      * @param {Object} layout the layout object to look through
-     * @returns {*}
+     * @return {Mixed}
      */
     findLayout: function(name, layout) {
         return (layout.name == name || layout.type == name) ? layout : this.findLayout(name, layout.layout);
     },
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      * Append dashlet toolbar view based on custom_toolbar definition
      *
      * @param {Array} list of component metadata
@@ -96,6 +96,8 @@
                         skipFetch: true
                     }
                 });
+            } else {
+                this.hasToolbar = false;
             }
         }
         if (this.meta.empty) {
@@ -109,7 +111,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      * Set default skipFetch as false.
      * Able to get the custom title label from the dashlet component.
      */
@@ -160,7 +162,7 @@
     },
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      * Place the each component to the right location
      *
      * @param comp
@@ -256,8 +258,7 @@
             })
         }
         this.meta.components = [component];
-        this._addComponentsFromDef(this.meta.components);
-        this.trigger('init');
+        this.initComponents(this.meta.components);
         this.model.set('updated', true);
         this.loadData();
         this.render();
@@ -301,7 +302,7 @@
             component.dispose();
         }, this);
         this._components = [];
-        this._addComponentsFromDef([
+        this.initComponents([
             {
                 view: 'dashlet-cell-empty',
                 context: {
@@ -394,8 +395,11 @@
      * @param {Boolean} true if it needs to be collapsed
      */
     collapse: function(collapsed) {
-        this.$(".dashlet-toggle > i").toggleClass("icon-chevron-down", collapsed);
-        this.$(".dashlet-toggle > i").toggleClass("icon-chevron-up", !collapsed);
+        if (this.hasToolbar === false) {
+            return;
+        }
+        this.$(".dashlet-toggle > i").toggleClass("fa-chevron-down", collapsed);
+        this.$(".dashlet-toggle > i").toggleClass("fa-chevron-up", !collapsed);
         this.$(".thumbnail").toggleClass("collapsed", collapsed);
         this.$("[data-dashlet=dashlet]").toggleClass("hide", collapsed);
     },

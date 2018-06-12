@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarObjects/templates/person/Person.php');
+use Sugarcrm\Sugarcrm\Security\Password\Hash;
+
+require_once 'include/SugarObjects/templates/person/Person.php';
+
 /**
  *  Contact is used to store customer information.
  */
@@ -135,15 +137,16 @@ class Contact extends Person {
     );
 
     /**
-     * This is a deprecated method, please start using __construct() as this
-     * method will be removed in a future version.
-     *
-     * @deprecated since 7.0.0. Use __construct() instead.
+     * This is deprecated since 7.0.0 and will be removed in 7.9.0.
+     * Please use __construct() instead.
+     * @deprecated 7.0.0
+     * @see __construct
      */
     public function Contact()
     {
-        $GLOBALS['log']->deprecated('Calls to Contact::Contact() are deprecated.');
         self::__construct();
+        $GLOBALS['log']->deprecated('Contact::Contact() is deprecated since 7.0.0. and will be removed in 7.9.0. ' .
+            'Please use Contact::__construct() instead.');
     }
 
 	public function __construct() {
@@ -568,5 +571,50 @@ class Contact extends Person {
             }
         }
         return parent::save($check_notify);
+    }
+
+    /**
+     * Attempt to rehash the current portal password hash
+     * @param string $password Clear text password
+     */
+    public function rehashPortalPassword($password)
+    {
+        if (empty($this->id) || empty($this->portal_password) || empty($password)) {
+            return;
+        }
+
+        $hashBackend = Hash::getInstance();
+
+        if ($hashBackend->needsRehash($this->portal_password)) {
+            if ($newHash = $hashBackend->hash($password)) {
+                $update = sprintf(
+                    'UPDATE %s SET portal_password = %s WHERE id = %s',
+                    $this->table_name,
+                    $this->db->quoted($newHash),
+                    $this->db->quoted($this->id)
+                );
+                $this->db->query($update);
+                $GLOBALS['log']->info("Rehashed portal password for contact id '{$this->id}'");
+            } else {
+                $GLOBALS['log']->warn("Error trying to rehash portal password for contact id '{$this->id}'");
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * In Portal, allows to access only the logged in Contact.
+     */
+    public function getOwnerWhere($user_id, $table_alias = null)
+    {
+        if (isset($_SESSION['type'], $_SESSION['contact_id']) && $_SESSION['type'] === 'support_portal') {
+            if ($table_alias === null) {
+                $table_alias = $this->table_name;
+            }
+            return $table_alias  . '.id = ' . $this->db->quoted($_SESSION['contact_id']);
+        }
+
+        return parent::getOwnerWhere($user_id, $table_alias);
     }
 }

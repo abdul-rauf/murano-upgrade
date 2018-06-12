@@ -8,19 +8,28 @@
 }
 .activitystream-posts-comments-container {
   border-bottom: @borderWidget;
-  padding: 10px 68px 0 57px;
+  padding: 10px 68px 0 52px;
   position: relative;
   font-size: @fontSizeLarge;
   min-height: 46px;
+  &.highlighted {
+    background: @dropdownLinkBackgroundHover;
+  }
   .avatar,
   .label-module {
     position: absolute;
     left: 10px;
     top: 10px;
   }
-  .tagged span.label {
-    font-size: @baseFontSize - 1;
-    padding: 2px 4px 1px;
+  .tagged {
+    max-width: 100%;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    span.label {
+      font-size: @baseFontSize - 1;
+      padding: 2px 4px 1px;
+    }
   }
   p {
     margin: 0;
@@ -61,6 +70,9 @@
     .reply-input {
       position: relative;
       margin-left: -37px;
+      .reply {
+        padding: 10px 58px 10px 10px;
+      }
     }
     .reply-btn {
       position: absolute;
@@ -161,7 +173,7 @@ div[data-placeholder]:not(:focus):not([data-hide-placeholder]):before {
 
 // Fix for activity stream dashlet for record view
 .dashboard .well .dashlet-content .activitystream-posts-comments-container {
-  padding: 12px 68px 8px 62px !important;
+  padding-bottom: 8px;
 }
 
 // Fix for activity stream dashlet actions

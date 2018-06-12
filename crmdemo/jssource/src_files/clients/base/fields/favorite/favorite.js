@@ -11,23 +11,23 @@
 /**
  * @class View.Fields.Base.FavoriteField
  * @alias SUGAR.App.view.fields.BaseFavoriteField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * This field doesn't support `showNoData`.
      */
     showNoData: false,
 
     'events': {
-        'click .icon-favorite': 'toggle'
+        'click .fa-favorite': 'toggle'
     },
     plugins: ['Tooltip'],
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      * The favorite is always a readonly field.
      */
@@ -94,7 +94,7 @@
     },
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      * @return {Boolean}
      */

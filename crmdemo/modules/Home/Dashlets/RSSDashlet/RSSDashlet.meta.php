@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: RSSDashlet.meta.php,v 1.1 2006/10/11 00:53:31 clint Exp $
 
 global $app_strings, $current_language;
 

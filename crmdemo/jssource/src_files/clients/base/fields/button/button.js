@@ -11,7 +11,7 @@
 /**
  * @class View.Fields.Base.ButtonField
  * @alias SUGAR.App.view.fields.BaseButtonField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     tagName: "span",
@@ -21,11 +21,12 @@
 
     initialize: function(options) {
         var self = this;
-        this.events = _.extend({}, this.events, options.def.events, {
-            'click .disabled' : 'preventClick'
-        });
 
-        app.view.Field.prototype.initialize.call(this, options);
+        this.events = _.extend({}, {
+            'click *' : 'preventClick'
+        }, this.events, options.def.events);
+
+        this._super('initialize', [options]);
 
         // take advantage of this hook to do the acl check
         // we use this wrapper because our spec
@@ -52,25 +53,35 @@
     },
     setDisabled: function(disable) {
         disable = _.isUndefined(disable) ? true : disable;
-        //Preserve the original css definition to restore later
-        var orig_css = this.def.css_class || '';
-        this.def.css_class = orig_css;
+        this.def.css_class = this.def.css_class || '';
         var css_class = this.def.css_class.split(' ');
-        if(disable) {
+        if (disable) {
             css_class.push('disabled');
         } else {
             css_class = _.without(css_class, 'disabled');
         }
         this.def.css_class = _.unique(_.compact(css_class)).join(' ');
         app.view.Field.prototype.setDisabled.call(this, disable);
-        //Restore original css
-        this.def.css_class = orig_css;
     },
+
+    /**
+     * Prevents the `click` event from propagating further if the button is
+     * in a disabled state.
+     *
+     * @param {Event} evt The `click` event.
+     * @return {boolean} Returns `false` if the button is disabled.
+     */
     preventClick: function(evt) {
-        if(this.isDisabled()) {
+        // FIXME: isDisabled should not check against `this.action`, and should
+        // should eliminate the need here to check for the `disabled` class.
+        // Should be fixed with SC-3418.
+        if (this.isDisabled() || this.$(this.fieldTag).hasClass('disabled')) {
+            evt.preventDefault();
+            evt.stopImmediatePropagation();
             return false;
         }
     },
+
     /**
      * Handles the jquery showing and event throwing
      * of the button. does no access checks.
@@ -111,20 +122,20 @@
      * It should check the visivility by isHidden instead of DOM visibility testing
      * since actiondropdown renders its dropdown lazy
      *
-     * @returns {boolean}
+     * @return {boolean}
      */
     isVisible: function() {
         return !this.isHidden;
     },
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      * No data changes to bind.
      */
     bindDomChange: function () {
     },
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      * No need to bind DOM changes to a model.
      */

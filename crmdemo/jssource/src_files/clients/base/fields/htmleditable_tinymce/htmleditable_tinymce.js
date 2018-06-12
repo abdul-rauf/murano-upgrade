@@ -11,9 +11,11 @@
 /**
  * @class View.Fields.Base.Htmleditable_tinymceField
  * @alias SUGAR.App.view.fields.BaseHtmleditable_tinymceField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
+    plugins: ['Tinymce', 'EllipsisInline'],
+
     fieldSelector: '.htmleditable', //iframe or textarea selector
     _htmleditor: null, // TinyMCE html editor
     _isDirty: false,
@@ -29,13 +31,14 @@
      * @private
      */
     _render: function() {
+
         this.destroyTinyMCEEditor();
 
         app.view.Field.prototype._render.call(this);
 
         this._getHtmlEditableField().attr('name', this.name);
         if (this._isEditView()) {
-            this._renderEdit(this.options.def.tinyConfig || null);
+            this._renderEdit(this.def.tinyConfig || null);
         } else {
             this._renderView();
         }
@@ -62,10 +65,15 @@
      */
     setViewContent: function(value){
         var editable = this._getHtmlEditableField();
-        if(editable && !_.isEmpty(editable.get(0).contentDocument)){
-            if(editable.contents().find('body').length > 0){
+        if (!editable) {
+            return;
+        }
+        if (!_.isUndefined(editable.get(0)) && !_.isEmpty(editable.get(0).contentDocument)) {
+            if (editable.contents().find('body').length > 0) {
                 editable.contents().find('body').html(value);
             }
+        } else {
+            editable.html(value);
         }
     },
 
@@ -135,8 +143,6 @@
 
             // Drop lists for link/image/media/template dialogs
             template_external_list_url: "lists/template_list.js",
-            external_link_list_url: "lists/link_list.js",
-            external_image_list_url: "lists/image_list.js",
             media_external_list_url: "lists/media_list.js",
 
             //plugin theme settings
@@ -157,7 +163,7 @@
     initTinyMCEEditor: function(optConfig) {
         var self = this;
         if(_.isEmpty(this._htmleditor)){
-            var config = optConfig || this.getTinyMCEConfig();
+            var config = _.extend({}, this.getTinyMCEConfig(), optConfig || {});
             var __superSetup__ = config.setup;
             // Preserve custom setup if it exists, add setup function needed for widget to work properly
             config.setup = function(editor){
@@ -189,7 +195,7 @@
                 self.context.trigger('tinymce:oninit', inst);
             };
 
-            $('.htmleditable').tinymce(config);
+            this._getHtmlEditableField().tinymce(config);
         }
     },
 
@@ -248,7 +254,7 @@
      * @return {String} content from the editor
      */
     getEditorContent: function() {
-        return this._htmleditor.getContent();
+        return this._htmleditor.getContent({format: 'raw'});
     },
 
     /**

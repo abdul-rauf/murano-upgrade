@@ -52,7 +52,7 @@ r8230 - 2005-10-03 17:47:19 -0700 (Mon, 03 Oct 2005) - majed - Added Sugar_Smart
  * @package Smarty
  */
 
-
+/* $Id: Config_File.class.php 10971 2006-01-12 22:58:30Z chris $ */
 
 /**
  * Config file reading class

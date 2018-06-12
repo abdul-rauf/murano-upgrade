@@ -72,34 +72,6 @@ $mod_strings = array (
     'LBL_OW_DESCRIPTION'=>'Description',
     'LBL_OW_TYPE'=>'Type',
 
-    //forecast schedule shortcuts
-    'LNK_NEW_TIMEPERIOD' => 'Create Time Period',
-    'LNK_TIMEPERIOD_LIST' => 'View Time Periods',
-
-    //Forecast schedule sub panel list view.
-    'LBL_SVFS_FORECASTDATE' => 'Schedule Start Date',
-    'LBL_SVFS_STATUS' => 'Status',
-    'LBL_SVFS_USER' => 'For',
-    'LBL_SVFS_CASCADE' => 'Cascade to Reports?',
-    'LBL_SVFS_HEADER' => 'Forecast Schedule:',
-
-    //Forecast Schedule detail; view.....
-    'LB_FS_KEY' => 'ID',
-    'LBL_FS_TIMEPERIOD_ID' => 'Time Period ID',
-    'LBL_FS_USER_ID' => 'User ID',
-    'LBL_FS_TIMEPERIOD' => 'Time Period',
-    'LBL_FS_START_DATE' => 'Start Date',
-    'LBL_FS_END_DATE' => 'End Date',
-    'LBL_FS_FORECAST_START_DATE' => "Forecast Start Date",
-    'LBL_FS_STATUS' => 'Status',
-    'LBL_FS_FORECAST_FOR' => 'Schedule For:',
-    'LBL_FS_CASCADE' =>'Cascade?',
-    'LBL_FS_MODULE_NAME' => 'Forecast Schedule',
-    'LBL_FS_CREATED_BY' =>'Created by',
-    'LBL_FS_DATE_ENTERED' => 'Date Entered',
-    'LBL_FS_DATE_MODIFIED' => 'Date Modified',
-    'LBL_FS_DELETED' => 'Deleted',
-
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Direct Report',
     'LBL_FDR_OPPORTUNITIES'=>'Opportunities in Forecast:',
@@ -169,7 +141,8 @@ $mod_strings = array (
     'LBL_VERSION' => 'Version',
 
     // Label for Current User Rep Worksheet Line
-    'LBL_MY_MANAGER_LINE' => '{{full_name}} (me)',
+    // &#x200E; tells the browser to interpret as left-to-right
+    'LBL_MY_MANAGER_LINE' => '{{full_name}} (me)&#x200E;',
 
     'LBL_EDITABLE_INVALID' => 'Invalid Value for {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Value must be between {{min}} and {{max}}',

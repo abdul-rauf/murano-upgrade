@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
@@ -33,11 +34,24 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
 
     protected $excludedModules = array(
         'Activities',
-        'KBDocuments',
         'Products',
         'ProductTemplates',
         'Leads',
         'Users',
+        'pmse_Business_Rules',
+        'pmse_Emails_Templates',
+        'pmse_Inbox',
+        'pmse_Project',
+    );
+
+    //fields that should be hidden in the create layout
+    protected $excludedFields = array(
+        'Calls' => array(
+            'repeat_type' => 'Calls',
+        ),
+        'Meetings' => array(
+            'repeat_type' => 'Meetings',
+        ),
     );
 
     public function __construct($module)
@@ -51,7 +65,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
         $this->_view = MB_EDITVIEW;
         $this->_fielddefs = $this->seed->field_defs;
         $this->loadViewDefs();
-        $this->_history = new History($this->fileName);
+        $this->_history = new History($this->pathMap[MB_HISTORYMETADATALOCATION] . $this->fileName);
     }
 
     public function getOriginalViewDefs()
@@ -162,18 +176,11 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
             }
         }
 
-        if (isset($defaultDef['hiddenFields'])) {
-            $hiddenFields = array();
-            foreach ($defaultDef['hiddenFields'] as $fieldName => $module) {
-                if (in_array($module, $includedModules)) {
-                    $hiddenFields[$fieldName] = $module;
-                }
-            }
-            if (!empty($hiddenFields)) {
-                $def['hiddenFields'] = $hiddenFields;
-            } else {
-                unset($def['hiddenFields']);
-            }
+        $hiddenFields = $this->getHiddenFields($def['module'], $defaultDef, $includedModules);
+        if (!empty($hiddenFields)) {
+            $def['hiddenFields'] = $hiddenFields;
+        } else {
+            unset($def['hiddenFields']);
         }
 
         return $def;
@@ -369,5 +376,39 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
     {
         //exclude modules that are in BWC or in the exclude list
         return (!isModuleBWC($module) && !in_array($module, $this->excludedModules));
+    }
+
+    /**
+     * @param $module string Module for processing the hidden fields
+     * @param $defaultDef array The default definitionns for the module
+     * @param $includedModules array List of modules available
+     *
+     * @return array array of hidden fields for the module
+     */
+    public function getHiddenFields($module, $defaultDef, $includedModules)
+    {
+        $hiddenFields = array();
+
+        $excludeFields = $this->getExcludedFields($module);
+        $hiddenFieldsDef = isset($defaultDef['hiddenFields']) ? $defaultDef['hiddenFields'] : array();
+        $hiddenFieldsDef = array_merge($hiddenFieldsDef, $excludeFields);
+
+        foreach ($hiddenFieldsDef as $fieldName => $module) {
+            if (in_array($module, $includedModules)) {
+                $hiddenFields[$fieldName] = $module;
+            }
+        }
+
+        return $hiddenFields;
+    }
+
+    /**
+     * Returns a list of fields that should be excluded from the layout
+     * @param $module
+     *
+     * @return array
+     */
+    public function getExcludedFields($module) {
+        return isset($this->excludedFields[$module]) ? $this->excludedFields[$module] : array();
     }
 }

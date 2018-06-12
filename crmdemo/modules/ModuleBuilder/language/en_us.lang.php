@@ -17,9 +17,9 @@ $mod_strings = array(
     'LBL_POWERED_BY_SUGAR' => 'Powered By SugarCRM' /*for 508 compliance fix*/,
 'help'=>array(
     'package'=>array(
-            'create'=>'Provide a <b>Name</b> for the package.  The name you enter must be alphanumeric and contain no spaces. (Example: HR_Management)<br/><br/> You can provide <b>Author</b> and <b>Description</b> information for package. <br/><br/>Click <b>Save</b> to create the package.',
+            'create'=>'Provide a <b>Name</b> for the package. The name must start with a letter and may only consist of letters, numbers, and underscores. No spaces or other special characters may be used. (Example: HR_Management)<br/><br/> You can provide <b>Author</b> and <b>Description</b> information for package. <br/><br/>Click <b>Save</b> to create the package.',
             'modify'=>'The properties and possible actions for the <b>Package</b> appear here.<br><br>You can modify the <b>Name</b>, <b>Author</b> and <b>Description</b> of the package, as well as view and customize all of the modules contained within the package.<br><br>Click <b>New Module</b> to create a module for the package.<br><br>If the package contains at least one module, you can <b>Publish</b> and <b>Deploy</b> the package, as well as <b>Export</b> the customizations made in the package.',
-            'name'=>'This is the <b>Name</b> of the current package. <br/><br/>The name you enter must be alphanumeric, start with a letter and contain no spaces. (Example: HR_Management)',
+            'name'=>'This is the <b>Name</b> of the current package. <br/><br/>The name must start with a letter and may only consist of letters, numbers, and underscores. No spaces or other special characters may be used. (Example: HR_Management)',
             'author'=>'This is the <b>Author</b> that is displayed during installation as the name of the entity that created the package.<br><br>The Author could be either an individual or a company.',
             'description'=>'This is the <b>Description</b> of the package that is displayed during installation.',
             'publishbtn'=>'Click <b>Publish</b> to save all entered data and to create a .zip file that is an installable version of the package.<br><br>Use <b>Module Loader</b> to upload the .zip file and install the package.',
@@ -51,6 +51,7 @@ $mod_strings = array(
         'viewfieldsbtn'=>'Click <b>View Fields</b> to view the fields associated with the module and to create and edit custom fields.',
         'viewrelsbtn'=>'Click <b>View Relationships</b> to view the relationships associated with this module and to create new relationships.',
         'viewlayoutsbtn'=>'Click <b>View Layouts</b> to view the layouts for the module and to customize the field arrangement within the layouts.',
+        'viewmobilelayoutsbtn' => 'Click <b>View Mobile Layouts</b> to view the mobile layouts for the module and to customize the field arrangement within the layouts.',
         'duplicatebtn'=>'Click <b>Duplicate</b> to copy the properties of the module into a new module and to display the new module. <br/><br/>For the new module, a new name will be generated automatically by appending a number to the end of the name of the module used to create the new one.',
         'deletebtn'=>'Click <b>Delete</b> to delete this module.',
         'name'=>'This is the <b>Name</b> of the current module.<br/><br/>The name must be alphanumeric and must start with a letter and contain no spaces. (Example: HR_Management)',
@@ -75,7 +76,7 @@ $mod_strings = array(
     ,
         'savebtn'	=> 'Click <b>Save & Deploy</b> to save changes you made and to make them active within the module.',
         'historyBtn'=> 'Click <b>View History</b> to view and restore a previously saved layout from the history.',
-        'historyDefault'=> 'Click <b>Restore Default</b> to restore a view to its original layout.',
+        'historyRestoreDefaultLayout'=> 'Click <b>Restore Default Layout</b> to restore a view to its original layout.',
         'Hidden' 	=> '<b>Hidden</b> fields do not appear in the subpanel.',
         'Default'	=> '<b>Default</b> fields appear in the subpanel.',
 
@@ -86,7 +87,7 @@ $mod_strings = array(
     ,
         'savebtn'	=> 'Click <b>Save & Deploy</b> to save changes you made and to make them active within the module.',
         'historyBtn'=> 'Click <b>View History</b> to view and restore a previously saved layout from the history.<br><br><b>Restore</b> within <b>View History</b> restores the field placement within previously saved layouts. To change field labels, click the Edit icon next to each field.',
-        'historyDefault'=> 'Click <b>Restore Default</b> to restore a view to its original layout.<br><br><b>Restore Default</b> only restores the field placement within the original layout. To change field labels, click the Edit icon next to each field.',
+        'historyRestoreDefaultLayout'=> 'Click <b>Restore Default Layout</b> to restore a view to its original layout.<br><br><b>Restore Default Layout</b> only restores the field placement within the original layout. To change field labels, click the Edit icon next to each field.',
         'Hidden' 	=> '<b>Hidden</b> fields not currently available for users to see in ListViews.',
         'Available' => '<b>Available</b> fields are not shown by default, but can be added to ListViews by users.',
         'Default'	=> '<b>Default</b> fields appear in ListViews that are not customized by users.'
@@ -97,7 +98,7 @@ $mod_strings = array(
     ,
         'savebtn'	=> 'Click <b>Save & Deploy</b> to save changes you made and to make them active within the module.',
         'historyBtn'=> 'Click <b>View History</b> to view and restore a previously saved layout from the history.<br><br><b>Restore</b> within <b>View History</b> restores the field placement within previously saved layouts. To change field labels, click the Edit icon next to each field.',
-        'historyDefault'=> 'Click <b>Restore Default</b> to restore a view to its original layout.<br><br><b>Restore Default</b> only restores the field placement within the original layout. To change field labels, click the Edit icon next to each field.',
+        'historyRestoreDefaultLayout'=> 'Click <b>Restore Default Layout</b> to restore a view to its original layout.<br><br><b>Restore Default Layout</b> only restores the field placement within the original layout. To change field labels, click the Edit icon next to each field.',
         'Hidden' 	=> '<b>Hidden</b> fields not currently available for users to see in ListViews.',
         'Default'	=> '<b>Default</b> fields appear in ListViews that are not customized by users.'
     ),
@@ -108,7 +109,7 @@ $mod_strings = array(
         'savebtn'	=> 'Clicking <b>Save & Deploy</b> will save all changes and make them active',
         'Hidden' 	=> '<b>Hidden</b> fields do not appear in the Search.',
         'historyBtn'=> 'Click <b>View History</b> to view and restore a previously saved layout from the history.<br><br><b>Restore</b> within <b>View History</b> restores the field placement within previously saved layouts. To change field labels, click the Edit icon next to each field.',
-        'historyDefault'=> 'Click <b>Restore Default</b> to restore a view to its original layout.<br><br><b>Restore Default</b> only restores the field placement within the original layout. To change field labels, click the Edit icon next to each field.',
+        'historyRestoreDefaultLayout'=> 'Click <b>Restore Default Layout</b> to restore a view to its original layout.<br><br><b>Restore Default Layout</b> only restores the field placement within the original layout. To change field labels, click the Edit icon next to each field.',
         'Default'	=> '<b>Default</b> fields appear in the Search.'
     ),
     'layoutEditor'=>array(
@@ -128,12 +129,12 @@ $mod_strings = array(
     ,
         'saveBtn'	=> 'Click <b>Save</b> to preserve the changes you made to the layout since the last time you saved it.<br><br>The changes will not be displayed in the module until you Deploy the saved changes.',
         'historyBtn'=> 'Click <b>View History</b> to view and restore a previously saved layout from the history.<br><br><b>Restore</b> within <b>View History</b> restores the field placement within previously saved layouts. To change field labels, click the Edit icon next to each field.',
-        'historyDefault'=> 'Click <b>Restore Default</b> to restore a view to its original layout.<br><br><b>Restore Default</b> only restores the field placement within the original layout. To change field labels, click the Edit icon next to each field.',
+        'historyRestoreDefaultLayout'=> 'Click <b>Restore Default Layout</b> to restore a view to its original layout.<br><br><b>Restore Default Layout</b> only restores the field placement within the original layout. To change field labels, click the Edit icon next to each field.',
         'publishBtn'=> 'Click <b>Save & Deploy</b> to save all changes you made to the layout since the last time you saved it, and to make the changes active in the module.<br><br>The layout will immediately be displayed in the module.',
         'toolbox'	=> 'The <b>Toolbox</b> contains the <b>Recycle Bin</b>, additional layout elements and the set of available fields to add to the layout.<br/><br/>The layout elements and fields in the Toolbox can be dragged and dropped into the layout, and the layout elements and fields can be dragged and dropped from the layout into the Toolbox.<br><br>The layout elements are <b>Panels</b> and <b>Rows</b>. Adding a new row or a new panel to the layout provides additional locations in the layout for fields.<br/><br/>Drag and drop any of the fields in the Toolbox or layout onto a occupied field position to swap the locations of the two fields.<br/><br/>The <b>Filler</b> field creates blank space in the layout where it is placed.',
         'panels'	=> 'The <b>Layout</b> area provides a view of how the layout will appear within the module when the changes made to the layout are deployed.<br/><br/>You can reposition fields, rows and panels by dragging and dropping them in the desired location.<br/><br/>Remove elements by dragging and dropping them in the <b>Recycle Bin</b> in the Toolbox, or add new elements and fields by dragging them from the <b>Toolbox</b>s and dropping them in the desired location in the layout.',
         'delete'	=> 'Drag and drop any element here to remove it from the layout',
-        'property'	=> 'Edit The label displayed for this field. <br/><b>Tab Order</b> controls in what order the tab key switches between fields.',
+        'property'	=> 'Edit the <b>Label</b> displayed for this field.<br><br><b>Width</b> provide a width value in pixels for Sidecar modules and as a percentage of the table width for backward compatible modules.',
     ),
     'fieldsEditor'=>array(
         'default'	=> 'The <b>Fields</b> that are available for the module are listed here by Field Name.<br><br>Custom fields created for the module appear above the fields that are available for the module by default.<br><br>To edit a field, click the <b>Field Name</b>.<br/><br/>To create a new field, click <b>Add Field</b>.',
@@ -186,7 +187,7 @@ $mod_strings = array(
         'DashletSearchViewBtn' =>'The <b>Sugar Dashlet Search</b> filters records for the Sugar Dashlet listview.',
         'popupHelp' =>'The <b>Popup</b> layouts that can be customized appear here.<br>',
         'PopupListViewBtn' => '<b>Popup ListView</b> layout is used to view a list of records when selecting one or more records to relate to the current record.',
-        'PopupSearchViewBtn' => '<b>Popup Search</b> layout allows users to search for records to relate to a current record and appears above the popup listview in the same window. Legacy modules use this layout for popup searching while Sidecar modules use the Search layout’s configuration.',
+        'PopupSearchViewBtn' => '<b>Popup Search</b> layout allows users to search for records to relate to a current record and appears above the popup listview in the same window. Legacy modules use this layout for popup searching while Sidecar modules use the Search layoutâs configuration.',
         'BasicSearchBtn' => 'Customize the <b>Basic Search</b> form that appears in the Basic Search tab in the Search area for the module.',
         'AdvancedSearchBtn' => 'Customize the <b>Advanced Search</b> form that appears in the Advanced Search tab in the Search area for the module.',
         'portalHelp' => 'Manage and customize the <b>Sugar Portal</b>.',
@@ -453,7 +454,7 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Visibility Editor',
 'LBL_ROLLUP' => 'Rollup',
 'LBL_RELATED_FIELD' => 'Related Field',
-'LBL_CONFIG_PORTAL_URL'=>'URL to custom logo image. The recommended logo dimensions are 163 × 18 pixels.',
+'LBL_CONFIG_PORTAL_URL'=>'URL to custom logo image. The recommended logo dimensions are 163 Ã 18 pixels.',
 'LBL_PORTAL_ROLE_DESC' => 'Do not delete this role. Customer Self-Service Portal Role is a system-generated role created during the Sugar Portal activation process. Use Access controls within this Role to enable and/or disable Bugs, Cases or Knowledge Base modules in Sugar Portal. Do not modify any other access controls for this role to avoid unknown and unpredictable system behavior. In case of accidental deletion of this role, recreate it by disabling and enabling Sugar Portal.',
 
 //RELATIONSHIPS
@@ -568,6 +569,7 @@ $mod_strings = array(
 'LBL_BTN_EXP'=>'Export',
 'LBL_BTN_DELETE'=>'Delete',
 'LBL_BTN_VIEW_LAYOUTS'=>'View Layouts',
+'LBL_BTN_VIEW_MOBILE_LAYOUTS'=>'View Mobile Layouts',
 'LBL_BTN_VIEW_FIELDS'=>'View Fields',
 'LBL_BTN_VIEW_RELATIONSHIPS'=>'View Relationships',
 'LBL_BTN_ADD_RELATIONSHIP'=>'Add Relationship',
@@ -600,6 +602,7 @@ $mod_strings = array(
     'LBL_PORTAL_DETAIL_NUMBER' => 'Number of fields to display on Detail View',
     'LBL_PORTAL_SEARCH_RESULT_NUMBER' => 'Number of results to display on Global Search',
     'LBL_PORTAL_DEFAULT_ASSIGN_USER' => 'Default assigned for new portal registrations',
+
 'LBL_PORTAL'=>'Portal',
 'LBL_PORTAL_LAYOUTS'=>'Portal Layouts',
 'LBL_SYNCP_WELCOME'=>'Please enter the URL of the portal instance you wish to update.',
@@ -628,7 +631,6 @@ $mod_strings = array(
 'LBL_NUMBER'=>'Number:',
 'LBL_PRIORITY'=>'Priority:',
 'LBL_SUBJECT'=>'Subject',
-
 
 //PACKAGE AND MODULE BUILDER
 'LBL_PACKAGE_NAME'=>'Package Name:',
@@ -660,7 +662,7 @@ $mod_strings = array(
 'LBL_VIEW'=>'View',
 'LBL_LIST_VIEW'=>'List View',
 'LBL_HISTORY'=>'View History',
-'LBL_RESTORE_DEFAULT'=>'Restore Default',
+'LBL_RESTORE_DEFAULT_LAYOUT'=>'Restore Default Layout',
 'LBL_ACTIVITIES'=>'Activity Stream',
 'LBL_SEARCH'=>'Search',
 'LBL_NEW'=>'New',
@@ -672,7 +674,7 @@ $mod_strings = array(
 'LBL_TYPE_FILE'=>'file',
 'LBL_RSUB'=>'This is the subpanel that will be displayed in your module',
 'LBL_MSUB'=>'This is the subpanel that your module provides to the related module for display',
-'LBL_MB_IMPORTABLE'=>'Importing',
+'LBL_MB_IMPORTABLE'=>'Allow Imports',
 
 // VISIBILITY EDITOR
 'LBL_VE_VISIBLE'=>'visible',
@@ -688,8 +690,8 @@ $mod_strings = array(
 'LBL_EC_CHECKERROR'=>'Please select a module.',
 'LBL_EC_CUSTOMFIELD'=>'customized field(s)',
 'LBL_EC_CUSTOMLAYOUT'=>'customized layout(s)',
+'LBL_EC_CUSTOMDROPDOWN' => 'customized dropdown(s)',
 'LBL_EC_NOCUSTOM'=>'No modules have been customized.',
-'LBL_EC_EMPTYCUSTOM'=>'has empty customizations.',
 'LBL_EC_EXPORTBTN'=>'Export',
 'LBL_MODULE_DEPLOYED' => 'Module has been deployed.',
 'LBL_UNDEFINED' => 'undefined',
@@ -709,7 +711,8 @@ $mod_strings = array(
 'LBL_JS_DEPLOY_PACKAGE' => 'Any customizations that you made in Studio will be overwritten when this module is re-deployed. Are you sure you want to proceed?',
 
 'LBL_DEPLOY_IN_PROGRESS' => 'Deploying Package',
-'LBL_JS_VALIDATE_NAME'=>'Name - Must be alphanumeric, begin with a letter and contain no spaces.',
+'LBL_JS_VALIDATE_NAME'=>'Name - Must start with a letter and may only consist of letters, numbers, and underscores. No spaces or other special characters may be used.',
+'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Package Key already exists',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Package Name already exists',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Key - Must be alphanumeric and begin with a letter.',
 'LBL_JS_VALIDATE_KEY'=>'Key - Must be alphanumeric, begin with a letter and contain no spaces.',
@@ -745,7 +748,8 @@ $mod_strings = array(
 
 //POPUP HELP
 'LBL_POPHELP_FIELD_DATA_TYPE'=>'Select the appropriate data type based on the type of data that will be entered into the field.',
-'LBL_POPHELP_SEARCHABLE'=>'Select the boost level for this field. <br />Fields with a higher boost level will be given greater weight when the search is performed. <br />When a search is performed, matching records containing fields with a greater weight will be appear higher in the search results.<br /> If you change the boost level for a field from one level to another, perform a system index to apply the change. <br/> Be sure to select to delete the existing data at the time that the system index is performed.',
+'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configure the field to be full text searchable.',
+'LBL_POPHELP_FTS_FIELD_BOOST' => 'Boosting is the process of enhancing the relevancy of a record\\\'s fields.<br />Fields with a higher boost level will be given greater weight when the search is performed. When a search is performed, matching records containing fields with a greater weight will be appear higher in the search results.<br />The default value is 1.0 which stands for a neutral boost. To apply a positive boost any float value higher than 1 is accepted. For a negative boost use values lower than 1. For example a value of 1.35 will positively boost a field by 135%. Using a value of 0.60 will apply a negative boost.<br />Note that in previous versions it was required to perform a full text search reindex. This is no longer required.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Yes</b>: The field will be included in an import operation.<br><b>No</b>: The field will not be included in an import.<br><b>Required</b>: A value for the field must be provided in any import.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Enter a number for Width, as measured in pixels.<br> The uploaded image will be scaled to this Width.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Enter a number for the Height, as measured in pixels.<br> The uploaded image will be scaled to this Height.',
@@ -768,7 +772,7 @@ $mod_strings = array(
 'LBL_REMOVE_CUSTOM' => 'Remove Customizations',
 'LBL_CLEAR_RELATIONSHIPS' => 'Clear Relationships',
 'LBL_RESET_LABELS' => 'Reset Labels',
-'LBL_RESET_LAYOUTS' => 'Reset Layouts"',
+'LBL_RESET_LAYOUTS' => 'Reset Layouts',
 'LBL_REMOVE_FIELDS' => 'Remove Custom Fields',
 'LBL_CLEAR_EXTENSIONS' => 'Clear Extensions',
 

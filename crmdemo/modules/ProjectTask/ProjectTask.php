@@ -307,43 +307,62 @@ class ProjectTask extends SugarBean {
 		return $array_assign;
 	}
 
-    function create_new_list_query($order_by, $where, $filter = array(), $params = array(), $show_deleted = 0, $join_type = '', $return_array = false, $parentbean = null, $singleSelect = false)
-    {
-        if(isset($filter['resource_name']) && $filter['resource_name'] === true) {
+    public function create_new_list_query(
+        $order_by,
+        $where,
+        $filter = array(),
+        $params = array(),
+        $show_deleted = 0,
+        $join_type = '',
+        $return_array = false,
+        $parentbean = null,
+        $singleSelect = false,
+        $ifListForExport = false
+    ) {
+        if (isset($filter['resource_name']) && $filter['resource_name'] !== false) {
             $filter['resource_id'] = true;
         }
-        return parent::create_new_list_query($order_by, $where, $filter, $params, $show_deleted, $join_type, $return_array, $parentbean, $singleSelect);
+        return parent::create_new_list_query(
+            $order_by,
+            $where,
+            $filter,
+            $params,
+            $show_deleted,
+            $join_type,
+            $return_array,
+            $parentbean,
+            $singleSelect,
+            $ifListForExport
+        );
     }
 
-    function getResourceName(){
-
-    	$query = "SELECT DISTINCT resource_type FROM project_resources WHERE resource_id = '" . $this->resource_id . "'";
-
-    	$result = $this->db->query($query, true, "Unable to retrieve project resource type");
-		$row = $this->db->fetchByAssoc($result);
-
-		if ($row != null){
-	    	$resource_table = strtolower($row['resource_type']);
-
-	    	if (empty($resource_table)){
-	    		return '&nbsp;';
-	    	}
-
-	    	$resource = $this->db->concat($resource_table, array('first_name', 'last_name'));
-
-	    	$resource_name_qry = "SELECT " . $resource . " as resource_name " .
-								 "FROM " . $resource_table . " ".
-								 "WHERE id = '" . $this->resource_id ."'";
-
-			$result = $this->db->query($resource_name_qry, true, "Unable to retrieve project resource name");
-			$row = $this->db->fetchByAssoc($result);
-
-			return $row['resource_name'];
-		}
-		else{
-			return '';
-		}
+    function getResourceName($resource_id = '')
+    {
+        //if resource is is not passed in then get it from current bean
+        if (empty($resource_id)) {
+            $resource_id = $this->resource_id;
+        }
+        $db = DBManagerFactory::getInstance();
+        $query = "SELECT DISTINCT resource_type FROM project_resources WHERE resource_id = '" . $resource_id . "'";
+        $result = $db->query($query, true, "Unable to retrieve project resource type");
+        $row = $db->fetchByAssoc($result);
+        if ($row != null) {
+            $resource_table = strtolower($row['resource_type']);
+            if (empty($resource_table)) {
+                return '&nbsp;';
+            }
+            $resource = $db->concat($resource_table, array('first_name', 'last_name'));
+            $resource_name_qry = "SELECT " . $resource . " as resource_name " .
+                "FROM " . $resource_table . " " .
+                "WHERE id = '" . $resource_id . "'";
+            $result = $db->query($resource_name_qry, true, "Unable to retrieve project resource name");
+            $row = $db->fetchByAssoc($result);
+            return $row['resource_name'];
+        } else {
+            return '';
+        }
     }
+
 
     /**
     * This method recalculates the percent complete of a parent task
@@ -664,6 +683,14 @@ class ProjectTask extends SugarBean {
             $task->populateFromRow($list[$v]);
             $task->skipParentUpdate();
             $task->save(false);
+        }
+    }
+
+    public function updateRelatedCalcFields($linkName = "")
+    {
+        parent::updateRelatedCalcFields($linkName);
+        if ($linkName == 'projects' && !$this->project_id && $this->deleted != 1) {
+            $this->mark_deleted($this->id);
         }
     }
 }

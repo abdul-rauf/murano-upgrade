@@ -27,7 +27,6 @@ class DnbApi extends SugarApi
                 'method' => 'dnbDirectGet',
                 'shortHelp' => 'Invoke DNB API using GET',
                 'longHelp' => 'include/api/help/dnb_get_help.html',
-                'keepSession' => true,
             ),
             'dnbDirectPost' => array(
                 'reqType' => 'POST',
@@ -36,7 +35,6 @@ class DnbApi extends SugarApi
                 'method' => 'dnbDirectPost',
                 'shortHelp' => 'Invoke DNB API using POST',
                 'longHelp' => 'include/api/help/dnb_post_help.html',
-                'keepSession' => true,
             ),
             'dnbAccountsBAL' => array(
                 'reqType' => 'POST',
@@ -45,7 +43,6 @@ class DnbApi extends SugarApi
                 'method' => 'dnbAccountsBAL',
                 'shortHelp' => 'Invoke BAL For Accounts',
                 'longHelp' => 'include/api/help/dnb_post_help.html',
-                'keepSession' => true,
             ),
             'dnbContactsBAL' => array(
                 'reqType' => 'POST',
@@ -54,6 +51,22 @@ class DnbApi extends SugarApi
                 'method' => 'dnbContactsBAL',
                 'shortHelp' => 'Invoke BAL For Contacts',
                 'longHelp' => 'include/api/help/dnb_post_help.html',
+            ),
+            'dnbBulkImport' => array(
+                'reqType' => 'POST',
+                'path' => array('connector', 'dnb', '?', 'bulkimport'),
+                'pathVars' => array('connector', 'dnb', 'module', 'bulkimport'),
+                'method' => 'dnbBulkImport',
+                'shortHelp' => 'Bulk Import D&B Objects',
+                'longHelp' => 'include/api/help/dnb_bulkimport_help.html',
+            ),
+            'dnbMeter' => array(
+                'reqType' => 'GET',
+                'path' => array('connector','dnb','meter'),
+                'pathVars' => array('connector','dnb','meter'),
+                'method' => 'dnbMeter',
+                'shortHelp' => 'Invoke DNB API using GET',
+                'longHelp' => 'include/api/help/dnb_get_help.html',
                 'keepSession' => true,
             ),
         );
@@ -99,26 +112,18 @@ class DnbApi extends SugarApi
             return array('error' =>'ERROR_DNB_CONFIG');
         }
         $result = '';
-        if ($queryType === 'profile') {
-            $result = $extDnbApi->dnbProfile($queryParam);
-        } else if ($queryType ==='competitors') {
+        if ($queryType ==='competitors') {
             $result = $extDnbApi->dnbCompetitors($queryParam);
         } else if ($queryType ==='industry') {
             $result = $extDnbApi->dnbIndustryInfo($queryParam);
         } else if ($queryType ==='financial') {
             $result = $extDnbApi->dnbFinancialInfo($queryParam);
-        } else if ($queryType ==='firmographic') {
-            $result = $extDnbApi->dnbStandardProfile($queryParam);
-        } else if ($queryType ==='premfirmographic') {
-            $result = $extDnbApi->dnbPremiumProfile($queryParam);
         } else if ($queryType ==='findIndustry') {
             $result = $extDnbApi->dnbIndustrySearch($queryParam);
         } else if ($queryType === 'findContacts') {
             $result = $extDnbApi->dnbFindContacts($queryParam);
         } else if ($queryType === 'refreshcheck') {
             $result = $extDnbApi->dnbRefreshCheck($queryParam);
-        } else if ($queryType === 'litefirmographic') {
-            $result = $extDnbApi->dnbLiteProfile($queryParam);
         } else if ($queryType === 'news') {
             $result = $extDnbApi->dnbNews($queryParam);
         }
@@ -207,6 +212,49 @@ class DnbApi extends SugarApi
         }
         $queryData = $args['qdata']; //data posted
         $result = $extDnbApi->dnbBALContacts($queryData);
+        if (is_array($result) && isset($result['error'])) {
+            throw new SugarApiExceptionRequestMethodFailure(null, array(), null, 424, $result['error']);
+        }
+        return $result;
+    }
+
+    /**
+     * Bulk Imports D&B Objects
+     * @param $api
+     * @param $args
+     * @return mixed
+     * @throws SugarApiExceptionRequestMethodFailure
+     * @throws SugarApiExceptionMissingParameter
+     */
+    public function dnbBulkImport($api,$args) {
+        $extDnbApi = $this->getEAPM();
+        if (is_array($extDnbApi) && isset($extDnbApi['error'])) {
+            throw new SugarApiExceptionRequestMethodFailure(null, array(), null, 424, $extDnbApi['error']);
+        }
+        $bulkImportData = $args['bulkdata']; //data posted
+        $module = $args['module'];
+        $result = $extDnbApi->dnbBulkImport($module, $bulkImportData);
+        if (is_array($result) && isset($result['error'])) {
+            throw new SugarApiExceptionRequestMethodFailure(null, array(), null, 424, $result['error']);
+        }
+        return $result;
+    }
+
+    /**
+     * Get D&B API Usage data
+     * @param $api
+     * @param $args
+     * @return mixed
+     * @throws SugarApiExceptionRequestMethodFailure
+     * @throws SugarApiExceptionMissingParameter
+     */
+    public function dnbMeter($api,$args) {
+        //invoke dnb api based on query type and query data
+        $extDnbApi = $this->getEAPM();
+        if (is_array($extDnbApi) && isset($extDnbApi['error'])) {
+            throw new SugarApiExceptionRequestMethodFailure(null, array(), null, 424, $extDnbApi['error']);
+        }
+        $result = $extDnbApi->dnbMeterInfo();
         if (is_array($result) && isset($result['error'])) {
             throw new SugarApiExceptionRequestMethodFailure(null, array(), null, 424, $result['error']);
         }

@@ -38,7 +38,6 @@
             return s ? (s.charAt(0).toUpperCase() + (s.length > 1 ? s.substr(1) : "")) : "";
         },
 
-
         /**
          * Capitalizes a hyphenated string.
          *
@@ -143,9 +142,8 @@
             }
 
             value = parseFloat(value.toFixed(round), 10).toFixed(precision).toString();
-            return (_.isString(numberGroupSeparator) && _.isString(decimalSeparator))
-                ? this.addNumberSeperators(value, numberGroupSeparator, decimalSeparator)
-                : value;
+            return (_.isString(numberGroupSeparator) && _.isString(decimalSeparator)) ?
+                this.addNumberSeparators(value, numberGroupSeparator, decimalSeparator) : value;
         },
 
         /**
@@ -175,13 +173,13 @@
         formatName: function(params, format) {
             return format.replace(/(f)|(l)|(s)/g, function(str, firstName, lastName, salutation) {
                 if (firstName) {
-                    return params['first_name'] || '';
+                    return params.first_name || '';
                 }
                 if (lastName) {
-                    return params['last_name'] || '';
+                    return params.last_name || '';
                 }
-                if (salutation && (params['last_name'] || params['first_name'])) {
-                    return params['salutation'] || '';
+                if (salutation && (params.last_name || params.first_name)) {
+                    return params.salutation || '';
                 }
                 return '';
             })
@@ -252,8 +250,8 @@
             }, '')
                 //Remove leading comma - i.e. ", John"
                 .replace(/^( )?,/g, '')
-                //Remove trailing comma - i.e., "John, "
-                .replace(/, $/g, '')
+                //Remove trailing comma - i.e., "John, ", "John,  ", etc.
+                .replace(/, +$/g, '')
                 //Remove extra spaces when middle part is missing
                 .replace(/  /g, ' ')
                 //trim spaces
@@ -273,34 +271,55 @@
         },
 
         /**
-         * Adds number seperators to a number string
-         * @param {String} numberString string of number to be modified of the format nn.nnn
-         * @param {String} numberGroupSeperator character seperator for number groups of 3 digits to the left of the decimal to add
-         * @param {String} decimalSeperator character to replace decimal in arg number with
+         * Adds number separators to a number string
+         * @param {String} numberString string of number to be modified of the
+         *   format nn.nnn
+         * @param {String} numberGroupSeparator character separator for number
+         *   groups of 3 digits to the left of the decimal to add
+         * @param {String} decimalSeparator character to replace decimal in arg
+         *   number with
          * @return {String}
          */
-        addNumberSeperators: function(numberString, numberGroupSeperator, decimalSeperator) {
-            var numberArray = numberString.split("."),
-                regex = /(\d+)(\d{3})/;
-
-            while (numberGroupSeperator !== '' && regex.test(numberArray[0])) {
-                numberArray[0] = numberArray[0].toString().replace(regex, '$1' + numberGroupSeperator + '$2');
+        addNumberSeparators: function(numberString, numberGroupSeparator, decimalSeparator) {
+            var numberArray = numberString.split(".");
+            var regex = /(\d+)(\d{3})/;
+            while (numberGroupSeparator !== '' && regex.test(numberArray[0])) {
+                numberArray[0] = numberArray[0].toString().replace(regex, '$1' + numberGroupSeparator + '$2');
             }
+            return numberArray[0] + (numberArray.length > 1 &&
+                numberArray[1] !== '' ? decimalSeparator + numberArray[1] : '');
+        },
 
-            return numberArray[0] + (numberArray.length > 1 && numberArray[1] !== '' ? decimalSeperator + numberArray[1] : '');
+        /**
+         * Adds number separators to a number string
+         * @param {String} numberString string of number to be modified of the
+         *   format nn.nnn
+         * @param {String} numberGroupSeparator character separator for number
+         *   groups of 3 digits to the left of the decimal to add
+         * @param {String} decimalSeparator character to replace decimal in arg
+         *   number with
+         * @return {String}
+         *
+         * @deprecated 7.7 and will be removed on 7.9. Please use
+         *   {@link #addNumberSeparators} instead.
+         */
+        addNumberSeperators: function(numberString, numberGroupSeparator, decimalSeparator) {
+            app.logger.warn('`addNumberSeperators` is deprecated since 7.7 and will be removed in 7.9.' +
+                'Please use `addNumberSeparators` instead.');
+            return this.addNumberSeparators(numberString, numberGroupSeparator, decimalSeparator);
         },
 
         /**
          * Unformats number strings
          * @param {String} numberString
-         * @param {String} numberGroupSeperator
-         * @param {String} decimalSeperator
+         * @param {String} numberGroupSeparator
+         * @param {String} decimalSeparator
          * @param {Boolean} toFloat
          * @return {String} formatted number string
          */
-        unformatNumberString: function(numberString, numberGroupSeperator, decimalSeperator, toFloat) {
+        unformatNumberString: function(numberString, numberGroupSeparator, decimalSeparator, toFloat) {
             toFloat = toFloat || false;
-            if (typeof numberGroupSeperator === 'undefined' || typeof decimalSeperator === 'undefined') {
+            if (typeof numberGroupSeparator === 'undefined' || typeof decimalSeparator === 'undefined') {
                 return numberString;
             }
 
@@ -316,14 +335,14 @@
                 }
             }
 
-            // parse out number group seperators
-            if (numberGroupSeperator !== '') {
-                var num_grp_sep_re = new RegExp('\\' + numberGroupSeperator, 'g');
+            // parse out number group separators
+            if (numberGroupSeparator !== '') {
+                var num_grp_sep_re = new RegExp('\\' + numberGroupSeparator, 'g');
                 numberString = numberString.replace(num_grp_sep_re, '');
             }
 
-            // parse out decimal seperators
-            numberString = numberString.replace(decimalSeperator, '.');
+            // parse out decimal separators
+            numberString = numberString.replace(decimalSeparator, '.');
 
             // remove any invalid chars
             //numberString = numberString.replace(/[^0-9\.\+\-\%]/g, '');
@@ -387,17 +406,35 @@
             return string.replace(regexEscape.specialRegExp, '\\$1');
         },
 
+        /**
+         * Generates and returns a UUID
+         * @return {string}
+         */
+        generateUUID: function() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        },
+
         cookie: {
             /**
              * Sets a cookie
              * @param {String} cName cookie name
              * @param {String} value
              * @param {Number} exdays days until expiration
+             * @param {String} path cookie path
              */
-            setCookie: function setCookie(cName, value, exdays) {
+            setCookie: function(cName, value, exdays, path) {
                 var exdate = new Date(), c_value;
                 exdate.setDate(exdate.getDate() + exdays);
-                c_value = escape(value) + ((exdays === null) ? "" : "; expires=" + exdate.toUTCString());
+                c_value = encodeURIComponent(value);
+                if (exdays) {
+                    c_value += "; expires=" + exdate.toUTCString();
+                }
+                if (path) {
+                    c_value += "; path=" + path;
+                }
                 document.cookie = cName + "=" + c_value;
             },
 
@@ -413,7 +450,7 @@
                     y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
                     x = x.replace(/^\s+|\s+$/g, "");
                     if (x === cName) {
-                        return unescape(y);
+                        return decodeURIComponent(y);
                     }
                 }
             }
@@ -580,8 +617,8 @@
 
         /**
          * Creates a deep clone of an object.
-         * @param {*} obj
-         * @return {*} Returns a value of the same type as the input.
+         * @param {Mixed} obj
+         * @return {Mixed} Returns a value of the same type as the input.
          */
         deepCopy: function(obj) {
             return _.isObject(obj) ? JSON.parse(JSON.stringify(obj)) : obj;
@@ -592,7 +629,7 @@
          * that have different values.
          * @param {Bean} beanA
          * @param {Bean} beanB
-         * @returns {Array}
+         * @return {Array}
          */
         compareBeans: function(beanA, beanB) {
             var changedFields;
@@ -620,9 +657,9 @@
 
         /**
          * Checks to see if values in beans are equal to each other.
-         * @param {*} value1
-         * @param {*} value2
-         * @returns {boolean}
+         * @param {Mixed} value1
+         * @param {Mixed} value2
+         * @return {boolean}
          */
         areBeanValuesEqual: function(value1, value2) {
             var getValueToCompare = function(value) {
@@ -643,9 +680,9 @@
 
         /**
          * Checks to see if the default value has changed.
-         * @param {String} attribute
-         * @param {Bean} bean
-         * @returns {boolean}
+         * @param {string} attribute
+         * @param {Data.Bean} bean
+         * @return {boolean}
          */
         hasDefaultValueChanged: function(attribute, bean) {
             var defaultValue = bean._defaults ? bean._defaults[attribute] : '';
@@ -661,8 +698,8 @@
          * - full path;
          * - empty path.
          *
-         * @param {String} url the full url or a relative url without the prepended `/`.
-         * @returns {String}
+         * @param {string} url the full url or a relative url without the prepended `/`.
+         * @return {string}
          */
         buildUrl: function(url) {
             // Adjust relative URL: prepend it with site URL
@@ -676,7 +713,7 @@
         /**
          * Get the layout container for the given component.
          * @param {View.Component} component
-         * @returns {View.Layout}
+         * @return {View.Layout}
          */
         getParentLayout: function(component) {
             var parent;
@@ -702,8 +739,24 @@
             }
             return isSortable;
         },
-        hardRefresh: function(){
+
+        hardRefresh: function() {
             window.location.reload(true);
+        },
+
+        /**
+         * Checks if the value should be rendered in RTL.
+         *
+         * @param {string} value The value to check.
+         * @return {boolean} `true` if the string is in a RTL language.
+         */
+        isDirectionRTL: function(value) {
+            var ltrChars = 'A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF' +
+                    '\u2C00-\uFB1C\uFDFE-\uFE6F\uFEFD-\uFFFF',
+                rtlChars = '\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC',
+                isRTL = new RegExp('^[^' + ltrChars + ']*[' + rtlChars + ']');
+
+            return isRTL.test(value);
         }
 
     });

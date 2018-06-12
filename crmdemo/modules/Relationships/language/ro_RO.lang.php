@@ -1,5 +1,5 @@
 <?php
-
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,24 +10,17 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+ /*********************************************************************************
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
 
 $mod_strings = array (
+  'LBL_ID' => 'ID',
+  'LBL_RELATIONSHIP_NAME' => 'Nume raport',
   'LBL_LHS_MODULE' => 'Numele modulului LHS',
   'LBL_LHS_TABLE' => 'Numele tabelului LHS',
   'LBL_LHS_KEY' => 'Numele Cheiei LHS',
@@ -40,9 +33,8 @@ $mod_strings = array (
   'LBL_RELATIONSHIP_TYPE' => 'Tipul relatiei',
   'LBL_RELATIONSHIP_ROLE_COLUMN' => 'Numele relatiei rolului coloanei ',
   'LBL_RELATIONSHIP_ROLE_COLUMN_VALUE' => 'Valoarea relatiei rolului coloanei ',
-  'LBL_ID' => 'ID',
-  'LBL_RELATIONSHIP_NAME' => 'Nume raport',
-  'LBL_REVERSE' => 'A anula, A inversa, A intoarce',
-  'LBL_DELETED' => 'Sters',
+  'LBL_REVERSE' => 'A anula, A inversa, A intoarce' ,
+  'LBL_DELETED' => 'Şters',
 );
-
+  
+?>

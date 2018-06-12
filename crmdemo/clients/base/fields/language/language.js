@@ -8,5 +8,5 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({extendsFrom:'EnumField',initialize:function(options){this._super('initialize',[options]);if(!this.model.has(this.name)){this._setToDefault();}},_loadTemplate:function(){this.type='enum';app.view.Field.prototype._loadTemplate.call(this);this.type='language';},format:function(value){if(!this.items[value]){value=this._getDefaultOption();this._setToDefault();}
-return value;},_getDefaultOption:function(optionsKeys){return app.lang.defaultLanguage;},_setToDefault:function(){var defaultValue=this._getDefaultOption();this.model.set(this.name,defaultValue);if(_.isFunction(this.model.setDefaultAttribute)){this.model.setDefaultAttribute(this.name,defaultValue);}}})
+({extendsFrom:'EnumField',initialize:function(options){this._super('initialize',[options]);this.model.setDefault(this.name,this._getDefaultOption());},_loadTemplate:function(){this.type='enum';app.view.Field.prototype._loadTemplate.call(this);this.type='language';},format:function(value){if(!this.items[value]){value=this._getDefaultOption();this.model.set(this.name,value);}
+return value;},_getDefaultOption:function(optionsKeys){return app.lang.getDefaultLanguage();},})

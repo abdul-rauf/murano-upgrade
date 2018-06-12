@@ -1,4 +1,5 @@
 <?php
+// created: 2018-06-12 08:18:09
 $viewdefs['Leads']['base']['view']['list'] = array (
   'panels' => 
   array (
@@ -21,19 +22,18 @@ $viewdefs['Leads']['base']['view']['list'] = array (
         ),
         1 => 
         array (
-          'name' => 'name',
-          'default' => true,
-          'enabled' => true,
-          'width' => '10%',
-          'label' => 'LBL_LIST_NAME',
-          'link' => true,
-          'orderBy' => 'name',
-          'related_fields' => 
+          'name' => 'full_name',
+          'type' => 'fullname',
+          'fields' => 
           array (
-            0 => 'first_name',
-            1 => 'last_name',
-            2 => 'salutation',
+            0 => 'salutation',
+            1 => 'first_name',
+            2 => 'last_name',
           ),
+          'link' => true,
+          'label' => 'LBL_LIST_NAME',
+          'enabled' => true,
+          'default' => true,
         ),
         2 => 
         array (

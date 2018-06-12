@@ -29,11 +29,17 @@ $mod_strings = array (
 'LBL_OOTB_PRUNE'		=> 'Prune Database on 1st of Month',
 'LBL_OOTB_TRACKER'		=> 'Prune Tracker Tables',
 'LBL_OOTB_PRUNE_RECORDLISTS'		=> 'Prune Old Record Lists',
+'LBL_OOTB_REMOVE_TMP_FILES' => 'Remove temporary files',
+'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Remove diagnostic tool files',
+'LBL_OOTB_REMOVE_PDF_FILES' => 'Remove temporary PDF files',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Update tracker_sessions Table',
 'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Run Email Reminder Notifications',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Clean Jobs Queue',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Create Future TimePeriods',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
+'LBL_OOTB_KBCONTENT_UPDATE' => 'Update KBContent articles.',
+'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publish approved articles & Expire KB Articles.',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Process Author Scheduled Job',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',

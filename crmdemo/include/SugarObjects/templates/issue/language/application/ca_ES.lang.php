@@ -9,12 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
-
- * Source: SugarCRM 5.2.0
- * Contributor(s): Ramón Feliu (ramon@slay.es).
- ********************************************************************************/
 /*
+ * Created on Aug 14, 2007
  *
  * To change the template for this generated file go to
  * Window - Preferences - PHPeclipse - PHP - Code Templates
@@ -24,7 +20,7 @@ $object_name = strtolower($object_name);
 
   $object_name.'_type_dom' =>
   array (
-    'Administration' => 'Administració',
+  	'Administration' => 'Administration',
     'Product' => 'Producte',
     'User' => 'Usuari',
   ),
@@ -33,9 +29,9 @@ $object_name = strtolower($object_name);
     'New' => 'Nou',
     'Assigned' => 'Assignat',
     'Closed' => 'Tancat',
-    'Pending Input' => 'Pendent d´Informació',
+    'Pending Input' => 'Pendent d&#39;informació',
     'Rejected' => 'Refusat',
-    'Duplicate' => 'Duplicat',
+    'Duplicate' => 'Duplicar',
   ),
   $object_name.'_priority_dom' =>
   array (
@@ -46,11 +42,11 @@ $object_name = strtolower($object_name);
   $object_name.'_resolution_dom' =>
   array (
   	'' => '',
-    'Accepted' => 'Acceptat',
-    'Duplicate' => 'Duplicat',
+  	'Accepted' => 'Acceptat',
+    'Duplicate' => 'Duplicar',
     'Closed' => 'Tancat',
     'Out of Date' => 'Caducat',
-    'Invalid' => 'No Vàlid',
+    'Invalid' => 'No Vàlida',
   ),
   );
-
+?>

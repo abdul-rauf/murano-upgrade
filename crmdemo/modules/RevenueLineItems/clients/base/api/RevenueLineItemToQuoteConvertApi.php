@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -129,12 +130,6 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
             array('quote_id' => $quote->id, 'bundle_id' => $product_bundle->id, 'bundle_index' => 0)
         );
 
-        $quote->total = $product_bundle->total;
-        $quote->subtotal = $product_bundle->subtotal;
-        $quote->deal_tot = $product_bundle->deal_tot;
-        $quote->new_sub = $product_bundle->new_sub;
-        $quote->tax = 0.00;
-        $quote->tax_usdollar = 0.00;
         // quote should default to same currency as RLI
         $quote->currency_id = $rli->currency_id;
         $quote->base_rate = $rli->base_rate;
@@ -173,11 +168,6 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
             /* @var $product Product */
             $product = $rli->convertToQuotedLineItem();
 
-            // get the correct subtotal which is Unit Price * Quantity
-            $subtotal->add(SugarMath::init($product->discount_price)->mul($product->quantity)->result());
-            // add up all the disocunt_amounts correctly
-            $deal_tot->add($product->discount_amount);
-
             $product_bundle->set_relationship(
                 'product_bundle_product',
                 array('bundle_id' => $product_bundle->id, 'product_id' => $product->id, 'product_index' => ($key + 1))
@@ -195,12 +185,6 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
             $product->save();
         }
         $product_bundle->bundle_stage = 'Draft';
-        $product_bundle->subtotal = $subtotal->result();
-        $product_bundle->deal_tot = $deal_tot->result();
-        $product_bundle->new_sub = SugarMath::init($product_bundle->subtotal)->sub($product_bundle->deal_tot)->result();
-        $product_bundle->total = $product_bundle->new_sub;
-        $product_bundle->tax = 0.00;
-        $product_bundle->tax_usdollar = 0.00;
         $product_bundle->currency_id = $product->currency_id;
         $product_bundle->base_rate = $product->base_rate;
         $product_bundle->save();

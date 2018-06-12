@@ -21,7 +21,7 @@
  * @author     Matthew Fonda <mfonda@php.net>
  * @copyright  2005 Matthew Fonda
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
-
+ * @version    CVS: $Id: Blowfish.php 50752 2009-09-10 22:18:28Z dwong $
  * @link       http://pear.php.net/package/Crypt_Blowfish
  */
 

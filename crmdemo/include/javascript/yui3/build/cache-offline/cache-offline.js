@@ -1,8 +1,19 @@
 /*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("cache-offline",function(e,t){function n(){n.superclass.constructor.apply(this,arguments)}var r=null,i=e.JSON;try{r=e.config.win.localStorage}catch(s){}e.mix(n,{NAME:"cacheOffline",ATTRS:{sandbox:{value:"default",writeOnce:"initOnly"},expires:{value:864e5},max:{value:null,readOnly:!0},uniqueKeys:{value:!0,readOnly:!0,setter:function(){return!0}}},flushAll:function(){var e=r,t;if(e)if(e.clear)e.clear();else for(t in e)e.hasOwnProperty(t)&&(e.removeItem(t),delete e[t])}}),e.extend(n,e.Cache,r?{_setMax:function(e){return null},_getSize:function(){var e=0,t=0,n=r.length;for(;t<n;++t)r.key(t).indexOf(this.get("sandbox"))===0&&e++;return e},_getEntries:function(){var e=[],t=0,n=r.length,s=this.get("sandbox");for(;t<n;++t)r.key(t).indexOf(s)===0&&(e[t]=i.parse(r.key(t).substring(s.length)));return e},_defAddFn:function(e){var t=e.entry,n=t.request,s=t.cached,o=t.expires;t.cached=s.getTime(),t.expires=o?o.getTime():o;try{r.setItem(this.get("sandbox")+i.stringify({request:n}),i.stringify(t))}catch(u){this.fire("error",{error:u})}},_defFlushFn:function(e){var t,n=r.length-1;for(;n>-1;--n)t=r.key(n),t.indexOf(this.get("sandbox"))===0&&r.removeItem(t)},retrieve:function(e){this.fire("request",{request:e});var t,n,s;try{s=this.get("sandbox")+i.stringify({request:e});try{t=i.parse(r.getItem(s))}catch(o){}}catch(u){}if(t){t.cached=new Date(t.cached),n=t.expires,n=n?new Date(n):null,t.expires=n;if(this._isMatch(e,t))return this.fire("retrieve",{entry:t}),t}return null}}:{_setMax:function(e){return null}}),e.CacheOffline=n},"3.15.0",{requires:["cache-base","json"]});
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('cache-offline',function(Y,NAME){function CacheOffline(){CacheOffline.superclass.constructor.apply(this,arguments);}
+var localStorage=null,JSON=Y.JSON;try{localStorage=Y.config.win.localStorage;}
+catch(e){}
+Y.mix(CacheOffline,{NAME:"cacheOffline",ATTRS:{sandbox:{value:"default",writeOnce:"initOnly"},expires:{value:86400000},max:{value:null,readOnly:true},uniqueKeys:{value:true,readOnly:true,setter:function(){return true;}}},flushAll:function(){var store=localStorage,key;if(store){if(store.clear){store.clear();}
+else{for(key in store){if(store.hasOwnProperty(key)){store.removeItem(key);delete store[key];}}}}
+else{}}});Y.extend(CacheOffline,Y.Cache,localStorage?{_setMax:function(value){return null;},_getSize:function(){var count=0,i=0,l=localStorage.length;for(;i<l;++i){if(localStorage.key(i).indexOf(this.get("sandbox"))===0){count++;}}
+return count;},_getEntries:function(){var entries=[],i=0,l=localStorage.length,sandbox=this.get("sandbox");for(;i<l;++i){if(localStorage.key(i).indexOf(sandbox)===0){entries[i]=JSON.parse(localStorage.key(i).substring(sandbox.length));}}
+return entries;},_defAddFn:function(e){var entry=e.entry,request=entry.request,cached=entry.cached,expires=entry.expires;entry.cached=cached.getTime();entry.expires=expires?expires.getTime():expires;try{localStorage.setItem(this.get("sandbox")+JSON.stringify({"request":request}),JSON.stringify(entry));}
+catch(error){this.fire("error",{error:error});}},_defFlushFn:function(e){var key,i=localStorage.length-1;for(;i>-1;--i){key=localStorage.key(i);if(key.indexOf(this.get("sandbox"))===0){localStorage.removeItem(key);}}},retrieve:function(request){this.fire("request",{request:request});var entry,expires,sandboxedrequest;try{sandboxedrequest=this.get("sandbox")+JSON.stringify({"request":request});try{entry=JSON.parse(localStorage.getItem(sandboxedrequest));}
+catch(e){}}
+catch(e2){}
+if(entry){entry.cached=new Date(entry.cached);expires=entry.expires;expires=!expires?null:new Date(expires);entry.expires=expires;if(this._isMatch(request,entry)){this.fire("retrieve",{entry:entry});return entry;}}
+return null;}}:{_setMax:function(value){return null;}});Y.CacheOffline=CacheOffline;},'3.15.0',{"requires":["cache-base","json"]});

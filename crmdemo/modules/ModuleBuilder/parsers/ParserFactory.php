@@ -18,18 +18,24 @@ require_once 'modules/ModuleBuilder/parsers/constants.php';
 class ParserFactory
 {
 
-    /*
+    /**
      * Create a new parser
      *
      * @param string $view          The view, for example EditView or ListView. For search views, use advanced_search or basic_search
      * @param string $moduleName    Module name
      * @param string $packageName   Package name. If present implies that we are being called from ModuleBuilder
      * @param string $client        The view client (e.g. portal, wireless, etc.)
+     * @param array  $params        Additional parser parameters
      * @return AbstractMetaDataParser
      */
-
-    public static function getParser ( $view , $moduleName , $packageName = null , $subpanelName = null, $client = '' )
-    {
+    public static function getParser(
+        $view,
+        $moduleName,
+        $packageName = null,
+        $subpanelName = null,
+        $client = '',
+        array $params = array()
+    ) {
         $GLOBALS [ 'log' ]->info ( "ParserFactory->getParser($view,$moduleName,$packageName,$subpanelName,$client )" ) ;
         $sm = null;
         $lView = strtolower ( $view );
@@ -51,7 +57,7 @@ class ParserFactory
         switch ( $lView) {
             case MB_RECORDVIEW:
                 require_once 'modules/ModuleBuilder/parsers/views/SidecarGridLayoutMetaDataParser.php' ;
-                return new SidecarGridLayoutMetaDataParser ( $view, $moduleName, $packageName, 'base' ) ;
+                return new SidecarGridLayoutMetaDataParser($view, $moduleName, $packageName, 'base', $params);
             case MB_EDITVIEW :
             case MB_DETAILVIEW :
             case MB_QUICKCREATE :
@@ -65,14 +71,13 @@ class ParserFactory
                 }
                 require_once 'modules/ModuleBuilder/parsers/views/SidecarGridLayoutMetaDataParser.php';
 
-                return new SidecarGridLayoutMetaDataParser ( $view, $moduleName, $packageName, $client ) ;
+                return new SidecarGridLayoutMetaDataParser($view, $moduleName, $packageName, $client, $params);
             case MB_WIRELESSLISTVIEW:
                 // Handle client settings if we can
                 if (empty($client)) {
                     $client = MB_WIRELESS;
                 }
                 require_once 'modules/ModuleBuilder/parsers/views/SidecarListLayoutMetaDataParser.php';
-
                 return new SidecarListLayoutMetaDataParser($view, $moduleName, $packageName, $client);
             case MB_BASICSEARCH :
             case MB_ADVANCEDSEARCH :
@@ -120,13 +125,18 @@ class ParserFactory
 
                 return new DashletMetaDataParser($view, $moduleName, $packageName  );
             case MB_SIDECARPOPUPVIEW:
+            case MB_SIDECARDUPECHECKVIEW:
                 require_once 'modules/ModuleBuilder/parsers/views/SidecarListLayoutMetaDataParser.php';
-                return new SidecarListLayoutMetaDataParser(MB_SIDECARPOPUPVIEW, $moduleName, $packageName, 'base');
+                return new SidecarListLayoutMetaDataParser($view, $moduleName, $packageName, 'base');
             case MB_POPUPLIST :
             case MB_POPUPSEARCH :
                 require_once 'modules/ModuleBuilder/parsers/views/PopupMetaDataParser.php';
 
-                return new PopupMetaDataParser($view, $moduleName, $packageName  );
+                $parser = new PopupMetaDataParser($view, $moduleName, $packageName);
+                // The popup parser needs the client and needs it to be set to
+                // something in order to validate fields
+                $parser->client = empty($client) ? 'base' : $client;
+                return $parser;
             case MB_LABEL :
                 require_once 'modules/ModuleBuilder/parsers/parser.label.php';
 

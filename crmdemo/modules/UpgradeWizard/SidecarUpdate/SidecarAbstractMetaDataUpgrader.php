@@ -172,7 +172,7 @@ abstract class SidecarAbstractMetaDataUpgrader
         'wirelesssearch' => MB_WIRELESSBASICSEARCH,
         'baselist'        => MB_SIDECARLISTVIEW,
         'baserecordview'  => MB_RECORDVIEW,
-        'basefilter'      => MB_SEARCHVIEW,
+        'basefilter'      => MB_BASICSEARCH,
         'basepopuplist'   => MB_SIDECARPOPUPVIEW,
     );
 
@@ -379,7 +379,17 @@ abstract class SidecarAbstractMetaDataUpgrader
         if (empty($defs[$field])) {
             return false;
         }
-        return true;
+
+        $viewname = $this->views[$this->client . $this->viewtype] == MB_SIDECARLISTVIEW ? MB_LISTVIEW :
+            $this->views[$this->client . $this->viewtype];
+
+        $parser = ParserFactory::getParser($viewname, $this->module);
+
+        if ($parser && method_exists($parser, 'isValidField')) {
+            return $parser->isValidField($field, $defs[$field]);
+        } else {
+            return AbstractMetaDataParser::validField($defs[$field], $this->viewtype, $this->client);
+        }
     }
 
 

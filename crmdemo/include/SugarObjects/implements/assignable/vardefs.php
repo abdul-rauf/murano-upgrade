@@ -14,22 +14,27 @@ $vardefs = array(
 	'assigned_user_id' =>
 		array (
 			'name' => 'assigned_user_id',
-			'rname' => 'user_name',
-			'id_name' => 'assigned_user_id',
 			'vname' => 'LBL_ASSIGNED_TO_ID',
 			'group'=>'assigned_user_name',
-			'type' => 'relate',
-			'table' => 'users',
-			'module' => 'Users',
-			'reportable'=>true,
+            'type' => 'id',
+			'reportable'=>false,
 			'isnull' => 'false',
-			'dbType' => 'id',
 			'audited'=>true,
             'duplicate_on_record_copy' => 'always',
 			'comment' => 'User ID assigned to record',
             'duplicate_merge'=>'disabled',
             'mandatory_fetch' => true,
             'massupdate' => false,
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+                'aggregations' => array(
+                    'assigned_user_id' => array(
+                        'type' => 'MyItems',
+                        'label' => 'LBL_AGG_ASSIGNED_TO_ME',
+                    ),
+                ),
+            ),
 		),
 	 'assigned_user_name' =>
 	 array (
@@ -63,7 +68,7 @@ $vardefs = array(
     'table' => 'users',
   ),
 ),
-    'indicies' => array(
+    'indices' => array(
         'assigned_user_id' => array(
             'name' => 'idx_' . strtolower($table_name) . '_assigned_del',
             'type' => 'index',

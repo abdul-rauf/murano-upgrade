@@ -1,4 +1,5 @@
 <?php
+// created: 2018-06-12 08:17:54
 $viewdefs['Tasks']['mobile']['view']['list'] = array (
   'panels' => 
   array (
@@ -19,7 +20,6 @@ $viewdefs['Tasks']['mobile']['view']['list'] = array (
         1 => 
         array (
           'name' => 'team_name',
-          'width' => '9',
           'label' => 'LBL_TEAM',
           'default' => true,
           'enabled' => true,
@@ -27,7 +27,6 @@ $viewdefs['Tasks']['mobile']['view']['list'] = array (
         2 => 
         array (
           'name' => 'assigned_user_name',
-          'width' => '9',
           'label' => 'LBL_ASSIGNED_TO_NAME',
           'default' => true,
           'enabled' => true,

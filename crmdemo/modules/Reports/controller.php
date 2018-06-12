@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
+ * $Id$
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
@@ -78,6 +78,7 @@ class ReportsController extends SugarController
 	{
 		$this->view = 'classic';
 	}
+
 	public function action_get_teamset_field() 
 	{
 		require_once('include/SugarFields/Fields/Teamset/ReportsSugarFieldTeamsetCollection.php');
@@ -110,7 +111,7 @@ class ReportsController extends SugarController
         //so when we call MassUpdate with $addAllBeanFields then it will use this in the query.
         if(!empty($_REQUEST['current_query_by_page']))
         {
-            $query = unserialize(base64_decode($_REQUEST['current_query_by_page']));
+            $query = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($_REQUEST['current_query_by_page']));
             if(!empty($query['module']))
             {
                 unset($query['module']);

@@ -1,14 +1,8 @@
 /*
-     YUI 3.15.0 (build 834026e)
-     Copyright 2014 Yahoo! Inc. All rights reserved.
-     Licensed under the BSD License.
-     http://yuilibrary.com/license/
-     */
-YUI.add('datatype-number-parse',function(Y,NAME){var safe=Y.Escape.regex,SPACES='\\s*';Y.mix(Y.namespace("Number"),{_buildParser:Y.cached(function(prefix,suffix,separator,decimal){var regexBits=[],regex;if(prefix){regexBits.push('^'+SPACES+safe(prefix)+SPACES);}
-if(suffix){regexBits.push(SPACES+safe(suffix)+SPACES+'$');}
-if(separator){regexBits.push(safe(separator)+'(?=\\d)');}
-regex=new RegExp('(?:'+regexBits.join('|')+')','g');if(decimal==='.'){decimal=null;}
-return function(val){val=val.replace(regex,'');return decimal?val.replace(decimal,'.'):val;};}),parse:function(data,config){var parser;if(config&&typeof data==='string'){parser=this._buildParser(config.prefix,config.suffix,config.thousandsSeparator,config.decimalSeparator);data=parser(data);}
-if(typeof data==='string'&&Y.Lang.trim(data)!==''){data=+data;}
-if(typeof data!=='number'||!isFinite(data)){data=null;}
-return data;}});Y.namespace("Parsers").number=Y.Number.parse;Y.namespace("DataType");Y.DataType.Number=Y.Number;},'3.15.0',{"requires":["escape"]});
+YUI 3.15.0 (build 834026e)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add("datatype-number-parse",function(e,t){var n=e.Escape.regex,r="\\s*";e.mix(e.namespace("Number"),{_buildParser:e.cached(function(e,t,i,s){var o=[],u;return e&&o.push("^"+r+n(e)+r),t&&o.push(r+n(t)+r+"$"),i&&o.push(n(i)+"(?=\\d)"),u=new RegExp("(?:"+o.join("|")+")","g"),s==="."&&(s=null),function(e){return e=e.replace(u,""),s?e.replace(s,"."):e}}),parse:function(t,n){var r;n&&typeof t=="string"&&(r=this._buildParser(n.prefix,n.suffix,n.thousandsSeparator,n.decimalSeparator),t=r(t)),typeof t=="string"&&e.Lang.trim(t)!==""&&(t=+t);if(typeof t!="number"||!isFinite(t))t=null;return t}}),e.namespace("Parsers").number=e.Number.parse,e.namespace("DataType"),e.DataType.Number=e.Number},"3.15.0",{requires:["escape"]});

@@ -9,32 +9,29 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-/*********************************************************************************
- * pl_pl.lang.php for SugarCRM 6.5.0
- * Translator: eVolpe
- * All Rights Reserved.
- * Any bugs report welcome: support@evolpe.pl
- * Contributor(s): ______________________________________..
- ********************************************************************************/
- 
+/*
+ * Created on Aug 14, 2007
+ *
+ * To change the template for this generated file go to
+ * Window - Preferences - PHPeclipse - PHP - Code Templates
+ */
 $object_name = strtolower($object_name);
  $app_list_strings = array (
 
   $object_name.'_type_dom' =>
   array (
-  	'Administration' => 'Administracja',
+  	'Administration' => 'Administration',
     'Product' => 'Produkt',
     'User' => 'Użytkownik',
   ),
    $object_name.'_status_dom' =>
   array (
     'New' => 'Nowy',
-    'Assigned' => 'Przydzielony',
+    'Assigned' => 'Przydzielono',
     'Closed' => 'Zamknięty',
     'Pending Input' => 'Oczekujący na wprowadzenie',
     'Rejected' => 'Odrzucony',
-    'Duplicate' => 'Duplikat',
+    'Duplicate' => 'Duplikuj',
   ),
   $object_name.'_priority_dom' =>
   array (
@@ -46,9 +43,10 @@ $object_name = strtolower($object_name);
   array (
   	'' => '',
   	'Accepted' => 'Zaakceptowany',
-    'Duplicate' => 'Duplikat',
+    'Duplicate' => 'Duplikuj',
     'Closed' => 'Zamknięty',
     'Out of Date' => 'Przedawniony',
     'Invalid' => 'Nieprawidłowy',
   ),
   );
+?>

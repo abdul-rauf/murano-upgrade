@@ -27,7 +27,7 @@ $dictionary['Opportunity'] = array(
             'dbType' => 'varchar',
             'len' => '50',
             'unified_search' => true,
-            'full_text_search' => array('enabled' => true, 'boost' => 3),
+            'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 1.65),
             'comment' => 'Name of the opportunity',
             'merge_filter' => 'selected',
             'importable' => 'required',
@@ -90,7 +90,6 @@ $dictionary['Opportunity'] = array(
             'table' => 'campaigns',
             'isnull' => true,
             'module' => 'Campaigns',
-            //'dbType' => 'char',
             'reportable' => false,
             'massupdate' => false,
             'duplicate_merge' => 'disabled',
@@ -126,9 +125,7 @@ $dictionary['Opportunity'] = array(
         'amount' => array(
             'name' => 'amount',
             'vname' => 'LBL_LIKELY',
-            //'function'=>array('vname'=>'getCurrencyType'),
             'type' => 'currency',
-            //'disable_num_format' => true,
             'dbType' => 'currency',
             'comment' => 'Unconverted amount of the opportunity',
             'importable' => 'required',
@@ -144,13 +141,6 @@ $dictionary['Opportunity'] = array(
             ),
             'convertToBase' => true,
             'showTransactionalAmount' => true,
-        ),
-        'base_rate' => array(
-            'name' => 'base_rate',
-            'vname' => 'LBL_CURRENCY_RATE',
-            'type' => 'decimal',
-            'len' => '26,6',
-            'studio' => false
         ),
         'amount_usdollar' => array(
             'name' => 'amount_usdollar',
@@ -182,52 +172,6 @@ $dictionary['Opportunity'] = array(
             'calculated' => true,
             'enforced' => true,
         ),
-        'currency_id' => array(
-            'name' => 'currency_id',
-            'type' => 'currency_id',
-            'dbType' => 'id',
-            'group' => 'currency_id',
-            'vname' => 'LBL_CURRENCY',
-            'function' => 'getCurrencies',
-            'function_bean' => 'Currencies',
-            'reportable' => false,
-            'comment' => 'Currency used for display purposes',
-            'default' => '-99'
-        ),
-        'currency_name' => array(
-            'name' => 'currency_name',
-            'rname' => 'name',
-            'id_name' => 'currency_id',
-            'vname' => 'LBL_CURRENCY_NAME',
-            'type' => 'relate',
-            'link' => 'currencies',
-            'isnull' => true,
-            'table' => 'currencies',
-            'module' => 'Currencies',
-            'source' => 'non-db',
-            'function' => 'getCurrencies',
-            'function_bean' => 'Currencies',
-            'studio' => false,
-            'duplicate_merge' => 'disabled',
-            'massupdate' => false
-        ),
-        'currency_symbol' => array(
-            'name' => 'currency_symbol',
-            'rname' => 'symbol',
-            'id_name' => 'currency_id',
-            'vname' => 'LBL_CURRENCY_SYMBOL',
-            'type' => 'relate',
-            'link' => 'currencies',
-            'isnull' => true,
-            'table' => 'currencies',
-            'module' => 'Currencies',
-            'source' => 'non-db',
-            'function' => 'getCurrencySymbols',
-            'function_bean' => 'Currencies',
-            'studio' => false,
-            'duplicate_merge' => 'disabled',
-            'massupdate' => false
-        ),
         'date_closed' => array(
             'name' => 'date_closed',
             'vname' => 'LBL_DATE_CLOSED',
@@ -240,7 +184,11 @@ $dictionary['Opportunity'] = array(
             'options' => 'date_range_search_dom',
             'related_fields' => array(
                 'date_closed_timestamp'
-            )
+            ),
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+            ),
         ),
         'date_closed_timestamp' => array(
             'name' => 'date_closed_timestamp',
@@ -259,6 +207,7 @@ $dictionary['Opportunity'] = array(
             'vname' => 'LBL_NEXT_STEP',
             'type' => 'varchar',
             'len' => '100',
+            'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 0.74),
             'comment' => 'The next step in the sales process',
             'merge_filter' => 'enabled',
             'massupdate' => true,
@@ -286,6 +235,9 @@ $dictionary['Opportunity'] = array(
             'duplicate_merge' => 'disabled',
             'studio' => false,
             'reportable' => false,
+            'massupdate' => false,
+            'importable' => false,
+            'default' => 'New'
         ),
         'probability' => array(
             'name' => 'probability',
@@ -333,12 +285,17 @@ $dictionary['Opportunity'] = array(
         ),
         'commit_stage' => array(
             'name' => 'commit_stage',
-            'vname' => 'LBL_COMMIT_STAGE',
+            'vname' => 'LBL_COMMIT_STAGE_FORECAST',
             'type' => 'enum',
             'len' => '50',
             'comment' => 'Forecast commit ranges: Include, Likely, Omit etc.',
             'function' => 'getCommitStageDropdown',
             'function_bean' => 'Forecasts',
+            'formula' => 'forecastCommitStage($probability)',
+            'calculated' => true,
+            'related_fields' => array(
+                'probability'
+            )
         ),
         'accounts' => array(
             'name' => 'accounts',
@@ -372,7 +329,9 @@ $dictionary['Opportunity'] = array(
         'contact_role' => array(
             'name' => 'contact_role',
             'type' => 'enum',
+            'studio' => 'false',
             'source' => 'non-db',
+            'massupdate' => false,
             'vname' => 'LBL_OPPORTUNITY_ROLE',
             'options' => 'opportunity_relationship_type_dom',
             'link' => 'contacts',
@@ -466,24 +425,6 @@ $dictionary['Opportunity'] = array(
             'vname' => 'LBL_CAMPAIGNS',
             'reportable' => false
         ),
-        'campaign_link' => array(
-            'name' => 'campaign_link',
-            'type' => 'link',
-            'relationship' => 'campaign_opportunities',
-            'vname' => 'LBL_CAMPAIGN_LINK',
-            'link_type' => 'one',
-            'module' => 'Campaigns',
-            'bean_name' => 'Campaign',
-            'source' => 'non-db',
-            'reportable' => false
-        ),
-        'currencies' => array(
-            'name' => 'currencies',
-            'type' => 'link',
-            'relationship' => 'opportunity_currencies',
-            'source' => 'non-db',
-            'vname' => 'LBL_CURRENCIES',
-        ),
         'contracts' => array(
             'name' => 'contracts',
             'type' => 'link',
@@ -502,6 +443,7 @@ $dictionary['Opportunity'] = array(
             'vname' => 'LBL_RLI',
             'relationship' => 'opportunities_revenuelineitems',
             'source' => 'non-db',
+            'workflow' => false
         ),
         'forecastworksheets' =>  array(
             'name' => 'forecastworksheets',
@@ -634,15 +576,6 @@ $dictionary['Opportunity'] = array(
             'rhs_key' => 'opportunity_id',
             'relationship_type' => 'one-to-many'
         ),
-        'opportunity_currencies' => array(
-            'lhs_module' => 'Opportunities',
-            'lhs_table' => 'opportunities',
-            'lhs_key' => 'currency_id',
-            'rhs_module' => 'Currencies',
-            'rhs_table' => 'currencies',
-            'rhs_key' => 'id',
-            'relationship_type' => 'one-to-many'
-        ),
         'opportunities_assigned_user' => array(
             'lhs_module' => 'Users',
             'lhs_table' => 'users',
@@ -677,7 +610,7 @@ $dictionary['Opportunity'] = array(
             'rhs_module' => 'RevenueLineItems',
             'rhs_table' => 'revenue_line_items',
             'rhs_key' => 'opportunity_id',
-            'relationship_type' => 'one-to-one',
+            'relationship_type' => 'one-to-many',
         ),
     ),
     'duplicate_check' => array(
@@ -687,11 +620,8 @@ $dictionary['Opportunity'] = array(
                 array(
                     '$and' => array(
                         array('name' => array('$starts' => '$name')),
-
-
                         array('sales_stage' => array('$not_equals' => 'Closed Lost')),
                         array('sales_stage' => array('$not_equals' => 'Closed Won')),
-
                         array('accounts.id' => array('$equals' => '$account_id')),
                     )
                 ),
@@ -711,5 +641,11 @@ VardefManager::createVardef(
         'default',
         'assignable',
         'team_security',
+        'currency'
     )
 );
+
+$dictionary['Opportunity']['fields']['base_rate']['readonly'] = true;
+
+//boost value for full text search
+$dictionary['Opportunity']['fields']['description']['full_text_search']['boost'] = 0.59;

@@ -90,13 +90,14 @@ class ViewPopupview extends ViewListView
             $ajax->addCrumb ( translate('LBL_LAYOUTS', 'ModuleBuilder'), 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard&layouts=1&MB=1&view_package='.$this->editPackage.'&view_module=' . $this->editModule . '")');
             $ajax->addCrumb ( translate('LBL_POPUP', 'ModuleBuilder'), 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard&view=popup&MB=1&view_package='.$this->editPackage.'&view_module=' . $this->editModule . '")' );
 
-            $ViewLabel = ($this->editLayout == MB_POPUPLIST) ? 'LBL_POPUPLISTVIEW' : 'LBL_POPUPSEARCH';
+            $ViewLabel = ($this->editLayout == MB_POPUPSEARCH) ? 'LBL_POPUPSEARCH' : 'LBL_POPUPLISTVIEW';
             $ajax->addCrumb ( translate ($ViewLabel, 'ModuleBuilder' ), '' ) ;
-        }else{
+        } else {
             $ajax->addCrumb ( translate($this->editModule), 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard&view_module=' . $this->editModule . '")' ) ;
             $ajax->addCrumb ( translate('LBL_LAYOUTS', 'ModuleBuilder'), 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard&layouts=1&view_module=' . $this->editModule . '")');
             $ajax->addCrumb ( translate('LBL_POPUP', 'ModuleBuilder'), 'ModuleBuilder.getContent("module=ModuleBuilder&action=wizard&view=popup&view_module=' . $this->editModule . '")' );
-            $ViewLabel = ($this->editLayout == MB_POPUPLIST) ? 'LBL_POPUPLISTVIEW' : 'LBL_POPUPSEARCH';
+
+            $ViewLabel = ($this->editLayout == MB_POPUPSEARCH) ? 'LBL_POPUPSEARCH' : 'LBL_POPUPLISTVIEW';
             $ajax->addCrumb ( translate ($ViewLabel, 'ModuleBuilder' ), '' ) ;
         }
         return $ajax ;
@@ -154,13 +155,29 @@ class ViewPopupview extends ViewListView
         if (isset($this->searchlayout))
             $histaction = "ModuleBuilder.history.browse(\"{$this->editModule}\", \"{$this->editLayout}\", \"{$this->searchlayout}\")" ;
 
+        $smarty->assign(
+            'onsubmit',
+            'studiotabs.generateGroupForm("edittabs");' .
+            'ModuleBuilder.state.markAsClean();ModuleBuilder.submitForm("edittabs"); return false;'
+        );
+
         $buttons = array ( ) ;
         if (! $this->fromModuleBuilder)
         {
-            $buttons [] = array ( 'name' => 'savebtn' , 'image' => $imageSave , 'text' => $GLOBALS [ 'mod_strings' ] [ 'LBL_BTN_SAVEPUBLISH' ] , 'actionScript' => "onclick='studiotabs.generateGroupForm(\"edittabs\");ModuleBuilder.state.isDirty=false;ModuleBuilder.submitForm(\"edittabs\" )'" ) ;
+            $buttons[] = array(
+                'name' => 'savebtn',
+                'image' => $imageSave,
+                'text' => $GLOBALS['mod_strings']['LBL_BTN_SAVEPUBLISH'],
+                'type' => 'submit',
+            );
         } else
         {
-            $buttons [] = array ( 'name' => 'mbsavebtn' , 'image' => $imageSave , 'text' => $GLOBALS [ 'mod_strings' ] [ 'LBL_BTN_SAVE' ] , 'actionScript' => "onclick='studiotabs.generateGroupForm(\"edittabs\");ModuleBuilder.state.isDirty=false;ModuleBuilder.submitForm(\"edittabs\" )'" ) ;
+            $buttons[] = array(
+                'name' => 'mbsavebtn',
+                'image' => $imageSave,
+                'text' => $GLOBALS['mod_strings']['LBL_BTN_SAVE'],
+                'type' => 'submit',
+            );
         }
         $buttons [] = array ( 'name' => 'historyBtn' , 'text' => translate ( 'LBL_HISTORY' ) , 'actionScript' => "onclick='$histaction'" ) ;
         $smarty->assign ( 'buttons', $this->_buildImageButtons ( $buttons ) ) ;

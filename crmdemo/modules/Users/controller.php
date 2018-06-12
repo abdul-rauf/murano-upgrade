@@ -151,5 +151,12 @@ class UsersController extends SugarController
     {
         require 'modules/Users/Save.php';
     }
+
+    public function action_validate()
+    {
+        global $current_user;
+        $only_verify_data = true;
+        require 'modules/Users/Save.php';
+    }
 }
 

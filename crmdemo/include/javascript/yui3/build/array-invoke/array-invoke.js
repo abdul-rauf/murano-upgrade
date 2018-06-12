@@ -1,8 +1,7 @@
 /*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("array-invoke",function(e,t){e.Array.invoke=function(t,n){var r=e.Array(arguments,2,!0),i=e.Lang.isFunction,s=[];return e.Array.each(e.Array(t),function(e,t){e&&i(e[n])&&(s[t]=e[n].apply(e,r))}),s}},"3.15.0",{requires:["yui-base"]});
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('array-invoke',function(Y,NAME){Y.Array.invoke=function(items,name){var args=Y.Array(arguments,2,true),isFunction=Y.Lang.isFunction,ret=[];Y.Array.each(Y.Array(items),function(item,i){if(item&&isFunction(item[name])){ret[i]=item[name].apply(item,args);}});return ret;};},'3.15.0',{"requires":["yui-base"]});

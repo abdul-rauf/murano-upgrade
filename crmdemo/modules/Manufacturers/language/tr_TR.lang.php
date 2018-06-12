@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,44 +10,53 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
+/*********************************************************************************
+
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
 
 $mod_strings = array (
-  'ERR_DELETE_RECORD' => 'Üreticiyi silmek için kayıt numarası belirtmeniz gerekmektedir.',
-  'LBL_CREATED_BY' => 'Oluşturan',
-  'LBL_CREATED_ID' => 'Oluşturan ID',
-  'LBL_EDITLAYOUT' => 'Yerleşimi Değiştir',
-  'LBL_ID' => 'ID',
-  'LBL_LIST_FORM_TITLE' => 'Üretici Listesi',
-  'LBL_LIST_LIST_ORDER' => 'Sıra',
-  'LBL_LIST_NAME' => 'Üretici',
-  'LBL_LIST_ORDER' => 'Sıra:',
-  'LBL_LIST_STATUS' => 'Durum',
-  'LBL_MANUFACTURER' => 'Üretici:',
-  'LBL_MODIFIED_BY' => 'Değiştiren',
-  'LBL_MODIFIED_ID' => 'Değiştiren ID',
+  'LBL_CREATED_ID'=>'Oluşturan ID',
+  'LBL_MODIFIED_ID'=>'Değiştiren ID',
   'LBL_MODULE_NAME' => 'Üreticiler',
   'LBL_MODULE_NAME_SINGULAR' => 'Üretici',
   'LBL_MODULE_TITLE' => 'Üreticiler: Ana Sayfa',
-  'LBL_NAME' => 'Üretici:',
-  'LBL_NEW_FORM_TITLE' => 'Yeni Üretici',
   'LBL_SEARCH_FORM_TITLE' => 'Üretici Arama',
+  'LBL_LIST_FORM_TITLE' => 'Üretici Listesi',
+  'LBL_NEW_FORM_TITLE' => 'Yeni Üretici',
+  'LBL_MANUFACTURER' => 'Üretici:',
+  'LBL_LIST_NAME' => 'Üretici',
+  'LBL_NAME' => 'Üretici:',
+  'LBL_ID' => 'KİMLİK',
+  'LBL_MODIFIED_BY' => 'Değiştiren',
+  'LBL_CREATED_BY' => 'Oluşturan',
+  'LBL_LIST_LIST_ORDER' => 'Sıra',
+  'LBL_LIST_ORDER' => 'Sıra:',
+  'LBL_LIST_STATUS' => 'Durum',
   'LBL_STATUS' => 'Durum:',
-  'LNK_IMPORT_MANUFACTURERS' => 'Üretici Verilerini Yükle',
-  'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Ürün Kategori Verilerini Yükle',
-  'LNK_NEW_MANUFACTURER' => 'Üreticiler',
-  'LNK_NEW_PRODUCT' => 'Katalog için Ürün Oluştur',
-  'LNK_NEW_PRODUCT_CATEGORY' => 'Ürün Kategorileri',
-  'LNK_NEW_PRODUCT_TYPE' => 'Ürün Tipleri',
-  'LNK_NEW_SHIPPER' => 'Nakliyat Sağlayıcıları',
   'LNK_PRODUCT_LIST' => 'Ürün Kataloğunu Göster',
+  'LNK_NEW_PRODUCT' => 'Katalog için Ürün Oluştur',
+  'LNK_NEW_MANUFACTURER' => 'Üreticiler',
+  'LNK_NEW_SHIPPER' => 'Nakliyat Sağlayıcıları',
+  'LNK_NEW_PRODUCT_CATEGORY' => 'Ürün Kategorileri',
+  'LNK_IMPORT_PRODUCT_CATEGORIES' => 'Ürün Kategori Verilerini Yükle',
+  'LNK_NEW_PRODUCT_TYPE' => 'Ürün Tipleri',
   'NTC_DELETE_CONFIRMATION' => 'Bu kaydı silmek istediğinizden emin misiniz?',
-  'NTC_LIST_ORDER' => 'Bu üreticinin, Üretici açılır-listesinde görünmesini istediğiniz sırayı belirleyin',
+  'ERR_DELETE_RECORD' => 'Üreticiyi silmek için kayıt numarası belirtmeniz gerekmektedir.',
   'NTC_STATUS' => 'Bu üreticinin durumunu, İnaktif olarak belirleyerek Üretici açılır-listesinden kaldırın',
+  'NTC_LIST_ORDER' => 'Bu üreticinin, Üretici açılır-listesinde görünmesini istediğiniz sırayı belirleyin',
   'manufacturer_status_dom' => 
   array (
     'Active' => 'Aktif',
     'Inactive' => 'İnaktif',
-  ),
+),
+  'LNK_IMPORT_MANUFACTURERS'=>'Üretici Verilerini Yükle',
+	'LBL_EDITLAYOUT' => 'Yerleşimi Değiştir' /*for 508 compliance fix*/,
+  'LBL_REVENUELINEITEMS' => 'Gelir Satır Kalemleri',
 );
 
+
+?>

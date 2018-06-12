@@ -43,9 +43,14 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
             {
                 result = SEC.parser.toConstant('""');
             }
-            // test if value is a number or boolean
-            else if ( SE.isNumeric(value) ) {
+            // test if value is a number or boolean but not a currency value, currency always needs to be a string
+            else if ( def.type !== 'currency' && SE.isNumeric(value) ) {
                 result = SEC.parser.toConstant(SE.unFormatNumber(value));
+            } else if (def.type == "date" || def.type == "datetime") {
+                value = App.date.stripIsoTimeDelimterAndTZ(value);
+                value = App.date.parse(value);
+                value.type = def.type;
+                result = this.getDateExpression(value);
             }
             // assume string
             else {
@@ -53,10 +58,7 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
             }
         } else if (typeof(value) == "object" && value != null && value.getTime) {
             //This is probably a date object that we must convert to an expression
-            var d = new SE.DateExpression("");
-            d.evaluate = function(){return this.value};
-            d.value = value;
-            result =  d;
+            result = this.getDateExpression(value);
         } else if (typeof(value) == "number") {
             //Cast to a string before send to toConstant.
             result =  SEC.parser.toConstant("" + value);
@@ -78,15 +80,44 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
 
         this.lockedFields = this.lockedFields || [];
 
-        if (typeof(value) == "object" 
+        if (typeof(value) == 'object'
             && value.length > 0
-            && targetDef.type != "multienum" ) {
-            value = value.join(", ");
+            && targetDef.type != 'multienum') {
+            value = value.join(', ');
+
+        } else if (value && targetDef.type === 'date') {
+            value = App.date(value).formatServer(true);
+
+        } else if (value && targetDef.type === 'datetimecombo') {
+            value = App.date(value).format();
         }
 
         //Boolean handling
-        if (targetDef.type == "bool" && _.isString(value)) {
+        if (targetDef.type == 'bool' && _.isString(value)) {
             value = SUGAR.expressions.Expression.isTruthy(value);
+        }
+
+        // Format decimal/float fields
+        if (value && (targetDef.type === 'decimal' || targetDef.type === 'float')) {
+            value = App.utils.formatNumber(
+                value,
+                targetDef.round || 6,
+                targetDef.precision || 6,
+                null,
+                null
+            );
+        }
+
+        // Do not overflow maxlength for calculated fields
+        if (_.isString(value) && targetDef.len && value.length > targetDef.len) {
+            var self = this;
+            value = value.substring(0, targetDef.len);
+            this.model.once('change:' + varname, function() {
+                var msg = SUGAR.App.lang.getAppString('LBL_FIELD_TRIMMED');
+                SUGAR.forms.markField(varname, self.getElement(varname), msg);
+            });
+        } else if (SUGAR.forms.markedField[varname]) {
+            SUGAR.forms.unmarkField(varname, this.getElement(varname));
         }
 
         if (!this.lockedFields[varname])
@@ -326,16 +357,38 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
                 return "";
         }
 
+        //make sure the property to cache the related fields is defined
+        if (_.isUndefined(this.view._loadedRelatedFields)) {
+            this.view._loadedRelatedFields = {};
+        }
+
         // initiate loading data in case if it's not initiated yet or loaded model doesn't contain the needed field
-        if (field && (!relContext.isDataFetched() || (relModel && _.isUndefined(relModel.get(field))))) {
+        var cachedKey = link + '_' + field+'_'+this.model.get(rField.id_name);
+
+        if (field && (!relContext.isDataFetched() || (relModel && _.isUndefined(relModel.get(field)))) && !this.view._loadedRelatedFields.hasOwnProperty(cachedKey)) {
             if (!_.contains(fields, field)) {
                 fields.push(field);
             }
+
+            //add field info to list of fields already loaded for this view
+            this.view._loadedRelatedFields[cachedKey] = cachedKey;
             this._loadRelatedData(link, fields, relContext, rField);
+
+            //add listener to remove cached info if the field value's change
+            this.addListener(rField.id_name, function(){this.view._loadedRelatedFields = {};}, this);
         }
         else if (relModel) {
-            return relModel.get(field);
-        } else {
+            var value = relModel.get(field);
+            if (value) {
+                var def = relModel.fields[field];
+                if (def.type == "date" || def.type == "datetime") {
+                    value = App.date.stripIsoTimeDelimterAndTZ(value);
+                    value = App.date.parse(value);
+                    value.type = def.type;
+                }
+            }
+            return value;
+        } else if (!col.page) {
             // This link is currently being loaded (with the field we need). Collection's don't fire a sync/fetch event,
             // so we need to use doWhen to known when the load is complete.
             // We will fire the link change event once the load is complete to re-fire the dependency with the correct data.
@@ -346,6 +399,13 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
             });
         }
         return "";
+    },
+    getDateExpression: function(date) {
+        //This is probably a date object that we must convert to an expression
+        var d = new SE.DateExpression("");
+        d.evaluate = function(){return this.value};
+        d.value = date;
+        return d;
     },
     //Helper function to trigger the actual load call of related data
     _loadRelatedData : function(link, fields, relContext, rField) {
@@ -428,23 +488,9 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
         if (field) {
             field.setDisabled(disabled);
 
-            // set the metadata flag for the field
-            this.view.setFieldMeta(target, {'readonly': disabled});
-            // if we are on a view that has noEditFields on it, we need to add or remove it depending
-            // the state of the readonly flag
-            if (_.isArray(this.view.noEditFields)) {
-                if(disabled) {
-                    this.view.noEditFields.push(target);
-                } else {
-                    this.view.noEditFields = _.without(this.view.noEditFields, target);
-                }
-            }
             //We then need to show or hide the inline edit pencil if it exists
-            if (disabled) {
-                this.view.$("span.record-edit-link-wrapper[data-name=" + target + "]").hide();
-            } else {
-                this.view.$("span.record-edit-link-wrapper[data-name=" + target + "]").show();
-            }
+            //FIXME SC-5212 will remove this.
+            this.view.$('span.record-edit-link-wrapper[data-name=' + target + ']').toggleClass('hide', disabled);
 
             // if disabled is false
             // and the currentState of the field is not edit
@@ -477,6 +523,51 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
             field.render();
         }
     },
+    /**
+     * Used to set assigned user.
+     * @param {string} username Username to set the record assigned to.
+     */
+    setAssignedUserName: function(target, username) {
+        if (this.model.has('assigned_user_name') && this.model.has('assigned_user_id')) {
+            var self = this, options = {}, usersCollection = SUGAR.App.data.createBeanCollection('Users');
+
+            options.filter = {
+                filter: [
+                    { user_name: username }
+                ]
+            }
+
+            options.success = function(collection) {
+                var userModel = collection.first();
+                if (userModel) {
+                    self.model.set({
+                        'assigned_user_name': userModel.get('full_name'),
+                        'assigned_user_id': userModel.get('id')
+                    });
+                    var field = self.view.getField(target, self.model);
+                    if (field && field.el) {
+                        SUGAR.forms.FlashField(field.el, null, target);
+                    }
+                }
+            }
+
+            options.error = function() {
+                SUGAR.App.alert.show('server-error', {
+                    level: 'error',
+                    title: SUGAR.App.lang.get('ERR_GENERIC_TITLE'),
+                    messages: SUGAR.App.lang.get('ERR_ASSIGNTO_ACTION')
+                });
+            }
+
+            usersCollection.fetch({
+                fields: ['full_name'],
+                limit: 1,
+                params: options.filter,
+                success: options.success,
+                error: options.error
+            });
+        }
+    },
     setModel : function(model) {
         this.model = model;
     },
@@ -487,7 +578,7 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
      * @param {String} add          What we want to add to the value
      * @return {String}
      */
-    currencyAdd: function(start, add) {
+    add: function(start, add) {
         return SUGAR.App.math.add(start, add, 6, true);
     },
     /**
@@ -497,7 +588,7 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
      * @param {String} subtract          What we want to subtract from the value
      * @return {String}
      */
-    currencySubtract: function(start, subtract) {
+    subtract: function(start, subtract) {
         return SUGAR.App.math.sub(start, subtract, 6, true);
     },
     /**
@@ -507,7 +598,7 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
      * @param {String} multiply     What we want to multipy by
      * @return {String}
      */
-    currencyMultiply: function(start, multiply) {
+    multiply: function(start, multiply) {
         return SUGAR.App.math.mul(start, multiply, 6, true);
     },
     /**
@@ -517,19 +608,30 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
      * @param {String} divide       What we want to divide the currency value by
      * @return {String}
      */
-    currencyDivide: function(start, divide) {
+    divide: function(start, divide) {
         return SUGAR.App.math.div(start, divide, 6, true);
+    },
+
+    /**
+     * Used to Round the value to a given precision
+     *
+     * @param {String} start
+     * @param {String} precision
+     * @return {String}
+     */
+    round: function(start, precision) {
+        return SUGAR.App.math.round(start, precision, true);
     }
 });
 
 /**
- * @STATIC
+ * @static
  * The Default expression parser.
  */
 SEC.parser = new SUGAR.expressions.ExpressionParser();
 
 /**
- * @STATIC
+ * @static
  * Parses expressions given a variable map.<br>
  */
 SEC.evalVariableExpression = function(expression, view)
@@ -583,18 +685,35 @@ SUGAR.forms.Dependency.fromMeta = function(meta, context){
     if (_.isEmpty(actions) && _.isEmpty(falseActions))
         return null;
 
-    _.each(actions, function(actionDef)
-    {
-        if (!actionDef.action || !SUGAR.forms[actionDef.action + "Action"])
+    _.each(actions, function(actionDef) {
+        if (!actionDef.action || !SUGAR.forms[actionDef.action + 'Action'])
             return;
-        actionObjects.push(new SUGAR.forms[actionDef.action + "Action"](actionDef.params));
-    });
-    _.each(falseActions, function(actionDef)
-    {
-        if (!actionDef.action || !SUGAR.forms[actionDef.action + "Action"])
+
+        var addAction = true;
+        // if the action is SetValue, lets make sure the the user has edit access to this field
+        if (actionDef.action === 'SetValue' && actionDef.params.target) {
+            addAction = App.acl.hasAccess('edit', this.model.module, undefined, actionDef.params.target);
+        }
+
+        if (addAction) {
+            actionObjects.push(new SUGAR.forms[actionDef.action + 'Action'](actionDef.params));
+        }
+    }, context);
+    _.each(falseActions, function(actionDef) {
+        if (!actionDef.action || !SUGAR.forms[actionDef.action + 'Action'])
             return;
-        falseActionObjects.push(new SUGAR.forms[actionDef.action + "Action"](actionDef.params));
-    });
+
+        var addAction = true;
+        // if the action is SetValue, lets make sure the the user has edit access to this field
+        if (actionDef.action === 'SetValue' && actionDef.params.target) {
+            addAction = App.acl.hasAccess('edit', this.model.module, undefined, actionDef.params.target);
+        }
+
+        if (addAction) {
+            falseActionObjects.push(new SUGAR.forms[actionDef.action + 'Action'](actionDef.params));
+        }
+
+    }, context);
 
     return new SUGAR.forms.Dependency(
         new SUGAR.forms.Trigger(triggerFields, condition, context),
@@ -605,7 +724,7 @@ SUGAR.forms.Dependency.fromMeta = function(meta, context){
 
     /**
      * If the type of all the triggerFiels are link, then it should return false
-     * @returns {boolean}
+     * @return {boolean}
      */
     SUGAR.forms.Dependency.prototype.fireLinkOnlyDependency = function()
     {
@@ -721,6 +840,24 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
     }
 
     /**
+     * Determines if actions is allowed to set new value on the record in the given context
+     *
+     * @param {ExpressionContext} context Expression context
+     * @return {Boolean}
+     */
+    SUGAR.forms.AbstractAction.prototype.canSetValue = function (context) {
+        if (context.options && context.options.revert) {
+            return false;
+        }
+
+        if (context.isOnLoad) {
+            return false;
+        }
+
+        return true;
+    };
+
+    /**
      * This object resembles a trigger where a change in any of the specified
      * variables triggers the dependencies to be re-evaluated again.
      */
@@ -759,17 +896,18 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
     }
 
     /**
-     * @STATIC
+     * @static
      * This is the function that is called when a 'change' event
      * is triggered. If the condition is true, then it triggers
      * all the dependencies.
      */
-    SUGAR.forms.Trigger.fire = function (model) {
+    SUGAR.forms.Trigger.fire = function (model, value, options) {
         // eval the condition
         var eval, val;
         if (model) {
             this.context.setModel(model);
         }
+        this.context.options = options;
         try {
             eval = SEC.parser.evaluate(this.condition, this.context);
         } catch (e) {
@@ -799,8 +937,13 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
     }
 
     SUGAR.forms.flashInProgress = {};
+    SUGAR.forms.markedField = {};
+    SUGAR.forms.exclamationMarkTemplate = Handlebars.compile(
+        '<span class="warning-tooltip add-on" data-container="body" rel="tooltip" title="{{this}}"><i class="fa fa-warning"></i></span>'
+    );
+
     /**
-     * @STATIC
+     * @static
      * Animates a field when by changing it's background color to
      * a shade of light red and back.
      */
@@ -830,52 +973,146 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
         });
     };
 
+    /**
+     * @static
+     * Marks a field by changing its background color and setting a text under it
+     */
+    SUGAR.forms.markField = function(key, el, text) {
+        if (SUGAR.forms.markedField[key])
+            return;
+
+        if (!el)
+            return;
+
+        var field = $(el).parents('[data-fieldname="' + key + '"]');
+        var $ftag = $(el).children();
+
+        // add warning class
+        field.addClass('warning');
+
+        // insert tooltip
+        var $tooltip = $(SUGAR.forms.exclamationMarkTemplate(text));
+        SUGAR.App.utils.tooltip.initialize($tooltip);
+
+        $ftag.wrap('<div class="input-append warning">');
+        $ftag.after($tooltip);
+
+        SUGAR.forms.markedField[key] = $tooltip;
+    };
+
+    /**
+     * @static
+     * Unmarks a marked field
+     */
+    SUGAR.forms.unmarkField = function(key, el) {
+        if (!SUGAR.forms.markedField[key])
+            return;
+
+        if (!el)
+            return;
+
+        var field = $(el).parents('[data-fieldname="' + key + '"]');
+
+        // remove warning class
+        field.removeClass('warning');
+
+        // remove tooltip
+        SUGAR.App.utils.tooltip.destroy(SUGAR.forms.markedField[key]);
+        SUGAR.forms.markedField[key].remove();
+
+        SUGAR.forms.markedField[key] = null;
+    };
+
     //Register SugarLogic as a plugin to sidecar.
     if (SUGAR.App && SUGAR.App.plugins) {
         SUGAR.App.plugins.register('SugarLogic', 'view', {
             onAttach: function() {
                 this.on("init", function(){
                     this.deps = [];
-                    var slContext = new SUGAR.expressions.SidecarExpressionContext(this),
+                    var slContext = this.slContext = new SUGAR.expressions.SidecarExpressionContext(this),
                         meta = _.extend({}, this.meta, this.options.meta),
                         relatedFields = [],
-                        updateCollection = function(collection, trigger) {
-                            trigger.context.inCollection = true;
-                            collection.each(function(model) {
-                                SUGAR.forms.Trigger.fire.apply(trigger, [model]);
-                            });
-                            trigger.context.inCollection = null;
-                        };
+                        updateCollection = function(models, trigger) {
+                            if (trigger.dependency.testOnLoad) {
+                                trigger.context.isOnLoad = true;
+                                _.each(models, function(model) {
+                                    SUGAR.forms.Trigger.fire.apply(trigger, [model]);
+                                });
+                                trigger.context.isOnLoad = null;
+                            }
+                        },
 
-                    _.each(meta.dependencies, function(dep) {
+                        // module level dependencies
+                        modDeps = SUGAR.App.metadata.getModule(this.context.get("module"), "dependencies"),
+                        action = (_.contains(this.plugins, "Editable")
+                            || slContext.view.name == 'edit'
+                            || slContext.view.name == 'create')
+                            ? "edit" : "view",
+                        deps = meta.dependencies;
+
+                    if (!_.isEmpty(modDeps)) {
+                        // to merge with view level dependencies
+                        var filteredModDeps = _.filter(modDeps, function (dep) {
+                            if (_.contains(dep.hooks, "all") || _.contains(dep.hooks, action)) {
+                                return true;
+                            }
+                            return false;
+                        });
+                        deps = (!_.isEmpty(deps)) ? _.union(deps, filteredModDeps) : filteredModDeps;
+                    }
+
+                    _.each(deps, function(dep) {
                         var newDep = SUGAR.forms.Dependency.fromMeta(dep, slContext);
                         if (newDep) {
                             relatedFields = _.union(relatedFields, newDep.getRelatedFields());
+                            // We need to re-run this code on render. See below.
                             if (this.context.isCreate() || newDep.fireLinkOnlyDependency()) {
                                 SUGAR.forms.Trigger.fire.apply(newDep.trigger);
                                 this.trigger('sugarlogic:initialize');
                             }
                             //We need to fire onLoad dependencies when a row toggles
                             if (newDep.testOnLoad) {
-                                this.context.on("list:editrow:fire", SUGAR.forms.Trigger.fire, newDep.trigger);
+                                this.context.on("list:editrow:fire", function() {
+                                    this.context.isOnLoad = true;
+                                    SUGAR.forms.Trigger.fire.apply(this, arguments);
+                                    delete this.context.isOnLoad;
+                                }, newDep.trigger);
                                 if (this.collection) {
                                     //For views with collections, we need to trigger onLoad dependencies during sync
                                     //For dependent fields and other actions which work outside of edit.
-                                    this.collection.on("sync", function(synced){
+                                    this.collection.on("sync", function(synced, syncData){
+                                        var models, ids;
                                         if (synced instanceof Backbone.Collection) {
+                                            //only update the changed set when we have a list
+                                            ids = _.pluck(syncData, 'id');
+                                            models = synced.filter(function(model){
+                                                return _.contains(ids, model.id)
+                                            });
                                             //Use defer to prevent script timeouts on large lists
-                                            _.defer(updateCollection, synced, newDep.trigger);
+                                            _.defer(updateCollection, models, newDep.trigger);
                                         } else {
                                             SUGAR.forms.Trigger.fire.apply(newDep.trigger, [synced]);
                                         }
                                     }, this);
                                 }
                             }
-                        }
                         this.deps.push(newDep);
+                        }
                     }, this);
                     slContext._setupLinks(relatedFields);
                     slContext._requestRollups(relatedFields);
+                });
+
+                // Fields are initialized upon view `render` and they can be
+                // setting a default value at this time. We need to run this
+                // code again.
+                this.on('render', function() {
+                    _.each(this.deps, function(dep) {
+                        if (this.context.isCreate() || dep.fireLinkOnlyDependency()) {
+                            SUGAR.forms.Trigger.fire.apply(dep.trigger);
+                            this.trigger('sugarlogic:initialize');
+                        }
+                    }, this);
                 });
            },
             /**
@@ -899,6 +1136,11 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
                         }
                     });
                 });
+                if (this.model) {
+                    fields = _.filter(fields, function(field){
+                        return this.model.fields[field] && this.model.fields[field].type != "link";
+                    }, this);
+                }
                 return fields;
             }
        });

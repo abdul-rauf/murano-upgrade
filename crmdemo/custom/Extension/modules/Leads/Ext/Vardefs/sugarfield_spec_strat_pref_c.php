@@ -1,5 +1,4 @@
 <?php
- // created: 2013-05-22 12:14:26
-$dictionary['Lead']['fields']['spec_strat_pref_c']['dependency']='';
+ // created: 2018-06-12 08:16:06
+$dictionary['Lead']['fields']['spec_strat_pref_c']['dependency'] = '';
 
- ?>

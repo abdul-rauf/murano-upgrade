@@ -58,7 +58,6 @@ $viewdefs['Contracts']['base']['view']['subpanel-list'] = array(
                     ),
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
-                    'width' => 10,
                     'enabled' => true,
                     'default' => true,
                 ),
@@ -70,7 +69,7 @@ $viewdefs['Contracts']['base']['view']['subpanel-list'] = array(
             array(
                 'type' => 'rowaction',
                 'name' => 'edit_button',
-                'icon' => 'icon-pencil',
+                'icon' => 'fa-pencil',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',
@@ -78,7 +77,7 @@ $viewdefs['Contracts']['base']['view']['subpanel-list'] = array(
             ),
             array(
                 'type' => 'unlink-action',
-                'icon' => 'icon-unlink',
+                'icon' => 'fa-chain-broken',
                 'label' => 'LBL_UNLINK_BUTTON',
             ),
         ),

@@ -1,6 +1,6 @@
 <?php
- // created: 2014-11-28 07:52:03
-$dictionary['mur_approval_managment']['fields']['status_changed_c']['enforced']='';
-$dictionary['mur_approval_managment']['fields']['status_changed_c']['dependency']='';
+ // created: 2018-06-12 08:16:06
+$dictionary['mur_approval_managment']['fields']['status_changed_c']['enforced'] = '';
+$dictionary['mur_approval_managment']['fields']['status_changed_c']['dependency'] = '';
+$dictionary['mur_approval_managment']['fields']['status_changed_c']['full_text_search']['boost'] = 1;
 
- ?>

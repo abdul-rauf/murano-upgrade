@@ -10,69 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// PRO/CORP only fields
-$fields = array(
-    array(
-        'name' => 'name',
-        'link' => true,
-        'label' => 'LBL_LIST_NAME',
-        'enabled' => true,
-        'default' => true
-    ),
-    array(
-        'name' => 'account_name',
-        'enabled' => true,
-        'default' => true        
-    ),
-    'status',
-    'quantity',
-    array(
-        'name' => 'discount_price',
-        'type' => 'currency',
-        'related_fields' => array(
-            'currency_id',
-            'base_rate',
-        ),
-        'showTransactionalAmount' => true,
-        'convertToBase' => true,
-        'currency_field' => 'currency_id',
-        'base_rate_field' => 'base_rate',
-        'enabled' => true,
-        'default' => true        
-
-    ),
-    array(
-        'name' => 'list_price',
-        'type' => 'currency',
-        'related_fields' => array(
-            'currency_id',
-            'base_rate',
-        ),
-        'showTransactionalAmount' => true,
-        'convertToBase' => true,
-        'currency_field' => 'currency_id',
-        'base_rate_field' => 'base_rate',
-        'enabled' => true,
-        'default' => true
-    ),
-    array(
-        'name' => 'cost_price',
-        'type' => 'currency',
-        'related_fields' => array(
-            'currency_id',
-            'base_rate',
-        ),
-        'showTransactionalAmount' => true,
-        'convertToBase' => true,
-        'currency_field' => 'currency_id',
-        'base_rate_field' => 'base_rate',
-        'enabled' => true,
-        'default' => true        
-    ),
-    'date_entered'
-);
-
-
 $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities'] = array(
     'type' => 'subpanel-list',
     'favorite' => true,
@@ -80,7 +17,105 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities'] = ar
         array(
             'name' => 'panel_header',
             'label' => 'LBL_PANEL_1',
-            'fields' => $fields
+            'fields' => array(
+                array(
+                    'name' => 'name',
+                    'link' => true,
+                    'label' => 'LBL_LIST_NAME',
+                    'enabled' => true,
+                    'default' => true
+                ),
+                'date_closed',
+                array(
+                    'name' => 'worst_case',
+                    'type' => 'currency',
+                    'related_fields' => array(
+                        'currency_id',
+                        'base_rate',
+                        'total_amount',
+                        'quantity',
+                        'discount_amount',
+                        'discount_price'
+                    ),
+                    'showTransactionalAmount' => true,
+                    'convertToBase' => true,
+                    'currency_field' => 'currency_id',
+                    'base_rate_field' => 'base_rate',
+                    'enabled' => true,
+                    'default' => true
+                ),
+                array(
+                    'name' => 'likely_case',
+                    'type' => 'currency',
+                    'related_fields' => array(
+                        'currency_id',
+                        'base_rate',
+                        'total_amount',
+                        'quantity',
+                        'discount_amount',
+                        'discount_price'
+                    ),
+                    'showTransactionalAmount' => true,
+                    'convertToBase' => true,
+                    'currency_field' => 'currency_id',
+                    'base_rate_field' => 'base_rate',
+                    'enabled' => true,
+                    'default' => true
+                ),
+                array(
+                    'name' => 'best_case',
+                    'type' => 'currency',
+                    'related_fields' => array(
+                        'currency_id',
+                        'base_rate',
+                        'total_amount',
+                        'quantity',
+                        'discount_amount',
+                        'discount_price'
+                    ),
+                    'showTransactionalAmount' => true,
+                    'convertToBase' => true,
+                    'currency_field' => 'currency_id',
+                    'base_rate_field' => 'base_rate',
+                    'enabled' => true,
+                    'default' => true
+                ),
+                array(
+                    'name' => 'account_name',
+                    'readonly' => true,
+                    'enabled' => true,
+                    'default' => true
+                ),
+                'sales_stage',
+                'probability',
+                'commit_stage',
+                array(
+                    'name' => 'product_template_name',
+                    'enabled' => true,
+                    'default' => true
+                ),
+                array(
+                    'name' => 'category_name',
+                    'enabled' => true,
+                    'default' => true
+                ),
+                'quantity',
+                array(
+                    'name' => 'quote_name',
+                    'label' => 'LBL_ASSOCIATED_QUOTE',
+                    'related_fields' => array('quote_id'),
+                    // this is a hack to get the quote_id field loaded
+                    'readonly' => true,
+                    'bwcLink' => true,
+                    'enabled' => true,
+                    'default' => true
+                ),
+                array(
+                    'name' => 'assigned_user_name',
+                    'enabled' => true,
+                    'default' => true
+                )
+            )
         ),
     ),
     'selection' => array (
@@ -105,6 +140,7 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities'] = ar
                 'events' => array(
                     'click' => 'list:massdelete:fire',
                 ),
+                'related_fields' => array('sales_stage')
             ),
         ),
     ),
@@ -116,13 +152,13 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities'] = ar
                 'css_class' => 'btn',
                 'tooltip' => 'LBL_PREVIEW',
                 'event' => 'list:preview:fire',
-                'icon' => 'icon-eye-open',
+                'icon' => 'fa-eye',
                 'acl_action' => 'view',
             ),
             array(
                 'type' => 'rowaction',
                 'name' => 'edit_button',
-                'icon' => 'icon-pencil',
+                'icon' => 'fa-pencil',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',

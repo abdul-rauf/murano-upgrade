@@ -1,7 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,17 +9,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$mod_strings = array (
-  'LBL_EMAIL_SIGNATURE_ERROR1' => 'Denne signatur kræver et navn.',
-  'LBL_MODULE_NAME' => 'Bruger signaturer',
-  'LBL_MODULE_NAME_SINGULAR' => 'Bruger signatur',
-  'LBL_SIGNATURE' => 'Signatur',
-  'LBL_SIGNATURES' => 'Signaturer',
-  'LBL_SIGNATURE_DEFAULT' => 'Brug signatur?',
-  'LBL_SIGNATURE_HTML' => 'HTML-signatur',
-  'LBL_SIGNATURE_NAME' => 'Navn',
-  'LBL_SIGNATURE_PREPEND' => 'Signatur oven over svar?',
+$mod_strings = array(
+    'LBL_MODULE_NAME'			=> 'Bruger signaturer',
+    'LBL_MODULE_NAME_SINGULAR'		=> 'Bruger signatur',
+    'LBL_EMAIL_SIGNATURE_ERROR1' => 'Denne signatur kræver et navn.',
+    'LBL_SIGNATURE_NAME'         => 'Navn',
+    'LBL_SIGNATURE'              => 'Signatur',
+    'LBL_SIGNATURE_HTML'         => 'HTML-signatur',
+    'LBL_SIGNATURE_DEFAULT'      => 'Brug signatur?',
+    'LBL_SIGNATURE_PREPEND'      => 'Signatur oven over svar?',
+    'LBL_SIGNATURES'             => 'Signaturer',
 );
-

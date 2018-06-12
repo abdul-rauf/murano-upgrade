@@ -38,10 +38,10 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
      * @var array
      */
     protected $currentStateFiles = array(
+        MB_HISTORYMETADATALOCATION,
         MB_WORKINGMETADATALOCATION,
         MB_CUSTOMMETADATALOCATION,
         MB_BASEMETADATALOCATION,
-        MB_HISTORYMETADATALOCATION,
     );
 
     /**
@@ -71,6 +71,25 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
 
         // Set the field defs
         $this->_fielddefs = $this->bean->field_defs;
+
+        // Some fields are defined in the original filter metadata file but not in _fielddefs.
+        // We want to add them to _fielddefs as well, so when they are moved from the default
+        // column to the hidden column in Studio's search layout, they won't disappear.
+        $types = array(MB_BASEMETADATALOCATION);
+        $marker = 'originalMetadataFile';
+        $originalMeta = $this->getMetadataFromFiles($types, $marker);
+        if (empty($originalMeta)) {
+            $originalMeta = $this->getFallbackMetadata($marker);
+        }
+        if ($originalMeta && !empty($originalMeta[$this->_moduleName]['base']['filter']['default']['fields']) && is_array($originalMeta[$this->_moduleName]['base']['filter']['default']['fields'])) {
+            foreach ($originalMeta[$this->_moduleName]['base']['filter']['default']['fields'] as $key => $val) {
+                // FIXME This is a temporary fix, will have a more generic solution in TY-228
+                if ((!isset($this->_fielddefs[$key]) && isset($val['dbFields'])) || $key === '$favorite') {
+                    // if this field is not already in _fielddefs, add it
+                    $this->_comboFieldDefs[$key] = $val;
+                }
+            }
+        }
 
         // Make sure the paneldefs are proper if there are any
         $this->_paneldefs = isset($this->_viewdefs) ? $this->_viewdefs : array();
@@ -121,6 +140,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
      */
     public function getFieldDefs()
     {
+        unset($this->_fielddefs['my_favorite']);
         return $this->_fielddefs;
     }
 
@@ -167,14 +187,22 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
         $this->_viewdefs = $defs;
 
         // Now save the actual data
-        write_array_to_file(
+        $ret = write_array_to_file(
             "viewdefs['{$this->_moduleName}']['{$this->_viewClient}']['filter']['default']",
             $this->_viewdefs,
             $savefile
         );
 
+        // Delete the working file if exists as we do in DeployedMetaDataImplementation
+        $workingFilename = $this->getMetadataFilename(MB_WORKINGMETADATALOCATION);
+
+        if (file_exists($workingFilename)) {
+            SugarAutoLoader::unlink($workingFilename);
+        }
+
         // clear the cache for this module
         MetaDataManager::refreshModulesCache(array($this->_moduleName));
+        return $ret;
     }
 
     /*

@@ -71,6 +71,36 @@ class Quota extends SugarBean
     }
 
     /**
+     * Get summary text
+     */
+    public function get_summary_text()
+    {
+        /**
+         * @var TimePeriod
+         */
+        $timeperiod = BeanFactory::retrieveBean("TimePeriods", $this->timeperiod_id);
+        // make sure we have the full name before display happens
+        if (empty($this->user_full_name) && !empty($this->user_id)) {
+            $user = BeanFactory::getBean('Users', $this->user_id);
+            $this->user_full_name = $user->full_name;
+        }
+        $mod_strings = return_module_language($GLOBALS['current_language'], $this->module_name);
+
+        // get the quota type as a label
+        $quota_type = '';
+        if (!empty($this->quota_type)) {
+            if ($this->quota_type == 'Direct') {
+                $quota_type = $mod_strings['LBL_MODULE_NAME_SINGULAR'] . ' ';
+            }
+            else if ($this->quota_type == 'Rollup') {
+                $quota_type = $mod_strings['LBL_MODULE_NAME_SINGULAR'] . ' (' . $mod_strings['LBL_ADJUSTED'] . ') ';
+            }
+        }
+
+        return "{$timeperiod->name} {$quota_type}- $this->user_full_name";
+    }
+
+    /**
      * function create_list_query
      *
      * @param $order_by

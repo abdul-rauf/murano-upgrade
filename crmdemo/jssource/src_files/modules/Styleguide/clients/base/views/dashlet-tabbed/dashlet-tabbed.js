@@ -12,7 +12,7 @@
     extendsFrom: 'TabbedDashletView',
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * @property {Number} _defaultSettings.limit Maximum number of records to
      *   load per request, defaults to '10'.
@@ -26,21 +26,17 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     initialize: function(options) {
         options.meta = options.meta || {};
         options.meta.template = 'tabbed-dashlet';
 
-        this.plugins = _.union(this.plugins, [
-            'LinkedModel'
-        ]);
-
         this._super('initialize', [options]);
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * FIXME: This should be removed when metadata supports date operators to
      * allow one to define relative dates for date filters.

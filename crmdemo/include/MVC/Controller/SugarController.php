@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/MVC/View/SugarView.php');
+use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
+
+require_once 'include/MVC/View/SugarView.php';
 
 /**
  * Main SugarCRM controller
@@ -134,12 +135,42 @@ class SugarController
 										'listview'=>'ListView'
 									  );
 
-	/**
-	 * Constructor. This ie meant tot load up the module, action, record as well
-	 * as the mapping arrays.
-	 */
-	public function SugarController(){
-	}
+    /**
+     * Constructor. This is meant to load up the module, action, record as well
+     * as the mapping arrays.
+     * @deprecated
+     */
+    protected function SugarController()
+    {
+        self::__construct();
+    }
+
+    /**
+     * Ctor
+     */
+    public function __construct()
+    {
+    }
+
+    /**
+     * Perform CSRF form validation. Extension classes can override this logic
+     * if any excotic logic is required. The default implementation uses the
+     * same CSRF form token which is tied to the user's session.
+     *
+     * This logic is being called from SugarApplication for all non-GET reqs.
+     *
+     * @param array $fields Key/value field pairs
+     * @return boolean
+     */
+    public function isCsrfValid(array $fields)
+    {
+        $csrf = CsrfAuthenticator::getInstance();
+        $valid = $csrf->isFormTokenValid($fields);
+        if (!$valid) {
+            $GLOBALS['log']->fatal("CSRF: auth failure for {$this->module} -> {$this->action}");
+        }
+        return $valid;
+    }
 
 	/**
 	 * Called from SugarApplication and is meant to perform the setup operations
@@ -593,6 +624,7 @@ class SugarController
 	 * Perform the actual massupdate.
 	 */
 	protected function action_massupdate(){
+        global $app_strings;
 		if(!empty($_REQUEST['massupdate']) && $_REQUEST['massupdate'] == 'true' && (!empty($_REQUEST['uid']) || !empty($_REQUEST['entire']))){
 			if(!empty($_REQUEST['Delete']) && $_REQUEST['Delete']=='true' && !$this->bean->ACLAccess('delete')
                 || (empty($_REQUEST['Delete']) || $_REQUEST['Delete']!='true') && !$this->bean->ACLAccess('save')){
@@ -612,19 +644,49 @@ class SugarController
             if(isset($_REQUEST['entire']) && empty($_POST['mass'])) {
                 $mass->generateSearchWhere($_REQUEST['module'], $_REQUEST['current_query_by_page']);
             }
-            $mass->handleMassUpdate();
+            $arr = $mass->handleMassUpdate();
             $storeQuery = new StoreQuery();//restore the current search. to solve bug 24722 for multi tabs massupdate.
             $temp_req = array('current_query_by_page' => $_REQUEST['current_query_by_page'], 'return_module' => $_REQUEST['return_module'], 'return_action' => $_REQUEST['return_action']);
+            if (!empty($_POST['mass'])) {
+                $total_records = count($_POST['mass']);
+                $failed_update = count($arr);
+                $successful_update = $total_records - $failed_update;
+                if ($successful_update == $total_records) {
+                   //show succesful deletion message if this is a delete update
+                    if(!empty($_REQUEST['Delete'])){
+                        $massupdate_status = $app_strings['TPL_MASSDELETE_SUCCESS'];
+                        $massupdate_status = str_replace("{{num}}", $successful_update, $massupdate_status);
+                    }else{
+                        //show succesful update message if this is not a delete request
+                        $massupdate_status = $app_strings['LBL_MASS_UPDATE_SUCCESS'];
+                    }
+                } else {
+                    if(!empty($_REQUEST['Delete'])){
+                        $massupdate_status = $app_strings['TPL_MASSDELETE_SUCCESS'];
+                    }else{
+                        $massupdate_status = $app_strings['TPL_MASSUPDATE_SUCCESS'];
+                    }
+
+                    $massupdate_status .= " " . $app_strings['TPL_MASSUPDATE_WARNING_PERMISSION'];
+                    $massupdate_status = str_replace("{{num}}", $successful_update, $massupdate_status);
+                    $massupdate_status = str_replace("{{remain}}", $failed_update, $massupdate_status);
+                }
+                $temp_req['updated_records'] = $massupdate_status;
+            }
             if($_REQUEST['return_module'] == 'Emails') {
                 if(!empty($_REQUEST['type']) && !empty($_REQUEST['ie_assigned_user_id'])) {
                     $this->req_for_email = array('type' => $_REQUEST['type'], 'ie_assigned_user_id' => $_REQUEST['ie_assigned_user_id']); // Specifically for My Achieves
                 }
             }
             $_REQUEST = array();
-            $_REQUEST = unserialize(base64_decode($temp_req['current_query_by_page']));
+            $_REQUEST = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($temp_req['current_query_by_page']));
             unset($_REQUEST[$seed->module_dir.'2_'.strtoupper($seed->object_name).'_offset']);//after massupdate, the page should redirect to no offset page
             $storeQuery->saveFromRequest($_REQUEST['module']);
-            $_REQUEST = array('return_module' => $temp_req['return_module'], 'return_action' => $temp_req['return_action']);//for post_massupdate, to go back to original page.
+            $_REQUEST = array(
+                'return_module' => $temp_req['return_module'],
+                'return_action' => $temp_req['return_action'],
+                'updated_records' => $temp_req['updated_records']
+            ); //for post_massupdate, to go back to original page.
 		}else{
 			sugar_die("You must massupdate at least one record");
 		}
@@ -639,7 +701,10 @@ class SugarController
 		$return_action = isset($_REQUEST['return_action']) ?
 			$_REQUEST['return_action'] :
 			$GLOBALS['sugar_config']['default_action'];
-		$url = "index.php?module=".$return_module."&action=".$return_action;
+        $url = "index.php?module=".$return_module."&action=".$return_action;
+        if (isset($_REQUEST['updated_records'])) {
+            $url .= "&updated_records=" . $_REQUEST['updated_records'];
+        }
 		if($return_module == 'Emails'){//specificly for My Achieves
 			if(!empty($this->req_for_email['type']) && !empty($this->req_for_email['ie_assigned_user_id'])) {
 				$url = $url . "&type=".$this->req_for_email['type']."&assigned_user_id=".$this->req_for_email['ie_assigned_user_id'];
@@ -834,6 +899,18 @@ class SugarController
                 && !$this->entry_point_registry[$entryPoint]['auth'] )
             return false;
         return true;
+    }
+
+    /**
+     * Checks to see if the requested entry point exists
+     *
+     * @param  $entrypoint string name of the entrypoint
+     * @return bool true if entrypoint exists, false if not
+     */
+    public function entryPointExists($entryPoint)
+    {
+        $this->loadMapping('entry_point_registry');
+        return !empty($this->entry_point_registry[$entryPoint]);
     }
 
 	/**

@@ -167,16 +167,15 @@ $admin_option_defs['Products']['product_types']= array('Product_Types','LBL_PROD
 $admin_option_defs['Quotes']['tax_rates']= array('TaxRates','LBL_TAXRATES_TITLE','LBL_TAXRATES','./index.php?module=TaxRates&action=index');
 
 $admin_group_header[]= array('LBL_PRICE_LIST_TITLE','',false,$admin_option_defs, 'LBL_PRICE_LIST_DESC');
-
 //bug tracker.
 $admin_option_defs=array();
 $admin_option_defs['Bugs']['bug_tracker']= array('Releases','LBL_MANAGE_RELEASES','LBL_RELEASE','./index.php?module=Releases&action=index');
 $admin_group_header[]= array('LBL_BUG_TITLE','',false,$admin_option_defs, 'LBL_BUG_DESC');
-//Forecasting
 
+//Forecasting
 $admin_option_defs=array();
-$admin_option_defs['Forecasts']['forecast_setup']= array('ForecastReports','LBL_MANAGE_FORECASTS_TITLE','LBL_MANAGE_FORECASTS', 'javascript:parent.SUGAR.App.router.navigate("Forecasts/config", {trigger: true});');
-$admin_group_header[]= array('LBL_FORECAST_TITLE','',false,$admin_option_defs, 'LBL_FORECAST_DESC');
+$admin_option_defs['Forecasts']['forecast_setup'] = array('ForecastReports','LBL_MANAGE_FORECASTS_TITLE', 'LBL_MANAGE_FORECASTS', 'javascript:void(parent.SUGAR.App.router.navigate("Forecasts/config", {trigger: true}));');
+$admin_group_header[]= array('LBL_FORECAST_TITLE', '', false, $admin_option_defs, 'LBL_FORECAST_DESC');
 
 
 //Contracts
@@ -203,7 +202,7 @@ foreach ($admin_group_header as $key=>$values) {
 		if (is_admin($current_user) ||
 			in_array($mod_val, $access) ||
 		    $mod_val=='studio'||
-		    ($mod_val=='Forecasts' && in_array('ForecastSchedule', $access)) ||
+		    ($mod_val=='Forecasts') ||
 		    ($mod_val =='any')
 		   ) {
 		   	    if(!is_admin($current_user)&& isset($values[3]['Administration'])){
@@ -237,6 +236,7 @@ foreach ($admin_group_header as $key=>$values) {
                 {
                     unset($admin_group_header[$key][3][$mod_val]);
                 }
+
 
         } else {
         	//hide the link

@@ -169,7 +169,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
 * @author   Scott Nichol <snichol@users.sourceforge.net>
-
+* @version  $Id: class.soapclient.php 57813 2010-08-19 17:34:44Z kjing $
 * @access   public
 */
 class nusoap_client extends nusoap_base  {

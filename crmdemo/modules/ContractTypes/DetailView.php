@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
+ * $Id$
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -24,6 +24,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 global $app_strings;
 global $mod_strings;
+
+if (empty($_REQUEST['record'])) {
+    header("Location: index.php?module=ContractTypes&action=index");
+}
 
 $focus = BeanFactory::getBean('ContractTypes', $_REQUEST['record']);
 

@@ -47,17 +47,23 @@
              * Create tooltips for all elements that have `ellipsis_inline` class.
              */
             initializeEllipsisTooltips: function() {
-                app.utils.tooltip.destroy(this._$ellipsisTooltips);
-                this._$ellipsisTooltips = app.utils.tooltip.initialize(this.$('.ellipsis_inline'), {
-                    trigger: 'manual'
-                });
+                var self = this;
+                if (this._$ellipsisTooltips) {
+                    app.utils.tooltip.destroy(this._$ellipsisTooltips);
+                }
+
+                _.defer(function($element, options, direction) {
+                    self._$ellipsisTooltips = app.utils.tooltip.initialize($element, options, direction);
+                }, this.$('.ellipsis_inline'), {trigger: 'manual'}, this.dir);
             },
 
             /**
              * Destroy all tooltips that have been created.
              */
             destroyEllipsisTooltips: function() {
-                app.utils.tooltip.destroy(this._$ellipsisTooltips);
+                if (this._$ellipsisTooltips) {
+                    app.utils.tooltip.destroy(this._$ellipsisTooltips);
+                }
                 this._$ellipsisTooltips = null;
             },
 

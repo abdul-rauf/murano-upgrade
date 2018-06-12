@@ -11,6 +11,7 @@
  */
 *}
 <form id="CalendarEditView" name="CalendarEditView" method="POST">	
+{sugar_csrf_form_token}
 		
 <input type="hidden" name="current_module" id="current_module" value="Meetings">
 <input type="hidden" name="return_module" id="return_module" value = "Calendar">
@@ -29,18 +30,6 @@
 <input type="hidden" name="repeat_count" id="repeat_count">
 <input type="hidden" name="repeat_until" id="repeat_until">
 <input type="hidden" name="repeat_dow" id="repeat_dow">
-
-
-<div style="padding: 4px 0; font-size: 12px;">
-	{literal}
-	<input type="radio" id="radio_meeting" value="Meetings" onclick="CAL.change_activity_type(this.value);" checked="true"  name="appttype" tabindex="100"/>
-	{/literal}
-	<label for="radio_meeting">{$MOD.LBL_CREATE_MEETING}</label>
-	{literal}
-	<input type="radio" id="radio_call" value="Calls" onclick="CAL.change_activity_type(this.value);" name="appttype" tabindex="100"/>
-	{/literal}
-	<label for="radio_call">{$MOD.LBL_CREATE_CALL}</label>											
-</div>
 
 <div id="form_content">
 	<input type="hidden" name="date_start" id="date_start" value="{$user_default_date_start}">

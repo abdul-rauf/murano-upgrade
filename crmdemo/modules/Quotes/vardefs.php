@@ -46,24 +46,6 @@ $dictionary['Quote'] = array(
             'vname' => 'LBL_SHIPPING_PROVIDER',
             'source' => 'non-db',
         ),
-        'currency_id' => array(
-            'name' => 'currency_id',
-            'vname' => 'LBL_CURRENCY_ID',
-            'type' => 'id',
-            'required' => false,
-            'do_report' => false,
-            'reportable' => false,
-            'default' => '-99',
-            'function' => 'getCurrencies',
-            'function_bean' => 'Currencies',
-        ),
-        'base_rate' => array(
-            'name' => 'base_rate',
-            'vname' => 'LBL_BASE_RATE',
-            'type' => 'decimal',
-            'len' => '26,6',
-            'studio' => false
-        ),
         'taxrate_id' => array(
             'name' => 'taxrate_id',
             'vname' => 'LBL_TAXRATE_ID',
@@ -97,15 +79,20 @@ $dictionary['Quote'] = array(
             'type' => 'name',
             'len' => '50',
             'unified_search' => true,
-            'full_text_search' => array('enabled' => true, 'boost' => 3),
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 1.61,
+            ),
             'importable' => 'required',
             'required' => true,
         ),
         'quote_type' => array(
             'name' => 'quote_type',
             'vname' => 'LBL_QUOTE_TYPE',
-            'type' => 'varchar',
-            'len' => 100,
+            'type' => 'radioenum',
+            'dbtype' => 'varchar',
+            'options' => 'quote_type_dom',
         ),
         'date_quote_expected_closed' => array(
             'name' => 'date_quote_expected_closed',
@@ -167,12 +154,22 @@ $dictionary['Quote'] = array(
             'audited' => true,
             'importable' => 'required',
             'required' => true,
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+            ),
         ),
         'purchase_order_num' => array(
             'name' => 'purchase_order_num',
             'vname' => 'LBL_PURCHASE_ORDER_NUM',
             'type' => 'varchar',
             'len' => '50',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'type' => 'exact',
+                'boost' => 1.19,
+            ),
         ),
         'quote_num' => array(
             'name' => 'quote_num',
@@ -182,7 +179,12 @@ $dictionary['Quote'] = array(
             'readonly' => true,
             'required' => true,
             'unified_search' => true,
-            'full_text_search' => array('enabled' => true, 'boost' => 3),
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'type' => 'exact',
+                'boost' => 1.17,
+            ),
             'disable_num_format' => true,
             'enable_range_search' => true,
             'options' => 'numeric_range_search_dom',
@@ -197,6 +199,9 @@ $dictionary['Quote'] = array(
                 'currency_id',
                 'base_rate'
             ),
+            'formula' => 'rollupCurrencySum($product_bundles, "subtotal")',
+            'calculated' => true,
+            'enforced' => true,
         ),
         'subtotal_usdollar' => array(
             'name' => 'subtotal_usdollar',
@@ -233,6 +238,9 @@ $dictionary['Quote'] = array(
                 'currency_id',
                 'base_rate'
             ),
+            'formula' => 'rollupCurrencySum($product_bundles, "shipping")',
+            'calculated' => true,
+            'enforced' => true,
         ),
         'shipping_usdollar' => array(
             'name' => 'shipping_usdollar',
@@ -240,6 +248,7 @@ $dictionary['Quote'] = array(
             'group' => 'shipping',
             'dbType' => 'decimal',
             'type' => 'currency',
+            'currency_id'=> '-99',
             'is_base_currency' => true,
             'len' => '26,6',
             'studio' => array(
@@ -275,12 +284,16 @@ $dictionary['Quote'] = array(
             'dbType' => 'decimal',
             'type' => 'currency',
             'len' => '26,2',
+            'formula' => 'rollupCurrencySum($product_bundles, "deal_tot")',
+            'calculated' => true,
+            'enforced' => true,
         ),
         'deal_tot_usdollar' => array(
             'name' => 'deal_tot_usdollar',
             'vname' => 'LBL_DEAL_TOT_USDOLLAR',
             'dbType' => 'decimal',
             'type' => 'currency',
+            'currency_id'=> '-99',
             'is_base_currency' => true,
             'len' => '26,2',
             'studio' => array(
@@ -305,12 +318,16 @@ $dictionary['Quote'] = array(
                 'currency_id',
                 'base_rate'
             ),
+            'formula' => 'rollupCurrencySum($product_bundles, "new_sub")',
+            'calculated' => true,
+            'enforced' => true,
         ),
         'new_sub_usdollar' => array(
             'name' => 'new_sub_usdollar',
-            'vname' => 'LBL_NEW_SUB',
+            'vname' => 'LBL_NEW_SUB_USDOLLAR',
             'dbType' => 'decimal',
             'type' => 'currency',
+            'currency_id'=> '-99',
             'is_base_currency' => true,
             'len' => '26,6',
             'studio' => array(
@@ -339,6 +356,9 @@ $dictionary['Quote'] = array(
                 'currency_id',
                 'base_rate'
             ),
+            'formula' => 'rollupCurrencySum($product_bundles, "tax")',
+            'calculated' => true,
+            'enforced' => true,
         ),
         'tax_usdollar' => array(
             'name' => 'tax_usdollar',
@@ -371,6 +391,9 @@ $dictionary['Quote'] = array(
             'dbType' => 'decimal',
             'type' => 'currency',
             'len' => '26,6',
+            'formula' => 'rollupCurrencySum($product_bundles, "total")',
+            'calculated' => true,
+            'enforced' => true,
         ),
         'total_usdollar' => array(
             'name' => 'total_usdollar',
@@ -378,6 +401,7 @@ $dictionary['Quote'] = array(
             'dbType' => 'decimal',
             'group' => 'total',
             'type' => 'currency',
+            'currency_id'=> '-99',
             'is_base_currency' => true,
             'len' => '26,6',
             'audited' => true,
@@ -406,6 +430,11 @@ $dictionary['Quote'] = array(
             'dbType' => 'varchar',
             'group' => 'billing_address',
             'len' => '150',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 0.24,
+            ),
         ),
         'billing_address_city' => array(
             'name' => 'billing_address_city',
@@ -442,6 +471,11 @@ $dictionary['Quote'] = array(
             'dbType' => 'varchar',
             'group' => 'shipping_address',
             'len' => '150',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 0.23,
+            ),
         ),
         'shipping_address_city' => array(
             'name' => 'shipping_address_city',
@@ -498,7 +532,7 @@ $dictionary['Quote'] = array(
         ),
         'shipping_contact_name' => array(
             'name' => 'shipping_contact_name',
-            'rname' => 'last_name',
+            'rname' => 'full_name',
             'id_name' => 'shipping_contact_id',
             'vname' => 'LBL_SHIPPING_CONTACT_NAME',
             'type' => 'relate',
@@ -536,11 +570,17 @@ $dictionary['Quote'] = array(
             'module' => 'Accounts',
             'source' => 'non-db',
             'massupdate' => false,
-            'studio' => 'false',
+            'studio' => array(
+                'edit' => 'false',
+                'detail' => 'false',
+                'list' => 'false',
+            )
         ),
         'account_id' => array(
             'name' => 'account_id',
-            'type' => 'id',
+            'type' => 'relate',
+            'link' => 'billing_accounts',
+            'rname' => 'id',
             'group' => 'billing_address',
             'vname' => 'LBL_ACCOUNT_ID',
             'source' => 'non-db',
@@ -571,7 +611,7 @@ $dictionary['Quote'] = array(
         ),
         'billing_contact_name' => array(
             'name' => 'billing_contact_name',
-            'rname' => 'last_name',
+            'rname' => 'full_name',
             'group' => 'billing_address',
             'id_name' => 'billing_contact_id',
             'vname' => 'LBL_BILLING_CONTACT_NAME',
@@ -651,6 +691,7 @@ $dictionary['Quote'] = array(
             'relationship' => 'quote_revenuelineitems',
             'vname' => 'LBL_REVENUELINEITEMS',
             'source' => 'non-db',
+            'workflow' => false
         ),
         'shipping_accounts' => array(
             'name' => 'shipping_accounts',
@@ -914,5 +955,9 @@ VardefManager::createVardef(
         'default',
         'assignable',
         'team_security',
+        'currency'
     )
 );
+
+//boost value for full text search
+$dictionary['Quote']['fields']['description']['full_text_search']['boost'] = 0.57;

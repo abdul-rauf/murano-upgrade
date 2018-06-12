@@ -1,6 +1,5 @@
 <?php
- // created: 2017-12-20 09:27:32
-$dictionary['rt_sorting']['fields']['amendments']['full_text_search']=array (
-);
+ // created: 2018-06-12 08:16:06
+$dictionary['rt_sorting']['fields']['amendments']['full_text_search']['boost'] = 1;
+$dictionary['rt_sorting']['fields']['amendments']['full_text_search']['enabled'] = false;
 
- ?>

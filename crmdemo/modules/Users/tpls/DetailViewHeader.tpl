@@ -44,11 +44,6 @@ $(document).ready(function(){
         $("ul.clickMenu").each(function(index, node){
             $(node).sugarActionMenu();
         });
-
-        //HACK: This will tell profileactions to reload the user avatar
-        if (window.parent.SUGAR && window.parent.SUGAR.App) {
-            window.parent.SUGAR.App.events.trigger("bwc:profile:entered");
-        }
     });
 {/literal}
 </script>
@@ -58,6 +53,7 @@ $(document).ready(function(){
 <td width="20%">
 
 <form action="index.php" method="post" name="DetailView" id="form">
+{sugar_csrf_form_token}
     <input type="hidden" name="module" value="Users">
     <input type="hidden" name="record" value="{$ID}">
     <input type="hidden" name="isDuplicate" value=false>

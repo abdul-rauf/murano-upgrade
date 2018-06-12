@@ -12,7 +12,7 @@
 $dictionary['ForecastWorksheet'] = array(
     'table' => 'forecast_worksheets',
     'studio' => false,
-    'acls' => array('SugarACLForecastWorksheets' => true, 'SugarACLStatic' => true),
+    'acls' => array('SugarACLForecastWorksheets' => true),
     'fields' => array(
         'parent_id' =>
         array(
@@ -258,64 +258,6 @@ $dictionary['ForecastWorksheet'] = array(
             'convertToBase' => true,
             'skip_preferred_conversion' => true
         ),
-        'base_rate' =>
-        array(
-            'name' => 'base_rate',
-            'vname' => 'LBL_BASE_RATE',
-            'type' => 'decimal',
-            'len' => '26,6',
-            'required' => true,
-            'studio' => false
-        ),
-        'currency_id' =>
-        array(
-            'name' => 'currency_id',
-            'type' => 'currency_id',
-            'dbType' => 'id',
-            'group' => 'currency_id',
-            'vname' => 'LBL_CURRENCY',
-            'function' => 'getCurrencies',
-            'function_bean' => 'Currencies',
-            'reportable' => false,
-            'comment' => 'Currency used for display purposes',
-            'studio' => false
-        ),
-        'currency_name' =>
-        array(
-            'name' => 'currency_name',
-            'rname' => 'name',
-            'id_name' => 'currency_id',
-            'vname' => 'LBL_CURRENCY_NAME',
-            'type' => 'relate',
-            'isnull' => 'true',
-            'table' => 'currencies',
-            'module' => 'Currencies',
-            'source' => 'non-db',
-            'function' => 'getCurrencies',
-            'function_bean' => 'Currencies',
-            'studio' => false,
-            'duplicate_merge' => 'disabled',
-            'link' => 'currency',
-            'formula' => 'related($currency, "name")',
-            'enforced' => true,
-            'calculated' => true,
-        ),
-        'currency_symbol' =>
-        array(
-            'name' => 'currency_symbol',
-            'rname' => 'symbol',
-            'id_name' => 'currency_id',
-            'vname' => 'LBL_CURRENCY_SYMBOL',
-            'type' => 'relate',
-            'isnull' => 'true',
-            'table' => 'currencies',
-            'module' => 'Currencies',
-            'source' => 'non-db',
-            'function' => 'getCurrencySymbols',
-            'function_bean' => 'Currencies',
-            'studio' => false,
-            'duplicate_merge' => 'disabled',
-        ),
         'date_closed' =>
         array(
             'name' => 'date_closed',
@@ -388,6 +330,11 @@ $dictionary['ForecastWorksheet'] = array(
             'studio' => false,
             'function' => 'getCommitStageDropdown',
             'function_bean' => 'Forecasts',
+            'formula' => 'forecastCommitStage($probability)',
+            'calculated' => true,
+            'related_fields' => array(
+                'probability'
+            )
         ),
         'draft' =>
         array(
@@ -534,22 +481,9 @@ $dictionary['ForecastWorksheet'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_CATEGORY',
         ),
-        'currency' =>
-        array(
-            'name' => 'currency',
-            'type' => 'link',
-            'relationship' => 'forecastworksheets_currencies',
-            'source' => 'non-db',
-            'vname' => 'LBL_CURRENCY_NAME',
-        ),
     ),
     'indices' => array(
         array('name' => 'idx_worksheets_parent', 'type' => 'index', 'fields' => array('parent_id', 'parent_type')),
-        array(
-            'name' => 'idx_worksheets_assigned_del',
-            'type' => 'index',
-            'fields' => array('deleted', 'assigned_user_id')
-        ),
         array(
             'name' => 'idx_worksheets_assigned_del_time_draft_parent_type',
             'type' => 'index',
@@ -603,17 +537,20 @@ $dictionary['ForecastWorksheet'] = array(
             'rhs_table' => 'forecast_worksheets',
             'rhs_key' => 'category_id',
             'relationship_type' => 'one-to-many'
-        ),
-        'forecastworksheets_currencies' =>  array(
-            'lhs_module' => 'Currencies',
-            'lhs_table' => 'currencies',
-            'lhs_key' => 'id',
-            'rhs_module' => 'ForecastWorksheets',
-            'rhs_table' => 'forecast_worksheets',
-            'rhs_key' => 'currency_id',
-            'relationship_type' => 'one-to-many'
-        ),
-    )
+        )
+    ),
+    // @TODO Fix the Default and Basic SugarObject templates so that Basic
+    // implements Default. This would allow the application of various
+    // implementations on Basic without forcing Default to have those so that
+    // situations like this - implementing taggable - doesn't have to apply to
+    // EVERYTHING. Since there is no distinction between basic and default for
+    // sugar objects templates yet, we need to forecefully remove the taggable
+    // implementation fields. Once there is a separation of default and basic
+    // templates we can safely remove these as this module will implement
+    // default instead of basic.
+    'ignore_templates' => array(
+        'taggable',
+    ),
 );
 
 VardefManager::createVardef(
@@ -623,5 +560,6 @@ VardefManager::createVardef(
         'default',
         'assignable',
         'team_security',
+        'currency'
     )
 );

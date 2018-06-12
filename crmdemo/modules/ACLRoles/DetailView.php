@@ -13,6 +13,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 //global $modInvisList;
+global $dictionary;
+
 $sugar_smarty = new Sugar_Smarty();
 $sugar_smarty->assign('MOD', $mod_strings);
 $sugar_smarty->assign('APP', $app_strings);
@@ -30,10 +32,21 @@ $sugar_smarty->assign('APP_LIST', $app_list_strings);
 $role = BeanFactory::getBean('ACLRoles', $_REQUEST['record']);
 $categories = ACLRole::getRoleActions($_REQUEST['record']);
 $names = ACLAction::setupCategoriesMatrix($categories);
+
+// Skipping modules that have 'hidden_to_role_assignment' property
+foreach ($categories as $name => $category) {
+	if (isset($dictionary[$name]) &&
+		isset($dictionary[$name]['hidden_to_role_assignment']) &&
+		$dictionary[$name]['hidden_to_role_assignment']
+	) {
+		unset($categories[$name]);
+	}
+}
+
 $categories2 = array();
 $categories2=$categories;
 $hidden_categories = array(
-"KBDocuments", "Campaigns","Forecasts","ForecastSchedule",
+"Campaigns","Forecasts",
 "Emails","EmailTemplates","EmailMarketing","Reports","PdfManager");
 foreach($hidden_categories as $v){
 	if (isset($categories2[$v])) {

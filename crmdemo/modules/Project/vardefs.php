@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: vardefs.php 56115 2010-04-26 17:08:09Z kjing $
 
 $dictionary['Project'] = array(
     'table' => 'project',
@@ -36,6 +36,16 @@ $dictionary['Project'] = array(
 			'comment' => 'Date record created',
 		    'enable_range_search' => true,
 		    'options' => 'date_range_search_dom',
+            'readonly' => true,
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+                'aggregations' => array(
+                    'date_entered' => array(
+                        'type' => 'DateRange',
+                    ),
+                ),
+            ),
 		),
 		'date_modified' => array(
 			'name' => 'date_modified',
@@ -44,20 +54,35 @@ $dictionary['Project'] = array(
 			'comment' => 'Date record last modified',
 		    'enable_range_search' => true,
 		    'options' => 'date_range_search_dom',
+            'readonly' => true,
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+                'aggregations' => array(
+                    'date_modified' => array(
+                        'type' => 'DateRange',
+                    ),
+                ),
+            ),
 		),
 		'assigned_user_id' => array(
 			'name' => 'assigned_user_id',
-			'rname' => 'user_name',
-			'id_name' => 'assigned_user_id',
-			'type' => 'assigned_user_name',
+            'type' => 'id',
 			'vname' => 'LBL_ASSIGNED_USER_ID',
 			'required' => false,
-			'len' => 36,
-			'dbType' => 'id',
-			'table' => 'users',
 			'isnull' => false,
-			'reportable'=>true,
-			'comment' => 'User assigned to this record'
+			'reportable'=>false,
+            'comment' => 'User assigned to this record',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+                'aggregations' => array(
+                    'assigned_user_id' => array(
+                        'type' => 'MyItems',
+                        'label' => 'LBL_AGG_ASSIGNED_TO_ME',
+                    ),
+                ),
+            ),
 		),
 		'modified_user_id' => array(
 			'name' => 'modified_user_id',
@@ -69,7 +94,18 @@ $dictionary['Project'] = array(
 			'isnull' => 'false',
 			'dbType' => 'id',
 			'reportable'=>true,
-			'comment' => 'User who last modified record'
+            'comment' => 'User who last modified record',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+                'type' => 'id',
+                'aggregations' => array(
+                    'modified_user_id' => array(
+                        'type' => 'MyItems',
+                        'label' => 'LBL_AGG_MODIFIED_BY_ME',
+                    ),
+                ),
+            ),
 		),
 		'modified_by_name' =>
 	  array (
@@ -95,6 +131,17 @@ $dictionary['Project'] = array(
 			'isnull' => 'false',
 			'dbType' => 'id',
 			'comment' => 'User who created record',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+                'type' => 'id',
+                'aggregations' => array(
+                    'created_by' => array(
+                        'type' => 'MyItems',
+                        'label' => 'LBL_AGG_CREATED_BY_ME',
+                    ),
+                ),
+            ),
 		),
 		'created_by_name' =>
 	  array (
@@ -119,7 +166,11 @@ $dictionary['Project'] = array(
 			'type' => 'name',
 			'len' => 50,
 			'unified_search' => true,
-            'full_text_search' => array('enabled' => true, 'boost' => 3),
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 0.84,
+            ),
 			'comment' => 'Project name',
 			'importable' => 'required',
             'required' => true,
@@ -129,6 +180,11 @@ $dictionary['Project'] = array(
 			'vname' => 'LBL_DESCRIPTION',
 			'required' => false,
 			'type' => 'text',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 0.46,
+            ),
 			'comment' => 'Project description'
 		),
 		'deleted' => array(
@@ -150,6 +206,7 @@ $dictionary['Project'] = array(
             'importable' => 'required',
             'required' => true,
             'enable_range_search' => true,
+            'options' => 'date_range_search_dom',
         ),
         'estimated_end_date' =>
         array(
@@ -160,6 +217,7 @@ $dictionary['Project'] = array(
             'importable' => 'required',
             'required' => true,
             'enable_range_search' => true,
+            'options' => 'date_range_search_dom',
         ),
         'status' =>
         array(
@@ -167,6 +225,10 @@ $dictionary['Project'] = array(
             'vname' => 'LBL_STATUS',
             'type' => 'enum',
             'options' => 'project_status_dom',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+            ),
         ),
 
         'priority' =>
@@ -175,6 +237,10 @@ $dictionary['Project'] = array(
             'vname' => 'LBL_PRIORITY',
             'type' => 'enum',
             'options' => 'projects_priority_options',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+            ),
         ),
         'is_template' => array(
             'name' => 'is_template',
@@ -368,6 +434,7 @@ $dictionary['Project'] = array(
             'relationship' => 'projects_revenuelineitems',
             'source'=>'non-db',
             'vname'=>'LBL_REVENUELINEITEMS',
+            'workflow' => false
         ),
 		'user_resources' =>
   			array (
@@ -490,6 +557,8 @@ $dictionary['Project'] = array(
             'rhs_table'         => 'holidays',
             'rhs_key'           => 'related_module_id',
             'relationship_type' => 'one-to-many',
+            'relationship_role_column'=>'related_module',
+            'relationship_role_column_value'=>'Project',
         ),
 
 	),

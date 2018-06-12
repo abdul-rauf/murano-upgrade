@@ -11,15 +11,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-/*********************************************************************************
- * pl_pl.lang.php for SugarCRM 6.5.0
- * Translator: eVolpe
- * All Rights Reserved.
- * Any bugs report welcome: support@evolpe.pl
- * Contributor(s): ______________________________________..
- ********************************************************************************/
+ // $Id: JotPadDashlet.en_us.lang.php 16620 2006-09-05 22:52:15Z wayne $
+
 
 $dashletStrings['ChartsDashlet'] = array('LBL_TITLE'            => 'Wykresy',
                                          'LBL_DESCRIPTION'      => 'Dashlet wyświetlający wykresy',
-                                         'LBL_CONFIGURE_TITLE'  => 'Tytuł', );
- 
+                                         'LBL_CONFIGURE_TITLE'  => 'Stanowisko', );
+?>

@@ -50,7 +50,7 @@
 			    // Only proxy on the first one (e.g. calendar icon; if a SugarCRM datetimecombo, we'll have a
 			    // "clock" for time and we don't want to open the calendar when that's clicked (UIUX-1110 / SP-1362)
 			    // Clicking on clock time icon is handled by the datetimecombo.js controller in SugarCRM.
-				this.element.parent().find('.add-on:first').on({
+				this.element.parent().find('.add-on[data-icon=calendar]').on({
 					click: $.proxy(this.focusShow, this)
 				});
 			}
@@ -272,15 +272,19 @@
 			nextMonth.setDate(nextMonth.getDate() + 42);
 			nextMonth = nextMonth.valueOf();
 			var html = [];
-			var clsName;
+			var clsName,
+				prevY,
+				prevM;
 			while(prevMonth.valueOf() < nextMonth) {
 				if (prevMonth.getDay() === this.weekStart) {
 					html.push('<tr>');
 				}
 				clsName = '';
-				if (prevMonth.getMonth() < month) {
+				prevY = prevMonth.getFullYear();
+				prevM = prevMonth.getMonth();
+				if ((prevM < month &&  prevY === year) ||  prevY < year) {
 					clsName += ' old';
-				} else if (prevMonth.getMonth() > month) {
+				} else if ((prevM > month && prevY === year) || prevY > year) {
 					clsName += ' new';
 				}
 				if (prevMonth.valueOf() === currentDate) {
@@ -663,6 +667,7 @@
 			var parts = dateIn.split(format.separator),
 				date = new Date(), isLegalDate = true,
 				val, i, cnt, originalDate, len, 
+				day, month, year,
 				monthsSet = false, dayValue = null, isValid = true;
 
 			// First check separator is correct
@@ -710,6 +715,7 @@
 					switch(format.parts[i]) {
 						case 'dd':
 						case 'd':
+							day = val;
 							// We must set months first and if format is dd-mm we defer setting day until month
 							if (!monthsSet) {
 								dayValue = val;	
@@ -719,6 +725,7 @@
 							break;
 						case 'mm':
 						case 'm':
+							month = val - 1;
 							if (_isInRange(val, 1, 12)) {
 								// If October 31 and we do setMonth(10) we get December since not 31 days in Nov!
 								originalDate = date.getDate();
@@ -738,6 +745,7 @@
 							}
 							break;
 						case 'yy':
+							year = 2000 + val;
 							len = val.toString().length;
 							// Auto correct when exactly four digits and current century
 							if (len === 4 && century() === val.toString().substr(0, 2)) {
@@ -750,6 +758,7 @@
 							}
 							break;
 						case 'yyyy':
+							year = val;
 							len = val.toString().length;
 							if (_isInRange(val, 0, 9999)) {
 
@@ -768,6 +777,9 @@
 							}
 							break;
 					}
+				}
+				if (isValid) {
+					date = new Date(year, month, day, 0, 0, 0);
 				}
 			} else {
 				isValid = false;

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once __DIR__ . '/UpgradeDriver.php';
+require_once dirname(__FILE__)  . '/UpgradeDriver.php';
 
 /**
  * Command-line upgrader
@@ -57,14 +57,41 @@ class CliUpgrader extends UpgradeDriver
         'cleanup' => 5
     );
 
+    /**
+     * {@inheritDoc}
+     */
+    public static $version = '1.0.0-dev';
+
+    /**
+     * {@inheritDoc}
+     */
+    public static $build = '999';
+
+    /**
+     * {@inheritDoc}
+     */
+    const VERSION_FILE = 'version.json';
+
     /*
      * CLI arguments: Zipfile Logfile Sugardir Adminuser [Stage]
      */
     public function runStage($stage)
     {
-        $cmd = "{$this->context['php']} -f {$this->context['script']} -- " . $this->buildArgString(
-                array('stage' => $stage, 'all' => true)
-            );
+        $scriptPathInfo = pathinfo($this->context['script']);
+
+        $argsToBeIncludedInCommand = $this->buildArgString( array('stage' => $stage, 'all' => true) );
+
+        //Check if we're executing from a phar, if so we need to adjust the command executed
+        if(substr($scriptPathInfo['dirname'] , 0, strlen('phar://')) === 'phar://') {
+
+            $pharPath = substr($scriptPathInfo['dirname'] , strlen('phar://'));
+
+            $cmd = "{$this->context['php']} {$pharPath}" . $argsToBeIncludedInCommand;
+        }
+        else {
+            $cmd = "{$this->context['php']} -f {$this->context['script']} -- " . $argsToBeIncludedInCommand;
+        }
+
         $this->log("Running $cmd");
         passthru($cmd, $retcode);
         return ($retcode == self::STOP_SIGNAL) ? self::STOP_SIGNAL : ($retcode == 0);
@@ -87,7 +114,7 @@ class CliUpgrader extends UpgradeDriver
     protected static function usage()
     {
         global $argv;
-        list($version, $build) = static::getVersion();
+        list($version, $build) = self::getVersion();
         $usage = <<<eoq2
 CLI Upgrader v.$version (build $build)
 Usage:
@@ -215,8 +242,10 @@ eoq2;
             $this->context['autoconfirm'] = false;
         }
         $this->context['sendlog'] = !empty($this->context['sendlog']);
-        if ($this->context['zip_as_dir']) {
+        if ($this->context['zip_as_dir'] && !isset($this->context['extract_dir'])) {
             $this->context['extract_dir'] = $this->context['zip'];
+            $this->context['health_check_path'] =
+                realpath($this->context['extract_dir']) . self::DEFAULT_HEALTHCHECK_PATH;
         }
     }
 
@@ -244,6 +273,7 @@ eoq2;
             if (!file_exists("$zip/manifest.php")) {
                 return $this->error("$zip does not contain manifest.php");
             }
+            $this->context['extract_dir'] = $zip;
             $this->log("Using $zip as extracted ZIP directory");
             return true;
         }
@@ -265,7 +295,7 @@ eoq2;
             $longopt[] = $data[2] . ':';
         }
         /* FIXME: getopt always uses global argv */
-        $opts = getopt($opt, $longopt);
+        $opts = @getopt($opt, $longopt);
 
         if (empty($opts)) {
             $this->argError("Invalid upgrader options");
@@ -356,7 +386,12 @@ eoq2;
             $context['php'] = $php_path . "php";
         }
         if (empty($context['script'])) {
-            $pharPath = Phar::running(false);
+            if (class_exists('Phar')) {
+                $pharPath = Phar::running(false);
+            } else {
+                $pharPath = null;
+            }
+
             $context['script'] = $pharPath ? $pharPath : __FILE__;
         }
         $context['argv'] = $argv;
@@ -381,13 +416,16 @@ eoq2;
     /**
      * Execution starts here
      */
-    public static function start()
+    public function start()
     {
         global $argv;
-        $upgrader = new static();
+        $class = get_class($this);
+        $upgrader = new $class();
         $upgrader->parseArgs($argv);
         $upgrader->verifyArguments($argv);
         $upgrader->init();
+        list($version, $build) = self::getVersion();
+        $upgrader->log("CliUpgrader v.$version (build $build) starting");
         if (isset($upgrader->context['stage'])) {
             $stage = $upgrader->context['stage'];
         } else {
@@ -503,7 +541,7 @@ eoq2;
      */
     protected function doHealthcheck()
     {
-        $scanner = $this->getHealthCheckScanner();
+        $scanner = $this->getHealthCheckScanner('cli', $this->fp, 0);
         if (!$scanner) {
             return $this->error('Cannot find health check scanner. Skipping health check stage');
         }
@@ -539,48 +577,31 @@ eoq2;
     }
 
     /**
-     *
-     * Get Scanner object
-     * @return HealthCheckScannerCli
-     */
-    protected function  getHealthCheckScanner()
-    {
-        if ($this->isHealthCheckInstalled()) {
-            $scanner = $this->getHelper()->getScanner('cli');
-            $scanner->setVerboseLevel(0);
-            $scanner->setLogFilePointer($this->fp);
-            $scanner->setInstanceDir($this->context['source_dir']);
-            return $scanner;
-        }
-        return false;
-    }
-
-    /**
      * @return HealthCheckHelper
      */
     protected function getHelper()
     {
-        require_once 'SugarSystemInfo.php';
-        require_once 'SugarHeartbeatClient.php';
-        require_once 'HealthCheckClient.php';
-        require_once 'HealthCheckHelper.php';
-        return HealthCheckHelper::getInstance();
-    }
+        /*
+         * Loading SugarSystemInfo from health check only if version < 7.2.2
+         * If version 7.2.2 and above SugarSystemInfo also loading in entryPoint.php
+         */
+        $sugar_version = '9.9.9';
+        include "sugar_version.php";
+        if (file_exists(dirname(__FILE__).'/SugarSystemInfo.php') && version_compare($sugar_version, '7.2.2', '<')) {
+            require_once 'SugarSystemInfo.php';
+        }
+        
+        if (!class_exists('SugarHeartbeatClient')) {
+            require_once 'SugarHeartbeatClient.php';
+        }
+        if (!class_exists('HealthCheckClient')) {
+            require_once 'HealthCheckClient.php';
+        }
+        if (!class_exists('HealthCheckHelper')) {
+            require_once 'HealthCheckHelper.php';
+        }
 
-    /**
-     *
-     * Verify if health check module is available
-     * @return boolean
-     */
-    protected function isHealthCheckInstalled()
-    {
-        set_include_path(
-            __DIR__ . DIRECTORY_SEPARATOR . realpath(
-                $this->context['health_check_path']
-            ) . PATH_SEPARATOR . get_include_path()
-        );
-        $file = 'Scanner/ScannerCli.php';
-        return stream_resolve_include_path($file);
+        return HealthCheckHelper::getInstance();
     }
 
     /**
@@ -600,6 +621,39 @@ eoq2;
         }
         return $md5sum;
     }
+
+    /**
+     * Verify and unpack upgrade package
+     * If we found that state file has pre step we clear state file
+     * @param string $zip ZIP filename
+     * @param string $dir Temp dir to use for zip files
+     * @return bool|false
+     */
+    protected function verify($zip, $dir)
+    {
+        if (!empty($this->state['stage']['pre'])) {
+            $this->cleanState();
+        }
+        return parent::verify($zip, $dir);
+    }
+
+    /**
+     * Run given stage
+     * If stage healthcheck and healthcheck doesn't exists we run unpack stage
+     * @inheritdoc
+     */
+    public function run($stage)
+    {
+        if ($stage == 'healthcheck' &&
+            (!file_exists($this->context['health_check_path']) || empty($this->state['stage']['unpack']) ||
+                $this->state['stage']['unpack'] == 'failed') &&
+            !$this->run('unpack')
+        ) {
+            return false;
+        }
+
+        return parent::run($stage);
+    }
 }
 
 if (empty($argv[0]) || basename($argv[0]) != basename(__FILE__)) {
@@ -610,5 +664,5 @@ $sapi_type = php_sapi_name();
 if (substr($sapi_type, 0, 3) != 'cli') {
     die("This is command-line only script");
 }
-CliUpgrader::start();
-
+$upgrader = new CliUpgrader();
+$upgrader->start();

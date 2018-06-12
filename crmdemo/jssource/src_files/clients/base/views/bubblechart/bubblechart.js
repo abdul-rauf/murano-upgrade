@@ -35,14 +35,19 @@
     likelyField: null,
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     initialize: function(options) {
         this.isManager = app.user.get('is_manager');
         this._initPlugins();
-        this._super('initialize', [options]);
 
-        this.forecastBy = app.metadata.getModule('Forecasts', 'config').forecast_by || 'Opportunities';
+        var config = app.metadata.getModule('Forecasts', 'config');
+        this.forecastBy = config && config.forecast_by || 'Opportunities';
+
+        // set the title label in meta the same way the dashlet title is set on render
+        options.meta.label = app.lang.get(options.meta.label, this.forecastBy);
+
+        this._super('initialize', [options]);
 
         var fields = [
             'id',
@@ -79,10 +84,14 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     initDashlet: function(view) {
         var self = this;
+
+        if (this.settings.get('filter_duration') == 0) {
+            this.settings.set({'filter_duration':'current'}, {'silent':true});
+        }
 
         this.setDateRange();
 
@@ -105,12 +114,13 @@
             .margin({top: 0})
             .tooltipContent(function(key, x, y, e, graph) {
                 e.point.close_date = d3.time.format('%x')(d3.time.format('%Y-%m-%d').parse(e.point.x));
-                e.point.amount = e.point.currency_symbol + d3.format(',.2d')(e.point.base_amount);
+                e.point.amount = app.currency.formatAmountLocale(e.point.base_amount, e.point.currency_id);
                 return self.tooltiptemplate(e.point).replace(/(\r\n|\n|\r)/gm, '');
             })
             .showTitle(false)
             .tooltips(true)
             .showLegend(true)
+            .direction(app.lang.direction)
             .bubbleClick(function(e) {
                 self.chart.dispatch.tooltipHide(e);
                 app.router.navigate(app.router.buildRoute(self.forecastBy, e.point.id), {trigger: true});
@@ -126,16 +136,22 @@
             })
             .strings({
                 legend: {
-                    close: app.lang.getAppString('LBL_CHART_LEGEND_CLOSE'),
-                    open: app.lang.getAppString('LBL_CHART_LEGEND_OPEN')
+                    close: app.lang.get('LBL_CHART_LEGEND_CLOSE'),
+                    open: app.lang.get('LBL_CHART_LEGEND_OPEN')
                 },
-                noData: app.lang.getAppString('LBL_CHART_NO_DATA')
+                noData: app.lang.get('LBL_CHART_NO_DATA')
             });
 
         this.on('data-changed', function() {
             this.renderChart();
         }, this);
         this.settings.on('change:filter_duration', this.changeFilter, this);
+
+        this.layout.on('render', function() {
+            if (!this.disposed && !this.settings.get('config')) {
+                this.layout.setTitle(app.lang.get(this.meta.label, this.forecastBy));
+            }
+        }, this);
     },
 
     /**
@@ -222,19 +238,20 @@
                     sales_stage: sales_stage,
                     sales_stage_short: sales_stage,
                     probability: parseInt(d.probability, 10),
-                    base_amount: parseInt(d[this.likelyField], 10),
-                    currency_symbol: app.currency.getCurrencySymbol(d.currency_id)
+                    base_amount: d[this.likelyField],
+                    currency_symbol: app.currency.getCurrencySymbol(d.currency_id),
+                    currency_id: d.currency_id
                 };
             }, this),
             properties: {
-                title: app.lang.getAppString('LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME'),
+                title: app.lang.get('LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME'),
                 value: data.records.length
             }
         };
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     loadData: function(options) {
         var self = this,
@@ -278,10 +295,24 @@
      */
     setDateRange: function() {
         var now = new Date(),
-            duration = parseInt(this.settings.get('filter_duration'), 10),
+            mapping = {
+                'current' : 0,
+                'next' : 3,
+                'year' : 12
+            },
+            duration = mapping[this.settings.get('filter_duration')],
             startMonth = Math.floor(now.getMonth() / 3) * 3,
             startDate = new Date(now.getFullYear(), (duration === 12 ? 0 : startMonth + duration), 1),
-            endDate = new Date(now.getFullYear(), (duration === 12 ? 12 : startDate.getMonth() + 3), 0);
+            addYear = 0,
+            addMonth = duration === 12 ? 12 : 3,
+            endDate;
+
+        // if "Next Quarter" is selected and the current month is Oct/Nov/Dec, add 1 to the year
+        if(duration === 3 && now.getMonth() >= 9) {
+            addYear = 1;
+        }
+        endDate = new Date(now.getFullYear() + addYear, startDate.getMonth() + addMonth, 0);
+
         this.dateRange = {
             'begin': app.date.format(startDate, 'Y-m-d'),
             'end': app.date.format(endDate, 'Y-m-d')
@@ -297,7 +328,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _dispose: function() {
         this.off('data-changed');

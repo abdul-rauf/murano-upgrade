@@ -36,6 +36,7 @@ class DashboardListApi extends FilterApi
                 'method' => 'getDashboards',
                 'shortHelp' => 'Get dashboards for a module',
                 'longHelp' => 'include/api/help/get_dashboards.html',
+                'cacheEtag' => true,
             ),
             'getDashboardsForHome' => array(
                 'reqType' => 'GET',
@@ -52,6 +53,7 @@ class DashboardListApi extends FilterApi
                 'method' => 'getDashboards',
                 'shortHelp' => 'Get dashboards for home',
                 'longHelp' => 'include/api/help/get_dashboards.html',
+                'cacheEtag' => true,
             ),
         );
     }
@@ -119,11 +121,16 @@ class DashboardListApi extends FilterApi
      *
      * @see SugarApi::getFieldsFromArgs()
      */
-    protected function getFieldsFromArgs(ServiceBase $api, array $args, SugarBean $bean = null, $viewName = 'view')
-    {
+    protected function getFieldsFromArgs(
+        ServiceBase $api,
+        array $args,
+        SugarBean $bean = null,
+        $viewName = 'view',
+        &$displayParams = array()
+    ) {
         if (isset($args['view'])) {
             unset($args['view']);
         }
-        return parent::getFieldsFromArgs($api, $args, $bean, $viewName);
+        return parent::getFieldsFromArgs($api, $args, $bean, $viewName, $displayParams);
     }
 }

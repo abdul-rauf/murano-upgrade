@@ -26,12 +26,14 @@
             /**
              * Search given view for any file input fields, upload the files and attach to the bean
              *
+             * @deprecated Since 7.6.0. Will be removed on 7.8.0.
              * @param {Backbone.View} view a view to search for file input fields and containing a model of type app.Bean
              * @param {Object} [callbacks] success or error callbacks that should be called
              * @param {Object} [options] api options to pass to the API behind the bean.uploadFile
              * @param {Boolean} [showAlert=true] whether or not to show the "Uploading" alert
              */
             checkFileFieldsAndProcessUpload : function(view, callbacks, options, showAlert) {
+                app.logger.warn('app.file.checkFileFieldsAndProcessUpload is deprecated as of 7.6.0.');
                 callbacks = callbacks || {};
                 options = options || {};
                 showAlert = _.isUndefined(showAlert) ? true : showAlert;
@@ -119,7 +121,7 @@
              */
             _triggerFieldValidationError: function(error, model, fieldName) {
                 var errors = {};
-                errors[error.responseText] = {};
+                errors[fieldName] = {};
                 model.trigger('error:validation:' + fieldName, errors);
                 model.trigger('error:validation', errors);
             },
@@ -138,7 +140,6 @@
                     return (!_.isEmpty(fieldValue) && !_.isEmpty($field.attr("name")));
                 }, this);
             }
-        }
-
+        };
     })(), false);
 })(SUGAR.App);

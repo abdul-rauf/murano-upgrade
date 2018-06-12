@@ -80,7 +80,11 @@ class OAuth2Api extends SugarApi
         if ( !$validVersion ) {
             throw new SugarApiExceptionClientOutdated();
         }
-
+        $platform = empty($args['platform']) ? 'base' : $args['platform'];
+        $allowedPlatforms = MetaDataManager::getPlatformList();
+        if (SugarConfig::getInstance()->get('disable_unknown_platforms') && !in_array($platform, $allowedPlatforms)) {
+            throw new SugarApiExceptionInvalidParameter("EXCEPTION_INVALID_PLATFORM");
+        }
         $oauth2Server = $this->getOAuth2Server($args);
         try {
             $GLOBALS['logic_hook']->call_custom_logic('Users', 'before_login');
@@ -124,11 +128,6 @@ class OAuth2Api extends SugarApi
             }
         }
 
-        $platform = 'base';
-        if (!empty($args['platform'])) {
-            $platform = $args['platform'];
-        }
-
         // Adding the setcookie() here instead of calling $api->setHeader() because
         // manually adding a cookie header will break 3rd party apps that use cookies
         setcookie(RestService::DOWNLOAD_COOKIE.'_'.$platform, $authData['download_token'], time()+$authData['refresh_expires_in'], ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure'), true);
@@ -136,7 +135,7 @@ class OAuth2Api extends SugarApi
         // For reauth requests we need to send back the session cookie as well to
         // keep the client in sync if there was a session cookie to begin with
         if (isset($_COOKIE[session_name()]) && !empty($args['grant_type']) && $args['grant_type'] == 'refresh_token' && !empty($args['refresh'])) {
-            $this->killSessionCookie();
+            $this->sendSessionCookie();
         }
         return $authData;
     }
@@ -156,6 +155,8 @@ class OAuth2Api extends SugarApi
         }
 
         setcookie(RestService::DOWNLOAD_COOKIE.'_'.$api->platform, false, -1, ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure'), true);
+
+        SugarApplication::endSession();
 
         // The OAuth access token is actually just a session, so we can nuke that here.
         $_SESSION = array();

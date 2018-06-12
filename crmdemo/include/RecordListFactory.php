@@ -31,9 +31,7 @@ class RecordListFactory
             $user = $GLOBALS['current_user'];
         }
 
-        $ret = $db->query("SELECT * FROM record_list WHERE id = '".$db->quote($id)."' AND assigned_user_id = '".$db->quote($user->id)."'",true);
-
-        $row = $db->fetchByAssoc($ret, false);
+        $row = $db->fetchOne("SELECT * FROM record_list WHERE id = '".$db->quote($id)."' AND assigned_user_id = '".$db->quote($user->id)."'",true, '', false);
 
         if (!empty($row['records'])) {
             $data = $row;
@@ -54,6 +52,8 @@ class RecordListFactory
      */
     public static function saveRecordList($recordList, $module, $id = null, $user = null)
     {
+        global $dictionary;
+        
         $db = DBManagerFactory::getInstance();
 
         if ($user == null) {
@@ -64,12 +64,34 @@ class RecordListFactory
 
         if (empty($id)) {
             $id = create_guid();
-            $query = "INSERT INTO record_list (id, assigned_user_id, module_name, records, date_modified) VALUES ('".$db->quote($id)."','".$db->quote($user->id)."', '".$db->quote($module)."','".$db->quote(json_encode($recordList))."', '".$currentTime."')";
+            $db->insertParams(
+                'record_list',
+                $dictionary['RecordList']['fields'],
+                array(
+                    'id' => $id,
+                    'assigned_user_id' => $user->id,
+                    'module_name' => $module,
+                    'records' => json_encode($recordList),
+                    'date_modified' => $currentTime,
+                ),
+                null,
+                true,
+                true
+            );
         } else {
-            $query = "UPDATE record_list SET records = '".$db->quote(json_encode($recordList))."', date_modified = '".$currentTime."' WHERE id = '".$db->quote($id)."'";
+            $db->updateParams(
+                'record_list',
+                $dictionary['RecordList']['fields'],
+                array(
+                    'records' => json_encode($recordList),
+                    'date_modified' => $currentTime,
+                ),
+                array('id' => $id),
+                null,
+                true,
+                true
+            );
         }
-
-        $db->query($query,true);
 
         return $id;
     }

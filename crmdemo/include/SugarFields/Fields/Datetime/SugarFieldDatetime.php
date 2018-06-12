@@ -343,11 +343,19 @@ class SugarFieldDatetime extends SugarFieldBase {
     }
 
     /**
-     * @see SugarFieldBase::apiFormatField
+     * {@inheritDoc}
      */
-    public function apiFormatField(array &$data, SugarBean $bean, array $args, $fieldName, $properties)
-    {
+    public function apiFormatField(
+        array &$data,
+        SugarBean $bean,
+        array $args,
+        $fieldName,
+        $properties,
+        array $fieldList = null,
+        ServiceBase $service = null
+    ) {
         global $timedate;
+        $this->ensureApiFormatFieldArguments($fieldList, $service);
 
         if(empty($bean->$fieldName)) {
             $data[$fieldName] = '';
@@ -356,7 +364,8 @@ class SugarFieldDatetime extends SugarFieldBase {
 
         $theDate = (!empty($bean->fetched_row[$fieldName])) ? $bean->fetched_row[$fieldName] : $bean->$fieldName;
 
-        $date = $timedate->fromDbType($theDate,$properties['type']);
+        $dbType = DBManagerFactory::getInstance()->getFieldType($properties);
+        $date = $timedate->fromDbType($theDate, $dbType);
 
         if ( $date == null ) {
             // Could not parse date... try User format

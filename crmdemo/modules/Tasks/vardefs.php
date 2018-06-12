@@ -22,7 +22,11 @@ $dictionary['Task'] = array(
             'type' => 'name',
             'len' => '50',
             'unified_search' => true,
-            'full_text_search' => array('enabled' => true, 'boost' => 3),
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 1.45,
+            ),
             'importable' => 'required',
             'required' => true,
         ),
@@ -34,6 +38,11 @@ $dictionary['Task'] = array(
             'len' => 100,
             'required' => true,
             'default' => 'Not Started',
+            'duplicate_on_record_copy' => 'no',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+            ),
         ),
         'date_due_flag' => array(
             'name' => 'date_due_flag',
@@ -53,6 +62,11 @@ $dictionary['Task'] = array(
             'studio' => array('required' => true, 'no_duplicate' => true),
             'enable_range_search' => true,
             'options' => 'date_range_search_dom',
+            'full_text_search' => array(
+                'type' => 'datetime',
+                'enabled' => true,
+                'searchable' => false,
+            ),
         ),
         'time_due' => array(
             'name' => 'time_due',
@@ -196,6 +210,7 @@ $dictionary['Task'] = array(
             'relationship' => 'revenuelineitem_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_REVENUELINEITEMS',
+            'workflow' => false
         ),
         'cases' => array(
             'name' => 'cases',
@@ -255,6 +270,29 @@ $dictionary['Task'] = array(
             'source' => 'non-db',
             'reportable' => false
         ),
+        'meetings_parent' => array(
+            'name' => 'meetings_parent',
+            'type' => 'link',
+            'relationship' => 'task_meetings_parent',
+            'source' => 'non-db',
+            'vname' => 'LBL_MEETINGS',
+            'reportable' => false,
+        ),
+        'calls_parent' => array(
+            'name' => 'calls_parent',
+            'type' => 'link',
+            'relationship' => 'task_calls_parent',
+            'source' => 'non-db',
+            'vname' => 'LBL_CALLS',
+            'reportable' => false,
+        ),
+        'project' => array(
+            'name' => 'project',
+            'type' => 'link',
+            'relationship' => 'projects_tasks',
+            'source' => 'non-db',
+            'vname' => 'LBL_PROJECTS',
+        ),
     ),
     'relationships' => array(
         'tasks_notes' => array(
@@ -265,6 +303,8 @@ $dictionary['Task'] = array(
             'rhs_table' => 'notes',
             'rhs_key' => 'parent_id',
             'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Tasks'
         ),
         'tasks_assigned_user' => array(
             'lhs_module' => 'Users',
@@ -292,7 +332,29 @@ $dictionary['Task'] = array(
             'rhs_table' => 'tasks',
             'rhs_key' => 'created_by',
             'relationship_type' => 'one-to-many'
-        )
+        ),
+        'task_meetings_parent' => array(
+            'lhs_module' => 'Tasks',
+            'lhs_table' => 'tasks',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Meetings',
+            'rhs_table' => 'meetings',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Tasks',
+        ),
+        'task_calls_parent' => array(
+            'lhs_module' => 'Tasks',
+            'lhs_table' => 'tasks',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Calls',
+            'rhs_table' => 'calls',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Tasks',
+        ),
     ),
     'indices' => array(
         array(
@@ -342,3 +404,6 @@ VardefManager::createVardef(
         'team_security',
     )
 );
+
+//boost value for full text search
+$dictionary['Task']['fields']['description']['full_text_search']['boost'] = 0.56;

@@ -42,15 +42,7 @@
              */
             this.action = options.meta && options.meta.action ? options.meta.action : this.name;
 
-            /**
-             * Template to render (optional).
-             * @cfg {Function}
-             */
-            this.template = options.template ||
-                this.getTemplateFromMeta(options) ||
-                app.template.getView(this.name, this.module) ||
-                app.template.getView(this.name) ||
-                (options.meta && options.meta.type ? app.template.getView(options.meta.type) : null);
+            this._loadTemplate(options);
 
             /**
              * Dictionary of field widgets.
@@ -95,30 +87,64 @@
         },
 
         /**
+         * Sets the appropriate template for this view to {@link #template}.
+         * Sets the name of the template to {@link #tplName}.
+         *
+         * @param {Object} [options] The options that may specify the template to
+         *   load.
+         * @private
+         */
+        _loadTemplate: function(options) {
+            var template, templateName;
+
+            if (template = options && options.template) {
+                templateName = null;
+            } else if (template = this.meta && this.meta.template && app.template.getView(this.meta.template)) {
+                templateName = this.meta.template;
+            } else if (template = (app.template.getView(this.name, this.module) || app.template.getView(this.name))) {
+                templateName = this.name;
+            } else if (template = this.meta && this.meta.type && app.template.getView(this.meta.type)) {
+                templateName = this.meta.type;
+            } else {
+                template = app.template.empty;
+                templateName = '';
+            }
+
+            /**
+             * The name of the template that is loaded.
+             * This is a public read-only property. This property should not be
+             * modified directly.
+             *
+             * @property {string|null} tplName
+             * @member View.View
+             */
+            this.tplName = templateName;
+
+            /**
+             * The template for this view.
+             *
+             * @property {Function} template
+             * @member View.View
+             */
+            this.template = template;
+        },
+
+        /**
          * Used in `initialize` above to check if metadata has `template`. If so, will return the
          * "surrogate template" from that view.
          * @param  {Object} options The options passed through from `initialize`
          * @return {Object} The view template or null
+         *
+         * @deprecated since 7.7 will be removed in 7.8.
          */
         getTemplateFromMeta: function(options) {
+            app.logger.warn('`getTemplateFromMeta` is deprecated since 7.7 and ' +
+                'will be removed in 7.8.');
+
             if(options.meta && options.meta.template) {
                 return app.template.getView(options.meta.template);
             }
             return null;
-        },
-
-        /**
-         * Sets template option.
-         *
-         * If the given option already exists it is augmented by the value of the given `option` parameter.
-         * See Handlebars.js documentation for details.
-         * @param {String} key Option key.
-         * @param {Object} option Option value.
-         */
-        setTemplateOption: function(key, option) {
-            this.options = this.options || {};
-            this.options.templateOptions = this.options.templateOptions || {};
-            this.options.templateOptions[key] = _.extend({}, this.options.templateOptions[key], option);
         },
 
         /**
@@ -183,6 +209,12 @@
                     // See the following resources
                     // https://github.com/documentcloud/backbone/issues/310
                     // http://tbranyen.com/post/missing-jquery-events-while-rendering
+
+                    // The following is provided for your convenience should you wish to learn more about
+                    // Backbone.js views delegateEvents do not get bound (sometimes).
+                    // For a list of the actual third party software used in this Sugar product,
+                    // please visit http://support.sugarcrm.com/06_Customer_Center/11_Third_Party_Software/.
+                    //
                     // http://stackoverflow.com/questions/5125958/backbone-js-views-delegateevents-do-not-get-bound-sometimes
                     this.delegateEvents();
                 } catch (e) {
@@ -290,8 +322,10 @@
          * and sets context's `fields` property beforehand.
          *
          * Override this method to provide custom fetch algorithm.
-         * @param options(optional) Options that are passed to collection/model's fetch method.
-         * @params setFields(optional) Boolean if true, the view will update the set of fields used on the current context
+         * @param {Object} [options] Options that are passed to
+         *   collection/model's fetch method.
+         * @param {boolean} [setFields=true] If `true`, the layout will update
+         *   the set of fields used on the current context.
          */
         loadData: function(options, setFields) {
             // See Bug56941.
@@ -391,7 +425,7 @@
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         closestComponent: function(name) {
             if (!this.layout) {
@@ -401,6 +435,26 @@
                 return this.layout;
             }
             return this.layout.closestComponent(name);
+        },
+
+        /**
+         * @inheritdoc
+         */
+        _show: function() {
+            this._super('_show');
+            _.each(this.fields, function(component) {
+                component.updateVisibleState(true);
+            });
+        },
+
+        /**
+         * @inheritdoc
+         */
+        _hide: function() {
+            this._super('_hide');
+            _.each(this.fields, function(component) {
+                component.updateVisibleState(true);
+            });
         },
 
         /**
@@ -451,7 +505,7 @@
                     if (def.name == field) {
                         panel.fields[i] = _.extend(def, meta);
                     }
-                })
+                });
             });
         }
 

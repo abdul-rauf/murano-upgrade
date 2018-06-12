@@ -13,9 +13,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 
-
-require_once('modules/Administration/UpgradeWizardCommon.php');
-
+require_once 'modules/Administration/UpgradeWizardCommon.php';
+require_once 'include/SugarSmarty/plugins/function.sugar_csrf_form_token.php';
 
 unset($_SESSION['rebuild_relationships']);
 unset($_SESSION['rebuild_extensions']);
@@ -38,9 +37,9 @@ $new_lang_desc = "";
 
 $mode           = $_REQUEST['mode'];
 $hidden_fields .= "<input type=hidden name=\"mode\" value=\"$mode\"/>";
+$hidden_fields .= smarty_function_sugar_csrf_form_token(array(), $smarty);
 
-
-$install_type   = getInstallType( $install_file );
+$install_type   = UpgradeWizardCommon::getInstallType( $install_file );
 
 $version        = "";
 $previous_version = "";
@@ -60,6 +59,7 @@ $is_uninstallable = true;
 $id_name = '';
 $dependencies = array();
 $remove_tables = 'true';
+$roles = array();
 
 unzip( $install_file, $unzip_dir );
 if($install_type == 'module' && $mode != 'Uninstall' && $mode != 'Disable'){
@@ -170,7 +170,7 @@ switch( $install_type ){
 		}
 		$hidden_fields .= "<input type=hidden name=\"new_lang_name\" value=\"$new_lang_name\"/>";
 
-		$new_lang_desc = getLanguagePackName( "$unzip_dir/$zip_from_dir/include/language/$new_lang_name.lang.php" );
+		$new_lang_desc = UpgradeWizardCommon::getLanguagePackName( "$unzip_dir/$zip_from_dir/include/language/$new_lang_name.lang.php" );
 		if( $new_lang_desc == "" ){
 			die( $mod_strings['ERR_UW_NO_LANG_DESC_1']."include/language/$new_lang_name.lang.php".$mod_strings['ERR_UW_NO_LANG_DESC_2']."$install_file." );
 		}
@@ -206,11 +206,23 @@ $hidden_fields .= "<input type=hidden name=\"version\" value=\"$version\"/>";
 $serial_manifest = array();
 $serial_manifest['manifest'] = (isset($manifest) ? $manifest : '');
 $serial_manifest['installdefs'] = (isset($installdefs) ? $installdefs : '');
+if (isset($installdefs['roles']) && $mode === 'Install' && $install_type === 'module') {
+    $roles = $installdefs['roles'];
+}
 $serial_manifest['upgrade_manifest'] = (isset($upgrade_manifest) ? $upgrade_manifest : '');
 $hidden_fields .= "<input type=hidden name=\"s_manifest\" value='".base64_encode(serialize($serial_manifest))."'>";
 // present list to user
+
+if (count($roles) == 0) {
+    $action = '_commit';
+    $buttonLabel = 'LBL_ML_COMMIT';
+} else {
+    $action = '_map_roles';
+    $buttonLabel = 'LBL_ML_NEXT';
+}
+ 
 ?>
-<form action="<?php print( $form_action . "_commit" ); ?>" name="files" method="post"  onSubmit="return validateForm(<?php print($require_license); ?>);">
+<form action="<?php print( $form_action . $action ); ?>" name="files" method="post" onsubmit="return validateForm(<?php print($require_license); ?>);">
 <?php
 if(empty($new_studio_mod_files)) {
 	if(!empty($mode) && $mode == 'Uninstall')
@@ -330,7 +342,7 @@ switch( $mode ){
 
 
 ?>
-<input type=submit value="<?php echo $mod_strings['LBL_ML_COMMIT'];?>" class="button" id="submit_button" />
+<input type=submit value="<?php echo $mod_strings[$buttonLabel];?>" class="button" id="submit_button" />
 <input type=button value="<?php echo $mod_strings['LBL_ML_CANCEL'];?>" class="button" onClick="location.href='index.php?module=Administration&action=UpgradeWizard&view=module';"/>
 
 <?php
@@ -426,7 +438,7 @@ if( $show_files == true ){
 //    echo '</div>';
 if($mode == "Disable" || $mode == "Enable"){
 	//check to see if any files have been modified
-	$modified_files = getDiffFiles($unzip_dir, $install_file, ($mode == 'Enable'), $previous_version);
+	$modified_files = UpgradeWizardCommon::getDiffFiles($unzip_dir, $install_file, ($mode == 'Enable'), $previous_version);
 	if(count($modified_files) > 0){
 		//we need to tell the user that some files have been modified since they last did an install
 		echo '<script>' .

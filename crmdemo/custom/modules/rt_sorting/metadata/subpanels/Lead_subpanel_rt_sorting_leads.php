@@ -1,67 +1,25 @@
 <?php
-// created: 2017-12-18 17:19:56
-$subpanel_layout['list_fields'] = array (
-  'name' => 
-  array (
-    'vname' => 'LBL_SUBJECT',
-    'widget_class' => 'SubPanelDetailViewLink',
-    'width' => '15%',
-    'default' => true,
-  ),
-  'date_entered' => 
-  array (
-    'vname' => 'LBL_DATE_ENTERED',
-    'width' => '15%',
-    'default' => true,
-  ),
-  'report_status' => 
-  array (
-    'vname' => 'LBL_REPORT_STATUS',
-    'width' => '15%',
-    'default' => true,
-  ),
-  'spaces' => 
-  array (
-    'vname' => 'LBL_SPACES',
-    'width' => '15%',
-    'default' => true,
-  ),
-  'edit_button' => 
-  array (
-    'vname' => 'LBL_EDIT_BUTTON',
-    'widget_class' => 'SubPanelEditButton',
-    'module' => 'rt_sorting',
-    'width' => '4%',
-    'default' => true,
-  ),
-  'remove_button' => 
-  array (
-    'vname' => 'LBL_REMOVE',
-    'widget_class' => 'SubPanelRemoveButton',
-    'module' => 'rt_sorting',
-    'width' => '5%',
-    'default' => true,
-  ),
-  'close_button' => 
-  array (
-    'vname' => 'LBL_COMPOSE_CLIENT',
-    'widget_class' => 'SubPanelComposeButton',
-    'module' => 'rt_sorting',
-    'width' => '5%',
-    'default' => true,
-  ),
-  'feedback_points1_c' => 
-  array (
-    'type' => 'decimal',
-    'default' => true,
-    'vname' => 'LBL_FEEDBACK_POINTS1_C',
-    'width' => '10%',
-  ),
-  'total_point_c' => 
-  array (
-    'type' => 'decimal',
-    'default' => true,
-    'vname' => 'LBL_TOTAL_POINT',
-    'width' => '10%',
-  ),
-);
+// created: ' . date('Y-m-d H:i:s')
+$subpanel_layout['list_fields']['name']['vname'] = 'LBL_SUBJECT';
+$subpanel_layout['list_fields']['name']['widget_class'] = 'SubPanelDetailViewLink';
+$subpanel_layout['list_fields']['name']['width'] = '15%';
+$subpanel_layout['list_fields']['name']['default'] = true;
+$subpanel_layout['list_fields']['date_entered']['vname'] = 'LBL_DATE_ENTERED';
+$subpanel_layout['list_fields']['date_entered']['width'] = '15%';
+$subpanel_layout['list_fields']['date_entered']['default'] = true;
+$subpanel_layout['list_fields']['report_status']['vname'] = 'LBL_REPORT_STATUS';
+$subpanel_layout['list_fields']['report_status']['width'] = '15%';
+$subpanel_layout['list_fields']['report_status']['default'] = true;
+$subpanel_layout['list_fields']['spaces']['vname'] = 'LBL_SPACES';
+$subpanel_layout['list_fields']['spaces']['width'] = '15%';
+$subpanel_layout['list_fields']['spaces']['default'] = true;
+$subpanel_layout['list_fields']['edit_button']['vname'] = 'LBL_EDIT_BUTTON';
+$subpanel_layout['list_fields']['edit_button']['widget_class'] = 'SubPanelEditButton';
+$subpanel_layout['list_fields']['edit_button']['module'] = 'rt_sorting';
+$subpanel_layout['list_fields']['edit_button']['width'] = '4%';
+$subpanel_layout['list_fields']['edit_button']['default'] = true;
+$subpanel_layout['list_fields']['remove_button']['vname'] = 'LBL_REMOVE';
+$subpanel_layout['list_fields']['remove_button']['widget_class'] = 'SubPanelRemoveButton';
+$subpanel_layout['list_fields']['remove_button']['module'] = 'rt_sorting';
+$subpanel_layout['list_fields']['remove_button']['width'] = '5%';
+$subpanel_layout['list_fields']['remove_button']['default'] = true;

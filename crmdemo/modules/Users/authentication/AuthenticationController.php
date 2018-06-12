@@ -46,24 +46,26 @@ class AuthenticationController
 	}
 
 
-	/**
-	 * Returns an instance of the authentication controller
-	 *
+    /**
+     * Returns an instance of the authentication controller
+     *
      * @param string $type this is the type of authentication you want to use default is SugarAuthenticate
      * @return AuthenticationController An instance of the authentication controller
-	 */
-	public static function getInstance($type = null)
-	{
-	    global $sugar_config;
-	    if(empty($type)) {
-	        $type = !empty($sugar_config['authenticationClass'])? $sugar_config['authenticationClass'] : 'SugarAuthenticate';
-	    }
-		if (empty(self::$authcontrollerinstance)) {
-			self::$authcontrollerinstance = new AuthenticationController($type);
-		}
+     */
+    public static function getInstance($type = null)
+    {
+        global $sugar_config;
+        if (empty($type)) {
+            $type = !empty($sugar_config['authenticationClass']) ? $sugar_config['authenticationClass'] : 'SugarAuthenticate';
+        }
+        if (empty(static::$authcontrollerinstance)) {
+            SugarAutoLoader::requireWithCustom('modules/Users/authentication/AuthenticationController.php');
+            $controllerClass = SugarAutoLoader::customClass('AuthenticationController');
+            static::$authcontrollerinstance = new $controllerClass($type);
+        }
 
-		return self::$authcontrollerinstance;
-	}
+        return static::$authcontrollerinstance;
+    }
 
 	/**
 	 * Set currect instance (for testing)
@@ -177,7 +179,7 @@ class AuthenticationController
 			    $_SESSION['userStats']['pages'] = 0;
 			}
 			$_SESSION['userStats']['lastTime'] = time();
-			$_SESSION['userStats']['pages']++;
+			$_SESSION['userStats']['pages'] += 1;
 
 		}
 		return $this->authenticated;
@@ -205,7 +207,7 @@ class AuthenticationController
 			    $_SESSION['userStats']['pages'] = 0;
 			}
 			$_SESSION['userStats']['lastTime'] = time();
-			$_SESSION['userStats']['pages']++;
+			$_SESSION['userStats']['pages'] += 1;
 
 		}
 		return $this->authenticated;

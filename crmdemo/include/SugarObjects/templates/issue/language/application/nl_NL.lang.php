@@ -1,8 +1,5 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
-/*
+ /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
@@ -12,39 +9,44 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
-
+/*
+ * Created on Aug 14, 2007
+ *
+ * To change the template for this generated file go to
+ * Window - Preferences - PHPeclipse - PHP - Code Templates
+ */
 $object_name = strtolower($object_name);
-$app_list_strings = array (
-  $object_name.'_priority_dom' => 
+ $app_list_strings = array (
+
+  $object_name.'_type_dom' =>
   array (
-    'P1' => 'Hoog',
-    'P2' => 'Medium',
-    'P3' => 'Laag',
-  ),
-  $object_name.'_resolution_dom' => 
-  array (
-    '' => ' ',
-    'Accepted' => 'Geaccepteerd',
-    'Closed' => 'Afgesloten',
-    'Duplicate' => 'Kopie',
-    'Invalid' => 'Ongeldig',
-    'Out of Date' => 'Verlopen',
-  ),
-  $object_name.'_status_dom' => 
-  array (
-    'Assigned' => 'Toegewezen',
-    'Closed' => 'Afgesloten',
-    'Duplicate' => 'Kopie',
-    'New' => 'Nieuw',
-    'Pending Input' => 'Wacht op input',
-    'Rejected' => 'Afgewezen',
-  ),
-  $object_name.'_type_dom' => 
-  array (
-    'Administration' => 'Beheer',
+  	'Administration' => 'Administration',
     'Product' => 'Product',
     'User' => 'Gebruiker',
   ),
-);
-
+   $object_name.'_status_dom' =>
+  array (
+    'New' => 'Nieuw',
+    'Assigned' => 'Toegewezen',
+    'Closed' => 'Afgesloten',
+    'Pending Input' => 'Wacht op input',
+    'Rejected' => 'Afgewezen',
+    'Duplicate' => 'Dupliceren',
+  ),
+  $object_name.'_priority_dom' =>
+  array (
+    'P1' => 'Hoog',
+    'P2' => 'Middel',
+    'P3' => 'Laag',
+  ),
+  $object_name.'_resolution_dom' =>
+  array (
+  	'' => '',
+  	'Accepted' => 'Geaccepteerd',
+    'Duplicate' => 'Dupliceren',
+    'Closed' => 'Afgesloten',
+    'Out of Date' => 'Verlopen',
+    'Invalid' => 'Ongeldig',
+  ),
+  );
+?>

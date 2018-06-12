@@ -1,7 +1,6 @@
 <?php
- // created: 2017-11-03 10:46:27
-$dictionary['Lead']['fields']['mfa_conference_c']['labelValue']='MFA Conference 2016';
-$dictionary['Lead']['fields']['mfa_conference_c']['dependency']='';
-$dictionary['Lead']['fields']['mfa_conference_c']['visibility_grid']='';
+ // created: 2018-06-12 08:16:06
+$dictionary['Lead']['fields']['mfa_conference_c']['labelValue'] = 'MFA Conference 2016';
+$dictionary['Lead']['fields']['mfa_conference_c']['dependency'] = '';
+$dictionary['Lead']['fields']['mfa_conference_c']['visibility_grid'] = '';
 
- ?>
