@@ -11,6 +11,7 @@
  */
 require_once('include/SugarFields/Fields/Collection/SugarFieldCollection.php');
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 class ViewSugarFieldCollection{
     var $ss; // Sugar Smarty Object
@@ -33,12 +34,24 @@ class ViewSugarFieldCollection{
     var $action_type;
     var $form_name;
 
-    function ViewSugarFieldCollection($fill_data = true){
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ViewSugarFieldCollection($fill_data = true)
+    {
+        self::__construct($fill_data);
+    }
+
+    public function __construct($fill_data = true)
+    {
     	$this->json = getJSONobj();
     	if($fill_data){
 	        $this->displayParams = $this->json->decode(html_entity_decode($_REQUEST['displayParams']));
 	        $this->vardef = $this->json->decode(html_entity_decode($_REQUEST['vardef']));
-	        $this->module_dir = $_REQUEST['module_dir'];
+            $this->module_dir = InputValidation::getService()->getValidInputRequest(
+                'module_dir',
+                'Assert\Mvc\ModuleName'
+            );
 	        $this->action_type = $_REQUEST['action_type'];
 	        $this->name = $this->vardef['name'];
 	        $this->value_name = $this->name . '_values';
@@ -343,7 +356,6 @@ FRA;
 
                 } else if($matches[0] == 'Teams') {
                     $sqs_objects[$name1] = $qsd->getQSTeam();
-
                 } else if($matches[0] == 'Users'){
                     $sqs_objects[$name1] = $qsd->getQSUser();
 

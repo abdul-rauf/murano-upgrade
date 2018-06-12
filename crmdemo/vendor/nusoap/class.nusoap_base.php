@@ -4,6 +4,10 @@
 
 Modification information for LGPL compliance
 
+2016-05-23 - smorozov - Restored PHP 4 constructor for backward compatibility
+
+2016-01-22 - avlasov - PHP 7 compatibility
+
 r57813 - 2010-08-19 10:34:44 -0700 (Thu, 19 Aug 2010) - kjing - Author: John Mertic <jmertic@sugarcrm.com>
     Bug 39085 - When loading the opposite search panel via ajax on the ListViews, call the index action instead of the ListView action to avoid touching pre-MVC code by accident.
 
@@ -267,12 +271,21 @@ class nusoap_base {
 	var $xmlEntities = array('quot' => '"','amp' => '&',
 		'lt' => '<','gt' => '>','apos' => "'");
 
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function nusoap_base()
+    {
+        self::__construct();
+    }
+
 	/**
 	* constructor
 	*
 	* @access	public
 	*/
-	function nusoap_base() {
+    public function __construct()
+    {
 		$this->debugLevel = $GLOBALS['_transient']['static']['nusoap_base']['globalDebugLevel'];
 	}
 
@@ -1041,6 +1054,3 @@ function usleepWindows($usec)
 	}
 	while ($timePassed < $usec);
 }
-
-
-?>

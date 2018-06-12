@@ -35,9 +35,18 @@ class Monitor implements Trackable {
 	var $session_id;
 
     /**
+     * @deprecated Use __construct() instead
+     */
+    public function Monitor($name = '', $monitorId = '', $metadata = '', $store = '')
+    {
+        self::__construct($name, $monitorId, $metadata, $store);
+    }
+
+    /**
      * Monitor constructor
      */
-    function Monitor($name='', $monitorId='', $metadata='', $store='') {
+    public function __construct($name='', $monitorId='', $metadata='', $store='')
+    {
 
     	if(empty($metadata) || !SugarAutoLoader::fileExists($metadata)) {
     	   $GLOBALS['log']->error($GLOBALS['app_strings']['ERR_MONITOR_FILE_MISSING'] . "($metadata)");

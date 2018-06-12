@@ -7858,7 +7858,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Follow Link',
   'LBL_TOGGLE_VISIBILITY' => 'Toggle Visibility', // Record view header panel element
   'LBL_ACTIVITIES' => 'Activity Stream',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
   'LBL_TRADEMARK' => 'SugarCRM is a trademark of SugarCRM, Inc. All other company and product names may be trademarks of the respective companies with which they are associated.',
   'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ are trademarks of SugarCRM Inc.',
   'LBL_SEND_INVITE' => 'Send invite',
@@ -9005,7 +9005,7 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> All Rights Reserved.<br />SugarCRM is a trademark of SugarCRM, Inc. All other company and product names may be trademarks of the respective companies with which they are associated.',
+    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> All Rights Reserved.<br />SugarCRM is a trademark of SugarCRM, Inc. All other company and product names may be trademarks of the respective companies with which they are associated.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Scheduled Job Completed',
@@ -9182,7 +9182,7 @@ Sincerely, SugarCRM',
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Error. You entered an invalid operator.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Error. You entered an invalid filter.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_EXP_DATE_LOW' => 'Error. Expiration Date can not be before the date of publishing.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Error. The Approved status requires publishing date.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'The Publish Date is empty.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today\'s date.',
@@ -11054,6 +11054,7 @@ Sincerely, SugarCRM',
     'LBL_ALERT_TITLE_ERROR' => 'Error:',
     'LBL_ALERT_TITLE_LOADING' => 'Loading',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Your browser version is no longer supported or you are using an unsupported browser.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'The following browser versions are recommended: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Please see the {{link}} page for suggested browsers.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Supported Platforms',
 
@@ -11428,13 +11429,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Expired',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Draft',
-    'Expired' => 'Expired',
-    'In Review' => 'In Review',
-    'Published' => 'Published',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Admin Actions--',
@@ -11446,57 +11440,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Delete Selected Articles',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Has Attachments',
-        'none' => 'Has None',
-        'mime' => 'Specify Mime Type',
-        'name' => 'Specify Name',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Words';
   $app_list_strings['moduleListSingular']['Words'] = 'Word';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Create Article';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Top 5',
-    'Top_10' => 'Top 10',
-    'Top_20' => 'Top 20',
-    'Bot_5'  => 'Bottom 5',
-    'Bot_10' => 'Bottom 10',
-    'Bot_20' => 'Bottom 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'All',
-        'added' => 'Added Last 30 days',
-        'pending' => 'Pending my Approval',
-        'updated' =>'Updated Last 30 days',
-        'faqs' => 'FAQs',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'On',
-    'before' => 'Before',
-    'after' => 'After',
-    'between_dates' => 'Is Between',
-    'last_7_days' => 'Last 7 Days',
-    'next_7_days' => 'Next 7 Days',
-    'last_month' => 'Last Month',
-    'this_month' => 'This Month',
-    'next_month' => 'Next Month',
-    'last_30_days' => 'Last 30 Days',
-    'next_30_days' => 'Next 30 Days',
-    'last_year' => 'Last Year',
-    'this_year' => 'This Year',
-    'next_year' => 'Next Year',
-    'isnull' => 'Is Null',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12358,6 +12304,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "All Contacts",
+    "email" => "Email Only",
+    "phone" => "Phone Only",
     "prem" => "Premium Only"
 );
 

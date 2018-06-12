@@ -27,15 +27,12 @@ $focus = BeanFactory::retrieveBean($_REQUEST['module_name'],$_REQUEST['record'])
 
 class Popup_Picker
 {
-
-
-	/*
-	 *
-	 */
-	function Popup_Picker()
-	{
-
-	}
+    /**
+     * @deprecated
+     */
+    public function Popup_Picker()
+    {
+    }
 
 	/**
 	 *
@@ -169,4 +166,3 @@ EOHTML;
 		insert_popup_footer();
     }
 } // end of class Popup_Picker
-?>

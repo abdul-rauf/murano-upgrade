@@ -79,10 +79,7 @@ class Employee extends Person {
 	var $new_schema = true;
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function Employee()
     {
@@ -154,7 +151,8 @@ class Employee extends Person {
         return $user_fields;
 	}
 
-	function list_view_parse_additional_sections(&$list_form, $xTemplateSection){
+    public function list_view_parse_additional_sections(&$list_form)
+    {
 		return $list_form;
 	}
 

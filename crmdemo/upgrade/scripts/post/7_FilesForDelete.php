@@ -109,7 +109,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             'styleguide/less/twitter-bootstrap/tiptip.less',
             'styleguide/less/twitter-bootstrap/toggle.less',
             // BR 796 api files
-            'clients/mobile/api/CurrentUserMobileApi.php',
             'clients/mobile/api/MetadataMobileApi.php',
             'clients/portal/api/MetadataPortalApi.php',
             'clients/base/views/activitystream-bottom/activitystream-bottom.php',
@@ -184,6 +183,14 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             'vendor/PHPMailer/',
             // PAT-2081 Move Google API library to composer
             'include/google-api-php-client',
+            // Delete files that should have been deleted before
+            'upgrade/scripts/post/5_MinifyJS.php',
+            // BR-4286 - Retire unused MVC action files
+            'modules/Calendar/views/view.createinvitee.php',
+            'modules/Calendar/views/view.getgr.php',
+            'modules/Calendar/views/view.getgrusers.php',
+            // BR-3766 - Remove unused non-INT flagged file
+            'modules/UpgradeWizard/populateColumns.php',
         );
 
         // must be upgrading from between 710 to 722
@@ -216,6 +223,22 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             $files[] = 'include/Expressions/Expression/Numeric/CurrencyMultiplyExpression.php';
             $files[] = 'include/Expressions/Expression/Numeric/CurrencyDivideExpression.php';
             $files[] = 'include/Expressions/Expression/Numeric/CurrencySumRelatedExpression.php';
+        }
+
+        if (version_compare($this->from_version, '7.7.2.1', '<')) {
+            $files[] = 'vendor/phpmailer/phpmailer/changelog.md';
+            $files[] = 'vendor/phpmailer/phpmailer/README.md';
+            $files[] = 'vendor/phpmailer/phpmailer/examples/LGPLv3.txt';
+            $files[] = 'vendor/phpmailer/phpmailer/extras/class.html2text.php';
+            $files[] = 'vendor/phpmailer/phpmailer/test';
+            $files[] = 'vendor/phpmailer/phpmailer/docs';
+            $files[] = 'vendor/phpmailer/phpmailer/language/phpmailer.lang-br.php';
+            $files[] = 'vendor/phpmailer/phpmailer/language/phpmailer.lang-cz.php';
+            $files[] = 'vendor/phpmailer/phpmailer/language/phpmailer.lang-dk.php';
+            $files[] = 'vendor/phpmailer/phpmailer/language/phpmailer.lang-no.php';
+            $files[] = 'vendor/phpmailer/phpmailer/language/phpmailer.lang-se.php';
+            $files[] = 'vendor/phpmailer/phpmailer/README.md';
+            $files[] = 'vendor/phpmailer/phpmailer/travis.phpunit.xml.dist';
         }
 
         if (version_compare($this->from_version, '7.5', '<')) {
@@ -275,7 +298,11 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
                 $files[] = 'vendor/OneLogin/Saml';
             }
         }
-        
+
+        if (version_compare($this->from_version, '7.7.1', '<')) {
+            $files[] = 'jssource/src_files';
+        }
+
         if (version_compare($this->from_version, '7.7', '<')) {
             $files[] = 'clients/base/views/interactionschart';
             $files[] = 'include/javascript/sugar7/plugins/Timeago.js';
@@ -339,6 +366,44 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             $files[] = 'modules/pmse_Emails_Templates/metadata/quickcreatedefs.php';
             $files[] = 'modules/pmse_Inbox/metadata/quickcreatedefs.php';
             $files[] = 'modules/pmse_Project/metadata/quickcreatedefs.php';
+        }
+
+        // BR-BR-4979... Remove Zend Mail
+        if (version_compare($this->from_version, '7.7.2.1', '<')) {
+            $files[] = 'vendor/Zend/Mail.php';
+            $files[] = 'vendor/Zend/Mail/Exception.php';
+            $files[] = 'vendor/Zend/Mail/Message.php';
+            $files[] = 'vendor/Zend/Mail/Message/File.php';
+            $files[] = 'vendor/Zend/Mail/Message/Interface.php';
+            $files[] = 'vendor/Zend/Mail/Part.php';
+            $files[] = 'vendor/Zend/Mail/Part/File.php';
+            $files[] = 'vendor/Zend/Mail/Part/Interface.php';
+            $files[] = 'vendor/Zend/Mail/Protocol/Abstract.php';
+            $files[] = 'vendor/Zend/Mail/Protocol/Exception.php';
+            $files[] = 'vendor/Zend/Mail/Protocol/Imap.php';
+            $files[] = 'vendor/Zend/Mail/Protocol/Pop3.php';
+            $files[] = 'vendor/Zend/Mail/Protocol/Smtp.php';
+            $files[] = 'vendor/Zend/Mail/Protocol/Smtp/Auth/Crammd5.php';
+            $files[] = 'vendor/Zend/Mail/Protocol/Smtp/Auth/Login.php';
+            $files[] = 'vendor/Zend/Mail/Protocol/Smtp/Auth/Plain.php';
+            $files[] = 'vendor/Zend/Mail/Storage.php';
+            $files[] = 'vendor/Zend/Mail/Storage/Abstract.php';
+            $files[] = 'vendor/Zend/Mail/Storage/Exception.php';
+            $files[] = 'vendor/Zend/Mail/Storage/Folder.php';
+            $files[] = 'vendor/Zend/Mail/Storage/Folder/Interface.php';
+            $files[] = 'vendor/Zend/Mail/Storage/Folder/Maildir.php';
+            $files[] = 'vendor/Zend/Mail/Storage/Folder/Mbox.php';
+            $files[] = 'vendor/Zend/Mail/Storage/Imap.php';
+            $files[] = 'vendor/Zend/Mail/Storage/Maildir.php';
+            $files[] = 'vendor/Zend/Mail/Storage/Mbox.php';
+            $files[] = 'vendor/Zend/Mail/Storage/Pop3.php';
+            $files[] = 'vendor/Zend/Mail/Storage/Writable/Interface.php';
+            $files[] = 'vendor/Zend/Mail/Storage/Writable/Maildir.php';
+            $files[] = 'vendor/Zend/Mail/Transport/Abstract.php';
+            $files[] = 'vendor/Zend/Mail/Transport/Exception.php';
+            $files[] = 'vendor/Zend/Mail/Transport/File.php';
+            $files[] = 'vendor/Zend/Mail/Transport/Sendmail.php';
+            $files[] = 'vendor/Zend/Mail/Transport/Smtp.php';
         }
 
         $this->fileToDelete($files);

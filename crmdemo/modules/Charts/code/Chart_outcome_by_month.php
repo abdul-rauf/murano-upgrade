@@ -25,10 +25,13 @@ class Chart_outcome_by_month
 {
 	var $modules = array('Opportunities');
 	var $order = 0;
-function Chart_outcome_by_month()
-{
 
-}
+    /**
+     * @deprecated
+     */
+    public function Chart_outcome_by_month()
+    {
+    }
 
 function draw($extra_tools)
 {
@@ -129,6 +132,7 @@ $cache_file_name = sugar_cached("xml/").$current_user->getUserPrivGuid()."_outco
 
 $GLOBALS['log']->debug("cache file name is: $cache_file_name");
 
+$date_start = isset($date_start) ? htmlspecialchars(substr($date_start, 0, 4), ENT_QUOTES, 'UTF-8') : '' ;
 
 global $app_strings;
 $tools='<div align="right"><a href="index.php?module='.$currentModule.'&action='. $action .'&obm_refresh=true" class="tabFormAdvLink">'.SugarThemeRegistry::current()->getImage('refresh','border="0" align="absmiddle"', null,null,'.gif',$mod_strings['LBL_REFRESH']).'&nbsp;'.$current_module_strings['LBL_REFRESH'].'</a>&nbsp;&nbsp;<a href="javascript: toggleDisplay(\'outcome_by_month_edit\');" class="tabFormAdvLink">'.SugarThemeRegistry::current()->getImage('edit','border="0" align="absmiddle"',null,null,'.gif',$mod_strings['LBL_EDIT']).'&nbsp;'. $current_module_strings['LBL_EDIT'].'</a>&nbsp;&nbsp;'.$extra_tools.'</div>';
@@ -152,7 +156,10 @@ if (empty($_SESSION['obm_ids'])) $_SESSION['obm_ids'] = "";
 <table cellpadding="0" cellspacing="0" border="0" class="edit view" align="center">
 <tr>
 	<td valign='top' nowrap ><b><?php echo $current_module_strings['LBL_YEAR']?></b><br><span class="dateFormat"><?php echo $app_strings['NTC_YEAR_FORMAT']?></span></td>
-	<td valign='top' ><input class="text" name="obm_year" size='12' maxlength='10' id='obm_year'  value='<?php if (isset($date_start)) echo substr($date_start,0,4)?>'>&nbsp;&nbsp;</td>
+	<td valign='top' >
+		<input class="text" name="obm_year" size='12' maxlength='10' id='obm_year'  value='<?php echo $date_start;?>'>
+		&nbsp;&nbsp;
+	</td>
 	<td valign='top'><b><?php echo $current_module_strings['LBL_USERS'];?></b></td>
 	<td valign='top'><select name="obm_ids[]" multiple size='3'><?php echo get_select_options_with_id(get_user_array(false),$ids); ?></select></td>
 	<td align="right" valign="top"><input class="button" onclick="return verify_chart_data_outcome_by_month();" type="submit" title="<?php echo $app_strings['LBL_SELECT_BUTTON_TITLE']; ?>" value="<?php echo $app_strings['LBL_SELECT_BUTTON_LABEL']?>" /><input class="button" onClick="javascript: toggleDisplay('outcome_by_month_edit');" type="button" title="<?php echo $app_strings['LBL_CANCEL_BUTTON_TITLE']; ?>" accessKey="<?php echo $app_strings['LBL_CANCEL_BUTTON_KEY'];?>" value="<?php echo $app_strings['LBL_CANCEL_BUTTON_LABEL']?>"/></td>
@@ -209,13 +216,14 @@ echo get_validate_chart_js();
 			$GLOBALS['log']->debug($user_id);
 			$GLOBALS['log']->debug("cache_file_name is: $cache_file_name");
 
+            $opp = BeanFactory::getBean('Opportunities');
 			$where = "";
 			//build the where clause for the query that matches $user
 			$count = count($user_id);
 			$id = array();
 			if ($count>0) {
 				foreach ($user_id as $the_id) {
-					$id[] = "'".$the_id."'";
+                    $id[] = $opp->db->quoted($the_id);
 				}
 				$ids = join(",",$id);
 				$where .= "opportunities.assigned_user_id IN ($ids) ";
@@ -226,7 +234,6 @@ echo get_validate_chart_js();
 			$dateStartDisplay = $timedate->asUserDate($timedate->fromString($date_start));
 			$dateEndDisplay = $timedate->asUserDate($timedate->fromString($date_end));
 
-			$opp = BeanFactory::getBean('Opportunities');
 			//build the where clause for the query that matches $date_start and $date_end
 			$where .= "AND opportunities.date_closed >= ".db_convert("'".$date_start."'",'date')." AND opportunities.date_closed <= ".db_convert("'".$date_end."'",'date')." AND opportunities.deleted=0";
 			$query = "SELECT sales_stage,".db_convert('opportunities.date_closed','date_format',array("'%Y-%m'"),array("'YYYY-MM'"))." as m, sum(amount_usdollar/1000) as total, count(*) as opp_count FROM opportunities ";
@@ -431,5 +438,3 @@ echo get_validate_chart_js();
 	}
 
 }
-
-?>

@@ -13,6 +13,8 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('modules/Reports/config.php');
 require_once('include/api/SugarApiException.php');
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 class Report
 {
     var $result;
@@ -96,6 +98,9 @@ class Report
     // this is a var not in metadata that is set to bypass the sugar_die calls used throughout this class
     public $fromApi = false;
 
+    // an empty bean
+    protected $moduleBean;
+
     /**
      *
      * Default visibility options
@@ -148,13 +153,28 @@ class Report
      */
     public $extModules = array();
 
-    function Report($report_def_str = '', $filters_def_str = '', $panels_def_str = '')
+    /**
+     * @var \Sugarcrm\Sugarcrm\Security\InputValidation\Request
+     */
+    protected $request;
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function Report()
+    {
+        self::__construct();
+    }
+
+    public function __construct($report_def_str = '', $filters_def_str = '', $panels_def_str = '')
     {
         global $current_user, $current_language, $app_list_strings;
         if (!isset($current_user) || empty($current_user)) {
 
             $current_user = BeanFactory::getBean('Users', '1');
         }
+
+        $this->request = InputValidation::getService();
 
         //Scheduled reports don't have $_REQUEST.
         if ((!isset($_REQUEST['module']) || $_REQUEST['module'] == 'Reports') && !defined('SUGAR_PHPUNIT_RUNNER')) {
@@ -166,7 +186,8 @@ class Report
 
         $this->report_max = (!empty($GLOBALS['sugar_config']['list_report_max_per_page']))
                 ? $GLOBALS['sugar_config']['list_report_max_per_page'] : 100;
-        $this->report_offset = (!empty($_REQUEST['report_offset'])) ? $_REQUEST['report_offset'] : 0;
+        $this->report_offset = (int) $this->request->getValidInputRequest('report_offset', null, 0);
+
         if ($this->report_offset < 0) $this->report_offset = 0;
         $this->time_date_obj = new TimeDate();
         $this->name = $mod_strings['LBL_UNTITLED'];
@@ -199,6 +220,7 @@ class Report
         }
         if (!empty($this->report_def['module'])) {
             $this->module = $this->report_def['module'];
+            $this->moduleBean = BeanFactory::getBean($this->module);
         }
         if (!empty($this->report_def['report_type'])) {
             $this->report_type = $this->report_def['report_type'];
@@ -1875,10 +1897,12 @@ class Report
 
         $where_auto = " " . $this->focus->table_name . ".deleted=0 \n";
 
+        // related custom fields could have record in the {MODULE}_cstm table and at the same time could not have
+        // record in the related module table. So we need to check for NULL value.
         foreach($this->extModules as $tableAlias => $extModule) {
             if (isset($extModule->deleted)) {
-               $where_auto .= " AND " . $tableAlias . ".deleted=0 \n";             
-            }            
+                $where_auto .= ' AND ' . $this->db->convert($tableAlias . '.deleted', 'IFNULL', array(0)) . "=0 \n";
+            }
         }
         
         // Start ACL check
@@ -2360,12 +2384,10 @@ class Report
                     }
                 } // if
                 
-                $module_bean = BeanFactory::getBean($this->module);
-                if (is_array($module_bean->field_defs)) {
-                    if (isset($module_bean->field_defs[$display_column['type']])) {
-                        if (isset($module_bean->field_defs[$display_column['type']]['options'])) {
-                            
-                            $trans_options = translate($module_bean->field_defs[$display_column['type']]['options']);
+                if (is_array($this->moduleBean->field_defs)) {
+                    if (isset($this->moduleBean->field_defs[$display_column['type']])) {
+                        if (isset($this->moduleBean->field_defs[$display_column['type']]['options'])) {
+                            $trans_options = translate($this->moduleBean->field_defs[$display_column['type']]['options']);
                                                         
                             if (isset($trans_options[$display_column['fields'][$field_name]])) {
                                 $display = $trans_options[$display_column['fields'][$field_name]];
@@ -2474,16 +2496,15 @@ class Report
             } // else
         }
 
-        if (empty($_REQUEST['record'])) {
-            $_REQUEST['record'] = -1;
-        }
+        $record = $this->request->getValidInputRequest('record', 'Assert\Guid', -1) ?: -1;
+        $assignedUserId = $this->request->getValidInputRequest('assigned_user_id', 'Assert\Guid');
 
         require_once('include/formbase.php');
         populateFromPost('', $saved_report);
 
         $result = $saved_report->save_report(
-            $_REQUEST['record'],
-            $_REQUEST['assigned_user_id'],
+            $record,
+            $assignedUserId,
             $report_name,
             $this->module,
             $report_type,

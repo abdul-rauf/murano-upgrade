@@ -10,6 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 require_once('include/tabs.php');
 require_once('include/ListView/ListViewSmarty.php');
 require_once('include/TemplateHandler/TemplateHandler.php');
@@ -53,8 +56,22 @@ require_once('include/EditView/EditView2.php');
      */
     protected $options;
 
-    public function SearchForm($seed, $module, $action = 'index', $options = array())
+     /**
+      * @var Request
+      */
+     protected $request;
+
+     /**
+      * @deprecated Use __construct() instead
+      */
+     public function SearchForm($seed, $module, $action = 'index', $options = array())
+     {
+         self::__construct($seed, $module, $action, $options);
+     }
+
+    public function __construct($seed, $module, $action = 'index', $options = array())
     {
+        $this->request = InputValidation::getService();
  		$this->th = new TemplateHandler();
  		$this->th->loadSmarty();
 		$this->seed = $seed;
@@ -120,13 +137,14 @@ require_once('include/EditView/EditView2.php');
         }
  	}
 
- 	function display($header = true){
+    public function display($header = true, $ajaxSave = false)
+    {
     	global $theme, $timedate, $current_user;
  		$header_txt = '';
  		$footer_txt = '';
  		$return_txt = '';
-		$this->th->ss->assign('module', $this->module);
-		$this->th->ss->assign('action', $this->action);
+		$this->th->ss->assign('module', htmlspecialchars($this->module, ENT_QUOTES, "UTF-8"));
+		$this->th->ss->assign('action', htmlspecialchars($this->action, ENT_QUOTES, "UTF-8"));
 		SugarACL::listFilter($this->module, $this->fieldDefs, array("owner_override" => true),
 		    array("use_value" => true, "suffix" => '_'.$this->parsedView, "add_acl" => true));
 		$this->th->ss->assign('displayView', $this->displayView);
@@ -300,27 +318,32 @@ require_once('include/EditView/EditView2.php');
         if(isset($_REQUEST['saved_search_select']) && $_REQUEST['saved_search_select']!='_none') {
             $saved_search=BeanFactory::getBean('SavedSearch');
             $saved_search->retrieveSavedSearch($_REQUEST['saved_search_select']);
+        } else {
+            $saved_search = null;
         }
 
-        $str = '<script>';
-        if(!empty($_REQUEST['displayColumns']))
-            $str .= 'SUGAR.savedViews.displayColumns = "' . $_REQUEST['displayColumns'] . '";';
-        elseif(isset($saved_search->contents['displayColumns']) && !empty($saved_search->contents['displayColumns']))
-            $str .= 'SUGAR.savedViews.displayColumns = "' . $saved_search->contents['displayColumns'] . '";';
-        if(!empty($_REQUEST['hideTabs']))
-            $str .= 'SUGAR.savedViews.hideTabs = "' . $_REQUEST['hideTabs'] . '";';
-        elseif(isset($saved_search->contents['hideTabs']) && !empty($saved_search->contents['hideTabs']))
-            $str .= 'SUGAR.savedViews.hideTabs = "' . $saved_search->contents['hideTabs'] . '";';
-        if(!empty($_REQUEST['orderBy']))
-            $str .= 'SUGAR.savedViews.selectedOrderBy = "' . $_REQUEST['orderBy'] . '";';
-        elseif(isset($saved_search->contents['orderBy']) && !empty($saved_search->contents['orderBy']))
-            $str .= 'SUGAR.savedViews.selectedOrderBy = "' . $saved_search->contents['orderBy'] . '";';
-        if(!empty($_REQUEST['sortOrder']))
-            $str .= 'SUGAR.savedViews.selectedSortOrder = "' . $_REQUEST['sortOrder'] . '";';
-        elseif(isset($saved_search->contents['sortOrder']) && !empty($saved_search->contents['sortOrder']))
-            $str .= 'SUGAR.savedViews.selectedSortOrder = "' . $saved_search->contents['sortOrder'] . '";';
+        $params = array('displayColumns', 'hideTabs', 'orderBy', 'sortOrder');
+        $values = $script = array();
 
-        $str .= '</script>';
+        foreach ($params as $param) {
+            if (!empty($saved_search->contents[$param])) {
+                $default = $saved_search->contents[$param];
+            } else {
+                $default = null;
+            }
+            $values[$param] = $this->request->getValidInputRequest($param, null, $default);
+        }
+
+        $values = array_filter($values);
+        if (count($values) == 0) {
+            return '';
+        }
+
+        foreach ($values as $param => $value) {
+            $script[] = 'SUGAR.savedViews.' . $param . ' = ' . json_encode($value) . ';';
+        }
+
+        $str = '<script>' . implode("\n", $script) . '</script>';
 
         return $str;
     }

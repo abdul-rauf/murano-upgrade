@@ -17,8 +17,11 @@
  */
 class SugarFieldHandler
 {
-
-    function SugarFieldHandler() {
+    /**
+     * @deprecated
+     */
+    public function SugarFieldHandler()
+    {
     }
 
     static function fixupFieldType($field) {

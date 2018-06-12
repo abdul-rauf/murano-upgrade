@@ -10,24 +10,28 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- 
-// $Id: tabs.php 42346 2008-12-04 16:09:08Z jmertic $
 
-
-
-class SugarWidgetTabs extends SugarWidget
+class SugarWidgetTabs
 {
  var $tabs;
  var $current_key;
 
- function SugarWidgetTabs(&$tabs,$current_key,$jscallback)
- {
-   $this->tabs = $tabs;
-   $this->current_key = $current_key;
-   $this->jscallback = $jscallback;
- }
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SugarWidgetTabs(&$tabs, $current_key, $jscallback)
+    {
+        self::__construct($tabs, $current_key, $jscallback);
+    }
 
- function display()
+    public function __construct(&$tabs,$current_key,$jscallback)
+    {
+        $this->tabs = $tabs;
+        $this->current_key = $current_key;
+        $this->jscallback = $jscallback;
+    }
+
+    public function display(&$layout_def)
  {
 	ob_start();
 ?>
@@ -102,4 +106,3 @@ function selectTabCSS(key)
         return $ob_contents;
 	}
 }
-?>

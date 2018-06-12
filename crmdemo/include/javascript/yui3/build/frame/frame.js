@@ -5,5 +5,1047 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add("frame",function(e,t){var n=e.Lang,r="contentready",i="host",s=function(){s.superclass.constructor.apply(this,arguments)};e.extend(s,e.Plugin.Base,{_ready:null,_rendered:null,_iframe:null,_instance:null,_create:function(t){var n,r="",i,o=this.get("src")===s.ATTRS.src.value,u=this.get("extracss")?'<style id="extra_css">'+this.get("extracss")+"</style>":"";this._iframe=e.one(e.config.doc.createElement("iframe")),this._iframe.setAttrs(s.IFRAME_ATTRS),this._iframe.setStyle("visibility","hidden"),this._iframe.set("src",this.get("src")),this.get("container").append(this._iframe),this._iframe.set("height","99%"),o&&(r=e.Lang.sub(s.PAGE_HTML,{DIR:this.get("dir"),LANG:this.get("lang"),TITLE:this.get("title"),META:s.META,LINKED_CSS:this.get("linkedcss"),CONTENT:this.get("content"),BASE_HREF:this.get("basehref"),DEFAULT_CSS:s.DEFAULT_CSS,EXTRA_CSS:u}),e.config.doc.compatMode!=="BackCompat"&&(r=s.getDocType()+"\n"+r)),n=this._resolveWinDoc(),r&&(n.doc.open(),n.doc.write(r),n.doc.close()),n.doc.documentElement?t(n):i=e.later(1,this,function(){n.doc&&n.doc.documentElement&&(t(n),i.cancel())},null,!0)},_resolveWinDoc:function(t){var n=t?t:{};return n.win=e.Node.getDOMNode(this._iframe.get("contentWindow")),n.doc=e.Node.getDOMNode(this._iframe.get("contentWindow.document")),n.doc||(n.doc=e.config.doc),n.win||(n.win=e.config.win),n},_onDomEvent:function(t){var n,r;if(!e.Node.getDOMNode(this._iframe))return;t.frameX=t.frameY=0,(t.pageX>0||t.pageY>0)&&t.type.substring(0,3)!=="key"&&(r=this._instance.one("win"),n=this._iframe.getXY(),t.frameX=n[0]+t.pageX-r.get("scrollLeft"),t.frameY=n[1]+t.pageY-r.get("scrollTop")),t.frameTarget=t.target,t.frameCurrentTarget=t.currentTarget,t.frameEvent=t,this.fire("dom:"+t.type,t)},initializer:function(){var e=this.get(i);e&&(e.frame=this),this.publish("ready",{emitFacade:!0,defaultFn:this._defReadyFn})},destructor:function(){var e=this.getInstance();e.one("doc").detachAll(),e=null,this._iframe.remove()},_DOMPaste:function(e){var t=this.getInstance(),n="",r=t.config.win;e._event.originalTarget&&(n=e._event.originalTarget),e._event.clipboardData&&(n=e._event.clipboardData.getData("Text")),r.clipboardData&&(n=r.clipboardData.getData("Text"),n===""&&(r.clipboardData.setData("Text",n)||(n=null))),e.frameTarget=e.target,e.frameCurrentTarget=e.currentTarget,e.frameEvent=e,n?e.clipboardData={data:n,getData:function(){return n}}:e.clipboardData=null,this.fire("dom:paste",e)},_defReadyFn:function(){var t=this.getInstance();e.each(s.DOM_EVENTS,function(n,r){var i=e.bind(this._onDomEvent,this),o=e.UA.ie&&s.THROTTLE_TIME>0?e.throttle(i,s.THROTTLE_TIME):i;t.Node.DOM_EVENTS[r]||(t.Node.DOM_EVENTS[r]=1),n===1&&r!=="focus"&&r!=="blur"&&r!=="paste"&&(r.substring(0,3)==="key"?t.on(r,o,t.config.doc):t.on(r,i,t.config.doc))},this),t.Node.DOM_EVENTS.paste=1,t.on("paste",e.bind(this._DOMPaste,this),t.one("body")),t.on("focus",e.bind(this._onDomEvent,this),t.config.win),t.on("blur",e.bind(this._onDomEvent,this),t.config.win),t.__use=t.use,t.use=e.bind(this.use,this),this._iframe.setStyles({visibility:"inherit"}),t.one("body").setStyle("display","block")},_fixIECursors:function(){var e=this.getInstance(),t=e.all("table"),n=e.all("br"),r;t.size()&&n.size()&&(r=t.item(0).get("sourceIndex"),n.each(function(t){var n=t.get("parentNode"),i=n.get("children"),s=n.all(">br");n.test("div")&&(i.size()>2?t.replace(e.Node.create("<wbr>")):t.get("sourceIndex")>r?s.size()&&t.replace(e.Node.create("<wbr>")):s.size()>1&&t.replace(e.Node.create("<wbr>")))}))},_onContentReady:function(t){if(!this._ready){this._ready=!0;var n=this.getInstance(),r=e.clone(this.get("use"));this.fire("contentready"),t&&(n.config.doc=e.Node.getDOMNode(t.target)),r.push(e.bind(function(){n.EditorSelection&&(n.EditorSelection.DEFAULT_BLOCK_TAG=this.get("defaultblock")),this.get("designMode")&&(e.UA.ie?(n.config.doc.body.contentEditable="true",this._ieSetBodyHeight(),n.on("keyup",e.bind(this._ieSetBodyHeight,this),n.config.doc)):n.config.doc.designMode="on"),this.fire("ready")},this)),n.use.apply(n,r),n.one("doc").get("documentElement").addClass("yui-js-enabled")}},_ieHeightCounter:null,_ieSetBodyHeight:function(t){this._ieHeightCounter||(this._ieHeightCounter=0),this._ieHeightCounter++;var n=!1,r,i,s;t||(n=!0);if(t){switch(t.keyCode){case 8:case 13:n=!0}if(t.ctrlKey||t.shiftKey)n=!0}if(n)try{r=this.getInstance(),i=this._iframe.get("offsetHeight"),s=r.config.doc.body.scrollHeight,i>s?(i=i-15+"px",r.config.doc.body.style.height=i):r.config.doc.body.style.height="auto"}catch(t){this._ieHeightCounter<100&&e.later(200,this,this._ieSetBodyHeight)}},_resolveBaseHref:function(t){if(!t||t==="")t=e.config.doc.location.href,t.indexOf("?")!==-1&&(t=t.substring(0,t.indexOf("?"))),t=t.substring(0,t.lastIndexOf("/"))+"/";return t},_getHTML:function(e){if(this._ready){var t=this.getInstance();e=t.one("body").get("innerHTML")}return e},_setHTML:function(t){if(this._ready){var n=this.getInstance();n.one("body").set("innerHTML",t)}else this.once(r,e.bind(this._setHTML,this,t));return t},_getLinkedCSS:function(t){e.Lang.isArray(t)||(t=[t]);var n="";return this._ready?n=t:e.each(t,function(e){e&&(n+='<link rel="stylesheet" href="'+e+'" type="text/css">')}),n},_setLinkedCSS:function(e){if(this._ready){var t=this.getInstance();t.Get.css(e)}return e},_setExtraCSS:function(t){if(this._ready){var n=this.getInstance(),i=n.one("#extra_css");i.remove(),n.one("head").append('<style id="extra_css">'+t+"</style>")}else this.once(r,e.bind(this._setExtraCSS,this,t));return t},_instanceLoaded:function(t){this._instance=t,this._onContentReady();var n=this._instance.config.doc;if(this.get("designMode")&&!e.UA.ie)try{n.execCommand("styleWithCSS",!1,!1),n.execCommand("insertbronreturn",!1,!1)}catch(r){}},use:function(){var t=this.getInstance(),n=e.Array(arguments),r=!1;return e.Lang.isFunction(n[n.length-1])&&(r=n.pop()),r&&n.push(function(){r.apply(t,arguments)}),t.__use.apply(t,n)},delegate:function(e,t,n,r){var i=this.getInstance();return i?(r||(r=n,n="body"),i.delegate
-(e,t,n,r)):!1},getInstance:function(){return this._instance},render:function(t){return this._rendered?this:(this._rendered=!0,t&&this.set("container",t),this._create(e.bind(function(t){var n,r,s=e.bind(function(e){this._instanceLoaded(e)},this),o=e.clone(this.get("use")),u={debug:!1,win:t.win,doc:t.doc},a=e.bind(function(){u=this._resolveWinDoc(u),n=YUI(u),n.host=this.get(i);try{n.use("node-base",s),r&&clearInterval(r)}catch(e){r=setInterval(function(){a()},350)}},this);o.push(a),e.use.apply(e,o)},this)),this)},_handleFocus:function(){var e=this.getInstance(),t=new e.EditorSelection,n,r,i,s;t.anchorNode&&(n=t.anchorNode,n.test("p")&&n.get("innerHTML")===""&&(n=n.get("parentNode")),r=n.get("childNodes"),r.size()&&(r.item(0).test("br")?t.selectNode(n,!0,!1):r.item(0).test("p")?(n=r.item(0).one("br.yui-cursor"),n&&(n=n.get("parentNode")),n||(n=r.item(0).get("firstChild")),n||(n=r.item(0)),n&&t.selectNode(n,!0,!1)):(i=e.one("br.yui-cursor"),i&&(s=i.get("parentNode"),s&&t.selectNode(s,!0,!1)))))},_validateLinkedCSS:function(e){return n.isString(e)||n.isArray(e)},focus:function(t){if(e.UA.ie&&e.UA.ie<9){try{e.one("win").focus(),this.getInstance()&&this.getInstance().one("win")&&this.getInstance().one("win").focus()}catch(n){}t===!0&&this._handleFocus(),e.Lang.isFunction(t)&&t()}else try{e.one("win").focus(),e.later(100,this,function(){this.getInstance()&&this.getInstance().one("win")&&this.getInstance().one("win").focus(),t===!0&&this._handleFocus(),e.Lang.isFunction(t)&&t()})}catch(r){}return this},show:function(){this._iframe.setStyles({position:"static",left:""});if(e.UA.gecko){try{this.getInstance()&&(this.getInstance().config.doc.designMode="on")}catch(t){}this.focus()}return this},hide:function(){return this._iframe.setStyles({position:"absolute",left:"-999999px"}),this}},{THROTTLE_TIME:100,DOM_EVENTS:{dblclick:1,click:1,paste:1,mouseup:1,mousedown:1,keyup:1,keydown:1,keypress:1,activate:1,deactivate:1,beforedeactivate:1,focusin:1,focusout:1},DEFAULT_CSS:"body { background-color: #fff; font: 13px/1.22 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small; } a, a:visited, a:hover { color: blue !important; text-decoration: underline !important; cursor: text !important; } img { cursor: pointer !important; border: none; }",IFRAME_ATTRS:{border:"0",frameBorder:"0",marginWidth:"0",marginHeight:"0",leftMargin:"0",topMargin:"0",allowTransparency:"true",width:"100%",height:"99%"},PAGE_HTML:'<html dir="{DIR}" lang="{LANG}"><head><title>{TITLE}</title>{META}<base href="{BASE_HREF}"/>{LINKED_CSS}<style id="editor_css">{DEFAULT_CSS}</style>{EXTRA_CSS}</head><body>{CONTENT}</body></html>',getDocType:function(){var t=e.config.doc.doctype,n=s.DOC_TYPE;return t?n="<!DOCTYPE "+t.name+(t.publicId?" "+t.publicId:"")+(t.systemId?" "+t.systemId:"")+">":e.config.doc.all&&(t=e.config.doc.all[0],t.nodeType&&t.nodeType===8&&t.nodeValue&&t.nodeValue.toLowerCase().indexOf("doctype")!==-1&&(n="<!"+t.nodeValue+">")),n},DOC_TYPE:'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">',META:'<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=7">',NAME:"frame",NS:"frame",ATTRS:{title:{value:"Blank Page"},dir:{value:"ltr"},lang:{value:"en-US"},src:{value:"javascript"+(e.UA.ie?":false":":")+";"},designMode:{writeOnce:!0,value:!1},content:{validator:n.isString,value:"<br>",setter:"_setHTML",getter:"_getHTML"},basehref:{value:!1,getter:"_resolveBaseHref"},use:{writeOnce:!0,value:["node","node-style","selector-css3"]},container:{value:"body",setter:function(t){return e.one(t)}},node:{readOnly:!0,value:null,getter:function(){return this._iframe}},id:{writeOnce:!0,getter:function(t){return t||(t="iframe-"+e.guid()),t}},linkedcss:{validator:"_validateLinkedCSS",getter:"_getLinkedCSS",setter:"_setLinkedCSS"},extracss:{validator:n.isString,setter:"_setExtraCSS"},defaultblock:{value:"p"}}}),e.namespace("Plugin"),e.Plugin.Frame=s,e.Frame=s},"3.15.0",{requires:["base","node","plugin","selector-css3","yui-throttle"]});
+YUI.add('frame', function (Y, NAME) {
+
+    /*jshint maxlen: 500 */
+    /**
+     * Creates a wrapper around an iframe. It loads the content either from a local
+     * file or from script and creates a local YUI instance bound to that new window and document.
+     * @class Frame
+     * @for Frame
+     * @extends Base
+     * @constructor
+     * @module editor
+     * @submodule frame
+     */
+
+    var Lang = Y.Lang,
+
+        EVENT_CONTENT_READY = 'contentready',
+
+        HOST = 'host',
+
+    Frame = function() {
+        Frame.superclass.constructor.apply(this, arguments);
+    };
+
+
+    Y.extend(Frame, Y.Plugin.Base, {
+        /**
+        * @private
+        * @property _ready
+        * @description Internal reference set when the content is ready.
+        * @type Boolean
+        */
+        _ready: null,
+        /**
+        * @private
+        * @property _rendered
+        * @description Internal reference set when render is called.
+        * @type Boolean
+        */
+        _rendered: null,
+        /**
+        * @private
+        * @property _iframe
+        * @description Internal Node reference to the iFrame or the window
+        * @type Node
+        */
+        _iframe: null,
+        /**
+        * @private
+        * @property _instance
+        * @description Internal reference to the YUI instance bound to the iFrame or window
+        * @type YUI
+        */
+        _instance: null,
+        /**
+        * @private
+        * @method _create
+        * @description Create the iframe or Window and get references to the Document & Window
+        * @return {Object} Hash table containing references to the new Document & Window
+        */
+        _create: function(cb) {
+            var res, html = '', timer,
+                //if the src attr is different than the default, don't create the document
+                create = (this.get('src') === Frame.ATTRS.src.value),
+                extra_css = ((this.get('extracss')) ? '<style id="extra_css">' + this.get('extracss') + '</style>' : '');
+
+            this._iframe = Y.one(Y.config.doc.createElement('iframe'));
+            this._iframe.setAttrs(Frame.IFRAME_ATTRS);
+
+            this._iframe.setStyle('visibility', 'hidden');
+            this._iframe.set('src', this.get('src'));
+            this.get('container').append(this._iframe);
+            this._iframe.set('height', '99%');
+
+            if (create) {
+                html = Y.Lang.sub(Frame.PAGE_HTML, {
+                    DIR: this.get('dir'),
+                    LANG: this.get('lang'),
+                    TITLE: this.get('title'),
+                    META: Frame.META,
+                    LINKED_CSS: this.get('linkedcss'),
+                    CONTENT: this.get('content'),
+                    BASE_HREF: this.get('basehref'),
+                    DEFAULT_CSS: Frame.DEFAULT_CSS,
+                    EXTRA_CSS: extra_css
+                });
+                if (Y.config.doc.compatMode !== 'BackCompat') {
+
+                    //html = Frame.DOC_TYPE + "\n" + html;
+                    html = Frame.getDocType() + "\n" + html;
+                } else {
+                }
+
+            }
+
+            res = this._resolveWinDoc();
+
+            if (html) {
+                res.doc.open();
+                res.doc.write(html);
+                res.doc.close();
+            }
+
+            if (!res.doc.documentElement) {
+                timer = Y.later(1, this, function() {
+                    if (res.doc && res.doc.documentElement) {
+                        cb(res);
+                        timer.cancel();
+                    }
+                }, null, true);
+            } else {
+                cb(res);
+            }
+
+        },
+        /**
+        * @private
+        * @method _resolveWinDoc
+        * @description Resolves the document and window from an iframe or window instance
+        * @param {Object} c The YUI Config to add the window and document to
+        * @return {Object} Object hash of window and document references, if a YUI config was passed, it is returned.
+        */
+        _resolveWinDoc: function(c) {
+            var config = (c) ? c : {};
+            config.win = Y.Node.getDOMNode(this._iframe.get('contentWindow'));
+            config.doc = Y.Node.getDOMNode(this._iframe.get('contentWindow.document'));
+            if (!config.doc) {
+                config.doc = Y.config.doc;
+            }
+            if (!config.win) {
+                config.win = Y.config.win;
+            }
+            return config;
+        },
+        /**
+        * @private
+        * @method _onDomEvent
+        * @description Generic handler for all DOM events fired by the iframe or window. This handler
+        * takes the current EventFacade and augments it to fire on the Frame host. It adds two new properties
+        * to the EventFacade called frameX and frameY which adds the scroll and xy position of the iframe
+        * to the original pageX and pageY of the event so external nodes can be positioned over the frame.
+        * @param {EventFacade} e
+        */
+        _onDomEvent: function(e) {
+            var xy, node;
+
+            if (!Y.Node.getDOMNode(this._iframe)) {
+                //The iframe is null for some reason, bail on sending events.
+                return;
+            }
+
+            e.frameX = e.frameY = 0;
+
+            if (e.pageX > 0 || e.pageY > 0) {
+                if (e.type.substring(0, 3) !== 'key') {
+                    node = this._instance.one('win');
+                    xy = this._iframe.getXY();
+                    e.frameX = xy[0] + e.pageX - node.get('scrollLeft');
+                    e.frameY = xy[1] + e.pageY - node.get('scrollTop');
+                }
+            }
+
+            e.frameTarget = e.target;
+            e.frameCurrentTarget = e.currentTarget;
+            e.frameEvent = e;
+
+            this.fire('dom:' + e.type, e);
+        },
+        initializer: function() {
+            var host = this.get(HOST);
+
+            if (host) {
+                host.frame = this;
+            }
+
+            this.publish('ready', {
+                emitFacade: true,
+                defaultFn: this._defReadyFn
+            });
+        },
+        destructor: function() {
+            var inst = this.getInstance();
+
+            inst.one('doc').detachAll();
+            inst = null;
+            this._iframe.remove();
+        },
+        /**
+        * @private
+        * @method _DOMPaste
+        * @description Simple pass thru handler for the paste event so we can do content cleanup
+        * @param {EventFacade} e
+        */
+        _DOMPaste: function(e) {
+            var inst = this.getInstance(),
+                data = '', win = inst.config.win;
+
+            if (e._event.originalTarget) {
+                data = e._event.originalTarget;
+            }
+            if (e._event.clipboardData) {
+                data = e._event.clipboardData.getData('Text');
+            }
+
+            if (win.clipboardData) {
+                data = win.clipboardData.getData('Text');
+                if (data === '') { // Could be empty, or failed
+                    // Verify failure
+                    if (!win.clipboardData.setData('Text', data)) {
+                        data = null;
+                    }
+                }
+            }
+
+
+            e.frameTarget = e.target;
+            e.frameCurrentTarget = e.currentTarget;
+            e.frameEvent = e;
+
+            if (data) {
+                e.clipboardData = {
+                    data: data,
+                    getData: function() {
+                        return data;
+                    }
+                };
+            } else {
+                e.clipboardData = null;
+            }
+
+            this.fire('dom:paste', e);
+        },
+        /**
+        * @private
+        * @method _defReadyFn
+        * @description Binds DOM events, sets the iframe to visible and fires the ready event
+        */
+        _defReadyFn: function() {
+            var inst = this.getInstance();
+
+            Y.each(Frame.DOM_EVENTS, function(v, k) {
+                var fn = Y.bind(this._onDomEvent, this),
+                    kfn = ((Y.UA.ie && Frame.THROTTLE_TIME > 0) ? Y.throttle(fn, Frame.THROTTLE_TIME) : fn);
+
+                if (!inst.Node.DOM_EVENTS[k]) {
+                    inst.Node.DOM_EVENTS[k] = 1;
+                }
+                if (v === 1) {
+                    if (k !== 'focus' && k !== 'blur' && k !== 'paste') {
+                        if (k.substring(0, 3) === 'key') {
+                            //Throttle key events in IE
+                            inst.on(k, kfn, inst.config.doc);
+                        } else {
+                            inst.on(k, fn, inst.config.doc);
+                        }
+                    }
+                }
+            }, this);
+
+            inst.Node.DOM_EVENTS.paste = 1;
+
+            inst.on('paste', Y.bind(this._DOMPaste, this), inst.one('body'));
+
+            //Adding focus/blur to the window object
+            inst.on('focus', Y.bind(this._onDomEvent, this), inst.config.win);
+            inst.on('blur', Y.bind(this._onDomEvent, this), inst.config.win);
+
+            inst.__use = inst.use;
+            inst.use = Y.bind(this.use, this);
+            this._iframe.setStyles({
+                visibility: 'inherit'
+            });
+            inst.one('body').setStyle('display', 'block');
+        },
+        /**
+        * It appears that having a BR tag anywhere in the source "below" a table with a percentage width (in IE 7 & 8)
+        * if there is any TEXTINPUT's outside the iframe, the cursor will rapidly flickr and the CPU would occasionally
+        * spike. This method finds all <BR>'s below the sourceIndex of the first table. Does some checks to see if they
+        * can be modified and replaces then with a <WBR> so the layout will remain in tact, but the flickering will
+        * no longer happen.
+        * @method _fixIECursors
+        * @private
+        */
+        _fixIECursors: function() {
+            var inst = this.getInstance(),
+                tables = inst.all('table'),
+                brs = inst.all('br'), si;
+
+            if (tables.size() && brs.size()) {
+                //First Table
+                si = tables.item(0).get('sourceIndex');
+                brs.each(function(n) {
+                    var p = n.get('parentNode'),
+                        c = p.get('children'), b = p.all('>br');
+
+                    if (p.test('div')) {
+                        if (c.size() > 2) {
+                            n.replace(inst.Node.create('<wbr>'));
+                        } else {
+                            if (n.get('sourceIndex') > si) {
+                                if (b.size()) {
+                                    n.replace(inst.Node.create('<wbr>'));
+                                }
+                            } else {
+                                if (b.size() > 1) {
+                                    n.replace(inst.Node.create('<wbr>'));
+                                }
+                            }
+                        }
+                    }
+
+                });
+            }
+        },
+        /**
+        * @private
+        * @method _onContentReady
+        * @description Called once the content is available in the frame/window and calls the final use call
+        * on the internal instance so that the modules are loaded properly.
+        */
+        _onContentReady: function(e) {
+            if (!this._ready) {
+                this._ready = true;
+                var inst = this.getInstance(),
+                    args = Y.clone(this.get('use'));
+
+                this.fire('contentready');
+
+                if (e) {
+                    inst.config.doc = Y.Node.getDOMNode(e.target);
+                }
+                //TODO Circle around and deal with CSS loading...
+                args.push(Y.bind(function() {
+                    if (inst.EditorSelection) {
+                        inst.EditorSelection.DEFAULT_BLOCK_TAG = this.get('defaultblock');
+                    }
+                    //Moved to here so that the iframe is ready before allowing editing..
+                    if (this.get('designMode')) {
+                        if(Y.UA.ie) {
+                            inst.config.doc.body.contentEditable = 'true';
+                            this._ieSetBodyHeight();
+                            inst.on('keyup', Y.bind(this._ieSetBodyHeight, this), inst.config.doc);
+                        } else {
+                            inst.config.doc.designMode = 'on';
+                        }
+                    }
+                    this.fire('ready');
+                }, this));
+                inst.use.apply(inst, args);
+
+                inst.one('doc').get('documentElement').addClass('yui-js-enabled');
+            }
+        },
+        _ieHeightCounter: null,
+        /**
+        * Internal method to set the height of the body to the height of the document in IE.
+        * With contenteditable being set, the document becomes unresponsive to clicks, this
+        * method expands the body to be the height of the document so that doesn't happen.
+        * @private
+        * @method _ieSetBodyHeight
+        */
+        _ieSetBodyHeight: function(e) {
+            if (!this._ieHeightCounter) {
+                this._ieHeightCounter = 0;
+            }
+            this._ieHeightCounter++;
+            var run = false, inst, h, bh;
+            if (!e) {
+                run = true;
+            }
+            if (e) {
+                switch (e.keyCode) {
+                    case 8:
+                    case 13:
+                        run = true;
+                        break;
+                }
+                if (e.ctrlKey || e.shiftKey) {
+                    run = true;
+                }
+            }
+            if (run) {
+                try {
+                    inst = this.getInstance();
+                    h = this._iframe.get('offsetHeight');
+                    bh = inst.config.doc.body.scrollHeight;
+                    if (h > bh) {
+                        h = (h - 15) + 'px';
+                        inst.config.doc.body.style.height = h;
+                    } else {
+                        inst.config.doc.body.style.height = 'auto';
+                    }
+                } catch (e) {
+                    if (this._ieHeightCounter < 100) {
+                        Y.later(200, this, this._ieSetBodyHeight);
+                    } else {
+                    }
+                }
+            }
+        },
+        /**
+        * @private
+        * @method _resolveBaseHref
+        * @description Resolves the basehref of the page the frame is created on. Only applies to dynamic content.
+        * @param {String} href The new value to use, if empty it will be resolved from the current url.
+        * @return {String}
+        */
+        _resolveBaseHref: function(href) {
+            if (!href || href === '') {
+                href = Y.config.doc.location.href;
+                if (href.indexOf('?') !== -1) { //Remove the query string
+                    href = href.substring(0, href.indexOf('?'));
+                }
+                href = href.substring(0, href.lastIndexOf('/')) + '/';
+            }
+            return href;
+        },
+        /**
+        * @private
+        * @method _getHTML
+        * @description Get the content from the iframe
+        * @param {String} html The raw HTML from the body of the iframe.
+        * @return {String}
+        */
+        _getHTML: function(html) {
+            if (this._ready) {
+                var inst = this.getInstance();
+                html = inst.one('body').get('innerHTML');
+            }
+            return html;
+        },
+        /**
+        * @private
+        * @method _setHTML
+        * @description Set the content of the iframe
+        * @param {String} html The raw HTML to set the body of the iframe to.
+        * @return {String}
+        */
+        _setHTML: function(html) {
+            if (this._ready) {
+                var inst = this.getInstance();
+                inst.one('body').set('innerHTML', html);
+            } else {
+                this.once(EVENT_CONTENT_READY, Y.bind(this._setHTML, this, html));
+            }
+
+            return html;
+        },
+        /**
+        * @private
+        * @method _getLinkedCSS
+        * @description Get the linked CSS on the instance.
+        */
+        _getLinkedCSS: function(urls) {
+            if (!Y.Lang.isArray(urls)) {
+                urls = [urls];
+            }
+            var str = '';
+            if (!this._ready) {
+                Y.each(urls, function(v) {
+                    if (v) {
+                        str += '<link rel="stylesheet" href="' + v + '" type="text/css">';
+                    }
+                });
+            } else {
+                str = urls;
+            }
+            return str;
+        },
+        /**
+        * @private
+        * @method _setLinkedCSS
+        * @description Sets the linked CSS on the instance..
+        */
+        _setLinkedCSS: function(css) {
+            if (this._ready) {
+                var inst = this.getInstance();
+                inst.Get.css(css);
+            }
+            return css;
+        },
+        /**
+        * @private
+        * @method _setExtraCSS
+        * @description Set's the extra CSS on the instance..
+        */
+        _setExtraCSS: function(css) {
+            if (this._ready) {
+                var inst = this.getInstance(),
+                    node = inst.one('#extra_css');
+
+                node.remove();
+                inst.one('head').append('<style id="extra_css">' + css + '</style>');
+            } else {
+                //This needs to be wrapped in a contentready callback for the !_ready state
+                this.once(EVENT_CONTENT_READY, Y.bind(this._setExtraCSS, this, css));
+            }
+
+            return css;
+        },
+        /**
+        * @private
+        * @method _instanceLoaded
+        * @description Called from the first YUI instance that sets up the internal instance.
+        * This loads the content into the window/frame and attaches the contentready event.
+        * @param {YUI} inst The internal YUI instance bound to the frame/window
+        */
+        _instanceLoaded: function(inst) {
+            this._instance = inst;
+            this._onContentReady();
+
+            var doc = this._instance.config.doc;
+
+            if (this.get('designMode')) {
+                if (!Y.UA.ie) {
+                    try {
+                        //Force other browsers into non CSS styling
+                        doc.execCommand('styleWithCSS', false, false);
+                        doc.execCommand('insertbronreturn', false, false);
+                    } catch (err) {}
+                }
+            }
+        },
+        //BEGIN PUBLIC METHODS
+        /**
+        * @method use
+        * @description This is a scoped version of the normal YUI.use method & is bound to this frame/window.
+        * At setup, the inst.use method is mapped to this method.
+        */
+        use: function() {
+            var inst = this.getInstance(),
+                args = Y.Array(arguments),
+                cb = false;
+
+            if (Y.Lang.isFunction(args[args.length - 1])) {
+                cb = args.pop();
+            }
+            if (cb) {
+                args.push(function() {
+                    cb.apply(inst, arguments);
+
+                });
+            }
+            
+            return inst.__use.apply(inst, args);
+        },
+        /**
+        * @method delegate
+        * @description A delegate method passed to the instance's delegate method
+        * @param {String} type The type of event to listen for
+        * @param {Function} fn The method to attach
+        * @param {String} cont The container to act as a delegate, if no "sel" passed, the body is assumed as the container.
+        * @param {String} sel The selector to match in the event (optional)
+        * @return {EventHandle} The Event handle returned from Y.delegate
+        */
+        delegate: function(type, fn, cont, sel) {
+            var inst = this.getInstance();
+            if (!inst) {
+                return false;
+            }
+            if (!sel) {
+                sel = cont;
+                cont = 'body';
+            }
+            return inst.delegate(type, fn, cont, sel);
+        },
+        /**
+        * @method getInstance
+        * @description Get a reference to the internal YUI instance.
+        * @return {YUI} The internal YUI instance
+        */
+        getInstance: function() {
+            return this._instance;
+        },
+        /**
+        * @method render
+        * @description Render the iframe into the container config option or open the window.
+        * @param {String/HTMLElement/Node} node The node to render to
+        * @return {Frame}
+        * @chainable
+        */
+        render: function(node) {
+            if (this._rendered) {
+                return this;
+            }
+            this._rendered = true;
+            if (node) {
+                this.set('container', node);
+            }
+
+            this._create(Y.bind(function(res) {
+
+                var inst, timer,
+                    cb = Y.bind(function(i) {
+                        this._instanceLoaded(i);
+                    }, this),
+                    args = Y.clone(this.get('use')),
+                    config = {
+                        debug: false,
+                        win: res.win,
+                        doc: res.doc
+                    },
+                    fn = Y.bind(function() {
+                        config = this._resolveWinDoc(config);
+                        inst = YUI(config);
+                        inst.host = this.get(HOST); //Cross reference to Editor
+
+                        try {
+                            inst.use('node-base', cb);
+                            if (timer) {
+                                clearInterval(timer);
+                            }
+                        } catch (e) {
+                            timer = setInterval(function() {
+                                fn();
+                            }, 350);
+                        }
+                    }, this);
+
+                args.push(fn);
+
+                Y.use.apply(Y, args);
+
+            }, this));
+
+            return this;
+        },
+        /**
+        * @private
+        * @method _handleFocus
+        * @description Does some tricks on focus to set the proper cursor position.
+        */
+        _handleFocus: function() {
+            var inst = this.getInstance(),
+                sel = new inst.EditorSelection(),
+                n, c, b, par;
+
+            if (sel.anchorNode) {
+                n = sel.anchorNode;
+
+                if (n.test('p') && n.get('innerHTML') === '') {
+                    n = n.get('parentNode');
+                }
+                c = n.get('childNodes');
+
+                if (c.size()) {
+                    if (c.item(0).test('br')) {
+                        sel.selectNode(n, true, false);
+                    } else if (c.item(0).test('p')) {
+                        n = c.item(0).one('br.yui-cursor');
+                        if (n) {
+                            n = n.get('parentNode');
+                        }
+                        if (!n) {
+                            n = c.item(0).get('firstChild');
+                        }
+                        if (!n) {
+                            n = c.item(0);
+                        }
+                        if (n) {
+                            sel.selectNode(n, true, false);
+                        }
+                    } else {
+                        b = inst.one('br.yui-cursor');
+                        if (b) {
+                            par = b.get('parentNode');
+                            if (par) {
+                                sel.selectNode(par, true, false);
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        /**
+        * Validates linkedcss property
+        *
+        * @method _validateLinkedCSS
+        * @private
+        */
+        _validateLinkedCSS: function(value) {
+            return Lang.isString(value) || Lang.isArray(value);
+        },
+        /**
+        * @method focus
+        * @description Set the focus to the iframe
+        * @param {Function} fn Callback function to execute after focus happens
+        * @return {Frame}
+        * @chainable
+        */
+        focus: function(fn) {
+            if (Y.UA.ie && Y.UA.ie < 9) {
+                try {
+                    Y.one('win').focus();
+                    if (this.getInstance()) {
+                        if (this.getInstance().one('win')) {
+                            this.getInstance().one('win').focus();
+                        }
+                    }
+                } catch (ierr) {
+                }
+                if (fn === true) {
+                    this._handleFocus();
+                }
+                if (Y.Lang.isFunction(fn)) {
+                    fn();
+                }
+            } else {
+                try {
+                    Y.one('win').focus();
+                    Y.later(100, this, function() {
+                        if (this.getInstance()) {
+                            if (this.getInstance().one('win')) {
+                                this.getInstance().one('win').focus();
+                            }
+                        }
+                        if (fn === true) {
+                            this._handleFocus();
+                        }
+                        if (Y.Lang.isFunction(fn)) {
+                            fn();
+                        }
+                    });
+                } catch (ferr) {
+                }
+            }
+            return this;
+        },
+        /**
+        * @method show
+        * @description Show the iframe instance
+        * @return {Frame}
+        * @chainable
+        */
+        show: function() {
+            this._iframe.setStyles({
+                position: 'static',
+                left: ''
+            });
+            if (Y.UA.gecko) {
+                try {
+                    if (this.getInstance()) {
+                        this.getInstance().config.doc.designMode = 'on';
+                    }
+                } catch (e) { }
+                this.focus();
+            }
+            return this;
+        },
+        /**
+        * @method hide
+        * @description Hide the iframe instance
+        * @return {Frame}
+        * @chainable
+        */
+        hide: function() {
+            this._iframe.setStyles({
+                position: 'absolute',
+                left: '-999999px'
+            });
+            return this;
+        }
+    }, {
+        /**
+        * @static
+        * @property THROTTLE_TIME
+        * @description The throttle time for key events in IE
+        * @type Number
+        * @default 100
+        */
+        THROTTLE_TIME: 100,
+        /**
+        * @static
+        * @property DOM_EVENTS
+        * @description The DomEvents that the frame automatically attaches and bubbles
+        * @type Object
+        */
+        DOM_EVENTS: {
+            dblclick: 1,
+            click: 1,
+            paste: 1,
+            mouseup: 1,
+            mousedown: 1,
+            keyup: 1,
+            keydown: 1,
+            keypress: 1,
+            activate: 1,
+            deactivate: 1,
+            beforedeactivate: 1,
+            focusin: 1,
+            focusout: 1
+        },
+
+        /**
+        * @static
+        * @property DEFAULT_CSS
+        * @description The default css used when creating the document.
+        * @type String
+        */
+        DEFAULT_CSS: 'body { background-color: #fff; font: 13px/1.22 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small; } a, a:visited, a:hover { color: blue !important; text-decoration: underline !important; cursor: text !important; } img { cursor: pointer !important; border: none; }',
+        /**
+        * The template string used to create the iframe, deprecated to use DOM instead of innerHTML
+        * @static
+        * @property HTML
+        * @type String
+        * @deprecated
+        */
+        //HTML: '<iframe border="0" frameBorder="0" marginWidth="0" marginHeight="0" leftMargin="0" topMargin="0" allowTransparency="true" width="100%" height="99%"></iframe>',
+        /**
+        * Attributes to auto add to the dynamic iframe under the hood
+        * @static
+        * @property IFRAME_ATTRS
+        * @type Object
+        */
+        IFRAME_ATTRS: {
+            border: '0',
+            frameBorder: '0',
+            marginWidth: '0',
+            marginHeight: '0',
+            leftMargin: '0',
+            topMargin: '0',
+            allowTransparency: 'true',
+            width: "100%",
+            height: "99%"
+        },
+        /**
+        * @static
+        * @property PAGE_HTML
+        * @description The template used to create the page when created dynamically.
+        * @type String
+        */
+        PAGE_HTML: '<html dir="{DIR}" lang="{LANG}"><head><title>{TITLE}</title>{META}<base href="{BASE_HREF}"/>{LINKED_CSS}<style id="editor_css">{DEFAULT_CSS}</style>{EXTRA_CSS}</head><body>{CONTENT}</body></html>',
+
+        /**
+        * @static
+        * @method getDocType
+        * @description Parses document.doctype and generates a DocType to match the parent page, if supported.
+        * For IE8, it grabs document.all[0].nodeValue and uses that. For IE < 8, it falls back to Frame.DOC_TYPE.
+        * @return {String} The normalized DocType to apply to the iframe
+        */
+        getDocType: function() {
+            var dt = Y.config.doc.doctype,
+                str = Frame.DOC_TYPE;
+
+            if (dt) {
+                str = '<!DOCTYPE ' + dt.name + ((dt.publicId) ? ' ' + dt.publicId : '') + ((dt.systemId) ? ' ' + dt.systemId : '') + '>';
+            } else {
+                if (Y.config.doc.all) {
+                    dt = Y.config.doc.all[0];
+                    if (dt.nodeType) {
+                        if (dt.nodeType === 8) {
+                            if (dt.nodeValue) {
+                                if (dt.nodeValue.toLowerCase().indexOf('doctype') !== -1) {
+                                    str = '<!' + dt.nodeValue + '>';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return str;
+        },
+        /**
+        * @static
+        * @property DOC_TYPE
+        * @description The DOCTYPE to prepend to the new document when created. Should match the one on the page being served.
+        * @type String
+        */
+        DOC_TYPE: '<!DOCTYPE HTML PUBLIC "-/'+'/W3C/'+'/DTD HTML 4.01/'+'/EN" "http:/'+'/www.w3.org/TR/html4/strict.dtd">',
+        /**
+        * @static
+        * @property META
+        * @description The meta-tag for Content-Type to add to the dynamic document
+        * @type String
+        */
+        META: '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=7">',
+        //META: '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>',
+        /**
+        * @static
+        * @property NAME
+        * @description The name of the class (frame)
+        * @type String
+        */
+        NAME: 'frame',
+        /**
+        * The namespace on which Frame plugin will reside.
+        *
+        * @property NS
+        * @type String
+        * @default 'frame'
+        * @static
+        */
+        NS: 'frame',
+        ATTRS: {
+            /**
+            * @attribute title
+            * @description The title to give the blank page.
+            * @type String
+            */
+            title: {
+                value: 'Blank Page'
+            },
+            /**
+            * @attribute dir
+            * @description The default text direction for this new frame. Default: ltr
+            * @type String
+            */
+            dir: {
+                value: 'ltr'
+            },
+            /**
+            * @attribute lang
+            * @description The default language. Default: en-US
+            * @type String
+            */
+            lang: {
+                value: 'en-US'
+            },
+            /**
+            * @attribute src
+            * @description The src of the iframe/window. Defaults to javascript:;
+            * @type String
+            */
+            src: {
+                //Hackish, IE needs the false in the Javascript URL
+                value: 'javascript' + ((Y.UA.ie) ? ':false' : ':') + ';'
+            },
+            /**
+            * @attribute designMode
+            * @description Should designMode be turned on after creation.
+            * @writeonce
+            * @type Boolean
+            */
+            designMode: {
+                writeOnce: true,
+                value: false
+            },
+            /**
+            * @attribute content
+            * @description The string to inject into the body of the new frame/window.
+            * @type String
+            */
+            content: {
+                validator: Lang.isString,
+                value: '<br>',
+                setter: '_setHTML',
+                getter: '_getHTML'
+            },
+            /**
+            * @attribute basehref
+            * @description The base href to use in the iframe.
+            * @type String
+            */
+            basehref: {
+                value: false,
+                getter: '_resolveBaseHref'
+            },
+            /**
+            * @attribute use
+            * @description Array of modules to include in the scoped YUI instance at render time. Default: ['none', 'selector-css2']
+            * @writeonce
+            * @type Array
+            */
+            use: {
+                writeOnce: true,
+                value: ['node', 'node-style', 'selector-css3']
+            },
+            /**
+            * @attribute container
+            * @description The container to append the iFrame to on render.
+            * @type String/HTMLElement/Node
+            */
+            container: {
+                value: 'body',
+                setter: function(n) {
+                    return Y.one(n);
+                }
+            },
+            /**
+            * @attribute node
+            * @description The Node instance of the iframe.
+            * @type Node
+            */
+            node: {
+                readOnly: true,
+                value: null,
+                getter: function() {
+                    return this._iframe;
+                }
+            },
+            /**
+            * @attribute id
+            * @description Set the id of the new Node. (optional)
+            * @type String
+            * @writeonce
+            */
+            id: {
+                writeOnce: true,
+                getter: function(id) {
+                    if (!id) {
+                        id = 'iframe-' + Y.guid();
+                    }
+                    return id;
+                }
+            },
+            /**
+            * @attribute linkedcss
+            * @description An array of url's to external linked style sheets
+            * @type String|Array
+            */
+            linkedcss: {
+                validator: '_validateLinkedCSS',
+                getter: '_getLinkedCSS',
+                setter: '_setLinkedCSS'
+            },
+            /**
+            * @attribute extracss
+            * @description A string of CSS to add to the Head of the Editor
+            * @type String
+            */
+            extracss: {
+                validator: Lang.isString,
+                setter: '_setExtraCSS'
+            },
+            /**
+            * @attribute defaultblock
+            * @description The default tag to use for block level items, defaults to: p
+            * @type String
+            */
+            defaultblock: {
+                value: 'p'
+            }
+        }
+    });
+
+    Y.namespace('Plugin');
+
+    Y.Plugin.Frame = Frame;
+
+    Y.Frame = Frame;
+
+
+
+}, '3.15.0', {"requires": ["base", "node", "plugin", "selector-css3", "yui-throttle"]});

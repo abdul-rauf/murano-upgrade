@@ -13,6 +13,8 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 require_once ('modules/ModuleBuilder/parsers/ParserFactory.php') ;
 require_once ('modules/ModuleBuilder/MB/AjaxCompose.php') ;
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;
@@ -23,22 +25,29 @@ class ViewLayoutView extends SugarView
     /** @var GridLayoutMetaDataParser */
     protected $parser;
 
-    function ViewLayoutView ()
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ViewLayoutView($bean = null, $view_object_map = array(), Request $request = null)
     {
-        $GLOBALS [ 'log' ]->debug ( 'in ViewLayoutView' ) ;
-        $this->editModule = $_REQUEST [ 'view_module' ] ;
-        $this->editLayout = $_REQUEST [ 'view' ] ;
-        $this->package = null;
-        $this->fromModuleBuilder = isset ( $_REQUEST [ 'MB' ] ) || !empty($_REQUEST [ 'view_package' ]);
-        if ($this->fromModuleBuilder)
-        {
-            $this->package = $_REQUEST [ 'view_package' ] ;
+        self::__construct($bean, $view_object_map, $request);
+    }
+
+    public function __construct($bean = null, $view_object_map = array(), $request = null)
+    {
+        parent::__construct($bean, $view_object_map, $request);
+        $GLOBALS ['log']->debug('in ViewLayoutView');
+        $this->editModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+        $this->editLayout = $this->request->getValidInputRequest('view','Assert\ComponentName');
+        $this->package = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
+        $mb = $this->request->getValidInputRequest('MB');
+        $this->fromModuleBuilder = !is_null($mb) || !empty($this->package);
+        if ($this->fromModuleBuilder) {
             $this->type = $this->editLayout;
-        } else
-        {
-            global $app_list_strings ;
-            $moduleNames = array_change_key_case ( $app_list_strings [ 'moduleList' ] ) ;
-            $this->translatedEditModule = $moduleNames [ strtolower ( $this->editModule ) ] ;
+        } else {
+            global $app_list_strings;
+            $moduleNames = array_change_key_case($app_list_strings ['moduleList']);
+            $this->translatedEditModule = $moduleNames [strtolower($this->editModule)];
             $this->sm = StudioModuleFactory::getStudioModule($this->editModule);
             $this->type = $this->sm->getViewType($this->editLayout);
         }
@@ -109,8 +118,10 @@ class ViewLayoutView extends SugarView
                 if($this->editLayout == MB_DETAILVIEW){
 		            $disableLayout = $parser2->getSyncDetailEditViews();
                 }
-                if(!empty($_REQUEST['copyFromEditView'])){
-                    $editViewPanels = $parser2->convertFromCanonicalForm($parser2->_viewdefs['panels']);
+
+                $copyFromEditView = $this->request->getValidInputRequest('copyFromEditView');
+                if(!empty($copyFromEditView)){
+                    $editViewPanels = $parser2->convertFromCanonicalForm ( $parser2->_viewdefs [ 'panels' ] ) ;
                     $parser->_viewdefs [ 'panels' ] = $editViewPanels;
                     $parser->_fielddefs = $parser2->_fielddefs;
                     $parser->setUseTabs($parser2->getUseTabs());

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,6 +9,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 /*
  * A mechanism to dynamically define new Relationships between modules
@@ -197,14 +198,14 @@ class AbstractRelationship
         if (!$this->relationship_only)
         {
         	if(!$this->is_custom && $update && file_exists("modules/{$this->rhs_module}/metadata/subpaneldefs.php")){
-        		include("modules/{$this->rhs_module}/metadata/subpaneldefs.php");
+        		include FileLoader::validateFilePath("modules/{$this->rhs_module}/metadata/subpaneldefs.php");
         		if(isset($layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'])){
         			$rightSysLabel = $layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'];
         		}
         		$layout_defs = array();
         	}
         	if(!$this->is_custom && $update && file_exists("modules/{$this->lhs_module}/metadata/subpaneldefs.php")){
-        		include("modules/{$this->lhs_module}/metadata/subpaneldefs.php");
+        		include FileLoader::validateFilePath("modules/{$this->lhs_module}/metadata/subpaneldefs.php");
         		if(isset($layout_defs[$this->lhs_module]['subpanel_setup'][strtolower($this->rhs_module)]['title_key'])){
         			$leftSysLabel = $layout_defs[$this->lhs_module]['subpanel_setup'][strtolower($this->rhs_module)]['title_key'];
         		}
@@ -559,20 +560,43 @@ class AbstractRelationship
 
         // now construct section 3, the fields in the join table
 
-        $properties [ 'fields' ] [] = array ( 'name' => 'id' , 'type' => 'varchar' , 'len' => 36 ) ;
-        $properties [ 'fields' ] [] = array ( 'name' => 'date_modified' , 'type' => 'datetime' ) ;
-        $properties [ 'fields' ] [] = array ( 'name' => 'deleted' , 'type' => 'bool' , 'len' => '1' , 'default' => '0' , 'required' => true ) ;
-        $properties [ 'fields' ] [] = array ( 'name' => $rel_properties [ 'join_key_lhs' ] , 'type' => 'varchar' , 'len' => 36 ) ;
-        $properties [ 'fields' ] [] = array ( 'name' => $rel_properties [ 'join_key_rhs' ] , 'type' => 'varchar' , 'len' => 36 ) ;
+        $properties['fields']['id'] = array(
+            'name' => 'id',
+            'type' => 'id',
+        );
+        $properties['fields']['date_modified'] = array(
+            'name' => 'date_modified',
+            'type' => 'datetime',
+        );
+        $properties['fields']['deleted'] = array(
+            'name' => 'deleted',
+            'type' => 'bool',
+            'default' => 0,
+        );
+        $properties['fields'][$rel_properties['join_key_lhs']] = array(
+            'name' => $rel_properties['join_key_lhs'],
+            'type' => 'id',
+        );
+        $properties['fields'][$rel_properties['join_key_rhs']] = array(
+            'name' => $rel_properties['join_key_rhs'],
+            'type' => 'id',
+        );
+
         if (strtolower ( $lhs_module ) == 'documents' || strtolower ( $rhs_module ) == 'documents' )
         {
-            $properties [ 'fields' ] [] = array ( 'name' => 'document_revision_id' , 'type' => 'varchar' , 'len' => '36' ) ;
+            $properties['fields']['document_revision_id'] = array(
+                'name' => 'document_revision_id',
+                'type' => 'id',
+            );
         }
         // if we have an extended relationship condition, then add in the corresponding relationship_role_column to the relationship (join) table
         // for now this is restricted to extended relationships that can be specified by a varchar
         if (isset ( $this->definition [ 'relationship_role_column_value' ] ))
         {
-            $properties [ 'fields' ] [] = array ( 'name' => $this->definition [ 'relationship_role_column' ] , 'type' => 'varchar' ) ;
+            $properties['fields'][$this->definition['relationship_role_column_value']] = array(
+                'name' => $this->definition['relationship_role_column_value'],
+                'type' => 'varchar',
+            );
         }
 
         // finally, wrap up with section 4, the indices on the join table
@@ -693,12 +717,12 @@ class AbstractRelationship
 
     public function getTitleKey($left=false){
 		if(!$this->is_custom && !$left && file_exists("modules/{$this->rhs_module}/metadata/subpaneldefs.php")){
-    		include("modules/{$this->rhs_module}/metadata/subpaneldefs.php");
+    		include FileLoader::validateFilePath("modules/{$this->rhs_module}/metadata/subpaneldefs.php");
     		if(isset($layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'])){
     			return $layout_defs[$this->rhs_module]['subpanel_setup'][strtolower($this->lhs_module)]['title_key'];
     		}
     	}else if(!$this->is_custom &&  file_exists("modules/{$this->lhs_module}/metadata/subpaneldefs.php")){
-    		include("modules/{$this->lhs_module}/metadata/subpaneldefs.php");
+    		include FileLoader::validateFilePath("modules/{$this->lhs_module}/metadata/subpaneldefs.php");
     		if(isset($layout_defs[$this->lhs_module]['subpanel_setup'][strtolower($this->rhs_module)]['title_key'])){
     			return $layout_defs[$this->lhs_module]['subpanel_setup'][strtolower($this->rhs_module)]['title_key'];
     		}

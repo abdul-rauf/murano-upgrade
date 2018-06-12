@@ -117,10 +117,7 @@ class User extends Person {
 	var $new_schema = true;
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function User()
     {
@@ -764,7 +761,7 @@ class User extends Person {
      * @param bool $deleted      Include deleted users
      * @return User|null         Returns the user object unless once is not found, then it returns null
      */
-    public function retrieve($id, $encode = true, $deleted = true) {
+    public function retrieve($id = -1, $encode = true, $deleted = true) {
         $ret = parent::retrieve($id, $encode, $deleted);
         //CurrentUserApi needs a consistent timestamp/format of the data modified for hash purposes.
         $this->hashTS = $this->fetched_row['date_modified'];
@@ -786,7 +783,7 @@ class User extends Person {
 
 	function retrieve_by_email_address($email) {
 
-		$email1= strtoupper($email);
+                $email1= strtoupper($this->db->quote($email));
 		$q=<<<EOQ
 
 		select id from users where id in ( SELECT  er.bean_id AS id FROM email_addr_bean_rel er,
@@ -1085,7 +1082,8 @@ EOQ;
         // ~jmorais@dri
 		global $locale;
 
-		$query = "SELECT u1.first_name, u1.last_name from users  u1, users  u2 where u1.id = u2.reports_to_id AND u2.id = '$this->id' and u1.deleted=0";
+        $query = "SELECT u1.first_name, u1.last_name from users u1, users u2 where u1.id=u2.reports_to_id AND u2.id=" .
+            $this->db->quoted($this->id) . " and u1.deleted=0";
 		$result = $this->db->query($query, true, "Error filling in additional detail fields");
 
 		$row = $this->db->fetchByAssoc($result);
@@ -1253,7 +1251,8 @@ EOQ;
 		return $user_fields;
 	}
 
-	function list_view_parse_additional_sections(& $list_form, $xTemplateSection) {
+    public function list_view_parse_additional_sections(&$list_form, $xTemplateSection = null)
+    {
 		return $list_form;
 	}
 
@@ -1721,7 +1720,14 @@ EOQ;
         if($module=='ContractTypes') {
             $module = 'Contracts';
         }
-        if(preg_match('/Product[a-zA-Z]*/',$module)) {
+        static $productModules = array(
+            'ProductBundles',
+            'ProductBundleNotes',
+            'ProductTemplates',
+            'ProductTypes',
+            'ProductCategories',
+        );
+        if (in_array($module, $productModules)) {
             $module = 'Products';
         }
 
@@ -2206,23 +2212,6 @@ EOQ;
                 // if send doesn't raise an exception then set the result status to true
                 $mailer->send();
                 $result["status"] = true;
-
-                // save the email record
-                $email                   = new Email();
-                $email->team_id          = 1;
-                $email->to_addrs         = '';
-                $email->type             = 'archived';
-                $email->deleted          = '0';
-                $email->name             = $emailTemplate->subject;
-                $email->description      = $textBody;
-                $email->description_html = $htmlBody;
-                $email->from_addr        = $mailer->getHeader(EmailHeaders::From)->getEmail();
-                $email->parent_type      = 'User';
-                $email->date_sent        = TimeDate::getInstance()->nowDb();
-                $email->modified_user_id = '1';
-                $email->created_by       = '1';
-                $email->status           = 'sent';
-                $email->save();
 
                 if (!isset($additionalData['link']) || $additionalData['link'] == false) {
                     $this->setNewPassword($additionalData['password'], '1');

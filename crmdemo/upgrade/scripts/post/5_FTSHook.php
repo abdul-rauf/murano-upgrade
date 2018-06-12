@@ -1,5 +1,7 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,19 +12,49 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
- * Install FTS logic hook
+ * Keep only Ext/LogicHooks/fts.php. Old logic hooks will be deleted
  */
+require_once 'include/utils/file_utils.php';
+
 class SugarUpgradeFTSHook extends UpgradeScript
 {
     public $order = 5000;
     public $type = self::UPGRADE_CUSTOM;
 
+    protected $mainHookFile = 'Ext/LogicHooks/fts.php';
+
+    protected $oldHookDefs = array(
+        'application/Ext/LogicHooks/logichooks.ext.php',
+        'Extension/application/Ext/LogicHooks/SugarFTSHooks.php',
+    );
+
     public function run()
     {
-        if(file_exists('Extension/application/Ext/LogicHooks/SugarFTSHooks.php')) return;
+        if ($this->fileExists($this->mainHookFile)) {
+            $this->removeDuplicates();
+        } else {
+            $this->log('Error: Main FTS hook file ' . $this->mainHookFile . ' missing.');
+        }
+    }
 
-        $hook = array(1, 'fts', 'include/SugarSearchEngine/SugarSearchEngineQueueManager.php', 'SugarSearchEngineQueueManager', 'populateIndexQueue');
-        check_logic_hook_file('application', 'after_save', $hook);
+    /**
+     * Removing dublicates fts logic hook
+     */
+    protected function removeDuplicates()
+    {
+        foreach ($this->oldHookDefs as $defPath) {
+            $this->upgrader->fileToDelete($defPath);
+        }
+    }
+
+    /**
+     * @param $defPath
+     * @return bool
+     */
+    protected function fileExists($defPath)
+    {
+        return SugarAutoLoader::fileExists($defPath);
     }
 }

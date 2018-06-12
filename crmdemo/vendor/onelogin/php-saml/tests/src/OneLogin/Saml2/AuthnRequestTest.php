@@ -160,6 +160,37 @@ class OneLogin_Saml2_AuthnRequestTest extends PHPUnit_Framework_TestCase
 
     /**
     * Tests the OneLogin_Saml2_AuthnRequest Constructor.
+    * The creation of a deflated SAML Request with and without NameIDPolicy
+    *
+    * @covers OneLogin_Saml2_AuthnRequest
+    */
+    public function testNameIDPolicy()
+    {
+        $settingsDir = TEST_ROOT .'/settings/';
+        include $settingsDir.'settings1.php';
+
+        $settings = new OneLogin_Saml2_Settings($settingsInfo);
+        $authnRequest = new OneLogin_Saml2_AuthnRequest($settings, false, false, false);
+        $encodedRequest = $authnRequest->getRequest();
+        $decoded = base64_decode($encodedRequest);
+        $request = gzinflate($decoded);
+        $this->assertNotContains('<samlp:NameIDPolicy', $request);
+
+        $authnRequest2 = new OneLogin_Saml2_AuthnRequest($settings, false, false, true);
+        $encodedRequest2 = $authnRequest2->getRequest();
+        $decoded2 = base64_decode($encodedRequest2);
+        $request2 = gzinflate($decoded2);
+        $this->assertContains('<samlp:NameIDPolicy', $request2);
+
+        $authnRequest3 = new OneLogin_Saml2_AuthnRequest($settings);
+        $encodedRequest3 = $authnRequest3->getRequest();
+        $decoded3 = base64_decode($encodedRequest3);
+        $request3 = gzinflate($decoded3);
+        $this->assertContains('<samlp:NameIDPolicy', $request3);
+    }
+
+    /**
+    * Tests the OneLogin_Saml2_AuthnRequest Constructor.
     * The creation of a deflated SAML Request
     *
     * @covers OneLogin_Saml2_AuthnRequest
@@ -194,5 +225,95 @@ class OneLogin_Saml2_AuthnRequestTest extends PHPUnit_Framework_TestCase
         $this->assertRegExp('#<saml:Issuer>http://stuff.com/endpoints/metadata.php</saml:Issuer>#', $message);
         $this->assertRegExp('#Format="urn:oasis:names:tc:SAML:2.0:nameid-format:encrypted"#', $message);
         $this->assertRegExp('#ProviderName="SP prueba"#', $message);
+    }
+
+    /**
+    * Tests that a 'true' value for compress => requests gets honored when we
+    * try to obtain the request payload from getRequest()
+    *
+    * @covers OneLogin_Saml2_AuthnRequest::getRequest()
+    */
+    public function testWeCanChooseToCompressARequest()
+    {
+        //Test that we can compress.
+        $settingsDir = TEST_ROOT .'/settings/';
+        include $settingsDir.'settings1.php';
+
+        $settings = new OneLogin_Saml2_Settings($settingsInfo);
+        $authnRequest = new OneLogin_Saml2_AuthnRequest($settings);
+        $payload = $authnRequest->getRequest();
+        $decoded = base64_decode($payload);
+        $decompressed = gzinflate($decoded);
+        $this->assertRegExp('#^<samlp:AuthnRequest#', $decompressed);
+    }
+
+    /**
+    * Tests that a 'false' value for compress => requests gets honored when we
+    * try to obtain the request payload from getRequest()
+    *
+    * @covers OneLogin_Saml2_AuthnRequest::getRequest()
+    */
+    public function testWeCanChooseNotToCompressARequest()
+    {
+        //Test that we can choose not to compress the request payload.
+        $settingsDir = TEST_ROOT .'/settings/';
+        include $settingsDir.'settings2.php';
+
+        $settings = new OneLogin_Saml2_Settings($settingsInfo);
+        $authnRequest = new OneLogin_Saml2_AuthnRequest($settings);
+        $payload = $authnRequest->getRequest();
+        $decoded = base64_decode($payload);
+        $this->assertRegExp('#^<samlp:AuthnRequest#', $decoded);
+    }
+
+    /**
+     * Tests that we can pass a boolean value to the getRequest()
+     * method to choose whether it should 'gzdeflate' the body
+     * of the request.
+     *
+     * @covers OneLogin_Saml2_AuthnRequest::getRequest()
+     */
+    public function testWeCanChooseToDeflateARequestBody()
+    {
+        //Test that we can choose not to compress the request payload.
+        $settingsDir = TEST_ROOT .'/settings/';
+        include $settingsDir.'settings1.php';
+
+        //Compression is currently turned on in settings.
+        $settings = new OneLogin_Saml2_Settings($settingsInfo);
+        $authnRequest = new OneLogin_Saml2_AuthnRequest($settings);
+        $payload = $authnRequest->getRequest(false);
+        $decoded = base64_decode($payload);
+        $this->assertRegExp('#^<samlp:AuthnRequest#', $decoded);
+
+        //Test that we can choose not to compress the request payload.
+        $settingsDir = TEST_ROOT .'/settings/';
+        include $settingsDir.'settings2.php';
+
+        //Compression is currently turned off in settings.
+        $settings = new OneLogin_Saml2_Settings($settingsInfo);
+        $authnRequest = new OneLogin_Saml2_AuthnRequest($settings);
+        $payload = $authnRequest->getRequest(true);
+        $decoded = base64_decode($payload);
+        $decompressed = gzinflate($decoded);
+        $this->assertRegExp('#^<samlp:AuthnRequest#', $decompressed);
+    }
+
+    /**
+     * Tests that we can get the request XML directly without
+     * going through intermediate steps
+     *
+     * @covers OneLogin_Saml2_AuthnRequest::getXML()
+     */
+    public function testGetXML()
+    {
+        $settingsDir = TEST_ROOT .'/settings/';
+        include $settingsDir.'settings1.php';
+
+        $settings = new OneLogin_Saml2_Settings($settingsInfo);
+        $authnRequest = new OneLogin_Saml2_AuthnRequest($settings);
+
+        $xml = $authnRequest->getXML();
+        $this->assertRegExp('#^<samlp:AuthnRequest#', $xml);
     }
 }

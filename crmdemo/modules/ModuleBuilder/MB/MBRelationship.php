@@ -27,14 +27,21 @@ class MBRelationship
     public $relatableModules = array ( ) ; // required by MBModule
     public $relationships = array ( ) ; // required by view.relationships.php; must be kept in sync with the implementation
 
-    
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function MBRelationship($name, $path, $key_name)
+    {
+        self::__construct($name, $path, $key_name);
+    }
+
     /*
      * Constructor
      * @param string $name      The name of this module (not used)
      * @param string $path      The base path of the module directory within the ModuleBuilder package directory
      * @param string $key_name  The Fully Qualified Name for this module - that is, $packageName_$name
      */
-    function MBRelationship ($name , $path , $key_name)
+    public function __construct($name , $path , $key_name)
     {
         $this->implementation = new UndeployedRelationships ( $path ) ;
         $this->moduleName = $key_name ;
@@ -147,5 +154,3 @@ class MBRelationship
     }
 
 }
-
-?>

@@ -138,22 +138,20 @@
          * Creates, renders, and registers within the app additional components.
          */
         loadAdditionalComponents: function(components) {
-            // Unload components that may be loaded previously
-            _.each(app.additionalComponents, function(component) {
-                if (component) {
-                    component.remove();
-                    component.dispose();
-                }
-            });
+            if (!_.isEmpty(app.additionalComponents)) {
+                app.logger.error('`app.controller.loadAdditionalComponents` has already been called. It can not be called twice.');
+                return;
+            }
+
             app.additionalComponents = {};
             _.each(components, function(component, name) {
                 if(component.target) {
                     var $el = this.$(component.target);
+                    if (!$el.get(0)) {
+                        app.logger.error('Unable to place additional component "' + name + '": the target specified does not exist.');
+                        return;
+                    }
                     if(component.layout) {
-                        if (!$el.get(0)) {
-                            app.logger.error('Unable to place additional component "' + name + '": the target specified does not exist.');
-                            return;
-                        }
                         app.additionalComponents[name] = app.view.createLayout({
                             context: this.context,
                             name: component.layout,
@@ -171,7 +169,7 @@
                 } else {
                     app.logger.error('Unable to place additional component "' + name + '": no target specified.');
                 }
-            });
+            }, this);
         }
     });
 

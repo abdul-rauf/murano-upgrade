@@ -14,6 +14,8 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
  */
 require_once 'include/MetaDataManager/MetaDataManager.php';
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 class DynamicField {
 
     public $module_dir = 'DynamicFields';
@@ -42,19 +44,20 @@ class DynamicField {
     );
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function DynamicField($module = '')
     {
         self::__construct($module);
     }
 
-
     public function __construct($module = '') {
-        $this->module = (! empty ( $module )) ? $module :( (isset($_REQUEST['module']) && ! empty($_REQUEST['module'])) ? $_REQUEST ['module'] : '');
+        $this->request = InputValidation::getService();
+        if (!empty($module)) {
+            $this->module = $module;
+        } else {
+            $this->module = $this->request->getValidInputRequest('module', 'Assert\ComponentName', '');
+        }
         $this->base_path = "custom/Extension/modules/{$this->module}/Ext/Vardefs";
     }
 
@@ -71,9 +74,9 @@ class DynamicField {
         return null ;
     }
 
-    function deleteCache(){
+    public static function deleteCache()
+    {
     }
-
 
     /**
     * This will add the bean as a reference in this object as well as building the custom field cache if it has not been built
@@ -493,6 +496,8 @@ class DynamicField {
     public function deleteField($widget){
         require_once('modules/DynamicFields/templates/Fields/TemplateField.php');
         global $beanList;
+
+        $db = DBManagerFactory::getInstance();
         if (!($widget instanceof TemplateField)) {
             $field_name = $widget;
             $widget = new TemplateField();
@@ -506,7 +511,7 @@ class DynamicField {
             $object_name = $newName != false ? $newName : $object_name;
         }
 
-        $GLOBALS['db']->query("DELETE FROM fields_meta_data WHERE id='" . $this->module . $widget->name . "'");
+        $db->query("DELETE FROM fields_meta_data WHERE id=" . $db->quoted($this->module . $widget->name));
         $sql = $widget->get_db_delete_alter_table( $this->bean->table_name . "_cstm" ) ;
         if (! empty( $sql ) )
             $GLOBALS['db']->query( $sql );
@@ -907,9 +912,14 @@ class DynamicField {
                 $count++;
             }
         }
-        $selMod = (!empty($_REQUEST['view_module'])) ? $_REQUEST['view_module'] : $this->module;
+
+        $selMod = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+        if (empty($selMod)) {
+            $selMod = $this->module;
+        }
+        $viewPackage = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName', null);
         require_once 'modules/ModuleBuilder/parsers/parser.label.php' ;
-        $parser = new ParserLabel ( $selMod , isset ( $_REQUEST [ 'view_package' ] ) ? $_REQUEST [ 'view_package' ] : null ) ;
+        $parser = new ParserLabel ( $selMod , $viewPackage) ;
         $parser->handleSave ( array('label_'. $systemLabel => $displayLabel ) , $GLOBALS [ 'current_language' ] ) ;
 
         return $systemLabel;
@@ -1058,5 +1068,3 @@ class DynamicField {
 
     ////////////////////////////END BACKWARDS COMPATIBILITY MODE FOR PRE 5.0 MODULES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 }
-
-?>

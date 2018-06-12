@@ -9,12 +9,25 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 require_once('modules/Notifications/views/view.quicklist.php');
 
 class ViewSystemQuicklist extends ViewQuickList{
-	function ViewSystemQuicklist(){
-		parent::ViewQuickList();
-	}
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ViewSystemQuicklist($bean = null, $view_object_map = array(), Request $request = null)
+    {
+        self::__construct($bean, $view_object_map, $request);
+    }
+
+    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
+    {
+        parent::__construct($bean, $view_object_map, $request);
+    }
 
 	function display()
 	{

@@ -12,7 +12,16 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 class UpgradeSavedSearch {
 
-	function UpgradeSavedSearch() {
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function UpgradeSavedSearch()
+    {
+        self::__construct();
+    }
+
+    public function __construct()
+    {
 		
 		$result = $GLOBALS['db']->query("SELECT id FROM saved_search");
 		while($row = $GLOBALS['db']->fetchByAssoc($result)) {
@@ -100,4 +109,3 @@ class UpgradeSavedSearch {
 		} //while
 	}
 }
-?>

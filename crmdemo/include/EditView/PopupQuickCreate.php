@@ -17,9 +17,18 @@ require_once('include/EditView/SubpanelQuickCreate.php');
  */
 class PopupQuickCreate extends SubpanelQuickCreate{
 
-	function PopupQuickCreate($module, $view='QuickCreate'){
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function PopupQuickCreate($module, $view = 'QuickCreate')
+    {
+        self::__construct($module, $view);
+    }
+
+    public function __construct($module, $view = 'QuickCreate')
+    {
 		$this->defaultProcess = false;
-		parent::SubpanelQuickCreate($module, $view, true);
+        parent::__construct($module, $view, true);
 		$this->ev->defs['templateMeta']['form']['buttons'] = array('POPUPSAVE', 'POPUPCANCEL');
 	}
 
@@ -30,4 +39,3 @@ class PopupQuickCreate extends SubpanelQuickCreate{
 		return $this->ev->display(false, true);
 	}
 }
-?>

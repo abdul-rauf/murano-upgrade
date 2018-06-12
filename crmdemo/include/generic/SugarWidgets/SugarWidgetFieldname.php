@@ -17,13 +17,21 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 class SugarWidgetFieldName extends SugarWidgetFieldVarchar
 {
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SugarWidgetFieldName(&$layout_manager)
+    {
+        self::__construct($layout_manager);
+    }
 
-    function SugarWidgetFieldName(&$layout_manager) {
-        parent::SugarWidgetFieldVarchar($layout_manager);
+    public function __construct(&$layout_manager)
+    {
+        parent::__construct($layout_manager);
         $this->reporter = $this->layout_manager->getAttribute('reporter');
     }
 
-	function displayList(&$layout_def)
+    public function displayList($layout_def)
 	{
 		if(empty($layout_def['column_key']))
 		{
@@ -151,7 +159,7 @@ class SugarWidgetFieldName extends SugarWidgetFieldVarchar
 			$input_name0 = $current_user->id;
 		}
 
-		return SugarWidgetFieldid::_get_column_select($layout_def)."="
+        return parent::_get_column_select($layout_def)."="
 			.$this->reporter->db->quoted($input_name0)."\n";
 	}
 
@@ -255,5 +263,3 @@ class SugarWidgetFieldName extends SugarWidgetFieldVarchar
         return $group_by;
 	}
 }
-
-?>

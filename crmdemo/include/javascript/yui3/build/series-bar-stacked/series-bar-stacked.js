@@ -5,4 +5,367 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add("series-bar-stacked",function(e,t){var n=e.Lang;e.StackedBarSeries=e.Base.create("stackedBarSeries",e.BarSeries,[e.StackingUtil],{drawSeries:function(){if(this.get("xcoords").length<1)return;var e=n.isNumber,t=this._copyObject(this.get("styles").marker),r=t.width,i=t.height,s=this.get("xcoords"),o=this.get("ycoords"),u=0,a=s.length,f=o[0],l=this.get("seriesTypeCollection"),c,h=this.get("order"),p=this.get("graphOrder"),d,v,m,g,y,b,w,E=h===0,S=a*i,x={width:[],height:[]},T=[],N=[],C=this.get("groupMarkers");n.isArray(t.fill.color)&&(b=t.fill.color.concat()),n.isArray(t.border.color)&&(w=t.border.color.concat()),this._createMarkerCache(),S>this.get("height")&&(c=this.get("height")/S,i*=c,i=Math.max(i,1));if(!E){m=l[h-1],g=m.get("negativeBaseValues"),y=m.get("positiveBaseValues");if(!g||!y)E=!0,y=[],g=[]}else g=[],y=[];this.set("negativeBaseValues",g),this.set("positiveBaseValues",y);for(u=0;u<a;++u){f=o[u],d=s[u];if(!e(f)||!e(d)){E&&(y[u]=this._leftOrigin,g[u]=this._leftOrigin),this._markers.push(null);continue}E?(r=Math.abs(d-this._leftOrigin),d>this._leftOrigin?(y[u]=d,g[u]=this._leftOrigin,d-=r):d<this._leftOrigin?(y[u]=this._leftOrigin,g[u]=d):(y[u]=d,g[u]=this._leftOrigin)):d<this._leftOrigin?(d=g[u]-(this._leftOrigin-s[u]),r=g[u]-d,g[u]=d):d>=this._leftOrigin&&(d+=y[u]-this._leftOrigin,r=d-y[u],y[u]=d,d-=r),!isNaN(r)&&r>0?(f-=i/2,C?(x.width[u]=r,x.height[u]=i,T.push(d),N.push(f)):(t.width=r,t.height=i,t.x=d,t.y=f,b&&(t.fill.color=b[u%b.length]),w&&(t.border.color=w[u%w.length]),v=this.getMarker(t,p,u))):C||this._markers.push(null)}C?this._createGroupMarker({fill:t.fill,border:t.border,dimensions:x,xvalues:T,yvalues:N,shape:t.shape}):this._clearMarkerCache()},updateMarkerState:function(e,t){if(this._markers[t]){var r=this._getState(e),i=this.get("ycoords"),s=this._markers[t],o=this.get("styles").marker,u=o.height,a=r==="off"||!o[r]?this._copyObject(o):this._copyObject(o[r]),f,l;a.y=i[t]-u/2,a.x=s.get("x"),a.width=s.get("width"),a.id=s.get("id"),f=a.fill.color,l=a.border.color,n.isArray(f)?a.fill.color=f[t%f.length]:a.fill.color=this._getItemColor(a.fill.color,t),n.isArray(l)?a.border.color=l[t%l.length]:a.border.color=this._getItemColor(a.border.color,t),s.set(a)}},_getPlotDefaults:function(){var e={fill:{type:"solid",alpha:1,colors:null,alphas:null,ratios:null},border:{weight:0,alpha:1},width:24,height:24,shape:"rect",padding:{top:0,left:0,right:0,bottom:0}};return e.fill.color=this._getDefaultColor(this.get("graphOrder"),"fill"),e.border.color=this._getDefaultColor(this.get("graphOrder"),"border"),e}},{ATTRS:{type:{value:"stackedBar"},direction:{value:"vertical"},negativeBaseValues:{value:null},positiveBaseValues:{value:null}}})},"3.15.0",{requires:["series-stacked","series-bar"]});
+YUI.add('series-bar-stacked', function (Y, NAME) {
+
+/**
+ * Provides functionality for creating a stacked bar series.
+ *
+ * @module charts
+ * @submodule series-bar-stacked
+ */
+var Y_Lang = Y.Lang;
+
+/**
+ * The StackedBarSeries renders bar chart in which series are stacked horizontally to show
+ * their contribution to the cumulative total.
+ *
+ * @class StackedBarSeries
+ * @extends BarSeries
+ * @uses StackingUtil
+ * @constructor
+ * @param {Object} config (optional) Configuration parameters.
+ * @submodule series-bar-stacked
+ */
+Y.StackedBarSeries = Y.Base.create("stackedBarSeries", Y.BarSeries, [Y.StackingUtil], {
+    /**
+     * @protected
+     *
+     * Draws the series.
+     *
+     * @method drawSeries
+     */
+    drawSeries: function()
+	{
+        if(this.get("xcoords").length < 1)
+        {
+            return;
+        }
+
+        var isNumber = Y_Lang.isNumber,
+            style = this._copyObject(this.get("styles").marker),
+            w = style.width,
+            h = style.height,
+            xcoords = this.get("xcoords"),
+            ycoords = this.get("ycoords"),
+            i = 0,
+            len = xcoords.length,
+            top = ycoords[0],
+            seriesCollection = this.get("seriesTypeCollection"),
+            ratio,
+            order = this.get("order"),
+            graphOrder = this.get("graphOrder"),
+            left,
+            marker,
+            lastCollection,
+            negativeBaseValues,
+            positiveBaseValues,
+            fillColors,
+            borderColors,
+            useOrigin = order === 0,
+            totalHeight = len * h,
+            dimensions = {
+                width: [],
+                height: []
+            },
+            xvalues = [],
+            yvalues = [],
+            groupMarkers = this.get("groupMarkers");
+        if(Y_Lang.isArray(style.fill.color))
+        {
+            fillColors = style.fill.color.concat();
+        }
+        if(Y_Lang.isArray(style.border.color))
+        {
+            borderColors = style.border.color.concat();
+        }
+        this._createMarkerCache();
+        if(totalHeight > this.get("height"))
+        {
+            ratio = this.get("height")/totalHeight;
+            h *= ratio;
+            h = Math.max(h, 1);
+        }
+        if(!useOrigin)
+        {
+            lastCollection = seriesCollection[order - 1];
+            negativeBaseValues = lastCollection.get("negativeBaseValues");
+            positiveBaseValues = lastCollection.get("positiveBaseValues");
+            if(!negativeBaseValues || !positiveBaseValues)
+            {
+                useOrigin = true;
+                positiveBaseValues = [];
+                negativeBaseValues = [];
+            }
+        }
+        else
+        {
+            negativeBaseValues = [];
+            positiveBaseValues = [];
+        }
+        this.set("negativeBaseValues", negativeBaseValues);
+        this.set("positiveBaseValues", positiveBaseValues);
+        for(i = 0; i < len; ++i)
+        {
+            top = ycoords[i];
+            left = xcoords[i];
+            if(!isNumber(top) || !isNumber(left))
+            {
+                if(useOrigin)
+                {
+                    positiveBaseValues[i] = this._leftOrigin;
+                    negativeBaseValues[i] = this._leftOrigin;
+                }
+                this._markers.push(null);
+                continue;
+            }
+            if(useOrigin)
+            {
+                w = Math.abs(left - this._leftOrigin);
+                if(left > this._leftOrigin)
+                {
+                    positiveBaseValues[i] = left;
+                    negativeBaseValues[i] = this._leftOrigin;
+                    left -= w;
+                }
+                else if(left < this._leftOrigin)
+                {
+                    positiveBaseValues[i] = this._leftOrigin;
+                    negativeBaseValues[i] = left;
+                }
+                else
+                {
+                    positiveBaseValues[i] = left;
+                    negativeBaseValues[i] = this._leftOrigin;
+                }
+            }
+            else
+            {
+                if(left < this._leftOrigin)
+                {
+                    left = negativeBaseValues[i] - (this._leftOrigin - xcoords[i]);
+                    w = negativeBaseValues[i] - left;
+                    negativeBaseValues[i] = left;
+                }
+                else if(left >= this._leftOrigin)
+                {
+                    left += (positiveBaseValues[i] - this._leftOrigin);
+                    w = left - positiveBaseValues[i];
+                    positiveBaseValues[i] = left;
+                    left -= w;
+                }
+            }
+            if(!isNaN(w) && w > 0)
+            {
+                top -= h/2;
+                if(groupMarkers)
+                {
+                    dimensions.width[i] = w;
+                    dimensions.height[i] = h;
+                    xvalues.push(left);
+                    yvalues.push(top);
+                }
+                else
+                {
+                    style.width = w;
+                    style.height = h;
+                    style.x = left;
+                    style.y = top;
+                    if(fillColors)
+                    {
+                        style.fill.color = fillColors[i % fillColors.length];
+                    }
+                    if(borderColors)
+                    {
+                        style.border.color = borderColors[i % borderColors.length];
+                    }
+                    marker = this.getMarker(style, graphOrder, i);
+                }
+            }
+            else if(!groupMarkers)
+            {
+                this._markers.push(null);
+            }
+        }
+        if(groupMarkers)
+        {
+            this._createGroupMarker({
+                fill: style.fill,
+                border: style.border,
+                dimensions: dimensions,
+                xvalues: xvalues,
+                yvalues: yvalues,
+                shape: style.shape
+            });
+        }
+        else
+        {
+            this._clearMarkerCache();
+        }
+    },
+
+    /**
+     * @protected
+     *
+     * Resizes and positions markers based on a mouse interaction.
+     *
+     * @method updateMarkerState
+     * @param {String} type state of the marker
+     * @param {Number} i index of the marker
+     */
+    updateMarkerState: function(type, i)
+    {
+        if(this._markers[i])
+        {
+            var state = this._getState(type),
+                ycoords = this.get("ycoords"),
+                marker = this._markers[i],
+                styles = this.get("styles").marker,
+                h = styles.height,
+                markerStyles = state === "off" || !styles[state] ? this._copyObject(styles) : this._copyObject(styles[state]),
+                fillColor,
+                borderColor;
+            markerStyles.y = (ycoords[i] - h/2);
+            markerStyles.x = marker.get("x");
+            markerStyles.width = marker.get("width");
+            markerStyles.id = marker.get("id");
+            fillColor = markerStyles.fill.color;
+            borderColor = markerStyles.border.color;
+            if(Y_Lang.isArray(fillColor))
+            {
+                markerStyles.fill.color = fillColor[i % fillColor.length];
+            }
+            else
+            {
+                markerStyles.fill.color = this._getItemColor(markerStyles.fill.color, i);
+            }
+            if(Y_Lang.isArray(borderColor))
+            {
+                markerStyles.border.color = borderColor[i % borderColor.length];
+            }
+            else
+            {
+                markerStyles.border.color = this._getItemColor(markerStyles.border.color, i);
+            }
+            marker.set(markerStyles);
+        }
+    },
+
+    /**
+     * @protected
+     *
+     * Returns default values for the `styles` attribute.
+     *
+     * @method _getPlotDefaults
+     * @return Object
+     */
+    _getPlotDefaults: function()
+    {
+        var defs = {
+            fill:{
+                type: "solid",
+                alpha: 1,
+                colors:null,
+                alphas: null,
+                ratios: null
+            },
+            border:{
+                weight: 0,
+                alpha: 1
+            },
+            width: 24,
+            height: 24,
+            shape: "rect",
+
+            padding:{
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0
+            }
+        };
+        defs.fill.color = this._getDefaultColor(this.get("graphOrder"), "fill");
+        defs.border.color = this._getDefaultColor(this.get("graphOrder"), "border");
+        return defs;
+    }
+}, {
+    ATTRS: {
+        /**
+         * Read-only attribute indicating the type of series.
+         *
+         * @attribute type
+         * @type String
+         * @default stackedBar
+         */
+        type: {
+            value: "stackedBar"
+        },
+
+        /**
+         * Direction of the series
+         *
+         * @attribute direction
+         * @type String
+         * @default vertical
+         */
+        direction: {
+            value: "vertical"
+        },
+
+        /**
+         * @private
+         *
+         * @attribute negativeBaseValues
+         * @type Array
+         * @default null
+         */
+        negativeBaseValues: {
+            value: null
+        },
+
+        /**
+         * @private
+         *
+         * @attribute positiveBaseValues
+         * @type Array
+         * @default null
+         */
+        positiveBaseValues: {
+            value: null
+        }
+
+        /**
+         * Style properties used for drawing markers. This attribute is inherited from `BarSeries`. Below are the default values:
+         *  <dl>
+         *      <dt>fill</dt><dd>A hash containing the following values:
+         *          <dl>
+         *              <dt>color</dt><dd>Color of the fill. The default value is determined by the order of the series on the graph. The color
+         *              will be retrieved from the below array:<br/>
+         *              `["#66007f", "#a86f41", "#295454", "#996ab2", "#e8cdb7", "#90bdbd","#000000","#c3b8ca", "#968373", "#678585"]`
+         *              </dd>
+         *              <dt>alpha</dt><dd>Number from 0 to 1 indicating the opacity of the marker fill. The default value is 1.</dd>
+         *          </dl>
+         *      </dd>
+         *      <dt>border</dt><dd>A hash containing the following values:
+         *          <dl>
+         *              <dt>color</dt><dd>Color of the border. The default value is determined by the order of the series on the graph. The color
+         *              will be retrieved from the below array:<br/>
+         *              `["#205096", "#b38206", "#000000", "#94001e", "#9d6fa0", "#e55b00", "#5e85c9", "#adab9e", "#6ac291", "#006457"]`
+         *              <dt>alpha</dt><dd>Number from 0 to 1 indicating the opacity of the marker border. The default value is 1.</dd>
+         *              <dt>weight</dt><dd>Number indicating the width of the border. The default value is 1.</dd>
+         *          </dl>
+         *      </dd>
+         *      <dt>height</dt><dd>indicates the width of the marker. The default value is 24.</dd>
+         *      <dt>over</dt><dd>hash containing styles for markers when highlighted by a `mouseover` event. The default
+         *      values for each style is null. When an over style is not set, the non-over value will be used. For example,
+         *      the default value for `marker.over.fill.color` is equivalent to `marker.fill.color`.</dd>
+         *  </dl>
+         *
+         * @attribute styles
+         * @type Object
+         */
+    }
+});
+
+
+
+}, '3.15.0', {"requires": ["series-stacked", "series-bar"]});

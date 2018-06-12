@@ -10,8 +10,8 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('service/core/SugarWebServiceImpl.php');
-require_once('SugarWebServiceUtilv3.php');
+require_once 'service/core/SugarWebServiceImpl.php';
+require_once 'service/v3/SugarWebServiceUtilv3.php';
 
 use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 
@@ -83,9 +83,7 @@ class SugarWebServiceImplv3 extends SugarWebServiceImpl {
             $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
             self::$helperObject->setFaultObject($error);
             return;
-        }
-        else if(function_exists('mcrypt_cbc'))
-        {
+        } elseif (extension_loaded('mcrypt')) {
             $password = self::$helperObject->decrypt_string($user_auth['password']);
             $authController->loggedIn = false; // reset login attempt to try again with decrypted password
             if($authController->login($user_auth['user_name'], $password) && isset($_SESSION['authenticated_user_id']))

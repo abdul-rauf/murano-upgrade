@@ -12,6 +12,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Util\Serialized;
+
+$request = InputValidation::getService();
+
 //increate timeout for phpo script execution
   if (ini_get('max_execution_time') > 0 && ini_get('max_execution_time') < 300) {
       ini_set('max_execution_time', 300);
@@ -40,7 +45,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   require_once("include/SugarRouting/SugarRouting.php");
   $rules = new SugarRouting($ie, $current_user);
 
-  $showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+  $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
 
  if (isset($_REQUEST['emailUIAction'])) {
   switch($_REQUEST['emailUIAction']) {
@@ -67,8 +72,13 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
         // this is used in forward/reply
     case "composeEmail":
         $GLOBALS['log']->debug("********** EMAIL 2.0 - Asynchronous - at: composeEmail");
-        if(isset($_REQUEST['sugarEmail']) && $_REQUEST['sugarEmail'] == 'true' && isset($_REQUEST['uid']) && !empty($_REQUEST['uid'])) {
-            $ie->email->retrieve($_REQUEST['uid']);
+
+        $uid = $request->getValidInputRequest('uid', 'Assert\Guid');
+        $ieId = $request->getValidInputRequest('ieId', 'Assert\Guid');
+        $mbox = $request->getValidInputRequest('mbox');
+
+        if (isset($_REQUEST['sugarEmail']) && $_REQUEST['sugarEmail'] == 'true' && !empty($uid)) {
+            $ie->email->retrieve($uid);
             $ie->email->from_addr = $ie->email->from_addr_name;
             $ie->email->to_addrs = to_html($ie->email->to_addrs_names);
             $ie->email->cc_addrs = to_html($ie->email->cc_addrs_names);
@@ -96,11 +106,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
             $ret['name'] = from_html($ret['name']);
             $out = $json->encode($ret, true);
             echo $out;
-        } elseif(isset($_REQUEST['uid']) && !empty($_REQUEST['uid']) && isset($_REQUEST['ieId']) && !empty($_REQUEST['ieId'])) {
-            $ie->retrieve($_REQUEST['ieId']);
-            $ie->mailbox = $_REQUEST['mbox'];
+        } elseif (!empty($uid) && !empty($ieId)) {
+            $ie->retrieve($ieId);
+            $ie->mailbox = $mbox;
 			global $timedate;
-            $ie->setEmailForDisplay($_REQUEST['uid']);
+            $ie->setEmailForDisplay($uid);
 			$ie->email->date_start = $timedate->to_display_date($ie->email->date_sent);
 			$ie->email->time_start = $timedate->to_display_time($ie->email->date_sent);
             $ie->email->date_sent = $timedate->to_display_date_time($ie->email->date_sent);
@@ -115,13 +125,13 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
             }
 
             if ($_REQUEST['composeType'] == 'forward') {
-            	$ret = $ie->email->et->createCopyOfInboundAttachment($ie, $ret, $_REQUEST['uid']);
+                $ret = $ie->email->et->createCopyOfInboundAttachment($ie, $ret, $uid);
             }
             $ret = $ie->email->et->getFromAllAccountsArray($ie, $ret);
             $ret['from'] = from_html($ret['from']);
             $ret['name'] = from_html($ret['name']);
-            $ret['ieId'] = $_REQUEST['ieId'];
-            $ret['mbox'] = $_REQUEST['mbox'];
+            $ret['ieId'] = $ieId;
+            $ret['mbox'] = $mbox;
             $out = $json->encode($ret, true);
             echo $out;
         }
@@ -340,8 +350,14 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
     case "getQuickCreateForm":
     	$GLOBALS['log']->debug("********** EMAIL 2.0 - Asynchronous - at: getQuickCreateForm");
-        if(isset($_REQUEST['qc_module']) && !empty($_REQUEST['qc_module'])) {
-        	if (!ACLController::checkAccess($_REQUEST['qc_module'],'edit', true)) {
+
+        $uid = $request->getValidInputRequest('uid', 'Assert\Guid');
+        $ieId = $request->getValidInputRequest('ieId', 'Assert\Guid');
+        $mailbox = $request->getValidInputRequest('mailbox');
+        $qcModule = $request->getValidInputRequest('qc_module', 'Assert\Mvc\ModuleName');
+
+        if(!empty($qcModule)) {
+        	if (!ACLController::checkAccess($qcModule,'edit', true)) {
         		echo trim($json->encode(array('html' => translate('LBL_NO_ACCESS', 'ACL')), true));
         		break;
         	}
@@ -349,17 +365,17 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
             $showSaveToAddressBookButton = false;//(in_array($_REQUEST['qc_module'], $people)) ? true : false;
 
             if(isset($_REQUEST['sugarEmail']) && !empty($_REQUEST['sugarEmail'])) {
-                $ie->email->retrieve($_REQUEST['uid']); // uid is a sugar GUID in this case
+                $ie->email->retrieve($uid); // uid is a sugar GUID in this case
             } else {
-                $ie->retrieve($_REQUEST['ieId']);
-                $ie->mailbox = $_REQUEST['mailbox'];
-                $ie->setEmailForDisplay($_REQUEST['uid']);
+                $ie->retrieve($ieId);
+                $ie->mailbox = $mailbox;
+                $ie->setEmailForDisplay($uid);
             }
             $ret = $email->et->getQuickCreateForm($_REQUEST, $ie->email, $showSaveToAddressBookButton);
-            $ret['ieId'] = $_REQUEST['ieId'];
-            $ret['mbox'] = $_REQUEST['mailbox'];
-            $ret['uid'] = $_REQUEST['uid'];
-            $ret['module'] = $_REQUEST['qc_module'];
+            $ret['ieId'] = $ieId;
+            $ret['mbox'] = $mailbox;
+            $ret['uid'] = $uid;
+            $ret['module'] = $qcModule;
             if (!isset($_REQUEST['iframe'])) {
                 $out = trim($json->encode($ret, false));
             } else {
@@ -437,9 +453,13 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
         break;
 
     case "getImportForm":
-        $ie->retrieve($_REQUEST['ieId']);
+
+        $uid = $request->getValidInputRequest('uid', 'Assert\Guid');
+        $ieId = $request->getValidInputRequest('ieId', 'Assert\Guid');
+
+        $ie->retrieve($ieId);
         //            $ie->mailbox = $_REQUEST['mailbox'];
-        $ie->setEmailForDisplay($_REQUEST['uid']);
+        $ie->setEmailForDisplay($uid);
         $ret = $email->et->getImportForm($_REQUEST, $ie->email);
         $out = trim($json->encode($ret, false));
         echo $out;
@@ -560,7 +580,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
     case "checkEmail2":
         $GLOBALS['log']->debug("********** EMAIL 2.0 - Asynchronous - at: checkEmail2");
 
-        $showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+            $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
 
         $ret = array();
         $ret['numberAccounts'] = count($showFolders);
@@ -596,7 +616,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
             $ie->mailbox = (isset($_REQUEST['mbox']) && !empty($_REQUEST['mbox'])) ? $_REQUEST['mbox'] : "INBOX";
             $ie->checkEmail(false);
         } elseif(isset($_REQUEST['all']) && !empty($_REQUEST['all'])) {
-            $showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+                $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
 
             $GLOBALS['log']->info("[EMAIL] - checkEmail found ".count($showFolders)." accounts to check for user [{$current_user->user_name}]");
 
@@ -807,19 +827,23 @@ eoq;
 
     case "getMultipleMessages":
         $GLOBALS['log']->debug("********** EMAIL 2.0 - Asynchronous - at: getMultipleMessages");
-        if(isset($_REQUEST['uid']) && !empty($_REQUEST['uid']) && isset($_REQUEST['ieId']) && !empty($_REQUEST['ieId'])) {
-            $exUids = explode(",", $_REQUEST['uid']);
+
+        $exUids = $request->getValidInputRequest('uid', array('Assert\Delimited' => array('constraints' => 'Assert\Guid')));
+        $ieId = $request->getValidInputRequest('ieId', 'Assert\Guid');
+        $mbox = $request->getValidInputRequest('mbox', 'Assert\Guid');
+
+        if (!empty($exUids) && !empty($ieId)) {
 
             $out = array();
             foreach($exUids as $k => $uid) {
-                if($email->et->validCacheFileExists($_REQUEST['ieId'], 'messages', $_REQUEST['mbox'].$uid.".php")) {
-                    $msg = $email->et->getCacheValue($_REQUEST['ieId'], 'messages', $_REQUEST['mbox'].$uid.".php", 'out');
+                if($email->et->validCacheFileExists($ieId, 'messages', $mbox.$uid.".php")) {
+                    $msg = $email->et->getCacheValue($ieId, 'messages', $mbox.$uid.".php", 'out');
                 } else {
-                    $ie->retrieve($_REQUEST['ieId']);
-                    $ie->mailbox = $_REQUEST['mbox'];
+                    $ie->retrieve($ieId);
+                    $ie->mailbox = $mbox;
                     $ie->setEmailForDisplay($uid, false, true);
-                    $msg = $ie->displayOneEmail($uid, $_REQUEST['mbox']);
-                    $email->et->writeCacheFile('out', $msg, $_REQUEST['ieId'], 'messages', "{$_REQUEST['mbox']}{$uid}.php");
+                    $msg = $ie->displayOneEmail($uid, $mbox);
+                    $email->et->writeCacheFile('out', $msg, $ieId, 'messages', "{$mbox}{$uid}.php");
                 }
 
                 $out[] = $msg;
@@ -918,7 +942,7 @@ eoq;
 			$direction = 'desc';
 			$sortSerial = $current_user->getPreference('folderSortOrder', 'Emails');
 			if(!empty($sortSerial) && !empty($_REQUEST['ieId']) && !empty($_REQUEST['mbox'])) {
-				$sortArray = unserialize($sortSerial);
+                    $sortArray = Serialized::unserialize($sortSerial);
 				$GLOBALS['log']->debug("********** EMAIL 2.0********** ary=".print_r($sortArray,true).' id='.$_REQUEST['ieId'].'; box='.$_REQUEST['mbox']);
 				$sort = $sortArray[$_REQUEST['ieId']][$_REQUEST['mbox']]['current']['sort'];
 				$direction = $sortArray[$_REQUEST['ieId']][$_REQUEST['mbox']]['current']['direction'];
@@ -987,7 +1011,7 @@ eoq;
         $rootNode = new ExtNode('','');
         $folderOpenState = $current_user->getPreference('folderOpenState', 'Emails');
         $folderOpenState = (empty($folderOpenState)) ? "" : $folderOpenState;
-        $ret = $email->et->folder->getUserFolders($rootNode, unserialize($folderOpenState), $current_user, true);
+            $ret = $email->et->folder->getUserFolders($rootNode, Serialized::unserialize($folderOpenState), $current_user, true);
         $out = $json->encode($ret);
         echo $out;
         break;
@@ -1240,7 +1264,7 @@ eoq;
         }
 
         $oe = new OutboundEmail();
-        $oe->id = $_REQUEST['mail_id'];
+        $oe->id = InputValidation::getService()->getValidInputRequest('mail_id', 'Assert\Guid', '');
         $oe->retrieve($oe->id);
         $oe->name = $_REQUEST['mail_name'];
         $type = empty($_REQUEST['type']) ? 'user' : $_REQUEST['type'];
@@ -1365,7 +1389,7 @@ eoq;
                 		continue;
                 	}
                     if($k == 'stored_options') {
-                        $ie->$k = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($ie->$k));
+                        $ie->$k = Serialized::unserialize($ie->$k, array(), true);
 	                    if (isset($ie->stored_options['from_name'])) {
 	                    	$ie->stored_options['from_name'] = from_html($ie->stored_options['from_name']);
 	                    }
@@ -1417,7 +1441,7 @@ eoq;
 
             foreach($ie->field_defs as $k => $v) {
                 if($k == 'stored_options') {
-                    $ie->$k = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($ie->$k));
+                    $ie->$k = Serialized::unserialize($ie->$k, array(), true);
                     if (isset($ie->stored_options['from_name'])) {
                     	$ie->stored_options['from_name'] = from_html($ie->stored_options['from_name']);
                     }

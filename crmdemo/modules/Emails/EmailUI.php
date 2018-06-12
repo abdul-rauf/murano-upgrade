@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,6 +9,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+use Sugarcrm\Sugarcrm\Util\Serialized;
 
 require_once("vendor/ytree/Tree.php");
 require_once("vendor/ytree/ExtNode.php");
@@ -37,12 +40,13 @@ class EmailUI {
 								   JOIN emails_text on emails.id = emails_text.email_id
                                    WHERE (type = '::TYPE::' OR status = '::STATUS::') AND assigned_user_id = '::USER_ID::' AND emails.deleted = '0'";
 
+    /**
+     * @var Request
+     */
+    protected $request;
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function EmailUI()
     {
@@ -56,13 +60,14 @@ class EmailUI {
 		$folderStateSerial = $current_user->getPreference('folderOpenState', 'Emails');
 
 		if(!empty($folderStateSerial)) {
-			$this->folderStates = unserialize($folderStateSerial);
+            $this->folderStates = Serialized::unserialize($folderStateSerial);
 		}
 
 		$this->smarty = new Sugar_Smarty();
 		$this->folder = new SugarFolder();
 		$this->userCacheDir = sugar_cached("modules/Emails/{$current_user->id}");
 		$this->db = DBManagerFactory::getInstance();
+        $this->request = InputValidation::getService();
 	}
 
 
@@ -241,7 +246,7 @@ class EmailUI {
 		$preloadFolder = 'lazyLoadFolder = ';
 		$focusFolderSerial = $current_user->getPreference('focusFolder', 'Emails');
 		if(!empty($focusFolderSerial)) {
-			$focusFolder = unserialize($focusFolderSerial);
+            $focusFolder = Serialized::unserialize($focusFolderSerial);
 			//$focusFolder['ieId'], $focusFolder['folder']
 			$preloadFolder .= json_encode($focusFolder).";";
 		} else {
@@ -884,18 +889,18 @@ eoq;
 		$sortSerial = $current_user->getPreference('folderSortOrder', 'Emails');
 		$sortArray = array();
 		if(!empty($sortSerial)) {
-			$sortArray = unserialize($sortSerial);
+            $sortArray = Serialized::unserialize($sortSerial);
 		}
 
 		// treeview collapsed/open states
 		$folderStateSerial = $current_user->getPreference('folderOpenState', 'Emails');
 		$folderStates = array();
 		if(!empty($folderStateSerial)) {
-			$folderStates = unserialize($folderStateSerial);
+            $folderStates = Serialized::unserialize($folderStateSerial);
 		}
 
 		// subscribed accounts
-		$showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+        $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
 
 		// general settings
 		$emailSettings = $current_user->getPreference('emailSettings', 'Emails');
@@ -912,7 +917,7 @@ eoq;
 
 		// focus folder
 		$focusFolder = $current_user->getPreference('focusFolder', 'Emails');
-		$focusFolder = !empty($focusFolder) ? unserialize($focusFolder) : array();
+        $focusFolder = !empty($focusFolder) ? Serialized::unserialize($focusFolder) : array();
 
 		// unread only flag
 		$showUnreadOnly = $current_user->getPreference('showUnreadOnly', 'Emails');
@@ -996,7 +1001,7 @@ eoq;
 
 		$sortSerial = $current_user->getPreference('folderSortOrder', 'Emails');
 		if(!empty($sortSerial)) {
-			$sortArray = unserialize($sortSerial);
+            $sortArray = Serialized::unserialize($sortSerial);
 		}
 
 		$sortArray[$ieId][$focusFolder]['current']['sort'] = $sortBy;
@@ -1015,7 +1020,7 @@ eoq;
 		$folderStates = array();
 
 		if(!empty($folderStateSerial)) {
-			$folderStates = unserialize($folderStateSerial);
+            $folderStates = Serialized::unserialize($folderStateSerial);
 		}
 
 		$folderStates[$focusFolder] = $focusFolderOpen;
@@ -1072,7 +1077,7 @@ eoq;
 	function emptyTrash(&$ie) {
 		global $current_user;
 
-		$showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+        $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
 
 		if(is_array($showFolders)) {
 			foreach($showFolders as $ieId) {
@@ -1106,7 +1111,7 @@ eoq;
 		$rootNode->dynamicloadfunction = '';
 		$rootNode->expanded = true;
 		$rootNode->dynamic_load = true;
-		$showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+        $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
 
 		if(empty($showFolders)) {
 			$showFolders = array();
@@ -1296,13 +1301,14 @@ eoq;
 	 * @param array $ret
 	 * @return array
 	 */
-	function getDraftAttachments($ret) {
+    public static function getDraftAttachments($ret)
+    {
 		global $db;
 
 		// $ret['uid'] is the draft Email object's GUID
 		$ret['attachments'] = array();
 
-		$q = "SELECT id, filename FROM notes WHERE parent_id = '{$ret['uid']}' AND deleted = 0";
+		$q = "SELECT id, filename FROM notes WHERE parent_id = {$db->quoted($ret['uid'])} AND deleted = 0";
 		$r = $db->query($q);
 
 		while($a = $db->fetchByAssoc($r)) {
@@ -1325,8 +1331,8 @@ eoq;
 			$cache = sugar_cached("modules/Emails/{$ie->id}/messages/{$ie->mailbox}{$uid}.php");
 		}
 		if(file_exists($cache)) {
-			include($cache); // profides $cacheFile
-			$metaOut = unserialize($cacheFile['out']);
+			$cacheFile = FileLoader::varFromInclude($cache, 'cacheFile'); // provides $cacheFile
+            $metaOut = Serialized::unserialize($cacheFile['out']);
 			$meta = $metaOut['meta']['email'];
 			if (isset($meta['attachments'])) {
 				$attachmentHtmlData = $meta['attachments'];
@@ -1634,7 +1640,6 @@ eoq;
 		$smarty->assign('MOD', $mod_strings);
 		$smarty->assign('APP', $app_strings);
 		$smarty->assign('GRIDLINE', $gridline);
-		$smarty->assign('PRINT_URL', 'index.php?'.$GLOBALS['request_string']);
 		$smarty->assign('ID', $focus->id);
 		$smarty->assign('TYPE', $focus->type);
 		$smarty->assign('PARENT_NAME', $focus->parent_name);
@@ -2050,7 +2055,11 @@ function distDirect($user, $mailIds) {
 function getAssignedEmailsCountForUsers($userIds) {
 	$counts = array();
 	foreach($userIds as $id) {
-		$r = $this->db->query("SELECT count(*) AS c FROM emails WHERE assigned_user_id = '$id' AND status = 'unread'");
+            $query = sprintf(
+                "SELECT count(*) AS c FROM emails WHERE assigned_user_id = %s AND status = 'unread'",
+                $this->db->quoted($id)
+            );
+            $r = $this->db->query($query);
 		$a = $this->db->fetchByAssoc($r);
 		$counts[$id] = $a['c'];
 	} // foreach
@@ -2082,19 +2091,24 @@ function getSingleMessage($ie) {
 
 		global $timedate;
 		global $app_strings,$mod_strings;
-		$ie->retrieve($_REQUEST['ieId']);
+
+        $ieId = $this->request->getValidInputRequest('ieId', 'Assert\Guid');
+        $mbox = $this->request->getValidInputRequest('mbox', 'Assert\Guid');
+        $uid = $this->request->getValidInputRequest('uid', 'Assert\Guid');
+
+		$ie->retrieve($ieId);
 		$noCache = true;
 
-		$ie->mailbox = $_REQUEST['mbox'];
-		$filename = $_REQUEST['mbox'].$_REQUEST['uid'].".php";
+		$ie->mailbox = $mbox;
+		$filename = $mbox.$uid.".php";
 		$md5uidl = "";
 		if ($ie->isPop3Protocol()) {
-			$md5uidl = md5($_REQUEST['uid']);
-			$filename = $_REQUEST['mbox'].$md5uidl.".php";
+			$md5uidl = md5($uid);
+			$filename = $mbox.$md5uidl.".php";
 		} // if
 
-		if($this->validCacheFileExists($_REQUEST['ieId'], 'messages', $filename)) {
-			$out = $this->getCacheValue($_REQUEST['ieId'], 'messages', $filename, 'out');
+		if($this->validCacheFileExists($ieId, 'messages', $filename)) {
+			$out = $this->getCacheValue($ieId, 'messages', $filename, 'out');
 			$noCache = false;
 
 			// something fubar'd the cache?
@@ -2110,11 +2124,11 @@ function getSingleMessage($ie) {
 		if($noCache) {
 			$writeToCacheFile = true;
 			if ($ie->isPop3Protocol()) {
-				$status = $ie->setEmailForDisplay($_REQUEST['uid'], true, true, true);
+				$status = $ie->setEmailForDisplay($uid, true, true, true);
 			} else {
-				$status = $ie->setEmailForDisplay($_REQUEST['uid'], false, true, true);
+				$status = $ie->setEmailForDisplay($uid, false, true, true);
 			}
-			$out = $ie->displayOneEmail($_REQUEST['uid'], $_REQUEST['mbox']);
+			$out = $ie->displayOneEmail($uid, $mbox);
 			// modify the out object to store date in GMT format on the local cache file
 			$dateTimeInUserFormat = $out['meta']['email']['date_start'];
 			$out['meta']['email']['date_start'] = $timedate->to_db($dateTimeInUserFormat);
@@ -2123,9 +2137,9 @@ function getSingleMessage($ie) {
 			}
 			if ($writeToCacheFile) {
 				if ($ie->isPop3Protocol()) {
-					$this->writeCacheFile('out', $out, $_REQUEST['ieId'], 'messages', "{$_REQUEST['mbox']}{$md5uidl}.php");
+					$this->writeCacheFile('out', $out, $ieId, 'messages', "{$mbox}{$md5uidl}.php");
 				} else {
-					$this->writeCacheFile('out', $out, $_REQUEST['ieId'], 'messages', "{$_REQUEST['mbox']}{$_REQUEST['uid']}.php");
+					$this->writeCacheFile('out', $out, $ieId, 'messages', "{$mbox}{$uid}.php");
 				} // else
 			// restore date in the users preferred format to be send on to UI for diaply
 			$out['meta']['email']['date_start'] = $dateTimeInUserFormat;
@@ -2157,10 +2171,10 @@ eoq;
 		if($noCache) {
 			$GLOBALS['log']->debug("EMAILUI: getSingleMessage() NOT using cache file");
 		} else {
-			$GLOBALS['log']->debug("EMAILUI: getSingleMessage() using cache file [ ".$_REQUEST['mbox'].$_REQUEST['uid'].".php ]");
+			$GLOBALS['log']->debug("EMAILUI: getSingleMessage() using cache file [ ".$mbox.$uid.".php ]");
 		}
 
-		$this->setReadFlag($_REQUEST['ieId'], $_REQUEST['mbox'], $_REQUEST['uid']);
+		$this->setReadFlag($ieId, $mbox, $uid);
 		return $out;
 	}
 
@@ -2741,7 +2755,7 @@ eoq;
 		} // if
 
 		//Check to make sure that the user has set the associated inbound email account -> outbound account is active.
-		$showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+        $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
         $sf = new SugarFolder();
         $groupSubs = $sf->getSubscriptions($current_user);
 
@@ -2815,7 +2829,7 @@ eoq;
 			$toArray = $ie->email->email2ParseAddressesForAddressesOnly($ret['to']);
 		} // else
         foreach($ieAccountsFull as $k => $v) {
-        	$storedOptions = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($v->stored_options));
+            $storedOptions = Serialized::unserialize($v->stored_options, array(), true);
 			if (  array_search_insensitive($storedOptions['from_addr'], $toArray)) {
         		if ($v->is_personal) {
 					$foundInPersonalAccounts = true;
@@ -2862,7 +2876,7 @@ eoq;
 
         $ieAccountsFrom= array();
         foreach($ieAccountsFull as $k => $v) {
-        	$storedOptions = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($v->stored_options));
+            $storedOptions = Serialized::unserialize($v->stored_options, array(), true);
         	$storedOptionsName = from_html($storedOptions['from_name']);
 
         	$selected = false;
@@ -2932,7 +2946,7 @@ eoq;
 
 		$ieAccountsFull = $ie->retrieveAllByGroupId($current_user->id);
 		$ieAccountsShowOptionsMeta = array();
-		$showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+        $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
 
 		$defaultIEAccount = $ie->getUsersDefaultOutboundServerId($current_user);
 
@@ -2986,7 +3000,7 @@ eoq;
 		//$ieAccountsShowOptions = "<option value=''>{$app_strings['LBL_NONE']}</option>\n";
 		$ieAccountsShowOptionsMeta = array();
 		$ieAccountsShowOptionsMeta[] = array("value" => "", "text" => $app_strings['LBL_NONE'], 'selected' => '');
-		$showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+        $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
 
 		foreach($ieAccountsFull as $k => $v) {
 			if(!in_array($v->id, $showFolders)) {
@@ -3064,10 +3078,10 @@ eoq;
 		$cacheFile = array();
 
 		if(file_exists($cacheFilePath)) {
-			include($cacheFilePath); // provides $cacheFile
+			$cacheFile = FileLoader::varFromInclude($cacheFilePath, 'cacheFile'); // provides $cacheFile
 
 			if(isset($cacheFile[$key])) {
-				$ret = unserialize($cacheFile[$key]);
+                $ret = Serialized::unserialize($cacheFile[$key]);
 				return $ret;
 			}
 		} else {
@@ -3096,7 +3110,7 @@ eoq;
 		$cacheFile = array();
 
 		if(file_exists($cacheFilePath)) {
-			include($cacheFilePath); // provides $cacheFile['timestamp']
+			$cacheFile = FileLoader::varFromInclude($cacheFilePath, 'cacheFile'); // provides $cacheFile['timestamp']
 
 			if(isset($cacheFile['timestamp'])) {
 				$GLOBALS['log']->debug("EMAILUI: found timestamp [ {$cacheFile['timestamp']} ]");
@@ -3124,7 +3138,7 @@ eoq;
 		$cacheFile = array();
 
 		if(file_exists($cacheFilePath)) {
-			include($cacheFilePath); // provides $cacheFile['timestamp']
+			$cacheFile = FileLoader::varFromInclude($cacheFilePath, 'cacheFile'); // provides $cacheFile['timestamp']
 
 			if(isset($cacheFile['timestamp'])) {
 				$cacheFile['timestamp'] = strtotime('now');

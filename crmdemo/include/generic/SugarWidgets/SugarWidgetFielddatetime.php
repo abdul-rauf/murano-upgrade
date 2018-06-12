@@ -15,9 +15,17 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 	var $reporter;
 	var $assigned_user=null;
 
-    function SugarWidgetFieldDateTime($layout_manager)
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SugarWidgetFieldDateTime(&$layout_manager)
     {
-        parent::SugarWidgetReportField($layout_manager);
+        self::__construct($layout_manager);
+    }
+
+    public function __construct(&$layout_manager)
+    {
+        parent::__construct($layout_manager);
     }
 
 	// get the reporter attribute
@@ -1115,7 +1123,8 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
         }
     }
 
-    function displayInput(&$layout_def) {
+    public function displayInput($layout_def)
+    {
     	global $timedate, $current_language, $app_strings;
         $home_mod_strings = return_module_language($current_language, 'Home');
         $filterTypes = array(' '                 => $app_strings['LBL_NONE'],

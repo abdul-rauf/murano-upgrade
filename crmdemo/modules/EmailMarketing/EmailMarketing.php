@@ -41,10 +41,7 @@ class EmailMarketing extends SugarBean
 	var $new_schema = true;
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function EmailMarketing()
     {
@@ -60,7 +57,8 @@ class EmailMarketing extends SugarBean
 
 	}
 
-	function retrieve($id, $encode=true, $deleted=true) {
+    public function retrieve($id = '-1', $encode = true, $deleted = true)
+    {
 	    parent::retrieve($id,$encode,$deleted);
 
         global $timedate;

@@ -18,11 +18,21 @@ require_once('include/Dashlets/DashletGeneric.php');
 
 
 class MyContactsDashlet extends DashletGeneric { 
-    function MyContactsDashlet($id, $def = null) {
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function MyContactsDashlet($id, $def = null)
+    {
+        self::__construct($id, $def);
+    }
+
+    public function __construct($id, $def = null)
+    {
         global $current_user, $app_strings;
 		require('modules/Contacts/Dashlets/MyContactsDashlet/MyContactsDashlet.data.php');
         
-        parent::DashletGeneric($id, $def);
+        parent::__construct($id, $def);
 
         if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', 'Contacts');
         
@@ -32,5 +42,3 @@ class MyContactsDashlet extends DashletGeneric {
         $this->seedBean = BeanFactory::getBean('Contacts');        
     }
 }
-
-?>

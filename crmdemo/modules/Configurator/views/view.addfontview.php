@@ -11,16 +11,26 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 require_once('include/MVC/View/SugarView.php');
 require_once('include/Sugarpdf/FontManager.php');
 class ConfiguratorViewAddFontView extends SugarView {
-   
+
     /**
-     * Constructor
+     * @deprecated Use __construct() instead
      */
-    public function AddFontView(){
-        parent::SugarView();
+    public function AddFontView($bean = null, $view_object_map = array(), Request $request = null)
+    {
+        self::__construct($bean, $view_object_map, $request);
     }
+
+    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
+    {
+        parent::__construct($bean, $view_object_map, $request);
+    }
+
     /** 
      * display the form
      */
@@ -40,16 +50,11 @@ class ConfiguratorViewAddFontView extends SugarView {
                 true
                 )
             );
-        if(!empty($_REQUEST['error'])){
-            $this->ss->assign("error", $_REQUEST['error']);
-        }
+        $this->ss->assign("error", $this->request->getValidInputRequest('request_error'));
         $this->ss->assign("MOD", $mod_strings);
         $this->ss->assign("APP", $app_strings);
-        if(isset($_REQUEST['return_action'])){
-            $this->ss->assign("RETURN_ACTION", $_REQUEST['return_action']);
-        }else{
-            $this->ss->assign("RETURN_ACTION", 'FontManager');
-        }
+        $return_action = $this->request->getValidInputRequest('return_action', null, 'FontManager');
+        $this->ss->assign("RETURN_ACTION", $return_action);
         $this->ss->assign("STYLE_LIST", array(
                 "regular"=>$mod_strings["LBL_FONT_REGULAR"],
                 "italic"=>$mod_strings["LBL_FONT_ITALIC"],
@@ -62,4 +67,3 @@ class ConfiguratorViewAddFontView extends SugarView {
         $this->ss->display('modules/Configurator/tpls/addFontView.tpl');
     }
 }
-

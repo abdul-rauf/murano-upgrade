@@ -9,24 +9,35 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
  require_once('include/ListView/ListViewSmarty.php');
  
 class ListViewPackages extends ListViewSmarty{
     var $secondaryDisplayColumns;
+
     /**
-     * Constructor  Call ListViewSmarty
+     * @deprecated Use __construct() instead
      */
-    function ListViewPackages(){
-        parent::ListViewSmarty();   
-    } 
-    
+    public function ListViewPackages(Request $request = null)
+    {
+        self::__construct($request);
+    }
+
+    public function __construct(Request $request = null)
+    {
+        parent::__construct($request);
+    }
+
     /**
      * Override the setup method in ListViewSmarty since we are not passing in a bean
      * 
      * @param data  the data to display on the page
      * @param file  the template file to parse
      */
-    function setup($data, $file){
+    public function setup($data, $file, $where, $params = array(), $offset = 0, $limit = -1,  $filter_fields = array(), $id_field = 'id')
+    {
         $this->data = $data;
         $this->tpl = $file;       
     }
@@ -34,7 +45,8 @@ class ListViewPackages extends ListViewSmarty{
     /**
      * Override the display method
      */
-    function display(){
+    public function display($end = true)
+    {
         global $odd_bg, $even_bg, $app_strings;
         $this->ss->assign('rowColor', array('oddListRow', 'evenListRow'));
         $this->ss->assign('bgColor', array($odd_bg, $even_bg));
@@ -44,4 +56,3 @@ class ListViewPackages extends ListViewSmarty{
         return $this->ss->fetch($this->tpl);  
     }  
 }
-?>

@@ -108,4 +108,3 @@ class SubPanelViewUsers {
 		$ListView->processListView($this->teams_list, "teams", "TEAM");
 	}
 }
-?>

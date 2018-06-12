@@ -309,42 +309,38 @@ class CalendarUtils
 		// rather than using relationships framework due to performance issues.
 		// Relationship framework runs very slowly
 
+        /** @var DBManager $db */
 		$db = $GLOBALS['db'];
 		$id = $bean->id;
 		$date_modified = $GLOBALS['timedate']->nowDb();
-		$lower_name = strtolower($bean->object_name);
 
-		$qu = "SELECT * FROM {$bean->rel_users_table} WHERE deleted = 0 AND {$lower_name}_id = '{$id}'";
-		$re = $db->query($qu);
-		$users_rel_arr = array();
+        $linkData = $clones = array();
+        foreach (array('users', 'contacts', 'leads') as $linkName) {
+            if (!$bean->load_relationship($linkName)) {
+                continue;
+            }
+
+            /** @var Link2 $link */
+            $link = $bean->$linkName;
+            $link->load(array(
+                'enforce_teams' => false,
+            ));
+            $ids = $link->get();
+
+            if (count($ids) == 0) {
+                continue;
+            }
+
+            $linkData[$linkName] = array($link->getRelationshipObject()->def, $ids);
+        }
+
 		// If the bean has a users_arr then related records for those ids will have
 		// already been created. This prevents duplicates of those records for 
 		// users, contacts and leads (handled below)
-		$exclude_users = empty($bean->users_arr) ? array() : array_flip($bean->users_arr);
-		
-		while($ro = $db->fetchByAssoc($re)) {
-			if (!isset($exclude_users[$ro['user_id']])) {
-				$users_rel_arr[] = $ro['user_id'];
-			}
-		}
+        if (isset($linkData['users']) && !empty($bean->users_arr)) {
+            $linkData['users'][1] = array_diff($linkData['users'][1], $bean->users_arr);
+        }
 
-		$qu = "SELECT * FROM {$bean->rel_contacts_table} WHERE deleted = 0 AND {$lower_name}_id = '{$id}'";
-		$re = $db->query($qu);
-		$contacts_rel_arr = array();
-		while($ro = $db->fetchByAssoc($re)) {
-			$contacts_rel_arr[] = $ro['contact_id'];
-		}
-
-		$qu = "SELECT * FROM {$bean->rel_leads_table} WHERE deleted = 0 AND {$lower_name}_id = '{$id}'";
-		$re = $db->query($qu);
-		$leads_rel_arr = array();
-		while($ro = $db->fetchByAssoc($re)) {
-			$leads_rel_arr[] = $ro['lead_id'];
-		}
-
-		$qu_contacts = array();
-		$qu_users = array();
-		$qu_leads = array();
 		$arr = array();
 		$i = 0;
 
@@ -377,30 +373,8 @@ class CalendarUtils
 			if($clone->id){
                 $clone->load_relationship('tag_link');
                 $calendarEvents->reconcileTags($parentTagBeans, $clone);
-				foreach($users_rel_arr as $user_id){
-                    $qu_users[] = array(
-                        'id' => create_guid(),
-                        'user_id' => $user_id,
-                        $lower_name . '_id' => $clone->id,
-                        'date_modified' => $date_modified,
-                    );
-				}
-				foreach($contacts_rel_arr as $contact_id){
-                    $qu_contacts[] = array(
-                        'id' => create_guid(),
-                        'contact_id' => $contact_id,
-                        $lower_name . '_id' => $clone->id,
-                        'date_modified' => $date_modified,
-                    );
-				}
-				foreach($leads_rel_arr as $lead_id){
-                    $qu_leads[] = array(
-                        'id' => create_guid(),
-                        'lead_id' => $lead_id,
-                        $lower_name . '_id' => $clone->id,
-                        'date_modified' => $date_modified,
-                    );
-				}
+                $clones[] = $clone->id;
+
 				if($i < 44){
 					$clone->date_start = $date_start;
 					$clone->date_end = $date_end;
@@ -412,40 +386,31 @@ class CalendarUtils
 		
         Activity::enable();
 
-        if (!empty($qu_users)) {
+        foreach ($linkData as $linkName => $data) {
+            list($def, $relIds) = $data;
+            $lhsKey = $def['join_key_lhs'];
+            $rhsKey = $def['join_key_rhs'];
+            $table = $def['join_table'];
+
             $fields = array(
                 'id' => array('name' => 'id', 'type' => 'id'),
-                'user_id' => array('name' => 'user_id', 'type' => 'id'),
-                $lower_name . '_id' => array('name' => $lower_name . '_id', 'type' => 'id'),
+                $lhsKey => array('name' => $lhsKey, 'type' => 'id'),
+                $rhsKey => array('name' => $rhsKey, 'type' => 'id'),
                 'date_modified' => array('name' => 'date_modified', 'type' => 'datetime'),
             );
-            foreach ($qu_users as $qu_user) {
-                $db->insertParams($bean->rel_users_table, $fields, $qu_user);
+
+            foreach ($clones as $cloneId) {
+                foreach ($relIds as $relId) {
+                    $db->insertParams($table, $fields, array(
+                        'id' => create_guid(),
+                        $lhsKey => $cloneId,
+                        $rhsKey => $relId,
+                        'date_modified' => $date_modified,
+                    ));
+                }
             }
         }
-        if (!empty($qu_contacts)) {
-            $fields = array(
-                'id' => array('name' => 'id', 'type' => 'id'),
-                'contact_id' => array('name' => 'contact_id', 'type' => 'id'),
-                $lower_name . '_id' => array('name' => $lower_name . '_id', 'type' => 'id'),
-                'date_modified' => array('name' => 'date_modified', 'type' => 'datetime'),
-            );
-            foreach ($qu_contacts as $qu_contact) {
-                $db->insertParams($bean->rel_contacts_table, $fields, $qu_contact);
-            }
-        }
-        if (!empty($qu_leads)) {
-            $fields = array(
-                'id' => array('name' => 'id', 'type' => 'id'),
-                'lead_id' => array('name' => 'lead_id', 'type' => 'id'),
-                $lower_name . '_id' => array('name' => $lower_name . '_id', 'type' => 'id'),
-                'date_modified' => array('name' => 'date_modified', 'type' => 'datetime'),
-            );
-            foreach ($qu_leads as $qu_lead) {
-                $db->insertParams($bean->rel_leads_table, $fields, $qu_lead);
-            }
-        }
-		
+
 		vCal::cache_sugar_vcal($GLOBALS['current_user']);
 		return $arr;
 	}
@@ -465,15 +430,25 @@ class CalendarUtils
 			$modified_user_id = 1;
 		$lower_name = strtolower($bean->object_name);
 
-		$qu = "SELECT id FROM {$bean->table_name} WHERE repeat_parent_id = '{$bean->id}' AND deleted = 0";
+        $qu = "SELECT id FROM {$bean->table_name} WHERE repeat_parent_id = "
+                . $db->quoted($bean->id) . " AND deleted = 0";
 		$re = $db->query($qu);
 		while( $ro = $db->fetchByAssoc($re)) {
 			$id = $ro['id'];
 			$date_modified = $GLOBALS['timedate']->nowDb();
-			$db->query("UPDATE {$bean->table_name} SET deleted = 1, date_modified = " . $db->convert($db->quoted($date_modified), 'datetime') . ", modified_user_id = '{$modified_user_id}' WHERE id = '{$id}'");
-			$db->query("UPDATE {$bean->rel_users_table} SET deleted = 1, date_modified = " . $db->convert($db->quoted($date_modified), 'datetime') . " WHERE {$lower_name}_id = '{$id}'");
-			$db->query("UPDATE {$bean->rel_contacts_table} SET deleted = 1, date_modified = " . $db->convert($db->quoted($date_modified), 'datetime') . " WHERE {$lower_name}_id = '{$id}'");
-			$db->query("UPDATE {$bean->rel_leads_table} SET deleted = 1, date_modified = " . $db->convert($db->quoted($date_modified), 'datetime') . " WHERE {$lower_name}_id = '{$id}'");
+            $db->query("UPDATE {$bean->table_name} SET deleted = 1, date_modified = "
+                . $db->convert($db->quoted($date_modified), 'datetime')
+                . ", modified_user_id = " . $db->quoted($modified_user_id)
+                . " WHERE id = " . $db->quoted($id));
+            $db->query("UPDATE {$bean->rel_users_table} SET deleted = 1, date_modified = "
+                . $db->convert($db->quoted($date_modified), 'datetime')
+                . " WHERE {$lower_name}_id = " . $db->quoted($id));
+            $db->query("UPDATE {$bean->rel_contacts_table} SET deleted = 1, date_modified = "
+                . $db->convert($db->quoted($date_modified), 'datetime')
+                . " WHERE {$lower_name}_id = " . $db->quoted($id));
+            $db->query("UPDATE {$bean->rel_leads_table} SET deleted = 1, date_modified = "
+                . $db->convert($db->quoted($date_modified), 'datetime')
+                . " WHERE {$lower_name}_id = " . $db->quoted($id));
 		}
 		vCal::cache_sugar_vcal($GLOBALS['current_user']);
 	}
@@ -490,8 +465,8 @@ class CalendarUtils
         if (empty($beanId) || trim($beanId) == '') {
             return;
         }
-
-		$qu = "SELECT id FROM {$bean->table_name} WHERE repeat_parent_id = '{$beanId}' AND deleted = 0 ORDER BY date_start";
+        $qu = "SELECT id FROM {$bean->table_name} WHERE repeat_parent_id = "
+            . $db->quoted($beanId) . " AND deleted = 0 ORDER BY date_start";
 		$re = $db->query($qu);
 		
 		$date_modified = $GLOBALS['timedate']->nowDb();
@@ -501,9 +476,14 @@ class CalendarUtils
 			$id = $ro['id'];
 			if($i == 0){
 				$new_parent_id = $id;
-				$qu = "UPDATE {$bean->table_name} SET repeat_parent_id = NULL, recurring_source = NULL, date_modified = " . $db->convert($db->quoted($date_modified), 'datetime') . " WHERE id = '{$id}'";
+                $qu = "UPDATE {$bean->table_name} SET repeat_parent_id = NULL, recurring_source = NULL, "
+                        . " date_modified = " . $db->convert($db->quoted($date_modified), 'datetime')
+                        . " WHERE id = " . $db->quoted($id);
 			}else{
-				$qu = "UPDATE {$bean->table_name} SET repeat_parent_id = '{$new_parent_id}', date_modified = " . $db->convert($db->quoted($date_modified), 'datetime') . " WHERE id = '{$id}'";
+                $qu = "UPDATE {$bean->table_name} SET repeat_parent_id = "
+                        . $db->quoted($new_parent_id) . ", date_modified = "
+                        . $db->convert($db->quoted($date_modified), 'datetime')
+                        . " WHERE id = " . $db->quoted($id);
 			}
 			$db->query($qu);
       		$i++;

@@ -12,6 +12,7 @@ if (!defined('sugarEntry') || !sugarEntry) {
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Store mismatching module labels before the instance has been upgraded
  */
@@ -80,7 +81,7 @@ class SugarUpgradeRegisterMismatchingModuleLabels extends UpgradeScript
         }
 
         $mod_strings = array();
-        include "modules/{$module}/language/{$language}.lang.php";
+        include clean_path("modules/{$module}/language/{$language}.lang.php");
 
         // check if either of the label in module list and LBL_MODULE_NAME is customized
         if ((empty($default_app_list_strings['moduleList'][$module])

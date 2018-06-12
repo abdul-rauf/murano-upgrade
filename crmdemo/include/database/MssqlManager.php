@@ -584,7 +584,9 @@ class MssqlManager extends DBManager
                         }else{
                             // FIXME: this looks really bad. Probably source for tons of bug
                             // needs to be removed
-                            $tablename = $this->getTableNameFromModuleName($_REQUEST['module'],$sql);
+                            $moduleName = $this->request->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
+                            $tablename = $this->getTableNameFromModuleName($moduleName, $sql);
+                            $tablename = $this->quote($tablename);
                         }
                         //if there is a distinct clause, form query with rownumber after distinct
                         if ($hasDistinct) {
@@ -1014,8 +1016,13 @@ class MssqlManager extends DBManager
 
     /**
      * @see DBManager::getAffectedRowCount()
+     * 
+     * Returns the number of rows affected by the last query
+	 * See also affected_rows capability, will return 0 unless the DB supports it
+     * @param resource $result query result resource
+     * @return int
      */
-	public function getAffectedRowCount()
+    public function getAffectedRowCount($result)
     {
         return $this->getOne("SELECT @@ROWCOUNT");
     }
@@ -1289,8 +1296,10 @@ class MssqlManager extends DBManager
     /**
      * Return representation of an empty value depending on type
      * @param string $type
+     * @param bool $forPrepared Is it going to be used for prepared statement?
+     * @return mixed Empty value
      */
-    public function emptyValue($type)
+    public function emptyValue($type, $forPrepared = false)
     {
         $ctype = $this->getColumnType($type);
         if($ctype == "datetime") {

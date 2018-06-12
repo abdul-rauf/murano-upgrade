@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,6 +9,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 require_once 'modules/ModuleBuilder/parsers/ModuleBuilderParser.php';
 require_once 'modules/Administration/Common.php';
@@ -47,7 +48,8 @@ class ParserDropDown extends ModuleBuilderParser
         // we rely here on PHP to preserve the order of the received name=>value pairs - associative arrays in PHP are ordered
         if (is_array($temp)) {
             foreach ($temp as $item) {
-                $dropdown[SugarCleaner::stripTags(from_html($item [ 0 ]), false)] = SugarCleaner::stripTags(from_html($item [ 1 ]), false);
+                $key = SugarCleaner::stripTags(from_html($item[0]), false);
+                $dropdown[$key] = empty($key) ? '' : SugarCleaner::stripTags(from_html($item[1]), false);
             }
         }
         if (array_key_exists($emptyMarker, $dropdown)) {
@@ -91,7 +93,7 @@ class ParserDropDown extends ModuleBuilderParser
                 $filePath = $this->getExtensionFilePath($dropdown_name, $selected_lang);
                 //Include the original extension to ensure any values sourced from it are kept.
                 if (sugar_is_file($filePath)) {
-                    include($filePath);
+                    include FileLoader::validateFilePath($filePath);
                 }
 
                 foreach ($dropdown as $key => $value) {
@@ -321,7 +323,7 @@ class ParserDropDown extends ModuleBuilderParser
             );
 
             foreach ($files as $customLanguage) {
-                include($customLanguage);
+                include FileLoader::validateFilePath($customLanguage);
                 if (isset($app_list_strings[$dropdownName])) {
                     foreach ($app_list_strings[$dropdownName] as $key => $value) {
                         if ($value === null && !isset($dropdown[$key])) {

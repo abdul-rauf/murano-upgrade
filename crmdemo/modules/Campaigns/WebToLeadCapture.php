@@ -10,6 +10,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 require_once('include/formbase.php');
 require_once('modules/Leads/LeadFormBase.php');
 
@@ -31,12 +34,29 @@ $users = array(
 	'PUT A RANDOM KEY FROM THE WEBSITE HERE' => array('name'=>'PUT THE USER_NAME HERE', 'pass'=>'PUT THE USER_HASH FOR THE RESPECTIVE USER HERE'),
 );
 
+$request = InputValidation::getService();
+
+$previousSoftFail = $request->getSoftFail();
+$request->setSoftFail(false);
+
+$redirect = $request->getValidInputPost(
+    'redirect',
+    array(
+        'Assert\Url' => array(
+            'protocols' => array('http', 'https'),
+        )
+    ),
+    ''
+);
+
+$request->setSoftFail($previousSoftFail);
+
 if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
 	    //adding the client ip address
 	    $_POST['client_id_address'] = query_client_ip();
 		$campaign_id=$_POST['campaign_id'];
 		$campaign = BeanFactory::getBean('Campaigns');
-		$camp_query  = "select name,id from campaigns where id='$campaign_id'";
+        $camp_query  = 'SELECT name, id FROM campaigns WHERE id = ' . $campaign->db->quoted($campaign_id);
 		$camp_query .= " and deleted=0";
         $camp_result=$campaign->db->query($camp_query);
         $camp_data = $campaign->db->fetchByAssoc($camp_result);
@@ -44,9 +64,10 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
         $db = DBManagerFactory::getInstance();
         $marketing = BeanFactory::getBean('EmailMarketing');
         $marketing_query = $marketing->create_new_list_query(
-                'date_start desc, date_modified desc',
-                "campaign_id = '{$campaign_id}' and status = 'active' and date_start < " . $db->convert('', 'today'),
-                array('id')
+            'date_start DESC, date_modified DESC',
+            'campaign_id = ' . $campaign->db->quoted($campaign_id) .' AND status = \'active\' AND date_start < '
+                . $db->convert('', 'today'),
+            array('id')
         );
         $marketing_result = $db->limitQuery($marketing_query, 0, 1, true);
         $marketing_data = $db->fetchByAssoc($marketing_result);
@@ -147,62 +168,48 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
                     $sea->AddUpdateEmailAddress($lead->email2,0,1);
                     
                 }
-            }              
-			if(isset($_POST['redirect_url']) && !empty($_POST['redirect_url'])){
-			    // Get the redirect url, and make sure the query string is not too long
-		        $redirect_url = $_POST['redirect_url'];
-		        $query_string = '';
-				$first_char = '&';
-				if(strpos($redirect_url, '?') === FALSE){
-					$first_char = '?';
-				}
-				$first_iteration = true;
-				$get_and_post = array_merge($_GET, $_POST);
-				foreach($get_and_post as $param => $value) {
+            }
 
-					if($param == 'redirect_url' && $param == 'submit')
-						continue;
-					
-					if($first_iteration){
-						$first_iteration = false;
-						$query_string .= $first_char;
-					}
-					else{
-						$query_string .= "&";
-					}
-					$query_string .= "{$param}=".urlencode($value);
-				}
-				if(empty($lead)) {
-					if($first_iteration){
-						$query_string .= $first_char;
-					}
-					else{
-						$query_string .= "&";
-					}
-					$query_string .= "error=1";
-				}
-				
-				$redirect_url = $redirect_url.$query_string;
+            $redirect_url = $request->getValidInputPost(
+                'redirect_url',
+                array(
+                    'Assert\Url' => array(
+                        'protocols' => array('http', 'https'),
+                    ),
+                ),
+                ''
+            );
 
+            if ($redirect_url !== null) {
+                $params = array();
+                foreach ($_REQUEST as $param => $_) {
+                    $params[$param] = $request->getValidInputRequest($param);
+                }
+                unset($params['redirect_url'], $params['submit']);
+                if (empty($lead)) {
+                    $params['error'] = 1;
+                }
 
 				// Check if the headers have been sent, or if the redirect url is greater than 2083 characters (IE max URL length)
 				//   and use a javascript form submission if that is the case.
 			    if(headers_sent() || strlen($redirect_url) > 2083){
     				echo '<html ' . get_language_header() . '><head><title>SugarCRM</title></head><body>';
-    				echo '<form name="redirect" action="' .$_POST['redirect_url']. '" method="GET">';
-    
-    				foreach($_POST as $param => $value) {
-    					if($param != 'redirect_url' ||$param != 'submit') {
-    						echo '<input type="hidden" name="'.$param.'" value="'.$value.'">';
-    					}
-    				}
-    				if(empty($lead)) {
-    					echo '<input type="hidden" name="error" value="1">';
+    				echo '<form name="redirect" action="' . htmlspecialchars($redirect_url, ENT_COMPAT, 'UTF-8') . '" method="GET">';
+    				foreach ($params as $param => $value) {
+						echo '<input type="hidden" name="'
+                            . htmlspecialchars($param, ENT_COMPAT, 'UTF-8') . '" value="'
+                            . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '">';
     				}
     				echo '</form><script language="javascript" type="text/javascript">document.redirect.submit();</script>';
     				echo '</body></html>';
     			}
 				else{
+                    if (count($params) > 0) {
+                        $query_string = http_build_query($params);
+                        $delimiter = strpos($redirect_url, '?') === false ? '?' : '&';
+                        $redirect_url .= $delimiter . $query_string;
+                    }
+
     				header("Location: {$redirect_url}");
     				die();
 			    }
@@ -219,15 +226,15 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
 	  }
 }
 
-if (!empty($_POST['redirect'])) {
+if (!empty($redirect)) {
     if(headers_sent()){
     	echo '<html ' . get_language_header() . '><head><title>SugarCRM</title></head><body>';
-    	echo '<form name="redirect" action="' .$_POST['redirect']. '" method="GET">';
+        echo '<form name="redirect" action="' . $redirect . '" method="GET">';
     	echo '</form><script language="javascript" type="text/javascript">document.redirect.submit();</script>';
     	echo '</body></html>';
     }
     else{
-    	header("Location: {$_POST['redirect']}");
+        header("Location: $redirect");
     	die();
     }
 }

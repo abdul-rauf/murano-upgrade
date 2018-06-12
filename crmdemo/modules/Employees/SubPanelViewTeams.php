@@ -18,13 +18,17 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-
-
-
 class SubPanelViewTeams {
 
 	var $users_list = null;
 	var $focus;
+
+    /**
+     * @deprecated
+     */
+    public function SubPanelViewTeams()
+    {
+    }
 
 	function setFocus(&$value){
 		$this->focus = (object) $value;
@@ -36,10 +40,6 @@ class SubPanelViewTeams {
 
 	function setHideNewButton($value){
 		$this->hideNewButton = $value;
-	}
-
-	function SubPanelViewTeams() 
-    {
 	}
 
 	function getHeaderText($action, $currentModule){
@@ -75,4 +75,3 @@ class SubPanelViewTeams {
 		$ListView->processListView($this->users_list, "users", "USER");
 	}
 }
-?>

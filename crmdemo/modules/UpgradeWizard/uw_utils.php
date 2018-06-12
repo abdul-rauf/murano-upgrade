@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// $Id: uw_utils.php 58174 2010-09-14 18:18:39Z kjing $
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 /**
  * Implodes some parts of version with specified delimiter, beta & rc parts are removed all time
@@ -900,7 +900,7 @@ function getModuleLanguagePack($lang, $module) {
 
         if (file_exists($langPack))
         {
-            include($langPack);
+            include FileLoader::validateFilePath($langPack);
         }
         elseif (file_exists($langPackEn))
         {
@@ -1813,7 +1813,7 @@ function getImageForType($type) {
 
 if ( !function_exists('getLanguagePackName') ) {
 function getLanguagePackName($the_file) {
-    require_once("$the_file");
+    $app_list_strings = FileLoader::varFromInclude($the_file, 'app_list_strings');
     if(isset($app_list_strings["language_pack_name"])) {
         return($app_list_strings["language_pack_name"]);
     }
@@ -2664,7 +2664,7 @@ function repairDBForUpgrade($execute=false,$path=''){
 	global $dictionary;
 	set_time_limit(3600);
 
-	$db = &DBManagerFactory::getInstance();
+    $db = DBManagerFactory::getInstance();
 	$sql = '';
 	VardefManager::clearVardef();
 	require_once('include/ListView/ListView.php');
@@ -2745,7 +2745,7 @@ function upgradeDashletsForSalesAndMarketing() {
         'obm_ids' => 'OutcomeByMonthDashlet');
 
 	$GLOBALS['mod_strings'] = return_module_language($GLOBALS['current_language'], 'Home');
-   	$db = &DBManagerFactory::getInstance();
+    $db = DBManagerFactory::getInstance();
     $result = $db->query("SELECT id FROM users where deleted = '0'");
 
    	while($row = $db->fetchByAssoc($result)) {
@@ -3024,7 +3024,7 @@ function upgradeUserPreferences() {
 
     $ce_to_pro_or_ent = (isset($_SESSION['upgrade_from_flavor']) && preg_match('/^SugarCE.*?(Pro|Ent|Corp|Ult)$/', $_SESSION['upgrade_from_flavor']));
 
-   	$db = &DBManagerFactory::getInstance();
+    $db = DBManagerFactory::getInstance();
     $result = $db->query("SELECT id FROM users WHERE " . User::getLicensedUsersWhere());
    	while($row = $db->fetchByAssoc($result))
     {
@@ -4420,7 +4420,7 @@ function updateRenamedModulesLabels()
 
         //get base list strings for this language
         if (file_exists("include/language/$langKey.lang.php")) {
-            include("include/language/$langKey.lang.php");
+            include FileLoader::validateFilePath("include/language/$langKey.lang.php");
 
             //Keep only renamed modules
             $renamedModules = array_diff($strings['moduleList'], $app_list_strings['moduleList']);

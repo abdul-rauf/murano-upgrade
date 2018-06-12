@@ -10,6 +10,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 /**
  * Known Entry Points as of 4.5
  * acceptDecline.php
@@ -46,14 +49,17 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * zipatcher.php
  * WebToLeadCapture.php
  * HandleAjaxCall.php */
+
  /*
   * for 50, added:
   * minify.php
   */
+
   /*
   * for 510, added:
   * dceActionCleanup.php
   */
+
 $GLOBALS['starttTime'] = microtime(true);
 
 if (!defined('SUGAR_BASE_DIR')) {
@@ -110,19 +116,10 @@ if (!empty($sugar_config['xhprof_config']))
 // make sure SugarConfig object is available
 require_once 'include/SugarObjects/SugarConfig.php';
 
-// Compatibility library with PHP 5.5's simplified password hashing API
-// This can be removed when SugarCRM's minimum PHP version is 5.5
-require_once 'vendor/ircmaxell/password-compat/lib/password.php';
-
 require_once('include/utils.php');
 register_shutdown_function('sugar_cleanup');
-///////////////////////////////////////////////////////////////////////////////
-////	DATA SECURITY MEASURES
+
 require_once('include/clean.php');
-clean_special_arguments();
-clean_incoming_data();
-////	END DATA SECURITY MEASURES
-///////////////////////////////////////////////////////////////////////////////
 
 // cn: set php.ini settings at entry points
 setPhpIniSettings();
@@ -131,11 +128,18 @@ require_once('sugar_version.php'); // provides $sugar_version, $sugar_db_version
 
 require_once('include/utils/sugar_file_utils.php');
 require_once('include/utils/autoloader.php');
+
+// Initialize autoloader
 SugarAutoLoader::init();
-//check to see if custom utils exist and load them too
+
+// Initialize InputValdation service as soon as possible. Up to this point
+// it is expected that no code has altered any input superglobals.
+InputValidation::initService();
+
+// Check to see if custom utils exist and load them too
 // not doing it in utils since autoloader is not loaded there yet
-foreach(SugarAutoLoader::existing('include/custom_utils.php', 'custom/include/custom_utils.php', SugarAutoLoader::loadExtension('utils')) as $file) {
-	require_once $file;
+foreach (SugarAutoLoader::existing('include/custom_utils.php', 'custom/include/custom_utils.php', SugarAutoLoader::loadExtension('utils')) as $file) {
+    require_once $file;
 }
 
 require_once('include/database/DBManagerFactory.php');

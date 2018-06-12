@@ -113,10 +113,7 @@ class WorkFlow extends SugarBean
     var $check_controller = true;
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function Workflow()
     {
@@ -136,7 +133,7 @@ class WorkFlow extends SugarBean
 		return $this->name;
 	}
 
-	function save_relationship_changes($is_update)
+    public function save_relationship_changes($is_update, $exclude = array())
     {
     }
 
@@ -181,7 +178,7 @@ class WorkFlow extends SugarBean
      * Contributor(s): ______________________________________..
     */
 
-    function create_new_list_query($order_by, $where,$filter=array(),$params=array(), $show_deleted = 0,$join_type='', $return_array = false,$parentbean=null, $singleSelect = false)
+    public function create_new_list_query($order_by, $where, $filter = array(), $params = array(), $show_deleted = 0, $join_type = '', $return_array = false, $parentbean = null, $singleSelect = false, $ifListForExport = false)
     {
     	$ret = array();
     	$custom_join = $this->getCustomJoin();
@@ -1181,7 +1178,12 @@ function get_action_contents($workflow_id, $trigger_count, $action_module_name, 
 						// fired while away from the workflow engine. This allows
 						// for that.
 						if ($workflow_trigger_id) {
-							$action_string .= "\t \$action_meta_array['".$array_position_name."']['trigger_id'] = '$workflow_trigger_id'; \n ";
+                            $action_string .= "\t \$action_meta_array['" .
+                                $array_position_name .
+                                "']['trigger_id'] = '$workflow_trigger_id'; \n ";
+                            $action_string .= "\t \$action_meta_array['" .
+                                $array_position_name .
+                                "']['action_id'] = '" . $row['id'] . "'; \n ";
 						}
 						$action_string .= "\t process_workflow_actions(\$focus, \$action_meta_array['".$array_position_name."']); \n ";
 
@@ -1506,8 +1508,10 @@ function getActiveWorkFlowCount() {
      */
     public function deleteSchedules()
     {
-        $query =  "SELECT id FROM workflow_schedules WHERE workflow_schedules.workflow_id = '" . $this->db->quote($this->id) . "'";
-        $result = $this->db->query($query, true, "Error getting workflow_schedules for workflow_id: " . $this->id);
+        //@codingStandardsIgnoreStart
+        $query =  "SELECT id FROM workflow_schedules WHERE workflow_schedules.workflow_id = " . $this->db->quoted($this->id);
+        $result = $this->db->query($query, true, "Error getting workflow_schedules for workflow_id: " . $this->db->quote($this->id));
+        //@codingStandardsIgnoreEnd
 
         // Remove each workflow schedule by id
         $removeExpired = array();

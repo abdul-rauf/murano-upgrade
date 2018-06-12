@@ -18,6 +18,8 @@ require_once 'include/MetaDataManager/MetaDataManager.php';
 require_once 'include/SubPanel/SubPanelDefinitions.php';
 require_once 'modules/ModuleBuilder/parsers/MetaDataFiles.php';
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
     const HISTORYFILENAME = 'restored.php';
@@ -74,7 +76,7 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
 
         $this->setUpSubpanelViewDefFileInfo();
 
-        include $this->loadedSubpanelFileName;
+        include FileLoader::validateFilePath($this->loadedSubpanelFileName);
 
         // Prepare to load the history file. This will be available in cases when
         // a layout is restored.
@@ -84,7 +86,7 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
         if (file_exists($this->historyPathname)) {
             // load in the subpanelDefOverride from the history file
             $GLOBALS['log']->debug(get_class($this) . ": loading from history");
-            require $this->historyPathname;
+            require FileLoader::validateFilePath($this->historyPathname);
         }
         $this->_history = new History($this->historyPathname);
 
@@ -214,7 +216,10 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
         $legacyDefs = $this->mdc->toLegacySubpanelLayoutDefs($viewdefs['subpanels']['meta']['components'], BeanFactory::newBean($loadedModule));
 
         if(empty($legacyDefs['subpanel_setup'])) {
-            $GLOBALS['log']->error("Could not convert subpanels for subpanel: {$subpanelName} - {$loadedModule}");
+            if (isModuleBWC($loadedModule)) {
+                $GLOBALS['log']->error("Could not convert subpanels for subpanel: {$subpanelName} - {$loadedModule}");
+            }
+
             return $subpanelName;
         }
 

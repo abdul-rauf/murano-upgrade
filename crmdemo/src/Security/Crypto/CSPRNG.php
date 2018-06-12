@@ -33,17 +33,10 @@ class CSPRNG
     protected static $instance;
 
     /**
-     * Available generators
-     * @var array
-     */
-    protected $generators = array();
-
-    /**
      * Ctor
      */
     public function __construct()
     {
-        $this->generators = $this->getAvailableGens();
     }
 
     /**
@@ -67,101 +60,23 @@ class CSPRNG
      *
      * @param integer $size Byte size
      * @param boolean $encode
-     * @return string|false
+     * @return string
+     * @throws \RuntimeException
      */
     public function generate($size, $encode = false)
     {
-        foreach ($this->generators as $name => $method) {
+        $random = random_bytes($size);
 
-            $random = call_user_func(array($this, $method), $size);
-
-            // try next one on failure
-            if ($random === false || $this->binaryStrLen($random) !== $size) {
-                continue;
-            }
-
-            return $encode ? $this->binaryEncode($random, $size) : $random;
+        // make sure the requested length is met
+        if ($this->binaryStrLen($random) !== $size) {
+            throw new \RuntimeException(sprintf(
+                'CSPRNG generated random value does not meet the requested size of %s bytes',
+                $size
+            ));
         }
 
-        return false;
-    }
+        return $encode ? $this->binaryEncode($random, $size) : $random;
 
-    /**
-     * Get available generators. Note that the orders of the returned
-     * list matters where the most preferrable method should be listed
-     * on the top.
-     *
-     * @return array
-     */
-    protected function getAvailableGens()
-    {
-        $generators = array();
-
-        /*
-         * Available on most *nix systems
-         */
-        if (@is_readable('/dev/urandom')) {
-            $generators['urandom'] = 'genUrandom';
-        }
-
-        /*
-         * Use /dev/urandom on *nix and Microsoft's Crypto API
-         */
-        if (function_exists('mcrypt_create_iv')) {
-            $generators['mcrypt'] = 'genMcrypt';
-        }
-
-        /*
-         * For better or for worse, available for platforms on PHP >= 5.3
-         */
-        if (function_exists('openssl_random_pseudo_bytes')) {
-            $generators['openssl'] = 'genOpenssl';
-        }
-
-        return $generators;
-    }
-
-    /**
-     * Generator using /dev/urandon
-     * @param integer $size Byte size
-     * @return string|false
-     */
-    protected function genUrandom($size)
-    {
-        $random = false;
-        $fp = @fopen('/dev/urandom', 'rb');
-
-        // use unbuffered stream to make sure we only consume the amount
-        // of bytes we actually need to avoid exhaustion
-        stream_set_read_buffer($fp, 0);
-
-        if ($fp !== false) {
-            $random = fread($fp, $size);
-            fclose($fp);
-        }
-
-        return $random;
-    }
-
-    /**
-     * Generator using mcrypt
-     * @param integer $size Byte size
-     * @return string|false
-     */
-    protected function genMcrypt($size)
-    {
-        return mcrypt_create_iv($size, MCRYPT_DEV_URANDOM);
-    }
-
-    /**
-     * Generator using openssl
-     * @param integer $size Byte size
-     * @return string|false
-     */
-    protected function genOpenssl($size)
-    {
-        $random = openssl_random_pseudo_bytes($size, $isStrong);
-        return $isStrong ? $random : false;
     }
 
     /**
@@ -172,10 +87,7 @@ class CSPRNG
      */
     protected function binaryStrLen($string)
     {
-        if (function_exists('mb_strlen')) {
-            return mb_strlen($string, '8bit');
-        }
-        return strlen($string);
+        return RandomCompat_strlen($string);
     }
 
     /**
@@ -188,10 +100,7 @@ class CSPRNG
      */
     protected function binarySubStr($string, $start, $length)
     {
-        if (function_exists('mb_substr')) {
-            return mb_substr($string, $start, $length, '8bit');
-        }
-        return substr($string, $start, $length);
+        return RandomCompat_substr($string, $start, $length);
     }
 
     /**

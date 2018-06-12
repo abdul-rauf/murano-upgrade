@@ -141,7 +141,13 @@
                 return original;
             }
 
-            value = parseFloat(value.toFixed(round), 10).toFixed(precision).toString();
+            // make sure that the precision variable is an integer and not a string
+            // Big.js doesn't like it as a string
+            if (_.isString(precision)) {
+                precision = parseInt(precision);
+            }
+            
+            value = Big(value).toFixed(precision);
             return (_.isString(numberGroupSeparator) && _.isString(decimalSeparator)) ?
                 this.addNumberSeparators(value, numberGroupSeparator, decimalSeparator) : value;
         },

@@ -64,11 +64,20 @@ class SugarDependentDropdown {
 		"multiple"	// custom functionality
 	);
 
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SugarDependentDropdown($metadata = '')
+    {
+        self::__construct($metadata);
+    }
+
 	/**
 	 * Sole constructor
 	 * @param string $metadata Path to metadata file to consume
 	 */
-	function SugarDependentDropdown($metadata='') {
+    public function __construct($metadata = '')
+    {
 		if(!empty($metadata)) {
 			$this->init($metadata);
 		}
@@ -300,4 +309,4 @@ class SugarDependentDropdown {
 	}
 	////	END PRIVATE UTILS
 	///////////////////////////////////////////////////////////////////////////
-} // end Class def
+}

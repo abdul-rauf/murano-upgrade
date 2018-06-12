@@ -28,7 +28,16 @@ class Dependency
 	protected $fireOnLoad = false;
     protected $hooks = array();
 
-	function Dependency($id) {
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function Dependency($id)
+    {
+        self::__construct($id);
+    }
+
+    public function __construct($id)
+    {
 		$this->id = $id;
 		$this->trigger = new Trigger('true');
 	}
@@ -196,4 +205,3 @@ class Dependency
     }
 
 }
-?>

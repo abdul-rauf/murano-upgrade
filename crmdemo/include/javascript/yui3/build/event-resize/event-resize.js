@@ -5,4 +5,56 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add("event-resize",function(e,t){e.Event.define("windowresize",{on:e.UA.gecko&&e.UA.gecko<1.91?function(t,n,r){n._handle=e.Event.attach("resize",function(e){r.fire(e)})}:function(t,n,r){var i=e.config.windowResizeDelay||100;n._handle=e.Event.attach("resize",function(t){n._timer&&n._timer.cancel(),n._timer=e.later(i,e,function(){r.fire(t)})})},detach:function(e,t){t._timer&&t._timer.cancel(),t._handle.detach()}})},"3.15.0",{requires:["node-base","event-synthetic"]});
+YUI.add('event-resize', function (Y, NAME) {
+
+/**
+ * Adds a window resize event that has its behavior normalized to fire at the
+ * end of the resize rather than constantly during the resize.
+ * @module event
+ * @submodule event-resize
+ */
+
+
+/**
+ * Old firefox fires the window resize event once when the resize action
+ * finishes, other browsers fire the event periodically during the
+ * resize.  This code uses timeout logic to simulate the Firefox
+ * behavior in other browsers.
+ * @event windowresize
+ * @for YUI
+ */
+Y.Event.define('windowresize', {
+
+    on: (Y.UA.gecko && Y.UA.gecko < 1.91) ?
+        function (node, sub, notifier) {
+            sub._handle = Y.Event.attach('resize', function (e) {
+                notifier.fire(e);
+            });
+        } :
+        function (node, sub, notifier) {
+            // interval bumped from 40 to 100ms as of 3.4.1
+            var delay = Y.config.windowResizeDelay || 100;
+
+            sub._handle = Y.Event.attach('resize', function (e) {
+                if (sub._timer) {
+                    sub._timer.cancel();
+                }
+
+                sub._timer = Y.later(delay, Y, function () {
+                    notifier.fire(e);
+                });
+            });
+        },
+
+    detach: function (node, sub) {
+        if (sub._timer) {
+            sub._timer.cancel();
+        }
+        sub._handle.detach();
+    }
+    // delegate methods not defined because this only works for window
+    // subscriptions, so...yeah.
+});
+
+
+}, '3.15.0', {"requires": ["node-base", "event-synthetic"]});

@@ -175,9 +175,9 @@ FROM prospect_lists_prospects plp
 		return $query;
 	}
 
-	function save_relationship_changes($is_update)
+    public function save_relationship_changes($is_update, $exclude = array())
     {
-    	parent::save_relationship_changes($is_update);
+        parent::save_relationship_changes($is_update, $exclude);
 		if($this->lead_id != "")
 	   		$this->set_prospect_relationship($this->id, $this->lead_id, "lead");
     	if($this->contact_id != "")
@@ -242,7 +242,10 @@ FROM prospect_lists_prospects plp
 
 	function get_entry_count()
 	{
-		$query = "SELECT count(*) AS num FROM prospect_lists_prospects WHERE prospect_list_id='$this->id' AND deleted = '0'";
+        $query = sprintf(
+            'SELECT count(*) AS num FROM prospect_lists_prospects WHERE prospect_list_id = %s AND deleted = 0',
+            $this->db->quoted($this->id)
+        );
 		$result = $this->db->query($query, true, "Grabbing prospect_list entry count");
 
 		$row = $this->db->fetchByAssoc($result);
@@ -299,11 +302,11 @@ FROM prospect_lists_prospects plp
 
     function mark_deleted($id){
         //remove prospects::prospectLists relationships
-        $query = "UPDATE prospect_lists_prospects SET deleted = 1 WHERE prospect_list_id = '{$id}' ";
+        $query = "UPDATE prospect_lists_prospects SET deleted = 1 WHERE prospect_list_id = " . $this->db->quoted($id);
         $this->db->query($query);
 
         //remove campaigns::prospectLists relationships
-        $query = "UPDATE prospect_list_campaigns SET deleted = 1 WHERE prospect_list_id = '{$id}' ";
+        $query = "UPDATE prospect_list_campaigns SET deleted = 1 WHERE prospect_list_id = " . $this->db->quoted($id);
         $this->db->query($query);
 
         return parent::mark_deleted($id);

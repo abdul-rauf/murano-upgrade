@@ -11,6 +11,8 @@
  */
 
 use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
 /**
  * Base Sugar view
@@ -33,6 +35,7 @@ class SugarView
      */
     var $action = '';
     /**
+     * @var SugarBean
      */
     var $bean = null;
     /**
@@ -77,14 +80,28 @@ class SugarView
     protected $browserTitle;
 
     /**
-     * Constructor which will peform the setup.
+     * @var Request 
      */
-    public function SugarView(
-        $bean = null,
-        $view_object_map = array()
-        )
+    protected $request;
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SugarView($bean = null, $view_object_map = array(), Request $request = null)
+    {
+        self::__construct($bean, $view_object_map, $request);
+    }
+
+    /**
+     * Ctor
+     * @param SugarBean $bean
+     * @param array $view_object_map
+     * @param Request $request
+     */
+    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
     {
         $this->base_menu = SugarAutoLoader::loadExtension("menus", "application");
+        $this->request = $request ?: InputValidation::getService();
     }
 
     public function init(
@@ -109,7 +126,7 @@ class SugarView
     /**
      * This method will be called from the controller and is not meant to be overridden.
      */
-    public function process()
+    public function process($params = array())
     {
         LogicHook::initialize();
         $this->_checkModule();
@@ -132,14 +149,15 @@ class SugarView
             $this->renderJavascript();
         }
 
-        if (!empty($_REQUEST['updated_records'])) {
-            $this->errors[] = $_REQUEST['updated_records'];
+        $records = $this->request->getValidInputRequest('updated_records');
+        if (!empty($records)) {
+            $this->errors[] = $records;
         }
 
         $this->_buildModuleList();
-        $this->preDisplay();
-        $this->displayErrors();
-        $this->display();
+        $this->preDisplay($params);
+        $this->displayErrors($params);
+        $this->display($params);
         if ( !empty($this->module) ) {
             $GLOBALS['logic_hook']->call_custom_logic($this->module, 'after_ui_frame');
         } else {
@@ -190,8 +208,10 @@ class SugarView
 
     /**
      * This method will display the errors on the page.
+     *
+     * @param array $params additional view paramters passed through from the controller
      */
-    public function displayErrors()
+    public function displayErrors($params = array())
     {
         $errors = '';
 
@@ -297,7 +317,7 @@ class SugarView
         $ss->assign('use_table_container', (isset($this->options['use_table_container']) ? $this->options['use_table_container'] : false));
 
         // set ab testing if exists
-        $testing = (isset($_REQUEST["testing"]) ? $_REQUEST['testing'] : "a");
+        $testing = $this->request->getValidInputRequest('testing', null, 'a');
         $ss->assign("ABTESTING", $testing);
 
         // get browser title
@@ -424,7 +444,7 @@ class SugarView
         }
         $ss->assign("GCLS",$gcls);
 
-        $ss->assign("SEARCH", isset($_REQUEST['query_string']) ? $_REQUEST['query_string'] : '');
+        $ss->assign("SEARCH", $this->request->getValidInputRequest('query_string', null, ''));
 
         if ($this->action == "EditView" || $this->action == "Login")
             $ss->assign("ONLOAD", 'onload="set_focus()"');
@@ -452,44 +472,6 @@ class SugarView
 		$ss->assign("homeImage",$homeImage);
         global $mod_strings;
         $mod_strings = $bakModStrings;
-		/******************DC MENU*********************/
-        // DEPRECATED since 7.0, will be removed from 7.2
-//		if(!empty($current_user->id) && !$this->_getOption('view_print')){
-//			require_once('include/DashletContainer/DCFactory.php');
-//            require_once('include/SugarSearchEngine/SugarSearchEngineFactory.php');
-//			$dcm = DCFactory::getContainer(null, 'DCMenu');
-//			$notifData = $dcm->getNotifications();
-//			$dcjs = getVersionedScript('include/DashletContainer/Containers/DCMenu.js');
-//			$ss->assign('NOTIFCLASS', $notifData['class']);
-//			$ss->assign('NOTIFCODE', $notifData['code']);
-//			$ss->assign('NOTIFICON', $notifData['icon']);
-//			$ss->assign('DCSCRIPT', $dcm->getScript());
-//			$ss->assign('ICONSEARCH', $dcm->getSearchIcon());
-//			$ss->assign('DCACTIONS',$dcm->getMenus());
-//			$ss->assign('PICTURE', $current_user->picture);
-//            $ftsAutocompleteEnable = TRUE;
-//            $searchEngine = SugarSearchEngineFactory::getInstance();
-//            if( ($searchEngine instanceOf SugarSearchEngine) || (isset($GLOBALS['sugar_config']['full_text_engine'])
-//                && isset($GLOBALS['sugar_config']['full_text_engine']['disable_autocomplete']) && $GLOBALS['sugar_config']['full_text_engine']['disable_autocomplete'] )
-//                )
-//                    $ftsAutocompleteEnable = FALSE;
-//
-//            if (SugarSearchEngineAbstractBase::isSearchEngineDown()) {
-//                $ftsAutocompleteEnable = false;
-//            }
-//            $ss->assign('FTS_AUTOCOMPLETE_ENABLE', $ftsAutocompleteEnable);
-//			$ss->assign('AJAX', isset($_REQUEST['ajax_load'])?$_REQUEST['ajax_load']:"0");
-//			$ss->assign('ACTION', isset($_REQUEST['action'])?$_REQUEST['action']:"");
-//			$ss->assign('FULL', isset($_REQUEST['full'])?$_REQUEST['full']:"false");
-//			if(is_admin($GLOBALS['current_user'])){
-//				$ss->assign('ISADMIN', true);
-//			} else {
-//				$ss->assign('ISADMIN', false);
-//			}
-//			$ss->assign('SUGAR_DCJS', $dcjs);
-//			//$ss->assign('SUGAR_DCMENU', $data['html']);
-//		}
-		/******************END DC MENU*********************/
         $headerTpl = $themeObject->getTemplate('header.tpl');
         if (inDeveloperMode() )
             $ss->clear_compiled_tpl($headerTpl);
@@ -548,11 +530,12 @@ class SugarView
     {
         global $sugar_config, $timedate;
 
+        $action = $this->request->getValidInputRequest('action');
         if(isset($this->bean->module_dir)){
             echo "<script>var module_sugar_grp1 = '{$this->bean->module_dir}';</script>";
         }
         if(isset($_REQUEST['action'])){
-            echo "<script>var action_sugar_grp1 = '{$_REQUEST['action']}';</script>";
+            echo "<script>var action_sugar_grp1 = '{$action}';</script>";
         }
         echo '<script>jscal_today = 1000*' . $timedate->asUserTs($timedate->getNow()) . '; if(typeof app_strings == "undefined") app_strings = new Array();</script>';
         if (!is_file(sugar_cached("include/javascript/sugar_grp1.js"))) {
@@ -627,6 +610,7 @@ EOQ;
     {
         global $locale, $sugar_config, $timedate;
 
+        $action = $this->request->getValidInputRequest('action');
 
         if ($this->_getOption('show_javascript')) {
             if (!$this->_getOption('show_header')) {
@@ -647,7 +631,7 @@ EOHTML;
                 $js_vars['module_sugar_grp1'] = $this->bean->module_dir;
             }
             if(isset($_REQUEST['action'])){
-                $js_vars['action_sugar_grp1'] = $_REQUEST['action'];
+                $js_vars['action_sugar_grp1'] = $action;
             }
             echo '<script>jscal_today = 1000*' . $timedate->asUserTs($timedate->getNow()) . '; if(typeof app_strings == "undefined") app_strings = new Array();</script>';
             // Make sure the necessary cache files are in place
@@ -1364,11 +1348,20 @@ EOHTML;
      */
     public function getBreadCrumbSymbol()
     {
-    	if(SugarThemeRegistry::current()->directionality == "ltr") {
-        	return "<span class='breadCrumbSymbol'>&raquo;</span>";
-        }
-        else {
-        	return "<span class='breadCrumbSymbol'>&laquo;</span>";
+        return self::staticGetBreadCrumbSymbol();
+    }
+
+    /**
+     * Returns the correct breadcrumb symbol according to theme's directionality setting
+     *
+     * @return string
+     */
+    public static function staticGetBreadCrumbSymbol()
+    {
+        if (SugarThemeRegistry::current()->directionality == "ltr") {
+            return "<span class='breadCrumbSymbol'>&raquo;</span>";
+        } else {
+            return "<span class='breadCrumbSymbol'>&laquo;</span>";
         }
     }
 

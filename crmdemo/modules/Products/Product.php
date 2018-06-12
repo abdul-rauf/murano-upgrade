@@ -149,10 +149,7 @@ class Product extends SugarBean
     );
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function Product()
     {
@@ -435,7 +432,7 @@ class Product extends SugarBean
 
         foreach ($this->getFieldDefinitions() as $field) {
             if ($field['name'] != 'id' && isset($this->fetched_row[$field['name']])) {
-                $rli->$field['name'] = $this->fetched_row[$field['name']];
+                $rli->{$field['name']} = $this->fetched_row[$field['name']];
                 // set the fetched row, so we prevent the product_template from fetching again
                 // when the re-save happens because of the relationships
                 $rli->fetched_row[$field['name']] = $this->fetched_row[$field['name']];

@@ -481,7 +481,7 @@ var SugarWizard = new function()
         }
     }
 } 
-SugarWizard.changeScreen('{/literal}{$START_PAGE}{literal}');
+SugarWizard.changeScreen('{/literal}{$START_PAGE|escape:'html':'UTF-8'}{literal}');
 document.onkeypress = SugarWizard.handleKeyStroke;
 
 function adjustEmailSettings(){

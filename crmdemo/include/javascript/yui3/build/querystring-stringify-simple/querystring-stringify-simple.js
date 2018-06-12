@@ -5,4 +5,47 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add("querystring-stringify-simple",function(e,t){var n=e.namespace("QueryString"),r=encodeURIComponent;n.stringify=function(t,n){var i=[],s=n&&n.arrayKey?!0:!1,o,u,a;for(o in t)if(t.hasOwnProperty(o))if(e.Lang.isArray(t[o]))for(u=0,a=t[o].length;u<a;u++)i.push(r(s?o+"[]":o)+"="+r(t[o][u]));else i.push(r(o)+"="+r(t[o]));return i.join("&")}},"3.15.0",{requires:["yui-base"]});
+YUI.add('querystring-stringify-simple', function (Y, NAME) {
+
+/*global Y */
+/**
+ * <p>Provides Y.QueryString.stringify method for converting objects to Query Strings.
+ * This is a subset implementation of the full querystring-stringify.</p>
+ * <p>This module provides the bare minimum functionality (encoding a hash of simple values),
+ * without the additional support for nested data structures.  Every key-value pair is
+ * encoded by encodeURIComponent.</p>
+ * <p>This module provides a minimalistic way for io to handle  single-level objects
+ * as transaction data.</p>
+ *
+ * @module querystring
+ * @submodule querystring-stringify-simple
+ */
+
+var QueryString = Y.namespace("QueryString"),
+    EUC = encodeURIComponent;
+
+
+QueryString.stringify = function (obj, c) {
+    var qs = [],
+        // Default behavior is false; standard key notation.
+        s = c && c.arrayKey ? true : false,
+        key, i, l;
+
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (Y.Lang.isArray(obj[key])) {
+                for (i = 0, l = obj[key].length; i < l; i++) {
+                    qs.push(EUC(s ? key + '[]' : key) + '=' + EUC(obj[key][i]));
+                }
+            }
+            else {
+                qs.push(EUC(key) + '=' + EUC(obj[key]));
+            }
+        }
+    }
+
+    return qs.join('&');
+};
+
+
+}, '3.15.0', {"requires": ["yui-base"]});

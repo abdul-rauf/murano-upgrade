@@ -22,19 +22,29 @@ class SugarMerge {
 	private $merged = array();
 	private $fp = NULL;
 
-	function SugarMerge($new_path='', $original_path='', $custom_path='custom', $includeFromNew = false) {
+    public function __construct($new_path='', $original_path='', $custom_path='custom', $includeFromNew = false)
+    {
 
 		$this->new_path = empty($new_path) || preg_match('/[\/]$/', $new_path) ? $new_path : $new_path . '/';
 		$this->original_path = empty($original_path) || preg_match('/[\/]$/', $original_path) ? $original_path : $original_path . '/';
 		$this->custom_path = empty($custom_path) || preg_match('/[\/]$/', $custom_path) ? $custom_path : $custom_path . '/';
         $includePrepend = $includeFromNew ? $this->new_path : "";
         //Use the new Merge classes if requested
-        require_once($includePrepend . 'modules/UpgradeWizard/SugarMerge/MergeUtils.php');
-        require_once($includePrepend . 'modules/UpgradeWizard/SugarMerge/EditViewMerge.php');
-        require_once($includePrepend . 'modules/UpgradeWizard/SugarMerge/DetailViewMerge.php');
-        require_once($includePrepend . 'modules/UpgradeWizard/SugarMerge/ListViewMerge.php');
-        require_once($includePrepend . 'modules/UpgradeWizard/SugarMerge/SearchMerge.php');
-        require_once($includePrepend . 'modules/UpgradeWizard/SugarMerge/QuickCreateMerge.php');
+        $mergeFiles = array(
+            'modules/UpgradeWizard/SugarMerge/MergeUtils.php',
+            'modules/UpgradeWizard/SugarMerge/EditViewMerge.php',
+            'modules/UpgradeWizard/SugarMerge/DetailViewMerge.php',
+            'modules/UpgradeWizard/SugarMerge/ListViewMerge.php',
+            'modules/UpgradeWizard/SugarMerge/SearchMerge.php',
+            'modules/UpgradeWizard/SugarMerge/QuickCreateMerge.php'
+        );
+        foreach ($mergeFiles as $mergeFile) {
+            if (file_exists($includePrepend . $mergeFile)) {
+                require_once($includePrepend . $mergeFile);
+            } else {
+                require_once($mergeFile);
+            }
+        }
         require_once('modules/ModuleBuilder/parsers/views/History.php');
 
 		$this->mergeMapping = array(
@@ -217,4 +227,3 @@ class SugarMerge {
 	}
 
 }
-?>

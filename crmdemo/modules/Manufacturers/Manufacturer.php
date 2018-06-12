@@ -47,10 +47,7 @@ class Manufacturer extends SugarBean {
 	var $additional_column_fields = Array();
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function Manufacturer()
     {
@@ -101,14 +98,18 @@ class Manufacturer extends SugarBean {
 		return $list;
 	}
 
-	function save_relationship_changes($is_update)
+    public function save_relationship_changes($is_update, $exclude = array())
     {
 
     }
 
 	function clear_product_manufacturer_relationship($manufacturer_id)
 	{
-		$query = "UPDATE $this->rel_products set manufacturer_id='' where (manufacturer_id='$manufacturer_id') and deleted=0";
+        $query = sprintf(
+            "UPDATE %s SET manufacturer_id = '' WHERE manufacturer_id = %s AND deleted = 0",
+            $this->rel_products,
+            $this->db->quoted($manufacturer_id)
+        );
 		$this->db->query($query,true,"Error clearing manufacturer to manufacturer relationship: ");
 	}
 

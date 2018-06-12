@@ -131,10 +131,19 @@ class SugarFolder {
         ),
     );
 
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SugarFolder()
+    {
+        self::__construct();
+    }
+
 	/**
 	 * Sole constructor
 	 */
-	function SugarFolder() {
+    public function __construct()
+    {
 		$this->db = DBManagerFactory::getInstance();
         $this->emailBean = BeanFactory::getBean('Emails');
 	}
@@ -319,7 +328,7 @@ class SugarFolder {
 	 */
 	function clearSubscriptionsForFolder($folderID)
 	{
-	    $query = "DELETE FROM folders_subscriptions WHERE folder_id = '$folderID'";
+        $query = "DELETE FROM folders_subscriptions WHERE folder_id = " . $this->db->quoted($folderID);
 	    $r = $this->db->query($query);
 	}
 
@@ -592,11 +601,16 @@ ENDW;
 			$user = $current_user;
 		}
 
-		$guid = create_guid();
+        $query = sprintf(
+            'INSERT INTO folders_rel (id, folder_id, polymorphic_module, polymorphic_id, deleted)
+             VALUES (%s, %s, %s, %s, 0)',
+            $this->db->quoted(create_guid()),
+            $this->db->quoted($this->id),
+            $this->db->quoted($bean->module_dir),
+            $this->db->quoted($bean->id)
+        );
 
-		$q = "INSERT INTO folders_rel (id, folder_id, polymorphic_module, polymorphic_id, deleted)
-				VALUES('{$guid}', '{$this->id}', '{$bean->module_dir}', '{$bean->id}', 0)";
-		$r = $this->db->query($q);
+        $r = $this->db->query($query);
 		return true;
 	}
 
@@ -1079,7 +1093,7 @@ ENDW;
     protected function getUpdateQuery($fieldNames, $fieldMapping = array())
     {
         $columns = array();
-        $where = "where id = '{$this->id}'";
+        $where = "where id = " . $this->db->quoted($this->id);
 
         foreach (array_filter($fieldNames, array($this, 'isNotId')) as $field) {
             $columns[] = "{$field}=" . $this->getFieldValue($field, $fieldMapping);
@@ -1122,7 +1136,7 @@ ENDW;
 			}
 
 			// if parent_id is set, update parent's has_child flag
-			$q3 = "UPDATE folders SET has_child = 1 WHERE id = '{$this->parent_folder}'";
+            $q3 = "UPDATE folders SET has_child = 1 WHERE id = " . $this->db->quoted($this->parent_folder);
 			$r3 = $this->db->query($q3);
 		}
 		else {
@@ -1163,7 +1177,12 @@ ENDW;
 	function createSubscriptionForUser($user_id)
 	{
 	   $guid2 = create_guid();
-	   $query = "INSERT INTO folders_subscriptions VALUES('{$guid2}', '{$this->id}', '{$user_id}')";
+        $query = sprintf(
+            'INSERT INTO folders_subscriptions VALUES(%s, %s, %s)',
+            $this->db->quoted($guid2),
+            $this->db->quoted($this->id),
+            $this->db->quoted($user_id)
+        );
 	   $this->db->query($query);
 	}
 
@@ -1187,11 +1206,12 @@ ENDW;
 			}
 		}
 		// update has_child to 0 for this parent folder if this is the only child it has
-		$q1 = "select count(*) count from folders where deleted = 0 AND parent_folder = '{$this->parent_folder}'";
+        $q1 = "select count(*) count from folders
+            where deleted = 0 AND parent_folder = " . $this->db->quoted($this->parent_folder);
 		$r1 = $this->db->query($q1);
 		$a1 = $this->db->fetchByAssoc($r1);
 		if ($a1['count'] == 1) {
-			$q1 = "UPDATE folders SET has_child = 0 WHERE id = '{$this->parent_folder}'";
+            $q1 = "UPDATE folders SET has_child = 0 WHERE id = " . $this->db->quoted($this->parent_folder);
 			$r1 = $this->db->query($q1);
 		} // if
 
@@ -1211,7 +1231,7 @@ ENDW;
 
 		$r2 = $this->db->query($q2);
 		if (!empty($this->parent_folder)) {
-			$q3 = "UPDATE folders SET has_child = 1 WHERE id = '{$this->parent_folder}'";
+            $q3 = "UPDATE folders SET has_child = 1 WHERE id = " . $this->db->quoted($this->parent_folder);
 			$r3 = $this->db->query($q3);
 		} // if
 		return array('status' => "done");
@@ -1219,12 +1239,12 @@ ENDW;
 	} // fn
 
 	function findAllChildren($folderId, &$childrenArray) {
-		$q = "SELECT * FROM folders WHERE id = '{$folderId}'";
+        $q = "SELECT * FROM folders WHERE id = " . $this->db->quoted($folderId);
 		$r = $this->db->query($q);
 		$a = $this->db->fetchByAssoc($r, false);
 
 		if($a['has_child'] == 1) {
-			$q2 = "SELECT id FROM folders WHERE deleted = 0 AND parent_folder = '{$folderId}'";
+            $q2 = "SELECT id FROM folders WHERE deleted = 0 AND parent_folder = " . $this->db->quoted($folderId);
 			$r2 = $this->db->query($q2);
 
 			while($a2 = $this->db->fetchByAssoc($r2)) {
@@ -1244,7 +1264,7 @@ ENDW;
         global $dictionary;
         require_once 'modules/TableDictionary.php';
 
-		$q = "SELECT * FROM folders WHERE id = '{$id}' AND deleted = 0";
+        $q = "SELECT * FROM folders WHERE id = " . $this->db->quoted($id) . " AND deleted = 0";
 		$r = $this->db->query($q);
 		$a = $this->db->fetchByAssoc($r);
 

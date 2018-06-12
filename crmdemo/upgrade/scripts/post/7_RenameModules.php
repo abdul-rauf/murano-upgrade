@@ -10,6 +10,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 /**
  * Update data for renamed modules
  */
@@ -81,6 +84,7 @@ class SugarUpgradeRenameModules extends UpgradeScript
                 $shouldUpdatePlural = false;
                 if (
                     empty($app_list_strings['moduleList'][$moduleId])
+                    && isset($default['moduleListSingular'][$moduleId])
                     && $strings['moduleList'][$moduleId] != $default['moduleList'][$moduleId]
                 ) {
                     $shouldUpdatePlural = true;
@@ -164,7 +168,7 @@ class SugarUpgradeRenameModules extends UpgradeScript
         $app_list_strings = false;
         if (file_exists('include/language/' . $lang . '.lang.php')) {
             $app_list_strings = array();
-            include('include/language/' . $lang . '.lang.php');
+            include FileLoader::validateFilePath('include/language/' . $lang . '.lang.php');
         }
         return $app_list_strings;
     }

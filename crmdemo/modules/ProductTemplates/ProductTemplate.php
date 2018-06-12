@@ -90,10 +90,7 @@ class ProductTemplate extends SugarBean {
 	);
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function ProductTemplate()
     {
@@ -216,14 +213,17 @@ class ProductTemplate extends SugarBean {
 	function get_notes()
 	{
 		// First, get the list of IDs.
-		$query = "SELECT id from notes where parent_id='$this->id' AND deleted=0";
+        $query = "SELECT id FROM notes WHERE parent_id = ".$this->db->quoted($this->id)." AND deleted = 0";
 
 		return $this->build_related_list($query, BeanFactory::getBean('Notes'));
 	}
 
 	function clear_note_product_template_relationship($product_template_id)
 	{
-		$query = "UPDATE notes set parent_id='', parent_type='' where (parent_id='$product_template_id') and deleted=0";
+        $query = sprintf(
+            "UPDATE notes SET parent_id='', parent_type='' WHERE parent_id = %s AND deleted = 0",
+            $this->db->quoted($product_template_id)
+        );
 		$this->db->query($query,true,"Error clearing note to product_template relationship: ");
 	}
 

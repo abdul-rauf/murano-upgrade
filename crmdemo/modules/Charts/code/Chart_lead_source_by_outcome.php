@@ -27,10 +27,13 @@ class Chart_lead_source_by_outcome
 {
 	var $modules = array('Opportunities');
 	var $order = 0;
-function Chart_lead_source_by_outcome()
-{
 
-}
+    /**
+     * @deprecated
+     */
+    public function Chart_lead_source_by_outcome()
+    {
+    }
 
 function draw($extra_tools)
 {
@@ -205,7 +208,7 @@ global  $timedate;
 			$id = array();
 			if ($count>0) {
 				foreach ($user_id as $the_id) {
-					$id[] = "'".$the_id."'";
+                    $id[] = $opp->db->quoted($the_id);
 				}
 				$ids = join(",",$id);
 				$where .= "opportunities.assigned_user_id IN ($ids) ";
@@ -218,7 +221,7 @@ global  $timedate;
 			if ($count>0) {
 
 				foreach ($datay as $key=>$value) {
-					$datayArr[] = "'".$key."'";
+                    $datayArr[] = $opp->db->quoted($key);
 				}
 				$datayArr = join(",",$datayArr);
 				$where .= "AND opportunities.lead_source IN	($datayArr) ";
@@ -420,5 +423,3 @@ global  $timedate;
 		return array( 'lead_source', 'sales_stage' );
 	}
 }
-
-?>

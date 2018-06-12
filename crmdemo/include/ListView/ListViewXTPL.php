@@ -10,6 +10,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
  
  // $Id: ListViewXTPL.php 55799 2010-04-05 20:00:37Z jmertic $
 
@@ -25,10 +27,19 @@ class ListViewXTPL extends ListViewDisplay{
 	var $data;
 	var $xtpl;
 
-	function ListViewXTPL() {
-		parent::ListViewDisplay();
-	}
-	
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ListViewXTPL(Request $request = null)
+    {
+        self::__construct($request);
+    }
+
+    public function __construct(Request $request = null)
+    {
+        parent::__construct($request);
+    }
+
     /**
      * Processes the request. Calls ListViewData process. Also assigns all lang strings, export links,
      * This is called from ListViewDisplay
@@ -191,6 +202,3 @@ class ListViewXTPL extends ListViewDisplay{
 		}
 	}
 }
-
-
-?>

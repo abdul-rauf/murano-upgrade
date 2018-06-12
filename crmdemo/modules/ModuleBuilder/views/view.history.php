@@ -53,7 +53,7 @@ class ViewHistory extends SugarView
         }
         
         $packageName = (isset ( $_REQUEST [ 'view_package' ] ) && (strtolower ( $_REQUEST [ 'view_package' ] ) != 'studio')) ? $_REQUEST [ 'view_package' ] : null ;
-        $this->module = $_REQUEST [ 'view_module' ] ;
+        $this->module = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
 
         $params = array();
         $this->parser = ParserFactory::getParser(
@@ -72,20 +72,22 @@ class ViewHistory extends SugarView
 
     function browse ()
     {
+        global $timedate ;
+
         $smarty = new Sugar_Smarty ( ) ;
         global $mod_strings ;
         $smarty->assign ( 'mod_strings', $mod_strings ) ;
         $smarty->assign ( 'view_module', $this->module ) ;
         $smarty->assign ( 'view', $this->layout ) ;
-        
-        if (! empty ( $_REQUEST [ 'subpanel' ] ))
-        {
-            $smarty->assign ( 'subpanel', $_REQUEST [ 'subpanel' ] ) ;
-        }
-        $stamps = array ( ) ;
-        global $timedate ;
-        $userFormat = $timedate->get_date_time_format () ;
-        $page = ! empty ( $_REQUEST [ 'page' ] ) ? $_REQUEST [ 'page' ] : 0 ;
+
+        $subpanel = $this->request->getValidInputRequest('subpanel');
+        $smarty->assign('subpanel', $subpanel);
+
+        $page = $this->request->getValidInputRequest('page', array(
+            'Assert\Type' => array('type' => 'numeric'),
+            'Assert\Range' => array('min' => 0),
+        ), 0);
+
         $count = $this->history->getCount();
         $ts = $this->history->getNth ( $page * $this->pageSize ) ;
         $snapshots = array ( ) ;
@@ -146,8 +148,7 @@ class ViewHistory extends SugarView
             . ");' style='margin:5px;'>";
         $this->history->restoreByTimestamp ( $sid ) ;
 
-        if ($this->layout == 'listview')
-        {
+        if (($this->layout == 'listview') || ($this->layout == 'wirelesslistview')) {
             require_once ("modules/ModuleBuilder/views/view.listview.php") ;
             $view = new ViewListView ( ) ;
         } else if ($this->layout == 'basic_search' || $this->layout == 'advanced_search')

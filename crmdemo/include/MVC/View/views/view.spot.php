@@ -1,4 +1,5 @@
 <?php
+
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -19,13 +20,23 @@ require_once('include/SugarSearchEngine/SugarSearchEngineFactory.php');
 class ViewSpot extends ViewAjax
 {
     /**
+     * @deprecated Use __construct() instead
+     */
+    public function ViewSpot()
+    {
+        self::__construct();
+    }
+
+    /**
      * Constructor
      *
-     * @see SugarView::SugarView()
+     * @see SugarView::__construct()
      */
-    public function ViewSpot() {
-        $this->options['show_header'] = true;
-        parent::SugarView();
+    public function __construct()
+    {
+        $options = $this->options;
+        parent::__construct();
+        $this->options = $options;
     }
 
     /**
@@ -55,7 +66,7 @@ class ViewSpot extends ViewAjax
 
         $searchEngine = SugarSearchEngineFactory::getInstance('', array(), true);
 
-        $trimmed_query = trim($_REQUEST['q']);
+        $trimmed_query = trim($this->request->getValidInputRequest('q'));
         $rs = $searchEngine->search($trimmed_query, $offset, $limit, $options);
         $formattedResults = $this->formatSearchResultsToDisplay($rs, $offset,$trimmed_query);
 
@@ -146,4 +157,3 @@ class ViewSpot extends ViewAjax
         return array('displayResults' => $displayResults, 'displayMoreForModule' => $displayMoreForModule);
     }
 }
-

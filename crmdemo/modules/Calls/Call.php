@@ -91,10 +91,7 @@ class Call extends SugarBean {
 	public $send_invites = false;
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function Call()
     {
@@ -152,11 +149,9 @@ class Call extends SugarBean {
 
         $check_notify = $this->send_invites;
         if ($this->send_invites == false) {
-            if ((!empty($_SESSION['workflow_cron']) || !empty($_SESSION['process_author_cron'])) && empty(CalendarEvents::$old_assigned_user_id)) {
-                $ce = new CalendarEvents();
-                $ce->setOldAssignedUser($this->module_dir, $this->id);
-            }
-            $old_assigned_user_id = CalendarEvents::$old_assigned_user_id;
+
+            $old_assigned_user_id = CalendarEvents::getOldAssignedUser($this->module_dir, $this->id);
+
             if ((empty($GLOBALS['installing']) || $GLOBALS['installing'] != true) &&
                 (!empty($this->assigned_user_id) &&
                     $this->assigned_user_id != $old_assigned_user_id &&
@@ -164,7 +159,7 @@ class Call extends SugarBean {
             ) {
                 $this->special_notification = true;
                 $check_notify = true;
-                CalendarEvents::$old_assigned_user_id = $this->assigned_user_id;
+                CalendarEvents::setOldAssignedUserValue($this->assigned_user_id);
                 if (isset($_REQUEST['assigned_user_name'])) {
                     $this->new_assigned_user_name = $_REQUEST['assigned_user_name'];
                 }
@@ -297,7 +292,7 @@ class Call extends SugarBean {
 
 		if (!empty($this->contact_id)) {
 			$query  = "SELECT first_name, last_name FROM contacts ";
-			$query .= "WHERE id='$this->contact_id' AND deleted=0";
+            $query .= "WHERE id=" . $this->db->quoted($this->contact_id) . " AND deleted=0";
 			$result = $this->db->limitQuery($query,0,1,true," Error filling in additional detail fields: ");
 
 			// Get the contact name.
@@ -622,7 +617,8 @@ class Call extends SugarBean {
 		return $array_assign;
 	}
 
-	function save_relationship_changes($is_update) {
+    public function save_relationship_changes($is_update, $exclude = array())
+    {
 		$exclude = array();
 		if(empty($this->in_workflow))
         {
@@ -684,7 +680,8 @@ class Call extends SugarBean {
 
         $deleteContacts = array();
         $this->load_relationship('contacts');
-        $q = 'SELECT mu.contact_id, mu.accept_status FROM calls_contacts mu WHERE mu.call_id = \''.$this->id.'\'';
+        $q = 'SELECT mu.contact_id, mu.accept_status FROM calls_contacts mu WHERE mu.call_id = ' .
+            $this->db->quoted($this->id);
         $r = $this->db->query($q);
         $acceptStatusContacts = array();
         while ($a = $this->db->fetchByAssoc($r)) {
@@ -698,10 +695,11 @@ class Call extends SugarBean {
         if (count($deleteContacts) > 0) {
             $sql = '';
             foreach ($deleteContacts as $u) {
-                $sql .= ",'" . $u . "'";
+                $sql .= "," . $this->db->quoted($u);
             }
             $sql = substr($sql, 1);
-            $sql = "UPDATE calls_contacts SET deleted = 1 WHERE contact_id IN ($sql) AND call_id = '". $this->id . "'";
+            $sql = "UPDATE calls_contacts SET deleted = 1 WHERE contact_id IN ($sql) AND call_id = " .
+                $this->db->quoted($this->id);
             $this->db->query($sql);
         }
 
@@ -713,9 +711,10 @@ class Call extends SugarBean {
                 $this->contacts->add($contactId);
             } else {
                 // update query to preserve accept_status
-                $qU  = 'UPDATE calls_contacts SET deleted = 0, accept_status = \''.$acceptStatusContacts[$contactId].'\' ';
-                $qU .= 'WHERE call_id = \''.$this->id.'\' ';
-                $qU .= 'AND contact_id = \''.$contactId.'\'';
+                $qU  = 'UPDATE calls_contacts SET deleted = 0, accept_status = ' .
+                    $this->db->quoted($acceptStatusContacts[$contactId]);
+                $qU .= ' WHERE call_id = ' . $this->db->quoted($this->id);
+                $qU .= ' AND contact_id = ' . $this->db->quoted($contactId);
                 $this->db->query($qU);
             }
         }
@@ -739,7 +738,8 @@ class Call extends SugarBean {
         $deleteUsers = array();
         $this->load_relationship('users');
         // Get all users for the call
-        $q = 'SELECT mu.user_id, mu.accept_status FROM calls_users mu WHERE mu.call_id = \''.$this->id.'\'';
+        $q = 'SELECT mu.user_id, mu.accept_status FROM calls_users mu WHERE mu.call_id = ' .
+            $this->db->quoted($this->id);
         $r = $this->db->query($q);
         $acceptStatusUsers = array();
         while ($a = $this->db->fetchByAssoc($r)) {
@@ -753,10 +753,11 @@ class Call extends SugarBean {
         if (count($deleteUsers) > 0) {
             $sql = '';
             foreach ($deleteUsers as $u) {
-                   $sql .= ",'" . $u . "'";
+                   $sql .= "," . $this->db->quoted($u);
             }
             $sql = substr($sql, 1);
-            $sql = "UPDATE calls_users SET deleted = 1 WHERE user_id IN ($sql) AND call_id = '". $this->id . "'";
+            $sql = "UPDATE calls_users SET deleted = 1 WHERE user_id IN ($sql) AND call_id = " .
+                $this->db->quoted($this->id);
             $this->db->query($sql);
         }
 
@@ -768,9 +769,10 @@ class Call extends SugarBean {
                 $this->users->add($userId);
             } else {
                 // update query to preserve accept_status
-                $qU  = 'UPDATE calls_users SET deleted = 0, accept_status = \''.$acceptStatusUsers[$userId].'\' ';
-                $qU .= 'WHERE call_id = \''.$this->id.'\' ';
-                $qU .= 'AND user_id = \''.$userId.'\'';
+                $qU  = 'UPDATE calls_users SET deleted = 0, accept_status = ' .
+                    $this->db->quoted($acceptStatusUsers[$userId]);
+                $qU .= ' WHERE call_id = ' . $this->db->quoted($this->id);
+                $qU .= ' AND user_id = ' . $this->db->quoted($userId);
                 $this->db->query($qU);
             }
         }
@@ -788,7 +790,8 @@ class Call extends SugarBean {
 
         $deleteLeads = array();
         $this->load_relationship('leads');
-        $q = 'SELECT mu.lead_id, mu.accept_status FROM calls_leads mu WHERE mu.call_id = \''.$this->id.'\'';
+        $q = 'SELECT mu.lead_id, mu.accept_status FROM calls_leads mu WHERE mu.call_id = ' .
+            $this->db->quoted($this->id);
         $r = $this->db->query($q);
         $acceptStatusLeads = array();
         while($a = $this->db->fetchByAssoc($r)) {
@@ -802,10 +805,11 @@ class Call extends SugarBean {
         if (count($deleteLeads) > 0) {
             $sql = '';
             foreach($deleteLeads as $u) {
-                    $sql .= ",'" . $u . "'";
+                    $sql .= "," . $this->db->quoted($u);
             }
             $sql = substr($sql, 1);
-            $sql = "UPDATE calls_leads SET deleted = 1 WHERE lead_id IN ($sql) AND call_id = '". $this->id . "'";
+            $sql = "UPDATE calls_leads SET deleted = 1 WHERE lead_id IN ($sql) AND call_id = " .
+                $this->db->quoted($this->id);
             $this->db->query($sql);
         }
 
@@ -817,9 +821,10 @@ class Call extends SugarBean {
                 $this->leads->add($leadId);
             } else {
                 // update query to preserve accept_status
-                $qU  = 'UPDATE calls_leads SET deleted = 0, accept_status = \''.$acceptStatusLeads[$leadId].'\' ';
-                $qU .= 'WHERE call_id = \''.$this->id.'\' ';
-                $qU .= 'AND lead_id = \''.$leadId.'\'';
+                $qU  = 'UPDATE calls_leads SET deleted = 0, accept_status = ' .
+                    $this->db->quoted($acceptStatusLeads[$leadId]);
+                $qU .= ' WHERE call_id = ' . $this->db->quoted($this->id);
+                $qU .= ' AND lead_id = ' . $this->db->quoted($leadId);
                 $this->db->query($qU);
             }
         }

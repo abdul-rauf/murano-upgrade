@@ -16,12 +16,20 @@ require_once('modules/Trackers/Metric.php');
 require_once('modules/Trackers/Trackable.php');
 
 class BlankMonitor extends Monitor implements Trackable {
-    
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function BlankMonitor()
+    {
+        self::__construct();
+    }
+
     /**
      * BlankMonitor constructor
      */
-    function BlankMonitor() {
-
+    public function __construct()
+    {
     }
     
     /**
@@ -59,8 +67,8 @@ class BlankMonitor extends Monitor implements Trackable {
      * the flush method passing with the montior ($this) instance.
      * 
      */
-    public function save() {
- 	
+    public function save($flush=true)
+    {
     }
 
 
@@ -86,5 +94,3 @@ class BlankMonitor extends Monitor implements Trackable {
 
 	}
 }
-
-?>

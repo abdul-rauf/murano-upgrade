@@ -23,7 +23,14 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 class SubPanelViewNotes {
-	
+
+    /**
+     * @deprecated
+     */
+    public function SubPanelViewNotes()
+    {
+    }
+
 var $notes_list = null;
 var $hideNewButton = false;
 var $focus;
@@ -39,10 +46,6 @@ function setNotesList(&$value){
 
 function setHideNewButton($value){
 	$this->hideNewButton = $value;	
-}
-
-function SubPanelViewNotes(){
-	global $theme;
 }
 
 function getHeaderText($action, $currentModule){
@@ -89,4 +92,3 @@ if(is_admin($current_user) && $_REQUEST['module'] != 'DynamicLayout' && !empty($
 }
 
 }
-?>

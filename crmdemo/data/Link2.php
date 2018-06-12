@@ -801,8 +801,8 @@ class Link2 {
             //look for key in  $join_key_values, if found add to filter criteria else abort duplicate checking.
             if (isset($join_key_values[$field])) {
 
-                $this->_duplicate_where .= $delimiter.' '.$field."='".$join_key_values[$field]."'";
-                $delimiter='AND';
+                $this->_duplicate_where .= $delimiter.' '.$field." = ". $this->_db->quoted($join_key_values[$field]);
+                $delimiter = ' AND ';
             } else {
                 $GLOBALS['log']->error('Duplicate checking aborted, Please supply a value for this column '.$field);
                 return false;
@@ -833,7 +833,7 @@ class Link2 {
      *
      */
     public function _get_alternate_key_fields($table_name) {
-        $indices=Link::_get_link_table_definition($table_name,'indices');
+        $indices = Link::get_link_table_definition($table_name, null, 'indices');
         if (!empty($indices)) {
             foreach ($indices as $index) {
                 if ( isset($index['type']) && $index['type'] == 'alternate_key' ) {

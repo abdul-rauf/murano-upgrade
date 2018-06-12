@@ -70,18 +70,12 @@ class Document extends SugarBean {
 	 );
 
     /**
-     * This is deprecated since 7.7.0 and will be removed in 7.9.0.
-     * Please use __construct() instead.
-     * @deprecated 7.7.0
-     * @see __construct
+     * @deprecated Use __construct() instead
      */
     public function Document()
     {
         self::__construct();
-        $GLOBALS['log']->deprecated('Document::Document() is deprecated since 7.7.0. and will be removed in 7.9.0. ' .
-            'Please use Document::__construct() instead.');
     }
-
 
 	public function __construct() {
 		parent::__construct();
@@ -202,7 +196,7 @@ class Document extends SugarBean {
             }
 
             if ((isset($_POST['load_signed_id']) and !empty($_POST['load_signed_id']))) {
-                $query="update linked_documents set deleted=1 where id='".$_POST['load_signed_id']."'";
+                $query="update linked_documents set deleted=1 where id=".$this->db->quoted($_POST['load_signed_id']);
                 $this->db->query($query);
             }
         }
@@ -296,12 +290,13 @@ class Document extends SugarBean {
 	       $this->status = $app_list_strings['document_status_dom'][$this->status_id];
 	    }
         if (!empty($this->related_doc_id)) {
-            $this->related_doc_name = Document::get_document_name($this->related_doc_id);
+            $this->related_doc_name = self::get_document_name($this->related_doc_id);
             $this->related_doc_rev_number = DocumentRevision::get_document_revision_name($this->related_doc_rev_id);
         }
 	}
 
-	function list_view_parse_additional_sections(& $list_form, $xTemplateSection) {
+    public function list_view_parse_additional_sections(&$list_form)
+    {
 		return $list_form;
 	}
 
@@ -364,8 +359,8 @@ class Document extends SugarBean {
 		return false;
 	}
 
-	//static function.
-	function get_document_name($doc_id){
+    public static function get_document_name($doc_id)
+    {
 		if (empty($doc_id)) return null;
 
 		$db = DBManagerFactory::getInstance();

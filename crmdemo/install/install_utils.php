@@ -13,7 +13,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('include/utils/zip_utils.php');
 require_once('include/upload_file.php');
 
-use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 ////////////////
 ////  GLOBAL utility
@@ -86,9 +88,11 @@ function commitLanguagePack($uninstall=false) {
     global $base_upgrade_dir;
     global $base_tmp_upgrade_dir;
 
+    $request = InputValidation::getService();
+
     $errors         = array();
-    $manifest       = urldecode($_REQUEST['manifest']);
-    $zipFile        = urldecode($_REQUEST['zipFile']);
+    $manifest       = urldecode($request->getValidInputRequest('manifest'));
+    $zipFile        = urldecode($request->getValidInputRequest('zipFile'));
     $version        = "";
     $show_files     = true;
     $unzip_dir      = mk_temp_dir( $base_tmp_upgrade_dir );
@@ -379,8 +383,14 @@ function removeLanguagePack() {
     global $sugar_config;
 
     $errors = array();
-    $manifest = urldecode($_REQUEST['manifest']);
-    $zipFile = urldecode($_REQUEST['zipFile']);
+    installLog("remove language pack being called......");
+    // Safe $_REQUEST['manifest'] and $_REQUEST['zipFile']
+    $inputValidation = InputValidation::getService();
+    $manifestURL = $inputValidation->getValidInputRequest('manifest');
+    $zipFileURL = $inputValidation->getValidInputRequest('zipFile');
+
+    $manifest = urldecode($manifestURL);
+    $zipFile = urldecode($zipFileURL);
 
     if(isset($manifest) && !empty($manifest)) {
         if(is_file($manifest)) {
@@ -455,7 +465,7 @@ function uninstallLangPack() {
  */
 if ( !function_exists('getLanguagePackName') ) {
 function getLanguagePackName($the_file) {
-    require_once( "$the_file" );
+    $app_list_strings = FileLoader::varFromInclude($the_file, 'app_list_strings');
     if( isset( $app_list_strings["language_pack_name"] ) ){
         return( $app_list_strings["language_pack_name"] );
     }
@@ -919,7 +929,9 @@ RedirectMatch 403 {$ignoreCase}/+custom/+blowfish
 RedirectMatch 403 {$ignoreCase}/+cache/+diagnostic
 RedirectMatch 403 {$ignoreCase}/+files\.md5$
 RedirectMatch 403 {$ignoreCase}/+composer\.(json|lock)
-RedirectMatch 403 {$ignoreCase}/+vendor/composer/
+RedirectMatch 403 {$ignoreCase}/+vendor/(?!ytree.*\.(css|js|gif|png))
+RedirectMatch 403 {$ignoreCase}/+bin/
+RedirectMatch 403 {$ignoreCase}/+src/
 RedirectMatch 403 {$ignoreCase}.*/\.git
 
 # Fix mimetype for logo.svg (SP-1395)
@@ -2314,7 +2326,6 @@ function addDefaultRoles($defaultRoles = array()) {
 
 
     foreach($defaultRoles as $roleName=>$role){
-        $ACLField = new ACLField();
         $role1= new ACLRole();
         $role1->name = $roleName;
         $role1->description = $roleName." Role";
@@ -2323,7 +2334,7 @@ function addDefaultRoles($defaultRoles = array()) {
             foreach($actions as $name=>$access_override){
                 if($name=='fields'){
                     foreach($access_override as $field_id=>$access){
-                        $ACLField->setAccessControl($category, $role1_id, $field_id, $access);
+                        ACLField::setAccessControl($category, $role1_id, $field_id, $access);
                     }
                 }else{
                     $queryACL="SELECT id FROM acl_actions where category='$category' and name='$name'";

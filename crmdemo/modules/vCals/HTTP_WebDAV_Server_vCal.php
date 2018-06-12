@@ -1,6 +1,6 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
- /*
+/*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
@@ -41,7 +41,15 @@ require_once 'vendor/HTTP_WebDAV_Server/Server.php';
         var $source = "";
         var $publish_key = "";
 
-        function HTTP_WebDAV_Server_vCal()
+        /**
+         * @deprecated Use __construct() instead
+         */
+        public function HTTP_WebDAV_Server_vCal()
+        {
+            self::__construct();
+        }
+
+    public function __construct()
         {
            $this->vcal_focus = BeanFactory::getBean('vCals');
            $this->user_focus = BeanFactory::getBean('Users');
@@ -412,6 +420,3 @@ require_once 'vendor/HTTP_WebDAV_Server/Server.php';
         }
 
     }
-
-
-?>

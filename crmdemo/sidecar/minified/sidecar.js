@@ -38,6 +38,7 @@
     include(sidecarUrl + 'lib/php-js/version_compare.js');
     include(sidecarUrl + 'lib/momentjs/min/moment.min.js');
     include(sidecarUrl + 'lib/crosstab/src/crosstab.js');
+    include(sidecarUrl + 'lib/bigjs/big.js');
     include(sidecarUrl + 'lib/sugarapi/sugarapi.js');
     include(sidecarUrl + 'src/app.js');
     include(sidecarUrl + 'src/utils/utils.js');

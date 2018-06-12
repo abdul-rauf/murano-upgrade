@@ -33,21 +33,21 @@ class {{$class.name}}_sugar extends {{$class.extends}} {
     {{/if}}
 
     /**
-     * This is a deprecated method, please start using __construct() as this
-     * method will be removed in a future version.
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
-    public function {{$class.name}}_sugar(){
-        $GLOBALS['log']->deprecated('Calls to {{$class.name}}::{{$class.name}} are deprecated.');
+    public function {{$class.name}}_sugar()
+    {
         self::__construct();
     }
 
-    public function __construct(){
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
         parent::__construct();
     }
-    
+
 {{if $class.acl}}
     public function bean_implements($interface){
         switch($interface){

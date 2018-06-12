@@ -25,15 +25,16 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * @param  string $fieldname
  * @param  string $vardef
  * @param  string $value
+ * @param  array  $displayParams
  * @return string html for input element for this control
  */
 function getControl(
     $module,
     $fieldname,
     $vardef = null,
-    $value = ''
-    )
-{
+    $value = '',
+    $displayParams = array()
+) {
     global $current_language, $app_strings, $dictionary, $app_list_strings, $current_user;
 
     // use the mod_strings for this module
@@ -81,7 +82,6 @@ function getControl(
             $sfh = new SugarFieldHandler();
         }
 
-        $displayParams = array();
         $displayParams['formName'] = 'importstep3';
 
         $contents = $sfh->displaySmarty('fields', $vardef, 'ImportView', $displayParams);
@@ -117,6 +117,7 @@ function getControl(
     $date_format = $timedate->get_cal_date_format();
     $ss->assign('USER_DATEFORMAT', $timedate->get_user_date_format());
  	$ss->assign('TIME_FORMAT', $time_format);
+    $ss->assign('module', $module);
     $time_separator = ":";
     $match = array();
     if(preg_match('/\d+([^\d])\d+([^\d]*)/s', $time_format, $match)) {

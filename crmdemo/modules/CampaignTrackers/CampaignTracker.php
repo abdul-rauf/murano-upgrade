@@ -75,10 +75,7 @@ class CampaignTracker extends SugarBean {
     var $required_fields =  array('tracker_name'=>1,'tracker_url'=>1);
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function CampaignTracker()
     {
@@ -91,7 +88,8 @@ class CampaignTracker extends SugarBean {
         $this->disable_row_level_security=true;
     }
 
-    function save() {
+    public function save($check_notify = false)
+    {
         //make sure that the url has a scheme, if not then add http:// scheme
         if ($this->is_optout!=1 ){
             $url = strtolower(trim($this->tracker_url));
@@ -100,7 +98,7 @@ class CampaignTracker extends SugarBean {
             }
         }
 
-        parent::save();
+        return parent::save($check_notify);
     }
 
     /* This method should return the summary text which is used to build the bread crumb navigation*/

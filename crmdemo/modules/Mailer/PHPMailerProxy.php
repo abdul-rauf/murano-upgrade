@@ -29,6 +29,7 @@ class PHPMailerProxy extends PHPMailer
     public function __construct($exceptions = false)
     {
         parent::__construct(true);
+        $this->SMTPAutoTLS = false;
     }
 
     /**

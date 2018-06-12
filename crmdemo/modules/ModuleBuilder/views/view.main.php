@@ -12,9 +12,18 @@
 
 class ViewMain extends SugarView
 { 	
- 	function ViewMain(){
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ViewMain()
+    {
+        self::__construct();
+    }
+
+    public function __construct()
+    {
 		$this->options['show_footer'] = false;
- 		parent::SugarView();
+        parent::__construct();
  	}
  	
  	/**
@@ -35,11 +44,11 @@ class ViewMain extends SugarView
 		global $app_strings, $current_user, $mod_strings, $theme;
 
  		$smarty = new Sugar_Smarty();
- 		$type = (!empty($_REQUEST['type']))?$_REQUEST['type']:'main';
+ 		$type = $this->request->getValidInputRequest('type', null , 'main');
  		$mbt = false;
  		$admin = false;
  		$mb = strtolower($type);
- 		$smarty->assign('TYPE', $type);
+ 		$smarty->assign('TYPE', JSON::encode($type));
  		$smarty->assign('app_strings', $app_strings);
  		$smarty->assign('mod', $mod_strings);
  		//Replaced by javascript function "setMode"

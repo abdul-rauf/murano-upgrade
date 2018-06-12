@@ -12,8 +12,17 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 class Metric {
-	
-    function Metric($type, $name) {
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function Metric($type, $name)
+    {
+        self::__construct($type, $name);
+    }
+
+    public function __construct($type, $name)
+    {
         $this->_name = $name;
         $this->_type = $type;
         $this->_mutable = $name == 'monitor_id' ? false : true;
@@ -32,4 +41,3 @@ class Metric {
     }
     
 }
-?>

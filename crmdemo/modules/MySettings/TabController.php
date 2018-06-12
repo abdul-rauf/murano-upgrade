@@ -153,7 +153,7 @@ class TabController
     }
 
 
-    public function get_key_array($arr)
+    public static function get_key_array($arr)
     {
         $new = array();
         if (!empty($arr)) {

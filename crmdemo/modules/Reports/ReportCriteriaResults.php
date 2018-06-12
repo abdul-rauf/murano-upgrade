@@ -14,7 +14,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 global $theme;
 
-
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 require_once('modules/Reports/index.php');
 require_once('modules/Reports/templates/templates_reports.php');
@@ -28,12 +28,15 @@ global $current_language, $report_modules, $modules_report, $current_user, $app_
 
 require_once('modules/Reports/Report.php');
 
+$reporterName = InputValidation::getService()->getValidInputRequest('save_report_as');
+
 $args = array();
 $jsonObj = getJSONobj();
 if (isset($_REQUEST['id']) && !isset($_REQUEST['record'])) {
 	$saved_report_seed = BeanFactory::getBean('Reports');
 	$saved_report_seed->disable_row_level_security = true;
 	$saved_report_seed->retrieve($_REQUEST['id'], false);
+
 	// do this to go through the transformation
 	$reportObj = new Report($saved_report_seed->content);
 	$saved_report_seed->content = $reportObj->report_def_str;
@@ -86,10 +89,11 @@ else if (isset($_REQUEST['record'])){
     $saved_report_seed = BeanFactory::getBean('Reports');
     $saved_report_seed->disable_row_level_security = true;
     $saved_report_seed->retrieve($_REQUEST['record'], false);
+
     // do this to go through the transformation
     $reportObj = new Report($saved_report_seed->content);
     $saved_report_seed->content = $reportObj->report_def_str;
-    $report_def = isset($_REQUEST['report_def']) ? html_entity_decode($_REQUEST['report_def']) : array();
+	$report_def = InputValidation::getService()->getValidInputRequest('report_def', null, array());
 
     if (!empty($_REQUEST['reset_filters'])) {
 //        $rCache = new ReportCache();
@@ -120,8 +124,8 @@ else if (isset($_REQUEST['record'])){
                 //saveReportFilters($saved_report_seed->id, '');
         //}
 
-        if (! empty($_REQUEST['save_report_as'])) {
-                $args['reporter']->name = $_REQUEST['save_report_as'];
+        if (!empty($reporterName)) {
+                $args['reporter']->name = $reporterName;
         } // if
     }
     if (!isset($args['reporter'])) {
@@ -148,47 +152,28 @@ else if (isset($_REQUEST['record'])){
         sugar_die('');
 } else if(!empty($_REQUEST['report_options'])) {
 	$reportOptionsArray = array();
-	if (isset($_REQUEST['showDetails'])) {
-		$reportOptionsArray['showDetails'] = $_REQUEST['showDetails'];
-	}
-	if (isset($_REQUEST['showChart'])) {
-		$reportOptionsArray['showChart'] = $_REQUEST['showChart'];
-	}
-	if (isset($_REQUEST['expandAll'])) {
-		$reportOptionsArray['expandAll'] = $_REQUEST['expandAll'];
-	}
+    foreach(array('showDetails', 'showChart', 'expandAll') as $param) {
+        $value = InputValidation::getService()->getValidInputRequest($param);
+        if (!empty($value)) {
+            $reportOptionsArray[$param] = $value;
+        }
+    }
 	updateReportOptions($_REQUEST['report_id'], $reportOptionsArray);
 } else {
-	$report_def = array();
-	if ( ! empty($_REQUEST['report_def'])) {
-		$report_def = html_entity_decode($_REQUEST['report_def']);
+	$report_def = InputValidation::getService()->getValidInputRequest('report_def', null, array());
+	if (!empty($report_def)) {
 		$panels_def = html_entity_decode($_REQUEST['panels_def']);
 		$filters_def = html_entity_decode($_REQUEST['filters_defs']);
        	$args['reporter'] =  new Report($report_def, $filters_def, $panels_def);
 
-    	if (! empty($_REQUEST['save_report_as'])) {
-         	$args['reporter']->name = $_REQUEST['save_report_as'];
+    	if (!empty($reporterName)) {
+         	$args['reporter']->name = $reporterName;
     	}
 	} else {
 		$reporter = new Report();
         $args['reporter'] = $reporter;
 	}
 }
-
-if(! empty($_REQUEST['to_pdf'])){
-    if (isset($args['reporter']))
-        template_handle_pdf($args['reporter']);
-	return;
-} // if
-if(! empty($_REQUEST['to_csv'])){
-    //check to see if exporting is allowed
-    if(!hasExportAccess($args)){
-        //die if one of the above conditions has been met
-        sugar_die($mod_strings['LBL_NO_EXPORT_ACCESS']);
-    }
-	template_handle_export($args['reporter']);
-	return;
-} // if
 
 // create report obj with the seed
 $args['list_nav'] = '';
@@ -213,18 +198,37 @@ $createURL = 'index.php?module=Reports&report_module=&action=index&page=report&C
 echo getClassicModuleTitle("Reports", $params, true, '', $createURL);
 
 // show report interface
-if (isset($_REQUEST['page'] ) && $_REQUEST['page'] == 'report') {
-	checkSavedReportACL($args['reporter'],$args);
-	if (isset($_REQUEST['run_query']) && ($_REQUEST['run_query'] == 1))
-		reportResults($args['reporter'],$args);
-	else
-		reportCriteriaWithResult($args['reporter'],$args);
-	if (!empty($_REQUEST['expanded_combo_summary_divs'])) {
-		$expandDivs = explode(" ",$_REQUEST['expanded_combo_summary_divs']);
-		foreach($expandDivs as $divId) {
-			str_replace(" ", "",$divId);
+if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'report') {
+    checkSavedReportACL($args['reporter'], $args);
+
+    if (!empty($_REQUEST['to_pdf'])) {
+        if (isset($args['reporter'])) {
+            template_handle_pdf($args['reporter']);
+        }
+        return;
+    }
+
+    if (!empty($_REQUEST['to_csv'])) {
+        if (!hasExportAccess($args)) {
+            sugar_die($mod_strings['LBL_NO_EXPORT_ACCESS']);
+        }
+        template_handle_export($args['reporter']);
+        return;
+    }
+
+    if (isset($_REQUEST['run_query']) && ($_REQUEST['run_query'] == 1)) {
+        reportResults($args['reporter'], $args);
+    } else {
+        reportCriteriaWithResult($args['reporter'], $args);
+    }
+
+    if (!empty($_REQUEST['expanded_combo_summary_divs'])) {
+        $expandDivs = explode(' ', $_REQUEST['expanded_combo_summary_divs']);
+        foreach ($expandDivs as $divId) {
+            str_replace(' ', '', $divId);
 			if ($divId != "") {
-				echo "<script>expandCollapseComboSummaryDiv('".$divId."')</script>";
+                echo "<script>expandCollapseComboSummaryDiv('" . htmlspecialchars($divId, ENT_QUOTES, 'UTF-8') . "')
+                    </script>";
 			} // if
 		} // foreach
 	} // if

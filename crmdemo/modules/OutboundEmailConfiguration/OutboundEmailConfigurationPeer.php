@@ -10,12 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once "OutboundSmtpEmailConfiguration.php"; // also imports OutboundEmailConfiguration.php
+// also imports OutboundEmailConfiguration.php
+require_once "modules/OutboundEmailConfiguration/OutboundSmtpEmailConfiguration.php";
 
 // external imports
 require_once "include/OutboundEmail/OutboundEmail.php";
 require_once "modules/InboundEmail/InboundEmail.php";
 require_once "modules/Users/User.php";
+
+use Sugarcrm\Sugarcrm\Util\Serialized;
 
 class OutboundEmailConfigurationPeer
 {
@@ -294,7 +297,7 @@ class OutboundEmailConfigurationPeer
         foreach ($ieAccounts as $inbox_id => $ie) {
             $name = $ie->get_stored_options('from_name');
             $addr = $ie->get_stored_options('from_addr');
-            $storedOptions = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($ie->stored_options));
+            $storedOptions = Serialized::unserialize($ie->stored_options, array(), true);
             $isAllowedGroup = $ie->get_stored_options('allow_outbound_group_usage',false);
             if (!$ie->is_personal && !$isAllowedGroup) {
                 continue;

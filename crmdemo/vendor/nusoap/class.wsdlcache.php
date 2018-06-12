@@ -4,6 +4,10 @@
 
 Modification information for LGPL compliance
 
+2016-05-23 - smorozov - Restored PHP 4 constructor for backward compatibility
+
+2016-01-22 - avlasov - PHP 7 compatibility
+
 r57813 - 2010-08-19 10:34:44 -0700 (Thu, 19 Aug 2010) - kjing - Author: John Mertic <jmertic@sugarcrm.com>
     Bug 39085 - When loading the opposite search panel via ajax on the ListViews, call the index action instead of the ListView action to avoid touching pre-MVC code by accident.
 
@@ -79,6 +83,14 @@ class nusoap_wsdlcache {
 	 */
 	var $debug_str = '';
 
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function nusoap_wsdlcache($cache_dir = '.', $cache_lifetime = 0)
+    {
+        self::__construct($cache_dir, $cache_lifetime);
+    }
+
 	/**
 	* constructor
 	*
@@ -86,7 +98,8 @@ class nusoap_wsdlcache {
 	* @param integer $cache_lifetime lifetime for caching-files in seconds or 0 for unlimited
 	* @access public
 	*/
-	function nusoap_wsdlcache($cache_dir='.', $cache_lifetime=0) {
+    public function __construct($cache_dir = '.', $cache_lifetime = 0)
+    {
 		$this->fplock = array();
 		$this->cache_dir = $cache_dir != '' ? $cache_dir : '.';
 		$this->cache_lifetime = $cache_lifetime;
@@ -248,4 +261,3 @@ class nusoap_wsdlcache {
  */
 class wsdlcache extends nusoap_wsdlcache {
 }
-?>

@@ -43,13 +43,22 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  	var $prefix = '';
  	var $mod_strings = array();
 
+     /**
+      * @deprecated Use __construct() instead
+      */
+     public function ListViewFacade($focus, $module, $type = 0)
+     {
+         self::__construct($focus, $module, $type);
+     }
+
  	/**
  	 * Constructor
  	 * @param $focus - the bean
  	 * @param $module - the module name
  	 * @param - 0 = decide for me, 1 = ListView.html, 2 = ListViewSmarty
  	 */
- 	function ListViewFacade($focus, $module, $type = 0){
+    public function __construct($focus, $module, $type = 0)
+    {
  		$this->focus = $focus;
  		$this->module = $module;
  		$this->type = $type;
@@ -139,4 +148,3 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 		$this->title = $title;
 	}
  }
-?>

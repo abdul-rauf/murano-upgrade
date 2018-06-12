@@ -18,6 +18,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 /**
  * Check for null or zero for list of values
  * @param $prefix the prefix of value to be checked
@@ -112,25 +114,26 @@ function populateFromPost($prefix, &$focus, $skipRetrieve=false) {
  */
 function populateFromPostACL(SugarBean $focus)
 {
-    $insert = !isset($focus->id) || $focus->new_with_id;
     $isOwner = $focus->isOwner($GLOBALS['current_user']->id);
 
     // set up a default bean as per bug 46448, without bringing EditView into the mix
     // bug 58730
     require_once 'data/BeanFactory.php';
 
-    $defaultBean = BeanFactory::getBean($focus->module_name);
+    if ($focus->new_with_id) {
+        $beanId = null;
+    } else {
+        $beanId = $focus->id;
+    }
+
+    $defaultBean = BeanFactory::getBean($focus->module_name, $beanId);
     $defaultBean->fill_in_additional_detail_fields();
     $defaultBean->assigned_user_id = $GLOBALS['current_user']->id;
 
     foreach (array_keys($focus->field_defs) as $field) {
         $fieldAccess = ACLField::hasAccess($field, $focus->module_dir, $GLOBALS['current_user']->id, $isOwner);
         if (!in_array($fieldAccess, array(2, 4))) {
-            if ($insert) {
-                $focus->$field = $defaultBean->$field;
-            } else {
-                unset($focus->$field);
-            }
+            $focus->$field = $defaultBean->$field;
         }
     }
 }
@@ -154,17 +157,31 @@ function add_hidden_elements($key, $value) {
 
 function getPostToForm($ignore='', $isRegularExpression=false)
 {
+    $htmlspecialchars = function ($value) {
+        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+    };
+
 	$fields = '';
 	if(!empty($ignore) && $isRegularExpression) {
 		foreach ($_POST as $key=>$value){
 			if(!preg_match($ignore, $key)) {
-                                $fields .= add_hidden_elements($key, $value);
+                $fields .= add_hidden_elements(
+                    htmlspecialchars($key, ENT_QUOTES, 'UTF-8'),
+                    is_array($value)
+                        ? array_map($htmlspecialchars, $value)
+                        : htmlspecialchars($value, ENT_QUOTES, 'UTF-8')
+                );
 			}
 		}
 	} else {
 		foreach ($_POST as $key=>$value){
 			if($key != $ignore) {
-                                $fields .= add_hidden_elements($key, $value);
+                $fields .= add_hidden_elements(
+                    htmlspecialchars($key, ENT_QUOTES, 'UTF-8'),
+                    is_array($value)
+                        ? array_map($htmlspecialchars, $value)
+                        : htmlspecialchars($value, ENT_QUOTES, 'UTF-8')
+                    );
 			}
 		}
 	}
@@ -179,7 +196,8 @@ function getGetToForm($ignore='', $usePostAsAuthority = false)
 	    if(is_array($value)) continue;
 		if($key != $ignore){
 			if(!$usePostAsAuthority || !isset($_POST[$key])){
-				$fields.= "<input type='hidden' name='$key' value='$value'>";
+                $fields .= "<input type='hidden' name='$key' value='" .
+                    htmlspecialchars($value, ENT_QUOTES, 'UTF-8') . "'>";
 			}
 		}
 	}
@@ -302,7 +320,8 @@ function buildRedirectURL($return_id = '', $return_module = '', array $additiona
 
 function getLikeForEachWord($fieldname, $value, $minsize=4)
 {
-	$value = trim($value);
+    $db = DBManagerFactory::getInstance();
+    $value = trim($value);
 	$values = explode(' ',$value);
 	$ret = '';
 	foreach($values as $val)
@@ -313,7 +332,7 @@ function getLikeForEachWord($fieldname, $value, $minsize=4)
 			{
 				$ret .= ' or';
 			}
-			$ret .= ' '. $fieldname . ' LIKE %'.$val.'%';
+            $ret .= ' '. $fieldname . ' LIKE ' . $db->quoted('%'.$val.'%');
 		}
 
 	}
@@ -396,7 +415,8 @@ function get_teams_hidden_inputs($module='') {
 	   }
 
 	   if(isset($_REQUEST['primary_team_name_collection'])) {
-	      $input .= "<input type='hidden' name='primary_team_name_collection' value='" . $_REQUEST['primary_team_name_collection'] . "'>\n";
+            $escaped = htmlspecialchars($_REQUEST['primary_team_name_collection'], ENT_QUOTES, 'UTF-8');
+            $input .= "<input type='hidden' name='primary_team_name_collection' value='" . $escaped . "'>\n";
 	   }
 	}
 	return $input;
@@ -449,7 +469,7 @@ function add_to_prospect_list($query_panel,$parent_module,$parent_type,$parent_i
 
 
     if (!class_exists($parent_type)) {
-        require_once('modules/'.cleanDirName($parent_module).'/'.cleanDirName($parent_type).'.php');
+        require_once FileLoader::validateFilePath('modules/'.$parent_module.'/'.$parent_type.'.php');
     }
     $focus = new $parent_type();
     $focus->retrieve($parent_id);

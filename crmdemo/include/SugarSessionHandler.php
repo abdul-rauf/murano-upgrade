@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Session handler for Sugar
  */
@@ -35,49 +36,69 @@ class SugarSessionHandler extends SessionHandler
      */
     protected $log;
 
+    /**
+     * Ctor
+     */
     public function __construct()
     {
         $this->max_session_time = SugarConfig::getInstance()->get('max_session_time');
         $this->log = LoggerManager::getLogger('SugarCRM');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function open($save_path, $session_id)
     {
-        parent::open($save_path, $session_id);
-        $this->session_start = time();
+        $result = parent::open($save_path, $session_id);
+
+        if ($result) {
+            $this->session_start = time();
+        }
+
+        return $result;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function close()
     {
-        parent::close();
-                
         if ($this->isCurrentSessionExceeded()) {
-            $this->log->error(sprintf("[SessionLock] Session lock was held for %s seconds which is longer than the maximum of %s seconds. Request details: 
-                SERVER_NAME     | %s 
-                SERVER_ADDR     | %s 
-                SCRIPT_FILENAME | %s 
-                REQUEST_METHOD  | %s 
-                SCRIPT_NAME     | %s 
-                REQUEST_URI     | %s 
-                QUERY_STRING    | %s ",
+            $vars = array(
+                'SERVER_NAME',
+                'SERVER_ADDR',
+                'SCRIPT_FILENAME',
+                'REQUEST_METHOD',
+                'SCRIPT_NAME',
+                'REQUEST_URI',
+                'QUERY_STRING',
+            );
+
+            $details = array();
+            foreach ($vars as $var) {
+                $value = isset($_SERVER[$var])
+                    ? $_SERVER[$var] : 'Not set';
+                $details[] = $var . ': ' . $value;
+            }
+
+            $this->log->fatal(sprintf(
+                '[SessionLock] Session lock was held for %d seconds which is longer than the maximum of %d seconds.'
+                . ' Request details: %s',
                 $this->session_time,
                 $this->max_session_time,
-                $_SERVER['SERVER_NAME'],
-                $_SERVER['SERVER_ADDR'],
-                $_SERVER['SCRIPT_FILENAME'],
-                $_SERVER['REQUEST_METHOD'],
-                $_SERVER['SCRIPT_NAME'],
-                $_SERVER['REQUEST_URI'],
-                $_SERVER['QUERY_STRING']
-            ));           
+                implode(', ', $details)
+            ));
         }
+
+        return parent::close();
     }
 
     /**
      * Calculate session time
-     * @return int
+     * @return int|false
      */
-    public function getCurrentSessionTime()
+    protected function getCurrentSessionTime()
     {
         if (!$this->session_start) {
             return false;
@@ -90,7 +111,7 @@ class SugarSessionHandler extends SessionHandler
      * Check if session time more than defined treshhold
      * @return bool
      */
-    public function isCurrentSessionExceeded() 
+    protected function isCurrentSessionExceeded()
     {
         $this->session_time = $this->getCurrentSessionTime();
 

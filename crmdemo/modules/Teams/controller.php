@@ -39,7 +39,8 @@ class TeamsController extends SugarController {
 		$retArray['caption'] = $caption;
 	    $retArray['width'] = '100';
 	    $retArray['theme'] = $theme;
-	    echo 'result = ' . $json->encode($retArray);
+	    header("Content-Type: application/json");
+	    echo $json->encode($retArray);
 	}
 }
 ?>

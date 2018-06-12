@@ -11,16 +11,33 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/api/SugarApiException.php');
-require_once('include/api/SugarApi.php');
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Platform as PlatformConstraint;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
 
-abstract class ServiceBase {
+abstract class ServiceBase implements LoggerAwareInterface
+{
     public $user;
     public $platform = 'base';
     public $action = 'view';
 
     abstract public function execute();
     abstract protected function handleException(Exception $exception);
+
+    /** @var LoggerInterface */
+    protected $logger;
+
+    /**
+     * Sets a logger instance on the object
+     *
+     * @param LoggerInterface $logger
+     * @return null
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
 
     protected function loadServiceDictionary($dictionaryName) {
         require_once("include/api/{$dictionaryName}.php");
@@ -111,9 +128,10 @@ abstract class ServiceBase {
      * simply have to generate the ETag, pass it in, and the function handles the rest.
      *
      * @param string $etag ETag to use for this content.
+     * @param int $cache_age age in seconds for Cache-control max-age header
      * @return bool Did we have a match?
      */
-    public function generateETagHeader()
+    public function generateETagHeader($etag, $cache_age = null)
     {
         // do nothing in base class
         return false;
@@ -181,13 +199,61 @@ abstract class ServiceBase {
                 // See BR-1038
                 return;
             }
-            $GLOBALS['log']->error("A PHP error occurred:\n".$errorOutput);
+            $GLOBALS['log']->error("A PHP error occurred:\n" . $errorOutput);
             $e = new SugarApiExceptionError();
             $e->errorLabel = $errorType;
             if (inDeveloperMode()) {
-                $e->setExtraData('error_output',$errorOutput);
+                $e->setExtraData('error_output', $errorOutput);
             }
             throw $e;
+        }
+    }
+
+    /**
+     * Validate the given platform name against the known platform list.
+     *
+     * As the platform has not been enforced in the past, this functionality
+     * needs to be explicitly enabled by setting the following config flag:
+     *
+     *      `$sugar_config['disable_unknown_platforms'] = true`
+     *
+     * This will become the default behavior and will be strictly enforced
+     * in the near future. It is a MUST for all customizations to properly
+     * register custom platforms through the Extension framework.
+     *
+     * If the above config flag is not set some generic validation will
+     * still be applied restricting the allowed characters and length.
+     *
+     * @throws SugarApiExceptionInvalidParameter
+     */
+    public function validatePlatform($platform)
+    {
+        $violations = Validator::getService()->validate($platform, new PlatformConstraint());
+        if (count($violations) === 0) {
+            return;
+        }
+
+        $raiseException = false;
+        $strict = (bool) SugarConfig::getInstance()->get('disable_unknown_platforms', false);
+
+        foreach ($violations as $violation) {
+            switch ($violation->getCode()) {
+                case PlatformConstraint::ERROR_INVALID_PLATFORM:
+                    if ($strict === true) {
+                        $this->logger->alert($violation->getMessage());
+                        $raiseException = true;
+                    } else {
+                        $this->logger->alert($violation->getMessage());
+                    }
+                    break;
+                default:
+                    $this->logger->alert($violation->getMessage());
+                    $raiseException = true;
+            }
+        }
+
+        if ($raiseException) {
+            throw new SugarApiExceptionInvalidParameter("EXCEPTION_INVALID_PLATFORM");
         }
     }
 }

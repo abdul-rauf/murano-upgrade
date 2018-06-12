@@ -20,7 +20,15 @@ class SetRequiredAction extends AbstractAction
      */
     protected $disallowedActions = array('view');
 
-    function SetRequiredAction($params)
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SetRequiredAction($params)
+    {
+        self::__construct($params);
+    }
+
+    public function __construct($params)
     {
         $this->params = $params;
         $this->targetField = $params['target'];

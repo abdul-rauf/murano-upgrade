@@ -10,6 +10,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 require_once('soap/SoapRelationshipHelper.php');
 set_time_limit(360);
 
@@ -195,9 +196,7 @@ function sync_set_entries($session, $module_name,$from_date, $to_date, $sync_ent
 
 				$cur = $seed->getCleanCopy();
 				foreach($value['name_value_list'] as $name_value){
-
-					$cur->$name_value['name'] = $name_value['value'];
-
+                    $cur->{$name_value['name']} = $name_value['value'];
 				}
 				$temp = BeanFactory::getBean($module_name, $cur->id);
 				if(empty($tmp)){

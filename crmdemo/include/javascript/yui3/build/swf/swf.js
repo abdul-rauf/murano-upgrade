@@ -5,4 +5,207 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add("swf",function(e,t){function d(t,n,d){this._id=e.guid("yuiswf");var v=this._id,m=o.one(t),d=d||{},g=d.version||l,y=(g+"").split("."),b=r.isFlashVersionAtLeast(parseInt(y[0],10),parseInt(y[1],10),parseInt(y[2],10)),w=r.isFlashVersionAtLeast(8,0,0),E=w&&!b&&d.useExpressInstall,S=E?c:n,x="<object ",T,N,C="yId="+e.id+"&YUISwfId="+v+"&YUIBridgeCallback="+h+"&allowedDomain="+document.location.hostname;e.SWF._instances[v]=this;if(m&&(b||E)&&S){x+='id="'+v+'" ',s.ie?x+='classid="'+a+'" ':x+='type="'+f+'" data="'+u.html(S)+'" ',T="100%",N="100%",x+='width="'+T+'" height="'+N+'">',s.ie&&(x+='<param name="movie" value="'+u.html(S)+'"/>');for(var k in d.fixedAttributes)p.hasOwnProperty(k)&&(x+='<param name="'+u.html(k)+'" value="'+u.html(d.fixedAttributes[k])+'"/>');for(var L in d.flashVars){var A=d.flashVars[L];i.isString(A)&&(C+="&"+u.html(L)+"="+u.html(encodeURIComponent(A)))}C&&(x+='<param name="flashVars" value="'+C+'"/>'),x+="</object>",m.set("innerHTML",x),this._swf=o.one("#"+v)}else{var O={};O.type="wrongflashversion",this.publish("wrongflashversion",{fireOnce:!0}),this.fire("wrongflashversion",O)}}var n=e.Event,r=e.SWFDetect,i=e.Lang,s=e.UA,o=e.Node,u=e.Escape,a="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000",f="application/x-shockwave-flash",l="10.0.22",c="http://fpdownload.macromedia.com/pub/flashplayer/update/current/swf/autoUpdater.swf?"+Math.random(),h="SWF.eventHandler",p={align:"",allowFullScreen:"",allowNetworking:"",allowScriptAccess:"",base:"",bgcolor:"",loop:"",menu:"",name:"",play:"",quality:"",salign:"",scale:"",tabindex:"",wmode:""};d._instances=d._instances||{},d.eventHandler=function(e,t){d._instances[e]._eventHandler(t)},d.prototype={_eventHandler:function(e){e.type==="swfReady"?(this.publish("swfReady",{fireOnce:!0}),this.fire("swfReady",e)):e.type!=="log"&&this.fire(e.type,e)},callSWF:function(e,t){return t||(t=[]),this._swf._node[e]?this._swf._node[e].apply(this._swf._node,t):null},toString:function(){return"SWF "+this._id}},e.augment(d,e.EventTarget),e.SWF=d},"3.15.0",{requires:["event-custom","node","swfdetect","escape"]});
+YUI.add('swf', function (Y, NAME) {
+
+/**
+ * Embed a Flash applications in a standard manner and communicate with it
+ * via External Interface.
+ * @module swf
+ * @deprecated The swf module is deprecated and will not be replaced. YUI has
+ * no plans for providing a utility for embedding Flash into HTML pages. 
+ */
+
+    var Event = Y.Event,
+        SWFDetect = Y.SWFDetect,
+        Lang = Y.Lang,
+        uA = Y.UA,
+        Node = Y.Node,
+        Escape = Y.Escape,
+
+        // private
+        FLASH_CID = "clsid:d27cdb6e-ae6d-11cf-96b8-444553540000",
+        FLASH_TYPE = "application/x-shockwave-flash",
+        FLASH_VER = "10.0.22",
+        EXPRESS_INSTALL_URL = "http://fpdownload.macromedia.com/pub/flashplayer/update/current/swf/autoUpdater.swf?" + Math.random(),
+        EVENT_HANDLER = "SWF.eventHandler",
+        possibleAttributes = {align:"", allowFullScreen:"", allowNetworking:"", allowScriptAccess:"", base:"", bgcolor:"", loop:"", menu:"", name:"", play: "", quality:"", salign:"", scale:"", tabindex:"", wmode:""};
+
+        /**
+         * The SWF utility is a tool for embedding Flash applications in HTML pages.
+         * @module swf
+         * @title SWF Utility
+         * @requires event-custom, node, swfdetect
+         */
+
+        /**
+         * Creates the SWF instance and keeps the configuration data
+         *
+         * @class SWF
+         * @deprecated
+         * @uses Y.Event.Target
+         * @constructor
+         * @param {String|HTMLElement} id The id of the element, or the element itself that the SWF will be inserted into.
+         *        The width and height of the SWF will be set to the width and height of this container element.
+         * @param {String} swfURL The URL of the SWF to be embedded into the page.
+         * @param {Object} p_oAttributes (optional) Configuration parameters for the Flash application and values for Flashvars
+         *        to be passed to the SWF. The p_oAttributes object allows the following additional properties:
+         *        <dl>
+         *          <dt>version : String</dt>
+         *          <dd>The minimum version of Flash required on the user's machine.</dd>
+         *          <dt>fixedAttributes : Object</dt>
+         *          <dd>An object literal containing one or more of the following String keys and their values: <code>align,
+         *              allowFullScreen, allowNetworking, allowScriptAccess, base, bgcolor, menu, name, quality, salign, scale,
+         *              tabindex, wmode.</code> event from the thumb</dd>
+         *        </dl>
+         */
+function SWF (p_oElement /*:String*/, swfURL /*:String*/, p_oAttributes /*:Object*/ ) {
+
+    this._id = Y.guid("yuiswf");
+
+
+    var _id = this._id;
+    var oElement = Node.one(p_oElement);
+
+    var p_oAttributes = p_oAttributes || {};
+
+    var flashVersion = p_oAttributes.version || FLASH_VER;
+
+    var flashVersionSplit = (flashVersion + '').split(".");
+    var isFlashVersionRight = SWFDetect.isFlashVersionAtLeast(parseInt(flashVersionSplit[0], 10), parseInt(flashVersionSplit[1], 10), parseInt(flashVersionSplit[2], 10));
+    var canExpressInstall = (SWFDetect.isFlashVersionAtLeast(8,0,0));
+    var shouldExpressInstall = canExpressInstall && !isFlashVersionRight && p_oAttributes.useExpressInstall;
+    var flashURL = (shouldExpressInstall)?EXPRESS_INSTALL_URL:swfURL;
+    var objstring = '<object ';
+    var w, h;
+    var flashvarstring = "yId=" + Y.id + "&YUISwfId=" + _id + "&YUIBridgeCallback=" + EVENT_HANDLER + "&allowedDomain=" + document.location.hostname;
+
+    Y.SWF._instances[_id] = this;
+    if (oElement && (isFlashVersionRight || shouldExpressInstall) && flashURL) {
+        objstring += 'id="' + _id + '" ';
+        if (uA.ie) {
+            objstring += 'classid="' + FLASH_CID + '" ';
+        } else {
+            objstring += 'type="' + FLASH_TYPE + '" data="' + Escape.html(flashURL) + '" ';
+        }
+
+        w = "100%";
+        h = "100%";
+
+        objstring += 'width="' + w + '" height="' + h + '">';
+
+        if (uA.ie) {
+            objstring += '<param name="movie" value="' + Escape.html(flashURL) + '"/>';
+        }
+
+        for (var attribute in p_oAttributes.fixedAttributes) {
+            if (possibleAttributes.hasOwnProperty(attribute)) {
+                objstring += '<param name="' + Escape.html(attribute) + '" value="' + Escape.html(p_oAttributes.fixedAttributes[attribute]) + '"/>';
+            }
+        }
+
+        for (var flashvar in p_oAttributes.flashVars) {
+            var fvar = p_oAttributes.flashVars[flashvar];
+            if (Lang.isString(fvar)) {
+                flashvarstring += "&" + Escape.html(flashvar) + "=" + Escape.html(encodeURIComponent(fvar));
+            }
+        }
+
+        if (flashvarstring) {
+            objstring += '<param name="flashVars" value="' + flashvarstring + '"/>';
+        }
+
+        objstring += "</object>";
+        //using innerHTML as setHTML/setContent causes some issues with ExternalInterface for IE versions of the player
+        oElement.set("innerHTML", objstring);
+
+        this._swf = Node.one("#" + _id);
+    } else {
+        /**
+         * Fired when the Flash player version on the user's machine is
+         * below the required value.
+         *
+         * @event wrongflashversion
+         */
+        var event = {};
+        event.type = "wrongflashversion";
+        this.publish("wrongflashversion", {fireOnce:true});
+        this.fire("wrongflashversion", event);
+    }
+}
+
+/**
+ * @private
+ * The static collection of all instances of the SWFs on the page.
+ * @property _instances
+ * @type Object
+ */
+
+SWF._instances = SWF._instances || {};
+
+/**
+ * @private
+ * Handles an event coming from within the SWF and delegate it
+ * to a specific instance of SWF.
+ * @method eventHandler
+ * @param swfid {String} the id of the SWF dispatching the event
+ * @param event {Object} the event being transmitted.
+ */
+SWF.eventHandler = function (swfid, event) {
+    SWF._instances[swfid]._eventHandler(event);
+};
+
+SWF.prototype = {
+    /**
+     * @private
+     * Propagates a specific event from Flash to JS.
+     * @method _eventHandler
+     * @param event {Object} The event to be propagated from Flash.
+     */
+    _eventHandler: function(event) {
+        if (event.type === "swfReady") {
+            this.publish("swfReady", {fireOnce:true});
+            this.fire("swfReady", event);
+        } else if(event.type === "log") {
+        } else {
+            this.fire(event.type, event);
+        }
+    },
+
+        /**
+     * Calls a specific function exposed by the SWF's
+     * ExternalInterface.
+     * @method callSWF
+     * @param func {String} the name of the function to call
+     * @param args {Array} the set of arguments to pass to the function.
+     */
+
+    callSWF: function (func, args)
+    {
+    if (!args) {
+          args= [];
+    }
+        if (this._swf._node[func]) {
+        return(this._swf._node[func].apply(this._swf._node, args));
+        } else {
+        return null;
+        }
+    },
+
+    /**
+     * Public accessor to the unique name of the SWF instance.
+     *
+     * @method toString
+     * @return {String} Unique name of the SWF instance.
+     */
+    toString: function()
+    {
+        return "SWF " + this._id;
+    }
+};
+
+Y.augment(SWF, Y.EventTarget);
+
+Y.SWF = SWF;
+
+
+}, '3.15.0', {"requires": ["event-custom", "node", "swfdetect", "escape"]});

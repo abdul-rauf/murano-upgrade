@@ -84,11 +84,19 @@ class HTTP_WebDAV_Server
     // {{{ Constructor
 
     /**
+     * @deprecated Use __construct() instead
+     */
+    public function HTTP_WebDAV_Server()
+    {
+        self::__construct();
+    }
+
+    /**
      * Constructor
      *
      * @param void
      */
-    function HTTP_WebDAV_Server()
+    public function __construct()
     {
         // PHP messages destroy XML output -> switch them off
         ini_set("display_errors", 0);
@@ -1870,4 +1878,3 @@ class HTTP_WebDAV_Server
    * c-basic-offset: 4
    * End:
    */
-?>

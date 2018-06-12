@@ -20,6 +20,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once('include/SugarObjects/forms/PersonFormBase.php');
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 class ContactFormBase extends PersonFormBase {
 
 var $moduleName = 'Contacts';
@@ -33,11 +35,11 @@ var $objectName = 'Contact';
  * @see checkForDuplicates (method), ContactFormBase.php, LeadFormBase.php, ProspectFormBase.php
  * @param $focus sugarbean
  * @param $prefix String value of prefix that may be present in $_POST variables
- * @return SQL String of the query that should be used for the initial duplicate lookup check
+ * @return string The query that should be used for the initial duplicate lookup check
  */
 public function getDuplicateQuery($focus, $prefix='')
 {
-
+    $db = DBManagerFactory::getInstance();
 	$query = 'SELECT contacts.id, contacts.first_name, contacts.last_name, contacts.title FROM contacts ';
 
     // Bug #46427 : Records from other Teams shown on Potential Duplicate Contacts screen during Lead Conversion
@@ -50,14 +52,25 @@ public function getDuplicateQuery($focus, $prefix='')
     $query .= ' where contacts.deleted = 0 AND ';
 
 	if(isset($_POST[$prefix.'first_name']) && strlen($_POST[$prefix.'first_name']) != 0 && isset($_POST[$prefix.'last_name']) && strlen($_POST[$prefix.'last_name']) != 0){
-		$query .= " contacts.first_name LIKE '". $_POST[$prefix.'first_name'] . "%' AND contacts.last_name = '". $_POST[$prefix.'last_name'] ."'";
+        $query .= sprintf(
+            ' contacts.first_name LIKE %s AND contacts.last_name = %s',
+            $db->quoted($_POST[$prefix . 'first_name'] . '%'),
+            $db->quoted($_POST[$prefix . 'last_name'])
+        );
 	} else {
-		$query .= " contacts.last_name = '". $_POST[$prefix.'last_name'] ."'";
+        $query .= sprintf(
+            ' contacts.last_name = %s',
+            $db->quoted($_POST[$prefix . 'last_name'])
+        );
 	}
 
 	if(!empty($_POST[$prefix.'record'])) {
-		$query .= " AND  contacts.id != '". $_POST[$prefix.'record'] ."'";
+        $query .= sprintf(
+            ' AND contacts.id != %s',
+            $db->quoted($_POST[$prefix . 'record'])
+        );
 	}
+
     return $query;
 }
 
@@ -465,23 +478,28 @@ function handleSave($prefix, $redirect=true, $useRequired=false){
 		$check_notify = false;
 	}
 
+	$post = InputValidation::getService();
+	$record = $post->getValidInputPost('record', 'Assert\Guid');
+	$dupCheck = $post->getValidInputPost('dup_checked');
+	$inboundEmailId = $post->getValidInputPost('inbound_email_id', 'Assert\Guid');
+	$relateTo = $post->getValidInputPost('relate_to', 'Assert\ComponentName');
+	$relateId = $post->getValidInputPost('relate_id', 'Assert\Guid');
 
-	if (empty($_POST['record']) && empty($_POST['dup_checked'])) {
+	if (!empty($record) && !empty($dupCheck)) {
 
 		$duplicateContacts = $this->checkForDuplicates($prefix);
 		if(isset($duplicateContacts)){
 			$location='module=Contacts&action=ShowDuplicates';
 			$get = '';
-			if(isset($_POST['inbound_email_id']) && !empty($_POST['inbound_email_id'])) {
-				$get .= '&inbound_email_id='.$_POST['inbound_email_id'];
+			if(!empty($inboundEmailId)) {
+				$get .= '&inbound_email_id=' . $inboundEmailId;
 			}
-
 			// Bug 25311 - Add special handling for when the form specifies many-to-many relationships
-			if(isset($_POST['relate_to']) && !empty($_POST['relate_to'])) {
-				$get .= '&Contactsrelate_to='.$_POST['relate_to'];
+			if(!empty($relateTo)) {
+				$get .= '&Contactsrelate_to=' . $relateTo;
 			}
-			if(isset($_POST['relate_id']) && !empty($_POST['relate_id'])) {
-				$get .= '&Contactsrelate_id='.$_POST['relate_id'];
+			if(!empty($relateId)) {
+				$get .= '&Contactsrelate_id='. $relateId;
 			}
 
 			//add all of the post fields to redirect get string
@@ -630,35 +648,33 @@ function handleSave($prefix, $redirect=true, $useRequired=false){
 }
 
 function handleRedirect($return_id){
-	if(isset($_POST['return_module']) && $_POST['return_module'] != "") {
-		$return_module = urlencode($_POST['return_module']);
-	}
-	else {
-		$return_module = "Contacts";
-	}
+    $return_module = InputValidation::getService()->getValidInputPost(
+        'return_module',
+        'Assert\Mvc\ModuleName',
+        'Contacts'
+    );
+    $return_action = InputValidation::getService()->getValidInputPost(
+        'return_action',
+        '',
+        'DetailView'
+    );
+    $return_id = InputValidation::getService()->getValidInputPost(
+        'return_id',
+        'Assert\Guid',
+        ''
+    );
 
-	if(isset($_POST['return_action']) && $_POST['return_action'] != "") {
-		if($_REQUEST['return_module'] == 'Emails') {
-			$return_action = urlencode($_REQUEST['return_action']);
-		}
-		// if we create a new record "Save", we want to redirect to the DetailView
-		elseif($_REQUEST['action'] == "Save" && $_REQUEST['return_module'] != "Home") {
-			$return_action = 'DetailView';
-		} else {
-			// if we "Cancel", we go back to the list view.
-			$return_action = urlencode($_REQUEST['return_action']);
-		}
-	}
-	else {
-		$return_action = "DetailView";
-	}
+    if ($_REQUEST['return_module'] == 'Emails') {
+        $return_action = InputValidation::getService()->getValidInputRequest('return_action', '');
 
-	if(isset($_POST['return_id']) && $_POST['return_id'] != "") {
-        $return_id = urlencode($_POST['return_id']);
 	}
+    // if we create a new record "Save", we want to redirect to the DetailView
+    elseif ($_REQUEST['action'] == 'Save' && $return_module != 'Home') {
+        $return_action = 'DetailView';
+    }
 
 	//eggsurplus Bug 23816: maintain VCR after an edit/save. If it is a duplicate then don't worry about it. The offset is now worthless.
- 	$redirect_url = "index.php?action=$return_action&module=$return_module&record=$return_id";
+    $redirect_url = "index.php?action=" . urlencode($return_action) . "&module=$return_module&record=$return_id";
  	if(isset($_REQUEST['offset']) && empty($_REQUEST['duplicateSave'])) {
  	    $redirect_url .= "&offset=".$_REQUEST['offset'];
  	}

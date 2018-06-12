@@ -19,17 +19,18 @@ require_once('modules/Trackers/Trackable.php');
 class tracker_queries_monitor extends Monitor implements Trackable {
 
     var $cached_data = array();
-    
-    public function __construct($name = '', $monitorId = '', $metadata = '', $store = '') {
-        parent::Monitor($name, $monitorId, $metadata, $store);
-    }
 
     /**
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
-    public function tracker_monitor($name = '', $monitorId = '', $metadata = '', $store = '') {
-        $GLOBALS['log']->deprecated('Please use parent::__construct() instead of parent::ClassName()');
+    public function tracker_queries_monitor($name = '', $monitorId = '', $metadata = '', $store = '')
+    {
         self::__construct($name, $monitorId, $metadata, $store);
+    }
+
+    public function __construct($name = '', $monitorId = '', $metadata = '', $store = '')
+    {
+        parent::__construct($name, $monitorId, $metadata, $store);
     }
 
     /**
@@ -112,4 +113,3 @@ class tracker_queries_monitor extends Monitor implements Trackable {
     	} //if
    } //save
 }
-?>

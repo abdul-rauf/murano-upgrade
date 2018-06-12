@@ -5,4 +5,147 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add("highlight-accentfold",function(e,t){var n=e.Text.AccentFold,r=e.Escape,i={},s=e.mix(e.Highlight,{allFold:function(t,o,u){var a=s._TEMPLATE,f=[],l=0,c,h,p,d,v;u=e.merge({escapeHTML:!1,replacer:function(e,n,r,i){var s;if(n&&!/\s/.test(r))return e;s=r.length,f.push([t.substring(l,i),t.substr(i,s)]),l=i+s}},u||i),s.all(n.fold(t),n.fold(o),u),l<t.length&&f.push([t.substr(l)]);for(h=0,p=f.length;h<p;++h){c=r.html(f[h][0]);if(d=f[h][1])c+=a.replace(/\{s\}/g,r.html(d));f[h]=c}return f.join("")},startFold:function(e,t){return s.allFold(e,t,{startsWith:!0})},wordsFold:function(e,t){var i=s._TEMPLATE;return s.words(e,n.fold(t),{mapper:function(e,t){return t.hasOwnProperty(n.fold(e))?i.replace(/\{s\}/g,r.html(e)):r.html(e)}})}})},"3.15.0",{requires:["highlight-base","text-accentfold"]});
+YUI.add('highlight-accentfold', function (Y, NAME) {
+
+/**
+Adds accent-folding highlighters to `Y.Highlight`.
+
+@module highlight
+@submodule highlight-accentfold
+**/
+
+/**
+@class Highlight
+@static
+**/
+
+var AccentFold = Y.Text.AccentFold,
+    Escape     = Y.Escape,
+
+    EMPTY_OBJECT = {},
+
+Highlight = Y.mix(Y.Highlight, {
+    // -- Public Static Methods ------------------------------------------------
+
+    /**
+    Accent-folding version of `all()`.
+
+    @method allFold
+    @param {String} haystack String to apply highlighting to.
+    @param {String|String[]} needles String or array of strings that should be
+      highlighted.
+    @param {Object} [options] Options object.
+    @param {Boolean} [options.startsWith=false] If `true`, matches must be
+        anchored to the beginning of the string.
+    @return {String} Escaped and highlighted copy of _haystack_.
+    @static
+    **/
+    allFold: function (haystack, needles, options) {
+        var template = Highlight._TEMPLATE,
+            results  = [],
+            startPos = 0,
+            chunk, i, len, match, result;
+
+        options = Y.merge({
+            // This tells Highlight.all() not to escape HTML, in order to ensure
+            // usable match offsets. The output of all() is discarded, and we
+            // perform our own escaping before returning the highlighted string.
+            escapeHTML: false,
+
+            // While the highlight regex operates on the accent-folded strings,
+            // this replacer will highlight the matched positions in the
+            // original string.
+            //
+            // Note: this implementation doesn't handle multi-character folds,
+            // like "æ" -> "ae". Doing so correctly would be prohibitively
+            // expensive both in terms of code size and runtime performance, so
+            // I've chosen to take the pragmatic route and just not do it at
+            // all. This is one of many reasons why accent folding is best done
+            // on the server.
+            replacer: function (match, p1, foldedNeedle, pos) {
+                var len;
+
+                // Ignore matches inside HTML entities.
+                if (p1 && !(/\s/).test(foldedNeedle)) {
+                    return match;
+                }
+
+                len = foldedNeedle.length;
+
+                results.push([
+                    haystack.substring(startPos, pos), // substring between previous match and this match
+                    haystack.substr(pos, len)          // match to be highlighted
+                ]);
+
+                startPos = pos + len;
+            }
+        }, options || EMPTY_OBJECT);
+
+        // Run the highlighter on the folded strings. We don't care about the
+        // output; our replacer function will build the canonical highlighted
+        // string, with original accented characters.
+        Highlight.all(AccentFold.fold(haystack), AccentFold.fold(needles), options);
+
+        // Tack on the remainder of the haystack that wasn't highlighted, if
+        // any.
+        if (startPos < haystack.length) {
+            results.push([haystack.substr(startPos)]);
+        }
+
+        // Highlight and escape the string.
+        for (i = 0, len = results.length; i < len; ++i) {
+            chunk = Escape.html(results[i][0]);
+
+            if ((match = results[i][1])) {
+                chunk += template.replace(/\{s\}/g, Escape.html(match));
+            }
+
+            results[i] = chunk;
+        }
+
+        return results.join('');
+    },
+
+    /**
+    Accent-folding version of `start()`.
+
+    @method startFold
+    @param {String} haystack String to apply highlighting to.
+    @param {String|String[]} needles String or array of strings that should be
+      highlighted.
+    @return {String} Escaped and highlighted copy of _haystack_.
+    @static
+    **/
+    startFold: function (haystack, needles) {
+        return Highlight.allFold(haystack, needles, {startsWith: true});
+    },
+
+    /**
+    Accent-folding version of `words()`.
+
+    @method wordsFold
+    @param {String} haystack String to apply highlighting to.
+    @param {String|String[]} needles String or array of strings containing words
+      that should be highlighted. If a string is passed, it will be split
+      into words; if an array is passed, it is assumed to have already been
+      split.
+    @return {String} Escaped and highlighted copy of _haystack_.
+    @static
+    **/
+    wordsFold: function (haystack, needles) {
+        var template = Highlight._TEMPLATE;
+
+        return Highlight.words(haystack, AccentFold.fold(needles), {
+            mapper: function (word, needles) {
+                if (needles.hasOwnProperty(AccentFold.fold(word))) {
+                    return template.replace(/\{s\}/g, Escape.html(word));
+                }
+
+                return Escape.html(word);
+            }
+        });
+    }
+});
+
+
+}, '3.15.0', {"requires": ["highlight-base", "text-accentfold"]});

@@ -15,6 +15,8 @@ SugarAutoLoader::requireWithCustom('include/Sugarpdf/sugarpdf_config.php');
 require_once('vendor/tcpdf/tcpdf.php');
 require_once('include/Sugarpdf/SugarpdfHelper.php');
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 class Sugarpdf extends TCPDF
 {
     /**
@@ -71,7 +73,8 @@ class Sugarpdf extends TCPDF
         $this->bean = $bean;
         $this->sugarpdf_object_map = $sugarpdf_object_map;
         if(!empty($_REQUEST["sugarpdf"])){
-            $this->action = $_REQUEST["sugarpdf"];
+            $request = InputValidation::getService();
+            $this->action = $request->getValidInputRequest('sugarpdf', array('Assert\Regex' => array('pattern' => '/^[a-z0-9_-]+$/i')));
         }
     }
 
@@ -275,7 +278,8 @@ class Sugarpdf extends TCPDF
      * The cell method is used by all the methods which print text (Write, MultiCell).
      * @see vendor/tcpdf/TCPDF#Cell()
      */
-    public function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=0, $link='', $stretch=0) {
+    public function Cell($w, $h = 0, $txt = '', $border = 0, $ln = 0, $align = '', $fill = 0, $link = '', $stretch = 0, $ignore_min_height = false)
+    {
         parent::Cell($w, $h, prepare_string($txt), $border, $ln, $align, $fill, $link, $stretch);
     }
 

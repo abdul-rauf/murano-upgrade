@@ -21,7 +21,15 @@ class ReadOnlyAction extends AbstractAction
      */
     protected $disallowedActions = array('view');
 
+    /**
+     * @deprecated Use __construct() instead
+     */
     public function ReadOnlyAction($params)
+    {
+        self::__construct($params);
+    }
+
+    public function __construct($params)
     {
         $this->params = $params;
         $this->targetField = $params['target'];

@@ -138,10 +138,7 @@ class Email extends SugarBean {
     protected $addedFieldDefs = array();
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function Email()
     {
@@ -336,9 +333,17 @@ class Email extends SugarBean {
 	    return get_file_mime_type($fileLocation, 'application/octet-stream');
 	}
 
-
-	function sendEmailTest($mailserver_url, $port, $ssltls, $smtp_auth_req, $smtp_username, $smtppassword, $fromaddress,
-        $toaddress, $mail_sendtype = 'smtp', $fromname = ''
+    public static function sendEmailTest(
+        $mailserver_url,
+        $port,
+        $ssltls,
+        $smtp_auth_req,
+        $smtp_username,
+        $smtppassword,
+        $fromaddress,
+        $toaddress,
+        $mail_sendtype = 'smtp',
+        $fromname = ''
     ) {
 		global $current_user,
                $app_strings;
@@ -511,15 +516,18 @@ class Email extends SugarBean {
 			    }
 			}
 
-	        /* template parsing */
-	        if (empty($object_arr)) {
-	          $object_arr= array('Contacts' => '123');
-	        }
-	        $object_arr['Users'] = $current_user->id;
-	        $this->description_html = EmailTemplate::parse_template($this->description_html, $object_arr);
-	        $this->name = EmailTemplate::parse_template($this->name, $object_arr);
-	        $this->description = EmailTemplate::parse_template($this->description, $object_arr);
-	        $this->description = html_entity_decode($this->description,ENT_COMPAT,'UTF-8');
+            if ($this->type != 'archived') {
+                /* template parsing */
+                if (empty($object_arr)) {
+                    $object_arr = array('Contacts' => '123');
+                }
+                $object_arr['Users'] = $current_user->id;
+                $this->description_html = EmailTemplate::parse_template($this->description_html, $object_arr);
+                $this->name = EmailTemplate::parse_template($this->name, $object_arr);
+                $this->description = EmailTemplate::parse_template($this->description, $object_arr);
+            }
+
+            $this->description = html_entity_decode($this->description, ENT_COMPAT, 'UTF-8');
 
             if ($this->type != 'draft' && $this->status != 'draft' &&
                 $this->type != 'archived' && $this->status != 'archived'
@@ -574,19 +582,16 @@ class Email extends SugarBean {
         $this->description_html = $htmlBody;
 
         $mailConfig = null;
-        try {
-            if (isset($request["fromAccount"]) && !empty($request["fromAccount"])) {
-                $mailConfig = OutboundEmailConfigurationPeer::getMailConfigurationFromId($current_user, $request["fromAccount"]);
-            } else {
-                $mailConfig = OutboundEmailConfigurationPeer::getSystemMailConfiguration($current_user);
+        if (!$saveAsDraft && !$archived) {
+                if (isset($request["fromAccount"]) && !empty($request["fromAccount"])) {
+                    $mailConfig = OutboundEmailConfigurationPeer::getMailConfigurationFromId($current_user, $request["fromAccount"]);
+                } else {
+                    $mailConfig = OutboundEmailConfigurationPeer::getSystemMailConfiguration($current_user);
+                }
+
+            if (is_null($mailConfig)) {
+                throw new MailerException("No Valid Mail Configurations Found", MailerException::InvalidConfiguration);
             }
-        } catch(Exception $e) {
-            if (!$saveAsDraft && !$archived) {
-                throw $e;
-            }
-        }
-        if (!$saveAsDraft && !$archived && is_null($mailConfig)) {
-            throw new MailerException("No Valid Mail Configurations Found", MailerException::InvalidConfiguration);
         }
 
         try {
@@ -925,7 +930,8 @@ class Email extends SugarBean {
 
 				} else {
                     $c = BeanFactory::getBean('Cases');
-                    if($caseId = InboundEmail::getCaseIdFromCaseNumber($subject, $c)) {
+                    $ie = BeanFactory::getBean('InboundEmail');
+                    if ($caseId = $ie->getCaseIdFromCaseNumber($subject, $c)) {
                         $c->retrieve($caseId);
                         $c->load_relationship('emails');
                         $c->emails->add($this->id);
@@ -1266,7 +1272,7 @@ class Email extends SugarBean {
 
     ///////////////////////////////////////////////////////////////////////////
     ////	RETRIEVERS
-    function retrieve($id, $encoded = true, $deleted = true)
+    public function retrieve($id = '-1', $encoded = true, $deleted = true)
     {
         // cn: bug 11915, return SugarBean's retrieve() call bean instead of $this
         $bean = parent::retrieve($id, $encoded, $deleted);
@@ -1380,10 +1386,11 @@ class Email extends SugarBean {
      */
     public function mark_deleted($id)
     {
-        $q = "UPDATE emails_text SET deleted = 1 WHERE email_id = '{$id}'";
+        $q = "UPDATE emails_text SET deleted = 1 WHERE email_id = " . $this->db->quoted($id);
         $this->db->query($q);
 
-        $q = "UPDATE folders_rel SET deleted = 1 WHERE polymorphic_id = '{$id}' AND polymorphic_module = 'Emails'";
+        $q = "UPDATE folders_rel SET deleted = 1 WHERE polymorphic_id = " . $this->db->quoted($id) .
+            " AND polymorphic_module = 'Emails'";
         $this->db->query($q);
 
         parent::mark_deleted($id);
@@ -1393,9 +1400,10 @@ class Email extends SugarBean {
 		if(empty($id))
 			$id = $this->id;
 
-		$q  = "UPDATE emails SET deleted = 1 WHERE id = '{$id}'";
-		$qt = "UPDATE emails_text SET deleted = 1 WHERE email_id = '{$id}'";
-		$qf = "UPDATE folders_rel SET deleted = 1 WHERE polymorphic_id = '{$id}' AND polymorphic_module = 'Emails'";
+        $q  = "UPDATE emails SET deleted = 1 WHERE id = " . $this->db->quoted($id);
+        $qt = "UPDATE emails_text SET deleted = 1 WHERE email_id = " . $this->db->quoted($id);
+        $qf = "UPDATE folders_rel SET deleted = 1 WHERE polymorphic_id = " .$this->db->quoted($id) .
+            " AND polymorphic_module = 'Emails'";
       	$r  = $this->db->query($q);
 		$rt = $this->db->query($qt);
 		$rf = $this->db->query($qf);
@@ -2743,7 +2751,9 @@ class Email extends SugarBean {
         $GLOBALS['log']->debug("------ EMAIL SEARCH DATETIME Values ---------------------------------------------");
         $GLOBALS['log']->debug("dbFormatDateFrom: {$dbFormatDateFrom}");
         $GLOBALS['log']->debug("dbFormatDateTo: {$dbFormatDateTo}");
-        $GLOBALS['log']->debug("$additionalWhereClause: " . $additionalWhereClause[count($additionalWhereClause)-1]);
+        if (count($additionalWhereClause)) {
+            $GLOBALS['log']->debug("additionalWhereClause: " . $additionalWhereClause[count($additionalWhereClause)-1]);
+        }
         $GLOBALS['log']->debug("---------------------------------------------------------------------------------");
 
         $additionalWhereClause = implode(" AND ", $additionalWhereClause);

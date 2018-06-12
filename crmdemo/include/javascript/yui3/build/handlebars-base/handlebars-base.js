@@ -5,9 +5,459 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add("handlebars-base",function(e,t){
+YUI.add('handlebars-base', function (Y, NAME) {
+
 /*!
 Handlebars.js - Copyright (C) 2011 Yehuda Katz
 https://raw.github.com/wycats/handlebars.js/master/LICENSE
 */
-;var n=e.namespace("Handlebars");n.VERSION="1.0.0",n.COMPILER_REVISION=4,n.REVISION_CHANGES={1:"<= 1.0.rc.2",2:"== 1.0.0-rc.3",3:"== 1.0.0-rc.4",4:">= 1.0.0"},n.helpers={},n.partials={};var r=Object.prototype.toString,i="[object Function]",s="[object Object]";n.registerHelper=function(e,t,i){if(r.call(e)===s){if(i||t)throw new n.Exception("Arg not supported with multiple helpers");n.Utils.extend(this.helpers,e)}else i&&(t.not=i),this.helpers[e]=t},n.registerPartial=function(e,t){r.call(e)===s?n.Utils.extend(this.partials,e):this.partials[e]=t},n.registerHelper("helperMissing",function(e){if(arguments.length===2)return undefined;throw new Error("Missing helper: '"+e+"'")}),n.registerHelper("blockHelperMissing",function(e,t){var s=t.inverse||function(){},o=t.fn,u=r.call(e);return u===i&&(e=e.call(this)),e===!0?o(this):e===!1||e==null?s(this):u==="[object Array]"?e.length>0?n.helpers.each(e,t):s(this):o(e)}),n.K=function(){},n.createFrame=Object.create||function(e){n.K.prototype=e;var t=new n.K;return n.K.prototype=null,t},n.logger={DEBUG:0,INFO:1,WARN:2,ERROR:3,level:3,methodMap:{0:"debug",1:"info",2:"warn",3:"error"},log:function(e,t){if(n.logger.level<=e){var r=n.logger.methodMap[e];typeof console!="undefined"&&console[r]&&console[r].call(console,t)}}},n.log=function(e,t){n.logger.log(e,t)},n.registerHelper("each",function(e,t){var s=t.fn,o=t.inverse,u=0,a="",f,l=r.call(e);l===i&&(e=e.call(this)),t.data&&(f=n.createFrame(t.data));if(e&&typeof e=="object")if(e instanceof Array)for(var c=e.length;u<c;u++)f&&(f.index=u),a+=s(e[u],{data:f});else for(var h in e)e.hasOwnProperty(h)&&(f&&(f.key=h),a+=s(e[h],{data:f}),u++);return u===0&&(a=o(this)),a}),n.registerHelper("if",function(e,t){var s=r.call(e);return s===i&&(e=e.call(this)),!e||n.Utils.isEmpty(e)?t.inverse(this):t.fn(this)}),n.registerHelper("unless",function(e,t){return n.helpers["if"].call(this,e,{fn:t.inverse,inverse:t.fn})}),n.registerHelper("with",function(e,t){var s=r.call(e);s===i&&(e=e.call(this));if(!n.Utils.isEmpty(e))return t.fn(e)}),n.registerHelper("log",function(e,t){var r=t.data&&t.data.level!=null?parseInt(t.data.level,10):1;n.log(r,e)});var o=["description","fileName","lineNumber","message","name","number","stack"];n.Exception=function(e){var t=Error.prototype.constructor.apply(this,arguments);for(var n=0;n<o.length;n++)this[o[n]]=t[o[n]]},n.Exception.prototype=new Error,n.SafeString=function(e){this.string=e},n.SafeString.prototype.toString=function(){return this.string.toString()};var u={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","`":"&#x60;"},a=/[&<>"'`]/g,f=/[&<>"'`]/,l=function(e){return u[e]||"&amp;"};n.Utils={extend:function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])},escapeExpression:function(e){return e instanceof n.SafeString?e.toString():e==null||e===!1?"":(e=e.toString(),f.test(e)?e.replace(a,l):e)},isEmpty:function(e){return!e&&e!==0?!0:r.call(e)==="[object Array]"&&e.length===0?!0:!1}},n.VM={template:function(e){var t={escapeExpression:n.Utils.escapeExpression,invokePartial:n.VM.invokePartial,programs:[],program:function(e,t,r){var i=this.programs[e];return r?i=n.VM.program(e,t,r):i||(i=this.programs[e]=n.VM.program(e,t)),i},merge:function(e,t){var r=e||t;return e&&t&&(r={},n.Utils.extend(r,t),n.Utils.extend(r,e)),r},programWithDepth:n.VM.programWithDepth,noop:n.VM.noop,compilerInfo:null};return function(r,i){i=i||{};var s=e.call(t,n,r,i.helpers,i.partials,i.data),o=t.compilerInfo||[],u=o[0]||1,a=n.COMPILER_REVISION;if(u!==a){if(u<a){var f=n.REVISION_CHANGES[a],l=n.REVISION_CHANGES[u];throw"Template was precompiled with an older version of Handlebars than the current runtime. Please update your precompiler to a newer version ("+f+") or downgrade your runtime to an older version ("+l+")."}throw"Template was precompiled with a newer version of Handlebars than the current runtime. Please update your runtime to a newer version ("+o[1]+")."}return s}},programWithDepth:function(e,t,n){var r=Array.prototype.slice.call(arguments,3),i=function(e,i){return i=i||{},t.apply(this,[e,i.data||n].concat(r))};return i.program=e,i.depth=r.length,i},program:function(e,t,n){var r=function(e,r){return r=r||{},t(e,r.data||n)};return r.program=e,r.depth=0,r},noop:function(){return""},invokePartial:function(e,t,r,i,s,o){var u={helpers:i,partials:s,data:o};if(e===undefined)throw new n.Exception("The partial "+t+" could not be found");if(e instanceof Function)return e(r,u);if(!n.compile)throw new n.Exception("The partial "+t+" could not be compiled when running in runtime-only mode");return s[t]=n.compile(e,{data:o!==undefined}),s[t](r,u)}},n.template=n.VM.template,n.VERSION+="-yui",n.revive=n.template,e.namespace("Template").Handlebars=n},"3.15.0",{requires:[]});
+// This file contains YUI-specific wrapper code and overrides for the
+// handlebars-base module.
+
+/**
+Handlebars is a simple template language inspired by Mustache.
+
+This is a YUI port of the original Handlebars project, which can be found at
+<https://github.com/wycats/handlebars.js>.
+
+@module handlebars
+@main handlebars
+@since 3.5.0
+*/
+
+/**
+Provides basic Handlebars template rendering functionality. Use this module when
+you only need to render pre-compiled templates.
+
+@module handlebars
+@submodule handlebars-base
+*/
+
+/**
+Handlebars is a simple template language inspired by Mustache.
+
+This is a YUI port of the original Handlebars project, which can be found at
+<https://github.com/wycats/handlebars.js>.
+
+@class Handlebars
+@since 3.5.0
+*/
+var Handlebars = Y.namespace('Handlebars');
+/* THIS FILE IS GENERATED BY A BUILD SCRIPT - DO NOT EDIT! */
+
+Handlebars.VERSION = "1.0.0";
+Handlebars.COMPILER_REVISION = 4;
+
+Handlebars.REVISION_CHANGES = {
+  1: '<= 1.0.rc.2', // 1.0.rc.2 is actually rev2 but doesn't report it
+  2: '== 1.0.0-rc.3',
+  3: '== 1.0.0-rc.4',
+  4: '>= 1.0.0'
+};
+
+Handlebars.helpers  = {};
+Handlebars.partials = {};
+
+var toString = Object.prototype.toString,
+    functionType = '[object Function]',
+    objectType = '[object Object]';
+
+Handlebars.registerHelper = function(name, fn, inverse) {
+  if (toString.call(name) === objectType) {
+    if (inverse || fn) { throw new Handlebars.Exception('Arg not supported with multiple helpers'); }
+    Handlebars.Utils.extend(this.helpers, name);
+  } else {
+    if (inverse) { fn.not = inverse; }
+    this.helpers[name] = fn;
+  }
+};
+
+Handlebars.registerPartial = function(name, str) {
+  if (toString.call(name) === objectType) {
+    Handlebars.Utils.extend(this.partials,  name);
+  } else {
+    this.partials[name] = str;
+  }
+};
+
+Handlebars.registerHelper('helperMissing', function(arg) {
+  if(arguments.length === 2) {
+    return undefined;
+  } else {
+    throw new Error("Missing helper: '" + arg + "'");
+  }
+});
+
+Handlebars.registerHelper('blockHelperMissing', function(context, options) {
+  var inverse = options.inverse || function() {}, fn = options.fn;
+
+  var type = toString.call(context);
+
+  if(type === functionType) { context = context.call(this); }
+
+  if(context === true) {
+    return fn(this);
+  } else if(context === false || context == null) {
+    return inverse(this);
+  } else if(type === "[object Array]") {
+    if(context.length > 0) {
+      return Handlebars.helpers.each(context, options);
+    } else {
+      return inverse(this);
+    }
+  } else {
+    return fn(context);
+  }
+});
+
+Handlebars.K = function() {};
+
+Handlebars.createFrame = Object.create || function(object) {
+  Handlebars.K.prototype = object;
+  var obj = new Handlebars.K();
+  Handlebars.K.prototype = null;
+  return obj;
+};
+
+Handlebars.logger = {
+  DEBUG: 0, INFO: 1, WARN: 2, ERROR: 3, level: 3,
+
+  methodMap: {0: 'debug', 1: 'info', 2: 'warn', 3: 'error'},
+
+  // can be overridden in the host environment
+  log: function(level, obj) {
+    if (Handlebars.logger.level <= level) {
+      var method = Handlebars.logger.methodMap[level];
+      if (typeof console !== 'undefined' && console[method]) {
+        console[method].call(console, obj);
+      }
+    }
+  }
+};
+
+Handlebars.log = function(level, obj) { Handlebars.logger.log(level, obj); };
+
+Handlebars.registerHelper('each', function(context, options) {
+  var fn = options.fn, inverse = options.inverse;
+  var i = 0, ret = "", data;
+
+  var type = toString.call(context);
+  if(type === functionType) { context = context.call(this); }
+
+  if (options.data) {
+    data = Handlebars.createFrame(options.data);
+  }
+
+  if(context && typeof context === 'object') {
+    if(context instanceof Array){
+      for(var j = context.length; i<j; i++) {
+        if (data) { data.index = i; }
+        ret = ret + fn(context[i], { data: data });
+      }
+    } else {
+      for(var key in context) {
+        if(context.hasOwnProperty(key)) {
+          if(data) { data.key = key; }
+          ret = ret + fn(context[key], {data: data});
+          i++;
+        }
+      }
+    }
+  }
+
+  if(i === 0){
+    ret = inverse(this);
+  }
+
+  return ret;
+});
+
+Handlebars.registerHelper('if', function(conditional, options) {
+  var type = toString.call(conditional);
+  if(type === functionType) { conditional = conditional.call(this); }
+
+  if(!conditional || Handlebars.Utils.isEmpty(conditional)) {
+    return options.inverse(this);
+  } else {
+    return options.fn(this);
+  }
+});
+
+Handlebars.registerHelper('unless', function(conditional, options) {
+  return Handlebars.helpers['if'].call(this, conditional, {fn: options.inverse, inverse: options.fn});
+});
+
+Handlebars.registerHelper('with', function(context, options) {
+  var type = toString.call(context);
+  if(type === functionType) { context = context.call(this); }
+
+  if (!Handlebars.Utils.isEmpty(context)) return options.fn(context);
+});
+
+Handlebars.registerHelper('log', function(context, options) {
+  var level = options.data && options.data.level != null ? parseInt(options.data.level, 10) : 1;
+  Handlebars.log(level, context);
+});
+/* THIS FILE IS GENERATED BY A BUILD SCRIPT - DO NOT EDIT! */
+
+var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
+
+Handlebars.Exception = function(message) {
+  var tmp = Error.prototype.constructor.apply(this, arguments);
+
+  // Unfortunately errors are not enumerable in Chrome (at least), so `for prop in tmp` doesn't work.
+  for (var idx = 0; idx < errorProps.length; idx++) {
+    this[errorProps[idx]] = tmp[errorProps[idx]];
+  }
+};
+Handlebars.Exception.prototype = new Error();
+
+// Build out our basic SafeString type
+Handlebars.SafeString = function(string) {
+  this.string = string;
+};
+Handlebars.SafeString.prototype.toString = function() {
+  return this.string.toString();
+};
+
+var escape = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#x27;",
+  "`": "&#x60;"
+};
+
+var badChars = /[&<>"'`]/g;
+var possible = /[&<>"'`]/;
+
+var escapeChar = function(chr) {
+  return escape[chr] || "&amp;";
+};
+
+Handlebars.Utils = {
+  extend: function(obj, value) {
+    for(var key in value) {
+      if(value.hasOwnProperty(key)) {
+        obj[key] = value[key];
+      }
+    }
+  },
+
+  escapeExpression: function(string) {
+    // don't escape SafeStrings, since they're already safe
+    if (string instanceof Handlebars.SafeString) {
+      return string.toString();
+    } else if (string == null || string === false) {
+      return "";
+    }
+
+    // Force a string conversion as this will be done by the append regardless and
+    // the regex test will do this transparently behind the scenes, causing issues if
+    // an object's to string has escaped characters in it.
+    string = string.toString();
+
+    if(!possible.test(string)) { return string; }
+    return string.replace(badChars, escapeChar);
+  },
+
+  isEmpty: function(value) {
+    if (!value && value !== 0) {
+      return true;
+    } else if(toString.call(value) === "[object Array]" && value.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+/* THIS FILE IS GENERATED BY A BUILD SCRIPT - DO NOT EDIT! */
+
+Handlebars.VM = {
+  template: function(templateSpec) {
+    // Just add water
+    var container = {
+      escapeExpression: Handlebars.Utils.escapeExpression,
+      invokePartial: Handlebars.VM.invokePartial,
+      programs: [],
+      program: function(i, fn, data) {
+        var programWrapper = this.programs[i];
+        if(data) {
+          programWrapper = Handlebars.VM.program(i, fn, data);
+        } else if (!programWrapper) {
+          programWrapper = this.programs[i] = Handlebars.VM.program(i, fn);
+        }
+        return programWrapper;
+      },
+      merge: function(param, common) {
+        var ret = param || common;
+
+        if (param && common) {
+          ret = {};
+          Handlebars.Utils.extend(ret, common);
+          Handlebars.Utils.extend(ret, param);
+        }
+        return ret;
+      },
+      programWithDepth: Handlebars.VM.programWithDepth,
+      noop: Handlebars.VM.noop,
+      compilerInfo: null
+    };
+
+    return function(context, options) {
+      options = options || {};
+      var result = templateSpec.call(container, Handlebars, context, options.helpers, options.partials, options.data);
+
+      var compilerInfo = container.compilerInfo || [],
+          compilerRevision = compilerInfo[0] || 1,
+          currentRevision = Handlebars.COMPILER_REVISION;
+
+      if (compilerRevision !== currentRevision) {
+        if (compilerRevision < currentRevision) {
+          var runtimeVersions = Handlebars.REVISION_CHANGES[currentRevision],
+              compilerVersions = Handlebars.REVISION_CHANGES[compilerRevision];
+          throw "Template was precompiled with an older version of Handlebars than the current runtime. "+
+                "Please update your precompiler to a newer version ("+runtimeVersions+") or downgrade your runtime to an older version ("+compilerVersions+").";
+        } else {
+          // Use the embedded version info since the runtime doesn't know about this revision yet
+          throw "Template was precompiled with a newer version of Handlebars than the current runtime. "+
+                "Please update your runtime to a newer version ("+compilerInfo[1]+").";
+        }
+      }
+
+      return result;
+    };
+  },
+
+  programWithDepth: function(i, fn, data /*, $depth */) {
+    var args = Array.prototype.slice.call(arguments, 3);
+
+    var program = function(context, options) {
+      options = options || {};
+
+      return fn.apply(this, [context, options.data || data].concat(args));
+    };
+    program.program = i;
+    program.depth = args.length;
+    return program;
+  },
+  program: function(i, fn, data) {
+    var program = function(context, options) {
+      options = options || {};
+
+      return fn(context, options.data || data);
+    };
+    program.program = i;
+    program.depth = 0;
+    return program;
+  },
+  noop: function() { return ""; },
+  invokePartial: function(partial, name, context, helpers, partials, data) {
+    var options = { helpers: helpers, partials: partials, data: data };
+
+    if(partial === undefined) {
+      throw new Handlebars.Exception("The partial " + name + " could not be found");
+    } else if(partial instanceof Function) {
+      return partial(context, options);
+    } else if (!Handlebars.compile) {
+      throw new Handlebars.Exception("The partial " + name + " could not be compiled when running in runtime-only mode");
+    } else {
+      partials[name] = Handlebars.compile(partial, {data: data !== undefined});
+      return partials[name](context, options);
+    }
+  }
+};
+
+Handlebars.template = Handlebars.VM.template;
+// This file contains YUI-specific wrapper code and overrides for the
+// handlebars-base module.
+
+Handlebars.VERSION += '-yui';
+
+/**
+Registers a helper function that will be made available to all templates.
+
+Helper functions receive the current template context as the `this` object, and
+can also receive arguments passed by the template.
+
+@example
+
+    Y.Handlebars.registerHelper('linkify', function () {
+        return '<a href="' + Y.Escape.html(this.url) + '">' +
+            Y.Escape.html(this.text) + '</a>';
+    });
+
+    var source = '<ul>{{#links}}<li>{{{linkify}}}</li>{{/links}}</ul>';
+
+    Y.Handlebars.render(source, {
+        links: [
+            {url: '/foo', text: 'Foo'},
+            {url: '/bar', text: 'Bar'},
+            {url: '/baz', text: 'Baz'}
+        ]
+    });
+
+@method registerHelper
+@param {String} name Name of this helper.
+@param {Function} fn Helper function.
+@param {Boolean} [inverse=false] If `true`, this helper will be considered an
+    "inverse" helper, like "unless". This means it will only be called if the
+    expression given in the template evaluates to a false or empty value.
+*/
+
+/**
+Registers a partial that will be made available to all templates.
+
+A partial is another template that can be used to render part of a larger
+template. For example, a website with a common header and footer across all its
+pages might use a template for each page, which would call shared partials to
+render the headers and footers.
+
+Partials may be specified as uncompiled template strings or as compiled template
+functions.
+
+@example
+
+    Y.Handlebars.registerPartial('header', '<h1>{{title}}</h1>');
+    Y.Handlebars.registerPartial('footer', 'Copyright (c) 2011 by Me.');
+
+    var source = '{{> header}} <p>Mustaches are awesome!</p> {{> footer}}';
+
+    Y.Handlebars.render(source, {title: 'My Page About Mustaches'});
+
+@method registerPartial
+@param {String} name Name of this partial.
+@param {Function|String} partial Template string or compiled template function.
+*/
+
+/**
+Converts a precompiled template into a renderable template function.
+
+@example
+
+    <script src="precompiled-template.js"></script>
+    <script>
+    YUI().use('handlebars-base', function (Y) {
+        // Convert the precompiled template function into a renderable template
+        // function.
+        var template = Y.Handlebars.template(precompiledTemplate);
+
+        // Render it.
+        template({pie: 'Pumpkin'});
+    });
+    </script>
+
+@method template
+@param {Function} template Precompiled Handlebars template function.
+@return {Function} Compiled template function.
+*/
+
+// Alias for Y.Handlebars.template(), used by Y.Template.
+Handlebars.revive = Handlebars.template;
+
+// Make Y.Template.Handlebars an alias for Y.Handlebars.
+Y.namespace('Template').Handlebars = Handlebars;
+
+
+}, '3.15.0', {"requires": []});
