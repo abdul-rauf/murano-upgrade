@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Выберите Макет для редактирования. <br /><br />Чтобы изменить макет, содержащий поля для ввода данных, нажмите Правка.<br /><br />Чтобы изменить макет отображения полей с введёнными данными, нажмите Подробная информация.<br /><br />Чтобы изменить колонки. появляющиеся при просмотре списков, нажмите Списки.<br /><br />Чтобы изменить макеты форм поиска, нажмите Поиск.',
         'subpanelHelp'=> 'subpanelHelp<br />Выберите Субпанель для изменения.',
         'searchHelp' => 'Выберите макет Поиска для редактирования.',
-        'labelsBtn'	=> 'Нажмите кнопку <b>Сохранить</b>, чтобы сохранить ваши пользовательские метки.',
+        'labelsBtn'	=> 'Отредактируйте <b>метки</b>, чтобы отобразить значения в этом модуле.',
         'newPackage'=>'newPackage<br /><br />Нажмите Новый пакет для создания нового пакета.',
         'mbHelp'    => 'Добро пожаловать в Конструктор модулей!<br /><br />Используйте Конструктор модулей для создания пакетов. которые содержат пользовательские модули, базирующиеся на стандартных модулях. или пользовательские объекты.<br /><br />Нажмите Новый пакет, чтобы создать новый пакет или выберите пакет для редактирования.<br /><br />Пакет выступает контейнером для пользовательских модулей, которые являются частью одного проекта. Пакет может содержать один или более пользовательских модулей, которые могут быть связаны друг с другом или с другими модулями.<br /><br />Например, Вы можете создать пакет, который содержит один пользовательский модуль, связанный со стандартным модулем Контрагенты. Или пакет, который содержит несколько новых модулей, работающих вместе и связанных друг с другом и с другими модулями в системе.',
         'exportBtn' => 'exportBtn<br />Нажмите Экспорт Изменений, чтобы создать и загрузить пакет с изменениями, сделанными в Студии для конкретных модулей.',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Название - должно содержать буквы и цифры без пробелов, и начинаться с буквы.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Package Key already exists',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Такое название пакета уже существует.',
+'LBL_JS_PACKAGE_NAME'=>'Имя пакета должно начинаться с буквы и содержать только буквы, цифры и подчеркивания. Пробелы и другие специальные символы использовать нельзя.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Ключ должен быть буквенно-цифровым и начинаться с буквы.',
 'LBL_JS_VALIDATE_KEY'=>'Префикс - должен содержать буквы и цифры',
 'LBL_JS_VALIDATE_LABEL'=>'Пожалуйста, введите ярлык, который будет использоваться в качестве названия при отображении данного модуля.',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Вы уверены, что хотите удалить эту связь?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Это сделает связь постоянной. Вы уверены, что хотите задействовать эту связь?',
 'LBL_CONFIRM_DONT_SAVE' => 'С момента последнего сохранения были внесены изменения. Хотите сохранить изменения сейчас?',
@@ -754,7 +755,7 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Нажмите "выбрать" для использования этого поля при поиске записей в этой модуле с помощью Глобального Поиска.',
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Выберите, чтобы использовать это поле при поиске записей в этом модуле с помощью глобального поиска.',
 //Revert Module labels
 'LBL_RESET' => 'Сбросить',
 'LBL_RESET_MODULE' => 'Очистить модуль',

@@ -43,7 +43,7 @@ class mu_Enquriy_TrackerDashlet extends DashletGeneric {
 		global $current_user, $app_strings;
 		require('modules/mu_Enquriy_Tracker/metadata/dashletviewdefs.php');
 
-        parent::DashletGeneric($id, $def);
+        parent::__construct($id, $def);
 
         if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', 'mu_Enquriy_Tracker');
 

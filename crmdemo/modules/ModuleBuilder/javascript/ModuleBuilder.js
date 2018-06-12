@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -1190,9 +1190,10 @@ if (typeof(ModuleBuilder) == 'undefined') {
 		 * 
 		 * @return {Void}
 		 */
-		resendRequest: function() {
-			var method = ModuleBuilder.requestElements.method || Connect.method,
-				url    = ModuleBuilder.requestElements.url || Connect.url;
+        resendRequest: function() {
+            var method = ModuleBuilder.requestElements.method || Connect.method,
+                url = ModuleBuilder.requestElements.url || Connect.url,
+                postFields = {};
 			
 			// Reset the isResend flag so that if this request fails it can fail
 			// legitimately
@@ -1203,12 +1204,18 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			if (ModuleBuilder.requestElements.fields) {
 				Connect.setForm(ModuleBuilder.requestElements.fields);
 			}
-			
-			Connect.asyncRequest(
-			    method, 
-			    url, 
-			    ModuleBuilder.requestElements.callbacks
-			);
+
+            // Attach CSRF token for POST
+            if (method == "POST") {
+                postFields['csrf_token'] = SUGAR.csrf.form_token;
+            }
+
+            Connect.asyncRequest(
+                method,
+                url,
+                ModuleBuilder.requestElements.callbacks,
+                SUGAR.util.paramsToUrl(postFields)
+            );
 		},
 		/**
 		 * Makes sure the session cookie is up to date. This supports being in 
@@ -1220,13 +1227,13 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			    cookiePattern = "(" + sessionName + "=)([a-f0-9\-]*)",
 			    matches = document.cookie.match(cookiePattern),
 			    matched = false,
-			    currentSID = parent.SUGAR.App.cache.get("AuthAccessToken");
-			    
+                currentSID = parent.SUGAR.App.api.getOAuthToken();
+
 			// If there is a current session id cookie (which would happen for
 			// bwc logins) but it does not match the current auth token then 
 			// update the document cookie to the auth token to allow studio to 
 			// continue to function
-			if (matches) {
+                if (currentSID && matches) {
 				for (var i in matches) {
 					if (matches[i] == currentSID) {
 						matched = true;
@@ -1369,11 +1376,11 @@ if (typeof(ModuleBuilder) == 'undefined') {
                 package:ModuleBuilder.MBpackage,
                 formula:encodeURIComponent(YAHOO.lang.JSON.stringify(formula))
             };
-            win.load(ModuleBuilder.paramsToUrl(win.params), null, function()
+            win.load('', "POST", function ()
             {
                 ModuleBuilder.formulaEditorWindow.center();
                 SUGAR.util.evalScript(ModuleBuilder.formulaEditorWindow.body.innerHTML);
-            });
+            }, ModuleBuilder.paramsToUrl(win.params));
             win.show();
             win.center();
         },

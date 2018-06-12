@@ -3,7 +3,7 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,7 +33,6 @@ class registry_v4_1 extends registry_v4 {
             array('session'=>'xsd:string', 'module_name'=>'xsd:string', 'module_id'=>'xsd:string', 'link_field_name'=>'xsd:string', 'related_module_query'=>'xsd:string', 'related_fields'=>'tns:select_fields', 'related_module_link_name_to_fields_array'=>'tns:link_names_to_fields_array', 'deleted'=>'xsd:int', 'order_by'=>'xsd:string', 'offset'=>'xsd:int' , 'limit'=>'xsd:int'),
             array('return'=>'tns:get_entry_result_version2'));
 
-		$this->serviceClass->registerFunction('get_dropdown', array('session'=>'xsd:string', 'dropdn'=>'xsd:string'), array('return'=>'xsd:array'));
 
         //Add get_modified_relationship function
         $this->serviceClass->registerFunction(
@@ -41,23 +40,8 @@ class registry_v4_1 extends registry_v4 {
             array('session'=>'xsd:string', 'module_name'=>'xsd:string','related_module'=>'xsd:string', 'from_date'=>'xsd:string', 'to_date'=>'xsd:string','offset'=>'xsd:int', 'max_results'=>'xsd:int','deleted'=>'xsd:int', 'module_user_id'=>'xsd:string', 'select_fields'=>'tns:select_fields', 'relationship_name'=>'xsd:string', 'deletion_date'=>'xsd:string'),
             array('return'=>'tns:modified_relationship_result'));
 
- $this->serviceClass->registerFunction(
-            'get_investor_updates',
-            array('session'=>'xsd:string'),
-            array('return'=>'xsd:string'));
-
-  $this->serviceClass->registerFunction(
-            'get_investor_report',
-            array('session'=>'xsd:string','client_id'=>'xsd:string'),
-            array('return'=>'xsd:string'));
-  $this->serviceClass->registerFunction(
-            'do_client_login',
-            array('session'=>'xsd:string','email'=>'xsd:string','pass'=>'xsd:string'),
-            array('return'=>'xsd:string'));
 	}
 
-	
-	
 
     /**
    	 * This method registers all the complex types

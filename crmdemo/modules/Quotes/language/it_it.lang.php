@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -208,7 +208,7 @@ $mod_strings = array (
     'LBL_ATTACHMENT' => 'Allegato' /*for 508 compliance fix*/,
     'NTC_OVERWRITE_ADDRESS_PHONE_CONFIRM' => 'Attualmente questo record contiene valori nel campo Indirizzo. Per sovrascrivere questi valori con il seguente Indirizzo dell´azienda che hai selezionato, clicca "OK". Per mantenere i valori attuali, clicca "Annulla".',
 	'LBL_EDITLAYOUT' => 'Modifica Layout' /*for 508 compliance fix*/,
-    'LBL_REVENUELINEITEMS' => 'Elementi dell´Opportunità',
+    'LBL_REVENUELINEITEMS' => 'Elementi dell&#39;opportunità',
 
     'EXCEPTION_QUOTE_ALREADY_CONVERTED' => 'Offerta già Convertita in Opportunità',
 );

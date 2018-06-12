@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -47,7 +47,7 @@ $mod_strings = array (
   'NTC_DELETE_GRAFT_CONFIRMATION' => 'Weet u zeker dat u deze categorie wilt verwijderen? Alle subcategorieën en producten blijven bewaard.',
   'LBL_PARENT_NAME' => 'Parent categorie',
   'LBL_CATEGORIES'=> 'Categorieën',
-  'LBL_EDITLAYOUT' => 'Wijzig layout' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Aangemaakt door ID',
   'LBL_MODIFIED_ID'=>'Gewijzigd door ID',
   'LBL_ASSIGNED_USER_NAME' => 'Toegewezen aan:',

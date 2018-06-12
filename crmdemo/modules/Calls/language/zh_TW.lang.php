@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -72,7 +72,7 @@ $mod_strings = array (
     'LBL_SEND_BUTTON_LABEL'=>'儲存與發送邀請',
 	'LBL_DATE_END'=>'結束日期',
 	'LBL_TIME_END'=>'時間終點',
-	'LBL_REMINDER_TIME'=>'提醒時間',
+    'LBL_REMINDER_TIME'=>'提醒時間',
     'LBL_EMAIL_REMINDER_SENT' => '已發送電子郵件提醒',
     'LBL_SEARCH_BUTTON'=> '搜尋',
     'LBL_ACTIVITIES_REPORTS' => '活動報表',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => '刪除所有週期',
     'LBL_DATE_END_ERROR' => '結束日期在開始日期之前',
     'LBL_REPEAT_PARENT_ID' => '重複父代 ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => '通話的週期 ID。原始通話開始日期',
     'LBL_RECURRING_SOURCE' => '重複出現來源',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => '您確定要移除所有重複出現的記錄嗎？',
     'LBL_RECURRING_LIMIT_ERROR' => '這一重複出現的通話無法排程，因為它超過允許的最大重複出現限制 $limit。',

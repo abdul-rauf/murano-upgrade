@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Uusi salasana',
 	'LBL_NEW_PASSWORD1'					=> 'Salasana',
 	'LBL_NEW_PASSWORD2'					=> 'Vahvista salasana',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Salasana on vaihdettu.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Salasana on vaihdettu.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'Sähköposti lähetettiin käyttäjälle sisältäen järjestelmän luoman salasanan.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Salasana luotiin onnistuneesti.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Salasana luotiin onnistuneesti.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Uusi käyttäjä',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Uusi käyttäjä',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Tavoitteet',
     'LBL_FORECASTS'                     => 'Ennusteet',
     'LBL_WORKSHEETS'                    => 'Työlistat',
+	'LBL_CALENDARS'                     => 'Kalenterit',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Hae toinen CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Vaihda ääneen',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Vaihda kuvaan',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Työpuhelin',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Julkaise omassa paikassani',
     'LBL_ICAL_PUB_URL'                  => 'iCal-integraation URL',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Käytä tätä URL:ää tilataksesi Sugar-kalenterin iCal-muodossa.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Käytä tätä URL-osoitetta Sugar-kalenterisi tilaamiseen iCal-tuetuissa ' .
+                                           'sovelluksissa. Sugar-kalenterin tapahtumat ovat katsottavissa vain luku -muodossa ' .
+                                           'ulkoisissa kalenterisovelluksissa ja tapahtumia ' .
+                                           '(kuten kokouksia, puheluja jne.) voidaan muokata vain Sugarissa.',
 	'LBL_YOUR_QUERY_URL'				=> 'Kyselyn URL',
 	'LNK_NEW_USER'						=> 'Luo uusi käyttäjä',
 	'LNK_NEW_PORTAL_USER'				=> 'Luo uusi Portal-käyttäjä',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Käyttäjien raportit',
     'LBL_CONTACTS_SYNC' => 'Kontaktit',
-
+    'LBL_DETAIL' => 'Käyttäjäprofiili',
 ); // END STRINGS DEFS
 
 ?>

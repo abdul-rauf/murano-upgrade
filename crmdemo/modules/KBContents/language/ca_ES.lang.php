@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -95,10 +95,13 @@ $mod_strings = array (
     'LBL_KB_STATUS_BACK_TO_DRAFT' => 'S&#39;ha tornat a canviar l&#39;estat del document a esborrany.',
     'LBL_OPERATOR_CONTAINING_THESE_WORDS' => 'que conté aquestes paraules',
     'LBL_OPERATOR_EXCLUDING_THESE_WORDS' => 'que exclogui aquestes paraules',
-    'ERROR_EXP_DATE_LOW' => 'The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_EXP_DATE_LOW' => 'La data de caducitat no pot ser abans de la data de la publicació.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'L&#39;estat Aprovat necessita una data de publicació.',
     'ERROR_ACTIVE_DATE_LOW' => 'The Publish Date must occur on a later date than today&#39;s date.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'La data de publicació està en blanc.',
     'LBL_RECORD_SAVED_SUCCESS' => 'Heu creat correctament el {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'ERROR_IS_BEFORE' => 'Error. La data d&#39;aquest camp ha de ser posterior a la del camp {{this}}.',
     'TPL_SHOW_MORE_MODULE' => 'Més articles de {{module}}...',
+    'LBL_LIST_FORM_TITLE' => 'Llista de Base de coneixement',
+    'LBL_SEARCH_FORM_TITLE' => 'Cerca a la Base de coneixement',
 );

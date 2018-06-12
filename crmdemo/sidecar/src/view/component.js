@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -22,9 +22,67 @@
     app.view.Component = Backbone.View.extend({
 
         /**
-         * Initializes a component.
+         * Internal flag used to prevent {@link #events} from being delegated
+         * prior to {@link #initialize}, in {@link #delegateEvents}. Do not use
+         * this flag!
+         *
+         * FIXME SC-5690: This property will be removed when we have mixin
+         * support with an ES6-style super method.
+         *
+         * @private
+         * @deprecated Deprecated in 7.8.0 and will be removed in 7.9.0.
+         * @type {boolean}
+         */
+        _isInitialized: false,
+
+        /**
+         * Constructor for sidecar components, currently used to define the
+         * order of event delegation on {@link #events this component's events},
+         * after Backbone changed the order in which events are delegated from
+         * 0.9.10 to 1.2.0. Also temporarily defines {@link #options} on the
+         * component, as Backbone no longer does this by default.
+         *
          * @constructor
-         * @param options
+         * @param {Object} options The Backbone.View initialization options.
+         */
+        constructor: function(options) {
+            /**
+             * Attaches the `options` passed into the constructor to this
+             * component.
+             *
+             * FIXME SC-5597: Since this is no longer supported by Backbone, it
+             * will be removed from Sidecar components as well.
+             *
+             * @deprecated Deprecated since 7.8.0. Will be removed in 7.10.0.
+             * @property {Object}
+             */
+            this.options = options || {};
+
+            this._wrapInitialize(options);
+
+            return Backbone.View.apply(this, arguments);
+        },
+
+        /**
+         * Wraps the initialize method to delegate the events on the element,
+         * after it initializes.
+         *
+         * @protected
+         * @param {Object} options The Backbone.View initialization options.
+         */
+        _wrapInitialize: function (options) {
+            this.initialize = _.wrap(this.initialize, _.bind(function (init) {
+                init.call(this, options);
+                this.initialize = init;
+                this._isInitialized = true;
+                this.delegateEvents();
+            }, this));
+        },
+
+        /**
+         * Initializes a component.
+         *
+         * @param {Object} options The Backbone.View initialization options.
          *
          * - context
          * - meta
@@ -33,7 +91,6 @@
          * - collection
          *
          * `context` is the only required option.
-         * @return {View.Component}
          */
         initialize: function(options) {
 
@@ -118,6 +175,23 @@
         },
 
         /**
+         * Proxies the parent method on `Backbone.View`, but only called after
+         * {@link #initialize this view instance initializes}.
+         *
+         * @return {View.Component} Returns {@link View.Component this instance}.
+         */
+        delegateEvents: function () {
+            if (!this._isInitialized) {
+                return this;
+            }
+
+            // FIXME SC-5680: We can't call `_super` from View.Component - it
+            // would just call this method again. SC-5680 will address fixing
+            // the `_super` method.
+            return Backbone.View.prototype.delegateEvents.apply(this, arguments);
+        },
+
+        /**
          * Sets template option.
          *
          * If the given option already exists it is augmented by the value of the given `option` parameter.
@@ -126,7 +200,6 @@
          * @param {Object} option Option value.
          */
         setTemplateOption: function(key, option) {
-            this.options = this.options || {};
             this.options.templateOptions = this.options.templateOptions || {};
             this.options.templateOptions[key] = _.extend({}, this.options.templateOptions[key], option);
         },
@@ -173,9 +246,7 @@
          * The default implementation does nothing.
          * See {@link View.Layout#loadData} and {@link View.View#loadData} methods.
          */
-        loadData: function() {
-            // Do nothing (view and layout will override)
-        },
+        loadData: _.noop,
 
         /**
          * Disposes a component.
@@ -247,9 +318,7 @@
          * @param {String} name The name of the component to find.
          * @return {View.Component} The component or `undefined` if not found.
          */
-        closestComponent: function(name) {
-            // Do nothing (field, view and layout will override)
-        },
+        closestComponent: _.noop,
 
         /**
          * Pass through function to jQuery's show to show view.
@@ -410,6 +479,14 @@
             }
 
             return ret;
+        },
+
+        /**
+         * Gets HTML placeholder for a component.
+         * @return {string} HTML placeholder to be used in a handlebars template.
+         */
+        getPlaceholder: function() {
+            return new Handlebars.SafeString('<span cid="' + this.cid + '"></span>');
         }
     });
 

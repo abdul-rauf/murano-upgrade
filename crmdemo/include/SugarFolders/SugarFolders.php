@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -342,11 +342,12 @@ ENDQ;
         $this->emailBean->addVisibilityFrom($q, array('where_condition' => true));
 
         $q .= <<<ENDW
- WHERE emails.deleted=0 AND emails.type NOT IN ('out', 'draft') AND emails.status NOT IN ('sent', 'draft')
-AND emails.id IN (
-SELECT eear.email_id FROM emails_email_addr_rel eear
-JOIN email_addr_bean_rel eabr ON eabr.email_address_id=eear.email_address_id AND eabr.bean_id = '{$current_user->id}' AND eabr.bean_module = 'Users'
-WHERE eear.deleted=0
+ WHERE emails.deleted=0 AND emails.type NOT IN ('out', 'draft') AND emails.status NOT IN ('sent', 'draft') 
+AND EXISTS (
+SELECT 1 FROM emails_email_addr_rel eear
+ JOIN email_addr_bean_rel eabr ON eabr.email_address_id=eear.email_address_id AND eabr.bean_id = '{$current_user->id}'
+ AND eabr.bean_module = 'Users'
+ WHERE eear.deleted=0 AND emails.id = eear.email_id
 )
 ENDW;
         $this->emailBean->addVisibilityWhere($q, array('where_condition' => true));
@@ -632,7 +633,6 @@ ENDW;
 			global $current_user;
 			$user = $current_user;
 		}
-		$rootWhere = '';
         $teamSecurityClause = '';
 
 		$bean = new SugarBean();
@@ -640,8 +640,8 @@ ENDW;
 		$bean->add_team_security_where_clause($teamSecurityClause,'f');
 		$bean->disable_row_level_security = true;
 
-
-    	$rootWhere .= "AND (f.parent_folder IS NULL OR f.parent_folder = '')";
+        // need space in coalesce for oracle to avoid to null conversion
+        $rootWhere = "AND (f.parent_folder IS NULL OR f.parent_folder = '')";
 
 		if($subscribed) {
 			$q = $this->coreSubscribed.$teamSecurityClause.$this->coreWhereSubscribed."'{$user->id}' ".$rootWhere.$this->coreOrderBy;

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Új jelszó',
 	'LBL_NEW_PASSWORD1'					=> 'Jelszó',
 	'LBL_NEW_PASSWORD2'					=> 'Jelszó megerősítése',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'A jelszót sikeresen megváltoztatta.',
+    'LBL_NEW_USER_PASSWORD_1' => 'A jelszót sikeresen megváltoztatta.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'A felhasználó emailben fogja megkapni a rendszer által generált jelszót.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'A jelszó sikeresen létrehozva.',
+    'LBL_NEW_USER_PASSWORD_3' => 'A jelszó sikeresen létrehozva.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Új felhasználó',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Új felhasználó [Alt + N]',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Előírások',
     'LBL_FORECASTS'                     => 'Előrejelzések',
     'LBL_WORKSHEETS'                    => 'Munkalapok',
+	'LBL_CALENDARS'                     => 'Naptárak',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Másik CAPTCHA bekérése',
 	'LBL_RECAPTCHA_SOUND'				=> 'Váltás hangra',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Váltás képre',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Irodai telefon',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Helyszínen való közzététel',
     'LBL_ICAL_PUB_URL'                  => 'iCal integrációs URL',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Használja ezt az URL-t a Sugar naptárra való feliratkozáshoz az iCal-en belül.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Használja ezt az URL-címet az iCal-támogatott Sugar naptárra való feliratkozáshoz ' .
+                                           'alkamazások. A Sugar naptár események csak olvashatóként tekinthetőek meg ' .
+                                           'külső naptári alkalmazásokban és bármely eseményi változtatásban ' .
+                                           '(pl. gyűlések, hívások, stb.) csak Sugarban hozhatóak létre.',
 	'LBL_YOUR_QUERY_URL'				=> 'A lekérdezés URL',
 	'LNK_NEW_USER'						=> 'Új felhasználó létrehozása',
 	'LNK_NEW_PORTAL_USER'				=> 'Portál API felhasználó létrehozása',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Felhasználók jelentései',
     'LBL_CONTACTS_SYNC' => 'Kapcsolatok',
-
+    'LBL_DETAIL' => 'Felhasználói profil',
 ); // END STRINGS DEFS
 
 ?>

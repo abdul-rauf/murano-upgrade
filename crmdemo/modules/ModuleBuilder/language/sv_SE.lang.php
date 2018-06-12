@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -66,7 +66,7 @@ $mod_strings = array(
 
     ),
     'dropdowns'=>array(
-        'default' => 'All of the dropdowns for the application are listed here.<br><br>  To make changes to an existing dropdown, click on the dropdown&#39;s name. <br><br>Make your changes within the <b>Dropdown Editor</b> form in the right-hand pane, and click <b>Save</b>. Make changes, as necessary, and then click <b>Save</b>.<br><br>To create a new dropdown, click <b>Add Dropdown</b>. Enter properties for the dropdown in the <b>Dropdown Editor</b> form, and click <b>Save</b>.',
+        'default' => 'Alla <b>listrutor</b> i nedrullningsbara listor för programmet listas här.<br><br>Listrutorna kan användas för listrutefält i valfri modul.<br><br>För att göra ändringar i en befintlig listruta, klicka på dess namn.<br><br>Klicka på<b>Lägg till listruta</b> för att skapa en ny listruta.',
         'editdropdown'=>'Rullgardinslistor kan användas som standard- eller anpassade fält i alla moduler.<br><br>Ange ett <b>Namn</b> för rullgardinslistan.<br><br>Om språkpaket är installerade i programmet kan du välja <b>Språket</b> du vill använda för listans poster.<br><br>Ange ett namn för posten i fältet<b>Postnamn</b>. Detta är inte namnet som kommer att visas för användare.<br><br>Ange namnet som ska synas mot användare i fältet <b>Visningsnamn</b><br><br>När namn och visningsnamn angivits, klicka på <b>Lägg till</b> för att lägga till posten i rullgardinslistan.<br><br>Drag och släpp poster för att ordna om dem.<br><br>Klicka på <b>ikonen Redigera</b> och skriv ett nytt namn för att ändra visningsnamnet på en post. Klicka på <b>ikonen Radera</b> för att radera en post ur listan.<br><br>Klicka på <b>Ångra</b> för att ångra en ändring som gjorts i ett visningsnamn. Klicka på <b>Återställ</b> för att återställa något som ångrats.<br><br>Klicka på <b>Spara</b> för att spara rullgardinslistan.',
 
     ),
@@ -156,7 +156,7 @@ $mod_strings = array(
         'studioBtn'	=> 'Use <b>Studio</b> to customize installed modules.',
         'mbBtn'		=> 'Använd <b>Module Builder</b> för att skapa nya moduler.',
         'sugarPortalBtn' => 'Använd <b>Sugar Portal Editor</b> för att hantera och anpassa Sugarportalen.',
-        'dropDownEditorBtn' => 'Use <b>Dropdown Editor</b> to add and edit global dropdowns for the application.',
+        'dropDownEditorBtn' => 'Använd <b>Dropdown Editor</b> för att lägga till och redigera globala listrutor för listrutefält.',
         'appBtn' 	=> 'I Applikationsläget kan du anpassa diverse egenskaper i programmet, som hur många rapporter som visas på hemsidan',
         'backBtn'	=> 'Återgå till föregående steg.',
         'studioHelp'=> 'In <b>Studio</b>, you can change how information is displayed, determine what data is available and create custom data fields for <i>installed</i> modules.',
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Välj vilken <b>Layout du vill redigera</b>.<br/<br/>Klicka <b>Redigeringsvy</b> för att ändra layouten som innehåller datafält för inmatning.<br/><br/> Klicka på <b>Detaljvy</b> för att välja layouten som visar datan inmatad i Redigeringsvyn.<br/><br/>Klicka <b>Listvy</b> för att välja välja vilka kolumner som syns i standardlistan.<br/><br/>Klicka på <b>Sök</b> för att ändra layouten på det vanliga och avancerade sökformuläret.',
         'subpanelHelp'=> 'Välj en <b>Underpanel</b> att redigera.',
         'searchHelp' => 'Välj vilken <b>Sök</b>layout du vill redigera.',
-        'labelsBtn'	=> 'Klicka på <b>Spara</b> för att spara dina anpassade titlar.',
+        'labelsBtn'	=> 'Redigera <b>Etiketter</b> ska visas för värden i den här modulen.',
         'newPackage'=>'Klicka på <b>Nytt paket</b> för att skapa ett nytt paket.',
         'mbHelp'    => '<b>Välkommen till Module Builder.</b><br/><br/>Använd <b>Module Builder</b> för att skapa egna paket med egna moduler baserade på standard- eller vanliga objekt.<br/><br/>Klicka på <b>Nytt paket</b> för att skapa ett nytt paket eller väl ett paket att redigera.<br/><br/> Ett <b>paket</b> fungerar som en behållare för anpassade moduler som är med i ett projekt. Paketet kan innehålla en eller fler egna moduler relaterade till varann eller till moduler i applikationen.<br/><br/>Exempelvis kanske du vill skapa ett paket som innehåller en egen modul relaterad till den vanliga Kontomodulen, eller så kanske du vill skapa ett paket med ett antal egna moduler relaterade till både varann och till moduler i applikationen.',
         'exportBtn' => 'Klicka på <b>Exportera anpassningar</b> för att skapa ett paket som innehåller anpassningar gjorda för specifika moduler i Studio.',
@@ -334,7 +334,7 @@ $mod_strings = array(
 'LBL_CURRENT_LAYOUT'=>'Current Layout',
 'LBL_CURRENCY' => 'Currency',
 'LBL_CUSTOM' => 'Anpassad',
-'LBL_DASHLET'=>'Sugardashlet',
+'LBL_DASHLET'=>'Sugar Dashlet',
 'LBL_DASHLETLISTVIEW'=>'Listvy i Sugardashlet',
 'LBL_DASHLETSEARCH'=>'Sugardashlet-sökning',
 'LBL_POPUP'=>'Popupvisning',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Name - Must be alphanumeric with no spaces and starting with a letter',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Paketnyckeln finns redan',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Paketnamn existerar redan',
+'LBL_JS_PACKAGE_NAME'=>'Paketets namn - måste börja med en bokstav och kan endast bestå av bokstäver, siffror och understreck. Inga blanksteg eller andra specialtecken får användas.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Nyckel - Måste vara alfanumeriska och börja med en bokstav.',
 'LBL_JS_VALIDATE_KEY'=>'Nyckel - Måste vara alfanumerisk, börja med en bokstav och får inte innehålla mellanrum.',
 'LBL_JS_VALIDATE_LABEL'=>'Ange ett namn som kommer att användas som visningsnamn för modulen',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Are you sure you wish to delete this relationship?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Detta kommer att göra relationen permanent. Är du säker på att du vill rulla ut relationen?',
 'LBL_CONFIRM_DONT_SAVE' => 'Ändringar har gjorts sedan du sparade senast, vill du spara?',

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Supprimer les fichiers de diagnostic',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Supprimer les fichiers PDF temporaires',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Mettre à jour la table tracker_sessions',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Exécuter les notifications par email',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Lancez les notifications de rappel par email',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Nettoyer la file des jobs',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Créer les Périodes futures',
 'LBL_OOTB_HEARTBEAT' => 'Heartbeat Sugar',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Mise à jour des articles KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publier les articles approuvés & les articles de la base de connaissances expirés.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Tâche planifié du planificateur de gestionnaire de processus',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Tâche planifiée d&#39;Advanced Workflow',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Fréquence',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Rafraichir les jobs',
 'LBL_POLLMONITOREDINBOXES' => 'Vérifier les boîtes emails entrantes',
 'LBL_PERFORMFULLFTSINDEX' => 'système d&#39;indexation de recherche Full-Text',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Supprimer les fichiers PDF temporaires',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publier les articles approuvés et les articles expirés de la base de connaissance.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Planificateur de file d&#39;attente Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Supprimer les fichiers de diagnostic',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Supprimer les fichiers temporaires',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Lancer le process nocturne d&#39;envoi des Campagnes d&#39;emailing',
 'LBL_ASYNCMASSUPDATE' => 'Réaliser les mises à jour globales de manière asynchrone',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Mettre à jour la table tracker_sessions',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Créer les Périodes futures',
 'LBL_SUGARJOBHEARTBEAT' => 'Heartbeat Sugar',
-'LBL_SENDEMAILREMINDERS'=> 'Exécuter l&#39;envoi des rappels par email',
+'LBL_SENDEMAILREMINDERS'=> 'Lancer l&#39;envoi des rappels par email',
 'LBL_CLEANJOBQUEUE' => 'Nettoyer le job de la file d&#39;attente',
 'LBL_CLEANOLDRECORDLISTS' => 'Supprime les ancients enregistrements',
 );

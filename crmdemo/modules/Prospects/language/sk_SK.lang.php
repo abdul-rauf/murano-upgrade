@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -91,7 +91,7 @@ $mod_strings = array (
   'LBL_COUNTRY' => 'Krajina:',
   'LBL_DESCRIPTION_INFORMATION' => 'Popis informácie',
   'LBL_ADDRESS_INFORMATION' => 'Informácie o adrese',
-  'LBL_DESCRIPTION' => 'Popis',
+  'LBL_DESCRIPTION' => 'Popis:',
   'LBL_PROSPECT_ROLE' => 'Rola:',
   'LBL_OPP_NAME' => 'Názov obchodnej príležitosti:',
   'LBL_IMPORT_VCARD' => 'Import vCard',
@@ -177,7 +177,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'The {{module_name}} module consists of individual people who are unqualified prospects that you have some information on, but is not yet a qualified {{leads_singular_module}}. Information (e.g. name, email address) regarding these {{plural_module_name}} are normally acquired from business cards you receive while attending various trades shows, conferences, etc. {{plural_module_name}} in Sugar are stand-alone records as they are not related to {{contacts_module}}, {{leads_module}}, {{accounts_module}}, or {{opportunities_module}}. There are various ways you can create {{plural_module_name}} in Sugar such as via the {{plural_module_name}} module, importing {{plural_module_name}}, etc. Once the {{module_name}} record is created, you can view and edit information pertaining to the {{module_name}} via the {{plural_module_name}} Record view.',
+    'LBL_HELP_RECORDS' => 'Modul {{module_name}} obsahuje jednotlivé osoby, ktoré sú nekvalifikovanými potenciálnymi zákazníkmi, o ktorých máte nejaké informácie, ale ešte nie sú kvalifikovaní ako {{leads_singular_module}}. Informácie (napr. meno, e-mailová adresa) o týchto záznamoch {{plural_module_name}} sa normálne získavajú z vizitiek, ktoré dostávate na rôznych veľtrhoch, konferenciách a pod. {{plural_module_name}} v aplikácii Sugar sú samostatné záznamy, pretože nesúvisia s modulom {{contacts_module}}, {{leads_module}}, {{accounts_module}} ani {{opportunities_module}}. {{plural_module_name}} môžete v aplikácii Sugar vytvárať rôznymi spôsobmi, napríklad prostredníctvom modulu {{plural_module_name}}, importom záznamov {{plural_module_name}} atď. Po vytvorení záznamu {{module_name}} môžete zobraziť a upraviť informácie týkajúce sa modulu {{module_name}} prostredníctvom zobrazenia záznamu {{plural_module_name}}.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'The {{module_name}} module consists of individual people who are unqualified prospects that you have some information on, but is not yet a qualified {{leads_singular_module}}.

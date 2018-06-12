@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Si feu clic a Confirma, suprimireu TOTES les dates de previsió i canviareu la vista d&#39;oportunitats. Si açò no és el que volíeu, feu clic a cancel·la per tornar a la configuració anterior.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'En fer clic a Confirmar eliminareu TOTES les dades de les previsions i canviareu la visualització d&#39;oportunitats. '
+        .'També es desactivaran TOTES les definicions de procés amb un mòdul de destinació d&#39;elements de línia d&#39;ingressos. '
+        .'Si no ho voleu fer, feu clic a cancel·la per tornar a la configuració anterior.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Si tots els elements de línies d&#39;ingressos estan tancats i al menys un s&#39;ha guanyat,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'la fase de vendes d&#39;oportunitats es configura com "Tancat guanyat".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Si tots els elements de la línia d&#39;ingressos estan a la fase de venda "Tancat perdut",',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El mòdul {{plural_module_name}} li permet fer un seguiment de vendes individuals i dels elements de línia que pertanyen a les vendes des del principi fins al final. Cada registre {{module_name}} representa un encapçalament per a un grup de {{revenuelineitems_module}} i també es relaciona amb altres registres importants com ara {{quotes_module}}, {{contacts_module}}, etc. Cada {{revenuelineitems_singular_module}} és la venda potencial d&#39;un producte determinat i inclou dades rellevants de la venda. Cada {{revenuelineitems_singular_module}} normalment evoluciona per diferents Fases de venda fins que es marca amb "Tancada guanyada" o "Tancada perduda". El registre {{module_name}} reflecteix l&#39;import i la data de tancament prevista del seu {{revenuelineitems_module}}. {{plural_module_name}} i {{revenuelineitems_module}} es poden aprofitar fins i tot més tard utilitzant el mòdul {{forecasts_singular_module}} de Sugar per entendre i anticipar tendències de vendes i per assolir quotes de venda.',
+    'LBL_HELP_RECORDS' => 'El mòdul de {{plural_module_name}} us permet seguir les vendes individuals de principi a fi. Cada registre {{module_name}} representa una venda prospectiva i inclou dades importants de la venda i de registres importants com ara {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} típicament progressa a través de diverses etapes de venda fins que es marca com "Tancat guanyat" o "Tancat perdut". {{plural_module_name}} es pot aprofitar encara més utilitzant el mòdul de {{forecasts_singular_module}} de Sugar per entendre i predir tendències de vendes i per centrar-se en assolir quotes de vendes.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de vendes individuals i dels elements de línia que pertanyen a aquestes vendes des del principi fins al final. Cada registre de {{module_name}} representa un encapçalament per a un grup de {{revenuelineitems_module}} a més d&#39;estar relacionat amb altres registres importants, com ara {{quotes_module}}, {{contacts_module}}, etc. 
+    'LBL_HELP_RECORD' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de vendes individuals i dels elements de línia que pertanyen a aquestes vendes des del principi fins al final. Cada registre de {{module_name}} representa una possible venda i inclou dades relevants d&#39;aquesta, a més d&#39;estar relacionat amb altres registres importants, com ara {{quotes_module}}, {{contacts_module}}, etc. 
 
 - Editeu els camps d&#39;aquest registre fent clic a un camp individual o amb el botó Edita.
-- Vegeu o modifiqueu enllaços a altres registres als subpanells, inclòs {{revenuelineitems_module}}, mitjançant la commutació de la subfinestra inferior esquerra a la "Vista de dades".
+- Vegeu o modifiqueu enllaços a altres registres als subpanells mitjançant la commutació de la subfinestra inferior esquerra a la "Vista de dades".
 - Feu i vegeu comentaris d&#39;usuari i l&#39;historial de canvis del registre al {{activitystream_singular_module}} mitjançant la commutació de la subfinestra inferior esquerra a la "Seqüència d&#39;activitats".
-- Feu el seguiment d&#39;aquest favorit o marqueu-lo com a favorit amb les icones que hi ha a la dreta del nom del registre.
-- Hi ha accions addicionals disponibles al menú desplegable d&#39;accions a la dreta del botó Edita.',
+- Feu el seguiment d&#39;aquest registre o marqueu-lo com a favorit amb les icones que hi ha a la dreta del nom del registre.
+- Hi ha accions addicionals disponibles al menú desplegable d&#39;accions, a la dreta del botó Edita.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals i dels elements de línia que pertanyen a aquestes vendes de principi a fi. Cada registre {{module_name}} representa un encapçalament per a un grup de {{revenuelineitems_module}} i també està relacionat amb altres registres importants com ara {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals i dels elements de línia que pertanyen a aquestes vendes de principi a fi. Cada registre {{module_name}} representa una possible venda i inclou dades relevants de la mateixa i també d&#39;altres registres importants com ara {{quotes_module}}, {{contacts_module}}, etc.
 
 Per crear un {{module_name}}:
 1. Proporcioneu els valors desitjats per als camps.
  - Els camps marcats "Obligatori" s&#39;han de completar abans de desar.
  - Feu clic a "Mostra més" per exposar camps addicionals si és necessari.
-2. Feu clic a "Desa" per finalitzar el nou registre i tornar a la pàgina anterior.
-3. Després de desar, feu servir el subpanell {{revenuelineitems_module}} per afegir elements de línia al {{module_name}}.',
+2. Feu clic a "Desa" per finalitzar el nou registre i tornar a la pàgina anterior.',
 
 // END PRO/CORP
 

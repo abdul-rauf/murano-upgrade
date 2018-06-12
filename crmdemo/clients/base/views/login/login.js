@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -283,10 +283,10 @@
             // For Safari & Chrome jQuery.Browser returns the webkit revision
             // instead of the browser version and it's hard to determine this
             // number.
-            msie : {min:11}, // IE 11
-            safari : {min:600}, // Safari 8.0.8, 9.0.1
-            mozilla : {min:41}, // Firefox 41, 42
-            chrome : {min:537.36} // Chrome 47
+            msie: {min: 9, max: 11}, // IE 9, 10, 11
+            safari: {min: 537}, // Safari 7.1
+            mozilla: {min: 41}, // Firefox 41,42
+            chrome: {min: 47} // Chrome 47
         };
 
         var current = parseFloat($.browser.version);
@@ -298,11 +298,6 @@
         // supported. The following check rectifies this issue.
         if ((/Trident\/7\./).test(currentNavigator.userAgent)) {
             var supported = supportedBrowsers['msie'];
-            return current >= supported.min;
-        // jquery $.browser returns 'safari' on a Chrome browser
-        // we want to make sure the right browser type to be checked
-        } else if ($.browser['safari'] && navigator.userAgent.indexOf('Chrome') != -1) {
-            var supported = supportedBrowsers['chrome'];
             return current >= supported.min;
         } else {
             for (var b in supportedBrowsers) {

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,6 +20,7 @@ global $timedate;
  
 $mod_strings = array (
     'LBL_GOOD_FILE' => 'Archivo de Importación Leído correctamente',
+    'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'El registro importado está participando en un proceso y no se puede editar porque algunos campos están bloqueados para la edición por el proceso.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'se ha encontrado una serie de errores. Vea la pestaña de errores para identificar las filas que no se han importado debido a errores',
     'LBL_UPDATE_SUCCESSFULLY' => 'registros actualizados correctamente',
     'LBL_SUCCESSFULLY_IMPORTED' => 'se han creado registros',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,8 +11,8 @@
  */
 $mod_strings = array (
     'LBL_MODULE_NAME' => 'Baza wiedzy',
-    'LBL_MODULE_NAME_SINGULAR' => 'Artykuły bazy wiedzy',
-    'LBL_MODULE_TITLE' => 'Artykuły bazy wiedzy',
+    'LBL_MODULE_NAME_SINGULAR' => 'Artykuł bazy wiedzy',
+    'LBL_MODULE_TITLE' => 'Artykuł bazy wiedzy',
     'LNK_NEW_ARTICLE' => 'Utwórz artykuł',
     'LNK_LIST_ARTICLES' => 'Wyświetl artykuły',
     'LNK_KNOWLEDGE_BASE_ADMIN_MENU' => 'Ustawienia',
@@ -23,14 +23,14 @@ $mod_strings = array (
     'LBL_CONFIG_LANGUAGES_LABEL_KEY' => 'Kod języka',
     'LBL_CONFIG_LANGUAGES_LABEL_NAME' => 'Etykieta języka',
     'ERR_CONFIG_LANGUAGES_DUPLICATE' => 'Dodawanie języka z kluczem duplikującym istniejący klucz jest zabronione.',
-    'ERR_CONFIG_LANGUAGES_EMPTY_KEY' => 'The Language Code field is empty, please enter values before saving.',
-    'ERR_CONFIG_LANGUAGES_EMPTY_VALUE' => 'The Language Label field is empty, please enter values before saving.',
+    'ERR_CONFIG_LANGUAGES_EMPTY_KEY' => 'Pole Kod języka jest puste. Wprowadź wartości przed zapisaniem.',
+    'ERR_CONFIG_LANGUAGES_EMPTY_VALUE' => 'Pole Etykieta języka jest puste. Wprowadź wartości przed zapisaniem.',
     'LBL_SET_ITEM_PRIMARY' => 'Ustaw wartość jako podstawową',
     'LBL_ITEM_REMOVE' => 'Usuń element',
     'LBL_ITEM_ADD' => 'Dodaj element',
     'LBL_MODULE_ID'=> 'KBContents',
     'LBL_DOCUMENT_REVISION_ID' => 'ID wersji',
-    'LBL_DOCUMENT_REVISION' => 'Wydanie',
+    'LBL_DOCUMENT_REVISION' => 'Wersja',
     'LBL_NUMBER' => 'Numer',
     'LBL_TEXT_BODY' => 'Treść',
     'LBL_LANG' => 'Język',
@@ -38,7 +38,7 @@ $mod_strings = array (
     'LBL_EXP_DATE' => 'Data wygaśnięcia',
     'LBL_DOC_ID' => 'ID dokumentu',
     'LBL_APPROVED' => 'Zatwierdzone',
-    'LBL_REVISION' => 'Wydanie',
+    'LBL_REVISION' => 'Wersja',
     'LBL_ACTIVE_REV' => 'Wersja artykułu',
     'LBL_IS_EXTERNAL' => 'Zewnętrzny artykuł',
     'LBL_KBDOCUMENT_ID' => 'ID dokumentu bazy wiedzy',
@@ -53,7 +53,7 @@ $mod_strings = array (
     'LBL_VIEWED_COUNT' => 'Wyświetl liczbę',
     'LBL_DOWNLOAD_ALL' => 'Pobierz wszystkie',
     'LBL_DOWNLOAD_ONE' => 'Pobierz',
-    'LBL_ATTACHMENTS' => 'Załączniki:',
+    'LBL_ATTACHMENTS' => 'Załączniki',
     'LBL_ADD_ATTACHMENT' => 'Przeglądaj',
     'LBL_CATEGORIES' => 'Kategorie Bazy wiedzy',
     'LBL_CATEGORY_NAME' => 'Kategoria',
@@ -76,7 +76,7 @@ $mod_strings = array (
     'LBL_CREATE_REVISION_BUTTON_LABEL' => 'Utwórz wersję',
     'LBL_CANNOT_CREATE_LOCALIZATION' =>
         'Nie można utworzyć nowej lokalizacji, ponieważ wersja lokalizacji istnieje dla wszystkich dostępnych języków.',
-    'LBL_SPECIFY_PUBLISH_DATE' => 'Schedule this article to be published by specifying the Publish Date. Do you wish to continue without updating a Publish Date?',
+    'LBL_SPECIFY_PUBLISH_DATE' => 'Zaplanuj publikację tego artykułu, określając datę publikacji. Czy chcesz kontynuować bez aktualizacji daty publikacji?',
     'LBL_MODIFY_EXP_DATE_LOW' => 'Data ważności przypada w dniu poprzedzającym datę publikacji. Czy chcesz kontynuować bez zmieniania daty ważności?',
     'LBL_PANEL_INMORELESS' => 'Przydatność',
     'LBL_MORE_OTHER_LANGUAGES' => 'Więcej języków...',
@@ -91,14 +91,17 @@ $mod_strings = array (
     'LBL_DELETE_CONFIRMATION_LANGUAGE' => 'Wszystkie dokumenty w tym języku zostaną usunięte! Czy na pewno chcesz usunąć ten język?',
     'LBL_CREATE_CATEGORY_PLACEHOLDER' => 'Naciśnij klawisz Enter, aby utworzyć, lub Esc, aby anulować',
     'LBL_KB_NOTIFICATION' => 'Dokument został opublikowany.',
-    'LBL_KB_PUBLISHED_REQUEST' => 'przydzielił(a) Ci dokument w celu zatwierdzenia i publikacji.',
+    'LBL_KB_PUBLISHED_REQUEST' => 'przydzielił Ci dokument w celu zatwierdzenia i publikacji.',
     'LBL_KB_STATUS_BACK_TO_DRAFT' => 'Status dokumentu został zmieniony z powrotem na wersję roboczą.',
     'LBL_OPERATOR_CONTAINING_THESE_WORDS' => 'zawierający następujące słowa',
     'LBL_OPERATOR_EXCLUDING_THESE_WORDS' => 'za wyjątkiem następujących słów',
-    'ERROR_EXP_DATE_LOW' => 'The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_EXP_DATE_LOW' => 'Data ważności nie może być wcześniejsza niż data publikacji.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Status Zatwierdzony wymaga daty publikacji.',
-    'ERROR_ACTIVE_DATE_LOW' => 'The Publish Date must occur on a later date than today&#39;s date.',
+    'ERROR_ACTIVE_DATE_LOW' => 'Data publikacji musi przypadać później niż dziś.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Data publikacji jest pusta.',
     'LBL_RECORD_SAVED_SUCCESS' => 'Pomyślnie utworzono {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'ERROR_IS_BEFORE' => 'Błąd. Data tego pola musi przypadać w dniu po dacie {{this}} pola.',
     'TPL_SHOW_MORE_MODULE' => 'Więcej artykułów {{module}}...',
+    'LBL_LIST_FORM_TITLE' => 'Lista bazy wiedzy',
+    'LBL_SEARCH_FORM_TITLE' => 'Wyszukiwanie w bazie wiedzy',
 );

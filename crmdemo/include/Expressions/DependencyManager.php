@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -37,9 +37,10 @@ class DependencyManager
      * @param Array<String=>Array> $fields, list of fields to get dependencies for.
      * @param Boolean $includeReadOnly include the read-only actions to ensure calculated fields are not modified by the user in edit views. These are not required on detail/list views
      * @param Boolean $orderMatters Order matters on views with multiple calculated fields that rely on each-other. If all the values are currently up to date, order doesn't matter.
+     * @param String $view view type
      * @return array<Dependency>
      */
-    public static function getCalculatedFieldDependencies($fields, $includeReadOnly = true, $orderMatters = false)
+    public static function getCalculatedFieldDependencies($fields, $includeReadOnly = true, $orderMatters = false, $view = null)
     {
 
         $deps = array();
@@ -54,11 +55,20 @@ class DependencyManager
                 $formulaFields[$field] = $triggerFields;
                 $dep = new Dependency($field);
                 $dep->setTrigger(new Trigger('true', $triggerFields));
+                $formula = Parser::evaluate($def['formula']);
+                $isRelated = Parser::isRelatedExpression($formula);
+                if ($isRelated) {
+                    $dep->setIsRelated($isRelated);
+                    $dep->setRelatedFields(Parser::getFormulaRelateFields($formula));
+                }
 
                 $errorValue = array_key_exists('errorValue', $def) ? $def['errorValue'] : null;
                 $dep->addAction(ActionFactory::getNewAction('SetValue', array('target' => $field,
                                                                               'value' => $def['formula'],
                                                                               'errorValue' => $errorValue)));
+                if ($view == 'CreateView') {
+                    $dep->setFireOnLoad(true);
+                }
                 if (isset($def['enforced']) && $def['enforced'] &&
                     //Check for the string "false"
                     (!is_string($def['enforced']) || strtolower($def['enforced']) !== "false")
@@ -129,22 +139,24 @@ class DependencyManager
     /**
      * Used to get a set of Dependencies to drive the dependent fields for this module.
      * @static
-     * @param array $fields fielddef array to create the dependencies from
-     * @return array<Dependency>
+     *
+     * @param array  $fields fielddef array to create the dependencies from
+     * @param string $action (optional)
+     *
+     * @return array <Dependency>
      */
-    public static function getDependentFieldDependencies($fields)
+    public static function getDependentFieldDependencies($fields, $action = 'view')
     {
         $deps = array();
 
         foreach ($fields as $field => $def) {
-            if (!empty ($def ['dependency'])) {
+            if (!empty ($def ['dependency']) && ($action != 'save' || !empty($def['required']))) {
                 // normalize the dependency definition
                 if (!is_array($def ['dependency'])) {
                     $triggerFields = Parser::getFieldsFromExpression($def ['dependency'], $fields);
                     $def ['dependency'] = array(array('trigger' => $triggerFields, 'action' => $def ['dependency']));
                 }
-                foreach ($def ['dependency'] as $depdef)
-                {
+                foreach ($def ['dependency'] as $depdef) {
                     $dep = new Dependency ("{$field}_vis");
                     if (is_array($depdef ['trigger'])) {
                         $triggerFields = $depdef ['trigger'];
@@ -152,8 +164,12 @@ class DependencyManager
                         $triggerFields = Parser::getFieldsFromExpression($depdef ['trigger'], $fields);
                     }
                     $dep->setTrigger(new Trigger ('true', $triggerFields));
-                    $dep->addAction(ActionFactory::getNewAction('SetVisibility',
-                        array('target' => $field, 'value' => $depdef ['action'])));
+                    $value = $depdef['action'];
+                    $actionClass = $action == 'save' ? 'SetRequired' : 'SetVisibility';
+                    //When getting a SetRequried action for save, we need to flip the logic so wrap 'not'
+                    $dep->addAction(
+                        ActionFactory::getNewAction($actionClass, array('target' => $field, 'value' => $value))
+                    );
                     $dep->setFireOnLoad(true);
                     $deps[] = $dep;
                 }
@@ -451,7 +467,7 @@ class DependencyManager
         } else
         {
             return array_merge(
-                self::getCalculatedFieldDependencies($fields),
+                self::getCalculatedFieldDependencies($fields, true, false, $view),
                 self::getDependentFieldDependencies($fields),
                 self::getDropDownDependencies($fields));
         }

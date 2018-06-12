@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,8 +16,8 @@ $mod_strings = array(
     'LNK_NEW_TAG' => 'Utwórz etykietę',
     'LNK_TAG_LIST' => 'Wyświetl etykiety',
     'LNK_IMPORT_TAGS' => 'Importuj szablony',
-    'LBL_DUPLICATES_FOUND' => 'Znaleziono powtarzające się etykiety. Anuluj, aby spróbować ponownie, lub wybierz istniejącą etykietę poniżej.',
-    'LBL_EDIT_DUPLICATE_FOUND' => 'Znaleziono zdubplikowaną etykietę. Zmień nazwę etykiety i spróbuj ponownie.',
+    'LBL_DUPLICATES_FOUND' => 'Znaleziono powtarzające się etykiety. Wybierz opcję Anuluj, aby spróbować ponownie, lub wybierz istniejącą etykietę poniżej.',
+    'LBL_EDIT_DUPLICATE_FOUND' => 'Znaleziono zduplikowaną etykietę. Zmień nazwę etykiety i spróbuj ponownie.',
     // Dynamic subpanels, OOTB
     'LBL_LEADS_SUBPANEL_TITLE' => 'Namiary',
     'LBL_CASES_SUBPANEL_TITLE' => 'Zgłoszenia',
@@ -27,8 +27,8 @@ $mod_strings = array(
     'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontakty',
     'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Kontrahenci',
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Szanse',
-    'LBL_NOTES_SUBPANEL_TITLE' => 'Załącznik',
-    'LBL_CALLS_SUBPANEL_TITLE' => 'Rozmowy tel.',
+    'LBL_NOTES_SUBPANEL_TITLE' => 'Notatki i załączniki',
+    'LBL_CALLS_SUBPANEL_TITLE' => 'Rozmowy telefoniczne',
     'LBL_MEETINGS_SUBPANEL_TITLE' => 'Spotkania',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Zadania',
     'LBL_REVENUELINEITEMS_SUBPANEL_TITLE' => 'Pozycje szansy',
@@ -36,9 +36,9 @@ $mod_strings = array(
     'LBL_PRODUCTTEMPLATES_SUBPANEL_TITLE' => 'Katalog produktów',
     'LBL_PRODUCTCATEGORIES_SUBPANEL_TITLE' => 'Kategorie produktów',
     'EXCEPTION_DUPLICATE_TAG_FOUND' => 'Znaleziono zduplikowaną etykietę. Wielkość liter w etykietach ma znaczenie, a etykiety muszą być unikatowe.',
-    'LBL_EXPORT_ASSIGNED_USER_ID' => 'Przydzielono do',
-    'LBL_EXPORT_MODIFIED_USER_ID' => 'Zmodyfikowane przez',
-    'LBL_EXPORT_CREATED_BY' => 'Utworzone przez',
-    'LBL_EXPORT_CREATED_BY_NAME' => 'Nazwa użytkownika, który utworzył',
-    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nazwa użytkownika, któremu przypisano',
+    'LBL_EXPORT_ASSIGNED_USER_ID' => 'Przypisano do (ID użytkownika)',
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Zmodyfikowano przez (ID)',
+    'LBL_EXPORT_CREATED_BY' => 'Utworzone przez (ID)',
+    'LBL_EXPORT_CREATED_BY_NAME' => 'Utworzono przez (nazwa użytkownika)',
+    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Przypisano do (nazwa użytkownika)',
 );

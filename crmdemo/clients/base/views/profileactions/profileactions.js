@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,20 +14,7 @@
  * @extends View.View
  */
 ({
-    plugins: ['Dropdown', 'Tooltip'],
-
-    events: {
-        'click [data-action=link]': 'linkClicked',
-        'click #userTab' : 'hideSubmenuItems',
-        'click #userActions' : 'closeSubmenu'
-    },
-
-    /**
-     * Visibility property for available submenu.
-     *
-     * @property
-     */
-    displaySubmenu: false,
+    plugins: ['Dropdown'],
 
     initialize: function(options) {
         app.view.View.prototype.initialize.call(this, options);
@@ -51,38 +38,6 @@
         }
         this._super('_renderHtml');
     },
-    /**
-     * Handle the button click event.
-     * Stop event propagation in order to keep the dropdown box.
-     *
-     * @param {Event} evt Mouse event.
-     */
-    linkClicked: function(evt) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        var $menuItem = this.$(evt.currentTarget),
-            $submenu = $menuItem.closest('li').find('.dropdown-inset');
-        $submenu.toggle();
-        // Handles the highlight of the dropdown arrow
-        $menuItem.toggleClass("open");
-
-        // Handles css properties when height exceed 330, the scrollbar appears
-        var maxHeight = 330,
-            currentHeight = this.$("#fullmenu").outerHeight();
-        this.$('.dropdown-submenu').toggleClass('with-scroll', currentHeight >= maxHeight);
-    },
-    /**
-     * Closes the submenu
-     */
-    closeSubmenu: function(){
-        this.$('.dropdown-submenu').removeClass("open");
-    },
-    /**
-     * Hides the submenu items
-     */
-    hideSubmenuItems: function() {
-        this.$('.dropdown-inset').hide();
-    },
 
     /**
      * Filters menu metadata
@@ -97,7 +52,7 @@
                 if(app.acl.hasAccess(item.acl_action, item.acl_module)) {
                     result.push(item);
                 }
-            } else if(item['acl_action'] === 'admin' && item['label'] === 'LBL_ADMIN') {
+            } else if(item['acl_action'] === 'admin') {
                 //Edge case for admin link. We only show the Admin link when
                 //user has the "Admin & Developer" or "Developer" (so developer
                 //in either case; see SP-1827)

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -91,13 +91,6 @@ class Contract extends SugarBean
     public $new_schema = true;
     public $module_dir = 'Contracts';
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Contracts()
-    {
-        self::__construct();
-    }
 
     public function __construct()
     {
@@ -150,8 +143,11 @@ class Contract extends SugarBean
         // contracts_opportunities is many to many but for some reason the UI implements it as if it's one to many
         // that is, for a contract, only one opp can be linked to it
         // workaround here to delete the current entry so when it's inserted later we have only the new record
-        $query = 'delete from ' . $this->rel_opportunity_table . " where contract_id = '" . $this->id . "'";
-        $this->db->query($query);
+        if (!empty($this->rel_fields_before_value['opportunity_id']) &&
+            $this->rel_fields_before_value['opportunity_id'] != $this->opportunity_id) {
+            $query = 'delete from ' . $this->rel_opportunity_table . " where contract_id = '" . $this->id . "'";
+            $this->db->query($query);
+        }
 
         $this->setCalculatedValues(false);
         $return_id = parent::save($check_notify);

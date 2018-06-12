@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -23,9 +23,9 @@
     showNoData: false,
 
     'events': {
-        'click .fa-favorite': 'toggle'
+        'click .btn': 'toggle'
     },
-    plugins: ['Tooltip'],
+
     /**
      * @inheritdoc
      *
@@ -33,7 +33,14 @@
      */
     initialize: function(options) {
         options.def.readonly = true;
-        app.view.Field.prototype.initialize.call(this, options);
+        // We change the field name to be 'my_favorite' because that's the name in
+        // the vardefs and thus in the model attributes. Since the model listens
+        // to `my_favorite` for several events ('change:my_favorite',
+        // 'acl:change:my_favorite', 'error:validation:my_favorite', ...), the
+        // names need to be equal.
+        options.def.name = 'my_favorite';
+
+        this._super('initialize', [options]);
     },
 
     /**
@@ -85,11 +92,13 @@
             return;
         }
         if (this.model.isFavorite()) {
-            star.addClass('active');
+            star.addClass('active')
+                .attr('aria-pressed', true);
             this.model.trigger("favorite:active");
         }
         else {
-            star.removeClass('active');
+            star.removeClass('active')
+                .attr('aria-pressed', false);
         }
     },
 

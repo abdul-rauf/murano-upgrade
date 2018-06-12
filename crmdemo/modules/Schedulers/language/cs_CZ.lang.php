@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Vymazat soubory diagnostiky',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Vymazat prozatimní PDF soubory',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Aktualizovat tracker_sessions tabulku',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Spustit emailovou upomínku',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Spustit oznamování připomenutí e-mailem',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Vyčistit frontu úloh',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Vytvořit budoucí časovou periodu',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Aktualizovat články KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publikovat schválené články a vypršet platnost článkům znalostní báze.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Naplánovaná úloha autora procesu',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Plánovaná úloha Advanced Workflow',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Obnovit práce',
 'LBL_POLLMONITOREDINBOXES' => 'Zkontrolovat Inbound Mail Accounts',
 'LBL_PERFORMFULLFTSINDEX' => 'Full-textový vyhledávač',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Odstranit dočasné soubory PDF',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publikovat schválené články a ukončit platnost článkům znalostní báze.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Plánovač fronty vyhledávače Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Odstranit soubory diagnostického nástroje',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Odstranit dočasné soubory',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Spouštět noční hromadné rozesílání e-mailových kampaní',
 'LBL_ASYNCMASSUPDATE' => 'Provést asynchroní hromadnou úpravu',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Aktualizovat trekovací tabulky',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Vytvořit budoucí časovou periodu',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'Spustit odesílání email. upomínek',
+'LBL_SENDEMAILREMINDERS'=> 'Spustit odesílání připomenutí e-mailem',
 'LBL_CLEANJOBQUEUE' => 'Vyčištění fronty úloh',
 'LBL_CLEANOLDRECORDLISTS' => 'Vyčistit seznamy starých záznamů',
 );

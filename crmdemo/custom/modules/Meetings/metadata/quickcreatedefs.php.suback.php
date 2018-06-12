@@ -1,5 +1,5 @@
 <?php
-// created: 2015-01-11 07:09:10
+// created: 2015-02-22 18:44:41
 $viewdefs['Meetings']['QuickCreate'] = array (
   'templateMeta' => 
   array (
@@ -9,7 +9,6 @@ $viewdefs['Meetings']['QuickCreate'] = array (
       'hidden' => 
       array (
         0 => '<input type="hidden" name="isSaveAndNew" value="false">',
-        1 => '<input type="hidden" name="is_ajax_call" value="1">',
       ),
       'buttons' => 
       array (
@@ -159,7 +158,7 @@ $viewdefs['Meetings']['QuickCreate'] = array (
                     {literal}
                     SUGAR.util.doWhen(function(){return typeof DurationDependency != "undefined" && typeof document.getElementById("duration") != "undefined"}, function(){
                         var duration_dependency = new DurationDependency("date_start","date_end","duration",date_time_format);
-                        initEditView(YAHOO.util.Selector.query(\'select#duration\')[0].form);
+                        //initEditView(YAHOO.util.Selector.query(\'select#duration\')[0].form);
                     });
                     {/literal}
                 </script>            

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -49,7 +49,7 @@ class ActivitiesApiHelper extends SugarBeanApiHelper
             'id' => isset($record['parent_id']) ? $record['parent_id'] : '',
         );
 
-        if (!is_null($requestBean) && ($record['activity_type'] === 'link' || $record['activity_type'] === 'unlink')) {
+        if (!is_null($requestBean) && $this->isRecordLinkAction($record)) {
             // Verify that the context matches record's parent module.
             if ($requestBean->module_name === $record['parent_type']) {
                 $array['module'] = $record['data']['subject']['module'];
@@ -58,5 +58,18 @@ class ActivitiesApiHelper extends SugarBeanApiHelper
         }
 
         return $array;
+    }
+
+    /**
+     * Checks to see if the activity type on a record is link or unlink
+     * @param array $record The API formatted record array
+     * @return boolean
+     */
+    protected function isRecordLinkAction($record)
+    {
+        if (isset($record['activity_type'])) {
+            return $record['activity_type'] === 'link' || $record['activity_type'] === 'unlink';
+        }
+        return false;
     }
 }

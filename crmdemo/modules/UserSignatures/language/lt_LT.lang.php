@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,8 +11,8 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'User Signatures',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'User Signature',
+    'LBL_MODULE_NAME'			=> 'Vartotojų parašai',
+    'LBL_MODULE_NAME_SINGULAR'		=> 'Vartotojo parašas',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'This signature requires a name.',
     'LBL_SIGNATURE_NAME'         => 'Pavadinimas',
     'LBL_SIGNATURE'              => 'Signature',

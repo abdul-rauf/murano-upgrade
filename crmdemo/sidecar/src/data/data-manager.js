@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -365,7 +365,7 @@
             };
 
             var superModel = _models[platformNamespace + 'Model'] ||
-                _models['BaseModel'] ||
+                _models.BaseModel ||
                 this.beanModel;
 
             modelController = _.extend(modelController || {}, baseProperties);
@@ -393,15 +393,6 @@
             this.resetCollection(moduleName);
 
             var baseCollectionProperties = {
-                /**
-                 * The model class that the collection contains.
-                 *
-                 * **Note:** Please do not manipulate this property directly.
-                 * This property should never be modified directly.
-                 *
-                 * @member Data.BeanCollection
-                 * @property {Data.Bean}
-                 */
                 model: model,
 
                 /**
@@ -430,7 +421,7 @@
             };
 
             var superCollection = _collections[platformNamespace + 'Collection'] ||
-                _collections['BaseCollection'] ||
+                _collections.BaseCollection ||
                 this.beanCollection;
 
             collectionController = _.extend(collectionController || {}, baseCollectionProperties);
@@ -465,17 +456,20 @@
 
             var baseProperties = {
                 /**
-                 * @inheritdoc Data.Bean#_defaults
+                 * Same as {@link Data.Bean#_defaults}
+                 * @inheritdoc
                  */
                 _defaults: defaults,
 
                 /**
-                 * @inheritdoc Data.Bean#module
+                 * Same as {@link Data.Bean#module}
+                 * @inheritdoc
                  */
                 module: name,
 
                 /**
-                 * @inheritdoc Data.Bean#fields
+                 * Same as {@link Data.Bean#fields}
+                 * @inheritdoc
                  */
                 fields: fields
             };
@@ -485,7 +479,6 @@
 
         /**
          * Accessor for declared models
-         * @method
          */
         getModelClasses: function() {
             return _models;
@@ -493,7 +486,6 @@
 
         /**
          * Accessor for declared collections
-         * @method
          */
         getCollectionClasses: function() {
             return _collections;
@@ -522,10 +514,9 @@
          *
          * This method is for internal use only.
          * @param {String} module Module name.
-         * @ignore
          */
         getBeanClass: function(module) {
-            return _models[module] || Backbone.Model;
+            return _models[module] || this.beanModel;
         },
 
         /**
@@ -574,27 +565,28 @@
         },
 
         /**
-         * Creates an instance of related {@link Data.Bean} or updates an existing bean with link information.
+         * Creates an instance of related {@link Data.Bean} or updates an
+         * existing bean with link information.
          *
-         * <pre><code>
-         * (function(app) {
+         *     (function(app) {
          *
-         * // Create a new contact related to the given opportunity.
-         * var contact = app.data.createRelatedBean(opportunity, "1", "contacts", {
-         *    "first_name": "John",
-         *    "last_name": "Smith",
-         *    "contact_role": "Decision Maker"
-         * });
-         * contact.save(null, { relate: true });
+         *     // Create a new contact related to the given opportunity.
+         *     var contact = app.data.createRelatedBean(opportunity, '1', 'contacts', {
+         *        'first_name': 'John',
+         *        'last_name': 'Smith',
+         *        'contact_role': 'Decision Maker'
+         *     });
+         *     contact.save(null, { relate: true });
          *
-         * })(SUGAR.App);
-         * </code></pre>
+         *     })(SUGAR.App);
          *
          * @param {Data.Bean} bean1 instance of the first bean
-         * @param {Data.Bean/String} beanOrId2 instance or ID of the second bean. A new instance is created if this parameter is <code>null</code>
-         * @param {String} link relationship link name
+         * @param {Data.Bean|string} beanOrId2 instance or ID of the second
+         *   bean. A new instance is created if this parameter is `null`.
+         * @param {string} link relationship link name
          * @param {Object} attrs(optional) bean attributes hash
-         * @return {Data.Bean} a new instance of the related bean or existing bean instance updated with relationship link information.
+         * @return {Data.Bean} a new instance of the related bean or existing
+         *   bean instance updated with relationship link information.
          */
         createRelatedBean: function(bean1, beanOrId2, link, attrs) {
             var relatedModule = this.getRelatedModule(bean1.module, link);
@@ -656,8 +648,8 @@
          * The newly created collection is cached in the given bean instance.
          *
          * @param {Data.Bean} bean the related beans are linked to the specified bean
-         * @param {String} link relationship link name
-         * @param {Array/Data.BeanCollection} models(optional) an array of related beans to populate the newly created collection with
+         * @param {string} link relationship link name
+         * @param {Array|Data.BeanCollection} models(optional) an array of related beans to populate the newly created collection with
          * @return {Data.BeanCollection} a new instance of the bean collection
          */
         createRelatedCollection: function(bean, link, models) {
@@ -689,8 +681,10 @@
 
         /**
          * Creates a collection of beans of different modules.
-         * @param {Array/Data.BeanCollection} models(optional) A list of models to populate the new collection with.
-         * @return {Data.MixedBeanCollection} Collection of mixed module collection.
+         * @param {Array|Data.BeanCollection} [models] A list of models to
+         *   populate the new collection with.
+         * @return {Data.MixedBeanCollection} Collection of mixed module
+         *   collection.
          */
         createMixedBeanCollection: function(models) {
             return new app.data.mixedBeanCollection(models);
@@ -844,9 +838,9 @@
 
         /**
          * Gets editable fields.
-         * @param {Data.Bean/Data.BeanCollection} model to get fields from.
-         * @param {Array} fields(optional) names to be checked.
-         * @param {Object} options
+         * @param {Data.Bean|Data.BeanCollection} model to get fields from.
+         * @param {Array} [fields] Names to be checked.
+         * @param {Object} [options]
          * @return {Object} Hash of editable fields.
          */
         getEditableFields: function(model, fields, options) {
@@ -856,11 +850,13 @@
             fields = fields || [];
 
             // No fields were specified, try the model's attributes instead
-            if (fields.length == 0) {
+            if (!fields.length) {
                 fields = _.keys(model.attributes);
             }
 
-            // Editible fields are fields that are either DB fields, such as name, or related fields that do have a real DB field behind them, such as opportunity_role (contact_role), that the user has access to edit.
+            // Editable fields are fields that are either DB fields, such as
+            // name, or related fields that do have a real DB field behind them,
+            // such as opportunity_role (contact_role), that the user has access to edit.
             // The following code will filter out fields such as assigned_user_name.
             _.each(fields, function(fieldName) {
                 var fieldValue;
@@ -895,7 +891,7 @@
          *
          * @param {string} method The CRUD method: ('create', 'read', 'update',
          *   or 'delete').
-         * @param {Data.Bean/Data.BeanCollection} model The model/collection to
+         * @param {Data.Bean|Data.BeanCollection} model The model/collection to
          *   be synced/read.
          * @param {Object} [options] Standard Backbone options as well as
          *   Sugar-specific options.
@@ -1100,15 +1096,23 @@
                 model.inSync = true;
                 model.original_assigned_user_id = model.get("assigned_user_id");
                 if ((method == "read") && (model instanceof app.BeanCollection)) {
+                    var offset = options.offset || 0;
                     data = data || {};
 
                     if (data.next_offset) {
-                        model.offset = data.next_offset != -1 ? data.next_offset : model.offset + (data.records || []).length;
+                        model.offset = data.next_offset != -1 ? data.next_offset : offset + (data.records || []).length;
                         model.next_offset = data.next_offset;
                         model.page = model.getPageNumber(options);
                     }
 
-                    model.total = _.isNumber(data.total) ? data.total : null;
+                    if (!options.update) {
+                        // We need to invalidate the cached version of the total
+                        // when a reset is fired on the collection from actions
+                        // such as filtering. If however, the total is being
+                        // populated from the server response, that will be
+                        // used instead.
+                        model.total = _.isNumber(data.total) ? data.total : null;
+                    }
 
                     // We need `xmod_aggs` property which are the facets
                     // for search.
@@ -1150,9 +1154,7 @@
                 }
 
                 model.dataFetched = true;
-                if (options.success) options.success(model, data, options);
-                // We use stock Backbone 'sync' event for model for successful response
-                model.trigger('sync', model, data, options, request);
+                if (options.success) options.success(data);
                 // trigger global data:sync:success event
                 self.trigger("data:sync:success", method, model, options, request);
                 model.inSync = null;
@@ -1171,7 +1173,7 @@
          *
          * @param {string} method The CRUD method: ('create', 'read', 'update',
          *   or 'delete').
-         * @param {Data.Bean/Data.BeanCollection} model The model/collection to
+         * @param {Data.Bean|Data.BeanCollection} model The model/collection to
          *   be synced/read.
          * @param {Object} [options] Standard Backbone options as well as
          *   Sugar-specific options.
@@ -1222,7 +1224,7 @@
          *
          * @param {string} method The CRUD method: ('create', 'read', 'update',
          *   or 'delete').
-         * @param {Data.Bean/Data.BeanCollection} model The model/collection to
+         * @param {Data.Bean|Data.BeanCollection} model The model/collection to
          *   be synced/read.
          * @param {Object} [options] Standard Backbone options as well as
          *   Sugar-specific options.
@@ -1267,7 +1269,7 @@
          *
          * @param {string} method The CRUD method: ('create', 'read', 'update',
          *   or 'delete').
-         * @param {Data.Bean/Data.BeanCollection} model The model/collection to
+         * @param {Data.Bean|Data.BeanCollection} model The model/collection to
          *   be synced/read.
          * @param {Object} [options] Standard Backbone options as well as
          *   Sugar-specific options.

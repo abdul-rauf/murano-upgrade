@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -35,15 +35,15 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'Lista spedytorów',
   'LNK_NEW_TAXRATE' => 'Lista stawek podatkowych',
   'NTC_DELETE_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten rekord?',
-  'ERR_DELETE_RECORD' => 'Musisz podać numer rekordu, aby usunąć tego spedytora.',
+  'ERR_DELETE_RECORD' => 'Aby usunąć spedytora, należy podać numer rekordu.',
   'NTC_STATUS' => 'Ustaw status na nieaktywny aby usunąć tego spedytora z listy spedytorów.',
-  'NTC_LIST_ORDER' => 'Ustawienie kolejności dla tego spedytora umieści go na rozwijalnej liście spedytorów',
+  'NTC_LIST_ORDER' => 'Ustaw kolejność w jakiej ten spedytor będzie wyświetlany na liście rozwijanej spedytorów',
   'shipper_status_dom' => 
   array (
     'Active' => 'Aktywny',
     'Inactive' => 'Nieaktywny',
 ),
-	'LBL_EDITLAYOUT' => 'Edytuj widok' /*for 508 compliance fix*/,
+	'LBL_EDITLAYOUT' => 'Edytuj układ' /*for 508 compliance fix*/,
 );
 
 

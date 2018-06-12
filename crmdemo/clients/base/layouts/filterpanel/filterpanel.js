@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -42,12 +42,10 @@
      *     <pre><code>
      *         'layout' => array(
      *              'type' =>'filterpanel',
-     *              'meta' => array(
-     *                  'filter_options' => array(
-     *                      'auto_apply' => false,
-     *                      'stickiness' => false,
-     *                      'show_actions' => false,
-     *                  ),
+     *              'filter_options' => array(
+     *                  'auto_apply' => false,
+     *                  'stickiness' => false,
+     *                  'show_actions' => false,
      *              ),
      *          ),
      *     </code></pre>
@@ -60,6 +58,10 @@
             'show_actions': true
         };
 
+        this.events = _.extend({}, this.events, {
+            'click [data-action=refreshList]': '_refreshList'
+        });
+
         var moduleMeta = app.metadata.getModule(opts.module) || {};
         this.disableActivityStreamToggle(opts.module, moduleMeta, opts.meta || {});
 
@@ -68,9 +70,7 @@
             this.currentLink = link;
         }, this);
 
-        this.on('filter:create:open', _.debounce(function() {
-            // This debounce method should be in accordance with filter-rows::openForm,
-            // so components show up at the same time
+        this.on('filter:create:open', function() {
             this.$('.filter-options').removeClass('hide');
 
             // "filter:create:open" is triggered even when the edit drawer is
@@ -89,7 +89,7 @@
                     'Filter:Reset'
                 ], this);
             }
-        }, 100, true), this);
+        }, this);
 
         this.on('filter:create:close', function() {
             this.$('.filter-options').addClass('hide');
@@ -151,6 +151,15 @@
         }
     },
 
+    /**
+     * Refreshes the list view by applying filters.
+     *
+     * @private
+     */
+    _refreshList: function() {
+        this.trigger('filter:apply');
+    },
+    
     /**
      * Disables the activity stream toggle if activity stream is not enabled for a module
      * @param {String} moduleName The name of the module

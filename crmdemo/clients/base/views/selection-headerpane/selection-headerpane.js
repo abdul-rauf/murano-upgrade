@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -26,8 +26,11 @@
             additionalEvents = {};
 
         this.isMultiLink = options.context.has('recLink');
+        var createButtonAcl = _.chain(this.meta.buttons)
+            .findWhere({name: 'main_dropdown'}).result('buttons')
+            .findWhere({name: 'create_button'}).result('acl_action').value();
 
-        if (isBwcEnabled || multiSelect || this.isMultiLink) {
+        if (isBwcEnabled || multiSelect || this.isMultiLink || !app.acl.hasAccess(createButtonAcl, options.module)) {
             buttonsToRemove.push('create_button');
         } else {
             additionalEvents['click [name=create_button]'] = 'createAndSelect';

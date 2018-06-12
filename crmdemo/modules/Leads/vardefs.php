@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -29,6 +29,7 @@ $dictionary['Lead'] = array(
             'default' => '0',
             'comment' => 'Has Lead been converted to a Contact (and other Sugar objects)',
             'massupdate' => false,
+            'studio' => false,
         ),
         'refered_by' => array(
             'name' => 'refered_by',
@@ -551,11 +552,6 @@ $dictionary['Lead'] = array(
     ),
     'indices' => array(
         array('name' => 'idx_lead_acct_name_first', 'type' => 'index', 'fields' => array('account_name', 'deleted')),
-        array(
-            'name' => 'idx_lead_last_first',
-            'type' => 'index',
-            'fields' => array('last_name', 'first_name', 'deleted')
-        ),
         array(
             'name' => 'idx_lead_del_stat',
             'type' => 'index',

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Feil ble funnet under kompatibilitetskontrollen.  For at SugarCRM-installasjonenen skal fungere riktig, utfører du de passende tiltakene for å løse problemene nedenfor, og trykker enten på knappe «sjekk på nytt» eller prøv å installere på nytt.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Tillat Call Time Pass Reference er på (dette bør settes til av i php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Ikke funnet: Sugar planlegger kjører med begrenset funksjonalitet.',
+	'ERR_CHECKSYS_CURL'					=> 'Finner ikke: Sugar Scheduler vil kjøres med begrenset funksjonalitet. Tjenesten e-postarkivering kjøres ikke.',
     'ERR_CHECKSYS_IMAP'					=> 'Finner ikke: InnkommendeE-post og kampanjer (e-post) krever IMAP-bibliotek. Ingen av dem kommer til å være funksjonell.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC kan ikke slås «På» når du bruker MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Advarsel: ',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'Databasen er utilgjengelig',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Støtte for database ble ikke funnet. Kontroller at du har de nødvendige driverne for en av de følgende støttede databasetypene: MySQL elller MS SQLServer. Du må kanskje avkommentere utvidelsen i php.ini-filen eller samle inn igjen med riktig binærfil – avhengig av PHP-versjonen din. Les PHP-veiledningen for mer informasjon om hvordan du aktiverer støtte for database.<br><br>Databasene Oracle og DB2 støttes ikke for SugarCRM PRO. For en liste over støttede databaser og annen plattforminformasjon, se<a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Finner ikke funksjonene tilknyttet XML-analysebibliotekene som Sugar-programmet trenger. Du må kanskje avkommentere utvidelsen i php.ini-filen, eller omkompilere med rett binærfil, avhengig av din  PHP-versjon. Se PHP-veiledningen for mer informasjon.',
+    'LBL_CHECKSYS_CSPRNG' => 'Slumptallsgeneratoren',
     'ERR_CHECKSYS_MBSTRING'             => 'Funksjoner knyttet til Multibyte Strings PHP-forlengelsen (mbstring) som Sugar-programmet trenger ble ikke funnet. <br/> <br/> Vanligvis er ikke mbstring-modulen aktivert som standard i PHP, og må aktiveres med --enable-mbstring når PHP binære bygges. Se PHP-veiledningen for mer informasjon om hvordan du aktiverer mbstring-støtte.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Innstillingen session.save_path i php-konfigurasjonsfilen (php.ini) er ikke angitt eller er satt til en mappe som ikke finnes. Du må kanskje angi innstillingen save_path i php.ini eller bekrefte at mappesettene i save_path finnes.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'ZIP-støtten ble ikke funnet: SugarCRM trenger ZIP-støtte for å behandle komprimerte filer.',
     'ERR_CHECKSYS_BCMATH'				=> 'BCMATH støtte ikke funnet: SugarCRM trenger BCMATH-støtte for arbitætrær nøyaktighetsmatematikk.',
     'ERR_CHECKSYS_HTACCESS'             => 'Testen for .htaccess-omskriving mislyktes. Dette betyr vanligvis at du ikke har AllowOverride definert for Sugar-katalogen.',
+    'ERR_CHECKSYS_CSPRNG' => 'CSPRNG unntak',
 	'ERR_DB_ADMIN'						=> 'Det angitte brukernavnet og/eller passordet for databaseadministratoren er ugyldig, og tilkobling til databasen kan ikke opprettes. Angi et gyldig brukernavn og passord.  (Feil: ',
     'ERR_DB_ADMIN_MSSQL'                => 'Det angitte brukernavnet og/eller passordet for databaseadministratoren er ugyldig, og tilkobling til databasen kan ikke opprettes. Angi et gyldig brukernavn og passord.',
 	'ERR_DB_EXISTS_NOT'					=> 'Den angitte databasen finnes ikke.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'Nøkkelen er nødvendig for generell programfunksjonalitet, men er ikke nødvendig for installasjonen. Du trenger ikke å angi nøkkelen nå, men du må gjøre det etter du har installert programmet.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Krever minsteinformasjon for installasjonen. Anbefalt for nye brukere.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Gir flere alternativer å konfigurere under installasjonen. De fleste av disse alternativene er også tilgjengelige etter installasjonen på administratorskjermbildene. Anbefalt for avanserte brukere.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Gir flere alternativer å konfigurere under installasjonen. De fleste av disse alternativene er også tilgjengelige etter installasjonen på administratorskjermbildene. Anbefalt for avanserte brukere.',
 	'LBL_LANG_1'						=> 'For å bruke et språk i Sugar enn standardspråket (US-engelsk), kan du laste opp og installere språkpakken nå. Du vil også kunne laste opp og installere språkpakker i Sugar-programmet. Hvis du vil hoppe over dette trinnet, klikker du på neste.',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Installer',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Fjern',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'Godta lisens',
     'LBL_LICENSE_CHECKING'              => 'Sjekker systemet for kompatibilitet.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Sjekker miljøet',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'Verifiserer DB-legitimasjon.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'Verifiserer DB, FTS-brukerinformasjon.',
     'LBL_LICENSE_CHECK_PASSED'          => 'Systemet besto kompatibilitetskontrollen.',
     'LBL_LICENSE_REDIRECT'              => 'Viderekobles om ',
 	'LBL_LICENSE_DIRECTIONS'			=> 'Hvis du har lisensinformasjonen din, angir du dette i feltene nedenfor.',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'Les følgende viktige informasjon før du fortsetter med installasjonen. Informasjonen hjelper deg å avgjøre om du er klar til å installere programmet.',
 
 
-	'LBL_WELCOME_2'						=> 'For installasjonsdokumentasjon, kan du gå til <a href="http://www.sugarcrm.com/crm/installation" target="_blank"> Sugar Wiki</a>.  <BR><BR>Du finner også hjelp fra Sugar Community i <a href="http://www.sugarcrm.com/forums/" target="_blank"> Sugar-forumene</a>.',
+	'LBL_WELCOME_2'						=> 'For installasjonsdokumentasjon, kan du gå til <a href="http://www.sugarcrm.com/crm/installation" target="_blank"> Sugar Wiki</a>.  <BR><BR>For å kontakte en SugarCRM-støtterepresentant for å få installasjonshjelp, kan du logge på <a target="_blank" href="http://support.sugarcrm.com"> SugarCRMs støtteportal Portal</a> og sende inn en støtteforespørsel.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>Velg språk</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Installasjonsveiviser',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Velkommen til SugarCRM ',
@@ -452,7 +455,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'Kjør nattlige masse-e-post kampanjer',
 	'LBL_OOTB_PRUNE'		=> 'Redusér databasen den første i hver måned',
     'LBL_OOTB_TRACKER'		=> 'Beskjær sporingstabeller',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Kjør Epostpåminnelsesvarsler',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Kjør påminnelsesvarsler via e-post',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'Oppdater tracker_sessions-tabellen',
     'LBL_OOTB_CLEANUP_QUEUE' => 'Rens jobbkø',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'Søkemotortype',
     'LBL_FTS_HELP'      => 'For å aktivere fullt tekstsøk angir du verten og porten hvor søkemotoren hostes. Sugar har innebygd støtte for elasticsearch-motoren.',
     'LBL_FTS_REQUIRED'    => 'Elastic Search kreves.',
-    'LBL_FTS_ERROR'    => 'Kan ikke koble til fullt tekstsøk-serveren. Kontroller innstillingene dine.',
+    'LBL_FTS_CONN_ERROR'    => 'Kan ikke koble til fullt tekstsøk-serveren. Kontroller innstillingene dine.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'Ingen fullt tekstsøk-serverversjon tilgjengelig, Kontroller innstillingene.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'Ustøttet versjon av Elastic search oppdaget. Bruk versjoner: %s',
 
     'LBL_PATCHES_TITLE'     => 'Installer nyeste oppdateringer',
     'LBL_MODULE_TITLE'      => 'Installer språkpakker',

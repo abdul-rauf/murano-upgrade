@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -54,7 +54,7 @@ $mod_strings = array(
 	'LBL_DELETE_SEEN'		=> 'Slet læste e-mails efter import',
 	'LBL_EDIT_TEMPLATE'		=> 'Rediger',
 	'LBL_EMAIL_OPTIONS'		=> 'Indstillinger for e-mail-håndtering',
-	'LBL_EMAIL_BOUNCE_OPTIONS' => 'Indstillinger for afvisningshåndtering',
+	'LBL_EMAIL_BOUNCE_OPTIONS' => 'CalDAV afvisningshåndtering',
 	'LBL_FILTER_DOMAIN_DESC'=> 'Undlad at sende automatiske svar til dette domæne.',
 	'LBL_ASSIGN_TO_GROUP_FOLDER_DESC'=> 'Markér dette felt for automatisk at oprette e-mail-poster i Sugar til alle indgående e-mails.',
 	'LBL_POSSIBLE_ACTION_DESC'		=> 'Til indstillingen Opret sag skal der vælges en gruppemappe',

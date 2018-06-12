@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Hiq fajllat e mjeteve diagnostifikuese',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Hiq fajllat PDF të përkohshëm',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Rinovo tabelën e sesionit të gjurmimit',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Emailat e drejtuar kujtojnë njoftimet',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Aktivizo njoftimet e rikujtesës me email',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Pastrimi i punëve të reshtit',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'krijo periudha kohore te ardhshme',
 'LBL_OOTB_HEARTBEAT' => 'Rrahja e zemrës së Sugar',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Përditëso artikujt KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publiko artikujt e miratuar dhe artikujt e përfunduar të bazës së njohurive.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Proceso Punën e Skeduluar të Autorit',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Punë e planifikuar e "Advanced Workflow"',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervali',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Rifrsko punët',
 'LBL_POLLMONITOREDINBOXES' => 'Kontrollo llogaritë e maileve të drejtuara për brenda',
 'LBL_PERFORMFULLFTSINDEX' => 'Kërkimi i tekstit të plotë në sistemin e indeksit',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Hiq skedarët e përkohshëm PDF',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publiko artikujt e miratuar dhe artikujt e përfunduar të bazës së njohurive.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Planifikuesi i radhës së kërkimit elastik',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Hiq skedarët e mjetit diagnostikues',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Hiq skedarët e përkohshëm',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Drejtimi i natës së Emailave masive të Kampanjës',
 'LBL_ASYNCMASSUPDATE' => 'Kryeni përditësim masive të josinkronik',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Rinovo tabelat e sesionit të gjurmuesve',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'krijo periudha kohore te ardhshme',
 'LBL_SUGARJOBHEARTBEAT' => 'Rrahja e zemrës së Sugar',
-'LBL_SENDEMAILREMINDERS'=> 'Drejtimi i Emailave përkujtuese të dërgimit',
+'LBL_SENDEMAILREMINDERS'=> 'Aktivizo dërgimin e rikujtesave me email',
 'LBL_CLEANJOBQUEUE' => 'Pastrim i punës së reshtit',
 'LBL_CLEANOLDRECORDLISTS' => 'Pastro listat e vjetra të regjistrimit',
 );

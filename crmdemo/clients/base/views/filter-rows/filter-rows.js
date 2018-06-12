@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -121,9 +121,7 @@
      * Handler for filter:create:open event
      * @param {Bean} filterModel
      */
-    openForm: _.debounce(function(filterModel) {
-        // This debounce method should be in accordance with filterpanel `filter:create:open` event handler,
-        // so components show up at the same time
+    openForm: function(filterModel) {
         var template = filterModel.get('filter_template') || filterModel.get('filter_definition');
         if (_.isEmpty(template)) {
             this.render();
@@ -135,13 +133,25 @@
         this.saveFilterEditState();
 
         //shortcut keys
-        app.shortcuts.register('Filter:Add', '+', function() {
-            this.$('[data-action=add]').last().click();
-        },this);
-        app.shortcuts.register('Filter:Remove', '-', function() {
-            this.$('[data-action=remove]').last().click();
-        },this);
-    }, 100, true),
+        app.shortcuts.register({
+            id: 'Filter:Add',
+            keys: '+',
+            component: this,
+            description: 'LBL_SHORTCUT_FILTER_ADD',
+            handler: function() {
+                this.$('[data-action=add]').last().click();
+            }
+        });
+        app.shortcuts.register({
+            id: 'Filter:Remove',
+            keys: '-',
+            component: this,
+            description: 'LBL_SHORTCUT_FILTER_REMOVE',
+            handler: function() {
+                this.$('[data-action=remove]').last().click();
+            }
+        });
+    },
 
     /**
      * Save the filter.
@@ -759,7 +769,7 @@
                 model.set(value);
                 value = value[fieldName] || [];
                 // FIXME: Change currency.js to retrieve correct unit for currency filters (see TY-156).
-                model.id = 'not_new';
+                model.set('id', 'not_new');
             }
 
             model.set(fieldName + '_min', value[0] || '');
@@ -827,7 +837,7 @@
                 model.set($row.data('value'));
                 // FIXME: Change currency.js to retrieve correct unit for currency filters (see TY-156).
                 // Mark this one as not_new so that model isn't treated as new
-                model.id = 'not_new';
+                model.set('id', 'not_new');
             } else {
                 model.set(fieldDef.id_name || fieldName, $row.data('value'));
             }

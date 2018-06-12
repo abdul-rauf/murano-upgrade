@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -145,7 +145,7 @@ $mod_strings = array (
     'LBL_OTHER_EMAIL_ADDRESS' => 'Teine e-post:',
     'LBL_OTHER_PHONE' => 'Teine telefon:',
     'LBL_PHONE' => 'Tlf number',
-    'LBL_PORTAL_ACTIVE' => 'Sait aktiivne:',
+    'LBL_PORTAL_ACTIVE' => 'Portaal aktiivne:',
     'LBL_PORTAL_APP'=> 'Saidi rakendus',
     'LBL_PORTAL_INFORMATION' => 'Saidi info',
     'LBL_PORTAL_NAME' => 'Saidi nimi:',
@@ -260,7 +260,7 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Muutja ID',
     'LBL_EXPORT_CREATED_BY' => 'Created By ID',
     'LBL_EXPORT_PHONE_MOBILE' => 'Mobile Phone',
-    'LBL_EXPORT_EMAIL2'=>'Other Email Address',
+    'LBL_EXPORT_EMAIL2'=>'Muu e-posti aadress',
 	'LBL_EDITLAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
 	'LBL_ENTERDATE' => 'Enter Date' /*for 508 compliance fix*/,
 	'LBL_LOADING' => 'Loading' /*for 508 compliance fix*/,

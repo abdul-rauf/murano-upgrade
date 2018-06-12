@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Valitse <b>muokattava asettelu</b>.<br /><br />Muuttaaksesi sitä asettelua, joka sisältää tietojensyöttökenttiä, klikkaa <b>muokkausnäkymä</b>.<br /><br />Muuttaaksesi sitä asettelua, joka näyttää muokkausnäkymässä syötettyjä tietoja, klikkaa <b>tietonäkymä</b>.<br /><br />Muuttaaksesi oletuslistassa näytettäviä sarakkeita, klikkaa <b>listanäkymä</b>.<br /><br />Muuttaaksesi perus- ja edistyneiden hakulomakkeiden asetteluja, klikkaa <b>haku</b>.',
         'subpanelHelp'=> 'Valitse muokattava <b>alapaneeli</b>.',
         'searchHelp' => 'Valitse muokattava <b>hakuasettelu</b>.',
-        'labelsBtn'	=> 'Tallenna mukautetut tunnisteet napsauttamalla <b>Save</b> (Tallenna).',
+        'labelsBtn'	=> 'Muokkaa <b>otsikoiden</b> näkyvät arvot tässä moduulissa.',
         'newPackage'=>'Klikkaa <b>uusi pakkaus</b> luodaksesi uuden pakkauksen.',
         'mbHelp'    => '<b>Tervetuloa Moduulirakentajaan.</b><br /><br />Käytä Moduulirakentajaa luodaksesi paketteja, jotka sisältävät mukautettuja moduuleita, jotka perustuvat standardeihin tai mukautettuihin objekteihin.<br /><br />Aloittaaksesi, klikkaa <b>Uusi paketti</b> luodaksesi uuden paketin, tai valitse muokattava paketti.<br /><br /><b>Paketti</b> on mukautetun moduulin säiliö, ja projekti koostuu eri paketeista. Paketissa voi olla yksi tai useampi mukautettu moduuli. Moduulit voivat liittyä toisiinsa tai sovelluksen moduuleihin.<br /><br />Esimerkkejä: Voisit haluta luoda paketin, joka sisältää mukautetun moduulin, joka liittyy standardiin Asiakkaat-moduuliin. Tai voisit luoda paketin joka sisältää useita uusia moduuleja, jotka toimivat yhdessä projektina, ja jotka liittyvät toisiinsa ja sovelluksen moduuleihin.',
         'exportBtn' => 'Klikkaa <b>Vie muutokset</b> ladataksesi paketin, joka sisältää Studiossa tehdyt muutokset moduuleihin.',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Nimi - Täytyy olla aakkosnumeerinen, alkaa kirjaimella ja olla sisältämättä välilyöntejä.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Paketin avain on jo olemassa',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Paketin nimi on jo käytössä',
+'LBL_JS_PACKAGE_NAME'=>'Paketin nimi - Nimen pitää alkaa kirjaimella ja se saa sisältää ainoastaan kirjaimia, numeroita ja alaviivoja. Nimi ei saa sisältää välilyöntejä tai muita erikoismerkkejä.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Avain – tämän on oltava alfanumeerinen (a-z, 0-9, ei ääkkösiä) ja sen on alettava kirjaimella.',
 'LBL_JS_VALIDATE_KEY'=>'Tietue - Täytyy olla aakkosnumeerinen, alkaa kirjaimella ja olla sisältämättä välilyöntejä.',
 'LBL_JS_VALIDATE_LABEL'=>'Syötä selite, jota käytetään tämän moduulin näyttönimenä',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Oletko varma, että haluat poistaa tämän suhteen?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tämä tekee suhteesta pysyvän. Oletko varma, että haluat ottaa tämän suhteen käyttöön?',
 'LBL_CONFIRM_DONT_SAVE' => 'Muutoksia on tehty sitten viime tallentamisen, haluatko tallentaa?',

@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-12 08:15:50
+// created: 2018-06-12 11:30:30
 $viewdefs['Leads']['QuickCreate'] = array (
   'templateMeta' => 
   array (
@@ -107,7 +107,7 @@ $viewdefs['Leads']['QuickCreate'] = array (
       array (
         0 => 
         array (
-          'name' => 'email1',
+          'name' => 'email',
         ),
       ),
       6 => 
@@ -130,6 +130,13 @@ $viewdefs['Leads']['QuickCreate'] = array (
         1 => 
         array (
           'name' => 'team_name',
+        ),
+      ),
+      8 => 
+      array (
+        0 => 
+        array (
+          'name' => 'email1',
         ),
       ),
     ),

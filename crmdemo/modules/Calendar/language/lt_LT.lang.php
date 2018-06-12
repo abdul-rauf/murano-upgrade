@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -37,7 +37,7 @@ $mod_strings = array (
 	'LBL_NEXT_MONTH' => 'Kitas mėnuo',
 	'LBL_NEXT_DAY' => 'Kita diena',
 	'LBL_NEXT_YEAR' => 'Kiti metai',
-	'LBL_NEXT_WEEK' => 'Kita savaitė',
+	'LBL_NEXT_WEEK' => 'Kitą savaitę',
 	'LBL_AM' => 'AM',
 	'LBL_PM' => 'PM',
 	'LBL_SCHEDULED' => 'Suplanuota',
@@ -48,7 +48,7 @@ $mod_strings = array (
 	'LBL_PREVIOUS_SHARED' => 'Atgal',
 	'LBL_NEXT_SHARED' => 'Toliau',
 	'LBL_SHARED_CAL_TITLE' => 'Bendras kalendorius',
-	'LBL_USERS' => 'Vartotojas',
+	'LBL_USERS' => 'Vartotojai',
 	'LBL_REFRESH' => 'Atnaujinti',
 	'LBL_EDIT_USERLIST' => 'Vartotojų sąrašas',
 	'LBL_SELECT_USERS' => 'Pasirinkti vartotojus, kuriuos rodyti kalendoriuje',
@@ -119,11 +119,11 @@ $mod_strings = array (
 	'LBL_REPEAT_INTERVAL' => 'Intervalas',
 	'LBL_REPEAT_END' => 'Pabaiga',	
 	'LBL_REPEAT_END_AFTER' => 'Po',
-	'LBL_REPEAT_OCCURRENCES' => 'Įvykiai',
+	'LBL_REPEAT_OCCURRENCES' => 'pasikartojimai',
 	'LBL_REPEAT_END_BY' => 'Pagal',	
 	'LBL_REPEAT_DOW' => 'Ant',	
 	'LBL_REPEAT_UNTIL' => 'Kartoti iki',
-	'LBL_REPEAT_COUNT' => 'Įvykių skaičius',
+	'LBL_REPEAT_COUNT' => 'Pasikartojimų sk.',
 	'LBL_RECURRING_LIMIT_ERROR' => 'Šis pasikartojantis$moduleTitle nebegali būti daug suplanuotas, kadangi jis viršija leistina pasikartojimų $limit skaičių.',
 	
 	'LBL_EDIT_ALL_RECURRENCES' => 'Redaguoti visus pasikartojimus',
@@ -137,6 +137,7 @@ $mod_strings = array (
     'LBL_CALENDAR_EVENT_NOT_A_RECURRING_EVENT' => "{0} is not a recurring event",
     'LBL_CALENDAR_EVENT_NOT_A_PARENT_OCCURRENCE' => "{0} is not a parent recurrence",
     'LBL_CALENDAR_EVENT_RECURRENCE_MODULE_NOT_SUPPORTED' => "{0} is not recognized as a recurring event module",
+
 );
 
 $mod_list_strings = array(

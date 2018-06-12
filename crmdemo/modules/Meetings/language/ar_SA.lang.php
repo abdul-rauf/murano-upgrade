@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'البريد الإلكتروني',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'إرسال بريد إلكتروني لجميع المدعوين',
     'LBL_POPUP_REMINDER' => 'تذكير منبثق',
-    'LBL_POPUP_REMINDER_TIME' => 'وقت التذكير المنبثق',
+    'LBL_POPUP_REMINDER_TIME' => 'وقت تذكير الرسائل المنبثقة',
     'LBL_EMAIL_REMINDER' => 'التذكير بالبريد الإلكتروني',
-    'LBL_EMAIL_REMINDER_TIME' => 'وقت التذكير بالبريد الإلكتروني',
+    'LBL_EMAIL_REMINDER_TIME' => 'وقت تذكير البريد الإلكتروني',
     'LBL_REMOVE' => 'تذكير',
 	'LBL_SCHEDULING_FORM_TITLE' => 'جدولة',
 	'LBL_SEARCH_BUTTON'=> 'بحث',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'حذف جميع التكرارات',
     'LBL_DATE_END_ERROR' => 'تاريخ الانتهاء قبل تاريخ البدء',
     'LBL_REPEAT_PARENT_ID' => 'تكرار المعرّف الأصل',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'معرف تكرار الاجتماع. تاريخ بدء الاجتماع الأصلي',
     'LBL_RECURRING_SOURCE' => 'المصدر المتكرر',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'هل تريد بالتأكيد إزالة جميع السجلات المتكررة؟',
     'LBL_RECURRENCE' => 'التكرار',

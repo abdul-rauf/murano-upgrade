@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,7 +14,7 @@
  * @extends View.View
  */
 ({
-    plugins: ['Dropdown', 'Tooltip'],
+    plugins: ['Dropdown'],
 
     /**
      * @param {Object} options
@@ -25,9 +25,15 @@
         app.view.View.prototype.initialize.call(this, options);
 
         //shortcut keys
-        app.shortcuts.register(app.shortcuts.GLOBAL + 'Create', 'c', function() {
-            this.$('[data-toggle=dropdown]').click();
-        }, this);
+        app.shortcuts.registerGlobal({
+            id: 'Quickcreate:Toggle',
+            keys: 'c',
+            component: this,
+            description: 'LBL_SHORTCUT_QUICK_CREATE',
+            handler: function() {
+                this.$('[data-toggle=dropdown]').click();
+            }
+        });
     },
 
     /**

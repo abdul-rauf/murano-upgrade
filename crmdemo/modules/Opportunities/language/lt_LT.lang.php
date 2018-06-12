@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -21,7 +21,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Pardavimo pavadinimas:',
     'LBL_OPPORTUNITY' => 'Pardavimas:',
     'LBL_NAME' => 'Pardavimo pavadinimas',
-    'LBL_INVITEE' => 'Kontaktai',
+    'LBL_INVITEE' => 'Kontaktas',
     'LBL_CURRENCIES' => 'Valiutos',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Pavadinimas',
     'LBL_LIST_ACCOUNT_NAME' => 'Kliento vardas',
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'By clicking Confirm, you will be erasing ALL Forecasts data and changing your Opportunities View. If this is not what you intended, click cancel to return to previous settings.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Spustelėję Patvirtinti, ištrinsite VISUS prognozių duomenis ir pakeisite galimybių rodinį. '
+        .'Taip pat bus išjungti VISI procesų apibrėžimai su pajamų eilutės prekių tiksliniu moduliu. '
+        .'Jei norėjote ne to, spustelėdami Atšaukti galite grįžti į ankstesnius nustatymus.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'If all Revenue Line Items are closed and at least one was won,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'the Opportunity Sales Stage is set to "Closed Won".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'If all Revenue Line Items are in the "Closed Lost" Sales Stage,',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a header for a group of {{revenuelineitems_module}} as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc. Each {{revenuelineitems_singular_module}} is the prospective sale of a particular product and includes relevant sale data. Each {{revenuelineitems_singular_module}} will typically progress through several Sales Stages until it is marked either "Closed Won" or "Closed Lost". The {{module_name}} record reflects the amount and expected close date of its {{revenuelineitems_module}}. {{plural_module_name}} and {{revenuelineitems_module}} can be leveraged even further by using Sugar&#39;s {{forecasts_singular_module}}ing module to understand and predict sales trends as well as focus work to achieve sales quotas.',
+    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} jums leidžia nuo pradžios iki pabaigos sekti atskirus pardavimus. Kiekviename {{module_name}} įraše nurodomas perspektyvus pardavimas ir jame pateikiami aktualūs pardavimo duomenys; įrašas taip pat susijęs su kitais svarbiais įrašais, pvz., {{quotes_module}}, {{contacts_module}} ir pan. {{module_name}} paprastai pereis keletą pardavimo etapų ir galiausiai bus pažymėtas kaip „Uždaryta kaip laimėta“ arba „Uždaryta kaip nelaimėta“. Naudojant „Sugar“ modulį {{forecasts_singular_module}}, {{plural_module_name}} galima panaudoti dar plačiau – siekiant suprasti ir prognozuoti pardavimo tendencijas bei, telkiant darbą, siekti pardavimo kvotų.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a header for a group of {{revenuelineitems_module}} as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} jums leidžia nuo pradžios iki pabaigos sekti atskirus pardavimus ir tiems pardavimams priklausančias eilučių prekes. Kiekviename {{module_name}} įraše nurodomas perspektyvus pardavimas ir jame pateikiami aktualūs pardavimo duomenys; įrašas taip pat susijęs su kitais svarbiais įrašais, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
 
-- Edit this record&#39;s fields by clicking an individual field or the Edit button.
-- View or modify links to other records in the subpanels, including {{revenuelineitems_module}}, by toggling the bottom left pane to "Data View".
-- Make and view user comments and record change history in the {{activitystream_singular_module}} by toggling the bottom left pane to "Activity Stream".
-- Follow or favorite this record using the icons to the right of the record name.
-- Additional actions are available in the dropdown Actions menu to the right of the Edit button.',
+- Šio įrašo laukus redaguoti galite spustelėję atskirą lauką arba mygtuką Redaguoti.
+- Apatinę kairiąją sritį perjungę į „Duomenų rodinys“, galite peržiūrėti ar modifikuoti saitus su kitais subpanelių įrašais.
+- Apatinę kairiąją sritį perjungę į „Veiklos“, galite komentuoti ar peržiūrėti vartotojų komentarus bei {{activitystream_singular_module}} įrašyti keitimų istoriją.
+- Naudodami įrašo pavadinimo dešinėje esančias piktogramas, galite šį įrašą sekti ar įtraukti prie mėgstamiausių.
+- Mygtuko Redaguoti dešinėje esančiame iškylančiajame meniu Veiksmai prieinami papildomi veiksmai.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a header for a group of {{revenuelineitems_module}} as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} jums leidžia nuo pradžios iki pabaigos sekti atskirus pardavimus ir tiems pardavimams priklausančias eilučių prekes. Kiekviename {{module_name}} įraše nurodomas perspektyvus pardavimas ir jame pateikiami aktualūs pardavimo duomenys; įrašas taip pat susijęs su kitais svarbiais įrašais, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
 
-To create an {{module_name}}:
-1. Provide values for the fields as desired.
- - Fields marked "Required" must be completed prior to saving.
- - Click "Show More" to expose additional fields if necessary.
-2. Click "Save" to finalize the new record and return to the previous page.
-3. After saving, use the {{revenuelineitems_module}} subpanel to add line items to the {{module_name}}.',
+Norėdami sukurti {{module_name}}, atlikite tolesnius veiksmus.
+1. Nurodykite norimas laukų reikšmes.
+ - Laukus, pažymėtus „Reikiamas“, prieš įrašant reikia užpildyti.
+ - Jei reikia, spustelėję „Rodyti daugiau“ galite matyti papildomų laukų.
+2. Spustelėję „Įrašyti“, baigsite naująjį įrašą ir grįšite į ankstesnį puslapį.',
 
 // END PRO/CORP
 

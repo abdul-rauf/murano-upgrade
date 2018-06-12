@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -263,8 +263,10 @@
             this.$(this.selectors.load).toggleClass('hide', false);
             this.$(this.selectors.rslt).toggleClass('hide', true);
             this.companyList = null;
+            tester = /\*$/;
+            companyName = tester.test(companyName) ? companyName : companyName + '*';
             var balParams = {
-                'KeywordText': companyName
+                'OrganizationName': companyName
             };
             //setting balParams to context because we want to retain the api parameters
             //without the pagination related parameters

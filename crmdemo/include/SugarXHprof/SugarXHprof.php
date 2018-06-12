@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -54,13 +54,6 @@ class SugarXHprof
      * @var SugarXHprof instance of profiler
      */
     protected static $instance = null;
-
-    /**
-     * Because of unregister_shutdown_function is not present in php we have to skip calls of 'end' method if that property equals to false
-     *
-     * @var bool is shutdown function registered or not
-     */
-    protected $registered = false;
 
     /**
      * @var bool enable profiler or not, it will be disabled by some reasons
@@ -181,6 +174,10 @@ class SugarXHprof
                     static::${$k} = $v;
                 }
             }
+        }
+
+        if (!static::$enable) {
+            return;
         }
 
         // disabling profiler if XHprof extension is not loaded
@@ -349,7 +346,6 @@ class SugarXHprof
             $this,
             'end'
         ));
-        $this->registered = true;
 
         $this->startTime = isset($_SERVER['REQUEST_TIME_FLOAT']) ? $_SERVER['REQUEST_TIME_FLOAT'] : microtime(true);
 
@@ -397,11 +393,11 @@ class SugarXHprof
      */
     public function end()
     {
-        if ($this->registered == false || static::$enable == false) {
+        if (!static::$enable) {
             return;
         }
-        $this->registered = false;
 
+        static::$enable = false;
         $origMemLimit = ini_get('memory_limit');
         ini_set('memory_limit', static::$memory_limit);
 

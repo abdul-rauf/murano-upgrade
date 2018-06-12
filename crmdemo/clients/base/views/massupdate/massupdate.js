@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -27,7 +27,6 @@
     fieldPlaceHolderTag: '[name=fieldPlaceHolder]',
     massUpdateViewName: 'massupdate-progress',
     className: 'extend',
-    plugins: ['Tooltip'],
 
     /**
      * Default settings used when none are supplied through metadata.
@@ -95,6 +94,11 @@
         );
         this.fieldValues = [{}];
         this.setMetadata(options);
+
+        // FIXME massupdate shouldn't mess with the main context (should have own context)
+        // this is a hack to prevent the massupdate fields to be added to the
+        // context
+        this.dataView = true;
 
         this._super('initialize', [options]);
         this._initSettings();
@@ -335,7 +339,7 @@
         if (!progressView) {
             progressView = app.view.createView({
                 context: this.context,
-                name: this.massUpdateViewName,
+                type: this.massUpdateViewName,
                 layout: this.layout
             });
             this.layout._components.push(progressView);
@@ -496,26 +500,27 @@
                                     if (_.isFunction(options.success)) {
                                         //setting data to null since backbone reset will add the data object to the collection
                                         //using the respoonse as options for callback
-                                        options.success(model, null, response);
+                                        options.status = response.status;
+                                        options.success();
                                     }
                                 } else {
                                     model.fetch(options);
                                 }
                             },
-                            error: function(xhr, status, error) {
+                            error: function(xhr) {
                                 model.attempt++;
                                 model.trigger('massupdate:fail');
                                 if (model.attempt <= model.maxAllowAttempt) {
                                     model.fetch(options);
                                 } else if (_.isFunction(options.error)) {
                                     model.trigger('massupdate:end');
-                                    options.error(xhr, status, error);
+                                    options.error(xhr);
                                 }
                             },
-                            complete: function(xhr, status) {
+                            complete: function(xhr) {
                                 model.trigger('massupdate:always');
                                 if (_.isFunction(options.complete)) {
-                                    options.complete(xhr, status);
+                                    options.complete(xhr);
                                 }
                             }
                     };
@@ -591,6 +596,7 @@
             messages: app.lang.get('NTC_DELETE_CONFIRMATION_MULTIPLE'),
             onConfirm: _.bind(this.deleteModels, this),
             onCancel: _.bind(function() {
+                app.analytics.trackEvent('click', 'mass_delete_cancel');
                 this._modelsToDelete = null;
                 app.router.navigate(this._targetUrl, {trigger: false, replace: true});
             }, this)
@@ -615,6 +621,8 @@
         var self = this,
             collection = self._modelsToDelete;
         var lastSelectedModels = _.clone(collection.models);
+
+        app.analytics.trackEvent('click', 'mass_delete_confirm');
         if(collection) {
             // massupdate:end could be triggered without triggering success event on collection.
             // For example, when we user has no permissions to perform delete.
@@ -971,18 +979,44 @@
      * Register shortcuts for mass update inline drawer.
      */
     registerShortcuts: function() {
-        app.shortcuts.register('MassUpdate:Add', '+', function() {
-            this.$('[data-action=add]').last().click();
-        }, this);
-        app.shortcuts.register('MassUpdate:Remove', '-', function() {
-            this.$('[data-action=remove]').last().click();
-        },this);
-        app.shortcuts.register('MassUpdate:Cancel', ['esc', 'ctrl+alt+l'], function() {
-            this.$('a.cancel_button').click();
-        }, this, true);
-        app.shortcuts.register('MassUpdate:Update', ['ctrl+s', 'ctrl+alt+a'], function() {
-            this.$('[name=update_button]:not(.disabled)').click();
-        }, this, true);
+        app.shortcuts.register({
+            id: 'MassUpdate:Add',
+            keys: '+',
+            component: this,
+            description: 'LBL_SHORTCUT_MASS_UPDATE_ADD',
+            handler: function() {
+                this.$('[data-action=add]').last().click();
+            }
+        });
+        app.shortcuts.register({
+            id: 'MassUpdate:Remove',
+            keys: '-',
+            component: this,
+            description: 'LBL_SHORTCUT_MASS_UPDATE_REMOVE',
+            handler: function() {
+                this.$('[data-action=remove]').last().click();
+            }
+        });
+        app.shortcuts.register({
+            id: 'MassUpdate:Cancel',
+            keys: ['esc', 'mod+alt+l'],
+            component: this,
+            description: 'LBL_SHORTCUT_MASS_UPDATE_CANCEL',
+            callOnFocus: true,
+            handler: function() {
+                this.$('a.cancel_button').click();
+            }
+        });
+        app.shortcuts.register({
+            id: 'MassUpdate:Update',
+            keys: ['mod+s', 'mod+alt+a'],
+            component: this,
+            description: 'LBL_SHORTCUT_MASS_UPDATE_SAVE',
+            callOnFocus: true,
+            handler: function() {
+                this.$('[name=update_button]:not(.disabled)').click();
+            }
+        });
     },
     /**
      * Clear shortcuts and restore previous shortcut session.

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -38,9 +38,16 @@
                 this.on('init', function() {
                     this.view.on('dragDropSelect2:selected', _.bind(this._handleItemSelected, this));
 
-                    app.shortcuts.register('DragdropSelect2:SelectAll', 'ctrl+a', function(event) {
-                        this.context.trigger('dragdropselect2:select:all', event);
-                    }, this, true);
+                    app.shortcuts.register({
+                        id: 'DragdropSelect2:SelectAll',
+                        keys: 'ctrl+a',
+                        component: this,
+                        description: 'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL',
+                        callOnFocus: true,
+                        handler: function() {
+                            this.context.trigger('dragdropselect2:select:all', event);
+                        }
+                    });
 
                     this.context.on('dragdropselect2:select:all', function(event) {
                         if ($.contains(this.el, event.target) || !_.isEmpty(this.$lastSelectedItem)) {
@@ -194,7 +201,7 @@
                         }
 
                         self.$(selectedClassSelector).each(function() {
-                            $(this).find('[data-id]').clone().appendTo($helper);
+                            $(this).find('[data-id]').clone().removeAttr('rel').appendTo($helper);
                         });
 
                         return $helper.get(0);

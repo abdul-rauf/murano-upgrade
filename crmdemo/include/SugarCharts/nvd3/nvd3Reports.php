@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -127,13 +127,26 @@ class nvd3Reports extends nvd3
         // store last grouped field
         $lastgroupfield = end($this->group_by);
 
-        if (isset($this->reporter->focus->field_defs[$lastgroupfield]) &&
-            ($this->reporter->focus->field_defs[$lastgroupfield]['type'] === "date"
-            || $this->reporter->focus->field_defs[$lastgroupfield]['type'] === "datetime")) {
+        if ($this->isDateSort($lastgroupfield)) {
             usort($super_set, array($this, "runDateSort"));
         } else {
             asort($super_set);
         }
+    }
+
+    /**
+     * Checks if the field is a date and needs to be sorted as a date
+     * @param $field
+     * @return bool
+     */
+    protected function isDateSort($field)
+    {
+        if (isset($this->reporter->focus->field_defs[$field])) {
+            $dateTypes = array('date', 'datetime', 'datetimecombo');
+            $type = $this->reporter->focus->field_defs[$field]['type'];
+            return in_array($type, $dateTypes);
+        }
+        return false;
     }
 
     /**

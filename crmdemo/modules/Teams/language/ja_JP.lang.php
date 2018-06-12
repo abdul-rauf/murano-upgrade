@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,29 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => '本当にこのレコードを削除してよいですか？',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => '本当にこの従業員をメンバーからはずしてよいですか？',
     'LBL_EDITLAYOUT' => 'レイアウト編集' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'チームベースのパーミッション',
+    'LBL_TBA_CONFIGURATION_DESC' => 'チームアクセスを有効化してモジュール別にアクセスを管理します。',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'チーム ベースのパーミッションの有効化',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => '有効化するモジュールの選択',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'チームベースのパーミッションを有効化すると、役割管理を使用して個別のモジュールのチームやユーザーに特定のアクセス権限を割り当てることができます。',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+モジュールのチームベースのパーミッションを無効にすると、そのモジュールのチームベースのパーミッションに関連付けられているデータ (例: この機能を使用したプロセスの定義やプロセス) が元に戻されます。これには、そのモジュールの「所有者および選択したチーム」オプションを使用したロールや、そのモジュールのレコードに関連するチームベースのパーミッションデータが含まれます。
+モジュールのチームベースのパーミッションを無効化した後には、クイックリペア＆再構築ツールを使用してシステムのキャッシュをクリアにすることを推奨します。
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>警告:</strong> モジュールのチームベースのパーミッションを無効にすると、そのモジュールのチームベースのパーミッションに関連付けられているデータ (例: この機能を使用したプロセスの定義やプロセス) が元に戻されます。これには、そのモジュールの「所有者および選択したチーム」オプションを使用したロールや、そのモジュールのレコードに関連するチームベースのパーミッションデータが含まれます。
+モジュールのチームベースのパーミッションを無効化した後には、クイックリペア＆再構築ツールを使用してシステムのキャッシュをクリアにすることを推奨します。
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+モジュールのチームベースのパーミッションを無効にすると、そのモジュールのチームベースのパーミッションに関連付けられているデータ (例: この機能を使用したプロセスの定義やプロセス) が元に戻されます。これには、そのモジュールの「所有者および選択したチーム」オプションを使用したロールや、そのモジュールのレコードに関連するチームベースのパーミッションデータが含まれます。モジュールのチームベースのパーミッションを無効化した後には、クイックリペア＆再構築ツールを使用してシステムのキャッシュをクリアにすることを推奨します。クイックリペア＆再構築を使用するアクセス権がない場合には、リペアメニューにアクセス可能な管理者にお問い合わせください。
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>警告:</strong> モジュールのチームベースのパーミッションを無効にすると、そのモジュールのチームベースのパーミッションに関連付けられているデータ (例: この機能を使用したプロセスの定義やプロセス) が元に戻されます。これには、そのモジュールの「所有者および選択したチーム」オプションを使用したロールや、そのモジュールのレコードに関連するチームベースのパーミッションデータが含まれます。モジュールのチームベースのパーミッションを無効化した後には、クイックリペア＆再構築ツールを使用してシステムのキャッシュをクリアにすることを推奨します。クイックリペア＆再構築を使用するアクセス権がない場合には、リペアメニューにアクセス可能な管理者にお問い合わせください。
+STR
+,
 );

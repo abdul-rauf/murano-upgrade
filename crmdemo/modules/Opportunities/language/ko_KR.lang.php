@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -21,7 +21,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => '영업기회명',
     'LBL_OPPORTUNITY' => '영업기회',
     'LBL_NAME' => '영업기회명',
-    'LBL_INVITEE' => '연락처목록',
+    'LBL_INVITEE' => '연락처',
     'LBL_CURRENCIES' => '통화목록',
     'LBL_LIST_OPPORTUNITY_NAME' => '이름',
     'LBL_LIST_ACCOUNT_NAME' => '거래처명',
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => '확인을 클릭해, 모든 예측 데이터를 삭제하고 기회보기를 변경하십시오. 이것을 원하지 않는 경우, 이전 설정으로 돌아가려면 취소를 클릭하십시오.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        '확인을 누르시면, 모든 예측 데이터가 삭제되며 영업기회 정보가 수정됩니다. '
+        .'또한, 매출 품목의 대상 모듈이 포함된 모든 프로세스 정의는 비활성화됩니다. '
+        .'이를 원치 않으시고 이전 설정으로 돌아가려면, 취소를 클릭하십시오.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => '모든 영업선 항목이 폐쇄되고,  적어도 하나의 항목이 승인된다면,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => '기회 판매 단계는 "청산 원"으로 설정되어 있습니다.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => '모든 영업선 항목이 "비승인" 판매 단계에 있다면,',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 모듈은 통해 개별 판매 및 그 판매에 속한 라인 항목을 처음부터 끝까지 추적할 수 있습니다.  각 {{module_name}} 레코드는 {{revenuelineitems_module}} 그룹에 대한 헤더뿐만 아니라 {{quotes_module}}, {{contacts_module}} 등의 다른 중요 레코드 관련사항을 나타냅니다. 각 {{revenuelineitems_singular_module}}은 특정 제품의 예상 매출이며, 관련된 판매 데이터가 포함되어 있습니다. 일반적으로, 각 {{revenuelineitems_singular_module}}는 "Closed Won"이나 "Closed Lost"가 표시될 때까지는 몇 가지 판매 단계에 걸쳐 진행됩니다. {{module_name}} 레코드는 {{revenuelineitems_module}}의 예상 마감일과 금액을 반영합니다. {{plural_module_name}} 및 {{revenuelineitems_module}}은 Sugar의 {{forecasts_singular_module}} 모듈을 통해서도 극대화하여 판매 할당량을 달성하기 위한 주요 작업은 물론 판매 추세를 이해하고 예측할 수 있습니다.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 모듈은 시작부터 끝까지 개별 판매를 추적할 수 있습니다. 각 {{module_name}} 기록은 잠재적인 판매 기록을 나타내고 관련 판매 데이터를 포함할 뿐만 아니라, {{quotes_module}}, {{contacts_module}} 등의 다른 중요한 기록과 연관됩니다. {{module_name}}은 보통 "완료" 혹은 "계약실패"로 표시될 때 까지 여러 판매 단계를 거치며 진행됩니다. 판매 추세 이해 및 예측과 판매 할당량 달성을 위한 작업 집중을 위해 Sugar의 {{forecasts_singular_module}} 예측 모듈을 사용함으로써 {{plural_module_name}}은 더욱 넓은 범위에서 활용될 수 있습니다.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} 모듈은 통해 개별 판매 및 그 판매에 속한 라인 항목을 처음부터 끝까지 추적할 수 있습니다.  각 {{module_name}} 레코드는 {{revenuelineitems_module}} 그룹에 대한 헤더뿐만 아니라 {{quotes_module}}, {{contacts_module}} 등의 다른 중요 레코드 관련사항을 나타냅니다.
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 모듈은 시작부터 끝까지 개별 판매를 추적할 수 있습니다. 각 {{module_name}} 기록은 잠재적인 판매 기록을 나타내고 관련 판매 데이터를 포함할 뿐만 아니라, {{quotes_module}}, {{contacts_module}} 등의 다른 중요한 기록과 연관됩니다.
 
-- 개별 필드나 편집 버튼을 클릭하여 이 레코드의 필드를 편집하십시오.
-- 하단 왼쪽 패널을 "데이터 보기"로 토글하여, {{revenuelineitems_module}}을 포함한 서브패널 내 다른 레코드들로 연결되는 링크를 수정하거나 보십시오.
-- 하단 왼쪽 패널을 "활동 스트림"으로 토글하여, 사용자 코멘트 및 {{activitystream_singular_module}} 내 레코드 변경 내역을 작성하고 보십시오.
-- 레코드 이름의 오른쪽에 있는 아이콘들을 이용하여 이 레코드를 팔로우하거나 즐겨찾기 하십시오.
-- 추가 실행은 편집 보튼 왼쪽의 드롭다운 실행(Actions)에서 이용 가능합니다.',
+- 개별 필드 또는 수정 버튼을 클릭하여 이 기록의 필드를 수정하십시오.
+- 좌측 하단 메뉴를 "데이터 보기"로 전환하여 서브패널 내 다른 기록 링크를 보기 또는 수정하십시오.
+- 좌측 하단 메뉴를 "활동 스트림"으로 전환하여 {{activitystream_singular_module}} 내 사용자 코멘트를 생성 및 수정하고 변경 기록을 남기십시오.
+- 기록명 우측에 위치한 아이콘을 사용하여 이 기록을 팔로우 혹은 즐겨찾기에 추가하십시오.
+- 수정 버튼 우측에 위치한 드롭다운 메뉴에서 추가적인 명령을 실행할 수 있습니다.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} 모듈은개별 판매 및 처음부터 끝까지 그 판매에 속한 라인 항목들을 추적할 수 있습니다. 각 {{module_name}} 기록은 {{revenuelineitems_module}} 그룹에대한헤더뿐만아니라 {{quotes_module}}, {{contacts_module}} 등의다른중요기록관련사항을나타냅니다.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 모듈은 시작부터 끝까지 개별 판매를 추적할 수 있습니다. 각 {{module_name}} 기록은 잠재적인 판매 기록을 나타내고 관련 판매 데이터를 포함할 뿐만 아니라, {{quotes_module}}, {{contacts_module}} 등의 다른 중요한 기록과 연관됩니다. 
 
-{{module_name}} 만들기:
-1. 원하는필드의값을 지정합니다.
-- "필수"로표시된 필드는 저장하기 전에완료해야 합니다. 
-- 필요한경우추가필드를노출하려면 "더보기"를클릭합니다. 
-2. “저장하기”를 클릭하여 새 기록을 완성하고 이전 페이지로 돌아갑니다.
-3. 저장후, {{revenuelineitems_module}} 서브패널을사용하여{{module_name}} 에라인 항목들을 추가합니다.',
+{{module_name}} 생성 절차:
+1. 원하는 필드 값을 입력하십시오.
+ - "필수"로 표시된 필드는 저장 이전에 작성 완료해야 합니다.
+ - 추가 필드를 보려면 "더 보기"를 클릭하십시오.
+2. 신규 생성된 기록을 마무리하고 이전 페이지로 돌아가려면 "저장"을 클릭하십시오.',
 
 // END PRO/CORP
 

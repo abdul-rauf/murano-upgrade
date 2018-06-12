@@ -2,13 +2,14 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 $dictionary["documents_revenuelineitems"] = array(
     'true_relationship_type' => 'many-to-many',
     'relationships' => array(
@@ -30,8 +31,7 @@ $dictionary["documents_revenuelineitems"] = array(
     'fields' => array(
         0 => array(
             'name' => 'id',
-            'type' => 'varchar',
-            'len' => 36,
+            'type' => 'id',
         ),
         1 => array(
             'name' => 'date_modified',
@@ -46,13 +46,11 @@ $dictionary["documents_revenuelineitems"] = array(
         ),
         3 => array(
             'name' => 'document_id',
-            'type' => 'varchar',
-            'len' => 36,
+            'type' => 'id',
         ),
         4 => array(
             'name' => 'rli_id',
-            'type' => 'varchar',
-            'len' => 36,
+            'type' => 'id',
         ),
     ),
     'indices' => array(

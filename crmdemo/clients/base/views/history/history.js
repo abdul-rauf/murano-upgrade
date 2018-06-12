@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -53,12 +53,12 @@
     /**
      * Retrieves custom filters.
      *
-     * @param {Integer} index Tab index.
+     * @param {number} index Tab index.
      * @return {Array} Custom filters.
      * @protected
      */
     _getFilters: function(index) {
-        var filterStr = app.date().subtract('days', this.settings.get('filter')).format('YYYY-MM-DD');
+        var filterStr = app.date().subtract(this.settings.get('filter'), 'days').format('YYYY-MM-DD');
 
         var tab = this.tabs[index],
             filter = {},

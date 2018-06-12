@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -275,7 +275,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => 'Modifica Campi Personalizzati',
     'LBL_EDIT_TABS'=>'Modifica Schede',
     'LBL_EMAIL_TITLE' => 'Email',
-    'LBL_EMAIL_DESC' => 'Gestire le email in entrata e in uscita. Le impostazioni di posta elettronica devono essere configurate in modo da permettere agli utenti di inviare e-mail e campagne newsletter.',
+    'LBL_EMAIL_DESC' => 'Gestisci messaggi di posta elettronica in uscita e in arrivo. Le impostazioni dei messaggi di posta elettronica devono essere configurate per ' .
+                        'consentire agli utenti di inviare email e campagne di newsletter.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Per utilizzare questa funzione e` richiesto un indirizzo e-mail primario per ogni utente.',
 	'LBL_ENABLE_MAILMERGE' => 'Abilitare Stampa Unione?',
 	'LBL_ENABLED' => 'Attivato',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Imposta la localizzazione predefinita per il tuo sistema',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => 'Il nome della persona che utilizzerà questo Client in modalità offline',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Nome utente finale:',
-    'LBL_MAILBOX_DESC' => 'Impostazioni degli account email da monitorare per la posta in arrivo',
+    'LBL_MAILBOX_DESC' => 'Imposta account di posta elettronica di gruppo per il monitoraggio dei messaggi in arrivo ' .
+        'e gestisci le informazioni personali sull&#39;account di posta elettronica in arrivo per gli utenti',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Tipi di contratto',
     'LBL_MANAGE_CURRENCIES' => 'Valute',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Gestione Gruppi',
@@ -539,10 +541,10 @@ Se continui a riscontrare problemi nella validazione automatica, prova a control
     'LBL_PASSWORD_LOST_TEMPLATE_MSG' => 'Modello di Email contenente un link creato dal sistema per reimpostare la password',
     'LBL_PASSWORD_INVALID_LENGTH' => 'La lunghezza minima deve essere inferiore alla lunghezza massima',
     'LBL_PASSWORD_INVALID_MINLENGTH' => 'La lunghezza minima deve essere superiore a 0',
-    'LBL_PASSWORD_SYST_GENERATED_PWD_ON' =>'Attiva la funzione Passwords create dal sistema',
+    'LBL_PASSWORD_SYST_GENERATED_PWD_ON' =>'Attiva la funzione Password create dal sistema',
 	'LBL_PASSWORD_SYST_GENERATED_PWD_HELP' => 'Quando questa funzione è attiva, gli utenti riceveranno via email un link creato dal sistema per reimpostare le loro passwords. I requisiti per questa funzione sono: 1) Deve essere configurato correttamente un server di posta in uscita nelle impostazioni delle Emails, e 2) gli utenti devono avere indirizzi di posta validi nei loro records utenti',
-	'LBL_PASSWORD_EXP_AFTER'=> 'La Password scade subito',
-    'LBL_PASSWORD_FORGOT_FEATURE'=> 'Attiva la funzione Password Dimenticata',
+	'LBL_PASSWORD_EXP_AFTER'=> 'La password scade subito',
+    'LBL_PASSWORD_FORGOT_FEATURE'=> 'Attiva la funzione Password dimenticata',
     'LBL_PASSWORD_FORGOT_FEATURE_HELP'=> 'Quando attivata, gli utenti avranno il permesso di re-impostare le proprie passwords sulla pagina di Login. I requisiti per usare questa funzione sono: 1) gli utenti devono avere indirizzi email forniti nei loro record utenti, e 2) deve essere configurato un server di posta in uscita nella pagina delle Impostazioni delle Email.',
     'LBL_PASSWORD_ONE_UPPER_CASE' => 'Deve contenere una lettera maiuscola (A-Z)',
     'LBL_PASSWORD_ONE_LOWER_CASE' => 'Deve contenere una lettera minuscola (a-z)',
@@ -562,7 +564,7 @@ Se continui a riscontrare problemi nella validazione automatica, prova a control
     'LBL_PASSWORD_AND_MAXIMUM_LENGTH'=> 'e Lunghezza massima',
     'LBL_PASSWORD_FIRSTNAME_PROHIBITED'=> 'Nome non ammesso',
     'LBL_PASSWORD_LASTNAME_PROHIBITED'=> 'Cognome non ammesso',
-    'LBL_PASSWORD_SYST_EXPIRATION'=> 'Scadenza della Password creata del sistema',
+    'LBL_PASSWORD_SYST_EXPIRATION'=> 'Scadenza della password creata del sistema',
     'LBL_PASSWORD_SYST_GENERATED_TITLE'=> 'Passwords create dal sistema',
     'LBL_PASSWORD_USER_EXPIRATION'=> 'Scadenza Password creata dall´utente',
     'ERR_PASSWORD_LINK_EXPIRE_TIME'   => 'Specifica il tempo in seguito al quale il link creato scadrà.',
@@ -576,7 +578,7 @@ Se continui a riscontrare problemi nella validazione automatica, prova a control
     'LBL_PASSWORD_REGEX_COMMENT'=> 'Descrizione delle espressioni regolari',
     'LBL_PASSWORD_RULES' => 'Regole delle Password',
     'LBL_PASSWORD_LINK_EXP_IN'=> 'il Link scade in',
-    'LBL_PASSWORD_EXP_IN'=> 'La Password scade in',
+    'LBL_PASSWORD_EXP_IN'=> 'La password scade tra',
     'LBL_PASSWORD_USER_RESET' => 'Reimposta password utente',
 	'LBL_PERFORM_UPDATE'=>'Esegui Aggiornamento',
     'LBL_PLUGINS_TITLE' => 'Sugar Forge',
@@ -628,6 +630,8 @@ Se continui a riscontrare problemi nella validazione automatica, prova a control
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Ricostruzione JS Raggruppamento File',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Ri-concatenare e sovrascrivere il raggruppamento dei file esistente con ultima versione del gruppo di file.',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Riparare file javascript',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Riparare i file JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Elaborazione file. Questo potrebbe richiedere alcuni minuti. Andando via da questa pagina il processo non si cancellerà, sarete liberi di muovervi o aspettare una conferma...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Elaborazione File fatta.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Ripara campi con nomi non interamente in minuscolo',
@@ -1007,7 +1011,7 @@ Se continui a riscontrare problemi nella validazione automatica, prova a control
     'LBL_QR_CLEAR_ADD_CACHE' => 'Pulizia dei File di Cache aggiuntivi...eseguita.',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Se questa casella non è selezionata, sarà richiesto ad un amministratore di riconvalidare manualmente dopo la scadenza delle licenze, altrimenti gli utenti non potranno più accedere.',
 	'LBL_TRACKER_SETTINGS' => 'Impostazioni indicatore',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Selezionare quali dati di sistema e dati utente vengono tracciati',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Abilita/disabilita monitoraggio',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Abilita/Disabilita Utenti Privati',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Attivato',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Disattivato',
@@ -1160,6 +1164,10 @@ Per ulteriori informazioni rimandiamo alla documentazione <a href="http://www.su
     'LBL_SPRITES_ADDED' => 'Sprite aggiunto {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Escludendo file: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Autorizzazioni basate sul gruppo',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Abilita l&#39;accesso del gruppo e gestisci l&#39;accesso per modulo.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Tipo di Sistema',
     'LBL_FTS_HOST' => 'Host',
@@ -1229,5 +1237,6 @@ Per ulteriori informazioni rimandiamo alla documentazione <a href="http://www.su
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Cliccando Sumbit ti sincronizzerai con il server principale.',
     'LBL_OFFLINE_ENABLED' => 'Offline abilitato',
     'LBL_OFFLINE_SETTINGS' => 'Impostazioni Offline',
+
 
 );

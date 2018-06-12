@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -17,6 +17,18 @@
      * @property {boolean}
      */
     shouldDisable: null,
+
+    /**
+     * KB specific parameters.
+     * @private
+     */
+    _tinyMCEConfig: {
+        'height': '300',
+        'plugins': 'code,textcolor,link,image',
+        'toolbar': 'code | bold italic underline strikethrough | bullist numlist | ' +
+        'alignleft aligncenter alignright alignjustify | forecolor backcolor | ' +
+        'removeformat | image link | fontsizeselect formatselect'
+    },
 
     /**
      * @inheritdoc
@@ -47,6 +59,8 @@
     getTinyMCEConfig: function() {
         var config = this._super('getTinyMCEConfig'),
             content_css = [];
+
+        config = _.extend(config, this._tinyMCEConfig);
 
         _.each(document.styleSheets, function(style) {
             if (style.href) {
@@ -108,7 +122,7 @@
     setMode: function(mode) {
         this.shouldDisable = (mode === 'edit' &&
             (this.view.tplName === 'list' ||
-            (this.view.tplName == '' && (this.tplName == 'subpanel-list' || this.tplName == 'list'))
+            (this.view.tplName == 'flex-list' && (this.tplName == 'subpanel-list' || this.tplName == 'list'))
             )
         );
         this._super('setMode', [mode]);

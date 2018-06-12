@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -214,6 +214,7 @@ $vardefs =array(
 			'len' => '150',
 			'comment' => 'The street address used for primary address',
 			'group' => 'primary_address',
+                        'group_label' => 'LBL_PRIMARY_ADDRESS',
 			'merge_filter' => 'enabled',
 			'duplicate_on_record_copy' => 'always',
             'full_text_search' => array(
@@ -292,6 +293,7 @@ $vardefs =array(
 			'dbType' => 'varchar',
 			'len' => '150',
 			'group'=>'alt_address',
+                        'group_label' => 'LBL_ALT_ADDRESS',
 			'comment' => 'Street address for alternate address',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
@@ -413,6 +415,18 @@ $vardefs =array(
     'taggable',
 ),
 'relationships'=>array(
+),
+'indices'=>array(
+     array(
+        'name' => 'idx_'.strtolower($module).'_last_first',
+        'type' => 'index',
+        'fields' => array('last_name', 'first_name', 'deleted'),
+     ),
+     array(
+        'name' => 'idx_'.strtolower($module).'_first_last',
+        'type' => 'index',
+        'fields' => array('first_name', 'last_name', 'deleted'),
+     ),
 ),
 'duplicate_check' => array(
     'enabled' => true,

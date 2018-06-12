@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -157,11 +157,9 @@ class SupportPortalVisibility extends SugarVisibility
             case 'pmse_Business_Rules':
             case 'pmse_Emails_Templates':
             case 'pmse_Project':
-            case 'pmse_Project/pmse_BpmAccessManagement':
             case 'pmse_Project/pmse_BpmActivityDefinition':
             case 'pmse_Project/pmse_BpmActivityStep':
             case 'pmse_Project/pmse_BpmActivityUser':
-            case 'pmse_Project/pmse_BpmCaseData':
             case 'pmse_Project/pmse_BpmDynaForm':
             case 'pmse_Project/pmse_BpmEventDefinition':
             case 'pmse_Project/pmse_BpmFlow':

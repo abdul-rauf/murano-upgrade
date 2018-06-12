@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> '편집할 지면배치를 선택하십시오.<br />데이타 입력을 위한 데이타 필드를 포함하는 지면배치를 변경하려면 편집보기를 클릭하십시오.<br />편집보기에서 필드로 입력되는 데이타를 전시하는 지면배치를 변경하려면 세부사항 보기를 클릭하십시오.<br />기본과 고급검색 형식 지면배치를 변경하려면 검색을 클릭하십시오.',
         'subpanelHelp'=> '편집할 하위패널을 선택하십시오.',
         'searchHelp' => '편집할 지면배치 검색을 선택하십시오.',
-        'labelsBtn'	=> '<b>저장</b>을 클릭하여 사용자화 라벨을 저장하십시오.',
+        'labelsBtn'	=> '이 모듈의 값을 표시할 <b>레이블</b>을 편집합니다.',
         'newPackage'=>'신규 패키지를 만들려면 신규 패키지 버튼을 클릭하십시오.',
         'mbHelp'    => '모듈 제조기에 오신것을 환영합니다. <br />기본 또는 고객 목적에 근거한 모듈을 포함한 신규 패키지를 만들때 사용합니다. <br />시작은 신규 패키지를 만들 신규 패키지 버튼을 클릭하거나 편집할 패키지를 선택합니다. <br />패키지는 하나의 프로젝트의 전체나 부분을 위한 고객 모듈의 컨테이너로서 작용합니다. 이 패키지는 상호간 또는 어플리케이션에 모듈에 연결될수 있는 하나 또는 그 이상의 고객 모듈을 포함할수 있습니다. <br />예 : 기본 계정 모듈에 관련된 하나의 고객 모듈을 포함하는 신규 패키지를 만들수 있습니다. 또는 프로젝트로서 함께 작동하는 상호간 연관되거나 어플리케이션의 모듈에 관련된 몇개의 모듈을 포함하는 신규 패키지를 만들수 있습니다.',
         'exportBtn' => '특정 모듈을 위한 작업실 주문제작을 포함하는 패키지를 만들기 위해서는 주문제작 보내기를 클릭하십시오.',
@@ -305,7 +305,7 @@ $mod_strings = array(
 
 ),
 //HOME
-'LBL_HOME_EDIT_DROPDOWNS'=>'내료보기 편집기',
+'LBL_HOME_EDIT_DROPDOWNS'=>'드롭다운 편집기',
 
 //ASSISTANT
 'LBL_AS_SHOW' => '다음에 보조 보이기',
@@ -318,7 +318,7 @@ $mod_strings = array(
 'LBL_DROPDOWNEDITOR' => '내려보기 편집기',
 'LBL_EDIT_DROPDOWN'=>'내려보기 편집하기',
 'LBL_DEVELOPER_TOOLS' => '개발자 도구',
-'LBL_SUGARPORTAL' => 'Sugar포탈 편집기',
+'LBL_SUGARPORTAL' => 'Sugar 포탈 편집기',
 'LBL_SYNCPORTAL' => '포탈 일치화',
 'LBL_PACKAGE_LIST' => '패키지 목록',
 'LBL_HOME' => '홈',
@@ -418,7 +418,7 @@ $mod_strings = array(
 
 'LBL_WIRELESSLAYOUTS'=>'모바일 지면배치',
 'LBL_WIRELESSEDITVIEW'=>'모바일 편집보기',
-'LBL_WIRELESSDETAILVIEW'=>'모바일 세부사항보기',
+'LBL_WIRELESSDETAILVIEW'=>'모바일 세부정보화면',
 'LBL_WIRELESSLISTVIEW'=>'모바일 목록보기',
 'LBL_WIRELESSSEARCH'=>'모바일 검색',
 
@@ -444,7 +444,7 @@ $mod_strings = array(
 'LBL_ROLLUP' => '올리기',
 'LBL_RELATED_FIELD' => '관련 필드',
 'LBL_CONFIG_PORTAL_URL'=>'고객 로고 이미지로의 URL. 권장되는 로고 치수는 163 × 18 pixels 입니다.',
-'LBL_PORTAL_ROLE_DESC' => '이 역할을 삭제하지 마십시오. 고객 셀프 서비스 포탈 역할은 Sugar 포탈 액션진행중 시스템에서 생성된 역할입니다. Sugar포탈내에 결함, 사례또는 지식기반 모듈의 작동/중지를 위해서는 역할내 접속 조종을 사용하십시오. 알수없거나 예측할수 없는 시스템 행위를 피하기위해서 이 역할의 접속 조종을 수정하지 마십시오.',
+'LBL_PORTAL_ROLE_DESC' => '이 역할을 삭제하지 마십시오. 고객 셀프 서비스 포탈 역할은 Sugar 포탈 액션 진행 중 시스템에서 생성된 역할입니다. Sugar포탈 내에 결함, 사례 또는 지식기반 모듈의 작동/중지를 위해서는 역할 내 접속 조종을 사용하십시오. 알 수 없거나 예측할 수 없는 시스템 행위를 피하기 위해서 이 역할의 접속 조종을 수정하지 마십시오.',
 
 //RELATIONSHIPS
 'LBL_MODULE' => '모듈',
@@ -537,7 +537,7 @@ $mod_strings = array(
 'LBL_BTN_DONT_SAVE'=>'변경내용 포기하기',
 'LBL_BTN_CANCEL'=>'취소',
 'LBL_BTN_CLOSE'=>'닫기',
-'LBL_BTN_SAVEPUBLISH'=>'저장후 배치',
+'LBL_BTN_SAVEPUBLISH'=>'저장 및 배치',
 'LBL_BTN_NEXT'=>'다음',
 'LBL_BTN_BACK'=>'뒤로',
 'LBL_BTN_CLONE'=>'클론',
@@ -602,9 +602,9 @@ $mod_strings = array(
 'LBL_PORTALSITE'=>'Sugar 포탈 URL',
 'LBL_PORTAL_GO'=>'이동하기',
 'LBL_UP_STYLE_SHEET'=>'style sheet 전송',
-'LBL_QUESTION_SUGAR_PORTAL' => '편집할 Sugar포탈 지면배치 선택',
+'LBL_QUESTION_SUGAR_PORTAL' => '편집할 Sugar 포탈 지면배치 선택',
 'LBL_QUESTION_PORTAL' => '편집할 포탈 지면배치 선택',
-'LBL_SUGAR_PORTAL'=>'Sugar포탈 편집기',
+'LBL_SUGAR_PORTAL'=>'Sugar 포탈 편집기',
 'LBL_USER_SELECT' => '사용자 선택',
 
 //PORTAL PREVIEW
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'이름-반드시 글자나 공간을 포함하지 않는 문자숫자식이여야 합니다.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'패키지 키가 이미 존재합니다',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'패키지 이름이 이미 존재합니다.',
+'LBL_JS_PACKAGE_NAME'=>'패키지 이름 - 글자로 시작해야하며 글자, 숫자, 밑줄만 사용할 수 있습니다. 스페이스 또는 특수문자는 사용할 수 없습니다.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'키 - 알파벳이며 문자로 시작합니다.',
 'LBL_JS_VALIDATE_KEY'=>'키-반드시 글자나 공간을 포함하지 않는 문자숫자식이여야 합니다.',
 'LBL_JS_VALIDATE_LABEL'=>'이 모듈의 전시 이름으로 사용될 라벨을 입력하십시오.',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'이 관계를 삭제하시겠습니까?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'이는 이 관계를 영구보관합니다. 이 관계를 배치하시겠습니까?',
 'LBL_CONFIRM_DONT_SAVE' => '마지막 저장후 다른 변경사항이 발생했습니다. 저장하시겠습니까?',

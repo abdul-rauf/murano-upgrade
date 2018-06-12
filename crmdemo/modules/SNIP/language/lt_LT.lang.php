@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,7 +20,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 $mod_strings = array(
-    'LBL_MODULE_NAME' => 'Email Archiving',
+    'LBL_MODULE_NAME' => 'El. pašto archyvavimas',
     'LBL_SNIP_SUMMARY' => "El. pašto archyvavimas yra paslauga, kuri laiškus siųstus iš bet kokio pašto kliento į spec. nurodytą el. pašo adresą, sukelia į SugarCRM programą. Vartotojui el. laiške tereikia nurodyti TO, CC, BCC lauke tą spec. el. pašo adresą ir laiškas bus įkeltas į SugarCRM. <br /><br />Patvirtinkite, kad sutinkate žemiau su naudojimo sąlygomis ir spauskite Įjungti, kad pradėti naudotis šia paslauga.",
 	'LBL_REGISTER_SNIP_FAIL' => 'Nepavyko susisiekti su el. pašto archyvavimo servisu: %s!',
 	'LBL_CONFIGURE_SNIP' => 'El. pašto archyvavimas',
@@ -32,7 +32,7 @@ $mod_strings = array(
 	'LBL_SNIP_CALLBACK_URL' => 'El. pašto archyvavimo serviso adresas',
     'LBL_SNIP_USER_DESC' => 'El. pašto archyvavimo vartotojas',
     'LBL_SNIP_KEY_DESC' => 'El. pašto archyvavimo OAuth raktas. Raktas naudojamas laiškų importavimui.',
-    'LBL_SNIP_STATUS_OK' => 'Įjungta',
+    'LBL_SNIP_STATUS_OK' => 'Įjungtas',
     'LBL_SNIP_STATUS_OK_SUMMARY' => 'Ši Sugar versija sėkmingai prisijungė prie el. pašto archyvavimo serverio.',
     'LBL_SNIP_STATUS_ERROR' => 'Klaida',
     'LBL_SNIP_STATUS_ERROR_SUMMARY' => 'Jūs turite teisingą el. pašto archyvavimo serverio licenciją, tačiau serveris grąžino šią klaidą:',

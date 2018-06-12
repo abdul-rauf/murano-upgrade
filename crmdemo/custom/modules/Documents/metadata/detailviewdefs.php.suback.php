@@ -1,5 +1,5 @@
 <?php
-// created: 2015-02-22 18:44:41
+// created: 2018-06-12 08:15:50
 $viewdefs['Documents']['DetailView'] = array (
   'templateMeta' => 
   array (
@@ -181,6 +181,7 @@ $viewdefs['Documents']['DetailView'] = array (
           'name' => 'assigned_user_name',
           'label' => 'LBL_ASSIGNED_TO_NAME',
         ),
+        1 => 'status_id',
       ),
     ),
   ),

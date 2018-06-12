@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Chyby byly zjištěny při kontrole kompatibility. Aby se vaše SugarCRM instalace mohla správně fungovat, prosim, vykonejte správné kroky k řešení problémů uvedených níže, a pak pokračujte stisknutím tlačítka překontrolovat, nebo zkuste nainstalovat znovu.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Položka Povolit času volání předat referenci je zapnuta (mělo by být vypnuto v souboru php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nenalezeno: Sugar Plánovač poběží s omezenou funkčností.',
+	'ERR_CHECKSYS_CURL'					=> 'Nenalezeno: Plánovač Sugar bude spuštěn s omezenou funkčností. Službu Archivování e-mailů nebude možné spustit.',
     'ERR_CHECKSYS_IMAP'					=> 'Nenaleyeno: Prichodzí Email a kampaně (e-mail) vyžadují IMAP knihovny. Ani jedno nebude funkční.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC nemůže být "On" při použití MS SQL Serveru.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Varování:',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'Databáze není k dispozici',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databázová podpora nebyla nalezena. Prosím, ujistěte se, že máte potřebné ovladače pro jeden z následujících podporovaných typů databází: MySQL nebo MS SQLServer. Možná bude nutné odkomentovat rozšíření v souboru php.ini, nebo překompilovat se správným binárním souborem, a to v závislosti na verzi PHP. Další informace o tom, jak povolit databázovou podporu, naleznete v příručce k PHP.<br><br>Oracle a DB2 nejsou podporovanými pro SugarCRM PRO. Seznam podporovaných databází a další informace o platformě naleznete na adrese <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funkce spojené s XML Parser Knihovami, které jsou potřebné pro aplikaci Sugar nebyly nalezeny. Možná bude nutné odkomentovat rozšíření v souboru php.ini, nebo překompilovat s právami binární soubor, v závislosti na verzi PHP. Podívejte se do vašeho PHP Manuálu pro více informací.',
+    'LBL_CHECKSYS_CSPRNG' => 'Generátor náhodných čísel',
     'ERR_CHECKSYS_MBSTRING'             => 'Funkce spojené s Multibyte Strings PHP rozšířením (mbstring), které jsou potřebné pro aplikaci Sugar nebyly nalezeny.<br /><br />Obecně platí, že je modul mbstring není povolen ve výchozím nastavení v PHP a musí být aktivován pomocí - enable-mbstring, když je compilovaný binární PHP. Podívejte se do vašeho PHP Manuálu pro více informací o tom, jak povolit mbstring podporu.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Nastavení Session.save_path v konfiguračním souboru PHP (php.ini) není nastaveno nebo je nastaveno na složku, která neexistuje. Možná budete muset nastavit save_path nastavení v php.ini, nebo ověřit, zda složky v save_path existují.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'Podpora ZIP komprese nebyla nalezena: SugarCRM potřebuje podporu ZIP na zpracování komprimovaných souborů.',
     'ERR_CHECKSYS_BCMATH'				=> 'Nebyla nalezena podpora pro BCMATH: SugarCRM potřebuje BCMATH pro výpočty v libovolné přesnosti.',
     'ERR_CHECKSYS_HTACCESS'             => 'Test .htaccess zápisů selhal. Toto obvykle znamená, že nemáte nastavená práva AllowOverride ke složce Sugaru.',
+    'ERR_CHECKSYS_CSPRNG' => 'Výjimka CSPRNG',
 	'ERR_DB_ADMIN'						=> 'Poskytnuté uživatelské jméno a / nebo heslo k databázi je neplatné, a připojení k databázi nelze vytvořit. Zadejte prosím platné uživatelské jméno a heslo. (Chyba:',
     'ERR_DB_ADMIN_MSSQL'                => 'Poskytnuté uživatelské jméno a / nebo heslo k databázi je neplatné, a připojení k databázi nelze vytvořit. Zadejte prosím platné uživatelské jméno a heslo.',
 	'ERR_DB_EXISTS_NOT'					=> 'Zadaná databáze neexistuje.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'Klíč je nutný pro možnost využití základních funkcí, ale to není nutný při instalaci. Klíč můžete zadat až po instalaci.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Jsou vyžadovány minimální informace o instalaci. Platí především pro nové uživatele.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Poskytuje další možnosti nastavení během instalace. Většina z těchto možností je také k dispozici po instalaci v administrátorském rozhraní. Doporučeno pro pokročilé uživatele.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Poskytuje další možnosti nastavení během instalace. Většina z těchto možností je také k dispozici po instalaci v administrátorském rozhraní. Doporučeno pro pokročilé uživatele.',
 	'LBL_LANG_1'						=> 'Chcete-li používat jiný jazyk než je výchozí  (US-angličtina), můžete si nyní nahrát a nainstalovat jazykový balíček. Budete mít možnost nahrát a nainstalovat jazykové balíčky později přímo v aplikaci Sugar. Pokud chcete tento krok přeskočit, klepněte na tlačítko Další.',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Instal',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Odstranit',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'Akceptace licence',
     'LBL_LICENSE_CHECKING'              => 'Kontrola kompatibility systému.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Kontrola prostředí',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'Kontorla DB pověření.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'Ověřování DB, pověření FTS.',
     'LBL_LICENSE_CHECK_PASSED'          => 'Kompatibilita systému byla úspěšně ověřena.',
     'LBL_LICENSE_REDIRECT'              => 'Přesměrování v',
 	'LBL_LICENSE_DIRECTIONS'			=> 'Pokud máte licenční informace, zadejte je do políčka níže.',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'Přečtěte si prosím následující důležité informace před tím než budete pokračovat v instalaci. Informace vám pomohou určit, zda jste či nejste připraveni nyní aplikaci nainstalovat.',
 
 
-	'LBL_WELCOME_2'						=> 'Pro instalační dokumentaci, navštivte prosím <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wik </ a>.<BR><BR>Chcete-li kontaktovat SugarCRM podporu pro pomoc při instalaci, prosíme, přihlaste se na <a target="_blank" href="http://support.sugarcrm.com"> SugarCRM Portál podpory </ a> a odešlete servisní požadavek.',
+	'LBL_WELCOME_2'						=> 'Dokumentaci k instalaci naleznete na <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>.  <BR><BR> Chcete-li kontaktovat technika podpory SugarCRM z důvodu pomoci s instalací, přihlaste se na <a target="_blank" href="http://support.sugarcrm.com">SugarCRM Support Portal</a> a odešlete případ podpory.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> 'Vyber jazyk',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Průvodce nastavením',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Vítejte v SugarCRM',
@@ -452,7 +455,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'Spouštět noční hromadné rozesílání e-mailových kampaní',
 	'LBL_OOTB_PRUNE'		=> 'Provést údržbu databáze každého prvního v měsíci',
     'LBL_OOTB_TRACKER'		=> 'omezení uživatelské historie k 1. v měsíci',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Spustit emailovou upomínku',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Spustit oznamování připomenutí e-mailem',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'Aktualizovat tabulku tracker_sessions',
     'LBL_OOTB_CLEANUP_QUEUE' => 'Vyčistit frontu úloh',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'Typ vyhledávače',
     'LBL_FTS_HELP'      => 'Chcete-li povolit fulltextové vyhledávání, vyberte vyhledávač a zadejte hostitele a port, kde je umístěn. Sugar obsahuje vestavěnou podporu pro elasticsearch vyhledávač.',
     'LBL_FTS_REQUIRED'    => 'Elastic Search je požadován.',
-    'LBL_FTS_ERROR'    => 'Nelze se připojit k serveru s full-textovým vyhledávačem, prosíme zkontrolujte Vaše nastavení.',
+    'LBL_FTS_CONN_ERROR'    => 'Nelze se připojit k serveru s fulltextové vyhledáváním, zkontrolujte své nastavení.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'Není k dispozici žádná verze serveru s fulltextovým vyhledáváním, zkontrolujte své nastavení.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'Zjištěna nepodporovaná verze Elasticsearch. Použijte verzi: %s',
 
     'LBL_PATCHES_TITLE'     => 'Instalovat poslední patche',
     'LBL_MODULE_TITLE'      => 'Instalovat jazykovou mutaci',

@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -63,6 +63,31 @@ class SugarUpgradeConfigSettings extends UpgradeScript
         $this->upgrader->config['default_theme'] = 'RacerX';
 
         $this->removeMassActionsDefaultSettings();
+        $this->fixConfigSettings($defaultSettings);
+    }
+
+    /**
+     * Overwrites some existing config keys for specific versions
+     *
+     * @param array $config Default Sugar config
+     */
+    private function fixConfigSettings($config)
+    {
+        $data = array(
+            '7.8.0.0' => array(
+                'snip_url',
+            ),
+        );
+        
+        foreach ($data as $version => $config_keys) {
+            if (version_compare($this->from_version, $version, '<')) {
+                foreach ($config_keys as $key) {
+                    if (isset($config[$key])) {
+                        $this->upgrader->config[$key] = $config[$key];
+                    }
+                }
+            }
+        }
     }
 
     /**

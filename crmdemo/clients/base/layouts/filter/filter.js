@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -19,8 +19,6 @@
  */
 ({
     className: 'filter-view search',
-
-    plugins: ['QuickSearchFilter'],
 
     events: {
         'click .add-on.fa-times': function() { this.trigger('filter:clear:quicksearch'); }
@@ -467,12 +465,12 @@
             ctxCollection.resetPagination();
 
             options = _.extend(options, ctx.get('collectionOptions'));
-            ctx.resetLoadFlag(false);
+            ctx.resetLoadFlag({recursive: false});
             ctx.set('skipFetch', true);
             ctx.loadData(options);
 
             // We need to reset twice so we can trigger the other bulk call.
-            ctx.resetLoadFlag(false);
+            ctx.resetLoadFlag({recursive: false});
             options.success = _.bind(function(hasAmount, properties) {
                 if (!this.disposed) {
                     ctx.trigger('refresh:count', hasAmount, properties);
@@ -508,10 +506,7 @@
             ctxCollection.filterDef = filterDef;
             ctxCollection.origFilterDef = origFilterDef;
 
-            ctx.resetLoadFlag(false);
-            if (!_.isEmpty(ctx._recordListFields)) {
-                ctx.set('fields', ctx._recordListFields);
-            }
+            ctx.resetLoadFlag({recursive: false});
             ctx.set('skipFetch', false);
             ctx.loadData(options);
         });

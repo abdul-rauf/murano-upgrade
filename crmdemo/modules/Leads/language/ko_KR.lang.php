@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -154,12 +154,12 @@ $mod_strings = array (
     'LBL_STREET' => '상세주소',
     'LBL_PRIMARY_ADDRESS_CITY' => '시',
     'LBL_PRIMARY_ADDRESS_COUNTRY' => '국가',
-    'LBL_PRIMARY_ADDRESS_POSTALCODE' => '우편번호',
+    'LBL_PRIMARY_ADDRESS_POSTALCODE' => '기본 주소지 우편번호',
     'LBL_PRIMARY_ADDRESS_STATE' => '도',
     'LBL_PRIMARY_ADDRESS_STREET_2'=>'상세주소 2',
-    'LBL_PRIMARY_ADDRESS_STREET_3'=>'상세주소 3',
+    'LBL_PRIMARY_ADDRESS_STREET_3'=>'기본 주소지 상세주소 3',
     'LBL_PRIMARY_ADDRESS_STREET' => '상세주소',
-    'LBL_PRIMARY_ADDRESS' => '기본주소',
+    'LBL_PRIMARY_ADDRESS' => '기본 주소지',
     'LBL_RECORD_SAVED_SUCCESS' => '성공적으로 생성하였습니다 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_REFERED_BY' => '추천인',
     'LBL_REPORTS_TO_ID'=>'다음 ID로 보고',

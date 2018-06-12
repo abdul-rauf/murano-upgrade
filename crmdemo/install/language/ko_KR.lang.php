@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => '적합성 확인중 오류가 발견되었습니다. SugarCRM설치가 올바른 작동을 위해서는 아래 목록의 문제들을 알맞은 단계에 걸쳐 확인하거나 재확인 버튼을 누르고 아니면 다시 설치하시기 바랍니다.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Call Time Pass Reference 를 작동하십시요.(이는 php.ini에서는 작동하실수 없습니다.)',
 
-	'ERR_CHECKSYS_CURL'					=> '발견되지 않았습니다. Sugar 일정표가 제한된 기능으로 작동합니다. 이메일 보관 서비스가 사용불가 합니다.',
+	'ERR_CHECKSYS_CURL'					=> '찾을 수 없습니다: Sugar 스케쥴러가 제한된 기능으로 실행되며, 이메일 보관 서비스는 실행되지 않습니다.',
     'ERR_CHECKSYS_IMAP'					=> '발견되지 않았습니다 : 수신 이메일과 캠페인(이메일)은 IMAP libraries를 요합니다. 모두  작동할수 없습니다.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'MS SQL서버 사용시 Magic Quotes GPC 를 작동할수 없습니다.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> '경고',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => '데이타베이스가 이용불가합니다.',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '데이타베이스 지원이 발견되지 않았습니다. 지원되는 데이타베이스 유형인 MySQL 나 MS SQLServer 중 하나에 필요한 드라이버인지 반드시 확인해주십시오. 귀하의 PHP 버전에 따라서, php.ini 파일 내 확장자를 언코멘트(uncomment)하거나, 올바른 2진 파일로 리컴파일해야 할 수도 있습니다. 데이타베이스 지원을 활성화하는 방법에 대한 자세한 정보는 PHP 매뉴얼을 참조하십시오. <br><br>Oracle 및 DB2는 SugarCRM PRO에 대해 지원되는 데이터베이스가 아닙니다. 지원되는 데이터베이스 목록 및 기타 플랫폼 정보는 <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>를 방문해 주십시오.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugar 어플리케이션에 필요한 XML Parser Libraries 연결 기능이 발견되지 않았습니다. PHP버전에 따라 php.ini 파일 확장을 uncomment 하거나 이진 파일을 재편집해야 합니다. 더 자세한 정보를 위해PHP 안내서를 참조하십시요.',
+    'LBL_CHECKSYS_CSPRNG' => '난수 생성기',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugar 어플리케이션에 필요한 Multibyte Strings PHP (mbstring)확장에 연결 기능이 발견되지 않았습니다. 일반적으로 mbstring 모듈은 PHP초기설정에 의해 작동이 불가하며 반드시 이원체 설치가 완료된후 사용가능한 mbstring과 같이 작동되어야 합니다. mbstring 작동가능 지원에 관한 더 자세한 정보를 위해서 PHP 안내서를 참조하십시오.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'php (php.ini)구성 파일의 세션 저장경로 설정이 이뤄지지 않았거나 존재하지 않는 폴더에 설정되었습니다. php.ini 의 저장경로 설정을 하거나 저장경로 파일이 존재하는지 확인하시기 바랍니다.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'ZIP 지원이 발견되지 않았습니다 : SugarCRM가 압축됩 파일을 진행하기위해서는 ZIP지원이 필요합니다.',
     'ERR_CHECKSYS_BCMATH'				=> 'BCMATH 지원을 찾지 못했습니다 : SugarCRM은 임의의 정밀 수학을 위해 BCMATH 지원이 필요합니다.',
     'ERR_CHECKSYS_HTACCESS'             => '. htaccess 재작성에 대한 테스트에 실패하였습니다. 이것은 일반적으로 여러분이 재정의 슈거(Sugar) 디렉토리에 대한 설정을 허용하지 않는 것을 의미합니다.',
+    'ERR_CHECKSYS_CSPRNG' => 'CSPRNG Exception',
 	'ERR_DB_ADMIN'						=> '입력된 데이타베이스 관리자명과 비밀번호가 사용불가하며 데이타베이스 연결이 되지 않았습니다. 유효한 사용자명과 비밀번호를 입력하십시오.',
     'ERR_DB_ADMIN_MSSQL'                => '입력된 데이타베이스 관리자명과 비밀번호가 사용불가하며 데이타베이스 연결이 되지 않았습니다. 유효한 사용자명과 비밀번호를 입력하십시오.',
 	'ERR_DB_EXISTS_NOT'					=> '명시된 데이타베이스가 존재하지 않습니다.',
@@ -114,7 +116,7 @@ $mod_strings = array(
     'ERR_DBCONF_PASSWORD_MISMATCH'      => 'Sugar 데이타베이스에 입력된 비밀번호가 일치하지 않습니다. 입력칸에 같은 비밀번호를 재입력하십시오.',
 	'ERR_ERROR_GENERAL'					=> '다음 오류가 발생했습니다.',
 	'ERR_LANG_CANNOT_DELETE_FILE'		=> '파일을 삭제할수 없습니다.',
-	'ERR_LANG_MISSING_FILE'				=> '파일을 발견할수 없습니ㅏㄷ.',
+	'ERR_LANG_MISSING_FILE'				=> '파일을 발견할 수 없습니다: ',
 	'ERR_LANG_NO_LANG_FILE'			 	=> '언어상자 파일을 발견할수 없습니다.',
 	'ERR_LANG_UPLOAD_1'					=> '전송중 문제가 발생했습니다. 다시 시도해 주십시오.',
 	'ERR_LANG_UPLOAD_2'					=> '언어상자는 반드시 ZIP보관해야 합니다.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => '키는 일반 어플리케이션 기능을 위해 필요합니다만 설치가 필요하지는 않습니다. 이번에는 키를 입력할 필요가 없지만 어플리케이션을 설치한 후에는 키를 입력해야 합니다.',
     'LBL_INSTALL_TYPE_MSG2'             => '설치를 위한 최소의 정보가 필요합니다. 신규사용자에게 권장합니다.',
     'LBL_INSTALL_TYPE_MSG3'             => '설치하는동안 설정할 추가항목을 입력하십시오. 이러한 항목의 대부분이 관리자화면의 설치후에 사용가능합니다. 고급사용자에 권장됩니다.',
+    'LBL_INSTALL_TYPE_MSG3'             => '설치하는동안 설정할 추가항목을 입력하십시오. 이러한 항목의 대부분이 관리자화면의 설치후에 사용가능합니다. 고급사용자에 권장됩니다.',
 	'LBL_LANG_1'						=> '초기설정 언어(미국-영어)외에 Sugar의 언어를 사용하려면 지금 언어상자를 전송해 설치할수 있습니다.<br />Sugar어플리케이션에서 언어 전송및 설치도 가능합니다. 이 단계를 생략하려면 다음버튼을 클릭하십시오.',
 	'LBL_LANG_BUTTON_COMMIT'			=> '설치',
 	'LBL_LANG_BUTTON_REMOVE'			=> '제거하기',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> '라이센스 수락',
     'LBL_LICENSE_CHECKING'              => '시스템 적용 확인중',
     'LBL_LICENSE_CHKENV_HEADER'         => '환경 확인중',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'DB 자격 인증중',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'DB 검증, FTS 자격.',
     'LBL_LICENSE_CHECK_PASSED'          => '시스템 적용 확인이 통과했습니다.',
     'LBL_LICENSE_REDIRECT'              => '새로 전송중',
 	'LBL_LICENSE_DIRECTIONS'			=> '라이센스 정보를 가지고 있다면 아래 필드에 입력하십시오.',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => '설치를 진행하기전 반드시 다음의 중요정보를 참조하십시오. 이 정보는  이 어플리케이션의 설치준비가 되었는지 결정하는데 도움을 줍니다.',
 
 
-	'LBL_WELCOME_2'						=> '문서 설치는 Sugar Wiki 를 방문하십시오. 설치도움을 위한 SugarCRM 지원 엔지니어에 문의하시려면 SugarCRM Support Portal에 접속하여 지원 사례를 제출하십시오.',
+	'LBL_WELCOME_2'						=> '설치 관련 자료는 <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>를 방문하시기 바랍니다.<BR><BR> 설치와 관련하여 SugarCRM 지원 기술자에게 문의하시려면, <a target="_blank" href="http://support.sugarcrm.com">SugarCRM 지원 포탈</a> 에 로그인하셔서 지원요청서를 제출하십시오.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '언어를 선택하십시오',
 	'LBL_WELCOME_SETUP_WIZARD'			=> '설정 마법사',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'SugarCRM 에 오신것을 환영합니다.',
@@ -452,7 +455,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> '매일 저녁 대용량 이메일 캠페인 실행',
 	'LBL_OOTB_PRUNE'		=> '매달 1일 Prune 데이타베이스',
     'LBL_OOTB_TRACKER'		=> 'Prune 추적 테이블',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> '이메일 알림장치 작동',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => '이메일 공지 알림 실행',
     'LBL_UPDATE_TRACKER_SESSIONS' => '추적장치 업데이트-세션 테이블',
     'LBL_OOTB_CLEANUP_QUEUE' => '대기중 작업 비우기',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => '검색엔진 형식',
     'LBL_FTS_HELP'      => '전체 문장검색 장치 작동을 위해서는 검색엔진 형식을 선택한후 검색엔진주최자와 포트를 입력하십시오. Sugar는 확장검색 엔진을 내장 지원을 포함하고 있습니다.',
     'LBL_FTS_REQUIRED'    => '융통성 있는 검색을 요구합니다.',
-    'LBL_FTS_ERROR'    => '전체 문장 검색 서버에 연결할수 없습니다. 설정을 확인해 주십시오.',
+    'LBL_FTS_CONN_ERROR'    => '전문 검색 서버에 연결할 수 없습니다. 설정 내용을 확인하십시오.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => '사용 가능한 전문 검색 서버 버전이 없습니다. 설정 내용을 확인하십시오.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => '지원하지 않는 버전의 엘라스틱 서치입니다. %s 버전을 이용하십시오.',
 
     'LBL_PATCHES_TITLE'     => '최신 패치 설치',
     'LBL_MODULE_TITLE'      => '언어 상자 설치',

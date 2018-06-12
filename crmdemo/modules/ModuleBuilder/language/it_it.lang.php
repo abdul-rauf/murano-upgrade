@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Select a Layout to edit.<br />To change the layout that contains data fields for entering data, click Edit View.<br /><br />To change the layout that displays the data entered into the fields in the Edit View, click Detail View.<br /><br />To change the columns which appear in the default list, click List View.<br /><br />To change the Basic and Advanced search form layouts, click Search.',
         'subpanelHelp'=> 'Select a Subpanel to edit.',
         'searchHelp' => 'Select a Search layout to edit.',
-        'labelsBtn'	=> 'Fai clic su <b>Salva</b> per salvare le etichette personalizzate.',
+        'labelsBtn'	=> 'Modificare le <b>etichette</b> da visualizzare per i valori di questo modulo.',
         'newPackage'=>'Fare clic su <b>Nuovo Pacchetto</b> per creare un nuovo pacchetto.',
         'mbHelp'    => 'Welcome to Module Builder.<br /><br />Use Module Builder to create packages containing custom modules based on standard or custom objects. <br /><br />To begin, click New Package to create a new package, or select a package to edit.<br /><br />A package acts as a container for custom modules, all of which are part of one project. The package can contain one or more custom modules that can be related to each other or to modules in the application. <br /><br />Examples: You might want to create a package containing one custom module that is related to the standard Accounts module. Or, you might want to create a package containing several new modules that work together as a project and that are related to each other and to modules in the application.',
         'exportBtn' => 'Click Export Customizations to create a package containing customizations made in Studio for specific modules.',
@@ -455,7 +455,7 @@ $mod_strings = array(
 'LBL_REL_NAME' => 'Nome',
 'LBL_REL_LABEL' => 'Etichetta',
 'LBL_REL_TYPE' => 'Tipo',
-'LBL_RHS_MODULE'=>'Modulo collegato',
+'LBL_RHS_MODULE'=>'Modulo correlato',
 'LBL_NO_RELS' => 'Non sono presenti relazioni',
 'LBL_RELATIONSHIP_ROLE_ENTRIES'=>'Condizione opzionale' ,
 'LBL_RELATIONSHIP_ROLE_COLUMN'=>'Colonna',
@@ -501,7 +501,7 @@ $mod_strings = array(
 'LBL_SECTION_PACKAGE' => 'Pacchetto',
 'LBL_SECTION_MODULES' => 'Moduli',
 'LBL_SECTION_PORTAL' => 'Portale',
-'LBL_SECTION_DROPDOWNS' => 'Dropdown',
+'LBL_SECTION_DROPDOWNS' => 'Menu a discesa',
 'LBL_SECTION_PROPERTIES' => 'Proprietà',
 'LBL_SECTION_DROPDOWNED' => 'Modifica Dropdown',
 'LBL_SECTION_HELP' => 'Aiuto',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Nome - Deve essere alfa-numerico senza spazi e il primo carettere deve essere una lettera',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'La chiave pacchetto esiste già',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Nome Pacchetto già esistente',
+'LBL_JS_PACKAGE_NAME'=>'Nome pacchetto - Il primo carattere deve essere una lettera e può contenere soltanto lettere, numeri e trattini bassi. Non è possibile utilizzare spazi, né altri caratteri speciali.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Chiave - Deve essere alfanumerica e iniziare con una lettera',
 'LBL_JS_VALIDATE_KEY'=>'Chiave - Deve essere alfa-numerico senza spazi e il primo carettere deve essere una lettera',
 'LBL_JS_VALIDATE_LABEL'=>'Si prega di inserire una label che verrà utilizzata come Nome Display per questo modulo',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Sei sicuro di voler eliminare la relazione?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Questo renderà la relazione permanente. Sei sicuro di voler distribuire la relazione?',
 'LBL_CONFIRM_DONT_SAVE' => 'Sono stati fatti dei cambiamenti dopo ultimo salvataggio, vuoi salvare?',
@@ -769,25 +770,25 @@ $mod_strings = array(
 'LBL_HISTORY_TITLE' => 'Cronologia',
 
 'fieldTypes' => array(
-                'varchar'=>'Campo Testo',
+                'varchar'=>'TextField',
                 'int'=>'Intero',
-                'float'=>'Galleggia',
-                'bool'=>'CasellaDiSpunta',
-                'enum'=>'DropDown',
-                'multienum' => 'Selezione Multipla',
+                'float'=>'A virgola mobile',
+                'bool'=>'Casella di controllo',
+                'enum'=>'Menu a discesa',
+                'multienum' => 'Selezione multipla',
                 'date'=>'Data',
                 'phone' => 'Telefono',
                 'currency' => 'Valuta',
                 'html' => 'HTML',
                 'radioenum' => 'Radio',
-                'relate' => 'Si riferiscono',
+                'relate' => 'Relazione',
                 'address' => 'Indirizzo',
-                'text' => 'AreaDiTesto',
+                'text' => 'Areatesto',
                 'url' => 'URL',
                 'iframe' => 'IFrame',
                 'image' => 'Immagine',
-                'encrypt'=>'Criptare',
-                'datetimecombo' =>'Dataora',
+                'encrypt'=>'Crittografa',
+                'datetimecombo' =>'Data/ora',
                 'decimal'=>'Decimale',
 ),
 'labelTypes' => array(

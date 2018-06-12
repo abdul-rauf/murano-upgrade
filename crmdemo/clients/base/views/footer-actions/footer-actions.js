@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -106,7 +106,13 @@
 
         this._watchForDashboard();
 
-        app.shortcuts.register(app.shortcuts.GLOBAL + 'Help', '?', this.shortcuts, this);
+        app.shortcuts.registerGlobal({
+            id: 'Shortcut:Help',
+            keys: '?',
+            component: this,
+            description: 'LBL_SHORTCUT_HELP',
+            handler: this.shortcuts
+        });
 
         app.user.lastState.preserve(app.user.lastState.key('toggle-show-tutorial', this));
 
@@ -191,7 +197,7 @@
         if (!this._feedbackView || this._feedbackView.disposed) {
             this._feedbackView = app.view.createView({
                 module: 'Feedbacks',
-                name: 'feedback',
+                type: 'feedback',
                 button: this.$('[data-action="feedback"]')
             });
 
@@ -243,6 +249,7 @@
         }
 
         if (disable) {
+            button.attr('aria-pressed', false);
             this._watchForDashboard();
         }
 
@@ -261,7 +268,9 @@
         }
 
         if (button) {
-            button.toggleClass('active', active);
+            button
+                .toggleClass('active', active)
+                .attr('aria-pressed', active);
         }
     },
 

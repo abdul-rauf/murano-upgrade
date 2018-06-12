@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -18,33 +18,28 @@
  */
 ({
     events: {
-        "click .toggle-actions a.btn": "toggleView"
+        'click .toggle-actions .btn': 'toggleView'
     },
-
-    plugins: ['Tooltip'],
 
     /**
      * @override
      * @param {Object} opts
      */
     initialize: function (opts) {
-        this.toggleComponents = [];
-        this.componentsList = {};
-        this.processToggles();
+        this.componentsList = {}; //components that can be toggled
+        this.toggles = []; //toggle buttons to display to user
+        this.processToggles(opts);
         this._super('initialize', [opts]);
     },
 
     /**
      * @inheritdoc
      */
-    initComponents: function(components, context, module) {
-        this._super('initComponents', [components, context, module]);
-
-        _.each(this.componentsList, function(comp) {
-            if (_.isFunction(comp.initComponents)) {
-                comp.initComponents();
-            }
-        });
+    loadData: function(options) {
+        var allComponents = this._components;
+        this._components = this.getNonToggleComponents();
+        this._super('loadData', [options]);
+        this._components = allComponents;
     },
 
     /**
@@ -52,7 +47,12 @@
      * @private
      */
     _render: function() {
+        // Only render components that cannot be toggled.
+        var allComponents = this._components;
+        this._components = this.getNonToggleComponents();
         this._super('_render');
+        this._components = allComponents;
+
         // get the last viewed layout
         this.toggleViewLastStateKey = app.user.lastState.key('toggle-view', this);
         var lastViewed = app.user.lastState.get(this.toggleViewLastStateKey);
@@ -67,9 +67,22 @@
             }
         }
 
-        this.showComponent(lastViewed, true);//SP-1766-don't double render!
-        // Toggle the appropriate button and layout for initial render
-        this.$('[data-view="' + lastViewed + '"]').button('toggle');
+        if (lastViewed) {
+            this.showComponent(lastViewed, true);//SP-1766-don't double render!
+            // Toggle the appropriate button and layout for initial render
+            this.$('[data-view="' + lastViewed + '"]')
+                .button('toggle')
+                .attr('aria-pressed', true);
+        }
+    },
+
+    /**
+     * Get components that cannot be toggled.
+     */
+    getNonToggleComponents: function() {
+        return _.filter(this._components, function(component) {
+            return !_.contains(this.componentsList, component);
+        }, this);
     },
 
     /**
@@ -92,23 +105,23 @@
     },
 
     /**
-     * Get components from the metadata and declare toggles
+     * Get components from the metadata and declare toggles.
+     *
+     * @param {Object} options The Backbone.View initialization options.
      */
-    processToggles: function () {
-        // Enable toggles
-        this.toggles = [];
+    processToggles: function(options) {
         var temp = {};
 
         //Go through components and figure out which toggles we should add
-        _.each(this.options.meta.components, function (component) {
+        _.each(options.meta.components, function (component) {
             var toggle;
             if (component.view) {
                 toggle = component.view;
             } else if (component.layout) {
-                toggle = (_.isString(component.layout)) ? component.layout : component.layout.name;
+                toggle = (_.isString(component.layout)) ? component.layout : component.layout.type;
             }
 
-            var availableToggle = _.find(this.options.meta.availableToggles, function (curr) {
+            var availableToggle = _.find(options.meta.availableToggles, function (curr) {
                 return curr.name === toggle;
             }, this);
             if (toggle && availableToggle) {
@@ -117,16 +130,12 @@
             }
         }, this);
 
-        if (this.options.meta.availableToggles) {
-            // Sort the toggles by the order in the availableToggles list
-            for (var i = 0; i < this.options.meta.availableToggles.length; i++) {
-                var curr = this.options.meta.availableToggles[i];
-                if (temp[curr.name]) {
-                    this.toggles.push(temp[curr.name]);
-                }
+        // Sort the toggles by the order in the availableToggles list
+        _.each(options.meta.availableToggles, function(toggle) {
+            if (temp[toggle.name]) {
+                this.toggles.push(temp[toggle.name]);
             }
-        }
-
+        }, this);
     },
 
     /**
@@ -136,30 +145,15 @@
      * @param {Object} def
      */
     _placeComponent: function (component, def) {
-        if (def && def.targetEl) {
-            if (def.position == 'prepend') {
-                this.$(def.targetEl).prepend(component.el);
-                return;
-            } else {
-                this.$(def.targetEl).append(component.el);
-            }
-        } else {
-            // If we recognize the view, prevent it from rendering until it's
-            // requested explicitly by the user.
-            var toggleAvailable = _.isObject(_.find(this.options.meta.availableToggles, function (curr) {
-                return curr.name === component.name;
-            }));
-            if (toggleAvailable) {
-                this.toggleComponents.push(component);
-                this.componentsList[component.name] = component;
-                this._components.splice(this._components.indexOf(component), 1);
-            } else {
-                // Safety check, just in case we've got a view that the layout
-                // doesn't recognize.
-                component.render();
-                this.$(".main-content").append(component.el);
-            }
+        var toggleAvailable = _.isObject(_.find(this.options.meta.availableToggles, function (curr) {
+            return curr.name === component.name;
+        }));
+
+        if (toggleAvailable) {
+            this.componentsList[component.name] = component;
         }
+
+        this.$('.main-content').append(component.el);
     },
 
     /**
@@ -168,58 +162,51 @@
      */
     toggleView: function (e) {
         var $el = this.$(e.currentTarget);
-        // Hack: With a real <button> with attribute disabled="disabled", events won't fire on the button. However,
-        // since we're using <a> anchor to allow tooltips even if btn disabled, we have to "fudge" disabled behavior
-        // See SP-1055, http://jsfiddle.net/hMQYZ/17/, https://github.com/twitter/bootstrap/issues/2373
-        if ($el.attr('disabled') === 'disabled') {
-            e.preventDefault();
-            e.stopPropagation();
-            return;
-        }
         // Only toggle if we click on an inactive button
         if (!$el.hasClass("active")) {
             var data = $el.data();
             app.user.lastState.set(this.toggleViewLastStateKey, data.view);
             this.showComponent(data.view);
-            this.reloadData(data.view);
+            this._toggleAria($el);
         }
     },
 
     /**
-     * Show a component and triggers "filterpanel:change"
-     * @param {String} name
-     * @param {Boolean} silent
+     * Sets all button accessibility 'aria-pressed' attributes to false
+     * then sets the active button 'aria-pressed' attribute to true.
+     *
+     * @private
+     */
+    _toggleAria: function(btn) {
+        this.$el.find('.btn').attr('aria-pressed', false);
+        btn.attr('aria-pressed', true);
+    },
+
+    /**
+     * Show and render a given component. Hide all others.
+     * @param {string} name
+     * @param {boolean} silent
      */
     showComponent: function (name, silent) {
         if (!name) return;
-        if (this.componentsList[name]) {
-            this.componentsList[name].render();
-            this._components.push(this.componentsList[name]);
-            this.$(".main-content").append(this.componentsList[name].el);
-        }
 
-        _.each(this.toggleComponents, function (comp) {
-            if (comp.name == name) {
+        _.each(this.componentsList, function (comp) {
+            if (comp.name === name) {
                 comp.show();
+
+                // Should only render if the component has never rendered before.
+                if (!comp._skipRenderWhenToggled) {
+                    comp.render();
+                    comp._skipRenderWhenToggled = true;
+                }
             } else {
                 comp.hide();
             }
         }, this);
+
         //Need to respect silent param if true as it prevents double rendering:
         //SP-1766-Filter for sidecar modules causes two requests to list view
         this.trigger('filterpanel:change', name, silent);
-    },
-
-    /**
-     * Reload the toggled component
-     * @param name
-     */
-    reloadData: function(name) {
-        var layout = this.componentsList[name];
-        if (layout) {
-            layout.context.resetLoadFlag(true);
-            layout.loadData();
-        }
     },
 
     /**
@@ -233,7 +220,6 @@
             }
         });
         this.componentsList = {};
-        this.toggleComponents = null;
         app.view.Layout.prototype._dispose.call(this);
     }
 })

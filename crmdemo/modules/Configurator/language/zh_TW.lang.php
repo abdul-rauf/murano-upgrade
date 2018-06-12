@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -91,8 +91,8 @@ $mod_strings = array (
     'LBL_TWEETTOCASE_ON_DESC' => '允許使用者從 Tweets 建立實例',
     'LBL_TWEETTOCASE_ON' => '啟用 Tweet&reg; 實例整合',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; 到實例',
-    'LBL_PREVIEW_SETTINGS' => 'Preview Pane Settings',
-    'LBL_PREVIEW_EDIT' => 'Enable edit in Preview pane',
+    'LBL_PREVIEW_SETTINGS' => '「預覽」窗格設定',
+    'LBL_PREVIEW_EDIT' => '允許在「預覽」窗格中編輯',
     'LBL_PREVIEW_EDIT_HELP' => 'Allows users to edit fields in the Preview pane',
 	'LBL_USE_REAL_NAMES'	=> '顯示全名',
 	'LBL_USE_REAL_NAMES_DESC'			=> '在指派欄位中顯示使用者的全名而非「使用者名稱」。',
@@ -139,6 +139,7 @@ $mod_strings = array (
     'LBL_OC_STATUS_DESC' => '若希望任何使用者均可存取離線用戶端，請核取此選項。否則，您可在使用者級別中配置存取權限。',
     'SESSION_TIMEOUT' => '入口網站工作階段逾時',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => '入口網站工作階段逾時適用於 6.5 及更早版本的歷史 Sugar Portal 版本。',
+    'UPLOAD_MAXSIZE_UNITS' => '位元',
     'SESSION_TIMEOUT_UNITS' => '秒',
     'LBL_LDAP_TITLE'=>'LDAP 驗證支援',
     'LBL_LDAP_ENABLE'=>'啟用 LDAP',
@@ -327,24 +328,24 @@ $mod_strings = array (
     'LBL_FONT_LIST_CIDINFO_INFO' => "Examples :".
 "<ul><li>".
 "Chinese Traditional :<br>".
-"<pre>\$enc=&#39;UniCNS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;CNS1&#39;,&#39;Supplement&#39;=>0);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ac15.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniCNS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'CNS1\\',\\'Supplement\\'=>0);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ac15.php\\');</pre>".
 "</li><li>".
 "Chinese Simplified :<br>".
-"<pre>\$enc=&#39;UniGB-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;GB1&#39;,&#39;Supplement&#39;=>2);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ag15.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniGB-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'GB1\\',\\'Supplement\\'=>2);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ag15.php\\');</pre>".
 "</li><li>".
 "Korean :<br>".
-"<pre>\$enc=&#39;UniKS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;Korea1&#39;,&#39;Supplement&#39;=>0);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ak12.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniKS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'Korea1\\',\\'Supplement\\'=>0);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ak12.php\\');</pre>".
 "</li><li>".
 "Japanese :<br>".
-"<pre>\$enc=&#39;UniJIS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;Japan1&#39;,&#39;Supplement&#39;=>5);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_aj16.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniJIS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'Japan1\\',\\'Supplement\\'=>5);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_aj16.php\\');</pre>".
 "</li></ul>".
 "More help : www.tcpdf.org",
     'LBL_FONT_LIST_FILESIZE' => '字體大小 (KB)',

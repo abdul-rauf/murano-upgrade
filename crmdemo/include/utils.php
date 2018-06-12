@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -307,6 +307,7 @@ function get_sugar_config_defaults()
     'email_default_editor' => 'html',
     'email_default_client' => 'sugar',
     'email_default_delete_attachments' => true,
+    'email_mailer_timeout' => 10,
     'history_max_viewed' => 50,
     'installer_locked' => true,
     'import_max_records_per_file' => 100,
@@ -379,7 +380,7 @@ function get_sugar_config_defaults()
       'enable_repeat' => true,
       'max_repeat_count' => 1000,
     ),
-    'snip_url' => 'http://ease.sugarcrm.com:20010/',
+    'snip_url' => 'https://ease.sugarcrm.com/',
     'passwordsetting' => array (
         'minpwdlength' => '',
         'maxpwdlength' => '',
@@ -452,6 +453,8 @@ function get_sugar_config_defaults()
             'error_number_of_cycles' =>  '10',
             'error_timeout' => '40',
         ),
+        'sugar_min_int' => -2147483648,
+        'sugar_max_int' => 2147483647,
     );
 
     if (empty($locale)) {
@@ -1400,7 +1403,8 @@ function is_guid($guid)
 }
 
 /**
- * Create a unique key and keep it in globals so it can be used by make_sugar_config() and other code during install process 
+ * Create a unique key and keep it in globals so it can be used by make_sugar_config()
+ * and other code during install process
  * @return string unique_key
  */
 function get_unique_key()
@@ -2091,7 +2095,7 @@ function xss_check_pattern($pattern, $str)
  * @param boolean $dieOnBadData true (default) if you want to die if bad data if found, false if not
  *
  * @deprecated This is now an integral part of the new Validator service and is implemented
- * in \Sugarcrm\Sugarcrm\Security\Validator\Constraints\LegacyCleanStringValidator. 
+ * in \Sugarcrm\Sugarcrm\Security\Validator\Constraints\LegacyCleanStringValidator.
  */
 function clean_string($value, $filter = "STANDARD", $dieOnBadData = true)
 {
@@ -2171,7 +2175,7 @@ function clean_special_arguments()
 /**
  * cleans the given key in superglobals $_GET, $_POST, $_REQUEST
  * @deprecated Superglobal sanitizing will be completely abandonned. Use the new InputValidation
- * framework in combination with Validator constraints for input validation. 
+ * framework in combination with Validator constraints for input validation.
  */
 function clean_superglobals($key, $filter = 'STANDARD')
 {
@@ -3012,7 +3016,7 @@ function check_php_version($sys_php_version = '')
     // versions below $min_considered_php_version considered invalid by default,
     // versions equal to or above this ver will be considered depending
     // on the rules that follow
-    $min_considered_php_version = '5.3.25';
+    $min_considered_php_version = '5.4.0';
     //always use .unsupported to make sure that the dev/beta/rc releases are excluded as well
 
     $version_threshold  = '7.0.unsupported';
@@ -3229,11 +3233,6 @@ function sugar_cleanup($exit = false)
 
     }
     SugarAutoLoader::saveClassMap();
-
-    // Clean PA session arrays
-    if (isset($_SESSION['triggeredFlows'])) {
-        unset($_SESSION['triggeredFlows']);
-    }
 
     if (class_exists('DBManagerFactory', false)) {
         DBManagerFactory::disconnectAll();
@@ -4265,6 +4264,12 @@ function rebuildConfigFile($sugar_config, $sugar_version)
         //no need to write to config.php
         unset($sugar_config['disable_team_access_check']);
     }
+    if (isset($sugar_config['team_based_acl']['enabled_modules'])) {
+        // [team_based_acl][enabled_modules] param is designed to be managed by config_override.php
+        // see TeamBasedACLConfigurator::saveConfig
+        // so empty this current value to use actual value from config_override.php after configs merge
+        $sugar_config['team_based_acl']['enabled_modules'] = array();
+    }
     // need to override version with default no matter what
     $sugar_config['sugar_version'] = $sugar_version;
 
@@ -4692,9 +4697,6 @@ function get_alt_hot_key()
 
 function can_start_session()
 {
-    if (!empty($_GET['PHPSESSID'])) {
-       return true;
-    }
     $session_id = session_id();
 
     return empty($session_id) ? true : false;
@@ -5905,7 +5907,7 @@ function validate_ip($clientIp, $sessionIp)
     if (isset($sugar_config['verify_client_ip']) && !$sugar_config['verify_client_ip']) {
         return true;
     }
-    
+
     $isValidIP = true;
 
     $classCheck = 0;

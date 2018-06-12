@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -47,7 +47,6 @@ $viewdefs['Calls']['base']['view']['preview'] = array(
                         array(
                             'name' => 'date_start',
                             'time' => array(
-                                'disable_text_input' => true,
                                 'step' => 15,
                             ),
                             'readonly' => false,
@@ -59,7 +58,6 @@ $viewdefs['Calls']['base']['view']['preview'] = array(
                         array(
                             'name' => 'date_end',
                             'time' => array(
-                                'disable_text_input' => true,
                                 'step' => 15,
                                 'duration' => array(
                                     'relative_to' => 'date_start'
@@ -80,6 +78,7 @@ $viewdefs['Calls']['base']['view']['preview'] = array(
                     'related_fields' => array(
                         'repeat_parent_id',
                     ),
+                    'readonly' => true,
                 ),
                 'direction',
                 array(

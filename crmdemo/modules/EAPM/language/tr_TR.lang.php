@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -53,6 +53,7 @@ $mod_strings = array (
   'LBL_API_OAUTHTOKEN' => 'OAuth Anahtarı',
   'LBL_AUTH_UNSUPPORTED' => "Bu yetkilendirme yöntemi uygulama tarafından desteklenmiyor",
   'LBL_AUTH_ERROR' => 'Bu hesaba bağlanma girişiminiz başarısız oldu.',
+  'LBL_CHANGE_APPLICATION_ERROR' => 'Kullanıcının uygulama adını değiştirmesine izin verilmez.',
   'LBL_VALIDATED' => 'Bağlı',
   'LBL_ACTIVE' => 'Aktif',
   'LBL_OAUTH_NAME' => '%s',

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -117,7 +117,7 @@ $mod_strings = array (
     'LBL_PDF_INVOICE_TITLE' => 'Factura',
     'LBL_PDF_ITEM_EXT_PRICE' => 'Precio Ext.',
     'LBL_PDF_ITEM_DISCOUNT' => 'Descuento',
-    'LBL_PDF_ITEM_SELECT_DISCOUNT' => 'Descuento seleccionado',
+    'LBL_PDF_ITEM_SELECT_DISCOUNT' => ' ',
     'LBL_PDF_ITEM_LIST_PRICE' => 'Precio de venta',
     'LBL_PDF_ITEM_PRODUCT' => 'Línea de la Oferta',
     'LBL_PDF_ITEM_QUANTITY' => 'Cantidad',

@@ -4,7 +4,7 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -128,6 +128,29 @@ abstract class BaseMailer implements IMailer
      */
     public function setHeader($key, $value = null) {
         $this->headers->setHeader($key, $value);
+    }
+
+    /**
+     * Adds or replaces the Message-ID header.
+     *
+     * The unique identifier is coupled with the hostname from the configuration in order to construct a Message-ID that
+     * is as unique as possible. The format of the Message-ID is <unique_id@hostname> per the recommendations from
+     * {@link https://www.jwz.org/doc/mid.html}. See the section on "Message-ID generation" to learn how to construct a
+     * unique identifier.
+     *
+     * In this particular implementation, the format of the Message-ID is <unix_timestamp.$id@hostname>. SugarCRM cleans
+     * values that appear as HTML in certain cases before inserting that data into the database. Because the Message-ID
+     * begins with a "<", an $id that begins with an alphabetic character will cause the Message-ID to be parsed as an
+     * invalid HTML tag by HTMLPurifier. Prefixing the unix timestamp guarantees that the Message-ID will begin with
+     * "<", followed by an integer, which HTMLPurifier will correctly ignore as a non-threatening tag. This allows the
+     * Message-ID to be saved to the database whenever appropriate, without risk of losing the value.
+     *
+     * @param string $id A unique identifier.
+     */
+    public function setMessageId($id)
+    {
+        $messageId = sprintf('<%s.%s@%s>', time(), $id, $this->config->getHostname());
+        $this->setHeader(EmailHeaders::MessageId, $messageId);
     }
 
     /**

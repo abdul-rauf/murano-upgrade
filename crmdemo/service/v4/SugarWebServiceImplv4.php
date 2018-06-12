@@ -3,7 +3,7 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -523,6 +523,7 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
     	                $list_params['favorites'] = 2;
     	            }
 
+                    $filterFields = self::$helperObject->checkFieldAccess($filterFields, $seed);
     				$ret_array = $seed->create_new_list_query('', $where, $filterFields, $list_params, 0, '', true, $seed, true);
     		        if(empty($params) or !is_array($params)) $params = array();
     		        if(!isset($params['custom_select'])) $params['custom_select'] = '';
@@ -533,6 +534,7 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
     			} else {
     				if ($beanName == "User") {
     					$filterFields = array('id', 'user_name', 'first_name', 'last_name', 'email_address');
+                        $filterFields = self::$helperObject->checkFieldAccess($filterFields, $seed);
     					$main_query = "select users.id, ea.email_address, users.user_name, first_name, last_name from users ";
     					$main_query = $main_query . " LEFT JOIN email_addr_bean_rel eabl ON eabl.bean_module = '{$seed->module_dir}'
     LEFT JOIN email_addresses ea ON (ea.id = eabl.email_address_id) ";
@@ -540,6 +542,7 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
     				} // if
     				if ($beanName == "ProjectTask") {
     					$filterFields = array('id', 'name', 'project_id', 'project_name');
+                        $filterFields = self::$helperObject->checkFieldAccess($filterFields, $seed);
     					$main_query = "select {$seed->table_name}.project_task_id id,{$seed->table_name}.project_id, {$seed->table_name}.name, project.name project_name from {$seed->table_name} ";
     					$seed->add_team_security_where_clause($main_query);
     					$main_query .= "LEFT JOIN teams ON $seed->table_name.team_id=teams.id AND (teams.deleted=0) ";

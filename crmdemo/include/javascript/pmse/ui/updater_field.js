@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -138,6 +138,23 @@ UpdaterField.prototype._parseSettings = function (settings) {
     return parsedSettings;
 };
 
+UpdaterField.prototype._toOptionsArray = function (obj, labelField) {
+    var arr = [];
+    if (_.isArray(obj)) {
+        return obj;
+    } else if (typeof obj !== 'object') {
+        throw new Error('_toOptionsArray(): The parameter must be an object or array.')
+    }
+    labelField = labelField || 'text';
+
+    _.each(obj, function (value, key) {
+        var text = typeof value === 'object' ? value[labelField] : value;
+        arr.push({value: key, text: text});
+    }, this);
+
+    return arr;
+};
+
 /**
  * Sets child option fiels into updater container
  * @param {Array} settings
@@ -149,27 +166,28 @@ UpdaterField.prototype.setOptions = function (settings) {
         newOption,
         aUsers = [],
         customUsers = {},
-        currentSetting;
+        currentSetting,
+        aux;
 
     this.list = settings;
     for (i = 0; i < settings.length; i += 1) {
-        /*CREATE INPUT FIELD*/
         currentSetting = this._parseSettings(settings[i]);
         currentSetting.parent = this;
         currentSetting.allowDisabling = this.hasCheckbox;
         currentSetting.disabled = this.hasCheckbox;
         switch (currentSetting.fieldType) {
             case 'TextField':
-                newOption =  new TextUpdaterItem(currentSetting);
+                newOption = new TextUpdaterItem(currentSetting);
                 break;
             case 'TextArea':
-                newOption =  new TextAreaUpdaterItem(currentSetting);
+                newOption = new TextAreaUpdaterItem(currentSetting);
                 break;
             case 'Date':
             case 'Datetime':
-                newOption =  new DateUpdaterItem(currentSetting);
+                newOption = new DateUpdaterItem(currentSetting);
                 break;
             case 'DropDown':
+            case 'Radio':
                 aUsers = [];
                 if (currentSetting.options instanceof Array) {
                     if (currentSetting.value === 'assigned_user_id') {
@@ -183,27 +201,29 @@ UpdaterField.prototype.setOptions = function (settings) {
                     }
                 } else {
                     if (currentSetting.options) {
-                        $.each(currentSetting.options, function (key, value) {
-                            aUsers.push({value: key, text: value});
-                        });
+                        aUsers = this._toOptionsArray(currentSetting.options);
                     }
                     currentSetting.options = aUsers;
-
                 }
-                newOption =  new DropdownUpdaterItem(currentSetting);
+                newOption = new DropdownUpdaterItem(currentSetting);
                 break;
             case 'Checkbox':
-                newOption =  new CheckboxUpdaterItem(currentSetting);
+                newOption = new CheckboxUpdaterItem(currentSetting);
                 break;
             case 'Currency':
                 currentSetting.currency = true;
             case 'Integer':
             case 'Decimal':
             case 'Float':
-                newOption =  new NumberUpdaterItem(currentSetting);
+                newOption = new NumberUpdaterItem(currentSetting);
+                break;
+            case 'MultiSelect':
+                currentSetting.options = this._toOptionsArray(currentSetting.options);
+                newOption = new MultiselectUpdaterItem(currentSetting);
                 break;
             case 'user':
-                currentSetting.searchUrl = 'pmse_Project/CrmData/users?filter={TERM}';
+                currentSetting.searchUrl = PMSE_USER_SEARCH.url;
+                currentSetting.searchLabel = PMSE_USER_SEARCH.text;
                 currentSetting.defaultSearchOptions = [
                     {text: translate('LBL_PMSE_FORM_OPTION_CURRENT_USER'), value: 'currentuser'},
                     {text: translate('LBL_PMSE_FORM_OPTION_RECORD_OWNER'), value: 'owner'},
@@ -213,6 +233,17 @@ UpdaterField.prototype.setOptions = function (settings) {
                 break;
             case 'team_list':
                 currentSetting.disabledAppendOption = !this.hasCheckbox;
+                aux = this.parent.getField('act_field_module').getSelectedData();
+                if (aux) {
+                    var moduleData = App.metadata.getModule(aux.module_name);
+                    currentSetting.disableTeamSelection = !_.isUndefined(moduleData) && !_.isUndefined(moduleData.isTBAEnabled)
+                        ? !moduleData.isTBAEnabled
+                        : true;
+                    this.parent.getField('act_field_module').setValid(true);
+                } else {
+                    // If the selected option is invalid then set valid to false
+                    this.parent.getField('act_field_module').setValid(false);
+                }
                 newOption = new TeamUpdaterItem(currentSetting);
                 break;
             default:
@@ -316,9 +347,6 @@ UpdaterField.prototype.createHTML = function () {
 
     this.html.appendChild(criteriaContainer);
 
-    if (this.errorTooltip) {
-        this.html.appendChild(this.errorTooltip.getHTML());
-    }
     if (this.helpTooltip) {
         this.html.appendChild(this.helpTooltip.getHTML());
     }
@@ -349,6 +377,7 @@ UpdaterField.prototype.setValue = function (value) {
                             if (fields[i].type === 'team_list') {
                                 this.options[j].setPrimaryTeam(fields[i].primary);
                                 this.options[j].setAppendTeams(fields[i].append);
+                                this.options[j].setSelectedTeams(fields[i].selected_teams);
                             }
                             break;
                         }
@@ -366,31 +395,21 @@ UpdaterField.prototype.setValue = function (value) {
  * @return {Boolean}
  */
 UpdaterField.prototype.isValid = function () {
-    var i, valid = true, current, field;
+    var valid = true, i, field, field_valid;
     for (i = 0; i < this.options.length; i += 1) {
         field = this.options[i];
-
-        //TODO: create validation for expressions built with expressionControl.
-        if (!field.isRequired() || field._parent.hasCheckbox && field.isDisabled()) {
-            valid = true;
+        if (field._parent.hasCheckbox && !field.isDisabled() || !field._parent.hasCheckbox) {
+            field_valid = field.isValid();
+            if (!field_valid) {
+                valid = false;
+            }
         } else {
-            valid = field.isValid();
+            field_valid = true;
         }
-
-        if (!valid) {
-            break;
-        }
+        field.decorateValid(field_valid);
     }
-
     if (valid) {
-        $(this.errorTooltip.html).removeClass('adam-tooltip-error-on');
-        $(this.errorTooltip.html).addClass('adam-tooltip-error-off');
-        valid = valid && Field.prototype.isValid.call(this);
-    } else {
-        this.visualObject.scrollTop += getRelativePosition(field.getHTML(), this.visualObject).top;
-        this.errorTooltip.setMessage(this.language.LBL_ERROR_ON_FIELDS);
-        $(this.errorTooltip.html).removeClass('adam-tooltip-error-off');
-        $(this.errorTooltip.html).addClass('adam-tooltip-error-on');
+        valid = Field.prototype.isValid.call(this);
     }
     return valid;
 };
@@ -569,7 +588,7 @@ UpdaterField.prototype.openPanelOnItem = function (field) {
                 if (fieldType === 'Date') {
                     constantPanelCfg = {
                         date: true,
-                        timespan: true
+                        datespan: true
                     };
                 } else {
                     constantPanelCfg = {
@@ -608,7 +627,7 @@ UpdaterField.prototype.openPanelOnItem = function (field) {
                 }],
                 dataFormat: "hierarchical",
                 typeField: "type",
-                typeFilter: field instanceof DateUpdaterItem ? ["Date", "Datetime"] : field._fieldType,
+                typeFilter: field._fieldType,
                 textField: "text",
                 valueField: "value",
                 dataChildRoot: "items",
@@ -664,6 +683,7 @@ var UpdaterItem = function (settings) {
     this._dirty = false;
     this._allowDisabling = true;
     this._controlContainer = null;
+    this._invalidFieldClass = 'pmse-field-error';
     UpdaterItem.prototype.init.call(this, settings);
 };
 
@@ -750,6 +770,7 @@ UpdaterItem.prototype.setLabel = function (label) {
     this._label = label;
     if (this._dom.labelText) {
         this._dom.labelText.textContent = label;
+        this._dom.labelText.setAttribute('data-original-title', label);
     }
     return this;
 };
@@ -772,8 +793,37 @@ UpdaterItem.prototype.isRequired = function () {
 
 
 UpdaterItem.prototype.isValid = function () {
-    return this._required ? this._value !== '' : true;
+    var valid = true;
+    if (this.isRequired()) {
+        switch (typeof(this._value)) {
+            case 'boolean':
+            case 'number':
+                break;
+            case 'object':
+                if (Array.isArray(this._value)) {
+                    valid = this._value.length > 0;
+                    break;
+                }
+            default:
+                valid = this._value ? true : false;
+        }
+    }
+    return valid;
 };
+
+/**
+ * Add or remove the invalid field class
+ * @param boolean valid
+ */
+UpdaterItem.prototype.decorateValid = function (valid) {
+    if (this._control) {
+        if (valid) {
+            $(this._control).removeClass(this._invalidFieldClass);
+        } else {
+            $(this._control).addClass(this._invalidFieldClass);
+        }
+    }
+}
 
 UpdaterItem.prototype.clear = function () {
     if (this._control) {
@@ -859,6 +909,9 @@ UpdaterItem.prototype._createConfigButton = function () {
     var button = this.createHTMLElement("a");
     button.href = "#";
     button.className = "adam-itemupdater-cfg fa fa-cog";
+    button.setAttribute('rel', 'tooltip');
+    button.setAttribute('data-placement', 'right');
+    button.setAttribute('data-original-title', App.lang.get('LBL_SUGAR_FIELD_SELECTOR', 'pmse_Emails_Templates'));
     this._configButton = button;
     return this._configButton;
 };
@@ -950,6 +1003,8 @@ UpdaterItem.prototype.createHTML = function () {
 
         labelText = this.createHTMLElement("span");
         labelText.className = "adam-itemupdater-labeltext";
+        labelText.setAttribute('rel', 'tooltip');
+        labelText.setAttribute('data-placement', 'left');
 
         requiredContainer = this.createHTMLElement("span");
         requiredContainer.className = "adam-itemupdater-required required noshadow";
@@ -1003,8 +1058,10 @@ var TeamUpdaterItem = function (settings) {
     this._disabledAppendOption = null;
     this._appendTeamsCheckbox = null;
     this._appendTeamsLabel = null;
+    this._selectedTeams = null;
     this._appendTeams = null;
     this._addButton = null;
+    this._disabledTeamSelection = null;
     TeamUpdaterItem.prototype.init.call(this, settings);
 };
 
@@ -1015,26 +1072,65 @@ TeamUpdaterItem.prototype.type = 'TeamUpdaterItem';
 TeamUpdaterItem.TEAM_ACTION = {
     PRIMARY: 0,
     ADD: 1,
-    REMOVE: 2
+    REMOVE: 2,
+    LOCK: 3
 };
 
 TeamUpdaterItem.prototype.init = function (settings) {
     var defaults = {
         primaryTeam: null,
         appendTeams: false,
-        disabledAppendOption: false
+        disabledAppendOption: false,
+        selectedTeams: [],
+        disableTeamSelection: true
     };
 
     jQuery.extend(true, defaults, settings);
 
     this.setPrimaryTeam(defaults.primaryTeam)
-        .setAppendTeams(defaults.appendTeams);
+        .setAppendTeams(defaults.appendTeams)
+        .setSelectedTeams(defaults.selectedTeams);
+
+    if (defaults.disableTeamSelection) {
+        this.disableTeamSelection();
+    } else {
+        this.enableTeamSelection();
+    }
 
     if (defaults.disabledAppendOption) {
         this.disableAppendOption();
     } else {
         this.enableAppendOption();
     }
+};
+
+TeamUpdaterItem.prototype.enableTeamSelection = function () {
+    this._disabledTeamSelection = false;
+    if (this._control) {
+        $(this._control)
+            .find('.btn.adam-team-action[name=lock]').show().end()
+            .find('.select2-container').css('width', '184px');
+    }
+    return this;
+};
+
+TeamUpdaterItem.prototype.disableTeamSelection = function () {
+    this._disabledTeamSelection = true;
+    if (this._control) {
+        $(this._control)
+            .find('.btn.adam-team-action[name=lock]').hide().end()
+            .find('.select2-container').css('width', '220px');
+    }
+    return this;
+};
+
+TeamUpdaterItem.prototype._updateTeamSelection = function () {
+    if (this._disabledTeamSelection) {
+        this.disableTeamSelection();
+    } else {
+        this.enableTeamSelection();
+    }
+    return this;
 };
 
 TeamUpdaterItem.prototype.disableAppendOption = function () {
@@ -1054,7 +1150,50 @@ TeamUpdaterItem.prototype.enableAppendOption = function () {
 };
 
 TeamUpdaterItem.prototype.isValid = function () {
-    return this._required ? !!this._value.length : true;
+    var valid = UpdaterItem.prototype.isValid.call(this), i;
+    if (valid && Array.isArray(this._value)) {
+        for (i = 0; i < this._value.length; i++) {
+            if (!this._value[i].valid) {
+                valid = false;
+                break;
+            }
+        }
+    }
+    return valid;
+};
+
+TeamUpdaterItem.prototype.decorateValid = function (valid) {
+    if (valid || this._value.length == 0) {
+        UpdaterItem.prototype.decorateValid.call(this, valid);
+    }
+};
+
+TeamUpdaterItem.prototype.setSelectedTeams = function (teams) {
+    var existingValues = [], that = this;
+    if (!jQuery.isArray(teams)) {
+        throw new Error('setSelectedTeams(): The parameter must be an array.');
+    }
+
+    this._selectedTeams = teams.slice(0);
+
+    if (this._control) {
+        jQuery(this._control).find('.adam-team-updater-line').each(function (index, item) {
+            var data = that._getLineData(item);
+
+            if (data !== null) {
+                if (that._selectedTeams.indexOf(data.id) >= 0) {
+                    var $lockButton = $(item).find('.adam-team-action[name=lock]');
+                    $lockButton.addClass('active').find('i').removeClass('fa-lock').addClass('active fa-unlock-alt');
+                    $lockButton.attr('data-original-title', App.lang.get('LBL_TEAM_SET_DISABLE'));
+
+                    existingValues.push(data.id);
+                }
+            }
+        });
+        this._selectedTeams = existingValues;
+    }
+
+    return this;
 };
 
 TeamUpdaterItem.prototype.setAppendTeams = function (bln) {
@@ -1086,7 +1225,7 @@ TeamUpdaterItem.prototype.setPrimaryTeam = function (team) {
             .removeClass('active').end().toArray();
         for (i = 0; i < lines.length; i += 1) {
             data = this._getLineData(lines[i]);
-            if (data.id === this._primaryTeam) {
+            if (!_.isNull(data) && data.id === this._primaryTeam) {
                 jQuery(lines[i]).find('.adam-team-action[name=primary]').addClass('active');
                 return this;
             }
@@ -1111,7 +1250,8 @@ TeamUpdaterItem.prototype._setValueToControl = function (value) {
         that._addNewInputLine(item);
         count ++;
     });
-    this.setPrimaryTeam(this._primaryTeam);
+    this.setPrimaryTeam(this._primaryTeam)
+        .setSelectedTeams(this._selectedTeams);
     if (!count) {
         this._addNewInputLine();
     }
@@ -1119,15 +1259,29 @@ TeamUpdaterItem.prototype._setValueToControl = function (value) {
 };
 
 TeamUpdaterItem.prototype._getValueFromControl = function () {
-    var value = [], that = this;
+    var value = [], that = this, i, found;
     this._primaryTeam = null;
+    this._selectedTeams = [];
     jQuery(this._control).find('.adam-team-updater-line').each(function () {
         var input = jQuery(this).find('input'),
             data = input.select2('data');
-        if (data !== null && value.indexOf(data.id) < 0) {
-            value.push(data.id);
+
+        if (data !== null) {
+            found = false;
+            for (i = 0; i < value.length; i++) {
+                if (value[i].id == data.id) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                value.push({id:data.id, valid:!input.hasClass(that._invalidFieldClass)});
+            }
             if (jQuery(this).find('.adam-team-action.active[name=primary]').length) {
                 that._primaryTeam = data.id;
+            }
+            if (that._selectedTeams.indexOf(data.id) < 0 && jQuery(this).find('.adam-team-action.active[name=lock]').length) {
+                that._selectedTeams.push(data.id);
             }
         }
     });
@@ -1226,7 +1380,7 @@ TeamUpdaterItem.prototype._openSearchMore = function (select) {
 };
 
 TeamUpdaterItem.prototype._addNewInputLine = function (value) {
-    var select, div, dropdownHTML, additionalList, listItem, tpl, $select;
+    var select, div, dropdownHTML, additionalList, listItem, tpl, $select, that = this;
 
     if (!this._control) {
         return this;
@@ -1239,15 +1393,23 @@ TeamUpdaterItem.prototype._addNewInputLine = function (value) {
     $select = jQuery(select).select2({
         minimumInputLength: 1,
         formatInputTooShort: '',
-        allowClear: true,
+        allowClear: false,
         query: this._queryFunction(),
-        width: this.fieldWidth || '220px',
+        width: this.fieldWidth || '184px',
         placeholder: translate('LBL_PMSE_UPDATERFIELD_ADD_TEAM'),
         initSelection: this._initSelection()
     });
 
     if (value) {
-        $select.select2("val", value, false);
+        $select.select2("val", value.id, false);
+        if (value.valid) {
+            $(select).removeClass(this._invalidFieldClass);
+        } else {
+            $(select).addClass(this._invalidFieldClass);
+        }
+        $select.on('change', function (e) {
+            $(select).removeClass(that._invalidFieldClass);
+        });
     }
 
     this._addButtonsToLine(div);
@@ -1279,7 +1441,7 @@ TeamUpdaterItem.prototype._createControl = function () {
 };
 
 TeamUpdaterItem.prototype._getAddButton = function () {
-    var addButton;
+    var addButton, i;
 
     if (this._addButton) {
         return this._addButton;
@@ -1291,6 +1453,10 @@ TeamUpdaterItem.prototype._getAddButton = function () {
     i.className = 'fa fa-plus';
     addButton.appendChild(i);
     addButton.name = 'add';
+    addButton.setAttribute('rel', 'tooltip');
+    addButton.setAttribute('data-placement', 'top');
+    addButton.setAttribute('data-original-title', App.lang.get('LBL_TEAM_ADD'));
+
     this._addButton = addButton;
 
     return addButton;
@@ -1298,7 +1464,7 @@ TeamUpdaterItem.prototype._getAddButton = function () {
 
 TeamUpdaterItem.prototype._addButtonsToLine = function (line) {
     var primaryButton = this.createHTMLElement('button'),
-        addButton, removeButton,
+        lockButton, addButton, removeButton,
         i = this.createHTMLElement('i');
 
     if ($(line).hasClass('adam-line-filled')) {
@@ -1309,26 +1475,41 @@ TeamUpdaterItem.prototype._addButtonsToLine = function (line) {
     primaryButton.appendChild(i);
     primaryButton.className = 'btn adam-team-action ';
     primaryButton.name = 'primary';
+    primaryButton.setAttribute('rel', 'tooltip');
+    primaryButton.setAttribute('data-placement', 'top');
+    primaryButton.setAttribute('data-original-title', App.lang.get('LBL_TEAM_PRIMARY'));
 
     removeButton = primaryButton.cloneNode(false);
-    removeButton.className = 'btn adam-team-action';
     i = i.cloneNode(false);
     i.className = 'fa fa-minus';
     removeButton.appendChild(i);
     removeButton.name = 'remove';
+    removeButton.setAttribute('rel', 'tooltip');
+    removeButton.setAttribute('data-placement', 'top');
+    removeButton.setAttribute('data-original-title', App.lang.get('LBL_TEAM_REMOVE'));
 
+    lockButton = primaryButton.cloneNode(false);
+    i = i.cloneNode(false);
+    i.className = 'fa fa-lock';
+    lockButton.appendChild(i);
+    lockButton.name = 'lock';
+    lockButton.setAttribute('rel', 'tooltip');
+    lockButton.setAttribute('data-placement', 'top');
+    lockButton.setAttribute('data-original-title', App.lang.get('LBL_TEAM_SET_ENABLE'));
     if ($(this._control).find('*').index(line) === 0) {
         removeButton.style.visibility = 'hidden';
     }
 
     addButton = this._getAddButton();
 
-    primaryButton.disabled = removeButton.disabled = addButton.disabled = this._disabled;
+    primaryButton.disabled = lockButton.disabled = removeButton.disabled = addButton.disabled = this._disabled;
 
     line.appendChild(primaryButton);
+    line.appendChild(lockButton);
     line.appendChild(removeButton);
     line.appendChild(addButton);
     $(line).addClass('adam-line-filled');
+    return this._updateTeamSelection();
 };
 
 TeamUpdaterItem.prototype.setValue = function (value) {
@@ -1341,6 +1522,7 @@ TeamUpdaterItem.prototype.setValue = function (value) {
     if (this._control) {
         this._setValueToControl(value);
         this._value = this._getValueFromControl();
+        this._updateTeamActionsVisibility();
     } else {
         this._value = value;
     }
@@ -1368,7 +1550,8 @@ TeamUpdaterItem.prototype._onChange = function () {
                 if (wasEmpty) {
                     that._addButtonsToLine($line.get(0));
                 }
-                if (!that._getValueFromControl().length) {
+
+                if (that._getLineData($line) === null || !that._getValueFromControl().length) {
                     $line.find('.adam-team-action[name=primary]').removeClass('active');
                 } else if (!that.isAppendMode() && that._primaryTeam === null) {
                     $line.find('.adam-team-action[name=primary]').addClass('active');
@@ -1376,7 +1559,7 @@ TeamUpdaterItem.prototype._onChange = function () {
                 break;
             case TeamUpdaterItem.TEAM_ACTION.REMOVE:
                 if (that._primaryTeam === null && !that.isAppendMode()) {
-                    $(that._control).find('.adam-team-action[name=primary]').first().addClass('active');
+                    $line.find('.adam-team-action[name=primary]').addClass('active');
                 }
                 break;
         }
@@ -1415,11 +1598,16 @@ TeamUpdaterItem.prototype.isAppendMode = function () {
 };
 
 TeamUpdaterItem.prototype.getData = function () {
+    var value = [], i;
+    for (i = 0; i < this._value.length; i++) {
+        value.push(this._value[i].id);
+    }
     return {
         name: this._label,
         field: this._name,
-        value: this._value,
+        value: value,
         primary: this._primaryTeam,
+        selected_teams: this._disabledTeamSelection ? [] : this._selectedTeams,
         append: this.isAppendMode(),
         type: this._fieldType
     };
@@ -1442,7 +1630,7 @@ TeamUpdaterItem.prototype._performTeamAction = function () {
             case 'primary':
                 if (lineData !== null) {
                     if (that.isAppendMode() || !$button.hasClass('active')) {
-                        $(that._control).find('.adam-team-action.active').not($button).removeClass('active');
+                        $(that._control).find('.adam-team-action.active[name=' + this.name + ']').not($button).removeClass('active');
                         $button.toggleClass('active');
                         changed = $button;
                         actionID = TeamUpdaterItem.TEAM_ACTION.PRIMARY;
@@ -1454,12 +1642,26 @@ TeamUpdaterItem.prototype._performTeamAction = function () {
                     that._addNewInputLine();
                 }
                 break;
+            case 'lock':
+                if (lineData !== null) {
+                    $button.toggleClass('active').find('i').toggleClass('fa-lock fa-unlock-alt');
+                    if ($button.hasClass('active')) {
+                        $button.attr('data-original-title', App.lang.get('LBL_TEAM_SET_DISABLE'));
+                    } else {
+                        $button.attr('data-original-title', App.lang.get('LBL_TEAM_SET_ENABLE'));
+                    }
+                    changed = $button;
+                    actionID = TeamUpdaterItem.TEAM_ACTION.LOCK;
+                }
+                break;
             case 'remove':
                 actionID = TeamUpdaterItem.TEAM_ACTION.REMOVE;
                 if ($line.find('.adam-team-action.active[name=primary]').length > 0) {
                     that._primaryTeam = null;
                 }
                 $line.remove();
+                // remove any tooltips left behind
+                $('.tooltip').remove();
                 changed = jQuery(that._control);
                 break;
         }
@@ -1581,10 +1783,6 @@ DateUpdaterItem.prototype.init = function (settings) {
     this.setValue(defaults.value);
 };
 
-DateUpdaterItem.prototype.isValid = function () {
-    return this._required ? !!this._value.length : true;
-};
-
 DateUpdaterItem.prototype._setValueToControl = function (value) {
     var friendlyValue = "", i, dateFormat, timeFormat;
     value.forEach(function(value, index, arr) {
@@ -1659,13 +1857,6 @@ var CheckboxUpdaterItem = function (settings) {
 CheckboxUpdaterItem.prototype = new UpdaterItem();
 CheckboxUpdaterItem.prototype.constructor = CheckboxUpdaterItem;
 CheckboxUpdaterItem.prototype.type = "CheckboxUpdaterItem";
-
-CheckboxUpdaterItem.prototype.isValid = function () {
-    // In contrast to the other UpdaterItem classes, it doesn't make sense to apply a validation method to a checkbox,
-    // since if it is checked its value will be TRUE, otherwise its value will be FALSE. Those are all the values that
-    // the checkbox can take, therefore, in CHECKED state or UNCHECKED state it always will meet the Required Field validation.
-    return true;
-};
 
 CheckboxUpdaterItem.prototype.setValue = function (value) {
     if (this._control) {
@@ -1751,10 +1942,6 @@ NumberUpdaterItem.prototype.init = function (settings) {
     this.setValue(defaults.value);
 };
 
-NumberUpdaterItem.prototype.isValid = function () {
-    return this._required ? !!this._value.length : true;
-};
-
 NumberUpdaterItem.prototype.isCurrency = function() {
     return this._currency;
 };
@@ -1782,46 +1969,182 @@ NumberUpdaterItem.prototype.setValue = function (value) {
 };
 
 NumberUpdaterItem.prototype.isValid = function () {
-    var isValid = true;
-    var value = this.getValue().slice(0);
-    var i;
-    var prev = null;
-    var currType;
-    var currValue;
-
-    if (value.length < 1) {
-        return false;
-    }
-
-    // TODO: the next validation must be implemented in ExpressionControl based on the kind of result it expects to return.
-
-    // We need to validate that a valid expression is inserted in the control
-    // First, check the syntax
-    for (i = 0; i < value.length; i += 1) {
-        currType = value[i].expType;
-        currValue = value[i].expValue;
-        if (prev === null) {
-            if (currType === 'ARITMETIC' && currValue !== '(') {
-                return false;
+    var valid = UpdaterItem.prototype.isValid.call(this);
+    if (valid && Array.isArray(this._value) && this._value.length > 0) {
+        var result = this.evaluateExpression(this._value);
+        if (result.valid) {
+            if (this.isCurrency() && result.expSubtype.toLowerCase() != 'currency') {
+                valid = false;
             }
         } else {
-            if ((currType === 'CONSTANT' || currType === 'VARIABLE' || (currType === 'ARITMETIC' && currValue === '(')) && (prev.expType === 'CONSTANT' || prev.expType === 'VARIABLE' || (prev.expType === 'ARITMETIC' && prev.expValue === ')'))) {
-                return false;
-            } else if ((currType === 'ARITMETIC' && currValue !== '(') && (prev.expType === 'ARITMETIC' && prev.expValue !== '(')) {
-                return false;
+            valid = false;
+        }
+    }
+    return valid;
+};
+
+/**
+ * Utility function to evaluate a value expression
+ *
+ * @param Array an array of tokens that form an expression
+ *
+ * @return Object with the following fields: valid, expType and expSubtype
+ */
+NumberUpdaterItem.prototype.evaluateExpression = function (value) {
+    var result = {valid:false}, exp, val, curr, i, j, c, left, right;
+    if (Array.isArray(value) && value.length > 0) {
+        // first pass to handle the GROUP operators ( and )
+        exp = value.slice(0);
+        val = [];
+        for (i = 0; i < exp.length; i++) {
+            curr = exp[i];
+            if (curr.expType == 'GROUP') {
+                // opening bracket
+                if (curr.expValue == '(') {
+                    // search for the matching closing bracket
+                    for (j = i + 1, c = 1; j < exp.length; j++) {
+                        curr = exp[j];
+                        if (curr.expType == 'GROUP') {
+                            // enclosed inner brackets
+                            if (curr.expValue == '(') {
+                                c++;
+                            } else {
+                                c--;
+                                if (c == 0) {
+                                    // found it
+                                    curr = this.evaluateExpression(exp.slice(i + 1, j));
+                                    if (curr.valid) {
+                                        val.push(curr);
+                                        break;
+                                    } else {
+                                        // recursive call failed
+                                        return result;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (j < exp.length) {
+                        i = j;
+                    } else {
+                        // no matching closing bracket found
+                        return result;
+                    }
+                } else {
+                    // closing bracket without a matching opening one
+                    return result;
+                }
+            } else {
+                val.push(curr);
             }
         }
-        prev = value[i];
+        // second pass to process the multiplicative operators x and /
+        exp = val.slice(0);
+        val = [];
+        for (i = 0; i < exp.length; i++) {
+            curr = exp[i];
+            if (curr.expType == 'ARITHMETIC' && (curr.expValue == 'x' || curr.expValue == '/')) {
+                // needs to have a left hand operand
+                if (val.length > 0) {
+                    left = val.pop();
+                    // left hand operand needs to be of a value type
+                    if (left.expType == 'CONSTANT' || left.expType == 'VARIABLE') {
+                        // needs to have a right hand operand
+                        if (i < exp.length - 1) {
+                            right = exp[i + 1];
+                            // right hand operand needs to be of a value type
+                            if (right.expType == 'CONSTANT' || right.expType == 'VARIABLE') {
+                                if (left.expSubtype.toLowerCase() == 'currency') {
+                                    if (right.expSubtype.toLowerCase() == 'currency') {
+                                        if (curr.expValue == 'x') {
+                                            // currency x currency
+                                            return result;
+                                        } else {
+                                            // currency / currency
+                                            curr = left;
+                                            curr.expSubtype = 'number';
+                                        }
+                                    } else {
+                                        // currency x / number
+                                        curr = left;
+                                    }
+                                } else {
+                                    if (right.expSubtype.toLowerCase() == 'currency') {
+                                        if (curr.expValue == 'x') {
+                                            // number x currency
+                                            curr = right;
+                                        } else {
+                                            // number / currency
+                                            return result;
+                                        }
+                                    } else {
+                                        // number x / number
+                                        curr = left;
+                                    }
+                                }
+                                val.push(curr);
+                                i++;
+                            } else {
+                                return result;
+                            }
+                        } else {
+                            return result;
+                        }
+                    } else {
+                        return result;
+                    }
+                } else {
+                    return result;
+                }
+            } else {
+                val.push(curr);
+            }
+        }
+        // third pass to process the additive operators + and -
+        exp = val.slice(0);
+        val = [];
+        for (i = 0; i < exp.length; i++) {
+            curr = exp[i];
+            if (curr.expType == 'ARITHMETIC' && (curr.expValue == '+' || curr.expValue == '-')) {
+                // needs to have a left hand operand
+                if (val.length > 0) {
+                    left = val.pop();
+                    // left hand operand needs to be of a value type
+                    if (left.expType == 'CONSTANT' || left.expType == 'VARIABLE') {
+                        // needs to have a right hand operand
+                        if (i < exp.length - 1) {
+                            right = exp[i + 1];
+                            // right hand operand needs to be of a value type
+                            if (right.expType == 'CONSTANT' || right.expType == 'VARIABLE') {
+                                // the two operands should be of the same value type
+                                if (left.expSubtype.toLowerCase() != right.expSubtype.toLowerCase()) {
+                                    return result;
+                                }
+                                val.push(left);
+                                i++;
+                            } else {
+                                return result;
+                            }
+                        } else {
+                            return result;
+                        }
+                    } else {
+                        return result;
+                    }
+                } else {
+                    return result;
+                }
+            } else {
+                val.push(curr);
+            }
+        }
+        // should have only one token left
+        if (val.length == 1) {
+            result = val[0];
+            result.valid = true;
+        }
     }
-
-    if (currType === 'ARITMETIC' && currValue !== ')') {
-        return false;
-    }
-
-    if (!isValid) {
-        return isValid;
-    }
-    return UpdaterItem.prototype.isValid.call(this);
+    return result;
 };
 
 NumberUpdaterItem.prototype._createControl = function () {
@@ -1869,7 +2192,7 @@ DropdownUpdaterItem.prototype._existsValueInOptions = function (value) {
     return false;
 };
 
-DropdownUpdaterItem.prototype._getFirstAvailabelValue = function () {
+DropdownUpdaterItem.prototype._getFirstAvailableValue = function () {
     return (this._options[0] && this._options[0].value) || "";
 };
 
@@ -1885,7 +2208,7 @@ DropdownUpdaterItem.prototype.setValue = function (value) {
             if (this._existsValueInOptions(value)) {
                 this._value = value;
             } else {
-                this._value = this._getFirstAvailabelValue();
+                this._value = this._getFirstAvailableValue();
             }
         }
     }
@@ -1948,7 +2271,14 @@ DropdownUpdaterItem.prototype.setOptions = function (options) {
     this._massiveAction = true;
     this.clearOptions();
     for (i = 0; i < options.length; i += 1) {
-        this.addOption(options[i]);
+        var option = options[i];
+        if (typeof option === 'string') {
+            option = {
+                text: option,
+                value: i
+            };
+        }
+        this.addOption(option);
     }
     this._massiveAction = false;
     this._paintItems();
@@ -1980,6 +2310,9 @@ DropdownUpdaterItem.prototype.createHTML = function () {
 //SearchUpdaterItem
 var SearchUpdaterItem = function (settings) {
     UpdaterItem.call(this, settings);
+    this._pageSize = null;
+    this._searchLabel = null;
+    this._searchValue = null;
     SearchUpdaterItem.prototype.init.call(this, settings);
 };
 
@@ -1993,20 +2326,22 @@ SearchUpdaterItem.prototype.type = 'SearchUpdaterItem';
 SearchUpdaterItem.prototype.init = function(settings) {
     var defaults = {
         value: '',
+        pageSize: 5,
+        searchValue: 'id',
+        searchLabel: 'text',
         searchMore: false,
         searchUrl: null,
-        defaultSearchOptions: [],
-        select2Translations: {
-            id: 'value',
-            text: 'text'
-        }
+        defaultSearchOptions: []
     };
 
     jQuery.extend(true, defaults, settings);
 
+    this._pageSize = typeof defaults.pageSize === 'number' && defaults.pageSize >= 1 ? Math.floor(defaults.pageSize) : 0;
+
     this._searchUrl = defaults.searchUrl;
     this._defaultSearchOptions = defaults.defaultSearchOptions;
-    this._select2Translations = defaults.select2Translations;
+    this._searchLabel = defaults.searchLabel;
+    this._searchValue = defaults.searchValue;
     this.setValue(defaults.value);
 
     if (defaults.searchMore) {
@@ -2233,30 +2568,47 @@ SearchUpdaterItem.prototype._createConfigButton = function() {
     return null;
 };
 
+SearchUpdaterItem.prototype._resizeListSize = function () {
+    var list = this.select2Control.data("select2").dropdown,
+        listItemHeight;
+    list = $(list).find('ul[role=listbox]');
+    listItemHeight = list.find('li').eq(0).outerHeight();
+    list.get(0).style.maxHeight = (listItemHeight * this._pageSize) + 'px';
+    return this;
+};
+
 /**
  * select2 internal query function. See select2 documentation for further info
  * @param options
  */
 SearchUpdaterItem.prototype._queryFunction = function(options) {
     var self = this;
-    var finalData = this._filterSelections(options, this._defaultSearchOptions);
+    var finalData = options.page > 1 ? [] : this._filterSelections(options, this._defaultSearchOptions);
     var callbackOptions = {more: false};
-    var term = $.trim(options.term) || '';
+    var term = $.trim(options.term);
+    var that = this;
 
     if (term) {
         var proxy = new SugarProxy();
-        proxy.url = this._searchUrl.replace(/\{TERM\}/g, term);
+        proxy.url = this._searchUrl.replace(/\{%TERM%\}/g, term)
+            .replace(/\{%OFFSET%\}/g, (options.page - 1) * this._pageSize);
+
+        if (this._pageSize > 0) {
+            proxy.url = proxy.url.replace(/\{%PAGESIZE%\}/g, this._pageSize);
+        }
+
         proxy.getData(null, {
             success: function(data) {
-                var finalData = [];
-                _.each(data.result, function(result) {
+                callbackOptions.more = data.next_offset >= 0 ? true : false;
+                _.each(data.records, function(result) {
                     finalData.push({
-                        id: result[self._select2Translations.id],
-                        text: result[self._select2Translations.text]
+                        id: result[self._searchValue],
+                        text: result[self._searchLabel]
                     });
                 });
                 callbackOptions.results = finalData;
                 options.callback(callbackOptions);
+                that._resizeListSize();
             },
             error: function() {
                 console.log('failure', arguments);
@@ -2294,13 +2646,240 @@ SearchUpdaterItem.prototype._filterSelections = function(searchOptions, results)
     var finalData = [];
     var term = $.trim(searchOptions.term);
     _.each(results, function(result) {
-        if (!term || searchOptions.matcher(term, result[this._select2Translations.text])) {
+        if (!term || searchOptions.matcher(term, result.text)) {
             finalData.push({
-                id: result[this._select2Translations.id],
-                text: result[this._select2Translations.text]
+                id: result.value,
+                text: result.text
             });
         }
     }, this);
 
     return finalData;
+};
+
+var MultiselectUpdaterItem = function (settings) {
+    UpdaterItem.call(this, settings);
+    this._options = null;
+    this._labelField = null;
+    this._valueField = null;
+    this._quickAccessOptions = {};
+    this._select2Control = null;
+    MultiselectUpdaterItem.prototype.init.call(this, settings);
+};
+
+MultiselectUpdaterItem.prototype =  new UpdaterItem();
+MultiselectUpdaterItem.prototype.constructor = MultiselectUpdaterItem;
+MultiselectUpdaterItem.prototype.type = 'MultiselectUpdaterItem';
+
+MultiselectUpdaterItem.ITEM_SEPARATOR = '<##>';
+
+MultiselectUpdaterItem.prototype.init = function (settings) {
+    var defaults = {
+        options: [],
+        value: [],
+        labelField: 'text',
+        valueField: 'value'
+    };
+
+    jQuery.extend(true, defaults, settings);
+    this.setLabelField(defaults.labelField)
+        .setValueField(defaults.valueField)
+        .setOptions(defaults.options)
+        .setValue(defaults.value);
+};
+
+MultiselectUpdaterItem.prototype.clear = function () {
+    if (this._control) {
+        this._setValueToControl([]);
+    }
+    this._value = [];
+    return this;
+};
+
+MultiselectUpdaterItem.prototype._disableControl = function () {
+    if (this._select2Control) {
+        this._select2Control.select2('disable');
+    }
+    return this;
+};
+
+MultiselectUpdaterItem.prototype._enableControl = function () {
+    if (this._select2Control) {
+        this._select2Control.select2('enable');
+    }
+    return this;
+};
+
+MultiselectUpdaterItem.prototype._getQueryFunction = function () {
+    return _.bind(function (queryObject) {
+        var term = jQuery.trim(queryObject.term),
+            results = [], i,
+            matcherFunction = term ? function (term, subject) {
+                return queryObject.matcher(term, subject);
+            } : function () { return true; };
+
+
+        _.each(this._options, function (item) {
+            if (matcherFunction(term, item[this._labelField])) {
+                results.push({
+                    id: item[this._valueField],
+                    text: item[this._labelField] + ''
+                });
+            }
+        }, this);
+
+        queryObject.callback({
+            more: false,
+            results: results
+        });
+    }, this);
+};
+
+MultiselectUpdaterItem.prototype.setValue = function (value){
+    if (!!this._options) {
+        if (value === "" || value === null) {
+            value = [];
+        }
+        if (!jQuery.isArray(value)) {
+            throw new Error("setValue(): The parameter must be an array.");
+        }
+        if (this._control) {
+            this._setValueToControl(value);
+            this._value = this._getValueFromControl();
+        } else {
+            this._value = value;
+        }
+    }
+    return this;
+};
+
+MultiselectUpdaterItem.prototype._setQuickAccessOptions = function (options) {
+    var obj = {};
+    _.each(options, function (item) {
+        obj[item[this._valueField]] = item;
+    }, this);
+    this._quickAccessOptions = obj;
+    return this;
+};
+
+MultiselectUpdaterItem.prototype.setLabelField = function (field) {
+    var currentValue = this.getValue(), modifiedValue;
+    if (typeof field !== 'string' || field === '') {
+        throw new Error('setLabelField(): The parameter must be a non empty string.');
+    }
+    this._labelField = field;
+    // The items text will be updated by executing the next line
+    this._setValueToControl(this._value);
+    return this;
+};
+
+MultiselectUpdaterItem.prototype.setValueField = function (field) {
+    var prevValueField = this._valueField, currentValue = this.getValue(), updatedValue = [], previousQuickAccessOptions;
+    if (typeof field !== 'string' || field === '') {
+        throw new Error('setValuefield(): The parameter must be a non empty string.');
+    }
+
+    this._valueField = field;
+
+    if (prevValueField !== field) {
+        previousQuickAccessOptions = _.clone(this._quickAccessOptions);
+        this._setQuickAccessOptions(this._options);
+
+        // The items values will be updated by executing the next block of code
+        _.each(currentValue, function (item) {
+            var quickAccessOption = previousQuickAccessOptions[item];
+            this.push(quickAccessOption[field]);
+        }, updatedValue);
+
+        this.setValue(updatedValue);
+    }
+
+    return this;
+};
+
+MultiselectUpdaterItem.prototype.setOptions = function (options) {
+    if (!_.isArray(options)) {
+        throw new Error('setItems(): The parameter must be an array.');
+    }
+    this._options = options;
+    this.setValue([]);
+    this._setQuickAccessOptions(options);
+    return this;
+};
+
+MultiselectUpdaterItem.prototype._setValueToControl = function (value) {
+    if (this._select2Control) {
+        this._select2Control.select2('val', value);
+    }
+    return this;
+};
+
+MultiselectUpdaterItem.prototype._getValueFromControl = function () {
+    var data, value = [];
+    if (this._select2Control) {
+        data = this._select2Control.select2("data");
+        _.each(data, function (item) {
+            this.push(item.id);
+        }, value);
+    }
+    return value;
+};
+
+MultiselectUpdaterItem.prototype._getInitSelectionFunction = function () {
+    return _.bind(function (element, callback) {
+        var eValue = element.val(),
+            value = eValue !== "" ? element.val().split(MultiselectUpdaterItem.ITEM_SEPARATOR) : [],
+            results = [];
+
+        value = _.sortBy(value);
+
+        _.each(value, function(value) {
+            var item = this._quickAccessOptions[value];
+            if (item !== undefined) {
+                results.push({
+                    id: item[this._valueField],
+                    text: item[this._labelField]
+                });
+            }
+        }, this);
+
+        callback(results);
+    }, this);
+};
+
+MultiselectUpdaterItem.prototype._onChange = function () {
+    var that = this;
+    return function (e) {
+        var value = that._getValueFromControl();
+        if (value.length){
+            that._setValueToControl(value);
+        }
+        UpdaterItem.prototype._onChange.call(that).apply(this, arguments);
+    };
+};
+
+MultiselectUpdaterItem.prototype.attachListeners = function () {
+    if (this.html && !this._attachedListeners) {
+        UpdaterItem.prototype.attachListeners.call(this);
+        this._select2Control.on("change", this._onChange());
+    }
+    return this;
+};
+
+MultiselectUpdaterItem.prototype._createControl = function () {
+    var input = this.createHTMLElement('input');
+    input.type = 'hidden';
+    input = jQuery(input).select2({
+        allowClear: false,
+        containerCssClass: 'select2-choices-pills-close',
+        dropdownCssClass: '',
+        multiple: true,
+        query: this._getQueryFunction(),
+        initSelection: this._getInitSelectionFunction(),
+        separator: MultiselectUpdaterItem.ITEM_SEPARATOR,
+        width: this.fieldWidth || '220px'
+    });
+    this._control = input.data('select2').container[0];
+    this._select2Control = input;
+    return UpdaterItem.prototype._createControl.call(this);
 };

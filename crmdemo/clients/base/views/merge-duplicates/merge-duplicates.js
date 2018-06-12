@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,13 +16,17 @@
  * @extends View.Views.Base.ListView
  */
 ({
-    plugins: ['Editable', 'ErrorDecoration', 'Tooltip', 'EllipsisInline', 'MergeDuplicates'],
     extendsFrom: 'ListView',
+
+    plugins: ['Editable', 'ErrorDecoration', 'MergeDuplicates'],
+
     events: {
         'click [data-mode=preview]' : 'togglePreview',
         'click [data-action=copy]' : 'triggerCopy',
         'click [data-action=delete]' : 'triggerDelete'
     },
+
+    dataView: '',
 
     /**
      * Default settings used when none are supplied through metadata.
@@ -241,8 +245,8 @@
     _delegateEvents: function() {
         this.layout.on('mergeduplicates:save:fire', this.triggerSave, this);
 
-        app.events.on('preview:open', _.bind(this.onPreviewToggle, this, true), this);
-        app.events.on('preview:close', _.bind(this.onPreviewToggle, this, false), this);
+        app.events.on('preview:open', _.bind(this._onPreviewToggle, this, true), this);
+        app.events.on('preview:close', _.bind(this._onPreviewToggle, this, false), this);
         this.on('render', this._showAlertIfIdentical, this);
     },
 
@@ -383,10 +387,13 @@
      * @private
      */
     _savePrimary: function() {
-        var self = this,
-            fields = this.getFieldNames().filter(function(field) {
+        var self = this;
+        var fields = this.getFieldNames().filter(function(field) {
             return app.acl.hasAccessToModel('edit', this.primaryRecord, field);
         }, this);
+        var headerpaneView = this.layout.getComponent('merge-duplicates-headerpane');
+
+        headerpaneView.getField('cancel_button').setDisabled(true);
 
         this.primaryRecord.trigger('duplicate:unformat:field');
 
@@ -400,17 +407,20 @@
                 self.primaryRecord.trigger('duplicate:format:field');
                 self.primaryRecord.trigger('mergeduplicates:primary:saved');
             },
-            error: function(error) {
+            error: function(model, error) {
                 if (error.status === 409) {
                     app.utils.resolve409Conflict(error, self.primaryRecord, function(model, isDatabaseData) {
                         if (model) {
                             if (isDatabaseData) {
                                 self.resetRadioSelection(model.id);
+                                headerpaneView.getField('cancel_button').setDisabled(false);
                             } else {
                                 self._savePrimary();
                             }
                         }
                     });
+                } else {
+                    headerpaneView.getField('cancel_button').setDisabled(false);
                 }
             },
             lastModified: this.primaryRecord.get('date_modified'),
@@ -742,11 +752,26 @@
     },
 
     /**
-     * Event listeners for `preview:open` and `preview:close` events
+     * Event handler for `preview:open` and `preview:close` events.
      *
      * @param {boolean} open Flag indicating the desired state of the preview
+     * @deprecated Since 7.8. Will be removed in 7.9.
      */
     onPreviewToggle: function(open) {
+        app.logger.warn('`View.Views.Base.MergeDuplicatesView#onPreviewToggle` has been deprecated since 7.8 and' +
+            ' will be removed in 7.9.');
+        this.isPreviewOpen = open;
+        this.$('[data-mode=preview]').toggleClass('on', open);
+    },
+
+    /**
+     * Event handler for `preview:open` and `preview:close` events.
+     *
+     * @param {boolean} open Flag indicating the desired state of the preview
+     * @deprecated Since 7.8. Will be removed in 7.9.
+     * @private
+     */
+    _onPreviewToggle: function(open) {
         this.isPreviewOpen = open;
         this.$('[data-mode=preview]').toggleClass('on', open);
     },
@@ -773,6 +798,7 @@
         var module = model.module || model.get('module');
         var previewCollection = app.data.createBeanCollection(module, [model]);
         app.events.trigger('preview:render', model, previewCollection, false);
+        app.events.trigger('preview:open', true);
     },
 
     /**
@@ -1036,6 +1062,13 @@
             app.alert.dismiss('mergeduplicates_merging');
             this._showSuccessMessage();
             app.drawer.close(true, this.primaryRecord);
+        }, this);
+
+        this.primaryRecord.on('validation:complete', function(isValid) {
+            if (!isValid) {
+                var headerpaneView = this.layout.getComponent('merge-duplicates-headerpane');
+                headerpaneView.getField('cancel_button').setDisabled(false);
+            }
         }, this);
     },
 
@@ -1415,6 +1448,11 @@
                 if (!self.mergeProgressModel.get('isStopped')) {
                     self.primaryRecord.trigger('mergeduplicates:related:merged');
                 }
+
+                if (self.mergeStat.total_fetch_errors > 0 || self.mergeStat.total_errors > 0) {
+                    var headerpaneView = self.layout.getComponent('merge-duplicates-headerpane');
+                    headerpaneView.getField('cancel_button').setDisabled(false);
+                }
             };
             // Wait until all related records be merged or finish merge.
             self.mergeRelatedCollection.queue.running() ?
@@ -1492,10 +1530,10 @@
                             model.view.mergeStat.total = model.view.mergeStat.total + options.chunk.ids.length;
                             options.queueSuccess();
                             if (_.isFunction(options.success)) {
-                                options.success(model, data, response);
+                                options.success(data);
                             }
                         },
-                        error: function(xhr, status, error) {
+                        error: function(xhr) {
                             model.attempt = model.attempt + 1;
                             model.view.mergeProgressModel.trigger('massupdate:item:attempt', model);
                             if (model.attempt <= (model.view._settings.merge_relate_max_attempt)) {
@@ -1506,9 +1544,9 @@
                                 model.view.mergeProgressModel.trigger('massupdate:item:fail', model);
                             }
                         },
-                        complete: function(xhr, status) {
+                        complete: function(xhr) {
                             if (_.isFunction(options.complete)) {
-                                options.complete(xhr, status);
+                                options.complete(xhr);
                             }
                         }
                     };
@@ -1653,7 +1691,7 @@
         if (!progressView) {
             progressView = app.view.createView({
                 context: this.context,
-                name: 'merge-duplicates-progress',
+                type: 'merge-duplicates-progress',
                 layout: this.layout,
                 model: this.mergeProgressModel
             });

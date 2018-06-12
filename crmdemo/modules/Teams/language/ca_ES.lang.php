@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,27 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => 'Esteu segur que voleu suprimir aquest registre?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Està segur que desitja treure aquest usuari de l´equip?',
     'LBL_EDITLAYOUT' => 'Editar disseny' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Permisos basats en equip',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Permetre l&#39;accés de l&#39;equip i gestionar l&#39;accés per mòdul.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Permetre permisos basats en equip',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Seleccioneu els mòduls a habilitar',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'Permetre permisos basats en equip us permetrà assignar drets específics d&#39;accés als equips i usuaris per a mòduls individuals, mitjançant la Gestió de rols.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+Impossibilitar els permisos basats en equips per a un mòdul invertirà totes les dades associades amb els permisos basats en equip per a aquest mòdul, incloses les definicions de processos o els processos que utilitzen la funció. Això inclou tots els rols que utilitzen l'opció "Propietari i equip seleccionat" per a aquest mòdul i qualsevol permís basat en equip per als registres d'aquest mòdul. També us recomanem que utilitzeu l'eina de reconstrucció i reparació ràpida per esborrar la memòria cau de sistema després d'impossibilitar els permisos basats en equips per a qualsevol mòdul.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Avís:</strong> Impossibilitar els permisos basats en equips per a un mòdul invertirà totes les dades associades amb els permisos basats en equip per a aquest mòdul, incloses les definicions de processos o els processos que utilitzen la funció. Això inclou tots els rols que utilitzen l'opció "Propietari i equip seleccionat" per a aquest mòdul i qualsevol permís basat en equip per als registres d'aquest mòdul. També us recomanem que utilitzeu l'eina de reconstrucció i reparació ràpida per esborrar la memòria cau de sistema després d'impossibilitar els permisos basats en equips per a qualsevol mòdul.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+Impossibilitar els permisos basats en equips per a un mòdul invertirà totes les dades associades amb els permisos basats en equip per a aquest mòdul, incloses les definicions de processos o els processos que utilitzen la funció. Això inclou tots els rols que utilitzen l'opció "Propietari i equip seleccionat" per a aquest mòdul i qualsevol permís basat en equip per als registres d'aquest mòdul. També us recomanem que utilitzeu l'eina de reconstrucció i reparació ràpida per esborrar la memòria cau de sistema després d'impossibilitar els permisos basats en equips per a qualsevol mòdul.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Avís:</strong> Impossibilitar els permisos basats en equips per a un mòdul invertirà totes les dades associades amb els permisos basats en equip per a aquest mòdul, incloses les definicions de processos o els processos que utilitzen la funció. Això inclou tots els rols que utilitzen l'opció "Propietari i equip seleccionat" per a aquest mòdul i qualsevol permís basat en equip per als registres d'aquest mòdul. També us recomanem que utilitzeu l'eina de reconstrucció i reparació ràpida per esborrar la memòria cau de sistema després d'impossibilitar els permisos basats en equips per a qualsevol mòdul.
+STR
+,
 );

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -39,8 +39,8 @@
 
             ctxModel.unset('commit_stages_included');
             _.each(ranges, function(range, key) {
-                if(range.in_included_total) {
-                    commitStages.push(key)
+                if (range.in_included_total) {
+                    commitStages.push(key);
                 }
                 delete range.in_included_total;
 
@@ -76,21 +76,23 @@
      * @inheritdoc
      */
     _saveConfig: function() {
-        this.context.get('model').save({}, {
-            // getting the fresh model with correct config settings passed in as the param
-            success: _.bind(function(model) {
-                // If we're inside a drawer and Forecasts is setup and this isn't the first time, otherwise refresh
-                if (app.drawer.count()) {
-                    this.showSavedConfirmation();
-                    // close the drawer and return to Forecasts
-                    app.drawer.close(this.context, this.context.get('model'));
-                    // Forecasts requires a refresh, always, so we force it
-                    Backbone.history.loadUrl(app.api.buildURL(this.module));
-                }
-            }, this),
-            error: _.bind(function() {
-                this.getField('save_button').setDisabled(false);
-            }, this)
-        });
+        var url = app.api.buildURL(this.module, 'config');
+        app.api.call('create', url, this.model.attributes, {
+                success: _.bind(function() {
+                    if (app.drawer.count()) {
+                        this.showSavedConfirmation();
+                        // close the drawer and return to Forecasts
+                        app.drawer.close(this.context, this.context.get('model'));
+                        // Forecasts requires a refresh, always, so we force it
+                        Backbone.history.loadUrl(app.api.buildURL(this.module));
+                    } else {
+                        app.router.navigate(this.module, {trigger: true});
+                    }
+                }, this),
+                error: _.bind(function() {
+                    this.getField('save_button').setDisabled(false);
+                }, this)
+            }
+        );
     }
 })

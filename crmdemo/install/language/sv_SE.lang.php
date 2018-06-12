@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Fel har upptäckts under kompatibilitetskontrollen. Rätta till problemen som listas nedan och klicka sedan på Försök igen eller starta om installationen för att se till att din SugarCRM-installation fungerar felfritt.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Referenser får just nu skickas vid anrop (detta bör inaktiveras i php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Hittades inte: Schemaläggaren i Sugar kommer att köras med begränsad funktionalitet.',
+	'ERR_CHECKSYS_CURL'					=> 'Hittades inte: Sugar Scheduler körs med begränsad funktionalitet. Tjänsten emailarkivering körs inte.',
     'ERR_CHECKSYS_IMAP'					=> 'Hittades inte: InboundEmail och Campaigns (Email) kräver de nya IMAP-biblioteken. De kommer inte att fungera.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC kan inte aktiveras när du använder MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Warning:',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'Databasen otillgänglig',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Kunde inte hitta databasstöd. Se till att du har nödvändiga drivrutiner för antingen MySQL eller MS SQLServer. Du kan behöva avkommentera ändelsen i filen php.ini eller kompilera om med den rätta binärfilen beroende på din PHP-version. Se PHP-manualen för mer information om hur databasstöd aktiveras.<br><br>Oracle och DB2 stöds inte i SugarCRM PRO. För en lista över alla databaser som stöds och annan plattformsspecifik information se <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funktioner som hör till XML Parser Libraries som Sugar behöver hittades inte. Du kanske behöver avkommentera ändelsen i php.ini eller kompilera om med rätt binärfil beroende på din PHP-version. Se PHP-manualen för mer information.',
+    'LBL_CHECKSYS_CSPRNG' => 'Slumptalsgenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Funktioner som hör till Multibyte Strings PHP-tillägget (mbstring) som Sugar behöver hittades inte. <br/><br/>I allmänhet är modulen mbstring inte aktiverat som standard i PHP, utan den måste aktiveras med --enable-mbstring när du bygger PHP. Se PHP-manualen för mer information om hur mbstring-stöd aktiveras.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Inställningen session.save_path i din PHP-konfiguration (php.ini) är antingen tom eller satt till en mapp som inte finns. Du behöver antingen ange en sökväg eller dubbelkolla att mappen finns.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'ZIP support hittades inte: SugarCRM behöver ZIP support för att kunna behandla komprimerade filer.',
     'ERR_CHECKSYS_BCMATH'				=> 'BCMATH stöd som inte hittas: SugarCRM behöver BCMATH stöd för godtycklig precision matte.',
     'ERR_CHECKSYS_HTACCESS'             => 'Test för .htaccess skrivning misslyckades. Det betyder oftast att du inte har Allowoverride inställd för Sugar directory.',
+    'ERR_CHECKSYS_CSPRNG' => 'CSPRNG-fel',
 	'ERR_DB_ADMIN'						=> 'The provided database administrator username and/or password is invalid, and a connection to the database could not be established.  Please enter a valid user name and password.  (Error:',
     'ERR_DB_ADMIN_MSSQL'                => 'Administratörslösenordet och/eller användarnamnet du angivit för databasen är ogilitgt. En anslutning kunde därför inte upprättas. Var god ange giltigt användarnamn och lösenord.',
 	'ERR_DB_EXISTS_NOT'					=> 'Den angivna databasen finns inte.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'Nyckeln krävs för allmän funktionalitet, men inte för installation. Du behöver inte skriva in den nu, men du kommer att behöva skriva in den när programmet är installerat.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Efterfrågar minimal information för installationen. Rekommenderas för nya användare.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Erbjuder fler alternativ under installation. De flesta av dessa kan ändras efter installation i adminpanelerna. Rekommenderas för avancerade användare.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Erbjuder fler alternativ under installation. De flesta av dessa kan ändras efter installation i adminpanelerna. Rekommenderas för avancerade användare.',
 	'LBL_LANG_1'						=> 'Vill du använda ett språkpaket i Sugar som inte är standard (dvs. US-Engelska), kan du ladda upp och installera språkpaketet nu. Du kommer också att kunna ladda upp och installera språkpaket inifrån Sugarapplikationen. Vill du hoppa över det nu, klicka på Nästa.',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Installera',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Radera',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'Godkännande av licens',
     'LBL_LICENSE_CHECKING'              => 'Kontrollerar systemkompatibilitet.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Kontrollerar miljö',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'Verifierar databasinloggning.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'Kontrollerar DB, autentiseringsuppgifter FTS.',
     'LBL_LICENSE_CHECK_PASSED'          => 'Systemet passerade kompatibilitetskontrollen.',
     'LBL_LICENSE_REDIRECT'              => 'Redirecting in',
 	'LBL_LICENSE_DIRECTIONS'			=> 'Ange din licensinformation nedan om du har den.',
@@ -372,7 +375,7 @@ $mod_strings = array(
 	'LBL_PERFORM_TITLE'					=> 'Utför konfiguration',
 	'LBL_PRINT'							=> 'Skriv ut',
 	'LBL_REG_CONF_1'					=> 'Fyll ut det korta formuläret nedan om du vill få nyheter om nya produkter, utbildning och specialerbjudanden, och exklusiva inbjudningar från SugarCRM. Vi varken säljer, hyr ut, delar eller på något annat sätt distribuerar denna information till tredje part.',
-	'LBL_REG_CONF_2'					=> 'Det enda som krävs för registrering är ditt namn och din epostadress. Resten av fälten är upp till dig, men det hjälper mycket. Vi varken säljer, hyr ut, delar eller på något annat sätt distribuerar denna information till tredje part.',
+	'LBL_REG_CONF_2'					=> 'Det enda som krävs för registrering är ditt namn och din emailadress. Resten av fälten är upp till dig, men det hjälper mycket. Vi varken säljer, hyr ut, delar eller på något annat sätt distribuerar denna information till tredje part.',
 	'LBL_REG_CONF_3'					=> 'Tack för att du registrerade dig! Klicka på Slutför för att logga in i SugarCRM. Första gången du loggar in använder du kontot "admin" med lösenordet du skrev in i steg 2.',
 	'LBL_REG_TITLE'						=> 'Registrering',
     'LBL_REG_NO_THANKS'                 => 'Nej tack',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'Läs denna viktiga information innan du fortsätter med installationen. Det kommer att hjälpa dig ta reda på om du är redo att installera programmet.',
 
 
-	'LBL_WELCOME_2'						=> 'För dokumentation om installation se <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugarwikin</a>.<BR><BR> Du kan även hitta hjälp från communityt på <a href="http://www.sugarcrm.com/forums/" target="_blank">Sugarforumen</a>.',
+	'LBL_WELCOME_2'						=> 'För installationsdokumentation, besök <a href="http://www.sugarcrm.com/crm/installation" target="_blank"> Sugar Wiki</a>.  <BR><BR>Kontakta en SugarCRM supportingenjör för installationshjälp, vänligen logga in till <a target="_blank" href="http://support.sugarcrm.com"> SugarCRM stöder Portal</a> och skickar ett supportärende.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>Välj ditt språk</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Installationsguiden',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Welcome to the SugarCRM',
@@ -448,11 +451,11 @@ $mod_strings = array(
 	'LBL_OOTB_WORKFLOW'		=> 'Genomför workflow uppgifter',
 	'LBL_OOTB_REPORTS'		=> 'Kör schemalagd process för att generera rapporter',
 	'LBL_OOTB_IE'			=> 'Kontrollera inkommande mailboxar',
-	'LBL_OOTB_BOUNCE'		=> 'Kör nattlig process för studsad kampanj epost',
-    'LBL_OOTB_CAMPAIGN'		=> 'Kör nattliga mass epost kampanjer',
+	'LBL_OOTB_BOUNCE'		=> 'Kör nattlig process för studsad kampanj email',
+    'LBL_OOTB_CAMPAIGN'		=> 'Kör nattliga mass-emailkampanjer',
 	'LBL_OOTB_PRUNE'		=> 'Rensa databasen den 1:a varje månad',
     'LBL_OOTB_TRACKER'		=> 'Ansa trackertabeller',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Kör Epostpåminnelse Meddelanden',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Aktivera meddelanden med email-påminnelser',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'Uppdatera tabellen tracker_sessions',
     'LBL_OOTB_CLEANUP_QUEUE' => 'Rensa Jobbköer',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'Sökmotor typ',
     'LBL_FTS_HELP'      => 'För att aktivera fulltextsökning, välj sökmotortyp och fyll i Host och Port där din sökmotor är hostad. Sugar har inbyggd sypport för elasticsearch engine.',
     'LBL_FTS_REQUIRED'    => 'Elasticsearch krävs.',
-    'LBL_FTS_ERROR'    => 'Kan inte ansluta till Fulltextsök server, vänligen bekräfta dina inställningar',
+    'LBL_FTS_CONN_ERROR'    => 'Det går inte att ansluta till Full Text Search-servern, vänligen verifiera inställningarna.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'Ingen fulltextsökning är tillgänglig för denna serverversion, kontrollera dina inställningar.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'Versioner som inte stöds av Elastic Search upptäcks. Vänligen använd versioner: %s',
 
     'LBL_PATCHES_TITLE'     => 'Installera senaste uppdateringar',
     'LBL_MODULE_TITLE'      => 'Download & Install Language Packs',
@@ -488,7 +493,7 @@ $mod_strings = array(
         'body' => '<div><table border=\\"0\\" cellspacing=\\"0\\" cellpadding=\\"0\\" width="550" align=\\"\\&quot;\\&quot;center\\&quot;\\&quot;\\"><tbody><tr><td colspan=\\"2\\"><p>Här är ditt användarnamn och ditt tillfälliga lösenord:</p><p>Användarnamn : $contact_user_user_name </p><p>Lösenord : $contact_user_user_hash </p><br><p>$config_site_url</p><br><p>Efter att du loggat in med ovanstående lösenord, kommer du behöva ändra lösenordet till ett eget.</p>   </td>         </tr><tr><td colspan=\\"2\\"></td>         </tr> </tbody></table> </div>',
         'txt_body' =>
 'är är ditt användarnamn och ditt tillfälliga lösenord: <br />Användarnamn : $contact_user_user_name<br />Lösenord : $contact_user_user_hash<br /><br />$config_site_url<br /><br />After you log in using the above password, you may be required to reset the password to one of your own choice.',
-        'name' => 'Systemgenererat lösenord epost',
+        'name' => 'Systemgenererat lösenordsemail',
         ),
     'advanced_password_forgot_password_email' => array(
         'subject' => 'Återställ ditt kontos lösenord',
@@ -496,7 +501,7 @@ $mod_strings = array(
         'body' => 'Du begärde nyss för $contact_user_pwd_last_changed att kunna återställa ditt kontolösenord.<br />Klicka på länken nedanför för att återställa ditt lösenord:<br />$contact_user_link_guid',
         'txt_body' =>
 'Du begärde nyss för $contact_user_pwd_last_changed att kunna återställa ditt kontolösenord. Klicka på länken nedanför för att återställa ditt lösenord: $contact_user_link_guid',
-        'name' => 'Glömt lösenord epost',
+        'name' => 'Glömt lösenord email',
         ),
 );
 

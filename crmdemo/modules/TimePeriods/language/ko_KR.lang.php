@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -52,5 +52,6 @@ $mod_strings = array (
   'LBL_LIST_WARNING' => '이 모듈에서의 변경내용은 {0}모듈의 기능성을 잠재적으로 깨뜨릴수 있습니다. {1}에 관련된 변경사항은 {0}설정을 통해 만들어져야 합니다.',
   'LBL_LEAF_CYCLE' => '리프 주기',
 
-  'LBL_DROPDOWN_TOOLTIP' => '{{start}}에서 {{end}}까지'
+  'LBL_DROPDOWN_TOOLTIP' => '{{start}}에서 {{end}}까지',
+  'LBL_DROPDOWN_TOOLTIP_RTL' => '{{start}} 부터 {{end}} 까지'
 );

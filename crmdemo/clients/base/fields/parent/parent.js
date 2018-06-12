@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -24,6 +24,9 @@
      */
     initialize: function(options) {
         this._super('initialize', [options]);
+
+        //FIXME: BR-4575 will remove this.
+        this.fieldDefs = _.extend(this.fieldDefs || {}, {link: 'parent'});
 
         /**
          * A hash of available modules in the parent type dropdown matching
@@ -103,8 +106,8 @@
         return this;
     },
     _getRelateId: function() {
-        return this.model.get("parent_id");
-    },
+         return this.model.get("parent_id");
+     },
     format: function(value) {
         var module;
         this.def.module = this.getSearchModule();
@@ -148,22 +151,6 @@
     },
 
     /**
-     * Enables or disables the module dropdown according to acls.
-     *
-     * @deprecated Since 7.7. Will be removed in 7.8.
-     * @param {string} action The acl action.
-     * @param {string} module the module to check access.
-     */
-    checkAcl: function(action, module) {
-        app.logger.warn('checkAcl is deprecated, it will be removed in 7.8');
-        if(app.acl.hasAccess(action, module) === false) {
-            this.$(this.typeFieldTag).select2("disable");
-        } else {
-            this.$(this.typeFieldTag).select2("enable");
-        }
-    },
-
-    /**
      * Filters the module list according to list acls.
      *
      * @param {Object} A hash of module names matching with their label.
@@ -202,6 +189,7 @@
                 if (!_.isUndefined(model.id)) {
                     this.model.set('parent_id', model.id, {silent: silent});
                     // FIXME we shouldn't rely on model.value... and hack the full_name here until we fix it properly
+                    // SC-4196 will fix this.
                     var value = model.value || model[this.def.rname || 'name'] || model['full_name'] ||
                         app.utils.formatNameLocale(model);
                     this.model.set('parent_name', value, {silent: silent});

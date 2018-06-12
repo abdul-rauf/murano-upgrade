@@ -33,7 +33,7 @@ require_once('modules/cl_Client_list/cl_Client_list_sugar.php');
 class cl_Client_list extends cl_Client_list_sugar {
 	
 	function cl_Client_list(){	
-		parent::cl_Client_list_sugar();
+		parent::__construct();
 	}
 	
 }

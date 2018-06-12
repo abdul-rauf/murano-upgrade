@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'fout: ontbrekende inloggegevens',
     'ERR_NO_UID' => 'fout: geen UID',
     'ERR_NO_IEID' => 'fout: geen ieID',
+    'ERR_INVALID_RECIPIENTS' => 'Er zijn een of meer ontvangers met een ongeldig e-mailadres. ' .
+        'Corrigeer dit en probeer het opnieuw.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Ongeldig E-mailadres',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'geen ontvangers opgegeven',

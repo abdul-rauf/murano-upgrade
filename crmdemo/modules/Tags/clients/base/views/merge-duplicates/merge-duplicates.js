@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -62,7 +62,7 @@
                             self.primaryRecord.trigger('duplicate:format:field');
                             self.primaryRecord.trigger('mergeduplicates:primary:saved');
                         },
-                        error: function(error) {
+                        error: function(model, error) {
                             if (error.status === 409) {
                                 app.utils.resolve409Conflict(error, self.primaryRecord, function(model, isDatabaseData) {
                                     if (model) {

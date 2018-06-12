@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Seleccioni un <b>Disseny a editar</b>.<br/<br/>Per canviar el disseny que conté els camps d&#39;introducció de dades, faci clic a <b>Vista d&#39;Edició</b>.<br/><br/>Per canviar el disseny que mostra les dades introduides en els camps a la Vista d&#39;Edició, faci clic a <b>Vista de Detall</b>.<br/><br/>Per canviar les columnes que apareixen a la llista per defecte, faci clic a <b>Vista de Llista</b>.<br/><br/>Per canviar els dissenys dels formularis de recerca Bàsica i Avançada, faci clic a <b>Recerca</b>.',
         'subpanelHelp'=> 'Seleccioni un <b>Subpanell</b> a editar.',
         'searchHelp' => 'Seleccioni un disseny de <b>Recerca</b> a editar.',
-        'labelsBtn'	=> 'Faci clic a <b>Guardar</b> per guardar les seves etiquetes personalitzades.',
+        'labelsBtn'	=> 'Editar les <b>Etiquetes</b> per mostrar els valors d&#39;aquest mòdul.',
         'newPackage'=>'Faci clic a <b>Nou Paquet</b> per crear un nou paquet.',
         'mbHelp'    => '<b>Benvingut al Constructor de Mòduls.</b><br/><br/>Utilitzi el <b>Constructor de Mòduls</b> per crear paquets que continguin mòduls personalitzats basats en objetes estàndar o personalitzats. <br/><br/>Per començar, faci clic a <b>Nou Paquet</b> per crear un nou paquet, o seleccioni el paquet a editar.<br/><br/> Un <b>paquet</b> actúa com contenidor de mòduls personalitzats, tots els quals son part d&#39;un projecte. El paquet pot contenir un o més mòduls personalitzats que poden estar relacionats entre ells o amb altres mòduls de l&#39;aplicació. <br/><br/>Per exemple: Pot voler crear un paquet que contingui un mòdul personalitzat que estigui relacionat amb el mòdul estàndar de Comptes. O, pot desitjar crear un paquet que contingui varis mòduls nous que funcionen conjuntament com un projecte i que estan relacionats entre ells i amb altres mòduls de l&#39;aplicació.',
         'exportBtn' => 'Faci clic a <b>Exportar Personalitzacions</b> per crear un paquet que contingui les personalitzacions que ha realitzat en l&#39;Estudi a varis mòduls específics.',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Nom - Ha de ser alfanumèric, sense espais i començant per lletra',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Paquet clau ja existeix',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Nom del paquet ja existeix',
+'LBL_JS_PACKAGE_NAME'=>'Nom del paquet - Ha de començar per una lletra i només pot incloure lletres, xifres i guions baixos. No s&#39;hi poden utilitzar espais ni cap altre caràcter especial.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Clau - Ha de ser alfanumèrica i començar amb una lletra.',
 'LBL_JS_VALIDATE_KEY'=>'Clau - Ha de ser alfanumèrica, sense espais i començat per lletra',
 'LBL_JS_VALIDATE_LABEL'=>'Si us Plau, introdueixi l&#39;etiqueta que s&#39;utilizarà com a Nom Visible d&#39;aquest mòdul',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Està segur que desitja eliminar aquesta relació?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Això farà la relació permanent. Està segur que desitja desplegar aquesta relació?',
 'LBL_CONFIRM_DONT_SAVE' => 'Hi ha canvis pendents de ser guardats, desitja guardar-los ara?',

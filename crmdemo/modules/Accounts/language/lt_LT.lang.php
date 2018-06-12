@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -61,8 +61,8 @@ $mod_strings = array (
 	'LBL_CITY' => 'Miestas:',
 	'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontaktai',
 	'LBL_COUNTRY' => 'Šalis:',
-	'LBL_DATE_ENTERED' => 'Sukurta:',
-	'LBL_DATE_MODIFIED' => 'Redaguota:',
+	'LBL_DATE_ENTERED' => 'Sukūrimo data:',
+	'LBL_DATE_MODIFIED' => 'Redagavimo data:',
 	'LBL_MODIFIED_ID'=>'Redaguotojo Id',
 	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Klientai',
 	'LBL_DESCRIPTION_INFORMATION' => 'Pastabos',

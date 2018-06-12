@@ -5,7 +5,7 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -121,7 +121,7 @@ class ViewLayoutView extends SugarView
 
                 $copyFromEditView = $this->request->getValidInputRequest('copyFromEditView');
                 if(!empty($copyFromEditView)){
-                    $editViewPanels = $parser2->convertFromCanonicalForm ( $parser2->_viewdefs [ 'panels' ] ) ;
+                    $editViewPanels = $parser2->convertFromCanonicalForm($parser2->_viewdefs['panels']);
                     $parser->_viewdefs [ 'panels' ] = $editViewPanels;
                     $parser->_fielddefs = $parser2->_fielddefs;
                     $parser->setUseTabs($parser2->getUseTabs());
@@ -133,15 +133,24 @@ class ViewLayoutView extends SugarView
 
         }
 
+        $available_fields = $parser->getAvailableFields();
+        $field_defs = $parser->getFieldDefs();
+
+        foreach($available_fields as $key => $value) {
+            if(isset($field_defs[$value['name']]['studio']) && $field_defs[$value['name']]['studio'] === false) {
+                unset($available_fields[$key]);
+            }
+        }
+
         $smarty->assign('buttons', $this->getButtonHTML($buttons));
 
         // assign fields and layout
-        $smarty->assign ( 'available_fields', $parser->getAvailableFields () ) ;
+        $smarty->assign ( 'available_fields', $available_fields ) ;
         
         $smarty->assign ( 'disable_layout', $disableLayout) ;
         $smarty->assign ( 'required_fields', $requiredFields) ;
         $smarty->assign ( 'layout', $parser->getLayout () ) ;
-        $smarty->assign ( 'field_defs', $parser->getFieldDefs () ) ;
+        $smarty->assign ( 'field_defs', $field_defs ) ;
         $smarty->assign ( 'view_module', $this->editModule ) ;
         $smarty->assign ( 'view', $this->editLayout ) ;
         $smarty->assign ( 'maxColumns', $parser->getMaxColumns() ) ;

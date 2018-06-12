@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -24,6 +24,13 @@
 (function(app) {
 
     var _keyPrefix = "";
+
+    var _warnIfBadType = function (value) {
+        if (_.isFunction(value) || _.isDate(value) || _.isRegExp(value) || value instanceof HTMLElement) {
+            app.logger.warn('Core.CacheManager: Providing any of Function, Date, RegExp, or HTMLElement to ' +
+                'the cache manager is deprecated in 7.8 and will be removed in 7.9');
+        }
+    };
 
     var _buildKey = function(key) {
         return _keyPrefix + key;
@@ -66,19 +73,21 @@
 
         /**
          * Gets an item from the cache.
-         * @param {String} key Item key.
-         * @return {Function/Number/Boolean/String/Array/Object} Item with the given key.
+         * @param {string} key Item key.
+         * @return {number|boolean|string|Array|Object} Item with the given key.
          */
         get: function(key) {
+            _warnIfBadType(key);
             return this.store.get(_buildKey(key));
         },
 
         /**
          * Puts an item into cache.
-         * @param {String} key Item key.
-         * @param {Function/Number/Boolean/String/Array/Object} value Item to put.
+         * @param {string} key Item key.
+         * @param {number|boolean|string|Array|Object} value Item to put.
          */
         set: function(key, value) {
+            _warnIfBadType(value);
             try {
                 this.store.set(_buildKey(key), value);
             } catch(e) {
@@ -92,10 +101,12 @@
 
         /**
          * Add an item to an existing item.
-         * @param {String} key Item key.
-         * @param {Function/Number/Boolean/String/Array/Object} value Item to add.
+         * @param {string} key Item key.
+         * @param {number|boolean|string|Array|Object} value Item to add.
          */
         add: function(key, value) {
+            app.logger.warn('Core.CacheManager#add: This method has been deprecated since 7.8 ' +
+                'and will be removed in 7.9');
             try {
                 this.store.add(_buildKey(key), value);
             } catch(e) {
@@ -169,7 +180,7 @@
          */
         cutAll: function(all) {
             if (all === true) return this.store.cutAll();
-            // FIXME when we upgrade underscore in SC-5094
+            // FIXME when migrate stash.js to a newer lib in SC-3004
             var obj = this.store.getAll();
             var keys = _.keys(obj);
             for (var i = 0, length = keys.length; i < length; i++) {
@@ -178,7 +189,6 @@
                 }
             }
         }
-
     };
 
     //Use eventing for cache cleaning

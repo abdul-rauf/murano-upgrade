@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,7 +14,7 @@
  * @extends View.View
  */
 ({
-    plugins: ['Dashlet', 'EllipsisInline'],
+    plugins: ['Dashlet'],
 
     /**
      * Manager totals for likely_adjusted
@@ -144,6 +144,11 @@
      * Holds the forecast isn't set up message if Forecasts hasn't been set up yet
      */
     forecastsNotSetUpMsg: undefined,
+
+    /**
+     * Flag for if loadData is currently running
+     */
+    loading: false,
 
     /**
      * @inheritdoc
@@ -426,7 +431,7 @@
     loadData: function(options) {
         // if in dashlet config, or if Forecasts is not configured properly,
         // do not load data
-        if(this.meta.config || !this.forecastsConfigOK || !this.isForecastSetup) {
+        if(this.meta.config || !this.forecastsConfigOK || !this.isForecastSetup || this.loading) {
             return;
         }
 
@@ -435,6 +440,7 @@
         }
 
         if(!_.isEmpty(this.model.get('selectedTimePeriod'))) {
+            this.loading = true;
             var url = this.getProjectedURL(),
                 cb = {
                     context: this,
@@ -443,10 +449,14 @@
                             data = options.beforeParseData(data);
                             data.parsedData = true;
                         }
-
                         this.handleNewDataFromServer(data)
                     }, this, options),
-                    complete: options ? options.complete : null
+                    complete: _.bind(function(){
+                        this.loading = false;
+                        if (options && options.complete && _.isFunction(options.complete)) {
+                            options.complete();
+                        }
+                    }, this)
                 };
 
             app.api.call('read', url, null, null, cb);

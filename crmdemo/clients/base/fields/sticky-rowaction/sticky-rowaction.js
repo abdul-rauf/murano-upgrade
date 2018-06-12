@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -40,6 +40,11 @@
             //Remove event listeners on this action since it is disabled
             this.undelegateEvents();
         }
+        // this can't be inside the isDisabled if block above because css_class can be set to 'disabled' by metadata
+        if (!_.isUndefined(this.def.css_class) && this.def.css_class.indexOf('disabled') !== -1) {
+            this.tabIndex = -1;
+        }
+
         this._super("_render");
     },
     /**

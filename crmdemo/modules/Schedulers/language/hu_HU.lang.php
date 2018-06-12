@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Diagnosztikai eszközfájlok eltávolítása',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Ideiglenes PDF fájlok eltávolítása',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'tracker_sessions tábláinak frissítése',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Email emlékeztető figyelmeztetések futtatása',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Futtassa az Email Emlékeztető Értesítéseket',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Munkalista törlése',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Időperiódusok létrehozása',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent cikkek frissítése.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Jóváhagyott cikkek közzététele és KB cikkek lejárttá tétele.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Folyamat Szerző Ütemezett Munkája',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow ütemezett feladat',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervallum:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Munkák frissítése',
 'LBL_POLLMONITOREDINBOXES' => 'Ellenőrizze a beérkező leveleit',
 'LBL_PERFORMFULLFTSINDEX' => 'Rendszerindexálás szöveges kereséshez',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Ideiglenes PDF fájlok eltávolítása',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Jóváhagyott cikkek publikálása és KB cikkek elévültté nyilvánítása.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch sorütemező',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Diagnosztikai eszközfájlok törlése',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Ideiglenes fájlok törlése',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Tömeges kampány emailek éjszakai kiküldése',
 'LBL_ASYNCMASSUPDATE' => 'Aszinkron tömeges frissítések végrehajtása',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Követő folyamattáblák frissítése',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Időperiódusok létrehozása',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'Email emlékeztető figyelmeztetések küldése',
+'LBL_SENDEMAILREMINDERS'=> 'Email emlékeztetők küldésének futtatása',
 'LBL_CLEANJOBQUEUE' => 'Munkalista törlése',
 'LBL_CLEANOLDRECORDLISTS' => 'Régi rekord listák törlése',
 );

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -247,7 +247,7 @@
             },
 
             /**
-             * Internal server error.
+             * Internal server error
              *
              * Provide custom `handleServerError` handler.
              * @method
@@ -255,9 +255,20 @@
             "500": function(error) {
                 this._callCustomHandler(error, this.handleServerError);
             },
-            
+
             /**
-             * Internal server error.
+             * Bad Gateway
+             *
+             * Provide custom `handleServerError` handler.
+             * @method
+             */
+
+            "502": function(error) {
+                this._callCustomHandler(error, this.handleServerError);
+            },
+
+            /**
+             * Service Unavailable
              *
              * Provide custom `handleServerError` handler.
              * @method
@@ -416,7 +427,8 @@
                 case 'view_render_denied':
                     title = app.lang.get('ERR_NO_VIEW_ACCESS_TITLE');
                     level = "warning";  // This isn't an application error, this is ACL enforcement.
-                    messages = [app.utils.formatString(app.lang.get('ERR_NO_VIEW_ACCESS_MSG'),[component.module])];
+                    var module = app.lang.getModuleName(component.module, {plural: true});
+                    messages = [app.utils.formatString(app.lang.get('ERR_NO_VIEW_ACCESS_MSG'),[module])];
                     break;
                 case 'layout_render':
                     title = app.lang.get('ERR_LAYOUT_RENDER_TITLE');

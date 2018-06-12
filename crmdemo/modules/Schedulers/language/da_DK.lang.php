@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Fjern diagnosticeringsværktøjsfiler',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Fjern midlertidige filer',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Opdater sporingssessionstabel',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Kør e-mail påmindelses notfikationer',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Kør e-mail-påmindelsesbeskeder',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Rens job kø',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Opret fremtidige tidsperioder',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Opdatér KBContent artikler.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Udgiv godkendte artikler & udløb KB-artikler.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Proces Forfatter Planlagt job',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow planlagt Job',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Opdater job',
 'LBL_POLLMONITOREDINBOXES' => 'Tjek indgående e-mail-konti',
 'LBL_PERFORMFULLFTSINDEX' => 'Fuldtekst søgeindeks system',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Fjern midlertidige PDF-filer',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Udgiv godkendte artikler & udløb KB-artikler.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch kø-planlægger',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Fjern diagnosticeringsværktøjsfiler',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Fjern midlertidige filer',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Kør hver nat kampagner med masse-e-mails',
 'LBL_ASYNCMASSUPDATE' => 'Udfør Asynchronous masse opdateringer',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Opdater sporingssessionstabeller',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Opret fremtidige tidsperioder',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'Kør e-mail påmindelses afsendelse',
+'LBL_SENDEMAILREMINDERS'=> 'Kør e-mail-påmindelser sender',
 'LBL_CLEANJOBQUEUE' => 'Rens job kø',
 'LBL_CLEANOLDRECORDLISTS' => 'Oprydning i gamle rekord lister',
 );

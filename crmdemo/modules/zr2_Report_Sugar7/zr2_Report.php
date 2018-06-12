@@ -31,7 +31,7 @@ class zr2_Report extends Basic {
 	var $module_dir = "zr2_Report";
 	
 	function zr2_Report() {
-		parent::Basic();
+		parent::__construct();
 	}
 
 	function fill_in_additional_list_fields() {

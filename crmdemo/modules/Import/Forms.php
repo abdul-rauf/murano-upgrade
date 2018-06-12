@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -53,7 +53,7 @@ function getControl(
         }
 
         // if this is the id relation field, then don't have a pop-up selector.
-        if( $vardef['type'] == 'relate' && $vardef['id_name'] == $vardef['name']) {
+        if ($vardef['type'] == 'relate' && isset($vardef['id_name']) && $vardef['id_name'] == $vardef['name']) {
             $vardef['type'] = 'varchar';
         }
 
@@ -72,6 +72,11 @@ function getControl(
             if ($fn === 'getEmailAddressWidget') {
                 unset($vardef['function']);
             }
+        }
+
+        // no widget for email field
+        if ($vardef['type'] == 'email') {
+            $vardef['type'] = 'varchar';
         }
 
         // load SugarFieldHandler to render the field tpl file

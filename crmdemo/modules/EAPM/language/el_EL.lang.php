@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -53,6 +53,7 @@ $mod_strings = array (
   'LBL_API_OAUTHTOKEN' => 'Ανοιχτή Εξουσιοδότηση',
   'LBL_AUTH_UNSUPPORTED' => "Αυτή η μέθοδος εξουσιοδότησης δεν υποστηρίζεται από την εφαρμογή",
   'LBL_AUTH_ERROR' => 'Η προσπάθεια να συνδεθεί με αυτόν τον λογαριασμό, απέτυχε.',
+  'LBL_CHANGE_APPLICATION_ERROR' => 'Ο χρήστης δεν επιτρέπεται να αλλάξει το όνομα της εφαρμογής.',
   'LBL_VALIDATED' => 'Συνδεδεμένο',
   'LBL_ACTIVE' => 'Ενεργό',
   'LBL_OAUTH_NAME' => '%',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'LBL_BLANK'	=> '-なし-',
+	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => '電話',
     'LBL_MODULE_NAME_SINGULAR'	=> '電話',
     'LBL_MODULE_TITLE' => '電話: ホーム',
@@ -66,13 +66,13 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'すべての招待者にEメール',
     'LBL_EMAIL_REMINDER' => 'Eメールリマインダ',
     'LBL_EMAIL_REMINDER_TIME' => 'Eメールリマインダ時間',
-    'LBL_POPUP_REMINDER_TIME' => 'リマインダをポップアップする時間',
+    'LBL_POPUP_REMINDER_TIME' => 'ポップアップリマインダ時間',
     'LBL_SEND_BUTTON_TITLE'=>'保存＆招待送信 [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'保存＆招待送信',
 	'LBL_DATE_END'=>'終了日',
 	'LBL_TIME_END'=>'終了時間',
-	'LBL_REMINDER_TIME'=>'リマインダ時間',
+    'LBL_REMINDER_TIME'=>'リマインダ時間',
     'LBL_EMAIL_REMINDER_SENT' => 'Eメールリマインダ送信済み',
     'LBL_SEARCH_BUTTON'=> '検索',
     'LBL_ACTIVITIES_REPORTS' => 'アクティビティレポート',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => '定期的な予定をすべて削除',
     'LBL_DATE_END_ERROR' => '最終日が開始日より前です',
     'LBL_REPEAT_PARENT_ID' => '関連親ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => '電話の定期予定ID。最初の電話開始日',
     'LBL_RECURRING_SOURCE' => '循環ソース',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => '本当にこの定期的なレコードをすべてはずしてよいですか？',
     'LBL_RECURRING_LIMIT_ERROR' => '重複できる上限 $limit を超えたため、この電話をスケジュールすることはできません。',

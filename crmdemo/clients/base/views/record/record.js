@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,6 +14,11 @@
  * @extends View.View
  */
 ({
+    /**
+     * @inheritdoc
+     */
+    dataView: 'record',
+
     inlineEditMode: false,
 
     createMode: false,
@@ -25,8 +30,7 @@
         'Editable',
         'Audit',
         'FindDuplicates',
-        'ToggleMoreLess',
-        'Tooltip'
+        'ToggleMoreLess'
     ],
 
     enableHeaderButtons: true,
@@ -65,10 +69,17 @@
     _containerWidth: 0,
 
     /**
+     * Flag indicating if the model for this view contains fields that are locked.
+     *
+     * @private
+     * @type {boolean}
+     */
+    _hasLockedFields: false,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
-        _.bindAll(this);
         /**
          * @inheritdoc
          * @property {Object} meta
@@ -79,6 +90,8 @@
         options.meta.hashSync = _.isUndefined(options.meta.hashSync) ? true : options.meta.hashSync;
         app.view.View.prototype.initialize.call(this, options);
         this.buttons = {};
+        //Adding the favorite and follow fields.
+        this.context.addFields(this._getDataFields());
 
         /**
          * An array of the {@link #alerts alert} names in this view.
@@ -136,14 +149,10 @@
         };
         this.createMode = this.context.get('create') ? true : false;
 
-        // Even in createMode we want it to start in detail so that we, later, respect
-        // this.editableFields (the list after pruning out readonly fields, etc.)
-        this.action = 'detail';
+        this.action = this.context.get('action') || 'detail';
 
         this.context.on('change:record_label', this.setLabel, this);
         this.context.set('viewed', true);
-        //Set the context to load the field list from the record metadata.
-        this.context.set('dataView', 'record');
         this.model.on('duplicate:before', this.setupDuplicateFields, this);
         // displays error msg when required field is missing
         this.model.on('error:validation', this.alerts.showInvalidModel, this);
@@ -169,14 +178,13 @@
 
         this.adjustHeaderpane = _.bind(_.debounce(this.adjustHeaderpane, 50), this);
         $(window).on('resize.' + this.cid, this.adjustHeaderpane);
-
-        $(window).on('resize.' + this.cid, this.overflowTabs);
+        $(window).on('resize.' + this.cid, _.bind(this.overflowTabs, this));
 
         // initialize tab view after the component is attached to DOM
         this.on('append', function() {
             this.overflowTabs();
             this.handleActiveTab();
-        });
+        }, this);
 
         this.on('render', this.registerShortcuts, this);
     },
@@ -185,12 +193,12 @@
      * Handler for when the ACLs change on the model. Toggles the `hide` class
      * on the pencil wrapper for each of the fields on this view that had ACL
      * changes.
+     * Hide the wrapper if no access to edit.
      *
-     * @param {Object} diff The diff object of fields and whether or not they
-     *   had ACL changes.
+     * @param {Object} diff The diff object of fields with ACL changes.
      */
     handleAclChange: function(diff) {
-        var fields = _.keys(diff);
+        var editAccess = app.acl.hasAccessToModel('edit', this.model);
 
         this._setNoEditFields();
         this.setEditableFields();
@@ -202,13 +210,128 @@
             var $pencilEl = $(pencilEl);
             var field = $pencilEl.data('name');
 
-            if (!diff[field]) {
+            if (editAccess && !diff[field]) {
                 return;
             }
 
             var hidePencil = !_.isUndefined(noEditFieldsMap[field]);
             $pencilEl.toggleClass('hide', hidePencil);
         }, this);
+    },
+
+    /**
+     * Go through the field controllers and set the locked states accordingly.
+     */
+    handleLockedFields: function() {
+        var self = this;
+
+        // Reset the locked field state
+        this._setLockedFieldFlag(false);
+
+        var lockedFields = this.model.get('locked_fields');
+
+        // Loop and check locked field state of each field
+        _.each(this.$('.record-lock-link-wrapper[data-name]'), function(el) {
+            var $el = $(el);
+            var fieldName = $el.data('name');
+
+            // No field name, nothing to do
+            if (fieldName == '') {
+                return;
+            }
+
+            // Get the field object
+            var field = this.getField(fieldName);
+
+            // Is the current field locked?
+            var isLocked = _.contains(lockedFields, fieldName);
+
+            // Special handling for fieldsets
+            if (field.fields) {
+                // Some fieldsets have fields that are only for viewing, like the
+                // `copy` field on alternate addresses. Those should be filtered
+                // out of the fields list.
+                var fieldSetFields = _.filter(field.fields, function(fieldSetField) {
+                    return !_.isUndefined(self.model.get(fieldSetField.name));
+                });
+
+                // A fieldset is locked when all of its actual fields are locked
+                isLocked = !_.isEmpty(fieldSetFields) && _.every(fieldSetFields, function(fieldSetField) {
+                    return _.contains(lockedFields, fieldSetField.name);
+                });
+
+                var hasLockedFieldSetField = _.some(fieldSetFields, function(fieldSetField) {
+                    return _.contains(lockedFields, fieldSetField.name);
+                });
+
+                if (hasLockedFieldSetField && this.getCurrentButtonState() === this.STATE.EDIT) {
+                    _.defer(function(field) {
+                        // by toggling the fieldset here, we allow the acl check to handle individual field states
+                        self.toggleField(field, true);
+                    }, field);
+                }
+            }
+
+            // Set the flag that says if we have locked fields
+            this._setLockedFieldFlag(this.hasLockedFields() || isLocked || hasLockedFieldSetField);
+
+            // If the field is locked and we are in edit mode...
+            if (isLocked && this.getCurrentButtonState() === this.STATE.EDIT) {
+                _.defer(function(field) {
+                    if (field.disposed) {
+                        return;
+                    }
+
+                    // Toggles the field state from edit to not edit
+                    self.toggleField(field, false);
+                }, field);
+            }
+
+            // Handle toggling the class
+            $el.toggleClass('hide', !isLocked);
+        }, this);
+
+        // Show the locked field warning if there is one
+        if (this.hasLockedFields()) {
+            this.warnLockedFields();
+        }
+    },
+
+    /**
+     * Returns the flag that tells whether this object has locked fields or not
+     * @return {boolean}
+     */
+    hasLockedFields: function() {
+        return this._hasLockedFields;
+    },
+
+    /**
+     * Sets the locked field flag
+     * @param {boolean} setFlag
+     * @private
+     */
+    _setLockedFieldFlag: function(setFlag) {
+        this._hasLockedFields = setFlag;
+    },
+
+    /**
+     * Alert warning if there are locked fields on the model.
+     */
+    warnLockedFields: function() {
+        if (this.getCurrentButtonState() !== this.STATE.EDIT) {
+            return;
+        }
+
+        if (this.context.get('lockedFieldsWarning') === false) {
+            this.context.set('lockedFieldsWarning', true);
+        } else {
+            app.alert.show('record_locked_field_warning', {
+                level: 'warning',
+                messages: 'LBL_LOCKED_FIELD_RECORD_VIEW_WARNING',
+                autoClose: true,
+                autoCloseDelay: 5000
+            });
+        }
     },
 
     /**
@@ -320,17 +443,12 @@
             }
         }, this);
 
-        this.initButtons();
-        this.setEditableFields();
-
-        if (this.context.get('action') === 'edit') {
+        if (this.action === 'edit') {
             this.setButtonStates(this.STATE.EDIT);
             this.toggleEdit(true);
         } else {
             this.setButtonStates(this.STATE.VIEW);
             if (this.createMode) {
-                // RecordView starts with action as detail; once this.editableFields has been set (e.g.
-                // readonly's pruned out), we can call toggleEdit - so only fields that should be are editable
                 this.toggleEdit(true);
             }
         }
@@ -342,6 +460,23 @@
             this.handleActiveTab();
             this.overflowTabs();
         }
+    },
+
+    _renderField: function(field, $fieldEl) {
+        // When we render the view, we need to enforce `action`
+        // to be 'detail' if the field is non editable.
+        // This is due to how View.Field#_loadTemplate currently works.
+        // FIXME SC-6037: Will remove this hack.
+        if (!_.contains(this.editableFields, field)) {
+            field.action = 'detail';
+            // Set viewName to `detail` if it was set to `edit` (because the field is non-editable)
+            // but if it is not `edit` (hardcoded e.g. preview template), we want to keep it as it was.
+            if (field.options.viewName === 'edit') {
+                field.options.viewName = 'detail';
+            }
+        }
+
+        this._super('_renderField', [field, $fieldEl]);
     },
 
     /**
@@ -466,6 +601,7 @@
      * @private
      */
     _setNoEditFields: function(panels) {
+        var self = this;
         panels = panels || this.meta.panels;
 
         delete this.noEditFields;
@@ -480,8 +616,15 @@
                 }
 
                 // disable the pencil icon if the user doesn't have ACLs
-                if (field.type === 'fieldset') {
-                    if (field.readonly || _.every(field.fields, function(f) {
+                if (field.fields) {
+                    // Some fieldsets have fields that are only for viewing, like the
+                    // `copy` field on alternate addresses. Those should be filtered
+                    // out of the fields list.
+                    var fieldSetFields = _.filter(field.fields, function(fieldSetField) {
+                        return !_.isUndefined(self.model.get(fieldSetField.name));
+                    });
+
+                    if (field.readonly || _.every(fieldSetFields, function(f) {
                         return !app.acl.hasAccessToModel('edit', this.model, f.name);
                     }, this)) {
                         this.noEditFields.push(field.name);
@@ -494,38 +637,26 @@
     },
 
     /**
-     * sets editable fields
+     * Returns a list of fields that are not buttons of the view.
+     *
+     * @private
+     */
+    _getNonButtonFields: function() {
+        return _.filter(this.fields, _.bind(function(field) {
+            if (field.name) {
+                return !this.buttons[field.name];
+            }
+
+            return true;
+        }, this));
+    },
+
+    /**
+     * Uses {@link app.plugins.Editable} to
+     * set the internal property of {@link #editableFields}.
      */
     setEditableFields: function() {
-        delete this.editableFields;
-        this.editableFields = [];
-
-        var previousField, firstField;
-        _.each(this.fields, function(field) {
-
-            var readonlyField = field.def.readonly ||
-                _.indexOf(this.noEditFields, field.def.name) >= 0 ||
-                field.parent || (field.name && this.buttons[field.name]);
-
-            if (readonlyField) {
-                // exclude read only fields
-                return;
-            }
-            if (previousField) {
-                previousField.nextField = field;
-                field.prevField = previousField;
-            } else {
-                firstField = field;
-            }
-            previousField = field;
-            this.editableFields.push(field);
-
-        }, this);
-
-        if (previousField) {
-            previousField.nextField = firstField;
-            firstField.prevField = previousField;
-        }
+        this.editableFields = this.getEditableFields(this._getNonButtonFields(), this.noEditFields);
     },
 
     initButtons: function() {
@@ -559,19 +690,17 @@
     _renderHtml: function() {
         this.showPreviousNextBtnGroup();
         app.view.View.prototype._renderHtml.call(this);
+        this.initButtons();
+        this.setEditableFields();
         this.adjustHeaderpane();
     },
 
     bindDataChange: function() {
-        this.model.on('change', function(fieldType) {
+        // Handle locked field changes
+        this.model.on('change:locked_fields', this.handleLockedFields, this);
+        this.model.on('change', function() {
             if (this.inlineEditMode) {
                 this.setButtonStates(this.STATE.EDIT);
-            }
-            if (this.model.isNotEmpty !== true && fieldType !== 'image') {
-                this.model.isNotEmpty = true;
-                if (!this.disposed) {
-                    this.render();
-                }
             }
         }, this);
     },
@@ -715,6 +844,7 @@
 
     editClicked: function() {
         this.setButtonStates(this.STATE.EDIT);
+        this.action = 'edit';
         this.toggleEdit(true);
         this.setRoute('edit');
     },
@@ -754,8 +884,9 @@
     },
 
     cancelClicked: function() {
-        this.handleCancel();
         this.setButtonStates(this.STATE.VIEW);
+        this.action = 'detail';
+        this.handleCancel();
         this.clearValidationErrors(this.editableFields);
         this.setRoute();
         this.unsetContextAction();
@@ -773,6 +904,10 @@
      */
     toggleEdit: function(isEdit) {
         var self = this;
+        this.$('.record-lock-link').toggleClass('record-lock-link-on', isEdit);
+        if (this.hasLockedFields()) {
+            this.warnLockedFields();
+        }
         this.toggleFields(this.editableFields, isEdit, function() {
             self.toggleViewButtons(isEdit);
             self.adjustHeaderpaneFields();
@@ -834,6 +969,7 @@
 
         if (!this.disposed) {
             this.setButtonStates(this.STATE.VIEW);
+            this.action = 'detail';
             this.setRoute();
             this.unsetContextAction();
             this.toggleEdit(false);
@@ -848,7 +984,11 @@
                 // fields to the record that may have been changed on the server on save.
                 _.each(this.context.children, function(child) {
                     if (child.get('isSubpanel') && !child.get('hidden')) {
-                        child.get('collapsed') ? child.resetLoadFlag(false) : child.reloadData({recursive: false});
+                        if (child.get('collapsed')) {
+                            child.resetLoadFlag({recursive: false});
+                        } else {
+                            child.reloadData({recursive: false});
+                        }
                     }
                 });
                 if (this.createMode) {
@@ -865,7 +1005,7 @@
         options = {
             showAlerts: true,
             success: successCallback,
-            error: _.bind(function(error) {
+            error: _.bind(function(model, error) {
                 if (error.status === 412 && !error.request.metadataRetry) {
                     this.handleMetadataSyncError(error);
                 } else if (error.status === 409) {
@@ -914,9 +1054,9 @@
     },
 
     handleCancel: function() {
+        this.inlineEditMode = false;
         this.model.revertAttributes();
         this.toggleEdit(false);
-        this.inlineEditMode = false;
         this._dismissAllAlerts();
     },
 
@@ -1070,7 +1210,7 @@
         if (field.view.meta && field.view.meta.useTabsAndPanels) {
             // If field's panel is a tab, switch to the tab that contains the field with the error
             if (fieldTab.length > 0) {
-                tabLink = this.$('[href="#'+fieldTab.attr('id')+'"].[data-toggle="tab"]');
+                tabLink = this.$('[href="#' + fieldTab.attr('id') + '"][data-toggle="tab"]');
                 tabLink.tab('show');
                 // Put a ! next to the tab if one doesn't already exist
                 if (tabLink.find('.fa-exclamation-circle').length === 0) {
@@ -1109,7 +1249,7 @@
             } else {
                 field.hide();
             }
-        }, this);
+        });
 
         this.toggleButtons(true);
     },
@@ -1423,14 +1563,45 @@
     _setMaxWidthForEllipsifiedCell: function($ellipsisCell, width) {
         var ellipsifiedCell,
             fieldType = $ellipsisCell.data('type');
-
         if (fieldType === 'fullname' || fieldType === 'dashboardtitle') {
             ellipsifiedCell = this.getField($ellipsisCell.data('name'));
             width -= ellipsifiedCell.getCellPadding();
             ellipsifiedCell.setMaxWidth(width);
         } else {
-            $ellipsisCell.children().css({'max-width': width});
+            $ellipsisCell.css({'width': width}).children().css({'max-width': (width - 2) + 'px'});
         }
+    },
+
+    /**
+     * Returns some fields to be used with app.view.View.getFieldNames() if their corresponding
+     * meta attribute is true
+     *
+     * @private
+     */
+    _getDataFields: function() {
+        var fields = [];
+
+        var favorite = _.find(this.meta.panels, function(panel) {
+            return _.find(panel.fields, function(field) {
+                return field.type === 'favorite';
+            });
+        });
+
+        var follow = _.find(this.meta.panels, function(panel) {
+            return _.find(panel.fields, function(field) {
+                return field.type === 'follow';
+            });
+        });
+
+        if (favorite) {
+            fields.push('my_favorite');
+        }
+
+        if (follow) {
+            fields.push('following');
+        }
+
+        return fields;
     },
 
     /**
@@ -1549,65 +1720,127 @@
      * Register keyboard shortcuts.
      */
     registerShortcuts: function() {
-        app.shortcuts.register('Record:Edit', ['e','ctrl+alt+i'], function() {
-            var $editButton = this.$('.headerpane [name=edit_button]');
-            if ($editButton.is(':visible') && !$editButton.hasClass('disabled')) {
-                $editButton.click();
+        app.shortcuts.register({
+            id: 'Record:Edit',
+            keys: ['e','mod+alt+i'],
+            component: this,
+            description: 'LBL_SHORTCUT_RECORD_EDIT',
+            handler: function() {
+                var $editButton = this.$('.headerpane [name=edit_button]');
+                if ($editButton.is(':visible') && !$editButton.hasClass('disabled')) {
+                    $editButton.click();
+                }
             }
-        }, this);
+        });
 
-        app.shortcuts.register('Record:Delete', ['d','ctrl+alt+d'], function() {
-            this.$('.headerpane [data-toggle=dropdown]:visible').click().blur();
-            this.$('.headerpane [name=delete_button]:visible').click();
-        }, this);
-
-        app.shortcuts.register('Record:Save', ['ctrl+s','ctrl+alt+a'], function() {
-            var $saveButton = this.$('a[name=save_button]');
-            if ($saveButton.is(':visible') && !$saveButton.hasClass('disabled')) {
-                $saveButton.click();
+        app.shortcuts.register({
+            id: 'Record:Delete',
+            keys: ['d','mod+alt+d'],
+            component: this,
+            description: 'LBL_SHORTCUT_RECORD_DELETE',
+            handler: function() {
+                this.$('.headerpane [data-toggle=dropdown]:visible').click().blur();
+                this.$('.headerpane [name=delete_button]:visible').click();
             }
-        }, this, true);
+        });
 
-        app.shortcuts.register('Record:Cancel', ['esc','ctrl+alt+l'], function() {
-            var $cancelButton = this.$('a[name=cancel_button]');
-            if ($cancelButton.is(':visible') && !$cancelButton.hasClass('disabled')) {
-                $cancelButton.click();
+        app.shortcuts.register({
+            id: 'Record:Save',
+            keys: ['mod+s','mod+alt+a'],
+            component: this,
+            description: 'LBL_SHORTCUT_RECORD_SAVE',
+            callOnFocus: true,
+            handler: function() {
+                var $saveButton = this.$('a[name=save_button]');
+                if ($saveButton.is(':visible') && !$saveButton.hasClass('disabled')) {
+                    $saveButton.click();
+                }
             }
-        }, this, true);
+        });
 
-        app.shortcuts.register('Record:Previous', 'h', function() {
-            var $previous = this.$('.btn.previous-row');
-            if ($previous.is(':visible') && !$previous.hasClass('disabled')) {
-                $previous.click();
+        app.shortcuts.register({
+            id: 'Record:Cancel',
+            keys: ['esc','mod+alt+l'],
+            component: this,
+            description: 'LBL_SHORTCUT_RECORD_CANCEL',
+            callOnFocus: true,
+            handler: function() {
+                var $cancelButton = this.$('a[name=cancel_button]');
+                if ($cancelButton.is(':visible') && !$cancelButton.hasClass('disabled')) {
+                    $cancelButton.click();
+                }
             }
-        }, this);
+        });
 
-        app.shortcuts.register('Record:Next', 'l', function() {
-            var $next = this.$('.btn.next-row');
-            if ($next.is(':visible') && !$next.hasClass('disabled')) {
-                $next.click();
+        app.shortcuts.register({
+            id: 'Record:Previous',
+            keys: 'h',
+            component: this,
+            description: 'LBL_SHORTCUT_RECORD_PREVIOUS',
+            handler: function() {
+                var $previous = this.$('.btn.previous-row');
+                if ($previous.is(':visible') && !$previous.hasClass('disabled')) {
+                    $previous.click();
+                }
             }
-        }, this);
+        });
 
-        app.shortcuts.register('Record:Favorite', 'f a', function() {
-            this.$('.headerpane .fa-favorite:visible').click();
-        }, this);
-
-        app.shortcuts.register('Record:Follow', 'f o', function() {
-            this.$('.headerpane [name=follow]:visible').click();
-        }, this);
-
-        app.shortcuts.register('Record:Copy', ['shift+c','ctrl+alt+u'], function() {
-            this.$('.headerpane [data-toggle=dropdown]:visible').click().blur();
-            this.$('.headerpane [name=duplicate_button]:visible').click();
-        }, this);
-
-        app.shortcuts.register('Record:Action:More', 'm', function() {
-            var $primaryDropdown = this.$('.headerpane .btn-primary[data-toggle=dropdown]:visible');
-            if (($primaryDropdown.length > 0) && !$primaryDropdown.hasClass('disabled')) {
-                $primaryDropdown.click();
+        app.shortcuts.register({
+            id: 'Record:Next',
+            keys: 'l',
+            component: this,
+            description: 'LBL_SHORTCUT_RECORD_NEXT',
+            handler: function() {
+                var $next = this.$('.btn.next-row');
+                if ($next.is(':visible') && !$next.hasClass('disabled')) {
+                    $next.click();
+                }
             }
-        }, this);
+        });
+
+        app.shortcuts.register({
+            id: 'Record:Favorite',
+            keys: 'f a',
+            component: this,
+            description: 'LBL_SHORTCUT_FAVORITE_RECORD',
+            handler: function() {
+                this.$('.headerpane .fa-favorite:visible').click();
+            }
+        });
+
+        app.shortcuts.register({
+            id: 'Record:Follow',
+            keys: 'f o',
+            component: this,
+            description: 'LBL_SHORTCUT_FOLLOW_RECORD',
+            handler: function() {
+                this.$('.headerpane [name=follow]:visible').click();
+            }
+        });
+
+        app.shortcuts.register({
+            id: 'Record:Copy',
+            keys: ['shift+c','mod+alt+u'],
+            component: this,
+            description: 'LBL_SHORTCUT_COPY_RECORD',
+            handler: function() {
+                this.$('.headerpane [data-toggle=dropdown]:visible').click().blur();
+                this.$('.headerpane [name=duplicate_button]:visible').click();
+            }
+        });
+
+        app.shortcuts.register({
+            id: 'Record:Action:More',
+            keys: 'm',
+            component: this,
+            description: 'LBL_SHORTCUT_OPEN_MORE_ACTION',
+            handler: function() {
+                var $primaryDropdown = this.$('.headerpane .btn-primary[data-toggle=dropdown]:visible');
+                if (($primaryDropdown.length > 0) && !$primaryDropdown.hasClass('disabled')) {
+                    $primaryDropdown.click();
+                }
+            }
+        });
     },
 
     /**

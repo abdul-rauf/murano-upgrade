@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,6 +20,7 @@ global $timedate;
  
 $mod_strings = array (
     'LBL_GOOD_FILE' => 'Importimi i dosjeve të lexuara ishte e suksesshme',
+    'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Regjistrimi i importuar është duke u përdorur në një proces dhe nuk mund të modifikohet, pasi disa fushave u është bllokuar modifikimi nga procesi.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Reshta nuk ëshin të importuara për shkak të një gabimi',
     'LBL_UPDATE_SUCCESSFULLY' => 'rifreskimi i regjistrimeve ishte i suksesshëm',
     'LBL_SUCCESSFULLY_IMPORTED' => 'Regjistrimet ishin të krijuara',
@@ -29,11 +30,11 @@ $mod_strings = array (
     'LBL_ERROR_UNABLE_TO_PUBLISH' => 'E pamudur për tu publikuar. Ekziston hartë tjetër të importimit me të njejtën emër.',
     'LBL_ERROR_UNABLE_TO_UNPUBLISH' => 'Në pamundësi për të nën-publikuar hartën në pronësi nga përdoruesi tjetër.Harta juaj e importit sipas emrit të njëjtë.',
     'LBL_ERROR_IMPORTS_NOT_SET_UP' => 'Importimet nuk janë të vendosura për këtë llojë module',
-    'LBL_IMPORT_TYPE' => 'Çfar dëshiron të bësh me të dhënat e importuara?',
+    'LBL_IMPORT_TYPE' => 'Çfarë dëshiron të bësh me të dhënat e importuara?',
     'LBL_IMPORT_BUTTON' => 'Krijo vetëm regjistrime të reja.',
     'LBL_UPDATE_BUTTON' => 'Krijo regjistrime të reja dhe rifresko regjistrimet ekzistuese',
-    'LBL_CREATE_BUTTON_HELP' => 'Përdor këtë opcion për të krijuar regjistrime të reja. Shënim: Reshtat në dosjet e importuara që përmbajnë vlera që përshtaten me ID e regjistrimeve ekzistuese nuk do të importohen nëse vlerat janë të hartuara në fushën e ID.',
-    'LBL_UPDATE_BUTTON_HELP' => 'Përdor opcionin për të rinovuar regjistrimet ekzistuese. Të dhënat në dosjet e importuara do të përputhen me regjistrimet ekzituese të bazuara në ID e regjistruar',
+    'LBL_CREATE_BUTTON_HELP' => 'Përdor këtë opsion për të krijuar regjistrime të reja. Shënim: Reshtat në dosjet e importuara që përmbajnë vlera që përshtaten me ID e regjistrimeve ekzistuese nuk do të importohen nëse vlerat janë të hartuara në fushën e ID.',
+    'LBL_UPDATE_BUTTON_HELP' => 'Përdor opsionin për të rinovuar regjistrimet ekzistuese. Të dhënat në dosjet e importuara do të përputhen me regjistrimet ekzituese të bazuara në ID e regjistruar.',
     'LBL_NO_ID' => 'është e nevojshme ID',
     'LBL_PRE_CHECK_SKIPPED' => 'Para-Kontrollim i anashkaluar',
     'LBL_NOLOCALE_NEEDED' => 'Asnjë konvertim i lokalizimit të nevojshëm',
@@ -203,7 +204,7 @@ $mod_strings = array (
     'LBL_ACCOUNTS_NOTE_1' => 'Fushat që mbarojnë me Adresa të Rrugës 2 dhe Adresa të Rrugës 3 janë të lidhura së bashku me fushën e rrugës kryesore të Adresës kur vendoset në bazën e të dhënave.',
     'LBL_REQUIRED_NOTE' => 'Fusha e kërkuar :',
     'LBL_IMPORT_NOW' => 'Importoni tani',
-    'LBL_' => 'LBL_',
+    'LBL_' => '',
     'LBL_CANNOT_OPEN' => 'Nuk mund të hapet dosja e importuar për leximin',
     'LBL_NOT_SAME_NUMBER' => 'Nuk ka qenë numër i njëjtë i fushave në linjë të dosjes tuaj',
     'LBL_NO_LINES' => 'Nuk kishte linja të zbuluara në dosjen tuaj të importit. Ju lutemi sigurohuni që nuk ka linja bosh në dosjen tuaj dhe provoni përsëri.',
@@ -288,7 +289,7 @@ $mod_strings = array (
     'LBL_MY_SAVED_ADMIN_HELP' => 'Përdoreni këtë opsion për të aplikuar parametrat para-vendosjes së importit tuaj, duke përfshirë pronat e importit, hartimet, dhe çdo parametër të kontrollit të kopjuar, për këtë import.<br /><br />Kliko Publikimi për të bërë hartimin në dispozicion për përdoruesit e tjerë.<br />Kliko Jo-Publikimi për të bërë hartimin në dispozicion për përdoruesit e tjerë.<br />Kliko Fshijë për të fshirë një hartim për të gjithë përdoruesit.',
     'LBL_MY_PUBLISHED_HELP' => 'Përdoreni këtë opsion për të aplikuar para-vendosjen e parametrave të importit, duke përfshirë pronat e importit, hartimet, dhe çdo kopjim i parametarve të kontrollit, për këtë import.',
     'LBL_ENCLOSURE_HELP' => 'Karakteri kualifikues është përdorur për të rrethuar përmbajtjen e synuar të fushës, duke përfshirë çfarëdo karakteri që është përdorur si përndarës.<br /><br />Shembull: Nëse kufiri është një presje (,) dhe kualifikueset janë një shenjë e kuotimit ("),<br />"Cupertino, California" është importuar në një fushë në aplikimin dhe shfaqet si Cupertino, Kaliforni.<br />Nëse nuk ka karaktere për kualifikimet, ose në qoftë se një karakter i ndryshëm është kualifikues,<br />"Cupertino, California" është importuar në dy fusha të ngjitura si "Cupertino dhe" Kaliforni ".<br /><br />Shënim: Dosja e importit nuk mund të përmbajnë asnjë karakter kualifikues.<br />Kualifikimet e parazgjedhura të karakterit për presje-dhe-skedën e palimituar të dosjeve të krijuara në Excel është një shenjë kuotimi.',
-    'LBL_DELIMITER_COMMA_HELP' => 'Përdoreni këtë opsion për të selektuar dhe ngarkuar dosjen që përmban tabelën e të dhënat që ju dëshironi të importoni. Shembuj:. Presje e- kufizuar dosja .csv ose eksporti i dosjes nga Microsoft Outlook.',
+    'LBL_DELIMITER_COMMA_HELP' => 'Përdoreni këtë opsion për të selektuar dhe ngarkuar dosjen që përmban të dhënat që dëshironi të importoni. Shembuj: Presje e- kufizuar dosja .csv ose eksporti i dosjes nga Microsoft Outlook.',
     'LBL_DELIMITER_TAB_HELP' => 'Selektoni këtë opsion, nëse karakteri që ndan fushat në dosjen e importit është skedë, dhe dosja e zgjerimit është .txt.',
     'LBL_DELIMITER_CUSTOM_HELP' => 'Selektoni këtë opsion, nëse karakteri që ndan fushat në dosjen e importit nuk është as presje ose skedë, dhe shkruani karakterin në fushën ngjitur.',
     'LBL_DATABASE_FIELD_HELP' => 'Kjo kolonë shfaq të gjitha fushat në modulë. Selekto fushën për të shënuar të dhënat në reshtat e dosjeve të importuara.',
@@ -304,7 +305,7 @@ $mod_strings = array (
     'LBL_DELETE_MAP_CONFIRMATION' => 'A jeni te sigurtë që doni të fshini këtë grup të ruajtur në parametrat e importit?',
     'LBL_THIRD_PARTY_CSV_SOURCES' => 'Nëse të dhënat e skedës së importit është eksportuar nga çdo burim i mëposhtëm, selektoni njërën.',
     'LBL_THIRD_PARTY_CSV_SOURCES_HELP' => 'Selektoni burimin pë të aplikuar automatikisht me porosi hartimet në mënyrë që të thjeshtoni procesin e hartimit (Hapi tjetër).',
-    'LBL_EXTERNAL_SOURCE_HELP' => 'Përdoreni këtë opsion për të importuar të dhënat drejtpërdrejt nga një aplikim të jashtëm ose të shërbimit, të tilla si Gmail.',
+    'LBL_EXTERNAL_SOURCE_HELP' => 'Përdoreni këtë opsion për të importuar të dhënat drejtpërdrejt nga një aplikacion ose shërbim i jashtëm, i tillë si Gmail.',
     'LBL_EXAMPLE_FILE' => 'Shkarko shabllonin e skedarit të importimit',
     'LBL_CONFIRM_IMPORT' => 'Ju keni selektuar për të azhurnuar regjistrimet gjatë procesit të importit. Azhurnimet e bëra në regjistrimet ekzistuese nuk mund të anulohen. Megjithatë, regjistrimet e krijuara gjatë procesit të importit mund të anulohen (fshihen), nëse dëshironi. Klikoni Anulo për të selektuar vetëm krijimin e regjistrimeve të reja, ose klikoni OK për të vazhduar.',
     'LBL_CONFIRM_MAP_OVERRIDE' => 'Paralajmërim: Ju tashmë keni selektuar hartën me porosi për këtë import, a doni të vazhdoni?',

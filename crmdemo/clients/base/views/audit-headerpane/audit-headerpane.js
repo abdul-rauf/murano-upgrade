@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -26,12 +26,19 @@
     initialize: function(options) {
         this._super('initialize', [options]);
         //shortcut keys
-        app.shortcuts.register('AuditHeaderPanel:Close', ['esc','ctrl+alt+l'], function() {
-            var $closeButton = this.$('a[name=close_button]');
-            if ($closeButton.is(':visible') && !$closeButton.hasClass('disabled')) {
-                $closeButton.click();
+        app.shortcuts.register({
+            id: 'AuditHeaderPanel:Close',
+            keys: ['esc','mod+alt+l'],
+            component: this,
+            description: 'LBL_SHORTCUT_CLOSE_DRAWER',
+            callOnFocus: true,
+            handler: function() {
+                var $closeButton = this.$('a[name=close_button]');
+                if ($closeButton.is(':visible') && !$closeButton.hasClass('disabled')) {
+                    $closeButton.click();
+                }
             }
-        }, this, true);
+        });
     },
 
     /**

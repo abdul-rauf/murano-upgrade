@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -47,7 +47,7 @@ $mod_strings = array (
   'LBL_SUBJECT' => 'Θέμα:',
   
   'LBL_RECORD_TYPE' => 'Ισχύει για:',
- 'LBL_RELATED_MODULE'=> 'Σχετική Ενότητα:',
+ 'LBL_RELATED_MODULE'=> 'Σχετικά ενότητα:',
   
   
   'LBL_PROCESS_LIST' => 'Εκτέλεση Εντολών Ροής Εργασίας',
@@ -94,6 +94,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Τύπος',
 
   // Workflow sunsetting message, added in 7.6.1
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Σημείωση:</strong> Αυτό το χαρακτηριστικό θα αφαιρεθεί σε μια μελλοντική έκδοση του Sugar που επί του παρόντος έχει προγραμματιστεί για δημοσίευση στο τέλη του 2017. Οι πελάτες που διαθέτουν το Sugar Enterprise θα πρέπει να αρχίσουν να χρησιμοποιούν τις βελτιωμένες δυνατότητες ροής εργασίας που παρέχονται από τη διαδικασία συγγραφής. Κάντε κλικ <a href="http://www.sugarcrm.com/wf-eol/" target="_blank"> εδώ</a> για περισσότερες πληροφορίες.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Σημείωση:</strong> Αυτό το χαρακτηριστικό θα αφαιρεθεί σε μελλοντική έκδοση του Sugar που επί του παρόντος έχει προγραμματιστεί για δημοσίευση στο τέλη του 2017. Οι πελάτες που διαθέτουν το Sugar Enterprise θα πρέπει να αρχίσουν να χρησιμοποιούν τις βελτιωμένες δυνατότητες ροής εργασίας που παρέχονται από την Advanced Workflow. Κάντε κλικ <a href="http://www.sugarcrm.com/wf-eol/" target="_blank"> εδώ</a> για περισσότερες πληροφορίες.',
 );
 

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -31,7 +31,7 @@
  * @extends View.View
  */
 ({
-    plugins: ['Dropdown', 'RelativeTime', 'EllipsisInline', 'Tooltip'],
+    plugins: ['Dropdown', 'RelativeTime'],
 
     /**
      * Notifications bean collection.
@@ -46,12 +46,12 @@
     _alertsCollections: {},
 
     /**
-     * @property {Number} Interval ID for checking reminders.
+     * @property {number} Interval ID for checking reminders.
      */
     _remindersIntervalId: null,
 
     /**
-     * @property {Number} Timestamp of last time when we checked reminders.
+     * @property {number} Timestamp of last time when we checked reminders.
      */
     _remindersIntervalStamp: 0,
 
@@ -106,7 +106,10 @@
         this._initCollection();
         this._initReminders();
         this._initFavicon();
-        this.startPulling();
+
+        //Start pulling data after 1 second so that other more important calls to
+        //the server can be processed first.
+        window.setTimeout(_.bind(this.startPulling, this), 1000);
 
         this.collection.on('change:is_read', this.render, this);
         return this;
@@ -180,8 +183,8 @@
      */
     _initReminders: function() {
 
-        var timeOptions = _.keys(app.lang.getAppListStrings('reminder_time_options')),
-            max = _.max(timeOptions, function(key) {
+        var timeOptions = _.keys(app.lang.getAppListStrings('reminder_time_options'));
+        var max = _.max(timeOptions, function(key) {
             return parseInt(key, 10);
         });
 
@@ -243,7 +246,6 @@
         this._remindersIntervalStamp = new Date().getTime();
 
         this.pull();
-        this._pullReminders();
         this._intervalId = window.setTimeout(_.bind(this._pullAction, this), this.delay);
         this._remindersIntervalId = window.setTimeout(_.bind(this.checkReminders, this), this.reminderDelay);
         return this;
@@ -263,7 +265,6 @@
         this._intervalId = window.setTimeout(_.bind(this._pullAction, this), this.delay);
 
         this.pull();
-        this._pullReminders();
     },
 
     /**
@@ -284,8 +285,8 @@
     },
 
     /**
-     * Pull and render notifications, if view isn't disposed or dropdown isn't
-     * open.
+     * Pull notifications and reminders via bulk API. Render notifications
+     * if view isn't disposed or dropdown isn't open.
      *
      * @return {View.Views.BaseNotificationsView} Instance of this view.
      */
@@ -295,6 +296,7 @@
         }
 
         var self = this;
+        var bulkApiId = _.uniqueId();
 
         this.collection.fetch({
             success: function() {
@@ -303,8 +305,15 @@
                 }
 
                 self.render();
+            },
+            apiOptions: {
+                bulk: bulkApiId
             }
         });
+
+        this._pullReminders(bulkApiId);
+
+        app.api.triggerBulkCall(bulkApiId);
 
         return this;
     },
@@ -314,16 +323,18 @@
      *
      * This will give us all the reminders that should be triggered during the
      * next maximum reminders time (with pull delay).
+     *
+     * @param {string} bulkApiId Bulk ID that the reminders should be a part of
      */
-    _pullReminders: function() {
+    _pullReminders: function(bulkApiId) {
 
         if (this.disposed || !_.isFinite(this.reminderMaxTime)) {
             return this;
         }
 
-        var date = new Date(),
-            startDate = date.toISOString(),
-            endDate;
+        var date = new Date();
+        var startDate = date.toISOString();
+        var endDate;
 
         date.setTime(date.getTime() + this.reminderMaxTime * 1000);
         endDate = date.toISOString();
@@ -341,7 +352,10 @@
                 silent: true,
                 merge: true,
                 //Notifications should never trigger a metadata refresh
-                apiOptions: {skipMetadataHash: true}
+                apiOptions: {
+                    skipMetadataHash: true,
+                    bulk: bulkApiId
+                }
             });
         }, this);
 
@@ -360,13 +374,14 @@
             this.stopPulling();
             return this;
         }
-        var date = (new Date()).getTime(),
-            diff = this.reminderDelay - (date - this._remindersIntervalStamp) % this.reminderDelay;
+        var date = (new Date()).getTime();
+        var diff = this.reminderDelay - (date - this._remindersIntervalStamp) % this.reminderDelay;
         this._remindersIntervalId = window.setTimeout(_.bind(this.checkReminders, this), diff);
         _.each(this._alertsCollections, function(collection) {
             _.chain(collection.models)
                 .filter(function(model) {
-                    var needDate = (new Date(model.get('date_start'))).getTime() - parseInt(model.get('reminder_time'), 10) * 1000;
+                    var needDate = (new Date(model.get('date_start'))).getTime() -
+                        parseInt(model.get('reminder_time'), 10) * 1000;
                     return needDate > this._remindersIntervalStamp && needDate - this._remindersIntervalStamp <= diff;
                 }, this)
                 .each(this._showReminderAlert, this);
@@ -383,11 +398,11 @@
      * @private
      */
     _showReminderAlert: function(model) {
-        var url = app.router.buildRoute(model.module, model.id),
-            dateFormat = app.user.getPreference('datepref') + ' ' + app.user.getPreference('timepref'),
-            dateValue = app.date.format(new Date(model.get('date_start')), dateFormat),
-            template = app.template.getView('notifications.notifications-alert'),
-            message = template({
+        var url = app.router.buildRoute(model.module, model.id);
+        var dateFormat = app.user.getPreference('datepref') + ' ' + app.user.getPreference('timepref');
+        var dateValue = app.date.format(new Date(model.get('date_start')), dateFormat);
+        var template = app.template.getView('notifications.notifications-alert');
+        var message = template({
                 title: new Handlebars.SafeString(app.lang.get('LBL_REMINDER_TITLE', model.module)),
                 module: model.module,
                 name: new Handlebars.SafeString(model.get('name')),

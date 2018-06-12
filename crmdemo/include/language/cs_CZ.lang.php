@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Filtr',
     'Comments' => 'Komentář',
     'Currencies' => 'Měna:',
-    'Project' => 'Projekty',
     'ProductTemplates' => 'Šablona produktu',
-    'ProductCategories' => 'Kategorie produktů',
     'ProductTypes' => 'Typ produktu',
     'Shippers' => 'Doručovatel',
     'Subscriptions' => 'Přihlášení',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Pá",
                 '7'=>"So",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Ne",
+            '2'=>"Po",
+            '3'=>"Út",
+            '4'=>"St",
+            '5'=>"Čt",
+            '6'=>"Pá",
+            '7'=>"So",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Ne',
         '1' => 'Po',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'roků',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Do',
+        'Occurrences' => 'Výskyty',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Žádný',
+        'Each' => 'Každý',
+        'On' => 'V',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'první',
+        'second' => 'druhý',
+        'third' => 'třetí',
+        'fourth' => 'čtvrtý',
+        'fifth' => 'pátý',
+        'last' => 'poslední',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Neděle',
+        'Mon' => 'Pondělí',
+        'Tue' => 'Úterý',
+        'Wed' => 'Středa',
+        'Thu' => 'Čtvrtek',
+        'Fri' => 'Pátek',
+        'Sat' => 'Sobota',
+        'Day' => 'Den',
+        'WD'  => 'Pracovní den',
+        'WE'  => 'Den víkendu'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Prostřední',
         'end' => 'Konec',
         'top' => 'Vrchol',
+        'total' => 'Celkem',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Trychtýř',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Světlé',
       'dark' => 'Tmavé',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Přesunout',
@@ -2100,8 +2219,8 @@ $app_list_strings = array (
         ),
         /* Barbados */
         "BB" => array(
-            "1" => array("code" => "CC", "name" => "Christ Church"),
-            "2" => array("code" => "AND", "name" => "Sv. Ondřej"),
+            "1" => array("code" => "Kopie(cc):", "name" => "Christ Church"),
+            "2" => array("code" => "A", "name" => "Sv. Ondřej"),
             "3" => array("code" => "GEO", "name" => "Svatý Jiří"),
             "4" => array("code" => "JAM", "name" => "Sv. Jakub"),
             "5" => array("code" => "JOH", "name" => "Svatý Jan"),
@@ -2247,7 +2366,7 @@ $app_list_strings = array (
             "1" => array("code" => "AC", "name" => "Acre"),
             "2" => array("code" => "AL", "name" => "Alagoas"),
             "3" => array("code" => "AP", "name" => "Amapa"),
-            "4" => array("code" => "AM", "name" => "Amazonas"),
+            "4" => array("code" => "dopoledne", "name" => "Amazonas"),
             "5" => array("code" => "BA", "name" => "Bahia"),
             "6" => array("code" => "CE", "name" => "Ceara"),
             "7" => array("code" => "DF", "name" => "Distrito Federal"),
@@ -2595,7 +2714,7 @@ $app_list_strings = array (
             "21" => array("code" => "MET", "name" => "Meta"),
             "22" => array("code" => "NAR", "name" => "Narino"),
             "23" => array("code" => "NDS", "name" => "Norte de Santander"),
-            "24" => array("code" => "PUT", "name" => "Putumayo"),
+            "24" => array("code" => "UMÍSTIT", "name" => "Putumayo"),
             "25" => array("code" => "QUI", "name" => "Quindio"),
             "26" => array("code" => "RIS", "name" => "Risaralda"),
             "27" => array("code" => "SAP", "name" => "San Andres y Providencia"),
@@ -2760,7 +2879,7 @@ $app_list_strings = array (
         /* Cyprus */
         "CY" => array(
             "1" => array("code" => "F", "name" => "Famagusta"),
-            "2" => array("code" => "K", "name" => "Kyrenia"),
+            "2" => array("code" => "tis", "name" => "Kyrenia"),
             "3" => array("code" => "A", "name" => "Larnaca"),
             "4" => array("code" => "I", "name" => "Limassol"),
             "5" => array("code" => "N", "name" => "Nicosia"),
@@ -2774,7 +2893,7 @@ $app_list_strings = array (
             "4" => array("code" => "E", "name" => "Pardubický"),
             "5" => array("code" => "H", "name" => "Královéhradecký"),
             "6" => array("code" => "J", "name" => "Vysočina"),
-            "7" => array("code" => "K", "name" => "Karlovarský"),
+            "7" => array("code" => "tis", "name" => "Karlovarský"),
             "8" => array("code" => "L", "name" => "Liberecký"),
             "9" => array("code" => "M", "name" => "Olomoucký"),
             "10" => array("code" => "P", "name" => "Plzeňský"),
@@ -2805,14 +2924,14 @@ $app_list_strings = array (
         /* Djibouti */
         "DJ" => array(
             "1" => array("code" => "S", "name" => "'Ali Sabih"),
-            "2" => array("code" => "K", "name" => "Dikhil"),
+            "2" => array("code" => "tis", "name" => "Dikhil"),
             "3" => array("code" => "J", "name" => "Djibouti"),
             "4" => array("code" => "O", "name" => "Obock"),
             "5" => array("code" => "T", "name" => "Tadjoura")
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Farnost sv. Ondřeje"),
+            "1" => array("code" => "A", "name" => "Farnost sv. Ondřeje"),
             "2" => array("code" => "DAV", "name" => "Farnost sv. Davida"),
             "3" => array("code" => "GEO", "name" => "Farnost sv. Jiří"),
             "4" => array("code" => "JOH", "name" => "Farnost sv. Jana"),
@@ -2852,7 +2971,7 @@ $app_list_strings = array (
             "25" => array("code" => "SC", "name" => "San Cristobal"),
             "26" => array("code" => "JO", "name" => "San Jose de Ocoa"),
             "27" => array("code" => "SJ", "name" => "San Juan"),
-            "28" => array("code" => "PM", "name" => "San Pedro de Macoris"),
+            "28" => array("code" => "odpoledne", "name" => "San Pedro de Macoris"),
             "29" => array("code" => "SA", "name" => "Santiago"),
             "30" => array("code" => "ST", "name" => "Santiago Rodriguez"),
             "31" => array("code" => "SD", "name" => "Santo Domingo"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "NEBO", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Jižní národy – národnosti"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "Sumba"),
+            "22" => array("code" => "SOUČET", "name" => "Sumba"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3213,7 +3332,7 @@ $app_list_strings = array (
         /* French Southern Territories */
         "TF" => array(
             "1" => array("code" => "C", "name" => "Iles Crozet"),
-            "2" => array("code" => "K", "name" => "Iles Kerguelen"),
+            "2" => array("code" => "tis", "name" => "Iles Kerguelen"),
             "3" => array("code" => "A", "name" => "Ile Amsterdam"),
             "4" => array("code" => "P", "name" => "Ile Saint-Paul"),
             "5" => array("code" => "D", "name" => "Adelie Land")
@@ -3324,7 +3443,7 @@ $app_list_strings = array (
         "GL" => array(
             "1" => array("code" => "A", "name" => "Avannaa"),
             "2" => array("code" => "T", "name" => "Tunu"),
-            "3" => array("code" => "K", "name" => "Kitaa")
+            "3" => array("code" => "tis", "name" => "Kitaa")
         ),
         /* Grenada */
         "86" => array(
@@ -3448,7 +3567,7 @@ $app_list_strings = array (
             "4" => array("code" => "EC", "name" => "East Berbice-Corentyne"),
             "5" => array("code" => "EW", "name" => "Essequibo Islands-West Demerara"),
             "6" => array("code" => "MB", "name" => "Mahaica-Berbice"),
-            "7" => array("code" => "PM", "name" => "Pomeroon-Supenaam"),
+            "7" => array("code" => "odpoledne", "name" => "Pomeroon-Supenaam"),
             "8" => array("code" => "PI", "name" => "Potaro-Siparuni"),
             "9" => array("code" => "UD", "name" => "Upper Demerara-Berbice"),
             "10" => array("code" => "UT", "name" => "Upper Takutu-Upper Essequibo")
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "NEBO", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "NEBO", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Farnost Kingston"),
             "4" => array("code" => "MAN", "name" => "Farnost Manchester"),
             "5" => array("code" => "POR", "name" => "Farnost Portland"),
-            "6" => array("code" => "AND", "name" => "Farnost sv. Ondřeje"),
+            "6" => array("code" => "A", "name" => "Farnost sv. Ondřeje"),
             "7" => array("code" => "ANN", "name" => "Farnost sv. Anny"),
             "8" => array("code" => "CAT", "name" => "Farnost sv. Kateřiny"),
             "9" => array("code" => "ELI", "name" => "Farnost sv. Alžběty"),
@@ -3917,7 +4036,7 @@ $app_list_strings = array (
         ),
         /* Jordan */
         "JO" => array(
-            "1" => array("code" => "AM", "name" => "'Amman"),
+            "1" => array("code" => "dopoledne", "name" => "'Amman"),
             "2" => array("code" => "AJ", "name" => "Ajlun"),
             "3" => array("code" => "AA", "name" => "Al'Aqabah"),
             "4" => array("code" => "AB", "name" => "Al Balqa'"),
@@ -3934,7 +4053,7 @@ $app_list_strings = array (
         "KZ" => array(
             "1" => array("code" => "AL", "name" => "Almaty"),
             "2" => array("code" => "AC", "name" => "Almaty City"),
-            "3" => array("code" => "AM", "name" => "Aqmola"),
+            "3" => array("code" => "dopoledne", "name" => "Aqmola"),
             "4" => array("code" => "AQ", "name" => "Aqtobe"),
             "5" => array("code" => "AS", "name" => "Astana City"),
             "6" => array("code" => "AT", "name" => "Atyrau"),
@@ -3964,7 +4083,7 @@ $app_list_strings = array (
         /* Kiribati */
         "KI" => array(
             "1" => array("code" => "AG", "name" => "Abaiang"),
-            "2" => array("code" => "AM", "name" => "Abemama"),
+            "2" => array("code" => "dopoledne", "name" => "Abemama"),
             "3" => array("code" => "AK", "name" => "Aranuka"),
             "4" => array("code" => "AO", "name" => "Arorae"),
             "5" => array("code" => "BA", "name" => "Banaba"),
@@ -4575,7 +4694,7 @@ $app_list_strings = array (
             "1" => array("code" => "AG", "name" => "Agalega Islands"),
             "2" => array("code" => "BL", "name" => "Black River"),
             "3" => array("code" => "BR", "name" => "Beau Bassin-Rose Hill"),
-            "4" => array("code" => "CC", "name" => "Cargados Carajos Shoals (Saint B)"),
+            "4" => array("code" => "Kopie(cc):", "name" => "Cargados Carajos Shoals (Saint B)"),
             "5" => array("code" => "CU", "name" => "Curepipe"),
             "6" => array("code" => "FL", "name" => "Flacq"),
             "7" => array("code" => "GP", "name" => "Grand Port"),
@@ -4649,7 +4768,7 @@ $app_list_strings = array (
         /* Micronesia */
         "FM" => array(
             "1" => array("code" => "C", "name" => "Chuuk"),
-            "2" => array("code" => "K", "name" => "Kosrae"),
+            "2" => array("code" => "tis", "name" => "Kosrae"),
             "3" => array("code" => "P", "name" => "Pohnpei"),
             "4" => array("code" => "Y", "name" => "Yap")
         ),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "NEBO", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -5027,7 +5146,7 @@ $app_list_strings = array (
         ),
         /* Palau */
         "PW" => array(
-            "1" => array("code" => "AM", "name" => "Aimeliik"),
+            "1" => array("code" => "dopoledne", "name" => "Aimeliik"),
             "2" => array("code" => "AR", "name" => "Airai"),
             "3" => array("code" => "AN", "name" => "Angaur"),
             "4" => array("code" => "HA", "name" => "Hatohobei"),
@@ -5048,7 +5167,7 @@ $app_list_strings = array (
         "PA" => array(
             "1" => array("code" => "BT", "name" => "Bocas del Toro"),
             "2" => array("code" => "CH", "name" => "Chiriqui"),
-            "3" => array("code" => "CC", "name" => "Cocle"),
+            "3" => array("code" => "Kopie(cc):", "name" => "Cocle"),
             "4" => array("code" => "CL", "name" => "Colon"),
             "5" => array("code" => "DA", "name" => "Darien"),
             "6" => array("code" => "HE", "name" => "Herrera"),
@@ -5084,14 +5203,14 @@ $app_list_strings = array (
         "PY" => array(
             "1" => array("code" => "AG", "name" => "Alto Paraguay"),
             "2" => array("code" => "AN", "name" => "Alto Parana"),
-            "3" => array("code" => "AM", "name" => "Amambay"),
+            "3" => array("code" => "dopoledne", "name" => "Amambay"),
             "4" => array("code" => "AS", "name" => "Asuncion"),
             "5" => array("code" => "BO", "name" => "Boqueron"),
             "6" => array("code" => "CG", "name" => "Caaguazu"),
             "7" => array("code" => "CZ", "name" => "Caazapa"),
             "8" => array("code" => "CN", "name" => "Canindeyu"),
             "9" => array("code" => "CE", "name" => "Centrální"),
-            "10" => array("code" => "CC", "name" => "Concepcion"),
+            "10" => array("code" => "Kopie(cc):", "name" => "Concepcion"),
             "11" => array("code" => "CD", "name" => "Cordillera"),
             "12" => array("code" => "GU", "name" => "Guaira"),
             "13" => array("code" => "IT", "name" => "Itapua"),
@@ -5103,7 +5222,7 @@ $app_list_strings = array (
         ),
         /* Peru */
         "PE" => array(
-            "1" => array("code" => "AM", "name" => "Amazonas"),
+            "1" => array("code" => "dopoledne", "name" => "Amazonas"),
             "2" => array("code" => "AN", "name" => "Ancash"),
             "3" => array("code" => "AP", "name" => "Apurimac"),
             "4" => array("code" => "AR", "name" => "Arequipa"),
@@ -5227,7 +5346,7 @@ $app_list_strings = array (
             "8" => array("code" => "OP", "name" => "Opolskie"),
             "9" => array("code" => "PP", "name" => "Podkarpackie"),
             "10" => array("code" => "PL", "name" => "Podlaskie"),
-            "11" => array("code" => "PM", "name" => "Pomorskie"),
+            "11" => array("code" => "odpoledne", "name" => "Pomorskie"),
             "12" => array("code" => "SL", "name" => "Śląskie"),
             "13" => array("code" => "SW", "name" => "Świętokrzyskie"),
             "14" => array("code" => "WM", "name" => "Warmińsko-Mazurskie"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "NEBO", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -5712,14 +5831,14 @@ $app_list_strings = array (
             "2" => array("code" => "AL", "name" => "Álava"),
             "3" => array("code" => "AB", "name" => "Albacete"),
             "4" => array("code" => "AC", "name" => "Alicante"),
-            "5" => array("code" => "AM", "name" => "Almeria"),
+            "5" => array("code" => "dopoledne", "name" => "Almeria"),
             "6" => array("code" => "AS", "name" => "Asturias"),
             "7" => array("code" => "AV", "name" => "Ávila"),
             "8" => array("code" => "BJ", "name" => "Badajoz"),
             "9" => array("code" => "IB", "name" => "Baleares"),
             "10" => array("code" => "BA", "name" => "Barcelona"),
             "11" => array("code" => "BU", "name" => "Burgos"),
-            "12" => array("code" => "CC", "name" => "Cáceres"),
+            "12" => array("code" => "Kopie(cc):", "name" => "Cáceres"),
             "13" => array("code" => "CZ", "name" => "Cádiz"),
             "14" => array("code" => "CT", "name" => "Cantabria"),
             "15" => array("code" => "CL", "name" => "Castellón"),
@@ -5735,7 +5854,7 @@ $app_list_strings = array (
             "25" => array("code" => "HS", "name" => "Huesca"),
             "26" => array("code" => "JN", "name" => "Jaén"),
             "27" => array("code" => "RJ", "name" => "La Rioja"),
-            "28" => array("code" => "PM", "name" => "Las Palmas"),
+            "28" => array("code" => "odpoledne", "name" => "Las Palmas"),
             "29" => array("code" => "LE", "name" => "León"),
             "30" => array("code" => "LL", "name" => "Lérida"),
             "31" => array("code" => "LG", "name" => "Lugo"),
@@ -5821,7 +5940,7 @@ $app_list_strings = array (
             "4" => array("code" => "MA", "name" => "Marowijne"),
             "5" => array("code" => "NI", "name" => "Nickerie"),
             "6" => array("code" => "PA", "name" => "Para"),
-            "7" => array("code" => "PM", "name" => "Paramaribo"),
+            "7" => array("code" => "odpoledne", "name" => "Paramaribo"),
             "9" => array("code" => "SA", "name" => "Saramacca"),
             "10" => array("code" => "SI", "name" => "Sipaliwini"),
             "11" => array("code" => "WA", "name" => "Wanica")
@@ -5835,7 +5954,7 @@ $app_list_strings = array (
         ),
         /* Sweden */
         "SE" => array(
-            "1" => array("code" => "K", "name" => "Blekinge"),
+            "1" => array("code" => "tis", "name" => "Blekinge"),
             "2" => array("code" => "W", "name" => "Dalama"),
             "3" => array("code" => "I", "name" => "Gotland"),
             "4" => array("code" => "X", "name" => "Gävleborg"),
@@ -5923,7 +6042,7 @@ $app_list_strings = array (
             "16" => array("code" => "TT", "name" => "T'ai-tung"),
             "17" => array("code" => "TY", "name" => "T'ao-yuan"),
             "18" => array("code" => "YL", "name" => "Yun-lin"),
-            "19" => array("code" => "CC", "name" => "Město Chia-i"),
+            "19" => array("code" => "Kopie(cc):", "name" => "Město Chia-i"),
             "20" => array("code" => "CL", "name" => "Chi-lung"),
             "21" => array("code" => "HC", "name" => "Hsin-chu"),
             "22" => array("code" => "TH", "name" => "T'ai-chung"),
@@ -6047,7 +6166,7 @@ $app_list_strings = array (
         ),
         /* Togo */
         "TG" => array(
-            "1" => array("code" => "K", "name" => "Kara"),
+            "1" => array("code" => "tis", "name" => "Kara"),
             "2" => array("code" => "P", "name" => "Plateaux"),
             "3" => array("code" => "S", "name" => "Savanes"),
             "4" => array("code" => "C", "name" => "Centrale"),
@@ -6443,7 +6562,7 @@ $app_list_strings = array (
             "7" => array("code" => "AA", "name" => "Ozbrojené síly – Amerika"),
             "8" => array("code" => "AC", "name" => "Ozbrojené síly – Kanada"),
             "9" => array("code" => "AE", "name" => "Ozbrojené síly – Evropa"),
-            "10" => array("code" => "AM", "name" => "Ozbrojené síly – Střední východ"),
+            "10" => array("code" => "dopoledne", "name" => "Ozbrojené síly – Střední východ"),
             "11" => array("code" => "AP", "name" => "Ozbrojené síly – Tichomoří"),
             "12" => array("code" => "CA", "name" => "Kalifornie"),
             "13" => array("code" => "CO", "name" => "Colorado"),
@@ -6482,7 +6601,7 @@ $app_list_strings = array (
             "46" => array("code" => "MP", "name" => "Severní Mariany"),
             "47" => array("code" => "OH", "name" => "Ohio"),
             "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "49" => array("code" => "NEBO", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pensylvánie"),
             "52" => array("code" => "PR", "name" => "Portoriko"),
@@ -6562,7 +6681,7 @@ $app_list_strings = array (
         ),
         /* Venezuela */
         "VE" => array(
-            "1" => array("code" => "AM", "name" => "Amazonas"),
+            "1" => array("code" => "dopoledne", "name" => "Amazonas"),
             "2" => array("code" => "AN", "name" => "Anzoategui"),
             "3" => array("code" => "AP", "name" => "Apure"),
             "4" => array("code" => "AR", "name" => "Aragua"),
@@ -6639,7 +6758,7 @@ $app_list_strings = array (
         "YE" => array(
             "1" => array("code" => "AB", "name" => "Abyan"),
             "2" => array("code" => "AD", "name" => "Adan"),
-            "3" => array("code" => "AM", "name" => "Amran"),
+            "3" => array("code" => "dopoledne", "name" => "Amran"),
             "4" => array("code" => "BA", "name" => "Al Bayda"),
             "5" => array("code" => "DA", "name" => "Ad Dali"),
             "6" => array("code" => "DH", "name" => "Dhamar"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "NEBO", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Sledovat Odkaz',
   'LBL_TOGGLE_VISIBILITY' => 'Přepnout viditelnost', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivity',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. Všechna práva vyhrazena.',
-  'LBL_TRADEMARK' => 'SugarCRM je ochrannou známkou SugarCRM, Inc. Všechny ostatní názvy společností a produktů jsou ochrannými známkami svých vlastníků.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ a Sugar™ jsou ochranné známky SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Odeslat pozvánku',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar a 3-D Krychle jsou registrované ochranné známky společnosti SugarCRM Inc. '.
+        'Všechny ostatní názvy produktů a společností používané nebo zobrazené v tomto produktu mohou být ochrannými známkami '.
+        'příslušných společností, s nimiž jsou spojeny.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ a Sugar™ jsou ochranné známky SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Odeslat pozvánku',
   'LBL_INVITEES' => 'Pozvaní',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Host neobdrží vaši pozvánku',
   'LBL_SELECT_ACTION_LABEL' => 'Zvolte akci',
   'LBL_TOGGLE_DRAWER' => 'Přepnout',
   'LBL_TOUR_NEXT' => 'Další',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Vlož [Alt+C]' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Logo firmy' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalendář' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'navigace v hlavním modulu',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'přepnout dílčí panel',
+
     'LBL_ADVANCED' => 'Pokročilé',
     'LBL_BASIC' => 'Základní',
     'LBL_MODULE_FILTER' => 'Filtrovat dle',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Týmy',
     'LBL_TEAM_SET_ID' => 'Nastavit ID týmu',
     'LBL_TEAM_SET'=>'Týmy',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Vybrané týmy',
     'LBL_SEARCH_UNAVAILABLE' => 'Vyhledávání nedostupné, prosíme zkuste to znovu.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Primární tým neuveden',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Chyba při pokusu o odstranění primární týmu s ID [{0}] pro [{1}] modul s ID [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Vyhledávač je dočasně nedostupný.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Došlo k běhové chybě vyhledávače. Obraťte se na svého správce systému.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Pole, které je uzamčeno procesem, nelze upravovat.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Vyskytla se závažná chyba. Důvody pro tuto výjimku mohou být různé, ale obecně spadají mimo rozsah více specifických API výjimek.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Značí. že server je zaneprázdněn, přetížen nebo nefunguje.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'Backend vyhledávač aktuálně není dostupný z důvodu problému s připojením. Ověřte připojení a konfiguraci v položce Správce->Hledání->Test.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'Vy vyhledávači SearchEngine došlo k běhové výjimce. Další informace najdete v souboru sugarcrm.log.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Pole, které je momentálně uzamčeno probíhajícím procesem, nelze upravovat.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s je uzamčen probíhajícím procesem a nelze ho upravovat.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s jsou uzamčeny probíhajícím procesem a nelze je upravovat.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Soubor s tímto názvem již v systému existuje.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Tato časová perioda již má sub-periody.',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Časové sub-periody nemohou mít další sub-periody.',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Nebylo možno stáhnout časové periody typu: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Žádná aktivní časová období pro aktuální nastavení.',
     'LBL_CURRENT_TIMEPERIOD' => 'Současná časová perioda',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Předchozí časová perioda',
     'LBL_NEXT_TIMEPERIOD' => 'Příští časová perioda',
@@ -8532,7 +8664,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => 'Zavřít',
     'LBL_ADDITIONAL_DETAILS' => 'Další podrobnosti',
     'LBL_ADMIN' => 'Správce',
-    'LBL_ALT_HOT_KEY' => 'Alt+',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'Archiv',
     'LBL_ASSIGNED_TO_USER'=>'Přiděleno k uživateli',
     'LBL_ASSIGNED_TO' => 'Přiřazeno (komu):',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Vyberte pole...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Vyberte logický operátor',
     'LBL_FILTER_CREATE_NEW' => 'Přidat',
+    'LBL_FILTER_CREATE_FILTER' => 'Vytvořit nový filtr',
+    'LBL_FILTER_EDIT_FILTER' => 'Upravit filtr',
     'LBL_FILTER_ALL_RECORDS' => 'Všechny záznamy',
     'TPL_FILTER_SAVE' => 'Úspěšně jste vytvořili filtr {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'Z',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Kraj/Stát:',
     'LBL_STATUS_UPDATED'=>'Váš status na tuto akci byl aktualizován!',
+    'LBL_STATUS_NOT_UPDATED' => 'Váš status pro tuto událost nebyl aktualizován.',
     'LBL_STATUS'=>'Stav:',
     'LBL_STREET'=>'Ulice',
     'LBL_SUBJECT' => 'Předmět',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Všechna práva vyhrazena.<br />SugarCRM je ochranná známka společnosti SugarCRM, Inc. Všechny ostatní názvy společností a produktů mohou být ochrannými známkami příslušných společností, se kterými jsou spojeny.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Všechna práva vyhrazena.<br />SugarCRM, Sugar a 3-D Krychle jsou registrované ochranné známky společnosti SugarCRM Inc. '.
+        'Všechny ostatní názvy produktů a společností používané nebo zobrazené v tomto produktu mohou být ochrannými známkami '.
+        'příslušných společností, s nimiž jsou spojeny.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Naplánovaný úkol zkompletován.',
@@ -9176,7 +9315,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Došlo k chybě. Zadali jste neplatný operátor.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Došlo k chybě. Zadali jste neplatný filtr.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Import se nezdařil. Pole skupiny jsou částečně uzamčena v definici procesu. Aby mohla být definice importována, musí být tato pole v definici procesu odemknuta.',
+    'ERROR_EXP_DATE_LOW' => 'Došlo k chybě. Datum vypršení platnosti nemůže být dřívější než datum publikování.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Došlo k chybě. Stav Schváleno vyžaduje datum publikování.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Datum publikování je prázdné.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9306,6 +9446,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'Sloupce mohou být zobrazeny',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Řídicí panel',
     'LBL_DASHBOARD_BWC' => 'Moje původní nástěnka',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Moje nástěnka',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Nástěnka nápovědy',
@@ -9338,9 +9479,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Moje {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Novinky',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Google News pro související záznam',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Metrika příležitostí',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Metrika příležitosti pro související záznam',
@@ -9409,7 +9547,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Aktuálně nebyly nalezeny žádé záznamy',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Shrnutí případů',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Nové Feed',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interakce',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Přílohy',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Poznámky a přílohy související se záznamem',
@@ -9918,7 +10055,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => 'Vyberte funkci práce',
     'LBL_DNB_BAL_ORG_NAME' => 'Název organizace',
     'LBL_DNB_BAL_IMPORT_AS' => 'Importovat jako:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Název organizace',
+    'LBL_DNB_BAL_ORG_NAME' => 'Název společnosti',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'v $USD milióny',
@@ -9977,7 +10114,7 @@ $app_strings = array (
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Nejužitečnější publikované články znalostní báze',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Zobrazuje nejoblíbenější a nejprohlíženější články znalostní báze',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtrováno podle {{label}} "{{value}}"',
 
@@ -10016,6 +10153,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Prosím vložte jméno stránky',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Můj obchodní plán',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Obchodní plán mého týmu",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Graf obchodního plánu',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Zobrazuje aktuální graf obchodního plánu.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Žádný obrázek',
 
@@ -10269,6 +10413,8 @@ $app_strings = array (
     'LBL_SELECT_THIS_ROW_TITLE' => 'Vybrat tento řádek',
     'LBL_TEAM_SELECTED_TITLE' => 'Zvolený tým',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Vyberte k vytvoření primárního týmu',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Tým označen jako vybraný na základě týmu ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Označte tento tým jako vybraný na základě týmu',
     'LBL_SEARCH_AND_SELECT' => 'Vyhledat a zobrazit {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Vyhledat a přidat {{module}}',
 
@@ -10357,6 +10503,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Náhled zakázán: Data nejsou dostupná',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Náhled zakázán: Zobrazuje se jako aktuální záznam',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Náhled zakázán: Záznam byl odstraněn nebo k němu není přístup',
+    'LBL_PREVIEW_PREVIOUS' => 'Předchozí náhled',
+    'LBL_PREVIEW_NEXT' => 'Další náhled',
+    'LBL_PREVIEW_CLOSE' => 'Zavřít náhled',
     'LBL_STREAM_NO_RECORDS' => 'Tento záznam nemá přiřazené poznámky. Prosím přidejte poznámku kliknutím na příslušný odkaz.',
     'LBL_DUPLICATES_FOUND' => 'Nalezeno {{duplicateCount}} duplikátů.',
     'LBL_NO_DUPLICATES_FOUND' => 'Nenalezeny žádné duplikáty.',
@@ -10376,6 +10525,7 @@ $app_strings = array (
         'Neplatný počet záznamů. Platný rozsah je od {{minRecords}} do {{maxRecords}} záznamů.',
     'LBL_MERGE_NO_ACCESS' =>
         'Nemáte oprávnění pro tuto operaci.',
+    'LBL_MERGE_LOCKED' => 'Některé ze záznamů vybrané pro sloučení obsahují pole, která jsou procesem uzamčena pro úpravy a nelze je v tuto chvíli sloučit.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10846,10 +10996,9 @@ $app_strings = array (
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Systémové nastavení',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Heslo',
     'LBL_CURRENT_PASSWORD'				=> 'Původní heslo',
-    'LBL_SET_NEW_PASSWORD'              => 'Zadejte heslo',
     'LBL_NEW_PASSWORD1'                 => 'Nové heslo',
     'LBL_NEW_PASSWORD2'                 => 'Potvrdit heslo',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Zadejete prosím pro potvrzení Vaše nové heslo.',
@@ -10857,13 +11006,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> 'Zadejete prosím Vaše původní heslo.',
     'ERR_REENTER_PASSWORDS' => 'Prosím napište znovu hesla. \\"Nové heslo\\" a \\"Potvrzení hesla\\" se neshodují.',
     'ERR_PASSWORD_MISMATCH' => 'Hesla se neschodují.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Heslo bylo změněno.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Nelze poslat heslo',
     'LBL_REQUEST_PASSWORD' => 'Vyžádat heslo',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Chyba: Vznikl problém s aktualizací hesla tohoto uživatele.',
     'LBL_INCORRECT_PASSWORD' => 'Chyba: Nesprávné heslo',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Preferovaný Jazyk:',
+    'LBL_PREFERRED_LANGUAGE' => 'Jazykové předvolby:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Vybrat report',
@@ -10893,6 +11041,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => 'Na serveru došlo k chybě a nelze dokončit váš požadavek.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Opakujte akci. Pokud chyba přetrvává, kontaktujte svého správce služby Sugar.',
     'ERR_HTTP_500_ACTION' => 'Prosím kontaktujte technickou podporu.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 Vnitřní chyba serveru',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Na serveru došlo k dočasné chybě a server nemohl dokončit váš požadavek.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Opakujte akci. Pokud chyba přetrvává, kontaktujte svého správce Sugar.',
+    'ERR_HTTP_502_ACTION' => 'Kontaktujte technickou podporu.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 Vnitřní chyba serveru',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Server je nedostupný, aby dokončil váš požadavek.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Opakujte akci později. Pokud chyba přetrvává, kontaktujte svého správce Sugar.',
+    'ERR_HTTP_503_ACTION' => 'Kontaktujte technickou podporu.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Vykreslení pohledu selhalo',
     'ERR_RENDER_FAILED_MSG' => 'Chyba při vykreslení pohledu',
@@ -11026,6 +11186,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => 'Chyba:',
     'LBL_ALERT_TITLE_LOADING' => 'Nahrávání',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Verze vašeho prohlížeče není již podporována nebo používáte nepodporovaný prohlížeč.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Jsou doporučeny tyto verze prohlížeče: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Navrhované prohlížeče najdete na stránce {{link}}.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Podporované platformy',
 
@@ -11078,6 +11239,9 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Během připojování k serveru se vyskytla chyba. Prosím zkuste to znovu.',
     'ERR_RESOLVE_ERRORS' => 'Prosím vyřešte problémy před pokračováním.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Aktualizovat seznam',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'více',
@@ -11142,7 +11306,7 @@ $app_strings = array (
     'LBL_RESOLVE_CONFLICT' => 'Vyřešit konflikt pro {{name}}',
 
     // Generic Help Strings
-    'LBL_HELP_MORE_INFO' => 'Pro více informací se obraťte na {{{more_info_url}}} {{plural_module_name}} dokumentaci.{{{more_info_url_close}}}',
+    'LBL_HELP_MORE_INFO' => 'Pro více informací se obraťte na dokumentaci {{{more_info_url_close}}}v sekci{{{more_info_url}}} {{plural_module_name}}',
     'LBL_HELP_NO_HELP' => 'Žádná data nejsou k dispozici',
 
     // Dashlet Preview Help String
@@ -11178,10 +11342,13 @@ $app_strings = array (
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM umožňuje power uživatelům rychle provádět úkoly s klávesovými zkratkami pro zvýšení produktivity. Tabulky napravo ukazují zkratky spolu s klávesami a akcemi, které je možné provádět.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Podporované klíče</h1><ul><li>všechny alfanumerické znaky a symboly</li><li>shift, ctrl, alt, příkaz, mod (ctrl v systému Windows/Linux a příkaz v systému Mac)</li><li>enter, esc, mezerník, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>Podporované funkce</h1><ul><li>Kombinace kláves: ctrl+m</li><li>Více kláves: m,ctrl+m</li><li>Posloupnost kláves: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Obecná zkratka',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Kontextní zkratky',
     'LBL_SHORTCUT_KEY_KEY' => 'Klíč',
     'LBL_SHORTCUT_FUNCTION' => 'Funkce',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Konfigurovat kontextové zkratky',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Žádné kontextové zkratky ke konfiguraci',
     'LBL_SHORTCUT_HELP' => 'Ukaž zkratkovou pomocnou stránku',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Přepněte na rychlé vytvoření menu',
     'LBL_SHORTCUT_SEARCH' => 'Soustřeď se na obecná vyhledávací pole',
@@ -11229,6 +11396,9 @@ $app_strings = array (
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Vybrat všechny položky v poli vícenásobného výběru',
     'LBL_SHORTCUT_SWEETSPOT' => 'Přepnout panel Sweet Spot',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Skrýt panel Sweet Spot',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Uložit konfiguraci',
+    'LBL_SHORTCUT_RESTORE' => 'Obnovit výchozí',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Při ukládání vlastních klávesových zkratek na server došlo k chybě. Zkuste to znovu.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} nastavení',
@@ -11251,13 +11421,20 @@ $app_strings = array (
     'LBL_CALENDAR_RECURRENCE' => "opakování",
     'LBL_CALENDAR_REMINDERS' => "Zobrazovat připomínání?",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Vlastní datum",
     'LBL_CALENDAR_REPEAT_TYPE' => "Typ opakování",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "opakovat interval",
     'LBL_CALENDAR_REPEAT_DOW' => "opakovat ve dnech týdne",
+    'LBL_CALENDAR_REPEAT' => "Opakovat",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Opakovat dokud",
     'LBL_CALENDAR_REPEAT_COUNT' => "Opakovat události",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Opakovat výběr",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Dny v měsíci",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Opakovat řadové",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Opakovat jednotku",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Změny událostí musí být uskutečněny používáním prvního záznamu v sérii.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Pravidla opakování nemají za následek generování události.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Účastní',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Odmítnutá',
@@ -11277,17 +11454,23 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM vyžaduje javascript. Prosím povolte javascript pro další používání Sugaru.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Serializovaná data nelze deserializovat',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Serializovaná data nelze deserializovat, protože obsahují odkazy na objekty nebo třídy',
 
     'LBL_FIELD_TRIMMED' => 'Obsah pole byl zkrácen, protože překračoval limit maximálního počtu znaků.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Pole překračuje maximální povolený počet znaků.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Minulých 7 dní',
     '30' => 'Posledních 30 dní',
     '90' => 'Minulé čtvrtletí',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11392,13 +11575,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Uplynula',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Návrh',
-    'Expired' => 'Uplynula',
-    'In Review' => 'Revidováno',
-    'Published' => 'Publikováno',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Admin akce--',
@@ -11410,57 +11586,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Smazat vybrané články',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Má přílohy',
-        'none' => 'Nemá žádné',
-        'mime' => 'Zadejte typ Mime',
-        'name' => 'Zadejte název',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Slova';
   $app_list_strings['moduleListSingular']['Words'] = 'Slovo';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Vytvořit článek';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Horních 5',
-    'Top_10' => 'Horních 10',
-    'Top_20' => 'Horních 20',
-    'Bot_5'  => 'Dolních 5',
-    'Bot_10' => 'Dolních 10',
-    'Bot_20' => 'Dolních 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Všechno',
-        'added' => 'Přidáno za posledních 30 dnů',
-        'pending' => 'Čeká na mé schválení',
-        'updated' =>'Aktualizované posledních 30 dnů',
-        'faqs' => 'Nejčastější dotazy',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'Na',
-    'before' => 'Před',
-    'after' => 'Po',
-    'between_dates' => 'Ne mezi',
-    'last_7_days' => 'Minulých 7 dní',
-    'next_7_days' => 'Příštích 7 dní',
-    'last_month' => 'Minulý měsíc',
-    'this_month' => 'Tento měsíc',
-    'next_month' => 'Příští měsíc',
-    'last_30_days' => 'Posledních 30 dní',
-    'next_30_days' => 'Příštích 30 dní',
-    'last_year' => 'Minulý rok',
-    'this_year' => 'Tento rok',
-    'next_year' => 'Příští rok',
-    'isnull' => 'Je null',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12322,6 +12450,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Všechny kontakty",
+    "email" => "Pouze e-mail",
+    "phone" => "Pouze telefon",
     "prem" => "Pouze Premium"
 );
 
@@ -12347,4 +12477,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'CV',
     'Both' => 'Oboje'
 );
-

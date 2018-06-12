@@ -15,8 +15,8 @@ class zr2_QueryTemplate extends ReportProviderBase {
 	var $module_dir = "zr2_QueryTemplate";
 	
 
-	function zr2_QueryTemplate() {		
-		parent::ReportProviderBase();		
+	function __construct() {		
+		parent::__construct();		
 		$this->new_schema = true;
 	}	
 	

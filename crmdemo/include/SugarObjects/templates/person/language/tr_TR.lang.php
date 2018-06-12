@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -25,14 +25,14 @@ $mod_strings = array(
     'LBL_OTHER_PHONE' => 'Diğer Telefon',
     'LBL_FAX_PHONE' => 'Faks',
     'LBL_EMAIL_ADDRESS' => 'E-Posta Adresi',
-    'LBL_PRIMARY_ADDRESS' => 'Asıl Adresi',
-    'LBL_PRIMARY_ADDRESS_STREET' => 'Asıl Adresi',
-    'LBL_PRIMARY_ADDRESS_STREET_2' => 'Asıl Adres Sokak 2 :',
-    'LBL_PRIMARY_ADDRESS_STREET_3' => 'Asıl Adres Sokak 3:',
-    'LBL_PRIMARY_ADDRESS_CITY' => 'Asıl Adres Şehir',
-    'LBL_PRIMARY_ADDRESS_STATE' => 'Asıl Adres Eyalet',
-    'LBL_PRIMARY_ADDRESS_POSTALCODE' => 'Asıl Adres Posta Kodu',
-    'LBL_PRIMARY_ADDRESS_COUNTRY' => 'Asıl Adres Ülke:',
+    'LBL_PRIMARY_ADDRESS' => 'Birincil Adres',
+    'LBL_PRIMARY_ADDRESS_STREET' => 'Birincil Adres',
+    'LBL_PRIMARY_ADDRESS_STREET_2' => 'Birincil Adres Sokak 2:',
+    'LBL_PRIMARY_ADDRESS_STREET_3' => 'Birincil Adres Sokak 3:',
+    'LBL_PRIMARY_ADDRESS_CITY' => 'Birincil Şehir',
+    'LBL_PRIMARY_ADDRESS_STATE' => 'Birincil Eyalet',
+    'LBL_PRIMARY_ADDRESS_POSTALCODE' => 'Birincil Posta Kodu',
+    'LBL_PRIMARY_ADDRESS_COUNTRY' => 'Birincil Adres Ülke:',
     'LBL_ALT_ADDRESS' => 'Alternatif Adres Sokak',
     'LBL_ALT_ADDRESS_STREET' => 'Alternatif Adres Sokak',
     'LBL_ALT_ADDRESS_STREET_2' => 'Alternatif Adres Sokak 2:',
@@ -66,6 +66,6 @@ $mod_strings = array(
     'LBL_FACEBOOK' => 'Facebook Hesabı',
     'LBL_TWITTER' => 'Twitter Hesabı',
     'LBL_GOOGLEPLUS' => 'Google Plus ID',
-    'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternatif Adresi Asıl Adrese Kopyala',
-    'NTC_COPY_PRIMARY_ADDRESS' => 'Asıl Adresi Alternatif  Adrese Kopyala',
+    'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternatif adresi birincil adrese kopyala',
+    'NTC_COPY_PRIMARY_ADDRESS' => 'Birincil adresi alternatif adrese kopyala',
 );

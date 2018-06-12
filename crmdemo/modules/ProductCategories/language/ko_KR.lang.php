@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -19,7 +19,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 $mod_strings = array (
-  'LBL_MODULE_NAME' => '상품 책자',
+  'LBL_MODULE_NAME' => '상품 범주목록',
   'LBL_MODULE_NAME_SINGULAR' => '상품 범주',
   'LBL_MODULE_TITLE' => '상품 범주:홈',
   'LBL_SEARCH_FORM_TITLE' => '상품 유형 검색',
@@ -47,7 +47,7 @@ $mod_strings = array (
   'NTC_DELETE_GRAFT_CONFIRMATION' => '이 범주를 삭제하시겠습니까? 모든 하위 범주와 상품은 남아있게 됩니다.',
   'LBL_PARENT_NAME' => '상위 형태:',
   'LBL_CATEGORIES'=> '범주',
-  'LBL_EDITLAYOUT' => '지면 배치 편집하기' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'생성자 ID',
   'LBL_MODIFIED_ID'=>'수정자 ID:',
   'LBL_ASSIGNED_USER_NAME' => '담당자',

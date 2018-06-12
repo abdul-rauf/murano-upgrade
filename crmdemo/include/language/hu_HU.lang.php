@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,7 +56,7 @@ $app_list_strings = array (
     'TaxRates'=>'Adókulcsok',
     'ContractTypes' => 'Szerződéstípusok',
     'Schedulers'=>'Ütemezők',
-    'Project'=>'Projekt',
+    'Project'=>'Projektek',
     'ProjectTask'=>'Projektfeladatok',
     'Campaigns'=>'Kampányok',
     'CampaignLog'=>'Kampánynapló',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Szűrő',
     'Comments' => 'Megjegyzés',
     'Currencies' => 'Pénznem',
-    'Project' => 'Projekt',
     'ProductTemplates' => 'Terméksablon',
-    'ProductCategories' => 'Termékkategória',
     'ProductTypes' => 'Terméktípus',
     'Shippers' => 'Beszállító',
     'Subscriptions' => 'Feliratkozás',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"P.",
                 '7'=>"Szo.",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Va",
+            '2'=>"Hé",
+            '3'=>"Ke",
+            '4'=>"Sze",
+            '5'=>"Csü",
+            '6'=>"Pé",
+            '7'=>"Szo",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'V.',
         '1' => 'H.',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'év',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => '-Ig',
+        'Occurrences' => 'Előfordulások',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Nincs',
+        'Each' => 'Mindegyik',
+        'On' => 'Pontosan',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'első',
+        'second' => 'másodperc',
+        'third' => 'harmadik',
+        'fourth' => 'negyedik',
+        'fifth' => 'ötödik',
+        'last' => 'utolsó',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Vasárnap',
+        'Mon' => 'Hétfő',
+        'Tue' => 'Kedd',
+        'Wed' => 'Szerda',
+        'Thu' => 'Csütörtök',
+        'Fri' => 'Péntek',
+        'Sat' => 'Szombat',
+        'Day' => 'Nap',
+        'WD'  => 'Hétköznap',
+        'WE'  => 'Hétvégi nap'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Közepe',
         'end' => 'Vége',
         'top' => 'Felső',
+        'total' => 'Összesen',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Tölcsér',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Világos',
       'dark' => 'Sötét',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Mozgatás',
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "Christ Church"),
-            "2" => array("code" => "AND", "name" => "Saint Andrew"),
+            "2" => array("code" => "ÉS", "name" => "Saint Andrew"),
             "3" => array("code" => "GEO", "name" => "Saint George"),
             "4" => array("code" => "JAM", "name" => "Saint James"),
             "5" => array("code" => "JOH", "name" => "Saint John"),
@@ -2238,8 +2357,8 @@ $app_list_strings = array (
             "5" => array("code" => "KW", "name" => "Kweneng"),
             "6" => array("code" => "NG", "name" => "Ngamiland"),
             "7" => array("code" => "NE", "name" => "Észak-kelet"),
-            "8" => array("code" => "NW", "name" => "Észak-nyugat"),
-            "9" => array("code" => "SE", "name" => "Dél-kelet"),
+            "8" => array("code" => "ÉNY", "name" => "Észak-nyugat"),
+            "9" => array("code" => "DK", "name" => "Dél-kelet"),
             "10" => array("code" => "SO", "name" => "Déli")
         ),
         /* Brazil */
@@ -2269,7 +2388,7 @@ $app_list_strings = array (
             "23" => array("code" => "RR", "name" => "Roraima"),
             "24" => array("code" => "SC", "name" => "Santa Catarina"),
             "25" => array("code" => "SP", "name" => "Sao Paulo"),
-            "26" => array("code" => "SE", "name" => "Sergipe"),
+            "26" => array("code" => "DK", "name" => "Sergipe"),
             "27" => array("code" => "TO", "name" => "Tocantins")
         ),
         /* British Indian Ocean Territory */
@@ -2595,7 +2714,7 @@ $app_list_strings = array (
             "21" => array("code" => "MET", "name" => "Meta"),
             "22" => array("code" => "NAR", "name" => "Narino"),
             "23" => array("code" => "NDS", "name" => "Norte de Santander"),
-            "24" => array("code" => "PUT", "name" => "Putumayo"),
+            "24" => array("code" => "TESZ", "name" => "Putumayo"),
             "25" => array("code" => "QUI", "name" => "Quindio"),
             "26" => array("code" => "RIS", "name" => "Risaralda"),
             "27" => array("code" => "SAP", "name" => "San Andres y Providencia"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "ÉS", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "VAGY", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Southern Nations - Nationalities"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "Sumba"),
+            "22" => array("code" => "ÖSSZ.", "name" => "Sumba"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3463,7 +3582,7 @@ $app_list_strings = array (
             "6" => array("code" => "NO", "name" => "Nord-Ouest"),
             "7" => array("code" => "OU", "name" => "Ouest"),
             "8" => array("code" => "SD", "name" => "Sud"),
-            "9" => array("code" => "SE", "name" => "Sud-Est")
+            "9" => array("code" => "DK", "name" => "Sud-Est")
         ),
         /* Heard and McDonald Islands */
         "HM" => array(
@@ -3546,7 +3665,7 @@ $app_list_strings = array (
             "28" => array("code" => "SP", "name" => "Sopron"),
             "29" => array("code" => "SS", "name" => "Szabolcs-Szatmár-Bereg"),
             "30" => array("code" => "SZ", "name" => "Szeged"),
-            "31" => array("code" => "SE", "name" => "Székesfehérvár"),
+            "31" => array("code" => "DK", "name" => "Székesfehérvár"),
             "32" => array("code" => "SL", "name" => "Szolnok"),
             "33" => array("code" => "SM", "name" => "Szombathely"),
             "34" => array("code" => "TA", "name" => "Tatabánya"),
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "VAGY", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3731,7 +3850,7 @@ $app_list_strings = array (
             "6" => array("code" => "JM", "name" => "Júdeai-hegység"),
             "7" => array("code" => "JE", "name" => "Jeruzsálem"),
             "8" => array("code" => "NE", "name" => "Negev"),
-            "10" => array("code" => "SE", "name" => "Semaria"),
+            "10" => array("code" => "DK", "name" => "Semaria"),
             "11" => array("code" => "SH", "name" => "Sharon"),
             "12" => array("code" => "TA", "name" => "Tel Aviv (Gosh Dan)")
         ),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "VAGY", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parish"),
             "4" => array("code" => "MAN", "name" => "Manchester Parish"),
             "5" => array("code" => "POR", "name" => "Portland Parish"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "ÉS", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parish"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parish"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parish"),
@@ -4109,7 +4228,7 @@ $app_list_strings = array (
             "11" => array("code" => "BAT", "name" => "Batroun"),
             "12" => array("code" => "BSH", "name" => "Bsharri"),
             "13" => array("code" => "KOU", "name" => "Koura"),
-            "14" => array("code" => "MIN", "name" => "Miniyeh-Danniyeh"),
+            "14" => array("code" => "Minimum", "name" => "Miniyeh-Danniyeh"),
             "15" => array("code" => "TRI", "name" => "Tripoli"),
             "16" => array("code" => "ZGH", "name" => "Zgharta"),
             "17" => array("code" => "ALE", "name" => "Aley"),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "VAGY", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -4829,7 +4948,7 @@ $app_list_strings = array (
             "11" => array("code" => "NA", "name" => "Narayani"),
             "12" => array("code" => "RA", "name" => "Rapti"),
             "13" => array("code" => "SA", "name" => "Sagarmatha"),
-            "14" => array("code" => "SE", "name" => "Seti")
+            "14" => array("code" => "DK", "name" => "Seti")
         ),
         /* Netherlands */
         "NL" => array(
@@ -5040,7 +5159,7 @@ $app_list_strings = array (
             "11" => array("code" => "NT", "name" => "Ngatpang"),
             "12" => array("code" => "NC", "name" => "Ngchesar"),
             "13" => array("code" => "NR", "name" => "Ngeremlengui"),
-            "14" => array("code" => "NW", "name" => "Ngiwal"),
+            "14" => array("code" => "ÉNY", "name" => "Ngiwal"),
             "15" => array("code" => "PE", "name" => "Peleliu"),
             "16" => array("code" => "SO", "name" => "Sonsorol")
         ),
@@ -5252,7 +5371,7 @@ $app_list_strings = array (
             "15" => array("code" => "PO", "name" => "Portalegre"),
             "16" => array("code" => "PR", "name" => "Porto"),
             "17" => array("code" => "SA", "name" => "Santarém"),
-            "18" => array("code" => "SE", "name" => "SetÚbal"),
+            "18" => array("code" => "DK", "name" => "SetÚbal"),
             "19" => array("code" => "VC", "name" => "Viana do Castelo"),
             "20" => array("code" => "VR", "name" => "Vila Real"),
             "21" => array("code" => "VI", "name" => "Viseu")
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novoszibirszk"),
             "49" => array("code" => "OM", "name" => "Omszk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "VAGY", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -5567,7 +5686,7 @@ $app_list_strings = array (
             "6" => array("code" => "FI", "name" => "Fiorentino"),
             "7" => array("code" => "MO", "name" => "Montegiardino"),
             "8" => array("code" => "SM", "name" => "Citta di San Marino"),
-            "9" => array("code" => "SE", "name" => "Serravalle")
+            "9" => array("code" => "DK", "name" => "Serravalle")
         ),
         /* Sao Tome and Principe */
         "ST" => array(
@@ -5702,7 +5821,7 @@ $app_list_strings = array (
             "4" => array("code" => "KN", "name" => "KwaZulu-Natal"),
             "5" => array("code" => "LP", "name" => "Limpopo"),
             "6" => array("code" => "MP", "name" => "Mpumalanga"),
-            "7" => array("code" => "NW", "name" => "Észak-nyugat"),
+            "7" => array("code" => "ÉNY", "name" => "Észak-nyugat"),
             "8" => array("code" => "NC", "name" => "Northern Cape"),
             "9" => array("code" => "WC", "name" => "Western Cape")
         ),
@@ -5767,7 +5886,7 @@ $app_list_strings = array (
             "2" => array("code" => "EA", "name" => "Keleti"),
             "3" => array("code" => "NC", "name" => "Észak-közép"),
             "4" => array("code" => "NO", "name" => "Északi"),
-            "5" => array("code" => "NW", "name" => "Észak-nyugat"),
+            "5" => array("code" => "ÉNY", "name" => "Észak-nyugat"),
             "6" => array("code" => "SA", "name" => "Sabaragamuwa"),
             "7" => array("code" => "SO", "name" => "Déli"),
             "8" => array("code" => "UV", "name" => "Uva"),
@@ -5872,7 +5991,7 @@ $app_list_strings = array (
             "11" => array("code" => "JU", "name" => "Jura"),
             "12" => array("code" => "LU", "name" => "Lucerne"),
             "13" => array("code" => "NE", "name" => "Neuchâtel"),
-            "14" => array("code" => "NW", "name" => "Nidwalden"),
+            "14" => array("code" => "ÉNY", "name" => "Nidwalden"),
             "15" => array("code" => "OW", "name" => "Obwalden"),
             "16" => array("code" => "SG", "name" => "St. Gallen"),
             "17" => array("code" => "SH", "name" => "Schaffhausen"),
@@ -5899,7 +6018,7 @@ $app_list_strings = array (
             "9" => array("code" => "HL", "name" => "Halab"),
             "10" => array("code" => "HM", "name" => "Hamah"),
             "11" => array("code" => "HI", "name" => "Hims"),
-            "12" => array("code" => "ID", "name" => "Idlib"),
+            "12" => array("code" => "Azonosító", "name" => "Idlib"),
             "13" => array("code" => "RD", "name" => "Rif Dimashq"),
             "14" => array("code" => "TA", "name" => "Tartus")
         ),
@@ -6310,7 +6429,7 @@ $app_list_strings = array (
             "16" => array("code" => "OD", "name" => "Odessza"),
             "17" => array("code" => "PO", "name" => "Poltava"),
             "18" => array("code" => "RI", "name" => "Rivne"),
-            "19" => array("code" => "SE", "name" => "Szevasztopol"),
+            "19" => array("code" => "DK", "name" => "Szevasztopol"),
             "20" => array("code" => "SU", "name" => "Szumi"),
             "21" => array("code" => "TE", "name" => "Ternopil"),
             "22" => array("code" => "VI", "name" => "Vinnicja"),
@@ -6455,7 +6574,7 @@ $app_list_strings = array (
             "19" => array("code" => "GA", "name" => "Georgia"),
             "20" => array("code" => "GU", "name" => "Guam"),
             "21" => array("code" => "HI", "name" => "Hawaii"),
-            "22" => array("code" => "ID", "name" => "Idaho"),
+            "22" => array("code" => "Azonosító", "name" => "Idaho"),
             "23" => array("code" => "IL", "name" => "Illinois"),
             "24" => array("code" => "IN", "name" => "Indiana"),
             "25" => array("code" => "IA", "name" => "Iowa"),
@@ -6482,7 +6601,7 @@ $app_list_strings = array (
             "46" => array("code" => "MP", "name" => "Északi-Mariana-szigetek"),
             "47" => array("code" => "OH", "name" => "Ohio"),
             "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "49" => array("code" => "VAGY", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pennsylvania"),
             "52" => array("code" => "PR", "name" => "Puerto Rico"),
@@ -6541,7 +6660,7 @@ $app_list_strings = array (
             "3" => array("code" => "FA", "name" => "Farg'ona"),
             "4" => array("code" => "JI", "name" => "Jizzax"),
             "5" => array("code" => "NG", "name" => "Namangan"),
-            "6" => array("code" => "NW", "name" => "Navoiy"),
+            "6" => array("code" => "ÉNY", "name" => "Navoiy"),
             "7" => array("code" => "QA", "name" => "Qashqadaryo"),
             "8" => array("code" => "QR", "name" => "Qoraqalpog'iston Republikasi"),
             "9" => array("code" => "SA", "name" => "Samarqand"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "VAGY", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -6686,7 +6805,7 @@ $app_list_strings = array (
             "4" => array("code" => "LP", "name" => "Luapula"),
             "5" => array("code" => "LK", "name" => "Lusaka"),
             "6" => array("code" => "NO", "name" => "Északi"),
-            "7" => array("code" => "NW", "name" => "Észak-nyugati"),
+            "7" => array("code" => "ÉNY", "name" => "Észak-nyugati"),
             "8" => array("code" => "SO", "name" => "Déli"),
             "9" => array("code" => "WE", "name" => "Nyugati")
         ),
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Követő link',
   'LBL_TOGGLE_VISIBILITY' => 'Láthatóság szabályozása', // Record view header panel element
   'LBL_ACTIVITIES' => 'Tevékenységek',
-  'LBL_COPYRIGHT' => 'Törvény által védve © 2004-2015 SugarCRM Inc. Minden jog fenntartva.',
-  'LBL_TRADEMARK' => 'A SugarCRM a SugarCRM Inc. védjegye. Minden egyéb cég- és terméknév a velük kapcsolatba hozható cég védjegye.',
-  'LBL_TRADEMARK2' => 'A SugarCRM ®, a Sugar Enterprise™ és a  Sugar™ SugarCRM Inc. védjegyek.',
-  'LBL_SEND_INVITE' => 'Meghívó küldése',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'A SugarCRM, a Sugar és a 3-D kocka a SugarCRM Inc. bejegyzett védjegyei. '.
+        'A termékben használt vagy abban megjelenő minden más cég- és terméknév az adott, '.
+        'hozzá kapcsolódó vállalat védjegye lehet.',
+    'LBL_TRADEMARK2' => 'A SugarCRM ®, a Sugar Enterprise™ és a  Sugar™ SugarCRM Inc. védjegyek.',
+    'LBL_SEND_INVITE' => 'Meghívó küldése',
   'LBL_INVITEES' => 'Meghívottak',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'A vendégek nem fogják megkapni a meghívóját',
   'LBL_SELECT_ACTION_LABEL' => 'Művelet kiválasztása',
   'LBL_TOGGLE_DRAWER' => 'Kapcsoló fiók',
   'LBL_TOUR_NEXT' => 'Tovább',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Hozzáadás' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Cég logo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Naptár' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'fő menü navigáció',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'Szubpanel ki-/bekapcsolása',
+
     'LBL_ADVANCED' => 'Összetett',
     'LBL_BASIC' => 'Egyszerű',
     'LBL_MODULE_FILTER' => 'Szűrés alapja:',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Csoportok',
     'LBL_TEAM_SET_ID' => 'Csoport beállítás azonosító',
     'LBL_TEAM_SET'=>'Csoport beállítás',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Kiválasztott Csoportok',
     'LBL_SEARCH_UNAVAILABLE' => 'A keresés nem elérhető. Kérem, próbálja később!',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Nincs elsődleges csoport meghatározva',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Hiba az elsődleges csoport azonosító eltávolítása közben [{0}] a [{1}] modulból, [{2}] azonosítóval',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'A keresőmotor pillanatnyilag nem elérhető.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Keresőmotor futásidejű hiba lépett fel. Kérjük, forduljon a rendszergazdához.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Érvénytelen platforma megadva.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Egy mező mely folyamat által zárt, nem módosítható.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Ismeretlen hiba lépett fel az alkalmazásprogramozási felületen.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Azt jelzi, hogy a szerver foglalt, túlterhelt vagy leállt.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'A keresőmotor jelenleg kapcsolódási probléma miatt nem elérhető. Ellenőrizze a csatlakozást és a beállítást az Admin->keresés->teszt alatt.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'A keresőmotorban futtatási kivétel lépett fel. Részletekért lásd: sugarcrm.log.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Jelzi a megadott platformát míg a hitelesítés ismeretlen. Az egyéni platformákat hozzá kell adni a custom/client/platforms.php-hoz',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Egy mező mely épp futó folyamat által zárt, nem módosítható.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s zárt egy futó folyamat által és nem módosítható.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s zártak egy futó folyamat által és nem módosítható.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Jelzi a megadott platformát míg a hitelesítés ismeretlen. Az egyéni platformákat hozzá kell adni a custom/client/platforms.php-hoz',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'A rendszer már tartalmaz egy hasonló nevű fájlt.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Az időperiódus már tartalmaz alegységeket',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Idő alegységek nem tartalmazhatnak további alegységeket',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Az alábbi időperiódusok betöltése sikertelen: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Nincs aktív idő-periódus a jelenlegi beállításokhoz.',
     'LBL_CURRENT_TIMEPERIOD' => 'Jelenlegi idő periódus',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Következő időperiódus',
     'LBL_NEXT_TIMEPERIOD' => 'Következő periódus',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Válasszon mezőt...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Válasszon kiszolgálót...',
     'LBL_FILTER_CREATE_NEW' => 'Új létrehozása',
+    'LBL_FILTER_CREATE_FILTER' => 'Új szűrő létrehozása',
+    'LBL_FILTER_EDIT_FILTER' => 'Szűrő módosítása',
     'LBL_FILTER_ALL_RECORDS' => 'Minden rekord',
     'TPL_FILTER_SAVE' => 'Sikeresen létrehozta a(z) {{name}} szűrőt.',
     'LBL_FILTER_BETWEEN_FROM' => 'Ettől',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Állam:',
     'LBL_STATUS_UPDATED'=>'Az Ön állapota erre az eseményre vonatkozóan frissítésre került!',
+    'LBL_STATUS_NOT_UPDATED' => 'Az ön állapota ennél az eseménynél nem módosult.',
     'LBL_STATUS'=>'Állapot:',
     'LBL_STREET'=>'Utca',
     'LBL_SUBJECT' => 'Tárgy',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a>Minden jog fenntartva.<br />SugarCRM védjegye a SugarCRM, Inc vállalatnak. Minden egyéb cég- és terméknév védjegye a kapcsolódó cégeknek.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Minden jog fenntartva.<br />A SugarCRM, a Sugar és a 3-D kocka a SugarCRM Inc. bejegyzett védjegyei. '.
+        'A termékben használt vagy abban megjelenő minden más cég- és terméknév az adott, '.
+        'hozzá kapcsolódó vállalat védjegye lehet.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Üzemezett Feladat Befejezve',
@@ -9176,7 +9315,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Hiba. Érvénytelen működtetőt adott meg.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Hiba. Érvénytelen szűrőt adott meg.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Importálás sikertelen. Kérjük ellenőrizze le a sugárt további részletekért.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Az importálás sikertelen volt. Egy csoport mező részlegesen zárolva van a Folyamat Meghatározása miatt. Ezeket a mezőket ki kell oldani a Folyamat Meghatározásban annak érdekében, hogy a meghatározás importálható legyen.',
+    'ERROR_EXP_DATE_LOW' => 'Hiba történt. A lejárati dátum nem lehet a közzététel időpontja előtt.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Hiba. A jóváhagyott állapothoz szükség van a közzététel dátumára.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'A Közzétételi Dátum helye üres.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9306,6 +9446,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'oszlop jeleníthető meg.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Műszerfal',
     'LBL_DASHBOARD_BWC' => 'Örökölt dashboard',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Műszerfalam',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Segítség müszerfal',
@@ -9338,9 +9479,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Saját {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Hírek',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Google hírcsatorna a kapcsolódó klienshez',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Lehetőség mutatók',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Lehetőség mutatók a kapcsolódó klienshez',
@@ -9409,11 +9547,10 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Jelenleg nem található rekord.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Ügyek összegzése',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Hírcsatorna',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interakciók',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Mellékletek',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Jegyzetek & mellékletek, amelyek a rekordhoz tartoznak',
-    'LBL_DASHLET_PIPLINE_NAME' => 'Pipeline',
+    'LBL_DASHLET_PIPLINE_NAME' => 'Adatcsatorna',
 
     'LBL_DASHLET_RECENT_TWEETS_SUGARCRM_NAME' => 'Utóbbi tweetek - @{{twitter}}',
 
@@ -9918,7 +10055,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => 'Feladatfunkció kiválasztása',
     'LBL_DNB_BAL_ORG_NAME' => 'Szervezet neve',
     'LBL_DNB_BAL_IMPORT_AS' => 'Importálás mint:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Szervezet neve',
+    'LBL_DNB_BAL_ORG_NAME' => 'Cég Neve',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'Millió $USD-ban',
@@ -9977,7 +10114,7 @@ $app_strings = array (
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Leghasznosabb közzétett tudásbázis-cikkek',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'A legkedveltebb és leggyakrabban megtekintett tudásbázis cikkeket mutatja',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} a következővel szűrve: {{label}} "{{value}}"',
 
@@ -10016,6 +10153,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'p',
     'ERR_BLANK_PAGE_NAME' => 'Kérem, írjon be egy oldal nevet!',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Adatcsatornám',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "A Csoportom adatcsatornája",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Eladási adatcsatorna jelzés',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Megjeleníti az aktuális pipeline-t.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Nincs kép',
 
@@ -10269,6 +10413,8 @@ $app_strings = array (
     'LBL_SELECT_THIS_ROW_TITLE' => 'Sor kijelölése',
     'LBL_TEAM_SELECTED_TITLE' => 'Kiválasztott csoport',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Válassza ki a jelen csoport elsődlegessé tételéhez',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Csoport megjelölve, mint Csoport-Alapú Kiválasztott ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Jelölje meg ezt a csoportot, mint Csoport-Alapú Kiválasztott',
     'LBL_SEARCH_AND_SELECT' => '{{module}} keresése és kiválasztása',
     'TPL_SEARCH_AND_ADD' => '{{module}} keresése és hozzáadása',
 
@@ -10357,6 +10503,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Előnézet nem elérhető: nincsenek elérhető adatok',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Előnézet nem elérhető: a tartalom megtekintés alatt',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Előnézet nem elérhető: a rekordot eltávolították, vagy nincs hozzáférés',
+    'LBL_PREVIEW_PREVIOUS' => 'Előző megtekintése',
+    'LBL_PREVIEW_NEXT' => 'Következő megtekintése',
+    'LBL_PREVIEW_CLOSE' => 'Megtekintés bezárása',
     'LBL_STREAM_NO_RECORDS' => 'A rekordhoz jelenleg nem tartozik jegyzet. Kérem, a link lekattintásával mellékeljen hozzá!',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}} többszörös előfordulást talált a rendszer.',
     'LBL_NO_DUPLICATES_FOUND' => 'Nem található ismétlődés.',
@@ -10376,6 +10525,7 @@ $app_strings = array (
         'Érvénytelen mennyiség. A számnak {{minRecords}} és {{maxRecords}} között kell lennie.',
     'LBL_MERGE_NO_ACCESS' =>
         'Nincs megfelelő hozzáférése a művelet végrehajtásához',
+    'LBL_MERGE_LOCKED' => 'Néhány egyesítés céljából kiválasztott rekord tartalmaz olyan mezőket, melyek szerkesztés miatt zárolva vannak egy folyamat által, ezért pillanatnyilag nem egyesíthetőek.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10846,10 +10996,9 @@ $app_strings = array (
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Rendszer-beállítások',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Stúdió',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Jelszó',
     'LBL_CURRENT_PASSWORD'				=> 'Jelenlegi jelszó',
-    'LBL_SET_NEW_PASSWORD'              => 'Adja meg a jelszót',
     'LBL_NEW_PASSWORD1'                 => 'Új jelszó',
     'LBL_NEW_PASSWORD2'                 => 'Erősítse meg a jelszót',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Kérjük, ismételten adja meg jelszavát!',
@@ -10857,13 +11006,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> 'Kérjük, adja meg jelenlegi jelszavát!',
     'ERR_REENTER_PASSWORDS' => 'A jelszavaknak egyezniük kell.',
     'ERR_PASSWORD_MISMATCH' => 'A megadott jelszó nem egyezik a rendszerben tárolt jelszóval.',
-    'LBL_NEW_USER_PASSWORD_1' => 'A jelszót sikeresen megváltoztatta.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Jelszó küldése sikertelen',
     'LBL_REQUEST_PASSWORD' => 'Kérjen be jelszót',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Hiba: a felhasználó jelszavának frissítése sikertelen.',
     'LBL_INCORRECT_PASSWORD' => 'Hiba: érvénytelen jelszó.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Preferált nyelv:',
+    'LBL_PREFERRED_LANGUAGE' => 'Nyelvi preferencia:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Jelentés kiválasztása',
@@ -10893,6 +11041,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => 'A szerver hibát észlelt, és nem tudta teljesíteni a kérését.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Kérjük, próbálja újra, Ha a hiba továbbra is fennáll, kérjük, forduljon a Sugar rendszergazdához.',
     'ERR_HTTP_500_ACTION' => 'Lépjen kapcsolatba a technikai segítségnyújtással!',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 Belső szerver hiba',
+    'ERR_HTTP_502_TEXT_LINE1' => 'A szerver átmeneti hibát észlelt, és nem tudta teljesíteni a kérését.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Kérjük, próbálja újra, Ha a hiba továbbra is fennáll, kérjük, forduljon a Sugar rendszergazdához.',
+    'ERR_HTTP_502_ACTION' => 'Lépjen kapcsolatba a technikai segítségnyújtással.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 Belső szerver hiba',
+    'ERR_HTTP_503_TEXT_LINE1' => 'A kiszolgáló nem tudja teljesíteni a kérését.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Kérjük, próbálja újra később. Ha a hiba továbbra is fennáll, kérjük, forduljon a Sugar rendszergazdához.',
+    'ERR_HTTP_503_ACTION' => 'Lépjen kapcsolatba a technikai segítségnyújtással.',
 
     'ERR_RENDER_FAILED_TITLE' => 'A renderelés sikertelen',
     'ERR_RENDER_FAILED_MSG' => 'Nézet renderelése sikertelen',
@@ -11026,6 +11186,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => 'Hiba:',
     'LBL_ALERT_TITLE_LOADING' => 'Betöltés',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Az Ön által használt böngésző jelen verzióját nem támogatja a rendszer, vagy eleve nem támogatott böngészőt használ.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'A következő böngésző verziók ajánlottak:<ul><li>Internet explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'A javasolt böngészőkhöz lásd a következő oldalt: {{link}}.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Támogatott platformok',
 
@@ -11078,6 +11239,9 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Hiba merült fel a szerverre való csatlakozás során. Próbálja újra!',
     'ERR_RESOLVE_ERRORS' => 'Oldja meg a problémákat a folytatás előtt!',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Lista frissítése',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'több',
@@ -11174,10 +11338,13 @@ $app_strings = array (
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'A sugarCRM lehetővé teszi a felhasználóknak, hogy gyorsan tudjanak bizonyos feladatokat elvégezni gyorsbillentyűkön keresztül, hogy ezáltal növelhessék a hatékonyságot. A jobb oldalon található táblázatok ábrázolák a rendelkezésre álló gyorsbillentyűket a használandó billentyűkkel és a hozzájuk tartozó funkciókkal.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Támogatott billentyűk</h1><ul><li>minden alfanumerikus karakter és szimbólum</li><li>shift, ctrl, alt, command, mod (ctrl a Windows-ban/Linux-ban és command Mac-ben)</li><li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>Támogatott funkciók</h1><ul><li>Billentyűkombináció: ctrl+m</li><li>Többszörös billentyűk: m,ctrl+m</li><li>Billenytűsorozat: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Általános Gyorsbillentyűk',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Szöveghez kapcsolódó Gyorsbillentyűk',
     'LBL_SHORTCUT_KEY_KEY' => 'Kulcs',
     'LBL_SHORTCUT_FUNCTION' => 'Funkció',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Kontextus szerinti parancsikonok konfigurálása',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Nincs konfigurálnivaló kontextusszerinti parancsikon',
     'LBL_SHORTCUT_HELP' => 'Gyorsbillentyű sugó oldal',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Gyors előállítási menű kapcsolása',
     'LBL_SHORTCUT_SEARCH' => 'Általános keresési mezőre koncentrálás',
@@ -11225,6 +11392,9 @@ $app_strings = array (
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Összes elem kiválasztása egy többválasztásos mezőben',
     'LBL_SHORTCUT_SWEETSPOT' => 'Sweet Spot sáv váltása',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Sweet Spot sáv elrejtése',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Konfiguráció mentése',
+    'LBL_SHORTCUT_RESTORE' => 'Visszaállítás alapértelmezettre',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Hiba történt a szerveren belüli egyéni gyorsbillentyűk mentésekor. Kérjük próbálja újra.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} Beállítások',
@@ -11247,13 +11417,20 @@ $app_strings = array (
     'LBL_CALENDAR_RECURRENCE' => "Többszörös előfordulás",
     'LBL_CALENDAR_REMINDERS' => "Emlékeztetők",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Egyéni időpont",
     'LBL_CALENDAR_REPEAT_TYPE' => "Ismétlési Típus",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Ismétlési Intervallum",
     'LBL_CALENDAR_REPEAT_DOW' => "Ismétlés a hét napjain",
+    'LBL_CALENDAR_REPEAT' => "Ismétlés",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Ismétel Amíg",
     'LBL_CALENDAR_REPEAT_COUNT' => "Előfordulás megismétlése",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Választó megismétlése",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Hónap napja(i)",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Sorszám ismétlése",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Egység ismétlése",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Ismétlődő módosításokat kell elvégezni a sorozat első adatának használatával.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Az ismétlődő szabályok nem létrehozott eseményt eredményeznek.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Résztvevő',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Elutasított',
@@ -11273,17 +11450,23 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'A SugarCRM-hez javascript szükséges. Kérjük, engedélyezze a javascript-et, hogy továbbra is használni tudja a SugarCRM-et.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'A szerializált adatok nem kerültek deszerializálásra',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'A szerializált adatok nem kerültek deszerializálásra, mert tartalmaznak tárgyakra, illetve osztályokra vonatkozó hivatkozásokat',
 
     'LBL_FIELD_TRIMMED' => 'A mező kiemelésre került, mert meghaladja a maximális karakterszámot.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'A mező meghaladja a maximális karakterszámot.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Utolsó 7 nap',
     '30' => 'Elmúlt 30 nap',
     '90' => 'Elmúlt negyedév',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11388,13 +11571,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Lejárt',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Piszkozat',
-    'Expired' => 'Lejárt',
-    'In Review' => 'Felülvizsgálaton',
-    'Published' => 'Közzétéve',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Rendszergazdai intézkedések--',
@@ -11406,57 +11582,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Kiválasztott cikkek törlése',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Csatolmánnyal',
-        'none' => 'Nincs',
-        'mime' => 'MIME típus megadása',
-        'name' => 'Név megadása',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Szavak';
   $app_list_strings['moduleListSingular']['Words'] = 'Szó';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Cikk létrehozása';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Top 5',
-    'Top_10' => 'Top 10',
-    'Top_20' => 'Top 20',
-    'Bot_5'  => 'Alsó 5',
-    'Bot_10' => 'Alsó 10',
-    'Bot_20' => 'Alsó 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Minden',
-        'added' => 'Hozzáadva az elmúlt 30 napban',
-        'pending' => 'Jóváhagyásomra vár',
-        'updated' =>'Frissítve az utolsó 30 napban',
-        'faqs' => 'GYIK',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'Rajta',
-    'before' => 'Előtt',
-    'after' => 'Után',
-    'between_dates' => 'Között',
-    'last_7_days' => 'Utolsó 7 nap',
-    'next_7_days' => 'Következő 7 nap',
-    'last_month' => 'Múlt hónap',
-    'this_month' => 'Aktuális hónap',
-    'next_month' => 'Következő hónap',
-    'last_30_days' => 'Elmúlt 30 nap',
-    'next_30_days' => 'Következő 30 nap',
-    'last_year' => 'Múlt év',
-    'this_year' => 'Aktuális év',
-    'next_year' => 'Következő év',
-    'isnull' => 'Nulla',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12318,6 +12446,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Összes kapcsolat",
+    "email" => "Csak e-mailben",
+    "phone" => "Csak telefonon",
     "prem" => "Csak prémium"
 );
 
@@ -12343,4 +12473,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Bio',
     'Both' => 'Mindkettő'
 );
-

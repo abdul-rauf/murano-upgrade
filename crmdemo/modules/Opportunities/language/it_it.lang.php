@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -66,8 +66,8 @@ $mod_strings = array(
     'UPDATE_MERGE_TXT' => 'Unisci più valute in un´unica valuta. Se noti che la stessa valuta si ripete più volte puoi scegliere di unirle. Quest´operazione unirà le valute anche per tutti gli altri moduli.',
     'LBL_ACCOUNT_NAME' => 'Nome Azienda:',
     'LBL_CURRENCY' => 'Valuta:',
-    'LBL_DATE_CLOSED' => 'Data Chiusura Prevista:',
-    'LBL_DATE_CLOSED_TIMESTAMP' => 'Data Chiusura Prevista Timestamp',
+    'LBL_DATE_CLOSED' => 'Data di chiusura prevista:',
+    'LBL_DATE_CLOSED_TIMESTAMP' => 'Timestamp data di chiusura prevista',
     'LBL_TYPE' => 'Tipo:',
     'LBL_CAMPAIGN' => 'Campagna:',
     'LBL_NEXT_STEP' => 'Prossimo Passo:',
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Cliccando Conferma, cancellerai TUTTI i dati delle previsioni e modificherai la Vista Opportunità. Se non  è questo che intendi fare, clicca annulla per ritornare alle impostazioni precedenti.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Facendo clic su Conferma, sarà possibile cancellare TUTTI i dati sulle Previsioni e modificare la vista Opportunità. '
+        .'Saranno, inoltre, disabilitate TUTTE le definizioni dei processi con un modulo obiettivo di Elementi dell&#39;opportunità. '
+        .'Se questo non è ciò che si intendeva, fare clic su Annulla per tornare alle impostazioni precedenti.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Se tutte gli Elementi dell´Opportunità sono chiusi o almeno uno è stato vinto,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'la Fase di Vendita dell´Opportunità è "Chiuso Vinto".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Se tutti gli Elementi dell´Opportunità sono in Fase di vendita "Chiuso Perso",',
@@ -162,28 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} consente di tenere traccia delle singole vendite e degli elementi della riga che appartengono a quelle vendite dall&#39;inizio alla fine. Ogni record {{module_name}} rappresenta un&#39;intestazione per un gruppo di {{revenuelineitems_module}} e si riferisce anche ad altri record importanti quali ad esempio {{quotes_module}}, {{contacts_module}}, ecc. 
-
-Ogni {{revenuelineitems_singular_module}} è la potenziale vendita di un determinato prodotto e comprende dati di vendita pertinenti. Ogni {{revenuelineitems_singular_module}} avanza tipicamente attraverso vari Fasi di Vendita fino a che non viene contrassegnato come "Chiuso Vinto" o "Chiuso perso". Il record {{module_name}} riflette l&#39;importo e la data di chiusura prevista del suo {{revenuelineitems_module}}. {{plural_module_name}} e {{revenuelineitems_module}} possono essere ulteriormente sfruttati servendosi del modulo {{forecasts_singular_module}}ing di Sugar per capire e prevedere i trend di vendite oltre che per concentrare il lavoro e ottenere quote di vendita.',
+    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} permette di tenere traccia delle vendite individuali, dall&#39;inizio alla fine. Ciascun record {{module_name}} rappresenta una probabile vendita e comprende i dati rilevanti alla vendita e ad altri record importanti quali {{quotes_module}}, {{contacts_module}}, ecc. Un {{module_name}} progredirà tipicamente passando per diverse fasi della vendita, fino a che acquisirà lo stato di "Chiuso vinto" o "Chiuso perso". {{plural_module_name}} può essere ulteriormente sfruttato utilizzando il modulo {{forecasts_singular_module}} di Sugar per capire e prevedere le tendenze di vendita e concentrare il lavoro sul raggiungimento delle quote di vendita.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} consente di tenere traccia delle singole vendite e degli elementi della riga che appartengono a quelle vendite dall&#39;inizio alla fine. Ogni record {{module_name}} rappresenta un&#39;intestazione per un gruppo di {{revenuelineitems_module}} e si riferisce anche ad altri record importanti quali ad esempio {{quotes_module}}, {{contacts_module}}, ecc.
+    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} permette di tenere traccia delle vendite individuali e dei prodotti che appartengono a quelle vendite, dall&#39;inizio alla fine. Ciascun record {{module_name}} rappresenta una probabile vendita e comprende i dati rilevanti alla vendita e ad altri record importanti quali {{quotes_module}}, {{contacts_module}}, ecc.
 
-- Modificare i record di questo campo facendo clic su un campo individuale o sul pulsante Edit.
-- Visualizzare o modificare i link verso altri record nei sottopannelli, compresi {{revenuelineitems_module}}, spostando il pannello inferiore sinistro su "Visualizzazione Dati".
-- Apportare e visualizzare commenti utente e modificare la cronologia dei cambiamenti in {{activitystream_singular_module}} spostando il pannello inferiore sinistro su "Flusso attività".
-- Seguire o rendere preferito questo record servendosi delle icone sul lato destro del nome del record.
-- Sono disponibili azioni aggiuntive nel menu Azioni a discesa, sul lato destro del pulsante Modifica.',
+- Modificare i campi di questo record facendo clic sul singolo cambio o sul pulsante Modifica.
+- Visualizzare o modificare i collegamenti agli altri record presenti nei sotto-pannelli attivando e disattivando il pannello in basso a sinistra su "Visualizza dati".
+- Fare e visualizzare i commenti degli utenti e registrare lo storico dei cambiamenti nel {{activitystream_singular_module}} attivando e disattivando il pannello in basso a sinistra su "Activity Stream".
+- Seguire o mettere tra i preferiti questo record utilizzando le icone a destra del nome del record.
+- Nel menu a discesa Azioni, a destra del pulsante Modifica sono disponibili ulteriori azioni.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Il modulo {{plural_module_name}} consente di tenere traccia delle singole vendite e degli elementi della riga che appartengono a quelle vendite dall&#39;inizio alla fine. Ogni record {{module_name}} rappresenta un&#39;intestazione per un gruppo di {{revenuelineitems_module}} e si riferisce anche ad altri record importanti quali ad esempio {{quotes_module}}, {{contacts_module}}, ecc.
+    'LBL_HELP_CREATE' => 'Il modulo {{plural_module_name}} permette di tenere traccia delle vendite individuali e dei prodotti che appartengono a quelle vendite, dall&#39;inizio alla fine. Ciascun record {{module_name}} rappresenta una probabile vendita e comprende i dati rilevanti alla vendita e ad altri record importanti quali {{quotes_module}}, {{contacts_module}}, ecc.
 
 Per creare un {{module_name}}:
-1. Fornire i valori per i campi, come richiesto.
- - I campi contrassegnati con "Richiesto" vanno completati prima del salvataggio.
- - Fare clic su "Mostra di più" per esporre campi aggiuntivi, ove necessario.
-2. Fare clic su "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.
-3. Dopo il salvataggio, usare il sottopannello {{revenuelineitems_module}} per aggiungere elementi di riga al {{module_name}}.',
+1. Fornire i valori dei campi desiderati.
+ - I campi contrassegnati con "Richiesti" devono essere completati prima del salvataggio.
+ - Fare clic su "Mostra più" per visualizzare ulteriori campi se necessario. 
+2. Fare clic su "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
 
 // END PRO/CORP
 

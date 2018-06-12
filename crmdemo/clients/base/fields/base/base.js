@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,7 +16,7 @@
  * @extends View.Field
  */
 ({
-    plugins: ['EllipsisInline', 'Tooltip', 'MetadataEventDriven'],
+    plugins: ['MetadataEventDriven'],
 
     /**
      * @inheritdoc
@@ -25,6 +25,8 @@
      * to fallback to metadata defined events.
      * This will make sure we merge metadata events with the ones provided by
      * the plugins.
+     *
+     * The Base Field will always clear any tooltips after `render`.
      */
     initialize: function(options) {
 
@@ -42,6 +44,10 @@
          * @property {boolean}
          */
         this.ellipsis = _.isUndefined(this.def.ellipsis) || this.def.ellipsis;
+
+        if (app.tooltip) {
+            this.on('render', app.tooltip.clear);
+        }
     },
 
     /**

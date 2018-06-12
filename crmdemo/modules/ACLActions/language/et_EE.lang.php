@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -12,14 +12,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 $mod_strings = array (
 'LBL_ACCESS_ALL'=>'Kõik',
-'LBL_ACCESS_NONE'=>'Midagi',
+'LBL_ACCESS_NONE'=>'Ükski',
 'LBL_ACCESS_OWNER'=>'Omanik',
-'LBL_ACCESS_NORMAL'=>'Normis',
+'LBL_ACCESS_NORMAL'=>'Tavaline',
 'LBL_ACCESS_ADMIN'=>'Admin',
 'LBL_ACCESS_ENABLED'=>'Lubatud',
-'LBL_ACCESS_DISABLED'=>'Mittelubatud',
+'LBL_ACCESS_DISABLED'=>'Keelatud',
 'LBL_ACCESS_DEV'=>'Arendaja',
 'LBL_ACCESS_ADMIN_DEV'=>'Admin ja arendaja',
+'LBL_ACCESS_SELECTED_TEAMS' => 'Omanik ja valitud meeskonnad',
 'LBL_NAME'=>'Nimi',
 'LBL_DESCRIPTION'=>'Kirjeldus',
 'LIST_ROLES'=>'Rollide loend',
@@ -33,9 +34,9 @@ $mod_strings = array (
 'LBL_ACTION_IMPORT'=>'Impordi',
 'LBL_ACTION_EXPORT'=>'Ekspordi',
 'LBL_ACTION_LIST'=>'Loend',
-'LBL_ACTION_MASSUPDATE' => 'Üldine ajakohastamine',
-'LBL_ACTION_ACCESS'=>'Ligipääs',
-'LBL_ACTION_ADMIN'=>'Ligipääsu tüüp',
+'LBL_ACTION_MASSUPDATE' => 'Massuuendamine',
+'LBL_ACTION_ACCESS'=>'Juurdepääs',
+'LBL_ACTION_ADMIN'=>'Juurdepääsu tüüp',
 'LBL_ACCESS_DEFAULT'=>'Pole määratud',
 )
 ?>

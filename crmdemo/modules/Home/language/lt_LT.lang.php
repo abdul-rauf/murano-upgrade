@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,7 +20,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 $mod_strings = array (
     'TPL_BROWSER_SUGAR7_RECORD_TITLE' => '{{#if name}}{{str name}} &raquo; {{/if}}{{module}} &raquo; {{appId}}',
-    'TPL_BROWSER_SUGAR7_ABOUT_TITLE' => 'About &raquo; {{appId}}',
+    'TPL_BROWSER_SUGAR7_ABOUT_TITLE' => 'Apie &raquo; {{appId}}',
   'LBL_MODULE_NAME' => 'Pradžia',
   'LBL_MODULE_NAME_SINGULAR' => 'Pradžia',
   'LBL_MODULES_TO_SEARCH' => 'Paieška moduliuose',
@@ -60,7 +60,7 @@ $mod_strings = array (
   'LNK_COMPOSE_EMAIL' => 'Rašyti laišką',
   'LNK_NEW_MEETING' => 'Suplanuoti susitikimą',
   'LNK_NEW_TASK' => 'Sukurti užduotį',
-  'LNK_NEW_BUG' => 'Sukurti klaidą',
+  'LNK_NEW_BUG' => 'Pranešti klaidą',
   'LBL_ADD_BUSINESSCARD' => 'Įvesti vizitinę kortelę',
   'ERR_ONE_CHAR' => 'Prašome įvesti bent vieną raidę ar numerį, kad galėtumėte pradėti ieškoti ...',
   'LBL_OPEN_TASKS' => 'Mano užduotys',
@@ -129,22 +129,22 @@ $mod_strings = array (
   'LBL_NO_DASHBOARD_CONFIGURED' => 'No dashboard configured.',
   'LBL_CREATE_DASHBOARD_LINK' => 'Create a dashboard',
 
-  'LBL_DASHLET_WEBPAGE_NAME' => 'Web Page',
-  'LBL_DASHLET_WEBPAGE_DESC' => 'Web Page',
+  'LBL_DASHLET_WEBPAGE_NAME' => 'Tinklalapis',
+  'LBL_DASHLET_WEBPAGE_DESC' => 'Tinklalapis',
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => 'Some sites may not load correctly due to insecure content or policies.',
 
-  'LBL_DASHLET_ADD' => 'Add a',
+  'LBL_DASHLET_ADD' => 'Pridėti',
   'LBL_DASHLET_DELETE' => 'Ištrinti panelį',
   'LBL_DASHLET_REFRESH' => 'Atnaujinti panelį',
   'LBL_DASHLET_EDIT' => 'Redaguoti panelį',
-  'LBL_DASHBOARD_TITLE' => 'Dashboard Title',
+  'LBL_DASHBOARD_TITLE' => 'Ataskaitų srities pavadinimas',
   'LBL_CREATE_DASHBOARD_MENU' => 'Create Dashboard',
   'LBL_DASHBOARD_EDIT' => 'Edit Dashboard',
-  'LBL_DASHBOARD_ADD_ROW' => 'Add a Row',
-  'LBL_DASHBOARD_ADD_1_COLUMN' => '+ 1 column',
-  'LBL_DASHBOARD_ADD_2_COLUMNS' => '+ 2 columns',
-  'LBL_DASHBOARD_ADD_3_COLUMNS' => '+ 3 columns',
+  'LBL_DASHBOARD_ADD_ROW' => 'Pridėti eilutę',
+  'LBL_DASHBOARD_ADD_1_COLUMN' => '+ 1 stulpelis',
+  'LBL_DASHBOARD_ADD_2_COLUMNS' => '+ 2 stulpeliai',
+  'LBL_DASHBOARD_ADD_3_COLUMNS' => '+ 3 stulpeliai',
   'LBL_DASHBOARD_1_COLUMN_LAYOUT' => '1 column layout',
   'LBL_DASHBOARD_2_COLUMN_LAYOUT' => '2 column layout',
   'LBL_DASHBOARD_3_COLUMN_LAYOUT' => '3 column layout',
@@ -263,8 +263,8 @@ $mod_strings = array (
 	'LBL_BASIC_SEARCH' => 'Bazinė paieška' /*for 508 compliance fix*/,
 	'LBL_ADVANCED_SEARCH' => 'Detali paieška' /*for 508 compliance fix*/,
 
-  'LBL_MOST_ACTIVE_COLLEAGUES' => 'Most Active',
-  'LBL_MOST_ACTIVE_COLLEAGUES_DESC' => 'It displays internal users who are most active',
+  'LBL_MOST_ACTIVE_COLLEAGUES' => 'Aktyviausi',
+  'LBL_MOST_ACTIVE_COLLEAGUES_DESC' => 'Rodomi aktyviausi vidiniai vartotojai',
   'LBL_MOST_CALLS_MADE' => '{{count}} calls made',
   'LBL_MOST_EMAILS_SENT' => '{{count}} emails sent',
   'LBL_MOST_EMAILS_RECEIVED' => '{{count}} emails received',

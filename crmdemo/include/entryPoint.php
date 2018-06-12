@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -185,15 +185,6 @@ if(empty($GLOBALS['installing'])){
 $GLOBALS['log'] = LoggerManager::getLogger('SugarCRM');
 $error_notice = '';
 $use_current_user_login = false;
-
-// Allow for the session information to be passed via the URL for printing.
-if (!empty($_GET['PHPSESSID'])) {
-    if (!empty($_COOKIE['PHPSESSID']) && strcmp($_GET['PHPSESSID'], $_COOKIE['PHPSESSID']) == 0) {
-        session_id($_REQUEST['PHPSESSID']);
-    } else {
-        unset($_GET['PHPSESSID']);
-    }
-}
 
     LogicHook::initialize()->call_custom_logic('', 'entry_point_variables_setting');
 

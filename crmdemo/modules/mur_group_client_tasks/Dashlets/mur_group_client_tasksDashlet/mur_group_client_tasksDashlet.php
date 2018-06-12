@@ -26,7 +26,7 @@ class mur_group_client_tasksDashlet extends DashletGeneric {
 		global $current_user, $app_strings;
 		require('modules/mur_group_client_tasks/metadata/dashletviewdefs.php');
 
-        parent::DashletGeneric($id, $def);
+        parent::__construct($id, $def);
 
         if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', 'mur_group_client_tasks');
 

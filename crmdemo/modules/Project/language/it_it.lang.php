@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -32,7 +32,7 @@ $mod_strings = array (
 	'LBL_NAME' => 'Nome:',
     'LBL_PDF_PROJECT_NAME' => 'Nome Progetto:',
 	'LBL_DESCRIPTION' => 'Descrizione:',
-	'LBL_DELETED' => 'Cancellato:',
+	'LBL_DELETED' => 'Eliminato:',
 	'LBL_DATE_START' => 'Data Inizio:',
 	'LBL_DATE_END' => 'Data Fine:',
 	'LBL_PRIORITY' => 'Priorità:',
@@ -180,8 +180,8 @@ $mod_strings = array (
     'NTC_NO_ACTIVE_PROJECTS' => 'Non hai nessun progetto attivo o compiti di progetto.',
     'NTC_ASSIGN_RIGHT_TEAM' => 'Assicurarsi che tutti le risorse del progetto siano membri di questo gruppo.',
        
-    'LBL_RESOURCE_NAME' => 'Nome risorsa',
-    'LBL_RESOURCE_TYPE' => 'Tipo risorsa',
+    'LBL_RESOURCE_NAME' => 'Nome',
+    'LBL_RESOURCE_TYPE' => 'Tipo',
     
     'LBL_GRID_ONLY' => 'Griglia',
     'LBL_GANTT_ONLY' => 'Gantt',

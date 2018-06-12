@@ -1,11 +1,8 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -117,13 +114,6 @@ class Opportunity extends SugarBean
         'quote_id' => 'quotes',
     );
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Opportunity()
-    {
-        self::__construct();
-    }
 
     public function __construct()
     {
@@ -133,28 +123,31 @@ class Opportunity extends SugarBean
         if (empty($sugar_config['require_accounts'])) {
             unset($this->required_fields['account_name']);
         }
-        global $current_user;
-        if (!empty($current_user)) {
-            $this->team_id = $current_user->default_team; //default_team is a team id
-            $this->team_set_id = $current_user->team_set_id;
-        } else {
-            $this->team_id = 1; // make the item globally accessible
-        }
     }
 
 
     public $new_schema = true;
 
 
+    /**
+     * Return the a Summary for the Record
+     *
+     * @return string
+     */
     public function get_summary_text()
     {
         return "$this->name";
     }
 
 
+    /**
+     * This is no longer used and is considered deprecated.  It will be removed in a future release.
+     *
+     * @deprecated
+     */
     public function create_list_query($order_by, $where, $show_deleted = 0)
     {
-
+        $GLOBALS['log']->deprecated('Opportunity::create_list_query() has been deprecated in 7.8');
         $custom_join = $this->custom_fields->getJOIN();
         $query = "SELECT ";
 
@@ -214,16 +207,26 @@ class Opportunity extends SugarBean
         return $query;
     }
 
+    /**
+     * This is no longer used and is considered deprecated.  It will be removed in a future release.
+     *
+     * @deprecated
+     */
     public function fill_in_additional_list_fields()
     {
+        $GLOBALS['log']->deprecated('Opportunity::fill_in_additional_list_fields() has been deprecated in 7.8');
         if ($this->force_load_details == true) {
             $this->fill_in_additional_detail_fields();
         }
     }
 
 
+    /**
+     * @deprecated Not used in the REST API, will be removed in a future version
+     */
     public function fill_in_additional_detail_fields()
     {
+        $GLOBALS['log']->deprecated('Opportunity::fill_in_additional_detail_fields() has been deprecated in 7.8');
         parent::fill_in_additional_detail_fields();
 
         if (!empty($this->currency_id)) {
@@ -251,13 +254,16 @@ class Opportunity extends SugarBean
     }
 
 
-    /** Returns a list of the associated contacts
-     * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc..
-     * All Rights Reserved..
-     * Contributor(s): ______________________________________..
+    /**
+     * Returns a list of the associated contacts
+     *
+     * This is no longer used and is considered deprecated.  It will be removed in a future release.
+     *
+     * @deprecated
      */
     public function get_contacts()
     {
+        $GLOBALS['log']->deprecated('Opportunity::get_contacts() has been deprecated in 7.8');
         $this->load_relationship('contacts');
         $query_array = $this->contacts->getQuery(true);
 
@@ -282,8 +288,16 @@ class Opportunity extends SugarBean
     }
 
 
+    /**
+     * This is no longer used and is considered deprecated.  It will be removed in a future release.
+     *
+     * @deprecated
+     * @param string $fromid
+     * @param string $toid
+     */
     public function update_currency_id($fromid, $toid)
     {
+        $GLOBALS['log']->deprecated('Opportunity::update_currency_id() has been deprecated in 7.8');
         $idequals = '';
 
         $currency = BeanFactory::getBean('Currencies', $toid);
@@ -312,8 +326,14 @@ class Opportunity extends SugarBean
     }
 
 
+    /**
+     * This is no longer used and is considered deprecated.  It will be removed in a future release.
+     *
+     * @deprecated
+     */
     public function get_list_view_data()
     {
+        $GLOBALS['log']->deprecated('Opportunity::get_list_view_data() has been deprecated in 7.8');
         global $locale, $current_language, $current_user, $mod_strings, $app_list_strings, $sugar_config;
         $app_strings = return_application_language($current_language);
         $params = array();
@@ -325,8 +345,14 @@ class Opportunity extends SugarBean
     }
 
 
+    /**
+     * This is no longer used and is considered deprecated.  It will be removed in a future release.
+     *
+     * @deprecated
+     */
     public function get_currency_symbol()
     {
+        $GLOBALS['log']->deprecated('Opportunity::get_currency_symbol() has been deprecated in 7.8');
         if (isset($this->currency_id)) {
             $cur_qry = "select * from currencies where id ='" . $this->currency_id . "'";
             $cur_res = $this->db->query($cur_qry);
@@ -363,8 +389,8 @@ class Opportunity extends SugarBean
     }
 
     /**
-    builds a generic search based on the query string using or
-    do not include any $this-> because this is called on without having the class instantiated
+     * builds a generic search based on the query string using or
+     * do not include any $this-> because this is called on without having the class instantiated
      */
     public function build_generic_where_clause($the_query_string)
     {
@@ -482,8 +508,16 @@ class Opportunity extends SugarBean
     }
 
 
+    /**
+     * This is no longer used since Opportunities is not in BWC.  This will be removed in a future version
+     *
+     * @deprecated
+     *
+     * @return array
+     */
     public function listviewACLHelper()
     {
+        $GLOBALS['log']->deprecated('Opportunity::listviewACLHelper() has been deprecated in 7.8');
         $array_assign = parent::listviewACLHelper();
         $is_owner = false;
         if (!empty($this->account_id)) {
@@ -505,10 +539,12 @@ class Opportunity extends SugarBean
 
 
     /**
-     * Static helper function for getting releated account info.
+     * Static helper function for getting releated account info, This will be removed in a future versions
+     * @deprecated
      */
     public function get_account_detail($opp_id)
     {
+        $GLOBALS['log']->deprecated('Opportunity::get_account_detail() has been deprecated in 7.8');
         $ret_array = array();
         $db = DBManagerFactory::getInstance();
         $query = "SELECT acc.id, acc.name, acc.assigned_user_id "

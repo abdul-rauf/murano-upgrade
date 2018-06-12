@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> '新パスワード',
 	'LBL_NEW_PASSWORD1'					=> 'パスワード',
 	'LBL_NEW_PASSWORD2'					=> 'パスワードの確認',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'パスワードは正常に変更されました。',
+    'LBL_NEW_USER_PASSWORD_1' => 'パスワードは正常に変更されました。',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'システムが生成したパスワードがEメールで送信されました。',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'パスワードは正常に生成されました。',
+    'LBL_NEW_USER_PASSWORD_3' => 'パスワードは正常に生成されました。',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'ユーザ作成',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'ユーザ作成 [Alt+N]',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'ノルマ',
     'LBL_FORECASTS'                     => '売上予測',
     'LBL_WORKSHEETS'                    => 'ワークシート',
+	'LBL_CALENDARS'                     => 'カレンダー',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => '別のCAPTCHAを取得',
 	'LBL_RECAPTCHA_SOUND'				=> '音に変更',
 	'LBL_RECAPTCHA_IMAGE'				=> '画像に変更',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> '電話 (勤務先)',
 	'LBL_YOUR_PUBLISH_URL'				=> '私の場所に公開',
     'LBL_ICAL_PUB_URL'                  => 'iCalインテグレーションURL',
-    'LBL_ICAL_PUB_URL_HELP'             => 'SugarカレンダーをiCalで閲覧するために使用するURL',
+    'LBL_ICAL_PUB_URL_HELP'             => 'この URL を使用して iCal がサポートするアプリケーション内に Sugar のカレンダーを' .
+                                           'サブスクライブします。Sugar のカレンダーイベントは外部のカレンダーアプリケーションでは' .
+                                           '読み取り専用で、イベントに変更を加えるには、Sugar から' .
+                                           '実行する必要があります (例: 会議、電話など)。',
 	'LBL_YOUR_QUERY_URL'				=> 'クエリURL',
 	'LNK_NEW_USER'						=> 'ユーザ作成',
 	'LNK_NEW_PORTAL_USER'				=> 'ポータルAPIユーザ',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'ユーザーズレポート',
     'LBL_CONTACTS_SYNC' => '取引先担当者',
-
+    'LBL_DETAIL' => 'ユーザプロフィール',
 ); // END STRINGS DEFS
 
 ?>

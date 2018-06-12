@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'إزالة ملفات الأدوات التشخيصية',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'إزالة ملفات PDF المؤقتة',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'تحديث جدول tracker_sessions',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'تشغيل إشعارات تذكير البريد الإلكتروني',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'تشغيل إعلامات تذكير البريد الإلكتروني',
 'LBL_OOTB_CLEANUP_QUEUE' => 'مسح قوائم انتظار الوظائف',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'إنشاء فترات زمنية في المستقبل',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'تحديث مقالات KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'انشر المقالات المعتمدة ومقالات KB منتهية الصلاحية.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'مهمة مجدولة لمؤلف العمليات',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'وظيفة Advanced Workflow المجدولة',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'الفاصل الزمني:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'تحديث الوظائف',
 'LBL_POLLMONITOREDINBOXES' => 'التحقق من حسابات البريد الداخلية',
 'LBL_PERFORMFULLFTSINDEX' => 'نظام فهرسة البحث عن كامل النص',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'إزالة ملفات PDF المؤقتة',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'انشر المقالات المعتمدة ومقالات KB منتهية الصلاحية.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'مجدول قائمة انتظار Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'إزالة ملفات الأدوات التشخيصية',
+'LBL_SUGARJOBREMOVETMPFILES' => 'إزالة الملفات المؤقتة',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'تشغيل حملات البريد الإلكتروني الجماعية ليلاً',
 'LBL_ASYNCMASSUPDATE' => 'عمل تحديثات عامة متزامنة',

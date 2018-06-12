@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,34 +20,43 @@
             tooltip: {
                 /**
                  * Initializes tooltips for given elements
+                 *
+                 * @deprecated `app.utils.tooltip` class has been deprecated since 7.8.0
+                 *   and will be removed in 7.9.0.
                  * @param {jQuery} $elements
                  * @param {object} (optional) options - see bootstrap-tooltip docs
                  * @returns {jQuery}
                  */
-                initialize: function($elements, options, direction) {
+                initialize: function($element, options, direction) {
+                    app.logger.warn('Utils.Utils.Tooltip#initialize: The `app.utils.tooltip` class has been' +
+                        ' deprecated since 7.8.0 and will be removed in 7.9.0.');
+
                     options = options || {};
 
-                    _.each($elements, function(element) {
-                        var $element = $(element);
-                        if (!$element.data('bs.tooltip')) {
-                            var data = $element.data();
-                            if (direction) {
-                                options.template = $tooltipTemplate.attr('dir', direction);
-                            }
-                            $element.tooltip(_.extend({
-                                container: 'body',
-                                trigger: 'hover' //show tooltip on hover only (not on focus)
-                            }, data, options));
+                    if (!$element.data('bs.tooltip')) {
+                        var data = $element.data();
+                        if (direction) {
+                            options.template = $tooltipTemplate.attr('dir', direction);
                         }
-                    });
-                    return $elements;
+                        $element.tooltip(_.extend({
+                            container: 'body',
+                            trigger: 'hover' //show tooltip on hover only (not on focus)
+                        }, data, options));
+                    }
+                    return $element;
                 },
 
                 /**
                  * Destroy tooltips
+                 *
+                 * @deprecated `app.utils.tooltip` class has been deprecated since 7.8.0
+                 *   and will be removed in 7.9.0.
                  * @param {jQuery} $tooltips
                  */
                 destroy: function($tooltips) {
+                    app.logger.warn('Utils.Utils.Tooltip#destroy: The `app.utils.tooltip` class has been' +
+                        ' deprecated since 7.8.0 and will be removed in 7.9.0.');
+
                     $tooltips.tooltip('destroy');
                 },
 
@@ -736,6 +745,48 @@
                 } else {
                     return model.get('name') || '';
                 }
+            },
+
+            /**
+             * Returns the first email address that matches the options or an
+             * empty string if none exist.
+             *
+             * An assumption is made that the associated email addresses will
+             * be found as an array on the model's `email` attribute.
+             *
+             * @param {Data.Bean} model
+             * @param {Object} [options]
+             * @param {Boolean} [options.primary_address]
+             * @param {Boolean} [options.invalid_email]
+             * @param {Boolean} [options.opt_out]
+             * @return {string}
+             */
+            getEmailAddress: function(model, options) {
+                var addresses;
+
+                options || (options = {});
+                addresses = model.get('email');
+
+                return _.chain(addresses).findWhere(options).pick('email_address').values().first().value() || '';
+            },
+
+            /**
+             * Returns the first valid email address associated with the model
+             * or an empty string if none exist.
+             *
+             * An email address is considered valid if its `invalid_email`
+             * property is `false`. The email address with `true`
+             * for the `primary_address` property is tested first.
+             *
+             * This method is implemented to simulate the server-side method
+             * SugarEmailAddress::getPrimaryAddress().
+             *
+             * @param {Data.Bean} model
+             * @return {string}
+             */
+            getPrimaryEmailAddress: function(model) {
+                return app.utils.getEmailAddress(model, {primary_address: true, invalid_email: false}) ||
+                    app.utils.getEmailAddress(model, {invalid_email: false});
             },
 
             /**

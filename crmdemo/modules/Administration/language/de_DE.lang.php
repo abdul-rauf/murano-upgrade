@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -275,7 +275,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => 'Benutzerfelder bearbeiten',
     'LBL_EDIT_TABS'=>'Tabs bearbeiten',
     'LBL_EMAIL_TITLE' => 'E-Mail',
-    'LBL_EMAIL_DESC' => 'Ein- und ausgehende E-Mails verwalten. Die E-Mail-Einstellungen müssen korrekt konfiguriert sein, um E-Mails und Newsletter zu versenden.',
+    'LBL_EMAIL_DESC' => 'Verwalten der ein- und ausgehenden E-Mails. Die E-Mail-Einstellungen müssen konfiguriert werden, um ' .
+                        'die Benutzer zu aktivieren, um ihnen E-Mail- und Newsletter-Kampagnen zu versenden.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Eine primäre E-Mail-Adresse wird für jeden angezeigten Benutzer benötigt, um diese Funktion verwenden zu können.',
 	'LBL_ENABLE_MAILMERGE' => 'Serienbriefe zulassen?',
 	'LBL_ENABLED' => 'Aktiviert',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Definieren Sie die Standard-Lokalisierungseinstellungen für Ihr System',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- Der Benutzername der Person, die diesen Offline-Client verwenden wird',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Benutzername:',
-    'LBL_MAILBOX_DESC' => 'Mailboxen zur Überwachung eingehender E-Mails konfigurieren',
+    'LBL_MAILBOX_DESC' => 'Gruppen-E-Mail-Konten für die Überwachung der eingehenden E-Mails einrichten ' .
+        'und Kontodaten für persönliche eingehende E-Mails von Benutzern verwalten',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Vertragstypen verwalten',
     'LBL_MANAGE_CURRENCIES' => 'Währungen',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Gruppen verwalten',
@@ -628,6 +630,8 @@ Wenn Sie fortgesetzte Probleme mit der automatischen Validierung haben, prüfen 
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'JS-Gruppierungsdateien neu aufbauen',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Führt bestehende Grupperungsdateien zusammen und überschreibt diese mit den neusten Versionen',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'javascript-Dateien reparieren',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'JS-Dateien reparieren',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Die Dateien werden verarbeitet. Das kann einige Minuten dauern. Der Vorgang wird durch das Verlassen der Seite nicht abgebrochen, Sie können entweder mit Ihrer Arbeit weitermachen oder auf die Bestätigung warten...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Die Dateien wurde verarbeitet.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Fehler mit Kleinbuchstaben reparieren',
@@ -1006,7 +1010,7 @@ Wenn Sie fortgesetzte Probleme mit der automatischen Validierung haben, prüfen 
     'LBL_QR_CLEAR_ADD_CACHE' => 'Zusätzliche Cache-Dateien werden gelöscht...fertig',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Wenn das Feld nicht markiert ist, muss ein Administrator nach Ablauf der Systemlizenz eine erneute manuelle Prüfung durchführen; sonst können sich die Benutzer nicht anmelden.',
 	'LBL_TRACKER_SETTINGS' => 'Tracker Einstellungen',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Wählen Sie, welche System- und Benutzerdaten überwacht werden sollen',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Tracking aktivieren/deaktivieren',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Seed-Benutzer aktivieren/deaktivieren',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Aktivieren',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Deaktivieren',
@@ -1159,6 +1163,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_ADDED' => 'Hinzufügen von Sprite {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Datei wird ausgeschlossen: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Team-basierte Berechtigungen',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Aktivieren Sie Teamzugriff und verwalten Sie den Zugriff durch das Modul.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Systemtyp',
     'LBL_FTS_HOST' => 'Host',
@@ -1231,5 +1239,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Durch Absenden wird diesen Client mit dem Master-Server synchronisiert.',
     'LBL_OFFLINE_ENABLED' => 'Offline aktiviert',
     'LBL_OFFLINE_SETTINGS' => 'Offline-Einstellungen',
+
 
 );

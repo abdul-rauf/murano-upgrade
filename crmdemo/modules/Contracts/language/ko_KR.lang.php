@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,7 +20,7 @@ $mod_strings = array (
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => '신규 계약 만들기',
-    'LNK_CONTRACT_LIST' => '계약목록 보기',
+    'LNK_CONTRACT_LIST' => '계약 보기',
     'LNK_IMPORT_CONTRACTS' => '계약내역 가져오기',
 
     // quick create label
@@ -77,7 +77,7 @@ $mod_strings = array (
 
     // subpanels
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => '문서목록',
-    'LBL_CONTACTS_SUBPANEL_TITLE' => '연락처목록',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => '연락처',
     'LBL_NOTES_SUBPANEL_TITLE' => '메모목록',
     'LBL_RLI_SUBPANEL_TITLE' => '매출 라인아이템',
     'LBL_QUOTES_SUBPANEL_TITLE' => '견적 목록',

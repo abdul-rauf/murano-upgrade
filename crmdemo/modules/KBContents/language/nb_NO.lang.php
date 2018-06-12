@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -95,10 +95,13 @@ $mod_strings = array (
     'LBL_KB_STATUS_BACK_TO_DRAFT' => 'Dokumentstatusen er endret tilbake til utkast.',
     'LBL_OPERATOR_CONTAINING_THESE_WORDS' => 'inneholder disse ordene',
     'LBL_OPERATOR_EXCLUDING_THESE_WORDS' => 'inneholder ikke disse ordene',
-    'ERROR_EXP_DATE_LOW' => 'The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_EXP_DATE_LOW' => 'Utløpsdatoen kan ikke være før publiseringsdatoen.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Godkjentstatusen krever en publiseringsdato.',
     'ERROR_ACTIVE_DATE_LOW' => 'The Publish Date must occur on a later date than today&#39;s date.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Publiseringsdatoen er tom.',
     'LBL_RECORD_SAVED_SUCCESS' => 'Du lyktes i å opprette {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'ERROR_IS_BEFORE' => 'Feil. Datoen for dette feltet må være etter datoen i {{this}} feltet.',
     'TPL_SHOW_MORE_MODULE' => 'Flere {{module}}-artikler …',
+    'LBL_LIST_FORM_TITLE' => 'Kunnskapsdatabaseliste',
+    'LBL_SEARCH_FORM_TITLE' => 'Søk i kunnskapsbase',
 );

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -45,13 +45,6 @@ class EmailUI {
      */
     protected $request;
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function EmailUI()
-    {
-        self::__construct();
-    }
 
 	public function __construct() {
 		global $sugar_config;
@@ -460,9 +453,15 @@ eoq;
         $ie1->disable_row_level_security = true;
 		$ie1->team_id = empty($current_user->default_team) ? $current_user->team_id : $current_user->default_team;
 		$ie1->team_set_id = $current_user->team_set_id;
+        // need this bean to generate correct teamset field
+        $emailsBean = BeanFactory::getBean('Emails');
+        $emailsBean->disable_row_level_security = true;
+        $emailsBean->team_id = $ie1->team_id;
+        $emailsBean->team_set_id = $ie1->team_set_id;
 
 		require_once('include/SugarFields/Fields/Teamset/EmailSugarFieldTeamsetCollection.php');
-		$teamSetField = new EmailSugarFieldTeamsetCollection($ie1, $ie1->field_defs, '', 'composeEmailForm');
+        $teamSetField
+            = new EmailSugarFieldTeamsetCollection($emailsBean, $emailsBean->field_defs, '', 'composeEmailForm');
 		$code1 = $teamSetField->get_code();
 		$sqs_objects1 = $teamSetField->createQuickSearchCode(true);
 		$this->smarty->assign('teamsdata', json_encode($code1 . $sqs_objects1));
@@ -1504,7 +1503,7 @@ eoq;
         $prefillData = $json->encode($emailAddress);
         $EditView->assignVar('prefillData', $prefillData);
         $EditView->assignVar('prefillEmailAddresses', 'false');
-        
+
         if ($module == 'Users') {
             $EditView->assignVar('useReplyTo', true);
         } else {
@@ -1560,9 +1559,18 @@ eoq;
 		require_once('include/SugarFields/Fields/Teamset/EmailSugarFieldTeamsetCollection.php');
 		$teamSetField = new EmailSugarFieldTeamsetCollection($email, $email->field_defs, '', $formName);
 		$code = $teamSetField->get_code();
-		$sqs_objects1 = $teamSetField->createQuickSearchCode(true);
-		//$sqs_objects = array_merge($sqs_objects, $sqs_objects1);
-		$smarty->assign("TEAM_SET_FIELD", $code . $sqs_objects1);
+        $code .= $teamSetField->createQuickSearchCode(true);
+        $jsCode = '';
+
+        // extract js code. need to add it to the top of the template. so it can be evaluated.
+        preg_match_all('#<script[^>]*>.*?</script>#is', $code, $js);
+        if (!empty($js[0])) {
+            $jsCode = implode("\n", $js[0]);
+            $code = str_replace($js[0], '', $code);
+        }
+
+        $smarty->assign("TEAM_SET_FIELD", $code);
+        $smarty->assign("JS", $jsCode);
         $showAssignTo = false;
         if (!isset($vars['showAssignTo']) || $vars['showAssignTo'] == true) {
         	$showAssignTo = true;
@@ -1663,7 +1671,7 @@ eoq;
 		$smarty->assign("JS_CUSTOM_VERSION", $GLOBALS['sugar_config']['js_custom_version']);
 
 		require_once('modules/Teams/TeamSetManager.php');
-		$smarty->assign("TEAM",  TeamSetManager::getCommaDelimitedTeams($focus->team_set_id, $focus->team_id, true));
+        $smarty->assign("TEAM", TeamSetManager::getFormattedTeamsFromSet($focus, true));
 		if(!empty($focus->reply_to_email)) {
 			$replyTo = "
 				<tr>
@@ -2437,11 +2445,11 @@ eoq;
 				{
 				    $searchq = $this->findEmailFromBeanIds('', $searchBean, $whereArr);
 				    if(!empty($searchq)) {
-					    $q[] = "($searchq)";
+                        $q[] = $searchq;
 				    }
 				}
 				if (!empty($q))
-    			    $finalQuery .= implode("\n UNION ALL \n", $q);
+                    $finalQuery .= implode("\n UNION \n", $q);
 			}
 			else
 				$finalQuery = $this->findEmailFromBeanIds('', $beanType, $whereArr);
@@ -2458,11 +2466,11 @@ eoq;
     	            {
     	                $data = $focus->$searchBean->get();
     	                if (count($data) != 0)
-    	                $q[] = '('.$this->findEmailFromBeanIds($data, $searchBean, $whereArr).')';
+                            $q[] = $this->findEmailFromBeanIds($data, $searchBean, $whereArr);
     	            }
     	        }
     	        if (!empty($q))
-    	        $finalQuery .= implode("\n UNION ALL \n", $q);
+                    $finalQuery .= implode("\n UNION \n", $q);
     	    }
     	    else
     	    {
@@ -2480,8 +2488,8 @@ eoq;
 
     function findEmailFromBeanIds($beanIds, $beanType, $whereArr) {
     	global $current_user;
-		$q = '';
-		$whereAdd = "";
+        $q = array();
+        $finalQuery = '';
 		$relatedIDs = '';
 		if ($beanIds != '') {
 			foreach ($beanIds as $key => $value) {
@@ -2498,43 +2506,96 @@ eoq;
 			unset($whereArr['first_name']);
 		}
 
-		foreach($whereArr as $column => $clause) {
-			if(!empty($whereAdd)) {
-				$whereAdd .= " OR ";
-			}
-			$clause = $current_user->db->quote($clause);
-			$whereAdd .= "{$column} LIKE '{$clause}%'";
-		}
-		$table = $beanType;
-		$module = ucfirst($table);
-		$person = BeanFactory::getBean($module);
-		if ($person->ACLAccess('list')) {
-			if ($relatedIDs != '') {
-				$where = "({$table}.deleted = 0 AND eabr.primary_address = 1 AND {$table}.id in ($relatedIDs))";
-			} else {
-				$where = "({$table}.deleted = 0 AND eabr.primary_address = 1)";
-			}
+        $table = $beanType;
+        $module = ucfirst($table);
+        $person = BeanFactory::getBean($module);
+        $personACLAccessList = $person->ACLAccess('list');
+        $requireOwner = ACLController::requireOwner($module, 'list');
+        if ($personACLAccessList) { // build query
+            if (empty($whereArr)) {
+                $whereAdd = '';
+                $t = $this->buildQuery(
+                    $relatedIDs,
+                    $table,
+                    $whereAdd,
+                    $requireOwner,
+                    $current_user,
+                    $beanType,
+                    $module,
+                    $person
+                );
+                if (!empty($t)) {
+                    $q[] = '(' . $t . ')';
+                }
+            } else {
+                foreach ($whereArr as $column => $clause) {
+                    $clause = $current_user->db->quote($clause);
+                    $whereAdd = "{$column} LIKE '{$clause}%'";
+                    $t = $this->buildQuery(
+                        $relatedIDs,
+                        $table,
+                        $whereAdd,
+                        $requireOwner,
+                        $current_user,
+                        $beanType,
+                        $module,
+                        $person
+                    );
+                    if (!empty($t)) {
+                        $q[] = '(' . $t . ')';
+                    }
+                }
+            }
+        }
 
-			if (ACLController::requireOwner($module, 'list')) {
-				$where = $where . " AND ({$table}.assigned_user_id = '{$current_user->id}')";
-			} // if
-			if(!empty($whereAdd)) {
-				$where .= " AND ({$whereAdd})";
-			}
+        if (!empty($q)) {
+            $finalQuery = implode("\n UNION \n", $q);
+        }
 
-			if ($beanType === 'accounts') {
-				$t = "SELECT {$table}.id, '' first_name, {$table}.name last_name, eabr.primary_address, ea.email_address, '{$module}' module ";
-			} else {
-				$t = "SELECT {$table}.id, {$table}.first_name, {$table}.last_name, eabr.primary_address, ea.email_address, '{$module}' module ";
-			}
+        return $finalQuery;
+    }
 
-			$t .= "FROM {$table} ";
-			$t .= "JOIN email_addr_bean_rel eabr ON ({$table}.id = eabr.bean_id and eabr.deleted=0) ";
-			$t .= "JOIN email_addresses ea ON (eabr.email_address_id = ea.id) ";
-			$person->add_team_security_where_clause($t);
-			$t .= " WHERE {$where} AND ea.invalid_email = 0 AND ea.opt_out = 0";
-		} // if
-		return $t;
+    private function buildQuery(
+        $relatedIDs,
+        $table,
+        $whereAdd,
+        $requireOwner,
+        $current_user,
+        $beanType,
+        $module,
+        $person
+    ) {
+        $t = '';
+
+        if ($relatedIDs != '') {
+            $where = "({$table}.deleted = 0 AND eabr.primary_address = 1 AND {$table}.id in ($relatedIDs))";
+        } else {
+            $where = "({$table}.deleted = 0 AND eabr.primary_address = 1)";
+        }
+
+        if ($requireOwner) {
+            $where = $where . " AND ({$table}.assigned_user_id = '{$current_user->id}')";
+        } // if
+        if (!empty($whereAdd)) {
+            $where .= " AND ({$whereAdd})";
+        }
+
+        if ($beanType === 'accounts') {
+            $t = "SELECT {$table}.id, '' first_name, {$table}.name last_name, ";
+            $t .= "eabr.primary_address, ea.email_address, '{$module}' module ";
+        } else {
+            $t = "SELECT {$table}.id, {$table}.first_name, {$table}.last_name, ";
+            $t .= "eabr.primary_address, ea.email_address, '{$module}' module ";
+        }
+
+        $t .= "FROM {$table} ";
+        $t .= "JOIN email_addr_bean_rel eabr ON ({$table}.id = eabr.bean_id and eabr.deleted=0) ";
+        $t .= "JOIN email_addresses ea ON (eabr.email_address_id = ea.id) ";
+        $person->add_team_security_where_clause($t);
+        $t .= " WHERE {$where} AND ea.invalid_email = 0 AND ea.opt_out = 0";
+
+
+        return $t;
     }
 
 	/**
@@ -3217,8 +3278,9 @@ eoq;
 		else
 			$cached = ($fromCache) ? 1 : 0;
 
-		if($data['mbox'] == 'undefined' || empty($data['mbox']))
-			$data['mbox'] = $app_strings['LBL_NONE'];
+        if (empty($data['mbox']) || $data['mbox'] == 'undefined') {
+            $data['mbox'] = $app_strings['LBL_NONE'];
+        }
 
 		$jsonOut = array('TotalCount' => $count, 'FromCache' => $cached, 'UnreadCount' => $unread, $resultsParam => $data['out']);
 

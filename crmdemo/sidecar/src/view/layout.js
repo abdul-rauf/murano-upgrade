@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -65,7 +65,6 @@
         /**
          * TODO docs (describe constructor options, see Component class for an example).
          *
-         * @constructor
          * @param options
          */
         initialize: function(options) {
@@ -97,22 +96,96 @@
                 this.label = '';
             }
 
-            this.template = app.template.getLayout(this.name, this.module) ||
-                            app.template.getLayout(this.type, this.module) ||
-                            app.template.getLayout(this.name) ||
-                            app.template.getLayout(this.type);
-            if (this.template) {
-                this.$el.html(this.template(this, options));
-            }
-
             /**
              * Reference to the parent layout instance.
              * @property {View.Layout}
              */
             this.layout = this.options.layout;
 
+            this._loadTemplate(options);
+
+            if (this.template) {
+                // Need to do .append() rather than .html() because we create new components
+                // in templates. By performing .html(), we remove that component from the document.
+                this.$el.append(this.template(this, options));
+                this.placeComponentsFromTemplate();
+            }
+
+            if (this.meta.lazy_loaded) {
+                /**
+                 * Holds the components metadata in case if it is a lazy loaded
+                 * layout. This property should be used to to initialize
+                 * components manually.
+                 *
+                 * @property {Array} The array of components.
+                 * @protected
+                 */
+                this._componentsMeta = this.meta.components;
+                this.meta.components = [];
+            }
+
             app.events.on('app:locale:change', function() {
                 this.render();
+            }, this);
+        },
+
+        /**
+         * Sets the appropriate template for this layout to {@link #template}.
+         *
+         * Gets the template from this layout's module, or falls back to the
+         * module specified in the `loadModule` meta property, or falls back to
+         * base.
+         *
+         * @param {Object} [options] A hash of options.
+         * @param {string} [options.loadModule] The fallback module to get the
+         *   template from.
+         * @private
+         */
+        _loadTemplate: function (options) {
+            options = options || {};
+            if (this.meta.template) {
+                this.template = app.template.getLayout(this.meta.template, this.module) ||
+                    app.template.getLayout(this.meta.template, options.loadModule);
+                return;
+            }
+
+            var tpl = app.template.getLayout(this.name, this.module) ||
+                app.template.getLayout(this.type, this.module);
+            if (!tpl) {
+                if (options.loadModule) {
+                    tpl = app.template.getLayout(this.name, options.loadModule) ||
+                        app.template.getLayout(this.type, options.loadModule);
+                } else {
+                    tpl = app.template.getLayout(this.name) ||
+                        app.template.getLayout(this.type);
+                }
+            }
+
+            this.template = tpl;
+        },
+
+        /**
+         * Move components created in templates to their appropriate placeholders.
+         */
+        placeComponentsFromTemplate: function() {
+            var componentElems = {};
+
+            if (_.isEmpty(this._components)) {
+                return;
+            }
+
+            this.$('span[cid]').each(function() {
+                var $this = $(this),
+                    cid = $this.attr('cid');
+
+                componentElems[cid] = $this;
+            });
+
+            _.each(this._components, function(component) {
+                var $placeholder = componentElems[component.cid];
+                if ($placeholder) {
+                    $placeholder.replaceWith(component.el);
+                }
             }, this);
         },
 
@@ -134,6 +207,7 @@
          *   the subcomponents.
          * @param {Object} [context] Context to pass to the new components.
          * @param {string} [module] Module to create the components from.
+         * @return {Array} initialized components
          */
         initComponents: function(components, context, module) {
             if (this.disposed) {
@@ -154,6 +228,8 @@
             });
 
             this.trigger('init');
+
+            return newSubComponents;
         },
 
         /**
@@ -187,18 +263,26 @@
                         name:def.view,
                         def: def,
                         module:module,
+                        loadModule: def.loadModule,
                         primary:def.primary,
                         layout:this
                     });
                 } else if (_.isObject(def.view)) {
+                    if (def.view.meta) {
+                        app.logger.warn('`meta` property in metadata layout definitions is deprecated since 7.8 and ' +
+                            'will be removed in 7.9. Please use `xmeta` instead.');
+                    }
+
                     //Inline definition of a sublayout
                     return app.view.createView({
-                        context:context,
-                        module:module,
-                        meta:def.view.meta || def.view,
-                        name:def.view.name || def.view.type || "",
-                        primary:def.view.primary,
-                        layout:this
+                        context: context,
+                        module: module,
+                        loadModule: def.loadModule,
+                        meta: def.view.meta || def.view,
+                        type:def.view.type,
+                        name:def.view.name,
+                        primary: def.view.primary,
+                        layout: this
                     });
                 }
             }
@@ -209,15 +293,23 @@
                         name: def.layout,
                         def: def,
                         module: module,
+                        loadModule: def.loadModule,
                         layout: this
                     });
                 } else if (_.isObject(def.layout)) {
+                    if (def.layout.meta) {
+                        app.logger.warn('`meta` property in metadata layout definitions is deprecated since 7.8 and ' +
+                            'will be removed in 7.9. Please use `xmeta` instead.');
+                    }
+
                     //Inline definition of a sublayout
                     return app.view.createLayout({
                         context: context,
                         module: module,
+                        loadModule: def.loadModule,
                         meta: def.layout.meta || def.layout,
-                        name: def.layout.name || def.layout.type || "",
+                        type: def.layout.type,
+                        name: def.layout.name,
                         def: def,
                         layout: this
                     });
@@ -242,6 +334,13 @@
         _addComponentsFromDef: function(components, context, module) {
             components = components || [];
             _.each(components, function(def) {
+                // If component has already been initialized by the template, do
+                // not initialize again.
+                if (def.initializedInTemplate) {
+                    delete def.initializedInTemplate;
+                    return;
+                }
+
                 if (def.view || def.layout) {
                     this.addComponent(this.createComponentFromDef(def, context, module), def);
                 }
@@ -250,7 +349,7 @@
 
         /**
          * Adds a component to this layout.
-         * @param {View.Layout/View.View} component Component (view or layout) to add
+         * @param {View.Layout|View.View} component Component (view or layout) to add
          * @param {Object} def Metadata definition
          */
         addComponent: function(component, def) {
@@ -265,7 +364,7 @@
          * Default implementation just appends all the components to itself.
          * Override this method to support custom placement of components.
          *
-         * @param {View.View/View.Layout} component View or layout component.
+         * @param {View.View|View.Layout} component View or layout component.
          * @protected
          */
         _placeComponent: function(component) {
@@ -276,7 +375,7 @@
          * Removes a component from this layout.
 
          * If component is an index, remove the component at that index. Otherwise see if component is in the array.
-         * @param {View.Layout/View.View/Number} component The layout or view to remove.
+         * @param {View.Layout|View.View|number} component The layout or view to remove.
          */
         removeComponent: function(component) {
             var i = _.isNumber(component) ? component : this._components.indexOf(component);
@@ -290,7 +389,7 @@
         /**
          * Gets a component by name.
          * @param {String} name Component name.
-         * @return {View.View/View.Layout} Component with the given name.
+         * @return {View.View|View.Layout} Component with the given name.
          */
         getComponent: function (name) {
             return _.find(this._components, function(component) {
@@ -322,28 +421,29 @@
          * Fetches data for layout's model or collection.
          *
          * The default implementation first calls the {@link Core.Context#loadData} method for the layout's context
-         * and then iterates through the components and calls their {@link View.Component#loadData} method.
-         * This method sets context's `fields` property beforehand.
+         * and then iterates through the components and calls their {@link View.Component#loadData} method,
+         * setting their contexts' `fields` property beforehand.
          *
          * Override this method to provide custom fetch algorithm.
          *
          * @param {Object} [options] Options that are passed to
          *   collection/model's fetch method.
-         * @param {boolean} [setFields=true] If `true`, the layout will update
-         *   the set of fields used on the current context.
          */
-        loadData: function(options, setFields) {
+        loadData: function (options) {
+            // FIXME This should be removed by 7.9.
+            if (arguments.length === 2) {
+                app.logger.warn('The `setFields` argument is no longer supported. Views and Layouts must ' +
+                    'add the fields they need without affecting other Views and Layouts');
+            }
+
             if (this.disposed) {
                 return;
             }
 
-            setFields = _.isUndefined(setFields) ? true : setFields;
-            if (setFields) {
-                this.context.set('fields', this.getFieldNames());
-            }
             this.context.loadData(options);
+
             _.each(this._components, function(component) {
-                component.loadData(options, component.context != this.context);
+                component.loadData(options);
             }, this);
         },
 
@@ -419,19 +519,31 @@
          *
          * Disposes each of this layout's components and calls
          * {@link View.Component#_dispose} method of the base class.
+         *
          * @protected
          */
         _dispose: function() {
             app.plugins.detach(this, "layout");
+            this._disposeComponents();
+            this._super('_dispose');
+        },
+
+        /**
+         * Disposes the layout's components and empties the `_components`
+         * property.
+         *
+         * @private
+         */
+        _disposeComponents: function() {
             _.each(this._components, function(component) {
                 component.dispose();
             });
             this._components = [];
-            app.view.Component.prototype._dispose.call(this);
         },
 
         /**
          * Gets a string representation of this layout.
+         *
          * @return {String} String representation of this layout.
          */
         toString: function() {

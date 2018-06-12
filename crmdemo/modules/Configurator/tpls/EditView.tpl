@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -294,7 +294,7 @@
 	<tr>
 		<td  scope="row">{$MOD.UPLOAD_MAX_SIZE}: </td>
 		<td  >
-			<input type='text' size='8' name='upload_maxsize' value='{$config.upload_maxsize}'>
+			<input type='text' size='8' name='upload_maxsize' value='{$config.upload_maxsize}'>&nbsp;{$MOD.UPLOAD_MAXSIZE_UNITS}
 		</td>
 		<td  scope="row">{$MOD.STACK_TRACE_ERRORS}: </td>
 		{if !empty($config.stack_trace_errors)}

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -99,7 +99,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulet {{plural_module_name}} bruges til at spore og administrere produktrelaterede problemer, der almindeligvis omtales som {{plural_module_name}} eller defekter, enten fundet internt eller rapporteret af kunderne. {{plural_module_name}} kan yderligere undersøges ved at spore den og rette den i udgivelse. Modulet {{plural_module_name}} giver brugerne en måde til hurtigt at gennemgå alle detaljer i {{module_name}} og den proces, der anvendes til at rette op på det. Når en {{module_name}} er oprettet eller indsendt, kan du se og redigere oplysninger om {{module_name}} via {{module_name}}&#39;s listevisning. Hver post i {{module_name}} kan derefter relateres til andre Sugar optegnelser, såsom {{calls_module}}, {{contacts_module}}, {{cases_module}} og mange andre.',
+    'LBL_HELP_RECORDS' => 'Modulet {{plural_module_name}} bruges til at spore og administrere produktrelaterede problemer, der almindeligvis omtales som {{plural_module_name}} eller defekter, enten fundet internt eller rapporteret af kunderne. {{plural_module_name}} kan yderligere undersøges ved at spore den og rette den i udgivelse. Modulet {{plural_module_name}} giver brugerne en måde til hurtigt at gennemgå alle detaljer i {{module_name}} og den proces, der anvendes til at rette op på det. Når en {{module_name}} er oprettet eller indsendt, kan du se og redigere oplysninger om {{module_name}} via {{module_name}}\\\'s listevisning. Hver post i {{module_name}} kan derefter relateres til andre Sugar optegnelser, såsom {{calls_module}}, {{contacts_module}}, {{cases_module}} og mange andre.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Modulet {{plural_module_name}} bruges til at spore og administrere produktrelaterede problemer, der almindeligvis omtales som {{plural_module_name}} eller defekter enten fundet internt eller rapporteret af kunderne. 

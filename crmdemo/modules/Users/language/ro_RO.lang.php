@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -230,7 +230,7 @@ $mod_strings = array (
     'LBL_LOGGED_OUT_3' => '.',
 	'LBL_MAIL_FROMADDRESS'				=> 'Adresa pentru răspuns',
 	'LBL_MAIL_FROMNAME'					=> 'Raspunde la numele',
-	'LBL_MAIL_OPTIONS_TITLE'			=> 'Setari Email',
+	'LBL_MAIL_OPTIONS_TITLE'			=> 'Setări de e-mail',
 	'LBL_MAIL_SENDTYPE'					=> 'Agent Transfer Email:',
 	'LBL_MAILMERGE_TEXT'				=> 'Activează Îmbinare corespondenţă (Îmbinare corespondenţă trebuie să fie, de asemenea, activat de către administratorul de sistem în configura setările)',
 	'LBL_MAILMERGE'						=> 'Îmbinare corespondenţă',
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Parola noua',
 	'LBL_NEW_PASSWORD1'					=> 'Parola:',
 	'LBL_NEW_PASSWORD2'					=> 'Confirma parola',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Parola a fost schimbata cu succes.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Parola a fost schimbata cu succes.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'Un e-mail a fost trimis la utilizator care conţine o parolă generata de sistem.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Parola a fost creata cu succes.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Parola a fost creata cu succes.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Utilizator nou',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Noi [Alt + N] Utilizator',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Contingente',
     'LBL_FORECASTS'                     => 'Previziuni',
     'LBL_WORKSHEETS'                    => 'Foi de lucru',
+	'LBL_CALENDARS'                     => 'Calendare',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Ia un alt CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Schimba la sunet',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Schimba la imagine',
@@ -343,7 +344,7 @@ $mod_strings = array (
     'LBL_SWAP_SHORTCUT_DESCRIPTION'     => 'Afişează bara de comenzi rapide în partea de sus, dacă au fost verificate. În caz contrar, se merge pe o parte.',
     'LBL_SWAP_LAST_VIEWED_POSITION'     => 'Ultimele afişate pe o parte',
     'LBL_SWAP_SHORTCUT_POSITION'        => 'Comenzi rapide în partea de sus',
-	'LBL_TAB_TITLE_EMAIL'				=> 'Setari Email',
+	'LBL_TAB_TITLE_EMAIL'				=> 'Setări de e-mail',
 	'LBL_TAB_TITLE_USER'				=> 'Setarile utilizatorului',
 	'LBL_THEME'							=> 'Tema',
 	'LBL_THEME_COLOR'					=> 'culoare',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Telefon Serviciu:',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Publică la locaţia mea',
     'LBL_ICAL_PUB_URL'                  => 'URL de integrare iCal',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Folosiţi acest URL-ul să se aboneze la calendarul de Sugar cu iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Utilizaţi acest URL pentru a vă abona la calendarul Sugar în aplicaţii iCal ' .
+                                           'acceptate. Evenimentele din calendarul Sugar pot fi vizualizate doar în citire ' .
+                                           'în aplicaţiile de calendar externe şi editările evenimentelor ' .
+                                           '(de ex. întâlniri, apeluri etc.) pot fi efectuate doar în Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'URL-ul de interogare',
 	'LNK_NEW_USER'						=> 'Creaza utilizator nou',
 	'LNK_NEW_PORTAL_USER'				=> 'Creaţi utilizator API Portal',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Rapoarte utilizator',
     'LBL_CONTACTS_SYNC' => 'Contacte',
-
+    'LBL_DETAIL' => 'Profil utilizator',
 ); // END STRINGS DEFS
 
 ?>

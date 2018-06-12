@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,10 +56,6 @@
  * )
  * ```
  *
- * TODO: there is a conflict in the link property of `this.def.link` that
- * should be populated from the view/field metadata with the `vardefs` one
- * which needs to be addressed.
- *
  * TODO: we have a mix of properties here with camelCase and underscore.
  * Needs to be addressed.
  *
@@ -69,7 +65,6 @@
  */
 ({
     fieldTag: 'input.select2',
-    plugins: ['QuickSearchFilter', 'EllipsisInline'],
 
     /**
      * Initializes field and binds all function calls to this
@@ -107,7 +102,15 @@
          */
         this._maxSelectedRecords = 20;
 
+        if (_.property('link')(options.def) && !_.isBoolean(options.def.link)) {
+            app.logger.warn('The `link` property passed in the viewDefs must be a boolean. Hence, `link`' +
+                ' will be set to `true` by default.');
+        }
+
         this._super('initialize', [options]);
+
+        // A relate field displays a link by default.
+        this.viewDefs = _.defaults(this.viewDefs || {}, {link: true});
         /**
          * The template used for a pill in case of multiselect field.
          *
@@ -472,18 +475,28 @@
      * extend this one from other "link" field
      */
     buildRoute: function(module, id) {
+        if (_.isUndefined(id) || !this.viewDefs.link) {
+            return;
+        }
+
         var oldModule = module;
         // This is a workaround until bug 61478 is resolved to keep parity with 6.7
         if (module === 'Users' && this.context.get('module') !== 'Users') {
             module = 'Employees';
         }
 
-        if (_.isEmpty(module) || (!_.isUndefined(this.def.link) && !this.def.link)) {
+        if (_.isEmpty(module)) {
             return;
         }
-        var action = (this.def.link && this.def.route)? this.def.route.action :"view";
-        if (!_.isEmpty(id) && app.acl.hasAccess(action, oldModule)) {
+
+        var relatedRecord = this.model.get(this.fieldDefs.link);
+        var action = this.viewDefs.route ? this.viewDefs.route.action : 'view';
+
+        if (relatedRecord && app.acl.hasAccess(action, oldModule, {acls: relatedRecord._acl})) {
             this.href = '#' + app.router.buildRoute(module, id);
+            //FIXME SC-6128 will remove this deprecated block.
+        } else if (!relatedRecord) {
+            this.href = this.href = '#' + app.router.buildRoute(module, id);
         } else {
             // if no access to module, remove the href
             this.href = undefined;
@@ -533,7 +546,15 @@
              */
             this._valueSetOnce = true;
         }
-        setFromCtx = value === null && !this._valueSetOnce && parentCtx && _.isEmpty(this.context.get('model').link) &&
+
+        // This check sees if we should populate the field from the context.
+        // Note that this is a different condition from if we should populate
+        // the field from a parent model.
+        //
+        // Also note that readonly fields are not automatically populated from
+        // the context.
+        setFromCtx = value === null && !this.fieldDefs.readonly &&
+            !this._valueSetOnce && parentCtx && _.isEmpty(this.context.get('model').link) &&
             this.view instanceof app.view.views.BaseCreateView &&
             parentCtx.get('module') === this.def.module &&
             this.module !== this.def.module;
@@ -548,7 +569,8 @@
             // FIXME we need to iterate over the populated_ that is causing
             // unsaved warnings when doing the auto populate.
         }
-        if (!this.def.isMultiSelect) {
+
+        if (!this.def.isMultiSelect && this.action !== 'edit' && !this.context.get('create')) {
             this._buildRoute();
         }
 
@@ -587,7 +609,9 @@
 
         _.each(models, _.bind(function(model) {
             values[this.def.id_name].push(model.id);
-            values[this.def.name].push(model[this.getRelatedModuleField()] || model.value);
+            //FIXME SC-4196 will fix the fallback to `formatNameLocale` for person type models.
+            values[this.def.name].push(model[this.getRelatedModuleField()] ||
+                app.utils.formatNameLocale(model) || model.value);
         }, this));
 
         // If it's not a multiselect relate, we get rid of the array.
@@ -600,16 +624,16 @@
         if (updateRelatedFields) {
             // TODO: move this to SidecarExpressionContext
             // check if link field is currently populated
-            if (this.model.get(this.def.link)) {
+            if (this.model.get(this.fieldDefs.link)) {
                 // unset values of related bean fields in order to make the model load
                 // the values corresponding to the currently selected bean
-                this.model.unset(this.def.link);
+                this.model.unset(this.fieldDefs.link);
             } else {
                 // unsetting what is not set won't trigger "change" event,
                 // we need to trigger it manually in order to notify subscribers
                 // that another related bean has been chosen.
                 // the actual data will then come asynchronously
-                this.model.trigger('change:' + this.def.link);
+                this.model.trigger('change:' + this.fieldDefs.link);
             }
             this.updateRelatedFields(models[0]);
         }
@@ -779,14 +803,14 @@
 
         // No module in the field def, so check if there is a module in the def
         // for the link field
-        var link = this.def.link && this.model.fields && this.model.fields[this.def.link] || {};
+        var link = this.fieldDefs.link && this.model.fields && this.model.fields[this.fieldDefs.link] || {};
         if (link.module) {
             return link.module;
         }
 
         // At this point neither the def nor link field def have a module... let
         // metadata manager try find it
-        return app.data.getRelatedModule(this.model.module, this.def.link);
+        return app.data.getRelatedModule(this.model.module, this.fieldDefs.link);
     },
     getPlaceHolder: function () {
         var searchModule = this.getSearchModule(),
@@ -873,6 +897,7 @@
             showAlerts: false,
             update: true,
             remove: _.isUndefined(params.offset),
+            reset: _.isUndefined(params.offset),
             fields: this.getSearchFields(),
             context: self,
             params: params,
@@ -882,7 +907,7 @@
                 if (fetch.more) {
                     var fieldEl = self.$(self.fieldTag),
                     //For teamset widget, we should specify which index element to be filled in
-                        plugin = (fieldEl.length > 1) ? $(fieldEl.get(self.currentIndex)).data("select2") : fieldEl.data("select2"),
+                        plugin = (fieldEl.length > 1) ? $(fieldEl.get(self._currentIndex)).data("select2") : fieldEl.data("select2"),
                         height = plugin.searchmore.children("li:first").children(":first").outerHeight(),
                     //0.2 makes scroll not to touch the bottom line which avoid fetching next record set
                         maxHeight = height * (limit - .2);

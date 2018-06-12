@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -250,4 +250,13 @@ class SugarApiExceptionSearchRuntime extends SugarApiExceptionError
 {
     public $errorLabel = 'search_runtime';
     public $messageLabel = 'EXCEPTION_SEARCH_RUNTIME';
+}
+
+/**
+ * Locked field edit attempt exception
+ */
+class SugarApiExceptionFieldEditDisabled extends SugarApiExceptionNotAuthorized
+{
+    public $errorLabel = 'field_locked';
+    public $messageLabel = 'EXCEPTION_FIELD_LOCKED_FOR_EDIT';
 }

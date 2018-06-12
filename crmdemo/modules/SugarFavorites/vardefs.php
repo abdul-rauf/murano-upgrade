@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -35,8 +35,7 @@ $dictionary['SugarFavorites'] = array(
     'name' => 'record_id',
     'vname' => 'LBL_RECORD_ID',
     'type' => 'parent_type',
-    'dbType'=>'varchar',
-  	'required'=>false,
+    'dbType'=>'id',
   	'group'=>'record_name',
     'options'=> 'parent_type_display',
     'massupdate' => 0,
@@ -47,7 +46,6 @@ $dictionary['SugarFavorites'] = array(
     'duplicate_merge_dom_value' => '0',
     'audited' => 0,
     'reportable' => 0,
-    'len' => '36',
   ),
   'record_name'=>
   array(
@@ -101,4 +99,4 @@ $dictionary['SugarFavorites'] = array(
 	'optimistic_lock'=>true,
 );
 require_once('include/SugarObjects/VardefManager.php');
-VardefManager::createVardef('SugarFavorites','SugarFavorites', array('basic','assignable'));
+VardefManager::createVardef('SugarFavorites', 'SugarFavorites', array('basic','assignable'));

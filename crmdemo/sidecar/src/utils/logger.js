@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -90,6 +90,19 @@
         },
 
         /**
+         * Turns on the warnings regarding usage of jQuery deprecated methods.
+         */
+        init: function() {
+            // TODO this will be removed by SC-5256.
+            if (!window.jQuery) {
+                return;
+            }
+            app.on('app:sync:complete', function() {
+                jQuery.migrateMute = this.getLevel().value > this.levels.WARN.value;
+            }, this);
+        },
+
+        /**
          * Outputs messages onto browser's console object.
          *
          * @class Utils.Logger.ConsoleWriter
@@ -101,9 +114,9 @@
              * Outputs a message with the specified log level onto the browser's console.
              * The writer uses:
              *
-             *  - <code>console.info</code>: <code>TRACE</code>, <code>DEBUG</code> and <code>INFO<code>.
-             *  - <code>console.warn</code>: <code>WARN</code>.
-             *  - <code>console.error</code>: <code>ERROR</code> and <code>FATAL</code>.
+             *  - `console.info`: `TRACE`, `DEBUG` and `INFO`.
+             *  - `console.warn`: `WARN`.
+             *  - `console.error`: `ERROR` and `FATAL`.
              *
              * @param {Utils.Logger.levels} level A logger level from logger.levels
              * @param {String} message
@@ -143,12 +156,11 @@
              *    status is `false` or an error occurred while processing the request.
              */
             write: function(level, message) {
-                // FIXME: add support for other logger levels (SC-3254)
+                // FIXME: add support for other logger levels (SC-5483).
                 if (level.value < app.logger.levels.WARN.value) {
                     return;
                 }
 
-                // TODO: add support for unauthenticated logging (SC-3254)
                 if (!app.api.isAuthenticated()) {
                     return;
                 }
@@ -209,7 +221,7 @@
 
         /**
          * Logs a message with a TRACE log level.
-         * @param {String/Object/Function} message log message
+         * @param {string|Object|Function} message log message
          * @member Utils.Logger
          */
         trace: function(message) {
@@ -218,7 +230,7 @@
 
         /**
          * Logs a message with DEBUG log level.
-         * @param {String/Object/Function} message log message
+         * @param {string|Object|Function} message log message
          * @member Utils.Logger
          */
         debug: function(message) {
@@ -227,7 +239,7 @@
 
         /**
          * Logs a message with INFO log level.
-         * @param {String/Object/Function} message log message
+         * @param {string|Object|Function} message log message
          * @member Utils.Logger
          */
         info: function(message) {
@@ -236,7 +248,7 @@
 
         /**
          * Logs a message with WARN log level.
-         * @param {String/Object/Function} message log message
+         * @param {string|Object|Function} message log message
          * @member Utils.Logger
          */
         warn: function(message) {
@@ -245,7 +257,7 @@
 
         /**
          * Logs a message with ERROR log level.
-         * @param {String/Object/Function} message log message
+         * @param {string|Object|Function} message log message
          * @member Utils.Logger
          */
         error: function(message) {
@@ -254,7 +266,7 @@
 
         /**
          * Logs a message with FATAL log level.
-         * @param {String/Object/Function} message log message
+         * @param {string|Object|Function} message log message
          * @member Utils.Logger
          */
         fatal: function(message) {
@@ -264,19 +276,44 @@
         /**
          * Retrieve logger level based on system settings.
          *
-         * @return {String} Logger level or `this.levels.ERROR` if none defined.
+         * @member Utils.Logger
+         * @return {Object} Logger level or `this.levels.ERROR` if none defined.
          */
         getLevel: function() {
-            // @deprecated Use `app.config.logger.level` instead, old
-            // property should be removed on 7.8 (SC-3254)
-            var level = app.config.logLevel;
-            if (level) {
-                return this.levels[app.config.logLevel];
-            }
-            level = app.config.logger && app.config.logger.level;
-            level = level && this.levels[level.toUpperCase()] || this.levels.ERROR;
+            var level = app.config.logger && app.config.logger.level;
 
-            return level;
+            /**
+             * @deprecated 7.7 It will be removed in 7.9.
+             *   Use `app.config.logger.level` instead.
+             * @property logLevel
+             * @member SUGAR.App.config
+             * FIXME: SC-5469 Remove deprecatedLevel.
+             */
+            var deprecatedLevel = app.config.logLevel;
+            if (!level && deprecatedLevel) {
+                level = deprecatedLevel;
+                console.warn('The property `app.config.logLevel` has been ' +
+                    'deprecated since 7.7.0.0 and will be removed in 7.9.0.0.' +
+                    ' Use `app.config.logger.level` instead.');
+            }
+
+            if (!level) {
+                return this.levels.ERROR;
+            }
+            level = level.toUpperCase();
+
+            // FIXME this needs to be done after SC-5483 is implemented
+            /*
+            if (!this.levels[level]) {
+
+                console.error('Your logger level is set to an invalid value. ' +
+                    'Please redefine it in Administration > System Settings. ' +
+                    'If you continue to see this warning, please ' +
+                    'contact your Admin.');
+            }
+            */
+
+            return this.levels[level] || this.levels.ERROR;
         },
 
         // TODO: We may want to add support for format strings like "Some message %s %d", params
@@ -285,7 +322,7 @@
          * If the message is an object, it will be serialized into a JSON string.
          * If the message is a function, it will evaluated in the logger's scope.
          * @param {Utils.Logger.levels} level log level
-         * @param {String/Object/Function} message log message
+         * @param {string|Object|Function} message log message
          * @member Utils.Logger
          */
         log: function(level, message) {
@@ -309,7 +346,8 @@
                 }
 
                 // @deprecated Use `app.config.logger.formatter` instead, old
-                // property should be removed on 7.8 (SC-3254)
+                // property should be removed on 7.9 (SC-5469)
+                // FIXME: SC-5478 Add deprecation warning and change order of operations.
                 var logger = app.config.logger,
                     formatter = this[app.config.logFormatter];
                 if (!formatter) {
@@ -319,7 +357,8 @@
                 message = formatter.format(level, message, new Date());
 
                 // @deprecated Use `app.config.logger.consoleWriter` instead, old
-                // property should be removed on 7.8 (SC-3254)
+                // property should be removed on 7.9 (SC-5469)
+                // FIXME: SC-5479 Add deprecation warning and change order of operations.
                 var consoleWriter = this[app.config.logWriter];
                 if (!consoleWriter) {
                     consoleWriter = (logger && this[logger.consoleWriter]) || this.ConsoleWriter;

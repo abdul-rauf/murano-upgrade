@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -15,6 +15,7 @@ use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\AdminSettings;
 
 require_once 'include/MetaDataManager/MetaDataManager.php';
+require_once 'modules/Configurator/Configurator.php';
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
@@ -73,7 +74,7 @@ class AdministrationController extends SugarController
         if (count($sugar_config['languages']) === count($disabled_langs)) {
             sugar_die(translate('LBL_CAN_NOT_DISABLE_ALL_LANG'));
         } else {
-            $cfg = new Configurator();
+            $cfg = $this->getConfigurator();
             if (in_array($sugar_config['default_language'], $disabled_langs)) {
                 reset($enabled_langs);
                 $cfg->config['default_language'] = current($enabled_langs);
@@ -111,9 +112,8 @@ class AdministrationController extends SugarController
 
         if (!is_admin($current_user)) sugar_die($app_strings['ERR_NOT_ADMIN']);
 
-        require_once('modules/Configurator/Configurator.php');
-        $configurator = new Configurator();
-        $configurator->saveConfig();
+        $cfg = $this->getConfigurator();
+        $cfg->saveConfig();
 
         if (isset($_REQUEST['enabled_modules']) && !empty ($_REQUEST['enabled_modules']))
         {
@@ -143,7 +143,7 @@ class AdministrationController extends SugarController
             sugar_cache_clear("CONTROLLER_wireless_module_registry_Users");
             sugar_cache_put('wireless_module_registry_keys', array_keys($updated_enabled_modules));
             sugar_cache_reset();
-            
+
             // Bug 59121 - Clear the metadata cache for the mobile platform
             MetaDataManager::refreshCache(array('mobile'));
         }
@@ -277,20 +277,6 @@ class AdministrationController extends SugarController
         }
     }
 
-
-/*
-    public function action_UpdateAjaxUI()
-    {
-        // TODO check if we need to use this to update the bwc widget.
-//        require_once('modules/Configurator/Configurator.php');
-//        $cfg = new Configurator();
-//        $disabled = json_decode(html_entity_decode  ($_REQUEST['disabled_modules'], ENT_QUOTES));
-//        $cfg->config['addAjaxBannedModules'] = empty($disabled) ? FALSE : $disabled;
-//        $cfg->handleOverride();
-//        $this->view = "configureajaxui";
-    }
-*/
-
     /*
      * action_callRebuildSprites
      *
@@ -324,7 +310,7 @@ class AdministrationController extends SugarController
     {
         $config = $this->mergeFtsConfig($type, $config);
 
-        $cfg = new Configurator();
+        $cfg = $this->getConfigurator();
         $cfg->config['full_text_engine'] = '';
         $cfg->saveConfig();
         $cfg->config['full_text_engine'] = array($type => $config);
@@ -385,5 +371,15 @@ class AdministrationController extends SugarController
     public function action_UpgradeWizard_map_roles()
     {
         $this->view = 'maproles';
+    }
+
+    /**
+     * Factory method to mock Configurator
+     *
+     * @return Configurator
+     */
+    protected function getConfigurator()
+    {
+        return new Configurator();
     }
 }

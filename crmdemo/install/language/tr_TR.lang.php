@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Uyumluluk denetimi sırasında hatalar tespit edildi. SugarCRM Kurulum işleminin düzgün çalışması için, lütfen aşağıda sıralanan problemleri gidermek için gerekli adımları atıp, yeniden kontrol butonuna basın ya da yeniden yüklemeyi deneyin.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference değeri On (php.ini içinde Off yapılmalıdır)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Bulunamadı: Sugar Zamanlayıcısı sınırlı fonksiyonlarıyla çalışacak. E-posta arşivleme servisi çalışmayacaktır.',
+	'ERR_CHECKSYS_CURL'					=> 'Bulunamadı: Sugar Planlayıcı sınırlı fonksiyonlarla çalışacak. E-posta Arşivleme hizmeti çalışmayacak.',
     'ERR_CHECKSYS_IMAP'					=> 'Bulunamadı : Gelen E-Posta ve Kampanyalar (E-Posta) için  IMAP kütüphaneleri gerekiyor. İkisi de çalışmayacak.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'MS SQL Server kullanırken, Magic Quotes GPC "On" olarak değiştirilemez.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Uyarı:',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'Veritabanı kullanılamaz',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Veritabanı Desteği bulunamadı. Lütfen aşağıda desteklenen Veritabanı Türlerinden biri için gerekli sürücülere sahip olduğunuzdan emin olun: MySQL veya MS SQLServer. Php.ini dosyasındaki uzantı açıklamasını kaldırmanız veya PHP versiyonuna bağlı olarak doğru ikili dosya ile tekrar derlemeniz gerekebilir. Lütfen Veritabanı Desteği Etkinleştirme ile ilgili daha fazla bilgi için PHP Kılavuzuna başvurun.<br><br>Oracle ve DB2, SugarCRM PRO için desteklenen veritabanları değildir. Desteklenen veritabanlarının ve diğer platform bilgilerinin bir listesi için lütfen <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/ adresini ziyaret edin</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugar uygulaması tarafından ihtiyaç duyulan XML Ayrıştırıcı Kütüphaneleri fonksiyonları bulunamadı. PHP versiyonun bağlı olarak, php.ini dosyasında eklentileri aktive etmeniz veya doğru seçenekler ile tekrar derlemeniz gerekebilir. Daha fazla bilgi için PHP Kılavuzuna bakınız.',
+    'LBL_CHECKSYS_CSPRNG' => 'Rasgele sayı üretici',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugar uygulaması tarafından ihtiyaç duyulan Multibyte Strings PHP eki (mbstring) ile ilişkili fonksiyonlar bulunamadı.<br/><br/><br />Genellikle mbstring modülü varsayılan olarak PHP içinde etkin olmayıp, PHP programı oluşturulurken --enable-mbstring seçeneği ile etkinleştirilmelidir. <br /> Mbstring desteğini etkinleştirmek ile ilgili daha fazla bilgi için PHP Kılavuzuna bakınız.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Php yapılandırma dosyasında (php.ini) session.save_path ayarları yapılmadı ya da olmayan bir klasörü işaret ediyor. Php.ini dosyasında save_path değerini ayarlayın ya da işaret edilen klasörün var olduğuna emin olun.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'ZIP desteği bulunamadı: SugarCRM sıkıştırılmış dosyaları işlemek için ZIP desteğine ihtiyaç duyar.',
     'ERR_CHECKSYS_BCMATH'				=> 'BCMATH desteği bulunamadı: SugarCRM isteğe bağlı hassaslıktaki matematiksel işlemler için BCMATCH desteğine gerek duyar.',
     'ERR_CHECKSYS_HTACCESS'             => '.Htaccess üzeine yeniden yazma başarısız oldu. Bu genelikle Sugar dizini için AllowOverride kurmanız gerektiği anlamına gelir.',
+    'ERR_CHECKSYS_CSPRNG' => 'CSPRNG Özel Durumu',
 	'ERR_DB_ADMIN'						=> 'Temin edilen veritabanı yöneticisi kullanıcı ismi ve / veya şifre geçersizdir ve veritabanına bir bağlantı kurulamadı. Geçerli bir kullanıcı ismi ve şifrenizi giriniz. (Hata:',
     'ERR_DB_ADMIN_MSSQL'                => 'Verilen veritabanı yöneticisi kullanıcı ismi ve/veya şifresi geçersiz, veritabanına bir bağlantı kurulamadı. Lütfen geçerli bir kullanıcı adı ve şifre giriniz.',
 	'ERR_DB_EXISTS_NOT'					=> 'Belirtilen veritabanı mevcut değil.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'Anahtar genel uygulama işlevselliği için gerekli olup, kurulum için gerekli değildir. Şu anda anahtarı girmeniz gerekmez, ancak uygulamayı kurduktan sonra anahtar gerekecektir.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Kurulum için minimum bilgi gerektirir. Yeni kullanıcılar için tavsiye edilir.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Kurulum sırasında ayarlamak için ek seçenekler sağlar. Bu seçeneklerin çoğu yönetici ekranları kurulumdan sonra da mevcuttur. İleri düzey kullanıcılar için önerilir.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Kurulum sırasında ayarlamak için ek seçenekler sağlar. Bu seçeneklerin çoğu yönetici ekranları kurulumdan sonra da mevcuttur. İleri düzey kullanıcılar için önerilir.',
 	'LBL_LANG_1'						=> 'Sugar içinde, varsayılan dil (ABD-İngilizce) dışında bir dil kullanmak için, şu anda bir dil paketini yükleyip kurabilirsiniz. Sugar uygulamasının içinden de dil paketlerini yükleyip kurabilirsiniz. Bu adımı atlamak istiyorsanız, İleri butonuna tıklayınız.',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Kur',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Sil',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'Lisans Kabulü',
     'LBL_LICENSE_CHECKING'              => 'Uyumluluk için sistem denetleniyor.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Ortamı Denetliyor',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'DB Kimlik Bilgileri doğrulanıyor.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'DB doğrulama, FTS Kimlik Bilgileri.',
     'LBL_LICENSE_CHECK_PASSED'          => 'Sistem uyumluluk kontrolünü geçti.',
     'LBL_LICENSE_REDIRECT'              => 'Yönlendirme Süresi:',
 	'LBL_LICENSE_DIRECTIONS'			=> 'Lisans bilgileriniz varsa, lütfen aşağıdaki alanlara girin.',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'Lütfen kuruluma devam etmeden önce aşağıdaki önemli bilgileri okuyunuz. Bu bilgiler şu anda uygulamayı yüklemek için hazır olup olmadığını belirlemenize yardımcı olur.',
 
 
-	'LBL_WELCOME_2'						=> 'Kurulum dokümanları için, lütfen  <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>&#39;yi ziyaret edin. <br><br> Kurulum yardımı için bir SugarCRM destek mühendisine başvurmak için, <a target="_blank" href="http://support.sugarcrm.com">SugarCRM Destek Portal</a>&#39;ında oturum açın ve bir destek çağrısı bırakın.',
+	'LBL_WELCOME_2'						=> 'Yükleme belgeleri için lütfen <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a> adresini ziyaret edin.  <BR><BR> Yükleme yardımına yönelik olarak bir SugarCRM destek mühendisiyle iletişim kurmak için lütfen <a target="_blank" href="http://support.sugarcrm.com">SugarCRM Support Portal</a> adresinde oturum açarak bir destek durumu gönderin.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>Dilinizi seçin</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Kurulum Sihirbazı',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'SugarCRM Sistemine Hoş geldiniz',
@@ -451,8 +454,8 @@ $mod_strings = array(
 	'LBL_OOTB_BOUNCE'		=> 'Gecelik Çalışan Geri Dönen Kampanya E-Postaları',
     'LBL_OOTB_CAMPAIGN'		=> 'Gecelik Çalışan Kitlesel E-Posta Kampanyaları',
 	'LBL_OOTB_PRUNE'		=> 'Ayın 1 inde Veritabanında temizlik yap',
-    'LBL_OOTB_TRACKER'		=> 'İzleyici tablolarını temizle',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'E-Posta Hatırlatıcı Bildirimlerini Çalıştır',
+    'LBL_OOTB_TRACKER'		=> 'Takipçi Tabloları Temizle',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'E-posta Hatırlatma Bildirimlerini çalıştır',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'tracker_sessions tablosunu güncelleştir',
     'LBL_OOTB_CLEANUP_QUEUE' => 'İş Kuyruğunu Temizle',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'Arama Motoru Tipi',
     'LBL_FTS_HELP'      => 'Tam metin aramayı etkinleştirmek için, arama motoru türünü seçin ve arama motorunu barındıran Sunucu ve Port bilgilerini girin. Sugar halihazırda elasticsearch arama motorunu desteklemektedir.',
     'LBL_FTS_REQUIRED'    => 'Elastic Search gerekmektedir.',
-    'LBL_FTS_ERROR'    => 'Tam-Metin Arama sunucusuna bağlanılamıyor, ayarlarınızı kontrol edin.',
+    'LBL_FTS_CONN_ERROR'    => 'Tam-Metin Arama sunucusuna bağlanılamıyor, ayarlarınızı kontrol edin.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'Tam metin arama sunucusu sürümü kullanılamıyor lütfen ayarlarınızı onaylayın.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'Desteklenmeyen Esnek arama sürümü tespit edildi. Lütfen şu sürümü kullanın: %s',
 
     'LBL_PATCHES_TITLE'     => 'Son Yamaları Yükle',
     'LBL_MODULE_TITLE'      => 'Dil Paketlerini Yükle',

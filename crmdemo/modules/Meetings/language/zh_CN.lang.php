@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => '电子邮件',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => '所有受邀者的电子邮件',
     'LBL_POPUP_REMINDER' => '弹出提醒',
-    'LBL_POPUP_REMINDER_TIME' => '弹出提醒的时间',
+    'LBL_POPUP_REMINDER_TIME' => '弹出提醒时间',
     'LBL_EMAIL_REMINDER' => '邮件提醒',
-    'LBL_EMAIL_REMINDER_TIME' => '邮件提醒时间',
+    'LBL_EMAIL_REMINDER_TIME' => '电子邮件提醒时间',
     'LBL_REMOVE' => '移除',
 	'LBL_SCHEDULING_FORM_TITLE' => '日程安排',
 	'LBL_SEARCH_BUTTON'=> '查找',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => '删除所有复发',
     'LBL_DATE_END_ERROR' => '结束日期在开始日期之前',
     'LBL_REPEAT_PARENT_ID' => '重复父 ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => '会议复发 ID。原始会议开始日期',
     'LBL_RECURRING_SOURCE' => '重复出现的资源',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => '您确定要删除所有的重复记录吗?',
     'LBL_RECURRENCE' => '复发',

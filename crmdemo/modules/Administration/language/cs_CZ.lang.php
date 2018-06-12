@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -193,7 +193,7 @@ $mod_strings = array (
     'LBL_CONFIGURE_SETTINGS_TITLE' => 'Systémové nastavení',
     'LBL_CONFIGURE_SETTINGS' => 'Rozšířené nastavení systému',
     'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'Zobrazit moduly a dílčí panely',
-    'LBL_CONFIGURE_UPDATER'=>'Nastavit SugarCRM updaty',
+    'LBL_CONFIGURE_UPDATER'=>'Konfigurovat aktualizace SugarCRM',
     'LBL_CONTRACT_TITLE'=>'Smlouvy',
     'LBL_CONTRACT_DESC'=>'Definovat typy smluv v modulu smlouvy. Když uživatelé vytvářejí smlouvy, drop-down menu se zobrazí s typy smluv pro výběr.',
     'LBL_CONTRACT_TYPES'=>'Nastavit typy smluv',
@@ -251,7 +251,7 @@ $mod_strings = array (
 	'LBL_DISABLED' => 'Vypnuto',
     'LBL_DISPLAY_TABS'=>'Zobrazit záložky',
     'LBL_DO_OVERWRITE_FILES'    => 'Nepřepisuj soubory',
-    'LBL_DOCUMENTATION_TITLE' => 'Online Dokumentace',
+    'LBL_DOCUMENTATION_TITLE' => 'Online dokumentace',
     'LBL_DOCUMENTATION' => 'Přístup k online uživatelské a administrátorské dokumentaci',
     'LBL_DONE'  => 'Dokončeno',
     'LBL_DROP_HERE' => '[Vlož sem]',
@@ -275,7 +275,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => 'Úprava vlastních polí',
     'LBL_EDIT_TABS'=>'Edituj záložky',
     'LBL_EMAIL_TITLE' => 'E-mail',
-    'LBL_EMAIL_DESC' => 'Správa odchozích a příchozích e-mailů. Nastavení e-mailu musí být nakonfigurován tak, aby uživatelům umožnilo odesílat e-maily a newsletter kampaně.',
+    'LBL_EMAIL_DESC' => 'Spravujte odchozí a příchozí e-maily. Nastavení e-mailu musí být nakonfigurováno za účelem ' .
+                        'bylo uživatelům umožněno odesílat v rámci kampaně e-maily a zpravodaje.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Je vyžadování primární emailová adresa pro každého uživatele při používání této funkce.',
 	'LBL_ENABLE_MAILMERGE' => 'Aktivovat slučování emailů?',
 	'LBL_ENABLED' => 'Aktivováno',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Nastavte výchozí regionální nastavení pro Váš systém.',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- jméno uživatele, který operuje s tímto offline klientem',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Jméno uživatele:',
-    'LBL_MAILBOX_DESC' => 'Nastaví mailboxy aby byly monitorovány pro příchozí emaily',
+    'LBL_MAILBOX_DESC' => 'Nastavit skupiny poštovních účtů pro sledování příchozích e-mailů ' .
+        'a spravovat osobní informace účtu příchozí pošty pro uživatele',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Typy kontraktu',
     'LBL_MANAGE_CURRENCIES' => 'Měny',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Uspořádat skupiny',
@@ -432,7 +434,7 @@ $mod_strings = array (
     'LBL_MANAGE_OPPORTUNITIES_DESC' => 'Konfigurujte modul obchodních příležitostí',
     'LBL_MANAGE_USERS_TITLE' => 'Správa uživatelů',
     'LBL_MANAGE_USERS' => 'Správa uživatelů a hesel',
-    'LBL_MANAGE_WORKFLOW'                   => 'Workflow Management',
+    'LBL_MANAGE_WORKFLOW'                   => 'Správa workflow',
     'LBL_MANAGE_STYLEGUIDE' => 'Průvodce styly',
     'LBL_MANAGE_STYLEGUIDE_TITLE' => 'Dokumentace a vzory',
     'LBL_MANUAL_VALIDATION_TXT' => 'Manuální ověření',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Předělávám js grouping soubory',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Rozplétám a přepisují existující skupiny souborů poslední verzí souborů',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Opravit soubory jazyka JavaScript',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Opravit soubory JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Zpracovávám soubory. To může trvat několik minut. odejít pryč z této stránky klidně můžete nebo čekjte na potvrzení ...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Dokončena oprava souborů.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Oprav názvy polí na malá písmena',
@@ -741,7 +745,7 @@ $mod_strings = array (
     'LBL_SUGAR_SCHEDULER' => 'Nastaví naplánované události',
     'LBL_SUGAR_SERVER_URL_DESC'          => '- URL adresa serveru tohoto klienta se připojí k (e.g., http://localhost/sugarserver).',
     'LBL_SUGAR_SERVER_URL'                => 'URL adresa serveru:',
-    'LBL_SUGAR_UPDATE_TITLE'=>'Updaty SugarCRM',
+    'LBL_SUGAR_UPDATE_TITLE'=>'Aktualizace SugarCRM',
     'LBL_SUGAR_UPDATE'=>'Zkontroluje nejnovější verzi systému Sugar',
     'LBL_SUGARCRM_HELP' => 'SugarCRM help',
     'LBL_SUPPORT_TITLE' => 'Sugar Suport Portal',
@@ -770,7 +774,7 @@ $mod_strings = array (
     'LBL_UPDATE_TIMEZONE_PROMPT_USERS_CONFIRM'=>'Vyžádat od uživatele přihlášení pro potvrzení',
     'LBL_UPDATE_TIMEZONE_UPDATE'=>'Aktualizace',
     'LBL_UPDATE_TIMEZONE_UPDATED'=>'Všechna nastavení časové zóny byla zaktualizována',
-    'LBL_UPDATE_TITLE'=>'Updaty SugarCRM',
+    'LBL_UPDATE_TITLE'=>'Aktualizace SugarCRM',
     'LBL_UPGRADE_ADDED_TO_GROUP' =>'Přidány do skupiny',
     'LBL_UPGRADE_ALREADY_EXISTS_GROUP' =>'skupina již existuje',
     'LBL_UPGRADE_ALREADY_EXISTS_IN_GROUP' =>'Již existuje ve skupině:',
@@ -893,7 +897,7 @@ $mod_strings = array (
 	'LBL_VISIBLE_PANELS'=>'Zobrazované subpanely',
     'LBL_VISIBLE_TABS'=>'Zobrazované záložky',
     'LBL_WORKFLOW_DESC'                     => 'Správa workflow podmínek, upozornění a akcí',
-    'LBL_WORKFLOW_TITLE'                    => 'Workflow Management',
+    'LBL_WORKFLOW_TITLE'                    => 'Správa workflow',
     'LBL_WORKBENCH' => 'Workbench',
     'LBL_WORKBENCH_DESC' => 'Customizace aplikace a tvorba nových modulů.',
 
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Vymazání mezipaměti souborů ... provedeno',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Pokud je toto políčko nezaškrtnuté, bude muset admin ručně prodloužit platnost poté, co vyprší systému licence, jinak se uživatelé nebudou moci přihlásit.',
 	'LBL_TRACKER_SETTINGS' => 'Traker',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Vyberte, jaká systémová a uživatelská data jsou sledována',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Povolit/zakázat sledování',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Povolení/Zakázání testovacích uživatelů',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Aktivovat',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Deaktivovat',
@@ -1158,6 +1162,10 @@ Další informace naleznete v dokumentaci na stránce <a href="http://www.sugarc
     'LBL_SPRITES_ADDED' => 'Přidán obrázek',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Vyřazení souboru',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Týmová oprávnění',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Povolte přístup týmu a spravujte přístup modulem.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Systémový typ',
     'LBL_FTS_HOST' => 'Hostitel',
@@ -1227,5 +1235,6 @@ Další informace naleznete v dokumentaci na stránce <a href="http://www.sugarc
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Kliknutím na Odeslat bude provedena synchronizace s master serverem.',
     'LBL_OFFLINE_ENABLED' => 'Offline povoleno',
     'LBL_OFFLINE_SETTINGS' => 'Nastavení offline přístupu',
+
 
 );

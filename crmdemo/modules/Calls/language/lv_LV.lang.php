@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -72,7 +72,7 @@ $mod_strings = array (
     'LBL_SEND_BUTTON_LABEL'=>'Saglabāt un nosūtīt ielūgumus',
 	'LBL_DATE_END'=>'Beigu datums',
 	'LBL_TIME_END'=>'Beigu laiks',
-	'LBL_REMINDER_TIME'=>'Atgādināšanas laiks',
+    'LBL_REMINDER_TIME'=>'Atgādināšanas laiks',
     'LBL_EMAIL_REMINDER_SENT' => 'E-pasta atgādinājums nosūtīts',
     'LBL_SEARCH_BUTTON'=> 'Meklēt',
     'LBL_ACTIVITIES_REPORTS' => 'Darbību atskaite',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Dzēst visus atkārtojumus',
     'LBL_DATE_END_ERROR' => 'Beigu datums ir pirms sākuma datuma',
     'LBL_REPEAT_PARENT_ID' => 'Atkārtojošs priekšteča ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Zvana atkārtošanās ID. Sākotnējā zvana sākuma datums',
     'LBL_RECURRING_SOURCE' => 'Atkārtojošs avots',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Vai tiešām vēlaties izņemt visus periodiskos ierakstus?',
     'LBL_RECURRING_LIMIT_ERROR' => 'Atkārtotos zvanu nevar ieplānot jo tas pārsniedz maksimāli atļauto atkārtojumu skaitu',

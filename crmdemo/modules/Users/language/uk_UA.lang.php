@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Новий пароль',
 	'LBL_NEW_PASSWORD1'					=> 'Пароль',
 	'LBL_NEW_PASSWORD2'					=> 'Підтвердити пароль',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Успішно змінено пароль.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Успішно змінено пароль.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'Лист, що містить автоматично згенерований пароль, було надіслано користувачеві.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Успішно створено пароль.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Успішно створено пароль.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Новий користувач',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Новий користувач',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Квоти',
     'LBL_FORECASTS'                     => 'Прогнози',
     'LBL_WORKSHEETS'                    => 'Таблиці',
+	'LBL_CALENDARS'                     => 'Календарі',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Оновити CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Переключитися на звук',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Переключитися на картинку',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Телефон (роб.)',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Опобліквати в моєму місці',
     'LBL_ICAL_PUB_URL'                  => 'URL інтеграції  iCal',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Використовуйте цей URL для підписки на Sugar-календар в рамках iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Використовуйте цю URL-адресу для підписки на календар Sugar у підтримуваних iCal ' .
+                                           'додатках. Події календаря Sugar доступні лише для читання ' .
+                                           'в зовнішніх додатках календаря, і вносити зміни до подій ' .
+                                           '(наприклад, зустрічей, дзвінків тощо) можна лише в Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'Запитуваний Вами URL:',
 	'LNK_NEW_USER'						=> 'Створити нового користувача',
 	'LNK_NEW_PORTAL_USER'				=> 'Створити нового користувача Порталу  API',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Звіти користувача',
     'LBL_CONTACTS_SYNC' => 'Контакти',
-
+    'LBL_DETAIL' => 'Профіль користувача',
 ); // END STRINGS DEFS
 
 ?>

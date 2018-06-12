@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -95,10 +95,13 @@ $mod_strings = array (
     'LBL_KB_STATUS_BACK_TO_DRAFT' => 'Dokumentum státusza vázlatra visszamódosítva.',
     'LBL_OPERATOR_CONTAINING_THESE_WORDS' => 'tartalmazza ezeket a szavakat',
     'LBL_OPERATOR_EXCLUDING_THESE_WORDS' => 'kivéve ezeket a szavakat',
-    'ERROR_EXP_DATE_LOW' => 'The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_EXP_DATE_LOW' => 'A lejárati dátum nem lehet a közzététel időpontja előtt.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'A Jóváhagyott státuszhoz szükség van a közzétételi dátumra.',
     'ERROR_ACTIVE_DATE_LOW' => 'The Publish Date must occur on a later date than today&#39;s date.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'A Közzétételi Dátum helye üres.',
     'LBL_RECORD_SAVED_SUCCESS' => 'Sikeresen létrehozta a/az {{moduleSingularLower}}<a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'ERROR_IS_BEFORE' => 'Hiba: A mezőben szereplő dátumnak későbbinek kell lennie {{this}}-nél.',
     'TPL_SHOW_MORE_MODULE' => 'Több {{module}} cikk...',
+    'LBL_LIST_FORM_TITLE' => 'Tudásbázis Lista',
+    'LBL_SEARCH_FORM_TITLE' => 'Tudásbázis keresés',
 );

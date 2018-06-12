@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -31,7 +31,7 @@ $mod_strings = array (
   'LBL_LIST_RELATE_TYPE' => 'Tipo Relazione',
   'LBL_LIST_ADDRESS_TYPE' => 'Tipo Indirizzo',
   'LBL_LIST_FIELD_VALUE' => 'Utente',
-  'LBL_LIST_REL_MODULE1' => 'Modulo Collegato',
+  'LBL_LIST_REL_MODULE1' => 'Modulo correlato',
   'LBL_LIST_REL_MODULE2' => 'Modulo Collegato',
   'LBL_LIST_WHERE_FILTER' => 'Stato',
 
@@ -40,7 +40,7 @@ $mod_strings = array (
   'LBL_RELATE_TYPE' => 'Tipo Relazione:',
   'LBL_WHERE_FILTER' => 'Stato:',
   'LBL_FIELD_VALUE' => 'Utente Selezionato:',
-  'LBL_REL_MODULE1' => 'Modulo Collegato:',
+  'LBL_REL_MODULE1' => 'Modulo correlato',
   'LBL_REL_MODULE2' => 'Modulo Collegato:',
   'LBL_CUSTOM_USER' => 'Utente Personalizzato:',
 

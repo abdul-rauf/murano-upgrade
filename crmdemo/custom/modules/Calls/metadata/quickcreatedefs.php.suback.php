@@ -1,5 +1,5 @@
 <?php
-// created: 2015-01-11 07:09:10
+// created: 2015-02-22 18:44:41
 $viewdefs['Calls']['QuickCreate'] = array (
   'templateMeta' => 
   array (
@@ -13,7 +13,6 @@ $viewdefs['Calls']['QuickCreate'] = array (
         2 => '<input type="hidden" name="user_invitees">',
         3 => '<input type="hidden" name="lead_invitees">',
         4 => '<input type="hidden" name="contact_invitees">',
-        5 => '<input type="hidden" name="is_ajax_call" value="1">',
       ),
       'buttons' => 
       array (

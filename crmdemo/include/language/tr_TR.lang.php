@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,7 +56,7 @@ $app_list_strings = array (
     'TaxRates'=>'Vergi Oranları',
     'ContractTypes' => 'Kontrat Tipleri',
     'Schedulers'=>'Planlayıcılar',
-    'Project'=>'Proje',
+    'Project'=>'Projeler',
     'ProjectTask'=>'Proje Görevleri',
     'Campaigns'=>'Kampanyalar',
     'CampaignLog'=>'Kampanya Tarihçesi',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Filtre',
     'Comments' => 'Açıklama',
     'Currencies' => 'Para Birimi',
-    'Project' => 'Proje',
     'ProductTemplates' => 'Ürün Şablonu:',
-    'ProductCategories' => 'Ürün Kategorisi',
     'ProductTypes' => 'Ürün Tipi',
     'Shippers' => 'Nakliyatçı',
     'Subscriptions' => 'Abonelik',
@@ -322,11 +320,11 @@ $app_list_strings = array (
   ),
   //Note:  do not translate opportunity_relationship_type_default_key
 //       it is the key for the default opportunity_relationship_type_dom value
-  'opportunity_relationship_type_default_key' => 'Asıl Karar Verici',
+  'opportunity_relationship_type_default_key' => 'Birincil Karar Verici',
   'opportunity_relationship_type_dom' =>
   array (
     '' => '',
-    'Primary Decision Maker' => 'Asıl Karar Verici',
+    'Primary Decision Maker' => 'Birincil Karar Verici',
     'Business Decision Maker' => 'Ticari Karar Verici',
     'Business Evaluator' => 'Ticari Değerlendirici',
     'Technical Decision Maker' => 'Teknik Karar Verici',
@@ -337,11 +335,11 @@ $app_list_strings = array (
   ),
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
-  'case_relationship_type_default_key' => 'Asıl Kontak',
+  'case_relationship_type_default_key' => 'Birincil Kontak',
   'case_relationship_type_dom' =>
   array (
     '' => '',
-    'Primary Contact' => 'Asıl Kontak',
+    'Primary Contact' => 'Birincil Kontak',
     'Alternate Contact' => 'Alternatif Kontak',
   ),
   'payment_terms' =>
@@ -725,11 +723,11 @@ $app_list_strings = array (
 
 //Note:  do not translate quote_relationship_type_default_key
 //       it is the key for the default quote_relationship_type_dom value
-  'quote_relationship_type_default_key' => 'Asıl Karar Verici',
+  'quote_relationship_type_default_key' => 'Birincil Karar Verici',
   'quote_relationship_type_dom' =>
   array (
     '' => '',
-    'Primary Decision Maker' => 'Asıl Karar Verici',
+    'Primary Decision Maker' => 'Birincil Karar Verici',
     'Business Decision Maker' => 'Ticari Karar Verici',
     'Business Evaluator' => 'Ticari Değerlendirici',
     'Technical Decision Maker' => 'Teknik Karar Verici',
@@ -944,6 +942,16 @@ $app_list_strings = array (
                 '5'=>"Per",
                 '6'=>"Cum",
                 '7'=>"Cmt",
+        ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Pz",
+            '2'=>"Pt",
+            '3'=>"Sa",
+            '4'=>"Ça",
+            '5'=>"Pe",
+            '6'=>"Cu",
+            '7'=>"Ct",
         ),
     'dom_cal_day_of_week' => array(
         '0' => 'Paz',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'yıl(lar)',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Kadar',
+        'Occurrences' => 'Yinelemeler',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Yok',
+        'Each' => 'Her',
+        'On' => 'Üstünde',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'birinci',
+        'second' => 'ikinci',
+        'third' => 'üçüncü',
+        'fourth' => 'dördüncü',
+        'fifth' => 'beşinci',
+        'last' => 'sonuncu',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Pazar',
+        'Mon' => 'Pazartesi',
+        'Tue' => 'Salı',
+        'Wed' => 'Çarşamba',
+        'Thu' => 'Perşembe',
+        'Fri' => 'Cuma',
+        'Sat' => 'Cumartesi',
+        'Day' => 'Gün',
+        'WD'  => 'Hafta içi',
+        'WE'  => 'Hafta Sonu'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Orta',
         'end' => 'Son',
         'top' => 'Üst',
+        'total' => 'Toplam',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Boru',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Açık',
       'dark' => 'Koyu',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Taşı',
@@ -1830,7 +1949,7 @@ $app_list_strings = array (
         "AS" => array(
             "1" => array("code" => "E", "name" => "Doğu"),
             "2" => array("code" => "M", "name" => "Manu'a"),
-            "3" => array("code" => "R", "name" => "Rose Island"),
+            "3" => array("code" => "T", "name" => "Rose Island"),
             "4" => array("code" => "S", "name" => "Swains Island"),
             "5" => array("code" => "W", "name" => "Batı")
         ),
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "Hıristiyan Kilisesi"),
-            "2" => array("code" => "AND", "name" => "Saint Andrew"),
+            "2" => array("code" => "VE", "name" => "Saint Andrew"),
             "3" => array("code" => "GEO", "name" => "Saint George"),
             "4" => array("code" => "JAM", "name" => "Saint James"),
             "5" => array("code" => "JOH", "name" => "Saint John"),
@@ -2247,7 +2366,7 @@ $app_list_strings = array (
             "1" => array("code" => "AC", "name" => "Acre"),
             "2" => array("code" => "AL", "name" => "Alagoas"),
             "3" => array("code" => "AP", "name" => "Amapa"),
-            "4" => array("code" => "AM", "name" => "Amazonas"),
+            "4" => array("code" => "ÖÖ", "name" => "Amazonas"),
             "5" => array("code" => "BA", "name" => "Bahia"),
             "6" => array("code" => "CE", "name" => "Ceara"),
             "7" => array("code" => "DF", "name" => "Federal Bölge"),
@@ -2595,7 +2714,7 @@ $app_list_strings = array (
             "21" => array("code" => "MET", "name" => "Meta"),
             "22" => array("code" => "NAR", "name" => "Narino"),
             "23" => array("code" => "NDS", "name" => "Norte de Santander"),
-            "24" => array("code" => "PUT", "name" => "Putumayo"),
+            "24" => array("code" => "KOY", "name" => "Putumayo"),
             "25" => array("code" => "QUI", "name" => "Quindio"),
             "26" => array("code" => "RIS", "name" => "Risaralda"),
             "27" => array("code" => "SAP", "name" => "San Andrés, Providencia ve Santa Catalina Takımadaları"),
@@ -2760,7 +2879,7 @@ $app_list_strings = array (
         /* Cyprus */
         "CY" => array(
             "1" => array("code" => "F", "name" => "Gazimağusa"),
-            "2" => array("code" => "K", "name" => "Girne"),
+            "2" => array("code" => "Bin", "name" => "Girne"),
             "3" => array("code" => "A", "name" => "Larnaka"),
             "4" => array("code" => "I", "name" => "Limasol"),
             "5" => array("code" => "N", "name" => "Lefkoşa"),
@@ -2774,7 +2893,7 @@ $app_list_strings = array (
             "4" => array("code" => "E", "name" => "Pardubický"),
             "5" => array("code" => "H", "name" => "Hradec Králové İli"),
             "6" => array("code" => "J", "name" => "Vysočina"),
-            "7" => array("code" => "K", "name" => "Karlovy Vary İli"),
+            "7" => array("code" => "Bin", "name" => "Karlovy Vary İli"),
             "8" => array("code" => "L", "name" => "Liberec"),
             "9" => array("code" => "M", "name" => "Olomouc"),
             "10" => array("code" => "P", "name" => "Plzen"),
@@ -2805,14 +2924,14 @@ $app_list_strings = array (
         /* Djibouti */
         "DJ" => array(
             "1" => array("code" => "S", "name" => "'Ali Sabih"),
-            "2" => array("code" => "K", "name" => "Dikhil"),
+            "2" => array("code" => "Bin", "name" => "Dikhil"),
             "3" => array("code" => "J", "name" => "Cibuti"),
             "4" => array("code" => "O", "name" => "Obock"),
             "5" => array("code" => "T", "name" => "Tadjoura")
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parişi"),
+            "1" => array("code" => "VE", "name" => "Saint Andrew Parişi"),
             "2" => array("code" => "DAV", "name" => "Saint David Parişi"),
             "3" => array("code" => "GEO", "name" => "Saint George Parişi"),
             "4" => array("code" => "JOH", "name" => "Saint John Parişi"),
@@ -2852,7 +2971,7 @@ $app_list_strings = array (
             "25" => array("code" => "SC", "name" => "San Cristobal"),
             "26" => array("code" => "JO", "name" => "San Jose de Ocoa"),
             "27" => array("code" => "SJ", "name" => "San Juan"),
-            "28" => array("code" => "PM", "name" => "San Pedro de Macoris"),
+            "28" => array("code" => "ÖS", "name" => "San Pedro de Macoris"),
             "29" => array("code" => "SA", "name" => "Santiago"),
             "30" => array("code" => "ST", "name" => "Santiago Rodriguez"),
             "31" => array("code" => "SD", "name" => "Santo Domingo"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "VEYA", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Güney Ulusları ve Halkları"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "Sumba"),
+            "22" => array("code" => "TOPLAM", "name" => "Sumba"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3039,7 +3158,7 @@ $app_list_strings = array (
             "1" => array("code" => "C", "name" => "Orta Bölge"),
             "2" => array("code" => "E", "name" => "Doğu Bölge"),
             "3" => array("code" => "N", "name" => "Kuzey Bölge"),
-            "4" => array("code" => "R", "name" => "Rotuma"),
+            "4" => array("code" => "T", "name" => "Rotuma"),
             "5" => array("code" => "W", "name" => "Batı Bölgen")
         ),
         /* Finland */
@@ -3213,7 +3332,7 @@ $app_list_strings = array (
         /* French Southern Territories */
         "TF" => array(
             "1" => array("code" => "C", "name" => "Crozet Adaları"),
-            "2" => array("code" => "K", "name" => "Kerguelen Adaları"),
+            "2" => array("code" => "Bin", "name" => "Kerguelen Adaları"),
             "3" => array("code" => "A", "name" => "Amsterdam Adası"),
             "4" => array("code" => "P", "name" => "Saint-Paul Adası"),
             "5" => array("code" => "D", "name" => "Adelie Land")
@@ -3324,7 +3443,7 @@ $app_list_strings = array (
         "GL" => array(
             "1" => array("code" => "A", "name" => "Avannaa"),
             "2" => array("code" => "T", "name" => "Tunu"),
-            "3" => array("code" => "K", "name" => "Kitaa")
+            "3" => array("code" => "Bin", "name" => "Kitaa")
         ),
         /* Grenada */
         "86" => array(
@@ -3448,7 +3567,7 @@ $app_list_strings = array (
             "4" => array("code" => "EC", "name" => "Güney Berbice-Corentyne"),
             "5" => array("code" => "EW", "name" => "Essequibo Adaları-West Demerara"),
             "6" => array("code" => "MB", "name" => "Mahaica-Berbice"),
-            "7" => array("code" => "PM", "name" => "Pomeroon-Supenaam"),
+            "7" => array("code" => "ÖS", "name" => "Pomeroon-Supenaam"),
             "8" => array("code" => "PI", "name" => "Potaro-Siparuni"),
             "9" => array("code" => "UD", "name" => "Yukarı Demerara-Berbice"),
             "10" => array("code" => "UT", "name" => "Yukarı Takutu-Upper Essequibo")
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "VEYA", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Pencap"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "VEYA", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parişi"),
             "4" => array("code" => "MAN", "name" => "Manchester Parişi"),
             "5" => array("code" => "POR", "name" => "Portland Parişi"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parişi"),
+            "6" => array("code" => "VE", "name" => "Saint Andrew Parişi"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parişi"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parişi"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parişi"),
@@ -3897,7 +4016,7 @@ $app_list_strings = array (
             "28" => array("code" => "NR", "name" => "Nara"),
             "29" => array("code" => "NI", "name" => "Niigata"),
             "30" => array("code" => "OI", "name" => "Oita"),
-            "31" => array("code" => "OK", "name" => "Okayama"),
+            "31" => array("code" => "Tamam", "name" => "Okayama"),
             "32" => array("code" => "ON", "name" => "Okinawa"),
             "33" => array("code" => "OS", "name" => "Osaka"),
             "34" => array("code" => "SA", "name" => "Saga"),
@@ -3917,7 +4036,7 @@ $app_list_strings = array (
         ),
         /* Jordan */
         "JO" => array(
-            "1" => array("code" => "AM", "name" => "Amman"),
+            "1" => array("code" => "ÖÖ", "name" => "Amman"),
             "2" => array("code" => "AJ", "name" => "Ajlun"),
             "3" => array("code" => "AA", "name" => "Akabe"),
             "4" => array("code" => "AB", "name" => "Balka"),
@@ -3934,7 +4053,7 @@ $app_list_strings = array (
         "KZ" => array(
             "1" => array("code" => "AL", "name" => "Almatı"),
             "2" => array("code" => "AC", "name" => "Almatı City"),
-            "3" => array("code" => "AM", "name" => "Astana"),
+            "3" => array("code" => "ÖÖ", "name" => "Astana"),
             "4" => array("code" => "AQ", "name" => "Aktobe"),
             "5" => array("code" => "AS", "name" => "Astana City"),
             "6" => array("code" => "AT", "name" => "Atırav"),
@@ -3964,7 +4083,7 @@ $app_list_strings = array (
         /* Kiribati */
         "KI" => array(
             "1" => array("code" => "AG", "name" => "Abaiang"),
-            "2" => array("code" => "AM", "name" => "Abemama"),
+            "2" => array("code" => "ÖÖ", "name" => "Abemama"),
             "3" => array("code" => "AK", "name" => "Aranuka"),
             "4" => array("code" => "AO", "name" => "Arorae"),
             "5" => array("code" => "BA", "name" => "Banaba"),
@@ -4109,7 +4228,7 @@ $app_list_strings = array (
             "11" => array("code" => "BAT", "name" => "Batroun"),
             "12" => array("code" => "BSH", "name" => "Bsharri"),
             "13" => array("code" => "KOU", "name" => "Koura"),
-            "14" => array("code" => "MIN", "name" => "Miniyeh-Danniyeh"),
+            "14" => array("code" => "MİN", "name" => "Miniyeh-Danniyeh"),
             "15" => array("code" => "TRI", "name" => "Tripoli"),
             "16" => array("code" => "ZGH", "name" => "Zgharta"),
             "17" => array("code" => "ALE", "name" => "Aley"),
@@ -4188,7 +4307,7 @@ $app_list_strings = array (
             "5" => array("code" => "E", "name" => "Eschen"),
             "6" => array("code" => "M", "name" => "Mauren"),
             "7" => array("code" => "T", "name" => "Triesenberg"),
-            "8" => array("code" => "R", "name" => "Ruggell"),
+            "8" => array("code" => "T", "name" => "Ruggell"),
             "9" => array("code" => "G", "name" => "Gamprin"),
             "10" => array("code" => "L", "name" => "Schellenberg"),
             "11" => array("code" => "P", "name" => "Planken")
@@ -4649,7 +4768,7 @@ $app_list_strings = array (
         /* Micronesia */
         "FM" => array(
             "1" => array("code" => "C", "name" => "Chuuk"),
-            "2" => array("code" => "K", "name" => "Kosrae"),
+            "2" => array("code" => "Bin", "name" => "Kosrae"),
             "3" => array("code" => "P", "name" => "Pohnpei"),
             "4" => array("code" => "Y", "name" => "Yap")
         ),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "VEYA", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Bender"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -4791,7 +4910,7 @@ $app_list_strings = array (
             "6" => array("code" => "KH", "name" => "Khomas"),
             "7" => array("code" => "KU", "name" => "Kunene"),
             "8" => array("code" => "OW", "name" => "Ohangwena"),
-            "9" => array("code" => "OK", "name" => "Omaheke"),
+            "9" => array("code" => "Tamam", "name" => "Omaheke"),
             "10" => array("code" => "OT", "name" => "Omusati"),
             "11" => array("code" => "ON", "name" => "Oshana"),
             "12" => array("code" => "OO", "name" => "Oshikoto"),
@@ -4978,7 +5097,7 @@ $app_list_strings = array (
         /* Northern Mariana Islands */
         "MP" => array(
             "1" => array("code" => "N", "name" => "Kuzey Adaları"),
-            "2" => array("code" => "R", "name" => "Rota"),
+            "2" => array("code" => "T", "name" => "Rota"),
             "3" => array("code" => "S", "name" => "Saipan"),
             "4" => array("code" => "T", "name" => "Tinian")
         ),
@@ -5027,7 +5146,7 @@ $app_list_strings = array (
         ),
         /* Palau */
         "PW" => array(
-            "1" => array("code" => "AM", "name" => "Aimeliik"),
+            "1" => array("code" => "ÖÖ", "name" => "Aimeliik"),
             "2" => array("code" => "AR", "name" => "Airai"),
             "3" => array("code" => "AN", "name" => "Angaur"),
             "4" => array("code" => "HA", "name" => "Hatohobei"),
@@ -5084,7 +5203,7 @@ $app_list_strings = array (
         "PY" => array(
             "1" => array("code" => "AG", "name" => "Alto Paraguay"),
             "2" => array("code" => "AN", "name" => "Alto Parana"),
-            "3" => array("code" => "AM", "name" => "Amambay"),
+            "3" => array("code" => "ÖÖ", "name" => "Amambay"),
             "4" => array("code" => "AS", "name" => "Asuncion"),
             "5" => array("code" => "BO", "name" => "Boqueron"),
             "6" => array("code" => "CG", "name" => "Caaguazu"),
@@ -5103,7 +5222,7 @@ $app_list_strings = array (
         ),
         /* Peru */
         "PE" => array(
-            "1" => array("code" => "AM", "name" => "Amazonas"),
+            "1" => array("code" => "ÖÖ", "name" => "Amazonas"),
             "2" => array("code" => "AN", "name" => "Ancash"),
             "3" => array("code" => "AP", "name" => "Apurimac"),
             "4" => array("code" => "AR", "name" => "Arequipa"),
@@ -5227,7 +5346,7 @@ $app_list_strings = array (
             "8" => array("code" => "OP", "name" => "Opole Voyvodalığı"),
             "9" => array("code" => "PP", "name" => "Alt Karpatya Voyvodalığı"),
             "10" => array("code" => "PL", "name" => "Podlaskie Voyvodalığı"),
-            "11" => array("code" => "PM", "name" => "Pomeranya Voyvodalığı"),
+            "11" => array("code" => "ÖS", "name" => "Pomeranya Voyvodalığı"),
             "12" => array("code" => "SL", "name" => "Silezya Voyvodalığı"),
             "13" => array("code" => "SW", "name" => "Świętokrzyskie Voyvodalığı"),
             "14" => array("code" => "WM", "name" => "Warmian-Masurian Voyvodalığı"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "VEYA", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -5537,7 +5656,7 @@ $app_list_strings = array (
         /* Saint Vincent and the Grenadines */
         "VC" => array(
             "1" => array("code" => "C", "name" => "Charlotte"),
-            "2" => array("code" => "R", "name" => "Grenadines"),
+            "2" => array("code" => "T", "name" => "Grenadines"),
             "3" => array("code" => "A", "name" => "Saint Andrew"),
             "4" => array("code" => "D", "name" => "Saint David"),
             "5" => array("code" => "G", "name" => "Saint George"),
@@ -5712,7 +5831,7 @@ $app_list_strings = array (
             "2" => array("code" => "AL", "name" => "Álava"),
             "3" => array("code" => "AB", "name" => "Albacete"),
             "4" => array("code" => "AC", "name" => "Alicante"),
-            "5" => array("code" => "AM", "name" => "Almeria"),
+            "5" => array("code" => "ÖÖ", "name" => "Almeria"),
             "6" => array("code" => "AS", "name" => "Asturias"),
             "7" => array("code" => "AV", "name" => "Ávila"),
             "8" => array("code" => "BJ", "name" => "Badajoz"),
@@ -5735,7 +5854,7 @@ $app_list_strings = array (
             "25" => array("code" => "HS", "name" => "Huesca"),
             "26" => array("code" => "JN", "name" => "Jaén"),
             "27" => array("code" => "RJ", "name" => "La Rioja"),
-            "28" => array("code" => "PM", "name" => "Las Palmas"),
+            "28" => array("code" => "ÖS", "name" => "Las Palmas"),
             "29" => array("code" => "LE", "name" => "León"),
             "30" => array("code" => "LL", "name" => "Lleida"),
             "31" => array("code" => "LG", "name" => "Lugo"),
@@ -5821,7 +5940,7 @@ $app_list_strings = array (
             "4" => array("code" => "MA", "name" => "Marowijne"),
             "5" => array("code" => "NI", "name" => "Nickerie"),
             "6" => array("code" => "PA", "name" => "Para"),
-            "7" => array("code" => "PM", "name" => "Paramaribo"),
+            "7" => array("code" => "ÖS", "name" => "Paramaribo"),
             "9" => array("code" => "SA", "name" => "Saramacca"),
             "10" => array("code" => "SI", "name" => "Sipaliwini"),
             "11" => array("code" => "WA", "name" => "Wanica")
@@ -5835,7 +5954,7 @@ $app_list_strings = array (
         ),
         /* Sweden */
         "SE" => array(
-            "1" => array("code" => "K", "name" => "Blekinge"),
+            "1" => array("code" => "Bin", "name" => "Blekinge"),
             "2" => array("code" => "W", "name" => "Dalama"),
             "3" => array("code" => "I", "name" => "Gotland"),
             "4" => array("code" => "X", "name" => "Gävleborg"),
@@ -5899,7 +6018,7 @@ $app_list_strings = array (
             "9" => array("code" => "HL", "name" => "Halep"),
             "10" => array("code" => "HM", "name" => "Hama"),
             "11" => array("code" => "HI", "name" => "Humus"),
-            "12" => array("code" => "ID", "name" => "İdlip"),
+            "12" => array("code" => "KİMLİK", "name" => "İdlip"),
             "13" => array("code" => "RD", "name" => "Rif Şam"),
             "14" => array("code" => "TA", "name" => "Tartus")
         ),
@@ -6047,7 +6166,7 @@ $app_list_strings = array (
         ),
         /* Togo */
         "TG" => array(
-            "1" => array("code" => "K", "name" => "Kara"),
+            "1" => array("code" => "Bin", "name" => "Kara"),
             "2" => array("code" => "P", "name" => "Plateaux"),
             "3" => array("code" => "S", "name" => "Savanes"),
             "4" => array("code" => "C", "name" => "Centrale"),
@@ -6443,7 +6562,7 @@ $app_list_strings = array (
             "7" => array("code" => "AA", "name" => "Amerika Silahlı Kuvvetleri"),
             "8" => array("code" => "AC", "name" => "Kanada Silahlı Kuvvetleri"),
             "9" => array("code" => "AE", "name" => "Avrupa Silahlı Kuvvetleri"),
-            "10" => array("code" => "AM", "name" => "Orta Doğu Silahlı Kuvvetleri"),
+            "10" => array("code" => "ÖÖ", "name" => "Orta Doğu Silahlı Kuvvetleri"),
             "11" => array("code" => "AP", "name" => "Pasifik Silahlı Kuvvetleri"),
             "12" => array("code" => "CA", "name" => "California"),
             "13" => array("code" => "CO", "name" => "Colorado"),
@@ -6455,7 +6574,7 @@ $app_list_strings = array (
             "19" => array("code" => "GA", "name" => "Georgia"),
             "20" => array("code" => "GU", "name" => "Guam"),
             "21" => array("code" => "HI", "name" => "Hawaii"),
-            "22" => array("code" => "ID", "name" => "Idaho"),
+            "22" => array("code" => "KİMLİK", "name" => "Idaho"),
             "23" => array("code" => "IL", "name" => "Illinois"),
             "24" => array("code" => "IN", "name" => "Indiana"),
             "25" => array("code" => "IA", "name" => "Iowa"),
@@ -6481,8 +6600,8 @@ $app_list_strings = array (
             "45" => array("code" => "ND", "name" => "North Dakota"),
             "46" => array("code" => "MP", "name" => "Kuzey Mariana Adaları"),
             "47" => array("code" => "OH", "name" => "Ohio"),
-            "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "48" => array("code" => "Tamam", "name" => "Oklahoma"),
+            "49" => array("code" => "VEYA", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pennsylvania"),
             "52" => array("code" => "PR", "name" => "Porto Riko"),
@@ -6562,7 +6681,7 @@ $app_list_strings = array (
         ),
         /* Venezuela */
         "VE" => array(
-            "1" => array("code" => "AM", "name" => "Amazonas"),
+            "1" => array("code" => "ÖÖ", "name" => "Amazonas"),
             "2" => array("code" => "AN", "name" => "Anzoategui"),
             "3" => array("code" => "AP", "name" => "Apure"),
             "4" => array("code" => "AR", "name" => "Aragua"),
@@ -6639,7 +6758,7 @@ $app_list_strings = array (
         "YE" => array(
             "1" => array("code" => "AB", "name" => "Abyan"),
             "2" => array("code" => "AD", "name" => "Adan"),
-            "3" => array("code" => "AM", "name" => "Amran"),
+            "3" => array("code" => "ÖÖ", "name" => "Amran"),
             "4" => array("code" => "BA", "name" => "Al Bayda"),
             "5" => array("code" => "DA", "name" => "Ad Dali"),
             "6" => array("code" => "DH", "name" => "Zamar"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Batı Kasai"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Kuzey Kivu"),
-            "10" => array("code" => "OR", "name" => "Doğu Bölgesi"),
+            "10" => array("code" => "VEYA", "name" => "Doğu Bölgesi"),
             "11" => array("code" => "SK", "name" => "Güney Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Bağlantıyı İzleyin',
   'LBL_TOGGLE_VISIBILITY' => 'Görünürlüğü Değiştir', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivite Akışı',
-  'LBL_COPYRIGHT' => 'Telif Hakkı © 2004-2015 SugarCRM Inc. Tüm Hakları Saklıdır.',
-  'LBL_TRADEMARK' => 'SugarCRM SugarCRM şirketinin ticari markasıdır. Tüm diğer şirket ve ürün adları bağlı oldukları şirketlerin ticari markaları olabilir.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise ™ ve Sugar ™ SugarCRM A.Ş. ticari markalarıdır',
-  'LBL_SEND_INVITE' => 'Davet Gönder',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar ve 3-D Küp, SugarCRM Inc.&#39;in tescilli ticari markalarıdır. '.
+        'Bu üründe kullanılan veya görünen diğer tüm şirket ve ürün adları, ilişkili olan '.
+        'ilgili şirketlerin ticari markalarıdır.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise ™ ve Sugar ™ SugarCRM A.Ş. ticari markalarıdır',
+    'LBL_SEND_INVITE' => 'Davet Gönder',
   'LBL_INVITEES' => 'Davetli',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Misafir, davetinizi almayacak',
   'LBL_SELECT_ACTION_LABEL' => 'Aksiyon Seç',
   'LBL_TOGGLE_DRAWER' => 'Çekmeceyi Değiştir',
   'LBL_TOUR_NEXT' => 'Sonraki',
@@ -7887,7 +8009,7 @@ $app_strings = array (
   'LBL_BASIC_QUICK_SEARCH' => 'Ara...' /*for 508 compliance fix*/,
   'LBL_PROJECT_MINUS' => 'Kaldır' /*for 508 compliance fix*/,
   'LBL_PROJECT_PLUS' => 'Ekle' /*for 508 compliance fix*/,
-  'LBL_Blank' => 'LBL_PDF_ITEM_SELECT_DISCOUNT' /*for 508 compliance fix*/,
+  'LBL_Blank' => ' ' /*for 508 compliance fix*/,
   'LBL_ICON_COLUMN_1' => 'Kolon' /*for 508 compliance fix*/,
   'LBL_ICON_COLUMN_2' => '2 Kolon' /*for 508 compliance fix*/,
   'LBL_ICON_COLUMN_3' => '3 Kolon' /*for 508 compliance fix*/,
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Ekle' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Şirket Logosu' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Takvim' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'ana modül navigasyon',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'alt panele değiştir',
+
     'LBL_ADVANCED' => 'Gelişmiş',
     'LBL_BASIC' => 'Temel',
     'LBL_MODULE_FILTER' => 'Filtrenin kaynağı',
@@ -8078,7 +8205,7 @@ $app_strings = array (
     'LBL_EMAIL_ADDR_DISPLAY_MSG'            => 'E-Posta adresini(lerini) gösteriyor. Toplam {2} adetin {0} - {1} aralığı',
 
     'LBL_EMAIL_EDIT_CONTACT'                => 'Kontak Değiştir',
-    'LBL_EMAIL_EDIT_CONTACT_WARN'           => 'Kontaklar ile çalışırken sadece Asıl Adres kullanılır.',
+    'LBL_EMAIL_EDIT_CONTACT_WARN'           => 'Kontaklar ile çalışırken sadece birincil adres kullanılır.',
     'LBL_EMAIL_EDIT_MAILING_LIST'           => 'Posta Listesi Değiştir',
 
     'LBL_EMAIL_EMPTYING_TRASH'              => 'Çöp Kutusu Boşaltılıyor',
@@ -8215,7 +8342,7 @@ $app_strings = array (
     'LBL_EMAIL_PAGE_AFTER'                  => '{0} adetin',
     'LBL_EMAIL_PAGE_BEFORE'                 => 'Sayfa',
     'LBL_EMAIL_PERFORMING_TASK'             => 'Adımı Gerçekleştiriyor',
-    'LBL_EMAIL_PRIMARY'                     => 'Asıl',
+    'LBL_EMAIL_PRIMARY'                     => 'Birincil',
     'LBL_EMAIL_PRINT'                       => 'Yazdır',
 
     'LBL_EMAIL_QC_BUGS'                     => 'Hata',
@@ -8368,12 +8495,13 @@ $app_strings = array (
     'LBL_TEAMS' =>'Takımlar',
     'LBL_TEAM_SET_ID' => 'Takım Küme ID',
     'LBL_TEAM_SET'=>'Takım Kümesi',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Seçili Takım',
     'LBL_SEARCH_UNAVAILABLE' => 'Arama çalışmıyor, daha sonra tekrar deneyin.',
-    'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Asıl Takım belirtilmedi',
-    'LBL_REMOVE_PRIMARY_TEAM_ERROR' => '[{2}] ID&#39;li modül için ID&#39;si [{0}] olan asıl takımı silme sırasında hata',
+    'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Birincil Takım belirtilmedi',
+    'LBL_REMOVE_PRIMARY_TEAM_ERROR' => '[{2}] ID&#39;li modül için ID&#39;si [{0}] olan birincil takımı silme sırasında hata',
     'LBL_TEAM_ADD' => 'Takım&nbsp;Ekle',
     'LBL_TEAM_REMOVE' => 'Takımı Kaldır',
-    'LBL_TEAM_PRIMARY' => 'Asıl Takım Olarak Ayarla',
+    'LBL_TEAM_PRIMARY' => 'Birincil Takım Olarak Ayarla',
 
     'LBL_CLOSE_BUTTON_LABEL' => 'Kapat',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}}, {{status}} olarak işaretlendi.',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Arama motoru geçici olarak kullanılamıyor.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Bir arama motoru çalışma zamanı hatası oluştu. Lütfen Sistem Yöneticinize başvurun.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Bir işlem tarafından kilitlenen alan düzenlenemez.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Genel arıza veya hata durumuyla karşılaşıldı. Bu hatanın nedeni, tanımlı API hatalarının dışında yer almaktadır.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Sunucunu meşgul, aşırı yüklü veya çökmüş olduğunu belirtir.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'Arama motoru arka ucu, bir bağlantı sorunu nedeniyle şu anda kullanılamıyor. Bağlantı ve yapılandırmayı Yönetici->arama->test&#39;te doğrulayın.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'SearchEngine içinde bir çalışma zamanı özel durumu oluştu. Daha fazla ayrıntı için sugarcrm.log&#39;a bakın.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Devam eden bir işlem tarafından kilitlenen alan düzenlenemez.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s devam eden bir işlem tarafından kilitlendi ve düzenlenemez.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s devam eden bir işlem tarafından kilitlendi ve düzenlenemez.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Sistemde aynı ismi taşıyan bir dosya daha var.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Bu Zaman Aralığı için zaten alt-aralıklar var',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Alt Zaman Aralığının alt-aralıkları olamaz',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => '{0} tipinde herhangi bir zaman aralığı alınamıyor.',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Mevcut ayarların aktif Zaman Aralıkları yok.',
     'LBL_CURRENT_TIMEPERIOD' => 'Şimdiki Zaman Aralığı',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Önceki Zaman Aralığı',
     'LBL_NEXT_TIMEPERIOD' => 'Sonraki Zaman Aralığı',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Alan seçin...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Operatör seçin...',
     'LBL_FILTER_CREATE_NEW' => 'Filtre Oluştur',
+    'LBL_FILTER_CREATE_FILTER' => 'Yeni filtre oluştur',
+    'LBL_FILTER_EDIT_FILTER' => 'Filtreyi düzenle',
     'LBL_FILTER_ALL_RECORDS' => 'Tüm Kayıtlar',
     'TPL_FILTER_SAVE' => 'Başarılı bir şekilde filtre {{name}} oluşturuldu.',
     'LBL_FILTER_BETWEEN_FROM' => 'den',
@@ -8821,14 +8955,14 @@ $app_strings = array (
     'LBL_PHASE' => 'Faz',
     'LBL_PICTURE_FILE' => 'Resim',
     'LBL_POSTAL_CODE' => 'Posta Kodu:',
-    'LBL_PRIMARY_ADDRESS_CITY' => 'Asıl Adres Şehir:',
-    'LBL_PRIMARY_ADDRESS_COUNTRY' => 'Asıl Adres Ülke:',
-    'LBL_PRIMARY_ADDRESS_POSTALCODE' => 'Asıl Adres Posta Kodu:',
-    'LBL_PRIMARY_ADDRESS_STATE' => 'Asıl Adres Eyalet:',
-    'LBL_PRIMARY_ADDRESS_STREET_2' => 'Asıl Adres Sokak 2 :',
-    'LBL_PRIMARY_ADDRESS_STREET_3' => 'Asıl Adres Sokak 3:',
-    'LBL_PRIMARY_ADDRESS_STREET' => 'Asıl Adres Sokak:',
-    'LBL_PRIMARY_ADDRESS' => 'Asıl Adres:',
+    'LBL_PRIMARY_ADDRESS_CITY' => 'Birincil Adres Şehir:',
+    'LBL_PRIMARY_ADDRESS_COUNTRY' => 'Birincil Adres Ülke:',
+    'LBL_PRIMARY_ADDRESS_POSTALCODE' => 'Birincil Adres Posta Kodu:',
+    'LBL_PRIMARY_ADDRESS_STATE' => 'Birincil Adres Eyalet:',
+    'LBL_PRIMARY_ADDRESS_STREET_2' => 'Birincil Adres Sokak 2:',
+    'LBL_PRIMARY_ADDRESS_STREET_3' => 'Birincil Adres Ülke:',
+    'LBL_PRIMARY_ADDRESS_STREET' => 'Birincil Adres Sokak:',
+    'LBL_PRIMARY_ADDRESS' => 'Birincil Adres:',
 
 	'LBL_BILLING_STREET'=> 'Sokak:',
 	'LBL_SHIPPING_STREET'=> 'Sokak:',
@@ -8938,16 +9072,16 @@ $app_strings = array (
     'LBL_SELECT_USER_BUTTON_LABEL' => 'Kullanıcı Seç',
     'LBL_SELECT_USER_BUTTON_TITLE' => 'Kullanıcı Seç',
     // Clear buttons take up too many keys, lets default the relate and collection ones to be empty
-    'LBL_ACCESSKEY_CLEAR_RELATE_KEY' => 'LBL_PDF_ITEM_SELECT_DISCOUNT',
+    'LBL_ACCESSKEY_CLEAR_RELATE_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_RELATE_TITLE' => 'Seçimi Temizle',
     'LBL_ACCESSKEY_CLEAR_RELATE_LABEL' => 'Seçimi Temizle',
-    'LBL_ACCESSKEY_CLEAR_COLLECTION_KEY' => 'LBL_PDF_ITEM_SELECT_DISCOUNT',
+    'LBL_ACCESSKEY_CLEAR_COLLECTION_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_COLLECTION_TITLE' => 'Seçimi Temizle',
     'LBL_ACCESSKEY_CLEAR_COLLECTION_LABEL' => 'Seçimi Temizle',
     'LBL_ACCESSKEY_SELECT_FILE_KEY' => 'F',
     'LBL_ACCESSKEY_SELECT_FILE_TITLE' => 'Dosya Seçin',
     'LBL_ACCESSKEY_SELECT_FILE_LABEL' => 'Dosya Seçin',
-    'LBL_ACCESSKEY_CLEAR_FILE_KEY' => 'LBL_PDF_ITEM_SELECT_DISCOUNT',
+    'LBL_ACCESSKEY_CLEAR_FILE_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_FILE_TITLE' => 'Dosya Temizle',
     'LBL_ACCESSKEY_CLEAR_FILE_LABEL' => 'Dosya Temizle',
 
@@ -8955,31 +9089,31 @@ $app_strings = array (
     'LBL_ACCESSKEY_SELECT_USERS_KEY' => 'U',
     'LBL_ACCESSKEY_SELECT_USERS_TITLE' => 'Kullanıcı Seç',
     'LBL_ACCESSKEY_SELECT_USERS_LABEL' => 'Kullanıcı Seç',
-    'LBL_ACCESSKEY_CLEAR_USERS_KEY' => 'LBL_PDF_ITEM_SELECT_DISCOUNT',
+    'LBL_ACCESSKEY_CLEAR_USERS_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_USERS_TITLE' => 'Kullanıcıyı Temizle',
     'LBL_ACCESSKEY_CLEAR_USERS_LABEL' => 'Kullanıcıyı Temizle',
     'LBL_ACCESSKEY_SELECT_ACCOUNTS_KEY' => 'A',
     'LBL_ACCESSKEY_SELECT_ACCOUNTS_TITLE' => 'Müşteri Seç',
     'LBL_ACCESSKEY_SELECT_ACCOUNTS_LABEL' => 'Müşteri Seç',
-    'LBL_ACCESSKEY_CLEAR_ACCOUNTS_KEY' => 'LBL_PDF_ITEM_SELECT_DISCOUNT',
+    'LBL_ACCESSKEY_CLEAR_ACCOUNTS_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_ACCOUNTS_TITLE' => 'Hesabı Temizle',
     'LBL_ACCESSKEY_CLEAR_ACCOUNTS_LABEL' => 'Hesabı Temizle',
     'LBL_ACCESSKEY_SELECT_CAMPAIGNS_KEY' => 'M',
     'LBL_ACCESSKEY_SELECT_CAMPAIGNS_TITLE' => 'Kampanya Seç',
     'LBL_ACCESSKEY_SELECT_CAMPAIGNS_LABEL' => 'Kampanya Seç',
-    'LBL_ACCESSKEY_CLEAR_CAMPAIGNS_KEY' => 'LBL_PDF_ITEM_SELECT_DISCOUNT',
+    'LBL_ACCESSKEY_CLEAR_CAMPAIGNS_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_CAMPAIGNS_TITLE' => 'Kampanyayı Temizle',
     'LBL_ACCESSKEY_CLEAR_CAMPAIGNS_LABEL' => 'Kampanyayı Temizle',
     'LBL_ACCESSKEY_SELECT_CONTACTS_KEY' => 'C',
     'LBL_ACCESSKEY_SELECT_CONTACTS_TITLE' => 'İlgili Seç',
     'LBL_ACCESSKEY_SELECT_CONTACTS_LABEL' => 'İlgili Seç',
-    'LBL_ACCESSKEY_CLEAR_CONTACTS_KEY' => 'LBL_PDF_ITEM_SELECT_DISCOUNT',
+    'LBL_ACCESSKEY_CLEAR_CONTACTS_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_CONTACTS_TITLE' => 'Kontak Kaydını Temizle',
     'LBL_ACCESSKEY_CLEAR_CONTACTS_LABEL' => 'Kontak Kaydını Temizle',
     'LBL_ACCESSKEY_SELECT_TEAMSET_KEY' => 'Z',
     'LBL_ACCESSKEY_SELECT_TEAMSET_TITLE' => 'Takım Seç',
     'LBL_ACCESSKEY_SELECT_TEAMSET_LABEL' => 'Takım Seç',
-    'LBL_ACCESSKEY_CLEAR_TEAMS_KEY' => 'LBL_PDF_ITEM_SELECT_DISCOUNT',
+    'LBL_ACCESSKEY_CLEAR_TEAMS_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_TEAMS_TITLE' => 'Takım Kaydını Temizle',
     'LBL_ACCESSKEY_CLEAR_TEAMS_LABEL' => 'Takım Kaydını Temizle',
     'LBL_SERVER_RESPONSE_RESOURCES' => 'Bu sayfanın oluşumu için kullanılan gerekli kaynaklar (sorgular, dosyalar)',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Eyalet:',
     'LBL_STATUS_UPDATED'=>'Bu Etkinlik için durumunuz güncellendi!',
+    'LBL_STATUS_NOT_UPDATED' => 'Bu etkinlik için Durumunuz güncellenmedi.',
     'LBL_STATUS'=>'Durum:',
     'LBL_STREET'=>'Sokak',
     'LBL_SUBJECT' => 'Konu',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Tüm Hakları Saklıdır.<br />SugarCRM, SugarCRM, Inc. in ticari markasıdır. Diğer tüm şirket ve ürün isimleri ilişkili olduğu şirketlerin ticari markası olabilir.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Tüm Hakları Saklıdır.<br />SugarCRM, Sugar ve 3-D Küp, SugarCRM Inc.&#39;in tescilli ticari markalarıdır. '.
+        'Bu üründe kullanılan veya görünen diğer tüm şirket ve ürün adları, ilişkili olan '.
+        'ilgili şirketlerin ticari markalarıdır.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Planlanan Görev Tamamlandı',
@@ -9176,7 +9315,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Hata. Geçersiz bir operatör girdiniz.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Hata. Geçersiz bir filtre girdiniz.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'İçe aktarılamadı. Bir grup alan, Süreç Tanımında kısmi olarak kilitli. Bu alanlar, tanımın içe aktarılması için Süreç Tanımında açılmalıdır.',
+    'ERROR_EXP_DATE_LOW' => 'Hata. Bitiş Tarihi, yayınlanma tarihinden önce olamaz.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Hata. Onaylandı durumu yayınlama tarihi gerektirir.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Yayın Tarihi boş.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9306,6 +9446,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'sütunları görüntülenebilir.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Gösterge Panosu',
     'LBL_DASHBOARD_BWC' => 'Eski Bilgi Pencerelerim',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Benim Pencerelerim',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Yardım Pencereleri',
@@ -9338,9 +9479,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Benim {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Haber',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'İlişkili Hesap için Google News beslemesi',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Fırsat Metrikleri',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'İlişkili Hesap için Fırsat Metrikleri',
@@ -9409,7 +9547,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Bu zaman diliminde kayıtlar bulunamadı.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Talep Özeti',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Haber Kaynağı',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Etkileşimler',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Notlar & Eklentiler',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Kayda ait Notlar ve Eklentiler',
@@ -9446,7 +9583,7 @@ $app_strings = array (
     'LBL_DNB_DUPLICATE' => 'Çokla',
     'LBL_DNB_UPLOAD' => 'Yükleyin',
     'LBL_DNB_MORE_SRCH_RES' => 'Daha Fazla D&B Arama Sonucu Göster',
-    'LBL_DNB_PRIMARY' => 'Asıl',
+    'LBL_DNB_PRIMARY' => 'Birincil',
     'LBL_DNB_PREMIUM' => 'Premiyum',
     'LBL_DNB_DATA_ERR' => 'D&B verisi yok',
     'LBL_DNB_SRCH' => 'Ara',
@@ -9567,13 +9704,13 @@ $app_strings = array (
 
     /* D&B Location */
     'LBL_DNB_LOC' => 'Lokasyon',
-    'LBL_DNB_PRIM_STREET' => 'Asıl Adres Sokağı',
+    'LBL_DNB_PRIM_STREET' => 'Birincil Adres Sokağı',
     'LBL_DNB_PRIM_CITY' => 'Birincil İl/İlçe',
-    'LBL_DNB_PRIM_STATE_ABBR' => 'Yurt dışı asıl adres bölgesi',
-    'LBL_DNB_PRIM_STATE' => 'Asıl Bölge',
+    'LBL_DNB_PRIM_STATE_ABBR' => 'Yurt dışı birincil adres bölgesi',
+    'LBL_DNB_PRIM_STATE' => 'Birincil Bölge',
     'LBL_DNB_PRIM_CEN_CD' => 'Sayım Kodu',
     'LBL_DNB_PRIM_CTRY_GRP' => 'Ülke Gurubu',
-    'LBL_DNB_PRIM_ZIP' => 'Asıl Posta Kodu',
+    'LBL_DNB_PRIM_ZIP' => 'Birincil Posta Kodu',
     'LBL_DNB_PRIM_COUNTY_NAME' => 'Vilayet İsmi',
     'LBL_DNB_PRIM_CTRY_CD' => 'Asıl Adres Ülke Kodu',
     'LBL_DNB_MAIL_STREET' => 'Posta Adresi Sokağı',
@@ -9766,9 +9903,9 @@ $app_strings = array (
     'LBL_DNB_TOTAL_ENQUIERY_COUNT' => 'Toplam Sorgulama Sayısı',
     'LBL_DNB_LAST_UPDATE_DATE' => 'Son Güncelleme Tarihi',
     'LBL_DNB_SELF_REQUEST_INDICATOR' => 'Kendi Talebi Göstergesi',
-    'LBL_DNB_PRIMARY_TOWN' => 'Asıl İlçe',
+    'LBL_DNB_PRIMARY_TOWN' => 'Birincil İlçe',
     'LBL_DNB_COUNTRY_OFFICIAL_NAME' => 'Ülke Resmi Adı',
-    'LBL_DNB_PRIMARY_ADDRESS_POSTAL_CODE' => 'Asıl Adres Posta Kodu',
+    'LBL_DNB_PRIMARY_ADDRESS_POSTAL_CODE' => 'Birincil Adres Posta Kodu',
     'LBL_DNB_TERRITORY_OFFICIAL_NAME' => 'Bölge Resmi İsmi',
     'LBL_DNB_TERRITORY_ABBREVATIVE_NAME' => 'Bölge Kısaltma İsmi',
     'LBL_DNB_UNDELIVERABLE_INDICATOR' => 'Ulaşılamama Göstergesi',
@@ -9800,7 +9937,7 @@ $app_strings = array (
     'LBL_DNB_INCORPORATION_YEAR' => 'Kuruluş Yılı',
     'LBL_DNB_ORGANIZATION_IDENTIFICATION_NUMBER' => 'Organizasyon Kimlik Numarası',
     'LBL_DNB_STREET_ADDRESS_LINE_TEXT' => 'Sokak Adresi Satırı Metni',
-    'LBL_DNB_PRIMARY_TOWN_NAME' => 'Asıl İlçe İsmi',
+    'LBL_DNB_PRIMARY_TOWN_NAME' => 'Birincil İlçe İsmi',
     'LBL_DNB_REGISTRATION_LOCATION_POSTAL_CODE' => 'Kayıt Lokasyonu Posta Kodu',
     'LBL_DNB_ORGANIZATION_FILLING_NAME' => 'Organizasyon Bildirilen Adı',
     'LBL_DNB_REGISTRATION_ISSUER_NAME' => 'Kayıt Sağlayanın İsmi',
@@ -9918,7 +10055,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => 'Görev Tanımı Seçin',
     'LBL_DNB_BAL_ORG_NAME' => 'Organizasyon İsmi',
     'LBL_DNB_BAL_IMPORT_AS' => 'İçeri Aktarma Şekli:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Organizasyon İsmi',
+    'LBL_DNB_BAL_ORG_NAME' => 'Şirket İsmi',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => '$USD Miyon olarak',
@@ -9977,7 +10114,7 @@ $app_strings = array (
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'En Kullanışlı Yayınlanmış Bilgi Bankası Makaleleri',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'En çok beğenilen ve görülen bilgi tabanı makalelerini görüntüler',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} modülü {{label}} "{{value}}" tarafından filtrelendi',
 
@@ -10016,6 +10153,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'bayan',
     'ERR_BLANK_PAGE_NAME' => 'Lütfen bir sayfa ismi giriniz.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Potansiyel Satışlarım',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Takımımın Potansiyel Satışları",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Potansiyel Satış Grafiği',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Mevcut potansiyel satış grafiğini gösterir.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Resim yok',
 
@@ -10150,7 +10294,7 @@ $app_strings = array (
     'LBL_NO_FLASH_PLAYER' => 'Merhaba, Flash kapalı veya Adobe Flash Player&#39;ın eski bir sürümünü kullanıyorsunuz. Lütfen <a href="http://www.adobe.com/go/getflashplayer/">Flash Player en son versiyonunu indirin</a> veya flash&#39;ı açın.',
   //Collection Field
   'LBL_COLLECTION_NAME' => 'İsim',
-  'LBL_COLLECTION_PRIMARY' => 'Asıl',
+  'LBL_COLLECTION_PRIMARY' => 'Birincil',
   'ERROR_MISSING_COLLECTION_SELECTION' => 'Zorunlu alan boş',
     'LBL_COLLECTION_EXACT' => 'Kesin',
 
@@ -10264,11 +10408,13 @@ $app_strings = array (
     'LBL_EMAIL_TITLE' => 'e-posta adresi',
     'LBL_EMAIL_OPT_TITLE' => 'liste dışına çıkmış E-Posta adresi',
     'LBL_EMAIL_INV_TITLE' => 'Geçersiz e-Posta adresi',
-    'LBL_EMAIL_PRIM_TITLE' => 'Asıl e-Posta adresi',
+    'LBL_EMAIL_PRIM_TITLE' => 'birincil e-posta adresi',
     'LBL_SELECT_ALL_TITLE' => 'Tüm kayıtlar',
     'LBL_SELECT_THIS_ROW_TITLE' => 'Bu satırı seç',
     'LBL_TEAM_SELECTED_TITLE' => 'Takım Seçildi',
-    'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Bu takımı asıl yapmak için seçin',
+    'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Bu takımı birincil yapmak için seçin',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Takım, Takım Bazlı Seçildi olarak işaretlendi ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Bu takımı, Takım Bazlı Seçildi olarak işaretle',
     'LBL_SEARCH_AND_SELECT' => 'Ara ve Seç {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Arama ve Ekleme {{module}}',
 
@@ -10357,6 +10503,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Önizleme devre dışı: Veri yok',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Ön izleme devre dışı: Mevcut kayıt görünümü',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Önizleme devre dışı: Kayıt silindi veya kayıda erişim izni yok',
+    'LBL_PREVIEW_PREVIOUS' => 'Önceki önizleme',
+    'LBL_PREVIEW_NEXT' => 'Sonraki önizleme',
+    'LBL_PREVIEW_CLOSE' => 'Önzilemeyi kapat',
     'LBL_STREAM_NO_RECORDS' => 'Bu kayıta eklemiş bir not yok. Not ekle bağlantısına tıklayarak bir not ekleyin.',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}} çift kayıt bulundu.',
     'LBL_NO_DUPLICATES_FOUND' => 'Yinelenen bulunamadı.',
@@ -10376,11 +10525,12 @@ $app_strings = array (
         'Hatalı kayıt sayısı. Geçerli aralık {{minRecords}} ile {{maxRecords}} arası.',
     'LBL_MERGE_NO_ACCESS' =>
         'Bu işlemi gerçekleştirmek için erişim hakkınız yok',
+    'LBL_MERGE_LOCKED' => 'Birleştirilmek üzere seçilen kayıtlardan bazıları, bir süreç tarafından düzenlemeye karşı kilitli olan alanlar içeriyor ve bu kez birleştirilemez.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
     'LBL_MERGE_UNSAVED_CHANGES'=>
-        'Asıl kaydı yapmış olduğunuz değişiklikleri kaydetmeden asıl kaydı değiştirmek üzeresiniz. Bütün değişiklikler kaybedilecek. Devam etmek istediğinize emin misiniz?',
+        'Birincil kaydı yapmış olduğunuz değişiklikleri kaydetmeden asıl kaydı değiştirmek üzeresiniz. Bütün değişiklikler kaybedilecek. Devam etmek istediğinize emin misiniz?',
     'LBL_MERGE_DUPLICATES_TITLE' => 'İlişkili Kayıtları Birleştir',
     'TPL_MERGE_DUPLICATES_PROGRESS_STATUS' => 'Birleştirilmiş: %{{percent}}.',
     'TPL_MERGE_DUPLICATES_FAIL_TO_ATTEMPT' =>
@@ -10450,7 +10600,7 @@ $app_strings = array (
     'LBL_COLORS' => 'Renkler',
     'BorderColor' => 'Çerçeve Rengi',
     'NavigationBar' => 'Navigasyon Bar',
-    'PrimaryButton' => 'Asıl Buton',
+    'PrimaryButton' => 'Birincil Buton',
     'LBL_SAVE_AND_DEPLOY_BTN' => 'Kaydet & Uygula',
     'LBL_RESET_THEME_LNK' => 'Varsayılan Temayı Geri Yükle',
     'LBL_RESET_THEME_MODAL_INFO' => 'Özel temanızı, varsayılan tema ile silmek üzeresiniz.',
@@ -10680,7 +10830,7 @@ $app_strings = array (
     'LBL_ACTION_FAVORITE_EXPLANATION' => '{{module}} "{{name}}" Favori olarak belirtildi',
     'LBL_ACTION_UNFAVORITE_EXPLANATION' => '{{module}} "{{name}}" Favori olmaktan çıkarıldı',
     'LBL_ACTION_CREATE_RELATED_EXPLANATION' => '{{module}} / "{{name}}" kaydı, {{relatedModule}} / "{{relatedName}}" ile ilişkili olarak oluşturuldu',
-    'LBL_EMAIL_ACTION_SET_PRIMARY' => 'Asıl',
+    'LBL_EMAIL_ACTION_SET_PRIMARY' => 'Birincil',
     'LBL_EMAIL_ACTION_SET_OPT_OUT' => 'Listeden Çıkış',
     'LBL_EMAIL_ACTION_SET_OPT_IN' => 'Listeye giriş',
     'LBL_EMAIL_ACTION_SET_VALID' => 'Geçerli',
@@ -10846,10 +10996,9 @@ $app_strings = array (
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Sistem Ayarları',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Stüdyo',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Şifre',
     'LBL_CURRENT_PASSWORD'				=> 'Geçerli Şifre',
-    'LBL_SET_NEW_PASSWORD'              => 'Şifrenizi Girin',
     'LBL_NEW_PASSWORD1'                 => 'Yeni Şifre',
     'LBL_NEW_PASSWORD2'                 => 'Şifreyi Onaylayın',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Lütfen şifre onayınızı girin.',
@@ -10857,13 +11006,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> 'Lütfen eski şifrenizi girin.',
     'ERR_REENTER_PASSWORDS' => 'Şifreler eşleşmelidir.',
     'ERR_PASSWORD_MISMATCH' => 'Girmiş olduğunuz şifre sistemimizde kayıtlı olan ile uyuşmuyor.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Şifreniz başarıyla güncellendi.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Şifre gönderilemiyor',
     'LBL_REQUEST_PASSWORD' => 'Şifre talep et',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Hata: Bu kullanıcı için parola güncelleştirmede bir sorun oluştu.',
     'LBL_INCORRECT_PASSWORD' => 'Hata: Hatalı şifre.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Tercih ettiğiniz dil:',
+    'LBL_PREFERRED_LANGUAGE' => 'Dil Tercihi:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Bir Rapor Seçin',
@@ -10893,6 +11041,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => 'Sunucu bir hatayla karşılaştı ve isteğinizi tamamlayamadı.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Lütfen yeniden deneyin. Hata devam ederse Sugar Yöneticinize başvurun.',
     'ERR_HTTP_500_ACTION' => 'Lütfen teknik desteğe başvurun.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 Dahili Sunucu Hatası',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Sunucu geçici bir hatayla karşılaştı ve isteğinizi tamamlayamadı.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Lütfen yeniden deneyin. Hata devam ederse Sugar Yöneticinize başvurun.',
+    'ERR_HTTP_502_ACTION' => 'Lütfen teknik desteğe başvurun.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 Dahili Sunucu Hatası',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Sunucu isteğinizi tamamlamak için uygun değil.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Lütfen daha sonra yeniden deneyin. Hata devam ederse Sugar Yöneticinize başvurun.',
+    'ERR_HTTP_503_ACTION' => 'Lütfen teknik desteğe başvurun.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Görüntü Oluşturma Başarısız',
     'ERR_RENDER_FAILED_MSG' => 'Bir görünüm başarısız oldu',
@@ -10973,7 +11133,7 @@ $app_strings = array (
     'LBL_ACTIVE_TASKS_DASHLET_CONFIRM_CLOSE' => 'Tamamlanmış olarak {0} kapatmak istediğinizden emin misiniz?',
     'LBL_ACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Görevlerim',
     'LBL_ACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Takım Görevleri',
-    'LBL_LIST_REMOVE_EMAIL_INFO' => 'Değiştirdiğiniz kayıt üzerinde faklı bir e-posta bulunmaktaydı. Şimdi asıl olarak belirlendi ve aşağıda dolduruldu.',
+    'LBL_LIST_REMOVE_EMAIL_INFO' => 'Değiştirdiğiniz kayıt üzerinde faklı bir e-posta bulunmaktaydı. Şimdi birincil olarak belirlendi ve aşağıda dolduruldu.',
     // inactive tasks dashlet
     'LBL_INACTIVE_TASKS_DASHLET' => 'İnaktif Görevler',
     'LBL_INACTIVE_TASKS_DASHLET_DESCRIPTION' => 'Görevler dashleti ertelenmiş ve tamamlanmış görevleri görüntüler.',
@@ -11026,6 +11186,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => 'Hata:',
     'LBL_ALERT_TITLE_LOADING' => 'Yükleniyor',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Tarayıcınızın sürümü artık desteklenmiyor ya da desteklenmeyen bir tarayıcı kullanıyorsunuz.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Şu tarayıcı sürümleri önerilir: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Lütfen önerilen tarayıcılar için {{link}} sayfasına bakın.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Desteklenen Platformlar',
 
@@ -11078,6 +11239,9 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Sunucuya bağlanırken bir hata oluştu. Lütfen tekrar deneyiniz.',
     'ERR_RESOLVE_ERRORS' => 'Lütfen devam etmeden önce hataları giderin.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Listeyi yenile',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'daha fazla',
@@ -11180,10 +11344,13 @@ $app_strings = array (
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM üretkenliği arttırmak için, yetkin kullanıcıların belirli işlemleri yapabilmesi için klavye kısa yollarını kullanmasına izin verir. Sağdaki tablolar, mevcut kısa yolları ve gerçekleştirdikleri aksiyonları göstermektedir.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Desteklenen tuşlar</h1><ul><li>tüm alfa sayısal karakterler ve semboller</li><li>shift, ctrl, alt, command, mod (Windows'da/Linux'de ctrl ve Mac'lerde command)</li><li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>Desteklenen özellikler</h1><ul><li>Tuş kombinasyonu: ctrl+m</li><li>Birden fazla tuş: m,ctrl+m</li><li>Tuş sırası: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Global Kısayollar',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'İçeriksel Kısayollar',
     'LBL_SHORTCUT_KEY_KEY' => 'Anahtar',
     'LBL_SHORTCUT_FUNCTION' => 'Fonksiyon',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Bağlamsal Kısayolları Yapılandırın',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Yapılandırılacak bağlamsal kısayollar yok',
     'LBL_SHORTCUT_HELP' => 'Kısa yollar yardım sayfasını göster',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Hızlı oluşturma menüsünü değiştir',
     'LBL_SHORTCUT_SEARCH' => 'Genel arama alanı üzerinde odak',
@@ -11213,7 +11380,7 @@ $app_strings = array (
     'LBL_SHORTCUT_RECORD_PREVIOUS' => 'Önceki Kaydı Aç',
     'LBL_SHORTCUT_RECORD_NEXT' => 'Sonraki kayıtı aç',
     'LBL_SHORTCUT_COPY_RECORD' => 'Geçerli kaydı kopyala',
-    'LBL_SHORTCUT_OPEN_MORE_ACTION' => 'Toplu aksiyon açılır listeyi aç',
+    'LBL_SHORTCUT_OPEN_MORE_ACTION' => 'Birincil aksiyon açılır listeyi aç',
     'LBL_SHORTCUT_CLOSE_DRAWER' => 'Bölmeyi Kapat',
     'LBL_SHORTCUT_FILTER_ADD' => 'Filtrelemek için ek kriter ekle',
     'LBL_SHORTCUT_FILTER_REMOVE' => 'Filtreden son kriteri kaldır',
@@ -11231,6 +11398,9 @@ $app_strings = array (
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Çoklu seçim alanında tüm öğeleri seçin',
     'LBL_SHORTCUT_SWEETSPOT' => 'En Etkili Nokta çubuğuna geçiş yapın',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'En Etkili Nokta çubuğunu gizle',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Yapılandırmayı kaydet',
+    'LBL_SHORTCUT_RESTORE' => 'Varsayılanı geri yükle',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Özel kısayol tuşları sunucuya kaydedilirken bir hata oluştu. Lütfen tekrar deneyin.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} Ayarları',
@@ -11253,13 +11423,20 @@ $app_strings = array (
     'LBL_CALENDAR_RECURRENCE' => "Yineleme",
     'LBL_CALENDAR_REMINDERS' => "Hatırlatıcılar",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Özel Tarih",
     'LBL_CALENDAR_REPEAT_TYPE' => "Tekrarlama Tipi",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Tekrarlama Aralığı",
     'LBL_CALENDAR_REPEAT_DOW' => "Haftanın Günlerinde Tekrar Et",
+    'LBL_CALENDAR_REPEAT' => "Tekrarla",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Tekrarlama Limiti",
     'LBL_CALENDAR_REPEAT_COUNT' => "Gerçekleşmeleri Tekrarla",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Seçiciyi Tekrarla",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Ayın Günü/Günleri",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Sıralı Tekrarla",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Birimi Tekrarla",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Tekrarlayan değişiklikler, serinin ilk kaydı ile yapılmalıdır.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Yineleme kuralları, oluşturulacak olan bir olaya neden olmaz.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Katılan',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Reddedildi',
@@ -11279,17 +11456,23 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM javascript kullanımına ihtiyaç duyar. Lütfen kullanıma devam etmek için javascript aktive edin.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Seri hale getirilmiş veri, seri halden çıkarılamadı',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Seri hale getirilmiş veri, seri halden çıkarılamadı çünkü nesneler ve sınıflar için referanslar içeriyor',
 
     'LBL_FIELD_TRIMMED' => 'Alan, maksimum karakter limitini aştığından dolayı kesildi.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Alan maksimum karakter sınırını aşıyor.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Son 7 gün',
     '30' => 'Son 30 gün',
     '90' => 'Son Çeyrek',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11394,13 +11577,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Süresi Geçmiş',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Taslak',
-    'Expired' => 'Süresi Geçmiş',
-    'In Review' => 'İncelemede',
-    'Published' => 'Yayınlandı',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Yönetici Aksiyonları--',
@@ -11412,57 +11588,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Seçili Makaleleri Sil',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Ekleri Vardır',
-        'none' => 'Ekleri Yoktur',
-        'mime' => 'Mime Tipi Belirtme',
-        'name' => 'İsim Belirtme',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Kelimeler';
   $app_list_strings['moduleListSingular']['Words'] = 'Kelimeler';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Makale Oluştur';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Üst 5',
-    'Top_10' => 'Üst 10',
-    'Top_20' => 'Üst 20',
-    'Bot_5'  => 'Alt 5',
-    'Bot_10' => 'Alt 10',
-    'Bot_20' => 'Alt 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Hepsi',
-        'added' => 'Son 30 gün eklendi',
-        'pending' => 'Onayımı Bekliyor',
-        'updated' =>'Son 30 gün güncellendi',
-        'faqs' => 'SSS',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'Üzerinde',
-    'before' => 'Önce',
-    'after' => 'Sonra',
-    'between_dates' => 'Arasında',
-    'last_7_days' => 'Son 7 gün',
-    'next_7_days' => 'Önümüzdeki 7 Gün',
-    'last_month' => 'Geçen Ay',
-    'this_month' => 'Bu Ay',
-    'next_month' => 'Gelecek Ay',
-    'last_30_days' => 'Son 30 gün',
-    'next_30_days' => 'Önümüzdeki 30 Gün',
-    'last_year' => 'Son Yıl',
-    'this_year' => 'Bu Yıl',
-    'next_year' => 'Gelecek Yıl',
-    'isnull' => 'Boş',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12324,6 +12452,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Tüm kişiler",
+    "email" => "Sadece E-posta",
+    "phone" => "Sadece Telefon",
     "prem" => "Sadece Premium"
 );
 
@@ -12349,4 +12479,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Bio',
     'Both' => 'Her ikisi'
 );
-

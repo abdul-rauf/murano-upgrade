@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Duke klikuar Konfirmo, ju do të fshini të gjitha të dhënat e parashikimeve dhe do të ndërroni shikimin e mundësive. Nëse nuk e keni këtë për qëllim, klikoni anulo për të kthyer konfigurimet e mëparshme.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Duke klikuar "Konfirmo", do të fshish TË GJITHA të dhënat e parashikimeve dhe do të ndryshosh shikimin e mundësive. '
+        .'Do të çaktivizohen edhe TË GJITHA përcaktimet e procesit me një modul të synuar për rreshtin e të ardhurave. '
+        .'Nëse nuk ke këtë për qëllim, kliko anulo për t&#39;u kthyer në cilësimet e mëparshme.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Nëse të gjitha rrjeshtat e të të ardhurave janë të mbyllura dhe të paktën një ka fituar,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'faza e shitjeve të mundësisë është caktuar si "E mbyllur si e fituar".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Nëse të gjitha rreshtat e të të ardhurave janë fazën e shitjes "Të mbyllura si të humbura",',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe artikujt e linjës që i përkasin atyre shitjeve nga fillimi në fund. Çdo regjistrim {{module_name}} paraqet titullin e një grupi me {{revenuelineitems_module}} si dhe lidhjen me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj. Çdo {{revenuelineitems_singular_module}} është një shitje e mundshme e një produkti të veçantë dhe përfshin të dhënat përkatëse të shitjes. Çdo {{revenuelineitems_singular_module}} do të përpunohet si zakonisht përmes disa fazave të shitjes derisa të shënohet si "Fitim i mbyllur" ose "Humbje e mbyllur". Regjistrimi {{module_name}} pasqyron shumën dhe datën e parashikuar të përfundimit të {{revenuelineitems_module}}. {{plural_module_name}} dhe {{revenuelineitems_module}} mund të ngrihen edhe më tej me anë të modulit të Sugar {{forecasts_singular_module}} për të kuptuar dhe parashikuar tendencat e shitjeve si dhe fokusin e punës për të arritur vlerat e shitjeve.',
+    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale nga fillimi në fund. Çdo regjistrim {{module_name}} përfaqëson një shitje të mundshme dhe përfshin datën përkatëse të shitjes, si dhe lidhjen me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj. Çdo {{module_name}} do të përpunohet si zakonisht përmes disa fazave të shitjes derisa të shënohet si "Fitim i mbyllur" ose "Humbje e mbyllur". {{plural_module_name}} mund të ngrihet edhe më tej me anë të modulit të Sugar {{forecasts_singular_module}} për të kuptuar dhe parashikuar tendencat e shitjeve si dhe fokusin e punës për të arritur kuotat e shitjeve.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe artikujt e linjës që i përkasin atyre shitjeve nga fillimi në fund. Çdo regjistrim {{module_name}} paraqet një titull për një grup me {{revenuelineitems_module}} si dhe lidhjen me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj.
+    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe produktet që i përkasin atyre shitjeve nga fillimi në fund. Çdo regjistrim {{module_name}} përfaqëson një shitje të mundshme dhe përfshin datën përkatëse të shitjes, si dhe lidhjen me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj.
 
 - Ndrysho fushën e regjistrimit duke klikuar në fushë individuale ose butonin "Ndrysho".
-- Shiko ose modifiko lidhjet me regjistrimet e tjera në nënpanelet, duke përfshirë {{revenuelineitems_module}}, duke e kaluar panelin majtas poshtë te "Pamje e të dhënave".
-- Bëj dhe shiko komentet e përdoruesit dhe regjistro historikun e ndryshimit në {{activitystream_singular_module}} duke e kaluar panelin majtas poshtë tek "Transmetimi i aktivitetit".
+- Shiko ose modifiko lidhjet me regjistrimet e tjera në nënpanelet, duke e kaluar panelin majtas poshtë te "Shikimi i të dhënave".
+- Bëj dhe shiko komentet e përdoruesit dhe regjistro historikun e ndryshimit në {{activitystream_singular_module}} duke e kaluar panelin majtas poshtë tek "Aktivitetet".
 - Ndiqe ose shënoje si të preferuar këtë regjistrim me anë të ikonave në të djathtë të emrit të regjistrimit.
 - Veprimet shtesë disponohen te menyja në zbritje "Veprimet" në të djathtë të butonit "Ndrysho".',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe të artikujve të linjës që i përkasin atyre shitjeve nga fillimi në fund. Çdo regjistrim {{module_name}} paraqet një titull për një grup me {{revenuelineitems_module}} si dhe lidhjen me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj.
+    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe produktet që i përkasin atyre shitjeve nga fillimi në fund. Çdo regjistrim {{module_name}} përfaqëson një shitje të mundshme dhe përfshin datën përkatëse të shitjes, si dhe lidhjen me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj.
 
 Për të krijuar një {{module_name}}:
 1. Jep vlerat për fushat sipas dëshirës.
- - Fushat e shënuar si "Të nevojshme" duhet të plotësohen përpara ruajtjes.
- - Kliko "Shfaq më shumë" për të shfaqur fusha shtesë nëse është e nevojshme.
-2. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.
-3. Pas ruajtjes, përdor nënpanelin {{revenuelineitems_module}} për të shtuar artikuj të linjës te {{module_name}}.',
+ - Fushat e shënuara me "Patjetër" duhet të plotësohen para se të ruhen.
+ - Kliko "Trego më shumë" për të paraqitur fushat shtesë nëse është e nevojshme.
+2. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
 
 // END PRO/CORP
 

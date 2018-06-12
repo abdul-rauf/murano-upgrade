@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -136,13 +136,13 @@ $mod_strings = array(
     'LBL_EXT_PRICE' => 'Prezzo est.',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Nome Simbolo Valuta',
     'LBL_RLI_SUBPANEL_TITLE' => 'Elementi dell´Opportunità',
-    'LNK_IMPORT_REVENUELINEITEMS' => 'Importa Elementi dell´Opportunità',
+    'LNK_IMPORT_REVENUELINEITEMS' => 'Importa elementi dell&#39;opportunità',
     'LBL_EDITLAYOUT' => 'Modifica Layout' /*for 508 compliance fix*/,
     //For export labels
     'LBL_EXPORT_CURRENCY_ID' => 'ID Valuta',
     'LBL_CURRENCY_RATE' => 'Tasso di Cambio',
-    'LBL_DATE_CLOSED' => 'Data Chiusura Prevista',
-    'LBL_DATE_CLOSED_TIMESTAMP' => 'Timestamp Data Chiusura Prevista',
+    'LBL_DATE_CLOSED' => 'Data di chiusura prevista',
+    'LBL_DATE_CLOSED_TIMESTAMP' => 'Timestamp data di chiusura prevista',
     'LBL_COMMIT_STAGE' => 'Fase di Conferma',
     'LBL_COMMIT_STAGE_FORECAST' => 'Previsione',
     'LBL_PROBABILITY' => 'Probabilità (%)',

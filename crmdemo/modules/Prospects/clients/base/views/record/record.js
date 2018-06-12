@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -41,9 +41,11 @@
             if (model && model.id && !this.disposed) {
                 this.model.fetch();
                 _.each(this.context.children, function(child) {
-                    if (!_.isUndefined(child.attributes) && !_.isUndefined(child.attributes.isSubpanel)) {
-                        if (child.attributes.isSubpanel && !child.attributes.hidden) {
-                            child.attributes.collection.fetch();
+                    if (child.get('isSubpanel') && !child.get('hidden')) {
+                        if (child.get('collapsed')) {
+                            child.resetLoadFlag({recursive: false});
+                        } else {
+                            child.reloadData({recursive: false});
                         }
                     }
                 });

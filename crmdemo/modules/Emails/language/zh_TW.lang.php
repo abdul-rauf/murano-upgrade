@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => '錯誤：缺失認證',
     'ERR_NO_UID' => '錯誤：無 UID',
     'ERR_NO_IEID' => '錯誤：無 ieID',
+    'ERR_INVALID_RECIPIENTS' => '有一個或多個收件者的電子郵件地址無效。' .
+        '請更正，然後重試。',
+    'ERR_INVALID_EMAIL_ADDRESS' => '無效電子郵件地址',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => '未指定收件者',

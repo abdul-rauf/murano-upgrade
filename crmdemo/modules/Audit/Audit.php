@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -30,6 +30,7 @@ class Audit extends SugarBean
 
     public $genericAssocFieldsArray = array();
     public $moduleAssocFieldsArray = array();
+
     private $fieldDefs;
 
     // This is used to retrieve related fields from form posts.
@@ -129,13 +130,9 @@ class Audit extends SugarBean
         $fieldDefs = $this->fieldDefs;
         $return = array();
 
+        $aclCheckContext = array('bean' => $bean);
         while ($row = $db->fetchByAssoc($results)) {
-            if (!ACLField::hasAccess(
-                $row['field_name'],
-                $bean->module_dir,
-                $GLOBALS['current_user']->id,
-                $bean->isOwner($GLOBALS['current_user']->id)
-            )) {
+            if (!SugarACL::checkField($bean->module_dir, $row['field_name'], 'access', $aclCheckContext)) {
                 continue;
             }
 
@@ -143,9 +140,15 @@ class Audit extends SugarBean
             $dateCreated = $timedate->fromDbType($db->fromConvert($row['date_created'], 'datetime'), "datetime");
             $row['date_created'] = $timedate->asIso($dateCreated);
 
-            //If the team_set_id field has a log entry, we retrieve the list of teams to display
-            if ($row['field_name'] == 'team_set_id') {
+            $viewName = array_search($row['field_name'], Team::$nameTeamsetMapping);
+            if ($viewName) {
+                $row['field_name'] = $viewName;
                 $return[] = $this->handleTeamSetField($row);
+                continue;
+            }
+
+            if ($this->handleRelateField($bean, $row)) {
+                $return[] = $row;
                 continue;
             }
 
@@ -160,7 +163,7 @@ class Audit extends SugarBean
                     }
                 }
             }
-            
+
             $row = $this->formatRowForApi($row);
 
             $fieldName = $row['field_name'];
@@ -201,6 +204,41 @@ class Audit extends SugarBean
     }
 
     /**
+     * Handles relate field.
+     *
+     * @param SugarBean $bean
+     * @param array $row A row of database-queried audit table results.
+     * @return boolean
+     */
+    protected function handleRelateField($bean, &$row)
+    {
+        $fields = $bean->getAuditEnabledFieldDefinitions(true);
+
+        if (isset($fields[$row['field_name']]) && $fields[$row['field_name']]['type'] === 'relate') {
+            $field = $fields[$row['field_name']];
+            $row['field_name'] = $field['name'];
+
+            if (!empty($row['before_value_string'])) {
+                $beforeBean = BeanFactory::getBean($field['module'], $row['before_value_string']);
+                if (!empty($beforeBean)) {
+                    $row['before_value_string'] = $beforeBean->get_summary_text();
+                }
+            }
+
+            if (!empty($row['after_value_string'])) {
+                $afterBean = BeanFactory::getBean($field['module'], $row['after_value_string']);
+                if (!empty($afterBean)) {
+                    $row['after_value_string'] = $afterBean->get_summary_text();
+                }
+            }
+
+            $row = $this->formatRowForApi($row);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Handles the special-cased `team_set_id` field when fetching rows for the
      * Audit Log API. It is needed in order to prevent processing this field as
      * type `relate`.
@@ -214,7 +252,6 @@ class Audit extends SugarBean
             return $row;
         }
 
-        $row['field_name'] = 'team_name';
         require_once 'modules/Teams/TeamSetManager.php';
         $row['before_value_string'] = TeamSetManager::getTeamsFromSet($row['before_value_string']);
         $row['after_value_string'] = TeamSetManager::getTeamsFromSet($row['after_value_string']);
@@ -266,14 +303,12 @@ class Audit extends SugarBean
 
         if ($value) {
             $obj = $timedate->fromDbType($value, $type);
-            $value = $timedate->asIsoDate($obj);
+            $value = $timedate->asIso($obj);
         }
 
         return $value;
     }
 
-    // FIXME TY-987:  we need to decide if we actually want to deprecate
-    // this and what we want to replace it with
    public static function get_audit_list()
     {
         global $focus, $genericAssocFieldsArray, $moduleAssocFieldsArray, $current_user, $timedate, $app_strings;
@@ -298,11 +333,12 @@ class Audit extends SugarBean
                     if(!ACLField::hasAccess($row['field_name'], $focus->module_dir, $GLOBALS['current_user']->id, $focus->isOwner($GLOBALS['current_user']->id))) continue;
 
                     //If the team_set_id field has a log entry, we retrieve the list of teams to display
-                    if ($row['field_name'] == 'team_set_id') {
-                       $row['field_name'] = 'team_name';
-                       require_once 'modules/Teams/TeamSetManager.php';
-                       $row['before_value_string'] = TeamSetManager::getCommaDelimitedTeams($row['before_value_string']);
-                       $row['after_value_string'] = TeamSetManager::getCommaDelimitedTeams($row['after_value_string']);
+                    $viewName = array_search($row['field_name'], Team::$nameTeamsetMapping);
+                    if ($viewName) {
+                        $row['field_name'] = $viewName;
+                        require_once 'modules/Teams/TeamSetManager.php';
+                        $row['before_value_string'] = TeamSetManager::getCommaDelimitedTeams($row['before_value_string']);
+                        $row['after_value_string'] = TeamSetManager::getCommaDelimitedTeams($row['after_value_string']);
                     }
                     $temp_list = array();
 

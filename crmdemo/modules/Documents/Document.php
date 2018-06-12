@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry)
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -69,13 +69,6 @@ class Document extends SugarBean {
 		'contract_id'=>'contracts',
 	 );
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Document()
-    {
-        self::__construct();
-    }
 
 	public function __construct() {
 		parent::__construct();
@@ -313,8 +306,19 @@ class Document extends SugarBean {
 		$document_fields['FILE_URL'] = $this->file_url;
 		$document_fields['FILE_URL_NOIMAGE'] = $this->file_url_noimage;
 		$document_fields['LAST_REV_CREATED_BY'] = $this->last_rev_created_name;
-		$document_fields['CATEGORY_ID'] = empty ($this->category_id) ? "" : $app_list_strings['document_category_dom'][$this->category_id];
-		$document_fields['SUBCATEGORY_ID'] = empty ($this->subcategory_id) ? "" : $app_list_strings['document_subcategory_dom'][$this->subcategory_id];
+
+        $category_id_key = isset($this->field_name_map['category_id']['options']) ?
+            $this->field_name_map['category_id']['options'] : 'document_category_dom';
+
+        $document_fields['CATEGORY_ID'] = empty ($this->category_id) ? "" :
+            $app_list_strings[$category_id_key][$this->category_id];
+
+        $subcategory_id_key = isset($this->field_name_map['subcategory_id']['options']) ?
+            $this->field_name_map['subcategory_id']['options'] : 'document_subcategory_dom';
+
+        $document_fields['SUBCATEGORY_ID'] = empty ($this->subcategory_id) ? "" :
+            $app_list_strings[$subcategory_id_key][$this->subcategory_id];
+
         $document_fields['NAME'] = $this->document_name;
 		$document_fields['DOCUMENT_NAME_JAVASCRIPT'] = $GLOBALS['db']->quote($document_fields['DOCUMENT_NAME']);
 		return $document_fields;
@@ -401,6 +405,14 @@ class Document extends SugarBean {
         }
 
         return '';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRecordName()
+    {
+        return isset($this->document_name) ? trim($this->document_name) : '';
     }
 }
 

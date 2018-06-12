@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,7 +56,7 @@ $app_list_strings = array (
     'TaxRates'=>'Taxas de Imposto',
     'ContractTypes' => 'Tipos de contrato',
     'Schedulers'=>'Agendadores',
-    'Project'=>'Projeto',
+    'Project'=>'Projetos',
     'ProjectTask'=>'Tarefas de Projeto',
     'Campaigns'=>'Campanhas',
     'CampaignLog'=>'Registro de Campanha',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Filtro',
     'Comments' => 'Comentário',
     'Currencies' => 'Moeda',
-    'Project' => 'Projeto',
     'ProductTemplates' => 'Modelo do produto',
-    'ProductCategories' => 'Categoria de Produtos',
     'ProductTypes' => 'Tipo de produto:',
     'Shippers' => 'Transportador',
     'Subscriptions' => 'Assinatura',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Sex",
                 '7'=>"Sáb",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Dom",
+            '2'=>"Seg",
+            '3'=>"Ter",
+            '4'=>"Qua",
+            '5'=>"Qui",
+            '6'=>"Sex",
+            '7'=>"Sáb",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Dom',
         '1' => 'Seg',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'ano(s)',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Até',
+        'Occurrences' => 'Ocorrências',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Nenhum',
+        'Each' => 'Cada',
+        'On' => 'Em',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'primeiro',
+        'second' => 'segundo',
+        'third' => 'terceiro',
+        'fourth' => 'quarto',
+        'fifth' => 'quinto',
+        'last' => 'último',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Domingo',
+        'Mon' => 'Segunda-feira',
+        'Tue' => 'Terça-feira',
+        'Wed' => 'Quarta-feira',
+        'Thu' => 'Quinta-feira',
+        'Fri' => 'Sexta-feira',
+        'Sat' => 'Sábado',
+        'Day' => 'Dia',
+        'WD'  => 'Dia da semana',
+        'WE'  => 'Fim de semana'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Meio',
         'end' => 'Fim',
         'top' => 'Topo',
+        'total' => 'Total',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Funil',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Claro',
       'dark' => 'Escuro',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Mover',
@@ -1875,7 +1994,7 @@ $app_list_strings = array (
             "5" => array("code" => "PRI", "name" => "Prickly Pear"),
             "6" => array("code" => "SAN", "name" => "Sandy"),
             "7" => array("code" => "SCR", "name" => "Scrub"),
-            "8" => array("code" => "SEA", "name" => "Seal"),
+            "8" => array("code" => "MAR", "name" => "Seal"),
             "9" => array("code" => "SOM", "name" => "Sombrero")
         ),
         /* Antigua and Barbuda */
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "Christchurch"),
-            "2" => array("code" => "AND", "name" => "Saint Andrew"),
+            "2" => array("code" => "E", "name" => "Saint Andrew"),
             "3" => array("code" => "GEO", "name" => "Saint George"),
             "4" => array("code" => "JAM", "name" => "Saint James"),
             "5" => array("code" => "JOH", "name" => "Saint John"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "E", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "OU", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Southern Nations - Nationalities"),
             "9" => array("code" => "TG", "name" => "Região Tigré"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "Sumba"),
+            "22" => array("code" => "SOMA", "name" => "Sumba"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "OU", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajastão"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Nápoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "OU", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Pádua"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parish"),
             "4" => array("code" => "MAN", "name" => "Manchester Parish"),
             "5" => array("code" => "POR", "name" => "Portland Parish"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "E", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parish"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parish"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parish"),
@@ -4109,7 +4228,7 @@ $app_list_strings = array (
             "11" => array("code" => "BAT", "name" => "Batroun"),
             "12" => array("code" => "BSH", "name" => "Bsharri"),
             "13" => array("code" => "KOU", "name" => "Koura"),
-            "14" => array("code" => "MIN", "name" => "Miniyeh-Danniyeh"),
+            "14" => array("code" => "MÍN", "name" => "Miniyeh-Danniyeh"),
             "15" => array("code" => "TRI", "name" => "Tripoli"),
             "16" => array("code" => "ZGH", "name" => "Zgharta"),
             "17" => array("code" => "ALE", "name" => "Aley"),
@@ -4367,8 +4486,8 @@ $app_list_strings = array (
             "7" => array("code" => "Pahang", "name" => "Pahang"),
             "8" => array("code" => "Perak", "name" => "Perak"),
             "9" => array("code" => "Perlis", "name" => "Perlis"),
-            "10" => array("code" => "Pulau Pinang", "name" => "Penang"),
-            "11" => array("code" => "Sabah", "name" => "Sabá"),
+            "10" => array("code" => "Penang", "name" => "Penang"),
+            "11" => array("code" => "Sabá", "name" => "Sabá"),
             "12" => array("code" => "Sarawak", "name" => "Sarawak"),
             "13" => array("code" => "Selangor", "name" => "Selangor"),
             "14" => array("code" => "Terengganu", "name" => "Terengganu"),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "OU", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "OU", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -6482,7 +6601,7 @@ $app_list_strings = array (
             "46" => array("code" => "MP", "name" => "Northern Mariana Islands"),
             "47" => array("code" => "OH", "name" => "Ohio"),
             "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "49" => array("code" => "OU", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pensilvânia"),
             "52" => array("code" => "PR", "name" => "Porto Rico"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "OU", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Seguir link',
   'LBL_TOGGLE_VISIBILITY' => 'Alternar visibilidade', // Record view header panel element
   'LBL_ACTIVITIES' => 'Cadeia de atividades',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. Todos os Direitos Reservados.',
-  'LBL_TRADEMARK' => 'SugarCRM é uma marca comercial da SugarCRM, Inc. Todos os outros nomes de empresas e produtos podem ser marcas comerciais das respectivas empresas com as quais eles estão associados.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ e Sugar™ são marcas registradas da SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Enviar Convite',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar e Cubo 3-D são marcas registradas da SugarCRM Inc. '.
+        'Todos os outros nomes de empresas e produtos usados ou citados neste produto podem ser marcas registradas das '.
+        'respectivas empresas às quais eles são associados.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ e Sugar™ são marcas registradas da SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Enviar Convite',
   'LBL_INVITEES' => 'Convidados',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Os convidados não receberão seu convite',
   'LBL_SELECT_ACTION_LABEL' => 'Selecionar Ação',
   'LBL_TOGGLE_DRAWER' => 'Ativar/desativar gaveta',
   'LBL_TOUR_NEXT' => 'Próximo',
@@ -7887,7 +8009,7 @@ $app_strings = array (
   'LBL_BASIC_QUICK_SEARCH' => 'Pesquisar' /*for 508 compliance fix*/,
   'LBL_PROJECT_MINUS' => 'Remover' /*for 508 compliance fix*/,
   'LBL_PROJECT_PLUS' => 'Adicionar' /*for 508 compliance fix*/,
-  'LBL_Blank' => 'Blank' /*for 508 compliance fix*/,
+  'LBL_Blank' => ' ' /*for 508 compliance fix*/,
   'LBL_ICON_COLUMN_1' => 'Coluna' /*for 508 compliance fix*/,
   'LBL_ICON_COLUMN_2' => '2 colunas' /*for 508 compliance fix*/,
   'LBL_ICON_COLUMN_3' => '3 colunas' /*for 508 compliance fix*/,
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Adicionar' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Logo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Calendário' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'navegação do módulo principal',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'ativar/desativar subpainel',
+
     'LBL_ADVANCED' => 'Avançado',
     'LBL_BASIC' => 'Básico',
     'LBL_MODULE_FILTER' => 'Filtro por',
@@ -8276,10 +8403,10 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_DISPLAY_NUM'        => 'Número de e-mails por página',
     'LBL_EMAIL_SETTINGS_EDIT_ACCOUNT'       => 'Editar conta de e-mail',
     'LBL_EMAIL_SETTINGS_FOLDERS'            => 'Pastas',
-    'LBL_EMAIL_SETTINGS_FROM_ADDR'          => 'Endereço em "De"',
+    'LBL_EMAIL_SETTINGS_FROM_ADDR'          => 'Endereço em &quot;De&quot;',
     'LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR' => 'Endereço de e-mail para notificação de teste:',
     'LBL_EMAIL_SETTINGS_TO_EMAIL_ADDR'      => 'Endereço de e-mail do destinatário',
-    'LBL_EMAIL_SETTINGS_FROM_NAME'          => 'Nome em "De"',
+    'LBL_EMAIL_SETTINGS_FROM_NAME'          => 'Nome em &quot;De&quot;',
     'LBL_EMAIL_SETTINGS_REPLY_TO_ADDR'      =>'Endereço de resposta',
     'LBL_EMAIL_SETTINGS_FULL_SCREEN'        => 'Tela inteira',
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Sincronizar todas as contas de e-mail',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Equipes',
     'LBL_TEAM_SET_ID' => 'ID de configuração de equipe',
     'LBL_TEAM_SET'=>'Configuração de Equipe',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Equipes selecionadas',
     'LBL_SEARCH_UNAVAILABLE' => 'Pesquisa indisponível. Tente mais tarde.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Nenhuma equipe principal especificada',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Erro ao tentar remover o id da equipe principal [{0}] para [{1}] módulo com id [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'O motor de busca está temporariamente indisponível.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Ocorreu um erro de tempo de execução no mecanismo de busca. Entre em contato com o administrador do sistema.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Campos bloqueados por processos não podem ser editados.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Uma condição foi encontrada devido a uma falha geral ou erro. Existem diversas razões para esta exceção, mas geralmente estão fora do âmbito de uma exceção de API mais específica.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Indica que o servidor está ocupado, sobrecarregado ou inativo.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'O backend do motor de busca está atualmente indisponível por causa de um problema de conexão. Verifique a conectividade e a configuração em Admin->Pesquisa->teste.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'Ocorreu uma exceção de tempo de execução no motor de busca. Consulte sugarcrm.log para obter mais detalhes.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Campos bloqueados por processos em execução não podem ser editados.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s está bloqueado por um processo em execução e não pode ser editado.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s estão bloqueados por um processo em execução e não podem ser editados.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Um arquivo com mesmo nome existe no sistema',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Este TimePeriod já tem subperíodos',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Períodos de tempo sub não pode ter sub-períodos',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Não foi possível recuperar quaisquer Períodos de tempo do tipo {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Não há períodos ativos para as configurações atuais.',
     'LBL_CURRENT_TIMEPERIOD' => 'Período de tempo atual',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Período de tempo anterior',
     'LBL_NEXT_TIMEPERIOD' => 'Próximo período de tempo',
@@ -8532,7 +8664,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => 'Fechar',
     'LBL_ADDITIONAL_DETAILS' => 'Detalhes Adicionais',
     'LBL_ADMIN' => 'Admin',
-    'LBL_ALT_HOT_KEY' => 'Alt+',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'Arquivar',
     'LBL_ASSIGNED_TO_USER'=>'Atribuído ao usuário',
     'LBL_ASSIGNED_TO' => 'Atribuído a',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Selecionar campo...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Selecionar operador...',
     'LBL_FILTER_CREATE_NEW' => 'Novo',
+    'LBL_FILTER_CREATE_FILTER' => 'Criar novo filtro',
+    'LBL_FILTER_EDIT_FILTER' => 'Editar filtro',
     'LBL_FILTER_ALL_RECORDS' => 'Todos os registros',
     'TPL_FILTER_SAVE' => 'Você criou com sucesso o filtro {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'De:',
@@ -8938,16 +9072,16 @@ $app_strings = array (
     'LBL_SELECT_USER_BUTTON_LABEL' => 'Selecionar usuário',
     'LBL_SELECT_USER_BUTTON_TITLE' => 'Selecionar usuário',
     // Clear buttons take up too many keys, lets default the relate and collection ones to be empty
-    'LBL_ACCESSKEY_CLEAR_RELATE_KEY' => 'Limpar',
+    'LBL_ACCESSKEY_CLEAR_RELATE_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_RELATE_TITLE' => 'Limpar seleção',
     'LBL_ACCESSKEY_CLEAR_RELATE_LABEL' => 'Limpar seleção',
-    'LBL_ACCESSKEY_CLEAR_COLLECTION_KEY' => 'Limpar seleção',
+    'LBL_ACCESSKEY_CLEAR_COLLECTION_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_COLLECTION_TITLE' => 'Limpar seleção',
     'LBL_ACCESSKEY_CLEAR_COLLECTION_LABEL' => 'Limpar seleção',
     'LBL_ACCESSKEY_SELECT_FILE_KEY' => 'F',
     'LBL_ACCESSKEY_SELECT_FILE_TITLE' => 'selecionar arquivo',
     'LBL_ACCESSKEY_SELECT_FILE_LABEL' => 'selecione um arquivo:',
-    'LBL_ACCESSKEY_CLEAR_FILE_KEY' => 'Limpar seleção',
+    'LBL_ACCESSKEY_CLEAR_FILE_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_FILE_TITLE' => 'Limpar arquivo',
     'LBL_ACCESSKEY_CLEAR_FILE_LABEL' => 'Limpar arquivo',
 
@@ -8955,31 +9089,31 @@ $app_strings = array (
     'LBL_ACCESSKEY_SELECT_USERS_KEY' => 'U',
     'LBL_ACCESSKEY_SELECT_USERS_TITLE' => 'Selecionar usuário',
     'LBL_ACCESSKEY_SELECT_USERS_LABEL' => 'Selecionar usuário',
-    'LBL_ACCESSKEY_CLEAR_USERS_KEY' => 'Limpar seleção',
+    'LBL_ACCESSKEY_CLEAR_USERS_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_USERS_TITLE' => 'Limpar usuário',
     'LBL_ACCESSKEY_CLEAR_USERS_LABEL' => 'Limpar usuário',
     'LBL_ACCESSKEY_SELECT_ACCOUNTS_KEY' => 'A',
     'LBL_ACCESSKEY_SELECT_ACCOUNTS_TITLE' => 'Selecionar uma Conta',
     'LBL_ACCESSKEY_SELECT_ACCOUNTS_LABEL' => 'Selecionar uma Conta',
-    'LBL_ACCESSKEY_CLEAR_ACCOUNTS_KEY' => 'Limpar seleção',
+    'LBL_ACCESSKEY_CLEAR_ACCOUNTS_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_ACCOUNTS_TITLE' => 'Limpar conta',
     'LBL_ACCESSKEY_CLEAR_ACCOUNTS_LABEL' => 'Limpar conta',
     'LBL_ACCESSKEY_SELECT_CAMPAIGNS_KEY' => 'M',
     'LBL_ACCESSKEY_SELECT_CAMPAIGNS_TITLE' => 'Selecionar campanha',
     'LBL_ACCESSKEY_SELECT_CAMPAIGNS_LABEL' => 'Selecionar campanha',
-    'LBL_ACCESSKEY_CLEAR_CAMPAIGNS_KEY' => 'Limpar seleção',
+    'LBL_ACCESSKEY_CLEAR_CAMPAIGNS_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_CAMPAIGNS_TITLE' => 'Limpar campanha',
     'LBL_ACCESSKEY_CLEAR_CAMPAIGNS_LABEL' => 'Limpar campanha',
     'LBL_ACCESSKEY_SELECT_CONTACTS_KEY' => 'C',
     'LBL_ACCESSKEY_SELECT_CONTACTS_TITLE' => 'Selecione contato',
     'LBL_ACCESSKEY_SELECT_CONTACTS_LABEL' => 'Selecione contato',
-    'LBL_ACCESSKEY_CLEAR_CONTACTS_KEY' => 'Limpar seleção',
+    'LBL_ACCESSKEY_CLEAR_CONTACTS_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_CONTACTS_TITLE' => 'Limpar contato',
     'LBL_ACCESSKEY_CLEAR_CONTACTS_LABEL' => 'Limpar contato',
     'LBL_ACCESSKEY_SELECT_TEAMSET_KEY' => 'Selecione Equipe',
     'LBL_ACCESSKEY_SELECT_TEAMSET_TITLE' => 'Selecionar equipe',
     'LBL_ACCESSKEY_SELECT_TEAMSET_LABEL' => 'Selecionar equipe',
-    'LBL_ACCESSKEY_CLEAR_TEAMS_KEY' => 'Limpar seleção',
+    'LBL_ACCESSKEY_CLEAR_TEAMS_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_TEAMS_TITLE' => 'Limpar equipe',
     'LBL_ACCESSKEY_CLEAR_TEAMS_LABEL' => 'Limpar equipe',
     'LBL_SERVER_RESPONSE_RESOURCES' => 'Recursos utilizados para construir esta página (consultas, arquivos)',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Estado:',
     'LBL_STATUS_UPDATED'=>'O seu estado para este evento foi atualizado!',
+    'LBL_STATUS_NOT_UPDATED' => 'O seu status para este evento não foi atualizado.',
     'LBL_STATUS'=>'Estado:',
     'LBL_STREET'=>'Rua',
     'LBL_SUBJECT' => 'Assunto',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy;© 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink"> SugarCRM Inc.</a> Todos os direitos reservados.<br />SugarCRM é uma marca comercial da SugarCRM, Inc. Todas as outras empresas e nomes de produtos podem ser marcas registadas das respectivas empresas às quais são associados.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Todos os direitos reservados.<br />SugarCRM, Sugar e Cubo 3-D são marcas registradas da SugarCRM Inc. '.
+        'Todos os outros nomes de empresas e produtos usados ou citados neste produto podem ser marcas registradas das '.
+        'respectivas empresas às quais eles são associados.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Tarefa agendada concluída',
@@ -9182,7 +9321,8 @@ Atenciosamente, SugarCRM',
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Erro. Você digitou um operador inválido.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Erro. Você digitou um filtro inválido.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Falha ao importar. Um campo de agrupamento está parcialmente bloqueado na Definição do Processo. Estes campos devem estar desbloqueados na Definição do Processo para a definição ser importada.',
+    'ERROR_EXP_DATE_LOW' => 'Erro. A data de validade não pode ser anterior à data de publicação.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Erro. O estado Aprovado exige uma data de publicação.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'A data de publicação está vazia.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9312,6 +9452,7 @@ Atenciosamente, SugarCRM',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => ' colunas não podem ser exibidas.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Painel',
     'LBL_DASHBOARD_BWC' => 'Meu Painel legado',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Meu Painel',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Ajuda do Painel',
@@ -9344,9 +9485,6 @@ Atenciosamente, SugarCRM',
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Meus {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Novidades',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Feed do Google Notícias para contas relacionadas',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Métricas de oportunidades',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Métricas de oportunidades para contas relacionadas. Exige assinatura D&B.',
@@ -9415,7 +9553,6 @@ Atenciosamente, SugarCRM',
 
     'LBL_DASHLET_NO_RECORDS' => 'Nenhum registro foi encontrado desta vez.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Resumo de Ocorrências',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Feed de Notícias',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interações',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Notas e Anexos',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notas e Anexos pertencem ao registro',
@@ -9925,7 +10062,7 @@ D&B® D-U-N-S® Number, fax, telefone e estilo de comércio. Inclui inteligênci
     'LBL_DNB_BAL_JOBCD_PH' => 'Selecione a Função do cargo',
     'LBL_DNB_BAL_ORG_NAME' => 'Nome da organização',
     'LBL_DNB_BAL_IMPORT_AS' => 'Importar como:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Nome da organização',
+    'LBL_DNB_BAL_ORG_NAME' => 'Nome da empresa',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'em milhões de dólares',
@@ -9984,7 +10121,7 @@ D&B® D-U-N-S® Number, fax, telefone e estilo de comércio. Inclui inteligênci
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Artigos mais úteis publicados na base de conhecimento',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Exibe os artigos mais gostados e mais vistos da base de conhecimento',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtrado por {{label}} "{{value}}"',
 
@@ -10023,6 +10160,13 @@ D&B® D-U-N-S® Number, fax, telefone e estilo de comércio. Inclui inteligênci
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Digite um nome de página.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Meu pipeline',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Pipeline da minha equipe",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Gráfico do pipeline de vendas',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Exibe o gráfico de pipeline atual.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Nenhuma imagem',
 
@@ -10292,6 +10436,8 @@ D&B® D-U-N-S® Number, fax, telefone e estilo de comércio. Inclui inteligênci
     'LBL_SELECT_THIS_ROW_TITLE' => 'Selecionar esta linha',
     'LBL_TEAM_SELECTED_TITLE' => 'Equipe selecionada',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Selecione para tornar esta equipe a primária',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Equipe marcada como selecionada em equipe ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Marcar esta equipe como selecionada em equipe',
     'LBL_SEARCH_AND_SELECT' => 'Pesquisar e selecionar {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Pesquisar e adicionar {{module}}',
 
@@ -10380,6 +10526,9 @@ D&B® D-U-N-S® Number, fax, telefone e estilo de comércio. Inclui inteligênci
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Visualização desabilitada: nenhum dado disponível',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Visualização desabilitada: em visualização como registro atual',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Visualização desabilitada: registro removido ou sem acesso ao registro',
+    'LBL_PREVIEW_PREVIOUS' => 'Visualização anterior',
+    'LBL_PREVIEW_NEXT' => 'Visualização seguinte',
+    'LBL_PREVIEW_CLOSE' => 'Fechar visualização',
     'LBL_STREAM_NO_RECORDS' => 'Este registro não contém registros neste momento. Adicione uma anotação clicando no link de anotação.',
     'LBL_DUPLICATES_FOUND' => 'Duplicatas de {{duplicateCount}} não encontradas.',
     'LBL_NO_DUPLICATES_FOUND' => 'Nenhuma duplicata foi encontrada.',
@@ -10399,6 +10548,7 @@ D&B® D-U-N-S® Number, fax, telefone e estilo de comércio. Inclui inteligênci
         'Número inválido de registros passados. O intervalo válido é de {{minRecords}} a {{maxRecords}} registros.',
     'LBL_MERGE_NO_ACCESS' =>
         'Você não tem acesso para realizar esta ação. Pelo menos um registro deve ser editado.',
+    'LBL_MERGE_LOCKED' => 'Alguns dos registos selecionados para serem fundidos contêm campos que estão bloqueados para edição por um processo e não podem ser fundidos neste momento.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10869,10 +11019,9 @@ D&B® D-U-N-S® Number, fax, telefone e estilo de comércio. Inclui inteligênci
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Configurações do Sistema',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Estúdio',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Senha',
     'LBL_CURRENT_PASSWORD'				=> 'Senha Atual',
-    'LBL_SET_NEW_PASSWORD'              => 'Digite a senha',
     'LBL_NEW_PASSWORD1'                 => 'Nova Senha',
     'LBL_NEW_PASSWORD2'                 => 'Confirmar Senha',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Inserir sua confirmação de senha.',
@@ -10880,13 +11029,12 @@ D&B® D-U-N-S® Number, fax, telefone e estilo de comércio. Inclui inteligênci
     'ERR_ENTER_OLD_PASSWORD'			=> 'Entrar com sua senha atual.',
     'ERR_REENTER_PASSWORDS' => 'Senha deve ser compatível.',
     'ERR_PASSWORD_MISMATCH' => 'As senhas não conferem',
-    'LBL_NEW_USER_PASSWORD_1' => 'Senha alterada com sucesso',
     'LBL_CANNOT_SEND_PASSWORD' => 'Não pode enviar a senha',
     'LBL_REQUEST_PASSWORD' => 'Solicitar Senha',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Erro: houve um problema ao atualizar a senha para este usuário.',
     'LBL_INCORRECT_PASSWORD' => 'Erro: senha incorreta.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Idioma preferido:',
+    'LBL_PREFERRED_LANGUAGE' => 'Preferências de idioma:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Selecione um Relatório',
@@ -10912,10 +11060,22 @@ D&B® D-U-N-S® Number, fax, telefone e estilo de comércio. Inclui inteligênci
     'ERR_HTTP_404_ACTION' => 'Volte à página anterior.',
 
     'ERR_HTTP_500_TYPE' => '500',
-    'ERR_HTTP_500_TITLE' => 'HTTP: 500 Erro interno do servidor',
+    'ERR_HTTP_500_TITLE' => 'HTTP: 502 Erro interno do servidor',
     'ERR_HTTP_500_TEXT_LINE1' => 'O servidor encontrou um erro e não pode completar sua solicitação.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Por favor, tente novamente. Se o erro persistir, entre em contato com o administrador Sugar.',
     'ERR_HTTP_500_ACTION' => 'Entre em contato com o suporte técnico.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 Erro interno do servidor',
+    'ERR_HTTP_502_TEXT_LINE1' => 'O servidor encontrou um erro temporário e não pode completar sua solicitação.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Tente novamente. Se o erro persistir, entre em contato com o administrador Sugar.',
+    'ERR_HTTP_502_ACTION' => 'Entre em contato com o suporte técnico.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 Erro interno do servidor',
+    'ERR_HTTP_503_TEXT_LINE1' => 'O servidor não está disponível para concluir sua solicitação.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Tente novamente mais tarde. Se o erro persistir, entre em contato com o administrador Sugar.',
+    'ERR_HTTP_503_ACTION' => 'Entre em contato com o suporte técnico.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Ver renderização Falha',
     'ERR_RENDER_FAILED_MSG' => 'Falha ao visualizar renderização',
@@ -11049,6 +11209,7 @@ D&B® D-U-N-S® Number, fax, telefone e estilo de comércio. Inclui inteligênci
     'LBL_ALERT_TITLE_ERROR' => 'Erro:',
     'LBL_ALERT_TITLE_LOADING' => 'Carregando',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'A versão de seu navegador não é mais compatível ou você está usando um navegador não compatível.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Recomenda-se as seguintes versões de navegador: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Consulte a página {{link}} para ver os navegadores sugeridos.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Plataformas suportadas',
 
@@ -11101,6 +11262,9 @@ D&B® D-U-N-S® Number, fax, telefone e estilo de comércio. Inclui inteligênci
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Houve um erro ao conectar-se ao servidor. Tente novamente.',
     'ERR_RESOLVE_ERRORS' => 'Resolva qualquer erro antes de continuar.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Atualizar lista',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'mais',
@@ -11209,10 +11373,13 @@ Para criar um novo registro usando os valores inseridos, clique em "Ignorar Dupl
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'O SugarCRM permite que usuários capacitados realizem rapidamente certas tarefas com atalhos de teclado para aumentar a produtividade. As tabelas à direita descrevem os atalhos disponíveis junto com as chaves e as ações que realizam.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Teclas suportadas</h1><ul><li>todos os caracteres e símbolos alfanuméricos</li> <li>shift, ctrl, alt, command, mod (ctrl no Windows/Linux e command em Macs)</li><li>enter, esc, espaço, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>Recursos suportados</h1><ul><li>Combinação de teclas: ctrl+m</li><li>Diversas teclas: m, ctrl+m</li><li>Sequência de teclas: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Atalhos Globais',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Atalhos Contextuais',
     'LBL_SHORTCUT_KEY_KEY' => 'Chave:',
     'LBL_SHORTCUT_FUNCTION' => 'Função',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Configurar atalhos contextuais',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Não há atalhos contextuais a serem configurados',
     'LBL_SHORTCUT_HELP' => 'Mostrar página de ajuda de atalhos',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Alternar o menu de criação rápida',
     'LBL_SHORTCUT_SEARCH' => 'Foco em campo de pesquisa global',
@@ -11260,6 +11427,9 @@ Para criar um novo registro usando os valores inseridos, clique em "Ignorar Dupl
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Selecionar todos os itens em um campo de seleção múltipla',
     'LBL_SHORTCUT_SWEETSPOT' => 'Ativar/desativar a barra Sweet Spot',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Ocultar a barra Sweet Spot',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Salvar configurações',
+    'LBL_SHORTCUT_RESTORE' => 'Restaurar padrão',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Ocorreu um erro ao salvar as teclas de atalho personalizadas no servidor. Tente novamente.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Configurações do {{module}}',
@@ -11282,13 +11452,20 @@ Para criar um novo registro usando os valores inseridos, clique em "Ignorar Dupl
     'LBL_CALENDAR_RECURRENCE' => "Recorrência",
     'LBL_CALENDAR_REMINDERS' => "Lembretes",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Data personalizada",
     'LBL_CALENDAR_REPEAT_TYPE' => "Tipo de Repetição",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Intervalo de Repetição",
     'LBL_CALENDAR_REPEAT_DOW' => "Repetir em Dias da Semana",
+    'LBL_CALENDAR_REPEAT' => "Repetir",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Repetir Até",
     'LBL_CALENDAR_REPEAT_COUNT' => "Repetir Ocorrências",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Repetir o seletor",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Dia(s) do mês",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Repetir ordinal",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Repetir unidade",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Alterações de recorrência devem ser feitas usando o primeiro registro da série.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'As regras de recorrência não resultam na criação de um evento.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Participando',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Recusado',
@@ -11308,17 +11485,23 @@ Para criar um novo registro usando os valores inseridos, clique em "Ignorar Dupl
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'O Sugar 7 exige javascript. Ative o javascript em seu navegador para continuar usando Sugar 7.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Os dados serializados não poderiam ser desserializados',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Os dados serializados não poderiam ser desserializados porque eles contêm referências a objetos ou classes',
 
     'LBL_FIELD_TRIMMED' => 'O campo foi cortado, já vez que ele excedia o limite máximo de caracteres.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'O campo excede o limite máximo de caracteres.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Últimos 7 dias',
     '30' => 'Os últimos 30 dias',
     '90' => 'Trimestre passado',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11423,13 +11606,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Expirou',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Rascunho',
-    'Expired' => 'Expirou',
-    'In Review' => 'Em análise',
-    'Published' => 'Publicado',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Ações Admin--',
@@ -11441,57 +11617,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Excluir artigos selecionados',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Tem anexos',
-        'none' => 'Não tem nenhum',
-        'mime' => 'Especificar o tipo de Mime',
-        'name' => 'Especificar nome',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Palavras';
   $app_list_strings['moduleListSingular']['Words'] = 'Palavra';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Criar Artigo';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Top 5',
-    'Top_10' => 'Top 10',
-    'Top_20' => 'Top 20',
-    'Bot_5'  => 'Últimos 5',
-    'Bot_10' => 'Últimos 10',
-    'Bot_20' => 'Últimos 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Todos',
-        'added' => 'Adicionado nos últimos 30 dias',
-        'pending' => 'Aguardando minha aprovação',
-        'updated' =>'Atualizado nos últimos 30 dias',
-        'faqs' => 'Perguntas frequentes',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'Em',
-    'before' => 'Antes',
-    'after' => 'Depois',
-    'between_dates' => 'Entre',
-    'last_7_days' => 'Últimos 7 dias',
-    'next_7_days' => 'Próximos 7 dias',
-    'last_month' => 'Mês passado',
-    'this_month' => 'Este mês',
-    'next_month' => 'Próximo mês',
-    'last_30_days' => 'Os últimos 30 dias',
-    'next_30_days' => 'Os próximos 30 dias',
-    'last_year' => 'Ano passado',
-    'this_year' => 'Este ano',
-    'next_year' => 'Próximo ano',
-    'isnull' => 'É nulo',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12354,6 +12482,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Todos os contatos",
+    "email" => "Somente e-mail",
+    "phone" => "Somente telefone",
     "prem" => "Apenas premium"
 );
 
@@ -12379,4 +12509,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Biografia',
     'Both' => 'Ambos'
 );
-

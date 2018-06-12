@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -32,8 +32,10 @@
              */
             onAttach: function(component) {
                 var self = this;
-                this.fileFieldName = component.options.def.name + '_file';
-                this.$embeddedInput = $('<input />', {name: this.fileFieldName, type: 'file'}).hide();
+                component.on('init', function() {
+                    this.fileFieldName = component.options.def.name + '_file';
+                    this.$embeddedInput = $('<input />', {name: this.fileFieldName, type: 'file'}).hide();
+                }, this);
                 component.on('render', function() {
                     component.$el.append(self.$embeddedInput);
                 }, this);
@@ -97,7 +99,7 @@
 
                 if (attributes.type === 'image' && fileObj.type.indexOf('image') === -1) {
                     this.clearFileInput($target);
-                    attributes.win.tinyMCEPopup.alert(app.lang.get('LBL_UPLOAD_ONLY_IMAGE', 'EmbeddedFiles'));
+                    tinymce.activeEditor.windowManager.alert(app.lang.get('LBL_UPLOAD_ONLY_IMAGE', 'EmbeddedFiles'));
                     return;
                 }
 
@@ -141,12 +143,7 @@
 
                             if (attributes.type === 'image') {
                                 // We are, so update image dimensions.
-                                if (_.isFunction(attributes.win.ImageDialog.getImageData)) {
-                                    attributes.win.ImageDialog.getImageData();
-                                }
-                                if (_.isFunction(attributes.win.ImageDialog.showPreviewImage)) {
-                                    attributes.win.ImageDialog.showPreviewImage(url);
-                                }
+                                this.updateImageData(url);
                             }
 
                             this.clearFileInput(this.$embeddedInput);
@@ -171,8 +168,17 @@
                 $field.val('');
                 // For IE.
                 $field.replaceWith($field.clone(true));
-            }
+            },
 
+            /**
+             * Updates image data such as dimensions for example.
+             *
+             * @param {string} url Uploaded image url.
+             */
+            updateImageData: function(url) {
+                var win = tinymce.activeEditor.windowManager.windows[0];
+                win.find('#src').value(url).fire('change');
+            }
         });
     });
 })(SUGAR.App);

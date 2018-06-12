@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -37,7 +37,6 @@
     omnibarView: null,
 
     initialize: function(opts) {
-        this.opts = opts;
         this.renderedActivities = {};
 
         var moduleMeta = app.metadata.getModule(opts.context.parent.get('module'));
@@ -53,7 +52,7 @@
 
         this.omnibarView = app.view.createView({
             context: this.context,
-            name: 'activitystream-omnibar',
+            type: 'activitystream-omnibar',
             module: this.module,
             layout: this
         });
@@ -285,7 +284,7 @@
         } else {
             view = app.view.createView({
                 context: this.context,
-                name: 'activitystream',
+                type: 'activitystream',
                 module: this.module,
                 layout: this,
                 model: model,
@@ -338,18 +337,21 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this.omnibarView.dispose();
+        this.disposeAllActivities();
+        this._super('_dispose');
+    },
+
+    /**
      * Dispose all previously rendered activities
      */
     disposeAllActivities: function() {
-        var nonActivities = [];
-        _.each(this._components, function(component) {
-            if (component.name !== 'activitystream') {
-                nonActivities.push(component);
-            } else {
-                component.dispose();
-            }
+        _.each(this.renderedActivities, function(component) {
+            component.dispose();
         });
-        this._components = nonActivities;
         this.renderedActivities = {};
     }
 })

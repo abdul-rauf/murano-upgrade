@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -37,7 +37,7 @@
             // skip this check for all white-listed routes (app.config.unsecureRoutes)]
             if (_.indexOf(app.config.unsecureRoutes, route) >= 0) return true;
 
-            // Check if a user is un-athenticated and redirect him to login
+            // Check if a user is un-authenticated and redirect him to login
             if (!app.api.isAuthenticated()) {
                 app.router.login();
                 return false;
@@ -62,17 +62,25 @@
         },
 
         /**
-         * If default routes are not desired, overwrite defaults with an array of custom routes with their handlers.
-         * @param customRoutes {Array} array of routes to replace sidecar routes with. In the format {route: "route", name: "routename", callback: function(){}}
+         * If default routes are not desired, overwrite defaults with an array
+         * of custom routes with their handlers.
+         *
+         * @param {Array} customRoutes List of routes to replace sidecar routes
+         * with. In the format:
+         *
+         *     { route: 'route', name: 'routename', callback: function() {} }
          */
         setRoutes: function(customRoutes) {
-            // Manipulate routes
+            app.logger.warn(
+                'Core.Routing#setRoutes is deprecated since 7.8 and will be removed in 7.9. ' +
+                'Please use Core.Router#addRoutes.'
+            );
             _routes = customRoutes;
         },
 
         /**
-         * Should be called when app has finished loading all the necessary files. This
-         * will create an instance of Backbone router.
+         * Should be called when app has finished loading all the necessary files.
+         * This will create an instance of Backbone router.
          */
         start: function() {
             var opts = {};
@@ -83,46 +91,56 @@
 
             app.augment("router", new app.Router(opts), false);
             app.events.trigger("router:start", app.router);
+            app.router.init();
             app.router.start();
+        },
+
+        /**
+         * Internal use only - for unit testing Routers.
+         *
+         * Disable `Backbone.history` temporarily.
+         */
+        stop: function () {
+            app.router.stop();
+            _routes = [];
         }
     });
 
     //Mix in the beforeEvents
-        _.extend(app.routing, app.beforeEvent);
+    _.extend(app.routing, app.beforeEvent);
 
     /**
      * Router manages the watching of the address hash and routes to the correct handler.
      *
-     * #NOTE# The default router has no routes, routes will need to be provided via a custom route object
-     * from the platform.js file. Custom routes can use predefined route handlers on the default router.
+     * **Note:** The default router has no routes, routes will need to be provided via a custom route object
+     * from the `platform.js` file. Custom routes can use predefined route handlers on the default router.
      *
      * Deprecated Routes:
      *
-     * "": "index",
-     * "logout": "logout",
-     * "logout/?clear=:clear": "logout",
-     * ":module": "list",
-     * ":module/layout/:view": "layout",
-     * ":module/create": "create",
-     * ":module/:id/:action": "record",
-     * ":module/:id": "record"
+     * - "": "index",
+     * - "logout": "logout",
+     * - "logout/?clear=:clear": "logout",
+     * - ":module": "list",
+     * - ":module/layout/:view": "layout",
+     * - ":module/create": "create",
+     * - ":module/:id/:action": "record",
+     * - ":module/:id": "record"
      *
-     * #Events:#
-     * ###router:start###
-      * Triggered after app.router has been initialized but before it has started.
-      * Should be used to register additional custom routes.
-      * @param {Core.Router} router
-      * ###Example:###
-      * <pre><code>
-      *     app.events.on("router:start", function(router){
-      *         router.route("MyModule/:layout", "my_custom_route", function(layout) {
-      *             app.controller.loadView({
-      *                module: "MyModule",
-      *                layout: layout
-      *            });
-      *        });
-      *    });
-      * </code></pre>
+     * ## Events:
+     * ### router:init
+     * Triggered after {@link Core.Routing#start} has been initialized but before it has started.
+     * Should be used to register additional custom routes:
+     *
+     *     app.events.on('router:init', function(router) {
+     *         var routes = [
+     *             {
+     *                 route: 'MyModule/my_custom_route',
+     *                 name: 'MyModule',
+     *                 callback: MyModule
+     *             }
+     *         ];
+     *         app.router.addRoutes(routes);
+     *     });
      *
      *
      *
@@ -159,28 +177,12 @@
             this._currentFragment = '';
 
             if (opts.customRoutes) {
-                this.customRoutes = opts.customRoutes;
-                this._bindCustomRoutes();
+                app.logger.warn(
+                    'Core.Router\'s option "customRoutes", is deprecated since 7.8 and will be removed in 7.9. ' +
+                    'Please use addRoutes.'
+                );
+                this._initRoutes = opts.customRoutes;
             }
-        },
-
-        /**
-         * Iterates over an array of custom routes and binds them, much like
-         * the default routes.
-         *
-         * Note: The original routes hash does not support having inline callback
-         * functions so this method allows for passing in callbacks with the routes.
-         * @private
-         */
-        _bindCustomRoutes: function() {
-            if (!this.customRoutes) return;
-
-            this.customRoutes.reverse();
-
-            _.each(this.customRoutes, function(route) {
-                // Check if route uses a predefined callback on router, else use supplied callback.
-                this.route(route.route, route.name, route.callback);
-            }, this);
         },
 
         /**
@@ -216,17 +218,44 @@
             return true;
         },
 
+        _addDefaultRoutes: function() {
+            var defaultRoutes = [
+                {
+                    name: 'notFound',
+                    route: /^.*$/,
+                    callback: function () {
+                        // no matching routes (e.g.: '#//' or '#unkown/path/route)
+                        app.error.handleHttpError({status: 404});
+                    }
+                }
+            ];
+            this.addRoutes(defaultRoutes);
+        },
+
         /**
          * Registers a handler for a named route.
          *
-         * This method wraps the handler into {@link Core.Router#_routeHandler} method.
+         * This method wraps the handler into {@link Core.Router#_routeHandler}
+         * method.
          *
-         * @param {String} route Route expression.
-         * @param {String} name Route name.
-         * @param {Function/String} callback Route handler.
+         * @param {string} route Route expression.
+         * @param {string} name Route name.
+         * @param {Function} [callback] Route handler. If not supplied, will
+         *   use the method name that matches the `name` param.
          */
-        route: function(route, name, callback) {
-            if (!callback) callback = this[name];
+        route: function (route, name, callback) {
+            if (!name) {
+                app.logger.warn('Route names will be required in 7.9.');
+            } else if (!_.isEmpty(this._routes[name])) {
+                app.logger.error('Route "' + name + '" is being overridden. This is highly NOT advisable.');
+            }
+
+            this._routes[name] = callback;
+
+            if (!callback) {
+                callback = this[name];
+            }
+
             callback.route = name;
             callback = _.wrap(callback, this._routeHandler);
             Backbone.Router.prototype.route.call(this, route, name, callback);
@@ -288,14 +317,107 @@
         },
 
         /**
+         * Initializes the router.
+         */
+        init: function() {
+            /**
+             * Routes' hashmap by name. See {@link#get} for more info.
+             *
+             * @type {Object}
+             * @private
+             */
+            this._routes = {};
+            this._addDefaultRoutes();
+            if (this._initRoutes) {
+                this.addRoutes(this._initRoutes);
+            }
+
+            if (this.customRoutes) {
+                app.logger.warn(
+                    'Core.Router\'s option "customRoutes", is deprecated since 7.8 and will be removed in 7.9. ' +
+                    'Please use addRoutes.'
+                );
+                this.addRoutes(this.customRoutes);
+            }
+
+            app.events.trigger('router:init');
+        },
+
+        /**
          * Starts Backbone history which in turn starts routing the hashtag.
          *
          * See Backbone.history documentation for details.
          */
         start: function() {
-            app.logger.info("Router Started");
+            if (!Backbone.History.started) {
+                Backbone.history.start();
+            }
+        },
+
+        stop: function() {
             Backbone.history.stop();
-            return Backbone.history.start();
+        },
+
+        /**
+         * Reset router.
+         * Stop Backbone.history and clean up routes.
+         * Re-initialize and start routing again.
+         */
+        reset: function() {
+            app.router.stop();
+            _routes = [];
+            Backbone.history.handlers = [];
+            app.router.init();
+            app.router.start();
+        },
+
+        /**
+         * Add routes into router.
+         *
+         * **Note:** Currently, Backbone stops after the first matching route.
+         * Therefore, the order of how custom routes are added is important.
+         *
+         * In general, the developer should add the more specific route first,
+         * so that the intended route gets called.
+         *
+         * For example, the route `MyRoute/create` will call `myRouteCreate` in
+         * the following code snippet:
+         *
+         *     var routes = [
+         *         {
+         *             name: 'myRouteCreate',
+         *             route: 'MyRoute/create',
+         *             callback: myRouteCreate
+         *         },
+         *         {
+         *             name: 'myRoute',
+         *             route: "MyRoute(/:my_custom_route)",
+         *             callback: myRoute
+         *         }
+         *     ];
+         *
+         * If the order of `myRouteCreate` and `myRoute` is reversed, triggering
+         * `MyRoute/create` will call `myRoute` with `:my_custom_route` set to
+         * `create`, which may not be intended.
+         *
+         * @param {Array} routes The ordered list of routes.
+         */
+        addRoutes: function(routes) {
+            if (!routes) return;
+            var newRoutes = routes.reverse();
+            _.each(newRoutes, function(route) {
+                this.route(route.route, route.name, route.callback);
+            }, this);
+        },
+
+        /**
+         * Retrieves the callback associated with the given name.
+         *
+         * @param {string} name The route to get the callback function.
+         * @returns {Function} The callback associated with this route name.
+         */
+        get: function (name) {
+            return this._routes[name];
         },
 
         /**
@@ -314,11 +436,11 @@
          * `app.utils` and return empty string if you want to fallback to this
          * definition of build route.
          *
-         * @param {Core.Context/String} moduleOrContext The name of the module
+         * @param {Core.Context|string} moduleOrContext The name of the module
          * or a context object to extract the module from.
-         * @param {String} id The model's ID.
-         * @param {String} [action] Action name.
-         * @return {String} route The built route.
+         * @param {string} id The model's ID.
+         * @param {string} [action] Action name.
+         * @return {string} route The built route.
          */
         buildRoute: function(moduleOrContext, id, action) {
             var route;
@@ -491,9 +613,10 @@
 
         /**
          * Handles `record` route.
-         * @param module Module name.
-         * @param id Record ID.
-         * @param action(optional) Action name (`edit`, etc.). Defaults to `detail` if not specified.
+         * @param {string} module Module name.
+         * @param {string} id Record ID. If `id` is `create`, it will load the create view.
+         * @param {string} [action] Action name (`edit`, etc.). Defaults to `detail` if not specified.
+         * @param {string} [layout] The layout to use for this route. Defaults to `record` if not specified.
          */
         record: function(module, id, action, layout) {
             if (!this._moduleExists(module)) {

@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -31,7 +31,7 @@ $mod_strings = array(
     'LBL_LIST_DATE_MODIFIED' => 'Ultima Modifica',
     'LBL_LIST_FILENAME' => 'Allegato',
     'LBL_LIST_FORM_TITLE' => 'Elenco Note',
-    'LBL_LIST_RELATED_TO' => 'Relativo A',
+    'LBL_LIST_RELATED_TO' => 'Relativo a',
     'LBL_LIST_SUBJECT' => 'Oggetto',
     'LBL_LIST_STATUS' => 'Stato',
     'LBL_LIST_CONTACT' => 'Contatto',
@@ -80,12 +80,12 @@ $mod_strings = array(
     'LBL_EXPORT_PARENT_ID' => 'Riferito a',
     'LBL_DATE_ENTERED' => 'Data Creazione',
     'LBL_DATE_MODIFIED' => 'Data Modifica',
-    'LBL_DELETED' => 'Cancellato',
-    'LBL_REVENUELINEITEMS' => 'Elementi dell´Opportunità',
+    'LBL_DELETED' => 'Eliminato',
+    'LBL_REVENUELINEITEMS' => 'Elementi dell&#39;opportunità',
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} consiste in singole {{plural_module_name}} che contengono un testo o un allegato collegato al record relazionato. I records {{module_name}} possono essere relazionati ad un record in più moduli attraverso il campo flex relate, e essere relazioni ad un singolo {{contacts_singular_module}}. Le {{plural_module_name}} possono contenere un testo generico o un allegato relativo al record. Esistono vari modi per creare una {{plural_module_name}} in Sugar, ad esempio attraverso il modulo {{plural_module_name}} , attraverso l´importazione di {{plural_module_name}}, attraverso il sottopannello Cronologia ecc. Una volta che il record {{module_name}} è stato creato, puoi visualizzare e modificare informazioni relative al modulo {{module_name}} attraverso la vista elenco delle {{plural_module_name}}. Ogni {{module_name}} potrebbe essere relazionata ad un record di Sugar come {{accounts_module}}, {{contacts_module}}, {{opportunities_module}} e molti altri.',
+    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} consiste in singole {{plural_module_name}} che contengono un testo o un allegato collegato al record relazionato. I records {{module_name}} possono essere relazionati ad un record in più moduli attraverso il campo flex relate, e essere relazioni ad un singolo {{contacts_singular_module}}. Le {{plural_module_name}} possono contenere un testo generico o un allegato relativo al record. Esistono vari modi per creare {{plural_module_name}} in Sugar, ad esempio attraverso il modulo {{plural_module_name}}, attraverso l´importazione di {{plural_module_name}}, attraverso il sottopannello Cronologia ecc. Una volta che il record {{module_name}} è stato creato, puoi visualizzare e modificare informazioni relative al modulo {{module_name}} attraverso la vista elenco delle {{plural_module_name}}. Ogni {{module_name}} potrebbe essere relazionata ad un record di Sugar come {{accounts_module}}, {{contacts_module}}, {{opportunities_module}} e molti altri.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} consiste in singole {{plural_module_name}} che contengono un testo o un allegato collegato al record relazionato. 

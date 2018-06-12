@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'كلمة مرور جديدة',
 	'LBL_NEW_PASSWORD1'					=> 'كلمة المرور',
 	'LBL_NEW_PASSWORD2'					=> 'تأكيد كلمة المرور',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'تم تغيير كلمة المرور بنجاح.',
+    'LBL_NEW_USER_PASSWORD_1' => 'تم تغيير كلمة المرور بنجاح.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'تم إرسال بريد إلكتروني للمستخدم يحتوي على كلمة مرور تم إنشاؤها بمعرفة النظام.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'تم إنشاء كلمة المرور بنجاح.',
+    'LBL_NEW_USER_PASSWORD_3' => 'تم إنشاء كلمة المرور بنجاح.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'مستخدم جديد',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'مستخدم جديد',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'الحصص النسبية',
     'LBL_FORECASTS'                     => 'التوقعات',
     'LBL_WORKSHEETS'                    => 'أوراق الأعمال',
+	'LBL_CALENDARS'                     => 'التقويمات',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'الحصول على CAPTCHA آخر',
 	'LBL_RECAPTCHA_SOUND'				=> 'الانتقال إلى الصوت',
 	'LBL_RECAPTCHA_IMAGE'				=> 'الانتقال إلى الصورة',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'هاتف العمل',
 	'LBL_YOUR_PUBLISH_URL'				=> 'النشر في موقعي',
     'LBL_ICAL_PUB_URL'                  => 'عنوان URL الخاص بتكامل iCal ',
-    'LBL_ICAL_PUB_URL_HELP'             => 'استخدم عنوان URL للاشتراك في تقويم Sugar في iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'استخدم عنوان URL للاشتراك في تقويم Sugar داخل تطبيقات iCal ' .
+                                           'المدعومة. تكون أحداث تقويم Sugar قابلة للعرض باعتبارها للقراءة فقط ' .
+                                           'في تطبيقات التقويم الخارجية وأية تعديلات على الأحداث ' .
+                                           '(مثل الاجتماعات والمكالمات وغيرها) يمكن إعدادها في Sugar فقط.',
 	'LBL_YOUR_QUERY_URL'				=> 'عنوان URL للاستعلام الخاص بك',
 	'LNK_NEW_USER'						=> 'إنشاء مستخدم جديد',
 	'LNK_NEW_PORTAL_USER'				=> 'إنشاء مستخدم لواجهة برمجة تطبيقات (API) البوابة',
@@ -622,7 +626,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'تقارير المستخدمين',
     'LBL_CONTACTS_SYNC' => 'جهات الاتصال',
-
+    'LBL_DETAIL' => 'ملف تعريف المستخدم',
 ); // END STRINGS DEFS
 
 ?>

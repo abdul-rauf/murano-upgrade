@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -95,10 +95,13 @@ $mod_strings = array (
     'LBL_KB_STATUS_BACK_TO_DRAFT' => 'El estado del documento ha cambiado a borrador de nuevo.',
     'LBL_OPERATOR_CONTAINING_THESE_WORDS' => 'contiene estas palabras',
     'LBL_OPERATOR_EXCLUDING_THESE_WORDS' => 'excluye estas palabras',
-    'ERROR_EXP_DATE_LOW' => 'The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_EXP_DATE_LOW' => 'La fecha de vencimiento no puede ser anterior a la fecha de la publicación.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'El estado Aprobado requiere una fecha de publicación.',
     'ERROR_ACTIVE_DATE_LOW' => 'The Publish Date must occur on a later date than today&#39;s date.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'La fecha de publicación está vacía.',
     'LBL_RECORD_SAVED_SUCCESS' => 'Ha creado de forma correcta el {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'ERROR_IS_BEFORE' => 'Error. La fecha de este campo debe ser posterior a la fecha del campo {{this}}.',
     'TPL_SHOW_MORE_MODULE' => 'Más artículos de {{module}}...',
+    'LBL_LIST_FORM_TITLE' => 'Lista de la base de conocimientos',
+    'LBL_SEARCH_FORM_TITLE' => 'Búsqueda en la Base de conocimientos',
 );

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Er zijn fouten ontdekt tijdens de compatibiliteitscheck. Om uw SugarCRM installatie goed te laten functioneren, dienen onderstaande issues te worden opgelost, druk daarna op de recheck-button of probeer opnieuw te installeren.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Parameter &#39;Allow Call Time Pass Reference&#39; heeft de waarde &#39;On&#39;  en deze moet &#39;Off&#39; zijn de php.ini',
 
-	'ERR_CHECKSYS_CURL'					=> 'Niet gevonden: Sugar taakplanner zal alleen met beperkte functionaliteit draaien.',
+	'ERR_CHECKSYS_CURL'					=> 'Niet gevonden: Sugar Scheduler wordt uitgevoerd met beperkte functionaliteit. De e-mailarchiveringsservice wordt niet uitgevoerd.',
     'ERR_CHECKSYS_IMAP'					=> 'Niet gevonden: Inkomende E-mail en Campagnes (E-mail) vereisen de IMAP-bibliotheken. Geen van beiden zullen functioneel zijn.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC kan niet  "On" zijn als  MS SQL Server wordt gebruikt.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Waarschuwing:',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'Database niet beschikbaar',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Database Support is niet gevonden. Zorg ervoor dat u de benodigde stuurprogramma&#39;s voor een van de volgende ondersteunde databasetypes heeft: MySQL of MS SQLServer. Het kan zijn dat u de opmerkingen in de exentie in het php.ini-bestand moet opheffen, of opnieuw moet compileren met het correcte binaire bestand, afhankelijk van uw versie van PHP. Raadpleeg uw PHP-handleiding voor meer informatie over hoe u Database Support moet inschakelen. <br><br>Oracle en DB2 worden niet ondersteund door SugarCRM PRO. Voor een lijst met ondersteunde databases en andere informatie over platforms, raadpleeg <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Functies behorende bij "XML Parser Libraries" benodigd door SugarCRM zijn niet gevonden. Controleer php.ini of de regels nog als commentaar zijn opgevoerd of hercompileer de binary file, afhankelijk van uw PHP versie. Raadpleeg de PHP handleiding voor meer informatie.',
+    'LBL_CHECKSYS_CSPRNG' => 'Willekeurige nummergenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Functies behorende bij "Multibyte Strings PHP Extension" benodigd door SugarCRM zijn niet gevonden. N.B. Standaard wordt de module niet geinstalleerd in PHP, om deze alsnog te activeren dient deze met "--enable-mbstring" te worden meegegeven als de PHP Binary wordt opgebouwd. Raadpleeg de PHP handleiding voor meer informatie.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'De "session.save_path" setting in de php.ini bestaat niet of staat ingesteld op een map die niet bestaat.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'ZIP support niet gevonden: SugarCRM heeft ZIP ondersteuning nodig voor gecomprimeerde bestanden',
     'ERR_CHECKSYS_BCMATH'				=> 'BCMATH-ondersteuning niet gevonden: SugarCRM heeft BCMATH-ondersteuning nodig voor een willekeurige precisieberekening.',
     'ERR_CHECKSYS_HTACCESS'             => 'Test voor .htaccess rewrites mislukt. Dit betekent doorgaand dat je niet AllowOverride hebt ingesteld voor de Sugar directory.',
+    'ERR_CHECKSYS_CSPRNG' => 'CSPRNG uitzondering',
 	'ERR_DB_ADMIN'						=> 'Gebruikersnaam en/of wachtwoord van de opgegeven database administrator zijn ongeldig. Hierdoor kan er geen koppeling met de database gemaakt worden. Voer een geldige gebruikersnaam en wachtwoord op.(Error:',
     'ERR_DB_ADMIN_MSSQL'                => 'Gebruikersnaam en/of wachtwoord van de opgegeven database administrator zijn ongeldig. Hierdoor kan er geen koppeling met de database gemaakt worden.  Voer een geldige gebruikersnaam en wachtwoord op.',
 	'ERR_DB_EXISTS_NOT'					=> 'Gespecificeerde database bestaat niet',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'Deze sleutel is niet vereist voor de installatie, maar is wel nodig voor de standaard applicatie functionaliteit. U hoeft deze sleutel dus nu niet in te vullen, maar u moet de sleutel wel invoeren nadat de installatie klaar is.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Vereist minimale informatie voor de installatie. Aanbevolen voor nieuwe gebruikers.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Biedt extra opties om in te stellen tijdens de installatie. De meeste van deze opties zijn ook beschikbaar na de installatie in de admin-schermen. Aanbevolen voor gevorderde gebruikers.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Biedt extra opties om in te stellen tijdens de installatie. De meeste van deze opties zijn ook beschikbaar na de installatie in de admin-schermen. Aanbevolen voor gevorderde gebruikers.',
 	'LBL_LANG_1'						=> 'Voor het gebruik van een andere taal dan de standaard taal (US-Engels), kunt u nu het taalpakket uploaden en installeren. Dit kan trouwens ook later vanuit SugarCRM. Als u deze stap wilt overslaan, druk op -volgende-',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Installeren',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Verwijder',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'Licentie Acceptatie',
     'LBL_LICENSE_CHECKING'              => 'Controle systeem voor de compatibiliteit.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Omgeving controleren',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'Verifieren van DB Credentials.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'DB, FTS credentials verifiëren.',
     'LBL_LICENSE_CHECK_PASSED'          => 'Compatibiliteitscheck is gelukt.',
     'LBL_LICENSE_REDIRECT'              => 'U wordt omgeleid naar',
 	'LBL_LICENSE_DIRECTIONS'			=> 'Wilt u uw licentie-informatie (indien aanwezig) invullen in onderstaande velden.',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'Lees de volgende belangrijke informatie voordat u verder gaat met de installatie. De informatie zal u helpen bepalen of u klaar bent om nu te installeren.',
 
 
-	'LBL_WELCOME_2'						=> 'Voor installatie documentatie, kunt u terecht op <a href="http://www.sugarcrm.com/crm/installation" target="_blank"> Sugar Wiki </ a>. <BR> Voor hulp bij de installatie door een SugarCRM Support medewerker, meldt u zich aan bij de <a target="_blank" href="http://support.sugarcrm.com"> SugarCRM Support Portal </ a> en vul een supportcase in.',
+	'LBL_WELCOME_2'						=> 'Ga voor installatiedocumenten naar de <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>.  <BR><BR> Log in op het <a target="_blank" href="http://support.sugarcrm.com">SugarCRM Support Portaal</a> om contact op te nemen met een SugarCRM support engineer voor hulp bij de installatie en verzend een supper case.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>Taalkeuze</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Installatiewizard',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Welkom bij SugarCRM',
@@ -452,7 +455,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'Massa e-mailcampagnes &#39;s nachts uitvoeren',
 	'LBL_OOTB_PRUNE'		=> 'Database weghalen op elke 1ste van de maand',
     'LBL_OOTB_TRACKER'		=> 'Opschoon trackter tabellen',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Meldingen e-mailherinnering uitvoeren',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Herinneringsberichten per e-mail uitvoeren',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'Update tracker_sessions tabel',
     'LBL_OOTB_CLEANUP_QUEUE' => 'Gooi de wachtrij voor taken leeg',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'Type zoekmachine',
     'LBL_FTS_HELP'      => 'To enable full-text searching, select the search engine type and enter the Host and Port where the search engine is hosted. Sugar includes built-in support for the elasticsearch engine.',
     'LBL_FTS_REQUIRED'    => 'Elastic Search is vereist.',
-    'LBL_FTS_ERROR'    => 'Verbinding maken met de server voor volledige tekst zoeken mislukt. Controleer uw instellingen.',
+    'LBL_FTS_CONN_ERROR'    => 'Kan geen verbinding maken met Full Text Search server, controleer uw instellingen.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'Geen versie van de server voor volledige tekst zoeken beschikbaar, controleer uw instellingen.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'Niet-ondersteunde versie van elastisch zoeken gedetecteerd. Gebruik versies: %s',
 
     'LBL_PATCHES_TITLE'     => 'Nieuwste Patches installeren',
     'LBL_MODULE_TITLE'      => 'Installeer taalpakket',

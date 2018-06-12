@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,7 +56,7 @@ $app_list_strings = array (
     'TaxRates'=>'Steuersätze',
     'ContractTypes' => 'Vertragstypen verwalten',
     'Schedulers'=>'Zeitplaner',
-    'Project'=>'Projekt',
+    'Project'=>'Projekte',
     'ProjectTask'=>'Projektaufgaben',
     'Campaigns'=>'Kampagnen',
     'CampaignLog'=>'Kampagnen-Protokoll',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Filter',
     'Comments' => 'Kommentar',
     'Currencies' => 'Währung',
-    'Project' => 'Projekt',
     'ProductTemplates' => 'Produkt-Vorlage',
-    'ProductCategories' => 'Produktkategorie',
     'ProductTypes' => 'Produktart',
     'Shippers' => 'Transportunternehmen',
     'Subscriptions' => 'Abonnement',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Fr",
                 '7'=>"Sa",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"So",
+            '2'=>"Mo",
+            '3'=>"Di",
+            '4'=>"Mi",
+            '5'=>"Do",
+            '6'=>"Fr",
+            '7'=>"Sa",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'So',
         '1' => 'Mo',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'Jährlich',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Bis',
+        'Occurrences' => 'Ereignisse',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Nichts',
+        'Each' => 'Jedes',
+        'On' => 'Am',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'erster',
+        'second' => 'zweiter',
+        'third' => 'dritter',
+        'fourth' => 'vierter',
+        'fifth' => 'fünfter',
+        'last' => 'letzter',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Sonntag',
+        'Mon' => 'Montag',
+        'Tue' => 'Dienstag',
+        'Wed' => 'Mittwoch',
+        'Thu' => 'Donnerstag',
+        'Fri' => 'Freitag',
+        'Sat' => 'Samstag',
+        'Day' => 'Tag',
+        'WD'  => 'Wochentag',
+        'WE'  => 'Tag am Wochenende'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Mitte',
         'end' => 'Ende',
         'top' => 'Oben',
+        'total' => 'Gesamt',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Trichter',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Hell',
       'dark' => 'Dunkel',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Verschieben',
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "Christ Church"),
-            "2" => array("code" => "AND", "name" => "Saint Andrew"),
+            "2" => array("code" => "UND", "name" => "Saint Andrew"),
             "3" => array("code" => "GEO", "name" => "Saint George"),
             "4" => array("code" => "JAM", "name" => "Saint James"),
             "5" => array("code" => "JOH", "name" => "Saint John"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "UND", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "ODER", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Southern Nations - Nationalities"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "Sumba"),
+            "22" => array("code" => "SUMME", "name" => "Sumba"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "ODER", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "ODER", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parish"),
             "4" => array("code" => "MAN", "name" => "Manchester Parish"),
             "5" => array("code" => "POR", "name" => "Portland Parish"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "UND", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parish"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parish"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parish"),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "ODER", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "ODER", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -6482,7 +6601,7 @@ $app_list_strings = array (
             "46" => array("code" => "MP", "name" => "Northern Mariana Islands"),
             "47" => array("code" => "OH", "name" => "Ohio"),
             "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "49" => array("code" => "ODER", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pennsylvania"),
             "52" => array("code" => "PR", "name" => "Puerto Rico"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "ODER", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7859,11 +7978,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Dem Link folgen',
   'LBL_TOGGLE_VISIBILITY' => 'Sichtbarkeit aktivieren', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivitäten-Stream',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. Alle Rechte vorbehalten.',
-  'LBL_TRADEMARK' => 'SugarCRM ist ein Warenzeichen von SugarCRM Inc. Alle anderen Firmen- und Produktnamen sind möglicherweise eingetragene Warenzeichen der jeweiligen Firmen, mit denen sie verbunden sind.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ und Sugar™ sind Warenzeichen von SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Einladung senden',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar und der 3-D-Würfel sind eingetragene Warenzeichen von SugarCRM Inc. '.
+        'Alle anderen in diesem Produkt verwendeten oder angegebenen Firmen- und Produktnamen sind möglicherweise Markenzeichen von '.
+        'den jeweiligen Unternehmen, mit denen sie verbunden sind.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ und Sugar™ sind Warenzeichen von SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Einladung senden',
   'LBL_INVITEES' => 'Teilnehmer',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Gast wird Ihre Einladung nicht erhalten',
   'LBL_SELECT_ACTION_LABEL' => 'Aktion wählen',
   'LBL_TOGGLE_DRAWER' => 'Schublade anzeigen',
   'LBL_TOUR_NEXT' => 'Weiter',
@@ -7888,7 +8010,7 @@ $app_strings = array (
   'LBL_BASIC_QUICK_SEARCH' => 'Suche...' /*for 508 compliance fix*/,
   'LBL_PROJECT_MINUS' => 'Entfernen' /*for 508 compliance fix*/,
   'LBL_PROJECT_PLUS' => 'Hinzufügen' /*for 508 compliance fix*/,
-  'LBL_Blank' => 'Blank' /*for 508 compliance fix*/,
+  'LBL_Blank' => ' ' /*for 508 compliance fix*/,
   'LBL_ICON_COLUMN_1' => 'Spalte' /*for 508 compliance fix*/,
   'LBL_ICON_COLUMN_2' => '2 Spalten' /*for 508 compliance fix*/,
   'LBL_ICON_COLUMN_3' => '3 Spalten' /*for 508 compliance fix*/,
@@ -7903,6 +8025,11 @@ $app_strings = array (
   'LBL_ADD' => 'Hinzufügen' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Firmenlogo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalender' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'Hauptmenü-Navigation',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'Toggle-Subpanel',
+
     'LBL_ADVANCED' => 'Erweitert',
     'LBL_BASIC' => 'Einfach',
     'LBL_MODULE_FILTER' => 'Gefiltert nach',
@@ -8369,6 +8496,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Teams',
     'LBL_TEAM_SET_ID' => 'Team-Set-ID',
     'LBL_TEAM_SET'=>'Team-Gruppe',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Ausgewählte Teams',
     'LBL_SEARCH_UNAVAILABLE' => 'Suche nicht verfügbar, bitte später versuchen',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Kein Primär-Team angegeben',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Fehler beim entfernen der primären Team ID [{0}] für [{1}] Modul mit der ID [{2}]',
@@ -8461,6 +8589,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Die Suchmaschine ist vorübergehend nicht verfügbar.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Ein Suchmaschinenlaufzeitfehler ist aufgetreten. Bitte kontaktieren Sie Ihren Systemadministrator.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Ein Feld, das durch einen Prozess gesperrt ist, kann nicht bearbeitet werden.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Wegen eines allgemeinen Fehlers ist ein Ausnahmezustand eingetreten. Die Gründe für diesen Ausnahmezustand sind zwar definiert, liegen aber außerhalb des für API-Ausnahmen definierten Bereiches.',
@@ -8485,9 +8614,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Gibt an, dass der Server beschäftigt, überladen oder ausgefallen ist.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'Das Suchmaschinen-Backend steht derzeit wegen eines Verbindungsproblems nicht zur Verfügung. Überprüfen Sie die Verbindung und die Einstellungen unter Admin-> Suche-> Test.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'In der Suchmaschine ist eine Laufzeitausnahme aufgetreten. Mehr Details finden Sie in der Datei sugarcrm.log.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Ein Feld, das momentant durch einen laufenden Prozess gesperrt ist, kann nicht bearbeitet werden.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s ist durch einen laufenden Prozess gesperrt und kann nicht bearbeitet werden.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s sind durch einen laufenden Prozess gesperrt und können nicht bearbeitet werden.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Es existiert bereits eine Datei mit demselben Namen im System.',
 
@@ -8496,6 +8627,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Die Zeitspanne hat bereits untergeordnete Zeitspannen',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Eine untergeordnete Zeitspanne kann keine weitere untergeordnete Zeitspannen haben',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Abruf der Zeitspanne von Typ: {0} nicht möglich',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Keine aktiven Zeiträume für die aktuellen Einstellungen.',
     'LBL_CURRENT_TIMEPERIOD' => 'Aktuelle Periode',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Vorherige Periode',
     'LBL_NEXT_TIMEPERIOD' => 'Nächste Periode',
@@ -8533,7 +8665,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => 'Schließen',
     'LBL_ADDITIONAL_DETAILS' => 'Weitere Details',
     'LBL_ADMIN' => 'Admin',
-    'LBL_ALT_HOT_KEY' => 'Alt+',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'Archivieren',
     'LBL_ASSIGNED_TO_USER'=>'Bearbeiter',
     'LBL_ASSIGNED_TO' => 'Zugewiesen an:',
@@ -8622,6 +8754,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Feld wählen...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Operator wahlen...',
     'LBL_FILTER_CREATE_NEW' => 'Erstellen',
+    'LBL_FILTER_CREATE_FILTER' => 'Neuen Filter erstellen',
+    'LBL_FILTER_EDIT_FILTER' => 'Filter bearbeiten',
     'LBL_FILTER_ALL_RECORDS' => 'Alle Datensätze',
     'TPL_FILTER_SAVE' => 'Der Filter {{name}} wurde erfolgreich erstellt.',
     'LBL_FILTER_BETWEEN_FROM' => 'Von',
@@ -8671,7 +8805,7 @@ $app_strings = array (
     'TPL_MAX_PILLS_DISPLAYED' => 'Only {{maxPillsDisplayed}} records are shown.',
     'TPL_MORE_RECORDS' => '{{recordsLeft}} more records selected.',
     'TPL_RECORDS_SELECTED' => '{{recordsLeft}} records selected.',
-    'LBL_SHOW_LESS' => 'Weniger zeigen',
+    'LBL_SHOW_LESS' => 'Weniger anzeigen',
     'LBL_SHOW_MORE' => 'Mehr anzeigen',
     'LBL_SHOW_MORE_MODULE' => 'Mehr {{{module}}}...',
     'LBL_SHOW_MORE_RECENTS' => 'Weniger zeigen...',
@@ -8942,7 +9076,7 @@ $app_strings = array (
     'LBL_ACCESSKEY_CLEAR_RELATE_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_RELATE_TITLE' => 'Auswahl aufheben',
     'LBL_ACCESSKEY_CLEAR_RELATE_LABEL' => 'Auswahl aufheben',
-    'LBL_ACCESSKEY_CLEAR_COLLECTION_KEY' => 'Auswahl aufheben',
+    'LBL_ACCESSKEY_CLEAR_COLLECTION_KEY' => ' ',
     'LBL_ACCESSKEY_CLEAR_COLLECTION_TITLE' => 'Auswahl aufheben',
     'LBL_ACCESSKEY_CLEAR_COLLECTION_LABEL' => 'Auswahl aufheben',
     'LBL_ACCESSKEY_SELECT_FILE_KEY' => 'F',
@@ -8998,6 +9132,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Bundesland:',
     'LBL_STATUS_UPDATED'=>'Der Status für dieses Ereignis wurde aktualisiert!',
+    'LBL_STATUS_NOT_UPDATED' => 'Ihr Status für dieses Ereignis wurde nicht aktualisiert.',
     'LBL_STATUS'=>'Status:',
     'LBL_STREET'=>'Straße',
     'LBL_SUBJECT' => 'Betreff',
@@ -9006,7 +9141,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Alle Rechte vorbehalten.<br />SugarCRM ist ein Warenzeichen von SugarCRM, Inc. Alle anderen Firmen- und Produktnamen können möglicherweise Warenzeichen des jeweiligen Unternehmens sein, mit dem sie verbunden sind.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Alle Rechte vorbehalten.<br />SugarCRM, Sugar und der 3-D-Würfel sind eingetragene Warenzeichen von SugarCRM Inc. '.
+        'Alle anderen in diesem Produkt verwendeten oder angegebenen Firmen- und Produktnamen sind möglicherweise Markenzeichen von '.
+        'den jeweiligen Unternehmen, mit denen sie verbunden sind.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Geplanter Job abgeschlossen',
@@ -9123,7 +9262,7 @@ Sincerely, SugarCRM',
     'NTC_TEMPLATE_IS_USED' => 'Die Vorlage wird in mindestens einem E-Mail-Marketing-Datensatz verwendet. Sind Sie sicher dass Sie diesen löschen möchten?',
     'NTC_TEMPLATES_IS_USED' => "Die Vorlagen werden in mindestens einem E-Mail-Marketing Datensatz verwendet. Sind Sie sicher dass Sie diese löschen möchten?\n",
     'NTC_DELETE_CONFIRMATION' => 'Sind Sie sicher, dass Sie diesen Eintrag löschen möchten?',
-    'NTC_DELETE_CONFIRMATION_FORMATTED' => 'Sind Sie sicher, dass Sie {0} löschen möchten?',
+    'NTC_DELETE_CONFIRMATION_FORMATTED' => 'Sind Sie sicher, dass Sie den {0} löschen möchten?',
     'NTC_DELETE_CONFIRMATION_NUM' => 'Bestätigen Sie das Löschen von ',
     'NTC_UPDATE_CONFIRMATION_NUM' => 'Bestätigen Sie das Update von ',
     'NTC_DELETE_SELECTED_RECORDS' =>' ausgewählten Datensätzen?',
@@ -9183,7 +9322,8 @@ Sincerely, SugarCRM',
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Fehler. Sie haben einen ungültigen Operator eingegeben.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Fehler. Sie haben einen ungültigen Filter eingegeben.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Importieren fehlgeschlagen. Ein Gruppenfeld ist in der Prozessdefinition teilweise gesperrt. Diese Felder müssen in der Prozessdefinition entsperrt werden, damit die Definition importiert werden kann.',
+    'ERROR_EXP_DATE_LOW' => 'Fehler. Ablaufdatum kann nicht vor dem Zeitpunkt der Veröffentlichung sein.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Fehler. Der Genehmigungsstatus erfordert ein Veröffentlichungsdatum.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Das Veröffentlichungsdatum ist leer.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9313,6 +9453,7 @@ Sincerely, SugarCRM',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'Spalten können angezeigt werden.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Dashboard',
     'LBL_DASHBOARD_BWC' => 'Mein früheres Dashboard',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Mein Dashboard',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Hilfe-Dashboard',
@@ -9345,9 +9486,6 @@ Sincerely, SugarCRM',
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Meine {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Neuigkeiten',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Google-Nachrichten-Feed für verknüpfte Firma',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Verkaufschancen im Überblick',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Verkaufschancen-Metrik für verknüpfte Firmen. Dies erfordert ein D&B-Abonement.',
@@ -9418,7 +9556,6 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
 
     'LBL_DASHLET_NO_RECORDS' => 'Keine Datensätze gefunden.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Ticket-Übersicht',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Nachrichten-Feed',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interaktionen',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Notizen & Anlagen',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notizen und Anhänge gehören zu diesem Datensatz',
@@ -9449,7 +9586,7 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
     'LBL_DNB_OTHER_FIELDS' => 'andere Felder',
     'LBL_DNB_OTHER' => 'Andere:',
     'LBL_DNB_OVERRIDE_SUCCESS' => 'Der D&B-Datenimport war erfolgreich',
-    'LBL_DNB_SHOW_LESS' => 'Weniger zeigen',
+    'LBL_DNB_SHOW_LESS' => 'Weniger anzeigen',
     'LBL_DNB_SHOW_MORE' => 'Mehr anzeigen',
     'LBL_DNB_IMPORT' => 'Import',
     'LBL_DNB_DUPLICATE' => 'Duplizieren',
@@ -9963,9 +10100,9 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
 
     /* Learning Resources Dashlet */
     'LBL_LEARNING_RESOURCES_TITLE' => 'Trainingsmaterialien',
-    'LBL_LEARNING_RESOURCES_DESC' => 'SugarCRM Training Center',
+    'LBL_LEARNING_RESOURCES_DESC' => 'SugarCRM Trainingszentrum',
     'LBL_LEARNING_RESOURCES_NAME' => 'Trainingsmaterialien',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugar University',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugar Universität',
     'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_TEASER' => 'Hier werden Sie mit Hilfe von Trainingsunterlagen, Videos, Trainingsklassen, Webinaren und der Zertifizierung zum Sugar-Experten.',
     'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Community-Forum',
     'LBL_LEARNING_RESOURCES_COMMUNITY_TEASER' => 'Nehmen Sie an Diskussionen teil, finden Sie Problemlösungen, teilen Sie Ideen mit anderen Benutzern.',
@@ -9986,7 +10123,7 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Die hilfsreichsten veröffentlichten Wissensdatenbank-Artikel',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Zeigt die beliebtesten und am häufigsten gelesenen Artikel der Wissensdatenbank an',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}}, gefiltert nach {{label}} "{{value}}"',
 
@@ -10025,6 +10162,13 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Bitte einen Seitennamen eintragen.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Meine Pipeline',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Meine Team-Pipeline",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Verkaufs-Pipeline-Diagramm',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Zeigt das aktuelle Pipeline-Diagramm an.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Kein Bild',
 
@@ -10294,6 +10438,8 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
     'LBL_SELECT_THIS_ROW_TITLE' => 'Diese Zeile auswählen',
     'LBL_TEAM_SELECTED_TITLE' => 'Team gewählt',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Primäres Team auswählen',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Team markiert als Team-basierte Ausgewählte ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Dieses Team als Team-basierte Ausgewählte markieren',
     'LBL_SEARCH_AND_SELECT' => 'Suchen und auswählen {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Suchen und Hinzufügen von {{module}}',
 
@@ -10382,6 +10528,9 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Vorschau deaktiviert: keine Daten verfügbar',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Vorschau deaktiviert für diesen Datensatz',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Vorschau disabled: Datensatz wurde möglicherweise entfernt oder Sie haben keinen Zugriff.',
+    'LBL_PREVIEW_PREVIOUS' => 'Vorschau vorherige',
+    'LBL_PREVIEW_NEXT' => 'Vorschau nächste',
+    'LBL_PREVIEW_CLOSE' => 'Vorschau schließen',
     'LBL_STREAM_NO_RECORDS' => 'Dieser Datensatz hat keine Notizen. Fügen Sie eine Notiz hinzu, indem Sie auf den Link "Notiz" klicken.',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}} Dublikate gefunden.',
     'LBL_NO_DUPLICATES_FOUND' => 'Keine Duplikate gefunden.',
@@ -10401,6 +10550,7 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
         'Ungültige Anzahl von Datensätzen übergeben. Die gültige Anzahl ist von {{minRecords}} bis {{maxRecords}} Datensätze.',
     'LBL_MERGE_NO_ACCESS' =>
         'Sie haben keinen Zugriff, um diese Aktion durchzuführen. Mindestens ein Datensatz muss bearbeitbar sein.',
+    'LBL_MERGE_LOCKED' => 'Einige der Datensätze, die für die Zusammenführung ausgewählt wurden, enthalten Felder, die durch einen Prozess für die Bearbeitung gesperrt sind und die zu diesem Zeitpunkt nicht zusammengeführt werden können.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10463,7 +10613,7 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
     'LBL_LOADING_LANGUAGE' => 'Sprachpaket laden',
     'LBL_UPLOADING' => 'Wird hochgeladen',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Sind Sie sicher, dass sie dieses Bild löschen möchten?',
-    'LBL_FILE_DELETE_CONFIRM' => "Sind Sie sicher, dass Sie diese Datei löschen möchten? Diese Vorgang kann nicht rückgängig gemacht werden.",
+    'LBL_FILE_DELETE_CONFIRM' => "Sind Sie sicher, dass Sie diese Datei löschen möchten? Dieser Vorgang kann nicht rückgängig gemacht werden.",
     'LBL_FILE_DELETED' => 'Die Datei wurde erfolgreich gelöscht',
 
     //theme roller
@@ -10871,10 +11021,9 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Systemeinstellungen',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Passwort',
     'LBL_CURRENT_PASSWORD'				=> 'Aktuelles Passwort',
-    'LBL_SET_NEW_PASSWORD'              => 'Passwort eingeben',
     'LBL_NEW_PASSWORD1'                 => 'Neues Passwort',
     'LBL_NEW_PASSWORD2'                 => 'Passwort bestätigen',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Bitte bestätigen Sie Ihr neues Passwort.',
@@ -10882,13 +11031,12 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
     'ERR_ENTER_OLD_PASSWORD'			=> 'Bitte geben Sie Ihr altes Passwort ein.',
     'ERR_REENTER_PASSWORDS' => 'Die Passwörter müssen übereinstimmen',
     'ERR_PASSWORD_MISMATCH' => 'Das eingegebene Passwort stimmt nicht mit dem in unserem System gespeicherten überein.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Das Passwort wurde erfolgreich geändert.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Das Passwort konnte nicht gesendet werden',
     'LBL_REQUEST_PASSWORD' => 'Passwort anfordern',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Fehler: Es ist ein Problem beim Speichern des Passworts aufgetreten.',
     'LBL_INCORRECT_PASSWORD' => 'Fehler: Falsches Passwort.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Bevorzugte Sprache:',
+    'LBL_PREFERRED_LANGUAGE' => 'Spracheinstellung:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Wählen Sie einen Bericht',
@@ -10918,6 +11066,18 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
     'ERR_HTTP_500_TEXT_LINE1' => 'Der Server hat einen Fehler festgestellt und konnte Ihre Anforderung nicht ausführen.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Bitte versuchen Sie es erneut. Wenn der Fehler weiterhin auftritt, kontaktieren Sie bitte Ihren Sugar-Administrator.',
     'ERR_HTTP_500_ACTION' => 'Bitte kontaktieren Sie den technischen Support.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 Interner Serverfehler',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Der Server hat einen temporären Fehler festgestellt und konnte Ihre Anforderung nicht ausführen.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Bitte versuchen Sie es erneut. Wenn der Fehler weiterhin auftritt, kontaktieren Sie bitte Ihren Sugar-Administrator.',
+    'ERR_HTTP_502_ACTION' => 'Bitte kontaktieren Sie den technischen Support.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 Interner Serverfehler',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Der Server konnte Ihre Anforderung nicht ausführen.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Bitte versuchen Sie es später erneut. Wenn der Fehler weiterhin auftritt, kontaktieren Sie bitte Ihren Sugar-Administrator.',
+    'ERR_HTTP_503_ACTION' => 'Bitte kontaktieren Sie den technischen Support.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Ansichts-Darstellung fehlgeschlagen',
     'ERR_RENDER_FAILED_MSG' => 'Die Ansicht konnte nicht dargestellt werden',
@@ -11051,6 +11211,7 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
     'LBL_ALERT_TITLE_ERROR' => 'Fehler:',
     'LBL_ALERT_TITLE_LOADING' => 'Laden',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Ihre Browserversion wird nicht mehr unterstützt oder Sie verwenden eine nicht unterstützten Browser.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Folgende Browserversionen werden empfohlen: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Gehen Sie auf {{link}} für die Auswahl der empfohlenen Browser.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Unterstützte Plattformen',
 
@@ -11103,6 +11264,9 @@ Börsennotierte Unternehmen inkludieren ihre wichtigsten Mitbewerber oft in ihre
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Bei der Verbindung zum Server ist ein Fehler aufgetreten. Bitte nochmal versuchen.',
     'ERR_RESOLVE_ERRORS' => 'Bitte beheben Sie alle Fehler, bevor Sie fortfahren.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Liste aktualisieren',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'mehr',
@@ -11210,10 +11374,14 @@ Um einen neuen Datensatz mit den eingegebenen Werten zu erstellen, klicken Sie a
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'Mit Hilfe von Schnellzugriffen befähigt SugarCRM Poweruser, schnell bestimmte Aufgaben zu erledigen, um die Produktivität zu erhöhen.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "Text for Translation
+<h1>Unterstützte Tasten</h1><ul><li>alel alphanumerischen Zeichen und Symbole</li><li>shift, ctrl, alt, Befehl, mod (ctrl in Windows/Linux und Befehl in Macs)</li><li>Eingabe, Esc, Leerzeichen, Tab, Seiteauf, Seiteab, Ende, home, ins, entf, backspace</li></ul><h1>Unterstützte Funktionen</h1><ul><li>Tastenkombination: ctrl+m</li><li>Mehrere Tasten: m,ctrl+m</li><li>Tastenfolge: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Globale Schnellzugriffe',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Kontextbezogene Shortcuts',
     'LBL_SHORTCUT_KEY_KEY' => 'Schlüssel:',
     'LBL_SHORTCUT_FUNCTION' => 'Name',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Kontextbezogene Shortcuts konfigurieren',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Nicht kontextbezogene Shortcuts zu konfigurieren',
     'LBL_SHORTCUT_HELP' => 'Zeige Shortcuts Hilfeseite',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Das Schnellerstellungsmenü ein-/ausblenden',
     'LBL_SHORTCUT_SEARCH' => 'Fokussiere das Feld für die globale Suche',
@@ -11261,6 +11429,9 @@ Um einen neuen Datensatz mit den eingegebenen Werten zu erstellen, klicken Sie a
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Wählen Sie alle Elemente in einem Mehrfachauswahl-Feld aus',
     'LBL_SHORTCUT_SWEETSPOT' => 'Sweet-Spot-Leiste ein-/ausblenden',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Sweet-Spot-Leiste ausblenden',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Konfiguration speichern',
+    'LBL_SHORTCUT_RESTORE' => 'Standard wiederherstellen',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Es ist ein Fehler beim Speichern der benutzerdefinierten Tastenkombinationen auf dem Server aufgetreten. Bitet versuchen sie es erneut.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} Einstellungen',
@@ -11283,13 +11454,20 @@ Um einen neuen Datensatz mit den eingegebenen Werten zu erstellen, klicken Sie a
     'LBL_CALENDAR_RECURRENCE' => "Serienereignis",
     'LBL_CALENDAR_REMINDERS' => "Erinnerungen",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Benutzerdefiniertes Datum",
     'LBL_CALENDAR_REPEAT_TYPE' => "Wiederholungstyp",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Wiederholungsintervall",
     'LBL_CALENDAR_REPEAT_DOW' => "Wiederholen an Wochentagen",
+    'LBL_CALENDAR_REPEAT' => "Wiederholen",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Wiederholen bis",
     'LBL_CALENDAR_REPEAT_COUNT' => "Ereignisse wiederholen",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Auswahl wiederholen",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Tag(e) des Monats",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Ordnungszahl wiederholen",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Einheit wiederholen",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Änderungen an einem Serienereignis müssen am ersten Bericht der Serie durchgeführt werden.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Wiederholungsregeln führen nicht zu einem Ereignis, das generiert wird.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Teilnehmend',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Abgelehnt',
@@ -11309,17 +11487,23 @@ Um einen neuen Datensatz mit den eingegebenen Werten zu erstellen, klicken Sie a
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 erfordert Javascript. Bitte aktivieren Sie Javascript, um Sugar 7 weiter zu verwenden.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Serialisierung der serialisierten Daten konnte nicht aufgehoben werden',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Serialisierung der serialisierten Daten konnte nicht aufgehoben werden, da sie Verweise zu Objekten oder Klassen enthalten',
 
     'LBL_FIELD_TRIMMED' => 'Feld wurde gekürzt, da die maximale Zeichenanzahl überschritten wurde.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Feld überschreitet die maximale Zeichenanzahl.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Letzten 7 Tage',
     '30' => 'Letzten 30 Tage',
     '90' => 'Letzes Quartal',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11424,13 +11608,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Abgelaufen',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Entwurf',
-    'Expired' => 'Abgelaufen',
-    'In Review' => 'In Durchsicht',
-    'Published' => 'Veröffentlicht',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Admin-Aktionen--',
@@ -11442,57 +11619,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Ausgewählte Artikel löschen',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Enthält Anlagen',
-        'none' => 'Enthält keine',
-        'mime' => 'Mime-Typ angeben',
-        'name' => 'Namen angeben',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Wörter';
   $app_list_strings['moduleListSingular']['Words'] = 'Wort';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Erstelle Artikel';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Top 5',
-    'Top_10' => 'Top 10',
-    'Top_20' => 'Top 20',
-    'Bot_5'  => 'Letzte 5',
-    'Bot_10' => 'Letzte 10',
-    'Bot_20' => 'Letzte 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Alle',
-        'added' => 'In den letzten 30 Tagen hinzugefügt',
-        'pending' => 'Wartet auf meine Genehmigung',
-        'updated' =>'In den letzten 30 Tagen aktualisiert',
-        'faqs' => 'Häufig gestellte Fragen',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'Am',
-    'before' => 'vor',
-    'after' => 'nach',
-    'between_dates' => 'ist zwischen',
-    'last_7_days' => 'Letzten 7 Tage',
-    'next_7_days' => 'Nächsten 7 Tage',
-    'last_month' => 'Letzten Monat',
-    'this_month' => 'Diesen Monat',
-    'next_month' => 'Nächster Monat',
-    'last_30_days' => 'Letzten 30 Tage',
-    'next_30_days' => 'Nächsten 30 Tage',
-    'last_year' => 'Letztes Jahr',
-    'this_year' => 'Dieses Jahr',
-    'next_year' => 'Nächstes Jahr',
-    'isnull' => 'Ist Null',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12354,6 +12483,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Alle Kontakte",
+    "email" => "Nur E-Mail",
+    "phone" => "Nur Telefon",
     "prem" => "Nur Prämium-Mitglieder"
 );
 
@@ -12379,4 +12510,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Biografie',
     'Both' => 'Beide'
 );
-

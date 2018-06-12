@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -55,13 +55,18 @@ class TeamSetLink extends Link2 {
 			$GLOBALS['log']->debug("TeamSetLink.add, Null key passed, no-op, returning... ");
 			return;
 		}
-		//if we have an array of ids, let's assume that this is a batch style operation so
-		//go ahead and add the whole list.
-		if(is_array($rel_keys)){
-			$this->appendTeams($rel_keys, $additional_values, $save);
-		}else{
-			$this->appendTeams(array($rel_keys), $additional_values, $save);
-		}
+
+        $rel_keys = is_array($rel_keys) ? $rel_keys : [$rel_keys];
+        $teamIds = [];
+        foreach ($rel_keys as $key) {
+            if ($key instanceof SugarBean) { /**@var $key SugarBean*/
+                $teamIds[] = $key->id;
+            } else { /**@var $key string*/
+                $teamIds[] = $key;
+            }
+        }
+
+        $this->appendTeams($teamIds, $additional_values, $save);
 	}
 
 	/**
@@ -127,10 +132,11 @@ class TeamSetLink extends Link2 {
                     }
 
                     //this stmt is intended to handle the situation where the code has set the team_id but not the team_set_id as may be the case
-                    //from SOAP.
+                    //from SOAP or related bean creation.
                     if (!in_array($this->focus->team_id, $this->_teamList)) {
                         $this->_teamList[] = $this->focus->team_id;
                     }
+
                 }
 
                 //we need to check if the assigned_user has access to any of the teams on this record,
@@ -171,16 +177,17 @@ class TeamSetLink extends Link2 {
                 $runUpdate = (!empty($this->focus->id) && empty($this->focus->new_with_id) && !empty($this->focus->save_from_post));
             }
 
-            $db = DBManagerFactory::getInstance();
             if ($runUpdate) {
-                $sql = sprintf(
-                    'UPDATE %s SET team_set_id = %s WHERE id = %s',
+                $updatesArr[] = "team_set_id = " . $GLOBALS['db']->quoted($this->focus->team_set_id);
+                $updateQuery = sprintf(
+                    'UPDATE %s SET %s WHERE id = %s',
                     $this->focus->table_name,
-                    $db->quoted($this->focus->team_set_id),
-                    $db->quoted($this->focus->id)
+                    implode(", ", $updatesArr),
+                    $GLOBALS['db']->quoted($this->focus->id)
                 );
-                $db->query($sql);
+                $GLOBALS['db']->query($updateQuery);
             }
+
             //keep track of what we put into the database so we can clean things up later
             TeamSetManager::saveTeamSetModule($this->focus->team_set_id, $this->focus->table_name);
 
@@ -201,11 +208,11 @@ class TeamSetLink extends Link2 {
 	 * @param unknown_type $save
 	 */
 	public function replace($rel_keys, $additional_values=array(), $save = true){
-		$this->_teamList = $rel_keys;
-		$this->_saved = false; //bug 48733 - "New team added during merge duplicate is not saved"
-		if($save){
-			$this->save();
-		}
+            $this->_teamList = $rel_keys;
+            $this->_saved = false; //bug 48733 - "New team added during merge duplicate is not saved"
+            if ($save) {
+                $this->save();
+            }
 	}
 
 	/**
@@ -258,15 +265,17 @@ class TeamSetLink extends Link2 {
 	 * @param unknown_type $save
 	 */
 	protected function appendTeams($rel_keys, $additional_values=array(), $save = true) {
-		if(empty($this->_teamList)){
-			$team_ids = $this->_teamSet->getTeamIds($this->focus->team_set_id);
-			$this->_teamList = array_merge($rel_keys, $team_ids);
-		}else{
-			$this->_teamList = array_merge($this->_teamList, $rel_keys);
-		}
-		if($save){
-			$this->save();
-		}
+            if (empty($this->_teamList)) {
+                $team_ids = $this->_teamSet->getTeamIds($this->focus->team_set_id);
+                $this->_teamList = array_merge($rel_keys, $team_ids);
+            } else {
+                $this->_teamList = array_merge($this->_teamList, $rel_keys);
+            }
+
+
+            if ($save) {
+                $this->save();
+            }
 	}
 
     /**

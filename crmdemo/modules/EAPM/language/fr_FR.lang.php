@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -53,6 +53,7 @@ $mod_strings = array (
   'LBL_API_OAUTHTOKEN' => 'Jetons OAuth',
   'LBL_AUTH_UNSUPPORTED' => "Cette méthode d'autorisation n'est pas priss en charge par l'application",
   'LBL_AUTH_ERROR' => 'La tentative d&#39;identification sur le lien externe a échoué.',
+  'LBL_CHANGE_APPLICATION_ERROR' => 'L&#39;utilisateur n&#39;est pas autorisé à modifier le nom de l&#39;application.',
   'LBL_VALIDATED' => 'Accès validé',
   'LBL_ACTIVE' => 'Actif',
   'LBL_OAUTH_NAME' => '%S',

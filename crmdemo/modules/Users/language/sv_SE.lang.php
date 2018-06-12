@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Nytt lösenord',
 	'LBL_NEW_PASSWORD1'					=> 'Lösenord',
 	'LBL_NEW_PASSWORD2'					=> 'Bekräfta lösenord',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Lösenordet är ändrat',
+    'LBL_NEW_USER_PASSWORD_1' => 'Lösenordet är ändrat',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'Ett email har skickats till användaren med ett systemgenererat lösenord.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Lösenordet skapades',
+    'LBL_NEW_USER_PASSWORD_3' => 'Lösenordet skapades',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Ny användare',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Ny användare [Alt+N]',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Offerter',
     'LBL_FORECASTS'                     => 'Prognoser',
     'LBL_WORKSHEETS'                    => 'Arbetsark',
+	'LBL_CALENDARS'                     => 'Kalendrar',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Förnya CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Byt till ljud',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Ändra till bild',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Kontorstelefon',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Publicera på min placering',
     'LBL_ICAL_PUB_URL'                  => 'iCal-integrations-URL',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Använd den här URLen för att prenumerera på Sugar kalender inuti iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Använd denna URL för att prenumerera på Sugar-kalendern om iCal stöds ' .
+                                           'program. Sugar-kalenderhändelser kan visas som skrivskyddade ' .
+                                           'i externa kalenderprogram och alla ändringar blir till evenemang ' .
+                                           '(möten, samtal etc.) kan endast göras i Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'Din query URL',
 	'LNK_NEW_USER'						=> 'Skapa ny användare',
 	'LNK_NEW_PORTAL_USER'				=> 'Skapa portal API användare',
@@ -451,8 +455,8 @@ $mod_strings = array (
 	'LBL_FORCE'							=> 'Tvinga Negativ',
 	'LBL_FORCE_DESC'					=> 'Vissa IMAP/POP3 servrar kräver speciella parametrar. Kryssa i för att tvinga negativ parameter vid uppkoppling (/notls)',
 	'LBL_FOUND_OPTIMUM_MSG'				=> '<br>Hittade optimala inställningar. Klicka på knappen nedan för att applicera dem på din Inkorg.',
-	'LBL_EMAIL_INBOUND_TITLE'			=> 'Inkommande epostinställningar',
-	'LBL_EMAIL_OUTBOUND_TITLE'			=> 'Utgående epostinställningar',
+	'LBL_EMAIL_INBOUND_TITLE'			=> 'Inkommande emailinställningar',
+	'LBL_EMAIL_OUTBOUND_TITLE'			=> 'Utgående emailinställningar',
 	'LBL_LOGIN'							=> 'Användarnamn',
 	'LBL_MAILBOX_DEFAULT'				=> 'INKORG',
 	'LBL_MAILBOX_SSL_DESC'				=> 'Använd SSL vid kommunikation. Om detta inte fungerar kontrollera din PHP installation inkluderad "--With-imap-ssl" i konfigurationen.',
@@ -496,32 +500,32 @@ $mod_strings = array (
 	'LBL_PDF_PAGE_FORMAT'  =>  'Sidformat',
 	'LBL_PDF_PAGE_FORMAT_TEXT'  =>  'Formatet som används av sidorna',
 	'LBL_PDF_PAGE_ORIENTATION'  =>  'Sid orientering',
-	'LBL_PDF_PAGE_ORIENTATION_TEXT'  =>  '-blank-',
+	'LBL_PDF_PAGE_ORIENTATION_TEXT'  =>  '',
 	'LBL_PDF_PAGE_ORIENTATION_P'  =>  'Porträtt',
 	'LBL_PDF_PAGE_ORIENTATION_L'  =>  'Landskap',
 	'LBL_PDF_MARGIN_HEADER'  =>  'Huvudmarginal',
-	'LBL_PDF_MARGIN_HEADER_TEXT'  =>  '-blank-',
+	'LBL_PDF_MARGIN_HEADER_TEXT'  =>  '',
 	'LBL_PDF_MARGIN_FOOTER'  =>  'Fotmarginal',
-	'LBL_PDF_MARGIN_FOOTER_TEXT'  =>  '-blank-',
+	'LBL_PDF_MARGIN_FOOTER_TEXT'  =>  '',
 	'LBL_PDF_MARGIN_TOP'  =>  'Topp marginal',
-	'LBL_PDF_MARGIN_TOP_TEXT'  =>  '-blank-',
+	'LBL_PDF_MARGIN_TOP_TEXT'  =>  '',
 	'LBL_PDF_MARGIN_BOTTOM'  =>  'Botten marginal',
-	'LBL_PDF_MARGIN_BOTTOM_TEXT'  =>  '-blank-',
+	'LBL_PDF_MARGIN_BOTTOM_TEXT'  =>  '',
 	'LBL_PDF_MARGIN_LEFT'  =>  'Vänster marginal',
-	'LBL_PDF_MARGIN_LEFT_TEXT'  =>  '-blank-',
+	'LBL_PDF_MARGIN_LEFT_TEXT'  =>  '',
 	'LBL_PDF_MARGIN_RIGHT'  =>  'Höger marginal',
-	'LBL_PDF_MARGIN_RIGHT_TEXT'  =>  '-blank-',
+	'LBL_PDF_MARGIN_RIGHT_TEXT'  =>  '',
 	'LBL_PDF_FONT_NAME_MAIN'  =>  'Typsnitt för sidhuvud och brödtext',
 	'LBL_PDF_FONT_NAME_MAIN_TEXT'  =>  'Den valda fonten kommer att läggas till sidhuvud och brödtext på PDF dokumentet',
 	'LBL_PDF_FONT_SIZE_MAIN'  =>  'Huvud font storlek',
-	'LBL_PDF_FONT_SIZE_MAIN_TEXT'  =>  '-blank-',
+	'LBL_PDF_FONT_SIZE_MAIN_TEXT'  =>  '',
 	'LBL_PDF_FONT_NAME_DATA'  =>  'Font för sidfoten',
 	'LBL_PDF_FONT_NAME_DATA_TEXT'  =>  'Det angivna typsnittet kommer att läggas till den text som visas i PDF dokument sidfoten.',
 	'LBL_PDF_FONT_SIZE_DATA'  =>  'Data font storlek',
-	'LBL_PDF_FONT_SIZE_DATA_TEXT'  =>  '-blank-',
+	'LBL_PDF_FONT_SIZE_DATA_TEXT'  =>  '',
 	'LBL_LAST_ADMIN_NOTICE' => 'Du har valt dig själv, du kan inte ange Användartyp eller statusen av dig själv.',
-	'LBL_SMTP_SERVER_HELP' => 'Denna SMTP Epost server kan användas för utgående epost. Ange ett användarnamn och lösenord för ditt epost konto ifall du vill använda den.',
-    'LBL_MISSING_DEFAULT_OUTBOUND_SMTP_SETTINGS' => 'Administratören har inte konfigurerat default utgående konto. Kan ej skicka test epost meddelande.',
+	'LBL_SMTP_SERVER_HELP' => 'Denna SMTP Emailserver kan användas för utgående email. Ange ett användarnamn och lösenord för ditt emailkonto ifall du vill använda den.',
+    'LBL_MISSING_DEFAULT_OUTBOUND_SMTP_SETTINGS' => 'Administratören har inte konfigurerat default utgående konto. Kan ej skicka testemail.',
     'LBL_MAIL_SMTPAUTH_REQ'				=> 'Använd SMTP autentifiering?',
 	'LBL_MAIL_SMTPPASS'					=> 'SMTP lösenord:',
 	'LBL_MAIL_SMTPPORT'					=> 'SMTP port',
@@ -529,11 +533,11 @@ $mod_strings = array (
 	'LBL_MAIL_SMTPUSER'					=> 'SMTP användarnamn',
 	'LBL_MAIL_SMTPTYPE'                => 'SMTP Server typ:',
 	'LBL_MAIL_SMTP_SETTINGS'           => 'SMTP Server specifikation',
-	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Välj din Epost leverantör',
+	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Välj din Emailleverantör:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Mail Lösenord',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Mail ID',
 	'LBL_GMAIL_SMTPPASS'					=> 'Gmail Lösenord',
-	'LBL_GMAIL_SMTPUSER'					=> 'Gmail Epost Adress',
+	'LBL_GMAIL_SMTPUSER'					=> 'Gmailadress:',
 	'LBL_EXCHANGE_SMTPPASS'					=> 'Exchange Lösenord',
 	'LBL_EXCHANGE_SMTPUSER'					=> 'Exchange Användarnamn',
 	'LBL_EXCHANGE_SMTPPORT'					=> 'Exchange Server port',
@@ -577,10 +581,10 @@ $mod_strings = array (
     'LBL_WIZARD_FINISH2DESC' => 'Gå direkt till applikationens Huvudsida',
     'LBL_WIZARD_PERSONALINFO' => 'Din information',
     'LBL_WIZARD_LOCALE' => 'Din plats',
-    'LBL_WIZARD_SMTP' => 'Ditt epostkonto',
+    'LBL_WIZARD_SMTP' => 'Ditt emailkonto',
     'LBL_WIZARD_PERSONALINFO_DESC' => 'Ange information om dig själv. Informationen du anger kommer att vara synlig för andra Sugar användare. Fält markerade med * är obligatoriska.',
     'LBL_WIZARD_LOCALE_DESC' => 'Ange din tidszon och hur du vill att datum, valutor och namn ska visas i Sugar.',
-    'LBL_WIZARD_SMTP_DESC' => 'Ange din epost användare och lösenord för default utgående epost server.',
+    'LBL_WIZARD_SMTP_DESC' => 'Ange din emailanvändare och lösenord för default utgående emailserver.',
 	'LBL_EAPM_SUBPANEL_TITLE' => 'Externa Konton',
 
 	'LBL_EDITLAYOUT' => 'Redigera layout' /*for 508 compliance fix*/,
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Användarnas rapporter',
     'LBL_CONTACTS_SYNC' => 'Kontakter',
-
+    'LBL_DETAIL' => 'Användarprofil',
 ); // END STRINGS DEFS
 
 ?>

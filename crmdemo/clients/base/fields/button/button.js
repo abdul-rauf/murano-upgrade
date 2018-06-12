@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -17,10 +17,11 @@
     tagName: "span",
     fieldTag: "a",
 
-    plugins: ['Tooltip', 'MetadataEventDriven'],
+    plugins: ['MetadataEventDriven'],
 
     initialize: function(options) {
         var self = this;
+        this.tabIndex = options.def.tabindex || 0;
 
         this.events = _.extend({}, {
             'click *' : 'preventClick'
@@ -43,8 +44,16 @@
             }
         });
     },
-    _render:function(){
+    _render:function() {
         this.fullRoute = _.isString(this.def.route) ? this.def.route : null;
+        this.ariaLabel = null;
+        if (!this.label || this.label.trim() === '') {
+            if (this.def.tooltip) {
+                this.ariaLabel = app.lang.get(this.def.tooltip, this.module);
+            } else {
+                this.ariaLabel = _.isString(this.def.icon) ? this.def.icon.replace(/^fa-(.*)/, '$1').replace(/-o(-)|-o$/, ' outline$1').replace('-', ' ') : null;
+            }
+        }
 
         app.view.Field.prototype._render.call(this);
     },
@@ -60,6 +69,7 @@
         } else {
             css_class = _.without(css_class, 'disabled');
         }
+        this.tabIndex = disable ? -1 : 0;
         this.def.css_class = _.unique(_.compact(css_class)).join(' ');
         app.view.Field.prototype.setDisabled.call(this, disable);
     },

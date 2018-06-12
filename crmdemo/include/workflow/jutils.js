@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -367,7 +367,9 @@ function submit_filtered(srcForm)
     document.body.appendChild(dstForm);
 
     var inputs = srcForm.getElementsByTagName("input");
-    inputs = inputs.concat(srcForm.getElementsByTagName("select"));
+    var selects = srcForm.getElementsByTagName("select");
+    // convert to arrays before concat
+    inputs = [].slice.call(inputs).concat([].slice.call(selects));
     for (var i = 0, length = inputs.length, srcInput, dstInput; i < length; i++) {
         srcInput = inputs[i];
         if (srcInput.value !== "") {

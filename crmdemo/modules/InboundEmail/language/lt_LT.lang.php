@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,7 +20,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 $mod_strings = array(
 
-	'LBL_ASSIGN_TEAM'		=> 'Priskirti komandai',
+	'LBL_ASSIGN_TEAM'		=> 'Priskirti komandoms',
 
 	'LBL_RE'					=> 'RE:',
 
@@ -80,7 +80,7 @@ $mod_strings = array(
 	'LBL_LIST_GLOBAL_PERSONAL'			=> 'Tipas',
 	'LBL_LIST_SERVER_URL'	=> 'Pašto serveris:',
 	'LBL_LIST_STATUS'		=> 'Statusas:',
-	'LBL_LOGIN'				=> 'Vartotojas vardas',
+	'LBL_LOGIN'				=> 'Vartotojo vardas',
 	'LBL_MAILBOX_DEFAULT'	=> 'Gauti laiškai',
 	'LBL_MAILBOX_SSL_DESC'	=> 'Jungiantis naudokite SSL. Jei neveikia patikrinkite ar jūsų PHP instaliacija turi nustatymuose  "--with-imap-ssl".',
 	'LBL_MAILBOX_SSL'		=> 'Naudoti SSL',

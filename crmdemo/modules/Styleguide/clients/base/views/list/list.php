@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,15 +11,12 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['Styleguide']['base']['view']['list'] = array(
-    'panels' =>
-    array(
-        0 =>
+    'panels' => array(
         array(
             'label' => 'LBL_PANEL_1',
             'fields' => array(
                 array(
                     'name' => 'full_name',
-                    'type' => 'fullname',
                     'fields' => array(
                         'salutation',
                         'first_name',
@@ -29,18 +26,16 @@ $viewdefs['Styleguide']['base']['view']['list'] = array(
                     'label' => 'fullname',
                     'enabled' => true,
                     'default' => true,
+                    'sortable' => false,
                 ),
                 array(
                     'name' => 'title',
-                    'label' => 'base',
+                    'label' => 'text',
+                    'sortable' => false,
                 ),
                 array(
                     'name' => 'do_not_call',
                     'label' => 'bool',
-                ),
-                array(
-                    'name' => 'parent_name',
-                    'label' => 'parent',
                     'sortable' => false,
                 ),
                 array(
@@ -56,15 +51,16 @@ $viewdefs['Styleguide']['base']['view']['list'] = array(
                     'sortable' => false,
                 ),
                 array(
-                    'name' => 'filename',
-                    'label' => 'file',
-                ),
-                array(
                     'name' => 'list_price',
                     'label' => 'currency',
                 ),
                 array(
-                    'name' => 'date_entered',
+                    'name' => 'birthdate',
+                    'label' => 'date',
+                    'sortable' => false,
+                ),
+                array(
+                    'name' => 'date_end',
                     'label' => 'datetimecombo',
                     'sortable' => false,
                 ),

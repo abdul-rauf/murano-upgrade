@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -36,12 +36,12 @@ $mod_strings = array(
     'LBL_DESCRIPTION_INFORMATION'       => 'Informacioni përshkrues',
     'LBL_DESCRIPTION'                   => 'Përshkrim',
     'LBL_COLON'                         => ':',
-    'LNK_NEW_CALL'                      => 'thirja identifikuese',
+    'LNK_NEW_CALL'                      => 'Thirrja identifikuese',
     'LNK_NEW_MEETING'                   => 'Orari i mbledhjes',
     'LNK_NEW_TASK'                      => 'Krijo detyrë',
     'LNK_NEW_NOTE'                      => 'Krijo shënim ose bashkangjit dokument',
     'LNK_NEW_EMAIL'                     => 'Krijo email të arkivuar',
-    'LNK_CALL_LIST'                     => 'Shiko thirjet',
+    'LNK_CALL_LIST'                     => 'Shiko thirrjet',
     'LNK_MEETING_LIST'                  => 'shiko mbledhjet',
     'LNK_TASK_LIST'                     => 'Shiko detyrat',
     'LNK_NOTE_LIST'                     => 'Shiko shënimet',
@@ -64,9 +64,9 @@ $mod_strings = array(
     'LBL_SCHEDULE_MEETING_BUTTON_TITLE' => 'Cakto mbledhje',
     'LBL_SCHEDULE_MEETING_BUTTON_KEY'   => 'M',
     'LBL_SCHEDULE_MEETING_BUTTON_LABEL' => 'Cakto mbledhje',
-    'LBL_SCHEDULE_CALL_BUTTON_TITLE'    => 'Thirje identifikuese',
+    'LBL_SCHEDULE_CALL_BUTTON_TITLE'    => 'Thirrje identifikuese',
     'LBL_SCHEDULE_CALL_BUTTON_KEY'      => 'C',
-    'LBL_SCHEDULE_CALL_BUTTON_LABEL'    => 'Thirje identifikuese',
+    'LBL_SCHEDULE_CALL_BUTTON_LABEL'    => 'Thirrje identifikuese',
     'LBL_NEW_NOTE_BUTTON_TITLE'         => 'Krijo shënim ose bashkëngjitje',
     'LBL_NEW_NOTE_BUTTON_KEY'           => 'T',
     'LBL_NEW_NOTE_BUTTON_LABEL'         => 'Krijo shënim ose bashkëngjitje',
@@ -86,7 +86,7 @@ $mod_strings = array(
             'last this_month' => 'Në fund të këtij muaji<br />Këtë muaj',
             'last next_month' => 'Muajin e ardhshëm',
         ),
-    'LNK_IMPORT_CALLS'                  => 'Thirje të rëndësishme',
+    'LNK_IMPORT_CALLS'                  => 'Thirrje të rëndësishme',
     'LNK_IMPORT_MEETINGS'               => 'Mbledhje të rëndësishme',
     'LNK_IMPORT_TASKS'                  => 'Detyra të rëndësishme',
     'LNK_IMPORT_NOTES'                  => 'Shënime të rëndësishme',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -111,17 +111,17 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} viene utilizzato per tracciare e gestire i problemi relativi al prodotto o servizio riportati dal cliente alla tua azienda. I {{plural_module_name}} sono tipicamente relazionati a record di {{accounts_singular_module}} e molteplici {{plural_module_name}} possono essere associate ad una singola {{accounts_singular_module}}. Esistono diversi modi per creare {{plural_module_name}} in Sugar come attraverso il modulo {{plural_module_name}}, importando {{plural_module_name}}, o convertendo da email. Una volta che {{module_name}} è creato, puoi visualizzare e modificare informazioni pertinenti il {{module_name}} attraverso la vista elenco delle {{module_name}}.  Ogni {{module_name}} potrebbe essere relazionata ad un record di Sugar come {{calls_module}}, {{contacts_module}}, {{bugs_module}} e molti altri.',
+    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} è utilizzato per tenere traccia e gestire i problemi legati ai prodotti o al servizio, che sono riscontrati dai clienti. I {{plural_module_name}} sono tipicamente relazionati a un record {{accounts_singular_module}} e a un singolo {{accounts_singular_module}}, è possibile associare molteplici {{plural_module_name}}. Esistono diversi modi per creare {{plural_module_name}} in Sugar, ad esempio tramite il modulo {{plural_module_name}}, l&#39;importazione di {{plural_module_name}} o la conversione da email. Dopo aver creato {{module_name}}, è possibile visualizzare e modificare le informazioni pertinenti tramite la vista record del modulo stesso. Ciascun record di {{module_name}} può essere poi correlato a diversi record di Sugar quali, a titolo esemplificativo {{calls_module}}, {{contacts_module}}, {{bugs_module}} ecc.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} viene utilizzato per tracciare e gestire i problemi relativi al prodotto o servizio riportati dal cliente alla tua azienda. - Modificare i campi di questi records cliccando il singolo campo o il pulsante Modifica. - Visualizza o modifica i link agli altri records nei sottopannelli agendo sul pulsante "Visualizza Dati" in basso a sinistra. - Creare e visualizzare i commenti degli utenti e la cronologia delle modifiche dei records nel modulo {{activitystream_singular_module}} agendo sul pulsante "Activity Stream" in basso a sinistra. - Seguire o impostare come preferito questo record usando le icone alla destra del nome del record. - Azioni aggiuntive sono disponibili nel menù a tendina delle Azioni alla destra del pulsante Modifica.',
+    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} è utilizzato per tenere traccia e gestire i problemi legati ai prodotti o al servizio, che sono riscontrati dai clienti. - Modificare i campi di questo record facendo clic su ciascuno di essi o sul pulsante Modifica. - Visualizzare o modificare i collegamenti agli altri record nei sottopannelli spostando la visualizzazione del riquadro in basso a sinistra su "Vista dati". - Creare e visualizzare i commenti degli utenti e registrare la cronologia delle modifiche nel {{activitystream_singular_module}} spostando la visualizzazione del riquadro in basso a sinistra su "Activity Stream". - Seguire o impostare come preferito questo record usando le icone alla destra del nome del record. - Nel menu a discesa Azioni, alla destra del pulsante Modifica, sono disponibili azioni aggiuntive.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Il modulo {{plural_module_name}} viene utilizzato per tracciare e gestire i problemi relativi al prodotto o servizio riportati dal cliente alla tua azienda.
+    'LBL_HELP_CREATE' => 'Il modulo {{plural_module_name}} è utilizzato per tenere traccia e gestire i problemi legati ai prodotti o al servizio, che sono riscontrati dai clienti.
 
 Per creare un {{module_name}}:
 1. Fornire i valori desiderati per i campi.
-- I campi contrassegnati come "Obbligatorio" devono essere compilati prima del salvataggio.
-- Cliccare "Mostra più" per visualizzare ulteriori campi se necessario.
-2. Cliccare "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
+- I campi contrassegnati con "Richiesto" devono essere compilati prima del salvataggio.
+- Fare clic su "Mostra altro" per visualizzare ulteriori campi, se necessario.
+2. Fare clic su "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
 );

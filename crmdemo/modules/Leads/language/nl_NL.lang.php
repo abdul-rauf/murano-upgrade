@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -282,7 +282,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'De {{plural_module_name}} module bestaat uit individuele prospects die geïnteresseerd kunnen zijn in een product of dienst die uw organisatie levert. Als de {{module_name}} is gekwalificeerd als een verkoop {{opportunities_singular_module}}, kunnen {{plural_module_name}} geconverteerd worden naar {{contacts_module}}, {{opportunities_module}}, en {{accounts_module}}. Er zijn meerdere manieren waarop een {{plural_module_name}} aangemaakt kan worden in Sugar, zoals bijvoorbeeld via de {{plural_module_name}} module, kopiëren, importeren van {{plural_module_name}}, etc. Als een {{module_name}} record is aangemaakt, kunt u deze bekijken en de gegevens behorende bij deze {{module_name}} aanpassen via de {{plural_module_name}} record view.',
+    'LBL_HELP_RECORDS' => 'De {{plural_module_name}} module bestaat uit individuele prospects die geïnteresseerd kunnen zijn in een product of dienst die uw organisatie levert. Als de {{module_name}} is gekwalificeerd als een verkoop {{opportunities_singular_module}}, kunnen {{plural_module_name}} geconverteerd worden naar {{contacts_module}}, {{opportunities_module}}, en {{accounts_module}}. Er zijn meerdere manieren waarop een {{module_name}} aangemaakt kan worden in Sugar, zoals bijvoorbeeld via de {{plural_module_name}} module, kopiëren, importeren van {{plural_module_name}}, etc. Als een {{module_name}} record is aangemaakt, kunt u deze bekijken en de gegevens behorende bij deze {{module_name}} aanpassen via de {{plural_module_name}} record view.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'De {{plural_module_name}} module bestaat uit individuele prospects die geïnteresseerd kunnen zijn in een product of dienst die uw organisatie levert.

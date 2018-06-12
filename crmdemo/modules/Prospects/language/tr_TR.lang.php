@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -62,11 +62,11 @@ $mod_strings = array (
   'LBL_OTHER_PHONE' => 'Diğer Telefon:',
   'LBL_FAX_PHONE' => 'Faks:',
   'LBL_STREET' => 'Sokak',
-  'LBL_PRIMARY_ADDRESS_STREET' => 'Asıl Adres Sokak:',
-  'LBL_PRIMARY_ADDRESS_CITY' => 'Asıl Adres Şehir:',
-  'LBL_PRIMARY_ADDRESS_COUNTRY' => 'Asıl Adres Ülke:',
-  'LBL_PRIMARY_ADDRESS_STATE' => 'Asıl Adres Eyalet:',
-  'LBL_PRIMARY_ADDRESS_POSTALCODE' => 'Asıl Adres Posta Kodu:',
+  'LBL_PRIMARY_ADDRESS_STREET' => 'Birincil Adres Sokak:',
+  'LBL_PRIMARY_ADDRESS_CITY' => 'Birincil Adres Şehir:',
+  'LBL_PRIMARY_ADDRESS_COUNTRY' => 'Birincil Adres Ülke:',
+  'LBL_PRIMARY_ADDRESS_STATE' => 'Birincil Adres Eyalet:',
+  'LBL_PRIMARY_ADDRESS_POSTALCODE' => 'Birincil Adres Posta Kodu:',
   'LBL_ALT_ADDRESS_STREET' => 'Alternatif Adres Sokak:',
   'LBL_ALT_ADDRESS_CITY' => 'Alternatif Adres Şehir:',
   'LBL_ALT_ADDRESS_COUNTRY' => 'Alternatif Adres Ülke:',
@@ -82,7 +82,7 @@ $mod_strings = array (
   'LBL_ASSISTANT_PHONE' => 'Asistan Telefonu:',
   'LBL_DO_NOT_CALL' => 'Tel. İle Aramayın:',
   'LBL_EMAIL_OPT_OUT' => 'Liste Dışı E-Posta:',
-  'LBL_PRIMARY_ADDRESS' => 'Asıl Adres:',
+  'LBL_PRIMARY_ADDRESS' => 'Birincil Adres:',
   'LBL_ALTERNATE_ADDRESS' => 'Diğer Adres:',
   'LBL_ANY_ADDRESS' => 'Adres:',
   'LBL_CITY' => 'Şehir:',
@@ -115,8 +115,8 @@ $mod_strings = array (
   'NTC_REMOVE_CONFIRMATION' => 'Talepten bu kontağı silmek istediğinizden emin misiniz?',
   'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Doğrudan raporlanan kişi olarak bu kaydı silmek istediğinizden emin misiniz?',
   'ERR_DELETE_RECORD' => 'Kontağı silmek için bir kayıt no&#39;su belirtilmesi zorunludur.',
-  'NTC_COPY_PRIMARY_ADDRESS' => 'Asıl Adresi Alternatif Adrese Kopyala',
-  'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternatif Adresi Asıl Adrese Kopyala',
+  'NTC_COPY_PRIMARY_ADDRESS' => 'Birincil adresi alternatif adrese kopyala',
+  'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternatif adresi birincil adrese kopyala',
   'LBL_SALUTATION' => 'Hitap',
   'LBL_SAVE_PROSPECT' => 'Hedef kaydet',
   'LBL_CREATED_OPPORTUNITY' =>'Yeni bir fırsat oluşturuldu',

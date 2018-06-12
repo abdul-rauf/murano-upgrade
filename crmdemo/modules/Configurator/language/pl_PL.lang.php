@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -42,23 +42,23 @@ $mod_strings = array (
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Ustawienia systemowe',
 	'LBL_ENABLE_MAILMERGE' => 'Włączyć scalanie poczty?',
 	'LBL_LOGVIEW' => 'Przeglądaj dziennik logów',
-	'LBL_MAIL_SMTPAUTH_REQ'				=> 'Użyć uwierzytelnienia SMTP?',
+	'LBL_MAIL_SMTPAUTH_REQ'				=> 'Użyć uwierzytelniania SMTP?',
 	'LBL_MAIL_SMTPPASS'					=> 'Hasło SMTP:',
 	'LBL_MAIL_SMTPPORT'					=> 'Port SMTP:',
 	'LBL_MAIL_SMTPSERVER'				=> 'Serwer SMTP:',
 	'LBL_MAIL_SMTPUSER'					=> 'Nazwa użytkownika SMTP:',
 	'LBL_MAIL_SMTPTYPE'                => 'Typ serwera SMTP:',
-	'LBL_MAIL_SMTP_SETTINGS'           => 'Ustawienia serwera SMTP',
+	'LBL_MAIL_SMTP_SETTINGS'           => 'Specyfikacja serwera SMTP',
 	'LBL_CHOOSE_EMAIL_PROVIDER'        => 'Wybierz dostawcę usług e-mail:',
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Hasło poczty Yahoo!:',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'ID poczty Yahoo!:',
-	'LBL_GMAIL_SMTPPASS'					=> 'Hasło poczty Gmail:',
+	'LBL_GMAIL_SMTPPASS'					=> 'Hasło Gmail:',
 	'LBL_GMAIL_SMTPUSER'					=> 'Adres e-mail poczty Gmail:',
-	'LBL_EXCHANGE_SMTPPASS'					=> 'Hasło poczty Exchange:',
+	'LBL_EXCHANGE_SMTPPASS'					=> 'Hasło Exchange:',
 	'LBL_EXCHANGE_SMTPUSER'					=> 'Nazwa użytkownika poczty Exchange:',
-	'LBL_EXCHANGE_SMTPPORT'					=> 'Port serwera poczty Exchange:',
-	'LBL_EXCHANGE_SMTPSERVER'				=> 'Serwer poczty Exchange:',
-    'LBL_ALLOW_DEFAULT_SELECTION'           => 'Zezwól użytkownikom na używanie tego konta do korespondencji wychodzącej:',
+	'LBL_EXCHANGE_SMTPPORT'					=> 'Port serwera Exchange:',
+	'LBL_EXCHANGE_SMTPSERVER'				=> 'Serwer Exchange:',
+    'LBL_ALLOW_DEFAULT_SELECTION'           => 'Zezwalaj użytkownikom na używanie tego konta do poczty wychodzącej:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Kiedy ta opcja jest zaznaczona, wszyscy użytkownicy będą mogli wysyłać wiadomości e-mail z tego samego konta używanego do wysyłania powiadomień i przypomnień. Jeśli ta opcja nie jest zaznaczona, użytkownicy nadal będą mogli używać serwera poczty wychodzącej po podaniu ich własnych informacji o koncie.',
 	'LBL_MAILMERGE_DESC' => 'Ta flaga powinna być zaznaczona tylko, jeśli posiadasz wtyczkę Sugar dla Microsoft&reg; Word&reg;.',
 	'LBL_MAILMERGE' => 'Scalanie poczty',
@@ -70,12 +70,12 @@ $mod_strings = array (
 	'LBL_MODULE_NAME_SINGULAR' => 'Ustawienie systemowe',
     'LBL_MODULE_ID'  => 'Konfigurator',
 	'LBL_MODULE_TITLE'=>'Interfejs użytkownika',
-	'LBL_NOTIFY_FROMADDRESS' => 'Adres Od:',
-	'LBL_NOTIFY_SUBJECT' => 'Temat:',
+	'LBL_NOTIFY_FROMADDRESS' => 'Adres nadawcy:',
+	'LBL_NOTIFY_SUBJECT' => 'Temat wiadomości:',
 	'LBL_PORTAL_ON_DESC' => 'Umożliwia użytkownikom zarządzanie informacjami o użytkownikach portalu poprzez rekord kontaktu. Użytkownicy portalu mają dostęp do zadań, błędów, artykułów bazy wiedzy i innych danych poprzez aplikację portalu Sugar.',
 	'LBL_PORTAL_ON' => 'Włącz zarządzanie użytkownikami portalu',
 	'LBL_PORTAL_TITLE' => 'Portal samoobsługowy klientów',
-	'LBL_PROXY_AUTH'=>'Uwierzytelnienie?',
+	'LBL_PROXY_AUTH'=>'Uwierzytelnianie?',
 	'LBL_PROXY_HOST'=>'Host serwera Proxy',
 	'LBL_PROXY_ON_DESC'=>'Skonfiguruj adres serwera proxy i ustawienia autoryzacji',
 	'LBL_PROXY_ON'=>'Użyć serwera proxy?',
@@ -84,7 +84,7 @@ $mod_strings = array (
 	'LBL_PROXY_TITLE'=>'Ustawienia proxy',
 	'LBL_PROXY_USERNAME'=>'Nazwa użytkownika',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Przywróć',
-	'LBL_SYSTEM_SETTINGS' => 'Ustawienia systemu',
+	'LBL_SYSTEM_SETTINGS' => 'Ustawienia systemowe',
 	'LBL_SKYPEOUT_ON_DESC' => 'Funkcja umożliwia połączenie z wybranym numerem telefonu za pomocą SkypeOut&reg;. Aby skorzystać z tej funkcji, numery muszą mieć prawidłowy format: „+”  „Kod Kraju” „Numer”, np. +1 (555) 555-1234.',
 	'LBL_SKYPEOUT_ON' => 'Włącz integrację ze SkypeOut&reg;',
 	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
@@ -93,8 +93,8 @@ $mod_strings = array (
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; do zgłoszenia',
     'LBL_PREVIEW_SETTINGS' => 'Ustawienia okienka podglądu',
     'LBL_PREVIEW_EDIT' => 'Włącz edycję w okienku podglądu',
-    'LBL_PREVIEW_EDIT_HELP' => 'Zezwala użytkowniom na edycję pól Podglądu',
-	'LBL_USE_REAL_NAMES'	=> 'Pokaż pełną nazwę użytkownika',
+    'LBL_PREVIEW_EDIT_HELP' => 'Zezwala użytkownikom na edycję pól Podglądu',
+	'LBL_USE_REAL_NAMES'	=> 'Wyświetlaj pełne nazwy',
 	'LBL_USE_REAL_NAMES_DESC'			=> 'Wyświetl pełne imiona i nazwiska użytkowników zamiast nazw użytkowników w polach przydzielenia.',
     'LBL_DISALBE_CONVERT_LEAD' => 'Wyłącz opcję przekształcania namiaru dla namiarów już przekształconych',
     'LBL_DISALBE_CONVERT_LEAD_DESC' => 'Jeśli namiar został już przekształcony, włączenie tej opcji usunie czynność przekształcania namiaru.',
@@ -117,11 +117,11 @@ $mod_strings = array (
     'CURRENT_LOGO_HELP'=>'To logo jest wyświetlane w lewym rogu stopki aplikacji Sugar.',
     'NEW_LOGO'=>'Wybierz logo:',
     'NEW_LOGO_HELP' => 'Dopuszczalny format logo to .png lub .jpg. Maksymalna wysokość to 24 pikseli, a maksymalna szerokość to 180 pikseli. Obraz przekraczający te rozmiary zostanie zeskalowany do maksymalnych wymiarów.',
-    'NEW_LOGO_HELP_NO_SPACE' => 'Obraz powinien być w formacie .jpg lub .png. Maksymalna wysokość to 24 pikseli, a szerokość to 450 pikseli. Każdy obraz przekraczający którykolwiek z wymiarów zostanie zeskalowany do maksymalnych możliwych rozmiarów. Nazwa pliku nie może zawierać spacji.',
+    'NEW_LOGO_HELP_NO_SPACE' => 'Obraz powinien być w formacie .jpg lub .png. Maksymalna wysokość to 24 piksele, a szerokość to 450 pikseli. Każdy obraz przekraczający którykolwiek z wymiarów zostanie zeskalowany do maksymalnych możliwych rozmiarów. Nazwa pliku nie może zawierać spacji.',
     'NEW_QUOTE_LOGO'=>'Załaduj nowe logo oferty',
     'NEW_QUOTE_LOGO_HELP'=>'Wymagany format pliku to .jpg.<BR>Rekomendowany rozmiar to 867x74 pikseli.',
     'QUOTES_CURRENT_LOGO'=>'Logo ofert',
-	'SLOW_QUERY_TIME_MSEC'=>'Próg czasu wykonywania określający wolne zapytania (msec)',
+	'SLOW_QUERY_TIME_MSEC'=>'Próg czasu wykonywania określający wolne zapytania (ms)',
 	'STACK_TRACE_ERRORS'=>'Wyświetlaj stos śladów błędów',
 	'UPLOAD_MAX_SIZE'=>'Maksymalna wielkość przesyłania',
 	'VERIFY_CLIENT_IP'=>'Sprawdzaj numer IP użytkownika',
@@ -139,6 +139,7 @@ $mod_strings = array (
     'LBL_OC_STATUS_DESC' => 'Zaznacz to pole, jeśli użytkownicy mają mieć dostęp do klienta offline. Możesz skonfigurować dostęp indywidualnie dla każdego z użytkowników.',
     'SESSION_TIMEOUT' => 'Wygaśnięcie sesji portalu',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Wygaśnięcie sesji Portalu występuje w starszych wersjach Portalu Sugar dostępnych w wersjach 6.5 i wcześniejszych.',
+    'UPLOAD_MAXSIZE_UNITS' => 'bajtów',
     'SESSION_TIMEOUT_UNITS' => 'sekundy',
     'LBL_LDAP_TITLE'=>'Obsługa uwierzytelniania LDAP',
     'LBL_LDAP_ENABLE'=>'Włącz uwierzytelnianie LDAP',
@@ -147,11 +148,11 @@ $mod_strings = array (
     'LBL_LDAP_ADMIN_USER'=> 'Nazwa użytkownika:',
     'LBL_LDAP_ADMIN_USER_DESC'=>'Stosowana w celu wyszukiwania użytkowników Sugar. [Może być konieczna pełna kwalifikacja] Możliwe jest utworzenie powiązania anonimowego.',
     'LBL_LDAP_ADMIN_PASSWORD'=> 'Hasło:',
-	'LBL_LDAP_AUTHENTICATION'=> 'Uwierzytelnienie:',
+	'LBL_LDAP_AUTHENTICATION'=> 'Uwierzytelnianie:',
 	'LBL_LDAP_AUTHENTICATION_DESC'=>'Powiąż z serwerem LDAP, używając określonych informacji o użytkowniku',
     'LBL_LDAP_AUTO_CREATE_USERS'=>'Automatyczne tworzenie użytkowników:',
-    'LBL_LDAP_USER_DN'=>'Użytkownik DN:',
-	'LBL_LDAP_GROUP_DN'=>'Grupa DN:',
+    'LBL_LDAP_USER_DN'=>'DN użytkownika:',
+	'LBL_LDAP_GROUP_DN'=>'DN grupy:',
 	'LBL_LDAP_GROUP_DN_DESC'=>'Przykład: <em>ou=groups,dc=example,dc=com</em>',
 	'LBL_LDAP_USER_FILTER'=>'Filtr użytkownika:',
 	'LBL_LDAP_GROUP_MEMBERSHIP'=>'Przynależność do grupy:',
@@ -180,7 +181,7 @@ $mod_strings = array (
     'LDAP_ENC_KEY_NO_FUNC_DESC' => 'Rozszerzenie php_mcrypt musi być włączone w pliku php.ini.',
     'LBL_ALL' => 'Wszystko',
     'LBL_MARK_POINT' => 'Punkt zaznaczenia',
-    'LBL_NEXT_' => 'Następny>>',
+    'LBL_NEXT_' => 'Dalej >>',
     'LBL_REFRESH_FROM_MARK' => 'Odśwież od punktu zaznaczenia',
     'LBL_SEARCH' => 'Wyszukiwanie:',
     'LBL_REG_EXP' => 'Zarejestrowanie wygasa:',
@@ -226,7 +227,7 @@ $mod_strings = array (
     'PDF_HEADER_LOGO_INFO' => 'Ten obraz jest wyświetlany w domyślnym nagłówku w ofertach PDF.',
 
     'PDF_NEW_HEADER_LOGO' => 'Wybierz nowy obraz dla ofert',
-    'PDF_NEW_HEADER_LOGO_INFO' => 'Plik może mieć format .jpg lub .png. (Tylko .jpg dla EZPDF)<BR>Zalecany rozmiar to 867x74 pikseli.',
+    'PDF_NEW_HEADER_LOGO_INFO' => 'Plik może mieć format .jpg lub .png. (Tylko .jpg dla EZPDF)<BR>Zalecany rozmiar to 867x60 pikseli.',
 
     'PDF_HEADER_LOGO_WIDTH' => 'Szerokość obrazu dla oferty',
     'PDF_HEADER_LOGO_WIDTH_INFO' => 'Zmień skalę dla załadowanego obrazu wyświetlanego w dokumentach PDF oferty. (tylko TCPDF)',
@@ -235,7 +236,7 @@ $mod_strings = array (
     'PDF_SMALL_HEADER_LOGO_INFO' => 'Ten obraz jest wyświetlany w nagłówku stron dokumentów PDF.',
 
     'PDF_NEW_SMALL_HEADER_LOGO' => 'Wybierz nowy obraz',
-    'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Wybierz plik do zastąpienia bieżącego pliku. Plik może mieć format .jpg lub .png (yylko .jpg dla EZPDF). Zalecany rozmiar to 212x40 px.',
+    'PDF_NEW_SMALL_HEADER_LOGO_INFO' => 'Wybierz plik do zastąpienia bieżącego pliku. Plik może mieć format .jpg lub .png (tylko .jpg dla EZPDF). Zalecany rozmiar to 212x40 px.',
 
     'PDF_SMALL_HEADER_LOGO_WIDTH' => 'Szerokość obrazu dla raportu',
     'PDF_SMALL_HEADER_LOGO_WIDTH_INFO' => 'Zmień skalę dla załadowanego obrazu wyświetlanego w dokumentach PDF raportu. (tylko TCPDF)',
@@ -260,7 +261,7 @@ $mod_strings = array (
     'PDF_KEYWORDS_INFO' => 'Powiąż słowa kluczowe z dokumentem, zazwyczaj w formie „słowo kluczowe1 słowo kluczowe2...”',
 
     'PDF_COMPRESSION' => 'Kompresja',
-    'PDF_COMPRESSION_INFO' => 'Aktywuje/deaktywuje kompresję strony. <br>W przypadku aktywacji, wewnętrzna reprezentacja każdej strony jest skompresowana, co prowadzi do współczynnika konwersji ok. 2 w wynikowym dokumencie.',
+    'PDF_COMPRESSION_INFO' => 'Aktywuje/dezaktywuje kompresję strony. <br>W przypadku aktywacji, wewnętrzna reprezentacja każdej strony jest skompresowana, co prowadzi do współczynnika konwersji ok. 2 w wynikowym dokumencie.',
 
     'PDF_JPEG_QUALITY' => 'Jakość JPEG (1-100)',
     'PDF_JPEG_QUALITY_INFO' => 'Ustaw jakość kompresji JPEG (1-100)',
@@ -275,7 +276,7 @@ $mod_strings = array (
     'PDF_USER_PASSWORD_INFO' => 'W przypadku braku hasła dokument będzie dostępny dla innych użytkowników. <br>Jeżeli podasz hasło użytkownika, przeglądarka PDF będzie go wymagać przed wyświetleniem. <br>Jeśli hasło nadrzędne jest inne niż hasło użytkownika, można go użyć w celu uzyskania pełnego dostępu.',
 
     'PDF_OWNER_PASSWORD' => 'Hasło właściciela',
-    'PDF_OWNER_PASSWORD_INFO' => 'W przypadku braku hasła dokument będzie dostępny dla innych użytkowników. <br>Jeżeli podasz hasło użytkownika, przeglądarka PDF będzie je wymagać przed wyświetleniem. <br>Jeśli hasło nadrzędne jest inne niż hasło użytkownika, można go użyć w celu uzyskania pełnego dostępu.',
+    'PDF_OWNER_PASSWORD_INFO' => 'W przypadku braku hasła dokument będzie dostępny dla innych użytkowników. <br>Jeżeli podasz hasło użytkownika, przeglądarka PDF będzie go wymagać przed wyświetleniem. <br>Jeśli hasło nadrzędne jest inne niż hasło użytkownika, można go użyć w celu uzyskania pełnego dostępu.',
 
     'PDF_ACL_ACCESS' => 'Kontrola dostępu',
     'PDF_ACL_ACCESS_INFO' => 'Domyśla kontrola dostępu generowania dokumentów PDF.',
@@ -293,7 +294,7 @@ $mod_strings = array (
     'HEAD_MAGNIFICATION_INFO' => 'Współczynnik powiększenia tytułów.',
 
     'PDF_IMAGE_SCALE_RATIO' => 'Współczynnik skalowalności obrazu',
-    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Współczynnik skalowalności obrazu',
+    'PDF_IMAGE_SCALE_RATIO_INFO' => 'Współczynnik stosowany do skalowania obrazu',
 
     'PDF_UNIT' => 'Jednostka',
     'PDF_UNIT_INFO' => 'Jednostka miary dokumentu',
@@ -303,7 +304,7 @@ $mod_strings = array (
 
 
     'LBL_FONTMANAGER_BUTTON' => 'Menedżer czcionek PDF',
-    'LBL_FONTMANAGER_TITLE' => 'Menedżer czcionek Manager',
+    'LBL_FONTMANAGER_TITLE' => 'Menedżer czcionek PDF',
     'LBL_FONT_BOLD' => 'Pogrubienie',
     'LBL_FONT_ITALIC' => 'Kursywa',
     'LBL_FONT_BOLDITALIC' => 'Pogrubienie/Kursywa',
@@ -322,31 +323,31 @@ $mod_strings = array (
     'LBL_FONT_LIST_STYLE_INFO' => 'Styl czcionki',
     'LBL_FONT_LIST_ENC' => 'Kodowanie',
     'LBL_FONT_LIST_EMBEDDED' => 'Wbudowana',
-    'LBL_FONT_LIST_EMBEDDED_INFO' => 'Zaznacz, jeżeli czcionka ma być wbudowana w plik',
+    'LBL_FONT_LIST_EMBEDDED_INFO' => 'Zaznacz, jeżeli czcionka ma być osadzona w pliku',
     'LBL_FONT_LIST_CIDINFO' => 'Informacje CID',
-    'LBL_FONT_LIST_CIDINFO_INFO' => "Examples :".
+    'LBL_FONT_LIST_CIDINFO_INFO' => "Przykłady:".
 "<ul><li>".
-"Chinese Traditional :<br>".
-"<pre>\$enc=&#39;UniCNS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;CNS1&#39;,&#39;Supplement&#39;=>0);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ac15.php&#39;);</pre>".
+"Chiński tradycyjny:<br>".
+"<pre>\\$enc=\\'UniCNS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'CNS1\\',\\'Supplement\\'=>0);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ac15.php\\');</pre>".
 "</li><li>".
-"Chinese Simplified :<br>".
-"<pre>\$enc=&#39;UniGB-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;GB1&#39;,&#39;Supplement&#39;=>2);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ag15.php&#39;);</pre>".
+"Chiński uproszczony:<br>".
+"<pre>\\$enc=\\'UniGB-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'GB1\\',\\'Supplement\\'=>2);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ag15.php\\');</pre>".
 "</li><li>".
-"Korean :<br>".
-"<pre>\$enc=&#39;UniKS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;Korea1&#39;,&#39;Supplement&#39;=>0);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ak12.php&#39;);</pre>".
+"Koreański:<br>".
+"<pre>\\$enc=\\'UniKS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'Korea1\\',\\'Supplement\\'=>0);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ak12.php\\');</pre>".
 "</li><li>".
-"Japanese :<br>".
-"<pre>\$enc=&#39;UniJIS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;Japan1&#39;,&#39;Supplement&#39;=>5);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_aj16.php&#39;);</pre>".
+"Japoński:<br>".
+"<pre>\\$enc=\\'UniJIS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'Japan1\\',\\'Supplement\\'=>5);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_aj16.php\\');</pre>".
 "</li></ul>".
-"More help : www.tcpdf.org",
+"Więcej pomocnych informacji: www.tcpdf.org",
     'LBL_FONT_LIST_FILESIZE' => 'Rozmiar czcionki (KB)',
     'LBL_ADD_FONT' => 'Dodaj czcionkę',
     'LBL_BACK' => 'Wstecz',
@@ -354,7 +355,7 @@ $mod_strings = array (
     'LBL_JS_CONFIRM_DELETE_FONT' => 'Czy na pewno chcesz usunąć tę czcionkę?',
 
     'LBL_ADDFONT_TITLE' => 'Dodaj czcionkę PDF',
-    'LBL_PDF_PATCH' => 'Ścieżka',
+    'LBL_PDF_PATCH' => 'Poprawka',
     'LBL_PDF_PATCH_INFO' => 'Własne modyfikacje kodowania. Zapisz w tablicy PDF.<br>Przykład:<br>ISO-8859-1 nie zawiera symbolu euro. Aby go dodać jako pozycję 164, wpisz „array(164=>\\\'Euro\\\')”.',
     'LBL_PDF_ENCODING_TABLE' => 'Tabela kodowania',
     'LBL_PDF_ENCODING_TABLE_INFO' => 'Nazwa tabeli kodowania.<br>Opcja ta jest ignorowana dla TrueType Unicode, OpenType Unicode i symboli.<br>Kodowanie określa powiązania pomiędzy kodem (od 0 do 255) a znakiem zawartym w czcionce.<br>Pierwsze 128 odpowiadają kodowi ASCII.',
@@ -366,7 +367,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'Złe rozszerzenie pliku.',
     'LBL_PDF_INSTRUCTIONS' => 'Instrukcje',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+Czcionki obsługiwane przez SugarPDF :
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -376,11 +377,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+W przypadku wybrania nieosadzania czcionki w pliku PDF wygenerowany plik PDF będzie miał mniejszy rozmiar, ale zostanie użyta zastępcza czcionka, jeśli czcionka nie jest dostępna w systemie, w którym zainstalowano przeglądarkę.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+Dodanie czcionki PDF do SugarCRM wymaga wykonania kroków 1 i 2 z dokumentacji czcionek TCPDF dostępnej w części „DOCS” <a href="http://www.tcpdf.org" target="_blank">witryny TCPDF</a>.
+<br><br>Narzędzia pfm2afm oraz ttf2ufm są dostępne w w ścieżce fonts/utils w pakiecie TCPDF, który można pobrać w części „DOWNLOAD” <a href="http://www.tcpdf.org" target="_blank">witryny TCPDF</a>.
+<br><br>Załaduj plik metryki wygenerowany w kroku 2 oraz poniższy plik czcionki.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'Pole Informacje CID nie może być puste.',
@@ -404,8 +405,8 @@ BSOFR
     'ERR_PDF_NO_UPLOAD' => 'Błąd podczas przesyłania czcionki lub pliku metryki.',
 
 // Wizard
-    'LBL_WIZARD_TITLE' => 'Kreator administratora',
-    'LBL_WIZARD_WELCOME_TAB' => 'Witamy',
+    'LBL_WIZARD_TITLE' => 'Kreator administracyjny',
+    'LBL_WIZARD_WELCOME_TAB' => 'Witaj',
     'LBL_WIZARD_WELCOME_TITLE' => 'Witamy w Sugar!',
     'LBL_WIZARD_WELCOME' => 'Kliknij <b>Dalej</b> aby dopasować, zlokalizować i skonfigurować Sugar. Jeżeli chcesz zrobić to potem, kliknij <b>Pomiń</b>.',
     'LBL_WIZARD_NEXT_BUTTON' => 'Dalej >',
@@ -417,16 +418,16 @@ BSOFR
     'LBL_WIZARD_FINISH_TITLE' => 'Wstępna konfiguracja systemu zakończona',
     'LBL_WIZARD_FINISH' => 'Kliknij <b>Kontynuuj</b>, aby skonfigurować swoje opcje użytkownika.<br/><br />
 Aby skonfigurować opcje systemu, kliknij <a href="index.php?module=Administration&action=index" target="_blank">tutaj</a>.',
-    'LBL_WIZARD_SYSTEM_TITLE' => 'Nazwa',
+    'LBL_WIZARD_SYSTEM_TITLE' => 'Branding',
     'LBL_WIZARD_SYSTEM_DESC' => 'Dodaj nazwę oraz logo firmy.',
     'LBL_WIZARD_LOCALE_DESC' => 'Określ strefę czasową wyświetlaną w systemie. Wprowadzone ustawienia będą domyślne dla całego systemu. Użytkownicy będą mogli zmienić swoje preferencje.',
     'LBL_WIZARD_SMTP_DESC' => 'Wprowadź konto e-mail, które będzie używane do wysyłania wiadomości e-mail, tj. powiadomień o przydzieleniu oraz nowych haseł użytkownika. Użytkownicy będą otrzymywać wiadomości e-mail z systemu z adresu określonego konta.',
 	'LBL_GMAIL_LOGO' => 'Logo Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,
-	'LBL_LOADING' => 'Ładownie...' /*for 508 compliance fix*/,
+	'LBL_LOADING' => 'Ładowanie...' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Usuń' /*for 508 compliance fix*/,
-	'LBL_WELCOME' => 'Witamy' /*for 508 compliance fix*/,
+	'LBL_WELCOME' => 'Witaj' /*for 508 compliance fix*/,
 	'LBL_LOGO' => 'Logo' /*for 508 compliance fix*/,
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION' => '* Moduł Raporty dostępny jest jedynie dla natywnych klientów Sugar Mobile',
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Moduł Raporty nie jest dostępny w mobilnym widoku przeglądarki.',

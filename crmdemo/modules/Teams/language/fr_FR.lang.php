@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,27 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => 'Êtes-vous sûr de vouloir supprimer cet enregistrement ?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Êtes-vous sûr(e) de vouloir supprimer la relation avec cet utilisateur ?',
     'LBL_EDITLAYOUT' => 'Éditer la mise en page' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Autorisations d&#39;équipe',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Activer l’accès de l’équipe et gérer l’accès par module.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Activer les autorisations d&#39;équipe',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Sélectionnez les modules à activer',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'Activer des autorisations d&#39;équipe vous permettra d&#39;attribuer des droits d&#39;accès spécifiques aux équipes et aux utilisateurs pour les modules individuels, via la Gestion des rôles.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+Désactiver des autorisations d'équipe pour un module retournera toutes les données associées aux autorisations d'équipe pour ce module, y compris les Définitions de processus ou les Processus utilisant cette fonctionnalité. Ceci inclut tous les rôles utilisant l'option « Propriétaire et équipe sélectionnée » pour ce module, ainsi que toutes les données d'autorisation d'équipe pour les enregistrements de ce module. Nous recommandons également d'utiliser la Réparation rapide et l'outil Reconstruire pour effacer votre cache système après avoir désactivé les autorisations d'équipe pour tous les modules.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Warning:</strong> Désactiver des autorisations d'équipe pour un module retournera toutes les données associées aux autorisations d'équipe pour ce module, y compris les Définitions de processus ou les Processus utilisant cette fonctionnalité. Ceci inclut tous les rôles utilisant l'option « Propriétaire et équipe sélectionnée » pour ce module, ainsi que toutes les données d'autorisation d'équipe pour les enregistrements de ce module. Nous recommandons également d'utiliser la Réparation rapide et l'outil Reconstruire pour effacer votre cache système après avoir désactivé les autorisations d'équipe pour tous les modules.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+Désactiver les autorisations d'équipe pour un module permet de retourner toutes les données associées aux autorisations d'équipe pour ce module, y compris les définitions de processus ou les processus utilisant cette fonctionnalité. Ceci inclut tous les rôles utilisant l'option « Propriétaire et équipe sélectionnée » pour ce module, ainsi que toutes les données d'autorisation d'équipe pour les enregistrements de ce module. Nous recommandons également d'utiliser la Réparation rapide et l'outil Reconstruire pour effacer le cache du système après la désactivation des autorisations d'équipe pour tout module. Si vous n'avez pas accès à Réparation rapide et Reconstruire, contactez un administrateur qui peut accéder au menu Réparation.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Warning:</strong> Désactiver les autorisations d'équipe pour un module permet de retourner toutes les données associées aux autorisations d'équipe pour ce module, y compris les définitions de processus ou les processus utilisant cette fonctionnalité. Ceci inclut tous les rôles utilisant l'option « Propriétaire et équipe sélectionnée » pour ce module, ainsi que toutes les données d'autorisation d'équipe pour les enregistrements de ce module. Nous recommandons également d'utiliser la Réparation rapide et l'outil Reconstruire pour effacer le cache du système après la désactivation des autorisations d'équipe pour tout module. Si vous n'avez pas accès à Réparation rapide et Reconstruire, contactez un administrateur qui peut accéder au menu Réparation.
+STR
+,
 );

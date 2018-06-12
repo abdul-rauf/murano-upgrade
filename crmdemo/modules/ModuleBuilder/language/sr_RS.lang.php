@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Odaberite <b>Rasored za izmenu</b>.<br><br>Da bi izmenili raspored koji sadrži polja sa podacima za unos podataka, kliknite <b>Pregled za izmenu</b>.<br><br>Da bi izmenili raspored koji prikazuje podatke unesene u polja u Pregledu za izmenu, kliknite <b>Detaljan pregled</b>.<br><br>Da bi promenili kolone koje se pojavljuju na podrazumevanoj listi, kliknite <b>Pregled u vidu liste</b>.<br><br>Da bi promenili raspored formi za osnovnu i naprednu pretragu, kliknite <b>Pretraga</b>.',
         'subpanelHelp'=> 'Odaberite Podpanel za izmenu.',
         'searchHelp' => 'Odaberite raspored pretrage a izmenu.',
-        'labelsBtn'	=> 'Kliknite <b>Snimi</b>da snimite prilagođene oznake.',
+        'labelsBtn'	=> 'Uredite <b>oznake</b> za prikaz vrednosti u ovom modulu.',
         'newPackage'=>'Kliknite <b>Novi paket</b> da bi kreirali novi paket.',
         'mbHelp'    => '<b>Dobrodošli u kreator modula.</b><br><br>Koristite <b>Kreator modula</b> da bi kreirali pakete koji sadrže prilagođene module zasnovane na standardnim ili prilagođenim objektima. <br><br>Da počnete, kliknite <b>Novi paket</b> da bi kreirali novi paket ili odabrali paket za izmenu.<br><br><b>Paket</b> se ponaša kao kontejner za prilagođene module, i svi su deo jednog projekta. Paket može da sadrži jedan ili više prilagođenih <b>modula</b> koji mogu biti povezani međusobno i sa drugim modulima u aplikaciji. <br><br>Na primer, možda ćete želeti da kreirate paket koji sadrži jedan prilagođen modul koji je povezan sa standardnim modulom Kompanije. Ili ćete možda želeti da kreirate paket koji sadrži više novih modula koji zajedno rade kao projekat i koji su međusobno povezani i povezani sa drugim postojećim modulima u aplikaciji.',
         'exportBtn' => 'Kliknite <b>Izvezi Prilagođavanja</b> da bi kreirali i preuzeli paket koji sadrži prilagođavanja napravljena u Studio-u za određene module.',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Ime - Mora biti alfanumeričko, bez razmaka i mora da počinje slovom.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Paket ključa već postoji',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Naziv paketa već postoji',
+'LBL_JS_PACKAGE_NAME'=>'Naziv paketa – mora da počinje slovom i može da se sastoji samo od slova, brojeva i podvlaka. Nije dozvoljeno koristiti razmake ni ostale posebne znakove.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Ključ - Mora biti alfanumerički i počinjati slovom.',
 'LBL_JS_VALIDATE_KEY'=>'Ključ - Mora biti alfanumerički, bez razmaka i mora da počinje slovom.',
 'LBL_JS_VALIDATE_LABEL'=>'Molim, unesite labelu koja će biti korišćena kao Ime za prikaz za ovaj modul',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Da li ste sigurni da želite da obrišete ovu vezu?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Ova veza će postati trajna. Da li ste sigurni da želite da rasporedite ovu vezu?',
 'LBL_CONFIRM_DONT_SAVE' => 'Da li želite da sačuvate promene koje su nastale nakon poslednjeg čuvanja?',

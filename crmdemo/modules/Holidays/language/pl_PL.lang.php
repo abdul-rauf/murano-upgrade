@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -17,11 +17,11 @@ $mod_strings = array (
 	'LBL_MODULE_NAME' => 'Urlopy',
 	'LBL_MODULE_NAME_SINGULAR' => 'Urlop',
 	'LBL_MODULE_TITLE' => 'Urlopy: Strona główna',
-	'LBL_HOLIDAY' => 'Urlopy:',
-	'LBL_HOLIDAY_DATE' => 'Data urlopu:',
+	'LBL_HOLIDAY' => 'Urlop: ',
+	'LBL_HOLIDAY_DATE' => 'Data urlopu: ',
 	'LBL_NAME' => 'Data urlopu:',
 	'LBL_DESCRIPTION' => 'Opis:',
-	'LBL_RESOURCE_NAME' => 'Nazwa źródła',
+	'LBL_RESOURCE_NAME' => 'Nazwa zasobu ',
 	
 	'LBL_SEARCH_FORM_TITLE' => 'Wyszukiwanie urlopu',
 	'LBL_LIST_FORM_TITLE' => 'Lista urlopów',		
@@ -32,9 +32,9 @@ $mod_strings = array (
 	'LBL_USERS_SUBPANEL_TITLE' => 'Użytkownicy',
 	'LBL_USER_HOLIDAY_SUBPANEL_TITLE'	=> 'Urlopy użytkownika',
 	
-	'LBL_RESOURCE' => 'Źródło:',
+	'LBL_RESOURCE' => 'Zasób: ',
 	'LBL_PERSON_TYPE' => 'Typ osoby',
-	'LBL_RELATED_MODULE'=> 'Powiązany moduł:',
+	'LBL_RELATED_MODULE'=> 'Moduł powiązany:',
 	
 	// For HolidaysQuickCreate.php
 	'LBL_SELECT_RESOURCE_TYPE' => 'Wybierz typ źródła...',

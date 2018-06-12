@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -275,7 +275,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => 'Muokkaa mukautettuja kenttiä',
     'LBL_EDIT_TABS'=>'Muokkaa välilehtiä',
     'LBL_EMAIL_TITLE' => 'Sähköposti',
-    'LBL_EMAIL_DESC' => 'Hallitse lähtevät ja saapuvat sähköpostit. Sähköpostiasetukset on määritettävä, jotta käyttäjät voivat lähettää sähköpostia ja uutiskirjekampanjoita.',
+    'LBL_EMAIL_DESC' => 'Hallitse lähteviä ja saapuvia sähköposteja. Sähköpostiasetukset on määritettävä, jotta ' .
+                        'käyttäjät voivat lähettää sähköpostia ja uutiskirjekampanjoita.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Ensisijainen sähköpostiosoite tarvitaan jokaiselle käyttäjälle käyttääksesi tätä ominaisuutta.',
 	'LBL_ENABLE_MAILMERGE' => 'Salli viestien yhdistäminen (Mail Merge)?',
 	'LBL_ENABLED' => 'Käytössä',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Aseta lokalisointiasetukset järjestelmällesi',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- Tätä offline-asiakasta käyttävän henkilön käyttäjänimi',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Loppukäyttäjänimi:',
-    'LBL_MAILBOX_DESC' => 'Asennettiin ryhmä viestitilejä saapuvien sähköpostien monitorointia ja henkilökohtaisen saapuvan postin tilin tietojen hallintaa varten.',
+    'LBL_MAILBOX_DESC' => 'Ota käyttöön ryhmäviestitilit sisääntulevien sähköpostien seurantaa varten ' .
+        'ja hallitse henkilökohtaista saapuvien viestien tilitietoja käyttäjille',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Sopimustyypit',
     'LBL_MANAGE_CURRENCIES' => 'Valuutat',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Hallitse ryhmiä',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Jälleenrakenna JS-ryhmitystiedostot',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Ketjuttaa uudestaan ja korvaa olemassa olevat ryhmätiedostot niiden uusimmilla versioilla',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Korjaa Javascript-tiedostot',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Korjaa JS-tiedostot',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Käsittelee tiedostoja. Tämä voi kestää useita minuutteja. Tältä sivulta poistuminen ei peruuta prosessia, joten voit jakaa tai odottaa konfirmaatiota...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Tiedostojen käsittely päättynyt.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Korjaa ei-pienikirjaimiset kentät',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Tyhjennetään lisävälimuistitiedostoja...tehty.',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Jos tämä on valitsematta, adminin pitää manuaalisesti validoida uudelleen järjestelmälisenssin umpeudutta, muuten käyttäjät eivät pääse kirjautumaan sisään.',
 	'LBL_TRACKER_SETTINGS' => 'Tracker',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Valitse, mitä järjestelmä- ja käyttäjätietoja seurataan',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Käytä/poista seuranta',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Ota käyttöön/poista käytöstä esimerkkikäyttäjät',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Aktivoi',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Deaktivoi',
@@ -1155,6 +1159,10 @@ Katso lisätietoja <a href="http://www.sugarcrm.com/crm/product_doc.php?edition=
     'LBL_SPRITES_ADDED' => 'Lisättiin sprite {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Ei prosessoida tiedostoa: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Tiimipohjaiset oikeudet',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Käytä pääsyä tiimille ja hallinnoi pääsyä moduuleittain.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Järjestelmän tyyppi',
     'LBL_FTS_HOST' => 'Isäntä',
@@ -1224,5 +1232,6 @@ Katso lisätietoja <a href="http://www.sugarcrm.com/crm/product_doc.php?edition=
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Klikkaamalla “Lähetä” synkronoidaan sinut pääpalvelimen kanssa.',
     'LBL_OFFLINE_ENABLED' => 'Offline käytössä',
     'LBL_OFFLINE_SETTINGS' => 'Offline-asetukset',
+
 
 );

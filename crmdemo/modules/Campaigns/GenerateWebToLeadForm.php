@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,18 +73,21 @@ if(!empty($_REQUEST['assigned_user_id'])){
 }
 
 
+
 if(isset($_REQUEST['team_name']) && !empty($_REQUEST['team_name'])){
 	require_once('include/SugarFields/SugarFieldHandler.php');
 	$sfh = new SugarFieldHandler();
 	$sf = $sfh->getSugarField('Teamset', true);
-	
-	$teamIds = $sf->getTeamsFromRequest('team_name');
-	$web_team_user = $sf->getPrimaryTeamIdFromRequest('team_name', $_POST);
-	
-	$teamSet = BeanFactory::getBean('TeamSets');
-	$web_team_set_id_user = $teamSet->addTeams($teamIds);
-	require_once('modules/Teams/TeamSetManager.php');
-	TeamSetManager::add($web_team_set_id_user, 'leads');
+
+    $teams = $sf->getTeamsFromRequest('team_name');
+    $web_team_user = $sf->getPrimaryTeamIdFromRequest('team_name', $_POST);
+
+    $teamSet = BeanFactory::getBean('TeamSets');
+    $web_team_set_id_user = $teamSet->addTeams(array_keys($teams));
+
+
+    require_once 'modules/Teams/TeamSetManager.php';
+    TeamSetManager::add($web_team_set_id_user, 'leads');
 }
 
  $lead = BeanFactory::getBean('Leads');
@@ -493,11 +496,17 @@ if(!empty($web_redirect_url)){
 if(!empty($web_assigned_user)){
     $Web_To_Lead_Form_html .= "<tr><td style='display: none'><input type='hidden' id='assigned_user_id' name='assigned_user_id' value='$web_assigned_user'></td></tr>";
 }
+
 if(!empty($web_team_user)){
     $Web_To_Lead_Form_html .= "<tr><td style='display: none'><input type='hidden' id='team_id' name='team_id' value='$web_team_user'></td></tr>";
 }
 if(!empty($web_team_set_id_user)){
     $Web_To_Lead_Form_html .= "<tr><td style='display: none'><input type='hidden' id='team_set_id' name='team_set_id' value='$web_team_set_id_user'></td></tr>";
+}
+if (!empty($web_acl_team_set_id)) {
+    $Web_To_Lead_Form_html .= "<tr><td style='display: none'>
+        <input type='hidden' id='acl_team_set_id' name='acl_team_set_id' value='$web_acl_team_set_id'>
+    </td></tr>";
 }
 $req_fields='';
 if(isset($required_fields) && $required_fields != null ){

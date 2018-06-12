@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -21,6 +21,9 @@
         // set as single select list
         options.meta = options.meta || {};
         options.meta.selection = {type: 'single', label: 'LBL_LINK_SELECT'};
+
+        //FIXME: This will be moved out as part of SC-5449.
+        options.meta.template = 'flex-list';
 
         this._super('initialize', [options]);
 
@@ -55,8 +58,8 @@
             this._buildFieldDefinitions(copyOfModelToSave, modelInDb);
 
             // set IDs to be different so that backbone collection can recognize that they're not the same
-            copyOfModelToSave.id = originalId + '-client';
-            modelInDb.id = originalId + '-database';
+            copyOfModelToSave.set('id', originalId + '-client');
+            modelInDb.set('id', originalId + '-database');
 
             // indicate which model is from the client and the server
             copyOfModelToSave.set('_dataOrigin', 'client');

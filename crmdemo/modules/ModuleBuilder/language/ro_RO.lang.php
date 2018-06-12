@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -306,7 +306,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Selectaţi un <b>Aspect de editat</b>.<br/<br/>Pentru a modifica aspectul care conţine câmpuri de date pentru introducerea datelor, faceţi clic pe <b>Vizualizare editare</b>.<br/><br/>Pentru a modifica aspectul care afişează datele introduse în câmpuri în Vizualizare editare, faceţi clic pe <b>Vizualizare editare</b>.<br/><br/>Pentru a modifica coloanele care apar în lista implicită, faceţi clic pe <b>Vizualizare listă</b>.<br/><br/>Pentru a modifica aspectele formularelor de căutare de bază şi avansate, faceţi clic pe <b>Căutare</b>.',
         'subpanelHelp'=> 'Selectaţi un <b>Subpanou</b> de editat.',
         'searchHelp' => 'Selectţi un aspect <b>Căutare</b> de editat.',
-        'labelsBtn'	=> 'Faceţi clic pe <b>Salvare</b> pentru a salva etichetele personalizate.',
+        'labelsBtn'	=> 'Editaţi <b>Etichetele</b> de afişat pentru valorile din acest modul.',
         'newPackage'=>'Faceţi clic pe <b>Pachet nou</b> pentru a crea un pachet nou.',
         'mbHelp'    => '<b>Bun venit la Creatorul de module.</b><br/><br/>Utilizaţi <b>Creatorul de module</b> pentru a crea pachete ce conţin module personalizate pe bază de obiecte standard sau personalizate. <br/><br/>Pentru a începe, faceţi clic pe <b>Pachet nou</b> pentru a crea un pachet nou sau selectaţi un pachet de editat.<br/><br/> Un <b>pachet</b> acţionează ca un container pentru module personalizate, toate făcând parte dintr-un proiect. Pachetul poate conţine unul sau mai multe module personalizate care pot fi asociate între ele sau cu module din aplicaţie. <br/><br/>Exemple: Poate doriţi să creaţi un pachet care să conţină un modul personalizat care este asociat modulului standard Conturi. Sau poate doriţi să creaţi un pachet care să conţină mai multe module noi care funcţionează împreună ca un pachet şi care sunt asociate între ele şi cu module din aplicaţie.',
         'exportBtn' => 'Faceţi clic pe <b>Export personalizări</b> pentru a crea un pachet care conţine personalizări efectuate în Studio pentru anumite module.',
@@ -314,7 +314,7 @@ $mod_strings = array(
 
 ),
 //HOME
-'LBL_HOME_EDIT_DROPDOWNS'=>'Renunta la editor',
+'LBL_HOME_EDIT_DROPDOWNS'=>'Editor liste verticale',
 
 //ASSISTANT
 'LBL_AS_SHOW' => 'Arata asistent in viitor',
@@ -324,7 +324,7 @@ $mod_strings = array(
 //STUDIO2
 'LBL_MODULEBUILDER'=>'Creator de module',
 'LBL_STUDIO' => 'Studio',
-'LBL_DROPDOWNEDITOR' => 'Renunta la editor',
+'LBL_DROPDOWNEDITOR' => 'Editor liste verticale',
 'LBL_EDIT_DROPDOWN'=>'Renunta la editare',
 'LBL_DEVELOPER_TOOLS' => 'Uneltele dezvoltatorului',
 'LBL_SUGARPORTAL' => 'Editorul de portal Sugar',
@@ -712,6 +712,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Nume - Trebuie sa fie alfanumeric, fara spatii si incepand cu o litera.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Cheia pachetului există deja',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Numele Pachetului există deja',
+'LBL_JS_PACKAGE_NAME'=>'Nume pachet - trebuie să înceapă cu o literă şi poate consta numai din litere, cifre şi linii de subliniere. Nu se pot folosi spații sau alte caractere speciale.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Cheie - Trebuie să fie alfanumerică şi să înceapă cu o literă.',
 'LBL_JS_VALIDATE_KEY'=>'Cheie - Trebuie sa fie alfanumerica',
 'LBL_JS_VALIDATE_LABEL'=>'Introduceti o eticheta care va fi folosita ca Nume Afisat pentru acest modul.',
@@ -736,8 +737,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Sigur stergeti aceasta relatie?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Aceasta va determina ca relatia sa devina permanenta. Sunteti sigur ca doriti sa desfasurati aceasta  relatie?',
 'LBL_CONFIRM_DONT_SAVE' => 'S-au facut modificari de cand ati salvat ultima oara, doriti sa salvati?',

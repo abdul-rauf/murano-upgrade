@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => '진단 도구 파일을 제거',
 'LBL_OOTB_REMOVE_PDF_FILES' => '임시 PDF 파일을 제거',
 'LBL_UPDATE_TRACKER_SESSIONS' => '추적장치 업데이트-세션 테이블',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> '이메일 알림장치 작동',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => '이메일 공지 알림 실행',
 'LBL_OOTB_CLEANUP_QUEUE' => '대기중 작업 비우기',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => '추후 기간 생성',
 'LBL_OOTB_HEARTBEAT' => '설탕 하트 비트',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent 기사를 업데이트하십시오.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => '승인 된 조항 & 만료 KB 조항을 게시 합니다.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => '프로세스 저자 예약 된 작업',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => '간격',
@@ -60,10 +60,10 @@ $mod_strings = array (
 'LBL_SAT'		=> '토요일',
 'LBL_ALL'		=> '매일',
 'LBL_EVERY_DAY'	=> '매일',
-'LBL_AT_THE'	=> '다음에서',
+'LBL_AT_THE'	=> '다음 ',
 'LBL_EVERY'		=> '매',
 'LBL_FROM'		=> '발신인',
-'LBL_ON_THE'	=> '다음에서',
+'LBL_ON_THE'	=> '다음 ',
 'LBL_RANGE'		=> '기한',
 'LBL_AT' 		=> 'at',
 'LBL_IN'		=> 'in',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => '작업 새로고침',
 'LBL_POLLMONITOREDINBOXES' => '수신메일 계정 확인',
 'LBL_PERFORMFULLFTSINDEX' => '전체문장 검색 색인 시스템',
+'LBL_SUGARJOBREMOVEPDFFILES' => '임시 PDF 파일을 제거',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => '승인된 조항 & 만료 KB 조항을 게시합니다.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch 큐 스케줄러',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => '진단 도구 파일을 제거',
+'LBL_SUGARJOBREMOVETMPFILES' => '임시 파일 제거',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '매일 저녁 대용량 이메일 캠페인 실행',
 'LBL_ASYNCMASSUPDATE' => '비동시적 대규모 업데이트를 실행합니다.',

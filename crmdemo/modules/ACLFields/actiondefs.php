@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -13,7 +13,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 // Be sure to include the base ACL's as well
 require_once 'modules/ACLActions/actiondefs.php';
 
- if(!defined('ACL_READ_ONLY')){   
+
+ if(!defined('ACL_READ_ONLY')){
  	define('ACL_READ_ONLY', 50);
  	define('ACL_READ_WRITE', 99);
  	define('ACL_OWNER_READ_WRITE', 40);
@@ -24,19 +25,13 @@ require_once 'modules/ACLActions/actiondefs.php';
  	 }
  	 define('ACL_FIELD_DEFAULT', 99);
  }
- 
- $GLOBALS['aclFieldOptions'] = array(
- 					ACL_ALLOW_DEFAULT=>'LBL_DEFAULT',
- 					ACL_READ_WRITE=>'LBL_READ_WRITE',
- 					ACL_READ_OWNER_WRITE=>'LBL_READ_OWNER_WRITE',
- 			 		ACL_READ_ONLY=>'LBL_READ_ONLY',
- 			 		ACL_OWNER_READ_WRITE=>'LBL_OWNER_READ_WRITE',
- 					ACL_ALLOW_NONE=>'LBL_ALLOW_NONE',
- 					);
 
- 
+$GLOBALS['aclFieldOptions'] = array(
+    ACL_ALLOW_DEFAULT => 'LBL_DEFAULT',
+    ACL_READ_WRITE => 'LBL_READ_WRITE',
+    ACL_READ_OWNER_WRITE => 'LBL_READ_OWNER_WRITE',
+);
+$GLOBALS['aclFieldOptions'][ACL_READ_ONLY] = 'LBL_READ_ONLY';
+$GLOBALS['aclFieldOptions'][ACL_OWNER_READ_WRITE] = 'LBL_OWNER_READ_WRITE';
 
-
-
-
-?>
+$GLOBALS['aclFieldOptions'][ACL_ALLOW_NONE] = 'LBL_ALLOW_NONE';

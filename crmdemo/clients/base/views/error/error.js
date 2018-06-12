@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -31,8 +31,8 @@
         app.controller.context.prepare(true);
 
         // Attach the metadata to the view
-        this.options.meta = this._metadata.modules[this.options.module].views[this.options.name].meta;
-        app.view.View.prototype.initialize.call(this, options);
+        options.meta = this._metadata.modules[options.module].views[options.type].meta;
+        this._super('initialize', [options]);
     },
     _render: function() {
         if(this.context.get('errorType')) {
@@ -76,6 +76,20 @@
                     type: 'ERR_HTTP_500_TYPE',
                     messages: ['ERR_HTTP_500_TEXT_LINE1', 'ERR_HTTP_500_TEXT_LINE2'],
                     linkText: app.lang.get('ERR_HTTP_500_ACTION')
+                };
+                break;
+            case '502':
+                attributes = {
+                    title: 'ERR_HTTP_502_TITLE',
+                    type: 'ERR_HTTP_502_TYPE',
+                    messages: ['ERR_HTTP_502_TEXT_LINE1', 'ERR_HTTP_502_TEXT_LINE2']
+                };
+                break;
+            case '503':
+                attributes = {
+                    title: 'ERR_HTTP_503_TITLE',
+                    type: 'ERR_HTTP_503_TYPE',
+                    messages: ['ERR_HTTP_503_TEXT_LINE1', 'ERR_HTTP_503_TEXT_LINE2']
                 };
                 break;
             default:

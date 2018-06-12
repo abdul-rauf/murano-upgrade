@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -27,7 +27,6 @@
          *
          * @param {String} message The error message.
          * @param {String} date The date that is invalid.
-         * @constructor
          */
         InvalidException: function(message, date) {
             this.name = 'InvalidException';
@@ -147,7 +146,7 @@
 
         /**
          * Get the date format preference for the given user.
-         * @param {Data.Bean/Object} user
+         * @param {Data.Bean|Object} user
          * @return {string}
          */
         getUserDateFormat: function(user) {
@@ -157,7 +156,7 @@
 
         /**
          * Get the time format preference for the given user.
-         * @param {Data.Bean/Object} user
+         * @param {Data.Bean|Object} user
          * @return {string}
          */
         getUserTimeFormat: function(user) {
@@ -686,7 +685,7 @@
 
             // Helper to return the number of days from now to 'day' (see dateObj initialization above)
             next = function(day) {
-                var days, todayDay, i, daysUntilNext;
+                var days, todayDay, daysUntilNext;
                 days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
                 todayDay = dateObj.getDay();
                 day = day.toLowerCase();
@@ -707,7 +706,7 @@
                     return new Date(dateObj.setDate(dateObj.getDate() + operator));
                 },
                 week: function(operator) {
-                    return new Date(dateObj.setDate(dateObj.getDate() + (operator*7) ))
+                    return new Date(dateObj.setDate(dateObj.getDate() + (operator * 7)));
                 },
                 month: function(operator) {
                     return addMonths(dateObj, operator);
@@ -874,73 +873,6 @@
                 if (yyyymmddLooseMatch) return true;
             }
             return false;
-        },
-
-        /**
-         * Same behavior of {@link Utils.Date#compare}.
-         *
-         * @deprecated 7.2 and will be removed on 7.5. Use {@link Utils.Date#compare} instead.
-         */
-        compareDates: function(date1, date2) {
-            app.logger.warn('date.compareDates() was called and is deprecated. ' +
-                'Please update code to use date.compare()');
-
-            return date.compare(date1, date2);
-        },
-
-        /**
-         * @param {String} date1
-         * @param {String} date2
-         * @return {Boolean}
-         *
-         * @deprecated 7.2 and will be removed on 7.5. Use {@link date#isAfter} instead.
-         */
-        isDateAfter: function(date1, date2) {
-            app.logger.warn('date.isDateAfter() was called and is deprecated. ' +
-                'Please update code to use date(date1).isAfter(date2)');
-            return date(date1).isAfter(date2);
-        },
-
-        /**
-         * @param {String} date1
-         * @param {String} date2
-         * @return {Boolean}
-         *
-         * @deprecated 7.2 and will be removed on 7.5. Use {@link date#isBefore} instead.
-         */
-        isDateBefore: function(date1, date2) {
-            app.logger.warn('date.isDateBefore() was called and is deprecated. ' +
-                'Please update code to use date(date1).isBefore(date2)');
-            return date(date1).isBefore(date2);
-        },
-
-        /**
-         * @param {String} date1
-         * @param {String} date2
-         * @return {Boolean}
-         *
-         * @deprecated 7.2 and will be removed on 7.5. Use {@link date#isSame} instead.
-         */
-        isDateOn: function(date1, date2) {
-            app.logger.warn('date.isDateOn() was called and is deprecated. ' +
-                'Please update code to use date.isSame()');
-            return date(date1).isSame(date2);
-        },
-
-        /**
-         * @param {String} date1
-         * @param {String} startDate
-         * @param {String} endDate
-         * @param {Boolean} [inclusive=false] include start and end dates in comparison
-         * @return {Boolean}
-         *
-         * @deprecated 7.2 and will be removed on 7.5. Use {@link date#isBetween} instead.
-         */
-        isDateBetween: function(date1, startDate, endDate, inclusive) {
-            app.logger.warn('date.isDateBetween() was called and is deprecated. ' +
-                'Please update code to use date.isBetween()');
-
-            return date(date1).isBetween(startDate, endDate, inclusive);
         }
     });
 
@@ -949,11 +881,11 @@
         /**
          * Formats a date to a string based on user preferences.
          *
-         * @param {Boolean} [dateOnly=false] Pass `true` to get date only.
-         * @param {Data.Bean/Object} [user=App.user] The user bean or the
+         * @param {boolean} [dateOnly=false] Pass `true` to get date only.
+         * @param {Data.Bean|Object} [user=App.user] The user bean or the
          *   current logged in user object. Defaults to current logged in
          *   user.
-         * @return {String} The formatted date based on user's preference.
+         * @return {string} The formatted date based on user's preference.
          */
         formatUser: function(dateOnly, user) {
             var format = date.getUserDateFormat(user);

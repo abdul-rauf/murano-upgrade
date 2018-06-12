@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -79,10 +79,10 @@ $mod_strings = array (
     'LBL_EMAIL_LINK_TYPE_HELP'			=> 'Client Email Sugar: Expediaza email-uri utilizand clientul de email din cadrul aplicatiei Sugar.<br />Client Email Extern: Expediaza email-uri utilizand un client de email din afara aplicatie Sugar, precum Microsoft Outlook.',
 	'LBL_MARKETING_ID'							=> 'ID Marketing',
     'LBL_MODULE_ID'                             => 'EmailPersoana',
-	'LBL_MODULE_NAME'							=> 'Setari Email',
-	'LBL_MODULE_NAME_SINGULAR'						=> 'Setari Email',
+	'LBL_MODULE_NAME'							=> 'Setări de e-mail',
+	'LBL_MODULE_NAME_SINGULAR'						=> 'Setări de e-mail',
 	'LBL_CONFIGURE_CAMPAIGN_EMAIL_SETTINGS'    => 'Configureaza Setarile de Email ale Campaniei',
-	'LBL_MODULE_TITLE'							=> 'Mangementul Cozii de Email-uri la Expediere',
+	'LBL_MODULE_TITLE'							=> 'Gestionare coadă de e-mailuri trimise',
 	'LBL_NOTIFICATION_ON_DESC' 					=> 'Cand este activata, email-urile sunt expediate la utilizatori atunci cand exista inregstrari alocate acestora.',
 	'LBL_NOTIFY_FROMADDRESS' 					=> '"De La " Adresa:',
 	'LBL_NOTIFY_FROMNAME' 						=> '"De La " Nume:',

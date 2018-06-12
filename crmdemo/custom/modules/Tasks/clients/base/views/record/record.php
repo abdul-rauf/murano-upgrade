@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-12 08:17:54
+// created: 2018-06-12 11:31:14
 $viewdefs['Tasks']['base']['view']['record'] = array (
   'buttons' => 
   array (
@@ -100,9 +100,17 @@ $viewdefs['Tasks']['base']['view']['record'] = array (
         ),
         9 => 
         array (
-          'type' => 'divider',
+          'type' => 'rowaction',
+          'event' => 'button:audit_button:click',
+          'name' => 'audit_button',
+          'label' => 'LNK_VIEW_CHANGE_LOG',
+          'acl_action' => 'view',
         ),
         10 => 
+        array (
+          'type' => 'divider',
+        ),
+        11 => 
         array (
           'type' => 'rowaction',
           'event' => 'button:delete_button:click',

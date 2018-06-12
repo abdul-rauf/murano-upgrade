@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -31,7 +31,6 @@
      * @inheritdoc
      */
     initialize: function(options) {
-        _.bindAll(this);
         this._super('initialize', [options]);
         this.events = _.extend({}, this.events, {
             'click [data-toggle-field]': '_handleSenderOptionClick'
@@ -187,9 +186,9 @@
         } else if (!_.isEmpty(relatedModel.get('id'))) {
             relatedModel.fetch({
                 showAlerts: false,
-                success: function(relatedModel) {
+                success: _.bind(function(relatedModel) {
                     setParent(relatedModel);
-                },
+                }, this),
                 fields: ['name']
             });
         }
@@ -454,6 +453,15 @@
         var myURL,
             sendModel = this.initializeSendEmailModel();
 
+        if (this._hasInvalidRecipients(sendModel)) {
+            app.alert.show('mail_invalid_recipients', {
+                level: 'error',
+                messages: app.lang.get('ERR_INVALID_RECIPIENTS', this.module)
+            });
+            this.setMainButtonsDisabled(false);
+            return;
+        }
+
         this.setMainButtonsDisabled(true);
         app.alert.show('mail_call_status', {level: 'process', title: pendingMessage});
 
@@ -497,6 +505,26 @@
     },
 
     /**
+     * Check if the recipients in any of the recipient fields are invalid.
+     *
+     * @param {Backbone.Model} model
+     * @return {boolean} Return true if there are invalid recipients in any of
+     *   the fields. Return false otherwise.
+     * @private
+     */
+    _hasInvalidRecipients: function(model) {
+        return _.some(['to_addresses', 'cc_addresses', 'bcc_addresses'], function(fieldName) {
+            var recipients = model.get(fieldName);
+            if (!recipients) {
+                return false;
+            }
+            return _.some(recipients.models, function(recipient) {
+                return recipient.get('_invalid');
+            });
+        }, this);
+    },
+
+    /**
      * Open the drawer with the EmailTemplates selection list layout. The callback should take the data passed to it
      * and replace the existing editor contents with the selected template.
      */
@@ -507,7 +535,7 @@
                     module: 'EmailTemplates'
                 }
             },
-            this.templateDrawerCallback
+            _.bind(this.templateDrawerCallback, this)
         );
     },
 
@@ -521,8 +549,8 @@
         if (model) {
             var emailTemplate = app.data.createBean('EmailTemplates', { id: model.id });
             emailTemplate.fetch({
-                success: this.confirmTemplate,
-                error: _.bind(function(error) {
+                success: _.bind(this.confirmTemplate, this),
+                error: _.bind(function(model, error) {
                     this._showServerError(error);
                 }, this)
             });
@@ -540,9 +568,7 @@
         app.alert.show('delete_confirmation', {
             level: 'confirmation',
             messages: app.lang.get('LBL_EMAILTEMPLATE_MESSAGE_SHOW_MSG', this.module),
-            onConfirm: _.bind(function() {
-                this.insertTemplate(template);
-            }, this)
+            onConfirm: _.bind(this.insertTemplate, this, template)
         });
     },
 
@@ -583,7 +609,7 @@
                         this.insertTemplateAttachments(data.models);
                     }
                 }, this),
-                error: _.bind(function(error) {
+                error: _.bind(function(collection, error) {
                     this._showServerError(error);
                 }, this)
             });
@@ -622,7 +648,8 @@
                 layout: 'selection-list',
                 context: {module: 'Documents'}
             },
-            this.documentDrawerCallback);
+            _.bind(this.documentDrawerCallback, this)
+        );
     },
 
     /**
@@ -644,7 +671,7 @@
                         type: this.ATTACH_TYPE_SUGAR_DOCUMENT
                     });
                 }, this),
-                error: _.bind(function(error) {
+                error: _.bind(function(model, error) {
                     this._showServerError(error);
                 }, this)
             });
@@ -682,7 +709,7 @@
                     module: 'UserSignatures'
                 }
             },
-            this._updateEditorWithSignature
+            _.bind(this._updateEditorWithSignature, this)
         );
     },
 
@@ -702,7 +729,7 @@
                         this._lastSelectedSignature = model;
                     }
                 }, this),
-                error: _.bind(function(error) {
+                error: _.bind(function(model, error) {
                     this._showServerError(error);
                 }, this)
             });
@@ -843,12 +870,18 @@
      * Register keyboard shortcuts.
      */
     registerShortcuts: function() {
-        app.shortcuts.register('Compose:Action:More', 'm', function() {
-            var $primaryDropdown = this.$('.btn-primary[data-toggle=dropdown]');
-            if ($primaryDropdown.is(':visible') && !$primaryDropdown.hasClass('disabled')) {
-                $primaryDropdown.click();
+        app.shortcuts.register({
+            id: 'Compose:Action:More',
+            keys: 'm',
+            component: this,
+            description: 'LBL_SHORTCUT_OPEN_MORE_ACTION',
+            handler: function() {
+                var $primaryDropdown = this.$('.btn-primary[data-toggle=dropdown]');
+                if ($primaryDropdown.is(':visible') && !$primaryDropdown.hasClass('disabled')) {
+                    $primaryDropdown.click();
+                }
             }
-        }, this);
+        });
         this._super('registerShortcuts');
     },
 
@@ -860,7 +893,7 @@
     resizeEditor: function(drawerHeight) {
         var $editor, headerHeight, recordHeight, showHideHeight, diffHeight, editorHeight, newEditorHeight;
 
-        $editor = this.$('.mceLayout .mceIframeContainer iframe');
+        $editor = this.$('.mce-stack-layout .mce-stack-layout-item iframe');
         //if editor not already rendered, cannot resize
         if ($editor.length === 0) {
             return;

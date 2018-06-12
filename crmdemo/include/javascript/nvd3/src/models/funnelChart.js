@@ -84,23 +84,20 @@ nv.models.funnelChart = function() {
 
         // if you have activated a data series, inactivate the rest
         if (series.active === 'active') {
-          data.filter(function(d) {
-            return d.active !== 'active';
-          }).map(function(d) {
-            d.values[0].active = 'inactive';
-            d.active = 'inactive';
-            return d;
-          });
+          data
+            .filter(function(d) {
+              return d.active !== 'active';
+            })
+            .map(function(d) {
+              d.active = 'inactive';
+              return d;
+            });
         }
 
         // if there are no active data series, inactivate them all
-        if (!data.filter(function(d) {
-          return d.active === 'active';
-        }).length) {
+        if (!data.filter(function(d) { return d.active === 'active'; }).length) {
           data.map(function(d) {
             d.active = '';
-            d.values[0].active = '';
-            container.selectAll('.nv-series').classed('nv-inactive', false);
             return d;
           });
         }
@@ -309,11 +306,20 @@ nv.models.funnelChart = function() {
 
       legend.dispatch.on('legendClick', function(d, i) {
         d.disabled = !d.disabled;
+        d.active = false;
 
+        // if there are no enabled data series, enable them all
         if (!data.filter(function(d) { return !d.disabled; }).length) {
           data.map(function(d) {
             d.disabled = false;
-            wrap.selectAll('.nv-series').classed('disabled', false);
+            return d;
+          });
+        }
+
+        // if there are no active data series, activate them all
+        if (!data.filter(function(d) { return d.active === 'active'; }).length) {
+          data.map(function(d) {
+            d.active = '';
             return d;
           });
         }
@@ -451,15 +457,13 @@ nv.models.funnelChart = function() {
   };
 
   chart.x = function(_) {
-    if (!arguments.length) { return getX; }
-    getX = _;
-    funnelWrap.x(_);
+    if (!arguments.length) { return funnel.x(); }
+    funnel.x(_);
     return chart;
   };
 
   chart.y = function(_) {
-    if (!arguments.length) { return getY; }
-    getY = _;
+    if (!arguments.length) { return funnel.y(); }
     funnel.y(_);
     return chart;
   };

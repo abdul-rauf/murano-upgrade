@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -22,14 +22,6 @@ require_once('modules/vCals/vCal.php');
 class iCal extends vCal {
 
     const UTC_FORMAT = 'Ymd\THi00\Z';
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function iCal()
-    {
-        self::__construct();
-    }
 
     /**
     * Constructor for the iCal class.
@@ -356,26 +348,6 @@ class iCal extends vCal {
     }
 
     /**
-    * Gets the time zone for the given user.
-    *
-    * @param User $current_user the user
-    * @return DateTimeZone the user's timezone
-    */
-    protected function getUserTimezone($current_user)
-    {
-        $gmtTZ = new DateTimeZone("UTC");
-        $userTZName = TimeDate::userTimezone($current_user);
-        if (!empty($userTZName))
-        {
-            $tz = new DateTimeZone($userTZName);
-        } else
-        {
-            $tz = $gmtTZ;
-        }
-        return $tz;
-    }
-
-    /**
     * Gets the daylight savings range for the given user.
     *
     * @param User $current_user the user
@@ -384,7 +356,7 @@ class iCal extends vCal {
     */
     protected function getDSTRange($current_user, $year)
     {
-        $tz = $this->getUserTimezone($current_user);
+        $tz = $current_user->getTimezone();
         $idx = 0;
         $result = array();
 
@@ -440,7 +412,6 @@ class iCal extends vCal {
         $timezoneName = $current_user->getPreference('timezone');
 
         $gmtTZ = new DateTimeZone("UTC");
-        $tz = $this->getUserTimezone($current_user);
         $dstRange = $this->getDSTRange($current_user, date('Y'));
 
         $dstOffset = 0;

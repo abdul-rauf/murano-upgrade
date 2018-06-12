@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -15,6 +15,7 @@ namespace Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\AbstractProvider;
 use Sugarcrm\Sugarcrm\Elasticsearch\Container;
 use Sugarcrm\Sugarcrm\Elasticsearch\ContainerAwareInterface;
+use Sugarcrm\Sugarcrm\Elasticsearch\ContainerAwareTrait;
 use Sugarcrm\Sugarcrm\Elasticsearch\Analysis\AnalysisBuilder;
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
@@ -40,33 +41,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Query\MatchAllQuery;
  */
 class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
 {
-    // Awaiting PHP 5.4+ support
-    //use ContainerAwareTrait;
-
-    ///// Start trait
-
-    /**
-     * @var \Sugarcrm\Sugarcrm\Elasticsearch\Container
-     */
-    protected $container;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setContainer(Container $container)
-    {
-        $this->container = $container;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    //// End trait
+    use ContainerAwareTrait;
 
     /**
      * @var HandlerCollection
@@ -452,6 +427,11 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
     protected $sort = array('_score');
 
     /**
+     * @var boolean Execute explain on query
+     */
+    protected $explain = false;
+
+    /**
      * Set search term
      * @param string $term Search term
      * @return GlobalSearch
@@ -519,7 +499,6 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
         return $this;
     }
 
-
     /**
      * Set the list of filters filtering.
      * @param array $filters
@@ -532,7 +511,6 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
         }
         return $this;
     }
-
 
     /**
      * Enable field boosts (disabled by default)
@@ -585,6 +563,17 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
         return $this;
     }
 
+    /**
+     * Set query explain flag
+     * @param boolean $flag
+     * @return GlobalSearch
+     */
+    public function setExplain($flag)
+    {
+        $this->explain = (bool) $flag;
+        return $this;
+    }
+
     protected function handleSearchAggregations($builder)
     {
         if ($this->queryCrossModuleAggs || $this->queryModuleAggs) {
@@ -621,6 +610,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
             ->setLimit($this->limit)
             ->setOffset($this->offset)
             ->setQuery($query)
+            ->setExplain($this->explain)
         ;
 
         // Set highlighter

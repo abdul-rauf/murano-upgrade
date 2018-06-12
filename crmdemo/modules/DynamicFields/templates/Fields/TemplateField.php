@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -68,6 +68,7 @@ class TemplateField{
     // THIS NEEDS TO BE NULL UNLESS IT IS TO BE USED SO IT DOESN'T SAVE AS AN EMPTY
     // VALUE IN DynamicField::saveExtendedAttributes() WHICH USES isset() RATHER THAN empty()
     var $group = null;
+    public $group_label = null;
 	var $vardef_map = array(
 		'name'=>'name',
 		'label'=>'vname',
@@ -97,6 +98,7 @@ class TemplateField{
         // Bug 58560 - Add a group index here so it gets written to the custom vardefs
         // for cases such as address fields
         'group' => 'group',
+        'group_label' => 'group_label',
 		'calculated' => 'calculated',
         'formula' => 'formula',
         'enforced' => 'enforced',
@@ -330,27 +332,31 @@ class TemplateField{
 	 * BEAN FUNCTIONS
 	 *
 	 */
-	function get_field_def(){
-		$array =  array(
-			'required'=>$this->convertBooleanValue($this->required),
-			'source'=>'custom_fields',
-			'name'=>$this->name,
-			'vname'=>$this->vname,
-			'type'=>$this->type,
+    public function get_field_def()
+    {
+        $array = array(
+            'required' => $this->convertBooleanValue($this->required),
+            'source' => 'custom_fields',
+            'name' => $this->name,
+            'vname' => $this->vname,
+            'type' => $this->type,
             // This needs to be a boolean value so clients know how to handle it
-			'massupdate'=>$this->convertBooleanValue($this->massupdate),
-			'default'=>$this->default,
-            'no_default'=> !empty($this->no_default),
-			'comments'=> (isset($this->comments)) ? $this->comments : '',
-		    'help'=> (isset($this->help)) ?  $this->help : '',
-		    'importable'=>$this->importable,
-			'duplicate_merge'=>$this->duplicate_merge,
-			'duplicate_merge_dom_value'=> $this->getDupMergeDomValue(),
-			'audited'=>$this->convertBooleanValue($this->audited),
-			'reportable'=>$this->convertBooleanValue($this->reportable),
-            'unified_search'=>$this->convertBooleanValue($this->unified_search),
-            'merge_filter' => empty($this->merge_filter) ? "disabled" : $this->merge_filter
-		);
+            'massupdate' => $this->convertBooleanValue($this->massupdate),
+            'no_default' => !empty($this->no_default),
+            'comments' => (isset($this->comments)) ? $this->comments : '',
+            'help' => (isset($this->help)) ? $this->help : '',
+            'importable' => $this->importable,
+            'duplicate_merge' => $this->duplicate_merge,
+            'duplicate_merge_dom_value' => $this->getDupMergeDomValue(),
+            'audited' => $this->convertBooleanValue($this->audited),
+            'reportable' => $this->convertBooleanValue($this->reportable),
+            'unified_search' => $this->convertBooleanValue($this->unified_search),
+            'merge_filter' => empty($this->merge_filter) ? "disabled" : $this->merge_filter,
+        );
+
+        if (isset($this->default)) {
+            $array['default'] = $this->default;
+        }
         if (isset($this->studio)) {
             $array['studio'] = $this->convertBooleanValue($this->studio);
         }
@@ -362,11 +368,11 @@ class TemplateField{
             $array['formula'] = html_entity_decode($this->formula);
             $array['enforced'] = !empty($this->enforced) && $this->enforced == true;
             if ($array['calculated'] && $array['enforced']) {
-                $array['default'] = null;
+                unset($array['default']);
                 $array['massupdate'] = false;
-                // Need to set it on the object as well, since some child classes 
+                // Need to set it on the object as well, since some child classes
                 // use that instead of the return of this method
-                $this->default = null;
+                unset($this->default);
                 $this->massupdate = false;
             }
         } else {
@@ -375,21 +381,29 @@ class TemplateField{
         if (!empty($this->dependency) && is_string($this->dependency)) {
             $array['dependency'] = html_entity_decode($this->dependency);
         }
-		if(!empty($this->len)){
-			$array['len'] = $this->len;
-		}
-		if(!empty($this->size)){
-			$array['size'] = $this->size;
-		}
+        if (!empty($this->len)) {
+            $array['len'] = $this->len;
+        }
+        if (!empty($this->size)) {
+            $array['size'] = $this->size;
+        }
         // Bug 61736 - Address fields in undeployed modules do not have a group property
         if (!empty($this->group)) {
             $array['group'] = $this->group;
         }
 
+        if (!empty($this->group_label)) {
+            $array['group_label'] = $this->group_label;
+        }
+
+        if (!empty($this->options)) {
+            $array['options'] = $this->options;
+        }
+
         $this->get_dup_merge_def($array);
 
-		return $array;
-	}
+        return $array;
+    }
 
 	protected function convertBooleanValue($value)
 	{
@@ -482,7 +496,7 @@ class TemplateField{
 
     /**
      * This function supports setting the values of all TemplateField instances.
-     * 
+     *
      * @param $row The Array key/value pairs from fields_meta_data table
      */
     function populateFromRow($row=array()) {
@@ -536,7 +550,7 @@ class TemplateField{
                 //Remove potential xss code from help field
                 if($field == 'help' && !empty($this->$vardef))
                 {
-                    $this->$vardef = htmlentities(remove_xss($this->$vardef));
+                    $this->$vardef = htmlspecialchars(remove_xss($this->$vardef), ENT_COMPAT, 'UTF-8');
                 }
 
 				if($vardef != $field){
@@ -550,11 +564,17 @@ class TemplateField{
 	}
 
     /**
-     * Applies rules for type specific fields vardefs. This can be overridden in 
+     * Applies rules for type specific fields vardefs. This can be overridden in
      * child classes.
      */
     protected function applyVardefRules()
     {
+        // Expected behavior of calculated fields without formula are like non-calculated fields
+        if (!empty($this->calculated) && empty($this->formula)) {
+            unset($this->calculated);
+            $this->enforced = '';
+        }
+
         if (!empty($this->calculated) && !empty($this->formula)
             && is_string($this->formula) && !empty($this->enforced) && $this->enforced)
         {
@@ -636,9 +656,9 @@ class TemplateField{
 	}
 
     /**
-     * Gets mapping of fields_meta_data to DynamicField properties. This can be 
+     * Gets mapping of fields_meta_data to DynamicField properties. This can be
      * overridden or extended in child classes.
-     * 
+     *
      * @return array
      */
     public function getFieldMetaDataMapping()

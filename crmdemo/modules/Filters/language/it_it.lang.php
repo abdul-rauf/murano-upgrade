@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -26,7 +26,7 @@ $mod_strings = array(
     'LBL_CREATED' => 'Creato Da',
     'LBL_CREATED_ID' => 'Creato da ID',
     'LBL_DESCRIPTION' => 'Descrizione',
-    'LBL_DELETED' => 'Cancellato',
+    'LBL_DELETED' => 'Eliminato',
     'LBL_NAME' => 'Nome',
     'LBL_CREATED_USER' => 'Creato da Utente',
     'LBL_CREATED_BY_ME' => 'Creato da Me',
@@ -83,7 +83,7 @@ $mod_strings = array(
     'LBL_OPERATOR_IS' => 'è',
     'LBL_OPERATOR_IS_NOT' => 'non è',
     'LBL_OPERATOR_EQUALS' => 'è uguale a',
-    'LBL_OPERATOR_NOT_EQUALS' => 'è uguale a',
+    'LBL_OPERATOR_NOT_EQUALS' => 'non è uguale a',
     'LBL_OPERATOR_BETWEEN' => 'è tra',
     'LBL_OPERATOR_STARTS_WITH' => 'inizia con',
     'LBL_OPERATOR_GREATER_THAN' => 'è maggiore di',
@@ -102,7 +102,7 @@ $mod_strings = array(
     'LBL_OPERATOR_LAST_MONTH' => 'mese scorso',
     'LBL_OPERATOR_THIS_MONTH' => 'mese corrente',
     'LBL_OPERATOR_NEXT_MONTH' => 'Mese prossimo',
-    'LBL_OPERATOR_LAST_YEAR' => 'anno scorso',
+    'LBL_OPERATOR_LAST_YEAR' => 'l&#39;anno scorso',
     'LBL_OPERATOR_THIS_YEAR' => 'anno corrente',
-    'LBL_OPERATOR_NEXT_YEAR' => 'Anno prossimo',
+    'LBL_OPERATOR_NEXT_YEAR' => 'l&#39;anno prossimo',
 );

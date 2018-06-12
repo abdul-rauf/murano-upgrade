@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,111 +11,111 @@
  */
 
 $mod_strings = array (
-  'LBL_MODULE_NAME' => 'Bugid',
-  'LBL_MODULE_NAME_SINGULAR'	=> 'Bug',
-  'LBL_MODULE_TITLE' => 'Bugi Tracker: Avaleht',
-  'LBL_MODULE_ID' => 'Bugid',
-  'LBL_SEARCH_FORM_TITLE' => 'Bugi otsing',
-  'LBL_LIST_FORM_TITLE' => 'Bugide loend',
-  'LBL_NEW_FORM_TITLE' => 'Uus bugi',
-  'LBL_CONTACT_BUG_TITLE' => 'Kontakt-bugi:',
+  'LBL_MODULE_NAME' => 'Vead',
+  'LBL_MODULE_NAME_SINGULAR'	=> 'Viga',
+  'LBL_MODULE_TITLE' => 'Vigade otsija: avaleht',
+  'LBL_MODULE_ID' => 'Vead',
+  'LBL_SEARCH_FORM_TITLE' => 'Veaotsing',
+  'LBL_LIST_FORM_TITLE' => 'Vigade loend',
+  'LBL_NEW_FORM_TITLE' => 'Uus viga',
+  'LBL_CONTACT_BUG_TITLE' => 'Kontaktviga:',
   'LBL_SUBJECT' => 'Teema:',
-  'LBL_BUG' => 'Bugi:',
-  'LBL_BUG_NUMBER' => 'Bugi number:',
+  'LBL_BUG' => 'Viga:',
+  'LBL_BUG_NUMBER' => 'Vea number:',
   'LBL_NUMBER' => 'Number:',
-  'LBL_STATUS' => 'Olek',
+  'LBL_STATUS' => 'Olek:',
   'LBL_PRIORITY' => 'Tähtsus:',
-  'LBL_DESCRIPTION' => 'Kirjeldus',
+  'LBL_DESCRIPTION' => 'Kirjeldus:',
   'LBL_CONTACT_NAME' => 'Kontaktisiku nimi:',
-  'LBL_BUG_SUBJECT' => 'Bugi teema:',
+  'LBL_BUG_SUBJECT' => 'Vea teema:',
   'LBL_CONTACT_ROLE' => 'Roll:',
-  'LBL_LIST_NUMBER' => 'Num:',
+  'LBL_LIST_NUMBER' => 'Num.',
   'LBL_LIST_SUBJECT' => 'Teema',
   'LBL_LIST_STATUS' => 'Olek',
-  'LBL_LIST_PRIORITY' => 'Tähtsus:',
+  'LBL_LIST_PRIORITY' => 'Tähtsus',
   'LBL_LIST_RELEASE' => 'Tooteuuendus',
   'LBL_LIST_RESOLUTION' => 'Resolutsioon',
-  'LBL_LIST_LAST_MODIFIED' => 'Viimati muudetud:',
+  'LBL_LIST_LAST_MODIFIED' => 'Viimati muudetud',
   'LBL_INVITEE' => 'Kontaktid',
   'LBL_TYPE' => 'Tüüp:',
   'LBL_LIST_TYPE' => 'Tüüp',
-  'LBL_RESOLUTION' => 'Resolutsioon',
+  'LBL_RESOLUTION' => 'Resolutsioon:',
   'LBL_RELEASE' => 'Tooteuuendus:',
-  'LNK_NEW_BUG' => 'Teata bugist',
-  'LNK_CREATE'  => 'Teata bugist',
-  'LNK_CREATE_WHEN_EMPTY'    => 'Report a Bug now.',
-  'LNK_BUG_LIST' => 'Vaata bugisid',
-  'LBL_SHOW_MORE' => 'Show More Bugs',
-  'NTC_REMOVE_INVITEE' => 'Kas oled kindel, et soovid selle kontakti bugist eemaldada?',
-  'NTC_REMOVE_ACCOUNT_CONFIRMATION' => 'Kas oled kindel, et soovid bugi sellest kontost eemaldada?',
-  'ERR_DELETE_RECORD' => 'Bugi kustutamiseks täpsusta kirje numbrit.',
-  'LBL_LIST_MY_BUGS' => 'Minu määratud bugid',
-  'LNK_IMPORT_BUGS' => 'Impordi bugid',
+  'LNK_NEW_BUG' => 'Teata veast',
+  'LNK_CREATE'  => 'Teata veast',
+  'LNK_CREATE_WHEN_EMPTY'    => 'Teata veast kohe.',
+  'LNK_BUG_LIST' => 'Vaata vigu',
+  'LBL_SHOW_MORE' => 'Näita rohkem vigu',
+  'NTC_REMOVE_INVITEE' => 'Kas olete kindel, et soovite selle kontakti veast eemaldada?',
+  'NTC_REMOVE_ACCOUNT_CONFIRMATION' => 'Kas olete kindel, et soovite selle vea sellest kontost eemaldada?',
+  'ERR_DELETE_RECORD' => 'Vea kustutamiseks täpsustage kirje numbrit.',
+  'LBL_LIST_MY_BUGS' => 'Minu määratud vead',
+  'LNK_IMPORT_BUGS' => 'Impordi vead',
   'LBL_FOUND_IN_RELEASE' => 'Leitud tooteuuenduses:',
   'LBL_FIXED_IN_RELEASE' => 'Fikseeritud tooteuuenduses:',
-  'LBL_LIST_FIXED_IN_RELEASE' => 'Fikseeritud tooteuuenduses:',
-  'LBL_WORK_LOG' => 'Töö logi',
+  'LBL_LIST_FIXED_IN_RELEASE' => 'Fikseeritud tooteuuenduses',
+  'LBL_WORK_LOG' => 'Töö logi:',
   'LBL_SOURCE' => 'Allikas:',
   'LBL_PRODUCT_CATEGORY' => 'Kategooria:',
 
   'LBL_CREATED_BY' => 'Looja:',
   'LBL_DATE_CREATED' => 'Loodud:',
   'LBL_MODIFIED_BY' => 'Muutja:',
-  'LBL_DATE_LAST_MODIFIED' => 'Muuda kuupäev:',
+  'LBL_DATE_LAST_MODIFIED' => 'Muudetud:',
 
-  'LBL_LIST_EMAIL_ADDRESS' => 'E-post:',
+  'LBL_LIST_EMAIL_ADDRESS' => 'Meiliaadress',
   'LBL_LIST_CONTACT_NAME' => 'Kontaktisiku nimi',
-  'LBL_LIST_ACCOUNT_NAME' => 'Ettevõtte nimi',
-  'LBL_LIST_PHONE' => 'Tlf number',
-  'NTC_DELETE_CONFIRMATION' => 'Kas oled kindel, et soovid selle bugi sellest kontaktist eemaldada?',
+  'LBL_LIST_ACCOUNT_NAME' => 'Konto nimi',
+  'LBL_LIST_PHONE' => 'Telefoninumber',
+  'NTC_DELETE_CONFIRMATION' => 'Kas olete kindel, et soovite selle kontakti sellest veast eemaldada?',
 
-  'LBL_DEFAULT_SUBPANEL_TITLE' => 'Bugi Tracker',
+  'LBL_DEFAULT_SUBPANEL_TITLE' => 'Vigade otsija',
   'LBL_ACTIVITIES_SUBPANEL_TITLE'=>'Tegevused',
   'LBL_HISTORY_SUBPANEL_TITLE'=>'Ajalugu',
   'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontaktid',
-  'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Ettevõtted',
+  'LBL_ACCOUNTS_SUBPANEL_TITLE' => 'Kontod',
   'LBL_CASES_SUBPANEL_TITLE' => 'Juhtumid',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projektid',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumendid',
   'LBL_SYSTEM_ID' => 'Süsteemi ID',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Määratud kasutaja',
-	'LBL_ASSIGNED_TO_NAME' => 'Vastutaja',
+	'LBL_ASSIGNED_TO_NAME' => 'Määratud kasutajale',
 
-	'LNK_BUG_REPORTS' => 'Vaata bugi aruandeid',
-	'LBL_SHOW_IN_PORTAL' => 'Näita saidil',
-	'LBL_BUG_INFORMATION' => 'Bugi ülevaade',
+	'LNK_BUG_REPORTS' => 'Vaata vea aruandeid',
+	'LBL_SHOW_IN_PORTAL' => 'Kuva portaalis',
+	'LBL_BUG_INFORMATION' => 'Ülevaade',
 
     //For export labels
-	'LBL_FOUND_IN_RELEASE_NAME' => 'Found In Release Name',
-    'LBL_PORTAL_VIEWABLE' => 'Portal Viewable',
-    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Assigned User Name',
-    'LBL_EXPORT_ASSIGNED_USER_ID' => 'Assigned User ID',
-    'LBL_EXPORT_FIXED_IN_RELEASE_NAMR' => 'Fixed in Release Name',
+	'LBL_FOUND_IN_RELEASE_NAME' => 'Leitud väljalaske nimes',
+    'LBL_PORTAL_VIEWABLE' => 'Portaali saab vaadata',
+    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Määratud kasutajanimi',
+    'LBL_EXPORT_ASSIGNED_USER_ID' => 'Määratud kasutaja ID',
+    'LBL_EXPORT_FIXED_IN_RELEASE_NAMR' => 'Fikseeritud väljalaske nimes',
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Muutja ID',
-    'LBL_EXPORT_CREATED_BY' => 'Created By ID',
+    'LBL_EXPORT_CREATED_BY' => 'Looja ID',
 
 
-    'LBL_NOTES_SUBPANEL_TITLE' => 'Märkused:',
+    'LBL_NOTES_SUBPANEL_TITLE' => 'Märkused',
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module is used to track and manage product related problems, commonly referred to as {{plural_module_name}} or defects, either found internally or reported by customers. The {{plural_module_name}} can be further triaged by tracking the found and fixed in release. The {{plural_module_name}} module gives users a way to quickly review all details of the {{module_name}} and the process being used to rectify it. Once a {{module_name}} is created or submitted, you can view and edit information pertaining to the {{module_name}} via the {{module_name}}&#39;s record view. Each {{module_name}} record may then relate to other Sugar records such as {{calls_module}}, {{contacts_module}}, {{cases_module}}, and many others.',
+    'LBL_HELP_RECORDS' => 'Moodulit {{plural_module_name}} kasutatakse tootega seotud probleemide otsimiseks ja haldamiseks, millele viidatakse sageli nimega {{plural_module_name}} või defektid, mis on leitud kas sisemiselt või millest on teatanud kliendid. Moodulit {{plural_module_name}} saab täiendavalt sortida, jälgides leidu ja parandust väljalaskes. Moodul {{plural_module_name}} annab kasutajatele kiire mooduse kõigi mooduli {{module_name}} ja selle parandamiseks kasutatavate üksikasjade vaatamiseks. Kui {{module_name}} on loodud või esitatud, saate mooduliga {{module_name}} seotud teavet vaadata ja redigeerida mooduli {{module_name}} kirje vaate kaudu. Iga {{module_name}} kirje võib seejärel kliendisuhte arenemisel seostuda muude Sugari kirjetega, nagu {{calls_module}}, {{contacts_module}}, {{cases_module}} ja paljude muudega.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'The {{plural_module_name}} module is used to track and manage product related problems, commonly referred to as {{plural_module_name}} or defects, either found internally or reported by customers.
+    'LBL_HELP_RECORD' => 'Moodulit {{plural_module_name}} kasutatakse tootega seotud probleemide otsimiseks ja haldamiseks, millele viidatakse sageli nimega {{plural_module_name}} või defektid, mis on leitud kas sisemiselt või millest on teatanud kliendid.
 
-- Edit this record&#39;s fields by clicking an individual field or the Edit button.
-- View or modify links to other records in the subpanels by toggling the bottom left pane to "Data View".
-- Make and view user comments and record change history in the {{activitystream_singular_module}} by toggling the bottom left pane to "Activity Stream".
-- Follow or favorite this record using the icons to the right of the record name.
-- Additional actions are available in the dropdown Actions menu to the right of the Edit button.',
+- Redigeerige selle kirje välju, klõpsates üksikut välja või nuppu Redigeeri.
+- Vaadake või muutke alampaneelidel linke muudele kirjetele, vahetades alumise vasaku paani suvandile Andmevaade.
+- Tehke ja vaadake kasutaja kommentaare ja kirje muutmise ajalugu moodulis {{activitystream_singular_module}}, vahetades alumise vasaku paani suvandile Tegevused.
+- Järgige seda kirjet või muutke see lemmikuks kirje nimest paremal olevate ikoonidega.
+- Lisatoimingud on saadaval nupust Redigeeri paremal olevas rippmenüüs Toimingud.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'The {{plural_module_name}} module is used to track and manage product related problems, commonly referred to as {{plural_module_name}} or defects, either found internally or reported by customers.
+    'LBL_HELP_CREATE' => 'Moodulit {{plural_module_name}} kasutatakse tootega seotud probleemide otsimiseks ja haldamiseks, millele viidatakse sageli nimega {{plural_module_name}} või defektid, mis on leitud kas sisemiselt või millest on teatanud kliendid.
 
-To create a {{module_name}}:
-1. Provide values for the fields as desired.
- - Fields marked "Required" must be completed prior to saving.
- - Click "Show More" to expose additional fields if necessary.
-2. Click "Save" to finalize the new record and return to the previous page.',
+Mooduli {{module_name}} loomiseks tehke järgmist.
+1. Esitage väljade väärtused soovi järgi.
+ - Väljad märkega Kohustuslik tuleb täita enne salvestamist.
+ - Vajaduse korral lisaväljade avaldamiseks klõpsake suvandit Kuva rohkem.
+2. Uue kirje lõpetamiseks ja eelmisele lehele naasmiseks klõpsake nuppu Salvesta.',
 );

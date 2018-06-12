@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -120,42 +120,61 @@
             this.view = options.view;
 
             /**
+             * View definitions for the field (doesn't include vardefs).
+             *
+             * The view definitions are the properties used for field rendering.
+             * Exple: A `link` property can specify if the field should be
+             * displayed as a link.
+             *
+             * @property {Object} viewDefs
+             * @property {Object} [viewDefs.defs] A hash of properties that
+             *   will override the field definitions (vardefs).
+             */
+            this.viewDefs = options.viewDefs || {};
+
+            /**
              * Field name.
-             * @property {String}
+             * @property {string}
              * @member View.Field
              */
-            this.name = this.options.def.name;
+            this.name = this.viewDefs.name || options.def && options.def.name;
+
+            var fieldDefs = this.model && this.model.fields ? this.model.fields[this.name] : null;
+            /**
+             * Field definitions (vardefs).
+             *
+             * Field definitions are properties that define the field and its
+             * internal behavior.
+             *
+             * @property {Object}
+             */
+            this.fieldDefs = _.extend({}, fieldDefs, this.viewDefs.defs);
+
+            /**
+             * Field metadata definition (fieldDefs + viewdefs).
+             *
+             * Viewdef are copied over vardef.
+             * @property {Object}
+             * @member View.Field
+             * @deprecated
+             */
+            this.def = _.extend({}, fieldDefs, options.def);
 
             /**
              * Widget type (text, bool, int, etc.).
              * @property {String}
              * @member View.Field
              */
-            this.type = this.options.def.type;
+            this.type = this.viewDefs.type || this.def.type || this.fieldDefs.type;
 
-            if (this.model && this.model.fields) {
-                // Set module field definition (vardef)
-                var clonedVarDef = _.clone(this.model.fields[this.name]);
-                /**
-                 * Field metadata definition (vardef + viewdef).
-                 *
-                 * Viewdef are copied over vardef.
-                 * @property {Object}
-                 * @member View.Field
-                 */
-                // Beware of shallow clone! We assume here that vardef object has only primitive types
-                this.def = clonedVarDef ? _.extend(clonedVarDef, options.def) : options.def;
-            }
-            else {
-                this.def = this.options.def;
-            }
-
+            // TODO deprecate this fallback, since label vs vname is already patched in metadata
+            var oldLabel = this.def.label || this.def.vname || this.name;
             /**
              * i18n-ed field label.
              * @property {String}
              * @member View.Field
              */
-            this.label = app.lang.get(this.def.label || this.def.vname || this.name, this.module);
+            this.label = app.lang.get(this.viewDefs.label || oldLabel, this.module);
 
             /**
              * Compiled template.
@@ -167,7 +186,7 @@
             // Bind validation error event
             // Note we bind it regardless of which view we on (only need for edit type views)
             if (this.model) {
-                this.model.on("error:validation:" + this.name, this.handleValidationError, this);
+                this.model.on('error:validation:' + this.name, this.handleValidationError, this);
                 this.model.on('validation:start attributes:revert', this.removeValidationErrors, this);
                 this.model.on('acl:change:' + this.name, this.handleAclChange, this);
             }
@@ -312,13 +331,15 @@
             // We may have:
             // this.events -- comes from custom .js controllers
             // this.def.events -- comes from metadata. See, for example, buttons section in portal.js file
-            events = events || this.events || (this.def ? this.def.events : null);
+            // FIXME SC-5676: The metadata events should typically be extended
+            // or mixed-in to the events, not OR'ed with `this.events`. SC-5676
+            // should address refactoring this method.
+            events = events || _.result(this, 'events') || (this.def ? this.def.events : null);
             if (!events) return;
 
             events = _.clone(events);
 
             _.each(events, function(eventHandler, handlerName) {
-
                 var callback = this[eventHandler];
 
                 // If our callbacks / events have not been registered in field,
@@ -338,7 +359,7 @@
                 }
             }, this);
 
-            Backbone.View.prototype.delegateEvents.call(this, events);
+            this._super('delegateEvents', [events]);
         },
 
         /**
@@ -481,8 +502,8 @@
          * Override this method to provide custom formatting in field
          * controller (`[type].js` file).
          *
-         * @param {Array/Object/String/Number/Boolean} value The value to format.
-         * @return {Array/Object/String/Number/Boolean} Formatted value.
+         * @param {Array|Object|string|number|boolean} value The value to format.
+         * @return {Array|Object|string|number|boolean} Formatted value.
          */
         format: function(value) {
             return value;
@@ -496,8 +517,8 @@
          * Override this method to provide custom unformatting in field
          * controller (`[type].js` file).
          *
-         * @param {String} value The value to unformat.
-         * @return {Array/Object/String/Number/Boolean} Unformatted value.
+         * @param {string} value The value to unformat.
+         * @return {Array|Object|string|number|boolean} Unformatted value.
          */
         unformat: function(value) {
             return value;
@@ -509,7 +530,7 @@
          * If you need to override the formatted value please override
          * {@link #format}.
          *
-         * @return {Array/Object/String/Number/Boolean} The formatted data as
+         * @return {Array|Object|string|number|boolean} The formatted data as
          *   provided by {@link #format}.
          */
         getFormattedValue: function() {

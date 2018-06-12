@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -144,7 +144,7 @@ class ForecastWorksheet extends SugarBean
     {
         //Update the Opportunities bean -- should update the revenue line item as well through SaveOverload.php
         /* @var $bean Opportunity|Product */
-        $bean = BeanFactory::getBean($this->parent_type, $this->parent_id);
+        $bean = $this->getBean($this->parent_type, $this->parent_id);
         $bean->probability = $this->probability;
         if ($bean instanceof RevenueLineItem) {
             $bean->likely_case = $this->likely_case;
@@ -225,12 +225,14 @@ class ForecastWorksheet extends SugarBean
 
     /**
      * Commit All Related Products from an Opportunity
-     *
+     * @deprecated As of 7.8 this is no longer needed
      * @param Opportunity $opp
      * @param $isCommit
      */
     public function saveOpportunityProducts(Opportunity $opp, $isCommit = false)
     {
+        $GLOBALS['log']->deprecated('Opportunity::saveOpportunityProducts() has been deprecated in 7.8');
+
         // remove the relationship if it exists as it could cause errors with the cached beans in the BeanFactory
         if (isset($opp->revenuelineitems)) {
             unset($opp->revenuelineitems);
@@ -259,7 +261,7 @@ class ForecastWorksheet extends SugarBean
         if (isset($this->fetched_row['date_closed']) && isset($bean->fetched_row['date_closed']) &&
             $this->timeperiodHasMigrated($this->fetched_row["date_closed"], $bean->fetched_row["date_closed"])
         ) {
-            $worksheet = BeanFactory::getBean("ForecastWorksheets");
+            $worksheet = $this->getBean("ForecastWorksheets");
             $worksheet->retrieve_by_string_fields(
                 array(
                     "parent_type" => $bean->module_name,
@@ -305,17 +307,17 @@ class ForecastWorksheet extends SugarBean
         }
 
         // load the opportunity
-        if (empty($this->opportunity_name) && !empty($rli->opportunity_id)) {
+        if (empty($rli->opportunity_name) && !empty($rli->opportunity_id)) {
             $rli->opportunity_name = $this->getRelatedName('Opportunities', $rli->opportunity_id);
         }
 
         // Product Template
-        if (empty($this->product_template_name) && !empty($rli->product_template_id)) {
+        if (empty($rli->product_template_name) && !empty($rli->product_template_id)) {
             $rli->product_template_name = $this->getRelatedName('ProductTemplates', $rli->product_template_id);
         }
 
         // Product Category
-        if (empty($this->category_name) && !empty($rli->category_id)) {
+        if (empty($rli->category_name) && !empty($rli->category_id)) {
             $rli->category_name = $this->getRelatedName('ProductCategories', $rli->category_id);
         }
 
@@ -384,10 +386,14 @@ class ForecastWorksheet extends SugarBean
      * Copy the fields from the $seed bean to the worksheet object
      *
      * @param array $fields
-     * @param SugarBean $seed
+     * @param SugarBean|array $seed
      */
-    public function copyValues($fields, SugarBean $seed)
+    public function copyValues($fields, $seed)
     {
+        if ($seed instanceof SugarBean) {
+            $seed = $seed->toArray();
+        }
+
         foreach ($fields as $field) {
             $key = $field;
             if (is_array($field)) {
@@ -397,8 +403,8 @@ class ForecastWorksheet extends SugarBean
                 $field = array_shift($field);
             }
             // make sure the field is set, as not to cause a notice since a field might get unset() from the $seed class
-            if (isset($seed->$field)) {
-                $this->$key = $seed->$field;
+            if (isset($seed[$field])) {
+                $this->$key = $seed[$field];
             }
         }
     }
@@ -413,16 +419,14 @@ class ForecastWorksheet extends SugarBean
      */
     public function commitWorksheet($user_id, $timeperiod, $chunk_size = 50)
     {
-        /* @var $admin Administration */
-        $admin = BeanFactory::getBean('Administration');
-        $settings = $admin->getConfigForModule('Forecasts');
+        $settings = Forecast::getSettings();
 
         if ($settings['is_setup'] == false) {
             $GLOBALS['log']->fatal("Forecast Module is not setup. " . __CLASS__ . " should not be running");
             return false;
         }
         /* @var $tp TimePeriod */
-        $tp = BeanFactory::getBean('TimePeriods', $timeperiod);
+        $tp = $this->getBean('TimePeriods', $timeperiod);
 
         if (empty($tp->id)) {
             $GLOBALS['log']->fatal("Unable to load TimePeriod for id: " . $timeperiod);
@@ -431,10 +435,10 @@ class ForecastWorksheet extends SugarBean
 
         $type = $settings['forecast_by'];
 
-        $sq = new SugarQuery();
+        $sq = $this->getSugarQuery();
         // we want the deleted records
         /* @var $bean_obj SugarBean */
-        $bean_obj = BeanFactory::getBean($type);
+        $bean_obj = $this->getBean($type);
         $sq->select(array($bean_obj->getTableName().'.*'));
         $sq->from($bean_obj, array('add_deleted' => false))->where()
             ->equals('assigned_user_id', $user_id)
@@ -459,7 +463,7 @@ class ForecastWorksheet extends SugarBean
         $bean_chunks = array_chunk($beans, $chunk_size);
 
         // process the first chunk
-        self::processWorksheetDataChunk($type, $bean_chunks[0]);
+        $this->processWorksheetDataChunk($type, $bean_chunks[0]);
 
         // process any remaining in the background
         for ($x = 1; $x < count($bean_chunks); $x++) {
@@ -475,18 +479,17 @@ class ForecastWorksheet extends SugarBean
      * @param string $forecast_by
      * @param array $data
      */
-    public static function processWorksheetDataChunk($forecast_by, array $data)
+    public function processWorksheetDataChunk($forecast_by, array $data)
     {
         foreach ($data as $bean) {
             /* @var $obj Opportunity|RevenueLineItem */
-            $obj = BeanFactory::getBean($forecast_by);
+            $obj = $this->getBean($forecast_by);
             $obj->loadFromRow($bean);
 
             /* @var $worksheet ForecastWorksheet */
-            $worksheet = BeanFactory::getBean('ForecastWorksheets');
+            $worksheet = $this->getBean('ForecastWorksheets');
             if ($forecast_by == 'Opportunities') {
                 $worksheet->saveRelatedOpportunity($obj, true);
-
             } elseif ($forecast_by == 'RevenueLineItems') {
                 $worksheet->saveRelatedProduct($obj, true);
             }
@@ -504,15 +507,14 @@ class ForecastWorksheet extends SugarBean
     protected function createUpdateForecastWorksheetJob($forecast_by, array $data, $user_id)
     {
         /* @var $job SchedulersJob */
-        $job = BeanFactory::getBean('SchedulersJobs');
+        $job = $this->getBean('SchedulersJobs');
         $job->name = "Update ForecastWorksheets";
         $job->target = "class::SugarJobUpdateForecastWorksheets";
         $job->data = json_encode(array('forecast_by' => $forecast_by, 'data' => $data));
         $job->retry_count = 0;
         $job->assigned_user_id = $user_id;
 
-        require_once('include/SugarQueue/SugarJobQueue.php');
-        $jq = new SugarJobQueue();
+        $jq = $this->getJobQueue();
         $jq->submitJob($job);
     }
 
@@ -602,7 +604,6 @@ class ForecastWorksheet extends SugarBean
         $job->retry_count = 0;
         $job->assigned_user_id = $user_id;
 
-        require_once('include/SugarQueue/SugarJobQueue.php');
         $jq = $this->getJobQueue();
         $jq->submitJob($job);
     }
@@ -622,10 +623,10 @@ class ForecastWorksheet extends SugarBean
      * Utility function to get beans (to aid in test writing)
      *
      * @param string $beanName
-     * @param string $id
+     * @param string|null $id
      * @return null|SugarBean
      */
-    public function getBean($beanName, $id)
+    public function getBean($beanName, $id = null)
     {
         return BeanFactory::getBean($beanName, $id);
     }
@@ -636,6 +637,7 @@ class ForecastWorksheet extends SugarBean
      */
     public function getJobQueue()
     {
+        SugarAutoLoader::load('include/SugarQueue/SugarJobQueue.php');
         return new SugarJobQueue();
     }
 
@@ -791,16 +793,13 @@ class ForecastWorksheet extends SugarBean
     public function worksheetTotals($timeperiod_id, $user_id, $forecast_by = null, $useDraftRecords = false)
     {
         /* @var $tp TimePeriod */
-        $tp = BeanFactory::getBean('TimePeriods', $timeperiod_id);
+        $tp = $this->getBean('TimePeriods', $timeperiod_id);
         if (empty($tp->id)) {
             // timeperiod not found
             return false;
         }
 
-        /* @var $admin Administration */
-        $admin = BeanFactory::getBean('Administration');
-        $settings = $admin->getConfigForModule('Forecasts');
-
+        $settings = Forecast::getSettings();
         if (is_null($forecast_by)) {
             $forecast_by = $settings['forecast_by'];
         }
@@ -836,8 +835,8 @@ class ForecastWorksheet extends SugarBean
 
         global $current_user;
 
-        $sq = new SugarQuery();
-        $bean_obj = BeanFactory::getBean($this->module_name);
+        $sq = $this->getSugarQuery();
+        $bean_obj = $this->getBean($this->module_name);
         $sq->select(array($bean_obj->getTableName().'.*'));
         $sq->from($bean_obj)->where()
             ->equals('assigned_user_id', $user_id)

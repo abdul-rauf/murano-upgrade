@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'E-postadresse',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Send epost til alle inviterte',
     'LBL_POPUP_REMINDER' => 'Sprettopp-påminnelse',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup Reminder Tid',
+    'LBL_POPUP_REMINDER_TIME' => 'Tid for popup-påminnelse',
     'LBL_EMAIL_REMINDER' => 'Epost-påminnelse',
-    'LBL_EMAIL_REMINDER_TIME' => 'Epost-påminnelse Tidspunkt',
+    'LBL_EMAIL_REMINDER_TIME' => 'Tid for e-postpåminnelse',
     'LBL_REMOVE' => 'fjern',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Planlegging',
 	'LBL_SEARCH_BUTTON'=> 'Søk',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Slett Alle Gjentakelser',
     'LBL_DATE_END_ERROR' => 'Sluttdato er før startdato',
     'LBL_REPEAT_PARENT_ID' => 'Gjenta Overordnet ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID for gjentakelse av møtet. Opprinnelig startdato for møte',
     'LBL_RECURRING_SOURCE' => 'Repeterende Kilde',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Er du sikker på at du ønsker å fjerne alle repeterende oppføringer?',
     'LBL_RECURRENCE' => 'Gjentakelse',

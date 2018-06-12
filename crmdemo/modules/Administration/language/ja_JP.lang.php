@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -275,7 +275,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => 'フィールドの編集',
     'LBL_EDIT_TABS'=>'タブ編集',
     'LBL_EMAIL_TITLE' => 'Eメール',
-    'LBL_EMAIL_DESC' => 'アウトバウンドおよびインバウンドメールを管理します。ユーザがメールやキャンペーンメールを送信できるようにするには、メール設定を行う必要があります。',
+    'LBL_EMAIL_DESC' => '送信および受信電子メールを管理します。次を実行するために電子メール設定を構成する必要があります。 ' .
+                        'キャンペーンを送信できるように指定する必要があります。',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => '本機能を利用するためには、それぞれのユーザに主たるEメールアドレスが必要です。',
 	'LBL_ENABLE_MAILMERGE' => 'メールマージを有効',
 	'LBL_ENABLED' => '有効',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'デフォルトのローカライゼーション設定',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- このクライアントの管理ユーザ名',
     'LBL_LOGIN_SUGAR_SERVER'                => 'エンドユーザ名:',
-    'LBL_MAILBOX_DESC' => 'インバウンドメールを監視する為のグループメールアカウントの設定、及び各ユーザの個人インバウンドメールアカウントの管理',
+    'LBL_MAILBOX_DESC' => '受信メールを監視するグループメールアカウントを設定して、 ' .
+        'ユーザーのために個人の受信メールアカウント情報を管理します',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'契約タイプ',
     'LBL_MANAGE_CURRENCIES' => '通貨',
     'LBL_MANAGE_GROUPS_TITLE'   => 'グループを管理',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'JavaScriptグルーピングファイルを再構築',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => '既存のJavaScriptファイルを結合してグルーピングファイルを再構築します。',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Javascriptファイルを修復',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'JSファイルを修復',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'ファイルを処理しています。この処理には数分かかることがあります。このページから移動してもプロセスはキャンセルされません。ページを移動してもこのまま待機しても構いません。',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'ファイルの更新が完了しました。',
     'LBL_REPAIR_FIELD_CASING_TITLE' => '小文字化していないフィールドのリペア',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => '追加キャッシュファイルをクリア中...完成',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'また、システムのライセンスを自動的に更新することができます。このボックスにチェックが入っていない場合は、管理者はシステムのライセンスが失効した後に手動で再認証する必要があり、認証を行わないとユーザはログインできなくなります。',
 	'LBL_TRACKER_SETTINGS' => 'トラッカー設定',
-	'LBL_TRACKER_SETTINGS_DESC' => 'トラッキングを設定',
+	'LBL_TRACKER_SETTINGS_DESC' => 'トラッキングの有効化/無効化',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'シードユーザの無効化/有効化',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> '有効にする',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> '無効にする',
@@ -1158,6 +1162,10 @@ SugarCRM モバイルおよびSugar ポータルでグローバル検索を有�
     'LBL_SPRITES_ADDED' => 'スプライト{0}を追加中',
     'LBL_SPRITES_EXCLUDING_FILE' => 'ファイルを除外中: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'チームベースのパーミッション',
+    'LBL_TBA_CONFIGURATION_DESC' => 'チームアクセスを有効化してモジュール別にアクセスを管理します。',
+
     //FTS
     'LBL_FTS_TYPE' => 'システムタイプ',
     'LBL_FTS_HOST' => 'ホスト',
@@ -1227,5 +1235,6 @@ SugarCRM モバイルおよびSugar ポータルでグローバル検索を有�
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => '実行をクリックするとマスターサーバと同期します。',
     'LBL_OFFLINE_ENABLED' => 'オフラインが有効',
     'LBL_OFFLINE_SETTINGS' => 'オフライン設定',
+
 
 );

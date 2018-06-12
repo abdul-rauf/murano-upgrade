@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -274,8 +274,9 @@ $mod_strings = array (
     'LBL_DST_UPGRADE' => 'Обновление:',
     'LBL_EDIT_CUSTOM_FIELDS' => 'Изменение пользовательских полей',
     'LBL_EDIT_TABS'=>'Править вкладки',
-    'LBL_EMAIL_TITLE' => 'Email',
-    'LBL_EMAIL_DESC' => 'Управление параметрами Электронной почты и рассылок. Необходимые параметры должны быть установлены для того, чтобы обеспечить пользователям возможность рассылки писем и новостей компании.',
+    'LBL_EMAIL_TITLE' => 'Электронная почта',
+    'LBL_EMAIL_DESC' => 'Настройте параметры исходящих и входящих сообщений электронной почты. Параметры электронной почты необходимо настроить, чтобы ' .
+                        'пользователи могли делать рассылку сообщений электронной почты и рекламных проспектов.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Для использования данной возможности каждому создаваемому пользователю необходимо в обязательном порядке указывать основной адрес E-mail.',
 	'LBL_ENABLE_MAILMERGE' => 'Включить слияние?',
 	'LBL_ENABLED' => 'Доступны',
@@ -293,11 +294,11 @@ $mod_strings = array (
     'LBL_FORECAST_TITLE'=> 'Прогноз',
     'LBL_FORECAST_DESC'=> 'Установите отчётные периоды для модуля Прогнозы. Они отображаются в выпадающем меню Отчётные периоды модуля Прогнозы.',
     'LBL_OPPORTUNITIES_DESC'=> 'Настройте параметры администратора для модуля Сделки. Настройки Сделок включают просмотр непосредственно Сделки или просмотр Сделки плюс Доходы по продажам, которые с ней связаны.',
-    'LBL_GLOBAL_SEARCH_SETTINGS' => 'Global Search',
-    'LBL_GLOBAL_SEARCH_SETTINGS_DESC' => 'Настроить опции Global Search.',
+    'LBL_GLOBAL_SEARCH_SETTINGS' => 'Поиск',
+    'LBL_GLOBAL_SEARCH_SETTINGS_DESC' => 'Выбор модулей для глобального поиска и настройка полнотекстового поиска.',
     'LBL_FTS_SETTINGS' => 'Настройка полнотекстового поиска',
    	'LBL_FTS_SETTINGS_DESC' => 'Настройка полнотекстовой поисковой системы.',
-    'LBL_LEGACY_FTS_SETTINGS' => 'Legacy Global Search Configuration',
+    'LBL_LEGACY_FTS_SETTINGS' => 'Устаревшая настройка глобального поиска',
     'LBL_GLOBAL_TEAM_DESC' => 'Общая видимость',
     'LBL_GLOBAL_TEAM_SELECT' => 'Общая команда по умолчанию не найдена. Пожалуйста, выберите команду из списка.',
     'LBL_GLOBAL_TEAM' => 'Изменить доступ к общей команде.',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Установка региональных настроек по умолчанию',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- Имя пользователя, который будет пользоваться этим оффлайн клиентом',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Имя конечного пользователя:',
-    'LBL_MAILBOX_DESC' => 'Настройка групповых учетных записей для входящей почты, а также управление персональными учетными записями пользователей',
+    'LBL_MAILBOX_DESC' => 'Настройка учетных записей почты группы для мониторинга входящей электронной почты ' .
+        'и управление сведениями учетной записи личной входящей почты для пользователей',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Типы контрактов',
     'LBL_MANAGE_CURRENCIES' => 'Валюта',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Управление группами',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Обновление JS Grouping Files',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Перезапись JS Grouping Files их более свежими версиями',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Восстановление файлов JavaScript',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Восстановление файлов JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Восстановление файлов может занять несколько минут. Переход на другую страницу не остановит процесс восстановления, поэтому вы можете либо покинуть данную страницу, либо дождаться сообщения об окончании процесса восстановления...<br>',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Восстановление закончено.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Восстановление нестрочных полей',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Удаление дополнительных кеш-файлов... готово',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Если данная функция отключена, администратор должен будет вручную снова проверять достоверность после того, как срок действия лицензии закончится, иначе пользователи не смогут авторизоваться.',
 	'LBL_TRACKER_SETTINGS' => 'Трекер',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Выберите, какие системы и данные пользователя должны отслеживаться',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Включить/отключить отслеживание',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Включить/Отключить демо-пользователей',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Включить',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Отключить',
@@ -1120,13 +1124,13 @@ $mod_strings = array (
     'LBL_SAML_LOGOUT_URL' => 'URL единого выхода из системы',
     'LBL_SAML_SAME_WINDOW' => 'Загрузите экран входа в том же <br>окне во избежание блокировки всплывающего окна',
     'LBL_SAML_SAME_WINDOW_DESC' => 'Эта опция загружает экран входа SAML в том же окне',
-    'LBL_GLOBAL_SEARCH_SETTINGS_TITLE' => 'Полнотекстовый поиск будет использоваться при возвращении результатов для глобального поиска в классическом приложении. Для возвращения результатов для конкретного модуля его необходимо включить ниже. Обязательно выполните полную индексацию системы после включения модулей для полнотекстового поиска. Отдельные поля модуя для полнотекстового поиска можно включить с помощью <a href="index.php?module=ModuleBuilder&action=index&type=studio">Studio</a>.<br>Для включения модулей для глобальных поисков в SugarCRM Mobile и Sugar Portal используйте <a href="index.php?module=Administration&action=UnifiedSearchSettings">Устаревшую настройку глобального поиска</a>. <br>Для получения дополнительной информации, обратитесь к <a href="http://www.sugarcrm.com/crm/product_doc.php?edition=ENT&version=7.7.0.0beta4&lang=en_us&module=FullTextSearch"> документации</a> по поиску.',
-    'LBL_UNIFIED_SEARCH_SETTINGS_TITLE' => 'Legacy global search will only be used to return results in SugarCRM Mobile or Sugar Portal global searches. In order for legacy global search to perform a search on a particular module, it must be enabled below. <br>
-To enable modules for global search in the desktop application, use the <a href="index.php?module=Administration&action=GlobalSearchSettings">Full Text Search Configuration</a>. <br>
-For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_doc.php?edition=ENT&version=7.7.0.0beta4&lang=en_us&module=LegacyGlobalSearch">Search</a> documentation.',
+    'LBL_GLOBAL_SEARCH_SETTINGS_TITLE' => 'Полнотекстовый поиск будет использоваться при возвращении результатов для глобального поиска в классическом приложении. Для возвращения результатов для конкретного модуля его необходимо включить ниже. Обязательно выполните полную индексацию системы после включения модулей для полнотекстового поиска. Отдельные поля модуля для полнотекстового поиска можно включить с помощью <a href="index.php?module=ModuleBuilder&action=index&type=studio">Studio</a>.<br>Для включения модулей для глобальных поисков в SugarCRM Mobile и Sugar Portal используйте <a href="index.php?module=Administration&action=UnifiedSearchSettings">устаревшую настройку глобального поиска</a>. <br>Для получения дополнительной информации обратитесь к <a href="http://www.sugarcrm.com/crm/product_doc.php?edition=ENT&version=7.7.0.0beta4&lang=en_us&module=FullTextSearch"> документации</a> по поиску.',
+    'LBL_UNIFIED_SEARCH_SETTINGS_TITLE' => 'Глобальный поиск с устаревшими настройками будет использоваться только при возвращении результатов глобального поиска в SugarCRM Mobile или Sugar Portal. Для выполнения глобального поиска с устаревшими настройками в конкретном модуле его необходимо включить ниже. <br>
+Для включения модулей для глобального поиска в классическом приложении используйте <a href="index.php?module=Administration&action=GlobalSearchSettings">настройку полнотекстового поиска</a>. <br>
+Для получения дополнительной информации обратитесь к <a href="http://www.sugarcrm.com/crm/product_doc.php?edition=ENT&version=7.7.0.0beta4&lang=en_us&module=LegacyGlobalSearch">документации</a> по поиску.',
     'LBL_SELECT_MODULES' => 'Расширенные',
     'LBL_SELECT_MODULES_TITLE' => 'Используйте перетаскивание, чтобы выделять модули и изменять порядок отображения. Выполните поиск чтобы изменения вступили в силу.',
-    'LBL_SELECT_FTS_MODULES_TITLE' => 'Перетащите модули, которые выбраны для отображения в Глобальном Поиске. Нажмите Сохранить, чтобы применить изменения.',
+    'LBL_SELECT_FTS_MODULES_TITLE' => 'Перетащите модули, которые выбраны для отображения в глобальном поиске. Нажмите "Сохранить", чтобы применить изменения.',
     'LBL_EAPM_SETTINGS' => 'Внешние учетные записи',
     'LBL_EAPM_SETTINGS_DESC' => 'Выберите внешние приложения, которым пользователи могут предоставлять информацию о своих учётных записях для доступа из Sugar.',
 	'LBL_LANGUAGE_PACKS' => 'Языковые пакеты' /*for 508 compliance fix*/,
@@ -1155,6 +1159,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_PROCESSING_DIR' => 'Обработка директории {0}',
     'LBL_SPRITES_ADDED' => 'Добавлен спрайт {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Исключающий файл: {0}',
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Разрешения для команды',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Предоставьте команде доступ и управляйте им по модулям.',
 
     //FTS
     'LBL_FTS_TYPE' => 'Тип системы',
@@ -1225,5 +1233,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Нажатие кнопки Submit позволит вам синхронизироваться с мастер-сервером.',
     'LBL_OFFLINE_ENABLED' => 'Offline доступен',
     'LBL_OFFLINE_SETTINGS' => 'Offline настройки',
+
 
 );

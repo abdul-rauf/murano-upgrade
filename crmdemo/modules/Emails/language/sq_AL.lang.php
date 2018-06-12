@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -156,14 +156,14 @@ $mod_strings = array (
 
 	'LNK_ALL_EMAIL_LIST'		=> 'Të gjitha emailet',
 	'LNK_ARCHIVED_EMAIL_LIST'	=> 'Emailet e arkivuara',
-	'LNK_CALL_LIST'				=> 'Thirjet',
+	'LNK_CALL_LIST'				=> 'Thirrjet',
 	'LNK_DRAFTS_EMAIL_LIST'		=> 'Të gjitha skicat',
 	'LNK_EMAIL_LIST'			=> 'Emailet',
 	'LBL_EMAIL_RELATE'          => 'Në lidhje me:',
 	'LNK_EMAIL_TEMPLATE_LIST'	=> 'Shiko shabllonat e emailit',
 	'LNK_MEETING_LIST'			=> 'Mbledhjet',
 	'LNK_NEW_ARCHIVE_EMAIL'		=> 'Krijo email të arkivuar',
-	'LNK_NEW_CALL'				=> 'Thirje identifikuese',
+	'LNK_NEW_CALL'				=> 'Thirrje identifikuese',
 	'LNK_NEW_EMAIL_TEMPLATE'	=> 'Krijo shabllona të emailit',
 	'LNK_NEW_EMAIL'				=> 'dërgo email',
 	'LNK_NEW_MEETING'			=> 'Cakto mbledhje',
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'gabim: mungojnë të dhëna',
     'ERR_NO_UID' => 'gabim: ska UID',
     'ERR_NO_IEID' => 'gabim: ska ieID',
+    'ERR_INVALID_RECIPIENTS' => 'Ka një ose më shumë marrës me adresë të pavlefshme emaili. ' .
+        'Korrigjoje këtë dhe provo sërish.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Adresa jovalide e Emailit',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'ska specifikim të dërguesit',

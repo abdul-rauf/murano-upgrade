@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -94,7 +94,7 @@ $mod_strings = array (
     'LBL_DO_NOT_CALL' => 'Non chiamare:',
     'LBL_DUPLICATE' => 'Lead Simili',
     'LBL_EMAIL_ADDRESS' => 'Indirizzo Email:',
-    'LBL_EMAIL_OPT_OUT' => 'Non vuole ricevere email:',
+    'LBL_EMAIL_OPT_OUT' => 'Scelta esclusione email:',
     'LBL_EXISTING_ACCOUNT' => 'Usata un´azienda esistente',
     'LBL_EXISTING_CONTACT' => 'Usato un contatto esistente',
     'LBL_EXISTING_OPPORTUNITY' => 'Usata un´opportunità esistente',
@@ -187,7 +187,7 @@ $mod_strings = array (
     'LNK_NEW_NOTE' => 'Nuova Nota',
     'LNK_NEW_TASK' => 'Nuovo Compito',
     'LNK_NEW_CASE' => 'Nuovo Reclamo',
-    'LNK_NEW_CALL' => 'Nuova Chiamata',
+    'LNK_NEW_CALL' => 'Log chiamata',
     'LNK_NEW_MEETING' => 'Nuova Riunione',
     'LNK_NEW_OPPORTUNITY' => 'Nuova Opportunità',
 	'LNK_SELECT_ACCOUNTS' => '<b>O</b> Seleziona Azienda',
@@ -198,7 +198,7 @@ $mod_strings = array (
     'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'La creazione di una opportunità richiede la presenza di un´azienda. Creare un´azienda o selezionarne una già esistente.',
     'NTC_REMOVE_CONFIRMATION' => 'Sei sicuro di voler rimuovere questo lead dal reclamo?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Sei sicuro di voler eliminare questo record come rapporto diretto?',
-    'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Campagne',
+    'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Log campagne',
     'LBL_TARGET_OF_CAMPAIGNS'=>'Campagne di Successo',
     'LBL_TARGET_BUTTON_LABEL'=>'Obiettivi',
     'LBL_TARGET_BUTTON_TITLE'=>'Obiettivi',
@@ -282,7 +282,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} consiste in singoli prospects che potrebbero essere interessati ad un prodotto o servizio che la tua azienda fornisce. Una volta che il {{module_name}} è qualificato come {{opportunities_singular_module}} di vendita, {{plural_module_name}} può essere convertito in {{contacts_module}}, {{opportunities_module}}, e {{accounts_module}}. Ci sono vari modi per creare {{plural_module_name}} in Sugar come mediante il modulo {{plural_module_name}}, duplicazione, importando {{plural_module_name}}, ecc. Una volta che {{module_name}} è creato, puoi visualizzare o modificre informazioni pertinenti il {{module_name}} attraverso la vista elenco del modulo {{plural_module_name}}.',
+    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} consiste in singoli prospects che potrebbero essere interessati ad un prodotto o servizio che la tua azienda fornisce. Una volta che il {{module_name}} è qualificato come {{opportunities_singular_module}} di vendita, {{plural_module_name}} può essere convertito in {{contacts_module}}, {{opportunities_module}}, e {{accounts_module}}. Ci sono vari modi per creare {{plural_module_name}} in Sugar come mediante il modulo {{plural_module_name}}, duplicazione, importando {{plural_module_name}}, ecc. Una volta che {{module_name}} è creato, puoi visualizzare o modificare informazioni pertinenti il {{module_name}} attraverso la vista elenco del modulo {{plural_module_name}}.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} consiste in singoli prospects che potrebbero essere interessati ad un prodotto o servizio che la tua azienda fornisce. 

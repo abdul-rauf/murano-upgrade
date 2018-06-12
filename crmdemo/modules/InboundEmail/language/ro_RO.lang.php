@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -104,10 +104,10 @@ $mod_strings = array(
 	'LBL_PERSONAL_MODULE_NAME_SINGULAR' => 'Cont de Mail Personal',
 	'LBL_CREATE_CASE'      => 'Creează Caz din Email',
 	'LBL_CREATE_CASE_HELP'  => 'Selecteaza crearea automata a inregistrarilor de caz in Sugar din emailurile de intrare.',
-	'LBL_MODULE_NAME'		=> 'Grup Cont Email',
-	'LBL_MODULE_NAME_SINGULAR' => 'Grup Cont Email',
+	'LBL_MODULE_NAME'		=> 'E-mail primit',
+	'LBL_MODULE_NAME_SINGULAR' => 'E-mail primit',
 	'LBL_BOUNCE_MODULE_NAME' => 'Returneaza Manipulare Mailbox',
-	'LBL_MODULE_TITLE'		=> 'Email de Intrare',
+	'LBL_MODULE_TITLE'		=> 'E-mail primit',
 	'LBL_NAME'				=> 'Nume',
     'LBL_NONE'              => 'Niciunul',
 	'LBL_NO_OPTIMUMS'		=> 'Nu au putut fi gasite optime. Va rugam sa verificati setarile si sa incercati din nou.',

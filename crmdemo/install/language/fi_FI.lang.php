@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Havaittiin virheitä yhteensopivuustarkistuksen aikana. Jotta SugarCRM-asennus toimisi kunnolla, suorita tarvittavat toimet korjataksesi alla listatut ongelmat ja paina <i>Tarkista uudelleen</i>-painiketta, tai yritä asennusta uudelleen.',
     'ERR_CHECKSYS_CALL_TIME'            => '<code>Allow Call Time Pass Reference</code> on <code>On</code> (tämä piäisi asettaa <code>Off</code>:iksi <code>php.ini</code>-tiedostossa)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Ei löydetty: Sugar Scheduler ajaa rajoitetuilla toiminnoilla.',
+	'ERR_CHECKSYS_CURL'					=> 'Ei löydy: Suger-ajastin toimii rajoitetulla kapasiteetilla. Sähköpostien arkistointipalvelu ei toimi.',
     'ERR_CHECKSYS_IMAP'					=> 'Ei löydetty: InboundEmail ja kampanjat (Sähköposti) vaativat IMAP kirjastot. Kumpikaan ei toimi.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC ei voi olla ‘On’ kun käytetään MS SQL Serveriä.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Varoitus:',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'Tietokanta ei ole käytettävissä',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Tietokantatukea ei löydetty. Varmista että sinulla on tarvittavat ajurit johonkin seuraavista tietokantatyypeistä: MySQL tai MS SQL Server. Sinun ehkä pitää poistaa kommenttimerkintä php.ini-tiedostosta, tai kääntää uudelleen oikealla binääritiedostolla, PHP-versiostasi riippuen. Lisätietoja tietokantatuen saamisesta saat PHP:n manuaalista.<br><br>SugarCRM PRO ei tue Oracle- ja DB2-tietokantoja. Voit lukea luettelon tuetuista tietokannoista ja muita alustan tietoja osoitteessa <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'XML-jäsenninkirjastoja käyttäviä Sugarin tarvitsemia funktioita ei löydetty. Sinun pitää ehkä poistaa kommenttimerkintä lisäosan edestä <code>php.ini</code>-tiedostossa, tai kääntää uudelleen oikealla binääritiedostolla, PHP-versiostasi riippuen. Katso lisätietoja PHP-manuaalista.',
+    'LBL_CHECKSYS_CSPRNG' => 'Satunnaislukugeneraattori',
     'ERR_CHECKSYS_MBSTRING'             => 'Multibyte Strings PHP -lisäosaan (<code>mbstring</code>) liittyviä Sugarin tarvitsemia funktioita ei löydetty.<br /><br />Usein mbstring-moduuli ei ole käytössä oletuksena ja pitää aktivoida --enable-mbstring -komennolla kun PHPn binääritiedostoa käännetään. Katso PHP-manuaalista lisätietoja miten mbstring-tuki saadaan käyttöön.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => '<code>session.save_path</code> asetus PHPn asetustiedostossa (<code>php.ini</code>) ei ole asetettu tai asetetaan kansioon, jota ei ole olemassa. Sinun pitää ehkä valita <code>save_path</code> asetus <code>php.ini</code>ssä tai tarkistaa, että kansiot, johon save_path osoittaa, ovat olemassa.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'Zip-tukea ei löytynyt: SugarCRM vaatii Zip-tuen voidakseen käsitellä pakattuja tiedostoja.',
     'ERR_CHECKSYS_BCMATH'				=> 'BCMATH-tukea ei löytynyt: SugarCRM vaatii BCMATH-tuen bignum-matematiikkaa varten.',
     'ERR_CHECKSYS_HTACCESS'             => '.htaccess-rewrite-testi epäonnistui. Tämä yleensä tarkoittaa, että Sugar-hakemistoosi ei ole konfiguroitu AllowOverrdiea.',
+    'ERR_CHECKSYS_CSPRNG' => 'CSPRNG poikkeus',
 	'ERR_DB_ADMIN'						=> 'Annettu tietokannan adminin käyttäjänimi ja/tai salasana on väärin, ja yhteyttä tietokantaan ei saatu. Syötä kelpaava käyttäjänimi ja salasana. (Virhe:&nbsp;',
     'ERR_DB_ADMIN_MSSQL'                => 'Annettu tietokannan adminin käyttäjänimi ja/tai salasana on väärin, ja yhteyttä tietokantaan ei saatu. Syötä kelpaava käyttäjänimi ja salasana.',
 	'ERR_DB_EXISTS_NOT'					=> 'Määritetty tietokanta ei ole olemassa.',
@@ -105,7 +107,7 @@ $mod_strings = array(
 	'ERR_DB_NAME2'						=> "Tietokannan nimessä ei voi olla taka- ja etukenoviivoja (“\\” ja “/”) tai pisteitä (“.”)",
     'ERR_DB_MYSQL_DB_NAME_INVALID'      => "Tietokannan nimessä ei voi olla taka- ja etukenoviivoja (“\\” ja “/”) tai pisteitä (“.”)",
     'ERR_DB_MSSQL_DB_NAME_INVALID'      => "Tietokannan nimi ei voi alkaa numerolla, numero- tai at-merkillä (“#” ja “@”), eikä voi sisältää välilyöntiä eikä seuraavia merkkejä: '&quot;' (lainausmerkki), “'” (heittomerkki), “*”, “/”, “\\”, “?”, “:”, “<”, “>”, “&”, “!”, tai “-”",
-    'ERR_DB_OCI8_DB_NAME_INVALID'       => "Tietokannan nimessä voi ainoastaan olla alfanumeerisia merkkejä ja seuraavia merkkejä: “#”, “_” ja “$”",
+    'ERR_DB_OCI8_DB_NAME_INVALID'       => "Tietokannan nimi voi sisältää ainoastaan aakkosnumeerisia merkkejä ja symboleja #', '_', ':', '.', '/' tai '$'",
 	'ERR_DB_PASSWORD'					=> 'Sugarin tietokanta-adminille annetut salasanat eivät täsmää. Syötä samat salasanat uudelleen salasanakenttiin.',
 	'ERR_DB_PRIV_USER'					=> 'Anna tietokanta-adminille käyttäjänimi. Käyttäjänimeä tarvitaan ensimmäiseen tietokannan yhdistämiseen.',
 	'ERR_DB_USER_EXISTS'				=> 'Käyttäjänimi Sugarin tietokantakäyttäjälle on jo olemassa — ei voida luoda toista samalla nimellä. Syötä uusi käyttäjänimi.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'Avainta vaaditaan sovelluksen toiminnallisuutta varten, mutta sitä ei tarvita asennuksessa. Avainta ei tarvitse syöttää nyt, mutta avain pitää syöttää asennuksen jälkeen.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Vaatii vähimmän määrän tietoa asennusta varten. Suositellaan uusille käyttäjille.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Tarjoaa lisää vaihtoehtoja asennuksen aikana. Useimmat näistä ovat saatavilla myös asennuksen jälkeen admin näytöissä. Suositellaan edistyneille käyttäjille.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Tarjoaa lisää vaihtoehtoja asennuksen aikana. Useimmat näistä ovat saatavilla myös asennuksen jälkeen admin näytöissä. Suositellaan edistyneille käyttäjille.',
 	'LBL_LANG_1'						=> 'Käyttääksesi Sugarissa jotain muuta kuin oletuskieltä (US-English), voit nyt ladata ja asentaa kielipaketin. Kielipajetteja voi asentaa myöhemmin Sugarin hallintasivuilta. Jos haluat ohittaa tämän vaiheen, klikkaa Seuraava.',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Asenna',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Poista',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'Lisenssin hyväksyminen',
     'LBL_LICENSE_CHECKING'              => 'Tarkistetaan järjestelmän yhteensopivuutta.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Tarkistetaan ympäristöä',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'Tarkistetaan tietokannan käyttäjätiedot',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'Varmentaa DB-, FTS -tunnistetietoja.',
     'LBL_LICENSE_CHECK_PASSED'          => 'Järjestelmä läpäisi yhteensopivuustarkistuksen.',
     'LBL_LICENSE_REDIRECT'              => 'Uudelleenohjataan…',
 	'LBL_LICENSE_DIRECTIONS'			=> 'Jos sinulla on lisenssitietoja, syötä se alla oleviin kenttiin.',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'Lue seuraavat tärkeät tiedot, ennen kuin jatkat asennusta. Tiedot auttavat sinua selvittämään oletko valmis asentamaan sovelluksen nyt.',
 
 
-	'LBL_WELCOME_2'						=> 'Asennusdokumentaatiota varten, käy <a href=&#39;http://www.sugarcrm.com/crm/installation&#39; target=&#39;_blank&#39;>Sugar Wikissä</a>.<br /><br />Voit myös saada apua Sugar-yhteisöltä <a href=&#39;http://www.sugarcrm.com/forums/&#39; target=&#39;_blank&#39;>Sugarin foorumeilla</a>.',
+	'LBL_WELCOME_2'						=> 'Asennusdokumentaatio on saatavilla osoitteessa <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>.  <BR><BR> Voit ottaa yhteyttä SugarCRM:n tukipalveluinsinööriin asennusohjeita varten kirjautumalla osoitteessa <a target="_blank" href="http://support.sugarcrm.com">SugarCRM Support Portal</a> ja lähettämällä tukipyynnön.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>Valitse kieli</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Asennustyökalu',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Tervetuloa SugarCRMiin',
@@ -452,7 +455,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'Suorita yölliset massaviestikampanjat',
 	'LBL_OOTB_PRUNE'		=> 'Karsi tietokanta kuukauden ensimmäisenä päivänä',
     'LBL_OOTB_TRACKER'		=> 'Karsi seurantataulukot',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Suorita sähköpostimuistutushuomautukset',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Suorita sähköpostin muistutusilmoitukset',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'Päivitä <code>tracker_sessions</code>-taulu',
     'LBL_OOTB_CLEANUP_QUEUE' => 'Puhdista työjono',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'Hakukoneen tyyppi',
     'LBL_FTS_HELP'      => 'Ottaaksesi käyttöön kokotekstihaun, valitse hakukoneen tyyppi ja syötä sen host ja portti. Sugar sisältää sisäänrakennetun tuen elasticsearch-hakukoneelle.',
     'LBL_FTS_REQUIRED'    => 'Elastic Search vaaditaan.',
-    'LBL_FTS_ERROR'    => 'Ei kyetty yhdistämään kokotekstihakupalvelimelle. Varmista asetukset.',
+    'LBL_FTS_CONN_ERROR'    => 'Ei voida yhdistää kokotekstihakupalvelimelle. Tarkista asetukset.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'Kokotekstihakupalvelimen versiota ei ole saatavissa. Tarkista asetukset.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'Havaittu elastisen haun versio, jota ei tueta. Käytä versioita: %s',
 
     'LBL_PATCHES_TITLE'     => 'Asenna uusimmat korjaustiedostot',
     'LBL_MODULE_TITLE'      => 'Asenna kielipaketit',

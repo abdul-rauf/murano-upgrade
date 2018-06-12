@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -21,25 +21,25 @@ $app_list_strings = array (
 strtolower($object_name).'_category_dom' =>
     array (
     '' => '',
-    'Marketing' => 'Marketingas',
+    'Marketing' => 'Rinkodara',
     'Knowledege Base' => 'Žinių bazė',
-    'Sales' => 'Pardavimai',
+    'Sales' => 'Pardavimas',
   ),
 
     strtolower($object_name).'_subcategory_dom' =>
     array (
     '' => '',
-    'Marketing Collateral' => 'Rinkodaros dokumentai',
-    'Product Brochures' => 'Prekių bukletai',
-    'FAQ' => 'FAQ',
+    'Marketing Collateral' => 'Rinkodaros dokumentacija',
+    'Product Brochures' => 'Produktų brošiūros',
+    'FAQ' => 'DUK',
   ),
 
     strtolower($object_name).'_status_dom' =>
     array (
     'Active' => 'Aktyvus',
     'Draft' => 'Juodraštis',
-    'FAQ' => 'FAQ',
-    'Expired' => 'Pasibaigęs',
+    'FAQ' => 'DUK',
+    'Expired' => 'Nebegalioja',
     'Under Review' => 'Peržiūrimas',
     'Pending' => 'Laukiantis',
   ),

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,7 +20,8 @@ global $timedate;
  
 $mod_strings = array (
     'LBL_GOOD_FILE' => 'Importuotas failas sėkmingai nuskaitytas',
-    'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Įrašai praleisti dėl klaidos',
+    'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Importuotas įrašas naudojamas procese ir jo redaguoti negalima, nes kai kurių laukų redaguoti vykdant procesą neleidžiama.',
+    'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'rastų klaidų skaičius. Peržiūrėkite eilučių, kurios dėl klaidos nebuvo importuotos, klaidos skirtuką  ',
     'LBL_UPDATE_SUCCESSFULLY' => 'Įrašai sukurti arba atnaujinti sėkmingai',
     'LBL_SUCCESSFULLY_IMPORTED' => 'Įrašai sukurti sėkmingai',
     'LBL_STEP_4_TITLE' => '4 žingsnis: Importuoti failą',

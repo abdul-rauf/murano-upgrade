@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,7 +20,7 @@
 ({
     fieldTag: 'input.select2',
 
-    plugins: ['EllipsisInline', 'SearchForMore', 'Tooltip'],
+    plugins: ['SearchForMore'],
 
     events: {
         'click button[data-action=addRow]': 'addRow',
@@ -54,15 +54,15 @@
     initialize: function(options) {
         var fieldValue;
 
+        this.addRow = _.debounce(this._addRowImmediately, 200);
+        this.removeRow = _.debounce(this._removeRowImmediately, 200);
+        this.previewRow = _.debounce(this._previewRowImmediately, 200);
+        this.search = _.debounce(this.search, app.config.requiredElapsed || 500);
+
         this._super('initialize', [options]);
 
         // translate the placeholder
         this.placeholder = app.lang.get(this.def.placeholder || this.placeholder, this.module);
-
-        this.addRow = _.debounce(this.addRow, 200);
-        this.removeRow = _.debounce(this.removeRow, 200);
-        this.previewRow = _.debounce(this.previewRow, 200);
-        this.search = _.debounce(this.search, app.config.requiredElapsed || 500);
 
         if (this.model.isNew()) {
             try {
@@ -217,7 +217,7 @@
             value = this.getFieldValue();
 
             if (value.length === 0) {
-                this.addRow();
+                this._addRowImmediately();
                 this.$('button[data-action=removeRow]').addClass('disabled');
             }
         } catch (e) {
@@ -261,7 +261,7 @@
                 hour: timelineStart.format(timeFormat),
                 alt: (index % 2 === 0)
             });
-            timelineStart.add('hours', 1);
+            timelineStart.add(1, 'hours');
         }
 
         this.$('[data-render=timeline-header]').html(this.timelineHeaderTemplate(timelineHeader));
@@ -307,8 +307,13 @@
         firstUserOverlay = $startEndOverlays.first();
         firstUserData = firstUserOverlay.closest('.participant').data();
         $timelineBlocks = this.getTimelineBlocks(firstUserData.module, firstUserData.id);
+
         timelineBlockStartIndex = startAndEndDates.meetingStart.diff(startAndEndDates.timelineStart, 'hours', true) * 4;
+        timelineBlockStartIndex = Math.round(timelineBlockStartIndex);
+
         timelineBlockEndIndex = (startAndEndDates.meetingEnd.diff(startAndEndDates.timelineStart, 'hours', true) * 4) - 1;
+        timelineBlockEndIndex = Math.round(timelineBlockEndIndex);
+
         $startBlock = $timelineBlocks.eq(timelineBlockStartIndex);
         $endBlock = $timelineBlocks.eq(timelineBlockEndIndex);
 
@@ -343,7 +348,14 @@
         var self = this,
             requests = [],
             startAndEndDates = this.getStartAndEndDates(),
+            participants;
+
+        try {
             participants = this.getFieldValue();
+        } catch (e) {
+            app.logger.warn(e);
+            return;
+        }
 
         if (this.freebusy.isFetching() || _.isEmpty(startAndEndDates)) {
             return;
@@ -494,7 +506,7 @@
                 $timelineBlocks.eq(diffInHours * 4).addClass('busy');
             }
 
-            busyStartDate.add('minutes', 15);
+            busyStartDate.add(15, 'minutes');
         }
     },
 
@@ -738,6 +750,7 @@
                 attributes = {
                     accept_status: acceptStatus(participant),
                     deletable: deletable(participant),
+                    email: app.utils.getPrimaryEmailAddress(participant),
                     last: (rows === i++),
                     name: app.utils.getRecordName(participant),
                     preview: preview(participant),
@@ -752,7 +765,7 @@
                     });
                 }
 
-                return _.extend(attributes, participant.attributes);
+                return _.extend({}, participant.attributes, attributes);
             });
         } catch (e) {
             app.logger.warn(e);
@@ -767,9 +780,10 @@
      *
      * Hides the [+] button.
      *
+     * @private
      * @param {Event} [event]
      */
-    addRow: function(event) {
+    _addRowImmediately: function(event) {
         this.$('.participants-schedule').addClass('new');
         this.$('[name=newRow]').css('display', 'table-row');
 
@@ -788,9 +802,10 @@
      * row. Otherwise, the search and select row is hidden and the [+] is shown
      * again.
      *
+     * @private
      * @param {Event} event
      */
-    removeRow: function(event) {
+    _removeRowImmediately: function(event) {
         var id, participants;
 
         id = $(event.currentTarget).data('id');
@@ -813,9 +828,10 @@
     /**
      * Shows or hides the preview of the participant.
      *
+     * @private
      * @param {Event} event
      */
-    previewRow: function(event) {
+    _previewRowImmediately: function(event) {
         var data, model, success;
 
         success = _.bind(function(model) {
@@ -824,6 +840,7 @@
         }, this);
 
         data = $(event.currentTarget).data();
+
         if (data && data.module && data.id) {
             model = app.data.createBean(data.module, {id: data.id});
             model.fetch({
@@ -960,7 +977,8 @@
     formatSearchResult: function(bean) {
         var result = {
             module: bean.module,
-            name: app.utils.getRecordName(bean)
+            name: app.utils.getRecordName(bean),
+            email: app.utils.getPrimaryEmailAddress(bean)
         };
 
         _.each(bean.searchInfo.highlighted, function(field) {

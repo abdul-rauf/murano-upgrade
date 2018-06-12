@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -36,7 +36,7 @@ function smarty_function_sugar_actions_link($params, &$smarty)
    if(!is_array($type)) {
    	  $module = $params['module'];
    	  $view = $params['view'];
-   	  switch(strtoupper($type)) {
+        switch (strtoupper($type)) {
 			case "SEARCH":
                 // TODO review these SUGAR.ajaxUI.* methods
 			return '<input tabindex="2" title="{$APP.LBL_SEARCH_BUTTON_TITLE}" accessKey="{$APP.LBL_SEARCH_BUTTON_KEY}" onclick="SUGAR.savedViews.setChooser(); SUGAR.ajaxUI.submitForm(this.form);" class="button" type="button" name="button" value="{$APP.LBL_SEARCH_BUTTON_LABEL}" id="search_form_submit"/>&nbsp;';
@@ -60,9 +60,17 @@ function smarty_function_sugar_actions_link($params, &$smarty)
 			return '{if $bean->aclAccess("delete")}<a title="{$APP.LBL_DELETE_BUTTON_TITLE}" accessKey="{$APP.LBL_DELETE_BUTTON_KEY}" onclick="$(\'#form\')[0].return_module.value=\'' . $module . '\'; $(\'#form\')[0].return_action.value=\'ListView\'; $(\'#form\')[0].action.value=\'Delete\'; if(confirm(\'{$APP.NTC_DELETE_CONFIRMATION}\')){literal}{$(\'#form\').submit()}{/literal};" name="Delete" id="delete_button">{$APP.LBL_DELETE_BUTTON_LABEL}</a>{/if} ';
 			break;
 
-			case "DUPLICATE":
-			return '{if $bean->aclAccess("edit")}<a title="{$APP.LBL_DUPLICATE_BUTTON_TITLE}" accessKey="{$APP.LBL_DUPLICATE_BUTTON_KEY}" onclick="$(\'#form\')[0].return_module.value=\''. $module . '\'; $(\'#form\')[0].return_action.value=\'DetailView\'; $(\'#form\')[0].isDuplicate.value=true; $(\'#form\')[0].action.value=\'' . $view . '\'; $(\'#form\')[0].return_id.value=\'{$id}\';SUGAR.ajaxUI.submitForm($(\'#form\')[0]);" name="Duplicate" id="duplicate_button">{$APP.LBL_DUPLICATE_BUTTON_LABEL}</a>{/if} ';
-			break;
+            case "DUPLICATE":
+                return '{if $bean->ACLAccess("edit")}<a title="{$APP.LBL_DUPLICATE_BUTTON_TITLE}" ' .
+                    'accessKey="{$APP.LBL_DUPLICATE_BUTTON_KEY}" ' .
+                    'onclick="$(\'#form\')[0].return_module.value=\''. $module . '\'; ' .
+                    '$(\'#form\')[0].return_action.value=\'DetailView\'; ' .
+                    '$(\'#form\')[0].isDuplicate.value=true; ' .
+                    '$(\'#form\')[0].action.value=\'DuplicateView\'; ' .
+                    '$(\'#form\')[0].return_id.value=\'{$id}\';' .
+                    'SUGAR.ajaxUI.submitForm($(\'#form\')[0]);" ' .
+                    'name="Duplicate" id="duplicate_button">{$APP.LBL_DUPLICATE_BUTTON_LABEL}</a>{/if} ';
+                break;
 
 			case "EDIT";
 			return '{if $bean->aclAccess("edit")}<a title="{$APP.LBL_EDIT_BUTTON_TITLE}" accessKey="{$APP.LBL_EDIT_BUTTON_KEY}" onclick="$(\'#form\')[0].return_module.value=\'' . $module . '\'; $(\'#form\')[0].return_action.value=\'DetailView\'; $(\'#form\')[0].return_id.value=\'{$id}\'; $(\'#form\')[0].action.value=\'EditView\';SUGAR.ajaxUI.submitForm($(\'#form\')[0]);" name="Edit" id="edit_button">{$APP.LBL_EDIT_BUTTON_LABEL}</a>{/if} ';
@@ -136,7 +144,6 @@ function smarty_function_sugar_actions_link($params, &$smarty)
 					}
 				}
 				return '';
-
 
    	  } //switch
 

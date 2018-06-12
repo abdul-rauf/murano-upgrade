@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -15,8 +15,6 @@
  */
 ({
     fieldTag: 'input.select2',
-
-    plugins: ['EllipsisInline'],
 
     /**
      * HTML tag of the append value checkbox.
@@ -68,8 +66,11 @@
      */
     _keysOrder: null,
 
-    initialize: function(){
-        this._super("initialize", arguments);
+    /**
+     * @inheritdoc
+     */
+    initialize: function() {
+        this._super('initialize', arguments);
 
         //Reset the availible options based on the user's access and the model's values
         if (_.isString(this.def.options)) {
@@ -82,17 +83,6 @@
                 }
             });
         }
-
-        /**
-         * Property to add or not the `ellipsis_inline` class when rendering the
-         * field in the `list` template. `true` to add the class, `false`
-         * otherwise.
-         *
-         * Defaults to `true`.
-         *
-         * @property {boolean}
-         */
-        this.ellipsis = _.isUndefined(this.def.ellipsis) || this.def.ellipsis;
     },
 
     /**
@@ -215,7 +205,7 @@
                     self.model.set(self.name, self.unformat(value));
                 }
             });
-            if (this.def.ordered) {
+            if (this.def.isMultiSelect && this.def.ordered) {
                 $el.select2('container').find('ul.select2-choices').sortable({
                     containment: 'parent',
                     start: function() {
@@ -297,7 +287,8 @@
      */
     loadEnumOptions: function(fetch, callback) {
         var self = this;
-        var _itemsKey = 'cache:' + this.module + ':' + this.name + ':items';
+        var _module = this.getLoadEnumOptionsModule();
+        var _itemsKey = 'cache:' + _module + ':' + this.name + ':items';
 
         this.items = this.def.options || this.context.get(_itemsKey);
 
@@ -305,7 +296,7 @@
 
         if (fetch || !this.items) {
             this.isFetchingOptions = true;
-            var _key = 'request:' + this.module + ':' + this.name;
+            var _key = 'request:' + _module + ':' + this.name;
             //if previous request is existed, ignore the duplicate request
             if (this.context.get(_key)) {
                 var request = this.context.get(_key);
@@ -316,7 +307,7 @@
                     }
                 }, this));
             } else {
-                var request = app.api.enumOptions(self.module, self.name, {
+                var request = app.api.enumOptions(_module, self.name, {
                     success: function(o) {
                         if(self.disposed) { return; }
                         if (self.items !== o) {
@@ -333,6 +324,15 @@
         } else if (_.isString(this.items)) {
             this.items = app.lang.getAppListStrings(this.items);
         }
+    },
+
+    /**
+     * Allow overriding of what module is used for loading the enum options
+     *
+     * @return {string}
+     */
+    getLoadEnumOptionsModule: function() {
+        return this.module;
     },
 
     /**
@@ -510,6 +510,9 @@
             options = null;
         }
         query.callback(data);
+
+        // Special hack for Firefox bug http://stackoverflow.com/questions/13040897/firefox-scrollbar-resets-incorrectly
+        $(this.$(this.fieldTag).data('select2').results[0]).scrollTop(1).scrollTop(0);
     },
 
     /**
@@ -555,26 +558,48 @@
             return results;
         }
 
-        // if it is not a dependency field (visibility_grid is not defined), we show the order from drop down list.
-        if (!this.def.visibility_grid) {
-            sortedResults = _.sortBy(results, function(item) {
-                return this._keysOrder[item.id];
-            }, this);
-            return sortedResults;
-        }
-
-        return results;
+        return _.sortBy(results, function(item) {
+            return this._keysOrder[item.id];
+        }, this);
     },
 
     _setupKeysOrder: function() {
-        var keys, orderedKeys, filteredOrderedKeys;
-        if (!this._keysOrder) {
+        var keys;
+        var orderedKeys;
+        var filteredOrderedKeys;
+        var visibilityGrid;
+
+        if (!_.isEmpty(this._keysOrder)) {
+            return;
+        }
+
+        visibilityGrid = this.def.visibility_grid || {};
+
+        var hasTrigger = visibilityGrid.values && visibilityGrid.trigger && this.model.has(visibilityGrid.trigger);
+
+        // in case we have visibility grid, build keys according to its order
+        if (hasTrigger) {
+            var trigger = this.model.get(visibilityGrid.trigger);
+            var _gridKeysOrder = visibilityGrid.values[trigger];
+
+            if (_gridKeysOrder) {
+                this._keysOrder = _.reduce(_gridKeysOrder, function(memo, value, index) {
+                    memo[value] = index;
+                    return memo;
+                }, {});
+
+                return;
+            }
+        } else {
             keys = _.keys(this.items);
             this._keysOrder = {};
+
             orderedKeys = _.map(app.lang.getAppListKeys(this.def.options), function(appListKey) {
                 return appListKey.toString();
             });
+
             filteredOrderedKeys = _.intersection(orderedKeys, keys);
+
             if (!_.isEqual(filteredOrderedKeys, keys)) {
                 _.each(filteredOrderedKeys, function(key, index) {
                     return this._keysOrder[key] = index;

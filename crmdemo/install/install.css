@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -118,9 +118,15 @@ pre a:link {
 pre.license {
     border: 1px solid #888888;
     font-size: 11px;
-    width: 52em;
-    height: 8em;
-    overflow-y:scroll;
+    height: 120px;
+    width: 97%;
+    overflow: auto;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+
+.pre-wrap {
+    white-space: pre-wrap;
 }
 
 .checkbox {

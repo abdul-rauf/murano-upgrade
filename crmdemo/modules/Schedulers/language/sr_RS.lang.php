@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Ukloniti fajlove alata za dijagnozu',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Ukloniti privremene PDF fajlove',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Ažuriraj tabelu tracker_sessions',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Pokreni email podsetnike',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Pokreni obaveštenja podsetnika za e-poštu',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Red poslova čišćenja',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Kreiraj Buduće Vremenske Periode',
 'LBL_OOTB_HEARTBEAT' => 'Sugar-ovi otkucaji srca',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Ažuriraj KBsadržaj članaka.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Objavi odobrene artikle i istekle KB artikle.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Autor Planiranog Poslovnog Procesa',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Planirani zadaci u Advanced Workflow-u',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Osveži zadatke',
 'LBL_POLLMONITOREDINBOXES' => 'Proveri dolazne Email naloge',
 'LBL_PERFORMFULLFTSINDEX' => 'Sistem indeksiranja za punu tekstualnu pretragu',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Ukloniti privremene PDF fajlove',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Objavi odobrene artikle i istekle KB artikle.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Planer redosleda Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Ukloniti fajlove alata za dijagnozu',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Ukloniti privremene fajlove',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Pokreni noćne masovne Email kampanje',
 'LBL_ASYNCMASSUPDATE' => 'Pokreni asinhrono masovno ažuriranje',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Ažuriraj tabele sesija sistema za praćenje',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Kreiraj Buduće Vremenske Periode',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'Pokreni slanje email podsetnika',
+'LBL_SENDEMAILREMINDERS'=> 'Pokreni slanje podsetnika za e-poštu',
 'LBL_CLEANJOBQUEUE' => 'Red poslova čišćenja',
 'LBL_CLEANOLDRECORDLISTS' => 'Očisti listu starih zapisa',
 );

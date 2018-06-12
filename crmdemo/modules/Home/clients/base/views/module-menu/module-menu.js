@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -250,7 +250,7 @@
                 });
                 if (focusToggle && this.isOpen()) {
                     // put focus back on toggle after renderPartial
-                    this.$('[data-toggle="recently-viewed"]').focus();
+                    this._focusRecentlyViewedToggle();
                 }
             }, this),
             'endpoint': function(method, model, options, callbacks) {
@@ -260,6 +260,14 @@
         });
 
         return;
+    },
+
+    /**
+     * Set focus on the recently viewed toggle
+     * @private
+     */
+    _focusRecentlyViewedToggle: function() {
+        this.$('[data-toggle="recently-viewed"]').focus();
     },
 
     /**

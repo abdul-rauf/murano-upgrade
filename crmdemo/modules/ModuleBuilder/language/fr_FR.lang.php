@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Sélectionnez une mise en page à éditer.<br/<br />Pour changer la mise en page qui contient des champs de données qui peuvent être saisis, cliquez sur <b>Éditer la vue</b>.<br /><br />Pour changer la mise en page qui affiche les données saisies dans l&#39;édition, cliquez sur <b>Vue Détails</b>.<br /><br />Pour changer les colonnes qui apparaissent dans les listes par défaut, cliquez sur <b>Vue Liste</b>.<br /><br />Pour changer la mise en page des recherches basiques et avancées, cliquez sur <b>Recherche</b>.',
         'subpanelHelp'=> 'Sélectionnez le sous-panel que vous voulez modifier en cliquant sur l&#39;cone adéquate.',
         'searchHelp' => 'Sélectionnez une mise en page recherchée à éditer.',
-        'labelsBtn'	=> 'Cliquez sur <b>Enregistrer</b> pour enregistrer vos étiquettes personnalisées.',
+        'labelsBtn'	=> 'Éditer les <b>Étiquettes</b> de façon à afficher les valeurs dans ce module.',
         'newPackage'=>'Cliquer ici pour créer un nouveau package',
         'mbHelp'    => '<b>Bienvenue dans le Module Builder.</b><br /><br />Utiliser le <b>Module Builder</b> pour créer des projets qui contiennent des modules personnalisés basés sur des objets standars ou personalisés. <br /><br />Pour commencer, cliquez sur <b>Nouveau Package</b> pour créer un nouveau Package, ou Sélectionnez un package à éditer.<br /><br />Un <b>package</b> agit comme un agit comme un conteneur pour les modules personnalisés, qui sont tous une partie d&#39;un projet. Le package peut contenir un ou plusieurs modules personnalisés peuvant être liées entre eux ou avec des modules existants dans l&#39;application. <br /> <br /> Exemples : Vous avez peut-être envie de créer un package contenant un module de personnalisé, ce qui est relati au module Compte. Ou bien, vous pouvez créer un package contenant plusieurs nouveaux modules qui fonctionnent ensemble comme un projet et qui sont liés les uns aux autres et aux modules existants.',
         'exportBtn' => 'Cliquez sur "Exporter les personnalisations" pour créer un package contenant les modifications faites dans le Studio.',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Nom - Doit être alphanumérique sans espace et commencer par une lettre',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'La clé de paquet existe déjà',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Ce nom de package existe déjà',
+'LBL_JS_PACKAGE_NAME'=>'Nom du package – Doit être alphanumérique sans espace et commencer par une lettre.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Clé - Doit contenir uniquement des caractères alphanumériques et commencer par une lettre',
 'LBL_JS_VALIDATE_KEY'=>'Clé - Doit être alphanumérique sans espace et commencer par une lettre',
 'LBL_JS_VALIDATE_LABEL'=>'Veuillez saisir un libellé qui sera utilisé comme nom public pour ce module',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Êtes-vous sûr(e) de vouloir supprimer cette relation ?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Cela rendra votre relation permanente. Êtes-vous sûr(e) de vouloir déployer cette relation ?',
 'LBL_CONFIRM_DONT_SAVE' => 'Attention vous avez fait des modifications depuis votre dernière sauvegarde, voulez-vous sauvegarder ces modifications ?',
@@ -771,7 +772,7 @@ $mod_strings = array(
 'fieldTypes' => array(
                 'varchar'=>'Saisie libre',
                 'int'=>'Entier',
-                'float'=>'Décimale',
+                'float'=>'Float',
                 'bool'=>'Case à cocher',
                 'enum'=>'Liste à choix simple',
                 'multienum' => 'Liste à choix multiple',

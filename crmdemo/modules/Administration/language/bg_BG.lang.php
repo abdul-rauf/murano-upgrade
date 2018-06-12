@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -275,7 +275,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => 'Редактиране на потребителски полета',
     'LBL_EDIT_TABS'=>'Редактиране на табулатори',
     'LBL_EMAIL_TITLE' => 'Електронна поща',
-    'LBL_EMAIL_DESC' => 'Управление на входящата и изходяща електронна поща. Електронната поща трябва да бъде конфигурирана, за да бъдат организирани кампании и потребителите да могат да получават и изпращат съобщения.',
+    'LBL_EMAIL_DESC' => 'Управление на изходящите и входящите имейли. Настройките на имейла трябва да бъдат конфигурирани, за да ' .
+                        'могат потребителите да изпращат електронна поща и провеждат кампании с бюлетини.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Всеки потребител трябва да има дефинирана пощенска кутия в своя профил.',
 	'LBL_ENABLE_MAILMERGE' => 'Разрешаване сливането на електронни писма?',
 	'LBL_ENABLED' => 'Разрешен',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Дефиниране на регионалните настройки за системата.',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- Фамилия на потребителя, който ще работи с този офлайн клиент',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Име на Крайния потребител:',
-    'LBL_MAILBOX_DESC' => 'Конфигуриране на пощенски кутии, които да бъдат следени за входящи съобщения',
+    'LBL_MAILBOX_DESC' => 'Създаване на профили за групова поща за наблюдение на входящите имейли ' .
+        'и управление на информацията от личните входящи имейл профили за потребителите',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Типове договори',
     'LBL_MANAGE_CURRENCIES' => 'Валути',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Управление на групи',
@@ -628,6 +630,8 @@ If you experience persistent problems with automatic validation, please check yo
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Регенериране на груповите JS файлове',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Свързва отново и презаписва текущите групови файлове с последна налична тяхна версия',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Поправяне на javascript файлове',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Поправяне на JS файлове',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Обработва файлове, която може да отнеме няколко минути. Напускането на текущата страница няма да прекрати процеса. Можете да продължите работата си или да изчакате потвърждение за приключване на процеса...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Обработката на фаловете е завършена..',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Коригиране на полета съдържащи главни букви',
@@ -1006,7 +1010,7 @@ If you experience persistent problems with automatic validation, please check yo
     'LBL_QR_CLEAR_ADD_CACHE' => 'Изчистване на кешираните файлове...приключено.',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Ако тази кутийка не е отметната, администратор трябва ръчно да ревалидира след изтичането на лиценза на системата, в противен случай потребителите няма да могат да влязат.',
 	'LBL_TRACKER_SETTINGS' => 'Потребителска активност',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Изберете кои системни и потребителски данни да се проследяват',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Активиране/деактивиране на проследяване',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Разрешаване/Забраняване на временни потребители',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Активирай',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Деактивирай',
@@ -1159,6 +1163,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_ADDED' => 'Добавена икона {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Изключване на файл: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Разрешения, базирани на екипа',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Разреши екипен достъп и управлявай достъпа по модули.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Индексираща програма',
     'LBL_FTS_HOST' => 'Адрес на сървъра',
@@ -1231,5 +1239,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Щракането върху Изпрати ще ви синхронизира с главния сървър.',
     'LBL_OFFLINE_ENABLED' => 'Офлайн режимът е активен',
     'LBL_OFFLINE_SETTINGS' => 'Офлайн настройки',
+
 
 );

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => '이메일',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => '모든 초대자에 이메일 보내기',
     'LBL_EMAIL_REMINDER' => '이메일 알림',
-    'LBL_EMAIL_REMINDER_TIME' => '이메일 알림 시간',
-    'LBL_POPUP_REMINDER_TIME' => '팝업 알림 시간',
+    'LBL_EMAIL_REMINDER_TIME' => '이메일 알림 시각',
+    'LBL_POPUP_REMINDER_TIME' => '팝업 알림 시각',
     'LBL_SEND_BUTTON_TITLE'=>'저장후 초대하기',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'저장후 초대하기',
 	'LBL_DATE_END'=>'완료일',
 	'LBL_TIME_END'=>'시간 완료',
-	'LBL_REMINDER_TIME'=>'알림 시간',
+    'LBL_REMINDER_TIME'=>'알림 시간',
     'LBL_EMAIL_REMINDER_SENT' => '이메일 알림 전송',
     'LBL_SEARCH_BUTTON'=> '검색',
     'LBL_ACTIVITIES_REPORTS' => '활동 보고서',
@@ -84,7 +84,7 @@ $mod_strings = array (
     'LNK_NEW_OPPORTUNITY'=> '영업기회 추가하기',
     'LBL_DEL' => '삭제',
     'LBL_LEADS_SUBPANEL_TITLE' => '관심고객',
-    'LBL_CONTACTS_SUBPANEL_TITLE' => '연락처목록',
+    'LBL_CONTACTS_SUBPANEL_TITLE' => '연락처',
     'LBL_USERS_SUBPANEL_TITLE' => '사용자',
     'LBL_OUTLOOK_ID' => 'Outlook ID',
     'LBL_MEMBER_OF' => '다음의 구성원',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => '모든 반복일정 삭제',
     'LBL_DATE_END_ERROR' => '완료 날짜는 시작날짜 이후로만 설정가능합니다.',
     'LBL_REPEAT_PARENT_ID' => '상위ID 반복',
+    'LBL_CALENDAR_RECURRENCE_ID' => '반복 호출 ID. 원 호출 개시 일자',
     'LBL_RECURRING_SOURCE' => '출처 반복',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => '반복되는 전체 기록을 삭제하시겠습니까?',
     'LBL_RECURRING_LIMIT_ERROR' => '반복되는 전화상담은 허용된 반복 제한을 최과하므로 예정될수 없습니다.',

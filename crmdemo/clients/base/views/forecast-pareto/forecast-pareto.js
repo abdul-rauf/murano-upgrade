@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,7 +16,7 @@
  * @extends View.View
  */
 ({
-    plugins: ['Dashlet', 'Tooltip'],
+    plugins: ['Dashlet'],
 
     className: 'forecasts-chart-wrapper',
 
@@ -251,10 +251,19 @@
      * Additional logic on switch visibility event.
      */
     visibilitySwitcher: function(event) {
+        var activeVisibility;
         this.settings.set({
             display_manager: this.isDisplayManager(),
             show_target_quota: (this.isDisplayManager() && !this.isTopLevelManager)
         });
+        if (!this.isManager) {
+            return;
+        }
+        activeVisibility = this.getVisibility();
+        this.$el.find('[data-action=visibility-switcher]')
+            .attr('aria-pressed', function() {
+                return $(this).val() === activeVisibility;
+            });
     },
 
     /**

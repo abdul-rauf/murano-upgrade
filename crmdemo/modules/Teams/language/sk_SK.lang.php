@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,50 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => 'Skutočne, chcete vymazať tento záznam?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Ste si istý, že chcete odobrať členstvo tomuto uživateľovi?',
     'LBL_EDITLAYOUT' => 'Upraviť rozloženie' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Tímové oprávnenia',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Povoľte tímový prístup a spravujte prístup pomocou modulu.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Povoľte tímové oprávnenia',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Vyberte moduly, ktoré chcete povoliť',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'Povolenie tímových oprávnení vám umožní pomocou správy rol priradiť k tímom a používateľom konkrétne prístupové oprávnenia pre jednotlivé moduly.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+Zakázanie tímových oprávnení vráti všetky údaje súvisiace s tímovými 
+oprávneniami pre daný
+ modul vrátane všetkých definícií procesov alebo procesov, ktoré používajú túto funkciu. Zahŕňa to všetky roly používajúce
+ možnosť „Vlastník a vybraný tím“ a všetky údaje tímových oprávnení pre záznamy uložené v tomto module.
+ Taktiež odporúčame, aby ste po zakázaní tímových oprávnení pre ktorýkoľvek modul, použili nástroj Rýchla oprava a obnova
+ a vyčistili vyrovnávaciu pamäť systému.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Upozornenie:</strong> Zakázanie tímových oprávnení vráti všetky údaje
+súvisiace s
+ tímovými oprávneniami pre daný modul vrátane definícií procesov alebo procesov, ktoré používajú túto funkciu. Zahŕňa to 
+ všetky roly používajúce možnosť „Vlastník a vybraný tím“ a všetky údaje tímových oprávnení
+ pre záznamy uložené v tomto module. Taktiež odporúčame, aby ste po zakázaní tímových oprávnení
+pre ktorýkoľvek modul, 
+ použili nástroj Rýchla oprava a obnova a vyčistili vyrovnávaciu pamäť systému.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+Zakázanie tímových oprávnení vráti všetky údaje súvisiace s tímovými 
+oprávneniami pre daný
+ modul vrátane všetkých definícií procesov alebo procesov, ktoré používajú túto funkciu. Zahŕňa to všetky roly používajúce
+ možnosť „Vlastník a vybraný tím“ a všetky údaje tímových oprávnení pre záznamy uložené v tomto module.
+ Taktiež odporúčame, aby ste po zakázaní tímových oprávnení pre ktorýkoľvek modul, použili nástroj Rýchla oprava a obnova
+ a vyčistili vyrovnávaciu pamäť systému. Ak nemáte prístup k nástroju Rýchla oprava a obnova, kontaktujte správcu a požiadajte
+ o prístup k ponuke Oprava.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Upozornenie:</strong> Zakázanie tímových oprávnení vráti všetky údaje súvisiace s tímovými 
+oprávneniami pre daný
+ modul vrátane všetkých definícií procesov alebo procesov, ktoré používajú túto funkciu. Zahŕňa to všetky roly používajúce
+ možnosť „Vlastník a vybraný tím“ a všetky údaje tímových oprávnení pre záznamy uložené v tomto module.
+ Taktiež odporúčame, aby ste po zakázaní tímových oprávnení pre ktorýkoľvek modul, použili nástroj Rýchla oprava a obnova
+ a vyčistili vyrovnávaciu pamäť systému. Ak nemáte prístup k nástroju Rýchla oprava a obnova, kontaktujte správcu a požiadajte
+ o prístup k ponuke Oprava.
+STR
+,
 );

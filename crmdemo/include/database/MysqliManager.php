@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -131,7 +131,6 @@ class MysqliManager extends MysqlManager
         if(is_array($sql)) {
             return $this->queryArray($sql, $dieOnError, $msg, $suppress);    //queryArray does not support any return sets
         }
-        static $queryMD5 = array();
 
         parent::countQuery($sql);
         $this->log->info('Query:' . $sql);
@@ -152,10 +151,6 @@ class MysqliManager extends MysqlManager
 
         else
             $result = $suppress?@mysqli_query($this->database,$sql):mysqli_query($this->database,$sql);
-        $md5 = md5($sql);
-
-        if (empty($queryMD5[$md5]))
-            $queryMD5[$md5] = true;
 
         $this->query_time = microtime(true) - $this->query_time;
         $this->log->info('Query Execution Time:'.$this->query_time);

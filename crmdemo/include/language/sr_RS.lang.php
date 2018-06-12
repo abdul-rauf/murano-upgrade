@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,7 +56,7 @@ $app_list_strings = array (
     'TaxRates'=>'Poreske stope',
     'ContractTypes' => 'Tipovi Ugovora',
     'Schedulers'=>'Planeri',
-    'Project'=>'Projekat',
+    'Project'=>'Projekti',
     'ProjectTask'=>'Projektni zadaci',
     'Campaigns'=>'Kampanje',
     'CampaignLog'=>'Log kampanje',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Filter',
     'Comments' => 'Komentar',
     'Currencies' => 'Valuta',
-    'Project' => 'Projekat',
     'ProductTemplates' => 'Šablon proizvoda:',
-    'ProductCategories' => 'Kategorija Proizvoda',
     'ProductTypes' => 'Tip proizvoda',
     'Shippers' => 'Pošiljalac',
     'Subscriptions' => 'Prijavljivanje',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Pet",
                 '7'=>"Sub",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Ne",
+            '2'=>"Po",
+            '3'=>"Ut",
+            '4'=>"Sr",
+            '5'=>"Če",
+            '6'=>"Pe",
+            '7'=>"Su",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Ned',
         '1' => 'Pon',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'Godišnje',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Do',
+        'Occurrences' => 'Događaji',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Nijedan',
+        'Each' => 'Svaki/a',
+        'On' => 'Dana',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'prvi/a',
+        'second' => 'drugi/a',
+        'third' => 'treći/a',
+        'fourth' => 'četvrti/a',
+        'fifth' => 'peti/a',
+        'last' => 'poslednji/a',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'nedelja',
+        'Mon' => 'ponedeljak',
+        'Tue' => 'utorak',
+        'Wed' => 'sreda',
+        'Thu' => 'četvrtak',
+        'Fri' => 'petak',
+        'Sat' => 'subota',
+        'Day' => 'dan',
+        'WD'  => 'radni dan',
+        'WE'  => 'vikend'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Sredina',
         'end' => 'Kraj',
         'top' => 'Vrh',
+        'total' => 'Ukupno',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Levak',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Svetlo',
       'dark' => 'Tamno',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Pomeri',
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "Hristova Crkva"),
-            "2" => array("code" => "AND", "name" => "Sveti Endru"),
+            "2" => array("code" => "I", "name" => "Sveti Endru"),
             "3" => array("code" => "GEO", "name" => "Sent Džordž"),
             "4" => array("code" => "JAM", "name" => "Sveti Džejms"),
             "5" => array("code" => "JOH", "name" => "Sent Džon"),
@@ -2247,7 +2366,7 @@ $app_list_strings = array (
             "1" => array("code" => "AC", "name" => "Akre"),
             "2" => array("code" => "AL", "name" => "Alagoas"),
             "3" => array("code" => "AP", "name" => "Amapa"),
-            "4" => array("code" => "AM", "name" => "Amazonas"),
+            "4" => array("code" => "Prepodne", "name" => "Amazonas"),
             "5" => array("code" => "BA", "name" => "Bahia"),
             "6" => array("code" => "CE", "name" => "Ceara"),
             "7" => array("code" => "DF", "name" => "Federalni Distrikt"),
@@ -2287,7 +2406,7 @@ $app_list_strings = array (
         "BN" => array(
             "1" => array("code" => "BEL", "name" => "Belait"),
             "2" => array("code" => "BRM", "name" => "Brunei i Muara"),
-            "3" => array("code" => "TEM", "name" => "Temburong"),
+            "3" => array("code" => "Brunei i Muara", "name" => "Temburong"),
             "4" => array("code" => "TUT", "name" => "Tutong")
         ),
         /* bulgary */
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Sent Endru Parohija"),
+            "1" => array("code" => "I", "name" => "Sent Endru Parohija"),
             "2" => array("code" => "DAV", "name" => "Sent Dejvid Parohija"),
             "3" => array("code" => "GEO", "name" => "Sent Džordž Parohija"),
             "4" => array("code" => "JOH", "name" => "Sent Džon Parohija"),
@@ -2852,7 +2971,7 @@ $app_list_strings = array (
             "25" => array("code" => "SC", "name" => "San Kristobal"),
             "26" => array("code" => "JO", "name" => "San Hoze de Okoa"),
             "27" => array("code" => "SJ", "name" => "San Juan"),
-            "28" => array("code" => "PM", "name" => "San Pedro de Makoris"),
+            "28" => array("code" => "Popodne", "name" => "San Pedro de Makoris"),
             "29" => array("code" => "SA", "name" => "Santjago"),
             "30" => array("code" => "ST", "name" => "Santjago Rodrigez"),
             "31" => array("code" => "SD", "name" => "Santo Domingo"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benišangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariaj"),
-            "6" => array("code" => "OR", "name" => "Oromija"),
+            "6" => array("code" => "ILI", "name" => "Oromija"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Južne Nacije - Nacionalnosti"),
             "9" => array("code" => "TG", "name" => "Tigraj"),
@@ -3448,7 +3567,7 @@ $app_list_strings = array (
             "4" => array("code" => "EC", "name" => "Istočni Berbice-Korentjne"),
             "5" => array("code" => "EW", "name" => "Esekuibo ostrva-Zapadna Demerara"),
             "6" => array("code" => "MB", "name" => "Mahaika-Berbice"),
-            "7" => array("code" => "PM", "name" => "Pomerun-Supenam"),
+            "7" => array("code" => "Popodne", "name" => "Pomerun-Supenam"),
             "8" => array("code" => "PI", "name" => "Potaro-Siparuni"),
             "9" => array("code" => "UD", "name" => "Gornja Demerara-Berbice"),
             "10" => array("code" => "UT", "name" => "Gornji Takutu-Gornji Esekuibo")
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaja"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orisa"),
+            "24" => array("code" => "ILI", "name" => "Orisa"),
             "25" => array("code" => "PO", "name" => "Pondičeri"),
             "26" => array("code" => "PU", "name" => "Pendžab"),
             "27" => array("code" => "RA", "name" => "Radžastan"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "ILI", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston parohija"),
             "4" => array("code" => "MAN", "name" => "Mančester parohija"),
             "5" => array("code" => "POR", "name" => "Portland parohija"),
-            "6" => array("code" => "AND", "name" => "Sent Endru Parohija"),
+            "6" => array("code" => "I", "name" => "Sent Endru Parohija"),
             "7" => array("code" => "ANN", "name" => "Sveta Ana parohija"),
             "8" => array("code" => "CAT", "name" => "Sveta Katarina parohija"),
             "9" => array("code" => "ELI", "name" => "Sveta Elizabet parohija"),
@@ -3917,7 +4036,7 @@ $app_list_strings = array (
         ),
         /* Jordan */
         "JO" => array(
-            "1" => array("code" => "AM", "name" => "Aman"),
+            "1" => array("code" => "Prepodne", "name" => "Aman"),
             "2" => array("code" => "AJ", "name" => "Ajlun"),
             "3" => array("code" => "AA", "name" => "Al Akabah"),
             "4" => array("code" => "AB", "name" => "Al Balka"),
@@ -3934,7 +4053,7 @@ $app_list_strings = array (
         "KZ" => array(
             "1" => array("code" => "AL", "name" => "Almati"),
             "2" => array("code" => "AC", "name" => "Almati grad"),
-            "3" => array("code" => "AM", "name" => "Akumola"),
+            "3" => array("code" => "Prepodne", "name" => "Akumola"),
             "4" => array("code" => "AQ", "name" => "Akutobe"),
             "5" => array("code" => "AS", "name" => "Astana grad"),
             "6" => array("code" => "AT", "name" => "Atjirau"),
@@ -3964,7 +4083,7 @@ $app_list_strings = array (
         /* Kiribati */
         "KI" => array(
             "1" => array("code" => "AG", "name" => "Abaijang"),
-            "2" => array("code" => "AM", "name" => "Abemama"),
+            "2" => array("code" => "Prepodne", "name" => "Abemama"),
             "3" => array("code" => "AK", "name" => "Aranuka"),
             "4" => array("code" => "AO", "name" => "Arora"),
             "5" => array("code" => "BA", "name" => "Banaba"),
@@ -4369,9 +4488,9 @@ $app_list_strings = array (
             "9" => array("code" => "Perlis", "name" => "Perlis"),
             "10" => array("code" => "Pulau Pinang", "name" => "Pulau Pinang"),
             "11" => array("code" => "Sabah", "name" => "Sabah"),
-            "12" => array("code" => "Sarawak", "name" => "Saravak"),
+            "12" => array("code" => "Saravak", "name" => "Saravak"),
             "13" => array("code" => "Selangor", "name" => "Selangor"),
-            "14" => array("code" => "Terengganu", "name" => "Terenganu"),
+            "14" => array("code" => "Terenganu", "name" => "Terenganu"),
             "15" => array("code" => "Kuala Lumpur", "name" => "Kuala Lumpur")
         ),
         /* Maldives */
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Kahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "ILI", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroka"),
             "9" => array("code" => "TI", "name" => "Tigina"),
             "10" => array("code" => "UN", "name" => "Ungeni"),
@@ -5027,7 +5146,7 @@ $app_list_strings = array (
         ),
         /* Palau */
         "PW" => array(
-            "1" => array("code" => "AM", "name" => "Aimelik"),
+            "1" => array("code" => "Prepodne", "name" => "Aimelik"),
             "2" => array("code" => "AR", "name" => "Airai"),
             "3" => array("code" => "AN", "name" => "Angaur"),
             "4" => array("code" => "HA", "name" => "Hatohobei"),
@@ -5084,7 +5203,7 @@ $app_list_strings = array (
         "PY" => array(
             "1" => array("code" => "AG", "name" => "Alto Paragvaj"),
             "2" => array("code" => "AN", "name" => "Alto Parana"),
-            "3" => array("code" => "AM", "name" => "Amambaj"),
+            "3" => array("code" => "Prepodne", "name" => "Amambaj"),
             "4" => array("code" => "AS", "name" => "Asunkion"),
             "5" => array("code" => "BO", "name" => "Bokveron"),
             "6" => array("code" => "CG", "name" => "Kaguazu"),
@@ -5103,7 +5222,7 @@ $app_list_strings = array (
         ),
         /* Peru */
         "PE" => array(
-            "1" => array("code" => "AM", "name" => "Amazonas"),
+            "1" => array("code" => "Prepodne", "name" => "Amazonas"),
             "2" => array("code" => "AN", "name" => "Ankaš"),
             "3" => array("code" => "AP", "name" => "Apurimak"),
             "4" => array("code" => "AR", "name" => "Arekuipa"),
@@ -5227,7 +5346,7 @@ $app_list_strings = array (
             "8" => array("code" => "OP", "name" => "Opolski"),
             "9" => array("code" => "PP", "name" => "Podkarpakija"),
             "10" => array("code" => "PL", "name" => "Podlaski"),
-            "11" => array("code" => "PM", "name" => "Pomorski"),
+            "11" => array("code" => "Popodne", "name" => "Pomorski"),
             "12" => array("code" => "SL", "name" => "Šleski"),
             "13" => array("code" => "SW", "name" => "Svietokrziski"),
             "14" => array("code" => "WM", "name" => "Varminsko-Mazurski"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "ILI", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -5712,7 +5831,7 @@ $app_list_strings = array (
             "2" => array("code" => "AL", "name" => "Alava"),
             "3" => array("code" => "AB", "name" => "Albakete"),
             "4" => array("code" => "AC", "name" => "Alikante"),
-            "5" => array("code" => "AM", "name" => "Almerija"),
+            "5" => array("code" => "Prepodne", "name" => "Almerija"),
             "6" => array("code" => "AS", "name" => "Asturijas"),
             "7" => array("code" => "AV", "name" => "Avila"),
             "8" => array("code" => "BJ", "name" => "Badajoz"),
@@ -5735,7 +5854,7 @@ $app_list_strings = array (
             "25" => array("code" => "HS", "name" => "Huesca"),
             "26" => array("code" => "JN", "name" => "Žaen"),
             "27" => array("code" => "RJ", "name" => "La Rioja"),
-            "28" => array("code" => "PM", "name" => "Las Palmas"),
+            "28" => array("code" => "Popodne", "name" => "Las Palmas"),
             "29" => array("code" => "LE", "name" => "Leon"),
             "30" => array("code" => "LL", "name" => "Lerida"),
             "31" => array("code" => "LG", "name" => "Lugo"),
@@ -5821,7 +5940,7 @@ $app_list_strings = array (
             "4" => array("code" => "MA", "name" => "Marovijn"),
             "5" => array("code" => "NI", "name" => "Nikerija"),
             "6" => array("code" => "PA", "name" => "Para"),
-            "7" => array("code" => "PM", "name" => "Paramaribo"),
+            "7" => array("code" => "Popodne", "name" => "Paramaribo"),
             "9" => array("code" => "SA", "name" => "Saramaka"),
             "10" => array("code" => "SI", "name" => "Sipalivini"),
             "11" => array("code" => "WA", "name" => "Vanika")
@@ -5899,7 +6018,7 @@ $app_list_strings = array (
             "9" => array("code" => "HL", "name" => "Halab"),
             "10" => array("code" => "HM", "name" => "Hamah"),
             "11" => array("code" => "HI", "name" => "Hims"),
-            "12" => array("code" => "ID", "name" => "Idlib"),
+            "12" => array("code" => "ID broj", "name" => "Idlib"),
             "13" => array("code" => "RD", "name" => "Rif Dimask"),
             "14" => array("code" => "TA", "name" => "Tartus")
         ),
@@ -5968,61 +6087,61 @@ $app_list_strings = array (
         ),
         /* Thailand */
         "TH" => array(
-            "1" => array("code" => "Amnat Charoen", "name" => "Amnat Čaroen"),
-            "2" => array("code" => "Ang Thong", "name" => "Ang Tong"),
-            "3" => array("code" => "Ayutthaya", "name" => "Ajutaja"),
+            "1" => array("code" => "Amnat Čaroen", "name" => "Amnat Čaroen"),
+            "2" => array("code" => "Ang Tong", "name" => "Ang Tong"),
+            "3" => array("code" => "Ajutaja", "name" => "Ajutaja"),
             "4" => array("code" => "Bangkok", "name" => "Bangkok"),
             "5" => array("code" => "Buriram", "name" => "Buriram"),
-            "6" => array("code" => "Chachoengsao", "name" => "Čačoengsao"),
-            "7" => array("code" => "Chai Nat", "name" => "Čai Nat"),
-            "8" => array("code" => "Chaiyaphum", "name" => "Čaijafum"),
-            "9" => array("code" => "Chanthaburi", "name" => "Čantaburi"),
-            "10" => array("code" => "Chiang Mai", "name" => "Čiang Mai"),
-            "11" => array("code" => "Chiang Rai", "name" => "Čiang Rai"),
-            "12" => array("code" => "Chon Buri", "name" => "Čon Buri"),
-            "13" => array("code" => "Chumphon", "name" => "Čumfon"),
+            "6" => array("code" => "Čačoengsao", "name" => "Čačoengsao"),
+            "7" => array("code" => "Čai Nat", "name" => "Čai Nat"),
+            "8" => array("code" => "Čaijafum", "name" => "Čaijafum"),
+            "9" => array("code" => "Čantaburi", "name" => "Čantaburi"),
+            "10" => array("code" => "Čiang Mai", "name" => "Čiang Mai"),
+            "11" => array("code" => "Čiang Rai", "name" => "Čiang Rai"),
+            "12" => array("code" => "Čon Buri", "name" => "Čon Buri"),
+            "13" => array("code" => "Čumfon", "name" => "Čumfon"),
             "14" => array("code" => "Kalasin", "name" => "Kalasin"),
-            "15" => array("code" => "Kamphaeng Phet", "name" => "Kamfeng Fet"),
-            "16" => array("code" => "Kanchanaburi", "name" => "Kančanaburi"),
-            "17" => array("code" => "Khon Kaen", "name" => "Kon Kaen"),
+            "15" => array("code" => "Kamfeng Fet", "name" => "Kamfeng Fet"),
+            "16" => array("code" => "Kančanaburi", "name" => "Kančanaburi"),
+            "17" => array("code" => "Kon Kaen", "name" => "Kon Kaen"),
             "18" => array("code" => "Krabi", "name" => "Krabi"),
             "19" => array("code" => "Lampang", "name" => "Lampang"),
-            "20" => array("code" => "Lamphun", "name" => "Lamfun"),
+            "20" => array("code" => "Lamfun", "name" => "Lamfun"),
             "21" => array("code" => "Loei", "name" => "Loei"),
             "22" => array("code" => "Lop Buri", "name" => "Lop Buri"),
             "23" => array("code" => "Mae Hong Son", "name" => "Mae Hong Son"),
-            "24" => array("code" => "Maha Sarakham", "name" => "Maha Sarakam"),
+            "24" => array("code" => "Maha Sarakam", "name" => "Maha Sarakam"),
             "25" => array("code" => "Mukdahan", "name" => "Mukdahan"),
-            "26" => array("code" => "Nakhon Nayok", "name" => "Nakhon Najok"),
+            "26" => array("code" => "Nakhon Najok", "name" => "Nakhon Najok"),
             "27" => array("code" => "Nakhon Pathom", "name" => "Nakhon Pathom"),
             "28" => array("code" => "Nakhon Phanom", "name" => "Nakhon Phanom"),
-            "29" => array("code" => "Nakhon Ratchasima", "name" => "Nakhon Ratčasima"),
-            "30" => array("code" => "Nakhon Sawan", "name" => "Nakhon Savan"),
-            "31" => array("code" => "Nakhon Si Thammarat", "name" => "Nakhon Si Tamarat"),
+            "29" => array("code" => "Nakhon Ratčasima", "name" => "Nakhon Ratčasima"),
+            "30" => array("code" => "Nakhon Savan", "name" => "Nakhon Savan"),
+            "31" => array("code" => "Nakhon Si Tamarat", "name" => "Nakhon Si Tamarat"),
             "32" => array("code" => "Nan", "name" => "Nan"),
-            "33" => array("code" => "Narathiwat", "name" => "Narativat"),
-            "34" => array("code" => "Nong Bua Lamphu", "name" => "Nong Bua Lampu"),
-            "35" => array("code" => "Nong Khai", "name" => "Nong Kai"),
-            "36" => array("code" => "Nonthaburi", "name" => "Nontaburi"),
-            "37" => array("code" => "Pathum Thani", "name" => "Patum Tani"),
-            "38" => array("code" => "Pattani", "name" => "Patani"),
-            "39" => array("code" => "Phangnga", "name" => "Fangnga"),
-            "40" => array("code" => "Phatthalung", "name" => "Fatalung"),
-            "41" => array("code" => "Phayao", "name" => "Fajao"),
-            "42" => array("code" => "Phetchabun", "name" => "Fetčabun"),
-            "43" => array("code" => "Phetchaburi", "name" => "Fetčaburi"),
-            "44" => array("code" => "Phichit", "name" => "Fičit"),
-            "45" => array("code" => "Phitsanulok", "name" => "Pitsanulok"),
-            "46" => array("code" => "Phrae", "name" => "Praje"),
-            "47" => array("code" => "Phuket", "name" => "Puket"),
-            "48" => array("code" => "Prachin Buri", "name" => "Pračin Buri"),
-            "49" => array("code" => "Prachuap Khiri Khan", "name" => "Pračuap Kiri Kan"),
+            "33" => array("code" => "Narativat", "name" => "Narativat"),
+            "34" => array("code" => "Nong Bua Lampu", "name" => "Nong Bua Lampu"),
+            "35" => array("code" => "Nong Kai", "name" => "Nong Kai"),
+            "36" => array("code" => "Nontaburi", "name" => "Nontaburi"),
+            "37" => array("code" => "Patum Tani", "name" => "Patum Tani"),
+            "38" => array("code" => "Patani", "name" => "Patani"),
+            "39" => array("code" => "Fangnga", "name" => "Fangnga"),
+            "40" => array("code" => "Fatalung", "name" => "Fatalung"),
+            "41" => array("code" => "Fajao", "name" => "Fajao"),
+            "42" => array("code" => "Fetčabun", "name" => "Fetčabun"),
+            "43" => array("code" => "Fetčaburi", "name" => "Fetčaburi"),
+            "44" => array("code" => "Fičit", "name" => "Fičit"),
+            "45" => array("code" => "Pitsanulok", "name" => "Pitsanulok"),
+            "46" => array("code" => "Praje", "name" => "Praje"),
+            "47" => array("code" => "Puket", "name" => "Puket"),
+            "48" => array("code" => "Pračin Buri", "name" => "Pračin Buri"),
+            "49" => array("code" => "Pračuap Kiri Kan", "name" => "Pračuap Kiri Kan"),
             "50" => array("code" => "Ranong", "name" => "Ranong"),
-            "51" => array("code" => "Ratchaburi", "name" => "Ratčaburi"),
-            "52" => array("code" => "Rayong", "name" => "Rajong"),
+            "51" => array("code" => "Ratčaburi", "name" => "Ratčaburi"),
+            "52" => array("code" => "Rajong", "name" => "Rajong"),
             "53" => array("code" => "Roi Et", "name" => "Roi Et"),
             "54" => array("code" => "Sa Kaeo", "name" => "Sa Kaeo"),
-            "55" => array("code" => "Sakon Nakhon", "name" => "Sakon Nakon"),
+            "55" => array("code" => "Sakon Nakon", "name" => "Sakon Nakon"),
             "56" => array("code" => "Samut Prakan", "name" => "Samut Prakan"),
             "57" => array("code" => "Samut Sakhon", "name" => "Samut Sakhon"),
             "58" => array("code" => "Samut Songkhram", "name" => "Samut Songkhram"),
@@ -6030,20 +6149,20 @@ $app_list_strings = array (
             "60" => array("code" => "Satun", "name" => "Satun"),
             "61" => array("code" => "Sing Buri", "name" => "Sing Buri"),
             "62" => array("code" => "Sisaket", "name" => "Sisaket"),
-            "63" => array("code" => "Songkhla", "name" => "Songkla"),
-            "64" => array("code" => "Sukhothai", "name" => "Sukotai"),
-            "65" => array("code" => "Suphan Buri", "name" => "Supan Buri"),
-            "66" => array("code" => "Surat Thani", "name" => "Surat Tani"),
+            "63" => array("code" => "Songkla", "name" => "Songkla"),
+            "64" => array("code" => "Sukotai", "name" => "Sukotai"),
+            "65" => array("code" => "Supan Buri", "name" => "Supan Buri"),
+            "66" => array("code" => "Surat Tani", "name" => "Surat Tani"),
             "67" => array("code" => "Surin", "name" => "Surin"),
             "68" => array("code" => "Tak", "name" => "Tak"),
             "69" => array("code" => "Trang", "name" => "Trang"),
             "70" => array("code" => "Trat", "name" => "Trat"),
-            "71" => array("code" => "Ubon Ratchathani", "name" => "Ubon Ratčatani"),
-            "72" => array("code" => "Udon Thani", "name" => "Udon Tani"),
-            "73" => array("code" => "Uthai Thani", "name" => "Utai Tani"),
-            "74" => array("code" => "Uttaradit", "name" => "Utaradit"),
-            "75" => array("code" => "Yala", "name" => "Jala"),
-            "76" => array("code" => "Yasothon", "name" => "Jasoton")
+            "71" => array("code" => "Ubon Ratčatani", "name" => "Ubon Ratčatani"),
+            "72" => array("code" => "Udon Tani", "name" => "Udon Tani"),
+            "73" => array("code" => "Utai Tani", "name" => "Utai Tani"),
+            "74" => array("code" => "Utaradit", "name" => "Utaradit"),
+            "75" => array("code" => "Jala", "name" => "Jala"),
+            "76" => array("code" => "Jasoton", "name" => "Jasoton")
         ),
         /* Togo */
         "TG" => array(
@@ -6443,7 +6562,7 @@ $app_list_strings = array (
             "7" => array("code" => "AA", "name" => "Oružane sile Amerika"),
             "8" => array("code" => "AC", "name" => "Oružane sile Kanade"),
             "9" => array("code" => "AE", "name" => "Oružane sile Evrope"),
-            "10" => array("code" => "AM", "name" => "Oružane sile Bliskog Istoka"),
+            "10" => array("code" => "Prepodne", "name" => "Oružane sile Bliskog Istoka"),
             "11" => array("code" => "AP", "name" => "Oružane sile Pacifika"),
             "12" => array("code" => "CA", "name" => "Kalifornija"),
             "13" => array("code" => "CO", "name" => "Kolorado"),
@@ -6455,7 +6574,7 @@ $app_list_strings = array (
             "19" => array("code" => "GA", "name" => "Džordžija"),
             "20" => array("code" => "GU", "name" => "Guam"),
             "21" => array("code" => "HI", "name" => "Havaiji"),
-            "22" => array("code" => "ID", "name" => "Ajdaho"),
+            "22" => array("code" => "ID broj", "name" => "Ajdaho"),
             "23" => array("code" => "IL", "name" => "Ilinois"),
             "24" => array("code" => "IN", "name" => "Indijana"),
             "25" => array("code" => "IA", "name" => "Ajova"),
@@ -6482,7 +6601,7 @@ $app_list_strings = array (
             "46" => array("code" => "MP", "name" => "Severna Mariana ostrva"),
             "47" => array("code" => "OH", "name" => "Ohajo"),
             "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "49" => array("code" => "ILI", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pensilvanija"),
             "52" => array("code" => "PR", "name" => "Puerto Riko"),
@@ -6562,7 +6681,7 @@ $app_list_strings = array (
         ),
         /* Venezuela */
         "VE" => array(
-            "1" => array("code" => "AM", "name" => "Amazonas"),
+            "1" => array("code" => "Prepodne", "name" => "Amazonas"),
             "2" => array("code" => "AN", "name" => "Anzoategui"),
             "3" => array("code" => "AP", "name" => "Apure"),
             "4" => array("code" => "AR", "name" => "Aragua"),
@@ -6639,7 +6758,7 @@ $app_list_strings = array (
         "YE" => array(
             "1" => array("code" => "AB", "name" => "Abjan"),
             "2" => array("code" => "AD", "name" => "Adan"),
-            "3" => array("code" => "AM", "name" => "Amran"),
+            "3" => array("code" => "Prepodne", "name" => "Amran"),
             "4" => array("code" => "BA", "name" => "Al Bajda"),
             "5" => array("code" => "DA", "name" => "Ad Dali"),
             "6" => array("code" => "DH", "name" => "Damar"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Okcidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "ILI", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Sledi link',
   'LBL_TOGGLE_VISIBILITY' => 'Izmeni vidljivost', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivnosti',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. Sva prava zadržana.',
-  'LBL_TRADEMARK' => 'SugarCRM je zaštitni znak SugarCRM, Inc. Sva ostala imena kompanija i proizvoda mogu biti zaštitni znakovi kompanija sa kojima su povezani.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ i Sugar™ su zaštitni znak SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Pošalji poziv',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar i 3-D kocka su registrovani žigovi kompanije SugarCRM Inc. '.
+        'Svi drugi nazivi kompanija ili proizvoda koji se koriste ili pojavljuju u ovom proizvodu mogu biti žigovi '.
+        'odgovarajućih kompanija sa kojima su povezani.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ i Sugar™ su zaštitni znak SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Pošalji poziv',
   'LBL_INVITEES' => 'Pozvani',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Gost neće primiti vaš poziv',
   'LBL_SELECT_ACTION_LABEL' => 'Izaberite akciju',
   'LBL_TOGGLE_DRAWER' => 'Uključi ladicu',
   'LBL_TOUR_NEXT' => 'Sledeći',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Dodaj' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Logo kompanije' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalendar' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'navigacija glavnim modulom',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'prebacivanje podtable',
+
     'LBL_ADVANCED' => 'Napredno',
     'LBL_BASIC' => 'Osnovno',
     'LBL_MODULE_FILTER' => 'Filtriraj po',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Timovi',
     'LBL_TEAM_SET_ID' => 'ID Postavljenog tima',
     'LBL_TEAM_SET'=>'Postavljeni tim',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Odabrani timovi',
     'LBL_SEARCH_UNAVAILABLE' => 'Pretraga nije dostupna, molimo pokušajte kasnije.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Osnovni Tim nije određen',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Greška prilikom pokušaja uklanjanja osnovnog tima id [{0}] za [{1}] modul sa id [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Pretraživač trenutno nije dostupan.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Nastala je greška pri izvršavanju pretraživača. Kontaktirajte svog administratora sistema.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Nije moguće uređivati polje koje je zaključao proces.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Stanje je uzrokovano uopštenom greškom. Razlozi za ovu grešku mogu biti različiti ali su generalno van opsega preciznih API grešaka.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Naznačava da je server zauzet, preopterećen ili ne radi.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'Pozadinski mehanizam pretraživača je trenutno nedostupan zbog problema u povezivanju. Potvrdite povezanost i konfiguraciju u Amin->pretraga->test.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'Dogodio se izuzetak tokom izvršenja programa u pretraživaču. Pogledajte sugarcrm.log za više informacija.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Nije moguće uređivati polje koje je trenutno zaključano aktivnim procesom.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => 'Polje %s je zaključano aktivnim procesom i nije ga moguće uređivati.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => 'Polja %s su zaključana aktivnim procesom i nije ih moguće uređivati.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Datoteka sa istim imenom već postoji u sistemu.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Ovaj TimePeriod već ima definisane pod-periode',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Pod-vremenski periodi ne mogu imati pod-periode.',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Nije moguće povratiti vremeneske periode tipa: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Nema aktivnih vremenskih perioda za trenutne postavke.',
     'LBL_CURRENT_TIMEPERIOD' => 'Trenutni Vremenski Period',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Prethodni Vremenski Period',
     'LBL_NEXT_TIMEPERIOD' => 'Budući Vremenski Period',
@@ -8532,7 +8664,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => 'Zatvori',
     'LBL_ADDITIONAL_DETAILS' => 'Dodatni detalji',
     'LBL_ADMIN' => 'Administracija',
-    'LBL_ALT_HOT_KEY' => 'Alt+',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'Arhiva',
     'LBL_ASSIGNED_TO_USER'=>'Dodeljeno korisniku',
     'LBL_ASSIGNED_TO' => 'Dodeljeno',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Izaberite polje...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Izaberite operator...',
     'LBL_FILTER_CREATE_NEW' => 'Kreiraj filter',
+    'LBL_FILTER_CREATE_FILTER' => 'Kreiraj novi filter',
+    'LBL_FILTER_EDIT_FILTER' => 'Uredi filter',
     'LBL_FILTER_ALL_RECORDS' => 'Svi zapisi',
     'TPL_FILTER_SAVE' => 'Uspešno ste napravili filter {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'Od',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Opština:',
     'LBL_STATUS_UPDATED'=>'Vaš status za ovaj događaj je ažuriran!',
+    'LBL_STATUS_NOT_UPDATED' => 'Vaš status za ovaj događaj nije ažuriran.',
     'LBL_STATUS'=>'Status:',
     'LBL_STREET'=>'Ulica',
     'LBL_SUBJECT' => 'Naslov',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy;2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Sva prava zadržana.<br />SugarCRM je robna marka kompanije SugarCRM, Inc. Svi ostali nazivi kompanije i proizvoda mogu da budu robne marke određenih kompanija sa kojima su povezane.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Sva prava zadržana.<br />SugarCRM, Sugar i 3-D kocka su registrovani žigovi kompanije SugarCRM Inc. '.
+        'Svi drugi nazivi kompanija ili proizvoda koji se koriste ili pojavljuju u ovom proizvodu mogu biti žigovi '.
+        'odgovarajućih kompanija sa kojima su povezani.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Zakazani posao je završen.',
@@ -9176,7 +9315,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Greška. Uneli ste nevažećeg operatera.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Greška. Uneli ste nevažeći filter.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Uvoz nije uspeo. Grupno polje je delimično zaključano u definiciji procesa. Ova polja moraju da budu otključana u definiciji procesa kako bi se definicija uvezla.',
+    'ERROR_EXP_DATE_LOW' => 'Greška. Datum isteka ne može da bude pre datuma izdavanja.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Greška. Odobreni status zahteva datum objavljivanja.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Datum objavljivanja je prazan.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9306,6 +9446,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'Kolone mogu biti prikazane',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Kontrolna tabla',
     'LBL_DASHBOARD_BWC' => 'Moj Lični Dashbord',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Moja tabla sa dašletima',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Tabla sa dašletima Pomoć',
@@ -9338,9 +9479,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Moje {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Vesti',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Google vesti za povezani nalog',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Pokazatelji prilike za prodaju',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Pokazatelji prilike za prodaju za povezanu kompaniju',
@@ -9409,7 +9547,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Nema pronađenih zapisa u ovom trenutku.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Pregled slučaja',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Vesti',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interakcije',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Prilozi',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Belečke i prilozi pripadaju zapisu',
@@ -9918,7 +10055,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => 'Odabrati poslovnu funkciju',
     'LBL_DNB_BAL_ORG_NAME' => 'Ime organizacije',
     'LBL_DNB_BAL_IMPORT_AS' => 'Uvesti kao:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Ime organizacije',
+    'LBL_DNB_BAL_ORG_NAME' => 'Naziv kompanije',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'U milionima $',
@@ -9977,7 +10114,7 @@ $app_strings = array (
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Najkorisniji članci objavljene baze znanja',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Prikazuje najomiljenije i najpregledanije članke iz baze znanja',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Prikazuje najpopularnije i najčitanije članke u bazi znanja',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtrirao {{label}} "{{value}}"',
 
@@ -10016,6 +10153,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Unesite ime stranice.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Moj prodajni kanal',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Prodajni kanal mog tima",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Grafikon prodajnog kanala',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Prikazuje trenutni grafikon prodajnog kanala.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Nema slike',
 
@@ -10269,6 +10413,8 @@ $app_strings = array (
     'LBL_SELECT_THIS_ROW_TITLE' => 'Odaberi ovaj red',
     'LBL_TEAM_SELECTED_TITLE' => 'Odabrani tim',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Odaberi da bi postavio ovaj tim kao primaran',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Tim označen kao odabran na osnovu tima ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Označi ovaj tim kao odabran na osnovu tima',
     'LBL_SEARCH_AND_SELECT' => 'Pronađi i izaberi {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Pretraži i dodaj {{module}}',
 
@@ -10357,6 +10503,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Pregled je isključen: Nema dostupnih podataka.',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Pregled nije moguć: Zapis se trenutno prikazuje',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Pregled je onemogućen: Zapis je obrisan ili nedostaje pristup zapisu',
+    'LBL_PREVIEW_PREVIOUS' => 'Prikaži prethodno',
+    'LBL_PREVIEW_NEXT' => 'Prikaži sledeće',
+    'LBL_PREVIEW_CLOSE' => 'Prikaži zatvoreno',
     'LBL_STREAM_NO_RECORDS' => 'Za ovaj zapis u ovom momentu ne postoje zabeleške. Molimo dodajte zabelešku klikom na link za dodavanje.',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}} duplikata je pronađeno.',
     'LBL_NO_DUPLICATES_FOUND' => 'Nisu pronađeni duplikati.',
@@ -10376,6 +10525,7 @@ $app_strings = array (
         'Prosleđen je neispravan broj zapisa. Ispravan opseg je između {{minRecords}} i {{maxRecords}} zapisa.',
     'LBL_MERGE_NO_ACCESS' =>
         'Nemate pristup za obavljanje ove radnje',
+    'LBL_MERGE_LOCKED' => 'Neki od zapisa koji su izabrani za spajanje sadrže polja koja su zaključana za uređivanje nekim procesom i trenutno ne mogu da se spoje.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10846,10 +10996,9 @@ $app_strings = array (
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Pregledaj i upravljaj podešavanjima aplikacije',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Podesi aplikaciju',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Lozinka',
     'LBL_CURRENT_PASSWORD'				=> 'Trenutna lozinka',
-    'LBL_SET_NEW_PASSWORD'              => 'Unesite lozinku',
     'LBL_NEW_PASSWORD1'                 => 'Nova lozinka',
     'LBL_NEW_PASSWORD2'                 => 'Potvrdite lozinku',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Molim, unesite potvrdu svoje lozinke.',
@@ -10857,13 +11006,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> 'Molim, unesite svoju trenutnu lozinku.',
     'ERR_REENTER_PASSWORDS' => 'Vrednost nove i trenutne lozinke se ne podudaraju.',
     'ERR_PASSWORD_MISMATCH' => 'Lozinke nisu iste.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Lozinka je uspešno promenjena.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Ne mogu poslati lozinku',
     'LBL_REQUEST_PASSWORD' => 'Traži šifru',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Greška: Došlo je do problema sa izmenom šifre ovog korisnika.',
     'LBL_INCORRECT_PASSWORD' => 'Greška : Netačna šifra.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Preferirani jezik',
+    'LBL_PREFERRED_LANGUAGE' => 'Željeni jezik:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Izaberite izveštaj',
@@ -10893,6 +11041,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => 'Došlo je do greške u serveru i on nije mogao da izvrši vaš zahtev.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Molimo pokušajte ponovo. Ako greška i dalje postoji, kontaktirajte svog Sugar administratora.',
     'ERR_HTTP_500_ACTION' => 'Molimo kontaktirajte tehničku podršku.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: interna greška servera 502',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Došlo je do privremene greške servera i zahtev ne može da se završi.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Pokušajte ponovo. Ako se greška nastavi, obratite se administratoru za Sugar.',
+    'ERR_HTTP_502_ACTION' => 'Obratite se tehničkoj podršci.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: interna greška servera 503',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Server nije dostupan za dovršavanje zahteva.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Pokušajte ponovo kasnije. Ako se greška nastavi, obratite se administratoru za Sugar.',
+    'ERR_HTTP_503_ACTION' => 'Obratite se tehničkoj podršci.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Neuspešna obrada polja',
     'ERR_RENDER_FAILED_MSG' => 'Neuspešna obrada pogleda',
@@ -11026,6 +11186,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => 'Greška:',
     'LBL_ALERT_TITLE_LOADING' => 'Učitavanje',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Verzija vašeg pregledača više nije podržana ili koritite nepodržani pregledač.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Preporučujemo sledeće verzije pregledača: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Pogledajte {{link}} stranicu za predložene čitače.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Podržane platforme',
 
@@ -11078,6 +11239,9 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Došlo je do greške pri povezivanju na server. Molimo vas probajte ponovo.',
     'ERR_RESOLVE_ERRORS' => 'Molimo vas rešite sve nastale greške pre nastavka.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Osveži listu',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'više',
@@ -11180,10 +11344,13 @@ $app_strings = array (
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM dozvoljava korisnicima da na brz način obave određene zadatke uz pomoću prečica na tastaturi koje uvećavaju produktivnost. Tabela',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Podržani tasteri</h1><ul><li>svi alfanumerički znakovi i simboli</li><li>shift, ctrl, alt, command, mod (ctrl u operativnim sistemima Windows/Linux i command u operativnom sistemu Mac)</li><li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>Podržane funkcije</h1><ul><li>Kombinacija tastera: ctrl+m</li><li>Višestruki tasteri: m,ctrl+m</li><li>Redosled tastera: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Globalne prečice',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Dodatne prečice',
     'LBL_SHORTCUT_KEY_KEY' => 'Ključ',
     'LBL_SHORTCUT_FUNCTION' => 'Funkcija',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Konfiguracija kontekstualnih prečica',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Nema kontekstualnih prečica za konfiguraciju',
     'LBL_SHORTCUT_HELP' => 'Prikazati pomoć u vezi prečica',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Postaviti meni brzog kreiranja',
     'LBL_SHORTCUT_SEARCH' => 'Fokus na polje globalne pretrage',
@@ -11231,6 +11398,9 @@ $app_strings = array (
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Odaberite sve stavke u polju sa više odabira',
     'LBL_SHORTCUT_SWEETSPOT' => 'Prebacite traku mesta udara',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Sakrijte traku mesta udara',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Sačuvaj konfiguraciju',
+    'LBL_SHORTCUT_RESTORE' => 'Vrati podrazumevano',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Došlo je do greške prilikom čuvanja prilagođenih tasterskih prečica na serveru. Pokušajte ponovo.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} Podešavanje',
@@ -11253,13 +11423,20 @@ $app_strings = array (
     'LBL_CALENDAR_RECURRENCE' => "Ponavljanje",
     'LBL_CALENDAR_REMINDERS' => "Podsetnici",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Prilagođeni datum",
     'LBL_CALENDAR_REPEAT_TYPE' => "Tip ponavljanja",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Intervali ponavljanja",
     'LBL_CALENDAR_REPEAT_DOW' => "Ponoviti sledećim danima u okviru nedelje",
+    'LBL_CALENDAR_REPEAT' => "Ponavljaj",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Ponavlja se do",
     'LBL_CALENDAR_REPEAT_COUNT' => "Ponoviti slučajeve",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Ponovi birač",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Dan(i) u mesecu",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Ponovi redni broj",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Ponovi jedinicu",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Vraćanje promena mora biti izvedeno korišćenjem prvih zapisa iz serije.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Pravila ponavljanja ne rezultiraju generisanjem događaja.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Prisustvujem',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Odbijen',
@@ -11279,17 +11456,23 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM zahteva javascript. Molim odobrite javascript kako biste nastavili da koristite SugarCRM.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Serijalizovanim podacima se ne može poništiti serijalizacija',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Serijalizovanim podacima se ne može poništiti serijalizacija zato što sadrže reference za objekte ili klase',
 
     'LBL_FIELD_TRIMMED' => 'Polje je skraćeno, zbog prekoračenja maksimalnog ograničenja za znakove.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Datoteka premašuje maksimalno ograničenje za znakove.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Poslednjih 7 dana',
     '30' => 'Poslednjih 30 dana',
     '90' => 'Poslednji kvartal',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11394,13 +11577,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Istekao',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Nacrt',
-    'Expired' => 'Istekao',
-    'In Review' => 'Na pregledu',
-    'Published' => 'Objavljen',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Admin Akcije--',
@@ -11412,57 +11588,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Obriši izabrane artikle',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Ima dodatke',
-        'none' => 'Nema ništa',
-        'mime' => 'Navedi MIME tip',
-        'name' => 'Navedi ime',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Reči';
   $app_list_strings['moduleListSingular']['Words'] = 'Reč';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Kreiraj artikal';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Prvih 5',
-    'Top_10' => 'Prvih 10',
-    'Top_20' => 'Prvih 20',
-    'Bot_5'  => 'Poslednjih 5',
-    'Bot_10' => 'Poslednjih 10',
-    'Bot_20' => 'Poslednjih 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Svi',
-        'added' => 'Dodani u poslednjih 30 dana',
-        'pending' => 'Na čekanju za odobrenje',
-        'updated' =>'Ažurirani u poslednjih 30 dana',
-        'faqs' => 'Često postavljana pitanja',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'Na',
-    'before' => 'Pre',
-    'after' => 'Posle',
-    'between_dates' => 'Između',
-    'last_7_days' => 'Poslednjih 7 dana',
-    'next_7_days' => 'Narednih 7 dana',
-    'last_month' => 'Prošli mesec',
-    'this_month' => 'Ovaj mesec',
-    'next_month' => 'Sledeći mesec',
-    'last_30_days' => 'Poslednjih 30 dana',
-    'next_30_days' => 'Narednih 30 dana',
-    'last_year' => 'Prošla godina',
-    'this_year' => 'Ove godine',
-    'next_year' => 'Sledeća godina',
-    'isnull' => 'je NULL',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12324,6 +12452,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Svi kontakti",
+    "email" => "Samo e-pošta",
+    "phone" => "Samo telefon",
     "prem" => "Samo premijum"
 );
 
@@ -12349,4 +12479,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Biografija',
     'Both' => 'Oba/oboje'
 );
-

@@ -38,7 +38,7 @@ class MyForecastsDashlet extends Dashlet {
     function MyForecastsDashlet($id, $def) {
         $this->loadLanguage('MyForecastsDashlet', 'modules/Forecasts/Dashlets/'); // load the language strings here
 
-        parent::Dashlet($id); // call parent constructor
+        parent::__construct($id); // call parent constructor
         $this->hasScript = true;  // dashlet has javascript attached to it
 
         $this->$id = $id;

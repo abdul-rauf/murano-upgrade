@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -91,7 +91,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} содержит перечень действий и активностей разного типа, которые должны быть завершены. Записи {{module_name}} могут быть связаны с одной записью во многих модулях через поле "flex relate", а ткже могут быть связаны с одним {{contacts_singular_module}}. Существует множество способов создания {{plural_module_name}} в Sugar, используя модуль {{plural_module_name}}, дублирование, импорт {{plural_module_name}} и т. п. Как только запись {{module_name}} создана, Вы можете просмотреть и редактировать информацию, касающуюся {{module_name}} в режиме просмотра записи {{plural_module_name}}. В зависимости от деталей {{module_name}}, Вы также сможете просмотреть и редактировать информацию {{module_name}} через модуль Календарь. Каждая запись {{module_name}} может быть связана с другими записями Sugar, такими как {{accounts_module}}, {{contacts_module}}, {{opportunities_module}}, и многими другими.',
+    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} содержит перечень действий и активностей разного типа, которые должны быть завершены. Записи модуля {{module_name}} могут быть связаны с одной записью во многих модулях через поле "flex relate", а также могут быть связаны с одним модулем {{contacts_singular_module}}. Существует множество способов создания {{plural_module_name}} в Sugar, используя модуль {{plural_module_name}}, дублирование, импорт {{plural_module_name}} и т. п. После создания записи {{module_name}} можно просматривать и редактировать информацию, касающуюся {{module_name}}, в режиме просмотра записи {{plural_module_name}}. В зависимости от деталей {{module_name}} Вы также сможете просматривать и редактировать информацию {{module_name}} через модуль Календарь. Каждая запись {{module_name}} может быть связана с другими записями Sugar, такими как {{accounts_module}}, {{contacts_module}}, {{opportunities_module}}, и многими другими.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{plural_module_name}} модуль содержит перечень действий и активностей разного типа, которые должны быть завершены- Чтобы редактировать поля данной записи, нажмите на самом поле или кликните по кнопке Редактировать.- Чтобы просмотреть или изменить ссылки, ведущие к другим записям, на субпанеле, переключите левую нижнюю панель на "Просмотр данных".- Чтобы оставлять и просматривать пользовательские комментарии, а также изменять историю в рамках одной записи в {{activitystream_singular_module}}, переключите левую нижнюю панель на "Лента активностей".- Чтобы подписаться или добавить в Избранное данную запись, используйте иконки справа от записи.- Дополнительные действия доступны в выпадающем меню Действий справа от кнопки Редактировать.',

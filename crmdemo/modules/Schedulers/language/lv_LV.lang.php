@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Noņemt diagnostikas rīka failus',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Noņemt pagaidu PDF failus',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Atjaunināt tracker_sessions Tabulu',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Izpildīt e-pasta atgādinājuma paziņojumus',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Ieslēgt e-pasta atgādinājumu paziņojumus',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Attīrīt uzdevumu rindu',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Izveidot nākotnes laika periodus',
 'LBL_OOTB_HEARTBEAT' => 'Sugar pulss',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Atjaunināt Zināšanu bāzes satura rakstus.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicēt apstiprinātos rakstus un Expire KB Articles.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Izpildīt autora ieplānoto uzdevumu',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervāls:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Atjaunot uzdevumus',
 'LBL_POLLMONITOREDINBOXES' => 'Pārbaudīt ienākošā e-pasta kontus',
 'LBL_PERFORMFULLFTSINDEX' => 'Pilna teksta meklēšanas indeksēšanas sistēma',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Noņemt pagaidu PDF failus',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publicēt apstiprinātos rakstus un Expire KB Articles.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elastīgās meklēšanas rindas plānotājs',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Noņemt diagnostikas rīka failus',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Noņemt pagaidu failus',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Masveida e-pasta kampaņas izpildīt pa nakti',
 'LBL_ASYNCMASSUPDATE' => 'Notiek asinhronas masveida izmaiņas (Mass Update)',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Atjaunināt Sekotāja sesiju tabulas',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Izveidot nākotnes laika periodus',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar pulss',
-'LBL_SENDEMAILREMINDERS'=> 'Veikt e-pasta atgādinājumu sūtīšanu',
+'LBL_SENDEMAILREMINDERS'=> 'Ieslēgt e-pasta atgādinājumu sūtīšanu',
 'LBL_CLEANJOBQUEUE' => 'Attīrīšanas uzdevumu rinda',
 'LBL_CLEANOLDRECORDLISTS' => 'Iztīrīt vecos ierakstus',
 );

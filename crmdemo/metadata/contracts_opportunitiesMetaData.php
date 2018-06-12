@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,12 +14,12 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 // $Id: contracts_opportunitiesMetaData.php 55782 2010-04-02 21:07:20Z clee $
 
 
-$dictionary['contracts_opportunities'] = array (
-	'table' => 'contracts_opportunities',
-	'fields' => array (
-		array('name' => 'id', 'type' => 'varchar', 'len' => '36'),
-		array('name' => 'opportunity_id', 'type' => 'varchar', 'len' => '36'),
-		array('name' => 'contract_id', 'type' => 'varchar', 'len' => '36'),
+$dictionary['contracts_opportunities'] = array(
+    'table' => 'contracts_opportunities',
+    'fields' => array(
+        array('name' => 'id', 'type' => 'id'),
+        array('name' => 'opportunity_id', 'type' => 'id'),
+        array('name' => 'contract_id', 'type' => 'id'),
 		array('name' => 'date_modified', 'type' => 'datetime'),
 		array('name' => 'deleted', 'type' => 'bool', 'len' => '1', 'default' => '0', 'required' => false),
 	),

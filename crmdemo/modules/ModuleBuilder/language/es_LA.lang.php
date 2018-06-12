@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -308,7 +308,7 @@ Si se incluye Oportunidades, Cuentas puede requerirse o eliminarse de convertir 
         'layoutsHelp'=> 'Seleccione un <b>Diseño a editar</b>.<br/<br/> Para cambiar el diseño que contiene los campos de datos para introducir los datos, haga clic en<b>Vista de Edición</b>.<br/><br/>Para cambiar el diseño que muestra los datos introducidos en los campos en la vista de edición, haga clic en <b>Vista de Detalle</b>.<br/><br/>Para cambiar las columnas que aparecen en la lista predeterminada, haga clic en <b>Vista de Lista</b>.<br/><br/>Para cambiar los diseños del formulario de búsqueda Básico y Avanzado, haga clic en <b>Buscar</b>.',
         'subpanelHelp'=> 'Seleccione un <b>Subpanel</b> para editar.',
         'searchHelp' => 'Seleccione un diseño de Búsqueda para editar.',
-        'labelsBtn'	=> 'Haga clic en <b>Guardar</b> para guardar las etiquetas personalizadas.',
+        'labelsBtn'	=> 'Editar las <b>etiquetas</b> para mostrar los valores en este módulo.',
         'newPackage'=>'Haga clic en Nuevo paquete para crear un nuevo paquete.',
         'mbHelp'    => '<b>Bienvenido al Generador de Módulo.</b><br/><br/>Utiice<b>Generador de Módulo</b>para crear paquetes que contengan módulos personalizados basados en objetos estándar o personalizados. <br/><br/> Para empezar, haga clic en <b>Paquete Nuevo</b>para crear un nuevo paquete, o seleccione un paquete para editar.<br/><br/> Un <b>Paquete</b>actúa como un contenedor de módulos personalizados, los cuales son parte de un proyecto. El paquete puede contener uno o más módulos personalizados que pueden estar relacionados entre sí o con los módulos de la aplicación.<br/><br/> Ejemplos: Es posible que desee crear un paquete que contiene un módulo personalizado que se relaciona con el módulo de Cuentas estándar. O bien, es posible que desee crear un paquete que contiene varios módulos nuevos que funcionan juntos como un proyecto y que están relacionados entre sí y con los módulos de la aplicación.',
         'exportBtn' => 'Haga clic en <b> Exportar personalizaciones </b> para crear un paquete que contenga personalizaciones realizadas en Studio para módulos específicos.',
@@ -714,6 +714,7 @@ Si se incluye Oportunidades, Cuentas puede requerirse o eliminarse de convertir 
 'LBL_JS_VALIDATE_NAME'=>'Nombre: debe ser alfanumérico, sin espacios, comenzar con una letra, y puede contener guiones bajos. No se pueden utilizar otros caracteres especiales.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'La Clave del paquete ya existe',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'El Nombre del Paquete ya existe',
+'LBL_JS_PACKAGE_NAME'=>'Nombre del paquete - debe empezar con una letra y sólo puede consistir de letras, números y guiones bajos. No se permiten espacios u otros caracteres especiales.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Clave: debe ser alfanumérica y comenzar con una letra.',
 'LBL_JS_VALIDATE_KEY'=>'Clave: debe ser alfanumérica, comenzar con una letra, y sin espacios.',
 'LBL_JS_VALIDATE_LABEL'=>'Por favor, introduzca la etiqueta que se utilizará como Nombre Visible de este módulo',
@@ -738,8 +739,8 @@ Si se incluye Oportunidades, Cuentas puede requerirse o eliminarse de convertir 
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'¿Está seguro de que desea eliminar esta relación?
 <br>Nota: Esta operación puede demorar unos minutos.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Esto hará la relación permantente. ¿Está seguro de que desea desplegar esta relación?',

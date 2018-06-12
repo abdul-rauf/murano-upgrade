@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,31 +10,24 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once ('include/SugarObjects/templates/basic/Basic.php');
+require_once 'include/SugarObjects/templates/basic/Basic.php';
 
 class Person extends Basic
 {
-    var $picture;
-    /**
-     *
-     * @var bool controls whether or not to invoke the getLocalFormatttedName
-     *      method with title and salutation
-     */
-    var $createLocaleFormattedName = true;
+    public $picture;
 
     /**
-     *
+     * Controls whether or not to invoke the getLocalFormatttedName method with
+     * title and salutation
+     * @var bool
+     */
+    public $createLocaleFormattedName = true;
+
+    /**
+     * Email address relationship
      * @var Link2
      */
     public $email_addresses;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Person()
-    {
-        self::__construct();
-    }
 
     public function __construct()
     {
@@ -66,19 +59,17 @@ class Person extends Basic
         $this->emailAddress->handleLegacyRetrieve($this);
     }
 
-	/**
+    /**
      * This function helps generate the name and full_name member field variables from the salutation, title, first_name and last_name fields.
      * It takes into account the locale format settings as well as ACL settings if supported.
-	 */
-	public function _create_proper_name_field()
-	{
-        global $locale;
-        $this->name = $this->full_name = $locale->formatName($this);
-	}
+     */
+    public function _create_proper_name_field()
+    {
+        $this->name = $this->full_name = $this->getRecordName();
+    }
 
     /**
-     *
-     * @see parent::save()
+     * @inheritDoc
      */
     public function save($check_notify = false)
     {
@@ -111,8 +102,6 @@ class Person extends Basic
         // bug #39188 - store emails state before workflow make any changes
         $this->emailAddress->stash($this->id, $this->module_dir);
         parent::save($check_notify);
-        // $this->emailAddress->evaluateWorkflowChanges($this->id,
-        // $this->module_dir);
         $override_email = array();
         if (!empty($this->email1_set_in_workflow)) {
             $override_email['emailAddress0'] = $this->email1_set_in_workflow;
@@ -125,31 +114,30 @@ class Person extends Basic
         }
         if ($ori_in_workflow === false || !empty($override_email)) {
             $this->emailAddress->save($this->id, $this->module_dir, $override_email, '', '', '', '', $this->in_workflow);
-            // $this->emailAddress->applyWorkflowChanges($this->id, $this->module_dir);
         }
+        $this->_create_proper_name_field();
         return $this->id;
     }
 
     /**
-     *
-     * @see parent::get_summary_text()
+     * @inheritDoc
      */
     public function get_summary_text()
     {
         $this->_create_proper_name_field();
         return $this->name;
-	}
+    }
 
-	/**
- 	 * @see parent::get_list_view_data()
- 	 */
-	public function get_list_view_data()
-	{
-		global $system_config;
-		global $current_user;
+    /**
+     * @inheritDoc
+     */
+    public function get_list_view_data()
+    {
+        global $system_config;
+        global $current_user;
 
-		$this->_create_proper_name_field();
-		$temp_array = $this->get_list_view_array();
+        $this->_create_proper_name_field();
+        $temp_array = $this->get_list_view_array();
 
         $temp_array['NAME'] = $this->name;
         $temp_array["ENCODED_NAME"] = $this->full_name;
@@ -165,12 +153,11 @@ class Person extends Basic
         }
         $temp_array['EMAIL_LINK'] = $current_user->getEmailLink('email1', $this, '', '', 'ListView');
 
-		return $temp_array;
-	}
+        return $temp_array;
+    }
 
     /**
-     *
-     * @see SugarBean::populateRelatedBean()
+     * @inheritDoc
      */
     public function populateRelatedBean(SugarBean $newbean)
     {
@@ -233,6 +220,7 @@ class Person extends Basic
     }
 
     /**
+     * Gets VCal data
      * @param array $options
      */
      protected function getVCalData($options)
@@ -254,5 +242,23 @@ class Person extends Basic
         $vcalData = str_replace("\r\n", "\n", $vcalData);
         $lines = explode("\n", $vcalData);
         return $lines;
+    }
+
+    /**
+     * Gets a Localization object
+     * @return Localization
+     */
+    protected function getLocaleObject()
+    {
+        global $locale;
+        return $locale;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRecordName()
+    {
+        return $this->getLocaleObject()->formatName($this);
     }
 }

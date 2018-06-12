@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -274,8 +274,9 @@ $mod_strings = array (
     'LBL_DST_UPGRADE' => 'Rindërto',
     'LBL_EDIT_CUSTOM_FIELDS' => 'Ndrysho fushat e zakonshme',
     'LBL_EDIT_TABS'=>'Ndrysho butonat',
-    'LBL_EMAIL_TITLE' => 'Email',
-    'LBL_EMAIL_DESC' => 'Menaxhoni emailat hyrse dhe dalëse. Parametrat e emailit duhet të jenë konfiguruar me qëllim që të mundësojnë përdoruesve të dërgojnë jashtë emailat dhe gazetën e fushatës.',
+    'LBL_EMAIL_TITLE' => 'Emaili',
+    'LBL_EMAIL_DESC' => 'Menaxho emailet dalëse dhe hyrëse. Cilësimet e emailit duhet të konfigurohen për ' .
+                        't&#39;u mundësuar përdoruesve dërgimin e emaileve dhe fushatave të buletineve.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Adresa e emailit primar është e nevojshme për çdo përdorues, në mënyrë që të përdorin këtë funksion.',
 	'LBL_ENABLE_MAILMERGE' => 'Mundëso bashkim të maileve?',
 	'LBL_ENABLED' => 'e mundur',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Vendosni parametrat e lokalizimit  të parazgjedhur për sistemin tuaj',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- Emri i përdoruesit të personit i cili do të operoje këtë klient offline',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Emri i përdoruesit të fundit:',
-    'LBL_MAILBOX_DESC' => 'Vendosni llogaritë e postës së grupit për monitorimin e emailit hyrës dhe për menaxhimin e llogarisë personale të postës hyrëse të informacionit për përdoruesit',
+    'LBL_MAILBOX_DESC' => 'Cakto llogari emaili grupi për monitorimin e emaileve hyrëse ' .
+        'dhe menaxho informacionin personal të llogarisë së emaileve hyrëse për përdoruesit',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Llojet e kontratës',
     'LBL_MANAGE_CURRENCIES' => 'Monedhat',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Menaxho grupet',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Rindërtoni grupimin e dosjeve JS',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Ri-lidhni dhe mbishkruani dosjet ekzistuese të grupit me versionet e fundit të dosjeve të grupit',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Riparo skedarët javascript',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Riparo skedarët JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Përpunimi i dosjeve. Kjo mund të zgjasë disa minuta. Duke u larguar nga kjo faqë nuk do të anuloni procesin, në mënyrë që të ndjeheni të lirë për të lëvizur ose të prisni për konfirmimin ...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Dosjet e bëra të përpunimit.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Riparimi i fushave më të vogla',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Fshirja e fajlleve të keshuara...e bërë',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Nëse kjo kuti është e pakontrolluar, një admin do të kërkohet të rivërtetoje manualisht mbas sistemit të licencës së përfunduar, përndryshe përdoruesit nuk do të jenë në gjendje të identifikohen.',
 	'LBL_TRACKER_SETTINGS' => 'Gjurmuesit',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Zgjidh arsyen e gjurmimit të sistemit dhe të dhënave të përdoruesit',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Aktivizo/çaktivizo gjurmimin',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Aktivizoni/çaktivizoni pasardhësin e përdoruesve',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Aktivizo',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Deaktivizo',
@@ -1158,6 +1162,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_ADDED' => 'Shtuar sprite {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Dosja e përjashtuar: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Lejet me bazë grupi',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Mundëso aksesin e grupit dhe menaxho aksesin sipas modulit.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Lloji i sistemit',
     'LBL_FTS_HOST' => 'Pritësi',
@@ -1227,5 +1235,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Klikimi submit do t&#39;ju sinkronizojë me master serverin.',
     'LBL_OFFLINE_ENABLED' => 'U mundësua offline',
     'LBL_OFFLINE_SETTINGS' => 'Të dhënat e offline',
+
 
 );

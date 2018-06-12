@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -274,8 +274,9 @@ $mod_strings = array (
     'LBL_DST_UPGRADE' => 'Αναβάθμιση:',
     'LBL_EDIT_CUSTOM_FIELDS' => 'Επεξεργασία Πρόσθετων Πεδίων',
     'LBL_EDIT_TABS'=>'Επεξεργασία Καρτελών',
-    'LBL_EMAIL_TITLE' => 'Email',
-    'LBL_EMAIL_DESC' => 'Διαχείριση εξερχομένων και εισερχομένων emails. Οι ρυθμίσεις email πρέπει να διαμορφωθούν έτσι ώστε να επιτρέπουν στους χρήστες να στέλνουν email και ενημερωτικά δελτία εκστρατειών.',
+    'LBL_EMAIL_TITLE' => 'Ηλεκτρονικό ταχυδρομείο',
+    'LBL_EMAIL_DESC' => 'Διαχείριση εξερχόμενων και εισερχόμενων μηνυμάτων ηλεκτρονικού ταχυδρομείου. Οι ρυθμίσεις ηλεκτρονικού ταχυδρομείου πρέπει να διαμορφωθούν έτσι ώστε να ' .
+                        'επιτρέπεται στους χρήστες να στέλνουν μηνύματα ηλεκτρονικού ταχυδρομείου και καμπάνιες εημερωτικών δελτίων.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Μια βασική διεύθυνση email είναι απαραίτητη για κάθε χρήστη, προκειμένου να χρησιμοποιήσετε αυτό το χαρακτηριστικό.',
 	'LBL_ENABLE_MAILMERGE' => 'Ενεργοποίηση Συγχώνευσης Ταχυδρομείου;',
 	'LBL_ENABLED' => 'Ενεργοποιημένο',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Ορίστε τις ρυθμίσεις προεπιλογής εντοπισμού για το σύστημα σας',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- Το Όνομα Χρήστη του ατόμου που θα λειτουργήσει αυτόν τον offline client',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Τέλος Όνομα Χρήστη:',
-    'LBL_MAILBOX_DESC' => 'Ρύθμιση γκρουπ λογαριασμών ηλεκτρονικού ταχυδρομείου, για την παρακολούθηση των εισερχόμενων email και τη διαχείριση προσωπικών εισερχόμενων πληροφοριών του λογαριασμού ηλεκτρονικού ταχυδρομείου για τους χρήστες',
+    'LBL_MAILBOX_DESC' => 'Δημιουργία ομαδικών λογαριασμών αλληλογραφίας για την παρακολούθηση των εισερχόμενων ηλεκτρονικών μηνυμάτων ' .
+        'για τη διαχείριση των στοιχείων λογαριασμού προσωπικής εισερχόμενης αλληλογραφίας των χρηστών',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Τύποι Συμβάσεων',
     'LBL_MANAGE_CURRENCIES' => 'Νομίσματα',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Διαχείριση Γκρουπ',
@@ -590,7 +592,7 @@ $mod_strings = array (
     'LBL_PRODUCTS_TITLE' => 'Κατάλογος Προϊόντος',
     'LBL_PRODUCTS' => 'Εισαγωγή στοιχείων στην κατηγορία προϊόντος',
     'LBL_PROXY_AUTH'=>'Ταυτοποίηση;',
-    'LBL_PROXY_HOST'=>'Διακομιστής Μεσολάβησης',
+    'LBL_PROXY_HOST'=>'Κεντρικός υπολογιστής μεσολάβησης',
     'LBL_PROXY_ON_DESC'=>'Χρησιμοποιήστε ένα διακομιστή μεσολάβησης για πρόσβαση σε εξωτερικά στοιχεία, όπως ενημερώσεις του Sugar.',
     'LBL_PROXY_ON'=>'Ενεργοποίηση Διακομιστή;',
     'LBL_PROXY_PASSWORD'=>'Κωδικός Πρόσβασης',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Ανοικοδόμηση Αρχείων Γκρουπ JS',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Ξανά-συνενώνει και επανεγγράφει υπάρχοντα αρχεία ομάδας, με τις τελευταίες εκδόσεις των αρχείων της ομάδας',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Επισκευή αρχείων javascript',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Επισκευή αρχείων JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Επεξεργασία αρχείων. Αυτό μπορεί να διαρκέσει αρκετά λεπτά. Πηγαίνοντας μακριά από αυτή τη σελίδα δεν θα ακυρώσει τη διαδικασία, αισθανθείτε ελεύθεροι να προχωρήσετε ή να περιμένετε για επιβεβαίωση...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Έγινε Επεξεργασία αρχείων.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Επιδιόρθωση Όχι-Πεζά Πεδία',
@@ -739,7 +743,7 @@ $mod_strings = array (
     'LBL_SUGAR_NETWORK_DESC' => 'Συνδεθείτε στις διάφορες υπηρεσίες του SugarCRM, όπου μπορείτε να έχετε πρόσβαση στο forum του SugarCRM και του Sugar Wiki. Αναζήτηση Συχνών Ερωτημάτων, λήψη της τελευταίας έκδοσης του  Sugar, αναζήτηση αρχείων και αναφορών σφαλμάτων και νέων χαρακτηριστικών γνωρισμάτων.',
     'LBL_SUGAR_SCHEDULER_TITLE' => 'Προγραμματισμένες Εργασίες',
     'LBL_SUGAR_SCHEDULER' => 'Ρύθμιση προγραμματισμένων εκδηλώσεων',
-    'LBL_SUGAR_SERVER_URL_DESC'          => '- Διεύθυνση URL του διακομιστή, ο πελάτης θα συνδεθεί στο (e.g., http://localhost/sugarserver).',
+    'LBL_SUGAR_SERVER_URL_DESC'          => '- Το URL του διακομιστή, στον οποίο θα συνδεθεί ο πελάτης (e.g., http://localhost/sugarserver).',
     'LBL_SUGAR_SERVER_URL'                => 'Διεύθυνση Διακομιστή URL:',
     'LBL_SUGAR_UPDATE_TITLE'=>'Αναβαθμίσεις Sugar',
     'LBL_SUGAR_UPDATE'=>'Έλεγχος για την τελευταία έκδοση του Sugar',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Εκκαθάριση Πρόσθετων Cache Αρχείων...ολοκληρώθηκε',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Εάν αυτό το κουτάκι είναι αποεπιλεγμένο, ένας διαχειριστής θα απαιτηθεί χειροκίνητα να επανα-επικυρώσει, αφότου λήξει η άδεια του συστήματος, διαφορετικά οι χειριστές θα είναι ανίκανοι να συνδεθούν.',
 	'LBL_TRACKER_SETTINGS' => 'Σημείο Εντοπισμού',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Επιλέξτε το σύστημα και τα δεδομένα χρήστη που παρακολουθούνται',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Ενεργοποίηση/Απενεργοποίηση παρακολούθησης',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Ενεργοποίηση/Απενεργοποίηση Χειριστών',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Ενεργός',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Ανενεργός',
@@ -1158,12 +1162,16 @@ $mod_strings = array (
     'LBL_SPRITES_ADDED' => 'Προστέθηκε sprite {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Εξαιρούμενο αρχείο: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Ομαδικά δικαιώματα',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Ενεργοποιήστε την πρόσβαση ομάδας και διαχειριστείτε την πρόσβαση βάση ενότητας.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Τύπος Συστήματος',
-    'LBL_FTS_HOST' => 'Host',
+    'LBL_FTS_HOST' => 'Κεντρικός υπολογιστής',
     'LBL_FTS_PORT' => 'Θύρα',
     'LBL_FTS_TYPE_HELP' => 'Επιλέξτε την μηχανή που θα χρησιμοποιηθεί για την αναζήτηση πλήρους κειμένου. Το σύστημα ανιχνεύει τις μηχανές που υποστηρίζονται και τις εμφανίζει μέσα σε αυτή τη λίστα. Η Sugar περιλαμβάνει ενσωματωμένη υποστήριξη για την ελαστική αναζήτηση μηχανής.',
-    'LBL_FTS_HOST_HELP' => 'Εισάγετε το όνομα της διεύθυνσης, όπου η αναζήτηση του πλήρους κειμένου διανέμεται στην μηχανή.',
+    'LBL_FTS_HOST_HELP' => 'Εισάγετε το όνομα του κεντρικού υπολογιστή, όπου η αναζήτηση του πλήρους κειμένου διανέμεται στην μηχανή.',
     'LBL_FTS_PORT_HELP' => 'Εισάγετε τον αριθμό της θύρας, όπου η αναζήτηση του πλήρους κειμένου διανέμεται στην μηχανή.',
 
     'LBL_AVAILABLE_FTS_MODULES' => 'Επιλογή ενότητας για ευρετήριο.',
@@ -1227,5 +1235,6 @@ $mod_strings = array (
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Πατώντας το κουμπί "Υποβολή" θα σας συγχρονίσει με τον κύριο διακομιστή.',
     'LBL_OFFLINE_ENABLED' => 'Ενεργοποιημένο Offline',
     'LBL_OFFLINE_SETTINGS' => 'Ρυθμίσεις Offline',
+
 
 );

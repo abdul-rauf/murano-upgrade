@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -107,8 +107,8 @@
             gsUtils.formatRecords(collection, false);
 
             _.each(this.collection.models, function(model) {
+                model.viewAccess = app.acl.hasAccessToModel('view', model);
 
-                model.link = '#' + app.router.buildRoute(model.module, model.id);
                 // FIXME: SC-4254 Remove this.layout.v2
                 if (this.layout.v2) {
                     var moduleMeta = this._fieldsMeta[model.module] || gsUtils.getFieldsMeta(model.module, {linkablePrimary: false});

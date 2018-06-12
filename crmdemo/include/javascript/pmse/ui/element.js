@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -97,7 +97,10 @@ Element.prototype.initObject = function (options) {
         zOrder : 1,
         visible : true
     };
-    $.extend(true, defaults, options);
+
+    // Do not deep copy here
+    $.extend(defaults, options);
+
     this//.setId(defaults.id)
         .setStyle(new Style({
             belongsTo: this,

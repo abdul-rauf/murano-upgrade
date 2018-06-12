@@ -3,7 +3,7 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -286,6 +286,10 @@ class MetaDataManager
             'max_repeat_count' => true,
         ),
         'lead_conv_activity_opt' => true,
+        'team_based_acl' => array(
+            'enabled' => true,
+            'enabled_modules' => true,
+        ),
         'preview_edit' => true,
     );
 
@@ -2057,6 +2061,12 @@ class MetaDataManager
         $connectors = ConnectorUtils::getConnectors();
         $configs['connectors'] = $this->getFilteredConnectorList($connectors);
 
+        if (isset($sugarConfig['sugar_min_int']) && is_numeric($sugarConfig['sugar_min_int'])) {
+            $configs['sugarMinInt'] = $sugarConfig['sugar_min_int'];
+        }
+        if (isset($sugarConfig['sugar_max_int']) && is_numeric($sugarConfig['sugar_max_int'])) {
+            $configs['sugarMaxInt'] = $sugarConfig['sugar_max_int'];
+        }
         return $configs;
     }
 
@@ -2469,6 +2479,7 @@ class MetaDataManager
 
         $js = "(function(app) {\n SUGAR.jssource = {";
 
+        $routesJs = '';
 
         $compJS = $this->buildJavascriptComponentSection($data);
         if (!$onlyReturnModuleComponents) {
@@ -2489,13 +2500,15 @@ class MetaDataManager
                 if (!empty($moduleJS)) {
                     $allModuleJS .= ",\n\t\t\"$module\":{{$moduleJS}}";
                 }
+                $routesJs .= MetaDataFiles::loadRouterFile($module, $platform);
             }
             //Chop off the first comma in $allModuleJS
             $js .= substr($allModuleJS, 1);
             $js .= "\n\t}";
         }
 
-        $js .= "}})(SUGAR.App);";
+        $js .= "}})(SUGAR.App);\n";
+        $js .= $routesJs;
         $hash = md5($js);
         //If we are going to be using uglify to minify our JS, we should minify the entire file rather than each component separately.
         if (shouldResourcesBeMinified() && SugarMin::isMinifyFast()) {
@@ -2916,7 +2929,8 @@ class MetaDataManager
                 $currency['iso4217'] = $current->iso4217;
                 $currency['status'] = $current->status;
                 $currency['symbol'] = $current->symbol;
-                $currency['conversion_rate'] = $current->conversion_rate;
+                // format just like we do on the models
+                $currency['conversion_rate'] = SugarMath::init($current->conversion_rate)->result();
                 $currency['name'] = $current->name;
                 $currency['date_entered'] = $current->date_entered;
                 $currency['date_modified'] = $current->date_modified;

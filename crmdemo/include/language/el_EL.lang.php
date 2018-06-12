@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,7 +56,7 @@ $app_list_strings = array (
     'TaxRates'=>'Φορολογικοί Συντελεστές',
     'ContractTypes' => 'Τύποι Συμβάσεων',
     'Schedulers'=>'Χρονοπρογραμματιστές εργασιών',
-    'Project'=>'Έργο',
+    'Project'=>'Έργα',
     'ProjectTask'=>'Εργασίες Έργων',
     'Campaigns'=>'Εκστρατείες',
     'CampaignLog'=>'Καταγραφή καμπάνιας',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Φίλτρο',
     'Comments' => 'Σχόλιο',
     'Currencies' => 'Νόμισμα',
-    'Project' => 'Έργο',
     'ProductTemplates' => 'Πρότυπο Προϊόντος',
-    'ProductCategories' => 'Τύπος Προϊόντος',
     'ProductTypes' => 'Τύπος Προϊόντος',
     'Shippers' => 'Πάροχος Αποστολής',
     'Subscriptions' => 'Συνδρομή',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Παρ",
                 '7'=>"Σάβ",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Κυ",
+            '2'=>"Δε",
+            '3'=>"Τρ",
+            '4'=>"Τε",
+            '5'=>"Πε",
+            '6'=>"Πα",
+            '7'=>"Σα",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Κυρ',
         '1' => 'Δευτ',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'έτος(η)',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Μέχρι',
+        'Occurrences' => 'Εμφανίσεις',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Κανένα',
+        'Each' => 'Κάθε',
+        'On' => 'Στο',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'πρώτη',
+        'second' => 'δεύτερη',
+        'third' => 'τρίτη',
+        'fourth' => 'τέταρτη',
+        'fifth' => 'πέμπτη',
+        'last' => 'τελευταία',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Κυριακή',
+        'Mon' => 'Δευτέρα',
+        'Tue' => 'Τρίτη',
+        'Wed' => 'Τετάρτη',
+        'Thu' => 'Πέμπτη',
+        'Fri' => 'Παρασκευή',
+        'Sat' => 'Σάββατο',
+        'Day' => 'Ημέρα',
+        'WD'  => 'Εργάσιμη ημέρα',
+        'WE'  => 'Ημέρα σαββατοκύριακου'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Μέση',
         'end' => 'Τέλος',
         'top' => 'Κορυφή',
+        'total' => 'Σύνολο',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Χωνί',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Light',
       'dark' => 'Dark',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Μετακίνηση',
@@ -1722,7 +1841,7 @@ $app_list_strings = array (
             "17" => array("code" => "KHO", "name" => "Khost"),
             "18" => array("code" => "KNR", "name" => "Konar"),
             "19" => array("code" => "LAG", "name" => "Laghman"),
-            "20" => array("code" => "LOW", "name" => "Lowgar"),
+            "20" => array("code" => "ΧΑΜΗΛΗ", "name" => "Lowgar"),
             "21" => array("code" => "NAN", "name" => "Nangrahar"),
             "22" => array("code" => "NIM", "name" => "Nimruz"),
             "23" => array("code" => "NUR", "name" => "Nurestan"),
@@ -1815,7 +1934,7 @@ $app_list_strings = array (
             "36" => array("code" => "SAH", "name" => "Souk Ahras"),
             "37" => array("code" => "SAI", "name" => "Saida"),
             "38" => array("code" => "SBA", "name" => "Sidi Bel Abbes"),
-            "39" => array("code" => "SET", "name" => "Setif"),
+            "39" => array("code" => "ΚΑΘΟΡΙΣΜΟΣ", "name" => "Setif"),
             "40" => array("code" => "SKI", "name" => "Skikda"),
             "41" => array("code" => "TAM", "name" => "Tamanghasset"),
             "42" => array("code" => "TEB", "name" => "Tebessa"),
@@ -1887,7 +2006,7 @@ $app_list_strings = array (
             "5" => array("code" => "ASM", "name" => "Saint Mary"),
             "6" => array("code" => "ASR", "name" => "Saint Peter"),
             "7" => array("code" => "BAR", "name" => "Barbuda"),
-            "8" => array("code" => "RED", "name" => "Redonda")
+            "8" => array("code" => "ΚΟΚΚΙΝΟ", "name" => "Redonda")
         ),
         /* Argentina */
         "AR" => array(
@@ -2018,7 +2137,7 @@ $app_list_strings = array (
             "46" => array("code" => "QBI", "name" => "Qubadli"),
             "47" => array("code" => "QUS", "name" => "Qusar"),
             "48" => array("code" => "SA", "name" => "Saki"),
-            "49" => array("code" => "SAT", "name" => "Saatli"),
+            "49" => array("code" => "ΣΑΒ", "name" => "Saatli"),
             "50" => array("code" => "SAB", "name" => "Sabirabad"),
             "51" => array("code" => "SAD", "name" => "Sadarak"),
             "52" => array("code" => "SAH", "name" => "Sahbuz"),
@@ -2067,7 +2186,7 @@ $app_list_strings = array (
             "16" => array("code" => "INA", "name" => "Inagua"),
             "17" => array("code" => "LNG", "name" => "Long Island"),
             "18" => array("code" => "MAN", "name" => "Mangrove Cay"),
-            "19" => array("code" => "MAY", "name" => "Mayaguana"),
+            "19" => array("code" => "ΜΑΙΟΣ", "name" => "Mayaguana"),
             "20" => array("code" => "MOO", "name" => "Moore's Island"),
             "21" => array("code" => "NAB", "name" => "North Abaco"),
             "22" => array("code" => "NAN", "name" => "North Andros"),
@@ -2100,8 +2219,8 @@ $app_list_strings = array (
         ),
         /* Barbados */
         "BB" => array(
-            "1" => array("code" => "CC", "name" => "Christ Church"),
-            "2" => array("code" => "AND", "name" => "Saint Andrew"),
+            "1" => array("code" => "ΚΟΙΝ", "name" => "Christ Church"),
+            "2" => array("code" => "ΚΑΙ", "name" => "Saint Andrew"),
             "3" => array("code" => "GEO", "name" => "Saint George"),
             "4" => array("code" => "JAM", "name" => "Saint James"),
             "5" => array("code" => "JOH", "name" => "Saint John"),
@@ -2181,12 +2300,12 @@ $app_list_strings = array (
             "4" => array("code" => "GAS", "name" => "Gasa"),
             "5" => array("code" => "HAA", "name" => "Haa"),
             "6" => array("code" => "LHU", "name" => "Lhuntse"),
-            "7" => array("code" => "MON", "name" => "Mongar"),
+            "7" => array("code" => "ΔΕΥΤ", "name" => "Mongar"),
             "8" => array("code" => "PAR", "name" => "Paro"),
             "9" => array("code" => "PEM", "name" => "Pemagatshel"),
             "10" => array("code" => "PUN", "name" => "Punakha"),
             "11" => array("code" => "SJO", "name" => "Samdrup Jongkhar"),
-            "12" => array("code" => "SAT", "name" => "Samtse"),
+            "12" => array("code" => "ΣΑΒ", "name" => "Samtse"),
             "13" => array("code" => "SAR", "name" => "Sarpang"),
             "14" => array("code" => "THI", "name" => "Thimphu"),
             "15" => array("code" => "TRG", "name" => "Trashigang"),
@@ -2381,7 +2500,7 @@ $app_list_strings = array (
             "9" => array("code" => "KI", "name" => "Kirundo"),
             "10" => array("code" => "MA", "name" => "Makamba"),
             "11" => array("code" => "MU", "name" => "Muramvya"),
-            "12" => array("code" => "MY", "name" => "Muyinga"),
+            "12" => array("code" => "ΔΙΚΗ ΜΟΥ", "name" => "Muyinga"),
             "13" => array("code" => "MW", "name" => "Mwaro"),
             "14" => array("code" => "NG", "name" => "Ngozi"),
             "15" => array("code" => "RT", "name" => "Rutana"),
@@ -2517,7 +2636,7 @@ $app_list_strings = array (
             "1" => array("code" => "AI", "name" => "Aisen del General Carlos Ibanez"),
             "2" => array("code" => "AN", "name" => "Antofagasta"),
             "3" => array("code" => "AR", "name" => "Araucania"),
-            "4" => array("code" => "AT", "name" => "Atacama"),
+            "4" => array("code" => "ΣΤΙΣ", "name" => "Atacama"),
             "5" => array("code" => "BI", "name" => "Bio-Bio"),
             "6" => array("code" => "CO", "name" => "Coquimbo"),
             "7" => array("code" => "LI", "name" => "Libertador General Bernardo O'Hi"),
@@ -2629,7 +2748,7 @@ $app_list_strings = array (
         /* Cook Islands */
         "CK" => array(
             "1" => array("code" => "AI", "name" => "Aitutaki"),
-            "2" => array("code" => "AT", "name" => "Atiu"),
+            "2" => array("code" => "ΣΤΙΣ", "name" => "Atiu"),
             "3" => array("code" => "MA", "name" => "Manuae"),
             "4" => array("code" => "MG", "name" => "Mangaia"),
             "5" => array("code" => "MK", "name" => "Manihiki"),
@@ -2703,7 +2822,7 @@ $app_list_strings = array (
             "45" => array("code" => "SEG", "name" => "Seguela"),
             "46" => array("code" => "SIN", "name" => "Sinfra"),
             "47" => array("code" => "SOU", "name" => "Soubre"),
-            "48" => array("code" => "TAB", "name" => "Tabou"),
+            "48" => array("code" => "ΚΑΡΤΕΛΑ", "name" => "Tabou"),
             "49" => array("code" => "TAN", "name" => "Tanda"),
             "50" => array("code" => "TIE", "name" => "Tiebissou"),
             "51" => array("code" => "TIN", "name" => "Tingrela"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "ΚΑΙ", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "Ή", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Southern Nations - Nationalities"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3004,7 +3123,7 @@ $app_list_strings = array (
             "3" => array("code" => "RUN", "name" => "Runavík"),
             "4" => array("code" => "TVØ", "name" => "Tvøroyri"),
             "5" => array("code" => "FUG", "name" => "Fuglafjørður"),
-            "6" => array("code" => "SUN", "name" => "Sunda Kommuna"),
+            "6" => array("code" => "ΚΥΡ", "name" => "Sunda Kommuna"),
             "7" => array("code" => "VáG", "name" => "Vágur"),
             "8" => array("code" => "NES", "name" => "Nes"),
             "9" => array("code" => "VES", "name" => "Vestmanna"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "Sumba"),
+            "22" => array("code" => "Άθροισμα", "name" => "Sumba"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3197,10 +3316,10 @@ $app_list_strings = array (
             "16" => array("code" => "SIN", "name" => "Sinnamary"),
             "17" => array("code" => "KOU", "name" => "Kourou"),
             "18" => array("code" => "MAC", "name" => "Macouria"),
-            "19" => array("code" => "MON", "name" => "Montsinéry-Tonnegrande"),
+            "19" => array("code" => "ΔΕΥΤ", "name" => "Montsinéry-Tonnegrande"),
             "20" => array("code" => "MAT", "name" => "Matoury"),
             "21" => array("code" => "CAY", "name" => "Cayenne"),
-            "22" => array("code" => "REM", "name" => "Remire-Montjoly")
+            "22" => array("code" => "ΑΦΑΙΡ", "name" => "Remire-Montjoly")
         ),
         /* French Polynesia */
         "PF" => array(
@@ -3306,7 +3425,7 @@ $app_list_strings = array (
         ),
         /* Greece */
         "GR" => array(
-            "1" => array("code" => "AT", "name" => "Attica"),
+            "1" => array("code" => "ΣΤΙΣ", "name" => "Attica"),
             "2" => array("code" => "CN", "name" => "Central Greece"),
             "3" => array("code" => "CM", "name" => "Central Macedonia"),
             "4" => array("code" => "CR", "name" => "Crete"),
@@ -3335,7 +3454,7 @@ $app_list_strings = array (
             "5" => array("code" => "M", "name" => "Saint Mark"),
             "6" => array("code" => "P", "name" => "Saint Patrick"),
             "7" => array("code" => "C", "name" => "Carriacou"),
-            "8" => array("code" => "Q", "name" => "Petit Martinique")
+            "8" => array("code" => "Τ", "name" => "Petit Martinique")
         ),
         /* Guadeloupe */
         "GP" => array(
@@ -3356,7 +3475,7 @@ $app_list_strings = array (
             "8" => array("code" => "INA", "name" => "Inarajan"),
             "9" => array("code" => "MAN", "name" => "Mangilao"),
             "10" => array("code" => "MER", "name" => "Merizo"),
-            "11" => array("code" => "MON", "name" => "Mongmong Toto Maite"),
+            "11" => array("code" => "ΔΕΥΤ", "name" => "Mongmong Toto Maite"),
             "12" => array("code" => "PIT", "name" => "Piti"),
             "13" => array("code" => "SAN", "name" => "Santa Rita"),
             "14" => array("code" => "SIN", "name" => "Sinajana"),
@@ -3474,7 +3593,7 @@ $app_list_strings = array (
         ),
         /* Honduras */
         "HN" => array(
-            "1" => array("code" => "AT", "name" => "Atlantida"),
+            "1" => array("code" => "ΣΤΙΣ", "name" => "Atlantida"),
             "2" => array("code" => "CH", "name" => "Choluteca"),
             "3" => array("code" => "CL", "name" => "Colon"),
             "4" => array("code" => "CM", "name" => "Comayagua"),
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "Ή", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3683,7 +3802,7 @@ $app_list_strings = array (
             "8" => array("code" => "DY", "name" => "Diyala"),
             "9" => array("code" => "KB", "name" => "Al Karbala"),
             "10" => array("code" => "MU", "name" => "Al Muthanna"),
-            "11" => array("code" => "MY", "name" => "Maysan"),
+            "11" => array("code" => "ΔΙΚΗ ΜΟΥ", "name" => "Maysan"),
             "12" => array("code" => "NJ", "name" => "An Najaf"),
             "13" => array("code" => "NN", "name" => "Ninawa"),
             "14" => array("code" => "QA", "name" => "Al Qadisyah"),
@@ -3743,7 +3862,7 @@ $app_list_strings = array (
             "4" => array("code" => "AO", "name" => "Aosta"),
             "5" => array("code" => "AR", "name" => "Arezzo"),
             "6" => array("code" => "AP", "name" => "Ascoli Piceno"),
-            "7" => array("code" => "AT", "name" => "Asti"),
+            "7" => array("code" => "ΣΤΙΣ", "name" => "Asti"),
             "8" => array("code" => "AV", "name" => "Avellino"),
             "9" => array("code" => "BA", "name" => "Bari"),
             "10" => array("code" => "BL", "name" => "Belluno"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "Ή", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parish"),
             "4" => array("code" => "MAN", "name" => "Manchester Parish"),
             "5" => array("code" => "POR", "name" => "Portland Parish"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "ΚΑΙ", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parish"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parish"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parish"),
@@ -3890,14 +4009,14 @@ $app_list_strings = array (
             "21" => array("code" => "KU", "name" => "Kumamoto"),
             "22" => array("code" => "KY", "name" => "Kyoto"),
             "23" => array("code" => "MI", "name" => "Mie"),
-            "24" => array("code" => "MY", "name" => "Miyagi"),
+            "24" => array("code" => "ΔΙΚΗ ΜΟΥ", "name" => "Miyagi"),
             "25" => array("code" => "MZ", "name" => "Miyazaki"),
             "26" => array("code" => "NA", "name" => "Nagano"),
             "27" => array("code" => "NG", "name" => "Nagasaki"),
             "28" => array("code" => "NR", "name" => "Nara"),
             "29" => array("code" => "NI", "name" => "Niigata"),
             "30" => array("code" => "OI", "name" => "Oita"),
-            "31" => array("code" => "OK", "name" => "Okayama"),
+            "31" => array("code" => "Εντάξει", "name" => "Okayama"),
             "32" => array("code" => "ON", "name" => "Okinawa"),
             "33" => array("code" => "OS", "name" => "Osaka"),
             "34" => array("code" => "SA", "name" => "Saga"),
@@ -3923,7 +4042,7 @@ $app_list_strings = array (
             "4" => array("code" => "AB", "name" => "Al Balqa'"),
             "5" => array("code" => "AK", "name" => "Al Karak"),
             "6" => array("code" => "AL", "name" => "Al Mafraq"),
-            "7" => array("code" => "AT", "name" => "At Tafilah"),
+            "7" => array("code" => "ΣΤΙΣ", "name" => "At Tafilah"),
             "8" => array("code" => "AZ", "name" => "Az Zarqa'"),
             "9" => array("code" => "IR", "name" => "Irbid"),
             "10" => array("code" => "JA", "name" => "Jarash"),
@@ -3937,9 +4056,9 @@ $app_list_strings = array (
             "3" => array("code" => "AM", "name" => "Aqmola"),
             "4" => array("code" => "AQ", "name" => "Aqtobe"),
             "5" => array("code" => "AS", "name" => "Astana City"),
-            "6" => array("code" => "AT", "name" => "Atyrau"),
+            "6" => array("code" => "ΣΤΙΣ", "name" => "Atyrau"),
             "7" => array("code" => "BA", "name" => "Batys Qazaqstan"),
-            "8" => array("code" => "BY", "name" => "Bayqongyr City"),
+            "8" => array("code" => "ΑΠΟ", "name" => "Bayqongyr City"),
             "9" => array("code" => "MA", "name" => "Mangghystau"),
             "10" => array("code" => "ON", "name" => "Ongtustik Qazaqstan"),
             "11" => array("code" => "PA", "name" => "Pavlodar"),
@@ -4039,7 +4158,7 @@ $app_list_strings = array (
         /* Laos */
         "LA" => array(
             "1" => array("code" => "VT", "name" => "Vientiane"),
-            "2" => array("code" => "AT", "name" => "Attapu"),
+            "2" => array("code" => "ΣΤΙΣ", "name" => "Attapu"),
             "3" => array("code" => "BK", "name" => "Bokeo"),
             "4" => array("code" => "BL", "name" => "Bolikhamxai"),
             "5" => array("code" => "CH", "name" => "Champasak"),
@@ -4109,7 +4228,7 @@ $app_list_strings = array (
             "11" => array("code" => "BAT", "name" => "Batroun"),
             "12" => array("code" => "BSH", "name" => "Bsharri"),
             "13" => array("code" => "KOU", "name" => "Koura"),
-            "14" => array("code" => "MIN", "name" => "Miniyeh-Danniyeh"),
+            "14" => array("code" => "ΕΛΑΧΙΣΤΟ", "name" => "Miniyeh-Danniyeh"),
             "15" => array("code" => "TRI", "name" => "Tripoli"),
             "16" => array("code" => "ZGH", "name" => "Zgharta"),
             "17" => array("code" => "ALE", "name" => "Aley"),
@@ -4280,8 +4399,8 @@ $app_list_strings = array (
             "46" => array("code" => "MAV", "name" => "Mavrovo and Rostuša"),
             "47" => array("code" => "MOG", "name" => "Mogila"),
             "48" => array("code" => "NEG", "name" => "Negotino"),
-            "49" => array("code" => "NOV", "name" => "Novaci"),
-            "50" => array("code" => "NOV", "name" => "Novo Selo"),
+            "49" => array("code" => "ΝΟΕ", "name" => "Novaci"),
+            "50" => array("code" => "ΝΟΕ", "name" => "Novo Selo"),
             "51" => array("code" => "OHR", "name" => "Ohrid"),
             "52" => array("code" => "OSL", "name" => "Oslomej"),
             "53" => array("code" => "PEH", "name" => "Pehčevo"),
@@ -4395,7 +4514,7 @@ $app_list_strings = array (
             "17" => array("code" => "NAD", "name" => "Nilandhe Atoll Dhekunu"),
             "18" => array("code" => "NAU", "name" => "Nilandhe Atoll Uthuru"),
             "19" => array("code" => "THD", "name" => "Thiladhunmathi Dhekunu"),
-            "20" => array("code" => "THU", "name" => "Thiladhunmathi Uthuru")
+            "20" => array("code" => "ΠΕΜ", "name" => "Thiladhunmathi Uthuru")
         ),
         /* Mali */
         "ML" => array(
@@ -4444,7 +4563,7 @@ $app_list_strings = array (
             "31" => array("code" => "NAX", "name" => "Naxxar"),
             "32" => array("code" => "PAO", "name" => "Paola"),
             "33" => array("code" => "PEM", "name" => "Pembroke"),
-            "34" => array("code" => "PIE", "name" => "Pieta"),
+            "34" => array("code" => "ΠΙΤΑ", "name" => "Pieta"),
             "35" => array("code" => "QOR", "name" => "Qormi"),
             "36" => array("code" => "QRE", "name" => "Qrendi"),
             "37" => array("code" => "RAB", "name" => "Rabat"),
@@ -4528,7 +4647,7 @@ $app_list_strings = array (
             "7" => array("code" => "LE", "name" => "Le Diamant"),
             "8" => array("code" => "DUC", "name" => "Ducos"),
             "9" => array("code" => "FON", "name" => "Fonds-Saint-Denis"),
-            "10" => array("code" => "FOR", "name" => "Fort-De-France"),
+            "10" => array("code" => "ΓΙΑ", "name" => "Fort-De-France"),
             "11" => array("code" => "LE", "name" => "Le François"),
             "12" => array("code" => "GRA", "name" => "Grand'Rivière"),
             "13" => array("code" => "GRO", "name" => "Gros-Morne"),
@@ -4575,7 +4694,7 @@ $app_list_strings = array (
             "1" => array("code" => "AG", "name" => "Agalega Islands"),
             "2" => array("code" => "BL", "name" => "Black River"),
             "3" => array("code" => "BR", "name" => "Beau Bassin-Rose Hill"),
-            "4" => array("code" => "CC", "name" => "Cargados Carajos Shoals (Saint B)"),
+            "4" => array("code" => "ΚΟΙΝ", "name" => "Cargados Carajos Shoals (Saint B)"),
             "5" => array("code" => "CU", "name" => "Curepipe"),
             "6" => array("code" => "FL", "name" => "Flacq"),
             "7" => array("code" => "GP", "name" => "Grand Port"),
@@ -4639,7 +4758,7 @@ $app_list_strings = array (
             "24" => array("code" => "SLP", "name" => "San Luis Potosi"),
             "25" => array("code" => "SIN", "name" => "Sinaloa"),
             "26" => array("code" => "SON", "name" => "Sonora"),
-            "27" => array("code" => "TAB", "name" => "Tabasco"),
+            "27" => array("code" => "ΚΑΡΤΕΛΑ", "name" => "Tabasco"),
             "28" => array("code" => "TAM", "name" => "Tamaulipas"),
             "29" => array("code" => "TLA", "name" => "Tlaxcala"),
             "30" => array("code" => "VER", "name" => "Veracruz-Llave"),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "Ή", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -4736,7 +4855,7 @@ $app_list_strings = array (
             "27" => array("code" => "OUJ", "name" => "Oujda"),
             "28" => array("code" => "RSA", "name" => "Rabat-Sale"),
             "29" => array("code" => "SAF", "name" => "Safi"),
-            "30" => array("code" => "SET", "name" => "Settat"),
+            "30" => array("code" => "ΚΑΘΟΡΙΣΜΟΣ", "name" => "Settat"),
             "31" => array("code" => "SKA", "name" => "Sidi Kacem"),
             "32" => array("code" => "TGR", "name" => "Tangier"),
             "33" => array("code" => "TAN", "name" => "Tan-Tan"),
@@ -4791,7 +4910,7 @@ $app_list_strings = array (
             "6" => array("code" => "KH", "name" => "Khomas"),
             "7" => array("code" => "KU", "name" => "Kunene"),
             "8" => array("code" => "OW", "name" => "Ohangwena"),
-            "9" => array("code" => "OK", "name" => "Omaheke"),
+            "9" => array("code" => "Εντάξει", "name" => "Omaheke"),
             "10" => array("code" => "OT", "name" => "Omusati"),
             "11" => array("code" => "ON", "name" => "Oshana"),
             "12" => array("code" => "OO", "name" => "Oshikoto"),
@@ -4801,7 +4920,7 @@ $app_list_strings = array (
         "NR" => array(
             "1" => array("code" => "AO", "name" => "Aiwo"),
             "2" => array("code" => "AA", "name" => "Anabar"),
-            "3" => array("code" => "AT", "name" => "Anetan"),
+            "3" => array("code" => "ΣΤΙΣ", "name" => "Anetan"),
             "4" => array("code" => "AI", "name" => "Anibare"),
             "5" => array("code" => "BA", "name" => "Baiti"),
             "6" => array("code" => "BO", "name" => "Boe"),
@@ -4921,7 +5040,7 @@ $app_list_strings = array (
             "4" => array("code" => "AK", "name" => "Akwa Ibom"),
             "5" => array("code" => "AN", "name" => "Anambra"),
             "6" => array("code" => "BC", "name" => "Bauchi"),
-            "7" => array("code" => "BY", "name" => "Bayelsa"),
+            "7" => array("code" => "ΑΠΟ", "name" => "Bayelsa"),
             "8" => array("code" => "BN", "name" => "Benue"),
             "9" => array("code" => "BO", "name" => "Borno"),
             "10" => array("code" => "CR", "name" => "Cross River"),
@@ -5048,7 +5167,7 @@ $app_list_strings = array (
         "PA" => array(
             "1" => array("code" => "BT", "name" => "Bocas del Toro"),
             "2" => array("code" => "CH", "name" => "Chiriqui"),
-            "3" => array("code" => "CC", "name" => "Cocle"),
+            "3" => array("code" => "ΚΟΙΝ", "name" => "Cocle"),
             "4" => array("code" => "CL", "name" => "Colon"),
             "5" => array("code" => "DA", "name" => "Darien"),
             "6" => array("code" => "HE", "name" => "Herrera"),
@@ -5091,7 +5210,7 @@ $app_list_strings = array (
             "7" => array("code" => "CZ", "name" => "Caazapa"),
             "8" => array("code" => "CN", "name" => "Canindeyu"),
             "9" => array("code" => "CE", "name" => "Central"),
-            "10" => array("code" => "CC", "name" => "Concepcion"),
+            "10" => array("code" => "ΚΟΙΝ", "name" => "Concepcion"),
             "11" => array("code" => "CD", "name" => "Cordillera"),
             "12" => array("code" => "GU", "name" => "Guaira"),
             "13" => array("code" => "IT", "name" => "Itapua"),
@@ -5266,7 +5385,7 @@ $app_list_strings = array (
             "4" => array("code" => "AGU", "name" => "Aguadilla"),
             "5" => array("code" => "AGU", "name" => "Aguas Buenas"),
             "6" => array("code" => "AIB", "name" => "Aibonito"),
-            "7" => array("code" => "ARE", "name" => "Arecibo"),
+            "7" => array("code" => "ΕΙΝΑΙ", "name" => "Arecibo"),
             "8" => array("code" => "ARR", "name" => "Arroyo"),
             "9" => array("code" => "BAR", "name" => "Barceloneta"),
             "10" => array("code" => "BAR", "name" => "Barranquitas"),
@@ -5299,7 +5418,7 @@ $app_list_strings = array (
             "37" => array("code" => "ISA", "name" => "Isabela"),
             "38" => array("code" => "JAY", "name" => "Jayuya"),
             "39" => array("code" => "JUA", "name" => "Juana Díaz"),
-            "40" => array("code" => "JUN", "name" => "Juncos"),
+            "40" => array("code" => "ΙΟΥΝ", "name" => "Juncos"),
             "41" => array("code" => "LAJ", "name" => "Lajas"),
             "42" => array("code" => "LAR", "name" => "Lares"),
             "43" => array("code" => "LAS", "name" => "Las Marías"),
@@ -5309,7 +5428,7 @@ $app_list_strings = array (
             "47" => array("code" => "MAN", "name" => "Manatí"),
             "48" => array("code" => "MAR", "name" => "Maricao"),
             "49" => array("code" => "MAU", "name" => "Maunabo"),
-            "50" => array("code" => "MAY", "name" => "Mayagüez"),
+            "50" => array("code" => "ΜΑΙΟΣ", "name" => "Mayagüez"),
             "51" => array("code" => "MOC", "name" => "Moca"),
             "52" => array("code" => "MOR", "name" => "Morovis"),
             "53" => array("code" => "NAG", "name" => "Naguabo"),
@@ -5379,7 +5498,7 @@ $app_list_strings = array (
             "23" => array("code" => "HD", "name" => "Hunedoara"),
             "24" => array("code" => "IL", "name" => "Ialomita"),
             "25" => array("code" => "IS", "name" => "Iasi"),
-            "26" => array("code" => "IF", "name" => "Ilfov"),
+            "26" => array("code" => "ΑΝ", "name" => "Ilfov"),
             "27" => array("code" => "MM", "name" => "Maramures"),
             "28" => array("code" => "MH", "name" => "Mehedinti"),
             "29" => array("code" => "MS", "name" => "Mures"),
@@ -5438,7 +5557,7 @@ $app_list_strings = array (
             "37" => array("code" => "LI", "name" => "Lipetsk"),
             "38" => array("code" => "MA", "name" => "Magadan"),
             "39" => array("code" => "MK", "name" => "Makhachkala"),
-            "40" => array("code" => "MY", "name" => "Maykop"),
+            "40" => array("code" => "ΔΙΚΗ ΜΟΥ", "name" => "Maykop"),
             "41" => array("code" => "MO", "name" => "Moscow"),
             "42" => array("code" => "MU", "name" => "Murmansk"),
             "43" => array("code" => "NA", "name" => "Nalchik"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "Ή", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -5491,7 +5610,7 @@ $app_list_strings = array (
         /* Rwanda */
         "RW" => array(
             "1" => array("code" => "BU", "name" => "Butare"),
-            "2" => array("code" => "BY", "name" => "Byumba"),
+            "2" => array("code" => "ΑΠΟ", "name" => "Byumba"),
             "3" => array("code" => "CY", "name" => "Cyangugu"),
             "4" => array("code" => "GK", "name" => "Gikongoro"),
             "5" => array("code" => "GS", "name" => "Gisenyi"),
@@ -5547,7 +5666,7 @@ $app_list_strings = array (
         "WS" => array(
             "1" => array("code" => "AN", "name" => "A'ana"),
             "2" => array("code" => "AI", "name" => "Aiga-i-le-Tai"),
-            "3" => array("code" => "AT", "name" => "Atua"),
+            "3" => array("code" => "ΣΤΙΣ", "name" => "Atua"),
             "4" => array("code" => "FA", "name" => "Fa'asaleleaga"),
             "5" => array("code" => "GE", "name" => "Gaga'emauga"),
             "6" => array("code" => "GF", "name" => "Gagaifomauga"),
@@ -5679,7 +5798,7 @@ $app_list_strings = array (
             "2" => array("code" => "BK", "name" => "Bakool"),
             "3" => array("code" => "BN", "name" => "Banaadir"),
             "4" => array("code" => "BR", "name" => "Bari"),
-            "5" => array("code" => "BY", "name" => "Bay"),
+            "5" => array("code" => "ΑΠΟ", "name" => "Bay"),
             "6" => array("code" => "GA", "name" => "Galguduud"),
             "7" => array("code" => "GE", "name" => "Gedo"),
             "8" => array("code" => "HI", "name" => "Hiiraan"),
@@ -5719,7 +5838,7 @@ $app_list_strings = array (
             "9" => array("code" => "IB", "name" => "Baleares"),
             "10" => array("code" => "BA", "name" => "Barcelona"),
             "11" => array("code" => "BU", "name" => "Burgos"),
-            "12" => array("code" => "CC", "name" => "Cáceres"),
+            "12" => array("code" => "ΚΟΙΝ", "name" => "Cáceres"),
             "13" => array("code" => "CZ", "name" => "Cádiz"),
             "14" => array("code" => "CT", "name" => "Cantabria"),
             "15" => array("code" => "CL", "name" => "Castellón"),
@@ -5899,7 +6018,7 @@ $app_list_strings = array (
             "9" => array("code" => "HL", "name" => "Halab"),
             "10" => array("code" => "HM", "name" => "Hamah"),
             "11" => array("code" => "HI", "name" => "Hims"),
-            "12" => array("code" => "ID", "name" => "Idlib"),
+            "12" => array("code" => "Ταυτότητα", "name" => "Idlib"),
             "13" => array("code" => "RD", "name" => "Rif Dimashq"),
             "14" => array("code" => "TA", "name" => "Tartus")
         ),
@@ -5923,7 +6042,7 @@ $app_list_strings = array (
             "16" => array("code" => "TT", "name" => "T'ai-tung"),
             "17" => array("code" => "TY", "name" => "T'ao-yuan"),
             "18" => array("code" => "YL", "name" => "Yun-lin"),
-            "19" => array("code" => "CC", "name" => "Chia-i city"),
+            "19" => array("code" => "ΚΟΙΝ", "name" => "Chia-i city"),
             "20" => array("code" => "CL", "name" => "Chi-lung"),
             "21" => array("code" => "HC", "name" => "Hsin-chu"),
             "22" => array("code" => "TH", "name" => "T'ai-chung"),
@@ -5947,7 +6066,7 @@ $app_list_strings = array (
             "6" => array("code" => "KI", "name" => "Kigoma"),
             "7" => array("code" => "KJ", "name" => "Kilimanjaro"),
             "8" => array("code" => "LN", "name" => "Lindi"),
-            "9" => array("code" => "MY", "name" => "Manyara"),
+            "9" => array("code" => "ΔΙΚΗ ΜΟΥ", "name" => "Manyara"),
             "10" => array("code" => "MR", "name" => "Mara"),
             "11" => array("code" => "MB", "name" => "Mbeya"),
             "12" => array("code" => "MO", "name" => "Morogoro"),
@@ -6255,7 +6374,7 @@ $app_list_strings = array (
             "20" => array("code" => "KPC", "name" => "Kapchorwa"),
             "21" => array("code" => "KTK", "name" => "Katakwi"),
             "22" => array("code" => "KUM", "name" => "Kumi"),
-            "23" => array("code" => "MAY", "name" => "Mayuge"),
+            "23" => array("code" => "ΜΑΙΟΣ", "name" => "Mayuge"),
             "24" => array("code" => "MBA", "name" => "Mbale"),
             "25" => array("code" => "PAL", "name" => "Pallisa"),
             "26" => array("code" => "SIR", "name" => "Sironko"),
@@ -6306,7 +6425,7 @@ $app_list_strings = array (
             "12" => array("code" => "KY", "name" => "Kyyiv"),
             "13" => array("code" => "LU", "name" => "Luhans'k"),
             "14" => array("code" => "LV", "name" => "L'viv"),
-            "15" => array("code" => "MY", "name" => "Mykolayiv"),
+            "15" => array("code" => "ΔΙΚΗ ΜΟΥ", "name" => "Mykolayiv"),
             "16" => array("code" => "OD", "name" => "Odesa"),
             "17" => array("code" => "PO", "name" => "Poltava"),
             "18" => array("code" => "RI", "name" => "Rivne"),
@@ -6455,7 +6574,7 @@ $app_list_strings = array (
             "19" => array("code" => "GA", "name" => "Γεωργία"),
             "20" => array("code" => "GU", "name" => "Γκουάμ"),
             "21" => array("code" => "HI", "name" => "Hawaii"),
-            "22" => array("code" => "ID", "name" => "Idaho"),
+            "22" => array("code" => "Ταυτότητα", "name" => "Idaho"),
             "23" => array("code" => "IL", "name" => "Illinois"),
             "24" => array("code" => "IN", "name" => "Indiana"),
             "25" => array("code" => "IA", "name" => "Iowa"),
@@ -6481,8 +6600,8 @@ $app_list_strings = array (
             "45" => array("code" => "ND", "name" => "North Dakota"),
             "46" => array("code" => "MP", "name" => "Northern Mariana Islands"),
             "47" => array("code" => "OH", "name" => "Ohio"),
-            "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "48" => array("code" => "Εντάξει", "name" => "Oklahoma"),
+            "49" => array("code" => "Ή", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pennsylvania"),
             "52" => array("code" => "PR", "name" => "Πουέρτο Ρίκο"),
@@ -6660,7 +6779,7 @@ $app_list_strings = array (
         /* Yugoslavia */
         "YU" => array(
             "1" => array("code" => "KOS", "name" => "Kosovo"),
-            "2" => array("code" => "MON", "name" => "Montenegro"),
+            "2" => array("code" => "ΔΕΥΤ", "name" => "Montenegro"),
             "3" => array("code" => "SER", "name" => "Σερβία"),
             "4" => array("code" => "VOJ", "name" => "Vojvodina")
         ),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "Ή", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Follow Link',
   'LBL_TOGGLE_VISIBILITY' => 'Εναλλαγή Ορατότητας', // Record view header panel element
   'LBL_ACTIVITIES' => 'Ροή Δραστηριοτήτων',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. Με Επιφύλαξη Παντός Δικαιώματος.',
-  'LBL_TRADEMARK' => 'Το SugarCRM είναι εμπορικό σήμα της SugarCRM, Inc. Όλα τα άλλα ονόματα εταιρειών και προϊόντων είναι εμπορικά σήματα των αντίστοιχων εταιρειών με τις οποίες συνδέονται.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ και Sugar™ είναι εμπορικά σήματα της SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Αποστολή πρόσκλησης',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'Tο SugarCRM, τo Sugar και ο 3-D κύβος είναι σήματα κατατεθέντα της SugarCRM Inc. '.
+        'Όλα τα υπόλοιπα ονόματα εταιρειών και προϊόντων που χρησιμοποιούνται ή που εμφανίζονται σε αυτό το προϊόν ενδέχεται να είναι εμπορικά σήματα των '.
+        'αντίστοιχων εταιριών με τις οποίες συνδέονται.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ και Sugar™ είναι εμπορικά σήματα της SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Αποστολή πρόσκλησης',
   'LBL_INVITEES' => 'Προσκεκλημένοι',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Ο φιλοξενούμενος δεν θα λάβει την πρόσκλησή σας',
   'LBL_SELECT_ACTION_LABEL' => 'Επιλογή Ενέργειας',
   'LBL_TOGGLE_DRAWER' => 'Συρτάρι Εναλλαγής',
   'LBL_TOUR_NEXT' => 'Επόμενο',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Προσθήκη' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Λογότυπο Επιχείρησης' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Ημερολόγιο' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'πλοήγηση κύριας μονάδας',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'Εναλλαγή υποπίνακα',
+
     'LBL_ADVANCED' => 'Προηγμένη',
     'LBL_BASIC' => 'Βασική',
     'LBL_MODULE_FILTER' => 'Φιλτράρισμα ανά...',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Ομάδες',
     'LBL_TEAM_SET_ID' => 'Καθορισμένη Ταυτότητα Ομάδας',
     'LBL_TEAM_SET'=>'Καθορισμός Ομάδας',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Επιλεγμένες ομάδες',
     'LBL_SEARCH_UNAVAILABLE' => 'Αναζήτηση μη διαθέσιμων, παρακαλώ προσπαθήστε ξανά αργότερα.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Καμία ομάδα που διευκρινίζεται Κύρια',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Σφάλμα επιχειρήσατε να αφαιρέσετε την κύρια ταυτότητα ομάδας [{0}] για [{1}] ενότητα με ταυτότητα [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Search engine is temporarily unavailable.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Εντοπίστηκε σφάλμα χρόνου εκτέλεσης μηχανής αναζήτησης. Παρακαλώ επικοινωνήστε με το Διαχειριστή συστήματος.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Δεν μπορείτε να επεξεργαστείτε ένα πεδίο που είναι κλειδωμένο από διαδικασία.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Μια κατάσταση παρουσιάστηκε λόγω μιας γενικής αποτυχίας ή λάθους. Οι λόγοι για αυτό το εύρος εξαίρεσης, αλλά γενικά δεν εμπίπτει στο πεδίο εφαρμογής, για περισσότερο από μία συγκεκριμένη εξαίρεση API.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Indicates that the server is busy, overloaded or down.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'The search engine backend is currently unavailable due to a connection issue. Verify connectivity and configuration in Admin->search->test.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'A runtime exception occured in SearchEngine. See sugarcrm.log for more details.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Δεν μπορείτε να επεξεργαστείτε ένα πεδίο που είναι κλειδωμένο από διεργασία που εκτελείται.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s είναι κλειδωμένο από μια διεργασία που εκτελείται και δεν μπορείτε να το επεξεργαστείτε.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s είναι κλειδωμένα από μια διεργασία που εκτελείται και δεν μπορείτε να τα επεξεργαστείτε.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Ένα αρχείο με το ίδιο όνομα υπάρχει ήδη στο σύστημα.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Αυτή η χρονική περίοδος έχει ήδη υπο-περιόδους',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Οι Χρονικές Περιόδους δεν μπορούν να έχουν υπο-περιόδους',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Ανίκανο να ανακτήσει οποιεσδήποτε χρονικές περιόδους του τύπου: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Καθόλου ενεργές χρονικές περίοδοι για τις τρέχουσες ρυθμίσεις.',
     'LBL_CURRENT_TIMEPERIOD' => 'Τρέχουσα Χρονική Περίοδος',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Προηγούμενη Χρονική Περίοδος',
     'LBL_NEXT_TIMEPERIOD' => 'Επόμενη Χρονική Περίοδος',
@@ -8532,7 +8664,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => 'Κλείσιμο',
     'LBL_ADDITIONAL_DETAILS' => 'Πρόσθετες Λεπτομέρειες',
     'LBL_ADMIN' => 'Διαχειριστής',
-    'LBL_ALT_HOT_KEY' => '-κενό-',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'Αρχειοθέτηση',
     'LBL_ASSIGNED_TO_USER'=>'Ανατέθηκε σε Χειριστή',
     'LBL_ASSIGNED_TO' => 'Ανατέθηκε σε:',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Επιλογή πεδίου...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Επιλογή τελεστή...',
     'LBL_FILTER_CREATE_NEW' => 'Δημιουργία Φίλτρου',
+    'LBL_FILTER_CREATE_FILTER' => 'Δημιουργία νέου φίλτρου',
+    'LBL_FILTER_EDIT_FILTER' => 'Επεξεργασία φίλτρου',
     'LBL_FILTER_ALL_RECORDS' => 'Όλες οι Εγγραφές',
     'TPL_FILTER_SAVE' => 'Δημιουργήσατε με επιτυχία το φίλτρο {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'Από',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Περιοχή:',
     'LBL_STATUS_UPDATED'=>'Η Κατάσταση σας για αυτό το συμβάν έχει ενημερωθεί!',
+    'LBL_STATUS_NOT_UPDATED' => 'Η κατάστασή σας για αυτό το συμβάν δεν έχει ενημερωθεί.',
     'LBL_STATUS'=>'Κατάσταση:',
     'LBL_STREET'=>'Οδός',
     'LBL_SUBJECT' => 'Θέμα',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2014 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Διατηρούνται όλα τα Πνευματικά Δικαιώματα.<br />SugarCRM είναι ένα εμπορικό σήμα του SugarCRM, Inc. Όλα τα άλλα ονόματα εταιρειών και προϊόντων μπορεί να είναι εμπορικά σήματα των αντίστοιχων εταιρειών με τα οποία συνδέονται.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Με Επιφύλαξη Παντός Δικαιώματος.<br />Το SugarCRM, τo Sugar και ο 3-D κύβος είναι σήματα κατατεθέντα της SugarCRM Inc. '.
+        'Όλα τα υπόλοιπα ονόματα εταιρειών και προϊόντων που χρησιμοποιούνται ή που εμφανίζονται σε αυτό το προϊόν ενδέχεται να είναι εμπορικά σήματα των '.
+        'αντίστοιχων εταιριών με τις οποίες συνδέονται.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Ολοκληρώθηκε η Προγραμματισμένη Εργασία',
@@ -9176,7 +9315,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Error. You entered an invalid operator.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Error. You entered an invalid filter.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Η εισαγωγή απέτυχε. Παρακαλώ ελέγξτε το sugar αρχείο καταγραφής σας για περισσότερες λεπτομέρειες.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Η εισαγωγή απέτυχε. Ένα πεδίο ομάδας είναι εν μέρει κλειδωμένο στον ορισμό διαδικασίας. Αυτά τα πεδία πρέπει να ξεκλειδωθούν στον ορισμό διαδικασίας για την καταχώρηση ορισμού.',
+    'ERROR_EXP_DATE_LOW' => 'Σφάλμα. Η ημερομηνία λήξης δεν μπορεί να προηγείται της ημερομηνίας δημοσίευσης.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Error. The Approved status requires publishing date.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Η ημερομηνία δημοσίευσης είναι άδεια.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9306,6 +9446,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'των στηλών που μπορούν να εμφανιστούν',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Πίνακας Εργαλείων',
     'LBL_DASHBOARD_BWC' => 'Πίνακας Εργαλείων Μου',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Πίνακας Εργαλείων Μου',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Βοήθεια Πίνακα Εργαλείων',
@@ -9338,9 +9479,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Οι {{module}} μου',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Νέα',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Google News feed για Σχετικό Λογαριασμό',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Ευκαιρία Μετρήσεων',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Μετρήσεις Ευκαιρίας για Σχετικό Λογαριασμό. Απαιτείται D&B συνδρομή.',
@@ -9409,7 +9547,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Δεν βρέθηκαν εγγραφές αυτή τη στιγμή.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Περίληψη Υπόθεσης',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Ειδησεογραφία',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Αλληλεπιδράσεις',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Σημειώσεις και Συνημμένα',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Σημειώσεις και Συνημμένα ανήκουν στην εγγραφή',
@@ -9470,7 +9607,7 @@ $app_strings = array (
     /*DNB Errors */
     'LBL_DNB_ERROR_CURL_RESOLVE_PROXY' => 'Δεν ήταν δυνατή η επίλυση μεσολάβησης(proxy). Η δεδομένη υποδοχή μεσολάβησης, δεν μπόρεσε να επιλυθεί. Παρακαλώ ελέγξτε τις ρυθμίσεις του διακομιστή μεσολάβησης.',
     'LBL_DNB_ERROR_CURL_RESOLVE_HOST' => 'Δεν ήταν δυνατή η επίλυση υποδοχής(host). Η δεδομένη απομακρυσμένη υποδοχή, δεν μπόρεσε να επιλυθεί.',
-    'LBL_DNB_ERROR_CURL_CONNECTION_FAIL' => 'Απέτυχε να συνδεθεί με υποδοχή(host) ή διακομιστή μεσολάβησης(proxy). Παρακαλώ ελέγξτε τις ρυθμίσεις διακομιστή μεσολάβησης.',
+    'LBL_DNB_ERROR_CURL_CONNECTION_FAIL' => 'Απέτυχε να συνδεθεί με κεντρικό υπολογιστή ή διακομιστή μεσολάβησης. Παρακαλώ ελέγξτε τις ρυθμίσεις διακομιστή μεσολάβησης.',
     'LBL_DNB_ERROR_CURL_NETWORK_FAIL' => 'Αποτυχία με την παραλαβή του δικτύου δεδομένων.' ,
     'LBL_DNB_UNKNOWN_ERROR' => 'Άγνωστο λάθος. Ελέγξτε τα αρχεία καταγραφής για περισσότερες λεπτομέρειες.',
     'LBL_DNB_EMPTY_PARAM' => 'Άδεια παράμετρος διαβιβάστηκε στο D & Β. Αντίγραφο, ελέγξτε το API',
@@ -9918,7 +10055,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => 'Επιλέξτε Λειτουργία Εργασίας',
     'LBL_DNB_BAL_ORG_NAME' => 'Όνομα Οργανισμού',
     'LBL_DNB_BAL_IMPORT_AS' => 'Εισαγωγή Ως:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Όνομα Οργανισμού',
+    'LBL_DNB_BAL_ORG_NAME' => 'Όνομα Εταιρείας',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'σε $USD Εκατομμύρια',
@@ -9976,8 +10113,8 @@ $app_strings = array (
     'LBL_DASHLET_LOCALIZATIONS_DESCRIPTION' => 'Displays a list of published, localized knowledge base articles',
 
     // Most Useful Knowledge Base Articles dashlet
-    'LBL_DASHLET_MOST_USEFUL_NAME' => 'Most Useful Published Knowledge Base Articles',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_NAME' => 'Πλέον χρήσιμα δημοσιευμένα άρθρα γνωσιακής βάσης',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Εμφανίζει τα άρθρα της γνωσιακής βάσης τα οποία άρεσαν και διαβάστηκαν περισσότερο',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtered by {{label}} "{{value}}"',
 
@@ -10016,6 +10153,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'κυρία',
     'ERR_BLANK_PAGE_NAME' => 'Παρακαλώ εισάγετε ένα όνομα σελίδας.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Η διαδρομή μου',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Η διαδρομή της ομάδας μου",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Γράφημα διαδρομής πωλήσεων',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Εμφανίζει το τρέχον γράφημα διαδρομής πωλήσεων.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Καμία Εικόνα',
 
@@ -10269,6 +10413,8 @@ $app_strings = array (
     'LBL_SELECT_THIS_ROW_TITLE' => 'Επιλογή αυτής της σειρά',
     'LBL_TEAM_SELECTED_TITLE' => 'Επιλεγμένη Ομάδα',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Επιλέξτε για να κάνει αυτή η ομάδα βασική',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Ομάδα που έχει επισημανθεί ως ομάδα που επιλέχθηκε αρχικά ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Επισημάνετε τη συγκεκριμένη ομάδα ως ομάδα που επιλέχθηκε αρχικά',
     'LBL_SEARCH_AND_SELECT' => 'Αναζήτηση και Επιλογή {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Search and Add {{module}}',
 
@@ -10357,6 +10503,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Απενεργοποιημένη Προεπισκόπηση. Δεν υπάρχουν δεδομένα',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Απενεργοποιημένη Προεπισκόπηση: Προδολή ως τρέχουσα εγγραφή',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Απενεργοποιημένη Προεπισκόπηση: Η εγγραφή αφαιρέθηκε ή δεν υπάρχει δικαίωμα πρόσβασης στην εγγραφή',
+    'LBL_PREVIEW_PREVIOUS' => 'Προεπισκόπηση προηγούμενου',
+    'LBL_PREVIEW_NEXT' => 'Προεπισκόπηση επόμενης',
+    'LBL_PREVIEW_CLOSE' => 'Κλείσιμο προεπισκόπησης',
     'LBL_STREAM_NO_RECORDS' => 'Αυτή η εγγραφή δεν έχει σημειώσεις αυτήν την στιγμή. Παρακαλείσθε να προσθέσετε μια σημείωση, πατώντας στον σύνδεσμο Προσθήκη Σημείωσης.',
     'LBL_DUPLICATES_FOUND' => 'βρέθηκαν {{duplicateCount}} αντίγραφα.',
     'LBL_NO_DUPLICATES_FOUND' => 'No duplicates found.',
@@ -10376,6 +10525,7 @@ $app_strings = array (
         'Μη έγκυρος αριθμός εγγραφών. Η έγκυρη περιοχή είναι από {{minRecords}} σε {{maxRecords}} εγγραφές.',
     'LBL_MERGE_NO_ACCESS' =>
         'Δεν έχετε πρόσβαση να εκτελέσετε αυτήν την ενέργεια. Τουλάχιστον μία εγγραφή πρέπει να είναι επεξεργάσιμη.',
+    'LBL_MERGE_LOCKED' => 'Ορισμένες από τις εγγραφές που επιλέγηκαν για συγχώνευση περιέχουν πεδία που είναι κλειδωμένα για επεξεργασία από μια διαδικασία και δεν μπορούν να συγχωνευτούν αυτή τη στιγμή.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10846,10 +10996,9 @@ $app_strings = array (
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Ρυθμίσεις Συστήματος',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Στούντιο',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Κωδικός Πρόσβασης',
     'LBL_CURRENT_PASSWORD'				=> 'Τρέχων Κωδικός Πρόσβασης:',
-    'LBL_SET_NEW_PASSWORD'              => 'Εισαγωγή Κωδικού Πρόσβασης',
     'LBL_NEW_PASSWORD1'                 => 'Nέος Κωδικός Πρόσβασης:',
     'LBL_NEW_PASSWORD2'                 => 'Επιβεβαίωση Κωδικού Πρόσβασης',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Παρακαλώ εισάγετε την επιβεβαίωση του κωδικού πρόσβασής σας.',
@@ -10857,13 +11006,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> 'Παρακαλώ εισάγετε τον τρέχον κωδικό πρόσβασης.',
     'ERR_REENTER_PASSWORDS' => 'Οι κωδικοί πρόσβασης δεν ταιριάζουν.',
     'ERR_PASSWORD_MISMATCH' => 'Οι κωδικοί πρόσβασης που εισάγατε δεν ταιριάζουν με τους κωδικούς του συστήματος μας.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Ο Κωδικός Πρόσβασης άλλαξε με επιτυχία.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Δεν μπορεί να στείλει τον κωδικό πρόσβασης',
     'LBL_REQUEST_PASSWORD' => 'Αίτημα Κωδικού Πρόσβασης',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Σφάλμα: Υπήρξε ένα πρόβλημα κατά την ενημέρωση του κωδικού πρόσβασης για αυτόν τον χρήστη.',
     'LBL_INCORRECT_PASSWORD' => 'Σφάλμα: Εσφαλμένος Κωδικός Πρόσβασης.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Προτίμηση Γλώσσας:',
+    'LBL_PREFERRED_LANGUAGE' => 'Γλώσσα προτίμησης:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Επιλογή Αναφοράς',
@@ -10893,6 +11041,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => 'Ο διακομιστής εντόπισε σφάλμα και δεν ήταν δυνατόν να εκτελέσει το αίτημά σας.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Παρακαλώ δοκιμάστε ξανά. Αν το σφάλμα συνεχίσει να υφίσταται, παρακαλώ επικοινωνήστε με το Διαχειριστή Sugar.',
     'ERR_HTTP_500_ACTION' => 'Παρακαλώ επικοινωνήστε με την τεχνική υποστήριξη.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 Εσωτερικό Σφάλμα Διακομιστή',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Ο διακομιστής αντιμετώπισε ένα προσωρινό σφάλμα και δεν μπόρεσε να ολοκληρώσει το αίτημά σας.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Παρακαλώ δοκιμάστε ξανά. Αν το σφάλμα συνεχίσει να υφίσταται, παρακαλώ επικοινωνήστε με το Διαχειριστή Sugar.',
+    'ERR_HTTP_502_ACTION' => 'Παρακαλώ επικοινωνήστε με την τεχνική υποστήριξη.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 Εσωτερικό Σφάλμα Διακομιστή',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Ο διακομιστής δεν είναι διαθέσιμος να ολοκληρώσει την αίτησή σας.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Παρακαλώ δοκιμάστε ξανά αργότερα. Αν το σφάλμα συνεχίσει να υφίσταται, παρακαλώ επικοινωνήστε με το Διαχειριστή Sugar.',
+    'ERR_HTTP_503_ACTION' => 'Παρακαλώ επικοινωνήστε με την τεχνική υποστήριξη.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Προβολή Αποτυχημένης Απόδοσης',
     'ERR_RENDER_FAILED_MSG' => 'Απέτυχε η απόδοση της προβολής',
@@ -11026,6 +11186,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => 'Σφάλμα:',
     'LBL_ALERT_TITLE_LOADING' => 'Φορτώνει',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Η έκδοση του προγράμματος περιήγησης δεν υποστηρίζεται πλέον ή χρησιμοποιείτε ένα πρόγραμμα περιήγησης που δεν υποστηρίζεται.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Συνιστώνται οι ακόλουθες εκδόσεις των προγραμμάτων περιήγησης: <ul><li>Internet Explorer 11</li> <li>Firefox 41</li> <li>Safari 7.1</li> <li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Please see the {{link}} page for suggested browsers.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Supported Platforms',
 
@@ -11078,6 +11239,9 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Παρουσιάστηκε σφάλμα κατά τη σύνδεση με το Διακομιστή. Παρακαλώ ξαναπροσπαθήστε.',
     'ERR_RESOLVE_ERRORS' => 'Πρέπει να το επαναπροσδιορίσετε οποιαδήποτε σφάλματα, πριν προχωρήσετε.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Ανανέωση λίστας',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'περισσότερο',
@@ -11180,10 +11344,13 @@ $app_strings = array (
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'Το SugarCRM επιτρέπει στους δυναμικούς χρήστες να εκτελούν γρήγορα ορισμένες εργασίες με τις συντομεύσεις πληκτρολογίου για την αύξηση της παραγωγικότητας. Οι πίνακες στα δεξιά περιγράφουν διαθέσιμες συντομεύσεις μαζί με τα πλήκτρα και τις ενέργειες που εκτελούν.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Πλήκτρα που υποστηρίζονται</h1> <ul><li>όλοι οι αλφαριθμητικοί χαρακτήρες και τα σύμβολα</li> <li>shift, ctrl, alt, command, mod (ctrl σε Windows/Linux και command σε Mac)</li> <li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul> <h1>Υποστηριζόμενες λειτουργίες</h1> <ul><li>Συνδυασμού πλήκτρων: ctrl + m</li> <li>Πολλά πλήκτρα: m, ctrl + m</li> <li>Ακολουθία πλήκτρων: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Σφαιρικές Συντομεύσεις',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Συμφραζόμενες Συντομεύσεις',
     'LBL_SHORTCUT_KEY_KEY' => 'Κλειδί',
     'LBL_SHORTCUT_FUNCTION' => 'Λειτουργία',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Ρυθμίσετε τις παραμέτρους των συμφραζόμενων συντομεύσεων',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Δεν υφίστανται συμφραζόμενες συντομεύσεις προς ρύθμιση',
     'LBL_SHORTCUT_HELP' => 'Εμφάνιση σελίδας βοηθείας συντομεύσεων',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Γρήγορη εναλλαγή δημιουργίας μενού',
     'LBL_SHORTCUT_SEARCH' => 'Έμφαση στο πεδίο σφαιρικής αναζήτησης',
@@ -11231,6 +11398,9 @@ $app_strings = array (
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Select all items in a multi-select field',
     'LBL_SHORTCUT_SWEETSPOT' => 'Toggle the Sweet Spot bar',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Hide the Sweet Spot bar',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Αποθηκεύστε τις ρυθμίσεις',
+    'LBL_SHORTCUT_RESTORE' => 'Επαναφορά των προεπιλεγμένων',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Παρουσιάστηκε σφάλμα κατά την αποθήκευση προσαρμοσμένων κλειδιών συντομεύσεων στο διακομιστή. Παρακαλώ προσπαθήστε ξανά.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} Ρυθμίσεις',
@@ -11253,13 +11423,20 @@ $app_strings = array (
     'LBL_CALENDAR_RECURRENCE' => "Επαναλαμβανόμενο",
     'LBL_CALENDAR_REMINDERS' => "Υπενθυμίσεις",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Προσαρμοσμένη ημερομηνία",
     'LBL_CALENDAR_REPEAT_TYPE' => "Τύπος Επανάληψης",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Διάστημα Επανάληψης",
     'LBL_CALENDAR_REPEAT_DOW' => "Επαναλάβετε τις Ημέρες της Εβδομάδας",
+    'LBL_CALENDAR_REPEAT' => "Επανάληψη",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Επανάληψη Μέχρι",
     'LBL_CALENDAR_REPEAT_COUNT' => "Επαναλαμβανόμενες Εμφανίσεις",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Επαναλάβετε επιλογέα",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Ημέρα(ες) του μήνα",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Επαναλάβετε τακτικά",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Επανάληψη μονάδας",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Η Επανάληψη των αλλαγών, πρέπει να γίνονται με τη χρήση της πρώτης εγγραφής στη σειρά.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Οι κανόνες επανάληψης δεν έχουν ως αποτέλεσμα τη δημιουργία εκδήλωσης.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Προσπάθειες',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Απορριπτέα',
@@ -11279,17 +11456,23 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Η SugarCRM απαιτεί javascript. Παρακαλώ ενεργοποιήστε το javascript για να συνεχίσετε να χρησιμοποιείτε την SugarCRM.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Τα σειριοποιημένα δεδομένα δεν θα μπορούσαν να είναι μη-σειριοποιημένα',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Τα σειριοποιημένα δεδομένα δεν θα μπορούσαν να είναι μη-σειριοποιημένα επειδή περιέχουν αναφορές σε αντικείμενα ή κλάσεις',
 
     'LBL_FIELD_TRIMMED' => 'Έγινε σύντμηση του πεδίου, λόγω υπέρβασης του ορίου μέγιστων χαρακτήρων.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Το πεδίο υπερβαίνει το μέγιστο όριο χαρακτήρων.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Τελευταίες 7 Ημέρες',
     '30' => 'Τελευταίες 30 Ημέρες',
     '90' => 'Τελευταίο Τρίμηνο',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11394,13 +11577,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Ληγμένο',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Πρόχειρο',
-    'Expired' => 'Ληγμένο',
-    'In Review' => 'Σε Αναθεώρηση',
-    'Published' => 'Δημοσίευση',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Ενέργειες Διαχειριστή--',
@@ -11412,57 +11588,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Διαγραφή Επιλεγμένων Άρθρων',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Has Attachments',
-        'none' => 'Has None',
-        'mime' => 'Specify Mime Type',
-        'name' => 'Specify Name',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Λέξεις';
   $app_list_strings['moduleListSingular']['Words'] = 'Λέξεις';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Δημιουργία Άρθρου';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Top 5',
-    'Top_10' => 'Top 10',
-    'Top_20' => 'Top 20',
-    'Bot_5'  => 'Bottom 5',
-    'Bot_10' => 'Bottom 10',
-    'Bot_20' => 'Bottom 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Όλες',
-        'added' => 'Added Last 30 days',
-        'pending' => 'Pending my Approval',
-        'updated' =>'Updated Last 30 days',
-        'faqs' => 'FAQs',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'Πάνω',
-    'before' => 'Πριν',
-    'after' => 'Μετά',
-    'between_dates' => 'είναι Μεταξύ',
-    'last_7_days' => 'Τελευταίες 7 Ημέρες',
-    'next_7_days' => 'Επόμενες 7 Ημέρες',
-    'last_month' => 'Τελευταίο Μήνα',
-    'this_month' => 'Αυτό τον Μήνα',
-    'next_month' => 'Επόμενο Μήνα',
-    'last_30_days' => 'Τελευταίες 30 Ημέρες',
-    'next_30_days' => 'Επόμενες 30 Ημέρες',
-    'last_year' => 'Τελευταίο Έτος',
-    'this_year' => 'Αυτό το Έτος',
-    'next_year' => 'Επόμενο Έτος',
-    'isnull' => 'Is Null',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12324,6 +12452,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "All Contacts",
+    "email" => "Ηλεκτρονικό ταχυδρομείο μόνο",
+    "phone" => "Τηλέφωνο μόνο",
     "prem" => "Μόνο αναβαθμισμένο"
 );
 
@@ -12349,4 +12479,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Bio',
     'Both' => 'Και τα δύο'
 );
-

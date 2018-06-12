@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -274,8 +274,9 @@ $mod_strings = array (
     'LBL_DST_UPGRADE' => 'Upgrade:',
     'LBL_EDIT_CUSTOM_FIELDS' => 'Edit Custom Fields',
     'LBL_EDIT_TABS'=>'Edit Tabs',
-    'LBL_EMAIL_TITLE' => 'Any Email',
-    'LBL_EMAIL_DESC' => 'Manage outbound and inbound emails. The email settings must be configured in order to enable users to send out email and newsletter campaigns.',
+    'LBL_EMAIL_TITLE' => 'Email',
+    'LBL_EMAIL_DESC' => 'Manage outbound and inbound emails. The email settings must be configured in order to ' .
+                        'enable users to send out email and newsletter campaigns.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'A primary email address is required for each user in order to use this feature.',
 	'LBL_ENABLE_MAILMERGE' => 'Enable Mail Merge?',
 	'LBL_ENABLED' => 'Enabled',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Set default localisation settings for your system',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- The User Name of the person who will operate this offline client',
     'LBL_LOGIN_SUGAR_SERVER'                => 'End User Name:',
-    'LBL_MAILBOX_DESC' => 'Set up group mail accounts for monitoring inbound email and manage personal inbound mail account information for users',
+    'LBL_MAILBOX_DESC' => 'Set up group mail accounts for monitoring inbound email ' .
+        'and manage personal inbound mail account information for users',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Contract Types',
     'LBL_MANAGE_CURRENCIES' => 'Currencies',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Manage Groups',
@@ -629,6 +631,8 @@ If your system environment prohibits your system from communicating to the licen
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Rebuild JS Grouping Files',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Re-concatenates and overwrites existing group files with latest versions of group files',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Repair javascript files',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Repair JS Files',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Processing files. This may take several minutes.  Going away from this page will not cancel the process, so feel free to move on or wait for confirmation...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Done Processing files.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Repair Non-Lowercase Fields',
@@ -1007,7 +1011,7 @@ If your system environment prohibits your system from communicating to the licen
     'LBL_QR_CLEAR_ADD_CACHE' => 'Clearing Addtional Cache Files...done',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'If this box is unchecked, an admin will be required to manually revalidate after system licence expires, otherwise users will be unable to login.',
 	'LBL_TRACKER_SETTINGS' => 'Tracker',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Select what system and user data is tracked',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Enable/Disable tracking',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Enable/Disable Seed Users',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Activate',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'DeActivate',
@@ -1156,6 +1160,10 @@ If your system environment prohibits your system from communicating to the licen
     'LBL_SPRITES_ADDED' => 'Added sprite {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Excluding file: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Team-based Permissions',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Enable team access, and manage access by module.',
+
     //FTS
     'LBL_FTS_TYPE' => 'System Type',
     'LBL_FTS_HOST' => 'Host',
@@ -1225,5 +1233,6 @@ If your system environment prohibits your system from communicating to the licen
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Clicking Submit will synchronise you with the master server.',
     'LBL_OFFLINE_ENABLED' => 'Offline enabled',
     'LBL_OFFLINE_SETTINGS' => 'Offline Settings',
+
 
 );

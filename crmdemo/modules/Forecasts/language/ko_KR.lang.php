@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -317,10 +317,10 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TIMEPERIOD_SETUP_NOTICE' => '기간 페이지는 첫 수용 또는 임시보관 저장후에만 읽기가 가능합니다; 이러한 이유료 기간은 신중히 설정되어야 합니다.',
     'LBL_FORECASTS_CONFIG_TIMEPERIOD_DESC' => '예측에 사용될 기간을 구성하십시오.',
     'LBL_FORECASTS_CONFIG_TIMEPERIOD_TYPE' => '귀사의 회계 목적을 위한 연도 형식을 선택하십시오.',
-    'LBL_FORECASTS_CONFIG_TIMEPERIOD' => '예측하고자하는 기간을 선택하십시오.',
+    'LBL_FORECASTS_CONFIG_TIMEPERIOD' => '기간의 유형을 선택하십시오',
     'LBL_FORECASTS_CONFIG_LEAFPERIOD' => '보고자하는 기간의 하위기간을 선택하십시오.',
-    'LBL_FORECASTS_CONFIG_START_DATE' => '시작하고자 하는 기간내 연도의 날짜를 선택하십시오.',
-    'LBL_FORECASTS_CONFIG_TIMEPERIODS_FORWARD' => '워크시트에서 사용자에게 보이고자하는 기간의 숫자를 선택하십시오.<노트:기간의 숫자는 하위기간에 근거해 나뉩니다.>',
+    'LBL_FORECASTS_CONFIG_START_DATE' => '회계연도 시작일을 선택하십시오',
+    'LBL_FORECASTS_CONFIG_TIMEPERIODS_FORWARD' => '워크시트에서 볼 미래 기간의 숫자를 선택하십시오.<br><i>이 숫자는 선택된 기본 구간에 적용됩니다. 예를 들어, 연간 기간으로 2를 선택하면 미래 8 분기가 표시됩니다.</i>',
     'LBL_FORECASTS_CONFIG_TIMEPERIODS_BACKWARD' => '워크시트에서 볼 과거 기간의 숫자를 선택하십시오.<br><i>이 숫자는 선택된 기본 기간에 적용됩니다. 예를 들어, 분기별 기간으로 2를 선택하면 과거 6개월이 표시됩니다.</i>',
     'LBL_FORECASTS_CONFIG_TIMEPERIOD_FISCAL_YEAR' => '선택한 시작 날짜는 2년간에 걸친 회계 연도를 가리킵니다. 사용할 회계 연도의 년도를 선택하십시오:',
     'LBL_FISCAL_YEAR' => '회계 연도',
@@ -347,7 +347,7 @@ $mod_strings = array (
     // scenarios config
     //TODO-sfa refactors the code references for scenarios to be scenarios (SFA-337).
     'LBL_FORECASTS_CONFIG_WORKSHEET_SCENARIOS' => '사용자가 각각의 영업기회를 입력하도록 칸을 선택하십시오.',
-    'LBL_FORECASTS_CONFIG_WORKSHEET_LIKELY_INFO' => '가능 금액은 영업기회의 금액과 연결되어있습니다; 이러한 이유로 가능 금액은 숨겨질수 없습니다.',
+    'LBL_FORECASTS_CONFIG_WORKSHEET_LIKELY_INFO' => '가능 금액은 {{forecastByModule}} 모듈에 입력된 금액을 바탕으로 합니다.',
     'LBL_FORECASTS_CONFIG_WORKSHEET_SCENARIOS_LIKELY' => '가능',
     'LBL_FORECASTS_CONFIG_WORKSHEET_SCENARIOS_BEST' => '최고',
     'LBL_FORECASTS_CONFIG_WORKSHEET_SCENARIOS_WORST' => '최하',

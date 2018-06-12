@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -3444,8 +3444,9 @@ function upgradeTeamColumn($bean, $column_name) {
 
 		//we have written out the teams.php into custom/Extension/modules/{$module_dir}/Ext/Vardefs/teams.php'
 		//now let's merge back into vardefs.ext.php
-		require_once('ModuleInstall/ModuleInstaller.php');
-		$mi = new ModuleInstaller();
+        SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
+        $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+        $mi = new $moduleInstallerClass();
 		$mi->merge_files('Ext/Vardefs/', 'vardefs.ext.php');
 		VardefManager::loadVardef($bean->module_dir, $bean->object_name, true);
 		$bean->field_defs = $GLOBALS['dictionary'][$bean->object_name]['fields'];

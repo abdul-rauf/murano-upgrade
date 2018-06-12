@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,27 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => '¿Está seguro de que desea eliminar este registro?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => '¿Está seguro de que desea quitar a este usuario del equipo?',
     'LBL_EDITLAYOUT' => 'Editar Diseño' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Permisos de trabajo en equipo',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Permitir el acceso de equipo y administrar el acceso por módulo.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Habilitar permisos de trabajo en equipo',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Seleccionar módulos para permitir',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'Habilitar permisos de trabajo en equipo le permitirá asignar derechos de acceso específicos para equipos y usuarios en los módulos individuales, a través de la administración de roles.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+Deshabilitar los permisos de trabajo en equipo de un módulo anulará cualquier dato asociado con los permisos de trabajo en equipo de ese módulo, incluyendo las definiciones de proceso o los procesos que utilicen la función. Esto incluye los roles que utilicen la opción "equipo de Propietario y Seleccionado" de dicho módulo y cualquier dato de los permisos de trabajo en equipo de los registros del módulo. También recomendamos que utilice Reparación y reconstrucción Rápida para limpiar la caché del sistema luego de deshabilitar los permisos de trabajo en equipo de cualquier módulo.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Advertencia:</strong> Deshabilitar los permisos de trabajo en equipo de un módulo anulará cualquier dato asociado con los permisos de trabajo en equipo de ese módulo, incluyendo las definiciones de proceso o los procesos que utilicen la función. Esto incluye los roles que utilicen la opción "equipo de Propietario y Seleccionado" de dicho módulo y cualquier dato de los permisos de trabajo en equipo de los registros del módulo. También recomendamos que utilice Reparación y reconstrucción Rápida para limpiar la caché del sistema luego de deshabilitar los permisos de trabajo en equipo de cualquier módulo.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+Deshabilitar los permisos de trabajo en equipo de un módulo anulará cualquier dato asociado con los permisos de trabajo en equipo de ese módulo, incluyendo las definiciones de proceso o los procesos que utilicen la función. Esto incluye los roles que utilicen la opción "equipo de Propietario y Seleccionado" de dicho módulo y cualquier dato de los permisos de trabajo en equipo de los registros del módulo. También recomendamos que utilice Reparación Rápida y la herramienta de reconstrucción para limpiar la caché del sistema luego de deshabilitar los permisos de trabajo en equipo de cualquier módulo. Si no tiene acceso para utilizar Reparación y Reconstrucción rápida, contacte a un administrador con acceso al menú Reparar.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Advertencia:</strong> Deshabilitar los permisos de trabajo en equipo de un módulo anulará cualquier dato asociado con los permisos de trabajo en equipo de ese módulo, incluyendo las definiciones de proceso o los procesos que utilicen la función. Esto incluye los roles que utilicen la opción "equipo de Propietario y Seleccionado" de dicho módulo y cualquier dato de los permisos de trabajo en equipo de los registros del módulo. También recomendamos que utilice Reparación Rápida y la herramienta de reconstrucción para limpiar la caché del sistema luego de deshabilitar los permisos de trabajo en equipo de cualquier módulo. Si no tiene acceso para utilizar Reparación y Reconstrucción rápida, contacte a un administrador con acceso al menú Reparar.
+STR
+,
 );

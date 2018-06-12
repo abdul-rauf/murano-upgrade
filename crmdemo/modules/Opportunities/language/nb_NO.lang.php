@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Ved å klikke på Bekreft , vil du bli slettet alle prognoser data og endre Salgsmuliheter. Hvis dette er ikke hva du mente , trykk Avbryt for å gå tilbake til tidligere innstillinger .',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Ved å klikke Bekreft vil du slette ALLE prognosedata og endre visning av muligheter. '
+        .'ALLE prosessdefinisjoner med en målmodul for omsetningsposter vil også deaktiveres. '
+        .'Hvis dette er ikke hva du mente, klikker du på avbryt for å gå tilbake til tidligere innstillinger.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Hvis alle Revenue Linjeelementer er lukker og minst en er satt til Vunnet',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'Salgsmuligheten er satt til Vunnet',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Hvis alle Revenue Linjeelementer er satt til Tapt i Salgsmulighet Status',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Med {{plural_module_name}}-modulen kan du følge individuelle salg og produktene som hører til salgene fra begynnelse til slutt. Hver {{module_name}}-post representerer en overskrift for en gruppe {{revenuelineitems_module}} og knyttes til andre viktige poster som {{quotes_module}}, {{contacts_module}} osv. Hver {{revenuelineitems_singular_module}} er det potensielle salget av et bestemt produkt og inkluderer relevante salgsdata. Hver {{revenuelineitems_singular_module}} går vanligvis gjennom flere salgsfaser frem til den merkes som enden «Lukket vant» eller «Lukket tapt». {{module_name}}-posten reflekterer beløpet og forventet lukkedato for {{revenuelineitems_module}}. {{plural_module_name}} og {{revenuelineitems_module}} kan forhandles ytterligere ved å bruke Sugars {{forecasts_singular_module}}-modul for å forstå og forutse salgstrender samt fokusere arbeidet på å oppnå salgskvotene.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}}-modulen lar deg spore salget fra start til slutt. Hver {{module_name}} representerer et potensielt salg og inkluderer relevante salgsdata og er knyttet til andre viktige registreringer som {{quotes_module}}, {{contacts_module}} osv. En {{module_name}} vil vanligvis gå gjennom flere salgstrinn før den er merket "Lukket vant" eller "Lukket mistet". {{plural_module_name}} kan utnyttes ytterligere med Sugars {{forecasts_singular_module}}ing-modul å forstå og forutsi salgstrender samt fokusarbeid for å oppnå salgsbudsjetter.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Med {{plural_module_name}}-modulen kan du følge individuelle salg og produktene som hører til salgene fra begynnelse til slutt. Hver {{module_name}}-post representerer en overskrift for en gruppe {{revenuelineitems_module}} og knyttes til andre viktige poster som {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_RECORD' => '{{plural_module_name}}-modulen lar deg spore individuelle salg og poster som tilhører dette salget fra start til slutt. Hver {{module_name}} representerer et potensielt salg og inkluderer relevante salgsdata og er knyttet til andre viktige registreringer som {{quotes_module}}, {{contacts_module}} osv.
 
-– Rediger postfeltet ved å klikke på et enkeltfelt eller Rediger-knappen.
-– Vis eller rediger lenker til andre poster i underpanelene, inkludert {{revenuelineitems_module}}, ved å endre panelet nede til venstre til «Datavisning».
-– Lag og se endringslogg for brukerkommentarer og -poster i {{activitystream_singular_module}} ved å endre panelet nede til venstre til «Aktivitetstrøm».
-– Følg eller merk posten som favoritt ved bruk av ikonene til høyre for postnavnet.
-– Ytterlighere handlinger er tilgjengelige i rullegardinmenyen for Handlinger til høyre for Rediger-knappen.',
+- Rediger postens felter ved å klikke på et individuelt felt eller Rediger-knappen.
+- Vis eller endre koblinger til andre poster i delpanelene ved å vise/skjule "Datavisning" i ruten nederst til venstre.
+- Skriv og vis brukerkommentarer og registrer endringshistorikk i {{activitystream_singular_module}} ved å vise/skjule "Aktivitetsstrøm" nederst til venstre.
+- Følg posten eller merk den som favoritt med ikonene til høre for postens navn.
+- Flere handlinger er tilgjengelige i rullegardinmenyen Handlinger til høre for Rediger-knappen.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Med {{plural_module_name}}-modulen kan du følge individuelle salg og produktene som hører til salgene fra begynnelse til slutt. Hver {{module_name}}-post representerer en overskrift for en gruppe {{revenuelineitems_module}} og knyttes til andre viktige poster som {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_CREATE' => '{{plural_module_name}}-modulen lar deg spore individuelle salg og poster som tilhører dette salget fra start til slutt. Hver {{module_name}} representerer et potensielt salg og inkluderer relevante salgsdata og er knyttet til andre viktige registreringer som {{quotes_module}}, {{contacts_module}} osv.
 
-Slik oppretter du {{module_name}}:
-1. Angi verdiene for feltene som ønsket.
-– Felt merket med "Obligatorisk" må fullføres før du lagrer.
-– Klikk på "Vis mer" for å se ytterligere felt ved behov.
-2. Klikk på "Lagre" for å ferdigstille den nye posten og gå tilbake til den forrige siden.
-3. Etter du har lagret, bruker du {{revenuelineitems_module}}-underpanelet for å legge produkter til{{module_name}}.',
+For å opprette {{module_name}}:
+1. Angi verdier for feltene etter behov.
+ - Felter merket "Obligatorisk" må fullføres før lagring.
+ - Klikk på "Vis flere" for å vise flere felt.
+2. Klikk på "Lagre" for å fullføre den nye posten og gå tilbake til forrige side.',
 
 // END PRO/CORP
 

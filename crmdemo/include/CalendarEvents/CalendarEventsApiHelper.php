@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -35,7 +35,7 @@ class CalendarEventsApiHelper extends SugarBeanApiHelper
      * The vCal cache is not updated for the current user as it is handled in the endpoints to guarantee that it happens
      * after all recurrences of an event are saved.
      *
-     * @param SugarBean $bean
+     * @param Call|Meeting|SugarBean $bean
      * @param array $submittedData
      * @param array $options
      * @return array
@@ -80,7 +80,7 @@ class CalendarEventsApiHelper extends SugarBeanApiHelper
 
         $bean->update_vcal = false;
 
-        $bean->users_arr = $this->getUserInvitees($bean, $submittedData);
+        $bean->users_arr = $this->getInvitees($bean, 'users', $submittedData);
         $bean->leads_arr = $this->getInvitees($bean, 'leads', $submittedData);
         $bean->contacts_arr = $this->getInvitees($bean, 'contacts', $submittedData);
 
@@ -169,27 +169,5 @@ class CalendarEventsApiHelper extends SugarBeanApiHelper
         }
 
         return $invites;
-    }
-
-    /**
-     * Returns an array of IDs for associated users.
-     *
-     * The assigned user is included if not already invited. The current user is included if the event is new and the
-     * current user is not the assigned user.
-     *
-     * @param SugarBean $bean
-     * @param array $submittedData The submitted data for this request
-     * @return array
-     */
-    protected function getUserInvitees(SugarBean $bean, $submittedData)
-    {
-        $userInvitees = $this->getInvitees($bean, 'users', $submittedData);
-        $userInvitees[] = $bean->assigned_user_id;
-
-        if ($bean->assigned_user_id != $GLOBALS['current_user']->id && (empty($bean->id) || $bean->new_with_id)) {
-            $userInvitees[] = $GLOBALS['current_user']->id;
-        }
-
-        return array_unique($userInvitees);
     }
 }

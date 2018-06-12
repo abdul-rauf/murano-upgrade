@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -275,7 +275,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => 'Editar campos personalizados',
     'LBL_EDIT_TABS'=>'Editar Guias',
     'LBL_EMAIL_TITLE' => 'E-mail',
-    'LBL_EMAIL_DESC' => 'Gerenciar entrada e saída de e-mails. As definições de e-mail devem ser configuradas de modo a permitir aos usuários o envio de campanhas de newsletters e e-mails.',
+    'LBL_EMAIL_DESC' => 'Gerenciar as configurações de e-mail de entrada e de saída. As configurações de e-mail devem ser configuradas para ' .
+                        'permitir que os usuários enviem campanhas de e-mail e newsletter.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Um endereço de e-mail principal é obrigatório para cada usuário para usar essa funcionalidade.',
 	'LBL_ENABLE_MAILMERGE' => 'Ativar Mala Direta?',
 	'LBL_ENABLED' => 'Ativo',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Definir configurações padrão de localização para o seu sistema.',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- O Nome de usuário da pessoa que operará este cliente offline',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Nome de usuário final:',
-    'LBL_MAILBOX_DESC' => 'Definir contas de e-mail em grupo a serem monitoradas para e-mail de entrada e gerenciar informações de conta de e-mails de entrada pessoal para os usuários',
+    'LBL_MAILBOX_DESC' => 'Configure as contas de correio do grupo para monitorar os e-mail de entrada ' .
+        'e gerenciar as informações de conta de e-mail de entrada pessoal para os usuários',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Tipos de contrato',
     'LBL_MANAGE_CURRENCIES' => 'Moedas',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Gerenciar Grupos',
@@ -628,6 +630,8 @@ Se surgirem problemas persistentes com a validação automática, verifique a su
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Reconstruir arquivos de agrupamento JS',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Associa novamente e sobrescreve arquivos de agrupamento existentes com versões atualizadas de arquivos de grupo',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Reparar arquivos Javascript',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Reparar arquivos JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Processando arquivos. Isso poderá demorar alguns minutos. Sair desta página não cancelará o processo, por isso, siga adiante ou espere confirmação...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Processamento de arquivos concluído.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Reparar campos sem letra minúscula',
@@ -1006,7 +1010,7 @@ Se surgirem problemas persistentes com a validação automática, verifique a su
     'LBL_QR_CLEAR_ADD_CACHE' => 'Limpando Arquivos em Cache adicionais... concluído',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Se esta caixa não estiver marcada, um administrador será necessário para revalidar manualmente após a licença de sistema expirar. De outra forma, os usuários não poderão fazer logon.',
 	'LBL_TRACKER_SETTINGS' => 'Rastreador',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Selecionar quais dados do usuário e do sistema serão rastreados',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Habilitar/desabilitar o rastreamento',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Ativar/Desativar usuários com semente',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Ativar',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Desativar',
@@ -1159,6 +1163,10 @@ Para obter mais informações, consulte a documentação de <a href="http://www.
     'LBL_SPRITES_ADDED' => 'Sprite adicionado {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Excluindo arquivo: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Permissões de equipe',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Permitir o acesso da equipe e gerenciar o acesso por módulo.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Tipo de Sistema',
     'LBL_FTS_HOST' => 'Host',
@@ -1231,5 +1239,6 @@ Para obter mais informações, consulte a documentação de <a href="http://www.
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Clicar em Enviar fará com que você sincronize com o servidor mestre.',
     'LBL_OFFLINE_ENABLED' => 'Habilitar Offline',
     'LBL_OFFLINE_SETTINGS' => 'Configurações Offline',
+
 
 );

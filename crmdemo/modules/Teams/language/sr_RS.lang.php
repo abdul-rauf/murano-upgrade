@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,45 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => 'Da li ste sigurni da želite da obrišete ovaj zapis?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Da li ste sigurni da želite da uklonite članstvo ovog korisnika?',
     'LBL_EDITLAYOUT' => 'Izmeni raspored' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Dozvole na bazi tima',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Omogućite pristup timu i upravljajte pristupom putem modula.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Omogući dozvole na bazi tima',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Izaberite module koje želite da omogućite',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'Ako omogućite dozvole na bazi tima, moći ćete da dodelite određena prava pristupa timovima i korisnicima za pojedinačne module putem Upravljanja ulogama.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+Onemogućavanje dozvola na bazi tima za neki modul će vratiti sve podatke povezane sa dozvolama na bazi tima za taj
+ modul, uključujuči sve Definicije procesa ili Procese koji koriste tu funkciju. To obuhvata sve Uloge koje koriste
+ opciju „Vlasnik i izabrani tim“ za taj modul i sve podatke o dozvolama na bazi tima za zapise u tom modulu.
+ Takođe preporučujemo da koristite alatku Brza popravka i ponovno sastavljanje kako biste obrisali keš sistema nakon onemogućavanja dozvola
+ na bazi tima za bilo koji modul.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Upozorenje:</strong> Onemogućavanje dozvola na bazi tima za neki modul će vratiti sve podatke povezane sa
+ dozvolama na bazi tima za taj modul, uključujuči sve Definicije procesa ili Procese koji koriste tu funkciju. To 
+ obuhvata sve Uloge koje koriste opciju „Vlasnik i izabrani tim“ za taj modul i sve podatke o dozvolama na bazi tima
+ za zapise u tom modulu. Takođe preporučujemo da koristite alatku Brza popravka i ponovno sastavljanje kako biste obrisali keš sistema
+ nakon onemogućavanja dozvola na bazi tima za bilo koji modul.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+Onemogućavanje dozvola na bazi tima za neki modul će vratiti sve podatke povezane sa dozvolama na bazi tima za taj
+ modul, uključujuči sve Definicije procesa ili Procese koji koriste tu funkciju. To obuhvata sve Uloge koje koriste
+ opciju „Vlasnik i izabrani tim“ za taj modul i sve podatke o dozvolama na bazi tima za zapise u tom modulu.
+ Takođe preporučujemo da koristite alatku Brza popravka i ponovno sastavljanje kako biste obrisali keš sistema nakon onemogućavanja dozvola
+ na bazi tima za bilo koji modul. Ako nemate pristup alatki Brza popravka i ponovno sastavljanje, obratite se administratoru
+ koji ima pristup meniju za popravke.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Upozorenje:</strong> Onemogućavanje dozvola na bazi tima za neki modul će vratiti sve podatke povezane sa
+ dozvolama na bazi tima za taj modul, uključujuči sve Definicije procesa ili Procese koji koriste tu funkciju. To
+ obuhvata sve Uloge koje koriste opciju „Vlasnik i izabrani tim“ za taj modul i sve podatke o dozvolama na bazi tima za
+ zapise u tom modulu. Takođe preporučujemo da koristite alatku Brza popravka i ponovno sastavljanje kako biste obrisali keš sistema nakon
+ onemogućavanja dozvola na bazi tima za bilo koji modul. Ako nemate pristup alatki Brza popravka i ponovno sastavljanje, obratite
+ se administratoru koji ima pristup meniju za popravke.
+STR
+,
 );

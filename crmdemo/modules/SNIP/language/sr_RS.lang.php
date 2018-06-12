@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,7 +20,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 $mod_strings = array(
-    'LBL_MODULE_NAME' => 'Arhiviranje Email poruka',
+    'LBL_MODULE_NAME' => 'Arhiviranje e-poruka',
     'LBL_SNIP_SUMMARY' => "Arhiviranje email poruka je automastki servis za uvoz koji korisnicima omogućava da uvezu email poruke u Sugar slanjem istih sa bilo kog mail klijenta ili servisa na email adresu koju obezbeđuje Sugar. Svaka Sugar instanca ima jedinstvenu email adresu. Da bi uvezao email poruke, korisnik šalje na datu email adresu koristeći polja TO, CC, BCC. Servis za arhiviranje email poruka će email poruke uvesti na Sugar instancu. Servis uvozi email, zajedno sa svim zakačenim fajlovima, slikama i kalendarskim događajima i napraviti zapise u okviru aplikacije koji su povezani sa postojećim zapisima po osnovu poklapajućih email adresa.<br /><br /><br /><br />Primer: Kao korisnik, kada pregledam kompaniju, u mogućnosti sam da vidim sve email poruke koje su pvezane sa kompanijom na osnovu email adrese u zapisu kompanije. Takođe ću videti i email poruke koje su povezane sa kontaktima vezanim za kompaniju.<br /><br /><br /><br />Prihvatite uslove date ispod i kliknite na \"Omogući\" kako biste počeli da koristite servis. Bićete u mogućnosti da ga isključite u bilo kom momentu. Kada je omogućen, biće prikazana email adresa koju će servis koristiti.",
 	'LBL_REGISTER_SNIP_FAIL' => 'Neuspešno kotaktiranje servisa za arhiviranje email poruka: %s!',
 	'LBL_CONFIGURE_SNIP' => 'Arhiviranje Email poruka',

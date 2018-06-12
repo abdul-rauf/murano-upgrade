@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Виберіть <b>Розмітку для редагування</b>.<br/<br/>Щоб змінити розмітку, яка містить поля даних для введення даних, натисніть <b>Редагувати перегляд</b>.<br/><br/>Щоб змінити розмітку, яка відображає дані, введені в поля в режимі редагування, натисніть<b>Детальний перегляд</b>.<br/><br/>Щоб змінити стовпці, які з&#39;являються в списку за замовчуванням, натисніть <b>Перегляд списку</b>.<br/><br/>Щоб змінити розмітки пошуку Базовий і Просунутий, натисніть <b>Пошук</b>.',
         'subpanelHelp'=> 'Виберіть субпанель для редагування.',
         'searchHelp' => 'Виберіть розмітку<b>Пошук</b>для редагування.',
-        'labelsBtn'	=> 'Натисніть <b>Зберегти</b>, щоб зберегти користувацькі мітки.',
+        'labelsBtn'	=> 'Відредагуйте <b>мітки</b>, щоб відобразити значення в цьому модулі.',
         'newPackage'=>'Натисніть Створити новий модуля щоб створити новий пакет',
         'mbHelp'    => '<b>Ласкаво просимо в Модуль будівника.</b><br/><br/>Use <b>Модуль будівника</b>для створення пакетів, що містять користувацькі модулі на основі стандартних або користувацьких об&#39;єктів. <br/><br/>Щоб почати, натисніть <b>Новий пакет</b> щоб створити новий пакет, або виберіть пакет для редагування.<br/><br/>  <b>Пакет</b> діє в якості контейнера для користувацьких модулів, кожен з яких є частиною одного проекту. Пакет може містити один або кілька користувацьких модулів, які можуть бути пов&#39;язані один з одним або з модулями програми. <br/><br/>Приклади: Ви можете створити пакет, що містить один користувацький модуль, який пов&#39;язаний з стандартним модулем Рахунків. Або, ви можете створити пакет, що містить кілька нових модулів, які працюють разом як проект і які пов&#39;язані один з одним і з модулями програми.',
         'exportBtn' => 'Натисніть <b>Експортувати налаштування</b>,щоб створити пакет, що містить налаштування, зроблені в Студії для конкретних модулів.',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Ім&#39;я -має бути буквенно-цифрове, починатися з літери і не містити пропусків.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Package Key already exists',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Таку назву пакета вже існує.',
+'LBL_JS_PACKAGE_NAME'=>'Ім&#39;я пакета повинно починатися з букви та містити лише букви, цифри та підкреслення. Пробіли й інші спеціальні символи використовувати не можна.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Ключ повинен бути буквено-цифровим і починатися з літери.',
 'LBL_JS_VALIDATE_KEY'=>'Префікс - повинен містити букви і цифри',
 'LBL_JS_VALIDATE_LABEL'=>'Будь ласка, введіть ярлик, який буде використовуватися в якості назви при відображенні даного модуля.',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ви впевнені, що хочете видалити цей зв&#39;язок?<br />Примітка: Ця операція не може завершити протягом декількох хвилин.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Це зробить зв&#39;язок постійним. Ви впевнені, що хочете встановити цей зв&#39;язок?',
 'LBL_CONFIRM_DONT_SAVE' => 'З моменту останнього збереження були внесені зміни. Хочете зберегти зміни зараз?',

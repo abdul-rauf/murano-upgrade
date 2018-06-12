@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,37 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => '이 기록을 삭제하시겠습니까?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => '이 사용자 멥버쉽을 제거하시겠습니까?',
     'LBL_EDITLAYOUT' => '지면 배치 편집하기' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => '담당부서 권한',
+    'LBL_TBA_CONFIGURATION_DESC' => '담당부서 권한 활성화 및 모듈 접근 관리',
+    'LBL_TBA_CONFIGURATION_LABEL' => '담당부서 권한 활성화',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => '활성화 모듈 선택',
+    'LBL_TBA_CONFIGURATION_TITLE' => '담당부서 권한 활성화는 역할 관리를 통하여 개별 모델에 대한 부서 및 개인 사용자의 액세스 권한을 배정합니다.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+담당부서 권한 비활성화는 프로세스 정의 및 모든 프로세스를 포함한 모듈의 권한과 연관된 데이터를 원상 복구합니다.
+ 이는 해당 모듈에 대한 "소유자 및 담당부서" 옵션을 이용하는 역할 및 담당부서 권한 기록 데이터를 포함합니다.
+ 모듈에 대한 담당부서 권한 비활성화 이후 빠른 수리 및 복구 툴을 이용하여 시스템 캐시를 정리하는 것을 권장합니다.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>경고:</strong> 담당부서 권한 비활성화는 프로세스 정의 및 모든 프로세스를 포함한 모듈의 권한과 연관된 데이터를 원상 복구합니다.
+ 이는 해당 모듈에 대한 "소유자 및 담당부서" 옵션을 이용하는 역할 및 담당부서 권한 기록 데이터를 포함합니다.
+ 모듈에 대한 담당부서 권한 비활성화 이후 빠른 수리 및 복구 툴을 이용하여 시스템 캐시를 정리하는 것을 권장합니다.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+담당부서 권한 비활성화는 프로세스 정의 및 모든 프로세스를 포함한 모듈의 권한과 연관된 데이터를 원상 복구합니다.
+ 이는 해당 모듈에 대한 "소유자 및 담당부서" 옵션을 이용하는 역할 및 담당부서 권한 기록 데이터를 포함합니다.
+ 모듈에 대한 담당부서 권한 비활성화 이후 빠른 수리 및 복구 툴을 이용하여 시스템 캐시를 정리하는 것을 권장합니다.
+ 빠른 수리 및 복구 툴에 접근이 제한될 시, 관리자에게 복구 메뉴 접근 권한을 요청하십시오.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>경고:</strong> 담당부서 권한 비활성화는 프로세스 정의 및 모든 프로세스를 포함한 모듈의 권한과 연관된 데이터를 원상 복구합니다.
+ 이는 해당 모듈에 대한 "소유자 및 담당부서" 옵션을 이용하는 역할 및 담당부서 권한 기록 데이터를 포함합니다.
+ 모듈에 대한 담당부서 권한 비활성화 이후 빠른 수리 및 복구 툴을 이용하여 시스템 캐시를 정리하는 것을 권장합니다.
+ 빠른 수리 및 복구 툴에 접근이 제한될 시, 관리자에게 복구 메뉴 접근 권한을 요청하십시오.
+STR
+,
 );

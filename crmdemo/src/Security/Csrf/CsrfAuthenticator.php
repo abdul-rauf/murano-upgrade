@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -22,13 +22,6 @@ use Psr\Log\LoggerInterface;
 /**
  *
  * CSRF Authenticator
- *
- *              !!! OPT-IN BETA FUNCTIONALITY !!!
- *
- * Note that this implemetation is currently in beta state. To opt-in for this
- * feature use this directive in config_overrider.php:
- *
- *  $sugar_config['csrf']['opt_in'] = true;
  *
  * The current implementation supports per session based form.
  *
@@ -103,9 +96,6 @@ class CsrfAuthenticator
 
         // set config options
         $this->softFailForm = (bool) $config->get('csrf.soft_fail_form', false);
-
-        // to be removed after beta
-        $this->beta = (bool) $config->get('csrf.opt_in', false);
     }
 
     /**
@@ -150,11 +140,6 @@ class CsrfAuthenticator
      */
     public function isFormTokenValid(array $post)
     {
-        // skip execution if not enabled
-        if (empty($this->beta)) {
-            return true;
-        }
-
         // handle missing token
         if (empty($post[self::FORM_TOKEN_FIELD])) {
             $this->logger->critical("CSRF: attack vector detected, missing form token field");

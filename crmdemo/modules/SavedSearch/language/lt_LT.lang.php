@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -21,7 +21,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $mod_strings = array (
 	'LBL_MODULE_TITLE' => 'Mano išsaugotos paieškos',
 	'LBL_SEARCH_FORM_TITLE' => 'Mano išsaugotos paieškos : Ieškoti',
-	'LBL_LIST_FORM_TITLE' => 'Mano išsaugotos paieškų sąrašas', 
+	'LBL_LIST_FORM_TITLE' => 'Mano išsaugotų paieškų sąrašas', 
 	'LBL_DELETE_CONFIRM' => 'Ar tikrai norite ištrinti pasirinktas išsaugotas paieškas?',
 	'LBL_UPDATE_BUTTON_TITLE' => 'Atnaujinti šią išsaugotą paiešką',
 	'LBL_DELETE_BUTTON_TITLE' => 'Ištrinti šią išsaugotą paiešką',

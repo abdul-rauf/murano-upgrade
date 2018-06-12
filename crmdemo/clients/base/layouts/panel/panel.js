@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -18,15 +18,6 @@
      * @inheritdoc
      */
     className: 'filtered tabbable tabs-left',
-
-    /**
-     * @inheritdoc
-     */
-    attributes: function() {
-        return {
-            'data-subpanel-link': this.options.context.get('link')
-        };
-    },
 
     // "Hide/Show" state per panel
     HIDE_SHOW_KEY: 'hide-show',
@@ -134,6 +125,9 @@
             this._super('_render');
         }
 
+        this.$el.attr({
+            'data-subpanel-link': this.options.context.get('link')
+        });
         this.$('.subpanel').toggleClass('closed', collapsed);
     },
 

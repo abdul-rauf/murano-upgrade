@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,9 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-    'LBL_MODULE_NAME' => 'Kunskapsbas Dokument',
-    'LBL_MODULE_NAME_SINGULAR' => 'Kunskapsbas artikel',
-    'LBL_MODULE_TITLE' => 'Kunskapsbas artikel',
+    'LBL_MODULE_NAME' => 'Kunskapsbas',
+    'LBL_MODULE_NAME_SINGULAR' => 'Kunskapsbasartikel',
+    'LBL_MODULE_TITLE' => 'Kunskapsbasartikel',
     'LNK_NEW_ARTICLE' => 'Skapa artikel',
     'LNK_LIST_ARTICLES' => 'Visa artiklar',
     'LNK_KNOWLEDGE_BASE_ADMIN_MENU' => 'Inställningar',
@@ -95,10 +95,13 @@ $mod_strings = array (
     'LBL_KB_STATUS_BACK_TO_DRAFT' => 'Dokumentets status har ändrats tillbaka till Utkast.',
     'LBL_OPERATOR_CONTAINING_THESE_WORDS' => 'innehåller de här orden',
     'LBL_OPERATOR_EXCLUDING_THESE_WORDS' => 'innehåller inte de här orden',
-    'ERROR_EXP_DATE_LOW' => 'The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_EXP_DATE_LOW' => 'Utgångsdatum kan inte ligga före publiceringsdatum.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Statusen Godkänd kräver ett publiceringsdatum.',
     'ERROR_ACTIVE_DATE_LOW' => 'The Publish Date must occur on a later date than today&#39;s date.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Fältet Publiceringsdatum är tomt.',
     'LBL_RECORD_SAVED_SUCCESS' => 'Du har skapat {{moduleSingularLower}}n <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'ERROR_IS_BEFORE' => 'Fel. Data i detta fält måste inträffa på ett datum efter datum för {{this}} fält.',
     'TPL_SHOW_MORE_MODULE' => 'Fler {{module}}-artiklar...',
+    'LBL_LIST_FORM_TITLE' => 'Kunskapsdatabaslista',
+    'LBL_SEARCH_FORM_TITLE' => 'Kunskapsdatabassökning',
 );

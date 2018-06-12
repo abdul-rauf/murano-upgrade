@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'LBL_BLANK'	=> '-blank-',
+	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Telefonsamtal',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Telefonsamtal',
     'LBL_MODULE_TITLE' => 'Telefonsamtal: Hem',
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Maila alla inbjudna',
     'LBL_EMAIL_REMINDER' => 'Mailpåminnelse',
-    'LBL_EMAIL_REMINDER_TIME' => 'Tid för mail-påminnelse',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup Påminnelsetid',
+    'LBL_EMAIL_REMINDER_TIME' => 'Tidpunkt för emailpåminnelse',
+    'LBL_POPUP_REMINDER_TIME' => 'Popup-påminnelsetid',
     'LBL_SEND_BUTTON_TITLE'=>'Skicka inbjudan [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Skicka inbjudan',
 	'LBL_DATE_END'=>'Slutdatum',
 	'LBL_TIME_END'=>'Slut tid',
-	'LBL_REMINDER_TIME'=>'Påminnelse tid',
+    'LBL_REMINDER_TIME'=>'Påminnelse tid',
     'LBL_EMAIL_REMINDER_SENT' => 'Mailpåminnelse skickad',
     'LBL_SEARCH_BUTTON'=> 'Sök',
     'LBL_ACTIVITIES_REPORTS' => 'Aktivitetsrapport',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Radera Alla Upprepningar',
     'LBL_DATE_END_ERROR' => 'Slutdatum är före startdatum',
     'LBL_REPEAT_PARENT_ID' => 'Repetera Parent ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Återkommande ID för samtal. Startdatum för ursprungligt samtal',
     'LBL_RECURRING_SOURCE' => 'Upprepa Source',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Är du säker på att du vill radera alla upprepade protokoll?',
     'LBL_RECURRING_LIMIT_ERROR' => 'Det här upprepade mötet kan inte schemaläggas för det överskrider maximalt antal tillåtna upprepningar av $limit.',

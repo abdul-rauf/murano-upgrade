@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -134,7 +134,7 @@ $mod_strings = array (
 'LBL_TAB_GROUP_LANGUAGE_HELP' => 'To set the tab group labels for other available languages, select a language, edit the labels and click Save & Deploy to make the changes for that language.',
 'LBL_ADD_GROUP'=>'Add Group',
 'LBL_NEW_GROUP'=>'קבוצה חדשה',
-'LBL_RENAME_TABS'=>'Rename Tabs',
+'LBL_RENAME_TABS'=>'שנה שם של כרטיסיות',
 'LBL_DISPLAY_OTHER_TAB' => 'Display &#39;Other&#39; Tab',
 
 //LIST VIEW EDITOR

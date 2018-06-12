@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -178,8 +178,8 @@
              * @return {Boolean}
              */
             isPossibleInvitee: function(person) {
-                var inviteeModuleList = ['Leads', 'Contacts', 'Users'],
-                    invitees = this.model.get('invitees');
+                var inviteeModuleList = ['Leads', 'Contacts', 'Users'];
+                var invitees = this.model.get('invitees');
 
                 return (!_.isEmpty(person.id) &&
                     _.contains(inviteeModuleList, person.module) &&
@@ -203,8 +203,18 @@
              *   adding an invitee to the collection.
              */
             addAsInvitee: function(person, options) {
-                options = _.extend({merge: true}, (options || {}));
-                this.model.get('invitees').add(person, options);
+                var complete;
+
+                complete = _.bind(function complete(request) {
+                    options = _.extend({merge: true}, (options || {}));
+                    this.model.get('invitees').add(person, options);
+                }, this);
+
+                if (person.fields && _.has(person.fields, 'email') && _.isFunction(person.fetch)) {
+                    person.fetch({fields: ['email'], complete: complete});
+                } else {
+                    complete();
+                }
             }
         });
     });

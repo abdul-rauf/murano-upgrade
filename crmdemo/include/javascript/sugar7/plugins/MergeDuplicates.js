@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -54,6 +54,11 @@
 
                 if (this._validateIsAnyEditable(models) === false) {
                     this._showNoEditAlert();
+                    return;
+                }
+
+                if (this._hasLockedFields(models) === true) {
+                    this._showLockedAlert();
                     return;
                 }
 
@@ -119,6 +124,19 @@
             },
 
             /**
+             * Check if there is at least one model that contains locked fields.
+             *
+             * @param {Array} models Array of merging record set.
+             * @return {boolean} `true` if non empty locked_fields is found, `false` otherwise.
+             * @protected
+             */
+            _hasLockedFields: function(models) {
+                return _.some(models, function(model) {
+                    return !_.isEmpty(model.get('locked_fields'));
+                });
+            },
+
+            /**
              * Display error message when there are no editable records.
              * @protected
              */
@@ -126,6 +144,18 @@
                 var msg = app.lang.get('LBL_MERGE_NO_ACCESS', this.module);
                 app.alert.show('no-record-to-edit', {
                     level: 'error',
+                    messages: msg
+                });
+            },
+
+            /**
+             * Display error message when there are locked fields.
+             */
+            _showLockedAlert: function() {
+                var msg = app.lang.get('LBL_MERGE_LOCKED', this.module);
+                app.alert.show('contains-locked-fields', {
+                    level: 'warning',
+                    autoclose: false,
                     messages: msg
                 });
             },

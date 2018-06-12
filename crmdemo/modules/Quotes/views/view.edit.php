@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -175,7 +175,10 @@ class QuotesViewEdit extends ViewEdit
 		require_once('modules/Currencies/ListCurrency.php');
 		$currency = new ListCurrency();
 		$base_rate = '1.00';
-        if ( isset($this->bean->currency_id) && !empty($this->bean->currency_id) ) {
+
+        if ((!empty($this->bean->id) || $this->ev->isDuplicate) &&
+            isset($this->bean->currency_id) &&
+            !empty($this->bean->currency_id)) {
             $curid = $this->bean->currency_id;
         } elseif ( isset($_REQUEST['currency_id']) && !empty($_REQUEST['currency_id']) ) {
             $curid = $_REQUEST['currency_id'];
@@ -222,8 +225,11 @@ class QuotesViewEdit extends ViewEdit
             if(is_array($product_bundle_list)){
 
 				foreach ($product_bundle_list as $product_bundle) {
+                    $escaped_bundle_name = str_replace('\\', '\\\\', $product_bundle->name);
 					$bundle_list = $product_bundle->get_product_bundle_line_items();
-					$add_row[] = "quotesManager.addTable('$product_bundle->id','$product_bundle->bundle_stage', '$product_bundle->name', '".format_money($product_bundle->shipping,FALSE)."' );\n";
+                    $add_row[] = "quotesManager.addTable('$product_bundle->id', '$product_bundle->bundle_stage', '" .
+                        $escaped_bundle_name . "', '" .
+                        format_money($product_bundle->shipping, false) . "' );\n";
 
 					if (is_array($bundle_list)) {
 						while (list($key, $line_item) = each ($bundle_list)) {
@@ -237,7 +243,14 @@ class QuotesViewEdit extends ViewEdit
 											. ", '".$convert_format($line_item->cost_price, $line_item->currency_id, $line_item->base_rate) . "'"
 											. ", '".$convert_format($line_item->list_price, $line_item->currency_id, $line_item->base_rate) ."'"
 											. ", '".$convert_format($line_item->discount_price, $line_item->currency_id, $line_item->base_rate) . "'"
-											. ", '$line_item->pricing_formula', '', '$line_item->pricing_factor', '$line_item->tax_class', '$tax_class_name', '$line_item->mft_part_num', '$product_bundle->id', '$product_bundle->bundle_stage', '$product_bundle->name', '"
+                                            . ", '$line_item->pricing_formula', "
+                                            . "'', '$line_item->pricing_factor', "
+                                            . "'$line_item->tax_class', "
+                                            . "'$tax_class_name', "
+                                            . "'$line_item->mft_part_num', "
+                                            . "'$product_bundle->id', "
+                                            . "'$product_bundle->bundle_stage', "
+                                            . "'$escaped_bundle_name', '"
 											. format_number($product_bundle->shipping)."', '".js_escape(br2nl($line_item->description))."', '". $line_item->type_id."'"
 											. ", '".format_number($line_item->discount_amount, $significantDigits, $significantDigits)."'"
 		                                    . ", ".($line_item->discount_select?1:0)

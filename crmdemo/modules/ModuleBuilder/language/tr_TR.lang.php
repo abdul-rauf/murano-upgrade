@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> '<b>Değiştirmek için bir Yerleşim</b> seçin.<br/><br/> Data girilen alanları içeren yerleşimi değiştirmek için <b>DeğişiklikGörünümü</b>&#39;nü tıklayın.<br/><br/>DeğişiklikGörünümü&#39;nde girilen dataları gösteren yerleşimi düzenlemek için <b>DetaylıGörünüm</b>&#39;ü tıklayın.<br/><br/>Varsayılan listede deki sütunları değiştirmek için, <b>ListeGörünümü</b>&#39;i tıklayın.<br/><br/>Temel ve Gelişmiş arama form seçeneklerini değiştirmek içinse, <b>Arama</b>&#39;yı tıklayın.',
         'subpanelHelp'=> 'Değiştirmek için bir <b>Alt panel</b> seçin.',
         'searchHelp' => 'Değiştirmek için <b>Arama</b> yerleşimini seçin.',
-        'labelsBtn'	=> 'Özel etiketlerinizi kaydetmek için <b>Kaydet</b> düğmesine tıklayın.',
+        'labelsBtn'	=> 'Bu modülde değerler için görüntülemek üzere <b>Labels</b> etiketini düzenleyin.',
         'newPackage'=>'Yeni bir paket oluşturmak için <b>Yeni Paket</b> butonuna tıklayın.',
         'mbHelp'    => '<b>Modül Oluşturucuya Hoş geldiniz.</b><br/><br/> Standart ve özelleştirilmiş nesnelere dayalı modüller içeren paketler oluşturmak için <b>Modül Oluşturucu</b>&#39;yu kullanın.<br/><br/><br />Başlamak ve yeni bir paket oluşturmak için <b>Yeni Paket</b> tıklayın, veya düzenlemek için bir paket seçin.<br/><br/>Bir <b>paket</b>, bir projenin parçası olan özel modüllerin gruplayıcısı olarak davranır. Bir paket bir veya daha fazla modülden oluşabilir.<br/><br/>Örneğin: standart Müşteriler modülü ile ilişkili yeni bir modül paketi oluşturmak isteyebilirsiniz. Veya, birbirleriyle veya uygulamadaki diğer modüllerle ilişkili birden fazla modülü barındıran bir paket de oluşturabilirsiniz.',
         'exportBtn' => 'Stüdyo aracında, belirli modüller için yapılan özelleştirmeleri içeren paket oluşturmak için <b>Özelleştirmeleri Dışarı Aktar</b> butonuna tıklayın.',
@@ -448,7 +448,7 @@ $mod_strings = array(
 
 //RELATIONSHIPS
 'LBL_MODULE' => 'Modül',
-'LBL_LHS_MODULE'=>'Asıl Modül',
+'LBL_LHS_MODULE'=>'Birincil Modül',
 'LBL_CUSTOM_RELATIONSHIPS' => 'İlişki Stüdyoda oluşturuldu',
 'LBL_RELATIONSHIPS'=>'İlişkiler',
 'LBL_RELATIONSHIP_EDIT' => 'İlişkileri Değiştir',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'İsim - Harf ve rakamlardan oluşmalı, boşluk olmamalı ve bir harf ile başlamalıdır.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Paket Anahtarı zaten var',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Paket İsmi zaten var',
+'LBL_JS_PACKAGE_NAME'=>'Paket İsmi - Harf ve rakamlardan oluşmalı, boşluk olmamalı ve bir harf ile başlamalıdır.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Anahtar - Alfanumerik olmalı ve bir harf ile başlamalıdır.',
 'LBL_JS_VALIDATE_KEY'=>'Anahtar - Alfa numerik olmalı, bir harfle başlamalı ve boşluk içermemelidir.',
 'LBL_JS_VALIDATE_LABEL'=>'Bu modül için isim olarak kullanılabilecek bir etiket girin',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'İlişkiyi silmek istediğinizden emin misiniz?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Bu işlem ilişkiyi sürekli kılacaktır. İlgili ilişkiyi uygulamak istediğinizden emin misiniz?',
 'LBL_CONFIRM_DONT_SAVE' => 'En son kayıt işleminizden sonraki değişiklikler yapıldı, ilgili değişiklikleri kaydetmek ister misiniz?',

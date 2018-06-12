@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -54,9 +54,10 @@
                         break;
                     case 'jquery_core':
                         return array (
-                            'include/javascript/jquery/jquery-min.js'             =>    $target,
-                            'include/javascript/jquery/jquery-ui-min.js'          =>    $target,
-                            'include/javascript/jquery/jquery.json-2.3.js'        =>    $target,
+                            'include/javascript/jquery/jquery-min.js'               =>  $target,
+                            'include/javascript/jquery/jquery-ui-min.js'            =>  $target,
+                            'include/javascript/jquery/jquery.json-2.3.js'          =>  $target,
+                            'include/javascript/jquery/jquery-migrate-1.2.1.min.js' =>  $target,
                         );
                         break;
                     case 'jquery_menus':
@@ -251,7 +252,7 @@
                    'include/javascript/nprogress/nprogress.js' => 'include/javascript/sugar_sidecar.min.js',
 
                    'include/javascript/select2/language.js' => 'include/javascript/sugar_sidecar.min.js',
-                   'sidecar/lib/momentjs/min/langs.min.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'sidecar/lib/momentjs/min/locales.min.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/favicon.js' => 'include/javascript/sugar_sidecar.min.js',
 
                    //Expression Engine
@@ -289,7 +290,6 @@
                     'include/javascript/sugar7/plugins/Taggable.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/RelativeTime.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ErrorDecoration.js'  => 'include/javascript/sugar_sidecar.min.js',
-                    'include/javascript/sugar7/plugins/QuickSearchFilter.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ClickToEdit.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/GridBuilder.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ListDisableSort.js'  => 'include/javascript/sugar_sidecar.min.js',
@@ -319,11 +319,14 @@
                     'include/javascript/sugar7/plugins/DragdropSelect2.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ReminderTimeDefaults.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/fuse/fuse.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/tinymce4/jquery.tinymce.min.js' => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/mousetrap/mousetrap.min.js' => 'include/javascript/sugar_sidecar.min.js',
                 )
            ),
 
             $sugar_grp_sugar7 = array(
                 'include/javascript/sugar7.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/tutorial.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/bwc.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/utils.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/utils-filters.js' => 'include/javascript/sugar_grp7.min.js',
@@ -338,7 +341,12 @@
                 'include/javascript/sugar7/filter-analytics.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/metadata-manager.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/sweetspot.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/tooltip.js' => 'include/javascript/sugar_grp7.min.js',
                 'include/javascript/sugar7/import-export-warnings.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/shortcuts.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/accessibility/accessibility.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/accessibility/click.js' => 'include/javascript/sugar_grp7.min.js',
+                'include/javascript/sugar7/accessibility/label.js' => 'include/javascript/sugar_grp7.min.js',
             ),
 
         );
@@ -356,4 +364,3 @@
     foreach(SugarAutoLoader::existing("custom/jssource/JSGroupings.php", SugarAutoLoader::loadExtension("jsgroupings")) as $file) {
         require $file;
     }
-

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -194,8 +194,6 @@ $mod_strings = array (
     'LBL_HOMEPAGE_TITLE' => 'Mijn Personen',
     'LBL_OPPORTUNITIES' => 'Opportunities',
 
-    'LBL_PASSWORD_CHANGE_FORM_TITLE' => 'Wachtwoord wijziging',
-    'LBL_OLD_PORTAL_PASSWORD' => 'Oude Portal wachtwoord',
     'LBL_PORTAL_PASSWORD' => 'Wachtwoord portalgebruiker',
     'LBL_CONFIRM_PORTAL_PASSWORD' => 'Wachtwoord portalgebruiker bevestigen',
     'LBL_LANG_PREF_TOOLTIP' => 'De Support Portal gebruikersinterface wordt aangemaakt in de hier geselecteerde taal.',

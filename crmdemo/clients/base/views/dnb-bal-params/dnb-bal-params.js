@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,7 +11,7 @@
 ({
     extendsFrom: 'DnbView',
 
-    plugins: ['ErrorDecoration', 'Tooltip'],
+    plugins: ['ErrorDecoration'],
 
     events: {
         'change [name="dnb_bal_sale"]': 'toggleFormControls',
@@ -34,9 +34,7 @@
         'change [name="dnb_bal_ind_code_type"]': 'modifyIndustryModel',
         'change [name="dnb_bal_cntct_filter"]': 'setBalFilter',
         'shown #dnb_bal_accordian': 'handlePanelShown',
-        'hidden #dnb_bal_accordian': 'handlePanelHidden',
-        'mouseenter [rel="tooltip"]': 'showTooltip',
-        'mouseleave [rel="tooltip"]': 'hideTooltip'
+        'hidden #dnb_bal_accordian': 'handlePanelHidden'
     },
 
     /**
@@ -712,23 +710,6 @@
             level: 'error',
             messages: msg
         });
-    },
-
-    showTooltip: function(e) {
-        this.$(e.currentTarget).tooltip('show');
-    },
-
-    hideTooltip: function(e) {
-        this.$(e.currentTarget).tooltip('hide');
-    },
-
-    unbindDom: function() {
-        // Unbind all tooltips on page
-        this.$('[rel="tooltip"]').each(function() {
-            $(this).tooltip('destroy');
-        });
-        unbindTooltips('[rel="tooltip"]');
-        this._super('unbindDom');
     },
 
     /**

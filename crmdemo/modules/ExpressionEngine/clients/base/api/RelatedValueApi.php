@@ -5,7 +5,7 @@ if (!defined('sugarEntry') || !sugarEntry) {
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -71,6 +71,13 @@ class RelatedValueApi extends SugarApi
                 $rField = $rfDef['relate'];
             }
 
+            // Switch the type to the correct name
+            if ($type == 'rollupAvg') {
+                $type = 'rollupAve';
+            } else if ($type == 'rollupCurrencySum') {
+                $type = 'rollupSum';
+            }
+
             switch ($type) {
                 //The Related function is used for pulling a sing field from a related record
                 case "related":
@@ -125,6 +132,7 @@ class RelatedValueApi extends SugarApi
                         $count = 0;
                         $min = false;
                         $max = false;
+                        $values = array();
                         if (!empty($relBeans)) {
                             //Check if the related record vardef has banned this field from formulas
                             $relBean = reset($relBeans);
@@ -134,55 +142,168 @@ class RelatedValueApi extends SugarApi
                                 break;
                             }
                         }
+
+                        $isCurrency = null;
+
                         foreach ($relBeans as $bean) {
                             if (isset($bean->$rField) && is_numeric($bean->$rField) &&
                                 //ensure the user can access the fields we are using.
                                 ACLField::hasAccess($rField, $bean->module_dir, $GLOBALS['current_user']->id, true)
                             ) {
+                                if(is_null($isCurrency)) {
+                                    $def = $bean->getFieldDefinition($bean->$rField);
+                                    // start by just using the type in the def
+                                    $def_type = $def['type'];
+                                    // but if custom_type is set, use it, when it's not set and dbType is, use dbType
+                                    if (isset($def['custom_type']) && !empty($def['custom_type'])) {
+                                        $def_type = $def['custom_type'];
+                                    } elseif (isset($def['dbType']) && !empty($def['dbType'])) {
+                                        $def_type = $def['dbType'];
+                                    }
+                                    // always lower case the type just to make sure.
+                                    $isCurrency = (strtolower($def_type) === 'currency');
+                                }
+
                                 $count++;
-                                $sum += floatval($bean->$rField);
-                                if ($min === false || $bean->$rField < $min) {
-                                    $min = floatval($bean->$rField);
+
+                                $value = $bean->$rField;
+                                if ($isCurrency) {
+                                    $value = SugarCurrency::convertAmountToBase($value, $bean->base_rate);
                                 }
-                                if ($max === false || $bean->$rField > $max) {
-                                    $max = floatval($bean->$rField);
+
+                                $sum = SugarMath::init($sum)->add($value)->result();
+                                if ($min === false || floatval($value) < floatval($min)) {
+                                    $min = $value;
                                 }
+                                if ($max === false || floatval($value) > floatval($max)) {
+                                    $max = $value;
+                                }
+                                $values[$bean->id] = $value;
                             }
                         }
                         if ($type == "rollupSum") {
                             $ret[$link][$type][$rField] = $sum;
+                            $ret[$link][$type][$rField . '_values'] = $values;
                         }
                         if ($type == "rollupAve") {
-                            $ret[$link][$type][$rField] = $count == 0 ? 0 : $sum / $count;
+                            $ret[$link][$type][$rField] = $count == 0 ? 0 : SugarMath::init($sum)->div($count)->result();
+                            $ret[$link][$type][$rField . '_values'] = $values;
                         }
                         if ($type == "rollupMin") {
                             $ret[$link][$type][$rField] = $min;
+                            $ret[$link][$type][$rField . '_values'] = $values;
                         }
                         if ($type == "rollupMax") {
                             $ret[$link][$type][$rField] = $max;
+                            $ret[$link][$type][$rField . '_values'] = $values;
                         }
                     } else {
                         $ret[$link][$type][$rField] = 0;
                     }
                     break;
-
-                case "rollupCurrencySum":
-                    $ret[$link][$type][$rField] = 0;
+                case "countConditional":
+                    $sum = 0;
                     if ($focus->load_relationship($link)) {
+                        $condition_values = Parser::evaluate($rfDef['condition_expr'])->evaluate();
+                        $relBeans = $focus->$link->getBeans(array("enforce_teams" => true));
+
+                        foreach ($relBeans as $bean) {
+                            if (in_array($bean->$rfDef['condition_field'], $condition_values)) {
+                                $sum++;
+                            }
+                        }
+                    }
+                    // for countConditional, we use the target field, since there can have more than one
+                    // on the same record.
+                    if (isset($rfDef['target'])) {
+                        $ret[$link][$type][$rfDef['target']] = $sum;
+                    } else {
+                        $ret[$link][$type] = $sum;
+                    }
+                    break;
+                case "rollupConditionalSum":
+                    $ret[$link][$type][$rField] = '0';
+
+                    if ($focus->load_relationship($link)) {
+                        if (preg_match('/^[a-zA-Z0-9_\-$]+\(.*\)$/', $rfDef['condition_expr'])) {
+                            $condition_values = Parser::evaluate($rfDef['condition_expr'])->evaluate();
+                        } else {
+                            $condition_values = array($rfDef['condition_expr']);
+                        }
                         $toRate = isset($focus->base_rate) ? $focus->base_rate : null;
                         $relBeans = $focus->$link->getBeans(array("enforce_teams" => true));
-                        $sum = 0;
+                        $sum = '0';
                         foreach ($relBeans as $bean) {
                             if (!empty($bean->$rField) && is_numeric($bean->$rField) &&
                                 //ensure the user can access the fields we are using.
                                 ACLField::hasAccess($rField, $bean->module_dir, $GLOBALS['current_user']->id, true)
                             ) {
-                                $sum = SugarMath::init($sum)->add(
-                                    SugarCurrency::convertWithRate($bean->$rField, $bean->base_rate, $toRate)
-                                )->result();
+                                if (in_array($bean->$rfDef['condition_field'], $condition_values)) {
+                                    $sum = SugarMath::init($sum)->add(
+                                        SugarCurrency::convertWithRate($bean->$rField, $bean->base_rate, $toRate)
+                                    )->result();
+                                }
                             }
                         }
                         $ret[$link][$type][$rField] = $sum;
+                    }
+                    break;
+                case 'maxRelatedDate':
+                    $ret[$link][$type][$rField] = "";
+                    if ($focus->load_relationship($link)) {
+                        $td = TimeDate::getInstance();
+                        $isTimestamp = true;
+                        $maxDate = 0;
+                        $relBeans = $focus->$link->getBeans(array("enforce_teams" => true));
+                        $valueMap = array();
+                        foreach ($relBeans as $bean) {
+                            if (ACLField::hasAccess($rField, $bean->module_dir, $GLOBALS['current_user']->id, true)
+                            ) {
+                                // we have to use the fetched_row as it's still in db format
+                                // where as the $bean->$relfield is formatted into the users format.
+                                if (isset($bean->fetched_row[$rField])) {
+                                    $value = $bean->fetched_row[$rField];
+                                } elseif (isset($bean->$rField)) {
+                                    if (is_int($bean->$rField)) {
+                                        // if we have a timestamp field, just set the value
+                                        $value = $bean->relfield;
+                                    } else {
+                                        // more than likely this is a date field, so try and un-format based on the users preferences
+                                        // we pass false to asDbDate as we want the value that would be stored in the DB
+                                        $value = $td->fromString($bean->$rField)->asDbDate(false);
+                                    }
+                                } else {
+                                    continue;
+                                }
+
+                                $valueMap[$bean->id] = $value;
+
+                                //if it isn't a timestamp, mark the flag as such and convert it for comparison
+                                if (!is_int($value)) {
+                                    $isTimestamp = false;
+                                    $value = strtotime($value);
+                                }
+
+                                //compare
+                                if ($maxDate < $value) {
+                                    $maxDate = $value;
+                                }
+                            }
+                        }
+
+                        //if nothing was done, return an empty string
+                        if ($maxDate == 0 && $isTimestamp) {
+                            $maxDate = "";
+                        } else if ($isTimestamp === false) {
+                            $date = new DateTime();
+                            $date->setTimestamp($maxDate);
+
+                            $maxDate = $date->format("Y-m-d");
+                        }
+
+
+                        $ret[$link][$type][$rField] = $maxDate;
+                        $ret[$link][$type][$rField . '_values'] = $valueMap;
                     }
                     break;
             }

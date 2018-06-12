@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -397,7 +397,7 @@ class SugarQuery
         // FIXME: it's really not good we have a special case here
         if (!empty($options['favorites']) || $link_name == 'favorites') {
             $sfOptions = $options;
-            $sf = new SugarFavorites();
+            $sf = BeanFactory::getBean('SugarFavorites');
             $options['alias'] = $sf->addToSugarQuery($this, $sfOptions);
         } else {
             $this->loadBeans($link_name, $options);
@@ -433,7 +433,7 @@ class SugarQuery
             $alias .= "_" . $table_name;
         }
 
-        return $this->db->getValidDBName($alias, 'alias');
+        return $this->db->getValidDBName($alias, true, 'alias');
     }
 
     /**
@@ -480,15 +480,54 @@ class SugarQuery
 
 
     /**
+     * Returns the correct join_key for the relationship that is being used in JoinOn, if no field is found
+     * NULL is returned.
+     *
+     * @param string $linkName
+     * @return null|string
+     */
+    protected function getJoinOnField($linkName) {
+        $bean = $this->from;
+
+        if (is_array($bean)) {
+            // the bean is the first element of the array
+            $bean = reset($bean);
+        }
+
+        $field = null;
+
+        if ($bean->load_relationship($linkName)) {
+            $rel_def = $bean->$linkName->getRelationshipObject()->def;
+            if ($bean->$linkName->getSide() == REL_LHS) {
+                $join_key = 'join_key_rhs';
+            } else {
+                $join_key = 'join_key_lhs';
+            }
+
+            if (!empty($rel_def[$join_key])) {
+                $field = $rel_def[$join_key];
+            }
+        }
+
+        return $field;
+    }
+
+    /**
      * Add a join-on if there is an rname_link in use
      *
      * @param array $options
-     *
+     * @throws SugarQueryException
      */
     public function setJoinOn($options = array())
     {
-        if ($this->rname_link !== false && !empty($options['baseBean']) && !empty($options['baseBeanId'])) {
-            $this->join[$this->rname_link]->on()->addRaw("{$options['baseBean']}_id = '{$options['baseBeanId']}'");
+        if ($this->rname_link !== false && !empty($options['baseBeanId'])) {
+            // get the field name from the relationship instead of just assuming it's something
+            $field = $this->getJoinOnField($this->join[$this->rname_link]->linkName);
+            if ($field) {
+                $this->join[$this->rname_link]->on()->addRaw("${field} = '{$options['baseBeanId']}'");
+            } else {
+                throw new SugarQueryException('Relationship Field Not Found');
+            }
         }        
     }
 

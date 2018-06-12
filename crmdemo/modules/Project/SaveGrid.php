@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -27,6 +27,9 @@ for ($i = 1; $i <= $_REQUEST['numRowsToSave']; $i++) {
         if (isset($_REQUEST["obj_id_" . $i])) {
             //$projectTask->id = $_REQUEST["obj_id_" . $i];
             $projectTask->retrieve($_REQUEST["obj_id_" . $i]);
+            if (!$projectTask->ACLAccess('edit')) {
+                continue;
+            }
         }
         $projectTask->project_task_id = $_REQUEST["mapped_row_" . $i];
         $projectTask->percent_complete = $_REQUEST["percent_complete_" . $i];
@@ -93,7 +96,10 @@ $deletedRows = $_REQUEST['deletedRows'];
 if ($deletedRows != "") {
     $deletedRowsArray = explode(",", $deletedRows);
     foreach ($deletedRowsArray as $rowid) {
-        BeanFactory::deleteBean('ProjectTask', $rowid);
+        $projectTask = BeanFactory::getBean('ProjectTask', $rowid);
+        if ($projectTask->ACLAccess('delete')) {
+            $projectTask->mark_deleted($projectTask->id);
+        }
     }
 }
 

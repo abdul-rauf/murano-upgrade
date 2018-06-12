@@ -24,8 +24,8 @@ class zr2_ReportTemplate extends ReportProviderBase {
 	var $object_name = "zr2_ReportTemplate";
 	var $module_dir = "zr2_ReportTemplate";
 	
-	function zr2_ReportTemplate() {		
-		parent::ReportProviderBase();
+	function __construct() {		
+		parent::__construct();
 		$this->new_schema = true;
 	}	
 	

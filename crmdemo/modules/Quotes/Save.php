@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -101,8 +101,8 @@ if (isset($_REQUEST['total'])) {
 }
 
 //unset relate fields for product bundles
-$tmpRelate_id = $_REQUEST['relate_id'];
-$tmpRelate_to = $_REQUEST['relate_to'];
+$tmpRelate_id = isset($_REQUEST['relate_id']) ? $_REQUEST['relate_id'] : '';
+$tmpRelate_to = isset($_REQUEST['relate_to']) ? $_REQUEST['relate_to'] : '';
 unset($_REQUEST['relate_id']);
 unset($_REQUEST['relate_to']);
 

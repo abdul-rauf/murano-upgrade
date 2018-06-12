@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,7 +33,7 @@ $mod_strings = array(
     'LBL_MODULE_TITLE' => 'Takımlar: Ana',
     'LBL_NAME' => 'Takım İsmi:',
     'LBL_NAME_2' => 'Takım İsmi(2):',
-    'LBL_PRIMARY_TEAM_NAME' => 'Asıl Takım İsmi',
+    'LBL_PRIMARY_TEAM_NAME' => 'Birincil Takım İsmi',
     'LBL_NEW_FORM_TITLE' => 'Yeni Takım',
     'LBL_PRIVATE' => 'Özel',
     'LBL_PRIVATE_TEAM_FOR' => 'Bunun için özel takım:',
@@ -56,4 +56,39 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => 'Bu kaydı silmek istediğinizden emin misiniz?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Bu kullanıcının üyeliğini kaldırmak istediğinizden emin misiniz?',
     'LBL_EDITLAYOUT' => 'Yerleşimi Değiştir' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Takım Bazlı İzinler',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Takım erişimini etkinleştirin ve modüller erişimi yönetin.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Takım bazlı izinleri etkinleştir',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Etkinleştirmek için modül seçin',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'Takım bazlı izinlerin etkinleştirilmesi size, Rol Yönetimi vasıtasıyla ayrı modüller için ekip ve kullanıcılara belirli erişim hakları atamanıza imkan verecektir.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+Bir modül için takım bazlı izinlerin devre dışı bırakılması bu modül için takım bazlı izinlerle ilişkili tüm verileri eski haline
+ döndürür, örneğin özelliği kullanan tüm İşlem Tanımları veya İşlemler dahil. Bu, o modül için "Sahip ve Seçili takım" seçeneğini kullanan tüm Rolleri ve o modüldeki kayıtlar için tüm takım bazlı izinler verilerini içerir.
+ Ayrıca herhangi bir modül için takım bazlı izinleri devre dışı bıraktıktan sonra sistem önbelleğinizi temizlemek için Hızlı Onarım
+ ve Yeniden Oluşturma aracını kullanmanızı öneririz.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Uyarı</strong> Bir modül için takım bazlı izinlerin devre dışı bırakılması bu modül için takım bazlı izinlerle ilişkili tüm verileri eski haline
+ döndürür, örneğin özelliği kullanan tüm İşlem Tanımları veya İşlemler dahil. Bu, o modül için "Sahip ve Seçili takım" seçeneğini kullanan tüm Rolleri ve o modüldeki kayıtlar için tüm takım bazlı izinler verilerini içerir.
+ Ayrıca herhangi bir modül için takım bazlı izinleri devre dışı bıraktıktan sonra sistem önbelleğinizi temizlemek için Hızlı Onarım
+ ve Yeniden Oluşturma aracını kullanmanızı öneririz.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+Bir modül için takım bazlı izinlerin devre dışı bırakılması bu modül için takım bazlı izinlerle ilişkili tüm verileri eski haline
+ döndürür, örneğin özelliği kullanan tüm İşlem Tanımları veya İşlemler dahil. Bu, o modül için "Sahip ve Seçili takım" seçeneğini kullanan tüm Rolleri ve o modüldeki kayıtlar için tüm takım bazlı izinler verilerini içerir.
+ Ayrıca herhangi bir modül için takım bazlı izinleri devre dışı bıraktıktan sonra sistem önbelleğinizi temizlemek için Hızlı Onarım
+ ve Yeniden Oluşturma aracını kullanmanızı öneririz. Hızlı Onarım ve Yeniden Oluşturma aracına erişim izniniz yoksa Onarım menüsüne erişimi bulunan bir yöneticiyle iletişime geçin.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Uyarı:</strong> Bir modül için takım bazlı izinlerin devre dışı bırakılması bu modül için takım bazlı izinlerle ilişkili tüm verileri eski haline
+ döndürür, örneğin özelliği kullanan tüm İşlem Tanımları veya İşlemler dahil. Bu, o modül için "Sahip ve Seçili takım" seçeneğini kullanan tüm Rolleri ve o modüldeki kayıtlar için tüm takım bazlı izinler verilerini içerir.
+ Ayrıca herhangi bir modül için takım bazlı izinleri devre dışı bıraktıktan sonra sistem önbelleğinizi temizlemek için Hızlı Onarım
+ ve Yeniden Oluşturma aracını kullanmanızı öneririz. Hızlı Onarım ve Yeniden Oluşturma aracına erişim izniniz yoksa Onarım menüsüne erişimi bulunan bir yöneticiyle iletişime geçin.
+STR
+,
 );

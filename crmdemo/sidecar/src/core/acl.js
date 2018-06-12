@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,7 +16,7 @@
      * @alias SUGAR.App.acl
      * @singleton
      */
-    app.augment("acl", {
+    app.augment('acl', {
 
         /**
          * Cache for {@link Core.Acl#hasAccessToAny} function.
@@ -30,12 +30,12 @@
          * @property {Object}
          */
         action2permission: {
-            "view": "read",
-            "readonly": "read",
-            "edit": "write",
-            "detail": "read",
-            "list": "read",
-            "disabled": "write"
+            'view': 'read',
+            'readonly': 'read',
+            'edit': 'write',
+            'detail': 'read',
+            'list': 'read',
+            'disabled': 'write',
         },
 
         /**
@@ -58,19 +58,18 @@
         },
 
         /**
-         * Checks ACLs to see if access is given to action.
+         * ACL helper to convert ACLs data into booleans.
          *
-         * @param {String} action Action name.
+         * @param {string} action Action name.
          * @param {Object} acls ACL hash.
-         * @return {Boolean} Flag indicating if the current user has access to the given action.
-         */        
-        _hasAccess: function(action, acls) {
+         * @return {boolean} Flag indicating if the current user has access.
+         */
+        _hasAccess: function (action, acls) {
             var access;
 
             if (acls.access === 'no') {
                 access = 'no';
-            }
-            else {
+            } else {
                 access = acls[action];
             }
 
@@ -78,62 +77,73 @@
         },
 
         /**
-         * Checks ACLs to see if access is given to action on a given field.
+         * ACL helper to convert ACLs data on fields into booleans.
          *
-         * @param {String} action Action name.
+         * @param {string} action Action name.
          * @param {Object} acls ACL hash.
-         * @param {String} field Name of the model field.
-         * @return {Boolean} Flag indicating if the current user has access to the given action.
+         * @param {string} field Name of the Module's field.
+         * @return {boolean} Flag indicating if the current user has access.
          */
-        _hasAccessToField: function(action, acls, field) {
+        _hasAccessToField: function (action, acls, field) {
             var access;
 
             action = this.action2permission[action] || action;
-            if(acls.fields[field] && acls.fields[field][action]) {
+            if (acls.fields[field] && acls.fields[field][action]) {
                 access = acls.fields[field][action];
             }
 
-            return access !== "no";
+            return access !== 'no';
         },
 
         /**
-         * Checks acls to see if the current user has access to action on a given module's field.
+         * Checks ACLs to see if the current user has access to action on a
+         * given module or record.
          *
-         * @param {String} action Action name.
-         * @param {Object} module Module name.
-         * @param {String} ownerId(optional) ID of the record's owner (`assigned_user_id` attribute).
-         * @param {String} field(optional) Name of the model field.
-         * @param {String} recordAcls(optional) a record's acls.
-         * @return {Boolean} Flag indicating if the current user has access to the given action.
+         * @param {string} action Action name.
+         * @param {string} module Module name.
+         * @param {Object} [options] Options.
+         * @param {string} [options.field] Name of the field to check access.
+         * @param {string} [options.acls] Record's ACLs that take precedence
+         *   over the module's ACLs. These are normally supplied by the server
+         *   as part of the data response in `_acl`.
+         * @return {boolean} Flag indicating if the current user has access.
          */
-        hasAccess: function(action, module, ownerId, field, recordAcls) {
-            //TODO Also add override for app full admins remember to add a test this means you
-            var acls = app.user.getAcls()[module];
-            var access = true;
-            if(acls || recordAcls) {
-                acls = acls || {};
-                if (recordAcls) { // A record's acls take precedence over the module acls. If they are available, merge the acls.
-                    acls = app.utils.deepCopy(acls); // deep clone acls
-                    acls.fields = acls.fields || {};
-                    _.extend(acls.fields, recordAcls.fields); // merge the field acls
-                    var fields = acls.fields;
-                    _.extend(acls, recordAcls); // merge record's acls with the module acls (shallow)
-                    acls.fields = fields; // use the merged field acls
+        hasAccess: function (action, module, options) {
+            var field;
+            var recordAcls;
 
-                }
-                access = this._hasAccess(action, acls);
-                if(field && acls.fields && access) {
-                    // see if we have access to the field
-                    access = this._hasAccessToField(action, acls, field);
-                    // if the field is in a group, see if we have access to the group
-                    var moduleMeta = app.metadata.getModule(module);
-                    var fieldMeta = (moduleMeta && moduleMeta.fields) ? moduleMeta.fields[field] : null;
-                    if (access && fieldMeta && fieldMeta.group) {
-                        access = this._hasAccessToField(action, acls, fieldMeta.group);
-                    }
-                }
+            if (!_.isObject(options)) {
+                // TODO: Throw deprecation warning and remove this code.
+                field = arguments[3];
+                recordAcls = arguments[4];
+            } else {
+                field = options.field;
+                recordAcls = options.acls;
             }
 
+            var acls = app.user.getAcls()[module];
+            if (!acls && !recordAcls) {
+                return true;
+            }
+
+            acls = acls || {};
+            if (recordAcls) {
+                var fieldAcls = _.extend({}, acls.fields, recordAcls.fields);
+                acls = _.extend({}, acls, recordAcls);
+                acls.fields = fieldAcls;
+            }
+
+            var access = this._hasAccess(action, acls);
+            if (access && field && acls.fields) {
+                access = this._hasAccessToField(action, acls, field);
+
+                // if the field is in a group, see if we have access to the group
+                var moduleMeta = app.metadata.getModule(module);
+                var fieldMeta = (moduleMeta && moduleMeta.fields) ? moduleMeta.fields[field] : null;
+                if (access && fieldMeta && fieldMeta.group) {
+                    access = this._hasAccessToField(action, acls, fieldMeta.group);
+                }
+            }
 
             return access;
         },
@@ -147,8 +157,11 @@
          * @return {Boolean} Flag indicating if the current user has access to the given action.
          */
         hasAccessToModel: function(action, model, field) {
-            var id, module, assignedUserId, acls,
-                access = true;
+            var id;
+            var module;
+            var assignedUserId;
+            var acls;
+
             if (model) {
                 id = model.id;
                 module = model.module;
@@ -160,11 +173,7 @@
                 action = 'create';
             }
 
-            if (access === true) {
-                access = this.hasAccess(action, module, assignedUserId, field, acls);
-            }
-
-            return access;
+            return this.hasAccess(action, module, assignedUserId, field, acls);
         },
 
         /**

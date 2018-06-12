@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -40,6 +40,7 @@ class CurrentUserApi extends SugarApi
         'default_locale_name_format' => 'default_locale_name_format',
         'fdow' => 'first_day_of_week',
         'sweetspot' => 'sweetspot',
+        'shortcuts' => 'shortcuts',
         'reminder_time' => 'reminder_time',
         'email_reminder_time' => 'email_reminder_time',
     );

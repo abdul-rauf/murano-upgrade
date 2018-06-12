@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -23,7 +23,7 @@ $mod_strings = array (
 	'LBL_ASSIGN_TEAM'					=> 'Takıma Ata',
 	'LBL_DEFAULT_TEAM_TEXT'				=> 'Üyesi olduğunuz ve Mevcut kayıtlara otomatik olarak atanan takımlar.',
 	'LBL_DEFAULT_TEAM'					=> 'Varsayılan Takımlar',
-    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Varsayılan Asıl Takım',
+    'LBL_DEFAULT_PRIMARY_TEAM'          => 'Varsayılan Brincil Takım',
 	'LBL_LIST_DESCRIPTION'				=> 'Tanım',
 	'LBL_MY_TEAMS'						=> 'Takımlarım',
 	'LBL_PRIVATE_TEAM_FOR'				=> '...için özel takım',
@@ -194,7 +194,7 @@ $mod_strings = array (
 	'LBL_LIST_LAST_NAME'				=> 'Soyisim',
 	'LBL_LIST_MEMBERSHIP'				=> 'Üyelik',
 	'LBL_LIST_NAME'						=> 'İsim',
-	'LBL_LIST_PRIMARY_PHONE'			=> 'Asıl Telefon',
+	'LBL_LIST_PRIMARY_PHONE'			=> 'Birincil Telefon',
 	'LBL_LIST_PASSWORD'					=> 'Şifre',
 	'LBL_LIST_STATUS'					=> 'Durum',
 	'LBL_LIST_TITLE'					=> 'Ünvan',
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Yeni Şifre',
 	'LBL_NEW_PASSWORD1'					=> 'Şifre',
 	'LBL_NEW_PASSWORD2'					=> 'Şifreyi Onaylayın',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Şifre başarıyla değiştirildi.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Şifre başarıyla değiştirildi.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'Kullanıcıya sistem-tarafından-üretilen şifreyi de içeren E-Posta gönderildi.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Şifre başarıyla oluşturuldu.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Şifre başarıyla oluşturuldu.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Yeni Kullanıcı',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Yeni Kullanıcı',
@@ -281,7 +281,7 @@ $mod_strings = array (
 	'LBL_PORTAL_ONLY_DESC'				=> 'Portal API için kullanımı için. Sugar web ara yüzünden bu yöntemle sisteme giriş yapamaz.',
 	'LBL_PORTAL_ONLY_USER'					=> 'Portal API Kullanıcısı',
 	'LBL_POSTAL_CODE'					=> 'Posta Kodu',
-	'LBL_PRIMARY_ADDRESS'				=> 'Asıl Adresi',
+	'LBL_PRIMARY_ADDRESS'				=> 'Birincil Adres',
 	'LBL_PROMPT_TIMEZONE_TEXT'			=> 'İlk girişte kullanıcıların Yeni Kullanıcı Sihirbazını kullanmaları için işaretleyin.',
 	'LBL_PROMPT_TIMEZONE'				=> 'Kullanıcı Sihirbazı İşareti',
 	'LBL_PROVIDE_USERNAME_AND_EMAIL' 	=> 'Geçerli bir Kullanıcı Adı ve E-posta Adresi sağlayın.',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Kotalar',
     'LBL_FORECASTS'                     => 'Tahminler',
     'LBL_WORKSHEETS'                    => 'Çalışma Sayfaları',
+	'LBL_CALENDARS'                     => 'Takvimler',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Başka bir CAPTCHA Al',
 	'LBL_RECAPTCHA_SOUND'				=> 'Sese geç',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Görüntüye Geç',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'İş Telefonu',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Benim lokasyonumda yayınla',
     'LBL_ICAL_PUB_URL'                  => 'iCal entegrasyon URL',
-    'LBL_ICAL_PUB_URL_HELP'             => 'iCal içerisinde Sugar takvimine abone olmak için bu URL adresini kullanın.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Sugar takviminize iCal destekli uygulamalar içinde abone olmak için bu URL&#39;yi ' .
+                                           'kullanın. Sugar takvim olayları, harici takvim uygulamalarında ' .
+                                           'salt okunur olarak görülebilir ve tüm olay düzenlemeleri ' .
+                                           '(ör. toplantılar, aramalar vb.) sadece Sugar&#39;da yapılabilir.',
 	'LBL_YOUR_QUERY_URL'				=> 'Sorgu URL iniz',
 	'LNK_NEW_USER'						=> 'Yeni Kullanıcı Oluşturun',
 	'LNK_NEW_PORTAL_USER'				=> 'Portal API Kullanıcısı Oluştur',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Kullanıcıların raporları',
     'LBL_CONTACTS_SYNC' => 'Kontaklar',
-
+    'LBL_DETAIL' => 'Kullanıcı Profili',
 ); // END STRINGS DEFS
 
 ?>

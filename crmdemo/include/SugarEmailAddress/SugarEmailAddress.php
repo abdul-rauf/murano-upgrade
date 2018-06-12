@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -40,13 +40,6 @@ class SugarEmailAddress extends SugarBean
      */
     public $fetchedAddresses = null;
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarEmailAddress()
-    {
-        self::__construct();
-    }
 
     public function __construct() {
         parent::__construct();
@@ -67,7 +60,7 @@ class SugarEmailAddress extends SugarBean
     public static function isValidEmail($emailAddress)
     {
         require_once 'modules/Mailer/PHPMailerProxy.php';
-        return PHPMailerProxy::ValidateAddress($emailAddress);
+        return PHPMailerProxy::ValidateAddress(Etechnika\IdnaConvert\IdnaConvert::encodeString($emailAddress));
     }
 
     /**

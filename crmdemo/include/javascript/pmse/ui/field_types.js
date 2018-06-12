@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -150,6 +150,7 @@ var ComboboxField = function (options, parent) {
      */
     this.options = [];
     this.related = null;
+    this._isValid = true;
     ComboboxField.prototype.initObject.call(this, options);
 };
 ComboboxField.prototype = new Field();
@@ -167,11 +168,13 @@ ComboboxField.prototype.type = 'ComboboxField';
 ComboboxField.prototype.initObject = function (options) {
     var defaults = {
         options: [],
-        related: null
+        related: null,
+        isValid: true
     };
     $.extend(true, defaults, options);
     this.setOptions(defaults.options)
-        .setRelated(defaults.related);
+        .setRelated(defaults.related)
+        .setValid(defaults.isValid);
 };
 
 /**
@@ -190,6 +193,22 @@ ComboboxField.prototype.setOptions = function (data) {
         if (!this.value) {
             this.value = this.controlObject.value;
         }
+    }
+    return this;
+
+};
+
+/**
+ * Adds a single option to the dropdown
+ * @param data
+ * @return {ComboboxField}
+ */
+ComboboxField.prototype.addOption = function(data) {
+    if ((this.html) && (data)) {
+        this.controlObject.appendChild(this.generateOption(data));
+    }
+    if (!this.value) {
+        this.value = this.controlObject.value;
     }
     return this;
 };
@@ -281,6 +300,16 @@ ComboboxField.prototype.generateOption = function (item) {
 };
 
 /**
+ * Returns the data associated to the current selected value.
+ * @return {Object|null}
+ */
+ComboboxField.prototype.getSelectedData = function () {
+    return _.find(this.options, function (item) {
+        return item.value == this.value;
+    }, this) || null;
+};
+
+/**
  * Attaches event listeners to the combo box field , it also call some methods to set and evaluate
  * the current value (to send it to the database later).
  *
@@ -301,6 +330,20 @@ ComboboxField.prototype.attachListeners = function () {
             });
     }
     return this;
+};
+
+ComboboxField.prototype.isValid = function() {
+    return this._isValid;
+};
+
+ComboboxField.prototype.setValid = function(valid) {
+    this._isValid = valid ? true : false;
+    this.decorateValid();
+    return this;
+};
+
+ComboboxField.prototype.decorateValid = function() {
+    $(this.controlObject).toggleClass(this._invalidFieldClass, !this.isValid());
 };
 
 /**
@@ -1269,7 +1312,7 @@ CheckboxGroup.prototype.evalRequired = function () { var response = true;
 var SearchableCombobox = function (options, parent) {
     Field.call(this, options, parent);
     this._placeholder = null;
-    this._minimumInputLength = null;
+    this._pageSize = null;
     this._valueField = null;
     this._textField = null;
     this._options = [];
@@ -1280,6 +1323,7 @@ var SearchableCombobox = function (options, parent) {
     this._searchDelay = null;
     this._searchMore = null;
     this._searchMoreList = null;
+    this._isValid = true;
     SearchableCombobox.prototype.initObject.call(this, options, parent);
 };
 
@@ -1290,7 +1334,7 @@ SearchableCombobox.prototype.type = "SearchableCombobox";
 SearchableCombobox.prototype.initObject = function (options, parent) {
     var defaults = {
         placeholder: "",
-        minimumInputLength: 1,
+        pageSize: 5,
         textField: "text",
         valueField: "value",
         fieldWidth: "200px",
@@ -1299,27 +1343,43 @@ SearchableCombobox.prototype.initObject = function (options, parent) {
         searchLabel: "text",
         searchValue: "value",
         searchDelay: 1500,
-        searchMore: false
+        searchMore: false,
+        isValid: true
     };
 
     $.extend(true, defaults, options);
 
     this._placeholder = defaults.placeholder;
-    this._minimumInputLength = defaults.minimumInputLength;
     this._textField = defaults.textField;
     this._valueField = defaults.valueField;
+    this._pageSize = typeof defaults.pageSize === 'number' && defaults.pageSize >= 1 ? Math.floor(defaults.pageSize) : 0;
     this.setFieldWidth(defaults.fieldWidth)
         .setSearchDelay(defaults.searchDelay)
         .setSearchValue(defaults.searchValue)
         .setSearchLabel(defaults.searchLabel)
         .setSearchURL(defaults.searchURL)
-        .setOptions(defaults.options);
+        .setOptions(defaults.options)
+        .setValid(defaults.isValid);
 
     if (defaults.searchMore) {
         this.enableSearchMore(defaults.searchMore);
     } else {
         this.disableSearchMore();
     }
+};
+
+SearchableCombobox.prototype.isValid = function() {
+    return this.disabled || this._isValid;
+};
+
+SearchableCombobox.prototype.setValid = function(valid) {
+    this._isValid = valid ? true : false;
+    this.decorateValid();
+    return this;
+};
+
+SearchableCombobox.prototype.decorateValid = function() {
+    $(this.controlObject).toggleClass(this._invalidFieldClass, !this.isValid());
 };
 
 SearchableCombobox.prototype._createSearchMoreOption = function () {
@@ -1403,6 +1463,15 @@ SearchableCombobox.prototype._getFilteredOptions = function (queryObject, items,
     return finalData;
 };
 
+SearchableCombobox.prototype._resizeListSize = function () {
+    var list = this.controlObject.data("select2").dropdown,
+        listItemHeight;
+    list = $(list).find('ul[role=listbox]');
+    listItemHeight = list.find('li').eq(0).outerHeight();
+    list.get(0).style.maxHeight = (listItemHeight * this._pageSize) + 'px';
+    return this;
+};
+
 SearchableCombobox.prototype.setSearchURL = function(url) {
     var delayToUse, that = this;
 
@@ -1419,7 +1488,6 @@ SearchableCombobox.prototype.setSearchURL = function(url) {
 
     this._searchFunction = _.debounce(function(queryObject) {
         var proxy = new SugarProxy(),
-            termRegExp = /\{TERM\}/g,
             result = {
                 more: false
             }, term = jQuery.trim(queryObject.term),
@@ -1432,17 +1500,20 @@ SearchableCombobox.prototype.setSearchURL = function(url) {
                 }
             };
 
-        finalData = that._getFilteredOptions(queryObject, that._options, "")
+        finalData = queryObject.page > 1 ? [] : that._getFilteredOptions(queryObject, that._options, 'text', 'id');
 
         if (term && that._searchURL) {
-            proxy.url = this._searchURL.replace(termRegExp, queryObject.term);
+            proxy.url = this._searchURL.replace(/\{%TERM%\}/g, queryObject.term)
+                .replace(/\{%OFFSET%\}/g, (queryObject.page - 1) * that._pageSize);
+
+            if (that._pageSize > 0) {
+                proxy.url = proxy.url.replace(/\{%PAGESIZE%\}/g, that._pageSize);
+            }
 
             proxy.getData(null, {
                 success: function (data) {
-                    if (!data.success) {
-                        throw new Error("SearchableCombobox's search function: Error.");
-                    }
-                    data = data.result;
+                    result.more = data.next_offset >= 0 ? true : false;
+                    data = data.records;
                     data.forEach(function (item) {
                         finalData.push({
                             id: getText(item, that._searchValue),
@@ -1452,6 +1523,7 @@ SearchableCombobox.prototype.setSearchURL = function(url) {
 
                     result.results = finalData;
                     queryObject.callback(result);
+                    that._resizeListSize();
                 },
                 error: function () {
                     console.log("failure", arguments);
@@ -1528,6 +1600,7 @@ SearchableCombobox.prototype.disable = function () {
     }
     this.setRequired(false);
     this.disabled = true;
+    this.decorateValid();
     return this;
 };
 
@@ -1540,6 +1613,7 @@ SearchableCombobox.prototype.enable = function () {
         this.setRequired(this.oldRequiredValue);
     }
     this.disabled = false;
+    this.decorateValid();
     return this;
 };
 

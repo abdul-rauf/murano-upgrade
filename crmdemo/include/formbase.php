@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -18,7 +18,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+use Sugarcrm\Sugarcrm\ProcessManager;
 
 /**
  * Check for null or zero for list of values
@@ -65,37 +67,6 @@ function populateFromPost($prefix, &$focus, $skipRetrieve=false) {
             $GLOBALS['log']->fatal("Field '$field' does not have a SugarField handler");
         }
 
-/*
-        if(isset($_POST[$prefix.$field])) {
-			if(is_array($_POST[$prefix.$field]) && !empty($focus->field_defs[$field]['isMultiSelect'])) {
-				if($_POST[$prefix.$field][0] === '' && !empty($_POST[$prefix.$field][1]) ) {
-					unset($_POST[$prefix.$field][0]);
-				}
-				$_POST[$prefix.$field] = encodeMultienumValue($_POST[$prefix.$field]);
-			}
-
-			$focus->$field = $_POST[$prefix.$field];
-			/*
-			 * overrides the passed value for booleans.
-			 * this will be fully deprecated when the change to binary booleans is complete.
-			 /
-			if(isset($focus->field_defs[$prefix.$field]) && $focus->field_defs[$prefix.$field]['type'] == 'bool' && isset($focus->field_defs[$prefix.$field]['options'])) {
-				$opts = explode("|", $focus->field_defs[$prefix.$field]['options']);
-				$bool = $_POST[$prefix.$field];
-
-				if(is_int($bool) || ($bool === "0" || $bool === "1" || $bool === "2")) {
-					// 1=on, 2=off
-					$selection = ($_POST[$prefix.$field] == "0") ? 1 : 0;
-				} elseif(is_bool($_POST[$prefix.$field])) {
-					// true=on, false=off
-					$selection = ($_POST[$prefix.$field]) ? 0 : 1;
-				}
-				$focus->$field = $opts[$selection];
-			}
-		} else if(!empty($focus->field_defs[$field]['isMultiSelect']) && !isset($_POST[$prefix.$field]) && isset($_POST[$prefix.$field . '_multiselect'])) {
-			$focus->$field = '';
-		}
-*/
 	}
 
 	foreach($focus->additional_column_fields as $field) {
@@ -126,13 +97,17 @@ function populateFromPostACL(SugarBean $focus)
         $beanId = $focus->id;
     }
 
-    $defaultBean = BeanFactory::getBean($focus->module_name, $beanId);
+    $defaultBean = BeanFactory::getBean($focus->module_name, $beanId, array('use_cache' => false));
     $defaultBean->fill_in_additional_detail_fields();
-    $defaultBean->assigned_user_id = $GLOBALS['current_user']->id;
+
+    if (empty($defaultBean->assigned_user_id)) {
+        $defaultBean->assigned_user_id = $GLOBALS['current_user']->id;
+    }
 
     foreach (array_keys($focus->field_defs) as $field) {
         $fieldAccess = ACLField::hasAccess($field, $focus->module_dir, $GLOBALS['current_user']->id, $isOwner);
-        if (!in_array($fieldAccess, array(2, 4))) {
+        $aclStrategyAccess = $focus->ACLFieldAccess($field, 'save', array());
+        if (!in_array($fieldAccess, array(2, 4)) || !$aclStrategyAccess) {
             $focus->$field = $defaultBean->$field;
         }
     }
@@ -557,5 +532,3 @@ function save_from_report($report_id,$parent_id, $module_name, $relationship_att
         $focus->$relationship_attr_name->add($row['primaryid']);
     }
 }
-
-?>

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'Eメール',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'すべての招待者にEメール',
     'LBL_POPUP_REMINDER' => 'ポップアップリマインダー',
-    'LBL_POPUP_REMINDER_TIME' => 'リマインダをポップアップする時間',
+    'LBL_POPUP_REMINDER_TIME' => 'ポップアップリマインダ時間',
     'LBL_EMAIL_REMINDER' => 'Eメールリマインダ',
-    'LBL_EMAIL_REMINDER_TIME' => 'Eメールリマインダ',
+    'LBL_EMAIL_REMINDER_TIME' => 'Eメールリマインダ時間',
     'LBL_REMOVE' => '削除',
 	'LBL_SCHEDULING_FORM_TITLE' => 'スケジューリング',
 	'LBL_SEARCH_BUTTON'=> '検索',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => '定期的な予定をすべて削除',
     'LBL_DATE_END_ERROR' => '最終日が開始日より前です',
     'LBL_REPEAT_PARENT_ID' => '関連親ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => '会議の定期予定ID。最初の会議開始日',
     'LBL_RECURRING_SOURCE' => '循環ソース',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => '本当にこの定期的なレコードをすべてはずしてよいですか？',
     'LBL_RECURRENCE' => '定期的な予定',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,7 +11,7 @@
  */
 
 $mod_strings = array (
-	'ERR_DELETE_RECORD'					=> 'Privalote nurodyti įrašo numerį, kad ištrinti klientą.',
+	'ERR_DELETE_RECORD'					=> 'Privalote nurodyti įrašo numerį, kad būtų galima ištrinti klientą.',
 	'LBL_ACCOUNT_ID'					=> 'Kliento ID',
 	'LBL_ACCOUNT_NAME'					=> 'Kliento vardas:',
 	'LBL_ACCOUNTS_SUBPANEL_TITLE'		=> 'Klientai',
@@ -42,7 +42,7 @@ $mod_strings = array (
 	'LBL_RESOLUTION'					=> 'Sprendimas:',
 	'LBL_SEARCH_FORM_TITLE'				=> 'Aptarnavimų paieška',
 	'LBL_STATUS'						=> 'Statusas:',
-    'LBL_SOURCE' => 'Source:',
+    'LBL_SOURCE' => 'Šaltinis:',
 	'LBL_SUBJECT'						=> 'Tema:',
 	'LBL_SYSTEM_ID'						=> 'Sistemos ID',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Kliento vardas',

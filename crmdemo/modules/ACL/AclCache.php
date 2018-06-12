@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -122,10 +122,31 @@ class AclCache
     }
 
     /**
-     * Clear a key in the cache.
+     * Clear cache.
+     * @param string $userId
+     * @param string $key
      */
-    public function clear()
+    public function clear($userId = null, $key = null)
     {
+        // clear cache for a single user
+        if ($userId) {
+            if ($this->hashes === null) {
+                $this->hashes = $this->cache->get(self::HASH_KEY);
+            }
+            if (isset($this->hashes[$userId])) {
+                if ($key) {
+                    if (isset($this->hashes[$userId][$key])) {
+                        unset($this->hashes[$userId][$key]);
+                        $this->cache->set(self::HASH_KEY, $this->hashes, 0);
+                    }
+                    return;
+                }
+                unset($this->hashes[$userId]);
+                $this->cache->set(self::HASH_KEY, $this->hashes, 0);
+            }
+            return;
+        }
+        // clear cache for all users
         $this->hashes = null;
         unset($this->cache->{self::HASH_KEY});
     }

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'New Password',
 	'LBL_NEW_PASSWORD1'					=> 'Password',
 	'LBL_NEW_PASSWORD2'					=> 'Confirm Password',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Password was changed successfully.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Password was changed successfully.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'An email was sent to the user containing a system-generated password.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Password was created successfully.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Password was created successfully.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'New User',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'New User',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Quotas',
     'LBL_FORECASTS'                     => 'Forecasts',
     'LBL_WORKSHEETS'                    => 'Worksheets',
+	'LBL_CALENDARS'                     => 'Calendars',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Get another CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Switch to Sound',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Switch to Image',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Work Phone',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Publish at my location',
     'LBL_ICAL_PUB_URL'                  => 'iCal integration URL',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Use this URL to subscribe to the Sugar calendar within iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Use this URL to subscribe to your Sugar calendar within iCal-supported ' .
+                                           'applications. Sugar calendar events are viewable as read-only ' .
+                                           'in external calendar applications and any edits to events ' .
+                                           '(e.g. meetings, calls etc.) can only be made in Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'Your Query URL',
 	'LNK_NEW_USER'						=> 'Create New User',
 	'LNK_NEW_PORTAL_USER'				=> 'Create Portal API User',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Users&#39; reports',
     'LBL_CONTACTS_SYNC' => 'Contacts',
-
+    'LBL_DETAIL' => 'User Profile',
 ); // END STRINGS DEFS
 
 ?>

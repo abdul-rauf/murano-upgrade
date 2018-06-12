@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -9,19 +9,28 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 (function(app) {
-    app.events.on("app:init", function() {
-        var routes,
-            homeOptions = {
-                dashboard: 'dashboard',
-                activities: 'activities'
-            },
-            getLastHomeKey = function() {
-                return app.user.lastState.buildKey('last-home', 'app-header');
-            };
+    /**
+     * A whitelist of routes that are allowed to be redirected to bwc
+     *
+     * @type {Array}
+     * @private
+     */
+    var bwcRedirectRoutes = [
+        'config',
+        'create',
+        'editAllRecurrences',
+        'layout',
+        'list',
+        'record',
+        'record_layout',
+        'record_layout_action',
+        'vcardImport'
+    ];
 
+    app.events.on('router:init', function() {
         // FIXME: Routes should be an extension of router.js, and not in a
         // privately-scoped variable; will be addressed in SC-2761.
-        routes = [
+        var routes = [
             {
                 name: "index",
                 route: ""
@@ -37,25 +46,12 @@
             {
                 name: "forgotpassword",
                 route: "forgotpassword",
-                callback: function(){
+                callback: function() {
                     app.controller.loadView({
                         module: "Forgotpassword",
                         layout: "forgotpassword",
                         create: true
                     });
-                }
-            },
-            {
-                name: "home",
-                route: "Home",
-                callback: function() {
-                    var lastHomeKey = getLastHomeKey(),
-                        lastHome = app.user.lastState.get(lastHomeKey);
-                    if (lastHome === homeOptions.dashboard) {
-                        app.router.list("Home");
-                    } else if (lastHome === homeOptions.activities) {
-                        app.router.redirect('#activities');
-                    }
                 }
             },
             {
@@ -70,18 +66,47 @@
                 }
             },
             {
-                name: 'activities',
-                route: 'activities',
+                name: "forecasts",
+                route: "Forecasts",
                 callback: function() {
-                    //when visiting activity stream, save last state of activities
-                    //so future Home routes go back to activities
-                    var lastHomeKey = getLastHomeKey();
-                    app.user.lastState.set(lastHomeKey, homeOptions.activities);
 
-                    app.controller.loadView({
-                        layout: 'activities',
-                        module: 'Activities'
-                    });
+                    var acls = app.user.getAcls().Forecasts,
+                        hasAccess = (!_.has(acls, 'access') || acls.access == 'yes'),
+                        forecastBy = app.metadata.getModule('Forecasts', 'config'),
+                        forecastByAcl = app.user.getAcls()[forecastBy ? forecastBy.forecast_by : {}],
+                        hasForecastByAccess = (!_.has(forecastByAcl, 'access') || forecastByAcl.access === 'yes'),
+                        title = '',
+                        msg = '';
+
+                    //check for access, set error messages if none
+                    if (hasAccess) {
+                        if (hasForecastByAccess) {
+                            if (!app.utils.checkForecastConfig()) {
+                                title = 'LBL_FORECASTS_MISSING_STAGE_TITLE';
+                                msg = 'LBL_FORECASTS_MISSING_SALES_STAGE_VALUES';
+                            }
+                        } else {
+                            title = 'LBL_FORECASTS_ACLS_NO_ACCESS_TITLE';
+                            msg = 'LBL_FORECASTS_RECORDS_ACLS_NO_ACCESS_MSG';
+                        }
+                    } else {
+                        title = 'LBL_FORECASTS_ACLS_NO_ACCESS_TITLE';
+                        msg = 'LBL_FORECASTS_ACLS_NO_ACCESS_MSG';
+                    }
+
+                    //if no errors, go on to the Forecast module, otherwise, display error message
+                    if (title == '' && msg == '') {
+                        app.controller.loadView({
+                            module: 'Forecasts',
+                            layout: 'records'
+                        });
+                    } else {
+                        app.alert.show('no_access_to_forecasts', {
+                            level: 'error',
+                            title: app.lang.get(title, 'Forecasts') + ':',
+                            messages: [app.lang.get(msg, 'Forecasts')]
+                        });
+                    }
                 }
             },
             {
@@ -95,104 +120,60 @@
             {
                 name: "bwc",
                 route: "bwc/*url",
-                callback: function(url) {
-                    app.logger.debug("BWC: " + url);
+                callback: function(url, params) {
+                    url = url || '';
+                    var bwcUrl = _.isEmpty(params) ? url : url + '?' + params;
+                    app.logger.debug("BWC: " + bwcUrl);
 
                     var frame = $('#bwc-frame');
                     if (frame.length === 1 &&
-                        app.utils.rmIframeMark('index.php' + frame.get(0).contentWindow.location.search) === url
+                        app.utils.rmIframeMark('index.php' + frame.get(0).contentWindow.location.search) === bwcUrl
                     ) {
+                        // close any drawers
+                        app.drawer.reset();
                         // update hash link only
                         return;
                     }
 
-                    // if only index.php is given, redirect to Home
-                    if (url === 'index.php') {
+                    if (bwcUrl === 'index.php') {
                         app.router.navigate('#Home', {trigger: true});
                         return;
                     }
-                    var params = {
+                    var options = {
                         layout: 'bwc',
-                        url: url
+                        url: bwcUrl
                     };
-                    var module = /module=([^&]*)/.exec(url);
+                    var module = /module=([^&]*)/.exec(bwcUrl);
 
                     if (!_.isNull(module) && !_.isEmpty(module[1])) {
-                        params.module = module[1];
+                        options.module = module[1];
                         // on BWC import we want to try and take the import module as the module
                         if (module[1] === 'Import') {
-                            module = /import_module=([^&]*)/.exec(url);
+                            module = /import_module=([^&]*)/.exec(bwcUrl);
                             if (!_.isNull(module) && !_.isEmpty(module[1])) {
-                                params.module = module[1];
+                                options.module = module[1];
                             }
                         }
                     }
 
-                    app.controller.loadView(params);
-                }
-            },
-            {
-                name: "sg_index",
-                route: "Styleguide",
-                callback: function() {
-                    app.controller.loadView({
-                        module: "Styleguide",
-                        layout: "styleguide",
-                        page_name: "home"
-                    });
-                }
-            },
-            {
-                name: "sg_module",
-                route: "Styleguide/:layout/:resource",
-                callback: function(layout, resource) {
-                    var page = '',
-                        field = '';
-                    if (layout === 'field') {
-                        //route: "Styleguide/field/text"
-                        page = 'field';
-                        field = resource;
-                    } else if (layout === 'view') {
-                        //route: "Styleguide/view/list"
-                        page = 'layouts_' + resource;
-                    } else if (layout === 'docs') {
-                        //route: "Styleguide/docs/base_grid"
-                        page = resource;
-                    } else if (layout === 'layout') {
-                        //route: "Styleguide/layout/records"
-                        layout = resource;
-                        page = 'module';
-                    }
-                    app.controller.loadView({
-                        module: "Styleguide",
-                        layout: layout,
-                        page_name: page,
-                        field_type: field,
-                        skipFetch: true
-                    });
+                    app.controller.loadView(options);
                 }
             },
             {
                 name: 'search',
-                route: 'search(/)(:searchTermAndParams)',
-                callback: function(searchTermAndParams) {
-                    var searchTerm = '';
+                route: 'search(/)(:term)',
+                callback: function(term, urlParams) {
+                    var searchTerm = term ? term : '';
                     var params = {modules: [], tags: []};
-                    if (searchTermAndParams) {
-                        // For search, we may have query params for the module list
-                        var uriSplit = searchTermAndParams.split('?');
-                        searchTerm = decodeURIComponent(uriSplit[0]);
 
-                        // We have parameters. Parse them.
-                        if (uriSplit.length > 1) {
-                            var paramsArray = uriSplit[1].split('&');
-                            _.each(paramsArray, function(paramPair) {
-                                var keyValueArray = paramPair.split('=');
-                                if (keyValueArray.length > 1) {
-                                    params[keyValueArray[0]] = keyValueArray[1].split(',');
-                                }
-                            });
-                        }
+                    if (urlParams) {
+                        var paramsArray = urlParams.split('&');
+                        _.each(paramsArray, function(paramPair) {
+                            var keyValueArray = paramPair.split('=');
+                            if (keyValueArray.length > 1) {
+                                params[keyValueArray[0]] = keyValueArray[1].split(',');
+                            }
+                        });
                     }
 
                     var appContext = app.controller.context;
@@ -201,7 +182,7 @@
                     var termHasChanged = appContext.get('searchTerm') !== searchTerm;
                     var modulesHaveChanged = !_.isEqual(appContext.get('module_list'), params.modules);
 
-                    params.tags = _.map(params.tags, function(tag){
+                    params.tags = _.map(params.tags, function(tag) {
                         return decodeURIComponent(tag);
                     });
                     var tagsHaveChanged = !_.isEqual(appContext.get('tagParams'), params.tags);
@@ -255,15 +236,6 @@
                 name: 'create',
                 route: ':module/create',
                 callback: function(module) {
-                    if (module === 'Home') {
-                        app.controller.loadView({
-                            module: module,
-                            layout: 'record'
-                        });
-
-                        return;
-                    }
-
                     // FIXME: We shouldn't be calling private methods like this.
                     // Will be addressed in SC-2761.
                     if (!app.router._moduleExists(module)) {
@@ -315,8 +287,8 @@
                 }
             },
             {
-                name: "editAllRecurrences",
-                route: ":module/:id/edit/all-recurrences",
+                name: 'editAllRecurrences',
+                route: ':module/:id/edit/all_recurrences',
                 callback: function(module, id) {
                     // FIXME: We shouldn't be calling private methods like this.
                     // Will be addressed in SC-2761.
@@ -339,7 +311,7 @@
             {
                 name: 'config',
                 route: ':module/config',
-                callback: function(module) {
+                callback: function (module) {
                     // FIXME: We shouldn't be calling private methods like this.
                     // Will be addressed in SC-2761.
                     if (!app.router._moduleExists(module)) {
@@ -367,41 +339,12 @@
                 }
             },
             {
-                name: "homeRecord",
-                route: "Home/:id",
-                callback: function(id) {
-                    //when visiting a dashboard, save last state of dashboard
-                    //so future Home routes go back to dashboard
-                    var lastHomeKey = getLastHomeKey();
-                    app.user.lastState.set(lastHomeKey, homeOptions.dashboard);
-
-                    //then continue on with default record routing
-                    app.router.record("Home", id);
-                }
+                name: 'record',
+                route: ':module/:id(/:action)'
             },
             {
-                name: "record",
-                route: ":module/:id"
-            },
-            {
-                name: "record",
-                route: ":module/:id/:action"
-            },
-            {
-                name: "record_layout",
-                route: ":module/:id/layout/:view",
-                callback: function(module, id, view) {
-                    // FIXME: We shouldn't be calling private methods like this.
-                    // Will be addressed in SC-2761.
-                    if (!app.router._moduleExists(module)) {
-                        return;
-                    }
-                    app.router.record(module, id, null, view);
-               }
-            },
-            {
-                name: "record_layout_action",
-                route: ":module/:id/layout/:view/:action",
+                name: 'recordLayoutAction',
+                route: ':module/:id/layout/:layout(/:action)',
                 callback: function(module, id, layout, action) {
                     // FIXME: We shouldn't be calling private methods like this.
                     // Will be addressed in SC-2761.
@@ -410,18 +353,13 @@
                     }
                     app.router.record(module, id, action, layout);
                 }
-            },
-            {
-                name: "not_found",
-                route: /^.*$/,
-                callback: function() {
-                    app.error.handleHttpError({status: 404});
-                }
             }
         ];
 
-        app.routing.setRoutes(routes);
+        app.router.addRoutes(routes);
+    });
 
+    app.events.on('app:init', function() {
         // allow subscription to successful token refresh
         app.api.setRefreshTokenSuccessCallback(function(callback) {
             callback();
@@ -491,9 +429,6 @@
                 title = getTitle(currModel);
                 //for record view, the title should be updated once model is fetched
                 currModel.on("change", setTitle, this);
-                app.controller.layout.once("dispose", function() {
-                    currModel.off("change", setTitle);
-                });
                 prevModel = currModel;
             } else {
                 title = getTitle();
@@ -531,11 +466,17 @@
          *   otherwise.
          */
         bwcRedirect: function(options) {
-            if (options && _.isArray(options.args) && options.args[0]) {
-                var module = options.args[0],
-                    id = options.args[1],
-                    action = id ? 'DetailView' : 'index',
-                    meta = app.metadata.getModule(module);
+            if (options.route && !_.contains(bwcRedirectRoutes, options.route)) {
+                // this route is a non bwc redirecting one
+                return true;
+            }
+
+            if (_.isArray(options.args) && options.args[0]) {
+                var module = options.args[0];
+                var id = options.args[1];
+                var action = id ? 'DetailView' : 'index';
+                var meta = app.metadata.getModule(module);
+
                 if (meta && meta.isBwcEnabled) {
                     var sidecarAction = options.args[2] || options.route,
                         bwcAction = app.bwc.getAction(sidecarAction);
@@ -554,9 +495,11 @@
                     _.defer(function() {
                         app.router.navigate(redirect, {trigger: true, replace: true});
                     });
+
                     return false;
                 }
             }
+
             return true;
         },
 

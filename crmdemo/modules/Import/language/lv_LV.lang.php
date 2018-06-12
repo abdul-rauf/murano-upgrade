@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,6 +20,7 @@ global $timedate;
  
 $mod_strings = array (
     'LBL_GOOD_FILE' => 'Importa fails nolasīts veiksmīgi',
+    'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Importētais ieraksts ir iesaistīts procesā, un to nevar rediģēt, jo šis process ir bloķējis dažu lauku rediģēšanu.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'ieraksti nav importēti kļūdu dēl',
     'LBL_UPDATE_SUCCESSFULLY' => 'ieraksti veiksmīgi atjaunināti',
     'LBL_SUCCESSFULLY_IMPORTED' => 'ieraksti izveidoti',
@@ -109,7 +110,7 @@ $mod_strings = array (
     'LBL_CUSTOM' => 'Pielāgots',
     'LBL_CUSTOM_CSV' => 'Pielāgots ar komatu atdalīts fails',
     'LBL_CSV' => 'fails manā datorā',
-    'LBL_EXTERNAL_SOURCE' => 'ārējā programma vai serviss',
+    'LBL_EXTERNAL_SOURCE' => 'ārējā programma vai pakalpojums',
     'LBL_TAB' => 'Ar cilni ierobežots fails',
     'LBL_CUSTOM_DELIMITED' => 'Pielāgots atdalītais fails',
     'LBL_CUSTOM_DELIMITER' => 'Lauki atdalīti ar:',
@@ -118,7 +119,7 @@ $mod_strings = array (
     'LBL_DONT_MAP' => '-- Nekartējiet šo lauku --',
     'LBL_STEP_MODULE' => 'Kurā modulī vēlaties importēt datus?',
     'LBL_STEP_1_TITLE' => '1. solis: Izvēlieties datu avotu',
-    'LBL_CONFIRM_TITLE' => 'Solis{0}: Apstiprināt importa faila īpašības',
+    'LBL_CONFIRM_TITLE' => '{0}. solis: Apstiprināt importa faila īpašības',
     'LBL_CONFIRM_EXT_TITLE' => 'Solis{0}: Apstiprināt ārējā datu avota īpašības',
     'LBL_WHAT_IS' => 'Mani dati ir:',
     'LBL_MICROSOFT_OUTLOOK' => '"Microsoft Outlook"',
@@ -132,7 +133,7 @@ $mod_strings = array (
     'LBL_UNPUBLISH' => 'Nepublicēt',
     'LBL_NEXT' => 'Tālāk >',
     'LBL_BACK' => '< Atpakaļ',
-    'LBL_STEP_2_TITLE' => '{0} solis: Augšupielādē importa failu',
+    'LBL_STEP_2_TITLE' => '{0}. solis: Augšupielādējiet importa failu',
     'LBL_HAS_HEADER' => 'Galvenes ieraksts:',
     'LBL_NUM_1' => '1.',
     'LBL_NUM_2' => '2.',
@@ -187,8 +188,8 @@ $mod_strings = array (
     'LBL_TAB_NUM_1' => 'Sāciet lietojumprogrammas darbību un atveriet datu failu',
     'LBL_TAB_NUM_2' => 'Izvēlieties <b> "Saglabāt kā..."</b> vai <b> "Eksportēt..." </b> izvēlnes iespēju.',
     'LBL_TAB_NUM_3' => 'Saglabājiet failu <b>TSV</b> vai <b>Ar cilni atdalītas vērtības</b> formātā.',
-    'LBL_STEP_3_TITLE' => '{0} solis: Apstiprini lauku kartēšanu',
-    'LBL_STEP_DUP_TITLE' => '{0} solis: Pārbaudi iespējamos dublikātus',
+    'LBL_STEP_3_TITLE' => '{0}. solis: Apstipriniet lauku kartēšanu',
+    'LBL_STEP_DUP_TITLE' => '{0}. solis: Pārbaudiet iespējamos dublikātus',
     'LBL_SELECT_FIELDS_TO_MAP' => 'Zemāk redzamajā sarakstā izvēlieties laukus  importēšanas failam, kuri jāimportē katrā sistēmas laukā. Kad esi pabeidzis, klikšķini <b>"Tālāk"</b>:',
     'LBL_DATABASE_FIELD' => 'Moduļa lauks',
     'LBL_HEADER_ROW' => 'Galvenes ieraksts',
@@ -288,7 +289,7 @@ $mod_strings = array (
     'LBL_MY_SAVED_ADMIN_HELP' => 'Izmanto šo iespēju, lai piemērotu iepriekš uzstādītus importēšanas iestatījumus, tādus kā īpašības, kartēšanas un dublikātu pārbaudi.<br><br>Klikšķini <b>Publicēt</b>, lai kartēšanas būtu pieejamas citiem lietotājiem.<br>Klikšķini <b>Nepublicēt</b>, lai šīs kartēšanas nebūtu pieejams citiem lietotājiem.<br>Klikšķini<b>Dzēst</b>lai dzēstu kartējumus visiem lietotājiem.',
     'LBL_MY_PUBLISHED_HELP' => 'Izmanto šo iespēju, lai piemērotu iepriekš uzstādītus importēšanas iestatījumus, tādus kā īpašības, kartēšanas un dublikātu pārbaudi.',
     'LBL_ENCLOSURE_HELP' => '<p><b>Ierobežotāja rakstu zīme</b> tiek lietota, lai ierobežotu paredzētā lauka saturu, ieskaitot simbolus, kuri lietoti, kā atdalītāji.<br><br>Piemērs:Ja atdalītājs ir komats (,), un Ierobežotāja rakstu zīme ir pēdiņas ("),<br><b>"Cupertino, California"</b> ir importēts vienā laukā lietojumprogrammā un parādās kā <b>Cupertino, California</b>.<br>Ja nav Ierobežotāja rakstu zīmes, vai Ierobežotāja rakstu zīme ir cits simbols,<br><b>"Cupertino, California"</b> ir importēts divos blakus laukos kā <b>"Cupertino</b> un <b>"California"</b>.<br><br>Piezīme: Importa fails var arī nesaturēt Ierobežotāja rakstu zīmes.<br>Noklusētā Ierobežotāja rakstu zīme ar komatu un tab atdalītajiem failiem, kuri izveidoti Excel ir pēdiņas </p>',
-    'LBL_DELIMITER_COMMA_HELP' => 'Izmanto šo iespēju, lai atlasītu un augšupielādētu izklājlapu failu, kurš satur datus, ar importējamajiem datiem.<br />Piemēri: ar komatu atdalīts .csv fails vai eksportēts fails no Microsoft Outlook.',
+    'LBL_DELIMITER_COMMA_HELP' => 'Izmantojiet šo iespēju, lai atlasītu un augšupielādētu izklājlapu failu, kurš satur datus, ar importējamajiem datiem. Piemēri: ar komatu atdalīts .csv fails vai eksportēts fails no Microsoft Outlook.',
     'LBL_DELIMITER_TAB_HELP' => 'Atzīmē šo izvēli, ja simbols, kurš atdala laukus importa failā ir <b>TAB</b>, un faila paplašinājums ir .txt.',
     'LBL_DELIMITER_CUSTOM_HELP' => 'Atzīmē šo iespēju ja rakstuzīme, kura atdala laukus importa failā nav komats vai TAB un ievadi šo rakstuzīmi blakus laukā.',
     'LBL_DATABASE_FIELD_HELP' => 'Šī kolonna attēlo visus moduļa laukus. Atlasi laukus uz kuriem kartēt importa faila ierakstus.',
@@ -304,7 +305,7 @@ $mod_strings = array (
     'LBL_DELETE_MAP_CONFIRMATION' => 'Vai tiešām vēlaties dzēst šos saglabātos importa uzstādījumus?',
     'LBL_THIRD_PARTY_CSV_SOURCES' => 'Ja importa fails ir eksportēts no kāda no sekojošiem avotiem, norādiet šo avotu.',
     'LBL_THIRD_PARTY_CSV_SOURCES_HELP' => 'Atzīmē avotu, lai automātiski piemērotu pielāgotos kartējumus, tādējādi vienkāršojot kartēšanas procesu (nākamais solis)',
-    'LBL_EXTERNAL_SOURCE_HELP' => 'Izmanto šo izvēli, lai importētu datus tieši no ārējās lietojumprogrammas vai servisa, piemēram, Gmail.',
+    'LBL_EXTERNAL_SOURCE_HELP' => 'Izmantojiet šo izvēli, lai importētu datus tieši no ārējās lietojumprogrammas vai pakalpojuma, piemēram, Gmail.',
     'LBL_EXAMPLE_FILE' => 'Lejupielādēt importa faila veidni',
     'LBL_CONFIRM_IMPORT' => 'Jūs esat izvēlējies atjaunināt ierakstus importēšanas procesā. Atjauninājumus esošajiem ierakstiem nevar atcelt. Ierakstus, kuri ir izveidoti importēšanas procesā var izdzēst, ja nepieciešams. Klikšķini Atcelt, lai veidotu tikai jaunus ierakstus, vai klikšķini OK, lai turpinātu.',
     'LBL_CONFIRM_MAP_OVERRIDE' => 'Brīdinājums: Jūs jau esat izvēlējies pielāgoto kartēšanu šim importam, vai vēlies turpināt?',
@@ -321,11 +322,11 @@ $mod_strings = array (
     'LBL_ADD_FIELD_HELP' => 'Izmanto šo izvēli, lai pievienotu vērtību visiem izveidotajiem un/vai atjauninātajiem laukiem. Atlasi lauku un tad ievadi, vai atlasi vērtību šim laukam, kolonnā Noklusētā vērtība.',
     'LBL_MISSING_HEADER_ROW' => 'Nav atrasts galvenes ieraksts',
     'LBL_CANCEL' => 'Atcelt',
-    'LBL_SELECT_DS_INSTRUCTION' => 'Gatavs sākt importēšanu? Izvēlies datu avotu, no kura vēlies importēt.',
-    'LBL_SELECT_UPLOAD_INSTRUCTION' => 'Atlasi failu Jūsu datorā, kurš satur datus kurus vēlies importēt, vai lejupielādē veidni, lai sāktu veidot importa failu.',
-    'LBL_SELECT_PROPERTY_INSTRUCTION' => 'Šeit attēlots, kā pirmie ieraksti importēšanas failā tiek attēloti ar atrastajām faila īpašībām. Ja galvenes ieraksts ir atrasts, tas ir parādīts tabulas pirmajā rindā. Aplūko importēšanas faila īpašības un ja nepieciešams veic izmaiņas un izveido papildus īpašības.Šo iestatījumu atjaunināšana, atjauninās datus, kuri parādās tabulā.',
-    'LBL_SELECT_MAPPING_INSTRUCTION' => 'Zemāk esošā tabula satur visus moduļa laukus uz kuriem var kartēt datus no importēšanas faila. Ja fails satur galvenes ierakstu, kolonnas failā ir kartētas uz atbilstošiem laukiem. Pārliecinies vai kartējumi ir pareizi un ja nepieciešams veic izmaiņas. Lai palīdzētu pārbaudīt kartējumus, Pirmā rinda attēlo datus no faila. Pārliecinies, ka ir veikti kartējumi uz visiem obligātajiem laukiem (atzīmēti ar zvaigznīti).',
-    'LBL_SELECT_DUPLICATE_INSTRUCTION' => 'Lai izvairītos no ierakstu dublikātiem, atlasi, kuri lauki importēšanas laikā tiks izmantoti dublikātu pārbaudei. Importēšanas faila ieraksti tiks salīdzināti ar esošajiem ierakstiem izmantojot atlasītos laukus. Ja ierakstu dublikāti tiks atrasti, tie tiks attēloti kopā ar importēšanas rezultātiem (nākamajā lapā). Tad tu varēsi izvēlēties kurus no šiem ierakstiem turpināt importēt.',
+    'LBL_SELECT_DS_INSTRUCTION' => 'Esat gatavi sākt importēšanu? Izvēlieties datu avotu, no kura vēlaties importēt.',
+    'LBL_SELECT_UPLOAD_INSTRUCTION' => 'Atlasiet failu Jūsu datorā, kurš satur datus, kurus vēlaties importēt, vai lejupielādējiet veidni, lai sāktu veidot importa failu.',
+    'LBL_SELECT_PROPERTY_INSTRUCTION' => 'Šeit attēlots, kā pirmie ieraksti importēšanas failā tiek attēloti ar atrastajām faila īpašībām. Ja galvenes ieraksts ir atrasts, tas ir parādīts tabulas pirmajā rindā. Aplūkojiet importēšanas faila īpašības un, ja nepieciešams, veiciet izmaiņas un izveidojiet papildus īpašības. Šo iestatījumu atjaunināšanas rezultātā tiks atjaunināti dati, kuri parādās tabulā.',
+    'LBL_SELECT_MAPPING_INSTRUCTION' => 'Zemāk redzamajā tabulā ir visi moduļa lauki, uz kuriem var kartēt datus no importēšanas faila. Ja failā ir galvenes ieraksti, kolonnas failā ir kartētas uz atbilstošiem laukiem. Pārliecinieties, vai kartējumi ir pareizi, un, ja nepieciešams, veiciet izmaiņas. Lai palīdzētu pārbaudīt kartējumus, pirmā rinda attēlo datus no faila. Pārliecinieties, ka ir veikti kartējumi uz visiem obligātajiem laukiem (atzīmēti ar zvaigznīti).',
+    'LBL_SELECT_DUPLICATE_INSTRUCTION' => 'Lai izvairītos no ierakstu dublikātiem, atlasiet, kuri lauki importēšanas laikā tiks izmantoti dublikātu pārbaudei. Importēšanas faila ieraksti tiks salīdzināti ar esošajiem ierakstiem, izmantojot atlasītos laukus. Ja ierakstu dublikāti tiks atrasti, tie tiks attēloti kopā ar importēšanas rezultātiem (nākamajā lapā). Tad varēsiet izvēlēties, kurus no šiem ierakstiem turpināt importēt.',
     'LBL_EXT_SOURCE_SIGN_IN' => 'Pieteikties',
     'LBL_EXT_SOURCE_SIGN_OUT' => 'Izrakstīties',
     'LBL_DUP_HELP' => 'Šeit ir ieraksti importa failā kuri netika importēti, jo satur datus, kuri sakrīt ar esošiem ierakstiem, balstoties uz dublikātu pārbaudi. Dati, kuri sakrīt ir iezīmēti. Lai atkārtoti importētu šos ierakstus, lejupielādē sarakstu, veic izmaiņas un klikšķini <b>Importēt atkārtoti</b>.',

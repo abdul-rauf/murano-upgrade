@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -246,16 +246,16 @@ class OAuthToken extends SugarBean
 
         if ($limit > 1) {
             // Find request tokens that are under the limit but still not this token
-            $ret = $db->limitQuery(
-                "SELECT id FROM oauth_tokens WHERE "
-                ." tstate = ".self::ACCESS
-                ." AND id <> '".$db->quote($this->id)."' "
-                ." AND platform = '".$db->quote($this->platform)."' "
-                ." AND assigned_user_id = '".$db->quote($this->assigned_user_id)."' "
-                ." AND contact_id = '".$db->quote($this->contact_id)."' "
-                ." ORDER BY expire_ts DESC ",
-                0, $limit - 1, true
-            );
+            $query = "SELECT id FROM oauth_tokens WHERE "
+                . " tstate = " . self::ACCESS
+                . " AND id <> " . $db->quoted($this->id)
+                . " AND platform = " . $db->quoted($this->platform)
+                . " AND assigned_user_id = " . $db->quoted($this->assigned_user_id);
+            if (!empty($this->contact_id)) {
+                $query .= " AND contact_id = " . $db->quoted($this->contact_id);
+            }
+            $query .= " ORDER BY expire_ts DESC";
+            $ret = $db->limitQuery($query, 0, $limit - 1, true);
 
             while ($row = $db->fetchByAssoc($ret)) {
                 $ids[] = $db->quote($row['id']);

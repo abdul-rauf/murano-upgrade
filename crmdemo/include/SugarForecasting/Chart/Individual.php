@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -102,13 +102,27 @@ class SugarForecasting_Chart_Individual extends SugarForecasting_Chart_AbstractC
         }
 
         $tp = $this->getTimeperiod();
-        $chart_info = array(
-            'title' => string_format(
+
+        if (!$tp->id) {
+            // Forecast Time Period was out of range
+            $title = '';
+            $quota = null;
+            $xaxis = array();
+            $error = 'ERR_NO_ACTIVE_TIMEPERIOD';
+        } else {
+            $title = string_format(
                 $forecast_strings['LBL_CHART_FORECAST_FOR'],
                 array($tp->name)
-            ),
-            'quota' => $this->getUserQuota(),
-            'x-axis' => $tp->getChartLabels(array()),
+            );
+            $quota = $this->getUserQuota();
+            $xaxis = $tp->getChartLabels(array());
+            $error = false;
+        }
+
+        return array(
+            'title' => $title,
+            'quota' => $quota,
+            'x-axis' => $xaxis,
             'labels' => array(
                 'forecast' => $app_list_strings[$config['buckets_dom']],
                 'sales_stage' => $app_list_strings['sales_stage_dom'],
@@ -119,10 +133,9 @@ class SugarForecasting_Chart_Individual extends SugarForecasting_Chart_AbstractC
                     'worst' => $app_strings['LBL_WORST']
                 )
             ),
-            'data' => $arrData
+            'data' => $arrData,
+            'error' => $error,
         );
-
-        return $chart_info;
     }
 
     /**

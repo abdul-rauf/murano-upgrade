@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -97,10 +97,19 @@
     },
 
     /**
+     * Returns action name.
+     *
+     * @return {string}
+     */
+    getCurrentMethod: function() {
+        return this.collection.method || this.collection.defaultMethod;
+    },
+
+    /**
      * Initialize the labels.
      */
     initLabels: function() {
-        this.LABELSET = this._labelSet[this.collection.method || this.collection.defaultMethod];
+        this.LABELSET = this._labelSet[this.getCurrentMethod()];
     },
 
     /**
@@ -336,7 +345,7 @@
         }
 
         var title = app.lang.get(this.LABELSET.TITLE, this.module, {
-            module: this.modulePlural
+            module: app.lang.getModuleName(this.module, {plural: true})
         });
         this.$holders.title.text(title);
 
@@ -352,13 +361,14 @@
         var size = this.getCompleteRecords(),
             discardSize = this.collection.discards.length,
             failed = this.getFailedRecords();
-        if (discardSize > 0) {
+        // "failed" records may mean field acl restrictions on "update" action
+        if (discardSize > 0 || (this.getCurrentMethod() == 'update' && failed > 0)) {
             //permission warning
             var message = app.lang.get(this.LABELSET['SUCCESS'], this.module, {
-                num: this.totalRecord - discardSize
+                num: this.totalRecord - discardSize - failed
             });
             message += app.lang.get('TPL_MASSUPDATE_WARNING_PERMISSION', this.module, {
-                remain: discardSize
+                remain: discardSize + failed
             });
             app.alert.show('massupdate_final_notice', {
                 level: 'warning',

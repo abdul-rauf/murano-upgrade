@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -25,7 +25,7 @@ $mod_strings = array(
     'LBL_CURRENCIES' => 'Waluty',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Nazwa',
     'LBL_LIST_ACCOUNT_NAME' => 'Nazwa kontrahenta',
-    'LBL_LIST_DATE_CLOSED' => 'Data zamknięcia',
+    'LBL_LIST_DATE_CLOSED' => 'Oczekiwana data zakończenia',
     'LBL_LIST_AMOUNT' => 'Prawdopodobny',
     'LBL_LIST_AMOUNT_USDOLLAR' => 'Przeliczona kwota',
     'LBL_ACCOUNT_ID' => 'ID kontrahenta',
@@ -42,40 +42,40 @@ $mod_strings = array(
     'UPDATE' => 'Szansa — Aktualizacja waluty',
     'UPDATE_DOLLARAMOUNTS' => 'Aktualizuj kwotę w USD',
     'UPDATE_VERIFY' => 'Weryfikuj kwoty',
-    'UPDATE_VERIFY_TXT' => 'Weryfikuje, czy wartości w Szansach są zapisane w postaci dziesiętnej przy użyciu cyfr (0-9) i seperatora (,).',
-    'UPDATE_FIX' => 'Napraw kwoty',
-    'UPDATE_FIX_TXT' => 'Próba naprawienia nieprawidłowych kwot poprzez przekształcenie bieżących wartości do postaci dziesiętnej. Wszelkie zmodyfikowane kwoty zostaną zapisane w kopii zapasowej w polu bazy danych amount_backup. Jeśli operacja spowoduje powstanie błędów, nie uruchamiaj ponownie bez przywrócenia poprzednich wartości z kopii zapasowej, ponieważ grozi to nadpisaniem kopii bezpieczeństwa błędnymi danymi.',
+    'UPDATE_VERIFY_TXT' => 'Weryfikuje, czy wartości w Szansach są zapisane w postaci dziesiętnej przy użyciu cyfr (0-9) i separatora (,).',
+    'UPDATE_FIX' => 'Popraw kwoty',
+    'UPDATE_FIX_TXT' => 'Przeprowadza próbę naprawy niewłaściwych kwot przez utworzenie prawidłowych wyrażeń dziesiętnych. Każda modyfikacja kwoty jest zachowana w bazie danych, w polu amount_backup. Jeśli wykonasz tę operację i pojawi się błąd, nie uruchamiaj jej ponownie, zanim nie zostaną przywrócone poprzednie wartości. Może to spowodować nadpisanie danych błędnymi wartościami.',
     'UPDATE_DOLLARAMOUNTS_TXT' => 'Aktualizuj kwoty szans w oparciu o aktualne stawki kursowe USD. Wartości te są używane do sporządzania wykresów oraz kwot widoku listy.',
     'UPDATE_CREATE_CURRENCY' => 'Tworzenie nowej waluty:',
-    'UPDATE_VERIFY_FAIL' => 'Błąd weryfikacji rekordu:',
+    'UPDATE_VERIFY_FAIL' => 'Weryfikacja rekordu nie powiodła się:',
     'UPDATE_VERIFY_CURAMOUNT' => 'Bieżąca kwota:',
-    'UPDATE_VERIFY_FIX' => 'Naprawa zwróci',
-    'UPDATE_INCLUDE_CLOSE' => 'Dodaj zamknięte rekordy',
+    'UPDATE_VERIFY_FIX' => 'Wykonanie naprawy powinno dać',
+    'UPDATE_INCLUDE_CLOSE' => 'Uwzględnij uwagę zamknięte rekordy',
     'UPDATE_VERIFY_NEWAMOUNT' => 'Nowa kwota:',
     'UPDATE_VERIFY_NEWCURRENCY' => 'Nowa waluta:',
-    'UPDATE_DONE' => 'Zrobione',
-    'UPDATE_BUG_COUNT' => 'Znaleziono błąd, trwa próba naprawienia:',
+    'UPDATE_DONE' => 'Wykonano',
+    'UPDATE_BUG_COUNT' => 'Znaleziono błędy i podjęto próbę naprawy:',
     'UPDATE_BUGFOUND_COUNT' => 'Znalezione błędy:',
     'UPDATE_COUNT' => 'Zaktualizowane rekordy:',
     'UPDATE_RESTORE_COUNT' => 'Przywrócono kwoty rekordów:',
     'UPDATE_RESTORE' => 'Przywróć kwoty',
-    'UPDATE_RESTORE_TXT' => 'Przywraca wartości kwot z kopii bezpieczeństwa utworzonych podczas naprawiania.',
+    'UPDATE_RESTORE_TXT' => 'Przywraca wartości kwot z kopii zapasowej podczas naprawy.',
     'UPDATE_FAIL' => 'Nie można zaktualizować — ',
     'UPDATE_NULL_VALUE' => 'Kwota ma wartość NULL. Ustawiono na 0 —',
     'UPDATE_MERGE' => 'Scal waluty',
     'UPDATE_MERGE_TXT' => 'Scal wiele walut w jedną. Jeśli dla tej samej waluty występuje kilka rekordów waluty, można je połączyć. Spowoduje to również połączenie walut dla wszystkich innych modułów.',
     'LBL_ACCOUNT_NAME' => 'Nazwa kontrahenta:',
     'LBL_CURRENCY' => 'Waluta:',
-    'LBL_DATE_CLOSED' => 'Data zamknięcia:',
+    'LBL_DATE_CLOSED' => 'Oczekiwana data zakończenia:',
     'LBL_DATE_CLOSED_TIMESTAMP' => 'Znacznik czasu oczekiwanej daty zakończenia',
     'LBL_TYPE' => 'Typ:',
     'LBL_CAMPAIGN' => 'Kampania:',
     'LBL_NEXT_STEP' => 'Następny krok:',
-    'LBL_LEAD_SOURCE' => 'Źródło pozyskania:',
-    'LBL_SALES_STAGE' => 'Etap sprzedaży:',
+    'LBL_LEAD_SOURCE' => 'Źródło pozyskania',
+    'LBL_SALES_STAGE' => 'Etap sprzedaży',
     'LBL_SALES_STATUS' => 'Status',
-    'LBL_PROBABILITY' => 'Prawdopodobieństwo (%):',
-    'LBL_DESCRIPTION' => 'Opis:',
+    'LBL_PROBABILITY' => 'Prawdopodobieństwo (%)',
+    'LBL_DESCRIPTION' => 'Opis',
     'LBL_DUPLICATE' => 'Szansa prawdopodobnie już istnieje',
     'MSG_DUPLICATE' => 'Utworzenie tej szansy prawdopodobnie spowoduje powstanie duplikatu już istniejącej szansy. Istniejące rekordy szans o podobnych nazwach są wymienione poniżej.<br>Kliknij Zapisz, aby utworzyć nową szansę, lub kliknij Anuluj, aby powrócić do modułu bez utworzenia szansy.',
     'LBL_NEW_FORM_TITLE' => 'Utwórz szansę',
@@ -95,29 +95,29 @@ $mod_strings = array(
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
     'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projekty',
     'LBL_ASSIGNED_TO_NAME' => 'Przydzielono do:',
-    'LBL_LIST_ASSIGNED_TO_NAME' => 'Przydzielony użytkownik',
+    'LBL_LIST_ASSIGNED_TO_NAME' => 'Przypisano do',
     'LBL_LIST_SALES_STAGE' => 'Etap sprzedaży',
     'LBL_MY_CLOSED_OPPORTUNITIES' => 'Moje zamknięte szanse',
     'LBL_TOTAL_OPPORTUNITIES' => 'Wszystkie szanse',
     'LBL_CLOSED_WON_OPPORTUNITIES' => 'Szanse zakończone sukcesem',
-    'LBL_ASSIGNED_TO_ID' => 'Przydzielono do:',
+    'LBL_ASSIGNED_TO_ID' => 'Przypisano do:',
     'LBL_CREATED_ID' => 'Utworzone przez (ID)',
-    'LBL_MODIFIED_ID' => 'Zmodyfikowane przez (ID)',
-    'LBL_MODIFIED_NAME' => 'Zmodyfikowane przez (nazwa)',
-    'LBL_CREATED_USER' => 'Utworzony użytkownik',
+    'LBL_MODIFIED_ID' => 'Zmodyfikowano przez (ID)',
+    'LBL_MODIFIED_NAME' => 'Zmodyfikowane przez (nazwa użytkownika)',
+    'LBL_CREATED_USER' => 'Utworzono przez',
     'LBL_MODIFIED_USER' => 'Zmodyfikowane przez',
     'LBL_CAMPAIGN_OPPORTUNITY' => 'Szansa kampanii',
     'LBL_PROJECT_SUBPANEL_TITLE' => 'Projekty',
-    'LABEL_PANEL_ASSIGNMENT' => 'Przydziały',
+    'LABEL_PANEL_ASSIGNMENT' => 'Przydział',
     'LNK_IMPORT_OPPORTUNITIES' => 'Import szans',
     'LBL_EDITLAYOUT' => 'Edytuj układ' /*for 508 compliance fix*/,
     //For export labels
-    'LBL_EXPORT_CAMPAIGN_ID' => 'Kampania',
+    'LBL_EXPORT_CAMPAIGN_ID' => 'ID kampanii',
     'LBL_OPPORTUNITY_TYPE' => 'Typ szansy',
-    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Przydzielono do (nazwa)',
-    'LBL_EXPORT_ASSIGNED_USER_ID' => 'Przydzielono do (ID)',
+    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Przypisano do (nazwa użytkownika)',
+    'LBL_EXPORT_ASSIGNED_USER_ID' => 'Przypisano do (ID użytkownika)',
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Zmodyfikowano przez (ID)',
-    'LBL_EXPORT_CREATED_BY' => 'Utworzono przez (ID)',
+    'LBL_EXPORT_CREATED_BY' => 'Utworzone przez (ID)',
     'LBL_EXPORT_NAME' => 'Nazwa',
     // SNIP
     'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Adresy e-mail powiązanych kontaktów',
@@ -127,16 +127,16 @@ $mod_strings = array(
     'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Umowy',
     'LBL_PRODUCTS' => 'Pozycje oferty',
     'LBL_RLI' => 'Pozycje szansy',
-    'LNK_OPPORTUNITY_REPORTS' => 'Raporty szans',
+    'LNK_OPPORTUNITY_REPORTS' => 'Wyświetl raporty szans',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Oferty',
     'LBL_TEAM_ID' => 'ID zespołu',
     'LBL_TIMEPERIODS' => 'Przedziały czasu',
     'LBL_TIMEPERIOD_ID' => 'ID przedziału czasu',
-    'LBL_COMMITTED' => 'Przydzielono',
+    'LBL_COMMITTED' => 'Zadeklarowano',
     'LBL_FORECAST' => 'Uwzględnij w prognozie',
-    'LBL_COMMIT_STAGE' => 'Etap zaangażowania',
+    'LBL_COMMIT_STAGE' => 'Etap wykonania',
     'LBL_COMMIT_STAGE_FORECAST' => 'Prognoza',
-    'LBL_WORKSHEET' => 'Arkusz roboczy',
+    'LBL_WORKSHEET' => 'Arkusz',
 
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Oferty',
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Klikając Potwierdź, usuniesz WSZYSTKIE dane Prognoz i zmienisz Widok szans. Jeśli nie było to Twoim zamiarem, kliknij anuluj, aby wrócić do poprzednich ustawień.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Klikając przycisk Potwierdź, wymażesz WSZYSTKIE dane prognozy i zmienisz widok możliwości. '
+        .'Również WSZYSTKIE definicje procesów z modułem docelowym pozycji wiersza przychodów zostaną wyłączone. '
+        .'Jeśli to nie o to ci chodziło, kliknij przycisk anuluj, aby powrócić do poprzednich ustawień.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Jeśli wszystkie Pozycje szansy są zamknięte i co najmniej jedna została zakończona sukcesem,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'etap sprzedaży zostanie ustawiony jako Zakończone sukcesem.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Jeśli wszystkie Pozycje szansy mają etap sprzedaży Zakończone porażką,',
@@ -162,31 +166,30 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduł {{plural_module_name}} zezwala na śledzenie od początku do końca indywidualnej sprzedaży i pozycji powiązanych z daną sprzedażą. Każdy rekord {{module_name}} jest nagłówkiem grupy {{revenuelineitems_module}} i odnosi się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. Każdy moduł {{revenuelineitems_singular_module}} określa szansę sprzedaży określonego produktu i zawiera odpowiednie dane sprzedaży. Każdy moduł {{revenuelineitems_singular_module}} zazwyczaj będzie przechodzić przez kilka faz sprzedaży do momentu oznaczenia jako Zamknięta zrealizowana lub Zamknięta niezrealizowana. Rekord {{module_name}} odpowiada ilości i oczekiwanej dacie zamknięcia dla rekordu {{revenuelineitems_module}}. {{plural_module_name}} i {{revenuelineitems_module}} można dalej stosować, korzystając z modułu {{forecasts_singular_module}} w systemie Sugar do wyświetlania i przewidywania trendów sprzedaży, a także koncentrowania pracy w celu osiągnięcia targetów sprzedaży.',
+    'LBL_HELP_RECORDS' => 'Moduł {{plural_module_name}} pozwala na śledzenie poszczególnych sprzedaży od początku do końca. Każdy rekord {{module_name}} reprezentuje potencjalną sprzedaż i obejmuje odpowiednie dane sprzedaży jak również odnoszące się do innych ważnych zapisów, takich jak {{quotes_module}}, {{contacts_module}} itd. {{module_name}} zazwyczaj będzie wykazywał postęp przez kilka etapów sprzedaży, dopóki nie zostanie oznaczony jako "Zamknięty pozyskany" lub "Zamknięty utracony". {{plural_module_name}} można wykorzystywać nawet w większym stopniu, korzystając z modułu Sugar {{forecasts_singular_module}} do zrozumienia i przewidywania trendów sprzedaży, a także skoncentrowania się na pracy w celu osiągnięcia określonych norm sprzedaży.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moduł {{plural_module_name}} zezwala na śledzenie od początku do końca indywidualnej sprzedaży i pozycji powiązanych z daną sprzedażą. Każdy rekord {{module_name}} jest nagłówkiem dla grupy {{revenuelineitems_module}} i jest powiązany z ważnymi rekordami, takimi jak: {{quotes_module}}, {{contacts_module}} itp.
+    'LBL_HELP_RECORD' => 'Moduł {{plural_module_name}} umożliwia śledzenie od początku do końca indywidualnej sprzedaży i pozycji powiązanych z daną sprzedażą. Każdy rekord {{module_name}} reprezentuje potencjalną sprzedaż i zawiera ważne rekordy, takie jak: {{quotes_module}}, {{contacts_module}} itp.
 
-- Edytuj pola tego rekordu poprzez kliknięcie odpowiedniego pola lub przycisku Edytuj.
-- Przeglądaj lub modyfikuj powiązania z innymi rekordami w panelach podrzędnych (łącznie z panelem {{revenuelineitems_module}}), przełączając widok lewego dolnego panelu na Widok danych.
-- Dodawaj i przeglądaj komentarze użytkowników i zapisuj historię zmian rekordu w module {{activitystream_singular_module}} poprzez przełączenie widoku dolnego lewego panelu na Panel aktywności.
+- Edytuj pola tego rekordu, klikając odpowiednie pole lub przycisk Edytuj.
+- Przeglądaj lub modyfikuj powiązania z innymi rekordami w panelach podrzędnych, przełączając widok lewego dolnego panelu na Widok danych.
+- Dodawaj i przeglądaj komentarze użytkowników i zapisuj historię zmian rekordu w module {{activitystream_singular_module}} poprzez przełączenie widoku dolnego lewego panelu na "Strumień aktywności".
 - Obserwuj lub dodaj do ulubionych ten rekord za pomocą ikon znajdujących się z prawej strony nazwy rekordu.
 - Dodatkowe działania dostępne są w liście rozwijanej menu Działania po prawej stronie przycisku Edytuj.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduł {{plural_module_name}} zezwala na śledzenie od początku do końca indywidualnej sprzedaży i pozycji powiązanych z daną sprzedażą. Każdy rekord {{module_name}} jest nagłówkiem dla grupy {{revenuelineitems_module}} i jest powiązany z ważnymi rekordami, takimi jak: {{quotes_module}}, {{contacts_module}} itp.
+    'LBL_HELP_CREATE' => 'Moduł {{plural_module_name}} umożliwia śledzenie od początku do końca indywidualnej sprzedaży i pozycji powiązanych z daną sprzedażą. Każdy rekord {{module_name}} reprezentuje potencjalną sprzedaż i zawiera odpowiednie dane sprzedaży oraz ważne rekordy powiązane z innymi, takie jak: {{quotes_module}}, {{contacts_module}} itp.
 
 Aby utworzyć moduł {{module_name}}:
 1. Wprowadź żądane wartości w polach.
- - Pola oznaczone jako Wymagane należy wypełnić przez zapisaniem.
- - W razie potrzeby kliknij opcję Wyświetl więcej, aby wyświetlić dodatkowe pola.
-2. Kliknij opcję Zapisz, aby zakończyć nowy rekord i wrócić do poprzedniej strony.
-3. Po zapisaniu użyj panelu podrzędnego {{revenuelineitems_module}} w celu dodania pozycji pojedynczych do modułu {{module_name}}.',
+ - Pola oznaczone jako "Wymagane" należy wypełnić przez zapisaniem.
+ - W razie potrzeby kliknij opcję "Wyświetl więcej", aby wyświetlić dodatkowe pola.
+2. Kliknij opcję "Zapisz", aby zakończyć nowy rekord i wrócić do poprzedniej strony.',
 
 // END PRO/CORP
 
     //Marketo
-    'LBL_MKTO_SYNC' => 'Synchronizuj z Marketo®',
+    'LBL_MKTO_SYNC' => 'Synchronizuj z Marketo&reg;',
     'LBL_MKTO_ID' => 'ID namiaru Marketo',
 
     'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => '10 najlepszych szans sprzedażowych',

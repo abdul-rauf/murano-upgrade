@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -68,7 +68,7 @@ $mod_strings = array(
     'LBL_MODIFIED_BY' => 'Змінено:',
     'LBL_SEND_ANYWAYS' => 'Ви дійсно бажаєте надіслати/зберегти це email-повідомлення без теми?',
     'LBL_LIST_EDIT_BUTTON' => 'Редагувати',
-    'LBL_ACTIVITIES_REPORTS' => 'Звіт по активностям',
+    'LBL_ACTIVITIES_REPORTS' => 'Звіт за активностями',
     'LBL_PANEL_DETAILS' => 'Деталі',
     'LBL_NOTE_INFORMATION' => 'Огляд',
     'LBL_MY_NOTES_DASHLETNAME' => 'Мої примітки',
@@ -85,7 +85,7 @@ $mod_strings = array(
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} модуль містить контакти {{plural_module_name}}, які включають текст або вкладення, яке прив&#39;язується до конкретного запису. {{module_name}} записи можуть бути пов&#39;язані з одним записом у багатьох модулях через поле "flex relate field" і з одиничним {{contacts_singular_module}}. {{plural_module_name}} може містити загальний текст про запис або навіть вкладення, що відноситься до запису. Існують різні способи створення {{plural_module_name}} в Sugar як через {{plural_module_name}} модуль, імпорт {{plural_module_name}}, через субпанелі Історія, і т. п. Як тільки {{module_name}} запис створено, ви можете переглянути та редагувати інформацію, що відноситься до {{module_name}} в {{plural_module_name}} режимі перегляду запису. Кожен {{module_name}} запис може бути пов&#39;язаний з іншими записами Sugar, такими як {{accounts_module}}, {{contacts_module}}, {{opportunities_module}}, і багатьма іншими.',
+    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} містить окремі {{plural_module_name}}, які включають текст або вкладення, що відноситься до конкретного запису. Записи {{module_name}} можуть бути пов&#39;язані з одним записом у багатьох модулях через поле "flex relate field", а також можуть бути пов&#39;язані з одним модулем {{contacts_singular_module}}. Модуль {{plural_module_name}} може містити загальний текст про запис або навіть вкладення, що відноситься до запису. Існують різні способи створення запису {{plural_module_name}} в Sugar, використовуючи модуль {{plural_module_name}}, імпорт даних модуля {{plural_module_name}}, через субпанелі Історія і т. д. Після створення запису {{module_name}} можна переглядати та редагувати інформацію, що стосується запису {{module_name}}, в режимі перегляду запису {{plural_module_name}}. Кожен запис {{module_name}} може бути пов&#39;язаний з іншими записами Sugar, такими як {{accounts_module}}, {{contacts_module}}, {{opportunities_module}} і багатьма іншими.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{plural_module_name}} модуль включає контакти {{plural_module_name}}, які містять текст або вкладення, що відноситься до пов&#39;язаного запису.

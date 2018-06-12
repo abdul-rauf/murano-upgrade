@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,7 +16,7 @@
 
 ({
     events: {
-        'click .qs-tag': 'handleTagSelection'
+        'click .qs-tag a': 'handleTagSelection'
     },
 
     initialize: function(options) {
@@ -43,7 +43,7 @@
             this.close();
         }, this);
 
-        this.collection.on('sync', this.quicksearchHandler,  this);
+        this.collection.on('sync', this.quicksearchHandler, this);
 
         //Listener for receiving focus for up/down arrow navigation:
         this.on('navigate:focus:receive', function() {
@@ -232,7 +232,7 @@
      * Dispose the keydown events for the view.
      */
     disposeKeyEvents: function() {
-        this.$el.off();
+        this.$el.off('keydown keyup');
     },
 
     /**

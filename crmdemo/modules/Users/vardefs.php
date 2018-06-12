@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -176,7 +176,7 @@ $dictionary['User'] = array(
             'type' => 'bool',
             'default' => '0',
             'studio' => array('listview' => false, 'searchview'=>false, 'related' => false),
-            // Remove from Process Author
+            // Remove from Advanced Workflow
             // To add finer grain validation, you could do something like this
             // 'processes' => array(
             //    'isCurrentUserAdmin',
@@ -366,6 +366,7 @@ $dictionary['User'] = array(
             'dbType' => 'varchar',
             'len' => '150',
             'group' => 'address',
+            'group_label' => 'LBL_ADDRESS',
         ) ,
         'address_city' => array(
             'name' => 'address_city',
@@ -927,6 +928,16 @@ $dictionary['User'] = array(
          'type' => 'enum',
          'vname' => 'LBL_PREFERRED_LANGUAGE',
          'options' => 'available_language_dom',
+            'studio' => array(
+                'editview'=>false,
+                'detailview' => false,
+                'listview' => false,
+                'quickcreate'=>false,
+                'searchview'=>false,
+                'wirelesseditview' => false,
+                'wirelessdetailview' => false,
+                'wirelesslistview' => false,
+            ),
       ),
 
 
@@ -974,10 +985,28 @@ $dictionary['User'] = array(
                 'status',
                 'last_name',
                 'first_name',
-                'id'
+                'id',
             )
         ) ,
         array(
+            'name' => 'idx_user_first_last',
+            'type' => 'index',
+                'fields' => array(
+                'first_name',
+                'last_name',
+                'deleted'
+                )
+            ) ,
+            array(
+                'name' => 'idx_user_last_first',
+                'type' => 'index',
+                'fields' => array(
+                'last_name',
+                'first_name',
+                'deleted'
+                )
+            ) ,
+            array(
 			'name' => 'idx_users_reports_to_id',
 			'type' => 'index',
 			'fields' => array('reports_to_id', 'id')

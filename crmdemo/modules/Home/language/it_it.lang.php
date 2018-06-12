@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -55,7 +55,7 @@ $mod_strings = array (
   'LNK_NEW_LEAD' => 'Nuovo Lead',
   'LNK_NEW_CASE' => 'Nuovo Reclamo',
   'LNK_NEW_NOTE' => 'Nuova Nota o Allegato',
-  'LNK_NEW_CALL' => 'Nuova Chiamata',
+  'LNK_NEW_CALL' => 'Log chiamata',
   'LNK_NEW_EMAIL' => 'Archivia Email',
   'LNK_COMPOSE_EMAIL' => 'Componi Email',
   'LNK_NEW_MEETING' => 'Nuova Riunione',
@@ -91,11 +91,11 @@ $mod_strings = array (
   'LBL_LAST_7_DAYS'=>'Ultimi 7 Giorni',
   'LBL_NEXT_7_DAYS'=>'Prossimi 7 Giorni',
   'LBL_LAST_MONTH'=>'Ultimo Mese',
-  'LBL_NEXT_MONTH'=>'Prossimo Mese',
+  'LBL_NEXT_MONTH'=>'Mese prossimo',
   'LBL_LAST_QUARTER'=>'Ultimo Trimestre',
   'LBL_THIS_QUARTER'=>'Trimestre Corrente',
-  'LBL_LAST_YEAR'=>'Anno Precedente',
-  'LBL_NEXT_YEAR'=>'Anno Successivo',
+  'LBL_LAST_YEAR'=>'Anno scorso',
+  'LBL_NEXT_YEAR'=>'Anno prossimo',
   'LBL_LAST_30_DAYS' => 'Ultimi 30 Giorni',
   'LBL_NEXT_30_DAYS' => 'Prossimi 30 Giorni',
   'LBL_THIS_MONTH' => 'Mese Corrente',

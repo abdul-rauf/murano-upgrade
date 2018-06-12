@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -117,7 +117,7 @@ $mod_strings = array (
     'LBL_PDF_INVOICE_TITLE' => '청구서',
     'LBL_PDF_ITEM_EXT_PRICE' => 'Ext. 가격',
     'LBL_PDF_ITEM_DISCOUNT' => '할인',
-    'LBL_PDF_ITEM_SELECT_DISCOUNT' => '할인',
+    'LBL_PDF_ITEM_SELECT_DISCOUNT' => ' ',
     'LBL_PDF_ITEM_LIST_PRICE' => '가격 목록',
     'LBL_PDF_ITEM_PRODUCT' => '견적 라인아이템',
     'LBL_PDF_ITEM_QUANTITY' => '분량',

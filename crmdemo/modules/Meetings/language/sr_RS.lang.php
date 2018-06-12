@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Pošaljite email svim pozvanima.',
     'LBL_POPUP_REMINDER' => 'Iskačući prozor podsetnik',
-    'LBL_POPUP_REMINDER_TIME' => 'Iskačući vremenski podsetnik',
+    'LBL_POPUP_REMINDER_TIME' => 'Vreme podsetnika za iskačući prozor',
     'LBL_EMAIL_REMINDER' => 'Email podsetnik',
-    'LBL_EMAIL_REMINDER_TIME' => 'Vreme email podsetnika',
+    'LBL_EMAIL_REMINDER_TIME' => 'Vreme podsetnika za e-poštu',
     'LBL_REMOVE' => 'Ukloni',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Zakazivanje',
 	'LBL_SEARCH_BUTTON'=> 'Pretraga',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Obriši sva ponavljanja',
     'LBL_DATE_END_ERROR' => 'Datum kraja je pre datuma početka',
     'LBL_REPEAT_PARENT_ID' => 'Matični ID ponavljanja',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID ponavljanja sastanka. Datum početka izvornog sastanka',
     'LBL_RECURRING_SOURCE' => 'Izvor ponavljanja',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Da li ste sigurni da želite da uklonite ponavljajuće zapise?',
     'LBL_RECURRENCE' => 'Ponavljanje',

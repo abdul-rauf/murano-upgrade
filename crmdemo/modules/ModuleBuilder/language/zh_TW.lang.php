@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -307,7 +307,7 @@ $mod_strings = array(
         'layoutsHelp'=> '選取<b>需要編輯的版面配置</b>。<br/<br/>如需變更包含可用於輸入資料之資料欄位的版面配置，按一下<b>編輯檢視表</b>。<br/><br/>如需變更編輯檢視表欄位中所輸入資料的版面配置，按一下<b>詳情檢視表</b>。<br/><br/>如需變更預設清單中顯示的欄，按一下<b>清單檢視表</b>。<br/><br/>如需變更基礎和進階搜尋表單版面配置，按一下<b>搜尋</b>。',
         'subpanelHelp'=> '選取需要編輯的<b>子面板</b>。',
         'searchHelp' => '選取需要編輯的<b>搜尋</b>版面配置。',
-        'labelsBtn'	=> '按一下<b>儲存</b>以儲存您的自訂標籤。',
+        'labelsBtn'	=> '編輯<b>標籤</b>，顯示該模組的值。',
         'newPackage'=>'按一下<b>新封裝</b>以建立新的封裝。',
         'mbHelp'    => '<b>歡迎來到模組建立器。</b><br/><br/>使用<b>模組建立器</b>建立封裝，其中包含基於標準和自訂對象的自訂模組<br/><br/>首先按一下<b>新增封裝</b>以建立一個新封裝，或選取一個封裝進行編輯。<br/><br/><b>封裝</b>可作為自訂模組的容器，所有自訂個模組都屬於同一專案。封裝可包含一個或多個自訂模組，它們互相關聯並與應用程式中的其他模組關聯。 <br/><br/>例如，您可能要建立一個封裝，其中包含一個與標準帳戶模組關聯的自訂模組。或者，您可能要建立一個包含多個模組的封裝，其中的模組作為一個專案相互協作，並且互相關聯並與應用程式中的其他模組關聯。',
         'exportBtn' => '按一下<b>匯出自訂</b>以建立一個封裝，此封裝包含工作室中設定的適用於指定模組的自訂。',
@@ -713,6 +713,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'名稱－必須以字母開頭，且只能包含字母、數字和底線。不得使用空格或其他特殊字元。',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'封裝金鑰已存在',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'封裝名稱已存在',
+'LBL_JS_PACKAGE_NAME'=>'封裝名稱－必須以字母開頭，且只能包含字母、數字和底線。不得使用空格或其他特殊字元。',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'金鑰－必須是英數字元且必須以字母開頭。',
 'LBL_JS_VALIDATE_KEY'=>'金鑰－必須是英數字元，必須以字母開頭且不得包含空格。',
 'LBL_JS_VALIDATE_LABEL'=>'請輸入將用作模組顯示名稱的標籤',
@@ -737,8 +738,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'您確定要刪除這個關係嗎？<br>注意：此作業可能無法在數分鐘內完成。',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'這將使這個關係永久化。您確定要部署此關係嗎？',
 'LBL_CONFIRM_DONT_SAVE' => '自上次儲存以來已進行變更，您想要儲存嗎？',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -53,6 +53,7 @@ $mod_strings = array (
   'LBL_API_OAUTHTOKEN' => 'Fitxa OAuth',
   'LBL_AUTH_UNSUPPORTED' => "Aquest mètode d&#39;autorització no és compatible amb l&#39;aplicació",
   'LBL_AUTH_ERROR' => 'L&#39;intent de connectar amb el compte ha fallat.',
+  'LBL_CHANGE_APPLICATION_ERROR' => 'Els usuaris no poden modificar el nom de l&#39;aplicació.',
   'LBL_VALIDATED' => 'Connectat',
   'LBL_ACTIVE' => 'Actiu',
   'LBL_OAUTH_NAME' => '%s',

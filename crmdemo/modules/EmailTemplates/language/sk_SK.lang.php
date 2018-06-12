@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -18,12 +18,12 @@ $mod_strings = array(
     'LBL_BODY'                          => 'Popis',
     'LBL_CLOSE'                         => 'Zavrieť',
     'LBL_COLON'                         => ':',
-    'LBL_DESCRIPTION'                   => 'Popis',
+    'LBL_DESCRIPTION'                   => 'Popis:',
     'LBL_EDIT_ALT_TEXT'                 => 'Editovať čistý text',
     'LBL_EMAIL_ATTACHMENT'              => 'Email príloha',
     'LBL_HIDE_ALT_TEXT'                 => 'Skryť čistý text',
     'LBL_HTML_BODY'                     => 'HTML popis',
-    'LBL_INSERT_VARIABLE'               => 'Vložiť Premennú',
+    'LBL_INSERT_VARIABLE'               => 'Vložiť premennú:',
     'LBL_INSERT_URL_REF'                => 'Vložiť URL odkaz',
     'LBL_INSERT_TRACKER_URL'            => 'Vložiť URL odkaz',
     'LBL_INSERT'                        => 'Vložiť',

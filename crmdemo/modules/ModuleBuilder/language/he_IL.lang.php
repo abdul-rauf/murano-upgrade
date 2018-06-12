@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -298,7 +298,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'בחר <b>תצורה לעריכה</b>.<br/<br/>כדי לשנות את התצורה שמכילה את שדות הנתונים להזנת נתונים, לחץ על <b>ערוך תצוגה</b>.<br/><br/>כדי לשנות את התצורה שמציגה את הנתונים שהוזנו בתוך השדות בעריכת תצוגה, לחץ על <b>תצוגה מפורטת</b>.<br/><br/>כדי לשנות את העמודות שמופיעות ברשימת ברירת מחדל, לחץ על <b>תצוגת רשימה</b>.<br/><br/>כדי לשנות את התצורות הבסיסיות והמתקדמות של טופס החיפוש, לחץ על <b>חיפוש</b>.',
         'subpanelHelp'=> 'בחר <b>פאנל-משנה</b> לעריכה.',
         'searchHelp' => 'בחר תצורת <b>חיפוש</b> לעריכה.',
-        'labelsBtn'	=> 'לחץ על <b>שמור</b> כדי לשמור התוויות המותאמות אישית שלך.',
+        'labelsBtn'	=> 'ערוך את ה<b>תוויות</b> שיש להציג עבור ערכים במודול זה.',
         'newPackage'=>'לחץ על <b>חבילה חדשה</b> כדי ליצור חבילה חדשה.',
         'mbHelp'    => '<b> ברוך הבא לבונה המודולים. </b><br/><br/>השתמש ב<b>בונה המודולים</b> כדי ליצור חבילות שמכילות מודולים מותאמים אישית לפי אובייקטים רגילים או מותאמים אישית. <br/><br/>כדי להתחיל, לחץ על <b>חבילה חדשה</b> כדי ליצור חבילה חדשה, או בחר חבילה כדי לערוך אותה.<br/><br/> <b>חבילה</b> פועלת כמו מכולה עבור מודולים מותאמים אישית, אשר כולם חלק מאותו פרויקט. החבילה יכולה להכיל מודולים מותאמים אישית שניתן לקשר אותם זה לזה או למודולים אחרים ביישום. <br/><br/>דוגמאות: ייתכן ותרצה ליצור חבילה שמכילה מודול אחד מותאם אישית שקשור למודול חשבונות הרגיל. או, אולי תרצה ליצור חבילה שמכילה מספר מודולים חדשים שעובד ביחד כפרויקט ואשר קשורים זה לזה ולמודולים אחרים ביישום.',
         'exportBtn' => 'לחץ על <b>ייצוא התאמות אישיות</b> כדי ליצור חבילה שמכילה התאמות אישיות שנעשו ב-Studio עבור מודולים ספציפיים.',
@@ -315,7 +315,7 @@ $mod_strings = array(
 
 //STUDIO2
 'LBL_MODULEBUILDER'=>'בונה מודולים',
-'LBL_STUDIO' => 'Studio',
+'LBL_STUDIO' => 'סטודיו',
 'LBL_DROPDOWNEDITOR' => 'עורך תפריט גלילה',
 'LBL_EDIT_DROPDOWN'=>'ערוך גלילה',
 'LBL_DEVELOPER_TOOLS' => 'כלי מפתחים',
@@ -364,7 +364,7 @@ $mod_strings = array(
 'LBL_LAYOUTS'=>'תצורות',
 'LBL_LISTVIEW'=>'ListView',
 'LBL_RECORDVIEW'=>'צפה ברשומות',
-'LBL_MODULE_TITLE' => 'Studio',
+'LBL_MODULE_TITLE' => 'סטודיו',
 'LBL_NEW_PACKAGE' => 'חבילה חדשה',
 'LBL_NEW_PANEL'=>'פאנל חדש',
 'LBL_NEW_ROW'=>'שורה חדשה',
@@ -704,6 +704,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Name - Must be alphanumeric with no spaces and starting with a letter',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'מפתח חבילה כבר קיים',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'שם חבילה כבר קיים',
+'LBL_JS_PACKAGE_NAME'=>'שם החבילה - חייב להתחיל באות ויכול לכלול רק אותיות, מספרים וקווים תחתונים. לא ניתן להשתמש ברווחים או בתווים מיוחדים אחרים.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'מפתח - צריך להיות אלפאבתי-נומרי ולהתחיל עם אות',
 'LBL_JS_VALIDATE_KEY'=>'Key - Must be alphanumeric',
 'LBL_JS_VALIDATE_LABEL'=>'אנא הזן תווית שתשמש בתור שם התצוגה עבור מודול זה',
@@ -728,8 +729,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Are you sure you wish to delete this relationship?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'זה יהפוך את מערכת היחסים לקבועה. האם אתה בטוח שברצונך לפרוש מערכת יחסים זו?',
 'LBL_CONFIRM_DONT_SAVE' => 'שינויים נעשו מאז השמירה האחרונה שלך, האם ברצונך לשמור?',

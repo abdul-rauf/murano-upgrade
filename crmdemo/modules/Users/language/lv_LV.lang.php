@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Jauna parole',
 	'LBL_NEW_PASSWORD1'					=> 'Parole',
 	'LBL_NEW_PASSWORD2'					=> 'Apstiprināt paroli',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Parole ir veiksmīgi nomainīta.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Parole ir veiksmīgi nomainīta.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'E-pasts ar sistēmas ģenerētu paroli ir nosūtīts lietotājam.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Parole ir veiksmīgi izveidota.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Parole ir veiksmīgi izveidota.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Jauns lietotājs',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Jauns lietotājs',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Kvotas',
     'LBL_FORECASTS'                     => 'Prognozes',
     'LBL_WORKSHEETS'                    => 'Darblapas',
+	'LBL_CALENDARS'                     => 'Kalendāri',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Iegūt citu CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Pārslēgties uz skaņu',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Pārslēgties uz attēlu',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Darba tālrunis',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Publicēt manā atrašanās vietā',
     'LBL_ICAL_PUB_URL'                  => 'iCal integrācijas URL',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Izmantojiet šo URL lai piekļūtu Sugar kalendāram no iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Izmantojiet šo URL, lai abonētu Sugar kalendāru iCal atbalstītās ' .
+                                           'lietotnēs. Sugar kalendāra notikumi ir aplūkojami tikai lasāmā formātā ' .
+                                           'ārējās kalendāra lietotnēs, un jebkādas izmaiņas notikumos ' .
+                                           '(piemēram, tikšanās, zvani utt.) var izdarīt tikai sistēmā Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'Jūsu vaicājuma URL',
 	'LNK_NEW_USER'						=> 'Izveidot jaunu lietotāju',
 	'LNK_NEW_PORTAL_USER'				=> 'Izveidot portāla API lietotāju',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Lietotāja atskaites',
     'LBL_CONTACTS_SYNC' => 'Kontaktpersonas',
-
+    'LBL_DETAIL' => 'Lietotāja profils',
 ); // END STRINGS DEFS
 
 ?>

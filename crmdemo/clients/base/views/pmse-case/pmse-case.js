@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -15,11 +15,15 @@
         'click .record-edit-link-wrapper': 'handleEdit'
     },
 
+    /**
+     * @deprecated Since 7.8. Will be removed in 7.10.
+     * @param options
+     */
     initialize: function(options) {
-
-        this.case = this.options.context.get('case');
-        _.bindAll(this);
-        options.meta = _.extend({}, app.metadata.getView(this.options.module, 'record'), options.meta);
+        app.logger.warn('View.Views.Base.PmseCaseView is deprecated and will be removed in 7.10');
+        this.case = options.context.get('case');
+        this.plugins = _.union(this.plugins || [], ['ProcessActions']);
+        options.meta = _.extend({}, app.metadata.getView(options.module, 'record'), options.meta);
         options.meta.hashSync = _.isUndefined(options.meta.hashSync) ? true : options.meta.hashSync;
         options.meta.buttons = this.case.buttons;
         this._super('initialize', [options]);
@@ -50,13 +54,13 @@
         this.adjustHeaderpane = _.bind(_.debounce(this.adjustHeaderpane, 50), this);
         $(window).on('resize.' + this.cid, this.adjustHeaderpane);
 
-        $(window).on('resize.' + this.cid, this.overflowTabs);
+        $(window).on('resize.' + this.cid, _.bind(this.overflowTabs, this));
 
         // initialize tab view after the component is attached to DOM
         this.on('append', function() {
             this.overflowTabs();
             this.handleActiveTab();
-                        });
+        }, this);
 
     },
 
@@ -236,16 +240,28 @@
         };
     },
 
-    caseHistory: function(){
-        showHistory(this.case.flow.cas_id, this.case.flow.cas_index);
+    /**
+     * Shows a window with current history of the record
+     *
+     */
+    caseHistory: function () {
+        this.getHistory(this.case.flow.cas_id);
     },
 
-    caseStatus: function(){
-        showImage(this.case.flow.cas_id);
+    /**
+     * Shows window with picture of current status of the process
+     *
+     */
+    caseStatus: function() {
+        this.showStatus(this.case.flow.cas_id);
     },
 
-    caseAddNotes: function(){
-        showNotes(this.case.flow.cas_id, this.case.flow.cas_index);
+    /**
+     * Shows window with notes of current process
+     *
+     */
+    caseAddNotes: function () {
+        this.showNotes(this.case.flow.cas_id, this.case.flow.cas_index);
     },
 
     caseChangeOwner: function () {
@@ -261,7 +277,6 @@
         value.beanId = this.case.flow.cas_sugar_object_id;
         showForm(this.case.flow.cas_id, this.case.flow.cas_index, this.case.flowId, this.case.inboxId, this.case.title.activity, value, 'reassign', this.model);
     },
-
 
     setEditableFields: function() {
         delete this.editableFields;
@@ -321,21 +336,9 @@
     },
 
     handleSave: function() {
-        var self = this;
-        self.inlineEditMode = false;
+        this.inlineEditMode = false;
 
-        app.file.checkFileFieldsAndProcessUpload(self, {
-                success: function(response) {
-                    if (response.record && response.record.date_modified) {
-                        self.model.set('date_modified', response.record.date_modified);
-                    }
-                    self._saveModel();
-                }
-            }, {
-                deleteIfFails: false
-            }
-        );
-
+        this._saveModel();
         self.$('.record-save-prompt').hide();
         if (!self.disposed) {
             self.render();
@@ -354,9 +357,11 @@
                 // Loop through the visible subpanels and have them sync. This is to update any related
                 // fields to the record that may have been changed on the server on save.
                 _.each(this.context.children, function(child) {
-                    if (!_.isUndefined(child.attributes) && !_.isUndefined(child.attributes.isSubpanel)) {
-                        if (child.attributes.isSubpanel && !child.attributes.hidden) {
-                            child.attributes.collection.fetch();
+                    if (child.get('isSubpanel') && !child.get('hidden')) {
+                        if (child.get('collapsed')) {
+                            child.resetLoadFlag({recursive: false});
+                        } else {
+                            child.reloadData({recursive: false});
                         }
                     }
                 });
@@ -373,7 +378,7 @@
         options = {
             showAlerts: true,
             success: successCallback,
-            error: _.bind(function(error) {
+            error: _.bind(function(model, error) {
                 if (error.status === 412 && !error.request.metadataRetry) {
                     this.handleMetadataSyncError(error);
                 } else if (error.status === 409) {
@@ -502,6 +507,20 @@
             }
         }, this);
         return isRequired;
+    },
+
+    /**
+     * @override
+     */
+    bindDataChange: function() {
+        this.model.on('change', function() {
+            if (this.model.isNotEmpty !== true) {
+                this.model.isNotEmpty = true;
+                if (!this.disposed) {
+                    this.render();
+                }
+            }
+        }, this);
     }
 
 })

@@ -5,7 +5,7 @@ class zr2_ReportTemplateViewEdit extends ViewEdit
 {
  	public function __construct()
  	{
- 		parent::ViewEdit();
+ 		parent::__construct();
  	}
 	
  	public function display()

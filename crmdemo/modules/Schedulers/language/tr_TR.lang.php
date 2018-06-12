@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -30,16 +30,16 @@ $mod_strings = array (
 'LBL_OOTB_TRACKER'		=> 'Takipçi Tabloları Temizle',
 'LBL_OOTB_PRUNE_RECORDLISTS'		=> 'Eski Kayıt Listesini Silin',
 'LBL_OOTB_REMOVE_TMP_FILES' => 'Geçici dosyaları sil',
-'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Hata bulma dosyalarını sil',
+'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Hata bulma aracı dosyalarını sil',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Geçici PDF dosyalarını sil',
-'LBL_UPDATE_TRACKER_SESSIONS' => 'takipçi_oturumlar Çizelgesini Güncelleyin',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'E-Posta Hatırlatıcı Bildirimlerini Çalıştır',
+'LBL_UPDATE_TRACKER_SESSIONS' => 'takipçi_oturumlar tablosunu güncelleştir',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'E-posta Hatırlatma Bildirimlerini çalıştır',
 'LBL_OOTB_CLEANUP_QUEUE' => 'İş Kuyruğunu Temizle',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Gelecek Zaman Aralıkları Oluştur',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Çalışırlık Sinyali',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent makalelerini güncelleyin.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Onaylanan makaleleri yayınla ve KB Makalelerinin süresini sonlandır.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Süreç Sahibi Programlanmış İşi',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Programlanmış İşi',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Sıklık Derecesi:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'İşleri Yenile',
 'LBL_POLLMONITOREDINBOXES' => 'Kontrol Et',
 'LBL_PERFORMFULLFTSINDEX' => 'Tam-Metin Arama İndeks Sistemi',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Geçici PDF dosyalarını sil',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Onaylanan makaleleri yayınla ve KB Makalelerinin süresini sonlandır.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch Queue Zamanlayıcısı',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Hata bulma aracı dosyalarını sil',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Geçici dosyaları sil',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Gecelik Çalışan Kitlesel E-Posta Kampanyaları',
 'LBL_ASYNCMASSUPDATE' => 'Asenkron Toplu Güncelleme Uygulayın',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Takipçi Oturum Tablolarını Güncelle',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Gelecek Zaman Aralıkları Oluştur',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Çalışırlık Sinyali',
-'LBL_SENDEMAILREMINDERS'=> 'E-Posta Hatırlatıcı Gönderimini Çalıştır',
+'LBL_SENDEMAILREMINDERS'=> 'E-posta Hatırlatıcısı Göndermeyi çalıştır',
 'LBL_CLEANJOBQUEUE' => 'İş Kuyruğunu Temizle',
 'LBL_CLEANOLDRECORDLISTS' => 'Eski Kayıt Listesini Temizle',
 );

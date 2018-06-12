@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Филтър',
     'Comments' => 'Коментар',
     'Currencies' => 'Валута',
-    'Project' => 'Проекти',
     'ProductTemplates' => 'Продуктов шаблон',
-    'ProductCategories' => 'Продуктова категория',
     'ProductTypes' => 'Тип на продукт',
     'Shippers' => 'Транспортна фирма',
     'Subscriptions' => 'Абонамент',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Петък",
                 '7'=>"Сб",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Неделя",
+            '2'=>"Понеделник",
+            '3'=>"Вторник",
+            '4'=>"Сряда",
+            '5'=>"Четвъртък",
+            '6'=>"Петък",
+            '7'=>"Събота",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Неделя',
         '1' => 'Понеделник',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'година(и)',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'До',
+        'Occurrences' => 'Събития',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'няма',
+        'Each' => 'Всеки',
+        'On' => 'На всеки',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'първи',
+        'second' => 'втори',
+        'third' => 'трети',
+        'fourth' => 'четвърти',
+        'fifth' => 'пети',
+        'last' => 'последен',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Неделя',
+        'Mon' => 'Понеделник',
+        'Tue' => 'Вторник',
+        'Wed' => 'Сряда',
+        'Thu' => 'Четвъртък',
+        'Fri' => 'Петък',
+        'Sat' => 'Събота',
+        'Day' => 'Ден',
+        'WD'  => 'Делничен ден',
+        'WE'  => 'Почивен ден'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Среда',
         'end' => 'Край',
         'top' => 'Горна част',
+        'total' => 'Общо',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Диаграма тип "Funnel"',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Светъл',
       'dark' => 'Тъмен',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Премести',
@@ -1829,8 +1948,8 @@ $app_list_strings = array (
         /* American Samoa */
         "AS" => array(
             "1" => array("code" => "E", "name" => "Източен"),
-            "2" => array("code" => "M", "name" => "Мануа"),
-            "3" => array("code" => "R", "name" => "Роуз Айлънд"),
+            "2" => array("code" => "М", "name" => "Мануа"),
+            "3" => array("code" => "Р", "name" => "Роуз Айлънд"),
             "4" => array("code" => "S", "name" => "Суейнс Айлънд"),
             "5" => array("code" => "W", "name" => "Западен")
         ),
@@ -1870,7 +1989,7 @@ $app_list_strings = array (
         "AI" => array(
             "1" => array("code" => "ANG", "name" => "Ангилита"),
             "2" => array("code" => "ANG", "name" => "Ангила"),
-            "3" => array("code" => "DOG", "name" => "Куче"),
+            "3" => array("code" => "КУЧЕ", "name" => "Куче"),
             "4" => array("code" => "LIT", "name" => "Литл Скръб"),
             "5" => array("code" => "PRI", "name" => "Прикли Пеър"),
             "6" => array("code" => "SAN", "name" => "Санди"),
@@ -2018,7 +2137,7 @@ $app_list_strings = array (
             "46" => array("code" => "QBI", "name" => "Кубадли"),
             "47" => array("code" => "QUS", "name" => "Кусар"),
             "48" => array("code" => "SA", "name" => "Саки"),
-            "49" => array("code" => "SAT", "name" => "Саатли"),
+            "49" => array("code" => "СБ", "name" => "Саатли"),
             "50" => array("code" => "SAB", "name" => "Сабирабад"),
             "51" => array("code" => "SAD", "name" => "Садарак"),
             "52" => array("code" => "SAH", "name" => "Сабуз"),
@@ -2067,7 +2186,7 @@ $app_list_strings = array (
             "16" => array("code" => "INA", "name" => "Инагуа"),
             "17" => array("code" => "LNG", "name" => "Лонг Айлънд"),
             "18" => array("code" => "MAN", "name" => "Мангроув Кей"),
-            "19" => array("code" => "MAY", "name" => "Мейагуана"),
+            "19" => array("code" => "МАЙ", "name" => "Мейагуана"),
             "20" => array("code" => "MOO", "name" => "Мур'с Айлънд"),
             "21" => array("code" => "NAB", "name" => "Северен Абако"),
             "22" => array("code" => "NAN", "name" => "Северен Андрос"),
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "Крайст Чърч"),
-            "2" => array("code" => "AND", "name" => "Сейнт Андрю"),
+            "2" => array("code" => "И", "name" => "Сейнт Андрю"),
             "3" => array("code" => "GEO", "name" => "Сейнт Джордж"),
             "4" => array("code" => "JAM", "name" => "Сейнт Джеймс"),
             "5" => array("code" => "JOH", "name" => "Сейнт Джон"),
@@ -2181,12 +2300,12 @@ $app_list_strings = array (
             "4" => array("code" => "GAS", "name" => "Гаса"),
             "5" => array("code" => "HAA", "name" => "Хаа"),
             "6" => array("code" => "LHU", "name" => "Лунтсе"),
-            "7" => array("code" => "MON", "name" => "Монгар"),
+            "7" => array("code" => "Понеделник", "name" => "Монгар"),
             "8" => array("code" => "PAR", "name" => "Паро"),
             "9" => array("code" => "PEM", "name" => "Пемагатшел"),
             "10" => array("code" => "PUN", "name" => "Пунака"),
             "11" => array("code" => "SJO", "name" => "Самдруп Джонгхар"),
-            "12" => array("code" => "SAT", "name" => "Самтсе"),
+            "12" => array("code" => "СБ", "name" => "Самтсе"),
             "13" => array("code" => "SAR", "name" => "Сарпанг"),
             "14" => array("code" => "THI", "name" => "Тхимпху"),
             "15" => array("code" => "TRG", "name" => "Трашиганг"),
@@ -2247,7 +2366,7 @@ $app_list_strings = array (
             "1" => array("code" => "AC", "name" => "Акр"),
             "2" => array("code" => "AL", "name" => "Алагоас"),
             "3" => array("code" => "AP", "name" => "Амапа"),
-            "4" => array("code" => "AM", "name" => "Амазонас"),
+            "4" => array("code" => "ч. преди обед", "name" => "Амазонас"),
             "5" => array("code" => "BA", "name" => "Баия"),
             "6" => array("code" => "CE", "name" => "Сеара"),
             "7" => array("code" => "DF", "name" => "Дистрито Федерал"),
@@ -2361,7 +2480,7 @@ $app_list_strings = array (
             "37" => array("code" => "SOM", "name" => "Соум"),
             "38" => array("code" => "SOR", "name" => "Соуроу"),
             "39" => array("code" => "TAP", "name" => "Тапоа"),
-            "40" => array("code" => "TUY", "name" => "Туй"),
+            "40" => array("code" => "Туй", "name" => "Туй"),
             "41" => array("code" => "YAG", "name" => "Яга"),
             "42" => array("code" => "YAT", "name" => "Ятенга"),
             "43" => array("code" => "ZIR", "name" => "Зиро"),
@@ -2564,7 +2683,7 @@ $app_list_strings = array (
         ),
         /* Cocos (Keeling) Islands */
         "CC" => array(
-            "1" => array("code" => "D", "name" => "Дайрекшън Айлънд"),
+            "1" => array("code" => "Д", "name" => "Дайрекшън Айлънд"),
             "2" => array("code" => "H", "name" => "Хоум Айлънд"),
             "3" => array("code" => "O", "name" => "Хорсбърг Айлънд"),
             "4" => array("code" => "S", "name" => "Саут Айлънд"),
@@ -2592,10 +2711,10 @@ $app_list_strings = array (
             "18" => array("code" => "GVR", "name" => "Гуавиаре"),
             "19" => array("code" => "HUI", "name" => "Хуила"),
             "20" => array("code" => "MAG", "name" => "Магдалена"),
-            "21" => array("code" => "MET", "name" => "Мета"),
+            "21" => array("code" => "Средно-европейско време", "name" => "Мета"),
             "22" => array("code" => "NAR", "name" => "Нарино"),
             "23" => array("code" => "NDS", "name" => "Норте де Сантандер"),
-            "24" => array("code" => "PUT", "name" => "Путумайо"),
+            "24" => array("code" => "ПОСТАВИ", "name" => "Путумайо"),
             "25" => array("code" => "QUI", "name" => "Киндио"),
             "26" => array("code" => "RIS", "name" => "Рисаралда"),
             "27" => array("code" => "SAP", "name" => "Сан Андрес и Провиденсиа"),
@@ -2608,9 +2727,9 @@ $app_list_strings = array (
         ),
         /* Comoros */
         "KM" => array(
-            "1" => array("code" => "G", "name" => "Гранд Комор"),
-            "2" => array("code" => "A", "name" => "Анжуан"),
-            "3" => array("code" => "M", "name" => "Моели")
+            "1" => array("code" => "Г", "name" => "Гранд Комор"),
+            "2" => array("code" => "А", "name" => "Анжуан"),
+            "3" => array("code" => "М", "name" => "Моели")
         ),
         /* Congo */
         "CG" => array(
@@ -2759,27 +2878,27 @@ $app_list_strings = array (
         ),
         /* Cyprus */
         "CY" => array(
-            "1" => array("code" => "F", "name" => "Фамагуста"),
-            "2" => array("code" => "K", "name" => "Кирения"),
-            "3" => array("code" => "A", "name" => "Ларнака"),
-            "4" => array("code" => "I", "name" => "Лимасол"),
-            "5" => array("code" => "N", "name" => "Никозия"),
+            "1" => array("code" => "Ф", "name" => "Фамагуста"),
+            "2" => array("code" => "хил.", "name" => "Кирения"),
+            "3" => array("code" => "А", "name" => "Ларнака"),
+            "4" => array("code" => "И", "name" => "Лимасол"),
+            "5" => array("code" => "Н", "name" => "Никозия"),
             "6" => array("code" => "P", "name" => "Пафос")
         ),
         /* Czech Republic */
         "CZ" => array(
-            "1" => array("code" => "A", "name" => "Хлавни место Прага"),
+            "1" => array("code" => "А", "name" => "Хлавни место Прага"),
             "2" => array("code" => "B", "name" => "Южноморавски край"),
-            "3" => array("code" => "C", "name" => "Южночешки край"),
+            "3" => array("code" => "С", "name" => "Южночешки край"),
             "4" => array("code" => "E", "name" => "Пардубицки край"),
             "5" => array("code" => "H", "name" => "Краловохрадецки край"),
             "6" => array("code" => "J", "name" => "Височински край"),
-            "7" => array("code" => "K", "name" => "Карловарски край"),
-            "8" => array("code" => "L", "name" => "Либерецки край"),
-            "9" => array("code" => "M", "name" => "Оломоуцки край"),
+            "7" => array("code" => "хил.", "name" => "Карловарски край"),
+            "8" => array("code" => "Л", "name" => "Либерецки край"),
+            "9" => array("code" => "М", "name" => "Оломоуцки край"),
             "10" => array("code" => "P", "name" => "Пилзенски край"),
             "11" => array("code" => "S", "name" => "Средночешки край"),
-            "12" => array("code" => "T", "name" => "Моравско-силезки край"),
+            "12" => array("code" => "Т", "name" => "Моравско-силезки край"),
             "13" => array("code" => "U", "name" => "Устецки край"),
             "14" => array("code" => "Z", "name" => "Злински край")
         ),
@@ -2805,14 +2924,14 @@ $app_list_strings = array (
         /* Djibouti */
         "DJ" => array(
             "1" => array("code" => "S", "name" => "'Ali Sabih"),
-            "2" => array("code" => "K", "name" => "Dikhil"),
+            "2" => array("code" => "хил.", "name" => "Dikhil"),
             "3" => array("code" => "J", "name" => "Djibouti"),
             "4" => array("code" => "O", "name" => "Obock"),
-            "5" => array("code" => "T", "name" => "Tadjoura")
+            "5" => array("code" => "Т", "name" => "Tadjoura")
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "И", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2852,7 +2971,7 @@ $app_list_strings = array (
             "25" => array("code" => "SC", "name" => "San Cristobal"),
             "26" => array("code" => "JO", "name" => "San Jose de Ocoa"),
             "27" => array("code" => "SJ", "name" => "Сан Хуан"),
-            "28" => array("code" => "PM", "name" => "San Pedro de Macoris"),
+            "28" => array("code" => "ч. следобед", "name" => "San Pedro de Macoris"),
             "29" => array("code" => "SA", "name" => "Santiago"),
             "30" => array("code" => "ST", "name" => "Santiago Rodriguez"),
             "31" => array("code" => "SD", "name" => "Santo Domingo"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Бенишангул-Гумаз"),
             "4" => array("code" => "GB", "name" => "Гамбела"),
             "5" => array("code" => "HR", "name" => "Харяи"),
-            "6" => array("code" => "OR", "name" => "Оромия"),
+            "6" => array("code" => "ИЛИ", "name" => "Оромия"),
             "7" => array("code" => "SM", "name" => "Сомали"),
             "8" => array("code" => "SN", "name" => "Южни нации - националности"),
             "9" => array("code" => "TG", "name" => "Тигрей"),
@@ -3004,7 +3123,7 @@ $app_list_strings = array (
             "3" => array("code" => "RUN", "name" => "Рунавик"),
             "4" => array("code" => "TVØ", "name" => "Творойри"),
             "5" => array("code" => "FUG", "name" => "Фуглафьордур"),
-            "6" => array("code" => "SUN", "name" => "Сунда Комуна"),
+            "6" => array("code" => "Неделя", "name" => "Сунда Комуна"),
             "7" => array("code" => "VáG", "name" => "Вагур"),
             "8" => array("code" => "NES", "name" => "Нес"),
             "9" => array("code" => "VES", "name" => "Вестмана"),
@@ -3015,13 +3134,13 @@ $app_list_strings = array (
             "14" => array("code" => "LEI", "name" => "Леирвик"),
             "15" => array("code" => "SAN", "name" => "Сандавагур"),
             "16" => array("code" => "HVA", "name" => "Хвалба"),
-            "17" => array("code" => "EIð", "name" => "Ейди"),
+            "17" => array("code" => "Ейд", "name" => "Ейди"),
             "18" => array("code" => "KVí", "name" => "Квивик"),
             "19" => array("code" => "SAN", "name" => "Сандур"),
             "20" => array("code" => "SKO", "name" => "Скопун"),
             "21" => array("code" => "HVA", "name" => "Хванасунд"),
-            "22" => array("code" => "SUM", "name" => "Сумба"),
-            "23" => array("code" => "VIð", "name" => "Видарейди"),
+            "22" => array("code" => "Сума", "name" => "Сумба"),
+            "23" => array("code" => "Вид", "name" => "Видарейди"),
             "24" => array("code" => "POR", "name" => "Поркери"),
             "25" => array("code" => "SKá", "name" => "Скалавик"),
             "26" => array("code" => "KUN", "name" => "Куной"),
@@ -3036,10 +3155,10 @@ $app_list_strings = array (
         ),
         /* Fiji */
         "FJ" => array(
-            "1" => array("code" => "C", "name" => "Сентръл Дивижън"),
+            "1" => array("code" => "С", "name" => "Сентръл Дивижън"),
             "2" => array("code" => "E", "name" => "Ийстърн Дивижън"),
-            "3" => array("code" => "N", "name" => "Нордърн Дивижън"),
-            "4" => array("code" => "R", "name" => "Ротума"),
+            "3" => array("code" => "Н", "name" => "Нордърн Дивижън"),
+            "4" => array("code" => "Р", "name" => "Ротума"),
             "5" => array("code" => "W", "name" => "Уестърн Дивижън")
         ),
         /* Finland */
@@ -3197,26 +3316,26 @@ $app_list_strings = array (
             "16" => array("code" => "SIN", "name" => "Sinnamary"),
             "17" => array("code" => "KOU", "name" => "Kourou"),
             "18" => array("code" => "MAC", "name" => "Macouria"),
-            "19" => array("code" => "MON", "name" => "Montsinéry-Tonnegrande"),
+            "19" => array("code" => "Понеделник", "name" => "Montsinéry-Tonnegrande"),
             "20" => array("code" => "MAT", "name" => "Matoury"),
             "21" => array("code" => "CAY", "name" => "Cayenne"),
-            "22" => array("code" => "REM", "name" => "Remire-Montjoly")
+            "22" => array("code" => "ИЗТРИЙ", "name" => "Remire-Montjoly")
         ),
         /* French Polynesia */
         "PF" => array(
-            "1" => array("code" => "M", "name" => "Archipel des Marquises"),
-            "2" => array("code" => "T", "name" => "Archipel des Tuamotu"),
-            "3" => array("code" => "I", "name" => "Archipel des Tubuai"),
-            "4" => array("code" => "V", "name" => "Iles du Vent"),
+            "1" => array("code" => "М", "name" => "Archipel des Marquises"),
+            "2" => array("code" => "Т", "name" => "Archipel des Tuamotu"),
+            "3" => array("code" => "И", "name" => "Archipel des Tubuai"),
+            "4" => array("code" => "Ж", "name" => "Iles du Vent"),
             "5" => array("code" => "S", "name" => "Iles Sous-le-Vent")
         ),
         /* French Southern Territories */
         "TF" => array(
-            "1" => array("code" => "C", "name" => "Iles Crozet"),
-            "2" => array("code" => "K", "name" => "Iles Kerguelen"),
-            "3" => array("code" => "A", "name" => "Ile Amsterdam"),
+            "1" => array("code" => "С", "name" => "Iles Crozet"),
+            "2" => array("code" => "хил.", "name" => "Iles Kerguelen"),
+            "3" => array("code" => "А", "name" => "Ile Amsterdam"),
             "4" => array("code" => "P", "name" => "Ile Saint-Paul"),
-            "5" => array("code" => "D", "name" => "Adelie Land")
+            "5" => array("code" => "Д", "name" => "Adelie Land")
         ),
         /* Gabon */
         "GA" => array(
@@ -3322,20 +3441,20 @@ $app_list_strings = array (
         ),
         /* Greenland */
         "GL" => array(
-            "1" => array("code" => "A", "name" => "Avannaa"),
-            "2" => array("code" => "T", "name" => "Tunu"),
-            "3" => array("code" => "K", "name" => "Kitaa")
+            "1" => array("code" => "А", "name" => "Avannaa"),
+            "2" => array("code" => "Т", "name" => "Tunu"),
+            "3" => array("code" => "хил.", "name" => "Kitaa")
         ),
         /* Grenada */
         "86" => array(
-            "1" => array("code" => "A", "name" => "Сейнт Андрю"),
-            "2" => array("code" => "D", "name" => "Saint David"),
-            "3" => array("code" => "G", "name" => "Сейнт Джордж"),
+            "1" => array("code" => "А", "name" => "Сейнт Андрю"),
+            "2" => array("code" => "Д", "name" => "Saint David"),
+            "3" => array("code" => "Г", "name" => "Сейнт Джордж"),
             "4" => array("code" => "J", "name" => "Сейнт Джон"),
-            "5" => array("code" => "M", "name" => "Saint Mark"),
+            "5" => array("code" => "М", "name" => "Saint Mark"),
             "6" => array("code" => "P", "name" => "Saint Patrick"),
-            "7" => array("code" => "C", "name" => "Carriacou"),
-            "8" => array("code" => "Q", "name" => "Petit Martinique")
+            "7" => array("code" => "С", "name" => "Carriacou"),
+            "8" => array("code" => "Я", "name" => "Petit Martinique")
         ),
         /* Guadeloupe */
         "GP" => array(
@@ -3356,7 +3475,7 @@ $app_list_strings = array (
             "8" => array("code" => "INA", "name" => "Inarajan"),
             "9" => array("code" => "MAN", "name" => "Mangilao"),
             "10" => array("code" => "MER", "name" => "Merizo"),
-            "11" => array("code" => "MON", "name" => "Mongmong Toto Maite"),
+            "11" => array("code" => "Понеделник", "name" => "Mongmong Toto Maite"),
             "12" => array("code" => "PIT", "name" => "Piti"),
             "13" => array("code" => "SAN", "name" => "Santa Rita"),
             "14" => array("code" => "SIN", "name" => "Sinajana"),
@@ -3404,7 +3523,7 @@ $app_list_strings = array (
             "9" => array("code" => "DBR", "name" => "Dubreka"),
             "10" => array("code" => "FRN", "name" => "Faranah"),
             "11" => array("code" => "FRC", "name" => "Forecariah"),
-            "12" => array("code" => "FRI", "name" => "Fria"),
+            "12" => array("code" => "Петък", "name" => "Fria"),
             "13" => array("code" => "GAO", "name" => "Gaoual"),
             "14" => array("code" => "GCD", "name" => "Gueckedou"),
             "15" => array("code" => "KNK", "name" => "Kankan"),
@@ -3448,7 +3567,7 @@ $app_list_strings = array (
             "4" => array("code" => "EC", "name" => "East Berbice-Corentyne"),
             "5" => array("code" => "EW", "name" => "Essequibo Islands-West Demerara"),
             "6" => array("code" => "MB", "name" => "Mahaica-Berbice"),
-            "7" => array("code" => "PM", "name" => "Pomeroon-Supenaam"),
+            "7" => array("code" => "ч. следобед", "name" => "Pomeroon-Supenaam"),
             "8" => array("code" => "PI", "name" => "Potaro-Siparuni"),
             "9" => array("code" => "UD", "name" => "Upper Demerara-Berbice"),
             "10" => array("code" => "UT", "name" => "Upper Takutu-Upper Essequibo")
@@ -3467,8 +3586,8 @@ $app_list_strings = array (
         ),
         /* Heard and McDonald Islands */
         "HM" => array(
-            "1" => array("code" => "F", "name" => "Flat Island"),
-            "2" => array("code" => "M", "name" => "McDonald Island"),
+            "1" => array("code" => "Ф", "name" => "Flat Island"),
+            "2" => array("code" => "М", "name" => "McDonald Island"),
             "3" => array("code" => "S", "name" => "Shag Island"),
             "4" => array("code" => "H", "name" => "Heard Island")
         ),
@@ -3592,14 +3711,14 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "ИЛИ", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
             "28" => array("code" => "SI", "name" => "Sikkim"),
             "29" => array("code" => "TN", "name" => "Tamil Nadu"),
             "30" => array("code" => "TR", "name" => "Tripura"),
-            "31" => array("code" => "UP", "name" => "Uttar Pradesh"),
+            "31" => array("code" => "НАГОРЕ", "name" => "Uttar Pradesh"),
             "32" => array("code" => "WB", "name" => "West Bengal")
         ),
         /* Indonesia */
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "ИЛИ", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parish"),
             "4" => array("code" => "MAN", "name" => "Manchester Parish"),
             "5" => array("code" => "POR", "name" => "Portland Parish"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "И", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parish"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parish"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parish"),
@@ -3897,7 +4016,7 @@ $app_list_strings = array (
             "28" => array("code" => "NR", "name" => "Nara"),
             "29" => array("code" => "NI", "name" => "Niigata"),
             "30" => array("code" => "OI", "name" => "Oita"),
-            "31" => array("code" => "OK", "name" => "Okayama"),
+            "31" => array("code" => "ОК", "name" => "Okayama"),
             "32" => array("code" => "ON", "name" => "Okinawa"),
             "33" => array("code" => "OS", "name" => "Osaka"),
             "34" => array("code" => "SA", "name" => "Saga"),
@@ -3917,7 +4036,7 @@ $app_list_strings = array (
         ),
         /* Jordan */
         "JO" => array(
-            "1" => array("code" => "AM", "name" => "'Amman"),
+            "1" => array("code" => "ч. преди обед", "name" => "'Amman"),
             "2" => array("code" => "AJ", "name" => "Ajlun"),
             "3" => array("code" => "AA", "name" => "Al'Aqabah"),
             "4" => array("code" => "AB", "name" => "Al Balqa'"),
@@ -3934,7 +4053,7 @@ $app_list_strings = array (
         "KZ" => array(
             "1" => array("code" => "AL", "name" => "Almaty"),
             "2" => array("code" => "AC", "name" => "Almaty City"),
-            "3" => array("code" => "AM", "name" => "Aqmola"),
+            "3" => array("code" => "ч. преди обед", "name" => "Aqmola"),
             "4" => array("code" => "AQ", "name" => "Aqtobe"),
             "5" => array("code" => "AS", "name" => "Astana City"),
             "6" => array("code" => "AT", "name" => "Atyrau"),
@@ -3964,7 +4083,7 @@ $app_list_strings = array (
         /* Kiribati */
         "KI" => array(
             "1" => array("code" => "AG", "name" => "Abaiang"),
-            "2" => array("code" => "AM", "name" => "Abemama"),
+            "2" => array("code" => "ч. преди обед", "name" => "Abemama"),
             "3" => array("code" => "AK", "name" => "Aranuka"),
             "4" => array("code" => "AO", "name" => "Arorae"),
             "5" => array("code" => "BA", "name" => "Banaba"),
@@ -4029,11 +4148,11 @@ $app_list_strings = array (
         "KG" => array(
             "1" => array("code" => "GB", "name" => "Bishkek"),
             "2" => array("code" => "B", "name" => "Batken"),
-            "3" => array("code" => "C", "name" => "Chu"),
+            "3" => array("code" => "С", "name" => "Chu"),
             "4" => array("code" => "J", "name" => "Jalal-Abad"),
-            "5" => array("code" => "N", "name" => "Naryn"),
+            "5" => array("code" => "Н", "name" => "Naryn"),
             "6" => array("code" => "O", "name" => "Osh"),
-            "7" => array("code" => "T", "name" => "Talas"),
+            "7" => array("code" => "Т", "name" => "Talas"),
             "8" => array("code" => "Y", "name" => "Ysyk-Kol")
         ),
         /* Laos */
@@ -4109,7 +4228,7 @@ $app_list_strings = array (
             "11" => array("code" => "BAT", "name" => "Batroun"),
             "12" => array("code" => "BSH", "name" => "Bsharri"),
             "13" => array("code" => "KOU", "name" => "Koura"),
-            "14" => array("code" => "MIN", "name" => "Miniyeh-Danniyeh"),
+            "14" => array("code" => "Минимална", "name" => "Miniyeh-Danniyeh"),
             "15" => array("code" => "TRI", "name" => "Tripoli"),
             "16" => array("code" => "ZGH", "name" => "Zgharta"),
             "17" => array("code" => "ALE", "name" => "Aley"),
@@ -4181,16 +4300,16 @@ $app_list_strings = array (
         ),
         /* Liechtenstein */
         "LI" => array(
-            "1" => array("code" => "V", "name" => "Vaduz"),
-            "2" => array("code" => "A", "name" => "Schaan"),
+            "1" => array("code" => "Ж", "name" => "Vaduz"),
+            "2" => array("code" => "А", "name" => "Schaan"),
             "3" => array("code" => "B", "name" => "Balzers"),
-            "4" => array("code" => "N", "name" => "Triesen"),
+            "4" => array("code" => "Н", "name" => "Triesen"),
             "5" => array("code" => "E", "name" => "Eschen"),
-            "6" => array("code" => "M", "name" => "Mauren"),
-            "7" => array("code" => "T", "name" => "Triesenberg"),
-            "8" => array("code" => "R", "name" => "Ruggell"),
-            "9" => array("code" => "G", "name" => "Gamprin"),
-            "10" => array("code" => "L", "name" => "Schellenberg"),
+            "6" => array("code" => "М", "name" => "Mauren"),
+            "7" => array("code" => "Т", "name" => "Triesenberg"),
+            "8" => array("code" => "Р", "name" => "Ruggell"),
+            "9" => array("code" => "Г", "name" => "Gamprin"),
+            "10" => array("code" => "Л", "name" => "Schellenberg"),
             "11" => array("code" => "P", "name" => "Planken")
         ),
         /* Lithuania */
@@ -4280,8 +4399,8 @@ $app_list_strings = array (
             "46" => array("code" => "MAV", "name" => "Mavrovo and Rostuša"),
             "47" => array("code" => "MOG", "name" => "Mogila"),
             "48" => array("code" => "NEG", "name" => "Negotino"),
-            "49" => array("code" => "NOV", "name" => "Novaci"),
-            "50" => array("code" => "NOV", "name" => "Novo Selo"),
+            "49" => array("code" => "Ноември", "name" => "Novaci"),
+            "50" => array("code" => "Ноември", "name" => "Novo Selo"),
             "51" => array("code" => "OHR", "name" => "Ohrid"),
             "52" => array("code" => "OSL", "name" => "Oslomej"),
             "53" => array("code" => "PEH", "name" => "Pehčevo"),
@@ -4395,7 +4514,7 @@ $app_list_strings = array (
             "17" => array("code" => "NAD", "name" => "Nilandhe Atoll Dhekunu"),
             "18" => array("code" => "NAU", "name" => "Nilandhe Atoll Uthuru"),
             "19" => array("code" => "THD", "name" => "Thiladhunmathi Dhekunu"),
-            "20" => array("code" => "THU", "name" => "Thiladhunmathi Uthuru")
+            "20" => array("code" => "Четвъртък", "name" => "Thiladhunmathi Uthuru")
         ),
         /* Mali */
         "ML" => array(
@@ -4444,7 +4563,7 @@ $app_list_strings = array (
             "31" => array("code" => "NAX", "name" => "Naxxar"),
             "32" => array("code" => "PAO", "name" => "Paola"),
             "33" => array("code" => "PEM", "name" => "Пемброук"),
-            "34" => array("code" => "PIE", "name" => "Pieta"),
+            "34" => array("code" => "Диаграма тип \"Pie\"", "name" => "Pieta"),
             "35" => array("code" => "QOR", "name" => "Qormi"),
             "36" => array("code" => "QRE", "name" => "Qrendi"),
             "37" => array("code" => "RAB", "name" => "Rabat"),
@@ -4648,8 +4767,8 @@ $app_list_strings = array (
         ),
         /* Micronesia */
         "FM" => array(
-            "1" => array("code" => "C", "name" => "Chuuk"),
-            "2" => array("code" => "K", "name" => "Kosrae"),
+            "1" => array("code" => "С", "name" => "Chuuk"),
+            "2" => array("code" => "хил.", "name" => "Kosrae"),
             "3" => array("code" => "P", "name" => "Pohnpei"),
             "4" => array("code" => "Y", "name" => "Yap")
         ),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "ИЛИ", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -4701,8 +4820,8 @@ $app_list_strings = array (
         ),
         /* Montserra */
         "MS" => array(
-            "1" => array("code" => "A", "name" => "Saint Anthony"),
-            "2" => array("code" => "G", "name" => "Saint Georges"),
+            "1" => array("code" => "А", "name" => "Saint Anthony"),
+            "2" => array("code" => "Г", "name" => "Saint Georges"),
             "3" => array("code" => "P", "name" => "Сейнт Питър")
         ),
         /* Morocco */
@@ -4791,7 +4910,7 @@ $app_list_strings = array (
             "6" => array("code" => "KH", "name" => "Khomas"),
             "7" => array("code" => "KU", "name" => "Kunene"),
             "8" => array("code" => "OW", "name" => "Ohangwena"),
-            "9" => array("code" => "OK", "name" => "Omaheke"),
+            "9" => array("code" => "ОК", "name" => "Omaheke"),
             "10" => array("code" => "OT", "name" => "Omusati"),
             "11" => array("code" => "ON", "name" => "Oshana"),
             "12" => array("code" => "OO", "name" => "Oshikoto"),
@@ -4856,8 +4975,8 @@ $app_list_strings = array (
         ),
         /* New Caledonia */
         "NC" => array(
-            "1" => array("code" => "L", "name" => "Iles Loyaute"),
-            "2" => array("code" => "N", "name" => "Nord"),
+            "1" => array("code" => "Л", "name" => "Iles Loyaute"),
+            "2" => array("code" => "Н", "name" => "Nord"),
             "3" => array("code" => "S", "name" => "Sud")
         ),
         /* New Zealand */
@@ -4977,10 +5096,10 @@ $app_list_strings = array (
         ),
         /* Northern Mariana Islands */
         "MP" => array(
-            "1" => array("code" => "N", "name" => "Northern Islands"),
-            "2" => array("code" => "R", "name" => "Rota"),
+            "1" => array("code" => "Н", "name" => "Northern Islands"),
+            "2" => array("code" => "Р", "name" => "Rota"),
             "3" => array("code" => "S", "name" => "Saipan"),
-            "4" => array("code" => "T", "name" => "Tinian")
+            "4" => array("code" => "Т", "name" => "Tinian")
         ),
         /* Norway */
         "NO" => array(
@@ -5019,15 +5138,15 @@ $app_list_strings = array (
         /* Pakistan */
         "PK" => array(
             "1" => array("code" => "B", "name" => "Balochistan"),
-            "2" => array("code" => "T", "name" => "Federally Administered Tribal Ar"),
-            "3" => array("code" => "I", "name" => "Islamabad Capital Territory"),
-            "4" => array("code" => "N", "name" => "North-West Frontier"),
+            "2" => array("code" => "Т", "name" => "Federally Administered Tribal Ar"),
+            "3" => array("code" => "И", "name" => "Islamabad Capital Territory"),
+            "4" => array("code" => "Н", "name" => "North-West Frontier"),
             "5" => array("code" => "P", "name" => "Punjab"),
             "6" => array("code" => "S", "name" => "Sindh")
         ),
         /* Palau */
         "PW" => array(
-            "1" => array("code" => "AM", "name" => "Aimeliik"),
+            "1" => array("code" => "ч. преди обед", "name" => "Aimeliik"),
             "2" => array("code" => "AR", "name" => "Airai"),
             "3" => array("code" => "AN", "name" => "Angaur"),
             "4" => array("code" => "HA", "name" => "Hatohobei"),
@@ -5084,7 +5203,7 @@ $app_list_strings = array (
         "PY" => array(
             "1" => array("code" => "AG", "name" => "Alto Paraguay"),
             "2" => array("code" => "AN", "name" => "Alto Parana"),
-            "3" => array("code" => "AM", "name" => "Amambay"),
+            "3" => array("code" => "ч. преди обед", "name" => "Amambay"),
             "4" => array("code" => "AS", "name" => "Asuncion"),
             "5" => array("code" => "BO", "name" => "Boqueron"),
             "6" => array("code" => "CG", "name" => "Caaguazu"),
@@ -5103,7 +5222,7 @@ $app_list_strings = array (
         ),
         /* Peru */
         "PE" => array(
-            "1" => array("code" => "AM", "name" => "Амазонас"),
+            "1" => array("code" => "ч. преди обед", "name" => "Амазонас"),
             "2" => array("code" => "AN", "name" => "Ancash"),
             "3" => array("code" => "AP", "name" => "Apurimac"),
             "4" => array("code" => "AR", "name" => "Arequipa"),
@@ -5227,7 +5346,7 @@ $app_list_strings = array (
             "8" => array("code" => "OP", "name" => "Opolskie"),
             "9" => array("code" => "PP", "name" => "Podkarpackie"),
             "10" => array("code" => "PL", "name" => "Podlaskie"),
-            "11" => array("code" => "PM", "name" => "Pomorskie"),
+            "11" => array("code" => "ч. следобед", "name" => "Pomorskie"),
             "12" => array("code" => "SL", "name" => "Śląskie"),
             "13" => array("code" => "SW", "name" => "Świętokrzyskie"),
             "14" => array("code" => "WM", "name" => "Warmińsko-Mazurskie"),
@@ -5309,7 +5428,7 @@ $app_list_strings = array (
             "47" => array("code" => "MAN", "name" => "Manatí"),
             "48" => array("code" => "MAR", "name" => "Maricao"),
             "49" => array("code" => "MAU", "name" => "Maunabo"),
-            "50" => array("code" => "MAY", "name" => "Mayagüez"),
+            "50" => array("code" => "МАЙ", "name" => "Mayagüez"),
             "51" => array("code" => "MOC", "name" => "Moca"),
             "52" => array("code" => "MOR", "name" => "Morovis"),
             "53" => array("code" => "NAG", "name" => "Naguabo"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "ИЛИ", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -5536,11 +5655,11 @@ $app_list_strings = array (
         ),
         /* Saint Vincent and the Grenadines */
         "VC" => array(
-            "1" => array("code" => "C", "name" => "Charlotte"),
-            "2" => array("code" => "R", "name" => "Grenadines"),
-            "3" => array("code" => "A", "name" => "Сейнт Андрю"),
-            "4" => array("code" => "D", "name" => "Saint David"),
-            "5" => array("code" => "G", "name" => "Сейнт Джордж"),
+            "1" => array("code" => "С", "name" => "Charlotte"),
+            "2" => array("code" => "Р", "name" => "Grenadines"),
+            "3" => array("code" => "А", "name" => "Сейнт Андрю"),
+            "4" => array("code" => "Д", "name" => "Saint David"),
+            "5" => array("code" => "Г", "name" => "Сейнт Джордж"),
             "6" => array("code" => "P", "name" => "Saint Patrick")
         ),
         /* Samoa */
@@ -5633,7 +5752,7 @@ $app_list_strings = array (
         /* Sierra Leon */
         "SL" => array(
             "1" => array("code" => "E", "name" => "Източен"),
-            "2" => array("code" => "N", "name" => "Нордърн"),
+            "2" => array("code" => "Н", "name" => "Нордърн"),
             "3" => array("code" => "S", "name" => "Садърн"),
             "4" => array("code" => "W", "name" => "Западен")
         ),
@@ -5712,7 +5831,7 @@ $app_list_strings = array (
             "2" => array("code" => "AL", "name" => "Álava"),
             "3" => array("code" => "AB", "name" => "Albacete"),
             "4" => array("code" => "AC", "name" => "Alicante"),
-            "5" => array("code" => "AM", "name" => "Almeria"),
+            "5" => array("code" => "ч. преди обед", "name" => "Almeria"),
             "6" => array("code" => "AS", "name" => "Asturias"),
             "7" => array("code" => "AV", "name" => "Ávila"),
             "8" => array("code" => "BJ", "name" => "Badajoz"),
@@ -5735,7 +5854,7 @@ $app_list_strings = array (
             "25" => array("code" => "HS", "name" => "Huesca"),
             "26" => array("code" => "JN", "name" => "Jaén"),
             "27" => array("code" => "RJ", "name" => "Ла Риоха"),
-            "28" => array("code" => "PM", "name" => "Las Palmas"),
+            "28" => array("code" => "ч. следобед", "name" => "Las Palmas"),
             "29" => array("code" => "LE", "name" => "León"),
             "30" => array("code" => "LL", "name" => "Lérida"),
             "31" => array("code" => "LG", "name" => "Lugo"),
@@ -5775,14 +5894,14 @@ $app_list_strings = array (
         ),
         /* St Helena */
         "SH" => array(
-            "1" => array("code" => "A", "name" => "Ascension"),
+            "1" => array("code" => "А", "name" => "Ascension"),
             "2" => array("code" => "S", "name" => "Saint Helena"),
-            "3" => array("code" => "T", "name" => "Tristan da Cunha")
+            "3" => array("code" => "Т", "name" => "Tristan da Cunha")
         ),
         /* St. Pierre and Miquelon */
         "PM" => array(
             "1" => array("code" => "P", "name" => "Saint Pierre"),
-            "2" => array("code" => "M", "name" => "Miquelon")
+            "2" => array("code" => "М", "name" => "Miquelon")
         ),
         /* Sudan */
         "SD" => array(
@@ -5821,7 +5940,7 @@ $app_list_strings = array (
             "4" => array("code" => "MA", "name" => "Marowijne"),
             "5" => array("code" => "NI", "name" => "Nickerie"),
             "6" => array("code" => "PA", "name" => "Пара"),
-            "7" => array("code" => "PM", "name" => "Paramaribo"),
+            "7" => array("code" => "ч. следобед", "name" => "Paramaribo"),
             "9" => array("code" => "SA", "name" => "Saramacca"),
             "10" => array("code" => "SI", "name" => "Sipaliwini"),
             "11" => array("code" => "WA", "name" => "Wanica")
@@ -5829,32 +5948,32 @@ $app_list_strings = array (
         /* Swaziland */
         "SZ" => array(
             "1" => array("code" => "H", "name" => "Hhohho"),
-            "2" => array("code" => "L", "name" => "Lubombo"),
-            "3" => array("code" => "M", "name" => "Manzini"),
+            "2" => array("code" => "Л", "name" => "Lubombo"),
+            "3" => array("code" => "М", "name" => "Manzini"),
             "4" => array("code" => "S", "name" => "Shishelweni")
         ),
         /* Sweden */
         "SE" => array(
-            "1" => array("code" => "K", "name" => "Blekinge"),
+            "1" => array("code" => "хил.", "name" => "Blekinge"),
             "2" => array("code" => "W", "name" => "Dalama"),
-            "3" => array("code" => "I", "name" => "Gotland"),
+            "3" => array("code" => "И", "name" => "Gotland"),
             "4" => array("code" => "X", "name" => "Gävleborg"),
-            "5" => array("code" => "N", "name" => "Halland"),
+            "5" => array("code" => "Н", "name" => "Halland"),
             "6" => array("code" => "Z", "name" => "Jämtland"),
-            "7" => array("code" => "F", "name" => "Jönköping"),
+            "7" => array("code" => "Ф", "name" => "Jönköping"),
             "8" => array("code" => "H", "name" => "Kalmar"),
-            "9" => array("code" => "G", "name" => "Kronoberg"),
+            "9" => array("code" => "Г", "name" => "Kronoberg"),
             "10" => array("code" => "BD", "name" => "Norrbotten"),
-            "11" => array("code" => "M", "name" => "Skåne"),
+            "11" => array("code" => "М", "name" => "Skåne"),
             "12" => array("code" => "AB", "name" => "Stockholm"),
-            "13" => array("code" => "D", "name" => "Södermanland"),
-            "14" => array("code" => "C", "name" => "Uppsala"),
+            "13" => array("code" => "Д", "name" => "Södermanland"),
+            "14" => array("code" => "С", "name" => "Uppsala"),
             "15" => array("code" => "S", "name" => "Värmland"),
             "16" => array("code" => "AC", "name" => "Västerbotten"),
             "17" => array("code" => "Y", "name" => "Västernorrland"),
             "18" => array("code" => "U", "name" => "Västmanland"),
             "19" => array("code" => "O", "name" => "Västra Götaland"),
-            "20" => array("code" => "T", "name" => "Örebro"),
+            "20" => array("code" => "Т", "name" => "Örebro"),
             "21" => array("code" => "E", "name" => "Östergötland")
         ),
         /* Switzerland */
@@ -5899,7 +6018,7 @@ $app_list_strings = array (
             "9" => array("code" => "HL", "name" => "Halab"),
             "10" => array("code" => "HM", "name" => "Hamah"),
             "11" => array("code" => "HI", "name" => "Hims"),
-            "12" => array("code" => "ID", "name" => "Idlib"),
+            "12" => array("code" => "Идентификатор", "name" => "Idlib"),
             "13" => array("code" => "RD", "name" => "Rif Dimashq"),
             "14" => array("code" => "TA", "name" => "Tartus")
         ),
@@ -6047,23 +6166,23 @@ $app_list_strings = array (
         ),
         /* Togo */
         "TG" => array(
-            "1" => array("code" => "K", "name" => "Kara"),
+            "1" => array("code" => "хил.", "name" => "Kara"),
             "2" => array("code" => "P", "name" => "Плато"),
             "3" => array("code" => "S", "name" => "Savanes"),
-            "4" => array("code" => "C", "name" => "Centrale"),
-            "5" => array("code" => "M", "name" => "Maritime")
+            "4" => array("code" => "С", "name" => "Centrale"),
+            "5" => array("code" => "М", "name" => "Maritime")
         ),
         /* Tokelau */
         "TK" => array(
-            "1" => array("code" => "A", "name" => "Atafu"),
-            "2" => array("code" => "F", "name" => "Fakaofo"),
-            "3" => array("code" => "N", "name" => "Nukunonu")
+            "1" => array("code" => "А", "name" => "Atafu"),
+            "2" => array("code" => "Ф", "name" => "Fakaofo"),
+            "3" => array("code" => "Н", "name" => "Nukunonu")
         ),
         /* Tonga */
         "TO" => array(
             "1" => array("code" => "H", "name" => "Ha'apai"),
-            "2" => array("code" => "T", "name" => "Tongatapu"),
-            "3" => array("code" => "V", "name" => "Vava'u")
+            "2" => array("code" => "Т", "name" => "Tongatapu"),
+            "3" => array("code" => "Ж", "name" => "Vava'u")
         ),
         /* Trinidad and Tobago */
         "TT" => array(
@@ -6196,11 +6315,11 @@ $app_list_strings = array (
         ),
         /* Turkmenistan */
         "TM" => array(
-            "1" => array("code" => "A", "name" => "Ahal Welayaty"),
+            "1" => array("code" => "А", "name" => "Ahal Welayaty"),
             "2" => array("code" => "B", "name" => "Balkan Welayaty"),
-            "3" => array("code" => "D", "name" => "Dashhowuz Welayaty"),
-            "4" => array("code" => "L", "name" => "Lebap Welayaty"),
-            "5" => array("code" => "M", "name" => "Mary Welayaty")
+            "3" => array("code" => "Д", "name" => "Dashhowuz Welayaty"),
+            "4" => array("code" => "Л", "name" => "Lebap Welayaty"),
+            "5" => array("code" => "М", "name" => "Mary Welayaty")
         ),
         /* Turks and Caicos Islands */
         "TC" => array(
@@ -6246,7 +6365,7 @@ $app_list_strings = array (
             "11" => array("code" => "RAK", "name" => "Rakai"),
             "12" => array("code" => "SEM", "name" => "Sembabule"),
             "13" => array("code" => "WAK", "name" => "Wakiso"),
-            "14" => array("code" => "BUG", "name" => "Bugiri"),
+            "14" => array("code" => "ПРОБЛЕМ", "name" => "Bugiri"),
             "15" => array("code" => "BUS", "name" => "Busia"),
             "16" => array("code" => "IGA", "name" => "Iganga"),
             "17" => array("code" => "JIN", "name" => "Jinja"),
@@ -6255,7 +6374,7 @@ $app_list_strings = array (
             "20" => array("code" => "KPC", "name" => "Kapchorwa"),
             "21" => array("code" => "KTK", "name" => "Katakwi"),
             "22" => array("code" => "KUM", "name" => "Kumi"),
-            "23" => array("code" => "MAY", "name" => "Mayuge"),
+            "23" => array("code" => "МАЙ", "name" => "Mayuge"),
             "24" => array("code" => "MBA", "name" => "Mbale"),
             "25" => array("code" => "PAL", "name" => "Pallisa"),
             "26" => array("code" => "SIR", "name" => "Sironko"),
@@ -6443,7 +6562,7 @@ $app_list_strings = array (
             "7" => array("code" => "AA", "name" => "Armed Forces Americas"),
             "8" => array("code" => "AC", "name" => "Armed Forces Canada"),
             "9" => array("code" => "AE", "name" => "Armed Forces Europe"),
-            "10" => array("code" => "AM", "name" => "Armed Forces Middle East"),
+            "10" => array("code" => "ч. преди обед", "name" => "Armed Forces Middle East"),
             "11" => array("code" => "AP", "name" => "Armed Forces Pacific"),
             "12" => array("code" => "CA", "name" => "Калифорния"),
             "13" => array("code" => "CO", "name" => "Колорадо"),
@@ -6455,7 +6574,7 @@ $app_list_strings = array (
             "19" => array("code" => "GA", "name" => "Джорджиа"),
             "20" => array("code" => "GU", "name" => "Guam"),
             "21" => array("code" => "HI", "name" => "Хавай"),
-            "22" => array("code" => "ID", "name" => "Идахо"),
+            "22" => array("code" => "Идентификатор", "name" => "Идахо"),
             "23" => array("code" => "IL", "name" => "Илинойс"),
             "24" => array("code" => "IN", "name" => "Индиана"),
             "25" => array("code" => "IA", "name" => "Йова"),
@@ -6481,8 +6600,8 @@ $app_list_strings = array (
             "45" => array("code" => "ND", "name" => "Норт Дакота"),
             "46" => array("code" => "MP", "name" => "Northern Mariana Islands"),
             "47" => array("code" => "OH", "name" => "Охайо"),
-            "48" => array("code" => "OK", "name" => "Оклахома"),
-            "49" => array("code" => "OR", "name" => "Оегон"),
+            "48" => array("code" => "ОК", "name" => "Оклахома"),
+            "49" => array("code" => "ИЛИ", "name" => "Оегон"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Пенсилваниа"),
             "52" => array("code" => "PR", "name" => "Puerto Rico"),
@@ -6562,7 +6681,7 @@ $app_list_strings = array (
         ),
         /* Venezuela */
         "VE" => array(
-            "1" => array("code" => "AM", "name" => "Амазонас"),
+            "1" => array("code" => "ч. преди обед", "name" => "Амазонас"),
             "2" => array("code" => "AN", "name" => "Anzoategui"),
             "3" => array("code" => "AP", "name" => "Apure"),
             "4" => array("code" => "AR", "name" => "Aragua"),
@@ -6625,13 +6744,13 @@ $app_list_strings = array (
         ),
         /* Virgin Islands (U.S.) */
         "VI" => array(
-            "1" => array("code" => "C", "name" => "Saint Croix"),
+            "1" => array("code" => "С", "name" => "Saint Croix"),
             "2" => array("code" => "J", "name" => "Сейнт Джон"),
-            "3" => array("code" => "T", "name" => "Сейнт Томас")
+            "3" => array("code" => "Т", "name" => "Сейнт Томас")
         ),
         /* Wallis and Futuna Islands */
         "WF" => array(
-            "1" => array("code" => "A", "name" => "Alo"),
+            "1" => array("code" => "А", "name" => "Alo"),
             "2" => array("code" => "S", "name" => "Sigave"),
             "3" => array("code" => "W", "name" => "Wallis")
         ),
@@ -6639,7 +6758,7 @@ $app_list_strings = array (
         "YE" => array(
             "1" => array("code" => "AB", "name" => "Abyan"),
             "2" => array("code" => "AD", "name" => "Adan"),
-            "3" => array("code" => "AM", "name" => "Amran"),
+            "3" => array("code" => "ч. преди обед", "name" => "Amran"),
             "4" => array("code" => "BA", "name" => "Al Bayda"),
             "5" => array("code" => "DA", "name" => "Ad Dali"),
             "6" => array("code" => "DH", "name" => "Dhamar"),
@@ -6660,7 +6779,7 @@ $app_list_strings = array (
         /* Yugoslavia */
         "YU" => array(
             "1" => array("code" => "KOS", "name" => "Kosovo"),
-            "2" => array("code" => "MON", "name" => "Montenegro"),
+            "2" => array("code" => "Понеделник", "name" => "Montenegro"),
             "3" => array("code" => "SER", "name" => "Serbia"),
             "4" => array("code" => "VOJ", "name" => "Vojvodina")
         ),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "ИЛИ", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Следвай линка',
   'LBL_TOGGLE_VISIBILITY' => 'Промяна на статуса за визуализация', // Record view header panel element
   'LBL_ACTIVITIES' => 'Хронология',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. Всички права запазени.',
-  'LBL_TRADEMARK' => 'SugarCRM е търговска марка на SugarCRM, Inc. Всички останали имена на компании и продукти могат да бъдат търговски марки на компании, с които са асоциирани.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ и Sugar™ са търговски марки на SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Изпрати покана',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar и 3-D кубът са регистрирани търговски марки на SugarCRM Inc. '.
+        'Всички други наименования на фирми и продукти, използвани или упоменати в този продукт е възможно да са търговски марки на '.
+        'съответните компании, с които те са свързани.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ и Sugar™ са търговски марки на SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Изпрати покана',
   'LBL_INVITEES' => 'Гости',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Гостът няма да получи вашата покана',
   'LBL_SELECT_ACTION_LABEL' => 'Изберете действие',
   'LBL_TOGGLE_DRAWER' => 'Промени размера на панела',
   'LBL_TOUR_NEXT' => 'Следваща стъпка',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Добави' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Лого на компанията' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Календар' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'Навигация на основния модул',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'табло за превключване',
+
     'LBL_ADVANCED' => 'Разширен',
     'LBL_BASIC' => 'Основен',
     'LBL_MODULE_FILTER' => 'Филтрирай по',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Екип',
     'LBL_TEAM_SET_ID' => 'Идентификатир на списъка с екипи',
     'LBL_TEAM_SET'=>'Списък на екипа',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Избрани екипи',
     'LBL_SEARCH_UNAVAILABLE' => 'Търсене не е възможно. Моля опитайте отново по-късно.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Не е дефиниран основен екип',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Грешка при опита за премахване на основен екип с идентификатор [{0}] за модул [{1}] с идентификатор  [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Търсачката е временно недостъпна.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Грешка във времето за работа на търсачката. Обърнете се към вашия системен администратор.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Поле, което е заключено от процес, не може да бъде редактирано.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Възникнала е генерална грешка или отказ. Причините могат да бъдат различни и не попадат в обхвата на управляваните от интерфейса изключения.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Показва, че сървърът е зает, претоварен или недостъпен.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'Отдалеченият край на търсачката в момента е недостъпен поради проблем с връзката. Проверете връзката и конфигурацията в администратор->търсене->тестване.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'Възникна изключение по време на работа в SearchEngine. Вижте sugarcrm.log за повече подробности.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Поле, което в момента е заключено от активен процес, не може да бъде редактирано.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s е заключено от активен процес и не може да се редактира.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s са заключени от активен процес и не могат да се редактират.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Файл със същото име вече съществува в системата.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'За този времеви период вече има дефинирани под-периоди',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Вторичните периоди от време не могат да имат подпериоди',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Unable to retrieve any timeperiods of type: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Не са намерени активни периоди за текущите настройки.',
     'LBL_CURRENT_TIMEPERIOD' => 'Текущ времеви период',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Предишен времеви период',
     'LBL_NEXT_TIMEPERIOD' => 'Следващ времеви период',
@@ -8532,7 +8664,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => 'Затвори',
     'LBL_ADDITIONAL_DETAILS' => 'Допълнителни детайли',
     'LBL_ADMIN' => 'Администриране',
-    'LBL_ALT_HOT_KEY' => 'Alt+',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'Архивирай',
     'LBL_ASSIGNED_TO_USER'=>'Посочи отговорник',
     'LBL_ASSIGNED_TO' => 'Отговорник:',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Избери поле...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Избери оператор...',
     'LBL_FILTER_CREATE_NEW' => 'Създай филтър',
+    'LBL_FILTER_CREATE_FILTER' => 'Създай нов филтър',
+    'LBL_FILTER_EDIT_FILTER' => 'Редактирай филтъра',
     'LBL_FILTER_ALL_RECORDS' => 'Всички записи',
     'TPL_FILTER_SAVE' => 'Успешно създадохте филтъра  {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'От',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Област:',
     'LBL_STATUS_UPDATED'=>'Статусът Ви за това събитие бе актуализиран!',
+    'LBL_STATUS_NOT_UPDATED' => 'Статусът Ви за това събитие не е актуализиран.',
     'LBL_STATUS'=>'Статус:',
     'LBL_STREET'=>'Улица',
     'LBL_SUBJECT' => 'Относно',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc. </a> Всички права запазени. <br />SugarCRM е запазена марка на SugarCRM Inc. Всички други имена на фирми и продукти могат да бъдат запазена марка на съответната фирма, с която са свързани.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Всички права запазени.<br />SugarCRM, Sugar и 3-D кубът са регистрирани търговски марки на SugarCRM Inc. '.
+        'Всички други наименования на фирми и продукти, използвани или упоменати в този продукт е възможно да са търговски марки на '.
+        'съответните компании, с които те са свързани.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Насрочената за изпълнение задача е приключена',
@@ -9176,7 +9315,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Грешка. Въвели сте невалиден оператор.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Грешка. Въвели сте невалиден филтър.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Неуспешно импортиране. Груповото поле е частично заключено от Дефиницията на процеса. Тези полета трябва да се отключат в Дефиницията на процеса, за да може актуализацията да продължи.',
+    'ERROR_EXP_DATE_LOW' => 'Грешка. Датата на изтичане не може да бъде преди датата на публикуване.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Грешка. Одобреният статут изисква дата на публикуване.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Полето на Датата на публикуване е празно.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9306,6 +9446,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'колони могат да бъдат визуализирани.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Начало',
     'LBL_DASHBOARD_BWC' => 'Моето електронно табло с модули изпълнявани в режиум на съвместимост',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Моето електронно табло',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Електронно табло с помощна информация',
@@ -9339,11 +9480,8 @@ $app_strings = array (
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Моите {{module}}',
 
-    'LBL_DASHLET_NEWS_NAME' => 'Новини',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Канал Google News за свързан профил',
-
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Измерители на възможностите',
-    'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Opportunity Metrics for Related Account',
+    'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Метрика на възможностите за подобен профил. Необходим е абонамент за D&B.',
     /*DNB Account Create Dashlet*/
     'LBL_DNB_ACC_CRT' => 'D&B Създаване на организация',
     'LBL_DNB_ACC_CRT_DESC' => 'Създай организация през D&B. Изисква се абонамент за D&B.',
@@ -9411,7 +9549,6 @@ Public companies frequently identify top competitors in their public filings, wh
 
     'LBL_DASHLET_NO_RECORDS' => 'Няма открити записи.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Резюме на казуса',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Лента с новини',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Взаимодействия',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Бележки & Прикачени файлове',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Бележки & Прикачени файлове принадлежащи на записа',
@@ -9922,7 +10059,7 @@ Includes business intelligence such as executive names and titles, financials, n
     'LBL_DNB_BAL_JOBCD_PH' => 'Изберете позиция',
     'LBL_DNB_BAL_ORG_NAME' => 'Име на организацията',
     'LBL_DNB_BAL_IMPORT_AS' => 'Импортирай като:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Име на организацията',
+    'LBL_DNB_BAL_ORG_NAME' => 'Организация',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'В милиони USD',
@@ -9981,7 +10118,7 @@ Includes business intelligence such as executive names and titles, financials, n
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Най-полезните публикувани статии от базата знания',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Показва най-харесваните и най-разглежданите статии от базата от знания',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtered by {{label}} "{{value}}"',
 
@@ -10020,6 +10157,13 @@ Includes business intelligence such as executive names and titles, financials, n
     'LBL_SEARCH_RESULTS_TIME' => 'Г-ца',
     'ERR_BLANK_PAGE_NAME' => 'Моля въведете име на страницата.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Моите възможности категоризирани по етап на преговори',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Текущите възможности на моя екип",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Графика на текущите възможности за продажба',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Визуализира графика на текущите възможности.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Липсва изображение',
 
@@ -10289,6 +10433,8 @@ Includes business intelligence such as executive names and titles, financials, n
     'LBL_SELECT_THIS_ROW_TITLE' => 'Маркирай този ред',
     'LBL_TEAM_SELECTED_TITLE' => 'Team Selected',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Маркирай за да стане този екип основен',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Екипът е маркиран като избран, базиран на екипа ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Маркирай този екип като избран, базиран на екипа',
     'LBL_SEARCH_AND_SELECT' => 'Търси и избери  {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Търсене и добавяне на {{module}}',
 
@@ -10377,6 +10523,9 @@ Includes business intelligence such as executive names and titles, financials, n
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Прегледът е забранен: Няма налични данни',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Визуализацията е деактивирана: В изглед като текущ запис',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Прегледът е забранен: Записът е премахнат или нямате достъп до него',
+    'LBL_PREVIEW_PREVIOUS' => 'Визуализирай предишния',
+    'LBL_PREVIEW_NEXT' => 'Визуализирай следващия',
+    'LBL_PREVIEW_CLOSE' => 'Затваряне на визуализацията',
     'LBL_STREAM_NO_RECORDS' => 'Този запис не съдържа бележки към момента. Моля добавете такава като проследните връзката за създаване на бележка.',
     'LBL_DUPLICATES_FOUND' => 'Намерени са {{duplicateCount}} дублирани записа.',
     'LBL_NO_DUPLICATES_FOUND' => 'Няма дубликати.',
@@ -10396,6 +10545,7 @@ Includes business intelligence such as executive names and titles, financials, n
         'Некоректен брой на записи. Допустимите граници са между {{minRecords}} и {{maxRecords}}.',
     'LBL_MERGE_NO_ACCESS' =>
         'Нямате достъп, за да извършите това действие.',
+    'LBL_MERGE_LOCKED' => 'Някои от избраните за обединяване записи съдържат полета, които са заключени за редактиране от процес и в момента не могат да бъдат обединени.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10866,10 +11016,9 @@ Includes business intelligence such as executive names and titles, financials, n
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Системни настройки',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Студио',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Парола',
     'LBL_CURRENT_PASSWORD'				=> 'Текуща парола',
-    'LBL_SET_NEW_PASSWORD'              => 'Въведете парола',
     'LBL_NEW_PASSWORD1'                 => 'Нова парола',
     'LBL_NEW_PASSWORD2'                 => 'Потвърждение на паролата',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Моля, въведете потвърждение на новата си парола.',
@@ -10877,13 +11026,12 @@ Includes business intelligence such as executive names and titles, financials, n
     'ERR_ENTER_OLD_PASSWORD'			=> 'Моля, въведете текущата си парола.',
     'ERR_REENTER_PASSWORDS' => 'Въведените пароли трябва да съвпадат.',
     'ERR_PASSWORD_MISMATCH' => 'Въведената парола не съвпада с тази в системата.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Паролата беше променена успешно.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Паролата не може да бъде изпратена',
     'LBL_REQUEST_PASSWORD' => 'Изпрати заявка за нова парола',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Грешка: Възникна проблем при актуализация на паролата на този потребител.',
     'LBL_INCORRECT_PASSWORD' => 'Грешка: Некоректна парола',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Предпочитан език:',
+    'LBL_PREFERRED_LANGUAGE' => 'Предпочитание за език:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Избери справка',
@@ -10913,6 +11061,18 @@ Includes business intelligence such as executive names and titles, financials, n
     'ERR_HTTP_500_TEXT_LINE1' => 'Сървърът попадна на грешка и не можа да изпълни вашата заявка.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Моля, опитайте отново. Ако грешката продължава, обърнете се към вашия администратор на SugarCRM.',
     'ERR_HTTP_500_ACTION' => 'Моля свържете се с техническа поддръжка.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 Вътрешна грешка в сървъра',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Сървърът попадна на временна грешка и не можа да изпълни вашата заявка.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Моля, опитайте отново. Ако грешката продължава, обърнете се към вашия администратор на SugarCRM.',
+    'ERR_HTTP_502_ACTION' => 'Моля свържете се с техническа поддръжка.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 Вътрешна грешка в сървъра',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Сървърът е недостъпен да изпълни заявката ви.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Моля, опитайте отново. Ако грешката продължава, обърнете се към вашия администратор на SugarCRM.',
+    'ERR_HTTP_503_ACTION' => 'Моля свържете се с техническа поддръжка.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Изгледът на може да бъде представен.',
     'ERR_RENDER_FAILED_MSG' => 'Изгледът на може да бъде представен.',
@@ -11035,7 +11195,7 @@ Includes business intelligence such as executive names and titles, financials, n
 
     //record save
     'LBL_RECORD_SAVED' => 'Записът е съхранен.', // use when there is no information about the record
-    'LBL_RECORD_SAVED_SUCCESS' => 'Успешно създадохте {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS' => 'Успешно създадохте {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
     'LBL_RECORD_SAVED_ACCESS_DENIED' => 'Записът беше успешно създаден, но не разполагате с права да го достъпите.', // use when user has no access to the model
     'LBL_VALIDATING' => 'Валидиране...',
 
@@ -11046,6 +11206,7 @@ Includes business intelligence such as executive names and titles, financials, n
     'LBL_ALERT_TITLE_ERROR' => 'Грешка:',
     'LBL_ALERT_TITLE_LOADING' => 'Зарежда',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Версията на вашия бразър не се поддържа вече.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Препоръчват се следните версии на браузъра: <ul><li>Internet Explorer 11</li> <li>Firefox 41</li> <li>Safari 7.1</li> <li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Моля, вижте страницата {{link}} за предложените браузъри.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Поддържани платформи',
 
@@ -11064,8 +11225,8 @@ Includes business intelligence such as executive names and titles, financials, n
 
 
     //cases summary chart
-    'LBL_CASE_SUMMARY_CHART' => 'Case Summary',
-    'LBL_CASE_SUMMARY_CHART_DESC' => 'Shows an overview of related cases.',
+    'LBL_CASE_SUMMARY_CHART' => 'Резюме на казуса',
+    'LBL_CASE_SUMMARY_CHART_DESC' => 'Показва преглед на подобните казуси.',
     'LBL_DASHLET_CASESSUMMARY_SUMMARY' => 'Резюме',
     'LBL_DASHLET_CASESSUMMARY_CLOSE_CASES' => 'Затворени казуси',
     'LBL_DASHLET_CASESSUMMARY_OPEN_CASES' => 'Актуални казуси',
@@ -11098,6 +11259,9 @@ Includes business intelligence such as executive names and titles, financials, n
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Възникна грешка при опита за връзка със сървъра. Моля опитайте отново.',
     'ERR_RESOLVE_ERRORS' => 'Отстранете възникналите грешки преди да продължите.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Обновяване на списъка',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'повече',
@@ -11206,10 +11370,13 @@ Includes business intelligence such as executive names and titles, financials, n
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM позволява на потребителите да подобрят своята производителност чрез изпълнение на определени операции с помощта на клавишни комбинации. Таблиците в дясно описват съществуващите клавични комбинации заедно с действията, които изпълняват.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Поддържани клавиши</h1><ul><li>всички буквено-цифрови знаци и символи,</li> <li>shift, ctrl, alt, command, mod (ctrl в Windows/Linux и command в Macs)</li> <li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>Поддържани функции</h1><ul><li>Комбинация от клавиши: ctrl+m</li><li>Няколко клавиша: m,ctrl+m</li><li>Последователност от клавиши: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Глобални клавишни комбинации',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Контекстни клавишни комбинации',
     'LBL_SHORTCUT_KEY_KEY' => 'Ключ',
     'LBL_SHORTCUT_FUNCTION' => 'Функция',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Конфигуриране на контекстни клавишни комбинации',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Няма контекстни клавишни комбинации за конфигуриране',
     'LBL_SHORTCUT_HELP' => 'Показване на помощна страница за клавишните комбинации',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Показване/Скриване на меню за бързо създаване на записи',
     'LBL_SHORTCUT_SEARCH' => 'Фокус на полето за глобално търсене',
@@ -11257,6 +11424,9 @@ Includes business intelligence such as executive names and titles, financials, n
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Избиране на всички елементи в поле за многократен избор',
     'LBL_SHORTCUT_SWEETSPOT' => 'Променяне на лентата на Sweet Spot',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Скриване на лентата на Sweet Spot',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Запази конфигурацията',
+    'LBL_SHORTCUT_RESTORE' => 'Възстанови стандартните настройки',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Възникна грешка при записване на персонализираните клавишни комбинации на сървъра. Моля, опитайте отново.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Настройки на модул {{module}}',
@@ -11279,13 +11449,20 @@ Includes business intelligence such as executive names and titles, financials, n
     'LBL_CALENDAR_RECURRENCE' => "Регулярност",
     'LBL_CALENDAR_REMINDERS' => "Напомняния",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Персонализирана дата",
     'LBL_CALENDAR_REPEAT_TYPE' => "Тип повторение",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Интервал на повторение",
     'LBL_CALENDAR_REPEAT_DOW' => "Повторение в дни от седмицата",
+    'LBL_CALENDAR_REPEAT' => "Повтори",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Повторение до",
     'LBL_CALENDAR_REPEAT_COUNT' => "Повторение",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Повтори селектора",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Ден (дни) от месеца",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Повтори редните числа",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Повтори единицата",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Промени в повторяемостта трябва да бъдат правени шрез първия запис от серията.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Правилата на повторяемост не водят до генериране на събитие.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Ще присъствам',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Отхвърлена',
@@ -11305,17 +11482,23 @@ Includes business intelligence such as executive names and titles, financials, n
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM изисква поддръжката на javascript. Моля разрешете изплзването на  javascript, за да продължите да използвате SugarCRM.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Сериализираните данни не можаха да се десериализират',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Сериализираните данни не можаха да се десериализират, защото съдържат препратки към обекти или класове',
 
     'LBL_FIELD_TRIMMED' => 'Полето беше намалено поради надвишаване на лимита за максимален брой знаци.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Полето надвишава ограничението за максимален брой знаци.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Изминалите 7 дни',
     '30' => 'Изминалите 30 дни',
     '90' => 'Изминалото тримесечие',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11420,13 +11603,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'С изтекъл срок на валидност',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Работен вариант',
-    'Expired' => 'С изтекъл срок на валидност',
-    'In Review' => 'В процес на преглед',
-    'Published' => 'Стартирал',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Административни действия--',
@@ -11438,57 +11614,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Изтрий маркираните статии',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'С приложения',
-        'none' => 'Без приложения',
-        'mime' => 'Посочи типа на мимиката',
-        'name' => 'Задайте име',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Думи';
   $app_list_strings['moduleListSingular']['Words'] = 'Дума';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Добавяне на статия';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => '5 най-разглеждани',
-    'Top_10' => '10 най-разглеждани',
-    'Top_20' => '20 най-разглеждани',
-    'Bot_5'  => '5 най-малко разглеждани',
-    'Bot_10' => '10 най-малко разглеждани',
-    'Bot_20' => '20 най-малко разглеждани',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Всички',
-        'added' => 'Добавени през последните 30 дни',
-        'pending' => 'Чакащи за моето одобрение',
-        'updated' =>'Актуализирани през последните 30 дни',
-        'faqs' => 'Често задавани въпроси',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'На',
-    'before' => 'Преди',
-    'after' => 'След',
-    'between_dates' => 'Е между',
-    'last_7_days' => 'Изминалите 7 дни',
-    'next_7_days' => 'Идващите 7 дни',
-    'last_month' => 'Миналия месец',
-    'this_month' => 'Текущия месец',
-    'next_month' => 'Следващия месец',
-    'last_30_days' => 'Изминалите 30 дни',
-    'next_30_days' => 'Идващите 30 дни',
-    'last_year' => 'Миналата година',
-    'this_year' => 'Текущата година',
-    'next_year' => 'Следващата година',
-    'isnull' => 'Невалидна',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12350,6 +12478,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Всички контакти",
+    "email" => "Само имейл",
+    "phone" => "Само телефон",
     "prem" => "Само версия премиум"
 );
 
@@ -12375,4 +12505,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Биография',
     'Both' => 'И двете'
 );
-

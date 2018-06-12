@@ -22,7 +22,7 @@ class ViewIndex extends SugarView
      *
      * Constructor
      *
-     * @see SugarView::SugarView()
+     * @see parent::__construct()
      */
     public function __construct($bean = null, $view_object_map = array())
     {

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -1189,7 +1189,7 @@
 		
 		CAL.get("user_invitees").value = "";
 		CAL.get("contact_invitees").value = "";
-		CAL.get("lead_invitees").value = "";	
+		CAL.get("lead_invitees").value = "";
 
 		CAL.each( GLOBAL_REGISTRY['focus'].users_arr, 	function(i,v){
 									var field_name = "";
@@ -1507,7 +1507,7 @@
             meetingDurationMinutes = 15,
             meetingAttributes = {
                 'date_start': dateStart,
-                'date_end': app.date(dateStart).add('m', meetingDurationMinutes).formatServer(),
+                'date_end': app.date(dateStart).add(meetingDurationMinutes, 'm').formatServer(),
                 'duration_hours': 0,
                 'duration_minutes': meetingDurationMinutes
             },

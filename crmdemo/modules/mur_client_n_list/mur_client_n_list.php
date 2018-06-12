@@ -33,7 +33,7 @@ require_once('modules/mur_client_n_list/mur_client_n_list_sugar.php');
 class mur_client_n_list extends mur_client_n_list_sugar {
 	
 	function mur_client_n_list(){	
-		parent::mur_client_n_list_sugar();
+		parent::__construct();
 	}
 	
 }

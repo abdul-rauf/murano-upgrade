@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -24,12 +24,12 @@ $mod_strings = array (
 	'LBL_CONTACT_CASE_TITLE'			=> '연락처',
 	'LBL_CONTACT_NAME'					=> '연락처명',
 	'LBL_CONTACT_ROLE'					=> '역할',
-	'LBL_CONTACTS_SUBPANEL_TITLE'		=> '연락처목록',
+	'LBL_CONTACTS_SUBPANEL_TITLE'		=> '연락처',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> '사례목록',
 	'LBL_DESCRIPTION'					=> '설명',
 	'LBL_FILENANE_ATTACHMENT' 			=> '파일 첨부',	
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> '완료된 활동',
-	'LBL_INVITEE'						=> '연락처목록',
+	'LBL_INVITEE'						=> '연락처',
 	'LBL_MEMBER_OF'						=> '거래처',
     'LBL_MODULE_NAME'					=> '사례 목록',
     'LBL_MODULE_NAME_SINGULAR'			=> '사례',

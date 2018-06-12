@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -60,9 +60,9 @@ $mod_strings = array (
   'LBL_ALERT_TRIG_USER_CUSTOM' => 		'Ontvanger geassocieerd met de doelmodule',
   'LBL_ALERT_TRIG_USER_CUSTOM_TITLE' => 	'Ontvanger geassocieerd met de doelmodule',
   'LBL_ALERT_SPECIFIC_USER' => 			'Een gespecificeerde',
-  'LBL_ALERT_SPECIFIC_USER_TITLE' => 	'Een gespecificeerde gebruiker',
+  'LBL_ALERT_SPECIFIC_USER_TITLE' => 	'Een specifieke gebruiker',
   'LBL_ALERT_SPECIFIC_TEAM' => 			'Alle gebruikers binnen een gespecificeerde',
-  'LBL_ALERT_SPECIFIC_TEAM_TITLE' => 	'Alle gebruikers in een specifiiek team',
+  'LBL_ALERT_SPECIFIC_TEAM_TITLE' => 	'Alle gebruikers in een specifiek team',
   'LBL_ALERT_SPECIFIC_ROLE' => 			'Alle gebruikers in een specifiek',
   'LBL_ALERT_SPECIFIC_ROLE_TITLE' => 	'Alle gebruikers in een specifieke rol',
   'LBL_ALERT_SPECIFIC_TEAM_TARGET_TITLE' => 	'Leden van het team geassocieerd met de doelmodule',

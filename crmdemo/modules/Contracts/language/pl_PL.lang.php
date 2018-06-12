@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,8 +20,8 @@ $mod_strings = array (
 
     // quick menu link labels
     'LNK_NEW_CONTRACT' => 'Utwórz umowę',
-    'LNK_CONTRACT_LIST' => 'Lista umów',
-    'LNK_IMPORT_CONTRACTS' => 'Import umów',
+    'LNK_CONTRACT_LIST' => 'Wyświetl umowy',
+    'LNK_IMPORT_CONTRACTS' => 'Importuj umowy',
 
     // quick create label
     'LBL_NEW_FORM_TITLE' => 'Nowa umowa',
@@ -33,15 +33,15 @@ $mod_strings = array (
     'LBL_ACCOUNT_NAME' => 'Nazwa kontrahenta:',
     'LBL_OPPORTUNITY' => 'Szansa',
     'LBL_OPPORTUNITY_ID' => 'ID szansy',
-    'LBL_START_DATE' => 'Data zawarcia:',
+    'LBL_START_DATE' => 'Data rozpoczęcia:',
     'LBL_END_DATE' => 'Data zakończenia:',
     'LBL_TOTAL_CONTRACT_VALUE' => 'Wartość umowy:',
-    'LBL_TOTAL_CONTRACT_VALUE_USDOLLAR' => 'Wartość umowy (PLN):',
+    'LBL_TOTAL_CONTRACT_VALUE_USDOLLAR' => 'Wartość umowy (USD):',
     'LBL_STATUS' => 'Status:',
     'LBL_CUSTOMER_SIGNED_DATE' => 'Data podpisania przez klienta:',
     'LBL_COMPANY_SIGNED_DATE' => 'Data podpisania przez firmę:',
-    'LBL_CONTRACT_TERM' => 'Warunki umowy:',
-    'LBL_EXPIRATION_NOTICE' => 'Ostrzeżenie o wygaśnieciu:',
+    'LBL_CONTRACT_TERM' => 'Czas trwania umowy:',
+    'LBL_EXPIRATION_NOTICE' => 'Ostrzeżenie o wygaśnięciu:',
     'LBL_TIME_TO_EXPIRY' => 'Czas do wygaśnięcia:',
     'LBL_DESCRIPTION' => 'Opis:',
     'LBL_TEAM' => 'Zespół:',
@@ -71,7 +71,7 @@ $mod_strings = array (
     'LBL_SF_ACCOUNT_NAME' => 'Nazwa kontrahenta:',
     'LBL_SF_STATUS' => 'Status:',
     'LBL_SF_CONTRACT_TYPE' => 'Typ:',
-    'LBL_SF_START_DATE' => 'Data zawarcia:',
+    'LBL_SF_START_DATE' => 'Data rozpoczęcia:',
     'LBL_SF_END_DATE' => 'Data zakończenia:',
     'LBL_SF_ASSIGNED_TO' => 'Przydzielono do:',
 
@@ -88,15 +88,15 @@ $mod_strings = array (
     'LBL_TYPE_NAME' => 'Nazwa typu',
     'LBL_CONTRACT_TYPE'=>'Typ:',
 
-    'LBL_CREATED_USER' => 'Użytkownik tworzący',
+    'LBL_CREATED_USER' => 'Utworzono przez',
     'LBL_MODIFIED_USER' => 'Zmodyfikowane przez',
     'LBL_DOCUMENTS' => 'Dokumenty',
     'LBL_CONTRACT_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
-    'LBL_CONTRACT_INFORMATION' => 'Podgląd',
+    'LBL_CONTRACT_INFORMATION' => 'Informacje ogólne',
 
-    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Przydzielono do',
-    'LBL_EXPORT_ASSIGNED_USER_ID' => 'Przydzielono do (ID)',
-    'LBL_EXPORT_MODIFIED_USER_ID' => 'Zmodyfikowano przez',
-    'LBL_EXPORT_CREATED_BY' => 'Utworzono przez',
+    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Przypisano do (nazwa użytkownika)',
+    'LBL_EXPORT_ASSIGNED_USER_ID' => 'Przypisano do (ID użytkownika)',
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Zmodyfikowano przez (ID)',
+    'LBL_EXPORT_CREATED_BY' => 'Utworzone przez (ID)',
     'LBL_EXPORT_TYPE_NAME' => 'Nazwa typu',
 );

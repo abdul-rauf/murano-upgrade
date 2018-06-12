@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,7 +56,7 @@ $app_list_strings = array (
     'TaxRates'=>'Податкові ставки',
     'ContractTypes' => 'Типи контрактів',
     'Schedulers'=>'Планувальники',
-    'Project'=>'Проект',
+    'Project'=>'Проекти',
     'ProjectTask'=>'Задачі проекту',
     'Campaigns'=>'Маркетингові кампанії',
     'CampaignLog'=>'Журнал маркетингової кампанії',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Фільтр',
     'Comments' => 'Коментар',
     'Currencies' => 'Валюта',
-    'Project' => 'Проект',
     'ProductTemplates' => 'Шаблон продукту',
-    'ProductCategories' => 'Категорія продукту',
     'ProductTypes' => 'Тип продукту',
     'Shippers' => 'Постачальник перевезень',
     'Subscriptions' => 'Підписка',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Пт",
                 '7'=>"Сб",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Нд",
+            '2'=>"Пн",
+            '3'=>"Вт",
+            '4'=>"Ср",
+            '5'=>"Чт",
+            '6'=>"Пт",
+            '7'=>"Сб",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Нд',
         '1' => 'Пн',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'рік(роки/років)',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'До',
+        'Occurrences' => 'Випадки',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Не визначено',
+        'Each' => 'Кожен',
+        'On' => 'На',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'перший',
+        'second' => 'другий',
+        'third' => 'третій',
+        'fourth' => 'четвертий',
+        'fifth' => 'п&#39;ятий',
+        'last' => 'останній',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Неділя',
+        'Mon' => 'Понеділок',
+        'Tue' => 'Вівторок',
+        'Wed' => 'Середа',
+        'Thu' => 'Четвер',
+        'Fri' => 'П&#39;ятниця',
+        'Sat' => 'Субота',
+        'Day' => 'День',
+        'WD'  => 'Будній день',
+        'WE'  => 'Вихідний день'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Середина',
         'end' => 'Дата завершення',
         'top' => 'Верх',
+        'total' => 'Усього',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Воронка',
@@ -1620,10 +1731,10 @@ $app_list_strings = array (
     'next_30_days' => 'Наступні 30 днів',
     'last_month' => 'Минулого місяця',
     'this_month' => 'Цього місяця',
-    'next_month' => 'Наступного місяця',
+    'next_month' => 'Наступний місяць',
     'last_year' => 'Минулого року',
     'this_year' => 'Цього року',
-    'next_year' => 'Наступного року',
+    'next_year' => 'Наступний рік',
     'between' => 'Між',
   ),
     'date_range_operator_dom' =>
@@ -1636,8 +1747,8 @@ $app_list_strings = array (
         'this_year' => 'Цього року',
         'next_7_days' => 'Наступні 7 днів',
         'next_30_days' => 'Наступні 30 днів',
-        'next_month' => 'Наступного місяця',
-        'next_year' => 'Наступного року',
+        'next_month' => 'Наступний місяць',
+        'next_year' => 'Наступний рік',
     ),
   'numeric_range_search_dom' =>
   array(
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Світлий',
       'dark' => 'Темний',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Перемістити',
@@ -2100,8 +2219,8 @@ $app_list_strings = array (
         ),
         /* Barbados */
         "BB" => array(
-            "1" => array("code" => "CC", "name" => "Крайст-черч"),
-            "2" => array("code" => "AND", "name" => "Сент-Ендрю"),
+            "1" => array("code" => "Копія", "name" => "Крайст-черч"),
+            "2" => array("code" => "І", "name" => "Сент-Ендрю"),
             "3" => array("code" => "GEO", "name" => "Сент-Джордж"),
             "4" => array("code" => "JAM", "name" => "Сент-Джеймс"),
             "5" => array("code" => "JOH", "name" => "Сент-Джон"),
@@ -2394,7 +2513,7 @@ $app_list_strings = array (
             "3" => array("code" => "KB", "name" => "Каеп"),
             "4" => array("code" => "KK", "name" => "Кахконг"),
             "5" => array("code" => "KL", "name" => "Кандаль"),
-            "6" => array("code" => "KM", "name" => "Кампонгтям"),
+            "6" => array("code" => "Кілометри", "name" => "Кампонгтям"),
             "7" => array("code" => "KN", "name" => "Кампонгчнанг"),
             "8" => array("code" => "KO", "name" => "Кампонгсаом"),
             "9" => array("code" => "KP", "name" => "Кампот"),
@@ -2432,7 +2551,7 @@ $app_list_strings = array (
         "CA" => array(
             "1" => array("code" => "AB", "name" => "Альберта"),
             "2" => array("code" => "BC", "name" => "Британська Колумбія"),
-            "3" => array("code" => "MB", "name" => "Манітоба"),
+            "3" => array("code" => "мБ", "name" => "Манітоба"),
             "4" => array("code" => "NB", "name" => "Нью-Брансвік"),
             "5" => array("code" => "NL", "name" => "Ньюфаундленд і Лабрадор"),
             "6" => array("code" => "NT", "name" => "Північно-західні території"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "І", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "АБО", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Southern Nations - Nationalities"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "Sumba"),
+            "22" => array("code" => "Сума", "name" => "Sumba"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3447,7 +3566,7 @@ $app_list_strings = array (
             "3" => array("code" => "DM", "name" => "Demerara-Mahaica"),
             "4" => array("code" => "EC", "name" => "East Berbice-Corentyne"),
             "5" => array("code" => "EW", "name" => "Essequibo Islands-West Demerara"),
-            "6" => array("code" => "MB", "name" => "Mahaica-Berbice"),
+            "6" => array("code" => "мБ", "name" => "Mahaica-Berbice"),
             "7" => array("code" => "PM", "name" => "Pomeroon-Supenaam"),
             "8" => array("code" => "PI", "name" => "Potaro-Siparuni"),
             "9" => array("code" => "UD", "name" => "Upper Demerara-Berbice"),
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "АБО", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "АБО", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3844,7 +3963,7 @@ $app_list_strings = array (
             "105" => array("code" => "VS", "name" => "Medio Campidano"),
             "106" => array("code" => "OG", "name" => "Ogliastra"),
             "107" => array("code" => "OT", "name" => "Olbia-Tempio"),
-            "108" => array("code" => "MB", "name" => "Monza e Brianza"),
+            "108" => array("code" => "мБ", "name" => "Monza e Brianza"),
             "109" => array("code" => "FM", "name" => "Fermo"),
             "110" => array("code" => "BT", "name" => "Barletta-Andria-Trani")
         ),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parish"),
             "4" => array("code" => "MAN", "name" => "Manchester Parish"),
             "5" => array("code" => "POR", "name" => "Portland Parish"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "І", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parish"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parish"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parish"),
@@ -4109,7 +4228,7 @@ $app_list_strings = array (
             "11" => array("code" => "BAT", "name" => "Batroun"),
             "12" => array("code" => "BSH", "name" => "Bsharri"),
             "13" => array("code" => "KOU", "name" => "Koura"),
-            "14" => array("code" => "MIN", "name" => "Miniyeh-Danniyeh"),
+            "14" => array("code" => "Мінімум", "name" => "Miniyeh-Danniyeh"),
             "15" => array("code" => "TRI", "name" => "Tripoli"),
             "16" => array("code" => "ZGH", "name" => "Zgharta"),
             "17" => array("code" => "ALE", "name" => "Aley"),
@@ -4575,7 +4694,7 @@ $app_list_strings = array (
             "1" => array("code" => "AG", "name" => "Agalega Islands"),
             "2" => array("code" => "BL", "name" => "Black River"),
             "3" => array("code" => "BR", "name" => "Beau Bassin-Rose Hill"),
-            "4" => array("code" => "CC", "name" => "Cargados Carajos Shoals (Saint B)"),
+            "4" => array("code" => "Копія", "name" => "Cargados Carajos Shoals (Saint B)"),
             "5" => array("code" => "CU", "name" => "Curepipe"),
             "6" => array("code" => "FL", "name" => "Flacq"),
             "7" => array("code" => "GP", "name" => "Grand Port"),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "АБО", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -5048,7 +5167,7 @@ $app_list_strings = array (
         "PA" => array(
             "1" => array("code" => "BT", "name" => "Bocas del Toro"),
             "2" => array("code" => "CH", "name" => "Chiriqui"),
-            "3" => array("code" => "CC", "name" => "Cocle"),
+            "3" => array("code" => "Копія", "name" => "Cocle"),
             "4" => array("code" => "CL", "name" => "Colon"),
             "5" => array("code" => "DA", "name" => "Darien"),
             "6" => array("code" => "HE", "name" => "Herrera"),
@@ -5069,7 +5188,7 @@ $app_list_strings = array (
             "8" => array("code" => "GU", "name" => "Gulf"),
             "9" => array("code" => "MD", "name" => "Madang"),
             "10" => array("code" => "MN", "name" => "Manus"),
-            "11" => array("code" => "MB", "name" => "Milne Bay"),
+            "11" => array("code" => "мБ", "name" => "Milne Bay"),
             "12" => array("code" => "MR", "name" => "Morobe"),
             "13" => array("code" => "NC", "name" => "National Capital"),
             "14" => array("code" => "NI", "name" => "New Ireland"),
@@ -5091,7 +5210,7 @@ $app_list_strings = array (
             "7" => array("code" => "CZ", "name" => "Caazapa"),
             "8" => array("code" => "CN", "name" => "Canindeyu"),
             "9" => array("code" => "CE", "name" => "Центральний"),
-            "10" => array("code" => "CC", "name" => "Concepcion"),
+            "10" => array("code" => "Копія", "name" => "Concepcion"),
             "11" => array("code" => "CD", "name" => "Cordillera"),
             "12" => array("code" => "GU", "name" => "Guaira"),
             "13" => array("code" => "IT", "name" => "Itapua"),
@@ -5427,7 +5546,7 @@ $app_list_strings = array (
             "26" => array("code" => "KZ", "name" => "Kazan"),
             "27" => array("code" => "KE", "name" => "Kemerovo"),
             "28" => array("code" => "KH", "name" => "Khabarovsk"),
-            "29" => array("code" => "KM", "name" => "Khanty-Mansiysk"),
+            "29" => array("code" => "Кілометри", "name" => "Khanty-Mansiysk"),
             "30" => array("code" => "KO", "name" => "Kostroma"),
             "31" => array("code" => "KR", "name" => "Krasnodar"),
             "32" => array("code" => "KN", "name" => "Krasnoyarsk"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "АБО", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -5622,7 +5741,7 @@ $app_list_strings = array (
             "14" => array("code" => "GP", "name" => "Grand' Anse (on Praslin)"),
             "15" => array("code" => "DG", "name" => "La Digue"),
             "16" => array("code" => "RA", "name" => "La Riviere Anglaise"),
-            "17" => array("code" => "MB", "name" => "Mont Buxton"),
+            "17" => array("code" => "мБ", "name" => "Mont Buxton"),
             "18" => array("code" => "MF", "name" => "Mont Fleuri"),
             "19" => array("code" => "PL", "name" => "Plaisance"),
             "20" => array("code" => "PR", "name" => "Pointe La Rue"),
@@ -5719,7 +5838,7 @@ $app_list_strings = array (
             "9" => array("code" => "IB", "name" => "Baleares"),
             "10" => array("code" => "BA", "name" => "Barcelona"),
             "11" => array("code" => "BU", "name" => "Burgos"),
-            "12" => array("code" => "CC", "name" => "Cáceres"),
+            "12" => array("code" => "Копія", "name" => "Cáceres"),
             "13" => array("code" => "CZ", "name" => "Cádiz"),
             "14" => array("code" => "CT", "name" => "Cantabria"),
             "15" => array("code" => "CL", "name" => "Castellón"),
@@ -5911,7 +6030,7 @@ $app_list_strings = array (
             "4" => array("code" => "HL", "name" => "Hua-lien"),
             "5" => array("code" => "IL", "name" => "I-lan"),
             "6" => array("code" => "KH", "name" => "Kao-hsiung county"),
-            "7" => array("code" => "KM", "name" => "Kin-men"),
+            "7" => array("code" => "Кілометри", "name" => "Kin-men"),
             "8" => array("code" => "LC", "name" => "Lien-chiang"),
             "9" => array("code" => "ML", "name" => "Miao-li"),
             "10" => array("code" => "NT", "name" => "Nan-t'ou"),
@@ -5923,7 +6042,7 @@ $app_list_strings = array (
             "16" => array("code" => "TT", "name" => "T'ai-tung"),
             "17" => array("code" => "TY", "name" => "T'ao-yuan"),
             "18" => array("code" => "YL", "name" => "Yun-lin"),
-            "19" => array("code" => "CC", "name" => "Chia-i city"),
+            "19" => array("code" => "Копія", "name" => "Chia-i city"),
             "20" => array("code" => "CL", "name" => "Chi-lung"),
             "21" => array("code" => "HC", "name" => "Hsin-chu"),
             "22" => array("code" => "TH", "name" => "T'ai-chung"),
@@ -5949,7 +6068,7 @@ $app_list_strings = array (
             "8" => array("code" => "LN", "name" => "Lindi"),
             "9" => array("code" => "MY", "name" => "Manyara"),
             "10" => array("code" => "MR", "name" => "Mara"),
-            "11" => array("code" => "MB", "name" => "Mbeya"),
+            "11" => array("code" => "мБ", "name" => "Mbeya"),
             "12" => array("code" => "MO", "name" => "Morogoro"),
             "13" => array("code" => "MT", "name" => "Mtwara"),
             "14" => array("code" => "MW", "name" => "Mwanza"),
@@ -6300,7 +6419,7 @@ $app_list_strings = array (
             "6" => array("code" => "DO", "name" => "Donets'k"),
             "7" => array("code" => "IV", "name" => "Ivano-Frankivs'k"),
             "8" => array("code" => "KL", "name" => "Kharkiv Kherson"),
-            "9" => array("code" => "KM", "name" => "Khmel'nyts'kyy"),
+            "9" => array("code" => "Кілометри", "name" => "Khmel'nyts'kyy"),
             "10" => array("code" => "KR", "name" => "Kirovohrad"),
             "11" => array("code" => "KV", "name" => "Kiev"),
             "12" => array("code" => "KY", "name" => "Kyyiv"),
@@ -6482,7 +6601,7 @@ $app_list_strings = array (
             "46" => array("code" => "MP", "name" => "Northern Mariana Islands"),
             "47" => array("code" => "OH", "name" => "Огайо"),
             "48" => array("code" => "OK", "name" => "Оклахома"),
-            "49" => array("code" => "OR", "name" => "Орегон"),
+            "49" => array("code" => "АБО", "name" => "Орегон"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Пенсільванія"),
             "52" => array("code" => "PR", "name" => "Puerto Rico"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "АБО", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Перейти за посиланням',
   'LBL_TOGGLE_VISIBILITY' => 'Вкл / викл видимість', // Record view header panel element
   'LBL_ACTIVITIES' => 'Стрічка активностей',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. Усі права захищено.',
-  'LBL_TRADEMARK' => 'SugarCRM є торговою маркою компанії SugarCRM, Inc. Всі інші назви компанії і продукту можуть бути товарними знаками відповідних компаній, з якими вони пов&#39;язані.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ та Sugar™ є торговими марками SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Надіслати запрошення',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar і 3-D куб є зареєстрованими торговими марками компанії SugarCRM Inc. '.
+        'Усі інші назви компаній і продуктів, які використовуються або зустрічаються в цьому продукті, можуть бути зареєстрованими торговими марками '.
+        'відповідних компаній, з якими вони пов&#39;язані.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ та Sugar™ є торговими марками SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Надіслати запрошення',
   'LBL_INVITEES' => 'Запрошені',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Гість не отримає ваше запрошення',
   'LBL_SELECT_ACTION_LABEL' => 'Вибрати дію',
   'LBL_TOGGLE_DRAWER' => 'Вкл / викл складач документу',
   'LBL_TOUR_NEXT' => 'Наступний',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Додати' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Логотип компанії' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Календар' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'навігація по основному модулю',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'переключити субпанель',
+
     'LBL_ADVANCED' => 'Розширений',
     'LBL_BASIC' => 'Базовий',
     'LBL_MODULE_FILTER' => 'Фільтр по...',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Команди',
     'LBL_TEAM_SET_ID' => 'ID призначеної команди',
     'LBL_TEAM_SET'=>'Призначена команда',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Вибрані команди',
     'LBL_SEARCH_UNAVAILABLE' => 'Пошук недоступний, спробуйте пізніше',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Основна команда не обрана',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Виникла помилка при спробі видалити основний код команди [{0}] для [{1}] модуля з кодом [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Пошукова система тимчасово недоступна.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Під час роботи пошукової системи сталася помилка. Зв’яжіться з системним адміністратором.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Не можна змінити поле, заблоковане процесом.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Умова сталося через загальний збію або помилки. Причини для даного виключення можуть бути різними, але зазвичай виходять за рамки більш конкретного винятку API.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Вказує, що сервер зайнятий, перевантажений або вимкнутий.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'Внутрішній сервер пошукової системи тимчасово недоступний через неполадки з підключенням. Перевірте наявність підключення та конфігурацію в меню Адміністратор->Пошук->Тест.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'У пошуковій системі сталася виняткова ситуація. Докладніше див. sugarcrm.log.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Не можна змінити поле, яке на даний момент заблоковано запущеним процесом.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s заблоковане запущеним процесом і не може бути змінено.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s заблоковані запущеним процесом і не можуть бути змінені.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Файл з такою назвою вже існує',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Цей часовий період вже містить додаткові періоди',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Додаткові часові періоди не можуть містити додаткові періоди',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Не вдалось  відслідкувати жодного часового періоду типу: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Немає активного часового періоду для поточних настройок.',
     'LBL_CURRENT_TIMEPERIOD' => 'Поточний часовий період',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Попередній часовий період',
     'LBL_NEXT_TIMEPERIOD' => 'Наступний часовий період',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Виберіть поле ...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Виберіть оператор ...',
     'LBL_FILTER_CREATE_NEW' => 'Створити',
+    'LBL_FILTER_CREATE_FILTER' => 'Створити новий фільтр',
+    'LBL_FILTER_EDIT_FILTER' => 'Редагувати фільтр',
     'LBL_FILTER_ALL_RECORDS' => 'Всі записи',
     'TPL_FILTER_SAVE' => 'Ви успішно створили фільтр {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'Від',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Область:',
     'LBL_STATUS_UPDATED'=>'Ваш статус для цієї події був оновлений!',
+    'LBL_STATUS_NOT_UPDATED' => 'Ваш статус для цієї події не було оновлено.',
     'LBL_STATUS'=>'Статус:',
     'LBL_STREET'=>'Вулиця',
     'LBL_SUBJECT' => 'Тема',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Усі права захищено.<br />SugarCRM є зареєстрованою торговою маркою компанії SugarCRM, Inc. Назви інших компаній і продуктів можуть бути торговими марками відповідних компаній, з якими вони пов&#39;язані.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Усі права захищено.<br />SugarCRM, Sugar і 3-D куб є зареєстрованими торговими марками компанії SugarCRM Inc. '.
+        'Усі інші назви компаній і продуктів, які використовуються або зустрічаються в цьому продукті, можуть бути зареєстрованими торговими марками '.
+        'відповідних компаній, з якими вони пов&#39;язані.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Заплановане завдання завершено',
@@ -9176,7 +9315,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Помилка. Введено недійсного оператора.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Помилка. Введено недійсний фільтр.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Помилка імпортування. Поле групи частково заблоковано у визначенні процесу. Щоб продовжити імпортувати визначення, необхідно розблокувати ці поля у визначенні процесу.',
+    'ERROR_EXP_DATE_LOW' => 'Помилка. Дата закінчення терміну дії не може передувати даті публікації.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Помилка. Стан «затверджено» потребує дати публікації.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Дата публікації порожня.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9306,6 +9446,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'стовпці можуть бути відображені.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Інформаційна панель',
     'LBL_DASHBOARD_BWC' => 'Мій старий робочий стіл',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Моя інф. панель',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Інф. панель довідки',
@@ -9338,9 +9479,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Мої {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Новини',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Стрічка новин Google для пов&#39;язаного Акаунта',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Показники продажів',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Показники продажу для пов&#39;язаного облікового запису. Необхідна D&B підписка.',
@@ -9409,7 +9547,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Записів не знайдено.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Опис випадку',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Стрічка новин',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Взаємодія',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Примітки та вкладення',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Примітки та Вкладення належать запису',
@@ -9918,7 +10055,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => 'Обрати функціональні обов&#39;язки',
     'LBL_DNB_BAL_ORG_NAME' => 'Назва організації',
     'LBL_DNB_BAL_IMPORT_AS' => 'Імпортувати як:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Назва організації',
+    'LBL_DNB_BAL_ORG_NAME' => 'Назва компанії',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'у мільйонах $USD',
@@ -9959,7 +10096,7 @@ $app_strings = array (
     'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Університет Sugar',
     'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_TEASER' => 'Стати експертом Sugar за допомогою тренінгів, відео, лекцій, вебінарів і сертифікацій.',
     'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Форуми спільнот',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_TEASER' => 'Приймайте участь в обговореннях, знаходьте рішення, і обмінюйтеся ідеями з іншими користувачами.',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_TEASER' => 'Приймайте участь в обговореннях, знаходьте рішення і обмінюйтеся ідеями з іншими користувачами.',
     'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Документація та підтримка',
     'LBL_LEARNING_RESOURCES_SUPPORT_TEASER' => 'Дізнайтеся подробиці роботи Sugar і співпрацюйте з підтримкою.',
 
@@ -9977,7 +10114,7 @@ $app_strings = array (
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Найкорисніші опубліковані статті бази знань',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Відображає найпопулярніші статті бази знань, які найчастіше переглядають',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}}, відфільтровані за {{label}} "{{value}}"',
 
@@ -10016,6 +10153,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'мс.',
     'ERR_BLANK_PAGE_NAME' => 'Пожалуйста, введите название страницы.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Моя лійка',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Лійка моєї команди",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Діаграма лійки продажів',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Відображає поточну діаграму лійки.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Немає зображення',
 
@@ -10269,6 +10413,8 @@ $app_strings = array (
     'LBL_SELECT_THIS_ROW_TITLE' => 'Обрати цей рядок',
     'LBL_TEAM_SELECTED_TITLE' => 'Обрана команда',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Натисніть, щоб зробити цю команду основною',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Команда, позначена як вибрана команда ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Позначити цю команду як вибрану команду',
     'LBL_SEARCH_AND_SELECT' => 'Знайти і Вибрати {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Пошук та додавання {{module}}',
 
@@ -10357,6 +10503,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Попередній перегляд неможливий: немає доступних даних',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Попередній перегляд неможливий: в перегляді як поточна запис',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Попередній перегляд неможливий: запис видалена або немає доступу до запису',
+    'LBL_PREVIEW_PREVIOUS' => 'Переглянути попередні',
+    'LBL_PREVIEW_NEXT' => 'Переглянути наступні',
+    'LBL_PREVIEW_CLOSE' => 'Закрити перегляд',
     'LBL_STREAM_NO_RECORDS' => 'В даний момент у цьому записі немає нотаток. Будь ласка, додайте замітку, натиснувши на кнопку "додати замітку".',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}} знайдені дублікати.',
     'LBL_NO_DUPLICATES_FOUND' => 'Повторів не знайдено.',
@@ -10376,6 +10525,7 @@ $app_strings = array (
         'Неккоректное число записів передано. Допустимий діапазон від {{minRecords}} до {{maxRecords}} записів.',
     'LBL_MERGE_NO_ACCESS' =>
         'У Вас немає доступу для виконання цієї дії. Принаймні один запис повинен бути редагованим.',
+    'LBL_MERGE_LOCKED' => 'Деякі записи, вибрані для об&#39;єднання, містять поля, заблоковані для редагування процесом, і зараз їх не можна об&#39;єднати.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10846,10 +10996,9 @@ $app_strings = array (
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Системні налаштування',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Студія',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Пароль',
     'LBL_CURRENT_PASSWORD'				=> 'Поточний пароль',
-    'LBL_SET_NEW_PASSWORD'              => 'Введіть пароль',
     'LBL_NEW_PASSWORD1'                 => 'Новий пароль',
     'LBL_NEW_PASSWORD2'                 => 'Підтвердити пароль',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Будь ласка, введіть підтвердження пароля.',
@@ -10857,13 +11006,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> 'Будь ласка, введіть Ваш поточний пароль',
     'ERR_REENTER_PASSWORDS' => 'Паролі не співпадають.',
     'ERR_PASSWORD_MISMATCH' => 'Паролі не співпадають.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Ваш пароль успішно оновлено.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Не вдається надіслати пароль',
     'LBL_REQUEST_PASSWORD' => 'Запит пароля',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Помилка: сталася проблема оновлення паролю для цього користувача.',
     'LBL_INCORRECT_PASSWORD' => 'Помилка: неправильний пароль',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Мовні переваги:',
+    'LBL_PREFERRED_LANGUAGE' => 'Пріоритетна мова:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Обрати звіт',
@@ -10893,6 +11041,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => 'На сервері сталася помилка, і виконати ваш запит не вдалося.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Повторіть спробу. Як що помилка не зникне, зверніться до адміністратора Sugar.',
     'ERR_HTTP_500_ACTION' => 'Будь ласка, зверніться до служби технічної підтримки.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 внутрішня помилка сервера',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Сервер не може виконати ваш запит через тимчасову помилку.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Повторіть спробу. Якщо помилка повторюватиметься, зверніться до адміністратора Sugar.',
+    'ERR_HTTP_502_ACTION' => 'Зверніться до служби технічної підтримки.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 внутрішня помилка сервера',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Сервер не може виконати ваш запит.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Повторіть спробу пізніше. Якщо помилка повторюватиметься, зверніться до адміністратора Sugar.',
+    'ERR_HTTP_503_ACTION' => 'Зверніться до служби технічної підтримки.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Рендер перегляду не вдався',
     'ERR_RENDER_FAILED_MSG' => 'Не вдався рендер перегляду',
@@ -11026,6 +11186,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => 'Помилка:',
     'LBL_ALERT_TITLE_LOADING' => 'Завантаження',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Ваша версія браузера більше не підтримується ,або Ви використовуєте непідтримуваний браузер.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Рекомендуються такі версії браузера: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Перейдіть на сторінку {{link}}, щоб переглянути рекомендовані браузери.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Підтримувані платформи',
 
@@ -11078,6 +11239,9 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Сталася помилка при підключенні до сервера. Будь ласка, спробуйте ще раз.',
     'ERR_RESOLVE_ERRORS' => 'Будь ласка, ухваліть будь-які помилки, перш ніж продовжити.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Оновити список',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'більше',
@@ -11142,7 +11306,7 @@ $app_strings = array (
     'LBL_RESOLVE_CONFLICT' => 'Вирішити конфлікт для {{name}}',
 
     // Generic Help Strings
-    'LBL_HELP_MORE_INFO' => 'Для отримання більш детальної інформації, зверніться до {{{more_info_url}}} {{plural_module_name}} документації.{{{more_info_url_close}}}',
+    'LBL_HELP_MORE_INFO' => 'Для отримання більш детальної інформації, зверніться до документації модуля {{{more_info_url}}} {{plural_module_name}}.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'Немає доступних даних',
 
     // Dashlet Preview Help String
@@ -11186,10 +11350,13 @@ $app_strings = array (
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM дозволяє досвідченим користувачам швидко виконувати певні поєднання клавіш для підвищення продуктивності. У таблицях зправа описуються наявні поєднання разом з ключами і діях, які вони виконують.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Підтримувані клавіші</h1><ul><li>усі алфавітно-цифрові символи і знаки</li> <li>Shift, Ctrl, Alt, Command, Mod (Ctrl у Windows/Linux і Command у Macs)</li> <li>Enter, Esc, ПРОБІЛ, Tab, PageUp, PageDown, End, Home, Ins, Del, Backspace</li></ul> <h1>Підтримувані функції</h1> <ul><li>Сполучення клавіш: Ctrl + M</li> <li>Декілька клавіш: M, Ctrl + M</li> <li>Комбінація клавіш: M – A</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Глобальні скорочення',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Контекстні скорочення',
     'LBL_SHORTCUT_KEY_KEY' => 'Ключ',
     'LBL_SHORTCUT_FUNCTION' => 'Функція',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Настроїти сполучення клавіш',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Немає сполучень клавіш для настроювання',
     'LBL_SHORTCUT_HELP' => 'Показати сторінку ярликів допомоги',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Перемкнути швидке створення меню',
     'LBL_SHORTCUT_SEARCH' => 'Зосередитися на глобальному полі пошуку',
@@ -11237,6 +11404,9 @@ $app_strings = array (
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Вибрати всі об&#39;єкти в полі з множинним вибором',
     'LBL_SHORTCUT_SWEETSPOT' => 'Увімкнути або вимкнути панель Sweet Spot',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Приховати панель Sweet Spot',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Зберегти конфігурацію',
+    'LBL_SHORTCUT_RESTORE' => 'Відновити значення за замовчуванням',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Під час збереження настроюваних сполучень клавіш на сервері сталася помилка. Повторіть спробу.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} налаштування',
@@ -11259,13 +11429,20 @@ $app_strings = array (
     'LBL_CALENDAR_RECURRENCE' => "Повторення",
     'LBL_CALENDAR_REMINDERS' => "Нагадування",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Настроювана дата",
     'LBL_CALENDAR_REPEAT_TYPE' => "Тип повторення",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Інтервал повторення",
     'LBL_CALENDAR_REPEAT_DOW' => "Повторити за днями тижня",
+    'LBL_CALENDAR_REPEAT' => "Повторити",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Повторювати до",
     'LBL_CALENDAR_REPEAT_COUNT' => "Повторити входження",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Повторити вибір",
+    'LBL_CALENDAR_REPEAT_DAYS' => "День (дні) місяця",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Повторити по черзі",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Повторити елемент",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Рекурентні зміни повинні бути виконані з використанням першого запису у серіях.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Виконання правил повторення не призводить до створення події.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Відвідування',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Відхилений',
@@ -11285,17 +11462,23 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 потребує JavaScript. Будь ласка, включіть JavaScript у вашому браузері, щоб використовувати Sugar 7.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Серіалізовані дані не можуть бути несеріалізованими',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Серіалізовані дані не можуть бути несеріалізованими, оскільки містять посилання на об’єкти або класи',
 
     'LBL_FIELD_TRIMMED' => 'Частину тексту в полі видалено, оскільки він перевищував вказану максимальну кількість символів.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Поле перевищує максимальну кількість символів.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Минулі 7 днів',
     '30' => 'Минулі 30 днів',
     '90' => 'Минулої чверті',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11400,13 +11583,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Закінчився термін дії',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Чернетка',
-    'Expired' => 'Закінчився термін дії',
-    'In Review' => 'На розгляді',
-    'Published' => 'Опубліковано',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Дії адміністратора--',
@@ -11418,57 +11594,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Видалити обрані статті',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Містить вкладення',
-        'none' => 'Вкладень немає',
-        'mime' => 'Вкажіть тип Mime',
-        'name' => 'Вкажіть ім&#39;я',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Слова';
   $app_list_strings['moduleListSingular']['Words'] = 'Слово';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Створити статтю';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Топ-5',
-    'Top_10' => 'Топ-10',
-    'Top_20' => 'Топ-20',
-    'Bot_5'  => 'Останні 5',
-    'Bot_10' => 'Останні 10',
-    'Bot_20' => 'Останні 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Всі',
-        'added' => 'Додано за останні 30 днів',
-        'pending' => 'Очікування затвердження',
-        'updated' =>'Оновлено за останні 30 днів',
-        'faqs' => 'Запитання й відповіді',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'Конкретна дата',
-    'before' => 'Перед',
-    'after' => 'Після',
-    'between_dates' => 'Між',
-    'last_7_days' => 'Минулі 7 днів',
-    'next_7_days' => 'Наступні 7 днів',
-    'last_month' => 'Минулого місяця',
-    'this_month' => 'Цього місяця',
-    'next_month' => 'Наступного місяця',
-    'last_30_days' => 'Минулі 30 днів',
-    'next_30_days' => 'Наступні 30 днів',
-    'last_year' => 'Минулого року',
-    'this_year' => 'Цього року',
-    'next_year' => 'Наступного року',
-    'isnull' => 'Пустий',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12330,6 +12458,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Всі контакти",
+    "email" => "Лише електронна пошта",
+    "phone" => "Лише телефон",
     "prem" => "Лише преміум"
 );
 
@@ -12355,4 +12485,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Біо',
     'Both' => 'Обидва'
 );
-

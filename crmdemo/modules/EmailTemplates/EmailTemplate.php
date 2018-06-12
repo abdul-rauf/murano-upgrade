@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -83,13 +83,6 @@ class EmailTemplate extends SugarBean {
 
     protected $storedVariables = array();
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function EmailTemplate()
-    {
-        self::__construct();
-    }
 
 	public function __construct() {
 		parent::__construct();
@@ -128,12 +121,16 @@ class EmailTemplate extends SugarBean {
 			'Users' => array(
 				'Users' => $current_user,
 			),
+            'Current User' => array(
+                'Users' => $current_user,
+            ),
 		);
 
 		$prefixes = array(
 			'Contacts' => 'contact_',
 			'Accounts' => 'account_',
 			'Users'	=> 'contact_user_',
+            'Current User'  => 'user_',
 		);
 
 		$collection = array();
@@ -221,8 +218,12 @@ class EmailTemplate extends SugarBean {
                 if (!empty($template_text)) {
 
                     if(!isset($this->parsed_urls[$key]) || $this->parsed_urls[$key]['text'] != $template_text) {
-                        //the curly brackets we key come in encoded, search for and replace the encoded brackets
-                        $template_text = str_ireplace(array('%7B','%7D'), array('{', '}'), $template_text);
+                        // Decode the encoded characters for curly braces and any other url-encoded characters
+                        $template_text = str_ireplace(
+                            array('%7B', '%7D'),
+                            array('{', '}'),
+                            rawurldecode($template_text)
+                        );
 
                         $matches = $this->_preg_match_tracker_url($template_text);
                         $count = count($matches[0]);

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,7 +14,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  // $Id: MyPipelineBySalesStageDashlet.en_us.lang.php 16286 2006-08-22 20:14:45 +0000 (Tue, 22 Aug 2006) wayne $
 
 
-$dashletStrings['PipelineBySalesStageDashlet'] = array('LBL_TITLE'       => 'Raporty etapów sprzedaży',
-                                                         'LBL_DESCRIPTION' => 'Pionowy wykres kolumnowy raportu szans sprzedaży',
+$dashletStrings['PipelineBySalesStageDashlet'] = array('LBL_TITLE'       => 'Lejek sprzedaży po etapie sprzedaży',
+                                                         'LBL_DESCRIPTION' => 'Pionowy wykres kolumnowy lejka etapów sprzedaży',
                                                          'LBL_REFRESH'     => 'Odśwież wykres');
 ?>

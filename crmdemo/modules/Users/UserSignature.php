@@ -46,7 +46,7 @@ class UserSignature extends SugarBean {
 		
 		$this->disable_row_level_security=true;
 		
-		parent::SugarBean();	
+		parent::__construct();	
 	}
 	
 	/**

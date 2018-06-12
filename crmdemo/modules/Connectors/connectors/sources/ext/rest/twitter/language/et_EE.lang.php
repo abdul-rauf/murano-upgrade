@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,12 +20,12 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => 'Obtain a Consumer Key and Secret from Twitter© by registering your Sugar instance as a new application.<br /><br />Steps to register your instance:<br /><br />   1. Go to the Twitter© Developers site:: http://dev.twitter.com/apps/new.<br />   2. Sign In using the Twitter account under which you would like to register the application.<br />   3. Within the registration form, enter a name for the application. This is the name users will see when they authenticate their Twitter accounts from within Sugar.<br />   4. Enter a Description.<br />   5. Enter an Application Website URL (could be anything).<br />   6. Select "Browser" for Application Type.<br />   7. After selecting "Browser" for Application Type, enter a Callback URL (could be anything since Sugar bypasses this on authentication. Example: Enter your Sugar root URL).<br />   8. Enter the security words.<br />   9. Click "Register application".<br />  10. Accept the Twitter API Terms of Service.<br />  11. Within the application page, find the Consumer Key and Consumer Secret. Enter the Key and Secret below.',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Hankige API võti ja salavõti Twitterist, registreerides oma Sugari eksemplari uue rakendusena.<br/><br>Teie eksemplari registreerimise etapid on järgmised:<br/><br/><ol><li>Minge järgmisele Twitteri arendajate saidile: <a href=&#39;http://dev.twitter.com/apps/new&#39; target=&#39;_blank&#39;>http://dev.twitter.com/apps/new</a>.</li><li>Logige sisse Twitteri kontoga, mille alt soovite rakenduse registreerida.</li><li>Sisestage rakenduse nimi registreerimisvormi. See on nimi, mida kasutajad näevad Twitteri kontode autentimisel Sugaris.</li><li>Sisestage kirjeldus.</li><li>Sisestage rakenduse veebisaidi URL.</li><li>Sisestage tagasihelistuse URL (võib olla mis tahes, kuna Sugar jätab selle autentimisel vahele. Näide: sisestage oma Sugari saidi URL).</li><li>Nõustuge Twitteri API kasutustingimustega.</li><li>Klõpsake suvandit Loo oma Twitteri rakendus.</li><li>Leidke rakenduse lehelt API võti ja API salavõti vahekaardilt API võtmed. Sisestage võti ja salavõti allpool.</li></ol></td></tr></table>',
     'LBL_NAME' => 'Twitteri kasutajanimi',
     'LBL_ID' => 'Twitteri kasutajanimi',
 	'company_url' => 'URL',
-    'oauth_consumer_key' => 'Consumer Key',
-    'oauth_consumer_secret' => 'Consumer Secret',
+    'oauth_consumer_key' => 'API võti',
+    'oauth_consumer_secret' => 'API salavõti',
 );
 
 ?>

@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Klikom na Potvrdi, biće obrisane svi podaci Prognoze i biće promenjen prikaz Prodajnih prilika. Ukoliko ovo nije ono što nameravate, kliknite na Poništi kako bi se vratili na prethodna podešavanja.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Ako kliknete na dugme „Potvrdi“, izbrisaćete SVE podatke o Prognozi i izmeniti prikaz Mogućnosti. '
+        .'Takođe će biti onemogućene sve definicije procesa sa ciljnim modulom za stavke linije prihoda. '
+        .'Ukoliko niste to želeli, kliknite na „Otkaži“ da biste se vratili na prethodne postavke.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Ukoliko su Prihodi zatvoreni i samo je jedan dobitan,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'faza Prodajnih prilika će biti podešena na ,,Zatvoreno dobitna".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Ukoliko su predmeti linije Prihoda u ,,Zatvoreno izgubljeno" prodajnoj fazi,',
@@ -162,26 +166,26 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} modul omogućava praćenje individualnih prodaja i stavki linija koje pripadaju tim prodajama od početka do kraja. Svaki {{module_name}} zapis predstavlja zaglavlje za grupu {{revenuelineitems_module}} kao što povezuje i druge bitne zapise kao što su {{quotes_module}}, {{contacts_module}} itd. Svaki {{revenuelineitems_singular_module}} je potencijalna prodaja određenog proizvoda i uključuje relevantne prodajne podatke. Svaki {{revenuelineitems_singular_module}} će tipično napredovati kroz nekoliko prodajnih nivoa dok ne bude označen kao "Uspešno zatvorena" ili "Neuspešno zatvorena". {{module_name}} zapis prikazuje iznos i očekivani datum zatvaranja od njegovog  {{revenuelineitems_module}}. {{plural_module_name}} i {{revenuelineitems_module}} mogu biti i uzdignuta i dalje korišćenjem Sugarovog {{forecasts_singular_module}} modula za razumevanje i predviđanje trendova prodaje kao i fokus posla kako bi se ostvarile prodajne ponude.',
+    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} vam omogućava da pratite pojedinačne prodaje od početka do kraja. Svaki zapis modula {{module_name}} predstavlja potencijalnu prodaju i obuhvata relevantne podatke o prodaji, kao i podatke u vezi sa drugim važnim zapisima kao što su {{quotes_module}}, {{contacts_module}} itd. {{module_name}} obično prolazi kroz nekoliko Faza prodaje sve dok se ne obeleži sa „Zatvoreno – dobijeno“ ili „Zatvoreno – izgubljeno“. {{plural_module_name}} može još bolje da se iskoristi korišćenjem modula {{forecasts_singular_module}} u okviru softvera Sugar, u cilju razumevanja i prognoziranja trendova prodaje, kao i usredsređivanja posla radi ostvarivanja prodajnih kvota.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} modul vam omogućava da pratite individualne prodaje i linije stavki koje pripadaju tim prodajama od početka do kraja. Svaki {{module_name}} zapis predstavlja zaglavlje grupe {{revenuelineitems_module}} a takođe se odnosi i na druge važne zapise kao što su {{quotes_module}}, {{contacts_module}} itd.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vam omogućava da pratite pojedinačne prodaje i linijske stavke koje pripadaju tim prodajama od početka do kraja. Svaki zapis modula {{module_name}} predstavlja potencijalnu prodaju i obuhvata relevantne podatke o prodaji, kao i podatke u vezi sa drugim važnim zapisima kao što su {{quotes_module}}, {{contacts_module}} itd.
 
-- Izmenite ovo polje zapisa tako što ćete kliknuti na svako pojedinačno polje ili dugme Izmeni.
-- Pogledajte ili izmenite linkove ka drugim zapisima u podpanelima, uključujući {{revenuelineitems_module}}, tako što ćete prebaciti donji levi pano na "Prikaz podataka".
-- Napravite i pogledajte komentare korisnika i istoriju promene zapisa u {{activitystream_singular_module}} tako što ćete prebaciti donji veli pano na "Tok aktivnosti".
-- Pratite ili učinite omiljenim ovaj zapis upotrebom ikona koje se nalaze sa desne strane imena zapisa.
-- Dodatne radnje su dostupne u padajućem meniju Akcije sa desne strane dugmeta Izmena.',
+- Uredite polja ovog zapisa klikom na pojedinačno polje ili na dugme „Uredi“.
+- Pregledajte ili izmenite veze ka drugim zapisima na podtablama prebacivanjem donjeg levog okna na „Prikaz podataka“.
+- Pišite ili pregledajte korisničke komentare i istoriju izmena zapisa u modulu {{activitystream_singular_module}} prebacivanjem donjeg levog okna na „Tok aktivnosti“.
+- Pratite ovaj zapis ili ga dodajte u favorite koristeći ikone sa desne strane naziva zapisa.
+- Dodatne radnje su dostupne u padajućem meniju za akcije sa desne strane dugmeta „Uredi“.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} modul vam omogućava da pratite individualne prodaje i linije stavki koje pripadaju tim prodajama od početka do kraja. Svaki {{module_name}} zapis predstavlja zaglavlje grupe {{revenuelineitems_module}} a takođe se odnosi i na druge važne zapise kao što su {{quotes_module}}, {{contacts_module}} itd.
+    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} vam omogućava da pratite pojedinačne prodaje i linijske stavke koje pripadaju tim prodajama od početka do kraja. Svaki zapis modula {{module_name}} predstavlja potencijalnu prodaju i obuhvata relevantne podatke o prodaji, kao i podatke u vezi sa drugim važnim zapisima kao što su {{quotes_module}}, {{contacts_module}} itd.
 
-Da kreirate {{module_name}}:
-1. Pružite vrednosti za polja po potrebi.
- - Polja koja su označena kao "Neophodna" moraju da se popune pre snimanja.
- - Kliknite na "Prikaži više" da pokažete dodatna polja ako je neophodno.
-2. Kliknite "Snimi" da završite nov zapis i vratite se na prethodnu stranu.
-3. Posle snimanja, upotrebite {{revenuelineitems_module}} podpano da dodate linije stavki u {{module_name}}.',
+
+Da biste kreirali {{module_name}}:
+1. Unesite željene vrednosti za polja.
+ - Polja označena kao „Obavezna“ moraju da se popune pre čuvanja.
+ - Kliknite na „Prikaži više“ da biste po potrebi prikazali dodatna polja.
+2. Kliknite na „Sačuvaj“ da biste dovršili novi zapis i vratili se na prethodnu stranicu.',
 
 // END PRO/CORP
 

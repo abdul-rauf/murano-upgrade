@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'حدد <b>تصميمًا لتحريره</b>.<br/<br/>لتغيير التصميم الذي يحتوي على حقول البيانات لإدخال البيانات، انقر على <b>تحرير طريقة العرض</b>.<br/><br/>لتغيير التصميم الذي يعرض البيانات التي يتم إدخالها في الحقول في عرض التحرير، انقر على <b>عرض التفاصيل</b>.<br/><br/>لتغيير الأعمدة التي تظهر في القائمة الافتراضية، انقر على <b>عرض القائمة</b>.<br/><br/>لتغيير مخططات النموذج الأساسي والمتقدم، انقر على <b>بحث</b>.',
         'subpanelHelp'=> 'حدد <b>لوحة فرعية</b> لتحريرها.',
         'searchHelp' => 'حدد تصميم <b>بحث</b> لتحريره.',
-        'labelsBtn'	=> 'انقر فوق <b>حفظ</b>لحفظ ملصقاتك المخصصة.',
+        'labelsBtn'	=> 'قم بتحرير <b>التسميات</b> لعرض القيم في هذه الوحدة.',
         'newPackage'=>'انقر على <b>حزمة جديدة</b> لإنشاء حزمة جديدة.',
         'mbHelp'    => '<b>مرحبًا بكم في منشئ الوحدة. استخدم </b><br/><br/><b>منشئ الوحدة</b> لإنشاء الحزم التي تحتوي على وحدات مخصصة اعتمادًا على الكائنات القياسية أو المخصصة. <br/><br/>للبدء، انقر على <b>حزمة جديدة</b> لإنشاء حزمة جديدة، أو حدد حزمة لتحريرها.<br/><br/> تقوم <b>الحزمة</b> بدور الحاوية للوحدات المخصصة، وكل منها تعد جزءًا من مشروع واحد. يمكن أن تحتوي الحزمة على وحدة مخصصة واحدة أو أكثر يمكن أن يتم ربطها ببعضها البعض أو بالوحدات الأخرى الموجودة في التطبيق. <br/><br/>أمثلة: قد ترغب في إنشاء حزمة تحتوي على وحدة مخصصة واحدة ترتبط بوحدة الحسابات القياسية. أو، يمكن أن ترغب في إنشاء حزمة تحتوي على عدة وحدات جديدة تعمل معًا كمشروع، وتتعلق ببعضها البعض وبالوحدات الأخرى الموجودة في التطبيق.',
         'exportBtn' => 'انقر على <b>تصدير التخصيصات</b> لإنشاء حزمة تحتوي على التخصيصات التي يتم عملها في الاستوديو لوحدات محددة.',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'الاسم - يجب أن يحتوي الاسم على الحروف والأرقام، ويجب أن يبدأ بحرف، كما يجب ألا يحتوي على أي مسافات.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'رمز الحزمة موجود بالفعل',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'اسم الحزمة موجود بالفعل',
+'LBL_JS_PACKAGE_NAME'=>'اسم الحزمة - يجب أن يحتوي الاسم على الحروف والأرقام، ويجب أن يبدأ بحرف، كما يجب ألا يحتوي على أي مسافات.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'المفتاح - يجب أن يحتوي على الحروف والأرقام، ويجب أن يبدأ بحرف.',
 'LBL_JS_VALIDATE_KEY'=>'المفتاح - يجب أن يحتوي على الحروف والأرقام، ويجب أن يبدأ بحرف، كما يجب ألا يحتوي على أي مسافات.',
 'LBL_JS_VALIDATE_LABEL'=>'يرجى إدخال تسمية يتم استخدامها كاسم عرض لهذه الوحدة',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'هل أنت متأكد من رغبتك في حذف هذه العلاقة؟<br>ملاحظة: قد لا تكتمل هذه العملية لعدة دقائق.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'وسيجعل ذلك هذه العلاقة دائمة. هل أنت متأكد من رغبتك في توزيع هذه العلاقة؟',
 'LBL_CONFIRM_DONT_SAVE' => 'تم إجراء تغييرات منذ أن قمت بحفظها، هل ترغب في حفظ تلك التغييرات؟',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,7 +11,7 @@
  */
 
 $mod_strings = array(
-    'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Feedback description',
+    'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Grįžtamojo ryšio aprašymas',
     'LBL_FEEDBACK_BTN_SUBMIT' => 'Siųsti',
     'LBL_FEEDBACK_SENT' => 'Feedback sent.',
     'LBL_FEEDBACK_SEND_ERROR' => 'Feedback not sent, please fill in both fields.',

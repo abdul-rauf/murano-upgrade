@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -42,8 +42,6 @@ class Link2 {
     protected $rows;   //any additional fields on the relationship
     protected $loaded; //true if this link has been loaded from the database
     protected $relationship_fields = array();
-    //Used to store unsaved beans on this relationship that will be combined with the ones pulled from the DB if getBeans() is called.
-    protected $tempBeans = array();
 
     /**
      * @param  $linkName String name of a link field in the module's vardefs
@@ -407,9 +405,11 @@ class Link2 {
      * <li><b>offset:</b> Offset to pass to the database query when loading.</li>
      * <li><b>order_by:</b> field to order the result set by</li>
      * <li><b>deleted:</b> If deleted is set to 1, only deleted records related to the current record will be returned.</li></ul>
+     * @param array $retrieveParams Array of options to send to retrieveBean
      * @return array of SugarBeans related through this link.
      */
-    function getBeans($params = array()) {
+    public function getBeans($params = array(), $retrieveParams = array())
+    {
         //Some depricated code attempts to pass in the old format to getBeans with a large number of useless paramters.
         //reset the parameters if they are not in the new array format.
     	if (!is_array($params))
@@ -434,12 +434,6 @@ class Link2 {
 
             $rel_module = $this->getRelatedModuleName();
 
-            //First swap in the temp loaded beans, only if we are doing a complete load (no params)
-            if (empty($params)) {
-                $result = $this->tempBeans;
-                $this->tempBeans = array();
-            }
-
             //If there are any relationship fields, we need to figure out the mapping from the relationship fields to the
             //fields in the related module
             $relBean = BeanFactory::getBean($rel_module);
@@ -452,7 +446,7 @@ class Link2 {
             {
                 if (empty($this->beans[$id]))
                 {
-                    $tmpBean = BeanFactory::retrieveBean($rel_module, $id);
+                    $tmpBean = BeanFactory::retrieveBean($rel_module, $id, $retrieveParams);
                     if ($tmpBean) {
                         $result[$id] = $tmpBean;
                     }
@@ -507,8 +501,7 @@ class Link2 {
         if (isset($rows[$relBean->id])) {
             $relationshipFields = $this->getRelationshipFields($relBean);
             $this->populateRelationshipOnlyFields($relationshipFields, $rows[$relBean->id], $relBean);
-            // add bean
-            $this->addBean($relBean);
+            $this->resetLoaded();
         }
     }
 
@@ -745,19 +738,12 @@ class Link2 {
      * This for the most part should not need to be called except by the relatipnship implementation classes.
      * @param SugarBean $bean
      * @return void
+     *
+     * @deprecated
      */
     public function addBean($bean)
     {
-        if (!is_array($this->beans))
-        {
-            $this->tempBeans[$bean->id] = $bean;
-            $this->rows[$bean->id] = array("id" => $bean->id);
-        }
-        else {
-            $this->beans[$bean->id] = $bean;
-            $this->rows[$bean->id] = array("id" => $bean->id);
-        }
-
+        $this->resetLoaded();
     }
 
     /**
@@ -766,18 +752,13 @@ class Link2 {
      *
      * @param SugarBean $bean
      * @return void
+     *
+     * @deprecated
      */
     public function removeBean($bean)
     {
-        if (!is_array($this->beans) && isset($this->tempBeans[$bean->id]))
-        {
-            unset($this->tempBeans[$bean->id]);
-        } else {
-            unset($this->beans[$bean->id]);
-            unset($this->rows[$bean->id]);
-        }
+        $this->resetLoaded();
     }
-
 
     /**
      * Directly queries the databse for set of values. The relationship classes and not link should handle this.

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -18,7 +18,7 @@
         'shown.bs.tab a[data-toggle="tab"]': 'resize',
     },
 
-    plugins: ['Dashlet', 'Chart', 'EllipsisInline'],
+    plugins: ['Dashlet', 'Chart'],
     className: 'cases-summary-wrapper',
 
     tabData: null,
@@ -95,7 +95,7 @@
                             viewName: 'detail',
                             view: self
                         });
-                    field.setElement(self.$('.favTarget.[data-model-id="' + model.id + '"]'));
+                    field.setElement(self.$('[data-model-id="' + model.id + '"]'));
                     field.render();
                 });
             }
@@ -198,7 +198,18 @@
                 this.displayNoData(true);
             }, this),
             complete: options ? options.complete : null,
-            limit: -1
+            limit: -1,
+            fields: this.getFieldNames()
         });
+    },
+
+    /**
+     * Get the list of field names to render the dashlet correctly
+     * @return {string[]} The list of fields we need to fetch
+     * @override
+     */
+    getFieldNames: function() {
+        // FIXME TY-920: we shouldn't have to override this per-dashlet
+        return this.dashletConfig && this.dashletConfig.dashlets[0].fields || [];
     }
 })

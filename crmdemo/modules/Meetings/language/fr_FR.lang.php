@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'Composer un email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Rapp. email tous',
     'LBL_POPUP_REMINDER' => 'Popup de rappel',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup de rappel',
+    'LBL_POPUP_REMINDER_TIME' => 'Heure de rappel par Popup',
     'LBL_EMAIL_REMINDER' => 'Email de rappel',
-    'LBL_EMAIL_REMINDER_TIME' => 'Email de rappel',
+    'LBL_EMAIL_REMINDER_TIME' => 'Heure de rappel par email',
     'LBL_REMOVE' => 'Sup',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Planification',
 	'LBL_SEARCH_BUTTON'=> 'Rechercher',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Supprimer toutes les occurrences',
     'LBL_DATE_END_ERROR' => 'La date de fin est avant la date de début',
     'LBL_REPEAT_PARENT_ID' => 'Répétition ID parent',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID de récurrence de la réunion. Date de début de la réunion d’origine',
     'LBL_RECURRING_SOURCE' => 'Source récurrence',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Êtes-vous sûr de vouloir supprimer tous les enregistrements récurrents ?',
     'LBL_RECURRENCE' => 'Récurrence',

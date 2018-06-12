@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -24,7 +24,14 @@
         // should use that context instead of layout.collection.
         this.collection = app.data.createMixedBeanCollection();
 
-        app.shortcuts.register(app.shortcuts.GLOBAL + 'Sweetspot', 'mod+shift+space', this.toggle, this, true);
+        app.shortcuts.registerGlobal({
+            id: 'Sweetspot:Toggle',
+            keys: 'mod+shift+space',
+            component: this,
+            description: 'LBL_SHORTCUT_SWEETSPOT',
+            callOnFocus: true,
+            handler: this.toggle
+        });
         app.events.on('app:logout app:login', this.hide, this);
         app.events.on('app:sync:complete sweetspot:reset', this._setTheme, this);
 
@@ -112,7 +119,14 @@
     createShortcuts: function() {
         app.shortcuts.saveSession();
         app.shortcuts.createSession(['SweetSpot:Toggle:Off'], this);
-        app.shortcuts.register('SweetSpot:Toggle:Off', 'esc', this.hide, this, true);
+        app.shortcuts.registerGlobal({
+            id: 'Sweetspot:Toggle:Off',
+            keys: 'esc',
+            component: this,
+            description: 'LBL_SHORTCUT_SWEETSPOT_HIDE',
+            callOnFocus: true,
+            handler: this.hide
+        });
     },
 
     /**

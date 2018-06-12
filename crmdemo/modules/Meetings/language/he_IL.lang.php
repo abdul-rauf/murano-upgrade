@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'דואר אלקטרוני',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'שלח מייל לכל המוזמנים',
     'LBL_POPUP_REMINDER' => 'תזכורת פופאפ',
-    'LBL_POPUP_REMINDER_TIME' => 'מועד תזכורת פופאפ',
+    'LBL_POPUP_REMINDER_TIME' => 'שעת תזכורת בהודעה קופצת',
     'LBL_EMAIL_REMINDER' => 'תזכורת בדואר אלקטרוני',
-    'LBL_EMAIL_REMINDER_TIME' => 'זמן תזכורת דואר אלקטרוני',
+    'LBL_EMAIL_REMINDER_TIME' => 'שעת תזכורת בדוא"ל',
     'LBL_REMOVE' => 'הערה',
 	'LBL_SCHEDULING_FORM_TITLE' => 'תזמן',
 	'LBL_SEARCH_BUTTON'=> 'חיפוש',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'מחק את כל החזרות',
     'LBL_DATE_END_ERROR' => 'תאריך הסיום לפני תאריך ההתחלה',
     'LBL_REPEAT_PARENT_ID' => 'זהות הורה של החזרה',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'מזהה מופע חוזר של ישיבה. תאריך התחלה של הישיבה המקורית',
     'LBL_RECURRING_SOURCE' => 'התרחשות שנית של המקור',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'אתה בטוח שברצונך להסיר את כל הרשומות החוזרות',
     'LBL_RECURRENCE' => 'חזרה',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'LBL_BLANK'	=> '-üres-',
+	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Hívások',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Hívás',
     'LBL_MODULE_TITLE' => 'Hívások: Főoldal',
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Email minden meghívottnak',
     'LBL_EMAIL_REMINDER' => 'Email emlékeztető',
-    'LBL_EMAIL_REMINDER_TIME' => 'Email emlékeztető ideje',
-    'LBL_POPUP_REMINDER_TIME' => 'Előugró Emlékeztető Ideje',
+    'LBL_EMAIL_REMINDER_TIME' => 'Email emlékeztető időpontja',
+    'LBL_POPUP_REMINDER_TIME' => 'Előugró Emlékeztető időpontja',
     'LBL_SEND_BUTTON_TITLE'=>'Mentés & meghívók küldése [Alt + I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Mentés & meghívók küldése',
 	'LBL_DATE_END'=>'Befejezés dátuma',
 	'LBL_TIME_END'=>'Befejezés időpontja',
-	'LBL_REMINDER_TIME'=>'Emlékeztető időpontja',
+    'LBL_REMINDER_TIME'=>'Emlékeztető időpontja',
     'LBL_EMAIL_REMINDER_SENT' => 'Email emlékeztető kiküldve',
     'LBL_SEARCH_BUTTON'=> 'Keres',
     'LBL_ACTIVITIES_REPORTS' => 'Tevékenységek jelentése',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Minden ismétlődés törlése',
     'LBL_DATE_END_ERROR' => 'A befejezés dátuma megelőzi a kezdés dátumát',
     'LBL_REPEAT_PARENT_ID' => 'Szülő azonosító megismétlése',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Ismétlődő azonosítójú hívás. Eredeti hívás kezdő dátuma',
     'LBL_RECURRING_SOURCE' => 'Visszatérő forrás',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Biztos benne, hogy eltávolítja az ismétlődő rekordokat?',
     'LBL_RECURRING_LIMIT_ERROR' => 'Az ismétlődő hívás nem rögzíthető, mert a hívások száma meghaladja a megengedett mennyiséget ($limit).',

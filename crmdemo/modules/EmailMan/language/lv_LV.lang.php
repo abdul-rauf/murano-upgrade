@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -87,7 +87,7 @@ $mod_strings = array (
 	'LBL_NOTIFY_FROMADDRESS' 					=> 'Sūtītāja adrese:',
 	'LBL_NOTIFY_FROMNAME' 						=> 'Sūtītāja vārds:',
 	'LBL_NOTIFY_ON'								=> 'Notifikāciju sūtīšana',
-	'LBL_ALLOW_USER_EMAIL_ACCOUNT'				=> 'Allow users to configure email accounts',
+	'LBL_ALLOW_USER_EMAIL_ACCOUNT'				=> 'Ļaut lietotājiem konfigurēt e-pasta kontus',
 	'LBL_NOTIFY_SEND_BY_DEFAULT'				=> 'Sūtīt notifikācijas jauniem lietotājiem',
 	'LBL_NOTIFY_TITLE'							=> 'E-pasta notifikāciju opcijas',
 	'LBL_OLD_ID'								=> 'Vecais Id',
@@ -130,7 +130,7 @@ $mod_strings = array (
 	'LBL_OUTGOING_SECTION_HELP'                 => 'Konfigurējiet noklusēto izejošā e-pasta serveri notifikāciju un darbplūsmu ziņojumu sūtīšanai.',
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Atļaut lietotājiem lietot šo kontu izejošiem e-pastiem',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Ja šī opcija ir atzīmēta, visi lietotāji var sūtīt e-pastus, izejošām e-pastam lietojot to pašu kontu, kas izmantots sistēmas ziņojumu un brīdinājumu sūtīšanai. Ja opcija netiek atzīmēta, lietotājs var izmantot to pašu izejošā e-pasta serveri, kad ir norādījis sava e-pasta konta informāciju.',
-    'LBL_FROM_ADDRESS_HELP'                     => 'Pēc aktivizēšanas lietotāja vārds un e-pasta adrese tiks norādīta e-pasta sūtītāja lauciņā. Šī funkcija var nestrādāta ar SMTP serveriem, kas neatbalsta e-pasta sūtīšanu cita e-pasta konta vārdā.',
+    'LBL_FROM_ADDRESS_HELP'                     => 'Pēc aktivizēšanas lietotāja vārds un e-pasta adrese tiks norādīta e-pasta sūtītāja lauciņā. Šī funkcija var nestrādāt ar SMTP serveriem, kas neatbalsta e-pasta sūtīšanu cita e-pasta konta vārdā.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo pasts' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -274,8 +274,9 @@ $mod_strings = array (
     'LBL_DST_UPGRADE' => 'Frissítés:',
     'LBL_EDIT_CUSTOM_FIELDS' => 'Egyéni mezők szerkesztése',
     'LBL_EDIT_TABS'=>'Fülek szerkesztése',
-    'LBL_EMAIL_TITLE' => 'E-mail',
-    'LBL_EMAIL_DESC' => 'Kimenő és bejövő e-mailek kezelése. Az e-mail beállításokat konfigurálni kell annak érdekében, hogy a felhasználók küldhessenek elektronikus leveleket és hírlevél kampányokat.',
+    'LBL_EMAIL_TITLE' => 'További email',
+    'LBL_EMAIL_DESC' => 'Kezelje a kimenő és beérkező emaileket. Az e-mail beállításokat mindenképpen konfigurálni kell annak érdekében, hogy ' .
+                        'engedélyezze a felhasználók számára az e-mailek és kampányhirdetések küldését.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'A funkció használatához minden felhasználó számára szükséges egy elsődleges e-mail cím.',
 	'LBL_ENABLE_MAILMERGE' => 'Körlevél engedélyezése?',
 	'LBL_ENABLED' => 'Engedélyezve',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Alapértelmezett helyi beállítások alkalmazása',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- az offline klienst kezelő felhasználó neve',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Végfelhasználó neve:',
-    'LBL_MAILBOX_DESC' => 'Csoportos mail fiókok beállítása a bejövő e-mailek ellenőrzésére és a személyes bejövő fiók információinak megadása',
+    'LBL_MAILBOX_DESC' => 'Hozzon létre csoportos email fiókokat, hogy megfigyelje a beérkező emaileket ' .
+        'és hogy kezelje a személyes fiók beérkező emailjeinek információit felhasználói számára',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Szerződéstípusok',
     'LBL_MANAGE_CURRENCIES' => 'Pénznemek',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Csoportok kezelése',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'JS csoportfájl felépítése',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Újra létrehozza és felülírja a létező csoportállományokat az utolsó verzióval.',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Javascript fájlok javítása',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'JS fájlok javítása',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Állományok feldolgozása. Ez több percig is eltarthat. Az oldal elhagyása nem zavarja meg a folyamatot, így szabadon továbbléphet vagy várhat a visszajelzésre...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Az állományok feldolgozása elkészült.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Nem kisbetűs mezők javítása',
@@ -949,7 +953,7 @@ $mod_strings = array (
     'WARN_VALIDATION_EXPIRED'=> "Megjegyzés: az érvényesítő kulcs lejár",
     'WARN_VALIDATION_EXPIRED2' =>"napon belül. Kérjük frissítse az információkat a Licenckezelő lapon az admin felületen!",
     'WARN_NO_SMTP_SERVER_AVAILABLE_ERROR' =>"Megjegyzés: rekord hozzárendelésről szóló értesítések küldéséhez az SMTP szervert be kell állítani az E-mail beállítások menüpontban.",
-	'LBL_MODULEBUILDER'=>'Module Builder',
+	'LBL_MODULEBUILDER'=>'Modulépítő',
 	'LBL_MODULEBUILDER_DESC'=>'Új modulok létrehozása a Sugar funkcionalitásának növelése érdekében',
 	'LBL_SUGARPORTAL'=>'Sugar portál',
 	'LBL_SUGARPORTAL_DESC' => 'Sugar portál kezelése',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Egyéb forrásból származó cache fájlok törlése...kész',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Ha ez a doboz nincs kipipálva, a rendszerlicenc lejárata után az adminnak kell manuálisan újraéleszteni azt, különben a felhasználók nem lesznek képesek bejelentkezni többé.',
 	'LBL_TRACKER_SETTINGS' => 'Követő',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Válassza ki, hogy milyen rendszer- és felhasználói adatokat követ nyomon',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Követés engedélyezésa/tiltása',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Feltöltés engedélyezése/letöltése',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Aktiválás',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Deaktiválás',
@@ -1159,6 +1163,10 @@ További információkért hivatkozzon a <a href="http://www.sugarcrm.com/crm/pr
     'LBL_SPRITES_ADDED' => '{0} sprite hozzáadva',
     'LBL_SPRITES_EXCLUDING_FILE' => '{0} fájl kihagyásával',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Csoport-alapú engedélyek',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Engedélyezze a csoport-hozzáférést és kezelje a hozzáférést a modulban.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Rendszertípus',
     'LBL_FTS_HOST' => 'Kiszolgáló',
@@ -1228,5 +1236,6 @@ További információkért hivatkozzon a <a href="http://www.sugarcrm.com/crm/pr
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Jóváhagyás esetén a rendszere szinkronizálódik a szerverrel.',
     'LBL_OFFLINE_ENABLED' => 'Offline engedélyezve',
     'LBL_OFFLINE_SETTINGS' => 'Offline beállítások',
+
 
 );

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -29,8 +29,11 @@ Studio2 = {
 			DDM = YAHOO.utilDragDropMgr;
 		
 		Studio2.maxColumns = parseInt(document.getElementById('maxColumns').value);
-		//Studio2.setStartId(parseInt(document.getElementById('idCount').value));
-		Studio2.setStartId(10000);
+
+        // initialize the ID sequence only if it's not already initialized
+        if (!Studio2.idStack) {
+            Studio2.setStartId(10000);
+        }
 		Studio2.fieldwidth = parseInt(document.getElementById('fieldwidth').value);
 		Studio2.panelNumber = parseInt(document.getElementById('nextPanelId').value);
 		Studio2.isIE = SUGAR.isIE;

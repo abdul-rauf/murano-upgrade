@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,10 +20,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 $mod_strings = array(
-    'LBL_MODULE_NAME' => 'Arhiva email',
+    'LBL_MODULE_NAME' => 'Arhivă e-mail',
     'LBL_SNIP_SUMMARY' => "Arhivarea e-mail este un serviciu automat, care permite utilizatorilor de a importa e-mailurile în Sugar  trimiţându-le de la orice client de e-mail sau la un serviciu de Sugar furnizat adresa de e-mail. Fiecare instanţă de Sugar are propria adresă de e-mail unica. Pentru a importa e-mailurile, un utilizator trimite la adresa de e-mail cu condiţia folosind Către, Cc, domenii de CCA. Serviciul de arhivare a email va importa e-mail în instanţă de Sugar.Serviciul importă de e-mail, împreună cu orice accesorii, imagini si evenimente din calendar, şi creează înregistrări în aplicare, care sunt asociate cu înregistrările existente, pe baza de potrivire adrese de e-mail.<br /><br />Exemplu: În calitate de utilizator, atunci când am vedea un cont, voi putea vedea toate e-mailurile care sunt asociate cu un cont pe adresa de e-mail în înregistrarea Cont. Eu voi fi, de asemenea, posibilitatea de a vedea email-uri care sunt asociate cu contact legate de cont.<br /><br />Acceptaţi termenii de mai jos şi faceţi clic pe Activare pentru a începe utilizarea serviciului. Va fi capabil de a dezactiva serviciul în orice moment. Odată ce serviciul este activat, adresa de e-mail pentru a utiliza serviciul va fi afişat.",
 	'LBL_REGISTER_SNIP_FAIL' => 'Nu a reuşit să contacteze serviciul de arhivare e-mail:% s!',
-	'LBL_CONFIGURE_SNIP' => 'Arhiva email',
+	'LBL_CONFIGURE_SNIP' => 'Arhivă e-mail',
     'LBL_DISABLE_SNIP' => 'Dezactiveaza',
     'LBL_SNIP_APPLICATION_UNIQUE_KEY' => 'Aplicatie Cheie unica',
     'LBL_SNIP_USER' => 'Arhivarea e-mail utilizator',

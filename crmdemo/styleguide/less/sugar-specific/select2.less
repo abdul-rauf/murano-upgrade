@@ -73,7 +73,7 @@
 
   &.select2-choices-pills .select2-search-choice,
   &.select2-container-multi.select2-choices-pills-close .select2-search-choice {
-    margin: 2px 0 2px 4px;
+    margin: 2px 0 1px 4px;
     font-size: 12px;
     font-weight: bold;
     border: none;
@@ -93,6 +93,15 @@
       outline: 0;
       outline: ~"thin dotted \9";
       background: @blue;
+    }
+    &.select2-choice-danger {
+      background-color: @btnDangerBackground;
+      span:before {
+        content: "\f06a";
+        font-family: 'FontAwesome';
+        color: @white;
+        padding-right: 3px;
+      }
     }
   }
 
@@ -405,9 +414,14 @@
   .select2-search-field input {
     margin:0;
     padding: 0 6px;
+    box-sizing: border-box;
+    position: absolute;
+    height: 19px;
+    margin: 2px 0;
   }
   .select2-search-choice {
     filter: none;
+    min-height: 15px;
   }
 }
 
@@ -435,6 +449,12 @@
     .label-module-mini {
       margin: 1px 4px 0 0;
       float: left;
+    }
+    .select2-result-status {
+      float: right;
+      max-width: 40%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   li div {
@@ -596,7 +616,7 @@
   .tag-wrapper {
     float: left;
     max-width: 100%;
-    padding: 3px 6px 2px;
+    padding: 3px 6px 4px;
     margin: 0 4px 4px 0;
     background: @gray;
     .box-sizing(border-box);

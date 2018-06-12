@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -141,9 +141,7 @@ class ExternalAPIFactory
             require_once('modules/Administration/Common.php');
             $languages = get_languages();
             foreach( $languages as $lang => $langLabel ) {
-                $contents = return_custom_app_list_strings_file_contents($lang);
-                $new_contents = replace_or_add_dropdown_type('extapi_meeting_password', $meetingPasswordList, $contents);
-                save_custom_app_list_strings_contents($new_contents, $lang);
+                save_custom_dropdown_strings(array('extapi_meeting_password' => $meetingPasswordList), $lang);
             }
         }
 

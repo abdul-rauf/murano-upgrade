@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,27 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => 'Weet u het zeker dat u dit record wilt verwijderen?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Weet u het zeker dat u het teamlidmaatschap van deze gebruiker wilt verwijderen?',
     'LBL_EDITLAYOUT' => 'Wijzig layout' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Op teams gebaseerde machtigingen',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Teamtoegang inschakelen en toegang beheren per module.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Op teams gebaseerde machtigingen inschakelen',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Selecteer modules om in te schakelen',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'Met op teams gebaseerde machtigingen kunt u via Rolbeheer specifieke toegangsrechten aan teams en gebruikers toekennen voor individuele modules.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+Op teams gebaseerde machtigingen voor een module overschrijven alle gegevens die aan op teams gebaseerde machtigingen zijn gekoppeld voor die module, waaronder Procesdefinities of Processen die de functie gebruiken. Dit is inclusief Rollen die de optie "Eigenaar & Geselecteerd team" gebruiken voor die module en eventuele op teams gebaseerde machtigingen voor records in die module. We raden u aan het middel Snel repareren en opnieuw opbouwen te gebruiken om uw systeemcache te legen nadat u op teams gebaseerde machtigingen hebt uitgeschakeld voor een module.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Waarschuwing:</strong> Op teams gebaseerde machtigingen voor een module overschrijven alle gegevens die aan op teams gebaseerde machtigingen zijn gekoppeld voor die module, waaronder Procesdefinities of Processen die de functie gebruiken. Dit is inclusief Rollen die de optie "Eigenaar & Geselecteerd team" gebruiken voor die module en eventuele op teams gebaseerde machtigingen voor records in die module. We raden u aan het middel Snel repareren en opnieuw opbouwen te gebruiken om uw systeemcache te legen nadat u op teams gebaseerde machtigingen hebt uitgeschakeld voor een module.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+Op teams gebaseerde machtigingen voor een module overschrijven alle gegevens die aan op teams gebaseerde machtigingen zijn gekoppeld voor die module, waaronder Procesdefinities of Processen die de functie gebruiken. Dit is inclusief Rollen die de optie "Eigenaar & Geselecteerd team" gebruiken voor die module en eventuele op teams gebaseerde machtigingen voor records in die module. We raden u aan het middel Snel repareren en opnieuw opbouwen te gebruiken om uw systeemcache te legen nadat u op teams gebaseerde machtigingen hebt uitgeschakeld voor een module. Neem contact op met een beheerder die toegang heeft tot het menu Reparatie als u geen toegang heeft tot Snel repareren en opnieuw opbouwen.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Waarschuwing:</strong>Op teams gebaseerde machtigingen voor een module overschrijven alle gegevens die aan op teams gebaseerde machtigingen zijn gekoppeld voor die module, waaronder Procesdefinities of Processen die de functie gebruiken. Dit is inclusief Rollen die de optie "Eigenaar & Geselecteerd team" gebruiken voor die module en eventuele op teams gebaseerde machtigingen voor records in die module. We raden u aan het middel Snel repareren en opnieuw opbouwen te gebruiken om uw systeemcache te legen nadat u op teams gebaseerde machtigingen hebt uitgeschakeld voor een module. Neem contact op met een beheerder die toegang heeft tot het menu Reparatie als u geen toegang heeft tot Snel repareren en opnieuw opbouwen.
+STR
+,
 );

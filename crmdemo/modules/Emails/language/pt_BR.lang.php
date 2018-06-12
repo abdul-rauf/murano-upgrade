@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -100,7 +100,7 @@ $mod_strings = array (
 	'LBL_ERROR_SENDING_EMAIL'	=> 'Erro ao enviar o e-mail',
 	'LBL_ERROR_SAVING_DRAFT'	=> 'Erro ao gravar rascunho',
 	'LBL_FORWARD_HEADER'		=> 'Iniciar a mensagem encaminhada:',
-	'LBL_FROM_NAME'				=> 'Nome em "De"',
+	'LBL_FROM_NAME'				=> 'Nome em &quot;De&quot;',
 	'LBL_FROM'					=> 'De:',
 	'LBL_REPLY_TO'				=> 'Responder para:',
 	'LBL_HTML_BODY'				=> 'Corpo em HTML',
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'erro: credenciais ausentes',
     'ERR_NO_UID' => 'error: nenhum UID',
     'ERR_NO_IEID' => 'error: nenhum ieID',
+    'ERR_INVALID_RECIPIENTS' => 'Existe um ou mais destinatários com endereço de e-mail inválido. ' .
+        'Corrija isto e tente novamente.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Endereço de e-mail inválido',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'nenhum recipiente especificado',

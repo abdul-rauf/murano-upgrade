@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -17,7 +17,7 @@ require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 // Used in several actions
 require_once 'modules/ModuleBuilder/parsers/parser.label.php';
-require_once 'ModuleInstall/ModuleInstaller.php';
+SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
 require_once 'modules/DynamicFields/FieldCases.php';
 require_once 'modules/DynamicFields/DynamicField.php';
 
@@ -583,7 +583,8 @@ class ModuleBuilderController extends SugarController
         $GLOBALS ['mod_strings']['LBL_ALL_MODULES'] = 'all_modules';
         $_REQUEST['execute_sql'] = true;
 
-        $mi = new ModuleInstaller();
+        $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+        $mi = new $moduleInstallerClass();
         $mi->silent = true;
         $mi->rebuild_extensions();
 
@@ -728,7 +729,7 @@ class ModuleBuilderController extends SugarController
 
     public function action_SaveDropDown()
     {
-        $parser = new ParserDropDown ();
+        $parser = ParserFactory::getParser('dropdown');
         $parser->saveDropDown($_REQUEST);
         MetaDataManager::refreshSectionCache(MetaDataManager::MM_LABELS);
         MetaDataManager::refreshSectionCache(MetaDataManager::MM_ORDEREDLABELS);

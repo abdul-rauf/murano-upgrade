@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -163,8 +163,8 @@ $mod_strings = array(
     'LBL_DISCOUNT_AS_PERCENT' => '% скидки',
     'SAVE_RLI_QUOTE_NOTICE' => 'Этот продукт уже конвертирован в коммерческое предложение. Внесенные вами изменения не обновятся в соответствующем коммерческом предложении',
 
-    'LBL_QUOTED' => 'Коммерческое предложение сформировано',
-    'LBL_NOT_QUOTED' => 'Коммерческое предложение не сформировано',
+    'LBL_QUOTED' => 'Ком. предл. сформировано',
+    'LBL_NOT_QUOTED' => 'Ком. предл. не сформировано',
     'WARNING_DELETED_RECORD_LIST_RECOMMIT_1' => 'Одна или более записей были включены в',
     'WARNING_DELETED_RECORD_LIST_RECOMMIT_2' => 'Они будут удалены и вам потребуется повторно совершить ваш',
     'WARNING_MERGE_RLIS_WITH_DIFFERENT_OPPORTUNITIES' => 'Одна или более записей, которые вы выбрали, не могут быть слиты, поскольку они принадлежат разным Продажам',

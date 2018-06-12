@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,14 +14,6 @@
  * @extends View.Fields.Base.BaseField
  */
 ({
-    /**
-     * @inheritdoc
-     */
-    plugins: [
-        'EllipsisInline',
-        'Tooltip'
-    ],
-
     /**
      * @inheritdoc
      */
@@ -45,22 +37,12 @@
      * @inheritdoc
      */
     initialize: function(options) {
-        // FIXME: Remove this when SIDECAR-517 gets in
+        // FIXME SC-1692: Remove this when SC-1692 gets in
         this._initPlugins();
         this._super('initialize', [options]);
         this._initEvents();
         this._initDefaultValue();
         this._initPlaceholderAttribute();
-        /**
-         * Property to add or not the `ellipsis_inline` class when rendering the
-         * field in the `list` template. `true` to add the class, `false`
-         * otherwise.
-         *
-         * Defaults to `true`.
-         *
-         * @property {boolean}
-         */
-        this.ellipsis = _.isUndefined(this.def.ellipsis) || this.def.ellipsis;
 
         /**
          * If a date picker has been initialized on the field or not.
@@ -78,7 +60,7 @@
      * @protected
      * @template
      *
-     * FIXME: Remove this when SIDECAR-517 gets in
+     * FIXME SC-1692: Remove this when SC-1692 gets in.
      */
     _initPlugins: function() {
         return this;
@@ -229,13 +211,23 @@
      * because `this.model.set()` could have been already empty thus not
      * triggering a new event and not calling the default code of
      * `bindDomChange()`.
+     *
+     * Undefined model values will not be replaced with empty string to prevent
+     * unnecessary unsaved changes warnings.
      */
     handleHideDatePicker: function() {
-        var $field = this.$(this.fieldTag),
-            value = this.unformat($field.val());
+        var $field = this.$(this.fieldTag);
+
+        // If we partially delete date from date picker and click outside the field, it will return undefined value.
+        // But we need to use empty string as the only one negative value.
+        var value = this.unformat($field.val()) || '';
 
         if (!value) {
             $field.val(value);
+        }
+
+        if (_.isEmptyValue(value) && _.isUndefined(this.model.get(this.name))) {
+            return;
         }
 
         this.model.set(this.name, value);
@@ -251,17 +243,19 @@
         if (this._inDetailMode()) {
             return;
         }
+        
+        if (this.action === 'edit') {
+            var $field = this.$(this.fieldTag);
 
-        var $field = this.$(this.fieldTag);
+            $field.on('focus', _.bind(this.handleFocus, this));
 
-        $field.on('focus', _.bind(this.handleFocus, this));
-
-        $('.main-pane, .flex-list-view-content').on('scroll.' + this.cid, _.bind(function() {
-            // make sure the dom element exists before trying to place the datepicker
-            if (this._getAppendToTarget()) {
-                $field.datepicker('place');
-            }
-        }, this));
+            $('.main-pane, .flex-list-view-content').on('scroll.' + this.cid, _.bind(function() {
+                // make sure the dom element exists before trying to place the datepicker
+                if (this._getAppendToTarget()) {
+                    $field.datepicker('place');
+                }
+            }, this));
+        }
     },
 
     /**
@@ -284,13 +278,15 @@
             return;
         }
 
-        $('.main-pane, .flex-list-view-content').off('scroll.' + this.cid);
+        if (this.action === 'edit') {
+            $('.main-pane, .flex-list-view-content').off('scroll.' + this.cid);
 
-        var $field = this.$(this.fieldTag),
-            datePicker = $field.data('datepicker');
-        if (datePicker && !datePicker.hidden) {
-            // todo: when SC-2395 gets implemented change this to 'remove' not 'hide'
-            $field.datepicker('hide');
+            var $field = this.$(this.fieldTag),
+                datePicker = $field.data('datepicker');
+            if (datePicker && !datePicker.hidden) {
+                // todo: when SC-2395 gets implemented change this to 'remove' not 'hide'
+                $field.datepicker('hide');
+            }
         }
     },
 
@@ -311,7 +307,7 @@
         };
 
         // Note that ordering here is used in following for loop
-        calendarPropsMap = ['dom_cal_day_long', 'dom_cal_day_short', 'dom_cal_month_long', 'dom_cal_month_short'];
+        calendarPropsMap = ['dom_cal_day_long', 'dom_cal_day_short', 'dom_cal_day_min', 'dom_cal_month_long', 'dom_cal_month_short'];
 
         for (calMapIndex = 0, mapLen = calendarPropsMap.length; calMapIndex < mapLen; calMapIndex++) {
 
@@ -339,9 +335,12 @@
                     pickerMapKey = 'daysShort';
                     break;
                 case 2:
-                    pickerMapKey = 'months';
+                    pickerMapKey = 'daysMin';
                     break;
                 case 3:
+                    pickerMapKey = 'months';
+                    break;
+                case 4:
                     pickerMapKey = 'monthsShort';
                     break;
             }
@@ -395,6 +394,10 @@
      * @inheritdoc
      */
     _render: function() {
+        if (this._hasDatePicker) {
+            this.$(this.fieldTag).datepicker('hide');
+        }
+
         this._super('_render');
 
         if (this.tplName !== 'edit' && this.tplName !== 'massupdate') {

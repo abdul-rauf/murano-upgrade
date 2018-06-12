@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -72,9 +72,16 @@
 
         // shortcut keys
         // Focus the search bar
-        app.shortcuts.register(app.shortcuts.GLOBAL + 'Search', ['s', 'ctrl+alt+0'], function() {
-            this.trigger('navigate:to:component', 'quicksearch-bar');
-        }, this);
+        app.shortcuts.registerGlobal({
+            id: 'Search:Focus',
+            keys: ['s', 'mod+alt+0'],
+            component: this,
+            description: 'LBL_SHORTCUT_SEARCH',
+            handler: function() {
+                this.trigger('navigate:to:component', 'quicksearch-bar');
+                this.triggerExpand();
+            }
+        });
 
         // When a component is trying to navigate from its last element to the next component,
         // Check to make sure there is a next navigable component. If it exists, set it to the component to focus
@@ -147,7 +154,7 @@
         // Listener for app:view:change to expand or collapse the search bar
         app.events.on('app:view:change', function() {
             if (this.context.get('search')) {
-                _.defer(_.bind(this.expand, this));
+                this.triggerExpand();
             } else {
                 _.bind(this.collapse, this);
             }
@@ -205,6 +212,14 @@
         this.compOnFocusIndex = 0;
     },
 
+    /**
+     * Expand quicksearch bar asynchronously.
+     * @param {boolean} update `true` means the expansion is to update the width.
+     *                  `false` means the expansion is new and needs animation.
+     */
+    triggerExpand: function(update) {
+        _.defer(_.bind(this.expand, this, update));
+    },
 
     /**
      * Expands the quicksearch.
@@ -270,7 +285,7 @@
     resizeHandler: function() {
         this._toggleResponsiveMode();
         if (this.expanded && !this.isResponsiveMode) {
-            _.defer(_.bind(this.expand, this, true));
+            this.triggerExpand(true);
         }
     },
 

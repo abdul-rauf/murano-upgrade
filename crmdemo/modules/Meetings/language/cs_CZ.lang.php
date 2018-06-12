@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'E-mail',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Obeslat všechny pozvané',
     'LBL_POPUP_REMINDER' => 'Popup připomínka',
-    'LBL_POPUP_REMINDER_TIME' => 'Čas připomenutí vyskakovacího okna',
+    'LBL_POPUP_REMINDER_TIME' => 'Nabídka času připomenutí e-mailem',
     'LBL_EMAIL_REMINDER' => 'Emailové upozornění',
-    'LBL_EMAIL_REMINDER_TIME' => 'Čas emailového upozornění',
+    'LBL_EMAIL_REMINDER_TIME' => 'Čas připomenutí e-mailem',
     'LBL_REMOVE' => 'odstranit',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Plánování',
 	'LBL_SEARCH_BUTTON'=> 'Hledat',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Odstranit všechny opakování',
     'LBL_DATE_END_ERROR' => 'Konečný datum je menší než počáteční datum',
     'LBL_REPEAT_PARENT_ID' => 'Opakovat zdrojové ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID opakování schůzky. Datum zahájení původní schůzky',
     'LBL_RECURRING_SOURCE' => 'Zdroj opakování',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Jste si jisti, že chcete odstranit všechny opakující se záznamy?',
     'LBL_RECURRENCE' => 'opakování',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Сповістити всіх запрошених по Email',
     'LBL_POPUP_REMINDER' => 'Спливаюче вікно нагадування',
-    'LBL_POPUP_REMINDER_TIME' => 'Спливаюче вікно нагадування часу',
+    'LBL_POPUP_REMINDER_TIME' => 'Час спливаючого сповіщення електронною поштою',
     'LBL_EMAIL_REMINDER' => 'Нагадування по Email',
-    'LBL_EMAIL_REMINDER_TIME' => 'Час нагадування по Email',
+    'LBL_EMAIL_REMINDER_TIME' => 'Час сповіщення електронною поштою',
     'LBL_REMOVE' => 'вид.',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Планування',
 	'LBL_SEARCH_BUTTON'=> 'Пошук',
@@ -94,7 +94,7 @@ $mod_strings = array (
 	'LBL_SUBJECT' => 'Тема:',
 	'LBL_TIME' => 'Час початку:',
 	'LBL_USERS_SUBPANEL_TITLE' => 'Користувачі',
-	'LBL_ACTIVITIES_REPORTS' => 'Звіт по активностям',
+	'LBL_ACTIVITIES_REPORTS' => 'Звіт за активностями',
     'LBL_PARENT_TYPE' => 'Тип батьківського запису',
     'LBL_PARENT_ID' => 'ID батьківського запису',
 	'LNK_MEETING_LIST'=>'Переглянути зустрічі',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Видалити всі повторення',
     'LBL_DATE_END_ERROR' => 'Необхідно задати значення дати завершення перед датою початку',
     'LBL_REPEAT_PARENT_ID' => 'Батьківський ID повторень',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID повторення зустрічі. Дата першої зустрічі',
     'LBL_RECURRING_SOURCE' => 'Джерело повторень',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Ви дійсно бажаєте видалити всі повторювані записи?',
     'LBL_RECURRENCE' => 'Повторення',
@@ -186,11 +187,11 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} складається із записів зустрічей, які можуть перебувати у статусі "Запланована", "Відбулася", або "Скасована". Дати майбутніх зустрічей, запланованих впродовж 24 годин, позначені синім. Дати прострочених зустрічей позначені червоним.
+    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} складається із записів зустрічей, які можуть перебувати у статусі "Запланована", "Відбулася" або "Скасована". Дати майбутніх зустрічей, запланованих на наступні 24 години, позначені синім. Дати прострочених зустрічей позначені червоним.
 
-За допомогою подання списку {{plural_module_name}} Ви можете переглядати і редагувати інформацію про зустрічі. Додаткові дії доступні в меню в кінці рядка кожної зустрічі. Можна вибрати "Закрити" у меню у рядку будь-якої зустрічі, щоб позначити її як "Відбулася".
+За допомогою подання списку {{plural_module_name}} можна переглядати і редагувати інформацію про зустрічі. Додаткові дії доступні в меню в кінці рядка кожної зустрічі. Виберіть "Закрити" в меню в рядку будь-якої зустрічі, щоб змінити її статус на "Відбулася". 
 
-Користувачі Sugar, Контакти та Інтереси можна додати в якості запрошених. {{plural_module_name}} можна створити за допомогою модуля {{plural_module_name}}, імпорту, а також через субпанель активностей (для попередніх версій модулів) або інформаційну панель Заплановані активності (для модулів Sidecar) на сторінках записів пов&#39;язаних модулів (наприклад, Контакти, Контрагенти і т.д.), який автоматично створює зв&#39;язок між обома записами.',
+Користувачів Sugar, Контакти та Інтереси можна додати як запрошених. {{plural_module_name}} можна створити за допомогою модуля {{plural_module_name}}, імпорту, а також через субпанель активностей (для попередніх версій модулів) або інформаційну панель Заплановані активності (для модулів Sidecar) на сторінках записів пов&#39;язаних модулів (наприклад, Контакти, Контрагенти і т.д.), який автоматично створює зв&#39;язок між обома записами.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Модуль {{plural_module_name}} складається з записів {{meetings_singular_module}}, зареєстрованих користувачами Вашої організації. {{plural_module_name}} можуть перебувати в статусі "Запланована", "Відбулася", або "Скасовано". Користувачі Sugar, як {{contacts_module}} і {{leads_module}} можуть бути додані в якості запрошених.

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -27,7 +27,7 @@ $mod_strings = array (
 	'EXPORT'=>'Dışarı Aktarım Ayarları',
 	'EXPORT_CHARSET' => 'Veri Yükle ve Dışarı Aktarmak için Varsayılan Karakter Kümesi',
 	'DISABLE_EXPORT'=>'Dışarı Aktarımı etkisizleştirin',
-    'DESC_DROPDOWN_EDITOR' => 'Açılır-liste ye ekleyin, silin veya değiştirin',
+    'DESC_DROPDOWN_EDITOR' => 'Açılır listeleri ekleyin, silin veya değiştirin',
     'DESC_EDIT_CUSTOM_FIELDS' => 'Alan Yerleşimi için oluşturulmuş özel alanları değiştirin',
     'DESC_FILES_INSTALLED' => 'Aşağıdaki yükseltmeler kuruldu:',
     'DESC_FILES_QUEUED' => 'Yüklenmeye hazır olan modüller:',
@@ -274,8 +274,9 @@ $mod_strings = array (
     'LBL_DST_UPGRADE' => 'Güncelleyin:',
     'LBL_EDIT_CUSTOM_FIELDS' => 'Özel Alanları Değiştir',
     'LBL_EDIT_TABS'=>'Sekmeleri Değiştirin',
-    'LBL_EMAIL_TITLE' => 'E-Posta',
-    'LBL_EMAIL_DESC' => 'Gelen ve giden E-Postaları yönetin. E-Posta ayarları, kullanıcıların dışarı E-Posta ve bülten kampanyaları gönderebilmesi için yapılandırılmalıdır.',
+    'LBL_EMAIL_TITLE' => 'E-posta',
+    'LBL_EMAIL_DESC' => 'Giden ve gelen e-postaları yönetin. E-posta ayarları, şundan dolayı yapılandırılmalıdır ' .
+                        've haber bültenleri göndermelerini sağlamak için yapılandırılmalıdır.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Bu özelliği her kullanıcının kullanması için asıl E-Posta adresi gereklidir.',
 	'LBL_ENABLE_MAILMERGE' => 'E-Posta Birleştirmeyi Etkinleştir?',
 	'LBL_ENABLED' => 'Etkin',
@@ -292,7 +293,7 @@ $mod_strings = array (
     'LBL_EXTERNAL_DEV_TITLE'=> 'Özel Alanları Taşı',
     'LBL_FORECAST_TITLE'=> 'Tahmin',
     'LBL_FORECAST_DESC'=> 'Tahmin Modülü için zaman dilimlerini tanımlayın. Bu zaman dilimleri, Tahmin Modülünde yer alan Zaman Dilimleri açılan menülerinde gösterilir.',
-    'LBL_OPPORTUNITIES_DESC'=> 'Fırsatlar modülü için yönetici ayalarını tanımlayınız. Fırsat Ayaları, Fırsatların tek başına veya eklenmiş Gelir Kalemleri ile görülmesini içerir.',
+    'LBL_OPPORTUNITIES_DESC'=> 'Fırsatlar modülü için yönetici ayalarını tanımlayınız. Fırsat Ayarları, Fırsatların tek başına veya eklenmiş Gelir Kalemleri ile görülmesini içerir.',
     'LBL_GLOBAL_SEARCH_SETTINGS' => 'Ara',
     'LBL_GLOBAL_SEARCH_SETTINGS_DESC' => 'Global Arama için modülleri seçin ve Tam-Metin arama özelliğini yapılandırın.',
     'LBL_FTS_SETTINGS' => 'Tam-Metin Arama Yapılandırması',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Sisteminiz için varsayılan yerel ayarları yapın',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- Bu çevrimdışı istemciyi çalıştıracak kişinin Kullanıcı Adı',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Son Kullanıcı İsmi:',
-    'LBL_MAILBOX_DESC' => 'Gelen E-Postaları izlemek için grup hesapları ayarlayın ve gelen kişisel E-Posta hesabı bilgilerini kullanıcılar için yönetin',
+    'LBL_MAILBOX_DESC' => 'Gelen e-postaları izlemek için grup e-posta hesaplarını ayarlayın ' .
+        've kullanıcılar için kişisel gelen e-posta hesap bilgilerini yönetin',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Kontrat Tipleri',
     'LBL_MANAGE_CURRENCIES' => 'Para Birimleri',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Grupları Yönetin',
@@ -524,7 +526,7 @@ $mod_strings = array (
     'LBL_OOTB_REPORTS'      => 'Rapor Üretimi Planlanmış Görevleri Çalıştırın',
     'LBL_OOTB_WORKFLOW'     => 'Süreç İş Akışı Görevleri',
     'LBL_OOTB_TRACKER'		=> 'Ayın 1 inde Kullanıcı Tarihçesinin fazla kısımlarını atın',
-   	'LBL_UPDATE_TRACKER_SESSIONS' => 'takipçi_oturumlar Çizelgesini Güncelleyin',
+   	'LBL_UPDATE_TRACKER_SESSIONS' => 'takipçi_oturumlar tablosunu güncelleştir',
     'LBL_OVERWRITE_FILES'   => 'Dosyaların üzerine yazın',
     'LBL_PASSWORD_SUGAR_SERVER_DESC'        => '- Sunucu üzerindeki bir Admin kullanıcı ismi ve şifresi',
     'LBL_PASSWORD_SUGAR_SERVER'          => 'Admin Şifresi:',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'JS Gruplama Dosyalarını Yeniden Oluştur',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Mevcut grup dosyaları ile bu dosyaların en son versiyonlarını tekrar birleştirir ve üstüne yazar',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Javascript dosyalarını onarın',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'JS Dosyalarını onarın',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Dosyalar işleniyor. Bu işlem bir kaç dakika sürebilir. Bu sayfadan çıkmanız süreci durdurmaz,  bu yüzden beklemek zorunda değilsiniz...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Dosyaların işlenmesi tamamlandı.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Küçük Harf Olmayan Alanları Onar',
@@ -825,9 +829,9 @@ $mod_strings = array (
     'LBL_WIRELESS_SUPPORTED_MODULES2' => '* Hata İzleme, Kampanyalar, Kontratlar, Dokümanlar, Bilgi Bankası, Ürünler, Projeler ve Hedefler modülleri SugarCRM Mobil için mevcut değil.',
     'LBL_WIRELESS_URL_HELP' => 'Sugar Mobile Plus uygulamasını yapılandırmak için tıklayın',
     'LBL_HISTORY_CONTACTS_EMAILS' => 'İlişkili Kontakların E-Postaları',
-    'LBL_HISTORY_CONTACTS_EMAILS_DESC' => 'E-Posta altpanelinde İlişkili (veya bağlantılı) Kontaklara ait e-postaların gösterilip, gösterilmeyeceğini kontrol eder.',
+    'LBL_HISTORY_CONTACTS_EMAILS_DESC' => 'E-Posta alt panelinde İlişkili (veya bağlantılı) Kontaklara ait e-postaların gösterilip, gösterilmeyeceğini kontrol eder.',
 
-    'LBL_USERS_DESC' => 'Sugar da kullanıcı oluşturun, değiştirin, etkinleştirin, devre dışı bırakın. Modül ve alan-seviye erişimi dahil olmak üzere takım ve rol oluşturup düzenleyin.',
+    'LBL_USERS_DESC' => 'Sugar&#39;da kullanıcı oluşturun, değiştirin, etkinleştirin, devre dışı bırakın. Modül ve alan-seviye erişimi dahil olmak üzere takım ve rol oluşturup düzenleyin.',
 
     'LBL_WEB_LOGIC_HOOKS' => 'Web Mantık Çengelleri',
     'LBL_WEB_LOGIC_HOOKS_DESC' => 'Sugar Web Logic Hooklarını Yönetin',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Ek Önbellek Dosyaları Temizleniyor…bitti',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Eğer bu kutu işaretlenmez ise, sistem lisans geçerliliği sona erdikten sonra manuel olarak geçerlilik süresini uzatmak için bir sistem yöneticisine ihtiyaç duyulacaktır. Aksi takdirde kullanıcılar sisteme giriş yapamayacaklardır.',
 	'LBL_TRACKER_SETTINGS' => 'Takip Edici',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Hangi sistem ve kullanıcı verilerinin izleneceğini seçin',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Takibi etkinleştir/devre dışı bırak',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Örnek Kullanıcıları Etkinleştir/Devre dışı bırak',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Aktif',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Devre dışı bırak',
@@ -1158,6 +1162,10 @@ Daha fazla bilgi için <a href="http://www.sugarcrm.com/crm/product_doc.php?edit
     'LBL_SPRITES_ADDED' => 'Hareketli Grafik Eklendi {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Hariç Tutulan Dosya: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Takım Bazlı İzinler',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Takım erişimini etkinleştirin ve modüller erişimi yönetin.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Sistem Türü',
     'LBL_FTS_HOST' => 'Sunucu',
@@ -1227,5 +1235,6 @@ Daha fazla bilgi için <a href="http://www.sugarcrm.com/crm/product_doc.php?edit
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Gönder butonuna tıkladığınızda ana sunucu ile senkronize olacaksınız.',
     'LBL_OFFLINE_ENABLED' => 'Çevrimdışı etkin',
     'LBL_OFFLINE_SETTINGS' => 'Çevrimdışı Ayarları',
+
 
 );

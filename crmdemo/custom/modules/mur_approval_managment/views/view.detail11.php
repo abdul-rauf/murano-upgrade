@@ -33,7 +33,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  {
 	function mur_approval_managmentViewDetail()
 	{		
-		parent::ViewDetail();
+		parent::__construct();
 	}
 	
 	/**

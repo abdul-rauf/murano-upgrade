@@ -16,7 +16,7 @@ require_once('include/MVC/View/SugarView.php');
 class AdministrationViewUC2C extends SugarView {
 	
 	function AdministrationViewUC2C(){
- 		parent::SugarView();
+ 		parent::__construct();
  	}
  
  	function display()

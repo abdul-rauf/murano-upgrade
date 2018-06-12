@@ -95,6 +95,12 @@
   height: ~"calc(@{val})";
 }
 
+.calcTop(@val) {
+  top: ~"-moz-calc(@{val})";
+  top: ~"-webkit-calc(@{val})";
+  top: ~"calc(@{val})";
+}
+
 .outline(@val) {
   outline: @val;
 }
@@ -168,7 +174,7 @@
   outline-offset: -2px;
   outline-width: 1px;
   outline-style: dotted;
-  outline-color: @grayLight;
+  outline-color: #589bda;
   // Firefox
   outline-color: -moz-mac-focusring;
   // Webkit

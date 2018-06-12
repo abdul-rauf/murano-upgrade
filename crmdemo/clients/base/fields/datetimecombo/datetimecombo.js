@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -147,6 +147,13 @@
      */
     _setupTimePicker: function() {
         var options;
+        var localeData = app.date.localeData();
+        var lang = {
+            am: localeData.meridiem(1, 00, true),
+            pm: localeData.meridiem(13, 00, true),
+            AM: localeData.meridiem(1, 00, false),
+            PM: localeData.meridiem(13, 00, false)
+        };
 
         this.def.time || (this.def.time = {});
 
@@ -160,7 +167,8 @@
                 false :
                 !!this.def.time.disable_text_input,
             className: this.def.time.css_class || 'prevent-mousedown',
-            appendTo: this.$el
+            appendTo: this.$el,
+            lang: lang
         };
 
         this._enableDuration(options);
@@ -171,7 +179,8 @@
 
     /**
      * Show duration on the timepicker dropdown if enabled in view definition.
-     * @param {Object} options - timepicker options
+     * @param {Object} options The timepicker options (see
+     *   https://github.com/jonthornton/jquery-timepicker#options).
      * @private
      */
     _enableDuration: function(options) {
@@ -196,7 +205,7 @@
                 startDate = app.date(dateStartString);
                 endDate = app.date(dateEndString);
 
-                if ((startDate.years() === endDate.years()) && (startDate.months() === endDate.months()) && (startDate.days() === endDate.days())) {
+                if ((startDate.year() === endDate.year()) && (startDate.month() === endDate.month()) && (startDate.days() === endDate.days())) {
                     this.minTime = app.date.duration({
                         hours: startDate.hours(),
                         minutes: startDate.minutes()
@@ -248,6 +257,9 @@
      * triggering a new event and not calling the default code of
      * `bindDomChange()`.
      *
+     * Undefined model values will not be replaced with empty string to prevent
+     * unnecessary unsaved changes warnings.
+     *
      * @override
      */
     handleHideDatePicker: function() {
@@ -261,6 +273,11 @@
             $dateField.val('');
             $timeField.val('');
         }
+
+        if (_.isEmptyValue(datetime) && _.isUndefined(this.model.get(this.name))) {
+            return;
+        }
+
         this.model.set(this.name, datetime);
     },
 
@@ -283,10 +300,6 @@
 
         $timeField.timepicker().on({
             showTimepicker: function() {
-                // Remove 24:00 from the list since it does not make sense when used in conjunction with a date.
-                // Timepicker plugin specifically added 24:00 since it can be used by itself without a date and
-                // that is what the standard calls for. (https://github.com/jonthornton/jquery-timepicker/issues/149)
-                $(this).data('timepickerList').find('li:contains("24:00"), li:contains("24.00")').remove();
                 selfView.trigger('list:scrollLock', true);
             },
             hideTimepicker: function() {
@@ -350,6 +363,9 @@
             value = this.format(value) || {'date': '', 'time': ''};
 
             this.$(this.fieldTag).val(value['date']);
+            if (value['date']) {
+                this.$(this.fieldTag).data('datepicker').setValue(value['date']);
+            }
             this.$(this.secondaryFieldTag).val(value['time']);
         }, this);
     },
@@ -444,7 +460,6 @@
 
         $ftag.parent().children('input').each(function(index) {
             $(this).after($tooltip[index]);
-            self.createErrorTooltips($tooltip[index]);
         });
     },
 
@@ -452,6 +467,10 @@
      * @inheritdoc
      */
     _render: function() {
+        if (this._hasTimePicker) {
+            this.$(this.secondaryFieldTag).timepicker('hide');
+        }
+
         this._super('_render');
 
         if (this._inDetailMode()) {

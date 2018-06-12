@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,7 +14,12 @@ var UITools = {
         this.index = this.index + 1;
         return this.index;
     }
+}, PMSE_USER_SEARCH = {
+    url: 'Users?filter[0][$and][0][status][$not_equals]=Inactive&filter[0][$and][1][$or][0][first_name][$starts]={%TERM%}&filter[0][$and][1][$or][1][last_name][$starts]={%TERM%}&fields=id,full_name&max_num={%PAGESIZE%}&offset={%OFFSET%}',
+    text:'full_name',
+    value: 'id'
 };
+
 var getRelativePosition = function (targetElement, relativeElement) {
     var e = $(targetElement).offset(),
         re = ($(relativeElement).get(0) instanceof Document) ? {top: 0, left: 0} : $(relativeElement).offset();

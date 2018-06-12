@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -75,7 +75,7 @@ $mod_strings = array (
   'LBL_EDITLAYOUT' => 'Modifica Layout' /*for 508 compliance fix*/,
   'LBL_TASK_INFORMATION' => 'Informazioni Compito',
   'LBL_HISTORY_SUBPANEL_TITLE' => 'Note',
-  'LBL_REVENUELINEITEMS' => 'Elemento dell´Opportunità',
+  'LBL_REVENUELINEITEMS' => 'Elementi dell&#39;opportunità',
   //For export labels
   'LBL_DATE_DUE' => 'Data Scadenza',
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nome Utente Assegnato',

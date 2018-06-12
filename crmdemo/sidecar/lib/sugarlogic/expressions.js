@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -543,14 +543,19 @@ var SEP = SUGAR.expressions.ExpressionParser = function() {
 
 SEP.prototype.getFieldsFromExpression = function(expression)
 {
-	var re = /[^$]*?\$(\w+)[^$]*?/g,
-		matches = [],
-		result;
-	while (result = re.exec(expression))
-	{
-		matches.push(result[result.length-1]);
-	}
-	return matches;
+    var i,
+        len,
+        matches = [],
+        re = /\$\w+/g,
+        result = expression.match(re);
+    if (null === result) {
+        return [];
+    }
+    len = result.length;
+    for (i = 0; i < len; i++) {
+        matches.push(result[i].substr(1));
+    }
+    return matches;
 }
 
 
@@ -1019,10 +1024,12 @@ SEP.prototype.toConstant = function(expr) {
 	return null;
 };
 
-SEP.prototype.getRelatedFieldsFromFormula = function(expr) {
+SEP.prototype.getRelatedFieldsFromFormula = function(expr, actionTarget) {
     var fields = [],
-        relateFunctions = ["related", "count", "rollupSum", "rollupMax", 'rollupMin', "rollupAve", "rollupCurrencySum"];
-    var recurseTokens = function(t){
+        relateFunctions = ['related', 'count', 'rollupSum', 'rollupMax', 'rollupMin', 'rollupAve', 'rollupAvg',
+            'rollupCurrencySum', 'rollupConditionalSum', 'countConditional', 'maxRelatedDate'];
+
+    var recurseTokens = function(t, actionTarget){
         //First check if its a simple related field
         if (t.type == "variable" && t.relate){
             fields.push({
@@ -1041,6 +1048,47 @@ SEP.prototype.getRelatedFieldsFromFormula = function(expr) {
                             link:t.args[0].name,
                             relate:t.args[1].value
                         });
+                    break;
+                case 'rollupConditionalSum':
+                    var field = {
+                        type: 'rollupConditionalSum',
+                        link: t.args[0].name,
+                        relate: t.args[1].value,
+                        condition_field: t.args[2].value
+                    };
+
+                    if (t.args[3].type == 'function') {
+                        var condVals = [];
+                        for (var i = 0; i < t.args[3].args.length; i++) {
+                            condVals.push('"' + t.args[3].args[i].value + '"');
+                        }
+                        field.condition_expr = t.args[3].name + '(' + condVals.join(',') + ')';
+                    } else {
+                        field.condition_expr = t.args[3].value;
+                    }
+
+                    fields.push(field);
+
+                    break;
+                case 'countConditional':
+                    var field = {
+                        target: actionTarget,
+                        type: 'countConditional',
+                        link: t.args[0].name,
+                        condition_field: t.args[1].value
+                    };
+                    if (t.args[2].type == 'function') {
+                        var condVals = [];
+                        for (var i = 0; i < t.args[2].args.length; i++) {
+                            condVals.push('"' + t.args[2].args[i].value + '"');
+                        }
+                        field.condition_expr = t.args[2].name + '(' + condVals.join(',') + ')';
+                    } else {
+                        field.condition_expr = t.args[2].value;
+                    }
+
+                    fields.push(field);
+
                     break;
                 case "count":
                     //count has no field parameter, only a link
@@ -1062,13 +1110,13 @@ SEP.prototype.getRelatedFieldsFromFormula = function(expr) {
             }
         } else if (t.type == "function") {
             for(var i = 0; i < t.args.length; i++){
-                recurseTokens(t.args[i]);
+                recurseTokens(t.args[i], actionTarget);
             }
         }
     }
     try {
         var t = this.tokenize(expr);
-        recurseTokens(t);
+        recurseTokens(t, actionTarget);
     }
     catch(e){}
 

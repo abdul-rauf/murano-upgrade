@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -57,7 +57,7 @@ $mod_strings = array(
     'LBL_ASSISTANT_PHONE' => 'Telefon i ndihmësit',
     'LBL_WORK_PHONE' => 'Telefoni i punës',
     'LNK_IMPORT_VCARD' => 'Krijo nga vKarta',
-    'LBL_IMPORT_VCARDTEXT' => 'Krijjo automatikisht kontakt të ri duke importuar vCard-ën nga systemi i dosjeve të tua',
+    'LBL_IMPORT_VCARDTEXT' => 'Krijo automatikisht kontakt të ri duke importuar vCard nga systemi i skedarëve.',
     'LBL_ANY_EMAIL' => 'çdo email',
     'LBL_PICTURE_FILE' => 'Fotografia',
     'LBL_EDIT_BUTTON' => 'Ndrysho',

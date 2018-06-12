@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Naujas slaptažodis',
 	'LBL_NEW_PASSWORD1'					=> 'Slaptažodis',
 	'LBL_NEW_PASSWORD2'					=> 'Patvirtinti slaptažodį',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Slaptažodis buvo sėkmingai pakeistas.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Slaptažodis buvo sėkmingai pakeistas.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'Vartotojui buvo išsiųstas laiškas su sistemos sugeneruotu slaptažodžiu.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Slaptažodis buvo sėkmingai sukurtas.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Slaptažodis buvo sėkmingai sukurtas.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Naujas vartotojas',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Naujas vartotojas [Alt+N]',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Kvotos',
     'LBL_FORECASTS'                     => 'Prognozės',
     'LBL_WORKSHEETS'                    => 'Darbalapiai',
+	'LBL_CALENDARS'                     => 'Kalendoriai',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Gaukite naują CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Pasakyti garsu',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Persijungti į paveiksliuką',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Darbo telefonas',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Paskelbti mano vietoje',
     'LBL_ICAL_PUB_URL'                  => 'iCal integracijos URL adresas',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Naudoti šį URL adresą, kad užregistruoti iCal SugarCRM kalendorių.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Naudodami šį URL, galite programose, kuriose palaikomas „iCal“, prenumeruoti savo „Sugar“ ' .
+                                           'kalendorių. „Sugar“ kalendoriaus įvykius išorinėse kalendoriaus programose ' .
+                                           'galima tik skaityti, ir visus įvykius (pvz., susitikimus, skambučius ir t. t.) ' .
+                                           'galima redaguoti tik programoje „Sugar“.',
 	'LBL_YOUR_QUERY_URL'				=> 'Jūsų užklausos URL',
 	'LNK_NEW_USER'						=> 'Sukurti naują vartotoją',
 	'LNK_NEW_PORTAL_USER'				=> 'Sukurti portalo API vartotoją',
@@ -453,7 +457,7 @@ $mod_strings = array (
 	'LBL_FOUND_OPTIMUM_MSG'				=> '<br>Rasti optimalūs nustatymai. Paspauskite mygtuką juos pritaikyti.',
 	'LBL_EMAIL_INBOUND_TITLE'			=> 'Įeinančio pašto nustatymai',
 	'LBL_EMAIL_OUTBOUND_TITLE'			=> 'Išeinančio pašto nustatymai',
-	'LBL_LOGIN'							=> 'Vartotojas vardas',
+	'LBL_LOGIN'							=> 'Vartotojo vardas',
 	'LBL_MAILBOX_DEFAULT'				=> 'Gauti laiškai',
 	'LBL_MAILBOX_SSL_DESC'				=> 'Naudoti SSL jungiantis. Jei neveikia patikrinkite PHP instaliaciją, turi būti "--with-imap-ssl" konfigūracijoje.',
 	'LBL_MAILBOX'						=> 'Stebimi aplankai',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Users&#39; reports',
     'LBL_CONTACTS_SYNC' => 'Contacts',
-
+    'LBL_DETAIL' => 'Vartotojo profilis',
 ); // END STRINGS DEFS
 
 ?>

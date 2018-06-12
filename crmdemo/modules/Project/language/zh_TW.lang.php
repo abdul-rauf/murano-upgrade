@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -180,8 +180,8 @@ $mod_strings = array (
     'NTC_NO_ACTIVE_PROJECTS' => '您沒有使用中專案或專案工作。',
     'NTC_ASSIGN_RIGHT_TEAM' => '確定所有專案資源是該小組的成員。',
        
-    'LBL_RESOURCE_NAME' => '資源名稱',
-    'LBL_RESOURCE_TYPE' => '資源類型',
+    'LBL_RESOURCE_NAME' => '名稱',
+    'LBL_RESOURCE_TYPE' => '類型',
     
     'LBL_GRID_ONLY' => '格線',
     'LBL_GANTT_ONLY' => '甘特圖',

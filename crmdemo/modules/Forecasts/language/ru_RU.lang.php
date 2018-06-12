@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -391,9 +391,9 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_WORKSHEET_TEXT' => 'Выберите колонки для отображения при просмотре листа прогноза. По умолчанию, будут выбраны следующие поля:',
 
     // forecast details dashlet
-    'LBL_DASHLET_FORECAST_NOT_SETUP' => 'Модуль прогнозов не был настроен и требуется его установка для корректного его использования. Обратитесь к Вашему системному администратору',
-    'LBL_DASHLET_FORECAST_NOT_SETUP_ADMIN' => 'Модуль прогнозов не был настроен и требуется его установка для корректного его использования.',
-    'LBL_DASHLET_FORECAST_CONFIG_LINK_TEXT' => 'Пожалуйста, нажмите здесь для конфигурации модуля Прогнозов.',
+    'LBL_DASHLET_FORECAST_NOT_SETUP' => 'Модуль прогнозов не был настроен. Для корректного использования виджета необходимо его установить. Обратитесь к системному администратору.',
+    'LBL_DASHLET_FORECAST_NOT_SETUP_ADMIN' => 'Модуль прогнозов не был настроен. Для корректного использования виджета необходимо его установить.',
+    'LBL_DASHLET_FORECAST_CONFIG_LINK_TEXT' => 'Нажмите здесь для настройки модуля прогнозов.',
     'LBL_DASHLET_MY_PIPELINE' => 'Моя воронка продаж',
     'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Воронка продаж моей команды",
     'LBL_DASHLET_PIPELINE_CHART_NAME' => 'Диаграмма воронки прогнозов',

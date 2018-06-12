@@ -1,11 +1,11 @@
 <?php
-$searchdefs['Leads'] = 
-array (
+// created: 2018-06-12 08:15:50
+$searchdefs['Leads'] = array (
   'layout' => 
   array (
     'basic_search' => 
     array (
-      'search_name' => 
+      0 => 
       array (
         'name' => 'search_name',
         'label' => 'LBL_NAME',
@@ -13,7 +13,7 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'current_user_only' => 
+      1 => 
       array (
         'name' => 'current_user_only',
         'label' => 'LBL_CURRENT_USER_FILTER',
@@ -21,7 +21,7 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'favorites_only' => 
+      2 => 
       array (
         'name' => 'favorites_only',
         'label' => 'LBL_FAVORITES_FILTER',
@@ -32,25 +32,25 @@ array (
     ),
     'advanced_search' => 
     array (
-      'account_name' => 
+      0 => 
       array (
         'name' => 'account_name',
         'default' => true,
         'width' => '10%',
       ),
-      'first_name' => 
+      1 => 
       array (
         'name' => 'first_name',
         'default' => true,
         'width' => '10%',
       ),
-      'last_name' => 
+      2 => 
       array (
         'name' => 'last_name',
         'default' => true,
         'width' => '10%',
       ),
-      'primary_address_city' => 
+      3 => 
       array (
         'type' => 'varchar',
         'label' => 'LBL_PRIMARY_ADDRESS_CITY',
@@ -58,7 +58,7 @@ array (
         'default' => true,
         'name' => 'primary_address_city',
       ),
-      'primary_address_state' => 
+      4 => 
       array (
         'type' => 'varchar',
         'label' => 'LBL_PRIMARY_ADDRESS_STATE',
@@ -66,7 +66,7 @@ array (
         'default' => true,
         'name' => 'primary_address_state',
       ),
-      'primary_address_country' => 
+      5 => 
       array (
         'name' => 'primary_address_country',
         'label' => 'LBL_COUNTRY',
@@ -75,7 +75,7 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'continent_c' => 
+      6 => 
       array (
         'type' => 'enum',
         'default' => true,
@@ -84,7 +84,7 @@ array (
         'width' => '10%',
         'name' => 'continent_c',
       ),
-      'investor_typ_c' => 
+      7 => 
       array (
         'type' => 'multienum',
         'default' => true,
@@ -93,7 +93,7 @@ array (
         'width' => '10%',
         'name' => 'investor_typ_c',
       ),
-      'assigned_user_id' => 
+      8 => 
       array (
         'name' => 'assigned_user_id',
         'type' => 'enum',
@@ -109,13 +109,13 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'status' => 
+      9 => 
       array (
         'name' => 'status',
         'default' => true,
         'width' => '10%',
       ),
-      'investor_rating_c' => 
+      10 => 
       array (
         'type' => 'enum',
         'default' => true,
@@ -125,7 +125,7 @@ array (
         'width' => '10%',
         'name' => 'investor_rating_c',
       ),
-      'fund_type_c' => 
+      11 => 
       array (
         'type' => 'multienum',
         'default' => true,
@@ -134,7 +134,7 @@ array (
         'width' => '10%',
         'name' => 'fund_type_c',
       ),
-      'spec_strat_pref_c' => 
+      12 => 
       array (
         'type' => 'multienum',
         'default' => true,
@@ -143,7 +143,7 @@ array (
         'width' => '10%',
         'name' => 'spec_strat_pref_c',
       ),
-      'investment_geography_c' => 
+      13 => 
       array (
         'type' => 'multienum',
         'default' => true,
@@ -152,7 +152,7 @@ array (
         'width' => '10%',
         'name' => 'investment_geography_c',
       ),
-      'pref_liquid_c' => 
+      14 => 
       array (
         'type' => 'enum',
         'default' => true,
@@ -161,7 +161,7 @@ array (
         'width' => '10%',
         'name' => 'pref_liquid_c',
       ),
-      'fund_structure_c' => 
+      15 => 
       array (
         'type' => 'multienum',
         'default' => true,
@@ -170,7 +170,7 @@ array (
         'width' => '10%',
         'name' => 'fund_structure_c',
       ),
-      'last_spoke_c' => 
+      16 => 
       array (
         'type' => 'date',
         'default' => true,
@@ -178,7 +178,7 @@ array (
         'width' => '10%',
         'name' => 'last_spoke_c',
       ),
-      'date_modified' => 
+      17 => 
       array (
         'type' => 'datetime',
         'studio' => 
@@ -191,7 +191,7 @@ array (
         'default' => true,
         'name' => 'date_modified',
       ),
-      'inv_groups' => 
+      18 => 
       array (
         'type' => 'text',
         'studio' => 
@@ -205,7 +205,7 @@ array (
         'default' => true,
         'name' => 'inv_groups',
       ),
-      'target_links' => 
+      19 => 
       array (
         'type' => 'text',
         'studio' => 
@@ -219,7 +219,7 @@ array (
         'default' => true,
         'name' => 'target_links',
       ),
-      'go_on_web_c' => 
+      20 => 
       array (
         'type' => 'bool',
         'default' => true,
@@ -227,7 +227,7 @@ array (
         'width' => '10%',
         'name' => 'go_on_web_c',
       ),
-      'title' => 
+      21 => 
       array (
         'type' => 'varchar',
         'label' => 'LBL_TITLE',

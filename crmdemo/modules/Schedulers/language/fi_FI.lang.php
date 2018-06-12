@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Poista diagnostiikkatyökalujen tiedostot.',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Poista väliaikaiset PDF-tiedostot.',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Päivitä tracker_sessions -taulukko',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Suorita sähköpostimuistutushuomautukset',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Suorita sähköpostin muistutusilmoitukset',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Puhdista työjono',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Luo tulevaisuuteen ajanjaksoja',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Päivitä KBContent-artikkelit.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Julkaise hyväksytyt artikkelit ja sulje KB-artikkelit.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Prosessikirjoittajan aikataulutettu tehtävä',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflown ajoitettu työ',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Aikaväli:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Virkistä tehtävät',
 'LBL_POLLMONITOREDINBOXES' => 'Tarkista saapuvan postin tilit',
 'LBL_PERFORMFULLFTSINDEX' => 'Täysi tekstinhakuindeksin päivitys',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Poista väliaikaiset PDF-tiedostot',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Julkaise hyväksytyt artikkelit ja sulje KB-artikkelit.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch jonon ajoittaja',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Poista diagnostiikkatyökalujen tiedostot',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Poista väliaikaiset tiedostot',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Suorita yölliset massaviestikampanjat',
 'LBL_ASYNCMASSUPDATE' => 'Suorita asynkroniset massapäivitykset',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Päivitä tracker sessionin taulut',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Luo tulevaisuuteen ajanjaksoja',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'Suorita sähköpostimuistutushuomautukset',
+'LBL_SENDEMAILREMINDERS'=> 'Suorita sähköpostimuistutusten lähetys',
 'LBL_CLEANJOBQUEUE' => 'Puhdista työjono',
 'LBL_CLEANOLDRECORDLISTS' => 'Siisti vanhat tietuelistat',
 );

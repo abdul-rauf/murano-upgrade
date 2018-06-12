@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,18 +33,18 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Eliminare fişiere instrumente de diagnosticare',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Eliminare fişiere PDF temporare',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Update tabel sesiuni tracker',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Instalati notificari Email Reminder',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Rulare notificări memento e-mail',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Curăţaţi coada de operaţii',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Creați perioadele viitoare de timp',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Actualizaţi articolele KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicare articole aprobate şi Expirare articole KB.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Sarcină programată de Autor Proces',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'interval',
 'LBL_LIST_LIST_ORDER' => 'Programatori',
-'LBL_LIST_NAME' => 'Progamator',
+'LBL_LIST_NAME' => 'Programator:',
 'LBL_LIST_RANGE' => 'Specrtu:',
 'LBL_LIST_REMOVE' => 'Inlatura:',
 'LBL_LIST_STATUS' => 'Status:',
@@ -103,7 +103,7 @@ $mod_strings = array (
 'LBL_NEW_FORM_TITLE' => 'Programare noua',
 'LBL_PERENNIAL' => 'perpetuu',
 'LBL_SEARCH_FORM_TITLE' => 'Cautare programare',
-'LBL_SCHEDULER' => 'Programare:',
+'LBL_SCHEDULER' => 'Programator:',
 'LBL_STATUS' => 'Status',
 'LBL_TIME_FROM' => 'Activ de la',
 'LBL_TIME_TO' => 'Activ pana la',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Locuri de munca actualizate',
 'LBL_POLLMONITOREDINBOXES' => 'Verificaţi Conturi Inbound Mail',
 'LBL_PERFORMFULLFTSINDEX' => 'Full-text de căutare sistem de index',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Eliminare fişiere PDF temporare',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publicare articole aprobate şi Expirare articole KB.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Programator de coadă Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Eliminare fişiere instrument de diagnosticare',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Eliminare fişiere temporare',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Derulati campania Nightly Mass',
 'LBL_ASYNCMASSUPDATE' => 'Realizare actualizări în masă asincrone',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Update tabele tracker session',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Creați perioadele viitoare de timp',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'Rulaţi Memento-uri de e-mail trimise',
+'LBL_SENDEMAILREMINDERS'=> 'Rulare trimitere mementouri e-mail',
 'LBL_CLEANJOBQUEUE' => 'Curăţare coadă de operaţii',
 'LBL_CLEANOLDRECORDLISTS' => 'Curăţare liste înregistrări vechi',
 );

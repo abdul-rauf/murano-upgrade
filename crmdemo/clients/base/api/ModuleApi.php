@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -19,6 +19,15 @@ class ModuleApi extends SugarApi {
     /** @var RelateRecordApi */
     protected $relateRecordApi;
     private $aclCheckOptions = array('source' => 'module_api');
+
+    /**
+     * A list of fields for which we disallow update through updateRecord
+     *
+     * @var array
+     */
+    protected $disabledUpdateFields = array(
+        'deleted',
+    );
 
     public function registerApiRest() {
         return array(
@@ -232,6 +241,12 @@ class ModuleApi extends SugarApi {
     }
 
     public function updateRecord($api, $args) {
+        foreach ($this->disabledUpdateFields as $field) {
+            if (isset($args[$field])) {
+                unset($args[$field]);
+            }
+        }
+
         $api->action = 'view';
         $this->requireArgs($args,array('module','record'));
 
@@ -244,6 +259,21 @@ class ModuleApi extends SugarApi {
         $this->moveTemporaryFiles($args, $bean);
         $this->updateBean($bean, $api, $args);
 
+        $this->updateRelatedRecords($api, $bean, $args);
+
+        return $this->getLoadedAndFormattedBean($api, $args);
+    }
+
+    /**
+     * Link and unlink any related records
+     *
+     * @param ServiceBase $api
+     * @param SugarBean $bean
+     * @param array $args API arguments
+     * @throws SugarApiExceptionInvalidParameter
+     */
+    public function updateRelatedRecords($api, $bean, $args)
+    {
         $relateArgs = $this->getRelatedRecordArguments($bean, $args, 'delete');
         $this->unlinkRelatedRecords($api, $bean, $relateArgs);
 
@@ -253,7 +283,6 @@ class ModuleApi extends SugarApi {
         $relateArgs = $this->getRelatedRecordArguments($bean, $args, 'create');
         $this->createRelatedRecords($api, $bean, $relateArgs);
 
-        return $this->getLoadedAndFormattedBean($api, $args);
     }
 
     public function retrieveRecord($api, $args) {
@@ -414,7 +443,9 @@ class ModuleApi extends SugarApi {
             $destination = rtrim($configDir, '/\\') . '/' . $filename;
             // FIXME BR-1956 will address having multiple files
             // associated with a record.
-            rename($filepath, $destination);
+            $from = UploadStream::STREAM_NAME . "://tmp/" . $args[$fieldName . '_guid'];
+            $to = UploadStream::STREAM_NAME . "://" . $filename;
+            UploadStream::move_temp_file($from, $to);
         }
     }
 

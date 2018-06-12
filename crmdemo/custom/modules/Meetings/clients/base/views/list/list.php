@@ -1,4 +1,5 @@
 <?php
+// created: 2018-06-12 11:31:14
 $viewdefs['Meetings']['base']['view']['list'] = array (
   'panels' => 
   array (

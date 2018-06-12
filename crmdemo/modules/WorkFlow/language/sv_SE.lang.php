@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -55,7 +55,7 @@ $mod_strings = array (
 	'LNK_PROCESS_VIEW' => 'Arbetsflöden Sekvens',
   'LBL_PROCESS_SELECT' => 'Var god välj en modul:',
   'LBL_LACK_OF_TRIGGER_ALERT'=> 'Meddelande: Du måste skapa en trigger för att det här arbetsflödet skall fungera',
-  'LBL_LACK_OF_NOTIFICATIONS_ON'=> 'Obs: För att skicka varningar måste du ange SMTP-serverinfo under Admin > Epostinställningar. ',
+  'LBL_LACK_OF_NOTIFICATIONS_ON'=> 'Obs: För att skicka varningar måste du ange SMTP-serverinfo under Admin > Emailinställningar. ',
   'LBL_FIRE_ORDER' => 'Processordning:',
   'LBL_RECIPIENTS' => 'Mottagare',
   'LBL_INVITEES' => 'Inbjudna',
@@ -94,6 +94,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Typ',
 
   // Workflow sunsetting message, added in 7.6.1
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Obs:</strong>Funktionen kommer att tas bort i en kommande version av Sugar planerad för 2017. Kunder som använder Sugar Enterprise bör börja använda de nya avancerade funktionerna för arbetsflöde som Processförfattaren erbjuder. Klicka <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">här</a> om du vill veta mer.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Obs:</strong>Funktionen kommer att tas bort i en kommande version av Sugar planerad för 2017. Kunder som använder Sugar Enterprise bör börja använda de nya avancerade funktionerna för arbetsflöde som Avancerat arbetsflöde erbjuder. Klicka <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">här</a> om du vill veta mer.',
 );
 

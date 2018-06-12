@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -216,7 +216,7 @@ $mod_strings = array (
 	'LBL_BUTTON_REPLY'			=> 'Raspunde',
         'LBL_BUTTON_REPLY_ALL'		=> 'Raspunde tuturor',
 	'LBL_CASES_SUBPANEL_TITLE'	=> 'Cazuri',
-	'LBL_INBOUND_TITLE'			=> 'Email legat',
+	'LBL_INBOUND_TITLE'			=> 'E-mail primit',
 	'LBL_INTENT'				=> 'Intentioneaza',
 	'LBL_MESSAGE_ID'			=> 'ID mesaj',
 	'LBL_REPLY_HEADER_1'		=> 'pe',
@@ -384,7 +384,7 @@ $mod_strings = array (
 	'LBL_WAIT' => 'Asteapta' /*for 508 compliance fix*/,
 	'LBL_CHECKEMAIL' => 'Verifica Email' /*for 508 compliance fix*/,
 	'LBL_COMPOSEEMAIL' => 'Compune Email [Alt+L]' /*for 508 compliance fix*/,
-	'LBL_EMAILSETTINGS' => 'Setari Email' /*for 508 compliance fix*/,
+	'LBL_EMAILSETTINGS' => 'Setări de e-mail' /*for 508 compliance fix*/,
 
 	// SNIP
 	'LBL_CONTACTS_SUBPANEL_TITLE_SNIP' => 'Contacte Email',
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'eroare: date de identificare lipsă',
     'ERR_NO_UID' => 'erore: UID lipsă',
     'ERR_NO_IEID' => 'eroare: ieID lipsă',
+    'ERR_INVALID_RECIPIENTS' => 'Există unul sau mai mulţi destinatari cu o adresă de e-mail nevalidă. ' .
+        'Corectaţi acest lucru și încercați din nou.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Adresă de e-mail nevalidă',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'niciun destinatar specificat',

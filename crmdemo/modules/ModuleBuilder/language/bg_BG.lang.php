@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -306,7 +306,7 @@ If Opportunities is included, Accounts must either be required or removed from t
         'layoutsHelp'=> 'Изберете <b>Подредба за редактиране</b>.<br/<br/>За да промените подредбата, която съдържа полета за данни за въвеждане на данни, щракнете върху <b>Форма за редактиране</b>.<br/><br/>За да промените подредбата, която показва данните, въведени в полетата във Формата за редактиране, щракнете върху <b>Форма за визуализиране на детайли</b>.<br/><br/>За да промените колоните, които се появяват в списъка по подразбиране, щракнете върху <b>Списък на записите</b>.<br/><br/>За да промените подредбите на формите за основно и разширено търсене, щракнете върху <b>Търсене</b>.',
         'subpanelHelp'=> 'Изберете <b>Панел със свързани записи</b>, за да редактирате.',
         'searchHelp' => 'Изберете подредба <b>Търсене</b>, за да редактирате.',
-        'labelsBtn'	=> 'Щракнете върху <b>Запиши</b>, за да запишете вашите потребителски етикети.',
+        'labelsBtn'	=> 'Редактирайте <b>етикетите</b> за показване на стойности в този модул.',
         'newPackage'=>'Натиснете <b>Нов пакет</b> , за да създадете нов пакет.',
         'mbHelp'    => '<b>Дошли в Създаване на модул.</b><br/><br/>Използвайте <b>Създаване на модул</b> за да създадете пакети, съдържащи потребителски модули, базирани на стандартни или потребителски обекти.<br/><br/>За да започнете, щракнете върху <b>Нов пакет</b>, за да създадете нов пакет, или изберете пакет за редактиране.<br/><br/> <b>Пакетът</b> служи за контейнер за потребителски модули, които всички са част от един проект. Пакетът може да съдържа един или повече потребителски модула, които могат да бъдат свързани помежду си или с модули в приложението.<br/><br/>Примери: Може да искате да създадете пакет, съдържащ един потребителски модул, който е свързан със стандартния Модул за профили. Или, може да искате да създадете пакет, съдържащ няколко нови модула, които работят заедно като проект и които са свързани помежду си и с модули в приложението.',
         'exportBtn' => 'Щракнете върху <b>Експортиране на персонализации</b> за създаване на пакет, който съдържа персонализации, направени в Студио за специфични модули.',
@@ -712,6 +712,7 @@ If Opportunities is included, Accounts must either be required or removed from t
 'LBL_JS_VALIDATE_NAME'=>'Име - Трябва да бъде последователност от букви и цифри без интервали и да започва с буква',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Ключът на пакета вече съществува',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Съществува пакет с такова име',
+'LBL_JS_PACKAGE_NAME'=>'Име на пакета - трябва да започва с буква и може да се състои само от букви, цифри и долни черти. Не могат да се използват интервали или други специални знаци.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Ключ - Трябва да съдържа комбинация от букви и цифри, започваща с буква.',
 'LBL_JS_VALIDATE_KEY'=>'Ключ - Трябва да бъде последователност от букви и цифри без интервали и да започва с буква',
 'LBL_JS_VALIDATE_LABEL'=>'Моля изберете етикет, който да се използва за заглавие на този модул',
@@ -736,8 +737,8 @@ If Opportunities is included, Accounts must either be required or removed from t
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Сигурни ли сте, че искате да изтриете връзката с другия модул?<br>Note: This operation may not complete for several minutes.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Връзката с модула ще бъде записана в базата. Сигурни ли сте, че искате да съхраните тази връзка?',
 'LBL_CONFIRM_DONT_SAVE' => 'Има налични промени от момента на последното Ви запазване. Искате ли да запазите?',

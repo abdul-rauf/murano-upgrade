@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -37,10 +37,10 @@ $mod_strings = array(
     'LBL_ALT_ADDRESS_STREET' => 'Alternativ adresse',
     'LBL_ALT_ADDRESS_STREET_2' => 'Alternativ adresse gate 2:',
     'LBL_ALT_ADDRESS_STREET_3' => 'Alternativ adresse gate 3:',
-    'LBL_ALT_ADDRESS_CITY' => 'By',
-    'LBL_ALT_ADDRESS_STATE' => 'State',
+    'LBL_ALT_ADDRESS_CITY' => 'Alternativ by',
+    'LBL_ALT_ADDRESS_STATE' => 'Alternativ stat',
     'LBL_ALT_ADDRESS_POSTALCODE' => 'Postnummer',
-    'LBL_ALT_ADDRESS_COUNTRY' => 'Land',
+    'LBL_ALT_ADDRESS_COUNTRY' => 'Alternativt land',
     'LBL_STREET' => 'Andre Adresser',
     'LBL_PRIMARY_STREET' => 'Adresse',
     'LBL_ALT_STREET' => 'Annen adresse',

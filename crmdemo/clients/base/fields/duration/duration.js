@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -19,8 +19,6 @@
  */
 ({
     extendsFrom: 'FieldsetField',
-
-    plugins: ['EllipsisInline'],
 
     detailViewNames: ['record', 'create', 'create-nodupecheck', 'preview', 'pmse-case'],
 
@@ -169,7 +167,7 @@
 
         if (defaultDateTime.minutes() > 30) {
             defaultDateTime
-                .add('h', 1)
+                .add(1, 'h')
                 .minutes(0);
         } else if (defaultDateTime.minutes() > 0) {
             defaultDateTime.minutes(30);
@@ -202,7 +200,10 @@
 
         // Do not change the end date if the start date has not been set or if the start date
         // and the end date have been changed at the same time.
-        if (!startDateString || (changedAttributes.date_start && changedAttributes.date_end)) {
+        if (!startDateString ||
+            (changedAttributes.date_start && changedAttributes.date_end) ||
+            !app.acl.hasAccessToModel('edit', this.model, 'date_end')
+        ) {
             return;
         }
 
@@ -220,7 +221,7 @@
         } else {
             // Set the end date to be an hour from the start date if the end
             // date has not been set yet.
-            endDate = app.date(startDateString).add('m', 30).formatServer();
+            endDate = app.date(startDateString).add(30, 'm').formatServer();
             this.model.set('date_end', endDate);
         }
     },
@@ -266,6 +267,29 @@
     _dispose: function() {
         this.model.removeValidationTask('duration_date_range_' + this.cid);
         this._super('_dispose');
+    },
+
+    /**
+     * Forces the date and time pickers to close in the event that they remain
+     * opened when the field is re-rendered.
+     *
+     * @inheritdoc
+     */
+    _render: function() {
+        var start = this.view.getField('date_start');
+        var end = this.view.getField('date_end');
+
+        if (start) {
+            start.$(start.fieldTag).datepicker('hide');
+            start.$(start.secondaryFieldTag).timepicker('hide');
+        }
+
+        if (end) {
+            end.$(end.fieldTag).datepicker('hide');
+            end.$(end.secondaryFieldTag).timepicker('hide');
+        }
+
+        return this._super('_render');
     },
 
     /**

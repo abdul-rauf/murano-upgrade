@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,18 +56,25 @@
 
         /**
          * Clears context's attributes and calls {@link Core.Context#resetLoadFlag} method.
-         * @param options(optional) Standard Backbone.Model options and clearAllListeners {boolean}
-         *        By default, it removes all events attached to models and collections in the context.
+         * @param {Object} [options] Standard Backbone.Model options
          */
         clear: function(options) {
             var collection = this.get('collection');
 
-            collection && collection.abortFetchRequest();
+            if (collection) {
+                collection.abortFetchRequest();
+            }
 
-            options = _.extend({clearAllListeners: true}, options || {});
+            if (_.has(options, 'clearAllListeners')) {
+                app.logger.warn('Core.Context::clear has deprecated support for the `clearAllListeners` option ' +
+                    'since 7.8 and will remove it in 7.9');
+            }
+
             _.each(this.children, function(child) {
                 child.clear(options);
             });
+
+            options = _.extend({clearAllListeners: true}, options || {});
 
             this.children = [];
             this.parent = null;
@@ -99,17 +106,35 @@
          *
          * The {@link Core.Context#loadData} method sets an internal boolean flag
          * to prevent multiple identical requests to the server. This method resets this flag.
-         * @param recusive Boolean if not false, child contexts will also be reset.
+         *
+         * @param {Object} [options] A hash of options.
+         * @param {boolean} [options.recursive = true] `true` to reset the child contexts
+         *   too.
+         * @param {boolean} [options.resetModel = true] `true` to reset the flag on the
+         *   model.
+         * @param {boolean} [options.resetCollection = true] `true` to reset the flag on
+         * the collection.
          */
-        resetLoadFlag: function(recursive) {
-            recursive = _.isUndefined(recursive) ? true : recursive;
+        resetLoadFlag: function (options) {
+            if (_.isBoolean(options)) {
+                app.logger.warn('`Core.Context#resetLoadFlag` has changed signature since 7.8 ' +
+                    'and will drop support for old signature in 7.9. Please update your code.');
+                options = { recursive: options };
+            }
+
+            options = options || {};
+            var recursive = _.isUndefined(options.recursive) ? true : options.recursive;
+            var resetModel = _.isUndefined(options.resetModel) ? true : options.resetModel;
+            var resetCollection = _.isUndefined(options.resetCollection) ? true : options.resetCollection;
+
             this._fetchCalled = false;
 
-            if (this.get("model")) {
-                this.get("model").dataFetched = false;
+            if (this.get('model') && resetModel) {
+                this.get('model').dataFetched = false;
             }
-            if (this.get("collection")) {
-                this.get("collection").dataFetched = false;
+
+            if (this.get('collection') && resetCollection) {
+                this.get('collection').dataFetched = false;
             }
 
             if (recursive) {
@@ -129,7 +154,7 @@
 
         /**
          * Gets a related context.
-         * @param {Object} def Related context definition.
+         * @param {Object} [def] Related context definition.
          * <pre>
          * {
          *    module: module name,
@@ -139,8 +164,9 @@
          * @return {Core.Context} New instance of the child context.
          */
         getChildContext: function(def) {
-            var context,
-                force = def.forceNew || false;
+            def = def || {};
+            var context;
+            var force = def.forceNew || false;
 
             delete def.forceNew;
 
@@ -155,6 +181,7 @@
             }
 
             if (!context) {
+                def = _.extend({ fetch: this.get('fetch') }, def);
                 context = app.context.getContext(def);
                 this.children.push(context);
                 context.parent = this;
@@ -196,6 +223,28 @@
             );
 
             return this;
+        },
+
+        /**
+         * Sets the `fetch` attribute recursively on the context and its children.
+         *
+         * A context with `fetch` set to `false` won't load the data.
+         *
+         * @param {boolean} fetch `true` to recursively set `fetch` to `true`
+         *   in this context and its children.
+         * @param {Object} [options] A hash of options.
+         * @param {boolean} [options.recursive] `true` to recursively set the
+         *   `fetch` boolean on the children.
+         */
+        setFetch: function (fetch, options) {
+            options = options || {};
+            this.set('fetch', fetch);
+            var recursive = options.recursive === void 0 ? true : options.recursive;
+            if (recursive) {
+                _.each(this.children, function(child) {
+                    child.setFetch(fetch);
+                });
+            }
         },
 
         /**
@@ -278,23 +327,45 @@
             };
         },
 
+        /**
+         * Sets the `fields` attribute on this context by extending the current
+         * `fields` attribute with the passed-in `fieldsArray`.
+         *
+         * @chainable
+         * @param {string[]} fieldsArray The list of field names.
+         * @return {Core.Context} Instance of this model.
+         */
+        addFields: function(fieldsArray) {
+           if (!fieldsArray) {
+               return;
+           }
+           var fields = _.union(fieldsArray, this.get('fields') || []);
+           return this.set('fields', fields);
+        },
 
         /**
          * Loads data (calls fetch on either model or collection).
          *
          * This method sets an internal boolean flag to prevent consecutive fetch operations.
          * Call {@link Core.Context#resetLoadFlag} to reset the context's state.
-         * @param options(optional) Options that are passed to collection/model's fetch method.
+         *
+         * @param {Object} [options] A hash of options passed to
+         *   collection/model's fetch method.
+         * @param {boolean} [options.fetch] `true` to always fetch the data.
          */
         loadData: function(options) {
-            if (this.isDataFetched() || this.get("create") === true) return;
+            options = options || {};
+            if (!options.forceFetch && !this._shouldFetch()) {
+                return;
+            }
+
+            delete options.forceFetch;
 
             var objectToFetch,
                 modelId = this.get("modelId"),
                 module = this.get("module"),
                 defaultOrdering = (app.config.orderByDefaults && module) ? app.config.orderByDefaults[module] : null;
 
-            options = options || {};
             objectToFetch = modelId ? this.get("model") : this.get("collection");
 
             // If we have an orderByDefaults in the config, and this is a bean collection,
@@ -345,18 +416,29 @@
         },
 
         /**
+         * Helper function to determine if {@link #loadData} can be called on
+         * this context.
+         *
+         * @protected
+         * @return {boolean} `true` if {@link #loadData} can be called. `false`
+         *   otherwise.
+         */
+        _shouldFetch: function () {
+            return (this.get('fetch') === void 0 || this.get('fetch')) &&
+                !this.isDataFetched() && !this.get('create');
+        },
+
+        /**
          * Refreshes the context's data and refetches the new data if
          * {@link #skipFetch} is `true`.
          *
          * @param {Object} [options] Options for {@link #loadData} and the
          *   `reload` event.
-         * @param {Object} [options.recursive] if `true`, child contexts will
-         *   also be reloaded.
          */
         reloadData: function(options) {
             options = options || {};
 
-            this.resetLoadFlag(options.recursive);
+            this.resetLoadFlag(options);
             this.loadData(options);
 
             /**
@@ -377,20 +459,21 @@
         isDataFetched: function() {
             var objectToFetch = this.get('modelId') ? this.get('model') : this.get('collection');
             return this._fetchCalled || (objectToFetch && !!objectToFetch.dataFetched);
-        }
+        },
     });
 
     app.augment('context', {
 
         /**
          * Returns a new instance of the context object.
-         * @param {Object} attributes Any parameters and state properties to attach to the context.
+         * @param {Object} [attributes] Any parameters and state properties to
+         *   attach to the context.
          * @return {Core.Context} New context instance.
          * @member Core.Context
          */
-        getContext: function(attributes) {
+        getContext: function (attributes) {
             return new app.Context(attributes);
-        }
+        },
     });
 
 })(SUGAR.App);

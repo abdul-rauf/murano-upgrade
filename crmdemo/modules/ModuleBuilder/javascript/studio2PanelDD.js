@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -97,7 +97,12 @@ YAHOO.extend(Studio2.PanelDD, YAHOO.util.DDProxy, {
                     var panelNumber = panelLabel.substring(panelLabelNoID.length) ;
 					var panelDisplay = SUGAR.language.get('ModuleBuilder', 'LBL_NEW_PANEL') + ' ' + panelNumber ;
 					document.getElementById("le_panelname_"+srcEl.id).childNodes[0].nodeValue =  panelDisplay ;
-					var params = { module: 'ModuleBuilder' , action: 'saveProperty', view_module: view_module }
+                    var params = {
+                        module: 'ModuleBuilder' ,
+                        action: 'saveProperty',
+                        view_module: view_module,
+                        csrf_token: SUGAR.csrf.form_token
+                    };
 					if (document.getElementById('prepareForSave').view_package)
 					{
 					   params ['view_package'] = document.getElementById('prepareForSave').view_package.value ;

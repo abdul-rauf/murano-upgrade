@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,6 +58,7 @@
         this.listenTo(this.layout, "filter:select:filter", this.handleSelect);
         this.listenTo(this.layout, "filter:change:module", this.handleModuleChange);
         this.listenTo(this.layout, "filter:render:filter", this._renderHtml);
+        this.listenTo(this.layout, 'filter:create:close', this.formatSelection);
     },
 
     /**
@@ -145,21 +146,34 @@
 
         // the shortcut keys need to be registered anytime this function is
         // called, not just on render
-        app.shortcuts.register(
-            'Filter:Create',
-            ['f c', 'ctrl+alt+8'],
-            function() {
+        app.shortcuts.register({
+            id: 'Filter:Create',
+            keys: ['f c', 'mod+alt+8'],
+            component: this,
+            description: 'LBL_SHORTCUT_FILTER_CREATE',
+            handler: function() {
                 // trigger the change event to open the edit filter drawer
                 this.filterNode.select2('val', 'create', true);
-            },
-            this
-        );
-        app.shortcuts.register('Filter:Edit', 'f e', function() {
-            this.$('.choice-filter.choice-filter-clickable').click();
-        }, this);
-        app.shortcuts.register('Filter:Show', 'f m', function() {
-            this.filterNode.select2('open');
-        }, this);
+            }
+        });
+        app.shortcuts.register({
+            id: 'Filter:Edit',
+            keys: 'f e',
+            component: this,
+            description: 'LBL_SHORTCUT_FILTER_EDIT',
+            handler: function() {
+                this.$('.choice-filter.choice-filter-clickable').click();
+            }
+        });
+        app.shortcuts.register({
+            id: 'Filter:Show',
+            keys: 'f m',
+            component: this,
+            description: 'LBL_SHORTCUT_FILTER_SHOW',
+            handler: function() {
+                this.filterNode.select2('open');
+            }
+        });
 
         if (!this.filterDropdownEnabled) {
             this.filterNode.select2("disable");
@@ -228,7 +242,10 @@
      * @return {string}
      */
     formatSelection: function(item) {
-        var ctx = {}, safeString;
+        var ctx = {},
+            safeString,
+            a11yLabel = app.lang.get('LBL_FILTER_CREATE_FILTER'),
+            a11yTabindex = 0;
 
         //Don't remove this line. We want to update the selected filter name but don't want to change to the filter
         //name displayed in the dropdown
@@ -242,8 +259,24 @@
 
         //Escape string to prevent XSS injection
         safeString = Handlebars.Utils.escapeExpression(item.text);
+        if (item.id !== 'all_records') {
+            if (this.isFilterEditable(item.id)) {
+                a11yTabindex = 0;
+                a11yLabel = app.lang.get('LBL_FILTER_EDIT_FILTER') + ' ' + safeString;
+            } else {
+                a11yTabindex = -1;
+                a11yLabel = safeString + ' ' + app.lang.get('LBL_FILTER');
+            }
+        } else {
+            a11yTabindex = this.isFilterEditable(item.id) ? 0 : -1;
+        }
+
         // Update the text for the selected filter.
         this.$('.choice-filter-label').html(safeString);
+        this.$('.choice-filter')
+            .attr('aria-label', a11yLabel);
+        this.$('.choice-filter')
+            .attr('tabindex', a11yTabindex);
 
         if (item.id !== 'all_records') {
             this.$('.choice-filter-close').show();
@@ -309,9 +342,9 @@
      */
     toggleFilterCursor: function(editable) {
         if (editable) {
-            this.$('.choice-filter').css("cursor", "pointer").addClass('choice-filter-clickable');
+            this.$('.choice-filter').css("cursor", "pointer").addClass('choice-filter-clickable').attr('tabindex', 0);
         } else {
-            this.$('.choice-filter').css("cursor", "not-allowed").removeClass('choice-filter-clickable');
+            this.$('.choice-filter').css("cursor", "not-allowed").removeClass('choice-filter-clickable').attr('tabindex', -1);
         }
     },
 
@@ -345,19 +378,27 @@
      */
     handleEditFilter: function() {
         var filterId = this.filterNode.val(),
-            filterModel;
+            filterModel,
+            a11yTabindex = 0;
 
         if (filterId === 'all_records') {
             // Figure out if we have an edit state. This would mean user was editing the filter so we want him to retrieve
             // the filter form in the state he left it.
             this.layout.trigger("filter:select:filter", 'create');
+            a11yTabindex = 0;
         } else {
             filterModel = this.layout.filters.collection.get(filterId);
+            a11yTabindex = -1;
         }
 
         if (filterModel && filterModel.get("editable") !== false) {
             this.layout.trigger("filter:create:open", filterModel);
+            a11yTabindex = 0;
         }
+
+        this.$('.choice-filter')
+            .attr('aria-label', app.lang.get('LBL_FILTER_EDIT_FILTER'))
+            .attr('tabindex', a11yTabindex);
     },
 
     /**

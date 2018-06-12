@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => '確認をクリックすると、すべての売上予測データを消去し、商談ビューを変更します。これが意図したものではない場合は、キャンセルをクリックして以前の設定に戻ります。',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        '確認をクリックすると、すべての売上予測データを消去して商談ビューが変更されます。'
+        .'また、商談品目のターゲットモジュールが含まれるすべてのプロセス定義は無効になります。'
+        .'この操作が意図したものでなければ、キャンセルをクリックして以前の設定に戻ってください。',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => '全ての商談品目がクローズされ、少なくとも一つ受注した場合、',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => '商談セールスステージは「クローズされた受注」にセットされます。',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => '全ての商談品目がクローズされた失注ステージにある場合、',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} モジュールでは個別の販売およびそれらの販売に付随する商品を最初から最後まで追跡できます。各 {{module_name}} レコードは {{revenuelineitems_module}} グループのヘッダーを表し、同時に {{quotes_module}}、 {{contacts_module}}などその他の重要レコードに関連します。各 {{revenuelineitems_singular_module}} はある製品の個々の販売であり、関連する販売データを含みます。それぞれの {{revenuelineitems_singular_module}} は通常「受注済み」または「失注済み」とマークされるまで複数の販売ステージを経て進行します。 {{module_name}} レコードには数量とその {{revenuelineitems_module}} の想定完了日が反映されます。 {{plural_module_name}} および {{revenuelineitems_module}} は、Sugar の {{forecasts_singular_module}} するモジュールを使用すると、販売トレンドを理解し予測するだけでなく、販売ノルマを達成を目標として業務をフォーカスするためにも利用できます。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールでは、個別の売上を最初から最後まで追跡できます。{{module_name}}レコードはそれぞれ、売上見込みを表し、該当する売上データや{{quotes_module}}、{{contacts_module}}などのその他の重要なレコードに関連するものが含まれます。{{module_name}}では通常「完了」または「失注」としてマークされるまで、複数の販売ステージを経て進行します。Sugar の{{forecasts_singular_module}}するモジュールを使用すると、{{plural_module_name}}は、売上の傾向を理解して予測するだけでなく、販売ノルマを達成目標として業務にフォーカスするためにも利用できます。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} モジュールは個別の販売とそれらの販売に付随する商品を最初から最後まで追跡できます。各 {{module_name}} レコードは {{revenuelineitems_module}} のグループのヘッダーを表すと同時に {{quotes_module}}、{{contacts_module}} などその他の重要なレコードに関連します。
+    'LBL_HELP_RECORD' => '{{plural_module_name}} モジュールは個別の販売とそれらの販売に付随する商品を最初から最後まで追跡できます。各 {{module_name}} レコードは売上見込みを表すと同時に {{quotes_module}}、{{contacts_module}} などその他の重要なレコードに関連するもの、該当する売上データなどが含まれます。
 
 - 個別のフィールドをクリックするか、編集ボタンをクリックしてこのレコードのフィールドを編集します。
-- 左下のペインを「データビュー」にトグルして {{revenuelineitems_module}} を含むサブパネルの他レコードへのリンクを表示または修正します。
-- 左下のペインを「アクティビティ ストリーム」にトグルして {{activitystream_singular_module}} でユーザーコメントを作成および表示し、変更履歴を記録します。
-- レコード名の右側のアイコンを使ってこのレコードをフォローまたはお気に入りに追加します。
+- 左下のペインを「データビュー」に切り替えてサブパネルの他レコードへのリンクを表示または修正します。
+- 左下のペインを「アクティビティ ストリーム」に切り替えて {{activitystream_singular_module}} でユーザーコメントを作成および表示し、変更履歴を記録します。
+- レコード名の右側のアイコンを使用してこのレコードをフォローまたはお気に入りに追加します。
 - その他のアクションは編集ボタンの右側のドロップダウン アクション メニューから利用できます。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールは個別の販売とそれらの販売に付随する商品を最初から最後まで追跡できます。各 {{module_name}} レコードは {{revenuelineitems_module}} のグループのヘッダーを表すと同時に {{quotes_module}}、 {{contacts_module}} などその他の重要なレコードに関連します。
+    'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールは個別の販売とそれらの販売に付随する商品を最初から最後まで追跡できます。各 {{module_name}} レコードは売上見込みを表すと同時に {{quotes_module}}、{{contacts_module}} などその他の重要なレコードに関連するもの、該当する売上データなどが含まれます。
 
-{{module_name}} を作成するには：
-1. 必要に応じてフィールドの値を入力します。
-- 「必須」フィールドは保存前に入力完了してください。
-- 必要に応じて、追加のフィールドを展開する「更に表示」をクリックします。
-2. 新しいレコードを確定し、前のページに戻るには「保存」をクリックします。
-3. 保存後に、 {{revenuelineitems_module}} サブパネルを使って商品を {{module_name}} に追加します。',
+{{module_name}}の作成方法:
+1. 希望に応じてフィールドの値を指定します。
+ - 「必須」とマークされているフィールドは、保存前に入力する必要があります。
+ - 必要に応じて「詳細表示」をクリックして、追加フィールドを表示します。
+2. 「保存」をクリックして、新規レコードを最終確認して、以前のページに戻ります。',
 
 // END PRO/CORP
 

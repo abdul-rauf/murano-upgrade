@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Remover arquivos da ferramenta de diagnóstico',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Remover arquivos PDF temporários',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Atualizar tabela tracker_sessions',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Executar notificações de lembrete de e-mail',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Executar as notificações do lembrete por e-mail',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Limpar trabalhos na fila',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Criar Períodos futuros',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat (Movimentação)',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Atualizar artigos KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicar artigos aprovados e expirar artigos KB.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Tarefa Agendada do Process Author',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Tarefas agendadas do Advanced Workflow',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervalo:',
@@ -139,6 +139,11 @@ start|restart|shutdown|status ]\nPara sair, digite 'quit'. Para desligar o servi
 'LBL_REFRESHJOBS' => 'Atualizar trabalhos',
 'LBL_POLLMONITOREDINBOXES' => 'Verificar contas de entrada de e-mail',
 'LBL_PERFORMFULLFTSINDEX' => 'Sistema de índice de pesquisa de texto completo',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Remover arquivos PDF temporários',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publicar artigos aprovados e expirar artigos KB.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Agendador de fila Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Remover arquivos da ferramenta de diagnóstico',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Remover arquivos temporários',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Executar envio noturno de campanhas de massa por e-mail',
 'LBL_ASYNCMASSUPDATE' => 'Realizar atualizações em massa assíncronos',
@@ -150,7 +155,7 @@ start|restart|shutdown|status ]\nPara sair, digite 'quit'. Para desligar o servi
 'LBL_UPDATETRACKERSESSIONS' => 'Atualizar tabelas de sessões de rastreadores',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Criar Períodos futuros',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat (Movimentação)',
-'LBL_SENDEMAILREMINDERS'=> 'Executar envio de lembretes de e-mail',
+'LBL_SENDEMAILREMINDERS'=> 'Executar envio de lembretes por e-mail',
 'LBL_CLEANJOBQUEUE' => 'Limpar fila de trabalho',
 'LBL_CLEANOLDRECORDLISTS' => 'Limpar listas antigas de registros',
 );

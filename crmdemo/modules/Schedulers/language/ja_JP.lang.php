@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => '診断ツールのファイルを削除',
 'LBL_OOTB_REMOVE_PDF_FILES' => '一時PDFファイルを削除',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'tracker_sessions テーブルを更新',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Eメールリマインダ通知を送信',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Eメールリマインダ通知を実行',
 'LBL_OOTB_CLEANUP_QUEUE' => 'ジョブキューの削除',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => '将来の期間を作成',
 'LBL_OOTB_HEARTBEAT' => 'Sugarハートビート',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent の記事を更新します。',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => '承認された記事を公開し、KB 記事を期限切れにします。',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'プロセスオーサにスケジュールされたジョブ',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflowでスケジュール済みのジョブ',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => '間隔:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'ジョブを更新',
 'LBL_POLLMONITOREDINBOXES' => 'インバウンドメールのアカウントを確認',
 'LBL_PERFORMFULLFTSINDEX' => 'フルテキスト検索インデックスシステム',
+'LBL_SUGARJOBREMOVEPDFFILES' => '一時PDFファイルを削除',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => '承認された記事を公開し、KB 記事を期限切れにします。',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch キュー スケジューラ',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => '診断ツールファイルを削除',
+'LBL_SUGARJOBREMOVETMPFILES' => '一時ファイルを削除',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '夜間にキャンペーンの一括Eメール送信を実行',
 'LBL_ASYNCMASSUPDATE' => '非同期一括アップデートを実行',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'トラッカーセッションテーブルを更新',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => '将来の期間を作成',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugarハートビート',
-'LBL_SENDEMAILREMINDERS'=> 'Eメールリマインダの送信を実行',
+'LBL_SENDEMAILREMINDERS'=> 'Eメールリマインダ送信を実行',
 'LBL_CLEANJOBQUEUE' => 'ジョブキューのクリーンアップ',
 'LBL_CLEANOLDRECORDLISTS' => '古いレコードリストをクリーンアップする',
 );

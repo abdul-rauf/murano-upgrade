@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -31,6 +31,7 @@ $dictionary['RevenueLineItem'] = array(
             'vname' => 'LBL_PRODUCT',
             'join_name' => 'templates',
             'type' => 'relate',
+            'save' => true,
             'link' => 'rli_templates_link',
             'table' => 'product_templates',
             'isnull' => 'true',
@@ -75,7 +76,7 @@ $dictionary['RevenueLineItem'] = array(
             'formula' => '
                 ifElse(and(isNumeric($quantity), isNumeric($discount_price)),
                   ifElse(equal($quantity, 0),
-                    "0",
+                    $total_amount,
                       currencySubtract(
                         currencyMultiply($discount_price, $quantity),
                         ifElse(isNumeric($discount_amount), $discount_amount, 0
@@ -100,11 +101,6 @@ $dictionary['RevenueLineItem'] = array(
             'type' => 'id',
             'required' => false,
             'reportable' => false,
-            'function' => array(
-                'name' => 'getProductTypes',
-                'returns' => 'html',
-                'include' => 'modules/ProductTemplates/ProductTemplate.php'
-            ),
             'comment' => 'Product type (ex: hardware, software)'
         ),
         'quote_id' => array(
@@ -166,6 +162,7 @@ $dictionary['RevenueLineItem'] = array(
             'module' => 'ProductCategories',
             'dbType' => 'varchar',
             'len' => '255',
+            'save' => true,
             'source' => 'non-db',
             'required' => false,
             'studio' => array('editview' => false, 'detailview' => false, 'quickcreate' => false),
@@ -231,11 +228,10 @@ $dictionary['RevenueLineItem'] = array(
             ifElse(
                 and(
                     equal($product_template_id, ""),
-                    not(isNumeric($discount_price))
+                    not(isNumeric($discount_price)),
+                    greaterThan($quantity, 0)
                 ),
-                divide($likely_case,
-                    ifElse(greaterThan($quantity, 0), $quantity, 1)
-                ),
+                divide($likely_case, $quantity),
                 $discount_price
             )',
             'enforced' => false,
@@ -448,7 +444,7 @@ $dictionary['RevenueLineItem'] = array(
             'type' => 'decimal',
             'len' => 12,
             'precision' => 2,
-            'validation' => array('type' => 'range', 'greaterthan' => 0),
+            'validation' => array('type' => 'range', 'greaterthan' => -1),
             'comment' => 'Quantity in use',
             'default' => 1.0
         ),
@@ -478,11 +474,6 @@ $dictionary['RevenueLineItem'] = array(
             'vname' => 'LBL_SUPPORT_TERM',
             'type' => 'varchar',
             'len' => 100,
-            'function' => array(
-                'name' => 'getSupportTerms',
-                'returns' => 'html',
-                'include' => 'modules/ProductTemplates/ProductTemplate.php'
-            ),
             'comment' => 'Term (length) of support contract'
         ),
         'date_support_expires' => array(
@@ -650,8 +641,17 @@ $dictionary['RevenueLineItem'] = array(
         'date_closed_timestamp' => array(
             'name' => 'date_closed_timestamp',
             'vname' => 'LBL_DATE_CLOSED_TIMESTAMP',
-            'type' => 'int',
-            'studio' => false,
+            'type' => 'ulong',
+            'studio' => array(
+                'formula' => true,
+                'related' => true,
+                'recordview' => false,
+                'listview' => false,
+                'detailview' => false,
+                'searchview' => false,
+                'createview' => false,
+                'editField' => false
+            ),
             'reportable' => false,
             'audited' => true,
             'activity_enabled' => false,
@@ -744,6 +744,7 @@ $dictionary['RevenueLineItem'] = array(
             'id_name' => 'campaign_id',
             'vname' => 'LBL_CAMPAIGN',
             'type' => 'relate',
+            'save' => true,
             'link' => 'campaign_revenuelineitems',
             'isnull' => 'true',
             'table' => 'campaigns',
@@ -824,6 +825,7 @@ $dictionary['RevenueLineItem'] = array(
             'required' => true,
             'join_name' => 'opportunities',
             'type' => 'relate',
+            'save' => true,
             'link' => 'opportunities',
             'table' => 'opportunities',
             'isnull' => 'true',
@@ -876,6 +878,7 @@ $dictionary['RevenueLineItem'] = array(
             'vname' => 'LBL_PRODUCT_TYPE',
             'join_name' => 'types',
             'type' => 'relate',
+            'save' => true,
             'link' => 'revenuelineitem_types_link',
             'table' => 'product_types',
             'isnull' => 'true',
@@ -936,6 +939,7 @@ $dictionary['RevenueLineItem'] = array(
             'name' => 'account_name',
             'rname' => 'name',
             'id_name' => 'account_id',
+            'save' => true,
             'vname' => 'LBL_ACCOUNT_NAME',
             'join_name' => 'accounts',
             'type' => 'relate',

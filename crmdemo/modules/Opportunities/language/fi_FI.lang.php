@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Klikkaamalla "hyväksy", poistat -kaikki- ennustetiedot ja myytät myyntimahdollisuusnäkymääsi. Jos tämä ei ole mitä haluat, klikkaa "peruuta" palataksesi vanhoihin asetuksiin.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Napsauttamalla Vahvista voit poistaa KAIKKI ennustetiedot ja muuttaa Myyntimahdollisuudet-näkymää.'
+        .'Myös KAIKKI prosessimääritelmät Tuoterivit-kohdemoodulilla poistetaan käytöstä. '
+        .'Jos tämä ei ole haluamasi toiminto, palaa edellisiin asetuksiin napsauttamalla Peruuta.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Jos kaikki tuoterivit ovat suljettu ja ainakin yksi on voitettu,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'myyntimahdollisuuden myyntivaiheen arvoksi asetetaan “suljettu - voitettu”.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Jos kaikkien tuoterivien myyntivaiheet ovat “suljettu - hävitty”,',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}}-moduulilla voidaant seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue vastaa {{revenuelineitems_module}}-ryhmän otsikkoa ja on yhteydessä muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}} jne. Kukin {{revenuelineitems_singular_module}} on tietyn tuotteen lupaava myynti ja sisältää oleellisia myyntitietoja. Kukin {{revenuelineitems_singular_module}} etenee tavallisesti useiden myyntivaiheiden kautta, kunnes se merkitään "Suljettu voitettu" tai "Suljettu hävitty". {{module_name}}-tietue kuvastaa vastaavaa {{revenuelineitems_module}}-määrää ja odotettua sulkemispäivämäärää. {{plural_module_name}} ja {{revenuelineitems_module}} voidaan hyödyntää lisää käyttämällä Sugarin {{forecasts_singular_module}}-moduulia myyntitrendien ymmärtämiseksi ja ennustamiseksi sekä työn keskittämiseksi myyntitavoitteiden saavuttamiseksi.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}}-moduulin avulla voit seurata yksittäisiä myyntejä alusta loppuun. Kukin {{module_name}} edustaa mahdollista myyntiä ja sisältää asiaankuuluvat myyntitiedot sekä muut liittyvät tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}}, jne. {{module_name}} etenee yleensä useissa myyntivaiheissa, kunnes se merkitään joko "Suljettu voitettu" tai "Suljettu hävitty". {{plural_module_name}} voidaan tehostaa edelleen käyttämällä Sugarin {{forecasts_singular_module}}-moduulia myyntitrendien ymmärtämiseksi ja ennustamiseksi sekä työn keskittämiseksi myyntitavoitteiden saavuttamiseen.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}-moduulilla voidaan seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue vastaa {{revenuelineitems_module}}-ryhmän otsikkoa ja on yhteydessä muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}} jne.
+    'LBL_HELP_RECORD' => 'Moduulilla {{plural_module_name}} voidaan seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}} edustaaa mahdollista myyntiä ja sisältää asiaankuuluvat myyntitiedot sekä muiden tärkeiden tietueiden, kuten {{quotes_module}}, {{contacts_module}} jne., liittyvät tiedot.
 
 - Muokkaa tietueen kenttiä napsauttamalla yksittäistä kenttää tai Muokkaa-painiketta.
-- Näytä tai muokkaa linkkejä muihin tietueisiin alapaneeleissa, kuten {{revenuelineitems_module}}, vaihtamalla vasemmanpuoleinen alareunan paneeli "Tietonäkymään".
-- Luo ja näytä käyttäjien kommentteja ja tallenna muutoshistoria {{activitystream_singular_module}}-moduulissa vaihtamalla vasemmanpuoleinen alareunan paneeli "Aktiviteettivirta"-näkymään.
+- Näytä tai muokkaa linkkejä muihin tietueisiin alapaneeleissa vaihtamalla vasemmanpuoleinen alapaneeli "Tietonäkymään".
+- Luo ja näytä käyttäjien kommentteja ja tallenna muutoshistoria {{activitystream_singular_module}}-moduulissa vaihtamalla vasemmanpuoleinen alapaneeli "Aktiviteettivirta"-näkymään.
 - Seuraa tietuetta ja merkitse se suosikiksi käyttämällä tietueen nimen oikealla puolella olevia kuvakkeita.
-- Muita toimintoja löytyy "Toiminnot"-pudotusvalikosta "Muokkaa"-painikkeen oikealla puolella.',
+- Muita toimintoja löytyy Toiminno"-pudotusvalikosta Muokkaa-painikkeen oikealla puolella.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}}-moduulilla voidaan seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue vastaa {{revenuelineitems_module}}-ryhmän otsikkoa ja on yhteydessä muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}} jne.
+    'LBL_HELP_CREATE' => 'Moduulilla {{plural_module_name}} voidaan seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}} edustaa mahdollista myyntiä ja sisältää asiaanmuuluvat myyntitiedot sekä muiden tärkeiden tietueiden, kuten {{quotes_module}}, {{contacts_module}} jne. liittyvät tiedot.
 
 {{module_name}} -tietueen luominen:
 1. Anna kentille haluamasi arvot.
  - "Pakollinen"-kentät tulee täyttää ennen tallentamista.
- - Saat esille lisää kenttiä tarvittaessa napsauttamalla "Näytä lisää".
-2. Napsauta "Tallenna" viimeistelläksesi tietueen ja palataksesi edelliselle sivulle.
-3. Tallentamisen jälkeen voit lisätä tuoterivejä {{module_name}}-moduuliin käyttämällä alapaneelia {{revenuelineitems_module}}.',
+ - Tarvittaessa saat esille lisää kenttiä napsauttamalla "Näytä lisää".
+2. Napsauta "Tallenna" viimeistelläksesi uuden tietueen ja palataksesi edelliselle sivulle.',
 
 // END PRO/CORP
 

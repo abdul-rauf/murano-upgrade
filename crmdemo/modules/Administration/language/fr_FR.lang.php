@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -274,8 +274,9 @@ $mod_strings = array (
     'LBL_DST_UPGRADE' => 'Mise à jour :',
     'LBL_EDIT_CUSTOM_FIELDS' => 'Éditer les champs personnalisés',
     'LBL_EDIT_TABS'=>'Éditer les onglets',
-    'LBL_EMAIL_TITLE' => 'Composer un email',
-    'LBL_EMAIL_DESC' => 'Les paramètres des boîtes e-mails doivent être configurés pour que les utilisateurs actifs puissent envoyer des e-mails, recevoir des notifications et effectuer des campagnes marketing de type email ou newsletter.',
+    'LBL_EMAIL_TITLE' => 'Email',
+    'LBL_EMAIL_DESC' => 'Gérer les emails entrants et sortants. Les paramètres des emails doivent être configurés afin de ' .
+                        'permettre aux utilisateurs d&#39;envoyer des campagnes par emails et newsletters.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Une adresse e-mail principale est obligatoire pour chaque utilisateur afin de pouvoir utiliser cette fonctionnalité.',
 	'LBL_ENABLE_MAILMERGE' => 'Autoriser le Publipostage ?',
 	'LBL_ENABLED' => 'Activé',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Configuration des paramètres locaux par défaut',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- Le login utilisateur sur le serveur qui va utiliser ce client déconnecté',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Login Utilisateur :',
-    'LBL_MAILBOX_DESC' => 'Configurer les boîtes e-mails de groupe pour contrôler les e-mails entrants',
+    'LBL_MAILBOX_DESC' => 'Configurer des comptes de messagerie groupée pour la surveillance des emails entrants ' .
+        'et gérer les informations de comptes personnels de messagerie entrante pour les utilisateurs',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Types de Contrat',
     'LBL_MANAGE_CURRENCIES' => 'Devises',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Gérer des Groupes',
@@ -629,6 +631,8 @@ Si la configuration de votre réseau interdit la communication avec le serveur d
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Reconstruire les fichiers regroupés JS',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Re-concatène et écrase les fichiers regroupés existants avec la dernière version des fichiers regroupés.',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Réparer les fichiers javascript',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Réparer les fichiers JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Traitement des fichiers, cela peut prendre quelques minutes. Sortir de cette page n&#39;annulera pas le processus, vous pouvez donc naviguez ailleurs ou patienter pour la confirmation...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Traitement des fichiers terminé.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Répare les champs qui ne sont pas en minuscules',
@@ -1007,7 +1011,7 @@ Si la configuration de votre réseau interdit la communication avec le serveur d
     'LBL_QR_CLEAR_ADD_CACHE' => 'Vidage des fichiers de cache additionnels... Effectué',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Si cette case est cochée, un administrateur devra revalider manuellement la licence système après la date d&#39;expiration, autrement les utilisateurs ne pourront plus s&#39;identifier.',
 	'LBL_TRACKER_SETTINGS' => 'Module de suivi',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Choisir les données système et utilisateur suivies',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Activer/désactiver le suivi',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Activer / Désactiver les utilisateurs issus des données de démos',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Activer',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Désactiver',
@@ -1156,6 +1160,10 @@ Si la configuration de votre réseau interdit la communication avec le serveur d
     'LBL_SPRITES_ADDED' => 'Ajout des Sprites CSS {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Fichier exclus : {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Autorisations d&#39;équipe',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Activer l’accès de l’équipe et gérer l’accès par module.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Type de système',
     'LBL_FTS_HOST' => 'Hôte',
@@ -1225,5 +1233,6 @@ Si la configuration de votre réseau interdit la communication avec le serveur d
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Le clic sur Valider va synchroniser votre client déconnecté avec le serveur maître.',
     'LBL_OFFLINE_ENABLED' => 'Mode déconnecté actif',
     'LBL_OFFLINE_SETTINGS' => 'Paramétrage du mode déconnecté',
+
 
 );

@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -125,7 +125,7 @@ $mod_strings = array(
     'LBL_PRIMARY_QUOTE_ID' => 'Primary Quote',
     'LBL_CONTRACTS' => 'Lepingud',
     'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Lepingud',
-    'LBL_PRODUCTS' => 'Quoted Line Items',
+    'LBL_PRODUCTS' => 'Pakkumuse artiklid',
     'LBL_RLI' => 'Revenue Line Items',
     'LNK_OPPORTUNITY_REPORTS' => 'Vaata müügivõimaluste aruandeid',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Pakkumised',
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'By clicking Confirm, you will be erasing ALL Forecasts data and changing your Opportunities View. If this is not what you intended, click cancel to return to previous settings.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Kui klõpsate valikut Kinnita, kustutate KÕIK prognooside andmed ja muudate oma müügivõimaluste vaadet. '
+        .'Samuti keelatakse KÕIK protsessimääratlused tulude rea üksuste sihtmoodulis. '
+        .'Kui te ei soovinud seda, klõpsake valikut Tühista, et naasta eelmiste sätete juurde.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'If all Revenue Line Items are closed and at least one was won,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'the Opportunity Sales Stage is set to "Closed Won".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'If all Revenue Line Items are in the "Closed Lost" Sales Stage,',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a header for a group of {{revenuelineitems_module}} as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc. Each {{revenuelineitems_singular_module}} is the prospective sale of a particular product and includes relevant sale data. Each {{revenuelineitems_singular_module}} will typically progress through several Sales Stages until it is marked either "Closed Won" or "Closed Lost". The {{module_name}} record reflects the amount and expected close date of its {{revenuelineitems_module}}. {{plural_module_name}} and {{revenuelineitems_module}} can be leveraged even further by using Sugar&#39;s {{forecasts_singular_module}}ing module to understand and predict sales trends as well as focus work to achieve sales quotas.',
+    'LBL_HELP_RECORDS' => 'Moodul {{plural_module_name}} võimaldab teil jälgida individuaalseid müüke algusest lõpuni. Iga mooduli {{module_name}} kirje esindab võimalikku müüki ja sisaldab asjakohaseid müügiandmeid ning viitab ka muudele olulistele kirjetele, nagu {{quotes_module}}, {{contacts_module}}, jne. {{module_name}} läbib tavaliselt mitu müügietappi, kuni selle olekuks märgitakse kas „Lõpetatud edukas” või „Lõpetatud kaotus”. Moodulit {{plural_module_name}} saab veelgi võimendada, kasutades Sugari moodulit {{forecasts_singular_module}}, et mõista ja prognoosida müügitrende ning suunata tööd müügikvootide saavutamisele.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a header for a group of {{revenuelineitems_module}} as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'Moodul {{plural_module_name}} võimaldab teil jälgida individuaalseid müüke ja nende müükide juurde kuuluvaid rea ühikuid, algusest lõpuni. Iga {{module_name}} kirje esindab võimalikku müüki ja sisaldab asjakohaseid müügiandmeid ning viitab ka muudele olulistele kirjetele, nagu {{quotes_module}}, {{contacts_module}} jne.
 
-- Edit this record&#39;s fields by clicking an individual field or the Edit button.
-- View or modify links to other records in the subpanels, including {{revenuelineitems_module}}, by toggling the bottom left pane to "Data View".
-- Make and view user comments and record change history in the {{activitystream_singular_module}} by toggling the bottom left pane to "Activity Stream".
-- Follow or favorite this record using the icons to the right of the record name.
-- Additional actions are available in the dropdown Actions menu to the right of the Edit button.',
+- Redigeerige kirje välju, klõpsates individuaalsel väljal või nupul Redigeeri.
+- Vaadake või muutke alampaneelides linke teistele kirjetele, valides alumisel vasakpoolsel paanil kuva „Andmevaade”.
+- Koostage ja vaadake kasutaja kommentaare ning salvestage muutuse ajalugu moodulis {{activitystream_singular_module}}, valides alumisel vasakpoolsel paanil kuva „Tegevuste voog”.
+- Jälgige või lisage see kirje lemmikute hulka, kasutades kirje nimest paremal asuvaid ikoone.
+- Täiendavad toimingud on saadaval tegevuste rippmenüüs, mis asub nupust Redigeeri paremal.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a header for a group of {{revenuelineitems_module}} as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Moodul {{plural_module_name}} võimaldab teil jälgida individuaalseid müüke ja nende müükide juurde kuuluvaid rea ühikuid, algusest lõpuni. Iga mooduli {{module_name}} kirje esindab võimalikku müüki ja sisaldab asjakohaseid müügiandmeid ning viitab ka muudele olulistele kirjetele, nagu {{quotes_module}}, {{contacts_module}}, etc.
 
-To create an {{module_name}}:
-1. Provide values for the fields as desired.
- - Fields marked "Required" must be completed prior to saving.
- - Click "Show More" to expose additional fields if necessary.
-2. Click "Save" to finalize the new record and return to the previous page.
-3. After saving, use the {{revenuelineitems_module}} subpanel to add line items to the {{module_name}}.',
+Mooduli {{module_name}} loomiseks tehke järgmist.
+1. Lisage soovitud väljadele väärtused.
+ - Enne salvestamist tuleb täita väljad, mis on märgitud kui „Kohustuslik”.
+ - Vajaduse korral klõpsake täiendavate väljade nägemiseks valikut „Kuva rohkem”.
+2. Klõpsake valikut „Salvesta”, et lõpetada uus kirje ja naasta eelmisele lehele.',
 
 // END PRO/CORP
 

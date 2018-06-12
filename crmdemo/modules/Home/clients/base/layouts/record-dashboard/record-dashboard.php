@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,13 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['Home']['base']['layout']['record-dashboard'] = array(
-    'metadata' =>
-    array(
-        'components' =>
-        array(
+    'metadata' => array(
+        'components' => array(
             array(
-                'rows' =>
-                array(
+                'rows' => array(
                     array(
                         array(
                             'view' => array(
@@ -28,8 +25,7 @@ $viewdefs['Home']['base']['layout']['record-dashboard'] = array(
                     ),
                     array(
                         array(
-                            'view' =>
-                            array(
+                            'view' => array(
                                 'type' => 'twitter',
                                 'label' => 'LBL_DASHLET_RECENT_TWEETS_SUGARCRM_NAME',
                                 'twitter' => 'sugarcrm',
@@ -40,12 +36,10 @@ $viewdefs['Home']['base']['layout']['record-dashboard'] = array(
                     ),
                     array(
                         array(
-                            'view' =>
-                            array(
+                            'view' => array(
                                 'type' => 'dashablelist',
                                 'label' => 'TPL_DASHLET_MY_MODULE',
-                                'display_columns' =>
-                                array(
+                                'display_columns' => array(
                                     'full_name',
                                     'account_name',
                                     'phone_work',
@@ -53,8 +47,7 @@ $viewdefs['Home']['base']['layout']['record-dashboard'] = array(
                                 ),
                                 'limit' => 15,
                             ),
-                            'context' =>
-                            array(
+                            'context' => array(
                                 'module' => 'Contacts',
                             ),
                             'width' => 12,
@@ -64,27 +57,20 @@ $viewdefs['Home']['base']['layout']['record-dashboard'] = array(
                 'width' => 4,
             ),
             array(
-                'rows' =>
-                array(
+                'rows' => array(
                     array(
                         array(
-                            'view' =>
-                            array(
-                                'type' => 'forecast-pipeline',
+                            'view' => array(
+                                'type' => 'sales-pipeline',
                                 'label' => 'LBL_DASHLET_PIPLINE_NAME',
                                 'visibility' => 'user',
-                            ),
-                            'context' =>
-                            array(
-                                'module' => 'Forecasts',
                             ),
                             'width' => 12,
                         ),
                     ),
                     array(
                         array(
-                            'view' =>
-                            array(
+                            'view' => array(
                                 'type' => 'bubblechart',
                                 'label' => 'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME',
                                 'filter_duration' => 'current',

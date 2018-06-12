@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -82,7 +82,7 @@ $mod_strings = array (
   'LBL_TPL_VALID_UNTIL' => 'Platí do:',
   'LBL_PURCHASE_ORDER_NUM' => 'Číslo nákupnej objednávky:',
   'LBL_PAYMENT_TERMS' => 'Platobné podmienky:',
-  'LBL_TPL_BILL_TO' => 'Faktúrovať komu',
+  'LBL_TPL_BILL_TO' => 'Komu fakturovať',
   'LBL_TPL_SHIP_TO' => 'Komu doručiť',
   'LBL_TPL_QUANTITY' => 'Množstvo',
   'LBL_TPL_PART_NUMBER' => 'Referenčné číslo:',
@@ -93,7 +93,7 @@ $mod_strings = array (
   'LBL_TPL_EXT_PRICE' => 'Ext. cena',
   'LBL_TPL_SUBTOTAL' => 'Medzisúčet:',
   'LBL_TPL_DISCOUNT' => 'Zľava:',
-  'LBL_TPL_DISCOUNTED_SUBTOTAL' => 'Zvýhodnený medzisúčet:',
+  'LBL_TPL_DISCOUNTED_SUBTOTAL' => 'Medzisúčet po zľave:',
   'LBL_TPL_TAX' => 'DPH:',
   'LBL_TPL_SHIPPING' => 'Doprava:',
   'LBL_TPL_TOTAL' => 'Celkom',

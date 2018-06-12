@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -95,10 +95,13 @@ $mod_strings = array (
     'LBL_KB_STATUS_BACK_TO_DRAFT' => '文档状态已更改为草稿。',
     'LBL_OPERATOR_CONTAINING_THESE_WORDS' => '包含这些词语',
     'LBL_OPERATOR_EXCLUDING_THESE_WORDS' => '不包含这些词语',
-    'ERROR_EXP_DATE_LOW' => 'The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_EXP_DATE_LOW' => '到期日期不能早于公布的日期。',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => '“已审核”状态需要有发布日期。',
     'ERROR_ACTIVE_DATE_LOW' => 'The Publish Date must occur on a later date than today&#39;s date.',
     'ERROR_ACTIVE_DATE_EMPTY' => '发布日期为空。',
     'LBL_RECORD_SAVED_SUCCESS' => '您成功创建了 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>。', // use when a model is available
+    'ERROR_IS_BEFORE' => '错误。此字段的日期不能晚于 {{this}} 字段的日期。',
     'TPL_SHOW_MORE_MODULE' => '更多 {{module}} 文章...',
+    'LBL_LIST_FORM_TITLE' => '知识库列表',
+    'LBL_SEARCH_FORM_TITLE' => '知识库搜索',
 );

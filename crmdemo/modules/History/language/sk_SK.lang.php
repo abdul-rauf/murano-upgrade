@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -36,7 +36,7 @@ $mod_strings = array (
   'LBL_CONTACT_NAME' => 'Meno kontaktu:',
   'LBL_MEETING' => 'Schôdzka',
   'LBL_DESCRIPTION_INFORMATION' => 'Popis informácie',
-  'LBL_DESCRIPTION' => 'Popis',
+  'LBL_DESCRIPTION' => 'Popis:',
   'LBL_COLON' => ':',
   'LBL_DEFAULT_STATUS' => 'Plánované',
   'LNK_NEW_CALL' => 'Záznam volania',

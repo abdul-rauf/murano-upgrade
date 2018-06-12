@@ -31,7 +31,7 @@ require_once('include/MVC/View/SugarView.php');
 class CalendarViewReschedule extends SugarView {
 
 	function CalendarViewReschedule(){
- 		parent::SugarView();
+ 		parent::__construct();
 	}
 	
 	function process(){

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -48,7 +48,7 @@
                 return action;
             }
 
-            if (action.acl_action === 'admin' && action['label'] === 'LBL_ADMIN') {
+            if (action.acl_action === 'admin') {
                 //Edge case for admin link. We only show the Admin link when
                 //user has the "Admin & Developer" or "Developer" (so developer
                 //in either case; see SP-1827)
@@ -109,14 +109,20 @@
                         weight = 30;
                         name = app.lang.get(action.label, module)
                     }
-                    actions[jsFunc]({
+                    var actionObj = {
                         module: module,
                         label: app.lang.getModuleIconLabel(module),
                         name: name,
                         route: action.route,
                         icon: action.icon,
-                        weight: weight
-                    });
+                        weight: weight,
+                    };
+
+                    if (action.openwindow) {
+                        actionObj.openwindow = action.openwindow;
+                    }
+
+                    actions[jsFunc](actionObj);
                 });
             });
             var profileActions = app.metadata.getView(null, 'profileactions');
@@ -125,12 +131,18 @@
                     return;
                 }
 
-                actions.push({
-                    name: app.lang.get(action.label),
+                var profileActionObj = {
+                    name: app.lang.get(action.label, action.module),
                     route: action.route,
                     icon: action.icon,
                     weight: 10
-                });
+                };
+
+                if (action.openwindow) {
+                    profileActionObj.openwindow = action.openwindow;
+                }
+
+                actions.push(profileActionObj);
             });
             return actions;
         };

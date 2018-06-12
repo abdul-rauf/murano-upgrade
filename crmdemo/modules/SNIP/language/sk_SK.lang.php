@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -23,7 +23,7 @@ $mod_strings = array(
     'LBL_MODULE_NAME' => 'Archivácia e-mailov',
     'LBL_SNIP_SUMMARY' => "Archivovanie emailov je automatická importovacia služba, ktorý umožňuje užívateľom importovať emaily do SugarCRM poslaním z hocijakého mailového klienta do emailovej adresy poskytovanej SugarCRM. Každý prípad v SugarCRM má svoju vlastnú unikátnu emailovú adresu. Na importovanie emailov, používateľ odošle email do poskytnutej emailovej adresy pomocou TO, CC, BCC. Emailová archivovacia služba importuje email do SugarCRM. Služba importuje email, so všetkými prílohami, obrázkami a udalostiami v kalendári, a vytvorí záznamy vnútri aplikácie, ktoré sú spojené s existujúcimi záznamami na základe zhodných emailových adries.<br /><br />Príklad: Ako užívateľ, keď si pozriem Účet, budem vidieť všetky emaily, ktoré súvisia s Účtom na základe emailových adries v zázname Účtu. Budem schopný vidieť všetky emaily, ktoré sú spojené s Kontaktmi súvisia s Účtom. <br /><br />Súhlaste s podmienkami nižšie a kliknite Aktivovať pre začatie používania služby. Budete môcť hocikedy vypnúť službu. Akonáhle je služba aktivovaná, emailová adresa na používanie služby bude zobrazená..",
 	'LBL_REGISTER_SNIP_FAIL' => 'Nepodarilo sa kontaktovať archivácie e-mailov servis:% s!',
-	'LBL_CONFIGURE_SNIP' => 'archivácia e-mailom',
+	'LBL_CONFIGURE_SNIP' => 'Archivácia e-mailov',
     'LBL_DISABLE_SNIP' => 'Zakázané',
     'LBL_SNIP_APPLICATION_UNIQUE_KEY' => 'Aplikácia Unikátneho kľúča',
     'LBL_SNIP_USER' => 'Archivácia Užívateľského emailu',

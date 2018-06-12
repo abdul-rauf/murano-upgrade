@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -77,7 +77,7 @@ SUGAR.Api = (function() {
 
         /**
          * XHR status code.
-         * @property {String/Number}
+         * @property {string|number}
          * @member SUGAR.HttpError
          */
         this.status = request.xhr.status;
@@ -256,7 +256,7 @@ SUGAR.Api = (function() {
             //In order to keep track of the number of ajax call in the air, we will add
             //a complete callback.
             // Do it only on the first run. No need to set this logic on subsequent execute calls.
-            if (this.numExecuted == 0) {
+            if (!this.numExecuted) {
                 var origCallback = this.params.complete;
                 this.params.complete = function() {
                     _numCallsInProgress--;
@@ -408,7 +408,7 @@ SUGAR.Api = (function() {
                 var onError = function() {
                     // Either regular request failed or token refresh failed
                     // Call original error callback
-                    if (_rqueue.length == 0 || self.refreshingToken(request.params.url)) {
+                    if (!_rqueue.length || self.refreshingToken(request.params.url)) {
                         if (callbacks.error) {
                             callbacks.error(error);
                         }
@@ -446,8 +446,12 @@ SUGAR.Api = (function() {
                             // only if token refresh failed
                             // In case of requests succeed, complete callback is called by ajax lib
                             if (refreshFailed) {
-                                while (r = _rqueue.shift()) {
-                                    if (r._ocomplete) r._ocomplete.call(this, r);
+                                r = _rqueue.shift();
+                                while (r) {
+                                    if (r._ocomplete) {
+                                        r._ocomplete.call(this, r);
+                                    }
+                                    r = _rqueue.shift();
                                 }
                             }
                         },
@@ -456,9 +460,11 @@ SUGAR.Api = (function() {
                             refreshFailed = false;
                             _refreshTokenSuccess(function() {
                                 // Repeat original requests
-                                while (r = _rqueue.shift()) {
+                                r = _rqueue.shift();
+                                while (r) {
                                     r._dequeuing = true;
                                     r.execute(self.getOAuthToken());
+                                    r = _rqueue.shift();
                                 }
                             });
                         },
@@ -518,8 +524,10 @@ SUGAR.Api = (function() {
                         _refreshTokenSuccess(
                             function() {
                                 // Repeat original requests
-                                while (r = _rqueue.shift()) {
+                                r = _rqueue.shift();
+                                while (r) {
                                     r.execute(self.getOAuthToken());
+                                    r = _rqueue.shift();
                                 }
                             }
                         );
@@ -647,7 +655,7 @@ SUGAR.Api = (function() {
                     params.success = function(data, status) {
                         /**
                          * XHR status code.
-                         * @property {String/Number}
+                         * @property {string|number}
                          * @member SUGAR.HttpRequest
                          */
                         request.status = (data && data.status) ? data.status : status;
@@ -764,7 +772,7 @@ SUGAR.Api = (function() {
                         params.headers['X-Userpref-Hash'] = upHash;
                     }
                     //Url needs to be trimmed down to the version number.
-                    if (params.url != '') {
+                    if (!_.isEmpty(params.url)) {
                         params.url = version + params.url.substring(this.serverUrl.length);
                     }
 
@@ -1300,16 +1308,15 @@ SUGAR.Api = (function() {
             /**
              * Triggers a file download of the exported records.
              *
-             * @param {Object} params - list of params
-             * <pre>
-             * {
-             *      module: Module name
-             *      uid : an array of record ids to request export
-             * }
-             * </pre>
-             * @param {jQuery} $el JQuery selector to element (needed for attaching iframe)
-             * @param {Object} [callbacks] list of callbacks {success:, error:, complete:}
-             * @param {Object} [options] Request options hash
+             * @param {Object} params Download parameters.
+             * @param {string} params.module Module name.
+             * @param {Array} params.uid Array of record ids to request export.
+             * @param {jQuery} $el JQuery selector to element.
+             * @param {Object} [callbacks] Various callbacks.
+             * @param {Function} [callbacks.success] Called on success.
+             * @param {Function} [callbacks.error] Called on failure.
+             * @param {Function} [callbacks.complete] Called when finished.
+             * @param {Object} [options] Request options hash.
              *
              * - passOAuthToken: Boolean flag indicating if OAuth token must be passed in the URL (`true` by default)
              *
@@ -1347,10 +1354,18 @@ SUGAR.Api = (function() {
 
             /**
              * Searches for specified query.
-             * @param {Object} params properties: q, module_list, fields, max_num, offset. The query property is required.
-             * { q: query, module_list: commaDelitedModuleList, fields: commaDelimitedFields, max_num: 20 },
-             * @param {Object} callbacks hash with with callbacks of the format {success: function(data){}, error: function(data){}}
-             * @param {Object} options(optional) request options.
+             * @param {Object} params Properties.
+             * @param {string} params.q Query.
+             * @param {string} [params.module_list] Comma-separated module list.
+             * @param {string} [params.fields] Comma-separated list of fields.
+             * @param {number} [params.max_num] Max number of records to return.
+             * @param {number} [params.offset] Initial offset into the results.
+             * @param {Object} callbacks Hash with success and error callbacks.
+             * @param {Function} callbacks.success Function called on success.
+             *   Takes one argument.
+             * @param {Function} callbacks.error Function called on failure.
+             *   Takes one argument.
+             * @param {Object} [options] Request options.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
@@ -1402,9 +1417,12 @@ SUGAR.Api = (function() {
                         _refreshTokenSuccess(
                             function() {
                                 // Repeat original requests
-                                while (r = _rqueue.shift()) {
-                                    r._dequeuing = true;
-                                    r.execute(self.getOAuthToken());
+                                r = _rqueue.shift();
+                                while (r) {
+                                    if (r._ocomplete) {
+                                        r._ocomplete.call(this, r);
+                                    }
+                                    r = _rqueue.shift();
                                 }
                             }
                         );

@@ -6,7 +6,7 @@ if (!defined('sugarEntry') || !sugarEntry) {
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -47,8 +47,7 @@ class SugarJobUpdateForecastWorksheets implements RunnableSchedulerJob
     {
 
         /* @var $admin Administration */
-        $admin = BeanFactory::getBean('Administration');
-        $settings = $admin->getConfigForModule('Forecasts');
+        $settings = Forecast::getSettings();
 
         if ($settings['is_setup'] == false) {
             $GLOBALS['log']->fatal("Forecast Module is not setup. " . __CLASS__ . " should not be running");
@@ -57,9 +56,10 @@ class SugarJobUpdateForecastWorksheets implements RunnableSchedulerJob
 
         $args = json_decode(html_entity_decode($data), true);
         $this->job->runnable_ran = true;
+        $worksheet = BeanFactory::getBean('ForecastWorksheets');
 
         // use the processWorksheetDataChunk to run the code.
-        ForecastWorksheet::processWorksheetDataChunk($args['forecast_by'], $args['data']);
+        $worksheet->processWorksheetDataChunk($args['forecast_by'], $args['data']);
 
         $this->job->succeedJob();
         return true;

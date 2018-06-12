@@ -31,7 +31,7 @@ require_once('include/MVC/View/SugarView.php');
 class CalendarViewRemove extends SugarView {
 
 	function CalendarViewRemove(){
- 		parent::SugarView();
+ 		parent::__construct();
 	}
 	
 	function process(){

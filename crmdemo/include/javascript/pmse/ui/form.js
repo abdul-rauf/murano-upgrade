@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -75,6 +75,8 @@ var Form = function (options) {
     this.parent = null;
 
     this._closeOnClickContext = null;
+
+    this._errorMessage = null;
 
     Form.prototype.initObject.call(this, options);
 };
@@ -152,12 +154,29 @@ Form.prototype.initObject = function (options) {
         .setProxy(defaults.proxy)
         .setCallback(defaults.callback)
         .setButtons(defaults.buttons)
+        ._setErrorMessage()
         .setLabelWidth(defaults.labelWidth)
         .setFooterHeight(defaults.footerHeight)
         .setHeaderHeight(defaults.headerHeight)
         .setCloseContainerOnSubmit(defaults.closeContainerOnSubmit)
         .setFooterAlign(defaults.footerAlign);
 };
+
+/**
+ * Sets error message to be shown when validation error happens.
+ * @private
+ */
+Form.prototype._setErrorMessage = function () {
+    var iconSpan = this.createHTMLElement('span');
+    iconSpan.className = 'fa fa-warning';
+    var messageLabel = this.createHTMLElement('span');
+    messageLabel.innerHTML = translate('LBL_PMSE_FORM_ERROR');
+    this._errorMessage = this.createHTMLElement('div');
+    this._errorMessage.className = 'pmse-form-error pmse-form-error-off';
+    this._errorMessage.appendChild(iconSpan);
+    this._errorMessage.appendChild(messageLabel);
+    return this;
+}
 
 /**
  * Sets the context in which a click action should autoclose the close-on-click elements, like FieldPanels.
@@ -441,6 +460,18 @@ Form.prototype.setItems = function (items) {
 };
 
 /**
+ * Returns a form's field object based on its name.
+ * @param name
+ * @returns {Object|null}
+ */
+Form.prototype.getField = function (name) {
+    var field = _.find(this.items, function (item) {
+        return item.name == name;
+    });
+    return field || null;
+};
+
+/**
  * Sets the buttons
  * @param {Array} buttons
  * @return {*}
@@ -544,6 +575,15 @@ Form.prototype.validate = function () {
             this.callback.required();
         }
     }
+    if (valid) {
+        $(".pmse-form-error")
+            .removeClass('pmse-form-error-on')
+            .addClass('pmse-form-error-off');
+    } else {
+        $(".pmse-form-error")
+            .removeClass('pmse-form-error-off')
+            .addClass('pmse-form-error-on');
+    }
     return valid;
 };
 
@@ -604,11 +644,13 @@ Form.prototype.createHTML = function () {
         $(html).find("select, input, textarea").focus(this.onEnterFieldHandler(this.items[i]));
         this.body.appendChild(html);
     }
+    this.footer.appendChild(this._errorMessage);
     for (i = 0; i < this.buttons.length; i += 1) {
         this.footer.appendChild(this.buttons[i].getHTML());
     }
     this.body.style.bottom = (this.footerHeight + 8) + 'px';
     this.footer.style.height = this.footerHeight + 'px';
+    this.footer.style.lineHeight = this.footerHeight + 'px';
     return this.html;
 };
 

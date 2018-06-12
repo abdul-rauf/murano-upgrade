@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -34,7 +34,7 @@ $mod_strings = array (
   'LNK_NEW_OPPORTUNITY' => 'Nuova Opportunità',
   'LNK_NEW_CASE' => 'Nuovo Reclamo',
   'LNK_NEW_NOTE' => 'Nuova Nota o Allegato',
-  'LNK_NEW_CALL' => 'Log Chiamata',
+  'LNK_NEW_CALL' => 'Log chiamata',
   'LNK_NEW_EMAIL' => 'Archivia Email',
   'LNK_NEW_MEETING' => 'Nuova Riunione',
   'LNK_NEW_TASK' => 'Nuovo Compito',
@@ -129,7 +129,7 @@ $mod_strings = array (
   'LBL_ACTIVITIES_REPORTS' => 'Reports Attività',
   'LBL_NO_REPORTS' => 'Nessun risultato.',
 
-  'LBL_SAVED_SEARCH' => 'Ricerca & Layout Salvati',
+  'LBL_SAVED_SEARCH' => 'Ricerca e layout salvati',
 
   'LBL_MY_TEAM_ACCOUNT_REPORTS' => 'Reports Aziende del mio Gruppo',
   'LBL_MY_TEAM_OPPORTUNITY_REPORTS' => 'Reports Opportunità del mio Gruppo',
@@ -172,7 +172,7 @@ $mod_strings = array (
   'LBL_WAS_SAVED' => 'è stato salvato',
   'LBL_FAILURE_REPORT' => 'FALLITO: Report',
   'LBL_WAS_NOT_SAVED' => 'non è stato salvato',
-  'LBL_EQUALS' => 'Uguali',
+  'LBL_EQUALS' => 'Uguale a',
   'LBL_LESS_THAN' => 'Meno di',
   'LBL_GREATER_THAN' => 'Maggiore di',
   'LBL_DOES_NOT_EQUAL' => 'Non è uguale',
@@ -292,11 +292,11 @@ $mod_strings = array (
 	'LBL_LAST_7_DAYS'=>'Ultimi 7 giorni',
 	'LBL_NEXT_7_DAYS'=>'Prossimi 7 giorni',
 	'LBL_LAST_MONTH'=>'Ultimo Mese',
-	'LBL_NEXT_MONTH'=>'Mese Successivo',
+	'LBL_NEXT_MONTH'=>'Mese prossimo',
 	'LBL_LAST_QUARTER'=>'Ultimo Trimestre',
 	'LBL_THIS_QUARTER'=>'Questo Trimestre',
-	'LBL_LAST_YEAR'=>'Anno Precedente',
-	'LBL_NEXT_YEAR'=>'Anno Successivo',
+	'LBL_LAST_YEAR'=>'Anno scorso',
+	'LBL_NEXT_YEAR'=>'Anno prossimo',
     'LBL_PREVIOUS_FISCAL_YEAR' => 'Anno Fiscale Precedente',
     'LBL_PREVIOUS_FISCAL_QUARTER' => 'Trimestre Fiscale Precedente',
     'LBL_CURRENT_FISCAL_YEAR' => 'Anno Fiscale Corrente',

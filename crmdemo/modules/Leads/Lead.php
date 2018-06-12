@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -111,25 +111,6 @@ class Lead extends Person {
 	// This is used to retrieve related fields from form posts.
 	var $additional_column_fields = Array('assigned_user_name', 'task_id', 'note_id', 'meeting_id', 'call_id', 'email_id');
 	var $relationship_fields = Array('email_id'=>'emails','call_id'=>'calls','meeting_id'=>'meetings','task_id'=>'tasks',);
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Lead()
-    {
-        self::__construct();
-    }
-
-	public function __construct() {
-		parent::__construct();
-		global $current_user;
-		if(!empty($current_user)) {
-			$this->team_id = $current_user->default_team;	//default_team is a team id
-			$this->team_set_id = $current_user->team_set_id;
-		} else {
-			$this->team_id = 1; // make the item globally accessible
-		}
-	}
 
 	function get_account()
 	{
@@ -309,36 +290,6 @@ class Lead extends Person {
 		}
 		return $temp_array;
 	}
-
-    /**
-     * Returns an array of fields that are of type link.
-     *
-     * @return array List of fields.
-     *
-     * Internal function, do not override.
-     */
-	//fix for bug 27339 Shine
-    function get_linked_fields()
-    {
-    	$linked_fields=array();
-    	$fieldDefs = $this->getFieldDefinitions();
-
-    	//find all definitions of type link.
-    	if (!empty($fieldDefs))
-    	{
-    		foreach ($fieldDefs as $name=>$properties)
-    		{
-                if ($name == 'meetings_parent' || $name == 'calls_parent') {
-                    continue;
-                }
-    			elseif (array_search('link',$properties) === 'type')
-    			{
-    				$linked_fields[$name]=$properties;
-    			}
-    		}
-    	}
-    	return $linked_fields;
-    }
 
 	/**
 		builds a generic search based on the query string using or

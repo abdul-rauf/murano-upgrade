@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -52,5 +52,6 @@ $mod_strings = array (
   'LBL_LIST_WARNING' => '请注意在此模块中所做的任何更改可能会破坏 {0} 模块的功能。应通过 <a style="text-decoration:none;"href="index.php?module=Forecasts&action=config"> 设置 {0}</a> 与 {1} 相关的变化。',
   'LBL_LEAF_CYCLE' => '铅的周期',
 
-  'LBL_DROPDOWN_TOOLTIP' => '{{start}} 至 {{end}}'
+  'LBL_DROPDOWN_TOOLTIP' => '{{start}} 至 {{end}}',
+  'LBL_DROPDOWN_TOOLTIP_RTL' => '{{end}} 到 {{start}}'
 );

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -46,15 +46,21 @@
         <th scope='col' align='center' id="lineLabel_{$vardef.name}_primary" rowspan='1' scope='row' style='white-space: nowrap; word-wrap: normal;'>
             {sugar_translate label='LBL_COLLECTION_PRIMARY'}
         </th>
+        {if $isTBAEnabled}
+            <th scope='col' align='center' id="lineLabel_{$idname}_selected" rowspan='1' scope='row'
+                style='white-space: nowrap; word-wrap:normal;'>
+                {sugar_translate label='LBL_TEAM_SET_SELECTED'}
+            </th>
+        {/if}
 <!-- BEGIN Add and collapse -->
         <td rowspan='1' scope='row' style='white-space:nowrap; word-wrap:normal;'>
             &nbsp;
             {if !$hideShowHideButton}
-            <span onclick="javascript:collection['{$displayParams.formName}_{$vardef.name}'].js_more();" id='more_{$displayParams.formName}_{$vardef.name}' {if empty($values.secondaries)}style="display:none; text-decoration:none;"{else}style="text-decoration:none;"{/if} title="{sugar_translate label="LBL_HIDE_SHOW"}">
+            <span onclick="javascript:collection['{$displayParams.formName}_{$vardef.name}'].js_more();" id='more_{$displayParams.formName}_{$vardef.name}' style="text-decoration:none;" title="{sugar_translate label="LBL_HIDE_SHOW"}">
             <input id="arrow_{$vardef.name}" name="arrow_{$vardef.name}" type="hidden" value="show">
 			{capture assign="attr"}border="0" id="more_img_{$displayParams.formName}_{$vardef.name}"{/capture}
             {sugar_getimage name="advanced_search.gif" attr=$attr}
-            <span id="more_div_{$displayParams.formName}_{$vardef.name}" {if empty($values.secondaries)}style="display:none"{/if}>{sugar_translate label='LBL_SHOW'}</span>
+            <span id="more_div_{$displayParams.formName}_{$vardef.name}" >{sugar_translate label='LBL_SHOW'}</span>
         	</span>
         	{/if}
         </td>
@@ -88,6 +94,18 @@
             <input id="primary_{$vardef.name}_collection_0" name="primary_{$vardef.name}_collection" type="radio" class="radio" {if $displayParams.primaryChecked}checked="checked" {/if} title="{sugar_translate label='LBL_TEAM_SELECT_AS_PRIM_TITLE'}"value="0" onclick="collection['{$displayParams.formName}_{$vardef.name}'].changePrimary(true);"/>
             </span>
         </td>
+        {if $isTBAEnabled}
+            <td valign='top' align='center' class="teamset-row">
+            <span id='{$displayParams.formName}_{$vardef.name}_checkbox_div_0'>
+            &nbsp;
+            <input id="selected_{$vardef.name}_collection_0" name="selected_{$vardef.name}_collection_0"
+                   type="checkbox" class="checkbox" value="{$values.primary.id}"
+                   {if $values.primary.selected}checked="checked"
+                   title="{sugar_translate label='LBL_TEAM_TBSELECTED_TITLE'}"
+                   {else}title="{sugar_translate label='LBL_TEAM_SELECT_AS_TBSELECTED_TITLE'}"{/if}/>
+            </span>
+            </td>
+        {/if}
         <td>
         &nbsp;
         </td>
@@ -114,6 +132,7 @@
 			var temp_array = new Array();  
 			temp_array['name'] = '{$secondary_field.name}';
 			temp_array['id'] = '{$secondary_field.id}';
+			{if $isTBAEnabled}temp_array['selected'] = '{$secondary_field.selected}';{/if}
 			collection["{$displayParams.formName}_{$vardef.name}"].secondaries_values.push(temp_array);
 			{/foreach}
 		{/if}

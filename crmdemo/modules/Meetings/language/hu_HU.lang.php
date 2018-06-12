@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'E-mail',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Email minden meghívottnak',
     'LBL_POPUP_REMINDER' => 'Előugró Emlékeztető',
-    'LBL_POPUP_REMINDER_TIME' => 'Előugró Emlékeztető Ideje',
+    'LBL_POPUP_REMINDER_TIME' => 'Előugró Emlékeztető időpontja',
     'LBL_EMAIL_REMINDER' => 'E-mail emlékeztető',
-    'LBL_EMAIL_REMINDER_TIME' => 'E-mail emlékeztető ideje',
+    'LBL_EMAIL_REMINDER_TIME' => 'Email emlékeztető időpontja',
     'LBL_REMOVE' => 'Eltávolítás',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Ütemezés',
 	'LBL_SEARCH_BUTTON'=> 'Keres',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Minden ismétlődés törlése',
     'LBL_DATE_END_ERROR' => 'A befejezés dátuma megelőzi a kezdés dátumát',
     'LBL_REPEAT_PARENT_ID' => 'Szülő azonosító megismétlése',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Ismétlődő azonosítójú gyűlés. Eredeti gyűlés kezdő dátuma',
     'LBL_RECURRING_SOURCE' => 'Visszatérő forrás',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Biztos benne, hogy eltávolítja az ismétlődő rekordokat?',
     'LBL_RECURRENCE' => 'Többszörös előfordulás',

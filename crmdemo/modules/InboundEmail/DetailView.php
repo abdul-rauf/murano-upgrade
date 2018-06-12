@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -263,7 +263,7 @@ if(!empty($focus->port)) {
 }
 if(!empty($focus->team_id)) {
 	require_once('modules/Teams/TeamSetManager.php');
-	$team_name = TeamSetManager::getCommaDelimitedTeams($focus->team_set_id, $focus->team_id, true);
+    $team_name = TeamSetManager::getFormattedTeamsFromSet($focus, true);
 
 	if(!isset($team_name) || empty($team_name)) {
 		$team_name = $app_strings['NTC_NO_ITEMS_DISPLAY'];

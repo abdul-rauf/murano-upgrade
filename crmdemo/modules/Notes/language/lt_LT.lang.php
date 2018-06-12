@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -69,7 +69,7 @@ $mod_strings = array(
     'LBL_SEND_ANYWAYS' => 'Šis laiškas neturi temos. Vis tiek siųsti/saugoti?',
     'LBL_LIST_EDIT_BUTTON' => 'Redaguoti',
     'LBL_ACTIVITIES_REPORTS' => 'Priminimų ataskaita',
-    'LBL_PANEL_DETAILS' => 'Detalės',
+    'LBL_PANEL_DETAILS' => 'Išsamiau',
     'LBL_NOTE_INFORMATION' => 'Užrašo informacija',
     'LBL_MY_NOTES_DASHLETNAME' => 'Mano užrašai',
     'LBL_EDITLAYOUT' => 'Redaguoti išdėstymą' /*for 508 compliance fix*/,

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,6 +20,7 @@ global $timedate;
  
 $mod_strings = array (
     'LBL_GOOD_FILE' => 'Importfilen lästes framgångsrikt',
+    'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Den Importerade posten deltar i en process och kan inte redigeras eftersom vissa fält är låsta för redigering av processen.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Poster skippade på grund av error',
     'LBL_UPDATE_SUCCESSFULLY' => 'Poster skapade eller uppdaterade framgångsrikt',
     'LBL_SUCCESSFULLY_IMPORTED' => 'Poster skapade framgångsrikt',
@@ -336,11 +337,11 @@ $mod_strings = array (
     'LBL_EXTERNAL_MAP_HELP' => 'Tabellen nedanför innehåller fälten i den externa källan och modulens fält för vilka de är mappade. Kolla mappningen för att vara säker på att de är vad du förväntar dig, och gör ändringar om det behövs. VAr säker på att mappa alla obligatoriska fält (markerade med stjärna).',
     'LBL_EXTERNAL_MAP_NOTE' => 'Importeringen kommer försökas för kontakterna i alla Google Contacts grupper.',
     'LBL_EXTERNAL_MAP_NOTE_SUB' => 'Användarnamnet för den nyligen skapade användaren kommer att vara Hela Namnen i Google Contact som standard. Användarnamnen kan ändras efter det att användarprotokollen skapats.',
-    'LBL_EXTERNAL_MAP_SUB_HELP' => 'Klicka <b>Importera Nu</b> för att starta importen. Nya poster kommer endast skapas för de poster som innehåller efternamn. Nya poster kommer inte skapas för data som identifierats som dubletter baserat på namn och/eller epostadresser.',
+    'LBL_EXTERNAL_MAP_SUB_HELP' => 'Klicka <b>Importera Nu</b> för att starta importen. Nya poster kommer endast skapas för de poster som innehåller efternamn. Nya poster kommer inte skapas för data som identifierats som dubletter baserat på namn och/eller emailadresser.',
     'LBL_EXTERNAL_FIELD_TOOLTIP' => 'Den här kolumnen visar fält externa källan som innehåller data som kan användas för att skapa nya protokoll.',
     'LBL_EXTERNAL_DEFAULT_TOOPLTIP' => 'Indikerar ett värde som ska användas i skapade protokoll om fälten i den externa källan inte innehåll data.',
     'LBL_EXTERNAL_ASSIGNED_TOOLTIP' => 'För att tilldela nya protokoll till en annan användare än dig själv, använd Standard Värde kolumnen för att välja en annan användare.',
     'LBL_EXTERNAL_TEAM_TOOLTIP' => 'För att tilldela nya protokoll till andra grupper än ditt standard team(s), använd Standard Värde kolumnen för att välja ett annat team.',
     'LBL_SIGN_IN_HELP' => 'För att aktivera den här servicen, vänligen logga in under Externa Konton fliken på din användarinställning sida.',
-    'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Försöker att hantera e-postadresser i en Bean som inte stödjer det.",
+    'LBL_NO_EMAIL_DEFS_IN_MODULE' => "Försöker att hantera emailadresser i en Bean som inte stödjer det.",
 );

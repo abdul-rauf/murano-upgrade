@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Selecteer <b>Te bewerken layout</b>.<br/<br/>Om de layout te bewerken die gegevensvelden bevat om gegevens in te voeren klikt u op <b>Bewerkingsweergave</b>.<br/><br/>Om de layout te wijzigen die de gegevens weergeeft in de velden in de Bewerkingsweergave klikt u op <b>Detailweergave</b>.<br/><br/>Om de kolommen te bewerken die in de standaard lijst verschijnen klikt u op <b>Lijstweergave</b>.<br/><br/>Om het Basis en Geavanceerde zoekformulier te wijzigen klikt u op <b>Zoeken</b>.',
         'subpanelHelp'=> 'Selecteer een <b>Subpaneel</b> dat u wilt bewerken.',
         'searchHelp' => 'Selecteer een <b>Zoeken</b> layout om te bewerken.',
-        'labelsBtn'	=> 'Klik op <b>Opslaan</b> om uw aangepaste labels op te slaan.',
+        'labelsBtn'	=> 'Bewerk de <b>Etiketten</b> die voor waarden in deze module worden getoond.',
         'newPackage'=>'Klik op <b>Nieuw pakket</b> om een nieuw pakket aan te maken.',
         'mbHelp'    => '<b>Welkom bij de Module bouwer.</b><br/><br/>Gebruik de <b>Module bouwer</b> om pakketten aan te maken die aangepaste modules bevatten op basis van standaard of aangepaste objecten. <br/><br/>Om te beginnen klikt u op <b>Nieuw pakket</b> om een nieuw pakket aan te maken of selecteer een pakket om te bewerken.<br/><br/> Een <b>pakket</b> functioneert als container voor aangepaste modules, welke allemaal onderdeel zijn van één project. Het pakket kan één of meerdere aangepaste modules bevatten die betrekking hebben op elkaar of op modules in de toepassing. <br/><br/>Voorbeelden: wellicht wilt u een pakket aanmaken met één aangepaste module die betrekking heeft op de standaard Accounts module. Of u kunt een pakket aanmaken met verschillende nieuwe modules die samenwerken als project en die betrekking hebben op elkaar en op modules in de toepassing.',
         'exportBtn' => 'Klik op <b>Wijzigingen exporteren</b> om een pakket aan te maken die wijzigingen bevat van specifieke modules die in Studio zijn doorgevoerd.',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Name - Must be alphanumeric, begin with a letter and contain no spaces.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Pakketsleutel bestaat reeds',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Pakketnaam bestaat reeds',
+'LBL_JS_PACKAGE_NAME'=>'Pakketnaam - Moet beginnen met een letter en mag alleen bestaan uit letters, cijfers en lage streepjes. Er mogen geen spaties of andere speciale tekens worden gebruikt.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Sleutel - Moet alfanumeriek zijn en beginnen met een letter.',
 'LBL_JS_VALIDATE_KEY'=>'Sleutel - Moet alfanumeriek zijn, beginnen met een letter en mag geen spaties bevatten.',
 'LBL_JS_VALIDATE_LABEL'=>'Voer een label in dat u kunt gebruiken als weergavenaam voor deze module',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Are you sure you wish to delete this relationship?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Hierdoor wordt deze relatie permanent gemaakt. Weet u zeker dat u deze relatie wilt inzetten?',
 'LBL_CONFIRM_DONT_SAVE' => 'Er zijn wijzigingen doorgevoerd sinds de laatste keer dat u heeft opgeslagen. Wilt u deze opslaan?',
@@ -753,7 +754,7 @@ $mod_strings = array(
 'LBL_POPHELP_DEPENDENT'=>"Create a formula to determine whether this field is visible in layouts.<br/>"
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
-        . "They will not follow the formula in the Sugar Self-Service Portal.",
+        . "Deze volgen de formule in het Sugar zelfbedieningsportaal niet.",
 'LBL_POPHELP_GLOBAL_SEARCH'=>'Selecteer dit veld om hem te gebruiken wanneer er naar records gezocht wordt door Algemeen zoeken te gebruiken in deze module.',
 //Revert Module labels
 'LBL_RESET' => 'Resetten',

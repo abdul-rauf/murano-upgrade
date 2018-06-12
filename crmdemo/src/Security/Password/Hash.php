@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -43,7 +43,7 @@ class Hash
      *
      * @var boolean
      */
-    protected $allowLegacy = true;
+    protected $allowLegacy = false;
 
     /**
      * Enable/disable backend rehash check
@@ -105,7 +105,7 @@ class Hash
 
             self::$instance = $instance = new self(self::getHashBackend($backend, $algo, $options));
 
-            $instance->setAllowLegacy($config->get('passwordHash.allowLegacy', true));
+            $instance->setAllowLegacy($config->get('passwordHash.allowLegacy', false));
             $instance->setRehash($config->get('passwordHash.rehash', true));
         }
         return self::$instance;
@@ -179,6 +179,8 @@ class Hash
             return false;
         }
 
+        // using lower case encoded password
+        $password = strtolower($password);
         if ($this->allowLegacy && $this->isLegacyHash($hash)) {
             return $this->verifyLegacy($password, $hash);
         }

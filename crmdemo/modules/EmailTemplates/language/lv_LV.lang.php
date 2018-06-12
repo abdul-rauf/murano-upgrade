@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -15,14 +15,14 @@ $mod_strings = array(
     'LBL_ADD_DOCUMENT'                  => 'PIevienot Sugar dokumentu',
     'LBL_ADD_FILE'                      => 'Pievienot failu',
     'LBL_ATTACHMENTS'                   => 'Pielikumi',
-    'LBL_BODY'                          => 'Ķermenis:',
+    'LBL_BODY'                          => 'Pamatteksts:',
     'LBL_CLOSE'                         => 'Aizvērt:',
     'LBL_COLON'                         => ':',
     'LBL_DESCRIPTION'                   => 'Apraksts:',
     'LBL_EDIT_ALT_TEXT'                 => 'Rediģēt vienkāršu tekstu',
     'LBL_EMAIL_ATTACHMENT'              => 'E-pasta pielikums',
     'LBL_HIDE_ALT_TEXT'                 => 'Slēpt vienkāršu tekstu',
-    'LBL_HTML_BODY'                     => 'HTML ķermenis',
+    'LBL_HTML_BODY'                     => 'HTML pamatteksts',
     'LBL_INSERT_VARIABLE'               => 'Ievietot mainīgo:',
     'LBL_INSERT_URL_REF'                => 'Ievietot URL atsauci',
     'LBL_INSERT_TRACKER_URL'            => 'Ievietot sekotāja URL:',

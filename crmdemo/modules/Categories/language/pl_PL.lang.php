@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -26,9 +26,9 @@ $mod_strings = array(
     'LBL_CONTEXTMENU_DELETE' => 'Usuń',
     'LBL_SEARCH_TREE' => 'Wyszukaj wg tytułu...',
     'LBL_DEFAULT_TITLE' => 'Domyślny tytuł',
-    'LBL_ADD_NEW' => 'Dodaj [Alt+C]',
+    'LBL_ADD_NEW' => 'Dodaj',
     'NTC_DELETE_CONFIRMATION_FORMATTED_PLURAL' => 'Czy na pewno chcesz usunąć {0}? 
 Wszystkie kategorie zagnieżdżone zostaną także usunięte',
-    'LBL_WRONG_MOVE_PATH' => 'You cannot move a folder into itself.',
-    'ERR_EMPTY_NODE_NAME' => 'You cannot add a category without title',
+    'LBL_WRONG_MOVE_PATH' => 'Nie można przenieść folderu do siebie samego.',
+    'ERR_EMPTY_NODE_NAME' => 'Nie można dodać kategorii bez tytułu',
 );

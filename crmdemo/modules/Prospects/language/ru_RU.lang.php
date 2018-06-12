@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -177,7 +177,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Модуль {{module_name}} содержит неквалифицированные контакты, о которых Вам удалось собрать немного информации, но ее недостаточно для квалификации интереса {{leads_singular_module}}. Информация (к примеру, имя, адрес электронной почты), которая относится к этим {{plural_module_name}}, получена через визитки с разных выставок, конференций и др. {{plural_module_name}} в Sugar являются отдельными записями, поскольку они не относятся к {{contacts_module}}, {{leads_module}}, {{accounts_module}}, или {{opportunities_module}}. Существуют различные способы создания {{plural_module_name}} в Sugar как через {{plural_module_name}} модуль, импорт {{plural_module_name}} и др. Как только {{module_name}} запись создана, Вы можете просмотреть и редактировать информацию, относящуюся к {{module_name}}, в {{plural_module_name}} режиме просмотра записи.',
+    'LBL_HELP_RECORDS' => 'Модуль {{module_name}} содержит неквалифицированные контакты, о которых Вам удалось собрать немного информации, но ее недостаточно для квалификации интереса {{leads_singular_module}}. Информация (к примеру, имя, адрес электронной почты), которая относится к контактам модуля {{plural_module_name}}, получена через визитки с разных выставок, конференций и т. п. {{plural_module_name}} в Sugar являются отдельными записями, поскольку они не относятся к модулям {{contacts_module}}, {{leads_module}}, {{accounts_module}} или {{opportunities_module}}. Существуют различные способы создания записей {{plural_module_name}} в Sugar, используя модуль {{plural_module_name}}, импорт данных модуля {{plural_module_name}} и т. п. После создания записи {{module_name}} можно просматривать и редактировать информацию, относящуюся к контакту модуля {{module_name}}, в режиме просмотра записи {{plural_module_name}}.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{module_name}} модуль содержит неквалифицированные контакты, точнее интересы, о которых вам удалось собрать немного информации, но которой недостаточно для квалификации интереса {{leads_singular_module}}.

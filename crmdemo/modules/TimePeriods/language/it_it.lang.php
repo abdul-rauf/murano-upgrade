@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -42,7 +42,7 @@ $mod_strings = array (
   'LBL_CREATED_BY' => 'Creato Da',
   'LBL_DATE_ENTERED' => 'Data Inserimento',
   'LBL_DATE_MODIFIED' => 'Data Modifica',
-  'LBL_DELETED' => 'Cancellato',
+  'LBL_DELETED' => 'Eliminato',
   
   'LBL_SEARCH_TP_NAME' => 'Arco Temporale',
   'LBL_SEARCH_TP_START_DATE' => 'Data Inizio',
@@ -52,5 +52,6 @@ $mod_strings = array (
   'LBL_LIST_WARNING' => 'Si prega di notare che tutte le modifiche apportate in questo modulo potrebbero potenzialmente interrompere la funzionalità del modulo {0}. Le modifiche relative a {1} dovrebbero essere fatte dalle <a style="text-decoration:none;" href="index.php?module=Forecasts&action=#config">Impostazioni {0}</a>.',
   'LBL_LEAF_CYCLE' => 'Leaf Cycle',
 
-  'LBL_DROPDOWN_TOOLTIP' => '{{start}} a {{end}}'
+  'LBL_DROPDOWN_TOOLTIP' => '{{start}} a {{end}}',
+  'LBL_DROPDOWN_TOOLTIP_RTL' => 'da {{end}} a {{start}}'
 );

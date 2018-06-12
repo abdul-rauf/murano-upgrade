@@ -2,25 +2,19 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*
- * Created on Jul 18, 2007
- *
- * To change the template for this generated file go to
- * Window - Preferences - PHPeclipse - PHP - Code Templates
- */
  function get_body(&$ss, $vardef){
  	$multi = false;
     $radio = false;
  	if (isset ($vardef['type']) && $vardef['type'] == 'multienum')
  		$multi = true;
- 		
+
  	$selected_options = "";
  	if ($multi && !empty($vardef['default'])) {
  		$selected_options = unencodeMultienum( $vardef['default']);
@@ -30,7 +24,8 @@
 
     $edit_mod_strings = return_module_language($GLOBALS['current_language'], 'EditCustomFields');
 
-	if(!empty($_REQUEST['type']) && $_REQUEST['type'] == 'radioenum'){
+	if ((!empty($_REQUEST['type']) && $_REQUEST['type'] == 'radioenum') ||
+        (isset($vardef['type']) && $vardef['type'] == 'radioenum')) {
 		$edit_mod_strings['LBL_DROP_DOWN_LIST'] = $edit_mod_strings['LBL_RADIO_FIELDS'];
         $radio = true;
 	}
@@ -52,7 +47,7 @@
     	$key = $dropdowns[0];
     	$default_dropdowns = $my_list_strings[$key];
     }
-    
+
     $selected_dropdown = '';
     if(!empty($vardef['options'])){
     	$selected_dropdown = $vardef['options'];

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -307,7 +307,7 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
         'layoutsHelp'=> 'Wählen Sie ein <b>Layout zur Bearbeitung</b>aus. <br/<br/>Um das Layout, in dem sich Datenfelder zur Eingabe von Daten befinden, zu ändern, klicken Sie auf <b>Bearbeitungsansicht</b>. <br/><br/>Um das Layout zu ändern, das die in dieser Ansicht eingegebenen Daten anzeigt, klicken Sie auf <b>Detailansicht</b>. <br/><br/>Um Veränderungen an den in der Standard-Liste angezeigten Spalten vorzunehmen, klicken Sie auf <b>Listenansicht</b>. <br/><br/>Um das Layout der einfachen und erweiterten Suche zu ändern, klicken Sie auf <b>Suche</b>.',
         'subpanelHelp'=> 'Wählen Sie ein <b>Sub-Panel</b> zur Bearbeitung aus.',
         'searchHelp' => 'Wählen Sie ein <b>Suche</b>-Layout zur Bearbeitung aus.',
-        'labelsBtn'	=> 'Klicken Sie auf <b>Speichern</b>, um Ihre benutzerdefinierten Bezeichnungen zu speichern.',
+        'labelsBtn'	=> 'Bearbeiten Sie die <b>Bezeichnungen</b>, um die Werte in diesem Modul anzuzeigen.',
         'newPackage'=>'Klicken Sie auf <b>Neues Paket</b>, um ein neues Paket erstellen.',
         'mbHelp'    => '<b>Willkommen beim Modul-Ersteller.</b><br/><br/>Verwenden Sie den <b>Modul-Ersteller</b> zum Erstellen von Paketen mit benutzerdefinierten Modulen, basierend auf Standard- oder benutzerdefinierten Objekten. <br/><br/>Klicken Sie zuerst auf <b>Neues Paket</b>, um ein neues Paket zu erstellen oder wählen Sie ein Paket zur Bearbeitung aus.<br/><br/> Ein <b>Paket</b> fungiert als Behälter für benutzerdefinierte Module, die Teil eines Projekts sind. Das Das Paket kann ein oder mehrere benutzerdefinierte Module enthalten, die miteinander oder mit Modulen in der Anwendung verknüpft sind. <br/><br/>Beispiele: Sie möchten ein Paket mit einem benutzerdefinierten Modul erstellen, das mit dem Standard-Firmenmodul verknüpft ist. Oder vielleicht möchten Sie ein Paket mit mehreren neuen Modulen erstellen, die wie in einem Projekt zusammenarbeiten, und die miteinander und auch mit den Modulen in der Anwendung verknüpft sind.',
         'exportBtn' => 'Klicken Sie auf <b>Anpassungen exportieren</b>, um ein Paket zu erstellen, das die in Studio vorgenommenen Anpassungen für bestimmte Module enthält.',
@@ -713,6 +713,7 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
 'LBL_JS_VALIDATE_NAME'=>'Name – Muss mit einem Buchstaben beginnen und darf nur aus Buchstaben, Zahlen und Unterstrichen bestehen. Keine Leerzeichen oder Sonderzeichen sind erlaubt.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Paketschlüssel existiert bereits',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Paketname existiert bereits',
+'LBL_JS_PACKAGE_NAME'=>'Paketname – Muss mit einem Buchstaben beginnen und darf nur aus Buchstaben, Zahlen und Unterstrichen bestehen. Keine Leerzeichen oder Sonderzeichen sind erlaubt.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Schlüssel - müssen alphanumerisch sein und mit einem Buchstaben beginnen.',
 'LBL_JS_VALIDATE_KEY'=>'Schlüssel - Muss alphanumerisch ohne Leerzeichen sein und mit einem Buchstaben beginnen.',
 'LBL_JS_VALIDATE_LABEL'=>'Bitte geben Sie eine Bezeichnung ein, die als Anzeigename für dieses Modul verwendet wird',
@@ -737,8 +738,8 @@ Wenn das Verkaufschancen-Modul enthalten ist, muss Konten entweder verpflichtend
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Sind Sie sicher, dass Sie diese Beziehung löschen möchten?<br>Hinweis: Dieser Vorgang kann einige Minuten dauern.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Dies macht diese Verknüpfung permanent. Sind Sie sicher, dass Sie die Beziehung anwenden möchten?',
 'LBL_CONFIRM_DONT_SAVE' => 'Seit dem letzten Speichern wurden Änderungen vorgenommen. Möchten Sie jetzt speichern?',

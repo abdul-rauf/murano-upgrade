@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -32,13 +32,13 @@ $mod_strings = array (
 	'LBL_CATEGORY' => 'Kategoria',
 	'LBL_SUBCATEGORY' => 'Podkategoria',
 	'LBL_STATUS' => 'Status',
-	'LBL_IS_TEMPLATE'=>'Szablon',
+	'LBL_IS_TEMPLATE'=>'Jest szablonem',
 	'LBL_TEMPLATE_TYPE'=>'Typ dokumentu',
-	'LBL_REVISION_NAME' => 'Typ wersji',
+	'LBL_REVISION_NAME' => 'Numer wersji',
 	'LBL_MIME' => 'Typ Mime',
 	'LBL_REVISION' => 'Wersja',
-	'LBL_DOCUMENT' => 'Powiązne dokumenty',
-	'LBL_LATEST_REVISION' => 'Ostatnia zmiana',
+	'LBL_DOCUMENT' => 'Powiązany dokument',
+	'LBL_LATEST_REVISION' => 'Najnowsza wersja',
 	'LBL_CHANGE_LOG'=> 'Historia zmian',
 	'LBL_ACTIVE_DATE'=> 'Data publikacji',
 	'LBL_EXPIRATION_DATE' => 'Data wygaśnięcia',
@@ -69,7 +69,7 @@ $mod_strings = array (
 	'LBL_LIST_REVISION' => 'Wersja',
 	'LBL_LIST_LAST_REV_CREATOR' => 'Opublikowano przez',
 	'LBL_LIST_LAST_REV_DATE' => 'Data wersji',
-	'LBL_LIST_VIEW_DOCUMENT'=>'Podgląd',
+	'LBL_LIST_VIEW_DOCUMENT'=>'Wyświetl',
     'LBL_LIST_DOWNLOAD'=> 'Pobierz',
 	'LBL_LIST_ACTIVE_DATE' => 'Data publikacji',
 	'LBL_LIST_EXP_DATE' => 'Data wygaśnięcia',
@@ -80,7 +80,7 @@ $mod_strings = array (
 	//document search form.
 	'LBL_SF_DOCUMENT' => 'Nazwa dokumentu:',
 	'LBL_SF_CATEGORY' => 'Kategoria:',
-	'LBL_SF_SUBCATEGORY'=> 'Pokategoria:',
+	'LBL_SF_SUBCATEGORY'=> 'Podkategoria:',
 	'LBL_SF_ACTIVE_DATE' => 'Data publikacji:',
 	'LBL_SF_EXP_DATE'=> 'Data wygaśnięcia:',
 

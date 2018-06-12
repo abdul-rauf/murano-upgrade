@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -277,7 +277,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => '編輯自訂欄位',
     'LBL_EDIT_TABS'=>'編輯索引標籤',
     'LBL_EMAIL_TITLE' => '電子郵件',
-    'LBL_EMAIL_DESC' => '管理輸出和輸入電子郵件。必須設定電子郵件設定，以讓使用者能夠傳送電子郵件和新聞稿推廣活動。',
+    'LBL_EMAIL_DESC' => '管理外寄電子郵件和輸入電子郵件。必須配置電子郵件設定' .
+                        '以確保使用者能夠傳送電子郵件和推廣活動新聞稿。',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => '各使用者需提供主要電子郵件地址以使用此功能。',
 	'LBL_ENABLE_MAILMERGE' => '啟用電子郵件合併？',
 	'LBL_ENABLED' => '已啟用',
@@ -406,7 +407,8 @@ $mod_strings = array (
     'LBL_LOCALE' => '為您的系統設定預設當地語系化設定',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '－將操作此離線用戶端之人員的「使用者名稱」',
     'LBL_LOGIN_SUGAR_SERVER'                => '使用者名稱：',
-    'LBL_MAILBOX_DESC' => '設定監控輸入電子郵件的群組郵件帳戶，並管理使用者個人輸入郵件帳戶資訊',
+    'LBL_MAILBOX_DESC' => '設定群組郵件帳戶以監控輸入電子郵件' .
+        '並管理使用者的個人輸入郵件帳戶資訊',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'合約類型',
     'LBL_MANAGE_CURRENCIES' => '貨幣：',
     'LBL_MANAGE_GROUPS_TITLE'   => '管理群組',
@@ -631,6 +633,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => '重建 JS 分組檔案',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => '用最新版本的群組檔案重新串連和覆寫現有群組檔案',
+    'LBL_REPAIR_JS_FILES_TITLE' => '修復 Javascript 檔案',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => '修復 JS 檔案',
     'LBL_REPAIR_JS_FILES_PROCESSING' => '正在處理檔案。這可能會需要花費幾分鐘。離開本頁不會取消該過程，因此可隨意離開或等待確認...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => '處理檔案已完成。',
     'LBL_REPAIR_FIELD_CASING_TITLE' => '修復非小寫欄位',
@@ -1009,7 +1013,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => '正在清除附加快取檔案...已完成',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => '如果方塊未核取，則管理員需在系統授權過期后手動重新驗證，否則使用者將無法登入。',
 	'LBL_TRACKER_SETTINGS' => '追蹤器',
-	'LBL_TRACKER_SETTINGS_DESC' => '選取追蹤的系統和使用者資料',
+	'LBL_TRACKER_SETTINGS_DESC' => '啟用/停用追蹤',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> '啟用/停用種子使用者',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> '啟用',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> '停用',
@@ -1162,6 +1166,10 @@ $mod_strings = array (
     'LBL_SPRITES_ADDED' => '新增精靈 {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => '不包括檔案：{0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => '小組許可',
+    'LBL_TBA_CONFIGURATION_DESC' => '啟用團隊存取，並按照模組管理存取。',
+
     //FTS
     'LBL_FTS_TYPE' => '系統類型',
     'LBL_FTS_HOST' => '主機',
@@ -1234,5 +1242,6 @@ $mod_strings = array (
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => '「按一下提交」會同步主要伺服器。',
     'LBL_OFFLINE_ENABLED' => '離線已啟用',
     'LBL_OFFLINE_SETTINGS' => '離線設定',
+
 
 );

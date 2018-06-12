@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -67,15 +67,15 @@ $mod_strings = array (
 	'LBL_SEQUENCE' => 'Sequenza aggiornamento riunione',
 	'LBL_PHONE' => 'Telefono Ufficio:',
 	'LBL_REMINDER_TIME'=>'Tempo di Avviso',
-    'LBL_EMAIL_REMINDER_SENT' => 'Email di promemoria inviata',
+    'LBL_EMAIL_REMINDER_SENT' => 'Promemoria tramite email inviati',
 	'LBL_REMINDER' => 'Ricorda:',
 	'LBL_REMINDER_POPUP' => 'Popup',
 	'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Email a tutti gli invitati',
     'LBL_POPUP_REMINDER' => 'Promemoria Popup',
-    'LBL_POPUP_REMINDER_TIME' => 'Orario Promemoria Popup',
+    'LBL_POPUP_REMINDER_TIME' => 'Ora promemoria popup',
     'LBL_EMAIL_REMINDER' => 'Email di promemoria',
-    'LBL_EMAIL_REMINDER_TIME' => 'Data di invio email di promemoria',
+    'LBL_EMAIL_REMINDER_TIME' => 'Ora promemoria email',
     'LBL_REMOVE' => 'Canc',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Gestione degli invitati',
 	'LBL_SEARCH_BUTTON'=> 'Cerca',
@@ -159,12 +159,13 @@ $mod_strings = array (
     'LBL_REPEAT_END_BY' => 'Da',
     'LBL_REPEAT_DOW' => 'Ripetere Dow',
     'LBL_REPEAT_UNTIL' => 'Ripetere Fino',
-    'LBL_REPEAT_COUNT' => 'Ripetere Conteggio',
+    'LBL_REPEAT_COUNT' => 'Numero delle ricorrenze',
     'LBL_RECURRING_LIMIT_ERROR' => 'Questa chiamata ricorrente non può essere schedulata perchè supera il $limit di ricorrenza massima consentita.',
     'LBL_EDIT_ALL_RECURRENCES' => 'Modifica Tutte le Ricorrenze',
     'LBL_REMOVE_ALL_RECURRENCES' => 'Cancella Tutte le Ricorrenze',
     'LBL_DATE_END_ERROR' => 'La Data di Fine precede la Data di Inizio',
     'LBL_REPEAT_PARENT_ID' => 'Ripetere ID Parent',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID ricorrenza della chiamata. Data di inizio della riunione originale',
     'LBL_RECURRING_SOURCE' => 'Fonte Ricorrente',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Sei sicuro di voler cancellare tutti i record ricorrenti?',
     'LBL_RECURRENCE' => 'Ricorrenza',
@@ -176,7 +177,7 @@ $mod_strings = array (
     'LBL_SEND_INVITES' => 'Invia Inviti',
     'LBL_REMINDER_TITLE' => 'Riunione:',
 
-    'LBL_REVENUELINEITEMS' => 'Elementi dell´Opportunità',
+    'LBL_REVENUELINEITEMS' => 'Elementi dell&#39;opportunità',
 
     'LBL_MEETING_CLOSE_SUCCESS' => 'Riunione chiusa con successo.',
 
@@ -190,7 +191,7 @@ $mod_strings = array (
 
 Dalla vista elenco del modulo {{plural_module_name}}, puoi visualizzare e modificare (tramite in-line editing) le informazioni relative ad una riunione. Azioni aggiuntive sono disponibili nel menu alla fine di ogni riga di Riunione. Puoi selezionare "Chiudi" dal menu nella riga di ogni riunione pianificata per marcarla come completata. 
 
-Gli utenti Sugar, i contatti e leads possono essere aggiunti come invitati nelle riunioni. Le {{plural_module_name}} posso essere create dal modulo {{plural_module_name}}, dal modulo Calendario, tramite importazione, così come dal sottopannello Attività  (per i moduli Legacy) o dalla Dashlet Attività Pianificate (per i moduli Sidecar), in record di moduli relazionati (ad es. Contatti, Aziende, etc.), creando automaticamente una relazione tra i due records.',
+Gli utenti Sugar, i contatti e leads possono essere aggiunti come invitati nelle riunioni. Le {{plural_module_name}} possono essere create dal modulo {{plural_module_name}}, dal modulo Calendario, tramite importazione, così come dal sottopannello Attività  (per i moduli Legacy) o dalla Dashlet Attività Pianificate (per i moduli Sidecar), in record di moduli relazionati (ad es. Contatti, Aziende, etc.), creando automaticamente una relazione tra i due records.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} consiste in un record {{meetings_singular_module}} registrato dagli utenti della tua organizzazione. Le {{plural_module_name}} possono essere in stato "Pianificata", "Effettuata" o "Non Effettuata. Utenti Sugar così come {{contacts_module}} e {{leads_module}} possono essere aggiunti come invitati.

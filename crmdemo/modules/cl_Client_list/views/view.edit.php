@@ -5,7 +5,7 @@ require_once('include/MVC/View/views/view.edit.php');
 
 class cl_Client_listViewEdit extends ViewEdit {
 	function cl_Client_listViewEdit(){
- 		parent::ViewEdit();
+ 		parent::__construct();
 		
 		        $this->useForSubpanel = TRUE;  
 

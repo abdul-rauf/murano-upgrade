@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -13,10 +13,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 
-use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
-
 // load the correct demo data and main application language file depending upon the installer language selected; if
 // it's not found fall back on en_us
+
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 if(file_exists("include/language/{$current_language}.lang.php")){
     require_once FileLoader::validateFilePath("include/language/{$current_language}.lang.php");
 }
@@ -142,6 +143,15 @@ echo '.';
 
 
 ///////////////////////////////////////////////////////////////////////////////
+$titles = $sugar_demodata['titles'];
+$first_name_max = $first_name_count - 1;
+$last_name_max = $last_name_count - 1;
+$street_address_max = $street_address_count - 1;
+$city_array_max = $city_array_count - 1;
+$lead_source_max = count($app_list_strings['lead_source_dom']) - 1;
+$lead_status_max = count($app_list_strings['lead_status_dom']) - 1;
+$title_max = count($titles) - 1;
+$contacts = array();
 ////	ACCOUNTS
 
 // Make a copy of the company name list we can destroy in
@@ -237,6 +247,29 @@ for($i = 0; $i < $number_companies; $i++) {
 	$account_ids[] = $account->id;
 	$accounts[] = $account;
 
+    $contact = new Contact();
+    $contact->first_name = $sugar_demodata['first_name_array'][mt_rand(0, $first_name_max)];
+    $contact->last_name = $sugar_demodata['last_name_array'][mt_rand(0, $last_name_max)];
+    $contact->assigned_user_id = $account->assigned_user_id;
+    $contact->primary_address_street = $sugar_demodata['street_address_array'][mt_rand(0, $street_address_max)];
+    $contact->primary_address_city = $sugar_demodata['city_array'][mt_rand(0, $city_array_max)];
+    $contact->lead_source = array_rand($app_list_strings['lead_source_dom']);
+    $contact->title = $titles[mt_rand(0, $title_max)];
+    $contact->emailAddress->addAddress(createEmailAddress(), true, true);
+    $contact->emailAddress->addAddress(createEmailAddress(), false, false, false, true);
+    $contact->phone_work = create_phone_number();
+    $contact->phone_home = create_phone_number();
+    $contact->phone_mobile = create_phone_number();
+    // Fill in a bogus address
+    $contact->primary_address_state = $account->billing_address_state;
+    $contact->team_id = $account->team_id;
+    $contact->team_set_id = $account->team_set_id;
+    $contact->assigned_user_name = $account->assigned_user_name;
+    $contact->primary_address_postalcode = mt_rand(10000, 99999);
+    $contact->primary_address_country = 'USA';
+    $contact->save();
+    $contacts[] = $contact->id;
+
     for($c = 0; $c < $number_cases; $c++) {
 	// Create a case for the account
 	$case = new aCase();
@@ -277,11 +310,14 @@ for($i = 0; $i < $number_companies; $i++) {
 	$note->save();
 
 	$call = new Call();
+    $call->set_created_by = false;
 	$call->parent_type = 'Accounts';
 	$call->parent_id = $account->id;
 	$call->name = $sugar_demodata['call_seed_data_names'][mt_rand(0,3)];
 	$call->assigned_user_id = $account->assigned_user_id;
 	$call->assigned_user_name = $account->assigned_user_name;
+    $call->created_by = $call->assigned_user_id;
+    $call->created_by_name = $call->assigned_user_name;
 	$call->direction='Outbound';
 	$call->date_start = create_date(). ' ' . create_time();
 	$call->duration_hours='0';
@@ -290,7 +326,9 @@ for($i = 0; $i < $number_companies; $i++) {
     $call->status = array_rand($app_list_strings['call_status_dom']);
 	$call->team_id = $account->team_id;
 	$call->team_set_id = $account->team_set_id;
+    $call->contacts_arr[0] = $contact->id;
 	$call->save();
+    $call->setContactInvitees($call->contacts_arr);
 
     //Set the user to accept the call
     $seed_user->id = $call->assigned_user_id;
@@ -304,19 +342,12 @@ installLog("DemoData: Done Companies + Related Calls, Notes Meetings and Bugs");
 
 unset($accounts_companies_list);
 
-$titles = $sugar_demodata['titles'];
 $account_max = count($account_ids) - 1;
-$first_name_max = $first_name_count - 1;
-$last_name_max = $last_name_count - 1;
-$street_address_max = $street_address_count - 1;
-$city_array_max = $city_array_count - 1;
-$lead_source_max = count($app_list_strings['lead_source_dom']) - 1;
-$lead_status_max = count($app_list_strings['lead_status_dom']) - 1;
-$title_max = count($titles) - 1;
+
 ///////////////////////////////////////////////////////////////////////////////
 ////	DEMO CONTACTS
 installLog("DemoData: Contacts");
-$contacts = array();
+
 for($i=0; $i<$number_contacts; $i++) {
 	$contact = new Contact();
 	$contact->first_name = $sugar_demodata['first_name_array'][mt_rand(0,$first_name_max)];
@@ -359,7 +390,8 @@ for($i=0; $i<1000; $i++)
 	$contact->primary_address_country = 'USA';
 	$contact->save();
     $contacts[] = $contact->id;
-	// Create a linking table entry to assign an account to the contact.
+
+    // Create a linking table entry to assign an account to the contact.
 	$contact->set_relationship('accounts_contacts', array('contact_id'=>$contact->id ,'account_id'=> $account_id, 'primary_account' => 1), false);
 
 	//Create new tasks
@@ -384,6 +416,7 @@ for($i=0; $i<1000; $i++)
 
 	//Create new meetings
 	$meeting = new Meeting();
+    $meeting->set_created_by = false;
 	$key = array_rand($sugar_demodata['meeting_seed_data_names']);
 	$meeting->name = $sugar_demodata['meeting_seed_data_names'][$key];
 	$meeting->date_start = create_date(). ' ' . create_time();
@@ -395,6 +428,8 @@ for($i=0; $i<1000; $i++)
 	$meeting->team_set_id = $contacts_account->team_set_id;
 	$meeting->assigned_user_id = $contacts_account->assigned_user_id;
 	$meeting->assigned_user_name = $contacts_account->assigned_user_name;
+    $meeting->created_by = $meeting->assigned_user_id;
+    $meeting->created_by_name = $meeting->assigned_user_name;
 	$meeting->description = $sugar_demodata['meeting_seed_data_descriptions'];
 	$meeting->status = array_rand($app_list_strings['meeting_status_dom']);
 	$meeting->contact_id = $contact->id;
@@ -402,7 +437,9 @@ for($i=0; $i<1000; $i++)
 	$meeting->parent_type = 'Accounts';
     // dont update vcal
     $meeting->update_vcal  = false;
+    $meeting->contacts_arr[0] = $contact->id;
 	$meeting->save();
+    $meeting->setContactInvitees($meeting->contacts_arr);
 	// leverage the seed user to set the acceptance status on the meeting.
 	$seed_user->id = $meeting->assigned_user_id;
     $meeting->set_accept_status($seed_user,'accept');

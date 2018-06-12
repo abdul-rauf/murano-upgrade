@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'LBL_BLANK'	=> '-κενό-',
+	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Κλήσεις',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Κλήση',
     'LBL_MODULE_TITLE' => 'Κλήσεις: Αρχή',
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Email υπενθύμισης προσκεκλημένων',
     'LBL_EMAIL_REMINDER' => 'Email Υπενθύμισης',
-    'LBL_EMAIL_REMINDER_TIME' => 'Ώρα Email Υπενθύμισης',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup Ώρα Υπενθύμισης',
+    'LBL_EMAIL_REMINDER_TIME' => 'Ώρα υπενθύμισης ηλεκτρονικού ταχυδρομείου',
+    'LBL_POPUP_REMINDER_TIME' => 'Ώρα υπενθύμισης αναδυόμενου',
     'LBL_SEND_BUTTON_TITLE'=>'Αποθήκευση & Αποστολή Προσκεκλημένων [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Αποθήκευση & Αποστολή Προσκεκλημένων',
 	'LBL_DATE_END'=>'Ημερομηνία Λήξης',
 	'LBL_TIME_END'=>'Ώρα Λήξης',
-	'LBL_REMINDER_TIME'=>'Ώρα Υπενθύμισης',
+    'LBL_REMINDER_TIME'=>'Ώρα Υπενθύμισης',
     'LBL_EMAIL_REMINDER_SENT' => 'Αποστολή Email Υπενθύμισης',
     'LBL_SEARCH_BUTTON'=> 'Αναζήτηση',
     'LBL_ACTIVITIES_REPORTS' => 'Αναφορά Δραστηριοτήτων',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Διαγραφή Επαναλαμβανόμενων',
     'LBL_DATE_END_ERROR' => 'Η ημερομηνία λήξης είναι πριν από την ημερομηνία έναρξης',
     'LBL_REPEAT_PARENT_ID' => 'Επανάληψη Γονικής Ταυτότητας',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Ταυτότητα επανάληψης κλήσης. Αρχική ημερομηνία έναρξης κλήσης',
     'LBL_RECURRING_SOURCE' => 'Επαναλαμβανόμενη Πηγή',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Είστε βέβαιοι ότι θέλετε να αφαιρέσετε όλες τις επαναλαμβανόμενες εγγραφές;',
     'LBL_RECURRING_LIMIT_ERROR' => 'Αυτή η επαναλαμβανόμενη τηλεφωνική κλήση δεν μπορεί να προγραμματιστεί, διότι υπερβαίνει το μέγιστο επιτρεπόμενο όριο επαναλήψεων.',

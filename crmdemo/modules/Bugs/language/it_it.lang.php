@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -15,9 +15,9 @@ $mod_strings = array (
   'LBL_MODULE_NAME_SINGULAR'	=> 'Bug',
   'LBL_MODULE_TITLE' => 'Tracker Bug: Home',
   'LBL_MODULE_ID' => 'Bug',
-  'LBL_SEARCH_FORM_TITLE' => 'Cerca Bug',
-  'LBL_LIST_FORM_TITLE' => 'Elenco Bug',
-  'LBL_NEW_FORM_TITLE' => 'Nuovo Bug',
+  'LBL_SEARCH_FORM_TITLE' => 'Cerca bug',
+  'LBL_LIST_FORM_TITLE' => 'Elenco bug',
+  'LBL_NEW_FORM_TITLE' => 'Nuovo bug',
   'LBL_CONTACT_BUG_TITLE' => 'Contatto-Bug:',
   'LBL_SUBJECT' => 'Oggetto:',
   'LBL_BUG' => 'Bug:',
@@ -41,9 +41,9 @@ $mod_strings = array (
   'LBL_LIST_TYPE' => 'Tipo',
   'LBL_RESOLUTION' => 'Soluzione:',
   'LBL_RELEASE' => 'Rilascia:',
-  'LNK_NEW_BUG' => 'Nuovo Bug',
-  'LNK_CREATE'  => 'Nuovo Bug',
-  'LNK_CREATE_WHEN_EMPTY'    => 'Crea un bug adesso.',
+  'LNK_NEW_BUG' => 'Segnala bug',
+  'LNK_CREATE'  => 'Segnala bug',
+  'LNK_CREATE_WHEN_EMPTY'    => 'Segnala un bug adesso.',
   'LNK_BUG_LIST' => 'Bug',
   'LBL_SHOW_MORE' => 'Mostra Più Bugs',
   'NTC_REMOVE_INVITEE' => 'Sei sicuro di voler rimuovere questo contatto dal Bug ?',
@@ -51,9 +51,9 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Per eliminare il bug deve essere specificato il numero del record.',
   'LBL_LIST_MY_BUGS' => 'I miei Bug',
   'LNK_IMPORT_BUGS' => 'Importa Bug',
-  'LBL_FOUND_IN_RELEASE' => 'Trovato nella Release:',
-  'LBL_FIXED_IN_RELEASE' => 'Risolto nella Release:',
-  'LBL_LIST_FIXED_IN_RELEASE' => 'Risolto nella Release',
+  'LBL_FOUND_IN_RELEASE' => 'Trovato nella release:',
+  'LBL_FIXED_IN_RELEASE' => 'Risolto nella release:',
+  'LBL_LIST_FIXED_IN_RELEASE' => 'Risolto nella release',
   'LBL_WORK_LOG' => 'Registro Operazioni:',
   'LBL_SOURCE' => 'Fonte:',
   'LBL_PRODUCT_CATEGORY' => 'Categoria:',
@@ -81,16 +81,16 @@ $mod_strings = array (
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Assegnato a:',
 	'LBL_ASSIGNED_TO_NAME' => 'Assegnato a:',
 
-	'LNK_BUG_REPORTS' => 'Report dei Bug',
-	'LBL_SHOW_IN_PORTAL' => 'Mostralo nel Portale',
+	'LNK_BUG_REPORTS' => 'Visualizza report sui bug',
+	'LBL_SHOW_IN_PORTAL' => 'Mostra nel portale',
 	'LBL_BUG_INFORMATION' => 'Informazioni Bug',
 
     //For export labels
-	'LBL_FOUND_IN_RELEASE_NAME' => 'Trovato nella Release',
+	'LBL_FOUND_IN_RELEASE_NAME' => 'Trovato nel nome release',
     'LBL_PORTAL_VIEWABLE' => 'Portale visibile',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nome Utente Assegnato',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'ID Utente Assegnato',
-    'LBL_EXPORT_FIXED_IN_RELEASE_NAMR' => 'Risolto nella Release',
+    'LBL_EXPORT_FIXED_IN_RELEASE_NAMR' => 'Risolto nel nome release',
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Modificato da ID',
     'LBL_EXPORT_CREATED_BY' => 'Creato da ID',
 
@@ -99,17 +99,17 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} è utilizzato per tracciare e gestire problemi legati ai prodotti, comunemente indicati in {{plural_module_name}} o difetti, sia trovati internamente che riportati dai clienti. I {{plural_module_name}} possono essere ulteriormente smistati e risolti in una release. Il modulo {{plural_module_name}} fornisce agli utenti un modo rapido per rivedere tutti i dettagli del {{module_name}} e il processo utilizzato per rettificarlo. Una volta che un {{module_name}} è creato o registrato, puoi visualizzare e modificare le informazioni pertinenti attraverso la vista elenco del {{module_name}} stesso. Ogni {{module_name}} potrebbe essere relazionato ad altri record di Sugar come {{calls_module}}, {{contacts_module}}, {{cases_module}} e molti altri.',
+    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} è utilizzato per tenere traccia e gestire i problemi legati ai prodotti, comunemente definiti {{plural_module_name}} o difetti, che sono riscontrati sia internamente che dai clienti. I {{plural_module_name}} possono essere ulteriormente valutati monitorando l’anomalia riscontrata ed essere in seguito risolti nella release. Il modulo {{plural_module_name}} fornisce agli utenti un modo rapido per riesaminare tutti i dettagli di {{module_name}} e il processo da utilizzare per porvi rimedio. Dopo aver creato o inoltrato un {{module_name}}}}, è possibile visualizzare e modificare le informazioni pertinenti tramite la vista record del modulo stesso. Ciascun record di {{module_name}} può essere poi correlato a diversi record di Sugar quali, a titolo esemplificativo {{calls_module}}, {{contacts_module}}, {{cases_module}} ecc.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} è utilizzato per tracciare e gestire problemi legati ai prodotti, comunemente indicati in {{plural_module_name}} o difetti, sia trovati internamente che riportati dai clienti. - Modificare i campi di questi records cliccando il singolo campo o il pulsante Modifica. - Visualizza o modifica i link agli altri records nei sottopannelli agendo sul pulsante "Visualizza Dati" in basso a sinistra. - Creare e visualizzare i commenti degli utenti e la cronologia delle modifiche dei records nel modulo {{activitystream_singular_module}} agendo sul pulsante "Activity Stream" in basso a sinistra. - Seguire o impostare come preferito questo record usando le icone alla destra del nome del record. - Azioni aggiuntive sono disponibili nel menù a tendina delle Azioni alla destra del pulsante Modifica.',
+    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} è utilizzato per tenere traccia e gestire i problemi legati ai prodotti, comunemente definiti {{plural_module_name}} o difetti, che sono riscontrati sia internamente che dai clienti. - Modificare i campi di questo record facendo clic su ciascuno di essi o sul pulsante Modifica. - Visualizzare o modificare i collegamenti agli altri record nei sottopannelli spostando la visualizzazione del riquadro in basso a sinistra su "Vista dati". - Creare e visualizzare i commenti degli utenti e registrare la cronologia delle modifiche nel {{activitystream_singular_module}} spostando la visualizzazione del riquadro in basso a sinistra su "Activity Stream". - Seguire o impostare come preferito questo record usando le icone alla destra del nome del record. - Nel menu a discesa Azioni, alla destra del pulsante Modifica, sono disponibili azioni aggiuntive.',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => 'Il modulo {{plural_module_name}} è utilizzato per tracciare e gestire problemi legati ai prodotti, comunemente indicati in {{plural_module_name}} o difetti, sia trovati internamente che riportati dai clienti.
 
 Per creare un {{module_name}}:
 1. Fornire i valori desiderati per i campi.
-- I campi contrassegnati come "Obbligatorio" devono essere compilati prima del salvataggio.
-- Cliccare "Mostra più" per visualizzare ulteriori campi se necessario.
-2. Cliccare "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
+- I campi contrassegnati con "Richiesto" devono essere compilati prima del salvataggio.
+- Fare clic su "Mostra altro" per visualizzare ulteriori campi, se necessario.
+2. Fare clic su "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
 );

@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => '按一下「確認」，將會清除「所有預測」資料並變更「商機檢視」。如果您不無需執行此動作，則按一下取消返回之前的設定。',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        '按一下確認，您將清除所有預測資料，並更改您的商機檢視表。'
+        .'同時還將停用所有附帶營收項目目標模組的流程定義。'
+        .'如果您不打算這樣做，按一下取消返回上一設定。',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => '如果所有「營收項目」已結束而且已贏得至少一個，',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => '則「商機銷售階段」設為「結束並贏得客戶」。',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => '如果所有「營收項目」處於「結束但客戶流失」銷售階段，',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => '透過 {{plural_module_name}} 模組，您可從頭至尾追蹤單個銷售及其所屬項目。各 {{module_name}} 記錄代表一組 {{revenuelineitems_module}} 的標題，以及關聯至其他重要記錄，比如 {{quotes_module}}、{{contacts_module}} 等。各 {{revenuelineitems_singular_module}} 是特定產品的潛在銷售，包含相關銷售資料。各 {{revenuelineitems_singular_module}} 一般會經歷數個「銷售階段」，直到它標記為「結束並贏得客戶」或「結束但客戶流失」。{{module_name}} 記錄反映其 {{revenuelineitems_module}} 的金額及預計結束日期。透過使用 Sugar 的 {{forecasts_singular_module}} 模組來了解和預測銷售趨勢以及實現銷售配額的工作重心，可對 {{plural_module_name}} 和 {{revenuelineitems_module}} 進一步加以利用。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模組可以從頭至尾追蹤單個銷售。每個 {{module_name}} 記錄都代表一次未來的銷售，並包含相關銷售資料，且與其他重要記錄有關，如 {{quotes_module}}、{{contacts_module}} 等等。{{module_name}} 一般會經歷數個「銷售階段」，直到它標記為「結束並贏得客戶」或「結束但客戶流失」。甚至可以透過使用 Sugar 的 {{forecasts_singular_module}} 模組來了解和預測銷售趨勢以及實現銷售配額的工作重心，對 {{plural_module_name}} 和進一步加以利用。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '透過 {{plural_module_name}} 模組，您可從頭至尾追蹤單個銷售及其所屬項目。各 {{module_name}} 記錄代表一組 {{revenuelineitems_module}} 的標題，以及關聯至其他重要記錄，比如 {{quotes_module}}、{{contacts_module}} 等。
+    'LBL_HELP_RECORD' => '透過 {{plural_module_name}} 模組，您可從頭至尾追蹤單個銷售及其所屬項目。各 {{module_name}} 記錄都代表一次未來的銷售，並包含相關銷售資料，且與其他重要記錄有關，比如 {{quotes_module}}、{{contacts_module}} 等。
 
 - 透過按一下單個欄位或「編輯」按鈕，編輯此記錄的欄位。
-- 透過切換左下角窗格至「資料檢視」，檢視或修改子面板其他記錄的連結（包括 {{revenuelineitems_module}}）。
+- 透過切換左下角窗格至「資料檢視」，檢視或修改子面板其他記錄的連結
 - 透過切換左下角窗格至「活動流」，在 {{activitystream_singular_module}} 中執行和檢視使用者註解和記錄變更歷史。
 - 使用記錄名稱右側的圖示追蹤此記錄或將此記錄新增至我的最愛。
 - 「編輯」按鈕右側的下拉式「動作」功能表提供其他動作選項。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '透過 {{plural_module_name}} 模組，您可從頭至尾追蹤單個銷售及其所屬項目。各 {{module_name}} 記錄代表一組 {{revenuelineitems_module}} 的標題，以及關聯至其他重要記錄，比如 {{quotes_module}}、{{contacts_module}} 等。
+    'LBL_HELP_CREATE' => '透過 {{plural_module_name}} 模組，您可從頭至尾追蹤單個銷售及其所屬項目。各 {{module_name}} 記錄都代表一次未來的銷售，並包含相關銷售資料，且與其他重要記錄有關，比如 {{quotes_module}}、{{contacts_module}} 等。
 
 建立 {{module_name}}：
 1. 按需提供欄位值。
  - 標記為「必填」的欄位在儲存前必須先填寫完整。
  - 按一下「顯示更多」以顯示更多欄位（若需）。
-2. 按一下「儲存」以完成新記錄並返回至上一頁。
-3. 儲存后，使用 {{revenuelineitems_module}} 子面板新增項目至 {{module_name}}。',
+2. 按一下「儲存」以完成新記錄並返回至上一頁。',
 
 // END PRO/CORP
 

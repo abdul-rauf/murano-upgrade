@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -55,7 +55,7 @@ $mod_strings = array (
 	'LBL_BILLING_ADDRESS' => 'Adresa e faturës:',
 	'LBL_BUG_FORM_TITLE' => 'Llogaritë',
 	'LBL_BUGS_SUBPANEL_TITLE' => 'Bugs',
-	'LBL_CALLS_SUBPANEL_TITLE' => 'Thirjet',
+	'LBL_CALLS_SUBPANEL_TITLE' => 'Thirrjet',
 	'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE' => 'Identifikimi i fushatës',
 	'LBL_CASES_SUBPANEL_TITLE' => 'Rastet',
 	'LBL_CITY' => 'Qyteti',

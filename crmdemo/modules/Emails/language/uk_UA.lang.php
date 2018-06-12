@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -280,7 +280,7 @@ $mod_strings = array (
 	'LBL_LIST_TITLE_MY_INBOX'	=> 'Папка "Вхідні"',
 	'LBL_LIST_TITLE_MY_SENT'	=> 'Мої надіслані Email-повідомлення',
 	'LBL_LIST_TITLE_MY_ARCHIVES'=> 'Мої архівовані Email-повідомлення',
-    'LBL_ACTIVITIES_REPORTS' 	=> 'Звіт по активностям',
+    'LBL_ACTIVITIES_REPORTS' 	=> 'Звіт за активностями',
 
 	'LNK_CHECK_MY_INBOX'		=> 'Перевірити мою пошту',
 	'LNK_DATE_SENT'				=> 'Дата надсилання',
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'помилка: відсутні облікові дані',
     'ERR_NO_UID' => 'помилка: немає UID',
     'ERR_NO_IEID' => 'помилка: немає ieID',
+    'ERR_INVALID_RECIPIENTS' => 'Один або декілька одержувачів із неприпустимою адресою електронної пошти. ' .
+        'Внесіть виправлення та повторіть спробу.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Неприпустима адреса електронної пошти',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'не вказані одержувачі',

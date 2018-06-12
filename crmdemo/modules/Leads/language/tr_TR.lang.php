@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -152,14 +152,14 @@ $mod_strings = array (
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portal Şifresi Belirlendi:',
     'LBL_POSTAL_CODE' => 'Posta Kodu:',
     'LBL_STREET' => 'Sokak',
-    'LBL_PRIMARY_ADDRESS_CITY' => 'Asıl Adres Şehir',
-    'LBL_PRIMARY_ADDRESS_COUNTRY' => 'Asıl Adres Ülke',
-    'LBL_PRIMARY_ADDRESS_POSTALCODE' => 'Asıl Adres Posta Kodu',
-    'LBL_PRIMARY_ADDRESS_STATE' => 'Asıl Adres Eyalet',
-    'LBL_PRIMARY_ADDRESS_STREET_2'=>'Asıl Adres Sokak 2',
-    'LBL_PRIMARY_ADDRESS_STREET_3'=>'Asıl Adres Sokak 3',
-    'LBL_PRIMARY_ADDRESS_STREET' => 'Asıl Adres Sokak',
-    'LBL_PRIMARY_ADDRESS' => 'Asıl Adres:',
+    'LBL_PRIMARY_ADDRESS_CITY' => 'Birincil Adres Şehir',
+    'LBL_PRIMARY_ADDRESS_COUNTRY' => 'Birincil Adres Ülke',
+    'LBL_PRIMARY_ADDRESS_POSTALCODE' => 'Birincil Adres Posta Kodu',
+    'LBL_PRIMARY_ADDRESS_STATE' => 'Birincil Adres Eyalet',
+    'LBL_PRIMARY_ADDRESS_STREET_2'=>'Birincil Adres Sokak 2',
+    'LBL_PRIMARY_ADDRESS_STREET_3'=>'Birincil Adres Sokak 3',
+    'LBL_PRIMARY_ADDRESS_STREET' => 'Birincil Adres Sokak',
+    'LBL_PRIMARY_ADDRESS' => 'Birincil Adres:',
     'LBL_RECORD_SAVED_SUCCESS' => 'Başarılı şekilde {{moduleSingularLower}} oluşturdunuz: <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_REFERED_BY' => 'Tavsiye Eden:',
     'LBL_REPORTS_TO_ID'=>'Rapor Edilen Kişi ID',
@@ -192,8 +192,8 @@ $mod_strings = array (
     'LNK_NEW_OPPORTUNITY' => 'Fırsat Oluştur',
 	'LNK_SELECT_ACCOUNTS' => '<b>VEYA</b> Müşteri Seç',
     'LNK_SELECT_CONTACTS' => 'VEYA Kontak Seçin',
-    'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternatif Adresi Asıl Adrese Kopyala',
-    'NTC_COPY_PRIMARY_ADDRESS' => 'Asıl Adresi Alternatif Adrese Kopyala',
+    'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternatif adresi birincil adrese kopyala',
+    'NTC_COPY_PRIMARY_ADDRESS' => 'Birincil adresi alternatif adrese kopyala',
     'NTC_DELETE_CONFIRMATION' => 'Bu kaydı silmek istediğinizden emin misiniz?',
     'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Bir Fırsat oluşturulabilmesi için Müşteri kaydı olması gerekir.\nLütfen yeni bir Müşteri oluşturun veya var olan Müşteri kaydını seçin.',
     'NTC_REMOVE_CONFIRMATION' => 'Bu talepten bu potansiyeli silmek istediğinize emin misiniz?',

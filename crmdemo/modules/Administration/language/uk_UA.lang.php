@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -182,7 +182,7 @@ $mod_strings = array (
     'LBL_CLEAR_PDF_FONT_CACHE_DESC'=>'Видалення з кешу файлу, використовуваного для зберігання даних шрифтів PDF',
     'LBL_CONFIG_CHECK' =>'Перевірка конфігурації',
     'LBL_CONFIG_FTS' => 'Налаштувати механізм повнотекстового пошуку',
-    'LBL_CONFIG_TABS'=>'Ви можете переміщати вкладки модулів для налаштування їх видимості у вікні робочого інтерфейсу. Якщо ви хочете виключити дану можливість для користувачів, які не мають прав адміністратора, залиште невідміченою опцію "Дозволити користувачам приховувати вкладки".',
+    'LBL_CONFIG_TABS'=>'Відображення модулів і субпанелей',
 	'LBL_CONFIG_TABS_DESC'=>'Використовуйте перетягування назв модулів, щоб вкладки або субпанелі відображалися або були приховані. Щоб управляти доступом до модулів, використовуйте <a href="?module=ACLRoles&action=index">Role Management.</a>',
 	'LBL_CONFIG_LANGS_DESC'=>'Використовуйте перетягування щоб дозволити або заборонити використання мов, розташованих нижче.',
 	'LBL_CONFIG_TABS_ALLOW_USERS_HIDE_TABS_HELP'=>'Оберіть цю опцію, щоб дати користувачам можливість вибирати вкладки модулів для відображення в налаштуваннях.',
@@ -192,7 +192,7 @@ $mod_strings = array (
     'LBL_CONFIGURE_GROUP_TABS' => 'Налаштування згрупованих фільтрів',
     'LBL_CONFIGURE_SETTINGS_TITLE' => 'Системні налаштування',
     'LBL_CONFIGURE_SETTINGS' => 'Налаштування загальносистемних параметрів',
-    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'Ви можете переміщати вкладки модулів для налаштування їх видимості у вікні робочого інтерфейсу. Якщо ви хочете виключити дану можливість для користувачів, які не мають прав адміністратора, залиште невідміченою опцію "Дозволити користувачам приховувати вкладки".',
+    'LBL_CONFIGURE_TABS_AND_SUBPANELS' => 'Відображення модулів і субпанелей',
     'LBL_CONFIGURE_UPDATER'=>'Настройка оновлень Sugar',
     'LBL_CONTRACT_TITLE'=>'Контракти',
     'LBL_CONTRACT_DESC'=>'Визначити типи договорів для модуля Договори. Коли користувач створює контракт, для вибору відображається випадаюче меню Типи.',
@@ -274,8 +274,9 @@ $mod_strings = array (
     'LBL_DST_UPGRADE' => 'Оновлення:',
     'LBL_EDIT_CUSTOM_FIELDS' => 'Редагувати поля користувача',
     'LBL_EDIT_TABS'=>'Редагувати вкладки',
-    'LBL_EMAIL_TITLE' => 'Email',
-    'LBL_EMAIL_DESC' => 'Управління параметрами Електронної пошти та розсилок. Необхідні параметри повинні бути встановлені для того, щоб забезпечити користувачам можливість розсилки листів і новин компанії.',
+    'LBL_EMAIL_TITLE' => 'Електронна пошта',
+    'LBL_EMAIL_DESC' => 'Керування вихідними та вхідними повідомленнями електронної пошти. Налаштуйте параметри електронної пошти, щоб ' .
+                        'користувачі могли робити розсилку повідомлень електронної пошти, а також інформаційні розсилки.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Для використання даної можливості кожному створюваному користувачеві необхідно в обов&#39;язковому порядку вказувати основну адресу E-mail.',
 	'LBL_ENABLE_MAILMERGE' => 'Увімкнути злиття пошти?',
 	'LBL_ENABLED' => 'Активовано',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Встановлення регіональних налаштувань за замовчуванням',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- Ім&#39;я користувача, який буде користуватися цим клієнтом, що знаходиться поза мережею',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Ім&#39;я кінцевого користувача:',
-    'LBL_MAILBOX_DESC' => 'Налаштування групових облікових записів для вхідної пошти, а також управління персональними обліковими записами користувачів',
+    'LBL_MAILBOX_DESC' => 'Настройка облікових записів пошти групи для моніторингу вхідних повідомлень ' .
+        'і керування даними облікового запису особистих вхідних повідомлень для користувачів',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Типи контрактів',
     'LBL_MANAGE_CURRENCIES' => 'Валюти',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Управління групами',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Оновлення JS Grouping Files',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Перезапис JS Grouping Files їх більш свіжими версіями',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Відновлення файлів JavaScript',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Відновлення файлів JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Відновлення файлів може зайняти кілька хвилин. Перехід на іншу сторінку не зупинить процес відновлення, тому ви можете або залишити дану сторінку, або дочекатися повідомлення про закінчення процесу відновлення ... <br>',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Обробка файлів закінчена',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Відновлення нестрочних полів',
@@ -950,7 +954,7 @@ $mod_strings = array (
     'WARN_VALIDATION_EXPIRED2' =>"дня (днів). Будь ласка, оновіть інформацію на сторінці <a href=\"index.php?action=LicenseSettings&module=Administration\"> \"License Management\" </a> в панелі адміністратора.",
     'WARN_NO_SMTP_SERVER_AVAILABLE_ERROR' =>"Примітка: для відправки повідомлень повинен бути налаштований SMTP-сервер в розділі <a href=\"index.php?module=EmailMan&action=config\"> Налаштування E-mail </a>.",
 	'LBL_MODULEBUILDER'=>'Конструктор модулів',
-	'LBL_MODULEBUILDER_DESC'=>'Створення нових модулів для розширення функціональності SugarCRM',
+	'LBL_MODULEBUILDER_DESC'=>'Створення нових модулів для розширення функціональності Sugar',
 	'LBL_SUGARPORTAL'=>'Портал',
 	'LBL_SUGARPORTAL_DESC' => 'Управління Sugar порталом',
 	'LBL_CLEAR_TEMPLATE_DATA_CACHE_DESC' => 'Видалення кеш файлів шаблонів',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Видалення додаткових кеш-файлів ... готово',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Якщо дана функція відключена, адміністратор повинен буде вручну знову перевіряти достовірність після того, як термін дії ліцензії закінчиться, інакше користувачі не зможуть авторизуватися.',
 	'LBL_TRACKER_SETTINGS' => 'Трекер',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Виберіть дані системи та користувача, які потрібно відслідковувати',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Увімкнути/вимкнути відстеження',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Включити / Відключити демо-користувачів',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Ввімкнути',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Вимкнути',
@@ -1158,6 +1162,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_ADDED' => 'Доданий спрайт {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Виключити файл: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Дозволи для команди',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Надайте команді доступ та керуйте ним за модулями.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Тип системи',
     'LBL_FTS_HOST' => 'Хост (головний комп&#39;ютер)',
@@ -1227,5 +1235,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Натискання кнопки Submit дозволить вам синхронізуватися з майстер-сервером.',
     'LBL_OFFLINE_ENABLED' => 'Offline доступний',
     'LBL_OFFLINE_SETTINGS' => 'Налаштування Offline',
+
 
 );

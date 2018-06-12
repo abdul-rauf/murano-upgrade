@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -62,7 +62,7 @@ $mod_strings = array (
 	'LBL_CONTACT_FIRST_NAME'	=> '연락처의 이름',
 	'LBL_CONTACT_LAST_NAME'		=> '연락처의 성',
 	'LBL_CONTACT_NAME'			=> '연락처',
-	'LBL_CONTACTS_SUBPANEL_TITLE'=> '연락처목록',
+	'LBL_CONTACTS_SUBPANEL_TITLE'=> '연락처',
 	'LBL_CREATED_BY'			=> '생성자:',
 	'LBL_DATE_AND_TIME'			=> '보낸 날짜와 시간',
 	'LBL_DATE_SENT'				=> '보낸 날짜',
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => '오류:자격이 없습니다.',
     'ERR_NO_UID' => '오류:UID가 없습니다.',
     'ERR_NO_IEID' => '오류:ie아이디가 없습니다.',
+    'ERR_INVALID_RECIPIENTS' => '한 명 이상의 수신자가 유효하지 않은 이메일 주소입니다. ' .
+        '이 문제를 수정하고 다시 시도해주십시오.',
+    'ERR_INVALID_EMAIL_ADDRESS' => '유효하지 않은 이메일 주소',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => '수신자가 명시되지 않았습니다.',

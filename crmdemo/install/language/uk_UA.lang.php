@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'У процесі перевірки сумісності були виявлені помилки. Для того, щоб Ваша система функціонувала правильно, будь ласка, виконайте необхідні дії над пунктами, зазначеними нижче, і повторіть перевірку, або почніть установку заново.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference включена (вимкніть цю опцію в php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Не знайдено: Планувальник Sugar буде запущений з обмеженою функціональністю.',
+	'ERR_CHECKSYS_CURL'					=> 'Не знайдено: планувальник Sugar працюватиме в режимі обмеженої функціональності. Служба архівування повідомлень електронної пошти працювати не буде.',
     'ERR_CHECKSYS_IMAP'					=> 'Не знайдено: для нормальної роботи вхідної пошти та кампаній необхідна наявність IMAP-бібліотек',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC не можна включити при використанні MS SQL Server',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Попередження:',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'База даних недоступна',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Підтримку бази даних не виявлено. Переконайтеся, що у вас є драйвери для одного з таких типів підтримуваних баз даних: MySQL, MS SQLServer чи Oracle. Можливо, потрібно видалити коментар до розширення у файлі php.ini або повторно виконати компілювання, використовуючи бінарний файл, який відповідає версії PHP. Щоб дізнатися, як активувати підтримку бази даних, перегляньте посібник користувача.<br><br>Бази даних Oracle і DB2 не підтримуються у версії SugarCRM PRO. Перелік підтримуваних баз даних та іншу інформацію щодо платформи можна знайти за адресою <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Функції для роботи з XML-парсером не виявлені. Ймовірно, Вам необхідно розкоментувати відповідне розширення у файлі php.ini, або перекомпілювати бінарний файл відповідно з вашою версією PHP. Будь ласка, зверніться до керівництва користувача PHP за більш детальною інформацією.',
+    'LBL_CHECKSYS_CSPRNG' => 'Генератор випадкових чисел',
     'ERR_CHECKSYS_MBSTRING'             => 'Не знайдено функція, пов&#39;язану з розширенням MBSTRING. <br /> <br /> Зазвичай модуль MBSTRING не включений за замовчуванням в PHP і повинен бути активований шляхом додавання опції --enable-mbstring при складанні PHP. Будь ласка, зверніться до керівництва користувача PHP за більш детальною інформацією.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Параметр session.save_path у файлі php.ini не встановлений або він посилається на неіснуючу папку. Вам необхідно встановити save_path setting в php.ini або переконатися в існуванні зазначеної папки.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'Не знайдено підтримка ZIP. SugarCRM потрібна підтримка ZIP-архівів для обробки стиснутих  файлів.',
     'ERR_CHECKSYS_BCMATH'				=> 'Підтримка BCMATH  не знайдена.SugarCRM вимагає наявності підтримки BCMATH для твору обчислень з довільною точністю',
     'ERR_CHECKSYS_HTACCESS'             => 'Перевірка на доступність на запис файлу .htaccess завершилася помилкою. Це швидше за все означає, що у вас не встановлена директива AllowOverride для каталогу Sugar.',
+    'ERR_CHECKSYS_CSPRNG' => 'Виняток CSPRNG',
 	'ERR_DB_ADMIN'						=> 'Ім&#39;я адміністратора бази даних і / або пароль вказано невірно. Неможливо з&#39;єднатися з базою даних. Будь ласка, введіть правильні логін і пароль. (Помилка:',
     'ERR_DB_ADMIN_MSSQL'                => 'Ім&#39;я адміністратора бази даних і / або пароль вказано невірно. Неможливо з&#39;єднатися з базою даних. Будь ласка, введіть правильні логін і пароль.',
 	'ERR_DB_EXISTS_NOT'					=> 'Вказана база даних не існує.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'Для використання загального функціоналу програми необхідний ключ, проте для установки він не потрібний. Вам не потрібно вводити ключ зараз, проте ключ буде необхідний після установки програми.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Для установки потрібно мінімум інформації. Рекомендується для нових користувачів.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Надає можливість додаткових установок під час установки. Більшість цих опцій доступно також і після установки з екрану адміністратора. Рекомендується для досвідчених користувачів.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Надає можливість додаткових установок під час установки. Більшість цих опцій доступно також і після установки з екрану адміністратора. Рекомендується для досвідчених користувачів.',
 	'LBL_LANG_1'						=> 'Для використання в Sugar мови, відмінної від мови за замовчуванням (US-English), Ви можете завантажити та встановити зараз мовний пакет. Ви також зможете завантажити та встановити мовний пакет з додатків Sugar. Якщо бажаєте пропустити цей крок, натисніть "Далі".',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Встановити',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Видалити',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'Погодження с умовами ліцензії',
     'LBL_LICENSE_CHECKING'              => 'Перевірка сумісності системи',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Перевірка оточення',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'Перевірка прав доступу до бази даних',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'Перевірка облікових даних DB, FTS.',
     'LBL_LICENSE_CHECK_PASSED'          => 'Система пройшла перевірку на сумісність',
     'LBL_LICENSE_REDIRECT'              => 'Перенаправлення в',
 	'LBL_LICENSE_DIRECTIONS'			=> 'Якщо у Вас є інформація про ліцензії, введіть її в поле нижче.',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'Прочитайте, будь ласка, наступну важливу інформацію перед продовженням установки. Ця інформація допоможе Вам визначити, чи готові Ви до установки програми.',
 
 
-	'LBL_WELCOME_2'						=> 'Документації з установки знаходиться на <a href="http://www.sugarcrm.com/crm/installation" target="_blank"> Sugar Wiki </a>. <BR> <BR> Для зв&#39;язку зі службою підтримки SugarCRM з питань установки, увійдіть Портал підтримки SugarCRM <a target="_blank" href="http://support.sugarcrm.com"> SugarCRM Support Portal </a> і оформите звернення на підтримку.',
+	'LBL_WELCOME_2'						=> 'Документацію з інсталяції можна знайти на веб-сайті <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>.   <BR><BR> Щоб зв&#39;язатися зі спеціалістом служби підтримки SugarCRM для отримання допомоги щодо інсталяції, увійдіть на <a target="_blank" href="http://support.sugarcrm.com">Портал підтримки SugarCRM</a> і подайте запит на отримання підтримки.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>Выберите язык</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Майстер налаштування',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Ласкаво просимо в SugarCRM',
@@ -452,7 +455,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'Запустити вночі масову розсилку листів',
 	'LBL_OOTB_PRUNE'		=> 'Стискати базу даних першого числа кожного місяця',
     'LBL_OOTB_TRACKER'		=> 'Очищати історію останніх переглядів',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Запустити оповіщення про Email-повідомлення',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Запуск сповіщень електронною поштою',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'Оновити таблицю tracker_sessions',
     'LBL_OOTB_CLEANUP_QUEUE' => 'Очистити список завдань',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'Пошук типу системи',
     'LBL_FTS_HELP'      => 'Щоб включити повнотекстовий пошук, виберіть тип пошукового механізму, і введіть хост і порт, де розташований пошуковий механізм. Sugar включає вбудовану підтримку для механізму пошуку elasticsearch.',
     'LBL_FTS_REQUIRED'    => 'Необхідний Elastic Search',
-    'LBL_FTS_ERROR'    => 'Не вдалося встановити з&#39;єднання з сервером повнотекстового пошуку, перевірте налаштування.',
+    'LBL_FTS_CONN_ERROR'    => 'Не вдалося встановити з&#39;єднання із сервером повнотекстового пошуку. Перевірте настройки.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'Немає жодної версії сервера повнотекстового пошуку. Перевірте настройки.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'Виявлено непідтримувану версію Elasticsearch. Використовуйте версії %s',
 
     'LBL_PATCHES_TITLE'     => 'Встановити останні доповнення',
     'LBL_MODULE_TITLE'      => 'Встановити мовні пакети',

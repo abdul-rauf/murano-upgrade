@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Nieuw wachtwoord',
 	'LBL_NEW_PASSWORD1'					=> 'Wachtwoord',
 	'LBL_NEW_PASSWORD2'					=> 'Bevestig Wachtwoord',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Wachtwoord is succesvol gewijzigd',
+    'LBL_NEW_USER_PASSWORD_1' => 'Wachtwoord is succesvol gewijzigd',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'Een e-mail met systeem-gegenereerd wachtwoord is verzonden naar gebruiker.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Wachtwoord succesvol aangemaakt.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Wachtwoord succesvol aangemaakt.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Nieuwe gebruiker',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Nieuwe gebruiker [Alt+N]',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Quotas',
     'LBL_FORECASTS'                     => 'Forecasts',
     'LBL_WORKSHEETS'                    => 'Werkbladen',
+	'LBL_CALENDARS'                     => 'Agenda&#39;s',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Haal een andere CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Wijzig naar Geluid',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Wijzig naar Afbeelding',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Telefoon (werk)',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Publiceer op mijn locatie',
     'LBL_ICAL_PUB_URL'                  => 'iCal integratie URL',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Gebruik deze URL om te abonneren op de Sugar kalender in iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Gebruik deze URL om u aan te melden voor uw Sugar agenda in iCal ondersteunde' .
+                                           'applicaties. Sugar agenda evenementen zijn als alleen-lezen te bekijken' .
+                                           'in externe agenda-applicaties en eventuele bewerkingen van evenementen' .
+                                           '(bijv. vergaderingen, oproepen, etc.) kunnen alleen in Sugar worden gedaan.',
 	'LBL_YOUR_QUERY_URL'				=> 'Agenda URL',
 	'LNK_NEW_USER'						=> 'Nieuwe Gebruiker',
 	'LNK_NEW_PORTAL_USER'				=> 'Nieuwe Portal API gebruiker',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Gebruikersrapportages',
     'LBL_CONTACTS_SYNC' => 'Contactpersonen',
-
+    'LBL_DETAIL' => 'Gebruikersprofiel',
 ); // END STRINGS DEFS
 
 ?>

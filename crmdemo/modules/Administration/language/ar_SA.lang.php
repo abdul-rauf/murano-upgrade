@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -275,7 +275,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => 'تعديل الحقول المخصصة',
     'LBL_EDIT_TABS'=>'تحرير علامات التبويب',
     'LBL_EMAIL_TITLE' => 'البريد الإلكتروني',
-    'LBL_EMAIL_DESC' => 'إدارة رسائل البريد الإلكتروني الصادرة والواردة. يجب تكوين إعدادات البريد الإلكتروني حتى يتمكن المستخدمون من إرسال رسالة إلكترونية وحملات رسائل إخبارية.',
+    'LBL_EMAIL_DESC' => 'إدارة البريد الإلكتروني الصادر والوراد. يجب تكوين إعدادات البريد الإلكتروني من أجل ' .
+                        'تمكين المستخدمين من إرسال البريد الإلكتروني وحملات الرسائل الإخبارية.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'يتطلب عنوان بريد إلكتروني أساسيًا لكل مستخدم لاستخدام هذه الميزة.',
 	'LBL_ENABLE_MAILMERGE' => 'تمكين دمج البريد؟',
 	'LBL_ENABLED' => 'مُمكَّن',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'تعيين إعدادات تعريب للنظام الخاص بك',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- اسم المستخدم الخاص بالشخص الذي سيقوم بتشغيل العميل غير المتصل',
     'LBL_LOGIN_SUGAR_SERVER'                => 'اسم المستخدم النهائي:',
-    'LBL_MAILBOX_DESC' => 'إنشاء حسابات البريد الجماعي لمراقبة البريد الإلكتروني الوارد وإدارة معلومات حساب البريد الوارد الشخصي للمستخدمين',
+    'LBL_MAILBOX_DESC' => 'إعداد حسابات بريد مجموعة لمراقبة البريد الإلكتروني الوارد ' .
+        'وإدارة معلومات حساب البريد الوارد الشخصي للمستخدمين',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'أنواع العقود',
     'LBL_MANAGE_CURRENCIES' => 'العملات',
     'LBL_MANAGE_GROUPS_TITLE'   => 'إدارة المجموعات',
@@ -629,6 +631,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'إعادة إنشاء الملفات المجمعة JS',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'إعادة السلسلة واستبدال ملفات المجموعة الموجودة بأحدث إصدارات ملفات المجموعة',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'إصلاح ملفات javascript',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'إصلاح ملفات JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'معالجة الملفات. قد يستغرق هذا عدة دقائق.  الانتقال من هذه الصفحة لن يلغي المعالجة، لذا يمكنك الانتقال كما تشاء أو الانتظار للتأكيد...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'تمت معالجة الملفات.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'إصلاح حقول الأحرف غير الصغيرة',
@@ -1010,7 +1014,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'يتم الآن مسح ملفات الذاكرة المؤقتة الإضافية...تم',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'في حالة عدم التحقق من هذا المربع، سيُطلب من المسؤول إعادة التحقق يدويًا بعد انتهاء ترخيص النظام، وإلا فلن يستطيع المستخدمون تسجيل الدخول.',
 	'LBL_TRACKER_SETTINGS' => 'المتعقب',
-	'LBL_TRACKER_SETTINGS_DESC' => 'حدد بيانات النظام وبيانات المستخدم التي يتم تعقبها',
+	'LBL_TRACKER_SETTINGS_DESC' => 'تمكين/تعطيل التتبع',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'تمكين/تعطيل المستخدمين التجريبيين',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'تنشيط',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'إلغاء التنشيط',
@@ -1164,6 +1168,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_ADDED' => 'نقوش متحركة مضافة {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'استبعاد ملف: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'الإذون المستندة إلى الفريق',
+    'LBL_TBA_CONFIGURATION_DESC' => 'قم بتمكين وصول الفريق، وإدارة الوصول بواسطة الوحدة.',
+
     //FTS
     'LBL_FTS_TYPE' => 'نوع النظام',
     'LBL_FTS_HOST' => 'مضيف',
@@ -1236,5 +1244,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'النقر فوق تسليم سيزامنك مع الخادم الرئيسي.',
     'LBL_OFFLINE_ENABLED' => 'تم تمكين عدم الاتصال',
     'LBL_OFFLINE_SETTINGS' => 'إعدادات عدم الاتصال',
+
 
 );

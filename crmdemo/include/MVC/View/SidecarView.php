@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -22,7 +22,6 @@
 
 require_once('include/MVC/View/SugarView.php');
 require_once('include/SugarTheme/SidecarTheme.php');
-require_once 'ModuleInstall/ModuleInstaller.php';
 
 class SidecarView extends SugarView
 {
@@ -50,12 +49,14 @@ class SidecarView extends SugarView
     {
         global $app_strings;
 
+        SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
+        $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
         //Rebuild config file if it doesn't exist
         if(!file_exists($this->configFile)) {
-           ModuleInstaller::handleBaseConfig();
+           $moduleInstallerClass::handleBaseConfig();
         }
         $this->ss->assign("configFile", $this->configFile);
-        $config = ModuleInstaller::getBaseConfig();
+        $config = $moduleInstallerClass::getBaseConfig();
         $this->ss->assign('configHash', md5(serialize($config)));
 
         $sugarSidecarPath = ensureJSCacheFilesExist();
@@ -67,6 +68,7 @@ class SidecarView extends SugarView
         if (SugarAutoLoader::fileExists($voodooFile)) {
             $this->ss->assign('voodooFile', $voodooFile);
         }
+
 
         //Load sidecar theme css
         $theme = new SidecarTheme();

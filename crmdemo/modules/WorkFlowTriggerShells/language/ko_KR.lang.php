@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -101,7 +101,7 @@ $mod_strings = array (
 
 
  	'LBL_NEW_FILTER_BUTTON_KEY' => 'F',
- 	'LBL_NEW_FILTER_BUTTON_TITLE' => '신규 필터 말들기',
+ 	'LBL_NEW_FILTER_BUTTON_TITLE' => '신규 필터 만들기',
  	'LBL_NEW_FILTER_BUTTON_LABEL' => '신규 필터 말들기',
 
   	'LBL_NEW_TRIGGER_BUTTON_KEY' => 'T',
@@ -109,7 +109,7 @@ $mod_strings = array (
  	'LBL_NEW_TRIGGER_BUTTON_LABEL' => '신규 영업기회 만들기',
 
  	'LBL_LIST_FRAME_SEC' => '필터',
- 	'LBL_LIST_FRAME_PRI' => '영업기회',
+ 	'LBL_LIST_FRAME_PRI' => '트리거: ',
 
 
  	'LBL_TRIGGER_FILTER_TITLE' => '영업기회 필터',

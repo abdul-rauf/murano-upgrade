@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Видалити файли засобів діагностики',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Видалити тимчасові PDF файли',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Оновити таблицю tracker_sessions',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Запустити оповіщення про Email-повідомлення',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Запуск сповіщень електронною поштою',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Очистити список завдань',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Створити майбутні часові проміжки',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Update KBContent articles.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Опублікуйте затверджені статті та статті бази знань, термін дії яких скоро вичерпається.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Запустити заплановане завдання',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Заплановане завдання Advanced Workflow',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Інтервал:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Оновити завдання',
 'LBL_POLLMONITOREDINBOXES' => 'Перевірити облікові записи вхідної пошти',
 'LBL_PERFORMFULLFTSINDEX' => 'Повнотекстова Індекс-система пошуку',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Видалити тимчасові PDF-файли',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Публікація затверджених статей і завершення терміну дії статей бази знань.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Планувальник черги Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Видалити файли засобів діагностики',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Видалити тимчасові файли',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Запустити вночі масову розсилку листів',
 'LBL_ASYNCMASSUPDATE' => 'Провести асинхронні масові оновлення',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Оновлювати таблиці сесій трекера',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Створити майбутні часові проміжки',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'Запустити розсилку Email-повідомлень',
+'LBL_SENDEMAILREMINDERS'=> 'Запуск надсилання сповіщень електронною поштою',
 'LBL_CLEANJOBQUEUE' => 'Очищення списку завдань',
 'LBL_CLEANOLDRECORDLISTS' => 'Очистити списки зі старими записами',
 );

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -17,6 +17,7 @@ $files = array(
     'modules/HealthCheck/Scanner/Scanner.php' => 'HealthCheck/Scanner/Scanner.php',
     'modules/HealthCheck/Scanner/ScannerCli.php' => 'HealthCheck/Scanner/ScannerCli.php',
     'modules/HealthCheck/Scanner/ScannerMeta.php' => 'HealthCheck/Scanner/ScannerMeta.php',
+    'modules/HealthCheck/Scanner/removed-php4-constructors.php' => 'HealthCheck/Scanner/removed-php4-constructors.php',
     'modules/HealthCheck/HealthCheckClient.php' => 'HealthCheck/HealthCheckClient.php',
     'modules/HealthCheck/HealthCheckHelper.php' => 'HealthCheck/HealthCheckHelper.php',
     'modules/HealthCheck/language/en_us.lang.php' => 'HealthCheck/language/en_us.lang.php'

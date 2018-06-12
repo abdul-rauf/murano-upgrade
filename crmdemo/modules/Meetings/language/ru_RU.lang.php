@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'E-mail',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Отправить Email-сообщение всем приглашенным',
     'LBL_POPUP_REMINDER' => 'Всплывающее напоминание',
-    'LBL_POPUP_REMINDER_TIME' => 'Всплывающее окно напоминания времени',
+    'LBL_POPUP_REMINDER_TIME' => 'Время всплывающего напоминания по электронной почте',
     'LBL_EMAIL_REMINDER' => 'Email-напоминание',
-    'LBL_EMAIL_REMINDER_TIME' => 'Время Email-напоминания',
+    'LBL_EMAIL_REMINDER_TIME' => 'Время напоминания по электронной почте',
     'LBL_REMOVE' => 'удал.',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Планирование',
 	'LBL_SEARCH_BUTTON'=> 'Поиск',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Удалить все повторения',
     'LBL_DATE_END_ERROR' => 'Дата окончания должна выбираться из диапазона до даты начала',
     'LBL_REPEAT_PARENT_ID' => 'Родительский ID повторений',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID повторения втречи. Дата первоначальной встречи',
     'LBL_RECURRING_SOURCE' => 'Источник повторений',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Вы действительно хотите удалить все повторяющиеся записи?',
     'LBL_RECURRENCE' => 'Повторение',
@@ -186,7 +187,11 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} состоит из записей {{meetings_singular_module}}, зарегистрированных пользователями Вашей организации. {{plural_module_name}} могут находиться в статусе "Запланирована", "Состоялась", или "Отменена". Из контекста списочного представления {{plural_module_name}}, Вы можете нажать кнопку Закрыть в действиях строки любой из запланированных {{meetings_singular_module}} для того, чтобы пометить ее как состоявшуюся. Пользователи Sugar, как {{contacts_module}} и {{leads_module}} могут быть добавлены в качестве приглашенных. Существуют различные способы создания {{meetings_module}} в Sugar, такие как через модуль {{plural_module_name}}, модуль {{calendar_module}}, импорт {{meetings_module}} и т.д. Пользователи также могут запланировать {{meetings_module}} через субпанель Активности (для предыдущих версий модулей) или дашлет Запланированные активности (для модулей Sidecar), в связанных записях модуля (например, {{contacts_module}}, {{accounts_module}}, {{leads_module}} и т.д.), который автоматически создает связь между обеими записями. После создания записи {{meetings_singular_module}}, Вы можете просматривать и редактировать информацию, касающуюся {{meetings_singular_module}} через режим детального просмотра {{module_name}}.',
+    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} состоит из записей встреч, которые могут находиться в статусе "Запланирована", "Состоялась" или "Отменена". Дата начала встреч, которые должны состояться в течении 24 часов, выделена синим цветом. Дата начала просроченных встреч выделена красным.
+
+С помощью списочного представления {{plural_module_name}} можно просматривать и редактировать данные о встречах. Дополнительные действия доступны в меню в конце строки каждой встречи. Нажмите "Закрыть" в действиях строки любой из запланированных встреч для того, чтобы пометить ее как состоявшуюся.
+
+Пользователи, контакты и предварительные контакты Sugar могут быть добавлены в качестве приглашенных. Существуют различные способы создания {{plural_module_name}} в Sugar, используя модуль {{plural_module_name}}, модуль Календарь, импорт, а также через субпанель Мероприятия (для предыдущих версий модулей) или дашлет Запланированные мероприятия (для модулей Sidecar) в записях связанного модуля (например, Контакты, Контрагенты и т.д.), который автоматически создает связь между обеими записями.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Модуль {{plural_module_name}} состоит из записей {{meetings_singular_module}}, зарегистрированных пользователями Вашей организации. {{plural_module_name}} могут находиться в статусе "Запланирована", "Состоялась", или "Отменена". Пользователи Sugar, как {{contacts_module}} и {{leads_module}} могут быть добавлены в качестве приглашенных. 

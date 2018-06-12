@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -193,7 +193,12 @@ $GLOBALS['log']->info('----->InboundEmail now saving self');
 $previousTeamAccessCheck = isset($GLOBALS['sugar_config']['disable_team_access_check']) ? $GLOBALS['sugar_config']['disable_team_access_check'] : null;
 $GLOBALS['sugar_config']['disable_team_access_check'] = TRUE;
 
-$monitor_fields = array('name', 'status', 'team_id', 'team_set_id');
+$monitor_fields = array(
+    'name',
+    'status',
+    'team_id',
+    'team_set_id',
+);
 
 $current_monitor_fields = array();
 foreach ($monitor_fields as $singleField) {

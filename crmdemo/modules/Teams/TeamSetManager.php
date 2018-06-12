@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -338,10 +338,14 @@ class TeamSetManager {
 		if(!is_array($teamSets)){
 			$teamSets = array();
 		}
-		foreach($team_names as $team_id => $team_name){
-			$tm = $teams[$team_id];
-			$teamSets[$team_set_id][] = array('id' => $team_id, 'name' => $team_name, 'name_2' => $tm->name_2);
-		}
+        foreach ($team_names as $team_id => $team_name) {
+            $tm = $teams[$team_id];
+            $teamSets[$team_set_id][] = array(
+                'id' => (string) $team_id,
+                'name' => $team_name,
+                'name_2' => $tm->name_2,
+            );
+        }
 
 	 	sugar_cache_put(TEAM_SET_CACHE_KEY,$teamSets);
 
@@ -367,6 +371,44 @@ class TeamSetManager {
 		if(empty($team_set_id)) return array();
 		return self::getFormattedTeamNames(self::getUnformattedTeamsFromSet($team_set_id));
 	}
+
+    /**
+     * Return a formatted list of teams with badges.
+     *
+     * @param $focus
+     * @param bool|false $forDisplay
+     * @return mixed|string|void
+     */
+    public static function getFormattedTeamsFromSet($focus, $forDisplay = false)
+    {
+        $result = array();
+
+        $team_set_id = $focus->team_set_id ? $focus->team_set_id : $focus->team_id;
+        $teams = self::getTeamsFromSet($team_set_id);
+
+
+        foreach ($teams as $key => $row) {
+            $isPrimaryTeam = false;
+            $row['title'] = $forDisplay ?
+                $row['display_name'] :
+                (!empty($row['name']) ? $row['name'] : $row['name_2']);
+
+            if (!empty($focus->team_id) && $row['id'] == $focus->team_id) {
+                $row['badges']['primary'] = $isPrimaryTeam = true;
+            }
+
+
+            if ($isPrimaryTeam) {
+                array_unshift($result, $row);
+            } else {
+                array_push($result, $row);
+            }
+        }
+
+        $detailView = new Sugar_Smarty();
+        $detailView->assign('teams', $result);
+        return $detailView->fetch('modules/Teams/tpls/DetailView.tpl');
+    }
 
 	/**
 	 * Return a comma delimited list of teams for display purposes

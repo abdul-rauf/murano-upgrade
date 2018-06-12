@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -125,7 +125,7 @@
                     }
                     var filterPopulate = this.get('filter_populate') || {};
                     _.each(this._filterRelate, function(toField, fromField) {
-                        filterPopulate[toField] = {$in: [relateModel.get(fromField)]};
+                        filterPopulate[toField] = relateModel.get(fromField);
 
                         var relateNameField = _.find(relateModel.fields, function(field) {
                             return field.id_name === fromField;

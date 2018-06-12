@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -217,7 +217,7 @@ $mod_strings = array (
   'LBL_NAVIGATION_MENU_TRACKERS' => 'Sekotāji',
   'LBL_NAVIGATION_MENU_MARKETING' => 'Mārketings',
   'LBL_NAVIGATION_MENU_SEND_EMAIL' => 'Sūtīt e-pastu',
-  'LBL_NAVIGATION_MENU_SUBSCRIPTIONS' => 'Abonamenti',
+  'LBL_NAVIGATION_MENU_SUBSCRIPTIONS' => 'Abonementi',
   'LBL_SUBSCRIPTION_TARGET_WIZARD_DESC' =>  'Šis nodefinēs mērķu sarakstu ar tipu Abonementi, šai kampaņai .<br>  Šis mērķu saraksts tiks izmantots, lai izsūtītu šīs kampaņas e-pastus   <br>Ja Jums nav saraksta, tiks izveidots tukšs saraksts.',
   'LBL_UNSUBSCRIPTION_TARGET_WIZARD_DESC' => 'Šis nodefinēs mērķu sarakstu ar tipu Atrakstīšanās, šai kampaņai .<br>  Šis mērķu saraksts saturēs cilvēku vārdus kuri ir atteikušies no jūsu kampaņas un ar kuriem nevajadzētu sazināties caur e-pastu  <br>Ja Jums nav saraksta, tiks izveidots tukšs saraksts.',
   'LBL_TEST_TARGET_WIZARD_DESC' => 'Šis nodefinēs mērķu sarakstu ar tipu Tests, šai kampaņai .<br>  Šis mērķu saraksts tiks izmantots, lai izsūtītu šīs kampaņas testa e-pastus   <br>Ja Jums nav saraksta, tiks izveidots tukšs saraksts.',
@@ -300,7 +300,7 @@ $mod_strings = array (
   'LBL_SSL_DESC'                              => 'Ja jūsu pasta serveris atbalsta drošo soketu savienojumus, aktivizējot šo tiks ietekmēti SSL savienojumi importējot e-pastus.',
   'LBL_SSL'                                   => 'Lietot SSL',
   //campaign diagnostics
-  'LNK_CAMPAIGN_DIGNOSTIC_LINK' => 'Kampaņas iespējams nefunkcionē kā plānots un Jūsu e-pasti iespējams nav nosūtīti sekojošu iemeslu dēļ:',
+  'LNK_CAMPAIGN_DIGNOSTIC_LINK' => 'Kampaņas, iespējams, nefunkcionē kā plānots, un Jūsu e-pasti, iespējams, nav nosūtīti sekojošu iemeslu dēļ:',
   'LBL_CAMPAIGN_DIAGNOSTICS'  => 'Kampaņas diagnostika',
   'LBL_DIAGNOSTIC'            => 'Diagnostika',
   'LBL_MAILBOX_CHECK1_GOOD'   => 'Pasta konti ar noraidīto ziņojumu apstrādi atrasti:',
@@ -356,8 +356,8 @@ $mod_strings = array (
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Lūdzu aizpildiet visus obligātos laukus',
     'LBL_NOT_VALID_EMAIL_ADDRESS' =>'Nederīga e-pasta adrese',
     'LBL_AVALAIBLE_FIELDS_HEADER' => 'Pieejamie lauki',
-    'LBL_LEAD_FORM_FIRST_HEADER' => 'Interesentu forma(pirmā kolonna)',
-    'LBL_LEAD_FORM_SECOND_HEADER' =>'Interesentu forma(otrā kolonna)',
+    'LBL_LEAD_FORM_FIRST_HEADER' => 'Interesentu forma (pirmā kolonna)',
+    'LBL_LEAD_FORM_SECOND_HEADER' =>'Interesentu forma (otrā kolonna)',
     'LBL_LEAD_MODULE'  => 'Interesenti',
     'LBL_CREATE_WEB_TO_LEAD_FORM' => 'Izveidot web-to-lead formu',
     'LBL_SELECT_REQUIRED_LEAD_FIELDS' => 'Lūdzu atzīmē nepieciešamos laikus:',

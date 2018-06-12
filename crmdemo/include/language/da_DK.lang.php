@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,7 +56,7 @@ $app_list_strings = array (
     'TaxRates'=>'Momssatser',
     'ContractTypes' => 'Kontrakttyper',
     'Schedulers'=>'Planlæggere',
-    'Project'=>'Projekt',
+    'Project'=>'Projekter',
     'ProjectTask'=>'Projektopgaver',
     'Campaigns'=>'Kampagner',
     'CampaignLog'=>'Kampagnelog',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Filter',
     'Comments' => 'Kommentar',
     'Currencies' => 'Valuta',
-    'Project' => 'Projekt',
     'ProductTemplates' => 'Produkt skabelon',
-    'ProductCategories' => 'Produktkategori',
     'ProductTypes' => 'Produkttype:',
     'Shippers' => 'Speditør',
     'Subscriptions' => 'Abonnement',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Fre",
                 '7'=>"Lør",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Sø",
+            '2'=>"Ma",
+            '3'=>"Ti",
+            '4'=>"On",
+            '5'=>"To",
+            '6'=>"Fr",
+            '7'=>"Lø",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Søn',
         '1' => 'Man',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'år',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Indtil',
+        'Occurrences' => 'Forekomster',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Ingen',
+        'Each' => 'Hver',
+        'On' => 'På den',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'først',
+        'second' => 'sekund',
+        'third' => 'tredje',
+        'fourth' => 'fjerde',
+        'fifth' => 'femte',
+        'last' => 'sidste',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Søndag',
+        'Mon' => 'Mandag',
+        'Tue' => 'Tirsdag',
+        'Wed' => 'Onsdag',
+        'Thu' => 'Torsdag',
+        'Fri' => 'Fredag',
+        'Sat' => 'Lørdag',
+        'Day' => 'Dag',
+        'WD'  => 'Ugedag',
+        'WE'  => 'Weekenddag'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Midt',
         'end' => 'Slut',
         'top' => 'Top',
+        'total' => 'I alt',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Tragt',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Lys',
       'dark' => 'Mørk',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Flyt',
@@ -1947,14 +2066,14 @@ $app_list_strings = array (
         ),
         /* Australia */
         "AU" => array(
-            "1" => array("code" => "ACT", "name" => "Australian Capital Territory"),
+            "1" => array("code" => "ACT", "name" => "Australiens hovedstadsområde"),
             "2" => array("code" => "NSW", "name" => "New South Wales"),
             "3" => array("code" => "NT", "name" => "Northern Territory"),
             "4" => array("code" => "QLD", "name" => "Queensland"),
-            "5" => array("code" => "SA", "name" => "South Australia"),
+            "5" => array("code" => "SA", "name" => "Sydaustralien"),
             "6" => array("code" => "TAS", "name" => "Tasmania"),
             "7" => array("code" => "VIC", "name" => "Victoria"),
-            "8" => array("code" => "WA", "name" => "Western Australia")
+            "8" => array("code" => "WA", "name" => "Vestaustralien")
         ),
         /*Austria */
         "AT" => array(
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "Christ Church"),
-            "2" => array("code" => "AND", "name" => "Saint Andrew"),
+            "2" => array("code" => "OG", "name" => "Saint Andrew"),
             "3" => array("code" => "GEO", "name" => "Saint George"),
             "4" => array("code" => "JAM", "name" => "Saint James"),
             "5" => array("code" => "JOH", "name" => "Saint John"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "OG", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "ELLER", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Southern Nations - Nationalities"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "ELLER", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "ELLER", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston sogn"),
             "4" => array("code" => "MAN", "name" => "Manchester sogn"),
             "5" => array("code" => "POR", "name" => "Portland sogn"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "OG", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann sogn"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine sogn"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth sogn"),
@@ -4227,7 +4346,7 @@ $app_list_strings = array (
             "2" => array("code" => "ANT", "name" => "St. Anthony sogn"),
             "3" => array("code" => "LAZ", "name" => "St. Lazarus sogn"),
             "4" => array("code" => "CAT", "name" => "Cathedral sogn"),
-            "5" => array("code" => "LAW", "name" => "St. Lawrence sogn")
+            "5" => array("code" => "LOV", "name" => "St. Lawrence sogn")
         ),
         /* Macedonia */
         /* same zone code for BOG CEN DEB DEM KAR KRI MAK NOV STA STR VRA ! */
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "ELLER", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "ELLER", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -5899,7 +6018,7 @@ $app_list_strings = array (
             "9" => array("code" => "HL", "name" => "Halab"),
             "10" => array("code" => "HM", "name" => "Hamah"),
             "11" => array("code" => "HI", "name" => "Hims"),
-            "12" => array("code" => "ID", "name" => "Idlib"),
+            "12" => array("code" => "Id", "name" => "Idlib"),
             "13" => array("code" => "RD", "name" => "Rif Dimashq"),
             "14" => array("code" => "TA", "name" => "Tartus")
         ),
@@ -6436,13 +6555,13 @@ $app_list_strings = array (
         "US" => array(
             "1" => array("code" => "AL", "name" => "Alabama"),
             "2" => array("code" => "AK", "name" => "Alaska"),
-            "3" => array("code" => "AS", "name" => "American Samoa"),
+            "3" => array("code" => "AS", "name" => "Amerikansk Samoa"),
             "4" => array("code" => "AZ", "name" => "Arizona"),
             "5" => array("code" => "AR", "name" => "Arkansas"),
             "6" => array("code" => "AF", "name" => "Armed Forces Africa"),
-            "7" => array("code" => "AA", "name" => "Armed Forces Americas"),
+            "7" => array("code" => "AA", "name" => "Nord- og Sydamerikas væbnede styrker"),
             "8" => array("code" => "AC", "name" => "Armed Forces Canada"),
-            "9" => array("code" => "AE", "name" => "Armed Forces Europe"),
+            "9" => array("code" => "AE", "name" => "Europas væbnede styrker"),
             "10" => array("code" => "AM", "name" => "Armed Forces Middle East"),
             "11" => array("code" => "AP", "name" => "Armed Forces Pacific"),
             "12" => array("code" => "CA", "name" => "California"),
@@ -6455,7 +6574,7 @@ $app_list_strings = array (
             "19" => array("code" => "GA", "name" => "Georgia"),
             "20" => array("code" => "GU", "name" => "Guam"),
             "21" => array("code" => "HI", "name" => "Hawaii"),
-            "22" => array("code" => "ID", "name" => "Idaho"),
+            "22" => array("code" => "Id", "name" => "Idaho"),
             "23" => array("code" => "IL", "name" => "Illinois"),
             "24" => array("code" => "IN", "name" => "Indiana"),
             "25" => array("code" => "IA", "name" => "Iowa"),
@@ -6482,7 +6601,7 @@ $app_list_strings = array (
             "46" => array("code" => "MP", "name" => "Nordmarianerne"),
             "47" => array("code" => "OH", "name" => "Ohio"),
             "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "49" => array("code" => "ELLER", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pennsylvania"),
             "52" => array("code" => "PR", "name" => "Puerto Rico"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "ELLER", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7608,7 +7727,7 @@ $app_list_strings = array (
         "AF" => "Afghanistan",
         "AL" => "Albania",
         "DZ" => "Algeria",
-        "AS" => "American Samoa",
+        "AS" => "Amerikansk Samoa",
         "AD" => "Andorra",
         "AO" => "Angola",
         "AI" => "Anguilla",
@@ -7617,7 +7736,7 @@ $app_list_strings = array (
         "AR" => "Argentina",
         "AM" => "Armenia",
         "AW" => "Aruba",
-        "AU" => "Australia",
+        "AU" => "Australien",
         "AT" => "Austria",
         "AZ" => "Azerbaijan",
         "BH" => "Bahrain",
@@ -7634,7 +7753,7 @@ $app_list_strings = array (
         "BW" => "Botswana",
         "BV" => "Bouvet Island",
         "BR" => "Brazil",
-        "IO" => "British Indian Ocean Territory",
+        "IO" => "Britiske territorier i Det Indiske Ocean",
         "VG" => "British Virgin Islands",
         "BN" => "Brunei",
         "BG" => "Bulgaria",
@@ -7704,7 +7823,7 @@ $app_list_strings = array (
         "HK" => "Hong Kong",
         "HU" => "Hungary",
         "IS" => "Iceland",
-        "IN" => "India",
+        "IN" => "Indien",
         "ID" => "Indonesia",
         "IR" => "Iran",
         "IQ" => "Iraq",
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Følg link',
   'LBL_TOGGLE_VISIBILITY' => 'Skift mellem visning', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktiviteter',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. Alle rettigheder forbeholdt.',
-  'LBL_TRADEMARK' => 'SugarCRM er et varemærke tilhørende SugarCRM, Inc. Alle andre virksomheds-og produktnavne kan være varemærker tilhørende de respektive virksomheder, som de er tilknyttet.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ og Sugar™ er varemærker af SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Send invitation',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar og 3D-terning er registrerede varemærker af SugarCRM Inc. '.
+        'Alle andre firma- og produktnavne, som er anvendt eller optræder i dette produkt kan være varemærker tilhørende de '.
+        'respektive selskaber, som de er forbundet med.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ og Sugar™ er varemærker af SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Send invitation',
   'LBL_INVITEES' => 'Inviterede',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Gæster vil ikke modtage din invitation',
   'LBL_SELECT_ACTION_LABEL' => 'Vælg handling',
   'LBL_TOGGLE_DRAWER' => 'Toggle Drawer',
   'LBL_TOUR_NEXT' => 'Næste',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Tilføj' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Virksomhedslogo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalender' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'hovedmenunavigation',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'skift undertavle',
+
     'LBL_ADVANCED' => 'Avanceret',
     'LBL_BASIC' => 'Grundlæggende',
     'LBL_MODULE_FILTER' => 'Filterer efter',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Team',
     'LBL_TEAM_SET_ID' => 'Teamsæt-ID',
     'LBL_TEAM_SET'=>'Teamsæt',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Valgte teams',
     'LBL_SEARCH_UNAVAILABLE' => 'Søgning ikke tilgængelig, venligst prøv igen senere.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Intet primært team er angivet',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Fejl under forsøg på at fjerne det primære team-ID [{0}] for [{1}]-modulet med id&#39;et [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Søgemaskine er midlertidigt utilgængelig.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Der opstod en fejl i søgemaskinen. Kontakt venligst din systemadministrator.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Et felt, der er låst af en proces kan ikke redigeres.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'En tilstand opstået på grund af en generel svigt eller fejl. Årsagerne til denne undtagelse varierer, men normalt falder udenfor rammerne af en mere specifik API undtagelse.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Angiver, at serveren er optaget, overbelastet eller nede.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'Søgemaskinens backend er ikke tilgængelig i øjeblikket på grund af et forbindelsesproblem. Kontroller tilslutning og konfiguration i Admin->search->test.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'En runtime undtagelse opstod i SearchEngine. Se sugarcrm.log for yderligere detaljer.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Et felt, der er i øjeblikket låst af en kørende proces kan ikke redigeres.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s er låst af en kørende proces og kan ikke redigeres.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s er låst af en kørende proces og kan ikke redigeres.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'En fil navn med samme navn findes allerede i systemet.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Denne tidsperiode har allerede delperioder',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Delperioder kan ikke have egne delperioder',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Kan ikke hente nogen perioder af typen: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Ingen aktive tidsperioder for de nuværende indstillinger.',
     'LBL_CURRENT_TIMEPERIOD' => 'Aktuel tidsperiode',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Foregående tidsperiode',
     'LBL_NEXT_TIMEPERIOD' => 'Næste tidsperiode',
@@ -8532,7 +8664,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => 'Luk',
     'LBL_ADDITIONAL_DETAILS' => 'Flere oplysninger',
     'LBL_ADMIN' => 'Administration',
-    'LBL_ALT_HOT_KEY' => 'Alt+',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'Arkiv',
     'LBL_ASSIGNED_TO_USER'=>'Tildelt til bruger',
     'LBL_ASSIGNED_TO' => 'Tildelt til:',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Vælg feltet ...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Vælg operatør ...',
     'LBL_FILTER_CREATE_NEW' => 'Opret',
+    'LBL_FILTER_CREATE_FILTER' => 'Opret nyt filter',
+    'LBL_FILTER_EDIT_FILTER' => 'Rediger filter',
     'LBL_FILTER_ALL_RECORDS' => 'Alle poster',
     'TPL_FILTER_SAVE' => 'Du oprettet filtret {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'Fra',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Tilstand:',
     'LBL_STATUS_UPDATED'=>'Din status for denne begivenhed er blevet opdateret!',
+    'LBL_STATUS_NOT_UPDATED' => 'Din status for denne begivenhed er ikke blevet opdateret.',
     'LBL_STATUS'=>'Status:',
     'LBL_STREET'=>'Gade',
     'LBL_SUBJECT' => 'Emne',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Alle rettigheder forbeholdes.<br />SugarCRM er et varemærke der tilhører SugarCRM, Inc. Alle andre firma- og produktnavne kan være varemærker, der tilhører deres respektive virksomheder.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Alle rettigheder forbeholdt. <br />SugarCRM, Sugar og 3D-terning er registrerede varemærker af SugarCRM Inc. '.
+        'Alle andre firma- og produktnavne, som er anvendt eller optræder i dette produkt kan være varemærker tilhørende de '.
+        'respektive selskaber, som de er forbundet med.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Planlagt job afsluttet',
@@ -9182,7 +9321,8 @@ Med venlig hilsen, SugarCRM',
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Fejl. Du har indtastet en ugyldig operatør.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Fejl. Du har indtastet et ugyldigt filter.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Importen mislykkedes. Et grupperingsfelt er delvist låst i procesdefinitionen. Disse felter skal låses op i procesdefinitionen for at definitionen kan importeres.',
+    'ERROR_EXP_DATE_LOW' => 'Fejl. Udløbsdato kan ikke være senere end udgivelsesdato.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Fejl. Godkendelsen kræver udgivelsesdato.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Udgivelsesdato er tom.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9312,6 +9452,7 @@ Med venlig hilsen, SugarCRM',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'kolonnene kan fremvises.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Betjeningspanel',
     'LBL_DASHBOARD_BWC' => 'Mit Legacy Dashboard',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Mit betjeningspanel',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Hjælp betjeningspanel',
@@ -9344,9 +9485,6 @@ Med venlig hilsen, SugarCRM',
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Mine {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Nyheder',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Google News feed for relateret konto',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Salgsmulighed metrics',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Metrics for salgsmulighed til relaterede konto. Kræver D & B abonnement.',
@@ -9415,7 +9553,6 @@ Med venlig hilsen, SugarCRM',
 
     'LBL_DASHLET_NO_RECORDS' => 'Ingen optegnelser blev fundet på dette tidspunkt.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Resumé af sagen',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Nyheds feed',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interaktioner',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Noter & vedhæftede filer',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Noter & Vedhæftede filer hører til posten',
@@ -9924,7 +10061,7 @@ Med venlig hilsen, SugarCRM',
     'LBL_DNB_BAL_JOBCD_PH' => 'Vælg Job Funktion',
     'LBL_DNB_BAL_ORG_NAME' => 'Organisationens navn',
     'LBL_DNB_BAL_IMPORT_AS' => 'Import ind som:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Organisationens navn',
+    'LBL_DNB_BAL_ORG_NAME' => 'Firmanavn',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'i $ USD Millioner',
@@ -9983,7 +10120,7 @@ Med venlig hilsen, SugarCRM',
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Mest nyttige udgivne videnbaseartikler',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Viser de artikler i vidensbasen, som der er mest læste og mest synes godt om',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtreret af {{label}} "{{value}}"',
 
@@ -10022,6 +10159,13 @@ Med venlig hilsen, SugarCRM',
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Angiv et sidenavn.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Min pipeline',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Mit teams Pipeline",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Prognose pipeline-diagram',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Viser aktuelt pipeline-diagram.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Intet billede',
 
@@ -10275,6 +10419,8 @@ Med venlig hilsen, SugarCRM',
     'LBL_SELECT_THIS_ROW_TITLE' => 'Vælg denne række',
     'LBL_TEAM_SELECTED_TITLE' => 'Valgt team',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Vælg for at gøre denne til primær team',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Team markeret som valgt team-baseret ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Marker dette hold som valgt team-baseret',
     'LBL_SEARCH_AND_SELECT' => 'Søg, og vælg {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Søg og tilføj {{module}}',
 
@@ -10363,6 +10509,9 @@ Med venlig hilsen, SugarCRM',
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Visning deaktiveret: Ingen tilgængelige data',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Visning deaktiveret: I visning som aktuelle post',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Visning deaktiveret: Post fjernet eller ingen adgang til post',
+    'LBL_PREVIEW_PREVIOUS' => 'Gennemse tidligere',
+    'LBL_PREVIEW_NEXT' => 'Gennemse næste',
+    'LBL_PREVIEW_CLOSE' => 'Luk gennemse',
     'LBL_STREAM_NO_RECORDS' => 'Denne post har ingen noter i øjeblikket. Venligst tilføje en note ved at klikke på Tilføj note.',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}} dubletter fundet.',
     'LBL_NO_DUPLICATES_FOUND' => 'Ingen dubletter fundet.',
@@ -10382,6 +10531,7 @@ Med venlig hilsen, SugarCRM',
         'Ugyldigt antal poster bestået. Det gyldige interval er fra {{minRecords}} til {{maxRecords}} poster.',
     'LBL_MERGE_NO_ACCESS' =>
         'Du har ikke adgang til at udføre denne handling. Mindst én post skal være redigerbare.',
+    'LBL_MERGE_LOCKED' => 'Nogle af de poster, der er markeret til fletning, indeholder felter, der er låst for redigering af en proces og kan ikke flettes på dette tidspunkt.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10852,10 +11002,9 @@ Med venlig hilsen, SugarCRM',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Systemindstillinger',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Adgangskode',
     'LBL_CURRENT_PASSWORD'				=> 'Nuværende adgangskode',
-    'LBL_SET_NEW_PASSWORD'              => 'Indtast adgangskode',
     'LBL_NEW_PASSWORD1'                 => 'Ny adgangskode',
     'LBL_NEW_PASSWORD2'                 => 'Bekræft adgangskode',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Angiv din bekræftelse af adgangskoden.',
@@ -10863,13 +11012,12 @@ Med venlig hilsen, SugarCRM',
     'ERR_ENTER_OLD_PASSWORD'			=> 'Angiv din nuværende adgangskode.',
     'ERR_REENTER_PASSWORDS' => 'Adgangskoderne skal matche.',
     'ERR_PASSWORD_MISMATCH' => 'Adgangskode indtastet matcher ikke det i dit system.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Adgangskoden blev ændret.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Kan ikke sende adgangskode',
     'LBL_REQUEST_PASSWORD' => 'Bed om adgangskode',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Fejl: Der var problemer med at opdatere adgangskoden for denne bruger.',
     'LBL_INCORRECT_PASSWORD' => 'Fejl: Forkert adgangskode.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Foretrukket Sprog:',
+    'LBL_PREFERRED_LANGUAGE' => 'Foretrukne sprog:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Vælg en rapport',
@@ -10899,6 +11047,18 @@ Med venlig hilsen, SugarCRM',
     'ERR_HTTP_500_TEXT_LINE1' => 'Serveren har fundet en fejl og kunne ikke fuldføre din anmodning.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Forsøg venligst igen. Hvis fejlen fortsætter, skal du kontakte Suger administratoren.',
     'ERR_HTTP_500_ACTION' => 'Venligst kontakt teknisk support.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 500 Intern serverfejl',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Serveren har fundet en fejl og kunne ikke fuldføre din anmodning.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Forsøg venligst igen. Hvis fejlen fortsætter, skal du kontakte Sugar administratoren.',
+    'ERR_HTTP_502_ACTION' => 'Venligst kontakt teknisk support.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 intern serverfejl',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Serveren er ikke tilgængelig til at fuldføre din anmodning.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Forsøg venligst igen. Hvis fejlen fortsætter, skal du kontakte Sugar administratoren.',
+    'ERR_HTTP_503_ACTION' => 'Venligst kontakt teknisk support.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Vis gengivelse mislykkedes',
     'ERR_RENDER_FAILED_MSG' => 'Det lykkedes ikke at gengive en visning',
@@ -11032,6 +11192,7 @@ Med venlig hilsen, SugarCRM',
     'LBL_ALERT_TITLE_ERROR' => 'Fejl:',
     'LBL_ALERT_TITLE_LOADING' => 'Indlæser ...',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Din browser-version understøttes ikke længere, eller du bruger en ikke-understøttet browser.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'De følgende browserversioner anbefales: <ul><li>Internet Explorer 11</li> <li>Firefox 41</li> <li>Safari 7.1</li> <li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Se venligst siden {{link}} med foreslåede browsere.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Understøttede platforme',
 
@@ -11084,6 +11245,9 @@ Med venlig hilsen, SugarCRM',
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Der opstod en fejl under oprettelse af forbindelse til serveren. Venligst prøv igen.',
     'ERR_RESOLVE_ERRORS' => 'Venligst løse eventuelle fejl før du fortsætter.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Opdater liste',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'mere',
@@ -11186,10 +11350,13 @@ Med venlig hilsen, SugarCRM',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'For at øge produktiviteten, gør SugarCRM det muligt for superbrugere hurtigt at udføre visse opgaver, ved hjælp af tastaturgenveje. Tabellerne til højre beskriver de tilgængelige genvejstaster, såvel som tastekombinationerne og de handlinger som disse udfører.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Understøttede taster</h1> <ul><li>alle alfanumeriske tegn og symboler,</li> <li>Skift, ctrl, alt, kommando, mod (ctrl i Windows/Linux og kommando i Mla)</li> <li>enter, esc, mellemrum, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul> <h1>Understøttede funktioner</h1> <ul><li>Tastaturkombination: ctrl + m</li> <li>flere taster: m, ctrl + m</li> <li>tastatursekvens: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Globale genveje',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Kontekstuel genveje',
     'LBL_SHORTCUT_KEY_KEY' => 'Tastekombination',
     'LBL_SHORTCUT_FUNCTION' => 'Funktion',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Konfigurer kontekstuelle genveje',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Ingen kontekstuelle genveje at konfigurere',
     'LBL_SHORTCUT_HELP' => 'Vis genvej til hjælpeside',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Skift til menuen for hurtig oprettelse',
     'LBL_SHORTCUT_SEARCH' => 'Fokus på globalt søgefelt',
@@ -11237,6 +11404,9 @@ Med venlig hilsen, SugarCRM',
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Vælg alle elementer i et multi-valg felt',
     'LBL_SHORTCUT_SWEETSPOT' => 'Skift til bjælken Sweet Spot',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Skjul Sweet Spot bjælken',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Gem konfiguration',
+    'LBL_SHORTCUT_RESTORE' => 'Gendan standard',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Der opstod en fejl under lagring af brugerdefinerede genvejstaster på serveren. Prøv venligst igen.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} Indstillinger',
@@ -11259,13 +11429,20 @@ Med venlig hilsen, SugarCRM',
     'LBL_CALENDAR_RECURRENCE' => "Gentagelse",
     'LBL_CALENDAR_REMINDERS' => "Påmindelser",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Brugerdefineret dato",
     'LBL_CALENDAR_REPEAT_TYPE' => "Gentag type",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Gentag interval",
     'LBL_CALENDAR_REPEAT_DOW' => "Gentag på ugedage",
+    'LBL_CALENDAR_REPEAT' => "Gentag",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Gentag indtil",
     'LBL_CALENDAR_REPEAT_COUNT' => "Gentag hændelser",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Gentag valg",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Dag(e) i måneden",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Gentag ordenstal",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Gentag enhed",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Gentagelsesændringer skal foretages ved hjælp af den første post i serien.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Gentagelsesregler medfører ikke, at der oprettes en begivenhed.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Deltagelse',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Afslået',
@@ -11285,17 +11462,23 @@ Med venlig hilsen, SugarCRM',
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 kræver JavaScript. Slå Javascript til i din browser for at bruge Sugar 7.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Serialiserede data kunne ikke fjernes fra serie',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Serialiserede data kunne ikke fjernes fra serie, fordi de indeholder referencer til objekter eller klasser',
 
     'LBL_FIELD_TRIMMED' => 'Felt blev beskåret, pga. overstigelse af den maksimale tilladte grænse for tegn.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Feltet overskrider maksimal tegngrænse.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'De sidste 7 dage',
     '30' => 'De sidste 30 dage',
     '90' => 'Sidste kvartal',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11400,13 +11583,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Udløbet',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Kladde',
-    'Expired' => 'Udløbet',
-    'In Review' => 'Til gennemsyn',
-    'Published' => 'Udgivet',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '- Administratorhandlinger -',
@@ -11418,57 +11594,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Slet valgte artikler',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Har vedlagte filer',
-        'none' => 'Har ingen',
-        'mime' => 'Angiv Mime type',
-        'name' => 'Angiv navn',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Ord';
   $app_list_strings['moduleListSingular']['Words'] = 'Ord';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Opret artikel';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Top 5',
-    'Top_10' => 'Top 10',
-    'Top_20' => 'Top 20',
-    'Bot_5'  => 'Nederste 5',
-    'Bot_10' => 'Nederste 10',
-    'Bot_20' => 'Nederste 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Alle',
-        'added' => 'Tilføjet sidste 30 dage',
-        'pending' => 'Afventer min godkendelse',
-        'updated' =>'Opdateret sidste 30 dage',
-        'faqs' => 'OSS&#39;er',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'På',
-    'before' => 'Før',
-    'after' => 'Efter',
-    'between_dates' => 'Er mellem',
-    'last_7_days' => 'De sidste 7 dage',
-    'next_7_days' => 'De næste 7 dage',
-    'last_month' => 'Sidste måned',
-    'this_month' => 'Denne måned',
-    'next_month' => 'Næste måned',
-    'last_30_days' => 'De sidste 30 dage',
-    'next_30_days' => 'De næste 30 dage',
-    'last_year' => 'Sidste år',
-    'this_year' => 'I år',
-    'next_year' => 'Næste år',
-    'isnull' => 'Er nul',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -11504,7 +11632,7 @@ $app_list_strings['kbolddocument_status_dom'] = array (
         'BOUVET ISLAND' => 'BOUVETØ',
         'BRAZIL' => 'BRASILIEN',
         'BRITISH ANTARCTICA TERRITORY' => 'DET BRITISKE TERRITORIUM I ANTARKTIS',
-        'BRITISH INDIAN OCEAN TERRITORY' => 'DET BRITISKE TERRITORIUM I DET INDISKE OCEAN',
+        'BRITISH INDIAN OCEAN TERRITORY' => 'BRITISKE TERRITORIER I DET INDISKE OCEAN',
         'BRITISH VIRGIN ISLANDS' => 'DE BRITISKE JOMFRUØER',
         'BRITISH WEST INDIES' => 'DE BRITISKE VESTINDISKE ØER',
         'BRUNEI' => 'BRUNEI',
@@ -12330,6 +12458,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "All Contacts",
+    "email" => "Kun e-mail",
+    "phone" => "Kun telefon",
     "prem" => "Premium Only"
 );
 
@@ -12355,4 +12485,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Bio',
     'Both' => 'Begge'
 );
-

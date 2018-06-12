@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -28,54 +28,63 @@
             /**
              * Initialize tooltips on render and destroy tooltip before render for views and fields.
              * Initialize tooltips on initialize for layouts.
+             *
+             * @deprecated `Tooltip` plugin has been deprecated since 7.8.0
+             *   and will be removed in 7.9.0.
              */
             onAttach: function() {
-                if (app.utils.isTouchDevice()) {
-                    return;
-                }
-                if ((this instanceof app.view.View) || (this instanceof app.view.Field)) {
-                    this.before('render', function() {
-                        this.destroyAllPluginTooltips();
-                    }, this);
-                    this.on('render', function() {
-                        this.initializeAllPluginTooltips();
-                    }, this);
-                    this.on('dismiss', this.removePluginTooltips, this);
-                } else if (this instanceof app.view.Layout) {
-                    this.on('init', function() {
-                        this.initializeAllPluginTooltips();
-                    }, this);
-                }
+                app.logger.warn('Tooltip#onAttach: The `Tooltip` plugin has been' +
+                    ' deprecated since 7.8.0 and will be removed in 7.9.0. Please remove this plugin from the ' +
+                    'following component: ' + this.toString());
             },
 
             /**
              * Destroy tooltips on dispose.
              */
-            onDetach: function() {
-                this.destroyAllPluginTooltips();
-            },
+            onDetach: $.noop,
 
             /**
              * Create all tooltips in this component.
+             *
+             * @deprecated `Tooltip` plugin has been deprecated since 7.8.0
+             *   and will be removed in 7.9.0.
              */
             initializeAllPluginTooltips: function() {
+                app.logger.warn('Tooltip#initializeAllPluginTooltips: The `Tooltip` plugin has been' +
+                    ' deprecated since 7.8.0 and will be removed in 7.9.0. Please remove this plugin from the ' +
+                    'following component: ' + this.toString());
+
                 this.removePluginTooltips();
                 this.addPluginTooltips();
             },
 
             /**
              * Destroy all tooltips that have been created in this component.
+             *
+             * @deprecated `Tooltip` plugin has been deprecated since 7.8.0
+             *   and will be removed in 7.9.0.
              */
             destroyAllPluginTooltips: function() {
+                app.logger.warn('Tooltip#destroyAllPluginTooltips: The `Tooltip` plugin has been' +
+                    ' deprecated since 7.8.0 and will be removed in 7.9.0. Please remove this plugin from the ' +
+                    'following component: ' + this.toString());
+
                 this.removePluginTooltips();
                 this._$pluginTooltips = null;
             },
 
             /**
              * Create tooltips within a given element.
+             *
+             * @deprecated `Tooltip` plugin has been deprecated since 7.8.0
+             *   and will be removed in 7.9.0.
              * @param {jQuery} $element (optional)
              */
             addPluginTooltips: function($element) {
+                app.logger.warn('Tooltip#addPluginTooltips: The `Tooltip` plugin has been' +
+                    ' deprecated since 7.8.0 and will be removed in 7.9.0. Please remove this plugin from the ' +
+                    'following component: ' + this.toString());
+
                 var $tooltips = this._getPluginTooltips($element);
                 if ($tooltips.length > 0) {
                     this._$pluginTooltips = (this._$pluginTooltips || $()).add(app.utils.tooltip.initialize($tooltips));
@@ -95,9 +104,16 @@
 
             /**
              * Destroy tooltips within a given element.
+             *
+             * @deprecated `Tooltip` plugin has been deprecated since 7.8.0
+             *   and will be removed in 7.9.0.
              * @param {jQuery} $element (optional)
              */
             removePluginTooltips: function($element) {
+                app.logger.warn('Tooltip#removePluginTooltips: The `Tooltip` plugin has been' +
+                    ' deprecated since 7.8.0 and will be removed in 7.9.0. Please remove this plugin from the ' +
+                    'following component: ' + this.toString());
+
                 var $tooltips;
                 if ($element) {
                     $tooltips = this._getPluginTooltips($element);
@@ -123,18 +139,3 @@
         });
     });
 })(SUGAR.App);
-
-(function($) {
-    $(function() {
-        if (!Modernizr.touch) {
-            return;
-        }
-        /**
-         * @inheritdoc
-         * Deactivate tooltip plugin on touch devices.
-         */
-        $.fn.tooltip = function() {
-            return this;
-        };
-    });
-})(jQuery);

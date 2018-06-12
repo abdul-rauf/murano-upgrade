@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -215,8 +215,9 @@ function create_campaign_summary  ($focus){
                 if(!empty($focus->$key) && !empty($mod_strings[$focus->field_name_map[$key]['vname']])){
                     $cmpgn_tbl .= "<tr><td scope='row' width='15%'>".$mod_strings[$focus->field_name_map[$key]['vname']]."</td>\n";
                     if($key == 'team_name') {
-					   require_once('modules/Teams/TeamSetManager.php');
-					   $cmpgn_tbl .= "<td scope='row'>".TeamSetManager::getCommaDelimitedTeams($focus->team_set_id, $focus->team_id, true)."</td></tr>\n";
+                        require_once 'modules/Teams/TeamSetManager.php';
+                        $cmpgn_tbl .= "<td scope='row'>" .
+                            TeamSetManager::getFormattedTeamsFromSet($focus, true) . "</td></tr>\n";
 		            } else {
                        $cmpgn_tbl .= "<td scope='row'>".$focus->$key."</td></tr>\n";
                     }

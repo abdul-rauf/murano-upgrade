@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -173,7 +173,7 @@
         // we need to make a clone of the plugins and then push to the new object. this prevents double plugin
         // registration across ExtendedComponents
         this.plugins = _.without(this.plugins, 'ReorderableColumns', 'MassCollection');
-        this.plugins.push('CteTabbing', 'DirtyCollection');
+        this.plugins.push('ClickToEdit', 'DirtyCollection');
         this._super('initialize', [options]);
         // we need to get the flex-list template from the ForecastWorksheets module so it can use the filteredCollection
         // for display
@@ -906,8 +906,8 @@
         }
 
         // custom success handler
-        options.success = _.bind(function(model, data, options) {
-            if(!this.disposed) {
+        options.success = _.bind(function(data) {
+            if (!this.disposed) {
                 this.collection.reset(data);
             }
         }, this);
@@ -1075,6 +1075,9 @@
         }
 
         app.events.on('preview:render', function(model) {
+            if (this.disposed) {
+                return;
+            }
             this.previewModel = model;
             this.previewVisible = true;
         }, this);

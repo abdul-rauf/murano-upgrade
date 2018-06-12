@@ -3,7 +3,7 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -201,7 +201,7 @@ $contents["javascript"] .= ActionFactory::buildActionCache($silent);
 $new_contents = "<?php\n\$FUNCTION_MAP = array(\n";
 $new_contents .= $contents["function_map"];
 $new_contents .= ");\n";
-$new_contents .= "?>";
+
 
 
 create_cache_directory("Expressions/functionmap.php");

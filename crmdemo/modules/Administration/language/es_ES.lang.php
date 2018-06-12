@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -277,7 +277,8 @@ Compruebe el valor de la Configuración Proxy en la <a href="index.php?module=Co
     'LBL_EDIT_CUSTOM_FIELDS' => 'Editar Campos Personalizados',
     'LBL_EDIT_TABS'=>'Editar Pestañas',
     'LBL_EMAIL_TITLE' => 'Correo electrónico',
-    'LBL_EMAIL_DESC' => 'Gestiona email entrante y saliente. La configuración de correo debe realizarse para que los usuarios puedan enviar email y boletines de noticias de las campañas.',
+    'LBL_EMAIL_DESC' => 'Administrar correos electrónicos salientes y entrantes. El correo electrónico debe estar configurado para ' .
+                        'permitir que los usuarios envíen campañas y boletines de noticias por correo electrónico.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Para poder utilizar esta funcionalidad, hace falta una dirección de email principal para cada usuario.',
 	'LBL_ENABLE_MAILMERGE' => '¿Habilitar Combinar Correspondencia?',
 	'LBL_ENABLED' => 'Habilitado',
@@ -406,7 +407,8 @@ Compruebe el valor de la Configuración Proxy en la <a href="index.php?module=Co
     'LBL_LOCALE' => 'Establecer la configuración regional por defecto para el sistema',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- El Nombre de Usuario de la persona que utilizará este cliente sin conexión',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Nombre de Usuario Final:',
-    'LBL_MAILBOX_DESC' => 'Configurar grupos de cuentas de correo para controlar los emails entrantes y gestionar la información de la cuenta personal de email entrante para los usuarios',
+    'LBL_MAILBOX_DESC' => 'Configurar cuentas de correo de grupo para monitorizar el correo electrónico entrante ' .
+        'y administrar la información de la cuenta personal de correo entrante para los usuarios',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Tipos de Contrato',
     'LBL_MANAGE_CURRENCIES' => 'Monedas',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Administrar Grupos',
@@ -630,6 +632,8 @@ Si experimenta problemas continuos con la validación automática, compruebe su 
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Reconstruir los Archivos de Agrupación de JS',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Reconcatena y sobrescribe los archivos agrupados existentes con las últimas versiones de los archivos agrupados',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Reparar archivos javascript',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Reparar archivos JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Procesando archivos. Esto puede tardar varios minutos.  Si sale de esta página no cancelará el proceso, de modo que si lo desea puede hacerlo o esperar a recibir confirmación...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Fin de Procesamiento de Archivos.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Reparar Campos que No están en Minúsculas',
@@ -1008,7 +1012,7 @@ Si experimenta problemas continuos con la validación automática, compruebe su 
     'LBL_QR_CLEAR_ADD_CACHE' => 'Eliminando archivos adicionales de caché...hecho',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Si se desmarca esta opción, se requerirá un administrador para realizar la revalidación de forma manual una vez haya caducado la licencia del sistema, de lo contrario los usuarios no podrán iniciar la sesión.',
 	'LBL_TRACKER_SETTINGS' => 'Monitorización',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Seleccionar los datos de sistema y de usuario que se deben seguir',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Habilitar/deshabilitar seguimiento',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Habilitar/Deshabilitar Usuarios Cabeza de Serie',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Activar',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Desactivar',
@@ -1161,6 +1165,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_ADDED' => 'Añadido sprite {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Excluyendo archivo: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Permisos de trabajo en equipo',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Permitir el acceso de equipo y administrar el acceso por módulo.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Tipo de sistema',
     'LBL_FTS_HOST' => 'Host',
@@ -1233,5 +1241,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Haciendo clic en Enviar le sincronizará con el servidor central.',
     'LBL_OFFLINE_ENABLED' => 'Sin conexión habilitado',
     'LBL_OFFLINE_SETTINGS' => 'Configuración sin conexión',
+
 
 );

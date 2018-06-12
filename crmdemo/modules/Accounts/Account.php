@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -117,24 +117,9 @@ class Account extends Company {
     var $push_billing;
     var $push_shipping;
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Account()
-    {
-        self::__construct();
-    }
 
 	public function __construct() {
         parent::__construct();
-
-		global $current_user;
-		if(!empty($current_user)) {
-			$this->team_id = $current_user->default_team;	//default_team is a team id
-			$this->team_set_id = $current_user->team_set_id;
-		} else {
-			$this->team_id = 1; // make the item globally accessible
-		}
 
         //Email logic
 		if (!empty($_REQUEST['parent_id']) && !empty($_REQUEST['parent_type']) && $_REQUEST['parent_type'] == 'Emails'

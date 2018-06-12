@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,9 +16,11 @@
 ({
     fieldTag: 'input.select2',
 
+    /**
+     * @inheritdoc
+     */
     initialize: function(options) {
-        _.bindAll(this);
-        app.view.Field.prototype.initialize.call(this, options);
+        this._super('initialize', [options]);
         this.endpoint = this.def.endpoint;
     },
 
@@ -32,7 +34,7 @@
                 myURL = app.api.buildURL(this.endpoint.module, action, attributes, params);
 
             app.api.call('GET', myURL, null, {
-                success: this.populateValues,
+                success: _.bind(this.populateValues, this),
                 error: function(error) {
                     // display error if not a metadata refresh
                     if (error.status !== 412) {

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -286,9 +286,12 @@
                 case 40: // down arrow
                 case 38: // up arrow
                     break;
+                // jshint ignore:start
                 case 9:  // tab
-                    if(!this.options.tabToSelect)
-                    break;
+                    if (!this.options.tabToSelect) {
+                        break;
+                    }
+                // jshint ignore:end
                 case 13: // enter
 
                     if(this.onEnterFn) {
@@ -346,6 +349,9 @@
     };
 
     $.fn.searchahead = function () {
+
+        SUGAR.App.logger.warn('SearchAhead plugin is deprecated since 7.8. and will be removed in 7.9.');
+
         var option = arguments[0],
             args = Array.prototype.slice.call(arguments, 1);
         return this.each(function () {

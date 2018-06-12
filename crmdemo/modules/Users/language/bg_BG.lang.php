@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Нова парола',
 	'LBL_NEW_PASSWORD1'					=> 'Парола',
 	'LBL_NEW_PASSWORD2'					=> 'Потвърждение на паролата',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Паролата беше променена успешно.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Паролата беше променена успешно.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'Изпратена е електронна поща със системно-генерираната парола до потребителя.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Паролата беше създадена успешно.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Паролата беше създадена успешно.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'Н',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Нов потребител',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Нов потребител [Alt+N]',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Квоти',
     'LBL_FORECASTS'                     => 'Прогнози',
     'LBL_WORKSHEETS'                    => 'План',
+	'LBL_CALENDARS'                     => 'Календар',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Вземи друг CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Превключи на звук',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Превключи на изображение',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Телефон',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Публикуване на',
     'LBL_ICAL_PUB_URL'                  => 'URL за iCal интеграция',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Използвайте следното URL, за да актуализирате календара на Sugar.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Използвайте този URL адрес, за да се абонирате за вашия календар на Sugar в рамките на поддържаните от iCal ' .
+                                           'приложения. Събитията в календара на Sugar са видими само за четене ' .
+                                           'във външни приложения на календара и всички редакции на събития ' .
+                                           '(например срещи, разговори и др.) могат да се правят само в Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'URL на вашата заявка',
 	'LNK_NEW_USER'						=> 'Създаване на потребител',
 	'LNK_NEW_PORTAL_USER'				=> 'Създаване на Портален потребител',
@@ -622,7 +626,7 @@ Click Cancel to exit the page without reassigning any records.',
 
     'LBL_FILTER_USERS_REPORTS' => 'Справки за потребители',
     'LBL_CONTACTS_SYNC' => 'Контакти',
-
+    'LBL_DETAIL' => 'Профил на потребителя',
 ); // END STRINGS DEFS
 
 ?>

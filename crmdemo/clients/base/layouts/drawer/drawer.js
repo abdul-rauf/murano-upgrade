@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -15,8 +15,9 @@
  */
 ({
     backdropHtml: '<div class="drawer-backdrop"></div>',
-    plugins: ['Tooltip'],
+
     onCloseCallback: null, //callbacks to be called once drawers are closed
+
     scrollTopPositions: [], //stores scroll positions for main and side pane
 
     pixelsFromFooter: 80, //how many pixels from the footer the drawer will drop down to
@@ -562,7 +563,6 @@
 
         //add tooltip
         $drawerTab = $bottom.find('.drawer-tab');
-        this.addPluginTooltips($drawerTab);
 
         //add expand/collapse tab behavior
         $drawerTab.on('click', _.bind(function(event) {
@@ -586,9 +586,6 @@
         var $drawerTab = $drawer.find('.drawer-tab')
             .off('click')
             .remove();
-
-        //remove tooltip
-        this.removePluginTooltips($drawerTab);
 
         //remove backdrop
         $drawer.find('.drawer-backdrop')

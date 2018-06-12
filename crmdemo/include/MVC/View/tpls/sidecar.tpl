@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -23,9 +23,6 @@
         {foreach from=$css_url item=url}
             <link rel="stylesheet" href="{sugar_getjspath file=$url}"/>
         {/foreach}
-        <!--[if lt IE 10]>
-        <link rel="stylesheet" type="text/css" href="{sugar_getjspath file='themes/default/css/ie.css'}">
-        <![endif]-->
         {sugar_getscript file="include/javascript/modernizr.js"}
     </head>
     <body>
@@ -65,7 +62,15 @@
         {sugar_getscript file="cache/include/javascript/sugar_grp7.min.js"}
         {literal}
         <script language="javascript">
-            if (parent.window != window && typeof(parent.SUGAR.App.router) != "undefined") {
+            var parentIsSugar = false;
+            try {
+                parentIsSugar = (parent.window != window)
+                    && (typeof parent.SUGAR != "undefined")
+                    && (typeof parent.SUGAR.App.router != "undefined");
+            } catch (e) {
+                // if we got here, we were trying to access parent window from different domain
+            }
+            if (parentIsSugar) {
                 parent.SUGAR.App.router.navigate("#Home", {trigger:true});
             } else {
                 var App;
@@ -102,6 +107,11 @@
 
         {if !empty($voodooFile)}
             <script src="{sugar_getjspath file=$voodooFile}"></script>
+        {/if}
+        {if !empty($processAuthorFiles)}
+            {sugar_getscript file="cache/include/javascript/pmse.utils.min.js"}
+            {sugar_getscript file="cache/include/javascript/pmse.jcore.min.js"}
+            {sugar_getscript file="cache/include/javascript/pmse.ui.min.js"}
         {/if}
     </body>
 </html>

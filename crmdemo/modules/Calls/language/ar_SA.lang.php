@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'البريد الإلكتروني',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'إرسال بريد إلكتروني لجميع المدعوين',
     'LBL_EMAIL_REMINDER' => 'التذكير بالبريد الإلكتروني',
-    'LBL_EMAIL_REMINDER_TIME' => 'وقت التذكير بالبريد الإلكتروني',
-    'LBL_POPUP_REMINDER_TIME' => 'وقت التذكير المنبثق',
+    'LBL_EMAIL_REMINDER_TIME' => 'وقت تذكير البريد الإلكتروني',
+    'LBL_POPUP_REMINDER_TIME' => 'وقت تذكير الرسائل المنبثقة',
     'LBL_SEND_BUTTON_TITLE'=>'حفظ الدعوات وإرسالها [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'حفظ الدعوات وإرسالها',
 	'LBL_DATE_END'=>'تاريخ الانتهاء',
 	'LBL_TIME_END'=>'وقت الانتهاء',
-	'LBL_REMINDER_TIME'=>'وقت التذكير',
+    'LBL_REMINDER_TIME'=>'وقت التذكير',
     'LBL_EMAIL_REMINDER_SENT' => 'تم إرسال التذكير بالبريد الإلكتروني',
     'LBL_SEARCH_BUTTON'=> 'بحث',
     'LBL_ACTIVITIES_REPORTS' => 'تقرير الأنشطة',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'حذف جميع التكرارات',
     'LBL_DATE_END_ERROR' => 'تاريخ الانتهاء قبل تاريخ البدء',
     'LBL_REPEAT_PARENT_ID' => 'تكرار المعرّف الأصل',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'معرف تكرار الاتصال. تاريخ بدء الاتصال الأصلي',
     'LBL_RECURRING_SOURCE' => 'المصدر المتكرر',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'هل تريد بالتأكيد إزالة جميع السجلات المتكررة؟',
     'LBL_RECURRING_LIMIT_ERROR' => 'لا يمكن جدولة المكالمة المتكررة لأنها تعدت الحد الأقصى المسموح به للتكرار $.',

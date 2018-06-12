@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -172,7 +172,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulī „{{plural_module_name}}” iekļauts uzņēmumu saraksts, ar kuriem jūsu uzņēmums ir saistīts, un tas pārsvarā tiek izmantots kā informācijas mezgls, no kura iespējams pārvaldīt un analizēt jūsu lietišķo mijiedarbību ar katru klientu. Ir vairāki veidi, kā var izveidot moduli „{{plural_module_name}}” vietnē „Sugar”, piemēram, izmantojot moduli „{{plural_module_name}}”, dublējot, importējot moduli „{{plural_module_name}}” utt. Kad moduļa „{{module_name}}” ieraksts ir izveidots, informāciju par moduli „{{module_name}}” var aplūkot un rediģēt moduļa „{{plural_module_name}}” ierakstu skatījuma režīmā. Katrs moduļa „{{module_name}}” ieraksts, nostiprinot attiecības ar klientu, var tikt saistīts ar jebkuru citu „Sugar” ierakstu, piemēram, moduļiem „{{contacts_module}}”, „{{meetings_module}}”, „{{cases_module}}”, „{{opportunities_module}}” un daudziem citiem.',
+    'LBL_HELP_RECORDS' => 'Modulī „{{plural_module_name}}” iekļauts uzņēmumu saraksts, ar kuriem jūsu uzņēmums ir saistīts, pārsvarā tas tiek izmantots kā informācijas mezgls, no kura iespējams pārvaldīt un analizēt jūsu lietišķās attiecības ar katru klientu. Ir vairāki veidi, kā var izveidot moduli „{{plural_module_name}}” vietnē „Sugar”, piemēram, izmantojot moduli „{{plural_module_name}}”, dublējot, importējot moduli „{{plural_module_name}}” utt. Kad moduļa „{{module_name}}” ieraksts ir izveidots, informāciju par moduli „{{module_name}}” var aplūkot un rediģēt moduļa „{{plural_module_name}}” ierakstu skatījuma režīmā. Katrs moduļa „{{module_name}}” ieraksts, nostiprinot attiecības ar klientu, var tikt saistīts ar jebkuru citu „Sugar” ierakstu, piemēram, moduļiem „{{contacts_module}}”, „{{meetings_module}}”, „{{cases_module}}”, „{{opportunities_module}}” un daudziem citiem.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{plural_module_name}} modulis satur uzņēmumus, ar kuriem jūsu uzņēmumam ir darīšanas, un galvenokārt tiek izmantots kā informācijas punkts, no kura pārvaldīt un analizēt jūsu biznesu ar katru klientu.

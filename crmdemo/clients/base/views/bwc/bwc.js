@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -149,7 +149,7 @@
         this.url = app.utils.addIframeMark(this.context.get('url') || 'index.php?module=' + this.module + '&action=index');
         app.view.View.prototype._renderHtml.call(this);
 
-        this.$('iframe').load(function() {
+        this.$('iframe').on('load', function() {
             //In order to update current location once bwc link is clicked.
             self.url = 'index.php' + this.contentWindow.location.search;
             self._setCurrentUrl();
@@ -228,6 +228,11 @@
     _setBwcModel: function(contentWindow) {
         var action = this.actionRegex.exec(contentWindow.location.search);
         action = (_.isArray(action)) ? action[1].toLowerCase() : null;
+
+        var EditViewGrid = contentWindow.document.getElementById('EditViewGrid');
+        if (EditViewGrid) {
+            contentWindow.EditView = EditViewGrid;
+        }
 
         //once edit page is entered, the page is navigated without action query string.
         //Therefore, if current page contains 'EditView' form, bind the action as 'editview'.
@@ -441,6 +446,26 @@
     },
 
     /**
+     * Rewrites old error elements to the new one pop-ups.
+     *
+     * @param {Object} $errors DOM elements containing errors to rewrite into standard errors.
+     */
+    convertToSidecarErrors: function($errors) {
+        if ($errors.length === 0) {
+            return;
+        }
+
+        $errors.hide();
+        var errorMessages = _.map($errors, function(error) {
+            return $(error).text();
+        });
+        app.alert.show('delete-error', {
+            level: 'error',
+            messages: errorMessages
+        });
+    },
+
+    /**
      * Allow BWC modules to rewrite their links when using their own ajax
      * calls.
      *
@@ -558,43 +583,6 @@
 
             return 'Clear ' + registered + ' event(s) in `bwc.sugarcrm`.';
         });
-    },
-
-    /**
-     * Before routing event handling on BWC views.
-     *
-     * This will track all url changes during the BWC redirect process. It
-     * calls {@link #unbindDom} on all route changes, unless the new url
-     * requested is the same as the previous one with only the `bwcFrame=1`
-     * difference in the URL.
-     * When the latter happens, it just means that we are cleaning up the link,
-     * but there is no actual reload of the iFrame, so we can't remove the
-     * events.
-     *
-     * The {@link #_setCurrentUrl} method is setting the {@link #_currentUrl}
-     * as the one set in the parent window as hash. This means that there is no
-     * real reload of the view, just hash update to keep it in sync.
-     *
-     * The custom route `route: "bwc/*url"` is ignoring the reload of the view
-     * based on the same logic used here.
-     *
-     * @deprecated since 7.7, will be removed in 7.8.
-     *
-     * @param {Object} route Route object being passed from
-     *   {@link Core.Routing#beforeRoute}.
-     */
-    beforeRoute: function(route) {
-
-        app.log.warn('`app.bwc.beforeRoute()` is deprecated since 7.7. This method will be removed in 7.8.');
-
-        var bwcUrl = route && route.args && route.args[0];
-
-        if (bwcUrl && this._currentUrl.replace('#bwc/', '') === bwcUrl) {
-            // update hash link only
-            return;
-        }
-
-        this.unbindDom();
     },
 
     /**

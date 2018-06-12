@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,12 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'LBL_BLANK'	=> '_TÜHI',
-    'LBL_MODULE_NAME' => 'Telefonikõned',
-    'LBL_MODULE_NAME_SINGULAR'	=> 'Call',
-    'LBL_MODULE_TITLE' => 'Telefonikõned: Avaleht',
-    'LBL_SEARCH_FORM_TITLE' => 'Telefonikõne otsing',
-    'LBL_LIST_FORM_TITLE' => 'Telefonikõne loend',
+	'LBL_BLANK'	=> ' ',
+    'LBL_MODULE_NAME' => 'Kõned',
+    'LBL_MODULE_NAME_SINGULAR'	=> 'Kõne',
+    'LBL_MODULE_TITLE' => 'Kõned: avaleht',
+    'LBL_SEARCH_FORM_TITLE' => 'Kõne otsing',
+    'LBL_LIST_FORM_TITLE' => 'Kõneloend',
     'LBL_NEW_FORM_TITLE' => 'Loo kohtumine',
     'LBL_LIST_CLOSE' => 'Sulge',
     'LBL_LIST_SUBJECT' => 'Teema',
@@ -24,158 +24,159 @@ $mod_strings = array (
     'LBL_LIST_RELATED_TO_ID' => 'Seotud ID',
     'LBL_LIST_DATE' => 'Alguskuupäev',
     'LBL_LIST_TIME' => 'Algusaeg',
-    'LBL_LIST_DURATION' => 'Kestvus',
+    'LBL_LIST_DURATION' => 'Kestus',
     'LBL_LIST_DIRECTION' => 'Suund',
     'LBL_SUBJECT' => 'Teema:',
     'LBL_CONTACT_NAME' => 'Kontakt:',
-    'LBL_CONTACT_ID'   => 'Contact Id',
-    'LBL_DESCRIPTION_INFORMATION' => 'Kirjelduse info',
+    'LBL_CONTACT_ID'   => 'Kontakti ID',
+    'LBL_DESCRIPTION_INFORMATION' => 'Kirjelduse teave',
     'LBL_DESCRIPTION' => 'Kirjeldus:',
     'LBL_STATUS' => 'Olek:',
     'LBL_DIRECTION' => 'Suund:',
     'LBL_DATE' => 'Alguskuupäev:',
-    'LBL_DURATION' => 'Kestvus:',
-    'LBL_DURATION_HOURS' => 'Kestvus tundides:',
-    'LBL_DURATION_MINUTES' => 'Kestvus minutites:',
+    'LBL_DURATION' => 'Kestus:',
+    'LBL_DURATION_HOURS' => 'Kestus tundides:',
+    'LBL_DURATION_MINUTES' => 'Kestus minutites:',
     'LBL_HOURS_MINUTES' => '(tunnid/minutid)',
-    'LBL_CALL' => 'Telefonikõne:',
+    'LBL_CALL' => 'Kõne:',
     'LBL_DATE_TIME' => 'Alguskuupäev ja aeg:',
     'LBL_TIME' => 'Algusaeg:',
-    'LBL_HOURS_ABBREV' => 't',
-    'LBL_MINSS_ABBREV' => 'm',
+    'LBL_HOURS_ABBREV' => 'h',
+    'LBL_MINSS_ABBREV' => 'min',
     'LBL_COLON' => ':',
     'LNK_NEW_CALL' => 'Kõne logi',
-    'LNK_NEW_MEETING' => 'Planeeri kohtumine',
-    'LNK_CALL_LIST' => 'Vaata telefonikõnesid',
-    'LNK_IMPORT_CALLS' => 'Impordi telefonikõned',
-    'ERR_DELETE_RECORD' => 'Ettevõtte kustutamiseks täpsusta kirje numbrit.',
-    'NTC_REMOVE_INVITEE' => 'Oled kindel, et soovid selle kutsutu telefonikõnest eemaldada?',
+    'LNK_NEW_MEETING' => 'Plaani kohtumine',
+    'LNK_CALL_LIST' => 'Vaata kõnesid',
+    'LNK_IMPORT_CALLS' => 'Impordi kõned',
+    'ERR_DELETE_RECORD' => 'Konto kustutamiseks täpsustage kirje numbrit.',
+    'NTC_REMOVE_INVITEE' => 'Kas olete kindel, et soovite selle kutsutu kõnest eemaldada?',
     'LBL_INVITEE' => 'Kutsutud',
     'LNK_NEW_APPOINTMENT' => 'Loo kohtumine',
-	'LBL_SCHEDULING_FORM_TITLE' => 'Planeerimine',
+	'LBL_SCHEDULING_FORM_TITLE' => 'Ajakava',
     'LBL_ADD_INVITEE' => 'Lisa kutsutuid',
     'LBL_NAME' => 'Nimi',
     'LBL_FIRST_NAME' => 'Eesnimi',
     'LBL_LAST_NAME' => 'Perekonnanimi',
-    'LBL_EMAIL' => 'E-post',
-    'LBL_ACCOUNT_NAME' => 'Account',    
-    'LBL_PHONE' => 'Tlf number',
-    'LBL_REMINDER' => 'Meelespea:',
-    'LBL_REMINDER_POPUP' => 'Popup',
-    'LBL_REMINDER_EMAIL' => 'Muu E-post:',
-    'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Email all invitees',
-    'LBL_EMAIL_REMINDER' => 'Email Reminder',
-    'LBL_EMAIL_REMINDER_TIME' => 'Email Reminder Time',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup Reminder Time',
-    'LBL_SEND_BUTTON_TITLE'=>'Saada kutsed [Alt+I]',
+    'LBL_EMAIL' => 'Meil',
+    'LBL_ACCOUNT_NAME' => 'Konto',    
+    'LBL_PHONE' => 'Telefoninumber',
+    'LBL_REMINDER' => 'Meeldetuletused:',
+    'LBL_REMINDER_POPUP' => 'Hüpik',
+    'LBL_REMINDER_EMAIL' => 'Meil',
+    'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Meili kõigile kutsututele',
+    'LBL_EMAIL_REMINDER' => 'Meili meeldetuletus',
+    'LBL_EMAIL_REMINDER_TIME' => 'Meili meeldetuletuse aeg',
+    'LBL_POPUP_REMINDER_TIME' => 'Hüpikakna meeldetuletuse aeg',
+    'LBL_SEND_BUTTON_TITLE'=>'Salvesta ja saada kutsed [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'l',
-    'LBL_SEND_BUTTON_LABEL'=>'Saada kutsed',
-	'LBL_DATE_END'=>'Lõpukuupäev',
+    'LBL_SEND_BUTTON_LABEL'=>'Salvesta ja saada kutsed',
+	'LBL_DATE_END'=>'Lõppkuupäev',
 	'LBL_TIME_END'=>'Lõppaeg',
-	'LBL_REMINDER_TIME'=>'Meeldetuletuse aeg',
-    'LBL_EMAIL_REMINDER_SENT' => 'Email reminder sent',
+    'LBL_REMINDER_TIME'=>'Meeldetuletuse aeg',
+    'LBL_EMAIL_REMINDER_SENT' => 'Meili meeldetuletus saadetud',
     'LBL_SEARCH_BUTTON'=> 'Otsi',
-    'LBL_ACTIVITIES_REPORTS' => 'Tegevuste raport',
+    'LBL_ACTIVITIES_REPORTS' => 'Tegevuste aruanne',
     'LBL_ADD_BUTTON'=> 'Lisa',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Telefonikõned',
-    'LBL_LOG_CALL'=> 'Telefonikõnede logi',
-    'LNK_SELECT_ACCOUNT'=> 'Vali ettevõte',
-    'LNK_NEW_ACCOUNT'=> 'Uus ettevõte',
+	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Kõned',
+    'LBL_LOG_CALL'=> 'Kõnede logi',
+    'LNK_SELECT_ACCOUNT'=> 'Vali konto',
+    'LNK_NEW_ACCOUNT'=> 'Uus konto',
     'LNK_NEW_OPPORTUNITY'=> 'Uus võimalus',
     'LBL_DEL' => 'Kustuta',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Müügivihjed',
     'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontaktid',
     'LBL_USERS_SUBPANEL_TITLE' => 'Kasutajad',
-    'LBL_OUTLOOK_ID' => 'Outlook ID',
+    'LBL_OUTLOOK_ID' => 'Outlooki ID',
     'LBL_MEMBER_OF' => 'Liige',
     'LBL_HISTORY_SUBPANEL_TITLE' => 'Märkused',
-    'LBL_LIST_ASSIGNED_TO_NAME' => 'Vastutaja',
+    'LBL_LIST_ASSIGNED_TO_NAME' => 'Määratud kasutaja',
     'LBL_LIST_MY_CALLS' => 'Minu kõned',
-    'LBL_MY_SCHEDULED_CALLS' => 'My Scheduled Calls',
-    'LBL_SELECT_FROM_DROPDOWN' => 'Palun tee esmalt valik rippmenüü loendist Seotud.',
-	'LBL_ASSIGNED_TO_NAME' => 'Vastutaja',
+    'LBL_MY_SCHEDULED_CALLS' => 'Minu plaanitud kõned',
+    'LBL_SELECT_FROM_DROPDOWN' => 'Tehke esmalt valik ripploendist Seotud.',
+	'LBL_ASSIGNED_TO_NAME' => 'Määratud kasutajale',
 	'LBL_ASSIGNED_TO_ID' => 'Määratud kasutaja',
     'NOTICE_DURATION_TIME' => 'Kestusaeg peab olema suurem kui 0',
-    'LBL_CALL_INFORMATION' => 'Telefonikõne ülevaade',
+    'LBL_CALL_INFORMATION' => 'Ülevaade',
     'LBL_REMOVE' => 'eemalda',
     'LBL_ACCEPT_STATUS' => 'Aktsepteeri olek',
-    'LBL_ACCEPT_LINK' => 'Accept Link',
+    'LBL_ACCEPT_LINK' => 'Aktsepteeri link',
     //For export labels
-    'LBL_PARENT_ID' => 'Parent ID',
+    'LBL_PARENT_ID' => 'Ema ID',
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Muutja ID',
-    'LBL_EXPORT_CREATED_BY' => 'Created By ID',
-    'LBL_EXPORT_ASSIGNED_USER_ID' => 'Assigned User ID',
-    'LBL_EXPORT_DATE_START' => 'Start Date and Time',
-    'LBL_EXPORT_PARENT_TYPE' => 'Related To Module',
-    'LBL_EXPORT_REMINDER_TIME' =>'Reminder Time (in minutes)',
+    'LBL_EXPORT_CREATED_BY' => 'Looja ID',
+    'LBL_EXPORT_ASSIGNED_USER_ID' => 'Määratud kasutaja ID',
+    'LBL_EXPORT_DATE_START' => 'Alguskuupäev ja aeg',
+    'LBL_EXPORT_PARENT_TYPE' => 'Seotud moodul',
+    'LBL_EXPORT_REMINDER_TIME' =>'Meeldetuletuse aeg (minutites)',
 
     // create invitee functionallity
-    'LBL_CREATE_INVITEE' => 'Create an Invitee',
-    'LBL_CREATE_CONTACT' => 'As Contact',
-    'LBL_CREATE_LEAD' => 'As Lead',
-    'LBL_CREATE_AND_ADD' => 'Create & Add',
+    'LBL_CREATE_INVITEE' => 'Loo kutsutu',
+    'LBL_CREATE_CONTACT' => 'Kontaktina',
+    'LBL_CREATE_LEAD' => 'Müügivihjena',
+    'LBL_CREATE_AND_ADD' => 'Loo ja lisa',
     'LBL_CANCEL_CREATE_INVITEE' => 'Tühista',
-    'LBL_EMPTY_SEARCH_RESULT' => 'Sorry, no results were found. Please create an invitee below.',
-    'LBL_NO_ACCESS' => 'You have no access to create $module',
+    'LBL_EMPTY_SEARCH_RESULT' => 'Kahjuks tulemusi ei leitud. Looge kutsutu allpool.',
+    'LBL_NO_ACCESS' => 'Teil pole juurdepääsu mooduli $module loomiseks',
     
-    'LBL_REPEAT_TYPE' => 'Repeat',
-    'LBL_REPEAT_INTERVAL' => 'Every',
-    'LBL_REPEAT_END' => 'End',
+    'LBL_REPEAT_TYPE' => 'Korda',
+    'LBL_REPEAT_INTERVAL' => 'Iga',
+    'LBL_REPEAT_END' => 'Lõpp',
     'LBL_REPEAT_END_AFTER' => 'Pärast',
-    'LBL_REPEAT_OCCURRENCES' => 'recurrences',
-    'LBL_REPEAT_END_BY' => 'By',
-    'LBL_REPEAT_DOW' => 'On',
-    'LBL_REPEAT_UNTIL' => 'Repeat Until',
-    'LBL_REPEAT_COUNT' => 'Number of recurrences',
-    'LBL_EDIT_ALL_RECURRENCES' => 'Edit All Recurrences',
-    'LBL_REMOVE_ALL_RECURRENCES' => 'Delete All Recurrences',
-    'LBL_DATE_END_ERROR' => 'End date is before start date',
-    'LBL_REPEAT_PARENT_ID' => 'Repeat Parent ID',
-    'LBL_RECURRING_SOURCE' => 'Recurring Source',
-    'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Are you sure you want to remove all recurring records?',
-    'LBL_RECURRING_LIMIT_ERROR' => 'This recurring call cannot be scheduled because it exceeds the maximum allowed recurrence of $limit.',
-    'LBL_RECURRENCE' => 'Recurrence',
-    'LBL_SYNCED_RECURRING_MSG' => 'This call originated in another system and was synced to Sugar. To make changes, go to the original Call within the other system. Changes made in the other system can be synced to this record.',
+    'LBL_REPEAT_OCCURRENCES' => 'kordumised',
+    'LBL_REPEAT_END_BY' => 'Poolt',
+    'LBL_REPEAT_DOW' => 'Ajal',
+    'LBL_REPEAT_UNTIL' => 'Korda kuni',
+    'LBL_REPEAT_COUNT' => 'Korduste arv',
+    'LBL_EDIT_ALL_RECURRENCES' => 'Redigeeri kõiki kordumisi',
+    'LBL_REMOVE_ALL_RECURRENCES' => 'Kustuta kõik kordumised',
+    'LBL_DATE_END_ERROR' => 'Lõppkuupäev on enne alguskuupäeva',
+    'LBL_REPEAT_PARENT_ID' => 'Korda ema ID-d',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Kõne korduse ID. Algse kõne alguskuupäev',
+    'LBL_RECURRING_SOURCE' => 'Korduv allikas',
+    'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Kas olete kindel, et soovite kõik korduvad kirjed eemaldada?',
+    'LBL_RECURRING_LIMIT_ERROR' => 'Seda korduvat kõnet ei saa plaanida, kuna see ületab maksimaalse lubatud $limit kordumise.',
+    'LBL_RECURRENCE' => 'Korduvus',
+    'LBL_SYNCED_RECURRING_MSG' => 'See kõne pärineb muust süsteemist ja sünkrooniti Sugariga. Muudatuste tegemiseks minge algse kõne juurde muus süsteemis. Muus süsteemis tehtud muudatusi saab selle kirjega sünkroonida.',
     'LBL_RELATED_TO' => 'Seotud:',
-    'LBL_CREATE_MODULE' => 'Telefonikõne logi',
-    'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Call with {{{this}}}',
-    'LBL_SEND_INVITES' => 'Send Invites',
-    'LBL_REMINDER_TITLE' => 'Telefonikõne:',
+    'LBL_CREATE_MODULE' => 'Kõnede logi',
+    'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Helistage {{{this}}}',
+    'LBL_SEND_INVITES' => 'Saada kutsed',
+    'LBL_REMINDER_TITLE' => 'Kõne:',
 
     //record save
-    'LBL_RECORD_SAVED_SUCCESS' => 'You scheduled the {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> for {{formatDate date_start}}.',
-    'LBL_RECORD_SAVED_ACCESS_DENIED' => 'You scheduled the {{moduleSingularLower}} for {{formatDate date_start}}, but you do not have permission to access it.',
+    'LBL_RECORD_SAVED_SUCCESS' => 'Plaanisite {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> ajaks {{formatDate date_start}}.',
+    'LBL_RECORD_SAVED_ACCESS_DENIED' => 'Plaanisite {{moduleSingularLower}} ajaks {{formatDate date_start}}, kuid teil pole õigust selle juurde pääseda.',
 
-    'LBL_REVENUELINEITEMS' => 'Revenue Line Items',
+    'LBL_REVENUELINEITEMS' => 'Tulude rea üksused',
 
-    'TPL_CALL_STATUS_CHANGED' => 'Call marked as {{status}}.',
+    'TPL_CALL_STATUS_CHANGED' => 'Kõne on märgitud kui {{status}}.',
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module consists of call records which may be in a status of "Scheduled", "Held", or "Canceled". Upcoming calls scheduled within the next 24 hours have the start date highlighted in blue. Overdue calls have the start date highlighted in red.
+    'LBL_HELP_RECORDS' => 'Moodul {{plural_module_name}} koosneb kõnekirjetest, mille olekuks võib olla Plaanitud, Ootel või Tühistatud. Järgmise 24 tunni jooksul plaanitud tulevaste kõnede alguskuupäev on siniselt esile tõstetud. Hilinenud kõnede alguskuupäev on esile tõstetud punaselt.
 
-From this {{plural_module_name}} list view, you can view and in-line edit call information. Additional actions are available in the menu at the end of each call&#39;s row. You can select "Close" from the menu on any scheduled call&#39;s row in order to mark it as held.
+Selle mooduli {{plural_module_name}} loendi vaatest saate kõneteavet vaadata ja real redigeerida. Lisatoimingud on saadaval iga kõnerea lõpus olevast menüüst. Kõne ootele märkimiseks saate mis tahes plaanitud kõne rea menüüst valida suvandi Sulge.
 
-Sugar users, contacts, and leads may be added as call invitees. {{plural_module_name}} may be created via the {{plural_module_name}} module, Calendar module, import, as well as via the Activities subpanel (for Legacy modules) or Planned Activities dashlet (for Sidecar modules) on related module records (e.g. Contacts, Accounts, etc.), which automatically creates a relationship between both records.',
+Sugari kasutajaid, kontakte ja müügivihjeid võib lisada kõnesse kutsututeks. Mooduli {{plural_module_name}} võib luua mooduli {{plural_module_name}}, mooduli Kalender, importimise ja ka alampaneeli Tegevused (moodulite Pärand puhul) või dashleti Plaanitud tegevused (moodulite Sidecar puhul) kaudu seotud mooduli kirjetes (nt Kontaktid, Kontod jne), mis loob mõlema kirje vahel seose automaatselt.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'The {{plural_module_name}} module consists of {{calls_singular_module}} records logged by users in your organization.  {{plural_module_name}} may be in a status of "Scheduled", "Held", or "Canceled". Sugar users as well as {{contacts_module}} and {{leads_module}} may be added as invitees.
+    'LBL_HELP_RECORD' => 'Moodul {{plural_module_name}} koosneb {{calls_singular_module}} kirjetest, mille on loginud teie organisatsiooni kasutajad.  Mooduli {{plural_module_name}} olekuks võib olla Plaanitud, Ootel või Tühistatud. Sugari kasutajad ja ka moodulid {{contacts_module}} ja {{leads_module}} võib lisada kutsututena.
 
-- Edit this record&#39;s fields by clicking an individual field or the Edit button.
-- View or modify links to other records in the subpanels by toggling the bottom left pane to "Data View".
-- Make and view user comments and record change history in the activity stream by toggling the bottom left pane to "Activity Stream".
-- Follow or favorite this record using the icons to the right of the record name.
-- Additional actions are available in the dropdown Actions menu to the right of the Edit button.',
+- Redigeerige selle kirje välju, klõpsates üksikut välja või nuppu Redigeeri.
+- Vaadake või muutke linke muudele kirjetele alampaneelidel, lülitades alumise vasaku paani suvandile Andmevaade.
+- Tehke ja vaadake kasutaja kommentaare ja kirje muutmise ajalugu tegevustes, lülitades alumise vasaku paani suvandile Tegevused.
+- Jälgige seda kirjet või pange see lemmikutesse, kasutades kirje nimest paremal olevaid ikoone.
+- Lisategevused on saadaval nupust Redigeeri paremal olevas rippmenüüs Tegevused.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'The {{plural_module_name}} module consists of {{calls_singular_module}} records logged by users in your organization.  {{plural_module_name}} may be in a status of "Scheduled", "Held", or "Canceled". Sugar users as well as contacts and leads may be added as invitees.
+    'LBL_HELP_CREATE' => 'Moodul {{plural_module_name}} koosneb {{calls_singular_module}} kirjetest, mille on loginud teie organisatsiooni kasutajad.  Mooduli  {{plural_module_name}} olekuks võib olla Plaanitud, Ootel või Tühistatud. Sugari kasutajad ja ka kontaktid ja müügivihjed võib lisada kutsututena.
 
-To create a {{calls_singular_module}}:
-1. Provide values for the fields as desired.
-    - Fields marked "Required" must be completed prior to saving.
-    - Click "Show More" to expose additional fields if necessary.
-2. Add invitees to the {{calls_singular_module}}.
-    - Click "Select an Attendee" to add an existing user, contact, or lead to the {{calls_singular_module}}.
-    - Click the plus icon to the right of "Select an Attendee" to create a {{calls_singular_module}} attendee as a new Sugar record.
-3. Click "Save" to finalize the new record and return to the previous page.',
+Mooduli {{calls_singular_module}} loomiseks tehke järgmist.
+1. Esitage väljade väärtused soovi järgi.
+    - Väljad märkega Kohustuslik tuleb täita enne salvestamist.
+    - Vajaduse korral lisaväljade avaldamiseks klõpsake suvandit Kuva rohkem.
+2. Lisage kutsutud moodulisse {{calls_singular_module}}.
+    - Olemasoleva kasutaja, kontakti või müügivihje lisamiseks moodulisse {{calls_singular_module}} klõpsake suvandit Vali kutsutu.
+    - Mooduli {{calls_singular_module}} kutsutu loomiseks Sugari uue kirjena klõpsake suvandist Vali kutsutu paremal olevat plussmärki.
+3. Uue kirje lõpetamiseks ja eelmisele lehele naasmiseks klõpsake nuppu Salvesta.',
 );
