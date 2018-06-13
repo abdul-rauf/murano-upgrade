@@ -1,6 +1,6 @@
 ## SugarCRM
 # Ignore custom .htaccess stuff.
-/.htaccess
+#/.htaccess
 # Ignore the cache directory completely.
 # This will break the current behaviour. Which was often leading to
 # the misuse of the repository as backup replacement.
@@ -15,8 +15,8 @@
 /custom/modules/*/Ext/
 /custom/application/Ext/
 # Custom configuration should also be ignored.
-/config.php
-/config_override.php
+#/config.php
+#/config_override.php
 # The silent upgrade scripts aren't needed.
 /silentUpgrade*.php
 # Logs files can safely be ignored.
