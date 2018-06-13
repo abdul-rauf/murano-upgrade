@@ -86,7 +86,7 @@ class SugarACL
 
             $name = BeanFactory::getObjectName($module);
             if(!isset($GLOBALS['dictionary'][$name])) {
-                if(empty($name) || empty($GLOBALS['beanList'][$module]) || empty($GLOBALS['beanFiles'][$GLOBALS['beanList'][$module]])) {
+                if(empty($name) || empty($GLOBALS['beanList'][$module]) || empty($GLOBALS['beanFiles'][$GLOBALS['beanList'][$module]]) || in_array($module, array('Empty'))) {
                     // try to weed out non-bean modules - these can't have ACLs as they don't have vardefs to keep them
                     $GLOBALS['log']->debug("Non-bean $module - no ACL for you!");
                     return array();
@@ -94,9 +94,9 @@ class SugarACL
                 VardefManager::loadVardef($module, $name);
             }
             $acl_list = isset($GLOBALS['dictionary'][$name]['acls'])?$GLOBALS['dictionary'][$name]['acls']:array();
-            $acl_list = array_merge($acl_list, SugarBean::getDefaultACL());
+            $acl_list = array_merge($acl_list, SugarBean::getDefaultACL($name));
 
-             $GLOBALS['log']->debug("ACLS for $module: ".var_export($acl_list, true));
+            $GLOBALS['log']->debug("ACLS for $module: ".var_export($acl_list, true));
 
             foreach($acl_list as $klass => $args) {
                 if($args === false) continue;

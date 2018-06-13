@@ -177,7 +177,7 @@ abstract class ImportDataSource implements Iterator
         fputcsv($fp,array($error,$fieldName,$fieldValue,$this->_rowsCount));
         fclose($fp);
 
-        if ( !$this->_rowCountedForErrors )
+        if ( !$this->_rowCountedForErrors || $error == 'Execution')
         {
             $this->_errorCount++;
             $this->_rowCountedForErrors = true;
@@ -302,13 +302,15 @@ abstract class ImportDataSource implements Iterator
 
     public function __get($var)
     {
-        if( isset($_REQUEST[$var]) )
+        if (isset($_REQUEST[$var])) {
             return $_REQUEST[$var];
-        else if( isset($this->_localeSettings[$var]) )
+        } elseif (isset($this->_localeSettings[$var])) {
             return $this->_localeSettings[$var];
-        else
+        } elseif (isset($this->$var)) {
             return $this->$var;
+        }
+
+        return null;
     }
-    
 }
  

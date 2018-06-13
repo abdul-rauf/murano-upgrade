@@ -6,6 +6,9 @@
   padding-top: 60px;
   overflow-x: auto;
 }
+.touch .sidebar-content .dashboard {
+  padding-top: 60px;
+}
 
 .touch #portal .dashboard {
   padding-top: 0;
@@ -14,28 +17,32 @@
 .dashboard {
   width: 100%;
   border-right: none;
-  background: url(@textureSecondary);
   position: absolute;
   top: 61px;
   bottom: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  .rtlFloat(@direction,right);
 
   .headerpane {
-    .record-cell {
-      padding-top: 15px;
-      &:first-child {
-        width: 100%;
-        max-width: 100px; //temp until better fix for ellipsis
+    h1 {
+      > .record-cell {
+        padding-top: 15px;
+        &:first-child {
+          width: 100%;
+          max-width: 100px; //temp until better fix for ellipsis
+        }
+        &.edit {
+          padding: 15px 0 0 20px;
+        }
+        .detail {
+          display: inline-block;
+          padding-top: 4px;
+          width: inherit;
+        }
       }
-      .detail {
-        display: inline-block;
-        padding-top: 4px;
+      input[type="text"] {
+        margin: 0 0 0 -7px;
       }
-    }
-    input[type="text"] {
-      margin: 0 0 0 -7px;
     }
   }
 
@@ -102,6 +109,7 @@
       .options {
         a {
           padding:0 12px;
+          display: inline-block;
           &:hover {
             text-decoration: none;
           }
@@ -128,11 +136,13 @@
         padding-right: 5px;
       }
 
-      .dashlet-content + .block-footer {
-        text-align: left;
-        font-weight: normal;
-        border-top: @borderWidget;
-        .border-radius(0 0 @baseBorderRadius @baseBorderRadius);
+      .dashlet-content + div {
+        .block-footer {
+          text-align: left;
+          font-weight: normal;
+          border-top: @borderWidget;
+          .border-radius(0 0 @baseBorderRadius @baseBorderRadius);
+        }
       }
 
       .block-footer {
@@ -171,7 +181,7 @@
         padding-top: 20px;
       }
       .well {
-        border: 1px dashed darken(@grayLighter 10%);
+        border: 1px dashed darken(@grayLighter, 10%);
         background: none;
       }
     }
@@ -231,7 +241,7 @@
           &> a {
             font-size: @fontSizeHeader;
             color: inherit;
-            padding: 4px 20px 4px 2px;
+            padding: 4px 24px 4px 2px;
             margin-left: 0;
             max-width: 100%;
             text-align: left;
@@ -244,11 +254,10 @@
               color: inherit !important;
               text-decoration: none;
             }
-            .icon-caret-down {
-              top: -2px;
+            .fa-caret-down {
               position: absolute;
               right: 0;
-              top: 7px;
+              top: 5px;
             }
           }
           ul.dropdown-menu {
@@ -308,7 +317,7 @@
   }
 }
 
-.swappable-dashlet.icon-download-alt {
+.swappable-dashlet.fa-download {
   display: none;
 }
 

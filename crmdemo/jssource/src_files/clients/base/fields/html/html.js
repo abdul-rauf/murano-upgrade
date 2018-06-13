@@ -11,24 +11,31 @@
 /**
  * @class View.Fields.Base.HtmlField
  * @alias SUGAR.App.view.fields.BaseHtmlField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     fieldSelector: '.htmlareafield', //iframe selector
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
+     *
+     * The direction for this field should always be `ltr`.
+     */
+    direction: 'ltr',
+
+    /**
+     * @inheritdoc
      *
      * The html area is always a readonly field.
      * (see htmleditable for an editable html field)
      */
     initialize: function(options) {
         options.def.readonly = true;
-        app.view.Field.prototype.initialize.call(this, options);
+        this._super('initialize', [options]);
     },
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      * Set the name of the field on the iframe as well as the contents
      *

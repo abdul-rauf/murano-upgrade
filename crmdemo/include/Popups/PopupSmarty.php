@@ -292,6 +292,7 @@ class PopupSmarty extends ListViewSmarty{
         $this->searchForm->lv = $lv;
         $this->searchForm->displaySavedSearch = false;
 
+
 		SugarACL::listFilter($this->module, $this->searchForm->fieldDefs, array("owner_override" => true),
 		    array("use_value" => true, "suffix" => '_advanced', "add_acl" => true));
 
@@ -380,6 +381,7 @@ class PopupSmarty extends ListViewSmarty{
                 }
             }
         }
+
         //check for team_set_count
         if(!empty($this->filter_fields['team_name']) && empty($this->filter_fields['team_count'])){
         	$this->filter_fields['team_count'] = true;

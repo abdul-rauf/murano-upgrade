@@ -165,11 +165,14 @@ class SugarFieldFile extends SugarFieldBase
         }
 
         if ($move) {
+            $temp = !empty($params['temp']);
             // Added checking of final move to capture errors that might occur
-            if ($upload_file->final_move($bean->id)) {
-                // This fixes an undefined index warning being thrown
-                $docType = isset($vardef['docType']) && isset($params[$prefix . $vardef['docType']]) ? $params[$prefix . $vardef['docType']] : null;
-                $upload_file->upload_doc($bean, $bean->id, $docType, $bean->$field, $upload_file->mime_type);
+            if ($upload_file->final_move($bean->id, $temp)) {
+                if (!$temp) {
+                    // This fixes an undefined index warning being thrown
+                    $docType = isset($vardef['docType']) && isset($params[$prefix . $vardef['docType']]) ? $params[$prefix . $vardef['docType']] : null;
+                    $upload_file->upload_doc($bean, $bean->id, $docType, $bean->$field, $upload_file->mime_type);
+                }
             } else {
                 // Reset the bean back to original, but only if we had set them.
                 $bean->$field = $originalvals['value'];
@@ -216,7 +219,18 @@ class SugarFieldFile extends SugarFieldBase
                 }
             }
         } elseif (!empty($duplicateModuleId)) {
-            $upload_file->duplicate_file($duplicateModuleId, $bean->id, $bean->$field);
+            if ($bean->object_name == 'Note') {
+                $duplicateBean = BeanFactory::getBean('Notes', $duplicateModuleId);
+                $duplicateModuleId = $duplicateBean->getUploadId();
+            }
+            // don't copy the actual file.
+            // for now, we only handle email notes
+            if (!empty($params['parent_type']) &&  $params['parent_type'] == 'Emails') {
+                $bean->upload_id = $duplicateModuleId;
+            }
+            else {
+                $upload_file->duplicate_file($duplicateModuleId, $bean->id, $bean->$field);
+            }
             $bean->$field = $params[$field];
 
             require_once 'include/utils/file_utils.php';
@@ -242,18 +256,20 @@ class SugarFieldFile extends SugarFieldBase
     }
 
     /**
-     * Formats a field for the Sugar API
-     *
-     * @param array     $data
-     * @param SugarBean $bean
-     * @param array     $args
-     * @param string    $fieldName
-     * @param array     $properties
+     * {@inheritDoc}
      */
-    public function apiFormatField(&$data, $bean, $args, $fieldName, $properties) {
+    public function apiFormatField(
+        array &$data,
+        SugarBean $bean,
+        array $args,
+        $fieldName,
+        $properties,
+        array $fieldList = null,
+        ServiceBase $service = null
+    ) {
         // Handle the parent so our current data element is set
-        parent::apiFormatField($data, $bean, $args, $fieldName, $properties);
-        
+        parent::apiFormatField($data, $bean, $args, $fieldName, $properties, $fieldList, $service);
+
         // Get fields related to this field but only if the current field is empty
         // If the current field is empty, set it to the related field(s) until it 
         // isn't empty. This happens in the case of upload file fields in File 
@@ -273,6 +289,39 @@ class SugarFieldFile extends SugarFieldBase
         // Add in file_mime_type
         if (empty($data['file_mime_type'])) {
             $data['file_mime_type'] = empty($bean->file_mime_type) ? '' : $bean->file_mime_type;
+        }
+    }
+
+    /** {@inheritDoc} */
+    public function apiSave(SugarBean $bean, array $params, $field, $properties)
+    {
+        parent::apiSave($bean, $params, $field, $properties);
+        // handle copy
+        // $params[$field . '_duplicateBeanId'] contains id of bean from which we should copy file
+        if (!empty($params[$field . '_duplicateBeanId'])) {
+            require_once 'include/upload_file.php';
+            $upload_file = new UploadFile($field . '_file');
+            $duplicateModuleId = $params[$field . '_duplicateBeanId'];
+            if ($bean->object_name == 'Note') {
+                $duplicateBean = BeanFactory::getBean('Notes', $duplicateModuleId);
+                $uploadId = $duplicateBean->getUploadId();
+                // don't copy the actual file for email notes
+                if (!empty($params['parent_type']) &&  $params['parent_type'] == 'Emails') {
+                    $bean->upload_id = $uploadId;
+                }
+                else {
+                    $upload_file->duplicate_file($uploadId, $bean->id, $bean->$field);
+                }
+            }
+            else {
+                $upload_file->duplicate_file($duplicateModuleId, $bean->id, $bean->$field);
+            }
+            require_once 'include/utils/file_utils.php';
+            $extension = get_file_extension($bean->$field);
+            if (!empty($extension)) {
+                $bean->file_ext = $extension;
+                $bean->file_mime_type = get_mime_content_type_from_filename($bean->$field);
+            }
         }
     }
 }

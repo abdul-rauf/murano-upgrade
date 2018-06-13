@@ -31,11 +31,12 @@ class SugarUpgradeMBMenu extends UpgradeScript
                 'label' => 'LNK_NEW_RECORD',
                 'acl_action' => 'create',
                 'acl_module' => $moduleName,
-                'icon' => 'icon-plus',
+                'icon' => 'fa-plus',
         );
 
         // Handle link to vCard
-        if (is_subclass_of(BeanFactory::getBean($moduleName), 'Person')) {
+        $bean = BeanFactory::getBean($moduleName);
+        if (is_subclass_of($bean, 'Person')) {
             $vCardRoute = (in_array($moduleName, $GLOBALS['bwcModules']))
                 ? '#bwc/index.php?' . http_build_query(array('module' => $moduleName, 'action' => 'ImportVCard'))
                 : "#$moduleName/vcard-import";
@@ -44,7 +45,7 @@ class SugarUpgradeMBMenu extends UpgradeScript
                 'label' => 'LNK_IMPORT_VCARD',
                 'acl_action' => 'create',
                 'acl_module' => $moduleName,
-                'icon' => 'icon-plus',
+                'icon' => 'fa-plus',
             );
         }
 
@@ -53,21 +54,23 @@ class SugarUpgradeMBMenu extends UpgradeScript
                 'label' => 'LNK_LIST',
                 'acl_action' => 'list',
                 'acl_module' => $moduleName,
-                'icon' => 'icon-reorder',
+                'icon' => 'fa-bars',
         );
-        $menu[] = array(
+        if ($bean instanceof SugarBean && $bean->importable) {
+            $menu[] = array(
                 'route' => '#bwc/index.php?' . http_build_query(
-                        array(
-                                'module' => 'Import',
-                                'action' => 'Step1',
-                                'import_module' => $moduleName,
-                        )
+                    array(
+                        'module' => 'Import',
+                        'action' => 'Step1',
+                        'import_module' => $moduleName,
+                    )
                 ),
                 'label' => 'LNK_IMPORT_'.strtoupper($moduleName),
                 'acl_action' => 'import',
                 'acl_module' => $moduleName,
-                'icon' => 'icon-upload',
-        );
+                'icon' => 'fa-arrow-circle-o-up',
+            );
+        }
         $content = <<<END
 <?php
 /* Created by SugarUpgrader for module $moduleName */
@@ -98,7 +101,7 @@ END;
 
         // Do it also for bwcModules since some of them may not have Menu.php and we need it
         // Also some non-MB modules marked as BWC in post scripts and should have valid menu as well.
-        foreach ($GLOBALS['bwcModules'] as $moduleName) {
+        foreach ($this->getNotCoreBwcModules() as $moduleName) {
             if (!file_exists("modules/$moduleName")) {
                 continue;
             }
@@ -120,5 +123,29 @@ END;
                 $this->addMenu($moduleName);
             }
         }
+    }
+
+    /**
+     * Search for bwc modules which are not related to core bwc modules
+     *
+     * @return array
+     */
+    protected function getNotCoreBwcModules()
+    {
+        // Because of 6_ScanModules.php we should find core BWC modules in some specific way.
+        $bwcModules = array();
+        include 'include/modules.php';
+        $coreBwcModules = $bwcModules;
+        foreach (SugarAutoLoader::existing('include/modules_override.php', SugarAutoLoader::loadExtension("modules")) as $modExtFile) {
+            $bwcModules = array();
+            include $modExtFile;
+            foreach ($bwcModules as $module) {
+                $key = array_search($module, $coreBwcModules);
+                if ($key !== false) {
+                    unset($coreBwcModules[$key]);
+                }
+            }
+        }
+        return array_diff($GLOBALS['bwcModules'], $coreBwcModules);
     }
 }

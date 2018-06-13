@@ -8,5 +8,4 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({extendsFrom:"RowactionField",initialize:function(options){this.plugins=_.clone(this.plugins)||[];this.plugins.push('DisableDelete');this._super("initialize",[options]);this.model.on("change:closed_revenue_line_items",function(){this.render();if(_.isFunction(this.view.initButtons)){this.view.initButtons();}
-if(_.isFunction(this.view.setButtonStates)){this.view.setButtonStates(this.view.STATE.VIEW);}},this);}})
+({extendsFrom:"RowactionField",initialize:function(options){this.plugins=_.clone(this.plugins)||[];this.plugins.push('DisableDelete');this._super("initialize",[options]);}})

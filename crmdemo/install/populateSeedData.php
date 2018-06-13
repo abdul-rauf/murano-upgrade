@@ -71,16 +71,19 @@ if( $memory_limit != "" && $memory_limit != "-1" ){ // if memory_limit is set
         ini_set("memory_limit", "$memory_needed" . "M");
     }
 }
+
 $large_scale_test = empty($sugar_config['large_scale_test']) ? false : $sugar_config['large_scale_test'];
 
 $seed_user = new User();
 $user_demo_data = new UserDemoData($seed_user, $large_scale_test);
+installLog("DemoData: Creating Users");
 $user_demo_data->create_demo_data();
+installLog("DemoData: Done Creating Users");
 $number_contacts = 200;
 $number_companies = 50;
 $number_leads = 200;
 $number_cases = 5;
-$large_scale_test = empty($sugar_config['large_scale_test']) ? false : $sugar_config['large_scale_test'];
+
 // If large scale test is set to true, increase the seed data.
 if($large_scale_test) {
 	// increase the cuttoff time to 1 hour
@@ -90,9 +93,11 @@ if($large_scale_test) {
 	$number_leads = 100000;
 }
 
+installLog("DemoData: Teams");
 $seed_team = new Team();
 $team_demo_data = new TeamDemoData($seed_team, $large_scale_test);
 $team_demo_data->create_demo_data();
+installLog("DemoData: Done Teams");
 
 $possible_duration_hours_arr = array( 0, 1, 2, 3);
 $possible_duration_minutes_arr = array('00' => '00','15' => '15', '30' => '30', '45' => '45');
@@ -121,12 +126,17 @@ $replacements[] = '';
 $replacements[] = '';
 
 //create timeperiods - pro only
+
 require_once('modules/Forecasts/ForecastDirectReports.php');
 require_once('modules/Forecasts/Common.php');
 require_once('modules/TimePeriods/TimePeriodsSeedData.php');
 
+installLog("DemoData: Time Periods");
 $timedate = TimeDate::getInstance();
 $timeperiods = TimePeriodsSeedData::populateSeedData();
+installLog("DemoData: Done Time Periods");
+
+echo '.';
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -136,12 +146,22 @@ $timeperiods = TimePeriodsSeedData::populateSeedData();
 // the name of de-duplication during account population.
 $accounts_companies_list = $sugar_demodata['company_name_array'];
 
+installLog("DemoData: Companies + Related Calls, Notes Meetings and Bugs");
 for($i = 0; $i < $number_companies; $i++) {
-	// De-populate a copy of the company name list
-	// as each name is used to prevent duplication.
-	$account_num = array_rand($accounts_companies_list);
-	$account_name = $accounts_companies_list[$account_num];
-	unset($accounts_companies_list[$account_num], $account_num);
+
+    if (count($accounts_companies_list) > 0) {
+	    // De-populate a copy of the company name list
+	    // as each name is used to prevent duplication.
+	    $account_num = array_rand($accounts_companies_list);
+	    $account_name = $accounts_companies_list[$account_num];
+	    unset($accounts_companies_list[$account_num], $account_num);
+    } else {
+        // We've run out of preset company names so start generating new ones.
+        $account_name =
+            $sugar_demodata['first_name_array'][array_rand($sugar_demodata['first_name_array'])] . ' ' .
+            $sugar_demodata['last_name_array'][array_rand($sugar_demodata['last_name_array'])] . ' ' .
+            $sugar_demodata['company_name_suffix_array'][array_rand($sugar_demodata['company_name_suffix_array'])];
+    }
 
 	// Create new accounts.
 	$account = new Account();
@@ -265,11 +285,7 @@ for($i = 0; $i < $number_companies; $i++) {
 	$call->duration_hours='0';
 	$call->duration_minutes='30';
 	$call->account_id =$account->id;
-    if (key($app_list_strings['call_status_dom']) === null) {
-        reset($app_list_strings['call_status_dom']);
-    }
-    $call->status = current($app_list_strings['call_status_dom']);
-    next($app_list_strings['call_status_dom']);
+    $call->status = array_rand($app_list_strings['call_status_dom']);
 	$call->team_id = $account->team_id;
 	$call->team_set_id = $account->team_set_id;
 	$call->save();
@@ -277,7 +293,12 @@ for($i = 0; $i < $number_companies; $i++) {
     //Set the user to accept the call
     $seed_user->id = $call->assigned_user_id;
     $call->set_accept_status($seed_user,'accept');
+
+    if ($i % 10 === 0) {
+        echo '.';
+    }
 }
+installLog("DemoData: Done Companies + Related Calls, Notes Meetings and Bugs");
 
 unset($accounts_companies_list);
 
@@ -292,7 +313,7 @@ $lead_status_max = count($app_list_strings['lead_status_dom']) - 1;
 $title_max = count($titles) - 1;
 ///////////////////////////////////////////////////////////////////////////////
 ////	DEMO CONTACTS
-
+installLog("DemoData: Contacts");
 $contacts = array();
 for($i=0; $i<$number_contacts; $i++) {
 	$contact = new Contact();
@@ -415,7 +436,13 @@ for($i=0; $i<1000; $i++)
 	$email->contacts->add($contact);
 	$email->load_relationship('accounts');
 	$email->accounts->add($contacts_account);
+
+    if ($i % 10 === 0) {
+        echo '.';
+    }
 }
+installLog("DemoData: Done Contacts");
+installLog("DemoData: Leads");
 
 for($i=0; $i<$number_leads; $i++)
 {
@@ -509,9 +536,15 @@ for($i=0; $i<$number_leads; $i++)
 	$lead->primary_address_postalcode = mt_rand(10000,99999);
 	$lead->primary_address_country = $sugar_demodata['primary_address_country'];
 	$lead->save();
+
+    if ($i % 10 === 0) {
+        echo '.';
+    }
 }
+installLog("DemoData: Done Leads");
 
 
+installLog("DemoData: Products Metadata");
 foreach($sugar_demodata['manufacturer_seed_data_names'] as $v){
 	$manufacturer = new Manufacturer;
 	$manufacturer->name = $v;
@@ -520,6 +553,9 @@ foreach($sugar_demodata['manufacturer_seed_data_names'] as $v){
 	$manufacturer->save();
 	$manufacturer_id_arr[] = $manufacturer->id;
 }
+
+echo '.';
+
 $list_order = 1;
 foreach($sugar_demodata['shipper_seed_data_names'] as $v){
 	$shipper = new Shipper;
@@ -531,6 +567,8 @@ foreach($sugar_demodata['shipper_seed_data_names'] as $v){
 	$ship_id_arr[] = $shipper->id;
 }
 
+echo '.';
+
 foreach($sugar_demodata['productcategory_seed_data_names'] as $v){
 	$category = new ProductCategory;
 	$category->name = $v;
@@ -540,6 +578,9 @@ foreach($sugar_demodata['productcategory_seed_data_names'] as $v){
 	$category->save();
 	$productcategory_id_arr[] = $category->id;
 }
+
+echo '.';
+
 $list_order = 1;
 foreach($sugar_demodata['producttype_seed_data_names'] as $v){
 	$type = new ProductType;
@@ -549,6 +590,10 @@ foreach($sugar_demodata['producttype_seed_data_names'] as $v){
 	$producttype_id_arr[] = $type->id;
 	$list_order++;
 }
+
+echo '.';
+
+
 foreach($sugar_demodata['taxrate_seed_data'] as $v){
 	$taxrate = new TaxRate;
 	$taxrate->name = $v['name'];
@@ -560,7 +605,7 @@ foreach($sugar_demodata['taxrate_seed_data'] as $v){
 	$taxrate_id_arr[] = $taxrate->id;
 };
 
-
+echo '.';
 
 
 foreach($sugar_demodata['currency_seed_data'] as $v){
@@ -574,6 +619,8 @@ foreach($sugar_demodata['currency_seed_data'] as $v){
 	$currency->symbol = $v['symbol'];
 	$currency->save();
 }
+
+echo '.';
 $dollar_id = '-99';
 //$tekkyware_id = $manufacturer->id;
 //$widgetworld_id = $manufacturer->id;
@@ -614,6 +661,10 @@ foreach($sugar_demodata['producttemplate_seed_data'] as $v){
 	$template->qty_in_stock = $v['qty_in_stock'];
 	$template->save();
 }
+installLog("DemoData: Done Products Metadata");
+echo '.';
+
+installLog("DemoData: Contracts");
 include_once('modules/TeamNotices/DefaultNotices.php');
 ///
 /// SEED DATA FOR CONTRACTS
@@ -636,62 +687,96 @@ foreach($sugar_demodata['contract_seed_data'] as $v){
 	$contract->description = $v['description'];
 	$contract->save();
 }
+installLog("DemoData: Done Contracts");
+
+echo '.';
 
 ///
 /// SEED DATA FOR KNOWLEDGE BASE
 ///
-$kbtags_hash = array();
-foreach($sugar_demodata['kbdocument_seed_data_kbtags'] as $v){
-    $kbtag = new KBTag;
-    $kbtag->tag_name = $v;
-    $id = $kbtag->save();
-    $kbtags_hash[$id] = $v;
+installLog("DemoData: KB");
+$categoryIds = array();
+foreach ($sugar_demodata['kbcategories_array'] as $name => $v) {
+    $kbCategory = BeanFactory::newBean('Categories');
+    $kbCategory->name = $name;
+
+    $KBContent = BeanFactory::getBean('KBContents');
+    $rootCategory = BeanFactory::getBean(
+        'Categories',
+        $KBContent->getCategoryRoot(),
+        array('use_cache' => false)
+    );
+    $rootCategory->append($kbCategory);
+    $idCategory = $kbCategory->save();
+    array_push($categoryIds, $idCategory);
+
+    if (count($v) > 0) {
+        foreach ($v as $subname) {
+            $kbSubCategory = BeanFactory::newBean('Categories');
+            $kbSubCategory->name = $subname;
+
+            $KBSubContent = BeanFactory::getBean('KBContents');
+            $rootSubCategory = BeanFactory::getBean(
+                'Categories',
+                $idCategory,
+                array('use_cache' => false)
+            );
+            $rootSubCategory->append($kbSubCategory);
+            $idSubCategory = $kbSubCategory->save();
+            array_push($categoryIds, $idSubCategory);
+        }
+    }
 }
 
-foreach($sugar_demodata['kbdocument_seed_data'] as $v){
-	$kbdoc = new KBDocument();
-	$kbdoc->kbdocument_name = $v['name'];
-	$kbdoc->status_id = 'Published';
-	$kbdoc->team_id = 1;
-	$kbdoc->assigned_user_id = 'seed_will_id';
-	$kbdoc->active_date = $v['start_date'];
-	$kbdoc->exp_date = $v['exp_date'];
-	$kbdoc->save();
+$system_config = new Administration();
+$system_config->saveSetting('KBContents', 'languages', $sugar_demodata['kbdocuments_languages'], 'base');
 
-	$kbdocRevision = new KBDocumentRevision;
-	$kbdocRevision->change_log = translate('DEF_CREATE_LOG','KBDocuments');
-	$kbdocRevision->revision = '1';
-	$kbdocRevision->kbdocument_id = $kbdoc->id;
-	$kbdocRevision->latest = true;
-	$kbdocRevision->save();
+echo '.';
 
-	$docRevision = new DocumentRevision();
-	$docRevision->filename = $kbdoc->kbdocument_name;
-	$docRevision->save();
-
+foreach($sugar_demodata['kbdocuments_seed_data'] as $v){
     $kbdocContent = new KBContent();
-    $kbdocContent->document_revision_id = $docRevision->id;
-    $kbdocContent->team_id = $kbdoc->team_id;
-	$kbdocContent->kbdocument_body = $v['body'];
-	$kbdocContent->save();
-
-	$kbdocRevision->kbcontent_id = $kbdocContent->id;
-    $kbdocRevision->document_revision_id = $docRevision->id;
-    $kbdocRevision->save();
-
-    $kbdoc->kbdocument_revision_id = $kbdocRevision->id;
-	$kbdoc->save();
-
-	foreach ($v['tags'] as $tag) {
-	    $kbdocKBTag = new KBDocumentKBTag();
-	    $kbdocKBTag->kbtag_id = array_search($tag,$kbtags_hash);
-	    $kbdocKBTag->kbdocument_id = $kbdoc->id;
-	    $kbdocKBTag->team_id = $kbdoc->team_id;
-	    $kbdocKBTag->save();
-	}
+    $kbdocContent->team_id = 1;
+    $kbdocContent->team_set_id = 1;
+    $kbdocContent->assigned_user_id = 'seed_will_id';
+    $kbdocContent->assigned_user_name = "seed_will";
+    $kbdocContent->name = $v['name'];
+    $kbdocContent->kbdocument_body = $v['body'];
+    $kbdocContent->tag = $v['tag'];
+    $kbdocContent->status = $sugar_demodata['kbdocuments_statuses'][array_rand($sugar_demodata['kbdocuments_statuses'])];
+    $kbdocContent->active_date = isset($v['active_date']) ? $v['active_date'] : null;
+    $kbdocContent->exp_date = isset($v['exp_date']) ? $v['exp_date'] : null;
+    $kbdocContent->useful = isset($v['useful']) ? $v['useful'] : 0;
+    $kbdocContent->notuseful = isset($v['notuseful']) ? $v['notuseful'] : 0;
+    $kbdocContent->category_id = $categoryIds[array_rand($categoryIds)];
+    $idDocument = $kbdocContent->save();
+    if (isset($v['localizations'])) {
+        foreach($v['localizations'] as $localization) {
+            $KBLocalization = clone(BeanFactory::retrieveBean('KBContents', $idDocument));
+            unset($KBLocalization->id);
+            unset($KBLocalization->kbarticle_id);
+            $KBLocalization->language = $localization['language'];
+            $KBLocalization->name = $localization['name'];
+            $KBLocalization->kbdocument_name = $localization['name'];
+            $KBLocalization->kbdocument_body = $localization['body'];
+            $KBLocalization->save();
+        }
+    }
+    if (isset($v['revisions'])) {
+        foreach($v['revisions'] as $revision) {
+            $KBRevision = clone(BeanFactory::retrieveBean('KBContents', $idDocument));
+            unset($KBRevision->id);
+            unset($KBRevision->revision);
+            $KBRevision->name = $revision['name'];
+            $KBRevision->save();
+        }
+    }
 }
 
+installLog("DemoData: Done KB");
 
+echo '.';
+
+installLog("DemoData: Email Templates");
 ///
 /// SEED DATA FOR EMAIL TEMPLATES
 ///
@@ -711,17 +796,18 @@ if(!empty($sugar_demodata['emailtemplates_seed_data'])) {
 	}
 }
 
+installLog("DemoData: Done Email Templates");
 
+echo '.';
+
+
+    installLog("DemoData: Products");
     include('install/seed_data/products_SeedData.php');
+    installLog("DemoData: Quotes");
     include('install/seed_data/quotes_SeedData.php');
-    //include('install/seed_data/opportunities_SeedData.php');
 
-    //This is set to yes at the begininning of this file
-	unset($_SESSION['disable_workflow']);
-
+    installLog("DemoData: Opportunities");
     require_once('modules/Opportunities/OpportunitiesSeedData.php');
-
-    //$products = $account->build_related_list('SELECT id FROM revenue_line_items', new RevenueLineItem(), 0, 50);
     $opportunity_ids = OpportunitiesSeedData::populateSeedData($number_companies*3, $app_list_strings, $accounts, $sugar_demodata['users']);
 
     foreach($contacts as $id)
@@ -732,11 +818,18 @@ if(!empty($sugar_demodata['emailtemplates_seed_data'])) {
         $contact->set_relationship('opportunities_contacts', array('contact_id'=>$contact->id ,'opportunity_id'=> $opportunity_ids[$opportunity_key], 'contact_role'=>$app_list_strings['opportunity_relationship_type_default_key']), false);
     }
 
+    installLog("DemoData: Done Opportunities");
+
+    echo '.';
+
+    installLog("DemoData: Forecasts");
     require_once('modules/Forecasts/ForecastsSeedData.php');
     ForecastsSeedData::populateSeedData($timeperiods);
 
+    installLog("DemoData: Done Forecasts");
+
+    echo '.';
 
 
-
-    include('install/seed_data/ForecastTreeSeedData.php');
-    ForecastTreeSeedData::populateUserSeedData();
+//This is set to yes at the begininning of this file
+unset($_SESSION['disable_workflow']);

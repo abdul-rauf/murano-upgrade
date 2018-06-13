@@ -1,4 +1,5 @@
 <?php
+// created: 2018-06-13 10:47:53
 $viewdefs['Opportunities']['base']['view']['list'] = array (
   'panels' => 
   array (
@@ -10,7 +11,6 @@ $viewdefs['Opportunities']['base']['view']['list'] = array (
         0 => 
         array (
           'name' => 'name',
-          'width' => '30%',
           'link' => true,
           'label' => 'LBL_LIST_OPPORTUNITY_NAME',
           'enabled' => true,
@@ -49,7 +49,6 @@ $viewdefs['Opportunities']['base']['view']['list'] = array (
         2 => 
         array (
           'name' => 'sales_stage',
-          'width' => '10%',
           'label' => 'LBL_LIST_SALES_STAGE',
           'enabled' => true,
           'default' => true,
@@ -67,7 +66,6 @@ $viewdefs['Opportunities']['base']['view']['list'] = array (
         4 => 
         array (
           'name' => 'date_entered',
-          'width' => '10%',
           'label' => 'LBL_DATE_ENTERED',
           'enabled' => true,
           'default' => true,
@@ -76,7 +74,6 @@ $viewdefs['Opportunities']['base']['view']['list'] = array (
         5 => 
         array (
           'name' => 'next_step',
-          'width' => '10%',
           'label' => 'LBL_NEXT_STEP',
           'enabled' => true,
           'default' => true,
@@ -84,7 +81,6 @@ $viewdefs['Opportunities']['base']['view']['list'] = array (
         6 => 
         array (
           'name' => 'date_closed',
-          'width' => '10',
           'label' => 'LBL_DATE_CLOSED',
           'enabled' => true,
           'default' => true,
@@ -92,11 +88,11 @@ $viewdefs['Opportunities']['base']['view']['list'] = array (
         7 => 
         array (
           'name' => 'assigned_user_name',
-          'width' => '5%',
           'label' => 'LBL_LIST_ASSIGNED_USER',
           'id' => 'ASSIGNED_USER_ID',
           'enabled' => true,
           'default' => true,
+          'sortable' => true,
         ),
         8 => 
         array (
@@ -135,7 +131,6 @@ $viewdefs['Opportunities']['base']['view']['list'] = array (
         array (
           'name' => 'team_name',
           'type' => 'teamset',
-          'width' => '5%',
           'label' => 'LBL_LIST_TEAM',
           'enabled' => true,
           'default' => false,
@@ -148,6 +143,12 @@ $viewdefs['Opportunities']['base']['view']['list'] = array (
           'enabled' => true,
           'default' => false,
           'readonly' => true,
+        ),
+        14 => 
+        array (
+          'name' => 'commit_stage',
+          'enabled' => true,
+          'default' => true,
         ),
       ),
     ),

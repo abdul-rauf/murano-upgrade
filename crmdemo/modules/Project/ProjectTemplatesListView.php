@@ -1,4 +1,5 @@
 <?php
+
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -12,7 +13,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 require_once('include/ListView/ListViewSmarty.php');
-require SugarAutoLoader::loadWithMetafiles('Project', 'listviewdefs');
+require SugarAutoLoader::loadWithMetafiles('Project', 'projecttemplate_listviewdefs');
 
 require_once('include/SearchForm/SearchForm.php');
 
@@ -135,6 +136,8 @@ $where .= 'is_template = 1 ';
 */
 
 //_pp($mod_strings);
+
+$seedProject->create_action = 'ProjectTemplatesEditView';
 
 // awu: Bug 11452 - removing export for non-admin users without a mass update form
 if (!is_admin($current_user)){

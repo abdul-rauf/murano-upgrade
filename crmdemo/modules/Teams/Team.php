@@ -186,11 +186,27 @@ class Team extends SugarBean
 			$team->add_user_to_team($user->id);
 		}
 
-		$su = BeanFactory::getBean('Users', $user->id);
+        $su = BeanFactory::retrieveBean('Users', $user->id);
+        if (!$su) {
+            return;
+        }
+
 		$team->retrieve($this->global_team);
 		$su->default_team = $team->id;
 		$su->team_id = $team->id;
-		$su->team_set_id = $team->id;
+
+		//do not overwrite the existing teamset during import
+		if ($su->in_import) {
+
+			//add the global team to the teamset
+			$user_team_ids = array($team->id);
+			$teamSet = BeanFactory::getBean('TeamSets');
+			$su->team_set_id = $teamSet->addTeams($user_team_ids);
+
+		} else {
+			//not an import, make the global team the team set id
+			$su->team_set_id = $team->id;
+		}
 		$su->save();
 	}
 
@@ -198,7 +214,11 @@ class Team extends SugarBean
 	 * Retrieve all of the users that are members of this team.
 	 * This list only includes explicitly assigned members.  (i.e. it will not show the manager of a member unless they are also explicty assigned).
 	 */
-	function get_team_members($only_active_users = false) {
+	function get_team_members($only_active_users = false, $filter = null) {
+		$where = "team_id='$this->id' and explicit_assign=1";
+		$filter = trim($filter);
+		$filter = is_string($filter) && !empty($filter) ? $filter : null;
+
 		// Get the list of members
 		$member = BeanFactory::getBean('TeamMemberships');
 		$member_list = $member->get_full_list("", "team_id='$this->id' and explicit_assign=1");
@@ -215,6 +235,11 @@ class Team extends SugarBean
 		foreach($member_list as $current_member)
 		{
 			$user = BeanFactory::getBean('Users', $current_member->user_id);
+
+			if (isset($filter) && (!(preg_match("/$filter/i", $user->user_name)
+				|| preg_match("/$filter/i", $user->first_name) || preg_match("/$filter/i", $user->last_name)))) {
+					continue;
+			}
 
 			//if the flag $only_active_users is set to true, then we only want to return
 			//active users. This was defined as part of workflow to not send out notifications
@@ -262,8 +287,8 @@ class Team extends SugarBean
 		$this->db->query($query,true,"Error deleting memberships while deleting team: ");
 
 		// Update teams and set deleted = 1
-		$query = "UPDATE teams SET deleted = 1 WHERE id='{$this->id}'";
-		$this->db->query($query,true,"Error deleting team: ");
+		$this->deleted = 1;
+		$this->save();
 
 		require_once('modules/Teams/TeamSetManager.php');
 		TeamSetManager::flushBackendCache();
@@ -511,10 +536,10 @@ class Team extends SugarBean
             }
             $manager = BeanFactory::getBean('Users');
             $manager->reports_to_id = $focus->reports_to_id;
-            while(!empty($manager->reports_to_id) && $manager->id != $manager->reports_to_id)
-            {
-                $manager->retrieve($manager->reports_to_id);
-
+            while (!empty($manager->reports_to_id)
+                && $manager->reports_to_id != $manager->id
+                && $manager->retrieve($manager->reports_to_id)
+            ) {
                 $result = $membership->retrieve_by_user_and_team($manager->id, $this->id);
                 if($result)
                 {
@@ -697,6 +722,11 @@ class Team extends SugarBean
 			   	   $sql = "UPDATE {$module} SET team_id = '{$this->id}' WHERE team_id = '{$old_team->id}'";
 			   	   $GLOBALS['log']->info("Updating team_id column values in {$module} table from '{$old_team->id}' to '{$this->id}'");
 			   	   $this->db->query($sql);
+
+			   	   $sql = "UPDATE team_sets_teams SET team_id = '{$this->id}' WHERE team_id = '{$old_team->id}'";
+			   	   $GLOBALS['log']->info("Updating team_id column values in team_sets_teams table from '{$old_team->id}' to '{$this->id}'");
+			   	   $this->db->query($sql);
+
 			   }
 			}
 			$old_team->delete_team();

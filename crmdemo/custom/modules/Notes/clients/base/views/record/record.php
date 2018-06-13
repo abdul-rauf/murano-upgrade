@@ -1,4 +1,5 @@
 <?php
+// created: 2018-06-13 10:47:53
 $viewdefs['Notes']['base']['view']['record'] = array (
   'buttons' => 
   array (
@@ -9,6 +10,10 @@ $viewdefs['Notes']['base']['view']['record'] = array (
       'label' => 'LBL_CANCEL_BUTTON_LABEL',
       'css_class' => 'btn-invisible btn-link',
       'showOn' => 'edit',
+      'events' => 
+      array (
+        'click' => 'button:cancel_button:click',
+      ),
     ),
     1 => 
     array (
@@ -73,17 +78,9 @@ $viewdefs['Notes']['base']['view']['record'] = array (
         ),
         6 => 
         array (
-          'type' => 'rowaction',
-          'event' => 'button:audit_button:click',
-          'name' => 'audit_button',
-          'label' => 'LNK_VIEW_CHANGE_LOG',
-          'acl_action' => 'view',
-        ),
-        7 => 
-        array (
           'type' => 'divider',
         ),
-        8 => 
+        7 => 
         array (
           'type' => 'rowaction',
           'event' => 'button:delete_button:click',
@@ -160,6 +157,11 @@ $viewdefs['Notes']['base']['view']['record'] = array (
           ),
         ),
         5 => 'assigned_user_name',
+        6 => 
+        array (
+          'name' => 'tag',
+          'span' => 12,
+        ),
       ),
     ),
     2 => 
@@ -176,6 +178,7 @@ $viewdefs['Notes']['base']['view']['record'] = array (
         array (
           'name' => 'date_entered_by',
           'readonly' => true,
+          'inline' => true,
           'type' => 'fieldset',
           'label' => 'LBL_DATE_ENTERED',
           'fields' => 
@@ -199,6 +202,7 @@ $viewdefs['Notes']['base']['view']['record'] = array (
         array (
           'name' => 'date_modified_by',
           'readonly' => true,
+          'inline' => true,
           'type' => 'fieldset',
           'label' => 'LBL_DATE_MODIFIED',
           'fields' => 

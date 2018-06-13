@@ -121,6 +121,7 @@ array (
         array (
             0 => array(
                 'name' => 'header_logo',
+                'popupHelp' => 'LBL_HEADER_LOGO_POPUP_HELP',
             ),
             1 => array(
                 'name' => 'footer_text',

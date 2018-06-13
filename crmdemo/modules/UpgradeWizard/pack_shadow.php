@@ -13,7 +13,13 @@
 require_once __DIR__ . '/pack_cli.php';
 
 $files = array(
-    "modules/UpgradeWizard/ShadowUpgrader.php" => 'ShadowUpgrader.php'
+    "modules/UpgradeWizard/ShadowUpgrader.php" => 'ShadowUpgrader.php',
+    'modules/HealthCheck/Scanner/Scanner.php' => 'HealthCheck/Scanner/Scanner.php',
+    'modules/HealthCheck/Scanner/ScannerCli.php' => 'HealthCheck/Scanner/ScannerCli.php',
+    'modules/HealthCheck/Scanner/ScannerMeta.php' => 'HealthCheck/Scanner/ScannerMeta.php',
+    'modules/HealthCheck/HealthCheckClient.php' => 'HealthCheck/HealthCheckClient.php',
+    'modules/HealthCheck/HealthCheckHelper.php' => 'HealthCheck/HealthCheckHelper.php',
+    'modules/HealthCheck/language/en_us.lang.php' => 'HealthCheck/language/en_us.lang.php'
 );
 
 if (empty($argv[0]) || basename($argv[0]) != basename(__FILE__)) {
@@ -54,7 +60,7 @@ $stub = <<<'STUB'
 <?php
 Phar::mapPhar();
 set_include_path('phar://' . __FILE__ . PATH_SEPARATOR . get_include_path());
-require_once "ShadowUpgrader.php"; ShadowUpgrader::start(); __HALT_COMPILER();
+require_once "ShadowUpgrader.php"; $upgrader = new ShadowUpgrader(); $upgrader->start(); __HALT_COMPILER();
 STUB;
 $phar->setStub($stub);
 

@@ -45,15 +45,17 @@
     shareTplBodyHtml: null,
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
-     * Adds the share options for use when launching the email client
+     * Adds the share options for use when launching the email client and
+     * refreshes the share options if the model data changes. The contents
      */
     initialize: function(options) {
-        this._super("initialize", [options]);
+        this._super('initialize', [options]);
         this.type = 'emailaction';
         this._initShareTemplates();
         this._setShareOptions();
+        this.model.on('change', this._setShareOptions, this);
     },
 
     /**
@@ -112,13 +114,13 @@
      * @protected
      */
     _getShareParams: function() {
-        var moduleString = app.lang.getAppListStrings('moduleListSingular');
+        var moduleString = app.lang.getModuleName(this.module);
 
         return _.extend({}, this.model.attributes, {
-            module: moduleString[this.module] || this.module,
+            module: moduleString,
             appId: app.config.appId,
             url: window.location.href,
-            name: new Handlebars.SafeString(this.model.attributes.name || this.model.attributes.full_name)
+            name: new Handlebars.SafeString(app.utils.getRecordName(this.model))
         });
     },
 

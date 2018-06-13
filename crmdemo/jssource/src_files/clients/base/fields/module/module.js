@@ -11,11 +11,11 @@
 /**
  * @class View.Fields.Base.ModuleField
  * @alias SUGAR.App.view.fields.BaseModuleField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     format: function(value){
-        value = app.lang.get('LBL_MODULE_NAME', value);
+        value = app.lang.getModuleName(value, {plural: true});
         return value;
     }
 })

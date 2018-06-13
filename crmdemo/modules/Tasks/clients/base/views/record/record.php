@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,6 +20,9 @@ $viewdefs['Tasks']['base']['view']['record'] = array(
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
+            'events' => array(
+                'click' => 'button:cancel_button:click',
+            ),
         ),
         array(
             'type' => 'rowaction',
@@ -70,23 +74,18 @@ $viewdefs['Tasks']['base']['view']['record'] = array(
                     'type' => 'closebutton',
                     'name' => 'record-close-new',
                     'label' => 'LBL_CLOSE_AND_CREATE_BUTTON_TITLE',
+                    'closed_status' => 'Completed',
                     'acl_action' => 'edit',
                 ),
                 array(
                     'type' => 'closebutton',
                     'name' => 'record-close',
                     'label' => 'LBL_CLOSE_BUTTON_TITLE',
+                    'closed_status' => 'Completed',
                     'acl_action' => 'edit',
                 ),
                 array(
                     'type' => 'divider',
-                ),
-                array(
-                    'type' => 'rowaction',
-                    'event' => 'button:find_duplicates_button:click',
-                    'name' => 'find_duplicates_button',
-                    'label' => 'LBL_DUP_MERGE',
-                    'acl_action' => 'edit',
                 ),
                 array(
                     'type' => 'rowaction',
@@ -154,6 +153,10 @@ $viewdefs['Tasks']['base']['view']['record'] = array(
                 'status',
                 'assigned_user_name',
                 'parent_name',
+                array(
+                    'name' => 'tag',
+                    'span' => 12,
+                ),
             ),
         ),
         array(
@@ -168,6 +171,7 @@ $viewdefs['Tasks']['base']['view']['record'] = array(
                 array(
                     'name' => 'date_entered_by',
                     'readonly' => true,
+                    'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_ENTERED',
                     'fields' => array(
@@ -187,6 +191,7 @@ $viewdefs['Tasks']['base']['view']['record'] = array(
                 array(
                     'name' => 'date_modified_by',
                     'readonly' => true,
+                    'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_MODIFIED',
                     'fields' => array(

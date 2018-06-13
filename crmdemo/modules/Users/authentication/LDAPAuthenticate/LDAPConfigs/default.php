@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: default.php 16292 2006-08-22 20:57:23Z awu $
 
 $GLOBALS['ldapConfig'] = array(
 'users'=>

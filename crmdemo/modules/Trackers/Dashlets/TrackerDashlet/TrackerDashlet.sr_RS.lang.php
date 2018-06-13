@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,24 +10,22 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$dashletStrings = array (
-  'TrackerDashlet' => 
-  array (
-    'LBL_DESCRIPTION' => 'Dašlet za pokretanje upita nad podacima sistema za praćenje',
-    'LBL_FILTER' => 'Filter',
-    'LBL_TITLE' => 'Izveštaji sistema za praćenje',
-    'LBL_SAVING' => 'Izvršavanje upita',
-    'LBL_SAVED' => 'Upit završen',
-    'LBL_CLEAR' => 'Obriši',
-    'LBL_CLEAR_TOOLTIP' => 'Briše vrednost polja datuma',
-    'LBL_CONFIGURE_TITLE' => 'Naslov',
-    'LBL_CONFIGURE_HEIGHT' => 'Visina (1 - 300)',
-    'LBL_SELECT_QUERY' => 'Odaberite upit...',
-    'LBL_FILTER_TOOLTIP' => 'Filtriraj po vrednostima u polju datuma',
-    'LBL_SINCE' => 'Od:',
-    'LBL_CHOOSE_DATE_TOOLTIP' => 'Za odabrane izveštaje, možete da filtrirate datum. Unesen datum će zameniti podrazumevan datum za izveštaj. Na primer, u izveštaju "Moje aktivnosti (ove nedelje)", vrednost će se koristiti za prikaz svih zapisa posle datuma filtriranja, umesto podrazumevanog perioda vremena za jednu nedelju.',
-  ),
+$dashletStrings['TrackerDashlet'] = array('LBL_TITLE'            => 'Izveštaji sistema za praćenje',
+                                          'LBL_DESCRIPTION'      => 'Dašlet za pokretanje upita nad podacima sistema za praćenje',
+                                          'LBL_SAVING'           => 'Izvršavanje upita',
+                                          'LBL_SAVED'            => 'Upit završen',
+                                          'LBL_CLEAR'            => 'Obriši',
+                                          'LBL_CLEAR_TOOLTIP'    => 'Briše vrednost polja datuma',
+                                          'LBL_CONFIGURE_TITLE'  => 'Titula',
+                                          'LBL_CONFIGURE_HEIGHT' => 'Visina (1 - 300)',
+										  'LBL_SELECT_QUERY'     => 'Odaberite upit...',
+										  'LBL_FILTER'              => 'Filter',
+										  'LBL_FILTER_TOOLTIP'      => 'Filtriraj po vrednostima u polju datuma',
+										  'LBL_SINCE'            => 'Od:',
+										  'LBL_CHOOSE_DATE_TOOLTIP' => 'For select reports, you can provide a date filter.' .
+										                               '  The date value entered will replace the default date value for the report.' .
+										                               '  For example, in the "My Activity (This Week)" report, the' .
+										                               ' value will be used to display all records after the filter date' .
+										                               ' instead of the default time period of one week.',
 );
-

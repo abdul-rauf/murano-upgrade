@@ -13,31 +13,16 @@
     app.events.on('app:init', function() {
         app.plugins.register('File', ['field'], {
             /**
-             * Asynchronously uploads files on toggle.
-             *
-             * @param {Object} component
-             * @param {Object} plugin
-             * @return {void}
-             */
-            onAttach: function(component, plugin) {
-                this.before('toggleField', function(viewName) {
-                    if (this.action === 'edit') {
-                        app.file.checkFileFieldsAndProcessUpload(this, null, {deleteIfFails: false}, true);
-                    }
-                    return true;
-                }, null, this);
-            },
-            /**
              * TODO: Empty function shouldn't be needed when SC-1576 is fixed.
              *
-             * {@inheritDoc}
+             * @inheritdoc
              * @return {void}
              */
             bindKeyDown: function() {},
             /**
              * TODO: Empty function shouldn't be needed when SC-1576 is fixed.
              *
-             * {@inheritDoc}
+             * @inheritdoc
              * @return {void}
              */
             bindDocumentMouseDown: function() {}

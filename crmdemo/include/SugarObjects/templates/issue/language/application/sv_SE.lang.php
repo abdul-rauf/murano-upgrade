@@ -1,6 +1,5 @@
 <?php
-
-/*
+ /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
  * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
@@ -10,24 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
+/*
+ * Created on Aug 14, 2007
+ *
+ * To change the template for this generated file go to
+ * Window - Preferences - PHPeclipse - PHP - Code Templates
+ */
 $object_name = strtolower($object_name);
  $app_list_strings = array (
 
@@ -35,7 +22,7 @@ $object_name = strtolower($object_name);
   array (
   	'Administration' => 'Administration',
     'Product' => 'Produkt',
-    'User' => 'Anvöndare',
+    'User' => 'Användare',
   ),
    $object_name.'_status_dom' =>
   array (
@@ -44,22 +31,22 @@ $object_name = strtolower($object_name);
     'Closed' => 'Stängd',
     'Pending Input' => 'Avvaktande',
     'Rejected' => 'Avslag',
-    'Duplicate' => 'Duplicerat',
+    'Duplicate' => 'Duplicera',
   ),
   $object_name.'_priority_dom' =>
   array (
     'P1' => 'Hög',
-    'P2' => 'Medium',
+    'P2' => 'Medel',
     'P3' => 'Låg',
   ),
   $object_name.'_resolution_dom' =>
   array (
   	'' => '',
   	'Accepted' => 'Accepterat',
-    'Duplicate' => 'Duplicerat',
-    'Closed' => 'Stängt',
+    'Duplicate' => 'Duplicera',
+    'Closed' => 'Stängd',
     'Out of Date' => 'Utgånget datum',
-    'Invalid' => 'Invalid',
+    'Invalid' => 'Ogiltig',
   ),
   );
 ?>

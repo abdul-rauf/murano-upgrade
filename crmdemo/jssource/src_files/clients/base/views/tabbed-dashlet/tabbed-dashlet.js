@@ -74,7 +74,7 @@
     _defaultSettings: {},
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Bind the separate context to avoid sharing context's handlers
      * between its extension dashlets.
@@ -85,13 +85,14 @@
             return;
         }
 
-        this.collection = new Backbone.Collection();
+        this.collection = app.data.createBeanCollection(this.module);
         this.context = this.context.getChildContext({
             forceNew: true,
             model: this.context.parent && this.context.parent.get('model'),
             collection: this.collection,
             //FIXME: name is temporary - special case for LinkedModel - SC-2550
-            name: 'tabbed-dashlet'
+            name: 'tabbed-dashlet',
+            skipFetch: true
         });
 
         this.context.set('parentModule', this.module);
@@ -339,7 +340,8 @@
                 params: {
                     order_by: tab.order_by || null,
                     include_child_items: tab.include_child_items || null
-                }
+                },
+                fields: tab.fields || null
             };
 
         if (tab.module != 'Meetings' && tab.module != 'Calls') {
@@ -443,7 +445,8 @@
         var loadDataRequests = [];
         _.each(tabs, function(tab, index) {
             loadDataRequests.push(function(callback){
-                tab.collection.options = self._getCollectionOptions(index);
+                tab.collection.setOption(self._getCollectionOptions(index));
+
                 tab.collection.filterDef = _.union(
                     self._getCollectionFilters(index),
                     self._getFilters(index)
@@ -527,7 +530,7 @@
     unlinkRecord: function(model) {
         var self = this;
         var name = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model)).trim();
-        var context = app.lang.get('LBL_MODULE_NAME_SINGULAR', model.module).toLowerCase() + ' ' + name;
+        var context = app.lang.getModuleName(model.module).toLowerCase() + ' ' + name;
         app.alert.show(model.get('id') + ':unlink_confirmation', {
             level: 'confirmation',
             messages: app.utils.formatString(app.lang.get('NTC_UNLINK_CONFIRMATION_FORMATTED'), [context]),
@@ -542,7 +545,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * New model related properties are injected into each model:
      *
@@ -570,7 +573,27 @@
     },
 
     /**
-     * {@inheritDoc}
+     *  Handle Avatar display, in case image doesn't exist.
+     *
+     *  FIXME: render avatar should happen when rendering each row, after pagination.(SC-2605)
+     *  @private
+     */
+    _renderAvatars: function() {
+        this.$('img.avatar').load(function() {
+            $(this).removeClass('hide');
+        })
+            .error(function() {
+                $(this).parent().removeClass('avatar avatar-md').addClass('label label-module label-module-md label-Users');
+                $(this).parent().find('span').removeClass('hide');
+            });
+        this.$('img.avatar').each(function() {
+            var img = $(this);
+            img.attr('src', img.data('src'));
+        });
+    },
+
+    /**
+     * @inheritdoc
      */
     _dispose: function() {
         _.each(this.tabs, function(tab) {

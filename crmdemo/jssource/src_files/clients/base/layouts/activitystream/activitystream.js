@@ -26,6 +26,23 @@
         this.exposeDataTransfer();
 
         this.context.on("activitystream:post:prepend", this.prependPost, this);
+        this.context.on('activitystream:paginate', this.paginate, this);
+
+        // Remove active state from all preview buttons
+        app.events.on('preview:close', function() {
+            this.clearRowDecorations();
+        }, this);
+    },
+
+    /**
+     * Removes highlighted styling from stream activities.
+     */
+    clearRowDecorations: function() {
+        if (_.isUndefined(app.drawer) || app.drawer.isActive(this.$el)) {
+            var activities = this.$('.activitystream-posts-comments-container');
+            activities.removeClass('highlighted');
+            activities.find('.preview-btn').removeClass('active');
+        }
     },
 
     /**
@@ -47,13 +64,13 @@
                     url = app.api.buildURL(real_module, action, {}, options.params);
                     break;
                 case "record":
-                    url = app.api.buildURL(real_module, "activities", {id: modelId, link: true}, options.params);
+                    url = app.api.buildURL(real_module, null, {id: modelId, link: 'activities'}, options.params);
                     break;
             }
             return app.api.call("read", url, null, callbacks);
         };
 
-        this.context.set("collectionOptions", {
+        this.context.get('collection').setOption({
             endpoint: endpoint,
             success: function(collection) {
                 collection.each(function(model) {
@@ -151,7 +168,7 @@
 
         if(component.name === "activitystream") {
             this.$el.find(".activitystream-list").append(component.el);
-        } else if (_.contains(['activitystream-bottom', 'list-bottom'], component.name)) {
+        } else if (component.name === 'activitystream-bottom') {
             this.$el.append(component.el);
             component.render();
         } else {
@@ -191,5 +208,14 @@
         });
         this._components = nonActivities;
         this.renderedActivities = {};
+    },
+
+    /**
+     * Get the next set of activity stream posts.
+     */
+    paginate: function() {
+        this.collection.paginate({
+            add: true
+        });
     }
 })

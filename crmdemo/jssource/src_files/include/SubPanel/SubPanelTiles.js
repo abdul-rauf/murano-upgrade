@@ -9,7 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: SubPanelTiles.js 56952 2010-06-14 21:44:26Z sadek $
 
 var request_id = 0;
 var current_child_field = '';
@@ -104,6 +104,28 @@ function subp_archive_email() {
     return false;
 }
 
+/**
+ * Builds a link for relationship deleting and navigates to this link
+ * @param  {String} module Module name
+ * @param  {String} action Action name
+ * @param  {Object} params Params to be included in a url
+ */
+function relationship_remove(module, action, params) {
+    var id = get_record_id();
+    var params = _.extend(params, {
+        record: id,
+        return_id: id
+    });
+
+    var route = app.bwc.buildRoute(module, id || null, action, params);
+
+    if (!_.isUndefined(params.return_url)) {
+        route += params.return_url;
+    }
+
+    app.router.navigate("#" + route, {trigger: true});
+}
+
 /*this function will take in three parameters, m,i,a and recreate navigation
 * m = module
 * i = record id
@@ -147,6 +169,7 @@ function get_record_id()
 {
 	return window.document.forms['DetailView'].elements['record'].value;
 }
+
 function get_layout_def_key()
 {
 	if(typeof(window.document.forms['DetailView'].elements['layout_def_key']) == 'undefined')return '';
@@ -193,6 +216,7 @@ function set_return_and_save_background(popup_reply_data)
 	var module = get_module_name();
 	var id = get_record_id();
 
+    query_array.push('csrf_token=' + SUGAR.csrf.form_token);
 	query_array.push('value=DetailView');
 	query_array.push('module='+module);
 	query_array.push('http_method=get');
@@ -248,19 +272,23 @@ function got_data(args, inline)
 	if (list_subpanel != null) {
 		var subpanel = document.getElementById('subpanel_'+request_map[args.request_id].toLowerCase());
 		var child_field = request_map[args.request_id].toLowerCase();
+        var bwcComponent = window.parent.SUGAR.App.controller.layout.getComponent('bwc');
 
         if(inline){
-            window.parent.SUGAR.App.controller.layout.getComponent('bwc').confirmMemLeak(list_subpanel);
-            $('a', list_subpanel).off('.bwc.sugarcrm');
+            if (bwcComponent) {
+                bwcComponent.confirmMemLeak(list_subpanel);
+                $('a', list_subpanel).off('.bwc.sugarcrm');
+            }
 
 			child_field_loaded[child_field] = 2;
 			list_subpanel.innerHTML='';
 			list_subpanel.innerHTML=args.responseText;
 
 		} else {
-
-            window.parent.SUGAR.App.controller.layout.getComponent('bwc').confirmMemLeak(subpanel);
-            $('a', subpanel).off('.bwc.sugarcrm');
+            if (bwcComponent) {
+                bwcComponent.confirmMemLeak(subpanel);
+                $('a', subpanel).off('.bwc.sugarcrm');
+            }
 
 			child_field_loaded[child_field] = 1;
 			subpanel.innerHTML='';
@@ -290,7 +318,9 @@ function got_data(args, inline)
 	  		$(node).sugarActionMenu();
 	  	});
 
-        window.parent.SUGAR.App.controller.layout.getComponent('bwc').rewriteLinks();
+       if (bwcComponent) {
+           bwcComponent.rewriteLinks();
+       }
 	}
 }
 

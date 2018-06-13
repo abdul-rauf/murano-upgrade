@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/api/SugarApi.php';
+require_once 'clients/base/api/ModuleApi.php';
 require_once 'modules/Forecasts/ForecastsDefaults.php';
 
-class ForecastsApi extends SugarApi
+class ForecastsApi extends ModuleApi
 {
     public function registerApiRest()
     {
@@ -122,7 +122,7 @@ class ForecastsApi extends SugarApi
         // INVESTIGATE: these need to be more dynamic and deal with potential customizations based on how filters are built in admin and/or studio
         /* @var $admin Administration */
         $admin = BeanFactory::getBean("Administration");
-        $forecastsSettings = $admin->getConfigForModule("Forecasts", "base");
+        $forecastsSettings = Forecast::getSettings(true);
         // we need to make sure all the default setting are there, if they are not
         // it should set them to the default value + clear the metadata and kick out a 412 error to force
         // the metadata to reload

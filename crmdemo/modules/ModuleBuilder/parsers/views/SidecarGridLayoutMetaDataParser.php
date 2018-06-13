@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -51,6 +52,14 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
         'panelDefault',
         'newTab'
     );
+
+    /**
+     * Fields with spans should keep their spans unless they need to be changed.
+     * This array keeps track of those fields and their spans.
+     *
+     * @var array
+     */
+    protected $baseSpans = array();
 
     /**
      * Gets the maximum span units for for a panel
@@ -324,22 +333,23 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
             }
         }
 
-        foreach ($previousViewDef as $key => $fieldDef ) {
-            if (is_array($fieldDef)) {
-                unset($previousViewDef[$key]['span']);
+        foreach ($previousViewDef as $previousKey => $previousFieldDef ) {
+            if (is_array($previousFieldDef)) {
+                unset($previousViewDef[$previousKey]['span']);
             }
         }
 
         $baseSpans = array();
         foreach ($this->baseViewFields as $baseKey => $baseFieldDef) {
             if (is_array($baseFieldDef) && isset($baseFieldDef['span'])) {
-                $baseSpans[$baseKey] = $baseFieldDef['span'];
+                $this->setBaseSpan($baseKey, $baseFieldDef['span']);
             }
         }
 
         // Set up the panel index so we know where the header panel meta needs to
         // be injected if there is header panel meta to be injected
         $panelIndex = 0;
+        $maxColumns = $this->getMaxColumns();
         foreach ($panels as $pName => $panel) {
             // This will only happen for record views at the moment. The header
             // panel index is set in _convertFromCanonicalForm.
@@ -351,10 +361,11 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
             }
             $panelName = strtoupper($pName);
             $fields = array();
-            // get number of panel columns default to 2
-            $panelColumns = 2;
+            // get number of panel columns
             if (!empty($this->extraPanelMeta[$panelName]['columns'])) {
-                $panelColumns = $this->extraPanelMeta[$panelName]['columns'];
+                $panelColumns = min($this->extraPanelMeta[$panelName]['columns'], $maxColumns);
+            } else {
+                $panelColumns = $maxColumns;
             }
             $singleSpanUnit = $this->maxSpan/$panelColumns;
 
@@ -381,6 +392,9 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
                     // dump out the last field we stored and reset column count
                     // leading empty => should not occur, but assign to next field as colspan
                     if ($lastField !== null) {
+                        // We need to calculate the last field's span to make
+                        // sure it stays consistent with the layout being saved
+                        $lastField = $this->adjustLastFieldSpan($lastField, $cell, $singleSpanUnit);
                         $fields = array_merge($fields,$this->_addCell($lastField, $offset, $singleSpanUnit));
                         $offset = 1;
                     }
@@ -400,19 +414,8 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
                             }
                         }
 
-                        if ($fieldCount === 1) {
-                            $lastField = array('span' => $this->maxSpan);
-                        } else {
-                            // calculate span of the filler based on span of the field it complements
-                            if (isset($lastField['name'], $baseSpans[$lastField['name']])) {
-                                $span = $this->maxSpan - $baseSpans[$lastField['name']];
-                                $lastField = array('span' => $span);
-                            } else {
-                                $lastField = array();
-                            }
-                        }
-                    }
-                    else {
+                        $lastField = $this->getLastFieldSpan($lastField, $singleSpanUnit, $fieldCount);
+                    } else {
                         // field => add the field def.
                         $fieldName = is_array($cell) ? $cell['name'] : $cell;
                         if (isset($previousViewDef[$fieldName])) {
@@ -428,7 +431,18 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
                         }
 
                         // If the field defs is empty it needs to be an array
-                        $lastField = $this->getNewRowItem($source, (empty($fielddefs[$fieldName]) ? array() : $fielddefs[$fieldName]));
+                        $newField = $this->getNewRowItem($source, (empty($fielddefs[$fieldName]) ? array() : $fielddefs[$fieldName]));
+                        // Adjust span for end column
+                        if ($lastField != null) {
+                            $newFieldSpan = $this->getLastFieldSpan($lastField, $singleSpanUnit, $fieldCount);
+                            if (isset($newFieldSpan['span'])) {
+                                if (!is_array($newField)) {
+                                    $newField = array('name'=>$newField);
+                                }
+                                $newField['span'] = $newFieldSpan['span'];
+                            }
+                        }
+                        $lastField = $newField;
                     }
                 }
 
@@ -456,14 +470,14 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
                 if (is_array($field)) {
                     if (isset($field['name'])) {
                         $fieldName = $field['name'];
-                        if (!isset($field['span']) && isset($baseSpans[$fieldName])) {
-                            $fields[$i]['span'] = $baseSpans[$fieldName];
+                        if (!isset($field['span']) && isset($this->baseSpans[$fieldName])) {
+                            $fields[$i]['span'] = $this->baseSpans[$fieldName]['span'];
                         }
                     }
-                } elseif (isset($baseSpans[$field])) {
+                } elseif (isset($this->baseSpans[$field])) {
                     $fields[$i] = array(
                         'name' => $field,
-                        'span' => $baseSpans[$field],
+                        'span' => $this->baseSpans[$field]['span'],
                     );
                 }
             }
@@ -479,12 +493,142 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
     }
 
     /**
+     * Sets a base span entry
+     * 
+     * @param string $name The field name to record the span for
+     * @param int $value The span value for this field
+     */
+    public function setBaseSpan($name, $value)
+    {
+        $this->baseSpans[$name] = array(
+            'span' => $value,
+            'adjustment' => 0,
+        );
+    }
+    /**
+     * Adjusts the span attribute of the prior field to accomodate expanded
+     * fields being shrunk while adding another field next to it
+     *
+     * @param mixed $lastField String or array layout field def
+     * @param mixed $currField The current field being looked at
+     * @param int $singleSpanUnit The value of a single span unit
+     * @return mixed
+     */
+    protected function adjustLastFieldSpan($lastField, $currField, $singleSpanUnit)
+    {
+        if (is_array($lastField) && isset($lastField['span'])) {
+            // Get our last field span since we need that throughout
+            $lfSpan = $lastField['span'];
+
+            // Inspect the current field span
+            $currFieldSpan = $this->getFieldSpan($currField, $singleSpanUnit);
+
+            // If the span of the current field and the span of the last field
+            // add up to max span, do nothing.
+            if ($lfSpan + $currFieldSpan == $this->maxSpan) {
+                return $lastField;
+            }
+
+            // If the span from the last field is the same as the
+            // max span, reduce it by one unit
+            if ($lfSpan == $this->maxSpan) {
+                $lfSpan -= $singleSpanUnit;
+            }
+
+            // If the remaining span measurement is the same as
+            // a single span, remove it from the defs
+            if ($lfSpan == $singleSpanUnit) {
+                unset($lastField['span']);
+            } else {
+                // Otherwise reset the value to the new span
+                $lastField['span'] = $lfSpan;
+            }
+
+            // Handle any necessary adjustments
+            if (isset($lastField['name'])) {
+                // Adjust the baseSpan of this field if it is set
+                $this->adjustBaseSpan($lastField['name'], $singleSpanUnit);
+
+                // Normalize the field for consistency
+                if (count($lastField) === 1) {
+                    $lastField = $lastField['name'];
+                }
+            }
+        }
+
+        // Send back what we know
+        return $lastField;
+    }
+
+    /**
+     * Handles adjustments to the baseSpans array to ensure all span attributes
+     * are kept up to speed.
+     *
+     * @param string $field The name of the field to adjust a span for
+     * @param int $singleSpanUnit The size of a single span
+     */
+    protected function adjustBaseSpan($field, $singleSpanUnit)
+    {
+        if (isset($this->baseSpans[$field])) {
+            // The last field span needs to be adjusted now
+            // If the last field span is the same as a single
+            // unit span, just get rid of it
+            if ($this->baseSpans[$field]['span'] == $singleSpanUnit) {
+                unset($this->baseSpans[$field]);
+            } else {
+                // Otherwise, reduce the last field span by
+                // one single unit span value
+                $this->baseSpans[$field]['span'] -= $singleSpanUnit;
+                $this->baseSpans[$field]['adjustment'] += $singleSpanUnit;
+            }
+        }
+    }
+
+    /**
+     * Gets current field's span based on the last field and adjust last field's base span if necessary
+     * 
+     * @param array $lastField The last field that was touched
+     * @param int $singleSpanUnit The number of spaces occupied by a single span
+     * @param int $fieldCount The number of fields in the row of fields
+     * @return array
+     */
+    protected function getLastFieldSpan($lastField, $singleSpanUnit, $fieldCount)
+    {
+        if ($fieldCount === 1) {
+            $lastField = array('span' => $this->maxSpan);
+        } else {
+            // calculate span of the filler based on span of the field it complements
+            if (is_array($lastField) && isset($lastField['name'], $this->baseSpans[$lastField['name']])) {
+                // The span for this field should be the max span 
+                // minus the last field span plus a single unit
+                // span
+                $fullBaseSpan = $this->baseSpans[$lastField['name']]['span'] + $this->baseSpans[$lastField['name']]['adjustment'];
+
+                if ($this->maxSpan > $fullBaseSpan) {
+                    $span = $this->maxSpan - $fullBaseSpan;
+                } else {
+                    $span = $singleSpanUnit;
+
+                    // Adjust the base spans so they are kept in sync
+                    $this->adjustBaseSpan($lastField['name'], $singleSpanUnit);
+                }
+
+                // Build the return array
+                $lastField = array('span' => $span);
+            } else {
+                $lastField = array();
+            }
+        }
+
+        return $lastField;
+    }
+
+    /**
      * here we convert from file (canonical) metadata => internal metadata format
      * @param $panels
-     * @param $fielddefs
      * @return array $internalPanels
      */
-    protected function _convertFromCanonicalForm($panels , $fielddefs)
+    protected function _convertFromCanonicalForm($panels)
     {
         // canonical form has format:
         // $panels[n]['label'] = label for panel n
@@ -495,6 +639,7 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
         // $panels[label for panel] = fields of panel in rows,cols format
 
         $internalPanels = array();
+        $maxColumns = $this->getMaxColumns();
 
         // Get the header panel index for use in removing and injecting the header
         // panel meta when editing record views
@@ -519,9 +664,10 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
             }
 
             // Get panel column value
-            $panelColumns = 2;
             if (!empty($panel['columns'])) {
-                $panelColumns = $panel['columns'];
+                $panelColumns = min($panel['columns'], $maxColumns);
+            } else {
+                $panelColumns = $maxColumns;
             }
 
             // panels now have meta at this level so we need to store that
@@ -660,13 +806,13 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
         return $out;
     }
 
-    /*
+    /**
      * Remove a field from the layout
      *
      * @param string $fieldName Name of the field to remove
      * @return boolean True if the field was removed; false otherwise
      */
-    function removeField ($fieldName)
+    public function removeField ($fieldName)
     {
         // Set the return result
         $result = false;
@@ -700,7 +846,7 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
                     $cols = count($row);
                     $empties = 0;
                     foreach ($row as $field) {
-                        if ($field === MBConstants::$EMPTY['name']) {
+                        if ($field === MBConstants::$EMPTY['name'] || $field === MBConstants::$FILLER['name']) {
                             $empties++;
                         }
                     }
@@ -714,7 +860,12 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
                 }
             }
 
-            $this->_viewdefs['panels'][$panelID] = $newRows;
+            if (count($newRows) > 0) {
+                $this->_viewdefs['panels'][$panelID] = $newRows;
+            } else {
+                unset($this->_viewdefs['panels'][$panelID]);
+            }
+
             return true;
         }
 
@@ -731,7 +882,12 @@ class SidecarGridLayoutMetaDataParser extends GridLayoutMetaDataParser {
 
             // Clear out the cache just for the platform we are on
             $client = empty($this->client) ? 'base' : $this->client;
-            MetaDataManager::refreshModulesCache(array($this->_moduleName), array($client));
+            MetaDataManager::refreshModulesCache(
+                array($this->_moduleName),
+                array($client),
+                $this->implementation->getParams()
+            );
+            parent::_clearCaches();
         }
     }
 

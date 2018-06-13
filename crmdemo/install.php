@@ -36,8 +36,9 @@ require_once('data/SugarBean.php');
 //check to see if the script files need to be rebuilt, add needed variables to request array
 $_REQUEST['root_directory'] = getcwd();
 $_REQUEST['js_rebuild_concat'] = 'rebuild';
-if(isset($_REQUEST['goto']) && $_REQUEST['goto'] != 'SilentInstall') {
+if (isset($_REQUEST['goto']) && $_REQUEST['goto'] != 'SilentInstall' && empty($_SESSION['js_minified'])) {    
     require_once('jssource/minify.php');
+    $_SESSION['js_minified'] = true;
 }
 
 $timedate = TimeDate::getInstance();
@@ -239,7 +240,7 @@ if (!isset($_SESSION['setup_site_log_dir']) || empty($_SESSION['setup_site_log_d
     $_SESSION['setup_site_log_dir'] = (isset($sugar_config['log_dir'])) ? $sugar_config['log_dir'] : '.';
 }
 if (!isset($sugar_config['unique_key'])) {
-    $sugar_config['unique_key'] = md5(create_guid());
+    $sugar_config['unique_key'] = get_unique_key();
 }
 if (!isset($_SESSION['cache_dir']) || empty($_SESSION['cache_dir'])) {
     $_SESSION['cache_dir'] = isset($sugar_config['cache_dir']) ? $sugar_config['cache_dir'] : 'cache/';
@@ -256,7 +257,6 @@ if (!isset($_SESSION['cache_dir']) || empty($_SESSION['cache_dir'])) {
             $_SESSION['oc_install'] = false;
         }
     }
-
   $workflow[] = 'confirmSettings.php';
   $workflow[] = 'performSetup.php';
 
@@ -574,7 +574,7 @@ EOQ;
         if (!empty($_SESSION['setup_site_specify_guid']) && !empty($_SESSION['setup_site_guid'])) {
             $sugar_config['unique_key'] = $_SESSION['setup_site_guid'];
         } else {
-            $sugar_config['unique_key'] = md5(create_guid());
+            $sugar_config['unique_key'] = get_unique_key();
         }
 
         $validation_errors = validate_dbConfig('a');

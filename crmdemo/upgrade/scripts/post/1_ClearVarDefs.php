@@ -71,7 +71,12 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
      */
     protected function getDefinition($seed)
     {
-        return new DefinitionObject($seed->getFieldDefinitions());
+        $defs = $seed->getFieldDefinitions();
+        if (empty($defs)) {
+            return null;
+        }
+
+        return new DefinitionObject($defs);
     }
 
     /**
@@ -381,6 +386,7 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
      * @param array $links
      * @param SugarBean $seed
      * @param DefinitionObject $defs
+     * @return bool Is link updated or not
      */
     protected function updateLinks($links, $seed, $defs)
     {
@@ -394,13 +400,13 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
             foreach ($files as $file) {
                 $dictionary = array();
                 include $file;
-                if (!empty($dictionary[$seed->module_dir]['fields'][$link])) {
+                if (!empty($dictionary[$seed->object_name]['fields'][$link])) {
                     $this->upgrader->backupFile($file);
                     $this->log("Updating definition of {$def['name']} for module {$seed->module_dir} in {$file}");
                     $out = "<?php\n // created: " . date('Y-m-d H:i:s') . "\n";
-                    $dictionary[$seed->module_dir]['fields'][$link]['type'] = 'id';
-                    $dictionary[$seed->module_dir]['fields'][$link]['link'] = $def['link'];
-                    $dictionary[$seed->module_dir]['fields'][$link]['rname'] = $def['rname'];
+                    $dictionary[$seed->object_name]['fields'][$link]['type'] = 'id';
+                    $dictionary[$seed->object_name]['fields'][$link]['link'] = $def['link'];
+                    $dictionary[$seed->object_name]['fields'][$link]['rname'] = $def['rname'];
                     foreach (array_keys($dictionary) as $key) {
                         $out .= override_value_to_string_recursive2('dictionary', $key, $dictionary[$key]);
                     }
@@ -546,7 +552,8 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
         foreach ($tokens as $ind => $token) {
             if (is_array($token) && $token[0] == T_VARIABLE) {
                 $res = $token[1];
-                while ($tokens[$ind] != '=' && $ind < count($tokens)) {
+                //Added -1 to $ind's upper bound since $ind++ is used in the loop
+                while ($tokens[$ind] != '=' && $ind < count($tokens)-1) {
                     $ind++;
                     if (!is_array($tokens[$ind])) {
                         if ($tokens[$ind] == '=') {
@@ -577,7 +584,11 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
         $fn = "{$base_path}/sugarfield_{$field}.php";
         if (file_exists($fn)) {
             $this->deleteFile($fn);
+        } else {
+	        return false;
         }
+
+        return true;
     }
 
     /**
@@ -691,6 +702,11 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
     {
         $mod = $seed->module_dir;
         $files = $this->getFiles($seed, '', $field);
+
+        if (count($files) == 0) {
+            return false;
+        }
+
         foreach ($files as $file) {
             $dictionary = array();
             include $file;
@@ -709,6 +725,8 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
                 }
             }
         }
+
+        return true;
     }
 
     /**
@@ -718,9 +736,12 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
      */
     protected function removeField($seed, $field)
     {
-        $this->log("Field {$field} for object {$seed->object_name} removing");
-        $this->deleteFieldFile($seed, $field);
-        $this->removeFieldFromExt($seed, $field);
+        $fieldres = $this->deleteFieldFile($seed, $field);
+        $extres = $this->removeFieldFromExt($seed, $field);
+
+        if ($fieldres || $extres) {
+            $this->log("Field {$field} for object {$seed->object_name} removed");
+        }
     }
 }
 

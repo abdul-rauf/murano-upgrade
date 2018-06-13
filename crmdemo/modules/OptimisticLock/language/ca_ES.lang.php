@@ -11,22 +11,22 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
- * Description:  Defines the Catalan language pack for the base application. 
 
- * Source: SugarCRM 5.2.0
- * Contributor(s): Ramón Feliu (ramon@slay.es).
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
  ********************************************************************************/
 
 $mod_strings = array (
-   'LBL_YOURS' 						=> 'El Seu',
-   'LBL_IN_DATABASE' 				=> 'En Base de dades',
-   'LBL_CONFLICT_EXISTS' 			=> 'Hi ha un Conflicte Per - ',
-   'LBL_ACCEPT_DATABASE' 			=> 'Acceptar Base de dades',
-   'LBL_ACCEPT_YOURS' 				=> 'Acceptar El Seu',
-   'LBL_RECORDS_MATCH' 				=> 'Els Registres Coincideixen',
-   'LBL_NO_LOCKED_OBJECTS' 			=> 'No hi ha Objectes Bloquejats',
+   'LBL_YOURS' => 'El Seu',
+   'LBL_IN_DATABASE' => 'En Base de dades',
+   'LBL_CONFLICT_EXISTS' => 'Hi ha un Conflicte Per - ',
+   'LBL_ACCEPT_DATABASE' => 'Acceptar Base de dades',
+   'LBL_ACCEPT_YOURS' => 'Acceptar El Seu',
+   'LBL_RECORDS_MATCH' => 'Els Registres Coincideixen',
+   'LBL_NO_LOCKED_OBJECTS' => 'No hi ha Objectes Bloquejats',
    
 );
-
 
 ?>

@@ -30,7 +30,11 @@ $vardefs =array(
 			'len' => '100',
 			'unified_search' => true,
             'duplicate_on_record_copy' => 'always',
-			'full_text_search' => array('enabled' => true, 'boost' => 3),
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 1.81,
+            ),
 			'comment' => 'First name of the contact',
             'merge_filter' => 'selected',
 
@@ -43,7 +47,11 @@ $vardefs =array(
 			'len' => '100',
 			'unified_search' => true,
             'duplicate_on_record_copy' => 'always',
-			'full_text_search' => array('enabled' => true, 'boost' => 3),
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 1.79,
+            ),
 			'comment' => 'Last name of the contact',
             'merge_filter' => 'selected',
             'required'=>true,
@@ -52,10 +60,8 @@ $vardefs =array(
 	'name' =>
 		array (
 			'name' => 'name',
-			'rname' => 'name',
 			'vname' => 'LBL_NAME',
 			'type' => 'fullname',
-			'link' => true, // bug 39288
 			'fields' => array('first_name', 'last_name', 'salutation', 'title'),
 			'sort_on' => 'last_name',
 			'source' => 'non-db',
@@ -67,10 +73,8 @@ $vardefs =array(
 	'full_name' =>
 		array (
 			'name' => 'full_name',
-			'rname' => 'full_name',
 			'vname' => 'LBL_NAME',
 			'type' => 'fullname',
-		    'link' => true, // bug 39288
 			'fields' => array('first_name', 'last_name', 'salutation', 'title'),
 			'sort_on' => 'last_name',
 			'source' => 'non-db',
@@ -143,8 +147,8 @@ $vardefs =array(
 			'dbType' => 'varchar',
 			'len' => 100,
             'duplicate_on_record_copy' => 'always',
-			'unified_search' => true, 
-			'full_text_search' => array('enabled' => true, 'boost' => 1),
+            'unified_search' => true,
+            'full_text_search' => array('enabled' => true, 'searchable' => true,  'boost' => 0.97),
 			'comment' => 'Home phone number of the contact',
             'merge_filter' => 'enabled',
 		),
@@ -156,7 +160,7 @@ $vardefs =array(
 			'dbType' => 'varchar',
 			'len' => 100,
 			'unified_search' => true,
-			'full_text_search' => array('enabled' => true, 'boost' => 1),
+            'full_text_search' => array('enabled' => true, 'searchable' => true,  'boost' => 0.96),
 			'comment' => 'Mobile phone number of the contact',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
@@ -170,7 +174,7 @@ $vardefs =array(
 			'len' => 100,
 			'audited'=>true,
 			'unified_search' => true,
-			'full_text_search' => array('enabled' => true, 'boost' => 1),
+            'full_text_search' => array('enabled' => true, 'searchable' => true,  'boost' => 0.95),
 			'comment' => 'Work phone number of the contact',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
@@ -183,7 +187,7 @@ $vardefs =array(
 			'dbType' => 'varchar',
 			'len' => 100,
 			'unified_search' => true,
-			'full_text_search' => array('enabled' => true, 'boost' => 1),
+            'full_text_search' => array('enabled' => true, 'searchable' => true,  'boost' => 0.94),
 			'comment' => 'Other phone number for the contact',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
@@ -196,7 +200,7 @@ $vardefs =array(
 			'dbType' => 'varchar',
 			'len' => 100,
 			'unified_search' => true,
-			'full_text_search' => array('enabled' => true, 'boost' => 1),
+            'full_text_search' => array('enabled' => true, 'searchable' => true,  'boost' => 0.93),
 			'comment' => 'Contact fax number',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
@@ -212,6 +216,11 @@ $vardefs =array(
 			'group' => 'primary_address',
 			'merge_filter' => 'enabled',
 			'duplicate_on_record_copy' => 'always',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 0.29,
+            ),
 		),
 	'primary_address_street_2' =>
 		array (
@@ -286,6 +295,11 @@ $vardefs =array(
 			'comment' => 'Street address for alternate address',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 0.28,
+            ),
 		),
 	'alt_address_street_2' =>
 		array (
@@ -355,7 +369,6 @@ $vardefs =array(
 			'type' => 'varchar',
 			'len' => '75',
 			'unified_search' => true,
-			'full_text_search' => array('enabled' => true, 'boost' => 2),
 			'comment' => 'Name of the assistant of the contact',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
@@ -369,7 +382,6 @@ $vardefs =array(
 			'len' => 100,
 			'group'=>'assistant',
 			'unified_search' => true,
-			'full_text_search' => array('enabled' => true, 'boost' => 1),
 			'comment' => 'Phone number of the assistant of the contact',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
@@ -398,6 +410,7 @@ $vardefs =array(
     ),
 'uses' => array(
     'email_address',
+    'taggable',
 ),
 'relationships'=>array(
 ),

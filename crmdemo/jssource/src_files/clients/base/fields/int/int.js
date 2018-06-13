@@ -11,11 +11,18 @@
 /**
  * @class View.Fields.Base.IntField
  * @alias SUGAR.App.view.fields.BaseIntField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     /**
-     * {@inheritDoc}
+     * @inheritdoc
+     *
+     * The direction for this field should always be `ltr`.
+     */
+    direction: 'ltr',
+
+    /**
+     * @inheritdoc
      *
      * Unformats the integer based on userPreferences (grouping separator).
      * If we weren't able to parse the value, `undefined` is returned.
@@ -28,7 +35,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Formats the integer based on user preferences (grouping separator).
      * If the field definition has `disabled_num_format` as `true` the value

@@ -1,6 +1,6 @@
 <?php
- // created: 2012-02-09 12:05:24
-$dictionary['Lead']['fields']['further_information_c']['enforced']='false';
-$dictionary['Lead']['fields']['further_information_c']['dependency']='';
+ // created: 2018-06-13 10:46:07
+$dictionary['Lead']['fields']['further_information_c']['enforced'] = 'false';
+$dictionary['Lead']['fields']['further_information_c']['dependency'] = '';
+$dictionary['Lead']['fields']['further_information_c']['full_text_search']['boost'] = 1;
 
- ?>

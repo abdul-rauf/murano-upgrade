@@ -61,11 +61,11 @@
     _defaultSettings: {
         max_records_to_merge: 5,
         mass_delete_chunk_size: 20,
-        mass_update_chunk_size: 20
+        mass_update_chunk_size: 500
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Try to find the `massupdate` template
      * falls back to `edit` when it does not exist
@@ -73,7 +73,7 @@
     fallbackFieldTemplate: 'edit',
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      * Retrieves metadata from sugarTemplate and then able to override it from
      * the core metadata. `panels` will only be supported on the core metadata.
      *
@@ -106,7 +106,7 @@
 
         //event register for preventing actions
         // when user escapes the page without confirming deleting
-        app.routing.before("route", this.beforeRouteDelete, this, true);
+        app.routing.before("route", this.beforeRouteDelete, this);
         $(window).on("beforeunload.delete" + this.cid, _.bind(this.warnDeleteOnRefresh, this));
     },
 
@@ -119,10 +119,15 @@
      */
     _initSettings: function() {
 
-        var configSettings = app.config.massActions && {
-            mass_delete_chunk_size: app.config.massActions.massDeleteChunkSize,
-            mass_update_chunk_size: app.config.massActions.massUpdateChunkSize
-        };
+        var configSettings = {};
+        if (app.config.massActions) {
+            if (app.config.massActions.massDeleteChunkSize) {
+                configSettings.mass_delete_chunk_size = app.config.massActions.massDeleteChunkSize;
+            }
+            if (app.config.massActions.massUpdateChunkSize) {
+                configSettings.mass_update_chunk_size = app.config.massActions.massUpdateChunkSize;
+            }
+        }
 
         this._settings = _.extend(
             {},
@@ -255,20 +260,44 @@
         this.defaultOption = null;
         this.setDefault();
     },
+
+    /**
+     * Removes the field value at the provided index.
+     *
+     * @param {integer} index
+     */
     removeUpdateField: function(index) {
         var fieldValue = this.fieldValues[index];
-        if(fieldValue) {
-            if(fieldValue.name) {
-                this.model.unset(fieldValue.name);
-                this.fieldValues.splice(index, 1);
-            } else {
-                //last item should be empty
-                var removed = this.fieldValues.splice(index - 1, 1);
-                this.defaultOption = removed[0];
-            }
-            this.setDefault();
+
+        if (_.isUndefined(fieldValue)) {
+            return;
         }
+        // If the fieldValue has a name, we need to remove it from the model and
+        // the fieldValues object.
+        if (fieldValue.name) {
+            this.model.unset(fieldValue.name);
+            // For relate fields, we need to clear fieldValue.id_name.
+            // Note that if fieldValue.id_name is undefined, this is still safe.
+            this.model.unset(fieldValue.id_name);
+            this.fieldValues.splice(index, 1);
+        // If the fieldValue does not have a name, reset the default option to
+        // the last item, which should be empty
+        } else {
+            var removed = this.fieldValues.splice(index - 1, 1);
+            this.defaultOption = removed[0];
+        }
+
+        // If there is a populate_list (i.e. this is a relate field)
+        // clear the related data.
+        // Fixme: This should be cleaned up on the relate field. See TY-651
+        if (!_.isUndefined(fieldValue.populate_list)) {
+            _.each(fieldValue.populate_list, function(key) {
+                this.model.unset(key);
+            }, this);
+        }
+        this.setDefault();
     },
+
     replaceUpdateField: function(selectedOption, targetIndex) {
         var fieldValue = this.fieldValues[targetIndex];
 
@@ -377,6 +406,14 @@
                  _chunkSize: 20,
 
                 /**
+                 * Number of update failures
+                 *
+                 * @property {Number} numFailures Number of failures.
+                 * @protected
+                 */
+                 numFailures: 0,
+
+                /**
                  * Set number of records per chunk.
                  *
                  * @param {Number} chunkSize Number of records.
@@ -434,7 +471,7 @@
                 },
 
                 /**
-                 * {@inheritDoc}
+                 * @inheritdoc
                  * Instead of fetching entire set,
                  * split entire set into small chunks
                  * and repeat fetching until entire set is completed.
@@ -451,7 +488,7 @@
                     this.updateChunk();
                     var callbacks = {
                             success: function(data, response) {
-                                model.attempt = 0;
+                                model.numFailures += data.failed;
                                 model.updateProgress();
                                 model.trigger('massupdate:done');
                                 if (model.length === 0) {
@@ -481,10 +518,16 @@
                                     options.complete(xhr, status);
                                 }
                             }
-                        },
-                        method = options.method || this.defaultMethod,
-                        data = this.getAttributes(options.attributes, method),
-                        url = app.api.buildURL(baseModule, this.module, data, options.params);
+                    };
+                    var method = options.method || this.defaultMethod;
+                    var data = this.getAttributes(options.attributes, method);
+
+                    if (_.isEmpty(data.massupdate_params.uid)) {
+                        // No records to update, end the mass update.
+                        model.trigger('massupdate:end');
+                        return;
+                    }
+                    var url = app.api.buildURL(baseModule, this.module, data, options.params);
                     app.api.call(method, url, data, callbacks);
                 },
 
@@ -573,6 +616,13 @@
             collection = self._modelsToDelete;
         var lastSelectedModels = _.clone(collection.models);
         if(collection) {
+            // massupdate:end could be triggered without triggering success event on collection.
+            // For example, when we user has no permissions to perform delete.
+            // That's why we need to clear modelsToDelete when massupdate:end triggered too.
+            collection.once('massupdate:end', function() {
+                self._modelsToDelete = null;
+            }, this);
+
             collection.fetch({
                 //Don't show alerts for this request
                 showAlerts: false,
@@ -580,8 +630,8 @@
                 error: function() {
                     app.alert.show('error_while_mass_update', {
                         level:'error',
-                        title: app.lang.getAppString('ERR_INTERNAL_ERR_MSG'),
-                        messages: app.lang.getAppString('ERR_HTTP_500_TEXT')
+                        title: app.lang.get('ERR_INTERNAL_ERR_MSG'),
+                        messages: ['ERR_HTTP_500_TEXT_LINE1', 'ERR_HTTP_500_TEXT_LINE2']
                     });
                 },
                 success: function(data, response, options) {
@@ -592,7 +642,7 @@
                         //TODO: Need trigger for fetching new record list
                         self.layout.context.reloadData({showAlerts: false});
                     } else if (options.status === 'queued') {
-                        app.alert.show('jobqueue_notice', {level: 'success', title: app.lang.getAppString('LBL_MASS_UPDATE_JOB_QUEUED'), autoClose: true});
+                        app.alert.show('jobqueue_notice', {level: 'success', title: app.lang.get('LBL_MASS_UPDATE_JOB_QUEUED'), autoClose: true});
                     }
                     self._modelsToDelete = null;
                     if (redirect) {
@@ -634,7 +684,7 @@
         var massExport = this.context.get("mass_collection");
 
         if (massExport) {
-            app.alert.show('massexport_loading', {level: 'process', title: app.lang.getAppString('LBL_LOADING')});
+            app.alert.show('massexport_loading', {level: 'process', title: app.lang.get('LBL_LOADING')});
 
             app.api.exportRecords({
                     module: this.module,
@@ -666,14 +716,14 @@
         this.once('massupdate:validation:complete', function(validate) {
             var errors = validate.errors,
                 emptyValues = validate.emptyValues,
-                confirmMessage = app.lang.getAppString('LBL_MASS_UPDATE_EMPTY_VALUES'),
+                confirmMessage = app.lang.get('LBL_MASS_UPDATE_EMPTY_VALUES'),
                 attributes = validate.attributes || this.getAttributes();
 
             this.$(".fieldPlaceHolder .error").removeClass("error");
             this.$(".fieldPlaceHolder .help-block").hide();
 
             if (_.isEmpty(errors)) {
-                confirmMessage += '<br>[' + emptyValues.join(',') + ']<br>' + app.lang.getAppString('LBL_MASS_UPDATE_EMPTY_CONFIRM') + '<br>';
+                confirmMessage += '<br>[' + emptyValues.join(',') + ']<br>' + app.lang.get('LBL_MASS_UPDATE_EMPTY_CONFIRM') + '<br>';
                 if (massUpdate) {
                     var fetchMassupdate = _.bind(function() {
                         var successMessages = this.buildSaveSuccessMessages(massUpdate);
@@ -684,8 +734,8 @@
                             error: function() {
                                 app.alert.show('error_while_mass_update', {
                                     level: 'error',
-                                    title: app.lang.getAppString('ERR_INTERNAL_ERR_MSG'),
-                                    messages: app.lang.getAppString('ERR_HTTP_500_TEXT')
+                                    title: app.lang.get('ERR_INTERNAL_ERR_MSG'),
+                                    messages: ['ERR_HTTP_500_TEXT_LINE1', 'ERR_HTTP_500_TEXT_LINE2']
                                 });
                             },
                             success: function(data, response, options) {
@@ -740,8 +790,8 @@
      */
     buildSaveSuccessMessages: function(massUpdateModel) {
         return {
-            done: app.lang.getAppString('LBL_MASS_UPDATE_SUCCESS'),
-            queued: app.lang.getAppString('LBL_MASS_UPDATE_JOB_QUEUED')
+            done: app.lang.get('LBL_MASS_UPDATE_SUCCESS'),
+            queued: app.lang.get('LBL_MASS_UPDATE_JOB_QUEUED')
         };
     },
 
@@ -777,6 +827,8 @@
                 attributes.push('parent_id', 'parent_type');
             } else if (value.name === 'team_name') {
                 attributes.push('team_name_type');
+            } else if (value.name === 'tag') {
+                attributes.push('tag_type');
             } else if (value.isMultiSelect) {
                 attributes.push(value.name + '_replace');
             }
@@ -784,17 +836,26 @@
         return _.pick(this.model.attributes, attributes);
     },
 
+    /**
+     * Get fields to validate.
+     * @return {Object}
+     * @private
+     */
+    _getFieldsToValidate: function() {
+        var fields = _.initial(this.fieldValues).concat(this.defaultOption);
+        return _.filter(fields, function(f) {
+            return f.name;
+        })
+    },
+
     checkValidationError: function() {
         var self = this,
             emptyValues = [],
             errors = {},
             validator = {},
-            fields = _.initial(this.fieldValues).concat(this.defaultOption),
             i = 0;
 
-        var fieldsToValidate = _.filter(fields, function(f) {
-            return f.name;
-        });
+        var fieldsToValidate = this._getFieldsToValidate();
 
         if (_.size(fieldsToValidate)) {
             _.each(fieldsToValidate, function(field) {
@@ -803,11 +864,20 @@
                 validator[field.name] = field;
                 field.required = (_.isBoolean(field.required) && field.required) || (field.required && field.required == 'true') || false;
                 var value = this.model.get(field.name);
-                if (!_.isBoolean(value) && !value) {
-                    emptyValues.push(app.lang.get(field.label, this.model.module));
-                    this.model.set(field.name, '', {silent: true});
-                    if (field.id_name) {
-                        this.model.set(field.id_name, '', {silent: true});
+                // check if value represents emptiness
+                if ((!_.isBoolean(value) && !value) || (_.isArray(value) && value.length === 0)) {
+                    // If value is empty, but it's being appended, don't add it to empty values
+                    // use == because the value may be a string
+                    var appendCheck = this.model.get(field.name + '_type');
+                    if (!appendCheck || appendCheck == 0) {
+                        emptyValues.push(app.lang.get(field.label, this.model.module));
+                        //don't set model if field is a relate collection
+                        if (!field.relate_collection) {
+                            this.model.set(field.name, '', {silent: true});
+                            if (field.id_name) {
+                                this.model.set(field.id_name, '', {silent: true});
+                            }
+                        }
                     }
                 }
                 this.model._doValidate(validator, errors, function(didItFail, fields, errors, callback) {
@@ -831,17 +901,20 @@
     handleValidationError: function(errors) {
         var self = this;
         _.each(errors, function (fieldErrors, fieldName) {
-            var fieldEl = self.getField(fieldName).$el,
-                errorEl = fieldEl.find(".help-block");
-            fieldEl.addClass("error");
-            if(errorEl.length == 0) {
-                errorEl = $("<span>").addClass("help-block");
-                errorEl.appendTo(fieldEl);
+            var field = self.getField(fieldName);
+            if (!_.isUndefined(field)) {
+                var fieldEl = field.$el,
+                    errorEl = fieldEl.find('.help-block');
+                fieldEl.addClass('error');
+                if(errorEl.length == 0) {
+                    errorEl = $('<span>').addClass('help-block');
+                    errorEl.appendTo(fieldEl);
+                }
+                errorEl.show().html('');
+                _.each(fieldErrors, function (errorContext, errorName) {
+                    errorEl.append(app.error.getErrorString(errorName, errorContext));
+                });
             }
-            errorEl.show().html("");
-            _.each(fieldErrors, function (errorContext, errorName) {
-                errorEl.append(app.error.getErrorString(errorName, errorContext));
-            });
         });
     },
     show: function() {
@@ -849,7 +922,7 @@
         this.visible = true;
         this.defaultOption = null;
         this.model.clear();
-        var defaults = _.extend({}, this.model._defaults, this.model.getDefaultAttributes());
+        var defaults = _.extend({}, this.model._defaults, this.model.getDefault());
         this.model.set(defaults);
         this.setDefault();
 

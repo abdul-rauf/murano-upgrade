@@ -129,7 +129,7 @@ $GLOBALS['_transient']['static']['nusoap_base']['globalDebugLevel'] = 9;
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
 * @author   Scott Nichol <snichol@users.sourceforge.net>
-
+* @version  $Id: class.nusoap_base.php 57813 2010-08-19 17:34:44Z kjing $
 * @access   public
 */
 class nusoap_base {

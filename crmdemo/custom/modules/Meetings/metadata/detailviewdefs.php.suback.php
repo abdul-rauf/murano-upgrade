@@ -1,5 +1,5 @@
 <?php
-// created: 2015-01-11 07:09:10
+// created: 2015-02-22 18:44:41
 $viewdefs['Meetings']['DetailView'] = array (
   'templateMeta' => 
   array (
@@ -8,9 +8,10 @@ $viewdefs['Meetings']['DetailView'] = array (
       'buttons' => 
       array (
         0 => 'EDIT',
-        1 => 'DUPLICATE',
-        2 => 'DELETE',
-        3 => 
+        1 => 'SHARE',
+        2 => 'DUPLICATE',
+        3 => 'DELETE',
+        4 => 
         array (
           'customCode' => '{if $fields.status.value != "Held" && $bean->aclAccess("edit")} <input type="hidden" name="isSaveAndNew" value="false">  <input type="hidden" name="status" value="">  <input type="hidden" name="isSaveFromDetailView" value="true">  <input title="{$APP.LBL_CLOSE_AND_CREATE_BUTTON_TITLE}"   class="button"  onclick="this.form.status.value=\'Held\'; this.form.action.value=\'Save\';this.form.return_module.value=\'Meetings\';this.form.isDuplicate.value=true;this.form.isSaveAndNew.value=true;this.form.return_action.value=\'EditView\'; this.form.isDuplicate.value=true;this.form.return_id.value=\'{$fields.id.value}\';" id="close_create_button" name="button"  value="{$APP.LBL_CLOSE_AND_CREATE_BUTTON_TITLE}"  type="submit">{/if}',
           'sugar_html' => 
@@ -28,7 +29,7 @@ $viewdefs['Meetings']['DetailView'] = array (
             'template' => '{if $fields.status.value != "Held" && $bean->aclAccess("edit")}[CONTENT]{/if}',
           ),
         ),
-        4 => 
+        5 => 
         array (
           'customCode' => '{if $fields.status.value != "Held" && $bean->aclAccess("edit")} <input type="hidden" name="isSave" value="false">  <input title="{$APP.LBL_CLOSE_BUTTON_TITLE}"  accesskey="{$APP.LBL_CLOSE_BUTTON_KEY}"  class="button"  onclick="this.form.status.value=\'Held\'; this.form.action.value=\'Save\';this.form.return_module.value=\'Meetings\';this.form.isSave.value=true;this.form.return_action.value=\'DetailView\'; this.form.return_id.value=\'{$fields.id.value}\'"  id="close_button" name="button1"  value="{$APP.LBL_CLOSE_BUTTON_TITLE}"  type="submit">{/if}',
           'sugar_html' => 

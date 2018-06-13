@@ -8,4 +8,4 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({format:function(value){value=app.lang.get('LBL_MODULE_NAME',value);return value;}})
+({format:function(value){value=app.lang.getModuleName(value,{plural:true});return value;}})

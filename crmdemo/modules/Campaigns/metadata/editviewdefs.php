@@ -116,6 +116,7 @@ function ConvertItems(id)  {ldelim}
             'name' => 'assigned_user_name',
             'label' => 'LBL_ASSIGNED_TO',
           ),
+
 		  array (
 		    'name'=>'team_name', 'displayParams'=>array('display'=>true),
 		  ),

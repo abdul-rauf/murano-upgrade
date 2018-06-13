@@ -17,20 +17,20 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'label' =>'LNK_NEW_TASK',
         'acl_action'=>'create',
         'acl_module'=>$module_name,
-        'icon' => 'icon-plus',
+        'icon' => 'fa-plus',
     ),
     array(
         'route'=>'#'.$module_name,
         'label' =>'LNK_TASK_LIST',
         'acl_action'=>'list',
         'acl_module'=>$module_name,
-        'icon' => 'icon-reorder',
+        'icon' => 'fa-bars',
     ),
     array(
         'route'=>'#bwc/index.php?module=Import&action=Step1&import_module=Tasks&return_module=Tasks&return_action=index',
         'label' =>'LNK_IMPORT_TASKS',
         'acl_action'=>'import',
         'acl_module'=>$module_name,
-        'icon' => 'icon-upload',
+        'icon' => 'fa-arrow-circle-o-up',
     ),
 );

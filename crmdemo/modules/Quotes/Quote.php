@@ -24,6 +24,13 @@ require_once($beanFiles['ProductBundle']);
 // Quote is used to store customer quote information.
 class Quote extends SugarBean
 {
+    /**
+     * Standard Out Of The Box Quoted Closed Status
+     *
+     * @var array
+     */
+    public $closed_statuses = array('Closed Accepted', 'Closed Dead', 'Closed Lost');
+
     public $field_name_map;
     // Stored fields
     public $id;
@@ -175,6 +182,29 @@ class Quote extends SugarBean
     }
 
     /**
+     * Delete all the associated Product Bundles from a Quote, This ensures that no orphaned records are left behind,
+     * when deleting a record.
+     *
+     * @param string $id The ID of the record that is being marked as deleted
+     */
+    public function mark_deleted($id)
+    {
+        // make sure we have the bean loaded
+        if ($this->id !== $id) {
+            $this->retrieve($id);
+        }
+        // load up all the product bundles and delete them
+        $this->load_relationship('product_bundles');
+        $bundles = $this->product_bundles->getBeans();
+        /* @var $bundle ProductBundle */
+        foreach ($bundles as $bundle) {
+            $bundle->mark_deleted($bundle->id);
+        }
+
+        parent::mark_deleted($id);
+    }
+
+    /**
      * returns bean name
      *
      * @return string Bean name
@@ -294,7 +324,7 @@ class Quote extends SugarBean
 
     public function set_taxrate_info()
     {
-        $query = "SELECT tr.id, tr.name, tr.value from $this->taxrate_table  tr, $this->table_name  q where tr.id = q.taxrate_id and q.id = '$this->id' and tr.deleted=0 and q.deleted=0";
+        $query = "SELECT tr.id, tr.name, tr.value from $this->taxrate_table  tr, $this->table_name  q where tr.id = q.taxrate_id and q.id = '$this->id' and tr.deleted=0 and q.deleted=0 and tr.status = 'Active'";
         $result = $this->db->query($query, true, "Error filling in additional detail fields: ");
 
         // Get the id and the name.
@@ -445,7 +475,6 @@ class Quote extends SugarBean
 
     public function save($check_notify = false)
     {
-
         if (!isset($this->system_id) || empty($this->system_id)) {
 
             $admin = Administration::getSettings();
@@ -639,5 +668,28 @@ class Quote extends SugarBean
         return $this->db->getOne($query);
     }
 
+    /**
+     * Is the current quote in a closed stage?
+     *
+     * @return bool
+     */
+    public function isClosed()
+    {
+        return in_array($this->quote_stage, $this->closed_statuses, true);
+    }
 
+    /**
+     * Bean specific logic for when SugarFieldCurrency_id::save() is called to make sure we can update the base_rate
+     *
+     * @return bool
+     */
+    public function updateCurrencyBaseRate()
+    {
+        // if the quote_stage changed, we should still update it, unless it's a change from closed to closed
+        if(isset($this->fetched_row['quote_stage']) && $this->fetched_row['quote_stage'] != $this->quote_stage) {
+            return !(in_array($this->fetched_row['quote_stage'], $this->closed_statuses, true) && $this->isClosed());
+        }
+
+        return !$this->isClosed();
+    }
 }

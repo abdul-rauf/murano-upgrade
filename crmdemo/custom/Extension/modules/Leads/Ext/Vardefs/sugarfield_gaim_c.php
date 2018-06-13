@@ -1,7 +1,6 @@
 <?php
- // created: 2017-11-03 10:49:22
-$dictionary['Lead']['fields']['gaim_c']['labelValue']='Gaim';
-$dictionary['Lead']['fields']['gaim_c']['dependency']='';
-$dictionary['Lead']['fields']['gaim_c']['visibility_grid']='';
+ // created: 2018-06-13 10:46:07
+$dictionary['Lead']['fields']['gaim_c']['labelValue'] = 'Gaim';
+$dictionary['Lead']['fields']['gaim_c']['dependency'] = '';
+$dictionary['Lead']['fields']['gaim_c']['visibility_grid'] = '';
 
- ?>

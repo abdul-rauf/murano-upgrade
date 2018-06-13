@@ -8,7 +8,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
+// $Id: oc_install.js 13195 2006-05-12 03:44:54Z roger $
 
 function toggleOfflineClientInstallation(){
    var theForm = document.forms[0];

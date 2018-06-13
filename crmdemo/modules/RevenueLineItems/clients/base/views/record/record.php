@@ -76,6 +76,10 @@ $fields = array(
         'name' => 'discount_rate_percent',
         'readonly' => true,
     ),
+    array(
+        'name' => 'tag',
+        'span' => 12,
+    ),
 );
 
 $fieldsHidden = array(
@@ -123,6 +127,7 @@ $fieldsHidden = array(
     array(
         'name' => 'date_entered_by',
         'readonly' => true,
+        'inline' => true,
         'type' => 'fieldset',
         'label' => 'LBL_DATE_ENTERED',
         'fields' => array(
@@ -141,6 +146,7 @@ $fieldsHidden = array(
     array(
         'name' => 'date_modified_by',
         'readonly' => true,
+        'inline' => true,
         'type' => 'fieldset',
         'label' => 'LBL_DATE_MODIFIED',
         'fields' => array(
@@ -163,11 +169,13 @@ $viewdefs['RevenueLineItems']['base']['view']['record'] = array(
     'buttons' => array(
         array(
             'type' => 'button',
-            'event' => 'button:cancel_button:click',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
+            'events' => array(
+                'click' => 'button:cancel_button:click',
+            ),
         ),
         array(
             'type' => 'rowaction',

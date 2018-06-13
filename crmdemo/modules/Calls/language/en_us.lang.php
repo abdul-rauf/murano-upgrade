@@ -28,6 +28,7 @@ $mod_strings = array (
     'LBL_LIST_DIRECTION' => 'Direction',
     'LBL_SUBJECT' => 'Subject:',
     'LBL_CONTACT_NAME' => 'Contact:',
+    'LBL_CONTACT_ID'   => 'Contact Id',
     'LBL_DESCRIPTION_INFORMATION' => 'Description Information',
     'LBL_DESCRIPTION' => 'Description:',
     'LBL_STATUS' => 'Status:',
@@ -65,6 +66,7 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Email all invitees',
     'LBL_EMAIL_REMINDER' => 'Email Reminder',
     'LBL_EMAIL_REMINDER_TIME' => 'Email Reminder Time',
+    'LBL_POPUP_REMINDER_TIME' => 'Popup Reminder Time',
     'LBL_SEND_BUTTON_TITLE'=>'Save & Send Invites [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Save & Send Invites',
@@ -89,6 +91,7 @@ $mod_strings = array (
     'LBL_HISTORY_SUBPANEL_TITLE' => 'Notes',
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Assigned User',
     'LBL_LIST_MY_CALLS' => 'My Calls',
+    'LBL_MY_SCHEDULED_CALLS' => 'My Scheduled Calls',
     'LBL_SELECT_FROM_DROPDOWN' => 'Please make a selection from the Related To dropdown list first.',
 	'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
 	'LBL_ASSIGNED_TO_ID' => 'Assigned User',
@@ -139,7 +142,40 @@ $mod_strings = array (
     'LBL_SEND_INVITES' => 'Send Invites',
     'LBL_REMINDER_TITLE' => 'Call:',
 
+    //record save
+    'LBL_RECORD_SAVED_SUCCESS' => 'You scheduled the {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> for {{formatDate date_start}}.',
+    'LBL_RECORD_SAVED_ACCESS_DENIED' => 'You scheduled the {{moduleSingularLower}} for {{formatDate date_start}}, but you do not have permission to access it.',
+
     'LBL_REVENUELINEITEMS' => 'Revenue Line Items',
 
     'TPL_CALL_STATUS_CHANGED' => 'Call marked as {{status}}.',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module consists of call records which may be in a status of "Scheduled", "Held", or "Canceled". Upcoming calls scheduled within the next 24 hours have the start date highlighted in blue. Overdue calls have the start date highlighted in red.
+
+From this {{plural_module_name}} list view, you can view and in-line edit call information. Additional actions are available in the menu at the end of each call\'s row. You can select "Close" from the menu on any scheduled call\'s row in order to mark it as held.
+
+Sugar users, contacts, and leads may be added as call invitees. {{plural_module_name}} may be created via the {{plural_module_name}} module, Calendar module, import, as well as via the Activities subpanel (for Legacy modules) or Planned Activities dashlet (for Sidecar modules) on related module records (e.g. Contacts, Accounts, etc.), which automatically creates a relationship between both records.',
+
+    // Record View Help Text
+    'LBL_HELP_RECORD' => 'The {{plural_module_name}} module consists of {{calls_singular_module}} records logged by users in your organization.  {{plural_module_name}} may be in a status of "Scheduled", "Held", or "Canceled". Sugar users as well as {{contacts_module}} and {{leads_module}} may be added as invitees.
+
+- Edit this record\'s fields by clicking an individual field or the Edit button.
+- View or modify links to other records in the subpanels by toggling the bottom left pane to "Data View".
+- Make and view user comments and record change history in the activity stream by toggling the bottom left pane to "Activity Stream".
+- Follow or favorite this record using the icons to the right of the record name.
+- Additional actions are available in the dropdown Actions menu to the right of the Edit button.',
+
+    // Create View Help Text
+    'LBL_HELP_CREATE' => 'The {{plural_module_name}} module consists of {{calls_singular_module}} records logged by users in your organization.  {{plural_module_name}} may be in a status of "Scheduled", "Held", or "Canceled". Sugar users as well as contacts and leads may be added as invitees.
+
+To create a {{calls_singular_module}}:
+1. Provide values for the fields as desired.
+    - Fields marked "Required" must be completed prior to saving.
+    - Click "Show More" to expose additional fields if necessary.
+2. Add invitees to the {{calls_singular_module}}.
+    - Click "Select an Attendee" to add an existing user, contact, or lead to the {{calls_singular_module}}.
+    - Click the plus icon to the right of "Select an Attendee" to create a {{calls_singular_module}} attendee as a new Sugar record.
+3. Click "Save" to finalize the new record and return to the previous page.',
 );

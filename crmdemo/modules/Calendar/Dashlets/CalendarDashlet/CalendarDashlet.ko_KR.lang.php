@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,19 +10,17 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$dashletStrings = array (
-  'CalendarDashlet' => 
-  array (
-    'LBL_CONFIGURE_TITLE' => '제목',
-    'LBL_CONFIGURE_VIEW' => '보기',
-    'LBL_DESCRIPTION' => '달력 dashlet',
-    'LBL_SAVE_BUTTON_LABEL' => '저장하기',
-    'LBL_TITLE' => '내 달력',
-    'LBL_VIEW_DAY' => '일',
-    'LBL_VIEW_MONTH' => '월',
-    'LBL_VIEW_WEEK' => '주',
-  ),
+$dashletStrings['CalendarDashlet'] = array(
+					'LBL_TITLE'            => '내 달력',
+                         'LBL_DESCRIPTION'      => '달력 dashlet',
+                         'LBL_CONFIGURE_TITLE'  => '제목',
+                         'LBL_CONFIGURE_VIEW'  => '보기',
+                         'LBL_SAVE_BUTTON_LABEL' => '저장하기',
+                         
+                         'LBL_VIEW_DAY' => '일',
+                         'LBL_VIEW_WEEK' => '주',
+                         'LBL_VIEW_MONTH' => '월',
+
 );
-
+?>

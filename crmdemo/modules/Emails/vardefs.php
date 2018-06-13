@@ -13,6 +13,7 @@
 $dictionary['Email'] = array(
     'table' => 'emails',
     'acl_fields' => false,
+    'full_text_search' => true,
     'activity_enabled' => true,
     'comment' => 'Contains a record of emails sent to and from the Sugar application',
     'fields' => array(
@@ -30,6 +31,15 @@ $dictionary['Email'] = array(
             'type' => 'datetime',
             'required' => true,
             'comment' => 'Date record created',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+                'aggregations' => array(
+                    'date_entered' => array(
+                        'type' => 'DateRange',
+                    ),
+                ),
+            ),
         ),
         'date_modified' => array(
             'name' => 'date_modified',
@@ -37,18 +47,33 @@ $dictionary['Email'] = array(
             'type' => 'datetime',
             'required' => true,
             'comment' => 'Date record last modified',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+                'aggregations' => array(
+                    'date_modified' => array(
+                        'type' => 'DateRange',
+                    ),
+                ),
+            ),
         ),
         'assigned_user_id' => array(
             'name' => 'assigned_user_id',
-            'rname' => 'user_name',
-            'id_name' => 'assigned_user_id',
             'vname' => 'LBL_ASSIGNED_TO',
-            'type' => 'assigned_user_name',
-            'table' => 'users',
+            'type' => 'id',
             'isnull' => false,
-            'reportable' => true,
-            'dbType' => 'id',
+            'reportable' => false,
             'comment' => 'User ID that last modified record',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+                'aggregations' => array(
+                    'assigned_user_id' => array(
+                        'type' => 'MyItems',
+                        'label' => 'LBL_AGG_ASSIGNED_TO_ME',
+                    ),
+                ),
+            ),
         ),
         'assigned_user_name' => array(
             'name' => 'assigned_user_name',
@@ -73,6 +98,17 @@ $dictionary['Email'] = array(
             'reportable' => true,
             'dbType' => 'id',
             'comment' => 'User ID that last modified record',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+                'type' => 'id',
+                'aggregations' => array(
+                    'modified_user_id' => array(
+                        'type' => 'MyItems',
+                        'label' => 'LBL_AGG_MODIFIED_BY_ME',
+                    ),
+                ),
+            ),
         ),
         'modified_by_name' => array(
             'name' => 'modified_by_name',
@@ -95,6 +131,17 @@ $dictionary['Email'] = array(
             'len' => '36',
             'reportable' => false,
             'comment' => 'User name who created record',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+                'type' => 'id',
+                'aggregations' => array(
+                    'created_by' => array(
+                        'type' => 'MyItems',
+                        'label' => 'LBL_AGG_CREATED_BY_ME',
+                    ),
+                ),
+            ),
         ),
         'created_by_name' => array(
             'name' => 'created_by_name',
@@ -166,6 +213,7 @@ $dictionary['Email'] = array(
             'type' => 'varchar',
             'vname' => 'description',
             'source' => 'non-db',
+            'full_text_search' => array('enabled' => true, 'searchable' => true),
         ),
         'date_sent' => array(
             'name' => 'date_sent',
@@ -196,6 +244,7 @@ $dictionary['Email'] = array(
             'required' => false,
             'len' => '255',
             'comment' => 'The subject of the email',
+            'full_text_search' => array('enabled' => true, 'searchable' => true),
         ),
         'type' => array(
             'name' => 'type',
@@ -276,23 +325,33 @@ $dictionary['Email'] = array(
         ),
         'parent_name' => array(
             'name' => 'parent_name',
-            'type' => 'varchar',
+            'parent_type' => 'record_type_display',
+            'type_name' => 'parent_type',
+            'id_name' => 'parent_id',
+            'vname' => 'LBL_LIST_RELATED_TO',
+            'type' => 'parent',
+            'group' => 'parent_name',
             'reportable' => false,
             'source' => 'non-db',
+            'options' => 'parent_type_display',
         ),
         'parent_type' => array(
             'name' => 'parent_type',
-            'type' => 'varchar',
+            'vname' => 'LBL_PARENT_TYPE',
+            'type' => 'parent_type',
+            'dbType' => 'varchar',
+            'group' => 'parent_name',
+            'options' => 'parent_type_display',
             'reportable' => false,
-            'len' => 100,
-            'comment' => 'Identifier of Sugar module to which this email is associated (deprecated as of 4.2)',
+            'comment' => 'Identifier of Sugar module to which this email is associated',
         ),
         'parent_id' => array(
             'name' => 'parent_id',
+            'vname' => 'LBL_PARENT_ID',
             'type' => 'id',
-            'len' => '36',
+            'group' => 'parent_name',
             'reportable' => false,
-            'comment' => 'ID of Sugar object referenced by parent_type (deprecated as of 4.2)',
+            'comment' => 'ID of Sugar object referenced by parent_type',
         ),
         /* relationship collection attributes */
         /* added to support InboundEmail */
@@ -394,6 +453,7 @@ $dictionary['Email'] = array(
             'module' => 'RevenueLineItems',
             'bean_name' => 'RevenueLineItem',
             'source' => 'non-db',
+            'workflow' => false
         ),
         'products' => array(
             'name' => 'products',

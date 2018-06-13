@@ -1,8 +1,8 @@
 /*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("pjax",function(e,t){var n=["loadContent","_defaultRoute"],r="error",i="load";e.Pjax=e.Base.create("pjax",e.Router,[e.PjaxBase,e.PjaxContent],{initializer:function(){this.publish(r,{defaultFn:this._defCompleteFn}),this.publish(i,{defaultFn:this._defCompleteFn})},_defaultRoute:function(e,t,n){var s=t.ioResponse,o=s.status,u=o>=200&&o<300?i:r;this.fire(u,{content:t.content,responseText:s.responseText,status:o,url:e.ioURL}),n()},_defCompleteFn:function(t){var n=this.get("container"),r=t.content;n&&r.node&&n.setHTML(r.node),r.title&&e.config.doc&&(e.config.doc.title=r.title)}},{ATTRS:{container:{value:null,setter:e.one},routes:{value:[{path:"*",callbacks:n}]}},defaultRoute:n})},"3.15.0",{requires:["pjax-base","pjax-content"]});
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('pjax',function(Y,NAME){var defaultRoute=['loadContent','_defaultRoute'],EVT_ERROR='error',EVT_LOAD='load';Y.Pjax=Y.Base.create('pjax',Y.Router,[Y.PjaxBase,Y.PjaxContent],{initializer:function(){this.publish(EVT_ERROR,{defaultFn:this._defCompleteFn});this.publish(EVT_LOAD,{defaultFn:this._defCompleteFn});},_defaultRoute:function(req,res,next){var ioResponse=res.ioResponse,status=ioResponse.status,event=status>=200&&status<300?EVT_LOAD:EVT_ERROR;this.fire(event,{content:res.content,responseText:ioResponse.responseText,status:status,url:req.ioURL});next();},_defCompleteFn:function(e){var container=this.get('container'),content=e.content;if(container&&content.node){container.setHTML(content.node);}
+if(content.title&&Y.config.doc){Y.config.doc.title=content.title;}}},{ATTRS:{container:{value:null,setter:Y.one},routes:{value:[{path:'*',callbacks:defaultRoute}]}},defaultRoute:defaultRoute});},'3.15.0',{"requires":["pjax-base","pjax-content"]});

@@ -20,7 +20,7 @@
  * @extends View.View
  */
 ({
-    plugins: ['LinkedModel', 'Dashlet', 'Timeago', 'Pagination'],
+    plugins: ['LinkedModel', 'Dashlet', 'Pagination'],
     events: {
         'click [data-event=create_button]': 'createRelatedNote',
         'click [data-event=select_button]': 'openSelectDrawer'
@@ -42,7 +42,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * @param {String} viewName view name.
      */
@@ -141,7 +141,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Once collection is reset, the view should be refreshed.
      */
@@ -150,6 +150,19 @@
             this.collection.on('reset', this.render, this);
         }
         this.on('render', this.applySvgIcon, this);
+        this.on('linked-model:create', this._reloadData, this);
+    },
+
+    /**
+     * Re-fetches the data for the context's collection.
+     *
+     * FIXME: This will be removed when SC-4775 is implemented.
+     *
+     * @private
+     */
+    _reloadData: function() {
+        this.context.set('skipFetch', false);
+        this.context.reloadData();
     },
 
     /**
@@ -210,7 +223,7 @@
     unlinkClicked: function(model) {
         var self = this;
         var name = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model)).trim();
-        var context = app.lang.get('LBL_MODULE_NAME_SINGULAR', model.module).toLowerCase() + ' ' + name;
+        var context = app.lang.getModuleName(model.module).toLowerCase() + ' ' + name;
         app.alert.show(model.get('id') + ':unlink_confirmation', {
             level: 'confirmation',
             messages: app.utils.formatString(app.lang.get('NTC_UNLINK_CONFIRMATION_FORMATTED'), [context]),
@@ -232,7 +245,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Dispose the interval timer as well.
      */

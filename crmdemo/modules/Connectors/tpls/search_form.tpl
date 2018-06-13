@@ -14,11 +14,13 @@
 <tr>
 <td nowrap>
 <h3>{$mod.LBL_MODIFY_SEARCH}</h3></td><td width='100%'>
-<IMG height='1' width='1' src='include/images/blank.gif' alt=''>
+<IMG height='1' width='1' src="{sugar_getjspath file='include/images/blank.gif'}" alt=''>
 </td>
 </tr>
 </table>
 <form name='SearchForm' method='POST' id='SearchForm'>
+{sugar_csrf_form_token}
+    {sugar_csrf_form_token}
  	<input type='hidden' name='source_id' id='source_id' value='{$source_id}' />
  	<input type='hidden' name='merge_module' value='{$module}' />
  	<input type='hidden' name='record' value='{$RECORD}' />

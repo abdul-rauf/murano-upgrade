@@ -14,15 +14,15 @@ array (
           2 => 'DELETE',
           3 => 
           array (
-            'customCode' => '<input title="{$MOD.LBL_CONVERTLEAD_TITLE}" accessKey="{$MOD.LBL_CONVERTLEAD_BUTTON_KEY}" type="button" class="button" onClick="document.location=\'index.php?module=Leads&action=ConvertLead&record={$fields.id.value}\'" name="convert" value="{$MOD.LBL_CONVERTLEAD}">',
+            // 'customCode' => '<input title="{$MOD.LBL_CONVERTLEAD_TITLE}" accessKey="{$MOD.LBL_CONVERTLEAD_BUTTON_KEY}" type="button" class="button" onClick="document.location=\'index.php?module=Leads&action=ConvertLead&record={$fields.id.value}\'" name="convert" value="{$MOD.LBL_CONVERTLEAD}">',
           ),
           4 => 
           array (
-            'customCode' => '<input title="{$APP.LBL_DUP_MERGE}" accessKey="M" class="button" onclick="this.form.return_module.value=\'Leads\'; this.form.return_action.value=\'DetailView\';this.form.return_id.value=\'{$fields.id.value}\'; this.form.action.value=\'Step1\'; this.form.module.value=\'MergeRecords\';" type="submit" name="Merge" value="{$APP.LBL_DUP_MERGE}">',
+            // 'customCode' => '<input title="{$APP.LBL_DUP_MERGE}" accessKey="M" class="button" onclick="this.form.return_module.value=\'Leads\'; this.form.return_action.value=\'DetailView\';this.form.return_id.value=\'{$fields.id.value}\'; this.form.action.value=\'Step1\'; this.form.module.value=\'MergeRecords\';" type="submit" name="Merge" value="{$APP.LBL_DUP_MERGE}">',
           ),
           5 => 
           array (
-            'customCode' => '<input title="{$APP.LBL_MANAGE_SUBSCRIPTIONS}" class="button" onclick="this.form.return_module.value=\'Leads\'; this.form.return_action.value=\'DetailView\';this.form.return_id.value=\'{$fields.id.value}\'; this.form.action.value=\'Subscriptions\'; this.form.module.value=\'Campaigns\'; this.form.module_tab.value=\'Leads\';" type="submit" name="Manage Subscriptions" value="{$APP.LBL_MANAGE_SUBSCRIPTIONS}">',
+            // 'customCode' => '<input title="{$APP.LBL_MANAGE_SUBSCRIPTIONS}" class="button" onclick="this.form.return_module.value=\'Leads\'; this.form.return_action.value=\'DetailView\';this.form.return_id.value=\'{$fields.id.value}\'; this.form.action.value=\'Subscriptions\'; this.form.module.value=\'Campaigns\'; this.form.module_tab.value=\'Leads\';" type="submit" name="Manage Subscriptions" value="{$APP.LBL_MANAGE_SUBSCRIPTIONS}">',
           ),
         ),
         'headerTpl' => 'modules/Leads/tpls/DetailViewHeader.tpl',
@@ -133,7 +133,6 @@ array (
             'name' => 'affiliate_c',
             'label' => 'LBL_AFFILIATE',
           ),
-          1 => '',
         ),
         4 => 
         array (
@@ -158,7 +157,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_MIFID',
           ),
-          1 => '',
         ),
         6 => 
         array (
@@ -201,6 +199,15 @@ array (
         array (
           0 => 
           array (
+            'name' => 'difficulty_score_c',
+            'label' => 'LBL_DIFFICULTY_SCORE',
+          ),
+          1 => '',
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
             'name' => 'further_information_c',
             'studio' => 'visible',
             'label' => 'LBL_FURTHER_INFORMATION',
@@ -212,7 +219,7 @@ array (
             'label' => 'LBL_ACCOUNT_DESCRIPTION',
           ),
         ),
-        9 => 
+        10 => 
         array (
           0 => 
           array (
@@ -223,7 +230,7 @@ array (
               'detailview' => true,
             ),
             'label' => 'LBL_GENERATE_DOC',
-            'customCode' => '<input title="{$APP.LBL_DUP_MERGE}" accesskey="M"  onclick="document.DetailView.action.value=\'gen_doc\';document.DetailView.submit();" name="button" value="Investor Report" type="submit">',
+            // 'customCode' => '<input title="{$APP.LBL_DUP_MERGE}" accesskey="M"  onclick="document.DetailView.action.value=\'gen_doc\';document.DetailView.submit();" name="button" value="Investor Report" type="submit"> / <input title="{$APP.LBL_DUP_MERGE}" accesskey="M"  onclick="document.DetailView.action.value=\'gen_doc_new\';document.DetailView.submit();" name="button" value="New Investor Report(Test Version)" type="submit"> ',
           ),
           1 => 
           array (
@@ -231,7 +238,7 @@ array (
             'label' => 'LBL_GO_ON_WEB',
           ),
         ),
-        10 => 
+        11 => 
         array (
           0 => 
           array (
@@ -242,7 +249,7 @@ array (
           1 => 
           array (
             'name' => 'quick_email',
-            'customCode' => '<input type="button" onClick="document.location.href=\'index.php?module=Leads&action=send_to&record={$fields.id.value}\'" value="Enquire">',
+            // 'customCode' => '<input type="button" onClick="document.location.href=\'index.php?module=Leads&action=send_to&record={$fields.id.value}\'" value="Enquire">',
             'label' => 'LBL_SEND_QUICK_EMAIL',
           ),
         ),
@@ -346,25 +353,38 @@ array (
           ),
           1 => 
           array (
-            'name' => 'targ_return_c',
-            'label' => 'LBL_TARG_RETURN',
+            'name' => 'min_track1_c',
+            'label' => 'LBL_MIN_TRACK1_C',
           ),
         ),
         7 => 
         array (
           0 => 
           array (
+            'name' => 'targ_return_c',
+            'label' => 'LBL_TARG_RETURN',
+          ),
+          1 => 
+          array (
             'name' => 'req_aum_c',
             'label' => 'LBL_REQ_AUM',
           ),
-          1 => 
+        ),
+        8 => 
+        array (
+          0 => 
           array (
             'name' => 'pref_liquid_c',
             'studio' => 'visible',
             'label' => 'LBL_PREF_LIQUID',
           ),
+          1 => 
+          array (
+            'name' => 'pref_liquid_1c_c',
+            'label' => 'LBL_PREF_LIQUID_1C',
+          ),
         ),
-        8 => 
+        9 => 
         array (
           0 => 
           array (
@@ -389,16 +409,6 @@ array (
             'comment' => 'Status of the lead',
             'label' => 'LBL_STATUS',
           ),
-          1 => 
-          array (
-            'name' => 'lead_source_cp',
-            'comment' => 'Lead source (ex: Web, print)',
-            'studio' => 
-            array (
-              'detailview' => true,
-            ),
-            'label' => 'LBL_LEAD_SOURCE',
-          ),
         ),
         1 => 
         array (
@@ -407,16 +417,6 @@ array (
             'name' => 'status_description',
             'comment' => 'Description of the status of the lead',
             'label' => 'LBL_STATUS_DESCRIPTION',
-          ),
-          1 => 
-          array (
-            'name' => 'lead_source_description_cp',
-            'comment' => 'BUTTON FOR QUICK EMAIL',
-            'studio' => 
-            array (
-              'detailview' => true,
-            ),
-            'label' => 'LBL_LEAD_SOURCE_DESCRIPTION',
           ),
         ),
         2 => 
@@ -445,7 +445,7 @@ array (
           array (
             'name' => 'date_modified',
             'label' => 'LBL_DATE_MODIFIED',
-            'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value}',
+            // 'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value}',
           ),
         ),
         4 => 
@@ -469,11 +469,103 @@ array (
         array (
           0 => 
           array (
-            'name' => 'client_list_c',
+            'name' => 'target_links',
+            'studio' => 
+            array (
+              'listview' => true,
+              'detailview' => true,
+            ),
+            'label' => 'All Target Lists',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'suitable_clients_2_c',
             'studio' => 'visible',
-            'label' => 'LBL_CLIENT_LIST',
+            'label' => 'LBL_SUITABLE_CLIENTS_2',
+          ),
+          1 => 
+          array (
+            'name' => 'trips_suitable2_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIPS_SUITABLE2',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'trips_suitable3_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIPS_SUITABLE3',
+          ),
+          1 => 
+          array (
+            'name' => 'trips_suitable4_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIPS_SUITABLE4',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'trips_suitable5_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIPS_SUITABLE5',
+          ),
+          1 => 
+          array (
+            'name' => 'trip6_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIP6',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'trip7_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIP7',
+          ),
+          1 => 
+          array (
+            'name' => 'trip8_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIP8',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'trip9_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TRIP9',
           ),
           1 => '',
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'inv_groups',
+            'studio' => 
+            array (
+              'listview' => true,
+              'detailview' => true,
+            ),
+            'label' => 'Client Trips',
+          ),
+          1 => 
+          array (
+            'name' => 'tempanalyst_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TEMPANALYST',
+          ),
         ),
       ),
     ),

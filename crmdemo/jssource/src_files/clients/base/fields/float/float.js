@@ -11,11 +11,18 @@
 /**
  * @class View.Fields.Base.FloatField
  * @alias SUGAR.App.view.fields.BaseFloatField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     /**
-     * {@inheritDoc}
+     * @inheritdoc
+     *
+     * The direction for this field should always be `ltr`.
+     */
+    direction: 'ltr',
+
+    /**
+     * @inheritdoc
      *
      * Unformats the float based on userPreferences (grouping/decimal separator).
      * If we weren't able to parse the value, the original value is returned.
@@ -37,7 +44,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Formats the float based on user preferences (grouping separator).
      * If the field definition has `disabled_num_format` as `true` the value
@@ -49,14 +56,27 @@
      *   preferences.
      */
     format: function(value) {
-        if (this.def.disable_num_format) {
+        if (this.def.disable_num_format || _.isNull(value)|| _.isUndefined(value) || _.isNaN(value)) {
             return value;
         }
+
+        var number_grouping_separator = app.user.getPreference('number_grouping_separator') || ',';
+        var decimal_separator = app.user.getPreference('decimal_separator') || '.';
+
+        if (_.isUndefined(this.def.precision) || !this.def.precision) {
+            return app.utils.addNumberSeparators(
+                value.toString(),
+                number_grouping_separator,
+                decimal_separator
+            );
+        }
+
         return app.utils.formatNumber(
             value,
-            this.def.round || 4,
-            this.def.precision || 4,
-            app.user.getPreference('number_grouping_separator') || ',',
-            app.user.getPreference('decimal_separator') || '.');
+            this.def.precision,
+            this.def.precision,
+            number_grouping_separator,
+            decimal_separator
+        );
     }
 })

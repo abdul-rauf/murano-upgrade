@@ -50,6 +50,7 @@ $viewdefs['Cases']['base']['layout']['subpanels'] = array (
       array (
           'layout' => 'subpanel',
           'label' => 'LBL_CONTACTS_SUBPANEL_TITLE',
+          'override_paneltop_view' => 'panel-top-for-cases',
           'override_subpanel_list_view' => 'subpanel-for-cases',
           'context' => array (
               'link' => 'contacts',
@@ -78,9 +79,10 @@ $viewdefs['Cases']['base']['layout']['subpanels'] = array (
       ),
       array(
           'layout' => 'subpanel',
-          'label' => 'LBL_KBDOCUMENTS_SUBPANEL_TITLE',
-          'context' => array (
-              'link' => 'kbdocuments',
+          'label' => 'LBL_KBCONTENTS_SUBPANEL_TITLE',
+          'override_paneltop_view' => 'panel-top-for-cases',
+          'context' => array(
+              'link' => 'kbcontents',
           ),
       ),
   ),

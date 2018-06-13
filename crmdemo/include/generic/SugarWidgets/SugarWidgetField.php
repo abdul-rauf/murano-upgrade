@@ -12,7 +12,7 @@ if(!defined('sugarEntry') || !sugarEntry)
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: SugarWidgetField.php 57035 2010-06-19 01:58:47Z kjing $
 
 
 

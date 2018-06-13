@@ -25,7 +25,7 @@
         'sic_code': 3599,
         'hoovers_ind_code': 25838,
         'sic_to_hic': 3599,
-        'connectorSettingsURL': 'index.php#bwc/index.php?module=Connectors&action=ModifyProperties',
+        'connectorSettingsURL': 'index.php#bwc/index.php?module=Connectors&action=ModifyProperties&active_tab=ext_rest_dnb',
         'systemSettingsURL': 'index.php#bwc/index.php?module=Configurator&action=EditView'
     },
 
@@ -47,7 +47,7 @@
     },
     //D&B Firmographic API product codes
     compInfoProdCD: {
-        'lite': 'CST_PRD_1',
+        'lite': 'DCP_BAS',
         'std': 'DCP_STD',
         'prem': 'DCP_PREM'
     },
@@ -196,14 +196,26 @@
             'desc': 'LBL_DNB_LONG_DESC'
         },
         'phone': {
-            'json_path': 'Telecommunication.TelephoneNumber.0.TelecommunicationNumber',
-            'label': 'LBL_DNB_PHONE',
-            'desc': 'LBL_DNB_PHONE_DESC'
+            'json_path': 'Telecommunication.TelephoneNumber.0',
+            'desc': 'LBL_DNB_PHONE_DESC',
+            'sub_object': {
+                'data_type': 'phone_idc',
+                'data_name': 'phone_office',
+                'phone_no': 'TelecommunicationNumber',
+                'id_code': 'InternationalDialingCode',
+                'label': 'LBL_DNB_PHONE'
+            }
         },
         'fax': {
-            'json_path': 'Telecommunication.FacsimileNumber.0.TelecommunicationNumber',
-            'label': 'LBL_DNB_FAX',
-            'desc': 'LBL_DNB_FAX_DESC'
+            'json_path': 'Telecommunication.FacsimileNumber.0',
+            'desc': 'LBL_DNB_FAX_DESC',
+            'sub_object': {
+                'data_type': 'phone_idc',
+                'data_name': 'fax',
+                'phone_no': 'TelecommunicationNumber',
+                'id_code': 'InternationalDialingCode',
+                'label': 'LBL_DNB_FAX'
+            }
         },
         'webpage': {
             'json_path': 'Telecommunication.WebPageAddress.0.TelecommunicationAddress',
@@ -423,6 +435,16 @@
             'desc': 'LBL_DNB_NONMARK_REAS_TXT_DESC',
             'case_fmt': true
         },
+        'orgid': {
+            'json_path': 'RegisteredDetail.OrganizationIdentificationNumberDetail',
+            'label': 'LBL_DNB_ORG_ID',
+            'desc': 'LBL_DNB_ORG_ID_DESC',
+            'sub_array': {
+                'data_type': 'org_id',
+                'org_id': 'OrganizationIdentificationNumber',
+                'org_id_type': '@TypeText'
+            }
+        },
         'indcodes': {
             'json_path': 'IndustryCode.IndustryCode',
             'label': 'LBL_DNB_IND_CD',
@@ -481,7 +503,8 @@
         'responseMsg': 'OrderProductResponse.TransactionResult.ResultText',
         'industry': 'OrderProductResponse.OrderProductResponseDetail.Product.Organization.IndustryCode.IndustryCode',
         'product': 'OrderProductResponse.OrderProductResponseDetail.Product.Organization',
-        'duns': 'OrderProductResponse.OrderProductResponseDetail.InquiryDetail.DUNSNumber'
+        'duns': 'OrderProductResponse.OrderProductResponseDetail.InquiryDetail.DUNSNumber',
+        'idc': 'Telecommunication.TelephoneNumber.0.InternationalDialingCode'
     },
     //common json paths
     commonJSONPaths: {
@@ -492,7 +515,8 @@
         'srchRslt': 'FindCompanyResponse.FindCompanyResponseDetail.FindCandidate',
         'competitors': 'FindCompetitorResponse.FindCompetitorResponseDetail.Competitor',
         'industryprofile': 'OrderProductResponse.OrderProductResponseDetail.Product.IndustryProfile',
-        'srchCount': 'FindCompanyResponse.FindCompanyResponseDetail.CandidateMatchedQuantity'
+        'srchCount': 'FindCompanyResponse.FindCompanyResponseDetail.CandidateMatchedQuantity',
+        'cmCount': 'GetCleanseMatchResponse.GetCleanseMatchResponseDetail.MatchResponseDetail.CandidateMatchedQuantity'
     },
     //common error codes with error labels
     commonErrorMap: {
@@ -520,7 +544,7 @@
         'srchCount': 'FindContactResponse.FindContactResponseDetail.CandidateMatchedQuantity',
         'orgName': 'OrderProductResponse.OrderProductResponseDetail.Product.Organization.OrganizationName.OrganizationPrimaryName.0.OrganizationName.$'
     },
-    
+
     //dashlets that occupy the full sidepane
     //account create and build a list for now
     sidePaneDashlets: {
@@ -660,7 +684,9 @@
             'ind_codes': this.formatIndCodes,
             'tpa': this.formatTPA,
             'sales_rev': this.formatAnnualSales,
-            'prim_sic': this.formatPrimSic
+            'prim_sic': this.formatPrimSic,
+            'org_id': this.formatOrgId,
+            'phone_idc': this.formatPhone
         };
         this.leadsAttr = this.contactAttr.slice();
         this.leadsAttr.push('account_name');
@@ -687,6 +713,25 @@
             obj = obj[args[i]];
         }
         return true;
+    },
+
+    /**
+     * Checks if
+     * 1. User has access to the field using the acl api
+     * 2. Checks is the user layout has the field
+     * @param {String} fieldName
+     */
+    checkFieldExists: function(fieldName) {
+        var checkUserAccess = app.acl.hasAccess('view', this.module, null, fieldName);
+        if (checkUserAccess) {
+            var viewMeta = App.metadata.getView(this.module, 'record');
+            var fieldExists = _.find(_.flatten(_.pluck(viewMeta.panels, 'fields')), function(fieldObj) {
+                return fieldObj.name === fieldName;
+            });
+        } else {
+            return false;
+        }
+        return fieldExists;
     },
 
     /**
@@ -728,6 +773,14 @@
         } else {
             this.template = app.template.get('dnb.dnb-error');
         }
+
+        this.renderErrorMessage();
+    },
+
+    /**
+     * Renders the actual error message that has been set on the error template
+     */
+    renderErrorMessage: function() {
         this.render();
         this.$('div#error-display').show();
         this.$('.showLessData').hide();
@@ -753,7 +806,7 @@
     /**
      * Gets company information for a DUNS number
      * @param {String} duns_num -- duns_num of the company
-     * @param {String} prod_code -- CST_PRD_1 or DCP_STD or DCP_PREM (referring to the 3 types of comp info dashlets)
+     * @param {String} prod_code -- DCP_BAS or DCP_STD or DCP_PREM (referring to the 3 types of comp info dashlets)
      * @param {String} backToListLabel -- label to be rendered to redirect to the previous view
      * @param {Function} renderFunction -- a function to be called to render the dnbapiresponse
      */
@@ -829,8 +882,15 @@
             _.each(dataElementsMap, function(value, key) {
                 //extract the informtaion
                 var dnbDataElement = null, dnbDataObj;
-                //if the data map is array then traverse the nested array
-                if (value.sub_array) {
+                if (key === 'orgid') {
+                    //if the key is orgId
+                    dnbDataElement = this.getJsonNode(productDetails, value.json_path);
+                    var formattedOrgIds = this.formatOrgId(dnbDataElement, value.sub_array);
+                    if (!_.isEmpty(formattedOrgIds)) {
+                        formattedDataElements = formattedDataElements.concat(formattedOrgIds);
+                    }
+                } else if (value.sub_array) {
+                    //if the data map is array then traverse the nested array
                     dnbDataElement = this.getJsonNode(productDetails, value.json_path);
                     _.each(dnbDataElement, function(dnbSubData) {
                         dnbDataObj = this.formatTypeMap[value.sub_array.data_type].call(this, dnbSubData, value.sub_array);
@@ -882,9 +942,9 @@
             dnbDataObj = {};
             dnbDataObj.dataElement = this.properCase(empName);
             if (jobTitle) {
-                jobTitle = '<i class="icon-user"></i>' + this.properCase(jobTitle);
+                jobTitle = '<i class="fa fa-user"></i>' + this.properCase(jobTitle);
             } else {
-                jobTitle = '<i class="icon-user"></i>' + app.lang.get('LBL_DNB_ASSOCIATE');
+                jobTitle = '<i class="fa fa-user"></i>' + app.lang.get('LBL_DNB_ASSOCIATE');
             }
             dnbDataObj.dnbLabel = jobTitle;
         }
@@ -956,6 +1016,36 @@
     },
 
     /**
+     * Preprocesses organization identification number
+     * @param {Array} orgIdArr
+     * @param {Object} orgIdDD Data Dictionary
+     * @return {Array}
+     */
+    formatOrgId: function(orgIdArr, orgIdDD) {
+        var uniqueOrgIds = _.uniq(_.pluck(orgIdArr,'OrganizationIdentificationNumber'));
+        var uniqueOrgIdObjects = [],
+            formattedObjects = [];
+        _.each(uniqueOrgIds, function(orgId) {
+            uniqueOrgIdObjects.push(_.find(orgIdArr, function(orgIdObj){
+                return orgIdObj.OrganizationIdentificationNumber === orgId;
+            }));
+        });
+        _.each(uniqueOrgIdObjects, function(orgIdObj){
+            var dnbDataObj = null;
+            var org_id_type = this.getJsonNode(orgIdObj, orgIdDD.org_id_type);
+            var org_id = this.getJsonNode(orgIdObj, orgIdDD.org_id);
+            if (!_.isUndefined(org_id_type) && org_id_type !== 'Unknown'
+                && !_.isUndefined(org_id) ) {
+                dnbDataObj = {};
+                dnbDataObj.dataElement = org_id;
+                dnbDataObj.dnbLabel = org_id_type;
+                formattedObjects.push(dnbDataObj);
+            }
+        }, this);
+        return formattedObjects;
+    },
+
+    /**
      * Preprocessing search results
      * @param {Object} srchResults DNB API Response for search results
      * @param {Object} searchDD Data Elements Map
@@ -1000,7 +1090,6 @@
                     }
                 }
             }, this);
-            frmtSrchRsltObj.isChecked = true;
             formattedSrchRslts.push(frmtSrchRsltObj);
         }, this);
         return formattedSrchRslts;
@@ -1039,6 +1128,41 @@
             dnbDataObj.dataName = 'annual_revenue';
         }
         return dnbDataObj;
+    },
+
+    /**
+     * Preprocesses search result
+     * @param {Object} phoneObj D&B Current Principal Object
+     * @param {Object} phoneDD Data Dictionary
+     * @return {Object} with label and dataelement
+     */
+    formatPhone: function(phoneObj, phoneDD) {
+        var dnbDataObj = null;
+        var phoneNo = this.getJsonNode(phoneObj, phoneDD.phone_no);
+        var idCode = this.getJsonNode(phoneObj, phoneDD.id_code);
+        if (phoneNo) {
+            dnbDataObj = {};
+            dnbDataObj.dataElement = this.appendIDCPhone(phoneNo, idCode);
+            dnbDataObj.dataName = phoneDD.data_name;
+            dnbDataObj.dnbLabel = app.lang.get(phoneDD.label);
+        }
+        return dnbDataObj;
+    },
+
+    /**
+     * Preprocesses search result
+     * @param {Number} phoneNo Phone Number
+     * @param {Number} idCode International Dailing Code
+     * @return {String} phone Number with international dailing code
+     */
+    appendIDCPhone: function (phoneNo, idCode) {
+        var retVal;
+        if(idCode) {
+            retVal = '+' + idCode + phoneNo.replace(/^0+/, '');
+        } else {
+            retVal = phoneNo;
+        }
+        return retVal;
     },
 
     /**
@@ -1105,7 +1229,7 @@
         if (!_.isUndefined(accountsModel)) {
             var self = this;
             app.drawer.open({
-                layout: 'create-actions',
+                layout: 'create',
                 context: {
                     create: true,
                     module: 'Accounts',
@@ -1130,6 +1254,7 @@
     getAccountsModel: function(companyApiResponse) {
         var organizationDetails = this.getJsonNode(companyApiResponse, this.appendSVCPaths.product);
         var accountsModel = null;
+        var idcode = this.getJsonNode(organizationDetails, this.appendSVCPaths.idc);
         if (!_.isUndefined(organizationDetails)) {
             var accountsBean = {};
             if (companyApiResponse.primarySIC) {
@@ -1140,6 +1265,8 @@
                 if (dnbDataElement) {
                     if (sugarColumnName === 'annual_revenue') {
                         dnbDataElement = this.formatSalesRevenue(dnbDataElement);
+                    } else if (sugarColumnName === 'phone_office') {
+                        dnbDataElement = this.appendIDCPhone(dnbDataElement, idcode)
                     }
                     accountsBean[sugarColumnName] = dnbDataElement;
                 }
@@ -1194,7 +1321,12 @@
      * @return {String}  properCase String
      */
     properCase: function(strParam) {
-        //http://stackoverflow.com/a/196991/226906
+        // The following is provided for your convenience should you wish to learn more about
+        // Convert string to title case with javascript.
+        // For a list of the actual third party software used in this Sugar product,
+        // please visit http://support.sugarcrm.com/06_Customer_Center/11_Third_Party_Software/.
+        //
+        // http://stackoverflow.com/a/196991/226906
         return strParam.replace(/\w\S*/g, function(txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
@@ -1238,13 +1370,24 @@
                 }
             }
         }, this);
-        //importing new data
+
+        // Import new data, but only if updated data is empty, otherwise the
+        // next conditional block will handle it
         if (newData.length > 0) {
             this.updateAccountsModel(newData, setModelFlag);
         }
-        //update existing data
+
+        // Update the model based on changes, making sure to not save the model
         if (updatedData.length > 0) {
-            var confirmationMsgKey, confirmationMsgData;
+            var confirmationMsgKey;
+            var confirmationMsgData;
+
+            // Import flag is true when we've already set the model based on an
+            // import selection. If it comes in again as false, the model will
+            // save when updated, which will save a new record in the database
+            // without a save event being fired. This fixes that.
+            var setModelOnlyFlag = importFlag === true;
+
             //show a detailed warning message about the single data element being imported
             if (updatedData.length === 1) {
                 var fieldName = app.lang.get(accountsModel.fields[updatedData[0].propName].vname, 'Accounts');
@@ -1276,7 +1419,7 @@
                 level: 'confirmation',
                 title: 'LBL_WARNING',
                 messages: confirmationMsgTpl(confirmationMsgData),
-                onConfirm: _.bind(this.updateAccountsModel, this, updatedData)
+                onConfirm: _.bind(this.updateAccountsModel, this, updatedData, setModelOnlyFlag)
             });
         }
     },
@@ -1322,13 +1465,13 @@
             var settingsFlag = this.settings.get(key);
             //if the settings flag is defined and is selected then
             //add that property to the filtered data dictionary
-            if (!_.isUndefined(settingsFlag) && settingsFlag === '1') {
+            if (!_.isUndefined(settingsFlag) && settingsFlag === true) {
                 this.filteredDD[key] = value;
             } else if (_.isUndefined(settingsFlag)) {
                 //if the settings flag is not defined
                 //select it by default
                 this.filteredDD[key] = value;
-                this.settings.set(key, '1');
+                this.settings.set(key, true);
             }
         }, this);
     },
@@ -1737,7 +1880,7 @@
         var model = this.getModuleModel(this.currentContact, moduleName);
         var self = this;
         app.drawer.open({
-            layout: 'create-actions',
+            layout: 'create',
             context: {
                 create: true,
                 module: model.module,
@@ -1752,7 +1895,7 @@
             self.context.loadData();
             _.each(app.controller.context.children, function(childContext) {
                 if (childContext.get('module') === 'Contacts') {
-                    childContext.reloadData(true);
+                    childContext.reloadData({recursive: false});
                 }
             });
         });
@@ -1802,16 +1945,18 @@
      * @param {Array} recordSet
      * @param {Number} pageStart
      * @param {Number} pageEnd
-     * @returns {Array} recordSet
+     * @return {Array} recordSet
      */
     getNextPage: function(recordSet, pageStart, pageEnd) {
-        return  _.filter(recordSet, function(resultObj) {
+        return _.filter(recordSet, function(resultObj) {
             return resultObj.recordNum >= pageStart && resultObj.recordNum <= pageEnd;
         });
     },
 
     /**
+     * TODO: refactor this to remove the logic
      * Render pagination control
+     * @param {String} componentName (Optional)
      */
     renderPaginationControl: function() {
         //it more records exist in api display pagination controls
@@ -1848,20 +1993,16 @@
      * Else invoke the
      */
     paginateRecords: function() {
-        var nextPage = this.getNextPage(this.formattedRecordSet, this.startRecord, this.endRecord);
-        if (_.isUndefined(this.currentPage) || _.isNull(this.currentPage)) {
-            this.currentPage = nextPage;
-        } else {
-            this.currentPage = this.currentPage.concat(nextPage);
-        }
+        return this.getNextPage(this.formattedRecordSet, this.startRecord, this.endRecord);
     },
 
     /**
      * Initialize pagination parameters
+     * @param {Number} pageSize
      */
-    initPaginationParams: function() {
+    initPaginationParams: function(pageSize) {
         //# of records to be displayed in the dashlet
-        this.pageSize = 10;
+        this.pageSize = !_.isUndefined(pageSize) ? pageSize : 10;
         //initial page no.
         this.pageNo = 1;
         //max # of records D&B API to return
@@ -1888,11 +2029,206 @@
     /**
      * Sets pagination params to existing params
      * @param {Object} apiParams
-     * @returns {Object}
+     * @return {Object}
      */
     setApiPaginationParams: function(apiParams) {
         apiParams.CandidatePerPageMaximumQuantity = this.apiPageSize;
         apiParams.CandidateDisplayStartSequenceNumber = this.apiPageOffset;
         return apiParams;
+    },
+
+    /**
+     * Loads the D&B Dashlets with appropriate data
+     * @param {String} modelAttribute
+     * @param {String} contextAttribute
+     * @param {Function} callBackFunction
+     * @param {String} callBackParams
+     * @param {String} errorTemplate
+     */
+    loadDNBData: function(modelAttribute, contextAttribute, callBackFunction, callBackParams, errorTemplate, fieldAclTemplate) {
+        if (this.checkFieldExists(modelAttribute)) {
+            var field,
+            modelAttr = this[modelAttribute],
+            contextAttr;
+            //get the attribute set in the context
+            if (!_.isNull(contextAttribute)) {
+                contextAttr = app.controller.context.get(contextAttribute);
+            }
+            if (!_.isUndefined(modelAttr) && !_.isNull(modelAttr)) {
+                field = modelAttr;
+            } else if (!_.isUndefined(contextAttr)) {
+                field = contextAttr;
+            }
+            if (!_.isUndefined(field) && !_.isNull(field)) {
+                if(!_.isNull(callBackParams)) {
+                    callBackFunction.call(this, field, callBackParams);
+                } else {
+                    callBackFunction.call(this, field);
+                }
+            } else {
+                this.template = app.template.get(errorTemplate);
+                if (!this.disposed) {
+                    this.render();
+                }
+            }
+        } else {
+            this.template = app.template.get(fieldAclTemplate);
+            if (!this.disposed) {
+                this.render();
+            }
+        }
+    },
+
+    /**
+     * Event handler for pagination controls
+     * Renders next page from context if available
+     * else invokes the D&B API to get the next page
+     * @param {Function} paginationCallBack
+     * @param {Object} apiParams Parameters for api call
+     * @param {Function} callBack
+     */
+    invokePagination: function(paginationCallBack, apiParams, callBack) {
+        this.displayPaginationLoading();
+        this.setPaginationParams();
+        //if the endRecord after pagination is greater than apiPageEndRecord
+        //we have to invoke the api with the pagination controls
+        if (this.endRecord > this.apiPageEndRecord && !_.isNull(paginationCallBack)) {
+            this.apiPageEndRecord = (this.startRecord + this.apiPageSize) - 1;
+            this.resetPaginationFlag = false;
+            //setting the apiPageOffset
+            this.apiPageOffset = this.startRecord;
+            paginationCallBack.call(this, this.setApiPaginationParams(apiParams), callBack);
+        } else {
+            var pageData = {
+                'product':  this.paginateRecords(),
+                'count': this.recordCount
+            };
+            this.renderPage(pageData, true);
+        }
+    },
+
+    /**
+     * Renders the currentPage
+     * @param {Object} pageData
+     * @param {Boolean} append boolean to indicate if records need to be appended to exsiting list
+     */
+    renderPage: function(pageData, append) {
+        if (_.isUndefined(append) || !append) {
+            if (this.disposed) {
+                return;
+            }
+            this.template = this.resultTemplate;
+            this.listData = pageData;
+            //pageData count is not defined when the page is being rendered after
+            //dupe check
+            //hence using the count from the context variable
+            if (_.isUndefined(pageData.count)) {
+                pageData.count = this.recordCount;
+            }
+            //if the api returns a success response then only set the count
+            if (pageData.product && !_.isUndefined(this.resultCountTmpl)) {
+                this.listData.count = this.resultCountTmpl + " (" + this.formatSalesRevenue(pageData.count) + ")";
+            } else {
+                delete this.listData['count'];
+            }
+            this.render();
+        } else {
+            this.currentPage = this.currentPage.concat(pageData.product);
+            _.each(pageData.product, function(listObj) {
+                //compile account row
+                var rowHtml = this.rowTmpl(listObj);
+                //append account row to exising list
+                this.$(this.selectors.rsltList).append(rowHtml);
+            }, this);
+        }
+        this.$(this.selectors.load).toggleClass('hide', true);
+        this.$(this.selectors.rslt).toggleClass('hide', false);
+        //render pagination controls only if the api returns a success response
+        if (pageData.product) {
+            this.renderPaginationControl();
+        }
+    },
+
+    /**
+     * Bulk Import D&B Objects
+     * @param {Array} bulkArray
+     * @param {String} module
+     * @param {Function} callBack
+     */
+    invokeBulkImport: function(bulkArray, module, callBack) {
+        //display loading message
+        app.alert.show('bulkImport', {
+            level: 'process',
+            title: app.lang.getAppString('LBL_DNB_BI_LOADING'),
+            autoClose: false
+        });
+        //hide previous
+        var bulkImportURL = app.api.buildURL('connector/dnb/' + module + '/bulkimport', '', {},{}),
+            self = this;
+        app.api.call('create', bulkImportURL, {'bulkdata': bulkArray}, {
+            success: function(data) {
+                //dismiss loading symbol
+                app.alert.dismiss('bulkImport');
+                var newAccounts = data.importSuccess,
+                    duplicates = data.duplicates,
+                    title, level, message;
+                var viewAccountsMsg = "<a href='#{{buildRoute module=module}}' data-route='#{{buildRoute module=module}}'>{{str 'LBL_DNB_VIEW_ACCT'}}</a>";
+                var viewAcctsHTML = Handlebars.compile(viewAccountsMsg)({'module': self.module});
+
+                if (newAccounts > 0 && duplicates === 0) {
+                    level = 'success';
+                    title = app.lang.get('LBL_SUCCESS');
+                    message = app.lang.get('LBL_DNB_BI_YOU_ADD') + newAccounts + app.lang.get('LBL_DNB_BI_NEW_ACCT');
+                } else if (newAccounts > 0 && duplicates > 0) {
+                    level = 'warning',
+                    title = app.lang.get('LBL_WARNING');
+                    message = app.lang.get('LBL_DNB_BI_YOU_ADD') + newAccounts + app.lang.get('LBL_DNB_BI_NEW_ACCT');
+                    message += duplicates + app.lang.get('LBL_DNB_BI_DUP_MSG');
+                } else if (newAccounts === 0) {
+                    level = 'error',
+                    title = app.lang.get('LBL_ERROR');
+                    message = app.lang.get('LBL_DNB_BI_ERR');
+                }
+                if (newAccounts !== 0) {
+                    message += viewAcctsHTML;
+                }
+                app.alert.show('dnb-import', {
+                    level: level,
+                    title: title + ':',
+                    messages: message,
+                    autoClose: true,
+                    autoCloseDelay: 10000
+                });
+                callBack.call(self);
+            },
+            error: function(xhr, status, error) {
+                app.alert.dismiss('bulkImport');
+                var errorMessage,
+                    errorCode = xhr.code;
+                if(!_.isUndefined(errorCode)) {
+                    errorMessage = app.lang.get(this.commonErrorMap[errorCode]);
+                }
+                if(_.isUndefined(errorMessage)) {
+                    errorMessage = this.commonErrorMap['ERROR_DNB_UNKNOWN'];
+                }
+                app.alert.show('dnb-import', {
+                    level: 'error',
+                    title: app.lang.get('LBL_ERROR'),
+                    messages: errorMessage,
+                    autoClose: true,
+                    autoCloseDelay: 10000
+                });
+            }
+        });
+    },
+
+    /**
+     * Toggle the button between enabled and disabled states
+     * @param {Boolean} isDisabled
+     * @param {String} selector
+     */
+    toggleButton: function(isDisabled, selector) {
+        this.$(selector).toggleClass('disabled', isDisabled);
+        this.$(selector).prop('disabled', isDisabled);
     }
-})
+});

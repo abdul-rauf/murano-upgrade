@@ -31,6 +31,7 @@ $viewdefs['Bugs']['base']['view']['list'] = array(
                     'name'=>  'name',
                     'enabled' => true,
                     'default'=>true,
+                    'link' => true,
                 ),
                 array(
                     'name'=>  'status',
@@ -73,6 +74,16 @@ $viewdefs['Bugs']['base']['view']['list'] = array(
                     'name'=>  'team_name',
                     'enabled' => true,
                     'default'=>false,
+                ),
+                array(
+                    'name' => 'date_modified',
+                    'enabled' => true,
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'date_entered',
+                    'enabled' => true,
+                    'default' => true,
                 ),
             ),
 

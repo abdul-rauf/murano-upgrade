@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -612,14 +613,19 @@ class SugarFieldTeamset extends SugarFieldBase {
     /**
      * This function will pull out the various teams in this teamset and return them in a collection
      *
-     * @param array     $data
-     * @param SugarBean $bean
-     * @param array     $args
-     * @param string    $fieldName
-     * @param array     $properties
+     * {@inheritDoc}
      */
-    public function apiFormatField(array &$data, SugarBean $bean, array $args, $fieldName, $properties)
-    {
+    public function apiFormatField(
+        array &$data,
+        SugarBean $bean,
+        array $args,
+        $fieldName,
+        $properties,
+        array $fieldList = null,
+        ServiceBase $service = null
+    ) {
+        $this->ensureApiFormatFieldArguments($fieldList, $service);
+
         if (empty($bean->teamList)) {
             require_once('modules/Teams/TeamSetManager.php');
             $teamList = TeamSetManager::getUnformattedTeamsFromSet($bean->team_set_id);
@@ -674,9 +680,9 @@ class SugarFieldTeamset extends SugarFieldBase {
 
         $bean->team_id = $primaryTeamId;
 
-        $bean->load_relationship('teams');
-        $method = 'replace';
-        $bean->teams->replace($teamIds, array(), false);
+        if ($bean->load_relationship('teams')) {
+            $bean->teams->replace($teamIds, array(), false);
+        };
     }
 
     public function apiMassUpdate(SugarBean $bean, array $params, $fieldName, $properties) {
@@ -757,6 +763,7 @@ class SugarFieldTeamset extends SugarFieldBase {
 
         $teamsets = array();
         foreach ($rows as $row) {
+            $row = $tsb->convertRow($row);
             $team = array('id' => $row['team_id']);
             $team['name'] = !empty($row['name'])?$row['name']:'';
             $team['name_2'] = !empty($row['name_2'])?$row['name_2']:'';
@@ -770,21 +777,6 @@ class SugarFieldTeamset extends SugarFieldBase {
         }
 
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getEmailTemplateValue($inputField, $vardef, $context)
-    {
-        if ($vardef['name'] !== $this->field_name) {
-            $seed = BeanFactory::getBean('Teams', $inputField);
-            if (!empty($seed->id)) {
-                $inputField = $seed->name . ' ' . $seed->name_2;
-            }
-        }
-        return parent::getEmailTemplateValue($inputField, $vardef, $context);
-    }
-
 }
 
 

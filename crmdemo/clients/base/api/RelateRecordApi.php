@@ -11,10 +11,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/ModuleApi.php');
+require_once('include/api/SugarApi.php');
 require_once('include/RecordListFactory.php');
 
-class RelateRecordApi extends ModuleApi {
+class RelateRecordApi extends SugarApi
+{
     public function registerApiRest() {
         return array(
             'fetchRelatedRecord' => array(
@@ -85,11 +86,12 @@ class RelateRecordApi extends ModuleApi {
      * @param $securityTypeLocal string What ACL to check on the near side of the link
      * @param $securityTypeRemote string What ACL to check on the far side of the link
      * @return array Two elements: The link name, and the SugarBean of the far end
+     * @throws SugarApiExceptionNotAuthorized
+     * @throws SugarApiExceptionNotFound
      */
-    protected function checkRelatedSecurity(ServiceBase $api, $args, SugarBean $primaryBean, $securityTypeLocal='view', $securityTypeRemote='view') {
-        if ( empty($primaryBean) ) {
-            throw new SugarApiExceptionNotFound('Could not find the primary bean');
-        }
+    protected function checkRelatedSecurity(ServiceBase $api, $args, SugarBean $primaryBean, $securityTypeLocal='view', $securityTypeRemote='view')
+    {
+        $this->requireArgs($args, array('link_name'));
         if ( ! $primaryBean->ACLAccess($securityTypeLocal) ) {
             throw new SugarApiExceptionNotAuthorized('No access to '.$securityTypeLocal.' records for module: '.$args['module']);
         }
@@ -151,16 +153,17 @@ class RelateRecordApi extends ModuleApi {
      * @param $api ServiceBase The API class of the request, used in cases where the API changes how security is applied
      * @param $args array The arguments array passed in from the API
      * @param $primaryBean SugarBean The near side of the link
-     * @param $relatedBean SugarBean The far side of the link
-     * @param $linkName string What is the name of the link field that you want to get the related fields for
-     * @param $relatedData array The data for the related fields (such as the contact_role in opportunities_contacts relationship)
+     * @param $relatedArray array The data for the related fields (such as the contact_role in opportunities_contacts relationship)
      * @return array Two elements, 'record' which is the formatted version of $primaryBean, and 'related_record' which is the formatted version of $relatedBean
      */
-    protected function formatNearAndFarRecords(ServiceBase $api, $args, SugarBean $primaryBean, $relatedArray = array()) {
+    protected function formatNearAndFarRecords(
+        ServiceBase $api,
+        array $args,
+        SugarBean $primaryBean,
+        array $relatedArray
+    ) {
         $api->action = 'view';
         $recordArray = $this->formatBean($api, $args, $primaryBean);
-        if (empty($relatedArray))
-            $relatedArray = $this->getRelatedRecord($api, $args);
 
         return array(
             'record'=>$recordArray,
@@ -172,7 +175,7 @@ class RelateRecordApi extends ModuleApi {
     function getRelatedRecord($api, $args) {
         $primaryBean = $this->loadBean($api, $args);
         
-        list($linkName, $relatedBean) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view','view');
+        list($linkName, $relatedBean) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'view');
 
         $related = array_values($primaryBean->$linkName->getBeans(array(
             'where' => array(
@@ -181,37 +184,51 @@ class RelateRecordApi extends ModuleApi {
                 'rhs_value' => $args['remote_id'],
             )
         )));
-        if ( empty($related[0]->id) ) {
-            // Retrieve failed, probably doesn't have permissions
-            throw new SugarApiExceptionNotFound('Could not find the related bean');
+
+        if (!empty($related[0]->id)) {
+            $relatedBean = $related[0];
+        } else {
+            // fall back to manual retrieval in case if the newly created bean is not related to the primary one
+            if (!$relatedBean->retrieve($args['remote_id'])) {
+                // Retrieve failed, probably doesn't have permissions
+                throw new SugarApiExceptionNotFound('Could not find the related bean');
+            }
+
         }
 
-        return $this->formatBean($api, $args, $related[0]);
+        return $this->formatBean($api, $args, $relatedBean);
         
     }
 
-    function createRelatedRecord($api, $args) {
+    /**
+     * Creates a record and relates it to a primary record.
+     *
+     * @param ServiceBase $api The API class of the request.
+     * @param array $args The arguments array passed in from the API.
+     * @return array Two elements, 'record' which is the formatted version of $primaryBean, and 'related_record' which is the formatted version of $relatedBean
+     * @throws SugarApiExceptionError In case if the module API has improper interface
+     */
+    public function createRelatedRecord($api, $args)
+    {
         $primaryBean = $this->loadBean($api, $args);
+        list($linkName) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view','create');
 
-        list($linkName, $relatedBean) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view','create');
-
-        if ( isset($args['id']) ) {
-            $relatedBean->new_with_id = true;
-        }
-
-        // Set rel data for $relatedBean->save() to create the link
-        $relatedBean->not_use_rel_in_req = true;
-        $relatedBean->new_rel_id = $primaryBean->id;
-        $relatedBean->new_rel_relname = $primaryBean->$linkName->getLinkForOtherSide();
-
-        $id = $this->updateBean($relatedBean, $api, $args);
+        /** @var Link2 $link */
+        $link = $primaryBean->$linkName;
+        $module = $link->getRelatedModuleName();
+        $moduleApi = $this->getModuleApi($api, $module);
+        $moduleApiArgs = $this->getModuleApiArgs($args, $module);
+        $relatedBean = $moduleApi->createBean($api, $moduleApiArgs, array(
+            'not_use_rel_in_req' => true,
+            'new_rel_id' => $primaryBean->id,
+            'new_rel_relname' => $link->getLinkForOtherSide(),
+        ));
 
         $args['remote_id'] = $relatedBean->id;
 
-        // This forces a re-retrieval of the bean from the database
-        BeanFactory::unregisterBean($relatedBean);
+        $relatedArray = $this->getRelatedRecord($api, $args);
 
-        return $this->formatNearAndFarRecords($api,$args,$primaryBean);
+        return $this->formatNearAndFarRecords($api, $args, $primaryBean, $relatedArray);
     }
 
     function createRelatedLink($api, $args) {
@@ -229,27 +246,39 @@ class RelateRecordApi extends ModuleApi {
      *
      * @param ServiceBase $api The API class of the request.
      * @param array $args The arguments array passed in from the API.
+     * @param string $securityTypeLocal What ACL to check on the near side of the link
+     * @param string $securityTypeRemote What ACL to check on the far side of the link
      * @return array Array of formatted fields.
+     * @throws SugarApiExceptionInvalidParameter If wrong arguments are passed
      * @throws SugarApiExceptionNotFound If bean can't be retrieved.
      */
-    public function createRelatedLinks($api, $args)
+    public function createRelatedLinks($api, $args, $securityTypeLocal = 'view', $securityTypeRemote = 'view')
     {
+        $this->requireArgs($args, array('ids'));
+        $ids = $this->normalizeLinkIds($args['ids']);
+
         $result = array(
             'related_records' => array(),
         );
 
         $primaryBean = $this->loadBean($api, $args);
 
-        list($linkName) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'view');
+        list($linkName) = $this->checkRelatedSecurity(
+            $api,
+            $args,
+            $primaryBean,
+            $securityTypeLocal,
+            $securityTypeRemote
+        );
         $relatedModuleName = $primaryBean->$linkName->getRelatedModuleName();
 
-        foreach ($args['ids'] as $id) {
+        foreach ($ids as $id => $additionalValues) {
             $relatedBean = BeanFactory::retrieveBean($relatedModuleName, $id);
 
             if (!$relatedBean || $relatedBean->deleted) {
                 throw new SugarApiExceptionNotFound('Could not find the related bean');
             }
-            $primaryBean->$linkName->add(array($relatedBean));
+            $primaryBean->$linkName->add(array($relatedBean), $additionalValues);
 
             $result['related_records'][] = $this->formatBean($api, $args, $relatedBean);
         }
@@ -259,6 +288,41 @@ class RelateRecordApi extends ModuleApi {
         $result['record'] = $this->formatBean($api, $args, $primaryBean);
 
         return $result;
+    }
+
+    /**
+     * Normalizes related record IDs obtained from API arguments
+     *
+     * @param mixed $ids
+     *
+     * @return array Associative array where key is record ID, value is additional link values
+     * @throws SugarApiExceptionInvalidParameter
+     */
+    protected function normalizeLinkIds($ids)
+    {
+        if (!is_array($ids)) {
+            throw new SugarApiExceptionInvalidParameter(
+                sprintf('Related record IDs must be array, %s given', gettype($ids))
+            );
+        }
+
+        $normalized = array();
+        foreach ($ids as $record) {
+            if (is_array($record)) {
+                if (!isset($record['id'])) {
+                    throw new SugarApiExceptionInvalidParameter('Related record ID is not specified in array notation');
+                }
+                $id = $record['id'];
+                $additionalValues = $record;
+                unset($additionalValues['id']);
+            } else {
+                $id = $record;
+                $additionalValues = array();
+            }
+            $normalized[$id] = $additionalValues;
+        }
+
+        return $normalized;
     }
 
     function updateRelatedLink($api, $args) {
@@ -280,9 +344,12 @@ class RelateRecordApi extends ModuleApi {
             // Retrieve failed, probably doesn't have permissions
             throw new SugarApiExceptionNotFound('Could not find the related bean');
         }
+        BeanFactory::registerBean($relatedBean);
 
         // updateBean may remove the relationship. see PAT-337 for details
-        $id = $this->updateBean($relatedBean, $api, $args);
+        $this->updateBean($relatedBean, $api, $args);
+        $relatedBean->retrieve($args['remote_id']);
+
         $relatedArray = array();
 
         // Make sure there is a related object
@@ -303,6 +370,14 @@ class RelateRecordApi extends ModuleApi {
                 $relatedData = $this->getRelatedFields($api, $args, $primaryBean, $linkName, $relatedBean);
                 // This function add() is actually 'addOrUpdate'. Here we use it for update only.
                 $primaryBean->$linkName->add(array($relatedBean),$relatedData);
+
+                // BR-2964, related objects are not populated
+                $primaryBean->$linkName->refreshRelationshipFields($relatedBean);
+
+                // BR-2937 The edit view cache issue for relate documents of a module
+                // nomad still needs this related array
+
+                $relatedArray = $this->formatBean($api, $args, $relatedBean);
             }
             // If the relationship has been removed, we don't need to update the relationship fields
             else {
@@ -332,6 +407,7 @@ class RelateRecordApi extends ModuleApi {
             // Retrieve failed, probably doesn't have permissions
             throw new SugarApiExceptionNotFound('Could not find the related bean');
         }
+        BeanFactory::registerBean($relatedBean);
 
         $primaryBean->$linkName->delete($primaryBean->id,$relatedBean);
         
@@ -388,5 +464,70 @@ class RelateRecordApi extends ModuleApi {
         $result['record'] = $this->formatBean($api, $args, $primaryBean);
 
         return $result;
+    }
+
+    /**
+     * Returns the API implementation for the given module
+     *
+     * @param ServiceBase $api
+     * @param string $module Relate module name
+     *
+     * @return ModuleApi Module API implementation
+     */
+    protected function getModuleApi(ServiceBase $api, $module)
+    {
+        $moduleApi = $this->loadModuleApi($api, $module);
+        if ($moduleApi instanceof ModuleApi) {
+            return $moduleApi;
+        }
+
+        require_once 'clients/base/api/ModuleApi.php';
+        return new ModuleApi();
+    }
+
+    /**
+     * Loads the API implementation for the given module
+     *
+     * @param ServiceBase $api
+     * @param string $module Relate module name
+     *
+     * @return ModuleApi Module API implementation
+     */
+    protected function loadModuleApi(ServiceBase $api, $module)
+    {
+        $templates = array(
+            array('custom/modules/%s/clients/%s/api/', 'Custom%sApi'),
+            array('modules/%s/clients/%s/api/', '%sApi'),
+        );
+
+        foreach ($templates as $template) {
+            list($directoryTemplate, $classTemplate) = $template;
+            $class = sprintf($classTemplate, $module);
+            $file = sprintf($directoryTemplate, $module, $api->platform) . $class . '.php';
+            if (file_exists($file)) {
+                require_once $file;
+                return new $class;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns arguments for internal call to Module API
+     *
+     * @param array $args RelateRecord API arguments
+     * @param string $module Relate module name
+     * @return array Module API arguments
+     */
+    protected function getModuleApiArgs(array $args, $module)
+    {
+        $args['relate_module'] = $args['module'];
+        $args['relate_record'] = $args['record'];
+        $args['module'] = $module;
+        unset($args['record']);
+        unset($args['link_name']);
+
+        return $args;
     }
 }

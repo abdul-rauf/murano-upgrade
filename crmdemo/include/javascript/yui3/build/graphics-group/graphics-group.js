@@ -1,37 +1,8 @@
 /*
-     YUI 3.15.0 (build 834026e)
-     Copyright 2014 Yahoo! Inc. All rights reserved.
-     Licensed under the BSD License.
-     http://yuilibrary.com/license/
-     */
-YUI.add('graphics-group',function(Y,NAME){var ShapeGroup,CircleGroup,RectGroup,EllipseGroup,DiamondGroup,Y_Lang=Y.Lang;ShapeGroup=function()
-{ShapeGroup.superclass.constructor.apply(this,arguments);};ShapeGroup.NAME="shapeGroup";Y.extend(ShapeGroup,Y.Path,{_draw:function()
-{var xvalues=this.get("xvalues"),yvalues=this.get("yvalues"),x,y,xRad,yRad,i=0,len,dimensions=this.get("dimensions"),width=dimensions.width,height=dimensions.height,radius=dimensions.radius,yRadius=dimensions.yRadius,widthIsArray=Y_Lang.isArray(width),heightIsArray=Y_Lang.isArray(height),radiusIsArray=Y_Lang.isArray(radius),yRadiusIsArray=Y_Lang.isArray(yRadius);if(xvalues&&yvalues&&xvalues.length>0)
-{this.clear();len=xvalues.length;for(;i<len;++i)
-{x=xvalues[i];y=yvalues[i];xRad=radiusIsArray?radius[i]:radius;yRad=yRadiusIsArray?yRadius[i]:yRadius;if(!isNaN(x)&&!isNaN(y)&&!isNaN(xRad))
-{this.drawShape({x:x,y:y,width:widthIsArray?width[i]:width,height:heightIsArray?height[i]:height,radius:xRad,yRadius:yRad});this.closePath();}}
-this._closePath();}},_getRadiusCollection:function(val)
-{var i=0,len=val.length,radii=[];for(;i<len;++i)
-{radii[i]=val[i]*0.5;}
-return radii;}});ShapeGroup.ATTRS=Y.merge(Y.Path.ATTRS,{dimensions:{getter:function()
-{var dimensions=this._dimensions,radius,yRadius,width,height;if(dimensions.hasOwnProperty("radius"))
-{return dimensions;}
-else
-{width=dimensions.width;height=dimensions.height;radius=Y_Lang.isArray(width)?this._getRadiusCollection(width):(width*0.5);yRadius=Y_Lang.isArray(height)?this._getRadiusCollection(height):(height*0.5);return{width:width,height:height,radius:radius,yRadius:yRadius};}},setter:function(val)
-{this._dimensions=val;return val;}},xvalues:{getter:function()
-{return this._xvalues;},setter:function(val)
-{this._xvalues=val;}},yvalues:{getter:function()
-{return this._yvalues;},setter:function(val)
-{this._yvalues=val;}}});Y.ShapeGroup=ShapeGroup;CircleGroup=function()
-{CircleGroup.superclass.constructor.apply(this,arguments);};CircleGroup.NAME="circleGroup";Y.extend(CircleGroup,Y.ShapeGroup,{drawShape:function(cfg)
-{this.drawCircle(cfg.x,cfg.y,cfg.radius);}});CircleGroup.ATTRS=Y.merge(Y.ShapeGroup.ATTRS,{dimensions:{getter:function()
-{var dimensions=this._dimensions,radius,yRadius,width,height;if(dimensions.hasOwnProperty("radius"))
-{return dimensions;}
-else
-{width=dimensions.width;height=dimensions.height;radius=Y_Lang.isArray(width)?this._getRadiusCollection(width):(width*0.5);yRadius=radius;return{width:width,height:height,radius:radius,yRadius:yRadius};}}}});CircleGroup.ATTRS=Y.ShapeGroup.ATTRS;Y.CircleGroup=CircleGroup;RectGroup=function()
-{RectGroup.superclass.constructor.apply(this,arguments);};RectGroup.NAME="rectGroup";Y.extend(RectGroup,Y.ShapeGroup,{drawShape:function(cfg)
-{this.drawRect(cfg.x,cfg.y,cfg.width,cfg.height);}});RectGroup.ATTRS=Y.ShapeGroup.ATTRS;Y.RectGroup=RectGroup;DiamondGroup=function()
-{DiamondGroup.superclass.constructor.apply(this,arguments);};DiamondGroup.NAME="diamondGroup";Y.extend(DiamondGroup,Y.ShapeGroup,{drawShape:function(cfg)
-{this.drawDiamond(cfg.x,cfg.y,cfg.width,cfg.height);}});DiamondGroup.ATTRS=Y.ShapeGroup.ATTRS;Y.DiamondGroup=DiamondGroup;EllipseGroup=function()
-{EllipseGroup.superclass.constructor.apply(this,arguments);};EllipseGroup.NAME="ellipseGroup";Y.extend(EllipseGroup,Y.ShapeGroup,{drawShape:function(cfg)
-{this.drawEllipse(cfg.x,cfg.y,cfg.width,cfg.height);}});EllipseGroup.ATTRS=Y.ShapeGroup.ATTRS;Y.EllipseGroup=EllipseGroup;},'3.15.0',{"requires":["graphics"]});
+YUI 3.15.0 (build 834026e)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add("graphics-group",function(e,t){var n,r,i,s,o,u=e.Lang;n=function(){n.superclass.constructor.apply(this,arguments)},n.NAME="shapeGroup",e.extend(n,e.Path,{_draw:function(){var e=this.get("xvalues"),t=this.get("yvalues"),n,r,i,s,o=0,a,f=this.get("dimensions"),l=f.width,c=f.height,h=f.radius,p=f.yRadius,d=u.isArray(l),v=u.isArray(c),m=u.isArray(h),g=u.isArray(p);if(e&&t&&e.length>0){this.clear(),a=e.length;for(;o<a;++o)n=e[o],r=t[o],i=m?h[o]:h,s=g?p[o]:p,!isNaN(n)&&!isNaN(r)&&!isNaN(i)&&(this.drawShape({x:n,y:r,width:d?l[o]:l,height:v?c[o]:c,radius:i,yRadius:s}),this.closePath());this._closePath()}},_getRadiusCollection:function(e){var t=0,n=e.length,r=[];for(;t<n;++t)r[t]=e[t]*.5;return r}}),n.ATTRS=e.merge(e.Path.ATTRS,{dimensions:{getter:function(){var e=this._dimensions,t,n,r,i;return e.hasOwnProperty("radius")?e:(r=e.width,i=e.height,t=u.isArray(r)?this._getRadiusCollection(r):r*.5,n=u.isArray(i)?this._getRadiusCollection(i):i*.5,{width:r,height:i,radius:t,yRadius:n})},setter:function(e){return this._dimensions=e,e}},xvalues:{getter:function(){return this._xvalues},setter:function(e){this._xvalues=e}},yvalues:{getter:function(){return this._yvalues},setter:function(e){this._yvalues=e}}}),e.ShapeGroup=n,r=function(){r.superclass.constructor.apply(this,arguments)},r.NAME="circleGroup",e.extend(r,e.ShapeGroup,{drawShape:function(e){this.drawCircle(e.x,e.y,e.radius)}}),r.ATTRS=e.merge(e.ShapeGroup.ATTRS,{dimensions:{getter:function(){var e=this._dimensions,t,n,r,i;return e.hasOwnProperty("radius")?e:(r=e.width,i=e.height,t=u.isArray(r)?this._getRadiusCollection(r):r*.5,n=t,{width:r,height:i,radius:t,yRadius:n})}}}),r.ATTRS=e.ShapeGroup.ATTRS,e.CircleGroup=r,i=function(){i.superclass.constructor.apply(this,arguments)},i.NAME="rectGroup",e.extend(i,e.ShapeGroup,{drawShape:function(e){this.drawRect(e.x,e.y,e.width,e.height)}}),i.ATTRS=e.ShapeGroup.ATTRS,e.RectGroup=i,o=function(){o.superclass.constructor.apply(this,arguments)},o.NAME="diamondGroup",e.extend(o,e.ShapeGroup,{drawShape:function(e){this.drawDiamond(e.x,e.y,e.width,e.height)}}),o.ATTRS=e.ShapeGroup.ATTRS,e.DiamondGroup=o,s=function(){s.superclass.constructor.apply(this,arguments)},s.NAME="ellipseGroup",e.extend(s,e.ShapeGroup,{drawShape:function(e){this.drawEllipse(e.x,e.y,e.width,e.height)}}),s.ATTRS=e.ShapeGroup.ATTRS,e.EllipseGroup=s},"3.15.0",{requires:["graphics"]});

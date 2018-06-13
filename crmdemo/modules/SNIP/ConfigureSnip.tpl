@@ -105,12 +105,14 @@ div.snipError{
 </style>
 {/literal}
 {$TITLE}
+
 	{if $SNIP_STATUS!='notpurchased'}
 	<table class="actionsContainer" border="0" cellpadding="0" cellspacing="1" width="100%">
 	<tbody>
 	    <tr>
 	        <td>
 	            <form method="post">
+{sugar_csrf_form_token}
 
 	            {if $SNIP_STATUS =='purchased'}
 	                <input title="" class="button" name="disable" value="  {$MOD.LBL_SNIP_BUTTON_DISABLE}  " type="submit">
@@ -153,6 +155,7 @@ div.snipError{
 						</div>
 						<div class='snipButtonWrapper'>
 						<form method="post">
+{sugar_csrf_form_token}
 							<input type='submit' class='snipEnableButton' disabled value='{$MOD.LBL_SNIP_BUTTON_ENABLE}' id='enableSnipButton'>
 							<input type='hidden' name='snipaction' value='enable_snip'>
 						</form>
@@ -171,6 +174,7 @@ div.snipError{
 					</td>
 					<td>
 						<form name='ToggleSnipStatus' method="POST" action="index.php?module=SNIP&action=ConfigureSnip">
+{sugar_csrf_form_token}
 						<input type='hidden' id='save_config' name='save_config' value='0'/>
 						{if $SNIP_STATUS == 'purchased'}
 							<div id='snip_title'><span style='color:green;font-weight:bold'>{$MOD.LBL_SNIP_STATUS_OK}</span></div>

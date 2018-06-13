@@ -1,8 +1,21 @@
 /*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("series-column",function(e,t){e.ColumnSeries=e.Base.create("columnSeries",e.MarkerSeries,[e.Histogram],{_getMarkerDimensions:function(e,t,n,r){var i={left:e+r};return this._bottomOrigin>=t?(i.top=t,i.calculatedSize=this._bottomOrigin-i.top):(i.top=this._bottomOrigin,i.calculatedSize=t-this._bottomOrigin),i},updateMarkerState:function(e,t){if(this._markers&&this._markers[t]){var n=this._copyObject(this.get("styles").marker),r,i=this._getState(e),s=this.get("xcoords"),o=this.get("ycoords"),u=this._markers[t],a,f,l=this.get("seriesTypeCollection"),c=l?l.length:0,h=0,p=0,d,v=0,m=[],g=this.get("order"),y;r=i==="off"||!n[i]?this._copyObject(n):this._copyObject(n[i]),r.fill.color=this._getItemColor(r.fill.color,t),r.border.color=this._getItemColor(r.border.color,t),y=this._getMarkerDimensions(s[t],o[t],n.width,p),r.height=y.calculatedSize,r.width=Math.min(this._maxSize,r.width),u.set(r);for(;v<c;++v)m[v]=s[t]+h,f=l[v].get("styles").marker,h+=Math.min(this._maxSize,f.width),g>v&&(p=h),p-=h/2;for(v=0;v<c;++v)a=l[v].get("markers"),a&&(d=a[t],d&&d!==undefined&&d.set("x",m[v]-h/2))}}},{ATTRS:{type:{value:"column"}}})},"3.15.0",{requires:["series-marker","series-histogram-base"]});
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('series-column',function(Y,NAME){Y.ColumnSeries=Y.Base.create("columnSeries",Y.MarkerSeries,[Y.Histogram],{_getMarkerDimensions:function(xcoord,ycoord,calculatedSize,offset)
+{var config={left:xcoord+offset};if(this._bottomOrigin>=ycoord)
+{config.top=ycoord;config.calculatedSize=this._bottomOrigin-config.top;}
+else
+{config.top=this._bottomOrigin;config.calculatedSize=ycoord-this._bottomOrigin;}
+return config;},updateMarkerState:function(type,i)
+{if(this._markers&&this._markers[i])
+{var styles=this._copyObject(this.get("styles").marker),markerStyles,state=this._getState(type),xcoords=this.get("xcoords"),ycoords=this.get("ycoords"),marker=this._markers[i],markers,seriesStyles,seriesCollection=this.get("seriesTypeCollection"),seriesLen=seriesCollection?seriesCollection.length:0,seriesSize=0,offset=0,renderer,n=0,xs=[],order=this.get("order"),config;markerStyles=state==="off"||!styles[state]?this._copyObject(styles):this._copyObject(styles[state]);markerStyles.fill.color=this._getItemColor(markerStyles.fill.color,i);markerStyles.border.color=this._getItemColor(markerStyles.border.color,i);config=this._getMarkerDimensions(xcoords[i],ycoords[i],styles.width,offset);markerStyles.height=config.calculatedSize;markerStyles.width=Math.min(this._maxSize,markerStyles.width);marker.set(markerStyles);for(;n<seriesLen;++n)
+{xs[n]=xcoords[i]+seriesSize;seriesStyles=seriesCollection[n].get("styles").marker;seriesSize+=Math.min(this._maxSize,seriesStyles.width);if(order>n)
+{offset=seriesSize;}
+offset-=seriesSize/2;}
+for(n=0;n<seriesLen;++n)
+{markers=seriesCollection[n].get("markers");if(markers)
+{renderer=markers[i];if(renderer&&renderer!==undefined)
+{renderer.set("x",(xs[n]-seriesSize/2));}}}}}},{ATTRS:{type:{value:"column"}}});},'3.15.0',{"requires":["series-marker","series-histogram-base"]});

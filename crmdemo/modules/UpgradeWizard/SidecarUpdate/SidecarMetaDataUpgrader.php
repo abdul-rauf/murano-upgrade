@@ -158,6 +158,18 @@ class SidecarMetaDataUpgrader
      */
     public $fromInstallation = false;
 
+    const UPGRADE_BASE = 1;
+    const UPGRADE_PORTAL = 2;
+    const UPGRADE_MOBILE = 4;
+    const UPGRADE_SUBPANEL = 8;
+    const UPGRADE_ALL = 15;
+    protected $upgradeCategories = self::UPGRADE_ALL;
+
+    public function setUpgradeCategories($categories)
+    {
+        $this->upgradeCategories = $categories;
+    }
+
     /**
      * Sets the list of files that need to be upgraded. Will look in directories
      * contained in $legacyFilePaths and will also attempt to identify custom
@@ -165,10 +177,18 @@ class SidecarMetaDataUpgrader
      */
     public function setFilesToUpgrade()
     {
-        $this->setBaseFilesToUpgrade();
-        $this->setPortalFilesToUpgrade();
-        $this->setMobileFilesToUpgrade();
-        $this->setSubpanelFilesToUpgrade();
+        if ($this->upgradeCategories & self::UPGRADE_BASE) {
+            $this->setBaseFilesToUpgrade();
+        }
+        if ($this->upgradeCategories & self::UPGRADE_PORTAL) {
+            $this->setPortalFilesToUpgrade();
+        }
+        if ($this->upgradeCategories & self::UPGRADE_MOBILE) {
+            $this->setMobileFilesToUpgrade();
+        }
+        if ($this->upgradeCategories & self::UPGRADE_SUBPANEL) {
+            $this->setSubpanelFilesToUpgrade();
+        }
     }
 
     /**
@@ -445,6 +465,14 @@ class SidecarMetaDataUpgrader
                 !file_exists('custom/' . $quickcreatedefsPath) && !file_exists($quickcreatedefsPath)) {
                 continue;
             }
+
+            //[CRYS-697] If module in BWC and don't have any customization not needed to upgrade it
+            $isCustomized =
+                file_exists('custom/' . $sidecarMetadataPath) || file_exists('custom/' . $quickcreatedefsPath);
+            if (isModuleBWC($module) && !$isCustomized) {
+                continue;
+            }
+
             $file = $this->getUpgradeFileParams(
                 'modules/' . $module . '/clients/base/menus/quickcreate/quickcreate.php',
                 $module, 'base', 'custom', null, true, false, true
@@ -452,7 +480,7 @@ class SidecarMetaDataUpgrader
             if (empty($file)) {
                 continue;
             }
-            $file['isDCEnabled'] = true;
+            $file['isDCEnabled'] = $this->isQuickCreateVisible($sidecarMetadataPath, $module, true);
             $file['order'] = $position++;
             $this->files[] = $file;
         }
@@ -467,6 +495,14 @@ class SidecarMetaDataUpgrader
                 !file_exists('custom/' . $quickcreatedefsPath) && !file_exists($quickcreatedefsPath)) {
                 continue;
             }
+
+            //[CRYS-697] If module in BWC and don't have any customization not needed to upgrade it
+            $isCustomized =
+                file_exists('custom/' . $sidecarMetadataPath) || file_exists('custom/' . $quickcreatedefsPath);
+            if (isModuleBWC($module) && !$isCustomized) {
+                continue;
+            }
+
             $file = $this->getUpgradeFileParams(
                 'modules/' . $module . '/clients/base/menus/quickcreate/quickcreate.php',
                 $module, 'base', 'custom', null, true, false, true
@@ -474,11 +510,35 @@ class SidecarMetaDataUpgrader
             if (empty($file)) {
                 continue;
             }
-            $file['isDCEnabled'] = false;
+            $file['isDCEnabled'] = $this->isQuickCreateVisible($sidecarMetadataPath, $module, false);
             $file['order'] = $position++;
             $this->files[] = $file;
         }
     }
+
+    /**
+     * Is the Quick Create file visible, if it's visible it should stay visible on the metadata upgrade
+     *
+     * @param string $quickCreateFile The Sidecar Metadata file
+     * @param string $module What module are we working with
+     * @param bool $default If visible is not found in the defs, it should return this value
+     * @return bool
+     */
+    protected function isQuickCreateVisible($quickCreateFile, $module, $default = false)
+    {
+        $viewdefs = array();
+        if (file_exists("custom/{$quickCreateFile}")) {
+            include "custom/{$quickCreateFile}";
+        } elseif (file_exists($quickCreateFile)) {
+            include "{$quickCreateFile}";
+        } else {
+            return $default;
+        }
+
+        $def = $viewdefs[$module]['base']['menu']['quickcreate'];
+        return (isset($def['visible'])) ? $def['visible'] : $default;
+    }
+
 
     protected function setMenuFiles()
     {

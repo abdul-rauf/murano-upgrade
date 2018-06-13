@@ -26,6 +26,7 @@ $mod_strings = array (
     'LBL_ACCOUNT_NAME' => 'Account Name:',
     'LBL_SALES_STATUS' => 'Status',
     'LBL_REVENUELINEITEM_NAME' => 'Revenue Line Item Name',
+    'LBL_OPPORTUNITY_NAME' => 'Opportunity Name',
     'LNK_OPPORTUNITY' => 'Opportunity',
     'LNK_ACCOUNTS' => 'Account',
 
@@ -76,34 +77,6 @@ $mod_strings = array (
     'LBL_OW_NEXT_STEP'=>'Next Step',
     'LBL_OW_DESCRIPTION'=>'Description',
     'LBL_OW_TYPE'=>'Type',
-
-    //forecast schedule shortcuts
-    'LNK_NEW_TIMEPERIOD' => 'Create Time Period',
-    'LNK_TIMEPERIOD_LIST' => 'View Time Periods',
-
-    //Forecast schedule sub panel list view.
-    'LBL_SVFS_FORECASTDATE' => 'Schedule Start Date',
-    'LBL_SVFS_STATUS' => 'Status',
-    'LBL_SVFS_USER' => 'For',
-    'LBL_SVFS_CASCADE' => 'Cascade to Reports?',
-    'LBL_SVFS_HEADER' => 'Forecast Schedule:',
-
-    //Forecast Schedule detail; view.....
-    'LB_FS_KEY' => 'ID',
-    'LBL_FS_TIMEPERIOD_ID' => 'Time Period ID',
-    'LBL_FS_USER_ID' => 'User ID',
-    'LBL_FS_TIMEPERIOD' => 'Time Period',
-    'LBL_FS_START_DATE' => 'Start Date',
-    'LBL_FS_END_DATE' => 'End Date',
-    'LBL_FS_FORECAST_START_DATE' => "Forecast Start Date",
-    'LBL_FS_STATUS' => 'Status',
-    'LBL_FS_FORECAST_FOR' => 'Schedule For:',
-    'LBL_FS_CASCADE' =>'Cascade?',
-    'LBL_FS_MODULE_NAME' => 'Forecast Schedule',
-    'LBL_FS_CREATED_BY' =>'Created by',
-    'LBL_FS_DATE_ENTERED' => 'Date Entered',
-    'LBL_FS_DATE_MODIFIED' => 'Date Modified',
-    'LBL_FS_DELETED' => 'Deleted',
 
     //forecast worksheet direct reports forecast
     'LBL_FDR_USER_NAME'=>'Direct Report',
@@ -185,5 +158,6 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'Invalid Value for {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Value must be between {{min}} and {{max}}',
-    'LBL_MANAGER_NOTIFY' => 'The following {0} {1} was not included in latest commit after it was included in the previous one'
+    'LBL_MANAGER_NOTIFY' => 'The following {0} {1} was not included in latest commit after it was included in the previous one',
+    'LBL_MANAGER_NOTIFY_NAME' => '{0} Commitment Change'
 );

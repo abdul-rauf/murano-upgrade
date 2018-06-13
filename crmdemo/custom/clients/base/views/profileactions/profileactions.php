@@ -1,13 +1,13 @@
 <?php
-// created: 2015-02-22 18:55:20
+// created: 2018-06-13 10:47:59
 $viewdefs['base']['view']['profileactions'] = array (
   0 => 
   array (
-    'route' => '#bwc/index.php?module=Users&action=DetailView&record=',
+    'route' => '#profile',
     'label' => 'LBL_PROFILE',
     'css_class' => 'profileactions-profile',
     'acl_action' => 'view',
-    'icon' => 'icon-user',
+    'icon' => 'fa-user',
     'submenu' => '',
   ),
   1 => 
@@ -16,7 +16,7 @@ $viewdefs['base']['view']['profileactions'] = array (
     'label' => 'LBL_EMPLOYEES',
     'css_class' => 'profileactions-employees',
     'acl_action' => 'list',
-    'icon' => 'icon-group',
+    'icon' => 'fa-users',
     'submenu' => '',
   ),
   2 => 
@@ -25,7 +25,7 @@ $viewdefs['base']['view']['profileactions'] = array (
     'label' => 'LBL_ADMIN',
     'css_class' => 'administration',
     'acl_action' => 'admin',
-    'icon' => 'icon-cogs',
+    'icon' => 'fa-cogs',
     'submenu' => '',
   ),
   3 => 
@@ -33,7 +33,7 @@ $viewdefs['base']['view']['profileactions'] = array (
     'route' => '#logout/?clear=1',
     'label' => 'LBL_LOGOUT',
     'css_class' => 'profileactions-logout',
-    'icon' => 'icon-signout',
+    'icon' => 'fa-sign-out',
     'submenu' => '',
   ),
   4 => 
@@ -42,7 +42,7 @@ $viewdefs['base']['view']['profileactions'] = array (
     'label' => 'LNK_ABOUT',
     'css_class' => 'profileactions-about',
     'acl_action' => 'view',
-    'icon' => 'icon-info-sign',
+    'icon' => 'fa-info-circle',
     'submenu' => '',
   ),
 );

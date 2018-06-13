@@ -10,8 +10,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Bug'] = array('table' => 'bugs',    'audited'=>true, 'activity_enabled' => true, 'comment' => 'Bugs are defects in products and services','duplicate_merge'=>true
-                               ,'unified_search' => true, 'unified_search_default_enabled' => true, 'fields' => array (
+$dictionary['Bug'] = array(
+    'table' => 'bugs',  'audited'=>true, 'activity_enabled' => true,
+    'comment' => 'Bugs are defects in products and services','duplicate_merge'=>true,
+    'unified_search' => true, 'full_text_search' => true, 'unified_search_default_enabled' => true,
+    'fields' => array (
   'found_in_release'=>
   	array(
   	'name'=>'found_in_release',
@@ -42,16 +45,17 @@ $dictionary['Bug'] = array('table' => 'bugs',    'audited'=>true, 'activity_enab
     'reportable'=>false,
     'source'=>'non-db',
     'table'=>'releases',
-    'merge_filter' => 'enabled', //bug 22994, we should use the release name to search, I have write codes to operate the cross table query. 
+    'merge_filter' => 'enabled', //bug 22994, we should use the release name to search, I have write codes to operate the cross table query.
     'id_name'=>'found_in_release',
     'module'=>'Releases',
     'link' => 'release_link',
     'massupdate' => false,
 	'studio' => array(
-       'editview' => false, 
+       'editview' => false,
        'detailview' => false,
-       'quickcreate' => false, 
-       'basic_search' => false, 
+       'recordview' => false,
+       'quickcreate' => false,
+       'basic_search' => false,
        'advanced_search' => false,
 	   'wirelesseditview' => false,
 	   'wirelessdetailview' => false,
@@ -98,10 +102,11 @@ $dictionary['Bug'] = array('table' => 'bugs',    'audited'=>true, 'activity_enab
     'source'=>'non-db',
     'link' => 'fixed_in_release_link',
 	'studio' => array(
-       'editview' => false, 
+       'editview' => false,
        'detailview' => false,
-       'quickcreate' => false, 
-       'basic_search' => false, 
+       'recordview' => false,
+       'quickcreate' => false,
+       'basic_search' => false,
        'advanced_search' => false,
        'wirelesseditview' => false,
        'wirelessdetailview' => false,
@@ -337,4 +342,9 @@ VardefManager::createVardef('Bugs','Bug', array('default', 'assignable',
 //defined in the field_arrays.php file
 $dictionary['Bug']['fields']['name']['importable'] = 'required';
 
-?>
+//boost value for full text search
+$dictionary['Bug']['fields']['name']['full_text_search']['boost'] = 1.51;
+$dictionary['Bug']['fields']['bug_number']['full_text_search']['boost'] = 1.27;
+$dictionary['Bug']['fields']['description']['full_text_search']['boost'] = 0.68;
+$dictionary['Bug']['fields']['work_log']['full_text_search']['boost'] = 0.67;
+

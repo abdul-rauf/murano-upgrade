@@ -8,5 +8,4 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-(function(app){app.events.on('app:init',function(){app.plugins.register('File',['field'],{onAttach:function(component,plugin){this.before('toggleField',function(viewName){if(this.action==='edit'){app.file.checkFileFieldsAndProcessUpload(this,null,{deleteIfFails:false},true);}
-return true;},null,this);},bindKeyDown:function(){},bindDocumentMouseDown:function(){}});});})(SUGAR.App);
+(function(app){app.events.on('app:init',function(){app.plugins.register('File',['field'],{bindKeyDown:function(){},bindDocumentMouseDown:function(){}});});})(SUGAR.App);

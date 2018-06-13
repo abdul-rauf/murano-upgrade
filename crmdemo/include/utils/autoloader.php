@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,6 +20,11 @@ class SugarAutoLoader
 {
     const CACHE_FILE = "file_map.php";
     const CLASS_CACHE_FILE = "class_map.php";
+
+    /**
+     * Root namespace
+     */
+    const NS_ROOT = 'Sugarcrm\\Sugarcrm\\';
 
     /**
      * Direct class mapping
@@ -60,6 +64,8 @@ class SugarAutoLoader
         'SugarWidget' => "include/generic/SugarWidgets/",
         'Zend_' => 'vendor/',
         'SugarJob' => 'include/SugarQueue/jobs/',
+        'MetaDataContext' => 'modules/ModuleBuilder/parsers/MetaDataContext/',
+        'MetaDataManager' => 'include/MetaDataManager/',
     );
 
     /**
@@ -75,7 +81,12 @@ class SugarAutoLoader
      * To add namespaces dynamically it's advised to use `self::addNamespace`
      * as this method will ensure a correct order from more to less
      * specific namespace prefixes. Also every prefix supports multiple
-     * paths.
+     * paths which are iterated in order to find a match.
+     *
+     * A better way to introduce new namespaces is by loading your libraries
+     * through composer.json. The namespace definition as per the autoload
+     * section will be automatically honored by this autoloader and avoids
+     * the need of programmatically adding new namespaces using addNameSpace.
      *
      * @var array nsPrefix => array(directories)
      */
@@ -88,18 +99,22 @@ class SugarAutoLoader
     public static $namespaceMapPsr4 = array();
 
     /**
-     * Class loading directories
-     * Classes in these dirs are loaded by class name:
-     * Foo -> $dir/Foo.php
-     * @var array paths
-     */
+	 * Class loading directories
+	 * Classes in these dirs are loaded by class name:
+	 * Foo -> $dir/Foo.php
+	 * @var array paths
+	 */
     public static $dirMap = array(
+        'clients/base/api/',
         "data/visibility/",
         "data/Relationships/",
         "data/duplicatecheck/",
+        'include/api/',
+        "include/CalendarEvents/",
         "include/SugarSearchEngine/",
         "include/",
         "modules/Mailer/",
+        'modules/Calendar/',
     );
 
     /**
@@ -107,26 +122,25 @@ class SugarAutoLoader
      * @var array
      */
     public static $exclude = array(
-        'cache/',
-        'custom/history/',
-        '.idea/',
-        'custom/blowfish/',
-        'custom/Extension/',
-        'custom/backup/',
-        'custom/modulebuilder/',
-        'tests/',
-        'examples/',
-        'docs/',
-        'vendor/log4php/',
-        'upload/',
-        'portal/',
-        'vendor/HTMLPurifier/',
-        'vendor/PHPMailer/',
-        'vendor/reCaptcha/',
-        'vendor/ytree/',
-        'vendor/pclzip/',
-        'vendor/nusoap/',
-        'vendor/bin/',
+        'cache',
+        'custom/history',
+        '.idea',
+        'custom/blowfish',
+        'custom/Extension',
+        'custom/backup',
+        'custom/modulebuilder',
+        'tests',
+        'examples',
+        'docs',
+        'vendor/log4php',
+        'upload',
+        'portal',
+        'vendor/HTMLPurifier',
+        'vendor/reCaptcha',
+        'vendor/ytree',
+        'vendor/pclzip',
+        'vendor/nusoap',
+        'vendor/bin',
     );
 
     /**
@@ -178,38 +192,47 @@ class SugarAutoLoader
         'autoload_psr4' => 'vendor/composer/autoload_psr4.php',
         'autoload_classmap' => 'vendor/composer/autoload_classmap.php',
     );
+    protected static $baseDirs;
+    protected static $ds = DIRECTORY_SEPARATOR;
 
     /**
      * Initialize the loader
+     *
+     * @param boolean $useConfig Used for UnitTest Runs since we don't have the stack installed
      */
-    public static function init()
+    public static function init($useConfig = true)
     {
-        $config = SugarConfig::getInstance();
+        if ($useConfig === true) {
+            $config = SugarConfig::getInstance();
 
-        /*
-         * When development mode is enabled, we bypass the usage
-         * of the filemap and build the classmap dynamically on
-         * every page load. We drop both cache file to make sure
-         * when devMode is disabled again that the system is
-         * properly initialized again withour the need for
-         * running a QuickRepairRebuild.
-         */
-        self::$devMode = $config->get('developerMode', false);
-        if (self::$devMode) {
-            @unlink(sugar_cached(self::CACHE_FILE));
-            @unlink(sugar_cached(self::CLASS_CACHE_FILE));
-        }
+            /*
+             * When development mode is enabled, we bypass the usage
+             * of the filemap and build the classmap dynamically on
+             * every page load. We drop both cache file to make sure
+             * when devMode is disabled again that the system is
+             * properly initialized again withour the need for
+             * running a QuickRepairRebuild.
+             */
+            self::$devMode = $config->get('developerMode', false);
+            if (self::$devMode) {
+                @unlink(sugar_cached(self::CACHE_FILE));
+                @unlink(sugar_cached(self::CLASS_CACHE_FILE));
+            }
 
-        // Extensions included from config
-        $exts = $config->get('autoloader.exts');
-        if (is_array($exts)) {
-            self::$exts += $exts;
-        }
+            // Extensions included from config
+            $exts = $config->get('autoloader.exts');
+            if (is_array($exts)) {
+                self::$exts += $exts;
+            }
 
-        // Excludes from config
-        $exclude = $config->get('autoloader.exclude');
-        if (is_array($exclude)) {
-            self::$exclude += $exclude;
+            // Excludes from config
+            $exclude = $config->get('autoloader.exclude');
+            if (is_array($exclude)) {
+                self::$exclude += $exclude;
+            }
+        } else {
+            // since we are ignoring the config, we have to use DevMode
+            self::$devMode = true;
         }
 
         // Create file map
@@ -339,11 +362,6 @@ class SugarAutoLoader
         // try namespaces
         if (false !== strpos($class, '\\')) {
             if ($file = self::getFilenameForFQCN($class)) {
-                // Currently no sugar files are loaded through namespaces,
-                // therefor we do not try to load files from custom. When
-                // Sugarcrm namespaces are introduced we will add specific
-                // handling for this as requireWithCustom is not namespace
-                // aware for the moment.
                 if (self::load($file)) {
                     self::$classMap[$class] = $file;
                     self::$classMapDirty = true;
@@ -449,7 +467,7 @@ class SugarAutoLoader
      * Return filename for given Fully Qualified Class Name
      *
      * @param string $class FQCN without leading backslash
-     * @return mixed(string|boolean)
+     * @return string|false
      */
     public static function getFilenameForFQCN($class)
     {
@@ -465,7 +483,7 @@ class SugarAutoLoader
      * PSR-0 support http://www.php-fig.org/psr/psr-0/
      *
      * @param string $class Fully Qualified Class Name
-     * @return mixed(string|boolean)
+     * @return string|false
      */
     public static function getFileNamePsr0($class)
     {
@@ -479,7 +497,9 @@ class SugarAutoLoader
                     } else {
                         $path .= str_replace('_', '/', $class) . '.php';
                     }
-                    return $path;
+                    if (self::fileExists($path)) {
+                        return $path;
+                    }
                 }
             }
         }
@@ -499,7 +519,9 @@ class SugarAutoLoader
                 if (strpos($class, $prefix) === 0) {
                     $path = empty($path) ? '' : $path . '/';
                     $path .= str_replace('\\', '/', str_replace($prefix, '', $class)) . '.php';
-                    return $path;
+                    if (self::fileExists($path)) {
+                        return $path;
+                    }
                 }
             }
         }
@@ -997,9 +1019,10 @@ class SugarAutoLoader
      * @param string $dir
      * @param bool $get_dirs Get directories and not files
      * @param string $extension Get only files with given extension
+     * @param boolean $recursive Scan directory recursively
      * @return array List of files
      */
-    public static function getDirFiles($dir, $get_dirs = false, $extension = null)
+    public static function getDirFiles($dir, $get_dirs = false, $extension = null, $recursive = false)
     {
         // In development mode we don't have the filemap available. To avoid
         // full rebuilds on every page load, only load what we need at this
@@ -1026,20 +1049,46 @@ class SugarAutoLoader
         	}
         	$data = $data[$part];
         }
-        $result = array();
+
         if (!is_array($data)) {
-            return $result;
+            return array();
         }
-        foreach ($data as $file => $data) {
+
+        return self::flatten($dir, $data, $get_dirs, $extension, $recursive);
+    }
+
+    /**
+     * Flattens the result of self::getDirFiles()
+     *
+     * @param string $dir Base directory
+     * @param array $data Tree data
+     * @param boolean $get_dirs
+     * @param string $extension Filter files by extension
+     * @param boolean $recursive Use data from subdirectories
+     *
+     * @return array Flattened data
+     */
+    protected function flatten($dir, array $data, $get_dirs, $extension, $recursive)
+    {
+        $result = array();
+        foreach ($data as $file => $nodes) {
             // check extension if given
             if (!empty($extension) && pathinfo($file, PATHINFO_EXTENSION) != $extension) {
                 continue;
             }
+            $path = $dir . '/' . $file;
             // get dirs or files depending on $get_dirs
-            if (is_array($data) == $get_dirs) {
-                $result[] = "$dir/$file";
+            if (is_array($nodes) == $get_dirs) {
+                $result[] = $path;
+            }
+            if ($recursive && is_array($nodes)) {
+                $result = array_merge(
+                    $result,
+                    self::flatten($path, $nodes, $get_dirs, $extension, $recursive)
+                );
             }
         }
+
         return $result;
     }
 
@@ -1226,19 +1275,21 @@ class SugarAutoLoader
      */
     public static function scanDir($path)
     {
-        $data = array();
+        $path = rtrim($path, '/');
         if (in_array($path, self::$exclude) || !file_exists("./".$path)) {
             return array();
         }
 
         $iter = new DirectoryIterator("./".$path);
+        $data = array();
         foreach ($iter as $item) {
             if ($item->isDot()) {
                 continue;
             }
             $filename = $item->getFilename();
             if ($item->isDir()) {
-                $data[$filename] = self::scanDir($path.$filename."/");
+                $filepath = ($path === "") ? $filename : $path . '/' . $filename;
+                $data[$filename] = self::scanDir($filepath);
             } else {
                 if (!in_array(pathinfo($filename, PATHINFO_EXTENSION), self::$exts)) {
                     continue;
@@ -1274,19 +1325,45 @@ class SugarAutoLoader
         return $data;
     }
 
-	/**
-	 * Get custom class name if that exists or original one if not
-	 * @param string $classname
-	 * @return string Classname
-	 */
-	public static function customClass($classname, $autoload = false)
-	{
-	    $customClass = 'Custom'.$classname;
-	    if(class_exists($customClass, $autoload)) {
-	        return $customClass;
-	    }
-	    return $classname;
-	}
+    /**
+     * Get custom class name if that exists or original one if not
+     * @param string $className Class name, legacy or FQCN
+     * @param boolean $autoload Try to autoload the custom class, always true
+     *      when a namespaced class name is passed in.
+     * @return string Classname
+     */
+    public static function customClass($className, $autoload = false)
+    {
+        if (strpos($className, '\\') !== false) {
+            $customClass = self::getCustomClassFQCN($className);
+            $autoload = true;
+        } else {
+            $customClass = 'Custom'.$className;
+        }
+
+        if ($customClass && class_exists($customClass, $autoload)) {
+            return $customClass;
+        }
+
+        return $className;
+    }
+
+    /**
+     * Get custom fully qualified class name, return false if not able
+     * to transform the given class name into its custom counterpart.
+     * Will also return false if given class name is already in custom
+     * format.
+     * @param string $className Fully qualified class name
+     * @return string|false
+     */
+    public static function getCustomClassFQCN($className)
+    {
+        $customBase = self::NS_ROOT . 'custom\\';
+        if (strpos($className, self::NS_ROOT) === 0 && strpos($className, $customBase) === false) {
+            return str_replace(self::NS_ROOT, $customBase, $className);
+        }
+        return false;
+    }
 
 	/**
 	 * Unlink and delete from map
@@ -1377,16 +1454,28 @@ class SugarAutoLoader
      */
     public static function normalizeFilePath($filename)
     {
+        if (!isset(self::$baseDirs)) {
+            self::$baseDirs = array(SUGAR_BASE_DIR);
+            if (defined('SHADOW_INSTANCE_DIR')) {
+                self::$baseDirs[] = SHADOW_INSTANCE_DIR;
+            }
+        }
+
         // Normalize directory separators
-        if(DIRECTORY_SEPARATOR != '/') {
-            $filename = str_replace(DIRECTORY_SEPARATOR, "/", $filename);
+        if (self::$ds != '/') {
+            $filename = str_replace(self::$ds, "/", $filename);
+        }
+
+        // Remove base dir - Composer always has absolute paths.
+        foreach (self::$baseDirs as $baseDir) {
+            $filename = str_replace($baseDir . '/', '', $filename, $count);
+            if ($count > 0) {
+                break;
+            }
         }
 
         // Remove repeated separators
         $filename = preg_replace('#(/)(\1+)#', '/', $filename);
-
-        // Remove base dir - Composer always has absolute paths.
-        $filename = str_replace(SUGAR_BASE_DIR . "/", "", $filename);
 
         return $filename;
     }

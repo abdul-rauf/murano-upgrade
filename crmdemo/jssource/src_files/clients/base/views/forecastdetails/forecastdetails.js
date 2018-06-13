@@ -52,6 +52,11 @@
     isForecastAdmin: false,
 
     /**
+     * Track if current user is manager.
+     */
+    isManager: false,
+
+    /**
      * Holds the subDetails template so the timeperiod field doesn't re-fetch every re-render
      */
     subDetailsTpl: {},
@@ -141,7 +146,7 @@
     forecastsNotSetUpMsg: undefined,
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     initialize: function(options) {
         this._super('initialize', [options]);
@@ -153,6 +158,7 @@
         this.isForecastSetup = this.forecastConfig.is_setup;
         this.forecastsConfigOK = app.utils.checkForecastConfig();
         this.isForecastAdmin = _.isUndefined(app.user.getAcls()['Forecasts'].admin);
+        this.isManager = app.user.get('is_manager');
 
         if(!this.isForecastSetup) {
             this.forecastsNotSetUpMsg = app.utils.getForecastNotSetUpMessage(this.isForecastAdmin);
@@ -206,7 +212,7 @@
     },
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     initDashlet: function() {
         this.settings.module = 'Forecasts';
@@ -297,7 +303,7 @@
     /**
      * Builds dashlet url
      *
-     * @return {*} url to call
+     * @return {Mixed} url to call
      */
     getProjectedURL: function() {
         var method = this.shouldRollup ? 'progressManager' : 'progressRep',
@@ -315,7 +321,7 @@
     },
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     bindDataChange: function() {
         if(this.meta.config) {
@@ -386,7 +392,7 @@
     },
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     unbindData: function() {
         var ctx;
@@ -499,7 +505,7 @@
      * Gets an object from the oldTotals Model
      *
      * @param id the model ID for the Object
-     * @returns {Object}
+     * @return {Object}
      */
     getOldTotalFromCollectionById: function(id) {
         return this.oldTotals.models.get(id);
@@ -510,14 +516,14 @@
      *
      * @param id model id
      * @param totals object to set
-     * @returns {*}
+     * @return {Mixed}
      */
     setOldTotalFromCollectionById: function(id, totals) {
         this.oldTotals.models.set(id, totals);
     },
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     _render: function() {
         this._super('_render');
@@ -804,7 +810,7 @@
      * @param {Number} caseValue the value to check
      * @param {Number} stageValue the value to check against
      * @param {String} type the property to get
-     * @returns {string}
+     * @return {string}
      */
     getClassBasedOnAmount: function (caseValue, stageValue, type) {
         var cssClass = '';
@@ -942,7 +948,7 @@
     },
 
     /**
-     * Handle the click event for the optins menu
+     * Handle the click event for the options menu
      *
      * @param {jQuery.Event} evt click event
      */

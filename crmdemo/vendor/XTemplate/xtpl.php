@@ -3,6 +3,9 @@
 /*
 
 Modification information for LGPL compliance
+
+jvink@sugarcrm.com - 2015-06-30 - Adding CSRF form token support
+
 Stas 2010-12-20 Added 'VERSION_MARK' to templates
 
 r56990 - 2010-06-16 13:05:36 -0700 (Wed, 16 Jun 2010) - kjing - snapshot "Mango" svn branch to a new one for GitHub sync
@@ -92,7 +95,7 @@ r3 - 2004-05-26 22:30:56 -0700 (Wed, 26 May 2004) - sugarjacob - Moving project 
 
 */
 
-
+use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
 
 class XTemplate {
 
@@ -119,7 +122,7 @@ class XTemplate {
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-
+	$Id: xtpl.php 36874 2008-06-19 19:09:05Z roger $
 */
 
 /***[ variables ]***********************************************************/
@@ -231,17 +234,15 @@ function parse ($bname) {
 		} else {
 			$var=$this->VARS;
 
-			foreach ($sub as $k1 => $v1)
-			{
-				if(is_array($var) && isset($var[$v1]))
-				{
-					$var=$var[$v1];
-				}
-				else
-				{
-					$var = null;
-				}
-			}
+            foreach ($sub as $k1 => $v1) {
+                if ($v1 === $this->csrfVar) {
+                    $var = $this->getCsrfToken();
+                } elseif (is_array($var) && isset($var[$v1])) {
+                    $var=$var[$v1];
+                } else {
+                    $var = null;
+                }
+            }
 
 			$nul=(!isset($this->NULL_STRING[$v])) ? ($this->NULL_STRING[""]) : ($this->NULL_STRING[$v]);
 			$var=(!isset($var))?$nul:$var;
@@ -559,11 +560,30 @@ function r_getfile($file) {
 	$text=$this->getfile($file);
 	while (preg_match($this->file_delim,$text,$res)) {
 		$text2=$this->getfile($res[1]);
-		$text=preg_replace("'".preg_quote($res[0])."'",$text2,$text);
+		$text=str_replace($res[0], $text2, $text);
 	}
 	return $text;
 }
 
+    /**
+     * Template variable name used to add a CSRF token
+     * @var string
+     */
+    protected $csrfVar = 'sugar_csrf_form_token';
+
+    /**
+     * Wrapper to mimic Smarty to dynamically add CSRF form token by adding
+     * `{sugar_csrf_form_token}` to the template file.
+     */
+    public function getCsrfToken()
+    {
+        $csrf = CsrfAuthenticator::getInstance();
+        return sprintf(
+            '<input type="hidden" name="%s" value="%s" />',
+            $csrf::FORM_TOKEN_FIELD,
+            $csrf->getFormToken()
+        );
+    }
+
 } /* end of XTemplate class. */
 
-?>

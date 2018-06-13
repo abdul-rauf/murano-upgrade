@@ -91,7 +91,7 @@ else if(field_type=='date'||field_type=='datetime'){if(qualifier_name.indexOf('t
 else{addFilterInputDate(row,filter);}}
 else if(field_type=='id'||field_type=='name'){if(qualifier_name=='is'){addFilterInputRelate(row,field,filter);}
 else{addFilterInputText(row,filter);}}
-else if((field_type=='user_name')||(field_type=='assigned_user_name')){if(users_array==""){loadXML();}
+else if(field_type=='username'||field_type=='assigned_user_name'){if(users_array==""){loadXML();}
 if(qualifier_name=='one_of'){addFilterInputSelectMultiple(row,users_array,filter);}
 else{addFilterInputSelectSingle(row,users_array,filter);}}
 else if(field_type=='enum'||field_type=='multienum'||field_type=='timeperiod'){if(qualifier_name=='one_of'){addFilterInputSelectMultiple(row,field.options,filter);}

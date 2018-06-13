@@ -8,5 +8,5 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({extendsFrom:'ButtonField',plugins:['EmailClientLaunch'],initialize:function(options){this._super("initialize",[options]);this._setEmailOptions();},_setEmailOptions:function(){var context=this.context.parent||this.context,parentModel=context.get('model');if(this.def.set_recipient_to_parent){this.addEmailOptions({to_addresses:[{bean:parentModel}]});}
+({extendsFrom:'ButtonField',plugins:['EmailClientLaunch'],initialize:function(options){this._super('initialize',[options]);this._initEmailOptions();},_initEmailOptions:function(){var context=this.context.parent||this.context,parentModel=context.get('model');if(parentModel instanceof Backbone.Model){this._updateEmailOptions(parentModel);parentModel.on('change',function(model){this._updateEmailOptions(model);this.render();},this);}},_updateEmailOptions:function(parentModel){if(this.def.set_recipient_to_parent){this.addEmailOptions({to_addresses:[{bean:parentModel}]});}
 if(this.def.set_related_to_parent){this.addEmailOptions({related:parentModel});}}})

@@ -66,7 +66,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-kw-scope-btn'
                         ),
@@ -76,6 +76,26 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                             'id' => 'dnb-kw-tags'
                         )
                     )
+                ),
+                //contact type array
+                array(
+                    'fields' => array(
+                        array(
+                            'type' => 'label',
+                            'cell_css_class' => 'span2',
+                            'default_value' => 'LBL_DNB_BAL_CNTCT_TYPE',
+                            'css' => 'dnb-bal-param-label'
+                        ),
+                        array(
+                            'name' => 'dnb_bal_cntct_filter',
+                            'label' => 'LBL_DNB_BAL_CNTCT_TYPE',
+                            'type' => 'enum',
+                            'cell_css_class' => 'span3',
+                            'placeholder' => "LBL_DNB_BAL_CNTCT_TYPE",
+                            'searchBarThreshold' => -1,
+                            'options' => 'dnb_bal_cntct_type'
+                        ),
+                    ),
                 )
             )
         ),
@@ -127,7 +147,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-state-btn'
                         ),
@@ -157,7 +177,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-city-btn'
                         ),
@@ -188,7 +208,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-area-code-btn'
                         ),
@@ -219,7 +239,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-postal-code-btn'
                         ),
@@ -273,7 +293,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-rad-srch-btn'
                         ),
@@ -332,7 +352,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-ind-code-btn'
                         ),
@@ -404,7 +424,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-sales-btn'
                         ),
@@ -463,7 +483,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-empcnt-btn'
                         ),
@@ -515,7 +535,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-empgrwth-btn'
                         ),
@@ -570,7 +590,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-mktcap-btn'
                         ),
@@ -611,7 +631,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-org-name-btn'
                         ),
@@ -665,7 +685,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-year-founding-btn',
                         ),
@@ -716,7 +736,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-duns-btn'
                         ),
@@ -724,6 +744,37 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                             'type' => 'tagcontainer',
                             'cell_css_class' => 'tagcontainer span3',
                             'id' => 'dnb-duns-tags'
+                        ),
+                    ),
+                ),
+                array(
+                    'fields' => array(
+                        array(
+                            'type' => 'label',
+                            'cell_css_class' => 'span2',
+                            'default_value' => 'LBL_DNB_BAL_GU_DUNS',
+                            'css' => 'dnb-bal-param-label'
+                        ),
+                        array(
+                            'name' => 'dnb_bal_gu_duns',
+                            'tooltip' => 'LBL_TT_DNB_BAL_DUNS',
+                            'type' => 'int',
+                            'cell_css_class' => 'span2',
+                            'no_required_placeholder' => true,
+                            'required' => true,
+                            'len' => 15
+                        ),
+                        array(
+                            'type' => 'rowaction',
+                            'cell_css_class' => 'span1',
+                            'icon' => 'fa-plus',
+                            'css_class' => 'dnb-bal-add-btn btn',
+                            'event' => 'dnb-bal-gu-duns-btn'
+                        ),
+                        array(
+                            'type' => 'tagcontainer',
+                            'cell_css_class' => 'tagcontainer span3',
+                            'id' => 'dnb-gu-duns-tags'
                         ),
                     ),
                 ),
@@ -747,7 +798,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-org-id-btn'
                         ),
@@ -813,7 +864,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-net-income-btn'
                         ),
@@ -868,7 +919,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-net-income-growth-btn'
                         ),
@@ -923,7 +974,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-assets-btn'
                         ),
@@ -989,7 +1040,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-offer-amt-btn'
                         ),
@@ -1044,7 +1095,7 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                         array(
                             'type' => 'rowaction',
                             'cell_css_class' => 'span1',
-                            'icon' => 'icon-plus',
+                            'icon' => 'fa-plus',
                             'css_class' => 'dnb-bal-add-btn btn',
                             'event' => 'dnb-bal-ipo-price-range-btn'
                         ),
@@ -1053,6 +1104,69 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                             'cell_css_class' => 'tagcontainer span3',
                             'id' => 'dnb-ipo-price-range-tags'
                         )
+                    ),
+                ),
+                array(
+                    'fields' => array(
+                        array(
+                            'type' => 'label',
+                            'cell_css_class' => 'span2',
+                            'default_value' => 'LBL_DNB_IPO_DATE',
+                            'css' => 'dnb-bal-param-label'
+                        ),
+                        array(
+                            'name' => 'dnb_bal_ipo_date_cat',
+                            'type' => 'enum',
+                            'cell_css_class' => 'span2',
+                            'searchBarThreshold' => -1,
+                            'options' => 'dnb_bal_filing_trading_option'
+                        ),
+                    ),
+                ),
+                array(
+                    'fields' => array(
+                        array(
+                            'name' => 'dnb_bal_ipo_date',
+                            'type' => 'enum',
+                            'cell_css_class' => 'span2 offset2',
+                            'searchBarThreshold' => -1,
+                            'options' => 'dnb_bal_after_before_btw',
+                        ),
+                        array(
+                            'name' => 'dnb_bal_ipo_date_low', //lower limit
+                            'type' => 'date',
+                            'format' => 'Y-m-d',
+                            'cell_css_class' => 'hide toggleCandidate span2',
+                        ),
+                        array(
+                            'name' => 'dnb_bal_annl_sale_and_str',
+                            'type' => 'label',
+                            'cell_css_class' => 'hide toggleCandidate span1',
+                            'css' => 'dnb-bal-param-label',
+                            'default_value' => 'LBL_DNB_AND'
+                        ),
+                        array(
+                            'name' => 'dnb_bal_ipo_date_high', //upper limit
+                            'type' => 'date',
+                            'format' => 'Y-m-d',
+                            'cell_css_class' => 'span2',
+                        ),
+                        array(
+                            'type' => 'rowaction',
+                            'cell_css_class' => 'span1',
+                            'icon' => 'fa-plus',
+                            'css_class' => 'dnb-bal-add-btn btn',
+                            'event' => 'dnb-bal-ipo-date-btn'
+                        ),
+                    ),
+                ),
+                array(
+                    'fields' => array(
+                        array(
+                            'type' => 'tagcontainer',
+                            'cell_css_class' => 'tagcontainer span3 offset2',
+                            'id' => 'dnb-ipo-date-tags'
+                        ),
                     ),
                 ),
             ),
@@ -1154,6 +1268,24 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                 'highKey' => 'ConsolidatedEmployeeHighRangeQuantity'//keys to be used in model
             )
         ),
+        'dnb-bal-ipo-date-btn' => array(
+            'operator' => 'dnb_bal_ipo_date',
+            'lowerLimit' => 'dnb_bal_ipo_date_low',
+            'upperLimit' => 'dnb_bal_ipo_date_high',
+            'addBtn' => '.dnb-bal-ipo-date-btn',
+            'container' => '#dnb-ipo-date-tags',
+            'tagLimit' => 1,
+            'keyType' => 'dnb_bal_ipo_date_cat',
+            'modelKey' => 'ipoDate', //keys to be used in model
+            'filingdate' => array(
+                'lowKey' => 'InitialPublicOfferingFilingFromDate', //keys to be used in model
+                'highKey' => 'InitialPublicOfferingFilingToDate'//keys to be used in model
+            ),
+            'tradingdate' => array(
+                'lowKey' => 'InitialPublicOfferingTradingFromDate', //keys to be used in model
+                'highKey' => 'InitialPublicOfferingTradingToDate'//keys to be used in model
+            )
+        ),
         'dnb-bal-empgrwth-btn' => array(
             'operator' => 'dnb_bal_emp_grwth',
             'lowerLimit' => 'dnb_bal_emp_grwth_low',
@@ -1191,6 +1323,14 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
             'inputKey' => 'dnb_bal_duns',
             'modelKey' => 'dunsNum', //keys to be used in model
             'modelSubKey' => 'DUNSNumber-'
+        ),
+        'dnb-bal-gu-duns-btn' => array(
+            'addBtn' => '.dnb-bal-gu-duns-btn',
+            'container' => '#dnb-gu-duns-tags',
+            'tagLimit' => 10,
+            'inputKey' => 'dnb_bal_gu_duns',
+            'modelKey' => 'guDunsNum', //keys to be used in model
+            'modelSubKey' => 'GlobalUltimateDUNSNumber-'
         ),
         'dnb-bal-org-name-btn' => array(
             'addBtn' => '.dnb-bal-org-name-btn',
@@ -1272,7 +1412,15 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
             'modelSubKey' => 'ManagementResponsibilityCode',
             'modelKey' => 'jobCode',
             'multiple' => false
-        )
+        ),
+        'dnb_bal_cntct_filter' => array(
+            'modelSubKey' => 'InclusionDataDescription-1',
+            'modelKey' => 'balFilter',
+            'multiple' => false,
+            'lookup' => array(
+                'prem' => 'IncludeContactsOnlyWithDirectEmailOrDirectPhone'
+            )
+        ),
     ),
     'balParamGroups' => array(
         'companySize' => array(
@@ -1341,6 +1489,10 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
             'ipoPriceRange' => array(
                 'label' => 'LBL_DNB_BAL_IPO_PRICE_RANGE',
                 'id' => 'dnb-ipo-price-range-tags'
+            ),
+            'ipoDate' => array(
+                'label' => 'LBL_DNB_IPO_DATE',
+                'id' => 'dnb-ipo-date-tags'
             )
         ),
         'companyInfo' => array(
@@ -1360,6 +1512,10 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                 'label' => 'LBL_DNB_BAL_DUNS',
                 'id' => 'dnb-duns-tags'
             ),
+            'guDunsNum' => array(
+                'label' => 'LBL_DNB_BAL_GU_DUNS',
+                'id' => 'dnb-gu-duns-tags'
+            ),
             'orgid' => array(
                 'label' => 'LBL_DNB_BAL_ORG_ID',
                 'id' => 'dnb-bal-org-id-tags'
@@ -1378,6 +1534,10 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
             'contactKw' => array(
                 'label' => 'LBL_DNB_BAL_PARAM_KEYWORD',
                 'id' => 'dnb-kw-tags'
+            ),
+            'balFilter' => array(
+                'label' => 'LBL_DNB_BAL_CNTCT_TYPE',
+                'select2' => 'dnb_bal_cntct_filter'
             )
         )
     )

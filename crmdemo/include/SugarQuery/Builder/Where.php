@@ -111,6 +111,34 @@ abstract class SugarQuery_Builder_Where
     }
 
     /**
+     * Sets an empty where query portion onto the where object. Delegates this
+     * to the DBManagers since Oracle has to handle empty differently than all
+     * other DBs.
+     * @param mixed $field The field
+     * @param SugarBean $bean SugarBean
+     * @return SugarQuery_Builder_Where
+     */
+    public function isEmpty($field, $bean = false)
+    {
+        $this->query->getDBManager()->setEmptyWhere($this, $field, $bean);
+        return $this;
+    }
+
+    /**
+     * Sets a not empty where query portion onto the where object. Delegates this
+     * to the DBManagers since Oracle has to handle empty differently than all
+     * other DBs.
+     * @param mixed $field The field
+     * @param SugarBean $bean SugarBean
+     * @return SugarQuery_Builder_Where
+     */
+    public function isNotEmpty($field, $bean = false)
+    {
+        $this->query->getDBManager()->setNotEmptyWhere($this, $field, $bean);
+        return $this;
+    }
+
+    /**
      * @param $field
      * @param bool $bean
      *
@@ -394,13 +422,12 @@ abstract class SugarQuery_Builder_Where
                 $type = $bean->getFieldDefinition($field);
                 $type = !empty($type['type']) ? $type['type'] : '';
             }
-            //We don't want `asDb` to set timezone since we've already set up our "from/to" dates
             if (!$type) {
-                $where->lte($field, $timeDate->asDb($dates[1], false), $bean);
-                $where->gte($field, $timeDate->asDb($dates[0], false), $bean);
+                $where->lte($field, $timeDate->asDb($dates[1]), $bean);
+                $where->gte($field, $timeDate->asDb($dates[0]), $bean);
             } else {
-                $where->lte($field, $timeDate->asDbType($dates[1], $type, false), $bean);
-                $where->gte($field, $timeDate->asDbType($dates[0], $type, false), $bean);
+                $where->lte($field, $timeDate->asDbType($dates[1], $type), $bean);
+                $where->gte($field, $timeDate->asDbType($dates[0], $type), $bean);
             }
         }
         return $this;

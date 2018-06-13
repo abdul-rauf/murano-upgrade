@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: MyPipelineBySalesStageDashlet.meta.php 28882 2007-10-26 00:51:46 +0000 (Fri, 26 Oct 2007) awu $
 
 global $app_strings, $current_language;
 

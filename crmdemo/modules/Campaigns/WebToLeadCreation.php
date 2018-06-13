@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
+ * $Id: WebToLeadCreation.php 16440 2006-08-25 23:18:55 +0000 (Tue, 23 Nov 2006) Vineet $
  * Description:  TODO: To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -107,6 +107,7 @@ $popup_request_data = array(
 $encoded_users_popup_request_data = $json->encode($popup_request_data);
 $xtpl->assign('encoded_campaigns_popup_request_data' , $json->encode($popup_request_data));
 
+
 $popup_request_data = array(
 	'call_back_function' => 'set_return',
 	'form_name' => 'EditView',
@@ -128,29 +129,38 @@ if(isset($lead->field_defs['webtolead_email1']) && isset($lead->field_defs['emai
 }
 
 $count= 0;
-foreach($lead->field_defs as $field_def)
-{
-	$email_fields = false;
-    if($field_def['name']== 'email1' || $field_def['name']== 'email2')
-    {
-    	$email_fields = true;
-    }
-	  if($field_def['name']!= 'account_name'){
-	    if( ( $field_def['type'] == 'relate' && empty($field_def['custom_type']) )
-	    	|| $field_def['type'] == 'assigned_user_name' || $field_def['type'] =='link'
-	    	|| (isset($field_def['source'])  && $field_def['source']=='non-db' && !$email_fields) || $field_def['type'] == 'id')
-	    {
-	        continue;
-	    }
-	   }
-	    if($field_def['name']== 'deleted' || $field_def['name']=='converted' || $field_def['name']=='date_entered'
-	        || $field_def['name']== 'date_modified' || $field_def['name']=='modified_user_id'
-	        || $field_def['name']=='assigned_user_id' || $field_def['name']=='created_by'
-	        || $field_def['name']=='team_id')
-	    {
-	    	continue;
-	    }
 
+// Used to prevent certain fields from appearing on the select list
+$fieldBlacklist = array(
+    'deleted' => 1,
+    'converted' => 1,
+    'date_entered' => 1,
+    'date_modified' => 1,
+    'modified_user_id' => 1,
+    'assigned_user_id' => 1,
+    'created_by' => 1,
+    'team_id' => 1,
+    'tag_lower' => 1,
+);
+
+foreach ($lead->field_defs as $field_def) {
+    $email_fields = false;
+    if ($field_def['name']== 'email' || $field_def['name']== 'email2') {
+        $email_fields = true;
+    }
+
+    if ($field_def['name']!= 'account_name') {
+        if ( ( $field_def['type'] == 'relate' && empty($field_def['custom_type']) )
+            || $field_def['type'] == 'assigned_user_name' || $field_def['type'] =='link'
+            || (isset($field_def['source'])  && $field_def['source']=='non-db' && !$email_fields) || $field_def['type'] == 'id')
+        {
+            continue;
+        }
+    }
+
+    if (!empty($fieldBlacklist[$field_def['name']])) {
+        continue;
+    }
 
     $field_def['vname'] = preg_replace('/:$/','',translate($field_def['vname'],'Leads'));
 
@@ -184,15 +194,18 @@ $qsd = QuickSearchDefaults::getQuickSearchDefaults();
 $sqs_objects = array('account_name' => $qsd->getQSParent(),
 					'assigned_user_name' => $qsd->getQSUser(),
 					'campaign_name' => $qsd->getQSCampaigns(),
+
 					'team_name' => $qsd->getQSTeam()
 
 					);
+
 require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
 $teamSetField = new SugarFieldTeamset('Teamset');
 $teamSetField->initClassicView($lead->field_defs, 'WebToLeadCreation');
 $sqs_objects = array_merge($sqs_objects, $teamSetField->getClassicViewQS());
 $quicksearch_js = '<script type="text/javascript" language="javascript">sqs_objects = ' . $json->encode($sqs_objects) . '</script>';
 $xtpl->assign("JAVASCRIPT", $quicksearch_js);
+
 
 if (empty($lead->id) && !isset($_REQUEST['isDuplicate'])) {
 	$xtpl->assign("TEAM_OPTIONS", get_select_options_with_id(get_team_array(), $current_user->default_team));
@@ -229,6 +242,7 @@ $javascript->addFieldGeneric('campaign_name', '', 'LBL_RELATED_CAMPAIGN' ,'true'
 $javascript->addFieldGeneric('assigned_user_name', '', 'LBL_ASSIGNED_TO' ,'true');
 $javascript->addToValidateBinaryDependency('campaign_name', 'alpha', $app_strings['ERR_SQS_NO_MATCH_FIELD'] . $mod_strings['LBL_LEAD_NOTIFY_CAMPAIGN'], 'false', '', 'campaign_id');
 $javascript->addToValidateBinaryDependency('assigned_user_name', 'alpha', $app_strings['ERR_SQS_NO_MATCH_FIELD'] . $app_strings['LBL_ASSIGNED_TO'], 'false', '', 'assigned_user_id');
+
 $javascript->addFieldGeneric('team_name', 'varchar', $app_strings['LBL_TEAM'] ,'true');
 $javascript->addToValidateBinaryDependency('team_name', 'alpha', $app_strings['ERR_SQS_NO_MATCH_FIELD'] . $app_strings['LBL_TEAM'], 'false', '', 'team_id');
 echo $javascript->getScript();

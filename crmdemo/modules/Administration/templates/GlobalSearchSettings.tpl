@@ -13,7 +13,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
     <td colspan="100">
-        <h2> {$moduleTitle}</h2>
+        <h2>{$MOD.LBL_FTS_SETTINGS}</h2>
     </td>
 </tr>
 <tr>
@@ -30,6 +30,7 @@
 <script type="text/javascript" src="{sugar_getjspath file='cache/include/javascript/sugar_grp_yui_widgets.js'}"></script>
 <link rel="stylesheet" type="text/css" href="{sugar_getjspath file='modules/Connectors/tpls/tabs.css'}"/>
 <form name="GlobalSearchSettings" method="POST">
+{sugar_csrf_form_token}
 	<input type="hidden" name="module" value="Administration">
 	<input type="hidden" name="action" value="saveGlobalSearchSettings">
 	<input type="hidden" name="enabled_modules" value="">
@@ -97,6 +98,8 @@
 	</table>
 </form>
 
+</table>
+
 <div id='selectFTSModules' class="yui-hidden">
     <div style="background-color: white; padding: 20px; overflow:scroll; height:400px;">
         <div id='selectFTSModulesTable' ></div>
@@ -115,6 +118,7 @@
 	var disabled_modules = {$disabled_modules};
 	var lblEnabled = '{sugar_translate label="LBL_ACTIVE_MODULES"}';
 	var lblDisabled = '{sugar_translate label="LBL_DISABLED_MODULES"}';
+
 	{literal}
 	SUGAR.globalSearchEnabledTable = new YAHOO.SUGAR.DragDropTable(
 		"enabled_div",
@@ -142,28 +146,28 @@
 	SUGAR.globalSearchEnabledTable.render();
 	SUGAR.globalSearchDisabledTable.render();
 
-    SUGAR.getEnabledModules = function()
-    {
-        var enabledTable = SUGAR.globalSearchEnabledTable;
-        var modules = "";
-        for(var i=0; i < enabledTable.getRecordSet().getLength(); i++)
+        SUGAR.getModulesFromTable = function(table)
         {
-            var data = enabledTable.getRecord(i).getData();
-            if (data.module && data.module != '')
-                modules += "," + data.module;
+            var modules = "";
+            for(var i=0; i < table.getRecordSet().getLength(); i++)
+            {
+                var data = table.getRecord(i).getData();
+                if (data.module && data.module != '')
+                    modules += "," + data.module;
+            }
+            modules = modules == "" ? modules : modules.substr(1);
+            return modules;
         }
-        return modules;
-    }
-    SUGAR.getEnabledModulesForFTSSched = function()
-    {
-        var enabledTable = SUGAR.FTS.selectedDataTable;
-        var modules = [];
-        var selectedIDs = enabledTable.getSelectedRows();
-        for(var i=0; i < selectedIDs.length; i++)
+        SUGAR.getEnabledModulesForFTSSched = function()
         {
-            var data = enabledTable.getRecord(selectedIDs[i]).getData();
-            modules.push(data.module);
-        }
+            var enabledTable = SUGAR.FTS.selectedDataTable;
+            var modules = [];
+            var selectedIDs = enabledTable.getSelectedRows();
+            for(var i=0; i < selectedIDs.length; i++)
+            {
+                var data = enabledTable.getRecord(selectedIDs[i]).getData();
+                modules.push(data.module);
+            }
 
         return modules;
     }
@@ -195,23 +199,26 @@
             if(!check_form('GlobalSearchSettings'))
                 return;
         }
-		var enabledTable = SUGAR.globalSearchEnabledTable;
-		var modules = SUGAR.getEnabledModules();
-		modules = modules == "" ? modules : modules.substr(1);
+        var enabled = SUGAR.getModulesFromTable(SUGAR.globalSearchEnabledTable);
+        var disabled = SUGAR.getModulesFromTable(SUGAR.globalSearchDisabledTable);
+
+        var urlParams = {
+            module: "Administration",
+            action: "saveglobalsearchsettings",
+            host: host,
+            port: port,
+            type: type,
+            enabled_modules: enabled,
+            disabled_modules: disabled,
+            csrf_token: SUGAR.csrf.form_token
+        }
 
 		ajaxStatus.showStatus(SUGAR.language.get('Administration', 'LBL_SAVING'));
 		Connect.asyncRequest(
             Connect.method,
             Connect.url,
             {success: SUGAR.saveCallBack},
-			SUGAR.util.paramsToUrl({
-				module: "Administration",
-				action: "saveglobalsearchsettings",
-                host: host,
-                port: port,
-                type: type,
-				enabled_modules: modules
-			}) + "to_pdf=1"
+			SUGAR.util.paramsToUrl(urlParams) + "to_pdf=1"
         );
 
 		return true;
@@ -223,11 +230,8 @@
         var response = YAHOO.lang.trim(o.responseText);
         if (response === "true") {
             var app = parent.SUGAR.App;
-            app.metadata.sync(function (){
-                app.additionalComponents.header.getComponent('globalsearch').populateModules();
-            });
-
-	       window.location.assign('index.php?module=Administration&action=index');
+            app.sync();
+            window.location.assign('index.php?module=Administration&action=index');
 	   } else {
             YAHOO.SUGAR.MessageBox.show({msg: response});
 	   }

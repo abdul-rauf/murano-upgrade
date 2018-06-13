@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,20 +20,17 @@ $viewdefs['Documents']['mobile']['view']['list'] = array(
                     'label' => 'LBL_DOC_NAME',
                     'default' => true,
                     'enabled' => true,
-                    'width' => '10%',
                 ),
                 array(
                     'name' => 'active_date',
                     'label' => 'LBL_DATE',
                     'enabled' => true,
-                    'width' => '10%',
                     'default' => true,
                 ),
                 array(
                     'name' => 'category_id',
                     'label' => 'LBL_CATEGORY',
                     'enabled' => true,
-                    'width' => '10%',
                     'default' => true,
                 ),
             ),

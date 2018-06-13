@@ -1,6 +1,6 @@
 <?php
 
-$layout_defs['Leads']['subpanel_setup']['mu_enquriy_tracker'] =
+/*$layout_defs['Leads']['subpanel_setup']['mu_enquriy_tracker'] =
         array('order' => 149,
             'module' => 'mu_Enquriy_Tracker',
             'subpanel_name' => 'default',
@@ -16,6 +16,6 @@ $layout_defs['Leads']['subpanel_setup']['mu_enquriy_tracker'] =
                 'campaign_id' => $_REQUEST['record'],
                 'return_as_array' => 'true'
             ),
-);
+);*/
 
 ?>

@@ -18,6 +18,8 @@ $viewdefs['base']['filter']['operators'] = array(
     'enum' => array(
         '$in' => 'LBL_OPERATOR_CONTAINS',
         '$not_in' => 'LBL_OPERATOR_NOT_CONTAINS',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
     ),
     'varchar' => array(
         '$equals' => 'LBL_OPERATOR_MATCHES',
@@ -89,6 +91,9 @@ $viewdefs['base']['filter']['operators'] = array(
         '$equals' => 'LBL_OPERATOR_EQUALS',
         '$lt' => 'LBL_OPERATOR_BEFORE',
         '$gt' => 'LBL_OPERATOR_AFTER',
+        'yesterday' => 'LBL_OPERATOR_YESTERDAY',
+        'today' => 'LBL_OPERATOR_TODAY',
+        'tomorrow' => 'LBL_OPERATOR_TOMORROW',
         'last_7_days' => 'LBL_OPERATOR_LAST_7_DAYS',
         'next_7_days' => 'LBL_OPERATOR_NEXT_7_DAYS',
         'last_30_days' => 'LBL_OPERATOR_LAST_30_DAYS',
@@ -105,6 +110,9 @@ $viewdefs['base']['filter']['operators'] = array(
         '$starts' => 'LBL_OPERATOR_EQUALS',
         '$lte' => 'LBL_OPERATOR_BEFORE',
         '$gte' => 'LBL_OPERATOR_AFTER',
+        'yesterday' => 'LBL_OPERATOR_YESTERDAY',
+        'today' => 'LBL_OPERATOR_TODAY',
+        'tomorrow' => 'LBL_OPERATOR_TOMORROW',
         'last_7_days' => 'LBL_OPERATOR_LAST_7_DAYS',
         'next_7_days' => 'LBL_OPERATOR_NEXT_7_DAYS',
         'last_30_days' => 'LBL_OPERATOR_LAST_30_DAYS',
@@ -121,6 +129,9 @@ $viewdefs['base']['filter']['operators'] = array(
         '$starts' => 'LBL_OPERATOR_EQUALS',
         '$lte' => 'LBL_OPERATOR_BEFORE',
         '$gte' => 'LBL_OPERATOR_AFTER',
+        'yesterday' => 'LBL_OPERATOR_YESTERDAY',
+        'today' => 'LBL_OPERATOR_TODAY',
+        'tomorrow' => 'LBL_OPERATOR_TOMORROW',
         'last_7_days' => 'LBL_OPERATOR_LAST_7_DAYS',
         'next_7_days' => 'LBL_OPERATOR_NEXT_7_DAYS',
         'last_30_days' => 'LBL_OPERATOR_LAST_30_DAYS',
@@ -137,8 +148,8 @@ $viewdefs['base']['filter']['operators'] = array(
         '$equals' => 'LBL_OPERATOR_IS'
     ),
     'relate' => array(
-        '$equals' => 'LBL_OPERATOR_IS',
-        '$not_equals' => 'LBL_OPERATOR_IS_NOT',
+        '$in' => 'LBL_OPERATOR_CONTAINS',
+        '$not_in' => 'LBL_OPERATOR_NOT_CONTAINS',
     ),
     'teamset' => array(
         '$equals' => 'LBL_OPERATOR_IS',
@@ -151,5 +162,14 @@ $viewdefs['base']['filter']['operators'] = array(
     'radioenum' => array(
         '$equals' => 'LBL_OPERATOR_IS',
         '$not_equals' => 'LBL_OPERATOR_IS_NOT',
-    )
+    ),
+    'parent' => array(
+        '$equals' => 'LBL_OPERATOR_IS',
+    ),
+    'tag' => array(
+        '$in' => 'LBL_OPERATOR_CONTAINS',
+        '$not_in' => 'LBL_OPERATOR_NOT_CONTAINS',
+        '$empty' => 'LBL_OPERATOR_EMPTY',
+        '$not_empty' => 'LBL_OPERATOR_NOT_EMPTY',
+    ),
 );

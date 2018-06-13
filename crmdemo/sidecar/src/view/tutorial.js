@@ -9,7 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /**
- * @class View.Tutorial
+ * @class View.TutorialView
  * @alias SUGAR.App.tutorial
  * @singleton
  */
@@ -108,12 +108,14 @@
     app.augment("tutorial", {
         instance: null,
         /**
-         * Test if a layout for the given module has a Tutorial associated with it.  By default, this will check if the
-         * layout associated with the default context has a Tutorial.
+         * Test if a layout for the given module has a Tutorial associated with
+         * it. By default, this will check if the layout associated with the
+         * default context has a Tutorial.
          *
-         * @param {String} layout (optional) layout name to check
-         * @param {String} module (optional) module name to check
-         * @returns {boolean} TRUE if a tutorial exists for this layout
+         * @param {string} [layout] layout name to check.
+         * @param {string} [module] module name to check.
+         * @return {boolean} `true` if a tutorial exists for this layout,
+         *   `false` otherwise.
          */
         hasTutorial: function(layout, module) {
             if(_.isUndefined(module)) module = app.controller.context.get('module');
@@ -201,6 +203,14 @@
             app.user.setPreference("tutorialPrefs", prefs);
         }
     });
+
+    /**
+     * @class View.TutorialView
+     * @alias SUGAR.App.view.TutorialView
+     * @extends View.View
+     *
+     * TODO this needs to be removed from this path
+     */
     app.view.TutorialView = app.view.View.extend({
 
         events: {
@@ -211,6 +221,14 @@
             'swipeLeft':                        "onSwipeLeft"
         },
 
+        /**
+         * Flag to indicate the `highlight` animation is in progess.
+         *
+         * @property {boolean}
+         * @private
+         */
+        _duringAnimate: false,
+
         initialize: function(options) {
             options = _.extend({
             }, options || {});
@@ -219,6 +237,8 @@
             this.setIntro(options.intro);
             this.setContent(options.content);
             this.setScroll(options.scroll);
+
+            app.events.on('app:login app:logout', this.hide, this);
         },
 
         setContent: function(content) {
@@ -261,25 +281,68 @@
             }
         },
 
-        hide: function(e) {
-            e.preventDefault();
-            this.remove();
+        /**
+         * Hides and disposes the tutorial.
+         *
+         * @param {Event} [event] Any event.
+         */
+        hide: function(event) {
+            if (event) {
+                event.preventDefault();
+            }
+            this.dispose();
         },
 
-        back: function(e) {
-            e.preventDefault();
+        /**
+         * Goes to the previous item.
+         *
+         * Does nothing if an animation is in progress.
+         *
+         * @param {Event} [event] Any event.
+         */
+        back: function(event) {
+            if (event) {
+                event.preventDefault();
+            }
+            if (this._duringAnimate) {
+                return;
+            }
             this.highlightItem(this.index - 1);
         },
 
-        next: function(e) {
-            e.preventDefault();
+        /**
+         * Goes to the next item.
+         *
+         * Does nothing if an animation is in progress.
+         *
+         * @param {Event} [event] Any event.
+         */
+        next: function(event) {
+            if (event) {
+                event.preventDefault();
+            }
+            if (this._duringAnimate) {
+                return;
+            }
             this.highlightItem(this.index + 1);
         },
 
+        /**
+         * Moves the highlighted item to another item.
+         *
+         * Does nothing when going before the first position, and hides the
+         * tutorial after the last item.
+         *
+         * @param {number} index The index of the target item.
+         */
         highlightItem: function(index) {
             var self = this;
 
-            if (index < 0 || index >= this.content.length) {
+            if (index < 0) {
+                return;
+            }
+            if (index >= this.content.length) {
+                this.hide();
                 return;
             }
 
@@ -316,6 +379,7 @@
                     this.highlightText.hide();
                     this.hideGlow();
 
+                    this._duringAnimate = true;
                     // Move the highlight to the element
                     this.highlight.animate({
                         "top": item.offset().top + (content.vertAdj || 0),
@@ -323,6 +387,7 @@
                         "width": content.full ? item.offset().width : "",
                         "height": content.full ? item.offset().height : ""
                     }, animationSpeed, "linear", function() {
+                        self._duringAnimate = false;
                         // default to have glow effect
                         if (content.glow === undefined || content.glow !== false) self.showGlow();
                         self.showHighlightText(content.text);
@@ -456,7 +521,7 @@
                 headerHeight = ($(".navbar").height() + 3) || 0,
                 footerHeight = $("footer").height() || 0,
             // the header and footer cover elements on the page so we account for this
-                buffer = 55,
+                buffer = 125,
                 direction;
             if ($.contains(".navbar", $targetEl)) {
                 headerHeight = 0;
@@ -467,12 +532,12 @@
             }
 
             if( elTop + elHeight > window.pageYOffset + viewportHeight - footerHeight ) {
-                direction = "down";
+                direction = 'down';
+                buffer *= -1;
             }
             // Make the buffer negative if we need to scroll up
             else if( elTop + elHeight < window.pageYOffset + elHeight + headerHeight ) {
                 direction = "up";
-                buffer *= -1;
             }
             else {
                 direction = "none";
@@ -483,7 +548,7 @@
 
             if( direction !== "none" ) {
                 // scroll to element
-                $('body, .main-pane, .side-pane').animate({
+                $('#content, .main-pane, .side-pane').animate({
                     scrollTop: elTop + buffer
                 },
                 {
@@ -509,10 +574,16 @@
             return this;
         },
 
+        /**
+         * @inheritdoc
+         */
         remove: function() {
             app.$contentEl.removeAttr('aria-hidden');
             if(app.tutorial.instance === this) {
                 app.tutorial.instance = null;
+            }
+            if (this.highlight) {
+                this.highlight.stop(true, true);
             }
             delete this.highlight;
             delete this.highlightText;

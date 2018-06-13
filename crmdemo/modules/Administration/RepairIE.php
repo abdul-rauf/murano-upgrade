@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
+ * $Id: Delete.php,v 1.22 2006/01/17 22:50:52 majed Exp $
  * Description:
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
  * Reserved. Contributor(s): ______________________________________..
@@ -27,7 +27,7 @@ $q = "SELECT id, name, email_password FROM inbound_email WHERE deleted=0 AND sta
 $r = $db->query($q);
 
 while($a = $db->fetchByAssoc($r)) {
-	$ieX = BeanFactory::getBean('InboundEmail', $a['id']);
+	$ieX = BeanFactory::getBean('InboundEmail', $a['id'], array('disable_row_level_security' => true));
 	if(!$ieX->repairAccount()) {
 		// none of the iterations worked.  flag for display
 		$badAccts[$a['id']] = $a['name'];

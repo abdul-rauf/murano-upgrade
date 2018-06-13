@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,15 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-
-
-
-
-
-	
-$mod_strings = array (
-  'LBL_ASSIGNED_TO_ID' => 'Přidělené ID uživatele',
-  'LBL_ASSIGNED_TO_NAME' => 'Uživatel',
+$mod_strings = array(
+'LBL_ASSIGNED_TO_ID'=>'Přiřazené uživateli s ID',
+'LBL_ASSIGNED_TO_NAME' => 'Přiřazeno komu',
 );
-

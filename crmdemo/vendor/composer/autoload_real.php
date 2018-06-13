@@ -40,11 +40,20 @@ class ComposerAutoloaderInitSugar
 
         $loader->register(false);
 
+        $includeFiles = require __DIR__ . '/autoload_files.php';
+        foreach ($includeFiles as $fileIdentifier => $file) {
+            composerRequireSugar($fileIdentifier, $file);
+        }
+
         return $loader;
     }
 }
 
-function composerRequireSugar($file)
+function composerRequireSugar($fileIdentifier, $file)
 {
-    require $file;
+    if (empty($GLOBALS['__composer_autoload_files'][$fileIdentifier])) {
+        require $file;
+
+        $GLOBALS['__composer_autoload_files'][$fileIdentifier] = true;
+    }
 }

@@ -9,4 +9,5 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 $action_view_map['trackersettings']= 'trackersettings';

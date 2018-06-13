@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<a data-action="email" href="javascript:void(0);"
+<a class="{{#if def.button}} btn{{/if}}{{#if def.primary}} btn-primary{{/if}}" data-action="email" href="javascript:void(0);"
 {{#if def.tooltip}}
     rel="tooltip"
     data-placement="bottom"
@@ -18,4 +18,4 @@
 {{/if}}
     name="{{name}}"
     track="click:{{#if name}}{{name}}{{else}}{{label}}{{/if}}">
-{{#if def.icon}}<i class="{{def.icon}}"></i>{{/if}}{{str label}}</a>
+{{#if def.icon}}<i class="fa {{def.icon}}"></i>{{/if}}{{str label}}</a>

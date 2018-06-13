@@ -8,7 +8,7 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({showNoData:false,'events':{'click .icon-favorite':'toggle'},plugins:['Tooltip'],initialize:function(options){options.def.readonly=true;app.view.Field.prototype.initialize.call(this,options);},_render:function(){if(!this.model.get('id')){return null;}
+({showNoData:false,'events':{'click .fa-favorite':'toggle'},plugins:['Tooltip'],initialize:function(options){options.def.readonly=true;app.view.Field.prototype.initialize.call(this,options);},_render:function(){if(!this.model.get('id')){return null;}
 if(!app.metadata.getModule(this.model.module).favoritesEnabled){app.logger.error("Trying to use favorite field on a module that doesn't support it: '"+this.model.module+"'.");return null;}
 return app.view.Field.prototype._render.call(this);},toggle:function(evt){var self=this,star=$(evt.currentTarget);var options={silent:true,alerts:false};if(self.view&&self.view.action==='list'){options.success=function(){self._refreshListView();};}
 if(this.model.favorite(!this.model.isFavorite(),options)===false){app.logger.error("Unable to set '"+this.model.module+"' record '"+this.model.id+"' as favorite");return;}

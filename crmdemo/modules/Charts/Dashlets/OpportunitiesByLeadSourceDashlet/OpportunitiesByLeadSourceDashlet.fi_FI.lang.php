@@ -10,10 +10,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- 
-$dashletStrings['OpportunitiesByLeadSourceDashlet'] = 
-  array(
-        'LBL_TITLE'       => 'Myyntimahdollisuudet liidien lähteen mukaan',
-        'LBL_DESCRIPTION' => 'Piirakkadiagrammi myyntimahdollisuuksista liidien lähteen mukaan',
-        'LBL_REFRESH' => 'Päivitä kuvio',
-        );
+
+ // $Id: MyPipelineBySalesStageDashlet.en_us.lang.php 16286 2006-08-22 20:14:45Z wayne $
+
+
+$dashletStrings['OpportunitiesByLeadSourceDashlet'] = array('LBL_TITLE'       => 'Myyntimahdollisuudet liidien lähteen mukaan',
+                                                       'LBL_DESCRIPTION' => 'Piirakkadiagrammi myyntimahdollisuuksista liidien lähteen mukaan',
+                                                       'LBL_REFRESH'     => 'Päivitä kuvio');
+?>

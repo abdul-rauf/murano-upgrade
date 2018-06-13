@@ -29,8 +29,8 @@ Studio2 = {
 			DDM = YAHOO.utilDragDropMgr;
 		
 		Studio2.maxColumns = parseInt(document.getElementById('maxColumns').value);
-		Studio2.setStartId(parseInt(document.getElementById('idCount').value));
-		Studio2.setStartId(1000);
+		//Studio2.setStartId(parseInt(document.getElementById('idCount').value));
+		Studio2.setStartId(10000);
 		Studio2.fieldwidth = parseInt(document.getElementById('fieldwidth').value);
 		Studio2.panelNumber = parseInt(document.getElementById('nextPanelId').value);
 		Studio2.isIE = SUGAR.isIE;
@@ -167,7 +167,7 @@ Studio2 = {
         var targetHeight =  body.clientHeight - (Dom.getY('panels') - Dom.getY(body)) - 32;
 		if (Studio2.isIE) targetHeight -= 10;
 		Dom.setStyle('panels', "height", targetHeight + "px");
-		Dom.setStyle('panels', "width" , ((Studio2.fieldwidth * 2) + 112) + "px");
+        Dom.setStyle('panels', "width" , ((Studio2.fieldwidth * Studio2.maxColumns) + 112) + "px");
 		Dom.setStyle('toolbox', "height", targetHeight + "px");
         Studio2.scrollZones = {
             panels: Studio2.getScrollZones('panels'),
@@ -573,7 +573,6 @@ Studio2 = {
 				var newRow = Studio2.newRow(false);
 				panel.appendChild(newRow);
 				Studio2.activateElement(newRow);
-//				debugger;
 			}
 		}
 	},
@@ -802,8 +801,9 @@ Studio2 = {
 	},
 
 	handleSave: function() {
+
 		ajaxStatus.showStatus(SUGAR.language.get('app_strings', 'LBL_SAVING'));
-		ModuleBuilder.state.isDirty=false;
+        ModuleBuilder.state.markAsClean();
 		this.prepareForSave();
 		// set <input type='hidden' name='action' value='saveLayout'>
 		var saveForm = document.forms['prepareForSave'];
@@ -818,7 +818,7 @@ Studio2 = {
 
 	handlePublish: function() {
 		ajaxStatus.showStatus(SUGAR.language.get('app_strings', 'LBL_SAVING'));
-		ModuleBuilder.state.isDirty=false;
+        ModuleBuilder.state.markAsClean();
 		this.prepareForSave();
 		// set <input type='hidden' name='action' value='saveAndPublishLayout'>
 		var saveForm = document.forms['prepareForSave'];
@@ -827,6 +827,8 @@ Studio2 = {
 		inputField.setAttribute('name','action');
 		inputField.setAttribute('value','saveAndPublishLayout');
 		saveForm.appendChild(inputField);
+
+
 		ModuleBuilder.submitForm('prepareForSave');
 		ajaxStatus.flashStatus(SUGAR.language.get('ModuleBuilder','LBL_DEPLOYE_COMPLETE'),5000);
 	},

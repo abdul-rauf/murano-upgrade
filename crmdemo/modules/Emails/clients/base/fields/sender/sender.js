@@ -11,7 +11,7 @@
 /**
  * @class View.Fields.Base.Emails.SenderField
  * @alias SUGAR.App.view.fields.BaseEmailsSenderField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     fieldTag: 'input.select2',
@@ -33,11 +33,14 @@
 
             app.api.call('GET', myURL, null, {
                 success: this.populateValues,
-                error:   function(error) {
-                    app.alert.show('server-error', {
-                        level: 'error',
-                        messages: 'ERR_GENERIC_SERVER_ERROR'
-                    });
+                error: function(error) {
+                    // display error if not a metadata refresh
+                    if (error.status !== 412) {
+                        app.alert.show('server-error', {
+                            level: 'error',
+                            messages: 'ERR_GENERIC_SERVER_ERROR'
+                        });
+                    }
                     app.error.handleHttpError(error);
                 }
             });
@@ -87,12 +90,10 @@
                 self.model.set(self.name, e.val, {silent: true});
             }
         });
-
-        this.$(".select2-container").addClass("tleft");
     },
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      * We need this empty so it won't affect refresh the select2 plugin
      */

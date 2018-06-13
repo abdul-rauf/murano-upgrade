@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,17 +10,18 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$mod_strings = array (
-  'LBL_DESCRIPTION' => 'Popis',
-  'LBL_GROUP_NAME' => 'Názov skupiny',
-  'LBL_LIST_TITLE' => 'skupiny',
-  'LBL_MODULE_NAME' => 'skupiny',
-  'LBL_MODULE_NAME_SINGULAR' => 'Skupina',
-  'LBL_TEAM' => 'Tím',
-  'LNK_ALL_GROUPS' => 'Všetky skupiny',
-  'LNK_CONVERT_USER' => 'konvertovať užívateľa do skupiny',
-  'LNK_NEW_GROUP' => 'Vytvoriť skupinu',
+$mod_strings = array ( 
+	'LBL_MODULE_NAME'			=> 'skupiny',
+	'LBL_MODULE_NAME_SINGULAR'		=> 'Skupina',
+	'LBL_GROUP_NAME'			=> 'Názov skupiny',
+	'LBL_DESCRIPTION'			=> 'Popis',
+	'LBL_TEAM'					=> 'Tím',
+	// ListView
+	'LBL_LIST_TITLE'			=> 'skupiny',
+	// Links
+	'LNK_ALL_GROUPS'			=> 'Všetky skupiny',
+	'LNK_NEW_GROUP'				=> 'Vytvoriť skupinu',
+	'LNK_CONVERT_USER'			=> 'konvertovať užívateľa do skupiny', 
 );
-
+?>

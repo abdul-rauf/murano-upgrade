@@ -1,6 +1,6 @@
 <?php
- // created: 2012-02-09 12:05:43
-$dictionary['Lead']['fields']['peralloc_hf_c']['enforced']='false';
-$dictionary['Lead']['fields']['peralloc_hf_c']['dependency']='';
+ // created: 2018-06-13 10:46:07
+$dictionary['Lead']['fields']['peralloc_hf_c']['enforced'] = 'false';
+$dictionary['Lead']['fields']['peralloc_hf_c']['dependency'] = '';
+$dictionary['Lead']['fields']['peralloc_hf_c']['full_text_search']['boost'] = 1;
 
- ?>

@@ -1,5 +1,5 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,14 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
-
-* Description: This file generates the appropriate manager for the database
-*
-* Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
-* All Rights Reserved.
-* Contributor(s): ______________________________________..
-********************************************************************************/
 
 require_once('include/database/DBManager.php');
 
@@ -96,7 +88,7 @@ class DBManagerFactory
      * instance if one is not specified
      *
      * @param  string $instanceName optional, name of the instance
-     * @return object DBManager instance
+     * @return DBManager Database instance
      */
 	public static function getInstance($instanceName = '')
     {

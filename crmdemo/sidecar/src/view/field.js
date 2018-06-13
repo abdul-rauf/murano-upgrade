@@ -168,6 +168,8 @@
             // Note we bind it regardless of which view we on (only need for edit type views)
             if (this.model) {
                 this.model.on("error:validation:" + this.name, this.handleValidationError, this);
+                this.model.on('validation:start attributes:revert', this.removeValidationErrors, this);
+                this.model.on('acl:change:' + this.name, this.handleAclChange, this);
             }
         },
 
@@ -179,6 +181,18 @@
          */
         viewFallbackMap: {
             'edit': 'detail'
+        },
+
+        /**
+         * Handler for when an ACL changes at the field-level.
+         *
+         * FIXME SC-3363: The previous action needs to be cleared in order to
+         * load the correct template when the user potentially loses access to a
+         * field. SC-3363 will address this.
+         */
+        handleAclChange: function() {
+            this.action = void 0;
+            this.render();
         },
 
         /**
@@ -319,7 +333,7 @@
                     events[handlerName] = 'callback_' + handlerName;
                 }
 
-                if (!callback) {
+                if (!_.isFunction(eventHandler) && !callback) {
                     delete events[handlerName];
                 }
             }, this);
@@ -347,6 +361,40 @@
                 this.value = this.getFormattedValue();
             }
 
+            /**
+             * The direction of the field. The default value `undefined` means
+             * that the field would use the inherited direction from the DOM.
+             *
+             * Override this property with a specific direction string if the
+             * field has a set direction that it always follows.
+             *
+             * Override this property with a function if logic is needed to
+             * determine the direction of the field. The function should return
+             * either a `string` indicating the direction of the field or
+             * `undefined`. This function is only called after the value is set
+             * so that we can base the direction on the value.
+             *
+             * Example using a function
+             *
+             *      direction: function() {
+             *          return this.isRTL ? 'rtl' : 'ltr';
+             *      }
+             *
+             * @property {string|Function|undefined} direction
+             * @return {string|undefined}
+             * @member View.Field
+             */
+            /**
+             * The direction attribute for the field to be used in the template.
+             *
+             * @property {string|undefined} dir
+             * @member View.Field
+             */
+            this.dir = _.result(this, 'direction');
+            if (app.lang.direction === this.dir) {
+                delete this.dir;
+            }
+
             this.unbindDom();
             this.$el.html(this.template(this) || '');
 
@@ -354,6 +402,8 @@
             if(this.def && this.def.css_class) {
                 this.getFieldElement().addClass(this.def.css_class);
             }
+
+            this.$(this.fieldTag).attr('dir', this.dir);
 
             this.bindDomChange();
             return this;
@@ -408,6 +458,19 @@
                     }
                 }, this);
             }
+        },
+
+        /**
+         * Checks to see if the field's value has been changed from the saved model
+         * This is not the same as {@link Backbone.Model#hasChanged} which checks if the model
+         * has changed from the last time it was set whereas this function checks if what is
+         * currently in the input field is the same as what is synced on the model
+         *
+         * @return {boolean} `true` if the value is different, `false` if field is synced with the
+         * saved model
+         */
+        hasChanged: function() {
+            return !_.isEqual(this.format(this.model.getSynced(this.name)), this.format(this.model.get(this.name)));
         },
 
         /**
@@ -467,8 +530,30 @@
          * </code></pre>
          *
          * @param {Object} errors hash of validation errors
+         * @template
          */
         handleValidationError: function(errors) {
+            // Override this method
+        },
+
+        /**
+         * Removes the validation error properties on the field that were set by
+         * {@link #handleValidationError}.
+         *
+         * The default implementation does nothing.
+         *
+         * Override this method to provide custom logic:
+         *
+         *      @example
+         *      app.view.Field = app.view.Field.extend({
+         *          removeValidationErrors: function(errors) {
+         *              // Your custom logic goes here
+         *          }
+         *      });
+         *
+         * @template
+         */
+        removeValidationErrors: function() {
             // Override this method
         },
 
@@ -566,40 +651,19 @@
         },
 
         /**
-         * Set current element's display property to be shown
+         * @inheritdoc
          */
-        show: function() {
-            if (!this.isVisible()) {
-                if (!this.triggerBefore("show")) {
-                    return false;
-                }
-
-                this.getFieldElement().removeClass("hide").show();
-
-                this.trigger('show');
-            }
+        _show: function() {
+            this.getFieldElement().removeClass('hide').show();
+            this.updateVisibleState(true);
         },
 
         /**
-         * Set current element's display property to be hidden
+         * @inheritdoc
          */
-        hide: function() {
-            if (this.isVisible()) {
-                if (!this.triggerBefore("hide")) {
-                    return false;
-                }
-
-                this.getFieldElement().addClass("hide").hide();
-
-                this.trigger('hide');
-            }
-        },
-
-        /**
-         *  Visibility Check
-         */
-        isVisible: function() {
-            return this.getFieldElement().css('display') !== 'none';
+        _hide: function() {
+            this.getFieldElement().addClass('hide').hide();
+            this.updateVisibleState(false);
         },
 
         /**
@@ -613,7 +677,7 @@
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         closestComponent: function(name) {
             if (!this.view) {

@@ -1,7 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,17 +9,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$mod_strings = array (
-  'LBL_EMAIL_SIGNATURE_ERROR1' => 'Ovaj potpis zahteva ime.',
-  'LBL_MODULE_NAME' => 'Potpisi korisnika',
-  'LBL_MODULE_NAME_SINGULAR' => 'Potpis korisnika',
-  'LBL_SIGNATURE' => 'Potpis',
-  'LBL_SIGNATURES' => 'Potpisi',
-  'LBL_SIGNATURE_DEFAULT' => 'Koristi potpis?',
-  'LBL_SIGNATURE_HTML' => 'HTML potpis',
-  'LBL_SIGNATURE_NAME' => 'Ime',
-  'LBL_SIGNATURE_PREPEND' => 'Potpis iznad odgovora?',
+$mod_strings = array(
+    'LBL_MODULE_NAME'			=> 'Potpisi korisnika',
+    'LBL_MODULE_NAME_SINGULAR'		=> 'Potpis korisnika',
+    'LBL_EMAIL_SIGNATURE_ERROR1' => 'Ovaj potpis zahteva ime.',
+    'LBL_SIGNATURE_NAME'         => 'Ime',
+    'LBL_SIGNATURE'              => 'Potpis',
+    'LBL_SIGNATURE_HTML'         => 'HTML potpis',
+    'LBL_SIGNATURE_DEFAULT'      => 'Koristi potpis?',
+    'LBL_SIGNATURE_PREPEND'      => 'Potpis iznad odgovora?',
+    'LBL_SIGNATURES'             => 'Potpisi',
 );
-

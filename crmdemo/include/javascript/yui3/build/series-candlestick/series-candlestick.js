@@ -1,8 +1,24 @@
 /*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("series-candlestick",function(e,t){function n(){n.superclass.constructor.apply(this,arguments)}n.NAME="candlestickSeries",n.ATTRS={type:{value:"candlestick"},graphic:{lazyAdd:!1,setter:function(e){return this.get("rendered")||this.set("rendered",!0),this.set("upcandle",e.addShape({type:"path"})),this.set("downcandle",e.addShape({type:"path"})),this.set("wick",e.addShape({type:"path"})),e}},upcandle:{},downcandle:{},wick:{}},e.extend(n,e.RangeSeries,{_drawMarkers:function(t,n,r,i,s,o,u,a,f){var l=this.get("upcandle"),c=this.get("downcandle"),h,p=this.get("wick"),d=f.wick,v=d.width,m,g,y,b,w,E,S,x,T,N,C=f.padding.left,k,L,A=e.Lang.isNumber;l.set(f.upcandle),c.set(f.downcandle),p.set({fill:d.fill,stroke:d.stroke,shapeRendering:d.shapeRendering}),l.clear(),c.clear(),p.clear();for(L=0;L<o;L+=1)m=Math.round(t[L]+C),E=m-a,S=m+a,g=Math.round(n[L]),y=Math.round(r[L]),b=Math.round(i[L]),w=Math.round(s[L]),k=g>w,x=k?w:g,T=k?g:w,N=T-x,h=k?l:c,h&&A(E)&&A(x)&&A(u)&&A(N)&&h.drawRect(E,x,u,N),A(m)&&A(y)&&A(b)&&p.drawRect(m-v/2,y,v,b-y);l.end(),c.end(),p.end(),p.toBack()},_toggleVisible:function(e){this.get("upcandle").set("visible",e),this.get("downcandle").set("visible",e),this.get("wick").set("visible",e)},destructor:function(){var e=this.get("upcandle"),t=this.get("downcandle"),n=this.get("wick");e&&e.destroy(),t&&t.destroy(),n&&n.destroy()},_getDefaultStyles:function(){var e={upcandle:{shapeRendering:"crispEdges",fill:{color:"#00aa00",alpha:1},stroke:{color:"#000000",alpha:1,weight:0}},downcandle:{shapeRendering:"crispEdges",fill:{color:"#aa0000",alpha:1},stroke:{color:"#000000",alpha:1,weight:0}},wick:{shapeRendering:"crispEdges",width:1,fill:{color:"#000000",alpha:1},stroke:{color:"#000000",alpha:1,weight:0}}};return this._mergeStyles(e,n.superclass._getDefaultStyles())}}),e.CandlestickSeries=n},"3.15.0",{requires:["series-range"]});
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('series-candlestick',function(Y,NAME){function CandlestickSeries()
+{CandlestickSeries.superclass.constructor.apply(this,arguments);}
+CandlestickSeries.NAME="candlestickSeries";CandlestickSeries.ATTRS={type:{value:"candlestick"},graphic:{lazyAdd:false,setter:function(val){if(!this.get("rendered")){this.set("rendered",true);}
+this.set("upcandle",val.addShape({type:"path"}));this.set("downcandle",val.addShape({type:"path"}));this.set("wick",val.addShape({type:"path"}));return val;}},upcandle:{},downcandle:{},wick:{}};Y.extend(CandlestickSeries,Y.RangeSeries,{_drawMarkers:function(xcoords,opencoords,highcoords,lowcoords,closecoords,len,width,halfwidth,styles)
+{var upcandle=this.get("upcandle"),downcandle=this.get("downcandle"),candle,wick=this.get("wick"),wickStyles=styles.wick,wickWidth=wickStyles.width,cx,opencoord,highcoord,lowcoord,closecoord,left,right,top,bottom,height,leftPadding=styles.padding.left,up,i,isNumber=Y.Lang.isNumber;upcandle.set(styles.upcandle);downcandle.set(styles.downcandle);wick.set({fill:wickStyles.fill,stroke:wickStyles.stroke,shapeRendering:wickStyles.shapeRendering});upcandle.clear();downcandle.clear();wick.clear();for(i=0;i<len;i=i+1)
+{cx=Math.round(xcoords[i]+leftPadding);left=cx-halfwidth;right=cx+halfwidth;opencoord=Math.round(opencoords[i]);highcoord=Math.round(highcoords[i]);lowcoord=Math.round(lowcoords[i]);closecoord=Math.round(closecoords[i]);up=opencoord>closecoord;top=up?closecoord:opencoord;bottom=up?opencoord:closecoord;height=bottom-top;candle=up?upcandle:downcandle;if(candle&&isNumber(left)&&isNumber(top)&&isNumber(width)&&isNumber(height))
+{candle.drawRect(left,top,width,height);}
+if(isNumber(cx)&&isNumber(highcoord)&&isNumber(lowcoord))
+{wick.drawRect(cx-wickWidth/2,highcoord,wickWidth,lowcoord-highcoord);}}
+upcandle.end();downcandle.end();wick.end();wick.toBack();},_toggleVisible:function(visible)
+{this.get("upcandle").set("visible",visible);this.get("downcandle").set("visible",visible);this.get("wick").set("visible",visible);},destructor:function()
+{var upcandle=this.get("upcandle"),downcandle=this.get("downcandle"),wick=this.get("wick");if(upcandle)
+{upcandle.destroy();}
+if(downcandle)
+{downcandle.destroy();}
+if(wick)
+{wick.destroy();}},_getDefaultStyles:function()
+{var styles={upcandle:{shapeRendering:"crispEdges",fill:{color:"#00aa00",alpha:1},stroke:{color:"#000000",alpha:1,weight:0}},downcandle:{shapeRendering:"crispEdges",fill:{color:"#aa0000",alpha:1},stroke:{color:"#000000",alpha:1,weight:0}},wick:{shapeRendering:"crispEdges",width:1,fill:{color:"#000000",alpha:1},stroke:{color:"#000000",alpha:1,weight:0}}};return this._mergeStyles(styles,CandlestickSeries.superclass._getDefaultStyles());}});Y.CandlestickSeries=CandlestickSeries;},'3.15.0',{"requires":["series-range"]});

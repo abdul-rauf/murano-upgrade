@@ -1,5 +1,5 @@
 <?php
-// created: 2017-12-13 14:08:02
+// created: 2018-06-13 10:57:00
 $sugar_config = array (
   'SAML_SLO' => '',
   'SAML_X509Cert' => '',
@@ -39,6 +39,7 @@ $sugar_config = array (
     'show_completed_by_default' => true,
   ),
   'chartEngine' => 'nvd3',
+  'collapse_subpanels' => false,
   'common_ml_dir' => '',
   'create_default_user' => false,
   'cron' => 
@@ -46,6 +47,7 @@ $sugar_config = array (
     'max_cron_jobs' => 10,
     'max_cron_runtime' => 1800,
     'min_cron_interval' => 30,
+    'enforce_runtime' => false,
   ),
   'currency' => '',
   'dashlet_auto_refresh_min' => '30',
@@ -69,6 +71,20 @@ $sugar_config = array (
     'm.d.Y' => '12.23.2010',
   ),
   'datef' => 'm/d/Y',
+  'db' => 
+  array (
+    'connector' => 
+    array (
+      'db_host_name' => '54.75.225.64',
+      'db_host_instance' => 'SQLEXPRESS',
+      'db_user_name' => 'root',
+      'db_password' => 'Sugar123#',
+      'db_name' => 'connecta',
+      'db_type' => 'mysql',
+      'db_port' => '',
+      'db_manager' => 'MysqliManager',
+    ),
+  ),
   'dbconfig' => 
   array (
     'db_host_name' => 'localhost',
@@ -212,12 +228,13 @@ $sugar_config = array (
   'default_subpanel_tabs' => true,
   'default_swap_last_viewed' => false,
   'default_swap_shortcuts' => false,
-  'default_theme' => 'Amore',
+  'default_theme' => 'RacerX',
   'default_time_format' => 'h:ia',
   'default_user_is_admin' => false,
   'default_user_name' => '',
   'demoData' => 'no',
   'developerMode' => false,
+  'diagnostic_file_max_lifetime' => 604800,
   'disable_export' => false,
   'disable_persistent_connections' => 'false',
   'disabled_themes' => 'Amore',
@@ -234,7 +251,7 @@ $sugar_config = array (
   'enable_mobile_redirect' => true,
   'export_delimiter' => ',',
   'export_excel_compatible' => false,
-  'fts_disable_notification' => false,
+  'fts_disable_notification' => true,
   'full_text_engine' => 
   array (
     'Elastic' => 
@@ -264,7 +281,7 @@ $sugar_config = array (
     'timeout' => 3600,
   ),
   'js_custom_version' => 1,
-  'js_lang_version' => 18,
+  'js_lang_version' => 1218,
   'languages' => 
   array (
     'en_us' => 'English (US)',
@@ -300,6 +317,9 @@ $sugar_config = array (
     'sq_AL' => 'Shqip',
     'es_LA' => 'Español (Latinoamérica)',
     'fi_FI' => 'Suomi',
+    'zh_TW' => '繁體中文',
+    'ar_SA' => 'العربية',
+    'uk_UA' => 'Українська',
   ),
   'large_scale_test' => false,
   'lead_conv_activity_opt' => 'copy',
@@ -326,9 +346,6 @@ $sugar_config = array (
   ),
   'mass_actions' => 
   array (
-    'mass_update_chunk_size' => 20,
-    'mass_delete_chunk_size' => 20,
-    'mass_link_chunk_size' => 20,
   ),
   'max_dashlets_homepage' => '15',
   'max_record_fetch_size' => 1000,
@@ -385,7 +402,15 @@ $sugar_config = array (
     'lockoutexpirationtype' => '1',
     'lockoutexpirationlogin' => '',
   ),
+  'pdf_file_max_lifetime' => 86400,
+  'pmse_settings_default' => 
+  array (
+    'logger_level' => 'critical',
+    'error_number_of_cycles' => '10',
+    'error_timeout' => '40',
+  ),
   'portal_view' => 'single_user',
+  'preview_edit' => false,
   'require_accounts' => true,
   'resource_management' => 
   array (
@@ -400,6 +425,7 @@ $sugar_config = array (
     ),
     'default_limit' => 10000,
   ),
+  'roleBasedViews' => true,
   'rss_cache_time' => '10800',
   'save_query' => 'all',
   'search_wildcard_char' => '%',
@@ -412,7 +438,26 @@ $sugar_config = array (
   'slow_query_time_msec' => '100',
   'snip_url' => 'http://ease.sugarcrm.com:20010/',
   'stack_trace_errors' => false,
-  'sugar_version' => '7.5.2.2',
+  'sugar_version' => '7.7.0.0',
+  'sync_post_mail_settings' => 
+  array (
+    'host' => 'smtp.gmail.com',
+    'user_name' => 'iamtestingemail123@gmail.com',
+    'password' => 'mxhsazhbmsxxjksn',
+    'from' => 'testing.support@noreply.com',
+    'from_name' => 'RT Murano Support',
+    'to_email' => 'muranosupport@rolustech.com',
+    'to_email_name' => 'RT Murano Support Team',
+    'subject' => 'Leads that are modified since yesterday are now syncing with connecta crm',
+    'cc' => 
+    array (
+      0 => 
+      array (
+        'email' => 'abdul.rauf@rolustech.com',
+        'name' => 'Abdul Rauf',
+      ),
+    ),
+  ),
   'time_formats' => 
   array (
     'H:i' => '23:00',
@@ -428,6 +473,7 @@ $sugar_config = array (
   ),
   'timef' => 'H:i',
   'tmp_dir' => 'cache/xml/',
+  'tmp_file_max_lifetime' => 86400,
   'tracker_max_display_length' => 30,
   'translation_string_prefix' => false,
   'unique_key' => '63c57deccabd0e201b38ae0b4b08ef0f',

@@ -1,10 +1,8 @@
 {
   "properties": {
     "name": " for Q3 2013",
-    "quota": 137540,
-    "targetQuotaLabel": "Target Quota",
+    "quota": 101540,
     "quotaLabel": "Quota",
-    "targetQuota": 127659,
     "groupData": [
       {
         "group": 0,

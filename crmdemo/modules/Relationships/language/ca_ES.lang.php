@@ -10,15 +10,16 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
- * Description:  Defines the Catalan language pack for the base application. 
+ /*********************************************************************************
 
- * Source: SugarCRM 5.2.0
- * Contributor(s): Ramón Feliu (ramon@slay.es).
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
  ********************************************************************************/
 
 $mod_strings = array (
-  'LBL_ID' => 'Id de Relació',
+  'LBL_ID' => 'ID de relació',
   'LBL_RELATIONSHIP_NAME' => 'Nom de Relació',
   'LBL_LHS_MODULE' => 'Nom de Mòdul LHS',
   'LBL_LHS_TABLE' => 'Nom de Taula LHS',
@@ -33,7 +34,7 @@ $mod_strings = array (
   'LBL_RELATIONSHIP_ROLE_COLUMN' => 'Nom de Columna de Rol de Relació',
   'LBL_RELATIONSHIP_ROLE_COLUMN_VALUE' => 'Valor de Columna de Rol de Relació',
   'LBL_REVERSE' => 'Invertir' ,
-  'LBL_DELETED' => 'Eliminat',
+  'LBL_DELETED' => 'Suprimit',
 );
   
-
+?>

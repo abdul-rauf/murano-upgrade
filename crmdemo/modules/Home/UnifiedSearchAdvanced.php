@@ -32,6 +32,15 @@ class UnifiedSearchAdvanced {
         $this->cache_display = sugar_cached('modules/unified_search_modules_display.php');
     }
 
+    public static function clearCache()
+    {
+        $file = sugar_cached('modules/unified_search_modules.php');
+
+        if (SugarAutoLoader::fileExists($file)) {
+            SugarAutoLoader::unlink($file);
+        }
+    }
+
 	function getDropDownDiv($tpl = 'modules/Home/UnifiedSearchAdvanced.tpl') {
 		global $app_list_strings, $app_strings;
 
@@ -473,7 +482,9 @@ class UnifiedSearchAdvanced {
             }
             else
             {
-                $json_disabled[] = array("module" => $module, 'label' => $label);
+                if(!empty($data['disabled_module_visible']) && $data['disabled_module_visible'] !== true) {
+                    $json_disabled[] = array("module" => $module, 'label' => $label);
+                }
             }
         }
 

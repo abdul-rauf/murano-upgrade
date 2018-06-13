@@ -13,6 +13,7 @@
 <!-- BEGIN: main -->
 {ERROR_STRING}
 <form name="EditView" method="POST" action="index.php">
+{sugar_csrf_form_token}
 	<input type="hidden" name="module" value="EmailMarketing">
 	<input type="hidden" name="record" value="{ID}">
 	<input type="hidden" name="action">
@@ -73,7 +74,7 @@
     <tr>
         <td scope="row"><slot>{MOD.LBL_FROM_NAME} <span class="required">{APP.LBL_REQUIRED_SYMBOL}</span></slot></td>
         <td ><slot><input name='from_name' id='from_name' tabindex='2' size='25' maxlength='100' type="text" value="{FROM_NAME}"></slot></td>
-        <td scope="row"><slot>{MOD.LBL_FROM_ADDR}</slot></td>
+        <td scope="row"><slot>{MOD.LBL_FROM_ADDR} <span class="required">{APP.LBL_REQUIRED_SYMBOL}</span></slot></td>
         <td class="datafield"><slot><input name='from_addr' id='from_addr' title='{MOD.LBL_FROM_ADDR}' tabindex='2' size='25' maxlength='100' type="text" value="{FROM_ADDR}"></slot></td>
     </tr>
     <tr>

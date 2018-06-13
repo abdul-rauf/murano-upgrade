@@ -169,11 +169,14 @@
          */
         cutAll: function(all) {
             if (all === true) return this.store.cutAll();
-            _.each(this.store.getAll(), function(value, key) {
-                if (key.indexOf(_keyPrefix) === 0) {
-                    this.store.cut(key);
+            // FIXME when we upgrade underscore in SC-5094
+            var obj = this.store.getAll();
+            var keys = _.keys(obj);
+            for (var i = 0, length = keys.length; i < length; i++) {
+                if (keys[i].indexOf(_keyPrefix) === 0) {
+                    this.store.cut(keys[i]);
                 }
-            }, this);
+            }
         }
 
     };

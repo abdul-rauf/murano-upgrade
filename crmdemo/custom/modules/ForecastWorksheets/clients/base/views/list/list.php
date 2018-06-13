@@ -20,7 +20,12 @@ array (
                 'label' => 'LBL_FORECAST',
                 'enabled' => true,
                 'default' => true,
+                'related_fields' => 
+                array (
+                  0 => 'probability',
+                ),
                 'click_to_edit' => true,
+                'sortable' => true,
               ),
               1 => 
               array (
@@ -37,7 +42,7 @@ array (
                 ),
                 'id' => 'PARENT_ID',
                 'link' => true,
-                'sortable' => false,
+                'sortable' => true,
               ),
               2 => 
               array (
@@ -51,7 +56,7 @@ array (
                 ),
                 'id' => 'ACCOUNT_ID',
                 'link' => true,
-                'sortable' => false,
+                'sortable' => true,
               ),
               3 => 
               array (
@@ -64,6 +69,7 @@ array (
                   0 => 'date_closed_timestamp',
                 ),
                 'click_to_edit' => true,
+                'sortable' => true,
               ),
               4 => 
               array (
@@ -76,6 +82,7 @@ array (
                   0 => 'probability',
                 ),
                 'click_to_edit' => true,
+                'sortable' => true,
               ),
               5 => 
               array (
@@ -88,6 +95,7 @@ array (
                   0 => 'sales_stage',
                 ),
                 'align' => 'right',
+                'sortable' => true,
               ),
               6 => 
               array (
@@ -107,6 +115,7 @@ array (
                 'click_to_edit' => true,
                 'convertToBase' => true,
                 'showTransactionalAmount' => true,
+                'sortable' => true,
               ),
               7 => 
               array (
@@ -124,6 +133,7 @@ array (
                 'click_to_edit' => true,
                 'convertToBase' => true,
                 'showTransactionalAmount' => true,
+                'sortable' => true,
               ),
             ),
           ),

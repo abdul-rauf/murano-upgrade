@@ -43,23 +43,26 @@ class One2MBeanRelationship extends One2MRelationship
 
         $lhsLinkName = $this->lhsLink;
         $rhsLinkName = $this->rhsLink;
-
+        $success = true;
         //Since this is bean based, we know updating the RHS's field will overwrite any old value,
         //But we need to use delete to make sure custom logic is called correctly
         if ($rhs->load_relationship($rhsLinkName)) {
             $oldLink = $rhs->$rhsLinkName;
             $prevRelated = $oldLink->getBeans(null);
             foreach($prevRelated as $oldLHS) {
-                if ($oldLHS->id != $lhs->id)
-                    $this->remove($oldLHS, $rhs, false);
+                if ($oldLHS->id != $lhs->id) {
+                    if($this->remove($oldLHS, $rhs, false) === false) {
+                        LoggerManager::getLogger()->error("Warning: failed trying to call remove() for relationship {$this->name} within One2MBeanRelationship->add(). rhsLinkName: $rhsLinkName");
+                        $success = false;
+                    }
+                }
             }
         }
-
         //Make sure we load the current relationship state to the LHS link
         if ((isset($lhs->$lhsLinkName) && is_a(
-            $lhs->$lhsLinkName,
-            "Link2"
-        )) || $lhs->load_relationship($lhsLinkName)
+                    $lhs->$lhsLinkName,
+                    "Link2"
+                )) || $lhs->load_relationship($lhsLinkName)
         ) {
             $lhs->$lhsLinkName->load();
         }
@@ -88,7 +91,7 @@ class One2MBeanRelationship extends One2MRelationship
             SugarRelationship::resaveRelatedBeans(false);
         }
 
-        return true;
+        return $success;
     }
 
     protected function updateLinks($lhs, $lhsLinkName, $rhs, $rhsLinkName)
@@ -104,23 +107,25 @@ class One2MBeanRelationship extends One2MRelationship
 
     protected function updateFields($lhs, $rhs, $additionalFields)
     {
-        //Now update the RHS bean's ID field
+        //Now update the RHS bean's key field
+        $lhsID = $this->def['lhs_key'];
         $rhsID = $this->def['rhs_key'];
-        $rhs->$rhsID = $lhs->id;
+        $rhs->$rhsID = $lhs->$lhsID;
         foreach ($additionalFields as $field => $val) {
             $rhs->$field = $val;
         }
         //Update role fields
-        if (!empty($this->def["relationship_role_column"]) && !empty($this->def["relationship_role_column_value"])) {
-            $roleField = $this->def["relationship_role_column"];
-            $rhs->$roleField = $this->def["relationship_role_column_value"];
+        foreach ($this->getRelationshipRoleColumns() as $column => $value) {
+            if (!empty($value)) {
+                $rhs->$column = $value;
+            }
         }
     }
 
     public function remove($lhs, $rhs, $save = true)
     {
         $rhsID = $this->def['rhs_key'];
-
+        $success = true;
         // If this relationship has already been removed, we can just return.
         // Check both current value of related ID field and the one from fetched row.
         // The latter is valid in case, if relation was removed by changing bean's related ID field to another value.
@@ -129,7 +134,7 @@ class One2MBeanRelationship extends One2MRelationship
             return false;
         }
 
-        $rhs->$rhsID = '';
+        $rhs->$rhsID = null;
 
         if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != "Yes") {
             $this->callBeforeDelete($lhs, $rhs, $this->getLHSLink());
@@ -143,18 +148,20 @@ class One2MBeanRelationship extends One2MRelationship
             // in mass updating and mass deleting
             $nullValue = $rhs->db->massageValue(null, $rhs->field_defs[$rhsID]);
 
-            $sql = "UPDATE {$rhs->table_name} 
+            $sql = "UPDATE {$rhs->table_name}
                     SET {$rhsID} = $nullValue
                     WHERE id = '{$rhs->id}'";
-            $rhs->db->query($sql);
+            if ($rhs->db->query($sql) === false) {
+                $success = false;
+                LoggerManager::getLogger()->error("Warning: failed trying to set null value on rhs for relationship {$this->name} within One2MBeanRelationship->remove(). sql: $sql");
+            }
         }
-
         if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != "Yes") {
             $this->callAfterDelete($lhs, $rhs, $this->getLHSLink());
             $this->callAfterDelete($rhs, $lhs, $this->getRHSLink());
         }
 
-        return true;
+        return $success;
     }
 
     /**
@@ -213,17 +220,18 @@ class One2MBeanRelationship extends One2MRelationship
             )->$lhsKey}' AND {$rhsTable}.deleted=$deleted";
 
             //Check for role column
-            if (!empty($this->def["relationship_role_column"]) && !empty($this->def["relationship_role_column_value"])) {
-                $roleField = $this->def["relationship_role_column"];
-                $roleValue = $this->def["relationship_role_column_value"];
-                $where .= " AND $rhsTable.$roleField = '$roleValue'";
+            $db = DBManagerFactory::getInstance();
+            foreach ($this->getRelationshipRoleColumns() as $column => $value) {
+                if (!empty($value)) {
+                    $where .= " AND $rhsTable.$column = ".$db->quoted($value);
+                }
             }
 
             //Add any optional where clause
             if (!empty($params['where'])) {
                 $relatedSeed = BeanFactory::getBean($this->getRHSModule());
-                $add_where = is_string($params['where']) ? 
-                             $params['where'] : 
+                $add_where = is_string($params['where']) ?
+                             $params['where'] :
                              $this->getOptionalWhereClause($params['where'], $rhsTable, $relatedSeed);
 
                 if (!empty($add_where)) {
@@ -352,11 +360,10 @@ class One2MBeanRelationship extends One2MRelationship
 
         $relTable =  $linkIsLHS ? $jta : $startingTable;
 
-        if (empty($options['ignoreRole']) && !empty($this->def["relationship_role_column"])
-            && !empty($this->def["relationship_role_column_value"])) {
-            $sugar_query->where()->equals(
-                "{$relTable}.{$this->def["relationship_role_column"]}",
-                $this->def["relationship_role_column_value"]);
+        if (empty($options['ignoreRole'])) {
+            foreach ($this->getRelationshipRoleColumns() as $column => $value) {
+                $sugar_query->where()->equals("{$relTable}.$column", $value);
+            }
         }
 
         $this->addCustomToSugarQuery($sugar_query, $options, $linkIsLHS, $jta);
@@ -452,10 +459,10 @@ class One2MBeanRelationship extends One2MRelationship
      */
     public function relationship_exists($lhs, $rhs)
     {
-        // we need the key that is stored on the rhs to compare tok
         $lhsIDName = $this->def['rhs_key'];
+        $rhsIDName = $this->def['lhs_key'];
 
-        return (isset($rhs->fetched_row[$lhsIDName]) && $rhs->$lhsIDName == $rhs->fetched_row[$lhsIDName] && $rhs->$lhsIDName == $lhs->id);
+        return (isset($rhs->fetched_row[$lhsIDName]) && $rhs->$lhsIDName == $rhs->fetched_row[$lhsIDName] && $rhs->$lhsIDName == $lhs->$rhsIDName);
     }
 
     public function getRelationshipTable()

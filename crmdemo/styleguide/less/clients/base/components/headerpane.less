@@ -32,6 +32,7 @@
     display: table-row;
     margin: 0;
     vertical-align: top;
+    color: @gray;
 
     > .record-cell {
       display: table-cell;
@@ -43,7 +44,7 @@
         display: none;
       }
       &.edit {
-        padding: 3px 0 0 13px;
+        padding: 2px 13px 0 13px;
         .record-cell {
           white-space: normal;
           overflow: visible;
@@ -55,6 +56,9 @@
         .record-label {
           left: 20px;
         }
+      }
+      &:last-of-type {
+        width: 100%;
       }
       .record-cell {
         white-space: nowrap;
@@ -75,6 +79,13 @@
         padding-top: 0;
         margin-top: -4px;
       }
+
+      &[data-type="label"] {
+        padding-right: 0;
+        &+ [data-type="collection-count"] {
+          padding-left: 5px;
+        }
+      }
     }
   }
 
@@ -87,15 +98,16 @@
     display: inline-block;
   }
 
+  .count {
+    white-space: nowrap;
+    min-width: 103px;
+  }
+
   .record-edit-link-wrapper {
-    width: 100%;
-    height: calc(100% - 16px);
-    top: 0;
-    left: 0;
-    z-index: 0;
+    height: 30px;
     .record-edit-link {
       margin-left: 0;
-      .icon-pencil {
+      .fa-pencil {
         left: -16px !important;
         top: 4px !important;
       }
@@ -107,6 +119,17 @@
     color: @grayLight;
     line-height: @fontSizeSmall + 2;
     padding: 0 0 0 7px;
+    display: none;
+  }
+
+  .record-cell.edit {
+    .record-label {
+      display: block;
+    }
+  }
+
+  span[data-type="label"] .ellipsis_inline {
+    padding: 0;
   }
 
   span[data-type="image"],
@@ -139,36 +162,6 @@
   span[data-type="name"] .table-cell-wrapper {
     width: 100%;
   }
-  span[data-type="fullname"] {
-    .index {
-      display: table;
-      > .detail,
-      > .edit {
-        display: table-row;
-        .record-cell {
-          display: table-cell;
-        }
-      }
-    }
-    span[data-type="enum"] {
-      width: 20%;
-    }
-    span[data-type="text"] {
-      width: 40%;
-      .record-label {
-        left: 7px;
-      }
-      input[type="text"] {
-        margin: 0px 0 0;
-      }
-    }
-    &.edit {
-      padding-left: 5px;
-    }
-    .detail .record-cell {
-      max-width: 180px;
-    }
-  }
 
   span[data-type="enum"],
   span[data-type="relate"] {
@@ -198,42 +191,51 @@
     min-width: 275px;
   }
 
-  span[data-type="fieldset-with-labels"] {
-    padding-bottom: 4px;
-  }
-
   span[data-type="follow"],
-  span[data-type="badge"] {
-    padding: 18px 16px 0 0;
-    .label {
-      font-size: 0.7em;
-      line-height: 0.7em;
-      padding: 6px 4px 2px;
-      height: 10px;
+  span[data-type="badge"],
+  span[data-type="badge-select"],
+  span[data-type="event-status"],
+  span[data-type="status"] {
+    padding: 19px 16px 0 0;
+    line-height: @fontSizeMini;
+    &:not(.edit) .label {
+      font-weight: 500;
+      font-size: @fontSizeMini;
+      line-height: @fontSizeMini;
+      min-width: 50px;
+      padding: 3px 6px 5px;
+      margin-top: 0px;
     }
   }
-  span[data-type="badge"] {
-    .label {
-      color: @grayDark;
-      background: transparent;
-      border: 1px solid @gray;
-      font-weight: 500;
+  span[data-type="badge-select"],
+  span[data-type="event-status"],
+  span[data-type="status"] {
+    .record-label {
+      padding-left: 1px;
     }
-    .label.label-success {
-      color: @white;
-      background-color: @success;
-      border: 1px solid @success;
-      font-weight: 600;
+    .select2-container .select2-choice {
+      border: 1px solid transparent;
+      background-image: none;
+      background-color: transparent;
+      padding-left: 0;
+      .box-shadow(none);
+    }
+  }
+  h1 > .record-cell.edit {
+    &[data-type="badge-select"],
+    &[data-type="event-status"],
+    &[data-type="status"] {
+      padding: 2px 11px 0 0;
     }
   }
 
   span[data-type="favorite"] {
     font-size: @baseFontSize;
     padding: 19px 16px 0 0;
-    [class="icon-favorite"] {
+    .fa {
       color: @grayLight;
     }
-    &:hover [class="icon-favorite"] {
+    &:hover .fa {
       color: @gray;
     }
   }
@@ -264,7 +266,7 @@
     .btn-group-previous-next {
       padding-left: 0;
       .btn {
-        [class^="icon-"] {
+        .fa {
           font-size: @baseFontSize;
         }
       }
@@ -288,14 +290,14 @@
       left: 0;
       top: 0;
     }
-    [class^="icon-"]{
+    .fa {
       font-size: @fontSizeHeader;
       font-weight: 500;
     }
-    .icon-double-angle-right {
+    .fa-angle-double-right {
       margin: 0 -1px 0 1px;
     }
-    .icon-double-angle-left {
+    .fa-angle-double-left {
       margin: 0 1px 0 -1px;
     }
   }

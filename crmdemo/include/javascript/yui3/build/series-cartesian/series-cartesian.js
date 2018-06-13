@@ -1,9 +1,123 @@
 /*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("series-cartesian",function(e,t){var n=e.Lang;e.CartesianSeries=e.Base.create("cartesianSeries",e.SeriesBase,[],{_xDisplayName:null,_yDisplayName:null,_leftOrigin:null,_bottomOrigin:null,addListeners:function(){var t=this.get("xAxis"),n=this.get("yAxis");t&&(this._xDataReadyHandle=t.after("dataReady",e.bind(this._xDataChangeHandler,this)),this._xDataUpdateHandle=t.after("dataUpdate",e.bind(this._xDataChangeHandler,this))),n&&(this._yDataReadyHandle=n.after("dataReady",e.bind(this._yDataChangeHandler,this)),this._yDataUpdateHandle=n.after("dataUpdate",e.bind(this._yDataChangeHandler,this))),this._xAxisChangeHandle=this.after("xAxisChange",this._xAxisChangeHandler),this._yAxisChangeHandle=this.after("yAxisChange",this._yAxisChangeHandler),this._stylesChangeHandle=this.after("stylesChange",function(){var e=this._updateAxisBase();e&&this.draw()}),this._widthChangeHandle=this.after("widthChange",function(){var e=this._updateAxisBase();e&&this.draw()}),this._heightChangeHandle=this.after("heightChange",function(){var e=this._updateAxisBase();e&&this.draw()}),this._visibleChangeHandle=this.after("visibleChange",this._handleVisibleChange)},_xAxisChangeHandler:function(){var t=this.get("xAxis");t.after("dataReady",e.bind(this._xDataChangeHandler,this)),t.after("dataUpdate",e.bind(this._xDataChangeHandler,this))},_yAxisChangeHandler:function(){var t=this.get("yAxis");t.after("dataReady",e.bind(this._yDataChangeHandler,this)),t.after("dataUpdate",e.bind(this._yDataChangeHandler,this))},GUID:"yuicartesianseries",_xDataChangeHandler:function(){var e=this._updateAxisBase();e&&this.draw()},_yDataChangeHandler:function(){var e=this._updateAxisBase();e&&this.draw()},_updateAxisBase:function(){var t=this.get("xAxis"),r=this.get("yAxis"),i=this.get("xKey"),s=this.get("yKey"),o,u,a,f,l;return!t||!r||!i||!s?l=!1:(u=t.getDataByKey(i),o=r.getDataByKey(s),n.isArray(i)?a=u&&e.Object.size(u)>0?this._checkForDataByKey(u,i):!1:a=u?!0:!1,n.isArray(s)?f=o&&e.Object.size(o)>0?this._checkForDataByKey(o,s):!1:f=o?!0:!1,l=a&&f,l&&(this.set("xData",u),this.set("yData",o))),l},_checkForDataByKey:function(e,t){var n,r=t.length,i=!1;for(n=0;n<r;n+=1)if(e[t[n]]){i=!0;break}return i},validate:function(){this.get("xData")&&this.get("yData")||this._updateAxisBase()?this.draw():this.fire("drawingComplete")},setAreaData:function(){var e=this.get("width"),t=this.get("height"),n=this.get("xAxis"),r=this.get("yAxis"),i=this._copyData(this.get("xData")),s=this._copyData(this.get("yData")),o=this.get("direction"),u=o==="vertical"?s.length:i.length,a=n.getEdgeOffset(n.getTotalMajorUnits(),e),f=r.getEdgeOffset(r.getTotalMajorUnits(),t),l=this.get("styles").padding,c=l.left,h=l.top,p=e-(c+l.right+a*2),d=t-(h+l.bottom+f*2),v=n.get("maximum"),m=n.get("minimum"),g=r.get("maximum"),y=r.get("minimum"),b=this.get("graphic"),w=r.get("type"),E=w==="numeric"||w==="stacked",S,x,T=n.getOrigin(),N=r.getOrigin();b.set("width",e),b.set("height",t),a+=c,f=E?f+d+h+l.bottom:h+f,this._leftOrigin=Math.round(n._getCoordFromValue(m,v,p,T,a,!1)),this._bottomOrigin=Math.round(r._getCoordFromValue(y,g,d,N,f,E)),S=this._getCoords(m,v,p,i,n,a,!1),x=this._getCoords(y,g,d,s,r,f,E),this.set("xcoords",S),this.set("ycoords",x),this._dataLength=u,this._setXMarkerPlane(S,u),this._setYMarkerPlane(x,u)},_getCoords:function(e,t,r,i,s,o,u){var a,f;if(n.isArray(i))a=s._getCoordsFromValues(e,t,r,i,o,u);else{a={};for(f in i)i.hasOwnProperty(f)&&(a[f]=this._getCoords.apply(this,[e,t,r,i[f],s,o,u]))}return a},_copyData:function(e){var t,r;if(n.isArray(e))t=e.concat();else{t={};for(r in e)e.hasOwnProperty(r)&&(t[r]=e[r].concat())}return t},_setXMarkerPlane:function(e,t){var r=0,i=[],s=this.get("xMarkerPlaneOffset"),o;if(n.isArray(e)){for(r=0;r<t;r+=1)o=e[r],i.push({start:o-s,end:o+s});this.set("xMarkerPlane",i)}},_setYMarkerPlane:function(e,t){var r=0,i=[],s=this.get("yMarkerPlaneOffset"),o;if(n.isArray(e)){for(r=0;r<t;r+=1)o=e[r],i.push({start:o-s,end:o+s});this.set("yMarkerPlane",i)}},_getFirstValidIndex:function(e){var t,r=-1,i=e.length;while(!n.isNumber(t)&&r<i)r+=1,t=e[r];return r},_getLastValidIndex:function(e){var t,r=e.length,i=-1;while(!n.isNumber(t)&&r>i)r-=1,t=e[r];return r},draw:function(){var e=this.get("width"),t=this.get("height"),n,r;if(this.get("rendered")&&isFinite(e)&&isFinite(t)&&e>0&&t>0&&(this.get("xData")&&this.get("yData")||this._updateAxisBase())){if(this._drawing){this._callLater=!0;return}this._drawing=!0,this._callLater=!1,this.setAreaData(),n=this.get("xcoords"),r=this.get("ycoords"),n&&r&&n.length>0&&this.drawSeries(),this._drawing=!1,this._callLater?this.draw():(this._toggleVisible(this.get("visible")),this.fire("drawingComplete"))}},_defaultPlaneOffset:4,destructor:function(){this.get("rendered")&&(this._xDataReadyHandle&&this._xDataReadyHandle.detach(),this._xDataUpdateHandle&&this._xDataUpdateHandle.detach(),this._yDataReadyHandle&&this._yDataReadyHandle.detach(),this._yDataUpdateHandle&&this._yDataUpdateHandle.detach(),this._xAxisChangeHandle&&this._xAxisChangeHandle.detach(),this._yAxisChangeHandle&&this._yAxisChangeHandle.detach())}},{ATTRS:{seriesTypeCollection:{},xDisplayName:{getter:function(){return this._xDisplayName||this.get("xKey")},setter:function(e){return this._xDisplayName=e.toString(),e}},yDisplayName:{getter:function(){return this._yDisplayName||this.get("yKey")},setter:function(e){return this._yDisplayName=e.toString(),e}},categoryDisplayName:{lazyAdd:!1,getter:function(){return this.get("direction")==="vertical"?this.get("yDisplayName"):this.get("xDisplayName")},setter:function(e){return this.get("direction")==="vertical"?this._yDisplayName=e:this._xDisplayName=e,e}},valueDisplayName:{lazyAdd:!1,getter:function(){return this.get("direction")==="vertical"?this.get("xDisplayName"):this.get("yDisplayName")},setter:function(e){return this.get("direction")==="vertical"?this._xDisplayName=e:this._yDisplayName=e,e}},type:{value:"cartesian"},order:{},graphOrder:{},xcoords:{},ycoords:{},xAxis:{},yAxis:{},xKey:{setter:function(e){return n
-.isArray(e)?e:e.toString()}},yKey:{setter:function(e){return n.isArray(e)?e:e.toString()}},xData:{},yData:{},xMarkerPlane:{},yMarkerPlane:{},xMarkerPlaneOffset:{getter:function(){var e=this.get("styles").marker;return e&&e.width&&isFinite(e.width)?e.width*.5:this._defaultPlaneOffset}},yMarkerPlaneOffset:{getter:function(){var e=this.get("styles").marker;return e&&e.height&&isFinite(e.height)?e.height*.5:this._defaultPlaneOffset}},direction:{value:"horizontal"}}})},"3.15.0",{requires:["series-base"]});
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('series-cartesian',function(Y,NAME){var Y_Lang=Y.Lang;Y.CartesianSeries=Y.Base.create("cartesianSeries",Y.SeriesBase,[],{_xDisplayName:null,_yDisplayName:null,_leftOrigin:null,_bottomOrigin:null,addListeners:function()
+{var xAxis=this.get("xAxis"),yAxis=this.get("yAxis");if(xAxis)
+{this._xDataReadyHandle=xAxis.after("dataReady",Y.bind(this._xDataChangeHandler,this));this._xDataUpdateHandle=xAxis.after("dataUpdate",Y.bind(this._xDataChangeHandler,this));}
+if(yAxis)
+{this._yDataReadyHandle=yAxis.after("dataReady",Y.bind(this._yDataChangeHandler,this));this._yDataUpdateHandle=yAxis.after("dataUpdate",Y.bind(this._yDataChangeHandler,this));}
+this._xAxisChangeHandle=this.after("xAxisChange",this._xAxisChangeHandler);this._yAxisChangeHandle=this.after("yAxisChange",this._yAxisChangeHandler);this._stylesChangeHandle=this.after("stylesChange",function(){var axesReady=this._updateAxisBase();if(axesReady)
+{this.draw();}});this._widthChangeHandle=this.after("widthChange",function(){var axesReady=this._updateAxisBase();if(axesReady)
+{this.draw();}});this._heightChangeHandle=this.after("heightChange",function(){var axesReady=this._updateAxisBase();if(axesReady)
+{this.draw();}});this._visibleChangeHandle=this.after("visibleChange",this._handleVisibleChange);},_xAxisChangeHandler:function()
+{var xAxis=this.get("xAxis");xAxis.after("dataReady",Y.bind(this._xDataChangeHandler,this));xAxis.after("dataUpdate",Y.bind(this._xDataChangeHandler,this));},_yAxisChangeHandler:function()
+{var yAxis=this.get("yAxis");yAxis.after("dataReady",Y.bind(this._yDataChangeHandler,this));yAxis.after("dataUpdate",Y.bind(this._yDataChangeHandler,this));},GUID:"yuicartesianseries",_xDataChangeHandler:function()
+{var axesReady=this._updateAxisBase();if(axesReady)
+{this.draw();}},_yDataChangeHandler:function()
+{var axesReady=this._updateAxisBase();if(axesReady)
+{this.draw();}},_updateAxisBase:function()
+{var xAxis=this.get("xAxis"),yAxis=this.get("yAxis"),xKey=this.get("xKey"),yKey=this.get("yKey"),yData,xData,xReady,yReady,ready;if(!xAxis||!yAxis||!xKey||!yKey)
+{ready=false;}
+else
+{xData=xAxis.getDataByKey(xKey);yData=yAxis.getDataByKey(yKey);if(Y_Lang.isArray(xKey))
+{xReady=(xData&&Y.Object.size(xData)>0)?this._checkForDataByKey(xData,xKey):false;}
+else
+{xReady=xData?true:false;}
+if(Y_Lang.isArray(yKey))
+{yReady=(yData&&Y.Object.size(yData)>0)?this._checkForDataByKey(yData,yKey):false;}
+else
+{yReady=yData?true:false;}
+ready=xReady&&yReady;if(ready)
+{this.set("xData",xData);this.set("yData",yData);}}
+return ready;},_checkForDataByKey:function(obj,keys)
+{var i,len=keys.length,hasData=false;for(i=0;i<len;i=i+1)
+{if(obj[keys[i]])
+{hasData=true;break;}}
+return hasData;},validate:function()
+{if((this.get("xData")&&this.get("yData"))||this._updateAxisBase())
+{this.draw();}
+else
+{this.fire("drawingComplete");}},setAreaData:function()
+{var w=this.get("width"),h=this.get("height"),xAxis=this.get("xAxis"),yAxis=this.get("yAxis"),xData=this._copyData(this.get("xData")),yData=this._copyData(this.get("yData")),direction=this.get("direction"),dataLength=direction==="vertical"?yData.length:xData.length,xOffset=xAxis.getEdgeOffset(xAxis.getTotalMajorUnits(),w),yOffset=yAxis.getEdgeOffset(yAxis.getTotalMajorUnits(),h),padding=this.get("styles").padding,leftPadding=padding.left,topPadding=padding.top,dataWidth=w-(leftPadding+padding.right+xOffset*2),dataHeight=h-(topPadding+padding.bottom+yOffset*2),xMax=xAxis.get("maximum"),xMin=xAxis.get("minimum"),yMax=yAxis.get("maximum"),yMin=yAxis.get("minimum"),graphic=this.get("graphic"),yAxisType=yAxis.get("type"),reverseYCoords=(yAxisType==="numeric"||yAxisType==="stacked"),xcoords,ycoords,xOriginValue=xAxis.getOrigin(),yOriginValue=yAxis.getOrigin();graphic.set("width",w);graphic.set("height",h);xOffset=xOffset+leftPadding;yOffset=reverseYCoords?yOffset+dataHeight+topPadding+padding.bottom:topPadding+yOffset;this._leftOrigin=Math.round(xAxis._getCoordFromValue(xMin,xMax,dataWidth,xOriginValue,xOffset,false));this._bottomOrigin=Math.round(yAxis._getCoordFromValue(yMin,yMax,dataHeight,yOriginValue,yOffset,reverseYCoords));xcoords=this._getCoords(xMin,xMax,dataWidth,xData,xAxis,xOffset,false);ycoords=this._getCoords(yMin,yMax,dataHeight,yData,yAxis,yOffset,reverseYCoords);this.set("xcoords",xcoords);this.set("ycoords",ycoords);this._dataLength=dataLength;this._setXMarkerPlane(xcoords,dataLength);this._setYMarkerPlane(ycoords,dataLength);},_getCoords:function(min,max,length,data,axis,offset,reverse)
+{var coords,key;if(Y_Lang.isArray(data))
+{coords=axis._getCoordsFromValues(min,max,length,data,offset,reverse);}
+else
+{coords={};for(key in data)
+{if(data.hasOwnProperty(key))
+{coords[key]=this._getCoords.apply(this,[min,max,length,data[key],axis,offset,reverse]);}}}
+return coords;},_copyData:function(val)
+{var copy,key;if(Y_Lang.isArray(val))
+{copy=val.concat();}
+else
+{copy={};for(key in val)
+{if(val.hasOwnProperty(key))
+{copy[key]=val[key].concat();}}}
+return copy;},_setXMarkerPlane:function(coords,dataLength)
+{var i=0,xMarkerPlane=[],xMarkerPlaneOffset=this.get("xMarkerPlaneOffset"),nextX;if(Y_Lang.isArray(coords))
+{for(i=0;i<dataLength;i=i+1)
+{nextX=coords[i];xMarkerPlane.push({start:nextX-xMarkerPlaneOffset,end:nextX+xMarkerPlaneOffset});}
+this.set("xMarkerPlane",xMarkerPlane);}},_setYMarkerPlane:function(coords,dataLength)
+{var i=0,yMarkerPlane=[],yMarkerPlaneOffset=this.get("yMarkerPlaneOffset"),nextY;if(Y_Lang.isArray(coords))
+{for(i=0;i<dataLength;i=i+1)
+{nextY=coords[i];yMarkerPlane.push({start:nextY-yMarkerPlaneOffset,end:nextY+yMarkerPlaneOffset});}
+this.set("yMarkerPlane",yMarkerPlane);}},_getFirstValidIndex:function(coords)
+{var coord,i=-1,limit=coords.length;while(!Y_Lang.isNumber(coord)&&i<limit)
+{i+=1;coord=coords[i];}
+return i;},_getLastValidIndex:function(coords)
+{var coord,i=coords.length,limit=-1;while(!Y_Lang.isNumber(coord)&&i>limit)
+{i-=1;coord=coords[i];}
+return i;},draw:function()
+{var w=this.get("width"),h=this.get("height"),xcoords,ycoords;if(this.get("rendered"))
+{if((isFinite(w)&&isFinite(h)&&w>0&&h>0)&&((this.get("xData")&&this.get("yData"))||this._updateAxisBase()))
+{if(this._drawing)
+{this._callLater=true;return;}
+this._drawing=true;this._callLater=false;this.setAreaData();xcoords=this.get("xcoords");ycoords=this.get("ycoords");if(xcoords&&ycoords&&xcoords.length>0)
+{this.drawSeries();}
+this._drawing=false;if(this._callLater)
+{this.draw();}
+else
+{this._toggleVisible(this.get("visible"));this.fire("drawingComplete");}}}},_defaultPlaneOffset:4,destructor:function()
+{if(this.get("rendered"))
+{if(this._xDataReadyHandle)
+{this._xDataReadyHandle.detach();}
+if(this._xDataUpdateHandle)
+{this._xDataUpdateHandle.detach();}
+if(this._yDataReadyHandle)
+{this._yDataReadyHandle.detach();}
+if(this._yDataUpdateHandle)
+{this._yDataUpdateHandle.detach();}
+if(this._xAxisChangeHandle)
+{this._xAxisChangeHandle.detach();}
+if(this._yAxisChangeHandle)
+{this._yAxisChangeHandle.detach();}}}},{ATTRS:{seriesTypeCollection:{},xDisplayName:{getter:function()
+{return this._xDisplayName||this.get("xKey");},setter:function(val)
+{this._xDisplayName=val.toString();return val;}},yDisplayName:{getter:function()
+{return this._yDisplayName||this.get("yKey");},setter:function(val)
+{this._yDisplayName=val.toString();return val;}},categoryDisplayName:{lazyAdd:false,getter:function()
+{return this.get("direction")==="vertical"?this.get("yDisplayName"):this.get("xDisplayName");},setter:function(val)
+{if(this.get("direction")==="vertical")
+{this._yDisplayName=val;}
+else
+{this._xDisplayName=val;}
+return val;}},valueDisplayName:{lazyAdd:false,getter:function()
+{return this.get("direction")==="vertical"?this.get("xDisplayName"):this.get("yDisplayName");},setter:function(val)
+{if(this.get("direction")==="vertical")
+{this._xDisplayName=val;}
+else
+{this._yDisplayName=val;}
+return val;}},type:{value:"cartesian"},order:{},graphOrder:{},xcoords:{},ycoords:{},xAxis:{},yAxis:{},xKey:{setter:function(val)
+{if(Y_Lang.isArray(val))
+{return val;}
+else
+{return val.toString();}}},yKey:{setter:function(val)
+{if(Y_Lang.isArray(val))
+{return val;}
+else
+{return val.toString();}}},xData:{},yData:{},xMarkerPlane:{},yMarkerPlane:{},xMarkerPlaneOffset:{getter:function(){var marker=this.get("styles").marker;if(marker&&marker.width&&isFinite(marker.width))
+{return marker.width*0.5;}
+return this._defaultPlaneOffset;}},yMarkerPlaneOffset:{getter:function(){var marker=this.get("styles").marker;if(marker&&marker.height&&isFinite(marker.height))
+{return marker.height*0.5;}
+return this._defaultPlaneOffset;}},direction:{value:"horizontal"}}});},'3.15.0',{"requires":["series-base"]});

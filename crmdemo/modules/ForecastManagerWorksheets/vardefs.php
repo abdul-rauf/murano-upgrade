@@ -65,22 +65,6 @@ $dictionary['ForecastManagerWorksheet'] = array(
             'type' => 'currency',
             'is_base_currency' => true
         ),
-        'currency_id' =>
-        array(
-            'name' => 'currency_id',
-            'vname' => 'LBL_CURRENCY_ID',
-            'type' => 'currency_id',
-            'dbType' => 'id',
-            'function' => 'getCurrencies',
-            'function_bean' => 'Currencies',
-        ),
-        'base_rate' =>
-        array(
-            'name' => 'base_rate',
-            'vname' => 'LBL_BASE_RATE',
-            'type' => 'decimal',
-            'len' => '26,6',
-        ),
         'timeperiod_id' =>
         array(
             'name' => 'timeperiod_id',
@@ -173,7 +157,19 @@ $dictionary['ForecastManagerWorksheet'] = array(
             'type' => 'index',
             'fields' => array('assigned_user_id', 'user_id', 'timeperiod_id', 'draft', 'deleted')
         )
-    )
+    ),
+    // @TODO Fix the Default and Basic SugarObject templates so that Basic
+    // implements Default. This would allow the application of various
+    // implementations on Basic without forcing Default to have those so that
+    // situations like this - implementing taggable - doesn't have to apply to
+    // EVERYTHING. Since there is no distinction between basic and default for
+    // sugar objects templates yet, we need to forecefully remove the taggable
+    // implementation fields. Once there is a separation of default and basic
+    // templates we can safely remove these as this module will implement
+    // default instead of basic.
+    'ignore_templates' => array(
+        'taggable',
+    ),
 );
 
 VardefManager::createVardef(
@@ -183,5 +179,6 @@ VardefManager::createVardef(
         'default',
         'assignable',
         'team_security',
+        'currency'
     )
 );

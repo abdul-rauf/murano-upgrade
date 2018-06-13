@@ -23,10 +23,11 @@ class SugarUpgradeFixTotalAmount extends UpgradeScript
 
             $sql = "UPDATE products
                 SET total_amount = ( discount_price * quantity ) -
-                    CASE
-                        WHEN discount_select = 1 THEN (discount_price * quantity ) * (discount_amount / 100 )
-                        ELSE discount_amount
-                    END";
+                  CASE
+                    WHEN discount_select = 1
+                    THEN (discount_price * quantity) * (discount_amount / 100)
+                    ELSE discount_amount
+                  END";
 
             $results = $this->db->query($sql);
             $total_updated = $this->db->getAffectedRowCount($results);

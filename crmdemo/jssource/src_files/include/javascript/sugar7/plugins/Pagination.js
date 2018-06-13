@@ -82,7 +82,6 @@
                 pageComponent = app.view.createView({
                     context: this.context,
                     name: 'list-bottom',
-                    className: 'block-footer',
                     meta: {
                         template: 'list-bottom.dashlet-bottom'
                     },
@@ -115,6 +114,7 @@
                 }
 
                 options = options || {};
+                var originalOptions = _.extend({}, this.collection.options, options);
                 var defaultOnSuccess = options.success;
                 options.success = null;
                 if (_.isFunction(this.getPaginationOptions)) {
@@ -152,13 +152,20 @@
                         this._renderRow(this.collection.get(model.id));
                     }, this);
                     this.trigger('render:rows');
-
-                    this.trigger('render');
                 }, this);
 
                 if (this.limit) {
                     options.limit = this.limit;
                 }
+
+                var _complete = options.complete;
+                options.complete = _.bind(function(xhr, status) {
+                    if (_.isFunction(_complete)) {
+                        _complete.call(this, xhr, status);
+                    }
+                    this.collection.options = originalOptions;
+                }, this);
+
                 beanCollection.paginate(options);
             },
 

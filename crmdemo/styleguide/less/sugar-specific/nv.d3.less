@@ -20,8 +20,10 @@ svg {
 }
 
 svg text {
-  font: normal @chartTextSize @sansFontFamily;
+  font: normal @chartTextSize 'Helvetica Neue', Arial, sans-serif;
   fill: @textColor;
+  stroke: none;
+  cursor: default;
 }
 
 svg .title {
@@ -47,7 +49,7 @@ svg .title {
 
 .nv-chart-print {
   visibility: hidden;
-  position: absolute;
+  position: absolute !important;
   left: -10000px;
   width: 720px;
   height: 480px;
@@ -64,6 +66,12 @@ svg .title {
   .nv-legend text {
     font-size: @fontSizeMedium;
   }
+}
+
+.nv-chart-background {
+  fill: transparent;
+  stroke-width: 0.5px;
+  stroke: @grayLight;
 }
 
 .nv-noData {
@@ -85,6 +93,7 @@ svg .title {
   min-width: 300px;
   min-height: 100px;
   overflow: hidden;
+  position: relative;
   /*
     Minimum height and width is a good idea to prevent negative SVG dimensions...
     For example width should be =< margin.left + margin.right + 1,
@@ -109,29 +118,6 @@ svg .title {
 
 .nv-chart-texture {
   background: url(@textureTertiary);
-}
-
-/**********
-* Styleguide
-*/
-
-.nv-demo {
-  padding: 20px;
-  width: 100%;
-  height: 100%;
-  .box-sizing(border-box);
-}
-
-body.full-screen {
-  height: 100%;
-  .nv-chart {
-    min-width: 100px;
-    min-height: 100px;
-    max-height: none;
-    border: 1px solid black;
-    height: 100%;
-    width: 100%;
-  }
 }
 
 
@@ -171,10 +157,13 @@ body.full-screen {
   line {
     fill: none;
   }
+  text {
+    cursor: pointer;
+  }
 }
 
 .nv-legend .disabled circle {
-  fill-opacity: 0;
+  fill: #fff;
 }
 
 .nv-legend-background {
@@ -191,6 +180,14 @@ body.full-screen {
     text-decoration: underline;
   }
 }
+
+.nv-lineLegend .nv-series {
+  cursor: default;
+  text {
+    cursor: default;
+  }
+}
+
 /**********
 *  Axes
 */
@@ -204,7 +201,8 @@ body.full-screen {
 }
 
 .nv-axis path.domain {
-  stroke-opacity: .75;
+  stroke-width: 2px;
+  stroke: #bbb;
 }
 
 .nv-axis line,
@@ -213,6 +211,7 @@ body.full-screen {
   stroke: @chartTickColor;
   stroke-width: @chartTickWidth;
   stroke-opacity: .3;
+  shape-rendering: crispEdges;
 }
 
 .nv-axis line.zero {
@@ -222,7 +221,9 @@ body.full-screen {
 .nv-axis .nv-axisMaxMin text {
   font-weight: bold;
 }
-
+// .nv-axis .nv-axisMaxMin line {
+//   stroke-opacity: .75;
+// }
 .nv-x.nv-axis text {
   font-size: @chartTextSize;
 }
@@ -268,12 +269,22 @@ body.full-screen {
 *  MultiBars
 */
 
-.nv-multibar .nv-groups rect,
-.nv-multibarHorizontal .nv-groups rect,
-.nv-discretebar .nv-groups rect {
-  stroke-opacity: 1;
-  stroke-width: 2px;
-  stroke: @white;
+.nv-multibar .nv-groups,
+.nv-multibarHorizontal .nv-groups,
+.nv-discretebar .nv-groups {
+  rect {
+    stroke-opacity: 1;
+    stroke-width: 2px;
+    stroke: @white;
+    fill-opacity: 1;
+    fill: inherit;
+  }
+  .nv-inactive rect {
+    fill-opacity: 0.5;
+  }
+  .nv-inactive:hover rect {
+    fill-opacity: 0.75;
+  }
 }
 
 .nv-multibar .nv-groups rect:hover,
@@ -286,7 +297,7 @@ body.full-screen {
 .nv-discretebar .nv-groups text,
 .nv-multibar .nv-groups text,
 .nv-multibarHorizontal .nv-groups text {
-  font-weight: bold;
+  //font-weight: bold;
   fill: rgba(0,0,0,1);
   stroke: rgba(0,0,0,0);
 }
@@ -298,6 +309,26 @@ body.full-screen {
 
 .nv-pie .hover path {
   fill-opacity: .7;
+}
+
+.nv-pie {
+  .nv-inactive path {
+    fill-opacity: 0.5;
+  }
+  .nv-inactive:hover path {
+    fill-opacity: 0.75;
+  }
+}
+
+.nv-holeWrap text{
+  text-anchor: middle;
+}
+text.nv-pie-hole-value {
+  font-size: 32px;
+  font-weight: bold;
+}
+text.nv-pie-hole-label {
+  font-size: 11px;
 }
 
 /**********
@@ -322,19 +353,20 @@ body.full-screen {
 }
 
 .nv-line .nv-scatter .nv-groups .nv-point {
-  fill-opacity: 0;
-  stroke-opacity: 0;
+  fill-opacity: 1;
+  stroke-opacity: 1;
+  stroke: #fff;
 }
 
 .nv-scatter.nv-single-point .nv-groups .nv-point {
-  fill-opacity: .5;
-  stroke-opacity: .5;
+  stroke-width: 2px;
 }
 
 .nv-scatter .nv-groups .nv-point.hover,
 .nv-groups .nv-point.hover {
-  stroke-width: 20px;
+  stroke-width: 16px;
   stroke-opacity: .5 !important;
+  stroke: inherit;
 }
 
 .nv-point-paths path {
@@ -519,24 +551,9 @@ body.full-screen {
   .nv-y.nv-axis .domain {
     display: none;
   }
-  .nv-y.nv-axis .tick line {
-    stroke-width: 2px;
-    stroke: #bbb;
-  }
   .nv-y.nv-axis text.nv-quotaValue,
   .nv-y.nv-axis text.nv-targetQuotaValue {
     font-weight: bold;
-  }
-  .nv-x.nv-axis .domain {
-    stroke-width: 2px;
-    stroke: #bbb;
-  }
-  svg text {
-    font-size: 12px;
-    fill: #aaa;
-  }
-  svg text.nv-legend-link {
-    fill: @linkColor;
   }
   .nv-multibar .nv-groups rect {
     stroke-opacity: 1;
@@ -553,17 +570,7 @@ body.full-screen {
   .nv-linesWrap2 .nv-scatter .nv-groups circle {
     stroke: @white;
   }
-  .nv-x.nv-axis text,
-  .nv-legend text {
-    fill: #888;
-    font-size: 12px;
-  }
-
 }
-.nv-lineLegend .nv-series {
-  cursor: default;
-}
-
 
 /**********
 * Treemap
@@ -781,17 +788,17 @@ body.full-screen {
   .nv-fill13 { stroke:@fill13; }
 }
 
-.nv-stroke0 { stroke:@stroke0; background-color:@stroke0; }
-.nv-stroke1 { stroke:@stroke1; background-color:@stroke1; }
-.nv-stroke2 { stroke:@stroke2; background-color:@stroke2; }
-.nv-stroke3 { stroke:@stroke3; background-color:@stroke3; }
-.nv-stroke4 { stroke:@stroke4; background-color:@stroke4; }
-.nv-stroke5 { stroke:@stroke5; background-color:@stroke5; }
-.nv-stroke6 { stroke:@stroke6; background-color:@stroke6; }
-.nv-stroke7 { stroke:@stroke7; background-color:@stroke7; }
-.nv-stroke8 { stroke:@stroke8; background-color:@stroke8; }
-.nv-stroke9 { stroke:@stroke9; background-color:@stroke9; }
-.nv-stroke10 { stroke:@stroke10; background-color:@stroke10; }
-.nv-stroke11 { stroke:@stroke11; background-color:@stroke11; }
-.nv-stroke12 { stroke:@stroke12; background-color:@stroke12; }
-.nv-stroke13 { stroke:@stroke13; background-color:@stroke13; }
+.nv-stroke00 { stroke:@stroke00; color:@stroke00; }
+.nv-stroke01 { stroke:@stroke01; color:@stroke01; }
+.nv-stroke02 { stroke:@stroke02; color:@stroke02; }
+.nv-stroke03 { stroke:@stroke03; color:@stroke03; }
+.nv-stroke04 { stroke:@stroke04; color:@stroke04; }
+.nv-stroke05 { stroke:@stroke05; color:@stroke05; }
+.nv-stroke06 { stroke:@stroke06; color:@stroke06; }
+.nv-stroke07 { stroke:@stroke07; color:@stroke07; }
+.nv-stroke08 { stroke:@stroke08; color:@stroke08; }
+.nv-stroke09 { stroke:@stroke09; color:@stroke09; }
+.nv-stroke10 { stroke:@stroke10; color:@stroke10; }
+.nv-stroke11 { stroke:@stroke11; color:@stroke11; }
+.nv-stroke12 { stroke:@stroke12; color:@stroke12; }
+.nv-stroke13 { stroke:@stroke13; color:@stroke13; }

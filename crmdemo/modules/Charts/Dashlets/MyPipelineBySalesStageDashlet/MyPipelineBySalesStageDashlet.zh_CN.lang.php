@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,14 +10,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$dashletStrings = array (
-  'MyPipelineBySalesStageDashlet' => 
-  array (
-    'LBL_DESCRIPTION' => '我的销售阶段的数据垂直条形图',
-    'LBL_REFRESH' => '刷新图表',
-    'LBL_TITLE' => '按销售阶段的我的销售管道数据',
-  ),
-);
+ // $Id: MyPipelineBySalesStageDashlet.en_us.lang.php 29243 2007-11-06 20:04:35Z awu $
 
+
+$dashletStrings['MyPipelineBySalesStageDashlet'] = array('LBL_TITLE'       => '我的销售阶段漏斗',
+                                                         'LBL_DESCRIPTION' => '我销售阶段管道的竖状柱形分析图表',
+                                                         'LBL_REFRESH'     => '刷新图表');
+?>

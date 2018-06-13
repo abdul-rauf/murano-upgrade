@@ -23,6 +23,7 @@ $fields = array(
         'name' => 'account_name',
         'enabled' => true,
         'default' => true,
+        'sortable' => true,
     ),
     array(
         'name' => 'status',

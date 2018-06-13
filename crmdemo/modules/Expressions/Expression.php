@@ -243,12 +243,12 @@ class Expression extends SugarBean {
             $temp_module->call_vardef_handler($meta_filter_name);
             if($_GET['opener_id']=='rel_module')
             {
-                $temp_select_array = $temp_module->vardef_handler->get_vardef_array(false, false, true, false);
+                $temp_select_array = $temp_module->vardef_handler->get_vardef_array(false, false, true, false, true);
                 $select_array = getDuplicateRelationListWithTitle($temp_select_array, $temp_module->vardef_handler->module_object->field_defs, $temp_module->vardef_handler->module_object->module_dir);
             }
             else
             {
-                $select_array = $temp_module->vardef_handler->get_vardef_array(true);
+                $select_array = $temp_module->vardef_handler->get_vardef_array(true, false, false, false, true);
                 $select_array = array_unique($select_array);
                 asort($select_array);
             }
@@ -262,7 +262,7 @@ class Expression extends SugarBean {
 					$temp_module = BeanFactory::getBean($dom_name);
 					$temp_module->call_vardef_handler("rel_filter");
 
-					$select_array = $temp_module->vardef_handler->get_vardef_array(true, '', true, true);
+                    $select_array = $temp_module->vardef_handler->get_vardef_array(true, true, false, false);
 			}
 			else if($meta_filter_name == "singular"){
 				$select_array = convert_module_to_singular(get_module_map(false));

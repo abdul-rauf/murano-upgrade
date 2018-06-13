@@ -11,21 +11,26 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: UpgradeWizard.php 56427 2010-05-13 00:38:18Z smalyshev $
 if(!is_admin($GLOBALS['current_user'])){
 	sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
 }
-require_once('modules/Administration/UpgradeWizardCommon.php');
-require_once('ModuleInstall/PackageManager/PackageManagerDisplay.php');
-require_once('ModuleInstall/ModuleScanner.php');
+
+require_once 'modules/Administration/UpgradeWizardCommon.php';
+require_once 'ModuleInstall/PackageManager/PackageManagerDisplay.php';
+require_once 'ModuleInstall/ModuleScanner.php';
+require_once 'include/SugarSmarty/plugins/function.sugar_csrf_form_token.php';
+
 global $mod_strings;
 $uh = new UpgradeHistory();
 
-function unlinkTempFiles() {
-	global $sugar_config;
-	@unlink($_FILES['upgrade_zip']['tmp_name']);
-	@unlink("upload://".$_FILES['upgrade_zip']['name']);
-}
+/**
+ * Namespace global function collision for unlinkTempFiles using
+ * a local class. This is a temporary fix which needs to be cleaned
+ * up properly moving all logic within the class instead of having
+ * functional code all over the place.
+ */
+
 
 $base_upgrade_dir       = "upload://upgrades";
 $base_tmp_upgrade_dir   = sugar_cached('upgrades/temp');
@@ -95,7 +100,7 @@ if( isset( $_REQUEST['run'] ) && ($_REQUEST['run'] != "") ){
                     strtolower(pathinfo($upload->get_stored_file_name(), PATHINFO_EXTENSION)) != 'zip' ||
                     !$upload->final_move($upload->get_stored_file_name())
                     ) {
-    			    unlinkTempFiles();
+    			    UpgradeWizardCommon::unlinkTempFiles();
                     sugar_die($mod_strings['LBL_UPGRADE_WIZARD_INVALID_PKG']);
             	} else {
     			     $tempFile = "upload://".$upload->get_stored_file_name();
@@ -105,7 +110,7 @@ if( isset( $_REQUEST['run'] ) && ($_REQUEST['run'] != "") ){
             }
         }
         if($perform) {
-            $manifest_file = extractManifest( $tempFile );
+            $manifest_file = UpgradeWizardCommon::extractManifest( $tempFile );
 			if(is_file($manifest_file))
 			{
     			//SCAN THE MANIFEST FILE TO MAKE SURE NO COPIES OR ANYTHING ARE HAPPENING IN IT
@@ -125,7 +130,7 @@ if( isset( $_REQUEST['run'] ) && ($_REQUEST['run'] != "") ){
     			}
 
                 try {
-                    validate_manifest($manifest);
+					UpgradeWizardCommon::validate_manifest($manifest);
                 } catch (Exception $e) {
                     $msg = $e->getMessage();
                     $GLOBALS['log']->fatal("$msg\n" . $e->getTraceAsString());
@@ -137,12 +142,12 @@ if( isset( $_REQUEST['run'] ) && ($_REQUEST['run'] != "") ){
     			// exclude the bad permutations
     			if( $view == "module" )	{
     				if ($upgrade_zip_type != "module" && $upgrade_zip_type != "theme" && $upgrade_zip_type != "langpack") {
-    					unlinkTempFiles();
+    					UpgradeWizardCommon::unlinkTempFiles();
     					 die($mod_strings['ERR_UW_NOT_ACCEPTIBLE_TYPE']);
     				}
     			} elseif( $view == "default" ) {
     				if($upgrade_zip_type != "patch" ) {
-    					unlinkTempFiles();
+    					UpgradeWizardCommon::unlinkTempFiles();
     					die($mod_strings['ERR_UW_ONLY_PATCHES']);
     				}
     			}
@@ -154,7 +159,7 @@ if( isset( $_REQUEST['run'] ) && ($_REQUEST['run'] != "") ){
 			    $target_manifest = remove_file_extension( $target_path ) . "-manifest.php";
 
     			if( isset($manifest['icon']) && $manifest['icon'] != "" ){
-	    			 $icon_location = extractFile( $tempFile ,$manifest['icon'] );
+	    			 $icon_location = UpgradeWizardCommon::extractFile( $tempFile ,$manifest['icon'] );
     				 copy($icon_location, remove_file_extension( $target_path )."-icon.".pathinfo($icon_location, PATHINFO_EXTENSION));
 	    		}
 
@@ -165,7 +170,7 @@ if( isset( $_REQUEST['run'] ) && ($_REQUEST['run'] != "") ){
 					 $GLOBALS['ML_STATUS_MESSAGE'] = $mod_strings['ERR_UW_UPLOAD_ERROR'];
 				}
 			} else {
-				unlinkTempFiles();
+				UpgradeWizardCommon::unlinkTempFiles();
 				die($mod_strings['ERR_UW_NO_MANIFEST']);
 			}
         }
@@ -197,10 +202,13 @@ else {
 	print( getClassicModuleTitle($mod_strings['LBL_MODULE_NAME'], array($mod_strings['LBL_MODULE_NAME'],$mod_strings['LBL_UPGRADE_WIZARD_TITLE']), false) );
 }
 
+$csrfToken = smarty_function_sugar_csrf_form_token(array(), $smarty);
+
 // upload link
 if(!empty($GLOBALS['sugar_config']['use_common_ml_dir']) && $GLOBALS['sugar_config']['use_common_ml_dir'] && !empty($GLOBALS['sugar_config']['common_ml_dir'])){
 	//rrs
 	$form = '<form name="move_form" action="index.php?module=Administration&view=module&action=UpgradeWizard" method="post"  ><input type=hidden name="run" value="upload" /><input type=hidden name="load_module_from_dir" id="load_module_from_dir" value="'.$GLOBALS['sugar_config']['common_ml_dir'].'" /><input type=hidden name="upgrade_zip_escaped" value="" />';
+    $form .= $csrfToken;
 	$form .= '<br>'.$mod_strings['LBL_MODULE_UPLOAD_DISABLE_HELP_TEXT'].'</br>';
 	$form .='<table width="100%" class="edit view"><tr><th align="left">'.$mod_strings['LBL_ML_NAME'].'</th><th align="left">'.$mod_strings['LBL_ML_ACTION'].'</th></tr>';
 	if ($handle = opendir($GLOBALS['sugar_config']['common_ml_dir'])) {
@@ -217,6 +225,7 @@ if(!empty($GLOBALS['sugar_config']['use_common_ml_dir']) && $GLOBALS['sugar_conf
 }else{
     $form =<<<eoq
 <form name="the_form" enctype="multipart/form-data" action="{$form_action}" method="post"  >
+{$csrfToken}
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="edit view">
 <tr><td>
 <table width="450" border="0" cellspacing="0" cellpadding="0">
@@ -301,7 +310,7 @@ foreach($upgrade_contents as $upgrade_content)
 
 		if(empty($manifest['icon']))
 		{
-			$icon = getImageForType( $manifest['type'] );
+			$icon = UpgradeWizardCommon::getImageForType( $manifest['type'] );
 		}
 		else
 		{

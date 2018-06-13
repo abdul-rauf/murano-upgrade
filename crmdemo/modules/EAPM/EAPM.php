@@ -14,6 +14,8 @@ require_once('include/SugarObjects/templates/basic/Basic.php');
 require_once('include/externalAPI/ExternalAPIFactory.php');
 require_once('include/SugarOauth.php');
 
+use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+
 class EAPM extends Basic {
 	var $new_schema = true;
 	var $module_dir = 'EAPM';
@@ -61,7 +63,7 @@ class EAPM extends Basic {
        $eapmBean = BeanFactory::getBean('EAPM');
 
        if ( isset($_SESSION['EAPM'][$application]) && !$includeInactive ) {
-           if ( is_array($_SESSION['EAPM'][$application]) ) {
+           if ( ArrayFunctions::is_array_access($_SESSION['EAPM'][$application]) ) {
                $eapmBean->fromArray($_SESSION['EAPM'][$application]);
            } else {
                return null;
@@ -71,7 +73,7 @@ class EAPM extends Basic {
            if ( !$includeInactive ) {
                $queryArray['validated'] = 1;
            }
-           $eapmBean = $eapmBean->retrieve_by_string_fields($queryArray);
+           $eapmBean = $eapmBean->retrieve_by_string_fields($queryArray, false);
 
            // Don't cache the include inactive results
            if ( !$includeInactive ) {
@@ -91,7 +93,18 @@ class EAPM extends Basic {
        return $eapmBean;
     }
 
-    function create_new_list_query($order_by, $where,$filter=array(),$params=array(), $show_deleted = 0,$join_type='', $return_array = false,$parentbean=null, $singleSelect = false) {
+    public function create_new_list_query(
+        $order_by,
+        $where,
+        $filter = array(),
+        $params = array(),
+        $show_deleted = 0,
+        $join_type = '',
+        $return_array = false,
+        $parentbean = null,
+        $singleSelect = false,
+        $ifListForExport = false
+    ) {
         global $current_user;
 
         if ( !is_admin($GLOBALS['current_user']) ) {
@@ -105,7 +118,18 @@ class EAPM extends Basic {
             }
         }
 
-        return parent::create_new_list_query($order_by, $where, $filter, $params, $show_deleted,$join_type, $return_array, $parentbean, $singleSelect);
+        return parent::create_new_list_query(
+            $order_by,
+            $where,
+            $filter,
+            $params,
+            $show_deleted,
+            $join_type,
+            $return_array,
+            $parentbean,
+            $singleSelect,
+            $ifListForExport
+        );
     }
 
    function save($check_notify = FALSE ) {
@@ -124,6 +148,9 @@ class EAPM extends Basic {
        if ( isset($_SESSION['EAPM'][$this->application]) ) {
            unset($_SESSION['EAPM'][$this->application]);
        }
+
+       // Nuke the Meetings type dropdown cache
+       sugar_cache_clear('meetings_type_drop_down');
 
        return $parentRet;
    }

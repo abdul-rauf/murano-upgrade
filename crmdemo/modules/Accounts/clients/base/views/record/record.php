@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,6 +20,9 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
+            'events' => array(
+                'click' => 'button:cancel_button:click',
+            ),
         ),
         array(
             'type' => 'rowaction',
@@ -124,7 +128,12 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                     'dismiss_label' => true,
                     'readonly'      => true,
                 ),
-                'name',
+                array(
+                    'name' => 'name',
+                    'events' => array(
+                        'keyup' => 'update:account',
+                    ),
+                ),
                 array(
                     'name' => 'favorite',
                     'label' => 'LBL_FAVORITE',
@@ -153,6 +162,10 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                 'account_type',
                 'assigned_user_name',
                 'phone_office',
+                array(
+                    'name' => 'tag',
+                    'span' => 12,
+                ),
             ),
         ),
         array(
@@ -243,7 +256,7 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                 ),
                 array(
                     'name' => 'phone_alternate',
-                    'label' => 'LBL_OTHER_PHONE',
+                    'label' => 'LBL_PHONE_ALT',
                 ),
                 'email',
                 'phone_fax',
@@ -267,6 +280,7 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                 array(
                     'name' => 'date_entered_by',
                     'readonly' => true,
+                    'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_ENTERED',
                     'fields' => array(
@@ -286,6 +300,7 @@ $viewdefs['Accounts']['base']['view']['record'] = array(
                 array(
                     'name' => 'date_modified_by',
                     'readonly' => true,
+                    'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_MODIFIED',
                     'fields' => array(

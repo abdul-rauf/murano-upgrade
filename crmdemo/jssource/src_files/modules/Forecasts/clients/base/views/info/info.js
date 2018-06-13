@@ -20,17 +20,24 @@
     tpModel: undefined,
     
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      */
     initialize: function(options) {
+        if (app.lang.direction === 'rtl') {
+            options.template = app.template.getView('info.info-rtl', 'Forecasts');
+
+            // reverse the datapoints
+            options.meta.datapoints.reverse();
+        }
+
         this.tpModel = new Backbone.Model();
         this._super("initialize", [options]);
         this.resetSelection(this.context.get("selectedTimePeriod"));
     },
     
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      *
      */
     bindDataChange: function(){

@@ -111,15 +111,6 @@ function generateComposeDataPackage($data,$forFullCompose = TRUE, $bean = null)
 				$namePlusEmail .= from_html($contact->full_name) . " <".from_html($contact->emailAddress->getPrimaryAddress($contact)).">";
 			}
 		}
-		if ($bean->module_dir == 'KBDocuments') {
-
-			require_once("modules/Emails/EmailUI.php");
-			$subject = $bean->kbdocument_name;
-			$article_body = str_replace('/cache/images/',$GLOBALS['sugar_config']['site_url'].'/cache/images/',KBDocument::get_kbdoc_body_without_incrementing_count($bean->id));
-			$body = from_html($article_body);
-			$attachments = KBDocument::get_kbdoc_attachments_for_newemail($bean->id);
-			$attachments = $attachments['attachments'];
-		} // if
 		if ($bean->module_dir == 'Quotes' && isset($data['recordId'])) {
 			$quotesData = getQuotesRelatedData($bean,$data);
 			global $current_language;
@@ -153,6 +144,7 @@ function generateComposeDataPackage($data,$forFullCompose = TRUE, $bean = null)
 
 		$ret = array();
 		$ie = BeanFactory::getBean('InboundEmail');
+        $ie->disable_row_level_security = true;
 		$ie->email = BeanFactory::getBean('Emails');
 		$ie->email->email2init();
 		$replyType = $data['reply'];
@@ -207,7 +199,14 @@ function generateComposeDataPackage($data,$forFullCompose = TRUE, $bean = null)
 
         // If it's a 'Reply All' action, append the CC addresses
         if ($data['reply'] == 'replyAll') {
-            $ret['cc_addrs'] = from_html($ie->email->to_addrs);
+            $cc_addrs = from_html($ie->email->cc_addrs);
+            $to_addrs = from_html(
+                !empty($ie->email->to_addrs_names) ? $ie->email->to_addrs_names : $ie->email->to_addrs
+            );
+            if (!empty($to_addrs)) {
+                $cc_addrs = $cc_addrs . ", " . $to_addrs;
+            }
+            $ret['cc_addrs'] = $cc_addrs;
         }
 
 	} else {

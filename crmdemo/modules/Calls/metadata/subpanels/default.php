@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: default.php 13968 2006-06-12 22:00:08Z jacob $
 $subpanel_layout = array(
 	//Removed button because this layout def is a component of
 	//the activities sub-panel.

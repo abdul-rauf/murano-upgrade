@@ -17,8 +17,6 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-
-
 // Expression is a general object for expressions, filters, and calculations
 class SessionManager extends SugarBean {
     var $new_schema = true;
@@ -129,9 +127,11 @@ class SessionManager extends SugarBean {
      */
     function archiveInactiveSessions(){
         $time_diff = $this->getTimeDiff();
-        $return_list = $this->get_list("", "$this->table_name.last_request_time < " . db_convert("'$time_diff'", 'datetime'));
-        foreach($return_list['list'] as $session){
+        $return_list = $this->get_full_list("", "$this->table_name.last_request_time < " . db_convert("'$time_diff'", 'datetime'));
+        if (!empty($return_list)) {
+            foreach ($return_list as $session) {
                 $session->archive();
+            }
         }
     }
 

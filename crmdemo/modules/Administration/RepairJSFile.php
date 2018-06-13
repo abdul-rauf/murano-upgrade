@@ -10,6 +10,28 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+require_once 'include/SugarSmarty/plugins/function.sugar_csrf_form_token.php';
+if (in_array($_REQUEST['type'], array('mini', 'replace', 'repair'), true)) {
+    // don't run it without forcing admins to realize this is deprecated
+    if (empty($_REQUEST['run_deprecated_feature'])) {
+        switch($_REQUEST['type']) {
+            case 'mini':
+                $runAction = 'Rebuild Minified JS Files';
+                break;
+            case 'replace':
+                $runAction = 'Rebuild JS Compressed Files';
+                break;
+            case 'repair':
+                $runAction = 'Repair JS Files';
+                break;
+        }
+        echo "<br><b>Note:</b> This feature is deprecated.<br>";
+        echo "To $runAction, <b>run_deprecated_feature=1</b> must be set as a request parameter.";
+        return;
+    }
+}
+
 if(is_admin($current_user)){
     global $mod_strings; 
 
@@ -39,7 +61,8 @@ if(is_admin($current_user)){
                         
                 //set loading message and create url
                 ajaxStatus.showStatus(SUGAR.language.get('app_strings', 'LBL_PROCESSING_REQUEST'));
-                postData = \"module=Administration&action=callJSRepair&js_admin_repair=".$_REQUEST['type']."&root_directory=".urlencode(getcwd())."\";
+                postData = \"module=Administration&action=callJSRepair&js_admin_repair=".$_REQUEST['type']."&root_directory=".urlencode(getcwd()).
+                "&csrf_token=".smarty_function_sugar_csrf_form_token(array('raw'=>true), $smarty)."\";
                  
     
                         
@@ -71,4 +94,3 @@ if(is_admin($current_user)){
 
 
 
-?>

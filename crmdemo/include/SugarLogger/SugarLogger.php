@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
+ * $Id$
  * Description:  Defines the English language pack for the base application.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -91,13 +91,31 @@ class SugarLogger implements LoggerTemplate
     public function __construct()
     {
         $config = SugarConfig::getInstance();
-        $this->ext = $config->get('logger.file.ext', $this->ext);
-        $this->logfile = $config->get('logger.file.name', $this->logfile);
-        $this->dateFormat = $config->get('logger.file.dateFormat', $this->dateFormat);
-        $this->logSize = $config->get('logger.file.maxSize', $this->logSize);
-        $this->maxLogs = $config->get('logger.file.maxLogs', $this->maxLogs);
-        $this->filesuffix = $config->get('logger.file.suffix', $this->filesuffix);
-        $log_dir = $config->get('log_dir' , $this->log_dir);
+
+        $extConfig = trim($config->get('logger.file.ext', $this->ext));
+        if (strcmp($extConfig, '') != 0 ) {
+            $this->ext = $extConfig;
+        }
+
+        $logfileConfig = trim($config->get('logger.file.name', $this->logfile));
+        if (strcmp($logfileConfig, '') != 0) {
+            $this->logfile = $logfileConfig;
+        }
+
+        $this->dateFormat = trim($config->get('logger.file.dateFormat', $this->dateFormat));
+
+        $logSizeConfig = trim($config->get('logger.file.maxSize', $this->logSize));
+        if (strcmp($logSizeConfig, '') != 0) {
+            $this->logSize = $logSizeConfig;
+        }
+
+        $maxLogsConfig = trim($config->get('logger.file.maxLogs', $this->maxLogs));
+        if ($maxLogsConfig > 0) {
+            $this->maxLogs = $maxLogsConfig;
+        }
+
+        $this->filesuffix = trim($config->get('logger.file.suffix', $this->filesuffix));
+        $log_dir = trim($config->get('log_dir' , $this->log_dir));
         $this->log_dir = $log_dir . (empty($log_dir)?'':'/');
         unset($config);
         $this->_doInitialization();
@@ -165,10 +183,20 @@ class SugarLogger implements LoggerTemplate
 		    $message = print_r($message,true);
 
 		//write out to the file including the time in the dateFormat the process id , the user id , and the log level as well as the message
-		fwrite($this->fp,
-		    strftime($this->dateFormat) . ' [' . getmypid () . '][' . $userID . '][' . strtoupper($level) . '] ' . $message . "\n"
-		    );
-	}
+        $this->write(strftime($this->dateFormat) . ' [' . getmypid () . '][' . $userID . '][' . strtoupper($level) . '] ' . $message . "\n");
+    }
+    
+    /**
+     * Writing log to file
+     * 
+     * @param string $string Message to log
+     */
+    protected function write($string)
+    {
+        if ($this->fp) {
+            fwrite($this->fp, $string);
+        }
+    }
 
 	/**
 	 * rolls the logger file to start using a new file

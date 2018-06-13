@@ -22,15 +22,15 @@
     disableButton: true,
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     initialize: function(options) {
-        this._super("initialize", [options]);
+        this._super('initialize', [options]);
         this.type = 'rowaction';
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     bindDataChange: function() {
         this.context.on('forecasts:worksheet:quota_changed', function() {
@@ -69,7 +69,7 @@
      * Only show this if the current user is a manager and we are on their manager view
      *
      * @override
-     * @returns {boolean|*|boolean|boolean}
+     * @return {boolean|*|boolean|boolean}
      */
     hasAccess: function() {
         var su = (this.context.get('selectedUser')) || app.user.toJSON(),
@@ -83,7 +83,7 @@
      *
      * @param {string} worksheetType            What worksheet are we on
      * @param {object} selectedUser             What user is calling the assign quota
-     * @param {string}selectedTimeperiod        Which timeperiod are we assigning quotas for
+     * @param {string} selectedTimeperiod        Which timeperiod are we assigning quotas for
      */
     assignQuota: function(worksheetType, selectedUser, selectedTimeperiod) {
         app.api.call('create', app.api.buildURL('ForecastManagerWorksheets/assignQuota'), {
@@ -95,6 +95,7 @@
                 app.alert.show('success', {
                     level: 'success',
                     autoClose: true,
+                    autoCloseDelay: 10000,
                     title: app.lang.get("LBL_FORECASTS_WIZARD_SUCCESS_TITLE", "Forecasts") + ":",
                     messages: [app.lang.get('LBL_QUOTA_ASSIGNED', 'Forecasts')]
                 });

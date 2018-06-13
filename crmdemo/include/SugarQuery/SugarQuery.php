@@ -76,12 +76,12 @@ class SugarQuery
     public $from = false;
 
     /**
-     * @var array(SugarQuery_Builder_Where)
+     * @var SugarQuery_Builder_Where[]
      */
     public $where = array();
 
     /**
-     * @var array(SugarQuery_Builder_Join)
+     * @var SugarQuery_Builder_Join[]
      */
     public $join = array();
 
@@ -111,6 +111,12 @@ class SugarQuery
      */
     protected $table_beans = array();
 
+    /**
+     * If an rname_link field is used, this is the join alias
+     * @var bool|string
+     */
+    public $rname_link = false;
+
     public $joinTableToKey = array();
 
     public $joinLinkToKey = array();
@@ -125,6 +131,7 @@ class SugarQuery
     /**
      * Should we use prepared statements?
      * @var bool
+     * @deprecated("Will be deprecated in 7.8 version and above")
      */
     public $usePreparedStatements = false;
 
@@ -137,13 +144,35 @@ class SugarQuery
     protected $dataItems = array();
     protected $dataSegment;
 
-    public function __construct()
+    /**
+     * @param DBManager $db
+     */
+    public function __construct(DBManager $db = null)
     {
         $this->select = new SugarQuery_Builder_Select($this, array());
-        $this->db = DBManagerFactory::getInstance();
-        if(!$this->db->usePreparedStatements) {
+        $this->setDBManager($db ?: DBManagerFactory::getInstance());
+    }
+
+    /**
+     * Set DBManager
+     * @param DBManager $db
+     */
+    public function setDBManager(DBManager $db)
+    {
+        $this->db = $db;
+        // usePreparedStatements will be deprecated in 7.8 version and above
+        if (!$this->db->usePreparedStatements) {
             $this->usePreparedStatements = false;
         }
+    }
+
+    /**
+     * Get DBManager
+     * @return DBManager
+     */
+    public function getDBManager()
+    {
+        return $this->db;
     }
 
     /**
@@ -195,6 +224,10 @@ class SugarQuery
      */
     public function from(SugarBean $bean, $options = array())
     {
+        if (is_string($options)){
+            $options = array('alias' => $options);
+        }
+
         $alias = (isset($options['alias'])) ? $options['alias'] : false;
 
         if (!empty($alias)) {
@@ -212,7 +245,13 @@ class SugarQuery
         }
 
         if ($team_security === true) {
-            $bean->addVisibilityQuery($this, array('table_alias' => $alias));
+            if (!empty($alias)) {
+                $options['table_alias'] = $alias;
+            }
+            if (!isset($options['action'])) {
+                $options['action'] = 'list';
+            }
+            $bean->addVisibilityQuery($this, $options);
         }
 
         if ($add_deleted === true) {
@@ -345,6 +384,10 @@ class SugarQuery
             $options['alias'] = $this->getJoinTableAlias($link_name, $relatedJoin);
         }
 
+        if (!isset($options['action'])) {
+            $options['action'] = 'list';
+        }
+
         if (!empty($this->links[$options['alias']])) {
             return $this->links[$options['alias']];
         }
@@ -435,6 +478,97 @@ class SugarQuery
 
 
     /**
+     * Add a join-on if there is an rname_link in use
+     *
+     * @param array $options
+     *
+     */
+    public function setJoinOn($options = array())
+    {
+        if ($this->rname_link !== false && !empty($options['baseBean']) && !empty($options['baseBeanId'])) {
+            $this->join[$this->rname_link]->on()->addRaw("{$options['baseBean']}_id = '{$options['baseBeanId']}'");
+        }        
+    }
+
+    /**
+     * If group by is not empty, then add rest of fields in select statement
+     */
+    protected function addGroupByFields()
+    {
+        //make sure 'group by' is not empty, if 'group by' is empty then we don't need to modify 'group by'
+        if (!empty($this->group_by)) {
+            $groupByCols = array();
+            //grab the defined cols so we don't add them twice
+            foreach ($this->group_by AS $groupBy) {
+                $groupByCols[$groupBy->column->table . '.' . $groupBy->column->field] = $groupBy->column->field;
+            }
+            //make sure all the fields in the select statement are in the group by
+            foreach ($this->select->select as $selectFieldKey => $selectField) {
+                //add cols not already defined
+                if (empty($groupByCols[$selectField->table . '.' . $selectField->field])) {
+                    //if field class is raw, then we need to do some special processing
+                    if (get_class($selectField) == 'SugarQuery_Builder_Field_Raw') {
+                        //check to see if this is a concatenated field:
+                        if (!empty($selectField->alias) && !empty($this->from->field_name_map[$selectField->alias]['db_concat_fields'])) {
+                            //we need to get the concatenated fields
+                            $concatFields = $this->from->field_name_map[$selectField->alias]['db_concat_fields'];
+                            //check to see if join exists, otherwise use table name
+                            $table = $this->from->field_name_map[$selectField->alias]['table'];
+                            $linkName = $this->from->field_name_map[$selectField->alias]['link'];
+                            //check for join name only if we have a table and link name
+                            if (!empty($table) && !empty($linkName)) {
+                                foreach ($this->join as $joinName => $joinDef) {
+                                    if ($joinDef->table == $table && $joinDef->linkName == $linkName) {
+                                        //table and link match this join, use the join name in the 'group by'
+                                        $table = $joinName;
+                                        break;
+                                    }
+                                }
+                            }
+                            //add each concat field to the group by
+                            foreach ($concatFields as $fieldToAdd) {
+                                if (empty($fieldToAdd) || !is_string($fieldToAdd)) {
+                                    //skip empty or array fields (should never happen unless metadata is bad)
+                                    continue;
+                                }
+                                $this->groupBy($table . '.' . $fieldToAdd);
+                            }
+                        } else {
+                            //not a concatenated field, so let's parse the string and attempt to grab the table and field name
+                            $fieldToAdd = $selectField->field;
+                            $fieldStringArray = explode(' ', $fieldToAdd);
+
+                            foreach ($fieldStringArray as $fieldStr) {
+                                if (strpos($fieldStr, '.' ) !== false) {
+                                    $fieldToAdd = $fieldStr;
+                                    break;
+                                }
+                            }
+
+                            //add either the newly saved table and field name or the entire string
+                            $this->groupBy($fieldToAdd);
+                        }
+                    } else {
+                        $type = $this->db->getFieldType($selectField->def);
+                        if ($type && $this->db->isTextType($type)) {
+                            $castedField = $this->db->convert(
+                                $selectField->table . '.' . $selectField->field,
+                                'text2char'
+                            );
+                            $this->groupByRaw($castedField);
+                            $selectField->addToSelectRaw($castedField, $selectFieldKey);
+                            continue;
+                        }
+                        //Field class is not of type raw, add the table and field name from the selectField array
+                        $this->groupBy($selectField->table . '.' . $selectField->field);
+                    }
+                } //end if (empty($groupByCols[$selectField->field]))
+            } //end foreach ($this->select->select as $selectField)
+        }//end if(!empty($this->group_by)){
+    }
+
+
+    /**
      * Compile this SugarQuery into a standard SQL-92 Query string
      * @return string
      */
@@ -442,6 +576,13 @@ class SugarQuery
     {
         $compiler = new SugarQuery_Compiler();
         $this->data = $this->dataItems = array();
+
+        //check if short list of fields in 'group by' is supported, if not add all fields in select
+        if (empty($this->db->capabilities['short_group_by'])) {
+            //add fields to group by
+            $this->addGroupByFields();
+        }
+
         $sql = $compiler->compile($this, $this->db);
         if($parent) {
             $parent->addData($this->data);
@@ -471,6 +612,8 @@ class SugarQuery
                 $results = $this->runQuery($this);
                 $return = array();
                 while ($row = $this->db->fetchByAssoc($results, $encode)) {
+                    //Apply any post data cleanup/db abstraction
+                    $row = $this->formatRow($row);
                     $return[] = $row;
                 }
                 if ($type == 'json') {
@@ -494,7 +637,7 @@ class SugarQuery
        if(empty($result)) {
            return false;
        }
-       $row = $this->db->fetchByAssoc($result);
+       $row = $this->db->fetchByAssoc($result, true, true);
        if(!empty($row)) {
            return array_shift($row);
        }
@@ -508,11 +651,33 @@ class SugarQuery
     protected function runQuery()
     {
         $sql = $this->compileSql();
+        // usePreparedStatements will be deprecated in 7.8 version and above
         if($this->usePreparedStatements) {
             return $this->db->preparedQuery($sql, $this->data);
         } else {
             return $this->db->query($sql);
         }
+    }
+
+    /**
+     * Applies any cleanup or formatting required on the raw DB data result.
+     *
+     * @param array $row
+     *
+     * @return array updated $row
+     */
+    protected function formatRow(array $row)
+    {
+        //remap long aliases to thier correct output key
+        if (!empty($this->select)) {
+            foreach ($this->select->select as $field) {
+                if (!empty($field->original_alias) && isset($row[$field->alias])) {
+                    $row[$field->original_alias] = $row[$field->alias];
+                    unset($row[$field->alias]);
+                }
+            }
+        }
+        return $row;
     }
 
 
@@ -793,16 +958,14 @@ class SugarQuery
         );
         $joined = BeanFactory::newBean($bean->$join->getRelatedModuleName());
         if ($team_security === true) {
-            $joined->addVisibilityQuery(
-                $this,
-                array("table_alias" => $alias, 'as_condition' => true)
-            );
+            $options['table_alias'] = $alias;
+            $options['as_condition'] = true;
+            $joined->addVisibilityQuery($this, $options);
         }
-
 
         if ($joined->hasCustomFields()) {
             $table_cstm = $joined->get_custom_table_name();
-            $alias_cstm = "{$alias}_cstm";
+            $alias_cstm = $this->db->getValidDBName($alias . '_cstm', false, 'alias');
             $this->joinTable($table_cstm, array('alias' => $alias_cstm, 'joinType' => "LEFT", "linkingTable" => true))
                 ->on()->equalsField("$alias_cstm.id_c", "{$alias}.id");
         }

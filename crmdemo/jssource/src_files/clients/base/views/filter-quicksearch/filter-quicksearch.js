@@ -45,7 +45,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      *
      * Changes `this.$el` to point to the `<input>` element.
      */
@@ -55,31 +55,57 @@
     },
 
     /**
-     * Fire quick search
-     * @param {Event} e
+     * For customers with large datasets, allow customization to disable
+     * the automatic filtering in the omnibar.
+     *
+     * @inheritdoc
      */
-    throttledSearch: _.debounce(function(e) {
-        var newSearch = this.$el.val();
-        if(this.currentSearch !== newSearch) {
-            this.currentSearch = newSearch;
-            this.layout.trigger('filter:apply', newSearch);
+    delegateEvents: function(events) {
+        if (app.config.disableOmnibarTypeahead) {
+            // Remove the keyup and paste events from this.events.
+            // This is before the call to this._super('delegateEvents'),
+            // so they have not been registered.
+            delete this.events.keyup;
+            delete this.events.paste;
+
+            // On enter key press, apply the quicksearch.
+            this.events.keydown = _.bind(function(evt) {
+                // Enter key code is 13
+                if (evt.keyCode === 13) {
+                    this.applyQuickSearch();
+                }
+            }, this);
         }
+        this._super('delegateEvents', [events]);
+    },
+
+    /**
+     * Fires the quick search.
+     * @param {Event} [event] A keyup event.
+     */
+    throttledSearch: _.debounce(function(event) {
+        this.applyQuickSearch();
     }, 400),
 
     /**
-     * Retrieve the field labels
+     * Retrieves the labels for the fields that are searchable in the
+     * quicksearch.
      *
-     * @param {String} moduleName
-     * @param {Array} field names
-     * @returns {Array} field labels
+     * @param {string} moduleName The module name the fields belong to.
+     * @param {string[]} fields The list of searchable fields.
+     * @return {string[]} The list of labels.
      */
     getFieldLabels: function(moduleName, fields) {
         var moduleMeta = app.metadata.getModule(moduleName);
         var labels = [];
-        _.each(fields, function(fieldName) {
+
+        _.each(_.flatten(fields), function(fieldName) {
             var fieldMeta = moduleMeta.fields[fieldName];
-            labels.push(app.lang.get(fieldMeta.vname, moduleName).toLowerCase());
+            if (fieldMeta) {
+                labels.push(app.lang.get(fieldMeta.vname, moduleName).toLowerCase());
+            }
         });
+
         return labels;
     },
 
@@ -92,7 +118,8 @@
         var label;
         this.toggleInput();
         if (!this.$el.hasClass('hide') && linkModule !== 'all_modules') {
-            var fields = this.getModuleQuickSearchFields(linkModuleName),
+            var filtersBeanPrototype = app.data.getBeanClass('Filters').prototype,
+                fields = filtersBeanPrototype.getModuleQuickSearchMeta(linkModuleName).fieldNames,
                 fieldLabels = this.getFieldLabels(linkModuleName, fields);
             label = app.lang.get('LBL_SEARCH_BY') + ' ' + fieldLabels.join(', ') + '...';
         } else {
@@ -122,7 +149,22 @@
         if (_.isFunction(input.placeholder)) {
             input.placeholder();
         }
-        this.currentSearch = '';
-        this.layout.trigger('filter:apply');
+        this.applyQuickSearch(true);
+    },
+
+    /**
+     * Invokes the `filter:apply` event with the current value on the
+     * quicksearch field.
+     *
+     * @param {boolean} [force] `true` to always trigger the `filter:apply`
+     *   event, `false` otherwise. Defaults to `false`.
+     */
+    applyQuickSearch: function(force) {
+        force = !_.isUndefined(force) ? force : false;
+        var newSearch = this.$el.val();
+        if (force || this.currentSearch !== newSearch) {
+            this.currentSearch = newSearch;
+            this.layout.trigger('filter:apply', newSearch);
+        }
     }
 })

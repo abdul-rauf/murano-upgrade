@@ -13,8 +13,8 @@
      * The SugarCRM Accessibility API provides an interface and plugin
      * framework to apply accessibility rules to any element.
      *
-     * Overrides {@link Component#render} to execute all accessibility helpers
-     * on the components.
+     * Executes all accessibility helpers on a {@link Component} anytime that
+     * component is rendered.
      *
      * Helpers:
      *
@@ -36,7 +36,6 @@
      *     }
      * })(SUGAR.App);
      * </code></pre>
-     *
      * @class SUGAR.accessibility
      * @singleton
      * @alias SUGAR.App.accessibility
@@ -45,18 +44,18 @@
         /**
          * Initializes the accessibility module.
          *
-         * Overrides {@link Component#render} to execute all accessibility helpers
+         * Overrides {@link Component#initialize} to execute all accessibility helpers
          * on the components.
          *
          * @param {App} app
          */
         init: function(app) {
             if (app.accessibility.helpers && !_.isEmpty(app.accessibility.helpers)) {
-                // override component render
-                app.view.Component.prototype.render = _.wrap(app.view.Component.prototype.render, function(render) {
-                    if (render.call(this)) {
+                app.view.Component.prototype.initialize = _.wrap(app.view.Component.prototype.initialize, function(func, options) {
+                    func.call(this, options);
+                    this.on('render', function() {
                         app.accessibility.run(this);
-                    }
+                    }, this);
                 });
             }
         },
@@ -119,13 +118,12 @@
          * Primarily used for logging purposes, this method is useful for
          * debugging.
          *
-         * @param {jQuery} $el
-         * The element for which the tag should be generated.
+         * @param {jQuery} $el The element for which the tag should be
+         *   generated.
          *
-         * @returns {String}
-         * A string representing an element's tag, with all attributes. The
-         * element's selector, if one exists, is returned when a representation
-         * cannot be reasonably generated.
+         * @return {string} A string representing an element's tag, with all
+         *   attributes. The element's selector, if one exists, is returned
+         *   when a representation cannot be reasonably generated.
          */
         getElementTag: function($el) {
             var tagName = ($el.prop('tagName') || '').toLowerCase(),

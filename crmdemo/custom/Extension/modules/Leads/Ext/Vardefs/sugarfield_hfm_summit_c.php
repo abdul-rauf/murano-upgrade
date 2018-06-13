@@ -1,7 +1,6 @@
 <?php
- // created: 2017-11-03 10:47:09
-$dictionary['Lead']['fields']['hfm_summit_c']['labelValue']='HFM Summit';
-$dictionary['Lead']['fields']['hfm_summit_c']['dependency']='';
-$dictionary['Lead']['fields']['hfm_summit_c']['visibility_grid']='';
+ // created: 2018-06-13 10:46:07
+$dictionary['Lead']['fields']['hfm_summit_c']['labelValue'] = 'HFM Summit';
+$dictionary['Lead']['fields']['hfm_summit_c']['dependency'] = '';
+$dictionary['Lead']['fields']['hfm_summit_c']['visibility_grid'] = '';
 
- ?>

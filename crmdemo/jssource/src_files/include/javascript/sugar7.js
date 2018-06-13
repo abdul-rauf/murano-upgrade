@@ -70,19 +70,26 @@
                 }
             },
             {
-                name: "activities",
-                route: "activities",
-                callback: function(){
+                name: 'activities',
+                route: 'activities',
+                callback: function() {
                     //when visiting activity stream, save last state of activities
                     //so future Home routes go back to activities
                     var lastHomeKey = getLastHomeKey();
                     app.user.lastState.set(lastHomeKey, homeOptions.activities);
 
                     app.controller.loadView({
-                        layout: "activities",
-                        module: "Activities",
-                        skipFetch: true
+                        layout: 'activities',
+                        module: 'Activities'
                     });
+                }
+            },
+            {
+                name: 'profile',
+                route: 'profile',
+                callback: function() {
+                    var route = app.bwc.buildRoute('Users', app.user.get('id'));
+                    app.router.navigate(route, {trigger: true, replace: true});
                 }
             },
             {
@@ -166,17 +173,92 @@
                 }
             },
             {
+                name: 'search',
+                route: 'search(/)(:searchTermAndParams)',
+                callback: function(searchTermAndParams) {
+                    var searchTerm = '';
+                    var params = {modules: [], tags: []};
+                    if (searchTermAndParams) {
+                        // For search, we may have query params for the module list
+                        var uriSplit = searchTermAndParams.split('?');
+                        searchTerm = decodeURIComponent(uriSplit[0]);
+
+                        // We have parameters. Parse them.
+                        if (uriSplit.length > 1) {
+                            var paramsArray = uriSplit[1].split('&');
+                            _.each(paramsArray, function(paramPair) {
+                                var keyValueArray = paramPair.split('=');
+                                if (keyValueArray.length > 1) {
+                                    params[keyValueArray[0]] = keyValueArray[1].split(',');
+                                }
+                            });
+                        }
+                    }
+
+                    var appContext = app.controller.context;
+
+                    // Set the new search term and module list in the context, if necessary.
+                    var termHasChanged = appContext.get('searchTerm') !== searchTerm;
+                    var modulesHaveChanged = !_.isEqual(appContext.get('module_list'), params.modules);
+
+                    params.tags = _.map(params.tags, function(tag){
+                        return decodeURIComponent(tag);
+                    });
+                    var tagsHaveChanged = !_.isEqual(appContext.get('tagParams'), params.tags);
+
+                    if (termHasChanged) {
+                        appContext.set('searchTerm', searchTerm);
+                    }
+                    if (modulesHaveChanged) {
+                        appContext.set('module_list', params.modules);
+                    }
+                    if (tagsHaveChanged) {
+                        appContext.set('tagParams', params.tags);
+                    }
+
+                    if (tagsHaveChanged) {
+                        appContext.trigger('tagsearch:fire:new')
+                    } else if (termHasChanged || modulesHaveChanged) {
+                        appContext.trigger('search:fire:new');
+                    }
+
+                    // Trigger an event on the quicksearch in the header. The
+                    // header cannot rely on the context, since it is
+                    // initialized once for the whole app.
+                    var header = app.additionalComponents.header;
+                    var quicksearch = header && header.getComponent('quicksearch');
+                    if (quicksearch) {
+                        quicksearch.trigger('route:search');
+                    }
+
+                    // If we are on the search page, we prevent the routing. The
+                    // listener on `change:searchTerm` in the layout will trigger
+                    // the new search.
+                    if (appContext && appContext.get('search')) {
+                        return;
+                    }
+
+                    app.controller.loadView({
+                        layout: 'search',
+                        searchTerm: searchTerm,
+                        module_list: params.modules,
+                        tagParams: params.tags,
+                        mixed: true
+                    });
+                }
+            },
+            {
                 name: "list",
                 route: ":module"
             },
             {
-                name: "create",
-                route: ":module/create",
+                name: 'create',
+                route: ':module/create',
                 callback: function(module) {
-                    if (module === "Home") {
+                    if (module === 'Home') {
                         app.controller.loadView({
                             module: module,
-                            layout: "record"
+                            layout: 'record'
                         });
 
                         return;
@@ -188,26 +270,25 @@
                         return;
                     }
 
-                    var previousModule = app.controller.context.get("module"),
-                        previousLayout = app.controller.context.get("layout");
-                    if (!(previousModule === module && previousLayout === "records")) {
-                        app.controller.loadView({
-                            module: module,
-                            layout: "records"
+                    var prevLayout = app.controller.context.get('layout');
+                    // FIXME we shouldn't rely on the layout type: SC-5319
+                    if (prevLayout && prevLayout !== 'login') {
+                        app.drawer.open({
+                            layout: 'create',
+                            context: {
+                                module: module,
+                                create: true,
+                                fromRouter: true
+                            }
+                        }, function(context, model) {
+                            if (model && model.module === app.controller.context.get('module')) {
+                                app.controller.context.reloadData();
+                            }
                         });
+                        return;
                     }
 
-                    app.drawer.open({
-                        layout: 'create-actions',
-                        context: {
-                            create: true
-                        }
-                    }, _.bind(function(context, model) {
-                        var module = context.get("module") || model.module,
-                            route = app.router.buildRoute(module);
-
-                        app.router.navigate(route, {trigger: (model instanceof Backbone.Model)});
-                    }, this));
+                    app.router.record(module, 'create');
                 }
             },
             {
@@ -234,6 +315,24 @@
                 }
             },
             {
+                name: "editAllRecurrences",
+                route: ":module/:id/edit/all-recurrences",
+                callback: function(module, id) {
+                    // FIXME: We shouldn't be calling private methods like this.
+                    // Will be addressed in SC-2761.
+                    if (!app.router._moduleExists(module)) {
+                        return;
+                    }
+                    app.controller.loadView({
+                        module: module,
+                        layout: 'record',
+                        action: 'edit',
+                        modelId: id,
+                        all_recurrences: true
+                    });
+                }
+            },
+            {
                 name: "layout",
                 route: ":module/layout/:view"
             },
@@ -246,28 +345,25 @@
                     if (!app.router._moduleExists(module)) {
                         return;
                     }
-                    // figure out where we need to go back to on cancel
-                    var previousModule = app.controller.context.get("module"),
-                        previousLayout = app.controller.context.get("layout");
-                    if (!(previousModule === module && previousLayout === "records")) {
-                        app.controller.loadView({
-                            module: module,
-                            layout: "records"
+
+                    var prevLayout = app.controller.context.get('layout');
+                    // FIXME we shouldn't rely on the layout type: SC-5319
+                    if (prevLayout && prevLayout !== 'login') {
+                        app.drawer.open({
+                            layout: 'config-drawer',
+                            context: {
+                                module: module,
+                                fromRouter: true
+                            }
                         });
+
+                        return;
                     }
 
-                    app.drawer.open({
-                        layout: 'config',
-                        context: {
-                            module: module,
-                            create: true
-                        }
-                    }, _.bind(function(context, model) {
-                        var module = context.get("module") || model.module,
-                            route = app.router.buildRoute(module);
-
-                        app.router.navigate(route, {trigger: (model instanceof Backbone.Model)});
-                    }, this));
+                    app.controller.loadView({
+                        layout: 'config-drawer',
+                        module: module
+                    });
                 }
             },
             {
@@ -314,6 +410,13 @@
                     }
                     app.router.record(module, id, action, layout);
                 }
+            },
+            {
+                name: "not_found",
+                route: /^.*$/,
+                callback: function() {
+                    app.error.handleHttpError({status: 404});
+                }
             }
         ];
 
@@ -338,7 +441,8 @@
     var titles = {
             'records': 'TPL_BROWSER_SUGAR7_RECORDS_TITLE',
             'record': 'TPL_BROWSER_SUGAR7_RECORD_TITLE',
-            'about': 'TPL_BROWSER_SUGAR7_ABOUT_TITLE'
+            'about': 'TPL_BROWSER_SUGAR7_ABOUT_TITLE',
+            'activities': 'TPL_BROWSER_SUGAR7_RECORD_TITLE'
         };
     // FIXME: This should have unit test coverage, e.g. on `app:view:change`
     // ensure `document.title` is updated. Will be addressed in SC-2761.
@@ -346,12 +450,12 @@
         var context = app.controller.context,
             module = context.get('module'),
             template = Handlebars.compile(app.lang.get(titles[context.get('layout')], module) || ''),
-            moduleString = app.lang.getAppListStrings('moduleList'),
+            moduleName = app.lang.getModuleName(module, {plural: true}),
             title;
         //pass current translated module name and current page's model data
         title = template(_.extend({
-            module: moduleString[module],
-            appId: app.config.appId
+            module: moduleName,
+            appId: app.config.systemName || app.config.appId
         }, model ? model.attributes : {}));
         // title may contain XML entities because Handlebars escapes characters
         // by replacing them for use in HTML, so the true text needs to be
@@ -382,15 +486,17 @@
             //For BWC module, current document title will be replaced with BWC title
             title = $('#bwc-frame').get(0) ? $('#bwc-frame').get(0).contentWindow.document.title : getTitle();
         } else {
-            title = getTitle();
-            if (!_.isEmpty(context.get("model"))) {
+            var currModel = context.get('model');
+            if (!_.isEmpty(currModel)) {
+                title = getTitle(currModel);
                 //for record view, the title should be updated once model is fetched
-                var currModel = context.get("model");
                 currModel.on("change", setTitle, this);
                 app.controller.layout.once("dispose", function() {
                     currModel.off("change", setTitle);
                 });
                 prevModel = currModel;
+            } else {
+                title = getTitle();
             }
         }
         document.title = title || document.title;
@@ -400,6 +506,10 @@
     var refreshExternalLogin = function() {
         var config = app.metadata.getConfig();
         app.api.setExternalLogin(config && config['externalLogin']);
+
+        if (config && (_.isNull(config['externalLoginSameWindow']) || config['externalLoginSameWindow'] === false)) {
+            app.api.setExternalLoginUICallback(window.open);
+        }
     };
 
     app.events.on("app:sync:complete", refreshExternalLogin, this);
@@ -417,7 +527,8 @@
          * present).
          *
          * @param {Object} options Object containing routing information.
-         * @return {Boolean} Returns `false` if redirected, `true` otherwise.
+         * @return {boolean} Returns `false` if it will redirect to bwc, `true`
+         *   otherwise.
          */
         bwcRedirect: function(options) {
             if (options && _.isArray(options.args) && options.args[0]) {
@@ -439,7 +550,10 @@
                         redirect += '&record=' + id;
                     }
 
-                    app.router.navigate(redirect, {trigger: true, replace: true});
+                    // let the entire before flow to finish before triggering a new navigate
+                    _.defer(function() {
+                        app.router.navigate(redirect, {trigger: true, replace: true});
+                    });
                     return false;
                 }
             }
@@ -468,8 +582,8 @@
                 accessCheck = checkAccessRoutes[route];
 
             if (accessCheck && !app.acl.hasAccess(accessCheck, module)) {
-                app.controller.loadView({
-                    layout: 'access-denied'
+                _.defer(function() {
+                    app.controller.loadView({layout: 'access-denied'});
                 });
                 return false;
             }
@@ -519,42 +633,27 @@
                 // FIXME: Should be event-driven, see:
                 // https://github.com/sugarcrm/Mango/pull/18722#discussion_r11782561
                 // Will be addressed in SC-2761.
-                $('#header').hide();
+                app.additionalComponents.header.hide();
                 return false;
             }
 
-            var passwordExpired = false;
             //If the password has expired (and we're not logging out which is ignored)
-            if (route && route !== 'logout' && app.user && app.user.has('is_password_expired')) {
-                passwordExpired = app.user.get('is_password_expired');
-                if (passwordExpired) {
-                    app.controller.loadView({
-                        layout: 'password-expired',
-                        module: 'Users',
-                        callbacks: {
-                            complete: function() {
-                                window.location.reload();//Reload when password reset
-                            }
-                        },
-                        modelId: app.user.get('id')
-                    });
-                    return false;
-                }
+            if (route && route !== 'logout' && app.user && app.user.get('is_password_expired')) {
+                app.controller.loadView({
+                    layout: 'password-expired',
+                    module: 'Users',
+                    callbacks: {
+                        complete: function() {
+                            // Reload when password reset
+                            window.location.reload();
+                        }
+                    },
+                    modelId: app.user.get('id')
+                });
+                app.additionalComponents.header.hide();
+
+                return false;
             }
-
-            var subroute;
-            if (module) {
-                var qpos = module.indexOf('?');
-                subroute = qpos > -1 ? module.substring(0, module.indexOf('?')) : module;
-            }
-            var viewId = options.route + (subroute ? '/' + subroute : '');
-
-            // FIXME: Analytics should not be tracked in hasAccessToModule,
-            // will be moved into another function in SC-2761.
-            app.analytics.currentViewId = viewId;
-            app.analytics.trackPageView(app.analytics.currentViewId);
-
-            return true;
         }
     });
 
@@ -588,6 +687,25 @@
                 $('#logoutframe').attr('src','');
             });
             $('#logoutframe').attr('src',data.url);
+        }
+    });
+
+    // remove filters from the cache on application logout
+    app.events.on('app:logout', function() {
+        var filters = app.data.getCollectionClasses().Filters;
+        if (filters) {
+            filters.prototype.resetFiltersCacheAndRequests();
+        }
+    });
+
+    /**
+     * Shortcuts should be disabled in setup wizard.
+     */
+    app.user.on('change:show_wizard', function(user, show_wizard) {
+        if (show_wizard) {
+            app.shortcuts.disable();
+        } else {
+            app.shortcuts.enable();
         }
     });
 })(SUGAR.App);

@@ -1,5 +1,4 @@
 <?php
- // created: 2011-06-16 10:30:50
-$dictionary['A1234_murano']['fields']['murano_c']['dependency']='';
+ // created: 2018-06-13 10:46:07
+$dictionary['A1234_murano']['fields']['murano_c']['dependency'] = '';
 
- ?>

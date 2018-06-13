@@ -114,7 +114,7 @@
     </div>
 </div>
 
-<div id='panels' style='float:left; overflow-y:auto; overflow-x:hidden'>
+<div id='panels' style='float:left; overflow-y:auto; overflow-x:hidden' class="max-columns-{$maxColumns}">
 
 <h3>{$layouttitle}</h3>
 {counter name='idCounter' assign='idCounter' start='1'}
@@ -238,6 +238,7 @@
 </div>
 
 <form name='prepareForSave' id='prepareForSave' action='index.php'>
+{sugar_csrf_form_token}
 <input type='hidden' name='module' value='ModuleBuilder'>
 <input type='hidden' name='view_module' value='{$view_module}'>
 <input type='hidden' name='view' value='{$view}'>
@@ -351,3 +352,4 @@ ModuleBuilder.package={if $fromModuleBuilder}"{$view_package}"{else}false{/if};
 
 ModuleBuilder.disablePopupPrompt = {if $syncDetailEditViews}{$syncDetailEditViews}{else}false{/if};
 </script>
+

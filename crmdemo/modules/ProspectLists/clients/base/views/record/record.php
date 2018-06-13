@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
@@ -26,6 +27,9 @@ $viewdefs['ProspectLists']['base']['view']['record'] = array(
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
+            'events' => array(
+                'click' => 'button:cancel_button:click',
+            ),
         ),
         array(
             'type' => 'rowaction',
@@ -67,25 +71,11 @@ $viewdefs['ProspectLists']['base']['view']['record'] = array(
                 ),
                 array(
                     'type' => 'rowaction',
-                    'event' => 'button:find_duplicates_button:click',
-                    'name' => 'find_duplicates_button',
-                    'label' => 'LBL_DUP_MERGE',
-                    'acl_action' => 'edit',
-                ),
-                array(
-                    'type' => 'rowaction',
                     'event' => 'button:duplicate_button:click',
                     'name' => 'duplicate_button',
                     'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
                     'acl_module' => 'ProspectLists',
                     'acl_action' => 'create',
-                ),
-                array(
-                    'type' => 'rowaction',
-                    'event' => 'button:audit_button:click',
-                    'name' => 'audit_button',
-                    'label' => 'LNK_VIEW_CHANGE_LOG',
-                    'acl_action' => 'view',
                 ),
                 array(
                     'type' => 'divider',
@@ -158,6 +148,7 @@ $viewdefs['ProspectLists']['base']['view']['record'] = array(
                 array(
                     'name' => 'date_modified_by',
                     'readonly' => true,
+                    'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_MODIFIED',
                     'fields' => array(
@@ -180,6 +171,7 @@ $viewdefs['ProspectLists']['base']['view']['record'] = array(
                 array(
                     'name' => 'date_entered_by',
                     'readonly' => true,
+                    'inline' => true,
                     'type' => 'fieldset',
                     'label' => 'LBL_DATE_ENTERED',
                     'fields' => array(
@@ -194,6 +186,10 @@ $viewdefs['ProspectLists']['base']['view']['record'] = array(
                             'name' => 'created_by_name',
                         ),
                     ),
+                ),
+                array(
+                    'name' => 'tag',
+                    'span' => 12,
                 ),
             )
         ),

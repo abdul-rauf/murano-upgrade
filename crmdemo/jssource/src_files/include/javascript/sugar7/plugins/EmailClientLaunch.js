@@ -50,9 +50,11 @@
                         module: 'Emails',
                         prepopulate: options
                     }
-                }, _.bind(function() {
-                    //allow for component to perform action after close
-                    this.trigger('emailclient:close');
+                }, _.bind(function(model) {
+                    if (model) {
+                        //allow for component to perform action after close
+                        this.trigger('emailclient:close');
+                    }
                 }, this));
             },
 
@@ -95,7 +97,7 @@
             useSugarEmailClient: function() {
                 var emailClientPreference = app.user.getPreference('email_client_preference');
 
-                return (emailClientPreference && emailClientPreference.type === 'sugar');
+                return (emailClientPreference && emailClientPreference.type === 'sugar' && app.acl.hasAccess('edit', 'Emails'));
             },
 
             /**
@@ -231,8 +233,12 @@
              * @private
              */
             _retrieveEmailAddressFromModel: function(model) {
-                var emails = model.get('email'),
-                    email,
+                var emails = model.get('email');
+                if (_.isUndefined(emails)) {
+                    // need to include fallback, since in a 6.7 where a module is modified using Studio, we have 'email1' in custom files
+                    return model.get('email1');
+                }
+                var email,
                     isValidEmail = function(email) {
                         return (!_.isUndefined(email) &&
                             !_.isEmpty(email.email_address) &&

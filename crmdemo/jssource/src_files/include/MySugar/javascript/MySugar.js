@@ -88,7 +88,7 @@ SUGAR.mySugar = function() {
 
             if(confirm(SUGAR.language.get('app_strings', 'LBL_DELETE_PAGE_CONFIRM')))
                 window.location = "index.php?module="+module+"&action=DynamicAction&DynamicAction=deletePage&pageNumToDelete="+pageNum;
-        },		
+        },
 
 		renamePage: function(pageNum){
 		    SUGAR.mySugar.toggleSpansForRename(pageNum);
@@ -107,7 +107,7 @@ SUGAR.mySugar = function() {
 		        tabLinkSpan.style.display = 'none';
 		        tabInputSpan.style.display = 'inline';
 		    }
-		},	
+		},
 		
         savePageTitle: function(pageNum,newTitleValue)
         {
@@ -366,7 +366,6 @@ SUGAR.mySugar = function() {
 			return inputSpanElement;
 		},
 		
-		
 		insertTabNameDisplay: function(page_num, pageName){
 			var spanElement = document.createElement("span");
 			spanElement.id = 'pageNum_'+page_num+'_link_span';
@@ -543,7 +542,7 @@ SUGAR.mySugar = function() {
 			}
 
 		 	var fillInDashlet = function(data) {
-
+                var bwc;
 		 		ajaxStatus.hideStatus();
 				if(data) {
                     
@@ -560,6 +559,16 @@ SUGAR.mySugar = function() {
                         return false;
                     }
 					SUGAR.mySugar.currentDashlet.innerHTML = data.responseText;			
+
+                    try {
+                        bwc = parent.SUGAR.App.controller.layout.getComponent("bwc");
+                    } catch (e) {}
+
+                    if (bwc) {
+                        $("a", SUGAR.mySugar.currentDashlet).each(function() {
+                            bwc.convertToSidecarLink(this);
+                        });
+                    }
 				}
 
 				SUGAR.util.evalScript(data.responseText);
@@ -998,7 +1007,7 @@ SUGAR.mySugar = function() {
 			  effect:[{effect:YAHOO.widget.ContainerEffect.SLIDE, duration:0.5},
 			  		  {effect:YAHOO.widget.ContainerEffect.FADE, duration:.5}]
 			});
-			SUGAR.mySugar.firstLoad.setBody('<div id="firstLoad" align="center" style="vertical-align:middle;"><img src="' + SUGAR.themes.image_server + 'index.php?entryPoint=getImage&themeName='+SUGAR.themes.theme_name+'&imageName=img_loading.gif" align="absmiddle" /> <b>' + SUGAR.language.get('app_strings', 'LBL_FIRST_LOAD') +'</b></div>');
+			SUGAR.mySugar.firstLoad.setBody('<div id="firstLoad" align="center" style="vertical-align:middle;"><img src="' + SUGAR.themes.image_server + 'index.php?entryPoint=getImage&themeName='+SUGAR.themes.theme_name+'&imageName=img_loading.gif&v='+SUGAR.VERSION_MARK+'" align="absmiddle" /> <b>' + SUGAR.language.get('app_strings', 'LBL_FIRST_LOAD') +'</b></div>');
 			SUGAR.mySugar.firstLoad.render(document.body);		
 			document.getElementById('firstLoad_c').style.display = '';
 			SUGAR.mySugar.firstLoad.show();
@@ -1022,7 +1031,7 @@ SUGAR.mySugar = function() {
 			  effect:[{effect:YAHOO.widget.ContainerEffect.SLIDE, duration:0.5},
 			  		  {effect:YAHOO.widget.ContainerEffect.FADE, duration:.5}]
 			});
-			SUGAR.mySugar.loading.setBody('<div id="loadingPage" align="center" style="vertical-align:middle;"><img src="' + SUGAR.themes.image_server + 'index.php?entryPoint=getImage&themeName='+SUGAR.themes.theme_name+'&imageName=img_loading.gif" align="absmiddle" /> <b>' + SUGAR.language.get('app_strings', 'LBL_LOADING_PAGE') +'</b></div>');
+			SUGAR.mySugar.loading.setBody('<div id="loadingPage" align="center" style="vertical-align:middle;"><img src="' + SUGAR.themes.image_server + 'index.php?entryPoint=getImage&themeName='+SUGAR.themes.theme_name+'&imageName=img_loading.gif&v='+SUGAR.VERSION_MARK+'" align="absmiddle" /> <b>' + SUGAR.language.get('app_strings', 'LBL_LOADING_PAGE') +'</b></div>');
 			SUGAR.mySugar.loading.render(document.body);		
 			if (document.getElementById('loading_c'))
                 document.getElementById('loading_c').style.display = 'none';

@@ -11,7 +11,7 @@
 /**
  * @class View.Fields.Base.ForecastParetoChartField
  * @alias SUGAR.App.view.fields.BaseForecastParetoChartField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     /**
@@ -36,7 +36,12 @@
     collapsed: false,
 
     /**
-     * {@inheritdoc}
+     * Throttled Set Server Data call to prevent it from firing multiple times right in a row.
+     */
+    throttledSetServerData: false,
+
+    /**
+     * @inheritdoc
      */
     initialize: function(options) {
         this.once('render', function() {
@@ -47,7 +52,7 @@
 
         // we need this if because Jasmine breaks with out as you can't define a view with a layout in Jasmine Test
         // @see BR-1217
-        if(this.view.layout) {
+        if (this.view.layout) {
             // we need to listen to the context on the layout for this view for when it collapses
             this.view.layout.on('dashlet:collapse', this.handleDashletCollapse, this);
             this.view.layout.context.on('dashboard:collapse:fire', this.handleDashletCollapse, this);
@@ -55,10 +60,12 @@
             // because the size of the dashlet can change in the dashboard.
             this.view.layout.context.on('dashlet:draggable:stop', this.handleDashletCollapse, this);
         }
+
+        this.throttledSetServerData = _.throttle(this._setServerData, 1000);
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     bindDataChange: function() {
         app.events.on('preview:open', function() {
@@ -90,7 +97,7 @@
     /**
      * Utility method to check is the dashlet is visible
      *
-     * @returns {boolean}
+     * @return {boolean}
      */
     isDashletVisible: function() {
         return (!this.disposed && this.state === 'open' &&
@@ -100,10 +107,10 @@
     /**
      * Utility method to resize dashlet with check for visibility
      *
-     * @returns {boolean}
+     * @return {boolean}
      */
     resize: function() {
-        if (this.isDashletVisible()) {
+        if (this.isDashletVisible() && this.paretoChart && _.isFunction(this.paretoChart.update)) {
             this.paretoChart.update();
         }
     },
@@ -187,7 +194,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      * Clean up!
      */
     unbindData: function() {
@@ -222,6 +229,7 @@
             .margin({top: 0, right: 10, bottom: 0, left: 10})
             .showTitle(false)
             .tooltips(true)
+            .direction(app.lang.direction)
             .tooltipQuota(function(key, x, y, e, graph) {
                 // Format the value using currency class and user settings
                 var val = app.currency.formatAmountLocale(e.val, app.currency.getBaseCurrencyId());
@@ -236,7 +244,7 @@
                 // Format the value using currency class and user settings
                 var val = app.currency.formatAmountLocale(e.value),
                     lbl = app.lang.get('LBL_SALES_STAGE', 'Forecasts');
-                if(this.model.get('group_by') == 'probability') {
+                if (this.model.get('group_by') == 'probability') {
                     lbl = app.lang.get('LBL_OW_PROBABILITY', 'Forecasts') + ' (%)';
                 }
 
@@ -247,18 +255,51 @@
             .colorData('default')
             .colorFill('default')
             .yAxisTickFormat(function(d) {
-                return app.currency.getCurrencySymbol(app.currency.getBaseCurrencyId()) + d3.format(',.2s')(d);
+                var si = d3.formatPrefix(d, 2);
+                return app.currency.getCurrencySymbol(app.currency.getBaseCurrencyId()) + d3.round(si.scale(d), 2) + si.symbol;
             })
             .quotaTickFormat(function(d) {
-                return app.currency.getCurrencySymbol(app.currency.getBaseCurrencyId()) + d3.format(',.3s')(d);
+                var si = d3.formatPrefix(d, 2);
+                return app.currency.getCurrencySymbol(app.currency.getBaseCurrencyId()) + d3.round(si.scale(d), 2) + si.symbol;
+            })
+            //TODO: only do barClick if dashlet in Forecasts intelligence pane
+            .barClick(function(data, eo, chart, container) {
+                var d = eo.series,
+                    selectedSeries = eo.seriesIndex;
+
+                d.disabled = !d.disabled;
+
+                chart.dispatch.tooltipHide();
+
+                if (!chart.stacked()) {
+                    data.filter(function(d) {
+                        return d.series === selectedSeries && d.type === 'line';
+                    }).map(function(d) {
+                        d.disabled = !d.disabled;
+                        return d;
+                    });
+                }
+
+                // if there are no enabled data series, enable them all
+                if (!data.filter(function(d) {
+                    return !d.disabled && d.type === 'bar';
+                }).length) {
+                    data.map(function(d) {
+                        d.disabled = false;
+                        container.selectAll('.nv-series').classed('disabled', false);
+                        return d;
+                    });
+                }
+
+                container.call(chart);
             })
             .id(this.chartId)
             .strings({
                 legend: {
-                    close: app.lang.getAppString('LBL_CHART_LEGEND_CLOSE'),
-                    open: app.lang.getAppString('LBL_CHART_LEGEND_OPEN')
+                    close: app.lang.get('LBL_CHART_LEGEND_CLOSE'),
+                    open: app.lang.get('LBL_CHART_LEGEND_OPEN')
                 },
-                noData: app.lang.getAppString('LBL_CHART_NO_DATA')
+                noData: app.lang.get('LBL_CHART_NO_DATA')
             });
 
         // just on the off chance that no options param is passed in
@@ -365,18 +406,21 @@
                 },
                 'data': []
             },
+            disabledKeys = this.getDisabledChartKeys(),
             barData = [dataset, dataset + '_adjusted'].map(function(ds, seriesIdx) {
                 var vals = records.map(function(rec, recIdx) {
-                    return {
-                        series: seriesIdx,
-                        x: recIdx + 1,
-                        y: parseFloat(rec[ds]),
-                        y0: 0
-                    };
-                });
+                        return {
+                            series: seriesIdx,
+                            x: recIdx + 1,
+                            y: parseFloat(rec[ds]),
+                            y0: 0
+                        };
+                    }),
+                    label = this._serverData.labels['dataset'][ds];
 
                 return {
-                    key: this._serverData.labels['dataset'][ds],
+                    disabled: (_.contains(disabledKeys, label)),
+                    key: label,
                     series: seriesIdx,
                     type: 'bar',
                     values: vals,
@@ -385,22 +429,23 @@
             }, this),
             lineData = [dataset, dataset + '_adjusted'].map(function(ds, seriesIdx) {
                 var vals = records.map(function(rec, recIdx) {
-                    return {
-                        series: seriesIdx,
-                        x: recIdx + 1,
-                        y: parseFloat(rec[ds])
-                    };
-                });
+                        return {
+                            series: seriesIdx,
+                            x: recIdx + 1,
+                            y: parseFloat(rec[ds])
+                        };
+                    }),
+                    addToLine = 0,
+                    label = this._serverData.labels['dataset'][ds];
 
-                // fix the vals
-                var addToLine = 0;
                 _.each(vals, function(val, i, list) {
                     list[i].y += addToLine;
                     addToLine = list[i].y;
                 });
 
                 return {
-                    key: this._serverData.labels['dataset'][ds],
+                    disabled: (_.contains(disabledKeys, label)),
+                    key: label,
                     series: seriesIdx,
                     type: 'line',
                     values: vals,
@@ -469,7 +514,8 @@
             records = this._serverData.data,
             data = (!_.isEmpty(ranges)) ? records.filter(function(rec) {
                 return _.contains(ranges, rec.forecast);
-            }) : records;
+            }) : records,
+            disabledKeys = this.getDisabledChartKeys();
 
         _.each(this._serverData.labels[type], function(label, value) {
             var td = data.filter(function(d) {
@@ -484,7 +530,7 @@
 
                 // loop though all the data and map it to the correct x series
                 _.each(td, function(record) {
-                    for(var y = 0; y < axis.length; y++) {
+                    for (var y = 0; y < axis.length; y++) {
                         if (record.date_closed_timestamp >= axis[y].start_timestamp &&
                             record.date_closed_timestamp <= axis[y].end_timestamp) {
                             // add the value
@@ -498,6 +544,7 @@
                 }, this);
 
                 barData.push({
+                    disabled: (_.contains(disabledKeys, label)),
                     key: label,
                     series: seriesIdx,
                     type: 'bar',
@@ -529,6 +576,24 @@
     },
 
     /**
+     * Look at the current chart if it exists and return the keys that are currently
+     * disabled they can still be disabled when the chart is re-rendered
+     *
+     * @return {Array}
+     */
+    getDisabledChartKeys: function() {
+        var currentChartData = d3.select('#' + this.chartId + ' svg').data(),
+            disabledBars = (!_.isUndefined(currentChartData[0])) ?
+                _.filter(currentChartData[0].data, function(d) {
+                    return (!_.isUndefined(d.disabled) && d.disabled === true);
+                }) : [];
+
+        return (!_.isEmpty(disabledBars)) ? _.map(disabledBars, function(d) {
+            return d.key;
+        }) : [];
+    },
+
+    /**
      * Accepts params object and builds the proper endpoint url for charts
      *
      * @return {String} has the proper structure for the chart url.
@@ -540,7 +605,7 @@
 
     /**
      * Do we have serverData yet?
-     * @returns {boolean}
+     * @return {boolean}
      */
     hasServerData: function() {
         return !_.isUndefined(this._serverData);
@@ -548,7 +613,7 @@
 
     /**
      * Return the data that was passed back from the server
-     * @returns {Object}
+     * @return {Object}
      */
     getServerData: function() {
         return this._serverData;
@@ -560,12 +625,22 @@
      * @param {Boolean} [adjustLabels]
      */
     setServerData: function(data, adjustLabels) {
+        this.throttledSetServerData(data, adjustLabels);
+    },
+
+    /**
+     * This method is called by the _.throttle call in initialize
+     *
+     * @param {Object} data
+     * @param {Boolean} [adjustLabels]
+     * @private
+     */
+    _setServerData: function(data, adjustLabels) {
         this._serverData = data;
 
         if (adjustLabels === true) {
             this.adjustProbabilityLabels();
         }
-
         this.renderDashletContents();
     },
 
@@ -582,7 +657,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _dispose: function() {
         this.handlePrinting('off');

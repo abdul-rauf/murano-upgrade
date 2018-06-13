@@ -134,6 +134,15 @@
             this.collection.off();
         }
 
+        // Make sure only one request is sent for each module.
+        prototype._request = prototype._request || {};
+        if (prototype._request[module]) {
+            prototype._request[module].xhr.done(_.bind(function() {
+                this._onSuccessCallback(options.success);
+            }, this));
+            return;
+        }
+
         // Try to retrieve cached filters.
         prototype._cache = prototype._cache || {};
         if (prototype._cache[module]) {
@@ -141,18 +150,12 @@
             return;
         }
 
-        this._resetFiltersCache(module);
+        this._initFiltersModuleCache();
 
         // No cache found, retrieve filters.
         this._loadPredefinedFilters();
 
-        if (!app.acl.hasAccess('list', module)) {
-            app.logger.debug('No "list" access to ' + module + ' so skipping fetch.');
-            this._onSuccessCallback(options.success);
-            return;
-        }
-
-        prototype.fetch.call(this, {
+        var requestObj = {
             showAlerts: false,
             filter: [
                 {'created_by': app.user.id},
@@ -162,6 +165,9 @@
                 this._cacheFilters(models);
                 this._onSuccessCallback(options.success);
             }, this),
+            complete: function() {
+                delete prototype._request[module];
+            },
             error: function() {
                 if (_.isFunction(options.error)) {
                     options.error();
@@ -169,7 +175,8 @@
                     app.logger.error('Unable to get filters from the server.');
                 }
             }
-        });
+        };
+        prototype._request[module] = prototype.fetch.call(this, requestObj);
     },
 
     /**
@@ -307,7 +314,7 @@
         var module = model.get('module_name') || this.moduleName;
 
         var fallbackLangModules = model.langModules || [module, 'Filters'];
-        var moduleName = app.lang.get('LBL_MODULE_NAME', module);
+        var moduleName = app.lang.getModuleName(module, {plural: true});
         var text = app.lang.get(name, fallbackLangModules) || '';
         return app.utils.formatString(text, [moduleName]);
     },
@@ -449,13 +456,12 @@
         delete prototype._cache[this.moduleName].user[model.id];
     },
 
-
     /**
-     * Resets the filter cache for this module.
+     * Initializes the filter cache for this module.
      *
      * @private
      */
-    _resetFiltersCache: function() {
+    _initFiltersModuleCache: function() {
         var prototype = this._getPrototype();
         prototype._cache = prototype._cache || {};
         prototype._cache[this.moduleName] = {
@@ -464,6 +470,18 @@
             template: {},
             user: {}
         };
+    },
+
+    /**
+     * Clears all the filters and their associated HTTP requests from the cache.
+     */
+    resetFiltersCacheAndRequests: function() {
+        var prototype = this._getPrototype();
+        prototype._cache = {};
+        _.each(prototype._request, function(request, module) {
+            request.xhr.abort();
+        });
+        prototype._request = {};
     },
 
     /**

@@ -20,9 +20,15 @@ require_once 'modules/ModuleBuilder/parsers/MetaDataFiles.php';
 
 class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
-
     const HISTORYFILENAME = 'restored.php';
     const HISTORYVARIABLENAME = 'viewdefs';
+
+    /**
+     * Subpanel link name
+     *
+     * @var string
+     */
+    protected $linkName;
 
     /**
      * The constructor
@@ -37,7 +43,7 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
         $this->mdc = new MetaDataConverter();
         $this->loadedModule = $loadedModule;
         $this->setViewClient($client);
-        $linkName = $this->linkName = $this->getLinkName($subpanelName, $loadedModule);
+        $linkName = $this->linkName = $this->detectLinkName($subpanelName, $loadedModule);
 
         // get the link and the related module name as the module we need the subpanel from
         $bean = BeanFactory::getBean($loadedModule);
@@ -74,16 +80,18 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
         // a layout is restored.
         $this->historyPathname = 'custom/history/modules/' . $this->_moduleName . '/clients/' . $this->getViewClient(
             ) . '/views/' . $this->sidecarSubpanelName. '/' . self::HISTORYFILENAME;
-        $this->_history = new History($this->historyPathname);
 
         if (file_exists($this->historyPathname)) {
             // load in the subpanelDefOverride from the history file
             $GLOBALS['log']->debug(get_class($this) . ": loading from history");
             require $this->historyPathname;
         }
+        $this->_history = new History($this->historyPathname);
 
+        $this->_history = new History($this->historyPathname);
         $this->_viewdefs = !empty($viewdefs) ? $this->getNewViewDefs($viewdefs) : array();
         $this->_fielddefs = $this->bean->field_defs;
+        $this->_mergeFielddefs($this->_fielddefs, $this->_viewdefs);
         $this->_language = '';
         // don't attempt to access the template_instance property if our subpanel represents a collection, as it won't be there - the sub-sub-panels get this value instead
         if (isset($this->_viewdefs['type']) && $this->_viewdefs['type'] != 'collection') {
@@ -102,6 +110,26 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
     public function getAffectedModules()
     {
         return array($this->_moduleName, $this->loadedModule);
+    }
+
+    /**
+     * Returns subpanel primary module name
+     *
+     * @return string
+     */
+    public function getPrimaryModuleName()
+    {
+        return $this->loadedModule;
+    }
+
+    /**
+     * Returns subpanel link name
+     *
+     * @return string
+     */
+    public function getLinkName()
+    {
+        return $this->linkName;
     }
 
     /**
@@ -156,12 +184,13 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
     }
 
     /**
-     * Get the link name for a subpanel using witchcraft and wizardry
+     * Detects the link name for a subpanel using witchcraft and wizardry
+     *
      * @param string $subpanelName - this is the name of the subpanel
      * @param string $loadedModule - this is the name of the module that is loaded
      * @return string the linkname for the subpanel
      */
-    protected function getLinkName($subpanelName, $loadedModule)
+    protected function detectLinkName($subpanelName, $loadedModule)
     {
         if (isModuleBWC($loadedModule) && !file_exists("modules/{$loadedModule}/clients/" . $this->getViewClient() . "/layouts/subpanels/subpanels.php")) {
             @include "modules/{$loadedModule}/metadata/subpaneldefs.php";
@@ -354,8 +383,6 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
         if (strpos($this->sidecarSubpanelName, 'subpanel-for-') !== false) {
             $this->_viewdefs['type'] = 'subpanel-list';
         }
-        // TODO: remove this when we have BWC modules converted
-        $this->stripUnwantedBWCKeys();
 
         write_array_to_file(
             $varname,
@@ -411,30 +438,7 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
             if (!empty($viewdefs[$this->loadedModule][$client]['layout']['subpanels']['components'][0]['override_subpanel_list_view']['link'])
                 && $viewdefs[$this->loadedModule][$client]['layout']['subpanels']['components'][0]['override_subpanel_list_view']['link'] == $this->linkName
             ) {
-                unlink($override);
-            }
-        }
-    }
-
-    /**
-     * Temporary method to remove BWC keys for sidecar subpanels
-     */
-    public function stripUnwantedBWCKeys()
-    {
-        static $unwantedKeys = array(
-            'width',
-        );
-        foreach ($this->_viewdefs['panels'] as &$panel) {
-            if (empty($panel['fields']) || !is_array($panel['fields'])) {
-                continue;
-            }
-            foreach ($panel['fields'] as &$field) {
-                foreach ($unwantedKeys as $unwantedKey) {
-                    if (empty($field[$unwantedKey])) {
-                        continue;
-                    }
-                    unset($field[$unwantedKey]);
-                }
+                SugarAutoLoader::unlink($override);
             }
         }
     }

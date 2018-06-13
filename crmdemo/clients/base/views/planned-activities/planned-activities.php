@@ -47,7 +47,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
             array(
                 'type' => 'actiondropdown',
                 'no_default_action' => true,
-                'icon' => 'icon-plus',
+                'icon' => 'fa-plus',
                 'buttons' => array(
                     array(
                         'type' => 'dashletaction',
@@ -142,7 +142,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
             'row_actions' => array(
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'icon-remove-circle',
+                    'icon' => 'fa-times-circle',
                     'css_class' => 'btn btn-mini',
                     'event' => 'planned-activities:close-record:fire',
                     'target' => 'view',
@@ -151,7 +151,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
                 ),
                 array(
                     'type' => 'unlink-action',
-                    'icon' => 'icon-unlink',
+                    'icon' => 'fa-chain-broken',
                     'css_class' => 'btn btn-mini',
                     'event' => 'tabbed-dashlet:unlink-record:fire',
                     'target' => 'view',
@@ -169,6 +169,12 @@ $viewdefs['base']['view']['planned-activities'] = array(
                 'type' => 'overdue-badge',
                 'css_class' => 'pull-right',
             ),
+            'fields' => array(
+                'name',
+                'assigned_user_name',
+                'assigned_user_id',
+                'date_start',
+            ),
         ),
         array(
             'filter_applied_to' => 'date_start',
@@ -182,7 +188,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
             'row_actions' => array(
                 array(
                     'type' => 'rowaction',
-                    'icon' => 'icon-remove-circle',
+                    'icon' => 'fa-times-circle',
                     'css_class' => 'btn btn-mini',
                     'event' => 'planned-activities:close-record:fire',
                     'target' => 'view',
@@ -191,7 +197,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
                 ),
                 array(
                     'type' => 'unlink-action',
-                    'icon' => 'icon-unlink',
+                    'icon' => 'fa-chain-broken',
                     'css_class' => 'btn btn-mini',
                     'event' => 'tabbed-dashlet:unlink-record:fire',
                     'target' => 'view',
@@ -207,6 +213,12 @@ $viewdefs['base']['view']['planned-activities'] = array(
             'overdue_badge' => array(
                 'name' => 'date_start',
                 'type' => 'overdue-badge',
+            ),
+            'fields' => array(
+                'name',
+                'assigned_user_name',
+                'assigned_user_id',
+                'date_start',
             ),
         ),
     ),

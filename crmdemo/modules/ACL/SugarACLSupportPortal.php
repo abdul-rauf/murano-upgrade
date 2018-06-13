@@ -94,7 +94,7 @@ class SugarACLSupportPortal extends SugarACLStatic
         $accessGranted = null;
 
         if ($this->isPortalUser() ) {
-            $bean = isset($context['bean'])?$context['bean']:null;
+            $bean = isset($context['bean'])?$context['bean']:BeanFactory::newBean($module);
             if (!$bean) {
                 // There is no bean, without a bean portal ACL's wont work
                 // So for security we will deny the request
@@ -108,7 +108,9 @@ class SugarACLSupportPortal extends SugarACLStatic
                  && $bean->module_dir != 'Notes'
                  && $bean->module_dir != 'Contacts' 
                  && $bean->module_dir != 'Bugs'
-                 && $bean->module_dir != 'KBDocuments' ) {
+                 && $bean->module_dir != 'KBContents'
+                 && $bean->module_dir != 'Categories'
+                 && $bean->module_dir != 'DocumentRevisions' ) {
                 return false;
             }
             $context['owner_override'] = $this->isPortalOwner($bean);
@@ -175,6 +177,7 @@ class SugarACLSupportPortal extends SugarACLStatic
         }
 
         if( !isset($accessGranted) ) {
+            $module = ($module == 'Categories') ? 'KBContents' : $module;
             $accessGranted = parent::fieldACL($module, $action, $context);
         }
 
@@ -192,6 +195,7 @@ class SugarACLSupportPortal extends SugarACLStatic
         $accessGranted = $this->portalAccess($module, $action, $context);
 
         if( !isset($accessGranted) ) {
+            $module = ($module == 'Categories') ? 'KBContents' : $module;
             $accessGranted = parent::beanACL($module, $action, $context);
         }
 

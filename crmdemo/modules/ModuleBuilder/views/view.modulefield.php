@@ -9,8 +9,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('modules/ModuleBuilder/MB/AjaxCompose.php');
-require_once('modules/DynamicFields/FieldViewer.php');
+
+use \Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
+use \Sugarcrm\Sugarcrm\SearchEngine\Capability\GlobalSearch\GlobalSearchCapable;
+
+require_once 'modules/ModuleBuilder/MB/AjaxCompose.php';
+require_once 'modules/DynamicFields/FieldViewer.php';
 
 class ViewModulefield extends SugarView
 {
@@ -251,6 +255,11 @@ class ViewModulefield extends SugarView
             $fv->ss->assign('no_duplicate', true);
         }
 
+        // Do not allow cloning of non-supported field types
+        if (isset($vardef['type']) && !array_key_exists($vardef['type'], $field_types)) {
+            $fv->ss->assign('no_duplicate', true);
+        }
+
         $fv->ss->assign('action',$action);
         $fv->ss->assign('isClone', ($isClone ? 1 : 0));
         $fv->ss->assign('isNew', $isNew);
@@ -261,20 +270,34 @@ class ViewModulefield extends SugarView
         ksort($field_types);
         $fv->ss->assign('field_types',$field_types);
 
-        $ftsEngineType = getFTSEngineType();
-        $usa = new UnifiedSearchAdvanced();
-        if(SugarSearchEngineFactory::getInstance()->isTypeFtsEnabled($vardef['type']) &&
-            //Show FTS for all modules under module builder and only check OOB modules for shoudlShowModule
-            ((!empty($_REQUEST['view_package']) && $_REQUEST['view_package'] != 'studio')
-                || $usa->shouldShowModule($moduleName)
-            )
-        ) {
-            $ftsBoostOptions = getFTSBoostOptions($ftsEngineType.'_boost_options');
-            $fv->ss->assign('fts_options', $ftsBoostOptions);
+        // Full Text Search settings
+        $engine = SearchEngine::getInstance()->getEngine();
+        if ($engine instanceof GlobalSearchCapable && in_array($vardef['type'], $engine->getStudioSupportedTypes())) {
+
+            // default fts parameters
+            $ftsFieldConfig = '0';
+            $ftsBoost = '1';
+
+            // determine fts configuration
+            if (!empty($vardef['full_text_search']) &&
+                !empty($vardef['full_text_search']['searchable']) &&
+                $vardef['full_text_search']['searchable'] == true) {
+                    $ftsFieldConfig = '2';
+            }
+
+            // determine boost value
+            if (!empty($vardef['full_text_search']['boost'])) {
+                $ftsBoost = (float) $vardef['full_text_search']['boost'];
+            }
+
+            $fv->ss->assign('fts_field_config', $GLOBALS['app_list_strings']['fts_field_config']);
+            $fv->ss->assign('fts_field_config_selected', $ftsFieldConfig);
+            $fv->ss->assign('fts_field_boost_value', $ftsBoost);
             $fv->ss->assign('show_fts', true);
         } else {
             $fv->ss->assign('show_fts', false);
         }
+
         //Ensure certain field types always have correct formula return types for validation.
         if (!empty($vardef['type'])) {
             switch ($vardef['type']) {

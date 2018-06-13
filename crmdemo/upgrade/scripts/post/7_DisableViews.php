@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/HealthCheck/Scanner/Scanner.php';
-
 /**
  * Post upgrade script which moves unsupported views to Disabled directory
  * It covers cases hasCustomViews and hasCustomViewsModDir from HealthCheck
@@ -26,10 +24,6 @@ class SugarUpgradeDisableViews extends UpgradeScript
      */
     public function run()
     {
-        if (version_compare($this->from_version, '7.5', '>=')) {
-            return;
-        }
-
         if (empty($this->state['healthcheck'])) {
             return;
         }
@@ -49,6 +43,15 @@ class SugarUpgradeDisableViews extends UpgradeScript
             }
         }
 
+        if ($files) {
+            $this->renameDisabled($files);
+        }
+
+
+    }
+
+    public function renameDisabled($files)
+    {
         foreach ($files as $fileFrom => $fileTo) {
             sugar_mkdir(dirname($fileTo), null, true);
             sugar_rename($fileFrom, $fileTo);

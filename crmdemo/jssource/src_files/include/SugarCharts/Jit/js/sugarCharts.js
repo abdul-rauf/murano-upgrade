@@ -9,7 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: customSugarCharts.js 2010-12-01 23:11:36Z lhuynh $
 
 function loadSugarChart (chartId, jsonFilename, css, chartConfig, params, callback) {
     this.chartObject = "";
@@ -69,10 +69,10 @@ function loadSugarChart (chartId, jsonFilename, css, chartConfig, params, callba
                                 .id(chartId)
                                 .strings({
                                     legend: {
-                                        close: SUGAR.App.lang.getAppString('LBL_CHART_LEGEND_CLOSE'),
-                                        open: SUGAR.App.lang.getAppString('LBL_CHART_LEGEND_OPEN')
+                                        close: SUGAR.App.lang.get('LBL_CHART_LEGEND_CLOSE'),
+                                        open: SUGAR.App.lang.get('LBL_CHART_LEGEND_OPEN')
                                     },
-                                    noData: SUGAR.App.lang.getAppString('LBL_CHART_NO_DATA')
+                                    noData: SUGAR.App.lang.get('LBL_CHART_NO_DATA')
                                 });
 
                             // get chartId from params or use the default for sugar

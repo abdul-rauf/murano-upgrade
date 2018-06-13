@@ -1,6 +1,6 @@
 <?php
-$listViewDefs ['Leads'] = 
-array (
+// created: 2015-06-13 07:05:46
+$listViewDefs['Leads'] = array (
   'ACCOUNT_NAME' => 
   array (
     'width' => '15%',
@@ -144,7 +144,7 @@ array (
     'width' => '16%',
     'label' => 'LBL_LIST_EMAIL_ADDRESS',
     'sortable' => false,
-    'customCode' => '{$EMAIL1_LINK}{$EMAIL1}</a>',
+    // 'customCode' => '{$EMAIL1_LINK}{$EMAIL1}</a>',
     'default' => false,
   ),
   'DO_NOT_CALL' => 
@@ -254,5 +254,12 @@ array (
     'label' => 'LBL_LIST_TEAM',
     'default' => false,
   ),
+  'EMAIL' => 
+  array (
+    'width' => '16%',
+    'label' => 'LBL_LIST_EMAIL_ADDRESS',
+    'sortable' => false,
+    // 'customCode' => '{$EMAIL_LINK}{$EMAIL}</a>',
+    'default' => false,
+  ),
 );
-?>

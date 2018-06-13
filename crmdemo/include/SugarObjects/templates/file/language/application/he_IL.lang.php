@@ -10,26 +10,19 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
 /*********************************************************************************
-
+ * $Id$
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- /*********************************************************************************
- * Hebrew vertion by:
- * Menahem Lurie Consultancy and IT Management,SugarCRM partner - Israel
- * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
- * All Rights Reserved.
- * *******************************************************************************/
  
 $app_list_strings = array (
 strtolower($object_name).'_category_dom' =>
     array (
     '' => '',
     'Marketing' => 'שיווק',
-    'Knowledege Base' => 'מרכז הידע',
+    'Knowledege Base' => 'מרכז מידע',
     'Sales' => 'מכירות',
   ),
 
@@ -38,18 +31,16 @@ strtolower($object_name).'_category_dom' =>
     '' => '',
     'Marketing Collateral' => 'שיווק מקבילי',
     'Product Brochures' => 'עלון מוצרים',
-    'FAQ' => 'FAQ',
+    'FAQ' => 'שאלות נפוצות',
   ),
 
     strtolower($object_name).'_status_dom' =>
     array (
     'Active' => 'פעיל',
     'Draft' => 'טיוטה',
-    'FAQ' => 'שו"ת',
+    'FAQ' => 'שאלות נפוצות',
     'Expired' => 'פג תוקף',
     'Under Review' => 'בסקירה',
-    'Pending' => 'תלוי ועומד',
+    'Pending' => 'תלויות ועומדות',
   ),
   );
-
-

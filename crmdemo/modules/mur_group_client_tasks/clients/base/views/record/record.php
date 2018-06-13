@@ -1,147 +1,142 @@
 <?php
-$module_name = 'mur_group_client_tasks';
-$viewdefs[$module_name] = 
-array (
-  'base' => 
+// created: 2018-06-13 10:57:00
+$viewdefs['mur_group_client_tasks']['base']['view']['record'] = array (
+  'panels' => 
   array (
-    'view' => 
+    0 => 
     array (
-      'record' => 
+      'name' => 'panel_header',
+      'label' => 'LBL_RECORD_HEADER',
+      'header' => true,
+      'fields' => 
       array (
-        'panels' => 
+        0 => 
         array (
-          0 => 
-          array (
-            'name' => 'panel_header',
-            'label' => 'LBL_RECORD_HEADER',
-            'header' => true,
-            'fields' => 
-            array (
-              0 => 
-              array (
-                'name' => 'picture',
-                'type' => 'avatar',
-                'width' => 42,
-                'height' => 42,
-                'dismiss_label' => true,
-                'readonly' => true,
-              ),
-              1 => 'name',
-              2 => 
-              array (
-                'name' => 'favorite',
-                'label' => 'LBL_FAVORITE',
-                'type' => 'favorite',
-                'readonly' => true,
-                'dismiss_label' => true,
-              ),
-              3 => 
-              array (
-                'name' => 'follow',
-                'label' => 'LBL_FOLLOW',
-                'type' => 'follow',
-                'readonly' => true,
-                'dismiss_label' => true,
-              ),
-            ),
-          ),
-          1 => 
-          array (
-            'name' => 'panel_body',
-            'label' => 'LBL_RECORD_BODY',
-            'columns' => 2,
-            'labelsOnTop' => true,
-            'placeholders' => true,
-            'newTab' => false,
-            'panelDefault' => 'expanded',
-            'fields' => 
-            array (
-              0 => 
-              array (
-                'name' => 'task_date',
-                'label' => 'LBL_TASK_DATE',
-              ),
-              1 => 
-              array (
-                'name' => 'client',
-                'studio' => 'visible',
-                'label' => 'LBL_CLIENT',
-              ),
-              2 => 'assigned_user_name',
-              3 => 'team_name',
-            ),
-          ),
-          2 => 
-          array (
-            'name' => 'panel_hidden',
-            'label' => 'LBL_SHOW_MORE',
-            'hide' => true,
-            'columns' => 2,
-            'labelsOnTop' => true,
-            'placeholders' => true,
-            'newTab' => false,
-            'panelDefault' => 'expanded',
-            'fields' => 
-            array (
-              0 => 
-              array (
-                'name' => 'description',
-                'span' => 12,
-              ),
-              1 => 
-              array (
-                'name' => 'date_modified_by',
-                'readonly' => true,
-                'type' => 'fieldset',
-                'label' => 'LBL_DATE_MODIFIED',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'date_modified',
-                  ),
-                  1 => 
-                  array (
-                    'type' => 'label',
-                    'default_value' => 'LBL_BY',
-                  ),
-                  2 => 
-                  array (
-                    'name' => 'modified_by_name',
-                  ),
-                ),
-              ),
-              2 => 
-              array (
-                'name' => 'date_entered_by',
-                'readonly' => true,
-                'type' => 'fieldset',
-                'label' => 'LBL_DATE_ENTERED',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'date_entered',
-                  ),
-                  1 => 
-                  array (
-                    'type' => 'label',
-                    'default_value' => 'LBL_BY',
-                  ),
-                  2 => 
-                  array (
-                    'name' => 'created_by_name',
-                  ),
-                ),
-              ),
-            ),
-          ),
+          'name' => 'picture',
+          'type' => 'avatar',
+          'width' => 42,
+          'height' => 42,
+          'dismiss_label' => true,
+          'readonly' => true,
         ),
-        'templateMeta' => 
+        1 => 'name',
+        2 => 
         array (
-          'useTabs' => false,
+          'name' => 'favorite',
+          'label' => 'LBL_FAVORITE',
+          'type' => 'favorite',
+          'readonly' => true,
+          'dismiss_label' => true,
+        ),
+        3 => 
+        array (
+          'name' => 'follow',
+          'label' => 'LBL_FOLLOW',
+          'type' => 'follow',
+          'readonly' => true,
+          'dismiss_label' => true,
         ),
       ),
     ),
+    1 => 
+    array (
+      'name' => 'panel_body',
+      'label' => 'LBL_RECORD_BODY',
+      'columns' => 2,
+      'labelsOnTop' => true,
+      'placeholders' => true,
+      'newTab' => false,
+      'panelDefault' => 'expanded',
+      'fields' => 
+      array (
+        0 => 
+        array (
+          'name' => 'task_date',
+          'label' => 'LBL_TASK_DATE',
+        ),
+        1 => 
+        array (
+          'name' => 'client',
+          'studio' => 'visible',
+          'label' => 'LBL_CLIENT',
+        ),
+        2 => 'assigned_user_name',
+        3 => 'team_name',
+        4 => 
+        array (
+          'name' => 'tag',
+          'span' => 12,
+        ),
+      ),
+    ),
+    2 => 
+    array (
+      'name' => 'panel_hidden',
+      'label' => 'LBL_SHOW_MORE',
+      'hide' => true,
+      'columns' => 2,
+      'labelsOnTop' => true,
+      'placeholders' => true,
+      'newTab' => false,
+      'panelDefault' => 'expanded',
+      'fields' => 
+      array (
+        0 => 
+        array (
+          'name' => 'description',
+          'span' => 12,
+        ),
+        1 => 
+        array (
+          'name' => 'date_modified_by',
+          'readonly' => true,
+          'type' => 'fieldset',
+          'label' => 'LBL_DATE_MODIFIED',
+          'fields' => 
+          array (
+            0 => 
+            array (
+              'name' => 'date_modified',
+            ),
+            1 => 
+            array (
+              'type' => 'label',
+              'default_value' => 'LBL_BY',
+            ),
+            2 => 
+            array (
+              'name' => 'modified_by_name',
+            ),
+          ),
+        ),
+        2 => 
+        array (
+          'name' => 'date_entered_by',
+          'readonly' => true,
+          'type' => 'fieldset',
+          'label' => 'LBL_DATE_ENTERED',
+          'fields' => 
+          array (
+            0 => 
+            array (
+              'name' => 'date_entered',
+            ),
+            1 => 
+            array (
+              'type' => 'label',
+              'default_value' => 'LBL_BY',
+            ),
+            2 => 
+            array (
+              'name' => 'created_by_name',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+  'templateMeta' => 
+  array (
+    'useTabs' => false,
   ),
 );

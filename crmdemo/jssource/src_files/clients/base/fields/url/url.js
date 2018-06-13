@@ -11,9 +11,16 @@
 /**
  * @class View.Fields.Base.UrlField
  * @alias SUGAR.App.view.fields.BaseUrlField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
+    /**
+     * @inheritdoc
+     *
+     * The direction for this field should always be `ltr`.
+     */
+    direction: 'ltr',
+
     plugins: ['EllipsisInline'],
     initialize: function(options) {
         this._super("initialize", arguments);
@@ -22,6 +29,7 @@
             this.def.readonly = true;
         }
     },
+
     format:function(value){
         if (value && !value.match(/^([a-zA-Z]+):\/\//)) {
             value = "http://" + value;

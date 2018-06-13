@@ -29,7 +29,7 @@ $viewdefs['base']['layout']['activities'] = array(
                                         'availableToggles' => array(
                                             array(
                                                 'name' => 'activitystream',
-                                                'icon' => 'icon-time',
+                                                'icon' => 'fa-clock-o',
                                                 'label' => 'LBL_ACTIVITY_STREAM',
                                             ),
                                         ),
@@ -60,18 +60,6 @@ $viewdefs['base']['layout']['activities'] = array(
                             'type' => 'simple',
                             'name' => 'main-pane',
                             'span' => 8,
-                        ),
-                    ),
-                    array(
-                        'layout' => array(
-                            'components' => array(
-                                array(
-                                    'layout' => 'list-sidebar',
-                                ),
-                            ),
-                            'type' => 'simple',
-                            'name' => 'side-pane',
-                            'span' => 4,
                         ),
                     ),
                     array(

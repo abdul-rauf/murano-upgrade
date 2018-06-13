@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
+ * $Header$
  * Description: TODO:  To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
@@ -24,8 +24,6 @@ if (!is_admin($current_user) && empty($workflow_modules))
 {
    sugar_die("Unauthorized access to WorkFlow.");
 }
-
-
 
 ///////////Show related config option
 //Set to true - show related dynamic fields

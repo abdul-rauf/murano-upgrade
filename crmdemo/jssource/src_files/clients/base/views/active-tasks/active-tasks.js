@@ -27,7 +27,7 @@
     extendsFrom: 'TabbedDashletView',
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * @property {Object} _defaultSettings
      * @property {Number} _defaultSettings.limit Maximum number of records to
@@ -42,7 +42,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     initialize: function(options) {
         options.meta = options.meta || {};
@@ -58,11 +58,13 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     _initEvents: function() {
         this._super('_initEvents');
         this.on('active-tasks:close-task:fire', this.closeTask, this);
+        this.on('linked-model:create', this.loadData, this);
+        this.on('render:rows', this._renderAvatars, this);
         return this;
     },
 
@@ -76,7 +78,7 @@
     closeTask: function(model){
         var self = this;
         var name = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model)).trim();
-        var context = app.lang.get('LBL_MODULE_NAME_SINGULAR', model.module).toLowerCase() + ' ' + name;
+        var context = app.lang.getModuleName(model.module).toLowerCase() + ' ' + name;
         app.alert.show('complete_task_confirmation:' + model.get('id'), {
             level: 'confirmation',
             messages: app.utils.formatString(app.lang.get('LBL_ACTIVE_TASKS_DASHLET_CONFIRM_CLOSE'), [context]),
@@ -90,7 +92,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * FIXME: This should be removed when metadata supports date operators to
      * allow one to define relative dates for date filters.
@@ -128,7 +130,7 @@
         } else {
             var self = this;
             app.drawer.open({
-                layout: 'create-actions',
+                layout: 'create',
                 context: {
                     create: true,
                     module: params.module
@@ -166,7 +168,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * New model related properties are injected into each model:
      *
@@ -185,5 +187,7 @@
         }
 
         this._super('_renderHtml');
+
+        this._renderAvatars();
     }
 })

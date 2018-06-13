@@ -1,4 +1,5 @@
 <?php
+// created: 2018-06-13 10:47:53
 $viewdefs['Notes']['mobile']['view']['detail'] = array (
   'templateMeta' => 
   array (

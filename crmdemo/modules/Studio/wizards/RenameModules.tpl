@@ -55,6 +55,7 @@
             <tr>
                 <td colspan='2'>
                     <form method='post' action='index.php' name='dropdownsform'>
+{sugar_csrf_form_token}
                         <input type='hidden' name='action' value='wizard'>
                         <input type='hidden' name='wizard' value='RenameModules'>
                         <input type='hidden' name='option' value='EditDropdown'>
@@ -72,6 +73,7 @@
 <tr>
     <td>
 <form method='post' action='index.php' name='editdropdown'>
+{sugar_csrf_form_token}
 <input type='hidden' name='action' value='wizard'>
 <input type='hidden' name='wizard' value='RenameModules'>
 <input type='hidden' name='option' value='SaveDropDown'>
@@ -85,19 +87,19 @@
 {foreach from=$dropdown item="value" key="key"}
 <tr>
     <td>
-        <span id='slot{$rowCounter}b' >
-            <span onclick='prepChangeDropDownValue({$rowCounter}, document.getElementById("slot{$rowCounter}_value"));'>{$editImage}</span>
+        <span id='slot{$rowCounter}b' class="{$value.module}">
+            <span class="{$value.module}-edit rename-slot-button" onclick='prepChangeDropDownValue({$rowCounter}, document.getElementById("slot{$rowCounter}_value"));'>{$editImage}</span>
             &nbsp;
-            <span id ='slot{$rowCounter}_value' onclick='prepChangeDropDownValue({$rowCounter}, this);'>{$value.lang}</span>
+            <span class="{$value.module}-title rename-slot-title" id ='slot{$rowCounter}_value' onclick='prepChangeDropDownValue({$rowCounter}, this);'>{$value.lang}</span>
             <span id='slot{$rowCounter}_textspan' style='display:none;'>{$value.user_lang}
                 <table style="margin-left:15px;">
                     <tr>
                         <td align="right">{$MOD.LBL_SINGULAR}</td>
-                        <td align="left"><input id='slot{$rowCounter}_stext' value='{$value.singular}' onchange='setSingularDropDownValue({$rowCounter});' type='text'></td>
+                        <td align="left"><input class="{$value.module}-singular rename-label-singular" id='slot{$rowCounter}_stext' value='{$value.singular}' onchange='setSingularDropDownValue({$rowCounter});' type='text'></td>
                     </tr>
                     <tr>
                         <td align="right">{$MOD.LBL_PLURAL}</td>
-                        <td align="left"><input id='slot{$rowCounter}_text' value='{$value.lang}' type='text'  onchange='setDropDownValue({$rowCounter}, this.value, true)' ></td>
+                        <td align="left"><input class="{$value.module}-plural rename-label-plural" id='slot{$rowCounter}_text' value='{$value.lang}' type='text'  onchange='setDropDownValue({$rowCounter}, this.value, true)' ></td>
                     </tr>
                 </table>
                 <input name='slot_{$rowCounter}' id='slot_{$rowCounter}' value='{$rowCounter}' type = 'hidden'>
@@ -153,20 +155,36 @@
         text.focus();
     }
 
+    function checkElementForErrors(el)
+    {
+        var formName = 'editdropdown';
+
+        if( YAHOO.lang.trim(el.value) == "")
+        {
+            var errorMessage = SUGAR.language.get('app_strings', 'ERR_MISSING_REQUIRED_FIELDS');
+            add_error_style(formName, el, errorMessage, true);
+            return true;
+        }
+        else
+        {
+            remove_error_style(formName, el);
+            return false;
+        }
+    }
+
     function checkForErrors(rowCount)
     {
         var foundErrors = false;
         var el1 = document.getElementById("slot" + rowCount + "_text");
         var el2 = document.getElementById("slot" + rowCount + "_stext");
 
-        if( YAHOO.lang.trim(el1.value) == "")
+        if( checkElementForErrors(el1) )
         {
-            add_error_style('editdropdown', el1, SUGAR.language.get('app_strings', 'ERR_MISSING_REQUIRED_FIELDS'),true);
             foundErrors = true;
         }
-        if( YAHOO.lang.trim(el2.value) == "")
+
+        if( checkElementForErrors(el2) )
         {
-            add_error_style('editdropdown', el2, SUGAR.language.get('app_strings', 'ERR_MISSING_REQUIRED_FIELDS'),true);
             foundErrors = true;
         }
 

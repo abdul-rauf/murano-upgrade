@@ -1,8 +1,12 @@
 /*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("attribute-extras",function(e,t){function o(){}var n="broadcast",r="published",i="initValue",s={readOnly:1,writeOnce:1,getter:1,broadcast:1};o.prototype={modifyAttr:function(e,t){var i=this,o,u;if(i.attrAdded(e)){i._isLazyAttr(e)&&i._addLazyAttr(e),u=i._state;for(o in t)s[o]&&t.hasOwnProperty(o)&&(u.add(e,o,t[o]),o===n&&u.remove(e,r))}},removeAttr:function(e){this._state.removeAll(e)},reset:function(t){var n=this;return t?(n._isLazyAttr(t)&&n._addLazyAttr(t),n.set(t,n._state.get(t,i))):e.Object.each(n._state.data,function(e,t){n.reset(t)}),n},_getAttrCfg:function(t){var n,r=this._state;return t?n=r.getAll(t)||{}:(n={},e.each(r.data,function(e,t){n[t]=r.getAll(t)})),n}},e.AttributeExtras=o},"3.15.0",{requires:["oop"]});
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('attribute-extras',function(Y,NAME){var BROADCAST="broadcast",PUBLISHED="published",INIT_VALUE="initValue",MODIFIABLE={readOnly:1,writeOnce:1,getter:1,broadcast:1};function AttributeExtras(){}
+AttributeExtras.prototype={modifyAttr:function(name,config){var host=this,prop,state;if(host.attrAdded(name)){if(host._isLazyAttr(name)){host._addLazyAttr(name);}
+state=host._state;for(prop in config){if(MODIFIABLE[prop]&&config.hasOwnProperty(prop)){state.add(name,prop,config[prop]);if(prop===BROADCAST){state.remove(name,PUBLISHED);}}}}},removeAttr:function(name){this._state.removeAll(name);},reset:function(name){var host=this;if(name){if(host._isLazyAttr(name)){host._addLazyAttr(name);}
+host.set(name,host._state.get(name,INIT_VALUE));}else{Y.Object.each(host._state.data,function(v,n){host.reset(n);});}
+return host;},_getAttrCfg:function(name){var o,state=this._state;if(name){o=state.getAll(name)||{};}else{o={};Y.each(state.data,function(v,n){o[n]=state.getAll(n);});}
+return o;}};Y.AttributeExtras=AttributeExtras;},'3.15.0',{"requires":["oop"]});

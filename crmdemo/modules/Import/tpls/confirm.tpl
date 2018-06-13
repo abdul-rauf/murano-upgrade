@@ -16,6 +16,7 @@
 <div class="hr"></div>
 
 <form enctype="multipart/form-data" real_id="importconfirm" id="importconfirm" name="importconfirm" method="POST" action="index.php">
+{sugar_csrf_form_token}
 <input type="hidden" name="module" value="Import">
 <input type="hidden" name="type" value="{$TYPE}">
 <input type="hidden" name="source" id="source" value="{$SOURCE}">
@@ -107,7 +108,7 @@
                         </slot></td>
                     </tr>
                     <tr>
-                        <td scope="col"><slot><label for="sigDigits">{$MOD.LBL_CURRENCY_SIG_DIGITS}:</label></slot></td>
+                        <td scope="col"><slot><label for="sigDigits">{$MOD.LBL_SYSTEM_SIG_DIGITS}:</label></slot></td>
                         <td ><slot><select id='sigDigits' onchange='setSigDigits(this.value);' name='importlocale_default_currency_significant_digits'>{$sigDigits}</select>
                         </slot></td>
                         <td scope="col"><slot><i>{$MOD.LBL_LOCALE_EXAMPLE_NAME_FORMAT}</i>:</slot></td>

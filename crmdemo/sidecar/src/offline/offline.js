@@ -96,6 +96,11 @@
     };
 
     // TODO: Revisit and move to util module
+    // The following is provided for your convenience should you wish to learn more about
+    // Create GUID / UUID in JavaScript?
+    // For a list of the actual third party software used in this Sugar product,
+    // please visit http://support.sugarcrm.com/06_Customer_Center/11_Third_Party_Software/.
+    //
     // http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
     var _generateUUID = function() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

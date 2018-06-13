@@ -75,6 +75,7 @@ $viewdefs['Quotes']['EditView'] = array(
     'LBL_PANEL_ASSIGNMENT' => array ( 
 	    array (
 	      'assigned_user_name',
+
 	      array('name'=>'team_name','displayParams'=>array('required'=>true)),
 	    ),    
     ),

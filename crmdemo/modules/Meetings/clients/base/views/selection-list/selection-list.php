@@ -22,12 +22,13 @@ $viewdefs['Meetings']['base']['view']['selection-list'] = array(
                     'enabled' => true,
                 ),
                 array(
-                    'name' => 'contact_name',
-                    'label' => 'LBL_LIST_CONTACT',
-                    'link' => true,
-                    'id' => 'CONTACT_ID',
+                    'name' => 'status',
+                    'label' => 'LBL_LIST_STATUS',
+                    'link' => false,
                     'default' => true,
                     'enabled' => true,
+                    'type' => 'event-status',
+                    'css_class' => 'full-width',
                 ),
                 array(
                     'name' => 'parent_name',
@@ -66,15 +67,7 @@ $viewdefs['Meetings']['base']['view']['selection-list'] = array(
                     'enabled' => true,
                 ),
                 array(
-                    'name' => 'status',
-                    'label' => 'LBL_LIST_STATUS',
-                    'link' => false,
-                    'default' => false,
-                    'enabled' => true,
-                ),
-                array(
                     'name' => 'date_entered',
-                    'width' => '10%',
                     'label' => 'LBL_DATE_ENTERED',
                     'default' => false,
                     'enabled' => true,

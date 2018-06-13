@@ -36,16 +36,17 @@
     fetchCalled: false,
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      * Create PDF Template collection in order to get available template list.
      */
     initialize: function(options) {
         this._super('initialize', [options]);
         this.templateCollection = app.data.createBeanCollection('PdfManager');
+        this._fetchTemplate();
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Prevents the "Email PDF" button from rendering if the user
      * doesn't have a valid email configuration or the user chooses to use an
@@ -61,7 +62,8 @@
      */
     _render: function() {
         var emailClientPreference = app.user.getPreference('email_client_preference');
-        if (this.def.action === 'email' && emailClientPreference.type !== 'sugar') {
+        if (!this.templateCollection.length > 0 ||
+            (this.def.action === 'email' && emailClientPreference.type !== 'sugar')) {
             this.hide();
         } else {
             this._super('_render');
@@ -178,7 +180,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      * Bind listener for template collection.
      */
     bindDataChange: function() {
@@ -187,7 +189,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      * Dispose safe for templateCollection listeners.
      */
     unbindData: function() {
@@ -197,7 +199,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      * Check additional access for PdfManager Module.
      */
     hasAccess: function() {

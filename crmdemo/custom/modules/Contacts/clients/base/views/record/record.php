@@ -1,6 +1,5 @@
 <?php
-
-/* This file was updated by 7_CustomRecordViewHistorySummaryButton */
+// created: 2018-06-13 10:47:53
 $viewdefs['Contacts']['base']['view']['record'] = array (
   'buttons' => 
   array (
@@ -11,6 +10,10 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
       'label' => 'LBL_CANCEL_BUTTON_LABEL',
       'css_class' => 'btn-invisible btn-link',
       'showOn' => 'edit',
+      'events' => 
+      array (
+        'click' => 'button:cancel_button:click',
+      ),
     ),
     1 => 
     array (
@@ -308,6 +311,11 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
           'name' => 'dnb_principal_id',
           'readonly' => true,
         ),
+        12 => 
+        array (
+          'name' => 'tag',
+          'span' => 12,
+        ),
       ),
       'newTab' => true,
       'panelDefault' => 'expanded',
@@ -351,6 +359,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
         array (
           'name' => 'date_modified_by',
           'readonly' => true,
+          'inline' => true,
           'type' => 'fieldset',
           'label' => 'LBL_DATE_MODIFIED',
           'fields' => 
@@ -375,6 +384,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
         array (
           'name' => 'date_entered_by',
           'readonly' => true,
+          'inline' => true,
           'type' => 'fieldset',
           'label' => 'LBL_DATE_ENTERED',
           'fields' => 

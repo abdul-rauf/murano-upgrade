@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
-
+ // $Id: ListViewXTPL.php 55799 2010-04-05 20:00:37Z jmertic $
 
 require_once('include/ListView/ListViewDisplay.php');
 	

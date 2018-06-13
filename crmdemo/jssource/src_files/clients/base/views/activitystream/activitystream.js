@@ -43,6 +43,14 @@
 
     _attachImageSelector: 'img[data-note-id]',
 
+    /**
+     * Modules placed in this array will have links to the module removed from the display
+     * e.g. Quotas isn't a real module, has no record view, shouldn't have a link
+     */
+    blacklistModules: [
+        'Quotas'
+    ],
+
     initialize: function(options) {
         this.opts = {params: {}};
         this.readonly = !!options.readonly;
@@ -75,6 +83,7 @@
         this.preview = this.getPreviewData();
         var data = this.model.get('data');
         var activity_type = this.model.get('activity_type');
+
         this.tpl = "TPL_ACTIVITY_" + activity_type.toUpperCase();
 
         switch(activity_type) {
@@ -271,6 +280,9 @@
             module = data.module,
             id = data.id;
 
+        // Remove highlighted styling from all activities
+        this.layout.clearRowDecorations();
+
         // If module/id data attributes don't exist, this user
         // doesn't have access to that record due to team security.
         if (module && id) {
@@ -278,11 +290,20 @@
                 collection = this.context.get("collection");
 
             model.set("id", id);
+            this.decorateRow();
             app.events.trigger("preview:module:update", this.context.get("module"));
             app.events.trigger("preview:render", model, collection, true, this.cid);
         }
 
         event.preventDefault();
+    },
+
+    /**
+     * Handles highlighting of current activity item and active state of preview button.
+     */
+    decorateRow: function() {
+        this.$el.addClass('highlighted');
+        this.$('.preview-btn').addClass('active');
     },
 
     _renderHtml: function(model) {
@@ -342,6 +363,13 @@
      */
     formatAllTagsAndLinks: function() {
         var post = this.model.get('data');
+
+        // Check to see if the post's module is in the blacklist, if so, delete
+        // the module property from the object so it will not create a link to the record
+        if (post.object && post.object.module && _.contains(this.blacklistModules, post.object.module)) {
+            delete post.object.module;
+        }
+
         this.unformatAllTagsAndLinks();
 
         if (post) {
@@ -377,7 +405,7 @@
      * Searches the post to identify links and make them as actual links
      *
      * @param {String} post
-     * @returns {String}
+     * @return {string}
      */
     formatLinks: function(post) {
         var formattedPost = '';
@@ -399,6 +427,10 @@
      * Resize the iframe that embeds video
      */
     resizeVideo: function() {
+        // if this is disposed, then just bail as the code below with throw errors
+        if (this.disposed === true) {
+            return;
+        }
         var data = this.model.get('data'),
             $embed = this.$('.embed'),
             $iframes = $embed.find('iframe'),
@@ -451,7 +483,7 @@
      * Builds and returns the url for the user's profile picture based on fetching from cache
      * @param model
      * @param activityType
-     * @returns string
+     * @return {string}
      */
     getAvatarUrlForUser: function (model, activityType){
         var createdBy = model.get('created_by'),
@@ -465,7 +497,7 @@
      *
      * @param model The User
      * @param activityType
-     * @returns {boolean} whether user has a picture
+     * @return {boolean} whether user has a picture
      */
     checkUserHasPicture: function (model, activityType) {
         var createdBy = model.get('created_by'),
@@ -525,7 +557,7 @@
      * Respects cache TTL, returns undefined if expired
      *
      * @param userId
-     * @returns {boolean|undefined} whether user has picture or undefined if cache not set or expired
+     * @return {boolean|undefined} whether user has picture or `undefined` if cache not set or expired
      * @private
      */
     getUserPictureStatus: function(userId) {
@@ -551,7 +583,7 @@
      * Build the file url for the given user's avatar
      *
      * @param userId
-     * @returns {String} The avatar url
+     * @return {string} The avatar url
      * @private
      */
     buildAvatarUrl: function(userId) {
@@ -571,7 +603,7 @@
      * Retrieve comment entered inside content editable and translate any tags into text format
      * so that it can be saved in the database as JSON string.
      *
-     * @returns {String}
+     * @return {string}
      */
     getComment: function() {
         return this.unformatTags(this.$('div.reply'));
@@ -637,7 +669,7 @@
      *
      * @param layoutName to look for up the context hierarchy
      * @param context start of context hierarchy
-     * @returns {*}
+     * @return {Mixed}
      * @private
      */
     _getParentModel: function(layoutName, context) {

@@ -61,6 +61,8 @@ SUGAR.expressions.getDisplayFunctionList = function() {
         case "charAt":
         case "formatName":
         case "sugarField":
+		case "forecastCommitStage":
+        case "currencyRate":
             continue;
             break;
         }
@@ -110,6 +112,15 @@ SUGAR.expressions.setReturnTypes = function(t, vMap)
 				break;
 			}
 		}
+
+		// For the conditional function, if both argument return types are same, set the conditional type
+		if (t.name == "ifElse") {
+			var args = t.args;
+			if (args[1].returnType == args[2].returnType) {
+				t.returnType = args[1].returnType;
+			}
+		}
+
 		if(!t.returnType)
 			throw (t.name + ": No known return type!");
 	}
@@ -227,8 +238,7 @@ SUGAR.expressions.validateCurrExpression = function(silent, matchType)
 		SUGAR.expressions.setReturnTypes(tokens, varTypeMap);
 		SUGAR.expressions.validateReturnTypes(tokens);
         SUGAR.expressions.validateRelateFunctions(tokens);
-		if (matchType && tokens.returnType != 'generic' && matchType != tokens.returnType)
-		{
+		if (matchType && matchType != tokens.returnType) {
 			Msg.show({
                 type: "alert",
                 title: SUGAR.language.get("ModuleBuilder", "LBL_FORMULA_INVALID"),
@@ -987,6 +997,13 @@ SUGAR.expressions.GridToolTip = {
             fb_ac_open = true;
             //Set the content of the spacer to the same as the formula input to offset the autocomplete location by that amount
             updateACSpacer();
+
+            $('#fb_ac_wrapper ul.ui-autocomplete').addClass('fb_ac_menu');
+            $('.fb_ac_menu').css('z-index', maxZ + 3);
+            var liDiff = $('.fb_ac_menu li').outerWidth() - $('.fb_ac_menu li').width();
+            var ulDiff = parseInt($('.fb_ac_menu').css("border-left-width")) + parseInt($('.fb_ac_menu').css("border-right-width"));
+            $('.fb_ac_menu li').width($('.fb_ac_menu li').width() - ulDiff - liDiff);
+
             hideACHelp();
         },
         close: function(){
@@ -1074,7 +1091,12 @@ SUGAR.expressions.GridToolTip = {
     })
 
     //Allow the user to click out of the autocomplete
-    $("body").mousedown(function(){$( "#fb_ac_input" ).autocomplete("close");});
+    $("body").mousedown(function() {
+        var $input = $("#fb_ac_input");
+        if ($input.autocomplete("instance")) {
+            $input.autocomplete("close");
+        }
+    });
     //Need to prevent the body from seeing mousedown events to the AC widget
     $("#fb_ac_wrapper").mousedown(function(){return false});
 

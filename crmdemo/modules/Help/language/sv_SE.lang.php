@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,24 +10,32 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+/*********************************************************************************
 
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
 
 $mod_strings = array (
-  'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att kunna radera organisationen.',
-  'LBL_LIST_FORM_TITLE' => 'Lista organisationer',
   'LBL_MODULE_NAME' => 'Organisationer',
   'LBL_MODULE_NAME_SINGULAR' => 'Konto',
   'LBL_MODULE_TITLE' => 'Organisationer:Hem',
-  'LBL_NEW_FORM_TITLE' => 'Skapa organisation',
   'LBL_SEARCH_FORM_TITLE' => 'Sök organisation',
-  'LNK_NEW_ACCOUNT' => 'Skapa organisation',
-  'LNK_NEW_CALL' => 'Schemalägg telefonsamtal',
-  'LNK_NEW_CASE' => 'Skapa ärende',
+  'LBL_LIST_FORM_TITLE' => 'Lista organisationer',
+  'LBL_NEW_FORM_TITLE' => 'Skapa organisation',
   'LNK_NEW_CONTACT' => 'Skapa kontakt',
-  'LNK_NEW_EMAIL' => 'Arkivera epost',
-  'LNK_NEW_MEETING' => 'Schemalägg möte',
-  'LNK_NEW_NOTE' => 'Skapa anteckning eller bilaga',
+  'LNK_NEW_ACCOUNT' => 'Skapa organisation',
   'LNK_NEW_OPPORTUNITY' => 'Skapa affärsmöjlighet',
+  'LNK_NEW_CASE' => 'Skapa ärende',
+  'LNK_NEW_NOTE' => 'Skapa anteckning eller bilaga',
+  'LNK_NEW_CALL' => 'Schemalägg telefonsamtal',
+  'LNK_NEW_EMAIL' => 'Arkivera email',
+  'LNK_NEW_MEETING' => 'Schemalägg möte',
   'LNK_NEW_TASK' => 'Skapa uppgift',
+  'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att kunna radera organisationen.',
 );
 
+
+?>

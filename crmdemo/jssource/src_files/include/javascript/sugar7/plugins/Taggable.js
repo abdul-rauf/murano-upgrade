@@ -9,8 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 (function (app) {
-    // This plugin depends on QuickSearchFilter. You must add that plugin to
-    // your view as well.
+    // This plugin depends on the Filters module being enabled.
     app.events.on("app:init", function () {
         var tagTemplate = Handlebars.compile('<span class="label label-{{module}} sugar_tag"><a href="#{{buildRoute module=module id=id}}">{{name}}</a></span>'),
             tagInEditTemplate = Handlebars.compile('<span class="label label-{{module}} sugar_tag" contenteditable="false"><a>{{name}}</a></span>'),
@@ -396,9 +395,10 @@
              * @private
              */
             _searchForTags: function(searchTerm) {
-                var searchParams,
-                    referenceSearchFields = ['name', 'first_name', 'last_name'],
-                    tagAction = searchTerm.charAt(0); // @ or # character
+                var searchParams;
+                var referenceSearchFields = ['name', 'first_name', 'last_name'];
+                var tagAction = searchTerm.charAt(0); // @ or # character
+                var filtersBeanPrototype = app.data.getBeanClass('Filters').prototype;
 
                 searchTerm = $.trim(searchTerm.substr(1));
 
@@ -416,15 +416,13 @@
                         this._resetTaggable();
                     } else {
                         if (tagAction === mention) {
-                            // This plugin depends on QuickSearchFilter because
-                            // of this branch.
-                            app.data.createBeanCollection("Users").fetch({
+                            app.data.createBeanCollection('Users').fetch({
                                 success: _.bind(function(collection, resp) {
                                     if (this._taggableEnabled && resp) {
                                         this._populateTagList(collection, searchTerm);
                                     }
                                 }, this),
-                                filter: this.getFilterDef("Users", searchTerm),
+                                filter: filtersBeanPrototype.buildSearchTermFilter('Users', searchTerm),
                                 params: {
                                     has_access_module: this._taggableModuleName,
                                     has_access_record: this._taggableModelId
@@ -470,18 +468,27 @@
 
                     // Append search results to the dropdown list
                     collection.each(function(model, index) {
-                        var htmlName = model.get('name').replace(new RegExp('(' + searchTerm + ')', 'ig'), function($1, match) {
-                                return '<strong>' + match + '</strong>';
-                            }),
-                            data = {
-                                module: model.get('_module'),
-                                id: model.get('id'),
-                                name: model.get('name'),
-                                htmlName: htmlName,
-                                noAccess: (model.get('has_access') === false) //only if false, undefined does not mean no access
-                            },
-                            $tagListOption = $(tagListOptionTemplate(data)).data(data);
+                        var $tagListOption, data, escapedSearchTerm, name, secureName, htmlName;
 
+                        name = app.utils.getRecordName(model);
+                        // secureName used as htmlName to insert into template without escaping ("triple-stash")
+                        secureName = Handlebars.Utils.escapeExpression(name).trim();
+                        // searchTerm can contains special symbols that escaped in secureName
+                        escapedSearchTerm = Handlebars.Utils.escapeExpression(searchTerm).trim();
+                        htmlName = secureName.replace(new RegExp('(' + escapedSearchTerm + ')', 'ig'), function($1, match) {
+                            return '<strong>' + match + '</strong>';
+                        });
+
+                        data = {
+                            module: model.get('_module'),
+                            id: model.get('id'),
+                            name: name,
+                            htmlName: htmlName,
+                            // only if false, undefined does not mean no access
+                            noAccess: (model.get('has_access') === false)
+                        };
+
+                        $tagListOption = $(tagListOptionTemplate(data)).data(data);
                         $tagList.append($tagListOption);
                     }, this);
 

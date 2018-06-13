@@ -25,6 +25,8 @@ define('REL_ONE_MANY', 'one-to-many');
 define('REL_ONE_ONE', 'one-to-one');
 define('REL_TYPE_ONE', 'one');
 define('REL_TYPE_MANY', 'many');
+define('REL_TYPE_UNDEFINED', 'undefined');
+
 /**
  * A relationship is between two modules.
  * It contains at least two links.
@@ -40,7 +42,19 @@ abstract class SugarRelationship
     protected $ignore_role_filter = false;
     protected $self_referencing = false; //A relationship is self referencing when LHS module = RHS Module
 
-    protected static $beansToResave = array();
+    /**
+     * Bean resave queue
+     *
+     * @var SugarBean[]
+     */
+    protected static $resaveQueue = array();
+
+    /**
+     * Index of bean resave queue
+     *
+     * @var array
+     */
+    protected static $resaveIndex = array();
 
     public abstract function add($lhs, $rhs, $additionalFields = array());
 
@@ -229,8 +243,10 @@ abstract class SugarRelationship
         if (!empty($values)) {
             $query = "INSERT INTO {$this->getRelationshipTable(
             )} ($columns) VALUES ($values)";
-            DBManagerFactory::getInstance()->query($query);
+            return DBManagerFactory::getInstance()->query($query);
         }
+
+        return false;
     }
 
     /**
@@ -309,13 +325,27 @@ abstract class SugarRelationship
         )} WHERE $leftIDName='$leftID' AND $rightIDName='$rightID' $roleCheck AND deleted=0";
 
         $db = DBManagerFactory::getInstance();
-        $result = $db->query($query);
-        $row = $db->fetchByAssoc($result);
+        $row = $db->fetchOne($query);
         if (!empty($row)) {
             return $row;
         } else {
             return false;
         }
+    }
+
+    /**
+     * Get role columns array for the defs
+     * @return array
+     */
+    public function getRelationshipRoleColumns($def = null)
+    {
+        if (!empty($this->def['relationship_role_columns']) && is_array($this->def['relationship_role_columns'])) {
+            return $this->def['relationship_role_columns'];
+        }
+        if (!empty($this->def['relationship_role_column']) && !empty($this->def["relationship_role_column_value"])) {
+            return array($this->def['relationship_role_column'] => $this->def["relationship_role_column_value"]);
+        }
+        return array();
     }
 
     /**
@@ -332,25 +362,29 @@ abstract class SugarRelationship
         if (empty ($table)) {
             $table = $this->getRelationshipTable();
         }
-        if (!empty($this->def['relationship_role_column']) && !empty($this->def["relationship_role_column_value"]) && !$ignore_role_filter) {
-            if (empty($table)) {
-                $roleCheck = " AND $this->relationship_role_column";
-            } else {
-                $roleCheck = " AND $table.{$this->relationship_role_column}";
-            }
-            //role column value.
-            if (empty($this->def['relationship_role_column_value'])) {
-                $roleCheck .= ' IS NULL';
-            } else {
-                $roleCheck .= " = '$this->relationship_role_column_value'";
+
+        if (!$ignore_role_filter) {
+            $db = DBManagerFactory::getInstance();
+            foreach ($this->getRelationshipRoleColumns() as $column => $value) {
+                if (empty($table)) {
+                    $roleCheck = " AND $column";
+                } else {
+                    $roleCheck = " AND $table.$column";
+                }
+                //role column value.
+                if (empty($value)) {
+                    $roleCheck .= ' IS NULL';
+                } else {
+                    $roleCheck .= " = ".$db->quoted($value);
+                }
             }
         }
-        if (!empty($this->def['primary_flag_column']) 
+        if (!empty($this->def['primary_flag_column'])
             && !empty($this->primaryOnly)
             && !$ignore_role_filter) {
 
             $field = $table.'.'.$this->def['primary_flag_column'];
-            
+
             $roleCheck .= " AND {$field} = 1 ";
         }
 
@@ -378,18 +412,11 @@ abstract class SugarRelationship
             $table = $this->getRelationshipTable();
         }
 
-        if (!empty($this->def['relationship_role_column']) &&
-            !empty($this->def["relationship_role_column_value"]) &&
-            !$ignore_role_filter
-        ) {
-            if (empty($table)) {
-                $field = $this->relationship_role_column;
-            } else {
-                $field = "$table.{$this->relationship_role_column}";
-            }
-            //role column value.
-            if (!empty($table)) {
-                if (empty($this->def['relationship_role_column_value'])) {
+        if (!$ignore_role_filter && !empty($table)) {
+            foreach ($this->getRelationshipRoleColumns() as $column => $value) {
+                //role column value.
+                $field = "$table.$column";
+                if (empty($value)) {
                     if (isset($sugar_query->join[$table])) {
                         $sugar_query->join[$table]->on()->isNull($field);
                     } else {
@@ -397,21 +424,15 @@ abstract class SugarRelationship
                     }
                 } else {
                     if (isset($sugar_query->join[$table])) { // i.e. Accounts joining Notes
-                        $sugar_query->join[$table]->on()->equals(
-                            $field,
-                            $this->relationship_role_column_value
-                        );
+                        $sugar_query->join[$table]->on()->equals($field, $value);
                     } else { // i.e. Notes joining Accounts
-                        $sugar_query->where()->equals(
-                            $field,
-                            $this->relationship_role_column_value
-                        );
+                        $sugar_query->where()->equals($field, $value);
                     }
                 }
             }
         }
 
-        if (!empty($this->def['primary_flag_column']) 
+        if (!empty($this->def['primary_flag_column'])
             && !empty($this->primaryOnly)
             && !$ignore_role_filter) {
 
@@ -492,6 +513,28 @@ abstract class SugarRelationship
     }
 
     /**
+     * Call the before update logic hook for a given link
+     *
+     * @param  SugarBean $focus base bean the hooks is triggered from
+     * @param  SugarBean $related bean being added/removed/updated from relationship
+     * @param string $link_name name of link being triggerd
+     *
+     * @return void
+     */
+    protected function callBeforeUpdate($focus, $related, $link_name = "")
+    {
+        $custom_logic_arguments = $this->getCustomLogicArguments(
+            $focus,
+            $related,
+            $link_name
+        );
+        $focus->call_custom_logic(
+            'before_relationship_update',
+            $custom_logic_arguments
+        );
+    }
+
+    /**
      * Call the after update logic hook for a given link
      *
      * @param  SugarBean $focus base bean the hooks is triggered from
@@ -555,7 +598,7 @@ abstract class SugarRelationship
 
     /**
      * Gets the correct table to select a custom where from
-     * 
+     *
      * @param string $whereTable Existing whereTable
      * @param SugarBean $relatedBean The related bean
      * @param string $fieldName The field name to check for a custom where table
@@ -566,7 +609,7 @@ abstract class SugarRelationship
         // Its just easier to work on a shorter variable
         $defs = $relatedBean->field_defs;
 
-        // If the field is sourced from custom fields, get the custom table it 
+        // If the field is sourced from custom fields, get the custom table it
         // belongs to
         if ($fieldName && isset($defs[$fieldName]['source']) && $defs[$fieldName]['source'] === 'custom_fields') {
             $whereTable = $relatedBean->get_custom_table_name();
@@ -577,7 +620,7 @@ abstract class SugarRelationship
 
     /**
      * Gets an optional where clause
-     * 
+     *
      * @param $optional_array List of conditionals to apply to a custom where
      * @param string $whereTable The existing where table to select from
      * @param SugarBean $relatedBean
@@ -615,10 +658,12 @@ abstract class SugarRelationship
      */
     public static function addToResaveList($bean)
     {
-        if (!isset(self::$beansToResave[$bean->module_dir])) {
-            self::$beansToResave[$bean->module_dir] = array();
+        if (isset(self::$resaveIndex[$bean->module_dir][$bean->id])) {
+            return;
         }
-        self::$beansToResave[$bean->module_dir][$bean->id] = $bean;
+
+        self::$resaveIndex[$bean->module_dir][$bean->id] = true;
+        self::$resaveQueue[] = $bean;
     }
 
     /**
@@ -634,30 +679,32 @@ abstract class SugarRelationship
         }
 
         //Resave any bean not currently in the middle of a save operation
-        foreach (self::$beansToResave as $module => $beans) {
-            foreach ($beans as $bean) {
-                if (empty($bean->deleted) && empty($bean->in_save)) {
-                    if ($refresh) {
-                        // Make sure we're using the newest version of the bean, not the one queued
-                        $latestBean = BeanFactory::retrieveBean($module, $bean->id);
-                        if ($latestBean !== null) {
-                            $bean = $latestBean;
-                        }
+        while (count(self::$resaveQueue) > 0) {
+            $bean = array_shift(self::$resaveQueue);
+            if (empty($bean->deleted) && empty($bean->in_save)) {
+                if ($refresh) {
+                    // Make sure we're using the newest version of the bean, not the one queued
+                    $latestBean = BeanFactory::retrieveBean($bean->module_name, $bean->id);
+                    if ($latestBean !== null) {
+                        $bean = $latestBean;
                     }
-                    $bean->save();
-                } else {
-                    // Bug 55942 save the in-save id which will be used to send workflow alert later
-                    if (isset($bean->id) && !empty($_SESSION['WORKFLOW_ALERTS'])) {
-                        $_SESSION['WORKFLOW_ALERTS']['id'] = $bean->id;
-                    }
+                }
+                $bean->save();
+            } else {
+                // Bug 55942 save the in-save id which will be used to send workflow alert later
+                if (isset($bean->id) && !empty($_SESSION['WORKFLOW_ALERTS'])) {
+                    $_SESSION['WORKFLOW_ALERTS']['id'] = $bean->id;
                 }
             }
         }
 
         SugarBean::leaveOperation('saving_related');
 
-        //Reset the list of beans that will need to be resaved
-        self::$beansToResave = array();
+        //Reset the queue index
+        self::$resaveIndex = array();
+
+        SugarBean::clearRecursiveResave();
+        return true;
     }
 
     /**

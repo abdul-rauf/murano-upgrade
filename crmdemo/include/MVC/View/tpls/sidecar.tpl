@@ -14,11 +14,12 @@
 <!DOCTYPE HTML>
 <html class="no-js">
     <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=8, IE=9, IE=10, IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <meta charset="UTF-8">
         <title>SugarCRM</title>
         <link rel="shortcut icon" href="{sugar_getjspath file='themes/default/images/sugar_icon.ico'}">
         <!-- CSS -->
+        <link rel="stylesheet" href="styleguide/assets/css/loading.css" type="text/css">
         {foreach from=$css_url item=url}
             <link rel="stylesheet" href="{sugar_getjspath file=$url}"/>
         {/foreach}
@@ -31,19 +32,32 @@
         <div id="sugarcrm">
             <div id="sidecar">
                 <div id="alerts" class="alert-top">
-                    <div class="loading gate">
-                        <strong>{$LBL_LOADING}</strong>
-                        <i class="l1 icon-circle"></i><i class="l2 icon-circle"></i><i class="l3 icon-circle"></i>
+                    <div class="alert-wrapper">
+                        <div class="alert alert-process">
+                            <strong>
+                                <div class="loading">
+                                    {$LBL_LOADING}<i class="l1">&#46;</i><i class="l2">&#46;</i><i class="l3">&#46;</i>
+                                </div>
+                            </strong>
+                        </div>
                     </div>
+                    <noscript>
+                        <div class="alert-top">
+                            <div class="alert alert-danger">
+                                <strong>{$LBL_ENABLE_JAVASCRIPT}</strong>
+                            </div>
+                        </div>
+                    </noscript>
                 </div>
                 <div id="header"></div>
                 <div id="content"></div>
+                <div id="sweetspot"></div>
                 <div id="drawers"></div>
                 <div id="footer"></div>
             </div>
         </div>
         <!-- App Scripts -->
-        {if !empty($developerMode)}
+        {if empty($shouldResourcesBeMinified)}
             {sugar_getscript file="sidecar/minified/sidecar.js"}
         {else}
             {sugar_getscript file="sidecar/minified/sidecar.min.js"}
@@ -60,12 +74,18 @@
             } else {
                 var App;
                 {/literal}{if $authorization}
-                SUGAR.App.cache.set("{$appPrefix}AuthAccessToken", "{$authorization.access_token}")
+                SUGAR.App.cache.set("{$appPrefix}AuthAccessToken", "{$authorization.access_token}");
                 {if $authorization.refresh_token}
-                SUGAR.App.cache.set("{$appPrefix}AuthRefreshToken", "{$authorization.refresh_token}")
+                SUGAR.App.cache.set("{$appPrefix}AuthRefreshToken", "{$authorization.refresh_token}");
                 {/if}
                 if (window.SUGAR.App.config.siteUrl != '') {ldelim}
-                    history.replaceState(null, 'SugarCRM', window.SUGAR.App.config.siteUrl+"/"+window.location.hash)
+                    history.replaceState(null, 'SugarCRM', window.SUGAR.App.config.siteUrl+"/"+window.location.hash);
+                {rdelim} else {ldelim}
+                    history.replaceState(
+                            null,
+                            'SugarCRM',
+                            window.location.origin + window.location.pathname + window.location.hash
+                    );
                 {rdelim}
                 {/if}{literal}
                 App = SUGAR.App.init({
@@ -75,7 +95,7 @@
                         app.once("app:view:change", function(){
                             app.progress.done();
                         });
-                        $('#alerts').empty();
+                        app.alert.dismissAll();
                         app.start();
                     }
                 });

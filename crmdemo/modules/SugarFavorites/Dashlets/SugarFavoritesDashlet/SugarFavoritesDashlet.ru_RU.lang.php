@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,14 +10,13 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$dashletStrings = array (
-  'SugarFavoritesDashlet' => 
-  array (
-    'LBL_CONFIGURE_TITLE' => 'Название',
-    'LBL_HOMEPAGE_TITLE' => 'Избранное Sugar',
-    'LBL_TITLE' => 'Мои избранные записи',
-  ),
-);
+ // $Id: SugarFavoritesDashlet.en_us.lang.php,v 1.1 2006/10/11 00:53:31 clint Exp $
 
+
+$dashletStrings['SugarFavoritesDashlet'] = array(
+                                            'LBL_TITLE'               => 'Мои избранные записи',
+                                            'LBL_HOMEPAGE_TITLE'      => 'Избранное Sugar',
+                                            'LBL_CONFIGURE_TITLE'  => 'Название',
+                                         );
+?>

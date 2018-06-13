@@ -9,7 +9,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: sugar_connection_event_listener.js 
 // TODO remove this file
 
 SUGAR_callsInProgress = 0;

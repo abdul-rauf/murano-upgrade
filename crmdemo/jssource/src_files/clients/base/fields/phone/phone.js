@@ -11,10 +11,18 @@
 /**
  * @class View.Fields.Base.PhoneField
  * @alias SUGAR.App.view.fields.BasePhoneField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     plugins: ['EllipsisInline'],
+
+    /**
+     * @inheritdoc
+     *
+     * The direction for this field should always be `ltr`.
+     */
+    direction: 'ltr',
+
     /**
      * @override
      * @param options
@@ -24,12 +32,23 @@
 
         this.skypeEnabled = serverInfo.system_skypeout_on ? true : false;
 
-        app.view.Field.prototype.initialize.call(this, options);
+        this._super('initialize', [options]);
+
+        /**
+         * Property to add or not the `ellipsis_inline` class when rendering the
+         * field in the `list` template. `true` to add the class, `false`
+         * otherwise.
+         *
+         * Defaults to `true`.
+         *
+         * @property {boolean}
+         */
+        this.ellipsis = _.isUndefined(this.def.ellipsis) || this.def.ellipsis;
     },
     /**
      * @override
      * @param value
-     * @returns {*}
+     * @return {Mixed}
      */
     format: function (value) {
         if ((this.action === 'list' || this.action === 'detail' || this.action === 'record')
@@ -42,7 +61,7 @@
     /**
      * checks if value should be skype formatted + 00 or 011 leading is necessary
      * @param value {String}
-     * @returns {boolean}
+     * @return {boolean}
      */
     isSkypeFormatted: function (value) {
         if (_.isString(value)) {
@@ -57,7 +76,7 @@
      * Document: https://support.skype.com/en/faq/FA12006/how-do-i-script-webpages-to-find-phone-numbers-using-click-to-call
      *
      * @param value {String}
-     * @returns {String}
+     * @return {string}
      */
     skypeFormat: function (value) {
         if (_.isString(value)) {

@@ -19,12 +19,12 @@
 // | Authors: Many @ Sitepointforums Advanced PHP Forums                  |
 // +----------------------------------------------------------------------+
 //
-
+// $Id: Decorators.php 26337 2007-09-03 16:07:55Z yun-ping $
 //
 /**
 * Decorators for dealing with parser options
 * @package XML_HTMLSax3
-
+* @version $Id: Decorators.php 26337 2007-09-03 16:07:55Z yun-ping $
 * @see XML_HTMLSax3::set_option
 */
 /**

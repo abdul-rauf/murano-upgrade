@@ -63,19 +63,30 @@ class SAMLAuthenticate extends SugarAuthenticate implements SugarAuthenticateExt
      */
     public function getLoginUrl($returnQueryVars = array())
     {
-        $settings = self::loadSettings();
+        $settings = self::loadSettings($returnQueryVars);
         $this->patchSettings($settings, $returnQueryVars);
         $authrequest = $this->getAuthRequest($settings);
         return $authrequest->getRedirectUrl();
     }
 
+    /**
+     * Get URL to follow to get logged out
+     * @return string
+     */
     public function getLogoutUrl()
     {
         if(empty($GLOBALS['sugar_config']['SAML_SLO'])) {
             return;
         }
-        $req = new OneLogin_Saml_LogoutRequest(SAMLAuthenticate::loadSettings());
-        return $req->getLogoutUrl();
+        $auth = new OneLogin_Saml2_Auth(SAMLAuthenticate::loadSettings());
+        $req = new OneLogin_Saml2_LogoutRequest($auth->getSettings());
+        $url = $GLOBALS['sugar_config']['SAML_SLO'];
+        if (strpos($url, '?') === false) {
+            $paramPrefix = '?';
+        } else {
+            $paramPrefix = '&';
+        }
+        return $url . $paramPrefix . 'SAMLRequest=' . urlencode($req->getRequest());
     }
 
     /**
@@ -91,9 +102,10 @@ class SAMLAuthenticate extends SugarAuthenticate implements SugarAuthenticateExt
 
     /**
      * Load SAML settings
+     * @param array $returnQueryVars Query variables that should be added to the return URL
      * @return OneLogin_Saml_Settings
      */
-    public static function loadSettings()
+    public static function loadSettings($returnQueryVars = array())
     {
         $settings = null;
         require_once 'modules/Users/authentication/SAMLAuthenticate/saml.php';

@@ -48,11 +48,11 @@ $dictionary['Campaign'] = array (
             'importable' => 'required',
             'required' => true,
             'unified_search' => true,
-            'full_text_search' => array (
+            'full_text_search' => array(
                 'enabled' => true,
-                'boost' => 3,
+                'searchable' => true,
+                'boost' => 1.39,
             ),
-            
         ),
         'refer_url' => array (
             'name' => 'refer_url',
@@ -112,7 +112,6 @@ $dictionary['Campaign'] = array (
             'comment' => 'Status of the campaign',
             'importable' => 'required',
             'required' => true,
-            
         ),
         'impressions' => array (
             'name' => 'impressions',
@@ -121,27 +120,6 @@ $dictionary['Campaign'] = array (
             'default' => 0,
             'reportable' => true,
             'comment' => 'Expected Click throughs manually entered by Campaign Manager'
-        ),
-        'currency_id' => array (
-            'name' => 'currency_id',
-            'vname' => 'LBL_CURRENCY',
-            'type' => 'currency_id',
-            'dbType' => 'id',
-            'group' => 'currency_id',
-            'function' => 'getCurrencies',
-            'function_bean' => 'Currencies',
-            'required' => false,
-            'do_report' => false,
-            'reportable' => false,
-            'default' => '-99',
-            'comment' => 'Currency in use for the campaign'
-        ),
-        'base_rate' => array(
-            'name' => 'base_rate',
-            'vname' => 'LBL_CURRENCY_RATE',
-            'type' => 'decimal',
-            'len' => '26,6',
-            'studio' => false
         ),
         'budget' => array (
             'name' => 'budget',
@@ -177,18 +155,32 @@ $dictionary['Campaign'] = array (
             'comment' => 'The type of campaign',
             'importable' => 'required',
             'required' => true,
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+            ),
             
         ),
         'objective' => array (
             'name' => 'objective',
             'vname' => 'LBL_CAMPAIGN_OBJECTIVE',
             'type' => 'text',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 0.42,
+            ),
             'comment' => 'The objective of the campaign'
         ),
         'content' => array (
             'name' => 'content',
             'vname' => 'LBL_CAMPAIGN_CONTENT',
             'type' => 'text',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+                'boost' => 0.41,
+            ),
             'comment' => 'The campaign description'
         ),
         'prospectlists' => array (
@@ -344,7 +336,8 @@ $dictionary['Campaign'] = array (
             'rhs_module' => 'RevenueLineItems',
             'rhs_table' => 'revenue_line_items',
             'rhs_key' => 'campaign_id',
-            'relationship_type' => 'one-to-many'
+            'relationship_type' => 'one-to-many',
+            'workflow' => false
         ),
 
         'campaign_leads' => array (
@@ -436,5 +429,6 @@ VardefManager :: createVardef(
         'default',
         'assignable',
         'team_security',
+        'currency'
        )
 );

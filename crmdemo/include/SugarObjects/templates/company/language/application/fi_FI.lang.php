@@ -10,9 +10,14 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+/*
+ * Created on Aug 14, 2007
+ *
+ * To change the template for this generated file go to
+ * Window - Preferences - PHPeclipse - PHP - Code Templates
+ */
+ $app_list_strings = array (
 
-$app_list_strings =
-array (
   strtolower($object_name).'_type_dom' =>
   array (
     '' => '',
@@ -21,11 +26,11 @@ array (
     'Customer' => 'Asiakas',
     'Integrator' => 'Integraattori',
     'Investor' => 'Sijoittaja',
-    'Partner' => 'Yhteistyökumppani',
+    'Partner' => 'Partner',
     'Press' => 'Lehdistö',
     'Prospect' => 'Prospekti',
     'Reseller' => 'Jälleenmyyjä',
     'Other' => 'Muu',
   ),
-);
 
+  );

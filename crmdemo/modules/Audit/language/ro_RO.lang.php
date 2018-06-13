@@ -1,7 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,16 +9,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
-
-$mod_strings = array (
-  'LBL_FIELD_NAME' => 'Camp',
-  'LBL_OLD_NAME' => 'Valoare Veche',
-  'LBL_NEW_VALUE' => 'Valoare Noua',
-  'LBL_CREATED_BY' => 'Schimbat de',
-  'LBL_LIST_DATE' => 'Lista in care a fost schimbat',
-  'LBL_AUDITED_FIELDS' => 'Domenii auditate în acest modul:',
-  'LBL_NO_AUDITED_FIELDS_TEXT' => 'Nu sunt domeniile auditate în acest modul',
-  'LBL_CHANGE_LOG' => 'Schimba Log',
+$mod_strings = array(
+    'LBL_AUDIT_TITLE' => 'Vizualizează registrul de modificări',
+    'LBL_FIELD_NAME' => 'Camp',
+    'LBL_OLD_NAME' => 'Valoare Veche',
+    'LBL_NEW_VALUE' => 'Valoare Noua',
+    'LBL_CREATED_BY' => 'Schimbat de',
+    'LBL_LIST_DATE' => 'Lista in care a fost schimbat',
+    'LBL_AUDITED_FIELDS' => 'Domenii auditate în acest modul:',
+    'LBL_NO_AUDITED_FIELDS_TEXT' => 'Nu sunt domeniile auditate în acest modul',
+    'LBL_CHANGE_LOG' => 'Schimba Log',
+    'LBL_CURRENCY_CONVERSION_TEXT' => 'Când câmpurile de monedă auditate sunt salvate într-o monedă care nu este implicită în sistem, jurnalul de modificări va afişa valori vechi şi noi în moneda convertită, implicită, definită de sistem.'
 );
-

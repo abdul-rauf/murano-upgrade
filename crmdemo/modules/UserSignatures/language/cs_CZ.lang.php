@@ -1,7 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,17 +9,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$mod_strings = array (
-  'LBL_EMAIL_SIGNATURE_ERROR1' => 'Tento podpis vyžaduje jméno.',
-  'LBL_MODULE_NAME' => 'Uživatelské podpisy',
-  'LBL_MODULE_NAME_SINGULAR' => 'Uživatelský podpis',
-  'LBL_SIGNATURE' => 'Podpis',
-  'LBL_SIGNATURES' => 'Podpisy',
-  'LBL_SIGNATURE_DEFAULT' => 'Použít podpis?',
-  'LBL_SIGNATURE_HTML' => 'HTML podpis',
-  'LBL_SIGNATURE_NAME' => 'Jméno',
-  'LBL_SIGNATURE_PREPEND' => 'Podpis nad odpovědí?',
+$mod_strings = array(
+    'LBL_MODULE_NAME'			=> 'Uživatelské podpisy',
+    'LBL_MODULE_NAME_SINGULAR'		=> 'Uživatelský podpis',
+    'LBL_EMAIL_SIGNATURE_ERROR1' => 'Tento podpis vyžaduje jméno.',
+    'LBL_SIGNATURE_NAME'         => 'Název',
+    'LBL_SIGNATURE'              => 'Podpis',
+    'LBL_SIGNATURE_HTML'         => 'HTML podpis',
+    'LBL_SIGNATURE_DEFAULT'      => 'Použít podpis?',
+    'LBL_SIGNATURE_PREPEND'      => 'Podpis nad odpovědí?',
+    'LBL_SIGNATURES'             => 'Podpisy',
 );
-

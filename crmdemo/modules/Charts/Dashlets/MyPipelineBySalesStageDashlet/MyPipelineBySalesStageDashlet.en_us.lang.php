@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: MyPipelineBySalesStageDashlet.en_us.lang.php 29243 2007-11-06 20:04:35Z awu $
 
 
 $dashletStrings['MyPipelineBySalesStageDashlet'] = array('LBL_TITLE'       => 'My Pipeline By Sales Stage',

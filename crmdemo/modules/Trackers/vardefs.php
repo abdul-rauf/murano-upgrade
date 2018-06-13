@@ -58,6 +58,7 @@ $dictionary['Tracker'] = array(
             'len' => '255',
             'isnull' => 'false',
         ),
+
 		'team_id'=>array(
 			'name' => 'team_id',
 			'vname' => 'LBL_TEAM_ID',
@@ -99,6 +100,7 @@ $dictionary['Tracker'] = array(
 		    'reportable'=>false,
 		    'comment' => 'Record deletion indicator'
 		),
+
 		'assigned_user_link'=>array (
 		    'name' => 'assigned_user_link',
 		    'type' => 'link',
@@ -108,7 +110,7 @@ $dictionary['Tracker'] = array(
 		    'module'=>'Users',
 		    'bean_name'=>'User',
 		    'source'=>'non-db',
-		),
+		),        
 		'monitor_id_link'=>array (
 		    'name' => 'monitor_id_link',
 		    'type' => 'link',
@@ -171,6 +173,16 @@ $dictionary['Tracker'] = array(
                 'date_modified',
             ),
         ),
+        array(
+            'name' => 'idx_trckr_mod_uid_dtmod_item',
+            'type' => 'index',
+            'fields' => array(
+                'module_name',
+                'user_id',
+                'date_modified',
+                'item_id',
+            ),
+        ),
     ),
 
     //relationships
@@ -182,4 +194,17 @@ $dictionary['Tracker'] = array(
 		   		'relationship_type'=>'one-to-one'
 		   )
    	),
+    'acls' => array('SugarACLStatic' => true),
 );
+if (!isset($dictionary['tracker_sessions']['fields'])) {
+    require "modules/Trackers/tracker_sessionsMetaData.php";
+}
+if (!isset($dictionary['tracker_perf']['fields'])) {
+    require "modules/Trackers/tracker_perfMetaData.php";
+}
+if (!isset($dictionary['tracker_queries']['fields'])) {
+    require "modules/Trackers/tracker_queriesMetaData.php";
+}
+if (!isset($dictionary['tracker_tracker_queries']['fields'])) {
+    require "modules/Trackers/tracker_tracker_queriesMetaData.php";
+}

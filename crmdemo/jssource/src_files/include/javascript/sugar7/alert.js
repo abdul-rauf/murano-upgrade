@@ -26,16 +26,13 @@
      * On 'app:sync' we display a simple 'LBL_LOADING' process alert
      */
     app.events.on('app:sync', function() {
-        app.alert.show('app:sync', {level: 'process', title: app.lang.getAppString('LBL_LOADING')});
+        app.alert.show('app:sync', {level: 'process', title: app.lang.get('LBL_LOADING')});
     });
 
     /**
      * On 'app:sync:complete' and 'app:sync:error' we dismiss the alert
      */
-    app.events.on('app:sync:complete', function() {
-        app.alert.dismiss('app:sync');
-    });
-    app.events.on('app:sync:error', function() {
+    app.events.on('app:sync:complete app:sync:error', function() {
         app.alert.dismiss('app:sync');
     });
 
@@ -135,15 +132,15 @@
 
         // Pull labels for each method
         if (method === 'read') {
-            alertOpts.title = app.lang.getAppString('LBL_LOADING');
+            alertOpts.title = app.lang.get('LBL_LOADING');
         }
         else if (method === 'delete') {
             // options.relate means we are breaking a relationship between two records, not actually deleting a record
             alertOpts.title = options.relate ?
-                app.lang.getAppString('LBL_UNLINKING') : app.lang.getAppString('LBL_DELETING');
+                app.lang.get('LBL_UNLINKING') : app.lang.get('LBL_DELETING');
         }
         else {
-            alertOpts.title = app.lang.getAppString('LBL_SAVING');
+            alertOpts.title = app.lang.get('LBL_SAVING');
         }
 
         // Check for an alert options object attach to options that would override
@@ -169,12 +166,6 @@
 
         // By default we don't display the alert
         if (!options.showAlerts) return;
-
-        // As we display alerts we have have to check if there is a process alert to dismiss prior to display the success one
-        // (as many requests can be fired at the same time we make sure not to dismiss another process alert!)
-        if (options.showAlerts.process !== false) {
-            processAlert.dismiss();
-        }
 
         // Error module will display proper message
         if (method === 'read') return;
@@ -209,10 +200,16 @@
 
         if (!error || (!error.handled && _.indexOf(suppressErrorMessageFor, error.status) === -1)) {
             syncCompleteHandler('error', 'ERR_GENERIC_SERVER_ERROR', method, model, options);
-        } else {
-            if (options.showAlerts && options.showAlerts.process !== false) {
-                processAlert.dismiss();
-            }
+        }
+    });
+
+    app.events.on('data:sync:complete', function(method, model, options) {
+        // As we display alerts we have have to check if there is a process
+        // alert to dismiss prior to display the success one (as many requests
+        // can be fired at the same time we make sure not to dismiss another
+        // process alert!)
+        if (options.showAlerts && options.showAlerts.process !== false) {
+            processAlert.dismiss();
         }
     });
 

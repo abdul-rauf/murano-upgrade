@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,19 +10,17 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$dashletStrings = array (
-  'CalendarDashlet' => 
-  array (
-    'LBL_TITLE' => 'Kalendář',
-    'LBL_DESCRIPTION' => 'Dashlet s kalendářem',
-    'LBL_CONFIGURE_TITLE' => 'Název',
-    'LBL_CONFIGURE_VIEW' => 'Zobrazit',
-    'LBL_SAVE_BUTTON_LABEL' => 'Uložit',
-    'LBL_VIEW_DAY' => 'Den',
-    'LBL_VIEW_WEEK' => 'Týden',
-    'LBL_VIEW_MONTH' => 'Měsíc',
-  ),
+$dashletStrings['CalendarDashlet'] = array(
+					'LBL_TITLE'            => 'Kalendář',
+                         'LBL_DESCRIPTION'      => 'Dashlet s kalendářem',
+                         'LBL_CONFIGURE_TITLE'  => 'Titul',
+                         'LBL_CONFIGURE_VIEW'  => 'Zobrazit',
+                         'LBL_SAVE_BUTTON_LABEL' => 'Uložit',
+                         
+                         'LBL_VIEW_DAY' => 'Den',
+                         'LBL_VIEW_WEEK' => 'Týden',
+                         'LBL_VIEW_MONTH' => 'Měsíc',
+
 );
-
+?>

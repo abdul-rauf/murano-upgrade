@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,32 +10,37 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
-
-$object_name = strtolower($object_name);
+/*********************************************************************************
+ * $Id$
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
+ 
 $app_list_strings = array (
-  $object_name.'_category_dom' => 
-  array (
+strtolower($object_name).'_category_dom' =>
+    array (
     '' => '',
-    'Knowledege Base' => 'Zināšanu bāze',
     'Marketing' => 'Mārketings',
+    'Knowledege Base' => 'Zināšanu bāze',
     'Sales' => 'Pārdošana',
   ),
-  $object_name.'_status_dom' => 
-  array (
-    'Active' => 'Aktīvs',
-    'Draft' => 'Skice',
-    'Expired' => 'Izbeidzies',
-    'FAQ' => 'BUJ/FAQ',
-    'Pending' => 'Gaidošs',
-    'Under Review' => 'Caurskatē',
-  ),
-  $object_name.'_subcategory_dom' => 
-  array (
+
+    strtolower($object_name).'_subcategory_dom' =>
+    array (
     '' => '',
-    'FAQ' => 'BUJ/FAQ',
     'Marketing Collateral' => 'Marketinga materiāli',
     'Product Brochures' => 'Produktu brošūras',
+    'FAQ' => 'BUJ',
   ),
-);
 
+    strtolower($object_name).'_status_dom' =>
+    array (
+    'Active' => 'Aktīvs',
+    'Draft' => 'Uzmetums',
+    'FAQ' => 'BUJ',
+    'Expired' => 'Izbeidzies',
+    'Under Review' => 'Caurskatē',
+    'Pending' => 'Nepabeigta',
+  ),
+  );

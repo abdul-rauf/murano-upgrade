@@ -24,7 +24,7 @@
 
     /**
      * Event handler for the select button that opens a
-     * {@link View.Layouts.Base.SelectionListLayout} in  a drawer for linking
+     * {@link View.Layouts.Base.SelectionListLinkLayout} in  a drawer for linking
      * an existing record.
      */
     openSelectDrawer: function() {
@@ -44,15 +44,14 @@
             layout: 'selection-list',
             context: {
                 module: 'Reports',
-                filterOptions: filterOptions.format(),
-                parent: this.context
+                filterOptions: filterOptions.format()
             }
         }, _.bind(this.selectDrawerCallback, this));
     },
 
     /**
      * Process the report that was selected by the user.
-     * @param {object} model
+     * @param {Object} model
      */
     selectDrawerCallback: function(model) {
         if (!model || _.isEmpty(model.id)) {
@@ -62,7 +61,7 @@
         if (model.module != this.context.get('module')) {
             app.alert.show('listfromreport-warning', {
                 level: 'warning',
-                messages: app.lang.getAppString('LBL_LINK_FROM_REPORT_WRONG_MODULE'),
+                messages: app.lang.get('LBL_LINK_FROM_REPORT_WRONG_MODULE'),
                 autoClose: true
             });
             return;
@@ -71,7 +70,7 @@
         var recordListUrl = app.api.buildURL('Reports', 'record_list', {id: model.id}),
             self = this;
 
-        app.alert.show('listfromreport_loading', {level: 'process', title: app.lang.getAppString('LBL_LOADING')});
+        app.alert.show('listfromreport_loading', {level: 'process', title: app.lang.get('LBL_LOADING')});
 
         app.api.call(
             'create',
@@ -83,8 +82,8 @@
                     app.alert.dismiss('listfromreport_loading');
                     app.alert.show('server-error', {
                         level: 'error',
-                        title: app.lang.getAppString('ERR_INTERNAL_ERR_MSG'),
-                        messages: app.lang.getAppString('ERR_HTTP_500_TEXT')
+                        title: app.lang.get('ERR_INTERNAL_ERR_MSG'),
+                        messages: ['ERR_HTTP_500_TEXT_LINE1', 'ERR_HTTP_500_TEXT_LINE2']
                     });
                 }
             }
@@ -93,7 +92,7 @@
 
     /**
      * Links records from a report to the parent record
-     * @param {object} response
+     * @param {Object} response
      */
     linkRecordList: function(response) {
         var parentModel = this.context.get('parentModel'),
@@ -119,7 +118,7 @@
 
     /**
      * Success callback function for api call
-     * @param {object} results
+     * @param {Object} results
      */
     linkSuccessCallback: function(results) {
         var message, messageLevel;
@@ -146,13 +145,13 @@
 
     /**
      * Error callback function for api call
-     * @param {object} error
+     * @param {Object} error
      */
     linkErrorCallback: function(error) {
         app.alert.show('server-error', {
             level: 'error',
-            title: app.lang.getAppString('ERR_INTERNAL_ERR_MSG'),
-            messages: app.lang.getAppString('ERR_HTTP_500_TEXT')
+            title: app.lang.get('ERR_INTERNAL_ERR_MSG'),
+            messages: ['ERR_HTTP_500_TEXT_LINE1', 'ERR_HTTP_500_TEXT_LINE2']
         });
     },
 

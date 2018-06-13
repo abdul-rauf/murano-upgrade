@@ -1,9 +1,9 @@
 <?php
-// created: 2015-02-22 18:55:20
+// created: 2018-06-13 10:47:51
 $viewdefs['A1234_murano']['base']['menu']['quickcreate'] = array (
   'layout' => 'create',
   'label' => 'LNK_NEW_RECORD',
-  'icon' => 'icon-plus',
+  'icon' => 'fa-plus',
   'visible' => false,
   'order' => 18,
 );

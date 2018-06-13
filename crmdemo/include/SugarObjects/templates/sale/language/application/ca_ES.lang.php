@@ -11,9 +11,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
- * Source: SugarCRM 5.2.0
- * Contributor(s): Ramón Feliu (ramon@slay.es).
+ * $Id$
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
  ********************************************************************************/
  
  $app_list_strings = array (
@@ -21,9 +23,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   strtolower($object_name).'_type_dom' =>
   array (
     '' => '',
-    'Existing Business' => 'Negocis Existents',
-    'New Business' => 'Nous Negocis',
+    'Existing Business' => 'Negoci existent',
+    'New Business' => 'Nous negocis',
   ),
 
   );
-?>

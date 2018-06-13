@@ -1,4 +1,4 @@
-<?PHP
+<?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -10,15 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-/*********************************************************************************
- * pl_pl.lang.php for SugarCRM 6.5.0
- * Translator: eVolpe
- * All Rights Reserved.
- * Any bugs report welcome: support@evolpe.pl
- * Contributor(s): ______________________________________..
- ********************************************************************************/
- 
 $mod_strings = array (
 'LBL_ALLOW_ALL'=>'Wszystko',
 'LBL_ALLOW_NONE'=>'Brak',
@@ -35,5 +26,6 @@ $mod_strings = array (
 'LBL_REDIRECT_TO_HOME'=>'Przekierowanie do Strony głównej w',
 'LBL_SECONDS'=>'sekund',
 'LBL_ADDING'=>'Dodano dla ',
+
 )
 ?>

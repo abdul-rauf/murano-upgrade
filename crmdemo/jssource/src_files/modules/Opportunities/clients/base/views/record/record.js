@@ -17,17 +17,9 @@
     alert: undefined,
 
     /**
-     * @inheritdoc
-     */
-    initialize: function(options) {
-        this.plugins = _.union(this.plugins || [], ['HistoricalSummary']);
-        this._super('initialize', [options]);
-    },
-
-    /**
      * Holds a reference to the alert this view triggers
      */
-    cancelClicked: function () {
+    cancelClicked: function() {
         /**
          * todo: this is a sad way to work around some problems with sugarlogic and revertAttributes
          * but it makes things work now. Probability listens for Sales Stage to change and then by
@@ -39,9 +31,21 @@
          * exact same thing, but that time, since the model was already set, it doesn't see anything in
          * this.model.changed, so it doesn't warn the user.
          */
-        var changedAttributes = this.model.changedAttributes(this.model.getSyncedAttributes());
-        this.model.set(changedAttributes);
+        var changedAttributes = this.model.changedAttributes(this.model.getSynced());
+        this.model.set(changedAttributes, { revert: true });
         this._super('cancelClicked');
     },
 
+    /**
+     * @inheritdoc
+     * @param {Object} options
+     */
+    initialize: function(options) {
+        this.plugins = _.union(this.plugins, ['LinkedModel', 'HistoricalSummary', 'CommittedDeleteWarning']);
+
+        this._super('initialize', [options]);
+
+        app.utils.hideForecastCommitStageField(this.meta.panels);
+    },
+    
 })

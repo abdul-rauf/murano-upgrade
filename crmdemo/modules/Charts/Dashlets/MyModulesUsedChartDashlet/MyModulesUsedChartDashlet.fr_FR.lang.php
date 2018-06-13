@@ -1,5 +1,5 @@
 <?php
-
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,27 +11,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
-
+ // $Id: MyPipelineBySalesStageDashlet.en_us.lang.php 16286 2006-08-22 20:14:45Z wayne $
 
 
 $dashletStrings['MyModulesUsedChartDashlet'] = array('LBL_TITLE'       => 'Mes modules utilisés (30 derniers jours)',
                                                      'LBL_DESCRIPTION' => 'Mes modules utilisés (30 derniers jours)',
-                                                     'LBL_REFRESH'     => 'Rafraichir le dashlet');
+                                                     'LBL_REFRESH'     => 'Rafraîchir Graphique');

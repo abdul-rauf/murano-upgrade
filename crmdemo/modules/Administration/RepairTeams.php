@@ -13,6 +13,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 
+require_once 'include/SugarSmarty/plugins/function.sugar_csrf_form_token.php';
 
 
 
@@ -188,8 +189,11 @@ ABC;
         $process_private_team_checked="checked";
     }
 
+    $csrfToken = smarty_function_sugar_csrf_form_token(array(), $smarty);
+
     $xyz=<<<EOF
         <form name="RepairTeams" method="POST" >
+            {$csrfToken}
             <input type="hidden" name="module" value="Administration">
             <input type="hidden" name="action"  value="RepairTeams">
             <input type="hidden" name="process"  value="1">

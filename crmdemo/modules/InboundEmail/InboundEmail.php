@@ -101,7 +101,6 @@ class InboundEmail extends SugarBean {
 	// object attributes
 	var $compoundMessageId; // concatenation of messageID and deliveredToEmail
 	var $serverConnectString;
-	var $disable_row_level_security	= true;
 	var $InboundEmailCachePath;
 	var $InboundEmailCacheFile			= 'InboundEmail.cache.php';
 	var $object_name					= 'InboundEmail';
@@ -589,6 +588,10 @@ class InboundEmail extends SugarBean {
 							$overview->date = $v;
 						break;
 
+                        case 'subject':
+                            $overview->subject = $v;
+                        break;
+
 						default:
 							$overview->$k = from_html($v);
 						break;
@@ -678,6 +681,10 @@ class InboundEmail extends SugarBean {
 					case "senddate":
 						$overview->date = $v;
 					break;
+
+                    case 'subject':
+                        $overview->subject = $v;
+                    break;
 
 					default:
 						$overview->$k = from_html($v);
@@ -822,6 +829,12 @@ class InboundEmail extends SugarBean {
 								$values .= "NULL";
 							}
 						break;
+
+                        case 'subject':
+                            $overview->subject = SugarCleaner::cleanHtml(htmlspecialchars_decode($overview->subject, ENT_QUOTES));
+                            $overview->subject = htmlspecialchars_decode($overview->subject, ENT_QUOTES);
+                            $values .= $this->db->quoted($overview->subject);
+                        break;
 
 						case "mbox":
 							$values .= "'{$mbox}'";
@@ -1029,7 +1042,6 @@ class InboundEmail extends SugarBean {
 	 * This will fetch only partial emails for POP3 and hence needs to be call again and again based on status it returns
 	 */
 	function pop3_checkPartialEmail($synch = false) {
-		require_once('include/utils/array_utils.php');
 		global $current_user;
 		global $sugar_config;
 
@@ -1048,7 +1060,7 @@ class InboundEmail extends SugarBean {
 	    			flush();
 				} // while
 				fclose($fh);
-				$diff = unserialize($data);
+				$diff = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize($data);
 				if (!empty($diff)) {
 					if (count($diff)> 50) {
 	                	$newDiff = array_slice($diff, 50, count($diff), true);
@@ -1499,7 +1511,7 @@ class InboundEmail extends SugarBean {
                     flush();
                 } // while
                 fclose($fh);
-                $results = unserialize($data);
+                $results = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize($data);
             } // if
         } // if
         if (!$cacheDataExists) {
@@ -2254,6 +2266,14 @@ class InboundEmail extends SugarBean {
 	 * @return boolean true on success, false on fail
 	 */
 	function savePersonalEmailAccount($userId = '', $userName = '', $forceSave=true) {
+		global $current_user;
+
+		if (SugarConfig::getInstance()->get("disable_user_email_config", false)
+			&& !$current_user->isAdminForModule("Emails")
+		) {
+			ACLController::displayNoAccess(false);
+			return false;
+		}
 		$groupId = $userId;
 		$accountExists = false;
 		if(isset($_REQUEST['ie_id']) && !empty($_REQUEST['ie_id'])) {
@@ -2516,7 +2536,6 @@ class InboundEmail extends SugarBean {
 					$retArray['err'][$k] = $mod_strings['ERR_BAD_LOGIN_PASSWORD'];
 					$retArray['bad'][$k] = $serviceTest;
 					$GLOBALS['log']->debug($l.': I-E ERROR: $ie->findOptimums() failed due to bad user credentials for user login: '.$this->email_user);
-					return $retArray;
 				} elseif( in_array($errors, $acceptableWarnings, TRUE)) { // false positive
 					$GLOBALS['log']->debug($l.': I-E found good connection but with warnings ['.$serviceTest.'] Errors:' . $errors);
 					$retArray['good'][$k] = $returnService[$k];
@@ -2694,7 +2713,7 @@ class InboundEmail extends SugarBean {
 			&& $this->checkFilterDomain($email)) { // if we haven't sent this guy 10 replies in 24hours
 
 				if(!empty($this->stored_options)) {
-					$storedOptions = unserialize(base64_decode($this->stored_options));
+					$storedOptions = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($this->stored_options));
 				}
 				// get FROM NAME
 				if(!empty($storedOptions['from_name'])) {
@@ -2841,6 +2860,9 @@ class InboundEmail extends SugarBean {
 			$email->retrieve($email->id);
 			$c = BeanFactory::getBean('Cases');
 			$c->description = $email->description;
+			if (empty($c->description) && !empty($email->description_html)) {
+			    $c->description = $email->description_html;
+			}
 			$c->assigned_user_id = $userId;
 			$c->name = $email->name;
 			$c->status = 'New';
@@ -2902,7 +2924,7 @@ class InboundEmail extends SugarBean {
 			$GLOBALS['log']->debug('InboundEmail created one case with number: '.$c->case_number);
 			$createCaseTemplateId = $this->get_stored_options('create_case_email_template', "");
 			if(!empty($this->stored_options)) {
-				$storedOptions = unserialize(base64_decode($this->stored_options));
+				$storedOptions = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($this->stored_options));
 			}
 			if(!empty($createCaseTemplateId)) {
 				$fromName = "";
@@ -3427,7 +3449,7 @@ class InboundEmail extends SugarBean {
 		$imapDecode => stdClass Object
 			(
 				[charset] => utf-8
-				[text] => w�hlen.php
+				[text] => wï¿½hlen.php
 			)
 
 					OR
@@ -4154,6 +4176,9 @@ class InboundEmail extends SugarBean {
 			$email->description_html= $this->getMessageText($msgNo, 'HTML', $structure, $fullHeader,$clean_email); // runs through handleTranserEncoding() already
 			$email->description	= $this->getMessageText($msgNo, 'PLAIN', $structure, $fullHeader,$clean_email); // runs through handleTranserEncoding() already
 			$this->imagePrefix = $oldPrefix;
+            if (empty($email->description)) {
+                $email->description = strip_tags($email->description_html);
+            }
 
 			// empty() check for body content
 			if(empty($email->description)) {
@@ -4199,7 +4224,6 @@ class InboundEmail extends SugarBean {
 					$email->team_set_id = $_REQUEST['team_set_id'];
 				} // if
 			}
-
 
 	        //Assign Parent Values if set
 	        if (!empty($_REQUEST['parent_id']) && !empty($_REQUEST['parent_type'])) {
@@ -4654,7 +4678,7 @@ eoq;
 			$stored_options=$this->stored_options;
 		}
 		if(!empty($stored_options)) {
-			$storedOptions = unserialize(base64_decode($stored_options));
+			$storedOptions = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($stored_options));
 			if (isset($storedOptions[$option_name])) {
 				$default_value=$storedOptions[$option_name];
 			}
@@ -4709,7 +4733,7 @@ eoq;
 	 * @return array Array of messageNumbers (mail server's internal keys)
 	 */
 	function getNewMessageIds() {
-		$storedOptions = unserialize(base64_decode($this->stored_options));
+		$storedOptions = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($this->stored_options));
 
 		//TODO figure out if the since date is UDT
 		if($storedOptions['only_since']) {// POP3 does not support Unseen flags
@@ -5222,13 +5246,32 @@ eoq;
 					$GLOBALS['log']->debug("INBOUNDEMAIL: could not imap_mail_copy() [ {$uids} ] to folder [ {$toFolder} ] from folder [ {$fromFolder} ]");
 				}
 			} else {
-				if(imap_mail_move($this->conn, $uids, $toFolder, CP_UID)) {
+                $connectStringToFolder = $this->getConnectString('', $toFolder);
+                $imapStatus = imap_status($this->conn, $connectStringToFolder, SA_UIDNEXT);
+
+                if ($imapStatus && imap_mail_move($this->conn, $uids, $toFolder, CP_UID)) {
+                    $nextUid = $imapStatus->uidnext;
 					$GLOBALS['log']->info("INBOUNDEMAIL: imap_mail_move() [ {$uids} ] to folder [ {$toFolder} ] from folder [ {$fromFolder} ]");
 					imap_expunge($this->conn); // hard deletes moved messages
 
 					// update cache on fromFolder
                     $overviews = $this->getOverviewsFromCacheFile($exUids, $fromFolder, true);
 					$this->deleteCachedMessages($uids, $fromFolder);
+
+                    // Need to switch folder because imap_search doesn't accept folder as a parameter
+                    imap_reopen($this->conn, $connectStringToFolder);
+
+                    $newUids = array_filter(
+                        imap_search($this->conn, 'ALL UNDELETED', SE_UID),
+                        function ($x) use ($nextUid) {
+                            return $x >= $nextUid;
+                        }
+                    );
+
+                    foreach ($overviews as $overview) {
+                        // need to update UIDs to match the new target folder
+                        $overview->uid = array_shift($newUids);
+                    }
 
 					// update cache on toFolder
                     $this->setCacheValue($toFolder, $overviews, array(), array());
@@ -5860,8 +5903,15 @@ eoq;
 		$meta['email']['cc_addrs'] = $ccs;
 
 		// body
-		$description = (empty($this->email->description_html)) ? nl2br($this->email->description) : $this->email->description_html;
+        if (empty($this->email->description_html)) {
+            $description = nl2br($this->email->description);
+            $description_html = '';
+        } else {
+            $description = SugarCleaner::cleanHtml(from_html($this->email->description_html, false), false);
+            $description_html  = $this->getHTMLDisplay($description);
+        }
 		$meta['email']['description'] = $description;
+        $meta['email']['description_html'] = $description_html;
 
 		// meta-metadata
 		$meta['is_sugarEmail'] = ($exMbox[0] == 'sugar') ? true : false;
@@ -5872,14 +5922,16 @@ eoq;
 			}
 		} else {
 			if( $this->email->status != 'sent' ){
-				// mark SugarEmail read
-				$q = "UPDATE emails SET status = 'read' WHERE id = '{$uid}'";
-				$r = $this->db->query($q);
+                $email = BeanFactory::getBean('Emails', $uid);
+                if (!empty($email->id)) {
+                    $email->status = 'read';
+                    $email->save();
+                }
 			}
 		}
 
 		$return = array();
-        $meta['email']['name'] = to_html($this->email->name);
+        $meta['email']['name'] = $this->email->name;
         $meta['email']['from_addr'] = ( !empty($this->email->from_addr_name) ) ? to_html($this->email->from_addr_name) : to_html($this->email->from_addr);
         $meta['email']['toaddrs'] = ( !empty($this->email->to_addrs_names) ) ? to_html($this->email->to_addrs_names) : to_html($this->email->to_addrs);
         $meta['email']['cc_addrs'] = to_html($this->email->cc_addrs_names);
@@ -6265,7 +6317,7 @@ eoq;
 				$delimiter = $mbox->delimiter;
 			}
 		}
-		$storedOptions = unserialize(base64_decode($this->stored_options));
+		$storedOptions = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($this->stored_options));
 		$storedOptions['folderDelimiter'] = $delimiter;
 		$this->stored_options = base64_encode(serialize($storedOptions));
         $this->save();
@@ -6550,6 +6602,40 @@ eoq;
         }
         $GLOBALS['log']->debug('-----> getNewEmailsForSyncedMailbox() got '.count($result).' unsynced messages');
         return $result;
+    }
+
+    /**
+     * Perform specialized Windows Outlook fixup to remove unnwanted blank lines caused from empty paragraphs
+     * left behind by HTML Purifier when MSOffice namespaces and Embedded styles are removed.
+     *
+     * Issue reported: https://sugarcrm.atlassian.net/browse/MAR-2297  (SI Bug number: 66022)
+     *
+     * Note: this fixup is enabled when the 'mso_fixup_paragraph_tags' config option has been added and is set to true.
+     *
+     * @param string $html
+     * @return string $html
+     */
+    public function getHTMLDisplay($html)
+    {
+        if (!empty($GLOBALS['sugar_config']['mso_fixup_paragraph_tags'])
+            && $GLOBALS['sugar_config']['mso_fixup_paragraph_tags'] === true
+            && (strpos($html, 'class="MsoNormal"') !== false ||
+                strpos($html, "<o:p>") !== false)
+        ) {
+                $replaceStrings = array(
+                    '<p></p>' => '',
+                    '<p> </p>' => '<br/>',
+                    '<p>&nbsp;</p>' => '<br/>',
+                    '<p>' . chr(0xC2) . chr(0xA0) . '</p>' => '<br/>',
+                    '<p class="MsoNormal"></p>' => '',
+                    '<p class="MsoNormal"> </p>' => '',
+                    '<p class="MsoNormal">&nbsp;</p>' => '',
+                    '<p class="MsoNormal">' . chr(0xC2) . chr(0xA0) . '</p>' => '',
+                );
+                $html = str_replace(array_keys($replaceStrings), array_values($replaceStrings), $html);
+                $html = "<style>p.MsoNormal {margin: 0;}</style>\n" . $html;
+        }
+        return $html;
     }
 
 } // end class definition

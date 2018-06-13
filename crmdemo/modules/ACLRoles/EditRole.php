@@ -47,6 +47,17 @@ if(!empty($_REQUEST['record'])){
 }else{
 	$categories = ACLRole::getRoleActions('');
 }
+
+// Skipping modules that have 'hidden_to_role_assignment' property
+foreach ($categories as $name => $category) {
+	if (isset($dictionary[$name]) &&
+		isset($dictionary[$name]['hidden_to_role_assignment']) &&
+		$dictionary[$name]['hidden_to_role_assignment']
+	) {
+		unset($categories[$name]);
+	}
+}
+
 if (in_array('Project', $modInvisList)) {
     unset($categories['Project']);
     unset($categories['ProjectTask']);
@@ -67,7 +78,13 @@ $sugar_smarty->assign('CATEGORIES', $categories);
 $sugar_smarty->assign('CATEGORY_NAME', $_REQUEST['category_name']);
 $sugar_smarty->assign('TDWIDTH', $tdwidth);
 $sugar_smarty->assign('ACTION_NAMES', $names);
-$actions = $categories[$_REQUEST['category_name']]['module'];
+
+$actions = null;
+if (isset($categories[$_REQUEST['category_name']]['module']))
+{
+    $actions = $categories[$_REQUEST['category_name']]['module'];
+}
+
 $sugar_smarty->assign('ACTIONS', $actions);
 ob_clean();
 

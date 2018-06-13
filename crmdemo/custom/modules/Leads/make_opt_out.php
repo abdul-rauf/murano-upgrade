@@ -22,8 +22,8 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 		}
 		
 		function ConDelete($bean_id){
-			$con =mysql_connect('54.75.225.64','root','Sugar123#') or die(mysql_error());
-			mysql_select_db('connecta') or die(mysql_error());;
+			$con =mysql_connect('54.75.225.64','root','Sugar123#') or sugar_upgrade_die(mysql_error());
+			mysql_select_db('connecta') or sugar_upgrade_die(mysql_error());;
 			 $sql ="delete from leads where id ='".$bean_id."'";
 			$row =mysql_query($sql,$con);
 			mysql_close($con);

@@ -1,4 +1,4 @@
- <?php
+<?php
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -96,12 +96,12 @@ class ViewRelationships extends SugarView
         foreach ( $relationships->getRelationshipList () as $relationshipName )
         {
             $rel = $relationships->get ( $relationshipName )->getDefinition () ;
-            if (isset($rel['lhs_vname'])) {
+            if (!empty($rel['lhs_vname'])) {
                 $rel['lhs_module'] = translate($rel['lhs_vname']);
             } else {
                 $rel['lhs_module'] = translate($rel['lhs_module']);
             }
-            if (isset($rel['rhs_vname'])) {
+            if (!empty($rel['rhs_vname'])) {
                 $rel['rhs_module'] = translate($rel['rhs_vname']);
             } else {
                 $rel['rhs_module'] = translate($rel['rhs_module']);

@@ -1,6 +1,6 @@
 <?php
- // created: 2013-09-23 16:12:51
-$dictionary['mur_client_n_list']['fields']['email_address_c']['enforced']='';
-$dictionary['mur_client_n_list']['fields']['email_address_c']['dependency']='';
+ // created: 2018-06-13 10:46:07
+$dictionary['mur_client_n_list']['fields']['email_address_c']['enforced'] = '';
+$dictionary['mur_client_n_list']['fields']['email_address_c']['dependency'] = '';
+$dictionary['mur_client_n_list']['fields']['email_address_c']['full_text_search']['boost'] = 1;
 
- ?>

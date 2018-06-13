@@ -9,50 +9,56 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
-
 $viewdefs['base']['view']['create-actions'] = array(
     'template' => 'record',
     'buttons' => array(
         array(
-            'name'      => 'cancel_button',
-            'type'      => 'button',
-            'label'     => 'LBL_CANCEL_BUTTON_LABEL',
+            'name' => 'cancel_button',
+            'type' => 'button',
+            'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
+            'events' => array(
+                'click' => 'button:cancel_button:click',
+            ),
         ),
         array(
-            'name'      => 'restore_button',
-            'type'      => 'button',
-            'label'     => 'LBL_RESTORE',
+            'name' => 'restore_button',
+            'type' => 'button',
+            'label' => 'LBL_RESTORE',
             'css_class' => 'btn-invisible btn-link',
-            'showOn'    => 'select',
+            'showOn' => 'select',
+            'events' => array(
+                'click' => 'button:restore_button:click',
+            ),
         ),
         array(
-            'type'    => 'actiondropdown',
-            'name'    => 'main_dropdown',
+            'name' => 'save_button',
+            'type' => 'button',
+            'label' => 'LBL_SAVE_BUTTON_LABEL',
             'primary' => true,
-            'switch_on_click' => true,
-            'buttons' => array(
-                array(
-                    'type'  => 'rowaction',
-                    'name'  => 'save_button',
-                    'label' => 'LBL_SAVE_BUTTON_LABEL',
-                ),
-                array(
-                    'type'   => 'rowaction',
-                    'name'   => 'save_view_button',
-                    'label'  => 'LBL_SAVE_AND_VIEW',
-                    'showOn' => 'create',
-                ),
-                array(
-                    'type'   => 'rowaction',
-                    'name'   => 'save_create_button',
-                    'label'  => 'LBL_SAVE_AND_CREATE_ANOTHER',
-                    'showOn' => 'create',
-                ),
+            'showOn' => 'create',
+            'events' => array(
+                'click' => 'button:save_button:click',
+            ),
+        ),
+        array(
+            'name' => 'duplicate_button',
+            'type' => 'button',
+            'label' => 'LBL_IGNORE_DUPLICATE_AND_SAVE',
+            'primary' => true,
+            'showOn' => 'duplicate',
+            'events' => array(
+                'click' => 'button:save_button:click',
+            ),
+        ),
+        array(
+            'name' => 'select_button',
+            'type' => 'button',
+            'label' => 'LBL_SAVE_BUTTON_LABEL',
+            'primary' => true,
+            'showOn' => 'select',
+            'events' => array(
+                'click' => 'button:save_button:click',
             ),
         ),
         array(

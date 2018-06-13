@@ -87,12 +87,13 @@ $mod_strings = array (
   'LBL_ALERT_ERRORS'=>'Notice: One or more alerts below contains errors.',
   'LBL_TRIGGER_ERROR'=>'Notice: This trigger contains invalid values and will not fire.',
   'LBL_TRIGGER_ERRORS'=>'Notice: One or more triggers below contains errors.',
-	'LBL_UP' => 'Up' /*for 508 compliance fix*/,
-	'LBL_DOWN' => 'Down' /*for 508 compliance fix*/,
-	'LBL_EDITLAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
-    'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow'=>'Workflow'),
-    'LBL_EMAILTEMPLATES_TYPE'=>'Type',
+  'LBL_UP' => 'Up' /*for 508 compliance fix*/,
+  'LBL_DOWN' => 'Down' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
+  'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Workflow'),
+  'LBL_EMAILTEMPLATES_TYPE' => 'Type',
+
+  // Workflow sunsetting message, added in 7.6.1
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> This feature will be removed in a future release of Sugar currently planned for 2017. Sugar Enterprise edition customers should begin to use the advanced workflow capabilities provided by Process Author. Click <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">here</a> for more information.',
 );
 
-
-?>

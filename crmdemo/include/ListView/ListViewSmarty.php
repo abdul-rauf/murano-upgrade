@@ -105,7 +105,8 @@ class ListViewSmarty extends ListViewDisplay{
             $action_menu = $this->buildActionsLink();
 			$this->ss->assign('actionsLinkTop', $action_menu);
             if(count($action_menu['buttons']) > 0) {
-                $this->ss->assign('actionDisabledLink', preg_replace("/id\s*\=(\"\w+\"|w+)/i", "", $action_menu['buttons'][0]));
+                $firstButton = reset($action_menu['buttons']);
+                $this->ss->assign('actionDisabledLink', preg_replace("/id\\s*\\=(\"\\w+\"|w+)/i", "", $firstButton));
             }
             $menu_location = 'bottom';
             $this->ss->assign('actionsLinkBottom', $this->buildActionsLink('actions_link' ,$menu_location));
@@ -204,6 +205,14 @@ class ListViewSmarty extends ListViewDisplay{
             $displayEmptyDataMessages = FALSE;
         }
         $this->ss->assign('displayEmptyDataMesssages', $displayEmptyDataMessages);
+
+        $displaySubMessage = true;
+        $modulesExemptFromSubMessage = array('Reports');
+        if(in_array($currentModule, $modulesExemptFromSubMessage) )
+        {
+            $displaySubMessage = false;
+        }
+        $this->ss->assign('displaySubMessage', $displaySubMessage);
 
 		$str = parent::display();
 		$strend = $this->displayEnd();

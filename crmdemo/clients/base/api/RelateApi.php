@@ -44,6 +44,15 @@ class RelateApi extends FilterApi {
                 'shortHelp' => 'Lists related records.',
                 'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
             ),
+            'listRelatedRecordsCount' => array(
+                'reqType' => 'GET',
+                'path' => array('<module>', '?', 'link', '?', 'count'),
+                'pathVars' => array('module', 'record', '', 'link_name', ''),
+                'jsonParams' => array('filter'),
+                'method' => 'filterRelatedCount',
+                'shortHelp' => 'Counts all filtered related records.',
+                'longHelp' => 'include/api/help/module_record_link_link_name_filter_get_help.html',
+            ),
         );
     }
 
@@ -60,9 +69,6 @@ class RelateApi extends FilterApi {
                     $args['module']
                 )
             );
-        }
-        if (!$record->ACLAccess('view')) {
-            throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $args['module']);
         }
 
         // Load the relationship.
@@ -115,6 +121,8 @@ class RelateApi extends FilterApi {
         }
 
         $q->joinSubpanel($record, $linkName, array('joinType' => 'INNER', 'ignoreRole' => $ignoreRole));
+        
+        $q->setJoinOn(array('baseBean' => strtolower($record->object_name), 'baseBeanId' => $record->id));
 
         if (!isset($args['filter']) || !is_array($args['filter'])) {
             $args['filter'] = array();

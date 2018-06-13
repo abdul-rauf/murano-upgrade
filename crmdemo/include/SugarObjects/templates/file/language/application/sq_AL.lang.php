@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,32 +10,37 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
-
-$object_name = strtolower($object_name);
+/*********************************************************************************
+ * $Id$
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
+ 
 $app_list_strings = array (
-  $object_name.'_category_dom' => 
-  array (
-    '' => '[-bosh-]',
+strtolower($object_name).'_category_dom' =>
+    array (
+    '' => '',
     'Marketing' => 'marketingu',
     'Knowledege Base' => 'baza e njohurisë',
     'Sales' => 'Shitjet',
   ),
-  $object_name.'_subcategory_dom' => 
-  array (
-    '' => '[-bosh-]',
+
+    strtolower($object_name).'_subcategory_dom' =>
+    array (
+    '' => '',
     'Marketing Collateral' => 'marketingu kolateral',
     'Product Brochures' => 'Broshurë e produkteve',
-    'FAQ' => 'pyetje më shpesh të parashtruara',
+    'FAQ' => 'Pyetje të shpeshta',
   ),
-  $object_name.'_status_dom' => 
-  array (
+
+    strtolower($object_name).'_status_dom' =>
+    array (
     'Active' => 'aktive',
     'Draft' => 'Skicë',
-    'FAQ' => 'pyetje më shpesh të parashtruara',
+    'FAQ' => 'Pyetje të shpeshta',
     'Expired' => 'Skaduar',
     'Under Review' => 'Në shqyrtim',
     'Pending' => 'Pezull',
   ),
-);
-
+  );

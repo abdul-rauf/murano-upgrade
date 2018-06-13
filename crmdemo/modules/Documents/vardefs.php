@@ -25,7 +25,7 @@ $dictionary['Document'] = array('table' => 'documents',
             'required' => true,
             'importable' => 'required',
             'unified_search' => true,
-            'full_text_search' => array('enabled' => true, 'boost' => 3),
+            'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 0.82),
         ),
         'name' => array(
             'name' => 'name',
@@ -127,7 +127,7 @@ $dictionary['Document'] = array('table' => 'documents',
         'status_id' =>
         array(
             'name' => 'status_id',
-            'vname' => 'LBL_DOC_STATUS_ID',
+            'vname' => 'LBL_DOC_STATUS',
             'type' => 'enum',
             'len' => 100,
             'options' => 'document_status_dom',
@@ -141,6 +141,7 @@ $dictionary['Document'] = array('table' => 'documents',
             'type' => 'varchar',
             'source' => 'non-db',
             'comment' => 'Document status for Meta-Data framework',
+            'studio' => 'false',
         ),
 
         'document_revision_id' =>
@@ -214,6 +215,7 @@ $dictionary['Document'] = array('table' => 'documents',
             'type' => 'relate',
             'table' => 'document_revisions',
             'link' => 'latest_document_revision_link',
+            'id_name' => 'document_revision_id',
             'join_name' => 'document_revisions',
             'vname' => 'LBL_LAST_REV_CREATE_DATE',
             'rname' => 'date_entered',
@@ -233,14 +235,6 @@ $dictionary['Document'] = array('table' => 'documents',
             'relationship' => 'contracttype_documents',
             'source' => 'non-db',
             'vname' => 'LBL_CONTRACTTYPES',
-        ),
-        //todo remove
-        'leads' => array(
-            'name' => 'leads',
-            'type' => 'link',
-            'relationship' => 'leads_documents',
-            'source' => 'non-db',
-            'vname' => 'LBL_LEADS',
         ),
         // Links around the world
         'accounts' =>
@@ -306,6 +300,7 @@ $dictionary['Document'] = array('table' => 'documents',
             'relationship' => 'documents_revenuelineitems',
             'source' => 'non-db',
             'vname' => 'LBL_RLI_SUBPANEL_TITLE',
+            'workflow' => false
         ),
         'related_doc_id' =>
         array(
@@ -486,4 +481,7 @@ $dictionary['Document'] = array('table' => 'documents',
 VardefManager::createVardef('Documents', 'Document', array('default', 'assignable',
     'team_security',
 ));
-?>
+
+//boost value for full text search
+$dictionary['Document']['fields']['description']['full_text_search']['boost'] = 0.61;
+

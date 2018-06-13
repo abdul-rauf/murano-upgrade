@@ -37,11 +37,11 @@ class SugarFieldHandler
                case 'url':
                		$field = 'link';
                		break;
+               case 'link':
+                   $field = 'relateLink';
+                   break;
                case 'varchar':
                     $field = 'base';
-                    break;
-                case 'team_list':
-                    $field = 'teamset';
                     break;
             }
 
@@ -51,7 +51,9 @@ class SugarFieldHandler
     /**
      * return the singleton of the SugarField
      *
-     * @param field string field type
+     * @param string $field Field type
+     * @param boolean $returnNullIfBase
+     * @return SugarFieldBase
      */
     static function getSugarField($field, $returnNullIfBase=false) {
         static $sugarFieldObjects = array();

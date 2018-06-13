@@ -11,23 +11,16 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-/*********************************************************************************
- * pl_pl.lang.php for SugarCRM 6.5.0
- * Translator: eVolpe
- * All Rights Reserved.
- * Any bugs report welcome: support@evolpe.pl
- * Contributor(s): ______________________________________..
- ********************************************************************************/
+ // $Id: JotPadDashlet.en_us.lang.php 51719 2009-10-22 17:18:00Z mitani $
 
+$defaultText = "";
 $dashletStrings['JotPadDashlet'] = array('LBL_TITLE'            => 'JotPad',
-                                         'LBL_DESCRIPTION'      => 'Dashlet Twoich notatek',
-                                         'LBL_SAVING'           => 'Widok w trakcie zapisywania...',
+                                         'LBL_DESCRIPTION'      => 'Dashlet do Twoich notatek',
+                                         'LBL_SAVING'           => 'Zapisywanie JotPad...',
                                          'LBL_SAVED'            => 'Zapisano',
-                                         'LBL_CONFIGURE_TITLE'  => 'Tytuł',
+                                         'LBL_CONFIGURE_TITLE'  => 'Stanowisko',
                                          'LBL_CONFIGURE_HEIGHT' => 'Wysokość (1 - 300)',
                                          'LBL_DBLCLICK_HELP'    => 'Kliknij dwa razy poniżej, aby edytować.',
-                                         'LBL_DEFAULT_TEXT'     => "Witaj w SugarCRM!\n\nMożesz dowolnie zmienić wygląd Twojej strony głównej, aby pasowała do Twoich potrzeb.\n\n" .
-                                                                   "* Dodawaj nowe dashlety, klikając na \"Dodaj dashlet\" w lewym górnym rogu ekranu.\n" .
-                                                                   "* Dostosuj każdy z dashletów, klikając na ikonkę konfiguracji w prawym górnym rogu każdego z dashletów\n" .
-                                                                   "* Usuń dashlet klikając na znak X");
- 
+                                         'LBL_DEFAULT_TEXT'     => $defaultText,
+);
+?>

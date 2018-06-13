@@ -91,16 +91,10 @@
     },
 
     loadData: function(options) {
-       if(this.model.get("duns_num")){
-            this.duns_num = this.model.get("duns_num");       
-       }
-          
-    },
-
-    loadData: function(options) {
-        if (this.model.get('duns_num')) {
+       if (this.model.get('duns_num')) {
             this.duns_num = this.model.get('duns_num');
-        }
+       }
+
     },
 
     _render: function() {
@@ -133,17 +127,7 @@
     loadNews: function(isCollapsed) {
         if (!isCollapsed) {
             //check if account is linked with a D-U-N-S
-            if (this.duns_num) {
-                this.getNewsandMediaInfo(this.duns_num);
-            } else if (!_.isUndefined(app.controller.context.get('dnb_temp_duns_num'))) {
-                //check if D-U-N-S is set in context by refresh dashlet
-                this.getNewsandMediaInfo(app.controller.context.get('dnb_temp_duns_num'));
-            } else {
-                this.template = app.template.get(this.name + '.dnb-no-duns');
-                if (!this.disposed) {
-                    this.render();
-                }
-            }
+            this.loadDNBData('duns_num', 'dnb_temp_duns_num', this.getNewsandMediaInfo, null, 'dnb.dnb-no-duns', 'dnb.dnb-no-duns-field');
         }
     },
 
@@ -250,7 +234,7 @@
         //grouping social media by DNB Code values
         //socialMedia variable will be a map
         //whose keys will be DNB Code values
-        //whose values will be social medial information in an array
+        //whose values will be social media information in an array
         var socialMedia = _.groupBy(dnbApiResponse, function(socialObj) {
             return socialObj.SocialMediaPlatformName['@DNBCodeValue'];
         });

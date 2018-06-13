@@ -1,9 +1,8 @@
 /*
-     YUI 3.15.0 (build 834026e)
-     Copyright 2014 Yahoo! Inc. All rights reserved.
-     Licensed under the BSD License.
-     http://yuilibrary.com/license/
-     */
-YUI.add('datasource-io',function(Y,NAME){var DSIO=function(){DSIO.superclass.constructor.apply(this,arguments);};Y.mix(DSIO,{NAME:"dataSourceIO",ATTRS:{io:{value:Y.io,cloneDefaultValue:false},ioConfig:{value:null}}});Y.extend(DSIO,Y.DataSource.Local,{initializer:function(config){this._queue={interval:null,conn:null,requests:[]};},successHandler:function(id,response,e){var defIOConfig=this.get("ioConfig"),payload=e.details[0];delete Y.DataSource.Local.transactions[e.tId];payload.data=response;this.fire("data",payload);if(defIOConfig&&defIOConfig.on&&defIOConfig.on.success){defIOConfig.on.success.apply(defIOConfig.context||Y,arguments);}},failureHandler:function(id,response,e){var defIOConfig=this.get("ioConfig"),payload=e.details[0];delete Y.DataSource.Local.transactions[e.tId];payload.error=new Error("IO data failure");payload.data=response;this.fire("data",payload);if(defIOConfig&&defIOConfig.on&&defIOConfig.on.failure){defIOConfig.on.failure.apply(defIOConfig.context||Y,arguments);}},_queue:null,_defRequestFn:function(e){var uri=this.get("source"),io=this.get("io"),defIOConfig=this.get("ioConfig"),request=e.request,cfg=Y.merge(defIOConfig,e.cfg,{on:Y.merge(defIOConfig,{success:this.successHandler,failure:this.failureHandler}),context:this,"arguments":e});if(Y.Lang.isString(request)){if(cfg.method&&(cfg.method.toUpperCase()==="POST")){cfg.data=cfg.data?cfg.data+request:request;}
-else{uri+=request;}}
-Y.DataSource.Local.transactions[e.tId]=io(uri,cfg);return e.tId;}});Y.DataSource.IO=DSIO;},'3.15.0',{"requires":["datasource-local","io-base"]});
+YUI 3.15.0 (build 834026e)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add("datasource-io",function(e,t){var n=function(){n.superclass.constructor.apply(this,arguments)};e.mix(n,{NAME:"dataSourceIO",ATTRS:{io:{value:e.io,cloneDefaultValue:!1},ioConfig:{value:null}}}),e.extend(n,e.DataSource.Local,{initializer:function(e){this._queue={interval:null,conn:null,requests:[]}},successHandler:function(t,n,r){var i=this.get("ioConfig"),s=r.details[0];delete e.DataSource.Local.transactions[r.tId],s.data=n,this.fire("data",s),i&&i.on&&i.on.success&&i.on.success.apply(i.context||e,arguments)},failureHandler:function(t,n,r){var i=this.get("ioConfig"),s=r.details[0];delete e.DataSource.Local.transactions[r.tId],s.error=new Error("IO data failure"),s.data=n,this.fire("data",s),i&&i.on&&i.on.failure&&i.on.failure.apply(i.context||e,arguments)},_queue:null,_defRequestFn:function(t){var n=this.get("source"),r=this.get("io"),i=this.get("ioConfig"),s=t.request,o=e.merge(i,t.cfg,{on:e.merge(i,{success:this.successHandler,failure:this.failureHandler}),context:this,arguments:t});return e.Lang.isString(s)&&(o.method&&o.method.toUpperCase()==="POST"?o.data=o.data?o.data+s:s:n+=s),e.DataSource.Local.transactions[t.tId]=r(n,o),t.tId}}),e.DataSource.IO=n},"3.15.0",{requires:["datasource-local","io-base"]});

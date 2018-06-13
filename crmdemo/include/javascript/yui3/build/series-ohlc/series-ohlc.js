@@ -1,19 +1,8 @@
 /*
-     YUI 3.15.0 (build 834026e)
-     Copyright 2014 Yahoo! Inc. All rights reserved.
-     Licensed under the BSD License.
-     http://yuilibrary.com/license/
-     */
-YUI.add('series-ohlc',function(Y,NAME){function OHLCSeries()
-{OHLCSeries.superclass.constructor.apply(this,arguments);}
-OHLCSeries.NAME="ohlcSeries";OHLCSeries.ATTRS={type:{value:"ohlc"},graphic:{lazyAdd:false,setter:function(val){if(!this.get("rendered")){this.set("rendered",true);}
-this.set("upmarker",val.addShape({type:"path"}));this.set("downmarker",val.addShape({type:"path"}));return val;}},upmarker:{},downmarker:{}};Y.extend(OHLCSeries,Y.RangeSeries,{_drawMarkers:function(xcoords,opencoords,highcoords,lowcoords,closecoords,len,width,halfwidth,styles)
-{var upmarker=this.get("upmarker"),downmarker=this.get("downmarker"),opencoord,highcoord,lowcoord,closecoord,left,right,leftPadding=styles.padding.left,marker,up,cx,i,height;upmarker.set(styles.upmarker);downmarker.set(styles.downmarker);upmarker.clear();downmarker.clear();for(i=0;i<len;i=i+1)
-{cx=xcoords[i]+leftPadding;left=cx-halfwidth;right=cx+halfwidth;opencoord=opencoords[i];highcoord=highcoords[i];lowcoord=lowcoords[i];closecoord=closecoords[i];up=opencoord>closecoord;height=lowcoord-highcoord;marker=up?upmarker:downmarker;marker.moveTo(left,opencoord);marker.lineTo(cx,opencoord);marker.moveTo(cx,highcoord);marker.lineTo(cx,lowcoord);marker.moveTo(cx,closecoord);marker.lineTo(right,closecoord);}
-upmarker.end();downmarker.end();},_toggleVisible:function(visible)
-{this.get("upmarker").set("visible",visible);this.get("downmarker").set("visible",visible);},destructor:function()
-{var upmarker=this.get("upmarker"),downmarker=this.get("downmarker");if(upmarker)
-{upmarker.destroy();}
-if(downmarker)
-{downmarker.destroy();}},_getDefaultStyles:function()
-{var styles={upmarker:{stroke:{color:"#00aa00",alpha:1,weight:1}},downmarker:{stroke:{color:"#aa0000",alpha:1,weight:1}}};return this._mergeStyles(styles,OHLCSeries.superclass._getDefaultStyles());}});Y.OHLCSeries=OHLCSeries;},'3.15.0',{"requires":["series-range"]});
+YUI 3.15.0 (build 834026e)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add("series-ohlc",function(e,t){function n(){n.superclass.constructor.apply(this,arguments)}n.NAME="ohlcSeries",n.ATTRS={type:{value:"ohlc"},graphic:{lazyAdd:!1,setter:function(e){return this.get("rendered")||this.set("rendered",!0),this.set("upmarker",e.addShape({type:"path"})),this.set("downmarker",e.addShape({type:"path"})),e}},upmarker:{},downmarker:{}},e.extend(n,e.RangeSeries,{_drawMarkers:function(e,t,n,r,i,s,o,u,a){var f=this.get("upmarker"),l=this.get("downmarker"),c,h,p,d,v,m,g=a.padding.left,y,b,w,E,S;f.set(a.upmarker),l.set(a.downmarker),f.clear(),l.clear();for(E=0;E<s;E+=1)w=e[E]+g,v=w-u,m=w+u,c=t[E],h=n[E],p=r[E],d=i[E],b=c>d,S=p-h,y=b?f:l,y.moveTo(v,c),y.lineTo(w,c),y.moveTo(w,h),y.lineTo(w,p),y.moveTo(w,d),y.lineTo(m,d);f.end(),l.end()},_toggleVisible:function(e){this.get("upmarker").set("visible",e),this.get("downmarker").set("visible",e)},destructor:function(){var e=this.get("upmarker"),t=this.get("downmarker");e&&e.destroy(),t&&t.destroy()},_getDefaultStyles:function(){var e={upmarker:{stroke:{color:"#00aa00",alpha:1,weight:1}},downmarker:{stroke:{color:"#aa0000",alpha:1,weight:1}}};return this._mergeStyles(e,n.superclass._getDefaultStyles())}}),e.OHLCSeries=n},"3.15.0",{requires:["series-range"]});

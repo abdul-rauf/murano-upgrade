@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: SugarWidgetSubPanelTopButton.php 51841 2009-10-26 20:33:15Z jmertic $
 
 
 
@@ -109,6 +109,8 @@ class SugarWidgetSubPanelTopButton extends SugarWidget
             "SubPanelTopCreateAccountNameButton",
             "SubPanelTopCreateLeadNameButton",
             "SubPanelTopCreateNoteButton",
+            "SubPanelTopScheduleMeetingButton",
+            "SubPanelTopScheduleCallButton",
             "SubPanelTopCreateTaskButton"
         );
 
@@ -134,10 +136,16 @@ class SugarWidgetSubPanelTopButton extends SugarWidget
             $panelDefs = $defines['subpanel_definition'];
             $link = '';
 
-            //Normalize Activities which should result in Create Tasks
-            if ($module == "Activities") {
+            //Normalize Activities which should result in child module creates
+            if ($module == "Activities" &&  $defines['child_module_name'] == 'Tasks') {
                 $module = "Tasks";
                 $label = $app_strings['LBL_CREATE_TASK'];
+            } elseif ($module == "Activities" &&  $defines['child_module_name'] == 'Meetings') {
+                $module = "Meetings";
+                $label = $app_strings['LBL_SCHEDULE_MEETING_BUTTON_LABEL'];
+            } elseif ($module == "Activities" &&  $defines['child_module_name'] == 'Calls') {
+                $module = "Calls";
+                $label = $app_strings['LBL_SCHEDULE_CALL'];
             }
 
             if ($panelDefs->isCollection()) {
@@ -246,9 +254,6 @@ class SugarWidgetSubPanelTopButton extends SugarWidget
                 break ;
             case 'documents' :
                 $name = $defines['focus']->document_name ;
-                break ;
-            case 'kbdocuments' :
-                $name = $defines['focus']->kbdocument_name ;
                 break ;
             case 'leads' :
             case 'contacts' :

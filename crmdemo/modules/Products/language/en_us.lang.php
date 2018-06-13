@@ -120,6 +120,7 @@ $mod_strings = array(
     'LBL_EXPERT_ID' => 'Product Expert',
     'LBL_FORECAST' => 'Include in Forecast',
     'LBL_CALCULATED_LINE_ITEM_AMOUNT' => 'Calculated Quoted Line Item Amount',
+    'LBL_SUBTOTAL' => 'Subtotal',
     'LBL_CONTACT' => 'Contact',
     'LBL_DISCOUNT_TOTAL' => 'Discount Total',
     'LBL_DISCOUNT_AMOUNT' => 'Discount Amount',
@@ -138,6 +139,7 @@ $mod_strings = array(
     'LBL_PROBABILITY' => 'Probability (%)',
     'LBL_SALES_STAGE' => 'Sales Stage',
     'LBL_SALES_STATUS' => 'Revenue Line Status',
+    'LBL_PIPELINE_TOTAL_IS' => 'Pipeline Total is ',
 
     'LBL_CONVERT_TO_QUOTE_ERROR' => 'Error:',
     'LBL_CONVERT_TO_QUOTE_ERROR_MESSAGE' => 'There was an error converting this Quoted Line Item to a Quote',
@@ -164,7 +166,8 @@ To create a {{module_name}}:
 1. Provide values for the fields as desired.
  - Fields marked "Required" must be completed prior to saving.
  - Click "Show More" to expose additional fields if necessary.
-2. Click "Save" to finalize the new record and return to the previous page.
- - Choose "Save and view" to open the new {{module_name}} in record view.
- - Choose "Save and create new" to immediately create another new {{module_name}}.',
+2. Click "Save" to finalize the new record and return to the previous page.',
+
+    'LBL_MANUFACTURERS' => 'Manufacturers',
+    'LBL_PRODUCT_POSITION' => 'Product Bundle Position',
 );

@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -46,11 +43,7 @@ class ForecastsDefaults
         }
 
         foreach ($forecastConfig as $name => $value) {
-            if (is_array($value)) {
-                $admin->saveSetting('Forecasts', $name, json_encode($value), 'base');
-            } else {
-                $admin->saveSetting('Forecasts', $name, $value, 'base');
-            }
+            $admin->saveSetting('Forecasts', $name, $value, 'base');
         }
 
         return $forecastConfig;
@@ -133,17 +126,18 @@ class ForecastsDefaults
             // whether or not to show the commit warnings
             'show_forecasts_commit_warnings' => 1,
             // default enabled worksheet columns
-            'worksheet_columns' =>self::getWorksheetColumns('pro'),
+            'worksheet_columns' => self::getWorksheetColumns('pro'),
         );
     }
 
     /**
      * Given a flavor, returns the proper worksheet columns in an array
      *
-     * @param $flav ent/ult/pro/corp
+     * @param string $flav ent/ult/pro/corp
      * @return array of fields and column names for the worksheet to use
      */
-    public static function getWorksheetColumns($flav) {
+    public static function getWorksheetColumns($flav)
+    {
         $cols = array();
         switch($flav) {
             case 'ent':
@@ -221,7 +215,6 @@ class ForecastsDefaults
                     $amount_usdollar = 'discount_amount_usdollar';
                     break;
                 case 'forecasts':
-                case 'forecast_schedule':
                     $isUsDollar = false;
                     break;
                 case 'quotes':

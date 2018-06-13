@@ -52,14 +52,16 @@ var SUGAR = SUGAR || {};
 SUGAR.Api = (function() {
     var _instance;
     var _methodsToRequest = {
-            "read": "GET",
-            "update": "PUT",
-            "create": "POST",
-            "delete": "DELETE"
+            'read': 'GET',
+            'update': 'PUT',
+            'create': 'POST',
+            'delete': 'DELETE'
         };
-    var _baseActions = ["read", "update", "create", "delete"];
+    var _baseActions = ['read', 'update', 'create', 'delete'];
     var _numCallsInProgress = 0;
-    var _refreshTokenSuccess = function(c){c();};
+    var _refreshTokenSuccess = function(c) {c();};
+    var _bulkQueues = { };
+    var _state = { };
 
     var HttpError = function(request, textStatus, errorThrown) {
 
@@ -107,15 +109,16 @@ SUGAR.Api = (function() {
 
         // The response will not be always a JSON string
 
-        if (typeof(this.responseText) === "string" && this.responseText.length > 0) {
+        if (typeof(this.responseText) === 'string' && this.responseText.length > 0) {
             try {
-                var contentType = this.request.xhr.getResponseHeader("Content-Type");
-                if (contentType && (contentType.indexOf("application/json") === 0)) {
+                var contentType = this.request.xhr.getResponseHeader('Content-Type');
+                if (contentType && (contentType.indexOf('application/json') === 0)) {
                     this.payload = JSON.parse(this.responseText);
                     /**
                      * Error code.
                      *
-                     * Additional failure information. See SugarCRM REST API documentation for a full list of error codes.
+                     * Additional failure information. See SugarCRM REST API
+                     * documentation for a full list of error codes.
                      * @property {String}
                      * @member SUGAR.HttpError
                      */
@@ -131,7 +134,7 @@ SUGAR.Api = (function() {
                     this.message = this.payload.error_message;
                 }
             }
-            catch(e) {
+            catch (e) {
                 // Ignore this error
             }
         }
@@ -155,12 +158,12 @@ SUGAR.Api = (function() {
          * @member SUGAR.HttpError
          */
         toString: function() {
-            return "HTTP error: " + this.status +
-                "\ntype: " + this.textStatus +
-                "\nerror: " + this.errorThrown +
-                "\nresponse: " + this.responseText +
-                "\ncode: " + this.code +
-                "\nmessage: " + this.message;
+            return 'HTTP error: ' + this.status +
+                '\ntype: ' + this.textStatus +
+                '\nerror: ' + this.errorThrown +
+                '\nresponse: ' + this.responseText +
+                '\ncode: ' + this.code +
+                '\nmessage: ' + this.message;
         }
 
     });
@@ -192,6 +195,15 @@ SUGAR.Api = (function() {
          * @member SUGAR.HttpRequest
          */
         this.numExecuted = 0;
+
+        /**
+         * The state object is used to store global enviroment conditions that may be relevent
+         * when processing this request but would not be passed to the server.
+         *
+         * @property {Object}
+         * @member SUGAR.HttpRequest
+         */
+        this.state = {};
     };
 
     /**
@@ -199,39 +211,47 @@ SUGAR.Api = (function() {
      *
      * Encapsulates XHR object and AJAX parameters.
      * @class SUGAR.HttpRequest
+     *
      */
     _.extend(HttpRequest.prototype, {
 
         /**
          * Executes AJAX request.
-         * @param {String=} token OAuth token. Must not be supplied for login type requests.
-         * @param {String=} mdHash current private metadata hash, used to validate the client metadata against the server.
-         * @param {String=} upHash Current User preferences hash, used to validate the client user pref data against the server.
+         * @param {string} token OAuth token. Must not be supplied for login
+         *   type requests.
+         * @param {string} mdHash current private metadata hash, used to
+         *   validate the client metadata against the server.
+         * @param {string} upHash Current User preferences hash, used to
+         *   validate the client user pref data against the server.
          */
         execute: function(token, mdHash, upHash) {
             if (token) {
                 this.params.headers = this.params.headers || {};
-                this.params.headers["OAuth-Token"] = token;
+                this.params.headers['OAuth-Token'] = token;
             }
             if (mdHash) {
                 this.params.headers = this.params.headers || {};
-                this.params.headers["X-Metadata-Hash"] = mdHash;
+                this.params.headers['X-Metadata-Hash'] = mdHash;
             }
             if (upHash) {
                 this.params.headers = this.params.headers || {};
-                this.params.headers["X-Userpref-Hash"] = upHash;
+                this.params.headers['X-Userpref-Hash'] = upHash;
             }
 
+            //The state object is used to store global enviroment conditions that may be relevent
+            //when processing this request but would not be passed to the server.
+            this.state = _.extend(this.state, _state);
+
             if (this.debug) {
-                console.log("====== Ajax Request Begin ======");
-                console.log(this.params.type + " " + this.params.url);
+                console.log('====== Ajax Request Begin ======');
+                console.log(this.params.type + ' ' + this.params.url);
                 var parsedData = this.params.data ? JSON.parse(this.params.data) : null;
-                if (parsedData && parsedData.password) parsedData.password = "***";
-                console.log("Payload: ",  this.params.data ? parsedData : "N/A");
+                if (parsedData && parsedData.password) parsedData.password = '***';
+                console.log('Payload: ', this.params.data ? parsedData : 'N/A');
                 var p = $.extend({}, this.params);
                 delete p.data;
-                console.log("params: ", p);
-                console.log("====== Request End ======");
+                console.log('params: ', p);
+                console.log('====== Request End ======');
             }
             //In order to keep track of the number of ajax call in the air, we will add
             //a complete callback.
@@ -258,6 +278,39 @@ SUGAR.Api = (function() {
 
     });
 
+    /**
+     * Fake jqXHR object because bulk calls do not have their own individual XHR requests
+     * @param {object} result object returned from the BulkAPI
+     * @param {string|number} [result.status=200] The response status.
+     * @param {Object} [result.status=200] The response headers.
+     * @param {Object} [result.contents={}] The response contents.
+     * @param {SUGAR.HttpRequest} parentReq bulk API request that this request is a part of.
+     */
+    var bulkXHR = function(result, parentReq) {
+        var contents = result.contents || {};
+
+        this.status = result.status || 200;
+        this.statusText = result.status_text || '';
+        this.responseText = _.isObject(contents) ? JSON.stringify(contents) : contents;
+        this.readyState = 4;
+        this._parent = parentReq.xhr;
+        this.headers = result.headers;
+    };
+
+    _.extend(bulkXHR.prototype, {
+        isResolved: function() {
+            return this._parent.isResolved();
+        },
+        getResponseHeader: function(h) {
+            return this.headers[h];
+        },
+        getAllResponseHeaders: function() {
+            return _.reduce(this.headers, function(str, value, key) {
+                return str.concat(key + ': ' + value + '\n');
+            }, '');
+        }
+    });
+
     function SugarApi(args) {
         var _serverUrl,
             _platform,
@@ -267,6 +320,8 @@ SUGAR.Api = (function() {
             _refreshingToken,
             _defaultErrorHandler,
             _externalLogin,
+            _allowBulk,
+            _externalLoginUICallback = null,
             _accessToken = null,
             _refreshToken = null,
             _downloadToken = null,
@@ -280,27 +335,42 @@ SUGAR.Api = (function() {
 
         // if no key/value store is provided, the auth token is kept in memory
         _keyValueStore = args && args.keyValueStore;
-        _serverUrl = (args && args.serverUrl) || "/rest/v10";
+        _serverUrl = (args && args.serverUrl) || '/rest/v10';
         // there will only be a fallback default error handler if provided here
         _defaultErrorHandler = (args && args.defaultErrorHandler) || null;
-        _platform = (args && args.platform) || "";
-        _clientID = (args && args.clientID) || "sugar";
+        _platform = (args && args.platform) || '';
+        _clientID = (args && args.clientID) || 'sugar';
         _timeout = ((args && args.timeout) || 30) * 1000;
         _externalLogin = false;
+        _allowBulk = !(args && args.disableBulkApi);
+
+        if (args && args.externalLoginUICallback && _.isFunction(args.externalLoginUICallback)) {
+            _externalLoginUICallback = args.externalLoginUICallback;
+        }
 
         if (_keyValueStore) {
             if (!$.isFunction(_keyValueStore.set) ||
                 !$.isFunction(_keyValueStore.get) ||
                 !$.isFunction(_keyValueStore.cut))
             {
-                throw new Error("Failed to initialize Sugar API: key/value store provider is invalid");
+                throw new Error('Failed to initialize Sugar API: key/value store provider is invalid');
             }
-            _accessToken = _keyValueStore.get("AuthAccessToken");
-            _refreshToken = _keyValueStore.get("AuthRefreshToken");
-            _downloadToken = _keyValueStore.get("DownloadToken");
+
+            var init = function() {
+                _accessToken = _keyValueStore.get('AuthAccessToken');
+                _refreshToken = _keyValueStore.get('AuthRefreshToken');
+                _downloadToken = _keyValueStore.get('DownloadToken');
+            };
+
+            if ($.isFunction(_keyValueStore.initAsync)) {
+                _keyValueStore.initAsync(init);
+            } else {
+                init();
+            }
+
             if ($.isFunction(_keyValueStore.on)) {
-                _keyValueStore.on("cache:clean", function(callback){
-                    callback(["AuthAccessToken", "AuthRefreshToken", "DownloadToken"]);
+                _keyValueStore.on('cache:clean', function(callback) {
+                    callback(['AuthAccessToken', 'AuthRefreshToken', 'DownloadToken']);
                 });
             }
         }
@@ -316,24 +386,23 @@ SUGAR.Api = (function() {
                 _refreshToken = data.refresh_token;
                 _downloadToken = data.download_token;
                 if (_keyValueStore) {
-                    _keyValueStore.set("AuthAccessToken", _accessToken);
-                    _keyValueStore.set("AuthRefreshToken", _refreshToken);
-                    _keyValueStore.set("DownloadToken", _downloadToken);
+                    _keyValueStore.set('AuthAccessToken', _accessToken);
+                    _keyValueStore.set('AuthRefreshToken', _refreshToken);
+                    _keyValueStore.set('DownloadToken', _downloadToken);
                 }
-            }
-            else {
+            } else {
                 _accessToken = null;
                 _refreshToken = null;
                 _downloadToken = null;
                 if (_keyValueStore) {
-                    _keyValueStore.cut("AuthAccessToken");
-                    _keyValueStore.cut("AuthRefreshToken");
-                    _keyValueStore.cut("DownloadToken");
+                    _keyValueStore.cut('AuthAccessToken');
+                    _keyValueStore.cut('AuthRefreshToken');
+                    _keyValueStore.cut('DownloadToken');
                 }
             }
         };
 
-        var _handleErrorAndRefreshToken = function(self, request, callbacks){
+        var _handleErrorAndRefreshToken = function(self, request, callbacks) {
             return function(xhr, textStatus, errorThrown) {
                 var error = new HttpError(request, textStatus, errorThrown);
                 var onError = function() {
@@ -346,14 +415,14 @@ SUGAR.Api = (function() {
                         else if ($.isFunction(self.defaultErrorHandler)) {
                             self.defaultErrorHandler(error);
                         }
-                    }
-                    else {
+                    } else {
                         // Token refresh failed
                         // Call original error callback for all queued requests
-                        for(var i = 0; i < _rqueue.length; ++i) {
+                        for (var i = 0; i < _rqueue.length; ++i) {
                             if (_rqueue[i]._oerror) _rqueue[i]._oerror(error);
                         }
                     }
+                    // duplicated due to other types of authentication
                     self.setRefreshingToken(false);
                 };
 
@@ -367,9 +436,12 @@ SUGAR.Api = (function() {
                         return;
                     }
                     _rqueue.push(request);
+
                     self.setRefreshingToken(true);
-                    self.login(null, { refresh: true }, {
+
+                    var refreshCallbacks = {
                         complete: function() {
+
                             // Call original complete callback for all queued requests
                             // only if token refresh failed
                             // In case of requests succeed, complete callback is called by ajax lib
@@ -380,45 +452,71 @@ SUGAR.Api = (function() {
                             }
                         },
                         success: function() {
-                            refreshFailed = false;
                             self.setRefreshingToken(false);
-                            _refreshTokenSuccess(
-                                function(){
-                                    // Repeat original requests
-                                    while (r = _rqueue.shift()) {
-                                        r._dequeuing = true;
-                                        r.execute(self.getOAuthToken());
-                                    }
+                            refreshFailed = false;
+                            _refreshTokenSuccess(function() {
+                                // Repeat original requests
+                                while (r = _rqueue.shift()) {
+                                    r._dequeuing = true;
+                                    r.execute(self.getOAuthToken());
                                 }
-                            );
+                            });
                         },
                         error: onError
+                    };
+
+                    if (!('crosstab' in window) || !crosstab.supported) {
+                        self.login(null, {refresh: true}, {
+                            complete: refreshCallbacks.complete,
+                            success: refreshCallbacks.success,
+                            error: refreshCallbacks.error
+                        });
+                        return;
+                    }
+
+                    crosstab(function() {
+                        crosstab.on('auth:refresh:complete', function(event) {
+                            var status = event.data;
+                            switch (status) {
+                                case 'success':
+                                    refreshCallbacks.success();
+                                    break;
+                                case 'error':
+                                    refreshCallbacks.error();
+                                    break;
+                                case 'complete':
+                                    refreshCallbacks.complete();
+                                    crosstab.off('auth:refresh:complete');
+                                    break;
+                            }
+                        });
+
+                        crosstab.broadcastMaster('auth:refresh');
                     });
-                }
-                else if (self.needQueue(request.params.url)) {
+
+                } else if (self.needQueue(request.params.url)) {
                     // Queue subsequent request to execute it after token refresh completes
                     _rqueue.push(request);
-                }
-                else if(_externalLogin && error.status == 401 && error.payload && error.payload.url) {
-                    if(!self.isLoginRequest(request.params.url)) {
+                } else if (_externalLogin && error.status == 401 && error.payload && error.payload.url) {
+                    if (!self.isLoginRequest(request.params.url)) {
                         _rqueue.push(request);
                     }
                     // don't try to reauth again from here
                     self.setRefreshingToken(true);
-                    $(window).on("message", function(event) {
-                        if(!event.originalEvent.origin || event.originalEvent.origin != window.location.origin) {
+                    $(window).on('message', function(event) {
+                        if (!event.originalEvent.origin || event.originalEvent.origin != window.location.origin) {
                             // this is not our message, ignore it
                             return;
                         }
-                        $(window).on("message", null);
+                        $(window).on('message', null);
                         authData = $.parseJSON(event.originalEvent.data);
-                        if(!authData || !authData.access_token) {
+                        if (!authData || !authData.access_token) {
                             onError();
                         }
                         self.setRefreshingToken(false);
                         _resetAuth(authData);
                         _refreshTokenSuccess(
-                            function(){
+                            function() {
                                 // Repeat original requests
                                 while (r = _rqueue.shift()) {
                                     r.execute(self.getOAuthToken());
@@ -426,9 +524,11 @@ SUGAR.Api = (function() {
                             }
                         );
                     });
-                    window.open(error.payload.url, '_blank', "width=600,height=400,centerscreen=1,resizable=1");
-                }
-                else {
+                    if (_.isFunction(_externalLoginUICallback)) {
+                        _externalLoginUICallback(error.payload.url, '_blank', 
+                                                 'width=600,height=400,centerscreen=1,resizable=1');
+                    }
+                } else {
                     onError();
                 }
             };
@@ -481,7 +581,9 @@ SUGAR.Api = (function() {
 
                 if (request) {
                     request.aborted = true;
-                    request.xhr.abort();
+                    if (request.xhr) {
+                        request.xhr.abort();
+                    }
                 }
             },
 
@@ -497,7 +599,7 @@ SUGAR.Api = (function() {
              * Sets the callback to be triggered after a token refresh occurs
              * @param callback function to be called
              */
-            setRefreshTokenSuccessCallback : function(callback) {
+            setRefreshTokenSuccessCallback: function(callback) {
                 if (_.isFunction(callback))
                     _refreshTokenSuccess = callback;
             },
@@ -505,17 +607,21 @@ SUGAR.Api = (function() {
             /**
              * Makes AJAX call via jquery/zepto AJAX API.
              *
-             * @param  {String} method CRUD action to make (read, create, update, delete) are mapped to corresponding HTTP verb: GET, POST, PUT, DELETE.
+             * @param  {string} method CRUD action to make (read, create, update,
+             *   delete) are mapped to corresponding HTTP verb: GET, POST, PUT, DELETE.
              * @param  {String} url resource URL.
-             * @param  {Object} data(optional) data will be stringified into JSON and set to request body.
-             * @param  {Object} callbacks(optional) callbacks object.
-             * @param  {Object} options(optional) options for request that map directly to the jquery/zepto Ajax options.
+             * @param  {Object} [data] data will be stringified into JSON and
+             *   set to request body.
+             * @param  {Object} [callbacks] callbacks object.
+             * @param  {Object} [options] options for request that map
+             *   directly to the jquery/zepto Ajax options.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @private
              * @member SUGAR.Api
              */
             call: function(method, url, data, callbacks, options) {
                 var request,
+                    args,
                     type = _methodsToRequest[method],
                     self = this,
                     token = this.getOAuthToken();
@@ -590,16 +696,112 @@ SUGAR.Api = (function() {
                 request.uid = _ruid++;
                 _requests[request.uid] = request;
 
+                args = [
+                    token,
+                    options.skipMetadataHash ? null : this.getMetadataHash(),
+                    options.skipMetadataHash ? null : this.getUserprefHash()
+                ];
                 // Login request doesn't need auth token
                 if (this.isLoginRequest(url)) {
                     request.execute();
                 } else if (this.isAuthRequest(url)) {
                     request.execute(token);
+                } else if (params.bulk && _allowBulk) {
+                    var bulkQueue = _bulkQueues[params.bulk] || [];
+                    if (!_bulkQueues[params.bulk]) {
+                        _bulkQueues[params.bulk] = bulkQueue;
+                    }
+                    bulkQueue.push({
+                        request: request,
+                        args: args
+                    });
                 } else {
-                    request.execute(token, options.skipMetadataHash?null:this.getMetadataHash(), options.skipMetadataHash?null: this.getUserprefHash());
+                    request.execute.apply(request, args);
                 }
 
                 return request;
+            },
+
+            /**
+             * Begins a BulkAPI request. Previous uses of call() should have
+             * options.bulk set to an ID.
+             * Calling triggerBulkCall with the same ID will combine all the
+             * previously queued requests into a single bulk call.
+             * @param {number|string} bulkId
+             * @member SUGAR.Api
+             */
+            triggerBulkCall: function(bulkId) {
+                if (!_allowBulk) {
+                    return;
+                }
+
+                bulkId = bulkId || true;
+                var queue = _bulkQueues[bulkId],
+                    requests = [],
+                    version = _.last(this.serverUrl.split('/'));
+
+                if (!queue) {
+                    //TODO log an error here
+                    return;
+                }
+                _.each(queue, function(r) {
+                    var params = r.request.params,
+                        args = r.args,
+                        token = args[0],
+                        mdHash = args[1],
+                        upHash = args[2];
+
+                    if (token) {
+                        params.headers = params.headers || {};
+                        params.headers['OAuth-Token'] = token;
+                    }
+                    if (mdHash) {
+                        params.headers = params.headers || {};
+                        params.headers['X-Metadata-Hash'] = mdHash;
+                    }
+                    if (upHash) {
+                        params.headers = params.headers || {};
+                        params.headers['X-Userpref-Hash'] = upHash;
+                    }
+                    //Url needs to be trimmed down to the version number.
+                    if (params.url != '') {
+                        params.url = version + params.url.substring(this.serverUrl.length);
+                    }
+
+                    requests.push(params);
+                }, this);
+                this.call('create', this.buildURL('bulk'), {requests: requests}, {
+                    success: function(o, parentReq) {
+                        _.each(queue, function(r, i) {
+                            var request = r.request,
+                                result = o[i],
+                                contents = result.contents || {},
+                                xhr = new bulkXHR(result, parentReq),
+                                error;
+                            request.xhr = xhr;
+
+                            if (request.aborted === true || contents.error) {
+                                request.status = 'error';
+                                if (_.isFunction(request.params.error)) {
+                                    request.params.error.call(request.params, request, 'error', xhr.statusText);
+                                }
+                            }
+                            else {
+                                if (_.isFunction(request.params.success)) {
+                                    request.params.success.call(request.params, contents, 'success');
+                                }
+                            }
+                            if (_.isFunction(request.params.complete)) {
+                                request.params.complete.call(request.params, request);
+                            }
+                        });
+                    }
+                });
+                _bulkQueues[bulkId] = null;
+            },
+
+            clearBulkQueue: function() {
+                _bulkQueues = {};
             },
 
             /**
@@ -610,8 +812,9 @@ SUGAR.Api = (function() {
              *
              * @param  {String} module module name.
              * @param  {String} action CRUD method.
-             * @param  {Object} attributes(optional) object of resource being actioned upon, e.g. `{name: "bob", id:"123"}`.
-             * @param  {Object} params(optional) URL parameters.
+             * @param  {Object} [attributes] object of resource being
+             *   actioned upon, e.g. `{name: "bob", id:"123"}`.
+             * @param  {Object} [params] URL parameters.
              * @return {String} URL for specified resource.
              * @private
              * @member SUGAR.Api
@@ -626,12 +829,15 @@ SUGAR.Api = (function() {
                     parts.push(module);
                 }
 
-                if ((action != "create") && attributes && attributes.id) {
+                if ((action != 'create') && attributes && attributes.id) {
                     parts.push(attributes.id);
                 }
 
-                if (attributes && attributes.link && action != "file") {
+                if (attributes && attributes.link && action != 'file') {
                     parts.push('link');
+                    if (_.isString(attributes.link)) {
+                        parts.push(attributes.link);
+                    }
                 }
 
                 if (action && $.inArray(action, _baseActions) === -1) {
@@ -648,15 +854,11 @@ SUGAR.Api = (function() {
                         parts.push(attributes.fileId);
                 }
 
-                if (params.filter && action !== 'export') {
-                    parts.push('filter');
-                }
-
-                url = parts.join("/");
+                url = parts.join('/');
 
                 // URL parameters
                 // remove nullish params
-                _.each(params, function(value,key) {
+                _.each(params, function(value, key) {
                     if (value === null || value === undefined) {
                         delete params[key];
                     }
@@ -664,7 +866,7 @@ SUGAR.Api = (function() {
 
                 params = $.param(params);
                 if (params.length > 0) {
-                    url += "?" + params;
+                    url += '?' + params;
                 }
 
                 return url;
@@ -673,52 +875,60 @@ SUGAR.Api = (function() {
             /**
              * Builds a file resource URL.
              *
-             * @param {Object} attributes Hash with file information.
+             * The `attributes` hash must contain the following properties:
              *
-             * The hash must contain the following properties:
-             * <pre>
-             * {
-             *   module: module name
-             *   id: record id
-             *   field(optional): Name of the file-type field in the given module
-             * }
-             * </pre>
-             * @param {Object} options(optional) URL options hash.
-             *
-             * - htmlJsonFormat: Boolean flag indicating if `sugar-html-json` format must be used (`true` by default if `field` property is specified)
-             * - passDownloadToken: Boolean flag indicating if download token must be passed in the URL (`false` by default)
-             * - deleteIfFails: Boolean flag indicating if related record should be marked deleted:1 if file operation unsuccessful.
-             * @return {String} URL for the file resource.
+             *     {
+             *         module: module name
+             *         id: record id
+             *         field: Name of the file field in the given module (optional).
+             *     }
              *
              * Example 1:
-             * <pre><code>
-             * var url = api.buildFileURL({
-             *    module: "Contacts",
-             *    id: "123",
-             *    field: "picture"
-             * });
              *
-             * // Returns: http://localhost:8888/sugarcrm/rest/v10/Contacts/123/file/picture?format=sugar-html-json&platform=base
-             * </code></pre>
+             *     var url = app.api.buildFileURL({
+             *        module: 'Contacts',
+             *        id: '123',
+             *        field: 'picture'
+             *     });
              *
-             * The `field` property is optional. If omitted the method returns URL for a list of file resources.
+             *     // Returns:
+             *     'http://localhost:8888/sugarcrm/rest/v10/Contacts/123/file/picture?format=sugar-html-json&platform=base'
+             *
+             * The `field` property is optional. If omitted the method returns a
+             * URL for a list of file resources.
+             *
              * Example 2:
-             * <pre><code>
-             * var url = api.buildFileURL({
-             *    module: "Contacts",
-             *    id: "123"
-             * });
              *
-             * // Returns: http://localhost:8888/sugarcrm/rest/v10/Contacts/123/file?platform=base
-             * </code></pre>
+             *     var url = app.api.buildFileURL({
+             *        module: 'Contacts',
+             *        id: '123'
+             *     });
+             *
+             *     // Returns:
+             *     'http://localhost:8888/sugarcrm/rest/v10/Contacts/123/file?platform=base'
+             *
+             * @param {Object} attributes Hash with file information.
+             * @param {Object} [options] URL options hash.
+             * @param {boolean} [options.htmlJsonFormat] Flag indicating if
+             *   `sugar-html-json` format must be used (`true` by default if
+             *   `field` property is specified).
+             * @param {boolean} [options.passDownloadToken] Flag indicating if
+             *   download token must be passed in the URL (`false` by default).
+             * @param {boolean} [options.deleteIfFails] Flag indicating if
+             *   related record should be marked deleted:1 if file operation
+             *   unsuccessful.
+             * @param {boolean} [options.keep] Flag indicating if the temporary
+             *   file should be kept when issuing a `GET` request to the
+             *   `FileTempApi` (it is cleaned up by default).
+             * @return {string} URL for the file resource.
              * @member SUGAR.Api
              */
             buildFileURL: function(attributes, options) {
                 var params = {};
                 options = options || {};
                 // We only concerned about the format if build URL for an actual file resource
-                if (attributes.field && (options.htmlJsonFormat !== false))  {
-                    params.format = "sugar-html-json";
+                if (attributes.field && (options.htmlJsonFormat !== false)) {
+                    params.format = 'sugar-html-json';
                 }
 
                 if (options.deleteIfFails === true) {
@@ -748,33 +958,37 @@ SUGAR.Api = (function() {
                     params.platform = _platform;
                 }
 
-                return this.buildURL(attributes.module, "file", attributes, params);
+                if (options.keep === true) {
+                    params.keep = 1;
+                }
+
+                return this.buildURL(attributes.module, 'file', attributes, params);
             },
 
             /**
              * Returns the current access token
              */
             getOAuthToken: function() {
-                return _keyValueStore ? _keyValueStore.get("AuthAccessToken") || _accessToken : _accessToken;
+                return _keyValueStore ? _keyValueStore.get('AuthAccessToken') || _accessToken : _accessToken;
             },
 
             /**
              * Returns the current refresh token
              */
             getRefreshToken: function() {
-                return _keyValueStore ? _keyValueStore.get("AuthRefreshToken") || _refreshToken : _refreshToken;
+                return _keyValueStore ? _keyValueStore.get('AuthRefreshToken') || _refreshToken : _refreshToken;
             },
 
             /**
              * Returns the current download token.
              */
             getDownloadToken: function() {
-                return _keyValueStore ? _keyValueStore.get("DownloadToken") || _downloadToken : _downloadToken;
+                return _keyValueStore ? _keyValueStore.get('DownloadToken') || _downloadToken : _downloadToken;
             },
 
 
             getMetadataHash: function() {
-                return _keyValueStore ? _keyValueStore.get("meta:hash") : null;
+                return _keyValueStore ? _keyValueStore.get('meta:hash') : null;
             },
 
             /**
@@ -783,16 +997,17 @@ SUGAR.Api = (function() {
              * @return {String} The user preference hash set from a /me response
              */
             getUserprefHash: function() {
-                return _keyValueStore ? _keyValueStore.get("userpref:hash") : null;
+                return _keyValueStore ? _keyValueStore.get('userpref:hash') : null;
             },
 
             /**
              * Fetches metadata.
              *
-             * @param  {String} hash Hash of the current metadata. Used to determine if the metadata is out of date or not.
-             * @param  {Array} types(optional) array of metadata types, e.g. `['vardefs','detailviewdefs']`.
-             * @param  {Array} modules(optional) array of module names, e.g. `['accounts','contacts']`.
-             * @param  {Object} callbacks(optional) callback object.
+             * @param  {String} hash Hash of the current metadata.
+             *   Used to determine if the metadata is out of date or not.
+             * @param  {Array} [types] array of metadata types, e.g. `['vardefs','detailviewdefs']`.
+             * @param  {Array} [modules] array of module names, e.g. `['accounts','contacts']`.
+             * @param  {Object} [callbacks] callback object.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
@@ -801,11 +1016,11 @@ SUGAR.Api = (function() {
                 var params = options.params || {}, method, url;
 
                 if (types) {
-                    params.type_filter = types.join(",");
+                    params.type_filter = types.join(',');
                 }
 
                 if (modules) {
-                    params.module_filter = modules.join(",");
+                    params.module_filter = modules.join(',');
                 }
 
                 if (_platform) {
@@ -818,7 +1033,9 @@ SUGAR.Api = (function() {
                     method = 'public';
                 }
 
-                url = this.buildURL("metadata", method, null, params);
+                params.module_dependencies = 1;
+
+                url = this.buildURL('metadata', method, null, params);
 
                 return this.call(method, url, null, callbacks);
             },
@@ -828,11 +1045,12 @@ SUGAR.Api = (function() {
              *
              * @param {String} method operation type: create, read, update, or delete.
              * @param {String} module module name.
-             * @param {Object} data request object. If it contains id, action, link, etc., URI will be adjusted accordingly.
+             * @param {Object} data request object. If it contains id, action,
+             *   link, etc., URI will be adjusted accordingly.
              * If methods parameter is 'create' or 'update', the data object will be put in the request body payload.
-             * @param {Object} params(optional) URL parameters.
-             * @param {Object} callbacks(optional) callback object.
-             * @param {Object} options(optional) request options.
+             * @param {Object} [params] URL parameters.
+             * @param {Object} [callbacks] callback object.
+             * @param {Object} [options] request options.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
@@ -857,41 +1075,41 @@ SUGAR.Api = (function() {
              * @param {String} method operation type: create, read, update, or delete.
              * @param {String} module module name.
              * @param {Object} data object with relationship information.
-             * @param {Object} params(optional) URL parameters.
-             * @param {Object} callbacks(optional) callback object.
-             * @param {Object} options(optional) request options.
+             * @param {Object} [params] URL parameters.
+             * @param {Object} [callbacks] callback object.
+             * @param {Object} [options] request options.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
             relationships: function(method, module, data, params, callbacks, options) {
-                var url = this.buildURL(module, data.link, data, params);
+                var url = this.buildURL(module, null, data, params);
                 return this.call(method, url, data.related, callbacks, options);
             },
 
             /**
              * Marks/unmarks a record as favorite.
-             * @param {String} module Module name.
-             * @param {String} id Record ID.
-             * @param {Boolean} favorite Flag inditicating if the record must be marked as favorite.
-             * @param {Object} callbacks(optional) Callback object.
-             * @param {Object} options(optional) request options.
+             * @param {string} module Module name.
+             * @param {string} id Record ID.
+             * @param {boolean} favorite Flag indicating if the record must be marked as favorite.
+             * @param {Object} [callbacks] Callback object.
+             * @param {Object} [options] request options.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
             favorite: function(module, id, favorite, callbacks, options) {
-                var action = favorite ? "favorite" : "unfavorite";
+                var action = favorite ? 'favorite' : 'unfavorite';
                 var url = this.buildURL(module, action, { id: id });
                 return this.call('update', url, null, callbacks, options);
             },
 
             /**
              * Subscribe/unsubscribe a record changes.
-             * @param {String} module Module name.
-             * @param {String} id Record ID.
-             * @param {Boolean} followed Flag indicates if wants to subscribe
-             * the record changes.
-             * @param {Object} callbacks(optional) Callback object.
-             * @param {Object} options(optional) request options.
+             * @param {string} module Module name.
+             * @param {string} id Record ID.
+             * @param {boolean} followed Flag indicates if wants to subscribe
+             *   the record changes.
+             * @param {Object} [callbacks] Callback object.
+             * @param {Object} [options] request options.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
@@ -906,24 +1124,24 @@ SUGAR.Api = (function() {
 
             /**
              * Loads an enum field's options using the enum API
-             * @param {String} module Module name.
-             * @param {String} field Name of enum field.
-             * @param {Object} callbacks
-             * @param {Object} options Options object (optional)
+             * @param {string} module Module name.
+             * @param {string} field Name of enum field.
+             * @param {Object} [callbacks] Callback object
+             * @param {Object} [options] Options object
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
-            enumOptions: function(module, field, callbacks, options){
-                var url = this.buildURL(module+"/enum/"+field);
+            enumOptions: function(module, field, callbacks, options) {
+                var url = this.buildURL(module + '/enum/' + field);
                 return this.call('read', url, null, callbacks, options);
             },
 
 
             /**
              * Given a url, attempt to download a file
-             * @param url {String} url to call
-             * @param {Object} callbacks(optional) Callback object
-             * @param {Object} options(optional)
+             * @param {string} url url to call
+             * @param {Object} [callbacks] Callback object
+             * @param {Object} [options] Options object
              *  - iframe: jquery element upon which to attach the iframe for download
              *    if not specified we must fall back to window.location.href
              */
@@ -935,8 +1153,7 @@ SUGAR.Api = (function() {
                     // start the download with the "iframe" hack
                     if (options.iframe) {
                         options.iframe.prepend('<iframe class="hide" src="' + url + '"></iframe>');
-                    }
-                    else {
+                    } else {
                         window.location.href = url;
                     }
                     if (_.isFunction(callbacks.success)) {
@@ -959,7 +1176,7 @@ SUGAR.Api = (function() {
             /**
              * Executes CRUD on a file resource.
              *
-             * @param {String} method operation type: create, read, update, or delete.
+             * @param {string} method operation type: create, read, update, or delete.
              * @param {Object} data object with file information.
              * <pre>
              * {
@@ -969,9 +1186,9 @@ SUGAR.Api = (function() {
              * }
              * </pre>
              * The `field` property is optional. If not specified, the API fetches the file list.
-             * @param {Object} $files(optional) jQuery/Zepto DOM elements that carry the files to upload.
-             * @param {Object} callbacks(optional) callback object.
-             * @param {Object} options(optional) Request options hash.
+             * @param {Object} [$files] jQuery/Zepto DOM elements that carry the files to upload.
+             * @param {Object} [callbacks] callback object.
+             * @param {Object} [options] Request options hash.
              *
              * - htmlJsonFormat: Boolean flag indicating if `sugar-html-json` format must be used (`true` by default)
              * - iframe: Boolean flag indicating if iframe transport is used (`true` by default)
@@ -1004,8 +1221,80 @@ SUGAR.Api = (function() {
                     options.deleteIfFails = true;
                 }
 
+                callbacks.success = _.wrap(callbacks.success, function(success, data, request) {
+                    if (data.error && _.isFunction(callbacks.error)) {
+                        callbacks.error(data);
+                    } else if (_.isFunction(success)) {
+                        success(data);
+                    }
+                });
+
                 return this.call(method, this.buildFileURL(data, options),
                     null, callbacks, ajaxParams);
+            },
+
+            /**
+             * Fetches the total amount of records for a given module.
+             *
+             * Example 1:
+             *
+             *     app.api.count('Contacts', null, {
+             *         success: function(data) {
+             *             console.log('Total number of Contacts:' +
+             *                 data.record_count);
+             *         }
+             *     });
+             *
+             * Example 2:
+             *
+             *     app.api.count('Accounts', null,
+             *         {
+             *             success: function(data) {
+             *                 console.log('Total number of "B" Accounts:' +
+             *                     data.record_count);
+             *             }
+             *         },
+             *         {
+             *             filter: [{'name': {'$starts': 'B'}}]
+             *         }
+             *     );
+             *
+             * Example 3:
+             *
+             *     app.api.count('Accounts',
+             *         {
+             *             id: 'abcd',
+             *             link: 'cases'
+             *         },
+             *         {
+             *             success: function(data) {
+             *                 console.log('Total number of "B" cases related' +
+             *                     'to "abcd" account:' + data.record_count);
+             *             }
+             *         },
+             *         {
+             *             filter: [{'name': {'$starts': 'B'}}]
+             *         }
+             *     );
+             *
+             * @param {string} module Module to fetch the count for.
+             * @param {Object} [data] Data object containing relationship
+             *   information.
+             * @param {string} [data.link] The link module name.
+             * @param {string} [data.id] The id of the model.
+             * @param {function} [callbacks] Callback functions.
+             * @param {Object} [options] URL options hash.
+             * @param {Object} [options.filter] If supplied, the count of
+             *   filtered records will be returned, instead of the total number
+             *   of records.
+             * @return {SUGAR.HttpRequest} Result of {@link SUGAR.Api#call}.
+             * @member SUGAR.Api
+             */
+            count: function(module, data, callbacks, options) {
+                options = options || {};
+                var url = this.buildURL(module, 'count', data, options);
+
+                return this.call('read', url, null, callbacks);
             },
 
             /**
@@ -1018,19 +1307,18 @@ SUGAR.Api = (function() {
              *      uid : an array of record ids to request export
              * }
              * </pre>
-             * @param $el JQuery selector to element (needed for attaching iframe)
-             * @param {Object} callbacks(optional) list of callbacks {success:, error:, complete:}
-             * @param {Object} options(optional) Request options hash
+             * @param {jQuery} $el JQuery selector to element (needed for attaching iframe)
+             * @param {Object} [callbacks] list of callbacks {success:, error:, complete:}
+             * @param {Object} [options] Request options hash
              *
              * - passOAuthToken: Boolean flag indicating if OAuth token must be passed in the URL (`true` by default)
              *
-             * @see FilterAPI
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
             exportRecords: function(params, $el, callbacks, options) {
-                var self = this,
-                    recordListUrl = this.buildURL(params.module, 'record_list');
+                var self = this;
+                var recordListUrl = this.buildURL(params.module, 'record_list');
 
                 options = options || {};
 
@@ -1067,8 +1355,22 @@ SUGAR.Api = (function() {
              * @member SUGAR.Api
              */
             search: function(params, callbacks, options) {
-                var url = this.buildURL(null, "search", null, params);
-                return this.call('read', url, null, callbacks, options);
+                options = options || {};
+                //FIXME: This is a temporary change. SC-4253 will set it back to
+                //'search' once BR-2367 will be merged.
+                var data = null;
+                if (options.data) {
+                    data = options.data;
+                    delete options.data;
+                }
+                var method = 'read';
+                if (options.fetchWithPost) {
+                    method = 'create';
+                }
+                var endpoint = options.useNewApi ? 'globalsearch' : 'search';
+                var url = this.buildURL(null, endpoint, null, params);
+
+                return this.call(method, url, data, callbacks, options);
             },
 
             /**
@@ -1080,9 +1382,10 @@ SUGAR.Api = (function() {
              *     password: user's password in clear text
              * </pre>
              *
-             * @param  {Object} credentials user credentials.
-             * @param  {Object} data(optional) extra data to be passed in login request such as client user agent, etc.
-             * @param  {Object} callbacks(optional) callback object.
+             * @param {Object} credentials user credentials.
+             * @param {Object} [data] extra data to be passed in login request
+             *   such as client user agent, etc.
+             * @param {Object} [callbacks] callback object.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
@@ -1102,28 +1405,28 @@ SUGAR.Api = (function() {
                     if (callbacks.error) callbacks.error(error);
                 };
 
-                if(data && data.refresh) {
+                if (data && data.refresh) {
                     payload = _.extend({
-                        grant_type:"refresh_token",
+                        grant_type: 'refresh_token',
                         client_id: this.clientID,
-                        client_secret:"",
+                        client_secret: '',
                         refresh_token: this.getRefreshToken(),
                         platform: _platform ? _platform : 'base'
                     }, data);
                 } else {
                     payload = _.extend({
-                        grant_type:"password",
+                        grant_type: 'password',
                         username: credentials.username,
                         password: credentials.password,
                         client_id: this.clientID,
                         platform: _platform ? _platform : 'base',
-                        client_secret:""
+                        client_secret: ''
                     }, data);
                     payload.client_info = data;
                 }
 
                 method = 'create';
-                url = this.buildURL("oauth2", "token", payload);
+                url = this.buildURL('oauth2', 'token', payload);
                 return this.call(method, url, payload, {
                     success: success,
                     error: error,
@@ -1135,14 +1438,14 @@ SUGAR.Api = (function() {
              * Executes CRUD on user profile.
              *
              * @param {String} method operation type: read or update (reserved for the future use).
-             * @param {Object} data(optional) user profile object.
-             * @param {Object} params(optional) URL parameters.
-             * @param {Object} callbacks(optional) callback object.
+             * @param {Object} [data] user profile object.
+             * @param {Object} [params] URL parameters.
+             * @param {Object} [callbacks] callback object.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
             me: function(method, data, params, callbacks) {
-                var url = this.buildURL("me", method, data, params);
+                var url = this.buildURL('me', method, data, params);
                 return this.call(method, url, data, callbacks);
             },
 
@@ -1151,29 +1454,29 @@ SUGAR.Api = (function() {
              *
              * @param {String} platform
              * @param {Object} themeName
-             * @param {Object} callbacks(optional) callback object.
+             * @param {Object} [callbacks] callback object.
              * @return {SUGAR.HttpRequest} AJAX request.
              */
             css: function(platform, themeName, callbacks) {
                 var params = {
-                    platform : platform,
-                    themeName : themeName
+                    platform: platform,
+                    themeName: themeName
                 };
-                var url = this.buildURL("css", "read", {}, params);
-                return this.call("read", url, {}, callbacks);
+                var url = this.buildURL('css', 'read', {}, params);
+                return this.call('read', url, {}, callbacks);
             },
 
             /**
              * Performs logout.
              *
-             * @param {Object} callbacks(optional) callback object.
+             * @param {Object} [callbacks] callback object.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
             logout: function(callbacks) {
                 callbacks = callbacks || {};
-                var payload = { "token": this.getOAuthToken(), "refresh_token": this.getRefreshToken()  };
-                var url = this.buildURL("oauth2", "logout", payload);
+                var payload = { 'token': this.getOAuthToken(), 'refresh_token': this.getRefreshToken() };
+                var url = this.buildURL('oauth2', 'logout', payload);
 
                 var originalComplete = callbacks.complete;
                 callbacks.complete = function() {
@@ -1189,10 +1492,10 @@ SUGAR.Api = (function() {
              *
              * The request doesn't send metadata hash by default.
              * Pass `false` for "skipMetadataHash" option to override this behavior.
-             * @param {String} action(optional) Optional ping operation.
-             * Currently, Sugar REST API supports "whattimeisit" only.
-             * @param {Object} callbacks(optional) callback object.
-             * @param {Object} options(optional) request options.
+             * @param {string} [action] Optional ping operation.
+             *   Currently, Sugar REST API supports "whattimeisit" only.
+             * @param {Object} [callbacks] callback object.
+             * @param {Object} [options] request options.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
@@ -1216,8 +1519,9 @@ SUGAR.Api = (function() {
              * TODO: The signup action needs another endpoint to allow a guest to signup
              *
              * @param  {Object} contactData user profile.
-             * @param  {Object} data(optional) extra data to be passed in login request such as client user agent, etc.
-             * @param  {Object} callbacks(optional) callback object.
+             * @param  {Object} [data] extra data to be passed in login request
+             *   such as client user agent, etc.
+             * @param  {Object} [callbacks] callback object.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
@@ -1226,7 +1530,7 @@ SUGAR.Api = (function() {
                 payload.client_info = data;
 
                 var method = 'create';
-                var url = this.buildURL("Leads", "register", payload);
+                var url = this.buildURL('Leads', 'register', payload);
                 return this.call(method, url, payload, callbacks);
             },
 
@@ -1235,7 +1539,7 @@ SUGAR.Api = (function() {
              * Verify password
              *
              * @param  {Object} password the password to verify
-             * @param  {Object} callbacks(optional) callback object.
+             * @param  {Object} [callbacks] callback object.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
@@ -1244,7 +1548,7 @@ SUGAR.Api = (function() {
                     password_to_verify: password
                 };
                 var method = 'create'; //POST so we don't require query params
-                var url = this.buildURL("me/password", method);
+                var url = this.buildURL('me/password', method);
                 return this.call(method, url, payload, callbacks);
             },
 
@@ -1253,7 +1557,7 @@ SUGAR.Api = (function() {
              *
              * @param  {Object} password the new password
              * @param  {Object} password the new password
-             * @param  {Object} callbacks(optional) callback object.
+             * @param  {Object} [callbacks] callback object.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
@@ -1263,29 +1567,29 @@ SUGAR.Api = (function() {
                     old_password: oldPassword
                 };
                 var method = 'update';
-                var url = this.buildURL("me/password", method);
+                var url = this.buildURL('me/password', method);
                 return this.call(method, url, payload, callbacks);
             },
 
             /**
              * Fetches server information.
-             * @param {Object} callbacks(optional) callback object.
+             * @param {Object} [callbacks] callback object.
              * @return {SUGAR.HttpRequest} AJAX request.
              * @member SUGAR.Api
              */
             info: function(callbacks) {
-                var url = this.buildURL("ServerInfo");
-                return this.call("read", url, null, callbacks);
+                var url = this.buildURL('ServerInfo');
+                return this.call('read', url, null, callbacks);
             },
 
             /**
              * Checks if API instance is currently authenticated.
              *
-             * @return {Boolean} true if authenticated, false otherwise.
+             * @return {boolean} `true` if authenticated, `false` otherwise.
              * @member SUGAR.Api
              */
             isAuthenticated: function() {
-                return typeof(this.getOAuthToken()) === "string" && this.getOAuthToken().length > 0;
+                return typeof(this.getOAuthToken()) === 'string' && this.getOAuthToken().length > 0;
             },
 
             /**
@@ -1297,22 +1601,23 @@ SUGAR.Api = (function() {
 
             /**
              * Checks if authentication token can and needs to be refreshed.
-             * @param {String} url URL of the failed request.
-             * @param {String} errorCode Failure code.
-             * @return {Boolean} `true` if the OAuth2 access token can be refreshed, `false` otherwise.
+             * @param {string} url URL of the failed request.
+             * @param {string} errorCode Failure code.
+             * @return {boolean} `true` if the OAuth2 access token can be refreshed, `false` otherwise.
              * @member SUGAR.Api
              * @private
              */
             needRefreshAuthToken: function(url, errorCode) {
                 return (!_refreshingToken) &&
-                    (typeof(this.getRefreshToken()) === "string" && this.getRefreshToken().length > 0) &&
+                    (typeof(this.getRefreshToken()) === 'string' && this.getRefreshToken().length > 0) &&
                     (!this.isAuthRequest(url)) &&    // must not be auth request
-                    (errorCode === "invalid_grant");    // means access token got expired or invalid
+                    (errorCode === 'invalid_grant');    // means access token got expired or invalid
             },
 
             /**
              * Checks if we need to queue a request while token refresh is in progress
-             * @param url
+             * @param {string} url
+             * @return {boolean} `true` if we need to queue the request
              * @private
              */
             needQueue: function(url) {
@@ -1323,7 +1628,8 @@ SUGAR.Api = (function() {
              * Checks if the request is authentication request.
              *
              * It could be either login (including token refresh) our logout request.
-             * @param url
+             * @param {string} url
+             * @return `true` if this is an authentication request
              */
             isAuthRequest: function(url) {
                 return new RegExp('\/oauth2\/').test(url);
@@ -1331,7 +1637,8 @@ SUGAR.Api = (function() {
 
             /**
              * Checks if request is a login request.
-             * @param url
+             * @param {string} url
+             * @return `true` if this is a login request, `false` otherwise
              */
             isLoginRequest: function(url) {
                 return new RegExp('\/oauth2\/token').test(url);
@@ -1339,7 +1646,9 @@ SUGAR.Api = (function() {
 
             /**
              * Checks if the request is the refresh token request
-             * @param url
+             * @param {string} url url of the request to check
+             * @return `true` if the request is the refresh token request,
+             *   `false` otherwise
              * @private
              */
             refreshingToken: function(url) {
@@ -1347,8 +1656,11 @@ SUGAR.Api = (function() {
             },
 
             /**
-             * Sets a flag indicating that this API instance is in the process of authentication token refresh.
-             * @param {Boolean} flag Flag indicating if token refresh is in progess (`true`).
+             * Sets a flag indicating that this API instance is in the process
+             * of authentication token refresh.
+             *
+             * @param {boolean} flag Flag indicating if token refresh is in
+             * progress (`true`).
              * @member SUGAR.Api
              * @private
              */
@@ -1361,10 +1673,60 @@ SUGAR.Api = (function() {
              * This means that 401 errors would contain external URL that we should use for authentication.
              * @param {Boolean} flag Flag indicating if external login is in effect
              * @member SUGAR.Api
-             * @public
              */
             setExternalLogin: function(flag) {
                 _externalLogin = flag;
+            },
+
+            /**
+             * Sets a function as external login UI callback
+             * @param {Function} callback
+             * @member SUGAR.Api
+             */
+            setExternalLoginUICallback: function(callback) {
+                if (_.isFunction(callback)) {
+                    _externalLoginUICallback = callback;
+                }
+            },
+
+            /**
+             * Retrieve a property from the current state.
+             *
+             * @param {String} key
+             * @return {Mixed}
+             */
+            getStateProperty: function(key) {
+                return _state[key];
+            },
+
+            /**
+             * Set a property of the current state. The current state will be attached to all
+             * api request objects when they are sent. Modifications to the state after the request is sent
+             * but before the request completes will not affect that requests state.
+             *
+             * States should be used to track conditions or parameters that should be applied to all requests made
+             * regardless of their source.
+             *
+             * @param {String} key
+             * @param {Mixed} value
+             */
+            setStateProperty: function(key, value) {
+                _state[key] = value;
+            },
+
+            /**
+             * Removes the given key from the current state
+             * @param {string} key
+             */
+            clearStateProperty: function(key) {
+                delete _state[key];
+            },
+
+            /**
+             * Clears the current API request state object.
+             */
+            resetState: function() {
+                _state = {};
             }
         };
     }
@@ -1390,10 +1752,51 @@ SUGAR.Api = (function() {
          */
         createInstance: function(args) {
             _instance = new SugarApi(args);
+
+            if (!('crosstab' in window) || !crosstab.supported) {
+                return _instance;
+            }
+
+            // this event should only be triggered on master tab and if
+            // crosstab library is loaded
+            crosstab(function() {
+                crosstab.on('auth:refresh', _.bind(function() {
+
+                    // prevents concurrent events from multiple tabs asking for a
+                    // refresh token
+                    if (this._runningRefreshToken) {
+                        return;
+                    }
+                    this._runningRefreshToken = true;
+
+                    var self = this;
+
+                    this.login(null, { refresh: true }, {
+                        complete: function() {
+                            crosstab.broadcast('auth:refresh:complete', 'complete');
+                        },
+                        success: function() {
+                            delete self._runningRefreshToken;
+                            crosstab.broadcast('auth:refresh:complete', 'success');
+                        },
+                        error: function() {
+                            delete self._runningRefreshToken;
+                            crosstab.broadcast('auth:refresh:complete', 'error');
+                        }
+                    });
+                }, _instance));
+            });
+
             return _instance;
         },
 
-        getCallsInProgressCount:function(){
+        /**
+         * Return the number of API calls currently in progress
+         * @return {number} Number of calls in progress
+         * @member SUGAR.Api
+         * @static
+         */
+        getCallsInProgressCount: function() {
             return _numCallsInProgress;
         },
 

@@ -16,7 +16,7 @@
 // |          Christian Stocker <chregu@bitflux.ch>                       |
 // +----------------------------------------------------------------------+
 //
-
+// $Id: Server.php 51443 2009-10-12 20:34:36Z jmertic $
 //
 require_once "vendor/HTTP_WebDAV_Server/Tools/_parse_propfind.php";
 require_once "vendor/HTTP_WebDAV_Server/Tools/_parse_proppatch.php";

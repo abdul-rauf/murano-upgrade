@@ -8,4 +8,4 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({events:{'click [name="reset_button"]':'triggerClearParams'},initialize:function(options){this._super('initialize',[options]);this.title=this.meta.title;this.render();},triggerClearParams:function(){this.layout.trigger('dnbbal:param:clear');}})
+({events:{'click [name="reset_button"]':'triggerClearParams'},initialize:function(options){this._super('initialize',[options]);this.title=this.meta.title;},triggerClearParams:function(){this.layout.trigger('dnbbal:param:clear');}})

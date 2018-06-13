@@ -42,14 +42,14 @@ class SugarMin {
     }
 
     protected function jsParser() {
-        if (inDeveloperMode()) {
+        if (!shouldResourcesBeMinified()) {
             return $this->text;
         }
 
         //If the JSMIn extension is loaded, use that as it can be as much as 1000x faster than JShrink
         if (extension_loaded("jsmin"))
         {
-            return jsmin($this->text);
+            return @jsmin($this->text);
         }
 
         if(!empty($GLOBALS['sugar_config']['uglify'])){

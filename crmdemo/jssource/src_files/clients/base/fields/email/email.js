@@ -11,7 +11,7 @@
 /**
  * @class View.Fields.Base.EmailField
  * @alias SUGAR.App.view.fields.BaseEmailField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     events: {
@@ -27,6 +27,13 @@
         invalid_email: {lbl: "LBL_EMAIL_INVALID", cl: "invalid"}
     },
     plugins: ['Tooltip', 'ListEditable', 'EmailClientLaunch'],
+
+    /**
+     * @inheritdoc
+     *
+     * The direction for this field should always be `ltr`.
+     */
+    direction: 'ltr',
 
     /**
      * @inheritdoc
@@ -57,6 +64,17 @@
 
         //set model as the related record when composing an email (copy is made by plugin)
         this.addEmailOptions({related: this.model});
+
+        /**
+         * Property to add or not the `ellipsis_inline` class when rendering the
+         * field in the `list` template. `true` to add the class, `false`
+         * otherwise.
+         *
+         * Defaults to `true`.
+         *
+         * @property {boolean}
+         */
+        this.ellipsis = _.isUndefined(this.def.ellipsis) || this.def.ellipsis;
     },
 
     /**
@@ -93,7 +111,7 @@
     /**
      * Get HTML for email input field.
      * @param {Object} email
-     * @returns {Object}
+     * @return {Object}
      * @private
      */
     _buildEmailFieldHtml: function(email) {
@@ -166,6 +184,7 @@
             $input = this.$(evt.currentTarget),
             index = $inputs.index($input),
             newEmail = $input.val(),
+            emails = this.model.get(this.name) || [],
             primaryRemoved;
 
         newEmail = $.trim(newEmail);
@@ -181,8 +200,7 @@
             if (primaryRemoved) {
                 // on list views we need to set the current value on the input
                 if (this.view && this.view.action === 'list') {
-                    var addresses = this.model.get(this.name) || [];
-                    var primaryAddress = _.filter(addresses, function(address){
+                    var primaryAddress = _.filter(emails, function(address) {
                         if (address.primary_address) {
                             return true;
                         }
@@ -200,9 +218,18 @@
                     .first()
                     .addClass('active');
             }
-        } else {
-            this._updateExistingAddressInModel(index, newEmail);
+            return;
         }
+        if (this.tplName === 'list-edit') {
+            // In list-edit mode the index is not always at the index of the current target.
+            _.find(emails, function(email, i) {
+                if (email.primary_address) {
+                    index = i;
+                    return true;
+                }
+            });
+        }
+        this._updateExistingAddressInModel(index, newEmail);
     },
 
     /**
@@ -259,7 +286,7 @@
     /**
      * Add the new email address to the model.
      * @param {String} email
-     * @returns {Boolean} Returns true when a new email is added.  Returns false if duplicate is found,
+     * @return {boolean} Returns true when a new email is added.  Returns false if duplicate is found,
      *          and was not added to the model.
      * @private
      */
@@ -292,6 +319,9 @@
         var existingAddresses = app.utils.deepCopy(this.model.get(this.name));
         //Simply update the email address
         existingAddresses[index].email_address = newEmail;
+        if (this.tplName === 'edit') {
+            this.model.set(this.name + (index + 1), newEmail);
+        }
         this.model.set(this.name, existingAddresses);
     },
 
@@ -328,7 +358,7 @@
     /**
      * Remove email address from the model.
      * @param {Number} index
-     * @returns {Boolean} Returns true if the removed address was the primary address.
+     * @return {boolean} Returns true if the removed address was the primary address.
      * @private
      */
     _removeExistingAddressInModel: function(index) {
@@ -362,11 +392,24 @@
 
     /**
      * Get the new email address input field.
-     * @returns {jQuery}
+     * @return {jQuery}
      * @private
      */
     _getNewEmailField: function() {
         return this.$('.newEmail');
+    },
+
+    /**
+     * Need to call `decorateError` after all email fields are rendered.
+     * @inheritdoc
+     *
+     * FIXME This is a temporary fix due to time constraints, a proper solution will be implemented in SC-4358
+     */
+    handleValidationError: function(errors) {
+        this._super('handleValidationError', [errors]);
+        _.defer(function (field) {
+            field.decorateError(errors);
+        }, this);
     },
 
     /**
@@ -454,7 +497,7 @@
     /**
      * Build label that gets displayed in tooltips.
      * @param {Object} value
-     * @returns {Object}
+     * @return {Object}
      */
     addFlagLabels: function(value) {
         var flagStr = "", flagArray;

@@ -1,7 +1,7 @@
 <?php
- // created: 2017-09-08 10:51:09
-$dictionary['Lead']['fields']['continent_c']['labelValue']='Continent';
-$dictionary['Lead']['fields']['continent_c']['dependency']='';
-$dictionary['Lead']['fields']['continent_c']['visibility_grid']='';
+ // created: 2018-06-13 10:46:07
+$dictionary['Lead']['fields']['continent_c']['labelValue'] = 'Continent';
+$dictionary['Lead']['fields']['continent_c']['dependency'] = '';
+$dictionary['Lead']['fields']['continent_c']['visibility_grid'] = '';
+$dictionary['Lead']['fields']['continent_c']['full_text_search']['boost'] = 1;
 
- ?>

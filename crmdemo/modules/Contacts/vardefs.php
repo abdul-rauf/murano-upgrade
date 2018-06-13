@@ -128,6 +128,7 @@ $dictionary['Contact'] = array(
             'options' => 'opportunity_relationship_type_dom',
             'link' => 'opportunities',
             'rname_link' => 'contact_role',
+            'massupdate' => false
         ),
         'reports_to_id' => array(
             'name' => 'reports_to_id',
@@ -271,8 +272,7 @@ $dictionary['Contact'] = array(
         'products' => array(
             'name' => 'products',
             'type' => 'link',
-            'link_file' => 'modules/Products/AccountLink.php',
-            'link_class' => 'AccountLink',
+            'rname' => array('first_name', 'last_name'),
             'relationship' => 'contact_products',
             'source' => 'non-db',
             'vname' => 'LBL_PRODUCTS_TITLE',
@@ -349,6 +349,30 @@ $dictionary['Contact'] = array(
             'relationship' => 'contact_tasks_parent',
             'source' => 'non-db',
             'vname' => 'LBL_TASKS',
+            'reportable' => false,
+        ),
+        'notes_parent' => array(
+            'name' => 'notes_parent',
+            'type' => 'link',
+            'relationship' => 'contact_notes_parent',
+            'source' => 'non-db',
+            'vname' => 'LBL_NOTES',
+            'reportable' => false,
+        ),
+        'calls_parent' => array(
+            'name' => 'calls_parent',
+            'type' => 'link',
+            'relationship' => 'contact_calls_parent',
+            'source' => 'non-db',
+            'vname' => 'LBL_CALLS',
+            'reportable' => false,
+        ),
+        'meetings_parent' => array(
+            'name' => 'meetings_parent',
+            'type' => 'link',
+            'relationship' => 'contact_meetings_parent',
+            'source' => 'non-db',
+            'vname' => 'LBL_MEETINGS',
             'reportable' => false,
         ),
         'all_tasks' => array(
@@ -650,6 +674,39 @@ $dictionary['Contact'] = array(
             'rhs_key' => 'contact_id',
             'relationship_type' => 'one-to-many',
         ),
+        'contact_notes_parent' => array(
+            'lhs_module' => 'Contacts',
+            'lhs_table' => 'contacts',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Notes',
+            'rhs_table' => 'notes',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Contacts',
+        ),
+        'contact_calls_parent' => array(
+            'lhs_module' => 'Contacts',
+            'lhs_table' => 'contacts',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Calls',
+            'rhs_table' => 'calls',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Contacts',
+        ),
+        'contact_meetings_parent' => array(
+            'lhs_module' => 'Contacts',
+            'lhs_table' => 'contacts',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Meetings',
+            'rhs_table' => 'meetings',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Contacts',
+        ),
         'contact_tasks' => array(
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
@@ -759,3 +816,16 @@ VardefManager::createVardef(
     'Contacts',
     'Contact'
 );
+
+//boost value for full text search
+$dictionary['Contact']['fields']['first_name']['full_text_search']['boost'] = 1.99;
+$dictionary['Contact']['fields']['last_name']['full_text_search']['boost'] = 1.97;
+$dictionary['Contact']['fields']['email']['full_text_search']['boost'] = 1.95;
+$dictionary['Contact']['fields']['phone_home']['full_text_search']['boost'] = 1.10;
+$dictionary['Contact']['fields']['phone_mobile']['full_text_search']['boost'] = 1.09;
+$dictionary['Contact']['fields']['phone_work']['full_text_search']['boost'] = 1.08;
+$dictionary['Contact']['fields']['phone_other']['full_text_search']['boost'] = 1.07;
+$dictionary['Contact']['fields']['phone_fax']['full_text_search']['boost'] = 1.06;
+$dictionary['Contact']['fields']['description']['full_text_search']['boost'] = 0.71;
+$dictionary['Contact']['fields']['primary_address_street']['full_text_search']['boost'] = 0.33;
+$dictionary['Contact']['fields']['alt_address_street']['full_text_search']['boost'] = 0.32;

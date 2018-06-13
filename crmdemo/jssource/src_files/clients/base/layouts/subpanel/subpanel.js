@@ -29,7 +29,7 @@
         //Check for the override_subpanel_list_view from the parent layout metadata and replace the list view if found.
         if (options.meta && options.def && options.def.override_subpanel_list_view) {
             _.each(options.meta.components, function(def) {
-                if (def.view && def.view == 'subpanel-list') {
+                if (def.view && def.view.indexOf('subpanel-list') !== -1) {
                     def.view = options.def.override_subpanel_list_view;
                 }
             });
@@ -58,14 +58,42 @@
             this.context.set('dataView', this.dataView);
         }
 
+        // FIXME in SC-3360 - this is a hacky flag to be able to fetch a collection of
+        // links. We will be able to remove this code once we introduce the CollectionsAPI.
+        var ignoreRole = this.context.get('ignore_role');
+        if (ignoreRole) {
+            var collection = this.collection;
+            var options = collection.getOption() || {};
+            var params = options.params || {};
+            params.ignore_role = ignoreRole;
+            collection.setOption('params', params);
+        }
+
         // binding so subpanels can trigger other subpanels to reload by link name
         // example: ctx.trigger('subpanel:reload', {links: ['opportunities','revenuelineitems']});
         if (this.context.parent) {
             this.context.parent.on('subpanel:reload', function(args) {
+                app.logger.warn('`subpanel:reload` is deprecated. Use `context.reloadData()` to reload and expand.');
                 if (!_.isUndefined(args) && _.isArray(args.links) && _.contains(args.links, this.context.get('link'))) {
                     this.context.reloadData({recursive: false});
                 }
             }, this);
         }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    show: function() {
+        this.context.set('hidden', false);
+        this._super('show');
+    },
+
+    /**
+     * @inheritdoc
+     */
+    hide: function() {
+        this.context.set('hidden', true);
+        this._super('hide');
     }
 })

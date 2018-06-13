@@ -203,7 +203,7 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
             return true;
         }
 
-
+        $bean = BeanFactory::getBean($this->module);
         $newdefs = array();
         $allNewDefs = array();
 
@@ -227,7 +227,8 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
             }
 
             // Skip subpanels that have links to non-existing modules
-            if (!empty($def['module']) && !in_array($def['module'], $GLOBALS['moduleList'])) {
+            // BR-3248, using full list
+            if (!empty($def['module']) && !isset($GLOBALS['beanList'][$def['module']])) {
                 unset($convertSubpanelDefs[$key]);
                 $this->logUpgradeStatus(
                     "Skipping subpanel $key in {$this->module} module. Linked module '{$def['module']}' does not exist"
@@ -237,9 +238,12 @@ class SidecarLayoutdefsMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
 
             // Type function in "get_subpanel_data" is no longer supported in Sugar 7.x,
             // but if necessary better to handle it here.
-            if (!empty($def['get_subpanel_data']) && !$this->isValidField($def['get_subpanel_data'])) {
-                $this->logUpgradeStatus("Skipping subpanel $key in {$this->module} module.");
-                continue;
+            if (!empty($def['get_subpanel_data'])) {
+                $fieldDef = $bean->getFieldDefinition($def['get_subpanel_data']);
+                if (!$fieldDef) {
+                    $this->logUpgradeStatus("Skipping subpanel $key in {$this->module} module.");
+                    continue;
+                }
             }
 
             $newdefs = $this->extractSidecarData($convertSubpanelDefs[$key], $def, $newdefs);

@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
@@ -24,6 +25,7 @@ $viewdefs['Users']['base']['view']['subpanel-list'] = array(
                     'enabled' => true,
                     'default' => true,
                     'sortable' => false,
+                    'link' => true,
                 ),
                 array(
                     'name' => 'user_name',
@@ -44,7 +46,6 @@ $viewdefs['Users']['base']['view']['subpanel-list'] = array(
                 ),
                 array(
                     'name' => 'email',
-                    'width' => '15%',
                     'label' => 'LBL_EMAIL',
                     'enabled' => true,
                     'default' => true,
@@ -52,7 +53,6 @@ $viewdefs['Users']['base']['view']['subpanel-list'] = array(
                 ),
                 array(
                     'name' => 'phone_work',
-                    'width' => '15%',
                     'label' => 'LBL_OFFICE_PHONE',
                     'default' => true,
                     'enabled' => true,
@@ -75,17 +75,8 @@ $viewdefs['Users']['base']['view']['subpanel-list'] = array(
     'rowactions' => array(
         'actions' => array(
             array(
-                'type' => 'rowaction',
-                'name' => 'edit_button',
-                'icon' => 'icon-pencil',
-                'label' => 'LBL_EDIT_BUTTON',
-                'event' => 'list:editrow:fire',
-                'acl_action' => 'edit',
-                'allow_bwc' => true,
-            ),
-            array(
                 'type' => 'unlink-action',
-                'icon' => 'icon-unlink',
+                'icon' => 'fa-chain-broken',
                 'label' => 'LBL_UNLINK_BUTTON',
             ),
         ),

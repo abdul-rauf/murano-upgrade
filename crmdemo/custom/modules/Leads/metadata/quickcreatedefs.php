@@ -1,5 +1,5 @@
 <?php
-// created: 2012-09-15 14:18:24
+// created: 2018-06-13 10:45:20
 $viewdefs['Leads']['QuickCreate'] = array (
   'templateMeta' => 
   array (

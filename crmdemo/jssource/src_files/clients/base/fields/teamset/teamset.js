@@ -15,8 +15,7 @@
  */
 ({
     extendsFrom: 'RelateField',
-    minChars: 1,
-    allow_single_deselect: false,
+
     events: {
         'click .btn[name=add]': 'addItem',
         'click .btn[name=remove]': 'removeItem',
@@ -33,13 +32,23 @@
     appendTeamTag: 'input[name=append_team]',
 
     initialize: function (options) {
-        this._super("initialize", [options]);
+        this._super('initialize', [options]);
+        /**
+         * @inheritdoc
+         */
+        this._allow_single_deselect = false;
+
+        /**
+         * @inheritdoc
+         */
+        this._minChars = 1;
+
         this._currentIndex = 0;
         this.model.on("change:team_name_type", this.appendTeam, this);
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Binds append team checkbox change for massupdate.
      */
@@ -55,7 +64,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     unbindDom: function() {
         this.$(this.appendTeamTag).off();
@@ -207,7 +216,7 @@
         }
 
         // If we're loading edit template on List view switch to detail template instead
-        if (!template && this.view.action === 'list' && this.tplName === 'edit') {
+        if (!template && this.view.action === 'list' && _.contains(['edit','detail'], this.tplName)) {
             this.template = app.template.getField(
                 this.type,
                 'list',
@@ -220,7 +229,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      * Add ability to edit and save an invalid team set.
      */
     _render: function () {
@@ -266,11 +275,7 @@
             //load the default team setting that is specified in the user profile settings
             if (_.isEmpty(value)) {
                 value = app.utils.deepCopy(app.user.getPreference("default_teams"));
-                this.model.set(this.name, value);
-                this.model.setDefaultAttribute(this.name, value);
-            } else {
-                this.model.set(this.name, value);
-                this.model.removeDefaultAttribute(this.name)
+                this.model.setDefault(this.name, value);
             }
         }
         value = app.utils.deepCopy(value);
@@ -281,7 +286,9 @@
                 }
             ];
         }
-        if (this.view.action === 'list' && this.view.name !== 'merge-duplicates') {
+        // FIXME: SC-3836 will replace special-casing view names/actions via
+        // action based templates.
+        if (this.view.action === 'list' && this.view.name !== 'merge-duplicates' && this.view.name !== 'audit') {
             //Display primary team in list view
             var primaryTeam = _.find(value, function (team) {
                 return team.primary;
@@ -333,6 +340,7 @@
     },
 
     addTeam: function () {
+        this.value.push({});
         this._currentIndex++;
         this._updateAndTriggerChange(this.value);
     },
@@ -383,7 +391,7 @@
         this._updateAndTriggerChange(this.value);
     },
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      * Restore the select2 focus location after refresh the dom.
      */
     bindDataChange: function() {
@@ -403,6 +411,12 @@
      */
     _updateAndTriggerChange: function (value) {
         // SP-1437: No Warning message when update with Team field only
+
+        // The following is provided for your convenience should you wish to learn more about
+        // Backbone Model .changedAttributes() not showing all changes.
+        // For a list of the actual third party software used in this Sugar product,
+        // please visit http://support.sugarcrm.com/06_Customer_Center/11_Third_Party_Software/.
+        //
         // http://stackoverflow.com/questions/17221680/backbone-model-changedattributes-not-showing-all-changes
         _.each(value, function(team) {
             // "add_button" and "remove_button" are JS elements, don't track them.

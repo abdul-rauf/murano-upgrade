@@ -17,6 +17,7 @@ $viewdefs['base']['layout']['shortcuts'] = array(
         'Global:Help' => 'LBL_SHORTCUT_HELP',
         'Global:Create' => 'LBL_SHORTCUT_QUICK_CREATE',
         'Global:Search' => 'LBL_SHORTCUT_SEARCH',
+        'Global:Sweetspot' => 'LBL_SHORTCUT_SWEETSPOT',
         'Sidebar:Toggle' => 'LBL_SHORTCUT_SIDEBAR_TOGGLE',
         'List:Headerpane:Create' => 'LBL_SHORTCUT_CREATE_RECORD',
         'List:Select:Down' => 'LBL_SHORTCUT_NAVIGATE_DOWN',
@@ -68,5 +69,9 @@ $viewdefs['base']['layout']['shortcuts'] = array(
         'MassUpdate:Remove' => 'LBL_SHORTCUT_MASS_UPDATE_REMOVE',
         'MassUpdate:Cancel' => 'LBL_SHORTCUT_MASS_UPDATE_CANCEL',
         'MassUpdate:Update' => 'LBL_SHORTCUT_MASS_UPDATE_SAVE',
+        'Alert:Confirm' => 'LBL_SHORTCUT_ALERT_CONFIRM',
+        'Alert:Cancel' => 'LBL_SHORTCUT_ALERT_CANCEL',
+        'DragdropSelect2:SelectAll' => 'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL',
+        'SweetSpot:Toggle:Off' => 'LBL_SHORTCUT_SWEETSPOT_HIDE',
     ),
 );

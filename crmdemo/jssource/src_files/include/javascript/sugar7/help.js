@@ -35,8 +35,8 @@
          */
         get: function (module, view, context) {
             var objModule = _.extend({
-                    'module_name' : app.lang.getModuleSingular(module),
-                    'plural_module_name' : app.lang.getAppListStrings('moduleList')[module] || module
+                    'module_name' : app.lang.getModuleName(module),
+                    'plural_module_name' : app.lang.getModuleName(module, {plural: true})
                 }, context || {}, this._getModuleLabelMap()),
                 viewName = this._cleanupViewName(view).toUpperCase();
 
@@ -79,8 +79,6 @@
                     return 'records';
                 case 'detail':
                     return 'record';
-                case 'create-actions':
-                    return 'create';
                 default:
                     return viewName;
             }
@@ -96,19 +94,16 @@
          * @private
          */
         _getModuleLabelMap: function() {
-            if (_.isUndefined(this._moduleLabelMap)) {
-                var singularModules = {},
-                    modules = {};
-                _.each(app.lang.getAppListStrings('moduleListSingular'), function(module, key) {
-                    singularModules[key.replace(/\s/g, '').toLowerCase() + '_singular_module'] = module;
-                }, this);
-                _.each(app.lang.getAppListStrings('moduleList'), function(module, key) {
-                    modules[key.replace(/\s/g, '').toLowerCase() + '_module'] = module;
-                }, this);
-
-                // combine them into one master object and save it on the object
-                this._moduleLabelMap = _.extend(singularModules, modules);
+            if (!_.isUndefined(this._moduleLabelMap)) {
+                return this._moduleLabelMap;
             }
+            this._moduleLabelMap = {};
+
+            _.each(app.metadata.getModuleNames({filter: 'enabled'}), function(module) {
+                var key = module.toLowerCase();
+                this._moduleLabelMap[key + '_singular_module'] = app.lang.getModuleName(module);
+                this._moduleLabelMap[key + '_module'] = app.lang.getModuleName(module, {plural: true});
+            }, this);
 
             return this._moduleLabelMap;
         },
@@ -118,6 +113,40 @@
          */
         clearModuleLabelMap: function() {
             this._moduleLabelMap = undefined;
+        },
+
+        /**
+         * Returns the URL for Sugar's Support documentation for this specific flavor/version/layout
+         *
+         * @param {string} [layoutName] optional The name of the layout being viewed. This defaults
+         *      to 'list' if not sent ex: records|list|record etc
+         * @param {string} [module] optional The name of the Module to use, defaults to getting
+         *      module name from the controller context
+         * @returns {string} The url to the Support docs
+         */
+        getMoreInfoHelpURL: function(layoutName, module) {
+            layoutName = layoutName || 'list';
+            module = module || app.controller.context.get('module');
+
+            var serverInfo = app.metadata.getServerInfo(),
+                lang = app.lang.getLanguage(),
+                url;
+
+            if (layoutName == 'records') {
+                layoutName = 'list';
+            }
+
+            url = 'http://www.sugarcrm.com/crm/product_doc.php?edition=' + serverInfo.flavor
+                + '&version=' + serverInfo.version + '&lang=' + lang + '&module=' + module + '&route=' + layoutName;
+
+            if (layoutName == 'bwc') {
+                var action = window.location.hash.match(/#bwc.*action=(\w*)/i);
+                if (action && !_.isUndefined(action[1])) {
+                    url += '&action=' + action[1];
+                }
+            }
+
+            return url;
         }
     });
 

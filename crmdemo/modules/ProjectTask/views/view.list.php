@@ -26,6 +26,7 @@ class ProjectTaskViewList extends ViewList
  	    $metadataFile = SugarAutoLoader::loadWithMetafiles($module, 'listviewdefs');
         require_once($metadataFile);
 
+
 		$this->bean->ACLFilterFieldList($listViewDefs[$module], array("owner_override" => true));
 		$seed = $this->bean;
         if(!empty($this->bean->object_name) && isset($_REQUEST[$module.'2_'.strtoupper($this->bean->object_name).'_offset'])) {//if you click the pagination button, it will populate the search criteria here
@@ -35,7 +36,7 @@ class ProjectTaskViewList extends ViewList
 		        	$blockVariables[] = 'lvso';
 		        }
 
-                $current_query_by_page = unserialize(base64_decode($_REQUEST['current_query_by_page']));
+                $current_query_by_page = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($_REQUEST['current_query_by_page']));
                 foreach($current_query_by_page as $search_key=>$search_value) {
                     if($search_key != $module.'2_'.strtoupper($this->bean->object_name).'_offset' && !in_array($search_key, $blockVariables)) {
                         if (!is_array($search_value)) {
@@ -175,19 +176,38 @@ class ProjectTaskViewList extends ViewList
 			return;
         }
 
-         /*
-         * Bug 50575 - related search columns not inluded in query in a proper way
-         */
-         $lv->searchColumns = $searchForm->searchColumns;
+        /*
+        * Bug 50575 - related search columns not inluded in query in a proper way
+        */
+        $lv->searchColumns = $searchForm->searchColumns;
 
-		if(empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false) {
+        if (isset($GLOBALS['mod_strings']['LBL_MODULE_NAME_SINGULAR'])) {
+            $seed->module_title = $GLOBALS['mod_strings']['LBL_MODULE_NAME_SINGULAR'];
+        }
+
+        if (isset($GLOBALS['mod_strings']['LBL_LIST_PARENT_NAME'])) {
+            $seed->parent_title = $GLOBALS['mod_strings']['LBL_LIST_PARENT_NAME'];
+            $seed->parent_module_dir = 'Project';
+        }
+
+        $project = BeanFactory::getBean('Project');
+        $project_query = new SugarQuery();
+        $project_query->from($project);
+        $project_list = $project->fetchFromQuery($project_query);
+
+        if (count($project_list)) {
+            $seed->show_link = true;
+        }
+
+        if(empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false) {
             //Bug 58841 - mass update form was not displayed for non-admin users that should have access
             if(ACLController::checkAccess($module, 'massupdate') || ACLController::checkAccess($module, 'export')){
                 $lv->setup($seed, 'include/ListView/ListViewGeneric.tpl', $where, $params);
             } else {
                 $lv->setup($seed, 'include/ListView/ListViewNoMassUpdate.tpl', $where, $params);
             }
-			echo $lv->display();
-		}
- 	}
+
+            echo $lv->display();
+        }
+    }
 }

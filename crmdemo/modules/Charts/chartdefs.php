@@ -13,6 +13,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $chartsStrings = return_module_language($GLOBALS['current_language'], 'Charts');
 
 $chartDefs = array(
+
 	'pipeline_by_sales_stage_funnel'=>
 		array(	'type' => 'code',
 				'id' => 'Chart_pipeline_by_sales_stage',
@@ -88,6 +89,7 @@ $chartDefs = array(
 						 ),
 				'url_params' => array( 'lead_source', ),
 			 ),
+
 	'opportunities_this_quarter' =>
 		array( 	'type' => 'code',
 				'id' => 'opportunities_this_quarter',
@@ -119,6 +121,7 @@ $chartDefs = array(
 						 ),
 
 		),
+
 
 	'my_team_modules_used_last_30_days' =>
 		array( 	'type' => 'code',

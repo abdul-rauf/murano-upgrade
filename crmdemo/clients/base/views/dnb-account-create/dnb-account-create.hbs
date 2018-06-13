@@ -30,14 +30,14 @@
                     <li class="row-fluid sortable" data-sortable="1">
                         <div class="rows well well-invisible">
                             <a data-toggle="dropdown"  class="btn btn-invisible btn-link hide">
-                                <i class="icon-cog"></i></a>
+                                <i class="fa fa-cog"></i></a>
                             <ul class="dropdown-menu left carettop">
                                 <div>
                                     <li><a class="remove-row">{{str "LBL_REMOVE"}}</a></li>
                                 </div>
                             </ul>
                             <a class="move btn btn-invisible btn-link hide">
-                                <i class="icon-resize-vertical"></i></a>
+                                <i class="fa fa-arrows-v"></i></a>
                             <ul class="dashlet-cell rows row-fluid">
                                 <li class="dashlet-container span12">
                                     <div>
@@ -45,8 +45,8 @@
                                             <div data-dashlet="toolbar">
                                                 <div class="dashlet-header">
                                                     <h4 data-toggle="dashlet">
-                                                        {{#if dnbSrchResults.count}}
-                                                            {{dnbSrchResults.count}}
+                                                        {{#if listData.count}}
+                                                            {{listData.count}}
                                                         {{else}}
                                                             {{str "LBL_DNB_SRCH_RES"}}
                                                         {{/if}}
@@ -54,14 +54,14 @@
                                                 </div>
                                             </div>
                                             <div data-dashlet="dashlet" class="dashlet-content">
-                                                <div id="dnb-company-list-loading"class="block-footer">
+                                                <div id="dnb-company-list-loading"class="block-footer hide">
                                                     {{str "LBL_DNB_SRCH_LOAD"}} ...
                                                 </div>
-                                                <div id="dnb-search-results">
-                                                    {{#if dnbSrchResults.product}}
+                                                <div id="dnb-search-results" class="hide">
+                                                    {{#if listData.product}}
                                                     <div>
                                                         <ul class="unstyled listed" id="dnb-results-list">
-                                                            {{#each dnbSrchResults.product}}
+                                                            {{#each listData.product}}
                                                                 <li>
                                                                     <div class='dnb-company-label'>
                                                                         <a class="dnb-company-name" id="{{this.duns_num}}">
@@ -96,8 +96,8 @@
                                                     </div>
                                                 {{else}}
                                                     <aside class='create-no-data'>
-                                                        {{#if dnbSrchResults.errmsg}}
-                                                            <em>{{dnbSrchResults.errmsg}}</em>
+                                                        {{#if listData.errmsg}}
+                                                            <em>{{listData.errmsg}}</em>
                                                         {{else}}
                                                             <em>{{str "LBL_DNB_NO_DATA"}}</em>
                                                         {{/if}}
@@ -109,14 +109,9 @@
                                                 <button data-action="show-more" class="btn btn-link btn-invisible more">
                                                     {{str "LBL_DNB_MORE_SRCH_RES"}}
                                                 </button>
-                                                <div class="loading">
-                                                    {{str "LBL_ALERT_TITLE_LOADING"}}
-                                                    <i class="l1 icon-circle"></i>
-                                                    <i class="l2 icon-circle"></i>
-                                                    <i class="l3 icon-circle"></i>
-                                                </div>
+                                                {{loading 'LBL_ALERT_TITLE_LOADING'}}
                                             </div>
-                                            <div class="swappable-dashlet icon-download-alt"></div>
+                                            <div class="fa fa-download swappable-dashlet"></div>
                                         </div>
                                     </div>
                                 </li>
@@ -126,10 +121,10 @@
                     <li class="row-fluid" data-sortable="1">
                         <div class="rows well well-invisible">
                             <a data-toggle="dropdown" class="btn btn-invisible btn-link hide">
-                                <i class="icon-cog"></i>
+                                <i class="fa fa-cog"></i>
                             </a>
                             <a class="move btn btn-invisible btn-link hide">
-                                <i class="icon-resize-vertical"></i>
+                                <i class="fa fa-arrows-v"></i>
                             </a>
                         </div>
                     </li>

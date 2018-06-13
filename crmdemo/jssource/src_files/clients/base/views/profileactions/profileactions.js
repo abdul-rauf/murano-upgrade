@@ -32,7 +32,6 @@
     initialize: function(options) {
         app.view.View.prototype.initialize.call(this, options);
         app.events.on("app:sync:complete", this.render, this);
-        app.events.on("bwc:profile:entered", this.bwcProfileEntered, this);
         app.events.on("bwc:avatar:removed", this.bwcAvatarRemoved, this);
         app.user.on("change:picture", this.setCurrentUserData, this);
     },
@@ -130,10 +129,6 @@
     filterMenuProperties:function(singleItem){
         if(singleItem['label'] === 'LBL_PROFILE'){
             singleItem['img_url'] = this.pictureUrl;
-            //Add userId to default route
-            if (singleItem['route'] === '#bwc/index.php?module=Users&action=DetailView&record=') {
-                singleItem['route'] += this.userId;
-            }
         }
         return singleItem;
     },

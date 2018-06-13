@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: ForProducts.php 18693 2006-12-15 01:18:22Z jenny $
 
 $subpanel_layout = array(
 		'top_buttons' => array(

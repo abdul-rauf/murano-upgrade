@@ -20,6 +20,19 @@
 
     initialize: function(options) {
         this._super('initialize', [options]);
+        // This component should always have a `list` action.
+        this.action = 'list';
+
+        /**
+         * Label key used for {@link #showMoreLabel}.
+         *
+         * You can define it in metadata under `label` property. Defaults to
+         * `TPL_SHOW_MORE_MODULE`.
+         *
+         * @type {string}
+         * @private
+         */
+        this._showMoreLabel = this.meta && this.meta.label || 'TPL_SHOW_MORE_MODULE';
         this._initPagination();
     },
 
@@ -44,17 +57,17 @@
             return;
         }
 
-        this.paginateFetched = false;
-        this.render();
-
         var options = {};
         options.success = _.bind(function() {
             this.layout.trigger('list:paginate:success');
-            this.paginateFetched = true;
+            // FIXME: This should trigger on `this.collection` instead of
+            // `this.context`. Will be fixed as part of SC-2605.
+            this.context.trigger('paginate');
             this.render();
         }, this);
 
         this.paginationComponent.getNextPagination(options);
+        this.render();
     },
 
     /**
@@ -62,13 +75,25 @@
      * Label should be "More <module name>...".
      */
     setShowMoreLabel: function() {
-        var model = this.collection.at(0),
-            module = model ? model.module : this.context.get('module');
-        this.showMoreLabel = app.lang.get('TPL_SHOW_MORE_MODULE', module, {
-            module: app.lang.get('LBL_MODULE_NAME', module).toLowerCase(),
+        var model = this.collection.at(0);
+        var module = model ? model.module : this.context.get('module');
+        var context = {
             count: this.collection.length,
             offset: this.collection.next_offset >= 0
-        });
+        };
+        if (module) {
+            context.module = new Handlebars.SafeString(app.lang.getModuleName(module, {plural: true}).toLowerCase());
+        }
+
+        /**
+         * Label used in the template to display Show more message.
+         *
+         * By default it will display "More {module}...".
+         *
+         * @type {string}
+         * @private
+         */
+        this.showMoreLabel = app.lang.get(this._showMoreLabel, module, context);
     },
 
     /**
@@ -86,7 +111,15 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
+     */
+    _renderHtml: function() {
+        this.setShowMoreLabel();
+        this._super('_renderHtml');
+    },
+
+    /**
+     * @inheritdoc
      *
      * Bind listeners for collection updates.
      * The pagination link synchronizes its visibility with the collection's
@@ -95,34 +128,14 @@
     bindDataChange: function() {
         this.context.on('change:collection', this.onCollectionChange, this);
         this.collection.on('add remove reset', this.render, this);
-        this.before('render', function() {
-            this.dataFetched = this.paginateFetched !== false && this.collection.dataFetched;
-            this.showLoadMsg = true;
-            if (app.alert.$alerts[0].innerText) {
-                this.showLoadMsg = false;
-            }
-            var nextOffset = this.collection.next_offset || -1;
-            if (this.collection.dataFetched && nextOffset === -1) {
-                this._invisible = true;
-                this.hide();
-                return false;
-            }
-            this._invisible = false;
-            this.show();
-            this.setShowMoreLabel();
-        }, null, this);
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
-     * Avoid to be shown if the view is invisible status.
      * Add dashlet placeholder's class in order to handle the custom css style.
      */
     show: function() {
-        if (this._invisible) {
-            return;
-        }
         this._super('show');
         if (!this.paginationComponent) {
             return;
@@ -131,7 +144,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      *
      * Remove pagination custom CSS class on dashlet placeholder.
      */

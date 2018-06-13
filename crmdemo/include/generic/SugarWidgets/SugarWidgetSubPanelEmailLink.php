@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: SugarWidgetSubPanelEmailLink.php 56851 2010-06-07 22:17:02Z jenny $
 
 
 
@@ -75,9 +75,9 @@ class SugarWidgetSubPanelEmailLink extends SugarWidgetField {
 			    );
                 if(isset($layout_def['fields']['FULL_NAME'])){
                     $composeData['parent_name'] = $layout_def['fields']['FULL_NAME'];
-                    $composeData['to_email_addrs'] = sprintf("%s <%s>", $layout_def['fields']['FULL_NAME'], $layout_def['fields']['EMAIL1']);
+                    $composeData['to_email_addrs'] = sprintf("%s <%s>", $layout_def['fields']['FULL_NAME'], $layout_def['fields']['EMAIL']);
                 } else {
-                    $composeData['to_email_addrs'] = $layout_def['fields']['EMAIL1'];
+                    $composeData['to_email_addrs'] = $layout_def['fields']['EMAIL'];
                 }
                 require_once('modules/Emails/EmailUI.php');
                 $eUi = new EmailUI();

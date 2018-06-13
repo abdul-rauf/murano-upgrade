@@ -69,6 +69,15 @@
     overflow-x: hidden;
     overflow-y: auto;
   }
+  .rss-feed {
+    ul {
+      list-style-type: none;
+      margin: 0 0 9px 0;
+    }
+    h4 {
+      font-size: 12px;
+    }
+  }
 }
 
 .dashlet {
@@ -95,14 +104,10 @@
   .dashlet-options {
     font-size: @baseFontSize;
     line-height: @baseLineHeight;
-    font-weight: 500;
     color: @gray;
     background: @grayLighter;
     border-bottom: @borderWidget;
     margin: 0;
-    .rtlPadding(@direction,7px 10px 7px 80px);
-    .rtl(@direction,ltr);
-    .rtlTextAlign(@direction,right);
     a {
       color: @gray;
     }
@@ -112,36 +117,27 @@
     background: @grayLighter;
   }
   h4 {
+    font-weight: 500;
+    font-size: @fontSizeLarge;
     padding: 7px 80px 8px 10px;
     cursor: move;
     .border-radius(@baseBorderRadius 0 0 0);
-    font-size: @fontSizeLarge;
   }
 
   .dashlet-options {
-    .border-radius(0);
-    padding: 6px 8px;
-    .select2-container,
-    .btn-group {
-      padding: 0;
-      margin: 0;
-    }
-    .btn:first-child {
-      margin: 0;
-    }
-    .btn-slider,
-    .dropdown {
-      font-size: @baseFontSize;
-    }
-    .btn {
-      font-size: @fontSizeSmall;
-    }
-    .dropdown-toggle {
-      margin-left: 0;
-      white-space: nowrap;
-    }
-    .dashlet-group .btn-toolbar .btn.toggle-control {
-      margin-left: 4px;
+    padding: 5px 8px;
+    &.control-group {
+      .row-fluid {
+        [class*="span"] {
+          max-width: 280px;
+        }
+      }
+      [class*="span"]:first-of-type:last-of-type {
+        min-width: 108px;
+      }
+      .span6.hide + .span6 {
+        min-width: 108px;
+      }
     }
   }
 
@@ -155,7 +151,7 @@
     .dashlet-options {
       display: none;
     }
-    i.icon-chevron-down::before {
+    i.fa-chevron-down::before {
       content: "\f077";
     }
   }
@@ -242,7 +238,7 @@
           margin-left: 0;
         }
       }
-      .icon-stack,
+      .fa-stack,
       img {
         margin: 0 12px 0 0;
         text-align: center;
@@ -256,16 +252,19 @@
         line-height: 0;
         margin-left: -44px;
       }
-      .pull-left.icon-stack {
+      p > .pull-left.label-module {
+        margin-left: -44px;
+      }
+      .pull-left.fa-stack {
         margin-left: -55px;
         > i {
           left: 5px;
         }
       }
-      .icon-stack {
+      .fa-stack {
         font-size: 21px;
         width: 2em;
-        .icon-user + .icon-question-sign {
+        .fa-user + .fa-question-circle {
           top: 9px;
           color: @white;
         }
@@ -503,7 +502,7 @@
     .border-radius(0 0 4px 4px);
     background-color: @white;
     border-top: 1px solid @grayLighter;
-    .icon-large {
+    .fa-large {
       vertical-align: middle;
       margin-left: 2px;
     }

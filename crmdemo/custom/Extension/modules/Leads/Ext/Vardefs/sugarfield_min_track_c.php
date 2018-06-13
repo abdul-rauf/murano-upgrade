@@ -1,6 +1,6 @@
 <?php
- // created: 2013-10-03 09:11:23
-$dictionary['Lead']['fields']['min_track_c']['dependency']='';
-$dictionary['Lead']['fields']['min_track_c']['visibility_grid']='';
+ // created: 2018-06-13 10:46:07
+$dictionary['Lead']['fields']['min_track_c']['dependency'] = '';
+$dictionary['Lead']['fields']['min_track_c']['visibility_grid'] = '';
+$dictionary['Lead']['fields']['min_track_c']['full_text_search']['boost'] = 1;
 
- ?>

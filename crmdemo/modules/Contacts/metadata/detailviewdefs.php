@@ -29,6 +29,7 @@ $viewdefs['Contacts']['DetailView'] = array(
                                                         ),
                                        ),
                         'maxColumns' => '2',
+
                         'useTabs' => true,
                         'widths' => array(
                                         array('label' => '10', 'field' => '30'),
@@ -52,6 +53,7 @@ $viewdefs['Contacts']['DetailView'] = array(
           array (
             'name' => 'full_name',
             'label' => 'LBL_NAME',
+
             'displayParams' => 
               array (
                 'enableConnectors' => true,
@@ -60,7 +62,7 @@ $viewdefs['Contacts']['DetailView'] = array(
                 array (
                   0 => 'ext_rest_twitter',
                 ),
-            ),
+            ),         
           ),
 
 	      array (
@@ -215,6 +217,7 @@ $viewdefs['Contacts']['DetailView'] = array(
         ),
 
         array (
+
           'team_name',
 
           array (

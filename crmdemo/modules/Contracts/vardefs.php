@@ -15,6 +15,7 @@ $dictionary['Contract'] = array(
     'audited' => true,
     'activity_enabled' => true,
     'unified_search' => true,
+    'full_text_search' => true,
     'comment' => 'A contract collects information about important legal and contractural obligations',
     'fields' => array(
         'name' => array(
@@ -27,6 +28,7 @@ $dictionary['Contract'] = array(
             'comment' => 'The name of the contract',
             'importable' => 'required',
             'unified_search' => true,
+            'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 1.59),
         ),
         'reference_code' => array(
             'name' => 'reference_code',
@@ -34,7 +36,8 @@ $dictionary['Contract'] = array(
             'type' => 'varchar',
             'len' => '255',
             'required' => false,
-            'comment' => 'The reference code used by the organization to refer to this contract'
+            'comment' => 'The reference code used by the organization to refer to this contract',
+            'full_text_search' => array('enabled' => true, 'searchable' => true, 'boost' => 0.62),
         ),
         'quotes' => array(
             'name' => 'quotes',
@@ -71,7 +74,7 @@ $dictionary['Contract'] = array(
         'opportunity_id' => array(
             'name' => 'opportunity_id',
             'type' => 'id',
-            'vname' => 'LBL_OPPORTUNITY_NAME',
+            'vname' => 'LBL_OPPORTUNITY_ID',
             'source' => 'non-db',
         ),
         'account_name' => array(
@@ -206,6 +209,10 @@ $dictionary['Contract'] = array(
             'audited' => true,
             'comment' => 'The contract status',
             'importable' => 'required',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false
+            ),
         ),
         'customer_signed_date' => array(
             'name' => 'customer_signed_date',
@@ -244,10 +251,11 @@ $dictionary['Contract'] = array(
             'type' => 'int',
             'len' => 5,
             'source' => 'non-db',
+            'sortable' => false,
         ),
         'type_name' => array(
             'name' => 'type_name',
-            'vname' => 'LBL_TYPE',
+            'vname' => 'LBL_TYPE_NAME',
             'rname' => 'name',
             'id_name' => 'type',
             'type' => 'relate',
@@ -325,12 +333,12 @@ $dictionary['Contract'] = array(
     ),
     'relationships' => array(
         'contracts_contract_types' => array(
-            'lhs_module' => 'Contracts',
-            'lhs_table' => 'contracts',
-            'lhs_key' => 'type',
-            'rhs_module' => 'ContractTypes',
-            'rhs_table' => 'contract_types',
-            'rhs_key' => 'id',
+            'lhs_module' => 'ContractTypes',
+            'lhs_table' => 'contract_types',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Contracts',
+            'rhs_table' => 'contracts',
+            'rhs_key' => 'type',
             'relationship_type' => 'one-to-many',
         ),
         'contract_notes' => array(
@@ -394,6 +402,9 @@ VardefManager::createVardef(
     array(
         'default',
         'assignable',
-        'team_security',
+        'team_security'
     )
 );
+
+//boost value for full text search
+$dictionary['Contract']['fields']['description']['full_text_search']['boost'] = 0.63;

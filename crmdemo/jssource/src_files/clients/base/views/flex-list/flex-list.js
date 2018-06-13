@@ -20,21 +20,7 @@
     _previewed: null,
 
     /**
-     * @property {String} _allListViewsFieldListKey The last state key that
-     * contains the full list of fields displayable in list views of this module.
-     * @protected
-     */
-    _allListViewsFieldListKey: null,
-
-    /**
-     * @property {String} _thisListViewFieldListKey The last state key that
-     * contains the visible state of the fields and their position in the table.
-     * @protected
-     */
-    _thisListViewFieldListKey: null,
-
-    /**
-     * {@inheritDoc}
+     * @inheritdoc
      */
     initialize: function(options) {
         this.plugins = _.union(this.plugins, ['Tooltip']);
@@ -49,8 +35,34 @@
         this.template = app.template.getView('flex-list');
         this.events = _.clone(this.events);
 
+        /**
+         * The last state key that contains the full list of fields displayable
+         * in list views of this module.
+         *
+         * @property {string}
+         * @protected
+         */
         this._allListViewsFieldListKey = app.user.lastState.buildKey('field-list', 'list-views', this.module);
+
+        /**
+         * The last state key that contains the visible state of the fields and
+         * their position in the table for this specific view.
+         *
+         * @property {string}
+         * @protected
+         */
         this._thisListViewFieldListKey = app.user.lastState.key('visible-fields', this);
+
+        if (this.meta.sticky_resizable_columns) {
+            /**
+             * The last state key that contains the user defined column widths
+             * for this specific view.
+             *
+             * @property {string}
+             * @protected
+             */
+            this._thisListViewFieldSizesKey = app.user.lastState.key('width-fields', this);
+        }
 
         this._fields = this.parseFields();
 
@@ -60,23 +72,32 @@
         this.resize = _.bind(_.debounce(this.resize, 200), this);
         this.bindResize();
 
+        var rightColumnsEvents = {};
         //add an event delegate for right action dropdown buttons onclick events
         if (this.rightColumns.length) {
-            this.events = _.extend({}, this.events, {
+            rightColumnsEvents = {
                 'hidden.bs.dropdown .flex-list-view .actions': 'resetDropdownDelegate',
                 'shown.bs.dropdown .flex-list-view .actions': 'delegateDropdown'
-            });
+            };
         }
+
+        this.events = _.extend(rightColumnsEvents, this.events, {
+            'click [data-widths=reset]': 'resetColumnWidths',
+            'click [data-columns-order=reset]': 'resetColumnOrder'
+        });
 
         this.on('list:reorder:columns', this.reorderCatalog, this);
         this.on('list:toggle:column', this.saveCurrentState, this);
         this.on('list:save:laststate', this.saveCurrentState, this);
+        this.on('list:column:resize:save', this.saveCurrentWidths, this);
+        this.on('list:scrollLock', this.scrollLock, this);
     },
 
     // fn to turn off event listeners and reenable tooltips
     resetDropdownDelegate: function(e) {
+        this.$el.removeClass('no-touch-scrolling');
         var $b = this.$(e.currentTarget).first();
-        $b.parent('.list').removeClass('open');
+        $b.parent().closest('.list').removeClass('open');
         $b.off('resetDropdownDelegate.right-actions');
     },
 
@@ -92,8 +113,9 @@
                 );
             };
 
+        this.$el.addClass('no-touch-scrolling');
         // add open class to parent list to elevate absolute z-index for iOS
-        $buttonGroup.parent('.list').addClass('open');
+        $buttonGroup.parent().closest('.list').addClass('open');
         // detect window bottom collision
         $buttonGroup.toggleClass('dropup', needsDropupClass($buttonGroup));
         // listen for delegate reset
@@ -146,8 +168,24 @@
      */
     parseFields: function() {
         var fields = _.flatten(_.pluck(this.meta.panels, 'fields'));
+
+        /**
+         * The default order of the fields.
+         *
+         * @property {string[]}
+         * @private
+         */
+        this._defaultFieldOrder = _.pluck(fields, 'name');
         var catalog = this._createCatalog(fields);
 
+        /**
+         * The custom order of the fields.
+         *
+         * See {@link #_getFieldsLastState}.
+         *
+         * @property {string[]}
+         * @private
+         */
         this._thisListViewFieldList = this._getFieldsLastState();
 
         if (this._thisListViewFieldList) {
@@ -423,6 +461,90 @@
     },
 
     /**
+     * Takes the decoded data and minimize it to save cache size.
+     *
+     * For example, if the field's storage entry is:
+     *
+     *     ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+     *
+     * And the decoded data is:
+     *
+     *     {
+     *         visible: ['B', 'C', 'E', 'F', 'H'],
+     *         widths: [125, 50, 60, 150, 200]
+     *     }
+     *
+     * The encoded data will be:
+     *
+     *     [0, 125, 50, 0, 60, 150, 0, 200]
+     *
+     * `0` means the field has no user defined width. (i.e: `A`, `D`, `G`)
+     * This is either because the column is hidden, or not displayable in this
+     * list view.
+     *
+     * @param {Object} decodedData The decoded data.
+     * @return {Array} The encoded data.
+     * @private
+     */
+    _encodeCacheWidthData: function(decodedData) {
+        var encodedData = [];
+
+        var fieldList = this._appendFieldsToAllListViewsFieldList();
+        var visibleIndex = 0;
+        _.each(fieldList, function(fieldName) {
+            var value = 0;
+            if (_.contains(decodedData.visible, fieldName)) {
+                value = decodedData.widths[visibleIndex++];
+            }
+            encodedData.push(value);
+        });
+        return encodedData;
+    },
+
+    /**
+     * Takes the minimized value stored in the cache and decodes it to make it
+     * more readable and easier to manipulate.
+     *
+     * If the field's storage entry is:
+     *
+     *     ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+     *
+     * And the encoded data is:
+     *
+     *     [0, 125, 50, 0, 60, 150, 0, 200]
+     *
+     * The decoded data will be:
+     *
+     *     {
+     *         visible: ['B', 'C', 'F', 'H'],
+     *         widths: [125, 50, 60, 150, 200]
+     *     }
+     *
+     * - `visible` contains the list of visible fields,
+     * - `widths` is the widths of fields, indexes whose value is `0` are
+     * skipped (fields not being displayed).
+     *
+     * @param {Array} encodedData The minimized data.
+     * @return {Object} The decoded data.
+     * @private
+     */
+    _decodeCacheWidthData: function(encodedData) {
+        var decodedData = {
+            'visible': [],
+            'widths': []
+        };
+
+        var fieldList = this._appendFieldsToAllListViewsFieldList();
+        _.each(_.pluck(this._fields.visible, 'name'), function(fieldName) {
+            var index = _.indexOf(fieldList, fieldName);
+            var width = encodedData[index] || 0;
+            decodedData.visible.push(fieldName);
+            decodedData.widths.push(width);
+        });
+        return decodedData;
+    },
+
+    /**
      * Append the list of fields defined in the metadata that are missing in the
      * field storage cache entry.
      *
@@ -531,6 +653,7 @@
             position: allFields
         };
         app.user.lastState.set(this._thisListViewFieldListKey, this._encodeCacheData(decoded));
+        this._thisListViewFieldList = this._getFieldsLastState();
     },
 
     /**
@@ -539,7 +662,7 @@
     addActions: function() {
         var meta = this.meta;
         if (_.isObject(meta.selection)) {
-            this.isLinkAction = meta.selection.isLinkAction;
+            this.isSearchAndSelectAction = meta.selection.isSearchAndSelectAction;
             switch (meta.selection.type) {
                 case 'single':
                     this.addSingleSelectionAction();
@@ -574,25 +697,23 @@
      * Add multi selection field to left column
      */
     addMultiSelectionAction: function() {
-        var _generateMeta = function(buttons, disableSelectAllAlert, isLinkAction) {
+        var _generateMeta = function(buttons, disableSelectAllAlert) {
             return {
                 'type': 'fieldset',
                 'fields': [
                     {
                         'type': 'actionmenu',
                         'buttons': buttons || [],
-                        'disable_select_all_alert': !!disableSelectAllAlert,
-                        'isLinkAction': !!isLinkAction
+                        'disable_select_all_alert': !!disableSelectAllAlert
                     }
                 ],
                 'value': false,
                 'sortable': false
             };
         };
-        var buttons = this.meta.selection.actions,
-            disableSelectAllAlert = !!this.meta.selection.disable_select_all_alert,
-            isLinkAction = !!this.meta.selection.isLinkAction;
-        this.leftColumns.push(_generateMeta(buttons, disableSelectAllAlert, isLinkAction));
+        var buttons = this.meta.selection.actions;
+        var disableSelectAllAlert = !!this.meta.selection.disable_select_all_alert;
+        this.leftColumns.push(_generateMeta(buttons, disableSelectAllAlert));
     },
     /**
      * Add fieldset of rowactions to the right column
@@ -626,7 +747,7 @@
             this._previewed = model;
             this.$("tr.highlighted").removeClass("highlighted current above below");
             if (model) {
-                var rowName = model.module + "_" + model.get("id");
+                var rowName = model.module + "_" + model.id;
                 var curr = this.$("tr[name='" + rowName + "']");
                 curr.addClass("current highlighted");
                 curr.prev("tr").addClass("highlighted above");
@@ -636,7 +757,7 @@
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _renderHtml: function() {
         this.colSpan = this._fields.visible.length || 0;
@@ -658,11 +779,21 @@
             this.$el.addClass('right-actions');
         }
 
+        var displayWidthSetting = this._thisListViewFieldSizes ||
+            !_.isUndefined(app.user.lastState.get(this._thisListViewFieldSizesKey));
+        var displayOrderSetting = false;
+        if (this._thisListViewFieldList) {
+            var customOrder = _.union(this._thisListViewFieldList.position, this._defaultFieldOrder);
+            displayOrderSetting = !_.isEqual(customOrder, this._defaultFieldOrder);
+        }
+        this._toggleSettings('widths', displayWidthSetting);
+        this._toggleSettings('order', displayOrderSetting);
+
         this.resize();
     },
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     _render: function() {
         this._super('_render');
@@ -768,7 +899,107 @@
     },
 
     /**
-     * @inheritDoc
+     * Saves the current field widths in {@link #_thisListViewFieldSizes}.
+     *
+     * If the stickiness is enabled, it also saves the widths into the cache,
+     * so that the next time the view is loaded, the user retrieves his
+     * preferred widths.
+     *
+     * Example of a value stored in the cache:
+     *
+     *     [125, 0, 52, 115, 0, 0, 51]
+     *
+     * Represents the current widths of fields `ABCDEF`, but no width has been
+     * defined for fields `B`, `E` and `F` (because they were hidden or not
+     * displayable).
+     *
+     * @param {Array} columns The widths of the current visible fields.
+     */
+    saveCurrentWidths: function(columns) {
+        // Needed in order to fix the scroll helper whenever the widths change.
+        this.resize();
+        if (!this._thisListViewFieldListKey) {
+            return;
+        }
+        var visibleFields = _.pluck(this._fields.visible, 'name');
+        var decoded = {
+            visible: visibleFields,
+            widths: columns
+        };
+        var encoded = this._encodeCacheWidthData(decoded);
+        this._toggleSettings('widths', true);
+
+        /**
+         * The list of user defined column widths for this specific view.
+         *
+         * @property {Array}
+         * @protected
+         */
+        this._thisListViewFieldSizes = encoded;
+
+        if (this._thisListViewFieldSizesKey) {
+            app.user.lastState.set(this._thisListViewFieldSizesKey, encoded);
+        }
+    },
+
+    /**
+     * Resets the column widths to the default settings.
+     *
+     * If the stickiness is enabled, it also removes the entry from the cache.
+     */
+    resetColumnWidths: function() {
+        this._thisListViewFieldSizes = null;
+        if (this._thisListViewFieldSizesKey) {
+            app.user.lastState.remove(this._thisListViewFieldSizesKey);
+        }
+        if (!this.disposed) {
+            this.render();
+            this._toggleSettings('widths', false);
+        }
+    },
+
+    /**
+     * Resets the column order to the default settings.
+     */
+    resetColumnOrder: function() {
+        var fields = _.flatten(_.pluck(this.meta.panels, 'fields'));
+        this._fields = this._createCatalog(fields);
+        this.saveCurrentState();
+        if (this.disposed) {
+            return;
+        }
+        this.render();
+    },
+
+    /**
+     * Shows, or hides, the reset setting option from the settings dropdown.
+     *
+     * @param {string} category The setting to show or hide.
+     * @param {boolean} show `true` to show it, `false` to hide it.
+     * @private
+     */
+    _toggleSettings: function(category, show) {
+        this.$('li[data-settings-li=' + category + ']').toggle(show);
+    },
+
+    /**
+     * Gets the list of widths for each visible field in the list view.
+     *
+     * If the stickiness is enabled, it will look for the entry in the cache.
+     *
+     * @return {Array} The list of widths if found, `undefined` otherwise.
+     */
+    getCacheWidths: function() {
+        var encodedData = this._thisListViewFieldSizes ||
+            app.user.lastState.get(this._thisListViewFieldSizesKey);
+        if (!encodedData) {
+            return;
+        }
+        return this._decodeCacheWidthData(encodedData).widths;
+    },
+
+    /**
+     * @inheritdoc
      */
     unbind: function() {
         $('#content, .main-pane').off('scroll.' + this.cid);
@@ -791,6 +1022,19 @@
     },
 
     /**
+     * Temporarily overwrites the css from the .scroll-width class so that
+     * row field dropdown menues aren't clipped by overflow-x property.
+     */
+    scrollLock: function(lock) {
+        var $content = this.$('.flex-list-view-content');
+        if (lock) {
+            $content.css({'overflow-y': 'visible', 'overflow-x': 'hidden'});
+        } else {
+            $content.removeAttr('style');
+        }
+    },
+
+    /**
      * Updates the class of this flex list as scrollable or not, and
      * adjusts/toggles the scroll helper.
      */
@@ -807,7 +1051,6 @@
 
         if (this.$helper && this.$helper.length > 0) {
             this.$helper.find('div').width(this.$spy.get(0).scrollWidth);
-            this.$helper.scrollLeft(this.$spy.scrollLeft());
             this._toggleScrollHelper();
         }
     }

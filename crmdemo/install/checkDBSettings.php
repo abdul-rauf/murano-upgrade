@@ -11,22 +11,16 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 
 function checkFTSSettings()
 {
     installLog("Begining to check FTS Settings.");
-    require_once 'include/SugarSearchEngine/SugarSearchEngineFactory.php';
-
-    $searchEngine = SugarSearchEngineFactory::getInstance(
-        $_SESSION['setup_fts_type'],
-        getFtsSettings()
-    );
-
-    $status = $searchEngine->getServerStatus();
-    installLog("FTS connection results: " . var_export($status, TRUE));
-
-    return $status['valid'];
+    $engine = SearchEngine::newEngine($_SESSION['setup_fts_type'], getFtsSettings());
+    $status = $engine->verifyConnectivity(false);
+    installLog("FTS connection results: $status");
+    $success = $status > 0 ? true : false;
+    return $success;
 }
 
 function checkDBSettings($silent=false) {
@@ -37,6 +31,9 @@ function checkDBSettings($silent=false) {
     copyInputsIntoSession();
 
     $db = getInstallDbInstance();
+    if (!empty($_SESSION['setup_db_options'])) {
+        $db->setOptions($_SESSION['setup_db_options']);
+    }
 
     installLog("testing with {$db->dbType}:{$db->variant}");
 
@@ -96,10 +93,18 @@ function checkDBSettings($silent=false) {
         }
 
         // Bug 29855 - Check to see if given db name is valid
-        if (preg_match("![\"'*/\\?:<>-]+!i", $_SESSION['setup_db_database_name']) ) {
-            $errors['ERR_DB_MSSQL_DB_NAME'] = $mod_strings['ERR_DB_MSSQL_DB_NAME_INVALID'];
-            installLog("ERROR::  {$errors['ERR_DB_MSSQL_DB_NAME']}");
+        if($_SESSION['setup_db_type'] == 'oci8') {
+            if (preg_match("![\"'*\\?<>-]+!i", $_SESSION['setup_db_database_name'])) {
+                $errors['ERR_DB_OCI8_DB_NAME'] = $mod_strings['ERR_DB_OCI8_DB_NAME_INVALID'];
+                installLog("ERROR::  {$errors['ERR_DB_OCI8_DB_NAME']}");
+            }
         }
+        else {
+            if (preg_match("![\"'*/\\?:<>-]+!i", $_SESSION['setup_db_database_name']) ) {
+                $errors['ERR_DB_MSSQL_DB_NAME'] = $mod_strings['ERR_DB_MSSQL_DB_NAME_INVALID'];
+                installLog("ERROR::  {$errors['ERR_DB_MSSQL_DB_NAME']}");
+            }
+         }
 
         // test the account that will talk to the db if we're not creating it
         if( $_SESSION['setup_db_sugarsales_user'] != '' && !$_SESSION['setup_db_create_sugarsales_user'] ){
@@ -343,6 +348,14 @@ function copyInputsIntoSession(){
             if (isset($_REQUEST['goto']) && $_REQUEST['goto'] == 'SilentInstall' && isset($_SESSION['setup_db_drop_tables'])) {
                 //set up for Oracle Silent Installer
                 $_REQUEST['setup_db_drop_tables'] = $_SESSION['setup_db_drop_tables'] ;
+            }
+
+            if (!isset($_SESSION['setup_db_options'])) {
+                $_SESSION['setup_db_options'] = array();
+            }
+
+            if (isset($_REQUEST['setup_db_ssl_is_enabled'])) {
+                $_SESSION['setup_db_options']['ssl'] = isTruthy($_REQUEST['setup_db_ssl_is_enabled']);
             }
 }
 

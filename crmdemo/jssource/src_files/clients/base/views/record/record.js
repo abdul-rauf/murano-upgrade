@@ -35,7 +35,7 @@
 
     events: {
         'click .record-edit-link-wrapper': 'handleEdit',
-        'click a[name=cancel_button]': 'cancelClicked',
+        'click a[name=cancel_button]': '_deprecatedCancelClicked',
         'click [data-action=scroll]': 'paginateRecord',
         'click .record-panel-header': 'togglePanel',
         'click #recordTab > .tab > a:not(.dropdown-toggle)': 'setActiveTab',
@@ -64,11 +64,76 @@
     // width of the layout that contains this view
     _containerWidth: 0,
 
+    /**
+     * @inheritdoc
+     */
     initialize: function(options) {
         _.bindAll(this);
+        /**
+         * @inheritdoc
+         * @property {Object} meta
+         * @property {boolean} meta.hashSync Set to `true` to update URL
+         *   consistently with the view state (`edit` or `detail`)
+         */
         options.meta = _.extend({}, app.metadata.getView(null, 'record'), options.meta);
+        options.meta.hashSync = _.isUndefined(options.meta.hashSync) ? true : options.meta.hashSync;
         app.view.View.prototype.initialize.call(this, options);
         this.buttons = {};
+
+        /**
+         * An array of the {@link #alerts alert} names in this view.
+         *
+         * @property {Array}
+         * @protected
+         */
+        this._viewAlerts = [];
+
+        /**
+         * A collection of alert messages to be used in this view. The alert methods
+         * should be invoked by Function.prototype.call(), passing in an instance of
+         * a sidecar view. For example:
+         *
+         *     // ...
+         *     this.alerts.showInvalidModel.call(this);
+         *     // ...
+         *
+         * FIXME: SC-3451 will refactor this `alerts` structure.
+         * @property {Object}
+         */
+        this.alerts = {
+            showInvalidModel: function() {
+                if (!this instanceof app.view.View) {
+                    app.logger.error('This method should be invoked by Function.prototype.call(), passing in as argument' +
+                    'an instance of this view.');
+                    return;
+                }
+                var name = 'invalid-data';
+                this._viewAlerts.push(name);
+                app.alert.show(name, {
+                    level: 'error',
+                    messages: 'ERR_RESOLVE_ERRORS'
+                });
+            },
+            showNoAccessError: function() {
+                if (!this instanceof app.view.View) {
+                    app.logger.error('This method should be invoked by Function.prototype.call(), passing in as argument' +
+                    'an instance of this view.');
+                    return;
+                }
+                // dismiss the default error
+                app.alert.dismiss('data:sync:error');
+                // display no access error
+                app.alert.show('server-error', {
+                    level: 'error',
+                    messages: 'ERR_HTTP_404_TEXT_LINE1'
+                });
+                // discard any changes before redirect
+                this.handleCancel();
+                // redirect to list view
+                var route = app.router.buildRoute(this.module);
+                app.router.navigate(route, {trigger: true});
+            }
+        };
         this.createMode = this.context.get('create') ? true : false;
 
         // Even in createMode we want it to start in detail so that we, later, respect
@@ -80,13 +145,16 @@
         //Set the context to load the field list from the record metadata.
         this.context.set('dataView', 'record');
         this.model.on('duplicate:before', this.setupDuplicateFields, this);
+        // displays error msg when required field is missing
+        this.model.on('error:validation', this.alerts.showInvalidModel, this);
         this.on('editable:keydown', this.handleKeyDown, this);
         this.on('editable:mousedown', this.handleMouseDown, this);
         this.on('field:error', this.handleFieldError, this);
+        this.model.on('acl:change', this.handleAclChange, this);
 
         //event register for preventing actions
         // when user escapes the page without confirming deleting
-        app.routing.before('route', this.beforeRouteDelete, this, true);
+        app.routing.before('route', this.beforeRouteDelete, this);
         $(window).on('beforeunload.delete' + this.cid, _.bind(this.warnDeleteOnRefresh, this));
 
         this.delegateButtonEvents();
@@ -114,6 +182,36 @@
     },
 
     /**
+     * Handler for when the ACLs change on the model. Toggles the `hide` class
+     * on the pencil wrapper for each of the fields on this view that had ACL
+     * changes.
+     *
+     * @param {Object} diff The diff object of fields and whether or not they
+     *   had ACL changes.
+     */
+    handleAclChange: function(diff) {
+        var fields = _.keys(diff);
+
+        this._setNoEditFields();
+        this.setEditableFields();
+
+        var noEditFieldsMap = _.object(this.noEditFields, _.values(this.noEditFields));
+        var $pencils = this.$('[data-wrapper=edit]');
+
+        _.each($pencils, function(pencilEl) {
+            var $pencilEl = $(pencilEl);
+            var field = $pencilEl.data('name');
+
+            if (!diff[field]) {
+                return;
+            }
+
+            var hidePencil = !_.isUndefined(noEditFieldsMap[field]);
+            $pencilEl.toggleClass('hide', hidePencil);
+        }, this);
+    },
+
+    /**
      * Compare with last fetched data and return true if model contains changes.
      *
      * Check changes for fields that are editable only.
@@ -136,7 +234,7 @@
         if (this.resavingAfterMetadataSync)
             return false;
 
-        changedAttributes = this.model.changedAttributes(_.extend({}, this.model.getSyncedAttributes(), this.model.getDefaultAttributes()));
+        changedAttributes = this.model.changedAttributes(this.model.getSynced());
 
         if (_.isEmpty(changedAttributes)) {
             return false;
@@ -146,12 +244,11 @@
         _.each(this.meta.panels, function(panel) {
             _.each(panel.fields, function(field) {
                 if (!field.readonly) {
+                    setAsEditable(field.name);
                     if (field.fields && _.isArray(field.fields)) {
                         _.each(field.fields, function(field) {
                             setAsEditable(field.name);
                         });
-                    } else {
-                        setAsEditable(field.name);
                     }
                 }
             });
@@ -183,11 +280,14 @@
     /**
      * Called each time a validation pass is completed on the model.
      *
+     * Enables the action button and calls {@link #handleSave} if the model is
+     * valid.
+     *
      * @param {boolean} isValid TRUE if model is valid.
      */
     validationComplete: function(isValid) {
+        this.toggleButtons(true);
         if (isValid) {
-            this.setButtonStates(this.STATE.VIEW);
             this.handleSave();
         }
     },
@@ -197,6 +297,7 @@
         this.context.on('button:save_button:click', this.saveClicked, this);
         this.context.on('button:delete_button:click', this.deleteClicked, this);
         this.context.on('button:duplicate_button:click', this.duplicateClicked, this);
+        this.context.on('button:cancel_button:click', this.cancelClicked, this);
     },
 
     _render: function() {
@@ -213,35 +314,31 @@
 
         // Field labels in headerpane should be hidden on view but displayed in edit and create
         _.each(this.fields, function(field) {
-            var toggleLabel = _.bind(function() {
-                this.toggleLabelByField(field, this.createMode);
-            }, this);
-
-            field.off('render', toggleLabel);
-            if (field.$el.closest('.headerpane').length > 0) {
-                field.on('render', toggleLabel);
-            }
             // some fields like 'favorite' is readonly by default, so we need to remove edit-link-wrapper
             if (field.def.readonly && field.name && -1 == _.indexOf(this.noEditFields, field.name)) {
                 this.$('.record-edit-link-wrapper[data-name=' + field.name + ']').remove();
             }
         }, this);
 
-        this.toggleHeaderLabels(this.createMode);
         this.initButtons();
-        this.setButtonStates(this.STATE.VIEW);
         this.setEditableFields();
 
-        if (this.createMode) {
-            // RecordView starts with action as detail; once this.editableFields has been set (e.g.
-            // readonly's pruned out), we can call toggleFields - so only fields that should be are editable
-            this.toggleFields(this.editableFields, true);
+        if (this.context.get('action') === 'edit') {
+            this.setButtonStates(this.STATE.EDIT);
+            this.toggleEdit(true);
+        } else {
+            this.setButtonStates(this.STATE.VIEW);
+            if (this.createMode) {
+                // RecordView starts with action as detail; once this.editableFields has been set (e.g.
+                // readonly's pruned out), we can call toggleEdit - so only fields that should be are editable
+                this.toggleEdit(true);
+            }
         }
 
         // initialize tab view only if the component is attached to DOM,
         // otherwise it's initialized partially and cannot be properly
         // re-initialized after the component is attached to DOM
-        if ($.contains(document, this.$el[0])) {
+        if ($.contains(document.documentElement, this.$el[0])) {
             this.handleActiveTab();
             this.overflowTabs();
         }
@@ -253,7 +350,7 @@
      */
     _initTabsAndPanels: function() {
         this.meta.firstPanelIsTab = this.checkFirstPanel();
-        this.meta.lastPanelIndex = this.meta.panels.length-1;
+        this.meta.lastPanelIndex = this.meta.panels.length - 1;
 
         _.each(this.meta.panels, function(panel, i) {
             if (panel.header) {
@@ -356,6 +453,46 @@
         var panelKey = app.user.lastState.key(panelID+':tabState', this);
         app.user.lastState.set(panelKey, state);
     },
+
+    /**
+     * Parses through an array of panels metadata and sets some of them
+     * as no edit fields.
+     *
+     * FIXME: SC-3940, remove this call to _setNoEditFields when we merge
+     * master_platform into master, as this was fixed by SC-3908.
+     *
+     * @param {Array} [panels] The panels to parse. This default to
+     *   `this.meta.panels`.
+     * @private
+     */
+    _setNoEditFields: function(panels) {
+        panels = panels || this.meta.panels;
+
+        delete this.noEditFields;
+        this.noEditFields = [];
+
+        _.each(panels, function(panel) {
+            _.each(panel.fields, function(field, index) {
+                var keys = _.keys(field);
+                // Make filler fields readonly
+                if (keys.length === 1 && keys[0] === 'span') {
+                    field.readonly = true;
+                }
+
+                // disable the pencil icon if the user doesn't have ACLs
+                if (field.type === 'fieldset') {
+                    if (field.readonly || _.every(field.fields, function(f) {
+                        return !app.acl.hasAccessToModel('edit', this.model, f.name);
+                    }, this)) {
+                        this.noEditFields.push(field.name);
+                    }
+                } else if (field.readonly || !app.acl.hasAccessToModel('edit', this.model, field.name)) {
+                    this.noEditFields.push(field.name);
+                }
+            }, this);
+        }, this);
+    },
+
     /**
      * sets editable fields
      */
@@ -395,15 +532,6 @@
         if (this.options.meta && this.options.meta.buttons) {
             _.each(this.options.meta.buttons, function(button) {
                 this.registerFieldAsButton(button.name);
-                if (button.buttons) {
-                    var dropdownButton = this.getField(button.name);
-                    if (!dropdownButton) {
-                        return;
-                    }
-                    _.each(dropdownButton.fields, function(ddButton) {
-                        this.buttons[ddButton.name] = ddButton;
-                    }, this);
-                }
             }, this);
         }
     },
@@ -448,15 +576,34 @@
         }, this);
     },
 
+    /**
+     * Enables or disables the action buttons that are currently shown on the
+     * page. Toggles the `.disabled` class by default.
+     *
+     * @param {boolean} [enable=false] Whether to enable or disable the action
+     *   buttons. Defaults to `false`.
+     */
+    toggleButtons: function(enable) {
+        var state = !_.isUndefined(enable) ? !enable : false;
+
+        _.each(this.buttons, function(button) {
+            var showOn = button.def.showOn;
+            if (_.isUndefined(showOn) || this.currentState === showOn) {
+                button.setDisabled(state);
+            }
+        }, this);
+    },
+
     duplicateClicked: function() {
         var self = this,
             prefill = app.data.createBean(this.model.module);
 
         prefill.copy(this.model);
+        this._copyNestedCollections(this.model, prefill);
         self.model.trigger('duplicate:before', prefill);
         prefill.unset('id');
         app.drawer.open({
-            layout: 'create-actions',
+            layout: 'create',
             context: {
                 create: true,
                 model: prefill,
@@ -471,23 +618,151 @@
         prefill.trigger('duplicate:field', self.model);
     },
 
+    /**
+     * Clones the attributes that are collections by way of the
+     * {@link VirtualCollection} plugin.
+     *
+     * This guarantees that all related models in nested collection are copied
+     * instead of only the ones that have already been fetched.
+     *
+     * All models of the collection on the source model are fetched
+     * asynchronously and then added to the same collection on the target model
+     * once there are no more models to retrieve. Note that this leaves open
+     * the possibility for a race condition where the user clicks the Save
+     * button on the Create View before all models have been received.
+     *
+     * @param {Data.Bean} source
+     * @param {Data.Bean} target
+     * @private
+     */
+    _copyNestedCollections: function(source, target) {
+        var collections, view;
+
+        // only model's that utilize the VirtualCollection plugin support this
+        // functionality
+        if (!_.isFunction(source.getCollectionFieldNames)) {
+            return;
+        }
+
+        // avoid using the ambiguous `this` since there are references to many
+        // objects in this method: view, field, model, collection, source,
+        // target, etc.
+        view = this;
+
+        /**
+         * Removes the `_action` attribute from a model when cloning it.
+         *
+         * @param {Data.Bean} model
+         * @return {Data.Bean}
+         */
+        function cloneModel(model) {
+            var attributes = _.chain(model.attributes).clone().omit('_action').value();
+            return app.data.createBean(model.module, attributes);
+        }
+
+        /**
+         * Copies all of the models from a collection to the same collection on
+         * the target model.
+         *
+         * @param collection
+         */
+        function copyCollection(collection) {
+            var field, relatedFields, options;
+
+            /**
+             * Adds all of the records from the source collection to the same
+             * collection on the target model.
+             *
+             * @param {VirtualCollection} sourceCollection
+             * @param {Object} [options]
+             */
+            function done(sourceCollection, options) {
+                var targetCollection = target.get(collection.fieldName);
+
+                if (!targetCollection) {
+                    return;
+                }
+
+                targetCollection.add(sourceCollection.map(cloneModel));
+            }
+
+            field = view.getField(collection.fieldName, source);
+            relatedFields = [];
+
+            if (field.def.fields) {
+                relatedFields = _.map(field.def.fields, function(def) {
+                    return _.isObject(def) ? def.name : def;
+                });
+            }
+
+            options = {success: done};
+
+            // request the related fields from the field definition if possible
+            if (relatedFields.length > 0) {
+                options.fields = relatedFields;
+            }
+
+            collection.fetchAll(options);
+        }
+
+        // get all attributes from the source model that are collections
+        collections = _.intersection(source.getCollectionFieldNames(), _.keys(source.attributes));
+
+        _.each(collections, function(name) {
+            copyCollection(source.get(name));
+        });
+    },
+
     editClicked: function() {
         this.setButtonStates(this.STATE.EDIT);
         this.toggleEdit(true);
+        this.setRoute('edit');
     },
 
     saveClicked: function() {
-        this.model.doValidate(this.getFields(this.module), _.bind(this.validationComplete, this));
+        // Disable the action buttons.
+        this.toggleButtons(false);
+        var allFields = this.getFields(this.module, this.model);
+        var fieldsToValidate = {};
+        for (var fieldKey in allFields) {
+            if (app.acl.hasAccessToModel('edit', this.model, fieldKey)) {
+                _.extend(fieldsToValidate, _.pick(allFields, fieldKey));
+            }
+        }
+        this.model.doValidate(fieldsToValidate, _.bind(this.validationComplete, this));
+    },
+
+    /**
+     * Handles when the cancel_button view event is triggered.
+     *
+     * FIXME: This method will be removed as part of BR-3945
+     *
+     * @private
+     *
+     * @deprecated Since 7.7. Will be removed in 7.9.
+     *   Use the `MetadataEventDriven` plugin events from the
+     *   `record.php` button metadata instead.
+     */
+    _deprecatedCancelClicked: function() {
+        var cancelBtn = this.getField('cancel_button');
+        if (!cancelBtn || !cancelBtn.def || !cancelBtn.def.events) {
+            app.logger.warn(this.module + ': Invoking the cancel_button from `this.events` has been deprecated' +
+                ' since 7.7. This handler will be removed in 7.9. Please use the `MetadataEventDriven` plugin' +
+                ' events from the \'record.php\' button metadata instead.');
+            this.cancelClicked.apply(this, arguments);
+        }
     },
 
     cancelClicked: function() {
         this.handleCancel();
         this.setButtonStates(this.STATE.VIEW);
         this.clearValidationErrors(this.editableFields);
+        this.setRoute();
+        this.unsetContextAction();
     },
 
-    deleteClicked: function() {
-        this.warnDelete();
+    deleteClicked: function(model) {
+        this.warnDelete(model);
     },
 
     /**
@@ -497,11 +772,11 @@
      *   otherwise.
      */
     toggleEdit: function(isEdit) {
-        this.$('.record-edit-link-wrapper').toggle(!isEdit);
-        this.$('.headerpane .record-label').toggle(isEdit);
-        this.toggleFields(this.editableFields, isEdit);
-        this.toggleViewButtons(isEdit);
-        this.adjustHeaderpane();
+        var self = this;
+        this.toggleFields(this.editableFields, isEdit, function() {
+            self.toggleViewButtons(isEdit);
+            self.adjustHeaderpaneFields();
+        });
     },
 
     /**
@@ -538,18 +813,6 @@
     },
 
     /**
-     * Hide/show all field labels in headerpane.
-     *
-     * @param {Boolean} isEdit `true` to show the field labels, `false`
-     *   otherwise.
-     */
-    toggleHeaderLabels: function(isEdit) {
-        this.$('.headerpane .record-label').toggle(isEdit);
-        this.toggleViewButtons(isEdit);
-        this.adjustHeaderpane();
-    },
-
-    /**
      * Hide view specific button during edit.
      *
      * @param {Boolean} isEdit `true` to hide some specific buttons, `false`
@@ -559,51 +822,22 @@
      * property).
      */
     toggleViewButtons: function(isEdit) {
-        this.$('.headerpane span[data-type="badge"]').toggleClass('hide', isEdit);
-        this.$('.headerpane span[data-type="favorite"]').toggleClass('hide', isEdit);
-        this.$('.headerpane span[data-type="follow"]').toggleClass('hide', isEdit);
         this.$('.headerpane .btn-group-previous-next').toggleClass('hide', isEdit);
     },
 
-    /**
-     * Hide/show field label given a field.
-     *
-     * @param {View.Field} field The field to toggle the label based on current
-     *   action.
-     */
-    toggleLabelByField: function(field, inCreate) {
-        if (field.action === 'edit' || (field.action === 'disabled' && inCreate)) {
-            field.$el.closest('.record-cell')
-                .addClass('edit')
-                .find('.record-label')
-                .show();
-        } else {
-            field.$el.closest('.record-cell')
-                .removeClass('edit')
-                .find('.record-label')
-                .hide();
-        }
-    },
-
     handleSave: function() {
-        var self = this;
-        self.inlineEditMode = false;
+        if (this.disposed) {
+            return;
+        }
+        this._saveModel();
+        this.$('.record-save-prompt').hide();
 
-        app.file.checkFileFieldsAndProcessUpload(self, {
-                success: function(response) {
-                    if (response.record && response.record.date_modified) {
-                        self.model.set('date_modified', response.record.date_modified);
-                    }
-                    self._saveModel();
-                }
-            }, {
-                deleteIfFails: false
-            }
-        );
-
-        self.$('.record-save-prompt').hide();
-        if (!self.disposed) {
-            self.render();
+        if (!this.disposed) {
+            this.setButtonStates(this.STATE.VIEW);
+            this.setRoute();
+            this.unsetContextAction();
+            this.toggleEdit(false);
+            this.inlineEditMode = false;
         }
     },
 
@@ -613,15 +847,14 @@
                 // Loop through the visible subpanels and have them sync. This is to update any related
                 // fields to the record that may have been changed on the server on save.
                 _.each(this.context.children, function(child) {
-                    if (!_.isUndefined(child.attributes) && !_.isUndefined(child.attributes.isSubpanel)) {
-                        if (child.attributes.isSubpanel && !child.attributes.hidden) {
-                            child.attributes.collection.fetch();
-                        }
+                    if (child.get('isSubpanel') && !child.get('hidden')) {
+                        child.get('collapsed') ? child.resetLoadFlag(false) : child.reloadData({recursive: false});
                     }
                 });
                 if (this.createMode) {
                     app.navigate(this.context, this.model);
-                } else if (!this.disposed) {
+                } else if (!this.disposed && !app.acl.hasAccessToModel('edit', this.model)) {
+                    //re-render the view if the user does not have edit access after save.
                     this.render();
                 }
             }, this);
@@ -645,6 +878,8 @@
                             }
                         }
                     }, this));
+                } else if (error.status === 403 || error.status === 404) {
+                    this.alerts.showNoAccessError.call(this);
                 } else {
                     this.editClicked();
                 }
@@ -682,6 +917,7 @@
         this.model.revertAttributes();
         this.toggleEdit(false);
         this.inlineEditMode = false;
+        this._dismissAllAlerts();
     },
 
     /**
@@ -691,7 +927,7 @@
      */
     beforeRouteDelete: function() {
         if (this._modelToDelete) {
-            this.warnDelete();
+            this.warnDelete(this._modelToDelete);
             return false;
         }
         return true;
@@ -708,7 +944,7 @@
         var messages = {};
         var model = this.model;
         var name = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model)).trim();
-        var context = app.lang.get('LBL_MODULE_NAME_SINGULAR', model.module).toLowerCase() + ' ' + name;
+        var context = app.lang.getModuleName(model.module).toLowerCase() + ' ' + name;
 
         messages.confirmation = app.utils.formatString(app.lang.get('NTC_DELETE_CONFIRMATION_FORMATTED'), [context]);
         messages.success = app.utils.formatString(app.lang.get('NTC_DELETE_SUCCESS'), [context]);
@@ -718,9 +954,9 @@
     /**
      * Popup dialog message to confirm delete action
      */
-    warnDelete: function() {
+    warnDelete: function(model) {
         var self = this;
-        this._modelToDelete = true;
+        this._modelToDelete = model;
 
         self._targetUrl = Backbone.history.getFragment();
         //Replace the url hash back to the current staying page
@@ -765,9 +1001,11 @@
             },
             success: function() {
                 var redirect = self._targetUrl !== self._currentUrl;
+
+                self.context.trigger('record:deleted', self._modelToDelete);
+
                 self._modelToDelete = false;
 
-                self.context.trigger('record:deleted');
                 if (redirect) {
                     self.unbindBeforeRouteDelete();
                     //Replace the url hash back to the current staying page
@@ -791,10 +1029,19 @@
      * @param {View.Field} field Current focused field (field in inline-edit mode).
      */
     handleKeyDown: function(e, field) {
+        var whichField = e.shiftKey ? 'prevField' : 'nextField';
+
         if (e.which === 9) { // If tab
             e.preventDefault();
-            this.nextField(field, e.shiftKey ? 'prevField' : 'nextField');
-            this.adjustHeaderpane();
+            this.nextField(field, whichField);
+            if (field.$el.closest('.headerpane').length > 0) {
+                this.toggleViewButtons(false);
+                this.adjustHeaderpaneFields();
+            }
+            if (field[whichField] && field[whichField].$el.closest('.headerpane').length > 0) {
+                this.toggleViewButtons(true);
+                this.adjustHeaderpaneFields();
+            }
         }
     },
 
@@ -826,8 +1073,8 @@
                 tabLink = this.$('[href="#'+fieldTab.attr('id')+'"].[data-toggle="tab"]');
                 tabLink.tab('show');
                 // Put a ! next to the tab if one doesn't already exist
-                if (tabLink.find('.icon-exclamation-sign').length === 0) {
-                    tabLink.append(' <i class="icon-exclamation-sign tab-warning"></i>');
+                if (tabLink.find('.fa-exclamation-circle').length === 0) {
+                    tabLink.append(' <i class="fa fa-exclamation-circle tab-warning"></i>');
                 }
             }
 
@@ -835,13 +1082,13 @@
             if (fieldPanel && fieldPanel.is(':hidden')) {
                 fieldPanel.toggle();
                 var fieldPanelArrow = fieldPanel.prev().find('i');
-                fieldPanelArrow.toggleClass('icon-chevron-up icon-chevron-down');
+                fieldPanelArrow.toggleClass('fa-chevron-up fa-chevron-down');
             }
         } else if (field.$el.is(':hidden')) {
             this.$('.more[data-moreless]').trigger('click');
             app.user.lastState.set(this.SHOW_MORE_KEY, this.$('.less[data-moreless]'));
         }
-        else if(field.$el.closest('.panel_hidden.hide').length > 0) {
+        else if (field.$el.closest('.panel_hidden.hide').length > 0) {
             this.toggleMoreLess(this.MORE_LESS_STATUS.MORE, true);
         }
     },
@@ -863,6 +1110,16 @@
                 field.hide();
             }
         }, this);
+
+        this.toggleButtons(true);
+    },
+
+    /**
+     * Get the current button state.
+     * @return {string} The current button state
+     */
+    getCurrentButtonState: function() {
+        return this.currentState;
     },
 
     /**
@@ -917,7 +1174,7 @@
                 var keys = _.keys(field);
 
                 // Make filler fields readonly
-                if (keys.length === 1 && keys[0] === 'span')  {
+                if (keys.length === 1 && keys[0] === 'span') {
                     field.readonly = true;
                 }
 
@@ -978,7 +1235,7 @@
      * @param {String} actionType
      * @private
      */
-    _doPaginate: function(model, actionType){
+    _doPaginate: function(model, actionType) {
         var list = this.context.get('listCollection');
         switch (actionType) {
             case 'next':
@@ -1008,6 +1265,29 @@
             var el = this.$el.find('[data-action=scroll][data-action-type=' + actionType + ']');
             this._disablePagination(el);
         }
+    },
+
+    /**
+     * Updates url without triggering the router.
+     *
+     * @param {string} action Action to pass when building the route
+     *   with {@link Core.Router#buildRoute}.
+     */
+    setRoute: function(action) {
+        if (!this.meta.hashSync) {
+            return;
+        }
+        app.router.navigate(app.router.buildRoute(this.module, this.model.id, action), {trigger: false});
+    },
+
+    /**
+     * Unsets the `action` attribute from the current context.
+     *
+     * Once 'action' is unset, the action is 'detail' and the view will render
+     * next in detail mode.
+     */
+    unsetContextAction: function() {
+            this.context.unset('action');
     },
 
     /**
@@ -1075,19 +1355,22 @@
 
         $recordCells = this.$('.headerpane h1').children('.record-cell, .btn-toolbar');
 
-        if (!_.isEmpty($recordCells) && this.getContainerWidth() > 0) {
+        if (($recordCells.length > 0) && (this.getContainerWidth() > 0)) {
             $ellipsisCell = $(this._getCellToEllipsify($recordCells));
 
-            if (!_.isEmpty($ellipsisCell)) {
+            if ($ellipsisCell.length > 0) {
                 if ($ellipsisCell.hasClass('edit')) {
                     // make the ellipsis cell widen to 100% on edit
                     $ellipsisCell.css({'width': '100%'});
                 } else {
                     ellipsisCellWidth = this._calculateEllipsifiedCellWidth($recordCells, $ellipsisCell);
                     this._setMaxWidthForEllipsifiedCell($ellipsisCell, ellipsisCellWidth);
-                    this._widenLastCell($recordCells);
                 }
             }
+        }
+
+        if (this.layout) {
+            this.layout.trigger('headerpane:adjust_fields');
         }
     },
 
@@ -1146,27 +1429,7 @@
             width -= ellipsifiedCell.getCellPadding();
             ellipsifiedCell.setMaxWidth(width);
         } else {
-            $ellipsisCell.css({'max-width': width});
-        }
-    },
-
-    /**
-     * Widen the last cell to 100%.
-     * @param {jQuery} $cells
-     * @private
-     */
-    _widenLastCell: function($cells) {
-        var $cellToWiden;
-
-        _.each($cells, function(cell) {
-            var $cell = $(cell);
-            if ($cell.hasClass('record-cell') && (!$cell.hasClass('hide') || $cell.is(':visible'))) {
-                $cellToWiden = $cell;
-            }
-        });
-
-        if ($cellToWiden) {
-            $cellToWiden.css({'width': '100%'});
+            $ellipsisCell.children().css({'max-width': width});
         }
     },
 
@@ -1207,7 +1470,7 @@
             $panelHeader.toggleClass('panel-inactive panel-active');
         }
         if ($panelHeader && $panelHeader.find('i')) {
-            $panelHeader.find('i').toggleClass('icon-chevron-up icon-chevron-down');
+            $panelHeader.find('i').toggleClass('fa-chevron-up fa-chevron-down');
         }
         var panelName = this.$(e.currentTarget).parent().data('panelname');
         var state = 'collapsed';
@@ -1327,7 +1590,7 @@
         }, this);
 
         app.shortcuts.register('Record:Favorite', 'f a', function() {
-            this.$('.headerpane .icon-favorite:visible').click();
+            this.$('.headerpane .fa-favorite:visible').click();
         }, this);
 
         app.shortcuts.register('Record:Follow', 'f o', function() {
@@ -1345,5 +1608,20 @@
                 $primaryDropdown.click();
             }
         }, this);
+    },
+
+    /**
+     * Dismisses all {@link #_viewAlerts alerts} defined in this view.
+     *
+     * @protected
+     */
+    _dismissAllAlerts: function() {
+        if (_.isEmpty(this._viewAlerts)) {
+            return;
+        }
+        _.each(_.uniq(this._viewAlerts), function(alert) {
+            app.alert.dismiss(alert);
+        });
+        this._viewAlerts = [];
     }
 })

@@ -1,7 +1,5 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,19 +10,17 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-	
 
-$dashletStrings = array (
-  'JotPadDashlet' => 
-  array (
-    'LBL_CONFIGURE_HEIGHT' => '高度（1 - 300）',
-    'LBL_CONFIGURE_TITLE' => '标题',
-    'LBL_DBLCLICK_HELP' => '双击下面区域进入编辑',
-    'LBL_DEFAULT_TEXT' => '',
-    'LBL_DESCRIPTION' => '保留记录的新增栏',
-    'LBL_SAVED' => '已保存',
-    'LBL_SAVING' => '保存记事本中...',
-    'LBL_TITLE' => '记事本',
-  ),
+ // $Id: JotPadDashlet.en_us.lang.php 51719 2009-10-22 17:18:00Z mitani $
+
+$defaultText = "";
+$dashletStrings['JotPadDashlet'] = array('LBL_TITLE'            => 'JotPad',
+                                         'LBL_DESCRIPTION'      => '一个写笔记的 dashlet',
+                                         'LBL_SAVING'           => '保存 JotPad...',
+                                         'LBL_SAVED'            => '保存完毕',
+                                         'LBL_CONFIGURE_TITLE'  => '职称',
+                                         'LBL_CONFIGURE_HEIGHT' => '高 (1 - 300)',
+                                         'LBL_DBLCLICK_HELP'    => '双击下方即可编辑',
+                                         'LBL_DEFAULT_TEXT'     => $defaultText,
 );
-
+?>

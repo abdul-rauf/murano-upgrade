@@ -11,7 +11,7 @@
 /**
  * @class View.Fields.Base.EnumField
  * @alias SUGAR.App.view.fields.BaseEnumField
- * @extends View.Field
+ * @extends View.Fields.Base.BaseField
  */
 ({
     fieldTag: 'input.select2',
@@ -24,15 +24,6 @@
      * @property {String}
      */
     appendValueTag: 'input[name=append_value]',
-
-    /**
-     * Whether the value of this enum should be defaulted to the first item when model attribute is undefined
-     * Set to false to prevent this defaulting
-     */
-    defaultOnUndefined: true,
-
-    //For multi select, we replace the empty key by a temporary key because Select2 doesn't handle empty values well
-    BLANK_VALUE_ID: '___i_am_empty___',
 
     /**
      * Whether this field is in the midst of fetching options for its dropdown.
@@ -77,6 +68,48 @@
      */
     _keysOrder: null,
 
+    initialize: function(){
+        this._super("initialize", arguments);
+
+        //Reset the availible options based on the user's access and the model's values
+        if (_.isString(this.def.options)) {
+            var self = this;
+
+            this.listenTo(this.model, "sync", function(model){
+                var options = app.lang.getAppListStrings(self.def.options);
+                if (options) {
+                    self.items = self._filterOptions(options);
+                }
+            });
+        }
+
+        /**
+         * Property to add or not the `ellipsis_inline` class when rendering the
+         * field in the `list` template. `true` to add the class, `false`
+         * otherwise.
+         *
+         * Defaults to `true`.
+         *
+         * @property {boolean}
+         */
+        this.ellipsis = _.isUndefined(this.def.ellipsis) || this.def.ellipsis;
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Returns the direction of the field depending on the nature of the first
+     * option when the language direction is `rtl`.
+     */
+    direction: function() {
+        if (_.isEmpty(this.items) || app.lang.direction !== 'rtl') {
+            return;
+        }
+
+        var firstOption = _.values(this.items)[0];
+        return app.utils.isDirectionRTL(firstOption) ? 'rtl' : 'ltr';
+    },
+
     /**
      * Bind the additional keydown handler on select2
      * search element (affected by version 3.4.3).
@@ -118,9 +151,9 @@
     },
 
     /**
-     * @returns {Field} this
      * @override
-     * @private
+     * @protected
+     * @chainable
      */
     _render: function() {
         var self = this;
@@ -133,6 +166,8 @@
                 }
             });
             if (this.isFetchingOptions){
+                // Set loading message in place of empty DIV while options are loaded via API
+                this.$el.html(app.lang.get('LBL_LOADING'));
                 return this;
             }
         }
@@ -147,23 +182,10 @@
             }, this);
             this.items = obj;
         }
-        var optionsKeys = _.isObject(this.items) ? _.keys(this.items) : [];
-        //After rendering the dropdown, the selected value should be the value set in the model,
-        //or the default value. The default value fallbacks to the first option if no other is selected.
-        // if the user has write access to the model for the field we are currently on
-        if (this.defaultOnUndefined && !this.def.isMultiSelect && _.isUndefined(this.model.get(this.name))
-            && app.acl.hasAccessToModel('write', this.model, this.name)
-            ) {
-            var defaultValue = this._getDefaultOption(optionsKeys);
-            if (defaultValue) {
-                // call with {silent: true} on, so it won't re-render the field, since we haven't rendered the field yet
-                this.model.set(this.name, defaultValue, {silent: true});
-                //Forecasting uses backbone model (not bean) for custom enums so we have to check here
-                if (_.isFunction(this.model.setDefaultAttribute)) {
-                    this.model.setDefaultAttribute(this.name, defaultValue);
-                }
-            }
-        }
+        this.items = this._filterOptions(this.items);
+        var optionsKeys = _.isObject(this.items) ? _.keys(this.items) : [],
+            defaultValue = this._checkForDefaultValue(this.model.get(this.name), optionsKeys);
+
         app.view.Field.prototype._render.call(this);
         // if displaying the noaccess template, just exit the method
         if (this.tplName == 'noaccess') {
@@ -171,58 +193,90 @@
         }
         var select2Options = this.getSelect2Options(optionsKeys);
         var $el = this.$(this.fieldTag);
-        if (!_.isEmpty(optionsKeys)) {
-            //FIXME remove check for tplName SC-2608
-            if (this.tplName === 'edit' || this.tplName === 'list-edit' || this.tplName === 'massupdate') {
-                $el.select2(select2Options);
-                var plugin = $el.data('select2');
-                if (plugin && plugin.focusser) {
-                    plugin.focusser.on('select2-focus', _.bind(_.debounce(this.handleFocus, 0), this));
-                }
-                $el.select2("container").addClass("tleft");
-                $el.on('change', function(ev){
-                    var value = ev.val;
-                    if (_.isUndefined(value)) {
-                        return;
-                    }
-                    if(self.model && !(self.name == 'currency_id' && _.isUndefined(value))) {
-                        self.model.set(self.name, self.unformat(value));
-                        //Forecasting uses backbone model (not bean) for custom enums so we have to check here
-                        if (_.isFunction(self.model.removeDefaultAttribute)) {
-                            self.model.removeDefaultAttribute(self.name)
-                        }
+        //FIXME remove check for tplName SC-2608
+        if (this.tplName === 'edit' || this.tplName === 'list-edit' || this.tplName === 'massupdate') {
+            $el.select2(select2Options);
+            var plugin = $el.data('select2');
 
+            if (plugin && this.dir) {
+                plugin.container.attr('dir', this.dir);
+                plugin.results.attr('dir', this.dir);
+            }
+
+            if (plugin && plugin.focusser) {
+                plugin.focusser.on('select2-focus', _.bind(_.debounce(this.handleFocus, 0), this));
+            }
+            $el.on('change', function(ev) {
+                var value = ev.val;
+                if (_.isUndefined(value)) {
+                    return;
+                }
+                if (self.model) {
+                    self.model.set(self.name, self.unformat(value));
+                }
+            });
+            if (this.def.ordered) {
+                $el.select2('container').find('ul.select2-choices').sortable({
+                    containment: 'parent',
+                    start: function() {
+                        $el.select2('onSortStart');
+                    },
+                    update: function() {
+                        $el.select2('onSortEnd');
                     }
                 });
-                if (this.def.ordered) {
-                    $el.select2("container").find("ul.select2-choices").sortable({
-                        containment: 'parent',
-                        start: function() {
-                            $el.select2("onSortStart");
-                        },
-                        update: function() {
-                            $el.select2("onSortEnd");
-                        }
-                    });
-                }
-            } else if(this.tplName === 'disabled') {
-                $el.select2(select2Options);
-                $el.select2('disable');
             }
-            //Setup selected value in Select2 widget
-            if(!_.isUndefined(this.value)){
-                // To make pills load properly when autoselecting a string val
-                // from a list val needs to be an array
-                if (!_.isArray(this.value)) {
-                    this.value = [this.value];
-                }
-                $el.select2('val', this.value);
+        } else if (this.tplName === 'disabled') {
+            $el.select2(select2Options);
+            $el.select2('disable');
+        }
+        //Setup selected value in Select2 widget
+        if (!_.isUndefined(this.value)) {
+            // To make pills load properly when autoselecting a string val
+            // from a list val needs to be an array
+            if (!_.isArray(this.value)) {
+                this.value = [this.value];
             }
-        } else {
-            // Set loading message in place of empty DIV while options are loaded via API
-            this.$el.html(app.lang.get("LBL_LOADING"));
+            // Trigger the `change` event only if we automatically set the
+            // default value.
+            $el.select2('val', this.value, !!defaultValue);
         }
         return this;
+    },
+
+    /**
+     * Sets the model value to the default value if required
+     * @private
+     */
+    _checkForDefaultValue: function(currentValue, optionsKeys){
+
+        // Javascript keys function returns strings even if keys are numbers.  The parameter optionsKeys
+        // is obtained by _.keys() operation on an object. Even if the object keys were numeric originally,
+        // optionsKeys will be an array of strings. Hence we need to cast currentValue to a string
+        // for comparison sake.
+        if ((typeof currentValue !== 'undefined') && (currentValue !== null)) {
+            currentValue = currentValue.toString();
+        }
+
+        var action = this.action || this.view.action;
+        //After rendering the dropdown, the selected value should be the value set in the model,
+        //or the default value. The default value fallbacks to the first option if no other is selected
+        //or the selected value is not available in the list of items,
+        //if the user has write access to the model for the field we are currently on.
+        //This should be done only if available options are loaded, otherwise the value in model will be reset to
+        //default even if it's in available options but they are not loaded yet
+        if (!this.def.isMultiSelect
+            && !_.isEmpty(this.items)
+            && !(this.model.has(this.name) && optionsKeys.indexOf(currentValue) > -1)
+            && app.acl.hasAccessToModel('write', this.model, this.name)
+            && (action == 'edit' || action == 'create')
+        ) {
+            var defaultValue = this._getDefaultOption(optionsKeys);
+            //Forecasting uses backbone model (not bean) for custom enums so we have to check here
+            if (_.isFunction(this.model.setDefault)) {
+                this.model.setDefault(this.name, defaultValue);
+            }
+        }
     },
 
     /**
@@ -242,10 +296,11 @@
      * @param {Function} callback (optional) Called when enum options are available.
      */
     loadEnumOptions: function(fetch, callback) {
-        var self = this,
-            meta = app.metadata.getModule(this.module, 'fields'),
-            fieldMeta = meta && meta[this.name] ? meta[this.name] : this.def;
-        this.items = this.def.options || fieldMeta.options;
+        var self = this;
+        var _itemsKey = 'cache:' + this.module + ':' + this.name + ':items';
+
+        this.items = this.def.options || this.context.get(_itemsKey);
+
         fetch = fetch || false;
 
         if (fetch || !this.items) {
@@ -266,7 +321,7 @@
                         if(self.disposed) { return; }
                         if (self.items !== o) {
                             self.items = o;
-                            fieldMeta.options = self.items;
+                            self.context.set(_itemsKey, self.items);
                             self.context.unset(_key);
                             callback.call(self);
                         }
@@ -283,28 +338,18 @@
     /**
      * Helper function for generating Select2 options for this enum
      * @param {Array} optionsKeys Set of option keys that will be loaded into Select2 widget
-     * @returns {{}} Select2 options, refer to Select2 documentation for what each option means
+     * @return {Object} Select2 options, refer to Select2 documentation for what each option means
      */
     getSelect2Options: function(optionsKeys){
         var select2Options = {};
-        var emptyIdx = _.indexOf(optionsKeys, "");
-        if (emptyIdx !== -1) {
-            select2Options.allowClear = true;
-            // if the blank option isn't at the top of the list we have to add it manually
-            if (emptyIdx > 1) {
-                this.hasBlank = true;
-            }
-        }
+        select2Options.allowClear = _.indexOf(optionsKeys, "") >= 0;
+        select2Options.transformVal = _.identity;
 
         /* From http://ivaynberg.github.com/select2/#documentation:
          * Initial value that is selected if no other selection is made
          */
         if(!this.def.isMultiSelect) {
             select2Options.placeholder = app.lang.get("LBL_SEARCH_SELECT");
-        }
-        // Options are being loaded via app.api.enum
-        if(_.isEmpty(optionsKeys)){
-            select2Options.placeholder = app.lang.get("LBL_LOADING");
         }
 
         /* From http://ivaynberg.github.com/select2/#documentation:
@@ -365,6 +410,7 @@
     _initSelection: function($ele, callback){
         var data = [];
         var options = _.isString(this.items) ? app.lang.getAppListStrings(this.items) : this.items;
+        options = this.items = this._filterOptions(options);
         var values = $ele.val();
         if (this.def.isMultiSelect) {
             values = values.split(this.def.separator || ',');
@@ -377,6 +423,66 @@
         } else {
             callback(data);
         }
+    },
+
+    /**
+     * Returns dropdown list options which can be used for editing 
+     *
+     * @param {Object} Dropdown list options
+     * @return {Object}
+     * @private
+     */
+    _filterOptions: function (options) {
+        var currentValue,
+            syncedVal,
+            newOptions = {},
+            filter = app.metadata.getEditableDropdownFilter(this.def.options);
+
+        /**
+         * Flag to indicate that the options have already been filtered and do
+         * not need to be sorted.
+         *
+         * @type {boolean}
+         */
+        this.isFiltered = !_.isEmpty(filter);
+
+        if (!this.isFiltered) {
+            return options;
+        }
+
+        if (!_.contains(this.view.plugins, "Editable")) {
+            return options;
+        }
+        //Force the current value(s) into the availible options
+        syncedVal = this.model.getSynced();
+        currentValue = _.isUndefined(syncedVal[this.name]) ? this.model.get(this.name) : syncedVal[this.name];
+        if (_.isString(currentValue)) {
+            currentValue = [currentValue];
+        }
+
+        var currentIndex = {};
+
+        // add current values to the index in case if current model is saved to the server in order to prevent data loss
+        if (!this.model.isNew()) {
+            _.each(currentValue, function(value) {
+                currentIndex[value] = true;
+            });
+        }
+
+        //Now remove the disabled options
+        if (!this._keysOrder) {
+            this._keysOrder = {};
+        }
+        _.each(filter, function(val, index) {
+            var key = val[0],
+                visible = val[1];
+            if ((visible || key in currentIndex) && !_.isUndefined(options[key]) && options[key] !== false) {
+                this._keysOrder[key] = index;
+                newOptions[key] = options[key];
+            }
+        }, this);
+
+        return newOptions;
     },
 
     /**
@@ -428,7 +534,7 @@
      * @private
      */
     _sortResults: function(results, container, query) {
-        var keys, sortedResults;
+        var sortedResults;
 
         if (this.def.sort_alpha) {
             sortedResults = _.sortBy(results, function(item) {
@@ -437,37 +543,64 @@
             return sortedResults;
         }
 
-        if (!this._keysOrder) {
-            this._keysOrder = {};
-            keys = _.map(app.lang.getAppListKeys(this.def.options), function(key) {
-                return key.toString();
-            });
-            if (!_.isEqual(keys, _.keys(this.items))) {
-                _.each(keys, function(key, index) {
-                    return this._keysOrder[key] = index;
-                }, this);
-            }
+        // Do not sort if options have already been filtered; or if the key ordering is empty,
+        // we should not change the order as the options were generated by a function.
+        if (this.isFiltered && _.isEmpty(this._keysOrder)) {
+            return results;
         }
+
+        this._setupKeysOrder();
+        // If the key ordering is empty, we should not change the order as the options were generated by a function.
         if (_.isEmpty(this._keysOrder)) {
             return results;
         }
-        sortedResults = results;
-        // if it is not a dependency field (visibility_grid is not defined), we show the order from drop down list
+
+        // if it is not a dependency field (visibility_grid is not defined), we show the order from drop down list.
         if (!this.def.visibility_grid) {
             sortedResults = _.sortBy(results, function(item) {
                 return this._keysOrder[item.id];
             }, this);
+            return sortedResults;
         }
-        return sortedResults;
+
+        return results;
+    },
+
+    _setupKeysOrder: function() {
+        var keys, orderedKeys, filteredOrderedKeys;
+        if (!this._keysOrder) {
+            keys = _.keys(this.items);
+            this._keysOrder = {};
+            orderedKeys = _.map(app.lang.getAppListKeys(this.def.options), function(appListKey) {
+                return appListKey.toString();
+            });
+            filteredOrderedKeys = _.intersection(orderedKeys, keys);
+            if (!_.isEqual(filteredOrderedKeys, keys)) {
+                _.each(filteredOrderedKeys, function(key, index) {
+                    return this._keysOrder[key] = index;
+                }, this);
+            }
+        }
     },
 
     /**
      * Helper function for retrieving the default value for the selection
      * @param {Array} optionsKeys Set of option keys that will be loaded into Select2 widget
-     * @returns {String} The default value
+     * @return {string} The default value
      */
     _getDefaultOption: function (optionsKeys) {
-        return _.first(optionsKeys);
+        //  Return the default if it's available in the definition.
+        if (this.def && (!_.isEmptyValue(this.def.default)) ) {
+            return this.def.default;
+        } else {
+            this._setupKeysOrder();
+            var invertedKeysOrder = _.invert(this._keysOrder);
+            //Check if we have a keys order, and that the sets of keys match
+            if (!_.isEmpty(invertedKeysOrder) && _.isEmpty(_.difference(_.keys(this._keysOrder), optionsKeys))) {
+                return _.first(invertedKeysOrder);
+            }
+            return _.first(optionsKeys);
+        }
     },
 
     /**
@@ -476,14 +609,20 @@
      * @param value Value from select2 widget
      * @return {String|Array} Unformatted value as String or String Array
      */
-    unformat: function(value){
-        if (this.def.isMultiSelect && _.isArray(value) && _.indexOf(value, this.BLANK_VALUE_ID) > -1) {
-            value = _.clone(value);
-
-            // Delete empty values from the options array
-            delete value[this.BLANK_VALUE_ID];
+    unformat: function(value) {
+        if (this.def.isMultiSelect && _.isArray(value)) {
+            var possibleKeys = _.keys(this.items);
+            if (!this.def.ordered) {
+                // if it's not ordered, i.e. sortable, force order
+                value = _.intersection(possibleKeys, value);
+            } else {
+                // no need to force order, just keep valid keys
+                value = _.intersection(value, possibleKeys);
+            }
+            return value;
         }
-        if(this.def.isMultiSelect && _.isNull(value)){
+
+        if (this.def.isMultiSelect && _.isNull(value)) {
             return [];  // Returning value that is null equivalent to server.  Backbone.js won't sync attributes with null values.
         } else {
             return value;
@@ -527,7 +666,7 @@
     },
 
     /**
-     * {@inheritDoc}
+     * @inheritdoc
      * Avoid rendering process on select2 change in order to keep focus.
      */
     bindDataChange: function() {
@@ -536,7 +675,7 @@
                 if (_.isEmpty(this.$(this.fieldTag).data('select2'))) {
                     this.render();
                 } else {
-                    this.$(this.fieldTag).select2('val', this.model.get(this.name));
+                    this.$(this.fieldTag).select2('val', this.format(this.model.get(this.name)));
                 }
             }, this);
         }
@@ -557,6 +696,7 @@
                 this.model.set(this.name + '_replace', this.appendValue ? '1' : '0');
             }, this));
         }
+
     },
 
     /**

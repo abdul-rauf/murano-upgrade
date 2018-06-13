@@ -55,8 +55,9 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
      * @param string $moduleName     The name of the module to which this view belongs
      * @param string $packageName    If not empty, the name of the package to which this view belongs
      * @param string $client         The client making the request for this parser
+     * @param array  $params         Additional parser parameters
      */
-    function __construct ($view , $moduleName , $packageName = '', $client = '')
+    public function __construct($view, $moduleName, $packageName = '', $client = '', array $params = array())
     {
         $GLOBALS [ 'log' ]->debug ( get_class ( $this ) . "->__construct( {$view} , {$moduleName} , {$packageName} )" ) ;
 
@@ -73,7 +74,7 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
         if (empty ( $packageName ))
         {
             require_once 'modules/ModuleBuilder/parsers/views/DeployedMetaDataImplementation.php' ;
-            $this->implementation = new DeployedMetaDataImplementation($view, $moduleName, $client);
+            $this->implementation = new DeployedMetaDataImplementation($view, $moduleName, $client, $params);
         } else
         {
             require_once 'modules/ModuleBuilder/parsers/views/UndeployedMetaDataImplementation.php' ;
@@ -100,7 +101,8 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
 
         $this->_fielddefs =  $this->implementation->getFielddefs() ;
         $this->_standardizeFieldLabels( $this->_fielddefs );
-        $this->_viewdefs [ 'panels' ] = $this->_convertFromCanonicalForm ( $this->_viewdefs [ 'panels' ] , $this->_fielddefs ) ; // put into our internal format
+        // put into our internal format
+        $this->_viewdefs['panels'] = $this->_convertFromCanonicalForm($this->_viewdefs['panels']);
         $this->_originalViewDef = $this->getFieldsFromLayout($this->implementation->getOriginalViewdefs ());
         $this->baseViewFields = $this->getFieldsFromLayout($this->implementation->getBaseViewdefs());
 
@@ -761,7 +763,7 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
      * Convert from the standard MetaData format to our internal format
      * Replace NULL with (filler) and missing entries with (empty)
      */
-    protected function _convertFromCanonicalForm ( $panels , $fielddefs )
+    protected function _convertFromCanonicalForm($panels)
     {
         if (empty ( $panels ))
             return ;
@@ -1000,9 +1002,9 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
      * @param  $fielddefs
      * @return array
      */
-    public function convertFromCanonicalForm ( $panels , $fielddefs )
+    public function convertFromCanonicalForm($panels)
     {
-        return $this->_convertFromCanonicalForm ( $panels , $fielddefs );
+        return $this->_convertFromCanonicalForm($panels);
     }
 
      /**

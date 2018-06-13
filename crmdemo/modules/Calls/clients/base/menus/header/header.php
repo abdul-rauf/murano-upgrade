@@ -14,23 +14,18 @@
 $moduleName = 'Calls';
 $viewdefs[$moduleName]['base']['menu']['header'] = array(
     array(
-        'route' => '#bwc/index.php?' . http_build_query(
-            array(
-                'module' => $moduleName,
-                'action' => 'EditView',
-            )
-        ),
+        'route' => "#{$moduleName}/create",
         'label' => 'LNK_NEW_CALL',
         'acl_action' => 'create',
         'acl_module' => $moduleName,
-        'icon' => 'icon-plus',
+        'icon' => 'fa-plus',
     ),
     array(
-        'route' => '#' . $moduleName,
+        'route' => "#{$moduleName}",
         'label' => 'LNK_CALL_LIST',
         'acl_action' => 'list',
         'acl_module' => $moduleName,
-        'icon' => 'icon-reorder',
+        'icon' => 'fa-bars',
     ),
     array(
         'route' => '#bwc/index.php?' . http_build_query(
@@ -45,7 +40,7 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' => 'LNK_IMPORT_CALLS',
         'acl_action' => 'import',
         'acl_module' => $moduleName,
-        'icon' => 'icon-upload',
+        'icon' => 'fa-arrow-circle-o-up',
     ),
     array(
         'route' => '#bwc/index.php?' . http_build_query(
@@ -58,6 +53,6 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'label' => 'LBL_ACTIVITIES_REPORTS',
         'acl_action' => 'list',
         'acl_module' => 'Reports',
-        'icon' => 'icon-bar-chart',
+        'icon' => 'fa-bar-chart-o',
     ),
 );

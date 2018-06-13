@@ -12,10 +12,12 @@ if (!defined('sugarEntry') || !sugarEntry) {
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 require_once('include/externalAPI/Base/OAuthPluginBase.php');
 require_once('include/externalAPI/Base/WebFeed.php');
 require_once 'include/SugarQuery/SugarQuery.php';
 require_once('include/SugarCache/SugarCache.php');
+require_once('include/externalAPI/Dnb/DnbCurlWrapper.php');
 
 class ExtAPIDnb extends ExternalAPIBase
 {
@@ -27,11 +29,8 @@ class ExtAPIDnb extends ExternalAPIBase
     private $dnbAuthURL = "rest/Authentication";
     //OrderReasonCode is a parameter required to fetch Firmographic info for all companies
     //if this is not set, API calls for companies in Germany will fail
-    private $dnbFirmographicURL = "V2.0/organizations/%s/products/%s?OrderReasonCode=6332";
-    private $dnbFirmoLiteURL = "V2/organizations/%s/products/CST_PRD_1";
-    private $dnbStandardSearch = "V2.0/organizations/%s/products/DCP_STD";
-    private $dnbPremiumSearch = "V2.0/organizations/%s/products/DCP_PREM";
-    private $dnbLiteSearchURL = "V2/organizations/%s/products/CST_PRD_1?CountryISOAlpha2Code=US";
+    private $dnbFirmographicURL = "V3.2/organizations/%s/products/%s?OrderReasonCode=6332";
+    private $dnbFirmoLiteURL = "V3.2/organizations/%s/products/DCP_BAS?OrderReasonCode=6332";
     private $dnbCompetitorsURL = "V4.0/organizations/%s/competitors";
     private $dnbIndustryURL = "V3.0/industries/industrycode-%s/IND_STD";
     private $dnbFinancialURL = "V3.0/organizations/%s/products/FIN_HGLT";
@@ -41,12 +40,13 @@ class ExtAPIDnb extends ExternalAPIBase
     private $dnbBALContactURL = "V6.0/organizations?SearchModeDescription=Advanced&findcontact=true&";
     private $dnbFindIndustryURL = "V4.0/industries?KeywordText=%s&findindustry=true";
     private $dnbFindContactsURL = "V4.0/organizations?findcontact=true&DUNSNumber-1=%s&SearchModeDescription=Advanced";
-    private $dnbContactDetPremURL = "V3.0/organizations/%s/products/CNTCT_PLUS?PrincipalIdentificationNumber=%s";
-    private $dnbContactDetStdURL = "V3.0/organizations/%s/products/CNTCT?PrincipalIdentificationNumber=%s";
+    private $dnbContactDetPremURL = "V3.0/organizations/%s/products/CNTCT_PLUS?PrincipalIdentificationNumber=%s&OrderReasonCode=6332";
+    private $dnbContactDetStdURL = "V3.0/organizations/%s/products/CNTCT?PrincipalIdentificationNumber=%s&OrderReasonCode=6332";
     private $dnbNewsURL = "V3.0/organizations/%s/products/NEWS_MDA";
     private $dnbIndustryConversionURL = "V4.0/industries?IndustryCode-1=%s&ReturnOnlyPremiumIndustryIndicator=true&IndustryCodeTypeCode-1=%s&findindustry=true";
     private $dnbRefreshCheckURL = "V4.0/organizations?refresh=refresh&DunsNumber-1=%s";
     private $dnbContactsBALURL = "V6.0/organizations?CandidateMaximumQuantity=1000&findcontact=true&SearchModeDescription=Advanced";
+    private $dnbMeterURL = "V3.0/meterinformation";
     private $dnbApplicationId;
     private $dnbUsername;
     private $dnbPassword;
@@ -55,9 +55,9 @@ class ExtAPIDnb extends ExternalAPIBase
     private $cacheTTL = 8640000;
     public $supportedModules = array();
     /**
-     * @var resource curl handle
+     * @var resource curl wrapper
      */
-    private $curlHandle;
+    private $curlWrapper;
 
     //commonly used json paths
     private $familyTreePaths = array(
@@ -81,12 +81,28 @@ class ExtAPIDnb extends ExternalAPIBase
 
     function __construct()
     {
+        $this->contactModules = array('Contacts','Leads','Prospects');
+        $this->logger = LoggerManager::getLogger();
+        $this->setCurlWrapper(new DnbCurlWrapper());
+        $this->loadConnectionCredentials();
+    }
+
+    private function loadConnectionCredentials()
+    {
         $this->dnbUsername = trim($this->getConnectorParam('dnb_username'));
         $this->dnbPassword = trim($this->getConnectorParam('dnb_password'));
         $this->dnbEnv = trim($this->getConnectorParam('dnb_env'));
-        $this->contactModules = array('Contacts','Leads','Prospects');
-        $this->logger = LoggerManager::getLogger();
     }
+
+    /**
+     * Set the curlWrapper property
+     * @param DnbCurlWrapper $dnbCurlWrapper
+     */
+    public function setCurlWrapper(DnbCurlWrapper $dnbCurlWrapper)
+    {
+        $this->curlWrapper = $dnbCurlWrapper;
+    }
+
 
     /**
      * Checks cache for cached response else invoke api using makeRequest
@@ -116,8 +132,6 @@ class ExtAPIDnb extends ExternalAPIBase
     }
 
     /**
-            //send error
-            return array('error' => 'ERROR_BAD_REQUEST');
      * Checks when the duns_num was last refreshed
      * @param $duns_num unique identifier for a company
      * @return jsonarray
@@ -147,61 +161,6 @@ class ExtAPIDnb extends ExternalAPIBase
             return $reply;
         }
         return $reply['responseJSON'];
-    }
-
-    /**
-     * Gets Lite Company Information for a D-U-N-S
-     * @param $duns_num unique identifier for a company
-     * @return jsonarray
-     */
-    public function dnbLiteProfile($duns_num)
-    {
-        //dnb profile standard
-        $cache_key = 'dnb.prof_lite.' . $duns_num;
-        $dnbendpoint = $this->dnbBaseURL[$this->dnbEnv] . sprintf($this->dnbLiteSearchURL, $duns_num);
-        //check if result exists in cache
-        $reply = $this->dnbServiceRequest($cache_key, $dnbendpoint, 'GET');
-        return $reply['responseJSON'];
-    }
-
-    /**
-     * Gets Standard Company Information for a D-U-N-S
-     * @param $duns_num unique identifier for a company
-     * @return jsonarray
-     */
-    public function dnbStandardProfile($duns_num)
-    {
-        //dnb profile standard
-        $cache_key = 'dnb.prof_std.' . $duns_num;
-        $dnbendpoint = $this->dnbBaseURL[$this->dnbEnv] . sprintf($this->dnbStandardSearch, $duns_num);
-        //check if result exists in cache
-        $reply = $this->dnbServiceRequest($cache_key, $dnbendpoint, 'GET');
-        return $reply['responseJSON'];
-    }
-
-    /**
-     * Gets Premium Company Information for a D-U-N-S
-     * @param $duns_num unique identifier for a company
-     * @return jsonarray
-     */
-    public function dnbPremiumProfile($duns_num)
-    {
-        //dnb profile premium
-        $cache_key = 'dnb.prof_prem.' . $duns_num;
-        $dnbendpoint = $this->dnbBaseURL[$this->dnbEnv] . sprintf($this->dnbPremiumSearch, $duns_num);
-        //check if result exists in cache
-        $reply = $this->dnbServiceRequest($cache_key, $dnbendpoint, 'GET');
-        return $reply['responseJSON'];
-    }
-
-    /**
-     * Gets Company Firmographic Information Based on DUNS number
-     * @param $duns_num
-     * @return jsonarray
-     */
-    public function dnbProfile($duns_num)
-    {
-        return $this->dnbStandardProfile($duns_num);
     }
 
     /**
@@ -240,6 +199,21 @@ class ExtAPIDnb extends ExternalAPIBase
         $dnbendpoint = $this->dnbBaseURL[$this->dnbEnv] . sprintf($this->dnbFinancialURL, $duns_num);
         //check if result exists in cache
         $reply = $this->dnbServiceRequest($cache_key, $dnbendpoint, 'GET');
+        return $reply['responseJSON'];
+    }
+
+    /**
+     * Gets D&B API Usage
+     * @return jsonarray
+     */
+    public function dnbMeterInfo()
+    {
+        $dnbendpoint = $this->dnbBaseURL[$this->dnbEnv] . $this->dnbMeterURL;
+        $reply = $this->makeRequest('GET', $dnbendpoint);
+        if (!$reply['success']) {
+            $this->logger->error('DNB failed, reply said: ' . print_r($reply, true));
+            return array('error' => 'ERROR_DNB_CONFIG');
+        }
         return $reply['responseJSON'];
     }
 
@@ -510,7 +484,7 @@ class ExtAPIDnb extends ExternalAPIBase
         $prod_code = $firmoParams['prod_code'];
         //dnb firmographic
         $cache_key = 'dnb.' . $duns_num . '.' . $prod_code;
-        if ($prod_code === 'CST_PRD_1') {
+        if ($prod_code === 'DCP_BAS') {
             $dnbendpoint = $this->dnbBaseURL[$this->dnbEnv] . sprintf($this->dnbFirmoLiteURL, $duns_num);
         } else {
             $dnbendpoint = $this->dnbBaseURL[$this->dnbEnv] . sprintf(
@@ -742,10 +716,13 @@ class ExtAPIDnb extends ExternalAPIBase
      * @return string An authenticated token or null if authenticated token was unattainable
      */
     private function getRecentToken() {
-        $dnbToken = !empty($_SESSION[$this->dnbEnv . 'dnbToken']) ?
-            $_SESSION[$this->dnbEnv . 'dnbToken'] : null;
-        $dnbTokenIssueTime = !empty($_SESSION[$this->dnbEnv . 'dnbTokenIssueTime']) ?
-            $_SESSION[$this->dnbEnv . 'dnbTokenIssueTime'] : null;
+        global $current_user;
+
+        // Get the token information from the EAPM bean
+        $eapm =  $this->getEAPMForUser($current_user);
+        $dnbToken = $eapm->tokenValue;
+        $dnbTokenIssueTime = $eapm->tokenIssueTime;
+
         //check if token has expired
         $dnbToken = $this->checkToken($dnbToken, $dnbTokenIssueTime);
         return $dnbToken;
@@ -753,12 +730,14 @@ class ExtAPIDnb extends ExternalAPIBase
 
     /**
      * Check if a valid token was procurable
+     *
+     * @param boolean $save Flag that tells the connector whether to save the token
      * @return boolean True if token was procurable, false if not
      */
-    public function checkTokenValidity()
+    public function checkTokenValidity($save = true)
     {
-        $dnbToken = $this->getAuthenticationToken();
-        return isset($dnbToken);
+        $dnbToken = $this->getAuthenticationToken($save);
+        return !empty($dnbToken);
     }
 
     /**
@@ -814,23 +793,8 @@ class ExtAPIDnb extends ExternalAPIBase
             CURLINFO_HEADER_OUT => false,
             CURLOPT_CUSTOMREQUEST => $requestMethod
         );
-        /* CURL SET PROXY CONFIG USING SUGAR SYSTEM SETTINGS */
-        $proxy_config = Administration::getSettings('proxy');
-        if (!empty($proxy_config) &&
-            !empty($proxy_config->settings['proxy_on']) &&
-            $proxy_config->settings['proxy_on'] === 1) {
-            $curl_options[CURLOPT_PROXY] = $proxy_config->settings['proxy_host'];
-            $curl_options[CURLOPT_PROXYPORT] = $proxy_config->settings['proxy_port'];
-            if (!empty($proxy_settings['proxy_auth'])) {
-                $curl_options[CURLOPT_PROXYUSERPWD] = $proxy_settings['proxy_username'] . ':' . $proxy_settings['proxy_password'];
-            }
-        }
-        if (empty($this->curlHandle)) {
-            $this->curlHandle = curl_init();
-        }
-        curl_setopt_array($this->curlHandle, $curl_options);
-        $response = curl_exec($this->curlHandle);
-        $httpStatus = curl_getinfo($this->curlHandle, CURLINFO_HTTP_CODE);
+
+        $response = $this->curlWrapper->execute($curl_options);
         //logging information in debug mode
         if ($this->logger->wouldLog('debug')) {
             if (!empty($requestHeaders) && count($requestHeaders) > 0) {
@@ -841,9 +805,9 @@ class ExtAPIDnb extends ExternalAPIBase
             $this->logger->debug("url: $url");
             $this->logger->debug("HTTP client response: $response");
         }
-        if ($response === false) {
-            $curl_errno = curl_errno($this->curlHandle);
-            $curl_error = curl_error($this->curlHandle);
+        if ($response['curlResponse'] === false) {
+            $curl_errno = $this->curlWrapper->getErrorNo();
+            $curl_error = $this->curlWrapper->getError();
             if (isset($curl_errno) && isset($curl_error)) {
                 $this->logger->error("HTTP client: cURL call failed: error $curl_errno: $curl_error");
                 return array('error' => 'ERROR_CURL_' . $curl_errno);
@@ -852,7 +816,7 @@ class ExtAPIDnb extends ExternalAPIBase
                 return array('error' => 'ERROR_CURL_UNKNOWN');
             }
         }
-        return array('httpStatus' => $httpStatus, 'curlResponse' => $response);
+        return $response;
     }
 
     /**
@@ -885,11 +849,21 @@ class ExtAPIDnb extends ExternalAPIBase
     }
 
     /**
-     * Return new DNB Authentication to access DNB api. Return null if authentication could not be verified
+     * Return new DNB Authentication to access DNB api. Return null if
+     * authentication could not be verified
+     *
+     * @param boolean $save Flag that tells the connector whether to save the token
      * @return string token if valid token found, null otherwise
      */
-    private function getAuthenticationToken()
+    private function getAuthenticationToken($save = true)
     {
+        global $current_user;
+
+        // In test, these values will be set AFTER contruction, so load them now
+        if ($this->inTest || empty($this->dnbUsername) || empty($this->dnbPassword)) {
+            $this->loadConnectionCredentials();
+        }
+
         $username = $this->dnbUsername;
         $password = $this->dnbPassword;
         $curl_headers = array(
@@ -916,9 +890,61 @@ class ExtAPIDnb extends ExternalAPIBase
                     return null;
                 }
             }
-            $_SESSION[$this->dnbEnv . 'dnbTokenIssueTime'] = time();
-            $_SESSION[$this->dnbEnv . 'dnbToken'] = $token;
+
+            // Save the token information if we are supposed to
+            if ($save === true) {
+                $eapm = $this->getEAPMForUser($current_user);
+                $eapm->api_data = base64_encode(json_encode(
+                    array(
+                        "tokenIssueTime" => time(),
+                        "tokenValue" => $token,
+                    )
+                ));
+                $eapm->save();
+            }
+
+            // Send it back
             return $token;
+        }
+    }
+
+    /**
+     * Gets the EAPM bean for the user and this connector
+     *
+     * @param User $user A User object
+     * @return EAPM
+     */
+    protected function getEAPMForUser($user)
+    {
+        // In any case we will need the EAPM bean
+        $seed = BeanFactory::getBean("EAPM");
+
+        // Setup our query to get what we need from the EAPM bean
+        $sq = new SugarQuery();
+        $sq->from($seed)
+           ->where()
+           ->equals('assigned_user_id', $user->id)
+           ->equals('application', $this->connector);
+
+        // Run the query and get the first result
+        $eapm = current($seed->fetchFromQuery($sq, array('api_data')));
+        if ($eapm) {
+            if (!empty($eapm->api_data)) {
+                // Get the decoded EAPM data for this connector and load it on
+                // the fetched bean as properties
+                $data = json_decode(base64_decode($eapm->api_data));
+                foreach($data as $key => $val) {
+                    $eapm->$key = $val;
+                }
+            }
+
+            // Send back this bean
+            return $eapm;
+        } else {
+            // No EAPM... load the basics and send it back
+            $seed->assigned_user_id = $user->id;
+            $seed->application = $this->connector;
+            return $seed;
         }
     }
 
@@ -1117,5 +1143,48 @@ class ExtAPIDnb extends ExternalAPIBase
             $list = $this->getCommonRecords($list, $existingIdsArray, $listKey, $moduleKey);
         }
         return $list;
+    }
+
+    /**
+     * Bulk imports D&B data
+     * @param $module String (Accounts)
+     * @param $bulkArray
+     * @return array
+     */
+    public function dnbBulkImport($module, $bulkArray)
+    {
+        if($module !== 'Accounts') {
+            return array('error' => 'ERROR_INVALID_MODULE_NAME');
+        }
+        $importSuccess = 0;
+        $duplicates = 0;
+        $results = null;
+        //loop through the array of dnbObjects to be imported
+        foreach($bulkArray as $dnbObj) {
+            $bean = BeanFactory::getBean($module);
+            //set bean data
+            foreach($dnbObj as $key => $value) {
+                $bean->{$key} = $dnbObj[$key];
+            }
+            //check for duplicates
+            //retrieve possible duplicates
+            $results = $bean->findDuplicates();
+            $duplicateRecordCount = 0;
+            if (!empty($results['records'])) {
+                $duplicateRecordCount = count($results['records']);
+            }
+            if ($duplicateRecordCount === 0) {
+                $bean->save();
+                $importSuccess++;
+            } else {
+                //counter for duplicates
+                $duplicates++;
+            }
+        }
+        //importInforrmation contains info about count of records succesfully imported
+        // and # of duplicates imported
+        return array('importSuccess' => $importSuccess,
+            'duplicates' => $duplicates
+        );
     }
 }

@@ -314,108 +314,6 @@ class Product extends SugarBean
 
         $id = parent::save($check_notify);
 
-        // We need to update the associated product bundle and quote totals that might be impacted by this product.
-
-        if (isset($id) && $this->ignoreQuoteSave === false) {
-            $tax_rate = 0.00;
-            $query = "select * from quotes INNER JOIN taxrates on quotes.taxrate_id=taxrates.id where quotes.id='" . $this->quote_id . "' and quotes.deleted=0 and taxrates.deleted=0";
-            $result = $this->db->query($query);
-            if ($row = $this->db->fetchByAssoc($result)) {
-                $tax_rate = $row['value'] / 100;
-                $shipping_usdollar = is_numeric($row['shipping_usdollar']) ? $row['shipping_usdollar'] : 0.00;
-            }
-            $query = "select product_bundles.id as bundle_id from product_bundle_product" .
-                " INNER JOIN product_bundles on product_bundles.id=product_bundle_product.bundle_id" .
-                " where product_bundle_product.deleted=0 AND product_bundle_product.product_id='" . $id . "' AND product_bundles.deleted=0";
-            $result = $this->db->query($query);
-            if ($row = $this->db->fetchByAssoc($result)) {
-                $bundle_id = $row['bundle_id'];
-                $query = "select shipping_usdollar from product_bundles where id='" . $bundle_id . "' and deleted=0";
-                $result = $this->db->query($query);
-                if ($row = $this->db->fetchByAssoc($result)) {
-                    $shipping_usdollar = is_numeric($row['shipping_usdollar']) ? $row['shipping_usdollar'] : 0.00;
-                }
-                $query = "select * from product_bundle_product where bundle_id='" . $bundle_id . "' and deleted=0";
-                $result = $this->db->query($query);
-                $new_sub_usdollar = 0.00;
-                $deal_tot_usdollar = 0.00;
-                $deal_tot = 0.00;
-                $new_sub = 0.00;
-                $subtotal_usdollar = 0.00;
-                $tax_usdollar = 0.00;
-                $total_usdollar = 0.00;
-                if ($row = $this->db->fetchByAssoc($result)) {
-                    while ($row != null) {
-                        $product = BeanFactory::getBean('Products');
-                        $product->id = $row['product_id'];
-                        $product->retrieve();
-                        $subtotal_usdollar += $product->discount_usdollar * $product->quantity;
-
-                        if (isset($this->discount_select) && $this->discount_select) {
-                            $deal_tot_usdollar += ($product->discount_amount / 100) * $product->discount_usdollar * $product->quantity;
-                        } else {
-                            $deal_tot_usdollar += $product->discount_amount;
-                        }
-                        $new_sub_usdollar = $subtotal_usdollar - $deal_tot_usdollar;
-                        if ($product->tax_class == 'Taxable') {
-                            $tax_usdollar += ($product->discount_usdollar * $product->quantity) * $tax_rate;
-
-                        }
-                        $row = $this->db->fetchByAssoc($result);
-                    }
-                    $total_usdollar += $new_sub_usdollar + $tax_usdollar + $shipping_usdollar;
-
-                    /** @var $currency Currency */
-                    $currency = BeanFactory::getBean('Currencies');
-
-                    $total = SugarCurrency::convertWithRate($total_usdollar, '1.0', $this->base_rate);
-                    $subtotal = SugarCurrency::convertWithRate($subtotal_usdollar, '1.0', $this->base_rate);
-                    $new_sub = SugarCurrency::convertWithRate($new_sub_usdollar, '1.0', $this->base_rate);
-                    $tax = SugarCurrency::convertWithRate($tax_usdollar, '1.0', $this->base_rate);
-                    $deal_tot = SugarCurrency::convertWithRate($deal_tot_usdollar, '1.0', $this->base_rate);
-                    $updateQuery = "update product_bundles set tax=" . $tax . ",tax_usdollar=" . $tax_usdollar . ",total=" . $total . ",deal_tot_usdollar=" . $deal_tot_usdollar . ",deal_tot=" . $deal_tot . ",total_usdollar=" . $total_usdollar .
-                        ",new_sub=" . $new_sub . ",new_sub_usdollar=" . $new_sub_usdollar . ",subtotal=" . $subtotal .
-                        ",subtotal_usdollar=" . $subtotal_usdollar . " where id='" . $bundle_id . "'";
-                    $result = $this->db->query($updateQuery);
-                    //Update the Grand Total for the Quote
-                    $subtotal_usdollar = 0.00;
-                    $tax_usdollar = 0.00;
-                    $total_usdollar = 0.00;
-                    $shipping_usdollar = 0.00;
-                    $new_sub_usdollar = 0.00;
-                    $query = "select sum(product_bundles.total_usdollar) as total_usdollar,sum(product_bundles.subtotal_usdollar) as subtotal_usdollar,sum(product_bundles.new_sub_usdollar) as new_sub_usdollar,sum(product_bundles.deal_tot_usdollar) as deal_tot_usdollar,sum(product_bundles.tax_usdollar) as tax_usdollar," .
-                        "sum(product_bundles.shipping_usdollar) as shipping_usdollar from product_bundle_quote INNER JOIN product_bundles on " .
-                        "product_bundles.id=product_bundle_quote.bundle_id where product_bundle_quote.quote_id='" . $this->quote_id . "' " .
-                        "and product_bundle_quote.deleted=0 and product_bundles.deleted=0";
-                    $result = $this->db->query($query);
-                    if ($row = $this->db->fetchByAssoc($result)) {
-                        /*
-                        while ($row != null) {
-                            $subtotal_usdollar += $row['subtotal_usdollar'];
-                            $tax_usdollar += $row['tax_usdollar'];
-                            $shipping_usdollar += $row['shipping_usdollar'];
-                            $row =  $this->db->fetchByAssoc($result);
-                        }*/
-                        $shipping_usdollar = is_numeric($row['shipping_usdollar']) ? $row['shipping_usdollar'] : 0.00;
-                        $subtotal_usdollar = is_numeric($row['subtotal_usdollar']) ? $row['subtotal_usdollar'] : 0.00;
-                        $deal_tot_usdollar = is_numeric($row['deal_tot_usdollar']) ? $row['deal_tot_usdollar'] : 0.00;
-                        $new_sub_usdollar = is_numeric($row['new_sub_usdollar']) ? $row['new_sub_usdollar'] : 0.00;
-                        $tax_usdollar = is_numeric($row['tax_usdollar']) ? $row['tax_usdollar'] : 0.00;
-                        $total_usdollar += $row['new_sub_usdollar'] + $row['tax_usdollar'] + $shipping_usdollar;
-                        $total = SugarCurrency::convertWithRate($total_usdollar, '1.0', $this->base_rate);
-                        $subtotal = SugarCurrency::convertWithRate($subtotal_usdollar, '1.0', $this->base_rate);
-                        $deal_tot_usdollar = $deal_tot_usdollar;
-                        $deal_tot = SugarCurrency::convertWithRate($deal_tot_usdollar, '1.0', $this->base_rate);
-                        $new_sub = SugarCurrency::convertWithRate($new_sub_usdollar, '1.0', $this->base_rate);
-                        $tax = SugarCurrency::convertWithRate($tax_usdollar, '1.0', $this->base_rate);
-                        $updateQuery = "update quotes set tax=" . $tax . ",tax_usdollar=" . $tax_usdollar . ",total=" . $total . ",total_usdollar=" . $total_usdollar . ",deal_tot=" . $deal_tot . ",deal_tot_usdollar=" . $deal_tot_usdollar . ",new_sub=" . $new_sub . ",new_sub_usdollar=" . $new_sub_usdollar . ",subtotal=" . $subtotal .
-                            ",subtotal_usdollar=" . $subtotal_usdollar . " where id='" . $this->quote_id . "'";
-                        $result = $this->db->query($updateQuery);
-                    }
-                }
-            }
-        }
-
         return $id;
 	}
 
@@ -556,7 +454,7 @@ class Product extends SugarBean
 
 
         // since we don't have a likely_case on products,
-        if ($rli->likely_case == '0.00') {
+        if ($rli->likely_case == '0.00' || empty($rli->likely_case)) {
             //undo bad math from quotes.
             $rli->likely_case = $this->total_amount;
         }
@@ -625,6 +523,43 @@ class Product extends SugarBean
             }
         }
         
+
+    }
+
+    /**
+     * Bean specific logic for when SugarFieldCurrency_id::save() is called to make sure we can update the base_rate
+     *
+     * @return bool
+     */
+    public function updateCurrencyBaseRate()
+    {
+        // if we are in the quote save, ignore this as it's a new record
+        // and it's not linked yet, so we need to keep the base_rate set from the quote.
+        if ($this->ignoreQuoteSave) {
+            return false;
+        }
+        // need to go though product bundles
+        $this->load_relationship('product_bundles');
+        // grab the first and only one
+        $bundle = array_pop($this->product_bundles->getBeans());
+
+        // make sure we have a bundle
+        if (empty($bundle)) {
+            return true;
+        }
+
+        // load the bundle -> quotes relationship
+        $bundle->load_relationship('quotes');
+
+        // get the beans
+        $quote = array_pop($bundle->quotes->getBeans());
+
+        if (empty($quote)) {
+            return true;
+        }
+
+        // if the quote is not closed, we should update the base rate
+        return !$quote->isClosed();
 
     }
 }

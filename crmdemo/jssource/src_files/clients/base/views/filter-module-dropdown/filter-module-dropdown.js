@@ -41,30 +41,28 @@
      */
     _render: function() {
         this._super('_render');
-
-        if (this.layout.showingActivities) {
-            this.filterList = this.getModuleListForActivities();
-        } else if (this.layout.layoutType === "record") {
-            this.filterList = this.getModuleListForSubpanels();
-        } else {
-            this.$el.hide();
-            return this;
-        }
-
-        this._renderDropdown(this.filterList);
+        this._renderDropdown();
     },
 
     /**
      * Render select2 dropdown
      * @private
      */
-    _renderDropdown: function(data) {
+    _renderDropdown: function() {
         var self = this;
+
+        this.filterList = this.getFilterList();
+
+        // Hide the dropdown if filterList has not been specified.
+        if (!this.filterList) {
+            this.$el.hide();
+            return;
+        }
 
         this.filterNode = this.$(".related-filter");
 
         this.filterNode.select2({
-            data: data,
+            data: this.filterList,
             multiple: false,
             minimumResultsForSearch: 7,
             formatSelection: _.bind(this.formatSelection, this),
@@ -79,7 +77,7 @@
         });
 
         // Disable the module filter dropdown.
-        if (this.layout.layoutType !== "record" || this.layout.showingActivities) {
+        if (this.shouldDisableFilter()) {
             this.filterNode.select2("disable");
         }
 
@@ -99,22 +97,40 @@
     },
 
     /**
+     * Get the list for filter module dropdown.
+     * @return {Object}
+     */
+    getFilterList: function() {
+        var filterList;
+
+        if (this.layout.showingActivities) {
+            filterList = this.getModuleListForActivities();
+        } else if (this.layout.layoutType === "record") {
+            filterList = this.getModuleListForSubpanels();
+        }
+
+        return filterList;
+    },
+
+    /**
+     * Should the filter be disabled?
+     * @return {boolean}
+     */
+    shouldDisableFilter: function() {
+        return (this.layout.layoutType !== "record" || this.layout.showingActivities);
+    },
+
+    /**
      * Trigger events when a change happens
      * @param {String} linkModuleName
      * @param {String} linkName
      * @param {Boolean} silent
      */
     handleChange: function(linkModuleName, linkName, silent) {
-        //this.layout is the filter layout which filter-module-dropdown view
-        //is a child of; we use it here as it has a last_state key in its meta
-        var cacheKey = app.user.lastState.key('subpanels-last', this.layout);
         if (linkName === "all_modules") {
             this.layout.trigger("subpanel:change");
-            // Fixes SP-836; esentially, we need to clear subpanel-last-<module> anytime 'All' selected
-            app.user.lastState.remove(cacheKey);
         } else if (linkName) {
             this.layout.trigger("subpanel:change", linkName);
-            app.user.lastState.set(cacheKey, linkName);
         }
 
         // It is important to reset the `currentFilterId` in order to retrieve
@@ -162,7 +178,7 @@
         if (this.module == "Activities") {
             label = app.lang.get("LBL_MODULE_ALL");
         } else {
-            label = app.lang.get('LBL_MODULE_NAME', this.module);
+            label = app.lang.getModuleName(this.module, {plural: true});
         }
         filters.push({id: 'Activities', text: label});
         return filters;
@@ -170,7 +186,7 @@
 
     /**
      * Pull the list of related modules from the subpanel metadata
-     * @returns {Object}
+     * @return {Object}
      */
     pullSubpanelRelationships: function() {
         // Subpanels are retrieved from the global module and not the
@@ -207,7 +223,7 @@
     initSelection: function(el, callback) {
         var selection, label;
         if (el.val() === "all_modules") {
-            label = (this.layout.layoutType === "record") ? app.lang.get("LBL_MODULE_ALL") : app.lang.get("LBL_MODULE_NAME", this.module);
+            label = (this.layout.layoutType === "record") ? app.lang.get("LBL_MODULE_ALL") : app.lang.getModuleName(this.module, {plural: true});
             selection = {id: "all_modules", text: label};
         } else if (_.findWhere(this.filterList, {id: el.val()})) {
             selection = _.findWhere(this.filterList, {id: el.val()});
@@ -218,33 +234,43 @@
     },
 
     /**
+     * Returns the label for the dropdown.
+     *
+     * @return {string}
+     */
+    getSelectionLabel: function() {
+        var selectionLabel;
+
+        if (this.layout.layoutType !== "record" || this.layout.showingActivities) {
+            selectionLabel = app.lang.get("LBL_MODULE");
+        } else {
+            selectionLabel = app.lang.get("LBL_RELATED") + '<i class="fa fa-caret-down"></i>';
+        }
+
+        return selectionLabel;
+    },
+
+    /**
      * Update the text for the selected module and returns template
      *
      * @param {Object} item
-     * @returns {string}
+     * @return {string}
      */
     formatSelection: function(item) {
-        var selectionLabel, safeString;
+        var safeString;
 
         //Escape string to prevent XSS injection
         safeString = Handlebars.Utils.escapeExpression(item.text);
         // Update the text for the selected module.
         this.$('.choice-related').html(safeString);
 
-        if (this.layout.layoutType !== "record" || this.layout.showingActivities) {
-            selectionLabel = app.lang.get("LBL_MODULE");
-        } else {
-            selectionLabel = app.lang.get("LBL_RELATED") + '<i class="icon-caret-down"></i>';
-        }
-
-
-        return this._select2formatSelectionTemplate(selectionLabel);
+        return this._select2formatSelectionTemplate(this.getSelectionLabel());
     },
 
     /**
      * Returns template
      * @param {Object} option
-     * @returns {string}
+     * @return {string}
      */
     formatResult: function(option) {
         // TODO: Determine whether active filters should be highlighted in bold in this menu.

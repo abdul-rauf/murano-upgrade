@@ -16,19 +16,26 @@ require_once 'include/SugarFields/Fields/Base/SugarFieldBase.php';
 class SugarFieldEmail extends SugarFieldBase
 {
     public $needsSecondaryQuery = true;
+    protected $formTemplateMap = array(
+        'popup_query_form' => 'Base',
+    );
 
     /**
-     * Formats a field for the Sugar API, unsets the email
-     * record from the data array if the user does not have access
+     * {@inheritDoc}
      *
-     * @param array $data
-     * @param SugarBean $bean
-     * @param array $args
-     * @param string $fieldName
-     * @param array $properties
-     */    
-    public function apiFormatField(&$data, $bean, $args, $fieldName, $properties)
-    {
+     * Unsets the email record from the data array if the user does not have access
+     */
+    public function apiFormatField(
+        array &$data,
+        SugarBean $bean,
+        array $args,
+        $fieldName,
+        $properties,
+        array $fieldList = null,
+        ServiceBase $service = null
+    ) {
+        $this->ensureApiFormatFieldArguments($fieldList, $service);
+
         if (empty($bean->emailAddress->hasFetched)) {
             $emailsRaw = $bean->emailAddress->getAddressesByGUID($bean->id, $bean->module_name);
         } else {
@@ -106,6 +113,7 @@ class SugarFieldEmail extends SugarFieldBase
 
         // Here is a hack for SugarEmailAddress.php so it doesn't attempt a legacy save
         $bean->emailAddress->dontLegacySave = true;
+        $bean->emailAddress->populateLegacyFields($bean);
     }
 
     /**
@@ -181,6 +189,7 @@ class SugarFieldEmail extends SugarFieldBase
         $has_primary = array();
 
         foreach ($rows as $row) {
+            $row['bean_id'] = $GLOBALS['db']->fromConvert($row['bean_id'], 'id');
             $bean = $beans[$row['bean_id']];
             if (empty($has_primary[$row['bean_id']])) {
                 $row['primary_address'] = true;
@@ -188,11 +197,15 @@ class SugarFieldEmail extends SugarFieldBase
             } else {
                 $row['primary_address'] = false;
             }
-            $bean->emailAddress->addAddress($row['email_address'],
-                                            $row['primary_address'],
-                                            false,
-                                            $row['invalid_email'],
-                                            $row['opt_out']);
+            $bean->emailAddress->addAddress(
+                $row['email_address'],
+                $row['primary_address'],
+                false,
+                $row['invalid_email'],
+                $row['opt_out'],
+                null,
+                false
+            );
         }
     }
 }

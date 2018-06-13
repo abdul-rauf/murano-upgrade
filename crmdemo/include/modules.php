@@ -35,7 +35,6 @@ $moduleList[] = 'Quotes';
 $moduleList[] = 'Products';
 $moduleList[] = 'Forecasts';
 $moduleList[] = 'Contracts';
-$moduleList[] = 'KBDocuments';
 
 $moduleList[] = 'Documents';
 $moduleList[] = 'Cases';
@@ -47,6 +46,7 @@ $moduleList[] = 'Bugs';
 $beanList = array();
 //ACL Objects
 $beanList['ACLRoles']       = 'ACLRole';
+$beanList['ACLRoleSets']    = 'ACLRoleSet';
 $beanList['ACLActions']     = 'ACLAction';
 $beanList['ACLFields']       = 'ACLField';
 //END ACL OBJECTS
@@ -142,7 +142,6 @@ $beanList['MonthTimePeriods']    = 'MonthTimePeriod';
 $beanList['Forecasts']  = 'Forecast';
 $beanList['ForecastWorksheets']  = 'ForecastWorksheet';
 $beanList['ForecastManagerWorksheets']  = 'ForecastManagerWorksheet';
-$beanList['ForecastSchedule']  = 'ForecastSchedule';
 $beanList['ForecastOpportunities']  = 'ForecastOpportunities';
 $beanList['ForecastDirectReports'] = 'ForecastDirectReports';
 $beanList['Quotas']     = 'Quota';
@@ -154,11 +153,6 @@ $beanList['WorkFlowActionShells']  = 'WorkFlowActionShell';
 $beanList['WorkFlowActions']  = 'WorkFlowAction';
 $beanList['Expressions']  = 'Expression';
 $beanList['Contracts']  = 'Contract';
-$beanList['KBDocuments'] = 'KBDocument';
-$beanList['KBDocumentRevisions'] = 'KBDocumentRevision';
-$beanList['KBTags'] = 'KBTag';
-$beanList['KBDocumentKBTags'] = 'KBDocumentKBTag';
-$beanList['KBContents'] = 'KBContent';
 $beanList['ContractTypes']  = 'ContractType';
 $beanList['Holidays'] = 'Holiday';
 $beanList['ProjectResources'] = 'ProjectResource';
@@ -176,6 +170,8 @@ $beanFiles['ACLAction'] = 'modules/ACLActions/ACLAction.php';
 $beanFiles['ACLRole'] = 'modules/ACLRoles/ACLRole.php';
 $beanFiles['Relationship']  = 'modules/Relationships/Relationship.php';
 
+// do not add any bean files before this point, otherwise the application may fail to install
+$beanFiles['ACLRoleSet'] = 'modules/ACLRoles/ACLRoleSet.php';
 $beanFiles['Lead']          = 'modules/Leads/Lead.php';
 $beanFiles['aCase']         = 'modules/Cases/Case.php';
 $beanFiles['Bug']           = 'modules/Bugs/Bug.php';
@@ -267,7 +263,6 @@ $beanFiles['MonthTimePeriod']    = 'modules/TimePeriods/MonthTimePeriod.php';
 $beanFiles['Forecast']      = 'modules/Forecasts/Forecast.php';
 $beanFiles['ForecastWorksheet'] = 'modules/ForecastWorksheets/ForecastWorksheet.php';
 $beanFiles['ForecastManagerWorksheet'] = 'modules/ForecastManagerWorksheets/ForecastManagerWorksheet.php';
-$beanFiles['ForecastSchedule']  = 'modules/ForecastSchedule/ForecastSchedule.php';
 $beanFiles['ForecastOpportunities']  = 'modules/Forecasts/ForecastOpportunities.php';
 $beanFiles['ForecastDirectReports'] = 'modules/Forecasts/ForecastDirectReports.php';
 $beanFiles['Quota']  = 'modules/Quotas/Quota.php';
@@ -280,11 +275,6 @@ $beanFiles['WorkFlowAction']  = 'modules/WorkFlowActions/WorkFlowAction.php';
 $beanFiles['Expression']  = 'modules/Expressions/Expression.php';
 $beanFiles['System']      = 'modules/Administration/System.php';
 $beanFiles['SessionManager']      = 'modules/Administration/SessionManager.php';
-$beanFiles['KBDocument'] = 'modules/KBDocuments/KBDocument.php';
-$beanFiles['KBDocumentRevision'] = 'modules/KBDocumentRevisions/KBDocumentRevision.php';
-$beanFiles['KBTag'] = 'modules/KBTags/KBTag.php';
-$beanFiles['KBDocumentKBTag'] = 'modules/KBDocumentKBTags/KBDocumentKBTag.php';
-$beanFiles['KBContent'] = 'modules/KBContents/KBContent.php';
 $beanFiles['ContractType']  = 'modules/ContractTypes/ContractType.php';
 $beanFiles['ProjectResource'] = 'modules/ProjectResources/ProjectResource.php';
 $beanFiles['Holiday'] = 'modules/Holidays/Holiday.php';
@@ -300,7 +290,7 @@ $modInvisList = array('Administration', 'Currencies', 'CustomFields', 'Connector
     'UpgradeWizard', 'Trackers', 'Connectors', 'Employees', 'Calendar',
     'Manufacturers', 'ProductBundles', 'ProductBundleNotes', 'ProductCategories', 'ProductTemplates', 'ProductTypes',
     'Shippers', 'TaxRates', 'TeamNotices', 'Teams', 'TimePeriods', 'ForecastOpportunities', 'Quotas',
-    'KBDocumentRevisions', 'KBDocumentKBTags', 'KBTags', 'KBContents', 'ContractTypes', 'ForecastSchedule',
+    'ContractTypes',
     'ACLFields', 'Holidays', 'SNIP', 'ForecastDirectReports', 'System',
     'Releases','Sync',
     'Users',  'Versions', 'LabelEditor','Roles','EmailMarketing'
@@ -313,7 +303,7 @@ $modInvisList = array('Administration', 'Currencies', 'CustomFields', 'Connector
     'Empty',
     'ProjectTask',
     'RevenueLineItems',
-    'ModuleBuilder'
+    'ModuleBuilder',
     );
 $adminOnlyList = array(
                     //module => list of actions  (all says all actions are admin only)
@@ -347,8 +337,8 @@ $modInvisList[] = 'WorkFlowActionShells';
 $modInvisList[] = 'WorkFlowActions';
 $modInvisList[] = 'Expressions';
 $modInvisList[] = 'ACLFields';
-$modInvisList[] = 'ForecastManagerWorksheet';
-$modInvisList[] = 'ForecastWorksheet';
+$modInvisList[] = 'ForecastManagerWorksheets';
+$modInvisList[] = 'ForecastWorksheets';
 $modInvisList[] = 'ACL';
 $modInvisList[] = 'ACLRoles';
 $modInvisList[] = 'Configurator';
@@ -371,7 +361,7 @@ $report_include_modules['Contracts']='Contract';
 //add Tracker modules
 
 $report_include_modules['Trackers']         = 'Tracker';
-
+$report_include_modules['Tags']         = 'Tag';
 
 $report_include_modules['TrackerPerfs']     = 'TrackerPerf';
 $report_include_modules['TrackerSessions']  = 'TrackerSession';
@@ -386,6 +376,9 @@ $modInvisList[] = 'Notifications';
 // Be sure to also add the modules to $modInvisList, otherwise their tab will still appear
 $GLOBALS['moduleTabMap'] = array(
     'UpgradeWizard' => 'Administration',
+    'KBDocuments' => 'KBContents',
+    'KBArticles' => 'KBContents',
+    'KBContentTemplates' => 'KBContents',
     'EmailMan' => 'Administration',
     'ModuleBuilder' => 'Administration',
     'Configurator' => 'Administration',
@@ -394,6 +387,7 @@ $GLOBALS['moduleTabMap'] = array(
     'DocumentRevisions' => 'Documents',
     'EmailTemplates' => 'Emails',
     'EmailMarketing' => 'Campaigns',
+    'CampaignTrackers' => 'Campaigns',
     'Quotas' => 'Forecasts',
     'TeamNotices' => 'Teams',
     'Activities' => 'Home',
@@ -443,6 +437,15 @@ $beanList['Dashboards'] = 'Dashboard';
 $beanFiles['Dashboard'] = 'modules/Dashboards/Dashboard.php';
 $modInvisList[] = 'Dashboards';
 
+// Make Tags a visible module since all should have at least access to it
+$moduleList[] = 'Tags';
+$beanList['Tags'] = 'Tag';
+$beanFiles['Tag'] = 'modules/Tags/Tag.php';
+
+$beanList['Categories'] = 'Category';
+$beanFiles['Category'] = 'modules/Categories/Category.php';
+$modInvisList[] = 'Categories';
+
 //Object list is only here to correct for modules that break
 //the bean class name == dictionary entry/object name convention
 //No future module should need an entry here.
@@ -469,7 +472,6 @@ $bwcModules = array(
     'Administration',
     'Audit',
     'Calendar',
-    'Calls',
     'CampaignLog',
     'Campaigns',
     'CampaignTrackers',
@@ -496,14 +498,7 @@ $bwcModules = array(
     'iCals',
     'Import',
     'InboundEmail',
-    'KBContents',
-    'KBDocuments',
-    'KBDocumentRevisions',
-    'KBTags',
-    'KBDocumentKBTags',
-    'KBContents',
     'Manufacturers',
-    'Meetings',
     'MergeRecords',
     'ModuleBuilder',
     'MySettings',
@@ -518,6 +513,7 @@ $bwcModules = array(
     'Project',
     'ProjectResources',
     'ProjectTask',
+    'Quotas',
     'Quotes',
     'QueryBuilder',
     'Relationships',
@@ -556,12 +552,28 @@ $bwcModules = array(
     'WorkFlowTriggerShells'
 );
 
-// Health Check module
-$beanList['HealthCheck'] = 'HealthCheck';
-$beanFiles['HealthCheck'] = 'modules/HealthCheck/HealthCheck.php';
-$modInvisList[] = 'HealthCheck';
-$adminOnlyList['HealthCheck'] = array('all' => 1);
-$bwcModules[] = 'HealthCheck';
+$beanList['KBDocuments'] = 'KBDocument';
+$beanFiles['KBDocument'] = 'modules/KBDocuments/KBDocument.php';
+$modInvisList[] = 'KBDocument';
+
+$beanList['KBContents'] = 'KBContent';
+$beanFiles['KBContent'] = 'modules/KBContents/KBContent.php';
+$moduleList[] = 'KBContents';
+
+$beanList['KBArticles'] = 'KBArticle';
+$beanFiles['KBArticle'] = 'modules/KBArticles/KBArticle.php';
+$modInvisList[] = 'KBArticles';
+
+$beanList['KBContentTemplates'] = 'KBContentTemplate';
+$beanFiles['KBContentTemplate'] = 'modules/KBContentTemplates/KBContentTemplate.php';
+$modInvisList[] = 'KBContentTemplates';
+
+$beanList['EmbeddedFiles'] = 'EmbeddedFile';
+$beanFiles['EmbeddedFile'] = 'modules/EmbeddedFiles/EmbeddedFile.php';
+$modInvisList[] = 'EmbeddedFiles';
+
+// this module doesn't need a Bean
+$modInvisList[] = 'Feedbacks';
 
 foreach(SugarAutoLoader::existing('include/modules_override.php', SugarAutoLoader::loadExtension("modules")) as $modExtFile) {
     include $modExtFile;

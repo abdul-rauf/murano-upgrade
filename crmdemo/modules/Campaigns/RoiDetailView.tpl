@@ -19,6 +19,7 @@
 <tr>
 <td>
 <form action="index.php" method="post" name="DetailView" id="form">
+{sugar_csrf_form_token}
 			<input type="hidden" name="module" value="CampaignLog">
 			<input type="hidden" name="record" value="{$ID}">
 			<input type="hidden" name="isDuplicate" value=false>
@@ -50,6 +51,7 @@
 	</tr><tr>
 	<td width="20%"><slot>{$MOD.LBL_CAMPAIGN_STATUS}</slot></td>
 	<td width="30%"><slot>{$STATUS}</slot></td>
+
 	<td width="20%"><slot>{$MOD.LBL_TEAM}</slot></td>
 	<td width="30%"><slot>{$TEAM_NAME}</slot></td>
 	</tr><tr>

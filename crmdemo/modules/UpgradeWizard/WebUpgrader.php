@@ -28,6 +28,86 @@ class WebUpgrader extends UpgradeDriver
      */
     public $readme;
 
+    /**
+     * {@inheritDoc}
+     */
+    public static $version = '1.0.0-dev';
+
+    /**
+     * {@inheritDoc}
+     */
+    public static $build = '999';
+
+    /**
+     * {@inheritDoc}
+     */
+    const VERSION_FILE = 'version.json';
+
+    /**
+     * IIS configuration file name
+     */
+    const IIS_CONFIG = 'web.config';
+
+    /**
+     * maxAllowedContentLength value for IIS. 100M
+     */
+    const IIS_CONTENT_LENGTH = 104857600;
+
+    /**
+     * Updating IIS config if maxAllowedContentLength < 100M or not set
+     */
+    protected function updateMaxAllowedContentLength()
+    {
+        if (!file_exists(self::IIS_CONFIG)) {
+            return;
+        }
+
+        $saveConfig = false;
+
+        $config = new DOMDocument('1.0', 'UTF-8');
+        $config->formatOutput = true;
+        $config->load(self::IIS_CONFIG);
+
+        $xpath = new DOMXPath($config);
+        $path = 'configuration/system.webServer/security/requestFiltering/requestLimits';
+        $lengthAttribute = $xpath->query('//' . $path . '/@maxAllowedContentLength');
+
+        if ($lengthAttribute->length) {
+
+            $currentLength = $lengthAttribute->item(0)->value;
+            if ($currentLength < self::IIS_CONTENT_LENGTH) {
+                $lengthAttribute->item(0)->value = self::IIS_CONTENT_LENGTH;
+                $saveConfig = true;
+            }
+        } else {
+
+            $elements = explode('/', $path);
+            $currentPath = '/';
+            $currentNode = null;
+            foreach ($elements as $nodeName) {
+
+                $currentPath .= '/' . $nodeName;
+                if (!$xpath->query($currentPath)->length) {
+                    $newChild = $config->createElement($nodeName, null);
+                    $currentNode = $currentNode->appendChild($newChild);
+                } else {
+                    $currentNode = $xpath->query($currentPath)->item(0);
+                }
+            }
+
+            if ($currentNode) {
+                $lengthAttribute = $config->createAttribute('maxAllowedContentLength');
+                $lengthAttribute->value = self::IIS_CONTENT_LENGTH;
+                $currentNode->appendChild($lengthAttribute);
+                $saveConfig = true;
+            }
+        }
+
+        if ($saveConfig) {
+            $config->save(self::IIS_CONFIG);
+        }
+    }
+
     public function runStage($stage)
     {
         return $this->run($stage);
@@ -37,8 +117,17 @@ class WebUpgrader extends UpgradeDriver
     {
         $this->context['source_dir'] = $dir;
         $this->context['log'] = "UpgradeWizard.log";
+        $this->context['HealthCheckLog'] = "HealthCheck.log";
         $this->context['zip'] = ''; // temporary
         parent::__construct();
+    }
+
+    public function start()
+    {
+        if (!isset($this->state['stage']) || !array_search('started', $this->state['stage'])) {
+            list($version, $build) = self::getVersion();
+            $this->log("WebUpgrader v.$version (build $build) starting");
+        }
     }
 
     protected function initSession()
@@ -60,10 +149,7 @@ class WebUpgrader extends UpgradeDriver
      */
     public function startRequest($token)
     {
-        if (empty($token) || empty($this->state['webToken']) || $token != $this->state['webToken']) {
-            return false;
-        }
-        if (empty($this->state['admin'])) {
+        if (!$this->checkTokenAndAdmin($token)) {
             return false;
         }
         if (!empty($this->state['zip'])) {
@@ -77,12 +163,37 @@ class WebUpgrader extends UpgradeDriver
     }
 
     /**
+     * Checks token and Admin User
+     * @param string $token
+     * @return boolean
+     */
+    public function checkTokenAndAdmin($token)
+    {
+        return (!empty($token) && !empty($this->state['webToken'])
+            && $token == $this->state['webToken'] && !empty($this->state['admin']));
+    }
+
+    /**
      * Get user from state
      * @see UpgradeDriver::getUser()
      */
     protected function getUser()
     {
+        //Set globals installing to true to prevent bean_implements check for some modules
+        if (isset($GLOBALS['installing'])) {
+            $installing = $GLOBALS['installing'];
+        }
+
+        $GLOBALS['installing'] = true;
+
         $user = BeanFactory::getBean('Users', $this->state['admin']);
+
+        if (isset($installing)) {
+            $GLOBALS['installing'] = $installing;
+        } else {
+            unset($GLOBALS['installing']);
+        }
+
         if ($user) {
             $this->context['admin'] = $user->user_name;
         }
@@ -132,6 +243,9 @@ class WebUpgrader extends UpgradeDriver
                 copy("modules/UpgradeWizard/$ufile", "{$upg_dir}{$ufile}");
             }
         }
+
+        $this->updateMaxAllowedContentLength();
+
         return $this->state['webToken'];
     }
 
@@ -155,6 +269,25 @@ class WebUpgrader extends UpgradeDriver
     }
 
     /**
+     * Sending HealthCheck log to sugar server
+     * @return bool|false
+     */
+    protected function sendHealthCheckLog()
+    {
+        $scanner = $this->getHealthCheckScanner('web');
+        if (!$scanner) {
+            return $this->error("Cannot find health check scanner", true);
+        }
+
+        $this->initSugar();
+
+        if ($this->getHelper()->sendLog($this->context['HealthCheckLog'])) {
+            return true;
+        }
+        return $this->error("Unable to send logs to HealthCheck server", true);
+    }
+
+    /**
      * Process upgrade action
      * @param string $action
      * @return next stage name or false on error
@@ -164,6 +297,11 @@ class WebUpgrader extends UpgradeDriver
         if ($action == "status") {
             return $this->getStatus();
         }
+
+        if ($action == 'sendlog') {
+            return $this->sendHealthCheckLog();
+        }
+
         if (!in_array($action, $this->stages)) {
             return $this->error("Unknown stage $action", true);
         }
@@ -262,6 +400,9 @@ class WebUpgrader extends UpgradeDriver
     public function displayUpgradePage()
     {
         global $token;
+        $upgraderVesion = $this->context['versionInfo'][0];
+        $upgraderBuild = $this->context['versionInfo'][1];
+        $this->log("WebUpgrader v." . $upgraderVesion . " (build " . $upgraderBuild . ") starting");
         include dirname(__FILE__) . '/upgrade_screen.php';
     }
 
@@ -275,27 +416,59 @@ class WebUpgrader extends UpgradeDriver
     }
 
     /**
-     *
      * @see UpgradeDriver::doHealthcheck()
      */
     protected function doHealthcheck()
     {
-        $id = $_REQUEST['confirm_id'];
-        if (!isset($id)) {
-            $this->log("No previous health check id set in request");
-            return false;
+        $scanner = $this->getHealthCheckScanner('web');
+        if (!$scanner) {
+            return $this->error("Cannot find health check scanner", true);
         }
+        $scanner->setLogFile($this->context['HealthCheckLog']);
 
-        $bean = BeanFactory::getBean('HealthCheck', $id);
-        if (!$bean) {
-            $this->log("Cannot find health check result by id $id");
-            return false;
-        }
+        $this->initSugar();
 
-        $this->state['healthcheck'] = json_decode($bean->logmeta, true);
+        $scanner->scan();
+
+        $logsInfo = $scanner->getLogMeta();
+        $this->state['healthcheck'] = $logsInfo;
         $this->saveState();
 
-        $this->log("Skipping health check - we have a confirmed id");
+        if ($logsInfo) {
+            $this->log('*** START HEALTHCHECK ISSUES ***');
+            foreach ($scanner->getLogMeta() as $key => $entry) {
+                $issueNo = $key + 1;
+                $this->log(
+                    " => {$entry['bucket']}: [Issue {$issueNo}][{$entry['flag_label']}][{$entry['report']}][{$entry['id']}][{$entry['title']}] {$entry['descr']}"
+                );
+            }
+            $this->log('*** END HEALTHCHECK ISSUES ***');
+        }
+
+        $this->getHelper()->pingHeartbeat(array('bucket' => $scanner->getStatus(), 'flag' => $scanner->getFlag()));
+
+        if ($scanner->isFlagRed()) {
+            $logDetails = array();
+            foreach ($logsInfo as $key => $log) {
+                if ($log['flag'] == HealthCheckScannerMeta::FLAG_RED) {
+                    $logDetails = $log;
+                    break;
+                }
+            }
+            return $this->error("The health check didn't pass: " . $logDetails['log'], true);
+        }
         return true;
+    }
+
+    /**
+     * @return HealthCheckHelper
+     */
+    protected function getHelper()
+    {
+        require_once 'include/SugarSystemInfo/SugarSystemInfo.php';
+        require_once 'include/SugarHeartbeat/SugarHeartbeatClient.php';
+        require_once 'HealthCheckHelper.php';
+        require_once 'HealthCheckClient.php';
+        return HealthCheckHelper::getInstance();
     }
 }

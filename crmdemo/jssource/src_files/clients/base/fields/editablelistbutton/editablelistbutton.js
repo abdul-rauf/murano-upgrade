@@ -51,21 +51,7 @@
             return;
         }
 
-        var self = this,
-            successCallback = function() {
-                self._save();
-            };
-
-        async.forEachSeries(this.view.rowFields[this.model.id], function(view, callback) {
-            app.file.checkFileFieldsAndProcessUpload(view, {
-                success: function(response) {
-                    if (response.record && response.record.date_modified) {
-                        self.model.set('date_modified', response.record.date_modified);
-                    }
-                    callback.call();
-                }
-            }, {deleteIfFails: false }, true);
-        }, successCallback);
+        this._save();
     },
 
     _save: function() {
@@ -73,7 +59,6 @@
             successCallback = function(model) {
                 self.changed = false;
                 self.view.toggleRow(model.id, false);
-                self._refreshListView();
             },
             options = {
                 success: successCallback,
@@ -111,12 +96,7 @@
                 relate: this.model.link ? true : false
             };
 
-        options = _.extend({
-            params: {
-                // tell the API to return only relevant fields
-                fields: this.context.get("fields")
-            }
-        }, options, this.getCustomSaveOptions(options));
+        options = _.extend({}, options, this.getCustomSaveOptions(options));
 
         this.model.save({}, options);
     },
@@ -152,24 +132,5 @@
     },
     cancelClicked: function(evt) {
         this.cancelEdit();
-    },
-    /**
-     * On model save success, this function gets called to refresh the list
-     * view.
-     *
-     * {@link View.Fields.Base.FavoriteField} is using about the same method.
-     * @private
-     */
-    _refreshListView: function() {
-        var filterPanelLayout = this.view;
-        //Try to find the filterpanel layout
-        while (filterPanelLayout && filterPanelLayout.name!=='filterpanel') {
-            filterPanelLayout = filterPanelLayout.layout;
-        }
-        //If filterpanel layout found and not disposed, then pick the value from the quicksearch input and
-        //trigger the filtering
-        if (filterPanelLayout && !filterPanelLayout.disposed && this.collection) {
-            filterPanelLayout.applyLastFilter(this.collection);
-        }
     }
 })

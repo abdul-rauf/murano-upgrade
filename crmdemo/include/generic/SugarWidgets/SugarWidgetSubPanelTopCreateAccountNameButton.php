@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
-
+// $Id: SugarWidgetSubPanelTopCreateAccountNameButton.php 38393 2008-07-29 19:44:00Z Collin Lee $
 
 
 

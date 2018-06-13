@@ -12,37 +12,17 @@
     extendsFrom: "RowactionField",
     
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     initialize: function(options) {
         this.plugins = _.clone(this.plugins) || [];
-        this.plugins.push('DisableDelete');
-        this._super("initialize", [options]);
-        this.context.on("record:deleted", function(){
-            this.deleteCommitWarning();
-        }, this);
-    },
-    
-    /**
-     * Shows a warning message if a RLI that is included in a forecast is deleted.
-     * @return string message
-     */
-    deleteCommitWarning: function(){
-        var message = null
-        if (this.model.get("commit_stage") == "include") {
-            var forecastModuleSingular = app.lang.get('LBL_MODULE_NAME_SINGULAR', 'Forecasts');
-            message = app.lang.get("WARNING_DELETED_RECORD_RECOMMIT_1", "RevenueLineItems")
-                + '<a href="#Forecasts">' + forecastModuleSingular + '</a>.  '
-                + app.lang.get("WARNING_DELETED_RECORD_RECOMMIT_2", "RevenueLineItems")
-                + '<a href="#Forecasts">' + forecastModuleSingular + '</a>.';
-            app.alert.show("included_delete_warning", {
-                level: "warning",
-                messages: message,
-                onLinkClick: function() {
-                    app.alert.dismissAll();
-                }
-            });
+
+        if (!options.context.get('isCreateSubpanel')) {
+            // if this is not a create subpanel, add the DisableDelete plugin
+            // on a create subpanel, don't add the plugin so users can delete rows
+            this.plugins.push('DisableDelete');
         }
-        return message;
+
+        this._super("initialize", [options]);
     }
 })

@@ -22,7 +22,7 @@ $mod_strings = array (
   'LBL_CREATED_ID'=>'Created By Id',
   'LBL_MODIFIED_ID'=>'Modified By Id',
   'LBL_MODULE_NAME' => 'Manufacturers',
-  'LBL_MODULE_NAME_SINGULAR' => 'Manufactuerer',
+  'LBL_MODULE_NAME_SINGULAR' => 'Manufacturer',
   'LBL_MODULE_TITLE' => 'Manufacturers: Home',
   'LBL_SEARCH_FORM_TITLE' => 'Manufacturer Search',
   'LBL_LIST_FORM_TITLE' => 'Manufacturer List',
@@ -55,6 +55,7 @@ $mod_strings = array (
 ),
   'LNK_IMPORT_MANUFACTURERS'=>'Import Manufacturers',
 	'LBL_EDITLAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
+  'LBL_REVENUELINEITEMS' => 'Revenue Line Items',
 );
 
 

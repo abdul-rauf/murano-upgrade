@@ -60,9 +60,7 @@
 
         if (this.meta.config) {
             this.listenTo(this.layout, 'init', this._addFilterComponent);
-            this.layout.before('dashletconfig:save', function() {
-                this.saveDashletFilter();
-            }, null, this);
+            this.layout.before('dashletconfig:save', this.saveDashletFilter, this);
         }
     },
 
@@ -73,6 +71,7 @@
     {
         var options = {};
         var self = this;
+        var refreshRate;
 
         options.limit = this.settings.get('limit') || this._defaultSettings.limit;
         this.settings.set('limit', options.limit);
@@ -83,7 +82,12 @@
         options = _.extend({}, this.context.get('collectionOptions'), options);
         this.context.set('collectionOptions', options);
 
-        if (options.auto_refresh) {
+        // Set the refresh rate for setInterval so it can be checked ahead of
+        // time.  60000 is 1000 miliseconds times 60 seconds in a minute.
+        refreshRate = options.auto_refresh * 60000;
+
+        // Only set up the interval handler if there is a refreshRate higher than 0
+        if (refreshRate > 0) {
             if (this.timerId) {
                 clearInterval(this.timerId);
             }
@@ -92,7 +96,7 @@
                     self.context.resetLoadFlag();
                     self.loadData();
                 }
-            }, this), options.auto_refresh * 1000 * 60);
+            }, this), refreshRate);
         }
     },
 
@@ -106,7 +110,7 @@
             return;
         }
 
-        this.layout._addComponentsFromDef([{
+        this.layout.initComponents([{
             layout: 'asdashlet-filter'
         }]);
     },
@@ -159,7 +163,7 @@
                     url = app.api.buildURL(real_module, action, {}, options.params);
                     break;
                 case 'record':
-                    url = app.api.buildURL(real_module, 'activities', {id: modelId, link: true}, options.params);
+                    url = app.api.buildURL(real_module, null, {id: modelId, link: 'activities'}, options.params);
                     break;
             }
 
@@ -271,7 +275,7 @@
      * Render each ActivityStream model
      *
      * @param model
-     * @returns {*}
+     * @return {Mixed}
      */
     renderPost: function(model) {
         var view;

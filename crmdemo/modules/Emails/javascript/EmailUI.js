@@ -86,7 +86,7 @@ SE.accounts = {
    					var is_group = oRecord.getData("is_group");
    					if(!is_group)
    					{
-    		  			if(oColumn.key == 'edit')
+    		  			if(oColumn.key == 'edit' && !SUGAR.email2.disableAccountEdit)
     		  			{
     		  				clckEvent = "SUGAR.email2.accounts.getIeAccount('"+ oRecord.getData('id') +"')";
     		  				imgSrc = 'index.php?entryPoint=getImage&amp;themeName=Sugar&amp;imageName='+oColumn.key+'_inline.gif';
@@ -191,7 +191,7 @@ SE.accounts = {
    					var type = oRecord.getData("type");
    					if(isEditable)
    					{
-    		  			if(oColumn.key == 'edit')
+    		  			if(oColumn.key == 'edit' && !SUGAR.email2.disableAccountEdit)
     		  			{
     		  				clckEvent = "SUGAR.email2.accounts.editOutbound('"+ oRecord.getData('id') +"')";
     		  				imgSrc = 'index.php?entryPoint=getImage&amp;themeName=Sugar&amp;imageName='+oColumn.key+'_inline.gif';
@@ -423,7 +423,14 @@ SE.accounts = {
 	},
 
 	smtp_setDefaultSMTPPort : function() {
-		useSSLPort = !document.getElementById("mail_smtpssl").options[0].selected;
+        var useSSLPort = false;
+        var ssl = document.getElementById("mail_smtpssl");
+        for (var j = 0; j < ssl.options.length; j++) {
+            if (ssl.options[j].text == 'SSL' && ssl.options[j].selected) {
+                useSSLPort = true;
+                break;
+            }
+        }
 
         if ( useSSLPort && document.getElementById("mail_smtpport").value == '25' ) {
             document.getElementById("mail_smtpport").value = '465';
@@ -1271,7 +1278,10 @@ SE.contextMenus = {
     markEmailCleanup : function() {
         SE.accounts.renderTree();
         SUGAR.hideMessageBox();
-        SE.listView.refreshGrid();
+
+        // Run pagination with the current state
+        var currentState = SE.grid.getState();
+        SE.grid.onPaginatorChangeRequest(currentState.pagination);
     },
 
 	showAssignmentDialog : function() {
@@ -1487,7 +1497,8 @@ SE.detailView = {
         }
 
         var displayFrame = document.getElementById('displayEmailFrame' + targetDiv.id);
-        displayFrame.contentWindow.document.write(email.description);
+        description = email.description_html || SE.util.nl2br(email.description);
+        displayFrame.contentWindow.document.write(description);
         displayFrame.contentWindow.document.close();
 
         displayFrame.contentWindow.setTargetAttributeForUrls = function() {
@@ -1555,7 +1566,8 @@ SE.detailView = {
         });
 
         var displayFrame = document.getElementById('displayEmailFramePreview');
-        displayFrame.contentWindow.document.write(email.description);
+        description = email.description_html || SE.util.nl2br(email.description);
+        displayFrame.contentWindow.document.write(description);
         displayFrame.contentWindow.document.close();
 
         displayFrame.contentWindow.setTargetAttributeForUrls = function() {
@@ -1735,14 +1747,14 @@ SE.detailView = {
         if(mboxStr.substring(0,7) == 'sugar::') {
             // display an email from Sugar
             document.getElementById('emailUIAction').value = 'getMultipleMessagesFromSugar';
-            document.getElementById('uid').value = uids;
         } else {
             // display an email from an email server
             document.getElementById('emailUIAction').value = 'getMultipleMessages';
-            document.getElementById('mbox').value = mbox;
-            document.getElementById('ieId').value = ieId;
-            document.getElementById('uid').value = uids;
         }
+
+        document.getElementById('mbox').value = mbox;
+        document.getElementById('ieId').value = ieId;
+        document.getElementById('uid').value = uids;
 
         var formObject = document.getElementById('emailUIForm');
         YAHOO.util.Connect.setForm(formObject);

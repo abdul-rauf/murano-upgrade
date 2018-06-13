@@ -1,6 +1,8 @@
 <?php
- // created: 2012-02-09 12:03:46
-$dictionary['Lead']['fields']['description']['calculated']=false;
-$dictionary['Lead']['fields']['description']['rows']='20';
+ // created: 2018-06-13 10:46:07
+$dictionary['Lead']['fields']['description']['calculated'] = false;
+$dictionary['Lead']['fields']['description']['rows'] = '20';
+$dictionary['Lead']['fields']['description']['full_text_search']['enabled'] = true;
+$dictionary['Lead']['fields']['description']['full_text_search']['searchable'] = true;
+$dictionary['Lead']['fields']['description']['full_text_search']['boost'] = 0.69999999999999996;
 
- ?>

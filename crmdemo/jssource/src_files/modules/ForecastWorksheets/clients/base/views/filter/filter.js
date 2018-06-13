@@ -112,7 +112,7 @@
             },
             _.bind(function(event) {
                 app.alert.show('worksheet_filtering',
-                    {level: 'process', title: app.lang.getAppString('LBL_LOADING')}
+                    {level: 'process', title: app.lang.get('LBL_LOADING')}
                 );
                 app.user.lastState.set(this.userLastWorksheetFilterKey, event.val);
                 _.delay(function() {
@@ -127,7 +127,7 @@
      * @param item selected item
      */
     formatCustomSelection: function(item) {        
-        return '<span class="select2-choice-type">' + app.lang.get("LBL_FILTER") + '</span><a class="select2-choice-filter" rel="'+ item.id + '" href="javascript:void(0)">'+ item.text +'</a>';
+        return '<span class="select2-choice-type" disabled="disabled">' + app.lang.get("LBL_FILTER") + '</span><a class="select2-choice-filter" rel="'+ item.id + '" href="javascript:void(0)">'+ item.text +'</a>';
     },
 
     /**

@@ -8,7 +8,7 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({_render:function(){this._super('_render');if(this.tplName==='disabled'){this.$(this.fieldTag).attr('disabled','disabled');}},unformat:function(value){value=(value!==''&&value!='http://')?value.trim():'';return value;},format:function(value){if(_.isEmpty(value)){value=_.isString(this.def['default'])?this.def['default']:undefined;}
+({direction:'ltr',_render:function(){this._super('_render');if(this.tplName==='disabled'){this.$(this.fieldTag).attr('disabled','disabled');}},unformat:function(value){value=(value!==''&&value!='http://')?value.trim():'';return value;},format:function(value){if(_.isEmpty(value)){value=_.isString(this.def['default'])?this.def['default']:undefined;}
 if(this.def.gen=='1'){var regex=/{(.+?)}/,result=null;do{result=regex.exec(value);if(result){value=value.replace(result[0],this.model.get(result[1]));}}while(result);}
 if(_.isString(value)&&!value.match(/^(http|https):\/\//)){value='http://'+value.trim();}
 return value;}})

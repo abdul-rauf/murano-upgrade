@@ -54,6 +54,7 @@ $viewdefs['Leads']['DetailView'] = array (
 			'headerTpl'=>'modules/Leads/tpls/DetailViewHeader.tpl',
 		),
 		'maxColumns' => '2',
+
 		'useTabs' => true,
 		'widths' => array (
 			array (
@@ -77,6 +78,7 @@ $viewdefs['Leads']['DetailView'] = array (
 			array (
 				'name' => 'full_name',
 				'label' => 'LBL_NAME',
+
 	            'displayParams' => array (
 	                'enableConnectors' => true,
 	                'module' => 'Leads',
@@ -84,7 +86,7 @@ $viewdefs['Leads']['DetailView'] = array (
 	                array (
 	                  0 => 'ext_rest_twitter',
 	                ),
-	            ),
+	            ), 			
 			),
 			'phone_work',
 		),
@@ -102,13 +104,14 @@ $viewdefs['Leads']['DetailView'] = array (
 	    array (
             array (
               'name' => 'account_name',
+
 			    'displayParams' => array (
 			       'enableConnectors' => true,
 			       'module' => 'Leads',
 			       'connectors' => 
 			       array (
 			       ),
-			    ),
+			    ), 
             ),
 			'website'
 	    ),		
@@ -189,7 +192,8 @@ $viewdefs['Leads']['DetailView'] = array (
           ),
         ),
         array (
-		  'team_name', 
+
+		  'team_name',
           array (
             'name' => 'date_entered',
             'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value}',

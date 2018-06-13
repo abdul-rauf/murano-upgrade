@@ -18,7 +18,8 @@
 ({
     extendsFrom: 'RecordlistView',
     fallbackFieldTemplate: 'list',
-    plugins: ['ErrorDecoration', 'Editable', 'SugarLogic', 'Pagination', 'LinkedModel'],
+    plugins: ['ErrorDecoration', 'Editable', 'SugarLogic', 'Pagination',
+        'ResizableColumns', 'MassCollection'],
 
     contextEvents: {
         "list:editall:fire": "toggleEdit",
@@ -35,35 +36,23 @@
         this.dataViewName = options.name || 'subpanel-list';
 
         this._super("initialize", [options]);
+
         // Setup max limit on collection's fetch options for this subpanel's context
-        if (app.config.maxSubpanelResult) {
-            var options = {
-                limit: app.config.maxSubpanelResult
-            };
+        var limit = this.context.get('limit') || app.config.maxSubpanelResult;
+
+        if (limit) {
+            this.context.set('limit', limit);
             //supanel-list extends indirectly ListView, and `limit` determines # records displayed
-            this.limit = options.limit;
-            var collectionOptions = this.context.has('collectionOptions') ? this.context.get('collectionOptions') : {};
-            this.context.set('collectionOptions', _.extend(collectionOptions, options));
+            this.limit = limit;
         }
 
         //Override the recordlist row template
         this.rowTemplate = app.template.getView('recordlist.row');
 
-        this.layout.on("hide", this.toggleList, this);
-        // Listens to parent of subpanel layout (subpanels)
-        this.listenTo(this.layout.layout, 'filter:change', this.renderOnFilterChanged);
-        this.listenTo(this.layout, 'filter:record:linked', this.renderOnFilterChanged);
-
         //event register for preventing actions
         //when user escapes the page without confirming deletion
-        app.routing.before("route", this.beforeRouteUnlink, this, true);
+        app.routing.before("route", this.beforeRouteUnlink, this);
         $(window).on("beforeunload.unlink" + this.cid, _.bind(this.warnUnlinkOnRefresh, this));
-    },
-    // SP-1383: Subpanel filters hide some panels when related filters are changed
-    // So when 'Related' filter changed, this ensures recordlist gets reloaded
-    renderOnFilterChanged: function() {
-        this.collection.trigger('reset');
-        this.render();
     },
 
     /**
@@ -116,14 +105,6 @@
     },
 
     /**
-     * Toggles the list visibility
-     * @param {Boolean} show TRUE to show, FALSE to hide.
-     */
-    toggleList: function(show) {
-        this.$el[show ? 'show' : 'hide']();
-    },
-
-    /**
      * Pre-event handler before current router is changed
      *
      * @return {Boolean} true to continue routing, false otherwise
@@ -147,7 +128,7 @@
     getUnlinkMessages: function(model) {
         var messages = {};
         var name = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model)).trim();
-        var context = app.lang.get('LBL_MODULE_NAME_SINGULAR', model.module).toLowerCase() + ' ' + name;
+        var context = app.lang.getModuleName(model.module).toLowerCase() + ' ' + name;
 
         messages.confirmation = app.utils.formatString(app.lang.get('NTC_UNLINK_CONFIRMATION_FORMATTED'), [context]);
         messages.success = app.utils.formatString(app.lang.get('NTC_UNLINK_SUCCESS'), [context]);

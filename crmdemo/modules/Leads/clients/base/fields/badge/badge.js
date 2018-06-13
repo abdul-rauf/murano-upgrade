@@ -8,4 +8,4 @@
      *
      * Copyright (C) SugarCRM Inc. All rights reserved.
      */
-({showNoData:false,initialize:function(options){options.def.readonly=true;app.view.Field.prototype.initialize.call(this,options);}})
+({showNoData:false,events:{'click [data-action=convert]':'convertLead'},initialize:function(options){options.def.readonly=true;app.view.Field.prototype.initialize.call(this,options);},convertLead:function(){var model=app.data.createBean(this.model.module);model.set(app.utils.deepCopy(this.model.attributes));app.drawer.open({layout:'convert',context:{forceNew:true,skipFetch:true,module:this.model.module,leadsModel:model}});}})

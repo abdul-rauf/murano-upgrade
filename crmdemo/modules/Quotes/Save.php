@@ -14,6 +14,7 @@ require_once('include/formbase.php');
 require_once('modules/Quotes/config.php');
 require_once('include/SugarFields/SugarFieldHandler.php');
 Activity::disable();
+/* @var $focus Quote */
 $focus = BeanFactory::getBean('Quotes');
 $focus = populateFromPost('', $focus);
 
@@ -26,6 +27,7 @@ if (!$focus->ACLAccess('Save')) {
 if (empty($focus->teams)) {
     $focus->load_relationship('teams');
 }
+$focus->in_save = true;
 $focus->teams->save();
 //bug: 35297 - set the teams to have not been saved, so workflow can update if necessary
 $focus->teams->setSaved(false);
@@ -38,7 +40,6 @@ if (!empty($_POST['assigned_user_id']) &&
 } else {
     $check_notify = false;
 }
-
 //bug55337 - Inline edit to different stage, cause total amount to display 0
 if (!isset($_REQUEST['from_dcmenu'])) {
     $focus->tax = 0;
@@ -78,6 +79,11 @@ if (isset($_REQUEST['duplicateSave']) && isset($_REQUEST['relate_id'])) {
     unset($_REQUEST['relate_id']);
 }
 
+// since the ProductBundles and Products get the BaseRate from the Quote
+// make sure it's set correctly before we do any of that processing.
+// This will ensure that SugarLogic doesn't do weird conversion.
+SugarCurrency::verifyCurrencyBaseRateSet($focus, !$focus->new_with_id);
+
 global $beanFiles;
 require_once($beanFiles['Product']);
 $GLOBALS['log']->debug("Saving associated products");
@@ -93,34 +99,33 @@ if (isset($_REQUEST['total'])) {
 } else {
     $total_keys = array();
 }
+
+//unset relate fields for product bundles
+$tmpRelate_id = $_REQUEST['relate_id'];
+$tmpRelate_to = $_REQUEST['relate_to'];
+unset($_REQUEST['relate_id']);
+unset($_REQUEST['relate_to']);
+
 $product_bundels = array();
 for ($k = 0; $k < sizeof($total_keys); $k++) {
     $pb = BeanFactory::getBean('ProductBundles');
 
     if (substr_count($total_keys[$k], 'group_') == 0) {
-        $pb->id = $total_keys[$k];
+        $pb->retrieve($total_keys[$k]);
     }
 
     $pb->team_id = $focus->team_id;
     $pb->team_set_id = $focus->team_set_id;
-
-    $pb->tax = (string)unformat_number($_REQUEST['tax'][$total_keys[$k]]);
     $pb->shipping = (string)unformat_number($_REQUEST['shipping'][$total_keys[$k]]);
-    $pb->subtotal = (string)unformat_number($_REQUEST['subtotal'][$total_keys[$k]]);
-    $pb->deal_tot = (string)unformat_number($_REQUEST['deal_tot'][$total_keys[$k]]);
-    $pb->new_sub = (string)unformat_number($_REQUEST['new_sub'][$total_keys[$k]]);
-    $pb->total = (string)unformat_number($_REQUEST['total'][$total_keys[$k]]);
     $pb->currency_id = $focus->currency_id;
+    $pb->base_rate = $focus->base_rate;
+    $pb->taxrate_id = $focus->taxrate_id;
     $pb->bundle_stage = $_REQUEST['bundle_stage'][$total_keys[$k]];
     $pb->name = $_REQUEST['bundle_name'][$total_keys[$k]];
 
-    // Bug 54931. Grand Total for custom groups too.
-    $focus->tax = SugarMath::init($focus->tax, 6)->add($pb->tax)->result();
-    $focus->shipping = SugarMath::init($focus->shipping, 6)->add($pb->shipping)->result();
-    $focus->subtotal = SugarMath::init($focus->subtotal, 6)->add($pb->subtotal)->result();
-    $focus->deal_tot = SugarMath::init($focus->deal_tot, 6)->add($pb->deal_tot)->result();
-    $focus->new_sub = SugarMath::init($focus->new_sub, 6)->add($pb->new_sub)->result();
-    $focus->total = SugarMath::init($focus->total, 6)->add($pb->total)->result();
+    $pb->load_relationship('quotes');
+    $pb->quotes->getBeans();
+    $pb->quotes->__set("beans", array($focus->id => $focus));
 
     $product_bundels[$total_keys[$k]] = $pb->save();
     if (substr_count($total_keys[$k], 'group_') > 0) {
@@ -137,7 +142,7 @@ $pb = BeanFactory::getBean('ProductBundles');
 $deletedGroups = array();
 if (isset($_POST['delete_table'])) {
     foreach ($_POST['delete_table'] as $todelete) {
-        if ($todelete != 1) {
+        if ($todelete !== '1') {
             $pb->mark_deleted($todelete);
             $deletedGroups[$todelete] = $todelete;
         }
@@ -146,6 +151,7 @@ if (isset($_POST['delete_table'])) {
 //Fix bug 25509
 $focus->process_save_dates = true;
 
+/* @var $pb ProductBundle */
 $pb = BeanFactory::getBean('ProductBundles');
 for ($i = 0; $i < $product_count; $i++) {
 
@@ -199,7 +205,9 @@ for ($i = 0; $i < $product_count; $i++) {
                         }
                     }
                 }
+
                 $product->currency_id = $focus->currency_id;
+                $product->base_rate = $focus->base_rate;
 
                 $product->team_id = $focus->team_id;
                 $product->team_set_id = $focus->team_set_id;
@@ -244,6 +252,21 @@ if (isset($GLOBALS['check_notify'])) {
 } else {
     $check_notify = false;
 }
+
+// we need to resave all the product bundles, so sugarlogic works.
+foreach ($product_bundels as $bundle_key) {
+    $pb = BeanFactory::getBean('ProductBundles', $bundle_key);
+    // if the products link is already load, we need to usnet it so we get the fresh values from the db.
+    if (isset($pb->products)) {
+        unset($pb->products);
+    }
+    $pb->save();
+}
+
+//reset relate fields
+$_REQUEST['relate_id'] = $tmpRelate_id;
+$_REQUEST['relate_to'] = $tmpRelate_to;
+
 $focus->save($check_notify);
 
 $return_id = $focus->id;

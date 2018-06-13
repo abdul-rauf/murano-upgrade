@@ -1,7 +1,7 @@
 <?php
 // created: 2015-01-11 07:10:26
 $modules_sources = array (
-  'Accounts' => 
+  /*'Accounts' => 
   array (
     'ext_soap_hoovers' => 'ext_soap_hoovers',
     'ext_rest_twitter' => 'ext_rest_twitter',
@@ -24,5 +24,5 @@ $modules_sources = array (
   'Opportunities' => 
   array (
     'ext_rest_insideview' => 'ext_rest_insideview',
-  ),
+  ),*/
 );

@@ -38,15 +38,20 @@ class Comment extends Basic
      */
     public function toJson()
     {
+        global $current_user;
+
         $this->retrieve();
         $sfh = new SugarFieldHandler();
         $data = array();
+        require_once 'include/api/RestService.php';
+        $service = new RestService();
+        $service->user = $current_user;
         foreach ($this->field_defs as $fieldName => $properties) {
             $type = !empty($properties['custom_type']) ? $properties['custom_type'] : $properties['type'];
 
             $field = $sfh->getSugarField($type);
             if ($field != null && isset($this->$fieldName)) {
-                $field->apiFormatField($data, $this, array(), $fieldName, $properties);
+                $field->apiFormatField($data, $this, array(), $fieldName, $properties, array(), $service);
             }
         }
         return json_encode($data);

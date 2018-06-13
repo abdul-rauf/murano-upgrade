@@ -103,17 +103,7 @@
         //if the dashlet is not collapsed load data from D&B
         if (!isCollapsed) {
             //check if account is linked with a D-U-N-S
-            if (this.duns_num) {
-                this.getDNBCompetitors(this.duns_num);
-            } else if (!_.isUndefined(app.controller.context.get('dnb_temp_duns_num'))) {
-                //check if D-U-N-S is set in context by refresh dashlet
-                this.getDNBCompetitors(app.controller.context.get('dnb_temp_duns_num'));
-            } else {
-                this.template = app.template.get(this.name + '.dnb-no-duns');
-                if (!this.disposed) {
-                    this.render();
-                }
-            }
+            this.loadDNBData('duns_num', 'dnb_temp_duns_num', this.getDNBCompetitors, null, 'dnb.dnb-no-duns', 'dnb.dnb-no-duns-field');
         }
     },
 
@@ -273,7 +263,7 @@
             this.template = app.template.get('dnb.dnb-company-details');
             this.render();
             this.$('div#dnb-company-details').hide();
-            this.baseCompanyInformation(duns_num, this.compInfoProdCD.std, app.lang.get('LBL_DNB_COMPETITORS_LIST'), this.renderCompanyDetails);
+            this.baseCompanyInformation(duns_num, this.compInfoProdCD.lite, app.lang.get('LBL_DNB_COMPETITORS_LIST'), this.renderCompanyDetails);
         }
     }
 })

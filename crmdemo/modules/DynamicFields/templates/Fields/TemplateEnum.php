@@ -11,7 +11,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/utils/array_utils.php');
 class TemplateEnum extends TemplateText{
     var $max_size = 100;
     var $len = 100;
@@ -124,7 +123,6 @@ class TemplateEnum extends TemplateText{
 		$def['options'] = !empty($this->options) ? $this->options : $this->ext1;
 		$def['default'] = !empty($this->default) ? $this->default : $this->default_value;
 		$def['len'] = $this->max_size;
-		$def['studio'] = 'visible';
 		// this class may be extended, so only do the unserialize for genuine TemplateEnums
 		if (get_class( $this ) == 'TemplateEnum' && empty($def['dependency']) )
 			$def['dependency'] = isset($this->ext4)? @unserialize(html_entity_decode($this->ext4)) : null ;
@@ -206,7 +204,6 @@ class TemplateEnum extends TemplateText{
                 }
             }
         }
-
         parent::delete($df);
     }
 }

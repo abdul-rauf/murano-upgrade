@@ -110,7 +110,9 @@ nv.utils.getColor = function (color) {
 // Default color chooser uses the index of an object as before.
 nv.utils.defaultColor = function () {
     var colors = d3.scale.category20().range();
-    return function (d, i) { return d.color || colors[i % colors.length]; };
+    return function (d, i) {
+      return d.color || colors[i % colors.length];
+    };
 };
 
 
@@ -159,6 +161,41 @@ nv.utils.pjax = function (links, content) {
     if (d3.event.state) { load(d3.event.state); }
   });
 };
+
+/* Numbers that are undefined, null or NaN, convert them to zeros.
+*/
+nv.utils.NaNtoZero = function(n) {
+    if (typeof n !== 'number'
+        || isNaN(n)
+        || n === null
+        || n === Infinity) return 0;
+
+    return n;
+};
+
+/*
+Snippet of code you can insert into each nv.models.* to give you the ability to
+do things like:
+chart.options({
+  showXAxis: true,
+  tooltips: true
+});
+
+To enable in the chart:
+chart.options = nv.utils.optionsFunc.bind(chart);
+*/
+nv.utils.optionsFunc = function(args) {
+    if (args) {
+      d3.map(args).forEach((function(key,value) {
+        if (typeof this[key] === "function") {
+           this[key](value);
+        }
+      }).bind(this));
+    }
+    return this;
+};
+
+
 
 //SUGAR ADDITIONS
 
@@ -281,28 +318,29 @@ nv.utils.dropShadow = function (id, defs, options) {
     , o = opt.offset || 2
     , b = opt.blur || 1;
 
-  var filter = defs.append('filter')
-        .attr('id',id)
-        .attr('height',h);
-  var offset = filter.append('feOffset')
-        .attr('in','SourceGraphic')
-        .attr('result','offsetBlur')
-        .attr('dx',o)
-        .attr('dy',o); //how much to offset
-  var color = filter.append('feColorMatrix')
-        .attr('in','offsetBlur')
-        .attr('result','matrixOut')
-        .attr('type','matrix')
-        .attr('values','1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0');
-  var blur = filter.append('feGaussianBlur')
-        .attr('in','matrixOut')
-        .attr('result','blurOut')
-        .attr('stdDeviation',b); //stdDeviation is how much to blur
-  var merge = filter.append('feMerge');
-      merge.append('feMergeNode'); //this contains the offset blurred image
-      merge.append('feMergeNode')
-        .attr('in','SourceGraphic'); //this contains the element that the filter is applied to
-
+  if (defs.select('#' + id).empty()) {
+    var filter = defs.append('filter')
+          .attr('id',id)
+          .attr('height',h);
+    var offset = filter.append('feOffset')
+          .attr('in','SourceGraphic')
+          .attr('result','offsetBlur')
+          .attr('dx',o)
+          .attr('dy',o); //how much to offset
+    var color = filter.append('feColorMatrix')
+          .attr('in','offsetBlur')
+          .attr('result','matrixOut')
+          .attr('type','matrix')
+          .attr('values','1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0');
+    var blur = filter.append('feGaussianBlur')
+          .attr('in','matrixOut')
+          .attr('result','blurOut')
+          .attr('stdDeviation',b); //stdDeviation is how much to blur
+    var merge = filter.append('feMerge');
+        merge.append('feMergeNode'); //this contains the offset blurred image
+        merge.append('feMergeNode')
+          .attr('in','SourceGraphic'); //this contains the element that the filter is applied to
+  }
   return 'url(#' + id + ')';
 };
 // <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
@@ -319,35 +357,98 @@ nv.utils.dropShadow = function (id, defs, options) {
 //   fill="yellow" filter="url(#f1)" />
 // </svg>
 
+nv.utils.stringSetLengths = function (_data, _container, _format) {
+  var lengths = [],
+      txt = _container.select('.tmp-text-strings').select('text');
+  if (txt.empty()) {
+    txt = _container.append('g').attr('class', 'tmp-text-strings').append('text');
+  }
+  txt.style('display', 'inline');
+  _data.forEach(function(d, i) {
+      txt.text(d, _format);
+      lengths.push(txt.node().getBoundingClientRect().width);
+    });
+  txt.text('').style('display', 'none');
+  return lengths;
+};
 
 nv.utils.maxStringSetLength = function (_data, _container, _format) {
-  var maxLength = 0;
-  _container.append('g').attr('class', 'tmp-text-strings');
-  var calcContainers = _container.select('.tmp-text-strings').selectAll('text')
-      .data(_data).enter()
-        .append('text')
-        .text(_format);
-  calcContainers
-    .each(function (d,i) {
-      maxLength = Math.max(this.getBBox().width, maxLength);
-    });
-  _container.select('.tmp-text-strings').remove();
-  return maxLength;
+  var lengths = nv.utils.stringSetLengths(_data, _container, _format);
+  return d3.max(lengths);
+};
+
+nv.utils.stringEllipsify = function(_string, _container, _length) {
+  var txt = _container.select('.tmp-text-strings').select('text'),
+      str = _string,
+      len = 0,
+      ell = 0;
+  if (txt.empty()) {
+    txt = _container.append('g').attr('class', 'tmp-text-strings').append('text');
+  }
+  txt.style('display', 'inline');
+  txt.text('...');
+  ell = txt.node().getBoundingClientRect().width;
+  txt.text(str);
+  len = txt.node().getBoundingClientRect().width;
+  strLen = len;
+  while (len > _length && len > 30) {
+    str = str.slice(0, -1);
+    txt.text(str);
+    len = txt.node().getBoundingClientRect().width + ell;
+  }
+  txt.text('').style('display', 'none');
+  return str + (strLen > _length ? '...' : '');
+};
+
+nv.utils.getTextBBox = function(text, floats) {
+  var bbox = text.node().getBoundingClientRect(),
+      size = {
+        width: floats ? bbox.width : parseInt(bbox.width, 10),
+        height: floats ? bbox.height : parseInt(bbox.height, 10)
+      };
+  return size;
 };
 
 nv.utils.getTextContrast = function(c, i, callback) {
-    var back = c,
-        backLab = d3.lab(back),
-        backLumen = backLab.l,
-        textLumen = backLumen > 50 ?
-          backLab.darker(4 + (backLumen - 75) / 25).l : // (50..100)[1 to 3.5]
-          backLab.brighter(4 + (25 - backLumen) / 25).l, // (0..50)[3.5..1]
-        textLab = d3.lab(textLumen, 0, 0),
-        text = textLab.toString();
+  var back = c,
+      backLab = d3.lab(back),
+      backLumen = backLab.l,
+      textLumen = backLumen > 50 ?
+        backLab.darker(4 + (backLumen - 75) / 25).l : // (50..100)[1 to 3.5]
+        backLab.brighter(4 + (25 - backLumen) / 25).l, // (0..50)[3.5..1]
+      textLab = d3.lab(textLumen, 0, 0),
+      text = textLab.toString();
+  if (callback) {
+    callback(backLab, textLab);
+  }
+  return text;
+};
 
-    if (callback) {
-      callback(backLab, textLab);
-    }
+nv.utils.isRTLChar = function(c) {
+  var rtlChars_ = '\u0591-\u07FF\uFB1D-\uFDFF\uFE70-\uFEFC',
+      rtlCharReg_ = new RegExp('[' + rtlChars_ + ']');
+  return rtlCharReg_.test(c);
+};
 
-    return text;
+nv.utils.polarToCartesian = function(centerX, centerY, radius, angleInDegrees) {
+  var angleInRadians = nv.utils.angleToRadians(angleInDegrees);
+  var x = centerX + radius * Math.cos(angleInRadians);
+  var y = centerY + radius * Math.sin(angleInRadians);
+  return [x, y];
+};
+
+nv.utils.angleToRadians = function(angleInDegrees) {
+  return angleInDegrees * Math.PI / 180.0;
+};
+
+nv.utils.angleToDegrees = function(angleInRadians) {
+  return angleInRadians * 180.0 / Math.PI;
+};
+
+nv.utils.isValidDate = function(d) {
+  if (!d) {
+    return false;
+  }
+  var testDate = new Date(d);
+  return testDate instanceof Date && !isNaN(testDate.valueOf());
 };

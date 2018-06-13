@@ -1,8 +1,9 @@
 /*
-YUI 3.15.0 (build 834026e)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("recordset-indexer",function(e,t){function n(e){n.superclass.constructor.apply(this,arguments)}e.mix(n,{NS:"indexer",NAME:"recordsetIndexer",ATTRS:{hashTables:{value:{}},keys:{value:{}}}}),e.extend(n,e.Plugin.Base,{initializer:function(t){var n=this.get("host");this.onHostEvent("add",e.bind("_defAddHash",this),n),this.onHostEvent("remove",e.bind("_defRemoveHash",this),n),this.onHostEvent("update",e.bind("_defUpdateHash",this),n)},destructor:function(e){},_setHashTable:function(e){var t=this.get("host"),n={},r=0,i=t.getLength();for(;r<i;r++)n[t._items[r].getValue(e)]=t._items[r];return n},_defAddHash:function(t){var n=this.get("hashTables");e.each(n,function(n,r){e.each(t.added||t.updated,function(e){e.getValue(r)&&(n[e.getValue(r)]=e)})})},_defRemoveHash:function(t){var n=this.get("hashTables"),r;e.each(n,function(n,i){e.each(t.removed||t.overwritten,function(e){r=e.getValue(i),r&&n[r]===e&&delete n[r]})})},_defUpdateHash:function(e){e.added=e.updated,e.removed=e.overwritten,this._defAddHash(e),this._defRemoveHash(e)},createTable:function(e){var t=this.get("hashTables");return t[e]=this._setHashTable(e),this.set("hashTables",t),t[e]},getTable:function(e){return this.get("hashTables")[e]}}),e.namespace("Plugin").RecordsetIndexer=n},"3.15.0",{requires:["recordset-base","plugin"]});
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('recordset-indexer',function(Y,NAME){function RecordsetIndexer(config){RecordsetIndexer.superclass.constructor.apply(this,arguments);}
+Y.mix(RecordsetIndexer,{NS:"indexer",NAME:"recordsetIndexer",ATTRS:{hashTables:{value:{}},keys:{value:{}}}});Y.extend(RecordsetIndexer,Y.Plugin.Base,{initializer:function(config){var host=this.get('host');this.onHostEvent('add',Y.bind("_defAddHash",this),host);this.onHostEvent('remove',Y.bind('_defRemoveHash',this),host);this.onHostEvent('update',Y.bind('_defUpdateHash',this),host);},destructor:function(config){},_setHashTable:function(key){var host=this.get('host'),obj={},i=0,len=host.getLength();for(;i<len;i++){obj[host._items[i].getValue(key)]=host._items[i];}
+return obj;},_defAddHash:function(e){var tbl=this.get('hashTables');Y.each(tbl,function(v,key){Y.each(e.added||e.updated,function(o){if(o.getValue(key)){v[o.getValue(key)]=o;}});});},_defRemoveHash:function(e){var tbl=this.get('hashTables'),reckey;Y.each(tbl,function(v,key){Y.each(e.removed||e.overwritten,function(o){reckey=o.getValue(key);if(reckey&&v[reckey]===o){delete v[reckey];}});});},_defUpdateHash:function(e){e.added=e.updated;e.removed=e.overwritten;this._defAddHash(e);this._defRemoveHash(e);},createTable:function(key){var tbls=this.get('hashTables');tbls[key]=this._setHashTable(key);this.set('hashTables',tbls);return tbls[key];},getTable:function(key){return this.get('hashTables')[key];}});Y.namespace("Plugin").RecordsetIndexer=RecordsetIndexer;},'3.15.0',{"requires":["recordset-base","plugin"]});

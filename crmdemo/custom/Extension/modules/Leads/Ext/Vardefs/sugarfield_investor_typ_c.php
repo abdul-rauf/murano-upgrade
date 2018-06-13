@@ -1,5 +1,4 @@
 <?php
- // created: 2011-09-08 11:13:52
-$dictionary['Lead']['fields']['investor_typ_c']['dependency']='';
+ // created: 2018-06-13 10:46:07
+$dictionary['Lead']['fields']['investor_typ_c']['dependency'] = '';
 
- ?>

@@ -24,8 +24,6 @@ $viewdefs['Leads']['base']['view']['subpanel-list'] = array(
                 'last_name',
             ),
             'link' => true,
-          'css_class' => 'full-name',
-          'width' =>  49,
           'label' => 'LBL_LIST_NAME',
           'enabled' => true,
           'default' => true,
@@ -59,6 +57,7 @@ $viewdefs['Leads']['base']['view']['subpanel-list'] = array(
           'label' => 'LBL_LIST_LEAD_SOURCE_DESCRIPTION',
           'enabled' => true,
           'default' => true,
+          'sortable' => false,
         ),
         array(
           'name' => 'assigned_user_name',
@@ -71,4 +70,37 @@ $viewdefs['Leads']['base']['view']['subpanel-list'] = array(
       ),
     ),
   ),
+    'rowactions' => array(
+        'actions' => array(
+            array(
+                'type' => 'rowaction',
+                'css_class' => 'btn',
+                'tooltip' => 'LBL_PREVIEW',
+                'event' => 'list:preview:fire',
+                'icon' => 'fa-eye',
+                'acl_action' => 'view',
+                'allow_bwc' => false,
+            ),
+            array(
+                'type' => 'rowaction',
+                'name' => 'edit_button',
+                'icon' => 'fa-pencil',
+                'label' => 'LBL_EDIT_BUTTON',
+                'event' => 'list:editrow:fire',
+                'acl_action' => 'edit',
+                'allow_bwc' => true,
+            ),
+            array(
+                'type' => 'convertbutton',
+                'name' => 'lead_convert_button',
+                'label' => 'LBL_CONVERT_BUTTON_LABEL',
+                'acl_action' => 'edit',
+            ),
+            array(
+                'type' => 'unlink-action',
+                'icon' => 'fa-chain-broken',
+                'label' => 'LBL_UNLINK_BUTTON',
+            ),
+        ),
+    ),
 );

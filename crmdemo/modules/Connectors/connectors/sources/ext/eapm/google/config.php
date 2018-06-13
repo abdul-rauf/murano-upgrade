@@ -1,4 +1,5 @@
 <?php
+
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -12,12 +13,14 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 $config = array (
-  'name' => 'Google&#169;',
+  'name' => 'Google',
   'eapm' => array(
     'enabled' => true,
     'only' => true,
   ),
   'order' => 12,
   'properties' => array (
+    'oauth2_client_id' => '',
+    'oauth2_client_secret' => '',
   ),
 );

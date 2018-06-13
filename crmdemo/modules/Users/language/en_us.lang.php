@@ -34,7 +34,6 @@ $mod_strings = array (
 	'LBL_TEAM_UPLINE_EXPLICIT'			=> 'Member',
     'LBL_TEAM_MEMBERSHIP'               => 'Team Membership',
     'LBL_TEAM_SET'                      => 'Team Set',
-
     'LBL_DELETE_USER_CONFIRM'           => 'When the User record is deleted, the corresponding Employee record will also be deleted. After the user is deleted, any workflow definitions and reports involving the user might need to be updated.<br/><br/>'.
                                                 'Deleting a User record cannot be undone.',
 	'LBL_DELETE_GROUP_CONFIRM'          => 'Are you sure you want to delete this Group User? Click OK to delete the User record.<br/>After clicking OK, you will be given the ability to reassign records assigned to the Group User to another user.',
@@ -66,8 +65,7 @@ $mod_strings = array (
 	'ERR_REPORT_LOOP'					=> 'The system detected a reporting loop. A user cannot report to themselves, nor can any of their managers report to them.',
 	'ERR_RULES_NOT_MET'                 => 'The password you entered did not meet the password requirements.  Please try again.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'User Information not found',
-	'ERR_USER_NAME_EXISTS_1'			=> 'The user name ',
-	'ERR_USER_NAME_EXISTS_2'			=> ' already exists.	Duplicate user names are not allowed.	Change the user name to be unique.',
+    'ERR_USER_NAME_EXISTS'              => 'The user name {0} already exists. Duplicate user names are not allowed. Change the user name to be unique.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'This user is locked out of the Sugar application and cannot log in using his/her existing password.',
 
 	'LBL_PASSWORD_SENT'                => 'Password Updated',
@@ -91,8 +89,6 @@ $mod_strings = array (
 	'LBL_ADDRESS_STREET_3'				=> 'Address Street 3',
 	'LBL_ADDRESS'						=> 'Address',
 	'LBL_ADMIN_USER'					=> 'System Administrator User',
-
-
 
 	'LBL_ADMIN_DESC'					=> 'User can access the Administration page all records, regardless of team security.',
 	'LBL_REGULAR_DESC'					=> 'User can access modules and records based on team security and roles.',
@@ -121,10 +117,10 @@ $mod_strings = array (
 	'LBL_CURRENCY_TEXT'					=> 'This is the currency used in list and record views if Show Preferred Currency is enabled. This is also your default currency for new records.',
 	'LBL_CURRENCY'						=> 'Preferred Currency',
 	'LBL_CURRENCY_EXAMPLE'				=> 'Currency Display Example',
-	'LBL_CURRENCY_SIG_DIGITS'			=> 'Currency Significant Digits',
+	'LBL_SYSTEM_SIG_DIGITS'				=> 'System Significant Digits',
+	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> 'Number of decimal places to show for decimals and floats throughout the system, such as currency and average in Reports.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => 'Show Preferred Currency',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => 'Convert base currency to user preferred in list and record views',
-	'LBL_CURRENCY_SIG_DIGITS_DESC'		=> 'Number of decimal places to show for currency',
 	'LBL_NUMBER_GROUPING_SEP'			=> '1000s separator',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> 'Character used to separate thousands',
 	'LBL_DECIMAL_SEP'					=> 'Decimal Symbol',
@@ -356,7 +352,7 @@ $mod_strings = array (
 	'LBL_TIME_FORMAT'					=> 'Time Format',
 	'LBL_TIMEZONE_DST_TEXT'				=> 'Observe Daylight Savings',
 	'LBL_TIMEZONE_DST'					=> 'Daylight Savings',
-	'LBL_TIMEZONE_TEXT'					=> 'Set the current time zone',
+	'LBL_TIMEZONE_TEXT'					=> 'Set the current time zone. <br/><br/>Please note: this setting is only used by legacy modules and Import/Export functions. Sugar 7 modules automatically use the browser time zone. To avoid time zone conflicts, please set the time zone to match your browser time zone.',
 	'LBL_TIMEZONE'						=> 'Time Zone',
 	'LBL_TITLE'							=> 'Title',
 	'LBL_USE_REAL_NAMES'				=> 'Show Full Names',
@@ -444,7 +440,6 @@ $mod_strings = array (
 	'ERR_REASS_SELECT_MODULE'			=> 'Please go back and select at least one module.',
 	'ERR_REASS_DIFF_USERS'				=> 'Please select a To User that is different from the From User.',
 // END MASS REASSIGNMENT SCRIPT STRINGS
-
 
 // INBOUND EMAIL STRINGS
 	'LBL_APPLY_OPTIMUMS'				=> 'Apply Optimums',
@@ -626,6 +621,7 @@ $mod_strings = array (
     'LBL_SHOWOPTIONS' => 'Show Options',
 
     'LBL_FILTER_USERS_REPORTS' => 'Users\' reports',
+    'LBL_CONTACTS_SYNC' => 'Contacts',
 
 ); // END STRINGS DEFS
 

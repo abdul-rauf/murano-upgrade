@@ -11,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: LogView.php 56427 2010-05-13 00:38:18Z smalyshev $
 global $mod_strings;
 if(!is_admin($current_user)){
 	sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
@@ -119,7 +119,7 @@ if (!empty ($_REQUEST['display'])) {
 
             $line = filter_var($line, FILTER_SANITIZE_SPECIAL_CHARS);
 			//preg_match('/[^\]]*\[([0-9]*)\] ([a-zA-Z]+) ([a-zA-Z0-9\.]+) - (.*)/', $line, $result);
-			preg_match('/[^\]]*\[([0-9]*)\]/', $line, $result);
+			preg_match('/[^\]]*\[([0-9]*)\]/', substr($line, 0, 80), $result);
 			ob_flush();
 			flush();
 			if(empty($result) && $lastMatch){

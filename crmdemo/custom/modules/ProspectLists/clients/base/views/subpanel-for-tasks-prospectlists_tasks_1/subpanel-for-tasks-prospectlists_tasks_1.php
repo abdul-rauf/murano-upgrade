@@ -1,5 +1,6 @@
 <?php
-// created: 2015-12-17 17:11:23
+
+/* This file was updated by 7_FixNameLink.php */
 $viewdefs['ProspectLists']['base']['view']['subpanel-for-tasks-prospectlists_tasks_1'] = array (
   'panels' => 
   array (
@@ -15,6 +16,7 @@ $viewdefs['ProspectLists']['base']['view']['subpanel-for-tasks-prospectlists_tas
           'enabled' => true,
           'default' => true,
           'name' => 'name',
+          'link' => true,
         ),
         1 => 
         array (

@@ -36,7 +36,6 @@ class ParserDropDown extends ModuleBuilderParser
         }
 
         $type = $_REQUEST['view_package'];
-        $dir = '';
         $dropdown_name = $params['dropdown_name'];
         $json = getJSONobj();
 
@@ -79,51 +78,120 @@ class ParserDropDown extends ModuleBuilderParser
             //write to contents
             $contents = str_replace("?>", '', $contents);
             if (empty($contents)) $contents = "<?php";
+
+            // Skip saveExemptDropdowns on upgrades
+            if (empty($params['skipSaveExemptDropdowns'])) {
+                $dropdown = $this->saveExemptDropdowns($dropdown, $dropdown_name, $my_list_strings, $selected_lang);
+            }
+
             //add new drop down to the bottom
             if (!empty($params['use_push'])) {
                 //this is for handling moduleList and such where nothing should be deleted or anything but they can be renamed
-                foreach ($dropdown as $key=>$value) {
+                $app_list_strings = array();
+                $filePath = $this->getExtensionFilePath($dropdown_name, $selected_lang);
+                //Include the original extension to ensure any values sourced from it are kept.
+                if (sugar_is_file($filePath)) {
+                    include($filePath);
+                }
+
+                foreach ($dropdown as $key => $value) {
                     //only if the value has changed or does not exist do we want to add it this way
-                    if (!isset($my_list_strings[$dropdown_name][$key]) || strcmp($my_list_strings[$dropdown_name][$key], $value) != 0 ) {
-                        //clear out the old value
-                        $pattern_match = '/\s*\$app_list_strings\s*\[\s*\''.$dropdown_name.'\'\s*\]\[\s*\''.$key.'\'\s*\]\s*=\s*[\'\"]{1}.*?[\'\"]{1};\s*/ism';
-                        $contents = preg_replace($pattern_match, "\n", $contents);
-                        //add the new ones without using GLOBALS
+                    if (!isset($my_list_strings[$dropdown_name][$key])
+                        || strcmp($my_list_strings[$dropdown_name][$key], $value) != 0) {
+                        $app_list_strings[$dropdown_name][$key] = $value;
+                    }
+                }
+                //Now that we have all the values, save the overrides to the extension
+                if (!empty($app_list_strings[$dropdown_name])) {
+                    $contents = "<?php\n //created: " . date('Y-m-d H:i:s') . "\n";
+                    foreach($app_list_strings[$dropdown_name] as $key => $value) {
                         $contents .= "\n\$app_list_strings['$dropdown_name']['$key']=" . var_export_helper($value) . ";";
                     }
+                    $this->saveContents($dropdown_name, $contents, $selected_lang);
                 }
             } else {
                 if (empty($params['skip_sync'])) {
                     // Now synch up the keys in other languages to ensure that removed/added
                     // Drop down values work properly under all langs.
                     // If skip_sync, we don't want to sync ALL languages
-                    $this->synchDropDown($dropdown_name, $dropdown, $selected_lang, $dir);
+                    $this->synchDropDown($dropdown_name, $dropdown, $selected_lang);
                 }
 
-                $contents = $this->getNewCustomContents($dropdown_name, $dropdown, $selected_lang);
+                $contents = $this->getExtensionContents($dropdown_name, $dropdown);
+                $this->saveContents($dropdown_name, $contents, $selected_lang);
             }
-            if (!empty($dir) && !is_dir($dir)) {
-                 $continue = mkdir_recursive($dir);
-            }
-            save_custom_app_list_strings_contents($contents, $selected_lang, $dir);
         }
+        $this->finalize($selected_lang);
+    }
+
+    /**
+     * Saves the dropdown as an Extension, and rebuilds the extensions for given language
+     *
+     * @param string $dropdownName - dropdown name, used for file name
+     * @param string $contents - the edited dropdown contents
+     * @param string $lang - the edited dropdown language
+     * @return bool Success
+     */
+    protected function saveContents($dropdownName, $contents, $lang)
+    {
+        $fileName = $this->getExtensionFilePath($dropdownName, $lang);
+        if ($fileName) {
+            if (SugarAutoLoader::put($fileName, $contents, true)) {
+                return true;
+            }
+            $GLOBALS['log']->fatal("Unable to write edited dropdown language to file: $fileName");
+        }
+        return false;
+    }
+
+    protected function getExtensionFilePath($dropdownName, $lang)
+    {
+        $dirName = 'custom/Extension/application/Ext/Language';
+        if (SugarAutoLoader::ensureDir($dirName)) {
+            $fileName = "$dirName/$lang.sugar_$dropdownName.php";
+
+            return $fileName;
+        } else {
+            $GLOBALS['log']->fatal("Unable to create dir: $dirName");
+        }
+
+        return false;
+    }
+
+
+    /**
+     * Clears the js cache and rebuilds the language files
+     *
+     * @param string $lang - language to be rebuilt, and cache cleared
+     */
+    public function finalize($lang)
+    {
+        $mi = new ModuleInstaller();
+        $mi->silent = true;
+        $mi->rebuild_languages(
+            array(
+                $lang => $lang
+            )
+        );
+
         sugar_cache_reset();
+        sugar_cache_reset_full();
         clearAllJsAndJsLangFilesWithoutOutput();
 
         // Clear out the api metadata languages cache for selected language
-        MetaDataManager::refreshLanguagesCache($selected_lang);
+        LanguageManager::invalidateJsLanguageCache();
+        MetaDataManager::refreshLanguagesCache($lang);
     }
 
     /**
      * function synchDropDown
      * 	Ensures that the set of dropdown keys is consistant accross all languages.
      *
-     * @param $dropdown_name The name of the dropdown to be synched
-     * @param $dropdown array The dropdown currently being saved
-     * @param $selected_lang String the language currently selected in Studio/MB
-     * @param $saveLov String the path to the directory to save the new lang file in.
+     * @param string $dropdown_name The name of the dropdown to be synched
+     * @param array $dropdown The dropdown currently being saved
+     * @param string $selected_lang the language currently selected in Studio/MB
      */
-    public function synchDropDown($dropdown_name, $dropdown, $selected_lang, $saveLoc)
+    public function synchDropDown($dropdown_name, $dropdown, $selected_lang)
     {
         $allLanguages =  get_languages();
         foreach ($allLanguages as $lang => $langName) {
@@ -136,8 +204,8 @@ class ParserDropDown extends ModuleBuilderParser
                     //if the dropdown does not exist in the language, justt use what we have.
                     $langDropDown = $dropdown;
                 }
-                $contents = $this->getNewCustomContents($dropdown_name, $langDropDown, $lang);
-                save_custom_app_list_strings_contents($contents, $lang, $saveLoc);
+                $contents = $this->getExtensionContents($dropdown_name, $langDropDown);
+                $this->saveContents($dropdown_name, $contents, $lang);
             }
         }
     }
@@ -208,5 +276,62 @@ class ParserDropDown extends ModuleBuilderParser
         $contents = preg_replace($this->getPatternMatch($dropdown_name), "\n\n", $contents);
         $contents .= "\n\n\$app_list_strings['$dropdown_name']=" . var_export_helper($dropdown) . ";";
         return $contents;
+    }
+
+    /**
+     * Retrieves the contents for a language extension that includes only the dropdown modified in the contents
+     * @param string $dropdown_name
+     * @param array $dropdown
+     *
+     * @return string
+     */
+    protected function getExtensionContents($dropdown_name, $dropdown)
+    {
+        $contents = "<?php\n // created: " . date('Y-m-d H:i:s') . "\n";
+        $contents .= "\n\$app_list_strings['$dropdown_name']=" . var_export_helper($dropdown) . ";";
+
+        return $contents;
+    }
+
+    /**
+     * Save dropdowns in which we use 'null' to remove a value
+     *
+     * @param $dropdown - Dropdown values
+     * @param $dropdownName - Dropdown name
+     * @param $myListStrings - Current app_list_strings
+     * @param $selectedLang - Selected language
+     *
+     * @see getExemptDropdowns()
+     */
+    public function saveExemptDropdowns($dropdown, $dropdownName, $myListStrings, $selectedLang)
+    {
+        // Handle special dropdown item removal
+        if (in_array($dropdownName, getExemptDropdowns())) {
+            foreach ($myListStrings[$dropdownName] as $key => $value) {
+                // If the value is present in the old app_list_strings but not in the new, null it
+                if (!empty($key) && !isset($dropdown[$key])) {
+                    $dropdown[$key] = null;
+                }
+            }
+            // We need to copy the NULLs if they are not set in the new dropdown
+            // because return_app_list_strings_language() removes them from the array
+            $files = SugarAutoLoader::existing(
+                "custom/include/language/$selectedLang.lang.php",
+                "custom/application/Ext/Language/$selectedLang.lang.ext.php"
+            );
+
+            foreach ($files as $customLanguage) {
+                include($customLanguage);
+                if (isset($app_list_strings[$dropdownName])) {
+                    foreach ($app_list_strings[$dropdownName] as $key => $value) {
+                        if ($value === null && !isset($dropdown[$key])) {
+                            $dropdown[$key] = null;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $dropdown;
     }
 }

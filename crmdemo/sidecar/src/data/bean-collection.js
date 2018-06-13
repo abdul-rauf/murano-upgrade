@@ -37,13 +37,15 @@
     app.augment('BeanCollection', Backbone.Collection.extend({
 
         /**
-         * Prepare related bean collections
+         * Prepare related bean collections and attach collection plugins.
          *
+         * @inheritdoc
          * @constructor
          * @param {Array} models initial array of models
          * @param {Object} options
          */
         constructor: function(models, options) {
+            app.plugins.attach(this, 'collection');
             if (options && options.link) {
                 this.link = options.link;
                 delete options.link;
@@ -59,9 +61,64 @@
          * @param {Object} options
          */
         initialize: function(models, options) {
-            this._initOptions = app.utils.deepCopy(options);
-            app.plugins.attach(this, "collection");
+            /**
+             * Initial fetch options.
+             *
+             * @deprecated 7.7 will be removed in 7.8. Please use {@link #setOption}
+             *   if you want to set persistent options.
+             *
+             * @type {Object}
+             * @private
+             */
+            if (!_.isEmpty(options)) {
+                options = app.utils.deepCopy(options);
+                this.setOption(options);
+                app.logger.warn('You should not pass persistent fetch options in initialize ' +
+                '(The options hash is supposed to be Backbone.js options hash, allowing you ' +
+                'to pass Backbone options used when setting the models into the collection).' +
+                ' Please use setOption() instead.');
+            }
+            this._initOptions = options;
+
+            /**
+             * The request object that is currently syncing against the server.
+             *
+             * This object is needed to determine if a fetch request should be
+             * aborted for the collection (e.g. if a new fetch request returns a
+             * response prior to a previous fetch request).
+             *
+             * @private
+             * @member Data.BeanCollection
+             * @property {SUGAR.Api.HttpRequest}
+             */
+            this._activeFetchRequest = null;
+
+            this.on('data:sync:complete', function() {
+                this._activeFetchRequest = null;
+            }, this);
+
+            this.on('remove', this._decrementTotal, this);
+
             Backbone.Collection.prototype.initialize.call(this, models, options);
+
+            /**
+             * Readonly property for the total records in server.
+             *
+             * Use {@link #fetchTotal} to get the current total.
+             * @type {number}
+             */
+            this.total = null;
+        },
+
+        /**
+         * Decrements the {@link #total collection total}.
+         *
+         * @protected
+         */
+        _decrementTotal: function() {
+            if (this.total) {
+                this.total--;
+            }
         },
 
         /**
@@ -75,9 +132,10 @@
         /**
          * Prepare the model to be added to the collection
          *
-         * @param {Bean} model to be added
-         * @param {Object} options(optional)
-         * @returns {Bean} prepared model
+         * @param {Data.Bean} model to be added.
+         * @param {Object} [options] to be passed to
+         *   {@link Backbone.Collection#_prepareModel} method.
+         * @return {Data.Bean} prepared model.
          * @private
          */
         _prepareModel: function(model, options) {
@@ -112,28 +170,36 @@
         },
 
         /**
-         * Fetches beans.
+         * Fetches beans. See {@link Data.BeanCollection#paginate} for details
+         * about pagination options.
          *
-         * @param options(optional) fetch options
+         * Only one fetch request can be executed at a time - previous fetch
+         * requests will be aborted.
          *
-         * - relate: boolean flag indicating that relationships should be fetched.
-         * - myItems: boolean flag indicating to fetch records assigned to the current user only
-         * - favorites: boolean flag indicating to fetch favorites
-         * - query: search query string
-         * - add: boolean flag indicating if new records should be appended to the collection.
-         * - success: success callback.
-         * - error: error callback.
-         *
-         * See {@link Data.BeanCollection#paginate} for details about pagination options.
+         * @param {Object} [options] Fetch options.
+         * @param {bool} [options.relate] `true` if relationships should be
+         *   fetched. `false` otherwise.
+         * @param {bool} [options.myItems] `true` if only records assigned to
+         *   the current user should be fetched. `false` otherwise.
+         * @param {bool} [options.favorites] `true` if favorited records should
+         *   be fetched. `false` otherwise.
+         * @param {bool} [options.add] `true` if new records should be appended
+         *   to the collection. `false` otherwise.
+         * @param {string} [options.query] Search query string.
+         * @param {Function} [options.success] The success callback to execute.
+         * @param {Function} [options.error] The error callback to execute.
          */
         fetch: function(options) {
-            options = _.extend({}, this.options, options);
+            options = _.extend({}, this.getOption(), options);
 
+            this.abortFetchRequest();
             /**
              * Field names.
              *
              * A list of fields that are populated on collection members.
-             * This property is used to build `fields` URL parameter when fetching beans.
+             * This property is used to build `fields` URL parameter when
+             * fetching beans.
+             *
              * @member Data.BeanCollection
              * @property {Array}
              */
@@ -142,45 +208,61 @@
             options.favorites = _.isUndefined(options.favorites) ? this.favorites : options.favorites;
             options.query = _.isUndefined(options.query) ? this.query : options.query;
 
-            this.options = options;
-            return Backbone.Collection.prototype.fetch.call(this, options);
+            this._activeFetchRequest = Backbone.Collection.prototype.fetch.call(this, options);
+            return this._activeFetchRequest;
         },
+
         /**
-         * Resets pagination properties on a collection to initial options, otherwise defaults to first page
+         * Getter for {@link #_activeFetchRequest}.
+         *
+         * @return {SUGAR.Api.HttpRequest} The active fetch request.
+         */
+        getFetchRequest: function() {
+            return this._activeFetchRequest;
+        },
+
+        /**
+         * Aborts the {@link #_activeFetchRequest current fetch request}.
+         */
+        abortFetchRequest: function() {
+            var req = this.getFetchRequest();
+            if (req) {
+                app.api.abortRequest(req.uid);
+            }
+        },
+
+        /**
+         * Resets pagination properties on a collection to initial options,
+         * otherwise defaults to first page
          */
         resetPagination:function(){
             var paginationDefaults = {offset: 0, next_offset: 0, page: 1};
             var optKeys = _.keys(paginationDefaults);
             this.resetOptions(optKeys);
+            var options = this.getOption();
             _.each(optKeys, function(optKey) {
-               if (this.options && this.options[optKey]) {
-                   this[optKey] = this.options[optKey];
-               } else {
-                   this[optKey] = paginationDefaults[optKey];
-               }
+                this[optKey] = options[optKey] || paginationDefaults[optKey];
             }, this);
         },
         /**
          * Resets optionsList to original values from init, clears them if no optionsList specified
          *
+         * @deprecated 7.7 will be removed in 7.8. Please use {@link #setOption}/{@link #unsetOption}
+         *   if you want to set persistent options.
+         *
          * @param {Array} optionsList(optional) array of option keys to reset
          */
         resetOptions: function (optionsList) {
-            if (_.isEmpty(this._initOptions)) {
+            if (_.isEmpty(this._initOptions) && _.isEmpty(this.getOption())) {
                 // clear options if none existed when we started
-                this.options = null;
-
-            } else if (!optionsList) {
-                // reset options if no specific ones are specified
-                this.options = this._initOptions;
-
+                this.unsetOption();
             } else {
                 // reset specific options if specified
                 _.each(optionsList, function (option) {
                     if (!_.isUndefined(this._initOptions[option])) {
-                        this.options[option] = this._initOptions[option];
-                    } else {
-                        delete this.options[option];
+                        this.setOption(option, this._initOptions[option]);
+                    } else if (!_.isEmpty(this.options) && _.has(this.options, option)) {
+                        this.unsetOption(option);
                     }
                 }, this);
             }
@@ -212,6 +294,113 @@
             }
 
             this.fetch(options);
+        },
+
+        /**
+         * Fetches the total amount of records on the bean collection, and sets
+         * it on the {@link #total} property.
+         *
+         * Returns the total amount of filtered records if a `filterDef`
+         * property is set on the collection.
+         *
+         * @param {Object} [options] Fetch total options.
+         * @param {Function} [options.success] Success callback.
+         * @param {Function} [options.complete] Complete callback.
+         * @param {Function} [options.error] Error callback.
+         * @return {SUGAR.HttpRequest} Result of {@link SUGAR.Api#call}.
+         */
+        fetchTotal: function(options) {
+            options = options || {};
+
+            if (!_.isNull(this.total) && _.isFunction(options.success)) {
+                options.success.call(this, this.total);
+                return;
+            }
+
+            options.success = _.wrap(options.success, _.bind(function(orig, data) {
+                this.total = parseInt(data.record_count, 10);
+                if (orig && _.isFunction(orig)) {
+                    orig(this.total);
+                }
+            }, this));
+
+            var module = this.module;
+            var data = null;
+            options.filter = options.filterDef || this.filterDef;
+
+            if (this.link) {
+                data = {
+                    id: this.link.bean.id,
+                    link: this.link.name
+                };
+                module = this.link.bean.module;
+            }
+
+            var callbacks = _.pick(options, 'success', 'complete', 'error');
+            options = _.omit(options, 'success', 'complete', 'error');
+
+            return app.api.count(module, data, callbacks, options);
+        },
+
+        /**
+         * A convenience method that checks to see if there are at least the
+         * amount of records passed in `amount`. Also passes to a provided
+         * success callback the length of records up to `amount`, and if there
+         * are more records to be fetched (`hasMore`).
+         *
+         * Fetches the partial amount of filtered records if a `filterDef`
+         * property is set on the collection.
+         *
+         * @param {number} amount The number of records to check if there are a
+         *   minimum of.
+         * @param {Object} [options] Fetch partial total options.
+         * @param {Object} [options.filterDef] Filter definition to be applied.
+         * @param {Function} [options.success] Success callback.
+         * @param {Function} [options.complete] Complete callback.
+         * @param {Function} [options.error] Error callback.
+         * @return {SUGAR.HttpRequest} Result of {@link SUGAR.Api#call}.
+         */
+        hasAtLeast: function(amount, options) {
+            options = options || {};
+            var method = 'read';
+            options.fields = ['id'];
+            delete options.view;
+            options.silent = true;
+            options.success = _.wrap(options.success, _.bind(function(orig, data) {
+                var length = data.records.length;
+                var hasAtLeastAmount = length >= amount;
+                var properties = {
+                    length: length,
+                    hasMore: data.next_offset !== -1
+                };
+
+                if (_.isFunction(orig)) {
+                    orig(hasAtLeastAmount, properties);
+                }
+
+                this.reset(null, {silent: true});
+            }, this));
+
+            var module = this.module;
+            var data = null;
+            var endpoint = 'records';
+            options.filter = options.filterDef || this.filterDef;
+            options.limit = options.limit || amount;
+
+            if (this.link) {
+                data = {
+                    id: this.link.bean.id,
+                    link: this.link.name
+                };
+                module = this.link.bean.module;
+                endpoint = 'relationships';
+            }
+
+            var callbacks = _.pick(options, 'success', 'complete', 'error');
+            options = _.omit(options, 'success', 'complete', 'error');
+            options = app.data.parseOptionsForSync(method, this, options);
+
+            return app.api[endpoint](method, module, data, options.params, callbacks, options.apiOptions);
         },
 
         /**
@@ -315,8 +504,80 @@
          */
         getModelIndex: function (model) {
             return this.indexOf(this.get(model.id));
+        },
+
+        /**
+         * Sets the default fetch options (one or many) on the model.
+         *
+         * @param {string|Object} key The name of the attribute, or an hash of
+         * attributes.
+         * @param {Mixed} [val] The default value for the `key` argument.
+         *
+         * @chainable
+         */
+        setOption: function(key, val) {
+            var attrs;
+            if (_.isObject(key)) {
+                attrs = key;
+            } else {
+                (attrs = {})[key] = val;
+            }
+
+            /**
+             * List of persistent fetch options.
+             *
+             * @type {Object}
+             * @private
+             */
+            this._persistentOptions = _.extend({}, this._persistentOptions, attrs);
+            return this;
+        },
+
+        /**
+         * Unsets a default fetch option (or all).
+         *
+         * @param {string|Object} [key] The name of the option to unset, or
+         * nothing to unset all options.
+         *
+         * @chainable
+         */
+        unsetOption: function(key) {
+            if (key) {
+                this.setOption(key, void 0);
+            } else {
+                this._persistentOptions = {};
+            }
+            return this;
+        },
+
+        /**
+         * Gets one or all persistent fetch options.
+         *
+         * @param {string|Object} [key] The name of the option to retrieve, or
+         * nothing to retrieve all options.
+         * @return {Mixed} A specific option, or the list of options.
+         */
+        getOption: function(key) {
+            if (key) {
+                return this._persistentOptions[key];
+            }
+            return this._persistentOptions;
+        },
+
+        /**
+         * @inheritdoc
+         *
+         * Clones the {@link #link} and all the persistent options of the
+         * Collection.
+         *
+         * @return {Data.BeanCollection} The new collection with an identical
+         * list of models as this one.
+         */
+        clone: function() {
+            var newCol = Backbone.Collection.prototype.clone.call(this);
+            newCol.link = _.clone(this.link);
+            newCol.setOption(_.clone(this.getOption()));
+            return newCol;
         }
-
     }), false);
-
 }(SUGAR.App));

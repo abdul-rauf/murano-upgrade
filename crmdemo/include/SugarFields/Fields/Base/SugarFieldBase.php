@@ -31,9 +31,42 @@ class SugarFieldBase {
     protected static $base = array();
     public $needsSecondaryQuery = false;
 
+    /**
+     * The name of the module the field belongs to
+     *
+     * @var string
+     */
+    protected $module;
+
+    /**
+     * Field options
+     *
+     * @var array
+     */
+    protected $options = array();
+
     function SugarFieldBase($type) {
     	$this->type = $type;
         $this->ss = new Sugar_Smarty();
+    }
+
+    /**
+     * Sets the field options
+     *
+     * @param $options
+     */
+    public function setOptions($options) {
+        $this->options = $options;
+    }
+
+    /**
+     * Sets the field module
+     *
+     * @param $module
+     */
+    public function setModule($module)
+    {
+        $this->module = $module;
     }
 
     function fetch($path)
@@ -72,19 +105,24 @@ class SugarFieldBase {
         return self::$base[$view];
     }
 
-    function findTemplate($view){
+    protected function findTemplate($view, $formName = '')
+    {
         static $tplCache = array();
 
         if ( isset($tplCache[$this->type][$view]) ) {
             return $tplCache[$this->type][$view];
         }
 
-        $lastClass = get_class($this);
-        $classList = array($this->type,str_replace('SugarField','',$lastClass));
-        while ( $lastClass = get_parent_class($lastClass) ) {
-            $classList[] = str_replace('SugarField','',$lastClass);
+        if (isset($this->formTemplateMap[$formName])) {
+            $classList = array($this->formTemplateMap[$formName]);
+        } else {
+            $lastClass = get_class($this);
+            $classList = array($this->type, str_replace('SugarField', '', $lastClass));
+            while ($lastClass = get_parent_class($lastClass)) {
+                $classList[] = str_replace('SugarField', '', $lastClass);
+            }
+            array_pop($classList); // remove this class - $base handles that
         }
-        array_pop($classList); // remove this class - $base handles that
 
         $tplName = '';
         global $current_language;
@@ -122,9 +160,20 @@ class SugarFieldBase {
      * @param array     $args
      * @param string    $fieldName
      * @param array     $properties
+     * @param array     $fieldList
+     * @param ServiceBase $service
      */
-    public function apiFormatField(array &$data, SugarBean $bean, array $args, $fieldName, $properties)
-    {
+    public function apiFormatField(
+        array &$data,
+        SugarBean $bean,
+        array $args,
+        $fieldName,
+        $properties,
+        array $fieldList = null,
+        ServiceBase $service = null
+    ) {
+        $this->ensureApiFormatFieldArguments($fieldList, $service);
+
         if (isset($bean->$fieldName)) {
             $data[$fieldName] = $bean->$fieldName;
         } else {
@@ -132,11 +181,27 @@ class SugarFieldBase {
         }
     }
 
+    /**
+     * Ensures that necessary arguments of apiFormatField() are passed
+     *
+     * @param array $fieldList The $fieldList argument of apiFormatField()
+     * @param ServiceBase $service The $service argument of apiFormatField()
+     */
+    protected function ensureApiFormatFieldArguments(array $fieldList = null, ServiceBase $service = null)
+    {
+        if ($fieldList === null) {
+            trigger_error('$fieldList argument of apiFormatField() is missing', E_USER_DEPRECATED);
+        }
+
+        if ($service === null) {
+            trigger_error('$service argument of apiFormatField() is missing', E_USER_DEPRECATED);
+        }
+    }
+
     function getWirelessSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex = -1, $view){
     	$this->setup($parentFieldArray, $vardef, $displayParams, $tabindex, false);
         return $this->fetch($this->findTemplate($view));
     }
-
 
     public function unformatField($formattedField, $vardef){
         // The base field doesn't do any formatting, so override it in subclasses for more specific actions
@@ -146,8 +211,8 @@ class SugarFieldBase {
     function getSmartyView($parentFieldArray, $vardef, $displayParams, $tabindex = -1, $view){
     	$this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
 
-
-    	return $this->fetch($this->findTemplate($view));
+        $formName = isset($displayParams['formName']) ? $displayParams['formName'] : '';
+        return $this->fetch($this->findTemplate($view, $formName));
     }
 
     function getListViewSmarty($parentFieldArray, $vardef, $displayParams, $col) {
@@ -530,15 +595,14 @@ class SugarFieldBase {
      * @param array $properties - Any properties for this field
      */
     public function save($bean, $params, $field, $properties, $prefix = '') {
-         if ( isset($params[$prefix.$field]) ) {
-             if(isset($properties['len']) && isset($properties['type']) && $this->isTrimmable($properties['type'])){
-                 $bean->$field = trim($this->unformatField($params[$prefix.$field], $properties));
-             }
-             else {
-                 $bean->$field = $this->unformatField($params[$prefix.$field], $properties);
-         	 }
-         }
-     }
+        if (isset($params[$prefix.$field])) {
+            if (isset($properties['len']) && isset($properties['type']) && $this->isTrimmable($properties['type'])) {
+                $bean->$field = trim($this->unformatField($params[$prefix.$field], $properties));
+            } else {
+                $bean->$field = $this->unformatField($params[$prefix.$field], $properties);
+            }
+        }
+    }
 
     /**
      * This should be called when the bean is saved from the API. Most fields can just use default, which calls the field's individual ->save() function instead.
@@ -555,6 +619,19 @@ class SugarFieldBase {
                 $bean->$field = $this->apiUnformatField($params[$field], $properties);
             }
         }
+    }
+
+    /**
+     * Validates submitted data
+     * @param SugarBean $bean
+     * @param array $params
+     * @param string $field
+     * @param array $properties
+     * @return boolean
+     */
+    public function apiValidate(SugarBean $bean, array $params, $field, $properties) 
+    {
+        return true;
     }
 
     /**
@@ -825,5 +902,45 @@ class SugarFieldBase {
     {
         return;
     }
-    
+
+    /**
+     * Adds field to the list of fields to be selected
+     *
+     * @param string $field
+     * @param array $fields
+     */
+    public function addFieldToQuery($field, array &$fields)
+    {
+        $fields[] = $field;
+    }
+
+    /**
+     * Processes view field by calling callbacks with its attributes and iterating over nested fields
+     *
+     * @param ViewIterator $iterator View iterator
+     * @param array $field The view definition of the field being processed
+     * @param callable $callback Iterator callback
+     */
+    public function iterateViewField(
+        ViewIterator $iterator,
+        array $field,
+        /* callable */ $callback
+    ) {
+        $fieldSetAttributes = array('fields', 'related_fields');
+        $fieldSets = array();
+        foreach ($fieldSetAttributes as $attribute) {
+            if (isset($field[$attribute]) && is_array($field[$attribute])) {
+                $fieldSets[] = $field[$attribute];
+                unset($field[$attribute]);
+            }
+        }
+
+        if (isset($field['name'])) {
+            $callback($field);
+        }
+
+        foreach ($fieldSets as $fieldSet) {
+            $iterator->apply($fieldSet, $callback);
+        }
+    }
 }

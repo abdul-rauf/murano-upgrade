@@ -22,8 +22,9 @@ class SugarUpgradeOpportunityUpdateRollupFields extends UpgradeScript
             return;
         }
 
-        // we need to anything other than ENT and ULT
-        if (!$this->fromFlavor('ent')) {
+        $settings = Opportunity::getSettings();
+        if ($settings['opps_view_by'] !== 'RevenueLineItems') {
+            $this->log('Not using Revenue Line Items; Skipping Upgrade Script');
             return;
         }
 
@@ -36,17 +37,8 @@ class SugarUpgradeOpportunityUpdateRollupFields extends UpgradeScript
                           Max(t.date_closed)           AS date_closed,
                           Max(t.date_closed_timestamp) AS date_closed_timestamp,
                           Count(0)                     AS total,
-                          ( won + lost )               total_closed,
-                          CASE
-                            WHEN Count(0) = 0
-                                  OR Count(0) > ( won + lost ) THEN
-                            'In Progress'
-                            ELSE
-                              CASE
-                                WHEN lost = Count(0) THEN 'Closed Lost'
-                                ELSE 'Closed Won'
-                              end
-                          end                          AS sales_status
+                          ( won + lost )               AS total_closed,
+                          lost
                    FROM   (SELECT rli.opportunity_id,
                                   (rli.likely_case/rli.base_rate) as likely_case,
                                   (rli.worst_case/rli.base_rate) as worst_case,
@@ -61,9 +53,9 @@ class SugarUpgradeOpportunityUpdateRollupFields extends UpgradeScript
                                     WHEN rli.sales_stage = 'Closed Won' THEN 1
                                     ELSE 0
                                   end AS won
-                           FROM   revenue_line_items AS rli
-                           WHERE  rli.deleted = 0) AS t
-                   GROUP  BY opp_id";
+                           FROM   revenue_line_items rli
+                           WHERE  rli.deleted = 0) t
+                   GROUP  BY t.opportunity_id, (won + lost), lost";
 
         $results = $this->db->query($sql);
 
@@ -71,6 +63,10 @@ class SugarUpgradeOpportunityUpdateRollupFields extends UpgradeScript
                     amount=(%f*base_rate),best_case=(%f*base_rate),worst_case=(%f*base_rate),date_closed='%s',date_closed_timestamp='%s',
                     sales_status='%s',total_revenue_line_items='%d',closed_revenue_line_items='%d' WHERE id = '%s'";
         while ($row = $this->db->fetchRow($results)) {
+            $row['sales_status'] = ($row['total'] == 0 || $row['total'] > $row['total_closed']) ?
+                'In Progress' : ($row['lost'] == $row['total']) ?
+                    'Closed Lost' : 'Closed Won';
+
             $this->db->query(
                 sprintf(
                     $sql,

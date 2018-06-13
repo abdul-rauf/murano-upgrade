@@ -54,7 +54,7 @@ nusoap-general@lists.sourceforge.net
 * 
 * @author   Scott Nichol <snichol@users.sourceforge.net>
 * @author	Ingo Fischer <ingo@apollon.de>
-
+* @version  $Id: class.wsdlcache.php 57813 2010-08-19 17:34:44Z kjing $
 * @access public 
 */
 class nusoap_wsdlcache {

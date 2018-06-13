@@ -51,7 +51,7 @@
     setLanguage: function(e) {
         var $li = this.$(e.currentTarget),
             langKey = $li.data("lang-key");
-        app.alert.show('language', {level: 'warning', title: app.lang.getAppString('LBL_LOADING_LANGUAGE'), autoclose: false});
+        app.alert.show('language', {level: 'warning', title: app.lang.get('LBL_LOADING_LANGUAGE'), autoclose: false});
         app.lang.setLanguage(langKey, function() {
             app.alert.dismiss('language');
         });
@@ -71,7 +71,7 @@
     /**
      * Formats the language list for the template
      *
-     * @returns {Array} of languages
+     * @return {Array} of languages
      */
     formatLanguageList: function() {
         // Format the list of languages for the template

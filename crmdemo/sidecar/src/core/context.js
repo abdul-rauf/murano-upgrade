@@ -60,8 +60,11 @@
          *        By default, it removes all events attached to models and collections in the context.
          */
         clear: function(options) {
-            options = _.extend({ clearAllListeners: true }, options || {});
+            var collection = this.get('collection');
 
+            collection && collection.abortFetchRequest();
+
+            options = _.extend({clearAllListeners: true}, options || {});
             _.each(this.children, function(child) {
                 child.clear(options);
             });
@@ -308,29 +311,25 @@
             if (objectToFetch && (objectToFetch instanceof app.Bean ||
                 objectToFetch instanceof app.BeanCollection)) {
 
-                if (this.get("link")) {
-                    options.relate = true;
+                if (this.get('dataView') && _.isString(this.get('dataView'))) {
+                    objectToFetch.setOption('view', this.get('dataView'));
                 }
 
-                if (this.get("dataView") && _.isString(this.get("dataView"))) {
-                    options.view = this.get("dataView");
+                if (this.get('fields')) {
+                    objectToFetch.setOption('fields', this.get('fields'));
                 }
 
-                if (this.get("fields")) {
-                    options.fields = this.get("fields");
+                if (this.get('limit')) {
+                    objectToFetch.setOption('limit', this.get('limit'));
                 }
 
-                if (this.get("limit")) {
-                    options.limit = this.get("limit");
-                }
-
-                if (this.get("module_list")) {
-                    options.module_list = this.get("module_list");
+                if (this.get('module_list')) {
+                    objectToFetch.setOption('module_list', this.get('module_list'));
                 }
 
                 // Track models that user is actively viewing
-                if(this.get("viewed")){
-                    options.viewed = true;
+                if(this.get('viewed')){
+                    objectToFetch.setOption('viewed', this.get('viewed'));
                 }
 
                 options.context = this;
@@ -346,27 +345,42 @@
         },
 
         /**
-         * Refreshes the context's data.
+         * Refreshes the context's data and refetches the new data if
+         * {@link #skipFetch} is `true`.
          *
-         * @param options
+         * @param {Object} [options] Options for {@link #loadData} and the
+         *   `reload` event.
+         * @param {Object} [options.recursive] if `true`, child contexts will
+         *   also be reloaded.
          */
         reloadData: function(options) {
+            options = options || {};
+
             this.resetLoadFlag(options.recursive);
             this.loadData(options);
+
+            /**
+             * @event reload
+             * Triggered before and after the context is reloaded.
+             * @param {Core.Context} this The context where the event was triggered.
+             * @param {Object} [options] The options passed during
+             *   {@link #reloadData} call.
+             */
+            this.trigger('reload', this, options);
         },
 
         /**
          * Indicator to know if data has been successfully loaded
          *
-         * @returns {boolean} TRUE if data has been fetched
+         * @return {boolean} `true` if data has been fetched, `false` otherwise.
          */
         isDataFetched: function() {
-            var objectToFetch = this.get("modelId") ? this.get("model") : this.get("collection");
+            var objectToFetch = this.get('modelId') ? this.get('model') : this.get('collection');
             return this._fetchCalled || (objectToFetch && !!objectToFetch.dataFetched);
         }
     });
 
-    app.augment("context", {
+    app.augment('context', {
 
         /**
          * Returns a new instance of the context object.

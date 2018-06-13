@@ -1,5 +1,5 @@
 <?php
-
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,33 +11,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-
-
-
-
-
-
-
-
-
-
-
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
- 
-
-
+ // $Id: JotPadDashlet.en_us.lang.php 51719 2009-10-22 17:18:00Z mitani $
 
 $defaultText = "";
 $dashletStrings['JotPadDashlet'] = array('LBL_TITLE'            => 'JotPad',
                                          'LBL_DESCRIPTION'      => 'תאסופית לשמירת הפתקים שלך',
-                                         'LBL_SAVING'           => 'Saving JotPad ...',
+                                         'LBL_SAVING'           => 'שומר את jotPad...',
                                          'LBL_SAVED'            => 'נשמר',
                                          'LBL_CONFIGURE_TITLE'  => 'כותרת',
                                          'LBL_CONFIGURE_HEIGHT' => 'גובה (1 - 300)',
-                                         'LBL_DBLCLICK_HELP'    => 'Double click below to Edit.',
+                                         'LBL_DBLCLICK_HELP'    => 'לחיצה כפולה למטה כדי לערוך.',
                                          'LBL_DEFAULT_TEXT'     => $defaultText,
 );
- 
-
+?>

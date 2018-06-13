@@ -10,15 +10,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
- * Description:  Defines the Catalan language pack for the base application. 
 
- * Source: SugarCRM 5.2.0
- * Contributor(s): Ramón Feliu (ramon@slay.es).
- ********************************************************************************/
+ // $Id: TeamNoticesDashlet.en_us.lang.php 16292 2006-08-22 20:57:23Z awu $
 
 
-
-$dashletStrings['TeamNoticesDashlet'] = array('LBL_TITLE'            => 'Notícies de l´Equip',
+$dashletStrings['TeamNoticesDashlet'] = array('LBL_TITLE'            => 'Notícies d´Equip',
                                               'LBL_DESCRIPTION'      => 'Mostra les notícies de l´equip en un quadre de text lliscant');
- 
+?>
