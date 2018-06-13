@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Dette er navnet som vises i titelbaren i din browser.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Aktivere/deaktivere emails fra beslægtede (eller forbundet) kontakter skal vises i e-mail underpanel.',
 
-    'LBL_OC_STATUS'                     => 'Status for standardofflineklient',
-    'DEFAULT_OC_STATUS'                 => 'Aktivér offlineklient som standard',
-    'LBL_OC_STATUS_DESC' => 'Markér dette felt, hvis alle brugere skal have adgang til offlineklienten. Ellers kan du konfigurere adgang på brugerniveau.',
     'SESSION_TIMEOUT' => 'Timeout for portalsession',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Portalen Session timeout er til ældre versioner af Sugar Portal tilgængelige i 6.5 og ældre.',
     'UPLOAD_MAXSIZE_UNITS' => 'bytes',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Login URL kan ikke være tom',
     'ERR_EMPTY_SAML_CERT' => 'SAML certifikat kan ikke være tom',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML enheds-URL kan ikke være tom',
     'ERR_SAML_LOGIN_URL' => 'SAML Login URL er ikke gyldig',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL er ikke gyldig',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM-fil bør indeholde privat nøgle',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM-fil bør indeholde x.509-certifikat',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Det leverede x.509-certifikat stemmer ikke overens med privat nøgle',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
 );
 
 

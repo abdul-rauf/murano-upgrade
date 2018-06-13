@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => '預測儀表板',
+
     //module strings.
     'LBL_MODULE_NAME' => '預測',
     'LBL_MODULE_NAME_SINGULAR' => '預測',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => '產品 ID',
     'LBL_QUOTA_ID' => '配額 ID',
     'LBL_VERSION' => '版本',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => '隱藏橫條圖圖例',
+    'LBL_CHART_BAR_LEGEND_OPEN' => '顯示橫條圖圖例',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => '隱藏行圖例',
+    'LBL_CHART_LINE_LEGEND_OPEN' => '顯示行圖例',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => '錯誤：使用者 {0} 無管理員權限，無法請求 {1} 的預測',
@@ -220,7 +227,7 @@ $mod_strings = array (
     'LBL_EXPECTED_OPPORTUNITIES' => '預期商機',
     'LBL_DISPLAYED_TOTAL' => '顯示全部',
     'LBL_TOTAL' => '總',
-    'LBL_OVERALL_TOTAL' => '總和',
+    'LBL_OVERALL_TOTAL' => '全部總計',
     'LBL_EDITABLE_INVALID' => '{0} 無效值',
     'LBL_EDITABLE_INVALID_RANGE' => '值必須介於 {0} 和 {1} 之間',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => '您的工作表中還有未儲存的變更。',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '財政年度起始日期：',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '配置將在預測模組中使用的時間週期。<br><br>請注意：初始設定之後將無法變更時間週期設定。<br><br>首先選擇財政年度的起始日期。然後選擇預測的時間週期類型。系統將根據您的選擇自動個計算時間週期的日期範圍。次要時間週期是預測工作表的基礎。<br><br>可檢視的未來和過去時間週期將決定預測模組中可見字週期的編號。使用者可在可見次要週期內檢視和編輯預測編號。',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '設定您想要對 {{forecastByModule}} 進行分類的方式。 <br><br>請注意，首次提交後將無法更改範圍設定。對於升級的實例，範圍設定與現有預測資料一同鎖定。 <br><br>您可以選擇基於概率範圍的兩個或三個類別，或建立不以概率為基礎的類別。 <br><br>您的自訂類別左邊有一些核取方塊；使用這些核取方塊可確定提交和報告給經理的預測數量中所包含的範圍。 <br><br>使用者可以從其工作表中手動更改包含/排除狀態和 {{forecastByModule}} 類別。',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '對 {{forecastByModule}} 的分類方式進行配置。<br><br>請注意，首次提交後無法更改範圍設定。對於升級後的實例，範圍設定使用現有預設數值進行鎖定。<br><br>您可以根據概率範圍選擇兩個或更多類別或不根據機率創建類別。<br><br>自定義類別的左側有複選框；請使用這些複選框確定向經理提交和報告的預測金額中要包含的範圍。<br><br>用戶可以從其工作單手動更改 {{forecastByModule}} 的包含/排除狀態和類別。',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => '選取您想要使用者在每個 {{forecastByModuleSingular}} 預測中填寫的欄。注意：可能金額與 {{forecastByModule}} 顯示的金額相關聯。因此「可能」 欄無法被隱藏。',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '選取您想要在預測模組中檢視的欄。欄位清單將與工作表組合，使用者可選擇如何設定檢視表。',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => '我是預測說明文字的預留位置！',

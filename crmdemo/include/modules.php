@@ -39,7 +39,8 @@ $moduleList[] = 'Documents';
 $moduleList[] = 'Cases';
 $moduleList[] = 'Project';
 $moduleList[] = 'Bugs';
-
+$moduleList[] = 'OutboundEmail';
+$moduleList[] = 'DataPrivacy';
 // this list defines all of the module names and bean names in the app
 // to create a new module's bean class, add the bean definition here
 $beanList = array();
@@ -154,12 +155,13 @@ $beanList['Expressions']  = 'Expression';
 $beanList['Contracts']  = 'Contract';
 $beanList['ContractTypes']  = 'ContractType';
 $beanList['Holidays'] = 'Holiday';
-$beanList['System'] = 'System';
 $beanList['SessionManager'] = 'SessionManager';
 
 $beanList['Empty'] = 'EmptyBean';
 $beanList['UpgradeHistory'] = 'UpgradeHistory';
-
+$beanList['OutboundEmail'] = 'OutboundEmail';
+$beanList['EmailParticipants'] = 'EmailParticipant';
+$beanList['DataPrivacy'] = 'DataPrivacy';
 // this list defines all of the files that contain the SugarBean class definitions from $beanList
 // to create a new module's bean class, add the file definition here
 $beanFiles = array();
@@ -271,7 +273,6 @@ $beanFiles['WorkFlowAlert']  = 'modules/WorkFlowAlerts/WorkFlowAlert.php';
 $beanFiles['WorkFlowActionShell']  = 'modules/WorkFlowActionShells/WorkFlowActionShell.php';
 $beanFiles['WorkFlowAction']  = 'modules/WorkFlowActions/WorkFlowAction.php';
 $beanFiles['Expression']  = 'modules/Expressions/Expression.php';
-$beanFiles['System']      = 'modules/Administration/System.php';
 $beanFiles['SessionManager']      = 'modules/Administration/SessionManager.php';
 $beanFiles['ContractType']  = 'modules/ContractTypes/ContractType.php';
 $beanFiles['Holiday'] = 'modules/Holidays/Holiday.php';
@@ -279,16 +280,18 @@ $beanFiles['Holiday'] = 'modules/Holidays/Holiday.php';
 $beanFiles['Configurator']          = 'modules/Configurator/Configurator.php';
 $beanFiles['EmptyBean'] = 'data/EmptyBean.php';
 $beanFiles['Styleguide'] = 'modules/Styleguide/Styleguide.php';
-
+$beanFiles['OutboundEmail'] = 'include/OutboundEmail/OutboundEmail.php';
+$beanFiles['EmailParticipant'] = 'modules/EmailParticipants/EmailParticipant.php';
+$beanFiles['DataPrivacy'] = 'modules/DataPrivacy/DataPrivacy.php';
 // added these lists for security settings for tabs
-$modInvisList = array('Administration', 'Currencies', 'CustomFields', 'Connectors',
+$modInvisList = array('Administration', 'CustomFields', 'Connectors',
     'Dropdown', 'Dynamic', 'DynamicFields', 'DynamicLayout', 'EditCustomFields',
     'Help', 'Import',  'MySettings', 'EditCustomFields','FieldsMetaData',
     'UpgradeWizard', 'Trackers', 'Connectors', 'Employees', 'Calendar',
     'Manufacturers', 'ProductBundles', 'ProductBundleNotes', 'ProductCategories', 'ProductTemplates', 'ProductTypes',
     'Shippers', 'TaxRates', 'TeamNotices', 'Teams', 'TimePeriods', 'ForecastOpportunities', 'Quotas',
     'ContractTypes',
-    'ACLFields', 'Holidays', 'SNIP', 'ForecastDirectReports', 'System',
+    'ACLFields', 'Holidays', 'SNIP', 'ForecastDirectReports',
     'Releases','Sync',
     'Users',  'Versions', 'LabelEditor','Roles','EmailMarketing'
     ,'OptimisticLock', 'TeamMemberships', 'TeamSets', 'TeamSetModule', 'Audit', 'MailMerge', 'MergeRecords', 'EmailAddresses','EmailText',
@@ -301,6 +304,7 @@ $modInvisList = array('Administration', 'Currencies', 'CustomFields', 'Connector
     'ProjectTask',
     'RevenueLineItems',
     'ModuleBuilder',
+    'OutboundEmail',
     );
 $adminOnlyList = array(
                     //module => list of actions  (all says all actions are admin only)
@@ -346,6 +350,7 @@ $modInvisList[] = 'SavedSearch';
 $modInvisList[] = 'Studio';
 $modInvisList[] = 'Connectors';
 $modInvisList[] = 'Styleguide';
+$modInvisList[] = 'EmailParticipants';
 
 $report_include_modules = array();
 //add prospects
@@ -379,15 +384,16 @@ $GLOBALS['moduleTabMap'] = array(
     'ModuleBuilder' => 'Administration',
     'Configurator' => 'Administration',
     'Studio' => 'Administration',
-    'Currencies' => 'Administration',
     'DocumentRevisions' => 'Documents',
     'EmailTemplates' => 'Emails',
+    'OutboundEmail' => 'Emails',
     'EmailMarketing' => 'Campaigns',
     'CampaignTrackers' => 'Campaigns',
     'Quotas' => 'Forecasts',
     'TeamNotices' => 'Teams',
     'Activities' => 'Home',
     'WorkFlowAlertShells' => 'WorkFlow',
+    'UserSignatures' => 'Emails',
  );
 $beanList['EAPM'] = 'EAPM';
 $beanFiles['EAPM'] = 'modules/EAPM/EAPM.php';
@@ -454,6 +460,7 @@ $objectList['TrackerSessions'] =  'tracker_sessions';
 $objectList['TrackerPerfs'] =  'tracker_perf';
 $objectList['TrackerQueries'] =  'tracker_queries';
 $objectList['TeamNotices'] =  'TeamNotices';
+$objectList['OutboundEmail'] =  'OutboundEmail';
 
 $beanList['PdfManager']     = 'PdfManager';
 $beanFiles['PdfManager']     = 'modules/PdfManager/PdfManager.php';
@@ -473,17 +480,13 @@ $bwcModules = array(
     'CampaignTrackers',
     'Charts',
     'Configurator',
-    'Contracts',
-    'ContractTypes',
     'Connectors',
-    'Currencies',
     'DocumentRevisions',
     'Documents',
     'EAPM',
     'EmailAddresses',
     'EmailMarketing',
     'EmailMan',
-    'Emails',
     'EmailTemplates',
     'Employees',
     'Exports',
@@ -494,7 +497,6 @@ $bwcModules = array(
     'iCals',
     'Import',
     'InboundEmail',
-    'Manufacturers',
     'MergeRecords',
     'ModuleBuilder',
     'MySettings',
@@ -513,11 +515,9 @@ $bwcModules = array(
     'SavedSearch',
     'Schedulers',
     'SchedulersJobs',
-    'Shippers',
     'SNIP',
     'Studio',
     'SugarFavorites',
-    'TaxRates',
     'Teams',
     'TeamMemberships',
     'TeamSets',
@@ -529,7 +529,6 @@ $bwcModules = array(
     'TrackerPerfs',
     'TrackerQueries',
     'UserPreferences',
-    'UserSignatures',
     'Users',
     'vCals',
     'vCards',

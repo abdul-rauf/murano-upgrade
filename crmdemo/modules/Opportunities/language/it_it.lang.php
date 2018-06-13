@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashboard elenco opportunità',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashboard record opportunità',
+
     'LBL_MODULE_NAME' => 'Opportunità',
     'LBL_MODULE_NAME_SINGULAR' => 'Opportunità',
     'LBL_MODULE_TITLE' => 'Opportunità: Home',
@@ -166,23 +170,23 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} consente di tenere traccia delle vendite individuali, dall&#39;inizio alla fine. Ciascun record contenuto in {{module_name}} rappresenta una potenziale vendita e comprende dati attinenti ad essa e ad altri importanti record quali {{quotes_module}}, {{contacts_module}}, ecc. Un {{module_name}} si svilupperà in genere lungo diverse fasi di vendita fino ad assumere lo stato di "Chiuso Vinto" o "Chiuso Perso". {{plural_module_name}} può essere sfruttato ulteriormente utilizzando il modulo {{forecasts_singular_module}} di Sugar per capire e prevedere le tendenze di vendita nonché per organizzare il lavoro in maniera specifica per ottenere le quote di vendita.',
+    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} permette di tracciare le vendite individuali dall&#39;inizio alla fine. Ciascun record di {{module_name}} rappresenta una vendita potenziale, comprende dati rilevanti per le vendite e si relaziona con altri record importanti quali {{quotes_module}}, {{contacts_module}}, ecc. Un {{module_name}} avanzerà, in genere, superando diverse Fasi di vendita fino ad acquisire lo stato di "Chiusa acquisita" o "Chiusa persa". {{plural_module_name}} può essere ulteriormente sfruttato tramite il modulo {{forecasts_singular_module}} di Sugar per comprendere e prevedere i trend di vendita nonché per focalizzarsi sul lavoro da svolgere per ottenere le quote di vendita.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} consente di tenere traccia delle vendite individuali e delle voci appartenenti a quelle vendite, dall&#39;inizio alla fine. Ciascun record di {{module_name}} rappresenta una potenziale vendita e comprende dati attinenti ad essa e ad altri importanti record quali {{quotes_module}}, {{contacts_module}}, ecc.
+    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} permette di tenere traccia delle vendite individuali e dei prodotti che appartengono a quelle vendite, dall&#39;inizio alla fine. Ciascun record {{module_name}} rappresenta una vendita potenziale, comprende i dati rilevanti della vendita e si relaziona con altri record importanti quali {{quotes_module}}, {{contacts_module}}, ecc.
 
-- Modificare i campi di questo record facendo clic sul singolo campo o sul pulsante Modifica.
-- Visualizzare o modificare i collegamenti agli altri record nei sottopannelli, portando il pannello inferiore sinistro su "Visualizza dati".
-- Effettuare e visualizzare i commenti utente e registrare la cronologia delle modifiche in {{activitystream_singular_module}} portando il pannello inferiore sinistro su "Activity Stream".
-- Seguire o impostare come preferito questo record utilizzando le icone poste alla destra del suo nome.
-- Nel menu a tendina Azioni, alla destra del pulsante Modifica, sono disponibili azioni aggiuntive.',
+- Modificare i campi di questo record facendo clic su un singolo campo oppure sul pulsante Modifica.
+- Visualizzare o modificare i collegamenti agli altri record nei sottopannelli spostando la visualizzazione del riquadro in basso a sinistra su "Vista dati".
+- Creare e visualizzare i commenti degli utenti e registrare la cronologia delle modifiche nel {{activitystream_singular_module}} spostando la visualizzazione del riquadro in basso a sinistra su "Activity Stream".
+- Seguire o impostare come preferito questo record usando le icone alla destra del nome del record.
+- Nel menu a discesa Azioni, alla destra del pulsante Modifica, sono disponibili azioni aggiuntive.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Il {{plural_module_name}} consente di tenere traccia delle vendite individuali e delle voci appartenenti a quelle vendite, dall&#39;inizio alla fine. Ciascun record di {{module_name}} rappresenta una potenziale vendita e comprende dati attinenti ad essa e ad altri importanti record quali {{quotes_module}}, {{contacts_module}}, ecc.
+    'LBL_HELP_CREATE' => 'Il modulo {{plural_module_name}} permette di tenere traccia delle vendite individuali e dei prodotti che appartengono a quelle vendite, dall&#39;inizio alla fine. Ciascun record {{module_name}} rappresenta una vendita potenziale, comprende i dati rilevanti della vendita e si relazione con altri record importanti quali {{quotes_module}}, {{contacts_module}}, ecc.
 
 Per creare un {{module_name}}:
-1. Fornire valori per i campi, come desiderato.
- - I campi contrassegnati come "Richiesto" devono essere completati prima del salvataggio.
+1. Fornire i valori desiderati per i campi.
+ - I campi contrassegnati come "Obbligatori" devono essere compilati prima del salvataggio.
  - Fare clic su "Altri dettagli" per visualizzare ulteriori campi, se necessario.
 2. Fare clic su "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
 

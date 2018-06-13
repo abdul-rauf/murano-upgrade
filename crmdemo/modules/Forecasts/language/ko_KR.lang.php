@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => '예상 대시보드',
+
     //module strings.
     'LBL_MODULE_NAME' => '예측',
     'LBL_MODULE_NAME_SINGULAR' => '예측',
@@ -148,7 +151,7 @@ $mod_strings = array (
     'LBL_CURRENCY_RATE' => '환율',
     'LBL_BASE_RATE' => '기본율',
 
-    'LBL_QUOTA' => '쿼터',
+    'LBL_QUOTA' => '견적',
     'LBL_QUOTA_ADJUSTED' => '쿼터(조정)',
 
     'LBL_FORECAST_FOR'=>'다음 대상을 위한 예측 워크시트',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => '제품 ID',
     'LBL_QUOTA_ID' => '쿼터 ID',
     'LBL_VERSION' => '버전',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => '바 범례 숨기기',
+    'LBL_CHART_BAR_LEGEND_OPEN' => '바 범례 표시',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => '라인 범례 숨기기',
+    'LBL_CHART_LINE_LEGEND_OPEN' => '라인 범례 표시',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => '오류:사용자{0}는 {1} 예측 요청에 대한 매니저 액세스가 없습니다.',
@@ -218,9 +225,9 @@ $mod_strings = array (
 
     //Labels for worksheet items
     'LBL_EXPECTED_OPPORTUNITIES' => '예상 영업기회',
-    'LBL_DISPLAYED_TOTAL' => '표시 전체',
+    'LBL_DISPLAYED_TOTAL' => '표시되는 합계',
     'LBL_TOTAL' => '합계',
-    'LBL_OVERALL_TOTAL' => '전체 전체',
+    'LBL_OVERALL_TOTAL' => '전체 합계',
     'LBL_EDITABLE_INVALID' => '{0}에 유효하지 않은 값',
     'LBL_EDITABLE_INVALID_RANGE' => '값이 {0}과 {1} 사이여야 합니다.',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => '작업계획안의 변경사항을 저장하지 않았습니다.',
@@ -260,7 +267,7 @@ $mod_strings = array (
     'LBL_PIPELINE_REVENUE' => '매출 파이프라인',
     'LBL_PIPELINE_OPPORTUNITIES' => '영업기회 파이프라인',
     'LBL_LOADING' => '로딩중입니다.',
-    'LBL_IN_FORECAST' => '예측에 포함',
+    'LBL_IN_FORECAST' => '예측 내용',
 
     // Actions Dropdown
     'LBL_ACTIONS' => '액션',
@@ -306,7 +313,8 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '회계 연도 시작일',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '예측모듈에 사용될 기간을 구성하십시요. <br />회계연도의 시작일을 선택함으로 시작되며 예측 하고자하는 기간을 선택합니다. 날짜 기간은 자동으로 선택사항에 기초하여 계산됩니다. 하위 기간은 예측 워크시트에 근거합니다.<br />볼수있는 미래와 과거 기간은 보기가능한 예측모듈의 하위기간을 지정합니다. 사용자는 볼수있는 하위기간의 예측 숫자를 보거나 편집할수 있습니다.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} 분류 방법을 설정하십시오. <br><br>레인지 설정은 1차 커밋 후 변경할 수 없다는 점을 참고하시기 바랍니다. 업그레이드된 인스턴스에 한하여, 범위 설정은 기존 예측 데이터에 잠겨 있습니다. <br><br>확률 기반 분류를 2가지 이상 선택할 수 있으며, 확률에 기반하지 않은 분류 생성 또한 가능합니다. <br><br>사용자 지정 분류의 좌측에 위치한 확인란은 사용된 예측량 내에서 어느 범위가 포함될 것인지 결정하고 관리자에게 보고될 것인지 결정할 때 사용하십시오. <br><br>사용자는 워크시트에서 수동으로 {{forecastByModule}}의 상태 및 범위 포함 여부를 결정할 수 있습니다.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{ForecastByModule}} 분류 방식을 구성합니다.<br><br>범위 설정은 첫 번째 확정 후에 변경할 수 없습니다. 업그레이드 된 인스턴스의 경우 범위 설정은 기존 예측 데이터로 고정됩니다.<br><br>확률 범위를 기반으로 두 개 이상의 카테고리를 선택하거나 확률을 기반으로 하지 않는 카테고리를 만들 수 있습니다.<br><br>사용자 정의 카테고리의 왼쪽에는 체크박스가 있습니다. 이를 사용하여 관리자에게 확정 및
+ 보고된 예측량에 포함될 범위를 결정하십시오.<br><br>사용자는 자신의 워크시트에서 수동으로 {{forecastByModule}}의 포함/제외 상태 및 카테고리를 변경할 수 있습니다.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => '각각의  {{forecastByModuleSingular}}를 위한 사용자가 예측지를 완성하도록 칼럼을 선택하십시요. 가능 금액은 {{forecastByModule}}에 나타나는 금액과 같으며 이러한 이유로 가능 금액을 숨길수 없습니다.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '예측모듈에서 보고자하는 칼럼을 선택하십시요. 필드목록을 기획자료를 포함하며 사용자가 보기을 구성하도록 선택할수 있게 합니다.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'how-to text!에 의한 예측 플레이스 홀더입니다.',

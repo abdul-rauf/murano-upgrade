@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Prognozių ataskaitų sritis',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Prognozės',
     'LBL_MODULE_NAME_SINGULAR' => 'Prognozė',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Produkto ID:',
     'LBL_QUOTA_ID' => 'Quota ID',
     'LBL_VERSION' => 'Versija',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Slėpti juostos legendą',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Rodyti juostos legendą',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Slėpti eilutės legendą',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Rodyti eilutės legendą',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Error: user {0} does not have manager access to request Forecasts for {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Fiscal year start date:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Conﬁgure the Time Period that will be used in the Forecasts module. <br><br>Please note that Time Period settings cannot be changed after initial setup.<br><br>Start by choosing the Start Date of your ﬁscal year. Then choose the type of Time Period for the Forecast. The date range for the Time Periods will be automatically calculated based on your selections. The Sub Time Period is the base for the Forecast worksheet. <br><br>The viewable future and past Time Periods will determine the number of visible sub-periods in the Forecasts module. The users are able to view and edit the Forecast numbers in the visible sub-periods.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Sukonfigūruokite, kaip norėtumėte į kategorijas skirstyti {{forecastByModule}}. <br><br>Atkreipkite dėmesį, kad po pirmojo fiksavimo intervalo nustatymų keisti negalima. Naujesnėse programose intervalo nustatymas užfiksuotas su esamais prognozių duomenimis. <br><br>Galite pasirinkti dvi ar kelias kategorijas, paremtas tikimybių intervalais, arba kurti kategorijas, paremtas ne tikimybėmis. <br><br>Jūsų pasirinktinių kategorijų kairėje yra žymės langelių; juos naudodami galite nuspręsti, kurie intervalai bus įtraukti į prognozių sumą, fiksuojamą ir deklaruojamą vadovams. <br><br>Vartotojas darbalapyje gali pats keisti {{forecastByModule}} įtraukimo / neįtraukimo būseną ir kategoriją.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigūruokite, kaip norite {{forecastByModule}} skirstyti į kategorijas. <br><br>Nepamirškite, kad pirmą kartą nusiuntus parametrų Diapazonas pakeisti nebegalima. Atnaujintų egzempliorių atveju parametre Diapazonas naudojami esami prognozės duomenys ir jų keisti negalima.<br><br>Galite pasirinkti dvi ar daugiau kategorijų, pagrįstų tikimybės diapazonais, arba sukurti kategorijas, kurios nebūtų pagrįstos tikimybėmis. <br><br>Kairėje tinkintų kategorijų pusėje yra žymės langeliai; juos pažymėdami pasirinkite diapazonus, kurie bus įtraukti į prognozės duomenis, fiksuojamus ir perduodamus vadovams. <br><br>Vartotojas pats gali nuspręsti, ar {{forecastByModule}} būsena ir kategorija turi būti įtraukta į darbalapį.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Select the columns you would like the user to fill out for their Forecasts of each {{forecastByModuleSingular}}. Please note the Likely amount is tied to the amount shown in {{forecastByModule}}; for this reason the Likely column cannot be hidden.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Select which columns you would like to view in the Forecast module. The list of fields will combine the worksheet and allow the user to choose how to configure its view.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'I am a placeholder for Forecast By how-to text!',

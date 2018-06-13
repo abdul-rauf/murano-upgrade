@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Řídicí panel seznamu příležitostí',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Řídicí panel záznamů příležitostí',
+
     'LBL_MODULE_NAME' => 'Obchody',
     'LBL_MODULE_NAME_SINGULAR' => 'Příležitost',
     'LBL_MODULE_TITLE' => 'Obchody: Hlavní stránka',
@@ -166,25 +170,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd. {{module_name}} typicky postupuje přes několik prodejních fází, dokud není označen buď jako „Vyhráno“ nebo „Prohráno“. {{plural_module_name}} lze využít ještě dále pomocí modulu Sugar {{forecasts_singular_module}}, abyste mohli porozumět prodejním trendům a předpovídat je, jakož i zaměřit své úsilí na dosažení prodejních kvót.',
+    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje relevantní údaje o prodeji, stejně jako údaje vztahující se k jiným důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd. {{module_name}} obvykle postupuje přes několik prodejních fází, dokud není označen buď jako „Uzavřeno – vyhráno“ nebo „Uzavřeno – prohráno“. {{plural_module_name}} lze využít ještě více pomocí modulu Sugar {{forecasts_singular_module}}, který pomáhá porozumět a předpovídat prodejní trendy, jakož i zaměřit práci na dosažení prodejních kvót.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} umožňuje sledovat jednotlivé prodeje a položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a zahrnuje relevantní prodejní údaje i údaje týkající se dalších důležitých záznamů jako například {{quotes_module}},{{contacts_module}} atd.
 
-- Upravte pole tohoto záznamu kliknutím na jednotlivé pole nebo na tlačítko Upravit.
-- Prohlížejte si nebo upravte odkazy na jiné záznamy v dílčím okně přepnutím levého podokna na „Zobrazení dat“.
-- Vytvářejte a prohlížejte si komentáře uživatelů a historii změn záznamů v {{activitystream_singular_module}} přepnutím levého podokna na „Přehled aktivit“.
-- Sledujte tento záznam nebo ho označte jako oblíbený pomocí ikony vpravo od názvu záznamu.
-- Další akce jsou dostupné v rozbalovací nabídce Akce vpravo od tlačítka Upravit.',
+- Upravte pole záznamu kliknutím na jednotlivá pole nebo na tlačítko Upravit.
+- Zobrazte nebo upravte vazby na ostatní záznamy v dílčích panelech přepnutím spodního levého panelu na „Zobrazení dat“.
+- Vytvořte a prohlédněte si uživatelské komentáře a historii změn záznamu v {{activitystream_singular_module}} přepnutím spodního levého panelu na „Přehled aktivit“.
+- Označte záznam jako Sledovaný nebo Oblíbený pomocí ikon vpravo od názvu záznamu.
+- Další akce jsou dostupné v rozbalovací nabídce Akce vpravo vedle tlačítka Upravit.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
+    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} umožňuje sledovat jednotlivé prodeje a položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a zahrnuje relevantní prodejní údaje i údaje týkající se dalších důležitých záznamů jako například {{quotes_module}},{{contacts_module}} atd.
 
-Chcete-li vytvořit {{module_name}}:
-1. Zadejte hodnoty polí, jak je požadováno.
- - Před uložením musí být vyplněna pole označená jako „Povinné“.
- - Chcete-li v případě potřeby zobrazit další pole, klikněte na „Zobrazit další“.
-2. Chcete-li dokončit nový záznam a vrátit se na předchozí stránku, klikněte na „Uložit“.',
+Vytvoření modulu {{module_name}}:
+1. Vyplňte hodnoty polí dle potřeby.
+ - Pole označená jako „Povinné“ musí být vyplněna před uložením.
+ - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí.
+2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
 
 // END PRO/CORP
 

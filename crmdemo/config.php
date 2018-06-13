@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 14:44:37
+// created: 2018-06-13 15:15:24
 $sugar_config = array (
   'SAML_SLO' => '',
   'SAML_X509Cert' => '',
@@ -9,6 +9,7 @@ $sugar_config = array (
     'account_sid' => 'mjQm6DlXen9jheC8vXoqf2jRx',
     'auth_token' => '7MpQtXsOHDIT6kZxj9CroZozv',
   ),
+  'activity_streams_enabled' => true,
   'addAjaxBannedModules' => 
   array (
     0 => 'Leads',
@@ -38,7 +39,7 @@ $sugar_config = array (
     'max_repeat_count' => 1000,
     'show_completed_by_default' => true,
   ),
-  'chartEngine' => 'nvd3',
+  'chartEngine' => 'sucrose',
   'collapse_subpanels' => false,
   'common_ml_dir' => '',
   'create_default_user' => false,
@@ -285,7 +286,7 @@ $sugar_config = array (
     'timeout' => 3600,
   ),
   'js_custom_version' => 1,
-  'js_lang_version' => 1221,
+  'js_lang_version' => 1222,
   'languages' => 
   array (
     'en_us' => 'English (US)',
@@ -301,7 +302,7 @@ $sugar_config = array (
     'it_it' => 'Italiano',
     'lt_LT' => 'Lietuvių',
     'ja_JP' => '日本語',
-    'nb_NO' => 'Bokmål',
+    'nb_NO' => 'Norsk',
     'nl_NL' => 'Nederlands',
     'pl_PL' => 'Polski',
     'pt_PT' => 'Português',
@@ -353,6 +354,7 @@ $sugar_config = array (
   'mass_actions' => 
   array (
   ),
+  'max_aggregate_email_attachments_bytes' => 10000000,
   'max_dashlets_homepage' => '15',
   'max_record_fetch_size' => 1000,
   'max_record_link_fetch_size' => 5000,
@@ -376,6 +378,7 @@ $sugar_config = array (
     'l s f' => 'l s f',
     'l f s' => 'l f s',
   ),
+  'new_email_addresses_opted_out' => false,
   'oauth_token_expiry' => 0,
   'oauth_token_life' => 86400,
   'passwordsetting' => 
@@ -446,8 +449,8 @@ $sugar_config = array (
   'snip_url' => 'https://ease.sugarcrm.com/',
   'stack_trace_errors' => false,
   'sugar_max_int' => 2147483647,
-  'sugar_min_int' => -2147483648,
-  'sugar_version' => '7.9.4.0',
+  'sugar_min_int' => -2147483648.0,
+  'sugar_version' => '8.0.0',
   'sync_post_mail_settings' => 
   array (
     'host' => 'smtp.gmail.com',

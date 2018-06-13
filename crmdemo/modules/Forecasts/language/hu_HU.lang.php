@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Előrejelzések műszerfal',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Előrejelzések',
     'LBL_MODULE_NAME_SINGULAR' => 'Előrejelzés',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Termék azonosítója',
     'LBL_QUOTA_ID' => 'Kötelezettség azonosító',
     'LBL_VERSION' => 'Verzió',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Sáv jelmagyarázat elrejtése',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Sáv jelmagyarázat megjelenítése',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Sor jelmagyarázat elrejtése',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Sor jelmagyarázat megjelenítése',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Hiba: {0} felhasználó nem rendelkezik megfelelő hozzáféréssel a {1} előrejelzés bekéréséhez',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Üzleti év kezdő dátuma:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Állítsa be az időszakot, amivel az Előrejelzések modul dolgozni fog!<br /><br />Első lépésként adja meg az üzleti év első napját! Ezt követően válassza ki, mely időszakot kíván vizsgálni a jövőben! A kiválasztott időszaki bontást a rendszer automatikusan hozzáigazítja a kezdő dátumhoz.<br /><br />A megtekinthető jövőbeni és elmúlt időszakok száma meghatározza, hogy hány alperiódust jelenít meg az Előrejelzések modul. Ezt a felhasználók később szerkeszthetik.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Állítsa be hogyan szeretné kategorizálni a {{forecastByModule}}-t.<br><br>Vegye figyelembe, hogy a tartománybeállításokat nem változtathatja meg az első elkövetés után. A frissített verzióknál a tartománybeállítás le van zárva a létező Előrejelzés adatban.<br><br>Kiválaszthat két vagy több kategóriát a tartomány valószínűségére alapozva, vagy létrehozhat olyan kategóriákat, melyek nem a valószínűségre alapoznak. <br><br>Megtalálja a jelölőnégyzeteket az egyéni kategóriák bal oldalán; használja ezeket, hogy eldöntse mely tartományokat tartalmazza az elkövetett és vezetőknek jelentett Előrejelzés.<br><br>Egy felhasználó megváltoztathatja a {{forecastByModule}} tartalmazott/kizárt státuszát és kategóriáját manuálisan is a Munkalapja segítségével.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Állítsa be a(z) {{forecastByModule}} modul kategorizálásának a módját. <br><br>Felhívjuk a figyelmét, hogy a Tartomány beállítások az első adatbevitelt követően nem módosíthatók. A frissített változatokban a Tartomány beállítás visszafordíthatatlanul a meglévő előrejelzés adatokhoz kapcsolódik.<br><br>Kiválaszthat egy vagy több kategóriát a valószínűségi tartományok alapján, vagy létrehozhat nem valószínűségen alapuló kategóriákat is. <br><br>Az egyedi kategóriái bal oldalán jelölőnégyzetek találhatók; ezek alapján beállíthatja, hogy mely tartományok szerepeljenek a kiválasztott Előrejelzési összegben, és kerüljenek lejelentésre a feletteseknek. <br><br>A felhasználó manuálisan, a munkalapjáról tudja módosítani a befoglal/kihagy státust és a(z) {{forecastByModule}} kategóriáját.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Adja meg, a felhasználóknak mely oszlopokat kell majd kitölteniük lehetőségeik előrejelzése során! Vegye figyelembe, hogy a "valószínű összeg" kapcsolódik a Lehetőség változójához, így azt az oszlopot nem lehet elrejteni.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Adja meg, mely oszlopokat kíván megjeleníteni az Előrejelzések modulban! A mezők listája tartalmazza majd a munkalapot és a felhasználók módosíthatják a nézet beállításait.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ez egy helykitöltő mintaszöveg!',

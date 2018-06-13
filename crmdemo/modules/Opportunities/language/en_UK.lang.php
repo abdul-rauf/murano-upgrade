@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Opportunities List Dashboard',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Opportunities Record Dashboard',
+
     'LBL_MODULE_NAME' => 'Opportunities',
     'LBL_MODULE_NAME_SINGULAR' => 'Opportunity',
     'LBL_MODULE_TITLE' => 'Opportunities: Home',
@@ -166,10 +170,10 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module allows you to track individual sales from start to finish. Each {{module_name}} record represents a prospective sale and includes relevant sale data as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc. An {{module_name}} will typically progress through several Sales Stages until it is marked either "Closed Won" or "Closed Lost". {{plural_module_name}} can be leveraged even further by using Sugar&#39;s {{forecasts_singular_module}}ing module to understand and predict sales trends as well as focus work to achieve sales quotas.',
+    'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module allows you to track individual sales from start to finish. Each {{module_name}} record represents a prospective sale and includes relevant sales data as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc. An {{module_name}} will typically progress through several Sales Stages until it is marked either "Closed Won" or "Closed Lost". {{plural_module_name}} can be leveraged even further by using Sugar&#39;s {{forecasts_singular_module}}ing module to understand and predict sales trends as well as focus work on achieving sales quotas.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a prospective sale and includes relevant sale data as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a prospective sale and includes relevant sales data as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc.
 
 - Edit this record&#39;s fields by clicking an individual field or the Edit button.
 - View or modify links to other records in the subpanels by toggling the bottom left pane to "Data View".
@@ -178,13 +182,13 @@ $mod_strings = array(
 - Additional actions are available in the dropdown Actions menu to the right of the Edit button.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a prospective sale and includes relevant sale data as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'The {{plural_module_name}} module allows you to track individual sales and the line items belonging to those sales from start to finish. Each {{module_name}} record represents a prospective sale and includes relevant sales data as well as relating to other important records such as {{quotes_module}}, {{contacts_module}}, etc.
 
 To create an {{module_name}}:
 1. Provide values for the fields as desired.
  - Fields marked "Required" must be completed prior to saving.
  - Click "Show More" to expose additional fields if necessary.
-2. Click "Save" to finalise the new record and return to the previous page.',
+2. Click "Save" to finalize the new record and return to the previous page.',
 
 // END PRO/CORP
 

@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Instrumentpanel med lista över möjligheter',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Instrumentpanel med poster över möjligheter',
+
     'LBL_MODULE_NAME' => 'Affärsmöjligheter',
     'LBL_MODULE_NAME_SINGULAR' => 'Affärsmöjlighet',
     'LBL_MODULE_TITLE' => 'Affärsmöjligheter: Hem',
@@ -166,25 +170,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulen {{plural_module_name}} låter dig spåra enskilda affärer från början till slut. Varje {{module_name}}-post representerar en potentiell affär och innehåller relevant försäljningsdata samt relaterar till andra viktiga poster som {{quotes_module}}, {{contacts_module}}, etc. En {{module_name}} kommer vanligtvis framskrida genom flera försäljningssteg tills det markeras antingen "Stängd vunnen" eller "Stängd förlorad". {{plural_module_name}} kan utnyttjas ännu mer genom att använda Sugars {{forecasts_singular_module}}-modul för att förstå och förutsäga försäljningstrender samt fokusera arbetet för att uppnå säljmål.',
+    'LBL_HELP_RECORDS' => 'Modulen{{plural_module_name}} tillåter dig att spåra enskilda försäljningar från början till slut. Varje {{module_name}} post representerar en potentiell försäljning och inkluderar relevant försäljningsinformation, samt relaterar till andra viktiga poster, såsom {{quotes_module}}, {{contacts_module}}, o.s.v. En {{module_name}} kommer vanligtvis gå igenom flera försäljningssteg fram tills den markeras som antingen "Closed Won" eller "Closed Lost". {{plural_module_name}} kan utnyttjas ännu mer, genom att man använder Sugars {{forecasts_singular_module}} modul för att förstå och förutsäga försäljningstrender, samt fokuserar på hur man kan uppnå försäljningskvoterna.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}-modulen låter dig spåra individuella affärer och innehållet i dem från början till slut. Varje post i {{module_name}} är en potentiell affär, och relaterar dessutom till andra viktiga poster som {{quotes_module}},{{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'Modulen {{plural_module_name}} tillåter dig att spåra enskilda försäljningar och radartiklarna som tillhör de här försäljningarna, från början till slut. Varje {{module_name}} post representerar en möjlig försäljning och är inklusive relevant försäljningsdata, samt relaterar till andra viktiga poster, såsom {{quotes_module}}, {{contacts_module}}, o. s. v.
 
-- Redigera postens fält genom att klicka på dem eller på knappen Redigera.
-- Visa eller redigera länkar till andra poster i underpanelerna genom att växla den nedre vänstra panelen till "Datavy".
-- Skapa och visa kommentarer, och håll koll på användningshistoriken i {{activitystream_singular_module}} genom att växla den nedre vänstra panelen till "Aktivitetsström".
-- Följ eller favoritmarkera posten med ikonerna till höger om postnamnet.
-- Ytterligare åtgärder hittar du i menyn Åtgärder till höger om knappen Redigera.',
+- Redigera den här postens fält, genom att klicka på det enskilda fältet eller på redigera knappen.
+- Granska eller ändra länkar till andra poster i underpanelerna genom att dra i den nedre vänstra panelen för "Datavy".
+- Lägg upp och granska användares kommentarer och datahistoriken i {{activitystream_singular_module}} genom att dra i den vänstra panelen till "Aktivitetsflöde".
+- Följ eller lägg till den här posten som favorit, genom att använda ikonerna till höger om postens namn.
+- Ytterligare åtgärder finns tillgängliga i rullgardinsmenyn till höger om redigeringsknappen.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}}-modulen låter dig spåra individuella köp och innehållet i dem från början till slut. Varje post i {{module_name}} är en potentiell affär, och relaterar dessutom till andra viktiga poster som {{quotes_module}},{{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Modulen {{plural_module_name}} tillåter dig att spåra enskilda försäljningar och radföremålen som tillhör försäljningarna, från början till slut. Varje {{module_name}} post representerar en potentiell försäljning och inkluderar relevant försäljningsdata, samt relaterar till andra viktiga poster, såsom{{quotes_module}}, {{contacts_module}}, o. s. v.
 
 För att skapa en {{module_name}}:
-1. Ange önskade värden i fälten.
- - Fält markerade med "Obligatorisk" måste fyllas i innan du kan spara.
- - Klicka på "Visa mer" för att få fram fler fält om de behövs.
-2. Klicka på "Spara" för att slutföra posten och återvända till föregående sida.',
+1. Ange värdena för de önskade fälten.
+ - Fält som är markerade "Obligatoriska" måste fyllas i innan de sparas.
+ - Klicka på "Visa mer" för att visa fler fält om detta behövs.
+2. Klicka på "Spara" för att färdigställa den nya posten och återgå till föregående sida.',
 
 // END PRO/CORP
 

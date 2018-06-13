@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Éste es el nombre mostrado en la barra de título de su navegador.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Habilitar/Deshabilitar correos electrónicos de contactos conocidos (o vinculados) para mostrar en el Subpanel de correos electrónicos.',
 
-    'LBL_OC_STATUS'                     => 'Estado predeterminado de Cliente Desconectado',
-    'DEFAULT_OC_STATUS'                 => 'Habilitar Cliente Desconectado por defecto',
-    'LBL_OC_STATUS_DESC' => 'Haga clic aquí si desea que algún usuario tenga acceso a Cliente Desconectado.  De lo contrario, puede configurar el acceso a nivel del usuario.',
     'SESSION_TIMEOUT' => 'Caducidad de la Sesión del Portal',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'El tiempo de caducidad de sesión del portal es para las versiones legacy de Sugar Portal, disponible en la versión 6.5 o anterior.',
     'UPLOAD_MAXSIZE_UNITS' => 'bytes',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'URL de Inicio de sesión de SAML no puede estar vacía',
     'ERR_EMPTY_SAML_CERT' => 'Certificación SAML no puede estar vacía',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'El ID de entidad de SAML no puede estar vacío',
     'ERR_SAML_LOGIN_URL' => 'URL de Inicio de sesión de SAML inválida',
     'ERR_SAML_SLO_URL' => 'URL SLO de SAML inválida',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'El archivo PEM debe contener una clave privada',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'El archivo PEM debe contener un certificado x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'El certificado x.509 proporcionado no coincide con la clave privada',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
 );
 
 

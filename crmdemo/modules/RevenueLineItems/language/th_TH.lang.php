@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'แดชบอร์ดรายการไอเท็มไลน์ภาษี',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกรายการไอเท็มไลน์ภาษี',
+
     'LBL_CAMPAIGN_PRODUCT' => 'ผลิตภัณฑ์ของแคมเปญ',
     'LBL_MODULE_NAME' => 'รายการบรรทัดรายได้',
     'LBL_MODULE_NAME_SINGULAR' => 'รายการบรรทัดรายได้',

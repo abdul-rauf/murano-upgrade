@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 10:47:53
+// created: 2018-06-13 15:14:56
 $viewdefs['Contacts']['base']['view']['record'] = array (
   'buttons' => 
   array (
@@ -157,7 +157,22 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
         ),
         1 => 
         array (
-          'name' => 'full_name',
+          'name' => 'favorite',
+          'label' => 'LBL_FAVORITE',
+          'type' => 'favorite',
+          'dismiss_label' => true,
+        ),
+        2 => 
+        array (
+          'name' => 'follow',
+          'label' => 'LBL_FOLLOW',
+          'type' => 'follow',
+          'readonly' => true,
+          'dismiss_label' => true,
+        ),
+        3 => 
+        array (
+          'name' => 'name',
           'label' => 'LBL_NAME',
           'dismiss_label' => true,
           'type' => 'fullname',
@@ -167,21 +182,6 @@ $viewdefs['Contacts']['base']['view']['record'] = array (
             1 => 'first_name',
             2 => 'last_name',
           ),
-        ),
-        2 => 
-        array (
-          'name' => 'favorite',
-          'label' => 'LBL_FAVORITE',
-          'type' => 'favorite',
-          'dismiss_label' => true,
-        ),
-        3 => 
-        array (
-          'name' => 'follow',
-          'label' => 'LBL_FOLLOW',
-          'type' => 'follow',
-          'readonly' => true,
-          'dismiss_label' => true,
         ),
       ),
     ),

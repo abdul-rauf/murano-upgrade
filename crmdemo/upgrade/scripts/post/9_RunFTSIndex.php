@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Elastica\Exception\ResponseException;
+use Sugarcrm\Sugarcrm\Elasticsearch\Analysis\AnalysisBuilder;
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\MappingCollection;
+use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\ErasedFieldsHandler;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\Engine\Elastic;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Index;
@@ -27,9 +31,11 @@ class SugarUpgradeRunFTSIndex extends UpgradeScript
      */
     public function run()
     {
-        if (version_compare($this->from_version, '7.7', '<')) {
+        if (version_compare($this->from_version, '7.10', '<')) {
             $this->dropExistingIndex();
             $this->runFTSIndex();
+        } elseif (version_compare($this->from_version, '8.0', '<')) {
+            $this->updateIndexMapping();
         }
     }
 
@@ -54,22 +60,40 @@ class SugarUpgradeRunFTSIndex extends UpgradeScript
      */
     public function dropExistingIndex()
     {
-        //the old index name is unique_key from sugar config
-        $name = \SugarConfig::getInstance()->get('unique_key', 'sugarcrm');
-
         $engine = SearchEngine::getInstance()->getEngine();
         if ($engine instanceof Elastic) {
+            //the old index name is unique_key from sugar config
+            $name = \SugarConfig::getInstance()->get('unique_key', 'sugarcrm');
             try {
                 $client = $engine->getContainer()->client;
                 $index = new Index($client, $name);
-                if ($index->exists()) {
-                    $index->delete();
-                    $this->log("SugarUpgradeRunFTSIndex: the existing index {$name} is deleted.");
-                } else {
-                    $this->log("SugarUpgradeRunFTSIndex: the index {$name} does not exist.");
-                }
+                $index->delete();
+                $this->log("SugarUpgradeRunFTSIndex: the existing index {$name} is deleted.");
             } catch (Exception $e) {
-                $this->log("SugarUpgradeRunFTSIndex: deleting the existing index {$name} got exceptions!");
+                if ($e instanceof ResponseException && strpos($e->getMessage(), "no such index") !== false) {
+                    $this->log("SugarUpgradeRunFTSIndex: the index {$name} does not exist.");
+                } else {
+                    $this->log("SugarUpgradeRunFTSIndex: deleting the existing index {$name} got exceptions!");
+                }
+            }
+        }
+    }
+
+    /**
+     * Update Mapping
+     */
+    protected function updateIndexMapping()
+    {
+        $engine = SearchEngine::getInstance()->getEngine();
+        if ($engine instanceof Elastic) {
+            try {
+                $handler = new ErasedFieldsHandler();
+                // update mapping
+                $engine->getContainer()->indexManager->updateIndexMappings([], $handler);
+
+                $this->log("SugarUpgradeRunFTSIndex: mappings on Elastic server have been updated.");
+            } catch (Exception $e) {
+                $this->log("SugarUpgradeRunFTSIndex: updating index mapping got exceptions!");
             }
         }
     }

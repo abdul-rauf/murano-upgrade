@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Quadre de comandament de la llista de possibles clients',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de possibles clients',
+
     'ERR_DELETE_RECORD' => 'Per suprimir el client potencial, heu d&#39;especificar un número de registre.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Descripció de la Compte',
     'LBL_ACCOUNT_ID'=>'ID del compte',
@@ -314,4 +319,6 @@ Després de confirmar cada mòdul necessari i desitjat, feu clic al botó Desa i
     'LBL_MKTO_LEAD_SCORE' => 'Puntuació del potencial',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Informes de potencials',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objectius empresarials consentits',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Darrera actualització del consetiment',
 );

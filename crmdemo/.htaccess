@@ -1,20 +1,6 @@
 
 
 # BEGIN SUGARCRM RESTRICTIONS
-RedirectMatch 403 .*\.log$
-RedirectMatch 403 /+not_imported_.*\.txt
-RedirectMatch 403 /+(soap|cache|xtemplate|data|examples|include|log4php|metadata|modules|clients|jssource|ModuleInstall)/+.*\.(php|tpl)
-RedirectMatch 403 /+emailmandelivery\.php
-RedirectMatch 403 /+upload/
-RedirectMatch 403 /+custom/+blowfish
-RedirectMatch 403 /+cache/+diagnostic
-RedirectMatch 403 /+files\.md5$
-RedirectMatch 403 /+composer\.(json|lock)
-RedirectMatch 403 /+vendor/(?!ytree.*\.(css|js|gif|png))
-RedirectMatch 403 /+bin/
-RedirectMatch 403 /+src/
-RedirectMatch 403 .*/\.git
-
 # Fix mimetype for logo.svg (SP-1395)
 AddType     image/svg+xml     .svg
 AddType     application/json  .json
@@ -24,6 +10,21 @@ AddType     application/javascript  .js
     Options +FollowSymLinks
     RewriteEngine On
     RewriteBase /
+    RewriteRule (?i)\.git - [F]
+    RewriteRule (?i)\.log$ - [F]
+    RewriteRule (?i)^bin/ - [F]
+    RewriteRule (?i)^cache/diagnostic/ - [F]
+    RewriteRule (?i)^composer\.(json|lock)$ - [F]
+    RewriteRule (?i)^cron\.php$ - [F]
+    RewriteRule (?i)^custom/blowfish/ - [F]
+    RewriteRule (?i)^dist/ - [F]
+    RewriteRule (?i)^emailmandelivery\.php$ - [F]
+    RewriteRule (?i)^files\.md5$ - [F]
+    RewriteRule (?i)^src/ - [F]
+    RewriteRule (?i)^upload/ - [F]
+    RewriteRule (?i)^vendor/(?!ytree.*\.(css|gif|js|png)$) - [F]
+    RewriteRule (?i)^(cache|clients|data|examples|include|jssource|log4php|metadata|ModuleInstall|modules|soap|xtemplate)/.*\.(php|tpl)$ - [F]
+
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^rest/(.*)$ api/rest.php?__sugar_url=$1 [L,QSA]

@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashbord for muligheterliste',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashbord for muligheteroppføring',
+
     'LBL_MODULE_NAME' => 'Muligheter',
     'LBL_MODULE_NAME_SINGULAR' => 'Salgsmulighet',
     'LBL_MODULE_TITLE' => 'Muligheter: Hjem',
@@ -166,25 +170,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Med modulen {{plural_module_name}} kan du spore individuelle salg fra start til slutt. Hver {{module_name}}-oppføring representerer et forestående salg og inkluderer relevante salgsdata og er knyttet til andre viktige oppføringer som {{quotes_module}}, {{contacts_module}} osv. En {{module_name}} vil vanligvis gå gjennom flere salgstrinn før den merkes som "Lukket vunnet" eller "Lukket tapt". {{plural_module_name}} kan benyttes videre ved hjelp av Sugars {{forecasts_singular_module}}-modul for å forstå og forutsi salgstrender i tillegg til å fokusere jobb for å oppnå salgskvoter.',
+    'LBL_HELP_RECORDS' => 'Modulen {{plural_module_name}} lar deg spore individuelle salg fra start til slutt. Hver {{module_name}} rekord representerer et potensielt salg og inkluderer relevante salgdata så vel som relatert til andre viktige registre som {{quotes_module}}, {{contacts_module}}, osv. Et {{module_name}} vil typisk skride gjennom flere salgsstadier til det merkes "lukket vunnet" eller "lukket tapt". {{plural_module_name}} kan påvirkes enda videre ved å bruke Sugars {{forecasts_singular_module}}-modul for å forstå og forutsi salgstrender så vel som fokusere arbeid for å oppnå salgskvoter.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Med {{plural_module_name}}-modulen kan du følge individuelle salg og produktene som hører til salgene fra begynnelse til slutt. Hver {{module_name}}-post representerer en et forestående salg, inkluderer relevante salgsdata og knyttes til andre viktige poster som {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_RECORD' => 'Modulen {{plural_module_name}} lar deg spore individuelle salg og linjeelementer som tilhører disse salgene fra start til slutt {{module_name}} register representerer et potensielt salg og inkluderer relevante salgsdata så vel som relatert til andre viktige registre som {{quotes_module}}, {{contacts_module}}, osv.
 
-– Rediger postfeltet ved å klikke på et enkeltfelt eller Rediger-knappen.
-– Vis eller rediger lenker til andre poster i underpanelene ved å endre panelet nede til venstre til «Datavisning».
-– Lag og se endringslogg for brukerkommentarer og -poster i {{activitystream_singular_module}} ved å endre panelet nede til venstre til «Aktivitetstrøm».
-– Følg eller merk posten som favoritt ved bruk av ikonene til høyre for postnavnet.
-– Ytterlighere handlinger er tilgjengelige i rullegardinmenyen for Handlinger til høyre for Rediger-knappen.',
+- Rediger dette registerets felt ved å klikke på et individuelt felt eller knappen Rediger.
+- Vis eller endre koblinger til andre registre i underpanelene ved å veksle nedre venstre rute til "Datavisning".
+- Lag og vis brukerkommentarer og registrer endringshistorikk i {{activitystream_singular_module}} ved å veksle nedre venstre rute til "Aktivitetsstrøm".
+- Følg eller sett dette registeret som favoritt med ikonene til høyre for registrernavnet.
+- Tilleggshandlinger er tilgjengelig i nedtrekksmenyen Handlinger til høyre for Rediger-knappen.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Med {{plural_module_name}}-modulen kan du følge individuelle salg og produktene som hører til salgene fra begynnelse til slutt. Hver {{module_name}}-post representerer en et forestående salg, inkluderer relevante salgsdata og knyttes til andre viktige poster som {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_CREATE' => 'Modulen {{plural_module_name}} lar deg spore individuelle salg og linjeelementer som tilhører disse salgene fra start til slutt. Hver {{module_name}}-oppføring representerer et potensielt salg og inkluderer relevante salgsdata og er knyttet til andre viktige oppføringer som {{quotes_module}}, {{contacts_module}}, etc.
 
-Slik oppretter du {{module_name}}:
-1. Angi verdiene for feltene som ønsket.
-– Felt merket med "Obligatorisk" må fullføres før du lagrer.
-– Klikk på "Vis mer" for å se ytterligere felt ved behov.
-2. Klikk på "Lagre" for å ferdigstille den nye posten og gå tilbake til den forrige siden.',
+For å opprette en {{module_name}}:
+1. Oppgi verdier for feltene som ønsket.
+ - Felter merket med "Obligatorisk" må fylles ut før du lagrer.
+ - Klikk på "Vis mer" for å vise flere felter ved behov.
+2. Klikk på "Lagre" for å fullføre den nye oppføringen og gå tilbake til forrige side.',
 
 // END PRO/CORP
 

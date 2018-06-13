@@ -31,7 +31,7 @@
     },
 
     /**
-     * @override
+     * @inheritdoc
      */
     initiateSave: function(callback) {
         this.disableButtons();
@@ -60,8 +60,8 @@
 
     /**
      * Check to see if all fields are valid
-     * @override
-     * @param callback
+     *
+     * @inheritdoc
      */
     validateModelWaterfall: function(callback) {
         // override this.model.doValidate() to display error if subpanel model validation failed
@@ -81,9 +81,7 @@
      * Check to see if there are subpanel create models on this view
      * And trigger an event to tell the subpanel to validate itself
      *
-     * @override
-     * @param callback
-     * @return {Mixed}
+     * @inheritdoc
      */
     validateSubpanelModelsWaterfall: function(callback) {
         this.hasSubpanelModels = false;

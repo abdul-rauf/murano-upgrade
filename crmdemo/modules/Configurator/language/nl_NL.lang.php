@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Deze naam wordt in de titelbar van uw browser getoond.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Toon/Verberg e-mails van gerelateerde (of gekoppelde) contactpersonen in het e-mail subpanel.',
 
-    'LBL_OC_STATUS'                     => 'Standaard Offline Client Status',
-    'DEFAULT_OC_STATUS'                 => 'Offline Client standaard inschakelen',
-    'LBL_OC_STATUS_DESC' => 'Check hier of u willekeurig welke gebruiker toegang wilt geven tot de Offline Cliënt. In de overige gevallen kunt u toegang op het gebruikersniveau wijzigen.',
     'SESSION_TIMEOUT' => 'Time-out portaalsessie',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'De time-out van de portaalsessie is bedoeld voor legacy versies van Sugar Portaal, beschikbaar in 6.5 en ouder.',
     'UPLOAD_MAXSIZE_UNITS' => 'bytes',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'Aanmeld URL SAML mag niet leeg zijn',
     'ERR_EMPTY_SAML_CERT' => 'SAML certificaat mag niet leeg zijn',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'ID SAML-entiteit kan niet leeg zijn',
     'ERR_SAML_LOGIN_URL' => 'Aanmeld URL SAML is ongeldig',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL is ongeldig',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM-bestand mag geen privé sleutel bevatten',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM-bestand moet x.509 certificaat bevatten',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Aangeleverd x.509 certificaat komt niet overeen met privé sleutel',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Activity Streams inschakelen',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Schakelt Activity Streams in voor de toepassing',
 );
 
 

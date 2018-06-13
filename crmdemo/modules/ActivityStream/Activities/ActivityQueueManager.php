@@ -70,6 +70,10 @@ class ActivityQueueManager
      */
     public static function isEnabledForModule($moduleName)
     {
+        if (!Activity::isEnabled()) {
+            return false;
+        }
+
         if (in_array($moduleName, self::$moduleBlacklist)) {
             return false;
         }

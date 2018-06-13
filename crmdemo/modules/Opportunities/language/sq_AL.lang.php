@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Paneli i listës së shanseve',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të shanseve',
+
     'LBL_MODULE_NAME' => 'Mundësitë',
     'LBL_MODULE_NAME_SINGULAR' => 'Mundësi:',
     'LBL_MODULE_TITLE' => 'Mundësite: Ballina',
@@ -81,7 +85,7 @@ $mod_strings = array(
     'LBL_NEW_FORM_TITLE' => 'Krijo mundësi',
     'LNK_NEW_OPPORTUNITY' => 'Krijo mundësi',
     'LNK_CREATE' => 'Krijo marrëveshje',
-    'LNK_OPPORTUNITY_LIST' => 'Shih mundësitë',
+    'LNK_OPPORTUNITY_LIST' => 'Shiko mundësitë',
     'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë mundësinë',
     'LBL_TOP_OPPORTUNITIES' => 'Mundësitë e mia top të hapura',
     'NTC_REMOVE_OPP_CONFIRMATION' => 'A jeni të sigurt që dëshironi të largoni këtë kontakt nga mundësia?',
@@ -127,7 +131,7 @@ $mod_strings = array(
     'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Kontratat',
     'LBL_PRODUCTS' => 'Produktet',
     'LBL_RLI' => 'Rreshti i llojeve të të ardhurave',
-    'LNK_OPPORTUNITY_REPORTS' => 'Shih raportet e mundësive',
+    'LNK_OPPORTUNITY_REPORTS' => 'Shiko raportet e mundësive',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Kuotat',
     'LBL_TEAM_ID' => 'Id e grupit',
     'LBL_TIMEPERIODS' => 'Periudhat kohore',
@@ -166,24 +170,24 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale nga fillimi në fund. Çdo regjistrim {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhënat përkatëse të shitjes, si dhe lidhet me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj. Ecuria e një {{module_name}} kalon zakonisht nëpër disa faza shitjesh derisa shënohet si "Fitim i mbyllur" ose si "Humbje e mbyllur". {{plural_module_name}} mund të rritet edhe më tej duke përdorur modulin {{forecasts_singular_module}} të Sugar për të kuptuar dhe parashikuar tendencat e shitjeve si dhe për të fokusuar punën për të arritur kuotat e shitjeve.',
+    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe artikujve të linjës që u përkasin këtyre shitjeve, nga fillimi deri në fund. Çdo regjistrim i {{module_name}} përbën një shitje të mundshme dhe përfshin të dhënat përkatëse të shitjes, si dhe ndërlidhet me regjistrime të tjera të rëndësishme, si p.sh. {{quotes_module}}, {{contacts_module}} etj. Zakonisht, {{module_name}} kalon në disa faza të shitjes derisa shënohet si "Mbyllje me fitim" ose "Mbyllje me humbje". {{plural_module_name}} mund të përdoret edhe më tej duke përdorur modulin e {{forecasts_singular_module}} të "Sugar" për të kuptuar dhe parashikuar tendencat e shitjeve, si dhe për t&#39;u përqendruar në arritjen e kuotave të shitjeve.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe të artikujve të linjës që u përkasin këtyre shitjeve nga fillimi në fund. Çdo regjistrim {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhënat përkatëse të shitjes, si dhe lidhet me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj.
+    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe artikujve të linjës që u përkasin këtyre shitjeve, nga fillimi deri në fund. Çdo regjistrim i {{module_name}} përbën një shitje të mundshme dhe përfshin të dhënat përkatëse të shitjes, si dhe ndërlidhet me regjistrime të tjera të rëndësishme, si p. sh. {{quotes_module}}, {{contacts_module}} etj.
 
-- Redakto fushat e këtij regjistrimi duke klikuar një fushë individuale ose butonin "Redakto".
-- Shfaq ose modifiko lidhjet për te regjistrimet e tjera në nënpanele, duke e lëvizur panelin e poshtëm majtas te "Pamja e të dhënave".
-- Bëj dhe shiko komente përdoruesi dhe regjistro historikun e ndryshimeve në {{activitystream_singular_module}}, duke e lëvizur panelin e poshtëm majtas tek "Transmetimi i aktiviteteve".
-- Ndiq ose bëje të preferuar këtë regjistrim duke përdorur ikonat në të djathtë të emrit të regjistrimit.
-- Veprime shtesë disponohen në menynë me zbritje të veprimeve në të djathë të butonit "Redakto".',
+- Modifiko fushën e këtij regjistrimit duke klikuar një fushë individuale ose butonin "Modifiko".
+- Shfaq ose modifiko lidhjet drejt regjistrimeve të tjera në nënpanele duke aktivizuar kanatin majtas poshtë te "Pamja e të dhënave".
+- Bëj dhe shiko komentet e përdoruesve, si dhe regjistro historikun e ndryshimeve në {{activitystream_singular_module}} duke aktivizuar kanatin majtas poshtë te "Fluksi i veprimeve".
+- Ndiq ose shëno si të preferuar regjistrimin duke përdorur ikonat në të djathtë të emrit të regjistrimit.
+- Veprimet e mëtejshme jepen në menynë vertikale "Veprimet" në të djathtë të butonin "Modifiko".',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe të artikujve të linjës që u përkasin këtyre shitjeve nga fillimi në fund. Çdo regjistrim {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhënat përkatëse të shitjes, si dhe lidhet me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj.
+    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe artikujve të linjës që u përkasin këtyre shitjeve, nga fillimi deri në fund. Çdo regjistrim {{module_name}} përbën shitje të mundshme dhe përfshin të dhënat përkatëse të shitjes, si dhe ndërlidhet me regjistrime të tjera të rëndësishme, si p.sh. {{quotes_module}}, {{contacts_module}} etj.
 
 Për të krijuar një {{module_name}}:
-1. Jep vlerat për fushat sipas dëshirës.
- - Fushat e shënuar si "Të nevojshme" duhet të plotësohen përpara ruajtjes.
- - Kliko "Shfaq më shumë" për të shfaqur fusha shtesë nëse është e nevojshme.
+1. Jep vlerat e fushave, sipas dëshirës.
+ - Fushat e shënuara me "E domosdoshme" duhen plotësuar përpara ruajtjes.
+ - Kliko "Shfaq të tjera" për të zbuluar fusha të tjera sipas nevojës.
 2. Kliko "Ruaj" për të përfunduar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
 
 // END PRO/CORP

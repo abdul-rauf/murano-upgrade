@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Kontrolna tabla prognoza',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Prognoze',
     'LBL_MODULE_NAME_SINGULAR' => 'Prognoza',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'ID broj proizvoda',
     'LBL_QUOTA_ID' => 'ID broj kvote',
     'LBL_VERSION' => 'Verzija',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Sakrij legendu trake',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Prikaži legendu trake',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Sakrij legendu linije',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Prikaži legendu linije',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Greška: korisnik {0} nema menadzerski pristup za traženje prognoza za {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Početni datum fiskalne godine:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Podesite vremenski period koji će biti korišćen za prognozu.<br><br>Počnite biranjem početnog datuma vaše fisklane godine. Onda izaberite tip vremenskog perioda za koji želite prognozu. Opseg datuma za vremenske periode biće automatski izračunat uz pomoć vaše selekcije. Vremenski pod-periodi su osnova za tabelu prognoza.<br><br>Vidljivi budući i prošli vremenski periodi će odrediti broj vidljivih pod-perioda. Korisnici mogu da pregledaju i izmene brojeve prognoze za vidljve pod-periode.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurišite način na koji želite da kategorizujete {{forecastByModule}}. <br><br>Imajte na umu da postavke opsega nije moguće izmeniti nakon prvog izvršavanja. Kod nadograđenih instanci, postavka opsega je zaključana sa postojećim podacima o prognozi.<br><br>Možete da izaberete dve ili više kategorija na osnovu opsega prema verovatnoći ili da kreirate kategorije koje nisu zasnovane na verovatnoći. <br><br>Sa leve strane prilagođenih kategorija nalaze se polja za potvrdu; koristite ih da biste izabrali opsege koji će biti uključeni u iznos prognoze za izvršavanje i izveštavanje menadžerima. <br><br>Korisnik može ručno da izmeni status „uključi/isključi“ i kategoriju modula {{forecastByModule}} na radnom listu.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurišite način na koji želite da kategorizujete {{forecastByModule}}. <br><br>Imajte na umu da postavke raspona ne mogu da se promene nakon prve potvrde. U nadograđenim instancama postavka raspona je zaključana u postojećim podacima o prognozi.<br><br>Možete da izaberete dve ili više kategorija na osnovu raspona verovatnoće ili da kreirate kategorije koje se ne zasnivaju na verovatnoći. <br><br>Levo od prilagođenih kategorija nalaze se polja za potvrdu koja možete da koristite za odabir raspona koji će se uključiti u iznos prognoze koji se potvrđuje i prenosi menadžerima. <br><br>Korisnik može na svom radnom listu ručno da promeni status kategorije {{forecastByModule}} na uključivanje ili isključivanje.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Odaberite kolone koje želite da korinik popuni za prognou svakog {{forecastByModuleSingular}}. Imajte na umu da je verovatna količina povezana sa količinom prikazanom u {{forecastByModule}}; iz ovog razloga kolona verovatno ne može biti skrivena.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Izaberite kolone koje bi želeli da vidite u modulu za prognozu. Lista polja će sačinjavati tabelu i omogućiće korisniku da sam podesi svoj pogled.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ovde stoji tekst uputstva za prognoze!',

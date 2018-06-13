@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Lehetőségek listája műszerfal',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Lehetőség bejegyzések műszerfal',
+
     'LBL_MODULE_NAME' => 'Lehetőségek',
     'LBL_MODULE_NAME_SINGULAR' => 'Lehetőség',
     'LBL_MODULE_TITLE' => 'Lehetőségek: Főoldal',
@@ -166,25 +170,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a végéig nyomon követheti az egyedi értékesítéseket. Minden {{module_name}} rekord egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos rekordokhoz kapcsolódó adatokat, mint a {{quotes_module}}, {{contacts_module}} stb. Egy {{module_name}} jellemzően több értékesítési fázison megy át, amíg "Lezárt, megnyert" vagy "Lezárt, elveszített" minősítést nem kap. A(z) {{plural_module_name}} ennél tovább is emelhető a Sugar {{forecasts_singular_module}} használatával, amelynek segítségével megértheti és képes lesz előre jelezni az értékesítési trendeket, és fókuszálhatja a munkáját annak érdekében, hogy elérje az értékesítési kvótákat.',
+    'LBL_HELP_RECORDS' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a befejezésig nyomon követheti egyéni módon az értékesítéseket. Mindegyik {{module_name}} bejegyzés egy értékesítési lehetőséget képvisel, és tartalmazza az összes releváns értékesítési adatot, valamint az egyéb fontos bejegyzéseket, amilyen például a(z) {{quotes_module}}, {{contacts_module}} stb. Egy {{module_name}} modul általában több értékesítési szakaszon átmegy, míg végül a „Lezárt, megnyert” vagy „Lezárt, elveszített” jelölést kapja. A(z) {{plural_module_name}} még jobban kihasználható a Sugar {{forecasts_singular_module}} moduljának igénybe vételével, mivel ez lehetővé teszi az értékesítési tendenciák megértését és előrejelzését, valamint a munkára való összpontosítást az értékesítési kvóták eléréséhez.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'A(z) {{plural_module_name}} modul segítségével nyomon követheti az egyedi eladásokat és az azokhoz tartozó sorokat elejétől-végig. Minden {{module_name}} rekord egy prospektív értékesítést képvisel, és olyan más, fontos rekordokhoz kapcsolódik, mint pl. {{quotes_module}}, {{contacts_module}} stb. 
+    'LBL_HELP_RECORD' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a befejezésig nyomon követheti egyéni módon az értékesítéseket és az értékesítésekhez tartozó sorelemeket. Mindegyik {{module_name}} bejegyzés egy értékesítési lehetőséget képvisel, és tartalmazza az összes releváns értékesítési adatot, valamint az egyéb fontos bejegyzéseket, amilyen például a(z) {{quotes_module}}, {{contacts_module}} stb.
 
-- A rekord mezőinek szerkesztéséhez kattintson egy adott mezőre vagy a Szerkesztés gombra.
-- Az alpanelekben lévő más rekordok megtekintéséhez vagy módosításához húzza a bal alsó panelt "Adatnézet" állásba.
-- A felhasználói megjegyzések beszúrásához vagy megtekintéséhez a(z) {{activitystream_singular_module}} modulban húzza a bal alsó panelt "Tevékenységek" állásba.
-- A rekord követéséhez vagy kedvencként történő kiemeléséhez használja a rekord nevének jobb oldalán lévő ikonokat.
-- A további műveletek a legördülő, a Szerkesztés gomb jobb oldalán lévő Műveletek menüből elérhetőek.',
+- Szerkessze ennek a rekordnak a mezőit külön-külön, vagy kattintson a Szerkesztés gombra.
+- Tekintse meg vagy szerkessze az alpanelekben található egyéb rekordokra vonatkozó linkeket a bal alsó „Adatnézet” kapcsoló használatával.
+- Hozzon létre vagy tekintsen meg felhasználói megjegyzéseket, illetve rögzítse a változási előzményeket a(z) {{activitystream_singular_module}} modulban a bal oldali alsó ablaktábla „Tevékenységfolyam” opcióra állításával.
+- A rekord neve mellett jobbra található ikonok segítségével jelölje be kedvencének a tartalmat, vagy kövesse annak utóéletét.
+- Egyéb tevékenységek a Szerkesztés gombtól jobbra szereplő műveleti gomb legördülő menüjében találhatók.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'A(z) {{plural_module_name}} modul segítségével nyomon követheti az egyedi eladásokat és az azokhoz tartozó sorokat elejétől-végig. Minden {{module_name}} rekord egy prospektív értékesítést képvisel, és olyan más, fontos rekordokhoz kapcsolódik, mint pl. {{quotes_module}}, {{contacts_module}} stb.
+    'LBL_HELP_CREATE' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a befejezésig nyomon követheti egyéni módon az értékesítéseket és az értékesítésekhez tartozó sorelemeket. Mindegyik {{module_name}} bejegyzés egy értékesítési lehetőséget képvisel, és tartalmazza az összes releváns értékesítési adatot, valamint az egyéb fontos bejegyzéseket, amilyen például a(z) {{quotes_module}}, {{contacts_module}} stb.
 
-{{module_name}} modul létrehozásához:
-1. Vigye be a mezőkbe a kívánt értékeket.
- - A "Kötelező" jelölésű mezőket mentés előtt ki kell tölteni.
- - Ha szükséges, a "Mutasson többet" gombbal további mezőket is megjeleníthet.
-2. Az új rekord véglegesítéséhez kattintson a "Mentés" gombra, és lépjen vissza az előző oldalra.',
+{{module_name}} létrehozása:
+1. Adja meg az adatokat a mezőkben szükség szerint.
+ - A „Kötelező” tulajdonsággal rendelkező mezők kitöltése nélkül mentés nem lehetséges.
+ - Szükség szerint további mezők megjelenítéséhez kattintson a „Több mutatása” lehetőségre.
+2. Kattintson a „Mentés” gombra a rekord mentéséhez és a korábbi oldalra való visszatéréshez.',
 
 // END PRO/CORP
 

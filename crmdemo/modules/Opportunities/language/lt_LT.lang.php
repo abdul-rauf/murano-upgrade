@@ -12,7 +12,11 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME' => 'Pardavimai',
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Pardavimų sąrašo ataskaitų sritis',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Pardavimų duomenų ataskaitų sritis',
+
+    'LBL_MODULE_NAME' => 'Pardavimas',
     'LBL_MODULE_NAME_SINGULAR' => 'Pardavimas',
     'LBL_MODULE_TITLE' => 'Pardavimai: Pradžia',
     'LBL_SEARCH_FORM_TITLE' => 'Pardavimų paieška',
@@ -24,7 +28,7 @@ $mod_strings = array(
     'LBL_INVITEE' => 'Kontaktas',
     'LBL_CURRENCIES' => 'Valiutos',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Pavadinimas',
-    'LBL_LIST_ACCOUNT_NAME' => 'Kliento vardas',
+    'LBL_LIST_ACCOUNT_NAME' => 'Kliento pavadinimas',
     'LBL_LIST_DATE_CLOSED' => 'Sandorio data',
     'LBL_LIST_AMOUNT' => 'Suma',
     'LBL_LIST_AMOUNT_USDOLLAR' => 'Suma',
@@ -166,24 +170,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} suteikia jums galimybę sekti atskiras pardavimo operacijas nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą ir jį sudaro susiję pardavimo duomenys bei su kitais svarbiais įrašais susijusi informacija, pvz., {{quotes_module}}, {{contacts_module}} ir pan. {{module_name}} paprastai vykdomas per kelis pardavimo etapus, kol pažymimas kaip „Closed won“ arba „Closed Lost“. {{plural_module_name}} gali būti naudojamas ir toliau naudojant „Sugar {{forecasts_singular_module}}“ modulį norint sužinoti ir numatyti pardavimo tendencijas bei susitelkti ties pardavimo kvotos pasiekimo tikslu.',
+    'LBL_HELP_RECORDS' => 'Naudodami modulį {{plural_module_name}} galite sekti atskirus pardavimo procesus nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą; įrašą sudaro susiję pardavimo duomenys bei su kitais svarbiais įrašais susijusi informacija, pvz., {{quotes_module}}, {{contacts_module}} ir kt. {{module_name}} paprastai vykdomas per kelis pardavimo etapus, kol pažymimas „Uždaryta kaip laimėta“ arba „Uždaryta kaip nelaimėta“. {{plural_module_name}} gali būti panaudotas ir toliau naudojant „Sugar“ {{forecasts_singular_module}} modulį siekiant suprasti ir numatyti pardavimo tendencijas bei susitelkti į pardavimo kvotų pasiekimo tikslą.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} suteikia jums galimybę sekti atskiras pardavimo operacijas ir tam pardavimus priklausančias prekes nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą ir jį sudaro susiję pardavimo duomenys bei su kitais svarbiais įrašais susijusi informacija, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
-- Redaguokite šio įrašo laukus spustelėdami atskirą lauką arba mygtuką Redaguoti
-- Peržiūrėkite arba keiskite kitų įrašų saitus antriniuose skydeliuose perjungdami apatinę kairiąją sritį į Duomenų rodinys.
-- Komentuokite ir peržiūrėkite vartotojų komentarus ir įrašų keitimo retrospektyvą {{activitystream_singular_module}} perjungdami apatinę kairiąją sritį į Veiklos srautas.
-- Stebėkite arba įtraukite į parankinius šį įrašą naudodami įrašo autoriaus vardo dešinėje esančias piktogramas.
-- Mygtuko Redaguoti dešinėje esančiame išplečiamajame meniu Veiksmai rodomi papildomi galimi veiksmai.',
+    'LBL_HELP_RECORD' => 'Naudodami modulį {{plural_module_name}} galite sekti atskirus pardavimo procesus ir konkrečiam pardavimui priklausančias eilutės prekes nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą; įrašą sudaro susiję pardavimo duomenys bei su kitais svarbiais įrašais susijusi informacija, pvz., {{quotes_module}}, {{contacts_module}} ir kt.
+
+− Redaguokite šio įrašo laukus spustelėdami atskirą lauką arba mygtuką „Redaguoti“.
+− Peržiūrėkite arba keiskite nuorodas į kitus įrašus antriniuose skydeliuose perjungdami apatinę kairiąją sritį į dalį „Duomenų rodinys“.
+− Komentuokite ir peržiūrėkite vartotojų komentarus, įrašykite keitimų retrospektyvą {{activitystream_singular_module}} perjungdami apatinę kairiąją sritį į dalį „Veiklos srautas“.
+− Stebėkite šį įrašą arba įtraukite jį į parankinius naudodami įrašo pavadinimo dešinėje esančias piktogramas.
+− Mygtuko „Redaguoti“ dešinėje esančiame išplečiamajame meniu „Veiksmai“ rodomi galimi papildomi veiksmai.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} suteikia jums galimybę sekti atskiras pardavimo operacijas ir tam pardavimus priklausančias prekes nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą ir jį sudaro susiję pardavimo duomenys bei su kitais svarbiais įrašais susijusi informacija, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
+    'LBL_HELP_CREATE' => 'Naudodami modulį {{plural_module_name}} galite sekti atskirus pardavimo procesus ir konkrečiam pardavimui priklausančias eilutės prekes nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą; įrašą sudaro susiję pardavimo duomenys bei su kitais svarbiais įrašais susijusi informacija, pvz., {{quotes_module}}, {{contacts_module}} ir kt.
 
 Norėdami sukurti {{module_name}}:
-1. Pateikite pageidaujamų laukų reikšmes.
- - Laukai, pažymėti kaip Būtinas, prieš įrašant turi būti užpildyti.
- - Jei reikia, kad būtų parodyti papildomi laukai, spustelėkite Rodyti daugiau.
-2. Spustelėję Įrašyti užbaigsite naują įrašą ir grįšite į ankstesnį puslapį.',
+1. Pateikite laukų vertes taip, kaip norite.
+ − Laukai, pažymėti kaip „Būtina“, turi būti užpildyti prieš įrašant.
+ − Spustelėkite „Rodyti daugiau“, jei reikia parodyti papildomus laukus.
+2. Spustelėję „Įrašyti“ užbaigsite naują įrašą ir grįšite į ankstesnį puslapį.',
 
 // END PRO/CORP
 

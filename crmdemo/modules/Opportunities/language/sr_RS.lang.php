@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Kontrolna tabla liste prodajnih prilika',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa prodajnih prilika',
+
     'LBL_MODULE_NAME' => 'Prodajne prilike',
     'LBL_MODULE_NAME_SINGULAR' => 'Prilika',
     'LBL_MODULE_TITLE' => 'Prodajne prilike: Početna strana',
@@ -166,24 +170,24 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} omogućuje praćenje pojedinačnih prodaja od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke u vezi sa ostalim važnim zapisima poput modula {{quotes_module}}, {{contacts_module}} itd. Svaki modul {{module_name}} obično napreduje kroz nekoliko faza prodaje dok ne dobije oznaku „Zatvoreno kao uspelo” ili „Zatvoreno kao neuspelo”. Modul {{plural_module_name}} može dodatno da se iskoristi upotrebom Sugar-ovog modula {{forecasts_singular_module}} u svrhu razumevanja i predviđanja trendova prodaje, kao i usmeravanja posla ka postizanju prodajnih kvota.',
+    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} omogućuje praćenje pojedinačnih prodaja od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i u vezi s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd. Modul {{module_name}} obično napreduje kroz nekoliko faza prodaje dok ne dobije oznaku „Zatvoreno kao uspelo” ili „Zatvoreno kao neuspelo”. Modul {{plural_module_name}} se može dodatno iskoristiti upotrebom Sugar-ovog modula {{forecasts_singular_module}} u cilju razumevanja i predviđanja trendova prodaje, kao i usmeravanja posla prema postizanju prodajnih kvota.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} omogućuje praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke u vezi sa ostalim važnim zapisima poput modula {{quotes_module}}, {{contacts_module}} itd.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} omogućuje praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i u vezi s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd. 
 
-- Uredite polja ovog zapisa tako što ćete kliknuti na pojedinačno polje ili dugme Uredi.
-- Pogledajte ili izmenite veze sa ostalim zapisima u podtablama tako što ćete prebaciti donje levo okno na „Prikaz podataka”.
+- Uredite polja ovog zapisa tako što ćete kliknuti na pojedinačno polje ili dugme Uredi. 
+- Pogledajte ili izmenite linkove ka ostalim zapisima u podpločama tako što ćete prebaciti donje levo okno na „Prikaz podataka”. 
 - Objavljujte i pregledajte komentare korisnika i beležite istoriju promena u modulu {{activitystream_singular_module}} tako što ćete prebaciti donje levo okno na „Pregled aktivnosti”. 
-- Pratite ili označite ovaj zapis kao omiljen pomoću ikona koje se nalaze desno od naziva zapisa.
+- Pratite ili označite ovaj zapis kao omiljen pomoću ikona koje se nalaze desno od naziva zapisa. 
 - Dodatne radnje dostupne su u padajućem meniju Radnje koji se nalazi desno od dugmeta Uredi.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} omogućuje praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke u vezi sa ostalim važnim zapisima poput modula {{quotes_module}}, {{contacts_module}} itd.
+    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} omogućuje praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i u vezi s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd.
 
-Da biste kreirali {{module_name}}:
-1. Unesite vrednosti polja po želji.
- - Polja označena „Obavezno” moraju da se popune pre čuvanja.
- - Kliknite na „Prikaži više” da biste otkrili dodatna polja ako je potrebno.
+Da biste napravili {{module_name}}:
+1. Unesite vrednosti polja po želji. 
+- Polja označena „Obavezno” moraju da se popune pre čuvanja. 
+- Kliknite na „Prikaži više” da biste otkrili dodatna polja ako je potrebno. 
 2. Kliknite na „Sačuvaj” da biste završili novi zapis i vratili se na prethodnu stranicu.',
 
 // END PRO/CORP

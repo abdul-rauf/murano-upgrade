@@ -358,7 +358,7 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
         $workingFilename = $this->getFileNameNoDefault($this->_view, $this->_moduleName, MB_WORKINGMETADATALOCATION);
 
 		if (file_exists($workingFilename)) {
-            SugarAutoLoader::unlink($workingFilename);
+            unlink($workingFilename);
         }
         $filename = $this->getFileNameNoDefault($this->_view, $this->_moduleName, MB_CUSTOMMETADATALOCATION);
 		$GLOBALS['log']->debug(get_class($this) . "->deploy(): writing to " . $filename);

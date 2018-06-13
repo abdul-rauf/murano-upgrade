@@ -34,23 +34,6 @@ $mod_strings = array(
 
     'ERR_DB_VERSION_FAILURE'			=> 'Nije moguće provjeriti verziju baze podataka.',
 
-
-	'ERR_OC_PASSWORD'					=> 'Potrebna je lozinka.',
-	'ERR_OC_SERVER_URL'					=> 'Potrebna je URL adresa poslužitelja Sugar.',
-	'ERR_OC_USERNAME'					=> 'Potrebno je korisničko ime korisnika poslužitelja.',
-	'LBL_INSTALL_OC'					=> 'Instalacija izvanmrežnog klijenta',
-    'LBL_OC_ADMIN'                      => 'Obratite se svojem administratoru da biste riješili ovaj problem.',
-    'LBL_OC_SUCCESS'                    => 'Dovršena je instalacija izvanmrežnog klijenta. Kliknite na gumb u nastavku da biste pristupili svojoj instalaciji.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'Admin. korisničko ime',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'Unesite podatke u nastavku da biste ispravno instalirali i sinkronizirali svoj izvanmrežni klijent.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'URL adresa poslužitelja Sugar',
-	'LBL_OC_INSTALL_PASS'				=> 'Lozinka za korisnika poslužitelja',
-	'LBL_OC_INSTALL_TITLE'				=> 'Instalacija izvanmrežnog klijenta',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'Ovo je korisničko ime s pomoću kojeg ćete se povezati s poslužiteljem Sugar.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'Korisničko ime',
-	'LBL_PERFORM_OC_INSTALL'			=> 'Pokretanje instalacije izvanmrežnog klijenta',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'Unesite podatke u nastavku da biste ispravno instalirali i sinkronizirali svoj izvanmrežni klijent.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Navedite korisničko ime za korisnika administratora Sugar. ',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Navedite lozinku za korisnika administratora Sugar. ',
@@ -58,7 +41,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Tijekom provjere kompatibilnosti otkrivene su pogreške. Da bi vaša instalacija aplikacije SugarCRM radila ispravno, poduzmite odgovarajuće korake za rješavanje problema navedene u nastavku i pritisnite gumb za ponovnu provjeru ili pokušajte ponovno instalirati.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Uključena je funkcija Allow Call Time Pass Reference (u php.ini mora biti postavljena na Isključeno)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nije pronađeno: Sugar Planer radit će s ograničenom funkcionalnošću. Usluga arhiviranja e-pošte neće raditi.',
+	'ERR_CHECKSYS_CURL'					=> 'Nije pronađeno: planer Sugar radit će s ograničenom funkcionalnošću. Usluga Arhiviranje e-pošte neće raditi.',
     'ERR_CHECKSYS_IMAP'					=> 'Nije pronađeno: dolazna e-pošta i kampanje (e-pošta) zahtijevaju biblioteke IMAP. Nijedno neće raditi.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Funkcija Magic Quotes GPC ne može biti uključena za vrijeme upotrebe poslužitelja MS SQL.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Upozorenje: ',
@@ -74,7 +57,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Za optimalno iskustvo upotrebe sučelja IIS/FastCGI sapi postavite fastcgi.logging na 0 u svojoj datoteci php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Instalirana nepodržana verzija PHP-a: ( ver.',
     'LBL_DB_UNAVAILABLE'                => 'Baza podataka nije dostupna',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podrška za bazu podataka nije pronađena. Provjerite imate li potrebne upravljačke programe za jednu od navedenih podržanih vrsta baza podataka: MySQL, MS SQLServer, Oracle ili DB2. Možda ćete morati ukloniti komentar s proširenja u datoteci php.ini ili je prevesti s ispravnom binarnom datotekom ovisno o vašoj verziji PHP-a. Više informacija o tome kako uključiti Podršku za bazu podataka potražite u svojem priručniku za PHP.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podrška za bazu podataka nije pronađena.  Provjerite imate li potrebne upravljačke programe za jednu od navedenih podržanih vrsta baza podataka: MySQL, MS SQLServer, Oracle ili DB2.  Možda ćete morati ukloniti komentar s proširenja u datoteci php.ini ili je programski prevesti s ispravnom binarnom datotekom ovisno o vašoj verziji PHP-a.  Više informacija o tome kako uključiti podršku za bazu podataka potražite u svojem priručniku za PHP.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funkcije povezane s bibliotekama za raščlanjivanje XML koje su potrebne za aplikaciju Sugar nisu pronađene. Možda ćete morati ukloniti komentar s proširenja u datoteci php.ini ili je prevesti s ispravnom binarnom datotekom ovisno o vašoj verziji PHP-a. Više informacija potražite u svojem priručniku za PHP.',
     'LBL_CHECKSYS_CSPRNG' => 'Generator slučajnih brojeva',
     'ERR_CHECKSYS_MBSTRING'             => 'Funkcije povezane s proširenjem Multibyte Strings PHP (mbstring) koje su potrebne za aplikaciju Sugar nisu pronađene. <br/><br/>Modul mbstring inače nije zadano uključen u PHP-u i mora ga se aktivirati s pomoću opcije --enable-mbstring nakon ugradnje binarne datoteke PHP. Više informacija o tome kako uključiti podršku za mbstring potražite u svojem priručniku za PHP.',
@@ -147,7 +130,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'Veličina datoteke za učitavanje',
 	'ERR_URL_BLANK'						=> 'Navedite osnovni URL za instancu Sugar.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'Nije moguće locirati zapis o instalaciji za',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'Učitana datoteka nije kompatibilna s ovim izdanjem (Community Edition, Professional ili Enterprise) aplikacije Sugar: ',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'Učitana datoteka nije kompatibilna s ovim izdanjem (Professional, Enterprise ili Ultimate izdanje) Sugara: ',
 	'ERROR_LICENSE_EXPIRED'				=> "Pogreška: vaša je licenca istekla prije ",
 	'ERROR_LICENSE_EXPIRED2'			=> " dan/a. Idite na stranicu <a href='index.php?action=LicenseSettings&module=Administration'>'„Upravljanje licencama”</a> na administratorskom zaslonu da biste unijeli svoj novi licencni ključ. Ako ne unesete novi licencni ključ unutar 30 dana od isteka licencnog ključa, više se nećete moći prijaviti u ovu aplikaciju.",
 	'ERROR_MANIFEST_TYPE'				=> 'Datoteka manifesta mora odrediti vrstu paketa.',
@@ -292,9 +275,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'Datum isteka',
 	'LBL_LICENSE_I_ACCEPT'				=> 'Prihvaćam',
 	'LBL_LICENSE_NUM_USERS'				=> 'Broj korisnika',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'Unesite broj kupljenih izvanmrežnih klijenata.',
-	'LBL_LICENSE_OC_NUM'				=> 'Broj licenci za izvanmrežne klijente',
-	'LBL_LICENSE_OC'					=> 'Licence za izvanmrežne klijente',
 	'LBL_LICENSE_PRINTABLE'				=> ' Prikaz za ispis ',
     'LBL_PRINT_SUMM'                    => 'Ispiši sažetak',
 	'LBL_LICENSE_TITLE_2'				=> 'Licenca za SugarCRM',
@@ -557,10 +537,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'Postavke razvrstavanja',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Navedite naziv sustava za instancu Sugar.',
 	'LBL_PATCH_UPLOAD' => 'Odaberite datoteku popravaka s lokalnog računala',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'Potrebna je verzija PHP-a 5 ili novija.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(Vaša je trenutačna verzija php-a ',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Uključen je način rada kompatibilnosti s ranijim verzijama PHP-a. Za nastavak postavite zend.ze1_compatibility_mode na Isključeno',
 
     'advanced_password_new_account_email' => array(
@@ -592,5 +568,3 @@ $contact_user_link_guid',
         'name' => 'Poruka e-pošte o zaboravljenoj lozinki',
         ),
 );
-
-?>

@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Võimaluste loendi töölaud',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Võimaluste kirjete töölaud',
+
     'LBL_MODULE_NAME' => 'Müügivõimalused',
     'LBL_MODULE_NAME_SINGULAR' => 'Opportunity',
     'LBL_MODULE_TITLE' => 'Müügivõimalused: Avaleht',
@@ -166,24 +170,23 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moodul {{plural_module_name}} võimaldab teil jälgida individuaalseid müüke algusest lõpuni. Iga mooduli {{module_name}} kirje esindab potentsiaalset müüki ja sisaldab olulisi müügiandmeid ning seostub muude oluliste müügikirjetega, nagu {{quotes_module}}, {{contacts_module}} jne. Moodul {{module_name}} läbib tavaliselt mitu müügietappi, kuni sellele lisatakse märge „Lõpetatud võidetud” või „Lõpetatud kaotatud”. Mooduleid {{plural_module_name}} saab edasi võimendada, kasutades Sugari moodulit {{forecasts_singular_module}}, et mõista ja prognoosida müügitrende ning seada eesmärgiks müügikvootide täitmine.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} moodul võimaldab teil üksikuid müüke algusest lõpuni jälgida. Iga {{module_name}} kirje tähistab potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid ning muid olulisi kirjeid nagu {{quotes_module}}, {{contacts_module}} jms. {{module_name}} läbib tavaliselt mitu müügietappi, kuni see märgitakse kas „suletud võiduks“ või „suletud kaotuseks“. Moodulit {{plural_module_name}} on võimalik veelgi paremini ära kasutada Sugari {{forecasts_singular_module}} mooduli abil, mõistmaks ja prognoosimaks müügitrende ja keskendumaks müügikvootide täitmisele.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moodul {{plural_module_name}} võimaldab teil jälgida individuaalseid müüke ja nende juurde kuuluvaid reaüksusi algusest lõpuni. Iga mooduli {{module_name}} kirje esindab potentsiaalset müüki ja sisaldab olulisi müügiandmeid ning seostub muude oluliste müügikirjetega, nagu {{quotes_module}}, {{contacts_module}} jne.
+    'LBL_HELP_RECORD' => '{{plural_module_name}} moodul võimaldab teil üksikuid müüke algusest lõpuni jälgida. Iga {{module_name}} kirje tähistab potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid ning muid olulisi kirjeid nagu {{quotes_module}}, {{contacts_module}} jms.
 
 - Redigeerige kirje välju, klõpsates individuaalsel väljal või nupul Redigeeri.
-- Vaadake või muutke alampaneelides linke teistele kirjetele, valides alumisel vasakpoolsel paanil kuva Andmevaade.
-- Koostage ja vaadake kasutaja kommentaare ning salvestage muutuse ajalugu moodulis {{activitystream_singular_module}}, valides alumisel vasakpoolsel paanil kuva Tegevuste voog.
-- Jälgige või lisage see kirje lemmikute hulka, kasutades kirje nimest paremal asuvaid ikoone.
+- Vaadake või muutke alampaneelides linke teistele kirjetele, valides alumisel vasakpoolsel paanil kuva Andmevaade. - Koostage ja vaadake kasutaja kommentaare ning salvestage muutuste ajalugu moodulis {{activitystream_singular_module}}, valides alumisel vasakpoolsel paanil kuva Tegevuste voog. 
+- Jälgige või lisage see kirje lemmikute hulka, kasutades kirje nimest paremal asuvaid ikoone. 
 - Täiendavad toimingud on saadaval tegevuste rippmenüüs, mis asub nupust Redigeeri paremal.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moodul {{plural_module_name}} võimaldab teil jälgida individuaalseid müüke ja nende juurde kuuluvaid reaüksusi algusest lõpuni. Iga mooduli {{module_name}} kirje esindab potentsiaalset müüki ja sisaldab olulisi müügiandmeid ning seostub muude oluliste müügikirjetega, nagu {{quotes_module}}, {{contacts_module}} jne.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} moodul võimaldab teil üksikuid müüke algusest lõpuni jälgida. Iga {{module_name}} kirje tähistab potentsiaalset müüki ja sisaldab asjakohaseid müügiandmeid ning muid olulisi kirjeid nagu {{quotes_module}}, {{contacts_module}} jms.
 
-Mooduli {{module_name}} loomiseks tehke järgmist.
-1. Esitage väljade väärtused soovi järgi.
- - Väljad märkega Kohustuslik tuleb täita enne salvestamist.
- - Vajaduse korral lisaväljade avaldamiseks klõpsake suvandit Kuva rohkem.
+Mooduli {{module_name}} loomiseks tehke järgmist. 
+1. Esitage väljade väärtused soovi järgi. 
+ - Väljad märkega Kohustuslik tuleb täita enne salvestamist. 
+ - Vajaduse korral lisaväljade avaldamiseks klõpsake suvandit Kuva rohkem. 
 2. Uue kirje lõpetamiseks ja eelmisele lehele naasmiseks klõpsake nuppu Salvesta.',
 
 // END PRO/CORP

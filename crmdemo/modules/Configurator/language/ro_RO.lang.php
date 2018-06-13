@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Acesta este numele care se afişează în bara de titlu a browserului.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Activează/dezactivează e-mail-uri de la contacte relaţionate (sau asociate) pentru afişare în Panoul secundar E-mail.',
 
-    'LBL_OC_STATUS'                     => 'Status offline client',
-    'DEFAULT_OC_STATUS'                 => 'Activează Offline Client în mod implicit',
-    'LBL_OC_STATUS_DESC' => 'Verificaţi aici dacă doriţi ca orice utilizator să aibă acces la Offline Client. In caz contrar, puteţi configurara accesul la nivel de utilizator.',
     'SESSION_TIMEOUT' => 'Portal Sesiunea Expirare',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Portalul Sesiunea Timeout este pentru versiunile mai vechi ale portalului Sugar disponibile în 6.5 și mai vechi.',
     'UPLOAD_MAXSIZE_UNITS' => 'octeţi',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Login URL nu poate fi gol',
     'ERR_EMPTY_SAML_CERT' => 'Certificatul SAML nu poate fi gol',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'ID entitate SAML nu poate fi goală',
     'ERR_SAML_LOGIN_URL' => 'SAML Login URL nu este valabil',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL nu este valabil',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'Fișierul PEM trebuie să conțină cheia privată',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'Fișierul PEM trebuie să conțină certificatul x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Certificatul x.509 furnizat nu corespunde cu cheia privată',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Fluxuri de activități',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Activare Fluxuri de activități',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Activează Fluxurile de activități pentru aplicație',
 );
 
 

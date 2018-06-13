@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Nadzorna ploča za predviđanja',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Predviđanja',
     'LBL_MODULE_NAME_SINGULAR' => 'Predviđanje',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'ID proizvoda',
     'LBL_QUOTA_ID' => 'ID kvote',
     'LBL_VERSION' => 'Verzija',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Sakrij trakastu legendu',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Prikaži trakastu legendu',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Sakrij linijsku legendu',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Prikaži linijsku legendu',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Pogreška: korisnik {0} nema pristup voditelja da bi zatražio predviđanja za {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Datum početka fiskalne godine:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurirajte vremensko razdoblje koje će se upotrebljavati u modulu predviđanja. <br><br>Imajte na umu da se postavke vremenskog razdoblja ne mogu promijeniti nakon prvog postavljanja.<br><br>Započnite tako da odaberete datum početka fiskalne godine. Zatim odaberite vrstu vremenskog razdoblja za predviđanja. Raspon datuma za vremenska razdoblja automatski će se izračunati na temelju vaših odabira. Podrazdoblje je osnova za radni list s predviđanjima. <br><br> Putem budućih i prošlih vremenskih razdoblja koja se mogu prikazati odredit će se broj vidljivih podrazdoblja u modulu predviđanja. Korisnici mogu pregledati i urediti brojeve predviđanja u vidljivim podrazdobljima.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurirajte način kategorizacije za {{forecastByModule}}. <br><br>Imajte na umu da se postavke raspona ne mogu promijeniti nakon prvog potvrđivanja. Kod nadograđenih instanca postavka raspona zaključava se s pomoću postojećih podataka predviđanja.<br><br>Možete odabrati dvije kategorije ili njih više na temelju raspona vjerojatnosti ili stvoriti kategorije koje se ne temelje na vjerojatnosti. <br><br>Na lijevoj strani kod prilagođenih kategorija nalaze se potvrdni okviri; s pomoću njih odlučite koji će rasponi biti uključeni u iznos predviđanja koji se potvrđuje i predaje voditelju. <br><br>Korisnik može ručno promijeniti status uključivanja/izostavljanja i kategoriju za {{forecastByModule}} s radnog lista.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurirajte način na koji želite kategorizirati {{forecastByModule}}. <br><br>Imajte na umu da se postavke raspona ne mogu promijeniti nakon prve potvrde. U nadograđenim instancama postavka raspona zaključana je u postojećim podacima o predviđanju.<br><br>Možete odabrati dvije ili više kategorija na temelju raspona vjerojatnosti ili stvoriti kategorije koje se ne temelje na vjerojatnosti. <br><br>Lijevo od prilagođenih kategorija nalaze se potvrdni okviri koje možete upotrijebiti za odabir raspona koji će se uključiti u iznos predviđanja koji se potvrđuje i prenosi upraviteljima. <br><br>Korisnik može na svom radnom listu ručno promijeniti status kategorije {{forecastByModule}} na uključivanje ili izostavljanje.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Odaberite stupce koje korisnik treba ispuniti za predviđanja kod svakog {{forecastByModuleSingular}}. Imajte na umu da je vjerojatni iznos povezan s iznosom koji se prikazuje u {{forecastByModule}}; iz tog razloga nije moguće sakriti stupac Vjerojatno.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Odaberite koji stupci će se prikazivati u modulu predviđanja. Putem popisa polja sastavit će se radni list i time će korisnik moći odabrati način konfiguracije prikaza.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ja sam rezervirano mjesto teksta objašnjenja za predviđanja prema!',

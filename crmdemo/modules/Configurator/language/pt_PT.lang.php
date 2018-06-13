@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Nome que aparece na barra de título do seu navegador.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Permitir/Inabilitar que apareçam e-mails de contactos relacionados (ou ligados) no Subpainel E-mail.',
 
-    'LBL_OC_STATUS'                     => 'Estado do Cliente Off-line por defeito',
-    'DEFAULT_OC_STATUS'                 => 'Habilitar o Cliente Off-line por defeito',
-    'LBL_OC_STATUS_DESC' => 'Selecione esta opção se pretender que qualquer Utilizador tenha acesso ao Cliente Off-line. Caso contrário poderá configurar isto ao nível de cada Utilizador.',
     'SESSION_TIMEOUT' => 'Tempo de Expiração da Sessão',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'O Limite de Sessão do Portal é para versões existentes do Portal Sugar disponível na versão 6.5 e anteriores.',
     'UPLOAD_MAXSIZE_UNITS' => 'bytes',
@@ -435,8 +432,17 @@ Para configurar definições adicionais do sistema, clique <a href="index.php?mo
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Login URL não pode ser vazio',
     'ERR_EMPTY_SAML_CERT' => 'O certificado SAML não pode ser vazio',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'A ID da Entidade SAML não pode estar vazio',
     'ERR_SAML_LOGIN_URL' => 'SAML Login URL não é válido',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL não é válido',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'O ficheiro PEM deve conter uma chave privada',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'O ficheiro PEM deve conter o certificado x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'O certificado x.509 fornecido não corresponde à chave privada',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Fluxos de Atividades',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Ativar Fluxos de Atividades',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Ativa os Fluxos de Atividades para a aplicação',
 );
 
 

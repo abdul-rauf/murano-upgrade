@@ -87,7 +87,7 @@ $app_list_strings = array (
     'UpgradeWizard' => 'معالج الترقية',
     'Trackers' => 'وحدات التعقب',
     'TrackerPerfs' => 'أداء المتعقب',
-    'TrackerSessions' => 'جلسات المتعقب',
+    'TrackerSessions' => 'جلسات وحدات التعقب',
     'TrackerQueries' => 'استعلامات المتعقب',
     'FAQ' => 'الأسئلة المتداولة',
     'Newsletters' => 'الرسائل الإخبارية',
@@ -97,13 +97,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'مفاتيح مستهلك OAuth',
     'OAuthTokens' => 'رموز OAuth',
     'Filters' => 'عوامل التصفية',
-    'UserSignatures' => 'توقيعات المستخدم',
+    'UserSignatures' => 'توقيعات البريد الإلكتروني',
     'Shippers' => 'مزودي الشحن',
     'Styleguide' => 'دليل الأنماط',
     'Feedbacks' => 'تعليقات',
     'Tags' => 'العلامات',
     'Categories' => 'الفئات',
     'Dashboards' => 'لوحات المعلومات',
+    'OutboundEmail' => 'إعدادات البريد الإلكتروني',
+    'EmailParticipants' => 'مشتركو البريد الإلكتروني',
+    'DataPrivacy' => 'خصوصية البيانات',
   ),
 
     'moduleIconList' =>
@@ -117,7 +120,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'الحصة النسبية',
         'Tasks' => 'Ts',
-        'Dashboards' => 'قاعدة البيانات',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'DP',
     ),
 
   'moduleListSingular' =>
@@ -127,7 +131,7 @@ $app_list_strings = array (
     'Styleguide' => 'دليل الأنماط',
     'Contacts' => 'جهة الاتصال',
     'Accounts' => 'الحساب',
-    'Opportunities' => 'الفرصة',
+    'Opportunities' => 'جديدة',
     'Cases' => 'الحالة',
     'Notes' => 'ملاحظة',
     'Calls' => 'المكالمة',
@@ -207,10 +211,13 @@ $app_list_strings = array (
     'ProductTypes' => 'نوع المنتج',
     'Shippers' => 'مزود الشحن',
     'Subscriptions' => 'الاشتراك',
-    'UserSignatures' => 'توقيع المستخدم',
+    'UserSignatures' => 'توقيع البريد الإلكتروني',
     'Feedbacks' => 'تعليقات',
     'Tags' => 'العلامة',
     'Categories' => 'الفئة',
+    'OutboundEmail' => 'إعداد البريد الإلكتروني',
+    'EmailParticipants' => 'مشترك البريد الإلكتروني',
+    'DataPrivacy' => 'خصوصية البيانات',
   ),
 
 /*
@@ -249,7 +256,7 @@ $app_list_strings = array (
     'Integrator' => 'الموحد',
     'Investor' => 'المستثمر',
     'Partner' => 'شريك',
-    'Press' => 'الصحافه',
+    'Press' => 'الصحافة',
     'Prospect' => 'العميل المتوقع',
     'Reseller' => 'الموزع',
     'Other' => 'أخرى',
@@ -274,14 +281,14 @@ $app_list_strings = array (
     'Finance' => 'التمويل',
     'Government' => 'الحكومة',
     'Healthcare' => 'الرعاية الصحية',
-    'Hospitality' => 'ضيافه',
+    'Hospitality' => 'ضيافة',
     'Insurance' => 'التأمين',
     'Machinery' => 'آليات',
     'Manufacturing' => 'التصنيع',
     'Media' => 'الإعلام',
     'Not For Profit' => 'غير هادف للربح',
     'Recreation' => 'ترفيه',
-    'Retail' => 'تجزئه',
+    'Retail' => 'تجزئة',
     'Shipping' => 'الشحن',
     'Technology' => 'التكنولوجيا',
     'Telecommunications' => 'الاتصالات عند بُعد',
@@ -314,6 +321,11 @@ $app_list_strings = array (
     'Existing Business' => 'صفقة حالية',
     'New Business' => 'صفقة جديدة',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'نشط',
+            'Inactive' => 'غير نشط',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => 'العائد',
@@ -337,6 +349,17 @@ $app_list_strings = array (
     'Influencer' => 'المؤثر',
     'Other' => 'أخرى',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'نشط',
+            'Inactive' => 'غير نشط',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'نشط',
+            'Inactive' => 'غير نشط',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => 'جهة الاتصال الرئيسية',
@@ -378,7 +401,7 @@ $app_list_strings = array (
     ),
     'sales_status_dom' => array(
         'New' => 'جديد',
-        'In Progress' => 'يتقدم',
+        'In Progress' => 'قيد التقدم',
         'Closed Won' => 'إغلاق لسبب الفوز',
         'Closed Lost' => 'إغلاق لسبب الخساره',
     ),
@@ -454,9 +477,9 @@ $app_list_strings = array (
   'task_priority_default' => 'متوسط',
   'task_priority_dom' =>
   array (
-    'High' => 'عالٍ',
-    'Medium' => 'متوسط',
-    'Low' => 'منخفض',
+    'High' => 'عالية',
+    'Medium' => 'متوسطة',
+    'Low' => 'منخفضة',
   ),
   'task_status_default' => 'لم يبدأ',
   'task_status_dom' =>
@@ -614,6 +637,7 @@ $app_list_strings = array (
 
     'Tasks' => 'المهمة',
       'KBContents' => 'قاعدة المعارف',
+      'Notes' => 'ملاحظة',
   ),
 
   'record_type_display_notes' =>
@@ -639,6 +663,14 @@ $app_list_strings = array (
     'Calls' => 'المكالمة',
       'KBContents' => 'قاعدة المعارف',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => 'الحساب',
+        'Contacts' => 'جهة الاتصال',
+        'Employees' => 'الموظف',
+        'Leads' => 'العميل المتوقع',
+        'Prospects' => 'الهدف',
+        'Users' => 'المستخدم',
+    ),
 
   'parent_type_display' =>
   array (
@@ -658,7 +690,7 @@ $app_list_strings = array (
 
     'Prospects' => 'الهدف',
       'KBContents' => 'قاعدة المعارف',
-
+      'Notes' => 'ملاحظة',
   ),
 
   'product_status_default_key' => 'الشحن',
@@ -812,7 +844,6 @@ $app_list_strings = array (
     'Product' => 'المنتج',
     'User' => 'المستخدم',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -823,7 +854,37 @@ $app_list_strings = array (
     'InboundEmail' => 'البريد الإلكتروني',
     'Twitter' => 'Twitter'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'طلب سياسة خصوصية بيانات',
+        'Send Personal Information being processed' => 'إرسال لمعلومات الشخصية التي تتم معالجتها',
+        'Rectify Information' => 'تصويب المعلومات',
+        'Request to Erase Information' => 'طلب مسح المعلومات',
+        'Export Information' => 'تصدير المعلومات',
+        'Restrict Processing' => 'تقييد المعالجة',
+        'Object to Processing' => 'الاعتراض على المعالجة',
+        'Consent to Process' => 'الموافقة على المعالجة',
+        'Withdraw Consent' => 'سحب الموافقة',
+        'Other' => 'أخرى',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'الاتصالات التجارية',
+        'Marketing Communications by company' => 'الاتصالات التسويقية بواسطة الشركة',
+        'Marketing Communications by partners' => 'الاتصالات التسويقية بواسطة الشركاء',
+    ),
+    'dataprivacy_status_default_key' => 'مفتوح',
+    'dataprivacy_status_dom' => array(
+        'Open' => 'مفتوح',
+        'Closed' => 'مكتمل',
+        'Rejected' => 'مرفوض',
+    ),
+    'dataprivacy_priority_default_key' => 'منخفض',
+    'dataprivacy_priority_dom' => array(
+        'Low' => 'منخفض',
+        'Medium' => 'متوسط',
+        'High' => 'مرتفع',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -859,6 +920,7 @@ $app_list_strings = array (
     'Studio' => 'الاستوديو',
     'Upgrade' => 'الترقية',
     'Users' => 'المستخدمون',
+    'OutboundEmail' => 'إعدادات البريد الإلكتروني',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -954,7 +1016,7 @@ $app_list_strings = array (
             '3'=>"ثلاثاء",
             '4'=>"أربعاء",
             '5'=>"خميس",
-            '6'=>"جمعه",
+            '6'=>"جمعة",
             '7'=>"سبت",
         ),
     'dom_cal_day_of_week' => array(
@@ -1047,6 +1109,11 @@ $app_list_strings = array (
                                         'failed'        => 'فشل',
                                         'completed'     => 'كامل',
                                         'no curl'       => 'ليس قيد التشغيل: لا يتوفر cURL',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'المسودة',
+        'Archived' => 'المؤرشفة',
     ),
 
     'scheduler_status_dom' =>
@@ -1490,7 +1557,11 @@ $app_list_strings = array (
     'exempt' => 'قائمة المنع - حسب المعرّف',
     'test' => 'اختبار',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'نشط',
+             'Inactive' => 'غير نشط',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1580,16 +1651,6 @@ $app_list_strings = array (
         '21' => '3 أسابيع',
         '31' => 'شهر واحد',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'نشط',
-    'Inactive' => 'غير نشط',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => 'عالٍ',
         'medium'    => 'متوسط',
@@ -1647,9 +1708,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'بلا',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google',
+        'exchange' => 'Exchange',
+        'outlook' => 'Outlook',
+        'other' => 'أخرى',
     ),
     'import_enclosure_options' =>
     array (
@@ -1662,7 +1729,7 @@ $app_list_strings = array (
     array (
         ',' => '،',
         ';' => '؛',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -1818,6 +1885,11 @@ $app_list_strings = array (
         'ACTIVE' => 'مُمكَّن',
         'INACTIVE' => 'معطَّل',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'السجل',
+        'records' => 'القائمة',
+        'activities' => 'سير النشاط',
+    ),
 );
 
 $app_strings = array (
@@ -1829,11 +1901,11 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'ارتباط متابعة',
   'LBL_TOGGLE_VISIBILITY' => 'تبديل الرؤية', // Record view header panel element
   'LBL_ACTIVITIES' => 'سير النشاط الكلي',
-  'LBL_COPYRIGHT' => 'حقوق الطبع والنشر © 2004-2017 SugarCRM Inc. جميع الحقوق محفوظة.',
+  'LBL_COPYRIGHT' => 'حقوق الطبع والنشر © 2004-2018 SugarCRM Inc. جميع الحقوق محفوظة.',
     'LBL_TRADEMARK' => 'SugarCRM، وSugar، ومكعب 3-D هي علامات تجارية مسجلة خاصة بشركة SugarCRM Inc. '.
         'جميع الشركات وأسماء المنتجات الأخرى المستخدمة أو تلك التي تظهر في هذا المنتج هي علامات تجارية خاصة '.
         'SugarCRM ®، وSugar Enterprise™، وSugar™ هي علامات خاصة بشركة SugarCRM Inc.',
-    'LBL_TRADEMARK2' => 'SugarCRM ®، وSugar Enterprise™، وSugar™ هي علامات خاصة بشركة SugarCRM Inc.',
+    'LBL_TRADEMARK2' => 'تُعد SugarCRM ® وSugar Enterprise™ وSugar™ علامات تجارية مملوكة لشركة SugarCRM Inc.',
     'LBL_SEND_INVITE' => 'إرسال دعوة',
   'LBL_INVITEES' => 'الضيوف',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'لن يتلقى الضيف دعوتك',
@@ -1902,6 +1974,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'تمكين SMTP عبر SSL أو TLS؟',
     'LBL_NO_ACTION'                         => 'لا يوجد إجراء بهذا الاسم.',
     'LBL_NO_DATA'                           => 'لا توجد بيانات',
+    'LBL_NOT_APPLICABLE'                    => 'لا ينطبق',
     'LBL_ROUTING_ADD_RULE'                  => 'إضافة قاعدة',
     'LBL_ROUTING_ALL'                       => 'على الأقل',
     'LBL_ROUTING_ANY'                       => 'أي',
@@ -2265,7 +2338,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'مزامنة جميع حسابات البريد الإلكتروني',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'تم إرسال بريد إلكتروني لعنوان البريد الإلكتروني المحدد باستخدام إعدادات البريد الصادر المقدمة. يُرجى التحقق من احتمال استلام البريد الإلكتروني للتحقق من صحة الإعدادات.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'القيام بهذا الإجراء سيتزامن مع حسابات البريد الإلكتروني ومحتوياتها.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'إجراء مزامنة كاملة؟\nفي حسابات البريد الإلكتروني الضخمة قد يستغرق ذلك بضع دقائق.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'إجراء مزامنة كاملة؟\\nفي حسابات البريد الإلكتروني الضخمة قد يستغرق ذلك بضع دقائق.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'انقر فوق المفتاح Shift أو المفتاح Ctrl لتحديد مجلدات متعددة.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'عام',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'مجلدات مجموعة متاحة',
@@ -2333,6 +2406,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'نجح الاستيراد',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'فشل الاستيراد إما لأن الرسالة قد تم استيرادها بالفعل، وإما لأنها قد تم حذفها من الخادم',
 
+    'LBL_EMAILS_FROM' => 'رسائل البريد الإلكتروني المرسلة',
+    'LBL_EMAILS_RECEIVED' => 'رسائل البريد الإلكتروني المستلمة',
+    'LBL_EMAIL_ADDRESSES_USED' => 'عناوين البريد الإلكتروني المستخدمة في الرسائل',
+    'LBL_EMAIL_ADDRESS' => 'عنوان البريد الإلكتروني',
+    'LBL_FROM' => 'من',
+    'LBL_TO' => 'إلى',
+    'LBL_CC' => 'نسخة',
+    'LBL_BCC' => 'نسخة مخفية',
+
     'LBL_LINK_NONE'=> 'بلا',
     'LBL_LINK_ALL'=> 'الكل',
     'LBL_LINK_RECORDS'=> 'السجلات',
@@ -2354,7 +2436,7 @@ $app_strings = array (
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'خطأ في محاولة إزالة معرّف فريق أساسي [{0}] لـ [{1}] نموذج مزود بمعرّف [{2}]',
     'LBL_TEAM_ADD' => 'إضافة &nbsp;فريق',
     'LBL_TEAM_REMOVE' => 'إزالة فريق',
-    'LBL_TEAM_PRIMARY' => 'معيَّن كفريق أساسي',
+    'LBL_TEAM_PRIMARY' => 'تعيين كفريق أساسي',
 
     'LBL_CLOSE_BUTTON_LABEL' => 'إغلاق',
     'TPL_STATUS_CHANGE_SUCCESS' => 'تم تمييز {{moduleSingular}} بحالة {{status}}.',
@@ -2382,6 +2464,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'مطلوب جلسة نشطة لتصدير المحتوى.',
     'ERR_NO_HEADER_ID' => 'هذه الخاصية غير متاحة في هذا الموضوع.',
     'ERR_NOT_ADMIN' => "دخول غير مسموح به للإدارة.",
+    'ERR_DISABLED_FOR_IDM_MODE' => "تم تعطيل هذا الخيار في SugarCRM لوضع IDM ويتوفر في وحدة تحكم السحابة.",
+    'ERR_GOTO_CLOUD_CONSOLE' => "الرجاء الانتقال إلى <a href=\"%s\" target=\"_blank\">وحدة تحكم السحابة</a>.",
     'ERR_MISSING_REQUIRED_FIELDS' => 'حقل مطلوب مفقود:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'حقل مطلوب غير صالح:',
     'ERR_INVALID_VALUE' => 'قيمة غير صالحة:',
@@ -2520,7 +2604,7 @@ $app_strings = array (
     'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'أرشيف',
     'LBL_ASSIGNED_TO_USER'=>'معيَّن للمستخدم',
-    'LBL_ASSIGNED_TO' => 'تعيين إلى:',
+    'LBL_ASSIGNED_TO' => 'تم تعيينها إلى:',
     'LBL_BACK' => 'للخلف',
     'LBL_BASE_RATE'=>'سعر الأساس',
     'LBL_BILL_TO_ACCOUNT'=>'تحرير الفاتورة إلى حساب',
@@ -2663,7 +2747,7 @@ $app_strings = array (
     'LBL_SHOW_MORE_RECENTS' => 'المزيد من عمليات البحث الأخيرة...',
     'LBL_SHOW_LESS_RECENTS' => '...القليل من عمليات البحث الأخيرة',
     'LBL_SHOW_MORE_RESULTS' => 'المزيد من نتائج البحث...',
-    'TPL_SHOW_MORE_MODULE' => 'المزيد{{module}}...',
+    'TPL_SHOW_MORE_MODULE' => 'مزيد من {{module}}...',
     'LBL_SHOW_MORE_GENERIC' => '{{name}} أكثر...',
     'LBL_TODAYS_ACTIVITIES' => 'أنشطة اليوم',
     'LBL_LEADS'=>'العملاء المتوقعون',
@@ -2711,7 +2795,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'فشل التحديث بأكمله. بدء محاولة جديدة ({{num}} لـ {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'التحديث بأكمله غير مكتمل. {{num}} لا يزال السجل (السجلات) بدون تغيير.',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => 'التحديث بأكمله غير مكتمل. {{num}} لا يزال السجل (السجلات) بدون تغيير.',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} تم تجاهل السجل (السجلات) نتيجة التصريح.',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => 'تم تجاهل {{remain}} السجل (السجلات) بسبب الأذونات أو الأخطاء.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} تم تحديث السجل (السجلات) بنجاح.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} تحديث شامل',
     'TPL_MASSDELETE_PROGRESS_STATUS' => 'حذف{{num}} {{total}}.',
@@ -2783,6 +2867,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'افتراضي المستخدم',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'حساب المستخدم',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'حساب مجموعة',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => 'الاسم',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => 'إنشاء',
@@ -2995,8 +3080,8 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy;2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
-        'جميع الحقوق محفوظة.<br /> SugarCRM>، و مكعب 3-D هي علامات تجارية مسجلة خاصة بشركة SugarCRM Inc. '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'جميع الحقوق محفوظة.<br /> إن SugarCRM، وSugar و3-D Cube هي علامات تجارية مسجلة خاصة بشركة SugarCRM Inc. '.
         'جميع الشركات وأسماء المنتجات الأخرى المستخدمة أو تلك التي تظهر في هذا المنتج هي علامات تجارية خاصة '.
         'بالشركات التابعة لها والمشتركة معها.',
 
@@ -3033,7 +3118,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'كلمة المرور',
     'LBL_LOGGED_OUT' => 'لقد تم تسجيل خروجك.',
     'LBL_LOGIN_FORM_LABEL' => 'اعرض استمارة تسجيل الدخول',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'العودة إلى تسجيل الدخول',
+    'LBL_LOGIN_INACTIVE_USER' => 'مستخدم غير نشط',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'لا يمكن تسجيل دخول مستخدم البوابة أو المجموعة.',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'لوحة المعلومات',
@@ -3100,16 +3187,15 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'العودة لأعلى',
     'LNK_REMOVE' => 'إزالة',
     'LNK_RESUME' => 'استئناف',
-    'LNK_VIEW_CHANGE_LOG' => 'عرض سجل التغييرات',
-
+    'LNK_VIEW_CHANGE_LOG' => 'عرض سجل التدقيق',
+    'TPL_AUDIT_LOG_TITLE' => 'سجل التدقيق لـ {{{name}}}',
 
     'NTC_CLICK_BACK' => 'يرجى النقر فوق الزر السابق في المستعرض وإصلاح الخطأ.',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
     'NTC_DATE_TIME_FORMAT' => '(yyyy-mm-dd 24:00)',
     'NTC_DELETE_CONFIRMATION_MULTIPLE' => 'هل تريد بالتأكيد حذف السجل (السجلات) المحددة؟',
     'NTC_TEMPLATE_IS_USED' => 'القالب مستخدم في سجل تسويق بريد إلكتروني واحد على الأقل. هل تريد بالتأكيد حذفه؟',
-    'NTC_TEMPLATES_IS_USED' => "يتم استخدام القوالب التالية في سجلات تسويق البريد الإلكتروني. هل تريد بالتأكيد حذفها؟
-",
+    'NTC_TEMPLATES_IS_USED' => "يتم استخدام القوالب التالية في سجلات تسويق البريد الإلكتروني. هل تريد بالتأكيد حذفها؟\n",
     'NTC_DELETE_CONFIRMATION' => 'هل تريد بالتأكيد حذف هذا السجل؟',
     'NTC_DELETE_CONFIRMATION_FORMATTED' => 'هل تريد بالتأكيد حذف {0}؟',
     'NTC_DELETE_CONFIRMATION_NUM' => 'هل تريد بالتأكيد حذف  ',
@@ -3136,7 +3222,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "ستنتهي رخصة شركتك لـ SugarCRM قريبًا.",
     'ERROR_LICENSE_VALIDATION'=> "تحتاج رخصة شركتك لـ SugarCRM إلى تحديث صلاحيتها. تسجيل الدخول لمسؤولي النظام فقط.",
     'WARN_LICENSE_VALIDATION'=> "تحتاج رخصة شركتك لـ SugarCRM إلى تحديث صلاحيتها قريبًا.",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"يتجاوز عدد العملاء غير المتصلين الذين تم تمكينهم حاليًا العدد المحدد في الترخيص الخاص بك.",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>تحذير:</b> مستعرضك متوافق في عرض IE غير مدعوم.",
     'WARN_LICENSE_SEATS'=>  "تحذير: عدد المستخدمين النشطاء هو الحد الأقصى للعدد المسموح به بالفعل للتراخيص.",
     'WARN_LICENSE_SEATS_MAXED'=>  "تحذير: عدد المستخدمين النشطاء يتجاوز الحد الأقصى للعدد المسموح به بالفعل للتراخيص.",
@@ -3206,9 +3291,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'تتم المعالجة الآن...',
     'LBL_REQUEST_PROCESSED'=>'تم',
     'LBL_AJAX_FAILURE' => 'فشل Ajax',
-    'LBL_OC_STATUS' => 'حالة العميل دون اتصال',
-    'LBL_OC_STATUS_TEXT' => 'تشير إلى ما إذا كان المستخدم الحالي قادرًا على استخدام عميل دون اتصال أم لا.',
-    'LBL_OC_DEFAULT_STATUS' => 'غير نشط',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => 'بحث...',
     'LBL_SAVED_SEARCH_SHORTCUT' => 'عمليات البحث المحفوظة',
     'LBL_SEARCH_POPULATE_ONLY'=> 'إجراء بحث باستخدام استمارة البحث أعلاه',
@@ -3217,7 +3299,7 @@ $app_strings = array (
     'LBL_SEARCH_FOR_MORE' => 'البحث عن المزيد...',
     'LBL_SEARCH_SELECT' => 'تحديد...',
     'LBL_SEARCH_AND_SELECT_ELLIPSIS' => 'البحث والتحديد...',
-    'LBL_SEARCH_SELECT_MODULE' => 'تحديد{{module}}...',
+    'LBL_SEARCH_SELECT_MODULE' => 'تحديد {{module}}...',
     'LBL_DETAILVIEW'=>'عرض التفاصيل',
     'LBL_LISTVIEW'=>'عرض القائمة',
     'LBL_EDITVIEW'=>'تعديل العرض',
@@ -3309,6 +3391,7 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => 'طي الكل',
     'LBL_EXPAND_ALL' => 'توسيع الكل',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => 'تحرير',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'عرض التقرير',
     'LBL_DASHLET_REFRESH_LABEL' => 'تحديث',
     'LBL_DASHLET_REMOVE_LABEL' => 'إزالة',
     'LBL_DASHLET_DROP_HERE' => 'الإسقاط هنا',
@@ -3336,7 +3419,7 @@ $app_strings = array (
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'سجلات القوائم من وحدة معينة وفقًا للمعيار الذي تحدده.',
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
-    'TPL_DASHLET_MY_MODULE' => 'الخاص بي {{module}}',
+    'TPL_DASHLET_MY_MODULE' => 'جهات الاتصال {{module}}',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'قياسات الفرص',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'قياسات الفرص للحساب ذو الصلة.',
@@ -3992,6 +4075,8 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '(غير مسموح بالدخول)',
     'LBL_NO_ACCESS_LOWER' => 'غير مسموح بالدخول',
     'LBL_NO_FIELD_ACCESS' => 'غير مسموح بالدخول',
+    'LBL_VALUE_ERASED' => 'تم مسح القيمة',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'تم مسح هذه المعلومات عبر طلب خصوصية بيانات',
     'LBL_CREATE_RELATED_RECORD' => 'إنشاء سجل ذي صلة',
     'LBL_ASSOC_RELATED_RECORD' => 'ربط السجل الحالي',
     'LBL_CHOOSE_LINK' => 'اختيار نوع الرابط',
@@ -4060,7 +4145,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => 'أكبر',
     'LBL_FONTSIZE_HUGE' => 'ضخم',
     'LBL_FONTSIZE_EXTRA_HUGE' => 'ضخم للغاية',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => 'فشل التنزيل\r\n{{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "فشل التنزيل\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'المزيد...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => '...أقل',
     'LBL_OFFLINE_MODE' => 'وضع عدم الاتصال',
@@ -4129,6 +4214,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => 'تفاصيل المعاملة',
     'LBL_RECORD_DELETED' => '(السجل المحذوف)',
     'LBL_NOT_AVAILABLE' => 'غير متاح',
+    'LBL_FILE_SIZE' => 'حجم الملف',
     'LBL_FILE_SIZE_UNITS_B' => 'بايت',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'ميجابايت',
@@ -4252,6 +4338,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => 'تفتح عرض التفاصيل على الجانب الأيمن من شاشتك.',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => 'استخدم الأسهم أدناه للتفقد السريع عبر مكونات هذه القائمة الأساسية.',
 
+    'LBL_COMMENT_ADD' => 'إضافة تعليق',
+    'LBL_REQUIRED' => 'مطلوب',
+    'LBL_MORE_BUTTON' => 'المزيد',
+    'LBL_TRY_AGAIN' => 'المحاولة مرة أخرى',
+    'LBL_NEW_RECORDS' => 'تم إنشاؤه مؤخرًا',
+    'LBL_ASSIGNED_TO_ME' => '{{{module}}} الخاصة بي',
+    'LBL_LISTVIEW_FILTER_ALL' => 'كل {{{module}}}',
+    'LBL_UNFAVORITE' => 'إلغاء تفضيل',
+    'LBL_ACTIVITY_CREATE' => 'تم إنشاء {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UPDATE' => 'تم تحديث {{{changes}}} في {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_LINK' => 'تم ربط {{{relatedRecord}}} بـ {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UNLINK' => 'تم إلغاء ربط {{{relatedRecord}}} من {{{record}}} {{{module}}}',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{relationship}} لـ {{parentModule}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => 'تنزيل السجلات ذات الصلة...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'تم تغيير تكوين لوحة المعلومات. هل تريد إعادة التحميل؟',
+    'LBL_RECORDS' => 'السجلات',
+    'LBL_DASHBOARDS' => 'لوحات المعلومات',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => 'بحث عن {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'القائمة الرئيسية',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => 'إنشاء سريع لسجل جديد',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'مرر لمزيد من الخيارات',
+    'LBL_DETAILS' => 'التفاصيل',
+    'LBL_DETAIL_RELATED' => 'ذو صلة',
+    'LBL_CREATE_RELATED_MODULE_WARN' => 'تتطلب {{module}} {{relatedModule}}. <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>إنشاء سجل {{relatedModule}}</a>.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'تحرير السجل',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'إعدادات عدم الاتصال',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'تصحيح الإعدادات',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "تم تمكين تشفير البيانات.',
+    'LBL_OFFLINE_TOTAL_RECORDS' => 'إجمالي السجلات',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => 'آخر تنزيل',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'تعذر تنزيل الملف.',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'فشل تحميل لوحات المعلومات من الخادم',
+    'ERR_FILTERS_FETCHING' => 'تعذر جلب عوامل التصفية',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'فشل تشفير التخزين المحلي',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'يجري تشفير بيانات عدم الاتصال. قد يستغرق ذلك عدة دقائق.',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'اكتمل تشفير بيانات عدم الاتصال.',
+    'ERR_ACCESS_SPECIFIC_MODULE' => 'ليس لك حق الوصول إلى الوحدة {{{module}}}.',
+    'LBL_SKIP' => 'تخطي',
+    'LBL_CONTINUE' => 'استمرار',
+    'LBL_ENABLE' => 'تمكين',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'تجربة حتى',
+    'LBL_MOBILE_SDK_VERSION' => 'إصدار SDK',
+    'LBL_LOG_LEVEL' => 'مستوى السجل',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'تم إعادة تكوين إعدادات تسجبل الدخول.',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'انتهت صلاحية فترة التجربة.',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'الخادم لا يدعم الاتصال الآمن. الرجاء إيقاف الاتصال الآمن.',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'الخادم يدعم الاتصال الآمن. الرجاء تشغيل الاتصال الآمن.',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => 'اتصالك غير آمن. اتصل بالمسؤول.',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'إعدادات تسجيل الدخول',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => 'قم بإعداد مثيل {{{brandName}}}',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'كي يعمل التطبيق، سوف تحتاج إلى كتابة عنوان URL لمثيل {{{brandName}}}. إذا لم تكن تملكه، الرجاء الاتصال بالمسؤول.',
+    'LBL_FACEID' => 'معرف الوجه',
+    'LBL_TOUCHID' => 'معرف اللمس',
+    'LBL_ENABLE_TOUCHID' => 'تمكين {{{biometryType}}}',
+    'LBL_SETUP_TOUCHID' => 'إعداد {{{biometryType}}}',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => 'تسجيل الدخول باستخدام الإصبع',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "لم يتم إعداد {{{biometryType}}} على جهازك. \n\nانتقل إلى إعدادات الجهاز لإعداد {{{biometryType}}}. بمجرد الإعداد، قم بتمكين {{{biometryType}}} لـ {{{brandName}}} في القائمة الرئيسية > الإعدادات.",
+    'LBL_TOUCH_ID_DISCLAIMER' => 'سيسمح استخدام {{{biometryType}}} مع {{{brandName}}} باستخدام المعرف البيولوجي بدلاً من إدخال كلمة المرور للوصول إلى {{{brandName}}}.',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => 'هل ترغب في المتابعة مع {{{biometryType}}}؟    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => 'أدخل كلمة مرور {{{brandName}}} لتمكين {{{biometryType}}}',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => 'الإعداد',
+    'LBL_MDM_CONFIRM_CHANGE' => 'تم تغيير تكوين التطبيق من مدير الجهاز المحمول. الرجاء إعادة تسجيل الدخول لتطبيق التغييرات.',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'الرجاء منح {{{brandName}}} الوصول إلى موقعك عبر إعدادات الجهاز.',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => 'الموقع الحالي غير متاح',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "انتهت مهلة استرداد الموقع الحالي. \nالرجاء إعادة المحاولة.",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => 'علامات الموقع غير متاحة',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => 'إحداثيات الموقع غير صحيحة',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'كلمة مرور غير صحيحة.',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'تطبيقك قديم ولم يعد متوافقًا مع مثيل {{{brandName}}} الذي تتصل به. هل تريد تحديثه؟',
+    'LBL_MOBILE_BY' => 'بواسطة',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'عامل التصفية غير متاح أثناء عدم الاتصال',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'سجلات عدم الاتصال',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => 'تنزيل الإعدادات',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'قم بتنزيل السجلات المعينة والمفضلة والمُتابعة للوصول أثناء عدم الاتصال. يمكنك تحديث تفضيلاتك في الإعدادات أثناء عدم الاتصال.',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "انتهى تنزيل سجلاتك. يمكنك الآن الوصول إليها في وضع عدم الاتصال.",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "لم يتم تنزيل جميع سجلاتك.\n هل تريد إعادة المحاولة؟",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'استخدام البيانات الخلوية',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => 'ليس الآن',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'توقف التنزيل مؤقتًا وسيتم استئنافه عند فتح التطبيق مرة أخرى.',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => 'يجري تنزيل {{{module}}}: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => 'تحديث آخر السجلات',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => 'بانتظار الاتصال',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => 'تم الإيقاف المؤقت',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => 'يجري الإيقاف',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'تنزيل',
+    'LBL_BULK_LOAD_BTN_PAUSE' => 'إيقاف مؤقت',
+    'LBL_BULK_LOAD_BTN_RESUME' => 'استئناف',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'فقط الاتصالات اللاسلكية هي التي تستخدم افتراضيًا',
+    'LBL_NPS_RATING_MSG' => "كيف تُقيم تجربتك \nمع {{{productName}}}؟",
+    'LBL_NPS_THANKS_MSG' => 'شكرًا لملاحظاتك!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => 'هل تتفضل بتقييمنا على متجر التطبيقات؟',
+    'LBL_NPS_NO_THANKS' => 'لا، شكرًا',
+    'LBL_NPS_NOT_NOW' => 'ليس الآن',
+    'LBL_NPS_RATE_NOW' => 'التقييم الآن',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'الشبكة غير متوفرة. ما يزال بإمكانك استخدام التطبيق أثناء عدم الاتصال',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => 'ستتم مزامنة تغييراتك عندما تكون متصلاً. <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>انظر التفاصيل</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => 'هناك بيانات لم تتم مزامنتها. الرجاء مراجعة <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>سجل المعاملة</a>',
+    'LBL_CONVERT' => 'تحويل',
+    'LBL_CONVERT_LEAD' => 'تحويل العميل المتوقع',
+    'LBL_SEARCH_EXISTING_RECORD' => 'بحث {{{this}}} الحالي',
+    'LBL_DUPLICATES_CHECK_FAILED' => 'فشل فحص التكرارات',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => 'هل تريد تحريك الأنشطة ذات الصلة إلى سجل الاتصال؟',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'لقد نجحت في تحويل العميل المتوقع {{{name}}}',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => 'لم يتم العثور على تكرارات.',
+    'ERR_LEAD_CONVERSION_FAIL' => 'فشل تحويل العميل المتوقع',
+    'LBL_SELECT_DUPLICATE_RECORD' => 'تحديد من {{{modulePlural}}} مكررة',
+    'LBL_SELECTED_EXISTING_RECORD' => '{{{moduleSingular}}} المحددة',
+    'LBL_CREATED_NEW_RECORD' => 'تم إنشاء {{{moduleSingular}}} جديدة',
+    'LBL_VO_BACK_BTN' => 'زر السابق',
+    'LBL_VO_HOME_BTN' => 'زر الصفحة الرئيسية',
+    'LBL_VO_DASHBOARD_BTN' => 'زر لوحة المعلومات',
+    'LBL_VO_SEARCH_BTN' => 'زر البحث',
+    'LBL_VO_RIGHT_MENU_BTN' => 'زر القائمة اليمنى',
+    'LBL_VO_ADD_BTN' => 'زر الإضافة',
+
     //begin portal
 
     //First time login wizard
@@ -4306,6 +4508,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => 'تحديد تقرير',
     'LBL_REPORT_AUTO_REFRESH' => 'تحديث تلقائي',
     'LBL_REPORT_EDIT' => 'تعديل التقرير المحدد',
+    'LBL_REFRESH_LIST_AND_CHART' => 'تحديث القائمة والمخطط',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => 'غير معروف',
@@ -4367,6 +4570,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'حدث خطأ أثناء إجراء التعيين إلى.',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => 'لا يمكنك الوصول إلى "{{name}}". يُرجى الاتصال بالمسؤول الخاص بك.',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => 'سنة {0}',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} Q{0}',
@@ -4379,9 +4585,14 @@ $app_strings = array (
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => 'تجاهل التكرار والحفظ',
     'LBL_RESTORE' => 'إعادة الضبط إلى الأصلي',
 
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => 'تم تعليم السجلات للمسح',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => 'عرض سجلات ذات صلة بطلب خصوصية بيانات من أجل '
+        . 'مسح المعلومات.',
+
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'تغذية RSS',
-    'LBL_RSS_FEED_DASHLET_DESCRIPTION' => 'حافظ على حداثة معلوماتك من خلال إضافة RSS أو موجزات المدونات.',
+    'LBL_RSS_FEED_DASHLET_DESCRIPTION' => 'حافظ على حداثة معلوماتك من خلال إضافة موجز RSS خارجي أو موجزات المدونات.',
     'LBL_RSS_FEED_URL' => 'عنوان URL الموجز',
     'LBL_RSS_FEED_AUTHOR' => 'المؤلف:',
     'LBL_RSS_FEED_ENTRIES_COUNT' => 'عدد الإدخالات المطلوب عرضها',
@@ -4401,6 +4612,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => 'غير مخصص',
     'LBL_ARCHIVE_EMAIL' => 'أرشيف البريد الإلكتروني',
     'LBL_EMAIL_ARCHIVED' => 'تمت أرشفة البريد الإلكتروني',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'إنشاء بريد إلكتروني مؤرشف',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'الأنشطة المخطط لها',
@@ -4432,6 +4644,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'مهامي',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'مهام الفريق',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanced Workflow',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP أو Old REST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'مهمة Cron',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => 'أداة الإضافة المنطقية',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'سير عمل Sugar',
+    'LBL_AUDIT_SUBJECT_USER' => 'المستخدم',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Web to Lead',
+
     //common chart strings
     'LBL_CHART' => 'المخطط',
     'LBL_CHART_NO_DATA' => 'لا تتوفر بيانات.',
@@ -4440,6 +4665,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => 'إخفاء أدوات التحكم',
     'LBL_CHART_CONTROLS_OPEN' => 'عرض أدوات التحكم',
     'LBL_CHART_UNDEFINED' => 'غير محدد',
+    'LBL_CHART_NO_LABEL' => 'غير محدد',
+    'LBL_CHART_AMOUNT' => 'المبلغ',
+    'LBL_CHART_COUNT' => 'العدد',
+    'LBL_CHART_PERCENT' => 'النسبة المئوية',
+    'LBL_CHART_GROUP' => 'المجموعة',
+    'LBL_CHART_DATE' => 'التاريخ',
+    'LBL_CHART_KEY' => 'المفتاح',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'نوع المخطط',
@@ -4511,6 +4743,10 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'عامل تصفية التاريخ الافتراضي',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'مجموعة البيانات الافتراضية',
 
+    'LBL_PRODUCT_CATALOG_NAME' => 'كتالوج المنتج',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => 'كتالوج المنتج',
+    'LBL_PRODUCT_CATALOG_DESC' => 'عرض عناصر وإضافتها من كتالوج المنتج.',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => 'عرض عناصر وإضافتها من كتالوج المنتج.',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}} في {{date}} في {{time}}',
@@ -4522,7 +4758,8 @@ $app_strings = array (
     'LBL_ACTIVTY_STREAM_SHOW_MORE' => 'المزيد من المنشورات...',
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => 'في',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'سير النشاط الخاص بي',
-    'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'عرض قائمة الأنشطة التي تم القيام بها في السجلات ونشر تعليقات.',
+    'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'اعرض قائمة الأنشطة التي تم القيام بها في السجلات وأنشئ التعليقات وانشرها.',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => 'تم تعطيل سير النشاط',
 
     'LBL_DATA_VIEW' => 'عرض البيانات',
     'LBL_COMMENT' => 'التعليق',
@@ -4530,6 +4767,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'حدث خطأ أثناء الاتصال بالخادم. يُرجى المحاولة مرة أخرى.',
     'ERR_RESOLVE_ERRORS' => 'يرجى حل أي أخطاء قبل المتابعة.',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => 'من أجل الموافقة، يجب ملء كل الحقول المطلوبة؛ لكن يظل بإمكانك رفض هذا السجل أو توجيهه.',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => 'من أحل الرفض/التوجيه، يجب ملء كل الحقول المطلوبة.',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'تحديث القائمة',
@@ -4557,6 +4798,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => 'لوحة مخطط التقارير المحفوظة',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'عرض أي مخطط من تقرير محفوظ.',
+
     'LBL_QUESTION_MARK' => '؟',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'المقالات المنشورة ذات الصلة',
@@ -4640,7 +4882,7 @@ $app_strings = array (
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'إعدادات البريد الإلكتروني',
 
     // shortcut keys help
-    'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'يقوم SugarCRM بتمكين المستخدمين الكبار من أداء مهام معينة بسرعة باستخدام اختصارات لوحة المفاتيح لزيادة الإنتاجية. توضح الجداول على اليمين الاختصارات بطول لوحة المفاتيح والإجراءات التي تطبقها.',
+    'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'يقوم SugarCRM بتمكين المستخدمين الكبار من أداء مهام معينة بسرعة باستخدام اختصارات لوحة المفاتيح لزيادة الإنتاجية. توضح الجداول على اليمين الاختصارات إلى جانب المفاتيح والإجراءات التي تطبقها.',
     'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>المفاتيح المدعومة</h1><ul><li>كل الحروف والرموز الأبجدية الرقمية</li><li>shift، ctrl، alt, command، mod (ctrl في Windows/Linux والأمر في Macs)</li><li>enter، esc، space، tab، pageup، pagedown، end، home، ins، del، backspace</li></ul><h1>الميزات المدعومة</h1><ul><li>مزيج المفاتيح: ctrl+m</li><li>المفاتيح المتعددة: m,ctrl+m</li><li>سلسلة المفاتيح: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'اختصارات عامة',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'اختصارات سياقية',
@@ -4759,6 +5001,29 @@ $app_strings = array (
 
     'LBL_FIELD_TRIMMED' => 'تم قص الحقل، بسبب تجاوز الحد الأقصى لعدد الحروف.',
     'LBL_FIELDSIZE_OVERFLOW' => 'يتجاوز الحقل الحد الأقصى للحروف.',
+    'LBL_TINYMCE_TARGET_SAME' => 'نفس النافذة',
+    'LBL_TINYMCE_TARGET_NEW' => 'نافذة جديدة',
+
+    'LBL_OUTBOUND_EMAILS' => 'إعدادات البريد الإلكتروني',
+    'LBL_OUTBOUND_EMAIL' => 'إعداد البريد الإلكتروني',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'مشتركو البريد الإلكتروني',
+    'LBL_EMAIL_PARTICIPANT' => 'مشترك البريد الإلكتروني',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => '{{email_address}} is opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'خصوصية البيانات',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'خصوصية البيانات',
+    'LBL_DATAPRIVACY_VIEW_PII' => 'عرض المعلومات الشخصية',
+    'LBL_DATAPRIVACY_MARKFORERASE' => 'تعليم للمسح',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'الحقل',
+    'LBL_DATAPRIVACY_VALUE' => 'القيمة',
+    'LBL_DATAPRIVACY_CHANGED_BY' => 'تغيير بواسطة',
+    'LBL_DATAPRIVACY_SOURCE' => 'المصدر',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => 'آخر تحديث',
+    'LBL_DATAPRIVACY_PII' => 'المعلومات الشخصية',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'تعليم للمسح',
+    'TPL_DATAPRIVACY_PII_TITLE' => 'معلومات شخصية لـ {{{name}}}',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -4827,7 +5092,7 @@ $app_list_strings['list_visibility_options'] = array(
 $app_list_strings['generic_timeperiod_options'] = array (
     'current' => 'ربع السنة الحالي',
     'next' => 'ربع السنة القادم',
-    'year' => 'هذة السنة',
+    'year' => 'هذه السنة',
 );
 
 // see sugarcrm/clients/base/views/bubblechart/bubblechart.php
@@ -5623,6 +5888,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'الحملة' ,
     'email' => 'البريد الإلكتروني',
     'workflow' => 'سير العمل',
+    'system' => 'النظام',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5641,7 +5907,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -5703,4 +5968,236 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'قالب قاعدة ا�
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'قالب قاعدة المعارف';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'الملفات المضمنة';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'الملف المضمن';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'ليك',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'KČ',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '•₪•',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'ليك',
+    'USD' => 'دولار',
+    'AFN' => 'أفغاني',
+    'ARS' => 'بيزو',
+    'AWG' => 'غيلدر',
+    'AUD' => 'دولار',
+    'AZN' => 'مانات جديد',
+    'BSD' => 'دولار',
+    'BBD' => 'دولار',
+    'BYR' => 'روبل',
+    'EUR' => 'يورو',
+    'BZD' => 'دولار',
+    'BMD' => 'دولار',
+    'BOB' => 'بوليفيانو',
+    'BAM' => 'ماركا قابلة للتحويل',
+    'BWP' => 'بولا',
+    'BGN' => 'ليف',
+    'BRL' => 'ريال',
+    'GBP' => 'جنيه',
+    'BND' => 'دولار',
+    'KHR' => 'ريالات',
+    'CAD' => 'دولار',
+    'KYD' => 'دولار',
+    'CLP' => 'بيزو',
+    'CNY' => 'رينمينبي الين الصيني',
+    'COP' => 'بيزو',
+    'CRC' => 'ColÃ³n',
+    'HRK' => 'كونا',
+    'CUP' => 'بيزو',
+    'CZK' => 'كورونا',
+    'DKK' => 'كرونا',
+    'DOP' => 'بيزو',
+    'XCD' => 'دولار',
+    'EGP' => 'جنيه',
+    'SVC' => 'كولون',
+    'EEK' => 'كروني',
+    'FKP' => 'جنيه',
+    'FJD' => 'دولار',
+    'GHC' => 'سيدي',
+    'GIP' => 'جنيه',
+    'GTQ' => 'كويتزال',
+    'GGP' => 'جنيه',
+    'GYD' => 'دولار',
+    'HNL' => 'لامبيرا',
+    'HKD' => 'دولار',
+    'HUF' => 'فورنت',
+    'ISK' => 'كرونر',
+    'INR' => 'روبية',
+    'IDR' => 'روبية',
+    'IRR' => 'ريال',
+    'IMP' => 'جنيه',
+    'ILS' => 'شيكل جديد',
+    'JMD' => 'دولار',
+    'JPY' => 'ين',
+    'JEP' => 'جنيه',
+    'KZT' => 'تينج',
+    'KPW' => 'وون',
+    'KRW' => 'وون',
+    'KGS' => 'سوم',
+    'LAK' => 'كيب',
+    'LVL' => 'لاتي',
+    'LBP' => 'جنيه',
+    'LRD' => 'دولار',
+    'CHF' => 'فرنك سويسري',
+    'LTL' => 'ليتا',
+    'MKD' => 'دينار',
+    'MYR' => 'رنجيت',
+    'MUR' => 'روبية',
+    'MXN' => 'بيزو',
+    'MNT' => 'توجريت',
+    'MZN' => 'ميتيكال',
+    'NAD' => 'دولار',
+    'NPR' => 'روبية',
+    'ANG' => 'غيلدر',
+    'NZD' => 'دولار',
+    'NIO' => 'كوردبة',
+    'NGN' => 'نايرا',
+    'NOK' => 'كورون',
+    'OMR' => 'ريال',
+    'PKR' => 'روبية',
+    'PAB' => 'بالبوا',
+    'PYG' => 'غواراني',
+    'PEN' => 'سول جديد',
+    'PHP' => 'بيزو',
+    'PLN' => 'زلوتيتش',
+    'QAR' => 'ريال',
+    'RON' => 'لي جديد',
+    'RUB' => 'روبل',
+    'SHP' => 'جنيه',
+    'SAR' => 'ريال',
+    'RSD' => 'دينار',
+    'SCR' => 'روبية',
+    'SGD' => 'دولار',
+    'SBD' => 'دولار',
+    'SOS' => 'شلن',
+    'ZAR' => 'راند',
+    'LKR' => 'روبية',
+    'SEK' => 'كرونا',
+    'SRD' => 'دولار',
+    'SYP' => 'جنيه',
+    'TWD' => 'دولار جديد',
+    'THB' => 'باهت',
+    'TTD' => 'دولار',
+    'TRY' => 'ليرة',
+    'TRL' => 'ليرات',
+    'TVD' => 'دولار',
+    'UAH' => 'هيرفنيا',
+    'UYU' => 'بيزو',
+    'UZS' => 'المبالغ',
+    'VEF' => 'فويرتيس بوليفاري',
+    'VND' => 'دونغ',
+    'YER' => 'ريال',
+    'ZWD' => 'دولار زيمبابوي',
+    );
 

@@ -399,7 +399,7 @@ eoq;
 		global $app_list_strings,$current_user, $app_strings, $mod_strings,$current_language,$locale;
 
 		//Link drop-downs
-		$parent_types = $app_list_strings['record_type_display'];
+        $parent_types = $app_list_strings['record_type_display'];
 		$disabled_parent_types = ACLController::disabledModuleList($parent_types, false, 'list');
 
 		foreach($disabled_parent_types as $disabled_parent_type) {
@@ -1302,7 +1302,8 @@ eoq;
 		// $ret['uid'] is the draft Email object's GUID
 		$ret['attachments'] = array();
 
-        $q = "SELECT id, filename FROM notes WHERE parent_id = {$db->quoted($ret['uid'])} AND deleted = 0";
+        //FIXME: notes.email_type should be Emails
+        $q = "SELECT id, filename FROM notes WHERE email_id = {$db->quoted($ret['uid'])} AND deleted = 0";
 		$r = $db->query($q);
 
 		while($a = $db->fetchByAssoc($r)) {
@@ -1317,17 +1318,10 @@ eoq;
 
 	function createCopyOfInboundAttachment($ie, $ret, $uid) {
 		global $sugar_config;
-		if ($ie->isPop3Protocol()) {
-			// get the UIDL from database;
-			$cachedUIDL = md5($uid);
-			$cache = sugar_cached("modules/Emails/{$ie->id}/messages/{$ie->mailbox}{$cachedUIDL}.php");
-		} else {
-			$cache = sugar_cached("modules/Emails/{$ie->id}/messages/{$ie->mailbox}{$uid}.php");
-		}
-		if(file_exists($cache)) {
-			$cacheFile = FileLoader::varFromInclude($cache, 'cacheFile'); // provides $cacheFile
-            $metaOut = Serialized::unserialize($cacheFile['out']);
-			$meta = $metaOut['meta']['email'];
+
+        if ($this->mboxCacheExists($ie->id, $ie->mailbox, $uid)) {
+            $metaOut = $this->getMboxCacheValue($ie->id, $ie->mailbox, $uid);
+            $meta = $metaOut['meta']['email'];
 			if (isset($meta['attachments'])) {
 				$attachmentHtmlData = $meta['attachments'];
 				$actualAttachmentInfo = array();
@@ -1628,7 +1622,7 @@ eoq;
 		//if not empty or set to test (from test campaigns)
 		if (!empty($focus->parent_type) && $focus->parent_type !='test') {
 			$smarty->assign('PARENT_MODULE', $focus->parent_type);
-			$smarty->assign('PARENT_TYPE', $app_list_strings['record_type_display'][$focus->parent_type] . ":");
+            $smarty->assign('PARENT_TYPE', $app_list_strings['record_type_display'][$focus->parent_type] . ':');
 		}
 
         global $gridline;
@@ -1678,11 +1672,13 @@ eoq;
 		///////////////////////////////////////////////////////////////////////////////
 
 		$note = BeanFactory::newBean('Notes');
-		$where = "notes.parent_id='{$focus->id}'";
+        //FIXME: notes.email_type should be Emails
+        $where = 'notes.email_id=' . $this->db->quoted($focus->id);
 		//take in account if this is from campaign and the template id is stored in the macros.
 
 		if(isset($macro_values) && isset($macro_values['email_template_id'])){
-		    $where = "notes.parent_id='{$macro_values['email_template_id']}'";
+            //FIXME: notes.email_type should be EmailTemplates
+            $where = 'notes.email_id=' . $this->db->quoted($macro_values['email_template_id']);
 		}
 		$notes_list = $note->get_full_list("notes.name", $where, true);
 
@@ -1957,13 +1953,15 @@ function distRoundRobin($userIds, $mailIds) {
 		$email->team_id = $assignedTeamInfo['primaryTeamId'];
 		$email->team_set_id = $assignedTeamInfo['teamSetId'];
 		$email->save();
-		$email->getNotes($mailId);
-        if(!empty($email->attachments)) {
-            foreach($email->attachments as $note) {
-                $note->team_id = $email->team_id;
-                $note->team_set_id = $email->team_set_id;
-                $note->save();
-            }
+
+        //FIXME: notes.email_type should be Emails
+        $where = 'notes.email_id=' . $this->db->quoted($mailId);
+        $attachments = BeanFactory::getBean('Notes')->get_full_list('', $where, true);
+
+        foreach ($attachments as $note) {
+            $note->team_id = $email->team_id;
+            $note->team_set_id = $email->team_set_id;
+            $note->save();
         }
 	}
 
@@ -1981,9 +1979,10 @@ function distLeastBusy($userIds, $mailIds) {
 	foreach($mailIds as $k => $mailId) {
 		$email = BeanFactory::getBean('Emails', $mailId);
 		foreach($userIds as $k => $id) {
-			$r = $this->db->query("SELECT count(*) AS c FROM emails WHERE assigned_user_id = '.$id.' AND status = 'unread'");
-			$a = $this->db->fetchByAssoc($r);
-			$counts[$id] = $a['c'];
+            $counts[$id] = $this->db->getConnection()->executeQuery(
+                'SELECT COUNT(*) AS c FROM emails WHERE assigned_user_id = ? AND status = ?',
+                [$id, 'unread']
+            )->fetchColumn();
 		}
 		asort($counts); // lowest to highest
 		$countsKeys = array_flip($counts); // keys now the 'count of items'
@@ -1993,13 +1992,15 @@ function distLeastBusy($userIds, $mailIds) {
 		$email->team_id = $assignedTeamInfo['primaryTeamId'];
 		$email->team_set_id = $assignedTeamInfo['teamSetId'];
 		$email->save();
-		$email->getNotes($mailId);
-        if(!empty($email->attachments)) {
-            foreach($email->attachments as $note) {
-                $note->team_id = $email->team_id;
-                $note->team_set_id = $email->team_set_id;
-                $note->save();
-            }
+
+        //FIXME: notes.email_type should be Emails
+        $where = 'notes.email_id=' . $this->db->quoted($mailId);
+        $attachments = BeanFactory::getBean('Notes')->get_full_list('', $where, true);
+
+        foreach ($attachments as $note) {
+            $note->team_id = $email->team_id;
+            $note->team_set_id = $email->team_set_id;
+            $note->save();
         }
 	}
 	return true;
@@ -2034,13 +2035,15 @@ function distDirect($user, $mailIds) {
 
 		}
 		$email->save();
-		$email->getNotes($mailId);
-        if(!empty($email->attachments)) {
-            foreach($email->attachments as $note) {
-                $note->team_id = $email->team_id;
-                $note->team_set_id = $email->team_set_id;
-                $note->save();
-            }
+
+        //FIXME: notes.email_type should be Emails
+        $where = 'notes.email_id=' . $this->db->quoted($mailId);
+        $attachments = BeanFactory::getBean('Notes')->get_full_list('', $where, true);
+
+        foreach ($attachments as $note) {
+            $note->team_id = $email->team_id;
+            $note->team_set_id = $email->team_set_id;
+            $note->save();
         }
 	}
 	return true;
@@ -2087,22 +2090,17 @@ function getSingleMessage($ie) {
 		global $app_strings,$mod_strings;
 
         $ieId = $this->request->getValidInputRequest('ieId', 'Assert\Guid');
-        $mbox = $this->request->getValidInputRequest('mbox', 'Assert\Guid');
+        $mbox = $this->request->getValidInputRequest('mbox');
         $uid = $this->request->getValidInputRequest('uid', 'Assert\Guid');
 
 		$ie->retrieve($ieId);
 		$noCache = true;
 
 		$ie->mailbox = $mbox;
-		$filename = $mbox.$uid.".php";
-		$md5uidl = "";
-		if ($ie->isPop3Protocol()) {
-			$md5uidl = md5($uid);
-			$filename = $mbox.$md5uidl.".php";
-		} // if
 
-		if($this->validCacheFileExists($ieId, 'messages', $filename)) {
-			$out = $this->getCacheValue($ieId, 'messages', $filename, 'out');
+
+        if ($this->mboxCacheExists($ieId, $mbox, $uid)) {
+            $out = $this->getMboxCacheValue($ieId, $mbox, $uid);
 			$noCache = false;
 
 			// something fubar'd the cache?
@@ -2130,11 +2128,7 @@ function getSingleMessage($ie) {
 				$writeToCacheFile = false;
 			}
 			if ($writeToCacheFile) {
-				if ($ie->isPop3Protocol()) {
-					$this->writeCacheFile('out', $out, $ieId, 'messages', "{$mbox}{$md5uidl}.php");
-				} else {
-					$this->writeCacheFile('out', $out, $ieId, 'messages', "{$mbox}{$uid}.php");
-				} // else
+                $this->writeMboxCacheValue($ieId, $mbox, $uid, $out);
 			// restore date in the users preferred format to be send on to UI for diaply
 			$out['meta']['email']['date_start'] = $dateTimeInUserFormat;
 			} // if
@@ -2161,12 +2155,6 @@ eoq;
         if (empty($out['meta']['email']['description'])) {
             $out['meta']['email']['description'] = $mod_strings['LBL_EMPTY_EMAIL_BODY'];
         }
-
-		if($noCache) {
-			$GLOBALS['log']->debug("EMAILUI: getSingleMessage() NOT using cache file");
-		} else {
-			$GLOBALS['log']->debug("EMAILUI: getSingleMessage() using cache file [ ".$mbox.$uid.".php ]");
-		}
 
 		$this->setReadFlag($ieId, $mbox, $uid);
 		return $out;
@@ -2551,8 +2539,6 @@ eoq;
         $module,
         $person
     ) {
-        $t = '';
-
         if ($relatedIDs != '') {
             $where = "({$table}.deleted = 0 AND eabr.primary_address = 1 AND {$table}.id in ($relatedIDs))";
         } else {
@@ -2566,20 +2552,16 @@ eoq;
             $where .= " AND ({$whereAdd})";
         }
 
-        if ($beanType === 'accounts') {
-            $t = "SELECT {$table}.id, '' first_name, {$table}.name last_name, ";
-            $t .= "eabr.primary_address, ea.email_address, '{$module}' module ";
-        } else {
-            $t = "SELECT {$table}.id, {$table}.first_name, {$table}.last_name, ";
-            $t .= "eabr.primary_address, ea.email_address, '{$module}' module ";
-        }
+        $t = $beanType === 'accounts' ?
+            "SELECT {$table}.id, '' first_name, {$table}.name last_name, " :
+            "SELECT {$table}.id, {$table}.first_name, {$table}.last_name, ";
 
+        $t .= "eabr.primary_address, ea.id AS email_address_id, ea.email_address, ea.opt_out, '{$module}' module ";
         $t .= "FROM {$table} ";
         $t .= "JOIN email_addr_bean_rel eabr ON ({$table}.id = eabr.bean_id and eabr.deleted=0) ";
         $t .= "JOIN email_addresses ea ON (eabr.email_address_id = ea.id) ";
         $person->add_team_security_where_clause($t);
-        $t .= " WHERE {$where} AND ea.invalid_email = 0 AND ea.opt_out = 0";
-
+        $t .= " WHERE {$where} AND ea.invalid_email = 0";
 
         return $t;
     }
@@ -3080,6 +3062,31 @@ eoq;
 		echo $this->smarty->fetch("modules/Emails/templates/successMessage.tpl");
 	}
 
+
+    /**
+     * Returns a filename for a cache file based on a hashed mbox and uid
+     *
+     * @param string $mbox Mailbox folder label
+     * @param string $uid Unique ID of message
+     * @return string Filename
+     */
+    private function getMboxCacheFilename($mbox, $uid)
+    {
+        return hash('sha256', $mbox . $uid) . '.php';
+    }
+
+    /**
+     * Generates a filepath for a cache file
+     * @param string $ieId InboundEmail id
+     * @param string $type Type of cache (messages|folders)
+     * @param string $filename Filename
+     * @return string Cache filepath
+     */
+    private function getCacheFilePath($ieId, $type, $filename)
+    {
+        return sugar_cached("modules/Emails/{$ieId}/{$type}/{$filename}");
+    }
+
 	/**
 	 * Validates existence and expiration of a cache file
 	 * @param string $ieId
@@ -3095,16 +3102,26 @@ eoq;
 			$refreshOffset = $this->cacheTimeouts[$type]; // use defaults
 		}
 
-		$cleanIeId = cleanDirName($ieId);
-		$cleanType = cleanDirName($type);
-		$cleanFile = cleanFileName($file);
-		$cacheFilePath = sugar_cached("modules/Emails/{$cleanIeId}/{$cleanType}/{$cleanFile}");
-		if(file_exists($cacheFilePath)) {
+        $cacheFilename = $this->getCacheFilePath($ieId, $type, $file);
+        if (file_exists($cacheFilename)) {
 			return true;
 		}
 
 		return false;
 	}
+
+    /**
+     * Checks existence of a cache entry for Mbox and Message id
+     * @param string $ieId Inbound Email Id
+     * @param string $mbox Mailbox folder label
+     * @param string $uid Unique ID of message
+     * @return boolean
+     */
+    public function mboxCacheExists($ieId, $mbox, $uid)
+    {
+        $filename = $this->getMboxCacheFilename($mbox, $uid);
+        return $this->validCacheFileExists($ieId, 'messages', $filename);
+    }
 
 	/**
 	 * retrieves the cached value
@@ -3117,10 +3134,7 @@ eoq;
 	function getCacheValue($ieId, $type, $file, $key) {
 		global $sugar_config;
 
-		$cleanIeId = cleanDirName($ieId);
-		$cleanType = cleanDirName($type);
-		$cleanFile = cleanFileName($file);
-		$cacheFilePath = sugar_cached("modules/Emails/{$cleanIeId}/{$cleanType}/{$cleanFile}");
+        $cacheFilePath = $this->getCacheFilePath($ieId, $type, $file);
 		$cacheFile = array();
 
 		if(file_exists($cacheFilePath)) {
@@ -3138,6 +3152,19 @@ eoq;
 		return null;
 	}
 
+    /**
+     * Retrieves the cached value for Mbox and message Id
+     * @param string $ieId Inbound Email id
+     * @param string $mbox Mailbox folder label
+     * @param string $uid Unique ID of message
+     * @return mixed
+     */
+    public function getMboxCacheValue($ieId, $mbox, $uid)
+    {
+        $filename = $this->getMboxCacheFilename($mbox, $uid);
+        return $this->getCacheValue($ieId, 'messages', $filename, 'out');
+    }
+
 	/**
 	 * retrieves the cache file last touched time
 	 * @param string $ieId
@@ -3148,11 +3175,7 @@ eoq;
 	function getCacheTimestamp($ieId, $type, $file) {
 		global $sugar_config;
 
-		$cleanIeId = cleanDirName($ieId);
-		$cleanType = cleanDirName($type);
-		$cleanFile = cleanFileName($file);
-		$cacheFilePath = sugar_cached("modules/Emails/{$cleanIeId}/{$cleanType}/{$cleanFile}");
-
+        $cacheFilePath = $this->getCacheFilePath($ieId, $type, $file);
 		$cacheFile = array();
 
 		if(file_exists($cacheFilePath)) {
@@ -3177,10 +3200,7 @@ eoq;
 	function setCacheTimestamp($ieId, $type, $file) {
 		global $sugar_config;
 
-		$cleanIeId = cleanDirName($ieId);
-		$cleanType = cleanDirName($type);
-		$cleanFile = cleanFileName($file);
-		$cacheFilePath = sugar_cached("modules/Emails/{$cleanIeId}/{$cleanType}/{$cleanFile}");
+        $cacheFilePath = $this->getCacheFilePath($ieId, $type, $file);
 		$cacheFile = array();
 
 		if(file_exists($cacheFilePath)) {
@@ -3206,10 +3226,7 @@ eoq;
 	function writeCacheFile($key, $var, $ieId, $type, $file) {
 		global $sugar_config;
 
-		$cleanIeId = cleanDirName($ieId);
-		$cleanType = cleanDirName($type);
-		$cleanFile = cleanFileName($file);
-		$the_file = sugar_cached("modules/Emails/{$cleanIeId}/{$cleanType}/{$cleanFile}");
+        $the_file = $this->getCacheFilePath($ieId, $type, $file);
 		$timestamp = strtotime('now');
 		$array = array();
 		$array['timestamp'] = $timestamp;
@@ -3217,6 +3234,20 @@ eoq;
 
 		return $this->_writeCacheFile($array, $the_file);
 	}
+
+    /**
+     * Writes a variable to a mbox cache entry
+     * @param string $ieId InboundEmail Id
+     * @param string $mbox Mailbox folder label
+     * @param string $uid Unique ID of message
+     * @param mixed $var Variable to be cached
+     *@return boolean
+     */
+    public function writeMboxCacheValue($ieId, $mbox, $uid, $var)
+    {
+        $filename = $this->getMboxCacheFilename($mbox, $uid);
+        return $this->writeCacheFile('out', $var, $ieId, 'messages', $filename);
+    }
 
 	/**
 	 * Performs the actual file write.  Abstracted from writeCacheFile() for
@@ -3245,6 +3276,23 @@ eoq;
 	        return false;
 	    }
 	}
+
+    /**
+     * Delete a cache entry
+     *
+     * @param string $ieId InboundEmail ID
+     * @param string $mbox Mailbox folder label
+     * @param string $uid Unique ID of message
+     */
+    public function deleteMboxCache($ieId, $mbox, $uid)
+    {
+        $filename = $this->getMboxCacheFilename($mbox, $uid);
+        $cacheFilename = $this->getCacheFilePath($ieId, 'messages', $filename);
+        if (file_exists($cacheFilename)) {
+            $msgCacheFile = FileLoader::validateFilePath($cacheFilename);
+            unlink($msgCacheFile);
+        }
+    }
 
 	/**
 	 * Generate JSON encoded data to be consumed by yui datatable.

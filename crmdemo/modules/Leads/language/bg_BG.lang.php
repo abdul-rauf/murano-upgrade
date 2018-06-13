@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Електронно табло със списък на Потенциалните клиенти',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Електронно табло със запис на Потенциалните клиенти',
+
     'ERR_DELETE_RECORD' => 'en_us Трябва да определите номер на записа, за да изтриете този потенциален клиент.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Описание на организацията',
     'LBL_ACCOUNT_ID'=>'Идентификатор на организацията',
@@ -313,4 +318,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Оценка на потенциала',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Справки за потенциални клиенти',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Одобрени бизнес цели',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Последна актуализация на одобрението',
 );

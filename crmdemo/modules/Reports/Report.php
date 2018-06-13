@@ -29,7 +29,17 @@ class Report
     var $group_fields_map = array();
     var $summary_fields_map = array();
     var $full_table_list = array();
-    var $full_table_beans = array();
+
+    /**
+     * @var SugarBean[]
+     */
+    public $full_bean_list = array();
+
+    /**
+     * @var string
+     */
+    public $from;
+
     var $where;
     var $order_by;
     var $order_by_arr = array();
@@ -38,7 +48,12 @@ class Report
     var $group_by;
     var $group_order_by = '';
     var $module = 'Accounts';
+
+    /**
+     * @var SugarBean
+     */
     var $focus;
+
     var $currency_symbol;
 
     /** @var Currency */
@@ -181,18 +196,22 @@ class Report
         $this->time_date_obj = new TimeDate();
         $this->name = $mod_strings['LBL_UNTITLED'];
         $this->db = DBManagerFactory::getInstance('reports');
-        if (Report::is_old_content($report_def_str)) {
-            $this->handleException('this report was created with an older version of reports. please upgrade');
-        }
 
         $json = getJSONobj();
         if (empty($report_def_str)) {
             $this->report_def_str = $this->default_report_def_str;
             $this->report_def = $json->decode($this->report_def_str);
+        } elseif (is_array($report_def_str)) {
+            $this->report_def = $report_def_str;
+            $this->report_def_str = $json->encode($report_def_str);
         } else {
+            if (Report::is_old_content($report_def_str)) {
+                $this->handleException('this report was created with an older version of reports. please upgrade');
+            }
             $this->report_def_str = $report_def_str;
             $this->report_def = $json->decode($this->report_def_str);
         }
+
         // 5.1 Report Format - only called by the Wizard.
         if (!empty($filters_def_str)) {
             $this->parseUIFiltersDef($json->decode($filters_def_str), $json->decode($panels_def_str));
@@ -379,19 +398,22 @@ class Report
                 }
             }
 
-            $filters = array();
-            $filters['Filter_1'] = array();
-            if (isset($this->report_def['filters_combiner']))
-                $filters['Filter_1']['operator'] = $this->report_def['filters_combiner'];
-            else
-                $filters['Filter_1']['operator'] = 'AND';
-            for ($i = 0; $i < count($this->report_def['filters_def']); $i++) {
-                if ($this->report_def['filters_def'][$i]['table_key'] != 'self') {
-                    $this->report_def['filters_def'][$i]['table_key'] = $upgrade_lookup[$this->report_def['filters_def'][$i]['table_key']];
+            if (empty($this->report_def['filters_def']) || !isset($this->report_def['filters_def']['Filter_1'])) {
+                $filters = array();
+                $filters['Filter_1'] = array();
+                if (isset($this->report_def['filters_combiner'])) {
+                    $filters['Filter_1']['operator'] = $this->report_def['filters_combiner'];
+                } else {
+                    $filters['Filter_1']['operator'] = 'AND';
                 }
-                array_push($filters['Filter_1'], $this->report_def['filters_def'][$i]);
+                for ($i = 0; $i < count($this->report_def['filters_def']); $i++) {
+                    if ($this->report_def['filters_def'][$i]['table_key'] != 'self') {
+                        $this->report_def['filters_def'][$i]['table_key'] = $upgrade_lookup[$this->report_def['filters_def'][$i]['table_key']];
+                    }
+                    array_push($filters['Filter_1'], $this->report_def['filters_def'][$i]);
+                }
+                $this->report_def['filters_def'] = $filters;
             }
-            $this->report_def['filters_def'] = $filters;
 
             // Re-encode the report definition
             $this->report_def_str = $json->encode($this->report_def);
@@ -418,7 +440,8 @@ class Report
         if (isset($this->report_def['numerical_chart_column']) && $this->report_def['numerical_chart_column'] == 'count')
             $this->report_def['numerical_chart_column'] = 'self:count';
         // END: Dynamically convert previous versions to 5.1 version of content string.
-        // Load all the necessary beans, and populate the full_table_beans array
+
+        // Load all the necessary beans, and populate the full_bean_list array
         foreach ($this->full_table_list as $table_key => $table_data)
         {
 
@@ -677,6 +700,7 @@ class Report
 
     function clear_results()
     {
+        $this->from = null;
         $this->where = null;
         $this->order_by = null;
         $this->group_by = null;
@@ -1168,56 +1192,53 @@ class Report
         $where_clause .= ')';
     }
 
-    protected function addSecurity($query, $focus, $alias)
+    /**
+     * Applies visibility filtering defined by the bean to the data selected from the specified table
+     * when building the FROM part of the query
+     *
+     * @param SugarBean $bean
+     * @param string $from
+     * @param string $tableAlias
+     *
+     * @return string
+     */
+    private function addVisibilityFrom(SugarBean $bean, $from, $tableAlias)
     {
-        $from = ''; $where = '';
-        /*
-         * Here we have a hack because MySQL hates subqueries in joins, see bug #60288 for details
-         */
-        $as_condition = $focus->db->supports("fix:report_as_condition");
-        $options = $this->visibilityOpts;
-        if($as_condition) {
-            $options['table_alias'] = $alias;
-            $options['as_condition'] = true;
-        } else {
-            $options['where_condition'] = true;
-        }
-        $focus->addVisibilityWhere($where, $options);
-        $focus->addVisibilityFrom($from, $options);
-        if(!empty($from) || !empty($where)) {
-            if($as_condition && strtolower(substr(ltrim($from), 0, 5)) != "inner") {
-                // check that we indeed got condition in FROM - it should not start with joins
-                if (!empty($from)) {
-                    $from = 'AND ' . ltrim($from);
-                }
-                if (!empty($where)) {
-                    $where = 'AND ' . ltrim($where);
-                }
-                $query .= "/* from $alias */ $from /* where $alias */ $where";
-            } else {
-                // if we didn't ask for condition or did not get one, get back to subquery mode
-                if(!empty($where)) {
-                    $where = "WHERE $where";
-                }
-                $query = str_replace(" {$focus->table_name} $alias ", "(SELECT {$focus->table_name}.* FROM {$focus->table_name} $from $where) $alias ", $query);
-            }
-        }
-        return $query;
+        $options = $this->getVisibilityOptions();
+        $options['table_alias'] = $tableAlias;
+
+        $bean->addVisibilityFrom($from, $options);
+
+        return $from;
+    }
+
+    /**
+     * Applies visibility filtering defined by the bean to the data selected from the specified table
+     * when building the WHERE part of the query
+     *
+     * @param SugarBean $bean
+     * @param string $where
+     * @param string $tableAlias
+     *
+     * @return string
+     */
+    private function addVisibilityWhere(SugarBean $bean, $where, $tableAlias)
+    {
+        $options = $this->getVisibilityOptions();
+        $options['table_alias'] = $tableAlias;
+
+        $bean->addVisibilityWhere($where, $options);
+
+        return $where;
     }
 
     function create_where()
     {
-        $where_arr = array();
         $this->layout_manager->setAttribute('context', 'Filter');
         $filters = $this->report_def['filters_def'];
         $where_clause = "";
         if (isset($filters['Filter_1']))
             Report::filtersIterate($filters['Filter_1'], $where_clause);
-        // Bug63958 Go back to using where clause team restrictions instead of INNER JOINS for performance reasons on SugarInternal
-        $options = $this->visibilityOpts;
-        $options['where_condition'] = true;
-        $options['action'] = 'list';
-        $where_clause = $this->focus->addVisibilityWhere($where_clause, $options);
         $this->where = $where_clause;
     }
 
@@ -1234,6 +1255,18 @@ class Report
                 $verdef_arr_for_filters[$fieldDef['name']] = $fieldDef;
             }
         }
+    }
+
+    private function getVisibilityOptions()
+    {
+        $options = $this->visibilityOpts;
+
+        // Here we have a hack because MySQL hates subqueries in joins, see bug #60288 for details
+        if ($this->focus->db->supports('fix:report_as_condition')) {
+            $options['as_condition'] = true;
+        }
+
+        return $options;
     }
 
     function createFilterStringForUI()
@@ -1661,7 +1694,8 @@ class Report
         $this->full_table_list['self']['params']['join_table_alias'] = $this->focus->table_name;
         $this->full_table_list['self']['params']['join_table_link_alias'] = $this->focus->table_name . "_l";
 
-        $this->from = "\nFROM " . $this->focus->table_name . "\n";
+        $from = "\nFROM " . $this->focus->table_name . "\n";
+        $this->from = $this->addVisibilityFrom($this->focus, $from, $this->focus->table_name);
 
         $this->jtcount = 0;
         foreach ($this->full_table_list as $table_key => $table_def)
@@ -1719,11 +1753,16 @@ class Report
                     $params['primary_table_name'] = $this->full_table_list[$table_def['parent']]['params']['join_table_alias'];
 
                     if (isset($this->full_bean_list[$table_def['parent']]->$link_name)) {
-                        if (!$this->full_bean_list[$table_def['parent']]->$link_name->loadedSuccesfully())
+                        /** @var Link2 $link */
+                        $link = $this->full_bean_list[$table_def['parent']]->$link_name;
+
+                        if (!$link->loadedSuccesfully()) {
                             $this->handleException("Unable to load link: $link_name for bean {$table_def['parent']}");
+                        }
+
                         // Start ACL check
                         global $current_user, $mod_strings;
-                        $linkModName = $this->full_bean_list[$table_def['parent']]->$link_name->getRelatedModuleName();
+                        $linkModName = $link->getRelatedModuleName();
                         $list_action = ACLAction::getUserAccessLevel($current_user->id, $linkModName, 'list', $type = 'module');
                         $view_action = ACLAction::getUserAccessLevel($current_user->id, $linkModName, 'view', $type = 'module');
 
@@ -1734,27 +1773,31 @@ class Report
                                 $this->handleException($mod_strings['LBL_NO_ACCESS'] . "----" . $linkModName);
                             }
                         }
-
-                        $this->from .= $this->addSecurity($this->full_bean_list[$table_def['parent']]->$link_name->getJoin($params),
-                            $focus, $params['join_table_alias']);
                         // End ACL check
                     }
                     else {
                         // Start ACL check
                         global $current_user, $mod_strings;
-                        $linkModName = $this->full_bean_list[$table_def['parent']]->$rel_name->getRelatedModuleName();
+
+                        /** @var Link2 $link */
+                        $link = $this->full_bean_list[$table_def['parent']]->$rel_name;
+
+                        $linkModName = $link->getRelatedModuleName();
                         $list_action = ACLAction::getUserAccessLevel($current_user->id, $linkModName, 'list', $type = 'module');
                         $view_action = ACLAction::getUserAccessLevel($current_user->id, $linkModName, 'view', $type = 'module');
 
-                        if (!$this->full_bean_list[$table_def['parent']]->$rel_name->loadedSuccesfully()) {
+                        if (!$link->loadedSuccesfully()) {
                             $this->handleException("Unable to load link: $rel_name");
                         }
                         if ($list_action == ACL_ALLOW_NONE || $view_action == ACL_ALLOW_NONE)
                             $this->handleException($mod_strings['LBL_NO_ACCESS'] . "----" . $linkModName);
-                        $this->from .= $this->addSecurity($this->full_bean_list[$table_def['parent']]->$rel_name->getJoin($params),
-                            $focus, $params['join_table_alias']);
                         // End ACL check
                     }
+
+                    $this->from .= $link->getJoin($params);
+
+                    $this->from = $this->addVisibilityFrom($focus, $this->from, $params['join_table_alias']);
+                    $this->where = $this->addVisibilityWhere($focus, $this->where, $params['join_table_alias']);
                 }
                 else
                 {
@@ -1806,13 +1849,27 @@ class Report
             // This is field name as table.field
             $field_name = substr($field, 0, $has_space);
             $field_data = explode(".", $field_name);
-            if (!isset($field_data[1]) || !isset($this->focus->field_defs[$field_data[1]]['type'])) {
+            if (!isset($field_data[1])) {
+                return $field;
+            }
+            $field_type = null;
+            foreach ($this->full_table_list as $k => $v) {
+                if (!empty($v['params']) && !empty($v['params']['join_table_alias'])) {
+                    if ($v['params']['join_table_alias'] == $field_data[0]) {
+                        $key = $k;
+                        break;
+                    }
+                }
+            }
+
+            if (!empty($key)) {
+                $fieldName = $key . ':' . $field_data[1];
+                $field_type = DBManagerFactory::getInstance()->getFieldType($this->all_fields[$fieldName]);
+            }
+            if (empty($field_type)) {
                 // Not a field or unknown field type - don't touch it
                 return $field;
             }
-
-            $db = DBManagerFactory::getInstance();
-            $field_type = $db->getFieldType($this->focus->field_defs[$field_data[1]]);
 
             if (!in_array($field_type, array('currency','double','float','decimal','int','date','datetime'))) {
                 if ($field_type === 'bool') {
@@ -1858,7 +1915,7 @@ class Report
                 $where_auto .= ' AND ' . $this->db->convert($tableAlias . '.deleted', 'IFNULL', array(0)) . "=0 \n";
             }
         }
-        
+
         // Start ACL check
         global $current_user, $mod_strings;
         if (!is_admin($current_user)) {
@@ -1875,6 +1932,10 @@ class Report
             $aclVisibility->addVisibilityWhere($where_auto);
         }
         // End ACL check
+
+        $options = $this->getVisibilityOptions();
+        $options['action'] = 'list';
+        $where_auto = $this->focus->addVisibilityWhere($where_auto, $options);
 
         if (!empty($this->where)) {
             $query .= " WHERE ($this->where) \nAND " . $where_auto;
@@ -2332,12 +2393,13 @@ class Report
                         $display = "";
                     }
                 } // if
-                
+
+
                 if (is_array($this->moduleBean->field_defs)) {
                     if (isset($this->moduleBean->field_defs[$display_column['type']])) {
                         if (isset($this->moduleBean->field_defs[$display_column['type']]['options'])) {
                             $trans_options = translate($this->moduleBean->field_defs[$display_column['type']]['options']);
-                                                        
+
                             if (isset($trans_options[$display_column['fields'][$field_name]])) {
                                 $display = $trans_options[$display_column['fields'][$field_name]];
                             }
@@ -2618,4 +2680,81 @@ class Report
         }
     }
 
+    /**
+     * Returns the report data as a flat list (no groups or aggs)
+     * @return array
+     */
+    public function getData()
+    {
+        global $alias_map;
+
+        $result = [];
+
+        if (!isset($this->result)) {
+            $this->run_query();
+        }
+
+        while ($row = $this->db->fetchByAssoc($this->result)) {
+            $row = array_combine(
+                array_map(
+                    function ($key) use ($alias_map) {
+                        return isset($alias_map[$key]) ? $alias_map[$key] : $key;
+                    },
+                    array_keys($row)
+                ),
+                array_values($row)
+            );
+            $result[] = $row;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Returns the record ids of this report
+     * @param array $reportDef
+     * @param integer $offset
+     * @param integer $limit
+     * @return array Array of record ids
+     */
+    public function getRecordIds($offset = 0, $limit = -1)
+    {
+        $recordIds = array();
+        $this->create_where();
+        $this->create_from();
+        $id = $this->full_bean_list['self']->table_name . '.id';
+        $query = "SELECT DISTINCT $id {$this->from} WHERE {$this->where} AND {$this->focus->table_name}.deleted=0";
+        $query .= " ORDER BY $id ASC";
+        $query = str_replace("\n", " ", $query);
+        if ($offset > 0 || $limit > 0) {
+            $result = $this->db->limitQuery($query, $offset, $limit, true, "Error executing query");
+        } else {
+            $result = $this->db->query($query, true, "Error executing query");
+        }
+        if ($result) {
+            while ($row = $this->db->fetchByAssoc($result)) {
+                $recordIds[] = $row['id'];
+            }
+        }
+        return $recordIds;
+    }
+
+    /**
+     * Returns record count of this report
+     * @return integer
+     */
+    public function getRecordCount()
+    {
+        $recordCount = 0;
+        $this->create_where();
+        $this->create_from();
+        $id = $this->full_bean_list['self']->table_name . '.id';
+        $query = "SELECT COUNT(DISTINCT $id) AS record_count {$this->from} WHERE {$this->where} AND {$this->focus->table_name}.deleted=0";
+        $result = $this->db->query($query, true, "Error executing query");
+        if ($result) {
+            $row = $this->db->fetchByAssoc($result);
+            $recordCount = (int) $row['record_count'];
+        }
+        return $recordCount;
+    }
 }

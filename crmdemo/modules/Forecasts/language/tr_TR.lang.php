@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Tahminler Panosu',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Tahminler',
     'LBL_MODULE_NAME_SINGULAR' => 'Tahmin',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Ürün ID:',
     'LBL_QUOTA_ID' => 'Kota ID',
     'LBL_VERSION' => 'Versiyon',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Çubuk göstergeyi gizle',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Çubuk göstergeyi göster',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Çizgi göstergeyi gizle',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Çizgi göstergeyi göster',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Hata: {0} kullanıcısının {1} için Tahminleri yönetici olarak görme hakkı yok',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Mali yıl başlangıç ​​tarihi:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Satış Tahmini modülü tarafından kullanılacak zaman aralığını tanımlayın.<br><br>Finansal yıl için Başlangıç Tarihi seçerek başlayın. Ardından satış tahmini için kullanacağınız zaman aralığının tipini seçin. Zaman aralıkları için tarihler seçiminize uygun olarak otomatik şekilde hesaplanacak. Alt Zaman Aralığı, Satış Tahminleri için temel oluşturmaktadır.<br><br>Görülebilir gelecek ve geçmiş zaman aralıkları, Tahminler modülünde görülebilecek alt zaman aralıklarının sayısını belirleyecektir. Kullanıcılar görülebilir alt zaman aralıkları için tahmin değerlerini görebilir ve değiştirebilir.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} modülünü nasıl kategorize etmek istediğinizi yapılandırın. <br><br>Lütfen dikkat, Aralık ayarları ilk onayın ardından değiştirilemez. Yükseltilmiş örnekler için Aralık ayarı, mevcut Tahmin verisiyle kapatılır.<br><br>Olasılık aralıklarına dayalı olarak iki veya daha fazla kategori seçebilir ya da olasılığa dayalı olmayan kategoriler oluşturabilirsiniz. <br><br>Özel kategorilerinizin solunda işaret kutuları vardır; teslim edilen ve yöneticilere bildirilen Tahmin miktarına hangi aralıkların dahil edileceğine karar vermek için bunları kullanın. <br><br>Bir kullanıcı, kendi çalışma sayfasından manuel olarak {{forecastByModule}} modülünün dahil/hariç durumunu ve kategorisini değiştirebilir.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} modülünü nasıl sınıflandırmak istediğinizi yapılandırın. <br><br>Lütfen ilk teslimin ardından Aralık ayarlarının değiştirilemeyeceğini unutmayın. Yükseltilmiş kurulumlar için Aralık ayarı, mevcut Tahmin verisiyle kilitlenir.<br><br>Olasılık aralıklarına dayalı bir veya iki kategori seçebilir ya da olasılığa dayalı olmayan kategoriler oluşturabilirsiniz. <br><br>Özel kategorilerinizin sol tarafında işaret kutuları vardır; hangi aralıkların yöneticilere taahhüt edilen ve bildirilen Tahmin miktarının içerisine dahil edileceğine karar vermek için bunları kullanın. <br><br>Bir kullanıcı, dahil etme/dahil etmeme durumunu ve {{forecastByModule}} modülünün kategorisini çalışma sayfalarından manuel olarak değiştirebilir.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Kullanıcının her {{forecastByModuleSingular}} tahmini için doldurmalarını istediğiniz kolonları seçin. Olası kolonu {{forecastByModule}} içinde gösterilen miktar olduğu için gizlenemez.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Tahmin modülünde görmek istediğiniz kolonları seçin. Alanların listesi, çalışma sayfası ile bir araya gelerek kullanıcıların nasıl görüntülemek istediklerini tanımlamada kullanılacak.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Tahmin Yönteminin nasıl yapılacağını belirten metin için yer doldurucuyum.',

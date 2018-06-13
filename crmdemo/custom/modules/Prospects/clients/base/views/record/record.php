@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 11:25:41
+// created: 2018-06-13 15:14:56
 $viewdefs['Prospects']['base']['view']['record'] = array (
   'buttons' => 
   array (
@@ -120,9 +120,17 @@ $viewdefs['Prospects']['base']['view']['record'] = array (
         ),
         12 => 
         array (
-          'type' => 'divider',
+          'type' => 'rowaction',
+          'event' => 'button:audit_button:click',
+          'name' => 'audit_button',
+          'label' => 'LNK_VIEW_CHANGE_LOG',
+          'acl_action' => 'view',
         ),
         13 => 
+        array (
+          'type' => 'divider',
+        ),
+        14 => 
         array (
           'type' => 'rowaction',
           'event' => 'button:delete_button:click',
@@ -155,7 +163,22 @@ $viewdefs['Prospects']['base']['view']['record'] = array (
         ),
         1 => 
         array (
-          'name' => 'full_name',
+          'name' => 'favorite',
+          'label' => 'LBL_FAVORITE',
+          'type' => 'favorite',
+          'dismiss_label' => true,
+        ),
+        2 => 
+        array (
+          'name' => 'follow',
+          'label' => 'LBL_FOLLOW',
+          'type' => 'follow',
+          'readonly' => true,
+          'dismiss_label' => true,
+        ),
+        3 => 
+        array (
+          'name' => 'name',
           'type' => 'fullname',
           'label' => 'LBL_NAME',
           'dismiss_label' => true,
@@ -165,21 +188,6 @@ $viewdefs['Prospects']['base']['view']['record'] = array (
             1 => 'first_name',
             2 => 'last_name',
           ),
-        ),
-        2 => 
-        array (
-          'name' => 'favorite',
-          'label' => 'LBL_FAVORITE',
-          'type' => 'favorite',
-          'dismiss_label' => true,
-        ),
-        3 => 
-        array (
-          'name' => 'follow',
-          'label' => 'LBL_FOLLOW',
-          'type' => 'follow',
-          'readonly' => true,
-          'dismiss_label' => true,
         ),
       ),
     ),

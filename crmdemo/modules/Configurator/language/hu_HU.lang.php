@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Ez a név jelenik meg címként a böngésző címsorában.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'A kapcsolódó kontaktoktól származó emailek alpanelen történő megjelenítésének engedélyezése és tiltása.',
 
-    'LBL_OC_STATUS'                     => 'Alapértelmezett offline kliens állapot',
-    'DEFAULT_OC_STATUS'                 => 'Engedélyezi az offline klienst alapértelmezettként',
-    'LBL_OC_STATUS_DESC' => 'Jelölje be, ha az összes felhasználónak engedélyezi a hozzáférést az offline klienshez. Ellenkező esetben felhasználói szinten tudja beállítani a hozzáférést.',
     'SESSION_TIMEOUT' => 'Portál munkamenet időtúllépés',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'A portál időkeret a Sugar Portal 6.5-ös verziójától kezdve működik.',
     'UPLOAD_MAXSIZE_UNITS' => 'bájtok',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'Az SAML Bejelentkezési URL nem lehet üres',
     'ERR_EMPTY_SAML_CERT' => 'Az SAML tanúsítvány nem lehet üres',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML entitás azonosító mező nem lehet üres',
     'ERR_SAML_LOGIN_URL' => 'Az SAML Bejelentkezési URL nem érvényes',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL nem érvényes',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'A PEM fájlnak személyes kulcsot kell tartalmaznia',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'A PEM fájlnak x.509 tanúsítványt kell tartalmaznia',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'A biztosított x.509 tanúsítvány nem felel meg a személyes kulcsnak',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Tevékenységfolyamok',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Tevékenységfolyamok engedélyezése',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Bekapcsolja a tevékenységfolyamokat az alkalmazásban',
 );
 
 

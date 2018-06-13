@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Müügivihjete loendi töölaud',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Müügivihjete kirjete töölaud',
+
     'ERR_DELETE_RECORD' => 'en_us Müügivihje kustutamiseks on vaja täpsustada kirje numbrit.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Ettevõtte kirjeldus',
     'LBL_ACCOUNT_ID'=>'Ettevõtte ID',
@@ -195,7 +200,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopeeri alternatiivne aadress esmaseks aadressiks',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopeeri esmane aadress alternatiivseks aadressiks',
     'NTC_DELETE_CONFIRMATION' => 'Oled kindel, et soovid seda kirjet kustutada?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Müügivõimaluse loomine eeldab ettevõtte kontot. \n Palun loo kas uus või vali olemasolev.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Müügivõimaluse loomine eeldab ettevõtte kontot. \\n Palun loo kas uus või vali olemasolev.',
     'NTC_REMOVE_CONFIRMATION' => 'Oled kindel, et soovid selle müügivihje juhtumist eemaldada?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Oled kindel, et soovid selle kirje eemaldada otsese aruandena?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Kampaaniad',
@@ -314,4 +319,6 @@ After confirming each required and desired module, click the Save and Convert bu
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Leads&#39; reports',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Nõustutud ärieesmärgid:',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Nõusoleku viimane uuendamine',
 );

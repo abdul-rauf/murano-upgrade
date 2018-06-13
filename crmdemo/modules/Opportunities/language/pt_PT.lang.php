@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashboard de Lista de Oportunidades',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashboard de Registo de Oportunidades',
+
     'LBL_MODULE_NAME' => 'Oportunidades',
     'LBL_MODULE_NAME_SINGULAR' => 'Oportunidade',
     'LBL_MODULE_TITLE' => 'Oportunidades: Ecrã Principal',
@@ -64,9 +68,9 @@ $mod_strings = array(
     'UPDATE_NULL_VALUE' => 'Valor é NULO definindo como 0 -',
     'UPDATE_MERGE' => 'Fundir Moedas',
     'UPDATE_MERGE_TXT' => 'Fundir múltiplas Moedas numa única Moeda. Se existirem múltiplos registos para a mesma Moeda, irá fundi-los num só. Isto irá fundir igualmente as Moedas para todos os outros módulos.',
-    'LBL_ACCOUNT_NAME' => 'Nome da Entidade',
+    'LBL_ACCOUNT_NAME' => 'Nome da Conta:',
     'LBL_CURRENCY' => 'Moeda',
-    'LBL_DATE_CLOSED' => 'Data Prevista',
+    'LBL_DATE_CLOSED' => 'Data Prevista:',
     'LBL_DATE_CLOSED_TIMESTAMP' => 'Carimbo da Data de Fecho Expectável',
     'LBL_TYPE' => 'Tipo',
     'LBL_CAMPAIGN' => 'Campanha:',
@@ -166,25 +170,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'O módulo {{plural_module_name}} permite-lhe acompanhar vendas individuais do início ao fim module. Cada registo {{module_name}} representa uma venda potencial e inclui dados de vendas relevantes, além de estar relacionado com outros registos importantes, como {{quotes_module}}, {{contacts_module}}, etc. Cada {{module_name}} progride normalmente através de várias Fases de Vendas até ser marcado como "Ganho" ou "Perdido". O {{plural_module_name}} pode ser ainda mais impulsionado com o módulo {{forecasts_singular_module}} do Sugar para entender e prever as tendências de vendas, bem como para o trabalho de foco com vista à obtenção de quotas de vendas.',
+    'LBL_HELP_RECORDS' => 'O módulo {{plural_module_name}} permite-lhe controlar as vendas individuais, do princípio ao fim. Cada registo de {{module_name}} representa uma possível venda e inclui dados de vendas relevantes, bem como referente a outros registos importantes, tais como {{quotes_module}}, {{contacts_module}}, etc. Um {{module_name}} avança habitualmente por várias Fases de Vendas até ser marcado como “Ganho Fechado” ou “Perda Fechado”. Os {{plural_module_name}} podem ser mais aproveitados se for usado o módulo de {{forecasts_singular_module}} para entender e prever as tendências de vendas, além de focar o trabalho para obter as quotas de vendas.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'O módulo {{plural_module_name}} permite seguir vendas individuais e os itens de linha que pertencem a essas vendas do princípio ao fim. Cada registo do {{module_name}} representa uma venda potencial e inclui dados de vendas relevantes, além de estar relacionado com outros registos importantes, como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'O módulo {{plural_module_name}} permite-lhe controlar as vendas individuais e os itens de linha pertencentes a essas vendas, do início ao fim. Cada registo de {{module_name}} representa uma possível venda e inclui dados de vendas relevantes, bem como referente a outros registos importantes, tais como {{quotes_module}}, {{contacts_module}}, etc.
 
-- Edite os campos deste registo clicando num campo individual ou no botão Editar.
-- Visualize ou modifique ligações para outros registos nos subpainéis, alternando o painel inferior esquerdo para "Visualização de Dados".
-- Crie e visualize comentários de utilizador e o histórico de alterações de registos no {{activitystream_singular_module}} alternando o painel esquerdo inferior para "Fluxo de Atividades".
-- Siga ou torne favorito este registo utilizando os ícones à direita do nome do registo.
-- Ações adicionais estão disponíveis no menu de seleção Ações à direita do botão Editar.',
+- Para editar os campos do registo, clique num campo individual ou no botão Editar.
+- Para ver ou modificar os links para outros registos dos subpainéis, alterne o painel inferior esquerdo para “Visualizar dados”.
+- Para fazer ou ver comentários de utilizadores e o historial de alterações do registo em {{activitystream_singular_module}}, alterne o painel inferior esquerdo para “Fluxo de Atividades”.
+- Para acompanhar ou marcar como favorito este registo, utilize os ícones à direita do nome do registo.
+- Existem ações adicionais no menu pendente Ações, à direita do botão Editar.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'O módulo {{plural_module_name}} permite-lhe acompanhar vendas individuais e os itens de linha que pertencem a essas vendas, do início ao fim. Cada registo {{module_name}} representa uma venda potencial e inclui dados de vendas relevantes, além de estar relacionado com outros registos importantes, como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'O módulo {{plural_module_name}} permite-lhe controlar as vendas individuais e os itens de linha pertencentes a essas vendas, do início ao fim. Cada registo {{module_name}} representa uma possível venda e inclui dados de vendas relevantes, bem como referente a outros registos importantes, tais como {{quotes_module}}, {{contacts_module}}, etc.
 
 Para criar um {{module_name}}:
-1. Forneça valores para os campos conforme pretendido.
- - Os campos marcados como "Obrigatório" deverão ser preenchidos antes de gravar.
- - Clique em "Mostrar Mais" para mostrar campos adicionais se necessário.
-2. Clique em "Gravar" para finalizar o novo registo e regressar à página anterior.',
+1. Forneça valores para os campos, conforme desejado.
+  - Os campos marcados "Obrigatório" devem ser preenchidos antes de guardar.
+  - Clique em “Mostrar mais” para expor campos adicionais, se necessário.
+2. Clique em “Guardar” para finalizar o novo registo e voltar à página anterior.',
 
 // END PRO/CORP
 

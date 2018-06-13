@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Řídicí panel seznamu zájemců',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Řídicí panel záznamů zájemců',
+
     'ERR_DELETE_RECORD' => 'Pro vymazání příležitosti musíte specifikovat číslo záznamu.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Popis společnosti',
     'LBL_ACCOUNT_ID'=>'ID společnosti',
@@ -302,4 +307,6 @@ Vytvoření modulu {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Skóre leada',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Reporty leadů',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Se souhlasem pro obchodní účely',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Poslední aktualizace souhlasu',
 );

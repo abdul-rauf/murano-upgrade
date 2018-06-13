@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashboard opportunitylijst',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashboard opportunityrecord',
+
     'LBL_MODULE_NAME' => 'Opportunities',
     'LBL_MODULE_NAME_SINGULAR' => 'Opportunity',
     'LBL_MODULE_TITLE' => 'Opportunities: Start',
@@ -166,25 +170,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Met de {{plural_module_name}} module kunt u de individuele verkoop van begin tot eind bijhouden. Elk {{module_name}}-record vertegenwoordigt een mogelijke verkoop en omvat relevante verkoopgegevens en heeft betrekking op andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc. Een {{module_name}} blijft doorgaans actief tijdens verschillende verkoopfases tot deze is gemarkeerd als "Gesloten, gewonnen" of "Gesloten, verloren". {{plural_module_name}} kan nog verder worden geleverd door de {{forecasts_singular_module}}-module van Sugar te gebruiken om verkooptrends te begrijpen en werk in te richten om verkoopquota&#39;s te behalen.',
+    'LBL_HELP_RECORDS' => 'In de module {{plural_module_name}} kunt u de individuele verkoop van begin tot eind volgen. Elk {{module_name}} record vertegenwoordigt een mogelijke verkoop en bevat relevante verkoopgegevens en andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc. Een {{module_name}} doorloopt doorgaans verscheidene verkoopfases tot deze wordt gemarkeerd als "Gesloten, gewonnen"of "Gesloten, verloren". {{plural_module_name}} kan nog verder worden uitgebouwd met de module {{forecasts_singular_module}} van Sugar om verkooptrends te begrijpen en voorspellen, en om het werk zo in te richten dat verkoopquota&#39;s worden behaald.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Met de {{plural_module_name}}-module kunt u van begin tot eind individuele verkoop volgen en de regelitems die tot die verkoop behoren. Elk {{module_name}}-record vertegenwoordigt een mogelijke verkoop en omvat relevante verkoopgegevens die bovendien ook betrekking hebben op andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'Met de module {{plural_module_name}} kunt u de individuele verkoop en de regelitems die bij deze verkoop horen van begin tot eind volgen. Elk {{module_name}} record vertegenwoordigt een mogelijke verkoop en bevat relevante verkoopgegevens, evenals andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc.
 
-- Bewerk de velden van dit record door op een individueel veld of de knop Bewerken te klikken.
-- Bekijk of wijzig links naar andere records in de subpanelen door het paneel linksonderin op "Gegevensweergave" te zetten.
-- Maak en bekijk opmerkingen van gebruikers en de recordveranderingsgeschiedenis in de {{activitystream_singular_module}} door het paneel linksonderin op "Activity Stream" te zetten.
-- Volg dit record of markeer het als favoriet door middel van de pictogrammen rechts van de naam van de record.
-- Extra acties kunnen worden uitgevoerd vanuit Acties vervolgkeuzemenu rechts van de knop Bewerken.',
+- De velden van dit record bewerken door op een individueel veld te klikken of de knop Bewerken.
+- Links naar andere records in de subpanelen bekijken of wijzigen door het paneel links onderin op "Gegevensweergave" te zetten.
+- Opmerkingen maken, opmerkingen van gebruikers bekijken en de veranderingsgeschiedenis bewaren in de {{activitystream_singular_module}} door het paneel links onderin op "Activity Stream" te zetten.
+- Dit record volgen of favoriet maken met de pictogrammen rechts van de naam van het record.
+- Aanvullende handelingen zijn beschikbaar in het vervolgkeuzemenu Acties rechts van de knop Bewerken.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Met de {{plural_module_name}} module kunt u de individuele verkoop van begin tot eind bijhouden. Elk {{module_name}}-record vertegenwoordigt een mogelijke verkoop en omvat relevante verkoopgegevens en heeft betrekking op andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc. 
+    'LBL_HELP_CREATE' => 'Met de module {{plural_module_name}} kunt u individuele verkopen en de regels die tot deze verkopen horen van begin tot eind volgen. Elk {{module_name}} record vertegenwoordigt een mogelijke verkoop en omvat relevante verkoopgegevens, evenals gegevens met betrekking tot andere belangrijke records, zoals {{quotes_module}}, {{contacts_module}}, etc.
 
 Een {{module_name}} aanmaken:
 1. Voer de gewenste waarden voor de velden in.
- - Velden gemarkeerd met "Verplicht" moeten worden ingevuld voordat u ze opslaat.
- - Klik indien nodig op "Meer tonen" om extra velden te tonen.
-2. Klik op "Opslaan" om de nieuwe record op te slaan en terug te keren naar de vorige pagina.',
+ - Velden gemarkeerd als "verplicht" moeten zijn ingevuld voordat u opslaat.
+ - Klik op "Meer tonen" om indien nodig extra velden te openen.
+2. Klik op "Opslaan" om het nieuwe record af te ronden en terug te keren naar de vorige pagina.',
 
 // END PRO/CORP
 

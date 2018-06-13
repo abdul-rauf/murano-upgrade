@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 11:25:40
+// created: 2018-06-13 15:14:56
 $viewdefs['Leads']['base']['view']['record'] = array (
   'buttons' => 
   array (
@@ -163,7 +163,32 @@ $viewdefs['Leads']['base']['view']['record'] = array (
         ),
         1 => 
         array (
-          'name' => 'full_name',
+          'type' => 'favorite',
+        ),
+        2 => 
+        array (
+          'type' => 'follow',
+          'readonly' => true,
+        ),
+        3 => 
+        array (
+          'name' => 'converted',
+          'type' => 'badge',
+          'dismiss_label' => true,
+          'readonly' => true,
+          'related_fields' => 
+          array (
+            0 => 'account_id',
+            1 => 'account_name',
+            2 => 'contact_id',
+            3 => 'contact_name',
+            4 => 'opportunity_id',
+            5 => 'opportunity_name',
+          ),
+        ),
+        4 => 
+        array (
+          'name' => 'name',
           'type' => 'fullname',
           'label' => 'LBL_NAME',
           'dismiss_label' => true,
@@ -178,31 +203,6 @@ $viewdefs['Leads']['base']['view']['record'] = array (
             ),
             1 => 'first_name',
             2 => 'last_name',
-          ),
-        ),
-        2 => 
-        array (
-          'type' => 'favorite',
-        ),
-        3 => 
-        array (
-          'type' => 'follow',
-          'readonly' => true,
-        ),
-        4 => 
-        array (
-          'name' => 'converted',
-          'type' => 'badge',
-          'dismiss_label' => true,
-          'readonly' => true,
-          'related_fields' => 
-          array (
-            0 => 'account_id',
-            1 => 'account_name',
-            2 => 'contact_id',
-            3 => 'contact_name',
-            4 => 'opportunity_id',
-            5 => 'opportunity_name',
           ),
         ),
       ),

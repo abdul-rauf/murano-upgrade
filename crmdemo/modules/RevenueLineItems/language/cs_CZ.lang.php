@@ -11,8 +11,12 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Řídicí panel seznamu řádků tržeb',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Řídicí panel záznamů řádků tržeb',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Produkt kampaně',
-    'LBL_MODULE_NAME' => 'Řádky obchodu',
+    'LBL_MODULE_NAME' => 'Řádky tržby',
     'LBL_MODULE_NAME_SINGULAR' => 'Řádek tržby',
     'LBL_MODULE_TITLE' => 'Řádky tržeb: Domů',
     'LBL_SEARCH_FORM_TITLE' => 'Vyhledat řádek tržby',
@@ -141,7 +145,7 @@ $mod_strings = array(
     //For export labels
     'LBL_EXPORT_CURRENCY_ID' => 'ID měny',
     'LBL_CURRENCY_RATE' => 'Kurz měny',
-    'LBL_DATE_CLOSED' => 'Předpokládané datum uzavření',
+    'LBL_DATE_CLOSED' => 'Předpokládané datum uzavření:',
     'LBL_DATE_CLOSED_TIMESTAMP' => 'Předpokládané datum a čas uzavření',
     'LBL_COMMIT_STAGE' => 'Fáze schválení',
     'LBL_COMMIT_STAGE_FORECAST' => 'Předpověď',

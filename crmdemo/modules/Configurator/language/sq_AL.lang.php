@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Ky është emri që shfaqet në shtyllën e titullit të shfletuesit tuaj.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Mundëson/pamundëson emaila nga kontakte të ndërlidhura për ti trguar nga subpaneli i emailave.',
 
-    'LBL_OC_STATUS'                     => 'Statusi i çaktivzuar i klientëve jashtë linje',
-    'DEFAULT_OC_STATUS'                 => 'Mundëso Klinetin jashtë linje përmes çaktivizimit',
-    'LBL_OC_STATUS_DESC' => 'Kontrolloni këtu nëse ju dëshironi qδ çdo përdorues të ketë qasje në Klientin offline. Përndryshe ju mund të konfiguroni qasje në nivel të përdoruesit.',
     'SESSION_TIMEOUT' => 'Kufiri kohor i sesionit të portalit',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Portal Sesioni i skaduar është për versionet e trashëguara të Sugar Portalit në verzionet 6.5 dhe më të vjetra.',
     'UPLOAD_MAXSIZE_UNITS' => 'bajt',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML URL logimi nuk mund të jetë i zbrazur',
     'ERR_EMPTY_SAML_CERT' => 'SAML çertifikata nuk mund të jetë e zbrazur',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'Identifikuesi i subjektit SAML nuk lejohet bosh',
     'ERR_SAML_LOGIN_URL' => 'SAML URL logimi nuk është valid',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL nuk vshtë valid',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'Skedari PEM duhet të përmbajë kod privat',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'Skedari PEM duhet të përmbajë certifikatë x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Certifikata e dhënë x.509 nuk përkon me kodin privat',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Transmetimi i aktiviteteve',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Aktivizo transmetimin e aktiviteteve',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Aktivizon transmetimet e aktiviteteve për aplikacionin',
 );
 
 

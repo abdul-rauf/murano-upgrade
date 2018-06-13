@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Pulpit listy możliwości',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Pulpit rekordów możliwości',
+
     'LBL_MODULE_NAME' => 'Szanse',
     'LBL_MODULE_NAME_SINGULAR' => 'Szansa',
     'LBL_MODULE_TITLE' => 'Szanse: Strona główna',
@@ -166,25 +170,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduł {{plural_module_name}} umożliwia śledzenie poszczególnych sprzedaży od początku do końca. Każdy rekord {{module_name}} zawiera potencjalną sprzedaż i obejmuje odpowiadające dane sprzedaży, a także odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. Rekord {{module_name}} zazwyczaj będzie przechodzić przez kilka etapów sprzedaży, dopóki nie zostanie oznaczony albo Zamknięta zrealizowana lub Zamknięta niezrealizowana. Rekordy {{plural_module_name}} mogą być dalej wykorzystywane za pomocą modułu Prognozowania w systemie Sugar do zrozumienia i przewidywania trendów w sprzedaży, a także koncentracji pracy w celu osiągnięcia targetów sprzedaży.',
+    'LBL_HELP_RECORDS' => 'Moduł {{plural_module_name}} pozwala na śledzenie poszczególnych sprzedaży od początku do końca. Każdy rekord {{module_name}} reprezentuje potencjalną sprzedaż i obejmuje istotne dane sprzedaży jak również dane odnoszące się do innych ważnych zapisów, takich jak {{quotes_module}}, {{contacts_module}} itp. {{module_name}} będzie zazwyczaj występował w kilku etapach sprzedaży, dopóki nie zostanie oznaczony jako „Zamknięty wygrany” lub „Zamknięty przegrany”. {{plural_module_name}} mogą posłużyć jeszcze w aplikacji Sugar w module {{forecasts_singular_module}} jako pomoc w zrozumieniu i przewidywaniu trendów sprzedaży oraz koncentrowaniu prac na osiąganiu norm sprzedaży.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moduł {{plural_module_name}} umożliwia śledzenie indywidualnej sprzedaży i powiązanych z nią pozycji od początku do końca. Każdy rekord {{module_name}} zawiera potencjalną sprzedaż i obejmuje odpowiadające dane sprzedaży, a także odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. 
+    'LBL_HELP_RECORD' => 'Moduł {{plural_module_name}} pozwala na śledzenie poszczególnych sprzedaży i pozycji wiersza należącego do tych sprzedaży od początku do końca. Każdy rekord {{module_name}} reprezentuje potencjalną sprzedaż i obejmuje istotne dane sprzedaży jak również dane odnoszące się do innych ważnych zapisów, takich jak {{quotes_module}}, {{contacts_module}} itp. 
 
-- Edytuj pola tego rekordu poprzez kliknięcie odpowiedniego pola lub przycisku Edytuj.
-- Przeglądaj lub modyfikuj powiązania z innymi rekordami w panelach podrzędnych, przełączając widok lewego dolnego panelu na Widok danych.
-- Dodawaj i przeglądaj komentarze użytkowników i zapisuj historię zmian rekordu w module {{activitystream_singular_module}} poprzez przełączenie widoku dolnego lewego panelu na Panel aktywności.
-- Obserwuj lub dodaj do ulubionych ten rekord za pomocą ikon znajdujących się z prawej strony nazwy rekordu.
-- Dodatkowe działania dostępne są w liście rozwijanej menu Działania po prawej stronie przycisku Edytuj.',
+- Edytuj pola tego rekordu, klikając w poszczególne pola lub przycisk Edytuj.
+- Wyświetl lub modyfikuj linki do innych rekordów w panelach podrzędnych, przełączając dolny lewy panel na „Widok danych”.
+- Wpisuj i wyświetlaj komentarze użytkowników oraz historię zmian rekordów w {{activitystream_singular_module}}, przełączając lewy dolny panel na „Strumień aktywności”.
+- Śledź ten rekord lub dodaj go do ulubionych za pomocą ikon z prawej strony nazwy rekordu.
+- Dodatkowe czynności są dostępne w rozwijanym menu działań po prawej stronie przycisku Edytuj.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduł {{plural_module_name}} umożliwia śledzenie indywidualnej sprzedaży i powiązanych z nią pozycji od początku do końca. Każdy rekord {{module_name}} zawiera potencjalną sprzedaż i obejmuje odpowiadające dane sprzedaży, a także odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. 
+    'LBL_HELP_CREATE' => 'Moduł {{plural_module_name}} pozwala na śledzenie poszczególnych sprzedaży i pozycji wiersza należącego do tych sprzedaży od początku do końca. Każdy rekord {{module_name}} reprezentuje potencjalną sprzedaż i obejmuje istotne dane sprzedaży jak również dane odnoszące się do innych ważnych zapisów, takich jak {{quotes_module}}, {{contacts_module}} itp. 
 
-Aby utworzyć rekord {{module_name}}:
+Aby utworzyć moduł {{module_name}}:
 1. Wprowadź żądane wartości w polach.
- - Pola oznaczone jako Wymagane należy wypełnić przez zapisaniem.
- - W razie potrzeby kliknij opcję Wyświetl więcej, aby wyświetlić dodatkowe pola.
-2. Kliknij opcję Zapisz, aby zakończyć nowy rekord i wrócić do poprzedniej strony.',
+ - Pola oznaczone jako „Wymagane” należy wypełnić przed zapisaniem.
+ - W razie potrzeby kliknij opcję „Wyświetl więcej”, aby wyświetlić dodatkowe pola.
+2. Kliknij opcję „Zapisz”, aby zakończyć nowy rekord i wrócić do poprzedniej strony.',
 
 // END PRO/CORP
 

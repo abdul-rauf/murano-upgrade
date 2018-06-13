@@ -34,23 +34,6 @@ $mod_strings = array(
 
     'ERR_DB_VERSION_FAILURE'			=> 'לא ניתן לבדוק את גרסת מסד הנתונים.',
 
-
-	'ERR_OC_PASSWORD'					=> 'דרושה סיסמה.',
-	'ERR_OC_SERVER_URL'					=> 'נדרש הURL של שרת הSugar.',
-	'ERR_OC_USERNAME'					=> 'נדרש שם המשתמש של משתמש השרת.',
-	'LBL_INSTALL_OC'					=> 'התקן לקוח במצב לא מקוון',
-    'LBL_OC_ADMIN'                      => 'אנא פנה למנהל שלך על מנת לפתור בעיה זו.',
-    'LBL_OC_SUCCESS'                    => 'התקנת לקוח במצב לא מקוון הושלמה. אנא לחץ על הכפתור למטה כדי לעבור להתקנה שלך.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'שם המשתמש של מנהל המערכת',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'אנא הזן את הפרטים הבאים על מנת להתקין ולסנכרן כראוי הלקוח במצב לא מקוון שלך.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'הURL של שרת הSugar',
-	'LBL_OC_INSTALL_PASS'				=> 'סיסמת משתמש השרת',
-	'LBL_OC_INSTALL_TITLE'				=> 'התקנת לקוח במצב לא מקוון',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'זהו שם המשתמש שאיתו אתה תתחבר לשרת הSugar שלך.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'שם משתמש',
-	'LBL_PERFORM_OC_INSTALL'			=> 'מאתחל התקנת לקוח במצב לא מקוון',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'אנא הזן את הפרטים הבאים על מנת להתקין ולסנכרן כראוי הלקוח במצב לא מקוון שלך.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Provide the user name for the Sugar admin user.',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Provide the password for the Sugar admin user.',
@@ -58,7 +41,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'שגיאות אותרו במהלך בדיקת תאימות. על מנת שהתקנת הSugarCRM שלך תתפקד כראוי, בבקשה תנקוט בצעדים המתאימים כדי לטפל בבעיות המפורטים להלן וגם לחץ על כפתור בדוק מחדש, או נסה להתקין שוב.',
     'ERR_CHECKSYS_CALL_TIME'            => 'הפניית העברת זמן שיחה מופעלת (יש להגדיר את זה לכבויה ב-php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'לא נמצא: מתזמן Sugar יפעל עם פונקציונליות מוגבלת. שירות הארכיון להודעות דוא"ל לא יפעל.',
+	'ERR_CHECKSYS_CURL'					=> 'לא נמצא: \'מתזמן Sugar\' יפעל עם פונקציונליות מוגבלת. שירות ההעברה לארכיון של הודעות דוא"ל לא יפעל.',
     'ERR_CHECKSYS_IMAP'					=> 'לא נמצא: InboundEmail ו-Campaigns (דוא"ל) דורשים ספריות IMAP. שניהם לא יפעלו.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'לא ניתן להפעיל Magic Quotes GPC בעת השימוש בשרת MS SQL.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Warning:',
@@ -74,7 +57,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'לחוויה אופטימלית באמצעות sapi IIS/FastCGI, הגדר fastcgi.logging ל0 בקובץ ה-php.ini שלך.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'מותקנת גרסת PHP לא נתמכת: (גרסה',
     'LBL_DB_UNAVAILABLE'                => 'מסד נתונים אינו זמין',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'תמיכת מסד הנתונים לא נמצאה. נא ודא שברשותך מנהלי ההתקנים הנחוצים עבור אחד מסוגי מסדי הנתונים הנתמכים הבאים: MySQL‏, MS SQLServer‏, Oracle או DB2. ייתכן שתצטרך לבטל את הסימון כהערה של סיומת קובץ ה-php.ini, או להדר מחדש עם הקובץ הבינארי נכון, בהתאם לגירסת PHP שלך. נא עיין במדריך PHP לקבלת מידע נוסף אודות הדרך לאפשר תמיכת מסד נתונים.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'לא נמצאה תמיכה במסד הנתונים.  נא ודא שיש לך את מנהלי ההתקנים הנחוצים עבור אחד מסוגי מסד הנתונים הנתמכים הבאים: MySQL, MS SQLServer, Oracle, or DB2.  ייתכן שיהיה עליך לשנות את הסיומת בקובץ php.ini, או להדר מחדש עם הקובץ הבינארי הנכון, תלוי בגרסה שלכם של PHP.  נא עיין במדריך PHP לקבלת מידע נוסף אודות כיצד לאפשר תמיכה במסד הנתונים.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'לא נמצאו פונקציות הקשורות לספריות מנתח XML הנחוצים ליישום ה-Sugar. ייתכן שתצטרך להוריד את התגובה של השלוחה בקובץ php.ini, או להדר מחדש עם הקובץ הבינארי הנכון, בהתאם לגרסת ה-PHP שלך. נא עיין במדריך PHP שלך לקבלת מידע נוסף.',
     'LBL_CHECKSYS_CSPRNG' => 'מחולל מספרים אקראיים',
     'ERR_CHECKSYS_MBSTRING'             => 'לא נמצאו פונקציות הקשורות לשלוחת מחרוזות מרובות הבתים של PHP (mbstring) הנחוצים ליישום ה-Sugar. <br/><br/>באופן כללי, מודול ה-mbstring לא מופעל כברירת מחדל ב-PHP וחייב להיות מופעל עם --אפשר-mbstring כאשר ה-PHP הבניארי בנוי. נא עיין במדריך PHP שלך לקבלת מידע נוסף על כיצד לאפשר תמיכת mbstring.',
@@ -147,7 +130,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'העלה גודל הקובץ',
 	'ERR_URL_BLANK'						=> 'ספק את ה-URL הבסיסי למופע ה-Sugar.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'לא ניתן לאתר רישום התקנה של',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'The uploaded file is not compatible with this flavor (Community Edition, Professional, or Enterprise) of Sugar:',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'הקובץ שהועלה אינו תואם את טעם זה (מהדורת Professional, Enterprise או Ultimate) של Sugar: ',
 	'ERROR_LICENSE_EXPIRED'				=> "Error: Your license expired",
 	'ERROR_LICENSE_EXPIRED2'			=> "day(s) ago.   Please go to the <a href=&#39;index.php?action=LicenseSettings&module=Administration&#39;>&#39;\"License Management\"</a>  in the Admin screen to enter your new license key.  If you do not enter a new license key within 30 days of your license key expiration, you will no longer be able to log in to this application.",
 	'ERROR_MANIFEST_TYPE'				=> 'קובץ המנשר חייב לציין את סוג החבילה.',
@@ -292,9 +275,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'תאריך תפוגה',
 	'LBL_LICENSE_I_ACCEPT'				=> 'אני מסכים',
 	'LBL_LICENSE_NUM_USERS'				=> 'מספר משתמשים',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'אנא הזן את מספר חשבונות המשתמש הלא מקוונים שנרכשו.',
-	'LBL_LICENSE_OC_NUM'				=> 'מספר רישיונות של חשבונות משתמשים לא מקוונים',
-	'LBL_LICENSE_OC'					=> 'רישיונות משתמשים לא מקוונים',
 	'LBL_LICENSE_PRINTABLE'				=> 'Printable View',
     'LBL_PRINT_SUMM'                    => 'סיכום הדפסה',
 	'LBL_LICENSE_TITLE_2'				=> 'רישיון SugarCRM',
@@ -478,10 +458,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'הגדרות איסוף',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'הזן שם מערכת עבור מופע Sugar.',
 	'LBL_PATCH_UPLOAD' => 'בחר קובץ טלאי מהמחשב המקומי שלך',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'Php version 5 or above is required.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(Your current php version is',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php Backward Compatibility mode is turned on. Set zend.ze1_compatibility_mode to Off for proceeding further',
 
     'advanced_password_new_account_email' => array(
@@ -501,5 +477,3 @@ $mod_strings = array(
         'name' => 'שכחת את סיסמת הדואר האלקטרוני',
         ),
 );
-
-?>

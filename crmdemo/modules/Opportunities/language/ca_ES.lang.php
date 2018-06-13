@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Quadre de comandament del llistat d&#39;oportunitats',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Quadre de comandament del registre d&#39;oportunitats',
+
     'LBL_MODULE_NAME' => 'Oportunitats',
     'LBL_MODULE_NAME_SINGULAR' => 'Oportunitat',
     'LBL_MODULE_TITLE' => 'Oportunitats: inici',
@@ -79,7 +83,7 @@ $mod_strings = array(
     'LBL_DUPLICATE' => 'Possible oportunitat duplicada',
     'MSG_DUPLICATE' => 'El registre per l´oportunitat que va a crear podría ser un duplicat d´un altre registre d´oportunitat existent. Els registres d´oportunitat amb noms similars es llisten a continuació.<br>Faci clic en Guardar per continuar amb la creació d´aquesta oportunitat, o en Cancelar per tornar al mòdul sense crear l´oportunitat.',
     'LBL_NEW_FORM_TITLE' => 'Crear oportunitat',
-    'LNK_NEW_OPPORTUNITY' => 'Crear oportunitat',
+    'LNK_NEW_OPPORTUNITY' => 'Crea oportunitat',
     'LNK_CREATE' => 'Crear tracte',
     'LNK_OPPORTUNITY_LIST' => 'Oportunitats',
     'ERR_DELETE_RECORD' => 'Per suprimir l&#39;oportunitat, heu d&#39;especificar un número de registre.',
@@ -166,19 +170,19 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals de principi a fi. Cada registre de {{module_name}} representa una venda potencial i inclou dades rellevants de la venda així com altres registres importants com ara {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalment evoluciona per diferents Fases de venda fins que es marca amb "Tancada guanyada" o "Tancada perduda". {{plural_module_name}} es poden aprofitar fins i tot més tard utilitzant el mòdul {{forecasts_singular_module}} de Sugar per entendre i anticipar tendències de vendes i per assolir quotes de venda.',
+    'LBL_HELP_RECORDS' => 'El mòdul {{plural_module_name}} us permet fer una seguiment de les vendes individuals de principi a fi. Cada registre de {{module_name}} representa una venda potencial i inclou les dades de la venda rellevant, aixi com les dades relacionades amb altres registres importants, com ara {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalment passarà a través de diverses fases de venda fins que es marca com "Tancat guanyat" o "Tancat perdut". {{plural_module_name}} es poden es pot aprofitar encara més utilitzant el mòdul {{forecasts_singular_module}} per entendre i predir les tendències de vendes i també per enfocar la feina per assolir quotes de vendes.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de vendes individuals i dels elements de línia que pertanyen a les vendes des del principi fins al final. Cada registre de {{module_name}} representa una venda potencial i n&#39;inclou dades rellevants, a més d&#39;altres registres importants com {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de vendes individuals i dels elements de línia que pertanyen a aquestes vendes des del principi fins al final. Cada registre {{module_name}} representa una possible venda i inclou dades relevants d&#39;aquesta i relatius a altres registres importants, com ara {{quotes_module}}, {{contacts_module}}, etc. 
 
-- Editeu els camps d&#39;aquest registre fent clic a un camp individual o amb el botó Edita.
-- Vegeu o modifiqueu enllaços a altres registres als subpanells mitjançant la commutació de la subfinestra inferior esquerra a la "Vista de dades".
-- Feu i vegeu comentaris d&#39;usuari i l&#39;historial de canvis del registre al {{activitystream_singular_module}} mitjançant la commutació de la subfinestra inferior esquerra al "Canal d&#39;activitat".
-- Feu el seguiment d&#39;aquest favorit o marqueu-lo com a favorit amb les icones que hi ha a la dreta del nom del registre.
-- Hi ha accions addicionals disponibles al menú desplegable d&#39;accions a la dreta del botó Edita.',
+- Editeu els camps d&#39;aquest registre fent clic a un camp o al botó Edita.
+- Visualitzeu o modifiqueu els enllaços a altres registres als subpanells commutant la subfinestra inferior esquerra a "Vista de dades".
+- Feu i vegeu comentaris d&#39;usuari i l&#39;historial de canvis del registre a {{activitystream_singular_module}} commutant la subfinestra inferior esquerra a "Seqüència d&#39;activitats".
+- Feu el seguiment d&#39;aquest registre o marqueu-lo com a favorit amb les icones que hi ha a la dreta del nom del registre.
+- Hi ha accions addicionals disponibles al menú desplegable Accions, a la dreta del botó Edita.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de vendes individuals i dels elements de línia que pertanyen a les vendes des del principi fins al final. Cada registre de {{module_name}} representa una venda potencial i n&#39;inclou dades rellevants, a més d&#39;altres registres importants com {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals i dels elements de línia que pertanyen a aquestes vendes de principi a fi. Cada registre {{module_name}} representa una possible venda i inclou dades relevants de la mateixa i també d&#39;altres registres importants com ara {{quotes_module}}, {{contacts_module}}, etc.
 
 Per crear un {{module_name}}:
 1. Proporcioneu els valors desitjats per als camps.

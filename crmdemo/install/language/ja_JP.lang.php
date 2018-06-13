@@ -34,23 +34,6 @@ $mod_strings = array(
 
     'ERR_DB_VERSION_FAILURE'			=> 'データベースのバージョンを確認できません。',
 
-
-	'ERR_OC_PASSWORD'					=> 'パスワードが必要です。',
-	'ERR_OC_SERVER_URL'					=> 'SugarCRMのサーバURLが必要です。',
-	'ERR_OC_USERNAME'					=> 'サーバユーザのユーザ名が必要です。',
-	'LBL_INSTALL_OC'					=> 'オフラインクライアントのインストール',
-    'LBL_OC_ADMIN'                      => 'この問題を解決するには管理者にご相談ください。',
-    'LBL_OC_SUCCESS'                    => 'オフラインクライアントのインストールが完了しました。以下のボタンをクリックしてください。',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> '管理者のユーザ名',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'オフラインクライアントを正しくインストール、同期させるには以下の設定を入力してください。',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'SugarサーバのURL',
-	'LBL_OC_INSTALL_PASS'				=> 'サーバユーザのパスワード',
-	'LBL_OC_INSTALL_TITLE'				=> 'オフラインクライアントのインストール',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'これはSugarサーバに接続するためのユーザ名です。',
-	'LBL_OC_INSTALL_USERNAME'			=> 'ユーザ名',
-	'LBL_PERFORM_OC_INSTALL'			=> 'オフラインクライアントのインストールを初期化しています',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'オフラインクライアントを正しくインストール、同期させるには以下の設定を入力してください。',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'SugarCRM管理者のユーザIDを入力してください。',
 	'ERR_ADMIN_PASS_BLANK'				=> 'SugarCRM管理者のパスワードを入力してください。',
@@ -58,7 +41,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => '整合性チェックの際にエラーが検出されました。SugarCRMを正常に動作させるため、以下にリストされた問題を解決し、再チェックボタンをクリックするか、インストールをやり直してください。',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass ReferenceがOnになっています（php.iniでOffに設定してください）',
 
-	'ERR_CHECKSYS_CURL'					=> '見つかりません：Sugarスケジューラーの機能は制限されます。メールアーカイブサービスは動作しません。',
+	'ERR_CHECKSYS_CURL'					=> '見つかりません: Sugarスケジューラは機能制限付きで実行されます。Eメールアーカイブは実行されません。',
     'ERR_CHECKSYS_IMAP'					=> '見つかりません: インバウンドEメールとキャンペーンEメールを利用するためにはIMAPライブラリが必要です。この２つは動作しません。',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'SQL Serverを使用する場合はMagic Quotes GPCをOnにできません。',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> '警告:',
@@ -74,7 +57,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS/FastCGI SAPIを適切に使用するためには、php.iniファイルで fastcgi.logging を 0 に設定してください。',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'このPHPのバージョンはサポート外です:  ( ver',
     'LBL_DB_UNAVAILABLE'                => 'データベースが利用不可能です。',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'データベースのサポートが見つかりません。サポートされているデータベースタイプ (MySQL、MS SQL Server、Oracle または DB2) のいずれかで必要なドライバがインストールされていることを確認してください。お使いのPHPのバージョンによっては、php.iniファイルの当該エクステンションの行のコメントをはずすか、正しいバイナリ ファイルでPHPをコンパイルし直す必要があります。データベースサポートを有効にする詳しい方法についてはPHPのマニュアルを参照ください。',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'データベース サポートが見つかりませんでした。次のサポートされているデータベース タイプ（MySQL、MS SQLServer、Oracle、または DB2）の 1 つに必要なドライバーがあるか確認してください。PHP のバージョンにより、php.ini ファイルで拡張のコメントを外すか、または適切なバイナリ ファイルを再コンパイルする必要があります。データベース サポートを有効にする方法に関する詳細は、PHP マニュアルを参照してください。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'XMLパーサライブラリに関連する機能が見つかりません。お使いのPHPのバージョンによっては、php.iniファイルの当該エクステンションの行のコメントをはずすか、PHPをコンパイルし直す必要があります。データベースをサポートする詳しい方法についてはPHPのマニュアルを参照ください。',
     'LBL_CHECKSYS_CSPRNG' => '乱数ジェネレーター',
     'ERR_CHECKSYS_MBSTRING'             => 'マルチバイトストリングをサポートするエクステンション（mbstring）が見つかりません。エクステンションがインストールされていないか、PHPがコンパイルされる際にmbstringモジュールが有効になっていない可能性があります。mbstringを有効にする方法についてはPHPのマニュアルを参照ください。',
@@ -147,7 +130,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'アップロードファイルサイズ',
 	'ERR_URL_BLANK'						=> 'SugarインスタンスのURLを入力してください。',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'インストール情報が確認できません:',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'アップロードされたファイルはこのSugarのエディション (Community Edition、Professional Edition、またはEnterprise Edition) と互換性がありません。',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'アップロードされたファイルはこのSugarのフレーバー (Professional、Enterprise、または Ultimate エディション) と互換性がありません: ',
 	'ERROR_LICENSE_EXPIRED'				=> "エラー: ライセンスは",
 	'ERROR_LICENSE_EXPIRED2'			=> "日前に切れています。管理メニューの<a href=&#39;index.php?action=LicenseSettings&module=Administration&#39;>ライセンス管理</a>に進み、新しいライセンスキーを入力してください。ライセンスが切れてから30日以内に新たなライセンスキーを入力しない場合、アプリケーションにログインできなくなります。",
 	'ERROR_MANIFEST_TYPE'				=> 'マニフェストファイルはパッケージタイプを指定する必要があります。',
@@ -292,9 +275,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> '有効期限',
 	'LBL_LICENSE_I_ACCEPT'				=> '許可',
 	'LBL_LICENSE_NUM_USERS'				=> 'ユーザ数',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> '購入したオフラインクライアントの数を入力してください。',
-	'LBL_LICENSE_OC_NUM'				=> 'オフラインクライアントライセンスの数',
-	'LBL_LICENSE_OC'					=> 'オフラインクライアントライセンス数',
 	'LBL_LICENSE_PRINTABLE'				=> '印刷用',
     'LBL_PRINT_SUMM'                    => '概要を印刷',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRMライセンス',
@@ -478,10 +458,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'コレーション設定',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Sugarインスタンスのシステム名を入力してください。',
 	'LBL_PATCH_UPLOAD' => 'ローカルコンピュータからパッチを選択してください。',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'PHPのバージョンは5以上である必要があります。',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '（現在のPHPバージョンは',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP下位互換モードが有効になっています。先に進めるためにzend.ze1_compatibility_modeをOffにセットしてください。',
 
     'advanced_password_new_account_email' => array(
@@ -501,5 +477,3 @@ $mod_strings = array(
         'name' => 'パスワードのリセットのお知らせ',
         ),
 );
-
-?>

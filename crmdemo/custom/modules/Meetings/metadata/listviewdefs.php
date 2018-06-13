@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 14:43:59
+// created: 2018-06-13 15:14:34
 $listViewDefs['Meetings'] = array (
   'SET_COMPLETE' => 
   array (

@@ -34,23 +34,6 @@ $mod_strings = array(
 
     'ERR_DB_VERSION_FAILURE'			=> '데이타베이스 버전을 확인할수 없습니다.',
 
-
-	'ERR_OC_PASSWORD'					=> '비밀번호가 필요합니다.',
-	'ERR_OC_SERVER_URL'					=> 'Sugar 서버 URL이 필요합니다.',
-	'ERR_OC_USERNAME'					=> '서버 사용자의 이름이 필요합니다.',
-	'LBL_INSTALL_OC'					=> '오프라인 고객 설치',
-    'LBL_OC_ADMIN'                      => '이 문제의 해결을 위해서는 관리자에 문의 하십시요.',
-    'LBL_OC_SUCCESS'                    => '오프라인 고객 설치가 완료되었습니다. 설치를 실행하려면 아래 버튼을 클릭하십시요.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> '관리자 사용자명',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> '올바른 설치와 오프라인 고객의 일치화를 위해 아래 세부설명을 입력하십시요.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'Sugar 서버의 URL',
-	'LBL_OC_INSTALL_PASS'				=> '서버 사용자의 비밀번호',
-	'LBL_OC_INSTALL_TITLE'				=> '오프라인 고객 설치',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> '이것은 Sugar서버와 연결할 사용자명입니다.',
-	'LBL_OC_INSTALL_USERNAME'			=> '사용자명',
-	'LBL_PERFORM_OC_INSTALL'			=> '오프라인 고객 설치 초기화중',
-    'LBL_OC_INSTALL_DIRECTIONS'         => '올바른 설치와 오프라인 고객의 일치화를 위해 아래 세부설명을 입력하십시요.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Sugar 관리자 사용자를 위한 사용자명을 입력해 주십시요.',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Sugar 관리자 사용자를 위한 비밀번호을 입력해 주십시요',
@@ -74,7 +57,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS/FastCGI sapi의 최고의 사용경험을 위해 php.ini파일의 fastcgi.logging 을 0으로 설정하십시요.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> '지원되지 않는 PHP버전이 설치되었습니다.',
     'LBL_DB_UNAVAILABLE'                => '데이타베이스가 이용불가합니다.',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '데이터베이스 지원을 찾을 수 없습니다. MySQL, MS SQLServer, Oracle, DB2와 같이, 지원되는 데이터베이스 유형에 필요한 드라이버가 있는지 확인하십시오. 사용자의 PHP버전에 따라 php.ini 파일 내 확장 주석을 제거하거나 올바른 이진 파일로 다시 컴파일해야 할 수도 있습니다. 데이터베이스 지원 설정 관련 상세 정보는 사용자의 PHP 설명서를 참조하십시오.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '데이터베이스 지원을 찾을 수 없습니다. MySQL, MS SQLServer, Oracle, DB2처럼  지원되는 데이터베이스 유형 중 하나에 필요한 드라이버가 있는지 확인하십시오. PHP 버전에 따라 php.ini 파일에서 확장자의 주석을 제거하거나 올바른 바이너리 파일로 다시 컴파일해야 할 수도 있습니다. 데이터베이스 지원을 활성화하는 방법에 대한 더 자세한 정보는 PHP Manual을 참조하십시오.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugar 어플리케이션에 필요한 XML Parser Libraries 연결 기능이 발견되지 않았습니다. PHP버전에 따라 php.ini 파일 확장을 uncomment 하거나 이진 파일을 재편집해야 합니다. 더 자세한 정보를 위해PHP 안내서를 참조하십시요.',
     'LBL_CHECKSYS_CSPRNG' => '난수 생성기',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugar 어플리케이션에 필요한 Multibyte Strings PHP (mbstring)확장에 연결 기능이 발견되지 않았습니다. 일반적으로 mbstring 모듈은 PHP초기설정에 의해 작동이 불가하며 반드시 이원체 설치가 완료된후 사용가능한 mbstring과 같이 작동되어야 합니다. mbstring 작동가능 지원에 관한 더 자세한 정보를 위해서 PHP 안내서를 참조하십시오.',
@@ -147,7 +130,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => '파일크기 전송',
 	'ERR_URL_BLANK'						=> 'Sugar예를 위한 기본 URL을 입력하십시오.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> '다음 설치된 기록을 찾을 수 없습니다:',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> '전송된 파일이 Sugar의 커뮤니티 에디션, 프로페셔널 또는 엔터프라이즈에 적용할수 없습니다.',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => '전송된 파일은 Sugar의 프로페셔널, 엔터프라이즈, 얼티메이트 에디션에 적용할 수 없습니다.',
 	'ERROR_LICENSE_EXPIRED'				=> "오류: 라이센스가",
 	'ERROR_LICENSE_EXPIRED2'			=> "~일 전. &#39;\"라이센스 관리\"에 접속하여 관리자 창에 새로운 라이센스 키를 입력하십시오. 라이센스 만료 30일 전에 새 키를 입력하지 않으면 이 어플리케이션의 접속이 제한됩니다.",
 	'ERROR_MANIFEST_TYPE'				=> '현재 파일이 반드시 패키지형식을 지정해야합니다.',
@@ -292,9 +275,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> '만료일',
 	'LBL_LICENSE_I_ACCEPT'				=> '수락합니다.',
 	'LBL_LICENSE_NUM_USERS'				=> '사용자 수',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> '오프라인 구매고객 수를 입력하십시오.',
-	'LBL_LICENSE_OC_NUM'				=> '오프라인 고객 라이센스 수',
-	'LBL_LICENSE_OC'					=> '오프라인 라이센스',
 	'LBL_LICENSE_PRINTABLE'				=> '출력 화면',
     'LBL_PRINT_SUMM'                    => '출력 요약',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRM 라이센스',
@@ -478,10 +458,6 @@ $mod_strings = array(
     'LBL_COLLATION' => '대조 설정',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Sugar 예를 위한 시스템명을 입력하십시오',
 	'LBL_PATCH_UPLOAD' => '현 컴퓨터에서 패치 파일을 선택하십시오',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'PHP버전 5나 그 상위 버전이 필요합니다.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '귀하의 현재 php버전은 다음과 같습니다.',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP 역방향 적합성 모드가 작동중입니다. 계속 진행하려면 zend.ze1_compatibility_mode 를 작동을 중지하십시오.',
 
     'advanced_password_new_account_email' => array(
@@ -501,5 +477,3 @@ $mod_strings = array(
         'name' => '이메일 비밀번호 분실',
         ),
 );
-
-?>

@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Fırsatlar Listesi Panosu',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Fırsatlar Kaydı Panosu',
+
     'LBL_MODULE_NAME' => 'Fırsatlar',
     'LBL_MODULE_NAME_SINGULAR' => 'Fırsat',
     'LBL_MODULE_TITLE' => 'Fırsatlar: Ana Sayfa',
@@ -166,25 +170,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} modülü, satışları başından sonuna kadar izlemenize olanak sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve hem ilgili satış verilerini hem de {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir. Bir {{module_name}}, Satış Aşamaları "Kazanılarak Kapandı" veya "Kaybedilerek Kapandı" şeklinde işaretlenene kadar genellikle birçok satış aşaması üzerinden ilerler. {{plural_module_name}}, Sugar {{forecasts_singular_module}} modülüne veri olarak ve satış trendlerininin anlaşılması ve tahmin edilmesi aynı zamanda satış kotlarını tutturmak üzere çalışmaya odaklanılması için kullanılabilir.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} modülü, münferit satışları başından sonuna kadar takip etmenizi sağlar. Her {{module_name}} kaydı, ileriye yönelik bir satışı belirtir ve ilgili satış bilgilerini aynı zamanda {{quotes_module}}, {{contacts_module}} gibi ilgili diğer önemli bilgileri içerir. Bir {{module_name}} modülü, modülü genellikle "Başarıyla Kapandı" veya "Başarısızlıkla Kapandı" olarak işaretlenene kadar birçok Satış Aşaması boyunca ilerler. {{plural_module_name}} modülü, satış trendlerini anlamak ve tahmin etmek aynı zamanda satış kotalarına ulaşmak için çalışmaya odaklanmak için Sugar&#39;ın {{forecasts_singular_module}} modülü kullanılarak daha da fazla geliştirilebilir.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} modülü, satışları ve bu satışlara ait kalemlerin satış sürecinin takip edilmesini sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve hem ilgili satış verilerini hem de {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir.
+    'LBL_HELP_RECORD' => '{{plural_module_name}} modülü, modülü, satışları ve bu satışlara ait kalemlerin satış sürecini başından sonuna kadar takip etmenizi sağlar. Her {{module_name}} kaydı, ileriye yönelik bir satışı belirtir ve ilgili satış bilgilerini aynı zamanda {{quotes_module}}, {{contacts_module}} gibi  ilgili diğer önemli bilgileri içerir.
 
 - Kaydın alanlarını, herhangi bir alana veya Değiştir düğmesine tıklayarak değiştirin.
-- Sol altta yer alan paneli "Kayıt Görünümü" olarak değiştirerek, diğer kayıtlar ile olan bağlantıları görün veya değiştirin.
-- Sol altta yer alan paneli "Aktivite Akışı" olarak değiştirerek, {{activitystream_singular_module}} içinde bulunan kullanıcı yorumlarıyla iletişime girin ve kayıt değiştirme geçmişini görün.
+- Sol altta yer alan paneli "Veri Görünümü" olarak değiştirerek, diğer kayıtlar ile olan bağlantıları görün veya değiştirin.
+- {activitystream_singular_module}} modülünde kullanıcı yorumları ve kayıt değişikliği geçmişini, sol alt bölmeyi "Aktivite Akışı" değerine değiştirerek yapın ve görüntüleyin.
 - Kayıt adının sağ tarafında bulunan simgeleri kullanarak bu kaydı takip edin veya favoriler arasına alın.
-- Daha fazla aksiyon, Değiştir düğmesinin sağındaki Aksiyonlar açılır menüsünde yer almaktadır.',
+-  Daha fazla aksiyon, Değiştir tuşunun sağındaki Aksiyonlar seçimli menüde yer almaktadır.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} modülü, satışları ve bu satışlara ait kalemlerin satış sürecinin başından sonuna takip edilmesini sağlar. {{module_name}} kaydı, potansiyel bir satışı temsil eder ve hem ilgili satış verilerini hem de {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} atışları ve bu satışlara ait kalemlerin satış sürecini başından sonuna kadar takip etmenizi sağlar. Her {{module_name}} kaydı, ileriye yönelik bir satışı belirtir ve ilgili satış bilgilerini aynı zamanda {{quotes_module}}, {{contacts_module}} gibi ilgili diğer önemli bilgileri içerir.
 
 Bir {{module_name}} oluşturmak için:
-1. İstendiği şekilde alanlar için değerler girin.
+1. Alanlar için istenen şekilde değerler girin.
  - "Zorunlu" olarak belirtilmiş alanların kaydetme öncesinde girilmesi gereklidir.
- - Gerek duyulursa ek alanları açmak için "Daha Fazlasına" tıklayın.
-2. "Kaydet" tuşuna basarak yeni kayıt oluşturma işlemini tamamlayın ve önceki sayfaya dönün.',
+ - Gerek duyulursa ek alanları açmak için "Daha Fazlası"na tıklayın.
+2.  "Kaydet" tuşuna basarak yeni kayıt oluşturma işlemini tamamlayın ve önceki sayfaya dönün.',
 
 // END PRO/CORP
 

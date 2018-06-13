@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Mahdollisuusluettelon työpöytä',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Mahdollisuusluettelon työpöytä',
+
     'LBL_MODULE_NAME' => 'Myyntimahdollisuudet',
     'LBL_MODULE_NAME_SINGULAR' => 'Myyntimahdollisuus',
     'LBL_MODULE_TITLE' => 'Myyntimahdollisuudet: Etusivu',
@@ -166,24 +170,24 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduulin {{plural_module_name}} avulla voit seurata henkilökohtaista myyntiä alusta loppuun. Tietueet {{module_name}} edustavat prospektiivista myyntiä ja sisältävät vastaavat myyntitiedot sekä muut tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}} jne. {{module_name}} etenee yleensä useiden myyntivaiheiden kautta, kunnes se merkitään joko "Suljettu voitettu" tai "Suljettu menetetty". Moduulia {{plural_module_name}} voidaan hyödyntää lisää käyttämällä Sugarin {{forecasts_singular_module}} -moduulia ymmärtääksesi ja ennustaaksesi myyntitrendejä sekä työn kohdistamiseksi myyntitavoitteiden saavuttamiseksi.',
+    'LBL_HELP_RECORDS' => 'Moduulin {{plural_module_name}} avulla voit seurata yksittäisiä myyntejä alusta loppuun. Kukin {{module_name}} -tietue edustaa prospektiivista myyntiä ja sisältää tärkeitä myyntitietoja sekä muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}} jne. liittyvää tietoa. {{module_name}} etenee tyypillisesti useiden myyntivaiheiden kautta, kunnes sen tilaksi merkitään joko "Suljettu voitettu" tai "Suljettu menetetty". Moduuleja {{plural_module_name}} voidaan hyödyntää edelleen käyttämällä Sugarin {{forecasts_singular_module}} -moduulia myyntitrendien ymmärtämiseen ja ennustamiseen sekä kohdistamaan työ myyntitavoitteiden saavuttamiseksi.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}-moduulilla voidaan seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue edustaa prospektiivista myyntiä ja sisältää vastaavat myyntitiedot sekä muihin tärkeisiin tietuesiin, kuten {{quotes_module}}, {{contacts_module}} jne., liittyviä tietoja.
+    'LBL_HELP_RECORD' => 'Moduulin {{plural_module_name}} avulla voi seurata yksittäisiä myyntejä ja myyntiin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}} -tietue edustaa prospektiivista myyntiä ja sisältää tärkeitä myyntitietoja sekä muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}} jne. liittyvää tietoa.
 
-- Muokkaa tämän tietueen kenttiä napsauttamalla yksittäistä kenttää tai Muokkaa-painiketta.
-- Näytä tai muokkaa linkkejä muihin tietueisiin alapaneeleissa vaihtamalla vasen alapaneeli "Tietonäkymään".
-- Luo ja näytä käyttäjien kommentteja ja tallenna muutoshistoria {{activitystream_singular_module}}-moduulissa vaihtamalla vasen alapaneeli "Aktiviteettivirta"-näkymään.
-- Seuraa tietuetta tai merkitse se suosikiksi käyttämällä tietueen nimen oikealla puolella olevia kuvakkeita.
-- Muita toimintoja löytyy Toiminnot-pudotusvalikosta Muokkaa-painikkeen oikealla puolella.',
+- Voit muokata tämän tietueen kenttiä napsauttamalla yksittäistä kenttää tai Muokkaa-painiketta.
+- Voit näyttää tai muokata linkkejä muihin tietueisiin alipaneeleissa vaihtamalla vasemmassa alalaidassa olevan paneelin "Datanäkymään".
+- Voit tehdä ja näyttää käyttäjien kommentteja ja tietueen muutoshistoriaa moduulissa {{activitystream_singular_module}} vaihtamalla vasemmassa alalaidassa olevan paneelin "Aktiviteettivirta"-näkymään.
+- Voit seurata tätä tietuetta tai asettaa sen suosikiksi käyttämällä tietueen nimen oikealla puolella olevia kuvakkeita.
+- Muita toimintoja löytyy Toiminnot-alasvetovalikossa Muokkaa-painikkeen oikealla puolella.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}}-moduulilla voidaan seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue edustaa prospektiivista myyntiä ja sisältää vastaavat myyntitiedot sekä muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}} jne., liittyviä tietoja.
+    'LBL_HELP_CREATE' => 'Moduulin {{plural_module_name}} avulla voit seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}} -tietue edustaa prospektiivista myyntiä ja sisältää siihen kuuluvat myyntitiedot sekä muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}} jne., liittyvää tietoa.
 
-{{module_name}} -tietueen luominen:
+Moduulin {{module_name}} luonti:
 1. Anna kentille haluamasi arvot.
- - "Pakollinen"-kentät tulee täyttää ennen tallentamista.
- - Saat esille lisää kenttiä tarvittaessa napsauttamalla "Näytä lisää".
+ - "Pakollinen"-kentät on täytettävä ennen tallentamista.
+ - Tarvittaessa saat esille lisää kenttiä napsauttamalla "Näytä lisää".
 2. Napsauta "Tallenna" viimeistelläksesi uuden tietueen ja palataksesi edelliselle sivulle.',
 
 // END PRO/CORP

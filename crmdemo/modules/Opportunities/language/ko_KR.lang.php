@@ -12,7 +12,11 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME' => '영업기회관리',
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '영업기회 목록 대시보드',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '영업기회 기록 대시보드',
+
+    'LBL_MODULE_NAME' => '영업기회',
     'LBL_MODULE_NAME_SINGULAR' => '영업기회',
     'LBL_MODULE_TITLE' => '영업기회관리: 홈',
     'LBL_SEARCH_FORM_TITLE' => '영업기회 검색',
@@ -66,7 +70,7 @@ $mod_strings = array(
     'UPDATE_MERGE_TXT' => '여러 통화를 하나의 통화값으로 병합합니다. 현재 병합하려는 통화값을이 사용된 레코드들이 있으면 모든 레코드의 통화가 병합된 통화값으로 변경됩니다. 통화값 병합은 모든 모듈에 적용됩니다.',
     'LBL_ACCOUNT_NAME' => '거래처명',
     'LBL_CURRENCY' => '통화',
-    'LBL_DATE_CLOSED' => '예정 마감일',
+    'LBL_DATE_CLOSED' => '마감 예정일',
     'LBL_DATE_CLOSED_TIMESTAMP' => '예상 마감일 타임스탬프',
     'LBL_TYPE' => '종류',
     'LBL_CAMPAIGN' => '캠페인',
