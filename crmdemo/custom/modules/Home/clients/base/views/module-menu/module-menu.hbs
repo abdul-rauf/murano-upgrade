@@ -13,14 +13,17 @@
  */
 --}}
 {{#if meta.short}}
-    <a class="cube module-list-link" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:cube"><img src="{{buildUrl url='custom/themes/default/images/clogo.png'}}" alt="{{str 'LBL_SUGAR_CUBE_ALT' module}}"></a>
+    <a class="cube module-list-link" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:cube" tabindex="-1"><img src="{{buildUrl url='custom/themes/default/images/clogo.png'}}" alt="{{str 'LBL_SUGAR_CUBE_ALT' module}}"></a>
 {{else}}
-    <a class="cube btn btn-invisible btn-link" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:cube"><img src="{{buildUrl url='custom/themes/default/images/clogo.png'}}" alt="{{str 'LBL_SUGAR_CUBE_ALT' module}}"></a>
+    <a class="cube btn btn-invisible btn-link" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:cube" aria-label="{{getModuleName module plural=true}}"><img src="{{buildUrl url='custom/themes/default/images/clogo.png'}}" alt="{{str 'LBL_SUGAR_CUBE_ALT' module}}"></a>
     {{#if actions}}
-        <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle" track="click:cube-dropdown"><i class="icon-caret-down"></i></button>
-        <div class="dropdown-menu scroll">
-            <ul role="menu">
-                {{#each actions}}
+    <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle" track="click:cube-dropdown" aria-label="{{getModuleName module plural=true}} - {{str 'LBL_LINK_MORE' module}}"><i class="fa fa-caret-down"></i></button>
+    <div class="dropdown-menu scroll">
+        <ul role="menu">
+            {{#each actions}}
+                {{#eq type 'divider'}}
+                    <li class="divider"></li>
+                {{else}}
                     <li><a class="ellipsis_inline" tabindex="-1"
                            data-navbar-menu-item="{{label}}"
                         {{#if event}}
@@ -30,17 +33,27 @@
                         {{else}}
                            href="{{route}}"
                            data-route="{{route}}"
+                           {{#if openwindow}}
+                           data-openwindow="true"
+                           {{/if}}
                            track="click:{{route}}"
-                        {{/if}}>{{#if icon}}<i class="{{icon}}"></i>{{/if}}{{str label ../module}}</a>
+                        {{/if}}>{{#if icon}}<i class="fa {{icon}}"></i>{{/if}}
+                        {{#if label_module}}
+                            {{str label label_module}}
+                        {{else}}
+                            {{str label ../../../module}}
+                        {{/if}}
+                        </a>
                     </li>
-                {{/each}}
-                <li class="divider" data-container="dashboards"></li>
-                {{#if ../dashboardBwcLink}}
-                    <li class="divider" data-container="legacy-dashboards"></li>
-                    <li><a class="ellipsis_inline" tabindex="-1" data-route="#{{../dashboardBwcLink}}" href="#{{../dashboardBwcLink}}"><i class="icon-time"></i>{{str 'LBL_DASHBOARD_BWC' module}}</a></li>
-                {{/if}}
-                <li class="divider" data-container="recently-viewed"></li>
-            </ul>
-        </div>
+                {{/eq}}
+            {{/each}}
+            <li class="divider" data-container="dashboards"></li>
+            {{#if ../dashboardBwcLink}}
+            <li class="divider" data-container="legacy-dashboards"></li>
+            <li><a class="ellipsis_inline" tabindex="-1" data-route="#{{../dashboardBwcLink}}" href="#{{../dashboardBwcLink}}"><i class="fa fa-clock-o"></i>{{str 'LBL_DASHBOARD_BWC' module}}</a></li>
+            {{/if}}
+            <li class="divider" data-container="recently-viewed"></li>
+        </ul>
+    </div>
     {{/if}}
 {{/if}}

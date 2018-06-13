@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 15:15:06
+// created: 2018-06-04 12:04:53
 $viewdefs['base']['view']['profileactions'] = array (
   0 => 
   array (
@@ -22,6 +22,7 @@ $viewdefs['base']['view']['profileactions'] = array (
     'label' => 'Admin',
     'acl_action' => 'admin',
     'route' => '#bwc/index.php?module=Administration&action=index',
+    'icon' => 'fa-cogs',
   ),
   3 => 
   array (

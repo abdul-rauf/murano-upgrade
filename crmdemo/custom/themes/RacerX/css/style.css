@@ -9452,3 +9452,25 @@ ul.clickMenu.subpanel.records li a { color:#FFF !important; }
 #email_options .detail tr td[scope="row"] { background-color:inherit; }
 .ygtvlabel { color:#ef8567; } 
 .yui-dt-bd td {color:#444444;}
+
+.listViewEmpty p {color: #000 !important;}
+#wizform table h4, 
+#wizform table #nav_step1,
+#wizform table #nav_step2,
+#wizform table #nav_step3,
+#wizform table #nav_step4,
+#wizform table #nav_step{color: #fff !important;}
+#wizform table #step1,
+#wizform table #step2,
+#wizform table #step3,
+#wizform table #step4{
+	background: url(../../../../custom/styleguide/assets/img/bodypattern.jpg) !important;
+}
+.other .edit.view table{
+	background: url(../../../../custom/styleguide/assets/img/bodypattern.jpg) !important;
+}
+.other td.edit #wizard .detail.view.small td{color: #ff0000 !important;}
+.other td.edit .detail.view.small td{color: #ff0000 !important;}
+
+
+
