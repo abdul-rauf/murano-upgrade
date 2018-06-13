@@ -13,23 +13,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 // $Id: Popup_picker.php 45763 2009-04-01 19:16:18Z majed $
 
-
-
-
-
-
 class Popup_Picker
 {
-	
-	
-	/*
-	 * 
-	 */
-	function Popup_Picker()
-	{
-		;
-	}
-	
+    /**
+     * @deprecated
+     */
+    public function Popup_Picker()
+    {
+    }
+
 	/*
 	 * 
 	 */
@@ -117,4 +109,3 @@ class Popup_Picker
 		return $output_html;
 	}
 } // end of class Popup_Picker
-?>

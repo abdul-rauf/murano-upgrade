@@ -11,6 +11,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 /**
  * Base database driver implementation.
  *
@@ -129,6 +132,11 @@ abstract class DBManager
 	 * @var Logger
 	 */
 	protected $log;
+
+    /**
+     * @var Request
+     */
+    protected $request;
 
 	/**
 	 * Table descriptions
@@ -404,6 +412,7 @@ abstract class DBManager
 		if(defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') == 'api') {
 		    $this->encode = false;
 		}
+        $this->request = InputValidation::getService();
 	}
 
     /**
@@ -768,7 +777,7 @@ protected function checkQuery($sql, $object_name = false)
 	 * @param array $field_defs Definitions in vardef-like format
 	 * @param array $data Key/value to insert
 	 * @param array $field_map Fields map from SugarBean
-	 * @param bool $execute Execute or return query?
+     * @param bool $execute Execute or return query? Deprecated, will be always considered TRUE
 	 * @param bool usePreparedStatements(will be deprecated in 7.8 version and above)
      * @return bool query result
      */
@@ -853,7 +862,7 @@ protected function checkQuery($sql, $object_name = false)
      * @param SugarBean $bean Sugarbean instance
      * @param array $where values with the keys as names of fields.
      * If we want to pass multiple values for a name, pass it as an array
-     * If where is not passed, it defaults to id of table
+     * If where is not passed, it defaults to id of table. Deprecated.
      * @return bool query result
      *
      */
@@ -880,6 +889,8 @@ protected function checkQuery($sql, $object_name = false)
      * If we want to pass multiple values for a name, pass it as an array
      * If where is not passed, it defaults to id of table
      * @return bool query result
+     *
+     * @deprecated Use SugarBean::mark_deleted() instead
      */
 	public function delete(SugarBean $bean, array $where = array())
 	{
@@ -905,6 +916,8 @@ protected function checkQuery($sql, $object_name = false)
 	 * @param  SugarBean   $bean  Sugarbean instance
 	 * @param  array    $where values with the keys as names of fields.
 	 * @return resource result from the query
+     *
+     * @depreated Use SugarBean::retrieve() instead
 	 */
 	public function retrieve(SugarBean $bean, array $where = array())
 	{
@@ -951,6 +964,8 @@ protected function checkQuery($sql, $object_name = false)
 	 * @param string $data Data for SQL
 	 * @param string $msg Error message
 	 * @return boolean
+     *
+     * @deprecated
 	 */
 	public function preparedQuery($sql, $data, array $lobs = array(), $msg = '')
 	{
@@ -2402,6 +2417,8 @@ protected function checkQuery($sql, $object_name = false)
 	 *
 	 * @param  string	$sql        The sql to parse
 	 * @return int index of the prepared statement to be used with execute
+     *
+     * @deprecated
 	 */
 	public function prepareQuery($sql)
 	{
@@ -2489,6 +2506,8 @@ protected function checkQuery($sql, $object_name = false)
 	 * @param  string	$sql        The sql to parse
 	 * @param  array    $data 		The array of data to replace the tokens with.
 	 * @return resource result set or false on error
+     *
+     * @deprecated
 	 */
 	public function pQuery($sql, $data = array())
 	{
@@ -2520,6 +2539,8 @@ protected function checkQuery($sql, $object_name = false)
 	 * @param  SugarBean $bean SugarBean instance
 	 * @param bool usePreparedStatements (will be deprecated in 7.8 version and above)
 	 * @return string SQL Create Table statement
+     *
+     * @deprecated Use DBManager::insert() instead
 	 */
 	public function insertSQL(SugarBean $bean, $usePreparedStatements = false)
 	{
@@ -2535,6 +2556,8 @@ protected function checkQuery($sql, $object_name = false)
 	 * @param  array  $where Optional, where conditions in an array
 	 * @param bool usePreparedStatements (will be deprecated in 7.8 version and above)
 	 * @return string SQL Create Table statement
+     *
+     * @deprecated Use DBManager::update() instead
 	 */
 	public function updateSQL(SugarBean $bean, array $where = array(), $usePreparedStatements = false)
 	{
@@ -2591,7 +2614,7 @@ protected function checkQuery($sql, $object_name = false)
      * @param array $data Key/value for update
      * @param array $where Key/value for where
      * @param array $field_map Fields map from SugarBean
-     * @param bool $execute Execute or return query?
+     * @param bool $execute Execute or return query? Deprecated, will be always considered TRUE
      * @param bool $usePreparedStatements (will be deprecated in 7.8 version and above)
      *
      * @return bool|string|array|PreparedStatement query result
@@ -2599,7 +2622,8 @@ protected function checkQuery($sql, $object_name = false)
     public function updateParams($table, $field_defs, $data, array $where = array(), $field_map = null, $execute = true, $usePreparedStatements = false)
     {
         $values = array();
-        foreach ($field_defs as $field => $fieldDef) {
+        foreach ($field_defs as $fieldDef) {
+            $field = $fieldDef['name'];
             if (!array_key_exists($field, $data)) {
                 continue;
             }
@@ -2802,7 +2826,7 @@ protected function checkQuery($sql, $object_name = false)
 			// handle some known types
 			switch($this->type_class[$type]) {
 				case 'bool':
-					if (!empty($fieldDef['required']) && $val == ''){
+					if (!empty($fieldDef['required']) && $val === ''){
 						if (isset($fieldDef['default'])){
 							return $fieldDef['default'];
 						}
@@ -2810,7 +2834,7 @@ protected function checkQuery($sql, $object_name = false)
 					}
 					return intval($val);
 				case 'int':
-					if (!empty($fieldDef['required']) && $val == ''){
+					if (!empty($fieldDef['required']) && $val === ''){
 						if (isset($fieldDef['default']) && is_numeric($fieldDef['default'])){
 							return $fieldDef['default'];
 						}
@@ -2983,6 +3007,8 @@ protected function checkQuery($sql, $object_name = false)
 	 * @param SugarBean $bean
 	 * @param array $columns
 	 * @return array
+     *
+     * @deprecated
 	 */
 	protected function prepareTypeData(SugarBean $bean, $columns)
 	{
@@ -3001,6 +3027,8 @@ protected function checkQuery($sql, $object_name = false)
      * @param array $where where conditions in an array
 	 * @param bool $usePreparedStatements (will be deprecated in 7.8 version and above)
      * @return string SQL Update Statement
+     *
+     * @deprecated Use SugarBean::mark_deleted() instead
      */
     public function deleteSQL(SugarBean $bean, array $where, $usePreparedStatements = false)
     {
@@ -3021,6 +3049,8 @@ protected function checkQuery($sql, $object_name = false)
      * @param array $where where conditions in an array
 	 * @param bool $usePreparedStatements (will be deprecated in 7.8 version and above)
      * @return string SQL Select Statement
+     *
+     * @depreated Use SugarBean::retrieve() instead
      */
     public function retrieveSQL(SugarBean $bean, array $where, $usePreparedStatements = false)
     {
@@ -4521,6 +4551,8 @@ protected function checkQuery($sql, $object_name = false)
 	 * @param array $lobs names of clob and blob fields from query
 	 * @param string $msg Error message
 	 * @return false|PreparedStatement
+     *
+     * @deprecated
 	 */
 	public function prepareStatement($sql, array $lobs = array(), $msg = '')
 	{

@@ -11,6 +11,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 require_once('include/DetailView/DetailView2.php');
 
 /**
@@ -32,27 +34,17 @@ class ViewDetail extends SugarView
     public $dv;
 
     /**
-     * Constructor
-     *
-     * @see SugarView::SugarView()
+     * @deprecated Use __construct() instead
      */
-    public function __construct($bean = null, $view_object_map = array())
+    public function ViewDetail($bean = null, $view_object_map = array(), Request $request = null)
     {
-        parent::__construct($bean, $view_object_map);
+        self::__construct($bean, $view_object_map, $request);
     }
 
-    /**
-     * Constructor
-     *
-     * @deprecated Use the PHP 5.x style __construct instead
-     * @see SugarView::SugarView()
-     */
-    public function ViewDetail($bean = null, $view_object_map = array())
+    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
     {
-        parent::SugarView($bean, $view_object_map);
+        parent::__construct($bean, $view_object_map, $request);
     }
-
-
 
     /**
      * @see SugarView::preDisplay()

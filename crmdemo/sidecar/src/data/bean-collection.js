@@ -61,6 +61,15 @@
          * @param {Object} options
          */
         initialize: function(models, options) {
+
+            /**
+             * List of persistent fetch options.
+             *
+             * @type {Object}
+             * @private
+             */
+            this._persistentOptions = {};
+
             /**
              * Initial fetch options.
              *
@@ -523,13 +532,7 @@
                 (attrs = {})[key] = val;
             }
 
-            /**
-             * List of persistent fetch options.
-             *
-             * @type {Object}
-             * @private
-             */
-            this._persistentOptions = _.extend({}, this._persistentOptions, attrs);
+            _.extend(this._persistentOptions, attrs);
             return this;
         },
 

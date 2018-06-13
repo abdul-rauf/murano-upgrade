@@ -4,6 +4,10 @@
 
 Modification information for LGPL compliance
 
+2016-05-23 - smorozov - Restored PHP 4 constructor for backward compatibility
+
+2016-01-22 - avlasov - PHP 7 compatibility
+
 r56990 - 2010-06-16 13:05:36 -0700 (Wed, 16 Jun 2010) - kjing - snapshot "Mango" svn branch to a new one for GitHub sync
 
 r56989 - 2010-06-16 13:01:33 -0700 (Wed, 16 Jun 2010) - kjing - defunt "Mango" svn dev branch before github cutover
@@ -92,11 +96,19 @@ class Config_File {
     /**#@-*/
 
     /**
+     * @deprecated Use __construct() instead
+     */
+    public function Config_File($config_path = null)
+    {
+        self::__construct($config_path);
+    }
+
+    /**
      * Constructs a new config file class.
      *
      * @param string $config_path (optional) path to the config files
      */
-    function Config_File($config_path = NULL)
+    public function __construct($config_path = NULL)
     {
         if (isset($config_path))
             $this->set_path($config_path);
@@ -409,5 +421,3 @@ class Config_File {
     }
     /**#@-*/
 }
-
-?>

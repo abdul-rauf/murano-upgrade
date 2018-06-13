@@ -275,6 +275,13 @@ class KBContent extends SugarBean {
                     $this->kbsapprover_id = $user->id;
                     break;
             }
+            switch ($dataChanges['status']['before']) {
+                case self::ST_PUBLISHED:
+                    if (!in_array($dataChanges['status']['after'], array(self::ST_APPROVED, self::ST_EXPIRED))) {
+                        $this->active_date = '';
+                    }
+                    break;
+            }
         }
 
         $this->checkActiveRev();
@@ -284,7 +291,8 @@ class KBContent extends SugarBean {
             $this->updateCategoryExternalVisibility($this->category_id);
         }
         if (isset($dataChanges['category_id'])) {
-            if ($dataChanges['category_id']['before'] != $dataChanges['category_id']['after']) {
+            if ($dataChanges['category_id']['before']
+                    && ($dataChanges['category_id']['before'] != $dataChanges['category_id']['after'])) {
                 $this->updateCategoryExternalVisibility($dataChanges['category_id']['before']);
             }
         }
@@ -405,7 +413,7 @@ class KBContent extends SugarBean {
             $this->active_rev = 1;
             $this->expirePublished();
             if (empty($this->active_date)) {
-                $this->active_date = $this->db->convert($GLOBALS['timedate']->nowDbDate(), 'datetime');
+                $this->active_date = $GLOBALS['timedate']->nowDbDate();
             }
         } else {
             $activeRevisionStatus = $this->getActiveRevisionStatus();
@@ -415,7 +423,7 @@ class KBContent extends SugarBean {
                 $this->resetActiveRev();
                 $this->active_rev = 1;
                 if (empty($this->active_date)) {
-                    $this->active_date = $this->db->convert($GLOBALS['timedate']->nowDbDate(), 'datetime');
+                    $this->active_date = $GLOBALS['timedate']->nowDbDate();
                 }
             }
         }
@@ -481,7 +489,7 @@ class KBContent extends SugarBean {
      */
     protected function expirePublished()
     {
-        $expDate = $this->db->convert("'".$GLOBALS['timedate']->nowDb()."'", 'datetime');
+        $expDate = $GLOBALS['timedate']->nowDb();
         $statuses = static::getPublishedStatuses();
 
         $query = new SugarQuery();

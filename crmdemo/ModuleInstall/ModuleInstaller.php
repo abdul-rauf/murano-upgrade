@@ -32,6 +32,8 @@ require_once 'modules/UpgradeWizard/SidecarUpdate/SidecarMetaDataUpgrader.php';
 require_once 'modules/MySettings/TabController.php';
 
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 define('DISABLED_PATH', 'Disabled');
 
@@ -62,7 +64,16 @@ class ModuleInstaller{
      */
     protected $patch = array();
 
-    function ModuleInstaller(){
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ModuleInstaller()
+    {
+        self::__construct();
+    }
+
+    public function __construct()
+    {
         $this->ms = new ModuleScanner();
         $this->modules = $this->getModuleDirs();
         $this->db = DBManagerFactory::getInstance();
@@ -316,7 +327,8 @@ class ModuleInstaller{
     function install_copy(){
         if(isset($this->installdefs['copy'])){
             /* BEGIN - RESTORE POINT - by MR. MILK August 31, 2005 02:22:11 PM */
-            $backup_path = clean_path( remove_file_extension(urldecode($_REQUEST['install_file']))."-restore" );
+
+            $backup_path = clean_path( remove_file_extension(urldecode($this->validateInstallFile())) . "-restore" );
             /* END - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
             foreach($this->installdefs['copy'] as $cp){
                 $GLOBALS['log']->debug("Copying ..." . $cp['from'].  " to " .$cp['to'] );
@@ -330,6 +342,7 @@ class ModuleInstaller{
         }
     }
     function uninstall_copy(){
+
         if(!empty($this->installdefs['copy'])){
             foreach($this->installdefs['copy'] as $cp){
                 $cp['to'] = clean_path(str_replace('<basepath>', $this->base_dir, $cp['to']));
@@ -338,12 +351,12 @@ class ModuleInstaller{
                 /* BEGIN - RESTORE POINT - by MR. MILK August 31, 2005 02:22:11 PM */
                 //rmdir_recursive($cp['to']);
 
-                $backup_path = clean_path( remove_file_extension(urldecode(hashToFile($_REQUEST['install_file'])))."-restore/".$cp['to'] );
+                $backup_path = clean_path( remove_file_extension(urldecode(hashToFile($this->validateInstallFile())))."-restore/".$cp['to'] );
                 $this->uninstall_new_files($cp, $backup_path);
                 $this->copy_path($backup_path, $cp['to'], $backup_path, true);
                 /* END - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
             }
-            $backup_path = clean_path( remove_file_extension(urldecode(hashToFile($_REQUEST['install_file'])))."-restore");
+            $backup_path = clean_path( remove_file_extension(urldecode(hashToFile($this->validateInstallFile())))."-restore");
             if(file_exists($backup_path))
                 rmdir_recursive($backup_path);
         }
@@ -569,13 +582,10 @@ class ModuleInstaller{
 
                 $path = $this->subSidecarPlaceHolders($path, $from);
 
-                $disabled_path = $path.'/'.DISABLED_PATH;
                 if (file_exists("$path/$target.php")) {
-                    mkdir_recursive($disabled_path, true);
-                    rename("$path/$target.php", "$disabled_path/$target.php");
-                } else if (!empty($from) && file_exists($path . '/'. basename($from))) {
-                    mkdir_recursive($disabled_path, true);
-                    rename( $path . '/'. basename($from), $disabled_path.'/'. basename($from));
+                    $this->enableMetadataFile($path . DIRECTORY_SEPARATOR, $target . '.php', false);
+                } elseif (!empty($from)) {
+                    $this->enableMetadataFile($path . DIRECTORY_SEPARATOR, basename($from), false);
                 }
             }
         }
@@ -664,15 +674,9 @@ class ModuleInstaller{
                 } else {
                     $target = $this->id_name;
                 }
-                if(!file_exists($path)) {
-                    mkdir_recursive($path, true);
-                }
-                $disabled_path = $path.'/'.DISABLED_PATH;
-                if (file_exists("$disabled_path/$target.php")) {
-                    rename("$disabled_path/$target.php",  "$path/$target.php");
-                }
-                if (!empty($from) && file_exists($disabled_path . '/'. basename($from))) {
-                    rename($disabled_path.'/'. basename($from),  $path . '/'. basename($from));
+                $this->enableMetadataFile($path . DIRECTORY_SEPARATOR, $target . '.php', true);
+                if (!empty($from)) {
+                    $this->enableMetadataFile($path . DIRECTORY_SEPARATOR, basename($from), true);
                 }
             }
         }
@@ -941,7 +945,7 @@ class ModuleInstaller{
                 }
             }
         }
-        $this->rebuild_extensions();
+        $this->rebuild_extensions($this->modulesInPackage);
     }
 
     function install_dashlets()
@@ -1430,8 +1434,7 @@ class ModuleInstaller{
 
             return;
         }
-        include($file);
-        $rel_dictionary = $dictionary;
+        $rel_dictionary = FileLoader::varFromInclude($file, 'dictionary');
 
         array_walk($rel_dictionary, array("ModuleInstaller", "cleanUpRelationship"));
 
@@ -1670,15 +1673,17 @@ class ModuleInstaller{
                         if ($def['type'] == "link" && !empty($def['relationship']) && !empty($dictionary[$def['relationship']]))
                         {
                             $rel_name = $def['relationship'];
+                            if (isset($dictionary[$rel_name]['relationships'][$rel_name])) {
+                                $rel_def = $dictionary[$rel_name]['relationships'][$rel_name];
 
-                            $rel_def = $dictionary[$rel_name]['relationships'][$rel_name];
-
-                            //Check against mods to be removed.
-                            foreach($this->modulesInPackage as $removed_mod) {
-                                if ($rel_def['lhs_module'] == $removed_mod || $rel_def['rhs_module'] == $removed_mod )
-                                {
-                                    $dictionary[$rel_name]['from_studio'] = true;
-                                    $relationships[$rel_name] = $dictionary[$rel_name];
+                                //Check against mods to be removed.
+                                foreach ($this->modulesInPackage as $removed_mod) {
+                                    if (($rel_def['lhs_module'] == $removed_mod)
+                                        || ($rel_def['rhs_module'] == $removed_mod)
+                                    ) {
+                                        $dictionary[$rel_name]['from_studio'] = true;
+                                        $relationships[$rel_name] = $dictionary[$rel_name];
+                                    }
                                 }
                             }
                         }
@@ -1872,7 +1877,7 @@ class ModuleInstaller{
 
     function rebuild_vardefs($modules = array())
     {
-        $this->rebuildExt("Vardefs", 'vardefs.ext.php', null, null, $modules);
+        $this->rebuildExt("Vardefs", 'vardefs.ext.php', $modules);
         if (!empty($modules)) {
             foreach($modules as $module) {
                 VardefManager::clearVardef($module);
@@ -2200,7 +2205,6 @@ class ModuleInstaller{
             if(!empty($mod) && $mod instanceof SugarBean && empty($mod->disable_vardefs)) { //#30273
                 $GLOBALS['log']->debug( "Creating Tables Bean : $bean");
                 $mod->create_tables();
-                SugarBean::createRelationshipMeta($mod->getObjectName(), $mod->db,$mod->table_name,'',$mod->module_dir);
             }
 
             // Return state. Null values essentially unset what wasn't set before
@@ -2486,12 +2490,8 @@ class ModuleInstaller{
             }//fi
             $this->id_name = $installdefs['id'];
             $this->installdefs = $installdefs;
-            $installed_modules = array();
-            if(isset($installdefs['beans'])){
-                foreach($this->installdefs['beans'] as $bean){
-                    $installed_modules[] = $bean['module'];
-                }
-            }
+            $installed_modules = $this->getInstalledModules();
+            $this->modulesInPackage = $installed_modules;
             if(!$this->silent){
                 $current_step++;
                 update_progress_bar('install', $current_step, $total_steps);
@@ -2531,6 +2531,7 @@ class ModuleInstaller{
             'disable_global_search',
             'disable_manifest_logichooks',
             'uninstall_layoutfields',
+            'disable_module',
             'reset_opcodes',
             'reset_file_cache',
         );
@@ -2546,12 +2547,8 @@ class ModuleInstaller{
             extract($data);
             $this->installdefs = $installdefs;
             $this->id_name = $this->installdefs['id'];
-            $installed_modules = array();
-            if(isset($this->installdefs['beans'])){
-                foreach($this->installdefs['beans'] as $bean){
-                    $installed_modules[] = $bean['module'];
-                }
-            }
+            $installed_modules = $this->getInstalledModules();
+            $this->modulesInPackage = $installed_modules;
             if(!$this->silent){
                 $current_step++;
                 update_progress_bar('install', $current_step, $total_steps);
@@ -2575,6 +2572,17 @@ class ModuleInstaller{
         }
     }
 
+    /**
+     * Remove module from module list
+     */
+    protected function disable_module()
+    {
+        global $moduleList;
+        foreach ($this->modulesInPackage as $module) {
+            unset($moduleList[array_search($module, $moduleList)]);
+        }
+    }
+
     function enable_vardef($to_module)
     {
         $this->enableExt("vardefs", "Vardefs", $to_module);
@@ -2586,6 +2594,7 @@ class ModuleInstaller{
     }
 
     function enable_relationships(){
+        $rebuild = false;
         if(isset($this->installdefs['relationships'])){
             $str = "<?php \n //WARNING: The contents of this file are auto-generated\n";
             $save_table_dictionary = false;
@@ -2604,20 +2613,36 @@ class ModuleInstaller{
                     $this->enable_layoutdef($relationship['module']);
                 }
             }
+            $rebuild = true;
+            if ($save_table_dictionary) {
+                $this->enableMetadataFile(
+                    'custom/Extension/application/Ext/TableDictionary/',
+                    $this->id_name . '.php',
+                    true
+                );
+            }
+        }
+        $studioRelationships = $this->findDisabledStudioRelationships();
+        if ($studioRelationships) {
+            $rebuild = true;
+            $save_table_dictionary = true;
+            foreach ($studioRelationships as $relName => $relationship) {
+                $this->enableRelationship($relName, $relationship, true);
+            }
+        }
+        if ($rebuild) {
             $this->rebuild_vardefs();
             $this->rebuild_layoutdefs();
-            if($save_table_dictionary){
-                if(!file_exists("custom/Extension/application/Ext/TableDictionary")){
-                    mkdir_recursive("custom/Extension/application/Ext/TableDictionary", true);
-                }
-                if (file_exists("custom/Extension/application/Ext/TableDictionary/".DISABLED_PATH."/$this->id_name.php"))
-                    rename("custom/Extension/application/Ext/TableDictionary/".DISABLED_PATH."/$this->id_name.php", "custom/Extension/application/Ext/TableDictionary/$this->id_name.php");
+            if ($save_table_dictionary) {
                 $this->rebuild_tabledictionary();
             }
+            SugarRelationshipFactory::deleteCache();
         }
     }
 
-    function disable_relationships($action = 'disable'){
+    protected function disable_relationships()
+    {
+        $rebuild = false;
         if(isset($this->installdefs['relationships'])){
             foreach($this->installdefs['relationships'] as $relationship){
                 $filename = basename($relationship['meta_data']);
@@ -2631,32 +2656,183 @@ class ModuleInstaller{
                 if(!empty($relationship['module']) && $relationship['module'] == 'application'){
                     $path ='custom/Extension/' . $relationship['module']. '/Ext/Vardefs';
                 }
-                if(!empty($relationship['module_vardefs']) && file_exists($path . '/'. $this->id_name . '.php')){
-                    mkdir_recursive($path . '/'.DISABLED_PATH, true);
-                    rename( $path . '/'. $this->id_name . '.php', $path . '/'.DISABLED_PATH.'/'. $this->id_name . '.php');
+                if (!empty($relationship['module_vardefs'])) {
+                    $this->enableMetadataFile($path . DIRECTORY_SEPARATOR, $this->id_name . '.php', false);
                 }
-                //remove the layoutdefs
-                if ( !empty($relationship['module']) ) {
-                    $path = 'custom/Extension/modules/' . $relationship['module']. '/Ext/Layoutdefs';
-                    if($relationship['module'] == 'application'){
-                        $path ='custom/Extension/' . $relationship['module']. '/Ext/Layoutdefs';
+
+                // disable the layoutdefs
+                if (!empty($relationship['module']) && !empty($relationship['module_layoutdefs'])) {
+                    $path = 'custom/Extension/modules/' . $relationship['module']. '/Ext/Layoutdefs/';
+                    if ($relationship['module'] == 'application') {
+                        $path ='custom/Extension/' . $relationship['module']. '/Ext/Layoutdefs/';
                     }
+                    $this->enableMetadataFile($path, $this->id_name . '.php', false);
                 }
-
-                if(!empty($relationship['module_layoutdefs']) && file_exists($path . '/'. $this->id_name . '.php')){
-                    mkdir_recursive($path . '/'.DISABLED_PATH, true);
-                    rename( $path . '/'. $this->id_name . '.php', $path . '/'.DISABLED_PATH.'/'. $this->id_name . '.php');
-                }
-
             }
-            if(file_exists("custom/Extension/application/Ext/TableDictionary/$this->id_name.php")){
-                mkdir_recursive("custom/Extension/application/Ext/TableDictionary/".DISABLED_PATH, true);
-                rename("custom/Extension/application/Ext/TableDictionary/$this->id_name.php", "custom/Extension/application/Ext/TableDictionary/".DISABLED_PATH."/$this->id_name.php");
+            $this->enableMetadataFile(
+                'custom/Extension/application/Ext/TableDictionary/',
+                $this->id_name . '.php',
+                false
+            );
+            $rebuild = true;
+        }
+
+        $studioRelationships = $this->findStudioRelationships();
+        if ($studioRelationships) {
+            foreach ($studioRelationships as $relName => $relationship) {
+                $this->enableRelationship($relName, $relationship, false);
             }
+            $rebuild = true;
+        }
+
+        if ($rebuild) {
             $this->rebuild_tabledictionary();
             $this->rebuild_vardefs();
             $this->rebuild_layoutdefs();
         }
+    }
+
+    /**
+     * Enable/disable single studio relationship
+     *
+     * @param string  $relName      Relationship name
+     * @param array   $relationship Relationship definition
+     * @param boolean $enable       Enable or disable it
+     */
+    protected function enableRelationship($relName, $relationship, $enable)
+    {
+        // check to see if we have any vardef or layoutdef entries to disable
+        // - must have a relationship['module'] parameter if we do
+        if (!isset($relationship['module'])) {
+            $mods = array(
+                $relationship['relationships'][$relName]['lhs_module'],
+                $relationship['relationships'][$relName]['rhs_module'],
+            );
+        } else {
+            $mods = array($relationship['module']);
+        }
+
+        $filename = $relName . '.php';
+
+        foreach ($mods as $mod) {
+            if ($mod != 'application') {
+                $basepath = "custom/Extension/modules/$mod/Ext/";
+            } else {
+                $basepath = "custom/Extension/application/Ext/";
+            }
+
+            foreach (array($filename , 'custom' . $filename, $relName . '_' . $mod . '.php') as $fn) {
+                foreach (array('Vardefs', 'Layoutdefs', 'WirelessLayoutdefs') as $path) {
+                    $path = $basepath . $path . DIRECTORY_SEPARATOR;
+                    $this->enableMetadataFile($path, $fn, $enable);
+                }
+            }
+            $this->enableMetadataFile('custom/Extension/application/Ext/TableDictionary/', $filename, $enable);
+        }
+        $this->enableMetadataFile('custom/metadata/', $relName . 'MetaData.php', $enable);
+    }
+
+    /**
+     * Enable/disable single metadata file
+     *
+     * @param string  $path     Directory
+     * @param string  $filename File name
+     * @param boolean $enable   Enable or disable it
+     */
+    protected function enableMetadataFile($path, $filename, $enable)
+    {
+        if ($enable) {
+            $fromDir = $path . DISABLED_PATH . DIRECTORY_SEPARATOR;
+            $toDir = $path;
+        } else {
+            $fromDir = $path ;
+            $toDir = $path . DISABLED_PATH . DIRECTORY_SEPARATOR;
+        }
+        if (file_exists($fromDir . $filename)) {
+            mkdir_recursive($toDir, true);
+            rename($fromDir . $filename, $toDir . $filename);
+        }
+    }
+
+    /**
+     * Get relationships to the disabled package modules
+     *
+     * @return array
+     */
+    protected function findDisabledStudioRelationships()
+    {
+        //Find studio created relationships.
+        $relationships = array();
+        foreach (glob('custom/metadata/' . DISABLED_PATH . '/*.php') as $meta) {
+            $dictionary = array();
+            include $meta;
+            $dictionaryKeys = array_keys($dictionary);
+            $relName = $dictionaryKeys[0];
+            foreach ($this->modulesInPackage as $module) {
+                if (isset($dictionary[$relName]['relationships'][$relName])
+                    && (($dictionary[$relName]['relationships'][$relName]['lhs_module'] == $module)
+                        || ($dictionary[$relName]['relationships'][$relName]['rhs_module'] == $module))
+                ) {
+                    $relationships[$relName] = $dictionary[$relName];
+                }
+            }
+        }
+        return $relationships;
+    }
+
+    /**
+     * Get relationships to the package modules created from studio
+     *
+     * @return array
+     */
+    protected function findStudioRelationships()
+    {
+        //Find studio created relationships.
+        $relationships = array();
+
+        global $beanList, $dictionary;
+        //Load up the custom relationship definitions.
+        if (file_exists('custom/application/Ext/TableDictionary/tabledictionary.ext.php')) {
+            include 'custom/application/Ext/TableDictionary/tabledictionary.ext.php';
+        }
+        //Find all the relatioships/relate fields involving this module.
+        foreach ($beanList as $mod => $bean) {
+            //Some modules like cases have a bean name that doesn't match the object name
+            $bean = BeanFactory::getObjectName($mod);
+            VardefManager::loadVardef($mod, $bean);
+            //We can skip modules that are in this package as they will be removed/disabled anyhow
+            if (!in_array($mod, $this->modulesInPackage)
+                && !empty($dictionary[$bean])
+                && !empty($dictionary[$bean]['fields'])
+            ) {
+                $field_defs = $dictionary[$bean]['fields'];
+                foreach ($field_defs as $def) {
+                    //Weed out most fields first
+                    //Custom relationships created in the relationship editor
+                    if (isset($def['type'])
+                        && ($def['type'] == 'link')
+                        && !empty($def['relationship'])
+                        && !empty($dictionary[$def['relationship']])
+                    ) {
+                        $relName = $def['relationship'];
+                        if (isset($dictionary[$relName]['relationships'][$relName])) {
+                            $relDef = $dictionary[$relName]['relationships'][$relName];
+
+                            //Check against mods to be removed/disabled
+                            foreach ($this->modulesInPackage as $affectedMod) {
+                                if (($relDef['lhs_module'] == $affectedMod)
+                                    || ($relDef['rhs_module'] == $affectedMod)
+                                ) {
+                                    $dictionary[$relName]['from_studio'] = true;
+                                    $relationships[$relName] = $dictionary[$relName];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $relationships;
     }
 
     function enable_dashlets(){
@@ -2700,7 +2876,7 @@ class ModuleInstaller{
                 foreach($this->installdefs['copy'] as $cp){
                     $cp['to'] = clean_path(str_replace('<basepath>', $this->base_dir, $cp['to']));
                     if (file_exists($cp['to'])) {
-                        $backup_path = clean_path(remove_file_extension(urldecode(hashToFile($_REQUEST['install_file'])))."-restore/".$cp['to']);
+                        $backup_path = clean_path(remove_file_extension(urldecode(hashToFile($this->validateInstallFile())))."-restore/".$cp['to']);
 
                         $GLOBALS['log']->debug('ENABLE COPY:: CREATING BACKUP OF: ' . $cp['to']);
                         $this->copy_path($cp['to'], $backup_path);
@@ -2731,7 +2907,7 @@ class ModuleInstaller{
                         $GLOBALS['log']->debug('DISABLE COPY:: REMOVING: ' . $cp['to']);
                         rmdir_recursive($cp['to']);
                     }
-                    $backup_path = clean_path( remove_file_extension(urldecode(hashToFile($_REQUEST['install_file'])))."-restore/".$cp['to'] ); // bug 16966 tyoung - replaced missing assignment to $backup_path
+                    $backup_path = clean_path( remove_file_extension(urldecode(hashToFile($this->validateInstallFile())))."-restore/".$cp['to'] ); // bug 16966 tyoung - replaced missing assignment to $backup_path
                     //check if this file exists in the -restore directory
 //					$GLOBALS['log']->debug("ModuleInstaller.php->disable_copy(): backup_path=".$backup_path);
                     if(file_exists($backup_path)){
@@ -3258,7 +3434,7 @@ class ModuleInstaller{
     protected function readManifest()
     {
         $installdefs = array();
-        require $this->base_dir . '/manifest.php';
+        require FileLoader::validateFilePath($this->base_dir . '/manifest.php');
         $installdefs = $this->patchInstallDefs($installdefs);
         return compact('manifest', 'installdefs');
     }
@@ -3337,5 +3513,35 @@ class ModuleInstaller{
         if (isset($engine) && isset($modules)) {
             $engine->addMappings($modules);
         }
+    }
+
+    /*
+     * Returns a valid input for the install_file
+     * paramete in the $_REQUEST sugperglobal
+     *
+     * @return mixed
+     */
+    protected function validateInstallFile()
+    {
+        $request = InputValidation::getService();
+        // $_REQUEST['install_file'] is a hash as per fileToHash/hashToFile
+        $installFile = $request->getValidInputRequest('install_file');
+        return $installFile;
+    }
+
+    /**
+     * Get package modules
+     *
+     * @return array
+     */
+    protected function getInstalledModules()
+    {
+        $installedModules = array();
+        if (isset($this->installdefs['beans'])) {
+            foreach ($this->installdefs['beans'] as $bean) {
+                $installedModules[] = $bean['module'];
+            }
+        }
+        return $installedModules;
     }
 }

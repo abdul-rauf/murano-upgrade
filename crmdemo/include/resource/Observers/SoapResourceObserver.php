@@ -17,10 +17,18 @@ class SoapResourceObserver extends ResourceObserver {
 
 private $soapServer;
 
-function SoapResourceObserver($module) {
-   parent::ResourceObserver($module);
-}
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SoapResourceObserver($module)
+    {
+        self::__construct($module);
+    }
 
+    public function __construct($module)
+    {
+        parent::__construct($module);
+    }
 
 /**
  * set_soap_server

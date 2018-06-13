@@ -22,6 +22,8 @@ require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 require_once 'modules/ModuleBuilder/parsers/views/History.php';
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 abstract class AbstractMetaDataImplementation
 {
     /**
@@ -288,8 +290,9 @@ abstract class AbstractMetaDataImplementation
         }
         // END ASSERTIONS
         $GLOBALS['log']->debug(get_class($this)."->_loadFromFile(): reading from ".$filename );
-        require $filename ; // loads the viewdef - must be a require not require_once to ensure can reload if called twice in succession
 
+        // loads the viewdef - must be a require not require_once to ensure can reload if called twice in succession
+        require FileLoader::validateFilePath($filename);
         // Check to see if we have the module name set as a variable rather than embedded in the $viewdef array
         // If we do, then we have to preserve the module variable when we write the file back out
         // This is a format used by ModuleBuilder templated modules to speed the renaming of modules

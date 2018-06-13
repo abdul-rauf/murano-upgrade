@@ -88,10 +88,7 @@ class ProductBundle extends SugarBean
     }
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function ProductBundle()
     {
@@ -299,11 +296,15 @@ class ProductBundle extends SugarBean
         if (empty($bundle_id)) {
             $bundle_id = $this->id;
         }
-        $query = "insert into $this->rel_products (id,product_index,product_id,bundle_id, date_modified) VALUES ('" . create_guid(
-            ) . "','$product_index', '$product_id', '$bundle_id', " . db_convert(
-                "'" . TimeDate::getInstance()->nowDb() . "'",
-                'datetime'
-            ) . ")";
+        $query = sprintf(
+            'INSERT INTO %s (id, product_index, product_id, bundle_id, date_modified) VALUES (%s, %s, %s, %s, %s)',
+            $this->rel_products,
+            $this->db->quoted(create_guid()),
+            $this->db->quoted($product_index),
+            $this->db->quoted($product_id),
+            $this->db->quoted($bundle_id),
+            db_convert("'" . TimeDate::getInstance()->nowDb() . "'", 'datetime')
+        );
         $this->db->query($query, true, "Error setting product to product bundle relationship: " . "<BR>$query");
         $GLOBALS['log']->debug("Setting product to product bundle relationship for $product_id and $bundle_id");
         return true;
@@ -323,7 +324,8 @@ class ProductBundle extends SugarBean
         }
 
         $query = "INSERT INTO $this->rel_notes (id,bundle_id,note_id,note_index, date_modified) VALUES ('" . create_guid(
-            ) . "','" . $bundle_id . "','" . $note_id . "','" . $note_index . "', " . db_convert(
+        ) . "'," . $this->db->quoted($bundle_id) . "," . $this->db->quoted($note_id) . "," .
+            $this->db->quoted($note_index) . ", " . db_convert(
                 "'" . TimeDate::getInstance()->nowDb() . "'",
                 'datetime'
             ) . ")";
@@ -342,7 +344,7 @@ class ProductBundle extends SugarBean
      */
     public function clear_product_bundle_note_relationship($bundle_id = '')
     {
-        $query = "DELETE FROM $this->rel_notes WHERE (bundle_id='$bundle_id') AND deleted=0";
+        $query = "DELETE FROM $this->rel_notes WHERE (bundle_id=".$this->db->quoted($bundle_id).") AND deleted=0";
 
         $this->db->query($query, true, "Error clearing note to product to product bundle relationship");
         return true;
@@ -355,7 +357,7 @@ class ProductBundle extends SugarBean
      */
     public function clear_productbundle_quote_relationship($bundle_id)
     {
-        $query = "delete from $this->rel_quotes where (bundle_id='$bundle_id') and deleted=0";
+        $query = "delete from $this->rel_quotes where (bundle_id=".$this->db->quoted($bundle_id).") and deleted=0";
         $this->db->query($query, true, "Error clearing product bundle to quote relationship: ");
         return true;
     }

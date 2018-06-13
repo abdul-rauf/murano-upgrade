@@ -9,6 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 class MBVardefs{
 	var $templates = array();
 	var $iTemplates = array();
@@ -18,7 +21,16 @@ class MBVardefs{
 	var $name = '';
 	var $errors = array();
 
-	function MBVardefs($name, $path, $key_name){
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function MBVardefs($name, $path, $key_name)
+    {
+        self::__construct($name, $path, $key_name);
+    }
+
+    public function __construct($name, $path, $key_name)
+    {
 		$this->path = $path;
 		$this->name = $name;
 		$this->key_name = $key_name;
@@ -175,11 +187,13 @@ class MBVardefs{
 		$header = file_get_contents('modules/ModuleBuilder/MB/header.php');
 		write_array_to_file('dictionary["' . $this->name . '"]', $this->getVardefs(), $path . '/vardefs.php', 'w', $header);
 	}
-	function load(){
-		$this->vardef = array('fields'=>array(), 'relationships'=>array());
-		if(file_exists($this->path . '/vardefs.php')){
-			include($this->path. '/vardefs.php');
-			$this->vardef = $vardefs;
-		}
-	}
+
+    public function load()
+    {
+        $this->vardef = array('fields'=>array(), 'relationships'=>array());
+        $vardefFile = $this->path . '/vardefs.php';
+        if (file_exists($vardefFile)) {
+            $this->vardef = FileLoader::varFromInclude($vardefFile, 'vardefs');
+        }
+    }
 }

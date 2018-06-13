@@ -17,11 +17,21 @@ require_once('include/Dashlets/DashletGeneric.php');
 
 
 class MyQuotesDashlet extends DashletGeneric { 
-    function MyQuotesDashlet($id, $def = null) {
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function MyQuotesDashlet($id, $def = null)
+    {
+        self::__construct($id, $def);
+    }
+
+    public function __construct($id, $def = null)
+    {
         global $current_user, $app_strings;
 		require('modules/Quotes/Dashlets/MyQuotesDashlet/MyQuotesDashlet.data.php');
 		
-        parent::DashletGeneric($id, $def);
+        parent::__construct($id, $def);
         
         if(empty($def['title'])) $this->title = translate('LBL_LIST_MY_QUOTES', 'Quotes');
         $this->searchFields = $dashletData['MyQuotesDashlet']['searchFields'];
@@ -29,5 +39,3 @@ class MyQuotesDashlet extends DashletGeneric {
         $this->seedBean = BeanFactory::getBean('Quotes');        
     }
 }
-
-?>

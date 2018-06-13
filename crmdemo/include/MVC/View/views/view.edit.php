@@ -11,6 +11,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 require_once('include/EditView/EditView2.php');
 class ViewEdit extends SugarView
 {
@@ -21,23 +23,16 @@ class ViewEdit extends SugarView
  	var $showTitle = true;
 
     /**
-     * Constructor
-     *
-     * @see SugarView::SugarView()
+     * @deprecated Use __construct() instead
      */
-    public function __construct($bean = null, $view_object_map = array())
+    public function ViewEdit($bean = null, $view_object_map = array(), Request $request = null)
     {
-        parent::__construct($bean, $view_object_map);
+        self::__construct($bean, $view_object_map, $request);
     }
 
-    /**
-     * Constructor
-     * @deprecated Use the PHP 5.x style __construct instead
-     * @see SugarView::SugarView()
-     */
-    public function ViewEdit($bean = null, $view_object_map = array())
+    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
     {
-        parent::SugarView($bean, $view_object_map);
+        parent::__construct($bean, $view_object_map, $request);
     }
 
     /**
@@ -65,4 +60,3 @@ class ViewEdit extends SugarView
         return new EditView();
     }
 }
-

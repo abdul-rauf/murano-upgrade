@@ -2,6 +2,15 @@
 
 $advancedSettings = array (
 
+    // Compression settings 
+    // Handle if the getRequest/getResponse methods will return the Request/Response deflated.
+    // But if we provide a $deflate boolean parameter to the getRequest or getResponse
+    // method it will have priority over the compression settings.
+    'compress' => array (
+        'requests' => true,
+        'responses' => true
+    ),
+
     // Security settings
     'security' => array (
 
@@ -39,8 +48,16 @@ $advancedSettings = array (
         'wantMessagesSigned' => false,
 
         // Indicates a requirement for the <saml:Assertion> elements received by
+        // this SP to be encrypted.
+        'wantAssertionsEncrypted' => false,
+
+        // Indicates a requirement for the <saml:Assertion> elements received by
         // this SP to be signed.        [The Metadata of the SP will offer this info]
         'wantAssertionsSigned' => false,
+
+        // Indicates a requirement for the NameID element on the SAMLResponse received
+        // by this SP to be present.
+        'wantNameId' => true,
 
         // Indicates a requirement for the NameID received by
         // this SP to be encrypted.
@@ -50,7 +67,7 @@ $advancedSettings = array (
         // Set to false and no AuthContext will be sent in the AuthNRequest,
         // Set true or don't present this parameter and you will get an AuthContext 'exact' 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport'
         // Set an array with the possible auth context values: array ('urn:oasis:names:tc:SAML:2.0:ac:classes:Password', 'urn:oasis:names:tc:SAML:2.0:ac:classes:X509'),
-        'requestedAuthnContext' => true,
+        'requestedAuthnContext' => false,
 
         // Allows the authn comparison parameter to be set, defaults to 'exact' if
         // the setting is not present.
@@ -60,6 +77,10 @@ $advancedSettings = array (
         // (In order to validate the xml, 'strict' and 'wantXMLValidation' must be true).
         'wantXMLValidation' => true,
 
+        // If true, SAMLResponses with an empty value at its Destination
+        // attribute will not be rejected for this fact.
+        'relaxDestinationValidation' => false,
+
         // Algorithm that the toolkit will use on signing process. Options:
         //    'http://www.w3.org/2000/09/xmldsig#rsa-sha1'
         //    'http://www.w3.org/2000/09/xmldsig#dsa-sha1'
@@ -67,6 +88,17 @@ $advancedSettings = array (
         //    'http://www.w3.org/2001/04/xmldsig-more#rsa-sha384'
         //    'http://www.w3.org/2001/04/xmldsig-more#rsa-sha512'
         'signatureAlgorithm' => 'http://www.w3.org/2000/09/xmldsig#rsa-sha1',
+
+        // Algorithm that the toolkit will use on digest process. Options:
+        //    'http://www.w3.org/2000/09/xmldsig#sha1'
+        //    'http://www.w3.org/2001/04/xmlenc#sha256'
+        //    'http://www.w3.org/2001/04/xmldsig-more#sha384'
+        //    'http://www.w3.org/2001/04/xmlenc#sha512'
+        'digestAlgorithm' => 'http://www.w3.org/2000/09/xmldsig#sha1',
+
+        // ADFS URL-Encodes SAML data as lowercase, and the toolkit by default uses
+        // uppercase. Turn it True for ADFS compatibility on signature verification
+        'lowercaseUrlencoding' => false,
     ),
 
     // Contact information template, it is recommended to suply a technical and support contacts

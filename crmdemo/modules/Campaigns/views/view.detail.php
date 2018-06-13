@@ -26,9 +26,17 @@ require_once('include/MVC/View/views/view.detail.php');
 
 class CampaignsViewDetail extends ViewDetail {
 
- 	function CampaignsViewDetail(){
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function CampaignsViewDetail()
+    {
+        self::__construct();
+    }
 
-        parent::ViewDetail();
+    public function __construct()
+    {
+        parent::__construct();
         //turn off normal display of subpanels
         $this->options['show_subpanels'] = false;
 
@@ -115,4 +123,3 @@ class CampaignsViewDetail extends ViewDetail {
 
     }
 }
-?>

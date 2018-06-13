@@ -10,6 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 require_once 'include/EditView/SugarVCR.php';
 require_once 'include/SugarSmarty/plugins/function.sugar_csrf_form_token.php';
 
@@ -19,6 +22,11 @@ require_once 'include/SugarSmarty/plugins/function.sugar_csrf_form_token.php';
  */
 class ListView
 {
+    /**
+     * @var Request
+     */
+    protected $request;
+
     var $local_theme= null;
     var $local_app_strings= null;
     var $local_image_path = null;
@@ -84,14 +92,17 @@ function processListView($seed, $xTemplateSection, $html_varName)
     global $sugar_config;
 
     $populateOnly = $this->ignorePopulateOnly ? FALSE : (!empty($sugar_config['save_query']) && $sugar_config['save_query'] == 'populate_only');
+
     if(isset($seed->module_dir) && $populateOnly) {
+
         if(empty($GLOBALS['displayListView']) && strcmp(strtolower($_REQUEST['action']), 'popup') != 0 && (!empty($_REQUEST['clear_query']) || $_REQUEST['module'] == $seed->module_dir && ((empty($_REQUEST['query']) || $_REQUEST['query'] == 'MSI')&& (empty($_SESSION['last_search_mod']) || $_SESSION['last_search_mod'] != $seed->module_dir)))) {
-            $_SESSION['last_search_mod'] = $_REQUEST['module'] ;
+            $_SESSION['last_search_mod'] = $this->request->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
             return;
         }
     }
+
     if(strcmp(strtolower($_REQUEST['action']), 'popup') != 0){
-        $_SESSION['last_search_mod'] = $_REQUEST['module'] ;
+        $_SESSION['last_search_mod'] = $this->request->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
     }
     //following session variable will track the detail view navigation history.
     //needs to the reset after each search.
@@ -554,13 +565,23 @@ function setDisplayHeaderAndFooter($bool) {
         $this->display_header_and_footer = $bool;
 }
 
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ListView()
+    {
+        self::__construct();
+    }
+
 /**initializes ListView
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________.
 */
- function ListView() {
+    public function __construct()
+    {
 
+    $this->request = InputValidation::getService();
 
     if(!$this->initialized) {
         global $sugar_config;
@@ -638,15 +659,7 @@ function getOrderBy($varName, $defaultOrderBy='', $force_sortorder='') {
             $desc = $defaultOrder;
         }
         $defaultOrder = $desc ? 'desc' : 'asc';
-        $orderByValue = $defaultOrder;
-        if (isset($_REQUEST[$orderByDirection]))
-        {
-            $possibleRequestOrderBy = $_REQUEST[$orderByDirection];
-            if ($possibleRequestOrderBy == 'asc' || $possibleRequestOrderBy == 'desc')
-            {
-                $orderByValue = $possibleRequestOrderBy;
-            }
-        }
+        $orderByValue = $this->request->getValidInputRequest($orderByDirection, 'Assert\Sql\OrderDirection', $defaultOrder); 
 
         if (isset($_REQUEST[$orderByColumn]))
         {
@@ -723,9 +736,6 @@ function getOrderBy($varName, $defaultOrderBy='', $force_sortorder='') {
     $this->getOrderBy($varName, $orderBy);
 
     $this->setLocalSessionVariable($varName, "QUERY_WHERE", $where);
-
-    //SETTING ORDER_BY FOR USE IN DETAILVIEW
-    $this->setLocalSessionVariable($varName, "ORDER_BY_DETAIL", $this->query_orderby);
 }
 
 function displayArrow() {
@@ -888,11 +898,12 @@ function setUserVariable($localVarName,$varName, $value) {
 */
  function getSessionVariable($localVarName,$varName) {
     //Set any variables pass in through request first
-    if(isset($_REQUEST[$this->getSessionVariableName($localVarName, $varName)])) {
-        $this->setSessionVariable($localVarName,$varName,$_REQUEST[$this->getSessionVariableName($localVarName, $varName)]);
+    if (isset($_REQUEST[$this->getSessionVariableName($localVarName, $varName)])) {
+        $var = $this->request->getValidInputRequest($this->getSessionVariableName($localVarName, $varName));
+        $this->setSessionVariable($localVarName,$varName, $var);
     }
 
-    if(isset($_SESSION[$this->getSessionVariableName($localVarName, $varName)])) {
+    if (isset($_SESSION[$this->getSessionVariableName($localVarName, $varName)])) {
         return $_SESSION[$this->getSessionVariableName($localVarName, $varName)];
     }
     return "";
@@ -900,10 +911,12 @@ function setUserVariable($localVarName,$varName, $value) {
 
 function getUserVariable($localVarName, $varName) {
     global $current_user;
-    if($this->is_dynamic ||  $localVarName == 'CELL')return;
-    if(isset($_REQUEST[$this->getSessionVariableName($localVarName, $varName)])) {
-
-            $this->setUserVariable($localVarName,$varName,$_REQUEST[$this->getSessionVariableName($localVarName, $varName)]);
+    if ($this->is_dynamic ||  $localVarName == 'CELL') {
+        return;
+    }
+    if (isset($_REQUEST[$this->getSessionVariableName($localVarName, $varName)])) {
+        $var = $this->request->getValidInputRequest($this->getSessionVariableName($localVarName, $varName));
+        $this->setUserVariable($localVarName, $varName, $var);
     }
     return $current_user->getPreference($this->getSessionVariableName($localVarName, $varName));
 }
@@ -928,7 +941,7 @@ function getUserVariable($localVarName, $varName) {
         );
 
         foreach($priority_map as $p) {
-            if (key_exists($p, $sortOrderList)) {
+            if (array_key_exists($p, $sortOrderList)) {
                 $order = strtolower($sortOrderList[$p]);
                 if (in_array($order, array('asc', 'desc'))) {
                     return $order;
@@ -1215,8 +1228,9 @@ function getUserVariable($localVarName, $varName) {
                 echo "<script>YAHOO.util.Event.addListener(window, \"load\", sListView.check_boxes);</script>\n";
 
                 $massUpdateRun = isset($_REQUEST['massupdate']) && $_REQUEST['massupdate'] == 'true';
-                $uids = empty($_REQUEST['uid']) || $massUpdateRun ? '' : $_REQUEST['uid'];
-                $select_entire_list = ($massUpdateRun) ? 0 : (isset($_POST['select_entire_list']) ? $_POST['select_entire_list'] : (isset($_REQUEST['select_entire_list']) ? $_REQUEST['select_entire_list'] : 0));
+                $uid = $this->request->getValidInputRequest('uid', array('Assert\Delimited' => array('constraints' => 'Assert\Guid')));
+                $uids = empty($uid) || $massUpdateRun ? '' : implode(',', $uid);
+                $select_entire_list = $massUpdateRun ? 0 : intval($this->request->getValidInputRequest('select_entire_list'));
 
                 echo "<textarea style='display: none' name='uid'>{$uids}</textarea>\n" .
                     "<input type='hidden' name='select_entire_list' value='{$select_entire_list}'>\n".
@@ -1294,12 +1308,6 @@ function getUserVariable($localVarName, $varName) {
             $GLOBALS['log']->info("Start/end records ($start_record, $end_record)");
 
             $end_record = $end_record-1;
-
-$script_href = "<a style=\'width: 150px\' name=\"thispage\" class=\'menuItem\' onmouseover=\'hiliteItem(this,\"yes\");\' onmouseout=\'unhiliteItem(this);\' onclick=\'if (document.MassUpdate.select_entire_list.value==1){document.MassUpdate.select_entire_list.value=0;sListView.check_all(document.MassUpdate, \"mass[]\", true, $this->records_per_page)}else {sListView.check_all(document.MassUpdate, \"mass[]\", true)};\' href=\'#\'>{$this->local_app_strings['LBL_LISTVIEW_OPTION_CURRENT']}&nbsp;&#x28;{$this->records_per_page}&#x29;&#x200E;</a>"
- . "<a style=\'width: 150px\' name=\"selectall\" class=\'menuItem\' onmouseover=\'hiliteItem(this,\"yes\");\' onmouseout=\'unhiliteItem(this);\' onclick=\'sListView.check_entire_list(document.MassUpdate, \"mass[]\",true,{$row_count});\' href=\'#\'>{$this->local_app_strings['LBL_LISTVIEW_OPTION_ENTIRE']}&nbsp;&#x28;{$row_count}&#x29;&#x200E;</a>"
- . "<a style=\'width: 150px\' name=\"deselect\" class=\'menuItem\' onmouseover=\'hiliteItem(this,\"yes\");\' onmouseout=\'unhiliteItem(this);\' onclick=\'sListView.clear_all(document.MassUpdate, \"mass[]\", false);\' href=\'#\'>{$this->local_app_strings['LBL_LISTVIEW_NONE']}</a>";
-
-$close_inline_img = SugarThemeRegistry::current()->getImage('close_inline', 'border=0', null, null, ".gif", $app_strings['LBL_CLOSEINLINE']);
 
             echo "<script>
                 function select_dialog() {
@@ -1859,7 +1867,8 @@ $close_inline_img = SugarThemeRegistry::current()->getImage('close_inline', 'bor
         return "&nbsp;<!--not_in_theme!--><img border='0' src='".$imgFileParts['dirname']."/".$imgFileParts['filename']."";
     }
 
-    function getArrowUpDownStart($upDown) {
+    public static function getArrowUpDownStart($upDown)
+    {
         $ext = ( SugarThemeRegistry::current()->pngSupport ? "png" : "gif" );
 
         if (!isset($upDown) || empty($upDown)) {
@@ -1876,7 +1885,8 @@ $close_inline_img = SugarThemeRegistry::current()->getImage('close_inline', 'bor
 		return '.'.$imgFileParts['extension']."' width='$width' height='$height' align='absmiddle' alt=".translate('LBL_SORT').">";
     }
 
-    function getArrowUpDownEnd($upDown) {
+    public static function getArrowUpDownEnd($upDown)
+    {
         if (!isset($upDown) || empty($upDown)) {
             $upDown = "";
         }
@@ -2033,4 +2043,3 @@ $close_inline_img = SugarThemeRegistry::current()->getImage('close_inline', 'bor
  }
 
 }
-?>

@@ -85,18 +85,13 @@ class FieldsMetaData extends SugarBean {
 	// METHODS
 	//////////////////////////////////////////////////////////////////
 
-
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function FieldsMetaData()
     {
         self::__construct();
     }
-
 
 	public function __construct()
 	{
@@ -106,7 +101,7 @@ class FieldsMetaData extends SugarBean {
 	
 	function mark_deleted($id)
 	{
-		$query = "DELETE FROM $this->table_name WHERE  id='$id'";
+        $query = "DELETE FROM $this->table_name WHERE  id=" . $this->db->quoted($id);
 		$this->db->query($query, true,"Error deleting record: ");
 		$this->mark_relationships_deleted($id);
 

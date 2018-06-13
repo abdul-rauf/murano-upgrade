@@ -20,6 +20,14 @@ class ChartsDashlet extends Dashlet {
     var $report_id;
 
     /**
+     * @deprecated Use __construct() instead
+     */
+    public function ChartsDashlet($id, $report_id, $def)
+    {
+        self::__construct($id, $report_id, $def);
+    }
+
+    /**
      * Constructor
      *
      * @global string current language
@@ -27,12 +35,13 @@ class ChartsDashlet extends Dashlet {
 	 * @param report_id $report_id id of the saved report
      * @param array $def options saved for this dashlet
      */
-    function ChartsDashlet($id, $report_id, $def) {
+    public function __construct($id, $report_id, $def)
+    {
     	$this->report_id = $report_id;
 
         $this->loadLanguage('ChartsDashlet'); // load the language strings here
 
-        parent::Dashlet($id); // call parent constructor
+        parent::__construct($id); // call parent constructor
 
         $this->searchFields = array();
         $this->isConfigurable = true; // dashlet is configurable

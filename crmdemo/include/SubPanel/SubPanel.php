@@ -30,7 +30,16 @@ class SubPanel
 	var $subpanel_defs;
 	var $subpanel_query=null;
     var $layout_def_key='';
-	function SubPanel($module, $record_id, $subpanel_id, $subpanelDef, $layout_def_key='')
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SubPanel($module, $record_id, $subpanel_id, $subpanelDef, $layout_def_key = '')
+    {
+        self::__construct($module, $record_id, $subpanel_id, $subpanelDef, $layout_def_key);
+    }
+
+    public function __construct($module, $record_id, $subpanel_id, $subpanelDef, $layout_def_key = '')
 	{
 		global $theme, $focus, $app_strings;
 
@@ -201,7 +210,8 @@ class SubPanel
 		return $modules;
 	}
 
-  function getModuleSubpanels($module){
+  public static function getModuleSubpanels($module)
+  {
   	require_once('include/SubPanel/SubPanelDefinitions.php');
 
   	$mod = BeanFactory::getBean($module);
@@ -352,4 +362,3 @@ class SubPanel
 		return $ret_val;
 	}
 }
-?>

@@ -44,10 +44,7 @@ class Role extends SugarBean {
 	var $new_schema = true;
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function Role()
     {
@@ -67,7 +64,8 @@ class Role extends SugarBean {
 	function query_modules($allow = 1)
 	{
 		$query = "SELECT module_id FROM roles_modules WHERE ";
-		$query .= "role_id = '$this->id' AND allow = '$allow' AND deleted=0";
+        $query .= "role_id = " . $this->db->quoted($this->id) . " AND allow = " .
+            $this->db->quoted($allow) . " AND deleted=0";
 		$result = $this->db->query($query);
 		
 		$return_array = array();

@@ -5,5 +5,1026 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add("editor-selection",function(e,t){var n="textContent",r="innerHTML",i="fontFamily";e.UA.ie&&e.UA.ie<11&&(n="nodeValue"),e.EditorSelection=function(t){var n,r,i,s,o,u,a,f=0,l,c,h=e.EditorSelection.ROOT;e.config.win.getSelection&&(!e.UA.ie||e.UA.ie<9||e.UA.ie>10)?n=e.config.win.getSelection():e.config.doc.selection&&(n=e.config.doc.selection.createRange()),this._selection=n;if(!n)return!1;if(n.pasteHTML){this.isCollapsed=n.compareEndPoints("StartToEnd",n)?!1:!0;if(this.isCollapsed){this.anchorNode=this.focusNode=e.one(n.parentElement()),t&&(i=e.config.doc.elementFromPoint(t.clientX,t.clientY)),o=n.duplicate();if(!i){r=n.parentElement(),s=r.childNodes;for(u=0;u<s.length;u++)o.inRange(n)&&(i||(i=s[u]))}this.ieNode=i,i&&(i.nodeType!==3&&(i.firstChild&&(i=i.firstChild),h.compareTo(i)&&i.firstChild&&(i=i.firstChild)),this.anchorNode=this.focusNode=e.EditorSelection.resolve(i),o.moveToElementText(n.parentElement()),a=n.compareEndPoints("StartToStart",o),a&&(f=this.getEditorOffset(h),n.move("character",-f)),this.anchorOffset=this.focusOffset=f,this.anchorTextNode=this.focusTextNode=e.one(i))}else n.htmlText&&n.htmlText!==""&&(l=e.Node.create(n.htmlText),l&&l.get("id")?(c=l.get("id"),this.anchorNode=this.focusNode=e.one("#"+c)):l&&(l=l.get("childNodes"),this.anchorNode=this.focusNode=l.item(0)))}else this.isCollapsed=n.isCollapsed,this.anchorNode=e.EditorSelection.resolve(n.anchorNode),this.focusNode=e.EditorSelection.resolve(n.focusNode),this.anchorOffset=n.anchorOffset,this.focusOffset=n.focusOffset,this.anchorTextNode=e.one(n.anchorNode||this.anchorNode),this.focusTextNode=e.one(n.focusNode||this.focusNode);e.Lang.isString(n.text)?this.text=n.text:n.toString?this.text=n.toString():this.text=""},e.EditorSelection.removeFontFamily=function(t){t.removeAttribute("face");var n=t.getAttribute("style").toLowerCase();(n===""||n==="font-family: ")&&t.removeAttribute("style"),n.match(e.EditorSelection.REG_FONTFAMILY)&&(n=n.replace(e.EditorSelection.REG_FONTFAMILY,""),t.setAttribute("style",n))},e.EditorSelection.filter=function(t){var n=(new Date).getTime(),r=e.EditorSelection,s=r.ROOT,o,u=s.all(r.ALL),a=s.all("strong,em"),f=e.config.doc,l,c={},h="",p,d=(new Date).getTime(),v;u.each(function(t){var n=e.Node.getDOMNode(t);n.style[i]&&(c["."+t._yuid]=n.style[i],t.addClass(t._yuid),r.removeFontFamily(n))}),v=(new Date).getTime(),s.all(".hr").addClass("yui-skip").addClass("yui-non"),e.UA.ie&&(l=e.Node.getDOMNode(s).getElementsByTagName("hr"),e.each(l,function(e){var t=f.createElement("div"),n=t.style;t.className="hr yui-non yui-skip",t.setAttribute("readonly",!0),t.setAttribute("contenteditable",!1),e.parentNode&&e.parentNode.replaceChild(t,e),n.border="1px solid #ccc",n.lineHeight="0",n.height="0",n.fontSize="0",n.marginTop="5px",n.marginBottom="5px",n.marginLeft="0px",n.marginRight="0px",n.padding="0"})),e.each(c,function(e,t){h+=t+" { font-family: "+e.replace(/"/gi,"")+"; }"}),e.StyleSheet(h,"editor"),a.each(function(e,t){var n=e.get("tagName").toLowerCase(),i="i";n==="strong"&&(i="b"),r.prototype._swap(a.item(t),i)}),p=s.all("ol,ul"),p.each(function(e){var t=e.all("li");t.size()||e.remove()}),t&&r.filterBlocks(),o=(new Date).getTime()},e.EditorSelection.filterBlocks=function(){var t=(new Date).getTime(),r,i=e.Node.getDOMNode(e.EditorSelection.ROOT).childNodes,s,o,u=!1,a=!0,f,l,c,h,p,d;if(i){for(s=0;s<i.length;s++)o=e.one(i[s]),o.test(e.EditorSelection.BLOCKS)?u=e.EditorSelection._wrapBlock(u):(a=!0,i[s].nodeType===3&&(h=i[s][n].match(e.EditorSelection.REG_CHAR),p=i[s][n].match(e.EditorSelection.REG_NON),h===null&&p&&(a=!1)),a&&(u||(u=[]),u.push(i[s])));u=e.EditorSelection._wrapBlock(u)}l=e.all(e.EditorSelection.DEFAULT_BLOCK_TAG);if(l.size()===1){c=l.item(0).all("br");if(c.size()===1){c.item(0).test(".yui-cursor")||c.item(0).remove(),d=l.item(0).get("innerHTML");if(d===""||d===" ")l.set("innerHTML",e.EditorSelection.CURSOR),f=new e.EditorSelection,f.focusCursor(!0,!0);c.item(0).test(".yui-cursor")&&e.UA.ie&&c.item(0).remove()}}else l.each(function(e){var t=e.get("innerHTML");t===""&&e.remove()});r=(new Date).getTime()},e.EditorSelection.REG_FONTFAMILY=/font-family:\s*;/,e.EditorSelection.REG_CHAR=/[a-zA-Z-0-9_!@#\$%\^&*\(\)-=_+\[\]\\{}|;':",.\/<>\?]/gi,e.EditorSelection.REG_NON=/[\s|\n|\t]/gi,e.EditorSelection.REG_NOHTML=/<\S[^><]*>/g,e.EditorSelection._wrapBlock=function(t){if(t){var n=e.Node.create("<"+e.EditorSelection.DEFAULT_BLOCK_TAG+"></"+e.EditorSelection.DEFAULT_BLOCK_TAG+">"),r=e.one(t[0]),i;for(i=1;i<t.length;i++)n.append(t[i]);r.replace(n),n.prepend(r)}return!1},e.EditorSelection.unfilter=function(){var t=e.EditorSelection.ROOT,n=t.all("[class]"),r="",s,o,u=t;return n.each(function(e){e.hasClass(e._yuid)&&(e.setStyle(i,e.getStyle(i)),e.removeClass(e._yuid),e.getAttribute("class")===""&&e.removeAttribute("class"))}),s=t.all(".yui-non"),s.each(function(e){!e.hasClass("yui-skip")&&e.get("innerHTML")===""?e.remove():e.removeClass("yui-non").removeClass("yui-skip")}),o=t.all("[id]"),o.each(function(e){e.get("id").indexOf("yui_3_")===0&&(e.removeAttribute("id"),e.removeAttribute("_yuid"))}),u&&(r=u.get("innerHTML")),t.all(".hr").addClass("yui-skip").addClass("yui-non"),r},e.EditorSelection.resolve=function(t){if(!t)return e.EditorSelection.ROOT;if(t&&t.nodeType===3)try{t=t.parentNode}catch(n){t=e.EditorSelection.ROOT}return e.one(t)},e.EditorSelection.getText=function(t){var n=t.get("innerHTML").replace(e.EditorSelection.REG_NOHTML,"");return n=n.replace("<span><br></span>","").replace("<br>",""),n},e.EditorSelection.DEFAULT_BLOCK_TAG="p",e.EditorSelection.ALL="[style],font[face]",e.EditorSelection.BLOCKS="p,div,ul,ol,table,style",e.EditorSelection.TMP="yui-tmp",e.EditorSelection.DEFAULT_TAG="span",e.EditorSelection.CURID="yui-cursor",e.EditorSelection.CUR_WRAPID="yui-cursor-wrapper",e.EditorSelection.CURSOR='<span><br class="yui-cursor"></span>',e.EditorSelection.ROOT=e.one("body"),e.EditorSelection.hasCursor=function(){var t=e.all("#"+e.EditorSelection.CUR_WRAPID);return t.size()},e.EditorSelection
-.cleanCursor=function(){var t,n="br.yui-cursor";t=e.all(n),t.size()&&t.each(function(t){var n=t.get("parentNode.parentNode.childNodes"),r;n.size()?t.remove():(r=e.EditorSelection.getText(n.item(0)),r!==""&&t.remove())})},e.EditorSelection.prototype={text:null,isCollapsed:null,anchorNode:null,anchorOffset:null,anchorTextNode:null,focusNode:null,focusOffset:null,focusTextNode:null,_selection:null,_wrap:function(t,n){var i=e.Node.create("<"+n+"></"+n+">");return i.set(r,t.get(r)),t.set(r,""),t.append(i),e.Node.getDOMNode(i)},_swap:function(t,n){var i=e.Node.create("<"+n+"></"+n+">");return i.set(r,t.get(r)),t.replace(i,t),e.Node.getDOMNode(i)},getSelected:function(){var t=e.EditorSelection,n=t.ROOT,r,s=[];return t.filter(),e.config.doc.execCommand("fontname",null,t.TMP),r=n.all(t.ALL),r.each(function(o,u){o.getStyle(i)===t.TMP&&(o.setStyle(i,""),t.removeFontFamily(o),o.compareTo(n)||s.push(e.Node.getDOMNode(r.item(u))))}),e.all(s)},insertContent:function(e){return this.insertAtCursor(e,this.anchorTextNode,this.anchorOffset,!0)},insertAtCursor:function(t,r,i,s){var o=e.Node.create("<"+e.EditorSelection.DEFAULT_TAG+' class="yui-non"></'+e.EditorSelection.DEFAULT_TAG+">"),u,a,f,l,c=this.createRange(),h,p=e.EditorSelection.ROOT;p.compareTo(r)&&(h=e.Node.create("<span></span>"),r.append(h),r=h);if(c.pasteHTML){if(i===0&&r&&!r.previous()&&r.get("nodeType")===3)return r.insert(t,"before"),c.moveToElementText&&c.moveToElementText(e.Node.getDOMNode(r.previous())),c.collapse(!1),c.select(),r.previous();l=e.Node.create(t);try{c.pasteHTML('<span id="rte-insert"></span>')}catch(d){}u=p.one("#rte-insert");if(u)return u.set("id",""),u.replace(l),c.moveToElementText&&c.moveToElementText(e.Node.getDOMNode(l)),c.collapse(!1),c.select(),l;e.on("available",function(){u.set("id",""),u.replace(l),c.moveToElementText&&c.moveToElementText(e.Node.getDOMNode(l)),c.collapse(!1),c.select()},"#rte-insert")}else i>0?(u=r.get(n),a=e.one(e.config.doc.createTextNode(u.substr(0,i))),f=e.one(e.config.doc.createTextNode(u.substr(i))),r.replace(a,r),l=e.Node.create(t),l.get("nodeType")===11&&(h=e.Node.create("<span></span>"),h.append(l),l=h),a.insert(l,"after"),f&&(l.insert(o,"after"),o.insert(f,"after"),this.selectNode(o,s))):(r.get("nodeType")===3&&(r=r.get("parentNode")||p),l=e.Node.create(t),t=r.get("innerHTML").replace(/\n/gi,""),t===""||t==="<br>"?r.append(l):l.get("parentNode")?r.insert(l,"before"):p.prepend(l),r.get("firstChild").test("br")&&r.get("firstChild").remove());return l},wrapContent:function(t){t=t?t:e.EditorSelection.DEFAULT_TAG;if(!this.isCollapsed){var n=this.getSelected(),r=[],i,s,o,u;return n.each(function(e,i){var s=e.get("tagName").toLowerCase();s==="font"?r.push(this._swap(n.item(i),t)):r.push(this._wrap(n.item(i),t))},this),i=this.createRange(),o=r[0],s=r[r.length-1],this._selection.removeAllRanges?(i.setStart(r[0],0),i.setEnd(s,s.childNodes.length),this._selection.removeAllRanges(),this._selection.addRange(i)):(i.moveToElementText&&(i.moveToElementText(e.Node.getDOMNode(o)),u=this.createRange(),u.moveToElementText(e.Node.getDOMNode(s)),i.setEndPoint("EndToEnd",u)),i.select()),r=e.all(r),r}return e.all([])},replace:function(t,r){var i=this.createRange(),s,o,u,a;return i.getBookmark?(u=i.getBookmark(),o=this.anchorNode.get("innerHTML").replace(t,r),this.anchorNode.set("innerHTML",o),i.moveToBookmark(u),a=e.one(i.parentElement())):(s=this.anchorTextNode,o=s.get(n),u=o.indexOf(t),o=o.replace(t,""),s.set(n,o),a=this.insertAtCursor(r,s,u,!0)),a},remove:function(){return this._selection&&this._selection.removeAllRanges&&this._selection.removeAllRanges(),this},createRange:function(){return e.config.doc.selection?e.config.doc.selection.createRange():e.config.doc.createRange()},selectNode:function(t,n,r){if(!t)return;r=r||0,t=e.Node.getDOMNode(t);var i=this.createRange();if(i.selectNode){i.selectNode(t),this._selection.removeAllRanges(),this._selection.addRange(i);if(n)try{this._selection.collapse(t,r)}catch(s){this._selection.collapse(t,0)}}else{t.nodeType===3&&(t=t.parentNode);try{i.moveToElementText(t)}catch(o){}n&&i.collapse(r?!1:!0),i.select()}return this},setCursor:function(){return this.removeCursor(!1),this.insertContent(e.EditorSelection.CURSOR)},getCursor:function(){return e.EditorSelection.ROOT.all("#"+e.EditorSelection.CURID)},removeCursor:function(e){var t=this.getCursor();return t&&(e?(t.removeAttribute("id"),t.set("innerHTML",'<br class="yui-cursor">')):t.remove()),t},focusCursor:function(e,t){e!==!1&&(e=!0),t!==!1&&(t=!0);var n=this.removeCursor(!0);n&&n.each(function(n){this.selectNode(n,e,t)},this)},toString:function(){return"EditorSelection Object"},getEditorOffset:function(t){var n=(t||e.EditorSelection.ROOT).getDOMNode(),r=0,i=e.config.doc,s=e.config.win,o,u,a;return typeof s.getSelection!="undefined"?(u=s.getSelection().getRangeAt(0),a=u.cloneRange(),a.selectNodeContents(n),a.setEnd(u.endContainer,u.endOffset),r=a.toString().length):(o=i.selection,o&&o.type!=="Control"&&(u=o.createRange(),a=i.body.createTextRange(),a.moveToElementText(n),a.setEndPoint("EndToEnd",u),r=a.text.length)),r}},e.Selection=e.EditorSelection},"3.15.0",{requires:["node"]});
+YUI.add('editor-selection', function (Y, NAME) {
+
+    /**
+     * Wraps some common Selection/Range functionality into a simple object
+     * @class EditorSelection
+     * @constructor
+     * @module editor
+     * @submodule selection
+     */
+
+    //TODO This shouldn't be there, Y.Node doesn't normalize getting textnode content.
+    var textContent = 'textContent',
+    INNER_HTML = 'innerHTML',
+    FONT_FAMILY = 'fontFamily';
+
+    if (Y.UA.ie && Y.UA.ie < 11) {
+        textContent = 'nodeValue';
+    }
+
+    Y.EditorSelection = function(domEvent) {
+        var sel, par, ieNode, nodes, rng, i,
+            comp, moved = 0, n, id, root = Y.EditorSelection.ROOT;
+
+
+        if (Y.config.win.getSelection && (!Y.UA.ie || Y.UA.ie < 9 || Y.UA.ie > 10)) {
+            sel = Y.config.win.getSelection();
+        } else if (Y.config.doc.selection) {
+            sel = Y.config.doc.selection.createRange();
+        }
+        this._selection = sel;
+
+        if (!sel) {
+            return false;
+        }
+
+        if (sel.pasteHTML) {
+            this.isCollapsed = (sel.compareEndPoints('StartToEnd', sel)) ? false : true;
+            if (this.isCollapsed) {
+                this.anchorNode = this.focusNode = Y.one(sel.parentElement());
+
+                if (domEvent) {
+                    ieNode = Y.config.doc.elementFromPoint(domEvent.clientX, domEvent.clientY);
+                }
+                rng = sel.duplicate();
+                if (!ieNode) {
+                    par = sel.parentElement();
+                    nodes = par.childNodes;
+
+                    for (i = 0; i < nodes.length; i++) {
+                        //This causes IE to not allow a selection on a doubleclick
+                        //rng.select(nodes[i]);
+                        if (rng.inRange(sel)) {
+                            if (!ieNode) {
+                                ieNode = nodes[i];
+                            }
+                        }
+                    }
+                }
+
+                this.ieNode = ieNode;
+
+                if (ieNode) {
+                    if (ieNode.nodeType !== 3) {
+                        if (ieNode.firstChild) {
+                            ieNode = ieNode.firstChild;
+                        }
+                        if (root.compareTo(ieNode)) {
+                            if (ieNode.firstChild) {
+                                ieNode = ieNode.firstChild;
+                            }
+                        }
+                    }
+                    this.anchorNode = this.focusNode = Y.EditorSelection.resolve(ieNode);
+
+                    rng.moveToElementText(sel.parentElement());
+                    comp = sel.compareEndPoints('StartToStart', rng);
+                    if (comp) {
+                        //We are not at the beginning of the selection.
+                        //Setting the move to something large, may need to increase it later
+                        moved = this.getEditorOffset(root);
+                        sel.move('character', -(moved));
+                    }
+
+                    this.anchorOffset = this.focusOffset = moved;
+
+                    this.anchorTextNode = this.focusTextNode = Y.one(ieNode);
+                }
+
+
+            } else {
+                //This helps IE deal with a selection and nodeChange events
+                if (sel.htmlText && sel.htmlText !== '') {
+                    n = Y.Node.create(sel.htmlText);
+                    if (n && n.get('id')) {
+                        id = n.get('id');
+                        this.anchorNode = this.focusNode = Y.one('#' + id);
+                    } else if (n) {
+                        n = n.get('childNodes');
+                        this.anchorNode = this.focusNode = n.item(0);
+                    }
+                }
+            }
+
+            //var self = this;
+            //debugger;
+        } else {
+            this.isCollapsed = sel.isCollapsed;
+            this.anchorNode = Y.EditorSelection.resolve(sel.anchorNode);
+            this.focusNode = Y.EditorSelection.resolve(sel.focusNode);
+            this.anchorOffset = sel.anchorOffset;
+            this.focusOffset = sel.focusOffset;
+
+            this.anchorTextNode = Y.one(sel.anchorNode || this.anchorNode);
+            this.focusTextNode = Y.one(sel.focusNode || this.focusNode);
+        }
+        if (Y.Lang.isString(sel.text)) {
+            this.text = sel.text;
+        } else {
+            if (sel.toString) {
+                this.text = sel.toString();
+            } else {
+                this.text = '';
+            }
+        }
+    };
+
+    /**
+    * Utility method to remove dead font-family styles from an element.
+    * @static
+    * @method removeFontFamily
+    */
+    Y.EditorSelection.removeFontFamily = function(n) {
+        n.removeAttribute('face');
+        var s = n.getAttribute('style').toLowerCase();
+        if (s === '' || (s === 'font-family: ')) {
+            n.removeAttribute('style');
+        }
+        if (s.match(Y.EditorSelection.REG_FONTFAMILY)) {
+            s = s.replace(Y.EditorSelection.REG_FONTFAMILY, '');
+            n.setAttribute('style', s);
+        }
+    };
+
+    /**
+    * Performs a prefilter on all nodes in the editor. Looks for nodes with a style: fontFamily or font face
+    * It then creates a dynamic class assigns it and removed the property. This is so that we don't lose
+    * the fontFamily when selecting nodes.
+    * @static
+    * @method filter
+    */
+    Y.EditorSelection.filter = function(blocks) {
+
+        var startTime = (new Date()).getTime(),
+            editorSelection = Y.EditorSelection,
+            root = editorSelection.ROOT,
+            endTime,
+            nodes = root.all(editorSelection.ALL),
+            baseNodes = root.all('strong,em'),
+            doc = Y.config.doc, hrs,
+            classNames = {}, cssString = '',
+            ls, startTime1 = (new Date()).getTime(),
+            endTime1;
+
+        nodes.each(function(n) {
+            var raw = Y.Node.getDOMNode(n);
+            if (raw.style[FONT_FAMILY]) {
+                classNames['.' + n._yuid] = raw.style[FONT_FAMILY];
+                n.addClass(n._yuid);
+
+                editorSelection.removeFontFamily(raw);
+            }
+        });
+        endTime1 = (new Date()).getTime();
+
+        root.all('.hr').addClass('yui-skip').addClass('yui-non');
+
+        if (Y.UA.ie) {
+            hrs = Y.Node.getDOMNode(root).getElementsByTagName('hr');
+            Y.each(hrs, function(hr) {
+                var el = doc.createElement('div'),
+                s = el.style;
+
+                el.className = 'hr yui-non yui-skip';
+
+                el.setAttribute('readonly', true);
+                el.setAttribute('contenteditable', false); //Keep it from being Edited
+                if (hr.parentNode) {
+                    hr.parentNode.replaceChild(el, hr);
+                }
+                //Had to move to inline style. writes for ie's < 8. They don't render el.setAttribute('style');
+                s.border = '1px solid #ccc';
+                s.lineHeight = '0';
+                s.height = '0';
+                s.fontSize = '0';
+                s.marginTop = '5px';
+                s.marginBottom = '5px';
+                s.marginLeft = '0px';
+                s.marginRight = '0px';
+                s.padding = '0';
+            });
+        }
+
+
+        Y.each(classNames, function(v, k) {
+            cssString += k + ' { font-family: ' + v.replace(/"/gi, '') + '; }';
+        });
+        Y.StyleSheet(cssString, 'editor');
+
+
+        //Not sure about this one?
+        baseNodes.each(function(n, k) {
+            var t = n.get('tagName').toLowerCase(),
+                newTag = 'i';
+            if (t === 'strong') {
+                newTag = 'b';
+            }
+            editorSelection.prototype._swap(baseNodes.item(k), newTag);
+        });
+
+        //Filter out all the empty UL/OL's
+        ls = root.all('ol,ul');
+        ls.each(function(v) {
+            var lis = v.all('li');
+            if (!lis.size()) {
+                v.remove();
+            }
+        });
+
+        if (blocks) {
+            editorSelection.filterBlocks();
+        }
+        endTime = (new Date()).getTime();
+    };
+
+    /**
+    * Method attempts to replace all "orphined" text nodes in the main body by wrapping them with a <p>. Called from filter.
+    * @static
+    * @method filterBlocks
+    */
+    Y.EditorSelection.filterBlocks = function() {
+        var startTime = (new Date()).getTime(), endTime,
+            childs = Y.Node.getDOMNode(Y.EditorSelection.ROOT).childNodes, i, node, wrapped = false, doit = true,
+            sel, single, br, c, s, html;
+
+        if (childs) {
+            for (i = 0; i < childs.length; i++) {
+                node = Y.one(childs[i]);
+                if (!node.test(Y.EditorSelection.BLOCKS)) {
+                    doit = true;
+                    if (childs[i].nodeType === 3) {
+                        c = childs[i][textContent].match(Y.EditorSelection.REG_CHAR);
+                        s = childs[i][textContent].match(Y.EditorSelection.REG_NON);
+                        if (c === null && s) {
+                            doit = false;
+
+                        }
+                    }
+                    if (doit) {
+                        if (!wrapped) {
+                            wrapped = [];
+                        }
+                        wrapped.push(childs[i]);
+                    }
+                } else {
+                    wrapped = Y.EditorSelection._wrapBlock(wrapped);
+                }
+            }
+            wrapped = Y.EditorSelection._wrapBlock(wrapped);
+        }
+
+        single = Y.all(Y.EditorSelection.DEFAULT_BLOCK_TAG);
+        if (single.size() === 1) {
+            br = single.item(0).all('br');
+            if (br.size() === 1) {
+                if (!br.item(0).test('.yui-cursor')) {
+                    br.item(0).remove();
+                }
+                html = single.item(0).get('innerHTML');
+                if (html === '' || html === ' ') {
+                    single.set('innerHTML', Y.EditorSelection.CURSOR);
+                    sel = new Y.EditorSelection();
+                    sel.focusCursor(true, true);
+                }
+                if (br.item(0).test('.yui-cursor') && Y.UA.ie) {
+                    br.item(0).remove();
+                }
+            }
+        } else {
+            single.each(function(p) {
+                var html = p.get('innerHTML');
+                if (html === '') {
+                    p.remove();
+                }
+            });
+        }
+
+        endTime = (new Date()).getTime();
+    };
+
+    /**
+    * Regular Expression used to find dead font-family styles
+    * @static
+    * @property REG_FONTFAMILY
+    */
+    Y.EditorSelection.REG_FONTFAMILY = /font-family:\s*;/;
+
+    /**
+    * Regular Expression to determine if a string has a character in it
+    * @static
+    * @property REG_CHAR
+    */
+    Y.EditorSelection.REG_CHAR = /[a-zA-Z-0-9_!@#\$%\^&*\(\)-=_+\[\]\\{}|;':",.\/<>\?]/gi;
+
+    /**
+    * Regular Expression to determine if a string has a non-character in it
+    * @static
+    * @property REG_NON
+    */
+    Y.EditorSelection.REG_NON = /[\s|\n|\t]/gi;
+
+    /**
+    * Regular Expression to remove all HTML from a string
+    * @static
+    * @property REG_NOHTML
+    */
+    Y.EditorSelection.REG_NOHTML = /<\S[^><]*>/g;
+
+
+    /**
+    * Wraps an array of elements in a Block level tag
+    * @static
+    * @private
+    * @method _wrapBlock
+    */
+    Y.EditorSelection._wrapBlock = function(wrapped) {
+        if (wrapped) {
+            var newChild = Y.Node.create('<' + Y.EditorSelection.DEFAULT_BLOCK_TAG + '></' + Y.EditorSelection.DEFAULT_BLOCK_TAG + '>'),
+                firstChild = Y.one(wrapped[0]), i;
+
+            for (i = 1; i < wrapped.length; i++) {
+                newChild.append(wrapped[i]);
+            }
+            firstChild.replace(newChild);
+            newChild.prepend(firstChild);
+        }
+        return false;
+    };
+
+    /**
+    * Undoes what filter does enough to return the HTML from the Editor, then re-applies the filter.
+    * @static
+    * @method unfilter
+    * @return {String} The filtered HTML
+    */
+    Y.EditorSelection.unfilter = function() {
+        var root = Y.EditorSelection.ROOT,
+            nodes = root.all('[class]'),
+            html = '', nons, ids,
+            body = root;
+
+
+        nodes.each(function(n) {
+            if (n.hasClass(n._yuid)) {
+                //One of ours
+                n.setStyle(FONT_FAMILY, n.getStyle(FONT_FAMILY));
+                n.removeClass(n._yuid);
+                if (n.getAttribute('class') === '') {
+                    n.removeAttribute('class');
+                }
+            }
+        });
+
+        nons = root.all('.yui-non');
+        nons.each(function(n) {
+            if (!n.hasClass('yui-skip') && n.get('innerHTML') === '') {
+                n.remove();
+            } else {
+                n.removeClass('yui-non').removeClass('yui-skip');
+            }
+        });
+
+        ids = root.all('[id]');
+        ids.each(function(n) {
+            if (n.get('id').indexOf('yui_3_') === 0) {
+                n.removeAttribute('id');
+                n.removeAttribute('_yuid');
+            }
+        });
+
+        if (body) {
+            html = body.get('innerHTML');
+        }
+
+        root.all('.hr').addClass('yui-skip').addClass('yui-non');
+
+        /*
+        nodes.each(function(n) {
+            n.addClass(n._yuid);
+            n.setStyle(FONT_FAMILY, '');
+            if (n.getAttribute('style') === '') {
+                n.removeAttribute('style');
+            }
+        });
+        */
+
+        return html;
+    };
+    /**
+    * Resolve a node from the selection object and return a Node instance
+    * @static
+    * @method resolve
+    * @param {HTMLElement} n The HTMLElement to resolve. Might be a TextNode, gives parentNode.
+    * @return {Node} The Resolved node
+    */
+    Y.EditorSelection.resolve = function(n) {
+        if (!n) {
+            return Y.EditorSelection.ROOT;
+        }
+
+        if (n && n.nodeType === 3) {
+            //Adding a try/catch here because in rare occasions IE will
+            //Throw a error accessing the parentNode of a stranded text node.
+            //In the case of Ctrl+Z (Undo)
+            try {
+                n = n.parentNode;
+            } catch (re) {
+                n = Y.EditorSelection.ROOT;
+            }
+        }
+        return Y.one(n);
+    };
+
+    /**
+    * Returns the innerHTML of a node with all HTML tags removed.
+    * @static
+    * @method getText
+    * @param {Node} node The Node instance to remove the HTML from
+    * @return {String} The string of text
+    */
+    Y.EditorSelection.getText = function(node) {
+        var txt = node.get('innerHTML').replace(Y.EditorSelection.REG_NOHTML, '');
+        //Clean out the cursor subs to see if the Node is empty
+        txt = txt.replace('<span><br></span>', '').replace('<br>', '');
+        return txt;
+    };
+
+    //Y.EditorSelection.DEFAULT_BLOCK_TAG = 'div';
+    Y.EditorSelection.DEFAULT_BLOCK_TAG = 'p';
+
+    /**
+    * The selector to use when looking for Nodes to cache the value of: [style],font[face]
+    * @static
+    * @property ALL
+    */
+    Y.EditorSelection.ALL = '[style],font[face]';
+
+    /**
+    * The selector to use when looking for block level items.
+    * @static
+    * @property BLOCKS
+    */
+    Y.EditorSelection.BLOCKS = 'p,div,ul,ol,table,style';
+    /**
+    * The temporary fontname applied to a selection to retrieve their values: yui-tmp
+    * @static
+    * @property TMP
+    */
+    Y.EditorSelection.TMP = 'yui-tmp';
+    /**
+    * The default tag to use when creating elements: span
+    * @static
+    * @property DEFAULT_TAG
+    */
+    Y.EditorSelection.DEFAULT_TAG = 'span';
+
+    /**
+    * The id of the outer cursor wrapper
+    * @static
+    * @property CURID
+    */
+    Y.EditorSelection.CURID = 'yui-cursor';
+
+    /**
+    * The id used to wrap the inner space of the cursor position
+    * @static
+    * @property CUR_WRAPID
+    */
+    Y.EditorSelection.CUR_WRAPID = 'yui-cursor-wrapper';
+
+    /**
+    * The default HTML used to focus the cursor..
+    * @static
+    * @property CURSOR
+    */
+    Y.EditorSelection.CURSOR = '<span><br class="yui-cursor"></span>';
+
+    /**
+    * The default HTML element from which data will be retrieved. Default: body
+    * @static
+    * @property ROOT
+    */
+    Y.EditorSelection.ROOT = Y.one('body');
+
+    Y.EditorSelection.hasCursor = function() {
+        var cur = Y.all('#' + Y.EditorSelection.CUR_WRAPID);
+        return cur.size();
+    };
+
+    /**
+    * Called from Editor keydown to remove the "extra" space before the cursor.
+    * @static
+    * @method cleanCursor
+    */
+    Y.EditorSelection.cleanCursor = function() {
+        var cur, sel = 'br.yui-cursor';
+        cur = Y.all(sel);
+        if (cur.size()) {
+            cur.each(function(b) {
+                var c = b.get('parentNode.parentNode.childNodes'), html;
+                if (c.size()) {
+                    b.remove();
+                } else {
+                    html = Y.EditorSelection.getText(c.item(0));
+                    if (html !== '') {
+                        b.remove();
+                    }
+                }
+            });
+        }
+        /*
+        var cur = Y.all('#' + Y.EditorSelection.CUR_WRAPID);
+        if (cur.size()) {
+            cur.each(function(c) {
+                var html = c.get('innerHTML');
+                if (html == '&nbsp;' || html == '<br>') {
+                    if (c.previous() || c.next()) {
+                        c.remove();
+                    }
+                }
+            });
+        }
+        */
+    };
+
+    Y.EditorSelection.prototype = {
+        /**
+        * Range text value
+        * @property text
+        * @type String
+        */
+        text: null,
+        /**
+        * Flag to show if the range is collapsed or not
+        * @property isCollapsed
+        * @type Boolean
+        */
+        isCollapsed: null,
+        /**
+        * A Node instance of the parentNode of the anchorNode of the range
+        * @property anchorNode
+        * @type Node
+        */
+        anchorNode: null,
+        /**
+        * The offset from the range object
+        * @property anchorOffset
+        * @type Number
+        */
+        anchorOffset: null,
+        /**
+        * A Node instance of the actual textNode of the range.
+        * @property anchorTextNode
+        * @type Node
+        */
+        anchorTextNode: null,
+        /**
+        * A Node instance of the parentNode of the focusNode of the range
+        * @property focusNode
+        * @type Node
+        */
+        focusNode: null,
+        /**
+        * The offset from the range object
+        * @property focusOffset
+        * @type Number
+        */
+        focusOffset: null,
+        /**
+        * A Node instance of the actual textNode of the range.
+        * @property focusTextNode
+        * @type Node
+        */
+        focusTextNode: null,
+        /**
+        * The actual Selection/Range object
+        * @property _selection
+        * @private
+        */
+        _selection: null,
+        /**
+        * Wrap an element, with another element
+        * @private
+        * @method _wrap
+        * @param {HTMLElement} n The node to wrap
+        * @param {String} tag The tag to use when creating the new element.
+        * @return {HTMLElement} The wrapped node
+        */
+        _wrap: function(n, tag) {
+            var tmp = Y.Node.create('<' + tag + '></' + tag + '>');
+            tmp.set(INNER_HTML, n.get(INNER_HTML));
+            n.set(INNER_HTML, '');
+            n.append(tmp);
+            return Y.Node.getDOMNode(tmp);
+        },
+        /**
+        * Swap an element, with another element
+        * @private
+        * @method _swap
+        * @param {HTMLElement} n The node to swap
+        * @param {String} tag The tag to use when creating the new element.
+        * @return {HTMLElement} The new node
+        */
+        _swap: function(n, tag) {
+            var tmp = Y.Node.create('<' + tag + '></' + tag + '>');
+            tmp.set(INNER_HTML, n.get(INNER_HTML));
+            n.replace(tmp, n);
+            return Y.Node.getDOMNode(tmp);
+        },
+        /**
+        * Get all the nodes in the current selection. This method will actually perform a filter first.
+        * Then it calls doc.execCommand('fontname', null, 'yui-tmp') to touch all nodes in the selection.
+        * The it compiles a list of all nodes affected by the execCommand and builds a NodeList to return.
+        * @method getSelected
+        * @return {NodeList} A NodeList of all items in the selection.
+        */
+        getSelected: function() {
+            var editorSelection = Y.EditorSelection,
+                root = editorSelection.ROOT,
+                nodes,
+                items = [];
+
+            editorSelection.filter();
+            Y.config.doc.execCommand('fontname', null, editorSelection.TMP);
+            nodes = root.all(editorSelection.ALL);
+
+            nodes.each(function(n, k) {
+                if (n.getStyle(FONT_FAMILY) === editorSelection.TMP) {
+                    n.setStyle(FONT_FAMILY, '');
+                    editorSelection.removeFontFamily(n);
+                    if (!n.compareTo(root)) {
+                        items.push(Y.Node.getDOMNode(nodes.item(k)));
+                    }
+                }
+            });
+            return Y.all(items);
+        },
+        /**
+        * Insert HTML at the current cursor position and return a Node instance of the newly inserted element.
+        * @method insertContent
+        * @param {String} html The HTML to insert.
+        * @return {Node} The inserted Node.
+        */
+        insertContent: function(html) {
+            return this.insertAtCursor(html, this.anchorTextNode, this.anchorOffset, true);
+        },
+        /**
+        * Insert HTML at the current cursor position, this method gives you control over the text node to insert into and the offset where to put it.
+        * @method insertAtCursor
+        * @param {String} html The HTML to insert.
+        * @param {Node} node The text node to break when inserting.
+        * @param {Number} offset The left offset of the text node to break and insert the new content.
+        * @param {Boolean} collapse Should the range be collapsed after insertion. default: false
+        * @return {Node} The inserted Node.
+        */
+        insertAtCursor: function(html, node, offset, collapse) {
+            var cur = Y.Node.create('<' + Y.EditorSelection.DEFAULT_TAG + ' class="yui-non"></' + Y.EditorSelection.DEFAULT_TAG + '>'),
+                inHTML, txt, txt2, newNode, range = this.createRange(), b, root = Y.EditorSelection.ROOT;
+
+            if (root.compareTo(node)) {
+                b = Y.Node.create('<span></span>');
+                node.append(b);
+                node = b;
+            }
+
+
+            if (range.pasteHTML) {
+                if (offset === 0 && node && !node.previous() && node.get('nodeType') === 3) {
+                    /*
+                    * For some strange reason, range.pasteHTML fails if the node is a textNode and
+                    * the offset is 0. (The cursor is at the beginning of the line)
+                    * It will always insert the new content at position 1 instead of
+                    * position 0. Here we test for that case and do it the hard way.
+                    */
+                    node.insert(html, 'before');
+                    if (range.moveToElementText) {
+                        range.moveToElementText(Y.Node.getDOMNode(node.previous()));
+                    }
+                    //Move the cursor after the new node
+                    range.collapse(false);
+                    range.select();
+                    return node.previous();
+                } else {
+                    newNode = Y.Node.create(html);
+                    try {
+                        range.pasteHTML('<span id="rte-insert"></span>');
+                    } catch (e) {}
+                    inHTML = root.one('#rte-insert');
+                    if (inHTML) {
+                        inHTML.set('id', '');
+                        inHTML.replace(newNode);
+                        if (range.moveToElementText) {
+                            range.moveToElementText(Y.Node.getDOMNode(newNode));
+                        }
+                        range.collapse(false);
+                        range.select();
+                        return newNode;
+                    } else {
+                        Y.on('available', function() {
+                            inHTML.set('id', '');
+                            inHTML.replace(newNode);
+                            if (range.moveToElementText) {
+                                range.moveToElementText(Y.Node.getDOMNode(newNode));
+                            }
+                            range.collapse(false);
+                            range.select();
+                        }, '#rte-insert');
+                    }
+                }
+            } else {
+                //TODO using Y.Node.create here throws warnings & strips first white space character
+                //txt = Y.one(Y.Node.create(inHTML.substr(0, offset)));
+                //txt2 = Y.one(Y.Node.create(inHTML.substr(offset)));
+                if (offset > 0) {
+                    inHTML = node.get(textContent);
+
+                    txt = Y.one(Y.config.doc.createTextNode(inHTML.substr(0, offset)));
+                    txt2 = Y.one(Y.config.doc.createTextNode(inHTML.substr(offset)));
+
+                    node.replace(txt, node);
+                    newNode = Y.Node.create(html);
+                    if (newNode.get('nodeType') === 11) {
+                        b = Y.Node.create('<span></span>');
+                        b.append(newNode);
+                        newNode = b;
+                    }
+                    txt.insert(newNode, 'after');
+                    //if (txt2 && txt2.get('length')) {
+                    if (txt2) {
+                        newNode.insert(cur, 'after');
+                        cur.insert(txt2, 'after');
+                        this.selectNode(cur, collapse);
+                    }
+                } else {
+                    if (node.get('nodeType') === 3) {
+                        node = node.get('parentNode') || root;
+                    }
+                    newNode = Y.Node.create(html);
+                    html = node.get('innerHTML').replace(/\n/gi, '');
+                    if (html === '' || html === '<br>') {
+                        node.append(newNode);
+                    } else {
+                        if (newNode.get('parentNode')) {
+                            node.insert(newNode, 'before');
+                        } else {
+                            root.prepend(newNode);
+                        }
+                    }
+                    if (node.get('firstChild').test('br')) {
+                        node.get('firstChild').remove();
+                    }
+                }
+            }
+            return newNode;
+        },
+        /**
+        * Get all elements inside a selection and wrap them with a new element and return a NodeList of all elements touched.
+        * @method wrapContent
+        * @param {String} tag The tag to wrap all selected items with.
+        * @return {NodeList} A NodeList of all items in the selection.
+        */
+        wrapContent: function(tag) {
+            tag = (tag) ? tag : Y.EditorSelection.DEFAULT_TAG;
+
+            if (!this.isCollapsed) {
+                var items = this.getSelected(),
+                    changed = [], range, last, first, range2;
+
+                items.each(function(n, k) {
+                    var t = n.get('tagName').toLowerCase();
+                    if (t === 'font') {
+                        changed.push(this._swap(items.item(k), tag));
+                    } else {
+                        changed.push(this._wrap(items.item(k), tag));
+                    }
+                }, this);
+
+                range = this.createRange();
+                first = changed[0];
+                last = changed[changed.length - 1];
+                if (this._selection.removeAllRanges) {
+                    range.setStart(changed[0], 0);
+                    range.setEnd(last, last.childNodes.length);
+                    this._selection.removeAllRanges();
+                    this._selection.addRange(range);
+                } else {
+                    if (range.moveToElementText) {
+                        range.moveToElementText(Y.Node.getDOMNode(first));
+                        range2 = this.createRange();
+                        range2.moveToElementText(Y.Node.getDOMNode(last));
+                        range.setEndPoint('EndToEnd', range2);
+                    }
+                    range.select();
+                }
+
+                changed = Y.all(changed);
+                return changed;
+
+
+            } else {
+                return Y.all([]);
+            }
+        },
+        /**
+        * Find and replace a string inside a text node and replace it with HTML focusing the node after
+        * to allow you to continue to type.
+        * @method replace
+        * @param {String} se The string to search for.
+        * @param {String} re The string of HTML to replace it with.
+        * @return {Node} The node inserted.
+        */
+        replace: function(se,re) {
+            var range = this.createRange(), node, txt, index, newNode;
+
+            if (range.getBookmark) {
+                index = range.getBookmark();
+                txt = this.anchorNode.get('innerHTML').replace(se, re);
+                this.anchorNode.set('innerHTML', txt);
+                range.moveToBookmark(index);
+                newNode = Y.one(range.parentElement());
+            } else {
+                node = this.anchorTextNode;
+                txt = node.get(textContent);
+                index = txt.indexOf(se);
+
+                txt = txt.replace(se, '');
+                node.set(textContent, txt);
+                newNode = this.insertAtCursor(re, node, index, true);
+            }
+            return newNode;
+        },
+        /**
+        * Destroy the range.
+        * @method remove
+        * @chainable
+        * @return {EditorSelection}
+        */
+        remove: function() {
+            if (this._selection && this._selection.removeAllRanges) {
+                this._selection.removeAllRanges();
+            }
+            return this;
+        },
+        /**
+        * Wrapper for the different range creation methods.
+        * @method createRange
+        * @return {Range}
+        */
+        createRange: function() {
+            if (Y.config.doc.selection) {
+                return Y.config.doc.selection.createRange();
+            } else {
+                return Y.config.doc.createRange();
+            }
+        },
+        /**
+        * Select a Node (hilighting it).
+        * @method selectNode
+        * @param {Node} node The node to select
+        * @param {Boolean} collapse Should the range be collapsed after insertion. default: false
+        * @chainable
+        * @return {EditorSelection}
+        */
+        selectNode: function(node, collapse, end) {
+            if (!node) {
+                return;
+            }
+            end = end || 0;
+            node = Y.Node.getDOMNode(node);
+            var range = this.createRange();
+            if (range.selectNode) {
+                range.selectNode(node);
+                this._selection.removeAllRanges();
+                this._selection.addRange(range);
+                if (collapse) {
+                    try {
+                        this._selection.collapse(node, end);
+                    } catch (err) {
+                        this._selection.collapse(node, 0);
+                    }
+                }
+            } else {
+                if (node.nodeType === 3) {
+                    node = node.parentNode;
+                }
+                try {
+                    range.moveToElementText(node);
+                } catch(e) {}
+                if (collapse) {
+                    range.collapse(((end) ? false : true));
+                }
+                range.select();
+            }
+            return this;
+        },
+        /**
+        * Put a placeholder in the DOM at the current cursor position.
+        * @method setCursor
+        * @return {Node}
+        */
+        setCursor: function() {
+            this.removeCursor(false);
+            return this.insertContent(Y.EditorSelection.CURSOR);
+        },
+        /**
+        * Get the placeholder in the DOM at the current cursor position.
+        * @method getCursor
+        * @return {Node}
+        */
+        getCursor: function() {
+            return Y.EditorSelection.ROOT.all('#' + Y.EditorSelection.CURID);
+        },
+        /**
+        * Remove the cursor placeholder from the DOM.
+        * @method removeCursor
+        * @param {Boolean} keep Setting this to true will keep the node, but remove the unique parts that make it the cursor.
+        * @return {Node}
+        */
+        removeCursor: function(keep) {
+            var cur = this.getCursor();
+            if (cur) {
+                if (keep) {
+                    cur.removeAttribute('id');
+                    cur.set('innerHTML', '<br class="yui-cursor">');
+                } else {
+                    cur.remove();
+                }
+            }
+            return cur;
+        },
+        /**
+        * Gets a stored cursor and focuses it for editing, must be called sometime after setCursor
+        * @method focusCursor
+        * @return {Node}
+        */
+        focusCursor: function(collapse, end) {
+            if (collapse !== false) {
+                collapse = true;
+            }
+            if (end !== false) {
+                end = true;
+            }
+            var cur = this.removeCursor(true);
+            if (cur) {
+                cur.each(function(c) {
+                    this.selectNode(c, collapse, end);
+                }, this);
+            }
+        },
+        /**
+        * Generic toString for logging.
+        * @method toString
+        * @return {String}
+        */
+        toString: function() {
+            return 'EditorSelection Object';
+        },
+
+        /**
+         Gets the offset of the selection for the selection within the current
+         editor
+         @public
+         @method getEditorOffset
+         @param {Y.Node} [node] Element used to measure the offset to
+         @return Number Number of characters the selection is from the beginning
+         @since 3.13.0
+         */
+        getEditorOffset: function(node) {
+            var container = (node || Y.EditorSelection.ROOT).getDOMNode(),
+                caretOffset = 0,
+                doc = Y.config.doc,
+                win = Y.config.win,
+                sel,
+                range,
+                preCaretRange;
+
+            if (typeof win.getSelection !== "undefined") {
+                range = win.getSelection().getRangeAt(0);
+                preCaretRange = range.cloneRange();
+                preCaretRange.selectNodeContents(container);
+                preCaretRange.setEnd(range.endContainer, range.endOffset);
+                caretOffset = preCaretRange.toString().length;
+            } else {
+                sel = doc.selection;
+
+                if ( sel && sel.type !== "Control") {
+                    range = sel.createRange();
+                    preCaretRange = doc.body.createTextRange();
+                    preCaretRange.moveToElementText(container);
+                    preCaretRange.setEndPoint("EndToEnd", range);
+                    caretOffset = preCaretRange.text.length;
+                }
+            }
+
+            return caretOffset;
+        }
+    };
+
+    //TODO Remove this alias in 3.6.0
+    Y.Selection = Y.EditorSelection;
+
+
+
+}, '3.15.0', {"requires": ["node"]});

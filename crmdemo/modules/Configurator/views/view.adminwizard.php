@@ -26,7 +26,7 @@ class ViewAdminwizard extends SugarView
 {
     public function __construct()
     {
-        parent::SugarView();
+        parent::__construct();
         
         $this->options['show_header'] = false;
         $this->options['show_footer'] = false;
@@ -92,7 +92,9 @@ class ViewAdminwizard extends SugarView
         ob_end_clean();
 
         $this->ss->assign('langHeader', get_language_header());
-        $this->ss->assign('START_PAGE', !empty($_REQUEST['page']) ? $_REQUEST['page'] : 'welcome');
+
+        $page = $this->request->getValidInputRequest('page', null, 'welcome');
+        $this->ss->assign('START_PAGE', $page);
                 
             $this->ss->display('modules/Configurator/tpls/adminwizard.tpl');
         }

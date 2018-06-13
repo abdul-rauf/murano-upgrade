@@ -15,9 +15,18 @@ require_once('include/MVC/View/views/view.detail.php');
 
 class ViewQuick extends ViewDetail{
 	var $type ='detail';
-	
- 	function ViewQuick(){
- 		parent::SugarView();
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ViewQuick()
+    {
+        self::__construct();
+    }
+
+    public function __construct()
+    {
+        parent::__construct();
  		$this->options['show_subpanels'] = false;
  		$this->options['show_title'] = false;
 		$this->options['show_header'] = false;

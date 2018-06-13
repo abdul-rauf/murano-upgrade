@@ -192,6 +192,10 @@
             params.meta = params.meta || app.metadata.getView(params.module, params.name);
             params.type = params.type || (params.meta && params.meta.type ? params.meta.type : (params.name || null));
 
+            if (params.def && params.def.xmeta) {
+                params.meta = _.extend({}, params.meta, params.def.xmeta);
+            }
+
             return this._createComponent("view", params.name, params);
         },
 
@@ -257,6 +261,11 @@
             params.context = params.context || app.controller.context;
             params.module = params.module || params.context.get("module");
             params.meta = params.meta || app.metadata.getLayout(params.module, params.name);
+
+            if (params.def && params.def.xmeta) {
+                params.meta = _.extend({}, params.meta, params.def.xmeta);
+            }
+
             params.type = params.type || (params.meta ? params.meta.type : null);
 
             return this._createComponent("layout", params.name || params.type, params);

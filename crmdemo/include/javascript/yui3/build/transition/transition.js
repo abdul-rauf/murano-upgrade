@@ -5,5 +5,761 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add("transition",function(e,t){var n="",r="",i=e.config.doc,s="documentElement",o=i[s].style,u="transition",a="transitionProperty",f,l,c,h,p,d,v={},m=["Webkit","Moz"],g={Webkit:"webkitTransitionEnd"},y=function(){this.init.apply(this,arguments)};y._TRANSFORM="transform",y._toCamel=function(e){return e=e.replace(/-([a-z])/gi,function(e,t){return t.toUpperCase()}),e},y._toHyphen=function(e){return e=e.replace(/([A-Z]?)([a-z]+)([A-Z]?)/g,function(e,t,n,r){var i=(t?"-"+t.toLowerCase():"")+n;return r&&(i+="-"+r.toLowerCase()),i}),e},y.SHOW_TRANSITION="fadeIn",y.HIDE_TRANSITION="fadeOut",y.useNative=!1,"transition"in o&&"transitionProperty"in o&&"transitionDuration"in o&&"transitionTimingFunction"in o&&"transitionDelay"in o?(y.useNative=!0,y.supported=!0):e.Array.each(m,function(e){var t=e+"Transition";t in i[s].style&&(n=e,r=y._toHyphen(e)+"-",y.useNative=!0,y.supported=!0,y._VENDOR_PREFIX=e)}),typeof o.transform=="undefined"&&e.Array.each(m,function(e){var t=e+"Transform";typeof o[t]!="undefined"&&(y._TRANSFORM=t)}),n&&(u=n+"Transition",a=n+"TransitionProperty"),f=r+"transition-property",l=r+"transition-duration",c=r+"transition-timing-function",h=r+"transition-delay",p="transitionend",d="on"+n.toLowerCase()+"transitionend",p=g[n]||p,y.fx={},y.toggles={},y._hasEnd={},y._reKeywords=/^(?:node|duration|iterations|easing|delay|on|onstart|onend)$/i,e.Node.DOM_EVENTS[p]=1,y.NAME="transition",y.DEFAULT_EASING="ease",y.DEFAULT_DURATION=.5,y.DEFAULT_DELAY=0,y._nodeAttrs={},y.prototype={constructor:y,init:function(e,t){var n=this;return n._node=e,!n._running&&t&&(n._config=t,e._transition=n,n._duration="duration"in t?t.duration:n.constructor.DEFAULT_DURATION,n._delay="delay"in t?t.delay:n.constructor.DEFAULT_DELAY,n._easing=t.easing||n.constructor.DEFAULT_EASING,n._count=0,n._running=!1),n},addProperty:function(t,n){var r=this,i=this._node,s=e.stamp(i),o=e.one(i),u=y._nodeAttrs[s],a,f,l,c,h;u||(u=y._nodeAttrs[s]={}),c=u[t],n&&n.value!==undefined?h=n.value:n!==undefined&&(h=n,n=v),typeof h=="function"&&(h=h.call(o,o)),c&&c.transition&&c.transition!==r&&c.transition._count--,r._count++,l=(typeof n.duration!="undefined"?n.duration:r._duration)||1e-4,u[t]={value:h,duration:l,delay:typeof n.delay!="undefined"?n.delay:r._delay,easing:n.easing||r._easing,transition:r},a=e.DOM.getComputedStyle(i,t),f=typeof h=="string"?a:parseFloat(a),y.useNative&&f===h&&setTimeout(function(){r._onNativeEnd.call(i,{propertyName:t,elapsedTime:l})},l*1e3)},removeProperty:function(t){var n=this,r=y._nodeAttrs[e.stamp(n._node)];r&&r[t]&&(delete r[t],n._count--)},initAttrs:function(t){var n,r=this._node;t.transform&&!t[y._TRANSFORM]&&(t[y._TRANSFORM]=t.transform,delete t.transform);for(n in t)t.hasOwnProperty(n)&&!y._reKeywords.test(n)&&(this.addProperty(n,t[n]),r.style[n]===""&&e.DOM.setStyle(r,n,e.DOM.getComputedStyle(r,n)))},run:function(t){var n=this,r=n._node,i=n._config,s={type:"transition:start",config:i};return n._running||(n._running=!0,i.on&&i.on.start&&i.on.start.call(e.one(r),s),n.initAttrs(n._config),n._callback=t,n._start()),n},_start:function(){this._runNative()},_prepDur:function(e){return e=parseFloat(e)*1e3,e+"ms"},_runNative:function(){var t=this,n=t._node,r=e.stamp(n),i=n.style,s=n.ownerDocument.defaultView.getComputedStyle(n),o=y._nodeAttrs[r],u="",a=s[y._toCamel(f)],d=f+": ",v=l+": ",m=c+": ",g=h+": ",b,w,E;a!=="all"&&(d+=a+",",v+=s[y._toCamel(l)]+",",m+=s[y._toCamel(c)]+",",g+=s[y._toCamel(h)]+",");for(E in o)b=y._toHyphen(E),w=o[E],(w=o[E])&&w.transition===t&&(E in n.style?(v+=t._prepDur(w.duration)+",",g+=t._prepDur(w.delay)+",",m+=w.easing+",",d+=b+",",u+=b+": "+w.value+"; "):this.removeProperty(E));d=d.replace(/,$/,";"),v=v.replace(/,$/,";"),m=m.replace(/,$/,";"),g=g.replace(/,$/,";"),y._hasEnd[r]||(n.addEventListener(p,t._onNativeEnd,""),y._hasEnd[r]=!0),i.cssText+=d+v+m+g+u},_end:function(t){var n=this,r=n._node,i=n._callback,s=n._config,o={type:"transition:end",config:s,elapsedTime:t},u=e.one(r);n._running=!1,n._callback=null,r&&(s.on&&s.on.end?setTimeout(function(){s.on.end.call(u,o),i&&i.call(u,o)},1):i&&setTimeout(function(){i.call(u,o)},1))},_endNative:function(e){var t=this._node,n=t.ownerDocument.defaultView.getComputedStyle(t,"")[y._toCamel(f)];e=y._toHyphen(e),typeof n=="string"&&(n=n.replace(new RegExp("(?:^|,\\s)"+e+",?"),","),n=n.replace(/^,|,$/,""),t.style[u]=n)},_onNativeEnd:function(t){var n=this,r=e.stamp(n),i=t,s=y._toCamel(i.propertyName),o=i.elapsedTime,u=y._nodeAttrs[r],f=u[s],l=f?f.transition:null,c,h;l&&(l.removeProperty(s),l._endNative(s),h=l._config[s],c={type:"propertyEnd",propertyName:s,elapsedTime:o,config:h},h&&h.on&&h.on.end&&h.on.end.call(e.one(n),c),l._count<=0&&(l._end(o),n.style[a]=""))},destroy:function(){var e=this,t=e._node;t&&(t.removeEventListener(p,e._onNativeEnd,!1),e._node=null)}},e.Transition=y,e.TransitionNative=y,e.Node.prototype.transition=function(t,n,r){var i=y._nodeAttrs[e.stamp(this._node)],s=i?i.transition||null:null,o,u;if(typeof t=="string"){typeof n=="function"&&(r=n,n=null),o=y.fx[t];if(n&&typeof n=="object"){n=e.clone(n);for(u in o)o.hasOwnProperty(u)&&(u in n||(n[u]=o[u]))}else n=o}else r=n,n=t;return s&&!s._running?s.init(this,n):s=new y(this._node,n),s.run(r),this},e.Node.prototype.show=function(t,n,r){return this._show(),t&&e.Transition&&(typeof t!="string"&&!t.push&&(typeof n=="function"&&(r=n,n=t),t=y.SHOW_TRANSITION),this.transition(t,n,r)),this},e.NodeList.prototype.show=function(t,n,r){var i=this._nodes,s=0,o;while(o=i[s++])e.one(o).show(t,n,r);return this};var b=function(e,t,n){return function(){t&&t.call(e),n&&typeof n=="function"&&n.apply(e._node,arguments)}};e.Node.prototype.hide=function(t,n,r){return t&&e.Transition?(typeof n=="function"&&(r=n,n=null),r=b(this,this._hide,r),typeof t!="string"&&!t.push&&(typeof n=="function"&&(r=n,n=t),t=y.HIDE_TRANSITION),this.transition(t,n,r)):this._hide(),this},e.NodeList.prototype.hide=function(t,n,r){var i=this._nodes,s=0,o;while(o=i[s++])e.one(o).hide(t,n,r);return this},e.NodeList.prototype
-.transition=function(t,n,r){var i=this._nodes,s=this.size(),o=0,r=r===!0,u;while(u=i[o++])o<s&&r?e.one(u).transition(t):e.one(u).transition(t,n);return this},e.Node.prototype.toggleView=function(t,n,r){this._toggles=this._toggles||[],r=arguments[arguments.length-1];if(typeof t!="string"){n=t,this._toggleView(n,r);return}return typeof n=="function"&&(n=undefined),typeof n=="undefined"&&t in this._toggles&&(n=!this._toggles[t]),n=n?1:0,n?this._show():r=b(this,this._hide,r),this._toggles[t]=n,this.transition(e.Transition.toggles[t][n],r),this},e.NodeList.prototype.toggleView=function(t,n,r){var i=this._nodes,s=0,o;while(o=i[s++])o=e.one(o),o.toggleView.apply(o,arguments);return this},e.mix(y.fx,{fadeOut:{opacity:0,duration:.5,easing:"ease-out"},fadeIn:{opacity:1,duration:.5,easing:"ease-in"},sizeOut:{height:0,width:0,duration:.75,easing:"ease-out"},sizeIn:{height:function(e){return e.get("scrollHeight")+"px"},width:function(e){return e.get("scrollWidth")+"px"},duration:.5,easing:"ease-in",on:{start:function(){var e=this.getStyle("overflow");e!=="hidden"&&(this.setStyle("overflow","hidden"),this._transitionOverflow=e)},end:function(){this._transitionOverflow&&(this.setStyle("overflow",this._transitionOverflow),delete this._transitionOverflow)}}}}),e.mix(y.toggles,{size:["sizeOut","sizeIn"],fade:["fadeOut","fadeIn"]})},"3.15.0",{requires:["node-style"]});
+YUI.add('transition', function (Y, NAME) {
+
+/**
+* Provides the transition method for Node.
+* Transition has no API of its own, but adds the transition method to Node.
+*
+* @module transition
+* @requires node-style
+*/
+
+var CAMEL_VENDOR_PREFIX = '',
+    VENDOR_PREFIX = '',
+    DOCUMENT = Y.config.doc,
+    DOCUMENT_ELEMENT = 'documentElement',
+    DOCUMENT_STYLE = DOCUMENT[DOCUMENT_ELEMENT].style,
+    TRANSITION_CAMEL = 'transition',
+    TRANSITION_PROPERTY_CAMEL = 'transitionProperty',
+    TRANSITION_PROPERTY,
+    TRANSITION_DURATION,
+    TRANSITION_TIMING_FUNCTION,
+    TRANSITION_DELAY,
+    TRANSITION_END,
+    ON_TRANSITION_END,
+
+    EMPTY_OBJ = {},
+
+    VENDORS = [
+        'Webkit',
+        'Moz'
+    ],
+
+    VENDOR_TRANSITION_END = {
+        Webkit: 'webkitTransitionEnd'
+    },
+
+/**
+ * A class for constructing transition instances.
+ * Adds the "transition" method to Node.
+ * @class Transition
+ * @constructor
+ */
+
+Transition = function() {
+    this.init.apply(this, arguments);
+};
+
+// One off handling of transform-prefixing.
+Transition._TRANSFORM = 'transform';
+
+Transition._toCamel = function(property) {
+    property = property.replace(/-([a-z])/gi, function(m0, m1) {
+        return m1.toUpperCase();
+    });
+
+    return property;
+};
+
+Transition._toHyphen = function(property) {
+    property = property.replace(/([A-Z]?)([a-z]+)([A-Z]?)/g, function(m0, m1, m2, m3) {
+        var str = ((m1) ? '-' + m1.toLowerCase() : '') + m2;
+
+        if (m3) {
+            str += '-' + m3.toLowerCase();
+        }
+
+        return str;
+    });
+
+    return property;
+};
+
+Transition.SHOW_TRANSITION = 'fadeIn';
+Transition.HIDE_TRANSITION = 'fadeOut';
+
+Transition.useNative = false;
+
+// Map transition properties to vendor-specific versions.
+if ('transition' in DOCUMENT_STYLE
+    && 'transitionProperty' in DOCUMENT_STYLE
+    && 'transitionDuration' in DOCUMENT_STYLE
+    && 'transitionTimingFunction' in DOCUMENT_STYLE
+    && 'transitionDelay' in DOCUMENT_STYLE) {
+    Transition.useNative = true;
+    Transition.supported = true; // TODO: remove
+} else {
+    Y.Array.each(VENDORS, function(val) { // then vendor specific
+        var property = val + 'Transition';
+        if (property in DOCUMENT[DOCUMENT_ELEMENT].style) {
+            CAMEL_VENDOR_PREFIX = val;
+            VENDOR_PREFIX       = Transition._toHyphen(val) + '-';
+
+            Transition.useNative = true;
+            Transition.supported = true; // TODO: remove
+            Transition._VENDOR_PREFIX = val;
+        }
+    });
+}
+
+// Map transform property to vendor-specific versions.
+// One-off required for cssText injection.
+if (typeof DOCUMENT_STYLE.transform === 'undefined') {
+    Y.Array.each(VENDORS, function(val) { // then vendor specific
+        var property = val + 'Transform';
+        if (typeof DOCUMENT_STYLE[property] !== 'undefined') {
+            Transition._TRANSFORM = property;
+        }
+    });
+}
+
+if (CAMEL_VENDOR_PREFIX) {
+    TRANSITION_CAMEL          = CAMEL_VENDOR_PREFIX + 'Transition';
+    TRANSITION_PROPERTY_CAMEL = CAMEL_VENDOR_PREFIX + 'TransitionProperty';
+}
+
+TRANSITION_PROPERTY        = VENDOR_PREFIX + 'transition-property';
+TRANSITION_DURATION        = VENDOR_PREFIX + 'transition-duration';
+TRANSITION_TIMING_FUNCTION = VENDOR_PREFIX + 'transition-timing-function';
+TRANSITION_DELAY           = VENDOR_PREFIX + 'transition-delay';
+
+TRANSITION_END    = 'transitionend';
+ON_TRANSITION_END = 'on' + CAMEL_VENDOR_PREFIX.toLowerCase() + 'transitionend';
+TRANSITION_END    = VENDOR_TRANSITION_END[CAMEL_VENDOR_PREFIX] || TRANSITION_END;
+
+Transition.fx = {};
+Transition.toggles = {};
+
+Transition._hasEnd = {};
+
+Transition._reKeywords = /^(?:node|duration|iterations|easing|delay|on|onstart|onend)$/i;
+
+Y.Node.DOM_EVENTS[TRANSITION_END] = 1;
+
+Transition.NAME = 'transition';
+
+Transition.DEFAULT_EASING = 'ease';
+Transition.DEFAULT_DURATION = 0.5;
+Transition.DEFAULT_DELAY = 0;
+
+Transition._nodeAttrs = {};
+
+Transition.prototype = {
+    constructor: Transition,
+    init: function(node, config) {
+        var anim = this;
+        anim._node = node;
+        if (!anim._running && config) {
+            anim._config = config;
+            node._transition = anim; // cache for reuse
+
+            anim._duration = ('duration' in config) ?
+                config.duration: anim.constructor.DEFAULT_DURATION;
+
+            anim._delay = ('delay' in config) ?
+                config.delay: anim.constructor.DEFAULT_DELAY;
+
+            anim._easing = config.easing || anim.constructor.DEFAULT_EASING;
+            anim._count = 0; // track number of animated properties
+            anim._running = false;
+
+        }
+
+        return anim;
+    },
+
+    addProperty: function(prop, config) {
+        var anim = this,
+            node = this._node,
+            uid = Y.stamp(node),
+            nodeInstance = Y.one(node),
+            attrs = Transition._nodeAttrs[uid],
+            computed,
+            compareVal,
+            dur,
+            attr,
+            val;
+
+        if (!attrs) {
+            attrs = Transition._nodeAttrs[uid] = {};
+        }
+
+        attr = attrs[prop];
+
+        // might just be a value
+        if (config && config.value !== undefined) {
+            val = config.value;
+        } else if (config !== undefined) {
+            val = config;
+            config = EMPTY_OBJ;
+        }
+
+        if (typeof val === 'function') {
+            val = val.call(nodeInstance, nodeInstance);
+        }
+
+        if (attr && attr.transition) {
+            // take control if another transition owns this property
+            if (attr.transition !== anim) {
+                attr.transition._count--; // remapping attr to this transition
+            }
+        }
+
+        anim._count++; // properties per transition
+
+        // make 0 async and fire events
+        dur = ((typeof config.duration !== 'undefined') ? config.duration :
+                    anim._duration) || 0.0001;
+
+        attrs[prop] = {
+            value: val,
+            duration: dur,
+            delay: (typeof config.delay !== 'undefined') ? config.delay :
+                    anim._delay,
+
+            easing: config.easing || anim._easing,
+
+            transition: anim
+        };
+
+        // native end event doesnt fire when setting to same value
+        // supplementing with timer
+        // val may be a string or number (height: 0, etc), but computedStyle is always string
+        computed = Y.DOM.getComputedStyle(node, prop);
+        compareVal = (typeof val === 'string') ? computed : parseFloat(computed);
+
+        if (Transition.useNative && compareVal === val) {
+            setTimeout(function() {
+                anim._onNativeEnd.call(node, {
+                    propertyName: prop,
+                    elapsedTime: dur
+                });
+            }, dur * 1000);
+        }
+    },
+
+    removeProperty: function(prop) {
+        var anim = this,
+            attrs = Transition._nodeAttrs[Y.stamp(anim._node)];
+
+        if (attrs && attrs[prop]) {
+            delete attrs[prop];
+            anim._count--;
+        }
+
+    },
+
+    initAttrs: function(config) {
+        var attr,
+            node = this._node;
+
+        if (config.transform && !config[Transition._TRANSFORM]) {
+            config[Transition._TRANSFORM] = config.transform;
+            delete config.transform; // TODO: copy
+        }
+
+        for (attr in config) {
+            if (config.hasOwnProperty(attr) && !Transition._reKeywords.test(attr)) {
+                this.addProperty(attr, config[attr]);
+
+                // when size is auto or % webkit starts from zero instead of computed
+                // (https://bugs.webkit.org/show_bug.cgi?id=16020)
+                // TODO: selective set
+                if (node.style[attr] === '') {
+                    Y.DOM.setStyle(node, attr, Y.DOM.getComputedStyle(node, attr));
+                }
+            }
+        }
+    },
+
+    /**
+     * Starts or an animation.
+     * @method run
+     * @chainable
+     * @private
+     */
+    run: function(callback) {
+        var anim = this,
+            node = anim._node,
+            config = anim._config,
+            data = {
+                type: 'transition:start',
+                config: config
+            };
+
+
+        if (!anim._running) {
+            anim._running = true;
+
+            if (config.on && config.on.start) {
+                config.on.start.call(Y.one(node), data);
+            }
+
+            anim.initAttrs(anim._config);
+
+            anim._callback = callback;
+            anim._start();
+        }
+
+
+        return anim;
+    },
+
+    _start: function() {
+        this._runNative();
+    },
+
+    _prepDur: function(dur) {
+        dur = parseFloat(dur) * 1000;
+
+        return dur + 'ms';
+    },
+
+    _runNative: function() {
+        var anim = this,
+            node = anim._node,
+            uid = Y.stamp(node),
+            style = node.style,
+            computed = node.ownerDocument.defaultView.getComputedStyle(node),
+            attrs = Transition._nodeAttrs[uid],
+            cssText = '',
+            cssTransition = computed[Transition._toCamel(TRANSITION_PROPERTY)],
+
+            transitionText = TRANSITION_PROPERTY + ': ',
+            duration = TRANSITION_DURATION + ': ',
+            easing = TRANSITION_TIMING_FUNCTION + ': ',
+            delay = TRANSITION_DELAY + ': ',
+            hyphy,
+            attr,
+            name;
+
+        // preserve existing transitions
+        if (cssTransition !== 'all') {
+            transitionText += cssTransition + ',';
+            duration += computed[Transition._toCamel(TRANSITION_DURATION)] + ',';
+            easing += computed[Transition._toCamel(TRANSITION_TIMING_FUNCTION)] + ',';
+            delay += computed[Transition._toCamel(TRANSITION_DELAY)] + ',';
+
+        }
+
+        // run transitions mapped to this instance
+        for (name in attrs) {
+            hyphy = Transition._toHyphen(name);
+            attr = attrs[name];
+            if ((attr = attrs[name]) && attr.transition === anim) {
+                if (name in node.style) { // only native styles allowed
+                    duration += anim._prepDur(attr.duration) + ',';
+                    delay += anim._prepDur(attr.delay) + ',';
+                    easing += (attr.easing) + ',';
+
+                    transitionText += hyphy + ',';
+                    cssText += hyphy + ': ' + attr.value + '; ';
+                } else {
+                    this.removeProperty(name);
+                }
+            }
+        }
+
+        transitionText = transitionText.replace(/,$/, ';');
+        duration = duration.replace(/,$/, ';');
+        easing = easing.replace(/,$/, ';');
+        delay = delay.replace(/,$/, ';');
+
+        // only one native end event per node
+        if (!Transition._hasEnd[uid]) {
+            node.addEventListener(TRANSITION_END, anim._onNativeEnd, '');
+            Transition._hasEnd[uid] = true;
+
+        }
+
+        style.cssText += transitionText + duration + easing + delay + cssText;
+
+    },
+
+    _end: function(elapsed) {
+        var anim = this,
+            node = anim._node,
+            callback = anim._callback,
+            config = anim._config,
+            data = {
+                type: 'transition:end',
+                config: config,
+                elapsedTime: elapsed
+            },
+
+            nodeInstance = Y.one(node);
+
+        anim._running = false;
+        anim._callback = null;
+
+        if (node) {
+            if (config.on && config.on.end) {
+                setTimeout(function() { // IE: allow previous update to finish
+                    config.on.end.call(nodeInstance, data);
+
+                    // nested to ensure proper fire order
+                    if (callback) {
+                        callback.call(nodeInstance, data);
+                    }
+
+                }, 1);
+            } else if (callback) {
+                setTimeout(function() { // IE: allow previous update to finish
+                    callback.call(nodeInstance, data);
+                }, 1);
+            }
+        }
+
+    },
+
+    _endNative: function(name) {
+        var node = this._node,
+            value = node.ownerDocument.defaultView.getComputedStyle(node, '')[Transition._toCamel(TRANSITION_PROPERTY)];
+
+        name = Transition._toHyphen(name);
+        if (typeof value === 'string') {
+            value = value.replace(new RegExp('(?:^|,\\s)' + name + ',?'), ',');
+            value = value.replace(/^,|,$/, '');
+            node.style[TRANSITION_CAMEL] = value;
+        }
+    },
+
+    _onNativeEnd: function(e) {
+        var node = this,
+            uid = Y.stamp(node),
+            event = e,//e._event,
+            name = Transition._toCamel(event.propertyName),
+            elapsed = event.elapsedTime,
+            attrs = Transition._nodeAttrs[uid],
+            attr = attrs[name],
+            anim = (attr) ? attr.transition : null,
+            data,
+            config;
+
+        if (anim) {
+            anim.removeProperty(name);
+            anim._endNative(name);
+            config = anim._config[name];
+
+            data = {
+                type: 'propertyEnd',
+                propertyName: name,
+                elapsedTime: elapsed,
+                config: config
+            };
+
+            if (config && config.on && config.on.end) {
+                config.on.end.call(Y.one(node), data);
+            }
+
+            if (anim._count <= 0)  { // after propertyEnd fires
+                anim._end(elapsed);
+                node.style[TRANSITION_PROPERTY_CAMEL] = ''; // clean up style
+            }
+        }
+    },
+
+    destroy: function() {
+        var anim = this,
+            node = anim._node;
+
+        if (node) {
+            node.removeEventListener(TRANSITION_END, anim._onNativeEnd, false);
+            anim._node = null;
+        }
+    }
+};
+
+Y.Transition = Transition;
+Y.TransitionNative = Transition; // TODO: remove
+
+/**
+ *   Animate one or more css properties to a given value. Requires the "transition" module.
+ *   <pre>example usage:
+ *       Y.one('#demo').transition({
+ *           duration: 1, // in seconds, default is 0.5
+ *           easing: 'ease-out', // default is 'ease'
+ *           delay: '1', // delay start for 1 second, default is 0
+ *
+ *           height: '10px',
+ *           width: '10px',
+ *
+ *           opacity: { // per property
+ *               value: 0,
+ *               duration: 2,
+ *               delay: 2,
+ *               easing: 'ease-in'
+ *           }
+ *       });
+ *   </pre>
+ *   @for Node
+ *   @method transition
+ *   @param {Object} config An object containing one or more style properties, a duration and an easing.
+ *   @param {Function} callback A function to run after the transition has completed.
+ *   @chainable
+*/
+Y.Node.prototype.transition = function(name, config, callback) {
+    var
+        transitionAttrs = Transition._nodeAttrs[Y.stamp(this._node)],
+        anim = (transitionAttrs) ? transitionAttrs.transition || null : null,
+        fxConfig,
+        prop;
+
+    if (typeof name === 'string') { // named effect, pull config from registry
+        if (typeof config === 'function') {
+            callback = config;
+            config = null;
+        }
+
+        fxConfig = Transition.fx[name];
+
+        if (config && typeof config === 'object') {
+            config = Y.clone(config);
+
+            for (prop in fxConfig) {
+                if (fxConfig.hasOwnProperty(prop)) {
+                    if (! (prop in config)) {
+                        config[prop] = fxConfig[prop];
+                    }
+                }
+            }
+        } else {
+            config = fxConfig;
+        }
+
+    } else { // name is a config, config is a callback or undefined
+        callback = config;
+        config = name;
+    }
+
+    if (anim && !anim._running) {
+        anim.init(this, config);
+    } else {
+        anim = new Transition(this._node, config);
+    }
+
+    anim.run(callback);
+    return this;
+};
+
+Y.Node.prototype.show = function(name, config, callback) {
+    this._show(); // show prior to transition
+    if (name && Y.Transition) {
+        if (typeof name !== 'string' && !name.push) { // named effect or array of effects supercedes default
+            if (typeof config === 'function') {
+                callback = config;
+                config = name;
+            }
+            name = Transition.SHOW_TRANSITION;
+        }
+        this.transition(name, config, callback);
+    }
+    return this;
+};
+
+Y.NodeList.prototype.show = function(name, config, callback) {
+    var nodes = this._nodes,
+        i = 0,
+        node;
+
+    while ((node = nodes[i++])) {
+        Y.one(node).show(name, config, callback);
+    }
+
+    return this;
+};
+
+
+
+var _wrapCallBack = function(anim, fn, callback) {
+    return function() {
+        if (fn) {
+            fn.call(anim);
+        }
+        if (callback && typeof callback === 'function') {
+            callback.apply(anim._node, arguments);
+        }
+    };
+};
+
+Y.Node.prototype.hide = function(name, config, callback) {
+    if (name && Y.Transition) {
+        if (typeof config === 'function') {
+            callback = config;
+            config = null;
+        }
+
+        callback = _wrapCallBack(this, this._hide, callback); // wrap with existing callback
+        if (typeof name !== 'string' && !name.push) { // named effect or array of effects supercedes default
+            if (typeof config === 'function') {
+                callback = config;
+                config = name;
+            }
+            name = Transition.HIDE_TRANSITION;
+        }
+        this.transition(name, config, callback);
+    } else {
+        this._hide();
+    }
+    return this;
+};
+
+Y.NodeList.prototype.hide = function(name, config, callback) {
+    var nodes = this._nodes,
+        i = 0,
+        node;
+
+    while ((node = nodes[i++])) {
+        Y.one(node).hide(name, config, callback);
+    }
+
+    return this;
+};
+
+/**
+ *   Animate one or more css properties to a given value. Requires the "transition" module.
+ *   <pre>example usage:
+ *       Y.all('.demo').transition({
+ *           duration: 1, // in seconds, default is 0.5
+ *           easing: 'ease-out', // default is 'ease'
+ *           delay: '1', // delay start for 1 second, default is 0
+ *
+ *           height: '10px',
+ *           width: '10px',
+ *
+ *           opacity: { // per property
+ *               value: 0,
+ *               duration: 2,
+ *               delay: 2,
+ *               easing: 'ease-in'
+ *           }
+ *       });
+ *   </pre>
+ *   @for NodeList
+ *   @method transition
+ *   @param {Object} config An object containing one or more style properties, a duration and an easing.
+ *   @param {Function} callback A function to run after the transition has completed. The callback fires
+ *       once per item in the NodeList.
+ *   @param {Boolean} callbackOnce If true, the callback will be called only after the
+ *       last transition has completed
+ *   @chainable
+*/
+Y.NodeList.prototype.transition = function(config, callback, callbackOnce) {
+    var nodes = this._nodes,
+        size = this.size(),
+         i = 0,
+        callbackOnce = callbackOnce === true,
+        node;
+
+    while ((node = nodes[i++])) {
+        if (i < size && callbackOnce){
+            Y.one(node).transition(config);
+        } else {
+            Y.one(node).transition(config, callback);
+        }
+    }
+
+    return this;
+};
+
+Y.Node.prototype.toggleView = function(name, on, callback) {
+    this._toggles = this._toggles || [];
+    callback = arguments[arguments.length - 1];
+
+    if (typeof name !== 'string') { // no transition, just toggle
+        on = name;
+        this._toggleView(on, callback); // call original _toggleView in Y.Node
+        return;
+    }
+
+    if (typeof on === 'function') { // Ignore "on" if used for callback argument.
+        on = undefined;
+    }
+
+    if (typeof on === 'undefined' && name in this._toggles) { // reverse current toggle
+        on = ! this._toggles[name];
+    }
+
+    on = (on) ? 1 : 0;
+    if (on) {
+        this._show();
+    }  else {
+        callback = _wrapCallBack(this, this._hide, callback);
+    }
+
+    this._toggles[name] = on;
+    this.transition(Y.Transition.toggles[name][on], callback);
+
+    return this;
+};
+
+Y.NodeList.prototype.toggleView = function(name, on, callback) {
+    var nodes = this._nodes,
+        i = 0,
+        node;
+
+    while ((node = nodes[i++])) {
+        node = Y.one(node);
+        node.toggleView.apply(node, arguments);
+    }
+
+    return this;
+};
+
+Y.mix(Transition.fx, {
+    fadeOut: {
+        opacity: 0,
+        duration: 0.5,
+        easing: 'ease-out'
+    },
+
+    fadeIn: {
+        opacity: 1,
+        duration: 0.5,
+        easing: 'ease-in'
+    },
+
+    sizeOut: {
+        height: 0,
+        width: 0,
+        duration: 0.75,
+        easing: 'ease-out'
+    },
+
+    sizeIn: {
+        height: function(node) {
+            return node.get('scrollHeight') + 'px';
+        },
+        width: function(node) {
+            return node.get('scrollWidth') + 'px';
+        },
+        duration: 0.5,
+        easing: 'ease-in',
+
+        on: {
+            start: function() {
+                var overflow = this.getStyle('overflow');
+                if (overflow !== 'hidden') { // enable scrollHeight/Width
+                    this.setStyle('overflow', 'hidden');
+                    this._transitionOverflow = overflow;
+                }
+            },
+
+            end: function() {
+                if (this._transitionOverflow) { // revert overridden value
+                    this.setStyle('overflow', this._transitionOverflow);
+                    delete this._transitionOverflow;
+                }
+            }
+        }
+    }
+});
+
+Y.mix(Transition.toggles, {
+    size: ['sizeOut', 'sizeIn'],
+    fade: ['fadeOut', 'fadeIn']
+});
+
+
+}, '3.15.0', {"requires": ["node-style"]});

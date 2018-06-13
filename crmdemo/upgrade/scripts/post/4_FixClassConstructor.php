@@ -12,6 +12,8 @@
 
 require_once 'modules/ModuleBuilder/controller.php';
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 /**
  * Class SugarUpgradeFixClassConstructor
  *
@@ -114,7 +116,7 @@ class SugarUpgradeFixClassConstructor extends UpgradeScript
         $className = $moduleName . '_sugar';
         $file = $this->getModuleClassFile($moduleName);
 
-        require_once $file;
+        require_once FileLoader::validateFilePath($file);
 
         try {
             $reflectionClass = new \ReflectionClass($className);

@@ -71,6 +71,9 @@ class EAPMController extends SugarController
                 SugarApplication::appendErrorMessage(translate('LBL_APPLICATION_FOUND_NOTICE', $this->bean->module_dir));
                 $this->bean->id = $eapmBean->id;
             }
+        } elseif (!empty($_POST['application'])) {
+            $this->failed = true;
+            return $this->failed(translate('LBL_CHANGE_APPLICATION_ERROR', $this->bean->module_dir));
         }
         $this->bean->validated = false;
         $this->bean->save_cleanup();
@@ -180,8 +183,36 @@ class EAPMController extends SugarController
         
         // This is a tweak so that we can automatically close windows if requested by the external account system
         if ( isset($_REQUEST['closeWhenDone']) && $_REQUEST['closeWhenDone'] == 1 ) {
-            if(!empty($_REQUEST['callbackFunction']) && !empty($_REQUEST['application'])){
-                $js = '<script type="text/javascript">window.opener.' . $_REQUEST['callbackFunction'] . '("' . $_REQUEST['application'] . '"); window.close();</script>';
+            $callback = $this->request->getValidInputRequest(
+                'callbackFunction',
+                array(
+                    'Assert\Choice' => array(
+                        'choices' => array(
+                            'hideExternalDiv',
+                            'reload',
+                            'close',
+                            '',
+                        )
+                    )
+                ),
+                ''
+            );
+
+            $application = $this->request->getValidInputRequest(
+                'application',
+                array(
+                    'Assert\Choice' => array(
+                        'choices' => array_keys(ExternalAPIFactory::loadFullAPIList())
+                    )
+                )
+            );
+
+            if (!empty($callback) && !empty($application)) {
+                $js = printf(
+                    "<script type=\"text/javascript\">window.opener.%s(\"%s\"); window.close();</script>",
+                    $callback,
+                    $application
+                );
             }else if(!empty($_REQUEST['refreshParentWindow'])){
                 $js = '<script type="text/javascript">window.opener.location.reload();window.close();</script>';
             }else{

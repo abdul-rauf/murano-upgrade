@@ -47,6 +47,14 @@ class Link {
 	var $_duplicate_key;
 	var $_duplicate_where;
 
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function Link($_rel_name, &$_bean, $fieldDef, $_table_name = '', $_key_name = '')
+    {
+        self::__construct($_rel_name, $_bean, $fieldDef, $_table_name, $_key_name);
+    }
+
 	/* Parameters:
 	 * 		$_rel_name: use this relationship key.
 	 * 		$_bean: reference of the bean that instantiated this class.
@@ -54,7 +62,8 @@ class Link {
 	 * 		$_table_name: optional, fetch from the bean's table name property.
 	 * 		$_key_name: optional, name of the primary key column for _table_name
 	 */
-	function Link($_rel_name, &$_bean, $fieldDef, $_table_name='', $_key_name=''){
+    public function __construct($_rel_name, &$_bean, $fieldDef, $_table_name='', $_key_name='')
+    {
 		global $dictionary;
         require_once("modules/TableDictionary.php");
         $GLOBALS['log']->debug("Link Constructor, relationship name: ".$_rel_name);
@@ -989,8 +998,8 @@ class Link {
 			//look for key in  $join_key_values, if found add to filter criteria else abort duplicate checking.
 			if (isset($join_key_values[$field])) {
 
-				$this->_duplicate_where .= $delimiter.' '.$field."='".$join_key_values[$field]."'";
-				$delimiter='AND';
+                $this->_duplicate_where .= $delimiter.' '.$field." = ". $this->_db->quoted($join_key_values[$field]);
+                $delimiter = ' AND ';
 			} else {
 				$GLOBALS['log']->error('Duplicate checking aborted, Please supply a value for this column '.$field);
 				return false;
@@ -1020,7 +1029,7 @@ class Link {
 	 */
 	function _get_alternate_key_fields($table_name) {
 		$alternateKey=null;
-		$indices=Link::_get_link_table_definition($table_name,'indices');
+        $indices = $this->_get_link_table_definition($table_name, 'indices');
 		if (!empty($indices)) {
 			foreach ($indices as $index) {
                 if ( isset($index['type']) && $index['type'] == 'alternate_key' ) {
@@ -1028,7 +1037,7 @@ class Link {
                 }
 			}
 		}
-		$relationships=Link::_get_link_table_definition($table_name,'relationships');
+        $relationships = $this->_get_link_table_definition($table_name, 'relationships');
 		if (!empty($relationships)) {//bug 32623, when the relationship is built in old version, there is no alternate_key. we have to use join_key_lhs and join_key_lhs.
 			if(!empty($relationships[$this->_relationship_name]) && !empty($relationships[$this->_relationship_name]['join_key_lhs']) && !empty($relationships[$this->_relationship_name]['join_key_rhs'])) {
 				return array($relationships[$this->_relationship_name]['join_key_lhs'], $relationships[$this->_relationship_name]['join_key_rhs']);
@@ -1036,9 +1045,12 @@ class Link {
 		}
 	}
 
-	/*
-	 */
-	function _get_link_table_definition($table_name,$def_name)
+    function _get_link_table_definition($table_name, $def_name)
+    {
+        return self::get_link_table_definition($table_name, $this->_relationship_name, $def_name);
+    }
+
+    public static function get_link_table_definition($table_name, $relationshipName, $def_name)
 	{
 	    global $dictionary;
 
@@ -1048,9 +1060,10 @@ class Link {
             return $dictionary[$table_name][$def_name];
         }
 
-		if (isset($dictionary[$this->_relationship_name][$def_name])) {
-			return ($dictionary[$this->_relationship_name][$def_name]);
+        if ($relationshipName && isset($dictionary[$relationshipName][$def_name])) {
+            return $dictionary[$relationshipName][$def_name];
 		}
+
         // custom metadata is found in custom/metadata (naturally) and the naming follows the convention $relationship_name_c, and $relationship_name = $table_name
         $relationshipName = preg_replace( '/_c$/' , '' , $table_name ) ;
 
@@ -1085,4 +1098,3 @@ class Link {
 
 
 }
-?>

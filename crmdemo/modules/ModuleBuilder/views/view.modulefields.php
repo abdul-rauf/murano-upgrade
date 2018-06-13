@@ -12,6 +12,8 @@
 require_once('modules/ModuleBuilder/MB/AjaxCompose.php');
 require_once('modules/ModuleBuilder/views/view.modulefield.php');
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 class ViewModulefields extends SugarView
 {
     var $mbModule;
@@ -36,7 +38,7 @@ class ViewModulefields extends SugarView
         $bak_mod_strings=$mod_strings;
         $smarty->assign('mod_strings', $mod_strings);
 
-        $module_name = $_REQUEST['view_module'];
+        $module_name = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
 
         global $current_language;
         $module_strings = return_module_language($current_language, $module_name);
@@ -108,8 +110,9 @@ class ViewModulefields extends SugarView
         } else {
             require_once('modules/ModuleBuilder/MB/ModuleBuilder.php');
             $mb = new ModuleBuilder();
-            $mb->getPackage($_REQUEST['view_package']);
-            $package = $mb->packages[$_REQUEST['view_package']];
+            $packName = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
+            $mb->getPackage($packName);
+            $package = $mb->packages[$packName];
 
             $package->getModule($module_name);
             $this->mbModule = $package->modules[$module_name];
@@ -122,7 +125,7 @@ class ViewModulefields extends SugarView
 
             if(file_exists($this->mbModule->path. '/language/'.$current_language.'.lang.php'))
             {
-                include($this->mbModule->path .'/language/'.$current_language.'.lang.php');
+                include FileLoader::validateFilePath($this->mbModule->path .'/language/'.$current_language.'.lang.php');
                 $this->mbModule->setModStrings($current_language,$mod_strings);
             }elseif(file_exists($this->mbModule->path. '/language/en_us.lang.php')){
                 include($this->mbModule->path .'/language/en_us.lang.php');

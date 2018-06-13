@@ -1,4 +1,18 @@
 <?php
+
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 if(!defined('sugarEntry'))define('sugarEntry', true);
 
 if (!defined('SUGAR_BASE_DIR')) {
@@ -21,10 +35,11 @@ if(isset($_REQUEST['root_directory'])){
     require_once('include/utils/sugar_file_utils.php');
 
     // get the root directory to process
-    $from = $_REQUEST['root_directory'];
+    $inputValidation = InputValidation::getService();
+    $from = $inputValidation->getValidInputRequest('root_directory', 'Assert\File');
     $forceReb = !empty($_REQUEST['force_rebuild']);
     // make sure that the rebuild option has been chosen
-    if (isset($_REQUEST['js_rebuild_concat'])) {
+    if (isset($_REQUEST['js_rebuild_concat'])){
         if (!$forceReb && $_REQUEST['js_rebuild_concat'] == 'rebuild') {
             //rebuild if files have changed
             $js_groupings = array();

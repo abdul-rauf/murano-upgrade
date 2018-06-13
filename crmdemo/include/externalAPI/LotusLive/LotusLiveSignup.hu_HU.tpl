@@ -1,17 +1,14 @@
 {*
-/*********************************************************************************
- * A fájl telepítésével vagy használatával Ön elismeri, hogy a SugarCRM Inc.
- * szerződött partnereként cégét ("Cég") a SugarCRM Inc. Master Subscription 
- * Agreement ("MSA") köti, amely megtekinthető az alábbi címen:
- * http://www.sugarcrm.com/master-subscription-agreement
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
  *
- * Amennyiben Céget nem köti jelenleg MSA, a fájl telepítésével elismeri, hogy
- * a jövőben ez a szerződés létrejön, továbbá hogy Önnek hatalmában áll Cég
- * ilyen fokú elkötelezése. 
- *
- * Copyright (C) 2004-2013 SugarCRM Inc.  Minden jog fenntartva.
- ********************************************************************************/
-
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
 *}
 Az IBM SmartCloud&trade; a cégek közötti zökkenőmentes együttműködést biztosítja az alábbi online szolgáltatásokon keresztül:
 <ul style="list-style-type: disc !important; border-left: 0px; padding-left: 0px; padding-top: 10px;">

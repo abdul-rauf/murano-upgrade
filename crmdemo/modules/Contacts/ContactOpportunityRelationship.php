@@ -44,21 +44,13 @@ class ContactOpportunityRelationship extends SugarBean {
       , 'deleted'=>array('name' =>'deleted', 'type' =>'bool', 'len'=>'1', 'default'=>'0', 'required'=>true)
       );
 
-
     /**
-     * This is deprecated since 7.7.0 and will be removed in 7.9.0.
-     * Please use __construct() instead.
-     * @deprecated 7.7.0
-     * @see __construct
+     * @deprecated Use __construct() instead
      */
     public function ContactOpportunityRelationship()
     {
         self::__construct();
-        $GLOBALS['log']->deprecated('ContactOpportunityRelationship::ContactOpportunityRelationship() is deprecated ' .
-            'since 7.7.0. and will be removed in 7.9.0. Please use ' .
-            'ContactOpportunityRelationship::__construct() instead.');
     }
-
 
 	public function __construct() {
 		$this->db = DBManagerFactory::getInstance();
@@ -73,7 +65,10 @@ class ContactOpportunityRelationship extends SugarBean {
 		global $locale;
 		if(isset($this->contact_id) && $this->contact_id != "")
 		{
-			$query = "SELECT first_name, last_name from contacts where id='$this->contact_id' AND deleted=0";
+                $query = sprintf(
+                    'SELECT first_name, last_name FROM contacts WHERE id = %s AND deleted = 0',
+                    $this->db->quoted($this->contact_id)
+                );
 			$result =$this->db->query($query,true," Error filling in additional detail fields: ");
 			// Get the id and the name.
 			$row = $this->db->fetchByAssoc($result);
@@ -86,7 +81,10 @@ class ContactOpportunityRelationship extends SugarBean {
 
 		if(isset($this->opportunity_id) && $this->opportunity_id != "")
 		{
-			$query = "SELECT name from opportunities where id='$this->opportunity_id' AND deleted=0";
+                $query = sprintf(
+                    'SELECT name FROM opportunities WHERE id = %s AND deleted = 0',
+                    $this->db->quoted($this->opportunity_id)
+                );
 			$result =$this->db->query($query,true," Error filling in additional detail fields: ");
 			// Get the id and the name.
 			$row = $this->db->fetchByAssoc($result);

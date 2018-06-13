@@ -46,10 +46,7 @@ class Shipper extends SugarBean {
 	var $additional_column_fields = Array();
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function Shipper()
     {
@@ -99,7 +96,7 @@ class Shipper extends SugarBean {
 		return $list;
 	}
 
-	function save_relationship_changes($is_update)
+    public function save_relationship_changes($is_update, $exclude = array())
     {
 
     }

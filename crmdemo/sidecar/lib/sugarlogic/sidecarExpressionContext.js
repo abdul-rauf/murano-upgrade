@@ -44,7 +44,8 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
                 result = SEC.parser.toConstant('""');
             }
             // test if value is a number or boolean but not a currency value, currency always needs to be a string
-            else if ( def.type !== 'currency' && SE.isNumeric(value) ) {
+            // enum values should be treated as strings, so let enum values fall into the final else
+            else if ((def.type !== 'currency' && def.type !== 'enum') && SE.isNumeric(value)) {
                 result = SEC.parser.toConstant(SE.unFormatNumber(value));
             } else if (def.type == "date" || def.type == "datetime") {
                 value = App.date.stripIsoTimeDelimterAndTZ(value);
@@ -363,19 +364,29 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
         }
 
         // initiate loading data in case if it's not initiated yet or loaded model doesn't contain the needed field
-        var cachedKey = link + '_' + field+'_'+this.model.get(rField.id_name);
+        var cachedKey = link + '_' + field + '_' + this.model.get(rField.id_name);
 
-        if (field && (!relContext.isDataFetched() || (relModel && _.isUndefined(relModel.get(field)))) && !this.view._loadedRelatedFields.hasOwnProperty(cachedKey)) {
+        if (field &&
+            (!relContext.isDataFetched() || (relModel && _.isUndefined(relModel.get(field)))) &&
+            !this.view._loadedRelatedFields.hasOwnProperty(cachedKey)) {
+
+            // fields may contain more fields than just the original one
+            // so cache those as well to avoid doing multiple requests
+            _.each(fields, _.bind(function(iterField) {
+                var fieldCacheKey = link + '_' + iterField + '_' + this.model.get(rField.id_name);
+                this.view._loadedRelatedFields[fieldCacheKey] = fieldCacheKey;
+            }, this));
+
             if (!_.contains(fields, field)) {
                 fields.push(field);
             }
 
-            //add field info to list of fields already loaded for this view
-            this.view._loadedRelatedFields[cachedKey] = cachedKey;
             this._loadRelatedData(link, fields, relContext, rField);
 
             //add listener to remove cached info if the field value's change
-            this.addListener(rField.id_name, function(){this.view._loadedRelatedFields = {};}, this);
+            this.addListener(rField.id_name, function() {
+                this.view._loadedRelatedFields = {};
+            }, this);
         }
         else if (relModel) {
             var value = relModel.get(field);
@@ -1030,7 +1041,7 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
                 this.on("init", function(){
                     this.deps = [];
                     var slContext = this.slContext = new SUGAR.expressions.SidecarExpressionContext(this),
-                        meta = _.extend({}, this.meta, this.options.meta),
+                        deps = this.getApplicableDeps(),
                         relatedFields = [],
                         updateCollection = function(models, trigger) {
                             if (trigger.dependency.testOnLoad) {
@@ -1040,26 +1051,7 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
                                 });
                                 trigger.context.isOnLoad = null;
                             }
-                        },
-
-                        // module level dependencies
-                        modDeps = SUGAR.App.metadata.getModule(this.context.get("module"), "dependencies"),
-                        action = (_.contains(this.plugins, "Editable")
-                            || slContext.view.name == 'edit'
-                            || slContext.view.name == 'create')
-                            ? "edit" : "view",
-                        deps = meta.dependencies;
-
-                    if (!_.isEmpty(modDeps)) {
-                        // to merge with view level dependencies
-                        var filteredModDeps = _.filter(modDeps, function (dep) {
-                            if (_.contains(dep.hooks, "all") || _.contains(dep.hooks, action)) {
-                                return true;
-                            }
-                            return false;
-                        });
-                        deps = (!_.isEmpty(deps)) ? _.union(deps, filteredModDeps) : filteredModDeps;
-                    }
+                        };
 
                     _.each(deps, function(dep) {
                         var newDep = SUGAR.forms.Dependency.fromMeta(dep, slContext);
@@ -1121,8 +1113,8 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
             getFieldNames: function() {
                 var getFields = SE.ExpressionParser.prototype.getFieldsFromExpression,
                     fields = Object.getPrototypeOf(this).getFieldNames.apply(this, arguments),
-                    meta = _.extend({}, this.meta, this.options.meta);
-                _.each(meta.dependencies, function(dep) {
+                    deps = this.getApplicableDeps();
+                _.each(deps, function(dep) {
                     if (dep.trigger) {
                         fields = _.union(fields, getFields(dep.trigger));
                     }
@@ -1142,6 +1134,29 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
                     }, this);
                 }
                 return fields;
+            },
+            getApplicableDeps: function() {
+                var meta = _.extend({}, this.meta, this.options.meta),
+                    // module level dependencies
+                    modDeps = SUGAR.App.metadata.getModule(this.context.get("module"), "dependencies"),
+                    action = (_.contains(this.plugins, "Editable")
+                        || slContext.view.name == 'edit'
+                        || slContext.view.name == 'create')
+                            ? "edit" : "view",
+                    deps = meta.dependencies;
+
+                if (!_.isEmpty(modDeps)) {
+                    // to merge with view level dependencies
+                    var filteredModDeps = _.filter(modDeps, function(dep) {
+                        if (_.contains(dep.hooks, "all") || _.contains(dep.hooks, action)) {
+                            return true;
+                        }
+                        return false;
+                    });
+                    deps = (!_.isEmpty(deps)) ? _.union(deps, filteredModDeps) : filteredModDeps;
+                }
+
+                return deps;
             }
        });
     } else if (console.error) {

@@ -5,4 +5,139 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add("autocomplete-filters-accentfold",function(e,t){var n=e.Text.AccentFold,r=e.Text.WordBreak,i=e.Array,s=e.Object;e.mix(e.namespace("AutoCompleteFilters"),{charMatchFold:function(e,t){if(!e)return t;var r=i.unique(n.fold(e).split(""));return i.filter(t,function(e){var t=n.fold(e.text);return i.every(r,function(e){return t.indexOf(e)!==-1})})},phraseMatchFold:function(e,t){return e?(e=n.fold(e),i.filter(t,function(t){return n.fold(t.text).indexOf(e)!==-1})):t},startsWithFold:function(e,t){return e?(e=n.fold(e),i.filter(t,function(t){return n.fold(t.text).indexOf(e)===0})):t},subWordMatchFold:function(e,t){if(!e)return t;var s=r.getUniqueWords(n.fold(e));return i.filter(t,function(e){var t=n.fold(e.text);return i.every(s,function(e){return t.indexOf(e)!==-1})})},wordMatchFold:function(e,t){if(!e)return t;var o=r.getUniqueWords(n.fold(e));return i.filter(t,function(e){var t=i.hash(r.getUniqueWords(n.fold(e.text)));return i.every(o,function(e){return s.owns(t,e)})})}})},"3.15.0",{requires:["array-extras","text-accentfold","text-wordbreak"]});
+YUI.add('autocomplete-filters-accentfold', function (Y, NAME) {
+
+/**
+Provides pre-built accent-folding result matching filters for AutoComplete.
+
+These filters are similar to the ones provided by the `autocomplete-filters`
+module, but use accent-aware comparisons. For example, "resume" and "résumé"
+will be considered equal when using the accent-folding filters.
+
+@module autocomplete
+@submodule autocomplete-filters-accentfold
+**/
+
+/**
+@class AutoCompleteFilters
+@static
+**/
+
+var AccentFold = Y.Text.AccentFold,
+    WordBreak  = Y.Text.WordBreak,
+    YArray     = Y.Array,
+    YObject    = Y.Object;
+
+Y.mix(Y.namespace('AutoCompleteFilters'), {
+    /**
+    Accent folding version of `charMatch()`.
+
+    @method charMatchFold
+    @param {String} query Query to match
+    @param {Array} results Results to filter
+    @return {Array} Filtered results
+    @static
+    **/
+    charMatchFold: function (query, results) {
+        if (!query) { return results; }
+
+        var queryChars = YArray.unique(AccentFold.fold(query).split(''));
+
+        return YArray.filter(results, function (result) {
+            var text = AccentFold.fold(result.text);
+
+            return YArray.every(queryChars, function (chr) {
+                return text.indexOf(chr) !== -1;
+            });
+        });
+    },
+
+    /**
+    Accent folding version of `phraseMatch()`.
+
+    @method phraseMatchFold
+    @param {String} query Query to match
+    @param {Array} results Results to filter
+    @return {Array} Filtered results
+    @static
+    **/
+    phraseMatchFold: function (query, results) {
+        if (!query) { return results; }
+
+        query = AccentFold.fold(query);
+
+        return YArray.filter(results, function (result) {
+            return AccentFold.fold(result.text).indexOf(query) !== -1;
+        });
+    },
+
+    /**
+    Accent folding version of `startsWith()`.
+
+    @method startsWithFold
+    @param {String} query Query to match
+    @param {Array} results Results to filter
+    @return {Array} Filtered results
+    @static
+    **/
+    startsWithFold: function (query, results) {
+        if (!query) { return results; }
+
+        query = AccentFold.fold(query);
+
+        return YArray.filter(results, function (result) {
+            return AccentFold.fold(result.text).indexOf(query) === 0;
+        });
+    },
+
+    /**
+    Accent folding version of `subWordMatch()`.
+
+    @method subWordMatchFold
+    @param {String} query Query to match
+    @param {Array} results Results to filter
+    @return {Array} Filtered results
+    @static
+    **/
+    subWordMatchFold: function (query, results) {
+        if (!query) { return results; }
+
+        var queryWords = WordBreak.getUniqueWords(AccentFold.fold(query));
+
+        return YArray.filter(results, function (result) {
+            var resultText = AccentFold.fold(result.text);
+
+            return YArray.every(queryWords, function (queryWord) {
+                return resultText.indexOf(queryWord) !== -1;
+            });
+        });
+    },
+
+    /**
+    Accent folding version of `wordMatch()`.
+
+    @method wordMatchFold
+    @param {String} query Query to match
+    @param {Array} results Results to filter
+    @return {Array} Filtered results
+    @static
+    **/
+    wordMatchFold: function (query, results) {
+        if (!query) { return results; }
+
+        var queryWords = WordBreak.getUniqueWords(AccentFold.fold(query));
+
+        return YArray.filter(results, function (result) {
+            // Convert resultWords array to a hash for fast lookup.
+            var resultWords = YArray.hash(WordBreak.getUniqueWords(
+                    AccentFold.fold(result.text)));
+
+            return YArray.every(queryWords, function (word) {
+                return YObject.owns(resultWords, word);
+            });
+        });
+    }
+});
+
+
+}, '3.15.0', {"requires": ["array-extras", "text-accentfold", "text-wordbreak"]});

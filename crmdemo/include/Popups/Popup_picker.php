@@ -22,11 +22,19 @@ class Popup_Picker
 	var $_create = false;
 	var $_hide_clear_button = false;
 
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function Popup_Picker()
+    {
+        self::__construct();
+    }
+
 	/**
 	 * Creates a new Popup_Picker object. Controls displaying of single select and multi select popups
 	 *
 	 */
-	function Popup_Picker()
+    public function __construct()
 	{
 		global $currentModule, $popupMeta;
 
@@ -315,4 +323,3 @@ EOQ;
         return $output_html;
 	}
 } // end of class Popup_Picker
-?>

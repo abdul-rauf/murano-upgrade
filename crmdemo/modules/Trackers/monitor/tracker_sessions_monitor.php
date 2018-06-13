@@ -17,7 +17,7 @@ class tracker_sessions_monitor extends Monitor
 {
     public function __construct($name = '', $monitorId = '', $metadata = '', $store = '')
     {
-        parent::Monitor($name, $monitorId, $metadata, $store);
+        parent::__construct($name, $monitorId, $metadata, $store);
 
         $this->setValue('session_id', $this->getSessionId());
 
@@ -62,18 +62,14 @@ class tracker_sessions_monitor extends Monitor
 
     private function getSessionId()
     {
-        try {
-            // Make sure we have the session
-            if (session_id() === '') {
-                session_start();
-            }
+        // Make sure we have the session
+        if (session_id() === '') {
+            session_start();
+        }
 
-            $sessionId = session_id();
-            if (!empty($sessionId) && strlen($sessionId) > MAX_SESSION_LENGTH) {
-                $sessionId = md5($sessionId);
-            }
-        } catch (Exception $e) {
-            $sessionId = false;
+        $sessionId = session_id();
+        if (!empty($sessionId) && strlen($sessionId) > MAX_SESSION_LENGTH) {
+            $sessionId = md5($sessionId);
         }
 
         return $sessionId;

@@ -33,7 +33,16 @@ class ExtNode {
 	var $dynamicloadfunction='loadDataForNode'; //default script to load node data (children)
 	var $expanded=false;  //show node expanded during initial load.
 	 
-	function ExtNode($id,$label,$show_expanded=true) {
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ExtNode($id, $label, $show_expanded = true)
+    {
+        self::__construct($id, $label, $show_expanded);
+    }
+
+    public function __construct($id, $label, $show_expanded = true)
+    {
 		$this->_label = $label;
 		$this->id = $id;
 		$this->_properties['text'] = htmlspecialchars_decode($label, ENT_QUOTES);

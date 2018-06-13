@@ -34,10 +34,7 @@ class CalendarDisplay {
 	);
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function CalendarDisplay(Calendar $cal, $dashlet_id = "")
     {
@@ -252,7 +249,6 @@ class CalendarDisplay {
 			$displayTimeslots = SugarConfig::getInstance()->get('calendar.display_timeslots', true);
 		}
 
-		$ss->assign('week',$_REQUEST['week']);
 		$ss->assign('display_timeslots', $displayTimeslots);
 		$ss->assign('show_calls',$this->cal->show_calls);
 		$ss->assign('show_tasks',$this->cal->show_tasks);

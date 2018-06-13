@@ -47,13 +47,18 @@ class TeamSetModule extends SugarBean{
         $this->disable_row_level_security =true;
     }
 
-    public function save(){
-        $sql = "SELECT id FROM $this->table_name WHERE team_set_id = '$this->team_set_id' AND module_table_name = '$this->module_table_name'";
+    public function save($check_notify = false)
+    {
+        $sql = sprintf(
+            'SELECT id FROM %s WHERE team_set_id = %s AND module_table_name = %s',
+            $this->table_name,
+            $this->db->quoted($this->team_set_id),
+            $this->db->quoted($this->module_table_name)
+        );
         $result = $this->db->query($sql);
         $row = $this->db->fetchByAssoc($result);
         if (!$row){
-            parent::save();
+            parent::save($check_notify);
         }
     }
 }
-?>

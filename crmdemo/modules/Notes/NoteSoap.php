@@ -12,13 +12,19 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 require_once('include/upload_file.php');
 
-require_once('include/upload_file.php');
-
 class NoteSoap
 {
     var $upload_file;
 
-    function NoteSoap()
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function NoteSoap()
+    {
+        self::__construct();
+    }
+
+    public function __construct()
     {
     	$this->upload_file = new UploadFile('uploadfile');
     }

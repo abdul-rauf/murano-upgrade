@@ -24,6 +24,13 @@ if (!defined('sugarEntry') || !sugarEntry) {
 
 class OpportunitiesViewEdit extends ViewEdit
 {
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function OpportunitiesViewEdit()
+    {
+        self::__construct();
+    }
 
     public function __construct()
     {
@@ -31,13 +38,6 @@ class OpportunitiesViewEdit extends ViewEdit
         $this->useForSubpanel = true;
     }
 
-    /**
-     * @deprecated
-     */
-    public function OpportunitiesViewEdit()
-    {
-        self::__construct();
-    }
 
     public function display()
     {

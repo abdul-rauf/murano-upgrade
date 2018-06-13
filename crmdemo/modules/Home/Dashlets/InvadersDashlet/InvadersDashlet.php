@@ -19,19 +19,28 @@ class InvadersDashlet extends Dashlet {
     var $height = '100'; // height of the pad
 
     /**
+     * @deprecated Use __construct() instead
+     */
+    public function InvadersDashlet($id, $def)
+    {
+        self::__construct($id, $def);
+    }
+
+    /**
      * Constructor
      *
      * @global string current language
      * @param guid $id id for the current dashlet (assigned from Home module)
      * @param array $def options saved for this dashlet
      */
-    function InvadersDashlet($id, $def) {
+    public function __construct($id, $def)
+    {
         $this->loadLanguage('InvadersDashlet'); // load the language strings here
 
         if(!empty($def['height'])) // set a default height if none is set
             $this->height = $def['height'];
 
-        parent::Dashlet($id); // call parent constructor
+        parent::__construct($id); // call parent constructor
 
         $this->isConfigurable = false; // dashlet is configurable
         $this->hasScript = true;  // dashlet has javascript attached to it
@@ -128,9 +137,8 @@ class InvadersDashlet extends Dashlet {
             $optionsArray['savedText'] = '';
         }
         $json = getJSONobj();
-        echo 'result = ' . $json->encode(array('id' => $_REQUEST['id'],
-                                       'savedText' => $optionsArray['savedText']));
+        header("Content-Type: application/json");
+        $guid = InputValidation::getService()->getValidInputRequest('id', 'Assert\Guid', '');
+        echo $json->encode(array('id' => $guid, 'savedText' => $optionsArray['savedText']));
     }
 }
-
-?>

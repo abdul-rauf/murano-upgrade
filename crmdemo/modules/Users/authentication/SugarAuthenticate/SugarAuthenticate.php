@@ -11,6 +11,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 /**
  * This file is used to control the authentication process.
  * It will call on the user authenticate and controll redirection
@@ -20,13 +22,22 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 class SugarAuthenticate{
 	var $userAuthenticateClass = 'SugarAuthenticateUser';
 	var $authenticationDir = 'SugarAuthenticate';
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SugarAuthenticate()
+    {
+        self::__construct();
+    }
+
 	/**
 	 * Constructs SugarAuthenticate
 	 * This will load the user authentication class
 	 *
 	 * @return SugarAuthenticate
 	 */
-	function SugarAuthenticate()
+    public function __construct()
 	{
 	    // check in custom dir first, in case someone want's to override an auth controller
 	    SugarAutoLoader::requireWithCustom('modules/Users/authentication/'.$this->authenticationDir.'/' . $this->userAuthenticateClass . '.php');
@@ -192,7 +203,7 @@ class SugarAuthenticate{
 		if (isset ($reset_language_on_default_user) && $reset_language_on_default_user && $GLOBALS['current_user']->user_name == $sugar_config['default_user_name']) {
 			$authenticated_user_language = $sugar_config['default_language'];
 		} else {
-			$authenticated_user_language = isset($_REQUEST['login_language']) ? $_REQUEST['login_language'] : $sugar_config['default_language'];
+			$authenticated_user_language = InputValidation::getService()->getValidInputRequest('login_language', 'Assert\Language', $sugar_config['default_language']);
 		}
 
 		$_SESSION['authenticated_user_language'] = $authenticated_user_language;
@@ -337,7 +348,8 @@ class SugarAuthenticate{
 	 * @param STRING $password
 	 * @return STRING $encoded_password
 	 */
-	function encodePassword($password){
+    public static function encodePassword($password)
+    {
 		return strtolower(md5($password));
 	}
 

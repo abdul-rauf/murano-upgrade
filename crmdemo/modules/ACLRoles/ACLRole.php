@@ -25,14 +25,10 @@ class ACLRole extends SugarBean{
     var $created_by;
 
     /**
-     * This is a deprecated method, please start using __construct() as this
-     * method will be removed in a future version.
-     *
-     * @deprecated since 7.0.0. Use __construct() instead.
+     * @deprecated Use __construct() instead
      */
     public function ACLRole()
     {
-        $GLOBALS['log']->deprecated('Calls to ACLRole::ACLRole() are deprecated.');
         self::__construct();
     }
 
@@ -112,14 +108,13 @@ public static function getUserRoles($user_id, $getAsNameArray = true)
 }
 
 /**
- * static  getUserRoleNames($user_id)
- * returns a list of Role names for a given user id
+ * Returns a list of Role names for a given user id
  *
- * @param GUID $user_id
- * @return a list of ACLRole Names
+ * @param string $user_id
+ * @return array List of ACLRole Names
  */
-function getUserRoleNames($user_id){
-
+public static function getUserRoleNames($user_id)
+{
         $user_roles = sugar_cache_retrieve("RoleMembershipNames_".$user_id);
 
         if(!$user_roles){
@@ -151,7 +146,8 @@ function getUserRoleNames($user_id){
  * @param boolean $returnAsArray - should it return the results as an array of arrays or as an array of ACLRoles
  * @return either an array of array representations of acl roles or an array of ACLRoles
  */
-function getAllRoles($returnAsArray = false){
+public static function getAllRoles($returnAsArray = false)
+{
         $db = DBManagerFactory::getInstance();
         $query = "SELECT acl_roles.* FROM acl_roles
                     WHERE acl_roles.deleted=0 ORDER BY name";
@@ -182,7 +178,8 @@ function getAllRoles($returnAsArray = false){
  * @param GUID $role_id
  * @return array of actions
  */
-function getRoleActions($role_id, $type='module'){
+    public static function getRoleActions($role_id, $type = 'module')
+    {
         global $beanList;
         //if we don't have it loaded then lets check against the db
         $additional_where = '';
@@ -195,7 +192,9 @@ function getRoleActions($role_id, $type='module'){
         $query .=" FROM acl_actions ";
 
         if(!empty($role_id)){
-            $query .=		" LEFT JOIN acl_roles_actions ON acl_roles_actions.role_id = '$role_id' AND  acl_roles_actions.action_id = acl_actions.id AND acl_roles_actions.deleted = 0";
+            $query .= " LEFT JOIN acl_roles_actions ON acl_roles_actions.role_id = ".
+                $db->quoted($role_id) .
+                " AND  acl_roles_actions.action_id = acl_actions.id AND acl_roles_actions.deleted = 0";
         }
         $query .= " WHERE acl_actions.deleted=0 ORDER BY acl_actions.category, acl_actions.name";
         $result = $db->query($query);
@@ -250,19 +249,23 @@ function getRoleActions($role_id, $type='module'){
  */
 function mark_relationships_deleted($id){
         //we need to delete the actions relationship by hand (special case)
-        $date_modified = db_convert("'".TimeDate::getInstance()->nowDb()."'", 'datetime');
-        $query =  "UPDATE acl_roles_actions SET deleted=1 , date_modified=$date_modified WHERE role_id = '$id' AND deleted=0";
+        $query = sprintf(
+            'UPDATE acl_roles_actions SET deleted = 1, date_modified = %s WHERE role_id = %s AND deleted = 0',
+            db_convert($this->db->quoted(TimeDate::getInstance()->nowDb()), 'datetime'),
+            $this->db->quoted($id)
+        );
         $this->db->query($query);
         parent::mark_relationships_deleted($id);
 }
 
-   /**
-    *  toArray()
-    * returns this role as an array
-    *
-    * @return array of fields with id, name, description
-    */
-    function toArray(){
+    /**
+     *  toArray()
+     * returns this role as an array
+     *
+     * @return array of fields with id, name, description
+     */
+    public function toArray($dbOnly = false, $stringOnly = false, $upperKeys = false)
+    {
         $array_fields = array('id', 'name', 'description');
         $arr = array();
         foreach($array_fields as $field){

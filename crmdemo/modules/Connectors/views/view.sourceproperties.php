@@ -12,13 +12,24 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 require_once('include/MVC/View/views/view.list.php');
 
 class ViewSourceProperties extends ViewList {
-   
- 	function ViewSourceProperties(){
- 		parent::ViewList();
- 	}
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ViewSourceProperties($bean = null, $view_object_map = array(), Request $request = null)
+    {
+        self::__construct($bean, $view_object_map, $request);
+    }
+
+    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
+    {
+        parent::__construct($bean, $view_object_map, $request);
+    }
 
     public function display()
     {
@@ -27,7 +38,8 @@ class ViewSourceProperties extends ViewList {
 		require_once('include/connectors/sources/SourceFactory.php');
 		require_once('include/connectors/utils/ConnectorUtils.php');
 		
-		$source_id = $_REQUEST['source_id'];
+		$source_id = $this->request->getValidInputRequest('source_id', 'Assert\ComponentName');
+
 		$connector_language = ConnectorUtils::getConnectorStrings($source_id);
     	$source = SourceFactory::getSource($source_id);
     	$properties = $source->getProperties();
@@ -61,4 +73,3 @@ class ViewSourceProperties extends ViewList {
         echo $this->ss->fetch($this->getCustomFilePathIfExists('modules/Connectors/tpls/source_properties.tpl'));
     }
 }
-

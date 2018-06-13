@@ -44,9 +44,16 @@ class WorkFlowGlue {
         'Is not empty' => 'LBL_IS_NOT_EMPTY',
     );
 
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function WorkFlowGlue()
+    {
+        self::__construct();
+    }
 
-	function WorkFlowGlue(){
-
+    public function __construct()
+    {
 		global $db;
 		$this->db = & $db;
 

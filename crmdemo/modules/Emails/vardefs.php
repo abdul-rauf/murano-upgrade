@@ -213,7 +213,7 @@ $dictionary['Email'] = array(
             'type' => 'varchar',
             'vname' => 'description',
             'source' => 'non-db',
-            'full_text_search' => array('enabled' => true, 'searchable' => true),
+            'full_text_search' => array('enabled' => true, 'searchable' => true, 'type' => 'text'),
         ),
         'date_sent' => array(
             'name' => 'date_sent',
@@ -655,3 +655,9 @@ VardefManager::createVardef(
     'Email',
     array('team_security')
 );
+
+// Temporary disable Email description field indexing until the analyzers are sorted out
+// to properly cope with larger fields. This impacts indexing performance and additional
+// adds a heavy taxation on the required disk space usage as well.
+$dictionary['Email']['fields']['description']['full_text_search']['enabled'] = false;
+$dictionary['Email']['fields']['description']['full_text_search']['searchable'] = false;

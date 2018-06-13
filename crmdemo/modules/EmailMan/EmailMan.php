@@ -47,10 +47,7 @@ class EmailMan extends SugarBean{
 	var $additional_column_fields = array();
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function EmailMan()
     {
@@ -65,7 +62,8 @@ class EmailMan extends SugarBean{
 
 	var $new_schema = true;
 
-    function create_new_list_query($order_by, $where,$filter=array(),$params=array(), $show_deleted = 0,$join_type='', $return_array = false,$parentbean=null, $singleSelect = false) {
+    public function create_new_list_query($order_by, $where, $filter = array(), $params = array(), $show_deleted = 0, $join_type = '', $return_array = false, $parentbean = null, $singleSelect = false, $ifListForExport = false)
+    {
 		$query = array('select' => '', 'from' => '', 'where' => '', 'order_by' => '');
 
 

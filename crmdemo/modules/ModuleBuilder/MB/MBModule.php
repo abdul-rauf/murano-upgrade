@@ -9,6 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 define('MB_TEMPLATES', 'include/SugarObjects/templates');
 define('MB_IMPLEMENTS', 'include/SugarObjects/implements');
 require_once 'modules/ModuleBuilder/MB/MBVardefs.php';
@@ -110,7 +115,7 @@ class MBModule
     {
         if (file_exists ( $this->path . '/config.php' ))
         {
-            include ($this->path . '/config.php') ;
+            include FileLoader::validateFilePath($this->path . '/config.php');
             $this->config = $config ;
             $this->normalizeConfig();
         }
@@ -718,7 +723,7 @@ class MBModule
         return $this->providedSubpanels;
     }
 
-    function getTypes ()
+    public static function getTypes()
     {
         $types = array ( ) ;
         $d = dir ( MB_TEMPLATES ) ;
@@ -735,23 +740,32 @@ class MBModule
 
     function rename ($new_name)
     {
-        $old = $this->getModuleDir () ;
+        $oldModDir = $this->getModuleDir();
         $old_name = $this->key_name;
         $this->name = $new_name ;
         $this->key_name = $this->package_key . '_' . $this->name ;
-        $new = $this->getModuleDir () ;
-        if (file_exists ( $new ))
-        {
+        $newModDir = $this->getModuleDir();
+        if (file_exists($newModDir)) {
             return false ;
         }
-        $renamed = rename ( $old, $new ) ;
+        $renamed = rename($oldModDir, $newModDir);
         if ($renamed)
         {
-            $this->renameMetaData ( $new , $old_name) ;
-            $this->renameLanguageFiles ( $new ) ;
+            $this->renameRelationships($newModDir, $old_name, $this->key_name);
+            $this->renameMetaData($newModDir, $old_name);
+            $this->renameLanguageFiles($newModDir);
 
         }
         return $renamed ;
+    }
+
+    public function renameRelationships($newModDir, $oldModName, $newModName)
+    {
+        //bug 39598 Relationship Name Is Not Updated If Module Name Is Changed In Module Builder
+        // and BR-4147 lhs module name was not updated when module name is changed
+        $relationships = new UndeployedRelationships($newModDir);
+        $relationships->renameModule($oldModName, $newModName);
+        $relationships->save();
     }
 
 	function renameLanguageFiles ($new_dir , $duplicate = false)
@@ -815,9 +829,6 @@ class MBModule
 
                     if ("relationships.php" == $e)
                     {
-                        //bug 39598 Relationship Name Is Not Updated If Module Name Is Changed In Module Builder
-                        $contents = str_replace  ( "'{$old_name}'", "'{$this->key_name}'" , $contents ) ;
-
                         if (!empty($this->config['label'])) {
                             $oldLabel = translate($old_name);
                             $newLabel = $this->config['label'];
@@ -875,6 +886,7 @@ class MBModule
 
         if ($copied)
         {
+            $this->renameRelationships($new, $old_name, $this->key_name);
             $this->renameMetaData ( $new , $old_name) ;
             $this->renameLanguageFiles ( $new, true ) ;
         }
@@ -907,36 +919,46 @@ class MBModule
         return rmdir_recursive($this->getModuleDir());
     }
 
-    function populateFromPost ()
+    /**
+     * Populates object from request
+     *
+     * @param Request $request
+     */
+    public function populateFromPost(Request $request = null)
     {
-        foreach ( $this->implementable as $key => $value )
-        {
-            $this->config [ $key ] = ! empty ( $_REQUEST [ $key ] ) ;
+        if (!$request) {
+            $request = InputValidation::getService();
         }
+
+        foreach ($this->implementable as $key => $_) {
+            $this->config[$key] = (bool) $request->getValidInputRequest($key);
+        }
+
         foreach ( $this->always_implement as $key => $value )
         {
             $this->config [ $key ] = true ;
         }
-        if (! empty ( $_REQUEST [ 'type' ] ))
-        {
-            $this->addTemplate ( $_REQUEST [ 'type' ] ) ;
+
+        $type = $request->getValidInputRequest('type');
+        if ($type) {
+            $this->addTemplate($type);
         }
 
-        if (!empty($_REQUEST['label'])) {
-            // this is encoded by securexss,
-            // but since this is a label that will go into language files, decode it
-            $label = htmlspecialchars_decode($_REQUEST['label'], ENT_QUOTES);
+        $label = $request->getValidInputRequest('label');
+        if ($label) {
+            $label = htmlspecialchars_decode($label, ENT_QUOTES);
             $label = SugarCleaner::cleanHtml($label, false);
             $this->config['label'] = $label == '' ? $this->name : $label;
         }
 
-        if (!empty($_REQUEST['label_singular'])) {
-            $label = htmlspecialchars_decode($_REQUEST['label_singular'], ENT_QUOTES);
+        $singularLabel = $request->getValidInputRequest('label_singular');
+        if ($singularLabel) {
+            $label = htmlspecialchars_decode($singularLabel, ENT_QUOTES);
             $label = SugarCleaner::cleanHtml($label, false);
             $this->config['label_singular'] = $label == '' ? $this->name : $label;
         }
 
-        $this->config [ 'importable' ] = ! empty( $_REQUEST[ 'importable' ] ) ;
+        $this->config['importable'] = (bool) $request->getValidInputRequest('importable');
 
     }
 

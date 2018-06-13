@@ -11,6 +11,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 /**
  * DetailView - display single record
  * @api
@@ -22,8 +25,24 @@ class DetailView extends ListView {
 	var $offset_key_mismatch=false;
 	var $no_record_found=false;
 
-	function DetailView(){
-		parent::ListView();
+    /**
+     * @var Request
+     */
+    protected $request;
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function DetailView()
+    {
+        self::__construct();
+    }
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->request = InputValidation::getService();
 
 		global $theme, $app_strings, $currentModule;
 		$this->local_theme = $theme;
@@ -57,7 +76,7 @@ class DetailView extends ListView {
 			$nav_history_array=explode(":",$nav_history);
 			$nav_stamp=$nav_history_array[0];
 			$nav_offset=$nav_history_array[1];
-			eval("\$nav_ids_visited= ".$nav_history_array[2].";");
+			$nav_ids_visited = explode(',', $nav_history_array[2]);
 		}
 
 		//from list				 					offset is there but $bNavHistorySet is false.
@@ -65,7 +84,11 @@ class DetailView extends ListView {
 		//from tracker 								offset is not there but $bNavHistorySet may or may not exist.
 		if (isset($_REQUEST['offset']) && !empty($_REQUEST['offset'])) {
 			//get offset values.
-			$offset = $_REQUEST['offset'];
+            $offsetConstraint = array(
+                'Assert\Type' => array('type' => 'numeric'),
+                'Assert\Range' => array('min' => 0),
+            );
+            $offset = $this->request->getValidInputGet('offset', $offsetConstraint, 0);
 			if($offset < 0){
 				$offset = 0;
 			}
@@ -172,7 +195,7 @@ class DetailView extends ListView {
 
   		//set nav_history.
 		if (empty($nav_stamp)) {
-			$nav_stamp=$_GET['stamp'];
+			$nav_stamp = InputValidation::getService()->getValidInputGet('stamp');
 		}
 		if (empty($nav_offset)) {
 			$nav_offset=$offset;
@@ -184,7 +207,7 @@ class DetailView extends ListView {
 			unset($nav_ids_visited[key($nav_ids_visited)]);
 		}
 		$nav_ids_visited[$offset]=$object->id;
-		$nav_history=sprintf("%s:%s:%s",$nav_stamp,$nav_offset,var_export($nav_ids_visited,true));
+		$nav_history=sprintf("%s:%s:%s",$nav_stamp,$nav_offset,implode(',', $nav_ids_visited));
         $this->setLocalSessionVariable($html_varName, "DETAIL_NAV_HISTORY",$nav_history);
 
 		return $object;
@@ -256,8 +279,9 @@ class DetailView extends ListView {
 
 				if ($row_count != 0) {
 		    		$resume_URL  = $this->base_URL.$current_offset."&InDetailNav=1";
-	    			//$resume_link = "<a href=\"$resume_URL\" >".$this->local_app_strings['LNK_RESUME']."&nbsp;</a>";
-					$resume_link = "<button type='button' class='button' title='$this->local_app_strings['LNK_RESUME']' onClick='location.href=\"$resume_URL\";'>".$this->local_app_strings['LNK_RESUME']."</button>";
+                    $resume_link = "<button type='button' class='button' title='"
+                        . $this->local_app_strings['LNK_RESUME'] . "' onClick='location.href=\"$resume_URL\";'>"
+                        . $this->local_app_strings['LNK_RESUME'] . '</button>';
 
 	    			$html_text .= "&nbsp;&nbsp;".$resume_link;
 				}
@@ -419,4 +443,3 @@ class DetailView extends ListView {
     }
 
 	}
-?>

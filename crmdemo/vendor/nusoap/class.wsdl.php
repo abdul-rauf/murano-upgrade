@@ -4,6 +4,10 @@
 
 Modification information for LGPL compliance
 
+2016-05-23 - smorozov - Restored PHP 4 constructor for backward compatibility
+
+2016-01-22 - avlasov - PHP 7 compatibility
+
 r57813 - 2010-08-19 10:34:44 -0700 (Thu, 19 Aug 2010) - kjing - Author: John Mertic <jmertic@sugarcrm.com>
     Bug 39085 - When loading the opposite search panel via ajax on the ListViews, call the index action instead of the ListView action to avoid touching pre-MVC code by accident.
 
@@ -106,6 +110,33 @@ class wsdl extends nusoap_base {
 	var $certRequest = array();		// Certificate for HTTP SSL authentication
 
     /**
+     * @deprecated Use __construct() instead
+     */
+    public function wsdl(
+        $wsdl = '',
+        $proxyhost = false,
+        $proxyport = false,
+        $proxyusername = false,
+        $proxypassword = false,
+        $timeout = 0,
+        $response_timeout = 30,
+        $curl_options = null,
+        $use_curl = false
+    ) {
+        self::__construct(
+            $wsdl,
+            $proxyhost,
+            $proxyport,
+            $proxyusername,
+            $proxypassword,
+            $timeout,
+            $response_timeout,
+            $curl_options,
+            $use_curl
+        );
+    }
+
+    /**
      * constructor
      *
      * @param string $wsdl WSDL document URL
@@ -119,8 +150,9 @@ class wsdl extends nusoap_base {
 	 * @param boolean $use_curl try to use cURL
      * @access public
      */
-    function wsdl($wsdl = '',$proxyhost=false,$proxyport=false,$proxyusername=false,$proxypassword=false,$timeout=0,$response_timeout=30,$curl_options=null,$use_curl=false){
-		parent::nusoap_base();
+    public function __construct($wsdl = '', $proxyhost = false, $proxyport = false, $proxyusername = false, $proxypassword = false, $timeout = 0, $response_timeout = 30, $curl_options = null, $use_curl = false)
+    {
+        parent::__construct();
 		$this->debug("ctor wsdl=$wsdl timeout=$timeout response_timeout=$response_timeout");
         $this->proxyhost = $proxyhost;
         $this->proxyport = $proxyport;
@@ -1979,5 +2011,3 @@ class wsdl extends nusoap_base {
 		return true;
 	}
 }
-
-?>

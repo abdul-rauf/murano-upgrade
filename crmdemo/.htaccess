@@ -9,6 +9,7 @@ RLimitMEM max max
 
 
 
+
 # BEGIN SUGARCRM RESTRICTIONS
 RedirectMatch 403 .*\.log$
 RedirectMatch 403 /+not_imported_.*\.txt
@@ -19,7 +20,9 @@ RedirectMatch 403 /+custom/+blowfish
 RedirectMatch 403 /+cache/+diagnostic
 RedirectMatch 403 /+files\.md5$
 RedirectMatch 403 /+composer\.(json|lock)
-RedirectMatch 403 /+vendor/composer/
+RedirectMatch 403 /+vendor/(?!ytree.*\.(css|js|gif|png))
+RedirectMatch 403 /+bin/
+RedirectMatch 403 /+src/
 RedirectMatch 403 .*/\.git
 
 # Fix mimetype for logo.svg (SP-1395)

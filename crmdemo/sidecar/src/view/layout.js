@@ -185,6 +185,7 @@
                     return app.view.createView({
                         context:context,
                         name:def.view,
+                        def: def,
                         module:module,
                         primary:def.primary,
                         layout:this

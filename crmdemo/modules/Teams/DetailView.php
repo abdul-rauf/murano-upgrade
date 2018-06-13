@@ -19,9 +19,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 
-
-
-
 require_once('modules/Teams/Forms.php');
 require_once('include/DetailView/DetailView.php');
 
@@ -54,7 +51,6 @@ $xtpl=new XTemplate ('modules/Teams/DetailView.html');
 $xtpl->assign("MOD", $mod_strings);
 $xtpl->assign("APP", $app_strings);
 $xtpl->assign("GRIDLINE", $gridline);
-$xtpl->assign("PRINT_URL", "index.php?".$GLOBALS['request_string']);
 $xtpl->assign("ID", $focus->id);
 $xtpl->assign("RETURN_MODULE", "Teams");
 $xtpl->assign("RETURN_ACTION", "DetailView");
@@ -101,7 +97,11 @@ require_once('include/SubPanel/SubPanelTiles.php');
 $subpanel = new SubPanelTiles($focus, 'Teams');
 echo $subpanel->display();
 
-$error_message = isset($_REQUEST['message']) ? $_REQUEST['message'] : '';
+$error_message = '';
+if (!empty($_REQUEST['message'])) {
+	$error_message = SugarCleaner::cleanHtml($_REQUEST['message'], false);
+}
+
 if(!empty($error_message))
 {
    if($error_message == 'LBL_MASSUPDATE_DELETE_GLOBAL_TEAM')

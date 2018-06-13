@@ -38,10 +38,19 @@ class SugarRouting {
 	);
 	var $customActions;
 
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SugarRouting($bean, $user)
+    {
+        self::__construct($bean, $user);
+    }
+
 	/**
 	 * Sole constructor
 	 */
-	function SugarRouting($bean, $user) {
+    public function __construct($bean, $user)
+    {
 		if(!empty($bean)) {
 			if($user == null) {
 				global $current_user;
@@ -508,16 +517,16 @@ class SugarRouting {
 					case "cc_addr":
 					case "description":
 						$GLOBALS['log']->debug("********* SUGARROUTING: got match-type criteria [ {$crit['crit1']} ]");
-						$GLOBALS['log']->debug("********* SUGARROUTING: matching [ {$crit['crit2']} to {$bean->$crit['crit0']} ]");
+                        $GLOBALS['log']->debug("********* SUGARROUTING: matching [ {$crit['crit2']} to {$bean->{$crit['crit0']}} ]");
 						switch($crit['crit1']) {
 							/**
 							 * Criteria for "match" type
 							 */
 							case "match":
 								// make sure rule crit exists
-								if(isset($bean->$crit['crit0'])) {
+                                if (isset($bean->{$crit['crit0']})) {
 									$regex = "/{$crit['crit2']}/i";
-									$field = $bean->$crit['crit0'];
+                                    $field = $bean->{$crit['crit0']};
 
 									if(!preg_match($regex, $field)) {
 										if($focusRule['all'] == true) {
@@ -542,15 +551,15 @@ class SugarRouting {
 							 * Criteria for "does not match" type
 							 */
 							case "notmatch":
-								if(isset($bean->$crit['crit0'])) {
+                                if (isset($bean->{$crit['crit0']})) {
 									$regex = "/{$crit['crit2']}/i";
-									$field = $bean->$crit['crit0'];
+                                    $field = $bean->{$crit['crit0']};
 
 									if(preg_match($regex, $field)) {
 										// got a match - we want to return a false flag
 										if($focusRule['all'] == true) {
 											$GLOBALS['log']->debug("********** SUGARROUTING: 'ALL' flag found and crit field not matched: [ {$crit['crit0']} -> {$crit['crit2']} for bean of type {$bean->module_dir} ]");
-											$GLOBALS['log']->debug("********** SUGARROUTING: 'ALL' [ value: {$bean->$crit['crit0']} ] [ regex: {$regex} ]");
+                                            $GLOBALS['log']->debug("********** SUGARROUTING: 'ALL' [ value: {$bean->{$crit['crit0']}} ] [ regex: {$regex} ]");
 											return false;
 										}
 									} else {

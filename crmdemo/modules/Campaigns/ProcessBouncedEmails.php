@@ -25,7 +25,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 function retrieveErrorReportAttachment($email)
 {
     $contents = "";
-    $query = "SELECT description FROM notes WHERE file_mime_type = 'messsage/rfc822' AND parent_type='Emails' AND parent_id = '".$email->id."' AND deleted=0";
+    $db = DBManagerFactory::getInstance();
+    $query = "SELECT description FROM notes WHERE file_mime_type = 'messsage/rfc822' AND parent_type='Emails'
+        AND parent_id = " . $db->quoted($email->id) . " AND deleted=0";
     $rs = $GLOBALS['db']->query($query);
     while ($row = $GLOBALS['db']->fetchByAssoc($rs)) 
 		$contents .= $row['description'];

@@ -64,10 +64,19 @@ class Localization {
      */
     protected $parsedFormats = array();
 
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function Localization()
+    {
+        self::__construct();
+    }
+
 	/**
 	 * sole constructor
 	 */
-	function Localization() {
+    public function __construct()
+    {
 		global $sugar_config;
 		$this->localeNameFormatDefault = empty($sugar_config['locale_name_format_default']) ? 's f l' : $sugar_config['default_name_format'];
 		$this->loadCurrencies();
@@ -341,9 +350,10 @@ class Localization {
 	 * @param string fromCharset the charset the string is currently in
 	 * @param string toCharset the charset to translate into (defaults to UTF-8)
 	 * @param bool   forceIconv force using the iconv library instead of mb_string
+     * @param bool   addBOM prepends BOM to the encoded string to be translated
 	 * @return string the translated string
 	 */
-    function translateCharset($string, $fromCharset, $toCharset='UTF-8', $forceIconv = false)
+    public function translateCharset($string, $fromCharset, $toCharset = 'UTF-8', $forceIconv = false, $addBOM = false)
     {
         $GLOBALS['log']->debug("Localization: translating [{$string}] from {$fromCharset} into {$toCharset}");
 
@@ -369,7 +379,7 @@ class Localization {
         if($isMb)
         {
             global $sugar_config;
-            if (!empty($sugar_config['export_excel_compatible'])) {
+            if (!empty($sugar_config['export_excel_compatible']) && $addBOM === true) {
                 return chr(255) . chr(254) . mb_convert_encoding($string, 'UTF-16LE', $fromCharset);
             } else {
                 return mb_convert_encoding($string, $toCharset, $fromCharset);
@@ -1031,5 +1041,3 @@ eoq;
         return $GLOBALS['sugar_config']['default_language'];
     }
 } // end class def
-
-?>

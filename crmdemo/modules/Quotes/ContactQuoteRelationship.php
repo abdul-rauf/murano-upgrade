@@ -48,10 +48,7 @@ class ContactQuoteRelationship extends SugarBean {
 	var $additional_column_fields = Array();
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function ContactQuoteRelationship()
     {
@@ -69,7 +66,10 @@ class ContactQuoteRelationship extends SugarBean {
 	    
 		if(isset($this->contact_id) && $this->contact_id != "")
 		{
-			$query = "SELECT first_name, last_name from contacts where id='$this->contact_id' AND deleted=0";
+            $query = sprintf(
+                'SELECT first_name, last_name FROM contacts WHERE id = %s AND deleted = 0',
+                $this->db->qouted($this->contact_id)
+            );
 			$result =$this->db->query($query,true," Error filling in additional detail fields: ");
 			// Get the id and the name.
 			$row = $this->db->fetchByAssoc($result);
@@ -82,7 +82,10 @@ class ContactQuoteRelationship extends SugarBean {
 
 		if(isset($this->quote_id) && $this->quote_id != "")
 		{
-			$query = "SELECT name from quotes where id='$this->quote_id' AND deleted=0";
+            $query = sprintf(
+                'SELECT name FROM quotes WHERE id = %s AND deleted = 0',
+                $this->db->quoted($this->quote_id)
+            );
 			$result =$this->db->query($query,true," Error filling in additional detail fields: ");
 			// Get the id and the name.
 			$row = $this->db->fetchByAssoc($result);

@@ -329,7 +329,8 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
                             'cell_css_class' => 'span2',
                             'placeholder' => "LBL_DNB_BAL_IND_CODE_TYPE",
                             'searchBarThreshold' => -1,
-                            'options' => 'dnb_sic_naics_code'
+                            'options' => 'dnb_sic_naics_code',
+                            'default' => '3599',
                         ),
                         array(
                             'name' => 'dnb_bal_ind_filter',
@@ -1418,7 +1419,9 @@ $viewdefs['base']['view']['dnb-bal-params'] = array(
             'modelKey' => 'balFilter',
             'multiple' => false,
             'lookup' => array(
-                'prem' => 'IncludeContactsOnlyWithDirectEmailOrDirectPhone'
+                'prem' => 'IncludeContactsOnlyWithDirectEmailOrDirectPhone',
+                'email' => 'IncludeContactsOnlyWithDirectEmail',
+                'phone' => 'IncludeContactsOnlyWithDirectPhone'
             )
         ),
     ),

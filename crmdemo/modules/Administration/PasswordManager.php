@@ -13,6 +13,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once "modules/OutboundEmailConfiguration/OutboundEmailConfigurationPeer.php";
 
+use Sugarcrm\Sugarcrm\Util\Serialized;
+
 if(!is_admin($current_user)){
     sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
 }
@@ -177,7 +179,7 @@ $sugar_smarty->assign('saml_enabled_checked', false);
 //}
 
 
-if(!function_exists('mcrypt_cbc')){
+if (!extension_loaded('mcrypt')) {
 	$sugar_smarty->assign("LDAP_ENC_KEY_READONLY", 'readonly');
 	$sugar_smarty->assign("LDAP_ENC_KEY_DESC", $config_strings['LDAP_ENC_KEY_NO_FUNC_DESC']);
 }else{
@@ -207,7 +209,7 @@ $sugar_smarty->assign("SMTP_SERVER_NOT_SET", $smtpServerIsSet);
 
 $focus = BeanFactory::getBean('InboundEmail');
 $focus->checkImap();
-$storedOptions = \Sugarcrm\Sugarcrm\Security\InputValidation\Serialized::unserialize(base64_decode($focus->stored_options));
+$storedOptions = Serialized::unserialize($focus->stored_options, array(), true);
 $email_templates_arr = get_bean_select_array(true, 'EmailTemplate','name', '','name',true);
 $create_case_email_template = (isset($storedOptions['create_case_email_template'])) ? $storedOptions['create_case_email_template'] : "";
 $TMPL_DRPDWN_LOST =get_select_options_with_id($email_templates_arr, $res['lostpasswordtmpl']);

@@ -137,16 +137,11 @@ class Contact extends Person {
     );
 
     /**
-     * This is deprecated since 7.0.0 and will be removed in 7.9.0.
-     * Please use __construct() instead.
-     * @deprecated 7.0.0
-     * @see __construct
+     * @deprecated Use __construct() instead
      */
     public function Contact()
     {
         self::__construct();
-        $GLOBALS['log']->deprecated('Contact::Contact() is deprecated since 7.0.0. and will be removed in 7.9.0. ' .
-            'Please use Contact::__construct() instead.');
     }
 
 	public function __construct() {
@@ -318,17 +313,17 @@ class Contact extends Person {
 		// retrieve the account information and the information about the person the contact reports to.
 		$query = "SELECT acc.id, acc.name, con_reports_to.first_name, con_reports_to.last_name
 		from contacts
-		left join accounts_contacts a_c on a_c.contact_id = '".$this->id."' and a_c.deleted=0
+        left join accounts_contacts a_c on a_c.contact_id = ".$this->db->quoted($this->id)." and a_c.deleted=0
 		left join accounts acc on a_c.account_id = acc.id and acc.deleted=0
 		left join contacts con_reports_to on con_reports_to.id = contacts.reports_to_id
-		where contacts.id = '".$this->id."'";
+        where contacts.id = ".$this->db->quoted($this->id);
 		// Bug 43196 - If a contact is related to multiple accounts, make sure we pull the one we are looking for
 		// Bug 44730  was introduced due to this, fix is to simply clear any whitespaces around the account_id first
 
         $clean_account_id = trim($this->account_id);
 
         if ( !empty($clean_account_id) ) {
-		    $query .= " and acc.id = '{$this->account_id}'";
+            $query .= " and acc.id = ".$this->db->quoted($this->account_id);
 		}
 
         $query .= " ORDER BY a_c.date_modified DESC";
@@ -352,7 +347,7 @@ class Contact extends Person {
 		}
 
 		$this->load_relationship('user_sync');
-		if ($this->user_sync->_relationship->relationship_exists($this, $GLOBALS['current_user'])) {
+        if ($this->user_sync->_relationship->relationship_exists($GLOBALS['current_user'], $this)) {
 			$this->sync_contact = true;
 		} else {
 			$this->sync_contact = false;
@@ -386,8 +381,8 @@ class Contact extends Person {
         if ($filter_fields && !empty($filter_fields['sync_contact'])) {
             $this->load_relationship('user_sync');
             $temp_array['SYNC_CONTACT'] = $this->user_sync->_relationship->relationship_exists(
-                $this,
-                $GLOBALS['current_user']
+                $GLOBALS['current_user'],
+                $this
             ) ? 1 : 0;
         }
 

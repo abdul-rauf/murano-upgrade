@@ -69,12 +69,8 @@ class Forecast extends SugarBean
      */
     public static $settings = array();
 
-
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function Forecast()
     {
@@ -106,7 +102,7 @@ class Forecast extends SugarBean
     }
 
 
-    function retrieve( $id, $encode = false, $deleted = true )
+    public function retrieve($id = '-1', $encode = false, $deleted = true)
     {
         $ret = parent::retrieve($id, $encode, $deleted);
 
@@ -153,7 +149,7 @@ class Forecast extends SugarBean
 	}
 
 
-	function list_view_parse_additional_sections( &$list_form, $xTemplateSection )
+    public function list_view_parse_additional_sections(&$list_form)
 	{
 		return $list_form;
 	}
@@ -176,7 +172,7 @@ class Forecast extends SugarBean
      *
      * @return String select query string, optionally an array value will be returned if $return_array= true.
      */
-    function create_new_list_query( $order_by, $where, $filter = array(), $params = array(), $show_deleted = 0, $join_type = '', $return_array = false, $parentbean = NULL, $singleSelect = false )
+    public function create_new_list_query($order_by, $where, $filter = array(), $params = array(), $show_deleted = 0, $join_type = '', $return_array = false, $parentbean = null, $singleSelect = false, $ifListForExport = false)
     {
         global $current_user;
         $ret_array           = array();

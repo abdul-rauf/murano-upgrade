@@ -12,6 +12,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 require_once('include/MVC/View/SugarView.php');
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
 class ImportView extends SugarView
 {
@@ -19,9 +21,16 @@ class ImportView extends SugarView
     protected $pageTitleKey;
     protected $instruction;
 
+    /**
+     * @var Request
+     */
+    protected $request;
+
     public function __construct($bean = null, $view_object_map = array())
     {
         global $mod_strings;
+
+        $this->request = InputValidation::getService();
 
         parent::__construct($bean, $view_object_map);
 
@@ -38,7 +47,7 @@ class ImportView extends SugarView
     /**
      * @see SugarView::getMenu()
      */
-    public function getMenu($module = null)
+    public function getMenu($module = null, $mod_strings_override = false)
     {
         global $mod_strings, $current_language;
 
@@ -47,7 +56,7 @@ class ImportView extends SugarView
 
         $old_mod_strings = $mod_strings;
         $mod_strings = return_module_language($current_language, $module);
-        $returnMenu = parent::getMenu($module);
+        $returnMenu = parent::getMenu($module, $mod_strings_override);
         $mod_strings = $old_mod_strings;
 
         return $returnMenu;
@@ -136,10 +145,46 @@ class ImportView extends SugarView
         $ss->assign("ACTION",$action);
         $ss->assign("IMPORT_MODULE",$module);
         $ss->assign("MOD", $GLOBALS['mod_strings']);
-        $ss->assign("SOURCE","");
-        if ( isset($_REQUEST['source']) )
-            $ss->assign("SOURCE", $_REQUEST['source']);
+        $ss->assign("SOURCE", $this->request->getValidInputRequest('source', array('Assert\Choice' => array('choices' => self::getImportSourceOptions())), ''));
 
         echo $ss->fetch('modules/Import/tpls/error.tpl');
+    }
+
+    /**
+     * Retrieve all valid import source options
+     * @return array
+     */
+    protected function getImportSourceOptions()
+    {
+        $savedSourceOptions = array_merge(self::getSavedImportSourceOptions(true),
+            self::getSavedImportSourceOptions(false));
+
+        $savedSourceOptionsFlattened = array();
+
+        foreach ($savedSourceOptions as $importOption) {
+            $savedSourceOptionsFlattened[] = "custom:" . $importOption['IMPORT_ID'];
+        }
+        return array_merge($savedSourceOptionsFlattened, array('csv', 'external', ''));
+    }
+
+    /**
+     * Retrieve published import options
+     * @return array
+     */
+    protected function getSavedImportSourceOptions($published = true)
+    {
+        $results = array();
+        $import_map_seed = BeanFactory::getBean('Import_1');
+        $publishedImportOptions = $import_map_seed->retrieve_all_by_string_fields(array(
+            'assigned_user_id' => $GLOBALS['current_user']->id,
+            'is_published' => $published ? 'yes' : 'no',
+            'module' => $this->importModule
+        ));
+
+        foreach ($publishedImportOptions as $option) {
+            $results[] = array("IMPORT_NAME" => $option->name, "IMPORT_ID" => $option->id);
+        }
+
+        return $results;
     }
 }

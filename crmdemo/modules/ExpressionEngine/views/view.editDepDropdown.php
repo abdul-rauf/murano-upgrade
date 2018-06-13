@@ -13,13 +13,22 @@
 
 class ViewEditDepDropdown extends SugarView
 {
-    function ViewEditDepDropdown(){
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ViewEditDepDropdown()
+    {
+        self::__construct();
+    }
+
+    public function __construct()
+    {
         $this->options['show_footer'] = false;
         if (isset ($_REQUEST['embed']) && $_REQUEST['embed'])
         {
             $this->options['show_header'] = false;
         }
-        parent::SugarView();
+        parent::__construct();
     }
 
     function display(){

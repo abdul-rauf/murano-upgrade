@@ -17,10 +17,19 @@ require_once('include/Dashlets/Dashlet.php');
 class CalendarDashlet extends Dashlet {
     var $view = 'week';
 
-    function CalendarDashlet($id, $def) {
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function CalendarDashlet($id, $def)
+    {
+        self::__construct($id, $def);
+    }
+
+    public function __construct($id, $def)
+    {
         $this->loadLanguage('CalendarDashlet','modules/Calendar/Dashlets/');
 
-		parent::Dashlet($id); 
+        parent::__construct($id); 
          
 		$this->isConfigurable = true; 
 		$this->hasScript = true;  
@@ -93,5 +102,3 @@ class CalendarDashlet extends Dashlet {
 
 
 }
-
-?>

@@ -17,9 +17,13 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 require_once 'include/SugarObjects/SugarConfig.php';
 require_once 'include/utils/security_utils.php';
 require_once 'include/utils/array_utils.php';
+
 
 
 function make_sugar_config(&$sugar_config)
@@ -1413,39 +1417,16 @@ function get_unique_key()
 /**
  * A temporary method of generating GUIDs of the correct format for our DB.
  * @return String contianing a GUID in the format: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
- *
- * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
- * All Rights Reserved.
- * Contributor(s): ______________________________________..
+ * @deprecated Use Sugarcrm\Sugarcrm\Util\Uuid
  */
 function create_guid()
 {
-    $microTime = microtime();
-    list($a_dec, $a_sec) = explode(" ", $microTime);
-
-    $dec_hex = dechex($a_dec* 1000000);
-    $sec_hex = dechex($a_sec);
-
-    ensure_length($dec_hex, 5);
-    ensure_length($sec_hex, 6);
-
-    $guid = "";
-    $guid .= $dec_hex;
-    $guid .= create_guid_section(3);
-    $guid .= '-';
-    $guid .= create_guid_section(4);
-    $guid .= '-';
-    $guid .= create_guid_section(4);
-    $guid .= '-';
-    $guid .= create_guid_section(4);
-    $guid .= '-';
-    $guid .= $sec_hex;
-    $guid .= create_guid_section(6);
-
-    return $guid;
-
+    return Sugarcrm\Sugarcrm\Util\Uuid::uuid1();
 }
 
+/**
+ * @deprecated see create_guid()
+ */
 function create_guid_section($characters)
 {
     $return = "";
@@ -1456,6 +1437,9 @@ function create_guid_section($characters)
     return $return;
 }
 
+/**
+ * @deprecated see create_guid()
+ */
 function ensure_length(&$string, $length)
 {
     $strlen = strlen($string);
@@ -1881,9 +1865,8 @@ function translate($string, $mod='', $selectedValue='')
     if (!empty($mod)) {
         global $current_language;
         //Bug 31275
-        if (isset($_REQUEST['login_language'])) {
-            $current_language = ($_REQUEST['login_language'] == $current_language)? $current_language : $_REQUEST['login_language'];
-        }
+        $request = InputValidation::getService();
+        $current_language = $request->getValidInputRequest('login_language', 'Assert\Language', $current_language);
         $lang = return_module_language($current_language, $mod);
 
         // Bug 60664 - If module language isn't found, just use mod_strings
@@ -2106,6 +2089,9 @@ function xss_check_pattern($pattern, $str)
  * 		"AUTO_INCREMENT"
  * 		"ALPHANUM"
  * @param boolean $dieOnBadData true (default) if you want to die if bad data if found, false if not
+ *
+ * @deprecated This is now an integral part of the new Validator service and is implemented
+ * in \Sugarcrm\Sugarcrm\Security\Validator\Constraints\LegacyCleanStringValidator. 
  */
 function clean_string($value, $filter = "STANDARD", $dieOnBadData = true)
 {
@@ -2150,6 +2136,10 @@ function clean_string($value, $filter = "STANDARD", $dieOnBadData = true)
     }
 }
 
+/**
+ * @deprecated Superglobal sanitizing will be completely abandonned. Use the new InputValidation
+ * framework in combination with Validator constraints for input validation.
+ */
 function clean_special_arguments()
 {
     if (isset($_SERVER['PHP_SELF']) && 'cli' !== PHP_SAPI) {
@@ -2180,6 +2170,8 @@ function clean_special_arguments()
 
 /**
  * cleans the given key in superglobals $_GET, $_POST, $_REQUEST
+ * @deprecated Superglobal sanitizing will be completely abandonned. Use the new InputValidation
+ * framework in combination with Validator constraints for input validation. 
  */
 function clean_superglobals($key, $filter = 'STANDARD')
 {
@@ -2188,6 +2180,10 @@ function clean_superglobals($key, $filter = 'STANDARD')
     if(isset($_REQUEST[$key])) clean_string($_REQUEST[$key], $filter);
 }
 
+/**
+ * @deprecated Superglobal sanitizing will be completely abandonned. Use the new InputValidation
+ * framework in combination with Validator constraints for input validation.
+ */
 function set_superglobals($key, $val)
 {
     $_GET[$key] = $val;
@@ -2195,7 +2191,11 @@ function set_superglobals($key, $val)
     $_REQUEST[$key] = $val;
 }
 
-// Works in conjunction with clean_string() to defeat SQL injection, file inclusion attacks, and XSS
+/**
+ * Works in conjunction with clean_string() to defeat SQL injection, file inclusion attacks, and XSS
+ * @deprecated Superglobal sanitizing will be completely abandonned. Use the new InputValidation
+ * framework in combination with Validator constraints for input validation.
+ */
 function clean_incoming_data()
 {
     global $sugar_config;
@@ -2278,6 +2278,11 @@ function str_end($str, $end)
     return (substr($str, strlen($str) - strlen($end)) == $end);
 }
 
+/**
+ * @deprecated Superglobal sanitizing will be completely abandonned. Use the new InputValidation
+ * framework in combination with Validator constraints for input validation. XSS prevention needs
+ * to be performed on the output layer in the form of escaping.
+ */
 function securexss($value)
 {
     if (defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') == 'api') {
@@ -2297,6 +2302,11 @@ function securexss($value)
     return htmlspecialchars($value, ENT_QUOTES, "UTF-8");
 }
 
+/**
+ * @deprecated Superglobal sanitizing will be completely abandonned. Use the new InputValidation
+ * framework in combination with Validator constraints for input validation. XSS prevention needs
+ * to be performed on the output layer in the form of escaping.
+ */
 function securexsskey($value, $die=true)
 {
     global $sugar_config;
@@ -2313,6 +2323,11 @@ function securexsskey($value, $die=true)
     }
 }
 
+/**
+ * @deprecated Superglobal sanitizing will be completely abandonned. Use the new InputValidation
+ * framework in combination with Validator constraints for input validation. XSS prevention needs
+ * to be performed on the output layer in the form of escaping.
+ */
 function preprocess_param($value)
 {
     if (is_string($value)) {
@@ -2326,6 +2341,11 @@ function preprocess_param($value)
     return $value;
 }
 
+/**
+ * @deprecated Superglobal sanitizing will be completely abandonned. Use the new InputValidation
+ * framework in combination with Validator constraints for input validation. XSS prevention needs
+ * to be performed on the output layer in the form of escaping.
+ */
 function cleanup_slashes($value)
 {
     if(is_string($value)) return stripslashes($value);
@@ -2540,36 +2560,22 @@ function values_to_keys($array)
 
 function clone_relationship(&$db, $tables = array(), $from_column, $from_id, $to_id)
 {
+    global $dictionary;
     foreach ($tables as $table) {
 
         if ($table == 'emails_beans') {
-            $query = "SELECT * FROM $table WHERE $from_column='$from_id' and bean_module='Leads'";
+            $query = "SELECT * FROM $table WHERE $from_column=" . $db->quoted($from_id) . " and bean_module='Leads'";
         } else {
-            $query = "SELECT * FROM $table WHERE $from_column='$from_id'";
+            $query = "SELECT * FROM $table WHERE $from_column=" . $db->quoted($from_id);
         }
         $results = $db->query($query);
         while ($row = $db->fetchByAssoc($results)) {
-            $query = "INSERT INTO $table ";
-            $names = '';
-            $values = '';
             $row[$from_column] = $to_id;
             $row['id'] = create_guid();
-            if ($table=='emails_beans') {
-                $row['bean_module'] =='Contacts';
+            if ($table == 'emails_beans') {
+                $row['bean_module'] = 'Contacts';
             }
-
-            foreach ($row as $name=>$value) {
-
-                if (empty($names)) {
-                    $names .= $name;
-                    $values .= "'$value'";
-                } else {
-                    $names .= ', '. $name;
-                    $values .= ", '$value'";
-                }
-            }
-            $query .= "($names)	VALUES ($values)";
-            $db->query($query);
+            $db->insertParams($table, $dictionary[$table]['fields'], $row);
         }
     }
 }
@@ -3009,7 +3015,7 @@ function check_php_version($sys_php_version = '')
     $min_considered_php_version = '5.3.25';
     //always use .unsupported to make sure that the dev/beta/rc releases are excluded as well
 
-    $version_threshold  = '5.6.unsupported';
+    $version_threshold  = '7.0.unsupported';
 
     // only the supported versions,
     // should be mutually exclusive with $invalid_php_versions
@@ -3687,8 +3693,7 @@ function search_filter_rel_info(& $focus, $tar_rel_module, $relationship_name)
         {
             $temp_bean = BeanFactory::getBean($tar_rel_module);
             $temp_bean->disable_row_level_security = true;
-        //	echo $focus->$field_def['id_name'];
-            $temp_bean->retrieve($focus->$field_def['id_name']);
+            $temp_bean->retrieve($focus->{$field_def['id_name']});
             if ($temp_bean->id!="") {
 
                 $rel_list[] = $temp_bean;
@@ -3699,8 +3704,7 @@ function search_filter_rel_info(& $focus, $tar_rel_module, $relationship_name)
         } elseif (!empty($rel_value['link']) && !empty($rel_value['id_name']) && $rel_value['link'] == $relationship_name) {
             $temp_bean = BeanFactory::getBean($tar_rel_module);
             $temp_bean->disable_row_level_security = true;
-        //	echo $focus->$rel_value['id_name'];
-            $temp_bean->retrieve($focus->$rel_value['id_name']);
+            $temp_bean->retrieve($focus->{$rel_value['id_name']});
             if ($temp_bean->id!="") {
 
                 $rel_list[] = $temp_bean;
@@ -3915,13 +3919,14 @@ function appendPortToHost($url, $port)
 /**
  * Singleton to return JSON object
  * @return	JSON object
+ * @deprecated JSON.php is composed of static methods only and can be called
+ * directly as `JSON::encode`, ... JSON class is autoloaded.
  */
 function getJSONobj()
 {
     static $json = null;
     if (!isset($json)) {
-        require_once 'include/JSON.php';
-        $json = new JSON(JSON_LOOSE_TYPE);
+        $json = new JSON();
     }
 
     return $json;
@@ -3955,6 +3960,7 @@ function setPhpIniSettings()
     if (!empty($backtrack_limit)) {
         ini_set('pcre.backtrack_limit', '-1');
     }
+    ini_set('always_populate_raw_post_data', '-1');
 }
 
 /**
@@ -4842,7 +4848,7 @@ function create_export_query_relate_link_patch($module, $searchFields, $where)
             } else {
                 $params['join_table_link_alias'] = 'join_link_'.$field['name'];
             }
-            $join = $seed->$field['link']->getJoin($params, true);
+            $join = $seed->{$field['link']}->getJoin($params, true);
             $join_table_alias = 'join_'.$field['name'];
             if (isset($field['db_concat_fields'])) {
                 $db_field = db_concat($join_table_alias, $field['db_concat_fields']);
@@ -5476,15 +5482,21 @@ function ensureJSCacheFilesExist($files = array(), $root = '.', $addPath = true)
 
     // If even one of the files doesn't exist, rebuild
     if (!$cacheExists) {
-        // Maintain state as well as possible
-        $rd = isset($_REQUEST['root_directory']) ? $_REQUEST['root_directory'] : null;
 
+        // Safe $_REQUEST['root_directory']
+        $inputValidation = InputValidation::getService();
+
+        // Maintain state as well as possible
+        $rd = $inputValidation->getValidInputRequest('root_directory', 'Assert\File');
+
+        // FIXME: setting $_REQUEST parameters ourselves ...
         // Build the concatenated files
         $_REQUEST['root_directory'] = $root;
         require_once("jssource/minify_utils.php");
         $minifyUtils = new SugarMinifyUtils();
         $minifyUtils->ConcatenateFiles($root);
 
+        // FIXME: setting $_REQUEST parameters ourselves ...
         // Cleanup the root directory request var if it was found. If it was null
         // this will in effect unset it
         $_REQUEST['root_directory'] = $rd;

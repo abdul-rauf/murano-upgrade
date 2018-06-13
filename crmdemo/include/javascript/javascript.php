@@ -22,7 +22,16 @@ class javascript{
 		$this->formname = $name;
 	}
 
-	function javascript(){
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function javascript()
+    {
+        self::__construct();
+    }
+
+    public function __construct()
+    {
 		global $app_strings, $current_user, $sugar_config;
 
         // Bug 24730 - default initialize the bean object in case we never set it to the current bean object
@@ -289,4 +298,3 @@ class javascript{
         return empty($required) ? "false" : "true";
     }
 }
-?>

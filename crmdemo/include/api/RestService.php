@@ -17,6 +17,8 @@ require_once('include/SugarOAuth2/SugarOAuth2Server.php');
 require_once('include/api/RestResponse.php');
 require_once('include/api/RestRequest.php');
 
+use Sugarcrm\Sugarcrm\Logger\LoggerTransition;
+
 /** @noinspection PhpInconsistentReturnPointsInspection */
 class RestService extends ServiceBase
 {
@@ -118,6 +120,9 @@ class RestService extends ServiceBase
         $this->min_version = $apiSettings['minVersion'];
         $this->max_version = $apiSettings['maxVersion'];
         $this->api_settings = $apiSettings;
+
+        $logger = new LoggerTransition(\LoggerManager::getLogger());
+        $this->setLogger($logger);
     }
 
     /**
@@ -153,6 +158,8 @@ class RestService extends ServiceBase
                     $this->platform = basename($_GET['platform']);
                 }
             }
+
+            $this->validatePlatform($this->platform);
             $this->request->setPlatform($this->platform);
 
             $GLOBALS['logic_hook']->call_custom_logic('', 'before_routing', array("api" => $this, "request" => $this->request));

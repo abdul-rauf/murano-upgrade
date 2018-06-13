@@ -11,6 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 class ModuleBuilderParser
 {
@@ -18,7 +19,15 @@ class ModuleBuilderParser
 	var $_defMap; // private - mapping from view to variable name inside the viewdef file
 	var $_variables = array(); // private - set of additional variables (other than the viewdefs) found in the viewdef file that need to be added to the file again when it is saved - used by ModuleBuilder
 	
-	function ModuleBuilderParser()
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ModuleBuilderParser()
+    {
+        self::__construct();
+    }
+
+    public function __construct()
 	{
 		$this->_defMap = array(
             'listview'=>'listViewDefs',
@@ -57,7 +66,7 @@ class ModuleBuilderParser
         }
 
         $GLOBALS['log']->info('ModuleBuilderParser->_loadFromFile(): file='.$file);        
-        require $file; // loads in a $viewdefs
+        require FileLoader::validateFilePath($file); // loads in a $viewdefs
 
         // Check to see if we have the module name set as a variable rather than embedded in the $viewdef array
         // If we do, then we have to preserve the module variable when we write the file back out
@@ -89,7 +98,7 @@ class ModuleBuilderParser
         return (array('viewdefs' => $defs, 'variables' => $variables));
 	}
 	
-	function handleSave ($file,$view,$moduleName,$defs)
+    public function handleSave()
 	{
 	}
 	
@@ -159,5 +168,3 @@ class ModuleBuilderParser
     }
     
 }
-
-?>

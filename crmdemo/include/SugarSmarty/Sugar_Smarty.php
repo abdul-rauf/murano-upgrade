@@ -25,7 +25,16 @@ if(!defined('SUGAR_SMARTY_DIR'))
 class Sugar_Smarty extends Smarty
 {
     protected static $_plugins_dir;
-	function Sugar_Smarty()
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function Sugar_Smarty()
+    {
+        self::__construct();
+    }
+
+    public function __construct()
 	{
 		if(!file_exists(SUGAR_SMARTY_DIR))mkdir_recursive(SUGAR_SMARTY_DIR, true);
 		if(!file_exists(SUGAR_SMARTY_DIR . 'templates_c'))mkdir_recursive(SUGAR_SMARTY_DIR . 'templates_c', true);

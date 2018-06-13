@@ -49,6 +49,7 @@
     'lib/sugaraccessibility/sugaraccessibility.js',
     'lib/sugaraccessibility/click.js',
     'lib/sugaraccessibility/label.js',
+    'lib/bigjs/big.js',
 
     'tests/fixtures/*.js',
 

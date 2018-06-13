@@ -23,7 +23,15 @@ class ParserLabel extends ModuleBuilderParser
      */
     protected static $moduleInstaller;
 
-    function ParserLabel ($moduleName, $packageName = '' )
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ParserLabel($moduleName, $packageName = '')
+    {
+        self::__construct($moduleName, $packageName);
+    }
+
+    public function __construct($moduleName, $packageName = '')
     {
         $this->moduleName = $moduleName;
         if (!empty($packageName))
@@ -36,7 +44,7 @@ class ParserLabel extends ModuleBuilderParser
      * @param array $params Labels as "label_".System label => Display label pairs
      * @param string $language      Language key, for example 'en_us'
      */
-    function handleSave ($params , $language)
+    function handleSave($params = null, $language = null)
     {
         $labels = array ( ) ;
         foreach ( $params as $key => $value )
@@ -302,4 +310,3 @@ class ParserLabel extends ModuleBuilderParser
         self::$moduleInstaller->rebuild_languages(array($language => $language), array($moduleName));
     }
 }
-

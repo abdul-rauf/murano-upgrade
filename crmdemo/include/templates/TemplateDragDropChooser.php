@@ -16,7 +16,12 @@ require_once("include/templates/Template.php");
 
 class TemplateDragDropChooser extends Template {
     var $args;
-    function TemplateDragDropChooser() {
+
+    /**
+     * @deprecated
+     */
+    public function TemplateDragDropChooser()
+    {
     }
 
 /*
@@ -267,5 +272,3 @@ class TemplateDragDropChooser extends Template {
     }
 
 }
-
-?>

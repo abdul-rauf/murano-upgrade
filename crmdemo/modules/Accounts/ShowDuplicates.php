@@ -29,6 +29,8 @@ global $app_list_strings;
 
 $error_msg = '';
 
+$db = DBManagerFactory::getInstance();
+
 global $current_language;
 $mod_strings = return_module_language($current_language, 'Accounts');
 $moduleName = $GLOBALS['app_list_strings']['moduleList']['Accounts'];
@@ -36,7 +38,6 @@ echo getClassicModuleTitle('Accounts', array($moduleName, $mod_strings['LBL_SAVE
 $xtpl=new XTemplate ('modules/Accounts/ShowDuplicates.html');
 $xtpl->assign("MOD", $mod_strings);
 $xtpl->assign("APP", $app_strings);
-$xtpl->assign("PRINT_URL", "index.php?".$GLOBALS['request_string']);
 $xtpl->assign("MODULE", $_REQUEST['module']);
 if ($error_msg != '')
 {
@@ -63,14 +64,14 @@ if ($count > 0)
 	{
 		if (!$first) $query .= ' OR ';
 		$first = false;
-		$query .= "id='$duplicate_id' ";
+		$query .= "id=".$db->quoted($duplicate_id)." ";
 	}
 	$query .= ')';
 }
 
 $duplicateAccounts = array();
 
-$db = DBManagerFactory::getInstance();
+
 $result = $db->query($query);
 $i=-1;
 while(($row=$db->fetchByAssoc($result)) != null) {

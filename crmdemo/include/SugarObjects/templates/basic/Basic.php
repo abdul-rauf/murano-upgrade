@@ -13,16 +13,19 @@
 class Basic extends SugarBean
 {
     /**
+     * @deprecated Use __construct() instead
+     */
+    public function Basic()
+    {
+        self::__construct();
+    }
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         parent::__construct();
-    }
-
-    public function Basic()
-    {
-        self::__construct();
     }
 
     /**

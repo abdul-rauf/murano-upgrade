@@ -51,7 +51,21 @@ class aSubPanel
 	var $bean_name ;
 	var $template_instance ;
 
-	function aSubPanel ( $name , $instance_properties , $parent_bean , $reload = false , $original_only = false, $forApi = false )
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function aSubPanel(
+        $name,
+        $instance_properties,
+        $parent_bean,
+        $reload = false,
+        $original_only = false,
+        $forApi = false
+    ) {
+        self::__construct($name, $instance_properties, $parent_bean, $reload, $original_only, $forApi);
+    }
+
+    public function __construct($name, $instance_properties, $parent_bean, $reload = false, $original_only = false, $forApi = false)
 	{
 
 		$this->_instance_properties = $instance_properties ;
@@ -607,6 +621,14 @@ class SubPanelDefinitions
 	var $platform ;
     static $refreshHiddenSubpanels = false;
 
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SubPanelDefinitions($focus, $layout_def_key = '', $layout_def_override = '', $platform = null)
+    {
+        self::__construct($focus, $layout_def_key, $layout_def_override, $platform);
+    }
+
 	/**
 	 * Enter description here...
 	 *
@@ -615,7 +637,7 @@ class SubPanelDefinitions
 	 * @param ARRAY $layout_def_override - if you wish to override the default loaded layout defs you pass them in here.
 	 * @return SubPanelDefinitions
 	 */
-	function SubPanelDefinitions ( $focus , $layout_def_key = '' , $layout_def_override = '' , $platform = null)
+    public function __construct($focus, $layout_def_key = '', $layout_def_override = '', $platform = null)
 	{
 		$this->_focus = $focus ;
 		$this->platform = $platform;
@@ -823,7 +845,7 @@ class SubPanelDefinitions
 	 * return all available subpanels that belong to the list of tab modules.  You can optionally return all
 	 * available subpanels, and also optionally group by module (prepends the key with the bean class name).
 	 */
-	static function get_all_subpanels($return_tab_modules_only = true, $group_by_module = false, $filter = true)
+        public static function get_all_subpanels($return_tab_modules_only = true, $group_by_module = false, $filter = true)
 	{
 		global $moduleList;
 
@@ -874,7 +896,8 @@ class SubPanelDefinitions
 	/*
 	 * save array of hidden panels to mysettings category in config table
 	 */
-	function set_hidden_subpanels($panels){
+    public static function set_hidden_subpanels($panels)
+    {
 		$administration = BeanFactory::getBean('Administration');
 		$serialized = base64_encode(serialize($panels));
 		$administration->saveSetting('MySettings', 'hide_subpanels', $serialized);
@@ -885,7 +908,8 @@ class SubPanelDefinitions
 	/*
 	 * retrieve hidden subpanels
 	 */
-	function get_hidden_subpanels(){
+    public static function get_hidden_subpanels()
+    {
 		//create variable as static to minimize queries
 		static $hidden_subpanels = null;
 

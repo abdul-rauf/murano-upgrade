@@ -17,8 +17,16 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 class SugarWidgetSubPanelTopSelectContactsButton extends SugarWidgetSubPanelTopSelectButton
 {
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SugarWidgetSubPanelTopSelectContactsButton($button_properties = array())
+    {
+        self::__construct($button_properties);
+    }
+
 	//button_properties is a collection of properties associated with the widget_class definition. layoutmanager
-	function SugarWidgetSubPanelTopSelectContactsButton($button_properties=array())
+    public function __construct($button_properties = array())
 	{
 		$this->button_properties=$button_properties;
 	}
@@ -29,7 +37,7 @@ class SugarWidgetSubPanelTopSelectContactsButton extends SugarWidgetSubPanelTopS
     }
 
 	//widget_data is the collection of attributes associated with the button in the layout_defs file.
-	function display(&$widget_data)
+    public function display($widget_data)
 	{
 		global $app_strings;
 		$initial_filter = '';
@@ -146,4 +154,3 @@ class SugarWidgetSubPanelTopSelectContactsButton extends SugarWidgetSubPanelTopS
 			. " onclick='open_popup(\"$this->module_name\",600,400,\"$initial_filter\",true,true,$json_encoded_php_array,\"$popup_mode\",$create);' /></form>\n";
 	}
 }
-?>

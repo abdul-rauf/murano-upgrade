@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 10:57:00
+// created: 2018-06-13 11:14:12
 $sugar_config = array (
   'SAML_SLO' => '',
   'SAML_X509Cert' => '',
@@ -281,7 +281,7 @@ $sugar_config = array (
     'timeout' => 3600,
   ),
   'js_custom_version' => 1,
-  'js_lang_version' => 1218,
+  'js_lang_version' => 1219,
   'languages' => 
   array (
     'en_us' => 'English (US)',
@@ -438,7 +438,7 @@ $sugar_config = array (
   'slow_query_time_msec' => '100',
   'snip_url' => 'http://ease.sugarcrm.com:20010/',
   'stack_trace_errors' => false,
-  'sugar_version' => '7.7.0.0',
+  'sugar_version' => '7.7.2.3',
   'sync_post_mail_settings' => 
   array (
     'host' => 'smtp.gmail.com',

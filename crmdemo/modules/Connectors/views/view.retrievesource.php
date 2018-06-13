@@ -13,19 +13,31 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 require_once('include/json_config.php');
 require_once('include/MVC/View/views/view.list.php');
 require_once('include/connectors/ConnectorFactory.php');
 
 class ViewRetrieveSource extends ViewList {
-   
- 	function ViewRetrieveSource(){
- 		parent::ViewList();
- 	}
+
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ViewRetrieveSource($bean = null, $view_object_map = array(), Request $request = null)
+    {
+        self::__construct($bean, $view_object_map, $request);
+    }
+
+    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
+    {
+        parent::__construct($bean, $view_object_map, $request);
+    }
 
     function display() {
 
-        $source_id = $_REQUEST['source_id'];
+        $source_id = $this->request->getValidInputRequest('source_id', 'Assert\ComponentName');
+
         if(empty($source_id)) {
            $GLOBALS['log']->error($GLOBALS['mod_strings']['ERROR_EMPTY_SOURCE_ID']);
            echo $GLOBALS['mod_strings']['ERROR_EMPTY_SOURCE'];
@@ -152,4 +164,3 @@ class ViewRetrieveSource extends ViewList {
 		return $displayColumns;
     }
 }
-

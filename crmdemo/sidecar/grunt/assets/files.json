@@ -61,7 +61,8 @@
                 "lib/jquery/jquery.tinymce.js",
                 "lib/php-js/version_compare.js",
                 "lib/momentjs/min/moment.min.js",
-                "lib/crosstab/src/crosstab.js"
+                "lib/crosstab/src/crosstab.js",
+                "lib/bigjs/big.js"
             ]
         }
     }

@@ -34,9 +34,17 @@ class SugarWidgetSubPanelTopButton extends SugarWidget
 
 //TODO rename defines to layout defs and make it a member variable instead of passing it multiple layers with extra copying.
 
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SugarWidgetSubPanelTopButton($module = '', $title = '', $access_key = '', $form_value = '')
+    {
+        self::__construct($module, $title, $access_key, $form_value);
+    }
+
 	/** Take the keys for the strings and look them up.  Module is literal, the rest are label keys
 	*/
-	function SugarWidgetSubPanelTopButton($module='', $title='', $access_key='', $form_value='')
+    public function __construct($module = '', $title = '', $access_key = '', $form_value = '')
 	{
 		global $app_strings;
 
@@ -418,4 +426,3 @@ class SugarWidgetSubPanelTopButton extends SugarWidget
 	}
 
 }
-?>

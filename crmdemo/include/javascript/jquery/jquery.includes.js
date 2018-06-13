@@ -1,4 +1,4 @@
-var header_template='\
+var header_template = '\
 <!DOCTYPE html>\
 <head>\
   <meta charset="utf-8">\
@@ -15,9 +15,13 @@ var header_template='\
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">\
   <script src="../js/stal.js"></script>\
 </head>\
-';var footer_template='\
+';
+
+var footer_template = '\
 </html>\
-';var stream_items_template='\
+';
+
+var stream_items_template = '\
 {{#aloop}}\
 <article>\
   <i class="{{starred}}"></i>\

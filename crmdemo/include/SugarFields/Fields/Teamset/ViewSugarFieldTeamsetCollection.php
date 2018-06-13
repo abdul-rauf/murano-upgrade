@@ -12,6 +12,7 @@
 require_once('include/SugarFields/Fields/Collection/SugarFieldCollection.php');
 require_once('include/SugarFields/Fields/Collection/ViewSugarFieldCollection.php');
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
 
@@ -20,8 +21,17 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
 	var $team_id = null;
 	var $type = 'TeamsetCollection';
 
-	function ViewSugarFieldTeamsetCollection($fill_data=false){
-    	parent::ViewSugarFieldCollection($fill_data);
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function ViewSugarFieldTeamsetCollection($fill_data = false)
+    {
+        self::__construct($fill_data);
+    }
+
+    public function __construct($fill_data = false)
+    {
+        parent::__construct($fill_data);
     }
 
     function populate(){
@@ -214,8 +224,8 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
 	    	$this->bean->{$this->value_name}=array_merge($this->bean->{$this->value_name}, $full_form_values);
 
 	    	//Save the search type (any, all, exact)
-	        if(isset($_REQUEST["{$this->name}_type"])) {
-	        	$this->displayParams['searchType'] = $_REQUEST["{$this->name}_type"];
+	        if (isset($_REQUEST["{$this->name}_type"])) {
+	        	$this->displayParams['searchType'] = InputValidation::getService()->getValidInputRequest($this->name.'_type');
 	        }
         } else {
             //Don't pre-populate the search form
@@ -366,7 +376,8 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
        return '';
     }
 
-    function findTemplate($view) {
+    public function findTemplate($view, $classList = null)
+    {
         return parent::findTemplate($view, array('Teamset'));
     }
 }

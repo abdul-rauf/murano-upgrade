@@ -15,7 +15,16 @@ class PanelVisibilityAction extends AbstractAction{
 	protected $targetPanel = "";
 	protected $expression = "";
 	
-	function PanelVisibilityAction($params) {
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function PanelVisibilityAction($params)
+    {
+        self::__construct($params);
+    }
+
+    public function __construct($params)
+    {
         $this->params = $params;
         if (is_array($params)) {
             if (isset($params['target'])) {

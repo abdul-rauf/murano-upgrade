@@ -35,7 +35,10 @@ class SubPanelViewTeams {
 		$this->hideNewButton = $value;
 	}
 
-	function SubPanelViewTeams() 
+    /**
+     * @deprecated
+     */
+    public function SubPanelViewTeams()
     {
 	}
 
@@ -93,4 +96,3 @@ class SubPanelViewTeams {
 		$ListView->processListView($this->users_list, "users", "USER");
 	}
 }
-?>

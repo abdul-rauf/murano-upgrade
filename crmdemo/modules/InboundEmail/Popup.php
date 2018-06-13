@@ -10,6 +10,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 /*********************************************************************************
  * $Id$
  * Description:
@@ -50,7 +53,7 @@ if(ob_get_level() < 1) {
 }
 
 
-require_once('modules/InboundEmail/language/'.$current_language.'.lang.php');
+require_once FileLoader::validateFilePath('modules/InboundEmail/language/'.$current_language.'.lang.php');
 global $theme;
 
 $title				= '';

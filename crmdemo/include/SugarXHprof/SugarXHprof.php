@@ -46,6 +46,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * @see SugarXHprof::$mongodb_collection    for $sugar_config['xhprof_config']['mongodb_collection']
  * @see SugarXHprof::$mongodb_options       for $sugar_config['xhprof_config']['mongodb_options']
  */
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 class SugarXHprof
 {
     /**
@@ -250,13 +252,17 @@ class SugarXHprof
     {
         $action = '';
 
+        $request = InputValidation::getService();
         // index.php
         if (!empty($GLOBALS['app']) && $GLOBALS['app'] instanceof SugarApplication && $GLOBALS['app']->controller instanceof SugarController) {
-            if (!empty($_REQUEST['entryPoint'])) {
-                if (!empty($GLOBALS['app']->controller->entry_point_registry) && !empty($GLOBALS['app']->controller->entry_point_registry[$_REQUEST['entryPoint']])) {
-                    $action .= 'entryPoint.' . $_REQUEST['entryPoint'];
+            // we validate entry point name against controller registry
+            $entryPoint = $request->getValidInputRequest('entryPoint');
+            if ($entryPoint) {
+                if (!empty($GLOBALS['app']->controller->entry_point_registry) && !empty($GLOBALS['app']->controller->entry_point_registry[$entryPoint])) {
+                    $action .= 'entryPoint.' . $entryPoint;
                 } else {
                     $action .= 'entryPoint.unknown';
+
                 }
             } else {
                 $action .= $GLOBALS['app']->controller->module . '.' . $GLOBALS['app']->controller->action;
@@ -283,11 +289,10 @@ class SugarXHprof
         } // service rest
         elseif (!empty($GLOBALS['service_object']) && $GLOBALS['service_object'] instanceof SugarRestService) {
             $action .= 'rest.' . $GLOBALS['service_object']->getRegisteredImplClass();
-            if (!empty($_REQUEST['method']) && method_exists($GLOBALS['service_object']->implementation,
-                    $_REQUEST['method'])
-            ) {
-                $action .= '.' . $_REQUEST['method'];
-            } elseif (empty($_REQUEST['method'])) {
+            $method = $request->getValidInputRequest('method');
+            if (!empty($method) && method_exists($GLOBALS['service_object']->implementation, $method)) {
+                $action .= '.' . $method;
+            } elseif (empty($method)) {
                 $action .= '.index';
             } else {
                 $action .= '.unknown';
@@ -327,11 +332,13 @@ class SugarXHprof
         }
 
         if (static::$sample_rate == 0) {
+            static::$enable = false;
             return;
         }
 
         $rate = 1 / static::$sample_rate * 100;
         if (rand(0, 100) > $rate) {
+            static::$enable = false;
             return;
         }
 

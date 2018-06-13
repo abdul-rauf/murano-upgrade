@@ -11,16 +11,27 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- 
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 require_once('include/MVC/View/views/view.list.php');
 require_once('modules/EAPM/EAPM.php');
 class MeetingsViewListbytype extends ViewList {
     var $options = array('show_header' => false, 'show_title' => false, 'show_subpanels' => false, 'show_search' => true, 'show_footer' => false, 'show_javascript' => false, 'view_print' => false,);
     
-    function MeetingsViewListbytype() {
-        parent::ViewList();
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function MeetingsViewListbytype($bean = null, $view_object_map = array(), Request $request = null)
+    {
+        self::__construct($bean, $view_object_map, $request);
     }
-    
+
+    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
+    {
+        parent::__construct($bean, $view_object_map, $request);
+    }
+
  	function listViewProcess(){
         if (!$eapmBean = EAPM::getLoginInfo('IBMSmartCloud', true) ) {
             $smarty = new Sugar_Smarty();
@@ -65,12 +76,9 @@ class MeetingsViewListbytype extends ViewList {
 
 		if(empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false){
 			$this->lv->ss->assign("SEARCH",false);
-            if ( !isset($_REQUEST['name_basic']) ) {
-                $_REQUEST['name_basic'] = '';
-            }
-            $this->lv->ss->assign('DCSEARCH',$_REQUEST['name_basic']);
+            $name_basic = $this->request->getValidInputRequest('name_basic');
+            $this->lv->ss->assign('DCSEARCH', $name_basic);
 			$this->lv->setup($this->seed, 'include/ListView/ListViewDCMenu.tpl', $this->where, $this->params);
-			$savedSearchName = empty($_REQUEST['saved_search_select_name']) ? '' : (' - ' . $_REQUEST['saved_search_select_name']);
 			echo $this->lv->display();
 		}
  	}

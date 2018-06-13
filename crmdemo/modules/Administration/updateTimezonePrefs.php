@@ -92,8 +92,15 @@ while ($row = $db->fetchByAssoc($result)) {
 	                }
 	        }
 	        	if($execute){
-        			$newstr = mysql_real_escape_string(base64_encode(serialize($newprefs)));
-       				$db->query("UPDATE users SET user_preferences = '{$newstr}' WHERE id = '{$row['id']}'");
+                    $db->query(
+                        sprintf(
+                            'UPDATE users
+                            SET user_preferences = %s
+                            WHERE id = %s',
+                            $db->quoted(base64_encode(serialize($newprefs))),
+                            $db->quoted($row['id'])
+                        )
+                    );
 	        	}
 	        }
 		if(!empty($setTo)){
@@ -111,7 +118,7 @@ while ($row = $db->fetchByAssoc($result)) {
         	echo $mod_strings['LBL_UPDATE_TIMEZONE_ADJUST'].": ";
         if($execute){
 			if(isset($_POST[$row['id'].'adjust'])){
-				echo  $adjustment;
+                    echo SugarCleaner::cleanHtml($adjustment, false);
 			}
 		}else{
 			echo "<select name='{$row['id']}adjust'>";

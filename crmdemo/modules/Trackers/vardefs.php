@@ -84,6 +84,7 @@ $dictionary['Tracker'] = array(
             'type' => 'varchar',
             'len' => '36',
             'isnull' => 'true',
+            'exportable' => false,
         ),
         'visible'=>array(
             'name' => 'visible',
@@ -157,6 +158,15 @@ $dictionary['Tracker'] = array(
                 'user_id',
                 'item_id',
                 'visible'
+            ),
+        ),
+        array(
+            'name' => 'idx_tracker_userid_del_vis',
+            'type' => 'index',
+            'fields' => array(
+                'user_id',
+                'deleted',
+                'visible',
             ),
         ),
         array(

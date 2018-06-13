@@ -11,6 +11,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 require_once('include/connectors/utils/ConnectorUtils.php');
 require_once('include/connectors/sources/SourceFactory.php');
 /**
@@ -102,9 +104,9 @@ class ExternalAPIFactory
 
         $optionList = array('supportedModules','useAuth','requireAuth','supportMeetingPassword','docSearch', 'authMethod', 'oauthFixed','needsUrl','canInvite','sendsInvites','sharingOptions','connector', 'oauthParams','restrictUploadsByExtension');
         foreach ( $apiFullList as $apiName => $apiOpts ) {
-            require_once($apiOpts['file']);
+            require_once FileLoader::validateFilePath($apiOpts['file']);
             if ( !empty($apiOpts['file_cstm']) ) {
-                require_once($apiOpts['file_cstm']);
+                require_once FileLoader::validateFilePath($apiOpts['file_cstm']);
             }
             $className = $apiOpts['className'];
             $apiClass = new $className();
@@ -177,9 +179,9 @@ class ExternalAPIFactory
         }
 
         $myApi = $apiList[$apiName];
-        require_once($myApi['file']);
+        require_once FileLoader::validateFilePath($myApi['file']);
         if ( !empty($myApi['file_cstm']) ) {
-            require_once($myApi['file_cstm']);
+            require_once FileLoader::validateFilePath($myApi['file_cstm']);
         }
 
         $apiClassName = $myApi['className'];

@@ -268,8 +268,11 @@ class MysqlManager extends DBManager
 
 	/**
 	 * @see DBManager::checkQuery()
+     * @param  string $sql         query to be run
+     * @param  bool   $object_name optional, object to look up indices in
+     * @return bool   true if an index is found false otherwise
 	 */
-	protected function checkQuery($sql)
+    protected function checkQuery($sql, $object_name = false)
 	{
 		$result   = $this->query('EXPLAIN ' . $sql);
 		$badQuery = array();
@@ -525,7 +528,7 @@ class MysqlManager extends DBManager
 	    $names = "SET NAMES 'utf8'";
 	    $collation = $this->getOption('collation');
 	    if(!empty($collation)) {
-	        $names .= " COLLATE '$collation'";
+	        $names .= " COLLATE {$this->quoted($collation)}";
 		}
 	    mysql_query($names, $this->database);
 
@@ -1569,13 +1572,16 @@ FROM information_schema.statistics';
         $charset = explode("_", $collation);
         $charset = $charset[0];
 
-        $this->query("ALTER DATABASE {$this->connectOptions['db_name']} DEFAULT COLLATE {$collation}");
+        $this->query('ALTER DATABASE ' . $this->connectOptions['db_name']
+            . ' DEFAULT COLLATE ' . $this->quoted($collation));
         $res = $this->query("SHOW TABLES");
 
         while ($row = $this->fetchRow($res)) {
             foreach ($row as $key => $table) {
-                $this->query("ALTER TABLE {$table} COLLATE {$collation}");
-                $this->query("ALTER TABLE {$table} CONVERT TO CHARACTER SET {$charset} COLLATE {$collation}");
+                $this->query('ALTER TABLE ' . $table . ' COLLATE ' . $this->quoted($collation));
+                $this->query('ALTER TABLE ' . $table
+                    . ' CONVERT TO CHARACTER SET ' . $this->quoted($charset)
+                    . ' COLLATE ' . $this->quoted($collation));
             }
         }
     }

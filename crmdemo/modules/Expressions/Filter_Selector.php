@@ -16,7 +16,7 @@ global $dictionary;
 
 global $theme;
 
-
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 require_once('include/utils/expression_utils.php');
 
@@ -43,7 +43,7 @@ global $selector_meta_array;
 
 	foreach($exp_object->selector_popup_fields as $field){
 		if(isset($_REQUEST[$field])){
-			$exp_object->$field = $_REQUEST[$field];
+			$exp_object->$field = InputValidation::getService()->getValidInputRequest($field);
 		}
 	}
 
@@ -63,7 +63,6 @@ $xtpl=new XTemplate ('modules/Expressions/Filter_Selector.html');
 $xtpl->assign("MOD", $mod_strings);
 $xtpl->assign("APP", $app_strings);
 $xtpl->assign("RETURN_PREFIX", $exp_object->return_prefix);
-$xtpl->assign("PRINT_URL", "index.php?".$GLOBALS['request_string']);
 
 require_once('include/language/jsLanguage.php');
 if (!is_file(sugar_cached('jsLanguage/') . $GLOBALS['current_language'] . '.js')) {
@@ -121,12 +120,12 @@ if(isset($exp_meta_array['select_field']) && $exp_meta_array['select_field']===t
 	$xtpl->assign('LHS_FIELD', $exp_object->lhs_field);
 
 	if(isset($_REQUEST['rhs_value']) && $_REQUEST['rhs_value']!='') {
-  		  $exp_object->rhs_value = $_REQUEST['rhs_value'];
+        $exp_object->rhs_value = InputValidation::getService()->getValidInputRequest('rhs_value');
 	//end expression object
 	}
 
 	if(isset($_REQUEST['time_type']) && $_REQUEST['lhs_field']!='') {
-  		  $exp_object->lhs_field = $_REQUEST['lhs_field'];
+        $exp_object->lhs_field = InputValidation::getService()->getValidInputRequest('lhs_field');
 	//end expression object
 	}
 

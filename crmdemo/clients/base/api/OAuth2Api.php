@@ -80,11 +80,10 @@ class OAuth2Api extends SugarApi
         if ( !$validVersion ) {
             throw new SugarApiExceptionClientOutdated();
         }
+
         $platform = empty($args['platform']) ? 'base' : $args['platform'];
-        $allowedPlatforms = MetaDataManager::getPlatformList();
-        if (SugarConfig::getInstance()->get('disable_unknown_platforms') && !in_array($platform, $allowedPlatforms)) {
-            throw new SugarApiExceptionInvalidParameter("EXCEPTION_INVALID_PLATFORM");
-        }
+        $api->validatePlatform($platform);
+
         $oauth2Server = $this->getOAuth2Server($args);
         try {
             $GLOBALS['logic_hook']->call_custom_logic('Users', 'before_login');
@@ -223,6 +222,7 @@ class OAuth2Api extends SugarApi
             $platform = 'base';
         }
 
+        $api->validatePlatform($platform);
 
         $oauth2Server = $this->getOAuth2Server($args);
 

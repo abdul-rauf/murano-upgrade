@@ -25,7 +25,15 @@ class SubpanelQuickCreate{
      */
     public $viewType = 'QuickCreate';
 
-    public function SubpanelQuickCreate($module, $view='QuickCreate', $proccessOverride = false)
+    /**
+     * @deprecated Use __construct() instead
+     */
+    public function SubpanelQuickCreate($module, $view = 'QuickCreate', $proccessOverride = false)
+    {
+        self::__construct($module, $view, $proccessOverride);
+    }
+
+    public function __construct($module, $view = 'QuickCreate', $proccessOverride = false)
     {
         $this->viewType = $view;
 

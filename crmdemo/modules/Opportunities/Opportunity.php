@@ -118,16 +118,12 @@ class Opportunity extends SugarBean
     );
 
     /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
+     * @deprecated Use __construct() instead
      */
     public function Opportunity()
     {
         self::__construct();
     }
-
 
     public function __construct()
     {
@@ -295,7 +291,7 @@ class Opportunity extends SugarBean
             if (!empty($idequals)) {
                 $idequals .= ' or ';
             }
-            $idequals .= "currency_id='$f'";
+            $idequals .= "currency_id=" . $this->db->quoted($f);
         }
 
 		if ( !empty($idequals) ) {
@@ -304,14 +300,11 @@ class Opportunity extends SugarBean
 
             while ($row = $this->db->fetchByAssoc($result)) {
                 $query = sprintf(
-                    "update opportunities set currency_id='%s',
-                                        amount_usdollar='%s',
-                                        base_rate='%s'
-                                        where id='%s';",
-                    $currency->id,
-                    SugarCurrency::convertAmountToBase($row['amount'], $currency->id),
-                    $currency->conversion_rate,
-                    $row['id']
+                    "UPDATE opportunities SET currency_id = %s, amount_usdollar = %s, base_rate = %s WHERE id = %s;",
+                    $this->db->quoted($currency->id),
+                    $this->db->quoted(SugarCurrency::convertAmountToBase($row['amount'], $currency->id)),
+                    $this->db->quoted($currency->conversion_rate),
+                    $this->db->quoted($row['id'])
                 );
                 $this->db->query($query);
             }
@@ -421,7 +414,7 @@ class Opportunity extends SugarBean
         return parent::save($check_notify);
     }
 
-    public function save_relationship_changes($is_update)
+    public function save_relationship_changes($is_update, $exclude = array())
     {
         //if account_id was replaced unlink the previous account_id.
         //this rel_fields_before_value is populated by sugarbean during the retrieve call.

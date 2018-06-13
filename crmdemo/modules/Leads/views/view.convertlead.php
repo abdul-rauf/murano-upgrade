@@ -23,7 +23,7 @@ class ViewConvertLead extends SugarView
         $view_object_map = array()
         )
     {
-        parent::SugarView($bean, $view_object_map);
+        parent::__construct($bean, $view_object_map);
     	$this->medataDataFile = SugarAutoLoader::existingCustomOne($this->fileName);
     }
 
@@ -419,7 +419,7 @@ class ViewConvertLead extends SugarView
                 $fieldDef = $beans['Contacts']->field_defs[$select];
                 if (!empty($fieldDef['id_name']) && !empty($_REQUEST[$fieldDef['id_name']]))
                 {
-                    $beans['Contacts']->$fieldDef['id_name'] = $_REQUEST[$fieldDef['id_name']];
+                    $beans['Contacts']->{$fieldDef['id_name']} = $_REQUEST[$fieldDef['id_name']];
                     $selects[$module] = $_REQUEST[$fieldDef['id_name']];
                     if (!empty($_REQUEST[$select]))
                     {
@@ -732,7 +732,13 @@ class ViewConvertLead extends SugarView
 		foreach($activitesList as $module)
 		{
             $activity = BeanFactory::newBean($module);
-            $query = "SELECT id FROM {$activity->table_name} WHERE parent_id = '{$lead->id}' AND parent_type = 'Leads'";
+            $query = sprintf(
+                'SELECT id FROM %s WHERE parent_id = %s AND parent_type = %s',
+                $activity->table_name,
+                $db->quoted($lead->id),
+                $db->quoted('Leads')
+            );
+
 			$result = $db->query($query,true);
             while($row = $db->fetchByAssoc($result))
             {
@@ -841,7 +847,7 @@ class ViewConvertLead extends SugarView
 			{
 				$bean->id = create_guid();
 				$bean->new_with_id = true;
-				$contact->$fieldDef['id_name'] = $bean->id ;
+                $contact->{$fieldDef['id_name']} = $bean->id;
 				if ($fieldDef['id_name'] != $select) {
 					$rname = isset($fieldDef['rname']) ? $fieldDef['rname'] : "";
 					if (!empty($rname) && isset($bean->$rname))
