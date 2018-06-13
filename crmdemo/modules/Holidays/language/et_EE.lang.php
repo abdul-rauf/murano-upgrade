@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,12 +16,12 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $mod_strings = array (
 	'LBL_MODULE_NAME' => 'Puhkused',
 	'LBL_MODULE_NAME_SINGULAR' => 'Puhkus',
-	'LBL_MODULE_TITLE' => 'Puhkused: Avaleht',
+	'LBL_MODULE_TITLE' => 'Puhkused: avaleht',
 	'LBL_HOLIDAY' => 'Puhkus:',
 	'LBL_HOLIDAY_DATE' => 'Puhkuse kuupäev:',
 	'LBL_NAME' => 'Puhkuse kuupäev:',
 	'LBL_DESCRIPTION' => 'Kirjeldus:',
-	'LBL_RESOURCE_NAME' => 'Allika nimi',
+	'LBL_RESOURCE_NAME' => 'Ressursi nimi ',
 	
 	'LBL_SEARCH_FORM_TITLE' => 'Puhkuse otsing',
 	'LBL_LIST_FORM_TITLE' => 'Puhkuste loend',		
@@ -37,7 +37,7 @@ $mod_strings = array (
 	'LBL_RELATED_MODULE'=> 'Seotud moodul:',
 	
 	// For HolidaysQuickCreate.php
-	'LBL_SELECT_RESOURCE_TYPE' => 'Vali ressursi tüüp...',
+	'LBL_SELECT_RESOURCE_TYPE' => 'Valige ressursi tüüp ...',
 	'LBL_USER' => 'Kasutaja',
 	'LBL_CONTACT' => 'Kontakt',
 );

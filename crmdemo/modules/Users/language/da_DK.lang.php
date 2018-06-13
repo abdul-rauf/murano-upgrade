@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Ny adgangskode',
 	'LBL_NEW_PASSWORD1'					=> 'Adgangskode',
 	'LBL_NEW_PASSWORD2'					=> 'Bekræft adgangskode',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Adgangskoden blev ændret.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Adgangskoden blev ændret.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'En e-mail er sendt til brugeren med en systemgenereret adgangskode.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Adgangskoden blev oprettet.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Adgangskoden blev oprettet.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Ny bruger',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Ny bruger [Alt+N]',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Kvoter',
     'LBL_FORECASTS'                     => 'Prognoser',
     'LBL_WORKSHEETS'                    => 'Regneark',
+	'LBL_CALENDARS'                     => 'Kalendere',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Hent en anden CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Skift til lyd',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Skift til billede',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Telefon arbejde',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Udgiv på min placering',
     'LBL_ICAL_PUB_URL'                  => 'iCal integrations URL',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Brug denne URL til at abonnere på Sugar kalenderen i iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Brug denne URL til at abonnere på din Sugar kalender på iCal-understøttede ' .
+                                           'applikationer. Sugar kalenderbegivenheder kan ses som skrivebeskyttet ' .
+                                           'i eksterne kalenderapplikationer og eventuelle ændringer til begivenheder ' .
+                                           '(f.eks. møder, opkald osv.) kan kun foretages i Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'Din forespørgsels-URL',
 	'LNK_NEW_USER'						=> 'Opret en ny bruger',
 	'LNK_NEW_PORTAL_USER'				=> 'Opret portal-API-bruger',
@@ -498,29 +502,29 @@ Klik på Annuller for at lukke siden uden omfordeling af poster.',
 	'LBL_PDF_PAGE_FORMAT'  =>  'Sideformat',
 	'LBL_PDF_PAGE_FORMAT_TEXT'  =>  'Det format, der bruges til sider',
 	'LBL_PDF_PAGE_ORIENTATION'  =>  'Sideretning',
-	'LBL_PDF_PAGE_ORIENTATION_TEXT'  =>  'PDF side orientering',
+	'LBL_PDF_PAGE_ORIENTATION_TEXT'  =>  '',
 	'LBL_PDF_PAGE_ORIENTATION_P'  =>  'Stående',
 	'LBL_PDF_PAGE_ORIENTATION_L'  =>  'Liggende',
 	'LBL_PDF_MARGIN_HEADER'  =>  'Sidehovedmargen',
-	'LBL_PDF_MARGIN_HEADER_TEXT'  =>  'PDF sidehoved margin',
+	'LBL_PDF_MARGIN_HEADER_TEXT'  =>  '',
 	'LBL_PDF_MARGIN_FOOTER'  =>  'Sidefodsmargen',
-	'LBL_PDF_MARGIN_FOOTER_TEXT'  =>  'PDF sidemargin Sidebund',
+	'LBL_PDF_MARGIN_FOOTER_TEXT'  =>  '',
 	'LBL_PDF_MARGIN_TOP'  =>  'Topmargen',
-	'LBL_PDF_MARGIN_TOP_TEXT'  =>  'PDF topmargin top tekst',
+	'LBL_PDF_MARGIN_TOP_TEXT'  =>  '',
 	'LBL_PDF_MARGIN_BOTTOM'  =>  'Bundmargen',
-	'LBL_PDF_MARGIN_BOTTOM_TEXT'  =>  'PDF bundmargin',
+	'LBL_PDF_MARGIN_BOTTOM_TEXT'  =>  '',
 	'LBL_PDF_MARGIN_LEFT'  =>  'Venstre margen',
-	'LBL_PDF_MARGIN_LEFT_TEXT'  =>  'PDF venstremargin',
+	'LBL_PDF_MARGIN_LEFT_TEXT'  =>  '',
 	'LBL_PDF_MARGIN_RIGHT'  =>  'Højre margen',
-	'LBL_PDF_MARGIN_RIGHT_TEXT'  =>  'PDF højremargin',
+	'LBL_PDF_MARGIN_RIGHT_TEXT'  =>  '',
 	'LBL_PDF_FONT_NAME_MAIN'  =>  'Skrifttype til sidehoved og brødtekst',
 	'LBL_PDF_FONT_NAME_MAIN_TEXT'  =>  'Den valgte skrifttype anvendes til teksten i sidehovedet og i brødteksten i PDF-dokumentet',
 	'LBL_PDF_FONT_SIZE_MAIN'  =>  'Hovedskriftstørrelse',
-	'LBL_PDF_FONT_SIZE_MAIN_TEXT'  =>  'PDF Fontstørrelse bodytekst',
+	'LBL_PDF_FONT_SIZE_MAIN_TEXT'  =>  '',
 	'LBL_PDF_FONT_NAME_DATA'  =>  'Skrifttype til sidefod',
 	'LBL_PDF_FONT_NAME_DATA_TEXT'  =>  'Den valgte skrifttype anvendes til teksten i sidefoden i PDF-dokumentet',
 	'LBL_PDF_FONT_SIZE_DATA'  =>  'Dataskriftstørrelse',
-	'LBL_PDF_FONT_SIZE_DATA_TEXT'  =>  'PDF Fontstørrelse datatekst',
+	'LBL_PDF_FONT_SIZE_DATA_TEXT'  =>  '',
 	'LBL_LAST_ADMIN_NOTICE' => 'Du har selv valgt. Du kan ikke ændre din egen brugertype eller status.',
 	'LBL_SMTP_SERVER_HELP' => 'Denne SMTP-e-mail-server kan bruges til udgående e-mail. Angiv et brugernavn og en adgangskode til din e-mail-konto, hvis du vil bruge e-mail-serveren.',
     'LBL_MISSING_DEFAULT_OUTBOUND_SMTP_SETTINGS' => 'Administratoren har endnu ikke konfigureret den udgående standardkonto. Test-e-mailen kan ikke sendes.',
@@ -621,7 +625,7 @@ Klik på Annuller for at lukke siden uden omfordeling af poster.',
 
     'LBL_FILTER_USERS_REPORTS' => 'Brugernes rapporter',
     'LBL_CONTACTS_SYNC' => 'Kontakter',
-
+    'LBL_DETAIL' => 'Brugerprofil',
 ); // END STRINGS DEFS
 
 ?>

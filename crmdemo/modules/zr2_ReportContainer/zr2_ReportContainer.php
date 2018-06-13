@@ -20,7 +20,7 @@ class zr2_ReportContainer extends Basic {
 
 
 	function zr2_ReportContainer() {
-		parent::Basic();
+		parent::__construct();
 	}
 	
 	function get_summary_text() {

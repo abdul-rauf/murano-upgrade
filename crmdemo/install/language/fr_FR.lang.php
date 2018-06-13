@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Des erreurs ont été détectées durant la vérification de compatibilité. Pour que votre installation de SugarCRM se fasse correctement, veuillez effectuer les modifications appropriées pour corriger les problèmes signalés ci-dessous puis cliquez sur le bouton revérification ou relancez l&#39;installation.',
     'ERR_CHECKSYS_CALL_TIME'            => 'La fonction Allow Call Time Pass Reference est définie sur On (veuillez la désactiver dans le php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Introuvable : Le planificateur Sugar fonctionnera de façon limitée.',
+	'ERR_CHECKSYS_CURL'					=> 'Introuvable : le planificateur Sugar fonctionnera de manière limitée. Le service d&#39;archivage des emails ne fonctionnera pas.',
     'ERR_CHECKSYS_IMAP'					=> 'Introuvable : Les mails entrants et les campagnes (Email) nécessitent la librairie IMAP dans PHP. Aucun des 2 ne pourra fonctionner.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'La fonction Magic Quotes GPC ne peut pas être mise à "On" lorsque vous utilisez MSSQL SERVER.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Attention : ',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'Base de données indisponible',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Le support de la base de données est introuvable. Assurez-vous de disposer des pilotes nécessaires pour l&#39;un des types de base de données pris en charge suivants : MySQL ou MS SQLServer.  Vous devrez décommenter l&#39;extension dans le fichier php.ini, ou recompiler le fichier binaire de droite, selon votre version de PHP.  Veuillez vous référer au manuel PHP pour plus d&#39;informations sur la façon d&#39;activer le Support de base de données. <br><br>Oracle et DB2 ne sont pas des bases de données prises en charge par SugarCRM PRO. Pour obtenir la liste des bases de données prises en charge et d&#39;autres informations de la plate-forme, veuillez visiter <a href="http://support.sugarcrm.com/05_Ressources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Ressources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Les fonctions associées aux bibliothèques de parsing XML qui sont nécessaires à Sugar n&#39;ont pas été retrouvées. Vous pourriez avoir besoin de décommenter l&#39;extension dans le fichier php.ini, ou recompiler avec le bon fichier binaire, en fonction de votre version de PHP. Veuillez vous référer à votre manuel PHP pour plus d&#39;informations.',
+    'LBL_CHECKSYS_CSPRNG' => 'Générateur de nombres aléatoires',
     'ERR_CHECKSYS_MBSTRING'             => 'Les fonctions associées avec l&#39;extension Multibyte de PHP (mbstring) qui sont nécessaires pour Sugar n&#39;ont pas été trouvées. <br/><br/>En général, le module mbstring n&#39;est pas activé par défaut dans PHP et doit être activé avec --enable-mbstring quand le binaire PHP est constitué. Veuillez vous référer au manuel PHP pour plus d&#39;informations sur l&#39;activation de mbstring.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'session.save_path n&#39;est pas défini dans le fichier de configuration php (php.ini) ou le répertoire défini n&#39;existe pas. Vous pourriez avoir besoin de définir un répertoire pour la variable save_path dans le fichier php.ini ou vérifier que le répertoire défini existe.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'Le support ZIP n&#39;a pas été détecté : SugarCRM nécessite le support ZIP pour compresser les fichiers.',
     'ERR_CHECKSYS_BCMATH'				=> 'Support de BCMATH non trouvé : SugarCRM requiert BCMATH pour une meilleure précision mathématique.',
     'ERR_CHECKSYS_HTACCESS'             => 'Le test d&#39;écriture du fichier .htaccess a échoué. Cela signifie généralement que vous n&#39;avez pas autorisé la directive AllowOverride pour le répertoire contenant Sugar.',
+    'ERR_CHECKSYS_CSPRNG' => 'Exception CSPRNG',
 	'ERR_DB_ADMIN'						=> 'Le login ou le mot de passe de l&#39;administrateur de la base de données est invalide, et une connexion à la base de de données n&#39;a pas pu être établie. Veuillez entrer un nom d&#39;utilisateur et un mot de passe valides. (Erreur : ',
     'ERR_DB_ADMIN_MSSQL'                => 'Le login ou le mot de passe de l&#39;administrateur de la base de données est invalide, et une connexion à la base de de données n&#39;a pas pu être établie. Veuillez entrer un nom d&#39;utilisateur et un mot de passe valides.',
 	'ERR_DB_EXISTS_NOT'					=> 'La base de données spécifiée n&#39;existe pas.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'Cette clé n&#39;est pas requise pour l&#39;installation mais sera requise pour les fonctionnalités générales. Vous pourrez entrer cette clé ultérieurement après avoir fini votre installation et vous être authentifié dans l&#39;application.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Informations minimum requises pour l&#39;installation. Recommandé pour les utilisateurs non expérimentés.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Fournit des options supplémentaires pour personnaliser votre installation. Ces options sont également disponibles après l&#39;installation dans l&#39;écran Administration. Recommandé pour les utilisateurs expérimentés.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Fournit des options supplémentaires pour personnaliser votre installation. Ces options sont également disponibles après l&#39;installation dans l&#39;écran Administration. Recommandé pour les utilisateurs expérimentés.',
 	'LBL_LANG_1'						=> 'Si vous voulez installer un pack de langue autre que celui par défaut en anglais US, vous pouvez le faire ci-dessous. Vous pourrez également télécharger et installer des modules linguistiques dans l&#39;application Sugar. Sinon, cliquez sur "Suivant" pour passer à l&#39;étape suivante.',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Installation',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Supprimer',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'Acceptation de la licence',
     'LBL_LICENSE_CHECKING'              => 'Vérification de la compatibilité du système',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Contrôle de l&#39;environnement',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'Contrôle de la base de données.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'Verification des identifiants de DB, FTS.',
     'LBL_LICENSE_CHECK_PASSED'          => 'Test pour la compatibilité système réussi.',
     'LBL_LICENSE_REDIRECT'              => 'Redirection dans ',
 	'LBL_LICENSE_DIRECTIONS'			=> 'Si vous avez votre information de licence, veuillez la renseigner dans les champs ci-dessous.',
@@ -514,7 +517,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'Veuillez lire les informations importantes ci-après avant de procéder à l&#39;installation. Ces informations vous aideront à déterminer si oui ou non vous êtes prêt à installer l&#39;application en ce moment.',
 
 
-	'LBL_WELCOME_2'						=> 'Pour obtenir de l&#39;aide sur l&#39;installation, veuillez vous rendre sur les forums <a href="http://www.sugarcrm.com/forums/" target="_blank">SugarCRM</a>.<BR><BR>Vous pouvez également obtenir l&#39;aide de la Communauté Sugar dans les<a href="http://www.sugarcrm.com/forums/" target="_blank">Forums de Sugar</a>.',
+	'LBL_WELCOME_2'						=> 'Pour la documentation d’installation, veuillez consulter <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>. <BR><BR> Pour contacter un technicien de SugarCRM et obtenir de l&#39;aide sur l&#39;installation, connectez-vous au <a target="_blank" href="http://support.sugarcrm.com">Portail de support de SugarCRM</a> et envoyez un ticket.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>Choisir votre langue</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Assistant d&#39;installation',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Bienvenue sur SugarCRM ',
@@ -530,7 +533,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'Lancer le process nocturne d&#39;envoi des Campagnes emails',
 	'LBL_OOTB_PRUNE'		=> 'Purger la BDD le premier de chaque mois',
     'LBL_OOTB_TRACKER'		=> 'Purger la table des historiques utilisateurs le premier de chaque mois',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Exécuter les notifications par email',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Lancez les notifications de rappel par email',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'Mettre à jour la table tracker_sessions',
     'LBL_OOTB_CLEANUP_QUEUE' => 'Nettoyer la file des jobs',
 
@@ -541,7 +544,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'Type de moteur de recherche',
     'LBL_FTS_HELP'      => 'Pour activer la recherche full-text, sélectionnez le type de moteur de recherche puis saisissez les paramètres d&#39;accès à celui-ci. Par défaut le moteur de recherche Elastic Search est inclus dans SugarCRM.',
     'LBL_FTS_REQUIRED'    => 'Elastic Search est requis pour le bon fonctionnement de l&#39;application.',
-    'LBL_FTS_ERROR'    => 'Impossible de se connecter au serveur hébergeant le moteur de recherche full-text, merci de vérifier les paramètres saisis.',
+    'LBL_FTS_CONN_ERROR'    => 'Impossible de se connecter au serveur hébergeant le moteur de recherche full-text, merci de vérifier les paramètres saisis.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'Version complète du serveur recherche de texte indisponible, veuillez vérifier vos paramètres.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'Version non prise en charge de Recherche élastique détectée. Veuillez utiliser les versions : %s',
 
     'LBL_PATCHES_TITLE'     => 'Installer les derniers Patches',
     'LBL_MODULE_TITLE'      => 'Télécharger et Installer des packs de traduction',

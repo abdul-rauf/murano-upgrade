@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -43,7 +43,7 @@ $mod_strings = array (
   'LBL_CREATED_PROSPECT' => 'Krijimi i kontaktit të ri',
   'LBL_EXISTING_ACCOUNT' => 'Përdorim i llogarisë ekzistuese',
   'LBL_CREATED_ACCOUNT' => 'Krijimi i llogarisë ekzistuese',
-  'LBL_CREATED_CALL' => 'Krijimi i thirjes së re',
+  'LBL_CREATED_CALL' => 'Krijimi i thirrjes së re',
   'LBL_CREATED_MEETING' => 'Krijimi i mbledhjes së re',
   'LBL_ADDMORE_BUSINESSCARD' => 'Shto biznis kard tjetër',
   'LBL_ADD_BUSINESSCARD' => 'Shtyp kartën e biznesit',
@@ -105,7 +105,7 @@ $mod_strings = array (
   'LNK_NEW_OPPORTUNITY' => 'Krijo mundësi',
   'LNK_NEW_CASE' => 'Krijo rast',
   'LNK_NEW_NOTE' => 'Krijo shënim ose bashkëngjitje',
-  'LNK_NEW_CALL' => 'Thirje identifikuese',
+  'LNK_NEW_CALL' => 'Thirrje identifikuese',
   'LNK_NEW_EMAIL' => 'Emaili i arkivuar',
   'LNK_NEW_MEETING' => 'Cakto mbledhje',
   'LNK_NEW_TASK' => 'Krijo detyrë',

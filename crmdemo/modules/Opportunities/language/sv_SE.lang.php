@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Genom att klicka på Godkänn tar du bort ALL Prognosdata och förändrar Affärsmöjlighetsvyn. Om inte detta är vad du vill, tryck på avbryt för att gå tillbaka till tidigare inställningar.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Genom att klicka på bekräfta, kommer du att radera alla prognosdata och ändra vyn Möjligheter. '
+        .'Också alla processdefinitioner med en träffmodul för inkomstbringande artiklar kommer att inaktiveras. '
+        .'Om detta inte är vad du tänkte gära, klicka på Avbryt för att återgå till föregående inställningar.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Om alla Inkomstposter är stängda och minst en vanns.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'Affärsmöjlighetens säljfas är satt till "Stängd vunnen".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Om alla Inkomstposter är i försäljningsskedet "Stängd förlorad",',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}}-modulen låter dig spåra individuella köp och innehållet i dem från början till slut. Varje post i {{module_name}} är en header till en grupp med {{revenuelineitems_module}} och relaterar dessutom till andra viktiga poster som {{quotes_module}},{{contacts_module}}, et.c. Varje {{revenuelineitems_singular_module}} är en möjligt försäljning av en viss produkt, och innehåller relevant data. Varje {{revenuelineitems_singular_module}} kommer typiskt att följa försäljningsprocessen tills den märks som antingen "Stängd, vunnen" eller "Stängd, förlorad". {{module_name}}-posten återspeglar beloppet och det förväntade försäljningsdatumet i sin {{revenuelineitems_module}}. {{plural_module_name}} och {{revenuelineitems_module}} kan användas ännu längre tillsammans med Sugars {{forecasts_singular_module}}ingsmodul för att förstå och förutsäga försäljningskurvor såväl som fokusera arbete för att uppnå försäljningsmål.',
+    'LBL_HELP_RECORDS' => 'Med modulen {{plural_module_name}} kan du spåra enskilda försäljningar från början till slut. Varje {{module_name}} post representerar en framtida försäljning och inkluderar relevanta försäljningsdata samt andra viktiga poster såsom {{quotes_module}}, {{contacts_module}}, etc. En sådan modul {{module_name}} ger normalt framsteg genom flera försäljningssteg tills det markeras antingen "Stängt vann" eller "Stängd förlorat". {{plural_module_name}} kan utnyttjas ytterligare genom att använda Sugars {{forecasts_singular_module}}ing modul för att förstå och förutsäga försäljningstrender samt fokusera arbetet på att uppnå säljbudget.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}-modulen låter dig spåra individuella köp och innehållet i dem från början till slut. Varje post i {{module_name}} är en header till en grupp med {{revenuelineitems_module}} och relaterar dessutom till andra viktiga poster som {{quotes_module}},{{contacts_module}}, et.c.
+    'LBL_HELP_RECORD' => '{{plural_module_name}} Denna modul tillåter Dig att spåra enskilda försäljningar och radartiklar som tillhör dessa från start till mål. Alla {{module_name}} data representerar en prospekterad försäljning och inkluderar relevanta försäljningsdata liksom relaterar till viktiga data så som {{quotes_module}}, {{contacts_module}}, etc.
 
-- Redigera postens fält genom att klicka på dem eller på knappen Redigera.
-- Visa eller redigera länkar till andra poster, som {{revenuelineitems_module}} i underpanelerna genom att växla den nedre vänstra panelen till "Datavy".
-- Skapa och visa kommentarer, och håll koll på användningshistoriken i {{activitystream_singular_module}} genom att växla den nedre vänstra panelen till "Aktivitetsström".
-- Följ eller favoritmarkera posten med ikonerna till höger om postnamnet.
-- Ytterligare åtgärder hittar du i menyn Åtgärder till höger om knappen Redigera.',
+- Redigera detta datafält genom att klicka på respektive fält eller använd Edit-knappen.
+- Granska eller ändra länkar till andra data i underpanelerna genom att dra i den nedre vänstra panelen för "Datavy".
+- Lägg upp och granska användarkommentarer och datahistoriken i {{activitystream_singular_module}} genom att dra i den nedre vänstra panelen för "Aktivitetsflöde".
+- Följ eller lägg till som favorit dessa data genom att använda ikonerna till höger om datanamnet.
+- Ytterligare åtgärder är tillgänglig i rullgardinsmenyn till höger om Edit-knappen.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}}-modulen låter dig spåra individuella köp och innehållet i dem från början till slut. Varje post i {{module_name}} är en header till en grupp med {{revenuelineitems_module}} och relaterar dessutom till andra viktiga poster som {{quotes_module}},{{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} modulen tillåter spårning av individuella försäljningar och alla detaljer som tillhör dessa från start till må. Alla {{module_name}} data representerar en förväntad försäljning och inkluderar relevanta försäljningsdata liksom relaterar till andra viktiga data såsom {{quotes_module}}, {{contacts_module}}, etc.
 
-För att skapa en {{module_name}}:
-1. Ange önskade värden i fälten.
- - Fält markerade med "Obligatorisk" måste fyllas i innan du kan spara.
- - Klicka på "Visa mer" för att få fram fler fält om de behövs.
-2. Klicka på "Spara" för att slutföra posten och återvända till föregående sida.
-3. Efter den sparas kan {{revenuelineitems_module}}-underpanelen användas för att lägga till information i {{module_name}}.',
+För att skapa ett {{module_name}}:
+1. Skriv in värden för önskat fält.
+ - Fält markerade med "Obligatoriskt" måste fyllas i innan man sparar.
+ - Klicka "Visa mer" för att se tilläggsfält om så är nödvändigt.
+2. Klicka "Spara" för att spara nya data oh återvända till föregående sida.',
 
 // END PRO/CORP
 

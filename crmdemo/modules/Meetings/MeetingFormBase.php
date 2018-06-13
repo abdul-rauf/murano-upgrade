@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -160,21 +160,23 @@ function handleSave($prefix,$redirect=true, $useRequired=false) {
 		return null;
 	}
 
-	if( !isset($_POST['reminder_checked']) or ( isset($_POST['reminder_checked']) && $_POST['reminder_checked'] == '0')) {
-		$_POST['reminder_time'] = -1;
-	}
-	if(!isset($_POST['reminder_time'])) {
-		$_POST['reminder_time'] = $current_user->getPreference('reminder_time');
-		$_POST['reminder_checked']=1;
-	}
+        if (!isset($_POST['reminder_checked']) ||
+            ( isset($_POST['reminder_checked']) && $_POST['reminder_checked'] == '0')) {
+            $_POST['reminder_time'] = -1;
+        }
+        if (!isset($_POST['reminder_time'])) {
+            $_POST['reminder_time'] = $current_user->getPreference('reminder_time');
+            $_POST['reminder_checked']=1;
+        }
 	
-	if(!isset($_POST['email_reminder_checked']) || (isset($_POST['email_reminder_checked']) && $_POST['email_reminder_checked'] == '0')) {
-		$_POST['email_reminder_time'] = -1;
-	}
-	if(!isset($_POST['email_reminder_time'])){
-		$_POST['email_reminder_time'] = $current_user->getPreference('email_reminder_time');
-		$_POST['email_reminder_checked'] = 1;
-	}
+        if (!isset($_POST['email_reminder_checked']) ||
+            (isset($_POST['email_reminder_checked']) && $_POST['email_reminder_checked'] == '0')) {
+            $_POST['email_reminder_time'] = -1;
+        }
+        if (!isset($_POST['email_reminder_time'])) {
+            $_POST['email_reminder_time'] = $current_user->getPreference('email_reminder_time');
+            $_POST['email_reminder_checked'] = 1;
+        }
     if (isset($_POST['repeat_parent_id']) && trim($_POST['repeat_parent_id']) == '') {
         unset($_POST['repeat_parent_id']);
     }
@@ -271,15 +273,15 @@ function handleSave($prefix,$redirect=true, $useRequired=false) {
             $contactInvitees = array();
             $leadInvitees = array();
            
-            $existingUsers = array();
+                $existingUserInvitees = array();
             $existingContacts = array();
             $existingLeads =  array();
-            
+
             if (!empty($_POST['user_invitees'])) {
                $userInvitees = explode(',', trim($_POST['user_invitees'], ','));
             }
             if (!empty($_POST['existing_invitees'])) {
-               $existingUsers =  explode(",", trim($_POST['existing_invitees'], ','));
+                    $existingUserInvitees = explode(",", trim($_POST['existing_invitees'], ','));
             }
            
             if (!empty($_POST['contact_invitees'])) {
@@ -319,7 +321,7 @@ function handleSave($prefix,$redirect=true, $useRequired=false) {
             $focus->users_arr = $userInvitees;
             $focus->contacts_arr = $contactInvitees;
             $focus->leads_arr = $leadInvitees;
-            
+
             $focus->save(true);
             $return_id = $focus->id;
             if (empty($return_id)) {
@@ -329,6 +331,18 @@ function handleSave($prefix,$redirect=true, $useRequired=false) {
                 $_REQUEST['return_action'] = 'EditView';
                 handleRedirect('', 'Meetings');
             }
+
+                // Collect existing users after calling save()
+                // Note: some users may have been added/removed as part of save()
+                $focus->load_relationship('users');
+                $existingUsers = array();
+                foreach ($focus->users->get() as $userId) {
+                    $existingUsers[$userId] = true;
+                }
+                // Fold in any User Ids that may have peen Posted on the Request
+                foreach ($existingUserInvitees as $userId) {
+                    $existingUsers[$userId] = true;
+                }
 
             $focus->setUserInvitees($userInvitees, $existingUsers);
             $focus->setContactInvitees($contactInvitees, $existingContacts);

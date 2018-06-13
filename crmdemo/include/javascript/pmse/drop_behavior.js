@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -514,6 +514,7 @@ AdamConnectionDropBehavior.prototype.onDrop = function (shape) {
             endPortXCoord,
             endPortYCoord,
             connection,
+            saveCon,
             currentConnection = canvas.currentConnection,
             srcPort,
             dstPort,
@@ -665,7 +666,16 @@ AdamConnectionDropBehavior.prototype.onDrop = function (shape) {
             endPort.attachListeners(endPort);
 
             // finally trigger createEvent
-            canvas.triggerCreateEvent(connection, []);
+            if (canvas.zoomFactor != 1) {
+                saveCon = _.extend({}, connection);
+                _.each(saveCon.points, function(point) {
+                    point.x /= canvas.zoomFactor;
+                    point.y /= canvas.zoomFactor;
+                });
+            } else {
+                saveCon = connection;
+            }
+            canvas.triggerCreateEvent(saveCon, []);
         } else if (port) {
             port.setOldParent(port.getParent());
             port.setOldX(port.getX());

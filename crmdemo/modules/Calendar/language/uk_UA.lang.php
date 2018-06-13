@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -34,10 +34,10 @@ $mod_strings = array (
 	'LBL_PREVIOUS_DAY' => 'Попередній день',
 	'LBL_PREVIOUS_YEAR' => 'Попередній рік',
 	'LBL_PREVIOUS_WEEK' => 'Попередній тиждень',
-	'LBL_NEXT_MONTH' => 'Наступного місяця',
-	'LBL_NEXT_DAY' => 'Наступного дня',
-	'LBL_NEXT_YEAR' => 'Наступного року',
-	'LBL_NEXT_WEEK' => 'Наступного тижня',
+	'LBL_NEXT_MONTH' => 'Наступний місяць',
+	'LBL_NEXT_DAY' => 'Наступний день',
+	'LBL_NEXT_YEAR' => 'Наступний рік',
+	'LBL_NEXT_WEEK' => 'Наступний тиждень',
 	'LBL_AM' => 'AM',
 	'LBL_PM' => 'PM',
 	'LBL_SCHEDULED' => 'Заплановано',
@@ -137,6 +137,7 @@ $mod_strings = array (
     'LBL_CALENDAR_EVENT_NOT_A_RECURRING_EVENT' => "{0} не є повторюваною подією",
     'LBL_CALENDAR_EVENT_NOT_A_PARENT_OCCURRENCE' => "{0} не основне повторення",
     'LBL_CALENDAR_EVENT_RECURRENCE_MODULE_NOT_SUPPORTED' => "{0} не розпізнається як повторювана подія модуля",
+
 );
 
 $mod_list_strings = array(

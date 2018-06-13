@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => '若单击确定，您将清除所有预测数据并更改您的商业机会视图。如果这不是您要的结果，请单击“取消”返回上一设置。',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        '点击确认，您将清除所有的预测数据，并更改您的机会视图。 '
+        .'此外，将禁用所有的流程定义，以及营收单项的目标模块。 '
+        .'如果您不打算这样做，请点击取消，返回上一设置界面。',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => '如果所有营收单项均已关闭且至少有一个谈成，',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => '则商业机会销售阶段将设置为“谈成结束”。',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => '如果所有营收单项均处于“丢单结束”销售阶段，',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块允许您从始至终地追踪个人销售和这些销售的明细项目。 每个 {{module_name}} 记录都代表一组 {{revenuelineitems_module}} 并和 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。每个 {{revenuelineitems_singular_module}} 都是特定产品的预期销售，包含相关销售数据。每个 {{revenuelineitems_singular_module}} 一般会经历几个销售阶段，直到被标记为“谈成结束”或“丢单结束”。{{module_name}} 记录反映 {{revenuelineitems_module}} 的金额和预计结束日期。通过 Sugar 的 {{forecasts_singular_module}} 模块可以进一步利用 {{plural_module_name}} 和 {{revenuelineitems_module}} 来了解和预测销售趋势，并着力于达到销售定额。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块可以让您全程跟踪个人销售。每个{{module_name}} 都代表一次未来的销售，并包含相关销售数据，且与其他重要记录有关，如{{quotes_module}}、{{contacts_module}}等等。{{module_name}} 通常经过几个销售阶段实现进步，直到被标记为”谈成结束“或者”丢单结束“。甚至可以使用Sugar 的{{forecasts_singular_module}}ing 模块进一步调节{{plural_module_name}}，以便于理解和预测销售趋势，以及集中精力达到销售定额。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} 允许您从始至终地追踪个人销售和这些销售的明细项目。 每个 {{module_name}} 记录都代表一组 {{revenuelineitems_module}} 并和 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 允许您从始至终地追踪个人销售和这些销售的明细项目。 每个 {{module_name}} 记录都代表一次未来销售，包括相关销售数据，并和 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。
 
 - 点击单一字段或“编辑”按钮，对记录的字段进行编辑。
-- 将左下角的窗格切换至“数据视图”以查看或修改子面板中其他记录的链接，包括 {{revenuelineitems_module}}。
+- 将左下角的窗格切换至“数据视图”以查看或修改子面板中其他记录的链接。
 - 将左下角的窗格切换至“活动流”，以在 {{activitystream_singular_module}} 中创建和查看用户评论以及记录更改历史。
 - 使用记录名称右侧的图标，关注或收藏此记录。
 - 使用“编辑”按钮右方的下拉操作菜单，可执行其他操作。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} 允许您全程追踪个人销售和这些销售的明细项目。 每个 {{module_name}} 记录都代表一组 {{revenuelineitems_module}} 的标头且和 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 允许您全程追踪个人销售和这些销售的明细项目。 每个 {{module_name}} 记录都代表一次未来的销售，包括相关销售数据，且和 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。
 
 创建 {{module_name}}：
 1. 按需提供字段值。 
  - 标记为“必填”的字段在保存前必须先填写完整。
  - 如有需要，点击“显示更多”以显示其他字段。
-2. 点击“保存”以完成新纪录，并返回至上一页。
-3. 保存之后，使用 {{revenuelineitems_module}} 子面板以添加明细项目至 {{module_name}}。',
+2. 点击“保存”以完成新纪录，并返回至上一页。',
 
 // END PRO/CORP
 

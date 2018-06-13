@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -97,11 +97,11 @@ class One2MBeanRelationship extends One2MRelationship
     protected function updateLinks($lhs, $lhsLinkName, $rhs, $rhsLinkName)
     {
         if (isset($lhs->$lhsLinkName)) {
-            $lhs->$lhsLinkName->addBean($rhs);
+            $lhs->$lhsLinkName->resetLoaded();
         }
-        //RHS only has one bean ever, so we don't need to preload the relationship
+
         if (isset($rhs->$rhsLinkName)) {
-            $rhs->$rhsLinkName->beans = array($lhs->id => $lhs);
+            $rhs->$rhsLinkName->resetLoaded();
         }
     }
 
@@ -155,6 +155,11 @@ class One2MBeanRelationship extends One2MRelationship
                 $success = false;
                 LoggerManager::getLogger()->error("Warning: failed trying to set null value on rhs for relationship {$this->name} within One2MBeanRelationship->remove(). sql: $sql");
             }
+        }
+
+        $link = $this->lhsLink;
+        if ($lhs->load_relationship($link)) {
+            $lhs->$link->resetLoaded();
         }
         if (empty($_SESSION['disable_workflow']) || $_SESSION['disable_workflow'] != "Yes") {
             $this->callAfterDelete($lhs, $rhs, $this->getLHSLink());

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'LBL_BLANK'	=> '-vide-',
+	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Appels',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Appel',
     'LBL_MODULE_TITLE' => 'Appels : Accueil',
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'Composer un email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Rapp. email tous',
     'LBL_EMAIL_REMINDER' => 'Notification par email',
-    'LBL_EMAIL_REMINDER_TIME' => 'Email de rappel',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup de rappel',
+    'LBL_EMAIL_REMINDER_TIME' => 'Heure de rappel par email',
+    'LBL_POPUP_REMINDER_TIME' => 'Heure de rappel par Popup',
     'LBL_SEND_BUTTON_TITLE'=>'Envoyer les invitations [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Envoyer Invitations',
 	'LBL_DATE_END'=>'Date de fin',
 	'LBL_TIME_END'=>'Heure de fin',
-	'LBL_REMINDER_TIME'=>'Heure de la notification',
+    'LBL_REMINDER_TIME'=>'Heure de la notification',
     'LBL_EMAIL_REMINDER_SENT' => 'Notification par email envoyée',
     'LBL_SEARCH_BUTTON'=> 'Rechercher',
     'LBL_ACTIVITIES_REPORTS' => 'Rapport d&#39;activités',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Supprimer toutes les occurrences',
     'LBL_DATE_END_ERROR' => 'La date de fin est avant la date de début',
     'LBL_REPEAT_PARENT_ID' => 'Répétition ID parent',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID de récurrence de l’appel. Date de début de l&#39;appel d’origine',
     'LBL_RECURRING_SOURCE' => 'Source récurrence',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Êtes-vous sûr de vouloir supprimer tous les enregistrements récurrents ?',
     'LBL_RECURRING_LIMIT_ERROR' => 'Cet appel ne peut être planifié car il dépasse le nombre maximum de récurrence autorisé qui est de $limit.',

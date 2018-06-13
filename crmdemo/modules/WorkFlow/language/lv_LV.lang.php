@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -78,7 +78,7 @@ $mod_strings = array (
   'LBL_LINK_RECORD'=>'Saite uz ierakstu',
   'LBL_INVITE_LINK'=>'Tikšanās/zvana ielūguma saite',
   'LBL_PLEASE_SELECT'=>'Izvēlieties',
-  'LBL_BODY'=>'Ķermenis:',
+  'LBL_BODY'=>'Pamatteksts:',
   'LBL__S'=>'$#39;s',
   'LBL_ALERT_SUBJECT'=>'DARBPLŪSMAS BRĪDINĀJUMS',
   'LBL_ACTION_ERROR'=>'Šo darbību nevar izpildīt. Rediģējiet darbību, lai visi lauki un lauku vērtības būtu derīgas.',
@@ -94,6 +94,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tips',
 
   // Workflow sunsetting message, added in 7.6.1
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Piezīme:</strong> Šī iespēja tiks izņemta turpmākajā Sugar izlaidumā, kas tiek plānots 2017. gadā. Sugar Enterprise versijas klientiem būtu jāsāk lietot paplašinātās darbplūsmas iespējas, ko nodrošina Procesu veidotājs. Uzklikšķiniet uz <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">šeit</a>, lai uzzinātu vairāk.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> This feature will be removed in a future release of Sugar currently planned for 2017. Sugar Enterprise edition customers should begin to use the advanced workflow capabilities provided by Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">here</a> for more information.',
 );
 

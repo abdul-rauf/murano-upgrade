@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Izvēlieties <b>Izkārtojumu rediģēšanai</b>.<br/<br/>Lai izmainītu datu ievadlaukus saturošu izkārtojumu, klikšķiniet <b>Rediģēšanas skatījums</b>.<br/><br/>Lai izmainītu izkārtojumu, kurš attēlo Rediģēšanas skatījumā ievadītos datus, klikšķiniet <b>Detalizēts skatījums</b>.<br/><br/>Lai izmainītu kolonnas, kuras parādās noklusētajā sarakstā, klikšķiniet <b>Saraksta skatījums</b>.<br/><br/>Lai izmainītu Pamata un Izvērstās meklēšanas formas izkārtojumus, klikšķiniet <b>Meklēšana</b>.',
         'subpanelHelp'=> 'Atlasiet Apakšpaneli rediģēšanai.',
         'searchHelp' => 'Atlasiet <b>Meklēšanas</b> izkārtojumu rediģēšanai.',
-        'labelsBtn'	=> 'Noklikšķiniet uz <b>Saglabāt</b>, lai saglabātu savas pielāgotās iezīmes.',
+        'labelsBtn'	=> 'Rediģējiet <b>Etiķetes</b>, lai parādītu lielumus šajā modulī.',
         'newPackage'=>'Klikšķini <b>Jauna pakotne</b>, lai izveitotu jaunu pakotni.',
         'mbHelp'    => '<b>Laipni lūgti Moduļu veidotājā.</b><br/><br/>Lietojiet <b>Moduļu veidotāju</b>, lai radītu pakotnes ar pielāgotajiem moduļiem, izmantojot standarta un pielāgotus objektus. <br/><br/>Lai izveidotu jaunu pakotni, klikškiniet<b>Jauna pakotne</b>, vai izvēlies esošu pakotni rediģēšanai.<br/><br/> <b>Pakotne</b> darbojas kā viena projekta pielāgoto moduļu konteiners. Pakotne var saturēt vienu vai vairākus <b>moduļus</b>, kuri var būt saistīti savā starpā, vai ar citiem moduļiem lietojumprogrammā. <br/><br/>Piemēri: Variet izveidot pakotni ar vienu pielāgoto moduli, kurš ir saistīts ar standarta Uzņēmuma moduli. Vai arī variet izveidot pakotni ar vairākiem jauniem  moduļiem, kuri darbojas kopā kā projekts, un ir saistīti viens ar otru un arī ar moduļiem lietojumprogrammā.',
         'exportBtn' => 'Klikšķiniet <b>Eksportēt pielāgojumus</b>, lai izveidotu un lejupielādētu pakotni ar Studio veiktajām izmaiņām, norādītajiem moduļiem.',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Nosaukums - Jāsastāv tikai no cipariem un burtiem, jāsākas ar burtu un nedrīkst saturēt atstarpes.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Pakotnes atslēga jau eksistē',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Pakotnes nosaukums jau eksistē',
+'LBL_JS_PACKAGE_NAME'=>'Pakotnes nosaukums - jāsākas ar burtu un var sastāvēt tikai no burtiem, cipariem un pasvītrojumiem. Nedrīkst saturēt atstarpes vai citus īpašos simbolus.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Atslēga - jābūt burtu un ciparu kombinācijai un jāsākas ar burtu.',
 'LBL_JS_VALIDATE_KEY'=>'Atslēga - Jābūt burtciparu, jāsākas ar burtu un nedrīkst saturēt atstarpes.',
 'LBL_JS_VALIDATE_LABEL'=>'Lūdzu ievadiet etiķeti, ko lietot par šī moduļa attēlošanas vārdu',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Vai tiešām vēlaties dzēst šo relāciju?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tādejādi tiks radīta pastāvīga relācija. Vai tiešām vēlaties izvietot šo relāciju?',
 'LBL_CONFIRM_DONT_SAVE' => 'Kopš pēdējās saglabāšanas ir veiktas izmaiņas, vai vēlaties saglabāt?',
@@ -742,18 +743,18 @@ $mod_strings = array(
 'LBL_POPHELP_IMPORTABLE'=>'<b>Jā</b>: Lauks tiks iekļauts importēšanas operācijā.<br><b>Nē</b>: Lauks netiks iekļauts importa operācijā<br><b>Obligāts</b>: Lauka vērtībai jābūt norādītai jebkurā importa operācijā.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Ievadiet platumu pikseļos. <br> Augšupielādētais attēls tiks mērogots atbilstoši šim platumam.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Ievadiet augstumu pikseļos. <br> Augšupielādētais attēls tiks mērogots atbilstoši šim augstumam.',
-'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'
-. '<br><b>In Filter</b>: The field will appear in the Merge Duplicates feature, and will also be available in the Find Duplicates feature.<br><b>Filter Only</b>: The field will not appear in the Merge Duplicates feature, but will be available in the Find Duplicates feature.<br><b>Default Selected Filter</b>: The field will be used for a filter condition by default in the Find Duplicates page, and will also appear in the Merge Duplicates feature.'
+'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Iespējots</b>: Lauks parādīsies Dublikātu sapludināšanas funkcijā, taču nebūs pieejams izmantošanai filtra nosacījumu noteikšanai Dublikātu meklēšanas funkcijā.<br><b>Atspējots</b>: Lauks neparādīsies Dublikātu sapludināšanas funkcijā un nebūs pieejams izmantošanai filtra nosacījumu noteikšanai Dublikātu meklēšanas funkcijā.'
+. '<br><b>Filtrā</b>: Lauks parādīsies Dublikātu sapludināšanas funkcijā un būs pieejams arī Dublikātu meklēšanas funkcijā.<br><b>Tikai filtrs</b>: Lauks neparādīsies Dublikātu sapludināšanas funkcijā, taču būs pieejams Dublikātu meklēšanas funkcijā.<br><b>Pēc noklusējuma izvēlēts filtrs</b>: Lauks tiks izmantots filtra nosacījuma noteikšanai pēc noklusējuma Dublikāta meklēšanas lapā, kā arī parādīsies Dublikātu sapludināšanas funkcijā.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Create a formula to determine the value in this field.<br>"
-   . "Workflow definitions containing an action that are set to update this field will no longer execute the action.<br>"
-   . "Fields using formulas will not be calculated in real-time in "
-   . "Mobile EditView layouts.",
+'LBL_POPHELP_CALCULATED'=>"Izveidot formulu, lai noskaidrotu vērtību šajā laukā.<br>"
+   . "Darbplūsmas definīcijas, kas satur darbību un ir iestatītas, lai atjauninātu šo lauku, vairs neveiks šo darbību.<br>"
+   . "Lauki, kas izmanto formulas, netiks aprēķināti reālā laika režīmā "
+   . "Mobile EditView izkārtojumos.",
 
-'LBL_POPHELP_DEPENDENT'=>"Create a formula to determine whether this field is visible in layouts.<br/>"
-        . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
-        . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
-        . "They will not follow the formula in the Sugar Self-Service Portal.",
+'LBL_POPHELP_DEPENDENT'=>"Izveidot formulu, lai noskaidrotu, vai šis lauks ir redzams izkārtojumos.<br/>"
+        . "Atkarīgie lauki ievēros atkarības formulu uz pārlūka bāzētajā mobilajā skatā, <br/>"
+        . "taču neievēros formulu vietējās lietotnēs, piemēram, Sugar Mobile tālruņiem iPhone. <br/>"
+        . "Tie neievēros formulu Sugar Self-Service portālā.",
 'LBL_POPHELP_GLOBAL_SEARCH'=>'Izvēlieties, lai izmantotu šo laukus ierakstu meklēšanai modulī, izmantojot Globālās meklēšanas iespēju.',
 //Revert Module labels
 'LBL_RESET' => 'Atiestatīt',

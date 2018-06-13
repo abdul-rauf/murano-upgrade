@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,7 +14,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 // $Id: en_us.lang.php 56786 2010-06-02 18:29:56Z jenny $
 
 $mod_strings = array (
-	'LBL_MODULE_NAME' => 'Projekto užduotis',
+	'LBL_MODULE_NAME' => 'Projekto užduotys',
 	'LBL_MODULE_NAME_SINGULAR' => 'Projekto užduotis',
 	'LBL_MODULE_TITLE' => 'Projekto užduotis: Pradžia',
 	'LBL_SEARCH_FORM_TITLE' => 'Projekto užduoties paieška',
@@ -24,8 +24,8 @@ $mod_strings = array (
 	'LBL_ID' => 'Id:',
     'LBL_PROJECT_TASK_ID' => 'Projekto užduoties Id:',
     'LBL_PROJECT_ID' => 'Projekto Id:',
-	'LBL_DATE_ENTERED' => 'Sukurta:',
-	'LBL_DATE_MODIFIED' => 'Redaguota:',
+	'LBL_DATE_ENTERED' => 'Sukūrimo data:',
+	'LBL_DATE_MODIFIED' => 'Redagavimo data:',
 	'LBL_ASSIGNED_USER_ID' => 'Atsakingas:',
 	'LBL_MODIFIED_USER_ID' => 'Redaguotojo Id:',
 	'LBL_CREATED_BY' => 'Sukūrė:',

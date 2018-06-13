@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Κατάργηση εργαλείων διαγνωστικών αρχείων',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Κατάργηση προσωρινών PDF αρχείων',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Αναβάθμιση Πίνακα tracker_sessions',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Εκτέλεση Υπενθύμισης Email',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Αποστείλετε ειδοποιήσεις υπενθύμισης μέσω ηλεκτρονικού ταχυδρομείου',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Εκκαθάριση Εργασιών Ουράς Αναμονής',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Δημιουργία Μελλοντικών Χρονικών Περιόδων',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Update KBContent articles.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Άρθρα εγκεκριμένα προς δημοσίευση & Άρθρα ληγμένου KB.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Διεργασία Συγγραφέα Προγραμματισμένης Εργασίας',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Προγραμματισμένη εργασία στην Advanced Workflow',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Διάστημα:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => '<b>Ανανέωση Εργασιών</b>',
 'LBL_POLLMONITOREDINBOXES' => '<b>Έλεγχος Εισερχόμενων Λογαριασμών Ταχυδρομείου</b>',
 'LBL_PERFORMFULLFTSINDEX' => '<b>Πλήρης-κείμενο Αναζήτηση Ευρετηρίου Συστήματος</b>',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Κατάργηση προσωρινών αρχείων PDF',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Δημοσιεύστε τα εγκεκριμένα άρθρα και τα ληγμένα άρθρα KB.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Προγραμματιστής σειράς προτεραιότητας του Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Κατάργηση αρχείων διαγνωστικού εργαλείου',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Κατάργηση προσωρινών αρχείων',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '<b>Εκτέλεση Νυχτερινών Μαζικών Emails Εκστρατείας</b>',
 'LBL_ASYNCMASSUPDATE' => 'Εκτέλεση Ασύγχρονων Μαζικών Ενημερώσεων',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => '<b>Αναπροσαρμογή Πινάκων Χρόνου Συνεδριών Σημείου Εντοπισμού</b>',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Δημιουργία Μελλοντικών TimePeriods',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> '<b>Εκτέλεση Αποστολής Email Υπενθυμίσεων</b>',
+'LBL_SENDEMAILREMINDERS'=> 'Εκτελέστε αποστολή υπενθύμισης μέσω ηλεκτρονικού ταχυδρομείου',
 'LBL_CLEANJOBQUEUE' => '<b>Εκκαθάριση Εργασιών Ουράς Αναμονής</b>',
 'LBL_CLEANOLDRECORDLISTS' => 'Εκκαθάριση Λιστών Παλαιών Εγγραφών',
 );

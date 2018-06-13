@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -29,16 +29,19 @@ $viewdefs['Calls']['base']['view']['subpanel-list'] = array(
           'enabled' => true,
           'default' => true,
           'name' => 'status',
-            'type' => 'event-status',
-            'css_class' => 'full-width',
+          'type' => 'event-status',
+          'css_class' => 'full-width',
         ),
         array(
+          'name' => 'date_start',
           'label' => 'LBL_LIST_DATE',
+          'type' => 'datetimecombo-colorcoded',
+          'completed_status_value' => 'Held',
           'enabled' => true,
           'default' => true,
-          'name' => 'date_start',
           'css_class' => 'overflow-visible',
           'readonly' => true,
+          'related_fields' => array('status'),
         ),
         array(
           'label' => 'LBL_DATE_END',

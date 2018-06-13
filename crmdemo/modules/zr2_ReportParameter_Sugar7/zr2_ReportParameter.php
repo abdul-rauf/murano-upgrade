@@ -26,7 +26,7 @@ class zr2_ReportParameter extends SugarBean {
 	var $module_dir = "zr2_ReportParameter";
 
 	function zr2_ReportParameter() {
-		parent::SugarBean();
+		parent::__construct();
 		$this->new_schema = true;
 		$this->disable_row_level_security = true;
 	}

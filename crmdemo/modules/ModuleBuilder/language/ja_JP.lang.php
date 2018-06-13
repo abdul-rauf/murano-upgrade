@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> '<b>編集するレイアウト</b>を選択してください。<br/<br/>データを入力する画面を変更する場合は<b>編集ビュー</b>をクリックしてください。<br/><br/>入力されたデータを表示する画面を変更する場合は<b>詳細ビュー</b>をクリックしてください。<br/><br/>デフォルトの一覧画面を変更する場合は<b>一覧画面</b>をクリックしてください。<br/><br/>基本検索や詳細検索のレイアウトを変更する場合は<b>検索</b>をクリックしてください。',
         'subpanelHelp'=> '編集する<b>サブパネル</b>を編集',
         'searchHelp' => '編集する検索レイアウトを選択してください。',
-        'labelsBtn'	=> '<b>保存</b> をクリックしてカスタム ラベルを保存します。',
+        'labelsBtn'	=> '<b>ラベル</b>を編集してこのモジュールの値を表示します。',
         'newPackage'=>'<b>新規パッケージ</b>をクリックしてパッケージを作成してください。',
         'mbHelp'    => '<b>モジュールビルダーへようこそ</b><br/><br/><b>モジュールビルダー</b>を使って標準モジュールやカスタムオブジェクトをベースとしたカスタムモジュールのプロジェクトを作成することができます。<br/><br/>開始するには<b>新規パッケージ</b>をクリックして新しいパッケージを作成してください。もしくは、編集したいパッケージを選択してください。<br/><br/><b>パッケージ</b>はカスタムモジュールのコンテナとして振る舞います。それらのカスタムモジュールはすべて１つのプロジェクトに属します。１つのパッケージには１つ以上のカスタムモジュールを含み、相互に関連付けを行い、既存のモジュールと関連を持つこともできます。<br/><br/>例: １つのカスタムモジュールを含むパッケージを作成し、標準の取引先モジュールと関連を持たせることができます。また、複数のカスタムモジュールを含むパッケージを作成し、それらを相互に関連させたり、既存のモジュールと関連させたりすることができます。',
         'exportBtn' => '<b>カスタマイズのエクスポート</b>をクリックするとスタジオで実施されたカスタマイズを含むパッケージを作成します。',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'パッケージ名 - 空白を含まず英字から始まる英数字である必要があります。',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'パッケージキーは既に存在します',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'パッケージ名は既に存在します。',
+'LBL_JS_PACKAGE_NAME'=>'パッケージ名 - 文字、数字、アンダースコアしか利用できません。文字で開始する必要があります。また、スペースや特殊文字は使用できません。',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'キー-英数字で、文字から始まる必要があります',
 'LBL_JS_VALIDATE_KEY'=>'キー - 空白を含まず英字から始まる英数字である必要があります',
 'LBL_JS_VALIDATE_LABEL'=>'モジュールの表示名に利用するラベルを入力してください',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'本当にこの関連を削除してよいですか？',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'この関連付けを永続化します。本当にこの関連付けを配置してよいですか？',
 'LBL_CONFIRM_DONT_SAVE' => '最後に保存された状態から変更が加えられています。保存しますか？',

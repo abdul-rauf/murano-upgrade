@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,7 +14,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 // $Id: en_us.lang.php 56786 2010-06-02 18:29:56Z jenny $
 
 $mod_strings = array (
-	'LBL_MODULE_NAME' => 'Projektas',
+	'LBL_MODULE_NAME' => 'Projektai',
 	'LBL_MODULE_NAME_SINGULAR' => 'Projektas',
 	'LBL_MODULE_TITLE' => 'Projektai: Pradžia',
 	'LBL_SEARCH_FORM_TITLE' => 'Projekto paieška',
@@ -23,7 +23,7 @@ $mod_strings = array (
 
 	'LBL_ID' => 'Id:',
 	'LBL_DATE_ENTERED' => 'Sukūrimo data:',
-	'LBL_DATE_MODIFIED' => 'Redaguota:',
+	'LBL_DATE_MODIFIED' => 'Redagavimo data:',
 	'LBL_ASSIGNED_USER_ID' => 'Atsakingas:',
     'LBL_ASSIGNED_USER_NAME' => 'Atsakingas:',
 	'LBL_MODIFIED_USER_ID' => 'Redaguotojo Id:',
@@ -180,8 +180,8 @@ $mod_strings = array (
     'NTC_NO_ACTIVE_PROJECTS' => 'Jūs neturite jokių aktyvių projektų ir projekto užduočių.',
     'NTC_ASSIGN_RIGHT_TEAM' => 'Įsitikinkite, kad visi projekto resursai yra šios komandos nariai.',
        
-    'LBL_RESOURCE_NAME' => 'Resource Name',
-    'LBL_RESOURCE_TYPE' => 'Resource Type',
+    'LBL_RESOURCE_NAME' => 'Pavadinimas',
+    'LBL_RESOURCE_TYPE' => 'Tipas',
     
     'LBL_GRID_ONLY' => 'Lentelė',
     'LBL_GANTT_ONLY' => 'Gantt',

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,30 +14,18 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Platform as PlatformConstraint;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerAwareTrait;
 
 abstract class ServiceBase implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     public $user;
     public $platform = 'base';
     public $action = 'view';
 
     abstract public function execute();
     abstract protected function handleException(Exception $exception);
-
-    /** @var LoggerInterface */
-    protected $logger;
-
-    /**
-     * Sets a logger instance on the object
-     *
-     * @param LoggerInterface $logger
-     * @return null
-     */
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
 
     protected function loadServiceDictionary($dictionaryName) {
         require_once("include/api/{$dictionaryName}.php");

@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Spiežot apstiprināt tiks izdzēsti VISI prognožu dati un mainīts jūsu Pārdošanas iespēju skats. Ja tas nav, tas ko vēlaties, spiediet Atcelt un atgriezties pie iepriekšējiem uzstādījumiem.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Noklikšķinot uz "Apstiprināt", tiks izdzēsti VISI prognozes dati, kā arī mainīts Darījumu skatījums. '
+        .'Tāpat tiks atspējotas VISAS procesu definīcijas ar ieņēmumu posteņu mērķa moduli. '
+        .'Ja tas nav tas, ko vēlējāties, spiediet Atcelt un atgriezties pie iepriekšējiem iestatījumiem.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Ja visas ieņēmumu rindas ir aizvērtas un vismaz viena vinnēta,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'iespējas pārdošanas fāze tiek iestatīta uz "Aizvērts - iegūts"',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Ja visas ieņēmumu rindas ir statusā Aizvērts zaudēts',
@@ -162,26 +166,24 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulis „{{plural_module_name}}” ļauj no sākuma līdz beigām sekot atsevišķiem pārdošanas darījumiem un ar tiem saistītajām pozīcijām. Katrs moduļa „{{module_name}}” ieraksts ir nosaukums moduļa „{{revenuelineitems_module}}” grupai, un tas ir saistīts ar citiem svarīgiem ierakstiem, piemēram, moduļiem „{{quotes_module}}”, „{{contacts_module}}” u. c. Katrs modulis „{{revenuelineitems_singular_module}}” ir kāda produkta potenciāls pārdošanas darījums, un tas ietver atbilstošu pārdošanas informāciju. Katrs modulis „{{revenuelineitems_singular_module}}” iziet vairākus pārdošanas posmus, līdz tas tiek atzīmēts kā „Aizvērts-noslēgts” vai „Aizvērts-zaudēts”. Moduļa „{{module_name}}” ieraksts atspoguļo moduļa „{{revenuelineitems_module}}” apjomu un plānoto slēgšanas datumu. Moduļa „{{plural_module_name}}” un moduļa „{{revenuelineitems_module}}” izmantošanu var vēl vairāk uzlabot, izmantojot „Sugar” moduli „{{forecasts_singular_module}}” ar kura palīdzību var saprast un prognozēt pārdošanas tendences, kā arī koncentrēt darbu uz pārdošanas kvotu sasniegšanu.',
+    'LBL_HELP_RECORDS' => 'Modulis „{{plural_module_name}}” ļauj no sākuma līdz beigām sekot atsevišķiem pārdošanas darījumiem. Katrs moduļa "{{module_name}}" ieraksts ir kāda produkta potenciāls pārdošanas darījums un ietver atbilstošus pārdošanas datus, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, {{quotes_module}}, {{contacts_module}} utt. Modulis "{{module_name}}" parasti iziet vairākus pārdošanas posmus, līdz tas tiek atzīmēts kā „Noslēgts ar panākumiem” vai „Noslēgts bez panākumiem”. Moduļa „{{plural_module_name}}” izmantošanu var vēl vairāk uzlabot, izmantojot „Sugar” moduli „{{forecasts_singular_module}}”, ar kura palīdzību var saprast un prognozēt pārdošanas tendences, kā arī koncentrēt darbu uz pārdošanas kvotu sasniegšanu.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} modulis ļauj sekot atsevišķiem pārdošanas darījumiem un tiem piederošajiem produktiem no sākuma līdz beigām. Katrs {{module_name}} ieraksts ir galvene {{revenuelineitems_module}} grupai, un tā ir saistīta ar citiem svarīgiem ierakstiem, piemēram, {{quotes_module}}, {{contacts_module}}, utt.
-
+    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem un tiem piederošajiem produktiem no sākuma līdz beigām. Katrs {{module_name}} ieraksts ir kāda produkta potenciāls pārdošanas darījums un ietver atbilstošus pārdošanas datus, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, {{quotes_module}}, {{contacts_module}}, utt.
 - Rediģējiet šī ieraksta laukus, noklikšķinot uz konkrēta lauka vai pogas Edit (Rediģēt).
-- Apskatiet vai rediģējiet saites uz citiem ierakstiem apakšpaneļos, tostarp {{revenuelineitems_module}}, ieslēdzot datu skatu kreisajā apakšējā panelī.
-- Veidojiet un apskatiet lietotāju komentārus un ierakstu izmaiņu vēsturi {{activitystream_singular_module}}, ieslēdzot darbību plūsmas skatu kreisajā apakšējā panelī.
+- Apskatiet vai rediģējiet saites uz citiem ierakstiem apakšpaneļos, ieslēdzot datu skatu kreisajā apakšējā panelī.
+- Veidojiet un apskatiet lietotāju komentārus un ierakstu izmaiņu vēsturi modulī {{activitystream_singular_module}}, ieslēdzot darbību plūsmu kreisajā apakšējā panelī.
 - Sekojiet šim ierakstam vai izceliet to, izmantojot ikonas pa labi no ieraksta nosaukuma.
 - Papildu darbības ir pieejamas nolaižamajā darbību izvēlnē pa labi no rediģēšanas pogas.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem un tiem piederošajiem produktiem no sākuma līdz beigām. Katrs {{module_name}} ieraksts ir galvene {{revenuelineitems_module}} grupai, un tā ir saistīta ar citiem svarīgiem ierakstiem, piemēram, {{quotes_module}}, {{contacts_module}}, utt.
+    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} ļauj sekot atsevišķiem pārdošanas darījumiem un tiem piederošajiem produktiem no sākuma līdz beigām. Katrs {{module_name}} ieraksts ir kāda produkta potenciāls pārdošanas darījums un ietver atbilstošus pārdošanas datus, kā arī ir saistīts ar citiem svarīgiem ierakstiem, piemēram, {{quotes_module}}, {{contacts_module}}, utt.
 
 Lai izveidotu {{module_name}}:
 1. Ievadiet atbilstošos laukos prasītās vērtības.
  - Pirms saglabāšanas ir jāaizpilda lauki, kuri ir atzīmēti kā obligāti.
  - Ja nepieciešams redzēt papildu laukus, spiediet "Rādīt vairāk".
-2. Spiediet "Saglabāt", lai pabeigtu jauna ieraksta izveidi un atgrieztos iepriekšējā lapā.
-3. Pēc saglabāšanas izmantojiet apakšpaneli {{revenuelineitems_module}}, lai pievienotu produktus modulim {{module_name}}.',
+2. Spiediet "Saglabāt", lai pabeigtu jauna ieraksta izveidi un atgrieztos iepriekšējā lapā.',
 
 // END PRO/CORP
 

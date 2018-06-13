@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,6 +20,7 @@ global $timedate;
  
 $mod_strings = array (
     'LBL_GOOD_FILE' => '成功导入文件读取',
+    'LBL_RECORD_CONTAIN_LOCK_FIELD' => '导入的记录正参与流程，由于一些字段被流程锁定编辑，因而记录无法编辑。',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => '找到的错误数。由于错误而未导入的行视图错误选项卡',
     'LBL_UPDATE_SUCCESSFULLY' => '更新成功记录',
     'LBL_SUCCESSFULLY_IMPORTED' => '创建记录',

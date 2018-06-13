@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'データベースが利用不可能です。',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'データベースのサポートレイヤが見つかりません。MySQL、MS SQL Server のデータベース ドライバが適切にインストールされていることを確認してください。お使いのPHPのバージョンによっては、php.iniファイルの当該エクステンションの行のコメントをはずすか、正しいバイナリ ファイルでPHPをコンパイルし直す必要があります。データベースをサポートする詳しい方法についてはPHPのマニュアルを参照ください。<br><br>Oracle および DB2 は SugarCRM PRO でサポートされていません。サポートされているデータベースの一覧およびその他のプラットフォーム情報については、 <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a> を参照してください。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'XMLパーサライブラリに関連する機能が見つかりません。お使いのPHPのバージョンによっては、php.iniファイルの当該エクステンションの行のコメントをはずすか、PHPをコンパイルし直す必要があります。データベースをサポートする詳しい方法についてはPHPのマニュアルを参照ください。',
+    'LBL_CHECKSYS_CSPRNG' => '乱数ジェネレーター',
     'ERR_CHECKSYS_MBSTRING'             => 'マルチバイトストリングをサポートするエクステンション（mbstring）が見つかりません。エクステンションがインストールされていないか、PHPがコンパイルされる際にmbstringモジュールが有効になっていない可能性があります。mbstringを有効にする方法についてはPHPのマニュアルを参照ください。',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'PHPの設定ファイル(php.ini)にsession.save_pathが設定されていないか、設定されたディレクトリが存在しません。session.save_pathに正しいディレクトリを指定してください。',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'ZIPサポートが見つかりません: 圧縮ファイルを処理するためにZIPサポートが必要です。',
     'ERR_CHECKSYS_BCMATH'				=> 'BCMATHサポートは見つかりません: SugarCRMは任意精度演算のためにBCMATHサポートが必要です。',
     'ERR_CHECKSYS_HTACCESS'             => '.htaccessの再書き込みテストに失敗しました。これは通常SugarディレクトリのためのAllowOverride設定が無いことを意味します。',
+    'ERR_CHECKSYS_CSPRNG' => 'CSPRNG例外',
 	'ERR_DB_ADMIN'						=> '入力されたデータベースの管理者ユーザ名またはパスワードが不正なため、データベースとの接続を確立できません。正しいユーザ名とパスワードを入力してください。（エラー:',
     'ERR_DB_ADMIN_MSSQL'                => '入力されたデータベースの管理者ユーザ名またはパスワードが不正なため、データベースとの接続を確立できません。正しいユーザ名とパスワードを入力してください。',
 	'ERR_DB_EXISTS_NOT'					=> '指定されたデータベースは存在しません。',
@@ -105,7 +107,7 @@ $mod_strings = array(
 	'ERR_DB_NAME2'						=> "「\\」、「/」、「.」を含むデータベース名を使用することはできません。",
     'ERR_DB_MYSQL_DB_NAME_INVALID'      => "「\\」、「/」、「.」を含むデータベース名を使用することはできません。",
     'ERR_DB_MSSQL_DB_NAME_INVALID'      => "「&#39;」、「\"」、「*」、「/」、「\\」、「?」、「:」、「<」、「>」、「-」を含むデータベース名を使用することはできません。",
-    'ERR_DB_OCI8_DB_NAME_INVALID'       => "データベース名はアルファベットと「#」、「_」、「$」しか使用することができません。",
+    'ERR_DB_OCI8_DB_NAME_INVALID'       => "データベースの名前には、英数字および「#」、「_」、「:」、「.」、「/」または「$」の記号しか指定できません。",
 	'ERR_DB_PASSWORD'					=> 'データベース管理者のパスワードが一致しません。パスワードフィールドに再度同じパスワードを入力してください。',
 	'ERR_DB_PRIV_USER'					=> 'データベース管理者のユーザ名を入力してください。初期の接続時にユーザを利用します。',
 	'ERR_DB_USER_EXISTS'				=> 'SugarCRMデータベースのユーザは既に存在します。同一名称でユーザを作成できません。新しいユーザ名を入力してください。',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'アプリケーションの機能一般を動作させるにはキーの入力が必要ですが、必ずしもインストール時に入力する必要はありません。ただし、インストール後に入力する必要があります。',
     'LBL_INSTALL_TYPE_MSG2'             => 'インストールのための最小限の情報を入力します。初めてインストールするユーザ向けです。',
     'LBL_INSTALL_TYPE_MSG3'             => 'インストールのためのその他のオプションを入力してください。ほとんどの設定はインストール後に管理メニューから指定することも可能です。インストール経験のあるユーザ向けです。',
+    'LBL_INSTALL_TYPE_MSG3'             => 'インストールのためのその他のオプションを入力してください。ほとんどの設定はインストール後に管理メニューから指定することも可能です。インストール経験のあるユーザ向けです。',
 	'LBL_LANG_1'						=> 'SugarCRMでデフォルトの言語（米国英語）以外を用いる場合、ここで言語パックをアップロードしてインストールすることができます。後でSugarCRM管理メニューからインストールすることも可能です。',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'インストール',
 	'LBL_LANG_BUTTON_REMOVE'			=> '削除',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'ライセンス確認',
     'LBL_LICENSE_CHECKING'              => '整合性のチェックをしています。',
     'LBL_LICENSE_CHKENV_HEADER'         => '環境をチェック中',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'データベースの認証を確認しています。',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'DB、FTS資格情報を検証中。',
     'LBL_LICENSE_CHECK_PASSED'          => 'システムコンポーネントの整合性を確認できました。',
     'LBL_LICENSE_REDIRECT'              => '移動します',
 	'LBL_LICENSE_DIRECTIONS'			=> 'ライセンス情報をお持ちの場合は以下のフィールドに入力してください。',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'インストールを進める前に以下の重要な情報をお読みください。この情報は、インストールの準備ができているかどうかを判断することに役立ちます。',
 
 
-	'LBL_WELCOME_2'						=> 'インストールのドキュメントについては <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>を参照してください。<BR><BR> テクニカルサポートが必要な場合はオープンソースCRMまでお問い合わせください。',
+	'LBL_WELCOME_2'						=> 'インストールのドキュメントは、<a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>を参照してください。 <BR><BR> インストールについてサポートを受けるためにSugarCRM サポートエンジニアに連絡するには、<a target="_blank" href="http://support.sugarcrm.com">SugarCRM サポートポータル</a>にログインして、サポートケースを送信してください。',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>言語の選択</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'セットアップウィザード',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'SugarCRMへようこそ',
@@ -452,7 +455,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'キャンペーンEメールの送信を夜間に実行',
 	'LBL_OOTB_PRUNE'		=> '月初め（１日）に不要なデータベースのデータを削除',
     'LBL_OOTB_TRACKER'		=> '月始め（1日）に不要なトラッカーテーブルを削除',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Eメールリマインダ通知を送信',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Eメールリマインダ通知を実行',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'tracker_sessionsテーブルを更新',
     'LBL_OOTB_CLEANUP_QUEUE' => 'ジョブキューの削除',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => '検索エンジンタイプ',
     'LBL_FTS_HELP'      => 'フルテキスト検索を有効にするには、検索エンジンのタイプを選択し、検索エンジンがホストしているホスト名とポート番号を入力してください。Sugarにはあらかじめelasticsearchエンジンが含まれています。',
     'LBL_FTS_REQUIRED'    => 'Elastic Searchが必要です。',
-    'LBL_FTS_ERROR'    => 'フルテキスト検索サーバに接続できません。設定が正しいかどうか確認してください。',
+    'LBL_FTS_CONN_ERROR'    => '全文検索サーバーに接続できません。設定を確認してください。',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => '全文検索サーバーのバージョンが利用できません。設定を確認してください。',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'Elastic 検索でサポートされているバージョンが検出されませんでした。%sのバージョンを使用してください。',
 
     'LBL_PATCHES_TITLE'     => '最新パッチのインストール',
     'LBL_MODULE_TITLE'      => '言語パックのインストール',

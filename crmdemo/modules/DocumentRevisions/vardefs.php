@@ -5,7 +5,7 @@ if (!defined('sugarEntry') || !sugarEntry) {
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -197,7 +197,10 @@ $dictionary['DocumentRevision'] = array(
     'indices' => array(
         array('name' => 'documentrevisionspk', 'type' => 'primary', 'fields' => array('id')),
         array('name' => 'documentrevision_mimetype', 'type' => 'index', 'fields' => array('file_mime_type')),
-        array('name' => 'documentrevision_document_id', 'type' => 'index', 'fields' => array('document_id')),
+        array('name' => 'idx_document_revisions_document_id_deleted', 'type' => 'index', 'fields' => array(
+            'document_id',
+            'deleted',
+        )),
     ),
     'acls' => array('SugarACLParentModule' => array('parentModule' => 'Documents', 'parentLink' => 'documents')),
     'visibility' => array('ParentModuleVisibility' => array('parentLink' => 'documents')),

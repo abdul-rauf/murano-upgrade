@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Премахване на файловете за диагностика',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Премахване на временните PDF файлове',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Актуализирай таблицата tracker_sessions',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Изпращане на известия за нопомняне по електронна поща',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Активирай известията за напомняне за получаване на имейли',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Изчистване на опашките от заявки',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Създаване на бъдещи времеви периоди',
 'LBL_OOTB_HEARTBEAT' => 'Статистика на Sugar',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Актуализирай статиите от KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Публикувай одобрени материали & изтичане на срока на KB материали.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Насрочена задача за Дизайнер на процеси',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Насрочена задача в Advanced Workflow',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Интервал на изпълнение:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Опресни задачите',
 'LBL_POLLMONITOREDINBOXES' => 'Проверка на пощенски кутии за входяща поща',
 'LBL_PERFORMFULLFTSINDEX' => 'Индексиране на съдържанието за пълнотекстово търсене',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Премахване на временните PDF файлове',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Публикувайте одобрени статии и отбележете статии в базата знания като изтекли.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Планиране на опашка за Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Премахване на файловете на инструмента за диагностика',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Премахване на временните файлове',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Изпращане на електронни писма от кампании',
 'LBL_ASYNCMASSUPDATE' => 'Изпъняване на асинхронни масови актуализации',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Актуализация на таблиците за проследяване на активностите в системата',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Създаване на бъдещи времеви периоди',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar статистика',
-'LBL_SENDEMAILREMINDERS'=> 'Изпращане на напомняния по електронна поща',
+'LBL_SENDEMAILREMINDERS'=> 'Изпълни Изпращане на напомняния по имейла',
 'LBL_CLEANJOBQUEUE' => 'Изчистване на опашките от заявки',
 'LBL_CLEANOLDRECORDLISTS' => 'Изчистване на списъците със стари записи',
 );

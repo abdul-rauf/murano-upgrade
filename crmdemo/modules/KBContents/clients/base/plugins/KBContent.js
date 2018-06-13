@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -36,8 +36,9 @@
             onAttach: function(component, plugin) {
                 this.on('init', function() {
                     this._initKBListeners();
-                    if (this.tplName === 'list' || this.tplName === 'panel-top' ||
-                        (!_.isUndefined(this.context) && this.context.get('isSubpanel') === true)
+                    if ((this.tplName === 'list' ||
+                        (!_.isUndefined(this.context) && this.context.get('isSubpanel') === true)) &&
+                        this.tplName !== 'panel-top'
                     ) {
                         this.context.on('list:editrow:fire', _.bind(function(model, view) {
                             this._initValidationHandler(model);
@@ -166,7 +167,7 @@
                             self._onCreateRevision(prefill, parentModel);
                         }
                     },
-                    error: function(error) {
+                    error: function() {
                         app.alert.show('server-error', {
                             level: 'error',
                             messages: 'ERR_GENERIC_SERVER_ERROR'
@@ -186,7 +187,6 @@
              * @private
              */
             _onCreateLocalization: function(prefill, parentModel) {
-
                 if (!this.checkCreateLocalization(parentModel)) {
                     app.alert.show('localizations', {
                         level: 'warning',
@@ -201,9 +201,9 @@
                     this.getAvailableLangsForLocalization(parentModel),
                     {silent: true}
                 );
-                prefill.unset('language', {silent: true});
+                var language = this._getNextAvailableLanguage(parentModel);
+                prefill.set('language', language);
                 prefill.unset('kbarticle_id', {silent: true});
-
                 this._openCreateRelatedDrawer(prefill, parentModel);
             },
 
@@ -342,6 +342,26 @@
             },
 
             /**
+             * Returns next available language that can be used for localization.
+             *
+             * @param {Data.Model} model Parent model.
+             * @return {string} Next available localization language.
+             * @private
+             */
+            _getNextAvailableLanguage: function(model) {
+                var usedLangs = this.getAvailableLangsForLocalization(model);
+                var config = app.metadata.getModule('KBContents', 'config');
+
+                var allLangs = _.map(config.languages, function(language) {
+                    var langObject = _.omit(language, 'primary');
+                    return _.first(_.keys(langObject));
+                });
+
+                var availableLangs = _.difference(allLangs, usedLangs);
+                return _.first(availableLangs);
+            },
+
+            /**
              * Returns array of langs for that there is localization.
              * @param {Data.Model} model Parent model.
              * @return {Array} Array of langs.
@@ -385,7 +405,7 @@
                                     });
                                 }
                             },
-                            error: function(error) {
+                            error: function() {
                                 app.alert.show('template-load-error', {
                                     level: 'error',
                                     messages: app.lang.get('LBL_TEMPLATE_LOAD_ERROR', 'KBContentTemplates')
@@ -535,17 +555,10 @@
                                     });
 
                                 }
-
-                                // enable buttons in recordview
-                                if (_.isFunction(this.toggleButtons)) {
-                                    this.toggleButtons(true);
-                                }
-
-                                // enable save button in recorlist view
-                                var inlineSaveButton = this.getField('inline-save', model);
-                                if (!_.isEmpty(inlineSaveButton)) {
-                                    inlineSaveButton.setDisabled(false);
-                                }
+                                // Emulate invalid validation to discard changes in components.
+                                // Pass a stub in order not to decorate anything in case of no real errors.
+                                errors.kbcontentsValidationCancel = {stub: true};
+                                callback(null, fields, errors);
                             }, this)
                         });
                     } else if (!publishingDate) {

@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -25,22 +25,22 @@ $mod_strings = array(
     'LBL_OTHER_PHONE' => '기타 전화번호',
     'LBL_FAX_PHONE' => '팩스',
     'LBL_EMAIL_ADDRESS' => '이메일 주소',
-    'LBL_PRIMARY_ADDRESS' => '기본주소',
+    'LBL_PRIMARY_ADDRESS' => '기본 주소지',
     'LBL_PRIMARY_ADDRESS_STREET' => '기본주소',
-    'LBL_PRIMARY_ADDRESS_STREET_2' => '기본주소 2',
+    'LBL_PRIMARY_ADDRESS_STREET_2' => '기본 주소지 상세주소 2',
     'LBL_PRIMARY_ADDRESS_STREET_3' => '기본주소 3',
     'LBL_PRIMARY_ADDRESS_CITY' => '시',
-    'LBL_PRIMARY_ADDRESS_STATE' => '도',
+    'LBL_PRIMARY_ADDRESS_STATE' => '기본 주소지 도',
     'LBL_PRIMARY_ADDRESS_POSTALCODE' => '우편번호',
-    'LBL_PRIMARY_ADDRESS_COUNTRY' => '국가',
+    'LBL_PRIMARY_ADDRESS_COUNTRY' => '기본 주소지 국가',
     'LBL_ALT_ADDRESS' => '보조 주소',
     'LBL_ALT_ADDRESS_STREET' => '보조 주소',
     'LBL_ALT_ADDRESS_STREET_2' => '나머지주소 2',
     'LBL_ALT_ADDRESS_STREET_3' => '나머지주소 3',
     'LBL_ALT_ADDRESS_CITY' => '시',
-    'LBL_ALT_ADDRESS_STATE' => '도',
+    'LBL_ALT_ADDRESS_STATE' => '대체 주소지 광역시/도',
     'LBL_ALT_ADDRESS_POSTALCODE' => '우편번호:',
-    'LBL_ALT_ADDRESS_COUNTRY' => '국가',
+    'LBL_ALT_ADDRESS_COUNTRY' => '대체 주소지 국가',
     'LBL_STREET' => '기타 주소',
     'LBL_PRIMARY_STREET' => '주소',
     'LBL_ALT_STREET' => '기타 주소',

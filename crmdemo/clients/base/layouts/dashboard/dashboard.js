@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -370,7 +370,7 @@
     /**
      * @inheritdoc
      */
-    loadData: function(options, setFields) {
+    loadData: function(options) {
         // Dashboards store their own metadata as part of their model.
         // For search facet dashboard, we do not want to load the dashboard
         // metadata from the database. Instead, we build the metadata below.
@@ -398,11 +398,11 @@
 
             if (parent) {
                 parent.once('sync', function() {
-                    this._super('loadData', [options, setFields]);
+                    this._super('loadData', [options]);
                 }, this);
             }
         } else {
-            this._super('loadData', [options, setFields]);
+            this._super('loadData', [options]);
         }
     },
 
@@ -782,7 +782,7 @@
         ]);
 
         layout.removeComponent(0);
-        layout.loadData({}, false);
+        layout.loadData();
         layout.render();
     },
 

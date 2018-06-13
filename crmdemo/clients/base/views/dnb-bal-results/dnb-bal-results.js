@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -38,7 +38,9 @@
         app.events.on('dnbbal:invoke', this.invokeBAL, this);
         var originalMeta = app.metadata.getView('','dnb-bal-results');
         if (originalMeta.import_enabled_modules) {
-            this.import_enabled_modules = originalMeta.import_enabled_modules;
+            this.import_enabled_modules = _.filter(originalMeta.import_enabled_modules, function(module) {
+                return app.acl.hasAccess('edit', module);
+            });
         }
         this.paginationCallback = this.baseContactsBAL;
         this.rowTmpl = app.template.get(this.name + '.dnb-contact-row');

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -25,8 +25,6 @@
         'click .reset_button': 'removeAllPills'
     },
 
-    plugins: ['EllipsisInline'],
-
     /**
      * @inheritdoc
      */
@@ -48,15 +46,22 @@
      * or array of those corresponding to the pills to add.
      */
     addPill: function(models) {
-        var modelName;
+
+        models = _.isArray(models) ? models : [models];
+
+        if (_.isEmpty(models)) {
+            return;
+        }
+
         var pillsAttrs = [];
         var pillsIds = _.pluck(this.pills, 'id');
-        models = _.isArray(models) ? models : [models];
 
         _.each(models, function(model) {
             //FIXME : SC-4196 will remove this.
-            modelName = model.name || model.full_name || model.document_name ||
-                model.get('name') || model.get('full_name') || model.get('document_name');
+            var modelName = model.get('name') || model.get('full_name') ||
+                app.utils.formatNameLocale(model.attributes) ||
+                model.get('document_name');
+
             if (modelName && !_.contains(pillsIds, model.id)) {
                 pillsAttrs.push({id: model.id, name: modelName});
             }
@@ -187,17 +192,14 @@
      * @inheritdoc
      */
     bindDataChange: function() {
-        this.collection.on('sync', function(collection, fetchedRecords) {
-            if (!_.isArray(fetchedRecords)) {
-                return;
-            }
-            var recordsToAdd = _.filter(fetchedRecords, function(attrs) {
-                return this.massCollection.get(attrs.id);
-            }, this);
-            if (!recordsToAdd.length) {
-                return;
-            }
+        this.collection.on('sync', function() {
+
+            var recordsToAdd = this.collection.filter(_.bind(function(model) {
+                return this.massCollection.get(model.id);
+            }, this));
+
             this.addPill(recordsToAdd);
+
         }, this);
     },
 

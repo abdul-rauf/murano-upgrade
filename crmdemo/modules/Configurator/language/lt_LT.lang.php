@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -25,11 +25,11 @@ $mod_strings = array (
 	'DEFAULT_CURRENCY_SYMBOL'=>'Valiutos simbolis',
 	'DEFAULT_CURRENCY'=>'Valiuta pagal nutylėjimą',
 	'DEFAULT_DATE_FORMAT'=>'Datos formatas pagal nutylėjimą',
-	'DEFAULT_DECIMAL_SEP'					=> 'Dešimtainis simbolis',
+	'DEFAULT_DECIMAL_SEP'					=> 'Dešimtainės skirtukas',
 	'DEFAULT_LANGUAGE'=>'Kalba pagal nutylėjimą',
 	'DEFAULT_NUMBER_GROUPING_SEP'			=> '1000 skirtukas',
 	'DEFAULT_SYSTEM_SETTINGS'=>'Vartotojo sąsaja',
-	'DEFAULT_THEME'=> 'Tematika pagal nutylėjimą',
+	'DEFAULT_THEME'=> 'Standartinė tema',
 	'DEFAULT_TIME_FORMAT'=>'Laiko formatas pagal nutylėjimą',
 /*	'DISABLE_EXPORT'=>'Disable export',*/
 	'DISPLAY_RESPONSE_TIME'=>'Rodyti serverio atsakymo laikus',
@@ -42,7 +42,7 @@ $mod_strings = array (
 	'LBL_CONFIGURE_SETTINGS_TITLE' => 'Sistemos nustatymai',
 	'LBL_ENABLE_MAILMERGE' => 'Įjungti laiškų susijungimą',
 	'LBL_LOGVIEW' => 'Nustatyti įrašų parametrus',
-	'LBL_MAIL_SMTPAUTH_REQ'				=> 'Naudoti SMTP identifikaciją',
+	'LBL_MAIL_SMTPAUTH_REQ'				=> 'Naudoti SMTP identifikaciją?',
 	'LBL_MAIL_SMTPPASS'					=> 'SMTP slaptažodis:',
 	'LBL_MAIL_SMTPPORT'					=> 'SMTP portas:',
 	'LBL_MAIL_SMTPSERVER'				=> 'SMTP serveris:',
@@ -68,7 +68,7 @@ $mod_strings = array (
     'LBL_MODULE_FAVICON_HELP'   => 'If you are in a module with an icon, use the module&#39;s icon as the favicon, instead of the theme&#39;s favicon, in the browser tab.',
 	'LBL_MODULE_NAME'=>'Sistemos nustatymai',
 	'LBL_MODULE_NAME_SINGULAR' => 'Sistemos nustatymai',
-    'LBL_MODULE_ID'  => 'Konfigūratorius',
+    'LBL_MODULE_ID'  => 'Konfigūravimas',
 	'LBL_MODULE_TITLE'=>'Vartotojo sąsaja',
 	'LBL_NOTIFY_FROMADDRESS' => 'Siuntėjo adresas:',
 	'LBL_NOTIFY_SUBJECT' => 'El. laiško tema:',
@@ -80,7 +80,7 @@ $mod_strings = array (
 	'LBL_PROXY_ON_DESC'=>'Nustatyti proxy serverio adresą ir identifikavimo nustatymus',
 	'LBL_PROXY_ON'=>'Naudoti proxy serverį?',
 	'LBL_PROXY_PASSWORD'=>'Slaptažodis',
-	'LBL_PROXY_PORT'=>'Portas',
+	'LBL_PROXY_PORT'=>'Prievadas',
 	'LBL_PROXY_TITLE'=>'Proxy nustatymai',
 	'LBL_PROXY_USERNAME'=>'Vartotojo vardas',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Atstatyti',
@@ -107,7 +107,7 @@ $mod_strings = array (
     'LBL_LIST_ENTRIES_PER_SEARCH_HELP'=>'This setting is also used for the number of search results that display on the global search page.',
 	'LIST_ENTRIES_PER_SUBPANEL'=>'Maksimalus atvaizduojamų elementų kiekis subpanelyje',
     'TPL_LIST_ENTRIES_PER_SUBPANEL_HELP'=>'Recommended setting is below {{subpanelEntriesNum}} for acceptable performance levels. As additional fields are added to the listview, this number should be at the lower end of the recommended setting.',
-	'LBL_WIRELESS_LIST_ENTRIES' => 'Maksimalus įrašų skaičius sąrašo formoje',
+	'LBL_WIRELESS_LIST_ENTRIES' => 'Maksimalus atvaizduojamų elementų kiekis sąraše',
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus serveris',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Maksimalus panelių skaičius puslapyje',
 	'LOG_MEMORY_USAGE'=>'Sekti atminties vartojimą',
@@ -139,6 +139,7 @@ $mod_strings = array (
     'LBL_OC_STATUS_DESC' => 'Čia galite nurodyti kurie vartotojai turės prisijungimą prie klientinės versijos. Tą taip pat galėsite padaryti individualiai redaguojant vartotojo nustatymus.',
     'SESSION_TIMEOUT' => 'Baigėsi portalo sesija',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Portalo sesijos laiko limitas yra susijęs su portalo 6.5 ir senesnioms versijomis.',
+    'UPLOAD_MAXSIZE_UNITS' => 'bait.',
     'SESSION_TIMEOUT_UNITS' => 'sekundės',
     'LBL_LDAP_TITLE'=>'LDAP autentifikavimo palaikymas',
     'LBL_LDAP_ENABLE'=>'Šalinti LDAP',
@@ -146,16 +147,16 @@ $mod_strings = array (
     'LBL_LDAP_SERVER_PORT'=> 'Porto numeris:',
     'LBL_LDAP_ADMIN_USER'=> 'Vartotojo vardas:',
     'LBL_LDAP_ADMIN_USER_DESC'=>'Naudojamas SugarCRM vartotojo paieškai. [Gali reikalauti pilno kvalifikavimo]<br>Bindins anonimiškai jeigu neteikiama.',
-    'LBL_LDAP_ADMIN_PASSWORD'=> 'Identifikuojamas slaptažodis',
+    'LBL_LDAP_ADMIN_PASSWORD'=> 'Slaptažodis:',
 	'LBL_LDAP_AUTHENTICATION'=> 'Identifikacija:',
 	'LBL_LDAP_AUTHENTICATION_DESC'=>'Susieti LDAP serverį panaudojant specifinius vartotojo įgaliojimus',
-    'LBL_LDAP_AUTO_CREATE_USERS'=>'Automatiškai sukurti vartotojus:',
+    'LBL_LDAP_AUTO_CREATE_USERS'=>'Automatinis vartotojo sukūrimas:',
     'LBL_LDAP_USER_DN'=>'Vartotojo DN:',
 	'LBL_LDAP_GROUP_DN'=>'Grupės DN:',
 	'LBL_LDAP_GROUP_DN_DESC'=>'Pavyzdys: ou=groups,dc=example,dc=com',
 	'LBL_LDAP_USER_FILTER'=>'Vartotojo filtras:',
 	'LBL_LDAP_GROUP_MEMBERSHIP'=>'Priklauso grupei:',
-	'LBL_LDAP_GROUP_MEMBERSHIP_DESC'=>'Vartotojas turi priklausyti grupei',
+	'LBL_LDAP_GROUP_MEMBERSHIP_DESC'=>'Vartotojas turi būti grupės narys',
 	'LBL_LDAP_GROUP_USER_ATTR'=>'Vartotojo atributas:',
 	'LBL_LDAP_GROUP_USER_ATTR_DESC'=>'Unikalus identifikatorius, kuris patikrina ar vartotojas priklauso atitinkamai grupei, pavyzdžiui: <em>uid</em>',
 	'LBL_LDAP_GROUP_ATTR_DESC'=>'Grupės atributas, kuris naudojamas išfiltruoti vartotojo atributą, pavz: vartotojoUid',
@@ -327,24 +328,24 @@ $mod_strings = array (
     'LBL_FONT_LIST_CIDINFO_INFO' => "Examples :".
 "<ul><li>".
 "Chinese Traditional :<br>".
-"<pre>\$enc=&#39;UniCNS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;CNS1&#39;,&#39;Supplement&#39;=>0);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ac15.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniCNS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'CNS1\\',\\'Supplement\\'=>0);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ac15.php\\');</pre>".
 "</li><li>".
 "Chinese Simplified :<br>".
-"<pre>\$enc=&#39;UniGB-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;GB1&#39;,&#39;Supplement&#39;=>2);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ag15.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniGB-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'GB1\\',\\'Supplement\\'=>2);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ag15.php\\');</pre>".
 "</li><li>".
 "Korean :<br>".
-"<pre>\$enc=&#39;UniKS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;Korea1&#39;,&#39;Supplement&#39;=>0);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ak12.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniKS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'Korea1\\',\\'Supplement\\'=>0);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ak12.php\\');</pre>".
 "</li><li>".
 "Japanese :<br>".
-"<pre>\$enc=&#39;UniJIS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;Japan1&#39;,&#39;Supplement&#39;=>5);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_aj16.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniJIS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'Japan1\\',\\'Supplement\\'=>5);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_aj16.php\\');</pre>".
 "</li></ul>".
 "More help : www.tcpdf.org",
     'LBL_FONT_LIST_FILESIZE' => 'Šrifto dydis (KB)',

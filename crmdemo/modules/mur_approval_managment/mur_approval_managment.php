@@ -33,7 +33,7 @@ require_once('modules/mur_approval_managment/mur_approval_managment_sugar.php');
 class mur_approval_managment extends mur_approval_managment_sugar {
 	
 	function mur_approval_managment(){	
-		parent::mur_approval_managment_sugar();
+		parent::__construct();
 	}
 	
 }

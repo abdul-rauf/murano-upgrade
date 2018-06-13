@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -34,8 +34,8 @@ $app_list_strings = array (
     'Quotes' => 'Oferte',
     'Products' => 'Produse din ofertă',
     'WebLogicHooks' => 'Controale logică web',
-    'ProductCategories' => 'Categorii de Produse',
-    'ProductTypes' => 'Tipuri produs',
+    'ProductCategories' => 'Categorii de produse',
+    'ProductTypes' => 'Tipuri de produse',
     'ProductTemplates' => 'Catalog de produse',
     'Reports' => 'Rapoarte',
     'Forecasts' => 'Previziuni',
@@ -45,7 +45,7 @@ $app_list_strings = array (
     'Quotas' => 'Contingente',
     'Teams' => 'Echipe',
     'TeamNotices' => 'Anunturile Echipei',
-    'Manufacturers' => 'Fabrici',
+    'Manufacturers' => 'Producători',
     'Activities' => 'Activitati',
     'Comments' => 'Comentarii',
     'Subscriptions' => 'Abonamente',
@@ -53,10 +53,10 @@ $app_list_strings = array (
     'Feeds' => 'RSS',
     'iFrames'=>'Site-urile Mele',
     'TimePeriods'=>'Perioade de timp:',
-    'TaxRates'=>'Ritmul taxelor',
+    'TaxRates'=>'Rate de impozitare',
     'ContractTypes' => 'Tipuri Contracte',
     'Schedulers'=>'Programatori',
-    'Project'=>'Proiect',
+    'Project'=>'Proiecte',
     'ProjectTask'=>'Sarcina de proiect',
     'Campaigns'=>'Campanii',
     'CampaignLog'=>'Jurnal Campanii',
@@ -74,13 +74,13 @@ $app_list_strings = array (
     'Employees' => 'Angajati',
     'Administration' => 'Administrare',
     'ACLRoles' => 'Roluri',
-    'InboundEmail' => 'Grup Cont Email',
+    'InboundEmail' => 'E-mail primit',
     'Releases' => 'Lansări',
     'Prospects' => 'Tinte',
     'Queues' => 'Cozi',
     'EmailMarketing' => 'Comercializarea Emailurilor',
     'EmailTemplates' => 'Email sabloane',
-    'SNIP' => "Arhiva email",
+    'SNIP' => "Arhivă e-mail",
     'ProspectLists' => 'Lista de Tinte',
     'SavedSearch' => 'Căutări salvate',
     'UpgradeWizard' => 'Upgrade asistent',
@@ -156,7 +156,7 @@ $app_list_strings = array (
     'TimePeriods'=>'Perioada de timp:',
     'TaxRates'=>'Rata Taxa',
     'ContractTypes' => 'Tip Contract',
-    'Schedulers'=>'Progamator',
+    'Schedulers'=>'Programator',
     'Campaigns'=>'Campanie',
     'CampaignLog'=>'Jurnal Campanii',
     'Project'=>'Proiect',
@@ -180,12 +180,12 @@ $app_list_strings = array (
     'Employees' => 'Angajat',
     'Administration' => 'Administrare',
     'ACLRoles' => 'Rol:',
-    'InboundEmail' => 'Grup Cont Email',
+    'InboundEmail' => 'E-mail primit',
     'Releases' => 'Lansare',
     'Queues' => 'Coada',
     'EmailMarketing' => 'Comercializarea Emailurilor',
     'EmailTemplates' => 'Sablon Email',
-    'SNIP' => "Arhiva email",
+    'SNIP' => "Arhivă e-mail",
     'SavedSearch' => 'Căutare salvată',
     'UpgradeWizard' => 'Upgrade asistent',
     'Trackers' => 'Tracker',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Filtru',
     'Comments' => 'Comentariu',
     'Currencies' => 'Moneda',
-    'Project' => 'Proiect',
     'ProductTemplates' => 'Model produs',
-    'ProductCategories' => 'Categoria Produsului',
     'ProductTypes' => 'Tipul produsului',
     'Shippers' => 'Transportator',
     'Subscriptions' => 'Abonament',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Vin",
                 '7'=>"Sam",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Dum",
+            '2'=>"Lun",
+            '3'=>"Mar",
+            '4'=>"Mie",
+            '5'=>"Joi",
+            '6'=>"Vin",
+            '7'=>"Sâm",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Dum',
         '1' => 'Lun',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'an(i)',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Până la',
+        'Occurrences' => 'Evenimente',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Niciunul',
+        'Each' => 'Fiecare',
+        'On' => 'Pe',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'primul',
+        'second' => 'al doilea',
+        'third' => 'al treilea',
+        'fourth' => 'al patrulea',
+        'fifth' => 'al cincilea',
+        'last' => 'ultimul',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Duminică',
+        'Mon' => 'Luni',
+        'Tue' => 'Marţi',
+        'Wed' => 'Miercuri',
+        'Thu' => 'Joi',
+        'Fri' => 'Vineri',
+        'Sat' => 'Sâmbătă',
+        'Day' => 'Zi',
+        'WD'  => 'Zi lucrătoare',
+        'WE'  => 'Zi de weekend'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Mijloc',
         'end' => 'Sfarsit',
         'top' => 'Top',
+        'total' => 'Total',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Palnie',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Deschis',
       'dark' => 'Închis',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Muta',
@@ -1722,7 +1841,7 @@ $app_list_strings = array (
             "17" => array("code" => "KHO", "name" => "Khost"),
             "18" => array("code" => "KNR", "name" => "Konar"),
             "19" => array("code" => "LAG", "name" => "Laghman"),
-            "20" => array("code" => "LOW", "name" => "Lowgar"),
+            "20" => array("code" => "SCĂZUT", "name" => "Lowgar"),
             "21" => array("code" => "NAN", "name" => "Nangrahar"),
             "22" => array("code" => "NIM", "name" => "Nimruz"),
             "23" => array("code" => "NUR", "name" => "Nurestan"),
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "Christ Church"),
-            "2" => array("code" => "AND", "name" => "Saint Andrew"),
+            "2" => array("code" => "SI", "name" => "Saint Andrew"),
             "3" => array("code" => "GEO", "name" => "Saint George"),
             "4" => array("code" => "JAM", "name" => "Saint James"),
             "5" => array("code" => "JOH", "name" => "Saint John"),
@@ -2394,7 +2513,7 @@ $app_list_strings = array (
             "3" => array("code" => "KB", "name" => "Keb"),
             "4" => array("code" => "KK", "name" => "Kaoh Kong"),
             "5" => array("code" => "KL", "name" => "Kandal"),
-            "6" => array("code" => "KM", "name" => "Kampong Cham"),
+            "6" => array("code" => "km", "name" => "Kampong Cham"),
             "7" => array("code" => "KN", "name" => "Kampong Chhnang"),
             "8" => array("code" => "KO", "name" => "Kampong Som"),
             "9" => array("code" => "KP", "name" => "Kampot"),
@@ -2595,7 +2714,7 @@ $app_list_strings = array (
             "21" => array("code" => "MET", "name" => "Meta"),
             "22" => array("code" => "NAR", "name" => "Narino"),
             "23" => array("code" => "NDS", "name" => "Norte de Santander"),
-            "24" => array("code" => "PUT", "name" => "Putumayo"),
+            "24" => array("code" => "PLASARE", "name" => "Putumayo"),
             "25" => array("code" => "QUI", "name" => "Quindio"),
             "26" => array("code" => "RIS", "name" => "Risaralda"),
             "27" => array("code" => "SAP", "name" => "San Andres y Providencia"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "SI", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "SAU", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Naţiunile din Sud - Naţionalităţi"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "Sumba"),
+            "22" => array("code" => "SUMA", "name" => "Sumba"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3335,7 +3454,7 @@ $app_list_strings = array (
             "5" => array("code" => "M", "name" => "Saint Mark"),
             "6" => array("code" => "P", "name" => "Saint Patrick"),
             "7" => array("code" => "C", "name" => "Carriacou"),
-            "8" => array("code" => "Q", "name" => "Petit Martinique")
+            "8" => array("code" => "T", "name" => "Petit Martinique")
         ),
         /* Guadeloupe */
         "GP" => array(
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "SAU", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "SAU", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parish"),
             "4" => array("code" => "MAN", "name" => "Manchester Parish"),
             "5" => array("code" => "POR", "name" => "Portland Parish"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "SI", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parish"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parish"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parish"),
@@ -4109,7 +4228,7 @@ $app_list_strings = array (
             "11" => array("code" => "BAT", "name" => "Batroun"),
             "12" => array("code" => "BSH", "name" => "Bsharri"),
             "13" => array("code" => "KOU", "name" => "Koura"),
-            "14" => array("code" => "MIN", "name" => "Miniyeh-Danniyeh"),
+            "14" => array("code" => "MINIM", "name" => "Miniyeh-Danniyeh"),
             "15" => array("code" => "TRI", "name" => "Tripoli"),
             "16" => array("code" => "ZGH", "name" => "Zgharta"),
             "17" => array("code" => "ALE", "name" => "Aley"),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "SAU", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -5427,7 +5546,7 @@ $app_list_strings = array (
             "26" => array("code" => "KZ", "name" => "Kazan"),
             "27" => array("code" => "KE", "name" => "Kemerovo"),
             "28" => array("code" => "KH", "name" => "Khabarovsk"),
-            "29" => array("code" => "KM", "name" => "Khanty-Mansiysk"),
+            "29" => array("code" => "km", "name" => "Khanty-Mansiysk"),
             "30" => array("code" => "KO", "name" => "Kostroma"),
             "31" => array("code" => "KR", "name" => "Krasnodar"),
             "32" => array("code" => "KN", "name" => "Krasnoyarsk"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "SAU", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -5911,7 +6030,7 @@ $app_list_strings = array (
             "4" => array("code" => "HL", "name" => "Hua-lien"),
             "5" => array("code" => "IL", "name" => "I-lan"),
             "6" => array("code" => "KH", "name" => "Kao-hsiung county"),
-            "7" => array("code" => "KM", "name" => "Kin-men"),
+            "7" => array("code" => "km", "name" => "Kin-men"),
             "8" => array("code" => "LC", "name" => "Lien-chiang"),
             "9" => array("code" => "ML", "name" => "Miao-li"),
             "10" => array("code" => "NT", "name" => "Nan-t'ou"),
@@ -6300,7 +6419,7 @@ $app_list_strings = array (
             "6" => array("code" => "DO", "name" => "Donets'k"),
             "7" => array("code" => "IV", "name" => "Ivano-Frankivs'k"),
             "8" => array("code" => "KL", "name" => "Kharkiv Kherson"),
-            "9" => array("code" => "KM", "name" => "Khmel'nyts'kyy"),
+            "9" => array("code" => "km", "name" => "Khmel'nyts'kyy"),
             "10" => array("code" => "KR", "name" => "Kirovohrad"),
             "11" => array("code" => "KV", "name" => "Kiev"),
             "12" => array("code" => "KY", "name" => "Kyyiv"),
@@ -6482,7 +6601,7 @@ $app_list_strings = array (
             "46" => array("code" => "MP", "name" => "Insulele Mariane de Nord"),
             "47" => array("code" => "OH", "name" => "Ohio"),
             "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "49" => array("code" => "SAU", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pennsylvania"),
             "52" => array("code" => "PR", "name" => "Puerto Rico"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "SAU", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Urmareste linkul',
   'LBL_TOGGLE_VISIBILITY' => 'Modifica vizibilitatea', // Record view header panel element
   'LBL_ACTIVITIES' => 'Flux de activităţi',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. Toate drepturile rezervat.',
-  'LBL_TRADEMARK' => 'SugarCRM este marca inregistrata a SugarCRM, Inc. Toate celelalte nume de companii sau produse sunt marci inregistrate ale companiilor cu care sunt asociate.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ si Sugar™ sunt marci inregistrate ale SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Trimite invitatie',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar şi Cubul 3-D sunt mărci comerciale înregistrate ale SugarCRM Inc. '.
+        'Toate celelalte denumiri de companii şi produse care sunt utilizate sau care apar în acest produs pot fi mărci comerciale ale '.
+        'companiilor respective cu care sunt asociate.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ si Sugar™ sunt marci inregistrate ale SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Trimite invitatie',
   'LBL_INVITEES' => 'Invitati',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Invitatul nu va primi invitaţia dvs.',
   'LBL_SELECT_ACTION_LABEL' => 'Selecteaza actiunea',
   'LBL_TOGGLE_DRAWER' => 'Extinde/restrange fereastra',
   'LBL_TOUR_NEXT' => 'Pagina urmatoare',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Adauga' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Logo companie' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Calendar' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'navigare modul principal',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'comutare subpanou',
+
     'LBL_ADVANCED' => 'Avansat',
     'LBL_BASIC' => 'Simplu',
     'LBL_MODULE_FILTER' => 'Filtreaza dupa...',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Echipe',
     'LBL_TEAM_SET_ID' => 'ID set echipă',
     'LBL_TEAM_SET'=>'Team Set',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Echipe selectate',
     'LBL_SEARCH_UNAVAILABLE' => 'Cautare indisponibila, te rugam sa incerci mai tarziu.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Nu este specificata nicio echipa principala',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Eroare in incercarea de a elimina echipa principala cu id [{0}] pentru modulul [{1}] cu id [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Motorul de căutare nu este disponibil momentan.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'S-a produs o eroare la momentul rulării motorului de căutare. Contactaţi administratorul de sistem.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Un câmp care este blocat de un proces nu poate fi editat.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'S-a produs o situaţie din cauza unei erori sau defecţiuni generale. Motivele acestei excepţii variază, dar, în general, nu fac obiectul unei excepţii API specifice.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Indică faptul că serverul este ocupat, supraîncărcat sau defect.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'Procesul de fundal al motorului de căutare nu este disponibil momentan din cauza unei probleme de conexiune. Verificaţi conectivitatea şi configurarea în Admin->căutare->test.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'S-a detectat o excepție la momentul execuţiei în motorul de căutare. Pentru detalii suplimentare, consultaţi sugarcrm.log.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Un câmp care este momentan blocat de un proces în curs de executare nu poate fi editat.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s este blocat de un proces în curs de executare şi nu poate fi editat.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s sunt blocate de un proces în curs de executare şi nu pot fi editate.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Un fişier cu acelaşi nume există deja în sistem.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Această Perioadă de timp are deja sub-perioade',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Perioadele de timp secundare nu pot avea sub-perioade',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Imposibil de recuperat orice Perioade de timp de tipul: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Nu există Perioade de timp active pentru setările curente.',
     'LBL_CURRENT_TIMEPERIOD' => 'Perioadă curentă de timp',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Perioadă anterioară de timp',
     'LBL_NEXT_TIMEPERIOD' => 'Perioada de timp următoare',
@@ -8549,7 +8681,7 @@ $app_strings = array (
     'LBL_BY' => 'de',
     'LBL_CALLS'=>'Apeluri',
     'LBL_CALL'=>'Apel',
-    'LBL_CAMPAIGNS_SEND_QUEUED' => 'Trimite emailurile de campanie din coada',
+    'LBL_CAMPAIGNS_SEND_QUEUED' => 'Trimite e-mailurile de campanie din coadă',
     'LBL_SUBMIT_BUTTON_LABEL' => 'Trimite',
     'LBL_CASE'=>'Tichet',
     'LBL_CASES'=>'Tichete',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Alege campul...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Alege operaturul...',
     'LBL_FILTER_CREATE_NEW' => 'Creează',
+    'LBL_FILTER_CREATE_FILTER' => 'Creare filtru nou',
+    'LBL_FILTER_EDIT_FILTER' => 'Editare filtru',
     'LBL_FILTER_ALL_RECORDS' => 'Toate inregistrarile',
     'TPL_FILTER_SAVE' => 'Ai creat cu succes filtrul {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'De la',
@@ -8655,9 +8789,9 @@ $app_strings = array (
     'LBL_EXPORT_ALL' => 'Exporta tot',
     'LBL_EXPORT' => 'Exporta',
     'LBL_FAVORITES_FILTER' => 'Favoritele mele:',
-    'LBL_GLOBAL_SEARCH' => 'Cautare globala',
-    'LBL_GLOBAL_SEARCH_MODULE_FILTER' => 'Filtru pentru modulul de cautare globala',
-    'LBL_GLOBAL_SEARCH_RUN' => 'Ruleaza cautare globala',
+    'LBL_GLOBAL_SEARCH' => 'Căutare globală',
+    'LBL_GLOBAL_SEARCH_MODULE_FILTER' => 'Filtru pentru modulul de căutare globală',
+    'LBL_GLOBAL_SEARCH_RUN' => 'Rulează căutare globală',
     'LBL_GO_BUTTON_LABEL' => 'Executa',
     'LBL_GS_HELP' => 'Campurile din acest modul folosite in cautare apar mai sus.  Textul marcat se potriveste cu criteriile de cautare.',
     'LBL_HIDE'=>'Ascunde',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Judet:',
     'LBL_STATUS_UPDATED'=>'Statusul tau pentru acest eveniment a fost actualizat!',
+    'LBL_STATUS_NOT_UPDATED' => 'Starea dvs. pentru acest eveniment nu a fost actualizată.',
     'LBL_STATUS'=>'Status:',
     'LBL_STREET'=>'Strada',
     'LBL_SUBJECT' => 'Subiect',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Toate drepturile rezervate.<br />SugarCRM este o marcă comercială a SugarCRM, Inc. Tote celelalte nume de companii şi produse pot fi mărci comerciale ale respectivelor companii cu care sunt asociate.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Toate drepturile rezervate.<br />SugarCRM, Sugar şi Cubul 3-D sunt mărci comerciale înregistrate ale SugarCRM Inc. '.
+        'Toate celelalte denumiri de companii şi produse care sunt utilizate sau care apar în acest produs pot fi mărci comerciale ale '.
+        'companiilor respective cu care sunt asociate.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Activitate programată finalizată',
@@ -9177,7 +9316,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Eroare. Aţi introdus un operator nevalid.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Eroare. Aţi introdus un filtru nevalid.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Importul nu a reuşit. Un câmp de grup este parţial blocat în Definiţie proces. Aceste câmpuri trebuie să fie deblocate în Definiţie proces pentru ca definiţia să fie importată.',
+    'ERROR_EXP_DATE_LOW' => 'Eroare. Data de expirare nu poate fi înainte de data publicării.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Eroare. Starea Aprobat necesită data de publicare.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Data publicare este goală.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9223,7 +9363,7 @@ $app_strings = array (
     'LBL_SEARCH_AND_SELECT_ELLIPSIS' => 'Căutaţi şi selectaţi...',
     'LBL_SEARCH_SELECT_MODULE' => 'Selectaţi {{module}}...',
     'LBL_DETAILVIEW'=>'Vizualizare detalii',
-    'LBL_LISTVIEW'=>'List View',
+    'LBL_LISTVIEW'=>'Vizualizare listă',
     'LBL_EDITVIEW'=>'Editare vizualizare',
     'LBL_SEARCHFORM'=>'Formular de căutare',
     'LBL_SAVED_SEARCH_ERROR' => 'Atribuiţi un nume acestei vizualizări.',
@@ -9307,6 +9447,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => ' coloane pot fi afişate.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Tabloul de bord',
     'LBL_DASHBOARD_BWC' => 'Tabloul meu de bord moştenit',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Tablou de bord',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Ajutor tablou de bord',
@@ -9334,14 +9475,11 @@ $app_strings = array (
     'LBL_FACET_ASSIGNED_TO_ME' => 'Alocat mie',
     'LBL_FACET_NO_DATA' => 'Nu există date pentru această faţetă.',
 
-    'LBL_DASHLET_LISTVIEW_NAME' => 'List View',
+    'LBL_DASHLET_LISTVIEW_NAME' => 'Vizualizare listă',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Listează înregistrări dintr-un anumit modul conform cu criteriile pe care le definiţi.',
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => '{{module}} mele',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Ştiri',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Flux de stiri Google pentru Cont corelat',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Indicatori de performanta pentru Oportunitate',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Metrică de Oportunitate pentru Contul asociat. Necesită abonament D&B.',
@@ -9412,7 +9550,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Nu s-a găsit nicio înregistrare moemntan.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Sumar tichete',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'News Feed',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interacţiuni',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Note & Atasamente',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notele & Atasamentele apartin inregistrarii',
@@ -9509,7 +9646,7 @@ $app_strings = array (
     'LBL_DNB_INF_INF_OVERVIEW' => 'Overview',
 
     /*DNB Contacts Dashlet*/
-    'LBL_DNB_CONTACT' => 'D&B: Contact Information',
+    'LBL_DNB_CONTACT' => 'D&B: Informaţii de contact',
     'LBL_DNB_CNTCT_LOADING' => 'Se încarcă contacte din D&B',
     'LBL_DNB_CONTACT_DESC' => 'Se afişează contacte din D&B. Necesită abonament D&B.',
     'LBL_DNB_CONTACT_LONG_DESC' => 'Contacte D&B vă oferă acces la peste 100 mil. contacte. Căutaţi după prenume, nume şi funcţie',
@@ -9924,7 +10061,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => 'Selectaţi funcţia',
     'LBL_DNB_BAL_ORG_NAME' => 'Numele organizaţiei',
     'LBL_DNB_BAL_IMPORT_AS' => 'Importare ca:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Numele organizaţiei',
+    'LBL_DNB_BAL_ORG_NAME' => 'Numele companiei',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'în milioane USD',
@@ -9983,7 +10120,7 @@ $app_strings = array (
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Cele mai utile articole publicate din baza de cunoştinţe',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Afişează cele mai apreciate şi mai vizualizate articole din baza de cunoştinţe',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtrat după {{label}} "{{value}}"',
 
@@ -10022,6 +10159,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Introduceţi un nume de pagină.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Sursa mea de Informaţii',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Sursa de informaţii a echipei mele",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Graficul cu surse de informaţii pentru vânzări',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Afişează graficul cu surse de informaţii actual.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'No Image',
 
@@ -10293,6 +10437,8 @@ $app_strings = array (
     'LBL_SELECT_THIS_ROW_TITLE' => 'Selectaţi acest rând',
     'LBL_TEAM_SELECTED_TITLE' => 'Echipă selectată ',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Selectaţi pentru a seta această echipă ca principală',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Echipă marcată ca Selectată pe bază de echipă ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Marcaţi această echipă ca Selectată pe bază de echipă',
     'LBL_SEARCH_AND_SELECT' => 'Căutare şi selectare {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Căutare şi adăugare {{module}}',
 
@@ -10381,6 +10527,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Previzualizare dezactivată: Nu există date disponibile',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Previzualizare dezactivată: în vizualizare ca înregistrare curentă',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Previzualizare dezactivată: Înregistrare eliminată sau nu există acces la înregistrare',
+    'LBL_PREVIEW_PREVIOUS' => 'Previzualizare anterior',
+    'LBL_PREVIEW_NEXT' => 'Previzualizare următor',
+    'LBL_PREVIEW_CLOSE' => 'Previzualizare închis',
     'LBL_STREAM_NO_RECORDS' => 'Aceasta inregistrare nu contine nicio note. Poti adauga o nota apasand linkul Adauga nota.',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}} duplicate găsite.',
     'LBL_NO_DUPLICATES_FOUND' => 'Nu s-au găsit duplicate.',
@@ -10400,6 +10549,7 @@ $app_strings = array (
         'Număr nevalid de înregistrări trecute. Intervalul valid este de la {{minRecords}} la {{maxRecords}} înregistrări.',
     'LBL_MERGE_NO_ACCESS' =>
         'Nu aveţi acces pentru a efectua această acţiune. Cel puţin o înregistrare trebuie să fie editabilă.',
+    'LBL_MERGE_LOCKED' => 'Unele dintre înregistrările selectate pentru fuziune conţin câmpuri care sunt blocate pentru editare de un proces şi nu pot fi fuzionate în acest moment.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10739,7 +10889,7 @@ $app_strings = array (
     'LBL_MOBILE_DEFAULT_DASHBOARD' => 'Tablou de bord selectat',
     'LBL_MOBILE_DEFAULT_DASHLET' => 'Tablou selectat',
     'LBL_ALL_DASHLETS' => 'Toate Tablourile',
-    'LBL_MOBILE_GLOBAL_SEARCH' => 'Cautare globala',
+    'LBL_MOBILE_GLOBAL_SEARCH' => 'Căutare globală',
     'LBL_MOBILE_ACTIVITYSTREAM_POST_PLACEHOLDER' => 'Tastaţi @ pentru a menţiona un utilizator. Tastaţi # pentru a face trimitere la o înregistrare.',
     'LBL_MOBILE_NEW_COMMENT' => 'Comentariu nou',
     'LBL_RECENTLY_VIEWED' => 'Vizualizate recent',
@@ -10864,16 +11014,15 @@ $app_strings = array (
     'LBL_TIMEZONE_DIFFERENT_LINK' => 'Reglaţi fusul orar.',
     //Admin wizard links
     'LBL_WIZ_SYSTEM_LOCALE_SETTINGS' => 'Locale Settings',
-    'LBL_WIZ_EMAIL_SETTINGS' => 'Email Settings',
+    'LBL_WIZ_EMAIL_SETTINGS' => 'Setări de e-mail',
     'LBL_WIZ_IMPORT_DATA' => 'Import date',
     'LBL_WIZ_CREATE_USERS' => 'Create Users',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Setări sistem',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Password',
     'LBL_CURRENT_PASSWORD'				=> 'Current Password',
-    'LBL_SET_NEW_PASSWORD'              => 'Introduceţi parola',
     'LBL_NEW_PASSWORD1'                 => 'New Password',
     'LBL_NEW_PASSWORD2'                 => 'Confirm Password',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Please enter your password confirmation.',
@@ -10881,13 +11030,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> 'Please enter your current password.',
     'ERR_REENTER_PASSWORDS' => 'Parolele trebuie să fie identice.',
     'ERR_PASSWORD_MISMATCH' => 'Parola introdusă nu se potriveşte cu cea din sistemul nostru.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Parola dvs. a fost actualizată cu succes.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Cannot send password',
     'LBL_REQUEST_PASSWORD' => 'Solicitare parolă',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Eroare: A existat o problemă la actualizarea parolei pentru acest utilizator.',
     'LBL_INCORRECT_PASSWORD' => 'Eroare: Parolă incorectă.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Language Preference:',
+    'LBL_PREFERRED_LANGUAGE' => 'Preferinţă de limbă:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Selectaţi un raport',
@@ -10917,6 +11065,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => 'Serverul a întâmpinat o eroare şi nu a putut finaliza solicitarea dvs.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Încercaţi din nou. Dacă eroarea persistă, contactaţi administratorul Sugar.',
     'ERR_HTTP_500_ACTION' => 'Contactaţi serviciul de asistenţă tehnică.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 Eroare server intern',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Serverul a întâmpinat o eroare temporară şi ar putea să nu finalizeze cererea dvs.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Încercaţi din nou. Dacă eroarea persistă, contactaţi administratorul Sugar.',
+    'ERR_HTTP_502_ACTION' => 'Contactaţi serviciul de asistenţă tehnică.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 Eroare server intern',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Serverul nu este disponibil pentru a finaliza cererea dvs.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Încercaţi din nou mai târziu. Dacă eroarea persistă, contactaţi administratorul Sugar.',
+    'ERR_HTTP_503_ACTION' => 'Contactaţi serviciul de asistenţă tehnică.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Randarea vizualizării a eşuat',
     'ERR_RENDER_FAILED_MSG' => 'Randarea unei vizualizări a eşuat',
@@ -10967,7 +11127,7 @@ $app_strings = array (
     'TPL_TABBED_DASHLET_GROUP_BUTTON_LABEL' => 'Elemente echipă',
 
     // history dashlet
-    'LBL_HISTORY_DASHLET' => 'History',
+    'LBL_HISTORY_DASHLET' => 'Istoric',
     'LBL_HISTORY_DASHLET_DESCRIPTION' => 'Dashlet-ul Istoric afiseaza intalnirile finalizate, apelurile logate, emailurile primite si emailurile trimise.',
     'LBL_HISTORY_DASHLET_EMAIL_SINGULAR' => 'Email',
     'LBL_HISTORY_DASHLET_EMAIL_PLURAL' => 'Emails',
@@ -10989,7 +11149,7 @@ $app_strings = array (
 
     // active tasks dashlet
     'LBL_ACTIVE_TASKS_DASHLET' => 'Task-uri active',
-    'LBL_ACTIVE_TASKS_DASHLET_DESCRIPTION' => 'Dashlet-ul <em>Task-uri active</em> afiseaza task-urile scadente si viitoare.',
+    'LBL_ACTIVE_TASKS_DASHLET_DESCRIPTION' => 'Dashletul Sarcini active afişează sarcinile scadente şi viitoare.',
     'LBL_ACTIVE_TASKS_DASHLET_DUE_NOW' => 'Dată limită acum',
     'LBL_ACTIVE_TASKS_DASHLET_UPCOMING' => 'Upcoming',
     'LBL_ACTIVE_TASKS_DASHLET_TODO' => 'De făcut',
@@ -11000,7 +11160,7 @@ $app_strings = array (
     'LBL_LIST_REMOVE_EMAIL_INFO' => 'A existat un e-mail suplimentar pe înregistrarea pe care o modificaţi. Acum este principal şi a fost completat automat mai jos.',
     // inactive tasks dashlet
     'LBL_INACTIVE_TASKS_DASHLET' => 'Task-uri inactive',
-    'LBL_INACTIVE_TASKS_DASHLET_DESCRIPTION' => 'Dashlet-ul <em>Task-uri</em> afiseaza task-urile finalizate sau realocate.',
+    'LBL_INACTIVE_TASKS_DASHLET_DESCRIPTION' => 'Dashletul Sarcini afişează sarcinile finalizate sau realocate.',
     'LBL_INACTIVE_TASKS_DASHLET_DEFERRED' => 'Deferred',
     'LBL_INACTIVE_TASKS_DASHLET_COMPLETED' => 'Completed',
     'TPL_INACTIVE_TASKS_DASHLET_TIME_RELATIVE' => 'ultima modificare {{relativetime}} în data {{date}} la ora {{time}}',
@@ -11050,6 +11210,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => 'Error:',
     'LBL_ALERT_TITLE_LOADING' => 'Loading',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Versiunea browserului dvs. nu mai este acceptată sau utilizaţi un browser neacceptat.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Sunt recomandate următoarele versiuni de browser: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Consultaţi pagina {{link}} pentru browserele recomandate.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Platforme acceptate',
 
@@ -11103,6 +11264,9 @@ $app_strings = array (
     'ERR_GENERIC_SERVER_ERROR' => 'A existat o eroare în momentul conectării la server. Încercaţi din nou.',
     'ERR_RESOLVE_ERRORS' => 'Remediaţi toate erorile înainte de a continua.',
 
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Reîmprospătaţi lista',
+
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'more',
     'LBL_TEXTAREA_LESS' => 'less',
@@ -11114,7 +11278,7 @@ $app_strings = array (
     'LBL_DASHLET_MOVE' => 'Move',
     'LBL_DASHLET_CLOSE' => 'Close',
 
-    'LBL_DASHLET_FORECAST_NAME' => 'In Forecast',
+    'LBL_DASHLET_FORECAST_NAME' => 'În previziune',
     'LBL_DASHLET_FORECASTS_CHART_NAME' => 'Tabel bară previziuni',
     'LBL_DASHLET_FORECAST_PARETO_CHART_NAME' => 'Tabel bară previziuni',
     'LBL_DASHLET_FORECASTS_FOR_CHART_NAME' => 'Previziune pentru',
@@ -11206,14 +11370,17 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
 
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_SUBJECT' => 'Setări server SMTP lipsă',
     'TPL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_DESCRIPTION' => 'Pentru a trimite notificări de atribuire a înregistrărilor, trebuie să se configureze un server SMTP în {{emailSettingsUrl}}.',
-    'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'Email Settings',
+    'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'Setări de e-mail',
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM le permite utilizaţilor performanţi să efectueze rapid anumite operaţii cu comenzi rapide de la tastatură, pentru a spori productivitatea. Tabelele din partea dreaptă descriu comenzile rapide disponibile, preucm şi tastele şi acţiunile pe care le execută.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Taste acceptate</h1><ul><li>toate caracterele alfanuemrice şi simbolurile</li><li>shift, ctrl, alt, command, mod (ctrl în Windows/Linux şi command pe computere Mac)</li><li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>Caracteristici acceptate</h1><ul><li>Combinaţie de taste: ctrl+m</li><li>Taste multiple: m,ctrl+m</li><li>Secvenţă de taste: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Comenzi rapide globale',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Comenzi rapide contextuale',
     'LBL_SHORTCUT_KEY_KEY' => 'Key',
     'LBL_SHORTCUT_FUNCTION' => 'Funccţie',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Configuraţi comenzile rapide contextuale',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Nicio comandă rapidă contextuală de configurat',
     'LBL_SHORTCUT_HELP' => 'Afişare pagină de ajutor comenzi rapide',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Comutaţi meniul de creare rapidă',
     'LBL_SHORTCUT_SEARCH' => 'Concentraţi-vă pe câmpul de căutare globală',
@@ -11261,6 +11428,9 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Selectaţi toate elementele dintr-un câmp cu selecţii multiple',
     'LBL_SHORTCUT_SWEETSPOT' => 'Comutaţi bara Sweet Spot',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Hide the Sweet Spot bar',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Salvaţi configuraţia',
+    'LBL_SHORTCUT_RESTORE' => 'Restabiliţi implicite',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'A apărut o eroare în timpul salvării tastelor personalizate de comandă rapidă pe server. Încercaţi din nou.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Setări {{module}}',
@@ -11283,13 +11453,20 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
     'LBL_CALENDAR_RECURRENCE' => "Repetare",
     'LBL_CALENDAR_REMINDERS' => "Mementouri",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Dată personalizată",
     'LBL_CALENDAR_REPEAT_TYPE' => "Repetă tip",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Repetă interval",
     'LBL_CALENDAR_REPEAT_DOW' => "Repetă în zilele săptămânii",
+    'LBL_CALENDAR_REPEAT' => "Repetare",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Repetă până la",
     'LBL_CALENDAR_REPEAT_COUNT' => "Repetă evenimentele",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Repetare selector",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Ziua(zilele) din lună",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Repetaţi ordinale",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Repetaţi unitate",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Modificările repetate trebuie efectuate utilizând prima înregistrare din serie.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Regulile de repetare nu conduc la generarea unui eveniment.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Participare',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Refuz',
@@ -11309,17 +11486,23 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM necesită javascript. Vă rugăm să activaţi javascript pentru a continua să utilizaţi SugarCRM.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Datele serializate nu au putut fi deserializate',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Datele serializate nu au putut fi deserializate, deoarece conţin referiri la obiecte sau clase',
 
     'LBL_FIELD_TRIMMED' => 'Câmpul a fost scurtat din cauza depăşirii limitei maxime de caractere.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Câmpul depăşeşte limita maximă de caractere.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Ultimele 7 Zile',
     '30' => 'Ultimele 30 Zile',
     '90' => 'Ultimul Trimestru',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11424,13 +11607,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Expirat',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Schita',
-    'Expired' => 'Expirat',
-    'In Review' => 'In revizuire',
-    'Published' => 'Publicat',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Acţiuni admin--',
@@ -11442,57 +11618,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Ştergere articole selectate',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Are ataşamente',
-        'none' => 'Nu are niciunul',
-        'mime' => 'Specificaţi tipul imitării',
-        'name' => 'Specificaţi numele',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Cuvinte';
   $app_list_strings['moduleListSingular']['Words'] = 'Cuvânt';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Create Article';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Primele 5',
-    'Top_10' => 'Primele 10',
-    'Top_20' => 'Primele 20',
-    'Bot_5'  => 'Ultimele 5',
-    'Bot_10' => 'Ultimele 10',
-    'Bot_20' => 'Ultimele 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Toti',
-        'added' => 'Adăugat în ultimele 30 de zile',
-        'pending' => 'Se aşteaptă aprobarea mea',
-        'updated' =>'Actualizat în ultimele 30 de zile',
-        'faqs' => 'Întrebări frecvente',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'Pe',
-    'before' => 'Inainte',
-    'after' => 'Dupa',
-    'between_dates' => 'Este Intre',
-    'last_7_days' => 'Ultimele 7 Zile',
-    'next_7_days' => 'Urmatoarele 7 Zile',
-    'last_month' => 'Ultima Luna',
-    'this_month' => 'Acesat Luna',
-    'next_month' => 'Luna urmatoare',
-    'last_30_days' => 'Ultimele 30 Zile',
-    'next_30_days' => 'Urmatoarele 30 Zile',
-    'last_year' => 'Ultimul An',
-    'this_year' => 'Acest An',
-    'next_year' => 'Anul urmator',
-    'isnull' => 'Este egal cu zero',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12354,6 +12482,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Toate contactele",
+    "email" => "Numai e-mail",
+    "phone" => "Numai telefon",
     "prem" => "Doar premium"
 );
 
@@ -12379,4 +12509,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Bio',
     'Both' => 'Ambele'
 );
-

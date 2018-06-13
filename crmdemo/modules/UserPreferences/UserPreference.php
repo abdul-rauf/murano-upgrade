@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -406,6 +406,7 @@ class UserPreference extends SugarBean
         $home_dashlets = $this->getPreference('dashlets', 'home');
         $ut = $this->getPreference('ut');
         $timezone = $this->getPreference('timezone');
+        $hideTabs = $this->canEditTabs() ? array() : $this->getPreference('hide_tabs');
 
         $query = "UPDATE user_preferences SET deleted = 1 WHERE assigned_user_id = '" . $user->id . "'";
         if ($category) {
@@ -431,8 +432,23 @@ class UserPreference extends SugarBean
             $this->setPreference('ut', $ut);
             $this->setPreference('timezone', $timezone);
             $this->setPreference('reminder_time', 1800);
+            $this->setPreference('hide_tabs', $hideTabs);
             $this->savePreferencesToDB();
         }
+    }
+
+    /**
+     * Check if current user can edit displayed modules
+     *
+     * @return bool
+     */
+    protected function canEditTabs()
+    {
+        if ($GLOBALS['current_user']->isAdminForModule('Users')) {
+            return true;
+        }
+        $tabs = new TabController();
+        return $tabs->get_users_can_edit();
     }
 
     /**

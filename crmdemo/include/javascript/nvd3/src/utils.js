@@ -357,22 +357,39 @@ nv.utils.dropShadow = function (id, defs, options) {
 //   fill="yellow" filter="url(#f1)" />
 // </svg>
 
-nv.utils.stringSetLengths = function (_data, _container, _format) {
+nv.utils.stringSetLengths = function(_data, _container, _format, classes, styles) {
   var lengths = [],
       txt = _container.select('.tmp-text-strings').select('text');
   if (txt.empty()) {
     txt = _container.append('g').attr('class', 'tmp-text-strings').append('text');
   }
+  txt.classed(classes, true);
   txt.style('display', 'inline');
   _data.forEach(function(d, i) {
-      txt.text(d, _format);
+      txt.text(_format(d, i));
       lengths.push(txt.node().getBoundingClientRect().width);
     });
-  txt.text('').style('display', 'none');
+  txt.text('').attr('class', 'tmp-text-strings').style('display', 'none');
   return lengths;
 };
 
-nv.utils.maxStringSetLength = function (_data, _container, _format) {
+nv.utils.stringSetThickness = function(_data, _container, _format, classes, styles) {
+  var thicknesses = [],
+      txt = _container.select('.tmp-text-strings').select('text');
+  if (txt.empty()) {
+    txt = _container.append('g').attr('class', 'tmp-text-strings').append('text');
+  }
+  txt.classed(classes, true);
+  txt.style('display', 'inline');
+  _data.forEach(function(d, i) {
+      txt.text(_format(d, i));
+      thicknesses.push(txt.node().getBoundingClientRect().height);
+    });
+  txt.text('').attr('class', 'tmp-text-strings').style('display', 'none');
+  return thicknesses;
+};
+
+nv.utils.maxStringSetLength = function(_data, _container, _format) {
   var lengths = nv.utils.stringSetLengths(_data, _container, _format);
   return d3.max(lengths);
 };
@@ -381,7 +398,8 @@ nv.utils.stringEllipsify = function(_string, _container, _length) {
   var txt = _container.select('.tmp-text-strings').select('text'),
       str = _string,
       len = 0,
-      ell = 0;
+      ell = 0,
+      strLen = 0;
   if (txt.empty()) {
     txt = _container.append('g').attr('class', 'tmp-text-strings').append('text');
   }
@@ -413,9 +431,9 @@ nv.utils.getTextContrast = function(c, i, callback) {
   var back = c,
       backLab = d3.lab(back),
       backLumen = backLab.l,
-      textLumen = backLumen > 50 ?
+      textLumen = backLumen > 60 ?
         backLab.darker(4 + (backLumen - 75) / 25).l : // (50..100)[1 to 3.5]
-        backLab.brighter(4 + (25 - backLumen) / 25).l, // (0..50)[3.5..1]
+        backLab.brighter(4 + (18 - backLumen) / 25).l, // (0..50)[3.5..1]
       textLab = d3.lab(textLumen, 0, 0),
       text = textLab.toString();
   if (callback) {
@@ -451,4 +469,51 @@ nv.utils.isValidDate = function(d) {
   }
   var testDate = new Date(d);
   return testDate instanceof Date && !isNaN(testDate.valueOf());
+};
+
+nv.utils.createTexture = function(defs, id, x, y) {
+  var texture = '#nv-diagonalHatch-' + id,
+      mask = '#nv-textureMask-' + id;
+
+  defs
+    .append('pattern')
+      .attr('id', 'nv-diagonalHatch-' + id)
+      .attr('patternUnits', 'userSpaceOnUse')
+      .attr('width', 8)
+      .attr('height', 8)
+      .append('path')
+        .attr('d', 'M-1,1 l2,-2 M0,8 l8,-8 M7,9 l1,-1')
+        .attr('class', 'texture-line')
+        // .attr('class', classes)
+        // .attr('stroke', fill)
+        .attr('stroke', '#fff')
+        .attr('stroke-linecap', 'square');
+
+  defs
+    .append('mask')
+      .attr('id', 'nv-textureMask-' + id)
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', '100%')
+      .attr('height', '100%')
+      .append('rect')
+        .attr('x', x || 0)
+        .attr('y', y || -1)
+        .attr('width', '100%')
+        .attr('height', '100%')
+        .attr('fill', 'url(' + texture + ')');
+
+  return mask;
+};
+
+nv.utils.numberFormatSI = function(d, p) {
+  if (p === 0) {
+    return d;
+  }
+  p = p || 2;
+  if (d < 1 && d > -1) {
+      return d3.round(d, p);
+  }
+  var si = d3.formatPrefix(d, p);
+  return d3.round(si.scale(d), p) + si.symbol;
 };

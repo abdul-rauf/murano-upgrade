@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -194,8 +194,6 @@ $mod_strings = array (
     'LBL_HOMEPAGE_TITLE' => 'Мои контакты',
     'LBL_OPPORTUNITIES' => 'Сделки',
 
-    'LBL_PASSWORD_CHANGE_FORM_TITLE' => 'Изменение пароля',
-    'LBL_OLD_PORTAL_PASSWORD' => 'Старый пароль к Порталу',
     'LBL_PORTAL_PASSWORD' => 'Пароль для портала',
     'LBL_CONFIRM_PORTAL_PASSWORD' => 'Подтвердить пароль для портала',
     'LBL_LANG_PREF_TOOLTIP' => 'Пользовательский интерфейс Портала Поддержки отображается на языке, выбранном здесь.',
@@ -247,7 +245,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'В модуле {{plural_module_name}} представлены контакты, с которыми взаимодействует Ваша организация. Записи модуля {{module_name}} обычно связаны с записью модуля {{accounts_singular_module}}, а множественные {{plural_module_name}} могут быть соотнесены с единичным модулем {{accounts_singular_module}}. Вы можете создать {{plural_module_name}} в Sugar разными способами, например, используя модуль {{plural_module_name}}, импорт {{plural_module_name}}, конвертацию {{leads_module}} в {{plural_module_name}}, и т. д. Как только запись {{module_name}} создана, Вы можете просмотреть и редактировать информацию, касающуюся {{module_name}} в режиме просмотра записи {{plural_module_name}}. Каждая запись {{module_name}} может быть связана с другими записями Sugar, такими как {{meetings_module}}, {{cases_module}}, {{opportunities_module}}, и многими другими, превращая запись {{module_name}} в узел для просмотра и продолжения взаимодействий с контактом.',
+    'LBL_HELP_RECORDS' => 'В модуле {{plural_module_name}} представлены контакты, с которыми взаимодействует Ваша организация. Записи модуля {{module_name}} обычно связаны с записью модуля {{accounts_singular_module}}, и несколько записей {{plural_module_name}} могут быть соотнесены с одним модулем {{accounts_singular_module}}. Существует множество способов создания записи {{plural_module_name}} в Sugar, используя модуль {{plural_module_name}}, импорт данных модуля {{plural_module_name}}, конвертацию модуля {{leads_module}} в модуль {{plural_module_name}} и т. д. После создания записи {{module_name}} можно просматривать и редактировать информацию, касающуюся модуля {{module_name}}, в режиме просмотра записи {{plural_module_name}}. Каждая запись {{module_name}} может быть связана с другими записями Sugar, такими как {{meetings_module}}, {{cases_module}}, {{opportunities_module}} и многими другими, превращая запись {{module_name}} в узел для просмотра и продолжения взаимодействий с контактом.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{plural_module_name}} модуль содержит контакты, с которыми взаимодействует ваша организация.

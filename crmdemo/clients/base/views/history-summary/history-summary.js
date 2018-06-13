@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -55,7 +55,7 @@
 
         this.setActivityModulesToFetch();
 
-        var HistoryCollection = app.BeanCollection.extend({
+        var HistoryCollection = app.MixedBeanCollection.extend({
             module: 'history',
             activityModules: this.activityModules,
             buildURL: _.bind(function(params) {
@@ -128,19 +128,6 @@
      */
     setActivityModulesToFetch: function() {
         this.activityModules = this.allActivityModules;
-    },
-
-    /**
-     * @inheritdoc
-     * @override
-     *
-     * Overridden to use the collection's fetch, not the context
-     */
-    loadData: function(options) {
-        if (this.collection.dataFetched) {
-            return;
-        }
-        this.collection.fetch(options);
     },
 
     /***
@@ -220,27 +207,9 @@
      * @private
      */
     _sanitizeModels: function() {
-        this.collection.map(function(model) {
+        this.collection.each(function(model) {
             model.module = model.get('_module');
         });
-    },
-
-    /**
-     * @inheritdoc
-     * @override
-     *
-     * Overriding to fetch using the collection, not the context
-     */
-    _setOrderBy: function(options) {
-        if (this.orderByLastStateKey) {
-            app.user.lastState.set(this.orderByLastStateKey, this.orderBy);
-        }
-
-        options.orderBy = this.orderBy;
-
-        this.collection.dataFetched = false;
-        this.collection.skipFetch = false;
-        this.loadData(options);
     },
 
     /**

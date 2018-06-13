@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -52,5 +52,6 @@ $mod_strings = array (
   'LBL_LIST_WARNING' => 'Tenga en cuenta que los cambios realizados en este módulo pueden causar problemas en la funcionalidad del módulo {0}. Los cambios relacionados con {1} deben estar realizados através de la <a style="text-decoration:none;" href="index.php?module=Forecasts&action=config">configuración {0}</a>.',
   'LBL_LEAF_CYCLE' => 'Ciclo de la hoja',
 
-  'LBL_DROPDOWN_TOOLTIP' => '{{start}} a {{end}}'
+  'LBL_DROPDOWN_TOOLTIP' => '{{start}} a {{end}}',
+  'LBL_DROPDOWN_TOOLTIP_RTL' => '{{end}} a {{start}}'
 );

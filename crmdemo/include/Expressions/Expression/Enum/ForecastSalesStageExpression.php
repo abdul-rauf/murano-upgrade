@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -63,7 +63,7 @@ class ForecastSalesStageExpression extends EnumExpression
 			    params = this.getParameters(),
 			    includeWon = params[0].evaluate(),
 			    includeClosed = params[1].evaluate(),
-			    array = App.lang.getAppListStrings('sales_stage_dom'),
+			    array = _.keys(App.lang.getAppListStrings('sales_stage_dom')),
 			    keysToRemove = [];
 
             if (!SEE.isTruthy(includeWon)) {
@@ -74,7 +74,7 @@ class ForecastSalesStageExpression extends EnumExpression
                 keysToRemove = _.union(keysToRemove, config.sales_stage_lost);
             }
 
-			return _.without(array, keysToRemove);
+			return _.difference(array, keysToRemove);
 JS;
     }
 

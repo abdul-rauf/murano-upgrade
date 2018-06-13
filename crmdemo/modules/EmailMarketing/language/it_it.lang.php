@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -65,10 +65,10 @@ $mod_strings = array (
   'LBL_EDIT_EMAIL_TEMPLATE'=>	'Modifica',
   'LBL_FROM_MAILBOX'=>'Dalla Casella',
   'LBL_FROM_MAILBOX_NAME'=>'Utilizza Casella:',
-  'LBL_PROSPECT_LIST_SUBPANEL_TITLE'=>'Elenchi Obiettivi',
+  'LBL_PROSPECT_LIST_SUBPANEL_TITLE'=>'Elenchi obiettivi',
   'LBL_ALL_PROSPECT_LISTS'=>'Seleziona per scegliere tutti gli Elenchi Obiettivi nella Campagna.',
   'LBL_RELATED_PROSPECT_LISTS'=>'Tutti gli Elenchi Obiettivi collegati al messaggio.',
-  'LBL_PROSPECT_LIST_NAME'=>'Nome Elenco Obiettivi:',
+  'LBL_PROSPECT_LIST_NAME'=>'Nome elenco obiettivi',
   'LBL_LIST_PROSPECT_LIST_NAME'=>'Elenchi Obiettivi',
   'LBL_MODULE_SEND_TEST'=>'Campagna: Invia Test',
   'LBL_MODULE_SEND_EMAILS'=>'Campagna: Invia Messaggi',

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -47,7 +47,7 @@ $mod_strings = array (
   'NTC_DELETE_GRAFT_CONFIRMATION' => 'אתה בטוח שברצונך למחוק קטגוריה זו?  קטגוריות המשנה והמוצרים לא ימחקו.',
   'LBL_PARENT_NAME' => 'קטגוריית אב:',
   'LBL_CATEGORIES'=> 'קטגוריות',
-  'LBL_EDITLAYOUT' => 'ערוך תצורה' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'נוצר על ידי Id',
   'LBL_MODIFIED_ID'=>'שונה על ידי Id',
   'LBL_ASSIGNED_USER_NAME' => 'הוקצה עבור:',

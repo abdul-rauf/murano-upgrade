@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -18,8 +18,7 @@
     tagName: 'ul',
 
     events: {
-        'click a[href]': 'triggerHide',
-        'click a[data-callback]': 'triggerAction'
+        'click li[data-sweetaction] > a': 'triggerAction',
     },
 
     /**
@@ -199,6 +198,7 @@
                 $list.append(this._resultPartial(result));
             }, this);
             if (options.showMore) {
+                options.searchRoute = '#search/' + options.term + '?';
                 $list.append(this._showMoreTpl(options));
             }
         }
@@ -270,23 +270,32 @@
 
         this.triggerHide();
 
-        var $action = this.$('.active > a');
-        var route = $action.attr('href');
+        var $action;
+        if (evt) {
+            evt.preventDefault();
+            // When the user clicks on an action, we need to select that action
+            // instead of the active one.
+            $action = this.$(evt.currentTarget);
+        } else {
+            $action = this.$('.active > a');
+        }
+
+        var route = $action.data('route');
         if (route) {
+            var openwindow = $action.data('openwindow');
+            if (openwindow) {
+                // If the there is an `openwindow` property configured on the action
+                // metadata, open this action in a new browser window.
+                window.open(route, '_blank');
+                return;
+            }
+
             app.router.navigate(route, {trigger: true});
         }
 
-        var action;
-        if (evt) {
-            // When the user clicks on an action, we need to select that action
-            // instead of the active one.
-            action = this.$(evt.currentTarget).data('callback');
-        } else {
-            action = $action.data('callback');
-        }
-
-        if (action) {
-            this.layout.triggerSystemAction(action);
+        var callback = $action.data('callback');
+        if (callback) {
+            this.layout.triggerSystemAction(callback);
         }
     },
 

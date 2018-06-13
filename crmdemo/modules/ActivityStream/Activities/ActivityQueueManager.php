@@ -5,7 +5,7 @@ if (!defined('sugarEntry') || !sugarEntry) {
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -22,7 +22,7 @@ class ActivityQueueManager
 {
     public static $linkBlacklist = array('user_sync', 'activities', 'contacts_sync', 'kbusefulness', 'usefulness');
     public static $linkModuleBlacklist = array('ActivityStream/Activities', 'ACLRoles', 'Teams',
-        'KBArticles', 'KBDocuments'
+        'KBArticles', 'KBDocuments', 'pmse_Project/pmse_BpmProcessDefinition',
     );
     public static $linkDupeCheck = array();
     public static $moduleBlacklist = array('OAuthTokens', 'SchedulersJobs',
@@ -45,7 +45,7 @@ class ActivityQueueManager
         if (Activity::isEnabled()) {
             $activity       = BeanFactory::getBean('Activities');
             $eventTriggered = false;
-            if ($event == 'after_save' && self::isEnabledForModule($bean->module_name)) {
+            if ($event == 'after_save' && self::isEnabledForModule($bean->getModuleName())) {
                 $eventTriggered = $this->createOrUpdate($bean, $args, $activity);
             } elseif ($event == 'after_relationship_add' && $this->isValidLink($args)) {
                 $eventTriggered = $this->link($args, $activity);
@@ -185,6 +185,25 @@ class ActivityQueueManager
         }
         $lhs                = BeanFactory::getBean($args['module'], $args['id']);
         $rhs                = BeanFactory::getBean($args['related_module'], $args['related_id']);
+
+        // Submodules break this paradigm pretty badly, so until there is a mechanism
+        // to handle $module_dir = $path/$sub_path this will have to do.
+        // @see SugarRelationship::getCustomLogicArguments() as well
+        if (!$lhs || !$rhs) {
+            // Get the logger so we can inform the system
+            $log = LoggerManager::getLogger();
+
+            if (!$lhs) {
+                $log->warn("Could not get LHS bean for {$args['module']}->id = {$args['id']}");
+            }
+
+            if (!$rhs) {
+                $log->warn("Could not get RHS bean for {$args['related_module']}->id = {$args['related_id']}");
+            }
+
+            return false;
+        }
+
         if (empty($lhs->name) && !empty($args['name'])) {
             $lhs->name = $args['name'];
         }
@@ -229,6 +248,25 @@ class ActivityQueueManager
         }
         $lhs                = BeanFactory::getBean($args['module'], $args['id']);
         $rhs                = BeanFactory::getBean($args['related_module'], $args['related_id']);
+
+        // Submodules break this paradigm pretty badly, so until there is a mechanism
+        // to handle $module_dir = $path/$sub_path this will have to do.
+        // @see SugarRelationship::getCustomLogicArguments() as well
+        if (!$lhs || !$rhs) {
+            // Get the logger so we can inform the system
+            $log = LoggerManager::getLogger();
+
+            if (!$lhs) {
+                $log->warn("Could not get LHS bean for {$args['module']}->id = {$args['id']}");
+            }
+
+            if (!$rhs) {
+                $log->warn("Could not get RHS bean for {$args['related_module']}->id = {$args['related_id']}");
+            }
+
+            return false;
+        }
+
         $data               = array(
             'object'       => self::getBeanAttributes($lhs),
             'subject'      => self::getBeanAttributes($rhs),
@@ -262,6 +300,15 @@ class ActivityQueueManager
             'module' => $bean->module_name,
             'id'     => $bean->id,
         );
+    }
+
+    /**
+     * Clears $linkDupeCheck property.
+     * Used mainly for daemon scripts.
+     */
+    public static function resetDuplicateCheck()
+    {
+        self::$linkDupeCheck = array();
     }
 
     /**

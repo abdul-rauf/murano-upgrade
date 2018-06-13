@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -2531,11 +2531,18 @@ SUGAR.reports = function() {
 
 			var callback = {
 				success:function(o){
-					var sqs_objects = JSON.parse(o.responseText);
-					var populate_list = new Array();
+                    var CBObject = JSON.parse(o.responseText);
+                    var populate_list = new Array();
+                    if (!_.isUndefined(sqs_objects) &&
+						CBObject[sqs_field_name] &&
+						_.isString(CBObject[sqs_field_name])) {
+                        sqs_objects[sqs_field_name] = JSON.parse(CBObject[sqs_field_name]);
+                    }
 					populate_list.push(field_name_name);
 					populate_list.push(field_id_name);
-					sqs_objects[sqs_field_name]['populate_list']=populate_list;
+                    if (!_.isUndefined(sqs_objects) && !_.isUndefined(sqs_objects[sqs_field_name])) {
+                        sqs_objects[sqs_field_name]['populate_list'] = populate_list;
+                    }
 				    enableQS(false);
 				},
 				failure: function(o){}

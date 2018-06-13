@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -44,7 +44,10 @@ ExpressionContainer.prototype.init = function (options, parent) {
         onBeforeOpenPanel: null,
         onChange: null
     };
-    $.extend(true, defaults, options);
+
+    // Do not deep copy here
+    $.extend(defaults, options);
+
     this.setExpressionValue(defaults.expression)
         //.setIsCBOpen(defaults.isCBOpen)
         //.setIsDDOpen(defaults.isDDOpen)
@@ -249,6 +252,7 @@ ExpressionContainer.prototype.handleClick = function (element) {
         switch (parentVariable.fieldType) {
             case "DropDown":
             case "Checkbox":
+            case 'Radio':
                 this.handleDropDownBuilder(globalParent, parentVariable, element);
                 break;
             case "user":
@@ -318,9 +322,10 @@ ExpressionContainer.prototype.handleCriteriaBuilder = function (globalParent, pa
                             arithmetic: ["+","-"]
                         },
                         constants: {
-                            date: parentVariable.fieldType === 'Date' ? true : false,
-                            datetime: parentVariable.fieldType === 'Datetime' ? true : false,
-                            timespan: true
+                            date: parentVariable.fieldType === 'Date',
+                            datetime: parentVariable.fieldType === 'Datetime',
+                            timespan: parentVariable.fieldType === 'Datetime',
+                            datespan: parentVariable.fieldType === 'Date'
                         },
                         variables: {
                             dataRoot: null,

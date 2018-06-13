@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,7 +153,7 @@ $mod_strings = array (
     'LBL_BACKUPS' => 'Napravi rezervnu kopiju Sugar fajlova',
     'LBL_BROWSE'                => 'Pretraži',
     'LBL_BUG_TITLE' => 'Praćenje defekata',
-    'LBL_BUG_DESC' => 'Podržava listu izdanja Vašeg proizvoda. Aktivna izdanja su prikazana u padajućem meniju Izdanja u kreiranim zapisima defekata kroz modul Praćenje defekata.',
+    'LBL_BUG_DESC' => 'Podržava listu izdanja proizvoda. Aktivna izdanja su prikazana u padajućem meniju Izdanja u kreiranim zapisima grešaka kroz modul Praćenje grešaka.',
     'LBL_CANCEL_BUTTON_TITLE' => 'Otkaži',
     'LBL_CAT_VIEW'            => 'Kategorije',
     'LBL_CHANGE_NAME_MODULES'=>'Promenite imena modula koji se pojavljuju u aplikaciji',
@@ -201,7 +201,7 @@ $mod_strings = array (
     'LBL_CREATE_RESOTRE_FILE' => 'restoreExpand.sql fajl je uspešno kreiran. Molimo da koristite fajl da bi povratili promene kolona.',
     'LBL_CURRENCY' => 'Postavite valute i stope konverzije',
     'LBL_CONNECTOR_SETTINGS' => 'Konektori',
-    'LBL_CONNECTOR_SETTINGS_DESC' => 'Upravlja podešavanjima konektora',
+    'LBL_CONNECTOR_SETTINGS_DESC' => 'Upravljanje podešavanjima konektora',
     'LBL_SUGARPDF_SETTINGS' => 'PDF',
     'LBL_SUGARPDF_SETTINGS_DESC' => 'Upravlja podešavanjima za generisane PDF fajlova',
     'LBL_DAYS' => 'Dani',
@@ -252,7 +252,7 @@ $mod_strings = array (
     'LBL_DISPLAY_TABS'=>'Prikaži kartice',
     'LBL_DO_OVERWRITE_FILES'    => 'Ne presnimavaj fajlove',
     'LBL_DOCUMENTATION_TITLE' => 'Online dokumentacija',
-    'LBL_DOCUMENTATION' => 'Pogledaj Sugar dokumentaciju za administratore i krajnje korisnike',
+    'LBL_DOCUMENTATION' => 'Pogledajte Sugar dokumentaciju za administratore i krajnje korisnike',
     'LBL_DONE'  => 'Završeno',
     'LBL_DROP_HERE' => '[Spusti ovde]',
     'LBL_DROPDOWN_EDITOR' => 'Editor padajućih listi',
@@ -274,8 +274,9 @@ $mod_strings = array (
     'LBL_DST_UPGRADE' => 'Nadogradi:',
     'LBL_EDIT_CUSTOM_FIELDS' => 'Izmeni prilagođena polja',
     'LBL_EDIT_TABS'=>'Izmeni kartice',
-    'LBL_EMAIL_TITLE' => 'Email',
-    'LBL_EMAIL_DESC' => 'Upravlja odlaznim i dolaznim email-ovima. Email podešavanja moraju biti konfigurisana da bi omogućili korisnicima da šalju email kampanje i biltene.',
+    'LBL_EMAIL_TITLE' => 'E-pošta',
+    'LBL_EMAIL_DESC' => 'Upravljajte odlaznim i dolaznim e-porukama. Podešavanja e-pošte moraju da se konfigurišu kako bi ' .
+                        'omogućavanja korisnicima da šalju kampanje putem e-pošte i biltena.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Primarna email adresa je neophodna za svakog korisnika za korišćenje ove funkcije.',
 	'LBL_ENABLE_MAILMERGE' => 'Omoguči email spajanje?',
 	'LBL_ENABLED' => 'Omogućeno',
@@ -292,7 +293,7 @@ $mod_strings = array (
     'LBL_EXTERNAL_DEV_TITLE'=> 'Premesti prilagođena polja',
     'LBL_FORECAST_TITLE'=> 'Prognoza',
     'LBL_FORECAST_DESC'=> 'Definiši vremenske periode za modul Prognoza. Ovi vremenski periodi biće prikazani u padajućem meniju vremenskih perioda u modulu prognoza.',
-    'LBL_OPPORTUNITIES_DESC'=> 'Podesite admin podešavanja za modul Prodajne Prilike. Podešavanje Prodajne Prilike uključuje prikaz Prodajnih Prilika samo prema prodajnoj prilici, ili prema prodajnoj prilici i linije stavki prihoda koja je za nju prikačena',
+    'LBL_OPPORTUNITIES_DESC'=> 'Podesite administrativna podešavanja za modul Prodajne prilike. Podešavanje Prodajne prilike uključuje prikaz Prodajnih prilika samo prema Prodajnoj prilici, ili prema Prodajnoj prilici i liniji stavki prihoda koja je za nju prikačena',
     'LBL_GLOBAL_SEARCH_SETTINGS' => 'Globalna pretraga',
     'LBL_GLOBAL_SEARCH_SETTINGS_DESC' => 'Konfiguriši opcije globalne pretrage za sistem.',
     'LBL_FTS_SETTINGS' => 'Full Text Search Configuration',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Postavite podrazumevane vrednosti lokalizacije sistema',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- Korisničko ime osobe koja će upravljati offline klijentom',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Ime krajnjeg korisnika:',
-    'LBL_MAILBOX_DESC' => 'Postavi grupne email naloge za nadgledanje dolaznih email-ova i upravljanje informacijama ličnih dolaznih email naloga za korisnike',
+    'LBL_MAILBOX_DESC' => 'Podesite grupne naloge pošte za praćenje dolaznih e-poruka ' .
+        'i upravljajte informacijama o nalogu lične dolazne pošte za korisnike',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Tipovi Ugovora',
     'LBL_MANAGE_CURRENCIES' => 'Valute',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Upravljanje grupama',
@@ -444,11 +446,11 @@ $mod_strings = array (
     'LBL_MANUAL_VALIDATION5'=> 'Nakon što uvezete validacioni ključ, završićete proces ručne provere. Vaš sistem će uraditi ažuriranje datuma kada ističe validacioni ključ, i to će biti datum kada ćete morati ponovo da uradite validaciju.',
     'LBL_MANUFACTURERS_TITLE' => 'Proizvođači',
     'LBL_MANUFACTURERS' => 'Podesi listu proizvođača',
-    'LBL_MASS_EMAIL_CONFIG_DESC'=> 'Konfigurišite email podešavanja',
+    'LBL_MASS_EMAIL_CONFIG_DESC'=> 'Konfigurišite podešavanja e-pošte',
     'LBL_MASS_EMAIL_CONFIG_TITLE'=>'Email podešavanja',
-    'LBL_MASS_EMAIL_MANAGER_DESC'=> 'Upravljanje listom odlaznih email-ova',
+    'LBL_MASS_EMAIL_MANAGER_DESC'=> 'Upravljanje listom odlaznih e-poruka',
     'LBL_MASS_EMAIL_MANAGER_HEADER'=>'Upravljanje email kampanjom',
-    'LBL_MASS_EMAIL_MANAGER_TITLE'=> 'Lista Email-ova',
+    'LBL_MASS_EMAIL_MANAGER_TITLE'=> 'Lista e-poruka',
     'LBL_MASSAGE_MASS_EMAIL_DESC'=>'SugarCRM 3.5.1+ zahteva ažuriranje podataka masovnih Email-ova. Da bi nastavili sa radom kliknite na "Počni ažuriranje".',
     'LBL_MASSAGE_MASS_EMAIL'=>'GMT popravka vremena i datuma za poslate masovne Email-ove',
     'LBL_MISSING_GLOBAL'=> 'Uočili smo da postoje korisnici koji nisu članovi globalnog tima. Ako želite da imate globalni tim, molimo da označite opciju ispod.',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Rekonstrauiše JS grupisane fajlove',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Ponovo spaja i zamenjuje postojeću grupu fajlova sa najnovijim verzijama grupe fajlova',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Popravi javascript datoteke',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Popravi JS datoteke',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Procesiram fajlove. Ovaj proces može da zahteva nekoliko minuta. Odlazak sa ove stranice neće poništiti ovaj proces, zato možete nastaviti sa radom i sačekati potvrdu o kraju procesa...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Procesiranje fajlova završeno.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Popravi polja sa velikim slovima',
@@ -655,7 +659,7 @@ $mod_strings = array (
     'LBL_REGEX_HELP_TITLE'		=>'Regex Opis',
     'LBL_REGEX_HELP_TEXT'		=>'<b>Regularni izrazi </b>obezbeđuju sažet i fleksibilan način za identifikaciju nizova u lozinci, kao određenih karaktera ili uzoraka karaktera. Možete da napravite prilagođena pravila za lozinke sa regex-om koji će biti korišćen u NOT MATCH uslovu; lozinka ne sme da sadrži slaganje ni sa jednim regex izrazom.',
     'LBL_REGEX_DESC_HELP_TEXT'	=>'Ovaj opis bi trebao da objasni Regex Zahteve i biće prikazan u listi zahteva za korisnike kada obezbede nove lozinke.',
-	'LBL_RELEASE' => 'Upravlja izdanjima i verzijama',
+	'LBL_RELEASE' => 'Upravljanje izdanjima i verzijama',
     'LBL_RENAME_TABS'=>'Promeni ime kartice',
     'LBL_REPAIR_ACTION' => 'Koju akciju želite da preduzmete?',
     'LBL_REPAIR_DATABASE_DESC' =>  'Popravlja baze podataka na osnovu definisanih vrednosti u vardef podacima',
@@ -736,13 +740,13 @@ $mod_strings = array (
     'LBL_STUDIO_TITLE' => 'Razvojni alati',
     'LBL_STUDIO' => 'Studio',
     'LBL_SUGAR_NETWORK_TITLE' => 'Sugar mreža',
-    'LBL_SUGAR_NETWORK_DESC' => 'Povežite se na različite SugarCRM usluge gde možete pristupiti SugarCRM forumima i Sugar Wiki-ju, pretražiti FAQ (Često Postavljana Pitanja), preuzeti najnoviju verziju Sugar-a, evidentirate i pretražite prijavljene defekte i tražite nove mogućnosti.',
+    'LBL_SUGAR_NETWORK_DESC' => 'Povežite se na različite SugarCRM usluge gde možete da pristupite SugarCRM forumima i Sugar Wiki-ju, pretražite FAQ (najčešća pitanja), preuzmete najnoviju verziju Sugar-a, evidentirate i pretražite prijavljene greške, tražite nove funkcije i još mnogo toga.',
     'LBL_SUGAR_SCHEDULER_TITLE' => 'Planer',
     'LBL_SUGAR_SCHEDULER' => 'Postavi zakazane događaje',
     'LBL_SUGAR_SERVER_URL_DESC'          => '-  URL servera ovog klijenta će se povezati na (e.g., http://localhost/sugarserver).',
     'LBL_SUGAR_SERVER_URL'                => 'URL servera:',
     'LBL_SUGAR_UPDATE_TITLE'=>'Novije verzije Sugar-a',
-    'LBL_SUGAR_UPDATE'=>'Proveri za najnoviju verziju Sugar-a',
+    'LBL_SUGAR_UPDATE'=>'Proverite da li je objavljena najnovija verzija Sugar-a',
     'LBL_SUGARCRM_HELP' => 'SugarCRM Pomoć',
     'LBL_SUPPORT_TITLE' => 'Sugar Portal Podrške',
     'LBL_SUPPORT' => 'Pristup tehničkoj podršci i ostalom',
@@ -824,7 +828,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SUPPORTED_MODULES' => '*Sledeći moduli su dostupni za SugarCRM Mobile: Računi, Kontakti, Prodajne prilike, Mogućnosti, Sastanci, Pozivi, Zadaci, Beleške, Izveštaji, Slučajevi, Citati, Zaposleni, i prilagođeni moduli. Svi moduli važe za Sugar Mobile.',
     'LBL_WIRELESS_SUPPORTED_MODULES2' => '* Praćenje defekata, Kampanje, Kontakti, Baza podataka i Ciljevi su moduli koji nisu dostupni za SugarCRM Mobile.',
     'LBL_WIRELESS_URL_HELP' => 'Kliknite da podesite Sugar Mobile Plus aplikacije',
-    'LBL_HISTORY_CONTACTS_EMAILS' => 'Email adrese povezanih konakata',
+    'LBL_HISTORY_CONTACTS_EMAILS' => 'E-adrese povezanih konakata',
     'LBL_HISTORY_CONTACTS_EMAILS_DESC' => 'Uključiti/Isključiti prikaz emailova od povezanih konatakata u email subpanelu.',
 
     'LBL_USERS_DESC' => 'Kreirajte, izmenite, aktivirajte i deaktivirajte korisnike u Sugar-u. Kreirajte i upravljajte timovima i ulogama, uključujući nivo pristupa modulima i poljima.',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Čišćenje dodatnih keš fajlova...gotovo',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Ako ova opcija nije označena, nakon isteka licence sistema administratoru će se tražiti da ručno ponovo uradi proveru, u suprotnom korisnici neće moći da se prijave.',
 	'LBL_TRACKER_SETTINGS' => 'Sistem za praćenje',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Odaberite sistem i podatke korisnika koji se prate',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Omogući/onemogući praćenje',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Omogući/Onemogući demo korisnike',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Aktiviraj',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Deaktiviraj',
@@ -1149,7 +1153,7 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SNIP_TITLE' => 'Arhiviranje Email poruka',
     'LBL_SNIP_DESC' => 'Podesi offline arhiviranje (Arhiviranje Email poruka)',
     'LBL_CONFIGURE_SNIP' => 'Arhiviranje email poruka',
-    'LBL_CONFIGURE_SNIP_DESC' => 'Omogući/Isključi Sugar servis za arhiviranje email poruka',
+    'LBL_CONFIGURE_SNIP_DESC' => 'Omogući/onemogući Sugar servis za arhiviranje e-poruka',
 
     //Sprites Support
     'LBL_SPRITES_NOT_SUPPORTED' => 'Greška: Nemoguće je napraviti sprite zato što funkcija imagecreatetruecolor ne može biti učitana',
@@ -1157,6 +1161,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_PROCESSING_DIR' => 'Procesiranje direktorijuma: {0}',
     'LBL_SPRITES_ADDED' => 'Dodat sprite {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Isključivanje datoteke: {0}',
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Dozvole na bazi tima',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Omogućite pristup timu i upravljajte pristupom putem modula.',
 
     //FTS
     'LBL_FTS_TYPE' => 'Tip sistema',
@@ -1227,5 +1235,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Klikom na podnesi izvršićete sinhronizaciju sa glavnim serverom.',
     'LBL_OFFLINE_ENABLED' => 'Offline režim uključen',
     'LBL_OFFLINE_SETTINGS' => 'Offline podešavanja',
+
 
 );

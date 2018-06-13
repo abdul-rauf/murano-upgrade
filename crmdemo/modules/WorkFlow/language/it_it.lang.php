@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -47,7 +47,7 @@ $mod_strings = array (
   'LBL_SUBJECT' => 'Oggetto:',
   
   'LBL_RECORD_TYPE' => 'Applica a:',
- 'LBL_RELATED_MODULE'=> 'Modulo Collegato:',
+ 'LBL_RELATED_MODULE'=> 'Modulo correlato:',
   
   
   'LBL_PROCESS_LIST' => 'Sequenza Workflow',
@@ -94,6 +94,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipo',
 
   // Workflow sunsetting message, added in 7.6.1
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Nota:</strong> questa funzione sarà rimossa in una prossima release di Sugar attualmente pianificata per il 2017. I clienti dell&#39;edizione Sugar Enterprise dovrebbero iniziare a usare le funzionalità avanzate del flusso di lavoro fornite da Process Author. Fare clic su <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">qui</a> per ulteriori informazioni.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Nota:</strong> questa funzione sarà rimossa in una prossima release di Sugar, attualmente pianificata per il 2017. I clienti dell&#39;edizione Sugar Enterprise devono iniziare a utilizzare le funzionalità del flusso di lavoro avanzato fornite da Flusso di lavoro avanzato. Per maggiori informazioni, fare clic qui su <a href="http://www.sugarcrm.com/wf-eol/" target="_blank"></a>.',
 );
 

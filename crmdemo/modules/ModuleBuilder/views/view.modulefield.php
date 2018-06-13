@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,7 +153,10 @@ class ViewModulefield extends SugarView
             	}
                 if (!empty($def['type']) && $def['type'] == "enum" && $field != $vardef['name'])
                 {
-                    if(!empty($def['studio']) && $def['studio'] == "false") continue; //bug51866
+                    //skip if $def has studio element set to false or "false".  NULL is a valid value
+                    if (isset($def['studio']) && ($def['studio'] === false || $def['studio'] === "false")) {
+                        continue;
+                    }
                     $enumFields[$field] = translate($def['vname'], $moduleName);
                     if (substr($enumFields[$field], -1) == ":")
                         $enumFields[$field] = substr($enumFields[$field], 0, strlen($enumFields[$field]) - 1);
@@ -314,6 +317,7 @@ class ViewModulefield extends SugarView
             switch ($vardef['type']) {
                 case 'date':
                 case 'datetime':
+                case 'datetimecombo':
                     $fv->ss->assign('calcFieldType', 'date');
                     break;
                 case 'bool':

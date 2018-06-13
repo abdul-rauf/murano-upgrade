@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -12,14 +12,14 @@
 
 $mod_strings = array(
     'LBL_CAMPAIGN_PRODUCT' => 'Campaign Quoted Line Item',
-    'LBL_MODULE_NAME' => 'Quoted Line Items',
+    'LBL_MODULE_NAME' => 'Pakkumuse artiklid',
     'LBL_MODULE_NAME_SINGULAR' => 'Quoted Line Item',
-    'LBL_MODULE_TITLE' => 'Quoted Line Items: Home',
+    'LBL_MODULE_TITLE' => 'Pakkumuse artiklid: avaleht',
     'LBL_SEARCH_FORM_TITLE' => 'Artikli otsing',
     'LBL_LIST_FORM_TITLE' => 'Artikli loend',
     'LBL_NEW_FORM_TITLE' => 'Loo artikkel',
     'LBL_PRODUCT' => 'Quoted Line Item:',
-    'LBL_RELATED_PRODUCTS' => 'Related Quoted Line Items',
+    'LBL_RELATED_PRODUCTS' => 'Seotud pakkumuse artiklid',
     'LBL_LEAD_SOURCE' => 'Lead Source',
     'LBL_LIST_NAME' => 'Quoted Line Item',
     'LBL_LIST_MANUFACTURER' => 'Tootja',
@@ -70,7 +70,7 @@ $mod_strings = array(
     'LBL_SUPPORT_CONTACT' => 'Toe kontakt:',
     'LBL_PRICING_FORMULA' => 'Hinnastamis valem:',
     'LBL_ACCOUNT_NAME' => 'Ettevõtte nimi:',
-    'LNK_PRODUCT_LIST' => 'Vaata artikleid',
+    'LNK_PRODUCT_LIST' => 'Vaata pakkumuse artikleid',
     'LNK_NEW_PRODUCT' => 'Loo artikkel',
     'NTC_DELETE_CONFIRMATION' => 'Kas oled kindel, et soovid seda kirjet kustutada?',
     'NTC_REMOVE_CONFIRMATION' => 'Kas oled kindel, et soovid selle artikli seose eemaldada?',
@@ -82,8 +82,8 @@ $mod_strings = array(
     'LBL_BOOK_VALUE' => 'Raamatu väärtus:',
     'LBL_BOOK_VALUE_USDOLLAR' => 'Raamatu väärtus (US Dollar):',
     'LBL_BOOK_VALUE_DATE' => 'Raamatu väärtuse kuupäev:',
-    'LBL_DEFAULT_SUBPANEL_TITLE' => 'Artiklid',
-    'LBL_RELATED_PRODUCTS_TITLE' => 'Quoted Line Items',
+    'LBL_DEFAULT_SUBPANEL_TITLE' => 'Pakkumuse artiklid',
+    'LBL_RELATED_PRODUCTS_TITLE' => 'Pakkumuse artiklid',
     'LBL_WEBSITE' => 'Veebisait',
     'LBL_COST_USDOLLAR' => 'Kulu (USD)',
     'LBL_DISCOUNT_USDOLLAR' => 'Ühiku hind USD',
@@ -126,8 +126,8 @@ $mod_strings = array(
     'LBL_DISCOUNT_AMOUNT' => 'Allahindlus kokku',
     'LBL_EXT_PRICE' => 'Ext. Price',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Valuuta sümboli nimi',
-    'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Quoted Line Items',
-    'LNK_IMPORT_PRODUCTS' => 'Impordi artiklid',
+    'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Pakkumuse artiklid',
+    'LNK_IMPORT_PRODUCTS' => 'Impordi pakkumuse artiklid',
     'LBL_EDITLAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
     //For export labels
     'LBL_EXPORT_CURRENCY_ID' => 'Currency ID',

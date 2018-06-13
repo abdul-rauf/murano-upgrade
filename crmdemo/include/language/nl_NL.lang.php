@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,7 +56,7 @@ $app_list_strings = array (
     'TaxRates'=>'BTW-tarief',
     'ContractTypes' => 'Contractvormen',
     'Schedulers'=>'Taakplanners',
-    'Project'=>'Project',
+    'Project'=>'Projecten',
     'ProjectTask'=>'Project Taken',
     'Campaigns'=>'Campagnes',
     'CampaignLog'=>'Campagne log',
@@ -123,7 +123,7 @@ $app_list_strings = array (
     'Dashboard' => 'Dashboard',
     'Styleguide' => 'Styleguide',
     'Contacts' => 'Persoon',
-    'Accounts' => 'Account',
+    'Accounts' => 'Organisatie',
     'Opportunities' => 'Opportunity',
     'Cases' => 'Case',
     'Notes' => 'Notitie',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Filteren',
     'Comments' => 'Commentaar',
     'Currencies' => 'Valuta',
-    'Project' => 'Project',
     'ProductTemplates' => 'Productsjabloon',
-    'ProductCategories' => 'Productcategorie',
     'ProductTypes' => 'Producttype',
     'Shippers' => 'Vervoerder',
     'Subscriptions' => 'Abonnement',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Vrij",
                 '7'=>"Zat",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Zo",
+            '2'=>"Ma",
+            '3'=>"Di",
+            '4'=>"Woe",
+            '5'=>"Do",
+            '6'=>"Vrij",
+            '7'=>"Za",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Zon',
         '1' => 'Maa',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'Ja(a)r(en)',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Tot',
+        'Occurrences' => 'Resultaten',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Geen',
+        'Each' => 'Elke',
+        'On' => 'Op de',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'eerste',
+        'second' => 'tweede',
+        'third' => 'derde',
+        'fourth' => 'vierde',
+        'fifth' => 'vijfde',
+        'last' => 'laatste',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Zondag',
+        'Mon' => 'Maandag',
+        'Tue' => 'Dinsdag',
+        'Wed' => 'Woensdag',
+        'Thu' => 'Donderdag',
+        'Fri' => 'Vrijdag',
+        'Sat' => 'Zaterdag',
+        'Day' => 'Dag',
+        'WD'  => 'Werkdag',
+        'WE'  => 'Weekend'
     ),
 
     'duration_dom' => array(
@@ -1421,7 +1531,7 @@ $app_list_strings = array (
   'custom_fields_importable_dom' => array (
     'true'=>'Ja',
     'false'=>'Nee',
-    'required'=>'Verplicht',
+    'required'=>'Vereist',
   ),
 
     'fts_field_config' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Midden',
         'end' => 'Einde',
         'top' => 'Boven',
+        'total' => 'Totaal',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Trechter',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Licht',
       'dark' => 'Donker',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Verplaatsen',
@@ -1722,7 +1841,7 @@ $app_list_strings = array (
             "17" => array("code" => "KHO", "name" => "Khost"),
             "18" => array("code" => "KNR", "name" => "Konar"),
             "19" => array("code" => "LAG", "name" => "Laghman"),
-            "20" => array("code" => "LOW", "name" => "Lowgar"),
+            "20" => array("code" => "LAAG", "name" => "Lowgar"),
             "21" => array("code" => "NAN", "name" => "Nangrahar"),
             "22" => array("code" => "NIM", "name" => "Nimruz"),
             "23" => array("code" => "NUR", "name" => "Nurestan"),
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "Christ Church"),
-            "2" => array("code" => "AND", "name" => "Saint Andrew"),
+            "2" => array("code" => "ALLE", "name" => "Saint Andrew"),
             "3" => array("code" => "GEO", "name" => "Saint George"),
             "4" => array("code" => "JAM", "name" => "Saint James"),
             "5" => array("code" => "JOH", "name" => "Saint John"),
@@ -2423,7 +2542,7 @@ $app_list_strings = array (
             "4" => array("code" => "EXN", "name" => "Extrême-Nord"),
             "5" => array("code" => "LIT", "name" => "Littoral"),
             "6" => array("code" => "NOR", "name" => "Noord (Nord)"),
-            "7" => array("code" => "NOT", "name" => "Noord-west (Nord-Ouest)"),
+            "7" => array("code" => "NIET", "name" => "Noord-west (Nord-Ouest)"),
             "8" => array("code" => "OUE", "name" => "West (Ouest)"),
             "9" => array("code" => "SUD", "name" => "Zuid (Sud)"),
             "10" => array("code" => "SOU", "name" => "Zuidwest (Sud-Ouest)")
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "ALLE", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "ELKE", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Southern Nations - Nationalities"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "Sumba"),
+            "22" => array("code" => "SOM", "name" => "Sumba"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3335,7 +3454,7 @@ $app_list_strings = array (
             "5" => array("code" => "M", "name" => "Saint Mark"),
             "6" => array("code" => "P", "name" => "Saint Patrick"),
             "7" => array("code" => "C", "name" => "Carriacou"),
-            "8" => array("code" => "Q", "name" => "Petit Martinique")
+            "8" => array("code" => "Kw", "name" => "Petit Martinique")
         ),
         /* Guadeloupe */
         "GP" => array(
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "ELKE", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "ELKE", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parish"),
             "4" => array("code" => "MAN", "name" => "Manchester Parish"),
             "5" => array("code" => "POR", "name" => "Portland Parish"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "ALLE", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parish"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parish"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parish"),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "ELKE", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "ELKE", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -6397,7 +6516,7 @@ $app_list_strings = array (
             "64" => array("code" => "YSN", "name" => "North Yorkshire"),
             "65" => array("code" => "NHM", "name" => "Northamptonshire"),
             "66" => array("code" => "NLD", "name" => "Northumberland"),
-            "67" => array("code" => "NOT", "name" => "Nottinghamshire"),
+            "67" => array("code" => "NIET", "name" => "Nottinghamshire"),
             "68" => array("code" => "ORK", "name" => "Orkney Islands"),
             "69" => array("code" => "OFE", "name" => "Oxfordshire"),
             "70" => array("code" => "PEM", "name" => "Pembrokeshire"),
@@ -6482,7 +6601,7 @@ $app_list_strings = array (
             "46" => array("code" => "MP", "name" => "Noordelijke Marianen"),
             "47" => array("code" => "OH", "name" => "Ohio"),
             "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "49" => array("code" => "ELKE", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pennsylvania"),
             "52" => array("code" => "PR", "name" => "Puerto Rico"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "ELKE", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Volg koppeling',
   'LBL_TOGGLE_VISIBILITY' => 'Toon zichtbaarheid', // Record view header panel element
   'LBL_ACTIVITIES' => 'Activity Stream',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. Alle rechten voorbehouden.',
-  'LBL_TRADEMARK' => 'SugarCRM is een handelsmerk van SugarCRM, Inc. Alle overige bedrijfs- en productnamen kunnen handelsmerken zijn van de betreffende organisaties waarmee zij zijn geassocieerd.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ zijn handelsmerken van SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Stuur uitnodiging',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar en de 3-D kubus zijn geregistreerde handelsmerken van SugarCRM Inc. '.
+        'Alle andere bedrijfs- en productnamen die in dit product verschijnen, kunnen handelsmerken zijn van de'.
+        'respectievelijke bedrijven waar zij aan zijn gekoppeld.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ zijn handelsmerken van SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Stuur uitnodiging',
   'LBL_INVITEES' => 'Genodigden',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Gast ontvangt uw uitnodiging niet',
   'LBL_SELECT_ACTION_LABEL' => 'Selecteer actie',
   'LBL_TOGGLE_DRAWER' => 'Drawer in/uitschakelen',
   'LBL_TOUR_NEXT' => 'Volgende',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Toevoegen' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Organisatie logo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Agenda' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'navigatie hoofdmodule',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'subpaneel wisselen',
+
     'LBL_ADVANCED' => 'Geavanceerd',
     'LBL_BASIC' => 'Basis',
     'LBL_MODULE_FILTER' => 'Filteren op...',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Teams',
     'LBL_TEAM_SET_ID' => 'Team Set ID',
     'LBL_TEAM_SET'=>'Team ingesteld',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Geselecteerde teams',
     'LBL_SEARCH_UNAVAILABLE' => 'Zoeken niet beschikbaar, probeert u het later nogmaals a.u.b.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Geen primair team gespecificeerd',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Fout bij het verwijderen van het primaire team ID [{0}] van [{1}] module met ID [{2}]',
@@ -8401,7 +8529,7 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Om de inhoud te exporteren is een actieve sessie vereist.',
     'ERR_NO_HEADER_ID' => 'Deze functie is niet beschikbaar in dit thema',
     'ERR_NOT_ADMIN' => "Ongeoorloofde toegang tot beheer.",
-    'ERR_MISSING_REQUIRED_FIELDS' => 'Verplichte velden ontbreken:',
+    'ERR_MISSING_REQUIRED_FIELDS' => 'Vereiste velden ontbreken:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Ongeldig vereist veld:',
     'ERR_INVALID_VALUE' => 'Ongeldige waarde:',
     'ERR_NO_SUCH_FILE' =>'Bestand bestaat niet op het systeem',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Search engine is temporarily unavailable.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Er is een zoekmachine Runtime-fout opgetreden. Neem contact op met uw systeembeheerder.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Een veld dat is vergrendeld door een proces kan niet worden bewerkt.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Er is een fout opgetreden. De oorzaak voor deze uitzondering wisselt, maar valt over het algemeen buiten het bereik van een meer specifieke API uitzondering.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Indicates that the server is busy, overloaded or down.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'The search engine backend is currently unavailable due to a connection issue. Verify connectivity and configuration in Admin->search->test.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'A runtime exception occured in SearchEngine. See sugarcrm.log for more details.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Een veld dat momenteel is vergrendeld door een actief proces kan niet worden bewerkt.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s is vergrendeld door een actief proces en kan niet worden bewerkt.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s zijn vergrendeld door een actief proces en kunnen niet worden vergrendeld.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Een bestand met dezelfde naam bestaat al in het systeem.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Deze periode heeft al subperiode',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Subperiodes kunnen geen subperiodes bevatten',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Geen periodes gevonden van het type: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Geen actieve perioden voor de huidige instellingen.',
     'LBL_CURRENT_TIMEPERIOD' => 'Huidige periode',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Voorgaande periode',
     'LBL_NEXT_TIMEPERIOD' => 'Volgende periode',
@@ -8586,11 +8718,11 @@ $app_strings = array (
     'LBL_CONTRACTS'=>'Contracten',
     'LBL_COUNTRY' => 'Land:',
     'LBL_RESET_BUTTON_LABEL' => 'Resetten',
-    'LBL_CREATE_BUTTON_LABEL' => 'Nieuw(e)',
+    'LBL_CREATE_BUTTON_LABEL' => 'Aanmaken',
     'LBL_CREATED_BY_USER'=>'Aangemaakt door gebruiker',
     'LBL_CREATED_USER'=>'Aangemaakt door gebruiker',
     'LBL_CREATED_ID' => 'Aangemaakt door ID',
-    'LBL_CREATED' => 'Gemaakt door',
+    'LBL_CREATED' => 'Aangemaakt door',
     'LBL_CREATE_NEW_TARGET_LIST' => 'Nieuwe targetlijst',
     'LBL_CURRENT_USER_FILTER' => 'Mijn items:',
     'LBL_CURRENCY'=>'Valuta:',
@@ -8620,7 +8752,9 @@ $app_strings = array (
     'LBL_FILTER_MENU_BY' => 'Filter menu op',
     'LBL_FILTER_SELECT_FIELD' => 'Selecteer veld...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Selecteer operator...',
-    'LBL_FILTER_CREATE_NEW' => 'Nieuw filter',
+    'LBL_FILTER_CREATE_NEW' => 'Aanmaken',
+    'LBL_FILTER_CREATE_FILTER' => 'Nieuw filter aanmaken',
+    'LBL_FILTER_EDIT_FILTER' => 'Filter bewerken',
     'LBL_FILTER_ALL_RECORDS' => 'Alle records',
     'TPL_FILTER_SAVE' => 'U heeft het filter {{name}} succesvol aangemaakt.',
     'LBL_FILTER_BETWEEN_FROM' => 'Van',
@@ -8633,7 +8767,7 @@ $app_strings = array (
     'LBL_VCARD_DOWNLOAD' => 'Download vCard',
     'LBL_EMPTY_VCARD' => 'Selecteer a.u.b. een vCard bestand',
     'LBL_IMAGE' => 'Afbeelding',
-    'LBL_EMPTY_REQUIRED_VCARD' => 'vCard bevat niet alle verplichte velden voor deze module.',
+    'LBL_EMPTY_REQUIRED_VCARD' => 'vCard bevat niet alle vereiste velden voor deze module.',
     'LBL_VCARD_ERROR_FILESIZE' => 'Het bestand is groter dan de 30000 bytes limiet die opgegevens is in het HTML form.',
     'LBL_VCARD_ERROR_DEFAULT' => 'Er is een fout opgetreden tijdens het uploaden van de vCard.',
     'TPL_IMPORT_VCARD_FAILURE' => 'Niet gelukt om {{module}} aan te maken van de vCard',
@@ -8766,7 +8900,7 @@ $app_strings = array (
     'LBL_PROFILE' => 'Profiel',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => 'Mail samenvoegen',
-    'LBL_MASS_UPDATE' => 'Mass update',
+    'LBL_MASS_UPDATE' => 'Massaal wijzigen',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Veld toevoegen',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Verwijder veld',
     'LBL_GENERATE_QUOTE' => 'Genereer offerte',
@@ -8798,8 +8932,8 @@ $app_strings = array (
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'groepsaccount',
     'LBL_NAME' => 'Naam',
     'LBL_NEW_BUTTON_KEY' => 'N',
-    'LBL_NEW_BUTTON_LABEL' => 'Nieuw(e)',
-    'LBL_NEW_BUTTON_TITLE' => 'Nieuw(e)',
+    'LBL_NEW_BUTTON_LABEL' => 'Aanmaken',
+    'LBL_NEW_BUTTON_TITLE' => 'Aanmaken',
     'LBL_NEXT_BUTTON_LABEL' => 'Volgende',
     'LBL_NOTES'=>'Notities',
     'LBL_OPENALL_BUTTON_KEY' => 'O',
@@ -8892,7 +9026,7 @@ $app_strings = array (
     'LBL_RELATED_RECORDS' => 'Gerelateerde records',
     'LBL_REPORTS_TO' => 'Rapporteert aan:',
     'LBL_REQUIRED_SYMBOL' => '*',
-    'LBL_REQUIRED_TITLE' => 'Geeft een verplicht veld aan',
+    'LBL_REQUIRED_TITLE' => 'Geeft een vereist veld aan',
     'LBL_EMAIL_DONE_BUTTON_LABEL' => 'Gereed',
     'LBL_SAVE_AS_BUTTON_KEY' => 'A',
     'LBL_SAVE_AS_BUTTON_LABEL' => 'Opslaan als',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Provincie:',
     'LBL_STATUS_UPDATED'=>'Uw status voor deze gebeurtenis is bijgewerkt!',
+    'LBL_STATUS_NOT_UPDATED' => 'Uw status voor dit evenement is niet bijgewerkt.',
     'LBL_STATUS'=>'Status:',
     'LBL_STREET'=>'Straat',
     'LBL_SUBJECT' => 'Onderwerp',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Alle rechten voorbehouden.<br />SugarCRM is een handelsmerk van SugarCRM, Inc. Alle andere bedrijfs- en productnamen kunnen handelsmerken zijn van de respectievelijke bedrijven waar zij betrekking op hebben.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Alle rechten voorbehouden.<br />SugarCRM, Sugar en de 3-D kubus zijn geregistreerde handelsmerken van SugarCRM Inc. '.
+        'Alle andere bedrijfs- en productnamen die in dit product verschijnen, kunnen handelsmerken zijn van de'.
+        'respectievelijke bedrijven waar zij aan zijn gekoppeld.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Geplande taak voltooid',
@@ -9093,7 +9232,7 @@ $app_strings = array (
     'LNK_GET_LATEST'=>'Haal nieuwste',
     'LNK_GET_LATEST_TOOLTIP'=>'Vervang door laatste versie',
     'LNK_HELP' => 'Help',
-    'LNK_CREATE' => 'Nieuw(e)',
+    'LNK_CREATE' => 'Aanmaken',
     'LNK_CREATE_WHEN_EMPTY' => 'Maak nu een nieuw record aan.',
     'LNK_LIST_END' => 'Einde',
     'LNK_LIST_NEXT' => 'Volgende',
@@ -9129,7 +9268,7 @@ $app_strings = array (
     'NTC_LOGIN_MESSAGE' => 'Eerst inloggen a.u.b.',
     'NTC_NO_ITEMS_DISPLAY' => 'geen',
     'NTC_REMOVE_CONFIRMATION' => 'Weet u zeker dat u deze koppeling wilt verwijderen?<br>Alleen de relatie wordt verwijderd. Het record zal niet worden verwijderd.',
-    'NTC_REQUIRED' => 'Geeft een verplicht veld aan',
+    'NTC_REQUIRED' => 'Geeft een vereist veld aan',
     'NTC_SUPPORT_SUGARCRM' => 'Steun het SugarCRM open source project met een donatie via Paypal - snel, gratis en veilig!',
     'NTC_TIME_FORMAT' => '(24:00)',
     'NTC_WELCOME' => 'Welkom',
@@ -9156,7 +9295,7 @@ $app_strings = array (
     'ERROR_EMAIL' => 'Fout. Ongeldig e-mailadres: {{#each this}}{{this}} {{/each}}',
     'ERROR_PRIMARY_EMAIL' => 'Fout. Er moet minimaal één primair adres opgegeven worden.',
     'ERROR_DUPLICATE_EMAIL' => 'Fout. Duplicaat e-mailadres: {{#each this}}{{this}} {{/each}}',
-    'ERROR_FIELD_REQUIRED' => 'Fout. Dit veld is verplicht.',
+    'ERROR_FIELD_REQUIRED' => 'Fout. Dit veld is vereist.',
     'ERROR_MINVALUE' => 'Fout. De minimale waarde van dit veld is {{this}}.',
     'ERROR_MAXVALUE' => 'Fout. De maximale waarde van dit veld is {{this}}.',
     'ERROR_IS_GREATER_THAN' => 'Fout. De waarde van dit veld moet groter zijn dan {{this}}.',
@@ -9176,7 +9315,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Fout. U hebt een ongeldige operator ingevoerd.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Fout. U hebt een ongeldige ingevoerd.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Importeren mislukt. Een groepsveld is gedeeltelijk vergrendeld in de Profesdefiniëring. Deze velden moeten in de Procesdefiniëring worden ontgrendeld zodat de definitie kan worden geïmporteerd.',
+    'ERROR_EXP_DATE_LOW' => 'Fout. Vervaldatum kan niet voor de publicatiedatum liggen.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Fout. De status Goedgekeurd vereist een datum van publicatie.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'De publicatiedatum is leeg.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9243,12 +9383,12 @@ $app_strings = array (
     // contextMenu strings
     'LBL_ADD_TO_FAVORITES' => 'Voeg toe aan mijn favorieten',
     'LBL_MARK_AS_FAVORITES' => 'Markeer als favoriet',
-    'LBL_CREATE_CONTACT' => 'Nieuw persoon',
-    'LBL_CREATE_NOTE' => 'Nieuwe notitie',
-    'LBL_CREATE_OPPORTUNITY' => 'Nieuwe opportunity',
+    'LBL_CREATE_CONTACT' => 'Persoon aanmaken',
+    'LBL_CREATE_NOTE' => 'Notitie aanmaken',
+    'LBL_CREATE_OPPORTUNITY' => 'Opportunity aanmaken',
     'LBL_SCHEDULE_CALL' => 'Plan telefoongesprek',
     'LBL_SCHEDULE_MEETING' => 'Plan afspraak',
-    'LBL_CREATE_TASK' => 'Nieuwe taak',
+    'LBL_CREATE_TASK' => 'Taak aanmaken',
     'LBL_REMOVE_FROM_FAVORITES' => 'Verwijder uit mijn favorieten',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Genereer formulier',
@@ -9306,6 +9446,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => '&nbsp;kolommen kunnen getoond worden.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Dashboard',
     'LBL_DASHBOARD_BWC' => 'Mijn legacy dashboard',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Mijn dashboard',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Help Dashboard',
@@ -9338,9 +9479,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Mijn {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Nieuws',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Google News Feed voor gerelateerde organisatie',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Opportunity cijfers',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Opportunity cijfers voor gerelateerde organisatie. Vereist D&B abonnement.',
@@ -9409,7 +9547,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Er werden nu geen gegevens gevonden.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Samenvatting van Cases',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Nieuwsfeed',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interacties',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Bijlagen',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notities & bijlagen behoren bij het record',
@@ -9918,7 +10055,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => 'Kies functie',
     'LBL_DNB_BAL_ORG_NAME' => 'Organisatienaam',
     'LBL_DNB_BAL_IMPORT_AS' => 'Importeer als:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Organisatienaam',
+    'LBL_DNB_BAL_ORG_NAME' => 'Bedrijfsnaam',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'in miljoenen $USD',
@@ -9956,9 +10093,9 @@ $app_strings = array (
     'LBL_LEARNING_RESOURCES_TITLE' => 'Trainingsmiddelen',
     'LBL_LEARNING_RESOURCES_DESC' => 'SugarCRM trainingsmiddelen',
     'LBL_LEARNING_RESOURCES_NAME' => 'Trainingsmiddelen',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugar Universiteit (engelstalig)',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_TEASER' => 'Wordt een Sugar-expert met training, videos, klassen, webinars en certificatie.',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Community-fora',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugar Universiteit (Engelstalig)',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_TEASER' => 'Word een Sugar-expert met training, videos, klassen, webinars en certificatie.',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Community-forums',
     'LBL_LEARNING_RESOURCES_COMMUNITY_TEASER' => 'Neem deel aan discussies, het oplossen van problemen en deel ideeën met andere gebruikers.',
     'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Documentatie & support',
     'LBL_LEARNING_RESOURCES_SUPPORT_TEASER' => 'Leer hoe Sugar werkt en neem contact op met support.',
@@ -9977,7 +10114,7 @@ $app_strings = array (
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Meest nuttige gepubliceerde kennisdatabankartikelen',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Geeft de artikelen uit de kennisbasis weer die de meeste likes hebben gekregen en het meest bekeken zijn',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} gefilterd op {{label}} "{{value}}"',
 
@@ -10016,6 +10153,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Voer een pagina naam in a.u.b.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Mijn pijplijn',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Pijplijn van mijn team",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Grafiek verkooppijplijn',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Toont huidige pijplijngrafiek.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Geen afbeelding',
 
@@ -10097,8 +10241,8 @@ $app_strings = array (
     'LBL_PORTAL_WELCOME_TITLE' => 'Welkom bij Sugar Portal 5.1.0',
     'LBL_PORTAL_WELCOME_INFO' => 'Sugar Portal is een framework die real-time inzicht geeft in Cases, Bugs, Nieuwsbrieven etc. aan klanten. Het is een externe interface voor Sugar die kan worden geïmplementeerd in elke website. In de toekomst zullen er meer features worden toegevoegd als Project Management en Forums.',
     'LBL_LIST' => 'Lijst',
-    'LBL_CREATE_CASE' => 'Nieuwe case',
-    'LBL_CREATE_BUG' => 'Nieuwe bug',
+    'LBL_CREATE_CASE' => 'Case aanmaken',
+    'LBL_CREATE_BUG' => 'Bug aanmaken',
     'LBL_NO_RECORDS_FOUND' => '- 0 gevonden records -',
 
     'DATA_TYPE_DUE' => 'Vervalt:',
@@ -10151,7 +10295,7 @@ $app_strings = array (
   //Collection Field
   'LBL_COLLECTION_NAME' => 'Naam',
   'LBL_COLLECTION_PRIMARY' => 'Primair',
-  'ERROR_MISSING_COLLECTION_SELECTION' => 'Leeg verplicht veld',
+  'ERROR_MISSING_COLLECTION_SELECTION' => 'Leeg vereist veld',
     'LBL_COLLECTION_EXACT' => 'Collectie',
 
     // fastcgi checks
@@ -10233,7 +10377,7 @@ $app_strings = array (
     //define labels to be used for overriding local values during import/export
     // ID labels
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Toegewezen aan ID',
-    'LBL_EXPORT_CREATED_BY' => 'Gemaakt door ID',
+    'LBL_EXPORT_CREATED_BY' => 'Aangemaakt door ID',
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Gewijzigd door ID',
     'LBL_EXPORT_REPORTS_TO_ID' => 'Rapporteert aan ID',
     'LBL_EXPORT_TEAM_ID' => 'Team-ID',
@@ -10269,6 +10413,8 @@ $app_strings = array (
     'LBL_SELECT_THIS_ROW_TITLE' => 'Selecteer deze rij',
     'LBL_TEAM_SELECTED_TITLE' => 'Geselecteerd team',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Selecteer om dit team primair te maken',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Team gemarkeerd als geselecteerd op teambasis',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Dit team markeren als geselecteerd op teambasis',
     'LBL_SEARCH_AND_SELECT' => 'Zoek en selecteer {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Zoeken en toevoegen {{module}}',
 
@@ -10357,6 +10503,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Voorvertoning uitgeschakeld: Geen gegevens beschikbaar',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Voorvertoning uitgeschakeld: Record wordt reeds weergegeven',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Voorvertoning uitgeschakeld: record verwijderd of geen toegang tot record',
+    'LBL_PREVIEW_PREVIOUS' => 'Voorbeeld vorige',
+    'LBL_PREVIEW_NEXT' => 'Voorbeeld volgende',
+    'LBL_PREVIEW_CLOSE' => 'Voorbeeld sluiten',
     'LBL_STREAM_NO_RECORDS' => 'Dit &#39;record&#39; heeft geen bijbehorende notities. Voeg een notitie toe door op de &#39;voeg notitie toe&#39; knop te klikken.',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}} duplicaten gevonden.',
     'LBL_NO_DUPLICATES_FOUND' => 'Geen duplicaten gevonden.',
@@ -10376,6 +10525,7 @@ $app_strings = array (
         'Ongeldig aantal records gekozen. Het toegestane aantal is  {{minRecords}} tot maximaal {{maxRecords}} records.',
     'LBL_MERGE_NO_ACCESS' =>
         'U heeft geen rechten om deze actie uit te voeren. Er moet minimaal 1 record aanpasbaar zijn.',
+    'LBL_MERGE_LOCKED' => 'Sommige geselecteerde records voor samenvoegen bevatten velden die zijn vergrendeld voor bewerking door een proces en kunnen momenteel niet worden samengevoegd.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10522,7 +10672,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
 
 
     'LBL_FUTURE' => 'Toekomst',
-    'LBL_REQUIRED_FIELD' => 'Verplicht',
+    'LBL_REQUIRED_FIELD' => 'Vereist',
     // for nomad mobile
     'LBL_OPTIONAL' => 'Optioneel',
     'LBL_RELATED_MODULE' => 'Gerelateerd aan {{{this}}}',
@@ -10665,13 +10815,13 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_OFFLINE_MERGE_DATA_CONFIRM' => 'Iemand heeft hetzelfde record aangepast op de server. Bevestig om automatisch samen te voegen of annuleer uw wijzingen.',
     'LBL_OFFLINE_LAST_SYNC_TS' => 'Laatste synchronisatie poging: {{ts}}',
     'LBL_ACTION_UPDATE' => 'BIJWERKEN',
-    'LBL_ACTION_CREATE' => 'NIEUW(E) MAKEN',
+    'LBL_ACTION_CREATE' => 'AANMAKEN',
     'LBL_ACTION_DELETE' => 'VERWIJDER',
     'LBL_ACTION_LINK' => 'KOPPEL',
     'LBL_ACTION_UNLINK' => 'ONTKOPPEL',
     'LBL_ACTION_FAVORITE' => 'FAVORIET',
     'LBL_ACTION_FOLLOW' => 'VOLGEN',
-    'LBL_ACTION_CREATE_EXPLANATION' => 'Nieuw(e) {{module}} "{{name}}"',
+    'LBL_ACTION_CREATE_EXPLANATION' => '{{module}} "{{name}}" aangemaakt',
     'LBL_ACTION_UPDATE_EXPLANATION' => 'Bijgewerkt: {{module}} "{{name}}"',
     'LBL_ACTION_DELETE_EXPLANATION' => 'Verwijderd: {{module}} "{{name}}"',
     'LBL_ACTION_LINK_EXPLANATION' => 'Relatie gelegd tussen {{module}} "{{name}}" en {{relatedModule}} "{{relatedName}}"',
@@ -10680,7 +10830,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_ACTION_UNFOLLOW_EXPLANATION' => 'Ontvolgen {{module}} "{{name}}"',
     'LBL_ACTION_FAVORITE_EXPLANATION' => 'Favoriet {{module}} "{{name}}"',
     'LBL_ACTION_UNFAVORITE_EXPLANATION' => 'Niet langer favoriet {{module}} "{{name}}"',
-    'LBL_ACTION_CREATE_RELATED_EXPLANATION' => 'Nieuw(e) {{module}} "{{name}}" gerelateerd met {{relatedModule}} "{{relatedName}}"',
+    'LBL_ACTION_CREATE_RELATED_EXPLANATION' => '{{module}} "{{name}}" aangemaakt gerelateerd met {{relatedModule}} "{{relatedName}}"',
     'LBL_EMAIL_ACTION_SET_PRIMARY' => 'Primair',
     'LBL_EMAIL_ACTION_SET_OPT_OUT' => 'Afmelden',
     'LBL_EMAIL_ACTION_SET_OPT_IN' => 'Opt-in',
@@ -10843,14 +10993,13 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_WIZ_SYSTEM_LOCALE_SETTINGS' => 'Lokale Instellingen',
     'LBL_WIZ_EMAIL_SETTINGS' => 'E-mailinstellingen',
     'LBL_WIZ_IMPORT_DATA' => 'Importeer Data',
-    'LBL_WIZ_CREATE_USERS' => 'Nieuwe gebruikers',
+    'LBL_WIZ_CREATE_USERS' => 'Gebruikers aanmaken',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Systeeminstellingen',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Wachtwoord',
     'LBL_CURRENT_PASSWORD'				=> 'Huidig wachtwoord',
-    'LBL_SET_NEW_PASSWORD'              => 'Voer wachtwoord in',
     'LBL_NEW_PASSWORD1'                 => 'Nieuw wachtwoord',
     'LBL_NEW_PASSWORD2'                 => 'Bevestig wachtwoord',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Vul uw nieuwe wachtwoord ter bevestiging in.',
@@ -10858,13 +11007,12 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'ERR_ENTER_OLD_PASSWORD'			=> 'Vul uw oude wachtwoord in.',
     'ERR_REENTER_PASSWORDS' => 'De wachtwoorden moeten overeenkomen.',
     'ERR_PASSWORD_MISMATCH' => 'Het ingevoerde wachtwoord is onjuist.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Wachtwoord is succesvol gewijzigd',
     'LBL_CANNOT_SEND_PASSWORD' => 'Kan geen wachtwoord sturen',
     'LBL_REQUEST_PASSWORD' => 'Vraag wachtwoord aan',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Fout: Er was een probleem bij het wijzigen van het wachtwoord voor deze gebruiker.',
     'LBL_INCORRECT_PASSWORD' => 'Fout: Onjuist wachtwoord.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Voorkeurstaal:',
+    'LBL_PREFERRED_LANGUAGE' => 'Taalvoorkeur:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Kies een rapport',
@@ -10894,6 +11042,18 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'ERR_HTTP_500_TEXT_LINE1' => 'De server heeft een fout aangetroffen en kan uw verzoek niet voltooien.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Probeer het opnieuw. Als de fout zich blijft voordoen, neem contact op met uw Sugar-beheerder.',
     'ERR_HTTP_500_ACTION' => 'Neem contact op met technische ondersteuning.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 interne serverfout',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Er trad een tijdelijke fout op in de server, waardoor uw verzoek niet kon worden voltooid.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Probeer het opnieuw. Als de fout zich blijft voordoen, neem dan contact op met uw Sugar systeembeheerder.',
+    'ERR_HTTP_502_ACTION' => 'Neem contact op met technische ondersteuning.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 interne serverfout',
+    'ERR_HTTP_503_TEXT_LINE1' => 'De server is niet bereikbaar om uw aanvraag te voltooien.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Probeer het later opnieuw. Als de fout zich blijft voordoen, neem dan contact op met uw Sugar systeembeheerder.',
+    'ERR_HTTP_503_ACTION' => 'Neem contact op met technische ondersteuning.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Weergave opbouwen mislukt',
     'ERR_RENDER_FAILED_MSG' => 'Het opbouwen van een weergave is mislukt',
@@ -11027,6 +11187,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_ALERT_TITLE_ERROR' => 'Fout:',
     'LBL_ALERT_TITLE_LOADING' => 'Bezig met laden',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => '(De versie van) uw browser wordt niet (langer) ondersteund.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'De volgende browserversies worden aanbevolen: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Raadpleeg de pagina {{link}} voor aanbevolen browsers.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Ondersteunde platforms',
 
@@ -11080,13 +11241,16 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'ERR_GENERIC_SERVER_ERROR' => 'Er kon geen verbinding met de server gemaakt worden. Probeer het a.u.b. opnieuw.',
     'ERR_RESOLVE_ERRORS' => 'Los eventuele fouten op voordat u verder gaat.',
 
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Lijst vernieuwen',
+
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'meer',
     'LBL_TEXTAREA_LESS' => 'minder',
 
     //attachments dashlet
     'LBL_MODULE_ATTACHMENTS_TITLE' => '{{module}} bijlagen',
-    'LBL_CREATE_ATTACHMENT' => 'Maak bijlage',
+    'LBL_CREATE_ATTACHMENT' => 'Bijlage aanmaken',
     'LBL_DASHLET_REFRESH' => 'Vernieuwen',
     'LBL_DASHLET_MOVE' => 'Verplaats',
     'LBL_DASHLET_CLOSE' => 'Sluit',
@@ -11167,7 +11331,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_HELP_CREATE_TITLE' => 'Aanmaken {{module_name}}',
     'LBL_HELP_CREATE' => 'Om {{plural_module_name}} aan te maken:
 1. Voer de gewenste gegevens in.
- * Velden die "verplicht" zijn, moeten ingevuld zijn voordat het record opgeslagen kan worden.
+ * Velden die "vereist" zijn, moeten ingevuld zijn voordat het record opgeslagen kan worden.
  * Klik op "Toon meer" om extra velden te tonen.
 2. Klik op "Opslaan" om het record op te slaan en terug te keren naar de {{plural_module_name}} list view.',
 
@@ -11187,15 +11351,18 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM stelt gebruikers in staat om snel bepaalde taken uit te voeren met toetsenbord sneltoetsen. De tabellen aan de rechterzijde beschrijven de beschikbare sneltoetsen met de toetsen en acties die ze uitvoeren.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Ondersteunde tekens</h1><ul><li>alle alfanumerieke tekens en symbolen</li><li>shift, ctrl, alt, command, mod (ctrl voor Windows/Linux en command voor Macs)</li><li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>Ondersteunde functies</h1><ul><li>Toetscombinatie: ctrl+m</li><li>Meerdere toetsen: m,ctrl+m</li><li>Toetsvolgorde: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Algemene sneltoetsen',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Contextuele sneltoetsen',
     'LBL_SHORTCUT_KEY_KEY' => 'Sleutel',
     'LBL_SHORTCUT_FUNCTION' => 'Functie',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Contextuele snelkoppelingen configureren',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Geen contextuele snelkoppelingen te configureren',
     'LBL_SHORTCUT_HELP' => 'Toon help sneltoetsen',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Toon het quick create menu',
     'LBL_SHORTCUT_SEARCH' => 'Ga naar global search veld',
     'LBL_SHORTCUT_SIDEBAR_TOGGLE' => 'Toon sidecar',
-    'LBL_SHORTCUT_CREATE_RECORD' => 'Maak nieuw record',
+    'LBL_SHORTCUT_CREATE_RECORD' => 'Nieuw record aanmaken',
     'LBL_SHORTCUT_NAVIGATE_DOWN' => 'Kies volgend record uit de lijst',
     'LBL_SHORTCUT_NAVIGATE_UP' => 'Kies vorig record uit de lijst',
     'LBL_SHORTCUT_SCROLL_LEFT' => 'Scroll lijst naar links',
@@ -11213,7 +11380,7 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
     'LBL_SHORTCUT_SELECT_ALL' => 'Selecteer alles',
     'LBL_SHORTCUT_OPEN_MASS_ACTION' => 'Open actie menu',
     'LBL_SHORTCUT_FILTER_SEARCH' => 'Ga naar filter veld',
-    'LBL_SHORTCUT_FILTER_CREATE' => 'Maak een nieuw filter',
+    'LBL_SHORTCUT_FILTER_CREATE' => 'Een nieuwe lijstfilter aanmaken',
     'LBL_SHORTCUT_FILTER_EDIT' => 'Pas huidig filter aan',
     'LBL_SHORTCUT_FILTER_SHOW' => 'Open filter menu',
     'LBL_SHORTCUT_RECORD_EDIT' => 'Wijzig record',
@@ -11238,6 +11405,9 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Selecteer alle items in een meervoudig selectieveld',
     'LBL_SHORTCUT_SWEETSPOT' => 'Het Sweet Spot-diagram in-/uitschakelen',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Het Sweet Spot-diagram verbergen',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Configuratie opslaan',
+    'LBL_SHORTCUT_RESTORE' => 'Standaardinstellingen herstellen',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Er is een fout opgetreden tijdens het opslaan van aangepaste sneltoetsen op de server. Probeer het opnieuw.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} instellingen',
@@ -11260,13 +11430,20 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
     'LBL_CALENDAR_RECURRENCE' => "Herhaling",
     'LBL_CALENDAR_REMINDERS' => "Herinneringen",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Aangepaste datum",
     'LBL_CALENDAR_REPEAT_TYPE' => "Herhaling Type",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Herhaling aantal",
     'LBL_CALENDAR_REPEAT_DOW' => "Herhaling op deze dagen per week",
+    'LBL_CALENDAR_REPEAT' => "Herhalen",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Herhalen tot",
     'LBL_CALENDAR_REPEAT_COUNT' => "Aantal herhalingen",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Selectie herhalen",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Dag(en) van de maand",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Ordinaal herhalen",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Eenheid herhalen",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Aanpassingen kunnen alleen worden uitgevoerd op het eerste record van de serie.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Herhalingsregels leiden niet tot het genereren van een evenement.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Aanwezig',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Afgewezen',
@@ -11286,17 +11463,23 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM requires javascript. Please enable javascript to continue using SugarCRM.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Serienummers van gegevens konden niet ongedaan worden gemaakt',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Serienummers van gegevens konden niet ongedaan worden gemaakt omdat deze verwijzingen bevatten naar objecten of klassen',
 
     'LBL_FIELD_TRIMMED' => 'Veld was uitgedund door overschrijding van het maximale aantal tekens.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Veld overschrijdt maximaal aantal tekens.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Afgelopen 7 dagen',
     '30' => 'Afgelopen 30 dagen',
     '90' => 'Vorig kwartaal',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11401,17 +11584,10 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Verlopen',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Concept',
-    'Expired' => 'Verlopen',
-    'In Review' => 'Ter beoordeling',
-    'Published' => 'Gepubliceerd',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Beheeracties--',
-    'Create New Tag' => 'Maak nieuwe tag',
+    'Create New Tag' => 'Nieuwe tag aanmaken',
     'Delete Tag'=>'Verwijder tag',
     'Rename Tag'=>'Hernoem tag',
     'Move Selected Articles'=>'Verplaats geselecteerde artikelen',
@@ -11419,57 +11595,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Verwijder geselecteerde artikelen',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Has Attachments',
-        'none' => 'Has None',
-        'mime' => 'Specify Mime Type',
-        'name' => 'Specify Name',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Woorden';
   $app_list_strings['moduleListSingular']['Words'] = 'Woord';
-  $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Nieuw artikel';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Top 5',
-    'Top_10' => 'Top 10',
-    'Top_20' => 'Top 20',
-    'Bot_5'  => 'Bottom 5',
-    'Bot_10' => 'Bottom 10',
-    'Bot_20' => 'Bottom 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Alle',
-        'added' => 'Added Last 30 days',
-        'pending' => 'Pending my Approval',
-        'updated' =>'Bijgewerkt in de afgelopen 30 dagen',
-        'faqs' => 'FAQ&#39;s',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'Op',
-    'before' => 'Voor',
-    'after' => 'Na',
-    'between_dates' => 'Tussen',
-    'last_7_days' => 'Afgelopen 7 dagen',
-    'next_7_days' => 'Volgende 7 dagen',
-    'last_month' => 'Vorige maand',
-    'this_month' => 'Huidige maand',
-    'next_month' => 'Volgende maand',
-    'last_30_days' => 'Afgelopen 30 dagen',
-    'next_30_days' => 'Komende 30 dagen',
-    'last_year' => 'Vorig jaar',
-    'this_year' => 'Huidig jaar',
-    'next_year' => 'Volgend jaar',
-    'isnull' => 'Is Null',
-        );
+  $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Artikel aanmaken';
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12331,6 +12459,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Alle contactpersonen",
+    "email" => "Alleen e-mail",
+    "phone" => "Alleen telefoon",
     "prem" => "Alleen Premium"
 );
 
@@ -12356,4 +12486,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Bio',
     'Both' => 'Beide'
 );
-

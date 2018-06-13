@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -17,7 +17,7 @@ $app_list_strings = array (
   'moduleList' =>
   array (
     'Home' => '홈',
-    'Contacts' => '연락처목록',
+    'Contacts' => '연락처',
     'Accounts' => '거래처',
     'Opportunities' => '영업기회',
     'Cases' => '사례 목록',
@@ -32,7 +32,7 @@ $app_list_strings = array (
     'Project' => '프로젝트',
     'Contracts'=>'계약목록',
     'Quotes' => '견적 목록',
-    'Products' => '견적 라인아이템',
+    'Products' => '견적 상품 목록',
     'WebLogicHooks' => '웹 논리 후크',
     'ProductCategories' => '상품 범주',
     'ProductTypes' => '상품 유형목록',
@@ -89,7 +89,7 @@ $app_list_strings = array (
     'TrackerSessions' => '추적 세션',
     'TrackerQueries' => '추적 문의',
     'FAQ' => '자주묻는질문',
-    'Newsletters' => '소식지',
+    'Newsletters' => '뉴스레터',
   	'SugarFavorites'=>'즐겨찾기',
 	'PdfManager' => 'PDF 관리',
 
@@ -97,7 +97,7 @@ $app_list_strings = array (
     'OAuthTokens' => '인증 표시',
     'Filters' => '필터',
     'UserSignatures' => '사용자 서명',
-    'Shippers' => '배송 공급자',
+    'Shippers' => '배송자',
     'Styleguide' => '스타일 가이드',
     'Feedbacks' => '피드백',
     'Tags' => '태그',
@@ -142,7 +142,7 @@ $app_list_strings = array (
     'WebLogicHooks' => '상품 범주',
     'Reports' => '보고서',
     'Forecasts' => '예상',
-    'ForecastWorksheets' => '예상기획 참고 자료지',
+    'ForecastWorksheets' => '예상기획 워크시트',
     'ForecastManagerWorksheets' => '예측 관리자 워크시트',
     'Quotas' => '견적',
     'MergeRecords'=>'합병기록',
@@ -170,7 +170,7 @@ $app_list_strings = array (
     'Connectors'=>'연결기',
     'Roles'=>'역할:',
     'Notifications'=>'알림',
-    'Sync'=>'일치화',
+    'Sync'=>'동기화',
     'PdfManager' => 'PDF 관리',
     'WorkFlow' => '작업흐름',
     'EAPM' => '외부 계정',
@@ -186,7 +186,7 @@ $app_list_strings = array (
     'EmailMarketing' => '이메일 마케팅 관리',
     'EmailTemplates' => '이메일 템플릿',
     'SNIP' => "이메일 보관",
-    'SavedSearch' => '저정된 검색결과',
+    'SavedSearch' => '저장된 검색결과',
     'UpgradeWizard' => '업그레이드 마법사',
     'Trackers' => '추적기',
     'TrackerPerfs' => '추적 수행',
@@ -194,14 +194,12 @@ $app_list_strings = array (
     'TrackerQueries' => '추적기 문의사항',
     'FAQ' => '자주묻는질문',
     'Newsletters' => '뉴스레터',
-    'OAuthKeys' => 'OAuth Consumer Key',
+    'OAuthKeys' => '소비자키 인증',
     'OAuthTokens' => '권한 표시',
     'Filters' => '필터',
     'Comments' => '의견',
     'Currencies' => '화폐',
-    'Project' => '프로젝트',
-    'ProductTemplates' => '제품 카탈로그',
-    'ProductCategories' => '상품 범주',
+    'ProductTemplates' => '제품 템플릿',
     'ProductTypes' => '제품 유형',
     'Shippers' => '배송자',
     'Subscriptions' => '구독',
@@ -243,12 +241,12 @@ $app_list_strings = array (
     '' => '',
     'Analyst' => '분석가',
     'Competitor' => '경쟁업체',
-    'Customer' => '소비자',
+    'Customer' => '고객',
     'Integrator' => '통합자',
     'Investor' => '투자자',
     'Partner' => '협력자',
     'Press' => '누르기',
-    'Prospect' => '예상',
+    'Prospect' => '전망',
     'Reseller' => '재판매자',
     'Other' => '기타',
   ),
@@ -279,7 +277,7 @@ $app_list_strings = array (
     'Media' => '신문/방송',
     'Not For Profit' => '비영리',
     'Recreation' => '레크리에이션',
-    'Retail' => '소매',
+    'Retail' => '유통',
     'Shipping' => '물류/운송',
     'Technology' => '기술',
     'Telecommunications' => '통신',
@@ -299,10 +297,10 @@ $app_list_strings = array (
     'Public Relations' => '광고 및 홍보',
     'Direct Mail' => 'DM 우편',
     'Conference' => '컨퍼런스',
-    'Trade Show' => '표시회',
+    'Trade Show' => '무역 박람회',
     'Web Site' => '웹사이트',
     'Word of mouth' => '입소문',
-    'Email' => '다른 이메일:',
+    'Email' => '이메일',
     'Campaign'=>'캠페인',
     'Other' => '기타',
   ),
@@ -337,11 +335,11 @@ $app_list_strings = array (
   ),
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
-  'case_relationship_type_default_key' => 'Primary Contact',
+  'case_relationship_type_default_key' => '주요 연락처',
   'case_relationship_type_dom' =>
   array (
     '' => '',
-    'Primary Contact' => 'Primary Contact',
+    'Primary Contact' => '주요 연락처',
     'Alternate Contact' => '부 연락처',
   ),
   'payment_terms' =>
@@ -352,32 +350,32 @@ $app_list_strings = array (
   ),
   'sales_stage_default_key' => '예측',
   'fts_type' => array (
-      'Elastic' => '신축검색',
+      'Elastic' => '유동적인 검색',
   ),
   'sales_stage_dom' =>
   array (
     'Prospecting' => '예측',
-    'Qualification' => '선별완료',
+    'Qualification' => '자격조건',
     'Needs Analysis' => '수요분석',
     'Value Proposition' => '초기영업',
     'Id. Decision Makers' => '의사결정권자확인',
     'Perception Analysis' => '고객요구사항분석',
     'Proposal/Price Quote' => '제안및견적',
-    'Negotiation/Review' => '최종교섭중',
-    'Closed Won' => '완료',
+    'Negotiation/Review' => '협상 및 검토',
+    'Closed Won' => '계약 성공',
     'Closed Lost' => '계약실패',
   ),
     'sales_status_with_quote_dom' => array(
         'New' => '신규',
         'In Progress' => '진행중',
-        'Closed Won' => '완료',
+        'Closed Won' => '계약 성공',
         'Closed Lost' => '계약실패',
         'Converted to Quote' => '견적으로 전환되었습니다'
     ),
     'sales_status_dom' => array(
         'New' => '신규',
         'In Progress' => '진행중',
-        'Closed Won' => '완료',
+        'Closed Won' => '계약 성공',
         'Closed Lost' => '계약실패',
     ),
 
@@ -388,16 +386,16 @@ $app_list_strings = array (
   'commit_stage_dom' =>
   array (
     'include' => '포함',
-    'upside'  => '윗부분',
+    'upside'  => '긍정적인 면',
     'exclude' => '불포함',
   ),
 
 
   'in_total_group_stages' => array (
-    'Draft' => '임시 보관',
+    'Draft' => '초안',
     'Negotiation' => '제안및교섭',
     'Delivered' => '전달',
-    'On Hold' => '대기',
+    'On Hold' => '보류',
     'Confirmed' => '확인',
     'Closed Accepted' => '계약성공',
     'Closed Lost' => '계약실패',
@@ -421,7 +419,7 @@ $app_list_strings = array (
     'Call' => '전화상담',
     'Meeting' => '회의',
     'Task' => '과제',
-    'Email' => '다른 이메일:',
+    'Email' => '이메일',
     'Note' => '메모',
   ),
   'salutation_dom' =>
@@ -430,7 +428,7 @@ $app_list_strings = array (
         'Mr.' => 'Mr.',
         'Ms.' => 'Ms.',
         'Mrs.' => 'Mrs.',
-        'Dr.' => 'Dr.',
+        'Dr.' => '박사',
         'Prof.' => '교수',
       ),
   //time is in seconds; the greater the time the longer it takes;
@@ -446,7 +444,7 @@ $app_list_strings = array (
                                   7200 => '2 시간 전에',
                                   10800 => '3 시간 전에',
                                   18000 => '5 시간 전에',
-                                  86400 => '일일 사전',
+                                  86400 => '1일 전',
                                  ),
 
   'task_priority_default' => '보통',
@@ -531,7 +529,7 @@ $app_list_strings = array (
   'user_type_dom' =>
   array (
     'RegularUser' => '일반사용자',
-    'Administrator' => '행정관',
+    'Administrator' => '관리자',
   ),
   'user_status_dom' =>
   array (
@@ -574,11 +572,11 @@ $app_list_strings = array (
     ),
 
     'project_status_dom' => array (
-        'Draft' => '임시 보관',
+        'Draft' => '초안',
         'In Review' => '검토 중',
         'Published' => '발표 완료',
     ),
-    'project_status_default' => '임시 보관',
+    'project_status_default' => '초안',
 
     'project_duration_units_dom' => array (
         'Days' => '일자',
@@ -601,7 +599,7 @@ $app_list_strings = array (
     'Opportunities' => '예비고객',
     'Cases' => '사례',
     'Leads' => '관심고객:',
-    'Contacts' => '연락처목록', // cn (11/22/2005) added to support Emails
+    'Contacts' => '연락처', // cn (11/22/2005) added to support Emails
     'Products' => '견적 라인아이템',
     'Quotes' => '견적',
     'Bugs' => '버그',
@@ -620,7 +618,7 @@ $app_list_strings = array (
     'Contacts' => '연락처',
     'Opportunities' => '예비고객',
     'Tasks' => '과제',
-    'ProductTemplates' => '상품 책자',
+    'ProductTemplates' => '제품 카탈로그',
     'Quotes' => '견적',
     'Products' => '견적 라인아이템',
     'Contracts' => '계약',
@@ -647,7 +645,7 @@ $app_list_strings = array (
     'Products' => '견적 라인아이템',
     'Quotes' => '견적',
 
-    'Bugs' => '결함',
+    'Bugs' => '버그',
     'Cases' => '사례',
     'Leads' => '관심고객:',
 
@@ -659,7 +657,7 @@ $app_list_strings = array (
 
   ),
 
-  'product_status_default_key' => '선적',
+  'product_status_default_key' => '배송',
   'product_status_quote_key' => '견적',
   'product_status_dom' =>
   array (
@@ -701,7 +699,7 @@ $app_list_strings = array (
     'Quotes' => '견적',
     'Orders' => '주문',
   ),
-  'default_quote_stage_key' => '임시 보관',
+  'default_quote_stage_key' => '초안',
   'quote_stage_dom' =>
   array (
     'Draft' => '임시 보관',
@@ -803,10 +801,10 @@ $app_list_strings = array (
   'bug_type_default_key' => '버그',
   'bug_type_dom' => array (
     'Defect' => '결함',
-    'Feature' => '기능개선',
+    'Feature' => '특징',
   ),
  'case_type_dom' => array (
-    'Administration' => '관리자',
+    'Administration' => '관리',
     'Product' => '제품',
     'User' => '사용자',
   ),
@@ -833,7 +831,7 @@ $app_list_strings = array (
     'Calls' => '전화 목록',
     'Campaigns' => '캠페인 목록',
     'Cases' => '사례 목록',
-    'Contacts' => '연락처목록',
+    'Contacts' => '연락처',
     'Currencies' => '통화목록',
   'Dashboard' => '대시보드',
   'Documents' => '문서 목록',
@@ -847,7 +845,7 @@ $app_list_strings = array (
     'Notes' => '노트',
     'Opportunities' => '영업기회',
     'Outlook Plugin' => '아웃룩 플러그인',
-    'Product Catalog' => '상품 책자',
+    'Product Catalog' => '제품 카탈로그',
     'Products' => '견적 라인아이템',
     'RevenueLineItems' => '매출 품목',
     'Projects' => '프로젝트 목록',
@@ -862,7 +860,7 @@ $app_list_strings = array (
   'campaign_status_dom' =>
   array (
         '' => '',
-        'Planning' => '계획중',
+        'Planning' => '기획',
         'Active' => '작동중',
         'Inactive' => '중지',
         'Complete' => '완료',
@@ -878,17 +876,17 @@ $app_list_strings = array (
         'Print' => '출력하기',
         'Web' => '웹',
         'Radio' => '라디오광고',
-        'Television' => '방송광고',
+        'Television' => 'Tv광고',
         'NewsLetter' => '뉴스레터',
         ),
 
   'newsletter_frequency_dom' =>
   array (
         '' => '',
-        'Weekly' => '매주',
-        'Monthly' => '매월',
-        'Quarterly' => '매분기',
-        'Annually' => '매년',
+        'Weekly' => '주별',
+        'Monthly' => '월별',
+        'Quarterly' => '분기별',
+        'Annually' => '연도별',
         ),
 
   'notifymail_sendtype' =>
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"금",
                 '7'=>"토",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"일",
+            '2'=>"월",
+            '3'=>"화",
+            '4'=>"수",
+            '5'=>"목",
+            '6'=>"금",
+            '7'=>"토",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => '일',
         '1' => '월',
@@ -964,7 +972,7 @@ $app_list_strings = array (
         ),
 
     'dom_report_types'=>array(
-                'tabular'=>'리스트',
+                'tabular'=>'열과 행',
                 'summary'=>'요약',
                 'detailed_summary'=>'설명 및 요약',
                 'Matrix' => '매트릭스',
@@ -1027,7 +1035,7 @@ $app_list_strings = array (
 
     'dom_email_editor_option'=> array(  ''          => '초기설정 이메일 형식',
                                         'html'      => 'HTML 이메일',
-                                        'plain'     => '평문 이메일'),
+                                        'plain'     => '플레인 텍스트 이메일'),
 
     'schedulers_times_dom'  => array(   'not run'       => '실행되지 않음',
                                         'ready'         => '준비',
@@ -1089,7 +1097,7 @@ $app_list_strings = array (
     'dom_meeting_accept_options' =>
     array (
     'accept' => '동의합니다.',
-    'decline' => '거절',
+    'decline' => '거절합니다',
     'tentative' => '예정',
   ),
     'dom_meeting_accept_status' =>
@@ -1145,7 +1153,7 @@ $app_list_strings = array (
   ),
     'tselect_type_dom' =>
         array (
-    '0'     =>  '아니요',
+    '0'     =>  '0 시간',
     '14440' => '4 시간',
     '28800' => '8 시간',
     '43200' => '12 시간',
@@ -1166,7 +1174,7 @@ $app_list_strings = array (
   ),
       'dtselect_type_dom' =>
         array (
-    'More Than' => '보다 많음',
+    'More Than' => '보다 많습니다',
     'Less Than' => '다음보다 적습니다',
   ),
         'wflow_alert_type_dom' =>
@@ -1247,8 +1255,8 @@ $app_list_strings = array (
   ),
   'wflow_adv_enum_type_dom' =>
         array (
-    'retreat' => 'Move dropdown backwards by',
-    'advance' => 'Move dropdown forwards by',
+    'retreat' => '드롭다운을 거꾸로 이동 ',
+    'advance' => '드롭다운은 앞으로 이동 ',
   ),
   'wflow_record_type_dom' =>
    array (
@@ -1265,7 +1273,7 @@ $app_list_strings = array (
   'wflow_relfilter_type_dom' =>
         array (
     'all' => '전체 관련',
-    'any' => '관련(Any)',
+    'any' => '관련된 (Any)',
         ),
         'wflow_fire_order_dom' => array('alerts_actions'=>'알림 후 액션',
                                     'actions_alerts'=>'액션 후 알림'),
@@ -1291,6 +1299,11 @@ $app_list_strings = array (
         'Weekly' => '주',
         'Monthly' => '월',
         'Yearly' => '년',
+    ),
+
+    'repeat_end_types' => array(
+        'Until' => '까지',
+        'Occurrences' => '발생횟수',
     ),
 
     'duration_hours_intervals' => array(
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => '없음',
+        'Each' => '각',
+        'On' => '다음에서',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => '1 순위',
+        'second' => '2 순위',
+        'third' => '3 순위',
+        'fourth' => '4 순위',
+        'fifth' => '5 순위',
+        'last' => '이외',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => '일요일',
+        'Mon' => '월요일',
+        'Tue' => '화요일',
+        'Wed' => '수요일',
+        'Thu' => '목요일',
+        'Fri' => '금요일',
+        'Sat' => '토요일',
+        'Day' => '일',
+        'WD'  => '평일',
+        'WE'  => '주말'
     ),
 
     'duration_dom' => array(
@@ -1393,11 +1503,11 @@ $app_list_strings = array (
   'campainglog_activity_type_dom' =>
   array (
     ''=>'',
-    'targeted' => '메세지 전송/시도',
-    'send error'=>'반송 메세지, 기타',
-    'invalid email'=>'반송 메세지, 유효하지 않은 이메일',
+    'targeted' => '메시지 전송/시도',
+    'send error'=>'반송 메시지, 기타',
+    'invalid email'=>'반송 메시지, 유효하지 않은 이메일',
     'link'=>'링크확인',
-    'viewed'=>'수신확인 메세지',
+    'viewed'=>'수신확인 메시지',
     'removed'=>'이탈됨',
     'lead'=>'관심고객 새로 만들기',
     'contact'=>'신규 연락처 생성완료',
@@ -1406,7 +1516,7 @@ $app_list_strings = array (
 
   'campainglog_target_type_dom' =>
   array (
-    'Contacts' => '연락처목록',
+    'Contacts' => '연락처',
     'Users'=>'사용자',
     'Prospects'=>'목표고객 목록',
     'Leads'=>'관심고객목록',
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => '중간',
         'end' => '완료',
         'top' => '상단',
+        'total' => '합계',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => '깔때기형',
@@ -1580,19 +1691,19 @@ $app_list_strings = array (
     array (
         '-1'  => '사용하지않음',
         '30'  => '매 30초마다',
-        '60'  => '매 1분마다',
-        '180'   => '매 3분마다',
-        '300'   => '매 5분마다',
-        '600'   => '매 10분마다',
+        '60'  => '1분마다',
+        '180'   => '3분마다',
+        '300'   => '5분마다',
+        '600'   => '10분마다',
     ),
     'sugar7_dashlet_auto_refresh_options' =>
     array (
         '0'  => '없음',
-        '1' => '매 1분',
+        '1' => '1분 간격',
         '5' => '매 5분',
-        '10' => '매 10분',
-        '15' => '매 15분',
-        '30' => '매 30분',
+        '10' => '10분 간격',
+        '15' => '15분 간격',
+        '30' => '30분 간격',
     ),
     'dashlet_limit_options' =>
     array(
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => '밝음',
       'dark' => '어두움',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => '이동',
@@ -1703,7 +1822,7 @@ $app_list_strings = array (
         ),
         /* Afghanistan */
         "AF" => array(
-            "1" => array("code" => "BAL", "name" => "Balkh"),
+            "1" => array("code" => "BAL", "name" => "발흐"),
             "2" => array("code" => "BAM", "name" => "바미안"),
             "3" => array("code" => "BDG", "name" => "바드기스"),
             "4" => array("code" => "BDS", "name" => "바다흐샨"),
@@ -1915,7 +2034,7 @@ $app_list_strings = array (
             "22" => array("code" => "SF", "name" => "산타페"),
             "23" => array("code" => "SD", "name" => "산티아고델에스테로"),
             "24" => array("code" => "TF", "name" => "티에라 델 푸에고"),
-            "25" => array("code" => "TU", "name" => "쿠만")
+            "25" => array("code" => "TU", "name" => "투쿠만")
         ),
         /* Armenia */
         "AM" => array(
@@ -2102,7 +2221,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "크라이스트처치"),
-            "2" => array("code" => "AND", "name" => "세인트안드레"),
+            "2" => array("code" => "그리고", "name" => "세인트안드레"),
             "3" => array("code" => "GEO", "name" => "세인트 조지"),
             "4" => array("code" => "JAM", "name" => "세인트제임스"),
             "5" => array("code" => "JOH", "name" => "세인트 존"),
@@ -2422,12 +2541,12 @@ $app_list_strings = array (
             "2" => array("code" => "CEN", "name" => "중부"),
             "3" => array("code" => "EST", "name" => "동부 (Est)"),
             "4" => array("code" => "EXN", "name" => "엑스트림므-노르드"),
-            "5" => array("code" => "LIT", "name" => "연안"),
+            "5" => array("code" => "LIT", "name" => "리토랄"),
             "6" => array("code" => "NOR", "name" => "북부 (노르드)"),
             "7" => array("code" => "NOT", "name" => "북서부 (노르드-퀘스트)"),
             "8" => array("code" => "OUE", "name" => "서부 (퀘스트)"),
             "9" => array("code" => "SUD", "name" => "남부 (수드)"),
-            "10" => array("code" => "SOU", "name" => "남서부 (수드--퀘스트)")
+            "10" => array("code" => "SOU", "name" => "남서부 (수드--웨스트)")
         ),
         /* Canada */
         "CA" => array(
@@ -2566,10 +2685,10 @@ $app_list_strings = array (
         /* Cocos (Keeling) Islands */
         "CC" => array(
             "1" => array("code" => "D", "name" => "디렉션 섬"),
-            "2" => array("code" => "H", "name" => "홈 섬"),
-            "3" => array("code" => "O", "name" => "호스버그 섬"),
-            "4" => array("code" => "S", "name" => "사우스 섬"),
-            "5" => array("code" => "W", "name" => "웨스트 섬")
+            "2" => array("code" => "H", "name" => "홈 아일랜드"),
+            "3" => array("code" => "O", "name" => "호스버그 아일랜드"),
+            "4" => array("code" => "S", "name" => "사우스 아일랜드"),
+            "5" => array("code" => "W", "name" => "웨스트 아일랜드")
         ),
         /* Colombia */
         "CO" => array(
@@ -2596,7 +2715,7 @@ $app_list_strings = array (
             "21" => array("code" => "MET", "name" => "메타"),
             "22" => array("code" => "NAR", "name" => "나리뇨"),
             "23" => array("code" => "NDS", "name" => "노르테데산탄데르"),
-            "24" => array("code" => "PUT", "name" => "푸투마요"),
+            "24" => array("code" => "올리기", "name" => "푸투마요"),
             "25" => array("code" => "QUI", "name" => "킨디오"),
             "26" => array("code" => "RIS", "name" => "리사랄다"),
             "27" => array("code" => "SAP", "name" => "산안드레스 이 프로비덴시아"),
@@ -2813,7 +2932,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "세인트 앤드류 교구"),
+            "1" => array("code" => "그리고", "name" => "세인트 앤드류 교구"),
             "2" => array("code" => "DAV", "name" => "세인트 데이빗 교구"),
             "3" => array("code" => "GEO", "name" => "세인트 조오지 교구"),
             "4" => array("code" => "JOH", "name" => "세인트 존 교구"),
@@ -2990,7 +3109,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "베니샨굴 구마즈"),
             "4" => array("code" => "GB", "name" => "감벨라"),
             "5" => array("code" => "HR", "name" => "하리알"),
-            "6" => array("code" => "OR", "name" => "오로미아"),
+            "6" => array("code" => "또는", "name" => "오로미아"),
             "7" => array("code" => "SM", "name" => "소말리"),
             "8" => array("code" => "SN", "name" => "남부 국가"),
             "9" => array("code" => "TG", "name" => "티그라이"),
@@ -3021,17 +3140,17 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "산두르"),
             "20" => array("code" => "SKO", "name" => "스코펀"),
             "21" => array("code" => "HVA", "name" => "흐반나순드"),
-            "22" => array("code" => "SUM", "name" => "숨바"),
+            "22" => array("code" => "합계", "name" => "숨바"),
             "23" => array("code" => "VIð", "name" => "비다레이디"),
             "24" => array("code" => "POR", "name" => "포케리"),
-            "25" => array("code" => "SKá", "name" => "스카라빅"),
+            "25" => array("code" => "스카", "name" => "스카라빅"),
             "26" => array("code" => "KUN", "name" => "쿠노이"),
             "27" => array("code" => "HÚS", "name" => "후사빅"),
             "28" => array("code" => "HOV", "name" => "Hov"),
             "29" => array("code" => "FáM", "name" => "팜진"),
             "30" => array("code" => "FUN", "name" => "푸닌구르"),
             "31" => array("code" => "HÚS", "name" => "후사르"),
-            "32" => array("code" => "SKÚ", "name" => "스쿠보이"),
+            "32" => array("code" => "스쿠", "name" => "스쿠보이"),
             "33" => array("code" => "SVí", "name" => "스비노이"),
             "34" => array("code" => "FUG", "name" => "푸글로이")
         ),
@@ -3069,7 +3188,7 @@ $app_list_strings = array (
             "13" => array("code" => "MI", "name" => "미디피레네"),
             "14" => array("code" => "NO", "name" => "노르파드칼레"),
             "15" => array("code" => "NR", "name" => "노르망디"),
-            "16" => array("code" => "PA", "name" => "파리 / 일레 드 프랑스"),
+            "16" => array("code" => "PA", "name" => "파리 / 일 드 프랑스"),
             "17" => array("code" => "PI", "name" => "피카르디"),
             "18" => array("code" => "PO", "name" => "푸아투 샤랑트"),
             "19" => array("code" => "PR", "name" => "프로방스"),
@@ -3126,7 +3245,7 @@ $app_list_strings = array (
             "45" => array("code" => "43", "name" => "오트루아르"),
             "46" => array("code" => "44", "name" => "루아르아틀랑티크"),
             "47" => array("code" => "45", "name" => "루아레"),
-            "48" => array("code" => "46", "name" => "Lot"),
+            "48" => array("code" => "46", "name" => "로트"),
             "49" => array("code" => "47", "name" => "로트에가론느"),
             "50" => array("code" => "48", "name" => "로제르"),
             "51" => array("code" => "49", "name" => "메느에르와르"),
@@ -3278,7 +3397,7 @@ $app_list_strings = array (
             "12" => array("code" => "SAR", "name" => "자를란트"),
             "13" => array("code" => "SAS", "name" => "작센"),
             "14" => array("code" => "SAC", "name" => "작센안할트"),
-            "15" => array("code" => "SCN", "name" => "슐레스비히홀슈타인"),
+            "15" => array("code" => "SCN", "name" => "슐레스비히-홀슈타인"),
             "16" => array("code" => "THE", "name" => "튀링겐")
         ),
         /* Ghana */
@@ -3301,7 +3420,7 @@ $app_list_strings = array (
             "3" => array("code" => "REC", "name" => "매립 지역"),
             "4" => array("code" => "SAN", "name" => "샌드핏츠 지역"),
             "5" => array("code" => "SOU", "name" => "사우스 디스트릭트"),
-            "6" => array("code" => "TOW", "name" => "도심 지역"),
+            "6" => array("code" => "토우", "name" => "도심 지역"),
             "7" => array("code" => "UPP", "name" => "어퍼 타운"),
             "8" => array("code" => "OTH", "name" => "기타")
         ),
@@ -3593,7 +3712,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "메갈라야"),
             "22" => array("code" => "MI", "name" => "미조람"),
             "23" => array("code" => "NA", "name" => "나갈랜드"),
-            "24" => array("code" => "OR", "name" => "오리사"),
+            "24" => array("code" => "또는", "name" => "오리사"),
             "25" => array("code" => "PO", "name" => "퐁디셰리"),
             "26" => array("code" => "PU", "name" => "펀잡"),
             "27" => array("code" => "RA", "name" => "라자스탄"),
@@ -3657,7 +3776,7 @@ $app_list_strings = array (
             "14" => array("code" => "KRD", "name" => "쿠르디스탄"),
             "15" => array("code" => "KRM", "name" => "케르만샤"),
             "16" => array("code" => "KZT", "name" => "후제스탄"),
-            "17" => array("code" => "LRS", "name" => "로레스탄"),
+            "17" => array("code" => "후제스탄", "name" => "로레스탄"),
             "18" => array("code" => "MKZ", "name" => "마르카지"),
             "19" => array("code" => "MZD", "name" => "마잔다란"),
             "20" => array("code" => "NKH", "name" => "북호라산"),
@@ -3796,7 +3915,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "나폴리"),
             "57" => array("code" => "NO", "name" => "노바라"),
             "58" => array("code" => "NU", "name" => "누오로"),
-            "59" => array("code" => "OR", "name" => "오리스타노"),
+            "59" => array("code" => "또는", "name" => "오리스타노"),
             "60" => array("code" => "PD", "name" => "파도바"),
             "61" => array("code" => "PA", "name" => "팔메로"),
             "62" => array("code" => "PR", "name" => "파르마"),
@@ -3856,7 +3975,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "킹스턴 교구"),
             "4" => array("code" => "MAN", "name" => "맨체스터 교구"),
             "5" => array("code" => "POR", "name" => "포틀랜드 교구"),
-            "6" => array("code" => "AND", "name" => "세인트 앤드류 교구"),
+            "6" => array("code" => "그리고", "name" => "세인트 앤드류 교구"),
             "7" => array("code" => "ANN", "name" => "세인트앤 교구"),
             "8" => array("code" => "CAT", "name" => "세인트캐서린 교구"),
             "9" => array("code" => "ELI", "name" => "세인트엘리자베스 교구"),
@@ -3898,7 +4017,7 @@ $app_list_strings = array (
             "28" => array("code" => "NR", "name" => "나라"),
             "29" => array("code" => "NI", "name" => "니가타"),
             "30" => array("code" => "OI", "name" => "오이타"),
-            "31" => array("code" => "OK", "name" => "오카야마"),
+            "31" => array("code" => "예", "name" => "오카야마"),
             "32" => array("code" => "ON", "name" => "오키나와"),
             "33" => array("code" => "OS", "name" => "오사카"),
             "34" => array("code" => "SA", "name" => "사가"),
@@ -4110,7 +4229,7 @@ $app_list_strings = array (
             "11" => array("code" => "BAT", "name" => "바트룬"),
             "12" => array("code" => "BSH", "name" => "브샤리"),
             "13" => array("code" => "KOU", "name" => "쿠라"),
-            "14" => array("code" => "MIN", "name" => "미녜-다니예"),
+            "14" => array("code" => "최소", "name" => "미녜-다니예"),
             "15" => array("code" => "TRI", "name" => "트리폴리"),
             "16" => array("code" => "ZGH", "name" => "즈가르타"),
             "17" => array("code" => "ALE", "name" => "알레이"),
@@ -4246,7 +4365,7 @@ $app_list_strings = array (
             "11" => array("code" => "ČAš", "name" => "카스카"),
             "12" => array("code" => "CEN", "name" => "첸타르"),
             "13" => array("code" => "CEN", "name" => "첸타르 주파"),
-            "14" => array("code" => "Češ", "name" => "체시노보-오블레스"),
+            "14" => array("code" => "세스", "name" => "체시노보-오블레스"),
             "15" => array("code" => "ČUČ", "name" => "쿠서-산데보"),
             "16" => array("code" => "DEB", "name" => "데바"),
             "17" => array("code" => "DEB", "name" => "데바카"),
@@ -4359,21 +4478,21 @@ $app_list_strings = array (
         ),
         /* Malaysia */
         "MY" => array(
-            "1" => array("code" => "Johor", "name" => "조호르"),
-            "2" => array("code" => "Kedah", "name" => "케다"),
-            "3" => array("code" => "Kelantan", "name" => "켈란탄"),
-            "4" => array("code" => "Labuan", "name" => "라부안"),
-            "5" => array("code" => "Melaka", "name" => "멜라카"),
-            "6" => array("code" => "Negeri Sembilan", "name" => "네게리셈빌란"),
-            "7" => array("code" => "Pahang", "name" => "파항"),
-            "8" => array("code" => "Perak", "name" => "페라크"),
-            "9" => array("code" => "Perlis", "name" => "펄리스"),
-            "10" => array("code" => "Pulau Pinang", "name" => "풀라우피낭"),
-            "11" => array("code" => "Sabah", "name" => "사바"),
-            "12" => array("code" => "Sarawak", "name" => "사라와크"),
-            "13" => array("code" => "Selangor", "name" => "셀랑고르"),
-            "14" => array("code" => "Terengganu", "name" => "테렝가누"),
-            "15" => array("code" => "Kuala Lumpur", "name" => "쿠알라룸푸르")
+            "1" => array("code" => "조호르", "name" => "조호르"),
+            "2" => array("code" => "케다", "name" => "케다"),
+            "3" => array("code" => "켈란탄", "name" => "켈란탄"),
+            "4" => array("code" => "라부안", "name" => "라부안"),
+            "5" => array("code" => "멜라카", "name" => "멜라카"),
+            "6" => array("code" => "네게리셈빌란", "name" => "네게리셈빌란"),
+            "7" => array("code" => "파항", "name" => "파항"),
+            "8" => array("code" => "페라크", "name" => "페라크"),
+            "9" => array("code" => "펄리스", "name" => "펄리스"),
+            "10" => array("code" => "풀라우피낭", "name" => "풀라우피낭"),
+            "11" => array("code" => "사바", "name" => "사바"),
+            "12" => array("code" => "사라와크", "name" => "사라와크"),
+            "13" => array("code" => "셀랑고르", "name" => "셀랑고르"),
+            "14" => array("code" => "테렝가누", "name" => "테렝가누"),
+            "15" => array("code" => "쿠알라룸푸르", "name" => "쿠알라룸푸르")
         ),
         /* Maldives */
         "MV" => array(
@@ -4389,7 +4508,7 @@ $app_list_strings = array (
             "10" => array("code" => "KLH", "name" => "콜후마둘루"),
             "11" => array("code" => "MAA", "name" => "알레 아톨"),
             "12" => array("code" => "MAD", "name" => "말호스마둘루 데쿠누"),
-            "13" => array("code" => "MAU", "name" => "말호스마둘루 우투루"),
+            "13" => array("code" => "마우", "name" => "말호스마둘루 우투루"),
             "14" => array("code" => "MLD", "name" => "밀라둔마둘루 데쿠누"),
             "15" => array("code" => "MLU", "name" => "밀라둔마둘루 우투루"),
             "16" => array("code" => "MUA", "name" => "물라쿠 아톨"),
@@ -4662,7 +4781,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "카훌"),
             "5" => array("code" => "ED", "name" => "에디네츠"),
             "6" => array("code" => "LA", "name" => "라푸스나"),
-            "7" => array("code" => "OR", "name" => "오르헤이"),
+            "7" => array("code" => "또는", "name" => "오르헤이"),
             "8" => array("code" => "SO", "name" => "소로카"),
             "9" => array("code" => "TI", "name" => "티기나"),
             "10" => array("code" => "UN", "name" => "운게니"),
@@ -4792,7 +4911,7 @@ $app_list_strings = array (
             "6" => array("code" => "KH", "name" => "호마스"),
             "7" => array("code" => "KU", "name" => "쿠네네"),
             "8" => array("code" => "OW", "name" => "오항궤나"),
-            "9" => array("code" => "OK", "name" => "오마헤케"),
+            "9" => array("code" => "예", "name" => "오마헤케"),
             "10" => array("code" => "OT", "name" => "오무사티"),
             "11" => array("code" => "ON", "name" => "오샤나"),
             "12" => array("code" => "OO", "name" => "오시코토"),
@@ -5293,7 +5412,7 @@ $app_list_strings = array (
             "30" => array("code" => "GUA", "name" => "과야닐라"),
             "31" => array("code" => "GUA", "name" => "과이나보"),
             "32" => array("code" => "GUR", "name" => "구라보"),
-            "33" => array("code" => "GU¡", "name" => "과니카"),
+            "33" => array("code" => "구이", "name" => "과니카"),
             "34" => array("code" => "HAT", "name" => "하티요"),
             "35" => array("code" => "HOR", "name" => "호르미구에로스"),
             "36" => array("code" => "HUM", "name" => "후마카오"),
@@ -5309,7 +5428,7 @@ $app_list_strings = array (
             "46" => array("code" => "LUQ", "name" => "루퀼로"),
             "47" => array("code" => "MAN", "name" => "마나티"),
             "48" => array("code" => "MAR", "name" => "마리아코"),
-            "49" => array("code" => "MAU", "name" => "마우나보"),
+            "49" => array("code" => "마우", "name" => "마우나보"),
             "50" => array("code" => "MAY", "name" => "마야궤스"),
             "51" => array("code" => "MOC", "name" => "모카"),
             "52" => array("code" => "MOR", "name" => "모로비스"),
@@ -5449,7 +5568,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "노브고로드"),
             "48" => array("code" => "NV", "name" => "노보시비르스크"),
             "49" => array("code" => "OM", "name" => "옴스크"),
-            "50" => array("code" => "OR", "name" => "오렐"),
+            "50" => array("code" => "또는", "name" => "오렐"),
             "51" => array("code" => "OE", "name" => "오렌부르크"),
             "52" => array("code" => "PA", "name" => "팔라나"),
             "53" => array("code" => "PE", "name" => "펜자"),
@@ -5900,7 +6019,7 @@ $app_list_strings = array (
             "9" => array("code" => "HL", "name" => "알레포"),
             "10" => array("code" => "HM", "name" => "하마"),
             "11" => array("code" => "HI", "name" => "홈스"),
-            "12" => array("code" => "ID", "name" => "이들리브"),
+            "12" => array("code" => "ID:", "name" => "이들리브"),
             "13" => array("code" => "RD", "name" => "리프디마슈크"),
             "14" => array("code" => "TA", "name" => "타르투스")
         ),
@@ -5969,82 +6088,82 @@ $app_list_strings = array (
         ),
         /* Thailand */
         "TH" => array(
-            "1" => array("code" => "Amnat Charoen", "name" => "암낫짜른"),
-            "2" => array("code" => "Ang Thong", "name" => "앙통"),
-            "3" => array("code" => "Ayutthaya", "name" => "아유타야"),
-            "4" => array("code" => "Bangkok", "name" => "방콕"),
-            "5" => array("code" => "Buriram", "name" => "부리남"),
-            "6" => array("code" => "Chachoengsao", "name" => "차층사오"),
-            "7" => array("code" => "Chai Nat", "name" => "차이낫"),
-            "8" => array("code" => "Chaiyaphum", "name" => "차이야품"),
-            "9" => array("code" => "Chanthaburi", "name" => "짠타부리"),
-            "10" => array("code" => "Chiang Mai", "name" => "치앙마이"),
-            "11" => array("code" => "Chiang Rai", "name" => "치앙라이"),
-            "12" => array("code" => "Chon Buri", "name" => "촌부리"),
-            "13" => array("code" => "Chumphon", "name" => "춤폰"),
-            "14" => array("code" => "Kalasin", "name" => "깔라신"),
-            "15" => array("code" => "Kamphaeng Phet", "name" => "깜팽펫"),
-            "16" => array("code" => "Kanchanaburi", "name" => "깐짜나부리"),
-            "17" => array("code" => "Khon Kaen", "name" => "콘깬"),
-            "18" => array("code" => "Krabi", "name" => "끄라비"),
-            "19" => array("code" => "Lampang", "name" => "람빵"),
-            "20" => array("code" => "Lamphun", "name" => "람푼"),
-            "21" => array("code" => "Loei", "name" => "르이"),
-            "22" => array("code" => "Lop Buri", "name" => "롭부리"),
-            "23" => array("code" => "Mae Hong Son", "name" => "매홍손"),
-            "24" => array("code" => "Maha Sarakham", "name" => "마하사라캄"),
-            "25" => array("code" => "Mukdahan", "name" => "묵다한"),
-            "26" => array("code" => "Nakhon Nayok", "name" => "나콘나욕"),
-            "27" => array("code" => "Nakhon Pathom", "name" => "나콘빠톰"),
-            "28" => array("code" => "Nakhon Phanom", "name" => "나콘파놈"),
-            "29" => array("code" => "Nakhon Ratchasima", "name" => "나콘랏차시마"),
-            "30" => array("code" => "Nakhon Sawan", "name" => "나콘사완"),
-            "31" => array("code" => "Nakhon Si Thammarat", "name" => "나콘시탐마랏"),
-            "32" => array("code" => "Nan", "name" => "난"),
-            "33" => array("code" => "Narathiwat", "name" => "나라티왓"),
-            "34" => array("code" => "Nong Bua Lamphu", "name" => "농부아람푸"),
-            "35" => array("code" => "Nong Khai", "name" => "농카이"),
-            "36" => array("code" => "Nonthaburi", "name" => "논타부리"),
-            "37" => array("code" => "Pathum Thani", "name" => "빠툼타니"),
-            "38" => array("code" => "Pattani", "name" => "빠따니"),
-            "39" => array("code" => "Phangnga", "name" => "팡응아"),
-            "40" => array("code" => "Phatthalung", "name" => "파탈룽"),
-            "41" => array("code" => "Phayao", "name" => "파야오"),
-            "42" => array("code" => "Phetchabun", "name" => "펫차분"),
-            "43" => array("code" => "Phetchaburi", "name" => "펫차부리"),
-            "44" => array("code" => "Phichit", "name" => "피찟"),
-            "45" => array("code" => "Phitsanulok", "name" => "핏사눌록"),
-            "46" => array("code" => "Phrae", "name" => "프래"),
-            "47" => array("code" => "Phuket", "name" => "푸켓"),
-            "48" => array("code" => "Prachin Buri", "name" => "쁘라찐부리"),
-            "49" => array("code" => "Prachuap Khiri Khan", "name" => "쁘라쭈압키리칸"),
-            "50" => array("code" => "Ranong", "name" => "라농"),
-            "51" => array("code" => "Ratchaburi", "name" => "랏차부리"),
-            "52" => array("code" => "Rayong", "name" => "라용"),
-            "53" => array("code" => "Roi Et", "name" => "로이엣"),
-            "54" => array("code" => "Sa Kaeo", "name" => "사깨오"),
-            "55" => array("code" => "Sakon Nakhon", "name" => "사꼰나콘"),
-            "56" => array("code" => "Samut Prakan", "name" => "사뭇쁘라깐"),
-            "57" => array("code" => "Samut Sakhon", "name" => "사뭇사콘"),
-            "58" => array("code" => "Samut Songkhram", "name" => "사뭇송크람"),
-            "59" => array("code" => "Sara Buri", "name" => "사라부리"),
-            "60" => array("code" => "Satun", "name" => "사뚠"),
-            "61" => array("code" => "Sing Buri", "name" => "싱부리"),
-            "62" => array("code" => "Sisaket", "name" => "시사껫"),
-            "63" => array("code" => "Songkhla", "name" => "송클라"),
-            "64" => array("code" => "Sukhothai", "name" => "수코타이"),
-            "65" => array("code" => "Suphan Buri", "name" => "수판부리"),
-            "66" => array("code" => "Surat Thani", "name" => "수랏타니"),
-            "67" => array("code" => "Surin", "name" => "수린"),
-            "68" => array("code" => "Tak", "name" => "딱"),
-            "69" => array("code" => "Trang", "name" => "뜨랑"),
-            "70" => array("code" => "Trat", "name" => "뜨랏"),
-            "71" => array("code" => "Ubon Ratchathani", "name" => "우본랏차타니"),
-            "72" => array("code" => "Udon Thani", "name" => "우돈타니"),
-            "73" => array("code" => "Uthai Thani", "name" => "우타이타니"),
-            "74" => array("code" => "Uttaradit", "name" => "우따라딧"),
-            "75" => array("code" => "Yala", "name" => "얄라"),
-            "76" => array("code" => "Yasothon", "name" => "야소톤")
+            "1" => array("code" => "암낫짜른", "name" => "암낫짜른"),
+            "2" => array("code" => "앙통", "name" => "앙통"),
+            "3" => array("code" => "아유타야", "name" => "아유타야"),
+            "4" => array("code" => "방콕", "name" => "방콕"),
+            "5" => array("code" => "부리남", "name" => "부리남"),
+            "6" => array("code" => "차층사오", "name" => "차층사오"),
+            "7" => array("code" => "차이낫", "name" => "차이낫"),
+            "8" => array("code" => "차이야품", "name" => "차이야품"),
+            "9" => array("code" => "짠타부리", "name" => "짠타부리"),
+            "10" => array("code" => "치앙마이", "name" => "치앙마이"),
+            "11" => array("code" => "치앙라이", "name" => "치앙라이"),
+            "12" => array("code" => "촌부리", "name" => "촌부리"),
+            "13" => array("code" => "춤폰", "name" => "춤폰"),
+            "14" => array("code" => "깔라신", "name" => "깔라신"),
+            "15" => array("code" => "깜팽펫", "name" => "깜팽펫"),
+            "16" => array("code" => "깐짜나부리", "name" => "깐짜나부리"),
+            "17" => array("code" => "콘깬", "name" => "콘깬"),
+            "18" => array("code" => "끄라비", "name" => "끄라비"),
+            "19" => array("code" => "람빵", "name" => "람빵"),
+            "20" => array("code" => "람푼", "name" => "람푼"),
+            "21" => array("code" => "르이", "name" => "르이"),
+            "22" => array("code" => "롭부리", "name" => "롭부리"),
+            "23" => array("code" => "매홍손", "name" => "매홍손"),
+            "24" => array("code" => "마하사라캄", "name" => "마하사라캄"),
+            "25" => array("code" => "묵다한", "name" => "묵다한"),
+            "26" => array("code" => "나콘나욕", "name" => "나콘나욕"),
+            "27" => array("code" => "나콘빠톰", "name" => "나콘빠톰"),
+            "28" => array("code" => "나콘파놈", "name" => "나콘파놈"),
+            "29" => array("code" => "나콘랏차시마", "name" => "나콘랏차시마"),
+            "30" => array("code" => "나콘사완", "name" => "나콘사완"),
+            "31" => array("code" => "나콘시탐마랏", "name" => "나콘시탐마랏"),
+            "32" => array("code" => "난", "name" => "난"),
+            "33" => array("code" => "나라티왓", "name" => "나라티왓"),
+            "34" => array("code" => "농부아람푸", "name" => "농부아람푸"),
+            "35" => array("code" => "농카이", "name" => "농카이"),
+            "36" => array("code" => "논타부리", "name" => "논타부리"),
+            "37" => array("code" => "빠툼타니", "name" => "빠툼타니"),
+            "38" => array("code" => "빠따니", "name" => "빠따니"),
+            "39" => array("code" => "팡응아", "name" => "팡응아"),
+            "40" => array("code" => "파탈룽", "name" => "파탈룽"),
+            "41" => array("code" => "파야오", "name" => "파야오"),
+            "42" => array("code" => "펫차분", "name" => "펫차분"),
+            "43" => array("code" => "펫차부리", "name" => "펫차부리"),
+            "44" => array("code" => "피찟", "name" => "피찟"),
+            "45" => array("code" => "핏사눌록", "name" => "핏사눌록"),
+            "46" => array("code" => "프래", "name" => "프래"),
+            "47" => array("code" => "푸켓", "name" => "푸켓"),
+            "48" => array("code" => "쁘라찐부리", "name" => "쁘라찐부리"),
+            "49" => array("code" => "쁘라쭈압키리칸", "name" => "쁘라쭈압키리칸"),
+            "50" => array("code" => "라농", "name" => "라농"),
+            "51" => array("code" => "랏차부리", "name" => "랏차부리"),
+            "52" => array("code" => "라용", "name" => "라용"),
+            "53" => array("code" => "로이엣", "name" => "로이엣"),
+            "54" => array("code" => "사깨오", "name" => "사깨오"),
+            "55" => array("code" => "사꼰나콘", "name" => "사꼰나콘"),
+            "56" => array("code" => "사뭇쁘라깐", "name" => "사뭇쁘라깐"),
+            "57" => array("code" => "사뭇사콘", "name" => "사뭇사콘"),
+            "58" => array("code" => "사뭇송크람", "name" => "사뭇송크람"),
+            "59" => array("code" => "사라부리", "name" => "사라부리"),
+            "60" => array("code" => "사뚠", "name" => "사뚠"),
+            "61" => array("code" => "싱부리", "name" => "싱부리"),
+            "62" => array("code" => "시사껫", "name" => "시사껫"),
+            "63" => array("code" => "송클라", "name" => "송클라"),
+            "64" => array("code" => "수코타이", "name" => "수코타이"),
+            "65" => array("code" => "수판부리", "name" => "수판부리"),
+            "66" => array("code" => "수랏타니", "name" => "수랏타니"),
+            "67" => array("code" => "수린", "name" => "수린"),
+            "68" => array("code" => "딱", "name" => "딱"),
+            "69" => array("code" => "뜨랑", "name" => "뜨랑"),
+            "70" => array("code" => "뜨랏", "name" => "뜨랏"),
+            "71" => array("code" => "우본랏차타니", "name" => "우본랏차타니"),
+            "72" => array("code" => "우돈타니", "name" => "우돈타니"),
+            "73" => array("code" => "우타이타니", "name" => "우타이타니"),
+            "74" => array("code" => "우따라딧", "name" => "우따라딧"),
+            "75" => array("code" => "얄라", "name" => "얄라"),
+            "76" => array("code" => "야소톤", "name" => "야소톤")
         ),
         /* Togo */
         "TG" => array(
@@ -6336,7 +6455,7 @@ $app_list_strings = array (
             "2" => array("code" => "ABNS", "name" => "애버딘셔"),
             "3" => array("code" => "ANG", "name" => "앵글시"),
             "4" => array("code" => "AGS", "name" => "앵거스"),
-            "5" => array("code" => "ARY", "name" => "아가일 뷰트"),
+            "5" => array("code" => "아리", "name" => "아가일 뷰트"),
             "6" => array("code" => "BEDS", "name" => "베드퍼드셔"),
             "7" => array("code" => "BERKS", "name" => "버크셔"),
             "8" => array("code" => "BLA", "name" => "블라이나이궨트"),
@@ -6359,27 +6478,27 @@ $app_list_strings = array (
             "25" => array("code" => "DGL", "name" => "덤프리스 갤러웨이"),
             "26" => array("code" => "DUND", "name" => "던디"),
             "27" => array("code" => "DHM", "name" => "더럼"),
-            "28" => array("code" => "ARYE", "name" => "이스트에어셔"),
-            "29" => array("code" => "DUNBE", "name" => "이스트던바턴셔"),
-            "30" => array("code" => "LOTE", "name" => "이스트로디언"),
-            "31" => array("code" => "RENE", "name" => "이스트렌프루셔"),
-            "32" => array("code" => "ERYS", "name" => "이스트라이딩오브요크셔"),
+            "28" => array("code" => "아리에", "name" => "이스트에어셔"),
+            "29" => array("code" => "던베", "name" => "이스트던바턴셔"),
+            "30" => array("code" => "로테", "name" => "이스트로디언"),
+            "31" => array("code" => "레네", "name" => "이스트렌프루셔"),
+            "32" => array("code" => "에리스", "name" => "이스트라이딩오브요크셔"),
             "33" => array("code" => "SXE", "name" => "이스트 서섹스"),
             "34" => array("code" => "EDIN", "name" => "에딘버러"),
             "35" => array("code" => "ESX", "name" => "에섹스"),
             "36" => array("code" => "FALK", "name" => "폴커크"),
             "37" => array("code" => "FFE", "name" => "파이프"),
-            "38" => array("code" => "FLINT", "name" => "플린트셔"),
+            "38" => array("code" => "플린트", "name" => "플린트셔"),
             "39" => array("code" => "GLAS", "name" => "글래스고"),
             "40" => array("code" => "GLOS", "name" => "글로스터셔"),
             "41" => array("code" => "LDN", "name" => "그레이터런던"),
             "42" => array("code" => "MCH", "name" => "그레이터맨체스터"),
             "43" => array("code" => "GDD", "name" => "귀네드"),
-            "44" => array("code" => "HANTS", "name" => "햄프셔"),
+            "44" => array("code" => "핸츠", "name" => "햄프셔"),
             "45" => array("code" => "HWR", "name" => "헤리퍼드셔"),
-            "46" => array("code" => "HERTS", "name" => "하트퍼드셔"),
+            "46" => array("code" => "허츠", "name" => "하트퍼드셔"),
             "47" => array("code" => "HLD", "name" => "하일랜드"),
-            "48" => array("code" => "IVER", "name" => "인버클라이드"),
+            "48" => array("code" => "아이버", "name" => "인버클라이드"),
             "49" => array("code" => "IOW", "name" => "아일오브와이트"),
             "50" => array("code" => "KNT", "name" => "켄트"),
             "51" => array("code" => "LANCS", "name" => "랭커셔"),
@@ -6411,7 +6530,7 @@ $app_list_strings = array (
             "77" => array("code" => "SHET", "name" => "셰틀랜드 제도"),
             "78" => array("code" => "SPE", "name" => "슈롭셔"),
             "79" => array("code" => "SOM", "name" => "서머싯"),
-            "80" => array("code" => "ARYS", "name" => "사우스에어셔"),
+            "80" => array("code" => "아리스", "name" => "사우스에어셔"),
             "81" => array("code" => "LANS", "name" => "사우스래너크셔"),
             "82" => array("code" => "YSS", "name" => "사우스요크셔"),
             "83" => array("code" => "SFD", "name" => "스태퍼드셔"),
@@ -6456,7 +6575,7 @@ $app_list_strings = array (
             "19" => array("code" => "GA", "name" => "조지아"),
             "20" => array("code" => "GU", "name" => "괌"),
             "21" => array("code" => "HI", "name" => "하와이"),
-            "22" => array("code" => "ID", "name" => "아이다 호"),
+            "22" => array("code" => "ID:", "name" => "아이다 호"),
             "23" => array("code" => "IL", "name" => "일리노이"),
             "24" => array("code" => "IN", "name" => "인디애나"),
             "25" => array("code" => "IA", "name" => "아이오와"),
@@ -6482,8 +6601,8 @@ $app_list_strings = array (
             "45" => array("code" => "ND", "name" => "노스 다코타"),
             "46" => array("code" => "MP", "name" => "북마리아나 제도"),
             "47" => array("code" => "OH", "name" => "오하이오"),
-            "48" => array("code" => "OK", "name" => "오클라호마"),
-            "49" => array("code" => "OR", "name" => "오레곤"),
+            "48" => array("code" => "예", "name" => "오클라호마"),
+            "49" => array("code" => "또는", "name" => "오레곤"),
             "50" => array("code" => "PW", "name" => "팔라우"),
             "51" => array("code" => "PA", "name" => "펜실베니아"),
             "52" => array("code" => "PR", "name" => "푸에르토리코"),
@@ -6676,7 +6795,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "카사이옥시당탈"),
             "8" => array("code" => "MA", "name" => "마니에마"),
             "9" => array("code" => "NK", "name" => "북 키부"),
-            "10" => array("code" => "OR", "name" => "동부 주"),
+            "10" => array("code" => "또는", "name" => "동부 주"),
             "11" => array("code" => "SK", "name" => "남 키부")
         ),
         /* Zambia */
@@ -7859,11 +7978,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => '링크 팔로잉',
   'LBL_TOGGLE_VISIBILITY' => '토글 가시성', // Record view header panel element
   'LBL_ACTIVITIES' => '활동흐름',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. All Rights Reserved.',
-  'LBL_TRADEMARK' => 'SugarCRM은 SugarCRM, Inc.의 상표입니다. 다른 모든 회사 및 제품 이름은 그것이 속한 각각의 기업의 상표입니다.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ 및 Sugar™는 SugarCRM, Inc.의 상표입니다.',
-  'LBL_SEND_INVITE' => '초대하기',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar 및 3-D 큐브는 SugarCRM Inc. 등록상표입니다. '.
+        '이 제품에 사용되거나 나타난 모든 여타 기업 및 상품명은 '.
+        '상품과 관련된 각 기업의 상표일 수 있습니다.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ 및 Sugar™는 SugarCRM, Inc.의 상표입니다.',
+    'LBL_SEND_INVITE' => '초대하기',
   'LBL_INVITEES' => '초대자 목록',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => '손님이 당신의 초대를 받지 않습니다.',
   'LBL_SELECT_ACTION_LABEL' => '액션 선택',
   'LBL_TOGGLE_DRAWER' => '토글 서랍',
   'LBL_TOUR_NEXT' => '다음',
@@ -7903,6 +8025,11 @@ $app_strings = array (
   'LBL_ADD' => '추가' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => '회사 로고' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => '캘린더' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => '메인 모듈 탐색',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => '서브 전환',
+
     'LBL_ADVANCED' => '고급',
     'LBL_BASIC' => '기본',
     'LBL_MODULE_FILTER' => '다음 조건으로 필터됨',
@@ -8243,7 +8370,7 @@ $app_strings = array (
     'LBL_EMAIL_REVERT'                      => '되돌아가기',
     'LBL_EMAIL_RELATE_EMAIL'                => '관련 이메일',
 
-    'LBL_EMAIL_RULES_TITLE'                 => '역할 관리',
+    'LBL_EMAIL_RULES_TITLE'                 => '규칙 관리',
 
     'LBL_EMAIL_SAVE'                        => '저장하기',
     'LBL_EMAIL_SAVE_AND_REPLY'              => '저장후 답장',
@@ -8369,6 +8496,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'팀',
     'LBL_TEAM_SET_ID' => '팀 설정 ID',
     'LBL_TEAM_SET'=>'팀 설정',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => '선택된 부서',
     'LBL_SEARCH_UNAVAILABLE' => '검색기능을 사용할수 없습니다. 나중에 다시 시도해주십시오.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => '명시된 기본 팀이 없습니다.',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => '아이디 [{2}] 모듈 [{1}] 에 대한 기본팀 아이디 [{0}] 제거를 시도하는 중 오류가 발생했습니다.',
@@ -8461,6 +8589,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => '잠시 검색 엔진을 이용할 수 없습니다.',
     'EXCEPTION_SEARCH_RUNTIME'          => '검색 엔진 런타임 오류가 발생했습니다. 시스템 관리자에 문의하십시오.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => '프로세스에 의해 락(lock)이 된 필드는 편집할 수 없습니다.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => '일반적인 고장이나 오류로 인해 문제가 발생했습니다. 원인은 예외적인 범위의 경우이지만, 일반적으로 더 구체적인 API 예외의 범위에 속합니다.',
@@ -8485,9 +8614,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => '서버가 사용량이 많거나 과부하 또는 다운된 상태입니다.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => '연결 문제가 있어 검색 엔진 백엔드를 현재 이용할 수 없습니다. 관리->검색->테스트에서 연결성 및 환경구성을 확인하십시오.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => '검색 엔진에 런타임 예외가 발생했습니다. 자세한 내용은 sugarcrm.log를 참조하세요.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => '현재 실행중인 프로세스에 의해 잠긴 필드는 편집될 수 없습니다.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s는 실행중인 프로세스에 의해 락 (lock)이 되어 편집할 수 없습니다.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s는 실행중인 프로세스에 의해 잠겨있으며 편집할 수 없습니다.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => '같은 이름의 파일이 존재합니다.',
 
@@ -8496,6 +8627,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => '이 기간은 이미 하위기간을 가지고 있습니다.',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => '하위 기간은 다른 하위기간을 가질수 없습니다.',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => '{0}형식의 기간을 가질수 없습니다.',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => '현재 설정을 위한 활성 기간이 없습니다.',
     'LBL_CURRENT_TIMEPERIOD' => '현재 기간',
     'LBL_PREVIOUS_TIMEPERIOD' => '이전 기간',
     'LBL_NEXT_TIMEPERIOD' => '다음 기간',
@@ -8622,6 +8754,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => '필드를 선택하십시오',
     'LBL_FILTER_SELECT_OPERATOR' => '작업자를 선택하십시오',
     'LBL_FILTER_CREATE_NEW' => '신규 필터 말들기',
+    'LBL_FILTER_CREATE_FILTER' => '새로운 필터 생성',
+    'LBL_FILTER_EDIT_FILTER' => '필터 편집',
     'LBL_FILTER_ALL_RECORDS' => '전체 기록',
     'TPL_FILTER_SAVE' => '성공적으로 필터 {{name}} 만들었습니다.',
     'LBL_FILTER_BETWEEN_FROM' => '발신인',
@@ -8778,7 +8912,7 @@ $app_strings = array (
     'TPL_MASS_ADD_TO_LIST_QUEUED' => '요청하신 레코드의 목표목록 추가가 스케줄링되었습니다.',
     'LBL_MASS_UPDATE_EMPTY_VALUES' => '값이 입력되지 않았습니다.',
     'LBL_MASS_UPDATE_EMPTY_CONFIRM' => '존재하는 값이 사라집니다. 계속하시겠습니까?',
-    'LBL_OPT_OUT_FLAG_PRIMARY' => '수신거부된 메인 이메일 주소',
+    'LBL_OPT_OUT_FLAG_PRIMARY' => '수신거부된 기본 이메일 주소',
     'LBL_MEETINGS'=>'회의',
     'LBL_MEETING'=>'회의',
     'LBL_MEETING_GO_BACK'=>'회의로 돌아가기',
@@ -8824,12 +8958,12 @@ $app_strings = array (
     'LBL_POSTAL_CODE' => '우편번호:',
     'LBL_PRIMARY_ADDRESS_CITY' => '시:',
     'LBL_PRIMARY_ADDRESS_COUNTRY' => '국가:',
-    'LBL_PRIMARY_ADDRESS_POSTALCODE' => '우편번호:',
-    'LBL_PRIMARY_ADDRESS_STATE' => '도:',
+    'LBL_PRIMARY_ADDRESS_POSTALCODE' => '기본 주소지 우편번호:',
+    'LBL_PRIMARY_ADDRESS_STATE' => '기본 주소 도:',
     'LBL_PRIMARY_ADDRESS_STREET_2' => '나머지주소2:',
-    'LBL_PRIMARY_ADDRESS_STREET_3' => '나머지주소3:',
-    'LBL_PRIMARY_ADDRESS_STREET' => '나머지주소:',
-    'LBL_PRIMARY_ADDRESS' => '기본주소:',
+    'LBL_PRIMARY_ADDRESS_STREET_3' => '기본 주소 나머지주소3:',
+    'LBL_PRIMARY_ADDRESS_STREET' => '기본 주소 나머지주소:',
+    'LBL_PRIMARY_ADDRESS' => '기본 주소:',
 
 	'LBL_BILLING_STREET'=> '청구지 주소:',
 	'LBL_SHIPPING_STREET'=> '배송지주소:',
@@ -8998,6 +9132,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => '도:',
     'LBL_STATUS_UPDATED'=>'당신의 상태가 변경되었습니다.',
+    'LBL_STATUS_NOT_UPDATED' => '이벤트에 대한 사용자의 상태가 업데이트 되지 않았습니다.',
     'LBL_STATUS'=>'상태:',
     'LBL_STREET'=>'동:',
     'LBL_SUBJECT' => '제목',
@@ -9006,7 +9141,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> 모든 판권을 소유합니다.<br />SugarCRM은 SugarCRM, Inc.의 상표입니다. 기타 모든 회사 및 제품 이름은 각 관련 회사의 상표일 수 있습니다.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '판권 소유.<br />SugarCRM, Sugar 및 3-D 큐브는 SugarCRM Inc. 등록 상표입니다. '.
+        '이 제품에 사용되거나 나타난 여타 모든 기업 및 상품명은 '.
+        '상품과 관련된 각 기업의 상표일 수 있습니다.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => '예약된 작업 완료',
@@ -9177,7 +9316,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => '오류. 유효하지 않은 연산자를 입력하셨습니다.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => '오류. 유효하지 않은 필터를 입력하셨습니다.',
     'ERROR_PA_UNSUPPORTED_FILE' => '가져오지못했습니다. 자세한내용을보려면 Sugar 로그를참조하십시오.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => '삽입에 실패했습니다. 프로세스 정의 내 그룹 필드 일부가 잠겨 있습니다. 정의에 삽입이 이루어지려면 프로세스 정의 내 이러한 필드의 잠금을 해제해야 합니다.',
+    'ERROR_EXP_DATE_LOW' => '오류. 만료 일자를 발매 일자 이전으로 설정할 수 없습니다.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => '오류. 승인된 상태에는 게시일이 필요합니다.',
     'ERROR_ACTIVE_DATE_EMPTY' => '게시 날짜가 비었습니다.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9307,6 +9447,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => '행이 표시될 수 있습니다',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => '대시보드',
     'LBL_DASHBOARD_BWC' => '내 기존 대시보드',
     'LBL_DEFAULT_DASHBOARD_TITLE' => '내 대시보드',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => '도움말 대시보드',
@@ -9339,9 +9480,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => '내 {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => '뉴스',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => '관련 계정을 위한 구글 뉴스',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => '영업기회 매트릭스(Metrics)',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => '관련 고객을 위한 예비고객 모체',
@@ -9410,7 +9548,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => '기록을 이 시간에 찾을 수 없습니다.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => '사례 요약',
-    'LBL_DASHLET_NEWS_FEED_NAME' => '소식 공급',
     'LBL_DASHLET_ITERACTIONS_NAME' => '인터렉션(Interactions)',
     'LBL_DASHLET_ATTACHMENTS_NAME' => '메모와 첨부문서',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => '레코드의 메모와 첨부문서',
@@ -9569,9 +9706,9 @@ $app_strings = array (
     /* D&B Location */
     'LBL_DNB_LOC' => '위치',
     'LBL_DNB_PRIM_STREET' => '주요 상세 주소',
-    'LBL_DNB_PRIM_CITY' => '주요 시/군',
+    'LBL_DNB_PRIM_CITY' => '기본 주소 시/군',
     'LBL_DNB_PRIM_STATE_ABBR' => '주요 지역 약어',
-    'LBL_DNB_PRIM_STATE' => '주요 지역',
+    'LBL_DNB_PRIM_STATE' => '기본 주소지 지역',
     'LBL_DNB_PRIM_CEN_CD' => '인구 코드',
     'LBL_DNB_PRIM_CTRY_GRP' => '국가 그룹',
     'LBL_DNB_PRIM_ZIP' => '기본 우편번호',
@@ -9767,7 +9904,7 @@ $app_strings = array (
     'LBL_DNB_TOTAL_ENQUIERY_COUNT' => '총 문의 횟수',
     'LBL_DNB_LAST_UPDATE_DATE' => '마지막 업데이트 날짜',
     'LBL_DNB_SELF_REQUEST_INDICATOR' => '자체 요청 표시',
-    'LBL_DNB_PRIMARY_TOWN' => '주요 도시',
+    'LBL_DNB_PRIMARY_TOWN' => '기본 주소 도시',
     'LBL_DNB_COUNTRY_OFFICIAL_NAME' => '국가 공식명',
     'LBL_DNB_PRIMARY_ADDRESS_POSTAL_CODE' => '기본주소지 우편번호',
     'LBL_DNB_TERRITORY_OFFICIAL_NAME' => '지역 공식명',
@@ -9885,7 +10022,7 @@ $app_strings = array (
     'LBL_DNB_BAL_SIC_NAICS_EXAMPLE' => '예: SIC 코드 : 5734 -> 컴퓨터 및 소프트웨어 스토어, 3711 -> 자동차 제조',
     'LBL_DNB_BAL_IND_CODE_TYPE_PRI_SEC' => '주요한/부차적인 것들을 포함합니다',
     'LBL_DNB_BAL_PRIMARY_ONLY' => '기본용',
-    'LBL_DNB_BAL_PRIMARY_SECONDARY' => '기본 및 보조',
+    'LBL_DNB_BAL_PRIMARY_SECONDARY' => '기본 및 대체',
     'LBL_DNB_BAL_FINANCIAL_INFO' => '재무 정보',
     'LBL_DNB_BAL_NET_INCOME' => '당기 순이익',
     'LBL_DNB_BAL_NET_INCOME_GROWTH' => '당기 순이익 증가율',
@@ -9919,7 +10056,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => '선택 작업 기능',
     'LBL_DNB_BAL_ORG_NAME' => '단체명',
     'LBL_DNB_BAL_IMPORT_AS' => '들여오기 대상 :',
-    'LBL_DNB_BAL_ORG_NAME' => '단체명',
+    'LBL_DNB_BAL_ORG_NAME' => '회사명',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => '$ USD의 수백만에',
@@ -9978,7 +10115,7 @@ $app_strings = array (
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => '가장 유용한 게시된 지식 기반 기사',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => '가장 선호되었고, 많이 읽혔던 기사를 보여줍니다',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtered by {{label}} "{{value}}"',
 
@@ -10017,6 +10154,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => '페이지명을 입력해주십시오.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => '내 파이프라인',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "내 부서의 파이프라인",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => '세일즈 파이프라인 차트',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => '현재 파이프라인 차트를 표시',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => '이미지 없음',
 
@@ -10235,7 +10379,7 @@ $app_strings = array (
     // ID labels
     'LBL_EXPORT_ASSIGNED_USER_ID' => '담당자 ID',
     'LBL_EXPORT_CREATED_BY' => '생성자 ID',
-    'LBL_EXPORT_MODIFIED_USER_ID' => '수정자 ID',
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'ID에 따른 수정',
     'LBL_EXPORT_REPORTS_TO_ID' => 'ID에 보고',
     'LBL_EXPORT_TEAM_ID' => '팀 ID',
     'LBL_EXPORT_TEAM_SET_ID' => '팀 설정 ID',
@@ -10270,6 +10414,8 @@ $app_strings = array (
     'LBL_SELECT_THIS_ROW_TITLE' => '이 가로열(Row)을 선택합니다.',
     'LBL_TEAM_SELECTED_TITLE' => '선택된  팀',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => '이팀을 기본으로 설정하기위해 선택합니다.',
+    'LBL_TEAM_TBSELECTED_TITLE' => '부서 기반 선택됨',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => '부서 기반 선택하기',
     'LBL_SEARCH_AND_SELECT' => '검색후 선택',
     'TPL_SEARCH_AND_ADD' => '{{module}} 검색 및 추가',
 
@@ -10358,6 +10504,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => '미리보기 불가. 데이터가 없습니다.',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => '미리보기 불가. 현재 레코드 보는중',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => '미리보기 불가. 기록이 제거되었거나 레코드에 접근이 블가능합니다',
+    'LBL_PREVIEW_PREVIOUS' => '이전 항목 미리보기',
+    'LBL_PREVIEW_NEXT' => '다음 항목 미리보기',
+    'LBL_PREVIEW_CLOSE' => '미리보기 닫기',
     'LBL_STREAM_NO_RECORDS' => '이 레코드는 관련된 메모가 없습니다.  메모 추가하기 링크를 클릭하여 메모를 추가하십시오.',
     'LBL_DUPLICATES_FOUND' => '중복 레코드 발견',
     'LBL_NO_DUPLICATES_FOUND' => '발견된 복제 없음.',
@@ -10377,6 +10526,7 @@ $app_strings = array (
         '유효하지 않은 슈의 레코드가 통과되었습니다. 유효한 범위는 {{minRecords}} 에서 {{maxRecords}}까지 입니다.',
     'LBL_MERGE_NO_ACCESS' =>
         '이 액션수행의 접근 권한이 없습니다.',
+    'LBL_MERGE_LOCKED' => '병합을 위해 선택된 일부 레코드는 편집을 위해 잠긴 필드를 포함하고 있으며 프로세스에 의해 현재 병합할 수 없습니다.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10449,10 +10599,10 @@ $app_strings = array (
     'LBL_LOADING_PREVIEW' => '미리보기를 로딩중입니다.',
     'LBL_RESET' => '재설정',
     'LBL_COLORS' => '색',
-    'BorderColor' => '테두리색상',
-    'NavigationBar' => '메뉴바',
+    'BorderColor' => '테두리 색상',
+    'NavigationBar' => '탐색 바',
     'PrimaryButton' => '메인버튼',
-    'LBL_SAVE_AND_DEPLOY_BTN' => '저장후 배치',
+    'LBL_SAVE_AND_DEPLOY_BTN' => '저장 및 배치',
     'LBL_RESET_THEME_LNK' => '기본 테마 재저장',
     'LBL_RESET_THEME_MODAL_INFO' => '사용자 정의 테마가 지워지고 기본 테마로 변경됩니다.',
     'LBL_RESET_THEME_PROCESS' => '기본 테마를 재저장중입니다.',
@@ -10847,10 +10997,9 @@ $app_strings = array (
     'LBL_WIZ_APPLICATION_SETTINGS' => '시스템 설정',
     'LBL_WIZ_CONFIGURE_APPLICATION' => '작업실',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> '비밀번호:',
     'LBL_CURRENT_PASSWORD'				=> '현재 비밀번호',
-    'LBL_SET_NEW_PASSWORD'              => '비밀번호를 입력하십시오',
     'LBL_NEW_PASSWORD1'                 => '새 비밀번호',
     'LBL_NEW_PASSWORD2'                 => '비밀번호 확인',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> '비밀번호 확인을 입력하십시오',
@@ -10858,13 +11007,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> '현재 비밀번호를 입력하십시오',
     'ERR_REENTER_PASSWORDS' => '비밀번호가 일치해야 합니다.',
     'ERR_PASSWORD_MISMATCH' => '입력된 비밀번호가 시스템과 일치하지 앖습니다.',
-    'LBL_NEW_USER_PASSWORD_1' => '비밀번호가 성공적으로 변경되었습니다',
     'LBL_CANNOT_SEND_PASSWORD' => '비밀번호를 보낼수 없습니다.',
     'LBL_REQUEST_PASSWORD' => '비밀번호 요청',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => '오류 :이 사용자에 대한 암호를 업데이트하는 데 문제가 발생했습니다.',
     'LBL_INCORRECT_PASSWORD' => '오류 : 잘못된 암호를 입력하였습니다.',
 
-    'LBL_PREFERRED_LANGUAGE' => '선호하는 언어',
+    'LBL_PREFERRED_LANGUAGE' => '언어 설정:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => '보고서 선택',
@@ -10894,6 +11042,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => '서버에 오류가 발생하여 귀하의 요청을 완료할 수 없었습니다.',
     'ERR_HTTP_500_TEXT_LINE2' => '다시 시도 하십시오. 오류가 계속되면 슈가 관리자에 문의해 주십시오.',
     'ERR_HTTP_500_ACTION' => '관리자에 문의하십시오.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 내부 서버 오류',
+    'ERR_HTTP_502_TEXT_LINE1' => '서버에 잠시 오류가 발생하여 귀하의 요청을 완료할 수 없습니다.',
+    'ERR_HTTP_502_TEXT_LINE2' => '다시 시도 하십시오. 오류가 계속되면 Sugar 관리자에 문의하십시오.',
+    'ERR_HTTP_502_ACTION' => '기술 지원에 문의하십시오.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 내부 서버 오류',
+    'ERR_HTTP_503_TEXT_LINE1' => '서버가 사용자의 요청을 완료할 수 없습니다.',
+    'ERR_HTTP_503_TEXT_LINE2' => '다시 시도 하십시오. 오류가 계속되면 Sugar 관리자에 문의하십시오.',
+    'ERR_HTTP_503_ACTION' => '기술 지원에 문의하십시오.',
 
     'ERR_RENDER_FAILED_TITLE' => '보기 제공 실패',
     'ERR_RENDER_FAILED_MSG' => '보기 제공 실패',
@@ -11027,6 +11187,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => '오류',
     'LBL_ALERT_TITLE_LOADING' => '로딩중입니다.',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => '귀하의 브라우저 버젼이 더이상 지원되지 않거나 지원되지 않는 브라우져입니다.',
+    'LBL_ALERT_BROWSER_SUPPORT' => '다음 브라우저를 권장합니다: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => '제안된 브라우저를 보려면 {{link}} 페이지를 보십시오.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => '지원되는 플랫폼',
 
@@ -11079,6 +11240,9 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => '서버 연결중 오류가 발생했습니다. 다시 시도해주십시오.',
     'ERR_RESOLVE_ERRORS' => '진행전 오류를 해결하십시오.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => '목록 새로고침',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => '더보기',
@@ -11175,10 +11339,13 @@ $app_strings = array (
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM은 파워 사용자들이 생산성을 향상시키기 위해 키보드 숏컷으로 특정한 작업을 빠르게 수행하도록 가능하게 합니다. 오른쪽에 있는 도표는 그것들이 수행하는 키들 및 작업들과 함께 사용 가능한 숏컷을 기술합니다.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>지원 키</h1><ul><li>모든 영문, 숫자 및 기호</li><li>shift, ctrl, alt, command, mod (Windows/Linux의 ctrl, Mac의 command)</li><li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>지원 기능</h1><ul><li>키 조합: ctrl+m</li><li>복수 키: m,ctrl+m</li><li>키 시퀀스: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => '글로벌 숏컷',
     'LBL_CONTEXTUAL_SHORTCUTS' => '상황 숏컷',
     'LBL_SHORTCUT_KEY_KEY' => '키',
     'LBL_SHORTCUT_FUNCTION' => '기능',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => '상황별 구성 바로가기',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => '구성할 &#39;상황별 바로가기&#39;가 없음',
     'LBL_SHORTCUT_HELP' => '숏컷 도움 페이지 보여주기',
     'LBL_SHORTCUT_QUICK_CREATE' => '빠른 생성 메뉴 토글',
     'LBL_SHORTCUT_SEARCH' => '글로벌 겁색 필드 포커스온',
@@ -11226,6 +11393,9 @@ $app_strings = array (
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => '다중 선택 필드에서 전체 항목 선택',
     'LBL_SHORTCUT_SWEETSPOT' => '스윗 스폿 바 토글 전환',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => '스윗 스폿 바 숨기기',
+    'LBL_SHORTCUT_SAVE_CONFIG' => '구성사항 저장',
+    'LBL_SHORTCUT_RESTORE' => '기본값으로 복원',
+    'LBL_SHORTCUT_CONFIG_ERROR' => '서버에서 사용자 지정 단축 키를 저장하는 동안 오류가 발생했습니다. 다시 시도 하십시오.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} 설정',
@@ -11248,13 +11418,20 @@ $app_strings = array (
     'LBL_CALENDAR_RECURRENCE' => "재발생",
     'LBL_CALENDAR_REMINDERS' => "미리 알림",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "사용자 정의 일자",
     'LBL_CALENDAR_REPEAT_TYPE' => "반복 유형",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "간격을 반복",
     'LBL_CALENDAR_REPEAT_DOW' => "요일에 반복",
+    'LBL_CALENDAR_REPEAT' => "반복",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "때까지 반복",
     'LBL_CALENDAR_REPEAT_COUNT' => "반복 발생",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "반복 지정",
+    'LBL_CALENDAR_REPEAT_DAYS' => "일",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "순위별 반복",
+    'LBL_CALENDAR_REPEAT_UNIT' => "단위별 반복",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => '되풀이 변화는 시리즈의 첫 번째 레코드를 사용해야합니다.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => '반복 규칙은 이벤트를 신규로 생성하지 않습니다.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => '출석',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => '거부',
@@ -11274,17 +11451,23 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => '슈가 CRM은 자바 스크립트를 필요로합니다. 슈가 CRM을 계속 사용하려면 자바 스크립트 (JavaScript)를 설치해주십시오.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => '데이터 직렬화를 취소할 수 없습니다',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => '데이터에 개체 또는 클래스에 대한 참조가 포함되어 있어서 데이터 직렬화를 취소할 수 없습니다',
 
     'LBL_FIELD_TRIMMED' => '최대 문자 한도를 초과하여 필드를 줄였습니다.',
+    'LBL_FIELDSIZE_OVERFLOW' => '필드가 최대 문자수 제한을 초과합니다.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => '지난 7일',
     '30' => '지난 30일',
     '90' => '지난 분기',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11389,13 +11572,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => '기간 만료됨',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => '임시 보관',
-    'Expired' => '기간 만료됨',
-    'In Review' => '검토 중',
-    'Published' => '발표 완료',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--관리자 액션--',
@@ -11407,57 +11583,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'선택된 기사 삭제',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => '첨부문서 있음',
-        'none' => '없음',
-        'mime' => 'Mime 유형 지정',
-        'name' => '이름 지정',
-    );
-
   $app_list_strings['moduleList']['Words'] = '단어';
   $app_list_strings['moduleListSingular']['Words'] = '단어';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = '신규지식 만들기';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => '상위 5',
-    'Top_10' => '상위 10',
-    'Top_20' => '상위 20',
-    'Bot_5'  => '하위 5',
-    'Bot_10' => '하위 10',
-    'Bot_20' => '하위 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'전체',
-        'added' => '최근 30일 추가됨',
-        'pending' => '계류 중인 나의 승인',
-        'updated' =>'최근 30일 업데이트됨',
-        'faqs' => 'FAQ',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'On',
-    'before' => '전',
-    'after' => '후',
-    'between_dates' => '중간',
-    'last_7_days' => '지난 7일',
-    'next_7_days' => '다음 7일',
-    'last_month' => '지난 달',
-    'this_month' => '이번 달',
-    'next_month' => '다음달',
-    'last_30_days' => '지난 30일',
-    'next_30_days' => '다음 30일',
-    'last_year' => '작년',
-    'this_year' => '올해',
-    'next_year' => '내년',
-    'isnull' => '무효',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12319,6 +12447,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "전체 연락처",
+    "email" => "이메일만 가능",
+    "phone" => "전화만 가능",
     "prem" => "프리미엄만 해당"
 );
 
@@ -12334,7 +12464,7 @@ $app_list_strings['moduleList']['EmbeddedFiles'] = '임베드된 파일';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '임베드된 파일';
 
 $app_list_strings['dnb_contact_types'] = array(
-    'Contacts' => '연락처목록',
+    'Contacts' => '연락처',
     'Leads' => '관심고객목록',
     'Prospects' => '목표고객 목록',
 );
@@ -12344,4 +12474,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => '바이오',
     'Both' => '양자 모두'
 );
-

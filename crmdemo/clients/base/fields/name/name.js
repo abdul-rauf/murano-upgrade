@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,24 +14,7 @@
  * @extends View.Fields.Base.BaseField
  */
 ({
-    plugins: ['EllipsisInline', 'MetadataEventDriven'],
-
-    /**
-     * @inheritdoc
-     */
-    initialize: function(options) {
-        this._super('initialize', [options]);
-        /**
-         * Property to add or not the `ellipsis_inline` class when rendering the
-         * field in the `list` template. `true` to add the class, `false`
-         * otherwise.
-         *
-         * Defaults to `true`.
-         *
-         * @property {boolean}
-         */
-        this.ellipsis = _.isUndefined(this.def.ellipsis) || this.def.ellipsis;
-    },
+    plugins: ['MetadataEventDriven'],
 
     _render: function() {
         // FIXME: This will be cleaned up by SC-3478.

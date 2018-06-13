@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -66,6 +66,13 @@
              * @param {View.Component} component The component this plugin is attached to.
              */
             onDetach: function(component) {
+                // Disabling all existing tooltips for input
+                if (!_.isEmpty(this.$treeContainer)) {
+                    _.each(this.$treeContainer.find('input'), _.bind(function(input) {
+                        this._disableTooltip($(input));
+                    }, this));
+                }
+
                 if (!_.isEmpty(this.jsTree)) {
                     this.jsTree.off();
                 }
@@ -74,6 +81,7 @@
                     this.onNestedSetSyncComplete,
                     this
                 );
+
             },
 
             /**
@@ -141,7 +149,7 @@
                     success: _.bind(function(data) {
                         this.createTree(data.jsonTree, this.$treeContainer, this.loadPluginsList());
                     }, this),
-                    error: _.bind(function(error) {
+                    error: _.bind(function(collection, error) {
                         this._alertError(error, _.bind(function() {
                             this.createTree([], this.$treeContainer, this.loadPluginsList());
                         }, this));
@@ -287,7 +295,11 @@
                             selectedNode = {
                                 id: id,
                                 name: node.find('a:first').text().trim(),
-                                type: node.data('type') || 'folder'
+                                type: node.data('type') || 'folder',
+                                toString: function() {
+                                    // jstree jquery plugin uses toString to get ID. We need to return right one.
+                                    return id;
+                                }
                             };
                             val[i] = selectedNode;
                         }, this);
@@ -695,7 +707,7 @@
                 obj.append(clonedElement);
 
                 this._toggleAddNodeButton(obj, true);
-                this._toggleTooltip(obj, true);
+                this._enableTooltip(clonedElement);
 
                 clonedElement.width(Math.min(h1.text("pW" + clonedElement[0].value).width(), w))[0].select();
 
@@ -703,8 +715,8 @@
                     .on('keydown', function(event) {
                         var key = event.which;
                         if (key === 27) {
-                            $(this).attr('rel') === 'add' ? $(this).attr('rel', 'delete') : this.value = t;
-                            el.attr('rel') === 'add' ? el.attr('rel', 'delete') : el.value = t;
+                            $(this).attr('data-mode') === 'add' ? $(this).attr('data-mode', 'delete') : this.value = t;
+                            el.attr('data-mode') === 'add' ? el.attr('data-mode', 'delete') : el.value = t;
                         }
                         if (key === 27 || key === 13 || key === 37 || key === 38 || key === 39 || key === 40 ||
                             key === 32) {
@@ -723,7 +735,7 @@
                             }
                         }
                         if (key === 27 || key === 13) {
-                            self._toggleTooltip(obj, false);
+                            self._disableTooltip(clonedElement);
                             event.preventDefault();
                             self._blur($(this), el);
                         }
@@ -1075,33 +1087,47 @@
             },
 
             /**
+             * Enables tooltip on input element
              *
-             * @param {Object} node JSTree node object.
-             * @param {Boolean} show
+             * Note: We are enabling tooltip for focus event only.
+             * That's why we need to call stopPropagation() on hover event for tooltip
+             *
+             * @param {jQuery} input Input element for JSTree node
              * @private
              */
-            _toggleTooltip: function(node, show) {
-                var input = node.children('input.jstree-rename-input:visible');
-                if (show) {
-                    input
-                        .tooltip({
-                            title: app.lang.get('LBL_CREATE_CATEGORY_PLACEHOLDER', 'KBContents'),
-                            container: 'body',
-                            trigger: 'focus',
-                            delay: { show: 200, hide: 100 }
-                        })
-                        .tooltip('show');
-                } else {
-                    /*
-                     [RS-1063]
-                     This is the known bug of an old version of the Bootstrap Tooltip.
-                     (see https://github.com/twbs/bootstrap/issues/10740)
-                     Next line (in combination with .find('..:visible') above) is a fix for current version
-                     */
-                    input.data('bs.tooltip').$tip.remove();
-                    input
-                        .tooltip('destroy');
+            _enableTooltip: function(input) {
+                input.on('hover', function(e) {
+                    e.stopPropagation();
+                });
+
+                input.attr('rel', 'tooltip');
+                input.attr('title', app.lang.get('LBL_CREATE_CATEGORY_PLACEHOLDER', 'KBContents'));
+                input.tooltip({
+                    container: 'body',
+                    trigger: 'focus',
+                    delay: {show: 200, hide: 100}
+                }).tooltip('show');
+            },
+
+            /**
+             * Disable tooltip on input element
+             *
+             * @param {jQuery} input Input element for JSTree node
+             * @private
+             */
+            _disableTooltip: function(input) {
+                if (!input.data('bs.tooltip')) {
+                    return;
                 }
+
+                /*
+                 [RS-1063]
+                 This is the known bug of an old version of the Bootstrap Tooltip.
+                 (see https://github.com/twbs/bootstrap/issues/10740)
+                 Next line (in combination with .find('..:visible') above) is a fix for current version
+                 */
+                input.data('bs.tooltip').$tip.remove();
+                input.tooltip('destroy');
             }
         });
     });

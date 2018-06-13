@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,18 +11,18 @@
 /**
  * @class View.Views.Base.DashboardHeaderpaneView
  * @alias SUGAR.App.view.views.BaseDashboardHeaderpaneView
- * @extends View.Views.Base.RecordView
+ * @extends View.Views.Base.HeaderpaneView
  */
 ({
-    extendsFrom: 'RecordView',
+    extendsFrom: 'HeaderpaneView',
     buttons: null,
     editableFields: null,
     className: 'preview-headerbar',
     events: {
-        'click [name=edit_button]' : 'editClicked',
-        'click [name=cancel_button]' : 'cancelClicked',
-        'click [name=create_cancel_button]' : 'createCancelClicked',
-        'click [name=delete_button]' : 'deleteClicked',
+        'click [name=edit_button]': 'editClicked',
+        'click [name=cancel_button]': 'cancelClicked',
+        'click [name=create_cancel_button]': 'createCancelClicked',
+        'click [name=delete_button]': 'deleteClicked',
         'click [name=add_button]': 'addClicked',
         'click [name=collapse_button]': 'collapseClicked',
         'click [name=expand_button]': 'expandClicked'
@@ -33,7 +33,6 @@
             options.template = app.template.getView(options.name);
         }
         this._super("initialize", [options]);
-        this.context.set('dataView', '');
         this.model.on("change change:layout change:metadata", function() {
             if (this.inlineEditMode) {
                 this.changed = true;
@@ -109,9 +108,9 @@
     },
 
     /**
-     * @override
-     *
      * The save function is handled by {@link View.Layouts.Base.DashboardLayout#handleSave}.
+     *
+     * @override
      */
     saveClicked: $.noop,
 
@@ -142,7 +141,7 @@
     _render: function() {
         app.view.View.prototype._render.call(this);
 
-        this.initButtons();
+        this._setButtons();
         this.setButtonStates(this.context.get("create") ? 'create' : 'view');
         this.setEditableFields();
     },

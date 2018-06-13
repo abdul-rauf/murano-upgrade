@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,31 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => 'Haluatko varmasti poistaa tämän tietueen?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Haluatko varmasti poistaa tämän käyttäjän jäsenyyden?',
     'LBL_EDITLAYOUT' => 'Muokkaa asettelua' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Tiimipohjaiset oikeudet',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Käytä pääsyä tiimille ja hallinnoi käyttöä moduuleittain.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Käytä tiimipohjaisia oikeuksia',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Valitse käyttöön otettavat moduulit',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'Tiimipohjaisia oikeuksia käyttämällä voit määrittää erityisiä käyttöoikeuksia tiimeille ja käyttäjille yksittäisiin moduuleihin Roolien hallinnan kautta.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+Tiimipohjaisten oikeuksien poistaminen moduulista kumoaa tiimipohjaisiin oikeuksiin liittyvät tiedot kyseisessä moduulissa mukaan lukien prosessimääritykset tai toimintoa käyttävät prosessit. Näihin sisältyvät roolit, jotka käyttävät "Omistaja ja valittu tiimi" -vaihtoehtoa kyseisessä moduulissa, sekä tiimipohjaiset oikeudet kyseisen moduulin tietueisiin.
+Suosittelemme myös, että moduulin tiimipohjaisten oikeuksien käytöstä poistamisen jälkeen tyhjennät järjestelmän välimuistin käyttämällä Pikakorjausta ja Uudelleenrakentaja-työkalua.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Varoitus:</strong>Tiimipohjaisten oikeuksien poistaminen moduulista kumoaa tiimipohjaisiin oikeuksiin liittyvät tiedot kyseisessä moduulissa mukaan lukien prosessimääritykset tai toimintoa käyttävät prosessit. Näihin sisältyvät roolit, jotka käyttävät "Omistaja ja valittu tiimi" -vaihtoehtoa kyseisessä moduulissa, sekä tiimipohjaiset oikeudet kyseisen moduulin tietueisiin.
+Suosittelemme myös, että moduulin tiimipohjaisten oikeuksien käytöstä poistamisen jälkeen tyhjennät järjestelmän välimuistin käyttämällä Pikakorjausta ja Uudelleenrakentaja-työkalua.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+Tiimipohjaisten oikeuksien poistaminen moduulista kumoaa tiimipohjaisiin oikeuksiin liittyvät tiedot kyseisessä moduulissa mukaan lukien prosessimääritykset tai toimintoa käyttävät prosessit. Näihin sisältyvät roolit, jotka käyttävät "Omistaja ja valittu tiimi" -vaihtoehtoa kyseisessä moduulissa, sekä tiimipohjaiset oikeudet kyseisen moduulin tietueisiin.
+Suosittelemme myös, että moduulin tiimipohjaisten oikeuksien käytöstä poistamisen jälkeen tyhjennät järjestelmän välimuistin käyttämällä Pikakorjausta ja Uudelleenrakentaja-työkalua. Jos sinulla ei ole Pikakorjaus- ja Uudelleenrakentaja-toimintojen käyttöoikeuksia, ota yhteyttä järjestelmänvalvojaan pääsyn myöntämiseksi Korjaa-valikkoon.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Varoitus:</strong>Tiimipohjaisten oikeuksien poistaminen moduulista kumoaa tiimipohjaisiin oikeuksiin liittyvät tiedot kyseisessä moduulissa mukaan lukien prosessimääritykset tai toimintoa käyttävät prosessit. Näihin sisältyvät roolit, jotka käyttävät "Omistaja ja valittu tiimi" -vaihtoehtoa kyseisessä moduulissa, sekä tiimipohjaiset oikeudet kyseisen moduulin tietueisiin.
+Suosittelemme myös, että moduulin tiimipohjaisten oikeuksien käytöstä poistamisen jälkeen tyhjennät järjestelmän välimuistin käyttämällä Pikakorjausta ja Uudelleenrakentaja-työkalua. Jos sinulla ei ole Pikakorjaus- ja Uudelleenrakentaja-toimintojen käyttöoikeuksia, ota yhteyttä järjestelmänvalvojaan pääsyn myöntämiseksi Korjaa-valikkoon.
+STR
+,
 );

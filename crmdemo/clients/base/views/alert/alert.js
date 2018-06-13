@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -17,14 +17,12 @@
 ({
     className: 'alert-wrapper', //override default class
 
-    plugins: ['Tooltip'],
-
-        events: {
-            'click [data-action=cancel]': 'cancelClicked',
-            'click [data-action=confirm]': 'confirmClicked',
-            'click [data-action=close]': 'closeClicked',
-            'click a': 'linkClick'
-        },
+    events: {
+        'click [data-action=cancel]': 'cancelClicked',
+        'click [data-action=confirm]': 'confirmClicked',
+        'click [data-action=close]': 'closeClicked',
+        'click a': 'linkClick'
+    },
 
     LEVEL: {
         PROCESS: 'process',
@@ -57,17 +55,17 @@
     initialize: function(options) {
         app.plugins.attach(this, 'view');
 
-        options || (options = {});
-        options.confirm || (options.confirm = {});
-        options.cancel || (options.cancel = {});
+        this.options = options || {};
+        this.options.confirm || (this.options.confirm = {});
+        this.options.cancel || (this.options.cancel = {});
 
-        this.onConfirm = options.onConfirm || options.confirm.callback;
-        this.confirmLabel = options.confirm.label || 'LBL_CONFIRM_BUTTON_LABEL';
-        this.onCancel = options.onCancel || options.cancel.callback;
-        this.cancelLabel = options.cancel.label || 'LBL_CANCEL_BUTTON_LABEL';
-        this.onLinkClick = options.onLinkClick;
-        this.onClose = options.onClose;
-        this.templateOptions = options.templateOptions;
+        this.onConfirm = this.options.onConfirm || this.options.confirm.callback;
+        this.confirmLabel = this.options.confirm.label || 'LBL_CONFIRM_BUTTON_LABEL';
+        this.onCancel = this.options.onCancel || this.options.cancel.callback;
+        this.cancelLabel = this.options.cancel.label || 'LBL_CANCEL_BUTTON_LABEL';
+        this.onLinkClick = this.options.onLinkClick;
+        this.onClose = this.options.onClose;
+        this.templateOptions = this.options.templateOptions;
         this.name = 'alert';
     },
 
@@ -93,6 +91,14 @@
         }
         if (_.isUndefined(options)) {
             return this;
+        }
+
+        if (options.messages) {
+            var messageSize = _.reduce(options.messages, function(memo, message) {
+                return memo + message.length;
+            }, 0);
+            this.templateOptions = this.templateOptions || {};
+            this.templateOptions.hasBigMessage = (messageSize > 80);
         }
 
         var template = this._getAlertTemplate(options, this.templateOptions);
@@ -160,94 +166,128 @@
     /**
      * Gets the HTML string for alert given options.
      *
-     * @param {Object} options The options object passed to the alert object when it was
-     *   created. See {@link #initialize} documentation to know the available
-     *   options.
+     * @param {Object} [options] The options object passed to the alert object
+     *   when it was created. See {@link #initialize} documentation to know the
+     *   available options.
+     * @param {string|string[]} [options.messages] The message(s) to be
+     *   displayed in the alert dialog.
      * @param {Object} [templateOptions] Optional template options to be passed
      *   to the template.
      * @return {string} The generated template.
      * @private
      */
     _getAlertTemplate: function(options, templateOptions) {
-        var template;
-        var level = options.level;
-        var alertClasses = this.getAlertClasses(level);
-        var title = options.title || this.getDefaultTitle(level);
-
-        switch (level) {
-            case this.LEVEL.PROCESS:
-                //Cut ellipsis at the end of the string
-                title = title.substr(-3) === '...' ? title.substr(0, title.length - 3) : title;
-                template = app.template.getView(this.name + '.process');
-                break;
-            case this.LEVEL.SUCCESS:
-            case this.LEVEL.WARNING:
-            case this.LEVEL.INFO:
-            case this.LEVEL.ERROR:
-                template = app.template.getView(this.name + '.error');
-                break;
-            case this.LEVEL.CONFIRMATION:
-                template = app.template.getView(this.name + '.confirmation');
-                break;
-            default:
-                template = app.template.empty;
-        }
+        options = options || {};
+        var alert = this._getAlertProps(options);
+        var template = alert.templateName ? app.template.getView(alert.templateName) : app.template.empty;
         var seed = _.extend({}, {
-            alertClass: alertClasses,
-            title: this.getTranslatedLabels(title),
+            alertClass: alert.cssClass,
+            alertIcon: alert.icon,
+            title: this.getTranslatedLabels(alert.title),
             messages: this.getTranslatedLabels(options.messages),
             closeable: _.isUndefined(options.closeable) || options.closeable,
             alert: this
         }, templateOptions);
+
         return template(seed);
     },
 
     /**
-     * Get CSS classes given alert level
-     * @param {String} level
-     * @return {String}
+     * From the given `options`, this method returns an object with
+     * corresponding alert properties.
+     *
+     * @private
+     * @param {Object} [options] Alert options like `title`, `level`, etc.
+     * @param {string} [options.level] Alert level e.g. 'success', 'error' etc.
+     * @param {string} [options.title] Custom alert title to be used.
+     * @return {Object} Alert properties to be used when rendering the alert
+     *   template.
      */
-    getAlertClasses: function(level) {
-        switch (level) {
+    _getAlertProps: function(options) {
+        var title = options.title || '';
+        var defaultTemplateName = this.name + '.error';
+
+        switch (options.level) {
             case this.LEVEL.PROCESS:
-                return 'alert-process';
+                // Remove ellipsis from the end of the string.
+                title = title.substr(-3) === '...' ? title.substr(0, title.length - 3) : title;
+
+                return {
+                    title: title || 'LBL_ALERT_TITLE_LOADING',
+                    templateName: this.name + '.process',
+                    cssClass: 'alert-process',
+                    icon: ''
+                };
             case this.LEVEL.SUCCESS:
-                return 'alert-success';
+                return {
+                    title: title || 'LBL_ALERT_TITLE_SUCCESS',
+                    templateName: defaultTemplateName,
+                    cssClass: 'alert-success',
+                    icon: 'fa-check-circle'
+                };
             case this.LEVEL.WARNING:
-                return 'alert-warning';
+                return {
+                    title: title || 'LBL_ALERT_TITLE_WARNING',
+                    templateName: defaultTemplateName,
+                    cssClass: 'alert-warning',
+                    icon: 'fa-exclamation-triangle'
+                };
             case this.LEVEL.INFO:
-                return 'alert-info';
+                return {
+                    title: title || 'LBL_ALERT_TITLE_NOTICE',
+                    templateName: defaultTemplateName,
+                    cssClass: 'alert-info',
+                    icon: 'fa-info-circle'
+                };
             case this.LEVEL.ERROR:
-                return 'alert-danger';
+                return {
+                    title: title || 'LBL_ALERT_TITLE_ERROR',
+                    templateName: defaultTemplateName,
+                    cssClass: 'alert-danger',
+                    icon: 'fa-exclamation-circle'
+                };
             case this.LEVEL.CONFIRMATION:
-                return 'alert-warning';
+                return {
+                    title: title || 'LBL_ALERT_TITLE_WARNING',
+                    templateName: this.name + '.confirmation',
+                    cssClass: 'alert-warning',
+                    icon: 'fa-exclamation-triangle'
+                };
             default:
-                return '';
+                return {
+                    title: title,
+                    cssClass: '',
+                    icon: 'fa-info-circle'
+                };
         }
     },
 
     /**
+     * Get CSS classes given alert level
+     *
+     * @deprecated Deprecated since 7.8. Will be removed in 7.9.
+     * @param {string} level
+     * @return {string}
+     */
+    getAlertClasses: function(level) {
+        app.logger.warn('The View.Views.Base.AlertView#getAlertClasses has been deprecated since 7.8.0 and will be ' +
+            'removed in 7.9.');
+
+        this._getAlertProps({level: level}).cssClass;
+    },
+
+    /**
      * Get the default title given alert level
-     * @param {String} level
-     * @return {String}
+     *
+     * @deprecated Deprecated since 7.8. Will be removed in 7.9.
+     * @param {string} level
+     * @return {string}
      */
     getDefaultTitle: function(level) {
-        switch (level) {
-            case this.LEVEL.PROCESS:
-                return 'LBL_ALERT_TITLE_LOADING';
-            case this.LEVEL.SUCCESS:
-                return 'LBL_ALERT_TITLE_SUCCESS';
-            case this.LEVEL.WARNING:
-                return 'LBL_ALERT_TITLE_WARNING';
-            case this.LEVEL.INFO:
-                return 'LBL_ALERT_TITLE_NOTICE';
-            case this.LEVEL.ERROR:
-                return 'LBL_ALERT_TITLE_ERROR';
-            case this.LEVEL.CONFIRMATION:
-                return 'LBL_ALERT_TITLE_WARNING';
-            default:
-                return '';
-        }
+        app.logger.warn('The View.Views.Base.AlertView#getDefaultTitle has been deprecated since 7.8.0 and will be ' +
+            'removed in 7.9.');
+
+        this._getAlertProps({level: level}).title;
     },
 
     /**
@@ -289,13 +329,25 @@
             'Alert:Cancel'
         ], this);
 
-        app.shortcuts.register('Alert:Confirm', ['enter'], function() {
-            this.$('[data-action=confirm]').click();
-        }, this);
+        app.shortcuts.register({
+            id: 'Alert:Confirm',
+            keys: 'enter',
+            component: this,
+            description: 'LBL_SHORTCUT_ALERT_CONFIRM',
+            handler: function() {
+                this.$('[data-action=confirm]').click();
+            }
+        });
 
-        app.shortcuts.register('Alert:Cancel', ['esc'], function() {
-            this.$('[data-action=cancel]').click();
-        }, this);
+        app.shortcuts.register({
+            id: 'Alert:Cancel',
+            keys: 'esc',
+            component: this,
+            description: 'LBL_SHORTCUT_ALERT_CANCEL',
+            handler: function() {
+                this.$('[data-action=cancel]').click();
+            }
+        });
     },
 
     /**

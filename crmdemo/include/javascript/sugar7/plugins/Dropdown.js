@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,7 +16,9 @@
          */
         app.plugins.register('Dropdown', ['layout', 'view'], {
             events: {
-                'keydown': 'handleDropdownKeydown'
+                'keydown': 'handleDropdownKeydown',
+                'shown.bs.dropdown .dropdown': '_toggleAria',
+                'hidden.bs.dropdown .dropdown': '_toggleAria'
             },
 
             onAttach: function(component, plugin) {
@@ -25,6 +27,11 @@
                         this.listenTo(app.bwc, 'clicked', this.closeDropdown);
                     }
                     app.routing.before('route', this.closeDropdown, this);
+                });
+                this.on('render', function() {
+                    this.$('[data-toggle="dropdown"]')
+                        .attr('aria-haspopup', true)
+                        .attr('aria-expanded', false);
                 });
             },
 
@@ -70,21 +77,12 @@
                         $items.index($focusItem),
                         $items
                     );
-
-                    // expand/collapse submenu using the right or left arrow key
-                    if (event.keyCode === $.ui.keyCode.RIGHT ||
-                        event.keyCode === $.ui.keyCode.LEFT
-                    ) {
-                        this._toggleSubmenu($focusItem);
-                    }
                 }
 
                 keysCaptured = [
                     $.ui.keyCode.ESCAPE,
                     $.ui.keyCode.UP,
-                    $.ui.keyCode.DOWN,
-                    $.ui.keyCode.LEFT,
-                    $.ui.keyCode.RIGHT
+                    $.ui.keyCode.DOWN
                 ];
                 if (_.contains(keysCaptured, event.keyCode)) {
                     // prevent bootstrap dropdown from duplicating work we've
@@ -95,6 +93,15 @@
                     // for example, scrolling up and down.
                     event.preventDefault();
                 }
+            },
+
+            /**
+             * Handler for adding functionality to the bootstrap dropdown toggle event
+             *
+             * @param {Event} event The keydown event
+             */
+            handleDropdownToggle: function(event) {
+                this._toggleAria(event);
             },
 
             /**
@@ -115,7 +122,7 @@
              * key that was pressed, and applies focus to that item.
              *
              * @param {String} key The key that was pressed.
-             * @param {Integer} index The index of the presently focused item.
+             * @param {number} index The index of the presently focused item.
              * @param {jQuery} $items The items in the submenu.
              * @private
              */
@@ -179,10 +186,22 @@
             },
 
             /**
+             * Sets a button accessibility class 'aria-expanded' to true or false
+             * depending on if the dropdown menu is open or closed.
+             *
+             * @param {Event} provides the needed currentTarget
+             * @private
+             */
+            _toggleAria: function(e) {
+                this.$('[data-toggle="dropdown"]').attr('aria-expanded', this.isDropdownOpen());
+            },
+
+            /**
              * Close the dropdown menu.
              */
             closeDropdown: function() {
                 this.$('.open .dropdown-menu').trigger('click.bs.dropdown');
+                this.$('[data-toggle="dropdown"]').attr('aria-expanded', 'false');
             },
 
             /**

@@ -15,7 +15,7 @@ require_once('modules/uc2ce_Click2Call/uc2ce_Click2Call_sugar.php');
 class uc2ce_Click2Call extends uc2ce_Click2Call_sugar {
 	
 	function uc2ce_Click2Call(){	
-		parent::uc2ce_Click2Call_sugar();
+		parent::__construct();
 	}
 	
 }

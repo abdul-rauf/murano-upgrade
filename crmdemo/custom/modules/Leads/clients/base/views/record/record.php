@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 10:47:53
+// created: 2018-06-13 11:25:40
 $viewdefs['Leads']['base']['view']['record'] = array (
   'buttons' => 
   array (
@@ -474,7 +474,11 @@ $viewdefs['Leads']['base']['view']['record'] = array (
       'placeholders' => true,
       'fields' => 
       array (
-        0 => 'status',
+        0 => 
+        array (
+          'name' => 'status',
+          'type' => 'status',
+        ),
         1 => 
         array (
           'name' => 'lead_source_cp',

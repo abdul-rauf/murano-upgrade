@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,27 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => 'Sind Sie sicher, dass Sie diesen Eintrag löschen möchten?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Sind Sie sicher, dass Sie die Mitgliedschaft für diese(n) Benutzer entfernen möchten?',
     'LBL_EDITLAYOUT' => 'Layout bearbeiten' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Team-basierte Berechtigungen',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Aktivieren Sie Teamzugriff und verwalten Sie den Zugriff durch das Modul.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Team-basierte Berechtigungen aktivieren',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Wählen Sie Module zum Aktivieren aus',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'Durch die Aktivierung von Team-basierten Berechtigungen können Sie bestimmte Zugriffsrechte auf Teams und Benutzer für einzelne Module mittels der Verwaltung von Rollen zuweisen.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+Die Deaktivierung der Team-basierten Berechtigungen für ein Modul hat zur Folge, dass alle den Team-basierten Berechtigungen für dieses Modul zugeordneten Daten, einschließlich Prozessdefinitionen oder Prozesse mit dieser Funktion, rückgängig gemacht werden. Hierunter fallen alle Rollen mit der "Besitzer & Ausgewähltes Team"-Option für dieses Modul sowie auch alle Team-basierten Berechtigungsdaten für Datensätze in diesem Modul. Wir empfehlen auch, die Schnellreparatur (Quick Repair) und das Neuaufbau-Tool zu verwenden, um den Systemcache nach der Desaktivierung der Team-basierten Berechtigungen für jedes Modul zu leeren.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Warning:</strong> Die Deaktivierung der Team-basierten Berechtigungen für ein Modul hat zur Folge, dass alle den Team-basierten Berechtigungen für dieses Modul zugeordneten Daten, einschließlich Prozessdefinitionen oder Prozesse mit dieser Funktion, rückgängig gemacht werden. Hierunter fallen alle Rollen mit der "Besitzer & Ausgewähltes Team"-Option für dieses Modul sowie auch alle Team-basierten Berechtigungsdaten für Datensätze in diesem Modul. Wir empfehlen auch, die Schnellreparatur (Quick Repair) und das Neuaufbau-Tool zu verwenden, um den Systemcache nach der Desaktivierung der Team-basierten Berechtigungen für jedes Modul zu leeren.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+Die Deaktivierung der Team-basierten Berechtigungen für ein Modul hat zur Folge, dass alle den Team-basierten Berechtigungen für dieses Modul zugeordneten Daten, einschließlich Prozessdefinitionen oder Prozesse mit dieser Funktion, rückgängig gemacht werden. Hierunter fallen alle Rollen mit der "Besitzer & Ausgewähltes Team"-Option für dieses Modul sowie auch alle Team-basierten Berechtigungsdaten für Datensätze in diesem Modul. Wir empfehlen auch, die Schnellreparatur (Quick Repair) und das Neuaufbau-Tool zu verwenden, um den Systemcache nach der Desaktivierung der Team-basierten Berechtigungen für jedes Modul zu leeren. Wenn Sie keinen Zugriff auf die Schnellreparatur (Quick Repair) und das Neuaufbau-Tool haben, kontaktieren Sie bitte einen Administrator, der auf das Reparatur-Menü Zugriff hat.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Warning:</strong> Die Deaktivierung der Team-basierten Berechtigungen für ein Modul hat zur Folge, dass alle den Team-basierten Berechtigungen für dieses Modul zugeordneten Daten, einschließlich Prozessdefinitionen oder Prozesse mit dieser Funktion, rückgängig gemacht werden. Hierunter fallen alle Rollen mit der "Besitzer & Ausgewähltes Team"-Option für dieses Modul sowie auch alle Team-basierten Berechtigungsdaten für Datensätze in diesem Modul. Wir empfehlen auch, die Schnellreparatur (Quick Repair) und das Neuaufbau-Tool zu verwenden, um den Systemcache nach der Desaktivierung der Team-basierten Berechtigungen für jedes Modul zu leeren. Wenn Sie keinen Zugriff auf die Schnellreparatur (Quick Repair) und das Neuaufbau-Tool haben, kontaktieren Sie bitte einen Administrator, der auf das Reparatur-Menü Zugriff hat.
+STR
+,
 );

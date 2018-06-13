@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -47,8 +47,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             'modules/Leads/SugarFeeds',
             'modules/Opportunities/SugarFeeds/OppFeed.php',
             'modules/SugarFeed',
-            // remove the old FTS Logic Hook
-            'custom/Extension/application/Ext/LogicHooks/SugarFTSHooks.php',
             // remove old popup picker files from RLI
             'modules/RevenueLineItems/Popup_picker.html',
             'modules/RevenueLineItems/Popup_picker.php',
@@ -185,10 +183,16 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             'include/google-api-php-client',
             // Delete files that should have been deleted before
             'upgrade/scripts/post/5_MinifyJS.php',
+            // MACAROON-1125
+            'include/javascript/pmse/business_rules.js',
+            // MACAROON-1328
+            'modules/pmse_Inbox/engine/PMSEAccessManagement.php',
             // BR-4286 - Retire unused MVC action files
             'modules/Calendar/views/view.createinvitee.php',
             'modules/Calendar/views/view.getgr.php',
             'modules/Calendar/views/view.getgrusers.php',
+            // MACAROON-1385
+            'modules/pmse_Inbox/engine/PMSEHandlers/PMSECronHandler.php',
             // BR-3766 - Remove unused non-INT flagged file
             'modules/UpgradeWizard/populateColumns.php',
         );
@@ -223,22 +227,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             $files[] = 'include/Expressions/Expression/Numeric/CurrencyMultiplyExpression.php';
             $files[] = 'include/Expressions/Expression/Numeric/CurrencyDivideExpression.php';
             $files[] = 'include/Expressions/Expression/Numeric/CurrencySumRelatedExpression.php';
-        }
-
-        if (version_compare($this->from_version, '7.7.2.1', '<')) {
-            $files[] = 'vendor/phpmailer/phpmailer/changelog.md';
-            $files[] = 'vendor/phpmailer/phpmailer/README.md';
-            $files[] = 'vendor/phpmailer/phpmailer/examples/LGPLv3.txt';
-            $files[] = 'vendor/phpmailer/phpmailer/extras/class.html2text.php';
-            $files[] = 'vendor/phpmailer/phpmailer/test';
-            $files[] = 'vendor/phpmailer/phpmailer/docs';
-            $files[] = 'vendor/phpmailer/phpmailer/language/phpmailer.lang-br.php';
-            $files[] = 'vendor/phpmailer/phpmailer/language/phpmailer.lang-cz.php';
-            $files[] = 'vendor/phpmailer/phpmailer/language/phpmailer.lang-dk.php';
-            $files[] = 'vendor/phpmailer/phpmailer/language/phpmailer.lang-no.php';
-            $files[] = 'vendor/phpmailer/phpmailer/language/phpmailer.lang-se.php';
-            $files[] = 'vendor/phpmailer/phpmailer/README.md';
-            $files[] = 'vendor/phpmailer/phpmailer/travis.phpunit.xml.dist';
         }
 
         if (version_compare($this->from_version, '7.5', '<')) {
@@ -299,10 +287,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             }
         }
 
-        if (version_compare($this->from_version, '7.7.1', '<')) {
-            $files[] = 'jssource/src_files';
-        }
-
         if (version_compare($this->from_version, '7.7', '<')) {
             $files[] = 'clients/base/views/interactionschart';
             $files[] = 'include/javascript/sugar7/plugins/Timeago.js';
@@ -357,7 +341,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             $files[] = 'silentFTSIndex.php';
             $files[] = 'upgrade/scripts/post/5_FTSHook.php';
             $files[] = 'modules/pmse_Business_Rules/clients/base/views/preview/preview.js';
-            $files[] = 'modules/pmse_Inbox/clients/base/fields/relate/relate.js';
         }
 
         // MACAROON-901... remove quickcreate files for PMSE modules
@@ -368,44 +351,166 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             $files[] = 'modules/pmse_Project/metadata/quickcreatedefs.php';
         }
 
-        // BR-BR-4979... Remove Zend Mail
-        if (version_compare($this->from_version, '7.7.2.1', '<')) {
-            $files[] = 'vendor/Zend/Mail.php';
-            $files[] = 'vendor/Zend/Mail/Exception.php';
-            $files[] = 'vendor/Zend/Mail/Message.php';
-            $files[] = 'vendor/Zend/Mail/Message/File.php';
-            $files[] = 'vendor/Zend/Mail/Message/Interface.php';
-            $files[] = 'vendor/Zend/Mail/Part.php';
-            $files[] = 'vendor/Zend/Mail/Part/File.php';
-            $files[] = 'vendor/Zend/Mail/Part/Interface.php';
-            $files[] = 'vendor/Zend/Mail/Protocol/Abstract.php';
-            $files[] = 'vendor/Zend/Mail/Protocol/Exception.php';
-            $files[] = 'vendor/Zend/Mail/Protocol/Imap.php';
-            $files[] = 'vendor/Zend/Mail/Protocol/Pop3.php';
-            $files[] = 'vendor/Zend/Mail/Protocol/Smtp.php';
-            $files[] = 'vendor/Zend/Mail/Protocol/Smtp/Auth/Crammd5.php';
-            $files[] = 'vendor/Zend/Mail/Protocol/Smtp/Auth/Login.php';
-            $files[] = 'vendor/Zend/Mail/Protocol/Smtp/Auth/Plain.php';
-            $files[] = 'vendor/Zend/Mail/Storage.php';
-            $files[] = 'vendor/Zend/Mail/Storage/Abstract.php';
-            $files[] = 'vendor/Zend/Mail/Storage/Exception.php';
-            $files[] = 'vendor/Zend/Mail/Storage/Folder.php';
-            $files[] = 'vendor/Zend/Mail/Storage/Folder/Interface.php';
-            $files[] = 'vendor/Zend/Mail/Storage/Folder/Maildir.php';
-            $files[] = 'vendor/Zend/Mail/Storage/Folder/Mbox.php';
-            $files[] = 'vendor/Zend/Mail/Storage/Imap.php';
-            $files[] = 'vendor/Zend/Mail/Storage/Maildir.php';
-            $files[] = 'vendor/Zend/Mail/Storage/Mbox.php';
-            $files[] = 'vendor/Zend/Mail/Storage/Pop3.php';
-            $files[] = 'vendor/Zend/Mail/Storage/Writable/Interface.php';
-            $files[] = 'vendor/Zend/Mail/Storage/Writable/Maildir.php';
-            $files[] = 'vendor/Zend/Mail/Transport/Abstract.php';
-            $files[] = 'vendor/Zend/Mail/Transport/Exception.php';
-            $files[] = 'vendor/Zend/Mail/Transport/File.php';
-            $files[] = 'vendor/Zend/Mail/Transport/Sendmail.php';
-            $files[] = 'vendor/Zend/Mail/Transport/Smtp.php';
+        if (version_compare($this->from_version, '7.8.0.0', '<')) {
+            $files[] = 'modules/Forecasts/clients/base/view/forecast-pipeline/forecast-pipeline.hbs';
+            $files[] = 'include/javascript/sugar7/plugins/QuickSearchFilter.js';
+            $files[] = 'styleguide/assets/css/sugar.css';
+            $files[] = 'styleguide/assets/css/bootstrap.css';
+            //MACAROON-1005 remove casesList-list.js
+            $files[] = 'modules/pmse_Inbox/clients/base/layouts/casesList-list/casesList-list.js';
+            $files[] = 'clients/base/views/passwordmodal';
+            $files[] = 'clients/portal/views/passwordmodal';
+            $files[] = 'modules/Notifications/controller.php';
+            $files[] = 'include/api/AttachmentListApi.php';
+            $files[] = 'clients/base/views/pmse-case/businesscard.hbs';
+            $files[] = 'clients/base/views/pmse-case/headerpane.hbs';
+            $files[] = 'clients/base/views/pmse-case/tabspanels.hbs';
+            $files[] = 'clients/base/layouts/create-actions';
+            $files[] = 'clients/base/views/create-actions';
+            $files[] = 'clients/base/views/news';
+            $files[] = 'styleguide/assets/css/jsduck.css';
+            $files[] = 'styleguide/less/sugar-specific/rtl.less';
+            $files[] = 'styleguide/less/twitter-bootstrap/alerts.less';
+            $files[] = 'themes/default/css/ie.css';
+            $files[] = 'sidecar/build.php';
+            $files[] = 'sidecar/construct';
+            $files[] = 'sidecar/grunt';
+            $files[] = 'sidecar/Gruntfile.js';
+            $files[] = 'sidecar/lib/jquery/jquery.tinymce.js';
+            $files[] = 'sidecar/lib/momentjs/lang';
+            $files[] = 'sidecar/lib/momentjs/min/langs.js';
+            $files[] = 'sidecar/lib/momentjs/min/langs.min.js';
+            $files[] = 'sidecar/lib/momentjs/min/moment-with-langs.js';
+            $files[] = 'sidecar/lib/momentjs/min/moment-with-langs.min.js';
+            $files[] = 'sidecar/lib/mousetrap';
+            $files[] = 'sidecar/lib/sugaraccessibility';
+            $files[] = 'sidecar/minified/sidecar.js';
+            $files[] = 'sidecar/minified/sidecar.lite.js';
+            $files[] = 'sidecar/minified/sidecar.lite.min.js';
+            $files[] = 'sidecar/src/include-manifest.php';
+            $files[] = 'sidecar/src/sample-config.js';
+            $files[] = 'sidecar/src/utils/shortcuts.js';
+            $files[] = 'sidecar/src/view/tutorial.js';
+            $files[] = 'jssource/src_files';
+            $files[] = 'clients/base/layouts/create-dupecheck/create-dupecheck.js';
+            $files[] = 'clients/base/layouts/dashlet-preview/dashlet-preview.js';
+            $files[] = 'clients/base/layouts/first-login-wizard/first-login-wizard.js';
+            $files[] = 'clients/base/layouts/multi-selection-list-link/multi-selection-list-link.js';
+            $files[] = 'clients/base/layouts/multi-selection-list/multi-selection-list.js';
+            $files[] = 'clients/base/views/help-dashboard-headerpane/help-dashboard-headerpane.js';
+            $files[] = 'modules/Accounts/clients/base/views/panel-top-for-prospectlists/panel-top-for-prospectlists.js';
+            $files[] = 'modules/Contacts/clients/base/views/panel-top-for-cases/panel-top-for-cases.js';
+            $files[] = 'modules/Contacts/clients/base/views/panel-top-for-prospectlists/panel-top-for-prospectlists.js';
+            $files[] = 'modules/Leads/clients/base/views/panel-top-for-prospectlists/panel-top-for-prospectlists.js';
+            $files[] = 'modules/Prospects/clients/base/views/panel-top-for-prospectlists/' .
+                'panel-top-for-prospectlists.js';
+            $files[] = 'modules/Quotes/clients/base/views/panel-top-for-accounts/panel-top-for-accounts.js';
+            $files[] = 'modules/Users/clients/base/views/panel-top-for-prospectlists/panel-top-for-prospectlists.js';
+            $files[] = 'modules/Leads/clients/base/views/panel-top-for-prospectlists/panel-top-for-prospectlists.js';
+            $files[] = 'modules/Prospects/clients/base/views/panel-top-for-prospectlists/' .
+                'panel-top-for-prospectlists.js';
+            $files[] = 'modules/Quotes/clients/base/views/panel-top-for-accounts/panel-top-for-accounts.js';
+            $files[] = 'modules/Users/clients/base/views/panel-top-for-prospectlists/panel-top-for-prospectlists.js';
+            $files[] = 'modules/ACLRoles/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Administration/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Calendar/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Campaigns/clients/base/layouts/records/records.js';
+            $files[] = 'modules/ContractTypes/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Contracts/clients/base/layouts/records/records.js';
+            $files[] = 'modules/DocumentRevisions/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Documents/clients/base/layouts/records/records.js';
+            $files[] = 'modules/EmailTemplates/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Emails/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Employees/clients/base/layouts/records/records.js';
+            $files[] = 'modules/InboundEmail/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Manufacturers/clients/base/layouts/records/records.js';
+            $files[] = 'modules/OAuthKeys/clients/base/layouts/records/records.js';
+            $files[] = 'modules/PdfManager/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Project/clients/base/layouts/records/records.js';
+            $files[] = 'modules/ProjectTask/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Quotas/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Quotes/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Reports/clients/base/layouts/records/records.js';
+            $files[] = 'modules/TaxRates/clients/base/layouts/records/records.js';
+            $files[] = 'modules/TeamNotices/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Teams/clients/base/layouts/records/records.js';
+            $files[] = 'modules/UserSignatures/clients/base/layouts/records/records.js';
+            $files[] = 'modules/Users/clients/base/layouts/records/records.js';
+            $files[] = 'clients/base/layouts/history-summary-preview/history-summary-preview.js';
+            $files[] = 'clients/base/views/history-summary-preview-header/history-summary-preview-header.js';
+            $files[] = 'clients/base/views/history-summary/history-summary.hbs';
+            $files[] = 'mobile/js/sidecar.js';
+            $files[] = 'modules/pmse_Inbox/engine/Crypt.php';
+            $files[] = 'modules/pmse_Inbox/engine/PMSEAccessManager.php';
+            $files[] = 'modules/pmse_Inbox/engine/PMSELicenseManager.php';
+            $files[] = 'modules/pmse_Project/pmse_BpmAccessManagement';
+            $files[] = 'themes/default/images/ical-settings-icon.gif';
+            $files[] = 'modules/Categories/clients/base/views/tree/tree.php';
+            $files[] = 'modules/Forecasts/clients/base/views/forecast-pipeline/forecast-pipeline.hbs';
+            $files[] = 'modules/ProductTemplates/clients/base/layouts/subpanels';
+            $files[] = 'modules/RevenueLineItems/clients/base/views/filter-rows/filter-rows.php';
+            $files[] = 'modules/RevenueLineItems/clients/base/views/subpanel-list-with-massupdate/' .
+                'subpanel-list-with-massupdate.js';
+            $files[] = 'src/JobQueue';
+            $files[] = 'queueManager.php';
         }
 
+        //Remove NotificationCenter, iCal and JobQ.
+        if (version_compare($this->from_version, '7.8.0.0RC3', '>=') &&
+            version_compare($this->from_version, '7.8.0.0', '<')
+        ) {
+            $files[] = 'Ext/LogicHooks/Notifications.php';
+            $files[] = 'caldav.php';
+            $files[] = 'clients/base/api/ReminderApi.php';
+            $files[] = 'clients/base/api/TokenVerificationApi.php';
+            $files[] = 'data/acl/SugarACLAddressees.php';
+            $files[] = 'include/api/help/reminder.html';
+            $files[] = 'include/api/help/token_verification_help.html';
+            $files[] = 'include/api/help/verify_socket_token_help.html';
+            $files[] = 'include/api/help/verify_trigger_token_help.html';
+            $files[] = 'include/javascript/sugar7/socket.js';
+            $files[] = 'include/nmb.php';
+            $files[] = 'include/sfr.php';
+            $files[] = 'install/templates/triggerServerConfig.tpl';
+            $files[] = 'install/templates/websocketConfig.tpl';
+            $files[] = 'metadata/calls_addresseesMetaData.php';
+            $files[] = 'metadata/meetings_addresseesMetaData.php';
+            $files[] = 'modules/Addressees';
+            $files[] = 'modules/Administration/ReExportEvents.php';
+            $files[] = 'modules/Administration/RebuildReminders.php';
+            $files[] = 'modules/Administration/templates/ReExportEvents.tpl';
+            $files[] = 'modules/Administration/templates/RebuildReminders.tpl';
+            $files[] = 'modules/Administration/templates/TriggerServer.tpl';
+            $files[] = 'modules/Administration/templates/WebSockets.tpl';
+            $files[] = 'modules/Administration/views/view.triggerserver.php';
+            $files[] = 'modules/Administration/views/view.websockets.php';
+            $files[] = 'modules/CalDav';
+            $files[] = 'modules/Calls/Emitter.php';
+            $files[] = 'modules/Calls/Ext/LogicHooks/logic_hooks.php';
+            $files[] = 'modules/CarrierEmail';
+            $files[] = 'modules/CarrierSugar';
+            $files[] = 'modules/Meetings/Emitter.php';
+            $files[] = 'modules/Meetings/Ext/LogicHooks/logic_hooks.php';
+            $files[] = 'modules/NotificationCenter';
+            $files[] = 'modules/Notifications/Ext/LogicHooks/logic_hooks.php';
+            $files[] = 'modules/TriggerServer';
+            $files[] = 'modules/UserPreferences/Ext/LogicHooks/logic_hooks.php';
+            $files[] = 'modules/WebSockets';
+            $files[] = 'queueManager.php';
+            $files[] = 'src/Dav';
+            $files[] = 'src/JobQueue';
+            $files[] = 'src/Notification';
+            $files[] = 'src/Socket';
+            $files[] = 'src/Trigger';
+            $files[] = 'styleguide/less/sugar-specific/notification-center.less';
+            $files[] = 'upgrade/scripts/post/1_LockJobQueue.php';
+            $files[] = 'upgrade/scripts/post/9_AddMeetingsAndCallsToEvents.php';
+            $files[] = 'upgrade/scripts/post/9_ParticipantsLinksUpdate.php';
+            $files[] = 'upgrade/scripts/post/9_RepairReminders.php';
+            $files[] = 'upgrade/scripts/post/9_UnlockJobQueue.php';
+            $files[] = 'upgrade/scripts/post/7_FixCallsMeetingsReminderSelection.php';
+            $files[] = 'vendor/sabre';
+        }
         $this->fileToDelete($files);
     }
 

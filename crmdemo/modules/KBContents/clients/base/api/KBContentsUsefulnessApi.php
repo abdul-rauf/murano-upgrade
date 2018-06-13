@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -22,16 +22,16 @@ class KBContentsUsefulnessApi extends ModuleApi
                 'path' => array('KBContents', '?', 'useful'),
                 'pathVars' => array('module', 'record', 'useful'),
                 'method' => 'voteUseful',
-                'shortHelp' => 'This method votes a record of the specified type as a useful',
-                'longHelp' => 'include/api/help/module_get_help.html',
+                'shortHelp' => 'This method votes a record of the specified type as useful',
+                'longHelp' => 'include/api/help/kb_vote_put_help.html',
             ),
             'notuseful' => array(
                 'reqType' => 'PUT',
                 'path' => array('KBContents', '?', 'notuseful'),
                 'pathVars' => array('module', 'record', 'notuseful'),
                 'method' => 'voteNotUseful',
-                'shortHelp' => 'This method votes a record of the specified type as a not useful',
-                'longHelp' => 'include/api/help/module_get_help.html',
+                'shortHelp' => 'This method votes a record of the specified type as not useful',
+                'longHelp' => 'include/api/help/kb_vote_put_help.html',
             ),
         );
     }

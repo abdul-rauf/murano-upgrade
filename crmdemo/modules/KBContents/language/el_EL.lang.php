@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -95,10 +95,13 @@ $mod_strings = array (
     'LBL_KB_STATUS_BACK_TO_DRAFT' => 'Η κατάσταση εγγράφου έχει μεταπέσει πίσω σε πρόχειρο.',
     'LBL_OPERATOR_CONTAINING_THESE_WORDS' => 'περιλαμβάνει αυτές τις λέξεις',
     'LBL_OPERATOR_EXCLUDING_THESE_WORDS' => 'εξαιρούνται αυτες οι λέξεις',
-    'ERROR_EXP_DATE_LOW' => 'The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_EXP_DATE_LOW' => 'Η ημερομηνία λήξης δεν μπορεί να είναι προηγείται της ημερομηνίας δημοσίευσης.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Η κατάσταση Εγκεκριμένο απαιτεί ημερομηνία δημοσίευσης.',
     'ERROR_ACTIVE_DATE_LOW' => 'The Publish Date must occur on a later date than today&#39;s date.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Η ημερομηνία δημοσίευσης είναι άδεια.',
     'LBL_RECORD_SAVED_SUCCESS' => 'Δημιουργήσατε με επιτυχία το {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'ERROR_IS_BEFORE' => 'Σφάλμα. Η ημερομηνία σε αυτό το πεδίο πρέπει να έπεται της ημερομηνίας του πεδίου {{this}}.',
     'TPL_SHOW_MORE_MODULE' => 'Περισσότερα {{module}} άρθρα...',
+    'LBL_LIST_FORM_TITLE' => 'Κατάλογος βασικών γνώσεων',
+    'LBL_SEARCH_FORM_TITLE' => 'Εξερεύνηση γνωσιακής Βάσης',
 );

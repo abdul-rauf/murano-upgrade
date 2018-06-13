@@ -26,7 +26,7 @@ class rt_client_reportingDashlet extends DashletGeneric {
 		global $current_user, $app_strings;
 		require('modules/rt_client_reporting/metadata/dashletviewdefs.php');
 
-        parent::DashletGeneric($id, $def);
+        parent::__construct($id, $def);
 
         if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', 'rt_client_reporting');
 

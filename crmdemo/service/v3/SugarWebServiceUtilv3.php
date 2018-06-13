@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -241,7 +241,6 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
                     require $defs;
                 }
 	            break;
-
 	        case 'default':
 	        default:
 	            $defs = SugarAutoLoader::loadWithMetafiles($module, 'subpaneldefs');
@@ -313,7 +312,6 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
 
         return $enabled_modules;
     }
-
     /**
      * Examine the application to determine which modules have been enabled..
      *

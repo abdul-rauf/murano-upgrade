@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -766,7 +766,7 @@ class RenameModules
         $GLOBALS['log']->info("Beginning to change module labels for: $moduleName");
         $currentModuleStrings = return_module_language($this->selectedLanguage, $moduleName);
         $labelKeysToReplace = array(
-            array('name' => 'LNK_NEW_RECORD', 'type' => 'plural'), //Module built modules, Create <moduleName>
+            array('name' => 'LNK_NEW_RECORD', 'type' => 'singular'), //Module built modules, Create <moduleName>
             array('name' => 'LNK_LIST', 'type' => 'plural'), //Module built modules, View <moduleName>
             array('name' => 'LNK_NEW_###MODULE_SINGULAR###', 'type' => 'singular'),
             array('name' => 'LNK_CREATE', 'type' => 'singular'),

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,7 +56,7 @@ $app_list_strings = array (
     'TaxRates'=>'Налоговые ставки',
     'ContractTypes' => 'Типы контрактов',
     'Schedulers'=>'Планировщик заданий',
-    'Project'=>'Проект',
+    'Project'=>'Проекты',
     'ProjectTask'=>'Проектные задачи',
     'Campaigns'=>'Маркетинговые кампании',
     'CampaignLog'=>'Журнал маркетинговых кампании',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Фильтр',
     'Comments' => 'Комментарий',
     'Currencies' => 'Валюта',
-    'Project' => 'Проект',
     'ProductTemplates' => 'Каталог продуктов',
-    'ProductCategories' => 'Категория продукта',
     'ProductTypes' => 'Вид продукта',
     'Shippers' => 'Служба доставки',
     'Subscriptions' => 'Подписка на рассылку',
@@ -664,7 +662,7 @@ $app_list_strings = array (
   'product_status_dom' =>
   array (
       '' => '',
-      'Quotes' => 'Коммерческое предложение сформировано',
+      'Quotes' => 'Ком. предл. сформировано',
       'Orders' => 'Заказ получен',
       'Ship' => 'Отгружено',
   ),
@@ -944,6 +942,16 @@ $app_list_strings = array (
                 '5'=>"Чт",
                 '6'=>"Пт",
                 '7'=>"Сб",
+        ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Вс",
+            '2'=>"Пн",
+            '3'=>"Вт",
+            '4'=>"Ср",
+            '5'=>"Чт",
+            '6'=>"Пт",
+            '7'=>"Сб",
         ),
     'dom_cal_day_of_week' => array(
         '0' => 'Вс',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'год (лет)',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'До',
+        'Occurrences' => 'Появления',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Нет',
+        'Each' => 'Каждый',
+        'On' => 'На',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'первый',
+        'second' => 'второй',
+        'third' => 'третий',
+        'fourth' => 'четвертый',
+        'fifth' => 'пятый',
+        'last' => 'последний',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Воскресенье',
+        'Mon' => 'Понедельник',
+        'Tue' => 'Вторник',
+        'Wed' => 'Среда',
+        'Thu' => 'Четверг',
+        'Fri' => 'Пятница',
+        'Sat' => 'Суббота',
+        'Day' => 'День',
+        'WD'  => 'Будний день',
+        'WE'  => 'Выходной день'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Середина',
         'end' => 'Дата окончания',
         'top' => 'Верх',
+        'total' => 'Итого',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Воронка',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Светлый',
       'dark' => 'Темный',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Переместить',
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "Christ Church"),
-            "2" => array("code" => "AND", "name" => "Saint Andrew"),
+            "2" => array("code" => "И", "name" => "Saint Andrew"),
             "3" => array("code" => "GEO", "name" => "Saint George"),
             "4" => array("code" => "JAM", "name" => "Saint James"),
             "5" => array("code" => "JOH", "name" => "Saint John"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "И", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "ИЛИ", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Southern Nations - Nationalities"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "Sumba"),
+            "22" => array("code" => "Сумма (итого)", "name" => "Sumba"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "ИЛИ", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "ИЛИ", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parish"),
             "4" => array("code" => "MAN", "name" => "Manchester Parish"),
             "5" => array("code" => "POR", "name" => "Portland Parish"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "И", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parish"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parish"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parish"),
@@ -4109,7 +4228,7 @@ $app_list_strings = array (
             "11" => array("code" => "BAT", "name" => "Batroun"),
             "12" => array("code" => "BSH", "name" => "Bsharri"),
             "13" => array("code" => "KOU", "name" => "Koura"),
-            "14" => array("code" => "MIN", "name" => "Miniyeh-Danniyeh"),
+            "14" => array("code" => "Мин", "name" => "Miniyeh-Danniyeh"),
             "15" => array("code" => "TRI", "name" => "Tripoli"),
             "16" => array("code" => "ZGH", "name" => "Zgharta"),
             "17" => array("code" => "ALE", "name" => "Aley"),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "ИЛИ", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "ИЛИ", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -6482,7 +6601,7 @@ $app_list_strings = array (
             "46" => array("code" => "MP", "name" => "Northern Mariana Islands"),
             "47" => array("code" => "OH", "name" => "Ohio"),
             "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "49" => array("code" => "ИЛИ", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pennsylvania"),
             "52" => array("code" => "PR", "name" => "Puerto Rico"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "ИЛИ", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Перейти по ссылке',
   'LBL_TOGGLE_VISIBILITY' => 'Вкл/выкл видимость', // Record view header panel element
   'LBL_ACTIVITIES' => 'Лента мероприятий',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. Все права защищены.',
-  'LBL_TRADEMARK' => 'SugarCRM является торговой маркой компании SugarCRM, Inc. Все другие названия компании и продукта могут быть торговыми марками соответственных компаний, с которыми они связаны.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ являются торговыми марками компании SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Отправить приглашение',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar и 3-D куб являются зарегистрированными торговыми марками компании SugarCRM Inc. '.
+        'Все другие названия компаний и продуктов, используемые или отображаемые в этом продукте, могут являться торговыми марками '.
+        'соответствующих компаний, с которыми они связаны.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ являются торговыми марками компании SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Отправить приглашение',
   'LBL_INVITEES' => 'Приглашенные',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Гость не получит ваше приглашение',
   'LBL_SELECT_ACTION_LABEL' => 'Выбрать действие',
   'LBL_TOGGLE_DRAWER' => 'Вкл/выкл составитель документа',
   'LBL_TOUR_NEXT' => 'Дальше',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Добавить' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Логотип компании' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Календарь' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'навигация по основному модулю',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'переключить субпанель',
+
     'LBL_ADVANCED' => 'Расширенные',
     'LBL_BASIC' => 'Базовые',
     'LBL_MODULE_FILTER' => 'Фильтровать по...',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Команды',
     'LBL_TEAM_SET_ID' => 'Установка команды',
     'LBL_TEAM_SET'=>'Установка команды',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Выбранные команды',
     'LBL_SEARCH_UNAVAILABLE' => 'Поиск недоступен, попробуйте позже',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Основная команда не выбрана',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Произошла ошибка при попытке удалить основной код команды [{0}] для [{1}] модуля с кодом [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Поисковая система временно недоступна.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Произошла ошибка при выполнении поиска. Обратитесь к системному администратору.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Нельзя изменить поле, заблокированное процессом.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Условие произошло из-за общего сбоя или ошибки. Причины для данного исключения могут быть разными, но обычно выходят за рамки более конкретного исключения API.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Обозначает, что сервер занят, перегружен или выключен.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'Внутренний сервер поисковой системы временно недоступен из-за проблем с подключением. Проверьте соединение и конфигурацию в меню Администратор->Поиск->Тест.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'В поисковой системе произошло исключение времени выполнения. Подробнее см. sugarcrm.log.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Нельзя изменить поле, которое в настоящее время заблокировано выполняющимся процессом.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s заблокировано выполняющимся процессом и не может быть изменено.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s заблокированы выполняющимся процессом и не могут быть изменены.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Файл с таким именем уже существует в системе.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Этот временной период уже содержит доп. периоды',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Доп. временные периоды не могут содержать доп. периоды',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Не удалось отследить временные периоды для типа: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Для текущих настроек нет активного временного периода.',
     'LBL_CURRENT_TIMEPERIOD' => 'Текущий временной период',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Предыдущий временной период',
     'LBL_NEXT_TIMEPERIOD' => 'Следующий временной период',
@@ -8532,7 +8664,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => 'Закрыть',
     'LBL_ADDITIONAL_DETAILS' => 'Дополнительная информация',
     'LBL_ADMIN' => 'Администрирование',
-    'LBL_ALT_HOT_KEY' => 'Alt+',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'Архивировать',
     'LBL_ASSIGNED_TO_USER'=>'Ответственный (-ая)',
     'LBL_ASSIGNED_TO' => 'Ответственный (-ая):',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Выберите поле...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Выберите оператор...',
     'LBL_FILTER_CREATE_NEW' => 'Создать фильтр',
+    'LBL_FILTER_CREATE_FILTER' => 'Создать новый фильтр',
+    'LBL_FILTER_EDIT_FILTER' => 'Изменить фильтр',
     'LBL_FILTER_ALL_RECORDS' => 'Все записи',
     'TPL_FILTER_SAVE' => 'Вы успешно создали фильтр {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'От',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Область',
     'LBL_STATUS_UPDATED'=>'Ваш статус для этого события был обновлён!',
+    'LBL_STATUS_NOT_UPDATED' => 'Ваш статус для этого события не был обновлен.',
     'LBL_STATUS'=>'Статус:',
     'LBL_STREET'=>'Улица',
     'LBL_SUBJECT' => 'Тема',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Все права защищены.<br />SugarCRM является зарегистрированной торговой маркой SugarCRM, Inc. Названия остальных компаний и продуктов могут являться торговым марками соответствующих компаний, с которыми они связаны.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Все права защищены.<br />SugarCRM, Sugar и 3-D куб являются зарегистрированными торговыми марками компании SugarCRM Inc. '.
+        'Все другие названия компаний и продуктов, используемые или отображаемые в этом продукте, могут являться торговыми марками '.
+        'соответствующих компаний, с которыми они связаны.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Запланированное задание завершено',
@@ -9176,7 +9315,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Ошибка. Введен недопустимый оператор.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Ошибка. Введен недопустимый фильтр.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Ошибка при импорте. Поле группы частично заблокировано в определении процесса. Чтобы импортировать определение, эти поля должны быть разблокированы в определении процесса.',
+    'ERROR_EXP_DATE_LOW' => 'Ошибка. Дата окончания срока действия не может приходиться на день, предшествующий дате публикации.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Ошибка. Статус "Утверждено" требует даты публикации.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Дата публикации пустая.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9235,8 +9375,8 @@ $app_strings = array (
     'MSG_LIST_VIEW_NO_RESULTS_BASIC' => "Результаты не найдены.",
     'MSG_LIST_VIEW_NO_RESULTS' => "Результаты не найдены для",
     'MSG_LIST_VIEW_NO_RESULTS_SUBMSG' => "Создать как новый",
-    'MSG_EMPTY_LIST_VIEW_NO_RESULTS' => "На данный момент у вас нет сохраненных записей. или одна сейчас.",
-    'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "На данный момент у вас нет сохраненных записей. <item2> пока одна.",
+    'MSG_EMPTY_LIST_VIEW_NO_RESULTS' => "На данный момент у вас нет сохраненных записей <item1>. Запись <item2> или <item3> сейчас одна.",
+    'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "На данный момент у вас нет сохраненных записей <item1>. Запись <item2> сейчас одна.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Вы можете создать <item1> из <item2>. <item3> <item2> списка.",
 
     'LBL_CLICK_HERE' => "Нажмите здесь",
@@ -9306,6 +9446,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'столбцы могут быть отображены.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Информационная панель',
     'LBL_DASHBOARD_BWC' => 'Мой старый рабочий стол',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Инф. панель',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Инф. панель справки',
@@ -9338,9 +9479,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Мои {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Новости',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Новостная лента Google для связанного Аккаунта',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Показатели сделки',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Показатели сделки для связанного Аккаунта',
@@ -9409,7 +9547,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Записи не найдены.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Резюме обращения',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Лента новостей',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Взаимодействия',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Заметки и Вложения',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Заметки и Вложения принадлежат записи',
@@ -9918,7 +10055,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => 'Выберите функциональную обязанность',
     'LBL_DNB_BAL_ORG_NAME' => 'Название организации',
     'LBL_DNB_BAL_IMPORT_AS' => 'Импортировать как:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Название организации',
+    'LBL_DNB_BAL_ORG_NAME' => 'Название компании',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'в миллионах $USD',
@@ -10016,6 +10153,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Пожалуйста, введите название страницы.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Моя воронка',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Воронка моей команды",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Диаграмма воронки продаж',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Отображает текущую диаграмму воронки.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Нет изображения',
 
@@ -10269,6 +10413,8 @@ $app_strings = array (
     'LBL_SELECT_THIS_ROW_TITLE' => 'Выбрать эту строку',
     'LBL_TEAM_SELECTED_TITLE' => 'Выбрана команда',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Нажмите, чтобы сделать эту команду основной',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Команда, помеченная как выбранная команда ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Пометить эту команду как выбранную команду',
     'LBL_SEARCH_AND_SELECT' => 'Найти и Выбрать {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Поиск и добавление {{module}}',
 
@@ -10357,6 +10503,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Предварительный просмотр невозможен: нет доступных данных',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Предварительный просмотр невозможен: в просмотре как текущая запись',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Предварительный просмотр невозможен: запись удалена или нет доступа к записи',
+    'LBL_PREVIEW_PREVIOUS' => 'Просмотреть предыдущие',
+    'LBL_PREVIEW_NEXT' => 'Просмотреть следующие',
+    'LBL_PREVIEW_CLOSE' => 'Закрыть просмотр',
     'LBL_STREAM_NO_RECORDS' => 'В данный момент у этой записи нет заметок. Пожалуйста, добавьте заметку, нажав на кнопку "добавить заметку".',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}} найдены дубликаты.',
     'LBL_NO_DUPLICATES_FOUND' => 'Дубликаты не найдены.',
@@ -10376,6 +10525,7 @@ $app_strings = array (
         'Неккоректное число записей передано. Допустимый диапазон от {{minRecords}} до {{maxRecords}} записей.',
     'LBL_MERGE_NO_ACCESS' =>
         'У Вас нет доступа для выполнения этого действия. По крайней мере одна запись должна быть редактируемой.',
+    'LBL_MERGE_LOCKED' => 'Некоторые выбранные для объединения записи содержат поля, заблокированные для редактирования процессом, и сейчас не могут быть объединены.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10846,10 +10996,9 @@ $app_strings = array (
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Настройки системы',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Пароль',
     'LBL_CURRENT_PASSWORD'				=> 'Текущий пароль',
-    'LBL_SET_NEW_PASSWORD'              => 'Введите пароль',
     'LBL_NEW_PASSWORD1'                 => 'Новый пароль',
     'LBL_NEW_PASSWORD2'                 => 'Подтвердить пароль',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Пожалуйста, подтвердите Ваш пароль.',
@@ -10857,13 +11006,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> 'Пожалуйста, введите Ваш текущий пароль.',
     'ERR_REENTER_PASSWORDS' => 'Пароли должны совпадать.',
     'ERR_PASSWORD_MISMATCH' => 'Пароли не совпадают.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Пароль был успешно изменен.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Ошибка отправки пароля',
     'LBL_REQUEST_PASSWORD' => 'Запросить пароль',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Ошибка: Возникла проблема с обновлением пароля для данного пользователя.',
     'LBL_INCORRECT_PASSWORD' => 'Ошибка. Неверный пароль.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Язык по предпочтению:',
+    'LBL_PREFERRED_LANGUAGE' => 'Предпочитаемый язык:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Выбрать отчёт',
@@ -10893,6 +11041,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => 'Сервер обнаружил ошибку и не может выполнить ваш запрос.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Повторите попытку. Если эта ошибка будет повторяться, обратитесь к администратору Sugar.',
     'ERR_HTTP_500_ACTION' => 'Обратитесь в техническую поддержку.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 Internal Server Error (Внутренняя ошибка сервера)',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Сервер не может выполнить ваш запрос из-за временной ошибки.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Повторите попытку. Если эта ошибка будет повторяться, обратитесь к администратору Sugar.',
+    'ERR_HTTP_502_ACTION' => 'Обратитесь в техническую поддержку.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 Internal Server Error (Внутренняя ошибка сервера)',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Сервер не может выполнить ваш запрос.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Повторите попытку позже. Если эта ошибка будет повторяться, обратитесь к администратору Sugar.',
+    'ERR_HTTP_503_ACTION' => 'Обратитесь в техническую поддержку.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Не удалось формировать изображение',
     'ERR_RENDER_FAILED_MSG' => 'Не удалось формировать изображение',
@@ -11026,6 +11186,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => 'Ошибка:',
     'LBL_ALERT_TITLE_LOADING' => 'Идет загрузка...',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Версия Вашего браузера больше не поддерживается, или Вы используете браузер, который не поддерживается.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Рекомендуются следующие версии браузера: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Список рекомендуемых браузеров см. на странице {{link}}.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Поддерживаемые платформы',
 
@@ -11078,6 +11239,9 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'При соединении с сервером произошла ошибка. Попробуйте снова.',
     'ERR_RESOLVE_ERRORS' => 'Пожалуйста, устраните все ошибки, чтобы продолжить.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Обновить список',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'больше',
@@ -11142,7 +11306,7 @@ $app_strings = array (
     'LBL_RESOLVE_CONFLICT' => 'Вступает в конфликт с {{name}}',
 
     // Generic Help Strings
-    'LBL_HELP_MORE_INFO' => 'Для получения более подробной информации обратитесь к {{{more_info_url}}} {{plural_module_name}} документации.{{{more_info_url_close}}}',
+    'LBL_HELP_MORE_INFO' => 'Для получения более подробной информации обратитесь к документации {{{more_info_url}}} {{plural_module_name}}.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'Нет доступных данных',
 
     // Dashlet Preview Help String
@@ -11186,10 +11350,13 @@ $app_strings = array (
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM позволяет опытным пользователям быстро выполнять определенные задачи с помощью горячих клавиш для повышения производительности. Списки справа описывают имеющиеся клавиши вместе с объяснениями и действиями, которые они выполняют.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Поддерживаемые клавиши</h1><ul><li>все алфавитно-цифровые символы и знаки</li><li>Shift, Ctrl, Alt, Command, Mod (Ctrl в Windows/Linux и Command в Macs)</li><li>Enter, Esc, ПРОБЕЛ, Tab, PageUp, PageDown, End, Home, Ins, Del, Backspace</li></ul><h1>Поддерживаемые функции</h1><ul><li>Комбинация клавиш: Ctrl + M</li><li>Несколько клавиш: M, Ctrl + M</li><li>Сочетание клавиш: M – A</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Глобальные быстрые клавиши',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Контекстуальные быстрые клавиши',
     'LBL_SHORTCUT_KEY_KEY' => 'Ключ',
     'LBL_SHORTCUT_FUNCTION' => 'Функция',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Настроить сочетания контекстных клавиш быстрого доступа',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Нет сочетаний клавиш для настройки',
     'LBL_SHORTCUT_HELP' => 'Показать страницу справки быстрых клавиш',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Переключить меню быстрого создания',
     'LBL_SHORTCUT_SEARCH' => 'Обратите внимание на поле глобального поиска',
@@ -11237,6 +11404,9 @@ $app_strings = array (
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Выбрать все элементы в поле с множественным выбором',
     'LBL_SHORTCUT_SWEETSPOT' => 'Отображение или скрытие панели Sweet Spot',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Скрыть панель Sweet Spot',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Сохранить настройку',
+    'LBL_SHORTCUT_RESTORE' => 'Восстановить значения по умолчанию',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'При сохранении настраиваемых сочетаний клавиш на сервер произошла ошибка. Повторите попытку.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} Настройки',
@@ -11259,13 +11429,20 @@ $app_strings = array (
     'LBL_CALENDAR_RECURRENCE' => "Повторение",
     'LBL_CALENDAR_REMINDERS' => "Напоминания",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Настраиваемая дата",
     'LBL_CALENDAR_REPEAT_TYPE' => "Тип повторения",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Интервал повторения",
     'LBL_CALENDAR_REPEAT_DOW' => "Повторять по дням недели",
+    'LBL_CALENDAR_REPEAT' => "Повторить",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Повторять до",
     'LBL_CALENDAR_REPEAT_COUNT' => "Повторить частоту",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Повторить выбор",
+    'LBL_CALENDAR_REPEAT_DAYS' => "День (-и) месяца",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Повторить по порядку",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Повторить элемент",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Доллжны быть внесены изменения повторения, используя первую запись в ряду.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Выполнение правил повторения не приводит к созданию события.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Посещение',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Отклонено',
@@ -11285,17 +11462,23 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Javascript необходим для SugarCRM. Пожалуйста, включите javascript, чтобы продолжить использование SugarCRM.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Сериализованные данные не могут быть несериализованными',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Сериализованные данные не могут быть несериализованными, поскольку содержат ссылки на объекты или классы',
 
     'LBL_FIELD_TRIMMED' => 'Часть текста в поле удалена вследствие превышения максимального разрешенного количества символов.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Поле превышает максимально допустимое количество знаков.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Прошедшие 7 дней',
     '30' => 'Прошедшие 30 дней',
     '90' => 'Прошлый квартал',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11400,13 +11583,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Просрочен',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Черновик',
-    'Expired' => 'Просрочен',
-    'In Review' => 'В рассмотрении',
-    'Published' => 'Опубликовано',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Действия администратора--',
@@ -11418,57 +11594,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Удалить выбранные метки',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Содержит вложения',
-        'none' => 'Вложений нет',
-        'mime' => 'Укажите тип Mime',
-        'name' => 'Укажите имя',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Слова';
   $app_list_strings['moduleListSingular']['Words'] = 'Слово';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Создать статью';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Первые 5',
-    'Top_10' => 'Первые 10',
-    'Top_20' => 'Первые 20',
-    'Bot_5'  => 'Последние 5',
-    'Bot_10' => 'Последние 10',
-    'Bot_20' => 'Последние 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Все',
-        'added' => 'Добавленные за последние 30 дней',
-        'pending' => 'Ожидающие моего утверждения',
-        'updated' =>'Измененные за последние 30 дней',
-        'faqs' => 'Часто задаваемые вопросы',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'Конкретная дата',
-    'before' => 'До',
-    'after' => 'После',
-    'between_dates' => 'Между',
-    'last_7_days' => 'Прошедшие 7 дней',
-    'next_7_days' => 'Следующие 7 дней',
-    'last_month' => 'Прошлый месяц',
-    'this_month' => 'Этот месяц',
-    'next_month' => 'Следующий месяц',
-    'last_30_days' => 'Прошедшие 30 дней',
-    'next_30_days' => 'Следующие 30 дней',
-    'last_year' => 'Прошлый год',
-    'this_year' => 'Этот год',
-    'next_year' => 'Следующий год',
-    'isnull' => 'Является пустым',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12330,6 +12458,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Все контакты",
+    "email" => "Только электронная почта",
+    "phone" => "Только телефон",
     "prem" => "Только премиум"
 );
 
@@ -12355,4 +12485,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Био',
     'Both' => 'Оба'
 );
-

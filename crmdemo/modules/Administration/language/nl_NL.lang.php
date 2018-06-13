@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -274,8 +274,9 @@ $mod_strings = array (
     'LBL_DST_UPGRADE' => 'Upgrade:',
     'LBL_EDIT_CUSTOM_FIELDS' => 'Aangepaste velden bewerken',
     'LBL_EDIT_TABS'=>'Wijzig tabs',
-    'LBL_EMAIL_TITLE' => 'E-mail',
-    'LBL_EMAIL_DESC' => 'Beheer uitgaande en ingaande e-mails. E-mailinstellingen moeten worden geconfigureerd om gebruikers e-mails en nieuwsbrieven campagnes te kunnen laten versturen.',
+    'LBL_EMAIL_TITLE' => 'E-mail opstellen',
+    'LBL_EMAIL_DESC' => 'Instellingen voor ingaande en uitgaande e-mail beheren. De e-mailinstellingen moeten worden geconfigureerd met het oog op ' .
+                        'gebruikers de mogelijkheid bieden om e-mail en nieuwsbriefcampagnes te verzenden.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Om deze functie te kunnen gebruiken is een primair e-mailadres verplicht voor iedere gebruiker.',
 	'LBL_ENABLE_MAILMERGE' => 'Activeer Mail Merge?',
 	'LBL_ENABLED' => 'Ingeschakeld',
@@ -333,7 +334,7 @@ $mod_strings = array (
     'LBL_LICENSE_KEY'          => 'Download sleutel',
     'LBL_LICENSE_MISSING_FIELDS'   => 'Er ontbreken verplichte velden:',
     'LBL_LICENSE_NUM_LIC_OC'           => 'Aantal Offline Client Licenties',
-    'LBL_LICENSE_NUM_PORTAL_USERS'         => 'Number of Portal Users',
+    'LBL_LICENSE_NUM_PORTAL_USERS'         => 'Aantal gelijktijdige gebruikers zelfbedieningsportaal',
     'LBL_LICENSE_USERS'      => 'Aantal gebruikers',
     'LBL_LICENSE_VALIDATION_END'           => 'Validatie sleutel verloopt',
     'LBL_LICENSE_VALIDATION_KEY'           => 'Validatie sleutel',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Stel standaard localisatie instellingen in voor uw systeem.',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- De gebruikersnaam van de persoon die met deze offline client zal werken',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Laatste Gebruikersnaam:',
-    'LBL_MAILBOX_DESC' => 'Configureer mailboxen voor inkomende E-mail',
+    'LBL_MAILBOX_DESC' => 'Stel groepse-mailaccounts in voor het volgen van inkomende e-mail ' .
+        'en beheer persoonlijke inkomende mailaccountinformatie voor gebruikers',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Beheer contracttypes',
     'LBL_MANAGE_CURRENCIES' => 'Valuta',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Beheer Groepen',
@@ -530,7 +532,7 @@ $mod_strings = array (
     'LBL_PASSWORD_SUGAR_SERVER'          => 'Admin Wachtwoord:',
     'LBL_PASSWORD'             => 'Wachtwoord',
     'LBL_PASSWORD_RESET_MANAGEMENT'=> 'Reset wachtwoord optie',
-    'LBL_PASSWORD_RULES_MANAGEMENT'=> 'Wachtwoord Vereisten',
+    'LBL_PASSWORD_RULES_MANAGEMENT'=> 'Wachtwoord eisen',
     'LBL_PASSWORD_TEMPLATE' => 'E-mailsjablonen',
     'LBL_PASSWORD_CREATE_TEMPLATE' => 'Nieuw',
 	'LBL_PASSWORD_EDIT_TEMPLATE' => 'Wijzig',
@@ -539,10 +541,10 @@ $mod_strings = array (
     'LBL_PASSWORD_INVALID_LENGTH' => 'De minimum lengte moet minder dan maximum lengte zijn',
     'LBL_PASSWORD_INVALID_MINLENGTH' => 'Minimum lengte moet meer dan 0 zijn',
     'LBL_PASSWORD_SYST_GENERATED_PWD_ON' =>'Activeer &#39;Systeem-Gegenereerde Wachtwoorden&#39;-mogelijkheid.',
-	'LBL_PASSWORD_SYST_GENERATED_PWD_HELP' => 'Wanneer deze functie is ingeschakeld, kunnen gebruikers per e-mail een automatisch gegenereerd link ontvangen om hun wachtwoorden te resetten. Vereisten voor deze functie zijn: 1) een uitgaande e-mailserver moet goed worden geconfigureerd in e-mailinstellingen, en 2) de gebruikers moeten geldige e-mailadressen hebben in hun gebruiker records',
+	'LBL_PASSWORD_SYST_GENERATED_PWD_HELP' => 'Wanneer deze functie is ingeschakeld, kunnen gebruikers per e-mail een automatisch gegenereerd link ontvangen om hun wachtwoorden te resetten. Eisen voor deze functie zijn: 1) een uitgaande e-mailserver moet goed worden geconfigureerd in e-mailinstellingen, en 2) de gebruikers moeten geldige e-mailadressen hebben in hun gebruiker records',
 	'LBL_PASSWORD_EXP_AFTER'=> 'Wachtwoord vervalt op',
     'LBL_PASSWORD_FORGOT_FEATURE'=> 'Activeer &#39;Vergeten Wachtwoord&#39;-mogelijkheid',
-    'LBL_PASSWORD_FORGOT_FEATURE_HELP'=> 'Als deze instelling actief is, hebben gebruikers de mogelijkheid om hun eigen wachtwoord opnieuw in te stellen op de Log-in pagina. Vereisten om deze optie te gebruiken zijn: 1) Gebruikers moeten hun e-mailadres ingegeven hebben in hun Gebruiksaccount, en 2) Een uitgaande e-mailserver moet ingesteld zijn in de e-mailinstellingen pagina.',
+    'LBL_PASSWORD_FORGOT_FEATURE_HELP'=> 'Als deze instelling actief is, hebben gebruikers de mogelijkheid om hun eigen wachtwoord opnieuw in te stellen op de Log-in pagina. Eisen om deze optie te gebruiken zijn: 1) Gebruikers moeten hun e-mailadres ingegeven hebben in hun Gebruiksaccount, en 2) Een uitgaande e-mailserver moet ingesteld zijn in de e-mailinstellingen pagina.',
     'LBL_PASSWORD_ONE_UPPER_CASE' => 'Moet een hoofdletter bevatten (A-Z)',
     'LBL_PASSWORD_ONE_LOWER_CASE' => 'Moet een kleine letter bevatten (a-z)',
     'LBL_PASSWORD_ONE_NUMBER' => 'Moet een nummer bevatten (0-9)',
@@ -585,7 +587,7 @@ $mod_strings = array (
     'LBL_PRIVATE_TEAM' => 'Herbouw toegang tot de privé-teams. Elke gebruiker van de applicatie moet een privé-team hebben. En alle managers van die gebruikers moeten er toegang tot hebben.',
     'LBL_PRODUCT_CATEGORIES_TITLE' => 'Productcategorieën',
     'LBL_PRODUCT_CATEGORIES' => 'Bewerk de lijst met productcategorieën',
-    'LBL_PRODUCT_TYPES_TITLE' => 'Type Product',
+    'LBL_PRODUCT_TYPES_TITLE' => 'Producttype',
     'LBL_PRODUCT_TYPES' => 'Beheer van de lijst met producttypen',
     'LBL_PRODUCTS_TITLE' => 'Productcatalogus',
     'LBL_PRODUCTS' => 'Voeg items toe in de productcatalogus',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Herbouw JS Grouping Files',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Overschrijft bestaande groupsbestanden met de laatste versies van de groepsbestanden',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Javascript bestanden repareren',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'JS bestanden repareren',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Bezig met verwerken bestanden. Dit kan een paar minuten duren. Weg navigeren van deze pagina zal het proces niet onderbreken, dus u kunt gerust verder gaan of wacht op bevestiging...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Klaar met verwerken van Bestanden.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Herstel velden met niet-kleine-letters',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Extra cachebestanden wissen... klaar',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Als dit niet is aangevinkt, zal een administrator handmatig het systeem moeten valideren nadat de licentie verloopt. Gebruikers kunnen niet inloggen als het systeem niet gevalideerd is!',
 	'LBL_TRACKER_SETTINGS' => 'Tracker instellingen',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Selecteer welke systeem- en gebruikersgegevens worden getraceerd',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Volgen inschakelen/uitschakelen',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'In-/Uitschakelen Demo Gebruikers',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Inschakelen',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Uitschakelen',
@@ -1158,6 +1162,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_ADDED' => 'Sprite {0} toegevoegd',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Bestand uitsluiten: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Op teams gebaseerde machtigingen',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Teamtoegang inschakelen en toegang beheren per module.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Type systeem',
     'LBL_FTS_HOST' => 'Host',
@@ -1227,5 +1235,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Door te klikken op indienen wordt u gesynchroniseerd met de hoofdserver.',
     'LBL_OFFLINE_ENABLED' => 'Offline ingeschakeld',
     'LBL_OFFLINE_SETTINGS' => 'Offline instellingen',
+
 
 );

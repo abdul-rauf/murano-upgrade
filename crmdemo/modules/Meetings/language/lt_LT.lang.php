@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'ERR_DELETE_RECORD' => 'Įrašas turi būti nurodytas norint ištrinti susitikimą.',
+	'ERR_DELETE_RECORD' => 'Įrašo numeris turi būti nurodytas norint ištrinti susitikimą.',
 	'LBL_ACCEPT_THIS'=>'Patvirtinti?',
 	'LBL_ADD_BUTTON'=> 'Pridėti',
 	'LBL_ADD_INVITEE' => 'Pridėti dalyvius',
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'El. paštas',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Siųsti el. laišką visiems dalyviams',
     'LBL_POPUP_REMINDER' => 'Popup Reminder',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup Reminder Time',
+    'LBL_POPUP_REMINDER_TIME' => 'Iššokantis priminimo laiko langas',
     'LBL_EMAIL_REMINDER' => 'Priminimas el. paštu',
-    'LBL_EMAIL_REMINDER_TIME' => 'Priminimo laikas el. paštu',
+    'LBL_EMAIL_REMINDER_TIME' => 'El. paštu siunčiamas priminimo laikas',
     'LBL_REMOVE' => 'trinti',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Suplanuojama',
 	'LBL_SEARCH_BUTTON'=> 'Ieškoti',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Ištrinti visus pasikartojimus',
     'LBL_DATE_END_ERROR' => 'Pabaigos data yra anksčiau nei pradžios data.',
     'LBL_REPEAT_PARENT_ID' => 'Repeat Parent ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Susitikimo pasikartojimo ID. Pradinė susitikimo pradžios data',
     'LBL_RECURRING_SOURCE' => 'Pasikartojantis šaltinis',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Ar tikrai norite ištrinti pasikartojančius įrašus?',
     'LBL_RECURRENCE' => 'Pasikartojimai',

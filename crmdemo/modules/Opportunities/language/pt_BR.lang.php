@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Ao clicar em Confirmar, você estará apagando TODOS os dados de Previsões e alterando sua Visualização de Oportunidades. Se isso não é o que você quer fazer, clique em Cancelar para retornar às configurações anteriores.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'A clicar em confirmar, você vai apagar TODOS os dados de previsões e alterar a exibição de oportunidades. '
+        .'Além disso, TODAS as definições de processo com um módulo de alvo dos itens de linha de receita serão desabilitadas. '
+        .'Se isso não é o que pretendia, clique em cancelar para retornar às configurações anteriores.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Se todos os Itens da linha de receita estiverem fechados e pelo menos um tiver ganhado,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'a Fase de vendas da Oportunidade é configurado como "Fechadas Ganhas".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Se todos os Itens da linha de receita estiverem na Fase de vendas "Fechadas Perdidas",',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'O módulo {{plural_module_name}} permite que você controle as vendas individuais e os itens de linha pertencentes a essas vendas do início ao fim. Cada registro {{module_name}} representa um cabeçalho de um grupo de {{revenuelineitems_module}}, bem como relativo a outros registros importantes, tais como {{quotes_module}}, {{contacts_module}}, etc. Cada {{revenuelineitems_singular_module}} é a venda em potencial de um determinado produto e inclui dados relevantes da venda. Cada {{revenuelineitems_singular_module}} avançará normalmente pelos vários estágios da venda até ser marcado como "Fechadas ganhas" ou "Fechadas perdidas". O registro {{module_name}} reflete a quantidade e a data de fechamento esperada de seu {{revenuelineitems_module}}. {{plural_module_name}} e {{revenuelineitems_module}} podem ser aproveitados ainda mais usando o módulo de {{forecasts_singular_module}} Sugar para entender e prever as tendências de vendas, bem como concentrar os esforços para atingir as cotas de vendas.',
+    'LBL_HELP_RECORDS' => 'O módulo {{plural_module_name}} permite que você rastreie as vendas individuais do início ao fim. Cada registro de {{module_name}} representa uma possível venda e inclui dados de venda relevantes, bem como dados relativos a outros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc. Um {{module_name}} normalmente avança por vários estágios de vendas até seja marcado com "Fechado ganho" ou "Fechado perdido". {{plural_module_name}} pode ser aproveitado ainda mais usando o módulo Sugar de {{forecasts_singular_module}} para entender e prever as tendências de vendas, bem como focar o trabalho para atingir as cotas de vendas.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'O módulo {{plural_module_name}} permite que você controle as vendas individuais e os itens de linha pertencentes a essas vendas do início ao fim. Cada registro {{module_name}} representa um cabeçalho de um grupo de {{revenuelineitems_module}}, bem como referente a outros registros importantes tais, tais como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'O módulo {{plural_module_name}} permite que você controle as vendas individuais e os itens de linha pertencentes a essas vendas do início ao fim. Cada registro {{module_name}} representa um possível venda e inclui dados de vendas relevantes, bem como dados referentes a outros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
 - Edite os campos desse registro clicando em um campo individual ou no botão Editar.
-- Visualize ou modifique links para outros registros nos subpainéis, incluindo {{revenuelineitems_module}} colocando o painel inferior esquerdo como "Visualização de dados".
-- Visualize e faça comentários de usuário e o histórico de alterações de registro em {{activitystream_singular_module}} colocando o painel esquerdo inferior como "Cadeia de atividades".
+- Visualize ou modifique links para outros registros nos subpainéis, colocando o painel inferior esquerdo como "Visualização de dados".
+- Visualize e faça comentários de usuário e do histórico de alterações de registros em {{activitystream_singular_module}} colocando o painel esquerdo inferior como "Fluxo de atividades".
 - Siga ou marque como favorito esse registro usando os ícones à direita do nome do registro.
 - Ações adicionais estão disponíveis no menu suspenso Ações, à direita do botão Editar.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'O módulo {{plural_module_name}} permite que você controle as vendas individuais e os itens de linha pertencentes a essas vendas do início ao fim. Cada registro {{module_name}} representa um cabeçalho de um grupo de {{revenuelineitems_module}}, bem como referente a outros registros importantes, tais como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'O módulo {{plural_module_name}} permite que você controle as vendas individuais e os itens de linha pertencentes a essas vendas do início ao fim. Cada registro {{module_name}} representa uma possível venda e inclui dados de vendas relevantes, bem como referente a outros registros importantes, tais como {{quotes_module}}, {{contacts_module}}, etc.
 
 Para criar um {{module_name}}:
 1. Forneça valores para os campos conforme desejado.
   - Os campos marcados "Obrigatório" devem ser preenchidos antes de salvar.
   - Clique em "Mostrar mais" para expor campos adicionais, se necessário.
-2. Clique em "Salvar" para finalizar o novo registro e voltar à página anterior.
-3. Depois de salvar, use o subpainel {{revenuelineitems_module}} para adicionar itens de linha para {{module_name}}.',
+2. Clique em "Salvar" para finalizar o novo registro e voltar à página anterior.',
 
 // END PRO/CORP
 

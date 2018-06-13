@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Nové heslo',
 	'LBL_NEW_PASSWORD1'					=> 'Heslo',
 	'LBL_NEW_PASSWORD2'					=> 'Potvrdit heslo',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Heslo bylo vyměněno.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Heslo bylo vyměněno.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'Bylo odesláno vygenerované heslo na uživatele.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Heslo bylo vytvořeno úspěšně.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Heslo bylo vytvořeno úspěšně.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Nový uživatel',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Nový uživatel',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Kvóty',
     'LBL_FORECASTS'                     => 'Předpovědi',
     'LBL_WORKSHEETS'                    => 'Listy',
+	'LBL_CALENDARS'                     => 'Kalendáře',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Vygeneruj další unikát',
 	'LBL_RECAPTCHA_SOUND'				=> 'Přepnout na hlas',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Přepnout na obrázek',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Telefon do práce',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Umístění zobrazení',
     'LBL_ICAL_PUB_URL'                  => 'adresa URL integrace iCal',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Používejte toto URL k odběru Sugar kalendáře pomocí iCal',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Použijte tuto adresu URL k přihlášení k odběru vašeho kalendáře Sugar v rámci aplikací podporovaných iCal.' .
+                                           'V externích aplikacích kalendářů lze události z kalendáře Sugar zobrazit pouze pro čtení ' .
+                                           'a jakékoli úpravy událostí ' .
+                                           '(například schůzky, volání atd.) lze provádět pouze v Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'Adresa URL vašeho dotazu',
 	'LNK_NEW_USER'						=> 'Vytvořit uživatele',
 	'LNK_NEW_PORTAL_USER'				=> 'Vytvoř Portal API User',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Reporty uživatelů',
     'LBL_CONTACTS_SYNC' => 'Kontakty',
-
+    'LBL_DETAIL' => 'Profil uživatele',
 ); // END STRINGS DEFS
 
 ?>

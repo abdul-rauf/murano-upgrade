@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -88,7 +88,7 @@ $mod_strings = array(
 	'LBL_UW_COMPLETE'							=> 'Plotëso',
 	'LBL_UW_CONTINUE_CONFIRMATION'              => 'Ky version i ri i Sugar përmban kontratë të re të licencës. A dëshironi që të vazhdoni?',
 	'LBL_UW_COMPLIANCE_ALL_OK'					=> 'Të gjitha nevojat e parametrave të sitemit janë të kënaqura',
-	'LBL_UW_COMPLIANCE_CALLTIME'				=> 'Parametrat e PHP: Koha e thirjes kalon sipas referencës',
+	'LBL_UW_COMPLIANCE_CALLTIME'				=> 'Parametrat e PHP: Koha e thirrjes kalon sipas referencës',
 	'LBL_UW_COMPLIANCE_CURL'					=> 'cURL modula',
 	'LBL_UW_COMPLIANCE_IMAP'					=> 'IMAP Modula',
 	'LBL_UW_COMPLIANCE_MBSTRING'				=> 'Moduli MBStrings',

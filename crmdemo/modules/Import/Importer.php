@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -19,6 +19,7 @@ require_once 'include/SugarFields/SugarFieldHandler.php';
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 
 class Importer
 {
@@ -196,7 +197,7 @@ class Importer
 
     protected function importRow($row)
     {
-        global $sugar_config, $mod_strings, $current_user;
+        global $sugar_config, $mod_strings, $current_user, $current_language;
 
         $focus = BeanFactory::getBean($this->bean->module_dir);
         $focus->unPopulateDefaultValues();
@@ -224,7 +225,23 @@ class Importer
             'non-primary' => array()
         );
 
+        $importRequiredFields = $focus->get_import_required_fields();
+
+        // to get a list of locked fields for this imported record
+        $lockedFields = array();
+        $fieldNum = array_search('id', $this->importColumns);
+        if ($fieldNum) {
+            $importedId = strip_tags(trim($row[$fieldNum]));
+            if ($importedId) {
+                $importedBean = BeanFactory::getBean($this->bean->module_dir, $importedId);
+                if ($importedBean) {
+                    $lockedFields = $importedBean->getLockedFields();
+                }
+            }
+        }
+
         $fields_order = $this->getImportColumnsOrder($focus->getFieldDefinitions());
+        $importFields = array();
         foreach ($fields_order as $fieldNum) {
             // loop if this column isn't set
             if ( !isset($this->importColumns[$fieldNum]) )
@@ -232,6 +249,8 @@ class Importer
 
             // get this field's properties
             $field           = $this->importColumns[$fieldNum];
+            $this->correctRealNameFieldDef($focus, array($field));
+            $importFields[] = $field;
             $fieldDef        = $focus->getFieldDefinition($field);
             $fieldTranslated = translate((isset($fieldDef['vname'])?$fieldDef['vname']:$fieldDef['name']), $focus->module_dir)." (".$fieldDef['name'].")";
             $defaultRowValue = '';
@@ -292,35 +311,44 @@ class Importer
                 continue;
 
             // If the field is required and blank then error out
-            if ( array_key_exists($field,$focus->get_import_required_fields()) && empty($rowValue) && $rowValue!='0')
-            {
+            if (array_key_exists($field, $importRequiredFields) && empty($rowValue) && $rowValue != '0') {
                 $this->importSource->writeError( $mod_strings['LBL_REQUIRED_VALUE'],$fieldTranslated,'NULL');
                 $do_save = false;
             }
 
             // Handle the special case 'Sync to Mail Client'
-            if ( $focus->object_name == "Contact" && $field == 'sync_contact' )
-            {
-                /**
-                 * Bug #41194 : if true used as value of sync_contact - add curent user to list to sync
-                 */
-                if ( true == $rowValue || 'true' == strtolower($rowValue)) {
-                    $focus->sync_contact = $focus->id;
-                } elseif (false == $rowValue || 'false' == strtolower($rowValue)) {
-                    $focus->sync_contact = '';
-                } else {
-                    $bad_names = array();
-                    $returnValue = $this->ifs->synctooutlook($rowValue,$fieldDef,$bad_names);
-                    // try the default value on fail
-                    if ( !$returnValue && !empty($defaultRowValue) )
-                        $returnValue = $this->ifs->synctooutlook($defaultRowValue, $fieldDef, $bad_names);
-                    if ( !$returnValue )
-                    {
-                        $this->importSource->writeError($mod_strings['LBL_ERROR_SYNC_USERS'], $fieldTranslated, $bad_names);
-                        $do_save = 0;
+            if ($focus->object_name == "Contact") {
+                // Handle the special case 'Sync to Mail Client'
+                if ($field == 'sync_contact') {
+                    /**
+                     * Bug #41194 : if true used as value of sync_contact - add curent user to list to sync
+                     */
+                    if (true == $rowValue || 'true' == strtolower($rowValue)) {
+                        $focus->sync_contact = $focus->id;
+                    } elseif (false == $rowValue || 'false' == strtolower($rowValue)) {
+                        $focus->sync_contact = '';
                     } else {
-                        $focus->sync_contact = $returnValue;
+                        $bad_names = array();
+                        $returnValue = $this->ifs->synctooutlook($rowValue, $fieldDef, $bad_names);
+                        // try the default value on fail
+                        if (!$returnValue && !empty($defaultRowValue)) {
+                            $returnValue = $this->ifs->synctooutlook($defaultRowValue, $fieldDef, $bad_names);
+                        }
+                        if (!$returnValue) {
+                            $this->importSource->writeError(
+                                $mod_strings['LBL_ERROR_SYNC_USERS'],
+                                $fieldTranslated,
+                                $bad_names
+                            );
+                            $do_save = 0;
+                        } else {
+                            $focus->sync_contact = $returnValue;
+                        }
                     }
+                }
+                // Handle preferred_language to sync to current_language if not set
+                if ($field == 'preferred_language' && empty($rowValue)) {
+                    $rowValue = $current_language;
                 }
             }
 
@@ -421,6 +449,17 @@ class Importer
                 $rowValue = get_module_from_singular($rowValue);
             }
 
+            // do not import if the record contains locked fields
+            if (in_array($field, $lockedFields)) {
+                $do_save = false;
+                $this->importSource->writeError(
+                    $mod_strings['LBL_RECORD_CONTAIN_LOCK_FIELD'],
+                    $field,
+                    $rowValue
+                );
+                break;
+            }
+
             $focus->$field = $rowValue;
             unset($defaultRowValue);
         }
@@ -514,6 +553,7 @@ class Importer
                     else
                     {
                         $focus = $clonedBean;
+                        $this->correctRealNameFieldDef($focus, $importFields);
                         $newRecord = FALSE;
                     }
                 }
@@ -670,8 +710,12 @@ class Importer
                 break;
             case 'teamset':
                 $this->ifs->teamset($rowValue,$fieldDef,$focus);
-                $this->importColumns[] = 'team_set_id';
-                $this->importColumns[] = 'team_id';
+                if (Team::$nameTeamsetMapping[$fieldDef['name']]) {
+                    $this->importColumns[] = Team::$nameTeamsetMapping[$fieldDef['name']];
+                }
+                if (!empty($fieldDefs['id_name'])) {
+                    $this->importColumns[] = $fieldDefs['id_name'];
+                }
                 return $rowValue;
                 break;
             case 'fullname':
@@ -802,6 +846,10 @@ class Importer
         if ( $focus->object_name == "Contact" && isset($list_of_users) )
             $focus->process_sync_to_outlook($list_of_users);
 
+        // Before calling save, we need to clear out any existing registered AWF
+        // triggered start events so they can continue to trigger.
+        Registry\Registry::getInstance()->drop('triggered_starts');
+
         $focus->save(false);
 
         //now that save is done, let's make sure that parent and related id's were saved as relationships
@@ -824,7 +872,7 @@ class Importer
         global $current_user;
 
         $firstrow = InputValidation::getService()->getValidInputRequest(
-            'firstrow', 
+            'firstrow',
             array('Assert\PhpSerialized' => array('base64Encoded' => true))
         );
         $mappingValsArr = $this->importColumns;
@@ -916,13 +964,8 @@ class Importer
     {
         global $timedate, $current_user;
 
-        $defaultRowValue = '';
-        if (is_array($fieldValue)) {
-            $defaultRowValue = encodeMultienumValue($fieldValue);
-        } elseif (!empty($_REQUEST[$field])) {
-            $defaultRowValue = $_REQUEST[$field];
-        }
-
+        // encodeMultienumValue already checks for array
+        $defaultRowValue = encodeMultienumValue($fieldValue);
 
         // translate default values to the date/time format for the import file
         if( $fieldDef['type'] == 'date' && $this->ifs->dateformat != $timedate->get_date_format() )
@@ -1336,6 +1379,17 @@ class Importer
                 'opt_out' => false,
             );
 
+            // check for current opt_out and invalid email settings for this email address
+            // if we find any, set them now
+            $db = DBManagerFactory::getInstance();
+            $queryStr = "SELECT opt_out, invalid_email FROM email_addresses WHERE email_address = ".
+                $db->quoted($email_address);
+            $queryResult = $db->query($queryStr);
+
+            if ($row = $db->fetchByAssoc($queryResult)) {
+                $address = array_merge($address, $row);
+            }
+
             // check if there are elements in $attrs after $email_address was shifted from there
             if ($attrs) {
                 $invalid_email = array_shift($attrs);
@@ -1370,5 +1424,31 @@ class Importer
         }
 
         return $result;
+    }
+
+    /**
+     * Replaces user_name with full name when use_real_name preference setting is enabled and this is a user name field
+     * and vice versa when use_real_name preference setting is disabled
+     *
+     * @param SugarBean $focus
+     * @param $importFields
+     */
+    protected function correctRealNameFieldDef(SugarBean $focus, $importFields)
+    {
+        global $current_user;
+
+        $useRealNames = $current_user->getPreference('use_real_names');
+
+        foreach ($importFields as $fieldName) {
+            if (!empty($focus->field_defs[$fieldName]['type']) &&
+                $focus->field_defs[$fieldName]['type'] == 'relate' &&
+                !empty($focus->field_defs[$fieldName]['module']) &&
+                $focus->field_defs[$fieldName]['module'] == 'Users' &&
+                !empty($focus->field_defs[$fieldName]['rname']) &&
+                in_array($focus->field_defs[$fieldName]['rname'], array('full_name', 'user_name'))
+            ) {
+                $focus->field_defs[$fieldName]['rname'] = $useRealNames ? 'full_name' : 'user_name';
+            }
+        }
     }
 }

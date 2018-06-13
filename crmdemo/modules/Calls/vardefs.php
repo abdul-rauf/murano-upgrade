@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -38,6 +38,8 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'studio' => false,
     'processes' => true,
     'default' => 0,
+    'group' => 'end_date',
+    'group_label' => 'LBL_DATE_END',
   ),
   'duration_minutes' =>
   array (
@@ -46,7 +48,8 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'type' => 'enum',
     'dbType' => 'int',
     'options' => 'duration_intervals',
-    'group'=>'duration_hours',
+    'group'=>'end_date',
+    'group_label' => 'LBL_DATE_END',
     'importable' => 'required',
     'len' => '2',
     'comment' => 'Call duration, minutes portion',
@@ -86,6 +89,8 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'studio' => array('recordview' => false, 'wirelesseditview'=>false), // date_end is computed by the server from date_start and duration
     'readonly' => true,
     'full_text_search' => array('enabled' => true, 'searchable' => false),
+    'group'=>'end_date',
+    'group_label' => 'LBL_DATE_END',
   ),
 
  'parent_type'=>
@@ -192,7 +197,7 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'comment' => 'Specifies when a email reminder alert should be issued; -1 means no alert; otherwise the number of seconds prior to the start',
     'studio' => array('recordview' => false, 'wirelesseditview' => false),
   ),
-  'email_reminder_sent' => array( 
+  'email_reminder_sent' => array(
     'name' => 'email_reminder_sent',
     'vname' => 'LBL_EMAIL_REMINDER_SENT',
     'default' => 0,
@@ -200,7 +205,7 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'comment' => 'Whether email reminder is already sent',
     'studio' => false,
     'massupdate'=> false,
-   ), 
+   ),
   'outlook_id' =>
   array (
     'name' => 'outlook_id',
@@ -219,7 +224,7 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'len' => '20',
     'source'=>'non-db',
   ),
-  //bug 39559 
+  //bug 39559
   'set_accept_links' => array (
     'name' => 'set_accept_links',
     'vname' => 'LBL_ACCEPT_LINK',
@@ -430,7 +435,7 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'massupdate' => false,
     'reportable' => false,
     'studio' => 'false',
-  ),  
+  ),
   'repeat_interval' =>
   array(
     'name' => 'repeat_interval',
@@ -443,7 +448,7 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'massupdate' => false,
     'reportable' => false,
     'studio' => 'false',
-  ),  
+  ),
   'repeat_dow' =>
   array(
     'name' => 'repeat_dow',
@@ -455,18 +460,18 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'massupdate' => false,
     'reportable' => false,
     'studio' => 'false',
-  ),  
+  ),
   'repeat_until' =>
   array(
     'name' => 'repeat_until',
     'vname' => 'LBL_CALENDAR_REPEAT_UNTIL_DATE',
-    'type' => 'date',
+        'type' => 'date',
     'comment' => 'Repeat until specified date',
     'importable' => 'false',
     'massupdate' => false,
     'reportable' => false,
     'studio' => 'false',
-  ),  
+  ),
   'repeat_count' =>
   array(
     'name' => 'repeat_count',
@@ -479,6 +484,80 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'reportable' => false,
     'studio' => 'false',
   ),
+        'repeat_selector' =>
+            array(
+                'name' => 'repeat_selector',
+                'vname' => 'LBL_CALENDAR_REPEAT_SELECTOR',
+                'type' => 'enum',
+                'len' => 36,
+                'options' => 'repeat_selector_dom',
+                'comment' => 'Repeat selector',
+                'importable' => 'false',
+                'massupdate' => false,
+                'reportable' => false,
+                'studio' => 'false',
+                'visibility_grid' => array(
+                    'trigger' => 'repeat_type',
+                    'values' => array(
+                        '' => array(
+                            'None',
+                        ),
+                        'Daily' => array(
+                            'None',
+                        ),
+                        'Weekly' => array(
+                            'None',
+                        ),
+                        'Monthly' => array(
+                            'None',
+                            'Each',
+                            'On',
+                        ),
+                        'Yearly' => array(
+                            'None',
+                            'On',
+                        ),
+                    ),
+                ),
+            ),
+        'repeat_days' =>
+            array(
+                'name' => 'repeat_days',
+                'vname' => 'LBL_CALENDAR_REPEAT_DAYS',
+                'type' => 'varchar',
+                'len' => 128,
+                'comment' => 'Days of month',
+                'importable' => 'false',
+                'massupdate' => false,
+                'reportable' => false,
+                'studio' => 'false',
+            ),
+        'repeat_ordinal' =>
+            array(
+                'name' => 'repeat_ordinal',
+                'vname' => 'LBL_CALENDAR_REPEAT_ORDINAL',
+                'type' => 'enum',
+                'len' => 36,
+                'options' => 'repeat_ordinal_dom',
+                'comment' => 'Repeat ordinal value',
+                'importable' => 'false',
+                'massupdate' => false,
+                'reportable' => false,
+                'studio' => 'false',
+            ),
+        'repeat_unit' =>
+            array(
+                'name' => 'repeat_unit',
+                'vname' => 'LBL_CALENDAR_REPEAT_UNIT',
+                'type' => 'enum',
+                'len' => 36,
+                'options' => 'repeat_unit_dom',
+                'comment' => 'Repeat unit value',
+                'importable' => 'false',
+                'massupdate' => false,
+                'reportable' => false,
+                'studio' => 'false',
+            ),
   'repeat_parent_id' =>
   array(
     'name' => 'repeat_parent_id',
@@ -491,6 +570,21 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'reportable' => false,
     'studio' => 'false',
   ),
+    'recurrence_id' => array(
+        'name' => 'recurrence_id',
+        'vname' => 'LBL_CALENDAR_RECURRENCE_ID',
+        'type' => 'datetime',
+        'dbType' => 'datetime',
+        'comment' => 'Recurrence ID of call. Original call start date',
+            'importable' => false,
+            'exportable' => false,
+            'massupdate' => false,
+            'studio' => false,
+            'processes' => false,
+            'visible' => false,
+            'reportable' => false,
+            'hideacl' => true,
+    ),
   'recurring_source' =>
   array(
     'name' => 'recurring_source',
@@ -576,6 +670,11 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
         'name' => 'idx_calls_date_start',
         'type' => 'index',
         'fields' => array('date_start'),
+    ),
+    array(
+        'name' => 'idx_calls_recurrence_id',
+        'type' => 'index',
+        'fields' => array('recurrence_id'),
     ),
     array(
         'name' => 'idx_calls_date_start_end_del',

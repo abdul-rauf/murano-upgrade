@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 10:45:20
+// created: 2018-06-13 11:24:59
 $viewdefs['Calls']['DetailView'] = array (
   'templateMeta' => 
   array (
@@ -177,8 +177,8 @@ $viewdefs['Calls']['DetailView'] = array (
         1 => 
         array (
           'name' => 'direction',
-          'label' => 'LBL_STATUS',
           'customCode' => '{$fields.direction.options[$fields.direction.value]}</span> <span id="status" class="sugar_field">{$fields.status.options[$fields.status.value]}',
+          'label' => 'LBL_STATUS',
         ),
       ),
       1 => 

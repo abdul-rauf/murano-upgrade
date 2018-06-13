@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -38,7 +38,7 @@ $mod_strings = array (
     'LBL_CREATED_BY'=> 'Creato Da',
     'LBL_DATE_ENTERED'=> 'Data Inserimento',
     'LBL_DATE_MODIFIED'=> 'Data Modifica',
-    'LBL_DELETED' => 'Cancellato',
+    'LBL_DELETED' => 'Eliminato',
     'LBL_MODIFIED'=> 'Modificato da ID',
     'LBL_MODIFIED_USER' => 'Modificato da',
     'LBL_CREATED'=> 'Creato da',

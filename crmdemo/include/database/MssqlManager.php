@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -65,6 +65,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 /**
  * SQL Server (mssql) manager
+ *
+ * @deprecated Use SqlsrvManager instead
  */
 class MssqlManager extends DBManager
 {
@@ -400,17 +402,21 @@ class MssqlManager extends DBManager
      */
     protected function isUnionQuery($sql)
     {
-        if (stripos($sql, 'UNION') && !preg_match("/(')(UNION).?(')/i", $sql)) {
+        // replace string literals with empty string, eg field1='Union''s Test' => field1='',
+        // then any remaining word 'union' must be keyword
+        $sql = preg_replace("/'[^']+'/", "''", str_replace("''", '', $sql));
+        $unionPattern = "/(\)|\s)UNION(\(|\s)/i";
+        if (preg_match($unionPattern, $sql)) {
             if (preg_match_all('/\(\s*(select[^)]+)\)/i', $sql, $matches)) {
                 $isUnionInSub = false;
                 $sqlMain = $sql;
                 foreach ($matches[0] as $query) {
-                    if (stripos($query, 'UNION') && !preg_match("/(')(UNION).?(')/i", $query)) {
+                    if (preg_match($unionPattern, $query)) {
                         $isUnionInSub = true;
                     }
                     $sqlMain = str_ireplace($query, '', $sqlMain);
                 }
-                return !$isUnionInSub || (stripos($sqlMain, 'UNION') && !preg_match("/(')(UNION).?(')/i", $sqlMain));
+                return !$isUnionInSub || preg_match($unionPattern, $sqlMain);
             }
             return true;
         }
@@ -435,7 +441,7 @@ class MssqlManager extends DBManager
             $GLOBALS['log']->debug(print_r(func_get_args(),true));
             $this->lastsql = $sql;
             $matches = array();
-            preg_match('/^(.*SELECT\s+)(.*?FROM.*WHERE)(.*)$/isU', $sql, $matches);
+            preg_match('/^(.*?SELECT\s+?)(.*?FROM.*WHERE)(.*?)$/si', $sql, $matches);
             if (!empty($matches[3])) {
                 if ($start == 0) {
                     $match_two = strtolower($matches[2]);
@@ -490,7 +496,15 @@ class MssqlManager extends DBManager
                     //if there is a distinct clause, parse sql string as we will have to insert the rownumber
                     //for paging, AFTER the distinct clause
                     $grpByStr = '';
-                    $hasDistinct = strpos(strtolower($matches[0]), "distinct");
+                    $distinctPos = stripos($matches[2], 'distinct');
+                    $fromPos = stripos($matches[2], 'from');
+
+                    if ($distinctPos && $fromPos && $fromPos < $distinctPos) { // distinct is a part of sub-query!
+                        $hasDistinct = false;
+                    } else {
+                        $hasDistinct = $distinctPos;
+                    }
+
                     if ($hasDistinct) {
                         $matches_sql = strtolower($matches[0]);
                         //remove reference to distinct and select keywords, as we will use a group by instead
@@ -1055,18 +1069,21 @@ class MssqlManager extends DBManager
         return str_replace("'","''", $this->quoteInternal($string));
     }
 
-    /**+
+    /**
      * @see DBManager::tableExists()
      */
     public function tableExists($tableName)
     {
         $GLOBALS['log']->info("tableExists: $tableName");
 
-        $this->checkConnection();
-        $result = $this->getOne(
-            "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' AND TABLE_NAME=".$this->quoted($tableName));
-
-        return !empty($result);
+        if ($this->getDatabase() && !empty($this->connectOptions['db_name'])) {
+            $result = $this->getOne(
+                "SELECT * FROM INFORMATION_SCHEMA.TABLES ".
+                "WHERE TABLE_TYPE='BASE TABLE' AND TABLE_NAME=".$this->quoted($tableName)
+            );
+            return !empty($result);
+        }
+        return false;
     }
 
     /**
@@ -1385,11 +1402,12 @@ class MssqlManager extends DBManager
                         LoggerManager::getLogger()->error("Can't add identity to table $tablename where identity already exists.");
                         unset($def['auto_increment']);
                     }
-                    $columns[] = 'ADD ' . $this->oneColumnSQLRep($def, $ignoreRequired, $tablename, false);
+                    $columns[] = (count($columns) == 0 ? 'ADD ' : '')
+                        . $this->oneColumnSQLRep($def, $ignoreRequired, $tablename, false);
                     break;
 
                 case 'drop':
-                    $columns[] = 'DROP COLUMN ' . $def['name'];
+                    $columns[] = (count($columns) == 0 ? 'DROP COLUMN ' : 'COLUMN ') . $def['name'];
                     break;
 
                 case 'modify':
@@ -1899,10 +1917,13 @@ EOQ;
         if ($fieldDef['type'] == 'int')
             $fieldDef['len'] = '4';
 
+        if ($fieldDef['type'] == 'bit') {
+            $fieldDef['len'] = '1';
+        }
+
         if(empty($fieldDef['len']))
         {
             switch($fieldDef['type']) {
-                case 'bit'      :
                 case 'bool'     : $fieldDef['len'] = '1'; break;
                 case 'smallint' : $fieldDef['len'] = '2'; break;
                 case 'float'    : $fieldDef['len'] = '8'; break;

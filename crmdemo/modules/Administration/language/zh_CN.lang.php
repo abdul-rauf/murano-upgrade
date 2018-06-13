@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -277,7 +277,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => '编辑自定义字段',
     'LBL_EDIT_TABS'=>'编辑标签',
     'LBL_EMAIL_TITLE' => '电子邮件',
-    'LBL_EMAIL_DESC' => '管理外部和内部邮件。 必须配置邮件设置，让用户可以发出邮件和通讯。',
+    'LBL_EMAIL_DESC' => '管理发件箱和收件箱电子邮件。必须对电子邮件的设置进行配置，以便 ' .
+                        '确保用户能够发出邮件和市场活动时讯。',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => '需要为每个用户设置一个主电子邮件地址来使用该特性。',
 	'LBL_ENABLE_MAILMERGE' => '启用邮件合并？',
 	'LBL_ENABLED' => '启用',
@@ -406,7 +407,8 @@ $mod_strings = array (
     'LBL_LOCALE' => '设置系统本地配置预设值',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- 操作此离线客户端的用户名',
     'LBL_LOGIN_SUGAR_SERVER'                => '最终用户名：',
-    'LBL_MAILBOX_DESC' => '配置监视邮箱帐户',
+    'LBL_MAILBOX_DESC' => '设置群邮件账户，监视收件箱电子邮件' .
+        '管理用户的个人收件箱邮件账户信息',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'管理合同类型',
     'LBL_MANAGE_CURRENCIES' => '货币',
     'LBL_MANAGE_GROUPS_TITLE'   => '管理组',
@@ -630,6 +632,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => '重建 JS 组文件',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => '重新连接并重写存在的组文件为最新版本的组文件',
+    'LBL_REPAIR_JS_FILES_TITLE' => '修复 javascript 文件',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => '修复 JS 文件',
     'LBL_REPAIR_JS_FILES_PROCESSING' => '处理文件中. 这将花费一些时间.  离开这些页面将取消处理, 因此按需要离开或等待确认......',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => '文件处理完成',
     'LBL_REPAIR_FIELD_CASING_TITLE' => '修复非小写字段',
@@ -1008,7 +1012,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => '清除额外缓存文件...... 完成',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => '假设取消选择此选项，在系统许可过期后，管理员需要手动重新验证，否则用户将无法登入。',
 	'LBL_TRACKER_SETTINGS' => '跟踪器',
-	'LBL_TRACKER_SETTINGS_DESC' => '选择要追踪的系统和用户数据',
+	'LBL_TRACKER_SETTINGS_DESC' => '启用/禁用追踪',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> '启用/禁用种子用户',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> '激活',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> '禁用',
@@ -1162,6 +1166,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_ADDED' => '已添加 sprite {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => '不包括文件：{0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => '团队权限',
+    'LBL_TBA_CONFIGURATION_DESC' => '启用团队访问，通过模块管理访问。',
+
     //FTS
     'LBL_FTS_TYPE' => '系统类型',
     'LBL_FTS_HOST' => '主机',
@@ -1231,5 +1239,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => '点击提交将与主服务器同步。',
     'LBL_OFFLINE_ENABLED' => '启用离线模式',
     'LBL_OFFLINE_SETTINGS' => '离线设置',
+
 
 );

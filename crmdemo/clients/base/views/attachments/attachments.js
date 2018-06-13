@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -76,6 +76,16 @@
         this.timer = parseInt(options['auto_refresh'], 10) * 60 * 1000;
         this.limit = options.limit;
         return this;
+    },
+
+    /**
+     * Get the list of field names to render the dashlet correctly
+     * @return {string[]} The list of fields we need to fetch
+     * @override
+     */
+    getFieldNames: function() {
+        // FIXME TY-920: we shouldn't have to override this per-dashlet
+        return this.dashletConfig && this.dashletConfig.dashlets[0].fields || [];
     },
 
     /**
@@ -161,7 +171,7 @@
      * @private
      */
     _reloadData: function() {
-        this.context.set('skipFetch', false);
+        this._prepContextForLoad();
         this.context.reloadData();
     },
 
@@ -185,15 +195,15 @@
             }
             var relatedModel = app.data.createRelatedBean(parentModel, model.id, link),
                 options = {
-                    //Show alerts for this request
+                    // Show alerts for this request
                     showAlerts: true,
                     relate: true,
-                    success: function(model) {
+                    success: function() {
                         self.context.resetLoadFlag();
-                        self.context.set('skipFetch', false);
+                        self._prepContextForLoad();
                         self.context.loadData();
                     },
-                    error: function(error) {
+                    error: function() {
                         app.alert.show('server-error', {
                             level: 'error',
                             messages: 'ERR_GENERIC_SERVER_ERROR'
@@ -211,6 +221,16 @@
         var link =  this.context.get('link'),
             parentModel = this.context.get('parentModel');
         this.createRelatedRecord(app.data.getRelatedModule(parentModel.module, link), link);
+    },
+
+    /**
+     * Fix the fields on the context to prevent conflict with list-bottom
+     * Also set `skipFetch` on the context since it is needed before most loads
+     * @private
+     */
+    _prepContextForLoad: function() {
+        this.context.set('fields', this.getFieldNames());
+        this.context.set('skipFetch', false);
     },
 
     /**

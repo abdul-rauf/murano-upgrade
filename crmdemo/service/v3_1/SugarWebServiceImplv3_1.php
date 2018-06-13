@@ -3,7 +3,7 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -221,6 +221,16 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
             $seed->$name = $value;
             $return_fields[] = $name;
 
+        }
+        if ($module_name == 'Contacts') {
+            global $current_language;
+            if (!in_array("preferred_language", $name_value_list)) {
+                $seed->preferred_language = $current_language;
+            } else {
+                if (empty($name_value_list["preferred_language"])) {
+                    $seed->preferred_language = $current_language;
+                }
+            }
         }
         if (!self::$helperObject->checkACLAccess($seed, 'Save', $error, 'no_access') || ($seed->deleted == 1  && !self::$helperObject->checkACLAccess($seed, 'Delete', $error, 'no_access'))) {
             $GLOBALS['log']->info('End: SugarWebServiceImpl->set_entry');

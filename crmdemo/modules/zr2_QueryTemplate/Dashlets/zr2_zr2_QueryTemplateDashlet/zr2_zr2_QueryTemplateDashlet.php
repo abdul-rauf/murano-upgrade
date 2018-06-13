@@ -51,7 +51,7 @@ class zr2_zr2_QueryTemplateDashlet extends DashletGeneric {
 		global $current_user, $app_strings;
 		require('modules/zr2_zr2_QueryTemplate/metadata/dashletviewdefs.php');
 
-        parent::DashletGeneric($id, $def);
+        parent::__construct($id, $def);
 
         if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', 'zr2_zr2_QueryTemplate');
 

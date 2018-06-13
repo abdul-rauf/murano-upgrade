@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,27 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => '確定要刪除此記錄嗎？',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => '確定要移除該使用者\\的成員資格嗎？',
     'LBL_EDITLAYOUT' => '編輯配置' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => '小組許可',
+    'LBL_TBA_CONFIGURATION_DESC' => '啟用團隊存取，並按照模組管理存取。',
+    'LBL_TBA_CONFIGURATION_LABEL' => '啟用小組許可',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => '選取要啟用的模組',
+    'LBL_TBA_CONFIGURATION_TITLE' => '啟用小組許可之後，您可透過角色管理向單個模組的小組和使用者指派特定存取權限。',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+停用一個模組的小組許可將會恢復該模組小組許可的所有相關資料，包括任何流程定義或使用該功能的流程。這包括所有在該模組使用「擁有者與選定團隊」選項的任何角色，以及該模組中所有用於記錄的小組許可資料。我們還建議您在停用任何模組的小組許可之後，使用快速修復和重建工具來清理您的系統快取。
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>警告︰</strong>停用一個模組的小組許可將會恢復該模組小組許可的所有相關資料，包括任何流程定義或使用該功能的流程。這包括所有在該模組使用「擁有者與選定團隊」選項的任何角色，以及該模組中所有用於記錄的小組許可資料。我們還建議您在停用任何模組的小組許可之後，使用快速修復和重建工具來清理您的系統快取。
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+停用一個模組的小組許可將會恢復該模組小組許可的所有相關資料，包括任何流程定義或使用該功能的流程。這包括所有在該模組使用「擁有者與選定團隊」選項的任何角色，以及該模組中所有用於記錄的小組許可資料。我們還建議您在停用任何模組的小組許可之後，使用快速修復和重建工具來清理您的系統快取。如果您無法取得快速修復或重建工具，請連絡擁有修復功能表存取權限的管理員。
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>警告：</strong>停用一個模組的小組許可將會恢復該模組小組許可的所有相關資料，包括任何流程定義或使用該功能的流程。這包括所有在該模組使用「擁有者與選定團隊」選項的任何角色，以及該模組中所有用於記錄的小組許可資料。我們還建議您在停用任何模組的小組許可之後，使用快速修復和重建工具來清理您的系統快取。如果您無法取得快速修復或重建工具，請連絡擁有修復功能表存取權限的管理員。
+STR
+,
 );

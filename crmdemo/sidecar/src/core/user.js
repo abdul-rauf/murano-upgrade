@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -202,8 +202,9 @@
          *
          * TODO support category parameter for preferences.
          *
-         * @param {String} name The preference name.
-         * @return {Array/Object/String/Number/Boolean} The value of the user preference.
+         * @param {string} name The preference name.
+         * @return {Array|Object|string|number|boolean} The value of the user
+         *   preference.
          */
         getPreference: function(name) {
 
@@ -285,14 +286,16 @@
                  * metadata.
                  *
                  * @param {string} key
-                 * @return {string}
+                 * @return {number|boolean|string|Array|Object} The last state
+                 *   value.
                  */
                 get: function(key) {
                     var result, storedKey;
 
                     if (!_.isUndefined(key)) {
                         storedKey = buildLastStateKeyForStorage(key);
-                        result = app.cache.get(storedKey) || this.defaults(key);
+                        result = app.cache.get(storedKey);
+                        result = result === void 0 ? this.defaults(key) : result;
                     }
 
                     return result;
@@ -411,9 +414,11 @@
         })()
     });
 
-    app.events.on("app:logout", function(clear) {
+    //FIXME Have a unit test to test the function in logout in TY-615
+    app.events.on('app:logout', function(clear) {
+        app.cache.cut('userpref:hash');
         if (clear === true) {
-            app.user.clear({silent:true});
+            app.user.clear({silent: true});
         }
     });
 

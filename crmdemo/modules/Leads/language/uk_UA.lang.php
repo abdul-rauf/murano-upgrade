@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -282,7 +282,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} містить потенційних клієнтів, які можуть бути зацікавлені в продукті або послузі, що надаються Вашою компанією. Як тільки {{module_name}} кваліфікований як {{opportunities_singular_module}} продажу, {{plural_module_name}} можна конвертувати в {{contacts_module}}, {{opportunities_module}} і {{accounts_module}}. Існує декілька способів створення {{plural_module_name}} в Sugar, наприклад, за допомогою модуля {{plural_module_name}}, дублювання, імпорту {{plural_module_name}} і т. п. Як тільки запис {{module_name}} створено, Ви можете переглянути та редагувати інформацію щодо {{module_name}}, використовуючи режим перегляду запису {{plural_module_name}}.',
+    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} містить потенційних клієнтів, які можуть бути зацікавлені в продукті або послузі, що надаються Вашою компанією. Як тільки {{module_name}} кваліфіковано як {{opportunities_singular_module}} продажу, {{plural_module_name}} можна конвертувати в {{contacts_module}}, {{opportunities_module}} і {{accounts_module}}. Існує декілька способів створення запису {{plural_module_name}} в Sugar, наприклад за допомогою модуля {{plural_module_name}}, дублювання, імпорту даних модуля {{plural_module_name}} і т. д. Після створення запису {{module_name}} можна переглядати та редагувати інформацію, що стосується запису {{module_name}}, використовуючи режим перегляду запису {{plural_module_name}}.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{plural_module_name}} модуль містить потенційних клієнтів, які можуть бути зацікавлені в продукт або послугу, що надаються Вашою компанією.

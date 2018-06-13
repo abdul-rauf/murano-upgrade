@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,10 +73,10 @@ $mod_strings = array(
     'LBL_SEND_AS_TEXT'                  => 'Enviar apenas texto',
     'LBL_ACCOUNT'                       => 'Conta',
     'LBL_BASE_MODULE'                   => 'Módulo base',
-    'LBL_FROM_NAME'                     => 'Nome em "De"',
+    'LBL_FROM_NAME'                     => 'Nome em &quot;De&quot;',
     'LBL_PLAIN_TEXT'                    => 'Texto sem formatação',
     'LBL_CREATED_BY'                    => 'Criado Por',
-    'LBL_FROM_ADDRESS'                  => 'Endereço em "De"',
+    'LBL_FROM_ADDRESS'                  => 'Endereço em &quot;De&quot;',
     'LBL_PUBLISHED'                     => 'Publicado',
     'LBL_ACTIVITIES_REPORTS'            => 'Relatório de Atividades',
     'LNK_VIEW_MY_INBOX'                 => 'Visualizar meu e-mail',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -104,7 +104,7 @@ $mod_strings = array (
     'LBL_COLLAPSE_SUBPANELS_DESC' => 'При выборе все субпанели в режиме записи будут свернуты по умолчанию для повышения производительности. Пользователям, желающим просмотреть данные субпанелей, необходимо будет разворачивать субпанель при каждом доступе к записи. Примечание: этот параметр не применяется к модулям прежних версий.',
     'LIST_ENTRIES_PER_LISTVIEW'=>'Количество отображаемых записей на странице',
     'TPL_LIST_ENTRIES_PER_LISTVIEW_HELP'=>'Рекомендуемая настройка для допустимого уровня производительности представлена ниже {{listEntriesNum}}. С каждым добавлением полей в списочное представление, этот номер должен быть в конце рекомендуемых настроек.',
-    'LBL_LIST_ENTRIES_PER_SEARCH_HELP'=>'This setting is also used for the number of search results that display on the global search page.',
+    'LBL_LIST_ENTRIES_PER_SEARCH_HELP'=>'Данный параметр также используется для результатов поиска, отображаемых на странице глобального поиска.',
 	'LIST_ENTRIES_PER_SUBPANEL'=>'Количество отображаемых субпанелей на странице',
     'TPL_LIST_ENTRIES_PER_SUBPANEL_HELP'=>'Рекомендуемая настройка для допустимого уровня производительности представлена ниже {{subpanelEntriesNum}}. С каждым добавлением полей в списочное представление, этот номер должен быть в конце рекомендуемых настроек.',
 	'LBL_WIRELESS_LIST_ENTRIES' => 'Количество отображаемых записей на странице (мобильная версия)',
@@ -139,6 +139,7 @@ $mod_strings = array (
     'LBL_OC_STATUS_DESC' => 'Нажмите здесь, если хотите, чтоб у всех пользователей был доступ к Оффлайн клиенту. Вы также можете настроить доступ на уровне пользователя.',
     'SESSION_TIMEOUT' => 'Истечение времени ожидания ответа от Портала',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Время ожидания сессии портала установлено для действующих версий портала Sugar, доступных для Sugar 6.5 и выше.',
+    'UPLOAD_MAXSIZE_UNITS' => 'байты',
     'SESSION_TIMEOUT_UNITS' => 'секунд',
     'LBL_LDAP_TITLE'=>'Поддержка LDAP-авторизации',
     'LBL_LDAP_ENABLE'=>'Включить LDAP',
@@ -327,24 +328,24 @@ $mod_strings = array (
     'LBL_FONT_LIST_CIDINFO_INFO' => "Examples :".
 "<ul><li>".
 "Chinese Traditional :<br>".
-"<pre>\$enc=&#39;UniCNS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;CNS1&#39;,&#39;Supplement&#39;=>0);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ac15.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniCNS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'CNS1\\',\\'Supplement\\'=>0);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ac15.php\\');</pre>".
 "</li><li>".
 "Chinese Simplified :<br>".
-"<pre>\$enc=&#39;UniGB-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;GB1&#39;,&#39;Supplement&#39;=>2);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ag15.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniGB-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'GB1\\',\\'Supplement\\'=>2);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ag15.php\\');</pre>".
 "</li><li>".
 "Korean :<br>".
-"<pre>\$enc=&#39;UniKS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;Korea1&#39;,&#39;Supplement&#39;=>0);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ak12.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniKS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'Korea1\\',\\'Supplement\\'=>0);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ak12.php\\');</pre>".
 "</li><li>".
 "Japanese :<br>".
-"<pre>\$enc=&#39;UniJIS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;Japan1&#39;,&#39;Supplement&#39;=>5);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_aj16.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniJIS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'Japan1\\',\\'Supplement\\'=>5);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_aj16.php\\');</pre>".
 "</li></ul>".
 "More help : www.tcpdf.org",
     'LBL_FONT_LIST_FILESIZE' => 'Размер шрифта',

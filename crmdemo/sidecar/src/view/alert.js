@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -72,9 +72,7 @@
             // Check for existing alerts and convert them into AlertView.
             _.each(this.$alerts.find('.alert-wrapper'), function(el, i) {
                 var key = 'init-' + i;
-                if (!_alerts[key]) {
-                    _alerts[key] = this._create(key, {el: el});
-                }
+                _alerts[key] = this._create(key, { el: el });
             }, this);
         },
 
@@ -112,23 +110,24 @@
          *
          * </code></pre>
          *
-         * @param {Object} options(optional) The options below are handled by
-         *   the framework. The base application {@link View.Views.Base.AlertView#initialize AlertView}
+         * @param {Object} [options] The options specified here are handled by
+         *   the framework. The base application
+         *   {@link View.Views.Base.AlertView#initialize AlertView}
          *   defines more options for specific behaviors.
-         *
-         * @param {string} options.level: alert level. `alert-[level]` class
+         * @param {string} [options.level] Alert level. `alert-[level]` class
          *   will be added to the alert view.
-         * @param {boolean} options.autoClose: boolean flag indicating if the
+         * @param {boolean} [options.autoClose] Boolean flag indicating if the
          *   alert must be closed after dismiss delay: See
          *   {@link Config#alertAutoCloseDelay} setting.
-         * @param {string} options.messages: string or array of string messages.
-         *   This parameter is normalized to array before rendering alerts.
-         * @param {string} options.title: the title of the alert, it's displayed
-         *   in bold.
+         * @param {string|string[]} [options.messages] Messages.
+         * @param {string} [options.title] The title of the alert.
+         *   It's displayed in bold.
          * @return {View.AlertView} Alert instance.
          */
         show: function(key, options) {
-            if (!this.$alerts || this.$alerts.length == 0) return null;
+            if (!this.$alerts || !this.$alerts.length) {
+                return null;
+            }
 
             if (this.preventAnyAlert) return null;
 
@@ -191,7 +190,7 @@
                 }
                 this.dismiss(alert.key);
 
-            }, this), autoCloseDelay || app.config.alertAutoCloseDelay || 9000);
+            }, this), autoCloseDelay || app.config.alertAutoCloseDelay || 5000);
         },
 
         /**

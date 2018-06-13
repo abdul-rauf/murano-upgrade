@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -180,8 +180,8 @@ $mod_strings = array (
     'NTC_NO_ACTIVE_PROJECTS' => 'Hiçbir aktif proje veya proje görevine sahip değilsiniz.',
     'NTC_ASSIGN_RIGHT_TEAM' => 'Tüm proje kaynağının bu takım üyelerinden oluştuğundan emin ol.',
        
-    'LBL_RESOURCE_NAME' => 'Kaynak İsmi',
-    'LBL_RESOURCE_TYPE' => 'Kaynak Türü',
+    'LBL_RESOURCE_NAME' => 'İsim',
+    'LBL_RESOURCE_TYPE' => 'Tip',
     
     'LBL_GRID_ONLY' => 'Izgara',
     'LBL_GANTT_ONLY' => 'Gantt',

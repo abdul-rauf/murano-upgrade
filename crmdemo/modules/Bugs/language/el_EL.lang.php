@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -99,7 +99,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Η {{plural_module_name}} ενότητα, χρησιμοποιείται για να παρακολουθείτε και να διαχειρίζεστε τα προϊόντα που σχετίζονται με προβλήματα, που συνήθως αναφέρονται ως {{plural_module_name}}  ελαττωματικά, είτε βρέθηκαν εσωτερικά είτε αναφέρθηκαν από τους πελάτες. Η {{plural_module_name}} ενότητα μπορεί να ανιχνευθεί περαιτέρω και να επισκευστεί στην αναβάθμιση. Η {{plural_module_name}} ενότητα, δίνει στους χειριστές ένα τρόπο για γρήγορη αναθεώρηση των λεπτομερειών {{module_name}} και τη διαδικασία που χρησιμοποιείται για να το διορθώσει. Μόλις δημιουργηθεί μία {{module_name}} ή υποβληθεί, μπορείτε να προβάλετε και να επεξεργαστείτε τις πληροφορίες που την αφορούν {{module_name}} μέσω της {{module_name}} προβολής εγγραφής {{module_name}}. Κάθε εγγραφή {{module_name}} μπορεί στη συνέχεια να συσχετιστεί με άλλες εγγραφές στο Sugar όπως {{calls_module}}, {{contacts_module}}, {{cases_module}}, και πολλές άλλες.',
+    'LBL_HELP_RECORDS' => 'Η ενότητα {{plural_module_name}}, χρησιμοποιείται για να παρακολουθείτε και να διαχειρίζεστε τα προβλήματα που σχετίζονται με προϊόντα, που συνήθως αναφέρονται ως {{plural_module_name}} ελαττωματικά, είτε βρέθηκαν εσωτερικά είτε αναφέρθηκαν από τους πελάτες. Η ενότητα {{plural_module_name}} μπορεί να ανιχνευθεί περαιτέρω και να επισκευστεί στην αναβάθμιση. Η ενότητα {{plural_module_name}}, δίνει στους χειριστές ένα τρόπο για γρήγορη αναθεώρηση των λεπτομερειών {{module_name}} και τη διαδικασία που χρησιμοποιείται για να τις διορθώσει. Μόλις δημιουργηθεί ή υποβληθεί μία {{module_name}}, μπορείτε να προβάλετε και να επεξεργαστείτε τις πληροφορίες που την αφορούν {{module_name}} μέσω της {{module_name}} προβολής εγγραφής {{module_name}}. Κάθε εγγραφή {{module_name}} μπορεί στη συνέχεια να συσχετιστεί με άλλες εγγραφές στο Sugar όπως {{calls_module}}, {{contacts_module}}, {{cases_module}}, και πολλές άλλες.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Η {{plural_module_name}} ενότητα, χρησιμοποιείται για να παρακολουθείτε και να διαχειρίζεστε τα προϊόντα που σχετίζονται με προβλήματα, που συνήθως αναφέρονται ως {{plural_module_name}}  ελαττωματικά, είτε βρέθηκαν εσωτερικά είτε αναφέρθηκαν από τους πελάτες..

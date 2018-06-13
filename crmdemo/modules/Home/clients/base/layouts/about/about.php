@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -12,13 +12,10 @@
  */
 
 $viewdefs['Home']['base']['layout']['about'] = array(
-    'type' => 'simple',
-    'name' => 'about',
     'css_class' => 'row-fluid',
     'components' => array(
         array(
             'layout' => array(
-                'type' => 'simple',
                 'css_class' => 'main-pane span12',
                 'components' => array(
                     array(
@@ -29,14 +26,9 @@ $viewdefs['Home']['base']['layout']['about'] = array(
                             'type' => 'fluid',
                             'components' => array(
                                 array(
-                                    'layout' => array(
-                                        'type' => 'simple',
+                                    'view' => array(
+                                        'type' => 'about-copyright',
                                         'span' => 12,
-                                        'components' => array(
-                                            array(
-                                                'view' => 'about-copyright',
-                                            ),
-                                        ),
                                     ),
                                 ),
                             ),
@@ -47,25 +39,15 @@ $viewdefs['Home']['base']['layout']['about'] = array(
                             'type' => 'fluid',
                             'components' => array(
                                 array(
-                                    'layout' => array(
-                                        'type' => 'simple',
+                                    'view' => array(
+                                        'type' => 'about-resources',
                                         'span' => 6,
-                                        'components' => array(
-                                            array(
-                                                'view' => 'about-resources',
-                                            ),
-                                        ),
                                     ),
                                 ),
                                 array(
-                                    'layout' => array(
-                                        'type' => 'simple',
+                                    'view' => array(
+                                        'type' => 'about-source-code',
                                         'span' => 6,
-                                        'components' => array(
-                                            array(
-                                                'view' => 'about-source-code',
-                                            ),
-                                        ),
                                     ),
                                 ),
                             ),

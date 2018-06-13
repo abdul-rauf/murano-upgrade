@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -12,18 +12,17 @@
  */
 
 $viewdefs['base']['layout']['find-duplicates'] = array(
-    'components' =>
-    array(
+    'components' => array(
         array(
-            'layout' =>
-            array(
-                'components' =>
-                array(
+            'layout' => array(
+                'type' => 'default',
+                'name' => 'sidebar',
+                'components' => array(
                     array(
-                        'layout' =>
-                        array(
-                            'components' =>
-                            array(
+                        'layout' => array(
+                            'type' => 'base',
+                            'name' => 'main-pane',
+                            'components' => array(
                                 array(
                                     'view' => 'find-duplicates-headerpane',
                                 ),
@@ -31,33 +30,21 @@ $viewdefs['base']['layout']['find-duplicates'] = array(
                                     'layout' => 'dupecheck',
                                 ),
                             ),
-                            'type' => 'simple',
-                            'name' => 'main-pane',
-                            'span' => 8,
                         ),
                     ),
                     array(
-                        'layout' =>
-                        array(
-                            'components' =>
-                            array(
+                        'layout' => array(
+                            'type' => 'base',
+                            'name' => 'preview-pane',
+                            'components' => array(
                                 array(
                                     'layout' => 'preview',
                                 ),
                             ),
-                            'type' => 'simple',
-                            'name' => 'preview-pane',
-                            'span' => 8,
                         ),
                     ),
                 ),
-                'type' => 'default',
-                'name' => 'sidebar',
-                'span' => 12,
             ),
         ),
     ),
-    'type' => 'find-duplicates',
-    'name' => 'base',
-    'span' => 12,
 );

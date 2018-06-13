@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,13 +11,13 @@
  */
 
 $mod_strings = array(
-    'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Feedback description',
+    'LBL_FEEDBACK_TEXT_PLACEHOLDER' => 'Tagasiside kirjeldus',
     'LBL_FEEDBACK_BTN_SUBMIT' => 'Saada',
-    'LBL_FEEDBACK_SENT' => 'Feedback sent.',
-    'LBL_FEEDBACK_SEND_ERROR' => 'Feedback not sent, please fill in both fields.',
-    'LBL_FEEDBACK_NOT_SENT' => 'Unable to contact feedback server, please try again later.',
-    'LBL_FEEDBACK_CSAT' => 'How would you describe your overall satisfaction with this product?',
-    'TPL_FEEDBACK_ASIDE' => 'We collect certain usage data at the time of submission. {{learnMoreLink}}. We do not collect contact information. Please {{contactSupportLink}} for bugs or other issues that require a response.',
-    'LBL_FEEDBACK_ASIDE_CLICK_MORE' => 'Click here to learn more',
-    'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => 'contact Support',
+    'LBL_FEEDBACK_SENT' => 'Tagasiside saadetud.',
+    'LBL_FEEDBACK_SEND_ERROR' => 'Tagasisidet ei saadetud, täitke mõlemad väljad.',
+    'LBL_FEEDBACK_NOT_SENT' => 'Tagasisideserveriga pole võimlaik ühendust luua, proovige hiljem uuesti.',
+    'LBL_FEEDBACK_CSAT' => 'Kuidas kirjeldaksite oma üldist rahulolu selle tootega?',
+    'TPL_FEEDBACK_ASIDE' => 'Kogume esitamisel teatud kasutusandmeid. {{learnMoreLink}}. Me ei kogu kontaktteavet. Vastust vajavate vigade või muude probleemide korral vt: {{contactSupportLink}}.',
+    'LBL_FEEDBACK_ASIDE_CLICK_MORE' => 'Lisateabe saamiseks klõpsake siin',
+    'LBL_FEEDBACK_ASIDE_CONTACT_SUPPORT' => 'võtke ühendust toega',
 );

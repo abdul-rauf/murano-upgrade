@@ -43,7 +43,7 @@ class mur_approval_managmentDashlet extends DashletGeneric {
 		global $current_user, $app_strings;
 		require('modules/mur_approval_managment/metadata/dashletviewdefs.php');
 
-        parent::DashletGeneric($id, $def);
+        parent::__construct($id, $def);
 
         if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', 'mur_approval_managment');
 

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -21,12 +21,14 @@
         'click  .addEmail':        'addNewAddress',
         'change .newEmail':        'addNewAddress'
     },
+
     _flag2Deco: {
         primary_address: {lbl: "LBL_EMAIL_PRIMARY", cl: "primary"},
         opt_out: {lbl: "LBL_EMAIL_OPT_OUT", cl: "opted-out"},
         invalid_email: {lbl: "LBL_EMAIL_INVALID", cl: "invalid"}
     },
-    plugins: ['Tooltip', 'ListEditable', 'EmailClientLaunch'],
+
+    plugins: ['ListEditable', 'EmailClientLaunch'],
 
     /**
      * @inheritdoc
@@ -64,17 +66,6 @@
 
         //set model as the related record when composing an email (copy is made by plugin)
         this.addEmailOptions({related: this.model});
-
-        /**
-         * Property to add or not the `ellipsis_inline` class when rendering the
-         * field in the `list` template. `true` to add the class, `false`
-         * otherwise.
-         *
-         * Defaults to `true`.
-         *
-         * @property {boolean}
-         */
-        this.ellipsis = _.isUndefined(this.def.ellipsis) || this.def.ellipsis;
     },
 
     /**
@@ -157,9 +148,6 @@
             $newEmailField = this._getNewEmailField()
                 .closest('.email')
                 .before(emailFieldHtml);
-
-            // add tooltips
-            this.addPluginTooltips($newEmailField.prev());
 
             if (this.def.required && this._shouldRenderRequiredPlaceholder()) {
                 // we need to remove the required place holder now
@@ -248,7 +236,6 @@
         primaryRemoved = this._removeExistingAddressInModel(index);
 
         $removeThisField = $deleteButton.closest('.email');
-        this.removePluginTooltips($removeThisField); // remove tooltips
         $removeThisField.remove();
 
         if (primaryRemoved) {
@@ -277,8 +264,9 @@
             index = $properties.index($property);
 
         if (property === 'primary_address') {
-            $properties.removeClass('active');
+            $properties.removeClass('active').attr('aria-pressed', false);
         }
+        $property.attr('aria-pressed', !$property.hasClass('active'));
 
         this._toggleExistingAddressPropertyInModel(index, property);
     },
@@ -454,7 +442,6 @@
             $input.wrap('<div class="input-append error '+this.fieldTag+'">');
         $input.next('.error-tooltip').remove();
         $input.after(this.exclamationMarkTemplate([app.error.getErrorString(errorName, errorContext)]));
-        this.createErrorTooltips($input.next('.error-tooltip'));
     },
 
     /**

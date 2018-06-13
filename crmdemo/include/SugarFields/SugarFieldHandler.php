@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -25,30 +25,33 @@ class SugarFieldHandler
     }
 
     static function fixupFieldType($field) {
-            switch($field) {
-               case 'double':
-               case 'decimal':
-                    $field = 'float';
-                    break;
-               case 'uint':
-               case 'ulong':
-               case 'long':
-               case 'short':
-               case 'tinyint':
-                    $field = 'int';
-                    break;
-               case 'url':
-               		$field = 'link';
-               		break;
-               case 'link':
-                   $field = 'relateLink';
-                   break;
-               case 'varchar':
-                    $field = 'base';
-                    break;
-            }
+        switch($field) {
+            case 'double':
+            case 'decimal':
+                $field = 'Float';
+                break;
+            case 'uint':
+            case 'ulong':
+            case 'long':
+            case 'short':
+            case 'tinyint':
+                $field = 'Int';
+                break;
+            case 'url':
+                $field = 'Link';
+                break;
+            case 'link':
+                $field = 'RelateLink';
+                break;
+            case 'varchar':
+                $field = 'Base';
+                break;
+            default:
+                $field = ucfirst($field);
+                break;
+        }
 
-        return ucfirst($field);
+        return $field;
     }
 
     /**
@@ -60,9 +63,12 @@ class SugarFieldHandler
      */
     static function getSugarField($field, $returnNullIfBase=false) {
         static $sugarFieldObjects = array();
+        static $fixupField = array();
 
-        $field = self::fixupFieldType($field);
-        $field = ucfirst($field);
+        if (!isset($fixupField[$field])) {
+            $fixupField[$field] = static::fixupFieldType($field);
+        }
+        $field = $fixupField[$field];
 
         if(!isset($sugarFieldObjects[$field])) {
         	//check custom directory

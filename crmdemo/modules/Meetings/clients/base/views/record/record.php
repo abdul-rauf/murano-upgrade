@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -199,7 +199,6 @@ $viewdefs['Meetings']['base']['view']['record'] = array(
                         array(
                             'name' => 'date_start',
                             'time' => array(
-                                'disable_text_input' => true,
                                 'step' => 15,
                             ),
                             'readonly' => false,
@@ -211,7 +210,6 @@ $viewdefs['Meetings']['base']['view']['record'] = array(
                         array(
                             'name' => 'date_end',
                             'time' => array(
-                                'disable_text_input' => true,
                                 'step' => 15,
                                 'duration' => array(
                                     'relative_to' => 'date_start'
@@ -246,6 +244,7 @@ $viewdefs['Meetings']['base']['view']['record'] = array(
                             'type' => 'enum',
                             'options' => 'repeat_interval_number',
                             'required' => true,
+                            'default' => 1,
                         ),
                         array(
                             'label' => 'LBL_CALENDAR_REPEAT_DOW',
@@ -255,13 +254,43 @@ $viewdefs['Meetings']['base']['view']['record'] = array(
                             'isMultiSelect' => true,
                         ),
                         array(
+                            'label' => 'LBL_CALENDAR_CUSTOM_DATE',
+                            'name' => 'repeat_selector',
+                            'type' => 'enum',
+                            'options' => 'repeat_selector_dom',
+                            'default' => 'None',
+                        ),
+                        array(
+                            'name' => 'repeat_days',
+                            'type' => 'repeat-days',
+                            'options' => array('' => ''),
+                            'isMultiSelect' => true,
+                            'dropdown_class' => 'recurring-date-dropdown',
+                            'container_class' => 'recurring-date-container select2-choices-pills-close',
+                        ),
+                        array(
+                            'label' => ' ',
+                            'name' => 'repeat_ordinal',
+                            'type' => 'enum',
+                            'options' => 'repeat_ordinal_dom',
+                        ),
+                        array(
+                            'label' => ' ',
+                            'name' => 'repeat_unit',
+                            'type' => 'enum',
+                            'options' => 'repeat_unit_dom',
+                        ),
+                        array(
+                            'label' => 'LBL_CALENDAR_REPEAT',
+                            'name' => 'repeat_end_type',
+                            'type' => 'enum',
+                            'options' => 'repeat_end_types',
+                            'default' => 'Until',
+                        ),
+                        array(
                             'label' => 'LBL_CALENDAR_REPEAT_UNTIL_DATE',
                             'name' => 'repeat_until',
                             'type' => 'repeat-until',
-                        ),
-                        array(
-                            'type' => 'label',
-                            'default_value' => 'LBL_LOWER_OR'
                         ),
                         array(
                             'label' => 'LBL_CALENDAR_REPEAT_COUNT',
@@ -300,7 +329,12 @@ $viewdefs['Meetings']['base']['view']['record'] = array(
                     'type' => 'participants',
                     'label' => 'LBL_INVITEES',
                     'span' => 12,
-                    'fields' => array('name', 'accept_status_meetings', 'picture'),
+                    'fields' => array(
+                        'name',
+                        'accept_status_meetings',
+                        'picture',
+                        'email',
+                    ),
                     'related_fields' => array(
                         'date_start',
                         'date_end',

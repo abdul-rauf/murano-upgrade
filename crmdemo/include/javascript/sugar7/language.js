@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,28 +11,6 @@
 (function(app) {
     app.events.on('app:init', function() {
         app.lang = _.extend(app.lang, {
-
-            /**
-             * Retrieves module singular from name.
-             *
-             * @deprecated Deprecated since 7.6.0. Use
-             *   {@link Core.Language#getModuleName} instead. Will be removed
-             *   in 7.8.0.
-             * @param {String} module Module name.
-             * @return {String} Module singular form.
-             */
-            getModuleSingular: function(module) {
-                app.logger.warn('The `app.lang.getModuleSingular` function has been deprecated since 7.6.0. Please ' +
-                    + 'upgrade your code to use `app.lang.getModuleName`.');
-
-                var modString = app.metadata.getStrings('mod_strings')[module],
-                    moduleSingular = (modString ? modString['LBL_MODULE_NAME_SINGULAR'] : '') ||
-                        app.lang.getAppListStrings('moduleListSingular')[module] ||
-                        app.lang.getAppListStrings('moduleList')[module] ||
-                        module;
-
-                return moduleSingular;
-            },
 
             /**
              * Gets the letters used for the icons shown in various headers for
@@ -80,8 +58,8 @@
         if (language) {
             language = language.replace('_', '-')
 
-            // Set moment.js language
-            app.date.lang(language.toLowerCase());
+            // Set moment.js locale with moment.js 2.8+
+            app.date.locale(language.toLowerCase());
 
             if ($.fn.select2.locales) {
                 var twoLetterCode = language.substring(0, 2).toLowerCase();

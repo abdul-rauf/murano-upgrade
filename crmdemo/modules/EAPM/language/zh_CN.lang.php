@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -53,6 +53,7 @@ $mod_strings = array (
   'LBL_API_OAUTHTOKEN' => '开放认证标记',
   'LBL_AUTH_UNSUPPORTED' => "应用程序不支持此认证方式。",
   'LBL_AUTH_ERROR' => '试图连接帐户失败。',
+  'LBL_CHANGE_APPLICATION_ERROR' => '不允许用户更改应用程序名称。',
   'LBL_VALIDATED' => '已连接',
   'LBL_ACTIVE' => '启用',
   'LBL_OAUTH_NAME' => '%s',

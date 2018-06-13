@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -180,7 +180,7 @@ $app_list_strings = array (
     'Employees' => 'Anställd',
     'Administration' => 'Administration',
     'ACLRoles' => 'Roll',
-    'InboundEmail' => 'Inkommande mail',
+    'InboundEmail' => 'Inkommande email',
     'Releases' => 'Release',
     'Queues' => 'Kö',
     'EmailMarketing' => 'Emailutskick',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Filter',
     'Comments' => 'Kommentera',
     'Currencies' => 'Valuta',
-    'Project' => 'Projekt',
     'ProductTemplates' => 'Produkt mall',
-    'ProductCategories' => 'Produktkategori',
     'ProductTypes' => 'Produkttyp',
     'Shippers' => 'Fraktleverantör',
     'Subscriptions' => 'Prenumeration',
@@ -611,7 +609,7 @@ $app_list_strings = array (
     'ProjectTask' => 'Projektuppgift',
 
     'Tasks' => 'Uppgift',
-      'KBContents' => 'Kunskapsbas Dokument',
+      'KBContents' => 'Kunskapsbas',
   ),
 
   'record_type_display_notes' =>
@@ -635,7 +633,7 @@ $app_list_strings = array (
 
     'Meetings' => 'Möte',
     'Calls' => 'Telefonsamtal',
-      'KBContents' => 'Kunskapsbas Dokument',
+      'KBContents' => 'Kunskapsbas',
   ),
 
   'parent_type_display' =>
@@ -655,7 +653,7 @@ $app_list_strings = array (
     'ProjectTask' => 'Projektuppgift',
 
     'Prospects' => 'Mål',
-      'KBContents' => 'Kunskapsbas Dokument',
+      'KBContents' => 'Kunskapsbas',
 
   ),
 
@@ -873,7 +871,7 @@ $app_list_strings = array (
   array (
         '' => '',
         'Telesales' => 'Telefonförsäljning',
-        'Mail' => 'Epostmeddelande',
+        'Mail' => 'Email',
         'Email' => 'Email',
         'Print' => 'Skriv ut',
         'Web' => 'Webb',
@@ -944,6 +942,16 @@ $app_list_strings = array (
                 '5'=>"Tor",
                 '6'=>"Fre",
                 '7'=>"Lör",
+        ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Sö",
+            '2'=>"Må",
+            '3'=>"Ti",
+            '4'=>"On",
+            '5'=>"To",
+            '6'=>"Fr",
+            '7'=>"Lö",
         ),
     'dom_cal_day_of_week' => array(
         '0' => 'Sön',
@@ -1057,7 +1065,7 @@ $app_list_strings = array (
     array (
     '' => '',
     'Marketing' => 'Marknad',
-    'Knowledege Base' => 'Kunskapsbas Dokument',
+    'Knowledege Base' => 'Kunskapsbas',
     'Sales' => 'Säljsida',
   ),
 
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'år',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Tills',
+        'Occurrences' => 'Förekomster',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Ingen',
+        'Each' => 'Varje',
+        'On' => 'På',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'första',
+        'second' => 'andra',
+        'third' => 'tredje',
+        'fourth' => 'fjärde',
+        'fifth' => 'femte',
+        'last' => 'sista',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Söndag',
+        'Mon' => 'Måndag',
+        'Tue' => 'Tisdag',
+        'Wed' => 'Onsdag',
+        'Thu' => 'Torsdag',
+        'Fri' => 'Fredag',
+        'Sat' => 'Lördag',
+        'Day' => 'Dag',
+        'WD'  => 'Veckodag',
+        'WE'  => 'Helgdag'
     ),
 
     'duration_dom' => array(
@@ -1395,13 +1505,13 @@ $app_list_strings = array (
     ''=>'',
     'targeted' => 'Meddelande skickade/försökt skicka',
     'send error'=>'Studsade meddelanden, andra',
-    'invalid email'=>'Skickade meddelanden, ogiltig epost',
+    'invalid email'=>'Studsade meddelanden, ogiltig email',
     'link'=>'Klickat via länk',
     'viewed'=>'Öppnade meddelanden',
     'removed'=>'Önskar ej utskick',
     'lead'=>'Skapade leads',
     'contact'=>'Skapade kontakter',
-    'blocked'=>'Dämpad efter adress eller domän',
+    'blocked'=>'Stoppad av emailadress eller domän',
   ),
 
   'campainglog_target_type_dom' =>
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Mellan',
         'end' => 'Slut',
         'top' => 'Topp',
+        'total' => 'Totalt',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Tratt',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Ljus',
       'dark' => 'Mörk',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Flytta',
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "Christ Church"),
-            "2" => array("code" => "AND", "name" => "Saint Andrew"),
+            "2" => array("code" => "Alla", "name" => "Saint Andrew"),
             "3" => array("code" => "GEO", "name" => "Saint George"),
             "4" => array("code" => "JAM", "name" => "Saint James"),
             "5" => array("code" => "JOH", "name" => "Saint John"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "Alla", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "Någon", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "De södra nationernas, nationaliteternas och folkens"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "Sumba"),
+            "22" => array("code" => "SUMMA", "name" => "Sumba"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "Någon", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "Någon", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parish"),
             "4" => array("code" => "MAN", "name" => "Manchester Parish"),
             "5" => array("code" => "POR", "name" => "Portland Parish"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "Alla", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parish"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parish"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parish"),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "Någon", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "Någon", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -6482,7 +6601,7 @@ $app_list_strings = array (
             "46" => array("code" => "MP", "name" => "Nordmarianerna"),
             "47" => array("code" => "OH", "name" => "Ohio"),
             "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "49" => array("code" => "Någon", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pennsylvania"),
             "52" => array("code" => "PR", "name" => "Puerto Rico"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "Någon", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Följ Länk',
   'LBL_TOGGLE_VISIBILITY' => 'Växla Synlighet', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivitetsström',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. Med ensamrätt.',
-  'LBL_TRADEMARK' => 'SugarCRM är ett varumärke hos SugarCRM, Inc. Alla andra företag och produktnamn kan vara varumärken som tillhör respektive företag som de förknippas med.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ och Sugar™ är varumärken tillhörande SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Skicka invite',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar och 3-D-kuben är registrerade varumärken för SugarCRM Inc. '.
+        'Alla andra företags- och produktnamn som används eller förekommer i denna produkt kan vara varumärken tillhörande '.
+        'respektive företag de associeras med.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ och Sugar™ är varumärken tillhörande SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Skicka invite',
   'LBL_INVITEES' => 'Gäster',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Gästen kommer inte att få din inbjudan',
   'LBL_SELECT_ACTION_LABEL' => 'Välj åtgärd',
   'LBL_TOGGLE_DRAWER' => 'Växla Drawer',
   'LBL_TOUR_NEXT' => 'Nästa',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Lägg till' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Företagslogotyp' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalender' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'huvudsaklig modulnavigering',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'toggle underpanel',
+
     'LBL_ADVANCED' => 'Advancerad',
     'LBL_BASIC' => 'Grundläggande',
     'LBL_MODULE_FILTER' => 'Filtrera',
@@ -7929,15 +8056,15 @@ $app_strings = array (
     'LBL_ROUTING_BUTTON_CANCEL'             => 'Avbryt',
     'LBL_ROUTING_BUTTON_SAVE'               => 'Spara regel',
 
-    'LBL_ROUTING_ACTIONS_COPY_MAIL'         => 'Kopiera epost',
+    'LBL_ROUTING_ACTIONS_COPY_MAIL'         => 'Kopiera email',
     'LBL_ROUTING_ACTIONS_DELETE_BEAN'       => 'Radera Sugar objekt',
     'LBL_ROUTING_ACTIONS_DELETE_FILE'       => 'Radera fil',
     'LBL_ROUTING_ACTIONS_DELETE_MAIL'       => 'Radera epost',
-    'LBL_ROUTING_ACTIONS_FORWARD'           => 'Vidarebefodra epost',
-    'LBL_ROUTING_ACTIONS_MARK_FLAGGED'      => 'Flagga epost',
+    'LBL_ROUTING_ACTIONS_FORWARD'           => 'Vidarebefodra email',
+    'LBL_ROUTING_ACTIONS_MARK_FLAGGED'      => 'Flagga email',
     'LBL_ROUTING_ACTIONS_MARK_READ'         => 'Markera som läst',
     'LBL_ROUTING_ACTIONS_MARK_UNREAD'       => 'Markera som oläst',
-    'LBL_ROUTING_ACTIONS_MOVE_MAIL'         => 'Flytta epost',
+    'LBL_ROUTING_ACTIONS_MOVE_MAIL'         => 'Flytta email',
     'LBL_ROUTING_ACTIONS_PEFORM'            => 'Genomför följande åtgärder',
     'LBL_ROUTING_ACTIONS_REPLY'             => 'Svarsadress',
 
@@ -7978,7 +8105,7 @@ $app_strings = array (
     'LBL_EMAIL_ACCOUNTS_EDIT'               => 'Redigera',
     'LBL_EMAIL_ACCOUNTS_GMAIL_DEFAULTS'     => 'Sätt Gmail standard',
     'LBL_EMAIL_ACCOUNTS_NAME'               => 'Namn',
-    'LBL_EMAIL_ACCOUNTS_OUTBOUND'           => 'Utgående epostserver',
+    'LBL_EMAIL_ACCOUNTS_OUTBOUND'           => 'Utgående emailserver',
     'LBL_EMAIL_ACCOUNTS_SENDTYPE'           => 'Mail transfer agent',
     'LBL_EMAIL_ACCOUNTS_SMTPAUTH_REQ'       => 'Använd SMTP autentifiering',
     'LBL_EMAIL_ACCOUNTS_SMTPPASS'           => 'SMTP lösenord',
@@ -7987,13 +8114,13 @@ $app_strings = array (
     'LBL_EMAIL_ACCOUNTS_SMTPSSL'            => 'Använd SSL vid uppkoppling',
     'LBL_EMAIL_ACCOUNTS_SMTPUSER'           => 'SMTP användarnamn',
     'LBL_EMAIL_ACCOUNTS_SMTPDEFAULT'        => 'Default',
-    'LBL_EMAIL_WARNING_MISSING_USER_CREDS'  => 'Varning: Du har glömt att fylla i användarnamn och lösenord för utgående epost konto.',
+    'LBL_EMAIL_WARNING_MISSING_USER_CREDS'  => 'Varning: Du har glömt att fylla i användarnamn och lösenord för utgående emailkonto.',
     'LBL_EMAIL_ACCOUNTS_SMTPUSER_REQD'      => 'SMTP Användarnamn krävs',
     'LBL_EMAIL_ACCOUNTS_SMTPPASS_REQD'      => 'SMTP Lösenord krävs',
-    'LBL_EMAIL_ACCOUNTS_TITLE'              => 'Inställningar för epostkonto',
-    'LBL_EMAIL_POP3_REMOVE_MESSAGE'         => 'Epost servern protokoll av typen POP3 kommer inte att supportas i nästa version. Endast IMAP kommer att supporteras.',
-    'LBL_EMAIL_ACCOUNTS_SUBTITLE'           => 'Sätt upp Epost Konton för att visa inkommande epost från dina epost konton.',
-    'LBL_EMAIL_ACCOUNTS_OUTBOUND_SUBTITLE'  => 'Ange SMTP epost server information för att använda utgående epost i Epost Konton',
+    'LBL_EMAIL_ACCOUNTS_TITLE'              => 'Inställningar för emailkonto',
+    'LBL_EMAIL_POP3_REMOVE_MESSAGE'         => 'Emailservern protokoll av typen POP3 kommer inte att supportas i nästa version. Endast IMAP kommer att supporteras.',
+    'LBL_EMAIL_ACCOUNTS_SUBTITLE'           => 'Sätt upp Emailkonton för att visa inkommande email från dina emailkonton.',
+    'LBL_EMAIL_ACCOUNTS_OUTBOUND_SUBTITLE'  => 'Ange SMTP-server information för att använda utgående email i Emailkonton.',
     'LBL_EMAIL_ADD'                         => 'Lägg till email',
 
     'LBL_EMAIL_ADDRESS_BOOK_ADD'            => 'Lägg till',
@@ -8003,13 +8130,13 @@ $app_strings = array (
     'LBL_EMAIL_ADDRESS_BOOK_ADD_BCC'        => 'Bcc:',
     'LBL_EMAIL_ADDRESS_BOOK_ADRRESS_TYPE'   => 'Till/Cc/Bcc',
     'LBL_EMAIL_ADDRESS_BOOK_ADD_LIST'       => 'Ny lista',
-    'LBL_EMAIL_ADDRESS_BOOK_EMAIL_ADDR'     => 'Epostadress',
+    'LBL_EMAIL_ADDRESS_BOOK_EMAIL_ADDR'     => 'Mailadress',
     'LBL_EMAIL_ADDRESS_BOOK_ERR_NOT_CONTACT'=> 'Endast redigering av kontakter är möjligt för tillfället.',
     'LBL_EMAIL_ADDRESS_BOOK_FILTER'         => 'Filter',
     'LBL_EMAIL_ADDRESS_BOOK_FIRST_NAME'     => 'Förnamn',
     'LBL_EMAIL_ADDRESS_BOOK_LAST_NAME'      => 'Efternamn',
     'LBL_EMAIL_ADDRESS_BOOK_MY_CONTACTS'    => 'Mina kontakter',
-    'LBL_EMAIL_ADDRESS_BOOK_MY_LISTS'       => 'Min epostlista',
+    'LBL_EMAIL_ADDRESS_BOOK_MY_LISTS'       => 'Min emaillista',
     'LBL_EMAIL_ADDRESS_BOOK_NAME'           => 'Namn',
     'LBL_EMAIL_ADDRESS_BOOK_NOT_FOUND'      => 'Inga adresser hittades',
     'LBL_EMAIL_ADDRESS_BOOK_SAVE_AND_ADD'   => 'Spara & lägg till i adressboken',
@@ -8019,8 +8146,8 @@ $app_strings = array (
     'LBL_EMAIL_REPORTS_TITLE'               => 'Rapporter',
     'LBL_EMAIL_REMOVE_SMTP_WARNING'         => 'Varning! Det utgående kontot du försöker radera är associerat med ett existerande ingående konto. Är det säker på att vill fortsätta?',
     'LBL_EMAIL_ADDRESSES'                   => 'Email',
-    'LBL_EMAIL_ADDRESS_PRIMARY'             => 'Epostadress',
-    'LBL_EMAIL_ADDRESSES_TITLE'             => 'Epostadresser',
+    'LBL_EMAIL_ADDRESS_PRIMARY'             => 'Emailadress',
+    'LBL_EMAIL_ADDRESSES_TITLE'             => 'Emailadresser',
     'LBL_EMAIL_ARCHIVE_TO_SUGAR'            => 'Importera till Sugar',
     'LBL_EMAIL_ASSIGNMENT'                  => 'Tilldelning',
     'LBL_EMAIL_ATTACH_FILE_TO_EMAIL'        => 'Bifoga',
@@ -8037,25 +8164,25 @@ $app_strings = array (
     'LBL_EMAIL_CANCEL'                      => 'Avbryt',
     'LBL_EMAIL_CC'                          => 'CC',
     'LBL_EMAIL_CHARSET'                     => 'Teckenuppsättning',
-    'LBL_EMAIL_CHECK'                       => 'Kontrollera epost',
-    'LBL_EMAIL_CHECKING_NEW'                => 'Kontrollera ny epost',
-    'LBL_EMAIL_CHECKING_DESC'               => 'Kontrollerar ny epost. <br><br>Om detta är första kontrollen för epostkontot, kan det ta en liten stund.',
+    'LBL_EMAIL_CHECK'                       => 'Kontrollera email',
+    'LBL_EMAIL_CHECKING_NEW'                => 'Kontrollera ny email',
+    'LBL_EMAIL_CHECKING_DESC'               => 'Kontrollerar ny email. <br><br>Om detta är första kontrollen för emailkontot, kan det ta en liten stund.',
     'LBL_EMAIL_CLOSE'                       => 'Stäng',
-    'LBL_EMAIL_COFFEE_BREAK'                => 'Kontrollerar ny epost. <br><br>Stora epostkonton kan ta väldigt lång tid.',
+    'LBL_EMAIL_COFFEE_BREAK'                => 'Kontrollerar ny email. <br><br>Stora emailkonton kan ta väldigt lång tid.',
     'LBL_EMAIL_COMMON'                      => 'Vanlig',
 
     'LBL_EMAIL_COMPOSE'                     => 'Email',
-    'LBL_EMAIL_COMPOSE_ERR_NO_RECIPIENTS'   => 'Var god ange mottagare för epostmeddelandet.',
+    'LBL_EMAIL_COMPOSE_ERR_NO_RECIPIENTS'   => 'Var god ange mottagare för emailmeddelandet.',
     'LBL_EMAIL_COMPOSE_LINK_TO'             => 'Associera med',
-    'LBL_EMAIL_COMPOSE_NO_BODY'             => 'Epostmeddelandet saknar text. Skicka ändå?',
-    'LBL_EMAIL_COMPOSE_NO_SUBJECT'          => 'Epostmeddelandet saknar Ämne. Skicka ändå?',
+    'LBL_EMAIL_COMPOSE_NO_BODY'             => 'Emailmeddelandet saknar text. Skicka ändå?',
+    'LBL_EMAIL_COMPOSE_NO_SUBJECT'          => 'Emailmeddelandet saknar Ämne. Skicka ändå?',
     'LBL_EMAIL_COMPOSE_NO_SUBJECT_LITERAL'  => '(saknar ämne)',
-    'LBL_EMAIL_COMPOSE_READ'                => 'Läs & skapa epost',
-    'LBL_EMAIL_COMPOSE_SEND_FROM'           => 'Skicka från epostkonto',
+    'LBL_EMAIL_COMPOSE_READ'                => 'Läs & skapa email',
+    'LBL_EMAIL_COMPOSE_SEND_FROM'           => 'Skicka från emailkonto',
     'LBL_EMAIL_COMPOSE_OPTIONS'             => 'Alternativ',
-    'LBL_EMAIL_COMPOSE_INVALID_ADDRESS'     => 'Var god skriv in giltiga epostadresser i Till-, CC-, och BCC-fälten',
+    'LBL_EMAIL_COMPOSE_INVALID_ADDRESS'     => 'Var god skriv in giltiga emailadresser i Till-, CC-, och BCC-fälten',
 
-    'LBL_EMAIL_CONFIRM_CLOSE'               => 'Ta bort det här epostmeddelandet?',
+    'LBL_EMAIL_CONFIRM_CLOSE'               => 'Ta bort det här emailmeddelandet?',
     'LBL_EMAIL_CONFIRM_DELETE'              => 'Ta bort dessa poster från din adressbok?',
     'LBL_EMAIL_CONFIRM_DELETE_SIGNATURE'    => 'Är du säker på att du vill radera denna signatur?',
 
@@ -8067,25 +8194,25 @@ $app_strings = array (
     'LBL_EMAIL_ASSIGNED_TO_USER'            =>'Tilldelad till användare',
     'LBL_EMAIL_DATE_TODAY'                  => 'Idag',
     'LBL_EMAIL_DATE_YESTERDAY'              => 'Igår',
-    'LBL_EMAIL_DD_TEXT'                     => 'epost vald.',
+    'LBL_EMAIL_DD_TEXT'                     => 'email vald.',
     'LBL_EMAIL_DEFAULTS'                    => 'Standard',
     'LBL_EMAIL_DELETE'                      => 'Radera',
     'LBL_EMAIL_DELETE_CONFIRM'              => 'Radera valda meddelanden?',
-    'LBL_EMAIL_DELETE_SUCCESS'              => 'Epostmeddande raderat.',
+    'LBL_EMAIL_DELETE_SUCCESS'              => 'Emailmeddande raderat.',
     'LBL_EMAIL_DELETING_MESSAGE'            => 'Raderar meddelande',
     'LBL_EMAIL_DETAILS'                     => 'Detaljer',
-    'LBL_EMAIL_DISPLAY_MSG'                 => 'Visar epost {0} - {1} av {2}',
-    'LBL_EMAIL_ADDR_DISPLAY_MSG'            => 'Visar epostadress(er) {0} - {1} av {2}',
+    'LBL_EMAIL_DISPLAY_MSG'                 => 'Visar email {0} - {1} av {2}',
+    'LBL_EMAIL_ADDR_DISPLAY_MSG'            => 'Visar emailadress(er) {0} - {1} av {2}',
 
     'LBL_EMAIL_EDIT_CONTACT'                => 'Redigera kontakt',
     'LBL_EMAIL_EDIT_CONTACT_WARN'           => 'Endast den primära adressen kommer att användas vid arbete med kontakter.',
-    'LBL_EMAIL_EDIT_MAILING_LIST'           => 'Redigera epostlistan',
+    'LBL_EMAIL_EDIT_MAILING_LIST'           => 'Redigera emaillistan',
 
     'LBL_EMAIL_EMPTYING_TRASH'              => 'Töm papperskorgen',
     'LBL_EMAIL_DELETING_OUTBOUND'           => 'Raderar utgående server',
     'LBL_EMAIL_CLEARING_CACHE_FILES'        => 'Tömmer cache filer',
-    'LBL_EMAIL_EMPTY_MSG'                   => 'Inga epostadresser visas',
-    'LBL_EMAIL_EMPTY_ADDR_MSG'              => 'Ingen epostadress att visa',
+    'LBL_EMAIL_EMPTY_MSG'                   => 'Inga emailadresser visas.',
+    'LBL_EMAIL_EMPTY_ADDR_MSG'              => 'Ingen emailadress att visa.',
 
     'LBL_EMAIL_ERROR_ADD_GROUP_FOLDER'      => 'Katalognamn måste vara unikt och ej tomt. Var god försök igen.',
     'LBL_EMAIL_ERROR_DELETE_GROUP_FOLDER'   => 'Kan inte radera katalogen. Katalogen eller underkatalogen har en mailbox associerad till den.',
@@ -8097,27 +8224,27 @@ $app_strings = array (
     'LBL_EMAIL_ERROR_DUPE_FOLDER_NAME'      => 'Sugar katalognamn måste vara unika.',
     'LBL_EMAIL_ERROR_EMPTY'                 => 'Var god fyll i sökkriterie.',
     'LBL_EMAIL_ERROR_GENERAL_TITLE'         => 'Ett fel har uppstått.',
-    'LBL_EMAIL_ERROR_LIST_NAME'             => 'En epostlista med det namnet finns redan.',
+    'LBL_EMAIL_ERROR_LIST_NAME'             => 'En emaillista med det namnet finns redan',
     'LBL_EMAIL_ERROR_MESSAGE_DELETED'       => 'Meddelande raderat från servern.',
     'LBL_EMAIL_ERROR_IMAP_MESSAGE_DELETED'  => 'Meddelandet är borttaget från servern eller flyttat till en annan mapp.',
     'LBL_EMAIL_ERROR_MAILSERVERCONNECTION'  => 'Misslyckades att koppla upp mot servern. Var god kontakta din administratör',
-    'LBL_EMAIL_ERROR_MOVE'                  => 'Flytt av epost mellan servrar och/eller epostkonton stödjs ej för tillfället.',
+    'LBL_EMAIL_ERROR_MOVE'                  => 'Flytt av email mellan servrar och/eller emailkonton stödjs ej för tillfället.',
     'LBL_EMAIL_ERROR_MOVE_TITLE'            => 'Fel vid flytt',
     'LBL_EMAIL_ERROR_NAME'                  => 'Namn är obligatoriskt',
     'LBL_EMAIL_ERROR_FROM_ADDRESS'          => 'Avsändaradress är obligatoriskt',
     'LBL_EMAIL_ERROR_NO_FILE'               => 'Vänligen ange en fil',
     'LBL_EMAIL_ERROR_NO_IMAP_FOLDER_RENAME' => 'Att ändra namn på IMAP katalog stödjs ej för tillfället.',
-    'LBL_EMAIL_ERROR_SERVER'                => 'En epostserveradress krävs.',
-    'LBL_EMAIL_ERROR_SAVE_ACCOUNT'          => 'Epostkontot har inte sparats.',
-    'LBL_EMAIL_ERROR_TIMEOUT'               => 'Ett fel uppstod vid kommunicering med epostservern.',
+    'LBL_EMAIL_ERROR_SERVER'                => 'En emailserveradress krävs.',
+    'LBL_EMAIL_ERROR_SAVE_ACCOUNT'          => 'Emailkontot har inte sparats.',
+    'LBL_EMAIL_ERROR_TIMEOUT'               => 'Ett fel uppstod vid kommunicering med emailservern.',
     'LBL_EMAIL_ERROR_USER'                  => 'Inloggningsnamn är obligatoriskt.',
     'LBL_EMAIL_ERROR_PASSWORD'              => 'Lösenord är obligatoriskt.',
-    'LBL_EMAIL_ERROR_PORT'                  => 'Epostserverport är obligatoriskt.',
+    'LBL_EMAIL_ERROR_PORT'                  => 'Emailserverport är obligatoriskt.',
     'LBL_EMAIL_ERROR_PROTOCOL'              => 'Serverprotokoll är obligatoriskt.',
     'LBL_EMAIL_ERROR_MONITORED_FOLDER'      => 'Kontrollerad mapp krävs.',
     'LBL_EMAIL_ERROR_TRASH_FOLDER'          => 'Papperskorgsmapp krävs.',
     'LBL_EMAIL_ERROR_VIEW_RAW_SOURCE'       => 'Informationen är ej tillgänglig',
-    'LBL_EMAIL_ERROR_NO_OUTBOUND'           => 'Ingen utgående epost server specificerad',
+    'LBL_EMAIL_ERROR_NO_OUTBOUND'           => 'Ingen utgående emailserver specificerad.',
     'LBL_EMAIL_FOLDERS'                     => 'Mappar',
     'LBL_EMAIL_FOLDERS_ACTIONS'             => 'Flytta till',
     'LBL_EMAIL_FOLDERS_ADD'                 => 'Lägg till',
@@ -8141,19 +8268,19 @@ $app_strings = array (
     'LBL_EMAIL_UPPER_CASE_GROUP'            => 'Grupp',
     'LBL_EMAIL_HOME_FOLDER'                 => 'Hem',
     'LBL_EMAIL_HTML_RTF'                    => 'Skicka HTML',
-    'LBL_EMAIL_IE_DELETE'                   => 'Radera epostkonto',
+    'LBL_EMAIL_IE_DELETE'                   => 'Radera emailkonto',
     'LBL_EMAIL_IE_DELETE_SIGNATURE'         => 'Raderar signatur',
-    'LBL_EMAIL_IE_DELETE_CONFIRM'           => 'Är du säker på att du vill radera epostkontot?',
+    'LBL_EMAIL_IE_DELETE_CONFIRM'           => 'Är du säker på att du vill radera emailkontot?',
     'LBL_EMAIL_IE_DELETE_SUCCESSFUL'        => 'Radering genomförd.',
-    'LBL_EMAIL_IE_SAVE'                     => 'Sparar epostkontots information',
-    'LBL_EMAIL_IMPORTING_EMAIL'             => 'Importera epost',
+    'LBL_EMAIL_IE_SAVE'                     => 'Sparar emailkontots information',
+    'LBL_EMAIL_IMPORTING_EMAIL'             => 'Importera email',
     'LBL_EMAIL_IMPORT_EMAIL'                => 'Importera till Sugar',
     'LBL_EMAIL_IMPORT_SETTINGS'                => 'Importera inställningar',
     'LBL_EMAIL_INVALID'                     => 'Ogiltig',
     'LBL_EMAIL_LINK_RECORD'                 => 'Klicka här',
-    'LBL_EMAIL_LIST_RENAME_TITLE'           => 'Döp om epostlistan',
-    'LBL_EMAIL_LIST_RENAME_DESC '           => 'Sätt ett namn på epostlistan',
-    'LBL_EMAIL_CONFIRM_DELETE_LIST'         => 'Ta bort dessa poster från din epostlista?',
+    'LBL_EMAIL_LIST_RENAME_TITLE'           => 'Döp om emaillistan',
+    'LBL_EMAIL_LIST_RENAME_DESC '           => 'Sätt ett namn på emaillistan',
+    'LBL_EMAIL_CONFIRM_DELETE_LIST'         => 'Ta bort dessa poster från din emaillista?',
     'LBL_EMAIL_LOADING'                     => 'Laddar...',
     'LBL_EMAIL_MARK'                        => 'Markera',
     'LBL_EMAIL_MARK_FLAGGED'                => 'Som flaggat',
@@ -8176,23 +8303,23 @@ $app_strings = array (
     'LBL_EMAIL_MENU_MAKE_SELECTION'         => 'Var god gör ett urval innan du kan genomföra denna åtgärd.',
 
     'LBL_EMAIL_MENU_HELP_ADD_FOLDER'        => 'Skapa en katalog (fjärrstyrt eller i Sugar)',
-    'LBL_EMAIL_MENU_HELP_ARCHIVE'           => 'Arkivera dessa epostmeddelanden till SugarCRM',
-    'LBL_EMAIL_MENU_HELP_COMPOSE_TO_LIST'   => 'Skicka epost till valda epostlistor',
-    'LBL_EMAIL_MENU_HELP_CONTACT_COMPOSE'   => 'Skicka epost till kontakten',
+    'LBL_EMAIL_MENU_HELP_ARCHIVE'           => 'Arkivera dessa emailmeddelanden till SugarCRM',
+    'LBL_EMAIL_MENU_HELP_COMPOSE_TO_LIST'   => 'Skicka email till valda emaillistor',
+    'LBL_EMAIL_MENU_HELP_CONTACT_COMPOSE'   => 'Skicka email till kontakten',
     'LBL_EMAIL_MENU_HELP_CONTACT_REMOVE'    => 'Radera kontakten',
-    'LBL_EMAIL_MENU_HELP_DELETE'            => 'Radera dessa epostmeddelanden',
+    'LBL_EMAIL_MENU_HELP_DELETE'            => 'Radera dessa emailmeddelanden',
     'LBL_EMAIL_MENU_HELP_DELETE_FOLDER'     => 'Radera katalogen (fjärrstyrt eller i Sugar)',
     'LBL_EMAIL_MENU_HELP_EDIT_CONTACT'      => 'Redigera en kontakt',
-    'LBL_EMAIL_MENU_HELP_EDIT_LIST'         => 'Redigera en epostlista',
-    'LBL_EMAIL_MENU_HELP_EMPTY_TRASH'       => 'Tömmer alla papperskorgar för dina epostkonton',
-    'LBL_EMAIL_MENU_HELP_MARK_FLAGGED'      => 'Markera denna epost som flaggad',
-    'LBL_EMAIL_MENU_HELP_MARK_READ'         => 'Markera dessa epostmeddelanden som lästa',
-    'LBL_EMAIL_MENU_HELP_MARK_UNFLAGGED'    => 'Markera denna epost som oflaggad',
-    'LBL_EMAIL_MENU_HELP_MARK_UNREAD'       => 'Markera dessa epostmeddelanden som olästa',
-    'LBL_EMAIL_MENU_HELP_REMOVE_LIST'       => 'Radera epostlistor',
+    'LBL_EMAIL_MENU_HELP_EDIT_LIST'         => 'Redigera en emaillista',
+    'LBL_EMAIL_MENU_HELP_EMPTY_TRASH'       => 'Tömmer alla papperskorgar för dina emailkonton',
+    'LBL_EMAIL_MENU_HELP_MARK_FLAGGED'      => 'Markera dessa email som flaggade',
+    'LBL_EMAIL_MENU_HELP_MARK_READ'         => 'Markera dessa emailmeddelanden som lästa',
+    'LBL_EMAIL_MENU_HELP_MARK_UNFLAGGED'    => 'Markera dessa email som oflaggade',
+    'LBL_EMAIL_MENU_HELP_MARK_UNREAD'       => 'Markera dessa emailmeddelanden som olästa',
+    'LBL_EMAIL_MENU_HELP_REMOVE_LIST'       => 'Radera emaillistor',
     'LBL_EMAIL_MENU_HELP_RENAME_FOLDER'     => 'Byt namn på en katalog (fjärrstyrt eller från Sugar)',
-    'LBL_EMAIL_MENU_HELP_REPLY'             => 'Svara dessa epostmeddelande(n)',
-    'LBL_EMAIL_MENU_HELP_REPLY_ALL'         => 'Svara alla mottagare för dessa epostmeddelanden',
+    'LBL_EMAIL_MENU_HELP_REPLY'             => 'Svara dessa emailmeddelande(n)',
+    'LBL_EMAIL_MENU_HELP_REPLY_ALL'         => 'Svara alla mottagare för dessa emailmeddelanden',
 
     'LBL_EMAIL_MESSAGES'                    => 'meddelanden',
 
@@ -8229,18 +8356,18 @@ $app_strings = array (
     'LBL_EMAIL_REBUILDING_FOLDERS'          => 'Återuppbygger kataloger',
     'LBL_EMAIL_RELATE_TO'                   => 'Relatera',
     'LBL_EMAIL_VIEW_RELATIONSHIPS'          => 'Se relationer',
-    'LBL_EMAIL_RECORD'                      => 'Epost meddelanden',
+    'LBL_EMAIL_RECORD'                      => 'Emailmeddelanden',
     'LBL_EMAIL_REMOVE'                      => 'Radera',
     'LBL_EMAIL_REPLY'                       => 'Svara',
     'LBL_EMAIL_REPLY_ALL'                   => 'Svara alla',
     'LBL_EMAIL_REPLY_TO'                    => 'Svara till',
-    'LBL_EMAIL_RETRIEVING_LIST'             => 'Tar emot epostlista',
+    'LBL_EMAIL_RETRIEVING_LIST'             => 'Tar emot emaillista',
     'LBL_EMAIL_RETRIEVING_MESSAGE'          => 'Tar emot meddelande',
-    'LBL_EMAIL_RETRIEVING_RECORD'           => 'Mottager epost meddelanden',
-    'LBL_EMAIL_SELECT_ONE_RECORD'           => 'Var snäll och välj endast ett epost meddelande',
+    'LBL_EMAIL_RETRIEVING_RECORD'           => 'Mottager emailmeddelanden',
+    'LBL_EMAIL_SELECT_ONE_RECORD'           => 'Var snäll och välj endast ett emailmeddelande',
     'LBL_EMAIL_RETURN_TO_VIEW'              => 'Återgå till tidigare modul?',
     'LBL_EMAIL_REVERT'                      => 'Återgå',
-    'LBL_EMAIL_RELATE_EMAIL'                => 'Relatera epost',
+    'LBL_EMAIL_RELATE_EMAIL'                => 'Relatera email',
 
     'LBL_EMAIL_RULES_TITLE'                 => 'Regelhantering',
 
@@ -8256,36 +8383,36 @@ $app_strings = array (
     'LBL_EMAIL_SEARCH_NO_RESULTS'           => 'Inget resultat matchade det valda sökkriteriet',
     'LBL_EMAIL_SEARCH_RESULTS_TITLE'        => 'Sökresultat',
     'LBL_EMAIL_SEARCH_TITLE'                => 'Enkel sök',
-    'LBL_EMAIL_SEARCH__FROM_ACCOUNTS'       => 'Sök epostkonto',
+    'LBL_EMAIL_SEARCH__FROM_ACCOUNTS'       => 'Sök emailkonto',
 
     'LBL_EMAIL_SELECT'                      => 'Välj',
 
     'LBL_EMAIL_SEND'                        => 'Skicka',
-    'LBL_EMAIL_SENDING_EMAIL'               => 'Skickar epost',
+    'LBL_EMAIL_SENDING_EMAIL'               => 'Skickar email',
 
     'LBL_EMAIL_SETTINGS'                    => 'Inställningar',
     'LBL_EMAIL_SETTINGS_2_ROWS'             => '2 rader',
     'LBL_EMAIL_SETTINGS_3_COLS'             => '3 kolumner',
     'LBL_EMAIL_SETTINGS_LAYOUT'             => 'Layout stil',
-    'LBL_EMAIL_SETTINGS_ACCOUNTS'           => 'Epostkonton',
+    'LBL_EMAIL_SETTINGS_ACCOUNTS'           => 'Emailkonton',
     'LBL_EMAIL_SETTINGS_ADD_ACCOUNT'        => 'Rensa formulär',
-    'LBL_EMAIL_SETTINGS_AUTO_IMPORT'        => 'Importera epost i samband med visning',
-    'LBL_EMAIL_SETTINGS_CHECK_INTERVAL'     => 'Hämta ny epost',
+    'LBL_EMAIL_SETTINGS_AUTO_IMPORT'        => 'Importera email i samband med visning',
+    'LBL_EMAIL_SETTINGS_CHECK_INTERVAL'     => 'Hämta ny email',
     'LBL_EMAIL_SETTINGS_COMPOSE_INLINE'     => 'Använd förhandsvisningspanelen',
     'LBL_EMAIL_SETTINGS_COMPOSE_POPUP'      => 'Använd pop-up fönster',
-    'LBL_EMAIL_SETTINGS_DISPLAY_NUM'        => 'Antal epostmeddelanden per sida',
-    'LBL_EMAIL_SETTINGS_EDIT_ACCOUNT'       => 'Redigera epostkonto',
+    'LBL_EMAIL_SETTINGS_DISPLAY_NUM'        => 'Antal emailmeddelanden per sida',
+    'LBL_EMAIL_SETTINGS_EDIT_ACCOUNT'       => 'Redigera emailkonto',
     'LBL_EMAIL_SETTINGS_FOLDERS'            => 'Mappar',
     'LBL_EMAIL_SETTINGS_FROM_ADDR'          => 'Från adress',
-    'LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR' => 'Epostadress för testmeddelanden:',
-    'LBL_EMAIL_SETTINGS_TO_EMAIL_ADDR'      => 'Till epostadress',
+    'LBL_EMAIL_SETTINGS_FROM_TO_EMAIL_ADDR' => 'Emailadress för testmeddelanden:',
+    'LBL_EMAIL_SETTINGS_TO_EMAIL_ADDR'      => 'Till emailadress',
     'LBL_EMAIL_SETTINGS_FROM_NAME'          => 'Från namn',
     'LBL_EMAIL_SETTINGS_REPLY_TO_ADDR'      =>'Svara till address',
     'LBL_EMAIL_SETTINGS_FULL_SCREEN'        => 'Fullskärm',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Synkronisera alla epostkonton',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Synkronisera alla emailkonton',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'Ett email skickades till angiven emailadress med hjälp av utgående serverinställningar. Se till att emailet togs emot och att inställningarna är korrekta.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Denna åtgärd kommer synkronisera alla epostkonton och deras innehåll.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Genomföra en full synkronisering?\nStora epostkonton kan ta några minuter.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Denna åtgärd kommer synkronisera alla emailkonton och deras innehåll.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Genomföra en full synkronisering?\nStora emailkonton kan ta några minuter.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Håll nere shift eller ctrl för att markera multipla mappar.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Allmänt',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Tillgängliga gruppkataloger',
@@ -8297,21 +8424,21 @@ $app_strings = array (
 
     'LBL_EMAIL_SETTINGS_NAME'               => 'Namn',
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH'    => 'Dessa inställningar kan kräva att sidan uppdateras för att de ska aktiveras.',
-    'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'Hämtar epostkonto',
+    'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'Hämtar emailkonto',
     'LBL_EMAIL_SETTINGS_RULES'              => 'Regler',
     'LBL_EMAIL_SETTINGS_SAVED'              => 'Inställningarna har sparats.\n\nDu måste ladda om sidan för att inställningarna ska börja gälla.',
     'LBL_EMAIL_SETTINGS_MUST_RELOAD'        => 'Du måste ladda om sidan för att de nya inställningarna ska börja gälla.',
-    'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => 'Skicka epost i oformaterad text',
-    'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => 'Aktiva epostkonton',
-    'LBL_EMAIL_SETTINGS_SHOW_NUM_IN_LIST'   => 'Antal epostmeddelanden per sida',
+    'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => 'Skicka email i oformaterad text',
+    'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => 'Aktiva emailkonton',
+    'LBL_EMAIL_SETTINGS_SHOW_NUM_IN_LIST'   => 'Antal emailmeddelanden per sida',
     'LBL_EMAIL_SETTINGS_TAB_POS'            => 'Placera flikar längst ned',
     'LBL_EMAIL_SETTINGS_TITLE_LAYOUT'       => 'Visuella inställningar',
     'LBL_EMAIL_SETTINGS_TITLE_PREFERENCES'  => 'Inställningar',
     'LBL_EMAIL_SETTINGS_TOGGLE_ADV'         => 'Visa avancerad',
     'LBL_EMAIL_SETTINGS_USER_FOLDERS'       => 'Tillgängliga kataloger',
     'LBL_EMAIL_ERROR_PREPEND'               => 'Fel:',
-    'LBL_EMAIL_INVALID_PERSONAL_OUTBOUND'   => 'Den utgående epost servern du valt för kontot är felaktig. Kontrollera inställningarna eller använd en annan epost server för epost kontot.',
-    'LBL_EMAIL_INVALID_SYSTEM_OUTBOUND'     => 'Det finns ingen utgående epost server konfigurerad. Var snäll och konfigurera en utgående epost server eller välj en befintlig epost server för kontot du använder i Inställningar >> Epost Konto',
+    'LBL_EMAIL_INVALID_PERSONAL_OUTBOUND'   => 'Den utgående emailservern du valt för kontot är felaktig. Kontrollera inställningarna eller använd en annan emailserver för emailkontot.',
+    'LBL_EMAIL_INVALID_SYSTEM_OUTBOUND'     => 'Det finns ingen utgående emailserver konfigurerad. Var snäll och konfigurera en utgående emailserver eller välj en befintlig emailserver för kontot du använder i Inställningar >> Emailkonto.',
     'LBL_EMAIL_SHOW_READ'                   => 'Visa alla',
     'LBL_EMAIL_SHOW_UNREAD_ONLY'            => 'Visa endast olästa',
     'LBL_EMAIL_SIGNATURES'                  => 'Signaturer',
@@ -8328,7 +8455,7 @@ $app_strings = array (
     'LBL_EMAIL_SUCCESS'                     => 'Genomfört',
     'LBL_EMAIL_SUGAR_FOLDER'                => 'Sugarkatalog',
     'LBL_EMAIL_TEAMS'                       => 'Tilldela till team',
-    'LBL_EMAIL_TEMPLATE_EDIT_PLAIN_TEXT'    => 'Epost mallen är tom',
+    'LBL_EMAIL_TEMPLATE_EDIT_PLAIN_TEXT'    => 'Emailmallen är tom',
     'LBL_EMAIL_TEMPLATES'                   => 'Mallar',
     'LBL_EMAIL_TEXT_FIRST'                  => 'Första sidan',
     'LBL_EMAIL_TEXT_PREV'                   => 'Föregående sida',
@@ -8351,7 +8478,7 @@ $app_strings = array (
 
     'LBL_EMAIL_MESSAGE_NO'                  => 'Meddelande nummer',
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'Import utförd',
-    'LBL_EMAIL_IMPORT_FAIL'                 => 'Importen har avslutats eftersom epost meddelandet redan är importerat eller borttaget från servern.',
+    'LBL_EMAIL_IMPORT_FAIL'                 => 'Importen har avslutats eftersom emailmeddelandet redan är importerat eller borttaget från servern',
 
     'LBL_LINK_NONE'=> 'Ingen',
     'LBL_LINK_ALL'=> 'Alla',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Teams',
     'LBL_TEAM_SET_ID' => 'Team ID',
     'LBL_TEAM_SET'=>'Team',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Valda team',
     'LBL_SEARCH_UNAVAILABLE' => 'Sökning otillgänglig, vänligen försök igen senare.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Inget primärt team är valt',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Fel det går ej att ta bort primärt team [{0}] för [{1}] modulen med id [{2}]',
@@ -8392,7 +8520,7 @@ $app_strings = array (
     'ERR_INVALID_DATE_FORMAT' => 'Datumformatet måste vara:',
     'ERR_INVALID_DATE' => 'Vad god fyll i ett giltigt datum.',
     'ERR_INVALID_DAY' => 'Var god fyll i en giltig dag',
-    'ERR_INVALID_EMAIL_ADDRESS' => 'inte en giltig epostadress',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'inte en giltig emailadress.',
     'ERR_INVALID_FILE_REFERENCE' => 'Ogiltig filreferens',
     'ERR_INVALID_HOUR' => 'Var god fyll i en giltig timme.',
     'ERR_INVALID_MONTH' => 'Var god fyll i en giltig månad.',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Sökmotorn är tillfälligt otillgänglig.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Ett fel uppstod vid körning av sökmotorn. Kontakta din systemadministratör.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Ett fält som är låst av en process kan inte redigeras.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Ett tillstånd inträffade på grund av ett allmänt fel eller misstag. Skälen för undantaget intervall men generellt faller utanför ramen för en mer specifik undantags API.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Indikerar att servern är upptagen, överbelastad eller nere.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'Sökmotorns backend är tillfälligt otillgänglig på grund av ett anslutningsfel. Kontrollera din anslutning och konfiguration i Admin->sök->test.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'Ett körtidsfel uppstod i SearchEngine. Se sugarcrm.log för mer information.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Ett fält som för närvarande är låst av pågående process kan inte redigeras.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s är låst av en pågående process och kan inte redigeras.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s är låst av en pågående process och kan inte redigeras.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'En fil med samma namn existerar redan i systemet.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Denna tidsperiod har redan underperioder',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Undertidsperioder kan inte ha underperioder',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Det gick inte att hämta någon Tidsperioder typ: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Inga aktiva tidsperioder för aktuella inställningar.',
     'LBL_CURRENT_TIMEPERIOD' => 'Aktuell tidsperiod',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Föregående tidsperiod',
     'LBL_NEXT_TIMEPERIOD' => 'Nästa tidsperiod',
@@ -8532,7 +8664,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => 'Stäng',
     'LBL_ADDITIONAL_DETAILS' => 'Ytterligare detaljer',
     'LBL_ADMIN' => 'Admin',
-    'LBL_ALT_HOT_KEY' => 'Alt+',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'Arkiv',
     'LBL_ASSIGNED_TO_USER'=>'Tilldelad till användare',
     'LBL_ASSIGNED_TO' => 'Tilldelad till:',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Välj fält...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Välj operatör...',
     'LBL_FILTER_CREATE_NEW' => 'Skapa',
+    'LBL_FILTER_CREATE_FILTER' => 'Skapa nytt filter',
+    'LBL_FILTER_EDIT_FILTER' => 'Redigera filter',
     'LBL_FILTER_ALL_RECORDS' => 'Alla poster',
     'TPL_FILTER_SAVE' => 'Du skapat filtret {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'Från',
@@ -8646,8 +8780,8 @@ $app_strings = array (
     'LBL_VIEW_BUTTON_TITLE' => 'Visa [Alt+V]',
     'LBL_VIEW_BUTTON' => 'Visa',
     'LBL_EMAIL_PDF_BUTTON_KEY' => 'M',
-    'LBL_EMAIL_PDF_BUTTON_LABEL' => 'Epost som PDF',
-    'LBL_EMAIL_PDF_BUTTON_TITLE' => 'Epost som PDF [Alt+M]',
+    'LBL_EMAIL_PDF_BUTTON_LABEL' => 'Emaila som PDF',
+    'LBL_EMAIL_PDF_BUTTON_TITLE' => 'Emaila som PDF',
     'LBL_EMAIL' => 'Email',
     'LBL_EMAILS'=>'Email',
     'LBL_EMPLOYEES' => 'Anställda',
@@ -8765,7 +8899,7 @@ $app_strings = array (
     'LBL_LOGOUT' => 'Logga ut',
     'LBL_PROFILE' => 'Profil',
     'LBL_MAILMERGE_KEY' => 'M',
-    'LBL_MAILMERGE' => 'Sammanfoga Epost',
+    'LBL_MAILMERGE' => 'Sammanfoga email',
     'LBL_MASS_UPDATE' => 'Massuppdatering',
     'LBL_MASS_UPDATE_ADD_FIELD' => 'Lägg till fält',
     'LBL_MASS_UPDATE_REMOVE_FIELD' => 'Ta bort fält',
@@ -8777,7 +8911,7 @@ $app_strings = array (
     'TPL_MASS_ADD_TO_LIST_QUEUED' => 'Din begäran om att lägga valda poster till <a href="{{listUrl}}">{{listName}}</a> mållista är planerat.',
     'LBL_MASS_UPDATE_EMPTY_VALUES' => 'Uppdateringen kommer att ta bort följande värden:',
     'LBL_MASS_UPDATE_EMPTY_CONFIRM' => 'Avbryt för att behålla befintliga värden. Bekräfta för att ta bort värdena.',
-    'LBL_OPT_OUT_FLAG_PRIMARY' => '"Opt out" primär epost',
+    'LBL_OPT_OUT_FLAG_PRIMARY' => '"Opt out" primär email',
     'LBL_MEETINGS'=>'Möten',
     'LBL_MEETING'=>'Möte',
     'LBL_MEETING_GO_BACK'=>'Gå tillbaka till mötet',
@@ -8997,15 +9131,20 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Stat:',
     'LBL_STATUS_UPDATED'=>'Din status för detta event har blivit uppdaterad!',
+    'LBL_STATUS_NOT_UPDATED' => 'Din status för detta event har blivit uppdaterad.',
     'LBL_STATUS'=>'Status:',
     'LBL_STREET'=>'Gata',
     'LBL_SUBJECT' => 'Ämne',
 
-    'LBL_INBOUNDEMAIL_ID' => 'Inkommande epostid',
+    'LBL_INBOUNDEMAIL_ID' => 'Inkommande emailid',
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Med ensamrätt.<br />SugarCRM är ett varumärke hos SugarCRM, Inc. Alla andra företag och produktnamn kan vara varumärken som tillhör respektive företag de förknippas med.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Med ensamrätt.<br />SugarCRM, Sugar och 3-D-kuben är registrerade varumärken för SugarCRM Inc. '.
+        'Alla andra företags- och produktnamn som används eller förekommer i denna produkt kan vara varumärken tillhörande '.
+        'respektive företag de associeras med.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Schemalagt jobb är klart',
@@ -9053,8 +9192,8 @@ $app_strings = array (
     'LBL_SCHEDULE_MEETING_BUTTON_KEY'   => 'M',
     'LBL_SCHEDULE_MEETING_BUTTON_LABEL' => 'Schemalägg möte',
     'LBL_TRACK_EMAIL_BUTTON_KEY' => 'K',
-    'LBL_TRACK_EMAIL_BUTTON_LABEL' => 'Arkivera epost',
-    'LBL_TRACK_EMAIL_BUTTON_TITLE' => 'Arkivera epost [Alt+K]',
+    'LBL_TRACK_EMAIL_BUTTON_LABEL' => 'Arkivera email',
+    'LBL_TRACK_EMAIL_BUTTON_TITLE' => 'Arkivera email',
     'LBL_UNAUTH_ADMIN' => 'Obehörig åtkomst till administrationen',
     'LBL_UNDELETE_BUTTON_LABEL' => 'Ångra radera',
     'LBL_UNDELETE_BUTTON_TITLE' => 'Ångra radera [Alt + D]',
@@ -9073,7 +9212,7 @@ $app_strings = array (
     'LBL_VIEW_PDF_BUTTON_LABEL' => 'Skriv ut som PDF',
     'LBL_VIEW_PDF_BUTTON_TITLE' => 'Skriv ut som PDF [Alt+P]',
 
-    'LBL_KBDOCUMENTS' => 'Kunskapsbas Dokument',
+    'LBL_KBDOCUMENTS' => 'Kunskapsbas',
     'ERR_EMPTY_NODE_NAME' => 'You cannot add a category without title',
 
 
@@ -9113,8 +9252,8 @@ $app_strings = array (
     'NTC_DATE_FORMAT' => '[åååå-mm-dd]',
     'NTC_DATE_TIME_FORMAT' => '[åååå-mm-dd 24:00]',
     'NTC_DELETE_CONFIRMATION_MULTIPLE' => 'Är du säker på att du vill radera de valda posterna?',
-    'NTC_TEMPLATE_IS_USED' => 'Denna mall används i åtminstone en epost marknads post. Är du säker på att du vill ta bort den?',
-    'NTC_TEMPLATES_IS_USED' => "Följande mallar används i epost marknads poster. Är du säker på att du vill ta bort dem?",
+    'NTC_TEMPLATE_IS_USED' => 'Denna mall används i åtminstone en emailmarknads post. Är du säker på att du vill ta bort den?',
+    'NTC_TEMPLATES_IS_USED' => "Följande mallar används i emailmarknadsposter. Är du säker på att du vill ta bort dem?\n",
     'NTC_DELETE_CONFIRMATION' => 'Är du säker på att du vill radera posten?',
     'NTC_DELETE_CONFIRMATION_FORMATTED' => 'Är du säker på att du vill ta bort {0}?',
     'NTC_DELETE_CONFIRMATION_NUM' => 'Är du säker på att du vill radera',
@@ -9171,12 +9310,13 @@ $app_strings = array (
     'ERROR_UPLOAD_FAILED' => 'Fel. Filen gick inte att ladda upp.',
     'ERROR_UPLOAD_ACCESS_PD' => 'Du har inte behörighet att skapa [processdefinitioner] för denna modul.',
     'ERROR_UPLOAD_ACCESS_BR' => 'Du har inte behörighet att skapa [affärsregler] för denna modul.',
-    'ERROR_UPLOAD_ACCESS_ET' => 'Du har inte behörighet att skapa [epostmallar] för denna modul.',
+    'ERROR_UPLOAD_ACCESS_ET' => 'Du har inte behörighet att skapa [emailmallar] för denna modul.',
     'ERROR_PA_FILTER_UNSUPPORTED_OPERATOR' => 'Fel. Du har angett en operatör som inte stöds.',
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Fel. Du har angett en ogiltig operatör.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Fel. Du har angett ett ogiltigt filter.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Importen misslyckades. Kontrollera Sugar-loggen för mer information.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Importen misslyckades. Ett grupperingsfält är delvis låst i processdefinitionen. Dessa fält måste låsas upp i processdefinitionen för att definitionen ska importeras.',
+    'ERROR_EXP_DATE_LOW' => 'Fel. Utgångsdatum kan inte ligga före publiceringsdatum.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Fel. Godkänd status kräver publiceringsdatum.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Fältet Publiceringsdatum är tomt.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9235,8 +9375,8 @@ $app_strings = array (
     'MSG_LIST_VIEW_NO_RESULTS_BASIC' => "Inga resultat hittades.",
     'MSG_LIST_VIEW_NO_RESULTS' => "Inga resultat hittades för",
     'MSG_LIST_VIEW_NO_RESULTS_SUBMSG' => "Skapa som ny",
-    'MSG_EMPTY_LIST_VIEW_NO_RESULTS' => "Du har inga <item1> -poster sparade. <item2> eller <item3> en nu.",
-    'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Du har inga <item1> -poster sparade. <item2> en nu.",
+    'MSG_EMPTY_LIST_VIEW_NO_RESULTS' => "Du har inga <item1> poster sparade. <item2> eller <item3> en nu.",
+    'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Du har inga <item1> poster sparade. <item2> en nu.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "Du kan skala från en .list",
 
     'LBL_CLICK_HERE' => "Klicka här",
@@ -9306,6 +9446,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'kolumner kan visas.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Instrumentpanel',
     'LBL_DASHBOARD_BWC' => 'Mitt Legacy Dashboard',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Min Dashboard',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Hjälp-Dashboard',
@@ -9338,9 +9479,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Mina {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Nyheter',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Google News feed till relaterad konto',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Affärsmöjlighet Metrics',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Affärsmöjlighet Metrics till relaterad konto. Kräver D&B abonnemang.',
@@ -9409,7 +9547,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Inga poster hittades vid denna tidpunkt.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Case sammandrag',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Nyhetsflöde',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interaktioner',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Noter & Bilagor',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Noter & Bilagor hör till posten',
@@ -9918,7 +10055,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => 'Välj Arbetsfunktion',
     'LBL_DNB_BAL_ORG_NAME' => 'Organisationens namn',
     'LBL_DNB_BAL_IMPORT_AS' => 'Importera som:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Organisationens namn',
+    'LBL_DNB_BAL_ORG_NAME' => 'Företagsnamn',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'i $ USD Miljoner',
@@ -9977,7 +10114,7 @@ $app_strings = array (
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Mest användbara publicerade kunskapsbasartiklar',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Visar de mest populära och visade kunskapsbasartiklarna',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtrerat efter {{label}} "{{value}}"',
 
@@ -10016,6 +10153,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Var god ange ett sidnamn',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Min pipeline',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Mitt teams Pipeline",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Försäljningsförloppet diagram',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Visar aktuellt pipelinediagram.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Ingen bild',
 
@@ -10261,14 +10405,16 @@ $app_strings = array (
     'LBL_ALT_INFO' => 'Information',
 	'MSG_DUPLICATE' => '{0} protokollet du försöker skapa kan vara en dubbelpost av ett {0} protokoll som redan existerar. {1} protokoll som innehåller liknande namn finns listade nedanför.<br>Klicka Skapa {1} för at fortsätta skapa {0}, eller välj existerande {0} listad nedanför.',
     'MSG_SHOW_DUPLICATES' => '{0} protokollet du försöker skapa kan vara en dubbelpost av ett {0} protokoll som redan existerar. {1} protokoll som innehåller liknande namn finns listade nedanför. Klicka Spara för att fortsätta skapa det här nya {0}, eller klicka Avbryt för att återvända till modulen utan att skapat {0}.',
-    'LBL_EMAIL_TITLE' => 'Epost',
-    'LBL_EMAIL_OPT_TITLE' => 'bortvald epostadress',
-    'LBL_EMAIL_INV_TITLE' => 'ogiltig epostadress',
-    'LBL_EMAIL_PRIM_TITLE' => 'primär epostadress',
+    'LBL_EMAIL_TITLE' => 'emailadress',
+    'LBL_EMAIL_OPT_TITLE' => 'bortvald emailadress',
+    'LBL_EMAIL_INV_TITLE' => 'ogiltig emailadress',
+    'LBL_EMAIL_PRIM_TITLE' => 'primär emailadress',
     'LBL_SELECT_ALL_TITLE' => 'Välj alla',
     'LBL_SELECT_THIS_ROW_TITLE' => 'Välj den här raden',
     'LBL_TEAM_SELECTED_TITLE' => 'Valda Teams',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Välj för att göra det här teamet primär',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Team markerade som team-baserade har valts ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Markera detta team som Team-baserade som valts',
     'LBL_SEARCH_AND_SELECT' => 'Sök och välj {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Sök och lägg till {{module}}',
 
@@ -10321,7 +10467,7 @@ $app_strings = array (
 
     'ERR_CONNECTOR_NOT_ARRAY' => 'connector matrisen i {0} är definierad felaktigt eller är tom och kan inte användas.',
     'LBL_PDF_VIEW' => 'Ladda ner PDF',
-    'LBL_PDF_EMAIL' => 'Eposta PDF',
+    'LBL_PDF_EMAIL' => 'Emaila PDF',
 
     'ERR_SUHOSIN' => 'Uppladdnings stream är blockerad av Sushosin, vänligen lägg till "upload" till suhosin.executor.include.whitelist (Se sugarcrm.log för mer information)',
 
@@ -10357,6 +10503,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Förhandsvy inaktiv: Uppgift saknas',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Förhandsvy: Med tanke på aktuell post',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Förhandsvy inaktiv: Post raderad bort eller ingen tillgång till posten',
+    'LBL_PREVIEW_PREVIOUS' => 'Förhandsgranska föregående',
+    'LBL_PREVIEW_NEXT' => 'Förhandsgranska nästa',
+    'LBL_PREVIEW_CLOSE' => 'Förhandsgranska Stäng',
     'LBL_STREAM_NO_RECORDS' => 'Det här protokollet har inte anteckningar just nu. Vänligen lägg till anteckning genom att klicka på lägg till anteckningsknappen.',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}} dubbletter hittades.',
     'LBL_NO_DUPLICATES_FOUND' => 'Inga kopior hittades.',
@@ -10376,6 +10525,7 @@ $app_strings = array (
         'Ogiltigt antal poster passerat. Giltiga värden är från {{minRecords}} till {{maxRecords}} poster.',
     'LBL_MERGE_NO_ACCESS' =>
         'Du har inte tillgång att utföra den här åtgärden. Minst en post måste vara redigerbar.',
+    'LBL_MERGE_LOCKED' => 'Några av de poster som har valts för sammanfogning innehåller fält som är låst för redigering av en process och kan inte sammanfogas vid denna tid.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10846,10 +10996,9 @@ $app_strings = array (
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Systeminställningar',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Lösenord',
     'LBL_CURRENT_PASSWORD'				=> 'Nuvarande lösenord',
-    'LBL_SET_NEW_PASSWORD'              => 'Ange lösenord',
     'LBL_NEW_PASSWORD1'                 => 'Nytt lösenord',
     'LBL_NEW_PASSWORD2'                 => 'Bekräfta lösenord',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Var god fyll i din lösenords verifiering.',
@@ -10857,13 +11006,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> 'Var god att ange ditt nuvarande lösenord.',
     'ERR_REENTER_PASSWORDS' => 'Lösenorden måste matcha.',
     'ERR_PASSWORD_MISMATCH' => 'Lösenordet stämmer inte överens med lösenordet i vårt system.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Ditt lösenord har uppdaterats.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Kan inte skicka lösenord',
     'LBL_REQUEST_PASSWORD' => 'Begär lösenord',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Fel: Det gick inte att uppdatera lösenordet för denna användare.',
     'LBL_INCORRECT_PASSWORD' => 'Fel: Felaktigt lösenord.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Språk:',
+    'LBL_PREFERRED_LANGUAGE' => 'Språkinställning:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Välj en rapport',
@@ -10893,6 +11041,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => 'Servern påträffade ett fel och kunde inte slutföra din begäran.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Försök igen. Om felet kvarstår, kontakta Sugar-administratören.',
     'ERR_HTTP_500_ACTION' => 'Vänligen kontakta teknisk support.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 Internt serverfel',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Servern påträffade ett fel och kunde inte slutföra din begäran.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Försök igen. Om felet kvarstår, kontakta administratören Sugar.',
+    'ERR_HTTP_502_ACTION' => 'Kontakta teknisk support.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 Internt serverfel',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Servern är inte tillgänglig för att slutföra din begäran.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Försök igen. Om felet kvarstår, kontakta Sugar-administratören.',
+    'ERR_HTTP_503_ACTION' => 'Kontakta teknisk support.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Renderingsvisning Misslyckande',
     'ERR_RENDER_FAILED_MSG' => 'Misslyckades att rendera visning',
@@ -11026,6 +11186,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => 'Fel:',
     'LBL_ALERT_TITLE_LOADING' => 'Laddar',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Din browser version stöds inte längre, eller du använder en webbläsare som inte stöds.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Följande webbläsarversioner rekommenderas: <ul><li>Internet Explorer 11</li> <li>Firefox 41</li> <li>Safari 7.1</li> <li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Se sidan {{link}} för föreslagna webbläsare.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Plattformar som stöds',
 
@@ -11078,6 +11239,9 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Det uppstod ett fel vid anslutning till servern. Försök igen.',
     'ERR_RESOLVE_ERRORS' => 'Vänligen åtgärda eventuella fel innan du fortsätter.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Uppdatera listan',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'mer',
@@ -11174,10 +11338,13 @@ $app_strings = array (
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM göra det möjligt för avancerade användare att snabbt utföra vissa uppgifter med kortkommandon för att öka produktiviteten. Tabellerna till höger beskriver tillgängliga genvägar tillsammans med nycklarna och de åtgärder de utför.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Stödnycklar</h1> <ul><li>alla alfanumeriska tecken och symboler</li> <li>shift, ctrl, alt, kommando, mod (ctrl i Windows/Linux och kommando i mobila luftkonditioneringsanläggningar)</li> <li>in, esc, utrymme, flikar, PgUp, PgDn, Home, Back Ins, Del, Backsteg</li></ul> <h1>Funktioner som stöds</h1> <ul><li>Nyckelkombination: ctrl + m</li> <li>flera nycklar: m, ctrl + m</li> <li>nyckelordningsföljd: m en</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Globala genvägar',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Kontextuella genvägar',
     'LBL_SHORTCUT_KEY_KEY' => 'Nyckel',
     'LBL_SHORTCUT_FUNCTION' => 'Funktion',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Konfigurera kontextuella genvägar',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Inga kontextuella genvägar att konfigurera',
     'LBL_SHORTCUT_HELP' => 'Visa genvägars hjälp sida',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Växla i snabb skapa menyn',
     'LBL_SHORTCUT_SEARCH' => 'Fokusera på globala sökfält',
@@ -11225,6 +11392,9 @@ $app_strings = array (
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Markera alla objekt i en flervalsfält',
     'LBL_SHORTCUT_SWEETSPOT' => 'Växla Sweet Spot-fältet',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Dölj Sweet Spot-fältet',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Spara konfigurationen',
+    'LBL_SHORTCUT_RESTORE' => 'Återställ till standard',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Ett fel uppstod när anpassade kortkommandon sparades på servern. Försök igen.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} Inställningar',
@@ -11247,13 +11417,20 @@ $app_strings = array (
     'LBL_CALENDAR_RECURRENCE' => "Upprepning",
     'LBL_CALENDAR_REMINDERS' => "Påminnelser",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Anpassade datum",
     'LBL_CALENDAR_REPEAT_TYPE' => "Upprepningstyp",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Upprepningsintervall",
     'LBL_CALENDAR_REPEAT_DOW' => "Repetera på Dag i Veckan",
+    'LBL_CALENDAR_REPEAT' => "Upprepa",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Repetera Ända Till",
     'LBL_CALENDAR_REPEAT_COUNT' => "Förekomster av upprepning",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Upprepa Selector",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Dag(ar) per månad",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Upprepa ordningstal",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Upprepa enhet",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Återkommande ändringar måste göras på den första posten i serien.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Återkommande regler leder inte till en händelse som genereras.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Deltar',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Avböjt',
@@ -11273,17 +11450,23 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM kräver javascript. Vänligen akivera javascript för att fortsätta använda SugarCRM.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Den serialiserade datan kunde ej avserialiseras',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Den serialiserade datan kunde ej avserialieras eftersom den innehåller referenser till objekt eller klasser',
 
     'LBL_FIELD_TRIMMED' => 'Fältet trimmades på grund av att det överskred teckengränsen.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Fältet överskrider högsta tillåtna teckengränsen.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Senaste 7 dagarna',
     '30' => 'Senaste 30 dagarna',
     '90' => 'Senaste kvartalet',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11371,14 +11554,14 @@ $app_list_strings['opps_config_view_by_closedate_rollup_dom'] = array(
 $app_list_strings['moduleList']['Library'] = 'Bibliotek';
 $app_list_strings['moduleListSingular']['Library'] = 'Bibliotek';
 $app_list_strings['library_type'] = array('Books'=>'Bok', 'Music'=>'Musik', 'DVD'=>'DVD', 'Magazines'=>'Tidningar');
-$app_list_strings['moduleList']['EmailAddresses'] = 'Epostadress';
+$app_list_strings['moduleList']['EmailAddresses'] = 'Emailadress';
 $app_list_strings['project_priority_default'] = 'Medel';
 $app_list_strings['project_priority_options'] = array (
     'High' => 'Hög',
     'Medium' => 'Medel',
     'Low' => 'Låg',
 );
-$app_list_strings['moduleListSingular']['EmailAddresses'] = 'Epostadress';
+$app_list_strings['moduleListSingular']['EmailAddresses'] = 'Emailadress';
 
 $app_list_strings['kbdocument_status_dom'] = array(
     'draft' => 'Utkast',
@@ -11387,13 +11570,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'published' => 'Publicerat',
     'expired' => 'Utgången',
 );
-
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Utkast',
-    'Expired' => 'Utgången',
-    'In Review' => 'Under granskning',
-    'Published' => 'Publicerat',
-  );
 
    $app_list_strings['kbadmin_actions_dom'] =
     array (
@@ -11406,57 +11582,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Radera valda artiklar',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Has Attachments',
-        'none' => 'Has None',
-        'mime' => 'Specify Mime Type',
-        'name' => 'Specify Name',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Ord';
   $app_list_strings['moduleListSingular']['Words'] = 'Ord';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Skapa artikel';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Top 5',
-    'Top_10' => 'Top 10',
-    'Top_20' => 'Top 20',
-    'Bot_5'  => 'Bottom 5',
-    'Bot_10' => 'Bottom 10',
-    'Bot_20' => 'Bottom 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Alla',
-        'added' => 'Added Last 30 days',
-        'pending' => 'Pending my Approval',
-        'updated' =>'Updated Last 30 days',
-        'faqs' => 'FAQs',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'På',
-    'before' => 'Före',
-    'after' => 'Efter',
-    'between_dates' => 'Mellan',
-    'last_7_days' => 'Senaste 7 dagarna',
-    'next_7_days' => 'Kommande 7 dagarna',
-    'last_month' => 'Senaste månaden',
-    'this_month' => 'Den här månaden',
-    'next_month' => 'Kommande månad',
-    'last_30_days' => 'Senaste 30 dagarna',
-    'next_30_days' => 'Kommande 30 dagarna',
-    'last_year' => 'Senaste året',
-    'this_year' => 'Det här året',
-    'next_year' => 'Det här året',
-    'isnull' => 'Is Null',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12318,15 +12446,17 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Alla Kontakter",
+    "email" => "Email endast",
+    "phone" => "Telefon endast",
     "prem" => "Endast premium"
 );
 
 $app_list_strings['moduleList']['KBDocuments'] = 'Kunskapsbas';
 $app_list_strings['moduleListSingular']['KBDocuments'] = 'Kunskapsbas';
-$app_list_strings['moduleList']['KBContents'] = 'Kunskapsbas Dokument';
+$app_list_strings['moduleList']['KBContents'] = 'Kunskapsbas';
 $app_list_strings['moduleListSingular']['KBContents'] = 'Kunskapsbasartikel';
-$app_list_strings['moduleList']['KBArticles'] = 'Kunskapsbas artikel';
-$app_list_strings['moduleListSingular']['KBArticles'] = 'Kunskapsbas artikel';
+$app_list_strings['moduleList']['KBArticles'] = 'Kunskapsbasartikel';
+$app_list_strings['moduleListSingular']['KBArticles'] = 'Kunskapsbasartikel';
 $app_list_strings['moduleList']['KBContentTemplates'] = 'Kunskapsbasmall';
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'Kunskapsbasmall';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'Inbäddade filer';
@@ -12343,4 +12473,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Bio',
     'Both' => 'Båda'
 );
-

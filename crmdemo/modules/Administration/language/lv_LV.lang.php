@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -275,7 +275,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => 'Rediģēt pielāgotos laukus',
     'LBL_EDIT_TABS'=>'Rediģēt cilnes',
     'LBL_EMAIL_TITLE' => 'E-pasts',
-    'LBL_EMAIL_DESC' => 'Pārvaldīt izejošos un ienākošos e-pastus. E-pasta iestatījumiem jābūt nokonfigurētiem, lai ļautu lietotājiem sūtīt e-pastus un biļetenus.',
+    'LBL_EMAIL_DESC' => 'Pārvaldiet izejošos un ienākošos e-pastus. E-pasta iestatījumi ir jākonfigurē, lai ' .
+                        'lietotāji varētu izsūtīt e-pastus un kampaņu biļetenus.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Lai šo iespēju izmantotu, katram lietotājam ir nepieciešama primārā e-pasta adrese.',
 	'LBL_ENABLE_MAILMERGE' => 'Aktivizēt pasta apvienošanu?',
 	'LBL_ENABLED' => 'Aktivizēts',
@@ -295,7 +296,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_DESC'=> 'Konfigurējiet administratora iestatījumus Iespēju modulim. Iespēju iestatījumos var norādīt Iespēju aplūkošanu vienu pašu vai kopā ar saistītajā ieņēmumu posteņu rindām.',
     'LBL_GLOBAL_SEARCH_SETTINGS' => 'Meklēt',
     'LBL_GLOBAL_SEARCH_SETTINGS_DESC' => 'Atlasīt moduļus globālai meklēšanai un konfigurēt pilna teksta meklēšanu.',
-    'LBL_FTS_SETTINGS' => 'Full Text Search Configuration',
+    'LBL_FTS_SETTINGS' => 'Pilna teksta meklēšanas konfigurācija',
    	'LBL_FTS_SETTINGS_DESC' => 'Konfigurēt pilna teksta meklēšanas sistēmu.',
     'LBL_LEGACY_FTS_SETTINGS' => 'Legacy Global Search Configuration',
     'LBL_GLOBAL_TEAM_DESC' => 'Globāli redzams',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Uzstādīt noklusētos sistēmas lokalizācijas iestatījumus',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '-  Lietotāja vārds personai, kura darbosies ar šo bezsaistes klientu',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Gala lietotāja vārds:',
-    'LBL_MAILBOX_DESC' => 'Uzstādīt grupas pasta kontus ienākošo e-pastu izsekošanai un vadīt lietotāju ienākošo pastu konta informāciju.',
+    'LBL_MAILBOX_DESC' => 'Iestatiet grupas pasta kontus, lai uzraudzītu ienākošos e-pastus ' .
+        'un pārvaldītu personīgo ienākošo e-pastu kontu informāciju lietotājiem',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Līguma tipi',
     'LBL_MANAGE_CURRENCIES' => 'Valūtas',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Pārvaldīt grupas',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Pārģenerēt JS Grupēšanas failus',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Atkārtoti savieno un pārraksta esošos grupu failus ar jaunākajām versijām',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Labot javascript failus',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Labot JS failus',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Apstrādā failus. Tam nepieciešamas dažas minūtes laika. Aiziešana prom no šīs lapas neatcels šo procesu, vari pamest šo lapu vai arī gaidīt apstiprinājumu...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Pabeigta failu apstrāde.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Salabot laukus rakstītus ar ne-mazajiem burtiem',
@@ -855,7 +859,7 @@ $mod_strings = array (
     'LBL_UW_LANGPACK_READY_UNISTALL'          => 'Valodas pakotne ir gatava atinstalēšanai.',
     'LBL_UW_MODULE_READY'           => 'Modulis ir gatavs instalēšanai.',
     'LBL_UW_LANGPACK_READY'           => 'Valodas pakotne ir gatava instalēšanai.',
-    'LBL_UW_NO_FILES_SELECTED'                  => 'Nav atlasīti faili lai',
+    'LBL_UW_NO_FILES_SELECTED'                  => 'Nav atlasīti faili, lai',
     'LBL_UW_NO_INSTALLED_UPGRADES'              => "<i>Atjauninājumi nav atrasti</i><br>",
     'LBL_UW_NONE'                               => 'Neviens',
     'LBL_UW_NOT_AVAILABLE'                      => "Nav pieejams",
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Kešatmiņas failus tīrīšana...pabeigta',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Ja šī izvēles šūna nav atzīmēta, administratoram būs manuāli jāveic atkārtota validācija pēc licences derīguma termiņa beigām, pretējā gadījumā lietotāji nevarēs pieteikties sistēmā.',
 	'LBL_TRACKER_SETTINGS' => 'Sekotājs',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Atlasiet, kādi sistēmas un lietotāja dati tiek izsekoti',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Izsekošanas iespējošana/atspējošana',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Ieslēgt/izslēgt datu ņēmējus',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Aktivizēt',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Deaktivizēt',
@@ -1120,9 +1124,9 @@ $mod_strings = array (
     'LBL_SAML_LOGOUT_URL' => 'SLO URL',
     'LBL_SAML_SAME_WINDOW' => 'Ielādēt pieteikšanās ekrānu tajā pašā <br>logā, lai izvairītos no uznirstošo logu bloķēšanas',
     'LBL_SAML_SAME_WINDOW_DESC' => 'Šī opcija ielādēs SAML pieteikšanās ekrānu tajā pašā logā',
-    'LBL_GLOBAL_SEARCH_SETTINGS_TITLE' => 'Full text search will be used to return results for a global search in the desktop application. In order for results to return for a particular module, it must be enabled below. Make sure to perform a full system index after enabling modules for full text search. Individual module fields can be enabled for full text search via <a href="index.php?module=ModuleBuilder&action=index&type=studio">Studio</a>.<br>
-To enable modules for global searches in SugarCRM Mobile and Sugar Portal, please use the <a href="index.php?module=Administration&action=UnifiedSearchSettings">Legacy Global Search Configuration</a>. <br>
-For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_doc.php?edition=ENT&version=7.7.0.0beta4&lang=en_us&module=FullTextSearch">Search</a> documentation.',
+    'LBL_GLOBAL_SEARCH_SETTINGS_TITLE' => 'Pilna teksta meklēšana tiks izmantota, lai atgrieztu rezultātus globālai meklēšanai darbvirsmas lietotnē. Lai rezultātus atgrieztu konkrētam modulim, tas ir jāiespējo zemāk. Noteikti veiciet pilnu sistēmas indeksāciju pēc moduļu iespējošanas pilna teksta meklēšanai. Atsevišķus moduļu laukus var iespējot pilna teksta meklēšanai, izmantojot <a href="index.php?module=ModuleBuilder&action=index&type=studio">Studio</a>.<br>
+Lai iespējot moduļus globālai meklēšanai SugarCRM Mobile un Sugar Portal, izmantojiet <a href="index.php?module=Administration&action=UnifiedSearchSettings">Legacy Global Search Configuration</a>. <br>
+Sīkāku informāciju atradīsiet <a href="http://www.sugarcrm.com/crm/product_doc.php?edition=ENT&version=7.7.0.0beta4&lang=en_us&module=FullTextSearch">Meklēšana</a> dokumentācijā.',
     'LBL_UNIFIED_SEARCH_SETTINGS_TITLE' => 'Legacy global search will only be used to return results in SugarCRM Mobile or Sugar Portal global searches. In order for legacy global search to perform a search on a particular module, it must be enabled below. <br>
 To enable modules for global search in the desktop application, use the <a href="index.php?module=Administration&action=GlobalSearchSettings">Full Text Search Configuration</a>. <br>
 For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_doc.php?edition=ENT&version=7.7.0.0beta4&lang=en_us&module=LegacyGlobalSearch">Search</a> documentation.',
@@ -1157,6 +1161,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_PROCESSING_DIR' => 'Apstrādā katalogu {0}',
     'LBL_SPRITES_ADDED' => 'Attēls pievienots {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Faila izslēgšana:{0}',
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Darba grupas atļaujas',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Iespējojiet darba grupas piekļuvi un pārvaldiet piekļuvi pēc moduļa.',
 
     //FTS
     'LBL_FTS_TYPE' => 'Sistēmas tips',
@@ -1227,5 +1235,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Uzklikšķinot iesniegšanas pogas Submit, tiksiet sinhronizēts ar galveno serveri.',
     'LBL_OFFLINE_ENABLED' => 'Bezsaistes režīms ieslēgts',
     'LBL_OFFLINE_SETTINGS' => 'Bezsaistes iestatījumi',
+
 
 );

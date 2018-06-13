@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -48,7 +48,7 @@
      */
     initialize: function(options) {
         //Grab the record list of fields to display from the base metadata
-        var recordListMeta = this._initializeMetadata(options.context);
+        var recordListMeta = this._initializeMetadata(options);
         //Allows sub-views to override and use different view metadata if desired
         options.meta = this._filterMeta(_.extend({}, recordListMeta, options.meta || {}), options);
         this._super("initialize", [options]);
@@ -61,7 +61,7 @@
 
         this.toggledModels = {};
 
-        this.context._recordListFields = this.getFieldNames(null, true);
+        this._addAdditionalFields();
 
         this._currentUrl = Backbone.history.getFragment();
 
@@ -386,40 +386,6 @@
     },
 
     /**
-     * Set the position of scrollable panel
-     * at the left border of the focused element.
-     *
-     * @param {number} left Left position of the focused element.
-     * @deprecated 7.7 and will be removed in 7.8.
-     */
-    setScrollAtLeftBorder: function(left) {
-        var $scrollPanel = this.$('.flex-list-view-content'),
-            leftBorderPosition = this._getBordersPosition().left,
-            scrollLeft = $scrollPanel.scrollLeft();
-
-        left += scrollLeft - leftBorderPosition;
-        $scrollPanel.scrollLeft(left);
-        app.logger.warn('"setScrollAtLeftBorder" method is deprecated and will be removed in 7.8');
-    },
-
-    /**
-     * Set the position of scrollable panel
-     * at the right border of the focused element.
-     *
-     * @param {number} right Right position of the focused element.
-     * @deprecated 7.7 and will be removed in 7.8.
-     */
-    setScrollAtRightBorder: function(right) {
-        var $scrollPanel = this.$('.flex-list-view-content'),
-            rightBorderPosition = this._getBordersPosition().right,
-            scrollLeft = $scrollPanel.scrollLeft();
-
-        right += scrollLeft - rightBorderPosition;
-        $scrollPanel.scrollLeft(right);
-        app.logger.warn('"setScrollAtRightBorder" method is deprecated and will be removed in 7.8');
-    },
-
-    /**
      * Delete the model once the user confirms the action
      */
     deleteModel: function() {
@@ -570,6 +536,12 @@
      * @param {Backbone.Model} model Selected row's model.
      */
     editClicked: function(model, field) {
+        // If a field is locked, we don't allow inline editing. Instead show an alert that links
+        // to the record view or editview to make changes there.
+        if (!_.isEmpty(model.get('locked_fields'))) {
+            this._showLockedFieldWarning(model);
+            return;
+        }
         if (field.def.full_form) {
             var parentModel = this.context.parent.get('model');
             var link = this.context.get('link');
@@ -585,6 +557,45 @@
         if (!_.isEqual(model.attributes, model._syncedAttributes)) {
             model.setSyncedAttributes(model.attributes);
         }
+    },
+
+    /**
+     * Show a warning alert about locked fields on the model. The warning will
+     * link to the Sidecar record view in edit mode or BWC edit view
+     *
+     * @param {Backbone.Model} model the model for the row we are editing
+     * @private
+     */
+    _showLockedFieldWarning: function(model) {
+        var route = app.router.buildRoute(model.module, model.id, 'edit');
+        var recordName = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model));
+        var message = app.lang.get(
+            'LBL_LOCKED_FIELD_INLINE_EDIT',
+            model.module,
+            {link: new Handlebars.SafeString('<a href="javascript:void(0);">' + recordName + '</a>')}
+        );
+        var module = app.metadata.getModule(model.module);
+        app.alert.show('locked_field_inline_edit', {
+            level: 'warning',
+            messages: message,
+            autoClose: false,
+            onLinkClick: function() {
+                app.alert.dismiss('locked_field_inline_edit');
+                var trigger = module.isBwcEnabled;
+                if (!trigger) {
+                    // We need to load the view here to add lockedFieldWarning to the context
+                    // for sidecar modules
+                    app.controller.loadView({
+                        layout: 'record',
+                        module: model.module,
+                        modelId: model.id,
+                        action: 'edit',
+                        lockedFieldsWarning: false
+                    });
+                }
+                app.router.navigate(route, {trigger: trigger});
+            }
+        });
     },
 
     /**
@@ -622,19 +633,18 @@
     },
 
     /**
-     * Adds the favorite field to app.view.View.getFieldNames() if meta.favorites is true
-     * so my_favorite is part of the field list and is fetched
+     * Adds additional fields to the context.
+     *
+     * @private
      */
-    getFieldNames: function(module, onlyDataFields) {
-        //Start with an empty set of fields since the view name in the request will load all fields from the metadata.
-        var fields = onlyDataFields ? [ ] : this._super('getFieldNames', arguments);
+    _addAdditionalFields: function() {
         if (this.meta.favorite) {
-            fields = _.union(fields, ['my_favorite']);
+            this.context.addFields(['my_favorite']);
         }
+
         if (this.meta.following) {
-            fields = _.union(fields, ['following']);
+            this.context.addFields(['following']);
         }
-        return fields;
     },
 
     /**
@@ -649,65 +659,115 @@
 
         this._super('registerShortcuts');
 
-        app.shortcuts.register('List:Inline:Edit', 'e', function() {
-            var self = this;
-            if (this.$('.selected [name=inline-cancel]:visible').length === 0) {
-                this.$('.selected [data-toggle=dropdown]:visible').click();
-                this.$('.selected [name=edit_button]:visible').click();
-                _.defer(function() {
-                    self.$('.selected input:first').focus();
-                });
+        app.shortcuts.register({
+            id: 'List:Inline:Edit',
+            keys: 'e',
+            component: this,
+            description: 'LBL_SHORTCUT_EDIT_SELECTED',
+            handler: function() {
+                var self = this;
+                if (this.$('.selected [name=inline-cancel]:visible').length === 0) {
+                    this.$('.selected [data-toggle=dropdown]:visible').click();
+                    this.$('.selected [name=edit_button]:visible').click();
+                    _.defer(function() {
+                        self.$('.selected input:first').focus();
+                    });
+                }
             }
-        }, this);
+        });
 
-        app.shortcuts.register('List:Delete', 'd', function() {
-            if (this.$('.selected [name=inline-cancel]:visible').length === 0) {
+        app.shortcuts.register({
+            id: 'List:Delete',
+            keys: 'd',
+            component: this,
+            description: 'LBL_SHORTCUT_RECORD_DELETE',
+            handler: function() {
+                if (this.$('.selected [name=inline-cancel]:visible').length === 0) {
+                    this.$('.selected [data-toggle=dropdown]:visible').click().blur();
+                    this.$('.selected [name=delete_button]:visible').click();
+                }
+            }
+        });
+
+        app.shortcuts.register({
+            id: 'List:Inline:Cancel',
+            keys: ['esc','mod+alt+l'],
+            component: this,
+            description: 'LBL_SHORTCUT_CANCEL_INLINE_EDIT',
+            callOnFocus: true,
+            handler: function() {
+                var $cancelButton = this.$('.selected [name=inline-cancel]'),
+                    $focusedInlineEditRow = $(event.target).closest('.tr-inline-edit');
+
+                if ($cancelButton.length > 0) {
+                    clickButton($cancelButton);
+                } else if ($focusedInlineEditRow.length > 0) {
+                    clickButton($focusedInlineEditRow.find('[name=inline-cancel]'));
+                }
+            }
+        });
+
+        app.shortcuts.register({
+            id: 'List:Inline:Save',
+            keys: ['mod+s','mod+alt+a'],
+            component: this,
+            description: 'LBL_SHORTCUT_RECORD_SAVE',
+            callOnFocus: true,
+            handler: function() {
+                var $saveButton = this.$('.selected [name=inline-save]'),
+                    $focusedInlineEditRow = $(event.target).closest('.tr-inline-edit');
+
+                if ($saveButton.length > 0) {
+                    clickButton($saveButton);
+                } else if ($focusedInlineEditRow.length > 0) {
+                    clickButton($focusedInlineEditRow.find('[name=inline-save]'));
+                }
+            }
+        });
+
+        app.shortcuts.register({
+            id: 'List:Favorite',
+            keys: 'f a',
+            component: this,
+            description: 'LBL_SHORTCUT_FAVORITE_RECORD',
+            handler: function() {
+                this.$('.selected .fa-favorite:visible').click();
+            }
+        });
+
+        app.shortcuts.register({
+            id: 'List:Follow',
+            keys: 'f o',
+            component: this,
+            description: 'LBL_SHORTCUT_FOLLOW_RECORD',
+            handler: function() {
                 this.$('.selected [data-toggle=dropdown]:visible').click().blur();
-                this.$('.selected [name=delete_button]:visible').click();
+                this.$('.selected [name=follow_button]:visible').click();
             }
-        }, this);
+        });
 
-        app.shortcuts.register('List:Inline:Cancel', ['esc','ctrl+alt+l'], function(event) {
-            var $cancelButton = this.$('.selected [name=inline-cancel]'),
-                $focusedInlineEditRow = $(event.target).closest('.tr-inline-edit');
-
-            if ($cancelButton.length > 0) {
-                clickButton($cancelButton);
-            } else if ($focusedInlineEditRow.length > 0) {
-                clickButton($focusedInlineEditRow.find('[name=inline-cancel]'));
+        app.shortcuts.register({
+            id: 'List:Preview',
+            keys: 'p',
+            component: this,
+            description: 'LBL_SHORTCUT_PREVIEW_SELECTED',
+            handler: function() {
+                clickButton(this.$('.selected [data-event="list:preview:fire"]:visible'));
             }
-        }, this, true);
+        });
 
-        app.shortcuts.register('List:Inline:Save', ['ctrl+s','ctrl+alt+a'], function(event) {
-            var $saveButton = this.$('.selected [name=inline-save]'),
-                $focusedInlineEditRow = $(event.target).closest('.tr-inline-edit');
-
-            if ($saveButton.length > 0) {
-                clickButton($saveButton);
-            } else if ($focusedInlineEditRow.length > 0) {
-                clickButton($focusedInlineEditRow.find('[name=inline-save]'));
+        app.shortcuts.register({
+            id: 'List:Select',
+            keys: 'x',
+            component: this,
+            description: 'LBL_SHORTCUT_MARK_SELECTED',
+            handler: function() {
+                var $checkbox = this.$('.selected input[type=checkbox]:first');
+                if ($checkbox.is(':visible') && !$checkbox.hasClass('disabled')) {
+                    $checkbox.get(0).click();
+                }
             }
-        }, this, true);
-
-        app.shortcuts.register('List:Favorite', 'f a', function() {
-            this.$('.selected .fa-favorite:visible').click();
-        }, this);
-
-        app.shortcuts.register('List:Follow', 'f o', function() {
-            this.$('.selected [data-toggle=dropdown]:visible').click().blur();
-            this.$('.selected [name=follow_button]:visible').click();
-        }, this);
-
-        app.shortcuts.register('List:Preview', 'p', function() {
-            clickButton(this.$('.selected [data-event="list:preview:fire"]:visible'));
-        }, this);
-
-        app.shortcuts.register('List:Select', 'x', function() {
-            var $checkbox = this.$('.selected input[type=checkbox]:first');
-            if ($checkbox.is(':visible') && !$checkbox.hasClass('disabled')) {
-                $checkbox.get(0).click();
-            }
-        }, this);
+        });
     },
 
     /**

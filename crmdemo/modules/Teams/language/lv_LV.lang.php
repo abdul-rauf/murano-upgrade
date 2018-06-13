@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,27 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => 'Vai tiešām vēlaties dzēst šo ierakstu?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Vai tiešām vēlaties izņemt lietotāju no darba grupas?',
     'LBL_EDITLAYOUT' => 'Rediģēt izkārtojumu' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Darba grupas atļaujas',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Iespējojiet darba grupas piekļuvi un pārvaldiet piekļuvi pēc moduļa.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Iespējot darba grupas atļaujas',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Atlasīt moduļus iespējošanai',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'Iespējojot darba grupas atļaujas, jūs varēsiet piešķirt īpašas piekļuves tiesības darba grupām un lietotājiem atsevišķos moduļos, izmantojot Lomu pārvaldību.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+Atspējojot darba grupas atļaujas modulim, tiks atgriezti visi dati, kas ir saistīti ar darba grupas atļaujām šajā modulī, tostarp jebkādas Procesu definīcijas vai Procesi, kas izmanto šo funkciju. Tas ietver jebkādas Lomas, kas izmanto opciju "Īpašnieks un atlasītā darba grupa" šim modulim, un jebkādas darba grupas atļaujas datu ierakstiem šajā modulī. Tāpat iesakām izmantot rīku Ātrais remonts un pārbūve, lai izdzēstu sistēmas kešatmiņu pēc darba grupas atļauju atspējošanas jebkurā modulī.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Brīdinājums:</strong> Atspējojot darba grupas atļaujas modulim, tiks atgriezti visi dati, kas ir saistīti ar darba grupas atļaujām šajā modulī, tostarp jebkādas Procesu definīcijas vai Procesi, kas izmanto šo funkciju. Tas ietver jebkādas Lomas, kas izmanto opciju "Īpašnieks un atlasītā darba grupa" šim modulim, un jebkādas darba grupas atļaujas datu ierakstiem šajā modulī. Tāpat iesakām izmantot rīku Ātrais remonts un pārbūve, lai izdzēstu sistēmas kešatmiņu pēc darba grupas atļauju atspējošanas jebkurā modulī.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+Atspējojot darba grupas atļaujas modulim, tiks atgriezti visi dati, kas ir saistīti ar darba grupas atļaujām šajā modulī, tostarp jebkādas Procesu definīcijas vai Procesi, kas izmanto šo funkciju. Tas ietver jebkādas Lomas, kas izmanto opciju "Īpašnieks un atlasītā darba grupa" šim modulim, un jebkādas darba grupas atļaujas datu ierakstiem šajā modulī. Tāpat iesakām izmantot rīku Ātrais remonts un pārbūve, lai izdzēstu sistēmas kešatmiņu pēc darba grupas atļauju atspējošanas jebkurā modulī. Ja jums nav piekļuves rīkam Ātrais remonts un pārbūve, sazinieties ar administratoru, kam ir piekļuve Remonta izvēlnei.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Brīdinājums:</strong> Atspējojot darba grupas atļaujas modulim, tiks atgriezti visi dati, kas ir saistīti ar darba grupas atļaujām šajā modulī, tostarp jebkādas Procesu definīcijas vai Procesi, kas izmanto šo funkciju. Tas ietver jebkādas Lomas, kas izmanto opciju "Īpašnieks un atlasītā darba grupa" šim modulim, un jebkādas darba grupas atļaujas datu ierakstiem šajā modulī. Tāpat iesakām izmantot rīku Ātrais remonts un pārbūve, lai izdzēstu sistēmas kešatmiņu pēc darba grupas atļauju atspējošanas jebkurā modulī. Ja jums nav piekļuves rīkam Ātrais remonts un pārbūve, sazinieties ar administratoru, kam ir piekļuve Remonta izvēlnei.
+STR
+,
 );

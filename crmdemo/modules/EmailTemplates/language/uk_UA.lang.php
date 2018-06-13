@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -78,7 +78,7 @@ $mod_strings = array(
     'LBL_CREATED_BY'                    => 'Створено',
     'LBL_FROM_ADDRESS'                  => 'Від (адреса)',
     'LBL_PUBLISHED'                     => 'Опубліковано',
-    'LBL_ACTIVITIES_REPORTS'            => 'Звіт по активностям',
+    'LBL_ACTIVITIES_REPORTS'            => 'Звіт за активностями',
     'LNK_VIEW_MY_INBOX'                 => 'Переглянути мої Email-повідомлення',
     'LBL_ASSIGNED_TO_ID'                => 'Відповідальний (-а)',
     'LBL_EDIT_LAYOUT'                   => 'Редагувати розташування' /*for 508 compliance fix*/,

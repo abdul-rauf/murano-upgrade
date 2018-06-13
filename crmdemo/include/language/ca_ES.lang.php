@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,7 +56,7 @@ $app_list_strings = array (
     'TaxRates'=>'Tipus d&#39;impostos',
     'ContractTypes' => 'Tipus de contracte',
     'Schedulers'=>'Planificadors',
-    'Project'=>'Projecte',
+    'Project'=>'Projectes',
     'ProjectTask'=>'Tasques del projecte',
     'Campaigns'=>'Campanyes',
     'CampaignLog'=>'Registre de campanyes',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Filtre',
     'Comments' => 'Comment',
     'Currencies' => 'Moneda',
-    'Project' => 'Projecte',
     'ProductTemplates' => 'Plantilla de producte',
-    'ProductCategories' => 'Categoria de producte',
     'ProductTypes' => 'Tipus de producte',
     'Shippers' => 'Proveïdor de transport',
     'Subscriptions' => 'Subscripció',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Div",
                 '7'=>"Dis",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Dg",
+            '2'=>"Dl",
+            '3'=>"Dt",
+            '4'=>"Dc",
+            '5'=>"Dj",
+            '6'=>"Dv",
+            '7'=>"Ds",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Diu',
         '1' => 'Dil',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'any(s)',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Fins',
+        'Occurrences' => 'Ocurrències',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Cap',
+        'Each' => 'Tots',
+        'On' => 'El',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'primer',
+        'second' => 'segon',
+        'third' => 'tercer',
+        'fourth' => 'quart',
+        'fifth' => 'cinquè',
+        'last' => 'darrer',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Diumenge',
+        'Mon' => 'Dilluns',
+        'Tue' => 'Dimarts',
+        'Wed' => 'Dimecres',
+        'Thu' => 'Dijous',
+        'Fri' => 'Divendres',
+        'Sat' => 'Dissabte',
+        'Day' => 'Dia',
+        'WD'  => 'Dia feiner',
+        'WE'  => 'Dia de cap de setmana'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Mig',
         'end' => 'Fi',
         'top' => 'Superior',
+        'total' => 'Total',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Embut',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Clar',
       'dark' => 'Fosc',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Moure',
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "Christ Church"),
-            "2" => array("code" => "AND", "name" => "Saint Andrew"),
+            "2" => array("code" => "I", "name" => "Saint Andrew"),
             "3" => array("code" => "GEO", "name" => "Saint George"),
             "4" => array("code" => "JAM", "name" => "Saint James"),
             "5" => array("code" => "JOH", "name" => "Saint John"),
@@ -2595,7 +2714,7 @@ $app_list_strings = array (
             "21" => array("code" => "MET", "name" => "Meta"),
             "22" => array("code" => "NAR", "name" => "Narino"),
             "23" => array("code" => "NDS", "name" => "Norte de Santander"),
-            "24" => array("code" => "PUT", "name" => "Putumayo"),
+            "24" => array("code" => "POSAR", "name" => "Putumayo"),
             "25" => array("code" => "QUI", "name" => "Quindio"),
             "26" => array("code" => "RIS", "name" => "Risaralda"),
             "27" => array("code" => "SAP", "name" => "San Andres y Providencia"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "I", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "O", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Southern Nations - Nationalities"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "O", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "O", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parish"),
             "4" => array("code" => "MAN", "name" => "Manchester Parish"),
             "5" => array("code" => "POR", "name" => "Portland Parish"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "I", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parish"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parish"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parish"),
@@ -3897,7 +4016,7 @@ $app_list_strings = array (
             "28" => array("code" => "NR", "name" => "Nara"),
             "29" => array("code" => "NI", "name" => "Niigata"),
             "30" => array("code" => "OI", "name" => "Oita"),
-            "31" => array("code" => "OK", "name" => "Okayama"),
+            "31" => array("code" => "Acceptar", "name" => "Okayama"),
             "32" => array("code" => "ON", "name" => "Okinawa"),
             "33" => array("code" => "OS", "name" => "Osaka"),
             "34" => array("code" => "SA", "name" => "Saga"),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "O", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -4791,7 +4910,7 @@ $app_list_strings = array (
             "6" => array("code" => "KH", "name" => "Khomas"),
             "7" => array("code" => "KU", "name" => "Kunene"),
             "8" => array("code" => "OW", "name" => "Ohangwena"),
-            "9" => array("code" => "OK", "name" => "Omaheke"),
+            "9" => array("code" => "Acceptar", "name" => "Omaheke"),
             "10" => array("code" => "OT", "name" => "Omusati"),
             "11" => array("code" => "ON", "name" => "Oshana"),
             "12" => array("code" => "OO", "name" => "Oshikoto"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "O", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -6481,8 +6600,8 @@ $app_list_strings = array (
             "45" => array("code" => "ND", "name" => "Dakota del Nord"),
             "46" => array("code" => "MP", "name" => "Northern Mariana Islands"),
             "47" => array("code" => "OH", "name" => "Ohio"),
-            "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "48" => array("code" => "Acceptar", "name" => "Oklahoma"),
+            "49" => array("code" => "O", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pennsylvania"),
             "52" => array("code" => "PR", "name" => "Puerto Rico"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "O", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Seguir l&#39;enllaç',
   'LBL_TOGGLE_VISIBILITY' => 'Alternar la vista', // Record view header panel element
   'LBL_ACTIVITIES' => 'Seqüència d&#39;activitats',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc Tots els drets reservats.',
-  'LBL_TRADEMARK' => 'SugarCRM és una marca registrada de SugarCRM, Inc. Tots els altres noms empresa i productes poden ser marques de les respectives empreses amb què estan associats.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ i Sugar™ són marques registrades de SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Enviar invitació',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar i el cub 3-D són marques comercials registrades de SugarCRM Inc. '.
+        'La resta de noms d&#39;empreses i productes que es fan servir o que surten en aquest producte poden ser marques registrades de '.
+        'les empreses corresponents amb les quals estan associats.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ i Sugar™ són marques registrades de SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Enviar invitació',
   'LBL_INVITEES' => 'Convidats',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'El convidat no rebrà la vostra invitació',
   'LBL_SELECT_ACTION_LABEL' => 'Seleccioneu l&#39;acció',
   'LBL_TOGGLE_DRAWER' => 'Activar/desactivar Drawer',
   'LBL_TOUR_NEXT' => 'Següent',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Afegir' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Logotip de l&#39;empresa' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Calendari' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'navegació pel mòdul principal',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'activar subpanel',
+
     'LBL_ADVANCED' => 'Avançat',
     'LBL_BASIC' => 'Basic',
     'LBL_MODULE_FILTER' => 'Filtrar per',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Equips',
     'LBL_TEAM_SET_ID' => 'Team Set ID',
     'LBL_TEAM_SET'=>'Equip configurat',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Equips seleccionats',
     'LBL_SEARCH_UNAVAILABLE' => 'Cerca no disponible; si us plau, torni a provar-ho més tard.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'El equip primari no esta especificat',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Error intentant eliminar el id primari del equip [{0}] per [{1}] amb el modul amb id [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Motor de cerca no està disponible temporalment.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'S&#39;ha produït un error de temps d&#39;execució del motor de cerca. Contacteu amb l&#39;administrador del sistema.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Un camp que està bloquejat per un procés no es pot editar.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'S&#39;ha trobat una condició causada per un error o avaria general. Els motius d&#39;aquest interval d&#39;excepció normalment estan fora de l&#39;àmbit d&#39;una excepció API més específica.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Indica que el servidor està ocupat, sobrecarregat o que no funciona.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'L&#39;extrem del motor de cerca no està disponible per un problema de connexió. Verifiqui la connectivitat i la configuració a Admin->cerca->prova.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'S&#39;ha produït una excepció d&#39;execució a SearchEngine. Consulti més detalls a sugarcrm.log.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Un camp que està bloquejat per un procés que s&#39;està executant no es pot editar.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s està bloquejat per un procés en execució i no es pot editar.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s estan bloquejats per un procés en execució i no es poden editar.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Un arxiu amb el mateix nom ja existeix al sistema.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Aquest període de temps ja té subperíodes',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Els subperíodes de temps no poden tenir subperíodes',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'No es pot recuperar cap període de temps del tipus: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'No hi ha Períodes de Temps actiu per a la configuració actual.',
     'LBL_CURRENT_TIMEPERIOD' => 'Període de temps actual',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Període de temps anterior',
     'LBL_NEXT_TIMEPERIOD' => 'Pròxim període de temps',
@@ -8532,7 +8664,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => 'Tancar',
     'LBL_ADDITIONAL_DETAILS' => 'Detalls Addicionals',
     'LBL_ADMIN' => 'Admin',
-    'LBL_ALT_HOT_KEY' => 'Alt+',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'Arxiu',
     'LBL_ASSIGNED_TO_USER'=>'Assignat a Usuari',
     'LBL_ASSIGNED_TO' => 'Assignat a:',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Seleccioni camp...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Seleccioni operador...',
     'LBL_FILTER_CREATE_NEW' => 'Crea',
+    'LBL_FILTER_CREATE_FILTER' => 'Crear Filtre',
+    'LBL_FILTER_EDIT_FILTER' => 'Editar filtre',
     'LBL_FILTER_ALL_RECORDS' => 'Tots els registres',
     'TPL_FILTER_SAVE' => 'Ha creat satosfactoriament el filtre {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'De',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Estat/Província:',
     'LBL_STATUS_UPDATED'=>'El seu estat per a aquest esdeveniment ha estat actualitzat!',
+    'LBL_STATUS_NOT_UPDATED' => 'El seu estat per a aquest esdeveniment no s&#39;ha actualitzat.',
     'LBL_STATUS'=>'Estat:',
     'LBL_STREET'=>'Carrer',
     'LBL_SUBJECT' => 'Assumpte',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Tots els drets reservats.<br />SugarCRM és una marca comercial de SugarCRM, Inc altres noms de companyies i productes poden ser marques comercials de les seves respectives companyies amb les quals estan associats.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Tots els drets reservats.<br />SugarCRM, Sugar i el cub 3-D són marques comercials registrades de SugarCRM Inc. '.
+        'La resta de noms d&#39;empreses i productes que es fan servir o que surten en aquest producte poden ser marques registrades de '.
+        'les empreses corresponents amb les quals estan associats.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Treball programat completat',
@@ -9178,7 +9317,8 @@ Atentament, SugarCRM',
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Error. Heu introduït un operador que no és vàlid.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Error. Heu introduït un filtre que no és vàlid.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'La importació ha fallat. Comproveu el registre de Sugar per obtenir més informació.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'La importació ha fallat. Un grup de camp està parcialment blocat en la definició de processos. Aquests camps s&#39;han de desblocar en la definició de processos perquè la definició es pugui importar.',
+    'ERROR_EXP_DATE_LOW' => 'Error. La data de caducitat no pot ser abans de la data de la publicació.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Error. L&#39;estat aprovat requereix data de publicació.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'La data de publicació està en blanc.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9308,6 +9448,7 @@ Atentament, SugarCRM',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'columnes es poden mostrar.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Quadre de comandament',
     'LBL_DASHBOARD_BWC' => 'El meu llegat Dashboard',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'El meu Dashboard',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Ajuda Dashboard',
@@ -9340,9 +9481,6 @@ Atentament, SugarCRM',
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Els meus {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Notícies',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Canal de continguts de Google News pel compte relacionat',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Mètriques d&#39;Oportunitat',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Mètriques d&#39;oportunitat pel compte relacionat. Requereix una subscripció a D&B.',
@@ -9411,7 +9549,6 @@ Atentament, SugarCRM',
 
     'LBL_DASHLET_NO_RECORDS' => 'No s&#39;ha trobat cap registre en aquest moment.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Resum de cas',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Font de Notícies',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interaccions',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Notes i adjunts',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notes i adjunts que pertanyen al registre',
@@ -9920,7 +10057,7 @@ Atentament, SugarCRM',
     'LBL_DNB_BAL_JOBCD_PH' => 'Selecciona la funció del càrrec',
     'LBL_DNB_BAL_ORG_NAME' => 'Nom de l&#39;organizació',
     'LBL_DNB_BAL_IMPORT_AS' => 'Importar com:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Nom de l&#39;organizació',
+    'LBL_DNB_BAL_ORG_NAME' => 'Nom de l&#39;empresa',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'en milions de $USD',
@@ -9979,7 +10116,7 @@ Atentament, SugarCRM',
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Articles més útils publicats a la Base de coneixements',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Mostra els articles de la base de coneixement que més han agradat i que més s&#39;han visualitzat',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtrat per {{label}} "{{value}}"',
 
@@ -10018,6 +10155,13 @@ Atentament, SugarCRM',
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Si us plau, introdueixi un nom de pàgina.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'El meu objectiu',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Objectiu del meu equip",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Gràfic d&#39;objectiu de vendes',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Mostra el gràfic d&#39;objectiu de vendes actual.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Sense Imatge',
 
@@ -10272,6 +10416,8 @@ Atentament, SugarCRM',
     'LBL_SELECT_THIS_ROW_TITLE' => 'Seleccioneu aquesta fila',
     'LBL_TEAM_SELECTED_TITLE' => 'Equip seleccionat',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Seleccioneu per fer d&#39;aquest equip el primàri',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Equip marcat com seleccionat per a treball en equip ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Marcar aquest equip com seleccionat per treball en equip',
     'LBL_SEARCH_AND_SELECT' => 'Cerca i selecciona {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Cerca i Afegeix {{module}}',
 
@@ -10360,6 +10506,9 @@ Atentament, SugarCRM',
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Vista prèvia inhabilitada: no hi ha dades disponibles',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Vista prèvia inhabilitada: a la vista com registre actual',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Vista prèvia inhabilitada: el registra s&#39;ha esborrat o no hiha accés al registre',
+    'LBL_PREVIEW_PREVIOUS' => 'Vista previa anterior',
+    'LBL_PREVIEW_NEXT' => 'Veure següent',
+    'LBL_PREVIEW_CLOSE' => 'Tanca visualització prèvia',
     'LBL_STREAM_NO_RECORDS' => 'Aquest registre no té notes en aquest moment. Si us plau, afegiu una nota fent clic a l&#39;enllaç Afegeix nota.',
     'LBL_DUPLICATES_FOUND' => 'S&#39;han trobat {{duplicateCount}} duplicats.',
     'LBL_NO_DUPLICATES_FOUND' => 'No s&#39;han trobat duplicats.',
@@ -10379,6 +10528,7 @@ Atentament, SugarCRM',
         'Número no vàlid de registres passats. El interval vàlid és des de {{minRecords}} fins a {{maxRecords}} registres.',
     'LBL_MERGE_NO_ACCESS' =>
         'No teniu permís per realitzar aquesta acció. al menys un registre ha de ser editable.',
+    'LBL_MERGE_LOCKED' => 'Alguns dels registres seleccionats per a la combinació contenen camps amb l&#39;edició blocada per un procés i no es poden combinar en aquests moments.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10849,10 +10999,9 @@ Atentament, SugarCRM',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Configuració del sistema',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Estudi',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Clau de pas',
     'LBL_CURRENT_PASSWORD'				=> 'Clau de pas antiga',
-    'LBL_SET_NEW_PASSWORD'              => 'Introduïu la contrasenya',
     'LBL_NEW_PASSWORD1'                 => 'Nova clau de pas',
     'LBL_NEW_PASSWORD2'                 => 'Confirmar clau de pas',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Si us plau, escriu un altre cop per confirmar, la nova clau de pas.',
@@ -10860,13 +11009,12 @@ Atentament, SugarCRM',
     'ERR_ENTER_OLD_PASSWORD'			=> 'Si us plau, escriu la seva clau de pas antiga.',
     'ERR_REENTER_PASSWORDS' => 'Les contrasenyes han de coincidir.',
     'ERR_PASSWORD_MISMATCH' => 'Les claus de pas no coincideixen.',
-    'LBL_NEW_USER_PASSWORD_1' => 'La contrasenya ha estat canviada amb èxit.',
     'LBL_CANNOT_SEND_PASSWORD' => 'No ha pogut enviar-se la contrasenya',
     'LBL_REQUEST_PASSWORD' => 'Sol·liciteu contrasenya',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Error: s&#39;ha produït un problema durant l&#39;actualització de la contrasenya d&#39;aquest usuari.',
     'LBL_INCORRECT_PASSWORD' => 'Error: contrasenya incorrecta',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Idioma preferit:',
+    'LBL_PREFERRED_LANGUAGE' => 'Idioma de preferència:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Seleccioneu un informe',
@@ -10896,6 +11044,18 @@ Atentament, SugarCRM',
     'ERR_HTTP_500_TEXT_LINE1' => 'El servidor ha trobat un error i no ha pogut completar la seva petició.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Si us plau, torni-ho a provar. Si l&#39;error persisteix, contacteu amb l&#39;administrador de Sugar.',
     'ERR_HTTP_500_ACTION' => 'Contacteu el servei d&#39;assitència.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: error de servidor intern 502',
+    'ERR_HTTP_502_TEXT_LINE1' => 'El servidor ha trobat un error temporal i no ha pogut completar la seva petició.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Si us plau, torni-ho a provar. Si l&#39;error persisteix, contacteu amb l&#39;administrador de Sugar.',
+    'ERR_HTTP_502_ACTION' => 'Contacteu el servei tècnic.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: error de servidor intern 503',
+    'ERR_HTTP_503_TEXT_LINE1' => 'El servidor no està disponible per completar la sol·licitud.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Si us plau, torni-ho a provar més tard. Si l&#39;error persisteix, contacteu amb l&#39;administrador de Sugar.',
+    'ERR_HTTP_503_ACTION' => 'Contacteu el servei tècnic.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Mostrar vista ha fallat',
     'ERR_RENDER_FAILED_MSG' => 'Error mostrant una vista',
@@ -11029,6 +11189,7 @@ Atentament, SugarCRM',
     'LBL_ALERT_TITLE_ERROR' => 'Error:',
     'LBL_ALERT_TITLE_LOADING' => 'S&#39;està carregant',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'La versió de l&#39;explorador ja no és compatible o esteu fent servir un explorador incompatible.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Es recomanen les següents versions de navegador: <ul><li>Internet Explorer 11</li> <li>Firefox 41</li> <li>Safari 7.1</li> <li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Si us plau, consulteu la pàgina {{link}} per a navegadors suggerits.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Plataformes suportades',
 
@@ -11081,6 +11242,9 @@ Atentament, SugarCRM',
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Ha ocorregut un error mentre es connectava al servidor. Intenteu-ho de nou.',
     'ERR_RESOLVE_ERRORS' => 'Solucioneu els errors abans de continuar.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Refrescar la llista',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'més',
@@ -11189,10 +11353,13 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM permet a usuaris intensos realitzar ràpidament certes tasques amb dreceres del teclat per augmentar la productivitat. Les taules de la dreta descriuen les dreceres disponibles junt amb les tecles i les accions que realitzen.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Tecles compatibles</h1> <ul><li>tots els caràcters alfanumèrics i símbols</li> <li>maj., ctrl, alt, comanda, mod (ctrl a Windows/Linux i comanda a Mac)</li> <li>intro, esc, espai, tabulador, RePàg, AvPàg, fi, inici, ins, del, retrocés</li></ul> <h1>Característiques compatibles</h1> <ul><li>Combinació de tecles: ctrl + m</li> <li>Tecles múltiples: m, ctrl + m</li> <li>Seqüència de tecles: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Dreceres globals',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Dreceres contextuals',
     'LBL_SHORTCUT_KEY_KEY' => 'Clau',
     'LBL_SHORTCUT_FUNCTION' => 'Funció',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Configura dreceres contextuals',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'No hi ha dreceres contextuals per configurar',
     'LBL_SHORTCUT_HELP' => 'Mostra la pàgina d&#39;ajuda de dreceres',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Alterna el menú de creació ràpida',
     'LBL_SHORTCUT_SEARCH' => 'Centreu-vos al camp de cerca global',
@@ -11240,6 +11407,9 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Seleccionar tots els elements en un camp de selecció múltiple',
     'LBL_SHORTCUT_SWEETSPOT' => 'Alterna la barra Sweet Spot',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Amaga la barra Sweet Spot',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Guardar configuració',
+    'LBL_SHORTCUT_RESTORE' => 'Restaurar valors per defecte',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'S&#39;ha produït un error mentre es desaven claus de drecera personalitzada al servidor. Torneu-ho a provar.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Configuració de {{module}}',
@@ -11262,13 +11432,20 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
     'LBL_CALENDAR_RECURRENCE' => "Recurrència",
     'LBL_CALENDAR_REMINDERS' => "Recordatoris",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Data personalitzada",
     'LBL_CALENDAR_REPEAT_TYPE' => "Tipus de repetició",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Repeteix interval",
     'LBL_CALENDAR_REPEAT_DOW' => "Repeteix els dies entre setmana",
+    'LBL_CALENDAR_REPEAT' => "Repetir",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Repeteix fins que",
     'LBL_CALENDAR_REPEAT_COUNT' => "Repeteix ocurrències",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Repetir selector",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Dies del mes",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Repetir Ordinal",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Repetir la unitat",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Els canvis de recurrència s&#39;han de fer amb el primer registre de la sèrie.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Un esdeveniment que es genera no ocasiona regles de recurrència.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Assisteix',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Refusada',
@@ -11288,17 +11465,23 @@ Per crear un nou registre amb els valors que heu introduït, feu clic a "Ignora 
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 requereix javascript. Habiliteu-lo al vostre navegador per utilitzar Sugar 7.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Les dades serialitzades no s&#39;han pogut deserialitzar',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Les dades serialitzades no s&#39;han pogut deserialitzar perquè contenen referències a objectes o classes',
 
     'LBL_FIELD_TRIMMED' => 'El camp s&#39;ha retallat perquè superava el límit màxim de caràcters.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'El camp supera el límit màxim de caràcters.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => '7 Dies Anteriors',
     '30' => 'Últims 30 Dies',
     '90' => 'Últim Trimestre',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11403,13 +11586,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Caducat',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Esborrany',
-    'Expired' => 'Caducat',
-    'In Review' => 'En revisió',
-    'Published' => 'Publicat',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Accions d&#39;admin.--',
@@ -11421,57 +11597,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Suprimir els articles seleccionats',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Té fitxers adjunts',
-        'none' => 'No Té',
-        'mime' => 'Especificar el tipus Mime',
-        'name' => 'Especifiqueu el nom',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Paraules';
   $app_list_strings['moduleListSingular']['Words'] = 'Paraula';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Crear Article';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => '5 Principals',
-    'Top_10' => '10 Principals',
-    'Top_20' => '20 Principals',
-    'Bot_5'  => '5 Últims',
-    'Bot_10' => '10 Últims',
-    'Bot_20' => '20 Últims',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Tot',
-        'added' => 'Afegit últims 30 dies',
-        'pending' => 'Pendent la meva aprovació',
-        'updated' =>'Actualització últims 30 dies',
-        'faqs' => 'Preguntes freqüents',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'En',
-    'before' => 'Abans',
-    'after' => 'Desprès',
-    'between_dates' => 'Està Entre',
-    'last_7_days' => '7 Dies Anteriors',
-    'next_7_days' => '7 Dies Següents',
-    'last_month' => 'Últim Mes',
-    'this_month' => 'Aquest Mes',
-    'next_month' => 'Mes següent',
-    'last_30_days' => 'Últims 30 Dies',
-    'next_30_days' => '30 Dies Següents',
-    'last_year' => 'Últim Any',
-    'this_year' => 'Aquest Any',
-    'next_year' => 'Any Següent',
-    'isnull' => 'És nul',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12333,6 +12461,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Tots els contactes",
+    "email" => "Només correu electrònic",
+    "phone" => "Només telèfon",
     "prem" => "Només Premium"
 );
 
@@ -12358,4 +12488,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Biografia',
     'Both' => 'Ambdues'
 );
-

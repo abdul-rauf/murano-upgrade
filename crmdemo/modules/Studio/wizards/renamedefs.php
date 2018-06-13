@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -607,6 +607,9 @@ $renamedefs = array(
             array('name' => 'LBL_OPPS_CONFIG_VIEW_BY_DATE_ROLLUP', 'type' => 'singular', 'source' => 'Opportunities'),
             array('name' => 'LBL_OPPS_CONFIG_ALERT', 'type' => 'plural', 'source' => 'Opportunities'),
             array('name' => 'LBL_OPPS_CONFIG_ALERT', 'type' => 'plural', 'source' => 'Forecasts'),
+            array('name' => 'LBL_OPPS_CONFIG_ALERT_TO_OPPS', 'type' => 'plural', 'source' => 'Opportunities'),
+            array('name' => 'LBL_OPPS_CONFIG_ALERT_TO_OPPS', 'type' => 'plural', 'source' => 'Forecasts'),
+            array('name' => 'LBL_OPPS_CONFIG_ALERT_TO_OPPS', 'type' => 'plural', 'source' => 'RevenueLineItems'),
             array('name' => 'LBL_OPPS_CONFIG_SALES_STAGE_1a', 'type' => 'plural', 'source' => 'RevenueLineItems'),
             array('name' => 'LBL_OPPS_CONFIG_SALES_STAGE_1b', 'type' => 'singular', 'source' => 'Opportunities'),
             array('name' => 'LBL_OPPS_CONFIG_SALES_STAGE_2a', 'type' => 'plural', 'source' => 'RevenueLineItems'),
@@ -883,7 +886,6 @@ $renamedefs = array(
         array('name' => 'LBL_ACCESSKEY_CLEAR_ACCOUNTS_TITLE', 'type' => 'singular', 'source' => 'Accounts'),
         array('name' => 'LBL_ACCESSKEY_CLEAR_ACCOUNTS_LABEL', 'type' => 'singular', 'source' => 'Accounts'),
         array('name' => 'LBL_SHIP_TO_ACCOUNT', 'type' => 'singular', 'source' => 'Accounts'),
-        array('name' => 'LBL_DASHLET_NEWS_DESCRIPTION', 'type' => 'singular', 'source' => 'Accounts'),
         array('name' => 'LBL_DASHLET_OPPORTUNITY_DESCRIPTION', 'type' => 'singular', 'source' => 'Accounts'),
 
         // Calls

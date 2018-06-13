@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -154,7 +154,7 @@ class MBLanguage{
                 //FOR GENERIC MENU
                 'LNK_NEW_RECORD' => $mod_strings['LBL_CREATE'] . " " . $this->label_singular,
                 'LNK_LIST' => $mod_strings['LBL_VIEW'] . " " . $this->label,
-                'LNK_IMPORT_' . strtoupper($this->key_name) => translate('LBL_IMPORT') . " " . $this->label_singular,
+                'LNK_IMPORT_' . strtoupper($this->key_name) => translate('LBL_IMPORT') . " " . $this->label,
                 'LBL_SEARCH_FORM_TITLE' => $mod_strings['LBL_SEARCH'] . " " . $this->label_singular,
                 'LBL_HISTORY_SUBPANEL_TITLE' => $mod_strings['LBL_HISTORY'],
                 'LBL_ACTIVITIES_SUBPANEL_TITLE' => $mod_strings['LBL_ACTIVITIES'],

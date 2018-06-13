@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,7 +56,7 @@ $mod_strings = array (
 	'LBL_BUG_FORM_TITLE' => 'Aziende',
 	'LBL_BUGS_SUBPANEL_TITLE' => 'Bug',
 	'LBL_CALLS_SUBPANEL_TITLE' => 'Chiamate',
-	'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE' => 'Log Campagne',
+	'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE' => 'Log campagne',
 	'LBL_CASES_SUBPANEL_TITLE' => 'Reclami',
 	'LBL_CITY' => 'Comune:',
 	'LBL_CONTACTS_SUBPANEL_TITLE' => 'Contatti',
@@ -69,7 +69,7 @@ $mod_strings = array (
 	'LBL_DESCRIPTION' => 'Descrizione:',
 	'LBL_DUPLICATE' => 'Possibile Duplicati Azienda',
 	'LBL_EMAIL' => 'Email:',
-	'LBL_EMAIL_OPT_OUT' => 'Email Opt Out:',
+	'LBL_EMAIL_OPT_OUT' => 'Scelta esclusione email:',
 	'LBL_EMAIL_ADDRESSES' => 'Indirizzi Email',
 	'LBL_EMPLOYEES' => 'Dipendenti:',
 	'LBL_FAX' => 'Fax:',
@@ -165,7 +165,7 @@ $mod_strings = array (
     // SNIP
     'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Email Contatti Relazionati',
     'LBL_FILENAME' => 'Allegato',
-    'LBL_REVENUELINEITEMS' => 'Elementi dell´Opportunità',
+    'LBL_REVENUELINEITEMS' => 'Elementi dell&#39;opportunità',
     'LBL_DUNS_NUM' => 'DUNS:',
     'LBL_DNB_BAL_PREVIEW' => 'Anteprima Aziende',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Note',

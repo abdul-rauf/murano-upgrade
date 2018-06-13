@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -18,11 +18,6 @@
      * Who we should extend
      */
     extendsFrom: 'EnumField',
-
-    /**
-     * Plugins
-     */
-    plugins: ['EllipsisInline', 'Tooltip'],
 
     /**
      * The template for the tooltip
@@ -50,13 +45,27 @@
     tooltipDir: 'right',
 
     /**
+     * Tooltip key for determining which language string to use
+     */
+    tooltipKey: 'LBL_DROPDOWN_TOOLTIP',
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
+        var tooltipCssClasses = '',
+            ttTemplate;
+
         if (app.lang.direction === 'rtl') {
             this.tooltipDir = 'left';
+            tooltipCssClasses = 'force-ltr';
+            this.tooltipKey += '_RTL';
         }
 
+        ttTemplate = app.template.getField('timeperiod', 'tooltip-default');
+        Handlebars.registerPartial('tooltipHtmlTemplate', ttTemplate({
+            cssClasses: tooltipCssClasses
+        }));
 
         var collectionParams = {
             limit: 100,
@@ -90,37 +99,22 @@
     },
 
     /**
-     * @inheritdoc
-     *
-     * Add a change event handler for initializing all the plugin tooltips again
-     */
-    bindDataChange: function() {
-        this._super("bindDataChange");
-        if (this.model) {
-            // when the value changes on the model, we need to initialize the Tooltips again
-            this.model.on('change:' + this.name, function() {
-                this.initializeAllPluginTooltips();
-            }, this);
-        }
-    },
-
-    /**
      * Utility method to take the TimePeriod collection and parse our the start and end dates to be in the user
      * date preference and store them for when the enum is actually opened
-     * @param data
+     * @param {Backbone.Collection} data
      */
     formatTooltips: function(data) {
         var usersDatePrefs = app.user.getPreference('datepref');
         data.each(function(model) {
           this.tpTooltipMap[model.id] = {
-              start :app.date.format(app.date.parse(model.get('start_date')), usersDatePrefs),
+              start: app.date.format(app.date.parse(model.get('start_date')), usersDatePrefs),
               end: app.date.format(app.date.parse(model.get('end_date')), usersDatePrefs)
-          }
+          };
         }, this);
         // since we don't need it any more, destroy it
-        this._destroyTplCollection();
+        this._destroyTpCollection();
 
-        if(this.updateDefaultTooltip) {
+        if (this.updateDefaultTooltip) {
             this.updateDefaultTooltip = false;
             // manually update the default selected item's tooltip
             var tooltipText = app.lang.get('LBL_DROPDOWN_TOOLTIP', 'TimePeriods', this.tpTooltipMap[this.value[0]]);
@@ -129,47 +123,21 @@
     },
 
     /**
-     * @inheritdoc
+     * Since this is specific to fetching the timeperiods and it's a dynamic endpoint
+     * override the module for when it has to load the enum options
+     *
+     * @override
+     * @return {string}
      */
-    _render: function() {
-        this._super("_render");
-        if (this.tplName == 'noaccess') {
-            return this;
-        }
-
-        var $el = this.$(this.fieldTag);
-        $el.on('select2-selected', _.bind(this.onSelectClear, this));
-        $el.on('select2-open', _.bind(this.onSelectOpen, this));
-        $el.on('select2-close', _.bind(this.onSelectClear, this));
-
-        this.initializeAllPluginTooltips();
-
-        return this;
-    },
-
-    /**
-     * On select open, we need to bind the tool tips
-     */
-    onSelectOpen: function() {
-        var $el = $('div.' + this.cssClassSelector);
-        this.removePluginTooltips();
-        this.addPluginTooltips($el);
-    },
-
-    /**
-     * When an item is selected of or the select is closed, we need to clean up the tool tips
-     */
-    onSelectClear: function() {
-        var $el = $('div.' + this.cssClassSelector);
-        this.removePluginTooltips($el);
-        this.addPluginTooltips();
+    getLoadEnumOptionsModule: function() {
+        return 'Forecasts';
     },
 
     /**
      * @inheritdoc
      */
     getSelect2Options: function(optionsKeys) {
-        var options = this._super("getSelect2Options", [optionsKeys]);
+        var options = this._super('getSelect2Options', [optionsKeys]);
 
         // this is to format the results
         options.formatResult = _.bind(this.formatOption, this);
@@ -199,19 +167,20 @@
         return this.tooltipTemplate({
             tooltip: this.tpTooltipMap[object.id],
             value: object.text,
-            tooltipDir: this.tooltipDir
+            tooltipDir: this.tooltipDir,
+            tooltipKey: this.tooltipKey
         });
     },
 
     /**
-     * Disposes the {@link #tplCollection} properly.
+     * Disposes the {@link #tpCollection} properly.
      *
      * @private
      */
-    _destroyTplCollection: function() {
+    _destroyTpCollection: function() {
         if (this.tpCollection) {
             this.tpCollection.off(null, null, this);
-            this.tplCollection = null;
+            this.tpCollection = null;
         }
     },
 
@@ -219,7 +188,7 @@
      * @inheritdoc
      */
     _dispose: function() {
-        this._destroyTplCollection();
+        this._destroyTpCollection();
         this._super('_dispose');
     }
 })

@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'A Visszaigazolás gombra kattintva Ön ki fog törölni MINDEN Előrejelző adatot a Lehetőségek Nézetéből. Ha Ön nem ezt akarta, kattintson a Vissza gombra, hogy visszatérhessen az előző oldal beállításaihoz.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'A megerősítésre kattintva kitörli az ÖSSZES előrejelzés adatot és megváltoztatja a Lehetőségek Nézetet. '
+        .'A bevételi tételek MINDEN cél-modullal rendelkező folyamat meghatározása le lesz tiltva. '
+        .'Ha nem ez volt a szándéka, kattintson a mégse gombra az előző oldalra való visszatéréshez.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Ha minden Bevételi Sortétel be van zárva és legalább egy megnyert tétel van,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'a Lehetőségi Eladások Státusza a "Bezárva Megnyerve" értéket veszi fel.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Ha minden Bevételi Sortétel Eladási Státusza a "Bezárva Elveszítve" értéket veszi fel,',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'A(z) {{plural_module_name}} lehetővé teszik, hogy nyomon kövesse az egyéni eladásokat és az adott eladáshoz tartozó sorokat elölről végig. Minden {{module_name}} egy fejlécet képvisel egy csoporthoz a {{revenuelineitems_module}} közül, valamint kapcsolódik olyan más fontos rekordokhoz, mint például {{quotes_module}}, {{contacts_module}}, stb. Minden {{revenuelineitems_singular_module}} egy adott termék prospektív értékesítése, és tartalmazza a releváns eladási adatokat. Minden {{revenuelineitems_singular_module}} jellemzően külöhböző értékesítési fázisokon megy át, amíg megkapja a "Lezárva, elnyerve" vagy "Lezárva, elveszítve" címkét. A(z) {{module_name}} rekord a(z) {{revenuelineitems_module}} összegét és várható lezárási dátuma. A {{plural_module_name}} és {{revenuelineitems_module}} ennél tovább is emelhetőek a Sugar {{forecasts_singular_module}} moduljának használatával, amelynek segítségével megértheti és képes lesz előre jelezni az értékesítési trendeket, és fókuszálhatja a munkáját annak érdekében, hogy elérje az értékesítési kvótákat.',
+    'LBL_HELP_RECORDS' => 'A {{plural_module_name}} lehetővé teszi az ön számára, hogy nyomon kövesse az egyéni eladásait elejétől-végéig. Minden {{module_name}} rekord képvisel egy leendő eladást és magába foglal jelentős eladási adatokat olyan egyéb fontos rekordokkal kapcsolatban is, mint például {{quotes_module}}, {{contacts_module}}, stb. Egy {{module_name}} fokozatosan fejlődik majd bizonyos eladási státusokon belül, amíg meg nem kapja a "Lezárt" vagy a "Lezárt, elvesztett" jelzést. A {{plural_module_name}} ennél jobban is ellenőzírhető a Sugar {{forecasts_singular_module}}ing modul használatával, mely által megértheti és előrejelezheti az eladások trendjét és fókuszálhat a munkára értékesítési kvóták elérése céljából.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'A(z) {{plural_module_name}} modul segítségével nyomon követheti az egyéni értékesítéseket, és az adott értékesítéshez tartozó sorokat elejétől végéig. Minden {{module_name}} rekord egy {{revenuelineitems_module}} csoport fejlécét képviseli, emellett más fontos rekordokhoz (pl. {{quotes_module}}, {{contacts_module}} stb.) is kapcsolódik.
+    'LBL_HELP_RECORD' => 'A(z) {{plural_module_name}} modul segítségével nyomon követheti az egyéni értékesítéseket, és az adott értékesítéshez tartozó tételeket elejétől a végéig. Minden {{module_name}} rekord egy leendő eladást képvisel, emellett más fontos rekordokhoz (pl. {{quotes_module}}, {{contacts_module}} stb.) is kapcsolódik.
 
 - Szerkessze a rekord mezőit, ehhez kattintson egy egyéni mezőre vagy a Szerkesztés gombra.
-- Tekintse meg vagy módosítsa a többi rekordra mutató hivatkozást az alpaneleken (pl. {{revenuelineitems_module}}), ehhez húzza a bal alsó panelt "Adatnézet"-re.
+- Tekintse meg vagy módosítsa a többi rekordra mutató hivatkozást az alpaneleken, ehhez húzza a bal alsó panelt "Adatnézet"-re.
 - Vigyen be felhasználói bejegyzéseket és rekordmódosítási előzményeket, illetve tekintse meg ezeket itt: {{activitystream_singular_module}}, ehhez húzza a bal alsó panelt "Tevékenységek" nézetre.
 - A rekordnév jobb oldalán található gombokkal kövesse vagy kedvelje ezt a rekordot.
 - További műveletek elérhetők a legördülő Tevékenységek menüben a Szerkesztés gomb jobb oldalán.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'A(z) {{plural_module_name}} modul segítségével nyomon követheti az egyedi eladásokat és az azokhoz tartozó sorokat elejétől-végig. Minden {{module_name}} rekord egy {{revenuelineitems_module}} csoport fejlécét képviseli, és olyan más, fontos rekordokhoz kapcsolódik, mint pl. {{quotes_module}}, {{contacts_module}} stb.
+    'LBL_HELP_CREATE' => 'A(z) {{plural_module_name}} modul segítségével nyomon követheti az egyedi eladásokat és az azokhoz tartozó tételeket elejétől-végig. Minden {{module_name}} rekord egy leendő eladást képvisel, és olyan más rekordhoz kapcsolódó eladási adatokat tartalmaz, mint pl. {{quotes_module}}, {{contacts_module}} stb.
 
 {{module_name}} modul létrehozásához:
 1. Vigye be a mezőkbe a kívánt értékeket.
  - A "Kötelező" jelölésű mezőket mentés előtt ki kell tölteni.
  - Ha szükséges, a "Mutasson többet" gombbal további mezőket is megjeleníthet.
-2. Az új rekord véglegesítéséhez kattintson a "Mentés" gombra, és lépjen vissza az előző oldalra.
-3. Mentés után használja a(z) {{revenuelineitems_module}} alpanelt, hogy sorokat adjon hozzá ehhez: {{module_name}}.',
+2. Az új rekord véglegesítéséhez kattintson a "Mentés" gombra, és lépjen vissza az előző oldalra.',
 
 // END PRO/CORP
 

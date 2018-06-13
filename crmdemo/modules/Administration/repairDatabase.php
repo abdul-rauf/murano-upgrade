@@ -4,7 +4,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -100,7 +100,13 @@ if (is_admin($current_user) || isset ($from_sync_client) || is_admin_for_any_mod
                         // has already been created with indices despite skip_index_rebuild
                         if ($tableExists) {
                             $compareIndices = isset($indices[$tableName]) ? $indices[$tableName] : array();
-                            $sql .= $db->alterTableIndices($tableName, $focus->getIndices(), $compareIndices, $execute);
+                            $sql .= $db->alterTableIndices(
+                                $tableName,
+                                $focus->getFieldDefinitions(),
+                                $focus->getIndices(),
+                                $compareIndices,
+                                $execute
+                            );
                         }
                         $repairedTables[$focus->table_name] = true;
                     }

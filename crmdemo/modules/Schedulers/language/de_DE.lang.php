@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Diagnose-Tool-Dateien entfernen',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Temporäre PDF-Dateien entfernen',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'tracker_sessions-Tabelle aktualisieren',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'E-Mail-Erinnerungen senden',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'E-Mail-Erinnerungsbenachrichtigungen ausführen',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Aufgaben-Warteschlange bereinigen',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Zukünftige Zeiträume anlegen',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent-Artikel aktualisieren.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Genehmigte Artikel veröffentlichen & Artikel aus der Wissensdatenbank auslaufen lassen.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'In Prozess-Autor geplanter Aufgabe',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Geplante Aufgaben für Advanced Workflow',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -117,7 +117,7 @@ $mod_strings = array (
 // Links
 'LNK_LIST_SCHEDULER' => 'Zeitplaner',
 'LNK_NEW_SCHEDULER' => 'Neue Aufgabe',
-'LNK_LIST_SCHEDULED' => 'Geplante Ausgaben',
+'LNK_LIST_SCHEDULED' => 'Geplante Aufgaben',
 // Messages
 'SOCK_GREETING' => "Dies ist die Oberfläche für den Sugar-Zeitplaner. \n[ Verfügbare daemon-Befehle: start|restart|shutdown|status ]\nZum Abbrechen schreiben Sie 'quit'. Um den Dienst zu stoppen, 'shutdown'.\n",
 'ERR_DELETE_RECORD' => 'Zum Löschen des Plans muss eine Datensatznummer angegeben werden.',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Aufgaben aktualisieren',
 'LBL_POLLMONITOREDINBOXES' => 'Eingehende E-Mail-Konten prüfen',
 'LBL_PERFORMFULLFTSINDEX' => 'Volltextsuche Index-System',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Temporäre PDF-Dateien entfernen',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Genehmigte Artikel veröffentlichen & Artikel aus der Wissensdatenbank auslaufen lassen.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch Warteschlangen-Planer',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Diagnose-Tool-Dateien entfernen',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Temporäre Dateien entfernen',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Run Nightly Mass Email Campaigns',
 'LBL_ASYNCMASSUPDATE' => 'Asynchrone Massen-Updates durchführen',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Tracker-Sitzungstabellen aktualisieren',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Zukünftige Zeiträume anlegen',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'E-Mail-Erinnerungen senden',
+'LBL_SENDEMAILREMINDERS'=> 'Senden der E-Mail-Erinnerungen ausführen',
 'LBL_CLEANJOBQUEUE' => 'Auftrags-Warteschlange bereinigen',
 'LBL_CLEANOLDRECORDLISTS' => 'Alte Datensatzlisten bereinigen',
 );

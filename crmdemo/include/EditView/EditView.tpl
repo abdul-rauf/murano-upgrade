@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 *}
+
 {{include file=$headerTpl}}
 {sugar_include include=$includes}
 
@@ -97,7 +98,7 @@ class="yui-navset"
 <tr>
 
 	{{math assign="rowCount" equation="$rowCount + 1"}}
-	
+
 	{{assign var='columnsInRow' value=$rowData|@count}}
 	{{assign var='columnsUsed' value=0}}
 
@@ -137,6 +138,15 @@ class="yui-navset"
 				     (isset($colData.field.displayParams.required) && $colData.field.displayParams.required)}}
 			    <span class="required">{{$APP.LBL_REQUIRED_SYMBOL}}</span>
 			{{/if}}
+
+            {{* Show the lock icon if the field is locked for editing by a process *}}
+            {{* Some views use empty strings as spacers and will not have an actual *}}
+            {{* field name. In those cases, don't worry about the locked field stuff *}}
+            {{if $colData.field.name}}
+            {if $fields.{{$colData.field.name}}.locked == true}
+                {$lockedIcon}
+            {/if}
+            {{/if}}
             {{if isset($colData.field.popupHelp) || isset($fields[$colData.field.name]) && isset($fields[$colData.field.name].popupHelp) }}
               {{if isset($colData.field.popupHelp) }}
                 {capture name="popupText" assign="popupText"}{sugar_translate label="{{$colData.field.popupHelp}}" module='{{$module}}'}{/capture}
@@ -184,7 +194,7 @@ class="yui-navset"
 
 		{{$colData.field.prefix}}
 		{{if !empty($colData.field.name)}}
-			{if $fields.{{$colData.field.name}}.acl > 1}
+			{if $fields.{{$colData.field.name}}.acl > 1 && $fields.{{$colData.field.name}}.locked == false}
 		{{/if}}
 
 			{{if $fields[$colData.field.name] && !empty($colData.field.fields) }}

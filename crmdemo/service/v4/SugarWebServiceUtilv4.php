@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -635,4 +635,24 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 	    return $results;
 
 	}
+
+    /**
+     * Takes in fields array and bean to check acl access against and returns filtered list of fields
+     * @param array $filterFields  list of fields to check acls
+     * @param SugarBean $seed bean containing the fields
+     * @return array $filterFields  returns array of filtered fields
+     */
+    public function checkFieldAccess($filterFields, $seed)
+    {
+        if (empty($filterFields) || empty($seed)) {
+            return $filterFields;
+        }
+        //filter out fields based on ACL Access
+        foreach ($filterFields as $fieldKey => $fieldToCheck) {
+            if (!$seed->ACLFieldAccess($fieldToCheck, 'read')) {
+                unset($filterFields[$fieldKey]);
+            }
+        }
+        return $filterFields;
+    }
 }

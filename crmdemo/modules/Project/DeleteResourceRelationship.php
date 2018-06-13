@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -53,12 +53,13 @@ $result = $projectTaskBean->db->query($query, true, "Unable to select project ta
 $row = $projectTaskBean->db->fetchByAssoc($result);
 
 while ($row != null){
-    $update_query = sprintf(
-        'UPDATE project_task SET resource_id = NULL, assigned_user_id = NULL WHERE id = %s',
-        $projectTaskBean->db->quoted($row['id'])
-    );
 
-    $projectTaskBean->db->query($update_query, true, "Unable to update resource for project task");
+	$update_query = sprintf(
+		'UPDATE project_task SET resource_id = NULL, assigned_user_id = NULL WHERE id = %s',
+		$projectTaskBean->db->quoted($row['id'])
+	);
+
+	$projectTaskBean->db->query($update_query, true, "Unable to update resource for project task");
 
 	$row = $projectTaskBean->db->fetchByAssoc($result);
 }

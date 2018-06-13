@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -194,8 +194,6 @@ $mod_strings = array (
     'LBL_HOMEPAGE_TITLE' => 'Моите контакти',
     'LBL_OPPORTUNITIES' => 'Възможности',
 
-    'LBL_PASSWORD_CHANGE_FORM_TITLE' => 'Смяна на парола',
-    'LBL_OLD_PORTAL_PASSWORD' => 'Стара парола в Портал',
     'LBL_PORTAL_PASSWORD' => 'Парола в Портала',
     'LBL_CONFIRM_PORTAL_PASSWORD' => 'Потвърди паролата в Портала',
     'LBL_LANG_PREF_TOOLTIP' => 'Потребителския интерфейс в Портала за поддръжка е на езика маркиран тук',

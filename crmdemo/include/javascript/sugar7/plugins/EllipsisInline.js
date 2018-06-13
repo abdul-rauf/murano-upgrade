@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,37 +16,36 @@
          */
         app.plugins.register('EllipsisInline', ['view', 'field'], {
 
-            events:{
-                'mouseenter .ellipsis_inline': '_showEllipsisTooltip',
-                'mouseleave .ellipsis_inline': '_hideEllipsisTooltip'
-            },
-
             _$ellipsisTooltips: null, //array of all initialized tooltips
 
             /**
              * Initialize tooltips on render and destroy tooltip before render.
+             *
+             * @deprecated EllipsisInline plugin has been deprecated since 7.8.0
+             *   and will be removed in 7.9.0.
              */
             onAttach: function() {
-                this.before('render', function() {
-                    this.destroyEllipsisTooltips();
-                }, this);
-
-                this.on('render', function() {
-                    this.initializeEllipsisTooltips();
-                }, this);
+                app.logger.warn('EllipsisInline#onAttach: The `EllipsisInline` plugin has been' +
+                    ' deprecated since 7.8.0 and will be removed in 7.9.0. Please remove this plugin from the ' +
+                    'following component: ' + this.toString());
             },
 
             /**
-             * Destory all tooltips on dispose.
+             * Destroy all tooltips on dispose.
              */
-            onDetach: function() {
-                this.destroyEllipsisTooltips();
-            },
+            onDetach: $.noop,
 
             /**
              * Create tooltips for all elements that have `ellipsis_inline` class.
+             *
+             * @deprecated EllipsisInline plugin has been deprecated since 7.8.0
+             *   and will be removed in 7.9.0.
              */
             initializeEllipsisTooltips: function() {
+                app.logger.warn('EllipsisInline#initializeEllipsisTooltips: The `EllipsisInline` plugin has been' +
+                    ' deprecated since 7.8.0 and will be removed in 7.9.0. Please remove this plugin from the ' +
+                    'following component: ' + this.toString());
+
                 var self = this;
                 if (this._$ellipsisTooltips) {
                     app.utils.tooltip.destroy(this._$ellipsisTooltips);
@@ -59,8 +58,15 @@
 
             /**
              * Destroy all tooltips that have been created.
+             *
+             * @deprecated EllipsisInline plugin has been deprecated since 7.8.0
+             *   and will be removed in 7.9.0.
              */
             destroyEllipsisTooltips: function() {
+                app.logger.warn('EllipsisInline#destroyEllipsisTooltips: The `EllipsisInline` plugin has been' +
+                    ' deprecated since 7.8.0 and will be removed in 7.9.0. Please remove this plugin from the ' +
+                    'following component: ' + this.toString());
+
                 if (this._$ellipsisTooltips) {
                     app.utils.tooltip.destroy(this._$ellipsisTooltips);
                 }

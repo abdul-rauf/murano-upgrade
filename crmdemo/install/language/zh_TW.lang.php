@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => '相容性檢查時偵測到錯誤。為確保 SugarCRM 安裝正常工作，請採取適當步驟解決下列問題，然後按一下「重新檢查」按鈕或嘗試重新安裝。',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference 已開啟（在 php.ini 中此選項應設定為關閉）',
 
-	'ERR_CHECKSYS_CURL'					=> '未找到：Sugar 排程器將在功能受限的條件下運行。',
+	'ERR_CHECKSYS_CURL'					=> '未找到：Sugar 工作計劃可以使用的功能有限，電子郵件封存服務將無法使用。',
     'ERR_CHECKSYS_IMAP'					=> '未找到：輸入電子郵件和宣傳活動（電子郵件）要求使用 IMAP 庫。兩者均不能正常工作。',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> '使用 MS SQL Server 時，Magic Quotes GPC 不能轉為「On」。',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> '警告：',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => '資料庫不可用',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '未找到資料庫支援。請確保以下支援的資料庫類型擁有必要的驅動程式：MySQL 或 MS SQLServer。您可能需要根據您的 PHP 版本，取消註解 php.ini 檔案的擴充，或使用正確的二進位檔案重新編譯。請參考 PHP 手冊了解如何啟用資料庫支援的更多資訊。<br><br>SugarCRM PRO 不支援 Oracle 和 DB2 資料庫。如需取得支援的資料庫清單或其他平台資訊，請造訪 <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => '未找到 Sugar 應用程式需要的與 XML 剖析器程式庫關聯的函數。您可能需要根據您的 PHP 版本，取消註解 php.ini 檔案的擴充，或使用正確的二進位檔案重新編譯。請參考 PHP 手冊了解更多資訊。',
+    'LBL_CHECKSYS_CSPRNG' => '亂數產生器',
     'ERR_CHECKSYS_MBSTRING'             => '未找到 Sugar 應用程式需要的與多位元組字串 PHP 擴充 (mbstring) 關聯的函數。<br/><br/>一般，mbstring 模組在 PHP 中預設為不啟用，它必須在建立 PHP 二進位時用 --enable-mbstring 啟用。請參考 PHP 手冊了解如何啟用 mbstring 支援的更多資訊。',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'PHP 設定檔 (php.ini) 中的 session.save_path 未設定或設定為不存在的資料夾。您需要在 php.ini 中設定 save_path setting 或確認 save_path 中設定的資料夾是否存在。',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> '未找到 ZIP 支援：SugarCRM 需要 ZIP 支援以處理壓縮檔。',
     'ERR_CHECKSYS_BCMATH'				=> '未找到 BCMATH 支援：SugarCRM 需要 BCMATH 支援以進行任意精度數學運算。',
     'ERR_CHECKSYS_HTACCESS'             => '.htaccess 重寫測試失敗。這通常意味著您沒有為 Sugar 目錄設定 AllowOverride。',
+    'ERR_CHECKSYS_CSPRNG' => 'CSPRNG 例外狀況',
 	'ERR_DB_ADMIN'						=> '提供的資料庫管理員使用者名稱和/或密碼無效，無法與資料庫建立連接。請輸入有效的使用者名稱和密碼（錯誤：',
     'ERR_DB_ADMIN_MSSQL'                => '提供的資料庫管理員使用者名稱和/或密碼無效，無法與資料庫建立連接。請輸入有效的使用者名稱和密碼。',
 	'ERR_DB_EXISTS_NOT'					=> '指定的資料庫不存在。',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => '一般應用程式功能需要金鑰，但安裝不需要。您現在不需要輸入金鑰，但必須在安裝應用程序之後提供金鑰。',
     'LBL_INSTALL_TYPE_MSG2'             => '安裝需要最少資訊。建議新使用者使用。',
     'LBL_INSTALL_TYPE_MSG3'             => '安裝期間提供需要設定的額外選項。大部分選項亦可在安裝之後從管理員螢幕設定。建議進階使用者使用。',
+    'LBL_INSTALL_TYPE_MSG3'             => '安裝期間提供需要設定的額外選項。大部分選項亦可在安裝之後從管理員螢幕設定。建議進階使用者使用。',
 	'LBL_LANG_1'						=> '如需在 Sugar 使用預設語言（美國英文）以外的其他語言，您現在可以上載並安裝語言套件。您亦可上載並安裝 Sugar 應用程式內部的語言套件。如需跳過此步驟，按一下「下一步」。',
 	'LBL_LANG_BUTTON_COMMIT'			=> '安裝',
 	'LBL_LANG_BUTTON_REMOVE'			=> '移除',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> '授權接受',
     'LBL_LICENSE_CHECKING'              => '檢查系統相容性。',
     'LBL_LICENSE_CHKENV_HEADER'         => '檢查環境',
-    'LBL_LICENSE_CHKDB_HEADER'          => '驗證 DB 認證。',
+    'LBL_LICENSE_CHKDB_HEADER'          => '驗證 DB、FTS 認證。',
     'LBL_LICENSE_CHECK_PASSED'          => '系統已通過相容性檢查。',
     'LBL_LICENSE_REDIRECT'              => '重新導向',
 	'LBL_LICENSE_DIRECTIONS'			=> '如果您有授權資訊，請在下列欄位中輸入。',
@@ -508,7 +511,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => '請在繼續安裝前閱讀以下重要資訊。下列資訊將有助於您確定現在是否已準備好安裝該應用程式。',
 
 
-	'LBL_WELCOME_2'						=> '如需安裝文件，請造訪 <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>。<BR><BR> 您亦可前往 <a href="http://www.sugarcrm.com/forums/" target="_blank">Sugar 論壇</a>，從 Sugar 社群取得幫助。',
+	'LBL_WELCOME_2'						=> '如需安裝文檔，請訪問 <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>。<BR><BR> 如需連絡一名 SugarCRM 支援工程師取得安裝幫助，請登入 <a target="_blank" href="http://support.sugarcrm.com">SugarCRM Support Portal</a>，并提交一份支援案例。',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>選擇您的語言</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> '設定精靈',
 	'LBL_WELCOME_TITLE_WELCOME'			=> '歡迎使用 SugarCRM',
@@ -524,7 +527,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> '夜間執行大量電子郵件推廣活動',
 	'LBL_OOTB_PRUNE'		=> '在月份第 1 天剪除資料庫',
     'LBL_OOTB_TRACKER'		=> '剪除追蹤器表格',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> '執行電子郵件提醒通知',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => '執行電子郵件提醒通知',
     'LBL_UPDATE_TRACKER_SESSIONS' => '更新 tracker_sessions 表格',
     'LBL_OOTB_CLEANUP_QUEUE' => '清理工作佇列',
 
@@ -535,7 +538,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => '搜尋引擎類型',
     'LBL_FTS_HELP'      => '如需啟用全文字搜尋，輸入搜索引擎託管的主機和連接埠。Sugar 為 Elasticsearch 引擎提供內設支援。',
     'LBL_FTS_REQUIRED'    => '需使用彈性搜尋。',
-    'LBL_FTS_ERROR'    => '無法連接全文字搜尋伺服器，請確認您的設定。',
+    'LBL_FTS_CONN_ERROR'    => '無法連接至全文搜尋伺服器，請驗證您的設定',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => '沒有可用全文搜尋伺服器版本，請驗證您的設定。',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => '檢測到不支援的彈性搜尋版本。請使用版本：%s',
 
     'LBL_PATCHES_TITLE'     => '安裝最新修補程式',
     'LBL_MODULE_TITLE'      => '安裝語言套件',

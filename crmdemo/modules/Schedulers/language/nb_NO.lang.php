@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Fjern filer for diagnostikkverktøy',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Fjern midlertidige PDF-filer',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Oppdater tracker_sessions tabell',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Kjør Epostpåminnelsesvarsler',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Kjør påminnelsesvarsler via e-post',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Rens jobbkø',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Opprett fremtidige tidsperioder',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Oppdater KBContent-artikler.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publiser godkjente artikler og KB-artikler som utløper.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Prosessforfatter planlagt jobb',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Oppdater jobber',
 'LBL_POLLMONITOREDINBOXES' => 'Sjekk inngående e-postkontoer',
 'LBL_PERFORMFULLFTSINDEX' => 'Fulltekst Søkeindeks-system',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Fjern midlertidige PDF-filer',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publiser godkjente artikler og Utløpt KB-artikler.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch Queue Scheduler',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Fjern filer av diagnostikkverktøy',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Fjern midlertidige filer',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Kjør nattlige masseutsendelser av e-post-kampanje',
 'LBL_ASYNCMASSUPDATE' => 'Utfør asynkrone masseoppdateringer',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Oppdater Tracker Session tabeller',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Opprett fremtidige tidsperioder',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'Kjør epostpåminnelse-utsendelse',
+'LBL_SENDEMAILREMINDERS'=> 'Kjør sending av e-postpåminnelser',
 'LBL_CLEANJOBQUEUE' => 'Rens jobbkø',
 'LBL_CLEANOLDRECORDLISTS' => 'Opprydding av gamle registeringslister',
 );

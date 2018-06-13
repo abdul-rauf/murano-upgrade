@@ -77,10 +77,11 @@
       min-width: 70px;
     }
     &.alert.alert-warning {
-      background-color: @warningBackground;
+      background-color: @warningTableBackground;
       border-bottom: none;
       border-left: none;
       max-height: none;
+      min-height: auto;
       position: static;
       > div {
         position: absolute;
@@ -89,6 +90,7 @@
         width: 100%;
         height: 42px;
         margin-top: -35px;
+        background: inherit;
         > span {
           font-size: @baseFontSize;
           display: table-cell;
@@ -103,7 +105,6 @@
       width: 100%;
       overflow-x: hidden;
       white-space: nowrap;
-      word-break: break-word;
       vertical-align: middle;
       text-overflow: ellipsis;
     }
@@ -129,7 +130,6 @@
     max-width: 21px;
     padding: 4px 8px;
     white-space: nowrap;
-    word-break: break-word;
     vertical-align: middle;
     text-overflow: ellipsis;
     background: @white;
@@ -191,7 +191,6 @@
       width: 100%;
       display: inline-block;
       white-space: nowrap;
-      word-break: break-word;
       position: relative;
       vertical-align: middle;
     }
@@ -208,9 +207,6 @@
           width: 100%;
         }
       }
-    }
-    .fa-favorite {
-      vertical-align: middle;
     }
     .list + .list .fa-favorite {
       margin: 0 8px;
@@ -246,6 +242,9 @@
       border: 0;
       margin: 4px 6px 4px 0;
     }
+    .datepicker {
+      z-index: initial;
+    }
   }
 
   /* ---------
@@ -262,7 +261,7 @@
     }
     th {
       white-space: normal;
-      word-break: break-word;
+      word-break: break-all;
     }
     td {
       font-weight: bold;
@@ -281,7 +280,6 @@
   TABLE ROW (specific) */
   tbody tr {
     border-top: @tableBorder;
-    border-bottom: @tableBorder;
     //for preview
     &.highlighted {
       &.current {
@@ -525,6 +523,7 @@ FLEXLIST GENERIC */
 .flex-list-view {
   position: relative;
   border-top: @borderWidget;
+  border-bottom: @tableBorder;
   .flex-list-view-content {
     overflow-x: auto;
   }
@@ -579,6 +578,7 @@ FLEXLIST GENERIC */
         overflow: visible;
         z-index: 10;
         padding: 4px 8px;
+        font-size: 0;
         .fieldset-field {
           display: inline-block;
           padding: 0;
@@ -588,9 +588,11 @@ FLEXLIST GENERIC */
         input[type=radio] {
           margin: 8px;
         }
-        .fa-favorite {
-          display: inline-block;
-          margin: 8px 6px;
+        .btn.btn-invisible {
+          margin: 0;
+          &.active {
+            background-color: transparent !important;
+          }
         }
         span.list,
         span.edit {
@@ -740,12 +742,12 @@ FLEXLIST GENERIC */
   /*DUPLICATES*/
   .dataTable.duplicates {
     tr {
-      border-top-color: @warningBorder;
-      border-bottom-color: @warningBorder;
+      border-top-color: lighten(@warningBorder, 5%);
+      border-bottom-color: lighten(@warningBorder, 5%);
     }
     th {
-      background-color: @warningBackground;
-      border-right-color: @warningBorder;
+      background-color: @confirmationBackground;
+      border-right-color: lighten(@warningBorder, 5%);
       &:first-child {
         .btn.checkall:only-child {
           margin-left: 0;
@@ -753,11 +755,16 @@ FLEXLIST GENERIC */
       }
     }
 
-    tbody > tr:not(.current):nth-child(odd) > td {
-      background-color: darken(@warningBackground,5%);
+    tbody > tr.current > td {
+      background-color: @dropdownLinkBackgroundHover;
     }
+
+    tbody > tr:not(.current):nth-child(odd) > td {
+      background-color: darken(@confirmationBackground,5%);
+    }
+
     tbody > tr:not(.current):nth-child(even) > td {
-      background-color: @warningBackground;
+      background-color: @confirmationBackground;
     }
 
   // &.table-striped tbody > tr:not(.current):not(.tr-inline-edit):nth-child(odd) > td {
@@ -792,10 +799,6 @@ FLEXLIST GENERIC */
             right: auto;
           }
         }
-      }
-      .morecol .dropdown {
-        width: 123px;
-        padding-left: 4px;
       }
     }
     /*convert lead dup check*/
@@ -1050,47 +1053,6 @@ table th.nosort span:after {
 .cell-xxlarge {
   min-width: @cell-xxlarge;
   max-width: @cell-xxlarge;
-}
-
-.morecol {
-  .btn {
-    margin: 0;
-  }
-  .dropdown.open {
-    .btn {
-      .box-shadow(none);
-      background-color: @gray;
-      > .fa {
-        color: @white;
-      }
-    }
-  }
-  .dropdown-menu {
-    .border-radius(2px);
-    margin-top: 7px;
-    right: 20px;
-    button {
-      background: none;
-      border: none;
-      padding-left: 30px;
-      width: 100%;
-      text-align: left;
-      margin-left: 0;
-      &.active {
-        font-weight: bold;
-      }
-      .fa {
-        margin-right: 5px;
-        margin-left: -22px;
-      }
-    }
-    li {
-      border-bottom: 1px solid @grayLighter;
-    }
-    li.divider + li {
-      border-top: 1px solid #ddd;
-    }
-  }
 }
 
 [data-type=phone] .gc-cs-link { /*UIUX-1270*/

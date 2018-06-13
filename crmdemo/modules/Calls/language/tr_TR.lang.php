@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'LBL_BLANK'	=> 'LBL_PDF_ITEM_SELECT_DISCOUNT',
+	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Aramalar',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Tel.Araması',
     'LBL_MODULE_TITLE' => 'Tel.Aramaları: Ana Sayfa',
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'E-Posta',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Tüm davetlilere e-posta',
     'LBL_EMAIL_REMINDER' => 'E-Posta Hatırlatıcı',
-    'LBL_EMAIL_REMINDER_TIME' => 'E-Posta Hatırlatma Zamanı',
-    'LBL_POPUP_REMINDER_TIME' => 'Açılır Liste Hatırlatma Zamanı',
+    'LBL_EMAIL_REMINDER_TIME' => 'E-posta Hatırlatma Zamanı',
+    'LBL_POPUP_REMINDER_TIME' => 'Açılır Pencere Hatırlatma Zamanı',
     'LBL_SEND_BUTTON_TITLE'=>'Kaydet & Davet Gönder  [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Kaydet & Davet Gönder',
 	'LBL_DATE_END'=>'Bitiş Tarihi',
 	'LBL_TIME_END'=>'Bitiş Saati',
-	'LBL_REMINDER_TIME'=>'Hatırlatma Saati',
+    'LBL_REMINDER_TIME'=>'Hatırlatma Saati',
     'LBL_EMAIL_REMINDER_SENT' => 'Hatırlatma mesajı gönderildi',
     'LBL_SEARCH_BUTTON'=> 'Ara',
     'LBL_ACTIVITIES_REPORTS' => 'Aktiviteler Raporu',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Bütün Tekrarları Sil',
     'LBL_DATE_END_ERROR' => 'Bitiş Tarihi, Başlangıç Tarihinden önce',
     'LBL_REPEAT_PARENT_ID' => 'Tekrar Eden Üst ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Aramanın yineleme kimliği. Orijinal arama başlangıç tarihi',
     'LBL_RECURRING_SOURCE' => 'Tekrarlanan Kaynak',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Tüm tekrarlanan kayıtları silmek istediğinizden emin misiniz?',
     'LBL_RECURRING_LIMIT_ERROR' => 'Bu tekrarlayan çağrı, maksimum tekrarlama limitini ($limit) aştığı için planlanamaz.',

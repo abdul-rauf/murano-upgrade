@@ -7,7 +7,7 @@ class ViewTest extends SugarView
 {
     public function _construct()
     {
-        parent::SugarView();
+        parent::__construct();
     }
     
      public function preDisplay(){

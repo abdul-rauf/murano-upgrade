@@ -3,13 +3,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 
 class CalendarUtils
 {
@@ -224,13 +226,13 @@ class CalendarUtils
 			}
 		}
 
-		/** 
+        /**
 		 * @var SugarDateTime $start Recurrence start date.
 		 */
 		$start = SugarDateTime::createFromFormat($GLOBALS['timedate']->get_date_time_format(),$date_start);
         $current = clone $start;
 
-		/** 
+        /**
 		 * @var SugarDateTime $end Recurrence end date. Used if recurrence ends by date.
          * To Make the RepeatUntil Date Inclusive, we need to Add 1 Day to End
 		 */
@@ -299,12 +301,14 @@ class CalendarUtils
 	/**
 	 * Save repeat activities
      * Invites are sent once for a Recurring Series (only when the Parent was saved)
-	 * @param SugarBean $bean
+	 * @param Call|Meeting|SugarBean $bean
 	 * @param array $timeArray array of datetimes
 	 * @return array
 	 */
 	static function saveRecurring(SugarBean $bean, $timeArray)
 	{
+        set_time_limit(0); // Required to prevent inadvertent timeouts for large recurring series
+
 		// Here we will create single big inserting query for each invitee relationship
 		// rather than using relationships framework due to performance issues.
 		// Relationship framework runs very slowly
@@ -314,7 +318,7 @@ class CalendarUtils
 		$id = $bean->id;
 		$date_modified = $GLOBALS['timedate']->nowDb();
 
-        $linkData = $clones = array();
+        $linkData = array();
         foreach (array('users', 'contacts', 'leads') as $linkName) {
             if (!$bean->load_relationship($linkName)) {
                 continue;
@@ -334,9 +338,9 @@ class CalendarUtils
             $linkData[$linkName] = array($link->getRelationshipObject()->def, $ids);
         }
 
-		// If the bean has a users_arr then related records for those ids will have
-		// already been created. This prevents duplicates of those records for 
-		// users, contacts and leads (handled below)
+        // If the bean has a users_arr then related records for those ids will have
+        // already been created. This prevents duplicates of those records for
+        // users, contacts and leads (handled below)
         if (isset($linkData['users']) && !empty($bean->users_arr)) {
             $linkData['users'][1] = array_diff($linkData['users'][1], $bean->users_arr);
         }
@@ -356,60 +360,67 @@ class CalendarUtils
         //attribute that incorrectly makes it look like an existing bean
         $clone->fetched_row = false;
 
-		foreach ($timeArray as $date_start) {
-			$clone->id = "";
-			$clone->date_start = $date_start;
-			// TODO CHECK DATETIME VARIABLE
-			$date = SugarDateTime::createFromFormat($GLOBALS['timedate']->get_date_time_format(),$date_start);
-			$date = $date->get("+{$bean->duration_hours} Hours")->get("+{$bean->duration_minutes} Minutes");
-			$date_end = $date->format($GLOBALS['timedate']->get_date_time_format());
-			$clone->date_end = $date_end;
-			$clone->recurring_source = "Sugar";
-			$clone->repeat_parent_id = $id;
-			$clone->update_vcal = false;
+        foreach ($timeArray as $date_start) {
+            $clone->id = create_guid();
+            $clone->new_with_id = true;
+            $clone->date_start = $date_start;
+            // TODO CHECK DATETIME VARIABLE
+            $date = SugarDateTime::createFromFormat($GLOBALS['timedate']->get_date_time_format(),$date_start);
+            $bean->duration_minutes = $bean->duration_minutes ? : 0;
+            $date = $date->get("+{$bean->duration_hours} Hours")->get("+{$bean->duration_minutes} Minutes");
+            $date_end = $date->format($GLOBALS['timedate']->get_date_time_format());
+            $clone->date_end = $date_end;
+            $clone->recurring_source = "Sugar";
+            $clone->repeat_parent_id = $id;
+            $clone->recurrence_id = null;
+            $clone->update_vcal = false;
             $clone->send_invites = false;
-			$clone->save(false);
 
-			if($clone->id){
-                $clone->load_relationship('tag_link');
-                $calendarEvents->reconcileTags($parentTagBeans, $clone);
-                $clones[] = $clone->id;
+            // make sure any store relationship info is not saved
+            $clone->rel_fields_before_value = array();
 
-				if($i < 44){
-					$clone->date_start = $date_start;
-					$clone->date_end = $date_end;
-					$arr[] = array_merge(array('id' => $clone->id),CalendarUtils::get_time_data($clone));
-				}
-				$i++;
-			}
-		}
-		
-        Activity::enable();
+            foreach ($linkData as $linkName => $data) {
+                list($def, $relIds) = $data;
+                $lhsKey = $def['join_key_lhs'];
+                $rhsKey = $def['join_key_rhs'];
+                $table = $def['join_table'];
 
-        foreach ($linkData as $linkName => $data) {
-            list($def, $relIds) = $data;
-            $lhsKey = $def['join_key_lhs'];
-            $rhsKey = $def['join_key_rhs'];
-            $table = $def['join_table'];
+                $fields = array(
+                    'id' => array('name' => 'id', 'type' => 'id'),
+                    $lhsKey => array('name' => $lhsKey, 'type' => 'id'),
+                    $rhsKey => array('name' => $rhsKey, 'type' => 'id'),
+                    'date_modified' => array('name' => 'date_modified', 'type' => 'datetime'),
+                );
 
-            $fields = array(
-                'id' => array('name' => 'id', 'type' => 'id'),
-                $lhsKey => array('name' => $lhsKey, 'type' => 'id'),
-                $rhsKey => array('name' => $rhsKey, 'type' => 'id'),
-                'date_modified' => array('name' => 'date_modified', 'type' => 'datetime'),
-            );
-
-            foreach ($clones as $cloneId) {
                 foreach ($relIds as $relId) {
                     $db->insertParams($table, $fields, array(
                         'id' => create_guid(),
-                        $lhsKey => $cloneId,
+                        $lhsKey => $clone->id,
                         $rhsKey => $relId,
                         'date_modified' => $date_modified,
                     ));
                 }
             }
+
+            // Before calling save, we need to clear out any existing registered AWF
+            // triggered start events so they can continue to trigger.
+            Registry\Registry::getInstance()->drop('triggered_starts');
+
+            $clone->save(false);
+
+            if($clone->id){
+                $clone->load_relationship('tag_link');
+                $calendarEvents->reconcileTags($parentTagBeans, $clone);
+                if($i < 44){
+                    $clone->date_start = $date_start;
+                    $clone->date_end = $date_end;
+                    $arr[] = array_merge(array('id' => $clone->id),CalendarUtils::get_time_data($clone));
+                }
+                $i++;
+            }
         }
+
+        Activity::enable();
 
 		vCal::cache_sugar_vcal($GLOBALS['current_user']);
 		return $arr;
@@ -417,7 +428,7 @@ class CalendarUtils
 
 	/**
 	 * Delete recurring activities and their invitee relationships
-	 * @param SugarBean $bean
+	 * @param Call|Meeting|SugarBean $bean
 	 */
 	static function markRepeatDeleted(SugarBean $bean)
 	{
@@ -453,41 +464,107 @@ class CalendarUtils
 		vCal::cache_sugar_vcal($GLOBALS['current_user']);
 	}
 
-	/**
-	 * check if meeting has repeat children and pass repeat_parent over to the 2nd meeting in sequence
-	 * @param SugarBean $bean
-	 * @param string $beanId
-	 */
-	static function correctRecurrences(SugarBean $bean, $beanId)
-	{
-		global $db;
+    /**
+     * check if meeting has repeat children and pass repeat_parent over to the 2nd meeting in sequence
+     * @param Call|Meeting|SugarBean $bean
+     * @param string $beanId
+     */
+    static function correctRecurrences(SugarBean $bean, $beanId)
+    {
+        global $db;
 
-        if (empty($beanId) || trim($beanId) == '') {
+        if (!$beanId || trim($beanId) == '') {
             return;
         }
-        $qu = "SELECT id FROM {$bean->table_name} WHERE repeat_parent_id = "
-            . $db->quoted($beanId) . " AND deleted = 0 ORDER BY date_start";
-		$re = $db->query($qu);
-		
-		$date_modified = $GLOBALS['timedate']->nowDb();
 
-		$i = 0;
-		while ($ro = $db->fetchByAssoc($re)) {
-			$id = $ro['id'];
-			if($i == 0){
-				$new_parent_id = $id;
-                $qu = "UPDATE {$bean->table_name} SET repeat_parent_id = NULL, recurring_source = NULL, "
-                        . " date_modified = " . $db->convert($db->quoted($date_modified), 'datetime')
-                        . " WHERE id = " . $db->quoted($id);
-			}else{
-                $qu = "UPDATE {$bean->table_name} SET repeat_parent_id = "
-                        . $db->quoted($new_parent_id) . ", date_modified = "
-                        . $db->convert($db->quoted($date_modified), 'datetime')
-                        . " WHERE id = " . $db->quoted($id);
-			}
-			$db->query($qu);
-      		$i++;
-		}
-	}
+        $query = "SELECT id FROM {$bean->table_name} WHERE repeat_parent_id = '{$beanId}' AND deleted = 0 ORDER BY date_start";
+        $result = $db->query($query);
 
+        $date_modified = $GLOBALS['timedate']->nowDb();
+
+        $new_parent_id = false;
+        while ($row = $db->fetchByAssoc($result)) {
+            $id = $row['id'];
+            if (!$new_parent_id) {
+                $new_parent_id = $id;
+                $query = "UPDATE {$bean->table_name} SET repeat_parent_id = NULL, recurring_source = NULL, date_modified = " . $db->convert($db->quoted($date_modified), 'datetime') . " WHERE id = '{$id}'";
+            } else {
+                $query = "UPDATE {$bean->table_name} SET repeat_parent_id = '{$new_parent_id}', date_modified = " . $db->convert($db->quoted($date_modified), 'datetime') . " WHERE id = '{$id}'";
+            }
+            $db->query($query);
+        }
+    }
+
+    /**
+     * get all invites for bean, such as  contacts, leads and users
+     * @param SugarBean|Call|Meeting $bean
+     * @return array
+     */
+    public static function getInvitees(\SugarBean $bean)
+    {
+        /** @var Localization $locale */
+        global $locale;
+
+        $definitions = \VardefManager::getFieldDefs($bean->module_name);
+        if (isset($definitions['invitees']['links'])) {
+            $requiredRelations = $definitions['invitees']['links'];
+        } else {
+            $requiredRelations = array('contacts', 'leads', 'users');
+        }
+
+        $invitees = array();
+        foreach ($requiredRelations as $relationship) {
+            if ($bean->load_relationship($relationship)) {
+                $bean->$relationship->resetLoaded();
+                $bean->$relationship->load();
+                foreach ($bean->$relationship->rows as $beanId => $row) {
+                    /** @var SugarBean $person */
+                    $person = BeanFactory::getBean(ucfirst($relationship), $beanId,
+                        array('disable_row_level_security' => true));
+                    if (!$person) {
+                        continue;
+                    }
+                    if ($person instanceof \User && $beanId == $bean->created_by) {
+                        continue;
+                    }
+                    $invitee = array(
+                        $person->module_name,
+                        $person->id,
+                        $person->emailAddress->getPrimaryAddress($person),
+                        $row['accept_status'],
+                        $locale->formatName($person),
+                    );
+                    $invitees[] = $invitee;
+                }
+            }
+        }
+        return $invitees;
+    }
+
+    /**
+     * Build notification list for Calls and Meetings.
+     *
+     * @param Call|Meeting|SugarBean $event
+     * @return string[]
+     * @throws Exception
+     */
+    public static function buildInvitesList(\SugarBean $event)
+    {
+        if (!($event instanceof \Call) && !($event instanceof \Meeting)) {
+            throw new Exception('$event should be instance of Call or Meeting. Get:' . get_class($event));
+        }
+        $inviteesList = array();
+        $invitees = static::getInvitees($event);
+        foreach ($invitees as $invite) {
+            $inviteesList[$invite[1]] = $invite[0];
+        }
+
+        if (!empty($event->created_by) &&
+            !isset($inviteesList[$event->created_by])
+        ) {
+            $inviteesList[$event->created_by] = 'Users';
+        }
+
+        return $inviteesList;
+    }
 }

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,8 +16,8 @@ define("CREDENTIAL_PASSWORD", "password");
 
 require_once('vendor/nusoap//nusoap.php');
 require_once('include/utils/zip_utils.php');
+SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
 require_once('ModuleInstall/PackageManager/PackageManagerDisplay.php');
-require_once('ModuleInstall/ModuleInstaller.php');
 require_once('ModuleInstall/PackageManager/PackageManagerComm.php');
 
 class PackageManager{
@@ -524,7 +524,8 @@ class PackageManager{
         }
 
         $GLOBALS['log']->debug("INSTALLING: ".$file);
-        $mi = new ModuleInstaller();
+        $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+        $mi = new $moduleInstallerClass();
         $mi->silent = $silent;
         $mod_strings = return_module_language($current_language, "Administration");
              $GLOBALS['log']->debug("ABOUT TO INSTALL: ".$file);
@@ -589,7 +590,8 @@ class PackageManager{
                 if(!isset($GLOBALS['mi_remove_tables']))$GLOBALS['mi_remove_tables'] = true;
                 $unzip_dir = mk_temp_dir( $base_tmp_upgrade_dir );
                 unzip($found->filename, $unzip_dir );
-                $mi = new ModuleInstaller();
+                $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+                $mi = new $moduleInstallerClass();
                 $mi->silent = true;
                 $mi->uninstall( "$unzip_dir");
                 $found->delete();
@@ -734,7 +736,7 @@ class PackageManager{
                         'description' => $description,
                         'uninstallable' => $uninstallable,
                         'type' => $type,
-                        'file' => fileToHash($upgrade_content),
+                        'file' => fileToHash(urlencode($upgrade_content)),
                         'file_install' => fileToHash($upgrade_content),
                         'unFile' => fileToHash($upgrade_content)
                     );

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -38,7 +38,7 @@ $mod_strings = array (
   'LBL_LIST_DEPARTMENT' => 'Departman',
   'LBL_LIST_REPORTS_TO_NAME' => 'Rapor Edilen Kişi:',
   'LBL_LIST_EMAIL' => 'E-Posta',
-  'LBL_LIST_PRIMARY_PHONE' => 'Asıl Telefon',
+  'LBL_LIST_PRIMARY_PHONE' => 'Birincil Telefon',
   'LBL_LIST_USER_NAME' => 'Kullanıcı İsmi',
   'LBL_LIST_ADMIN' => 'Sistem Yöneticisi',
   'LBL_NEW_EMPLOYEE_BUTTON_TITLE' => 'Yeni Çalışan',
@@ -81,7 +81,7 @@ $mod_strings = array (
   'LBL_HOME_PHONE' => 'Ev Telefonu:',
   'LBL_WORK_PHONE' => 'İş Telefonu:',
   'LBL_EMPLOYEE_STATUS' => 'İş Durumu:',
-  'LBL_PRIMARY_ADDRESS' => 'Asıl Adres:',
+  'LBL_PRIMARY_ADDRESS' => 'Birincil Adres:',
   'LBL_SAVED_SEARCH' => 'Yerleşim Seçenekleri',
   'LBL_CREATE_USER_BUTTON_TITLE' => 'Kullanıcı Oluştur',
   'LBL_CREATE_USER_BUTTON_LABEL' => 'Kullanıcı Oluştur',

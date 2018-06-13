@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'خطأ: بيانات اعتماد مفقودة',
     'ERR_NO_UID' => 'خطأ: لا يوجد UID',
     'ERR_NO_IEID' => 'خطأ: لا يوجد ieID',
+    'ERR_INVALID_RECIPIENTS' => 'هناك مستلم واحد أو أكثر بعنوان بريد إلكتروني غير صالح. ' .
+        'الرجاء تصحيح ذلك ثم المحاولة مرة أخرى.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'عنوان بريد إلكتروني غير صالح',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'لم يتم تحديد مستلمين',

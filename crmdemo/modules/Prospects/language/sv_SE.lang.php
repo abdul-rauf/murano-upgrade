@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -131,7 +131,7 @@ $mod_strings = array (
   'LNK_IMPORT_PROSPECT' => 'Importera targets',
   'LBL_SELECT_CHECKED_BUTTON_LABEL' => 'Välj markerade targets',
   'LBL_SELECT_CHECKED_BUTTON_TITLE' => 'Välj markerade targets',
-  'LBL_INVALID_EMAIL'=>'Ogiltig e-postadress:',
+  'LBL_INVALID_EMAIL'=>'Ogiltig emailadress:',
   'LBL_DEFAULT_SUBPANEL_TITLE'=>'Mål',
   'LBL_PROSPECT_LIST' => 'Prospek lista',
   'LBL_CONVERT_BUTTON_KEY' => 'V',
@@ -177,7 +177,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{module_name}} modulen består av enskilda människor som är okvalificerade men du har någon information om, men är ännu inte ett kvalificerad {{leads_singular_module}}. Information (t.ex. namn, e-postadress) om dessa {{plural_module_name}} köps normalt från visitkort som du får samtidigt delta olika trades shower, konferenser etc. {{plural_module_name}} i Sugar är fristående dokument som inte är relaterade till {{contacts_module}}, {{leads_module}}, {{accounts_module}} eller {{opportunities_module}}. Det finns olika sätt du kan skapa {{plural_module_name}} i Sugar som via {{plural_module_name}} modul, importera {{plural_module_name}}, etc. När {{module_name}} post skapas, kan du visa och redigera information som rör den {{module_name}} via {{plural_module_name}} detaljvyn.".',
+    'LBL_HELP_RECORDS' => '{{module_name}} modulen består av enskilda människor som är okvalificerade men du har någon information om, men är ännu inte ett kvalificerad {{leads_singular_module}}. Information (t.ex. namn, emailadress) om dessa {{plural_module_name}} köps normalt från visitkort som du får samtidigt delta olika trades shower, konferenser etc. {{plural_module_name}} i Sugar är fristående dokument som inte är relaterade till {{contacts_module}}, {{leads_module}}, {{accounts_module}} eller {{opportunities_module}}. Det finns olika sätt du kan skapa {{plural_module_name}} i Sugar som via {{plural_module_name}} modul, importera {{plural_module_name}}, etc. När {{module_name}} post skapas, kan du visa och redigera information som rör den {{module_name}} via {{plural_module_name}} detaljvyn.".',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '"{{module_name}}modulen består av folk som är lösa prospects som du kanske har lite information om, med som inte än är en full {{leads_singular_module}}.

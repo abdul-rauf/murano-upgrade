@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -23,7 +23,6 @@
      * @inheritdoc
      */
     initialize: function(options) {
-        this.plugins = _.union(this.plugins, ['Tooltip']);
         this._super('initialize', [options]);
 
         //Store left column fields
@@ -76,8 +75,10 @@
         //add an event delegate for right action dropdown buttons onclick events
         if (this.rightColumns.length) {
             rightColumnsEvents = {
-                'hidden.bs.dropdown .flex-list-view .actions': 'resetDropdownDelegate',
-                'shown.bs.dropdown .flex-list-view .actions': 'delegateDropdown'
+                'hidden.bs.dropdown .actions': 'resetDropdownDelegate',
+                'shown.bs.dropdown .actions': 'delegateDropdown',
+                'shown.bs.dropdown .morecol': '_toggleAria',
+                'hidden.bs.dropdown .morecol': '_toggleAria'
             };
         }
 
@@ -126,6 +127,19 @@
                 // detect window bottom collision on scroll
                 $buttonGroup.toggleClass('dropup', needsDropupClass($buttonGroup));
             }, 30), this));
+    },
+
+    /**
+     * Sets a button accessibility class 'aria-expanded' to true or false
+     * depending on if the dropdown menu is open or closed.
+     *
+     * @param {Event} provides the needed currentTarget
+     * @private
+     */
+    _toggleAria: function(e) {
+        var $dropdown = this.$(e.currentTarget).find('.dropdown'),
+            $button = $dropdown.find('[data-toggle="dropdown"]');
+        $button.attr('aria-expanded', $dropdown.hasClass('open'));
     },
 
     addPreviewEvents: function () {
@@ -745,13 +759,13 @@
         // If there are drawers, make sure we're updating only list views on active drawer.
         if (_.isUndefined(app.drawer) || app.drawer.isActive(this.$el)) {
             this._previewed = model;
-            this.$("tr.highlighted").removeClass("highlighted current above below");
+            this.$('.btn.rowaction.active').removeClass('active').attr('aria-pressed', false);
+            this.$("tr.highlighted").removeClass("highlighted current");
             if (model) {
                 var rowName = model.module + "_" + model.id;
                 var curr = this.$("tr[name='" + rowName + "']");
                 curr.addClass("current highlighted");
-                curr.prev("tr").addClass("highlighted above");
-                curr.next("tr").addClass("highlighted below");
+                this.$('tr.current .btn.rowaction').addClass('active').attr('aria-pressed', true);
             }
         }
     },

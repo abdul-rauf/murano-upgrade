@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -305,7 +305,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Velg <b>Grensesnitt å redigere</b>.<br/><br/>For å endre grensesnittet som inneholder datafelt for dataangivelse, klikk på <b>Rediger-visning</b>.<br/><br/>For å endre grensesnittet som viser de angitte dataene i feltene i rediger-visningen, klikk på <b>Detaljvisning</b>.<br/><br/>For å endre kolonnene som vises i standardlisten, klikk på <b>Listevisning</b>.<br/><br/>For å endre grunnleggende og avansert søkeskjemagrensesnitt, klikk på <b>Søk</b>.',
         'subpanelHelp'=> 'Velg et <b>underpanel</b> som du vil redigere.',
         'searchHelp' => 'Velg et <b>søkegrensesnitt</b> som du vil redigere.',
-        'labelsBtn'	=> 'Klikk på <b>Lagre</b> for å lagre de tilpassede etikettene dine.',
+        'labelsBtn'	=> 'Rediger <b>etikettene</b> å vise verdier i denne modulen.',
         'newPackage'=>'Klikk på <b>Ny pakke</b> for å opprette en ny pakke.',
         'mbHelp'    => '<b>Velkommen til modulbyggeren.</b><br/><br/>Bruk <b>modulbyggeren</b> til å opprette pakker med tilpassede moduler basert på standard eller tilpassede objekter. <br/><br/>For å begynne, klikk på <b>Ny pakke</b> for å opprette en ny pakke eller å velge en pakke du vil redigere.<br/><br/> En <b>pakke</b> handler som en beholder for tilpassede moduler – alle en del av ett prosjekt. Pakken kan inneholde én eller flere tilpassede moduler som kan relateres til hverandre eller til moduler i programmet. <br/><br/>Eksempler: Du vil kanskje opprette en pakke med én tilpasset modul som er relatert til standard kontomodul. Eller kanskje du vil opprette en pakke med flere nye moduler som jobber sammen som et prosjekt og relateres til hverandre og modulene i programmet.',
         'exportBtn' => 'Klikk på <b>Eksporter tilpasninger</b> for å opprette en pakke som inneholder tilpasninger gjort i Studio for bestemte moduler.',
@@ -711,6 +711,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Name - Must be alphanumeric with no spaces and starting with a letter',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Pakkenøkkelen finnes allerede',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Pakkenavnet finnes allerede',
+'LBL_JS_PACKAGE_NAME'=>'Pakkenavn - Må starte bed en bokstav og kan kun bestå av bokstaver, tall og understrek. Mellomrom eller andre spesialtegn kan ikke brukes.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Nøkkel - Må være alfanumerisk og begynne med en bokstav.',
 'LBL_JS_VALIDATE_KEY'=>'Nøkkel - Må være alfanumerisk',
 'LBL_JS_VALIDATE_LABEL'=>'Angi en etikett som skal brukes som visningsnavnet til modulen',
@@ -735,8 +736,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Er du sikker på at du vil slette dette forholdet?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Dette vil gjøre dette forholdet permanent. Er du sikker på at du vil distribuere dette forholdet?',
 'LBL_CONFIRM_DONT_SAVE' => 'Endringer har blitt gjort siden din siste lagring, vil du lagre?',

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -364,7 +364,7 @@ $mod_strings = array (
     //Campaign charts
     'LBL_CAMPAIGN_RETURN_ON_INVESTMENT' =>'Kampanjens ROI',
     'LBL_CAMPAIGN_RESPONSE_BY_RECIPIENT_ACTIVITY'=>'Kampanjens resultat jämfört mottagarnas aktivitet',
-    'LBL_LOG_ENTRIES_BLOCKEDD_TITLE'=>'Stoppad av epostadress eller domän',
+    'LBL_LOG_ENTRIES_BLOCKEDD_TITLE'=>'Dämpad efter adress eller domän',
 
     'LBL_AMOUNT_IN' => 'Summa i',
 
@@ -387,14 +387,14 @@ $mod_strings = array (
     'LBL_MODIFIED_USER' => 'Ändrad användare',
     'LBL_LOG_ENTRIES' => 'Loggposter',
     'LBL_PROSPECTLISTS_SUBPANEL_TITLE' => 'Prospektlista',
-    'LBL_EMAILMARKETING_SUBPANEL_TITLE' => 'Epostutskick',
+    'LBL_EMAILMARKETING_SUBPANEL_TITLE' => 'Emailutskick',
     'LBL_TRACK_QUEUE_SUBPANEL_TITLE' => 'Track kö',
     'LBL_TARGETED_SUBPANEL_TITLE' => 'Mål',
     'LBL_VIEWED_SUBPANEL_TITLE' => 'Visade',
     'LBL_LINK_SUBPANEL_TITLE' => 'Länka',
     'LBL_LEAD_SUBPANEL_TITLE' => 'Möjlig kund',
     'LBL_CONTACT_SUBPANEL_TITLE' => 'Kontakt',
-    'LBL_INVALID EMAIL_SUBPANEL_TITLE' => 'Ogiltig epostadress',
+    'LBL_INVALID EMAIL_SUBPANEL_TITLE' => 'Ogiltig emailadress',
     'LBL_SEND ERROR_SUBPANEL_TITLE' => 'Fel vid skicka',
     'LBL_REMOVED_SUBPANEL_TITLE' => 'Borttagen',
     'LBL_BLOCKED_SUBPANEL_TITLE' => 'Blockerad',
@@ -417,8 +417,8 @@ $mod_strings = array (
 	'LBL_DELETE_INLINE' => 'Radera' /*for 508 compliance fix*/,
 	'LBL_DELETE' => 'Radera' /*for 508 compliance fix*/,
     'LBL_VIEW_INLINE' => 'Visa',
-    'ERR_NO_OPTS_SAVED'		=> 'Inga optimum sparades med ditt inkommande epostkonto.',
-    'ERR_REVIEW_EMAIL_SETTINGS' => 'Gå igenom inkommande e-postinställningar.',
+    'ERR_NO_OPTS_SAVED'		=> 'Inga optimum sparades med ditt inkommande emailkonto.',
+    'ERR_REVIEW_EMAIL_SETTINGS' => 'Gå igenom inkommande emailinställningar.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} leads som var skapade genom den här kampanjen kommer att raderas efter skapandet.',
 );
 

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -32,6 +32,12 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'jsonParams' => array(),
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastManagerWorksheetGet.html',
+                'exceptions' => array(
+                    'SugarApiExceptionError',
+                    'SugarApiExceptionInvalidParameter',
+                    'SugarApiExceptionNotAuthorized',
+                    'SugarApiExceptionNotFound',
+                ),
             ),
             'forecastWorksheetTimePeriodGet' => array(
                 'reqType' => 'GET',
@@ -41,6 +47,12 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'jsonParams' => array(),
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastManagerWorksheetGet.html',
+                'exceptions' => array(
+                    'SugarApiExceptionError',
+                    'SugarApiExceptionInvalidParameter',
+                    'SugarApiExceptionNotAuthorized',
+                    'SugarApiExceptionNotFound',
+                ),
             ),
             'forecastWorksheetTimePeriodUserIdGet' => array(
                 'reqType' => 'GET',
@@ -50,6 +62,12 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'jsonParams' => array(),
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastManagerWorksheetGet.html',
+                'exceptions' => array(
+                    'SugarApiExceptionError',
+                    'SugarApiExceptionInvalidParameter',
+                    'SugarApiExceptionNotAuthorized',
+                    'SugarApiExceptionNotFound',
+                ),
             ),
             'forecastWorksheetChartGet' => array(
                 'reqType' => 'GET',
@@ -58,7 +76,13 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'method' => 'forecastManagerWorksheetsChartGet',
                 'jsonParams' => array(),
                 'shortHelp' => 'Filter records and reformat data for chart presentation',
-                'longHelp' => 'modules/Forecasts/clients/base/api/help/forecastManagerWorksheetsChartGet.html'
+                'longHelp' => 'modules/Forecasts/clients/base/api/help/forecastManagerWorksheetsChartGet.html',
+                'exceptions' => array(
+                    'SugarApiExceptionError',
+                    'SugarApiExceptionInvalidParameter',
+                    'SugarApiExceptionNotAuthorized',
+                    'SugarApiExceptionNotFound',
+                ),
             ),
             'forecastWorksheetChartTimePeriodGet' => array(
                 'reqType' => 'GET',
@@ -67,7 +91,13 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'method' => 'forecastManagerWorksheetsChartGet',
                 'jsonParams' => array(),
                 'shortHelp' => 'Filter records and reformat data for chart presentation',
-                'longHelp' => 'modules/Forecasts/clients/base/api/help/forecastManagerWorksheetsChartGet.html'
+                'longHelp' => 'modules/Forecasts/clients/base/api/help/forecastManagerWorksheetsChartGet.html',
+                'exceptions' => array(
+                    'SugarApiExceptionError',
+                    'SugarApiExceptionInvalidParameter',
+                    'SugarApiExceptionNotAuthorized',
+                    'SugarApiExceptionNotFound',
+                ),
             ),
             'forecastWorksheetChartTimePeriodUserIdGet' => array(
                 'reqType' => 'GET',
@@ -76,7 +106,13 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'method' => 'forecastManagerWorksheetsChartGet',
                 'jsonParams' => array(),
                 'shortHelp' => 'Filter records and reformat data for chart presentation',
-                'longHelp' => 'modules/Forecasts/clients/base/api/help/forecastManagerWorksheetsChartGet.html'
+                'longHelp' => 'modules/Forecasts/clients/base/api/help/forecastManagerWorksheetsChartGet.html',
+                'exceptions' => array(
+                    'SugarApiExceptionError',
+                    'SugarApiExceptionInvalidParameter',
+                    'SugarApiExceptionNotAuthorized',
+                    'SugarApiExceptionNotFound',
+                ),
             ),
             'filterModuleGet' => array(
                 'reqType' => 'GET',
@@ -86,6 +122,12 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'jsonParams' => array('filter'),
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastManagerWorksheetFilter.html',
+                'exceptions' => array(
+                    'SugarApiExceptionError',
+                    'SugarApiExceptionInvalidParameter',
+                    'SugarApiExceptionNotAuthorized',
+                    'SugarApiExceptionNotFound',
+                ),
             ),
             'filterModulePost' => array(
                 'reqType' => 'POST',
@@ -95,6 +137,12 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
                 'jsonParams' => array('filter'),
                 'shortHelp' => 'Filter records from a single module',
                 'longHelp' => 'modules/Forecasts/clients/base/api/help/ForecastManagerWorksheetFilter.html',
+                'exceptions' => array(
+                    'SugarApiExceptionError',
+                    'SugarApiExceptionInvalidParameter',
+                    'SugarApiExceptionNotAuthorized',
+                    'SugarApiExceptionNotFound',
+                ),
             ),
         );
     }

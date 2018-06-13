@@ -1,15 +1,15 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
-* Your installation or use of this SugarCRM file is subject to the applicable
-* terms available at
-* http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
-* If you do not agree to all of the applicable terms or do not have the
-* authority to bind the entity as an authorized representative, then do not
-* install or use this SugarCRM file.
-*
-* Copyright (C) SugarCRM Inc. All rights reserved.
-*/
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
 $dictionary['ProductTemplate'] = array(
     'table' => 'product_templates',
     'comment' => 'The Admin view of a Product in Product Catalog; used as template for a product instance',
@@ -20,7 +20,6 @@ $dictionary['ProductTemplate'] = array(
             'name' => 'type_id',
             'type' => 'id',
             'required' => false,
-            'function' => array('name'=>'getProductTypes', 'returns'=>'html'),
             'reportable' => false,
             'vname' => 'LBL_TYPE_ID',
             'importable' => 'true',
@@ -29,7 +28,6 @@ $dictionary['ProductTemplate'] = array(
         'manufacturer_id' => array(
             'name' => 'manufacturer_id',
             'type' => 'id',
-            'function' => array('name'=>'getManufacturers', 'returns'=>'html'),
             'required'=>false,
             'reportable'=>false,
             'vname' =>'LBL_LIST_MANUFACTURER_ID',
@@ -91,7 +89,6 @@ $dictionary['ProductTemplate'] = array(
             'len' => '255',
             'source' => 'non-db',
             'importable' => 'true',
-            'studio' => false,
         ),
         'mft_part_num' => array(
             'name' => 'mft_part_num',

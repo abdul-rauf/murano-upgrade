@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -274,8 +274,9 @@ $mod_strings = array (
     'LBL_DST_UPGRADE' => 'Oppgrader:',
     'LBL_EDIT_CUSTOM_FIELDS' => 'Endre tilpassede områder',
     'LBL_EDIT_TABS'=>'Endre etiketter',
-    'LBL_EMAIL_TITLE' => 'E-postadresse',
-    'LBL_EMAIL_DESC' => 'Administrer utgående og innkommende e-postmeldinger. Disse innstillingene må konfigureres slik at brukerne kan sende e-post og nyhetsbrevskampanjer.',
+    'LBL_EMAIL_TITLE' => 'E-post',
+    'LBL_EMAIL_DESC' => 'Behandle innkommende og utgående e-poster. E-postinnstillingene må konfigureres for å ' .
+                        'gjør det mulig for brukere å sende ut e-post og nyhetsbrev.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'En primær e-postadresse er nødvendig for hver bruker for å bruke denne funksjonen.',
 	'LBL_ENABLE_MAILMERGE' => 'Tillatt e-postfusjonering?',
 	'LBL_ENABLED' => 'Aktivert',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Bestem lokale forhåndsinnstillinger for ditt system',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- Brukernavnet for den personen som betjener denne offline-klienten',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Avslutt brukernavn:',
-    'LBL_MAILBOX_DESC' => 'Sett opp e.postkontoer som skal overvåkes for innkommende e-post',
+    'LBL_MAILBOX_DESC' => 'Konfigurere gruppekontoer for e-post for overvåking av innkommende e-post ' .
+        'og administrere personlig kontoinformasjon for innkommende e-post for brukere',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Kontrakttyper',
     'LBL_MANAGE_CURRENCIES' => 'Valutaer',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Administrer grupper',
@@ -417,7 +419,7 @@ $mod_strings = array (
     'LBL_MANAGE_MAILBOX' => 'Innkommende e-post',
     'LBL_MANAGE_OFFLINE_CLIENT'   => 'Vis offline-klienter',
     'LBL_MANAGE_OPPORTUNITIES' => 'Muligheter',
-    'LBL_MANAGE_PASSWORD_TITLE' => 'Passord administrasjon',
+    'LBL_MANAGE_PASSWORD_TITLE' => 'Passordadministrasjon',
     'LBL_MANAGE_PASSWORD'=>'Administrer passord krav og utløp',
     'LBL_MANAGE_RELEASES' => 'Utsendelser',
     'LBL_MANAGE_ROLES_TITLE' => 'Administrasjon av roller',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Gjenoppbygger JS-grupperingsfiler',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Binder sammen og overskriver eksisterende gruppefiler med de nyeste versjonene av gruppefiler',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Reparer javascript-filer',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Reparer JS-filer',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Behandler filer. Dette kan ta flere minutter. Prosessen blir ikke påvirket av at du går til en annen side, så se deg omkring hvis du føler for det eller vent på bekreftelse...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Behandling av filer er ferdig.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Reparasjon av Ikke-Små bokstaver feltene',
@@ -736,7 +740,7 @@ $mod_strings = array (
     'LBL_STUDIO_TITLE' => 'Verktøy for utvikling',
     'LBL_STUDIO' => 'Studio',
     'LBL_SUGAR_NETWORK_TITLE' => 'Sugar-nettverk',
-    'LBL_SUGAR_NETWORK_DESC' => 'Innenfor Sugar-portalen får du tilgang til SugarCRM-forumer og SugarWiki,, kan søke i FAQs (Frequently Asked Questions - Ofte gjentatte spørsmål), lade ned den seneste Sugar-versjonen, kjøpe',
+    'LBL_SUGAR_NETWORK_DESC' => 'Innenfor Sugar-portalen får du tilgang til SugarCRM-forumer og SugarWiki, kan søke i FAQs (Frequently Asked Questions - Ofte gjentatte spørsmål), lade ned den seneste Sugar-versjonen, kjøpe nye funksjoner og mer.',
     'LBL_SUGAR_SCHEDULER_TITLE' => 'Planlegger',
     'LBL_SUGAR_SCHEDULER' => 'Sett opp planlagte hendelser',
     'LBL_SUGAR_SERVER_URL_DESC'          => '- Serverklientens URL kobler til (f.eks. http://localhost/sugarserver).',
@@ -747,7 +751,7 @@ $mod_strings = array (
     'LBL_SUPPORT_TITLE' => 'Sugar-supportportal',
     'LBL_SUPPORT' => 'Få tilgang til en personifisert portal for tekniskt support med mere',
     'LBL_SYSTEM_NAME' => 'Systemnavn',
-    'LBL_TAXRATES_TITLE' => 'Skatterater',
+    'LBL_TAXRATES_TITLE' => 'Skattesatser',
     'LBL_TAXRATES' => 'Konfigurer en liste over tilgjengelige skatterater',
     'LBL_TEAM_HIERARCHY' => 'Gjenoppbygger gruppehierarkien. Stilltiende tilganger for alle grupper og brukere vil bli gjenoppbygd. <Br/>La oss si at bruk A rapporterer til bruker B som rapporterer til bruker C. Hvis uttrykkelig tilgang til gruppe 1 blir gitt til bruker A, så erverver bruker B og bruker C stilltiende tilgang til denne gruppen.',
     'LBL_TEAMS_TITLE' => 'Team',
@@ -827,7 +831,7 @@ $mod_strings = array (
     'LBL_HISTORY_CONTACTS_EMAILS' => 'Relaterte kontakters e-poster',
     'LBL_HISTORY_CONTACTS_EMAILS_DESC' => 'Aktiver/deaktiver e-poster fra relaterte (eller koblede) kontakter skal vises i e-post underpanelet.',
 
-    'LBL_USERS_DESC' => 'Opprett, endre, aktiver og avaktiver brukere i Sugar. Opprett og administrer grupper og roller, inkludert modul- og feltnivå-tilgang.',
+    'LBL_USERS_DESC' => 'Opprett, endre, aktiver og deaktiver brukere i Sugar. Opprett og administrer grupper og roller, inkludert modul- og feltnivå-tilgang.',
 
     'LBL_WEB_LOGIC_HOOKS' => 'Web Logic Hooks',
     'LBL_WEB_LOGIC_HOOKS_DESC' => 'Administrer Sugar Web Logic Hooks',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Sletter mellomlager-filer...utført',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Hvis denne boksen ikke er sjekket, vil en administrator väre nødvendig for å manuellt revalidere etter at systemlisensen er utløpt, hvis ikke vil ikke brukere väre i stand til å logge inn.',
 	'LBL_TRACKER_SETTINGS' => 'Følger',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Velg hvilket system og brukerdata som skal følges',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Aktiver/deaktiver sporing',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Aktiver/deaktiver Seed Users',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Aktiver',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Deaktiver',
@@ -1158,6 +1162,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_ADDED' => 'Lagt til sprite {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Ekskluderer fil: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Gruppebaserte tillatelser',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Aktiver gruppetilgang og administrer tilgang etter modulen.',
+
     //FTS
     'LBL_FTS_TYPE' => 'System-type',
     'LBL_FTS_HOST' => 'Vert',
@@ -1227,5 +1235,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Ved å klikke Submit vil du synkronisere med hovedserveren.',
     'LBL_OFFLINE_ENABLED' => 'Offline aktivert',
     'LBL_OFFLINE_SETTINGS' => 'Offline Innstillinger',
+
 
 );

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -113,6 +113,35 @@ function get_campaign_mailboxes_with_stored_options() {
         }
     }
 	return $ret;
+}
+
+/**
+ * Gets campaign type
+ * @param string $track
+ * @return string
+ */
+function getCampaignType($track)
+{
+    $db = DBManagerFactory::getInstance();
+    $query = "select c.campaign_type from campaign_trkrs ct, campaigns c where c.id = ct.campaign_id and ct.id = ".
+        $db->quoted($track) . " and ct.deleted = 0 and c.deleted = 0";
+    return $db->getOne($query);
+}
+
+/**
+ * Checks if eamils have been sent for a campaign
+ * @param string $track
+ * @return boolean
+ */
+function hasSentCampaignEmail($track)
+{
+    $db = DBManagerFactory::getInstance();
+    // when a campaign email is sent, a log entry is also created with activity_type = targeted
+    // more_information contains the email address
+    $query = "select count(cl.more_information) from campaign_log cl, campaign_trkrs ct".
+        " where ct.campaign_id = cl.campaign_id and ct.id = ".$db->quoted($track). " and ct.deleted = 0".
+        " and cl.activity_type = 'targeted' and cl.more_information is not null and cl.deleted = 0";
+    return $db->getOne($query) > 0;
 }
 
 function log_campaign_activity($identifier, $activity, $update=true, $clicked_url_key=null) {
@@ -898,7 +927,11 @@ function write_mail_merge_log_entry($campaign_id,$pl_row) {
         $insert_query.=" AND prospect_lists.deleted=0";
         $insert_query.=" AND plc.deleted=0";
         $insert_query.=" AND plp.deleted=0";
-        $insert_query.=" AND prospect_lists.list_type!='test' AND prospect_lists.list_type not like 'exempt%'";
+        $insert_query.=" AND prospect_lists.list_type!='test'";
+        $insert_query.=" AND plp.related_id NOT IN";
+        $insert_query.=" (SELECT related_id FROM prospect_lists_prospects plp1";
+        $insert_query.="  INNER JOIN prospect_lists pl1 ON plp1.prospect_list_id = pl1.id";
+        $insert_query.="  WHERE pl1.list_type LIKE 'exempt%')";
         $focus->db->query($insert_query);
 
         global $mod_strings;

@@ -20,7 +20,7 @@ class ReportProviderBase extends SugarBean {
 	var $type_desc;
 
 	function ReportProviderBase() {		
-		parent::SugarBean();		
+		parent::__construct();		
 		$this->new_schema = true;
 		global $current_user;
 		if(empty($current_user))

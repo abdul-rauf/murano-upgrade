@@ -4,7 +4,7 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -134,9 +134,10 @@ class DeployedRelationships extends AbstractRelationships implements Relationshi
         {
             $this->removeFieldsFromDeployedLayout($rel);
         }
-        require_once("ModuleInstall/ModuleInstaller.php");
+        SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
     	require_once ('modules/Administration/QuickRepairAndRebuild.php') ;
-    	$mi = new ModuleInstaller();
+        $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+        $mi = new $moduleInstallerClass();
     	$mi->silent = true;
     	$mi->uninstall_relationship("custom/metadata/{$rel_name}MetaData.php");
 
@@ -329,8 +330,9 @@ class DeployedRelationships extends AbstractRelationships implements Relationshi
             // individually call the appropriate ModuleInstaller->install_...() methods to take our relationship out of our staging area and expand it out to the individual module Ext areas
 
             $GLOBALS [ 'mod_strings' ] = $adminModStrings ;
-            require_once 'ModuleInstall/ModuleInstaller.php' ;
-            $mi = new ModuleInstaller ( ) ;
+            SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
+            $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+            $mi = new $moduleInstallerClass();
 
             $mi->id_name = 'custom' . $name ; // provide the moduleinstaller with a unique name for this relationship - normally this value is set to the package key...
             $mi->installdefs = $installDefs ;

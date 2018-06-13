@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Dzēst visus atkārtojumus',
     'LBL_DATE_END_ERROR' => 'Beigu datums ir pirms sākuma datuma',
     'LBL_REPEAT_PARENT_ID' => 'Atkārtošanās vecāka ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Tikšanās atkārtošanās ID. Sākotnējās tikšanās sākuma datums',
     'LBL_RECURRING_SOURCE' => 'Atkārtošanas avots',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Vai tiešām vēlaties dzēst visus atkārtojumus?',
     'LBL_RECURRENCE' => 'Atkārtošanās',

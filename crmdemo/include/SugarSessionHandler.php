@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -64,7 +64,14 @@ class SugarSessionHandler extends SessionHandler
      */
     public function close()
     {
-        if ($this->isCurrentSessionExceeded()) {
+        if ($this->isCurrentSessionExceeded() && basename($_SERVER['SCRIPT_NAME']) !== 'cron.php') {
+            global $current_user;
+
+            $id = "unknown";
+            if (!empty($current_user)) {
+                $id = $current_user->id;
+            }
+
             $vars = array(
                 'SERVER_NAME',
                 'SERVER_ADDR',
@@ -83,8 +90,9 @@ class SugarSessionHandler extends SessionHandler
             }
 
             $this->log->fatal(sprintf(
-                '[SessionLock] Session lock was held for %d seconds which is longer than the maximum of %d seconds.'
+                '[SessionLock] Session lock for user id %s was held for %d seconds which is longer than the maximum of %d seconds.'
                 . ' Request details: %s',
+                $id,
                 $this->session_time,
                 $this->max_session_time,
                 implode(', ', $details)
@@ -118,7 +126,7 @@ class SugarSessionHandler extends SessionHandler
         if ($this->max_session_time && $this->session_time) {
             return $this->session_time > $this->max_session_time;
         }
-        
+
         return false;
     }
 }

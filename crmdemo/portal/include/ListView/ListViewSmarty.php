@@ -32,7 +32,7 @@ class ListViewSmarty extends ListViewDisplay {
      *
      */
     function ListViewSmarty() {
-        parent::ListViewDisplay();
+        parent::__construct();
         $this->ss = new Sugar_Smarty();
     }
     

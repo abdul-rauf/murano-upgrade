@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> '新密碼',
 	'LBL_NEW_PASSWORD1'					=> '密碼',
 	'LBL_NEW_PASSWORD2'					=> '確認密碼',
-	'LBL_NEW_USER_PASSWORD_1'			=> '已成功變更密碼。',
+    'LBL_NEW_USER_PASSWORD_1' => '已成功變更密碼。',
 	'LBL_NEW_USER_PASSWORD_2'			=> '已向使用者傳送包含系統產生密碼的電子郵件。',
-	'LBL_NEW_USER_PASSWORD_3'			=> '已成功建立密碼。',
+    'LBL_NEW_USER_PASSWORD_3' => '已成功建立密碼。',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> '新使用者',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> '新使用者',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => '配額',
     'LBL_FORECASTS'                     => '預測',
     'LBL_WORKSHEETS'                    => '工作表',
+	'LBL_CALENDARS'                     => '行事曆',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => '獲取另一個 CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> '切換至「聲音」',
 	'LBL_RECAPTCHA_IMAGE'				=> '切換至「圖像」',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> '工作電話',
 	'LBL_YOUR_PUBLISH_URL'				=> '在我的位置發佈',
     'LBL_ICAL_PUB_URL'                  => 'iCal 整合 URL',
-    'LBL_ICAL_PUB_URL_HELP'             => '使用此 URL 以在 iCal 中訂閱 Sugar 行事曆。',
+    'LBL_ICAL_PUB_URL_HELP'             => '使用此 URL 在 iCal 支援的應用程式內訂閱您的行事歷。' .
+                                           'Sugar 行事歷事件將做為唯讀事件' .
+                                           '在外部應用程式中查看，任何對於事件的編輯' .
+                                           '（如會議、電話等）都只能在 Sugar 中建立。',
 	'LBL_YOUR_QUERY_URL'				=> '您的查詢 URL',
 	'LNK_NEW_USER'						=> '建立新使用者',
 	'LNK_NEW_PORTAL_USER'				=> '建立入口網站 API 使用者',
@@ -623,7 +627,7 @@ SugarCRM 支援部提供的有關在 Sugar 中執行常見工作和流程的提�
 
     'LBL_FILTER_USERS_REPORTS' => '使用者報表',
     'LBL_CONTACTS_SYNC' => '連絡人',
-
+    'LBL_DETAIL' => '使用者設定檔',
 ); // END STRINGS DEFS
 
 ?>

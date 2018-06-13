@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -290,9 +290,8 @@ abstract class AbstractMetaDataImplementation
         }
         // END ASSERTIONS
         $GLOBALS['log']->debug(get_class($this)."->_loadFromFile(): reading from ".$filename );
+        require FileLoader::validateFilePath($filename); // loads the viewdef - must be a require not require_once to ensure can reload if called twice in succession
 
-        // loads the viewdef - must be a require not require_once to ensure can reload if called twice in succession
-        require FileLoader::validateFilePath($filename);
         // Check to see if we have the module name set as a variable rather than embedded in the $viewdef array
         // If we do, then we have to preserve the module variable when we write the file back out
         // This is a format used by ModuleBuilder templated modules to speed the renaming of modules

@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -146,7 +146,7 @@ class ActivitiesApi extends FilterApi
             $seed->populateFromRow($row, true);
             $record = $this->formatBean($api, $args, $seed, $options);
 
-            if ($record['activity_type'] === 'update') {
+            if (isset($record['activity_type']) && $record['activity_type'] === 'update') {
                 if (is_null($bean) || empty($bean->id)) {
                     $fields = json_decode($row['fields'], true);
                     $changedData = array();

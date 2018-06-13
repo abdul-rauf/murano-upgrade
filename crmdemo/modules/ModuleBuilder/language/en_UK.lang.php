@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Select a <b>Layout to edit</b>.<br/<br/>To change the layout that contains data fields for entering data, click <b>Edit View</b>.<br/><br/>To change the layout that displays the data entered into the fields in the Edit View, click <b>Detail View</b>.<br/><br/>To change the columns which appear in the default list, click <b>List View</b>.<br/><br/>To change the Basic and Advanced search form layouts, click <b>Search</b>.',
         'subpanelHelp'=> 'Select a <b>Subpanel</b> to edit.',
         'searchHelp' => 'Select a <b>Search</b> layout to edit.',
-        'labelsBtn'	=> 'Click <b>Save</b> to save your custom labels.',
+        'labelsBtn'	=> 'Edit the <b>Labels</b> to display for values in this module.',
         'newPackage'=>'Click <b>New Package</b> to create a new package.',
         'mbHelp'    => '<b>Welcome to Module Builder.</b><br/><br/>Use <b>Module Builder</b> to create packages containing custom modules based on standard or custom objects. <br/><br/>To begin, click <b>New Package</b> to create a new package, or select a package to edit.<br/><br/> A <b>package</b> acts as a container for custom modules, all of which are part of one project. The package can contain one or more custom modules that can be related to each other or to modules in the application. <br/><br/>Examples: You might want to create a package containing one custom module that is related to the standard Accounts module. Or, you might want to create a package containing several new modules that work together as a project and that are related to each other and to modules in the application.',
         'exportBtn' => 'Click <b>Export Customisations</b> to create a package containing customisations made in Studio for specific modules.',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Name - Must be alphanumeric with no spaces and starting with a letter',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Package Key already exists',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Package Name already exists',
+'LBL_JS_PACKAGE_NAME'=>'Package Name - Must start with a letter and may only consist of letters, numbers, and underscores. No spaces or other special characters may be used.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Key - Must be alphanumeric and begin with a letter.',
 'LBL_JS_VALIDATE_KEY'=>'Key - Must be alphanumeric, begin with a letter and contain no spaces.',
 'LBL_JS_VALIDATE_LABEL'=>'Please enter a label that will be used as the Display Name for this module',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Are you sure you wish to delete this relationship?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'This will make this relationship permanent. Are you sure you wish to deploy this relationship?',
 'LBL_CONFIRM_DONT_SAVE' => 'Changes have been made since you last saved, would you like to save?',

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -32,8 +32,9 @@
      * @param {Object} options
      */
     initialize: function(options) {
-        // `dataViewName` corresponds to the list of fields the API should retrieve.
-        this.dataViewName = options.name || 'subpanel-list';
+        // `dataView` corresponds to the list of fields the API should retrieve.
+        // Inherit from the layout unless not defined.
+        this.dataView = (options.layout && options.layout.dataView) || options.name || 'subpanel-list';
 
         this._super("initialize", [options]);
 
@@ -58,13 +59,16 @@
     /**
      * When parent recordlist's initialize is invoked (above), this will get called
      * and populate our the list's meta with the proper view subpanel metadata.
+     *
+     * @private
+     * @param {Object} options
      * @return {Object} The view metadata for this module's subpanel.
      */
-    _initializeMetadata: function() {
+    _initializeMetadata: function(options) {
         return  _.extend({},
-            app.metadata.getView(null, 'subpanel-list', true),
-            app.metadata.getView(this.options.module, 'record-list', true),
-            app.metadata.getView(this.options.module, 'subpanel-list', true)
+            app.metadata.getView(null, 'subpanel-list'),
+            app.metadata.getView(options.module, 'record-list'),
+            app.metadata.getView(options.module, 'subpanel-list')
         );
     },
 

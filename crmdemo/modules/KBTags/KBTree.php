@@ -20,7 +20,7 @@ require_once('vendor/ytree/Tree.php');
 
 class KBTree extends Tree {
 	function KBTree($name) {
-		parent::Tree($name);
+		parent::__construct($name);
 	}
 	function generate_nodes_array($scriptTags = true) {
 		global $sugar_config;

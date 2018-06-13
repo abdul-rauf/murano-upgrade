@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -450,15 +450,16 @@ class SugarOAuth2Storage implements IOAuth2GrantUser, IOAuth2RefreshTokens, Suga
         $this->userType = $this->getUserType();
 
         // Handle the session now
-        if ( session_id() != '' && session_id() != $oauth_token ) {
+        if (session_id() && session_id() != $oauth_token) {
             // Oh, we are in trouble, we have a session and it's the wrong one.
             // Let's close this session and start a new one with the correct ID.
             session_write_close();
         }
-        session_id($oauth_token);
-        // Disable cookies
-        ini_set("session.use_cookies",false);
-        session_start();
+        ini_set('session.use_cookies', false);
+        if (session_id() != $oauth_token) {
+            session_id($oauth_token);
+            session_start();
+        }
         if (!empty($_SESSION['user_id'])) {
             $GLOBALS['log']->fatal("A new access token was created for another users existing session id. User_id:{$_SESSION['user_id']}, session_id: $oauth_token");
             session_destroy();

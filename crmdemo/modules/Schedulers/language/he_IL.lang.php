@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'הסר קבצי כלי אבחון',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'הסר קבצי PDF זמניים',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'עדכן טבלת משימות לגששים',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'הפעל התראות תזכורת דוא"ל',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'הפעל הודעות תזכורת בדוא"ל',
 'LBL_OOTB_CLEANUP_QUEUE' => 'נקה תור משרות',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'צור תקופות זמן עתידיות',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'עדכן מאמרים של KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'פרסם מאמרים מאושרים והעבר לפג תוקף מאמרי KB.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'משימת תזמון תהליך מחבר',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'מרווחים:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'רענן גובים',
 'LBL_POLLMONITOREDINBOXES' => 'בדוק חשבונות דואר נכנס',
 'LBL_PERFORMFULLFTSINDEX' => 'מערכת מפתח לחיפוש טקסט מלא',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'הסר קבצי PDF זמניים',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'פרסם מאמרים שאושרו והעבר מאמרי KB לקטגוריית &#39;פג תוקף&#39;.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'מתזמן תורי Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'הסר קבצים של כלי האבחון',
+'LBL_SUGARJOBREMOVETMPFILES' => 'הסר קבצים זמניים',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'הרץ קמפיין דואר אלקטרוני לילי',
 'LBL_ASYNCMASSUPDATE' => 'בצע עדכון אסינכרוני מסיבי',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'עדכן טבלאות גששים',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'צור תקופות זמן עתידיות',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'הפעל תזכורות דוא"ל שולח',
+'LBL_SENDEMAILREMINDERS'=> 'הפעל שליחת תזכורות בדוא"ל',
 'LBL_CLEANJOBQUEUE' => 'ניקוי תור משרות',
 'LBL_CLEANOLDRECORDLISTS' => 'נקה רשימת רשומות ישנה',
 );

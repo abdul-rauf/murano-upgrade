@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,31 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => '您确定要删除这条记录吗？',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => '您是否确定要删除这个用户的成员关系？',
     'LBL_EDITLAYOUT' => '编辑布局' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => '团队权限',
+    'LBL_TBA_CONFIGURATION_DESC' => '启用团队访问，通过模块管理访问。',
+    'LBL_TBA_CONFIGURATION_LABEL' => '启用团队权限',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => '选择要启用的模块',
+    'LBL_TBA_CONFIGURATION_TITLE' => '通过角色管理启用团队权限将确保您可将特定访问权分配给单个模块的团队和用户。',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+利用这一特点禁用一个模块的团队权限将会恢复关于该模块团队权限的所有数据，包括流程定义或流程。这包括所有在该模块使用”负责人与选择的团队“选项的角色，以及该模块中所有用于记录的团队权限数据。
+我们还建议您在禁用任何模块的团队权限之后，使用快速修复和重建工具来清理您的系统缓存。
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>警告：</strong>利用这一特点禁用一个模块的团队权限将会恢复关于该模块团队权限的所有数据，包括流程定义或流程。这包括所有在该模块使用”负责人与选择的团队“选项的角色，以及该模块中所有用于记录的团队权限数据。
+我们还建议您在禁用任何模块的团队权限之后，使用快速修复和重建工具来清理您的系统缓存。
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+利用这一特点禁用一个模块的团队权限将会恢复关于该模块团队权限的所有数据，包括流程定义或流程。这包括所有在该模块使用”负责人与选择的团队“选项的角色，以及该模块中所有用于记录的团队权限数据。
+我们还建议您在禁用任何模块的团队权限之后，使用快速修复和重建工具来清理您的系统缓存。如果您没有使用快速修复或重建工具，那么，请访问修复菜单，
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>警告：</strong>利用这一特点禁用一个模块的团队权限将会恢复关于该模块团队权限的所有数据，包括流程定义或流程。这包括所有在该模块使用”负责人与选择的团队“选项的角色，以及该模块中所有用于记录的团队权限数据。
+我们还建议您在禁用任何模块的团队权限之后，使用快速修复和重建工具来清理您的系统缓存。如果您没有使用快速修复或重建工具，那么，请访问修复菜单，
+STR
+,
 );

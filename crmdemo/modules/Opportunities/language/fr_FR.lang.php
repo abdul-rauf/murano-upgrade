@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'En cliquant sur Confirmer, vous effacerez TOUTES les données des Prévisions et modifierez la vue des Affaires. Si vous ne souhaitez pas faire cela veuillez cliquer sur Annuler.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'En cliquant sur Confirmer, vous effacerez TOUTES les données des Prévisions et modifierez la vue des Affaires. '
+        .'TOUTES les définitions des processus avec un module cible de Lignes de revenu seront également désactivées. '
+        .'Si ce n’est pas ce que vous souhaitiez, cliquez sur Annuler pour revenir aux paramètres précédents.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Si toutes les Lignes de revenu sont closes et qu&#39;au moins une a été gagnée,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'la phase de vente de l&#39;Affaire est définie à "Gagné"',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Si toutes les Lignes de revenu sont dans la phase de vente "Perdu",',
@@ -162,25 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} vous permet de suivre les ventes individuelles ainsi que les articles associés à ces ventes de bout en bout. Chaque enregistrement d&#39;{{module_name}} représente un en-tête pour un groupe de {{revenuelineitems_module}} et est associé à d&#39;autres documents importants tels que {{quotes_module}}, {{contacts_module}}, etc. Chaque {{revenuelineitems_singular_module}} représente la vente future d&#39;un produit particulier et inclut des informations pertinentes sur la vente. Chaque {{revenuelineitems_singular_module}} passera en général par plusieurs phases de vente jusqu&#39;à ce qu&#39;elle soit marquée « Gagné » ou « Perdu ». L&#39;enregistrement {{module_name}} reflète le montant et la date de clôture prévue de ses {{revenuelineitems_module}}. Les données {{plural_module_name}} et {{revenuelineitems_module}} peuvent être exploitées encore davantage à l&#39;aide du module {{forecasts_singular_module}} de Sugar pour comprendre et prédire l&#39;évolution des ventes et pour mieux cibler les efforts afin d&#39;atteindre les quotas de vente.',
+    'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} vous permet de suivre les ventes individuelles de bout en bout. Chaque enregistrement de {{module_name}} représente une vente future et inclut les données de vente correspondantes et associées à d&#39;autres documents importants tels que {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} progressera normalement parmi diverses étapes de vente jusqu&#39;à ce qu&#39;elles soient marquées comme « Ventes clôturées et gagnées » ou « Ventes clôturées et perdues ». {{plural_module_name}} peuvent être exploitées encore davantage à l&#39;aide du module {{forecasts_singular_module}} de Sugar pour comprendre et prédire l&#39;évolution des ventes et pour mieux cibler les efforts afin d&#39;atteindre les quotas de vente.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre les ventes individuelles ainsi que les articles associés à ces ventes de bout en bout. Chaque enregistrement de {{module_name}} représente un en-tête pour un groupe de {{revenuelineitems_module}} et est associé à d&#39;autres documents importants tels que {{quotes_module}}, {{contacts_module}}, etc.
- - Modifier les champs de l&#39;enregistrement en cliquant sur un champ individuel ou sur le bouton Edit. 
-- Afficher ou modifier des liens vers d&#39;autres enregistrements dans les sous-panels, y compris {{revenuelineitems_module}}, en activant/désactivant le volet en bas à gauche sur « Voir les données ». 
-- Saisir et voir les commentaires des utilisateurs et l&#39;historique des modifications de l&#39;enregistrement dans {{activitystream_singular_module}} en activant/désactivant le volet en bas à gauche sur « Flux de l&#39;activité ». 
+    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre les ventes individuelles ainsi que les articles associés à ces ventes de bout en bout. Chaque enregistrement de {{module_name}} représente une vente future et inclut les données de vente correspondantes et associées à d&#39;autres documents importants tels que {{quotes_module}}, {{contacts_module}}, etc.
+
+ - Modifier les champs de l&#39;enregistrement en cliquant sur un champ individuel ou sur la touche Éditer. 
+- Afficher ou modifier des liens vers d&#39;autres enregistrements dans les sous-panels en activant/désactivant le volet en bas à gauche sur « Voir les données ». 
+- Saisir et voir les commentaires des utilisateurs et l&#39;historique des modifications de l&#39;enregistrement dans {{activitystream_singular_module}} en activant/désactivant le volet en bas à gauche sur « Flux d&#39;activités ». 
 - Suivre ou mettre en favori cet enregistrement à l&#39;aide des icônes à droite du nom de l&#39;enregistrement. 
-- D&#39;autres actions sont disponibles dans le menu déroulant Actions à droite de la touche Edit.',
+- D&#39;autres actions sont disponibles dans le menu déroulant Actions à droite de la touche Éditer.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre les ventes individuelles, ainsi que les postes liés à ces ventes, du début à la fin. Chaque enregistrement {{module_name}} représente un en-tête pour un groupe de {{revenuelineitems_module}} et est associé à d&#39;autres enregistrements importants, tels que {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre les ventes individuelles ainsi que les articles associés à ces ventes de bout en bout. Chaque enregistrement de {{module_name}} représente une vente future et inclut les données de vente correspondantes et associées à d&#39;autres documents importants tels que {{quotes_module}}, {{contacts_module}}, etc.
 
-Pour créer un enregistrement {{module_name}}, les étapes suivantes sont nécessaires : 
+Pour créer un enregistrement {{module_name}}, les étapes suivantes sont nécessaires :
 1. Remplir les champs souhaités.
  - Les champs identifiés comme "Obligatoire" doivent être complétés avant la sauvegarde.
  - Cliquer sur "Voir plus" pour afficher plus de champs, si nécessaire.
-2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente. 
-3. Après l&#39;enregistrement, utiliser le sous-panneau {{revenuelineitems_module}} pour ajouter des articles à {{module_name}}.',
+2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
 
 // END PRO/CORP
 

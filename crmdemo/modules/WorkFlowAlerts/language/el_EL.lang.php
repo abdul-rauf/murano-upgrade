@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -31,8 +31,8 @@ $mod_strings = array (
   'LBL_LIST_RELATE_TYPE' => 'Σχετικός Τύπος',
   'LBL_LIST_ADDRESS_TYPE' => 'Τύπος Διεύθυνσης',
   'LBL_LIST_FIELD_VALUE' => 'Χρήστης',
-  'LBL_LIST_REL_MODULE1' => 'Σχετική Ενότητα 1',
-  'LBL_LIST_REL_MODULE2' => 'Σχετική Ενότητα 2',
+  'LBL_LIST_REL_MODULE1' => 'Σχετικά ενότητα 1',
+  'LBL_LIST_REL_MODULE2' => 'Σχετικά ενότητα 2',
   'LBL_LIST_WHERE_FILTER' => 'Κατάσταση',
 
   'LBL_USER_TYPE' => 'Τύπος Χρήστη:',
@@ -40,8 +40,8 @@ $mod_strings = array (
   'LBL_RELATE_TYPE' => 'Τύπος Σχέσης:',
   'LBL_WHERE_FILTER' => 'Κατάσταση:',
   'LBL_FIELD_VALUE' => 'Επιλεγμένος Χρήστης:',
-  'LBL_REL_MODULE1' => 'Σχετική Ενότητα 1:',
-  'LBL_REL_MODULE2' => 'Σχετική Ενότητα 2:',
+  'LBL_REL_MODULE1' => 'Σχετικά ενότητα:',
+  'LBL_REL_MODULE2' => 'Σχετικά ενότητα 2:',
   'LBL_CUSTOM_USER' => 'Χρήστης Προσαρμογής:',
 
   'LNK_NEW_WORKFLOW' => 'Δημιουργία Ροής Εργασίας',
@@ -90,8 +90,8 @@ $mod_strings = array (
   'LBL_ADDRESS_TYPE_TARGET' => 'τύπος',
 
 
-  'LBL_ALERT_REL1' => 'Σχετική Ενότητα 1:',
-  'LBL_ALERT_REL2' => 'Σχετική Ενότητα 2:',
+  'LBL_ALERT_REL1' => 'Σχετικά ενότητα 1: ',
+  'LBL_ALERT_REL2' => 'Σχετικά ενότητα 2: ',
 
   'LBL_NEXT_BUTTON' => 'Επόμενο',
   'LBL_PREVIOUS_BUTTON' => 'Προηγούμενο',

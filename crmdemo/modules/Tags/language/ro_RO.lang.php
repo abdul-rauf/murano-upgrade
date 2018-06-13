@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -34,7 +34,7 @@ $mod_strings = array(
     'LBL_REVENUELINEITEMS_SUBPANEL_TITLE' => 'Elemente venit',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produse din ofertă',
     'LBL_PRODUCTTEMPLATES_SUBPANEL_TITLE' => 'Catalog de produse',
-    'LBL_PRODUCTCATEGORIES_SUBPANEL_TITLE' => 'Categorii de Produse',
+    'LBL_PRODUCTCATEGORIES_SUBPANEL_TITLE' => 'Categorii de produse',
     'EXCEPTION_DUPLICATE_TAG_FOUND' => 'S-a găsit o etichetă duplicat. Etichetele nu sunt sensibile la litere mari şi mici şi trebuie să fie unice.',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'ID utilizator alocat',
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Modificat după ID',

@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -31,9 +31,9 @@ class KBContentsFilterApi extends FilterApi
                 'shortHelp' => 'Lists filtered records.',
                 'longHelp' => 'include/api/help/module_filter_get_help.html',
                 'exceptions' => array(
-                    // Thrown in filterList
+                    'SugarApiExceptionNotFound',
+                    'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
-                    // Thrown in filterListSetup and parseArguments
                     'SugarApiExceptionNotAuthorized',
                 ),
             ),
@@ -46,9 +46,9 @@ class KBContentsFilterApi extends FilterApi
                 'shortHelp' => 'List of all records in this module',
                 'longHelp' => 'include/api/help/module_filter_get_help.html',
                 'exceptions' => array(
-                    // Thrown in filterList
+                    'SugarApiExceptionNotFound',
+                    'SugarApiExceptionError',
                     'SugarApiExceptionInvalidParameter',
-                    // Thrown in filterListSetup and parseArguments
                     'SugarApiExceptionNotAuthorized',
                 ),
             ),

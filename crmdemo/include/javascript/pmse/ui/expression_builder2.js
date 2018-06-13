@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -72,7 +72,7 @@ ExpressionControl.prototype._typeToControl = {
     //"iframe": "iframe",
     //"image": "image" ,
     "integer": "integer",
-    "multiselect": "text", //"multiselect",
+    "multiselect": "multiselect",
     //"flex relate": "flexrelate",
     "phone": "text",
     "radio": "radio",
@@ -116,55 +116,60 @@ ExpressionControl.prototype.OPERATORS  = {
             value: "NOT"
         }
     ],
-    "comparison": [
+    'group': [
         {
-            text: translate('LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR'),
-            datefield: translate('LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_DATE'),
-            value: "major_than"
+            text: '(',
+            value: '('
         },
         {
-            text: translate('LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_THAN'),
-            datefield: translate('LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_THAN_DATE'),
-            value: "minor_than"
-        },
-        {
-            text: translate('LBL_PMSE_EXPCONTROL_OPERATOR_EQUAL'),
-            textfield: translate('LBL_PMSE_EXPCONTROL_OPERATOR_EQUAL_TEXT'),
-            datefield: translate('LBL_PMSE_EXPCONTROL_OPERATOR_EQUAL'),
-            value: "equals"
-        },
-        {
-            text: translate('LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL'),
-            datefield: translate('LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE'),
-            value: "major_equals_than"
-        },
-        {
-            text: translate('LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_THAN'),
-            datefield: translate('LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE'),
-            value: "minor_equals_than"
-        },
-        {
-            text: translate('LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL'),
-            textfield: translate('LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT'),
-            datefield: translate('LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE'),
-            value: "not_equals"
-        }
-    ],
-    "group": [
-        {
-            text: "(",
-            value: "("
-        },
-        {
-            text: ")",
-            value: ")"
+            text: ')',
+            value: ')'
         }
     ]
 };
 
+ExpressionControl.prototype.initComparisonOperators = function(module) {
+    ExpressionControl.prototype.OPERATORS.comparison = [
+        {
+            text: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR', module),
+            datefield: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_DATE', module),
+            value: 'major_than'
+        },
+        {
+            text: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_THAN', module),
+            datefield: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_THAN_DATE', module),
+            value: 'minor_than'
+        },
+        {
+            text: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_EQUAL', module),
+            textfield: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_EQUAL_TEXT', module),
+            datefield: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_EQUAL', module),
+            value: 'equals'
+        },
+        {
+            text: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL', module),
+            datefield: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE', module),
+            value: 'major_equals_than'
+        },
+        {
+            text: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_THAN', module),
+            datefield: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE', module),
+            value: 'minor_equals_than'
+        },
+        {
+            text: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL', module),
+            textfield: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT', module),
+            datefield: App.lang.get('LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE', module),
+            value: 'not_equals'
+        }
+    ];
+};
+
 ExpressionControl.prototype.EXTRA_OPERATORS = {};
 
-ExpressionControl.prototype.init = function (settings) {
+ExpressionControl.prototype.init = function(settings) {
+    var module = 'pmse_Project';
+    ExpressionControl.prototype.initComparisonOperators(module);
     var defaults = {
         width: 200,
         itemContainerHeight: 80, //only applicable when it is not external
@@ -569,6 +574,7 @@ ExpressionControl.prototype.setConstantPanel = function(settings) {
             date: true,
             datetime: true,
             timespan: true,
+            datespan: false,
             currency: true
         };
     } else {
@@ -582,6 +588,7 @@ ExpressionControl.prototype.setConstantPanel = function(settings) {
             ._createDateConstantPanel()
             ._createDateTimeConstantPanel()
             ._createTimespanPanel()
+            ._createDatespanPanel()
             ._createCurrencyPanel();
     }
 
@@ -1040,6 +1047,8 @@ ExpressionControl.prototype._onPanelValueGeneration = function () {
                     valueField = subpanel.getItem("value");
                     if (aux[1] === 'Currency') {
                         value = valueField.getAmount();
+                    } else if (aux[1] === 'MultiSelect') {
+                        value = data.value;
                     } else {
                         value = that._getStringOrNumber(data.value);
                     }
@@ -1058,6 +1067,9 @@ ExpressionControl.prototype._onPanelValueGeneration = function () {
                             break;
                         case 'Currency':
                             label += valueField.getCurrencyText() + ' %VALUE%';
+                            break;
+                        case 'MultiSelect':
+                            label += valueField.getSelectionAsText();
                             break;
                         default:
                             label += (valueType === "string" ? "\"" + value + "\"" : data.value);
@@ -1174,6 +1186,7 @@ ExpressionControl.prototype._onPanelValueGeneration = function () {
                         expValue: data.datetime
                     };
                     break;
+                case 'form-constant-datespan':
                 case 'form-constant-timespan':
                     itemData = {
                         expType: "CONSTANT",
@@ -1461,7 +1474,7 @@ ExpressionControl.prototype._createModulePanel = function () {
                     dependencyHandler: function (dependantField, parentField, value) {
                         var type = value.split(that._auxSeparator)[1],
                             form, newField, items = [], itemsObj, keys, operators, newFieldSettings, operatorField,
-                            labelField = 'text';
+                            labelField = 'text', aux;
                         type = type && that._typeToControl[type.toLowerCase()];
                         if ((type && type !== currentType) || type === 'dropdown') {
                             currentType = type;
@@ -1474,9 +1487,10 @@ ExpressionControl.prototype._createModulePanel = function () {
                                 name: dependantField.getName()
                             };
 
-                            if (type === 'dropdown') {
-                                if (parentField.getSelectedData()) {
-                                    itemsObj = parentField.getSelectedData()["optionItem"];
+                            if (type === 'dropdown' || type === 'multiselect' || type === 'radio') {
+                                aux = parentField.getSelectedData();
+                                if (aux) {
+                                    itemsObj = aux["optionItem"];
                                 }
                                 else {
                                     itemsObj = parentField._getFirstAvailableOption()["optionItem"];
@@ -1500,7 +1514,9 @@ ExpressionControl.prototype._createModulePanel = function () {
                                     fields: ["id", "full_name"],
                                     filterOptions: null
                                 };
-                                newFieldSettings.searchURL = 'pmse_Project/CrmData/users?filter={TERM}';
+                                newFieldSettings.searchValue = PMSE_USER_SEARCH.value;
+                                newFieldSettings.searchLabel = PMSE_USER_SEARCH.text;
+                                newFieldSettings.searchURL = PMSE_USER_SEARCH.url;
                             }
                             operatorField = form.getItem("operator");
 
@@ -1741,6 +1757,8 @@ ExpressionControl.prototype._createUserPanel = function () {
                     label: translate("LBL_PMSE_EXPCONTROL_USER_EVALUATION_VALUE"),
                     width: "35%",
                     required: true,
+                    searchValue: PMSE_USER_SEARCH.value,
+                    searchLabel: PMSE_USER_SEARCH.text,
                     dependencyHandler: function(dependantField, field, value) {
                         var condition = value.split("|")[0];
                         dependantField.setSearchURL(null)
@@ -1758,12 +1776,13 @@ ExpressionControl.prototype._createUserPanel = function () {
                                     .setDataRoot(settings.userRolesDataRoot)
                                     .setLabelField(settings.userRolesLabelField)
                                     .setValueField(settings.userRolesValueField)
+                                    .disableSearchMore()
                                     .load()
                                     .enable();
                                 break;
                             case 'USER_IDENTITY':
                                 dependantField.clearOptions()
-                                    .setSearchURL('pmse_Project/CrmData/users?filter={TERM}')
+                                    .setSearchURL(PMSE_USER_SEARCH.url)
                                     .enable()
                                     .enableSearchMore({
                                         module: "Users",
@@ -1898,7 +1917,7 @@ ExpressionControl.prototype._createDateTimeConstantPanel = function() {
                 }
             ],
             onCollapse: function (formPanel) {
-                formPanel.getItem("datetime").closeAll();
+                formPanel.getItem("datetime").close();
             }
         });
         this._constantPanel.addItem(this._constantPanels.datetime);
@@ -1963,6 +1982,57 @@ ExpressionControl.prototype._createTimespanPanel = function() {
         this._constantPanels.timespan.enable();
     } else {
         this._constantPanels.timespan.disable();
+    }
+
+    return this;
+};
+
+ExpressionControl.prototype._createDatespanPanel = function() {
+    var settings = this._constantSettings.datespan;
+    if (!this._constantPanels.datespan) {
+        this._constantPanels.datespan = new FormPanel({
+            id: "form-constant-datespan",
+            title: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_TITLE"),
+            foregroundAppendTo: this._panel._getUsableAppendTo(),
+            items: [
+                {
+                    type: "integer",
+                    name: "ammount",
+                    label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_AMOUNT"),
+                    filter: "integer",
+                    width: "40%",
+                    required: true,
+                    disabled: true
+                }, {
+                    type: "dropdown",
+                    label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_UNIT"),
+                    name: "unittime",
+                    width: "60%",
+                    disabled: true,
+                    options: [
+                        {
+                            label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_YEARS"),
+                            value: "y"
+                        }, {
+                            label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MONTHS"),
+                            value: "m"
+                        }, {
+                            label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_WEEKS"),
+                            value: "w"
+                        }, {
+                            label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS"),
+                            value: "d"
+                        }
+                    ]
+                }
+            ]
+        });
+        this._constantPanel.addItem(this._constantPanels.datespan);
+    }
+    if (settings) {
+        this._constantPanels.datespan.enable();
+    } else {
+        this._constantPanels.datespan.disable();
     }
 
     return this;
@@ -2102,6 +2172,9 @@ ExpressionControl.prototype._createBasicConstantPanel = function () {
         basicForm.getItem("btn_string").setVisible(settings === true || !!settings.string);
         basicForm.getItem("btn_number").setVisible(settings === true || !!settings.number);
         basicForm.getItem("btn_boolean").setVisible(settings === true || !!settings.boolean);
+        if (settings !== true && !!settings.number && !settings.string && !settings.boolean) {
+            this._constantPanels.basic.setTitle(App.lang.get('LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER', 'pmse_Project'));
+        }
         settings = settings === true || (settings.string || settings.number || settings.boolean);
         if (settings) {
             this._constantPanel.setVisible(true);
@@ -2156,11 +2229,12 @@ ExpressionControl.prototype._createMainPanel = function () {
             onExpand: this._onExpandPanel()
         });
         if (this._constantSettings) {
-            this._createBasicConstantPanel();
             this._createDateConstantPanel();
             this._createDateTimeConstantPanel();
             this._createTimespanPanel();
+            this._createDatespanPanel();
             this._createCurrencyPanel();
+            this._createBasicConstantPanel();
         }
         items.push(this._constantPanel);
         this._constantPanel.setVisible(!!this._constantPanel.getItems().length);

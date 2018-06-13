@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Trimite email tuturor invitatilor',
     'LBL_POPUP_REMINDER' => 'Memento în pop-up',
-    'LBL_POPUP_REMINDER_TIME' => 'Fereastră pop-up memento',
+    'LBL_POPUP_REMINDER_TIME' => 'Oră memento pop-up',
     'LBL_EMAIL_REMINDER' => 'memento email',
-    'LBL_EMAIL_REMINDER_TIME' => 'Memento Email',
+    'LBL_EMAIL_REMINDER_TIME' => 'Oră memento e-mail',
     'LBL_REMOVE' => 'elim.',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Programare',
 	'LBL_SEARCH_BUTTON'=> 'Cauta',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Eliminare toate repetările',
     'LBL_DATE_END_ERROR' => 'Data de sfârşit este înainte de data începerii',
     'LBL_REPEAT_PARENT_ID' => 'Repetare ID părinte',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID recurenţă întâlnire. Data originală de începere a întâlnirii',
     'LBL_RECURRING_SOURCE' => 'Sursa periodica',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Sunteţi sigur că doriţi să eliminaţi toate înregistrările recurente?',
     'LBL_RECURRENCE' => 'Repetare',

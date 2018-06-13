@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -63,17 +63,29 @@
         }
 
         if (this.isCheckAllCheckbox) {
-            app.shortcuts.register('SelectAll:Checkbox', 'ctrl+a', function() {
-                if (!this.isDisabled()) {
-                    this.$('[data-check=all]:visible').click();
+            app.shortcuts.register({
+                id: 'SelectAll:Checkbox',
+                keys: 'mod+a',
+                component: this,
+                description: 'LBL_SHORTCUT_SELECT_ALL',
+                handler: function() {
+                    if (!this.isDisabled()) {
+                        this.$('[data-check=all]:visible').click();
+                    }
                 }
-            }, this);
-            app.shortcuts.register('SelectAll:Dropdown', 'm', function() {
-                var $dropdown = this.$(this.actionDropDownTag);
-                if ($dropdown.is(':visible') && !$dropdown.hasClass('disabled')) {
-                    $dropdown.click();
+            });
+            app.shortcuts.register({
+                id: 'SelectAll:Dropdown',
+                keys: 'm',
+                component: this,
+                description: 'LBL_SHORTCUT_OPEN_MASS_ACTION',
+                handler: function() {
+                    var $dropdown = this.$(this.actionDropDownTag);
+                    if ($dropdown.is(':visible') && !$dropdown.hasClass('disabled')) {
+                        $dropdown.click();
+                    }
                 }
-            }, this);
+            });
         }
     },
 
@@ -137,18 +149,18 @@
     _bindModelChangeEvents: function() {
         this.massCollection.on('add', function(model) {
             if (this.model && model.id === this.model.id) {
-                this.$(this.fieldTag).attr('checked', true);
+                this.$(this.fieldTag).prop('checked', true);
             }
         }, this);
 
         this.massCollection.on('remove', function(model) {
             if (this.model && model.id === this.model.id) {
-                this.$(this.fieldTag).attr('checked', false);
+                this.$(this.fieldTag).prop('checked', false);
             }
         }, this);
 
         this.massCollection.on('reset', function() {
-            this.$(this.fieldTag).attr('checked', !!this.massCollection.get(this.model.id));
+            this.$(this.fieldTag).prop('checked', !!this.massCollection.get(this.model.id));
         }, this);
     },
 
@@ -163,14 +175,14 @@
         // row are all checked.
         this.massCollection.on('all:checked', function() {
             if (this.collection.length !== 0) {
-                this.$(this.fieldTag).attr('checked', true);
+                this.$(this.fieldTag).prop('checked', true);
             }
         }, this);
 
         // Unchecks/deselects the actionmenu checkbox if the checkboxes of
         // each row are NOT all checked.
         this.massCollection.on('not:all:checked', function() {
-            this.$(this.fieldTag).attr('checked', false);
+            this.$(this.fieldTag).prop('checked', false);
         }, this);
 
         this.massCollection.on('add', this._onMassCollectionAddAll, this);
@@ -205,7 +217,7 @@
             //so we need to compare ids instead of models directly.
         } else if (_.intersection(massCollectionIds, viewCollectionIds).length !== 0) {
             this.setDropdownDisabled(false);
-            this.$(this.fieldTag).attr('checked', true);
+            this.$(this.fieldTag).prop('checked', true);
         }
         if (!this.def.disable_select_all_alert) {
             this.context.trigger('toggleSelectAllAlert');
@@ -224,6 +236,7 @@
             // Listeners on the checkAll/uncheckAll checkbox.
             this._bindAllModelChangeEvents();
             this.action_enabled = this.massCollection.length > 0;
+            this.tabIndex = this.action_enabled ? 0 : -1;
         } else {
             // Listeners for each record selection.
             this._bindModelChangeEvents();
@@ -308,7 +321,10 @@
      * to enable it.
      */
     setDropdownDisabled: function(disable) {
-        this.$(this.actionDropDownTag).toggleClass('disabled', disable);
+        this.$(this.actionDropDownTag)
+            .toggleClass('disabled', disable)
+            .attr('aria-haspopup', !disable)
+            .attr('tabindex', disable ? -1 : 0);
     },
 
     /**

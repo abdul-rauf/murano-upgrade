@@ -33,7 +33,7 @@ require_once('modules/mr_consultant/mr_consultant_sugar.php');
 class mr_consultant extends mr_consultant_sugar {
 	
 	function mr_consultant(){	
-		parent::mr_consultant_sugar();
+		parent::__construct();
 	}
 	
 }

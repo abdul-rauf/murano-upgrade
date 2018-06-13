@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'Any Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Email all invitees',
     'LBL_EMAIL_REMINDER' => 'Email Reminder',
-    'LBL_EMAIL_REMINDER_TIME' => 'Email Reminder Time',
+    'LBL_EMAIL_REMINDER_TIME' => 'Email reminder time',
     'LBL_POPUP_REMINDER_TIME' => 'Popup Reminder Time',
     'LBL_SEND_BUTTON_TITLE'=>'Save & Send Invites [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Save & Send Invites',
 	'LBL_DATE_END'=>'End Date',
 	'LBL_TIME_END'=>'Time End',
-	'LBL_REMINDER_TIME'=>'Reminder Time',
+    'LBL_REMINDER_TIME'=>'Reminder Time',
     'LBL_EMAIL_REMINDER_SENT' => 'Email reminder sent',
     'LBL_SEARCH_BUTTON'=> 'Search',
     'LBL_ACTIVITIES_REPORTS' => 'Activities Report',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Delete All Recurrences',
     'LBL_DATE_END_ERROR' => 'End date is before start date',
     'LBL_REPEAT_PARENT_ID' => 'Repeat Parent ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Recurrence ID of call. Original call start date',
     'LBL_RECURRING_SOURCE' => 'Recurring Source',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Are you sure you want to remove all recurring records?',
     'LBL_RECURRING_LIMIT_ERROR' => 'This recurring call cannot be scheduled because it exceeds the maximum allowed recurrence of $limit.',

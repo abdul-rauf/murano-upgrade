@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'Muu E-post:',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Email all invitees',
     'LBL_POPUP_REMINDER' => 'Popup Reminder',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup Reminder Time',
+    'LBL_POPUP_REMINDER_TIME' => 'Hüpikakna meeldetuletuse aeg',
     'LBL_EMAIL_REMINDER' => 'Email Reminder',
-    'LBL_EMAIL_REMINDER_TIME' => 'Email Reminder Time',
+    'LBL_EMAIL_REMINDER_TIME' => 'Meili meeldetuletuse aeg',
     'LBL_REMOVE' => 'eemalda',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Planeerimine',
 	'LBL_SEARCH_BUTTON'=> 'Otsi',
@@ -151,7 +151,7 @@ $mod_strings = array (
     'LBL_EMPTY_SEARCH_RESULT' => 'Sorry, no results were found. Please create an invitee below.',
     'LBL_NO_ACCESS' => 'You have no access to create $module',
     
-    'LBL_REPEAT_TYPE' => 'Repeat',
+    'LBL_REPEAT_TYPE' => 'Korda',
     'LBL_REPEAT_INTERVAL' => 'Every',
     'LBL_REPEAT_END' => 'End',
     'LBL_REPEAT_END_AFTER' => 'Pärast',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Delete All Recurrences',
     'LBL_DATE_END_ERROR' => 'End date is before start date',
     'LBL_REPEAT_PARENT_ID' => 'Repeat Parent ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Kohtumise korduse ID. Algse kohtumise alguskuupäev',
     'LBL_RECURRING_SOURCE' => 'Recurring Source',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Are you sure you want to remove all recurring records?',
     'LBL_RECURRENCE' => 'Recurrence',

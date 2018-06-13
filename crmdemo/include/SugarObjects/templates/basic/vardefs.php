@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -112,6 +112,12 @@ $vardefs = array(
                         ),
                     ),
                 ),
+                'processes' => array(
+                    'types' => array(
+                        'RR' => false,
+                        'ALL' => true,
+                    ),
+                ),
             ),
         'modified_by_name' => array(
                 'name' => 'modified_by_name',
@@ -154,6 +160,12 @@ $vardefs = array(
                             'type' => 'MyItems',
                             'label' => 'LBL_AGG_CREATED_BY_ME',
                         ),
+                    ),
+                ),
+                'processes' => array(
+                    'types' => array(
+                        'RR' => false,
+                        'ALL' => true,
                     ),
                 ),
             ),
@@ -237,7 +249,7 @@ $vardefs = array(
         'date_modified' => array(
             'name' => 'idx_' . strtolower($table_name) . '_date_modfied',
             'type' => 'index',
-            'fields' => array('date_modified')
+            'fields' => array('date_modified'),
         ),
         'deleted' => array(
             'name' => 'idx_' . strtolower($table_name) . '_id_del',

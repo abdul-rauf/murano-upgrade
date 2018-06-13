@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -122,14 +122,14 @@ $mod_strings = array (
     'LBL_RECORD_SAVED_SUCCESS' => 'Başarılı şekilde {{moduleSingularLower}} oluşturdunuz: <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Sokak',
     'LBL_POSTAL_CODE' => 'Posta Kodu:',
-    'LBL_PRIMARY_ADDRESS_CITY' => 'Asıl Adres Şehir:',
-    'LBL_PRIMARY_ADDRESS_COUNTRY' => 'Asıl Adres Ülke:',
-    'LBL_PRIMARY_ADDRESS_POSTALCODE' => 'Asıl Adres Posta Kodu:',
-    'LBL_PRIMARY_ADDRESS_STATE' => 'Asıl Adres Eyalet:',
+    'LBL_PRIMARY_ADDRESS_CITY' => 'Birincil Adres Şehir:',
+    'LBL_PRIMARY_ADDRESS_COUNTRY' => 'Birincil Adres Ülke:',
+    'LBL_PRIMARY_ADDRESS_POSTALCODE' => 'Birincil Adres Posta Kodu:',
+    'LBL_PRIMARY_ADDRESS_STATE' => 'Birincil Adres Eyalet:',
     'LBL_PRIMARY_ADDRESS_STREET_2' => 'Asıl Adres Sokak 2 :',
-    'LBL_PRIMARY_ADDRESS_STREET_3' => 'Asıl Adres Sokak 3:',
-    'LBL_PRIMARY_ADDRESS_STREET' => 'Asıl Adres Sokak:',
-    'LBL_PRIMARY_ADDRESS' => 'Asıl Adres:',
+    'LBL_PRIMARY_ADDRESS_STREET_3' => 'Birincil Adres Sokak 3:',
+    'LBL_PRIMARY_ADDRESS_STREET' => 'Birincil Adres Sokak:',
+    'LBL_PRIMARY_ADDRESS' => 'Birincil Adres:',
     'LBL_PRODUCTS_TITLE'=>'Ürünler',
     'LBL_REVENUELINEITEMS_TITLE'=>'Gelir Kalemleri',
     'LBL_RELATED_CONTACTS_TITLE'=>'İlişkili Kontaklar',
@@ -162,8 +162,8 @@ $mod_strings = array (
     'LNK_SELECT_ACCOUNT' => "Müşteri Seç",
     'MSG_DUPLICATE' => 'Oluşturmak üzere olduğunuz kontak kaydı, zaten var olan bir kontağın benzeri olabilir. Benzer isimleri içeren kontaklar aşağıda listelenmektedir.<br>Bu kontağı oluşturmaya devam etmek için Hesap Oluştura tıklayın veya aşağıdaki listeden var olan bir hesap seçin.',
     'MSG_SHOW_DUPLICATES' => 'Oluşturduğunuz kontak kaydı, sistemdeki başka bir kontak kaydının benzeri olabilir. Benzer isimleri içeren kontaklar aşağıda listelenmektedir.<br>Bu kontağı oluşturmaya devam etmek için Kayıt butonuna basın veya İptal butonuna basarak kontak oluşturmadan modüle dönünüz.',
-    'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternatif Adresi Asıl Adrese Kopyala',
-    'NTC_COPY_PRIMARY_ADDRESS' => 'Asıl Adresi Alternatif Adrese Kopyala',
+    'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternatif adresi birincil adrese kopyala',
+    'NTC_COPY_PRIMARY_ADDRESS' => 'Birincil adresi alternatif adrese kopyala',
     'NTC_DELETE_CONFIRMATION' => 'Bu kaydı silmek istediğinizden emin misiniz?',
     'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Fırsat oluşturulması için müşteri kaydının olması gerekir.\n Lütfen yeni bir müşteri oluşturun veya var olan müşterilerden birini seçin.',
     'NTC_REMOVE_CONFIRMATION' => 'Talepten bu kontağı silmek istediğinizden emin misiniz?',
@@ -179,7 +179,7 @@ $mod_strings = array (
     'LBL_QUOTES_BILL_TO' => 'Teklifler (Faturalanacak)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Teklif Kalemleri',
     'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Kontratlar',
-    'LBL_COPY_ADDRESS_CHECKED_PRIMARY' => 'Asıl Adrese kopyala',
+    'LBL_COPY_ADDRESS_CHECKED_PRIMARY' => 'Birincil Adrese kopyala',
     'LBL_COPY_ADDRESS_CHECKED_ALT' => 'Diğer Adrese kopyala',
 
     'LBL_CASES_SUBPANEL_TITLE' => 'Talepler',
@@ -194,8 +194,6 @@ $mod_strings = array (
     'LBL_HOMEPAGE_TITLE' => 'Kontaklarım',
     'LBL_OPPORTUNITIES' => 'Fırsatlar',
 
-    'LBL_PASSWORD_CHANGE_FORM_TITLE' => 'Şifre değiştir',
-    'LBL_OLD_PORTAL_PASSWORD' => 'Eski Portal Şifresi',
     'LBL_PORTAL_PASSWORD' => 'Portal Şifresi',
     'LBL_CONFIRM_PORTAL_PASSWORD' => 'Portal Şifresini Teyit et',
     'LBL_LANG_PREF_TOOLTIP' => 'Destek Portalı kullanıcı arayüzü burada seçilen dilde ayarlandı',

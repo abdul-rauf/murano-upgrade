@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -39,12 +39,12 @@ $mod_strings = array (
   'LBL_DESCRIPTION' => 'Përshkrim',
   'LBL_COLON' => ':',
   'LBL_DEFAULT_STATUS' => 'Planifikuar',
-  'LNK_NEW_CALL' => 'Thirje identifikuese',
+  'LNK_NEW_CALL' => 'Thirrje identifikuese',
   'LNK_NEW_MEETING' => 'Cakto mbledhje',
   'LNK_NEW_TASK' => 'Krijo detyrë',
   'LNK_NEW_NOTE' => 'Krijo shënim ose bashkëngjitje',
   'LNK_NEW_EMAIL' => 'Emaili i arkivuar',
-  'LNK_CALL_LIST' => 'Thirjet',
+  'LNK_CALL_LIST' => 'Thirrjet',
   'LNK_MEETING_LIST' => 'Mbledhjet',
   'LNK_TASK_LIST' => 'Detyrat',
   'LNK_NOTE_LIST' => 'Shënimet',
@@ -66,9 +66,9 @@ $mod_strings = array (
   'LBL_SCHEDULE_MEETING_BUTTON_TITLE' => 'Cakto mbledhje [Alt+ M]',
   'LBL_SCHEDULE_MEETING_BUTTON_KEY' => 'M',
   'LBL_SCHEDULE_MEETING_BUTTON_LABEL' => 'Cakto mbledhje',
-  'LBL_SCHEDULE_CALL_BUTTON_TITLE' => 'Thirje identifikuese',
+  'LBL_SCHEDULE_CALL_BUTTON_TITLE' => 'Thirrje identifikuese',
   'LBL_SCHEDULE_CALL_BUTTON_KEY' => 'C',
-  'LBL_SCHEDULE_CALL_BUTTON_LABEL' => 'Thirje identifikuese',
+  'LBL_SCHEDULE_CALL_BUTTON_LABEL' => 'Thirrje identifikuese',
   'LBL_NEW_NOTE_BUTTON_TITLE' => 'Krijo shënim ose bashkëngjitje  [Alt+T]',
   'LBL_NEW_NOTE_BUTTON_KEY' => 'T',
   'LBL_NEW_NOTE_BUTTON_LABEL' => 'Krijo shënim ose bashkëngjitje',

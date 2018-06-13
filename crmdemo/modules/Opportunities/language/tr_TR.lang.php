@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Onayla tuşuna basarak, BÜTÜN Satış Tahminlerini silecek ve Fırsatlar Görünümünü değiştireceksiniz. Eğer yapmak istediğiniz bu değilse, iptal tuşuna basın ve önceki ekrana dönün.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Onayla düğmesine tıklayarak TÜM Tahmin verilerini silecek ve Fırsat Görünümünü değiştireceksiniz. '
+        .'Ayrıca Gelir Kalemleri hedef modülüne sahip TÜM İşlem Tanımları devre dışı bırakılacak. '
+        .'İstediğiniz bu değilse önceki ayarlara geri dönmek için iptal düğmesine tıklayın.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Eğer bütün gelir kalemleri kapandıysa ve en azından biri kazanıldıysa,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'Fırsat Satış Aşaması "Kazanılarak Kapatıldı" olarak işaretlendi.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Eğer bütün gelir kalemleri "Kaybedilerek Kapandı" Satış Aşamasındaysa,',
@@ -162,25 +166,24 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} modülü, baştan sona kadar satışları ve bu satışlara ait kalemlerin satış sürecinin takip edilmesini sağlar. Her {{module_name}} kaydı {{revenuelineitems_module}} kaydı için başlığı temsil eder ve aynı zamanda diğer {{quotes_module}}, {{contacts_module}} ve benzeri gibi önemli kayıtlar ile ilişkisini sağlar. Her {{revenuelineitems_singular_module}}, belirli bir ürünün satış fırsatıdır ve ilişkili satış bilgisini içerir. Her {{revenuelineitems_singular_module}} için Satış Aşamaları "Kazanılarak Kapandı" veya "Kaybedilerek Kapandı" şeklinde işaretlenene kadar takip edilir. {{module_name}} kaydı, ilgili {{revenuelineitems_module}} kaydının beklenen miktarını ve kapanma tarihini içerir. {{plural_module_name}} ve {{revenuelineitems_module}} kayıtları Sugar {{forecasts_singular_module}} modülüne veri olarak ve satış trendlerininin anlaşılması ve tahmin edilmesi aynı zamanda satış kotlarını tutturmak üzere çalışmaya odaklanılması için kullanılabilir.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} modülü, size ayrı satışları başlangıcından bitişine kadar izlemenize olanak sağlar. Her {{module_name}} kaydı, ileriye yönelik bir satışı belirtir ve ilgili satış verileri aynı zamanda {{quotes_module}}, {{contacts_module}} vb. gibi diğer önemli bilgileri içerir. Bir {{module_name}}, genellikle "Başarıyla Kapandı" veya "Başarısızlıkla Kapandı" olarak işaretlenene kadar birçok Satış Aşaması boyunca ilerler. {{plural_module_name}}, satış trendlerini anlamak ve tahmin etmek aynı zamanda satış kotalarına ulaşmak için çalışmaya odaklanmak için Sugar&#39;ın {{forecasts_singular_module}} modülü kullanılarak daha da fazla geliştirilebilir.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} modülü, satışları ve bu satışlara ait kalemlerin satış sürecinin takip edilmesini sağlar. Her {{module_name}} kaydı, bir grup {{revenuelineitems_module}} kaydı için başlığı temsil eder ve diğer {{quotes_module}}, {{contacts_module}} gibi önemli kayıtlar ile ilişkisini sağlar. 
+    'LBL_HELP_RECORD' => '{{plural_module_name}} modülü, satışları ve bu satışlara ait kalemlerin satış sürecinin takip edilmesini sağlar. Her {{module_name}} kaydı, muhtemel satışı temsil eder ve {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlar ile ilişkisini sağlar. 
 - Bu kayıtın alanlarını her bir alana tıklayarak veya Değiştir seçeneği ile değiştirebilirsiniz. 
-- Alt sol paneli "Veri Görüntüleme" moduna getirerek, {{revenuelineitems_module}} dahil diğer modüller ile ilişkisini görüntüleyebilir veya değiştirebilirsiniz. 
+- Alt sol paneli "Veri Görüntüleme" moduna getirerek diğer modüller ile ilişkisini görüntüleyebilir veya değiştirebilirsiniz. 
 - Sol alt paneli "Aktivite Akışı" moduna getirerek, {{activitystream_singular_module}} içinde bulunan kullanıcı yorumlarını ve değişiklik tarihçesini görebilir veya ekleyebilirsiniz. 
 - Kayıtın sağındaki ikonlara tıklayarak izlemeye alabilir veya favori olarak işaretleyebilirsiniz. 
 - Değiştir tuşunun sağındaki Aksiyonlar menüsü ile ek aksiyonlar mümkün olmaktadır.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} modülü, satışları ve bu satışlara ait kalemlerin satış sürecinin takip edilmesini sağlar. Her {{module_name}} kaydı, bir grup {{revenuelineitems_module}} kaydı için başlığı temsil eder ve diğer {{quotes_module}}, {{contacts_module}} gibi önemli kayıtlar ile ilişkisini sağlar.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} modülü, satışları ve bu satışlara ait kalemlerin satış sürecinin takip edilmesini sağlar. Her {{module_name}} kaydı, muhtemel bir satışı temsil eder ve diğer {{quotes_module}}, {{contacts_module}} gibi önemli kayıtlar ile ilişkisini sağlar.
 
 {{module_name}} kaydı oluşturmak için: 
 1. İstendiği şekilde alanlar için değerler girin. 
 - "Zorunlu" olarak işaretlenmiş alanların kayıt öncesinde girilmesi gerekmektedir. 
 - "Daha fazlasını göster" seçeneği ile, gerektiğinde ek alanları görünür kılın.
-2. "Kaydet" tuşuna basarak kayıt işlemini tamamlayın ve önceki sayfaya dönün.
-3. Kaydettikten sonra, {{revenuelineitems_module}} alt panelini kullanarak, {{module_name}} içine kalemleri oluşturun.',
+2. "Kaydet" tuşuna basarak kayıt işlemini tamamlayın ve önceki sayfaya dönün.',
 
 // END PRO/CORP
 

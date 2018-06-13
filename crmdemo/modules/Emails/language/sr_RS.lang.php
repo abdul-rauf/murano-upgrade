@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -318,7 +318,7 @@ $mod_strings = array (
     'LBL_EMAIL_SETTINGS_OUTBOUND_ACCOUNT' => 'Odlazni SMTP Mail Server',
     'LBL_EMAIL_SETTINGS_OUTBOUND_ACCOUNTS' => 'Odlazni SMTP Mail Serveri',
     'LBL_EMAIL_SETTINGS_INBOUND_ACCOUNTS' => 'Mail Nalozi',
-    'LBL_EMAIL_SETTINGS_INBOUND' => 'Dolazni Email',
+    'LBL_EMAIL_SETTINGS_INBOUND' => 'Dolazna e-pošta',
     'LBL_EMAIL_SETTINGS_OUTBOUND' => 'Odlazni Email',
     'LBL_ADD_CC' => 'Dodaj Kopija za',
     'LBL_CC_BUTTON' => 'Kopija za:',
@@ -384,7 +384,7 @@ $mod_strings = array (
 	'LBL_WAIT' => 'Sačekaj' /*for 508 compliance fix*/,
 	'LBL_CHECKEMAIL' => 'Proveri email' /*for 508 compliance fix*/,
 	'LBL_COMPOSEEMAIL' => 'Napiši Email' /*for 508 compliance fix*/,
-	'LBL_EMAILSETTINGS' => 'Email podešavanja' /*for 508 compliance fix*/,
+	'LBL_EMAILSETTINGS' => 'Podešavanja e-pošte' /*for 508 compliance fix*/,
 
 	// SNIP
 	'LBL_CONTACTS_SUBPANEL_TITLE_SNIP' => 'Email kontakti',
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'greška: nedostaju akreditivi',
     'ERR_NO_UID' => 'greška: nedostaje UID',
     'ERR_NO_IEID' => 'greška: nedostaje ieID',
+    'ERR_INVALID_RECIPIENTS' => 'Jedan primalac ili više njih ima nevažeću e-adresu. ' .
+        'Ispravite ovo i pokušajte ponovo.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Nevažeća e-adresa',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'nisu navedeni primaoci',

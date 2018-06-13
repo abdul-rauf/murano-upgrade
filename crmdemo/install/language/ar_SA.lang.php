@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'تم اكتشاف أخطاء أثناء فحص التوافقية.  لكى يعمل تثبيت SugarCRM بكفاءة، يُرجى اتخاذ الخطوات المناسبة لمواجهة المسائل المذكورة أدناه إما بالضغط على زر إعادة الفحص، وإما بإعادة محاولة التثبيت مرة أخرى.',
     'ERR_CHECKSYS_CALL_TIME'            => 'السماح بتشغيل وضع "مرجعية مرور وقت الاتصال (ويجب ضبطها على وضع إيقاف التشغيل في php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'لم يتم العثور عليه: سيعمل نظام الجدول الزمني لـ Sugar بكفاءة محدودة. لن تعمل خدمة أرشفة البريد الإلكتروني.',
+	'ERR_CHECKSYS_CURL'					=> 'غير موجود: سيتم تشغيل أداة جدولة Sugar بوظائف محدودة. لن يتم تشغيل خدمة أرشفة البريد الإلكتروني.',
     'ERR_CHECKSYS_IMAP'					=> 'لم يتم العثور عليه: تتطلب InboundEmail وCampaigns (Email) مكتبات IMAP. ولن يعمل أي منها.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'لا يمكن تشغيل Magic Quotes GPC على وضع "تشغيل" عند استخدام خادم MS SQL.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'تحذير: ',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'قاعدة البيانات غير متاحة',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'دعم قاعدة البيانات لم يكن موجودًا. الرجاء التأكد من توفر برامج التشغيل اللازمة لأحد أنواع قواعد البيانات المدعمة التالية: MySQL أو MS SQLServer. قد تحتاج إلى إلغاء التعليق على الامتداد الموجود في ملف php.ini، أو إعادة التحويل البرمجي بواسطة الملف الثنائي المناسب، وذلك حسب إصدار PHP الموجود لديك. الرجاء الرجوع إلى دليل PHP الموجو لديك للحصول على مزيد من المعلومات حول كيفية تمكين دعم قاعدة البيانات.<br><br>لا تعتبر Oracle وDB2 قواعد بيانات معتمدة لدى SugarCRM PRO. للحصول على قائمة بقواعد البيانات المدعمة ومعلومات النظام الأساسي، برجاء التفضل بزيارة <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'لم يتم العثور على الوظائف المرتبطة بمكتبات XML Parser Libraries الضرورية لتطبيق Sugar.  قد تحتاج إلى عدم التعليق على الامتداد في ملف php.ini، أو إعادة تجميع مع ملف ثنائي صحيح، وفقًا لإصدار PHP الخاص بك.  يُرجى مراجعة دليل PHP للحصول على مزيد من المعلومات.',
+    'LBL_CHECKSYS_CSPRNG' => 'منشئ الأرقام العشوائية',
     'ERR_CHECKSYS_MBSTRING'             => 'لم يتم العثور على الوظائف المرتبطة بامتداد Multibyte Strings PHP (mbstring) الضرورية لتطبيق Sugar. <br/><br/>وبشكل عام، لم يتم تفعيل وحدة mbstring افتراضيًا في PHP ويجب تفعيلها باستخدام تفعيل mbstring عند إنشاء ثنائي PHP. يُرجى الرجوع لدليل PHP للحصول على مزيد من المعلومات عن كيفية تفعيل دعم mbstring.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'لم يتم تعيين إعداد save_path في ملف تهيئة php الخاص بك (php.ini) أو ضبطه على مجلد غير موجود. قد تحتاج إلى ضبط إعداد save_path في php.ini أو التحقق من وجود المجلد المعين في save_path.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'لم يتم العثور على دعم ZIP: يحتاج SugarCRM لدعم ZIP لتنفيذ الملفات المضغوطة.',
     'ERR_CHECKSYS_BCMATH'				=> 'لم يتم العثور على دعم BCMATH: يحتاج SugarCRM لدعم BCMATH بالنسبة لدقة العمليات الرياضية الإجبارية.',
     'ERR_CHECKSYS_HTACCESS'             => 'فشل اختبار إعادة الكتابة على htaccess . وهذا يعني أحيانًا أنه ليس لديك إعداد AllowOverride (السماح بالتجاوز) بالنسبة لدليل Sugar.',
+    'ERR_CHECKSYS_CSPRNG' => 'استثناء CSPRNG',
 	'ERR_DB_ADMIN'						=> 'اسم المستخدم و/أو كلمة مرور المسؤول لقاعدة البيانات المتاحة غير صالحة، وتعذر تأسيس الاتصال بقاعدة البيانات.  يُرجى إدخال اسم مستخدم وكلمة مرور صالحة.  (خطأ: ',
     'ERR_DB_ADMIN_MSSQL'                => 'اسم المستخدم و/أو كلمة مرور المسؤول لقاعدة البيانات المتاحة غير صالحة، وتعذر تأسيس الاتصال بقاعدة البيانات.  يُرجى إدخال اسم مستخدم وكلمة مرور صالحة.',
 	'ERR_DB_EXISTS_NOT'					=> 'قاعدة البيانات المحددة غير موجودة.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'المفتاح مطلوب لوظيفية التطبيق العامة، ولكنه غير ضروري للتثبيت. لست في حاجة لإدخال المفتاح في هذا التوقيت، ولكنك ستحتاج إلى إدخال المفتاح بعد تثبيت التطبيق.',
     'LBL_INSTALL_TYPE_MSG2'             => 'يتطلب الحد الأدنى من البيانات للتثبيت. يُوصى به للمستخدمين الجدد.',
     'LBL_INSTALL_TYPE_MSG3'             => 'يتيح خيارات إضافية للتعيين أثناء التثبيت. أغلب تلك الخيارات متوفرة أيضًا بعد التثبيت في شاشات المسؤول. يُوصى به للمستخدمين المتقدمين.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'يتيح خيارات إضافية للتعيين أثناء التثبيت. أغلب تلك الخيارات متوفرة أيضًا بعد التثبيت في شاشات المسؤول. يُوصى به للمستخدمين المتقدمين.',
 	'LBL_LANG_1'						=> 'لاستخدام لغة في Sugar خلاف اللغة الافتراضية (اللغة الإنجليزية للولايات المتحدة)، يمكنك تحميل وتثبيت حزمة اللغة في هذا التوقيت. ستكون لك القدرة على تحميل وتثبيت حزم اللغات داخل تطبيق Sugar أيضًا.  إذا كنت ترغب في تجاوز تلك الخطوة، فانقر "التالي".',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'تثبيت',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'إزالة',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'قبول الترخيص',
     'LBL_LICENSE_CHECKING'              => 'فحص توافقية النظام.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'فحص البيئة',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'التحقق من بيانات اعتماد DB.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'التحقق من DB، بيانات اعتماد FTS.',
     'LBL_LICENSE_CHECK_PASSED'          => 'اجتياز النظام لفحص التوافقية.',
     'LBL_LICENSE_REDIRECT'              => 'إعادة توجيهه في ',
 	'LBL_LICENSE_DIRECTIONS'			=> 'إذا كانت لديك بيانات ترخيصك، فيُرجى إدخالها في الحقول أدناه.',
@@ -514,7 +517,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'يُرجى قراءة المعلومات الهامة التالية قبل متابعة عملية التثبيت.  ستساعدك المعلومات في تحديد ما إذا كنت مستعدًا أم لا لتثبيت التطبيق في هذا الوقت.',
 
 
-	'LBL_WELCOME_2'						=> 'للحصول على مستندات التثبيت، يُرجى زيارة موقعنا <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>.  <BR><BR> للاتصال بمهندس دعم SugarCRM فيما يخص تعليمات التثبيت، يُرجى تسجيل الدخول إلى<a target="_blank" href="http://support.sugarcrm.com">SugarCRM Support Portal</a> وإرسال حالة الدعم.',
+	'LBL_WELCOME_2'						=> 'للحصول على مستندات التثبيت، تفضل بزيارة <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>. <BR><BR> للاتصال بمهندس دعم SugarCRM للحصول على تعليمات التثبيت، يرجى تسجيل الدخول إلى <a target="_blank" href="http://support.sugarcrm.com">بوابة دعم SugarCRM</a> وإرسال حالة دعم.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>اختر لغتك</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'نافذة الإعداد',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'أهلاً بك مع SugarCRM ',
@@ -530,7 +533,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'تشغيل حملات البريد الإلكتروني الجماعية ليلاً',
 	'LBL_OOTB_PRUNE'		=> 'تنقيح قواعد البيانات في الأول من كل شهر',
     'LBL_OOTB_TRACKER'		=> 'تنقيح جداول المتعقب',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'تشغيل إشعارات تذكير البريد الإلكتروني',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'تشغيل إعلامات تذكير البريد الإلكتروني',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'تحديث جدول tracker_sessions',
     'LBL_OOTB_CLEANUP_QUEUE' => 'مسح قوائم انتظار الوظائف',
 
@@ -541,7 +544,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'نوع محرك البحث',
     'LBL_FTS_HELP'      => 'لتمكين البحث بنص كامل، أدخل المضيف والمنفذ حيث تتم استضافة محرك البحث. يحتوي Sugar على دعم ذاتي لمحركات البحث المرنة.',
     'LBL_FTS_REQUIRED'    => 'مطلوب البحث المرن.',
-    'LBL_FTS_ERROR'    => 'تعذر الاتصال بخادم بحث نصي كامل، يُرجى التحقق من إعداداتك.',
+    'LBL_FTS_CONN_ERROR'    => 'تعذر الاتصال بخادم بحث نصي كامل، يُرجى التحقق من إعداداتك.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'إصدار خادم بحث النص الكامل غير متوفر، يرجى التحقق من الإعدادات.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'تم اكتشاف إصدار غير مدعوم للبحث المرن. يرجى استخدام الإصدارات: %s',
 
     'LBL_PATCHES_TITLE'     => 'تثبيت أحدث الملفات',
     'LBL_MODULE_TITLE'      => 'تثبيت حزم اللغة',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -172,7 +172,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} містить перелік компаній, з якими взаємодіє Ваша організація, і є вузлом, де Ви можете управляти і аналізувати Ваші активності з клієнтами. Існує безліч способів, за допомогою яких Ви можете створити {{plural_module_name}} в Sugar, а саме за допомогю модуля {{plural_module_name}}, дублювання, імпорту {{plural_module_name}} і т. п. Як тільки створено запис {{module_name}}, Ви можете переглянути та редагувати інформацію щодо {{module_name}} в режимі перегляду запису {{plural_module_name}}. Кожен запис {{module_name}} може бути пов&#39;язаний з іншим записом Sugar, таким як {{contacts_module}}, {{meetings_module}}, {{cases_module}}, {{opportunities_module}} і багатьма іншими записами в процесі розвитку відносин з клієнтами.',
+    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} містить перелік компаній, з якими взаємодіє Ваша організація, і є вузлом, де Ви можете управляти і аналізувати свої активності з клієнтами. Існує безліч способів, за допомогою яких можна створити {{plural_module_name}} в Sugar, а саме за допомогою модуля {{plural_module_name}}, дублювання, імпорту даних модуля {{plural_module_name}} і т. д. Після створення запису {{module_name}} можна переглядати та редагувати інформацію, що стосується запису {{module_name}}, в режимі перегляду запису {{plural_module_name}}. Кожен запис {{module_name}} може бути пов&#39;язаний з іншим записом Sugar, таким як {{contacts_module}}, {{meetings_module}}, {{cases_module}}, {{opportunities_module}} і багатьма іншими записами в процесі розвитку відносин з клієнтами.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{plural_module_name}} модуль містить перелік компаній, з якими взаємодіє Ваша організація, і є вузлом, де Ви можете управляти і аналізувати Ваші активності з клієнтами.

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Pronađene su greške u toku provere kompatibilnosti. Kako bi Vaša SugarCRM instalacija pravilno funkcionisala, molim preduzmite odgovarajuće korake vezane za dole navedene stavke i pritisnite dugme Ponovna provera, ili pokrenite ponovo instalaciju.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Opcija Allow Call Time Pass Reference je uključena (trebalo bi da je isključena u php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nije nađeno: Sugar planer će raditi sa ograničenom funkcionalnošću.',
+	'ERR_CHECKSYS_CURL'					=> 'Nije pronađeno: Sugar planer će raditi sa ograničenom funkcionalnošću. Usluga arhiviranja e-pošte neće raditi.',
     'ERR_CHECKSYS_IMAP'					=> 'Nije nađeno: Dolazne email poruke i Kampanje (Email) zahtevaju IMAP biblioteke. Ni jedna od navedenih funkcija neće raditi.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC opcija ne može da bude uključena kada se koristi MS SQL server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Upozorenje:',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'Baza nije dostupna',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nije nađena podrška baze. Molimo, proverite da li imate neophodne drajvere za jednu od sledećih podržanih tipova baza: MySQL ili MS SQLServer. Možda ćete morati da uklonite ekstenziju u php.ini fajlu, ili da rekompajlirate sa tačnim binarnim fajlom, u zavisnosti od Vaše verzije PHP-a. Molimo pogledajte u Vaš PHP priručnik za više informacija o tome kako da uključite podršku baze. <br><br>Oracle i DB2 nisu baze podataka koje su podržane za SugarCRM PRO. Za spisak baza koje su podržane i informacije o drugim platformama, posetite <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Nisu nađene funkcije povezane sa bibliotekama XML parsiranja koje su neophodne za Sugar aplikaciju. Možda ćete morati da uklonite ekstenziju u php.ini fajlu , ili da ga ponovo kompajlirate sa tačnim binarnim fajlom, u zavisnosti od Vaše verzije PHP-a. Za više informacija molimo da pogledate PHP priručnik.',
+    'LBL_CHECKSYS_CSPRNG' => 'Generator nasumičnog broja',
     'ERR_CHECKSYS_MBSTRING'             => 'Funkcije koje zavise od Multibyte Strings PHP ekstenzije (mbstring), a koje su neophodne za ispravan rad Sugar aplikacije, nisu pronađene. <br/><br/>Generalno, mbstring modul podrazumevano nije omogućen u PHP-u i mora se posebno aktivirati uključivanjem opcije --enable-mbstring za vreme bildovanja PHP binarnog fajla. Za više informacija, molimo konsultujte vašu PHP dokumentaciju.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Podešavanje session.save_path u Vašem PHP konfiguracionom fajlu (php.ini) nije postavljeno ili je postavljno na folder koji ne postoji. Možda ćete morati da postavite podešavanja save_path u php.ini ili da verifikujete da postavke foldera u save_path postoje.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'ZIP podrška nije nađena: Potrebna je ZIP podrška da bi SugarCRM procesirao kompresovane fajlove.',
     'ERR_CHECKSYS_BCMATH'				=> 'BCMATH podrška nije pronađena: SugarCRM zahteva BCMATH podršku za matematiku arbitarne preciznosti.',
     'ERR_CHECKSYS_HTACCESS'             => 'Test za izmenu .htaccess nije uspeo. To najčešće znači da nemate podešenu opciju AllowOverride za Sugar direktorijum.',
+    'ERR_CHECKSYS_CSPRNG' => 'Izuzetak za CSPRNG',
 	'ERR_DB_ADMIN'						=> 'Uneto ime i/ili lozinka administratora baze nije validno, ne može da se uspostavi veza sa bazom. Molim, unesite važeće korisničko ime i lozinku. (Greška:',
     'ERR_DB_ADMIN_MSSQL'                => 'Uneto ime i/ili lozinka administratora baze nije validno, nije uspostavljena veza na bazu. Molim, unesite važeće korisničko ime i lozinku.',
 	'ERR_DB_EXISTS_NOT'					=> 'Naznačena baza ne postoji.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'Ključ je neophodan za opštu funkcionalsnost aplikacije, ali nije neophodan za instalaciju. Ne morate sada da unesete ključ, ali ćete morati da ga unesete nakon instaliranja aplikacije.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Zahteva minimalan broj informacija pri instalaciji. Preporučljivo za nove korisnike.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Omogućava dodatna podešavanja tokom instalacije. Većina ovih opcija je takođe dostupna nakon instalacije na administratorskim stranama. Preporučljivo za naprednije korisnike.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Omogućava dodatna podešavanja tokom instalacije. Većina ovih opcija je takođe dostupna nakon instalacije na administratorskim stranama. Preporučljivo za naprednije korisnike.',
 	'LBL_LANG_1'						=> 'Da bi koristili drugačiji jezik u Sugar-u a ne podrazumevani jezik (US-English), možete sada uvesti i instalirati jezički paket. Takođe, moći ćete da uvezete i instalirate jezičke pakete koji su u okrviru Sugar aplikacije. Ako želite da preskočite ovaj korak pritisnite Sledeći.',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Instaliraj',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Ukloni',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'Prihvatanje licence',
     'LBL_LICENSE_CHECKING'              => 'Provera sistema radi kompatibilnosti.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Proveravam okruženje',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'Proveravam akreditive baze podataka.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'Proveravanje baze podataka i FTS akreditiva.',
     'LBL_LICENSE_CHECK_PASSED'          => 'Sistem je prošao proveru kompatibilnosti.',
     'LBL_LICENSE_REDIRECT'              => 'Preusmeravanje u',
 	'LBL_LICENSE_DIRECTIONS'			=> 'Ako imate informaciju o licenci, molim unesite je u polje ispod.',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'Molim pročitajte sledeće važno obaveštenje pre nego što nastavite sa instalacijom. Informacije će Vam pomoći da odlučite da li ste spremni da u ovom trenutku instalirate aplikaciju.',
 
 
-	'LBL_WELCOME_2'						=> 'Za dokumentaciju o instalaciji, molim posetite <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>.  <BR><BR> Da kontaktirate SugarCRM inženjera podrške za pomoć pri instalaciji, molimo prijavite se na <a target="_blank" href="http://support.sugarcrm.com">SugarCRM Support Portal</a> i podnesite slučaj podršci.',
+	'LBL_WELCOME_2'						=> 'Dokumentaciju za instalaciju potražite na <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>. <BR><BR> Da biste se obratili inženjeru SugarCRM podrške za pomoć pri instalaciji, prijavite se na <a target="_blank" href="http://support.sugarcrm.com">Portal podrške za SugarCRM</a> i prijavite slučaj za podršku.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>Izaberite svoj jezik</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Čarobnjak podešavanja',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Dobrodošli u SugarCRM',
@@ -452,7 +455,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'Pokreni noćne masovne Email kampanje',
 	'LBL_OOTB_PRUNE'		=> 'Smanji bazu prvog dana u mesecu',
     'LBL_OOTB_TRACKER'		=> 'Smanji tabele sistema za praćenje',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Pokreni email podsetnike',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Pokreni obaveštenja podsetnika za e-poštu',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'Ažuriraj tabelu tracker_sessions',
     'LBL_OOTB_CLEANUP_QUEUE' => 'Red poslova čišćenja',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'Tip sistema',
     'LBL_FTS_HELP'      => 'Kako biste omogućili punu tekstualnu pretragu, odaberite vrstu aplikacije za pretragu i upišite lokaciju (host) i port gde se nalazi aplikacija za pretragu. Sugar uključuje ugrađenu podršku za elasticsearch aplikaciju.',
     'LBL_FTS_REQUIRED'    => 'Potrebna je elastična pretraga.',
-    'LBL_FTS_ERROR'    => 'Nemoguće je povezati se sa serverom za punu tekstualnu pretragu, molimo proverite Vaša podešavanja.',
+    'LBL_FTS_CONN_ERROR'    => 'Nije moguće povezivanje sa serverom za pretraživanje celog teksta, proverite postavke.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'Nema dostupne verzije servera za pretraživanje celog teksta, proverite svoje postavke.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'Otkrivena je nepodržana verzija pretraživača Elastic search. Koristite verzije: %s',
 
     'LBL_PATCHES_TITLE'     => 'Instaliraj najnovije zakrpe',
     'LBL_MODULE_TITLE'      => 'Instalacija jezičkih paketa',

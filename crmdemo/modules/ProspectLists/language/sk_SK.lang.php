@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -65,7 +65,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'A {{module_name}} consists of a collection of individuals or organizations you want to include or exclude in a mass marketing {{campaigns_singular_module}}. {{plural_module_name}} can contain any number and any combination of Targets, {{contacts_module}}, {{leads_module}}, Users, and {{accounts_module}}. Targets can be grouped into a {{module_name}} according to a set of predetermined criteria such as age group, geographic location, or spending habits. {{plural_module_name}} are used in mass email marketing {{campaigns_module}} that can be configured in the {{campaigns_module}} module.',
+    'LBL_HELP_RECORDS' => 'Modul {{module_name}} obsahuje súbor jednotlivcov alebo organizácií, ktoré chcete zahrnúť alebo vylúčiť z masového marketingu {{campaigns_singular_module}}. {{plural_module_name}} môže obsahovať ľubovoľný počet a ľubovoľnú kombináciu záznamov Ciele, {{contacts_module}}, {{leads_module}}, Používatelia a {{accounts_module}}. Ciele možno zoskupiť do záznamu {{module_name}} podľa množiny vopred určených kritérií, ako je napríklad veková skupina, geografická poloha alebo výdavkové návyky. {{plural_module_name}} sa používa pri masovom e-mailovom marketingu {{campaigns_module}}, ktorý možno nakonfigurovať v module {{campaigns_module}}.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'A {{module_name}} consists of a collection of individuals or organizations you want to include or exclude in a mass marketing {{campaigns_singular_module}}.

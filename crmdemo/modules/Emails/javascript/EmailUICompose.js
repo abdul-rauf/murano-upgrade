@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -1956,8 +1956,9 @@ SE.composeLayout = {
         form.ieId.value = ieId;
         form.mbox.value = mbox;
 		var teamIdsArray = SUGAR.collection.prototype.getTeamIdsfromUI(composeOptionsFormName, 'team_name');
+		var selTeamIdsArray = SUGAR.collection.prototype.getSelectedTeamIdsFromUI(composeOptionsFormName, 'team_name');
 		form.teamIds.value = teamIdsArray.join(",");
-        //form.selectedTeam.value = document.getElementById('teamOptions' + idx).value;
+        form.selectedTeam.value = selTeamIdsArray.join(",");
         form.primaryteam.value = SUGAR.collection.prototype.getPrimaryTeamidsFromUI(composeOptionsFormName, 'team_name');
 
         // email attachments

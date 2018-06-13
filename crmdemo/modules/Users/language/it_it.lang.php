@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -208,7 +208,7 @@ $mod_strings = array (
 	'LBL_LOCALE_EXAMPLE_NAME_FORMAT'	=> 'Esempio',
 	'LBL_LOCALE_NAME_FORMAT_DESC'		=> 'Imposta come verranno mostrati i nomi',
 	'LBL_LOCALE_NAME_FORMAT_DESC_2'	=> '<i>"s" Titolo<br>"f" Nome<br>"l" Cognome</i>',
-    'LBL_SAVED_SEARCH'                  => 'Ricerca & Layout Salvati',
+    'LBL_SAVED_SEARCH'                  => 'Ricerca e layout salvati',
 	// LOGIN PAGE STRINGS
 	'LBL_LOGIN_BUTTON_KEY'				=> 'L',
 	'LBL_LOGIN_BUTTON_LABEL'			=> 'Login',
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Password Nuova',
 	'LBL_NEW_PASSWORD1'					=> 'Password',
 	'LBL_NEW_PASSWORD2'					=> 'Conferma Password',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'La Password è stata modificata con successo.',
+    'LBL_NEW_USER_PASSWORD_1' => 'La Password è stata modificata con successo.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'È stata inviata una email all´utente contenente la password generata dal sistema.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'La Password è stata creata con successo.',
+    'LBL_NEW_USER_PASSWORD_3' => 'La Password è stata creata con successo.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Nuovo Utente',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Nuovo Utente [Alt+N]',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Budget',
     'LBL_FORECASTS'                     => 'Previsioni',
     'LBL_WORKSHEETS'                    => 'Fogli di Lavoro',
+	'LBL_CALENDARS'                     => 'Calendari',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Ottieni un altro CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Cambia in Suono',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Cambia in Immagine',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Telefono Lavoro',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Pubblica al mio indirizzo',
     'LBL_ICAL_PUB_URL'                  => 'URL Integrazione iCal',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Utilizza questo URL per registrarsi al calendario di Sugar all´interno di iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Utilizzare questa URL per abbonarsi al calendario Sugar nelle applicazioni supportate da iCal ' .
+                                           'applicazioni. Gli eventi del calendario di Sugar sono visualizzabili in modalità di sola lettura ' .
+                                           'nelle applicazioni calendari esterni e qualsiasi modifica agli eventi ' .
+                                           '(es. riunioni, chiamate ecc.) possono essere eseguite soltanto in Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'Query per la pubblicazione',
 	'LNK_NEW_USER'						=> 'Nuovo Utente',
 	'LNK_NEW_PORTAL_USER'				=> 'Crea Utente Portal API',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Report Utenti',
     'LBL_CONTACTS_SYNC' => 'Contatti',
-
+    'LBL_DETAIL' => 'Profilo utente',
 ); // END STRINGS DEFS
 
 ?>

@@ -5,7 +5,7 @@ if (!defined('sugarEntry') || !sugarEntry) {
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -137,13 +137,6 @@ class Email extends SugarBean {
      */
     protected $addedFieldDefs = array();
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Email()
-    {
-        self::__construct();
-    }
 
 	/**
 	 * sole constructor
@@ -205,7 +198,8 @@ class Email extends SugarBean {
 		$fileName = $upload->create_stored_filename();
         $GLOBALS['log']->debug("Email Attachment [$fileName]");
         if($upload->final_move($guid)) {
-        	copy("upload://$guid", sugar_cached("$email_uploads/$guid"));
+			sugar_mkdir(sugar_cached("$email_uploads/"));
+			copy("upload://$guid", sugar_cached("$email_uploads/$guid"));
 			return array(
 					'guid' => $guid,
 					'name' => $GLOBALS['db']->quote($fileName),
@@ -816,6 +810,8 @@ class Email extends SugarBean {
             }
 
             if (!is_null($mailer)) {
+                $mailer->setMessageId($this->id);
+                $this->message_id = $mailer->getHeader(EmailHeaders::MessageId);
                 $sentMessage = $mailer->send();
             }
         }
@@ -890,9 +886,10 @@ class Email extends SugarBean {
 			$this->cc_addrs_names = $_REQUEST['sendCc'];
 			$this->bcc_addrs = $_REQUEST['sendBcc'];
 			$this->bcc_addrs_names = $_REQUEST['sendBcc'];
-			$this->team_id = (isset($_REQUEST['primaryteam']) ?  $_REQUEST['primaryteam'] : $current_user->getPrivateTeamID());
+			$this->team_id = (!empty($_REQUEST['primaryteam']) ?  $_REQUEST['primaryteam'] : $current_user->getPrivateTeamID());
+			/* @var TeamSet $teamSet */
 			$teamSet = BeanFactory::getBean('TeamSets');
-			$teamIdsArray = (isset($_REQUEST['teamIds']) ?  explode(",", $_REQUEST['teamIds']) : array($current_user->getPrivateTeamID()));
+			$teamIdsArray = (!empty($_REQUEST['teamIds']) ?  explode(",", $_REQUEST['teamIds']) : array($current_user->getPrivateTeamID()));
 			$this->team_set_id = $teamSet->addTeams($teamIdsArray);
 
             if ($archived && !empty($request['assignedUser'])) {
@@ -1262,12 +1259,20 @@ class Email extends SugarBean {
         foreach($this->email_to_text as $textfield=>$mailfield) {
             $text->$textfield = $this->$mailfield;
         }
+
+        // Get and save the current Database Encoding setting and force it to be enabled
+        $encodeVal = $GLOBALS['db']->getEncode();
+        $GLOBALS['db']->setEncode(true);
+
         $text->email_id = $this->id;
 		if(!$this->new_with_id) {
             $this->db->update($text);
 		} else {
 		    $this->db->insert($text);
 		}
+
+        // Restore previous Database Encoding setting
+        $GLOBALS['db']->setEncode($encodeVal);
 	}
 
     ///////////////////////////////////////////////////////////////////////////
@@ -2189,7 +2194,13 @@ class Email extends SugarBean {
             $mailer->setHtmlBody($htmlBody);
             $mailer->setTextBody($textBody);
 
+            // Use this email's ID in the Message-ID if it exists. Otherwise, let it be auto-generated.
+            if (!empty($this->id)) {
+                $mailer->setMessageId($this->id);
+            }
+
             $mailer->send();
+            $this->message_id = $mailer->getHeader(EmailHeaders::MessageId);
 
             ///////////////////////////////////////////////////////////////////
             ////	INBOUND EMAIL HANDLING
@@ -2752,7 +2763,8 @@ class Email extends SugarBean {
         $GLOBALS['log']->debug("dbFormatDateFrom: {$dbFormatDateFrom}");
         $GLOBALS['log']->debug("dbFormatDateTo: {$dbFormatDateTo}");
         if (count($additionalWhereClause)) {
-            $GLOBALS['log']->debug("additionalWhereClause: " . $additionalWhereClause[count($additionalWhereClause)-1]);
+            $GLOBALS['log']->debug("additionalWhereClause: " .
+                $additionalWhereClause[count($additionalWhereClause) - 1]);
         }
         $GLOBALS['log']->debug("---------------------------------------------------------------------------------");
 

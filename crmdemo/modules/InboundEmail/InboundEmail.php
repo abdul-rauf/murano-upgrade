@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -12,6 +12,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 use Sugarcrm\Sugarcrm\Util\Serialized;
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 require_once('include/OutboundEmail/OutboundEmail.php');
 
@@ -136,14 +137,6 @@ class InboundEmail extends SugarBean {
 	// prefix to use when importing inlinge images in emails
 	public $imagePrefix;
 	protected $module_key = 'InboundEmail';
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function InboundEmail()
-    {
-        self::__construct();
-    }
 
 	/**
 	 * Sole constructor
@@ -2885,7 +2878,6 @@ class InboundEmail extends SugarBean {
 			$c->priority = 'P1';
 			$c->team_id = $_REQUEST['team_id'];
 			$c->team_set_id = $_REQUEST['team_set_id'];
-
 			if(!empty($email->reply_to_email)) {
 				$contactAddr = $email->reply_to_email;
 			} else {
@@ -2982,6 +2974,8 @@ class InboundEmail extends SugarBean {
             	$ret = $email->et->displayComposeEmail($email);
             	$ret['description'] = empty($email->description_html) ?  str_replace("\n", "\n<BR/>", $email->description) : $email->description_html;
 
+				include_once('include/workflow/alert_utils.php');
+
 				$reply = BeanFactory::getBean('Emails');
 				$reply->type				= 'out';
 				$reply->to_addrs			= $to[0]['email'];
@@ -2993,9 +2987,9 @@ class InboundEmail extends SugarBean {
 				$reply->reply_to_name		= $replyToName;
 				$reply->reply_to_addr		= $replyToAddr;
 				$reply->name				= $et->subject;
-				$reply->description			= $et->body . "<div><hr /></div>" .  $email->description;
+				$reply->description			= trim(parse_alert_template($c, $et->body)) . "<div><hr /></div>" .  $email->description;
 				if (!$et->text_only) {
-					$reply->description_html	= $et->body_html .  "<div><hr /></div>" . $email->description;
+					$reply->description_html = trim(parse_alert_template($c, $et->body_html)) .  "<div><hr /></div>" . $email->description;
 				}
 				$GLOBALS['log']->debug('saving and sending auto-reply email');
 				//$reply->save(); // don't save the actual email.
@@ -4192,8 +4186,10 @@ class InboundEmail extends SugarBean {
 				$this->imagePrefix = "cid:";
 			}
 			// handle multi-part email bodies
-			$email->description_html= $this->getMessageText($msgNo, 'HTML', $structure, $fullHeader,$clean_email); // runs through handleTranserEncoding() already
-			$email->description	= $this->getMessageText($msgNo, 'PLAIN', $structure, $fullHeader,$clean_email); // runs through handleTranserEncoding() already
+            // runs through handleTranserEncoding() already
+            $email->description_html = $this->getMessageText($msgNo, 'HTML', $structure, $fullHeader, $clean_email);
+            // runs through handleTranserEncoding() already
+            $email->description = $this->getMessageText($msgNo, 'PLAIN', $structure, $fullHeader, $clean_email);
 			$this->imagePrefix = $oldPrefix;
             if (empty($email->description)) {
                 $email->description = strip_tags($email->description_html);
@@ -4243,6 +4239,7 @@ class InboundEmail extends SugarBean {
 					$email->team_set_id = $_REQUEST['team_set_id'];
 				} // if
 			}
+
 
 	        //Assign Parent Values if set
 	        if (!empty($_REQUEST['parent_id']) && !empty($_REQUEST['parent_type'])) {

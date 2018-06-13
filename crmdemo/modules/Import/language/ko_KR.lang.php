@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,6 +20,7 @@ global $timedate;
  
 $mod_strings = array (
     'LBL_GOOD_FILE' => '가져온 파일 읽기를 성공했습니다.',
+    'LBL_RECORD_CONTAIN_LOCK_FIELD' => '삽입된 레코드는 프로세스에 동원되고 있으며, 해당 프로세스에 의해 일부 필드가 편집을 위해 잠겨있으므로 편집할 수 없습니다.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => '오류로 인해 줄을 가져오지 못했습니다.',
     'LBL_UPDATE_SUCCESSFULLY' => '기록 업데이트를 성공했습니다.',
     'LBL_SUCCESSFULLY_IMPORTED' => '기록이 새로 생성되었습니다.',

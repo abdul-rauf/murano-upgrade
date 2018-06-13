@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,7 +11,7 @@
  */
 
 /**
- * The Tag class handles operations related to the Tags functionality 
+ * The Tag class handles operations related to the Tags functionality
  **/
 class Tag extends Basic
 {
@@ -110,7 +110,13 @@ class Tag extends Basic
             // If there is an id property of the result then we have existing records
             // and need to bomb out now
             if (!empty($result[0]['id'])) {
-                throw new SugarApiExceptionNotAuthorized('EXCEPTION_DUPLICATE_TAG_FOUND', null, $this->module_dir);
+                throw new SugarApiExceptionNotAuthorized(
+                    'EXCEPTION_DUPLICATE_TAG_FOUND',
+                    null,
+                    $this->module_dir,
+                    null,
+                    'duplicate_tag'
+                );
             }
         }
     }
@@ -137,7 +143,9 @@ class Tag extends Basic
             $ids = "'" . implode("','", $ids) . "'";
         }
 
-        $sql = "SELECT tags.id, tags.name, tbr.bean_id as {$focus->table_name}_id";
+        $tableAlias = $this->db->getValidDBName($focus->table_name . '_id', false, 'alias');
+
+        $sql = "SELECT tags.id, tags.name, tbr.bean_id as {$tableAlias}";
         $sql .= " FROM tags INNER JOIN tag_bean_rel tbr ON tags.id=tbr.tag_id";
         $sql .= " WHERE tbr.bean_module = '{$focus->module_name}' AND tbr.bean_id in ($ids) AND tbr.deleted=0";
         $sql .= " ORDER BY tags.name_lower ASC";
@@ -145,7 +153,7 @@ class Tag extends Basic
         $result = $this->db->query($sql);
         $returnArray = array();
         while ($data = $this->db->fetchByAssoc($result)) {
-            $returnArray[$data["{$focus->table_name}_id"]][] = array("id" => $data["id"], "name"=>$data["name"]);
+            $returnArray[$data[$tableAlias]][] = array("id" => $data["id"], "name"=>$data["name"]);
         }
         return $returnArray;
     }

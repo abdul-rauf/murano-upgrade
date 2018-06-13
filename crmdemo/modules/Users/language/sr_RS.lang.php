@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Nova lozinka',
 	'LBL_NEW_PASSWORD1'					=> 'Lozinka',
 	'LBL_NEW_PASSWORD2'					=> 'Potvrdite lozinku',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Lozinka je uspešno promenjena.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Lozinka je uspešno promenjena.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'Email sa sistemski generisanom lozinkom je poslat korisniku.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Lozinka je kreirana uspešno.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Lozinka je kreirana uspešno.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Novi korisnik',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Novi korisnik [Alt+N]',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Kvote',
     'LBL_FORECASTS'                     => 'Prognoze',
     'LBL_WORKSHEETS'                    => 'Radni listovi',
+	'LBL_CALENDARS'                     => 'Kalendari',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Traži drugi CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Prebaci na Zvuk',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Prebaci na Sliku',
@@ -343,7 +344,7 @@ $mod_strings = array (
     'LBL_SWAP_SHORTCUT_DESCRIPTION'     => 'Prikazuje meni Prečice na vrh ako je odabrano. U suprotnom ide sa strane.',
     'LBL_SWAP_LAST_VIEWED_POSITION'     => 'Poslednje pregledano sa strane',
     'LBL_SWAP_SHORTCUT_POSITION'        => 'Prečice na vrh',
-	'LBL_TAB_TITLE_EMAIL'				=> 'Email podešavanja',
+	'LBL_TAB_TITLE_EMAIL'				=> 'Podešavanja e-pošte',
 	'LBL_TAB_TITLE_USER'				=> 'Podešavanja korisnika',
 	'LBL_THEME'							=> 'Teme',
 	'LBL_THEME_COLOR'					=> 'Boja',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Poslovni telefon',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Objavi na mojoj lokaciji',
     'LBL_ICAL_PUB_URL'                  => 'URL za integraciju sa iCal',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Iskoristite ovaj URL kako biste se prijavili na Sugar kalendar u okviru iCal',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Koristite ovu URL adresu da biste se pretlatili na Sugar kalendar u aplikacijama koje podržavaju ' .
+                                           'iCal. Događaji u Sugar kalendaru mogu se pregledati u režimu samo za čitanje ' .
+                                           'u spoljnim aplikacijama kalendara, a izmene događaja ' .
+                                           '(npr. sastanci, pozivi itd.) mogu se vršiti samo u softveru Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'URL vašeg upita',
 	'LNK_NEW_USER'						=> 'Kreiraj novog korisnika',
 	'LNK_NEW_PORTAL_USER'				=> 'Kreiraj novog API Portal korisnika',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Korisnički izveštaji',
     'LBL_CONTACTS_SYNC' => 'Kontakti',
-
+    'LBL_DETAIL' => 'Profil korisnika',
 ); // END STRINGS DEFS
 
 ?>

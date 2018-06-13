@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -301,7 +301,22 @@ class ImportDuplicateCheck
 
         $index_array = array();
         $fields_used = array();
-        $mstr_exclude_array = array('all'=>array('team_set_id','id','deleted'),'contacts'=>array('email2'), array('leads'=>'reports_to_id'), array('prospects'=>'tracker_key'));
+        $mstr_exclude_array = array(
+            'all' => array(
+                'team_set_id',
+                'id',
+                'deleted',
+            ),
+            'contacts' => array(
+                'email2',
+            ),
+            array(
+                'leads' => 'reports_to_id',
+            ),
+            array(
+                'prospects' => 'tracker_key',
+            ),
+        );
 
         //create exclude array from subset of applicable mstr_exclude_array elements
         $exclude_array =  isset($mstr_exclude_array[strtolower($this->_focus->module_dir)])?array_merge($mstr_exclude_array[strtolower($this->_focus->module_dir)], $mstr_exclude_array['all']) : $mstr_exclude_array['all'];

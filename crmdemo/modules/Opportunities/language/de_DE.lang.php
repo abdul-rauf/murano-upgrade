@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Durch Klicken von "Bestätigen" löschen Sie ALLE Prognosedaten und ändern Ihre Verkaufschancen-Ansicht. Falls Sie dies nicht wünschen, klicken Sie auf Abbrechen, um zu den vorherigen Einstellungen zurückzukehren.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Durch Klicken von "Bestätigen" löschen Sie ALLE Prognosedaten und ändern Ihre Verkaufschancen-Ansicht. '
+        .'Auch ALLE Prozessdefinitionen mit einem Zielmodul von Umsatzposten werden deaktiviert. '
+        .'Wenn Sie dies nicht wünschen, klicken Sie auf "Abbrechen", um zu den vorherigen Einstellungen zurúckzukehren.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Falls alle Umsatzposten geschlossen sind und mindestens einer gewonnen wurde,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'wird die Verkaufsphase "Verkaufschancen" auf "Gewonnen" gesetzt.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Falls alle Umsatzposten sich in der Verkaufsphase "Verloren" befinden,',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Mit dem Modul {{plural_module_name}} können Sie einzelne Verkäufe sowie auch die dazugehörigen Umsatzposten von Anfang bis Ende nachverfolgen. Jeder Eintrag {{module_name}} stellt die Kopfzeile einer Gruppe von {{revenuelineitems_module}} dar und hat auch einen Bezug auf andere wichtige Einträge, wie z. B. {{quotes_module}}, {{contacts_module}}, etc. Jeder {{revenuelineitems_singular_module}} bedeutet den potentiellen Verkauf eines bestimmten Produkts und enthält verkaufsrelevante Daten. Jeder {{revenuelineitems_singular_module}} durchläuft verschiedene Verkaufsphasen, bis er entweder die Markierung „Gewonnen“ oder „Verloren“ erhält. Der {{module_name}} Eintrag zeigt den Betrag und das erwartete Verkaufsdatum seines {{revenuelineitems_module}} an. {{plural_module_name}} und {{revenuelineitems_module}} können mithilfe von Sugar&#39;s {{forecasts_singular_module}}Module desweiteren auch noch dazu genutzt werden, Trends bei Verkäufen besser zu verstehen und vorherzusagen und erlauben, dass man sich noch mehr auf das Erreichen der Verkaufsquoten konzentrieren kann.',
+    'LBL_HELP_RECORDS' => 'Mit dem Modul {{plural_module_name}} können Sie einzelne Verkäufe von Anfang bis Ende nachverfolgen. Jeder Eintrag {{module_name}} stellt einen potentiellen Verkauf dar und hat sowohl relevante Verkaufsdaten als auch einen Bezug auf andere wichtige Einträge, wie z. B. {{quotes_module}}, {{contacts_module}}, etc. Ein Eintrag {{module_name}} durchläuft in der Regel verschiedene Verkaufsphasen, bis er entweder die Markierung "Gewonnen“ oder "Verloren“ erhält. {{plural_module_name}} kann desweiteren mithilfe von Sugar´s {{forecasts_singular_module}}Modul auch dazu genutzt werden, Trends bei Verkäufen besser zu verstehen und vorherzusagen und es erlaubt, dass man sich noch mehr auf das Erreichen der Verkaufsquoten konzentrieren kann.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Mit dem Modul {{plural_module_name}} Modul können Sie einzelne Verkäufe, samt dazugehöriger Umsatzposten, von Anfang bis Ende nachverfolgen. Jeder Eintrag {{module_name}} stellt die Kopfzeile einer Gruppe von {{revenuelineitems_module}} dar sowie auch den Bezug zu anderen wichtigen Einträgen, wie z. B. {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'Mit dem Modul {{plural_module_name}} Modul können Sie einzelne Verkäufe, samt dazugehöriger Umsatzposten, von Anfang bis Ende nachverfolgen. Jeder Eintrag {{module_name}} stellt einen potentiellen Verkauf dar und hat die relevanten Verkaufsdaten sowie auch den Bezug zu anderen wichtigen Einträgen, wie z. B. {{quotes_module}}, {{contacts_module}}, etc.
 
-- Bearbeiten Sie die Felder in diesem Eintrag indem Sie auf ein bestimmtes Feld oder auf die Schaltfläche "Bearbeiten" klicken.
-- Zeigen Sie Links zu anderen Einträgen in den Subpanels an oder bearbeiten Sie diese, einschließlich {{revenuelineitems_module}}, indem Sie das Fenster links unten auf "Datenansicht" einstellen.
-- Machen Sie Benutzerkommentarde, zeigen Sie diese an oder zeigen Sie die Datensatz-Änderungshistorie in {{activitystream_singular_module}} an, indem Sie das Fenster links unten auf "Aktivitäts-Stream" einstellen.
+- Bearbeiten Sie die Felder in diesem Eintrag, indem Sie auf ein bestimmtes Feld oder auf die Schaltfläche "Bearbeiten" klicken.
+- Zeigen Sie Links zu anderen Einträgen in den Subpanels an oder bearbeiten Sie diese, indem Sie das Fenster links unten auf "Datenansicht" einstellen.
+- Machen Sie Benutzerkommentare, zeigen Sie diese an oder zeigen Sie die Datensatz-Änderungshistorie in {{activitystream_singular_module}} an, indem Sie das Fenster links unten auf "Aktivitäts-Stream" einstellen.
 - Folgen Sie diesem Datensatz oder markieren Sie ihn als Favoriten, indem Sie die Symbole rechts neben dem Datensatznamen verwenden.
 - Weitere Aktionen stehen Ihnen im Dropdown-Menü rechts neben der Schaltfläche "Bearbeiten" zur Verfügung.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Mit dem Modul {{plural_module_name}} Modul können Sie einzelne Verkäufe, samt dazugehöriger Umsatzposten, von Anfang bis Ende nachverfolgen. Jeder Eintrag {{module_name}} stellt die Kopfzeile einer Gruppe von {{revenuelineitems_module}} dar sowie auch den Bezug zu anderen wichtigen Einträgen, wie z. B. {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Mit dem Modul {{plural_module_name}} Modul können Sie einzelne Verkäufe, samt dazugehöriger Umsatzposten, von Anfang bis Ende nachverfolgen. Jeder Eintrag {{module_name}} stellt einen potentiellen Verkauf dar und hat die relevanten Verkaufsdaten sowie auch den Bezug zu anderen wichtigen Einträgen, wie z. B. {{quotes_module}}, {{contacts_module}}, etc.
 
 So erstellen Sie ein {{module_name}}: 
 1. Erfassen Sie alle relevanten Informationen. 
 - Felder, die als Pflichtfeld markiert sind, müssen vor dem Speichern ausgefüllt werden. 
 - Klicken Sie auf "Mehr anzeigen", um weitere Felder zu erfassen. 
-2. Klicken Sie auf "Speichern", um den Datensatz fertigzustellen und auf die letzte Seite zurück zu kommen.
-3. Verwenden Sie das Sub-Panel {{revenuelineitems_module}} zum Hinzufügen von Umsatzposten zum {{module_name}}.',
+2. Klicken Sie auf "Speichern", um den Datensatz fertigzustellen und auf die letzte Seite zurück zu kommen.',
 
 // END PRO/CORP
 

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -66,13 +66,13 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Send mail til alle inviterede',
     'LBL_EMAIL_REMINDER' => 'E-mail påmindelse',
     'LBL_EMAIL_REMINDER_TIME' => 'E-mail påmindelsestid',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup påmindelsestid',
+    'LBL_POPUP_REMINDER_TIME' => 'Popup påmindelsestidspunkt',
     'LBL_SEND_BUTTON_TITLE'=>'Send invitationer [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Send invitationer',
 	'LBL_DATE_END'=>'Slutdato',
 	'LBL_TIME_END'=>'Sluttidspunkt',
-	'LBL_REMINDER_TIME'=>'Påmindelsestidspunkt',
+    'LBL_REMINDER_TIME'=>'Påmindelsestidspunkt',
     'LBL_EMAIL_REMINDER_SENT' => 'E-mail påmindelse sendt',
     'LBL_SEARCH_BUTTON'=> 'Søg',
     'LBL_ACTIVITIES_REPORTS' => 'Aktivitetsrapport',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Slet alle gentagelser',
     'LBL_DATE_END_ERROR' => 'Slut dato er før start dato',
     'LBL_REPEAT_PARENT_ID' => 'Gentag overordnet id',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Gentagelses-ID på opkald. Startdato for oprindeligt opkald',
     'LBL_RECURRING_SOURCE' => 'Tilbagevendende kilde',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Er du sikker på du vil fjerne alle tilbagevendende poster?',
     'LBL_RECURRING_LIMIT_ERROR' => 'Dette tilbagevendende opkald kan ikke planlægges, da det overskrider den maksimalt antal tilladte gentagelser på $limit.',

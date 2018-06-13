@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -17,6 +17,7 @@
 
 <h2>Summary</h2>
 <span class="lead">
+    Note: This endpoint is <strong>deprecated</strong>. Please use GET /&lt;module&gt;/filter and supply a filter_id instead.
     This endpoint will return a set of records filtered by a given filter id. Additional filters can also be applied in
     addition to any existing filters defined by the filter record. Care will need to be taken to make sure this filter
     has appropriate indexes on the server side otherwise the runtime of the endpoint will be very long. Related fields

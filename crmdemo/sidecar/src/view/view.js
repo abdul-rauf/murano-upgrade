@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -21,7 +21,6 @@
 
         /**
          * TODO: add docs (describe options parameter, see Component class for an example).
-         * @constructor
          * @param options
          */
         initialize: function(options) {
@@ -29,10 +28,16 @@
             app.view.Component.prototype.initialize.call(this, options);
 
             /**
-             * Name of the view (required).
-             * @cfg {String}
+             * View type
+             * @cfg {string}
              */
-            this.name = options.name;
+            this.type = options.type;
+
+            /**
+             * Name of the view.
+             * @cfg {string}
+             */
+            this.name = options.name || this.type;
 
             /**
              * Name of the action (optional).
@@ -81,9 +86,39 @@
 
             this._setLabels();
 
+            /**
+             * The view name that contains the list of fields to use when
+             * fetching the model/collection from the server.
+             *
+             * List, record or detail views might have too many fields defined
+             * in the metadata. This property avoids having to list all these
+             * fields in the request params.
+             *
+             * @property {string} dataView
+             */
+            if (this.dataView) {
+                this.context.set('dataView', this.dataView);
+            } else {
+                this.context.addFields(this.getFieldNames());
+            }
+
             app.events.on('app:locale:change', function() {
                 this._setLabels();
             }, this);
+        },
+
+        /**
+         * Gets the template falling back using `loadModule` property when
+         * specified.
+         *
+         * @param {string} name The template's name to get.
+         * @param {string} [fallbackModule] The module to fallback to if the
+         *   template does not exist in this view's module. If undefined, the
+         *   template is grabbed in `base`.
+         * @private
+         */
+        _getTemplate: function(name, fallbackModule) {
+            return app.template.getView(name, this.module) || app.template.getView(name, fallbackModule);
         },
 
         /**
@@ -92,22 +127,35 @@
          *
          * @param {Object} [options] The options that may specify the template to
          *   load.
+         * @param {Object} [options] A hash of options.
+         * @param {Function} [options.template] The compiled template.
+         * @param {string} [options.loadModule] The fallback module to get the
+         *   template from.
          * @private
          */
         _loadTemplate: function(options) {
             var template, templateName;
+            options = options || {};
 
-            if (template = options && options.template) {
+            if (options.template) {
+                template = options.template;
                 templateName = null;
-            } else if (template = this.meta && this.meta.template && app.template.getView(this.meta.template)) {
+            } else if (this.meta && this.meta.template) {
+                template = this._getTemplate(this.meta.template, options.loadModule);
                 templateName = this.meta.template;
-            } else if (template = (app.template.getView(this.name, this.module) || app.template.getView(this.name))) {
-                templateName = this.name;
-            } else if (template = this.meta && this.meta.type && app.template.getView(this.meta.type)) {
-                templateName = this.meta.type;
             } else {
-                template = app.template.empty;
-                templateName = '';
+                template = this._getTemplate(this.name, options.loadModule);
+                templateName = this.name;
+            }
+
+            if (!template) {
+                if (this.meta && this.meta.type) {
+                    template = this._getTemplate(this.meta.type, options.loadModule);
+                    templateName = this.meta.type;
+                } else {
+                    template = app.template.empty;
+                    templateName = '';
+                }
             }
 
             /**
@@ -127,24 +175,6 @@
              * @member View.View
              */
             this.template = template;
-        },
-
-        /**
-         * Used in `initialize` above to check if metadata has `template`. If so, will return the
-         * "surrogate template" from that view.
-         * @param  {Object} options The options passed through from `initialize`
-         * @return {Object} The view template or null
-         *
-         * @deprecated since 7.7 will be removed in 7.8.
-         */
-        getTemplateFromMeta: function(options) {
-            app.logger.warn('`getTemplateFromMeta` is deprecated since 7.7 and ' +
-                'will be removed in 7.8.');
-
-            if(options.meta && options.meta.template) {
-                return app.template.getView(options.meta.template);
-            }
-            return null;
         },
 
         /**
@@ -190,8 +220,8 @@
          * </code></pre>
          *
          * This method uses this view's {@link View.View#template} property to render itself.
-         * @param ctx(optional) Template context.
-         * @param options(optional) Template options.
+         * @param {Data.Context} [ctx] Template context.
+         * @param {Object} [options] Template options.
          * <pre><code>
          * {
          *    helpers: helpers,
@@ -206,17 +236,6 @@
             if (this.template) {
                 try {
                     this.$el.html(this.template(ctx || this, options || this.options.templateOptions));
-                    // See the following resources
-                    // https://github.com/documentcloud/backbone/issues/310
-                    // http://tbranyen.com/post/missing-jquery-events-while-rendering
-
-                    // The following is provided for your convenience should you wish to learn more about
-                    // Backbone.js views delegateEvents do not get bound (sometimes).
-                    // For a list of the actual third party software used in this Sugar product,
-                    // please visit http://support.sugarcrm.com/06_Customer_Center/11_Third_Party_Software/.
-                    //
-                    // http://stackoverflow.com/questions/5125958/backbone-js-views-delegateevents-do-not-get-bound-sometimes
-                    this.delegateEvents();
                 } catch (e) {
                     app.logger.error("Failed to render " + this + "\n" + e);
                     app.error.handleRenderError(this, '_renderHtml');
@@ -318,24 +337,23 @@
         /**
          * Fetches data for view's model or collection.
          *
-         * This method calls view's context {@link Core.Context#loadData} method
-         * and sets context's `fields` property beforehand.
+         * This method calls view's context {@link Core.Context#loadData} method.
          *
          * Override this method to provide custom fetch algorithm.
          * @param {Object} [options] Options that are passed to
          *   collection/model's fetch method.
-         * @param {boolean} [setFields=true] If `true`, the layout will update
-         *   the set of fields used on the current context.
          */
-        loadData: function(options, setFields) {
+        loadData: function(options) {
+            // FIXME This should be removed by 7.9.
+            if (arguments.length === 2) {
+                app.logger.warn('The `setFields` argument is no longer supported. Views and Layouts must ' +
+                    'add the fields they need without affecting other Views and Layouts');
+            }
+
             // See Bug56941.
             // Lets only load the data for views where user has read access.
             // Otherwise we generate REST API errors.
             if (app.acl.hasAccess("read", this.module)) {
-                setFields = _.isUndefined(setFields) ? true : setFields;
-                if (setFields){
-                    this.context.set("fields", this.getFieldNames());
-                }
                 this.context.loadData(options);
             }
         },
@@ -490,26 +508,50 @@
             return "view-" + this.name + "-" + app.view.Component.prototype.toString.call(this);
         },
 
+        /**
+         * Gets a field's metadata.
+         * @param {String} name Field name.
+         * @param {Boolean} includeChild optional flag indicating that we should check if this is a child field when true.
+         * @return {Object} field metadata.
+         */
+        getFieldMeta : function(field, includeChild) {
+            var fields = _.flatten(_.pluck(this.meta.panels, "fields")),
+                ret = _.find(fields, function(def) {
+                    return def.name === field;
+                });
 
+            if (!ret && includeChild) {
+                ret = _.find(_.flatten(_.pluck(fields, "fields")), function(def) {
+                    return def && def.name === field;
+                });
 
-        getFieldMeta : function(field) {
-            var ret = _.find(_.flatten(_.pluck(this.meta.panels, "fields")), function(def){
-                return def.name == field;
-            });
+                if (ret) {
+                    ret._isChild = true;
+                }
+            }
+
             return ret;
         },
 
+        /**
+         * Sets a field's metadata.
+         * @param {String} name Field name.
+         * @param {Object} meta Field metadata
+         */
         setFieldMeta : function(field, meta) {
-            _.each(this.meta.panels, function(panel){
-                _.each(panel.fields, function(def, i){
-                    if (def.name == field) {
+            _.each(this.meta.panels, function(panel) {
+                _.each(panel.fields, function(def, i) {
+                    if (def.name === field) {
                         panel.fields[i] = _.extend(def, meta);
+                    } else if (_.isArray(def.fields)) {
+                        _.each(def.fields, function(childDef, j) {
+                            if (childDef.name === field) {
+                                def.fields[j] = _.extend(childDef, meta);
+                            }
+                        });
                     }
                 });
             });
         }
-
     });
-
-
 })(SUGAR.App);

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -21,10 +21,10 @@
     events: {
         'change input': 'filterNameChanged',
         'keyup input': 'filterNameChanged',
-        'click a.reset_button': 'triggerReset',
-        'click a.filter-close': 'triggerClose',
-        'click a.save_button:not(.disabled)': 'triggerSave',
-        'click a.delete_button:not(.hide)': 'triggerDelete'
+        'click [data-action=filter-reset]': 'triggerReset',
+        'click [data-action=filter-close]': 'triggerClose',
+        'click [data-action=filter-delete]:not(.hide)': 'triggerDelete',
+        'click [data-action=filter-save]:not(.disabled)': 'triggerSave'
     },
 
     className: 'filter-header',
@@ -51,30 +51,44 @@
             this.setFilterName(name);
 
             //shortcut keys
-            app.shortcuts.register(
-                'Filter:Close',
-                ['esc', 'ctrl+alt+l'],
-                function() {
-                    this.$('a.filter-close').click();
-                },
-                this,
-                true
-            );
-            app.shortcuts.register(
-                'Filter:Save',
-                ['ctrl+s', 'ctrl+alt+a'],
-                function() {
-                    this.$('a.save_button:not(.disabled)').click();
-                },
-                this,
-                true
-            );
-            app.shortcuts.register('Filter:Delete', 'd', function() {
-                this.$('a.delete_button:not(.hide)').click();
-            }, this);
-            app.shortcuts.register('Filter:Reset', 'r', function() {
-                this.$('a.reset_button').click();
-            }, this);
+            app.shortcuts.register({
+                id: 'Filter:Close',
+                keys: ['esc', 'mod+alt+l'],
+                component: this,
+                description: 'LBL_SHORTCUT_FILTER_CLOSE',
+                callOnFocus: true,
+                handler: function() {
+                    this.$('[data-action=filter-close]').click();
+                }
+            });
+            app.shortcuts.register({
+                id: 'Filter:Save',
+                keys: ['mod+s', 'mod+alt+a'],
+                component: this,
+                description: 'LBL_SHORTCUT_FILTER_SAVE',
+                callOnFocus: true,
+                handler: function() {
+                    this.$('[data-action=filter-save]:not(.disabled)').click();
+                }
+            });
+            app.shortcuts.register({
+                id: 'Filter:Delete',
+                keys: 'd',
+                component: this,
+                description: 'LBL_SHORTCUT_FILTER_DELETE',
+                handler: function() {
+                    this.$('[data-action=filter-delete]:not(.hide)').click();
+                }
+            });
+            app.shortcuts.register({
+                id: 'Filter:Reset',
+                keys: 'r',
+                component: this,
+                description: 'LBL_SHORTCUT_FILTER_RESET',
+                handler: function() {
+                    this.$('[data-action=filter-reset]').click();
+                }
+            });
         }, this);
 
         this.listenTo(this.layout, 'filter:toggle:savestate', this.toggleSave);
@@ -157,7 +171,7 @@
      * @param {Boolean} enable `true` to enable the button, `false` otherwise.
      */
     toggleDelete: function(enable) {
-        this.$('.delete_button').toggleClass('hide', !enable);
+        this.$('[data-action=filter-delete]').toggleClass('hide', !enable);
     },
 
     /**
@@ -168,7 +182,7 @@
     toggleSave: function(enable) {
         this.saveState = _.isUndefined(enable) ? !this.saveState : !!enable;
         var isEnabled = this.getFilterName() && this.saveState;
-        this.$('.save_button').toggleClass('disabled', !isEnabled);
+        this.$('[data-action=filter-save]').toggleClass('disabled', !isEnabled);
     },
 
     /**

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -38,15 +38,48 @@ class CountRelatedExpression extends NumericExpression
      */
     public static function getJSEvaluate()
     {
-        return <<<EOQ
-		    var linkField = this.getParameters().evaluate();
+        return <<<JS
 
-			if (typeof(linkField) == "string" && linkField != "") {
+        var linkField = this.getParameters().evaluate();
+        // if App is undefined, then we should still use what was there since it works in BWC mode.
+        if (App === undefined) {
+
+            if (typeof(linkField) == 'string' && linkField != '') {
                 return this.context.getRelatedField(linkField, 'count');
-			}
+            }
 
-			return "";
-EOQ;
+            return '';
+        }
+
+        // just the the length of the collection for the given linkField
+        var target = this.context.target,
+            current_value = 0,
+            relatedColl = this.context.model.getRelatedCollection(linkField);
+
+        // if the model is new, it will never have the dataFetched flag set on it, so we should always use what
+        // was returned by the call above.
+        if (relatedColl.dataFetched || this.context.model.isNew()) {
+            current_value = relatedColl.length;
+        } else if (this.context.model.has(linkField)) {
+            // check the case where related data still hasn't been loaded
+            // but we made a call to ExpressionEngine earlier
+            var link = this.context.model.get(linkField);
+            if (link.count) {
+                current_value = link.count;
+            }
+        }
+
+        this.context.model.set(target, current_value);
+        // update the relationship defs on the model
+        this.context.updateRelatedFieldValue(
+            linkField,
+            'count',
+            '',
+            current_value,
+            this.context.model.isNew()
+        );
+        return current_value;
+JS;
     }
 
     /**

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -39,11 +39,11 @@ if(empty($_REQUEST['track'])) {
 if(!empty($_REQUEST['identifier'])) {
 	$keys=log_campaign_activity($_REQUEST['identifier'],'link',true,$track);
     
-}else{
-    //if this has no identifier, then this is a web/banner campaign
-    //pass in with id set to string 'BANNER'
-    $keys=log_campaign_activity('BANNER','link',true,$track);
-
+} elseif (!in_array(getCampaignType($track), array('Email', 'NewsLetter')) ||
+    hasSentCampaignEmail($track)) {
+    // this has no identifier, pass in with id set to string 'BANNER'
+    // don't log if it's email/newsletter campaign and campaign emails haven't been sent
+    $keys = log_campaign_activity('BANNER', 'link', true, $track);
 }
 
 $track = $db->quote($track);

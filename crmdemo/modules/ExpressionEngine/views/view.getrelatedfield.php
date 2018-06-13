@@ -35,7 +35,7 @@ class ViewGetRelatedField extends ViewAjax
 
     function __construct()
     {
-        parent::ViewAjax();
+        parent::__construct();
         foreach($this->vars as $var)
         {
             if (empty($_REQUEST[$var]))

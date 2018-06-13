@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Eliminar Todas las Recurrencias',
     'LBL_DATE_END_ERROR' => 'La fecha de finalización es anterior a la fecha de inicio',
     'LBL_REPEAT_PARENT_ID' => 'Repita el ID principal',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID de repetición de reunión. Fecha de inicio de reunión original',
     'LBL_RECURRING_SOURCE' => 'Fuente periódica',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => '¿Está seguro de que desea eliminar todos los registros recurrentes?',
     'LBL_RECURRENCE' => 'Repetición',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -95,10 +95,13 @@ $mod_strings = array (
     'LBL_KB_STATUS_BACK_TO_DRAFT' => 'ドキュメントのステータスはドラフトに戻されました。',
     'LBL_OPERATOR_CONTAINING_THESE_WORDS' => '含めるキーワード',
     'LBL_OPERATOR_EXCLUDING_THESE_WORDS' => 'これらの言葉を除く',
-    'ERROR_EXP_DATE_LOW' => 'The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_EXP_DATE_LOW' => '有効期限は公開日より前に設定できません。',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => '承認済みステータスにするには、発行日が必要です。',
     'ERROR_ACTIVE_DATE_LOW' => 'The Publish Date must occur on a later date than today&#39;s date.',
     'ERROR_ACTIVE_DATE_EMPTY' => '発行日が空です。',
     'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>の作成に成功しました。', // use when a model is available
+    'ERROR_IS_BEFORE' => 'エラー: このフィールドの日付は、{{this}}のフィールドの日付よりも後の日付でなければなりません。',
     'TPL_SHOW_MORE_MODULE' => 'その他の {{module}} 記事...',
+    'LBL_LIST_FORM_TITLE' => 'ナレッジベース一覧',
+    'LBL_SEARCH_FORM_TITLE' => 'ナレッジベース検索',
 );

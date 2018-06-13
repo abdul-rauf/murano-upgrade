@@ -3,7 +3,7 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -452,6 +452,10 @@ $dictionary['Document'] = array('table' => 'documents',
         array('name' => 'idx_doc_cat', 'type' => 'index', 'fields' => array('category_id', 'subcategory_id')),
         array('name' => 'idx_document_doc_type', 'type' => 'index', 'fields' => array('doc_type')),
         array('name' => 'idx_document_exp_date', 'type' => 'index', 'fields' => array('exp_date')),
+        array('name' => 'idx_documents_related_doc_id_deleted', 'type' => 'index', 'fields' => array(
+            'related_doc_id',
+            'deleted',
+        )),
     ),
     'relationships' => array(
         'related_documents' => array('lhs_module' => 'Documents', 'lhs_table' => 'documents', 'lhs_key' => 'id',

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Nέος Κωδικός Πρόσβασης:',
 	'LBL_NEW_PASSWORD1'					=> 'Κωδικός Πρόσβασης',
 	'LBL_NEW_PASSWORD2'					=> 'Επιβεβαίωση Κωδικού Πρόσβασης',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Ο Κωδικός Πρόσβασης άλλαξε με επιτυχία.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Ο Κωδικός Πρόσβασης άλλαξε με επιτυχία.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'Ένα email στάλθηκε στον χειριστή το οποίο περιλαμβάνει έναν παραγμένο κωδικό πρόσβασης του συστήματος.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Ο Κωδικός Πρόσβασης δημιουργήθηκε με επιτυχία.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Ο Κωδικός Πρόσβασης δημιουργήθηκε με επιτυχία.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Νέος Χρήστης',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Νέος Χρήστης [Alt+N]',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Ποσοστώσεις',
     'LBL_FORECASTS'                     => 'Προβλέψεις',
     'LBL_WORKSHEETS'                    => 'Φύλλα εργασίας',
+	'LBL_CALENDARS'                     => 'Ημερολόγια',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Πάρτε ένα άλλο CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Αλλαγή στον Ήχο',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Αλλαγή σε εικόνα',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Τηλέφωνο Εργασίας',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Δημοσίευση στη δική μου περιοχή',
     'LBL_ICAL_PUB_URL'                  => 'iCal ολοκλήρωση URL',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Χρησιμοποιήστε αυτό το URL για να προσυπογράψετε στο ημερολόγιο Sugar μέσα σε iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Χρησιμοποιήστε αυτο το URL για να εγγραφείτε στο ημερολόγιό Sugar σε iCal-υποστηριζόμενες ' .
+                                           'εφαρμογές. Συμβάντα ημερολογίου Sugar είναι δυνατό να προβληθούν μόνο προς ανάγνωση ' .
+                                           'σε εξωτερικές εφαρμογές ημερολογίου, και οποιεσδήποτε τροποποιήσεις σε συμβάντα ' .
+                                           '(π.χ. συναντήσεις, κλήσεις, κ.λπ.) μπορούν να πραγματοποιηθούν μόνο στο Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'URL Ερωτήματος σας',
 	'LNK_NEW_USER'						=> 'Δημιουργία Χρήστη',
 	'LNK_NEW_PORTAL_USER'				=> 'Δημιουργία Χρήστη Portal API',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Αναφορές Χρηστών',
     'LBL_CONTACTS_SYNC' => 'Επαφές',
-
+    'LBL_DETAIL' => 'Προφίλ Χειριστή',
 ); // END STRINGS DEFS
 
 ?>

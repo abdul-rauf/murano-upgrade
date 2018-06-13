@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -284,11 +284,27 @@
 
                     if (_.isString(controller)) {
                         try {
-                            controller = eval("[" + controller + "][0]");
+                            controller = eval("[" + controller + "][0]"); // jshint ignore:line
                         } catch (e) {
                             app.logger.error('Failed to eval view controller for ' + className + ': ' + e + ':\n' + entry.controller);
                         }
+                    } else {
+                        /**
+                         * To create a layout or a view in a layout definition metadata file, the rules are:
+                         *     the name defines which metadata to use
+                         *     the type defines which js controller to use
+                         */
+                        // Log warnings when controllers for layouts/views have nothing else but "extendsFrom"
+                        var emptyController = type !== 'field' &&
+                            Object.getOwnPropertyNames(controller).length === 1 &&
+                            controller.hasOwnProperty('extendsFrom');
+                        if (emptyController) {
+                            app.logger.warn('Instead of creating an empty js controller `' + className +
+                                '` and specify the parent with extendsFrom, please use `type` property in the metadata `' + name +
+                                '`, to specify controller to use. It will allow you to delete your empty controllers and save memory.');
+                        }
                     }
+
                     entries[className] = {
                         type: name,
                         controller: controller,
@@ -446,61 +462,101 @@
         },
 
         /**
-         * Gets field widget metadata.
-         * @param {Object} type Field type.
-         * @return {Object} Metadata for the specified field type (falls back to `base` field).
+         * Gets the field def for a given Module's field (or all fields if none
+         * is supplied).
+         *
+         * @param {Object} options.
+         * @param {string} options.module The module that we want to get the
+         *   vardefs.
+         * @param {string} [options.name] The field name to get the field def.
+         * @return {Object|undefined} Field def for the given Module, or all
+         *   fields if no `options.name` is supplied.
          */
-        getField: function(type) {
-            // Fall back to the base field
-            var metadata = _metadata.fields ? (_metadata.fields[type] || _metadata.base) : null;
-            return metadata ? app.metadata.copy(metadata, { field: type }) : metadata;
+        getField: function (options) {
+            if (_.isString(options) || options === void 0) {
+                var type = options;
+                app.logger.warn('`Core.Metadata#getField` signature is deprecated since 7.8 ' +
+                    'and will be removed in 7.9. Please update your code.');
+                var metadata = _metadata.fields ? (_metadata.fields[type] || _metadata.base) : null;
+                return metadata ? app.metadata.copy(metadata, { field: type }) : metadata;
+            }
+
+            if (!options.module) {
+                throw new Error('Cannot get vardefs without a module');
+            }
+
+            var fields = this.getModule(options.module, 'fields');
+            if (fields && options.name) {
+                return fields[options.name];
+            }
+
+            return fields;
         },
 
         /**
          * Gets view metadata.
-         * @param {String} module Module name.
-         * @param {String} view (optional) View name.
-         * @return {Object} View metadata if view name is specified.
-         *   Otherwise, metadata for all views of the given module.
-         *   If the optional view parameter is provided we instead return null
+         * @param {string} module Module name.
+         * @param {string} [view] View name.
+         * @param {string} [loadModule] The module that should be considered base. Defaults to core metadata.
+         * @return {Object|null} View metadata if `view name` is specified.
+         *   Otherwise, metadata for all views of the given `module`.
+         *   If the optional view parameter is provided we instead return `null`
          *   if view for module not found.
          */
-        getView: function(module, view) {
-            var metadata = module ? this.getModule(module, 'views') : _metadata.views;
+        getView: function (module, view, loadModule) {
+
+            if (!module && !view) {
+                return _metadata.views;
+            }
+
+            var meta = this.getModule(module, 'views');
+
             if (view) {
-                if (metadata && metadata[view] && !_.isUndefined(metadata[view].meta)) {
-                    metadata = metadata[view].meta;
-                } else if (_metadata.views && _metadata.views[view] && !_.isUndefined(_metadata.views[view].meta)) {
-                    metadata = _metadata.views[view].meta;
+                if (meta && meta[view] && meta[view].meta !== void 0) {
+                    meta = meta[view].meta;
+                } else if (loadModule) {
+                    meta = this.getModule(loadModule, 'views');
+                    meta = meta && meta[view] ? meta[view].meta : null;
+                } else if (_metadata.views && _metadata.views[view]) {
+                    meta = _metadata.views[view].meta;
                 } else {
-                    metadata = null;
+                    meta = null;
                 }
             }
-            return metadata ? app.metadata.copy(metadata, { module: module, view: view }) : metadata;
+
+            return meta ? app.metadata.copy(meta, { module: module, view: view }) : meta;
         },
 
         /**
          * Gets layout metadata.
          * @param {String} module Module name.
-         * @param {String} layout (optional) Layout name.
-         * @return {Object} Layout metadata if layout name is specified. Otherwise, metadata for all layouts of the given module.
-         * If the optional layout parameter is provided we instead return null if layout for module not found.
+         * @param {string} [layout] Layout name.
+         * @param {string} [loadModule] The module that should be considered base. Defaults to core metadata.
+         * @return {Object|null} Layout metadata if `layout` name is specified. Otherwise, metadata for all layouts of the given module.
+         * If the optional `layout` parameter is provided we instead return `null` if layout for module not found.
          */
-        getLayout: function(module, layout) {
-            var metadata = this.getModule(module, 'layouts');
+        getLayout: function (module, layout, loadModule) {
 
-            // Check to see if there is a module layout
+            if (!module && !layout) {
+                return _metadata.layouts;
+            }
+
+            var meta = this.getModule(module, 'layouts');
+
             if (layout) {
-                if (metadata && metadata[layout]) {
-                    metadata = metadata[layout].meta;
-                }
-                else if (_metadata.layouts && _metadata.layouts[layout]) { // Look for a module non-specific layout
-                    metadata = _metadata.layouts[layout].meta;
+                if (meta && meta[layout] && meta[layout].meta !== void 0) {
+                    meta = meta[layout].meta;
+                } else if (loadModule) {
+                    meta = this.getModule(loadModule, 'layouts');
+                    meta = meta && meta[layout] ? meta[layout].meta : null;
+                } else if (_metadata.layouts && _metadata.layouts[layout]) {
+                    meta = _metadata.layouts[layout].meta;
                 } else {
-                    metadata = null;
+                    meta = null;
                 }
             }
-            return metadata ? app.metadata.copy(metadata, { module: module, layout: layout }) : metadata;
+
+            return meta ? app.metadata.copy(meta, { module: module, layout: layout }) : meta;
         },
 
         /**
@@ -530,22 +586,7 @@
                 'quick_create', '!quick_create'
             ];
 
-            // Fix for phantomjs: ensure it's an array.
-            arguments = Array.prototype.slice.call(arguments);
-
-            // Ensure backward compatibility since the signature changed
-            if (arguments.length >= 1 && !_.isObject(arguments[0])) {
-                app.logger.warn('getModuleNames no longer accepts visible and access params.');
-                var args = _.clone(arguments);
-                options = {};
-                if (args[0]) {
-                    options.filter = 'display_tab';
-                }
-                options.access = args[1];
-            }
-
             options = options || {};
-
             var moduleList = [];
 
             // Clients may call an old version of the API that do not return
@@ -1006,6 +1047,8 @@
                 }
                 return false;
             }
+            // Update the private jssource file so that we don't reload it again
+            this._jsSourceFile = metadata.jssource;
             return true;
         },
 
@@ -1035,14 +1078,14 @@
          */
         storageHandler: function() {
 
-            if (!_syncing && ((this.getHash() != _metadata._hash && _mdLoaded['md']) ||
+            if (!_syncing && ((this.getHash() != _metadata._hash && _mdLoaded.md) ||
                 (
                     app.api.getUserprefHash() && app.user.get('_hash') &&
                     app.api.getUserprefHash() != app.user.get('_hash')
                 )
             )) {
                 _syncing = true;
-                _mdLoaded['md'] = false;
+                _mdLoaded.md = false;
                 app.sync({
                     getPublic: !app.api.isAuthenticated()
                 });

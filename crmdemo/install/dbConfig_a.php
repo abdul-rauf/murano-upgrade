@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -92,11 +92,23 @@ $out2 =<<<EOQ2
 </tr>
 <tr>
 	<td colspan="2">
-<div id="errorMsgs" style="display:none"></div>
+EOQ2;
+
+if (!empty($si_errors) && sizeof($db_errors) > 0) {
+    $out2 .= '<div id="errorMsgs"><ul>';
+    foreach ($db_errors as $error) {
+        $out2 .= '<li class="error">' . $error . '</li>';
+    }
+    $out2 .= '</ul></div>';
+} else {
+    $out2 .= '<div id="errorMsgs" style="display:none"></div>';
+}
+
+$out2 .=<<<EOQ2
+
 <div class="required">{$mod_strings['LBL_REQUIRED']}</div>
 <table width="100%" cellpadding="0" cellpadding="0" border="0" class="StyleDottedHr">
 <tr><th colspan="3" align="left" >{$mod_strings['LBL_DBCONF_TITLE_NAME']} </td></tr>
-
 EOQ2;
 
 $config_params = $db->installConfig();
@@ -393,10 +405,10 @@ function callDBCheck(){
                 if(typeof(document.setConfig.dbUSRData) != 'undefined'){
                     postData += "&dbUSRData="+document.getElementById('dbUSRData').value;
                 }
-
                 if(typeof(document.setConfig.setup_db_ssl_is_enabled) != 'undefined') {
                     postData += "&setup_db_ssl_is_enabled="+document.getElementById('setup_db_ssl_is_enabled').value;
                 }
+
 EOQ4;
 
 
@@ -474,9 +486,10 @@ function confirm_drop_tables(yes_no){
 
 EOQ5;
 
+
 $sslDD = "<select name='setup_db_ssl_is_enabled' id='setup_db_ssl_is_enabled'><option value='no' >".$mod_strings['LBL_NO']."</option><option value='yes' ".(!empty($_SESSION['setup_db_options']['ssl'])?'selected':'').">".$mod_strings['LBL_YES']."</option>";
 $sslDD .= "</select><br>&nbsp;";
-
+ 
 $outSSL=<<<SSL
 <table width="100%" cellpadding="0" cellpadding="0" border="0" class="StyleDottedHr">
 <tr><td width='1%'>&nbsp;</td><td width='60%'><div id='sugarDBSSL'><b>{$mod_strings['LBL_DBCONF_SSL_ENABLED']}</b></div>&nbsp;</td><td width='35%'>$sslDD</td></tr>
@@ -487,7 +500,13 @@ SSL;
 ////	END PAGE OUTPUT
 ///////////////////////////////////////////////////////////////////////////////
 
+$sugar_smarty = new Sugar_Smarty();
 
+$sugar_smarty->assign('icon', $icon);
+$sugar_smarty->assign('css', $css);
+$sugar_smarty->assign('loginImage', $loginImage);
+$sugar_smarty->assign('APP', $app_strings);
+$sugar_smarty->assign('MOD', $mod_strings);
 
 echo $out;
 echo $out2;

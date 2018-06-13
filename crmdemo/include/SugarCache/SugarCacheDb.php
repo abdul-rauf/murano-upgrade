@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -135,7 +135,7 @@ class SugarCacheDb extends SugarCacheAbstract
             $expires
         );
 
-        $this->db->query($upsert);
+        $this->query($upsert);
     }
 
     /**
@@ -148,6 +148,7 @@ class SugarCacheDb extends SugarCacheAbstract
             $this->db->quoted($this->hashKeyName($key)),
             $this->getSqlDateTime()
         );
+        $this->db->increaseQueryLimit();
         if ($row = $this->db->fetchOne($query, '', false)) {
             return $this->decode($row['value'], $key);
         }
@@ -161,7 +162,7 @@ class SugarCacheDb extends SugarCacheAbstract
     protected function _clearExternal($key)
     {
         $id = $this->db->quoted($this->hashKeyName($key));
-        $this->db->query("DELETE FROM key_value_cache WHERE id = $id");
+        $this->query("DELETE FROM key_value_cache WHERE id = $id");
     }
 
     /**
@@ -169,7 +170,7 @@ class SugarCacheDb extends SugarCacheAbstract
      */
     protected function _resetExternal()
     {
-        $this->db->query($this->db->truncateTableSQL('key_value_cache'));
+        $this->query($this->db->truncateTableSQL('key_value_cache'));
     }
 
     /**
@@ -183,7 +184,7 @@ class SugarCacheDb extends SugarCacheAbstract
 
         $expires = $this->getSqlDateTime();
         $start = microtime(true);
-        $this->db->query("DELETE FROM key_value_cache WHERE date_expires <= $expires");
+        $this->query("DELETE FROM key_value_cache WHERE date_expires <= $expires");
         $runtime = round((microtime(true) - $start) * 1000);
 
         $msg = "SugarCacheDb running garbage collection - took $runtime msecs";
@@ -270,5 +271,17 @@ class SugarCacheDb extends SugarCacheAbstract
             $this->db->quoted($expires->asDb()),
             'datetime'
         );
+    }
+
+    /**
+     * Calls the normal DB query but first sets the DB to ignore the next query.
+     * @param string $sql
+     *
+     * @return bool|resource
+     */
+    protected function query($sql)
+    {
+        $this->db->increaseQueryLimit();
+        return $this->db->query($sql);
     }
 }

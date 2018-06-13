@@ -40,10 +40,7 @@ nv.models.lineChart = function() {
       yAxis = nv.models.axis()
         .orient('left')
         .tickPadding(4)
-        .tickFormat(function(d) {
-          var si = d3.formatPrefix(d, 1);
-          return d3.round(si.scale(d), 1) + si.symbol;
-        }),
+        .tickFormat(nv.utils.numberFormatSI),
       legend = nv.models.legend()
         .align('right'),
       controls = nv.models.legend()
@@ -58,7 +55,7 @@ nv.models.lineChart = function() {
   var showTooltip = function(eo, offsetElement) {
     var key = eo.series.key,
         x = xAxis.tickFormat()(lines.x()(eo.point, eo.pointIndex)),
-        y = yAxis.tickFormat()(lines.y()(eo.point, eo.pointIndex)),
+        y = lines.y()(eo.point, eo.pointIndex),
         content = tooltipContent(key, x, y, eo, chart);
 
     tooltip = nv.tooltip.show(eo.e, content, null, null, offsetElement);
@@ -142,6 +139,14 @@ nv.models.lineChart = function() {
         }
       });
 
+      isTimeSeries = data[0].values.length && data[0].values[0] instanceof Array && nv.utils.isValidDate(data[0].values[0][0]);
+      // SAVE FOR LATER
+      // isOrdinalSeries = !isTimeSeries && labels.length > 0 && d3.min(lineData, function(d) {
+      //   return d3.min(d.values, function(d, i) {
+      //     return lines.x()(d, i);
+      //   });
+      // }) > 0;
+
       lineData = data.filter(function(d) {
           return !d.disabled;
         });
@@ -164,7 +169,7 @@ nv.models.lineChart = function() {
       // set state.disabled
       state.disabled = lineData.map(function(d) { return !!d.disabled; });
       state.interpolate = lines.interpolate();
-      state.isArea = !lines.isArea();
+      state.isArea = lines.isArea()();
 
       var controlsData = [
         { key: 'Linear', disabled: lines.interpolate() !== 'linear' },
@@ -182,14 +187,6 @@ nv.models.lineChart = function() {
       singlePoint = d3.max(lineData, function(d) {
           return d.values.length;
         }) === 1;
-
-      isTimeSeries = lineData[0].values.length && lineData[0].values[0] instanceof Array && nv.utils.isValidDate(lineData[0].values[0][0]);
-      // SAVE FOR LATER
-      // isOrdinalSeries = !isTimeSeries && labels.length > 0 && d3.min(lineData, function(d) {
-      //   return d3.min(d.values, function(d, i) {
-      //     return lines.x()(d, i);
-      //   });
-      // }) > 0;
 
       showMaxMin = isTimeSeries || nv.utils.isValidDate(labels[0]) ? true : false;
 
@@ -211,7 +208,9 @@ nv.models.lineChart = function() {
                 if (p.indexOf(c) < 0) p.push(c);
                 return p;
               }, [])
-              .sort(),
+              .sort(function(a, b) {
+                return a - b;
+              }),
             xExtents = d3.extent(xValues),
             xOffset = 1 * (isTimeSeries ? 86400000 : 1);
 
@@ -232,6 +231,7 @@ nv.models.lineChart = function() {
             yExtents[0] - yOffset,
             yExtents[1] + yOffset
           ]);
+
         xAxis
           .ticks(xValues.length)
           .tickValues(xValues)
@@ -448,8 +448,6 @@ nv.models.lineChart = function() {
 
         // Y-Axis
         yAxis
-          .tickSize(-innerWidth + (lines.padData() ? pointRadius : 0), 0)
-          // .ticks(innerHeight / 36) //TODO: why was this here?
           .margin(innerMargin);
         yAxisWrap
           .call(yAxis);
@@ -459,20 +457,21 @@ nv.models.lineChart = function() {
         setInnerDimensions();
 
         // X-Axis
+        trans = innerMargin.left + ',';
+        trans += innerMargin.top + (xAxis.orient() === 'bottom' ? innerHeight : 0);
+        xAxisWrap
+          .attr('transform', 'translate(' + trans + ')');
+        // resize ticks based on new dimensions
         xAxis
           .tickSize(-innerHeight + (lines.padData() ? pointRadius : 0), 0)
           .margin(innerMargin);
         xAxisWrap
           .call(xAxis);
-        // reset inner dimensions
         xAxisMargin = xAxis.margin();
         setInnerMargins();
         setInnerDimensions();
-        // resize ticks based on new dimensions
         xAxis
-          .tickSize(-innerHeight + (lines.padData() ? pointRadius : 0), 0);
-        xAxis
-          .resizeTickLines();
+          .resizeTickLines(-innerHeight + (lines.padData() ? pointRadius : 0));
 
         // recall y-axis to set final size based on new dimensions
         yAxis
@@ -813,6 +812,7 @@ nv.models.lineChart = function() {
     }
     direction = _;
     yAxis.direction(_);
+    xAxis.direction(_);
     legend.direction(_);
     controls.direction(_);
     return chart;

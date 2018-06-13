@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -246,10 +246,6 @@
         return (this.model.isNew() && (nonDefaultedAttributesChanged || defaultedAttributesChanged));
     },
 
-    handleSync: function () {
-        //override handleSync since there is no need to save the previous model state
-    },
-
     /**
      * @inheritdoc
      *
@@ -414,7 +410,7 @@
                     callback(false);
                 }
             }, this),
-            error = _.bind(function (e) {
+            error = _.bind(function(model, e) {
                 if (e.status == 412 && !e.request.metadataRetry) {
                     this.handleMetadataSyncError(e);
                 } else {
@@ -455,7 +451,7 @@
                     callback(false);
                 }
             }, this),
-            error = _.bind(function (e) {
+            error = _.bind(function(model, e) {
                 if (e.status == 412 && !e.request.metadataRetry) {
                     this.handleMetadataSyncError(e);
                 } else {
@@ -544,17 +540,26 @@
                 if (child.get('isCreateSubpanel')) {
                     // create the child collection JSON structure to save
                     var childCollection = {
-                        create: []
-                    };
-
+                            create: []
+                        },
+                        linkName = child.get('link');
+                    if (this.model.has(linkName)) {
+                        // the model already has the link name, there must be rollup formulas
+                        // on the create form between the model and the subpanel
+                        childCollection = this.model.get(linkName);
+                        // make sure there is a create key on the childCollection
+                        if (!_.has(childCollection, 'create')) {
+                            childCollection['create'] = [];
+                        }
+                    }
                     // loop through the models in the collection and push each model's JSON
                     // data to the 'create' array
                     _.each(child.get('collection').models, function(model) {
-                        childCollection.create.push(model.toJSON())
-                    }, this)
+                        childCollection.create.push(model.toJSON());
+                    }, this);
 
                     // set the child JSON collection data to the model
-                    this.model.set(child.get('link'), childCollection);
+                    this.model.set(linkName, childCollection);
                 }
             }, this);
         }
@@ -599,7 +604,7 @@
         //use the model attributes combined with data from the view to build the success message context
         successMessageContext = _.extend({
             module: this.module,
-            moduleSingularLower: this.moduleSingular.toLowerCase()
+            moduleSingularLower: app.lang.getModuleName(this.module).toLowerCase()
         }, modelAttributes);
 
         return app.lang.get(successLabel, this.module, successMessageContext);
@@ -714,6 +719,8 @@
     /**
      * Add component to layout's component list so it gets cleaned up properly on dispose
      *
+     * FIXME: SC-6041 should handle deprecating this method.
+     *
      * @param component
      */
     addToLayoutComponents: function (component) {
@@ -728,6 +735,16 @@
         if (this.dupecheckList) {
             this.dupecheckList.hide();
         }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        if (this.dupecheckList) {
+            this.dupecheckList.dispose();
+        }
+        this._super('_dispose');
     },
 
     /**
@@ -747,18 +764,38 @@
     registerShortcuts: function() {
         this._super('registerShortcuts');
 
-        app.shortcuts.register('Create:Save', ['ctrl+s','ctrl+alt+a'], function() {
-            var $saveButton = this.$('a[name=' + this.saveButtonName + ']');
-            if ($saveButton.is(':visible') && !$saveButton.hasClass('disabled')) {
-                $saveButton.get(0).click();
+        app.shortcuts.register({
+            id: 'Create:Save',
+            keys: ['mod+s','mod+alt+a'],
+            component: this,
+            description: 'LBL_SHORTCUT_RECORD_SAVE',
+            callOnFocus: true,
+            handler: function() {
+                var $saveButton = this.$('a[name=' + this.saveButtonName + ']');
+                if ($saveButton.is(':visible') && !$saveButton.hasClass('disabled')) {
+                    $saveButton.get(0).click();
+                }
             }
-        }, this, true);
+        });
 
-        app.shortcuts.register('Create:Cancel', ['esc','ctrl+alt+l'], function() {
-            var $cancelButton = this.$('a[name=' + this.cancelButtonName + ']');
-            if ($cancelButton.is(':visible') && !$cancelButton.hasClass('disabled')) {
-                $cancelButton.get(0).click();
+        app.shortcuts.register({
+            id: 'Create:Cancel',
+            keys: ['esc','mod+alt+l'],
+            component: this,
+            description: 'LBL_SHORTCUT_CLOSE_DRAWER',
+            callOnFocus: true,
+            handler: function() {
+                var $cancelButton = this.$('a[name=' + this.cancelButtonName + ']');
+                if ($cancelButton.is(':visible') && !$cancelButton.hasClass('disabled')) {
+                    $cancelButton.get(0).click();
+                }
             }
-        }, this, true);
-    }
+        });
+    },
+
+    /**
+     * We don't want the locked fields warning on create
+     * @override
+     */
+    warnLockedFields: _.noop
 })

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -122,13 +122,16 @@ class RelateApi extends FilterApi {
 
         $q->joinSubpanel($record, $linkName, array('joinType' => 'INNER', 'ignoreRole' => $ignoreRole));
         
-        $q->setJoinOn(array('baseBean' => strtolower($record->object_name), 'baseBeanId' => $record->id));
+        $q->setJoinOn(array('baseBeanId' => $record->id));
 
         if (!isset($args['filter']) || !is_array($args['filter'])) {
             $args['filter'] = array();
         }
         self::addFilters($args['filter'], $q->where(), $q);
 
+        if (!sizeof($q->order_by)) {
+            self::addOrderBy($q, $this->defaultOrderBy);
+        }
         return array($args, $q, $options, $linkSeed);
     }
 

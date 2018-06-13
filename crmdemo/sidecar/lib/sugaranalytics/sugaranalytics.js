@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -31,29 +31,24 @@ var SUGAR = SUGAR || {};
  *
  * - called on app:init, load the analytics api.
  *
- * @member SUGAR.analytics.connectors
- *
  * start(id, options)
  *
  * - called on app:start, prepare or open the connection to the analytics system.
  *
  * @param  {String}id, tracking id of for analytics system
  * @param  {Object}options, SUGAR.App.config.analytics configuration.
- * @member SUGAR.analytics.connectors
  *
  * trackPageView(pageURI)
  *
  * - track a change of page.
  *
  * @param  {String} pageURI.
- * @member SUGAR.analytics.connectors
  *
  * trackEvent()
  *
  * - track an event on the page.
  *
  * @param  {Object} event, with the following attributes: category, action, label, value. Label is always set as the current route the user is on.
- * @member SUGAR.analytics.connectors
  *
  * Below is a sample connector.
  * <pre>
@@ -212,9 +207,9 @@ var SUGAR = SUGAR || {};
         },
 
         /**
-         * Track a page view
+         * Track a page view.
          *
-         * @param  {String} page URI.
+         * @param {string} page URI.
          * @member SUGAR.analytics
          */
         trackPageView: function(page) {
@@ -223,14 +218,12 @@ var SUGAR = SUGAR || {};
         },
 
         /**
-         * Track a event
+         * Track an event.
          *
-         * Label will always be the current view Id.
-         *
-         * @param  {String} category.
-         * @param  {String} action.
-         * @param  {String} event.
-         * @param  {String} value.
+         * @param {string} category Category of the event.
+         * @param {string} action Action of the event.
+         * @param {Object} event Event to track.
+         * @param {number} [value] Value associated with the event.
          * @member SUGAR.analytics
          */
         trackEvent: function(category, action, event, value) {
@@ -245,9 +238,9 @@ var SUGAR = SUGAR || {};
         },
 
         /**
-         * Detach analytics in an element based on having the track attribute
+         * Detach analytics in an element based on having the track attribute.
          *
-         * @param  {JQuery Object} element.
+         * @param {jQuery} $el Element to detach analytics from.
          * @member SUGAR.analytics
          * @deprecated since 7.7. Will be removed in 7.9.
          */
@@ -258,9 +251,9 @@ var SUGAR = SUGAR || {};
         },
 
         /**
-         * Attach analytics in an element based on having the 'track' attribute
+         * Attach analytics in an element based on having the 'track' attribute.
          *
-         * @param  {JQuery Object} element.
+         * @param {jQuery} $el Element to attach analytics to.
          * @member SUGAR.analytics
          * @deprecated since 7.7. Will be removed in 7.9.
          */
@@ -275,9 +268,9 @@ var SUGAR = SUGAR || {};
         },
 
         /**
-         * Find all trackable elements in an element based on them having the 'track' attribute
+         * Find all trackable child elements of the given element.
          *
-         * @param  {JQuery Object} element.
+         * @param {jQuery} $el Element to search.
          * @member SUGAR.analytics
          * @deprecated since 7.7. Will be removed in 7.9.
          */
@@ -307,14 +300,12 @@ var SUGAR = SUGAR || {};
             var track = ($el.attr('track') || '').trim();
             if (track === '') return;
             var eventArgs = this.parseTrackTag(track);
-
-
             this._attachEvents(eventArgs.events, eventArgs.action, eventArgs.css, $el);
         },
 
         /**
-         * parses track tags
-         * @param {String} track
+         * Parses track tags.
+         * @param {string} track.
          * @return {Object}
          * @deprecated since 7.7. Will be removed in 7.9.
          */

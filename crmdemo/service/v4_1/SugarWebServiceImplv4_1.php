@@ -3,7 +3,7 @@ if (!defined('sugarEntry')) define('sugarEntry', true);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -227,91 +227,5 @@ class SugarWebServiceImplv4_1 extends SugarWebServiceImplv4
             'error' => $error->get_soap_array()
         );
     }
-			function get_investor_updates($session){
-				global $db;
-				$sql ="select weekly_investor_updates_c,account_name,last_spoke_c,continent_c,primary_address_country from leads inner join leads_cstm on leads.id = leads_cstm.id_c where id_c in (select lead_id_c from mur_approval_managment_cstm mamc inner join mur_approval_managment mam on mam.id =mamc.id_c where mam.deleted =0 and mamc.status_c ='approved' ) order by last_spoke_c desc";
-				$res =$db->query($sql);
-				$cnt =0;
-				while($row =$db->fetchByAssoc($res)){
-					
-					$output_row[$cnt]['account_name'] =$row['account_name'];
-					$output_row[$cnt]['weekly_investor_updates_c'] =$row['weekly_investor_updates_c'];
-					$output_row[$cnt]['country'] =$row['primary_address_country'];
-					$output_row[$cnt]['last_spoke'] =$row['last_spoke_c'];
-					$cnt++;
-				}
-				return $output_row;
 
-			}
-			function get_investor_report($session,$client_id){
-				global $db;
-				//$client_id ='c08f6786-1a95-e320-b3cc-52e945b127f0';
-				if (!self::$helperObject->checkSessionAndModuleAccess($session, 'invalid_session', '', '', '', $error)) {
-    		$error->set_error('invalid_login');
-    		$GLOBALS['log']->error('End: SugarWebServiceImpl->search_by_module - FAILED on checkSessionAndModuleAccess');
-    		return;
-    	}
-				$cur_date =date("Y-m-d");
-				$sql ="SELECT IFNULL(l1.id,'') l1_id,cl_client_list.id cl_id
-,l1.account_name l1_account_name,l1.first_name l1_first_name,l1.last_name l1_last_name,l1.primary_address_city l1_primary_address_city,l1.primary_address_country l1_primary_address_country,IFNULL(cl_client_list.id,'') primaryid
-,cl_client_list.date_sent cl_client_list_date_sent,IFNULL(cl_client_list.hit_status,'') cl_client_list_hit_status
-,IFNULL(cl_client_list.description,'') cl_client_list_description FROM cl_client_list
- INNER JOIN  cl_client_list_leads_c l1_1 ON cl_client_list.id=l1_1.cl_client_2c69nt_list_ida AND l1_1.deleted=0 
- INNER JOIN  leads l1 ON l1.id=l1_1.cl_client_b14ddsleads_idb AND l1.deleted=0
-LEFT JOIN cl_client_list_cstm cl_client_list_cstm ON cl_client_list.id = cl_client_list_cstm.id_c
-LEFT JOIN mur_client_n_list mur_client_n_list1 ON mur_client_n_list1.id = cl_client_list_cstm.mur_client_n_list_id_c
- WHERE  cl_client_list_cstm.mur_client_n_list_id_c='".$client_id."'
-AND  cl_client_list.deleted=0 
- ORDER BY cl_client_list_description 
- DESC LIMIT 0,1000 ";
- $GLOBALS['log']->fatal("get_investor_report called ".$sql);
-				$res =$db->query($sql);
-				$cnt =0;
-				while($row =$db->fetchByAssoc($res)){
-					
-					$output_row[]=$row;
-					
-					$cnt++;
-				}
-				return $output_row;
-
-			}
-				function do_client_login($session,$email,$pass){
-				global $db;
-				$output_row = array();
-				$cnt=0;
-				$output_row[$cnt]['status']='fail';
-				$pass =str_replace('0','',$pass);
-
-				
-				$sql ="SELECT * from mur_client_n_list mur inner join mur_client_n_list_cstm murc on mur.id = murc.id_c where murc.email_address_c = '".$email."' and REPLACE(MD5(mur.password),'0','')  = '".$pass."' and mur.deleted =0 and active_on_portal =1 ";
-
-				// just by pass because of bug in app
-
-/*
-if($email =='vinod@avcadvisors.com'){
-	$sql ="SELECT * from mur_client_n_list mur inner join mur_client_n_list_cstm murc on mur.id = murc.id_c where murc.email_address_c = '".$email."'  and mur.deleted =0 and active_on_portal =1 ";
-
-}*/
-			
-
-				$res =$db->query($sql);
-				$GLOBALS['log']->fatal($sql);
-				while($row =$db->fetchByAssoc($res)){
-				$output_row[$cnt]=$row;
-				$output_row[$cnt]['status']='pass';
-				$cnt++;
-
-				}
-			return $output_row;
-			}
-			function get_dropdown($session,$dropdn) {
-		global $app_list_strings,$current_user,$current_language;
-		$app_list_strings = return_app_list_strings_language($current_language);
-
-		//$retArray = array('dk'=>'123','vals'=>$app_list_strings->case_type_dom);
-		return $app_list_strings[$dropdn]; 
-		//return $current_user; 
-		//return array("ashish");
-	}
 }

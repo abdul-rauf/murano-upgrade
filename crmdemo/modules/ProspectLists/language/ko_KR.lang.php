@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -45,7 +45,7 @@ $mod_strings = array (
   'LNK_PROSPECT_LIST' => '목표 고객',
 
   'LBL_PROSPECT_LISTS_SUBPANEL_TITLE' => '목표고객 목록',
-  'LBL_CONTACTS_SUBPANEL_TITLE' => '연락처목록',
+  'LBL_CONTACTS_SUBPANEL_TITLE' => '연락처',
   'LBL_LEADS_SUBPANEL_TITLE' => '관심고객목록',
   'LBL_PROSPECTS_SUBPANEL_TITLE'=>'목표 고객 목록',
   'LBL_ACCOUNTS_SUBPANEL_TITLE' => '거래처 목록',

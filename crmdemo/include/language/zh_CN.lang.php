@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => '筛选器',
     'Comments' => '评论',
     'Currencies' => '货币',
-    'Project' => '项目',
     'ProductTemplates' => '产品模板',
-    'ProductCategories' => '产品类别',
     'ProductTypes' => '产品类型',
     'Shippers' => '运输供应商',
     'Subscriptions' => '订阅',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"星期五",
                 '7'=>"星期六",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"周日",
+            '2'=>"周一",
+            '3'=>"周二",
+            '4'=>"周三",
+            '5'=>"周四",
+            '6'=>"周五",
+            '7'=>"周六",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => '星期日',
         '1' => '星期一',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => '年',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => '直到',
+        'Occurrences' => '出现',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => '无',
+        'Each' => '每个',
+        'On' => '于',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => '第一',
+        'second' => '第二',
+        'third' => '第三',
+        'fourth' => '第四',
+        'fifth' => '第五',
+        'last' => '最后',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => '星期日',
+        'Mon' => '星期一',
+        'Tue' => '星期二',
+        'Wed' => '星期三',
+        'Thu' => '星期四',
+        'Fri' => '星期五',
+        'Sat' => '星期六',
+        'Day' => '天',
+        'WD'  => '工作日',
+        'WE'  => '周末'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => '中阶段',
         'end' => '结束',
         'top' => '顶部',
+        'total' => '总计',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => '漏斗形图',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => '淡',
       'dark' => '深',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => '移动',
@@ -1722,7 +1841,7 @@ $app_list_strings = array (
             "17" => array("code" => "KHO", "name" => "Khost"),
             "18" => array("code" => "KNR", "name" => "Konar"),
             "19" => array("code" => "LAG", "name" => "Laghman"),
-            "20" => array("code" => "LOW", "name" => "Lowgar"),
+            "20" => array("code" => "低", "name" => "Lowgar"),
             "21" => array("code" => "NAN", "name" => "Nangrahar"),
             "22" => array("code" => "NIM", "name" => "Nimruz"),
             "23" => array("code" => "NUR", "name" => "Nurestan"),
@@ -1815,7 +1934,7 @@ $app_list_strings = array (
             "36" => array("code" => "SAH", "name" => "苏格艾赫拉斯"),
             "37" => array("code" => "SAI", "name" => "Saida"),
             "38" => array("code" => "SBA", "name" => "Sidi Bel Abbes"),
-            "39" => array("code" => "SET", "name" => "Setif"),
+            "39" => array("code" => "设置", "name" => "Setif"),
             "40" => array("code" => "SKI", "name" => "Skikda"),
             "41" => array("code" => "TAM", "name" => "Tamanghasset"),
             "42" => array("code" => "TEB", "name" => "Tebessa"),
@@ -1887,7 +2006,7 @@ $app_list_strings = array (
             "5" => array("code" => "ASM", "name" => "圣玛丽"),
             "6" => array("code" => "ASR", "name" => "圣彼得"),
             "7" => array("code" => "BAR", "name" => "Barbuda"),
-            "8" => array("code" => "RED", "name" => "Redonda")
+            "8" => array("code" => "红色", "name" => "Redonda")
         ),
         /* Argentina */
         "AR" => array(
@@ -1948,7 +2067,7 @@ $app_list_strings = array (
         /* Australia */
         "AU" => array(
             "1" => array("code" => "ACT", "name" => "澳大利亚首都直辖区"),
-            "2" => array("code" => "NSW", "name" => "新南威尔士州"),
+            "2" => array("code" => "新南威尔士州", "name" => "新南威尔士州"),
             "3" => array("code" => "NT", "name" => "北领地"),
             "4" => array("code" => "QLD", "name" => "昆士兰州"),
             "5" => array("code" => "SA", "name" => "南澳大利亚"),
@@ -2067,7 +2186,7 @@ $app_list_strings = array (
             "16" => array("code" => "INA", "name" => "伊纳瓜岛"),
             "17" => array("code" => "LNG", "name" => "长岛"),
             "18" => array("code" => "MAN", "name" => "曼格罗夫岛"),
-            "19" => array("code" => "MAY", "name" => "马亚瓜纳岛"),
+            "19" => array("code" => "5 月", "name" => "马亚瓜纳岛"),
             "20" => array("code" => "MOO", "name" => "Moore's Island"),
             "21" => array("code" => "NAB", "name" => "North Abaco"),
             "22" => array("code" => "NAN", "name" => "北安德罗斯岛"),
@@ -2100,8 +2219,8 @@ $app_list_strings = array (
         ),
         /* Barbados */
         "BB" => array(
-            "1" => array("code" => "CC", "name" => "基督教堂"),
-            "2" => array("code" => "AND", "name" => "圣安德鲁"),
+            "1" => array("code" => "抄送", "name" => "基督教堂"),
+            "2" => array("code" => "和", "name" => "圣安德鲁"),
             "3" => array("code" => "GEO", "name" => "圣乔治"),
             "4" => array("code" => "JAM", "name" => "圣詹姆斯"),
             "5" => array("code" => "JOH", "name" => "圣约翰"),
@@ -2124,7 +2243,7 @@ $app_list_strings = array (
         ),
         /* Belgium */
         "BE" => array(
-            "1" => array("code" => "VAN", "name" => "安特卫普"),
+            "1" => array("code" => "凡城", "name" => "安特卫普"),
             "2" => array("code" => "WBR", "name" => "Brabant Wallon"),
             "3" => array("code" => "WHT", "name" => "埃诺"),
             "4" => array("code" => "WLG", "name" => "列日"),
@@ -2181,7 +2300,7 @@ $app_list_strings = array (
             "4" => array("code" => "GAS", "name" => "加萨宗"),
             "5" => array("code" => "HAA", "name" => "Haa"),
             "6" => array("code" => "LHU", "name" => "伦奇宗"),
-            "7" => array("code" => "MON", "name" => "蒙加尔宗"),
+            "7" => array("code" => "星期一", "name" => "蒙加尔宗"),
             "8" => array("code" => "PAR", "name" => "帕罗宗"),
             "9" => array("code" => "PEM", "name" => "佩马加策尔"),
             "10" => array("code" => "PUN", "name" => "普那卡"),
@@ -2247,12 +2366,12 @@ $app_list_strings = array (
             "1" => array("code" => "AC", "name" => "阿克里"),
             "2" => array("code" => "AL", "name" => "阿拉戈斯"),
             "3" => array("code" => "AP", "name" => "阿马帕"),
-            "4" => array("code" => "AM", "name" => "亚马逊"),
+            "4" => array("code" => "上午", "name" => "亚马逊"),
             "5" => array("code" => "BA", "name" => "巴伊亚"),
             "6" => array("code" => "CE", "name" => "塞阿拉"),
             "7" => array("code" => "DF", "name" => "联邦区"),
             "8" => array("code" => "ES", "name" => "圣埃斯皮里图"),
-            "9" => array("code" => "GO", "name" => "戈亚斯"),
+            "9" => array("code" => "开始", "name" => "戈亚斯"),
             "10" => array("code" => "MA", "name" => "马拉尼昂"),
             "11" => array("code" => "MT", "name" => "马托格罗索"),
             "12" => array("code" => "MS", "name" => "南马托格罗索"),
@@ -2361,7 +2480,7 @@ $app_list_strings = array (
             "37" => array("code" => "SOM", "name" => "苏姆省"),
             "38" => array("code" => "SOR", "name" => "苏鲁省"),
             "39" => array("code" => "TAP", "name" => "塔波阿省"),
-            "40" => array("code" => "TUY", "name" => "图伊省"),
+            "40" => array("code" => "图伊省", "name" => "图伊省"),
             "41" => array("code" => "YAG", "name" => "亚加省"),
             "42" => array("code" => "YAT", "name" => "雅滕加省"),
             "43" => array("code" => "ZIR", "name" => "济罗省"),
@@ -2394,7 +2513,7 @@ $app_list_strings = array (
             "3" => array("code" => "KB", "name" => "Keb"),
             "4" => array("code" => "KK", "name" => "戈公省"),
             "5" => array("code" => "KL", "name" => "干丹省"),
-            "6" => array("code" => "KM", "name" => "磅湛省"),
+            "6" => array("code" => "公里", "name" => "磅湛省"),
             "7" => array("code" => "KN", "name" => "磅清扬省"),
             "8" => array("code" => "KO", "name" => "磅逊"),
             "9" => array("code" => "KP", "name" => "贡布省"),
@@ -2423,7 +2542,7 @@ $app_list_strings = array (
             "4" => array("code" => "EXN", "name" => "极北省"),
             "5" => array("code" => "LIT", "name" => "滨海省"),
             "6" => array("code" => "NOR", "name" => "北部 (Nord)"),
-            "7" => array("code" => "NOT", "name" => "西北 (Nord-Ouest)"),
+            "7" => array("code" => "不", "name" => "西北 (Nord-Ouest)"),
             "8" => array("code" => "OUE", "name" => "西部 (Ouest)"),
             "9" => array("code" => "SUD", "name" => "南部 (Sud)"),
             "10" => array("code" => "SOU", "name" => "西南 (Sud-Ouest)")
@@ -2592,7 +2711,7 @@ $app_list_strings = array (
             "18" => array("code" => "GVR", "name" => "瓜维亚雷省"),
             "19" => array("code" => "HUI", "name" => "Huila"),
             "20" => array("code" => "MAG", "name" => "马格达莱纳省"),
-            "21" => array("code" => "MET", "name" => "梅塔省"),
+            "21" => array("code" => "欧洲中部时间", "name" => "梅塔省"),
             "22" => array("code" => "NAR", "name" => "纳里尼奥省"),
             "23" => array("code" => "NDS", "name" => "北桑坦德省"),
             "24" => array("code" => "PUT", "name" => "普图马约省"),
@@ -2703,7 +2822,7 @@ $app_list_strings = array (
             "45" => array("code" => "SEG", "name" => "塞盖拉"),
             "46" => array("code" => "SIN", "name" => "辛夫拉"),
             "47" => array("code" => "SOU", "name" => "苏布雷"),
-            "48" => array("code" => "TAB", "name" => "塔布"),
+            "48" => array("code" => "标签", "name" => "塔布"),
             "49" => array("code" => "TAN", "name" => "坦达"),
             "50" => array("code" => "TIE", "name" => "铁比苏"),
             "51" => array("code" => "TIN", "name" => "廷雷拉"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "圣安德鲁区"),
+            "1" => array("code" => "和", "name" => "圣安德鲁区"),
             "2" => array("code" => "DAV", "name" => "圣戴维区"),
             "3" => array("code" => "GEO", "name" => "圣乔治区"),
             "4" => array("code" => "JOH", "name" => "圣约翰区"),
@@ -2852,7 +2971,7 @@ $app_list_strings = array (
             "25" => array("code" => "SC", "name" => "圣克里斯托巴尔"),
             "26" => array("code" => "JO", "name" => "圣荷西省"),
             "27" => array("code" => "SJ", "name" => "San Juan"),
-            "28" => array("code" => "PM", "name" => "圣彼德省"),
+            "28" => array("code" => "下午", "name" => "圣彼德省"),
             "29" => array("code" => "SA", "name" => "圣地亚哥"),
             "30" => array("code" => "ST", "name" => "Santiago Rodriguez"),
             "31" => array("code" => "SD", "name" => "圣多明各"),
@@ -3004,7 +3123,7 @@ $app_list_strings = array (
             "3" => array("code" => "RUN", "name" => "Runavík"),
             "4" => array("code" => "TVØ", "name" => "Tvøroyri"),
             "5" => array("code" => "FUG", "name" => "Fuglafjørður"),
-            "6" => array("code" => "SUN", "name" => "Sunda Kommuna"),
+            "6" => array("code" => "星期日", "name" => "Sunda Kommuna"),
             "7" => array("code" => "VáG", "name" => "Vágur"),
             "8" => array("code" => "NES", "name" => "Nes"),
             "9" => array("code" => "VES", "name" => "韦斯特曼纳群岛"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "桑杜尔"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "松巴岛"),
+            "22" => array("code" => "总数", "name" => "松巴岛"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3197,10 +3316,10 @@ $app_list_strings = array (
             "16" => array("code" => "SIN", "name" => "Sinnamary"),
             "17" => array("code" => "KOU", "name" => "库鲁"),
             "18" => array("code" => "MAC", "name" => "马古利亚"),
-            "19" => array("code" => "MON", "name" => "Montsinéry-Tonnegrande"),
+            "19" => array("code" => "星期一", "name" => "Montsinéry-Tonnegrande"),
             "20" => array("code" => "MAT", "name" => "Matoury"),
             "21" => array("code" => "CAY", "name" => "卡宴"),
-            "22" => array("code" => "REM", "name" => "Remire-Montjoly")
+            "22" => array("code" => "移除", "name" => "Remire-Montjoly")
         ),
         /* French Polynesia */
         "PF" => array(
@@ -3356,7 +3475,7 @@ $app_list_strings = array (
             "8" => array("code" => "INA", "name" => "英纳拉汉"),
             "9" => array("code" => "MAN", "name" => "曼吉劳"),
             "10" => array("code" => "MER", "name" => "马利索"),
-            "11" => array("code" => "MON", "name" => "Mongmong Toto Maite"),
+            "11" => array("code" => "星期一", "name" => "Mongmong Toto Maite"),
             "12" => array("code" => "PIT", "name" => "Piti"),
             "13" => array("code" => "SAN", "name" => "圣丽塔"),
             "14" => array("code" => "SIN", "name" => "锡纳加纳"),
@@ -3404,8 +3523,8 @@ $app_list_strings = array (
             "9" => array("code" => "DBR", "name" => "杜布雷卡省"),
             "10" => array("code" => "FRN", "name" => "法拉纳省"),
             "11" => array("code" => "FRC", "name" => "弗雷卡里亚省"),
-            "12" => array("code" => "FRI", "name" => "弗里亚省"),
-            "13" => array("code" => "GAO", "name" => "加瓦尔省"),
+            "12" => array("code" => "星期五", "name" => "弗里亚省"),
+            "13" => array("code" => "加奥", "name" => "加瓦尔省"),
             "14" => array("code" => "GCD", "name" => "盖凯杜省"),
             "15" => array("code" => "KNK", "name" => "康康省"),
             "16" => array("code" => "KRN", "name" => "凯鲁阿内省"),
@@ -3448,7 +3567,7 @@ $app_list_strings = array (
             "4" => array("code" => "EC", "name" => "东伯比斯-科兰太因"),
             "5" => array("code" => "EW", "name" => "埃塞奎博群岛-西德梅拉拉"),
             "6" => array("code" => "MB", "name" => "马海卡-伯比斯"),
-            "7" => array("code" => "PM", "name" => "波默伦-苏佩纳姆"),
+            "7" => array("code" => "下午", "name" => "波默伦-苏佩纳姆"),
             "8" => array("code" => "PI", "name" => "波塔罗-锡帕鲁尼"),
             "9" => array("code" => "UD", "name" => "上德梅拉拉-伯比斯"),
             "10" => array("code" => "UT", "name" => "上塔库图-上埃塞奎博")
@@ -3578,7 +3697,7 @@ $app_list_strings = array (
             "7" => array("code" => "DA", "name" => "达德拉和纳加尔哈维利"),
             "8" => array("code" => "DM", "name" => "达曼和第乌"),
             "9" => array("code" => "DE", "name" => "德里"),
-            "10" => array("code" => "GO", "name" => "果阿邦"),
+            "10" => array("code" => "开始", "name" => "果阿邦"),
             "11" => array("code" => "GU", "name" => "古吉拉特邦"),
             "12" => array("code" => "HA", "name" => "哈里亚纳邦"),
             "13" => array("code" => "HP", "name" => "喜马偕尔邦"),
@@ -3599,7 +3718,7 @@ $app_list_strings = array (
             "28" => array("code" => "SI", "name" => "锡金邦"),
             "29" => array("code" => "TN", "name" => "泰米尔纳德邦"),
             "30" => array("code" => "TR", "name" => "特里普拉邦"),
-            "31" => array("code" => "UP", "name" => "北方邦"),
+            "31" => array("code" => "上移", "name" => "北方邦"),
             "32" => array("code" => "WB", "name" => "西孟加拉邦")
         ),
         /* Indonesia */
@@ -3636,7 +3755,7 @@ $app_list_strings = array (
             "29" => array("code" => "IB", "name" => "西伊里安查亚省"),
             "30" => array("code" => "BT", "name" => "万丹省"),
             "31" => array("code" => "BB", "name" => "邦加-勿里洞省"),
-            "32" => array("code" => "GO", "name" => "哥伦打洛省")
+            "32" => array("code" => "开始", "name" => "哥伦打洛省")
         ),
         /* Iran */
         "IR" => array(
@@ -3661,7 +3780,7 @@ $app_list_strings = array (
             "19" => array("code" => "MZD", "name" => "马赞达兰省"),
             "20" => array("code" => "NKH", "name" => "北霍拉桑省"),
             "21" => array("code" => "QAZ", "name" => "加兹温省"),
-            "22" => array("code" => "QOM", "name" => "库姆省"),
+            "22" => array("code" => "库姆省", "name" => "库姆省"),
             "23" => array("code" => "RKH", "name" => "霍拉桑省"),
             "24" => array("code" => "SBL", "name" => "锡斯坦－俾路支斯坦省"),
             "25" => array("code" => "SKH", "name" => "南霍拉桑省"),
@@ -3773,7 +3892,7 @@ $app_list_strings = array (
             "34" => array("code" => "FO", "name" => "弗利"),
             "35" => array("code" => "FR", "name" => "弗罗西诺内"),
             "36" => array("code" => "GE", "name" => "热那亚"),
-            "37" => array("code" => "GO", "name" => "戈里齐亚"),
+            "37" => array("code" => "开始", "name" => "戈里齐亚"),
             "38" => array("code" => "GR", "name" => "格罗塞托"),
             "39" => array("code" => "IM", "name" => "因佩里亚"),
             "40" => array("code" => "IS", "name" => "伊塞尔尼亚"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "金斯敦区"),
             "4" => array("code" => "MAN", "name" => "曼彻斯特区"),
             "5" => array("code" => "POR", "name" => "波特兰区"),
-            "6" => array("code" => "AND", "name" => "圣安德鲁区"),
+            "6" => array("code" => "和", "name" => "圣安德鲁区"),
             "7" => array("code" => "ANN", "name" => "圣安娜区"),
             "8" => array("code" => "CAT", "name" => "圣凯瑟琳区"),
             "9" => array("code" => "ELI", "name" => "圣伊丽莎白区"),
@@ -3897,7 +4016,7 @@ $app_list_strings = array (
             "28" => array("code" => "NR", "name" => "奈良"),
             "29" => array("code" => "NI", "name" => "新泻"),
             "30" => array("code" => "OI", "name" => "大分"),
-            "31" => array("code" => "OK", "name" => "冈山"),
+            "31" => array("code" => "确定", "name" => "冈山"),
             "32" => array("code" => "ON", "name" => "冲绳县"),
             "33" => array("code" => "OS", "name" => "大阪"),
             "34" => array("code" => "SA", "name" => "佐贺县"),
@@ -3917,7 +4036,7 @@ $app_list_strings = array (
         ),
         /* Jordan */
         "JO" => array(
-            "1" => array("code" => "AM", "name" => "安曼省"),
+            "1" => array("code" => "上午", "name" => "安曼省"),
             "2" => array("code" => "AJ", "name" => "阿杰隆省"),
             "3" => array("code" => "AA", "name" => "亚喀巴省"),
             "4" => array("code" => "AB", "name" => "拜勒卡省"),
@@ -3934,12 +4053,12 @@ $app_list_strings = array (
         "KZ" => array(
             "1" => array("code" => "AL", "name" => "阿拉木图州"),
             "2" => array("code" => "AC", "name" => "阿拉木图市"),
-            "3" => array("code" => "AM", "name" => "阿克莫拉州"),
+            "3" => array("code" => "上午", "name" => "阿克莫拉州"),
             "4" => array("code" => "AQ", "name" => "阿克托别州"),
             "5" => array("code" => "AS", "name" => "阿斯塔纳市"),
             "6" => array("code" => "AT", "name" => "阿特劳州"),
             "7" => array("code" => "BA", "name" => "西哈萨克斯坦州"),
-            "8" => array("code" => "BY", "name" => "Bayqongyr 市"),
+            "8" => array("code" => "通过", "name" => "Bayqongyr 市"),
             "9" => array("code" => "MA", "name" => "曼格斯套州"),
             "10" => array("code" => "ON", "name" => "南哈萨克斯坦州"),
             "11" => array("code" => "PA", "name" => "巴甫洛达尔州"),
@@ -3964,7 +4083,7 @@ $app_list_strings = array (
         /* Kiribati */
         "KI" => array(
             "1" => array("code" => "AG", "name" => "阿拜昂"),
-            "2" => array("code" => "AM", "name" => "阿贝马马环礁"),
+            "2" => array("code" => "上午", "name" => "阿贝马马环礁"),
             "3" => array("code" => "AK", "name" => "阿拉努卡环礁"),
             "4" => array("code" => "AO", "name" => "阿罗赖岛"),
             "5" => array("code" => "BA", "name" => "巴纳巴岛"),
@@ -4109,7 +4228,7 @@ $app_list_strings = array (
             "11" => array("code" => "BAT", "name" => "巴特伦"),
             "12" => array("code" => "BSH", "name" => "卜舍里"),
             "13" => array("code" => "KOU", "name" => "库拉"),
-            "14" => array("code" => "MIN", "name" => "Miniyeh-Danniyeh"),
+            "14" => array("code" => "最小值", "name" => "Miniyeh-Danniyeh"),
             "15" => array("code" => "TRI", "name" => "的黎波里"),
             "16" => array("code" => "ZGH", "name" => "兹加尔塔"),
             "17" => array("code" => "ALE", "name" => "阿列伊"),
@@ -4358,27 +4477,27 @@ $app_list_strings = array (
         ),
         /* Malaysia */
         "MY" => array(
-            "1" => array("code" => "Johor", "name" => "柔佛州"),
-            "2" => array("code" => "Kedah", "name" => "吉打州"),
-            "3" => array("code" => "Kelantan", "name" => "吉兰丹州"),
-            "4" => array("code" => "Labuan", "name" => "纳闽"),
-            "5" => array("code" => "Melaka", "name" => "马六甲"),
-            "6" => array("code" => "Negeri Sembilan", "name" => "森美兰州"),
-            "7" => array("code" => "Pahang", "name" => "彭亨"),
-            "8" => array("code" => "Perak", "name" => "霹雳"),
-            "9" => array("code" => "Perlis", "name" => "玻璃市州"),
-            "10" => array("code" => "Pulau Pinang", "name" => "槟城"),
-            "11" => array("code" => "Sabah", "name" => "沙巴"),
-            "12" => array("code" => "Sarawak", "name" => "沙捞越"),
-            "13" => array("code" => "Selangor", "name" => "雪兰莪州"),
-            "14" => array("code" => "Terengganu", "name" => "登嘉楼州"),
-            "15" => array("code" => "Kuala Lumpur", "name" => "吉隆坡")
+            "1" => array("code" => "柔佛州", "name" => "柔佛州"),
+            "2" => array("code" => "吉打州", "name" => "吉打州"),
+            "3" => array("code" => "吉兰丹州", "name" => "吉兰丹州"),
+            "4" => array("code" => "纳闽", "name" => "纳闽"),
+            "5" => array("code" => "马六甲", "name" => "马六甲"),
+            "6" => array("code" => "森美兰州", "name" => "森美兰州"),
+            "7" => array("code" => "彭亨", "name" => "彭亨"),
+            "8" => array("code" => "霹雳", "name" => "霹雳"),
+            "9" => array("code" => "玻璃市州", "name" => "玻璃市州"),
+            "10" => array("code" => "槟城", "name" => "槟城"),
+            "11" => array("code" => "沙巴", "name" => "沙巴"),
+            "12" => array("code" => "沙捞越", "name" => "沙捞越"),
+            "13" => array("code" => "雪兰莪州", "name" => "雪兰莪州"),
+            "14" => array("code" => "登嘉楼州", "name" => "登嘉楼州"),
+            "15" => array("code" => "吉隆坡", "name" => "吉隆坡")
         ),
         /* Maldives */
         "MV" => array(
             "1" => array("code" => "AAD", "name" => "Ari Atoll Dheknu"),
             "2" => array("code" => "AAU", "name" => "Ari Atoll Uthuru"),
-            "3" => array("code" => "ADD", "name" => "阿杜环礁"),
+            "3" => array("code" => "添加", "name" => "阿杜环礁"),
             "4" => array("code" => "FAA", "name" => "法迪福卢"),
             "5" => array("code" => "FEA", "name" => "Felidhe 环礁"),
             "6" => array("code" => "FMU", "name" => "Fua Mulaku"),
@@ -4395,7 +4514,7 @@ $app_list_strings = array (
             "17" => array("code" => "NAD", "name" => "Nilandhe Atoll Dhekunu"),
             "18" => array("code" => "NAU", "name" => "Nilandhe Atoll Uthuru"),
             "19" => array("code" => "THD", "name" => "Thiladhunmathi Dhekunu"),
-            "20" => array("code" => "THU", "name" => "Thiladhunmathi Uthuru")
+            "20" => array("code" => "星期四", "name" => "Thiladhunmathi Uthuru")
         ),
         /* Mali */
         "ML" => array(
@@ -4444,7 +4563,7 @@ $app_list_strings = array (
             "31" => array("code" => "NAX", "name" => "纳沙尔"),
             "32" => array("code" => "PAO", "name" => "保拉"),
             "33" => array("code" => "PEM", "name" => "彭布罗克"),
-            "34" => array("code" => "PIE", "name" => "Pieta"),
+            "34" => array("code" => "饼图", "name" => "Pieta"),
             "35" => array("code" => "QOR", "name" => "戈尔米"),
             "36" => array("code" => "QRE", "name" => "奎伦迪"),
             "37" => array("code" => "RAB", "name" => "拉巴特"),
@@ -4483,10 +4602,10 @@ $app_list_strings = array (
         /* Marshall Islands */
         "MH" => array(
             "1" => array("code" => "ALG", "name" => "艾林吉纳埃环礁"),
-            "2" => array("code" => "ALL", "name" => "埃林拉普拉普环礁"),
+            "2" => array("code" => "所有", "name" => "埃林拉普拉普环礁"),
             "3" => array("code" => "ALK", "name" => "艾卢克环礁"),
             "4" => array("code" => "ARN", "name" => "阿尔诺环礁"),
-            "5" => array("code" => "AUR", "name" => "奥尔环礁"),
+            "5" => array("code" => "奥尔环礁", "name" => "奥尔环礁"),
             "6" => array("code" => "BKR", "name" => "比卡尔环礁"),
             "7" => array("code" => "BKN", "name" => "比基尼环礁"),
             "8" => array("code" => "BKK", "name" => "博卡克环礁"),
@@ -4498,8 +4617,8 @@ $app_list_strings = array (
             "14" => array("code" => "JEM", "name" => "杰莫岛"),
             "15" => array("code" => "KIL", "name" => "基利岛"),
             "16" => array("code" => "KWJ", "name" => "夸贾林环礁"),
-            "17" => array("code" => "LAE", "name" => "拉埃环礁"),
-            "18" => array("code" => "LIB", "name" => "里布岛"),
+            "17" => array("code" => "拉埃环礁", "name" => "拉埃环礁"),
+            "18" => array("code" => "里布岛", "name" => "里布岛"),
             "19" => array("code" => "LKP", "name" => "利基埃普环礁"),
             "20" => array("code" => "MJR", "name" => "马朱罗环礁"),
             "21" => array("code" => "MLP", "name" => "马洛埃拉普环礁"),
@@ -4560,7 +4679,7 @@ $app_list_strings = array (
             "2" => array("code" => "AS", "name" => "阿萨巴"),
             "3" => array("code" => "BR", "name" => "布拉克纳省"),
             "4" => array("code" => "DN", "name" => "努瓦迪布湾省"),
-            "5" => array("code" => "GO", "name" => "戈戈尔省"),
+            "5" => array("code" => "开始", "name" => "戈戈尔省"),
             "6" => array("code" => "GM", "name" => "吉迪马卡省"),
             "7" => array("code" => "HC", "name" => "东胡德省"),
             "8" => array("code" => "HG", "name" => "西胡德省"),
@@ -4575,7 +4694,7 @@ $app_list_strings = array (
             "1" => array("code" => "AG", "name" => "阿加莱加群岛"),
             "2" => array("code" => "BL", "name" => "布莱克河"),
             "3" => array("code" => "BR", "name" => "博巴森一荷"),
-            "4" => array("code" => "CC", "name" => "卡加多斯-卡拉若斯群岛（圣布兰登群岛）"),
+            "4" => array("code" => "抄送", "name" => "卡加多斯-卡拉若斯群岛（圣布兰登群岛）"),
             "5" => array("code" => "CU", "name" => "鸠比"),
             "6" => array("code" => "FL", "name" => "弗拉克"),
             "7" => array("code" => "GP", "name" => "大港"),
@@ -4639,7 +4758,7 @@ $app_list_strings = array (
             "24" => array("code" => "SLP", "name" => "圣路易斯波托西州"),
             "25" => array("code" => "SIN", "name" => "锡那罗亚州"),
             "26" => array("code" => "SON", "name" => "索诺拉州"),
-            "27" => array("code" => "TAB", "name" => "塔巴斯科州"),
+            "27" => array("code" => "标签", "name" => "塔巴斯科州"),
             "28" => array("code" => "TAM", "name" => "塔毛利帕斯州"),
             "29" => array("code" => "TLA", "name" => "特拉斯卡拉州"),
             "30" => array("code" => "VER", "name" => "韦拉克鲁斯州"),
@@ -4719,7 +4838,7 @@ $app_list_strings = array (
             "10" => array("code" => "EKS", "name" => "斯拉格奈堡"),
             "11" => array("code" => "ERA", "name" => "拉希迪耶"),
             "12" => array("code" => "ESS", "name" => "索维拉"),
-            "13" => array("code" => "FES", "name" => "菲斯"),
+            "13" => array("code" => "菲斯", "name" => "菲斯"),
             "14" => array("code" => "FIG", "name" => "菲吉格"),
             "15" => array("code" => "GLM", "name" => "盖勒敏"),
             "16" => array("code" => "IFR", "name" => "伊夫兰"),
@@ -4736,7 +4855,7 @@ $app_list_strings = array (
             "27" => array("code" => "OUJ", "name" => "乌季达"),
             "28" => array("code" => "RSA", "name" => "拉巴特塞勒"),
             "29" => array("code" => "SAF", "name" => "萨非"),
-            "30" => array("code" => "SET", "name" => "塞塔特"),
+            "30" => array("code" => "设置", "name" => "塞塔特"),
             "31" => array("code" => "SKA", "name" => "西迪卡塞姆"),
             "32" => array("code" => "TGR", "name" => "丹吉尔"),
             "33" => array("code" => "TAN", "name" => "Tan-Tan"),
@@ -4791,7 +4910,7 @@ $app_list_strings = array (
             "6" => array("code" => "KH", "name" => "霍马斯区"),
             "7" => array("code" => "KU", "name" => "库内内区"),
             "8" => array("code" => "OW", "name" => "奥汉圭纳区"),
-            "9" => array("code" => "OK", "name" => "奥马海凯区"),
+            "9" => array("code" => "确定", "name" => "奥马海凯区"),
             "10" => array("code" => "OT", "name" => "奥穆萨蒂区"),
             "11" => array("code" => "ON", "name" => "奥沙纳区"),
             "12" => array("code" => "OO", "name" => "奥希科托区"),
@@ -4921,7 +5040,7 @@ $app_list_strings = array (
             "4" => array("code" => "AK", "name" => "阿夸伊博姆州"),
             "5" => array("code" => "AN", "name" => "阿南布拉州"),
             "6" => array("code" => "BC", "name" => "包奇州"),
-            "7" => array("code" => "BY", "name" => "巴耶尔萨州"),
+            "7" => array("code" => "通过", "name" => "巴耶尔萨州"),
             "8" => array("code" => "BN", "name" => "贝努埃州"),
             "9" => array("code" => "BO", "name" => "博尔诺州"),
             "10" => array("code" => "CR", "name" => "十字河流州"),
@@ -4930,7 +5049,7 @@ $app_list_strings = array (
             "13" => array("code" => "ED", "name" => "埃多族"),
             "14" => array("code" => "EK", "name" => "埃基蒂州"),
             "15" => array("code" => "EN", "name" => "埃努古"),
-            "16" => array("code" => "GO", "name" => "贡贝州"),
+            "16" => array("code" => "开始", "name" => "贡贝州"),
             "17" => array("code" => "IM", "name" => "伊莫州"),
             "18" => array("code" => "JI", "name" => "吉加瓦州"),
             "19" => array("code" => "KD", "name" => "卡杜纳州"),
@@ -5027,7 +5146,7 @@ $app_list_strings = array (
         ),
         /* Palau */
         "PW" => array(
-            "1" => array("code" => "AM", "name" => "艾梅利克州"),
+            "1" => array("code" => "上午", "name" => "艾梅利克州"),
             "2" => array("code" => "AR", "name" => "艾拉伊州"),
             "3" => array("code" => "AN", "name" => "昂奥尔州"),
             "4" => array("code" => "HA", "name" => "哈托博海伊州"),
@@ -5048,7 +5167,7 @@ $app_list_strings = array (
         "PA" => array(
             "1" => array("code" => "BT", "name" => "博卡斯德尔托罗省"),
             "2" => array("code" => "CH", "name" => "奇里基省"),
-            "3" => array("code" => "CC", "name" => "科克莱省"),
+            "3" => array("code" => "抄送", "name" => "科克莱省"),
             "4" => array("code" => "CL", "name" => "科隆省"),
             "5" => array("code" => "DA", "name" => "达连省"),
             "6" => array("code" => "HE", "name" => "埃雷拉省"),
@@ -5084,14 +5203,14 @@ $app_list_strings = array (
         "PY" => array(
             "1" => array("code" => "AG", "name" => "上巴拉圭省"),
             "2" => array("code" => "AN", "name" => "上巴拉那省"),
-            "3" => array("code" => "AM", "name" => "阿曼拜省"),
+            "3" => array("code" => "上午", "name" => "阿曼拜省"),
             "4" => array("code" => "AS", "name" => "亚松森特别区"),
             "5" => array("code" => "BO", "name" => "博克龙省"),
             "6" => array("code" => "CG", "name" => "卡瓜苏省"),
             "7" => array("code" => "CZ", "name" => "卡萨帕省"),
             "8" => array("code" => "CN", "name" => "卡嫩迪尤省"),
             "9" => array("code" => "CE", "name" => "Central"),
-            "10" => array("code" => "CC", "name" => "康塞普西翁省"),
+            "10" => array("code" => "抄送", "name" => "康塞普西翁省"),
             "11" => array("code" => "CD", "name" => "科迪勒拉省"),
             "12" => array("code" => "GU", "name" => "瓜伊拉省"),
             "13" => array("code" => "IT", "name" => "伊塔普亚省"),
@@ -5103,7 +5222,7 @@ $app_list_strings = array (
         ),
         /* Peru */
         "PE" => array(
-            "1" => array("code" => "AM", "name" => "亚马逊"),
+            "1" => array("code" => "上午", "name" => "亚马逊"),
             "2" => array("code" => "AN", "name" => "安卡什省"),
             "3" => array("code" => "AP", "name" => "阿普里马克省"),
             "4" => array("code" => "AR", "name" => "阿雷基帕省"),
@@ -5138,7 +5257,7 @@ $app_list_strings = array (
             "5" => array("code" => "ALB", "name" => "阿尔拜省"),
             "6" => array("code" => "ANT", "name" => "安蒂克省"),
             "7" => array("code" => "APY", "name" => "阿巴尧省"),
-            "8" => array("code" => "AUR", "name" => "奥罗拉省"),
+            "8" => array("code" => "奥尔环礁", "name" => "奥罗拉省"),
             "9" => array("code" => "BAS", "name" => "巴西兰省"),
             "10" => array("code" => "BTA", "name" => "巴丹省"),
             "11" => array("code" => "BTE", "name" => "巴丹群岛省"),
@@ -5227,7 +5346,7 @@ $app_list_strings = array (
             "8" => array("code" => "OP", "name" => "奥波莱省"),
             "9" => array("code" => "PP", "name" => "喀尔巴阡山省"),
             "10" => array("code" => "PL", "name" => "波德拉谢省"),
-            "11" => array("code" => "PM", "name" => "滨海省"),
+            "11" => array("code" => "下午", "name" => "滨海省"),
             "12" => array("code" => "SL", "name" => "西里西亚省"),
             "13" => array("code" => "SW", "name" => "圣十字省"),
             "14" => array("code" => "WM", "name" => "瓦尔米亚-马祖里省"),
@@ -5309,7 +5428,7 @@ $app_list_strings = array (
             "47" => array("code" => "MAN", "name" => "Manatí"),
             "48" => array("code" => "MAR", "name" => "Maricao"),
             "49" => array("code" => "MAU", "name" => "Maunabo"),
-            "50" => array("code" => "MAY", "name" => "马亚圭斯"),
+            "50" => array("code" => "5 月", "name" => "马亚圭斯"),
             "51" => array("code" => "MOC", "name" => "Moca"),
             "52" => array("code" => "MOR", "name" => "莫罗维斯"),
             "53" => array("code" => "NAG", "name" => "纳瓜布"),
@@ -5415,7 +5534,7 @@ $app_list_strings = array (
             "14" => array("code" => "CI", "name" => "赤塔市"),
             "15" => array("code" => "DU", "name" => "杜金卡"),
             "16" => array("code" => "EL", "name" => "埃利斯塔"),
-            "17" => array("code" => "GO", "name" => "Gomo-Altaysk"),
+            "17" => array("code" => "开始", "name" => "Gomo-Altaysk"),
             "18" => array("code" => "GA", "name" => "戈尔诺·阿尔泰斯克"),
             "19" => array("code" => "GR", "name" => "格罗兹尼"),
             "20" => array("code" => "IR", "name" => "伊尔库茨克"),
@@ -5427,7 +5546,7 @@ $app_list_strings = array (
             "26" => array("code" => "KZ", "name" => "喀山"),
             "27" => array("code" => "KE", "name" => "克麦罗沃"),
             "28" => array("code" => "KH", "name" => "哈巴罗夫斯克"),
-            "29" => array("code" => "KM", "name" => "汉特-曼西斯克"),
+            "29" => array("code" => "公里", "name" => "汉特-曼西斯克"),
             "30" => array("code" => "KO", "name" => "科斯特罗马"),
             "31" => array("code" => "KR", "name" => "克拉斯诺达尔"),
             "32" => array("code" => "KN", "name" => "克拉斯诺雅斯克"),
@@ -5491,7 +5610,7 @@ $app_list_strings = array (
         /* Rwanda */
         "RW" => array(
             "1" => array("code" => "BU", "name" => "布塔雷省"),
-            "2" => array("code" => "BY", "name" => "比温巴省"),
+            "2" => array("code" => "通过", "name" => "比温巴省"),
             "3" => array("code" => "CY", "name" => "尚古古省"),
             "4" => array("code" => "GK", "name" => "基贡戈洛省"),
             "5" => array("code" => "GS", "name" => "吉塞尼省"),
@@ -5679,7 +5798,7 @@ $app_list_strings = array (
             "2" => array("code" => "BK", "name" => "巴科尔"),
             "3" => array("code" => "BN", "name" => "贝纳迪尔"),
             "4" => array("code" => "BR", "name" => "巴里"),
-            "5" => array("code" => "BY", "name" => "Bay"),
+            "5" => array("code" => "通过", "name" => "Bay"),
             "6" => array("code" => "GA", "name" => "加尔古杜德州"),
             "7" => array("code" => "GE", "name" => "盖多州"),
             "8" => array("code" => "HI", "name" => "希兰州"),
@@ -5712,14 +5831,14 @@ $app_list_strings = array (
             "2" => array("code" => "AL", "name" => "阿拉瓦省"),
             "3" => array("code" => "AB", "name" => "阿尔瓦塞特省"),
             "4" => array("code" => "AC", "name" => "阿里坎特"),
-            "5" => array("code" => "AM", "name" => "阿尔梅里亚省"),
+            "5" => array("code" => "上午", "name" => "阿尔梅里亚省"),
             "6" => array("code" => "AS", "name" => "阿斯图里亚斯"),
             "7" => array("code" => "AV", "name" => "阿维拉省"),
             "8" => array("code" => "BJ", "name" => "巴达霍斯"),
             "9" => array("code" => "IB", "name" => "巴利阿里"),
             "10" => array("code" => "BA", "name" => "巴塞罗那"),
             "11" => array("code" => "BU", "name" => "布尔戈斯"),
-            "12" => array("code" => "CC", "name" => "卡塞雷斯"),
+            "12" => array("code" => "抄送", "name" => "卡塞雷斯"),
             "13" => array("code" => "CZ", "name" => "加的斯"),
             "14" => array("code" => "CT", "name" => "坎塔布里亚"),
             "15" => array("code" => "CL", "name" => "卡斯特利翁"),
@@ -5735,7 +5854,7 @@ $app_list_strings = array (
             "25" => array("code" => "HS", "name" => "韦斯卡"),
             "26" => array("code" => "JN", "name" => "哈恩省"),
             "27" => array("code" => "RJ", "name" => "La Rioja"),
-            "28" => array("code" => "PM", "name" => "拉斯帕尔马斯"),
+            "28" => array("code" => "下午", "name" => "拉斯帕尔马斯"),
             "29" => array("code" => "LE", "name" => "莱昂"),
             "30" => array("code" => "LL", "name" => "莱里达"),
             "31" => array("code" => "LG", "name" => "卢戈"),
@@ -5821,7 +5940,7 @@ $app_list_strings = array (
             "4" => array("code" => "MA", "name" => "马罗维纳"),
             "5" => array("code" => "NI", "name" => "尼克里"),
             "6" => array("code" => "PA", "name" => "帕拉"),
-            "7" => array("code" => "PM", "name" => "帕拉马里博"),
+            "7" => array("code" => "下午", "name" => "帕拉马里博"),
             "9" => array("code" => "SA", "name" => "萨拉马卡"),
             "10" => array("code" => "SI", "name" => "西帕里维尼"),
             "11" => array("code" => "WA", "name" => "瓦尼卡")
@@ -5911,7 +6030,7 @@ $app_list_strings = array (
             "4" => array("code" => "HL", "name" => "花莲县"),
             "5" => array("code" => "IL", "name" => "宜兰县"),
             "6" => array("code" => "KH", "name" => "高雄县"),
-            "7" => array("code" => "KM", "name" => "金门县"),
+            "7" => array("code" => "公里", "name" => "金门县"),
             "8" => array("code" => "LC", "name" => "连江县"),
             "9" => array("code" => "ML", "name" => "苗栗县"),
             "10" => array("code" => "NT", "name" => "南投县"),
@@ -5923,7 +6042,7 @@ $app_list_strings = array (
             "16" => array("code" => "TT", "name" => "台东县"),
             "17" => array("code" => "TY", "name" => "桃园市"),
             "18" => array("code" => "YL", "name" => "云林县"),
-            "19" => array("code" => "CC", "name" => "嘉义县"),
+            "19" => array("code" => "抄送", "name" => "嘉义县"),
             "20" => array("code" => "CL", "name" => "基隆"),
             "21" => array("code" => "HC", "name" => "新竹县"),
             "22" => array("code" => "TH", "name" => "台中市"),
@@ -5968,82 +6087,82 @@ $app_list_strings = array (
         ),
         /* Thailand */
         "TH" => array(
-            "1" => array("code" => "Amnat Charoen", "name" => "安纳乍能府"),
-            "2" => array("code" => "Ang Thong", "name" => "红统府"),
-            "3" => array("code" => "Ayutthaya", "name" => "大城府"),
-            "4" => array("code" => "Bangkok", "name" => "曼谷"),
-            "5" => array("code" => "Buriram", "name" => "武里喃府"),
-            "6" => array("code" => "Chachoengsao", "name" => "北柳府"),
-            "7" => array("code" => "Chai Nat", "name" => "猜纳府"),
-            "8" => array("code" => "Chaiyaphum", "name" => "猜也奔府"),
-            "9" => array("code" => "Chanthaburi", "name" => "尖竹汶府"),
-            "10" => array("code" => "Chiang Mai", "name" => "清迈"),
-            "11" => array("code" => "Chiang Rai", "name" => "清莱"),
-            "12" => array("code" => "Chon Buri", "name" => "春武里府"),
-            "13" => array("code" => "Chumphon", "name" => "春蓬府"),
-            "14" => array("code" => "Kalasin", "name" => "加拉信府"),
-            "15" => array("code" => "Kamphaeng Phet", "name" => "甘烹碧府"),
-            "16" => array("code" => "Kanchanaburi", "name" => "北碧府"),
-            "17" => array("code" => "Khon Kaen", "name" => "孔敬府"),
-            "18" => array("code" => "Krabi", "name" => "甲米府"),
-            "19" => array("code" => "Lampang", "name" => "南邦府"),
-            "20" => array("code" => "Lamphun", "name" => "南奔府"),
-            "21" => array("code" => "Loei", "name" => "黎府"),
-            "22" => array("code" => "Lop Buri", "name" => "华富里府"),
-            "23" => array("code" => "Mae Hong Son", "name" => "夜丰颂府"),
-            "24" => array("code" => "Maha Sarakham", "name" => "玛哈沙拉堪府"),
-            "25" => array("code" => "Mukdahan", "name" => "莫拉限府"),
-            "26" => array("code" => "Nakhon Nayok", "name" => "那空那育府"),
-            "27" => array("code" => "Nakhon Pathom", "name" => "佛统府"),
-            "28" => array("code" => "Nakhon Phanom", "name" => "那空帕农府"),
-            "29" => array("code" => "Nakhon Ratchasima", "name" => "呵叻府"),
-            "30" => array("code" => "Nakhon Sawan", "name" => "那空沙旺"),
-            "31" => array("code" => "Nakhon Si Thammarat", "name" => "洛坤府"),
+            "1" => array("code" => "安纳乍能府", "name" => "安纳乍能府"),
+            "2" => array("code" => "红统府", "name" => "红统府"),
+            "3" => array("code" => "大城府", "name" => "大城府"),
+            "4" => array("code" => "曼谷", "name" => "曼谷"),
+            "5" => array("code" => "武里喃府", "name" => "武里喃府"),
+            "6" => array("code" => "北柳府", "name" => "北柳府"),
+            "7" => array("code" => "猜纳府", "name" => "猜纳府"),
+            "8" => array("code" => "猜也奔府", "name" => "猜也奔府"),
+            "9" => array("code" => "尖竹汶府", "name" => "尖竹汶府"),
+            "10" => array("code" => "清迈", "name" => "清迈"),
+            "11" => array("code" => "清莱", "name" => "清莱"),
+            "12" => array("code" => "春武里府", "name" => "春武里府"),
+            "13" => array("code" => "春蓬府", "name" => "春蓬府"),
+            "14" => array("code" => "加拉信府", "name" => "加拉信府"),
+            "15" => array("code" => "甘烹碧府", "name" => "甘烹碧府"),
+            "16" => array("code" => "北碧府", "name" => "北碧府"),
+            "17" => array("code" => "孔敬府", "name" => "孔敬府"),
+            "18" => array("code" => "甲米府", "name" => "甲米府"),
+            "19" => array("code" => "南邦府", "name" => "南邦府"),
+            "20" => array("code" => "南奔府", "name" => "南奔府"),
+            "21" => array("code" => "黎府", "name" => "黎府"),
+            "22" => array("code" => "华富里府", "name" => "华富里府"),
+            "23" => array("code" => "夜丰颂府", "name" => "夜丰颂府"),
+            "24" => array("code" => "玛哈沙拉堪府", "name" => "玛哈沙拉堪府"),
+            "25" => array("code" => "莫拉限府", "name" => "莫拉限府"),
+            "26" => array("code" => "那空那育府", "name" => "那空那育府"),
+            "27" => array("code" => "佛统府", "name" => "佛统府"),
+            "28" => array("code" => "那空帕农府", "name" => "那空帕农府"),
+            "29" => array("code" => "呵叻府", "name" => "呵叻府"),
+            "30" => array("code" => "那空沙旺", "name" => "那空沙旺"),
+            "31" => array("code" => "洛坤府", "name" => "洛坤府"),
             "32" => array("code" => "Nan", "name" => "Nan"),
-            "33" => array("code" => "Narathiwat", "name" => "那拉提瓦府"),
-            "34" => array("code" => "Nong Bua Lamphu", "name" => "廊磨喃蒲府"),
-            "35" => array("code" => "Nong Khai", "name" => "廊开府"),
-            "36" => array("code" => "Nonthaburi", "name" => "暖武里府"),
-            "37" => array("code" => "Pathum Thani", "name" => "巴吞他尼府"),
-            "38" => array("code" => "Pattani", "name" => "北大年府"),
-            "39" => array("code" => "Phangnga", "name" => "攀牙府"),
-            "40" => array("code" => "Phatthalung", "name" => "博他仑府"),
-            "41" => array("code" => "Phayao", "name" => "帕尧府"),
-            "42" => array("code" => "Phetchabun", "name" => "碧差汶府"),
-            "43" => array("code" => "Phetchaburi", "name" => "碧武里府"),
-            "44" => array("code" => "Phichit", "name" => "披集府"),
-            "45" => array("code" => "Phitsanulok", "name" => "彭世洛府"),
-            "46" => array("code" => "Phrae", "name" => "帕府"),
-            "47" => array("code" => "Phuket", "name" => "普吉岛"),
-            "48" => array("code" => "Prachin Buri", "name" => "巴真府"),
-            "49" => array("code" => "Prachuap Khiri Khan", "name" => "巴蜀府"),
-            "50" => array("code" => "Ranong", "name" => "拉廊府"),
-            "51" => array("code" => "Ratchaburi", "name" => "叻丕府"),
-            "52" => array("code" => "Rayong", "name" => "罗永府"),
-            "53" => array("code" => "Roi Et", "name" => "黎逸府"),
-            "54" => array("code" => "Sa Kaeo", "name" => "沙缴府"),
-            "55" => array("code" => "Sakon Nakhon", "name" => "色军府"),
-            "56" => array("code" => "Samut Prakan", "name" => "北榄府"),
-            "57" => array("code" => "Samut Sakhon", "name" => "龙仔厝府"),
-            "58" => array("code" => "Samut Songkhram", "name" => "夜功府"),
-            "59" => array("code" => "Sara Buri", "name" => "沙拉武里"),
-            "60" => array("code" => "Satun", "name" => "沙敦府"),
-            "61" => array("code" => "Sing Buri", "name" => "信武里府"),
-            "62" => array("code" => "Sisaket", "name" => "四色菊府"),
-            "63" => array("code" => "Songkhla", "name" => "宋卡"),
-            "64" => array("code" => "Sukhothai", "name" => "素可泰"),
-            "65" => array("code" => "Suphan Buri", "name" => "素攀武里府"),
-            "66" => array("code" => "Surat Thani", "name" => "素叻他尼府"),
-            "67" => array("code" => "Surin", "name" => "素辇府"),
+            "33" => array("code" => "那拉提瓦府", "name" => "那拉提瓦府"),
+            "34" => array("code" => "廊磨喃蒲府", "name" => "廊磨喃蒲府"),
+            "35" => array("code" => "廊开府", "name" => "廊开府"),
+            "36" => array("code" => "暖武里府", "name" => "暖武里府"),
+            "37" => array("code" => "巴吞他尼府", "name" => "巴吞他尼府"),
+            "38" => array("code" => "北大年府", "name" => "北大年府"),
+            "39" => array("code" => "攀牙府", "name" => "攀牙府"),
+            "40" => array("code" => "博他仑府", "name" => "博他仑府"),
+            "41" => array("code" => "帕尧府", "name" => "帕尧府"),
+            "42" => array("code" => "碧差汶府", "name" => "碧差汶府"),
+            "43" => array("code" => "碧武里府", "name" => "碧武里府"),
+            "44" => array("code" => "披集府", "name" => "披集府"),
+            "45" => array("code" => "彭世洛府", "name" => "彭世洛府"),
+            "46" => array("code" => "帕府", "name" => "帕府"),
+            "47" => array("code" => "普吉岛", "name" => "普吉岛"),
+            "48" => array("code" => "巴真府", "name" => "巴真府"),
+            "49" => array("code" => "巴蜀府", "name" => "巴蜀府"),
+            "50" => array("code" => "拉廊府", "name" => "拉廊府"),
+            "51" => array("code" => "叻丕府", "name" => "叻丕府"),
+            "52" => array("code" => "罗永府", "name" => "罗永府"),
+            "53" => array("code" => "黎逸府", "name" => "黎逸府"),
+            "54" => array("code" => "沙缴府", "name" => "沙缴府"),
+            "55" => array("code" => "色军府", "name" => "色军府"),
+            "56" => array("code" => "北榄府", "name" => "北榄府"),
+            "57" => array("code" => "龙仔厝府", "name" => "龙仔厝府"),
+            "58" => array("code" => "夜功府", "name" => "夜功府"),
+            "59" => array("code" => "沙拉武里", "name" => "沙拉武里"),
+            "60" => array("code" => "沙敦府", "name" => "沙敦府"),
+            "61" => array("code" => "信武里府", "name" => "信武里府"),
+            "62" => array("code" => "四色菊府", "name" => "四色菊府"),
+            "63" => array("code" => "宋卡", "name" => "宋卡"),
+            "64" => array("code" => "素可泰", "name" => "素可泰"),
+            "65" => array("code" => "素攀武里府", "name" => "素攀武里府"),
+            "66" => array("code" => "素叻他尼府", "name" => "素叻他尼府"),
+            "67" => array("code" => "素辇府", "name" => "素辇府"),
             "68" => array("code" => "Tak", "name" => "Tak"),
-            "69" => array("code" => "Trang", "name" => "董里"),
-            "70" => array("code" => "Trat", "name" => "达叻"),
-            "71" => array("code" => "Ubon Ratchathani", "name" => "乌汶府"),
-            "72" => array("code" => "Udon Thani", "name" => "乌隆他尼府"),
-            "73" => array("code" => "Uthai Thani", "name" => "乌泰他尼府"),
-            "74" => array("code" => "Uttaradit", "name" => "程逸府"),
-            "75" => array("code" => "Yala", "name" => "也拉府"),
-            "76" => array("code" => "Yasothon", "name" => "益梭通府")
+            "69" => array("code" => "董里", "name" => "董里"),
+            "70" => array("code" => "达叻", "name" => "达叻"),
+            "71" => array("code" => "乌汶府", "name" => "乌汶府"),
+            "72" => array("code" => "乌隆他尼府", "name" => "乌隆他尼府"),
+            "73" => array("code" => "乌泰他尼府", "name" => "乌泰他尼府"),
+            "74" => array("code" => "程逸府", "name" => "程逸府"),
+            "75" => array("code" => "也拉府", "name" => "也拉府"),
+            "76" => array("code" => "益梭通府", "name" => "益梭通府")
         ),
         /* Togo */
         "TG" => array(
@@ -6189,7 +6308,7 @@ $app_list_strings = array (
             "75" => array("code" => "TRA", "name" => "特拉布宗"),
             "76" => array("code" => "TUN", "name" => "通杰利省"),
             "77" => array("code" => "USK", "name" => "乌沙克"),
-            "78" => array("code" => "VAN", "name" => "凡城"),
+            "78" => array("code" => "凡城", "name" => "凡城"),
             "79" => array("code" => "YAL", "name" => "亚洛瓦省"),
             "80" => array("code" => "YOZ", "name" => "约兹加特"),
             "81" => array("code" => "ZON", "name" => "宗古尔达克")
@@ -6226,7 +6345,7 @@ $app_list_strings = array (
             "3" => array("code" => "NTO", "name" => "纽陶岛"),
             "4" => array("code" => "FUN", "name" => "富那富提"),
             "5" => array("code" => "NME", "name" => "纳诺梅阿环礁"),
-            "6" => array("code" => "NUI", "name" => "努伊环礁"),
+            "6" => array("code" => "努伊环礁", "name" => "努伊环礁"),
             "7" => array("code" => "NFT", "name" => "努库费陶环礁"),
             "8" => array("code" => "NLL", "name" => "努库莱莱环礁"),
             "9" => array("code" => "VAI", "name" => "瓦伊图普环礁")
@@ -6246,7 +6365,7 @@ $app_list_strings = array (
             "11" => array("code" => "RAK", "name" => "拉卡伊区"),
             "12" => array("code" => "SEM", "name" => "森巴布莱区"),
             "13" => array("code" => "WAK", "name" => "瓦基索区"),
-            "14" => array("code" => "BUG", "name" => "布吉里区"),
+            "14" => array("code" => "错误", "name" => "布吉里区"),
             "15" => array("code" => "BUS", "name" => "布西亚区"),
             "16" => array("code" => "IGA", "name" => "伊甘加区"),
             "17" => array("code" => "JIN", "name" => "金贾区"),
@@ -6255,7 +6374,7 @@ $app_list_strings = array (
             "20" => array("code" => "KPC", "name" => "卡普乔鲁瓦区"),
             "21" => array("code" => "KTK", "name" => "卡塔奎区"),
             "22" => array("code" => "KUM", "name" => "库米区"),
-            "23" => array("code" => "MAY", "name" => "马尤盖区"),
+            "23" => array("code" => "5 月", "name" => "马尤盖区"),
             "24" => array("code" => "MBA", "name" => "姆巴莱区"),
             "25" => array("code" => "PAL", "name" => "帕利萨区"),
             "26" => array("code" => "SIR", "name" => "锡龙科区"),
@@ -6300,7 +6419,7 @@ $app_list_strings = array (
             "6" => array("code" => "DO", "name" => "顿涅茨克"),
             "7" => array("code" => "IV", "name" => "伊万诺-弗兰科夫斯克州"),
             "8" => array("code" => "KL", "name" => "哈尔科夫-赫尔松州"),
-            "9" => array("code" => "KM", "name" => "赫梅利尼茨基州"),
+            "9" => array("code" => "公里", "name" => "赫梅利尼茨基州"),
             "10" => array("code" => "KR", "name" => "基洛沃格勒州"),
             "11" => array("code" => "KV", "name" => "基辅"),
             "12" => array("code" => "KY", "name" => "Kyyiv"),
@@ -6388,7 +6507,7 @@ $app_list_strings = array (
             "55" => array("code" => "MERT", "name" => "梅瑟蒂德菲尔"),
             "56" => array("code" => "MLOT", "name" => "中洛锡安郡"),
             "57" => array("code" => "MMOUTH", "name" => "蒙茅斯郡"),
-            "58" => array("code" => "MORAY", "name" => "默里郡"),
+            "58" => array("code" => "默里郡", "name" => "默里郡"),
             "59" => array("code" => "NPRTAL", "name" => "下塔尔波特港"),
             "60" => array("code" => "NEWPT", "name" => "新港"),
             "61" => array("code" => "NOR", "name" => "诺福克"),
@@ -6397,7 +6516,7 @@ $app_list_strings = array (
             "64" => array("code" => "YSN", "name" => "北约克郡"),
             "65" => array("code" => "NHM", "name" => "北安普敦郡"),
             "66" => array("code" => "NLD", "name" => "诺森伯兰郡"),
-            "67" => array("code" => "NOT", "name" => "诺丁汉郡"),
+            "67" => array("code" => "不", "name" => "诺丁汉郡"),
             "68" => array("code" => "ORK", "name" => "奥克尼群岛"),
             "69" => array("code" => "OFE", "name" => "牛津郡"),
             "70" => array("code" => "PEM", "name" => "彭布罗克郡"),
@@ -6443,7 +6562,7 @@ $app_list_strings = array (
             "7" => array("code" => "AA", "name" => "美洲武装部队"),
             "8" => array("code" => "AC", "name" => "加拿大武装部队"),
             "9" => array("code" => "AE", "name" => "欧洲武装部队"),
-            "10" => array("code" => "AM", "name" => "中东武装部队"),
+            "10" => array("code" => "上午", "name" => "中东武装部队"),
             "11" => array("code" => "AP", "name" => "太平洋武装部队"),
             "12" => array("code" => "CA", "name" => "加利福尼亚州"),
             "13" => array("code" => "CO", "name" => "科罗拉多州"),
@@ -6481,7 +6600,7 @@ $app_list_strings = array (
             "45" => array("code" => "ND", "name" => "北达科他州"),
             "46" => array("code" => "MP", "name" => "北马里亚纳群岛"),
             "47" => array("code" => "OH", "name" => "俄亥俄州"),
-            "48" => array("code" => "OK", "name" => "俄克拉荷马州"),
+            "48" => array("code" => "确定", "name" => "俄克拉荷马州"),
             "49" => array("code" => "OR", "name" => "俄勒冈州"),
             "50" => array("code" => "PW", "name" => "帕劳"),
             "51" => array("code" => "PA", "name" => "宾夕法尼亚州"),
@@ -6562,7 +6681,7 @@ $app_list_strings = array (
         ),
         /* Venezuela */
         "VE" => array(
-            "1" => array("code" => "AM", "name" => "亚马逊"),
+            "1" => array("code" => "上午", "name" => "亚马逊"),
             "2" => array("code" => "AN", "name" => "安索阿特吉州"),
             "3" => array("code" => "AP", "name" => "阿普雷州"),
             "4" => array("code" => "AR", "name" => "阿拉瓜州"),
@@ -6639,7 +6758,7 @@ $app_list_strings = array (
         "YE" => array(
             "1" => array("code" => "AB", "name" => "阿比扬省"),
             "2" => array("code" => "AD", "name" => "亚丁省"),
-            "3" => array("code" => "AM", "name" => "阿姆兰省"),
+            "3" => array("code" => "上午", "name" => "阿姆兰省"),
             "4" => array("code" => "BA", "name" => "拜达省"),
             "5" => array("code" => "DA", "name" => "达利省"),
             "6" => array("code" => "DH", "name" => "扎马尔省"),
@@ -6660,7 +6779,7 @@ $app_list_strings = array (
         /* Yugoslavia */
         "YU" => array(
             "1" => array("code" => "KOS", "name" => "科索沃"),
-            "2" => array("code" => "MON", "name" => "黑山"),
+            "2" => array("code" => "星期一", "name" => "黑山"),
             "3" => array("code" => "SER", "name" => "塞尔维亚"),
             "4" => array("code" => "VOJ", "name" => "伏伊伏丁那")
         ),
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => '跟踪链接',
   'LBL_TOGGLE_VISIBILITY' => '切换可见选择', // Record view header panel element
   'LBL_ACTIVITIES' => '活动流',
-  'LBL_COPYRIGHT' => '©2004-2015 SugarCRM Inc. 版权所有。',
-  'LBL_TRADEMARK' => 'SugarCRM 是 SugarCRM, Inc. 的商标。全部其他公司和产品名称可能是各相关公司的商标。',
-  'LBL_TRADEMARK2' => 'SugarCRM ®、Sugar Enterprise™ 和Sugar™ 是 SugarCRM Inc.的商标。',
-  'LBL_SEND_INVITE' => '发送邀请',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM、Sugar 和 3-D 立方体均为 SugarCRM Inc. 的注册商标。'.
+        '该产品中使用或出现的任何其他公司和产品名称可能是 '.
+        '与此类名称有关的公司的商标。',
+    'LBL_TRADEMARK2' => 'SugarCRM ®、Sugar Enterprise™ 和Sugar™ 是 SugarCRM Inc.的商标。',
+    'LBL_SEND_INVITE' => '发送邀请',
   'LBL_INVITEES' => '受邀者',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => '客户收不到您的邀请',
   'LBL_SELECT_ACTION_LABEL' => '选择动作',
   'LBL_TOGGLE_DRAWER' => '切换选项抽屉',
   'LBL_TOUR_NEXT' => '下一步',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => '添加' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => '公司Logo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => '日历' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => '主模块导航',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => '切换子面板',
+
     'LBL_ADVANCED' => '高级',
     'LBL_BASIC' => '基本',
     'LBL_MODULE_FILTER' => '筛选器',
@@ -8271,7 +8398,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_ADD_ACCOUNT'        => '清除窗口',
     'LBL_EMAIL_SETTINGS_AUTO_IMPORT'        => '在视图上导入邮件',
     'LBL_EMAIL_SETTINGS_CHECK_INTERVAL'     => '查找新邮件',
-    'LBL_EMAIL_SETTINGS_COMPOSE_INLINE'     => '使用前一个面板',
+    'LBL_EMAIL_SETTINGS_COMPOSE_INLINE'     => '使用预览窗格',
     'LBL_EMAIL_SETTINGS_COMPOSE_POPUP'      => '使用弹出窗口',
     'LBL_EMAIL_SETTINGS_DISPLAY_NUM'        => '每页邮件数量',
     'LBL_EMAIL_SETTINGS_EDIT_ACCOUNT'       => '编辑邮件账户',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'团队',
     'LBL_TEAM_SET_ID' => '团队列表编号',
     'LBL_TEAM_SET'=>'团队列表',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => '选择团队',
     'LBL_SEARCH_UNAVAILABLE' => '搜索无效，请稍后再尝试.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => '没有指定主要团队',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => '试图从模块[{1}]中删除编号为[{2}]的主团队[{0}]失败',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => '搜索引擎暂时不可用。',
     'EXCEPTION_SEARCH_RUNTIME'          => '搜索引擎运行时出错。请联系您的系统管理员。',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => '流程锁定的字段不能进行编辑。',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => '错误条件。',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => '指示服务器繁忙、 过载或故障。',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => '由于连接问题，搜索引擎后端暂时不可用。请按照“管理>搜索>测试”确认连接和配置。',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => '搜索引擎出现运行时异常。请访问 sugarcrm.log 查阅更多详情。',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => '运行的流程当前锁定的字段不能进行编辑。',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s 被运行流程锁定，不能进行编辑。',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s 被运行流程锁定，不能进行编辑。',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => '相同名字的文件已存在于系统中.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => '此时段已有子周期',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => '子时间段不能有子周期',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => '无法检索任何时间周期类型：{0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => '可用时段不适用于当前设置。',
     'LBL_CURRENT_TIMEPERIOD' => '当前时间周期',
     'LBL_PREVIOUS_TIMEPERIOD' => '上个时间周期',
     'LBL_NEXT_TIMEPERIOD' => '下个时间周期',
@@ -8532,7 +8664,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => '关闭',
     'LBL_ADDITIONAL_DETAILS' => '额外细节',
     'LBL_ADMIN' => '系统管理',
-    'LBL_ALT_HOT_KEY' => 'Alt+',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => '存档',
     'LBL_ASSIGNED_TO_USER'=>'负责人',
     'LBL_ASSIGNED_TO' => '负责人：',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => '选择字段',
     'LBL_FILTER_SELECT_OPERATOR' => '选择运营商',
     'LBL_FILTER_CREATE_NEW' => '创建',
+    'LBL_FILTER_CREATE_FILTER' => '创建新筛选器',
+    'LBL_FILTER_EDIT_FILTER' => '编辑筛选器',
     'LBL_FILTER_ALL_RECORDS' => '所有记录',
     'TPL_FILTER_SAVE' => '成功创建筛选器{{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => '来自',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => '省份：',
     'LBL_STATUS_UPDATED'=>'对于这个事件，您的状态已更新！',
+    'LBL_STATUS_NOT_UPDATED' => '对于这个事件，您的状态还未更新！',
     'LBL_STATUS'=>'状态:',
     'LBL_STREET'=>'街道',
     'LBL_SUBJECT' => '主题',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> 保留所有权利。<br />SugarCRM 是 SugarCRM, Inc. 的商标，所有其他公司名称和产品名称可能是相关各家公司的商标。',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '保留所有权利。<br />SugarCRM、Sugar 和 3-D 立方体均为 SugarCRM Inc. 的注册商标。 '.
+        '该产品中使用或出现的任何其他公司和产品名称可能是'.
+        '与此类名称有关的公司的商标。',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => '计划的作业完成了',
@@ -9176,7 +9315,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => '出错。您输入了无效的运算符。',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => '出错。您输入了无效的筛选器。',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => '导入失败。流程定义中的一组字段被部分锁定。流程定义中的这些字段必须解锁，以便导入定义。',
+    'ERROR_EXP_DATE_LOW' => '错误。到期日期不能早于公布的日期。',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => '出错。已批准状态需要发布日期。',
     'ERROR_ACTIVE_DATE_EMPTY' => '发布日期为空。',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9306,6 +9446,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => '显示列',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => '仪表板',
     'LBL_DASHBOARD_BWC' => '我的遗留仪表板',
     'LBL_DEFAULT_DASHBOARD_TITLE' => '我的仪表板',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => '帮助仪表板',
@@ -9338,9 +9479,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => '我的 {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => '新闻',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => '谷歌新闻订阅的相关帐户',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => '商业机会指标',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => '关联客户的销售机会指标',
@@ -9409,7 +9547,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => '没有发现记录。',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => '客户反馈总结',
-    'LBL_DASHLET_NEWS_FEED_NAME' => '新闻订阅',
     'LBL_DASHLET_ITERACTIONS_NAME' => '互动',
     'LBL_DASHLET_ATTACHMENTS_NAME' => '笔记与附件',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => '注释和附件所属的记录',
@@ -9918,7 +10055,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => '选择工作职能',
     'LBL_DNB_BAL_ORG_NAME' => '组织名称',
     'LBL_DNB_BAL_IMPORT_AS' => '导入为：',
-    'LBL_DNB_BAL_ORG_NAME' => '组织名称',
+    'LBL_DNB_BAL_ORG_NAME' => '公司名称',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => '美金 百万',
@@ -9977,7 +10114,7 @@ $app_strings = array (
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => '已发布的最有用知识库文章',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => '显示最受欢迎和查看最多的知识库文章',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} 按 {{label}} "{{value}}" 筛选',
 
@@ -10016,6 +10153,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => '分',
     'ERR_BLANK_PAGE_NAME' => '请输入一个页名称。',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => '我的管道',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "我团队的管道",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => '销售管道图表',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => '显示当前管道图表。',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => '无图像',
 
@@ -10282,6 +10426,8 @@ $app_strings = array (
     'LBL_SELECT_THIS_ROW_TITLE' => '选择该行',
     'LBL_TEAM_SELECTED_TITLE' => '被选团队',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => '选择该团队为主要团队',
+    'LBL_TEAM_TBSELECTED_TITLE' => '团队被标记为选择的团队 ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => '将该团队标记为选择的团队',
     'LBL_SEARCH_AND_SELECT' => '查找和选择 {{module}}',
     'TPL_SEARCH_AND_ADD' => '搜索并添加 {{module}}',
 
@@ -10370,6 +10516,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => '预览失败：无可用数据',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => '预览禁用：作为当前记录',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => '预览禁用：记录删除或不记录访问',
+    'LBL_PREVIEW_PREVIOUS' => '预览上一页',
+    'LBL_PREVIEW_NEXT' => '预览下一页',
+    'LBL_PREVIEW_CLOSE' => '结束预览',
     'LBL_STREAM_NO_RECORDS' => '当前这条记录没有注释。请添加注释，点击“添加注释”链接。',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}}发现重复',
     'LBL_NO_DUPLICATES_FOUND' => '未找到任何重复项。',
@@ -10389,6 +10538,7 @@ $app_strings = array (
         '无效的数字传递的记录。 有效范围是从{{minRecords}} 到 {{maxRecords}} records。',
     'LBL_MERGE_NO_ACCESS' =>
         '您没有访问权限才能执行此操作',
+    'LBL_MERGE_LOCKED' => '一些被选中合并的记录所包含的字段被流程锁定编辑，此时无法合并。',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10859,10 +11009,9 @@ $app_strings = array (
     'LBL_WIZ_APPLICATION_SETTINGS' => '系统设置',
     'LBL_WIZ_CONFIGURE_APPLICATION' => '工作室',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> '密码',
     'LBL_CURRENT_PASSWORD'				=> '当前密码',
-    'LBL_SET_NEW_PASSWORD'              => '输入密码',
     'LBL_NEW_PASSWORD1'                 => '新密码',
     'LBL_NEW_PASSWORD2'                 => '确认密码',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> '请输入您的密码确认。',
@@ -10870,13 +11019,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> '请输入您的当前密码。',
     'ERR_REENTER_PASSWORDS' => '请重新输入密码。“新密码”和“确认密码”不匹配。',
     'ERR_PASSWORD_MISMATCH' => '输入密码与系统密码不匹配。',
-    'LBL_NEW_USER_PASSWORD_1' => '密码修改成功.',
     'LBL_CANNOT_SEND_PASSWORD' => '不能发送密码',
     'LBL_REQUEST_PASSWORD' => '需要密码',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => '错误:用户密码更新有问题。',
     'LBL_INCORRECT_PASSWORD' => '错误：密码错误。',
 
-    'LBL_PREFERRED_LANGUAGE' => '首选语言:',
+    'LBL_PREFERRED_LANGUAGE' => '首选语言：',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => '选择报告',
@@ -10906,6 +11054,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => '服务器遇到错误，无法完成您的请求。',
     'ERR_HTTP_500_TEXT_LINE2' => '请重试。如果错误仍然存在，请联系您的 Sugar 管理员。',
     'ERR_HTTP_500_ACTION' => '请联系技术支持',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 内部服务器错误',
+    'ERR_HTTP_502_TEXT_LINE1' => '服务器暂时出现错误，无法完成您的请求。',
+    'ERR_HTTP_502_TEXT_LINE2' => '请重试。如果错误仍然存在，请联系您的 Sugar 管理员。',
+    'ERR_HTTP_502_ACTION' => '请联系技术支持。',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 内部服务器错误',
+    'ERR_HTTP_503_TEXT_LINE1' => '服务器不可用，无法完成您的请求。',
+    'ERR_HTTP_503_TEXT_LINE2' => '请稍后重试。如果错误仍然存在，请联系您的 Sugar 管理员。',
+    'ERR_HTTP_503_ACTION' => '请联系技术支持。',
 
     'ERR_RENDER_FAILED_TITLE' => '渲染失败',
     'ERR_RENDER_FAILED_MSG' => '无法渲染视图',
@@ -11039,6 +11199,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => '错误',
     'LBL_ALERT_TITLE_LOADING' => '加载中 ...',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => '您的浏览器版本不再支持或您使用不受支援的浏览器。',
+    'LBL_ALERT_BROWSER_SUPPORT' => '推荐以下浏览器版本：<ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => '请参阅 {{link}} 页面，了解建议的浏览器。',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => '支持的平台',
 
@@ -11091,6 +11252,9 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => '在连接到服务器时出现错误。请再试一次。',
     'ERR_RESOLVE_ERRORS' => '安装前，请先解决全部错误。',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => '刷新列表',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => '更多',
@@ -11198,10 +11362,13 @@ $app_strings = array (
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM允许进阶的用户使用键盘快捷键完成某些任务以提高效率。右侧的表格描述了可用快捷键的键位及功能。',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>支持键</h1><ul><li>所有字母字符和符号</li><li>shift、ctrl、alt、command、mod （ Windows/Linux 中的 ctrl 键和 Macs 中的 command 键）</li><li>enter、esc、space、tab、pageup、pagedown、end、home、ins、del、backspace</li></ul><h1>支持功能</h1><ul><li>组合键: ctrl+m</li><li>多键：m、ctrl+m</li><li>键序列：m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => '全局快捷键',
     'LBL_CONTEXTUAL_SHORTCUTS' => '文脉上的快捷键',
     'LBL_SHORTCUT_KEY_KEY' => '密匙',
     'LBL_SHORTCUT_FUNCTION' => '功能',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => '配置文脉上的快捷键',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => '无文脉快捷键可配置',
     'LBL_SHORTCUT_HELP' => '显示快捷键帮助页',
     'LBL_SHORTCUT_QUICK_CREATE' => '隐藏/显示快速创建菜单',
     'LBL_SHORTCUT_SEARCH' => '关注全局搜索字段',
@@ -11249,6 +11416,9 @@ $app_strings = array (
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => '选择多选字段中的所有项目',
     'LBL_SHORTCUT_SWEETSPOT' => '切换到最优点位栏',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => '隐藏最佳点条块',
+    'LBL_SHORTCUT_SAVE_CONFIG' => '保存配置',
+    'LBL_SHORTCUT_RESTORE' => '恢复为默认值',
+    'LBL_SHORTCUT_CONFIG_ERROR' => '在服务器上保存自定义快捷键时出现错误，请重试。',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}}设置',
@@ -11271,13 +11441,20 @@ $app_strings = array (
     'LBL_CALENDAR_RECURRENCE' => "复发",
     'LBL_CALENDAR_REMINDERS' => "提醒",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "自定义日期",
     'LBL_CALENDAR_REPEAT_TYPE' => "重复类型",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "重复间隔",
     'LBL_CALENDAR_REPEAT_DOW' => "重复于周之日",
+    'LBL_CALENDAR_REPEAT' => "重复",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "重复直到",
     'LBL_CALENDAR_REPEAT_COUNT' => "重复事件",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "重复选择器",
+    'LBL_CALENDAR_REPEAT_DAYS' => "每月天数",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "重复顺序",
+    'LBL_CALENDAR_REPEAT_UNIT' => "重复单元",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => '重复变更必须在系列的第一个记录执行。',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => '复发规则不会导致生成事件。',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => '参加',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => '拒绝',
@@ -11297,17 +11474,23 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 需要javascript。请启动Javascript以便继续使用Sugar 7。',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => '已序列化的数据无法进行反序列化',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => '已序列化的数据无法进行反序列化，因为其中包含对象或类别的引用',
 
     'LBL_FIELD_TRIMMED' => '由于超过最大字符限制，字段被调整。',
+    'LBL_FIELDSIZE_OVERFLOW' => '字段超出最大字符数限制。',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => '最近 7 天',
     '30' => '最近 30 天',
     '90' => '上个季度',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11412,13 +11595,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => '失效',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => '草稿',
-    'Expired' => '失效',
-    'In Review' => '检查中',
-    'Published' => '已发布',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--管理员动作--',
@@ -11430,57 +11606,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'删除选择的文章',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => '有附件',
-        'none' => '没有',
-        'mime' => '指定 Mime 类型',
-        'name' => '指定名称',
-    );
-
   $app_list_strings['moduleList']['Words'] = '文字';
   $app_list_strings['moduleListSingular']['Words'] = 'Words';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = '创建文章';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => '前5位',
-    'Top_10' => '前10位',
-    'Top_20' => '前20位',
-    'Bot_5'  => '末5位',
-    'Bot_10' => '末10位',
-    'Bot_20' => '末20位',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'所有',
-        'added' => '最近 30 天添加的',
-        'pending' => '待审批',
-        'updated' =>'最近 30 天内完成更新',
-        'faqs' => '常见问题',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => '在',
-    'before' => '前',
-    'after' => '后',
-    'between_dates' => '之间',
-    'last_7_days' => '最近 7 天',
-    'next_7_days' => '未来 7 天',
-    'last_month' => '上个月',
-    'this_month' => '本月',
-    'next_month' => '下个月',
-    'last_30_days' => '最近 30 天',
-    'next_30_days' => '未来 30 天',
-    'last_year' => '去年',
-    'this_year' => '今年',
-    'next_year' => '明年',
-    'isnull' => '是空的',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12342,6 +12470,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "所有联系人",
+    "email" => "仅适用于电子邮件",
+    "phone" => "仅适用于电话",
     "prem" => "仅限特级的"
 );
 
@@ -12367,4 +12497,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => '个人简历',
     'Both' => '两者'
 );
-

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => '移除診斷工具檔案',
 'LBL_OOTB_REMOVE_PDF_FILES' => '移除暫存 PDF 檔案',
 'LBL_UPDATE_TRACKER_SESSIONS' => '更新 tracker_sessions 表格',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> '執行電子郵件提醒通知',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => '執行電子郵件提醒通知',
 'LBL_OOTB_CLEANUP_QUEUE' => '清理工作佇列',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => '建立未來時間週期',
 'LBL_OOTB_HEARTBEAT' => 'Sugar 活動訊號',
 'LBL_OOTB_KBCONTENT_UPDATE' => '更新 KBContent 文章。',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => '發佈經核准的文章和「過期 KB 文章」。',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => '處理作者排程工作',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => '間隔：',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => '重新整理工作',
 'LBL_POLLMONITOREDINBOXES' => '檢查輸入郵件帳戶',
 'LBL_PERFORMFULLFTSINDEX' => '全文檢索搜尋索引系統',
+'LBL_SUGARJOBREMOVEPDFFILES' => '移除暫存 PDF 檔案',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => '發佈經核准的文章和「過期 KB 文章」。',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch 佇列排程器',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => '移除診斷工具檔案',
+'LBL_SUGARJOBREMOVETMPFILES' => '移除暫存檔案',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '夜間執行大量電子郵件推廣活動',
 'LBL_ASYNCMASSUPDATE' => '執行非同步大量更新',

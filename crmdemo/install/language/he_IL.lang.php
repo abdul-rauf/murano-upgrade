@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'שגיאות אותרו במהלך בדיקת תאימות. על מנת שהתקנת הSugarCRM שלך תתפקד כראוי, בבקשה תנקוט בצעדים המתאימים כדי לטפל בבעיות המפורטים להלן וגם לחץ על כפתור בדוק מחדש, או נסה להתקין שוב.',
     'ERR_CHECKSYS_CALL_TIME'            => 'הפניית העברת זמן שיחה מופעלת (יש להגדיר את זה לכבויה ב-php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'לא נמצא: מתזמן הSugar יפעל עם פונקציונליות מוגבלת.',
+	'ERR_CHECKSYS_CURL'					=> 'לא נמצא: מתזמן Sugar יפעל עם פונקציונליות מוגבלת. השירות ארכיון דוא"ל לא יפעל.',
     'ERR_CHECKSYS_IMAP'					=> 'לא נמצא: InboundEmail ו-Campaigns (דוא"ל) דורשים ספריות IMAP. שניהם לא יפעלו.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'לא ניתן להפעיל Magic Quotes GPC בעת השימוש בשרת MS SQL.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Warning:',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'מסד נתונים אינו זמין',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'תמיכת מסד הנתונים לא נמצאה. אנא ודא שיש לך את מנהלי ההתקנים הדרושים עבור אחד מסוגי מסד הנתונים הנתמכים הבאים: MySQL או MS SQLServer. ייתכן שתצטרך לבטל את הסימון כהערה של סיומת קובץ ה-php.ini, או להדר מחדש עם הקובץ הבינארי הנכון, בהתאם לגרסה של PHP שלך. נא עיין במדריך ה-PHP שלך לקבלת מידע נוסף על אופן הפעלת תמיכת מסד הנתונים.<br><br>Oracle ו- DB2 הם מסדי נתונים שלא נתמכים עבור PRO SugarCRM. לקבלת רשימה של מסדי נתונים נתמכים ומידע פלטפורמה אחר, "אנא בקר בכתובת" <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'לא נמצאו פונקציות הקשורות לספריות מנתח XML הנחוצים ליישום ה-Sugar. ייתכן שתצטרך להוריד את התגובה של השלוחה בקובץ php.ini, או להדר מחדש עם הקובץ הבינארי הנכון, בהתאם לגרסת ה-PHP שלך. נא עיין במדריך PHP שלך לקבלת מידע נוסף.',
+    'LBL_CHECKSYS_CSPRNG' => 'מחולל מספרים אקראיים',
     'ERR_CHECKSYS_MBSTRING'             => 'לא נמצאו פונקציות הקשורות לשלוחת מחרוזות מרובות הבתים של PHP (mbstring) הנחוצים ליישום ה-Sugar. <br/><br/>באופן כללי, מודול ה-mbstring לא מופעל כברירת מחדל ב-PHP וחייב להיות מופעל עם --אפשר-mbstring כאשר ה-PHP הבניארי בנוי. נא עיין במדריך PHP שלך לקבלת מידע נוסף על כיצד לאפשר תמיכת mbstring.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'ההגדרה של Session.save_path בקובץ תצורת ה-php שלך (php.ini) אינה מוגדרת או מוגדרת לתיקייה שלא הייתה קיימת. ייתכן שתצטרך להגדיר את הגדרת save_path ב-php.ini או לוודא שקיימות ערכות התיקייה ב-save_path.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'תמיכת ZIP לא נמצאה: SugarCRM זקוק לתמיכת ZIP כדי לעבד קבצים דחוסים.',
     'ERR_CHECKSYS_BCMATH'				=> 'לא נמצאה תמיכת BCMATH: שוגר צריך תמיכת BCMATH עבור חשבון מדוייק שרירותי',
     'ERR_CHECKSYS_HTACCESS'             => 'בדיקה של כתיבת .htaccess נכשלה. זה בדרך כלל אומר שלא הוגדרה אפשרות דריסה בספריית שוגר',
+    'ERR_CHECKSYS_CSPRNG' => 'חריגת CSPRNG',
 	'ERR_DB_ADMIN'						=> 'The provided database administrator username and/or password is invalid, and a connection to the database could not be established.  Please enter a valid user name and password.  (Error:',
     'ERR_DB_ADMIN_MSSQL'                => 'שם המשתמש המסופק של מנהל מסד הנתונים  ו\\או הסיסמה  לא חוקי\\ת, והתחברות למסד הנתונים לא ניתנת לייצור. נא הזן שם משתמש וסיסמה בתוקף.',
 	'ERR_DB_EXISTS_NOT'					=> 'מסד הנתונים שצוין אינו קיים.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'המפתח נדרש עבור פונקציונליות של יישום כללי, אך אינו נדרש עבור ההתקנה. אינך צריך להזין את המפתח בשלב זה, אך תצטרך להזינו לאחר התקנת היישום.',
     'LBL_INSTALL_TYPE_MSG2'             => 'דורש מידע מינימלי עבור ההתקנה. מומלץ עבור משתמשים חדשים.',
     'LBL_INSTALL_TYPE_MSG3'             => 'מציג אפשרויות נוספות להגדרה במהלך ההתקנה. רוב האפשרויות האלה זמינות גם לאחר ההתקנה במסכי ניהול המערכת. מומלץ עבור משתמשים מתקדמים.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'מציג אפשרויות נוספות להגדרה במהלך ההתקנה. רוב האפשרויות האלה זמינות גם לאחר ההתקנה במסכי ניהול המערכת. מומלץ עבור משתמשים מתקדמים.',
 	'LBL_LANG_1'						=> 'כדי להשתמש בשפה ב-Sugar שאיננה שפת ברירת המחדל (אנגלית ארה"ב), תוכל להעלות ולהתקין את חבילת השפות בשלב זה. כמו כן, תוכל להעלות ולהתקין חבילות שפות מתוך היישום Sugar. במידה ותרצה לדלג על שלב זה, לחץ על הבא.',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'התקן',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'הסר',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'קבלת רישיון',
     'LBL_LICENSE_CHECKING'              => 'בודק מערכת עבור תאימות.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'בודק סביבה',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'מאמת תעודות DB.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'מאמת אישורי DB‏, FTS.',
     'LBL_LICENSE_CHECK_PASSED'          => 'המערכת עברה את בדיקת התאימות.',
     'LBL_LICENSE_REDIRECT'              => 'Redirecting in',
 	'LBL_LICENSE_DIRECTIONS'			=> 'במידה ויש לך את פרטי הרישיון שלך, אנא הזן אותם בשדות הבאים.',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'אנא קרא את המידע החשוב הבא לפני שתמשיך בהתקנה. המידע יעזור לך לקבוע אם אתה מוכן להתקין את היישום בשלב זה.',
 
 
-	'LBL_WELCOME_2'						=> 'For installation documentation, please visit the <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>.  <BR><BR> To contact a SugarCRM support engineer for installation help, please log in to the <a target="_blank" href="http://support.sugarcrm.com">SugarCRM Support Portal</a> and submit a support case.',
+	'LBL_WELCOME_2'						=> 'לקריאת מסמכי עזר בנושא התקנה, בקר ב-<a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>.  <BR><BR> ליצירת קשר עם איש תמיכה ב-SugarCRM על מנת שיסייע לך בהתקנה, היכנס ל<a target="_blank" href="http://support.sugarcrm.com">פורטל התמיכה של SugarCRM</a> והגש אירוע תמיכה.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>בחר את השפה שלך</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'אשף ההתקנה',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Welcome to the SugarCRM',
@@ -452,7 +455,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'הרץ קמפיין מייל לילי',
 	'LBL_OOTB_PRUNE'		=> 'קצץ מסד נתונים בראשון לכל חודש',
     'LBL_OOTB_TRACKER'		=> 'טבלאות מעקב Prune',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'הפעל התראות תזכורת דוא"ל',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'הפעל הודעות תזכורת בדוא"ל',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'עדכן טבלת tracker_sessions',
     'LBL_OOTB_CLEANUP_QUEUE' => 'נקה תור משרות',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'סוג מנוע חיפוש',
     'LBL_FTS_HELP'      => 'To enable full-text searching, select the search engine type and enter the Host and Port where the search engine is hosted. Sugar includes built-in support for the elasticsearch engine.',
     'LBL_FTS_REQUIRED'    => 'דרוש חיפוש אלסטי',
-    'LBL_FTS_ERROR'    => 'לא ניתן להתחבר לשרת חיפוש טקסט מלא, אנא אמת את ההגדרות שלך.',
+    'LBL_FTS_CONN_ERROR'    => 'לא ניתן להתחבר לשרת חיפוש טקסט מלא, אנא אמת את ההגדרות שלך.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'לא זמינה אף גירסה של שרת חיפוש טקסט מלא, אנא אמת את ההגדרות שלך.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'זוהתה גירסה של חיפוש Elastic שאינה נתמכת. יש להשתמש בגרסאות: %s',
 
     'LBL_PATCHES_TITLE'     => 'התקן טלאים אחרונים',
     'LBL_MODULE_TITLE'      => 'התקן חבילות שפות',

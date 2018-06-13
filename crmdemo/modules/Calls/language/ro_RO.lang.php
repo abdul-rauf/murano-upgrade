@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'LBL_BLANK'	=> 'alb-',
+	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Apeluri',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Apel',
     'LBL_MODULE_TITLE' => 'Apeluri: Acasa',
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Trimite email tuturor invitatilor',
     'LBL_EMAIL_REMINDER' => 'memento email',
-    'LBL_EMAIL_REMINDER_TIME' => 'Memento Email',
-    'LBL_POPUP_REMINDER_TIME' => 'Fereastră pop-up memento',
+    'LBL_EMAIL_REMINDER_TIME' => 'Oră memento e-mail',
+    'LBL_POPUP_REMINDER_TIME' => 'Oră memento pop-up',
     'LBL_SEND_BUTTON_TITLE'=>'Trimite Invitatii[Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Trimite invitatii',
 	'LBL_DATE_END'=>'Data Termen',
 	'LBL_TIME_END'=>'Timpul Termen',
-	'LBL_REMINDER_TIME'=>'Timpul Mementoului',
+    'LBL_REMINDER_TIME'=>'Timpul Mementoului',
     'LBL_EMAIL_REMINDER_SENT' => 'Memento emeil trimis',
     'LBL_SEARCH_BUTTON'=> 'Cauta',
     'LBL_ACTIVITIES_REPORTS' => 'Raport Activitati',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Eliminare toate repetările',
     'LBL_DATE_END_ERROR' => 'Data de sfârşit este înainte de data începerii',
     'LBL_REPEAT_PARENT_ID' => 'Repetare ID părinte',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID recurenţă apel. Dată iniţială de începere apel',
     'LBL_RECURRING_SOURCE' => 'Sursa periodica',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Sunteţi sigur că doriţi să eliminaţi toate înregistrările recurente?',
     'LBL_RECURRING_LIMIT_ERROR' => 'Această recurentă $ titlu modul nu poate fi programat, deoarece depășește reapariția maximă permisă de $ limită.',

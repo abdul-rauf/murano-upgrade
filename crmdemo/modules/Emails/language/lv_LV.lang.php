@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -337,7 +337,7 @@ $mod_strings = array (
     'LBL_MAILBOX_TYPE_GROUP' => 'Grupa',
     'LBL_MAILBOX_TYPE_GROUP_FOLDER' => 'Grupa - Automātisks-Imports',
     'LBL_SEARCH_FOR' => 'Meklēt',
-    'LBL_EMAIL_INBOUND_TYPE_HELP' => '<b>Personīgs</b>: E-pasta kontam variet piekļūt tikai Jūs. Tikai Jūs variet pārvaldīt un importēt e-pastus no šī konta.<br><b>Grupas</b>: E-pasta kontam var piekļūt norādītas darba grupas locekļi. Darba grupas locekļi var pārvaldīt un importēt e-pastus no šī konta.<br><b>Grupas - auto-importa</b>: E-pasta kontam var piekļūt norādītās darba grupas locekļi. E-pasti tiek automātiski importēti kā ieraksti.',
+    'LBL_EMAIL_INBOUND_TYPE_HELP' => '<b>Personīgs</b>: E-pasta kontam varat piekļūt tikai Jūs. Tikai Jūs varat pārvaldīt un importēt e-pastus no šī konta.<br><b>Grupas</b>: E-pasta kontam var piekļūt norādītas darba grupas locekļi. Darba grupas locekļi var pārvaldīt un importēt e-pastus no šī konta.<br><b>Grupas - auto-importa</b>: E-pasta kontam var piekļūt norādītās darba grupas locekļi. E-pasti tiek automātiski importēti kā ieraksti.',
     'LBL_ADDRESS_BOOK_SEARCH_HELP' => 'Adresātu meklēšanai ievadiet e-pastu, vārdu, uzvārdu vai uzņēmuma nosaukumu',
     'LBL_TEST_SETTINGS'     => 'Uzstādījumu tests',
     'LBL_EMPTY_EMAIL_BODY'  => '<p><span style="color: #888888;"><em>Ziņojumam nav satura</em></span></p>',
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'kļūda: iztrūkst pieteikšanās datu',
     'ERR_NO_UID' => 'kļūda: nav UID',
     'ERR_NO_IEID' => 'kļūda: nav ieID',
+    'ERR_INVALID_RECIPIENTS' => 'Ir viens vai vairāki saņēmēji ar nederīgu e-pasta adresi. ' .
+        'Izlabojiet to un mēģiniet vēlreiz.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Nederīga e-pasta adrese',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'nav norādīti saņēmēji',

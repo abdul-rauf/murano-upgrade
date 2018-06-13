@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,7 +73,7 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'E-Mail',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'E-Mail an alle Teilnehmer',
     'LBL_POPUP_REMINDER' => 'Popup-Erinnerung',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup-Erinnerungszeit',
+    'LBL_POPUP_REMINDER_TIME' => 'Pop-up-Erinnerungszeit',
     'LBL_EMAIL_REMINDER' => 'E-Mail-Erinnerung',
     'LBL_EMAIL_REMINDER_TIME' => 'E-Mail-Erinnerungszeit',
     'LBL_REMOVE' => 'Entfernen',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Alle Ereignisse entfernen',
     'LBL_DATE_END_ERROR' => 'Das Enddatum liegt vor dem Stardatum',
     'LBL_REPEAT_PARENT_ID' => 'Wiederholungs-Parent-ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Wiederholungs-ID des Meetings. Ursprüngliches Meeting Startdatum',
     'LBL_RECURRING_SOURCE' => 'Wiederholungs-Quelle',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Möchten Sie wirklich alle Serientermine entfernen?',
     'LBL_RECURRENCE' => 'Ereignis',

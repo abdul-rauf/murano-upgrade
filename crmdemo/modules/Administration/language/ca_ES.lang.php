@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -275,7 +275,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => 'Editar Camps Personalitzats',
     'LBL_EDIT_TABS'=>'Editar Pestanyes',
     'LBL_EMAIL_TITLE' => 'Adreça electrònica',
-    'LBL_EMAIL_DESC' => 'Gestiona correu entrant i sortint. La configuració de correu s´ha de realitzar perquè els usuaris puguin enviar correu i butlletins de Notícies de les campanyes.',
+    'LBL_EMAIL_DESC' => 'Gestioneu els missatges de correu electrònic entrants i sortints. S&#39;ha de configurar el correu electrònic per poder ' .
+                        'permetre als usuaris enviar campanyes de correu electrònic i un butlletí.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'Una adreça de correu electrònic principal es requereix per a cada usuari per tal d&#39;utilitzar aquesta funció.',
 	'LBL_ENABLE_MAILMERGE' => '¿Habilitar Combinar Correspondència?',
 	'LBL_ENABLED' => 'Activar',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Estableix la configuració regional per defecte per el seu sistema.',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => '- El Nom d´Usuari de la persona que utilizará aquest client',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Nom d´Usuari Final:',
-    'LBL_MAILBOX_DESC' => 'Configurar busties per la monitorització del correu entrant.',
+    'LBL_MAILBOX_DESC' => 'Creeu comptes de correu de grup per controlar el correu entrant ' .
+        'i gestionar la informació del compte de correu entrant per als usuaris',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Tipus de contracte',
     'LBL_MANAGE_CURRENCIES' => 'Monedes',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Administrar Grups',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Reconstruir els Arxius d´Agrupació de JS',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Reconcatena i sobreescriu els arxius agrupats existents amb les últimes versions dels arxius agrupats',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Repara els arxius JavaScript',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Repara els arxius JS',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Processant arxius. Això pot tardar diversos minuts. Si surt d´aquesta pàgina no cancel·larà el procés, de manera que si ho desitja pot fer-ho o esperar que el procés finalitzi...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Final de Procés d´Arxius.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Reparar Camps que No están en Minúscules',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Esborrat d&#39;arxius addicionals de memòria cache...fet',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Si es desmarca aquesta opció, es requerirà un administrador per realitzar la revalidació de forma manual una vegada hagi caducat la llicència del sistema, en un altre cas els usuaris no podran iniciar la sessió.',
 	'LBL_TRACKER_SETTINGS' => 'Configuració de Monitoratge',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Habilitar/Deshabilitar Monitoratge',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Activar/desactivar el seguiment',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Habilitar/Deshabilitar Usuaris Cap de sèrie',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Activar',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Desactivar',
@@ -1156,6 +1160,10 @@ Per obtenir més informació, consulteu la documentació de <a href="http://www.
     'LBL_SPRITES_ADDED' => 'Afegit sprite {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Excloent arxiu: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Permisos basats en equip',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Permetre l&#39;accés de l&#39;equip i gestionar l&#39;accés per mòdul.',
+
     //FTS
     'LBL_FTS_TYPE' => 'Tipus de sistema',
     'LBL_FTS_HOST' => 'Amfitrió',
@@ -1225,5 +1233,6 @@ Per obtenir més informació, consulteu la documentació de <a href="http://www.
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Clicant Submit es sincronitzarà amb el servidor mestre',
     'LBL_OFFLINE_ENABLED' => 'Offline activat',
     'LBL_OFFLINE_SETTINGS' => 'Ajustos Offline',
+
 
 );

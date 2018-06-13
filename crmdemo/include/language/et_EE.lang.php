@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -13,94 +13,94 @@
 //to translate, only modify the right value in each key/value pair
 $app_list_strings = array (
 //e.g. auf Deutsch 'Contacts'=>'Contakten',
-  'language_pack_name' => 'US Inglise keel',
+  'language_pack_name' => 'USA inglise keel',
   'moduleList' =>
   array (
     'Home' => 'Avaleht',
-    'Contacts' => 'Contacts',
-    'Accounts' => 'Ettevõtted',
+    'Contacts' => 'Kontaktid',
+    'Accounts' => 'Kontod',
     'Opportunities' => 'Müügivõimalused',
     'Cases' => 'Juhtumid',
-    'Notes' => 'Märkused:',
-    'Calls' => 'Telefonikõned',
-    'Emails' => 'Emails',
+    'Notes' => 'Märkused',
+    'Calls' => 'Kõned',
+    'Emails' => 'E-kirjad',
     'Meetings' => 'Kohtumised',
     'Tasks' => 'Ülesanded',
     'Calendar' => 'Kalender',
-    'Leads' => 'Leads',
+    'Leads' => 'Müügivihjed',
     'Currencies' => 'Valuutad',
     'Project' => 'Projekt',
-    'Contracts'=>'Contracts',
-    'Quotes' => 'Quotes',
-    'Products' => 'Quoted Line Items',
-    'WebLogicHooks' => 'Web Logic Hooks',
-    'ProductCategories' => 'Artiklite kategooriad',
-    'ProductTypes' => 'Product Types',
-    'ProductTemplates' => 'Artikli kataloog',
+    'Contracts'=>'Lepingud',
+    'Quotes' => 'Pakkumused',
+    'Products' => 'Pakkumuse artiklid',
+    'WebLogicHooks' => 'Veebihaagid',
+    'ProductCategories' => 'Tootekategooriad',
+    'ProductTypes' => 'Tooteliigid',
+    'ProductTemplates' => 'Tootekataloog',
     'Reports' => 'Aruanded',
-    'Forecasts' => 'Forecasts',
-    'ForecastWorksheets' => 'Forecast Worksheets',
-    'ForecastManagerWorksheets' => 'Forecast Manager Worksheets',
+    'Forecasts' => 'Prognoosid',
+    'ForecastWorksheets' => 'Prognoosi töölehed',
+    'ForecastManagerWorksheets' => 'Prognoosi haldamise töölehed',
     'MergeRecords'=>'Mesti kirjed',
-    'Quotas' => 'Quotas',
+    'Quotas' => 'Kvoodid',
     'Teams' => 'Meeskonnad',
     'TeamNotices' => 'Meeskonna teated',
     'Manufacturers' => 'Tootjad',
     'Activities' => 'Tegevused',
-    'Comments' => 'Comments',
+    'Comments' => 'Kommentaarid',
     'Subscriptions' => 'Tellimised',
-    'Bugs' => 'Bugid',
+    'Bugs' => 'Vead',
     'Feeds' => 'RSS',
     'iFrames'=>'Minu saidid',
     'TimePeriods'=>'Ajaperioodid',
     'TaxRates'=>'Maksumäärad',
-    'ContractTypes' => 'Lepingu tüübid',
+    'ContractTypes' => 'Lepinguliigid',
     'Schedulers'=>'Planeerijad',
-    'Project'=>'Projekt',
+    'Project'=>'Projektid',
     'ProjectTask'=>'Projekti ülesanded',
     'Campaigns'=>'Kampaaniad',
     'CampaignLog'=>'Kampaania logi',
-    'CampaignTrackers'=>'Kampaana trackerid',
-    'Documents'=>'Documents',
-    'DocumentRevisions'=>'Dokumendi revisjonid',
-    'Connectors'=>'Connectorid',
+    'CampaignTrackers'=>'Kampaania otsijad',
+    'Documents'=>'Dokumendid',
+    'DocumentRevisions'=>'Dokumendi versioonid',
+    'Connectors'=>'Konnektorid',
     'Roles'=>'Rollid',
     'Notifications'=>'Teavitused',
-    'Sync'=>'Sünkimine',
+    'Sync'=>'Sünkroonimine',
     'WorkFlow' => 'Töövoo definitsioonid',
-    'EAPM' => 'External Accounts',
-    'Worksheet' => 'Worksheet',
+    'EAPM' => 'Väliskontod',
+    'Worksheet' => 'Tööleht',
     'Users' => 'Kasutajad',
     'Employees' => 'Töötajad',
-    'Administration' => 'Administratsioon',
+    'Administration' => 'Haldus',
     'ACLRoles' => 'Rollid',
-    'InboundEmail' => 'Grupi e-posti konto',
-    'Releases' => 'Tooteuuendused',
+    'InboundEmail' => 'Sissetulev e-kiri',
+    'Releases' => 'Redaktsioonid',
     'Prospects' => 'Eesmärgid',
-    'Queues' => 'Pakkumised',
+    'Queues' => 'Järjekorrad',
     'EmailMarketing' => 'E-posti turundus',
     'EmailTemplates' => 'E-kirja mallid',
-    'SNIP' => "Email Archiving",
-    'ProspectLists' => 'Eesmärkide loend',
+    'SNIP' => "E-kirjade arhiveerimine",
+    'ProspectLists' => 'Eesmärgiloendid',
     'SavedSearch' => 'Salvestatud otsingud',
-    'UpgradeWizard' => 'Täienda viisard',
-    'Trackers' => 'Trackerid',
-    'TrackerPerfs' => 'Trackeri toiming',
-    'TrackerSessions' => 'Trackeri sessioonid',
-    'TrackerQueries' => 'Trackeri päringud',
-    'FAQ' => 'FAQ',
+    'UpgradeWizard' => 'Uuendamise viisard',
+    'Trackers' => 'Otsijad',
+    'TrackerPerfs' => 'Otsija tulemuslikkus',
+    'TrackerSessions' => 'Otsija seansid',
+    'TrackerQueries' => 'Otsija päringud',
+    'FAQ' => 'KKK',
     'Newsletters' => 'Uudiskirjad',
   	'SugarFavorites'=>'Lemmikud',
-	'PdfManager' => 'PDF Manager',
+	'PdfManager' => 'PDF-i haldur',
 
-    'OAuthKeys' => 'OAuth Consumer Keys',
-    'OAuthTokens' => 'OAuth Tokens',
+    'OAuthKeys' => 'OAuthi tarbija võtmed',
+    'OAuthTokens' => 'OAuthi load',
     'Filters' => 'Filtrid',
-    'UserSignatures' => 'User Signatures',
-    'Shippers' => 'Tarnepakkujad',
-    'Styleguide' => 'Styleguide',
-    'Feedbacks' => 'Feedbacks',
-    'Tags' => 'Tags',
+    'UserSignatures' => 'Kasutaja allkirjad',
+    'Shippers' => 'Vedajad',
+    'Styleguide' => 'Stiilijuhend',
+    'Feedbacks' => 'Tagasiside',
+    'Tags' => 'Sildid',
     'Categories' => 'Kategooriad',
   ),
 
@@ -121,94 +121,92 @@ $app_list_strings = array (
   array (
     'Home' => 'Avaleht',
     'Dashboard' => 'Töölaud',
-    'Styleguide' => 'Styleguide',
+    'Styleguide' => 'Stiilijuhend',
     'Contacts' => 'Kontakt',
-    'Accounts' => 'Account',
-    'Opportunities' => 'Opportunity',
-    'Cases' => 'Case',
-    'Notes' => 'Note',
-    'Calls' => 'Call',
-    'Emails' => 'Muu E-post:',
-    'Meetings' => 'Meeting',
-    'Tasks' => 'Task',
+    'Accounts' => 'Konto',
+    'Opportunities' => 'Võimalus',
+    'Cases' => 'Juhtum',
+    'Notes' => 'Märkus',
+    'Calls' => 'Kõne',
+    'Emails' => 'E-kiri',
+    'Meetings' => 'Kohtumine',
+    'Tasks' => 'Ülesanne',
     'Calendar' => 'Kalender',
     'Leads' => 'Müügivihje',
-    'Manufacturers' => 'Manufacturer',
-    'Contracts'=>'Contract',
-    'Quotes' => 'Quote',
-    'Products' => 'Quoted Line Item',
-    'ProductCategories' => 'Product Category',
-    'RevenueLineItems' => 'Revenue Line Item',
-    'WebLogicHooks' => 'Web Logic Hook',
-    'Reports' => 'Report',
-    'Forecasts' => 'Forecast',
+    'Manufacturers' => 'Tootja',
+    'Contracts'=>'Leping',
+    'Quotes' => 'Pakkumus',
+    'Products' => 'Pakkumuse artikkel',
+    'ProductCategories' => 'Tootekategooria',
+    'RevenueLineItems' => 'Tuluartikkel',
+    'WebLogicHooks' => 'Veebihaak',
+    'Reports' => 'Aruanne',
+    'Forecasts' => 'Prognoos',
     'ForecastWorksheets' => 'Prognoosi tööleht',
-    'ForecastManagerWorksheets' => 'Forecast Manager Worksheet',
-    'Quotas' => 'Quota',
-    'MergeRecords'=>'Merge Record',
+    'ForecastManagerWorksheets' => 'Prognoosi haldamise tööleht',
+    'Quotas' => 'Kvoot',
+    'MergeRecords'=>'Mesti kirje',
     'Teams' => 'Meeskond',
-    'TeamNotices' => 'Team Notice',
+    'TeamNotices' => 'Meeskonna teade',
     'Activities' => 'Tegevus',
-    'ActivityStream' => 'Tegevused',
-    'Bugs' => 'Bug',
+    'ActivityStream' => 'Tegevuste voog',
+    'Bugs' => 'Viga',
     'Feeds' => 'RSS',
     'iFrames'=>'Minu saidid',
-    'TimePeriods'=>'Time Period',
-    'TaxRates'=>'Tax Rate',
-    'ContractTypes' => 'Lepingu tüüp',
-    'Schedulers'=>'Scheduler',
-    'Campaigns'=>'Campaign',
+    'TimePeriods'=>'Ajaperiood',
+    'TaxRates'=>'Maksumäär',
+    'ContractTypes' => 'Lepingu liik',
+    'Schedulers'=>'Planeerija',
+    'Campaigns'=>'Kampaania',
     'CampaignLog'=>'Kampaania logi',
     'Project'=>'Projekt',
-    'ProjectTask'=>'Project Task',
-    'Prospects' => 'Target',
-    'ProspectLists' => 'Eesmärgi loend',
-    'Campaigns'=>'Campaign',
-    'CampaignTrackers'=>'Campaign Tracker',
-    'Documents'=>'Document',
-    'DocumentRevisions'=>'Dokumendi revisjon',
-    'Connectors'=>'Connector',
-    'Roles'=>'Role',
-    'Notifications'=>'Notification',
-    'Sync'=>'Sünkimine',
-    'PdfManager' => 'PDF Manager',
-    'WorkFlow' => 'Workflow',
-    'EAPM' => 'External Account',
-    'Worksheet' => 'Worksheet',
+    'ProjectTask'=>'Projekti ülesanne',
+    'Prospects' => 'Eesmärk',
+    'ProspectLists' => 'Eesmärgiloend',
+    'Campaigns'=>'Kampaania',
+    'CampaignTrackers'=>'Kampaania otsija',
+    'Documents'=>'Dokument',
+    'DocumentRevisions'=>'Dokumendi versioon',
+    'Connectors'=>'Konnektor',
+    'Roles'=>'Roll',
+    'Notifications'=>'Teavitus',
+    'Sync'=>'Sünkroonimine',
+    'PdfManager' => 'PDF-i haldur',
+    'WorkFlow' => 'Töövoog',
+    'EAPM' => 'Väliskonto',
+    'Worksheet' => 'Tööleht',
     'Users' => 'Kasutaja',
     'SugarFavorites'=>'SugarFavorites',
-    'Employees' => 'Employee',
-    'Administration' => 'Administratsioon',
-    'ACLRoles' => 'Role',
-    'InboundEmail' => 'Grupi e-posti konto',
-    'Releases' => 'Release',
-    'Queues' => 'Ootejärjekord',
+    'Employees' => 'Töötaja',
+    'Administration' => 'Haldus',
+    'ACLRoles' => 'Roll',
+    'InboundEmail' => 'Sissetulev e-kiri',
+    'Releases' => 'Redaktsioon',
+    'Queues' => 'Järjekord',
     'EmailMarketing' => 'E-posti turundus',
-    'EmailTemplates' => 'Email Template',
-    'SNIP' => "Email Archiving",
-    'SavedSearch' => 'Saved Search',
-    'UpgradeWizard' => 'Täienda viisard',
-    'Trackers' => 'Tracker',
-    'TrackerPerfs' => 'Trackeri toiming',
-    'TrackerSessions' => 'Tracker Session',
-    'TrackerQueries' => 'Tracker Query',
-    'FAQ' => 'FAQ',
+    'EmailTemplates' => 'E-kirja mall',
+    'SNIP' => "E-kirjade arhiveerimine",
+    'SavedSearch' => 'Salvestatud otsing',
+    'UpgradeWizard' => 'Uuendamise viisard',
+    'Trackers' => 'Otsija',
+    'TrackerPerfs' => 'Otsija tulemuslikkus',
+    'TrackerSessions' => 'Otsija seanss',
+    'TrackerQueries' => 'Otsija päring',
+    'FAQ' => 'KKK',
     'Newsletters' => 'Uudiskiri',
-    'OAuthKeys' => 'OAuth Consumer Key',
-    'OAuthTokens' => 'OAuth Token',
-    'Filters' => 'Filter',
-    'Comments' => 'Comment',
-    'Currencies' => 'Currency',
-    'Project' => 'Projekt',
-    'ProductTemplates' => 'Product Template',
-    'ProductCategories' => 'Product Category',
-    'ProductTypes' => 'Product Type',
-    'Shippers' => 'Shipping Provider',
-    'Subscriptions' => 'Tellimine',
-    'UserSignatures' => 'User Signature',
-    'Feedbacks' => 'Feedback',
+    'OAuthKeys' => 'OAuthi tarbija võti',
+    'OAuthTokens' => 'OAuthi luba',
+    'Filters' => 'Filtri',
+    'Comments' => 'Kommentaar',
+    'Currencies' => 'Valuuta',
+    'ProductTemplates' => 'Toote mall',
+    'ProductTypes' => 'Tooteliik',
+    'Shippers' => 'Vedaja',
+    'Subscriptions' => 'Tellimus',
+    'UserSignatures' => 'Kasutaja allkiri',
+    'Feedbacks' => 'Tagasiside',
     'Tags' => 'Silt',
-    'Categories' => 'Category',
+    'Categories' => 'Kategooria',
   ),
 
 /*
@@ -217,131 +215,131 @@ $app_list_strings = array (
  */
   'checkbox_dom'=> array(
     ''=>'',
-    '1'=>'Yes',
-    '2'=>'No',
+    '1'=>'Jah',
+    '2'=>'Ei',
   ),
 
     'checkbox_massupdate_dom' => array(
-        0 => 'No',
-        1 => 'Yes',
+        0 => 'Ei',
+        1 => 'Jah',
     ),
 
     'notifications_status_dom' => array(
-        0 => 'Unread',
-        1 => 'Read',
+        0 => 'Lugemata',
+        1 => 'Loetud',
     ),
 
   'optout_dom' => array(
-      '' => '-none-',
-      'false' => 'No',
-      'true' => 'Yes',
+      '' => '-puudub-',
+      'false' => 'Ei',
+      'true' => 'Jah',
   ),
 
   //e.g. en français 'Analyst'=>'Analyste',
   'account_type_dom' =>
   array (
     '' => '',
-    'Analyst' => 'Analyst',
-    'Competitor' => 'Competitor',
-    'Customer' => 'Customer',
-    'Integrator' => 'Integrator',
+    'Analyst' => 'Analüütik',
+    'Competitor' => 'Konkurent',
+    'Customer' => 'Klient',
+    'Integrator' => 'Integraator',
     'Investor' => 'Investor',
     'Partner' => 'Partner',
     'Press' => 'Press',
-    'Prospect' => 'Prospect',
-    'Reseller' => 'Reseller',
-    'Other' => 'Teine',
+    'Prospect' => 'Potentsiaalne klient',
+    'Reseller' => 'Edasimüüja',
+    'Other' => 'Muud',
   ),
   //e.g. en español 'Apparel'=>'Ropa',
   'industry_dom' =>
   array (
     '' => '',
-    'Apparel' => 'Apparel',
+    'Apparel' => 'Rõivad',
     'Banking' => 'Pangandus',
     'Biotechnology' => 'Biotehnoloogia',
     'Chemicals' => 'Kemikaalid',
-    'Communications' => 'Kommunikatsioonid',
-    'Construction' => 'Konstruktsioonid',
+    'Communications' => 'Side',
+    'Construction' => 'Ehitus',
     'Consulting' => 'Konsulteerimine',
-    'Education' => 'Education',
+    'Education' => 'Haridus',
     'Electronics' => 'Elektroonika',
     'Energy' => 'Energia',
-    'Engineering' => 'Inseneeria',
+    'Engineering' => 'Inseneriteadus',
     'Entertainment' => 'Meelelahutus',
     'Environmental' => 'Keskkond',
-    'Finance' => 'Finance',
-    'Government' => 'Government',
+    'Finance' => 'Rahandus',
+    'Government' => 'Valitsus',
     'Healthcare' => 'Tervishoid',
-    'Hospitality' => 'Hospitality',
+    'Hospitality' => 'Majutus',
     'Insurance' => 'Kindlustus',
     'Machinery' => 'Masinatööstus',
     'Manufacturing' => 'Tootmine',
     'Media' => 'Meedia',
     'Not For Profit' => 'MTÜ',
-    'Recreation' => 'Taasloomine',
-    'Retail' => 'Retail',
+    'Recreation' => 'Vaba aeg',
+    'Retail' => 'Jaemüük',
     'Shipping' => 'Tarnimine',
-    'Technology' => 'Technology',
+    'Technology' => 'Tehnoloogia',
     'Telecommunications' => 'Telekommunikatsioonid',
-    'Transportation' => 'Transportation',
-    'Utilities' => 'Taaskasutus',
-    'Other' => 'Teine',
+    'Transportation' => 'Transport',
+    'Utilities' => 'Utiliidid',
+    'Other' => 'Muud',
   ),
-  'lead_source_default_key' => 'Self Generated',
+  'lead_source_default_key' => 'Ise loodud',
   'lead_source_dom' =>
   array (
     '' => '',
     'Cold Call' => 'Külm kõne',
     'Existing Customer' => 'Olemasolev klient',
-    'Self Generated' => 'Self Generated',
-    'Employee' => 'Employee',
+    'Self Generated' => 'Ise loodud',
+    'Employee' => 'Töötaja',
     'Partner' => 'Partner',
-    'Public Relations' => 'PR',
-    'Direct Mail' => 'Otsekiri',
+    'Public Relations' => 'Avalikud suhted',
+    'Direct Mail' => 'Otsepost',
     'Conference' => 'Konverents',
-    'Trade Show' => 'Trade show',
+    'Trade Show' => 'Mess',
     'Web Site' => 'Veebisait',
     'Word of mouth' => 'Suusõnaline teade',
-    'Email' => 'Muu E-post:',
-    'Campaign'=>'Campaign',
-    'Other' => 'Teine',
+    'Email' => 'E-kiri',
+    'Campaign'=>'Kampaania',
+    'Other' => 'Muud',
   ),
   'opportunity_type_dom' =>
   array (
     '' => '',
-    'Existing Business' => 'Existing Business',
-    'New Business' => 'New Business',
+    'Existing Business' => 'Olemasolev ettevõte',
+    'New Business' => 'Uus ettevõte',
   ),
   'roi_type_dom' =>
     array (
-    'Revenue' => 'Revenue',
+    'Revenue' => 'Tulud',
     'Investment'=>'Investeering',
-    'Expected_Revenue'=>'Oodatav tulu:',
+    'Expected_Revenue'=>'Eeldatav tulu',
     'Budget'=>'Eelarve',
 
   ),
   //Note:  do not translate opportunity_relationship_type_default_key
 //       it is the key for the default opportunity_relationship_type_dom value
-  'opportunity_relationship_type_default_key' => 'Primary Decision Maker',
+  'opportunity_relationship_type_default_key' => 'Esmane otsuse tegija',
   'opportunity_relationship_type_dom' =>
   array (
     '' => '',
-    'Primary Decision Maker' => 'Primary Decision Maker',
+    'Primary Decision Maker' => 'Esmane otsuse tegija',
     'Business Decision Maker' => 'Äriotsuste tegija',
-    'Business Evaluator' => 'Ärihindaja',
-    'Technical Decision Maker' => 'Tehnilise otsuse tegija',
+    'Business Evaluator' => 'Äri hindaja',
+    'Technical Decision Maker' => 'Tehniline otsustaja',
     'Technical Evaluator' => 'Tehniline hindaja',
-    'Executive Sponsor' => 'Executive Sponsor',
+    'Executive Sponsor' => 'Juhtiv sponsor',
     'Influencer' => 'Mõjutaja',
-    'Other' => 'Teine',
+    'Other' => 'Muud',
   ),
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
-  'case_relationship_type_default_key' => 'Primary Contact',
+  'case_relationship_type_default_key' => 'Esmane kontakt',
   'case_relationship_type_dom' =>
   array (
     '' => '',
-    'Primary Contact' => 'Primary Contact',
+    'Primary Contact' => 'Esmane kontakt',
     'Alternate Contact' => 'Alternatiivne kontakt',
   ),
   'payment_terms' =>
@@ -350,57 +348,57 @@ $app_list_strings = array (
     'Net 15' => 'Net 15',
     'Net 30' => 'Net 30',
   ),
-  'sales_stage_default_key' => 'Prospecting',
+  'sales_stage_default_key' => 'Potentsiaalsete klientide tuvastus',
   'fts_type' => array (
       'Elastic' => 'ElasticSearch',
   ),
   'sales_stage_dom' =>
   array (
-    'Prospecting' => 'Prospecting',
+    'Prospecting' => 'Potentsiaalsete klientide tuvastus',
     'Qualification' => 'Kvalifikatsioon',
     'Needs Analysis' => 'Vajab analüüsi',
-    'Value Proposition' => 'Väärtuse kinnitus',
-    'Id. Decision Makers' => 'Id. Otsustajad',
-    'Perception Analysis' => 'Perception Analysis',
-    'Proposal/Price Quote' => 'Pakkumine/Hinnapakkumine',
-    'Negotiation/Review' => 'Läbirääkimised/Ülevaade',
-    'Closed Won' => 'Closed Won',
-    'Closed Lost' => 'Suletud kaotused',
+    'Value Proposition' => 'Väärtuspakkumine',
+    'Id. Decision Makers' => 'ID otsustajad',
+    'Perception Analysis' => 'Taju analüüs',
+    'Proposal/Price Quote' => 'Ettepanek/hinnapakkumine',
+    'Negotiation/Review' => 'Läbirääkimised/ülevaade',
+    'Closed Won' => 'Lõpetatud võidetud',
+    'Closed Lost' => 'Lõpetatud kaotatud',
   ),
     'sales_status_with_quote_dom' => array(
         'New' => 'Uus',
-        'In Progress' => 'Töös',
-        'Closed Won' => 'Closed Won',
-        'Closed Lost' => 'Suletud kaotused',
-        'Converted to Quote' => 'Converted to Quote'
+        'In Progress' => 'Pooleli',
+        'Closed Won' => 'Lõpetatud võidetud',
+        'Closed Lost' => 'Lõpetatud kaotatud',
+        'Converted to Quote' => 'Teisendatud pakkumuseks'
     ),
     'sales_status_dom' => array(
         'New' => 'Uus',
-        'In Progress' => 'Töös',
-        'Closed Won' => 'Closed Won',
-        'Closed Lost' => 'Suletud kaotused',
+        'In Progress' => 'Pooleli',
+        'Closed Won' => 'Lõpetatud võidetud',
+        'Closed Lost' => 'Lõpetatud kaotatud',
     ),
 
   'commit_stage_binary_dom' => array (
-    'include' => 'Include',
-    'exclude' => 'Exclude',
+    'include' => 'Kaasa',
+    'exclude' => 'Välista',
   ),
   'commit_stage_dom' =>
   array (
-    'include' => 'Include',
-    'upside'  => 'Upside',
-    'exclude' => 'Exclude',
+    'include' => 'Kaasa',
+    'upside'  => 'Tagurpidi',
+    'exclude' => 'Välista',
   ),
 
 
   'in_total_group_stages' => array (
     'Draft' => 'Mustand',
     'Negotiation' => 'Läbirääkimine',
-    'Delivered' => 'Kohaletoimetatud',
+    'Delivered' => 'Kohale toimetatud',
     'On Hold' => 'Ootel',
     'Confirmed' => 'Kinnitatud',
-    'Closed Accepted' => 'Suletud kinnitatud',
-    'Closed Lost' => 'Suletud kaotused',
+    'Closed Accepted' => 'Lõpetatud kinnitatud',
+    'Closed Lost' => 'Lõpetatud kaotatud',
     'Closed Dead' => 'Closed Dead',
   ),
   'sales_probability_dom' => // keys must be the same as sales_stage_dom
@@ -418,35 +416,35 @@ $app_list_strings = array (
   ),
   'activity_dom' =>
   array (
-    'Call' => 'Call',
-    'Meeting' => 'Meeting',
-    'Task' => 'Task',
-    'Email' => 'Muu E-post:',
-    'Note' => 'Note',
+    'Call' => 'Kõne',
+    'Meeting' => 'Kohtumine',
+    'Task' => 'Ülesanne',
+    'Email' => 'E-kiri',
+    'Note' => 'Märkus',
   ),
   'salutation_dom' =>
       array (
         '' => '',
-        'Mr.' => 'Mr.',
-        'Ms.' => 'Ms.',
-        'Mrs.' => 'Mrs.',
-        'Dr.' => 'Dr.',
-        'Prof.' => 'Prof.',
+        'Mr.' => 'Hr',
+        'Ms.' => 'Prl',
+        'Mrs.' => 'Pr',
+        'Dr.' => 'Dr',
+        'Prof.' => 'Prof',
       ),
   //time is in seconds; the greater the time the longer it takes;
   'reminder_max_time' => 90000,
   'reminder_time_options' => array(
-      '-1' => 'None',
-      60=> '1 minute prior',
-                                  300=> '5 minutes prior',
-                                  600=> '10 minutes prior',
-                                  900=> '15 minutes prior',
-                                  1800=> '30 minutes prior',
-                                  3600=> '1 hour prior',
-                                  7200 => '2 hours prior',
-                                  10800 => '3 hours prior',
-                                  18000 => '5 hours prior',
-                                  86400 => '1 day prior',
+      '-1' => 'Ükski',
+      60=> '1 minut enne',
+                                  300=> '5 minutit enne',
+                                  600=> '10 minutit enne',
+                                  900=> '15 minutit enne',
+                                  1800=> '30 minutit enne',
+                                  3600=> '1 tund enne',
+                                  7200 => '2 tundi enne',
+                                  10800 => '3 tundi enne',
+                                  18000 => '5 tundi enne',
+                                  86400 => '1 päev enne',
                                  ),
 
   'task_priority_default' => 'Keskmine',
@@ -456,21 +454,21 @@ $app_list_strings = array (
     'Medium' => 'Keskmine',
     'Low' => 'Madal',
   ),
-  'task_status_default' => 'Not Started',
+  'task_status_default' => 'Pole alustatud',
   'task_status_dom' =>
   array (
-    'Not Started' => 'Not Started',
-    'In Progress' => 'Töös',
+    'Not Started' => 'Pole alustatud',
+    'In Progress' => 'Pooleli',
     'Completed' => 'Lõpetatud',
     'Pending Input' => 'Ootel sisend',
-    'Deferred' => 'Edasilükatud',
+    'Deferred' => 'Edasi lükatud',
   ),
-  'meeting_status_default' => 'Kavandatud',
+  'meeting_status_default' => 'Plaanitud',
   'meeting_status_dom' =>
   array (
-    'Planned' => 'Planeeritud',
-    'Held' => 'Held',
-    'Not Held' => 'Canceled',
+    'Planned' => 'Ajastatud',
+    'Held' => 'Toimus',
+    'Not Held' => 'Tühistatud',
   ),
   'extapi_meeting_password' =>
   array (
@@ -478,31 +476,31 @@ $app_list_strings = array (
   ),
   'meeting_type_dom' =>
    array (
-      'Other' => 'Teine',
+      'Other' => 'Muud',
       'Sugar' => 'SugarCRM',
    ),
-  'call_status_default' => 'Kavandatud',
+  'call_status_default' => 'Plaanitud',
   'call_status_dom' =>
   array (
-    'Planned' => 'Planeeritud',
-    'Held' => 'Held',
-    'Not Held' => 'Canceled',
+    'Planned' => 'Ajastatud',
+    'Held' => 'Toimus',
+    'Not Held' => 'Tühistatud',
   ),
-  'call_direction_default' => 'Outbound',
+  'call_direction_default' => 'Väljaminev',
   'call_direction_dom' =>
   array (
     'Inbound' => 'Sissetulev',
-    'Outbound' => 'Outbound',
+    'Outbound' => 'Väljaminev',
   ),
   'lead_status_dom' =>
   array (
     '' => '',
     'New' => 'Uus',
     'Assigned' => 'Määratud',
-    'In Process' => 'Töös',
-    'Converted' => 'Muudetud:',
+    'In Process' => 'Pooleli',
+    'Converted' => 'Muudetud',
     'Recycled' => 'Ümbertöödeldud',
-    'Dead' => 'Dead',
+    'Dead' => 'Surnud',
   ),
    'gender_list' =>
   array (
@@ -516,10 +514,10 @@ $app_list_strings = array (
   array (
     'New' => 'Uus',
     'Assigned' => 'Määratud',
-    'Closed' => 'Closed',
+    'Closed' => 'Suletud',
     'Pending Input' => 'Ootel sisend',
-    'Rejected' => 'Tagasilükatud',
-    'Duplicate' => 'Tee koopia',
+    'Rejected' => 'Tagasi lükatud',
+    'Duplicate' => 'Dubleeri',
   ),
   'case_priority_default_key' => 'P2',
   'case_priority_dom' =>
@@ -531,12 +529,12 @@ $app_list_strings = array (
   'user_type_dom' =>
   array (
     'RegularUser' => 'Regulaarne kasutaja',
-    'Administrator' => 'Administrator',
+    'Administrator' => 'Administraator',
   ),
   'user_status_dom' =>
   array (
     'Active' => 'Aktiivne',
-    'Inactive' => 'Mitteaktiivne',
+    'Inactive' => 'Inaktiivne',
   ),
   'employee_status_dom' =>
   array (
@@ -559,11 +557,11 @@ $app_list_strings = array (
     'project_task_priority_default' => 'Keskmine',
 
     'project_task_status_options' => array (
-        'Not Started' => 'Not Started',
-        'In Progress' => 'Töös',
+        'Not Started' => 'Pole alustatud',
+        'In Progress' => 'Pooleli',
         'Completed' => 'Lõpetatud',
         'Pending Input' => 'Ootel sisend',
-        'Deferred' => 'Edasilükatud',
+        'Deferred' => 'Edasi lükatud',
     ),
     'project_task_utilization_options' => array (
         '0' => 'ühtegi',
@@ -575,14 +573,14 @@ $app_list_strings = array (
 
     'project_status_dom' => array (
         'Draft' => 'Mustand',
-        'In Review' => 'In Review',
+        'In Review' => 'Üle vaatamisel',
         'Published' => 'Avaldatud',
     ),
     'project_status_default' => 'Mustand',
 
     'project_duration_units_dom' => array (
-        'Days' => 'Days',
-        'Hours' => 'Tunde',
+        'Days' => 'Päeva',
+        'Hours' => 'Tundi',
     ),
 
     'project_priority_options' => array (
@@ -593,89 +591,89 @@ $app_list_strings = array (
     'project_priority_default' => 'Keskmine',
   //Note:  do not translate record_type_default_key
 //       it is the key for the default record_type_module value
-  'record_type_default_key' => 'Ettevõtted',
+  'record_type_default_key' => 'Kontod',
   'record_type_display' =>
   array (
     '' => '',
-    'Accounts' => 'Account',
-    'Opportunities' => 'Opportunity',
-    'Cases' => 'Case',
+    'Accounts' => 'Konto',
+    'Opportunities' => 'Võimalus',
+    'Cases' => 'Juhtum',
     'Leads' => 'Müügivihje',
-    'Contacts' => 'Contacts', // cn (11/22/2005) added to support Emails
-    'Products' => 'Quoted Line Item',
-    'Quotes' => 'Quote',
-    'Bugs' => 'Bug',
+    'Contacts' => 'Kontaktid', // cn (11/22/2005) added to support Emails
+    'Products' => 'Pakkumuse artikkel',
+    'Quotes' => 'Pakkumus',
+    'Bugs' => 'Viga',
     'Project' => 'Projekt',
 
-    'Prospects' => 'Target',
-    'ProjectTask' => 'Project Task',
+    'Prospects' => 'Eesmärk',
+    'ProjectTask' => 'Projekti ülesanne',
 
-    'Tasks' => 'Task',
+    'Tasks' => 'Ülesanne',
       'KBContents' => 'Teadmusbaas',
   ),
 
   'record_type_display_notes' =>
   array (
-    'Accounts' => 'Account',
+    'Accounts' => 'Konto',
     'Contacts' => 'Kontakt',
-    'Opportunities' => 'Opportunity',
-    'Tasks' => 'Task',
-    'ProductTemplates' => 'Artikli kataloog',
-    'Quotes' => 'Quote',
-    'Products' => 'Quoted Line Item',
-    'Contracts' => 'Contract',
-    'Emails' => 'Muu E-post:',
+    'Opportunities' => 'Võimalus',
+    'Tasks' => 'Ülesanne',
+    'ProductTemplates' => 'Tootekataloog',
+    'Quotes' => 'Pakkumus',
+    'Products' => 'Pakkumuse artikkel',
+    'Contracts' => 'Leping',
+    'Emails' => 'E-kiri',
 
-    'Bugs' => 'Bug',
+    'Bugs' => 'Viga',
     'Project' => 'Projekt',
-    'ProjectTask' => 'Project Task',
-    'Prospects' => 'Target',
-    'Cases' => 'Case',
+    'ProjectTask' => 'Projekti ülesanne',
+    'Prospects' => 'Eesmärk',
+    'Cases' => 'Juhtum',
     'Leads' => 'Müügivihje',
 
-    'Meetings' => 'Meeting',
-    'Calls' => 'Call',
+    'Meetings' => 'Kohtumine',
+    'Calls' => 'Kõne',
       'KBContents' => 'Teadmusbaas',
   ),
 
   'parent_type_display' =>
   array (
-    'Accounts' => 'Account',
+    'Accounts' => 'Konto',
     'Contacts' => 'Kontakt',
-    'Tasks' => 'Task',
-    'Opportunities' => 'Opportunity',
-    'Products' => 'Quoted Line Item',
-    'Quotes' => 'Quote',
+    'Tasks' => 'Ülesanne',
+    'Opportunities' => 'Võimalus',
+    'Products' => 'Pakkumuse artikkel',
+    'Quotes' => 'Pakkumus',
 
-    'Bugs' => 'Bugid',
-    'Cases' => 'Case',
+    'Bugs' => 'Vead',
+    'Cases' => 'Juhtum',
     'Leads' => 'Müügivihje',
 
     'Project' => 'Projekt',
-    'ProjectTask' => 'Project Task',
+    'ProjectTask' => 'Projekti ülesanne',
 
-    'Prospects' => 'Target',
+    'Prospects' => 'Eesmärk',
       'KBContents' => 'Teadmusbaas',
 
   ),
 
-  'product_status_default_key' => 'Ship',
-  'product_status_quote_key' => 'Pakkumised',
+  'product_status_default_key' => 'Saada',
+  'product_status_quote_key' => 'Pakkumused',
   'product_status_dom' =>
   array (
       '' => '',
-      'Quotes' => 'Quoted',
+      'Quotes' => 'Pakutud',
       'Orders' => 'Tellitud',
       'Ship' => 'Tarnitud',
   ),
 
 
-  'pricing_formula_default_key' => 'Fixed',
+  'pricing_formula_default_key' => 'Fikseeritud',
   'pricing_formula_dom' =>
   array (
     'Fixed' => 'Fikseeritud hind',
     'ProfitMargin' => 'Kasumimarginaal',
-    'PercentageMarkup' => 'Markup over Cost',
+    'PercentageMarkup' => 'Juurdehindlus üle kulu',
     'PercentageDiscount' => 'Allahindlus loendist',
     'IsList' => 'Sama nagu loendis',
   ),
@@ -698,7 +696,7 @@ $app_list_strings = array (
 
   'quote_type_dom' =>
   array (
-    'Quotes' => 'Quote',
+    'Quotes' => 'Pakkumus',
     'Orders' => 'Telli',
   ),
   'default_quote_stage_key' => 'Mustand',
@@ -706,12 +704,12 @@ $app_list_strings = array (
   array (
     'Draft' => 'Mustand',
     'Negotiation' => 'Läbirääkimine',
-    'Delivered' => 'Kohaletoimetatud',
+    'Delivered' => 'Kohale toimetatud',
     'On Hold' => 'Ootel',
     'Confirmed' => 'Kinnitatud',
-    'Closed Accepted' => 'Suletud kinnitatud',
-    'Closed Lost' => 'Suletud kaotused',
-    'Closed Dead' => 'Closed Dead',
+    'Closed Accepted' => 'Lõpetatud kinnitatud',
+    'Closed Lost' => 'Lõpetatud kaotatud',
+    'Closed Dead' => 'Lõpetatud surnud',
   ),
   'default_order_stage_key' => 'Ootel',
   'order_stage_dom' =>
@@ -725,22 +723,22 @@ $app_list_strings = array (
 
 //Note:  do not translate quote_relationship_type_default_key
 //       it is the key for the default quote_relationship_type_dom value
-  'quote_relationship_type_default_key' => 'Primary Decision Maker',
+  'quote_relationship_type_default_key' => 'Esmane otsuse tegija',
   'quote_relationship_type_dom' =>
   array (
     '' => '',
-    'Primary Decision Maker' => 'Primary Decision Maker',
+    'Primary Decision Maker' => 'Esmane otsuse tegija',
     'Business Decision Maker' => 'Äriotsuste tegija',
-    'Business Evaluator' => 'Ärihindaja',
-    'Technical Decision Maker' => 'Tehnilise otsuse tegija',
+    'Business Evaluator' => 'Äri hindaja',
+    'Technical Decision Maker' => 'Tehniline otsustaja',
     'Technical Evaluator' => 'Tehniline hindaja',
-    'Executive Sponsor' => 'Executive Sponsor',
+    'Executive Sponsor' => 'Juhtiv sponsor',
     'Influencer' => 'Mõjutaja',
-    'Other' => 'Teine',
+    'Other' => 'Muud',
   ),
   'layouts_dom' =>
   array (
-    'Standard' => 'Quote',
+    'Standard' => 'Pakkumus',
     'Invoice' => 'Arve',
   ),
   'issue_priority_default_key' => 'Keskmine',
@@ -755,11 +753,11 @@ $app_list_strings = array (
   'issue_resolution_dom' =>
   array (
     '' => '',
-    'Accepted' => 'Accepted',
-    'Duplicate' => 'Tee koopia',
-    'Closed' => 'Closed',
-    'Out of Date' => 'Out of Date',
-    'Invalid' => 'Invalid',
+    'Accepted' => 'Aktsepteeritud',
+    'Duplicate' => 'Dubleeri',
+    'Closed' => 'Suletud',
+    'Out of Date' => 'Aegunud',
+    'Invalid' => 'Kehtetu',
   ),
 
   'issue_status_default_key' => 'Uus',
@@ -767,9 +765,9 @@ $app_list_strings = array (
   array (
     'New' => 'Uus',
     'Assigned' => 'Määratud',
-    'Closed' => 'Closed',
+    'Closed' => 'Suletud',
     'Pending' => 'Ootel',
-    'Rejected' => 'Tagasilükatud',
+    'Rejected' => 'Tagasi lükatud',
   ),
 
   'bug_priority_default_key' => 'Keskmine',
@@ -784,11 +782,11 @@ $app_list_strings = array (
   'bug_resolution_dom' =>
   array (
     '' => '',
-    'Accepted' => 'Accepted',
-    'Duplicate' => 'Tee koopia',
-    'Fixed' => 'Fixed',
-    'Out of Date' => 'Out of Date',
-    'Invalid' => 'Invalid',
+    'Accepted' => 'Aktsepteeritud',
+    'Duplicate' => 'Dubleeri',
+    'Fixed' => 'Fikseeritud',
+    'Out of Date' => 'Aegunud',
+    'Invalid' => 'Kehtetu',
     'Later' => 'Hiljem',
   ),
   'bug_status_default_key' => 'Uus',
@@ -796,18 +794,18 @@ $app_list_strings = array (
   array (
     'New' => 'Uus',
     'Assigned' => 'Määratud',
-    'Closed' => 'Closed',
+    'Closed' => 'Suletud',
     'Pending' => 'Ootel',
-    'Rejected' => 'Tagasilükatud',
+    'Rejected' => 'Tagasi lükatud',
   ),
-  'bug_type_default_key' => 'Bug',
+  'bug_type_default_key' => 'Viga',
   'bug_type_dom' => array (
-    'Defect' => 'Viga',
+    'Defect' => 'Defekt',
     'Feature' => 'Funktsioon',
   ),
  'case_type_dom' => array (
-    'Administration' => 'Administratsioon',
-    'Product' => 'Product',
+    'Administration' => 'Haldus',
+    'Product' => 'Toode',
     'User' => 'Kasutaja',
   ),
 
@@ -818,7 +816,7 @@ $app_list_strings = array (
     'Internal' => 'Sisemine',
     'Forum' => 'Foorum',
     'Web' => 'Veeb',
-    'InboundEmail' => 'Muu E-post:',
+    'InboundEmail' => 'E-kiri',
     'Twitter' => 'Twitter'
   ),
 
@@ -826,45 +824,45 @@ $app_list_strings = array (
   'product_category_dom' =>
   array (
     '' => '',
-    'Accounts' => 'Ettevõtted',
+    'Accounts' => 'Kontod',
     'Activities' => 'Tegevused',
-    'Bug Tracker' => 'Bug Tracker',
+    'Bug Tracker' => 'Vigade otsija',
     'Calendar' => 'Kalender',
-    'Calls' => 'Telefonikõned',
+    'Calls' => 'Kõned',
     'Campaigns' => 'Kampaaniad',
     'Cases' => 'Juhtumid',
-    'Contacts' => 'Contacts',
+    'Contacts' => 'Kontaktid',
     'Currencies' => 'Valuutad',
   'Dashboard' => 'Töölaud',
-  'Documents' => 'Documents',
-    'Emails' => 'Emails',
+  'Documents' => 'Dokumendid',
+    'Emails' => 'E-kirjad',
     'Feeds' => 'Vood',
-    'Forecasts' => 'Forecasts',
-    'Help' => 'Help',
+    'Forecasts' => 'Prognoosid',
+    'Help' => 'Abi',
     'Home' => 'Avaleht',
-  'Leads' => 'Leads',
+  'Leads' => 'Müügivihjed',
   'Meetings' => 'Kohtumised',
-    'Notes' => 'Märkused:',
+    'Notes' => 'Märkused',
     'Opportunities' => 'Müügivõimalused',
-    'Outlook Plugin' => 'Outlook plugin',
-    'Product Catalog' => 'Artikli kataloog',
-    'Products' => 'Quoted Line Items',
-    'RevenueLineItems' => 'Revenue Line Items',
-    'Projects' => 'Projects',
-    'Quotes' => 'Quotes',
-    'Releases' => 'Tooteuuendused',
+    'Outlook Plugin' => 'Outlooki plugin',
+    'Product Catalog' => 'Tootekataloog',
+    'Products' => 'Pakkumuse artiklid',
+    'RevenueLineItems' => 'Tuluartiklid',
+    'Projects' => 'Projektid',
+    'Quotes' => 'Pakkumused',
+    'Releases' => 'Redaktsioonid',
     'RSS' => 'RSS',
-    'Studio' => 'Stuudio',
-    'Upgrade' => 'Upgrade',
+    'Studio' => 'Studio',
+    'Upgrade' => 'Täiendus',
     'Users' => 'Kasutajad',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
   array (
         '' => '',
-        'Planning' => 'Planeerimine',
+        'Planning' => 'Plaanimine',
         'Active' => 'Aktiivne',
-        'Inactive' => 'Mitteaktiivne',
+        'Inactive' => 'Inaktiivne',
         'Complete' => 'Lõpetatud',
         'In Queue' => 'Järjekorras',
         'Sending'=> 'Saatmine',
@@ -872,12 +870,12 @@ $app_list_strings = array (
   'campaign_type_dom' =>
   array (
         '' => '',
-        'Telesales' => 'Telemarketing',
+        'Telesales' => 'Telemüük',
         'Mail' => 'Kiri',
-        'Email' => 'Muu E-post:',
+        'Email' => 'E-kiri',
         'Print' => 'Prindi',
         'Web' => 'Veeb',
-        'Radio' => 'Radio',
+        'Radio' => 'Raadio',
         'Television' => 'Televisioon',
         'NewsLetter' => 'Uudiskiri',
         ),
@@ -885,7 +883,7 @@ $app_list_strings = array (
   'newsletter_frequency_dom' =>
   array (
         '' => '',
-        'Weekly' => 'Nädalati',
+        'Weekly' => 'Iganädalane',
         'Monthly' => 'Igakuine',
         'Quarterly' => 'Kvartaalne',
         'Annually' => 'Iga-aastane',
@@ -913,8 +911,8 @@ $app_list_strings = array (
         'dom_cal_month_short'=>array(
                 '0'=>"",
                 '1'=>"Jan",
-                '2'=>"Feb",
-                '3'=>"Mar",
+                '2'=>"Veebr",
+                '3'=>"Märts",
                 '4'=>"Apr",
                 '5'=>"Mai",
                 '6'=>"Juuni",
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Reede",
                 '7'=>"Laup",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Pühap",
+            '2'=>"Esmasp",
+            '3'=>"Teisip",
+            '4'=>"Kolmap",
+            '5'=>"Neljap",
+            '6'=>"Reede",
+            '7'=>"Laup",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Pühap',
         '1' => 'Esmasp',
@@ -955,12 +963,12 @@ $app_list_strings = array (
         '6' => 'Laup',
     ),
     'dom_meridiem_lowercase'=>array(
-                'am'=>"am",
-                'pm'=>"pm"
+                'am'=>"el",
+                'pm'=>"pl"
         ),
     'dom_meridiem_uppercase'=>array(
-                 'AM'=>'AM',
-                 'PM'=>'PM'
+                 'AM'=>'EL',
+                 'PM'=>'PL'
         ),
 
     'dom_report_types'=>array(
@@ -976,32 +984,32 @@ $app_list_strings = array (
         'archived'  => 'Arhiveeritud',
         'draft'     => 'Mustand',
         'inbound'   => 'Sissetulev',
-        'campaign'  => 'Campaign'
+        'campaign'  => 'Kampaania'
     ),
     'dom_email_status' => array (
         'archived'  => 'Arhiveeritud',
-        'closed'    => 'Closed',
+        'closed'    => 'Suletud',
         'draft'     => 'Mustandis',
-        'read'      => 'Read',
+        'read'      => 'Loetud',
         'replied'   => 'Vastatud',
         'sent'      => 'Saadetud',
         'send_error'=> 'Saada veateade',
-        'unread'    => 'Unread',
+        'unread'    => 'Lugemata',
     ),
     'dom_email_archived_status' => array (
         'archived'  => 'Arhiveeritud',
     ),
 
-    'dom_email_server_type' => array(   ''          => '--None--',
+    'dom_email_server_type' => array(   ''          => '--Ükski--',
                                         'imap'      => 'IMAP',
     ),
     'dom_mailbox_type'      => array(/*''           => '--None Specified--',*/
-                                     'pick'     => '--None--',
-                                     'createcase'  => 'Loo müügijuhtum',
-                                     'bounce'   => 'Bounce Handling',
+                                     'pick'     => '--Ükski--',
+                                     'createcase'  => 'Loo juhtum',
+                                     'bounce'   => 'Tagastatud kirjade käsitlemine',
     ),
-    'dom_email_distribution'=> array(''             => '--None--',
-                                     'direct'       => 'Otsene määramne',
+    'dom_email_distribution'=> array(''             => '--Ükski--',
+                                     'direct'       => 'Otsene määramine',
                                      'roundRobin'   => 'Round-Robin',
                                      'leastBusy'    => 'Least-Busy',
     ),
@@ -1278,11 +1286,11 @@ $app_list_strings = array (
                                     '45'=>'45'),
 
     'repeat_type_dom' => array(
-    	'' => 'None',
-    	'Daily'	=> 'Päevati',
-	'Weekly' => 'Nädalati',
-	'Monthly' => 'Igakuine',
-	'Yearly' => 'Yearly',
+    	'' => 'Puudub',
+    	'Daily'	=> 'Iga päev',
+	'Weekly' => 'Iga nädal',
+	'Monthly' => 'Iga kuu',
+	'Yearly' => 'Iga aasta',
     ),
 
     'repeat_intervals' => array(
@@ -1291,6 +1299,11 @@ $app_list_strings = array (
         'Weekly' => 'week(s)',
         'Monthly' => 'month(s)',
         'Yearly' => 'year(s)',
+    ),
+
+    'repeat_end_types' => array(
+        'Until' => 'Kuni',
+        'Occurrences' => 'Juhtumid',
     ),
 
     'duration_hours_intervals' => array(
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Ükski',
+        'Each' => 'Iga',
+        'On' => 'Järjekorras',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'esimene',
+        'second' => 'teine',
+        'third' => 'kolmas',
+        'fourth' => 'neljandal',
+        'fifth' => 'viiendal',
+        'last' => 'viimasel',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Pühapäev',
+        'Mon' => 'Esmaspäev',
+        'Tue' => 'Teisipäev',
+        'Wed' => 'Kolmapäev',
+        'Thu' => 'Neljapäev',
+        'Fri' => 'Reede',
+        'Sat' => 'Laupäev',
+        'Day' => 'Päev',
+        'WD'  => 'Nädalapäev',
+        'WE'  => 'Puhkepäev'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Middle',
         'end' => 'End',
         'top' => 'Top',
+        'total' => 'Kokku',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Funnel',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Light',
       'dark' => 'Dark',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Move',
@@ -2762,7 +2881,7 @@ $app_list_strings = array (
             "1" => array("code" => "F", "name" => "Famagusta"),
             "2" => array("code" => "K", "name" => "Kyrenia"),
             "3" => array("code" => "A", "name" => "Larnaca"),
-            "4" => array("code" => "I", "name" => "Limassol"),
+            "4" => array("code" => "l", "name" => "Limassol"),
             "5" => array("code" => "N", "name" => "Nicosia"),
             "6" => array("code" => "P", "name" => "Paphos")
         ),
@@ -3206,7 +3325,7 @@ $app_list_strings = array (
         "PF" => array(
             "1" => array("code" => "M", "name" => "Archipel des Marquises"),
             "2" => array("code" => "T", "name" => "Archipel des Tuamotu"),
-            "3" => array("code" => "I", "name" => "Archipel des Tubuai"),
+            "3" => array("code" => "l", "name" => "Archipel des Tubuai"),
             "4" => array("code" => "V", "name" => "Iles du Vent"),
             "5" => array("code" => "S", "name" => "Iles Sous-le-Vent")
         ),
@@ -5020,7 +5139,7 @@ $app_list_strings = array (
         "PK" => array(
             "1" => array("code" => "B", "name" => "Balochistan"),
             "2" => array("code" => "T", "name" => "Federally Administered Tribal Ar"),
-            "3" => array("code" => "I", "name" => "Islamabad Capital Territory"),
+            "3" => array("code" => "l", "name" => "Islamabad Capital Territory"),
             "4" => array("code" => "N", "name" => "North-West Frontier"),
             "5" => array("code" => "P", "name" => "Punjab"),
             "6" => array("code" => "S", "name" => "Sindh")
@@ -5837,7 +5956,7 @@ $app_list_strings = array (
         "SE" => array(
             "1" => array("code" => "K", "name" => "Blekinge"),
             "2" => array("code" => "W", "name" => "Dalama"),
-            "3" => array("code" => "I", "name" => "Gotland"),
+            "3" => array("code" => "l", "name" => "Gotland"),
             "4" => array("code" => "X", "name" => "Gävleborg"),
             "5" => array("code" => "N", "name" => "Halland"),
             "6" => array("code" => "Z", "name" => "Jämtland"),
@@ -7852,17 +7971,20 @@ $app_list_strings = array (
 $app_strings = array (
   'LBL_RECORD_HEADER' => 'Record Header', // Studio editing of record views
   'LBL_RECORD_BODY' => 'Visiitkaart', // Studio editing of record views
-  'LBL_RECORD_SHOWMORE' => 'Show More', // Studio editing of record views
+  'LBL_RECORD_SHOWMORE' => 'Näita rohkem', // Studio editing of record views
   'LBL_FAVORITE' => 'Favorite', // Record view header panel element
   'LBL_FOLLOW' => 'Follow', // Record view header panel element
   'LBL_FOLLOW_LINK' => 'Follow Link',
   'LBL_TOGGLE_VISIBILITY' => 'Toggle Visibility', // Record view header panel element
   'LBL_ACTIVITIES' => 'Tegevused',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. All Rights Reserved.',
-  'LBL_TRADEMARK' => 'SugarCRM is a trademark of SugarCRM, Inc. All other company and product names may be trademarks of the respective companies with which they are associated.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ are trademarks of SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Send invite',
-  'LBL_INVITEES' => 'Guests',
+  'LBL_COPYRIGHT' => 'Autoriõigus © 2004–2017 SugarCRM Inc. Kõik õigused kaitstud.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar ja 3-D Kuup on ettevõtte SugarCRM Inc. registreeritud kaubamärgid. '.
+        'Kõik muud tootes kasutatavad või esinevad ettevõtte ja tootenimed võivad olla '.
+        'vastavate ettevõtete kaubamärgid, millega need on seotud.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ are trademarks of SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Send invite',
+  'LBL_INVITEES' => 'Külalised',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Külaline ei saa teie kutset',
   'LBL_SELECT_ACTION_LABEL' => 'Select Action',
   'LBL_TOGGLE_DRAWER' => 'Toggle Drawer',
   'LBL_TOUR_NEXT' => 'Järgmine',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Lisa [Alt+C]' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Company logo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalender' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'peamooduli navigeerimine',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'lülita sisse alampaneel',
+
     'LBL_ADVANCED' => 'Laiendatud',
     'LBL_BASIC' => 'Basic',
     'LBL_MODULE_FILTER' => 'Filter by...',
@@ -7993,7 +8120,7 @@ $app_strings = array (
     'LBL_EMAIL_ACCOUNTS_TITLE'              => 'E-posti konto haldus',
     'LBL_EMAIL_POP3_REMOVE_MESSAGE'         => 'Mail Server Protocol of type POP3 will not be supported in the next release. Only IMAP will be supported.',
     'LBL_EMAIL_ACCOUNTS_SUBTITLE'           => 'Seadista e-posti kontod sissetulevate e-kirjade vaatamiseks.',
-    'LBL_EMAIL_ACCOUNTS_OUTBOUND_SUBTITLE'  => 'Provide SMTP mail server information to use for outgoing email in Mail Accounts.',
+    'LBL_EMAIL_ACCOUNTS_OUTBOUND_SUBTITLE'  => 'Lisage SMTP meiliserveri teave e-posti kontodes väljaminevate e-kirjade jaoks kasutamiseks.',
     'LBL_EMAIL_ADD'                         => 'Add email',
 
     'LBL_EMAIL_ADDRESS_BOOK_ADD'            => 'Tehtud',
@@ -8118,7 +8245,7 @@ $app_strings = array (
     'LBL_EMAIL_ERROR_TRASH_FOLDER'          => 'Prügikasti kaust on nõutav.',
     'LBL_EMAIL_ERROR_VIEW_RAW_SOURCE'       => 'See info pole saadaval',
     'LBL_EMAIL_ERROR_NO_OUTBOUND'           => 'Väljaminevat meiliserverit pole täpsustatud.',
-    'LBL_EMAIL_FOLDERS'                     => 'Folders',
+    'LBL_EMAIL_FOLDERS'                     => 'Kaustad',
     'LBL_EMAIL_FOLDERS_ACTIONS'             => 'Aseta',
     'LBL_EMAIL_FOLDERS_ADD'                 => 'Lisa',
     'LBL_EMAIL_FOLDERS_ADD_DIALOG_TITLE'    => 'Lisa uus kaust',
@@ -8308,7 +8435,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_TITLE_LAYOUT'       => 'Visuaali sätted',
     'LBL_EMAIL_SETTINGS_TITLE_PREFERENCES'  => 'Soodustused',
     'LBL_EMAIL_SETTINGS_TOGGLE_ADV'         => 'Näita laiendatud',
-    'LBL_EMAIL_SETTINGS_USER_FOLDERS'       => 'Saadavl kasutaja kaustad',
+    'LBL_EMAIL_SETTINGS_USER_FOLDERS'       => 'Saadaval kasutaja kaustad',
     'LBL_EMAIL_ERROR_PREPEND'               => 'Viga:',
     'LBL_EMAIL_INVALID_PERSONAL_OUTBOUND'   => 'Sinu kasutatava e-posti konto valitud väljamineva e-posti mailiserver on kehtetu. Kontrolli sätteid või vali teine meiliserver selle e-posti konto jaoks.',
     'LBL_EMAIL_INVALID_SYSTEM_OUTBOUND'     => 'Väljamineva e-posti mailiserver pole konfigureeritud e-kirju saatma. Palun konfigureeri väljamineva e-posti mailiserver või vali server e-posti konto jaoks mida sa kasutad sätetes >> E-posti konto.',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Meeskonnad',
     'LBL_TEAM_SET_ID' => 'Team Set ID',
     'LBL_TEAM_SET'=>'Team Set',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Valitud meeskonnad',
     'LBL_SEARCH_UNAVAILABLE' => 'Search unavailable, please try again later.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Esmast meeskonda pole määratletud',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Error attempting to remove primary team id [{0}] for [{1}] module with id [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Search engine is temporarily unavailable.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'A search engine runtime error occurred. Please contact your System Administrator.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Protsessi poolt lukustatud välja ei saa redigeerida.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'A condition was encountered because of a general failure or error. The reasons for this exception range but generally fall outside the scope of a more specific API exception.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Indicates that the server is busy, overloaded or down.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'The search engine backend is currently unavailable due to a connection issue. Verify connectivity and configuration in Admin->search->test.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'A runtime exception occured in SearchEngine. See sugarcrm.log for more details.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Töötava protsessi poolt praegu lukustatud välja ei saa redigeerida.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s on lukustatud töötava protsessi poolt ja seda ei saa redigeerida.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s on lukustatud töötava protsessi poolt ja neid ei saa redigeerida.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'A file with the same name already exists in the system.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'This TimePeriod already has sub-periods',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Sub Time Periods cannot have sub-periods',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Unable to retrieve any Time Periods of type: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Praeguste sätete jaoks pole aktiivseid ajavahemikke.',
     'LBL_CURRENT_TIMEPERIOD' => 'Current Time Period',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Previous Time Period',
     'LBL_NEXT_TIMEPERIOD' => 'Next Time Period',
@@ -8532,7 +8664,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => 'Sulge',
     'LBL_ADDITIONAL_DETAILS' => 'Lisainfo',
     'LBL_ADMIN' => 'Admin',
-    'LBL_ALT_HOT_KEY' => 'Alt+',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'Arhiiv',
     'LBL_ASSIGNED_TO_USER'=>'Määratud kasutaja',
     'LBL_ASSIGNED_TO' => 'Vastutaja:',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Select field...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Select operator...',
     'LBL_FILTER_CREATE_NEW' => 'Loo',
+    'LBL_FILTER_CREATE_FILTER' => 'Loo uus filter',
+    'LBL_FILTER_EDIT_FILTER' => 'Redigeeri filtrit',
     'LBL_FILTER_ALL_RECORDS' => 'All Records',
     'TPL_FILTER_SAVE' => 'You successfully created the filter {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'Kellelt',
@@ -8671,13 +8805,13 @@ $app_strings = array (
     'TPL_MORE_RECORDS' => '{{recordsLeft}} more records selected.',
     'TPL_RECORDS_SELECTED' => '{{recordsLeft}} records selected.',
     'LBL_SHOW_LESS' => 'Show less',
-    'LBL_SHOW_MORE' => 'Show more',
-    'LBL_SHOW_MORE_MODULE' => 'More {{{module}}}...',
-    'LBL_SHOW_MORE_RECENTS' => 'More recents...',
+    'LBL_SHOW_MORE' => 'Näita rohkem',
+    'LBL_SHOW_MORE_MODULE' => 'Rohkem {{{module}}}...',
+    'LBL_SHOW_MORE_RECENTS' => 'Rohkem hiljutisi...',
     'LBL_SHOW_LESS_RECENTS' => 'Less recents',
-    'LBL_SHOW_MORE_RESULTS' => 'More search results...',
-    'TPL_SHOW_MORE_MODULE' => 'More {{module}}...',
-    'LBL_SHOW_MORE_GENERIC' => 'More {{name}}...',
+    'LBL_SHOW_MORE_RESULTS' => 'Rohkem otsingutulemeid...',
+    'TPL_SHOW_MORE_MODULE' => 'Rohkem {{module}}...',
+    'LBL_SHOW_MORE_GENERIC' => 'Rohkem {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Tänased tegevused',
     'LBL_LEADS'=>'Müügivihjed',
     'LBL_LESS' => 'vähem',
@@ -8698,7 +8832,7 @@ $app_strings = array (
     'LBL_LIST_DATE_ENTERED'=>'Loomiskuupäev',
     'LBL_LIST_EMAIL' => 'E-post',
     'LBL_LIST_NAME' => 'Nimi',
-    'LBL_LIST_OF' => 'of',
+    'LBL_LIST_OF' => '/',
     'LBL_LIST_PHONE' => 'Telefon',
     'LBL_LIST_RELATED_TO' => 'Seotud',
     'LBL_LIST_USER_NAME' => 'Kasutajanimi',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Maakond:',
     'LBL_STATUS_UPDATED'=>'Sinu olek selle sündmuse jaoks on uuendatud!',
+    'LBL_STATUS_NOT_UPDATED' => 'Teie olekut selle sündmuse jaoks ei uuendatud.',
     'LBL_STATUS'=>'Olek:',
     'LBL_STREET'=>'Tänav',
     'LBL_SUBJECT' => 'Teema',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004–2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Kõik õigused kaitstud.<br />SugarCRM on ettevõtte SugarCRM, Inc. kaubamärk. Kõik muud ettevõtete ja toodete nimed võivad olla nendega seotud vastavate ettevõtete kaubamärgid.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004–2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Kõik õigused kaitstud.<br />SugarCRM, Sugar ja 3-D Kuup on ettevõtte SugarCRM Inc. registreeritud kaubamärgid. '.
+        'Kõik muud tootes kasutatavad või esinevad ettevõtte ja tootenimed võivad olla '.
+        'vastavate ettevõtete kaubamärgid, millega need on seotud.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Scheduled Job Completed',
@@ -9182,7 +9321,8 @@ Sincerely, SugarCRM',
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Error. You entered an invalid operator.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Error. You entered an invalid filter.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Import ebaõnnestus. Grupi väli on valikus Protsessi määratlus osaliselt lukustatud. Definitsiooni importimiseks peab need väljad valikus Protsessi määratlus avama.',
+    'ERROR_EXP_DATE_LOW' => 'Tõrge. Aegumiskuupäev ei saa olla varasem kui avaldamiskuupäev.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Error. The Approved status requires publishing date.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Avaldamiskuupäev on tühi.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9241,8 +9381,8 @@ Sincerely, SugarCRM',
     'MSG_LIST_VIEW_NO_RESULTS_BASIC' => "No results found.",
     'MSG_LIST_VIEW_NO_RESULTS' => "No results found for <item1>",
     'MSG_LIST_VIEW_NO_RESULTS_SUBMSG' => "Create <item1> as a new <item2>",
-    'MSG_EMPTY_LIST_VIEW_NO_RESULTS' => "You currently have no <item1> records saved. <item2> or <item3> one now.",
-    'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "You currently have no <item1> records saved. <item2> one now.",
+    'MSG_EMPTY_LIST_VIEW_NO_RESULTS' => "Teil pole praegu ühtegi <item1> salvestatud kirjet. <item2> või <item3> kirje.",
+    'MSG_EMPTY_LIST_VIEW_NO_RESULTS_NO_IMPORT' => "Teil pole praegu ühtegi <item1> salvestatud kirjet. <item2> või kirje.",
     'MSG_EMPTY_LIST_VIEW_GO_TO_PARENT' => "You can create <item1> from a <item2>. <item3> <item2> list.",
 
     'LBL_CLICK_HERE' => "Click here",
@@ -9312,9 +9452,10 @@ Sincerely, SugarCRM',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => ' columns can be displayed.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Töölaud',
     'LBL_DASHBOARD_BWC' => 'My Legacy Dashboard',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'My Dashboard',
-    'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Help Dashboard',
+    'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Abi töölaud',
     'LBL_DEFAULT_HELP_DASHLET_TITLE' => 'Help Dashlet',
     'LBL_DEFAULT_HELP_DASHLET_DESC' => 'Help Dashlet provides module and view-specific help.',
     'LBL_COLLAPSE_ALL' => 'Ahenda kõik',
@@ -9339,14 +9480,11 @@ Sincerely, SugarCRM',
     'LBL_FACET_ASSIGNED_TO_ME' => 'Assigned to Me',
     'LBL_FACET_NO_DATA' => 'No data for this facet.',
 
-    'LBL_DASHLET_LISTVIEW_NAME' => 'ListView',
-    'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Lists records from a particular module according to criteria you define.',
+    'LBL_DASHLET_LISTVIEW_NAME' => 'Loendivaade',
+    'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Loetleb kirjed kindlast moodulist teie määratletud kriteeriumide järgi.',
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'My {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'News',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Google News feed for Related Account',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Opportunity Metrics',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Opportunity Metrics for Related Account.  Requires D&B subscription.',
@@ -9415,9 +9553,8 @@ Sincerely, SugarCRM',
     'LBL_DNB_COMPETITORS_TOP' => 'Top Competitor',
     'LBL_DNB_COMPETITORS_LIST' => 'Back To D&B Competitors List',
 
-    'LBL_DASHLET_NO_RECORDS' => 'No records were found at this time.',
+    'LBL_DASHLET_NO_RECORDS' => 'Praegu ei leitud ühtegi kirjet.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Case Summary',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Uudisvoog',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interactions',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Manused',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notes & Attachments belongs to the record',
@@ -9449,11 +9586,11 @@ Sincerely, SugarCRM',
     'LBL_DNB_OTHER' => 'Teine',
     'LBL_DNB_OVERRIDE_SUCCESS' => 'D&B data imported successfully',
     'LBL_DNB_SHOW_LESS' => 'Show Less',
-    'LBL_DNB_SHOW_MORE' => 'Show More',
+    'LBL_DNB_SHOW_MORE' => 'Näita rohkem',
     'LBL_DNB_IMPORT' => 'Impordi',
     'LBL_DNB_DUPLICATE' => 'Tee koopia',
     'LBL_DNB_UPLOAD' => 'Lae üles',
-    'LBL_DNB_MORE_SRCH_RES' => 'Show More D&B Search Results',
+    'LBL_DNB_MORE_SRCH_RES' => 'Näita rohkem D&B otsingutulemeid',
     'LBL_DNB_PRIMARY' => 'Esmane',
     'LBL_DNB_PREMIUM' => 'Premium',
     'LBL_DNB_DATA_ERR' => 'D&B data not available',
@@ -9533,7 +9670,7 @@ Sincerely, SugarCRM',
     'LBL_DNB_CONTACT_COMP_HIST' => 'Compensation History',
     'LBL_DNB_CONTACT_EMP_PROF' => 'Employee Profile',
     'LBL_DNB_CONTACT_LIST' => 'Back To D&B Contacts List',
-    'LBL_DNB_CONTACT_SHOW_MORE' => 'Show More D&B Contacts',
+    'LBL_DNB_CONTACT_SHOW_MORE' => 'Näita rohkem D&B kontakte',
 
     /*D&B Metering*/
     'LBL_DNB_METER' => 'D&B: kasutusarvesti',
@@ -9929,7 +10066,7 @@ Sincerely, SugarCRM',
     'LBL_DNB_BAL_JOBCD_PH' => 'Select Job Function',
     'LBL_DNB_BAL_ORG_NAME' => 'Organization Name',
     'LBL_DNB_BAL_IMPORT_AS' => 'Import As:',
-    'LBL_DNB_BAL_ORG_NAME' => 'Organization Name',
+    'LBL_DNB_BAL_ORG_NAME' => 'Ettevõtte nimi',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => 'in $USD Millions',
@@ -9956,7 +10093,7 @@ Sincerely, SugarCRM',
     'LBL_TWITTER_RETWEET' => 'Retweet',
     'LBL_TWITTER_FAVORITE' => 'Favorite',
     'LBL_TWITTER_FOLLOW' => 'Follow',
-    'LBL_TWITTER_DESCRIPTION' => 'See matching twitter user&#39;s bio and tweets, retweet, and reply to tweets',
+    'LBL_TWITTER_DESCRIPTION' => 'Kuvab ühtiva Twitteri kasutaja biograafia ja säutsud, edasisäutsud ja säutsude vastused',
     'LBL_TWITTER_ID' =>  'Twitter ID',
     'LBL_TWITTER_DISPLAY_ROWS' => 'Kuva read',
     'LBL_TWITTER_MY_ACCOUNT' => 'Minu konto',
@@ -9964,15 +10101,15 @@ Sincerely, SugarCRM',
     'LBL_TWITTER_SOURCE' => 'Source Tweet:',
 
     /* Learning Resources Dashlet */
-    'LBL_LEARNING_RESOURCES_TITLE' => 'Learning Resources',
-    'LBL_LEARNING_RESOURCES_DESC' => 'SugarCRM Learning Resources',
-    'LBL_LEARNING_RESOURCES_NAME' => 'Learning Resources',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugar University',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_TEASER' => 'Become a Sugar expert with upgrade training, videos, classes, webinars, and certification.',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Community Forums',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_TEASER' => 'Join the discussion, problem solve, and share ideas with other users.',
-    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Documentation & Support',
-    'LBL_LEARNING_RESOURCES_SUPPORT_TEASER' => 'Learn the details of how Sugar works and engage with support.',
+    'LBL_LEARNING_RESOURCES_TITLE' => 'Õpperessursid',
+    'LBL_LEARNING_RESOURCES_DESC' => 'SugarCRM-i õpperessursid',
+    'LBL_LEARNING_RESOURCES_NAME' => 'Õpperessursid',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugari ülikool',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_TEASER' => 'Saage uuenduskoolituste, videote, kursuste, veebiseminaride ja sertimise abil Sugari eksperdiks.',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Kogukonnafoorumid',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_TEASER' => 'Liituge aruteluga, lahendage probleeme ja jagage ideid teiste kasutajatega.',
+    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Dokumentatsioon ja tugi',
+    'LBL_LEARNING_RESOURCES_SUPPORT_TEASER' => 'Uurige Sugari tööpõhimõtteid üksikasjalikult ja suhelge toega.',
 
     /* Country Chart Dashlet */
     'LBL_DASHLET_COUNTRY_CHART_NAME' => 'Sales by Country',
@@ -9987,8 +10124,8 @@ Sincerely, SugarCRM',
     'LBL_DASHLET_LOCALIZATIONS_DESCRIPTION' => 'Displays a list of published, localized knowledge base articles',
 
     // Most Useful Knowledge Base Articles dashlet
-    'LBL_DASHLET_MOST_USEFUL_NAME' => 'Most Useful Published Knowledge Base Articles',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_NAME' => 'Kõige kasulikumad avaldatud teadmusbaasi artiklid',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Kuvab kõige populaarsemad ja vaadatumad teadmusbaasi artiklid',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtered by {{label}} "{{value}}"',
 
@@ -10027,6 +10164,13 @@ Sincerely, SugarCRM',
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Palun sisesta lehe nimi.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Minu pooleli müügitehing',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Minu meeskonna pooleli müügitehing",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Pooleli müügitehingute diagramm',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Kuvab praegu pooleli müügitehingute diagrammi.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Kujutist pole',
 
@@ -10110,7 +10254,7 @@ Sincerely, SugarCRM',
     'LBL_LIST' => 'Loend',
     'LBL_CREATE_CASE' => 'Loo juhtum',
     'LBL_CREATE_BUG' => 'Loo bugi',
-    'LBL_NO_RECORDS_FOUND' => '- 0 Kirjet leitud -',
+    'LBL_NO_RECORDS_FOUND' => '- 0 kirjet leitud -',
 
     'DATA_TYPE_DUE' => 'Due:',
     'DATA_TYPE_START' => 'Algus:',
@@ -10171,7 +10315,7 @@ Sincerely, SugarCRM',
     'LBL_ASSIGNED_TO_NAME' => 'Vastutaja',
     'LBL_DESCRIPTION' => 'Kirjeldus',
 
-  'LBL_NONE' => '-none-',
+  'LBL_NONE' => '-puudub-',
   'LBL_YESTERDAY'=> 'eile',
   'LBL_TODAY'=>'täna',
   'LBL_TOMORROW'=>'homme',
@@ -10289,7 +10433,7 @@ Sincerely, SugarCRM',
     'LBL_ALT_INFO' => 'Information',
 	'MSG_DUPLICATE' => 'The {0} record you are about to create might be a duplicate of an {0} record that already exists. {1} records containing similar names are listed below.<br>Click Create {1} to continue creating this new {0}, or select an existing {0} listed below.',
     'MSG_SHOW_DUPLICATES' => 'The {0} record you are about to create might be a duplicate of a {0} record that already exists. {1} records containing similar names are listed below.  Click Save to continue creating this new {0}, or click Cancel to return to the module without creating the {0}.',
-    'LBL_EMAIL_TITLE' => 'email address',
+    'LBL_EMAIL_TITLE' => 'e-posti aadress',
     'LBL_EMAIL_OPT_TITLE' => 'opted out email address',
     'LBL_EMAIL_INV_TITLE' => 'invalid email address',
     'LBL_EMAIL_PRIM_TITLE' => 'primary email address',
@@ -10297,6 +10441,8 @@ Sincerely, SugarCRM',
     'LBL_SELECT_THIS_ROW_TITLE' => 'Select this row',
     'LBL_TEAM_SELECTED_TITLE' => 'Team Selected ',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Select to make this team primary',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Meeskond märgiti meeskonnapõhiselt valituks ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Märgi see meeskond meeskonnapõhiselt valituks',
     'LBL_SEARCH_AND_SELECT' => 'Search and Select {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Search and Add {{module}}',
 
@@ -10377,7 +10523,7 @@ Sincerely, SugarCRM',
     'LBL_LISTVIEW_NO_RECORDS' => 'No data available.',
     'LBL_DETAILVIEW_NO_RECORDS' => 'This record could not be rendered at this time.',
     'LBL_REFINE_LIST' => 'Refine list',
-    'LBL_SEARCH_BY' => 'Search by',
+    'LBL_SEARCH_BY' => 'Otsingualus',
     'LBL_PREVIEW' => 'Preview',
     'LBL_COLUMNS' => 'Veerud',
     'LBL_PREVIEW_DISABLED_NO_RECORD' => 'Preview disabled: No data available',
@@ -10385,6 +10531,9 @@ Sincerely, SugarCRM',
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Preview disabled: No data available',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Preview disabled: In view as current record',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Preview disabled: Record removed or no access to record',
+    'LBL_PREVIEW_PREVIOUS' => 'Eelmise eelvaade',
+    'LBL_PREVIEW_NEXT' => 'Järgmise eelvaade',
+    'LBL_PREVIEW_CLOSE' => 'Eelvaate sulgemine',
     'LBL_STREAM_NO_RECORDS' => 'This record has no notes at this time. Please add a note by clicking on the add note link.',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}} duplicates found.',
     'LBL_NO_DUPLICATES_FOUND' => 'No duplicates found.',
@@ -10404,6 +10553,7 @@ Sincerely, SugarCRM',
         'Invalid number of records passed. The valid range is from {{minRecords}} to {{maxRecords}} records.',
     'LBL_MERGE_NO_ACCESS' =>
         'You have no access to perform this action. At least one record must be editable.',
+    'LBL_MERGE_LOCKED' => 'Mõned mestimiseks mõeldud kirjed sisaldavad välju, mis on protsessi poolt redigeerimiseks lukustatud ja mida ei saa hetkel mestida.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10527,7 +10677,7 @@ Sincerely, SugarCRM',
     'LBL_TOUR_RECORD_SUBPANEL' => 'Click on header to expand and collapse subpanel',
     'LBL_TOUR_RECORD_INLINEEDIT' => 'Record name can be updated in place',
     'LBL_TOUR_RECORD_STATUS' => 'Find record level status here',
-    'LBL_TOUR_RECORD_SHOWMORE' => 'Click to see more data for the record',
+    'LBL_TOUR_RECORD_SHOWMORE' => 'Klõpsake, et näha kirje kohta rohkem andmeid',
     'LBL_TOUR_RECORD_TOGGLEACTIVITIES' => 'Choose to see activities or related records',
     'LBL_TOUR_RECORD_INLINEEDITRECORD' => 'Click to edit each field inline',
     'LBL_TOUR_RECORD_DASHBOARDACTIONS' => 'Create new groups of Dashlets',
@@ -10599,12 +10749,12 @@ Sincerely, SugarCRM',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Ülesanded',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Telefonikõned',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Emails',
-    'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Quoted Line Items',
+    'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Pakkumuse artiklid',
     'LNK_SETTINGS' => 'Settings',
     'LBL_MOBILE_SUPPORT' => 'Tugi',
-    'LBL_MOBILE_SHOW_MORE' => 'Show more...',
-    'LBL_MOBILE_SHOW_MORE_TOP' => 'Show more...',
-    'LBL_MOBILE_NO_RECORDS' => 'No records found',
+    'LBL_MOBILE_SHOW_MORE' => 'Näita rohkem...',
+    'LBL_MOBILE_SHOW_MORE_TOP' => 'Näita rohkem...',
+    'LBL_MOBILE_NO_RECORDS' => 'Ühtegi kirjet ei leitud',
     'LBL_MOBILE_SEARCH_TEAMS' => 'Search teams...',
     'LBL_MOBILE_SELECT_TEAMS' => 'Vali meeskonnad',
     'LBL_MOBILE_WAIT' => 'Please wait...',
@@ -10833,7 +10983,7 @@ Sincerely, SugarCRM',
     'LBL_MOBILE_TUTORIAL_DETAIL_BACK_TABLET' => 'Go back.',
     'LBL_MOBILE_TUTORIAL_DETAIL_RELATE_LINK' => 'Click to open a related record.',
     'LBL_MOBILE_TUTORIAL_DETAIL_FOLLOW' => 'Follow/Unfollow a record.',
-    'LBL_MOBILE_TUTORIAL_DETAIL_SHOW_MORE' => 'Click to expand a detail information.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_SHOW_MORE' => 'Klõpsake üksikasja teabe laiendamiseks.',
 
     'LBL_MOBILE_TUTORIAL_HOME_MENU_INTRO_TITLE' => 'Main menu view.',
     'LBL_MOBILE_TUTORIAL_HOME_MENU_INTRO_TEXT' => 'The main menu opens on the left side of your screen.',
@@ -10874,10 +11024,9 @@ Sincerely, SugarCRM',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Süsteemi sätted',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Stuudio',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Salasõna',
     'LBL_CURRENT_PASSWORD'				=> 'Praegune parool',
-    'LBL_SET_NEW_PASSWORD'              => 'Enter Password',
     'LBL_NEW_PASSWORD1'                 => 'Uus parool',
     'LBL_NEW_PASSWORD2'                 => 'Kinnita salasõna',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Palun sisesta oma salasõna kinnitus.',
@@ -10885,13 +11034,12 @@ Sincerely, SugarCRM',
     'ERR_ENTER_OLD_PASSWORD'			=> 'Palun sisesta oma praegune salasõna.',
     'ERR_REENTER_PASSWORDS' => 'The passwords must match.',
     'ERR_PASSWORD_MISMATCH' => 'Password entered does not match that in our system.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Your password has been successfully updated.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Ei saa saata salasõna',
     'LBL_REQUEST_PASSWORD' => 'Request Password',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Error: There was a problem updating password for this user.',
     'LBL_INCORRECT_PASSWORD' => 'Error: Incorrect password.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Preferred Language:',
+    'LBL_PREFERRED_LANGUAGE' => 'Keele-eelistus:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Select a Report',
@@ -10921,6 +11069,18 @@ Sincerely, SugarCRM',
     'ERR_HTTP_500_TEXT_LINE1' => 'The server encountered an error and could not complete your request.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Please try again. If the error persists, please contact your Sugar Administrator.',
     'ERR_HTTP_500_ACTION' => 'Please contact technical support.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 sisemine serveritõrge',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Serveris ilmnes ajutine tõrge ja teie taotlust ei saa praegu täita.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Proovige uuesti. Probleemi püsimisel pöörduge oma Sugari administraatori poole.',
+    'ERR_HTTP_502_ACTION' => 'Pöörduge tehnilise toe poole.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 sisemine serveritõrge',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Server ei saa teie taotlust täita.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Proovige hiljem uuesti. Probleemi püsimisel pöörduge oma Sugari administraatori poole.',
+    'ERR_HTTP_503_ACTION' => 'Pöörduge tehnilise toe poole.',
 
     'ERR_RENDER_FAILED_TITLE' => 'View Render Failed',
     'ERR_RENDER_FAILED_MSG' => 'Failed to render a view',
@@ -10960,7 +11120,7 @@ Sincerely, SugarCRM',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'RSS voog',
-    'LBL_RSS_FEED_DASHLET_DESCRIPTION' => 'Stay current by adding an external RSS or Blog Feed.',
+    'LBL_RSS_FEED_DASHLET_DESCRIPTION' => 'Hoiab teid asjadega kursis, lisades välise RSS või ajaveebi voo.',
     'LBL_RSS_FEED_URL' => 'Feed URL',
     'LBL_RSS_FEED_AUTHOR' => 'Autor:',
     'LBL_RSS_FEED_ENTRIES_COUNT' => 'Number of entries to show',
@@ -10972,7 +11132,7 @@ Sincerely, SugarCRM',
 
     // history dashlet
     'LBL_HISTORY_DASHLET' => 'Ajalugu',
-    'LBL_HISTORY_DASHLET_DESCRIPTION' => 'The History dashlet displays Meetings held, Calls logged, Emails received and Emails sent.',
+    'LBL_HISTORY_DASHLET_DESCRIPTION' => 'Ajaloo dashlet kuvab peetud kohtumised, logitud kõned ning vastuvõetud ja saadetud e-kirjad.',
     'LBL_HISTORY_DASHLET_EMAIL_SINGULAR' => 'Muu E-post:',
     'LBL_HISTORY_DASHLET_EMAIL_PLURAL' => 'Emails',
     'LBL_HISTORY_DASHLET_USER_BUTTON_LABEL' => 'My History',
@@ -10982,8 +11142,8 @@ Sincerely, SugarCRM',
     'LBL_EMAIL_ARCHIVED' => 'Email archived',
 
     // planned activities dashlet
-    'LBL_PLANNED_ACTIVITIES_DASHLET' => 'Planned Activities',
-    'LBL_PLANNED_ACTIVITIES_DASHLET_DESCRIPTION' => 'The Planned Activities dashlet displays scheduled Meetings and Calls.',
+    'LBL_PLANNED_ACTIVITIES_DASHLET' => 'Plaanitud tegevused',
+    'LBL_PLANNED_ACTIVITIES_DASHLET_DESCRIPTION' => 'Planeeritud tegevuste dashlet kuvab plaanilised kohtumised ja kõned.',
     'LBL_PLANNED_ACTIVITIES_DASHLET_TODAY_BUTTON_LABEL' => 'Täna',
     'LBL_PLANNED_ACTIVITIES_DASHLET_FUTURE_BUTTON_LABEL' => 'Future',
     'LBL_PLANNED_ACTIVITIES_DASHLET_USER_BUTTON_LABEL' => 'My Activities',
@@ -10992,8 +11152,8 @@ Sincerely, SugarCRM',
     'LBL_PLANNED_ACTIVITIES_DASHLET_CONFIRM_CLOSE' => 'Are you sure you want to mark {0} as closed?',
 
     // active tasks dashlet
-    'LBL_ACTIVE_TASKS_DASHLET' => 'Active Tasks',
-    'LBL_ACTIVE_TASKS_DASHLET_DESCRIPTION' => 'The Active Tasks dashlet displays due now, upcoming and to do Tasks.',
+    'LBL_ACTIVE_TASKS_DASHLET' => 'Aktiivsed tööülesanded',
+    'LBL_ACTIVE_TASKS_DASHLET_DESCRIPTION' => 'Aktiivsete tööülesannete dashlet kuvab praeguse tähtajaga, edasised ja tegemist vajavad tööülesanded.',
     'LBL_ACTIVE_TASKS_DASHLET_DUE_NOW' => 'Due Now',
     'LBL_ACTIVE_TASKS_DASHLET_UPCOMING' => 'Upcoming',
     'LBL_ACTIVE_TASKS_DASHLET_TODO' => 'To Do',
@@ -11003,8 +11163,8 @@ Sincerely, SugarCRM',
     'LBL_ACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Team Tasks',
     'LBL_LIST_REMOVE_EMAIL_INFO' => 'There was an additional email on the record you are modifying. It is now the primary and has been populated below.',
     // inactive tasks dashlet
-    'LBL_INACTIVE_TASKS_DASHLET' => 'Inactive Tasks',
-    'LBL_INACTIVE_TASKS_DASHLET_DESCRIPTION' => 'The Tasks dashlet displays deferred and completed Tasks.',
+    'LBL_INACTIVE_TASKS_DASHLET' => 'Passiivsed ülesanded',
+    'LBL_INACTIVE_TASKS_DASHLET_DESCRIPTION' => 'Pasiivsete ülesannete dashlet kuvab seisatud ja lõpetatud tööülesanded.',
     'LBL_INACTIVE_TASKS_DASHLET_DEFERRED' => 'Edasilükatud',
     'LBL_INACTIVE_TASKS_DASHLET_COMPLETED' => 'Lõpetatud',
     'TPL_INACTIVE_TASKS_DASHLET_TIME_RELATIVE' => 'last modified {{relativetime}} on {{date}} at {{time}}',
@@ -11054,6 +11214,7 @@ Sincerely, SugarCRM',
     'LBL_ALERT_TITLE_ERROR' => 'Error:',
     'LBL_ALERT_TITLE_LOADING' => 'Loading',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Your browser version is no longer supported or you are using an unsupported browser.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Soovitatav on kasutada järgmisi brauserite versioone: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Please see the {{link}} page for suggested browsers.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Supported Platforms',
 
@@ -11064,8 +11225,8 @@ Sincerely, SugarCRM',
     'LBL_OVERWRITE_POPULATED_DATA_TO' => 'Kellele:',
 
     //organization chart
-    'LBL_ORG_CHART' => 'Organization Chart',
-    'LBL_ORG_CHART_DESC' => 'Displays the employee structure of your organization.',
+    'LBL_ORG_CHART' => 'Organisatsiooniskeem',
+    'LBL_ORG_CHART_DESC' => 'Kuvab teie organisatsiooni töötajate struktuuri.',
     'LBL_ORG_CHART_TOOLTIP_TOGGLE'=> 'Toggle orientation',
     'LBL_ORG_CHART_TOOLTIP_NODES'=> 'Show all nodes',
     'LBL_ORG_CHART_TOOLTIP_ZOOM'=> 'Zoom to fit',
@@ -11080,8 +11241,8 @@ Sincerely, SugarCRM',
 
     //top 10 opportunities chart
     // these are the generic ones, the module specific ones are in the modules language files
-    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => 'Top 10 Sales',
-    'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Displays top ten sales in a bubble chart.',
+    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => 'Müügi esikümme',
+    'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Kuvab müügi esikümne mulldiagrammina.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'My Items',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "My Team's Items",
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'Default date filter',
@@ -11095,10 +11256,10 @@ Sincerely, SugarCRM',
     'LBL_ACTIVITY_STREAM' => 'Tegevused',
     'LBL_ACTIVITY_STREAM_DISABLED' => 'Activity Stream is not enabled',
     'LBL_ACTIVITY_STREAM_DISABLED_MODULE' => 'Activity Stream is not enabled for this module',
-    'LBL_ACTIVTY_STREAM_SHOW_MORE' => 'More posts...',
+    'LBL_ACTIVTY_STREAM_SHOW_MORE' => 'Rohkem postitusi...',
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => ' on ',
-    'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'My Activity Stream',
-    'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'View a list of activities performed on records and create and post comments.',
+    'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'Minu tegevusvoog',
+    'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'Kuvab kirjetega tehtud tegevuste ja loodud ning postitatud kommentaaride loendi.',
 
     'LBL_DATA_VIEW' => 'Data View',
     'LBL_COMMENT' => 'Comment',
@@ -11106,6 +11267,9 @@ Sincerely, SugarCRM',
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'There was an error while connecting to the server. Please try again.',
     'ERR_RESOLVE_ERRORS' => 'Please resolve any errors before proceeding.',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Värskenda loendit',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'more',
@@ -11118,18 +11282,18 @@ Sincerely, SugarCRM',
     'LBL_DASHLET_MOVE' => 'Move',
     'LBL_DASHLET_CLOSE' => 'Sulge',
 
-    'LBL_DASHLET_FORECAST_NAME' => 'In Forecast',
-    'LBL_DASHLET_FORECASTS_CHART_NAME' => 'Forecast Bar Chart',
+    'LBL_DASHLET_FORECAST_NAME' => 'Prognoosimisel',
+    'LBL_DASHLET_FORECASTS_CHART_NAME' => 'Prognoosi lintdiagramm',
     'LBL_DASHLET_FORECAST_PARETO_CHART_NAME' => 'Forecast Bar Chart',
     'LBL_DASHLET_FORECASTS_FOR_CHART_NAME' => 'Forecast for',
-    'LBL_DASHLET_FORECASTS_CHART_DESC' => 'Displays the Forecast Bar Chart for a specific Time Period',
+    'LBL_DASHLET_FORECASTS_CHART_DESC' => 'Kuvab prognoosi lintdiagrammi kindla ajavahemiku kohta',
     'LBL_DASHLET_FORECASTS_GROUPBY' => 'Grupeeri',
     'LBL_DASHLET_FORECASTS_DATASET' => 'Dataset',
     'LBL_DASHLET_FORECASTS_DETAILS' => 'Forecasts Details',
-    'LBL_DASHLET_FORECASTS_DETAILS_DESC' => 'Displays current Forecast details.',
+    'LBL_DASHLET_FORECASTS_DETAILS_DESC' => 'Kuvab praegused prognoosimise üksikasjad.',
 
-    'LBL_DASHLET_SAVED_REPORTS_CHART' => 'Saved Reports Chart Dashlet',
-    'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'Displays any chart from a saved report.',
+    'LBL_DASHLET_SAVED_REPORTS_CHART' => 'Salvestatud aruannete diagrammi dashlet',
+    'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'Kuvab salvestatud aruandest mis tahes diagrammi.',
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'Published Related Articles',
@@ -11170,14 +11334,14 @@ Sincerely, SugarCRM',
     'LBL_RESOLVE_CONFLICT' => 'Resolve Conflict for {{name}}',
 
     // Generic Help Strings
-    'LBL_HELP_MORE_INFO' => 'For more information, refer to the {{{more_info_url}}} {{plural_module_name}} documentation.{{{more_info_url_close}}}',
+    'LBL_HELP_MORE_INFO' => 'Rohkem teavet vt mooduli {{{more_info_url}}} {{plural_module_name}} dokumentatsioonist.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'No Data Available',
 
     // Dashlet Preview Help String
     'LBL_HELP_PREVIEW' => 'The help dashlet provides specific information pertaining to the module you are currently viewing along with a link to the corresponding documentation (e.g. Leads documentation) in the Application guide for more information.',
 
     // list view (AKA Records)
-    'LBL_HELP_RECORDS_TITLE' => 'List View Help',
+    'LBL_HELP_RECORDS_TITLE' => 'Loendivaate abi',
     'LBL_HELP_RECORDS' => "A module's list view displays all records meeting the current search criteria and to which users have access. You can view the basic details of each record within the field columns of the list view or click the record's name to open the record view.",
 
     // record view (AKA Detail View)
@@ -11214,10 +11378,13 @@ To create a new record using the values you have entered, click "Ignore Duplicat
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM enables power users to quickly perform certain tasks with keyboard shortcuts to increase productivity. The tables on the right describe available shortcuts along with the keys and the actions they perform.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Toetatud võtmed</h1><ul><li>kõik tähtnumbrilised märgid ja sümbolid</li><li>shift, ctrl, alt, command, mod (ctrl operatsioonisüsteemis Windows/Linux ja command Mac-arvutites)</li><li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>Toetatud funktsioonid</h1><ul><li>Klahvikombinatsioon: ctrl+m</li><li>Mitu klahvi: m,ctrl+m</li><li>Klahvijada: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Global Shortcuts',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Contextual Shortcuts',
     'LBL_SHORTCUT_KEY_KEY' => 'Väärtus',
     'LBL_SHORTCUT_FUNCTION' => 'Function',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Konfigureeri kontekstipõhiseid otseteid',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Pole kontekstipõhiseid otseteid, mida konfigureerida',
     'LBL_SHORTCUT_HELP' => 'Show shortcuts help page',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Toggle the quick create menu',
     'LBL_SHORTCUT_SEARCH' => 'Focus on global search field',
@@ -11265,6 +11432,9 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Select all items in a multi-select field',
     'LBL_SHORTCUT_SWEETSPOT' => 'Toggle the Sweet Spot bar',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Hide the Sweet Spot bar',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Salvesta konfiguratsioon',
+    'LBL_SHORTCUT_RESTORE' => 'Taasta vaikesätted',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Kohandatud kiirklahvide salvestamisel serverisse ilmnes tõrge. Proovige hiljem uuesti.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} Settings',
@@ -11287,18 +11457,25 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_CALENDAR_RECURRENCE' => "Recurrence",
     'LBL_CALENDAR_REMINDERS' => "Meeldetuletused",
 
-    'LBL_CALENDAR_REPEAT_TYPE' => "Repeat Type",
+    'LBL_CALENDAR_CUSTOM_DATE' => "Kohandatud kuupäev",
+    'LBL_CALENDAR_REPEAT_TYPE' => "Korduse tüüp",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Repeat Interval",
     'LBL_CALENDAR_REPEAT_DOW' => "Repeat on Days of Week",
+    'LBL_CALENDAR_REPEAT' => "Korda",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Repeat Until",
     'LBL_CALENDAR_REPEAT_COUNT' => "Repeat Occurrences",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Kordamise valija",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Päeva kuus",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Korda järgarve",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Korda üksust",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Recurrence changes must be made using the first record in the series.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Kordusreeglite määramise tulemusena ei looda sündmust.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Attending',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Tagasilükatud',
     'LBL_CALENDAR_EVENT_RESPONSE_TENTATIVE' => 'Esialgne',
-    'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'No Reply',
+    'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'Vastuseta',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Schedule Unavailable',
 
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'Error occurred while retrieving schedule.',
@@ -11313,17 +11490,23 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 requires javascript. Please enable Javascript in your browser to use Sugar 7.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Jadaks teisendatud andmete jadaesitust ei saanud tagasi võtta',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Jadaks teisendatud andmete jadaesitust ei saanud tagasi võtta, sest need sisaldavad viiteid objektidele või klassidele',
 
     'LBL_FIELD_TRIMMED' => 'Välja kärbiti maksimaalse tähemärkide arvu ületamise tõttu.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Väli ületab lubatud märkide arvu.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Viimased 7 päeva',
     '30' => 'Viimased 30 päeva',
     '90' => 'Viimane kvartal',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11411,14 +11594,14 @@ $app_list_strings['opps_config_view_by_closedate_rollup_dom'] = array(
 $app_list_strings['moduleList']['Library'] = 'Raamatukogu';
 $app_list_strings['moduleListSingular']['Library'] = 'Raamatukogu';
 $app_list_strings['library_type'] = array('Books'=>'Raamat', 'Music'=>'Muusika', 'DVD'=>'DVD', 'Magazines'=>'Ajakirjad');
-$app_list_strings['moduleList']['EmailAddresses'] = 'Email Address';
+$app_list_strings['moduleList']['EmailAddresses'] = 'E-posti aadress';
 $app_list_strings['project_priority_default'] = 'Keskmine';
 $app_list_strings['project_priority_options'] = array (
     'High' => 'Kõrge',
     'Medium' => 'Keskmine',
     'Low' => 'Madal',
 );
-$app_list_strings['moduleListSingular']['EmailAddresses'] = 'Email Address';
+$app_list_strings['moduleListSingular']['EmailAddresses'] = 'E-posti aadress';
 
 $app_list_strings['kbdocument_status_dom'] = array(
     'draft' => 'Mustand',
@@ -11427,13 +11610,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'published' => 'Avaldatud',
     'expired' => 'Aegunud',
 );
-
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Mustand',
-    'Expired' => 'Aegunud',
-    'In Review' => 'In Review',
-    'Published' => 'Avaldatud',
-  );
 
    $app_list_strings['kbadmin_actions_dom'] =
     array (
@@ -11446,57 +11622,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Kustuta valitud artiklid',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Has Attachments',
-        'none' => 'Has None',
-        'mime' => 'Specify Mime Type',
-        'name' => 'Specify Name',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Words';
   $app_list_strings['moduleListSingular']['Words'] = 'Word';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Loo artikkel';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Top 5',
-    'Top_10' => 'Top 10',
-    'Top_20' => 'Top 20',
-    'Bot_5'  => 'Bottom 5',
-    'Bot_10' => 'Bottom 10',
-    'Bot_20' => 'Bottom 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Kõik',
-        'added' => 'Added Last 30 days',
-        'pending' => 'Pending my Approval',
-        'updated' =>'Updated Last 30 days',
-        'faqs' => 'FAQs',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'On',
-    'before' => 'Before',
-    'after' => 'Pärast',
-    'between_dates' => 'Is Between',
-    'last_7_days' => 'Viimased 7 päeva',
-    'next_7_days' => 'Järgmised 7 päeva',
-    'last_month' => 'Viimane kuu',
-    'this_month' => 'Sel kuul',
-    'next_month' => 'Järgmine kuu',
-    'last_30_days' => 'Viimased 30 päeva',
-    'next_30_days' => 'Järgmised 30 päeva',
-    'last_year' => 'Viimane aasta',
-    'this_year' => 'Sel aastal',
-    'next_year' => 'Järgmine aasta',
-    'isnull' => 'Is Null',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12358,6 +12486,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "All Contacts",
+    "email" => "Ainult meiliaadress",
+    "phone" => "Ainult telefon",
     "prem" => "Premium Only"
 );
 
@@ -12383,4 +12513,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Bio',
     'Both' => 'Both'
 );
-

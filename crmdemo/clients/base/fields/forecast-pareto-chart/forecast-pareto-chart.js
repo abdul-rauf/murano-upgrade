@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -302,6 +302,11 @@
                 noData: app.lang.get('LBL_CHART_NO_DATA')
             });
 
+        this.paretoChart.displayNoData = _.bind(function(state) {
+            this.$('[data-content="chart"]').toggleClass('hide', state);
+            this.$('[data-content="nodata"]').toggleClass('hide', !state);
+        }, this);
+
         // just on the off chance that no options param is passed in
         options = options || {};
         options.success = _.bind(function(data) {
@@ -310,8 +315,25 @@
                     title: data.title
                 });
                 this._serverData = data;
-                this.convertDataToChartData();
-                this.generateD3Chart();
+                if (data.error) {
+                    app.alert.show('chart_error', {
+                        level: 'error',
+                        messages: data.error
+                    });
+
+                    if (!_.isEmpty(this.paretoChart)) {
+                        this.paretoChart.displayNoData(true);
+                    }
+
+                    this.trigger('chart:pareto:rendered');
+                } else {
+                    if (!_.isEmpty(this.paretoChart)) {
+                        this.paretoChart.displayNoData(false);
+                    }
+
+                    this.convertDataToChartData();
+                    this.generateD3Chart();
+                }
             }
         }, this);
 

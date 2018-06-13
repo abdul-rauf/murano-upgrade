@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Ta bort diagnoseringsfiler',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Ta bort tillfälliga PDF-filer',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Uppdatera tracker_sessions tabellen',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Kör emailpåminnelser',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Aktivera meddelanden med email-påminnelser',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Rensa Jobbköer',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Skapa framtida tidsperioder',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Uppdatera KBContent-artiklar.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicera godkända artiklar och inaktuella kunskapsbas-artiklar.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Processförfattare-schemalagt jobb',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Schemalagt jobb för avancerat arbetsflöde',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Uppdatera jobb',
 'LBL_POLLMONITOREDINBOXES' => 'Kontrollera inkommande mailkonton',
 'LBL_PERFORMFULLFTSINDEX' => 'Fulltextsökning indexerar System',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Ta bort tillfälliga PDF-filer',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publicera godkända artiklar och inaktuella kunskapsbas-artiklar.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Schemaläggare för Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Ta bort diagnostikfiler',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Ta bort temporära filer',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Kör nattliga mass-mailkampanjer',
 'LBL_ASYNCMASSUPDATE' => 'Utför asynkron mäss uppdateringar',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Uppdatera sessions logg tabeller',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Skapa framtida tidsperioder',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'Skicka mailpåminnelser',
+'LBL_SENDEMAILREMINDERS'=> 'Aktivera sändning av email-påminnelser',
 'LBL_CLEANJOBQUEUE' => 'Rensa Upp Job Köer',
 'LBL_CLEANOLDRECORDLISTS' => 'Cleanup gamla postlistor',
 );

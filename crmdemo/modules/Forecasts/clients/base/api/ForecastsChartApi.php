@@ -1,9 +1,8 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -59,13 +58,26 @@ class ForecastsChartApi extends SugarApi
             $klass = 'SugarForecasting_Chart_Manager';
         }
 
+        $obj = $this->getClass($file, $klass, $args);
+        return $obj->process();
+    }
+
+    /**
+     * Utility method to get the class
+     *
+     * @param string $file
+     * @param string $klass
+     * @param array $args
+     * @return SugarForecasting_Chart_AbstractChart
+     */
+    protected function getClass($file, $klass, $args)
+    {
         // check for a custom file exists
         SugarAutoLoader::requireWithCustom($file);
         $klass = SugarAutoLoader::customClass($klass);
         // create the class
 
         /* @var $obj SugarForecasting_Chart_AbstractChart */
-        $obj = new $klass($args);
-        return $obj->process();
+        return new $klass($args);
     }
 }

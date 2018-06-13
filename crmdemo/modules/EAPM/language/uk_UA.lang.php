@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -53,6 +53,7 @@ $mod_strings = array (
   'LBL_API_OAUTHTOKEN' => 'Токен OAuth-авторизації',
   'LBL_AUTH_UNSUPPORTED' => "Цей метод авторизації не підтримується додатком",
   'LBL_AUTH_ERROR' => 'Не вдалось з&#39;єднатися з цим обліковим записом.',
+  'LBL_CHANGE_APPLICATION_ERROR' => 'Користувачу заборонено змінювати назву додатка.',
   'LBL_VALIDATED' => 'Підключено',
   'LBL_ACTIVE' => 'Активна',
   'LBL_OAUTH_NAME' => '%s',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -307,7 +307,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Vælg et <b>Layout til redigering</b>. <br/<br/> For at ændre layoutet, der indeholder datafelter til indtastning af data, skal du klikke på <b>Redigér visning</b>. <br/> <br/> Hvis du vil ændre layoutet, der viser de indtastede data i felterne i Edit View klik på <b> Detaljeret visning</b>. <br/><br/> For at ændre kolonnerne, der vises i standard, klik på <b>Listevisning</b>. <br/><br/> For at ændre Basis og Avanceret søgning for layouts, klik på <b>Søg</b>.',
         'subpanelHelp'=> '<b>Vælg en underpanel der skal redigeres.</b>',
         'searchHelp' => '<b>Vælg et søgningslayout der skal redigeres.</b>',
-        'labelsBtn'	=> 'Klik <b>Save</b> for at gemme dine brugerdefinerede labels.',
+        'labelsBtn'	=> 'Rediger <b>etiketterne</b> for at vise værdier i dette modul.',
         'newPackage'=>'Klik på <b>Ny pakke</b> for at oprette en ny pakke.',
         'mbHelp'    => '<b>Velkommen til Modul Builder.</b> <br/><br/> Brug <b>Modul Builder</b> for at oprette pakker indeholdende brugerdefinerede moduler baseret på standard eller brugerdefinerede objekter. <br/><br/> Til at begynde med, skal du klikke på <b>Ny pakke</b> for at oprette en ny pakke, eller vælg en pakke til at redigere. <br/><br/> En <b>Pakke</b> fungerer som en beholder for brugerdefinerede moduler, som alle er en del af et projekt. Pakken kan indeholde en eller flere brugerdefinerede moduler, der kan relateres til hinanden eller til moduler i applikationen. <br/><br/> Eksempler: Du vil måske oprette en pakke, der indeholder et brugerdefineret modul, der er relateret til standard Konti-modulet. Eller, du ønsker måske at oprette en pakke, der indeholder en række nye moduler, der arbejder sammen som et projekt, og som er relateret til hinanden og til moduler i programmet.',
         'exportBtn' => 'Klik på <b>Eksportér tilpasninger</b> for at oprette en pakke med tilpasninger foretaget i Studio til specifikke moduler.',
@@ -713,6 +713,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Navn - skal være alfanumerisk og uden mellemrum og starte med et bogstav',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Pakkenøgle findes allerede',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Pakkens navn eksisterer allerede',
+'LBL_JS_PACKAGE_NAME'=>'Pakke navn - skal starte med et bogstav og må kun bestå af bogstaver, tal og understregningstegn. Der må ikke bruges mellemrum eller andre specialtegn.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Nøgle - Skal være alfanumerisk og begynde med et bogstav.',
 'LBL_JS_VALIDATE_KEY'=>'Nøgle - skal være alfanumerisk og uden mellemrum og starte med et bogstav',
 'LBL_JS_VALIDATE_LABEL'=>'Angiv en etiket, der skal bruges som vist navn til dette modul',
@@ -737,8 +738,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Er du sikker på, at du vil slette denne relation?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Derved bliver denne relation permanent. Er du sikker på, at du vil installere denne relation?',
 'LBL_CONFIRM_DONT_SAVE' => 'Der er foretaget ændringer, siden du sidst gemte. Vil du gemme?',

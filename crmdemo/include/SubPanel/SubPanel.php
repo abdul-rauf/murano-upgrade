@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -284,8 +284,9 @@ class SubPanel
         $fp = sugar_fopen("{$layoutPath}/{$extname}.php", 'w');
         fwrite($fp, "<?php\n//auto-generated file DO NOT EDIT\n$newValue\n?>");
         fclose($fp);
-        require_once('ModuleInstall/ModuleInstaller.php');
-        $moduleInstaller = new ModuleInstaller();
+        SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
+        $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+        $moduleInstaller = new $moduleInstallerClass();
         $moduleInstaller->silent = true; // make sure that the ModuleInstaller->log() function doesn't echo while rebuilding the layoutdefs
         $moduleInstaller->$moduleInstallerMethod();
         SugarAutoLoader::buildCache();

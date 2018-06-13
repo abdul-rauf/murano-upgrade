@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -216,7 +216,7 @@ SUGAR.expressions.validateRelateFunctions = function(t)
             throw (t.name + ": related field  " + t.args[1].value + " must be a number ");
         }
 
-        return;
+        return def;
 	}
 };
 
@@ -237,8 +237,20 @@ SUGAR.expressions.validateCurrExpression = function(silent, matchType)
 		var tokens = new SUGAR.expressions.ExpressionParser().tokenize(expression);
 		SUGAR.expressions.setReturnTypes(tokens, varTypeMap);
 		SUGAR.expressions.validateReturnTypes(tokens);
-        SUGAR.expressions.validateRelateFunctions(tokens);
-		if (matchType && matchType != tokens.returnType) {
+		var def = SUGAR.expressions.validateRelateFunctions(tokens),
+		    returnType = tokens.returnType;
+		if (tokens.name == 'related' && def.type) {
+		    switch(def.type) {
+		        case "datetime":
+                case 'datetimecombo':
+		            returnType = "date"; break;
+		        case "bool":
+		            returnType = "boolean"; break;
+		        default:
+		            returnType = def.type;
+		    }
+		}
+		if (matchType && matchType != returnType) {
 			Msg.show({
                 type: "alert",
                 title: SUGAR.language.get("ModuleBuilder", "LBL_FORMULA_INVALID"),

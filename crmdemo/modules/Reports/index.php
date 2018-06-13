@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -261,9 +261,17 @@ function checkSavedReportACL(&$reporter,&$args) {
 		global $current_user;
 		if (isset($args['reporter']->saved_report) && $args['reporter']->saved_report->assigned_user_id != $current_user->id)
 			$is_owner = false;
-		if(!ACLController::checkAccess('Reports', 'list', $is_owner) || !ACLController::checkAccess('Reports', 'view', $is_owner))  {
-			sugar_die($mod_strings['LBL_NO_ACCESS']);
-		}
+
+        if ($reporter->saved_report) {
+            if (!$reporter->saved_report->ACLAccess('list') || !$reporter->saved_report->ACLAccess('view')) {
+                sugar_die($mod_strings['LBL_NO_ACCESS']);
+            }
+        } elseif (
+            !ACLController::checkAccess('Reports', 'list', $is_owner) ||
+            !ACLController::checkAccess('Reports', 'view', $is_owner)
+        ) {
+            sugar_die($mod_strings['LBL_NO_ACCESS']);
+        }
 	}
 	return true;
 }

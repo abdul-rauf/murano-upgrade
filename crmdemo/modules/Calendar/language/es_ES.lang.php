@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -137,6 +137,7 @@ $mod_strings = array (
     'LBL_CALENDAR_EVENT_NOT_A_RECURRING_EVENT' => "{0} no es un evento recurrente",
     'LBL_CALENDAR_EVENT_NOT_A_PARENT_OCCURRENCE' => "{0} no es una recurrencia principal",
     'LBL_CALENDAR_EVENT_RECURRENCE_MODULE_NOT_SUPPORTED' => "{0} no está reconocido como módulo de evento recurrente",
+
 );
 
 $mod_list_strings = array(

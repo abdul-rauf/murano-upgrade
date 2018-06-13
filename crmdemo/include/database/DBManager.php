@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -71,7 +71,6 @@ abstract class DBManager
 {
 	/**
 	 * Actual database link, used in concrete classes
-	 * @var resource
 	 */
 	public $database = null;
 
@@ -798,12 +797,11 @@ protected function checkQuery($sql, $object_name = false)
 				    // if it's not for prep, massageValue will decode it
 				    $val = $data[$field];
 				}
+                if ($val === '' && $this->isNullable($fieldDef)) {
+                    $val = null;
+                }
 			} else {
-				if(isset($fieldDef['default']) && strlen($fieldDef['default']) > 0) {
-					$val = $fieldDef['default'];
-				} else {
 					$val = null;
-				}
 			}
 
 			//handle auto increment values here - we may have to do something like nextval for oracle
@@ -816,9 +814,7 @@ protected function checkQuery($sql, $object_name = false)
 				$values['deleted'] = (int)$val;
 			} else {
 				// need to do some thing about types of values
-				if(!is_null($val) || !empty($fieldDef['required'])) {
-					$values[$field] = $this->massageValue($val, $fieldDef, $usePreparedStatements);
-				}
+                                $values[$field] = $this->massageValue($val, $fieldDef, $usePreparedStatements);
 			}
 		}
 
@@ -1005,7 +1001,8 @@ protected function checkQuery($sql, $object_name = false)
 	 */
 	protected function createConstraintSql(SugarBean $bean)
 	{
-		return $this->getConstraintSql($bean->getIndices(), $bean->getTableName());
+        $indices = $this->massageIndexDefs($bean->getFieldDefinitions(), $bean->getIndices());
+        return $this->getConstraintSql($indices, $bean->getTableName());
 	}
 
 	/**
@@ -1020,6 +1017,7 @@ protected function checkQuery($sql, $object_name = false)
      */
 	public function createTableParams($tablename, $fieldDefs, $indices, $engine = null)
 	{
+        $indices = $this->massageIndexDefs($fieldDefs, $indices);
 		if (!empty($fieldDefs)) {
 			$sql = $this->createTableSQLParams($tablename, $fieldDefs, $indices, $engine);
 			$res = true;
@@ -1132,7 +1130,7 @@ protected function checkQuery($sql, $object_name = false)
 
         $sql = $this->repairTableColumns($tableName, $fielddefs, $execute);
         if (empty($this->options['skip_index_rebuild'])) {
-            $sql .= $this->repairTableIndices($tableName, $indices, $execute);
+            $sql .= $this->repairTableIndices($tableName, $fielddefs, $indices, $execute);
         }
 
         return $sql;
@@ -1290,29 +1288,30 @@ protected function checkQuery($sql, $object_name = false)
      * Supplies the SQL commands that repair a table Indices
      *
      * @param  string $tableName
-     * @param  array  $indices   Index definitions, in vardef format
-     * @param  bool   $execute   optional, true if we want the queries executed instead of returned
-     *
+     * @param  array $fieldDefs field definitions of the table
+     * @param  array $indices Index definitions, in vardef format
+     * @param  bool $execute optional, true if we want the queries executed instead of returned
      * @return string
      */
-    private function repairTableIndices($tableName, $indices, $execute)
+    private function repairTableIndices($tableName, $fieldDefs, $indices, $execute)
     {
         $schemaIndices = $this->get_indices($tableName);
-        return $this->alterTableIndices($tableName, $indices, $schemaIndices, $execute);
+        return $this->alterTableIndices($tableName, $fieldDefs, $indices, $schemaIndices, $execute);
     }
 
     /**
      * Supplies the SQL commands that alters table to match the definition
      *
      * @param string $tableName Table name
+     * @param array $fieldDefs Field definitions from vardefs
      * @param array $indices Index definitions from vardefs
      * @param array $compareIndices Index definitions obtained from database
      * @param bool $execute Whether we want the queries executed instead of returned
-     *
      * @return string
      */
-    public function alterTableIndices($tableName, $indices, $compareIndices, $execute)
+    public function alterTableIndices($tableName, $fieldDefs, $indices, $compareIndices, $execute)
     {
+        $indices = $this->massageIndexDefs($fieldDefs, $indices);
         $take_action = false;
         $tableDefs = $this->get_columns($tableName);
         $sql = "/* INDEXES */\n";
@@ -2056,14 +2055,32 @@ protected function checkQuery($sql, $object_name = false)
 		self::$queryCount = 0;
 	}
 
-	/**
-	 * This function increments the global $sql_queries variable
-	 *
-	 * @param string $sql The query that was just run
-	 */
-	public function countQuery($sql = '')
-	{
+    /**
+     * @param int $amount
+     */
+    public static function increaseQueryLimit($amount = 1)
+    {
+        // For admin user, $queryLimit is 0 meaning infinite.
+        if (self::$queryLimit != 0) {
+            self::$queryLimit += $amount;
+        }
+    }
+
+    /**
+     * This function increments the global $sql_queries variable
+     *
+     * @param string $sql The query that was just run
+     */
+    public function countQuery($sql = '')
+    {
         global $current_user;
+        //Need to use a static flag to prevent possible loops
+        static $in_count_query;
+
+        if ($in_count_query) {
+            return;
+        }
+        $in_count_query = true;
         if (self::$queryLimit != 0 && ++self::$queryCount > self::$queryLimit
             && (empty($GLOBALS['current_user']) || !$current_user->isDeveloperForAnyModule())
         ) {
@@ -2073,8 +2090,9 @@ protected function checkQuery($sql, $object_name = false)
             }
             $resourceManager = ResourceManager::getInstance();
             $resourceManager->notifyObservers('ERR_QUERY_LIMIT');
-		}
-	}
+        }
+        $in_count_query = false;
+    }
 
 	/**
 	 * Pre-process string for quoting
@@ -2643,13 +2661,9 @@ protected function checkQuery($sql, $object_name = false)
                 $val = $data[$field];
             }
 
-
-            if (strlen($val) == 0) {
-                if (!empty($fieldDef['required']) && isset($fieldDef['default']) && strlen($fieldDef['default']) > 0) {
-                    $val = $fieldDef['default'];
-                } else {
-                    $val = null;
-                }
+            //Required fields should never be null (but they can be empty values)
+            if ($val === '' && $this->isNullable($fieldDef)) {
+                $val = null;
             }
 
             if ($fieldType == 'bool') {
@@ -2789,6 +2803,11 @@ protected function checkQuery($sql, $object_name = false)
      */
     public function getLikeSQL($name, $value)
     {
+        if ($this->supports('case_insensitive')) {
+            $name = 'UPPER(' . $name . ')';
+            $value = strtoupper($value);
+        }
+
         return $name . ' LIKE ' . $this->quoted($value);
     }
 
@@ -2811,95 +2830,74 @@ protected function checkQuery($sql, $object_name = false)
 	    return " WHERE $where";
 	}
 
-	/**
-	 * Outputs a correct string for the sql statement according to value
-	 *
-	 * @param  mixed $val
-	 * @param  array $fieldDef field definition
-	 * @return mixed
-	 */
-	public function massageValue($val, $fieldDef, $forPrepared = false)
-	{
-		$type = $this->getFieldType($fieldDef);
+    /**
+     * Helper function for massageValue used to abstract logic for empty values.
+     *
+     * @param array $fieldDef Field definition.
+     * @param bool $forPrepared Whether used in prepared statements or not.
+     * @return mixed
+     */
+    protected function massageEmptyValue($fieldDef, $forPrepared)
+    {
+        // Required fields are not supposed to have NULLs in database
+        if (!empty($fieldDef['required'])) {
+            return $this->emptyValue($this->getFieldType($fieldDef), $forPrepared);
+        } else {
+            return $forPrepared ? null : "NULL";
+        }
+    }
 
-		if(isset($this->type_class[$type])) {
-			// handle some known types
-			switch($this->type_class[$type]) {
-				case 'bool':
-					if (!empty($fieldDef['required']) && $val === ''){
-						if (isset($fieldDef['default'])){
-							return $fieldDef['default'];
-						}
-						return 0;
-					}
-					return intval($val);
-				case 'int':
-					if (!empty($fieldDef['required']) && $val === ''){
-						if (isset($fieldDef['default']) && is_numeric($fieldDef['default'])){
-							return $fieldDef['default'];
-						}
-						return 0;
-					}
-					return intval($val);
-				case 'bigint' :
-					$val = (float)$val;
-					if (!empty($fieldDef['required']) && $val == false){
-						if (isset($fieldDef['default']) && is_numeric($fieldDef['default'])){
-							return $fieldDef['default'];
-						}
-						return 0;
-					}
-					return $val;
-				case 'float':
-					if (!empty($fieldDef['required'])  && $val == ''){
-						if (isset($fieldDef['default']) && is_numeric($fieldDef['default'])){
-							return $fieldDef['default'];
-						}
-						return 0;
-					}
-					if (empty($val)){
-						return 0;
-					}
-					return floatval($val);
-				case 'time':
-				case 'date':
-					// empty date can't be '', so convert it to either NULL or empty date value
-					if($val == '') {
-						if (!empty($fieldDef['required'])) {
-							if (isset($fieldDef['default'])) {
-								return $fieldDef['default'];
-							}
-							return $this->emptyValue($type, $forPrepared);
-						}
-						return $forPrepared?null:"NULL";
-					}
-					break;
-			}
-		} else {
-		    if(!empty($val) && !empty($fieldDef['len']) && strlen($val) > $fieldDef['len']) {
-			    $val = $this->truncate($val, $fieldDef['len']);
-			}
-		}
+    /**
+     * Outputs a correct string for the sql statement according to value.
+     *
+     * @param mixed $val Value to massage.
+     * @param array $fieldDef Field definition.
+     * @param bool $forPrepared Whether used in prepared statements or not.
+     *
+     * @return mixed
+     */
+    public function massageValue($val, $fieldDef, $forPrepared = false)
+    {
+        $type = $this->getFieldType($fieldDef);
 
-		if ( is_null($val) ) {
-			if(!empty($fieldDef['required'])) {
-				if (isset($fieldDef['default']) && !empty($fieldDef['default'])){
-					return $fieldDef['default'];
-				}
-				return $this->emptyValue($type, $forPrepared);
-			} else {
-				return $forPrepared?null:"NULL";
-			}
-		}
-        if($type == "datetimecombo") {
+        if (isset($this->type_class[$type])) {
+            // handle some known types
+            switch ($this->type_class[$type]) {
+                case 'bool':
+                    return ($val === '' || is_null($val))
+                            ? $this->massageEmptyValue($fieldDef, $forPrepared) : intval($val);
+                case 'int':
+                    return ($val === '' || is_null($val))
+                            ? $this->massageEmptyValue($fieldDef, $forPrepared) : intval($val);
+                case 'bigint':
+                    $val = (float)$val;
+                    return ($val === false || is_null($val))
+                            ? $this->massageEmptyValue($fieldDef, $forPrepared) : $val;
+                case 'float':
+                    return ($val === '' || is_null($val))
+                            ? $this->massageEmptyValue($fieldDef, $forPrepared) : floatval($val);
+                case 'time':
+                case 'date':
+                    // empty date can't be '', so convert it to either NULL or empty date value
+                    if ($val === '' || is_null($val)) {
+                        return $this->massageEmptyValue($fieldDef, $forPrepared);
+                    }
+                    break;
+            }
+        } elseif (!empty($val) && !empty($fieldDef['len']) && strlen($val) > $fieldDef['len']) {
+            $val = $this->truncate($val, $fieldDef['len']);
+        }
+
+        if (is_null($val)) {
+            return $this->massageEmptyValue($fieldDef, $forPrepared);
+        }
+
+        if ($type == "datetimecombo") {
             $type = "datetime";
         }
-        if ($forPrepared) {
-            return $val;
-        } else {
-		    return $this->convert($this->quoted($val), $type);
-        }
-	}
+
+        return $forPrepared ? $val : $this->convert($this->quoted($val), $type);
+    }
 
 	/**
 	 * Massages the field defintions to fill in anything else the DB backend may add
@@ -3710,20 +3708,11 @@ protected function checkQuery($sql, $object_name = false)
         $fields = array_intersect_key($fields, (array) $bean);
 
         if (is_array($fields) and count($fields) > 0) {
-            foreach ($fields as $field=>$properties) {
+            foreach ($fields as $field => $vardefs) {
                 if (array_key_exists($field, $fetched_row)) {
                     $before_value = $fetched_row[$field];
                     $after_value=$bean->$field;
-                    if (isset($properties['type'])) {
-                        $field_type=$properties['type'];
-                    } else {
-                        if (isset($properties['dbType']))
-                            $field_type=$properties['dbType'];
-                        else if(isset($properties['data_type']))
-                            $field_type=$properties['data_type'];
-                        else
-                            $field_type=$properties['dbtype'];
-                    }
+                    $field_type = $this->getFieldType($vardefs);
                 }
 
                 //Because of bug #25078(sqlserver haven't 'date' type, trim extra "00:00:00" when insert into *_cstm table).
@@ -3990,6 +3979,7 @@ protected function checkQuery($sql, $object_name = false)
 	{
 		$i = 0;
 		$order_by_arr = array();
+        $returnValue = '';
 		foreach ($values as $key => $value) {
 			if($key == '') {
 				$order_by_arr[] = "WHEN ($order_by='' OR $order_by IS NULL) THEN $i";
@@ -3997,25 +3987,40 @@ protected function checkQuery($sql, $object_name = false)
 				$order_by_arr[] = "WHEN $order_by=".$this->quoted($key)." THEN $i";
 			}
 			$i++;
-		}
-		return "CASE ".implode("\n", $order_by_arr)." ELSE $i END $order_dir\n";
+
+        }
+
+        if (count($order_by_arr) > 0){
+            $returnValue = "CASE ".implode("\n", $order_by_arr)." ELSE $i END $order_dir\n";
+        }
+
+        return $returnValue;
 	}
 
-	/**
-	 * Return representation of an empty value depending on type
-	 * The value is fully quoted, converted, etc.
-	 * @param string $type
-	 * @param bool $forPrepared Is it going to be used for prepared statement?
-     * @return mixed Empty value
+    /**
+     * Return representation of an empty value depending on type.
+     * The value is fully quoted, converted, etc.
+     *
+     * @param string $type Type of value.
+     * @param bool $forPrepared Whether used in prepared statements or not.
+     * @return mixed Empty value.
      */
-	public function emptyValue($type, $forPrepared = false)
-	{
-		if(isset($this->type_class[$type]) && ($this->type_class[$type] == 'bool' || $this->type_class[$type] == 'int' || $this->type_class[$type] == 'float')) {
-			return 0;
-		}
+    public function emptyValue($type, $forPrepared = false)
+    {
+        if (isset($this->type_class[$type])) {
+            switch ($this->type_class[$type]) {
+                case 'bool':
+                case 'int':
+                case 'float':
+                case 'bigint':
+                    return 0;
+                case 'date':
+                    return $forPrepared ? null : "NULL";
+            }
+        }
 
-		return $forPrepared?"":"''";
-	}
+        return $forPrepared ? "" : "''";
+    }
 
 	/**
 	 * List of available collation settings
@@ -5109,4 +5114,20 @@ protected function checkQuery($sql, $object_name = false)
         'XMLCAST' => true, 'XMLEXISTS' => true, 'XMLNAMESPACES' => true, 'XMLTYPE' => true,
         'XOR' => true, 'YEAR' => true, 'YEARS' => true, 'YEAR_MONTH' => true, 'ZEROFILL' => true,
         'ZEROFILLADD' => true, 'ZONE' => true);
+
+    /**
+     * Adapts indices for a concrete database
+     *
+     * @param $fieldDefs
+     * @param $indices
+     * @return array
+     */
+    protected function massageIndexDefs($fieldDefs, $indices)
+    {
+        if (!$this->isFieldArray($indices)) {
+            $indices = array($indices);
+        }
+
+        return $indices;
+    }
 }

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -144,7 +144,7 @@ $mod_strings = array (
   'LBL_DATE_ENTERED' => '입력된 날짜',
   'LBL_DELETED' => '삭제 완료',
   'LBL_EMAIL_ADDRESS'=>'이메일 주소',
-  'LBL_CONTACTS_SYNC' => '연락처목록',
+  'LBL_CONTACTS_SYNC' => '연락처',
 );
 
 

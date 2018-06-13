@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -197,8 +197,12 @@
      * @protected
      */
     _getChildFields: function() {
+        if (!_.isEmpty(this.fields)) {
+            return this.fields;
+        }
+
         var metaFields = this._getChildFieldsMeta();
-        if (_.isEmpty(this.fields) && metaFields) {
+        if (metaFields) {
             _.each(metaFields, function(fieldDef) {
                 var field = app.view.createField({
                     def: fieldDef,
@@ -299,7 +303,6 @@
             } else {
                 field.action = name;
             }
-            field.setViewName(name);
         });
 
         //The _super 'setMode' would render all child fields.
@@ -321,6 +324,19 @@
      * Keep empty because you cannot set a value of a type `fieldset`.
      */
     bindDataChange: function() {
+        var removeNoData = _.debounce(function() {
+            if (this.disposed) {
+                return;
+            }
+
+            if (this.action === 'nodata') {
+                this.setMode('detail');
+            }
+        }, 100);
+
+        _.each(this._getChildFields(), function(field) {
+            this.model.on('change:' + field.name, removeNoData, this);
+        }, this);
     },
 
     /**

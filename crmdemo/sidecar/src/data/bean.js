@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -31,7 +31,7 @@
 
     /**
      * Add doValidate method to Backbone.Model so it won't fail when calling doValidate
-     * @param {Array/Object} fields A hash of field definitions or array of field names to validate.
+     * @param {Array|Object} fields A hash of field definitions or array of field names to validate.
      * @param {Function} callback Function called with isValid flag once the validation is complete
      */
     Backbone.Model.prototype.doValidate = function(fields, callback) {
@@ -44,7 +44,6 @@
          * to be overridden.
          *
          * @inheritdoc
-         * @constructor
          * @param {Object} attributes
          * @param {Object} options
          */
@@ -88,7 +87,7 @@
 
             //Clone the fields to allow dynamic changes to vardefs per bean instance
             if (this.fields) {
-                this.fields = app.metadata.copy(this.fields, { bean: this });
+                this.fields = app.utils.deepCopy(this.fields);
             }
 
             this.addValidationTask('sidecar', _.bind(this._doValidate, this));
@@ -137,55 +136,53 @@
          */
         _bindEvents: function() {
             this.on('sync', function() {
-                this.setSyncedAttributes(this.attributes);
                 this._checkAcl();
+                this.setSyncedAttributes(this.attributes);
             }, this);
         },
 
         /**
-         * Checks if the `_acl` attribute has changed from its previous value on
-         * {@link Data.Bean the model}, and triggers the
-         * `acl:change:<fieldname>` event on all the fields whose ACLs have
-         * changed. Also triggers the `acl:change` event if one field had ACL
-         * changes. All events are triggered on {@link Data.Bean the model}.
+         * Checks if the `_acl` attribute has changed from its synced value on
+         * {@link Data.Bean the model}, and triggers the `acl:change` event if
+         * one field had ACL changes. All events are triggered on
+         * {@link Data.Bean the model}.
          *
          * @private
          */
         _checkAcl: function() {
-            var _acl = this.get('_acl');
-            var acls = _acl && _acl.fields || {};
+            var changedFieldAcls = this._checkFieldAcls();
 
-            /**
-             * Hash of the previous field-level ACL changes.
-             *
-             * @property {Object}
-             */
-            this._prevAcls = this._prevAcls || {};
-
-            // Get the hash of fields with potential ACL changes.
-            var aclDiff = _.changed(acls, this._prevAcls);
-            // Set the old ACLs to the new ACLs.
-            this._prevAcls = acls;
-
-            if (!aclDiff) {
-                return;
+            if (_.size(changedFieldAcls) || !_.isEqual(
+                _.omit(this.get('_acl'), 'fields'),
+                _.omit(this.getSynced('_acl'), 'fields')
+            )) {
+                this.trigger('acl:change', changedFieldAcls);
             }
+        },
 
-            var aclChange = false;
-            _.each(aclDiff, function(changed, field) {
-                if (changed) {
-                    aclChange = true;
-                    this.trigger('acl:change:' + field);
-                } else {
-                    // We don't care about fields that didn't have ACL
-                    // changes.
-                    delete aclDiff[field];
+        /**
+         * Triggers the `acl:change:<fieldname>` event on all the fields whose
+         * ACLs have changed. All events are triggered on
+         * {@link Data.Bean the model}.
+         *
+         * @private
+         * @return {Object} The hash of fields that had ACL changes.
+         */
+        _checkFieldAcls: function () {
+            var changedFieldAcls = {};
+            var fieldsProp = _.property('fields');
+            var syncedFieldAcls = fieldsProp(this.getSynced('_acl')) || {};
+            var fieldAcls = fieldsProp(this.get('_acl')) || {};
+            var fields = _.extend({}, syncedFieldAcls, fieldAcls);
+
+            _.each(fields, function (field, fieldName) {
+                if (!_.isEqual(syncedFieldAcls[fieldName], fieldAcls[fieldName])) {
+                    this.trigger('acl:change:' + fieldName);
+                    changedFieldAcls[fieldName] = true;
                 }
             }, this);
 
-            if (aclChange) {
-                this.trigger('acl:change', aclDiff);
-            }
+            return changedFieldAcls;
         },
 
         /**
@@ -310,7 +307,7 @@
         /**
          * Runs sidecar validation on fields.
          *
-         * @param {Array/Object} fields A hash of field definitions or array of field names to validate.
+         * @param {Array|Object} fields A hash of field definitions or array of field names to validate.
          * @param {Object} errors validation errors object.
          * @param {Function} callback Async.js waterfall callback
          *
@@ -654,97 +651,6 @@
         },
 
         /**
-         * Sets the hash of default values on the model.
-         *
-         * Default values will be ignored when checking if the model
-         * `has changed`.
-         *
-         * @param {Object} attributes The hash of key/value pairs.
-         *
-         * @deprecated since 7.6. Will be removed in 7.8.
-         *  Use {link Data.Bean#setDefault instead}. Note that unlike the
-         *  previous behavior, {link Data.Bean#setDefault instead} takes care
-         *  of filling undefined attributes.
-         */
-        setDefaultAttributes: function(attributes) {
-            app.logger.warn('Data.Bean.setDefaultAttributes is deprecated. ' +
-                'Please update your code to use Data.Bean.setDefault');
-            this._defaults = {};
-            this.setDefault(attributes);
-        },
-
-        /**
-         * Sets a default value on the model.
-         *
-         * Default values will be ignored when checking if the model
-         * `has changed`.
-         *
-         * @param {string} key The attribute key.
-         * @param {Mixed} value The default value.
-         *
-         * @deprecated since 7.6. Will be removed in 7.8.
-         *  Use {link Data.Bean#setDefault instead}. Note that unlike the
-         *  previous behavior, {link Data.Bean#setDefault instead} takes care
-         *  of filling undefined attributes.
-         */
-        setDefaultAttribute: function(key, value) {
-            app.logger.warn('Data.Bean.setDefaultAttribute is deprecated. ' +
-                'Please update your code to use Data.Bean.setDefault');
-            this.setDefault(key, value);
-        },
-
-        /**
-         * Removes the default value of an attribute.
-         *
-         * @param {string} key The attribute key.
-         *
-         * @deprecated since 7.6. Will be removed in 7.8. We consider that it
-         *  is a bad practice to remove default values. Please update your code
-         *  to stop using it.
-         */
-        removeDefaultAttribute: function(key) {
-            app.logger.warn('Data.Bean.removeDefaultAttribute is deprecated. ' +
-                'We consider it as a bad practice so the method will be ' +
-                'removed in 7.8. Please update your code to stop using it.');
-            if (this._defaults) {
-                // do not delete from _defaults on the prototype
-                if (!this.hasOwnProperty('_defaults')) {
-                    this._defaults = _.clone(this._defaults);
-                }
-                delete this._defaults[key];
-            }
-        },
-
-        /**
-         * Gets a default value.
-         *
-         * @param {string} The attribute key.
-         * @return {Mixed} The default value.
-         *
-         * @deprecated since 7.6. Will be removed in 7.8.
-         *  Use {link Data.Bean#getDefault instead}.
-         */
-        getDefaultAttribute: function(key) {
-            app.logger.warn('Data.Bean.getDefaultAttribute is deprecated. ' +
-                'Please update your code to use Data.Bean.getDefault');
-            return this.getDefault(key);
-        },
-
-        /**
-         * Gets all the default values.
-         *
-         * @return {Object} The hash of default values.
-         *
-         * @deprecated since 7.6. Will be removed in 7.8.
-         *  Use {link Data.Bean#getDefault instead}.
-         */
-        getDefaultAttributes: function() {
-            app.logger.warn('Data.Bean.getDefaultAttributes is deprecated. ' +
-                'Please update your code to use Data.Bean.getDefault');
-            return this.getDefault();
-        },
-
-        /**
          * Gets the default values (one or many).
          *
          * @param {string} [key] The name of the attribute.
@@ -837,6 +743,15 @@
                 return this._persistentOptions[key];
             }
             return this._persistentOptions;
+        },
+
+        /**
+         * Return all fields of a given type.
+         * @param {string} type The type of the field to search for.
+         * @return {Array} List of fields filtered by the given type.
+         */
+        fieldsOfType: function(typeOfField) {
+            return _.where(this.fields, {type: typeOfField});
         }
     }), false);
 

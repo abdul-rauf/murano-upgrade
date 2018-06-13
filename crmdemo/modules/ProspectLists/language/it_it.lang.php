@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -17,7 +17,7 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Liste Obiettivi: Home',
   'LBL_SEARCH_FORM_TITLE' => 'Cerca Liste Obiettivi',
   'LBL_LIST_FORM_TITLE' => 'Liste Obiettivi',
-  'LBL_PROSPECT_LIST_NAME' => 'Lista Obiettivo:',
+  'LBL_PROSPECT_LIST_NAME' => 'Elenco obiettivi:',
   'LBL_NAME' => 'Nome',
   'LBL_ENTRIES' => 'Voci Totali',
   'LBL_LIST_PROSPECT_LIST_NAME' => 'Lista Obiettivi',
@@ -68,7 +68,7 @@ $mod_strings = array (
     'LBL_HELP_RECORDS' => 'Una {{module_name}} consiste in un insieme di soggetti o aziende che vuoi includere o escludere in una {{campaigns_singular_module}} massiva di marketing. {{plural_module_name}} può contenere qualsiasi numero e combinazione di Obiettivi, {{contacts_module}}, {{leads_module}}, Utenti e {{accounts_module}}. Gli obiettivi possono essere raggruppati in una {{module_name}} in accordo con una serie di criteri predeterminati come età del gruppo, zona geografica o abitudini di spesa. {{plural_module_name}} sono utilizzate nelle email di {{campaigns_module}} massive di marketing che possono essere configurate nel modulo {{campaigns_module}}.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Una {{module_name}} consiste in un insieme di soggetti o aziende che vuoi includere o escludere in una {{campaigns_singular_module}} massiva di marketing.  - Modificare i campi di questi records cliccando il singolo campo o il pulsante Modifica. - Visualizza o modifica i link agli altri records nei sottopannelli, inclusi i destinatari delle {{campaigns_singular_module}}, agendo sul pulsante "Visualizza Dati" in basso a sinistra. - Creare e visualizzare i commenti degli utenti e la cronologia delle modifiche dei records nel modulo {{activitystream_singular_module}} agendo sul pulsante "Activity Stream" in basso a sinistra. - Seguire o impostare come preferito questo record usando le icone alla destra del nome del record. - Azioni aggiuntive sono disponibili nel menù a tendina delle Azioni alla destra del pulsante Modifica.',
+    'LBL_HELP_RECORD' => 'Un {{module_name}} comprende un insieme di soggetti o aziende che si desidera includere o escludere in una {{campaigns_singular_module}} di marketing di massa. - Modificare i campi di questo record facendo clic su ciascuno di essi o sul pulsante Modifica. - Visualizzare o modificare i collegamenti agli altri record nei sottopannelli, inclusi i destinatari delle {{campaigns_singular_module}}, spostando la visualizzazione del riquadro in basso a sinistra su "Vista dati". - Creare e visualizzare i commenti degli utenti e registrare la cronologia delle modifiche nel {{activitystream_singular_module}} spostando la visualizzazione del riquadro in basso a sinistra su "Activity Stream". - Seguire o impostare come preferito questo record usando le icone alla destra del nome del record. - Nel menu a discesa Azioni, alla destra del pulsante Modifica, sono disponibili azioni aggiuntive.',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => 'Una {{module_name}} consiste in un insieme di soggetti o aziende che vuoi includere o escludere in una {{campaigns_singular_module}} campagna di marketing di massa.

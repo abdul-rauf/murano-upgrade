@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -32,12 +32,12 @@ $mod_strings = array (
 	'LBL_TEAM_ID' => 'Zespół:',
 	'LBL_NAME' => 'Nazwa:',
 	'LBL_STATUS' => 'Status:',
-	'LBL_DATE_DUE' => 'Data zakończenia:',
-	'LBL_TIME_DUE' => 'Czas trwania:',
-    'LBL_RESOURCE' => 'Źródło:',
-    'LBL_PREDECESSORS' => 'Poprzednik:',
-	'LBL_DATE_START' => 'Data rozpoczęcia',
-    'LBL_DATE_FINISH' => 'Data zakończenia',    
+	'LBL_DATE_DUE' => 'Data wymagalności:',
+	'LBL_TIME_DUE' => 'Godzina zakończenia:',
+    'LBL_RESOURCE' => 'Zasób:',
+    'LBL_PREDECESSORS' => 'Poprzednicy:',
+	'LBL_DATE_START' => 'Data rozpoczęcia:',
+    'LBL_DATE_FINISH' => 'Data zakończenia:',    
 	'LBL_TIME_START' => 'Czas rozpoczęcia:',
     'LBL_TIME_FINISH' => 'Czas zakończenia:',
     'LBL_DURATION' => 'Czas trwania:',
@@ -45,7 +45,7 @@ $mod_strings = array (
     'LBL_ACTUAL_DURATION' => 'Rzeczywisty czas trwania:',
 	'LBL_PARENT_ID' => 'Projekt:',
     'LBL_PARENT_TASK_ID' => 'ID nadrzędnego zadania:',    
-    'LBL_PERCENT_COMPLETE' => '% realizacji:',
+    'LBL_PERCENT_COMPLETE' => '% ukończenia:',
 	'LBL_PRIORITY' => 'Priorytet:',
 	'LBL_DESCRIPTION' => 'Opis:',
 	'LBL_ORDER_NUMBER' => 'Kolejność:',
@@ -62,7 +62,7 @@ $mod_strings = array (
 	'LBL_LIST_NAME' => 'Nazwa',
     'LBL_LIST_DAYS' => 'dni',
 	'LBL_LIST_PARENT_NAME' => 'Projekt',
-	'LBL_LIST_PERCENT_COMPLETE' => '% realizacji:',
+	'LBL_LIST_PERCENT_COMPLETE' => '% ukończenia',
 	'LBL_LIST_STATUS' => 'Status',
     'LBL_LIST_DURATION' => 'Czas trwania',
     'LBL_LIST_ACTUAL_DURATION' => 'Rzeczywisty czas trwania',
@@ -92,7 +92,7 @@ $mod_strings = array (
     'LBL_ASSIGNED_USER_NAME' => 'Przydzielono do',
     'LBL_PARENT_NAME' => 'Nazwa projektu',
     'LBL_LIST_PROJECT_NAME' => 'Projekty',
-	'LBL_EDITLAYOUT' => 'Edytuj widok' /*for 508 compliance fix*/,
+	'LBL_EDITLAYOUT' => 'Edytuj układ' /*for 508 compliance fix*/,
         'LBL_RESOURCE_ID' => 'ID źródła',
 
 );

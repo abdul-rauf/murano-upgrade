@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Remover ficheiros da ferramenta de diagnósticos',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Remover ficheiros PDF temporários',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Atualizar tabela tracker_sessions',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Correr os Lembretes de Emails a Enviar',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Executar as notificações do lembrete por E-mail',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Limpar a Fila de Trabalhos',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Criar Períodos de Tempo Futuros',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Atualizar artigos KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicar artigos aprovados e Artigos KB expirados.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Processar tarefa de processo do autor',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Tarefa calendarizada do Advanced Workflow',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervalo:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Actualizar Tarefas',
 'LBL_POLLMONITOREDINBOXES' => 'Verificar Contas de Entrada de E-mail',
 'LBL_PERFORMFULLFTSINDEX' => 'Sistema de Indexação de Pesquisa de Texto Completo',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Remover ficheiros PDF temporários',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publicar artigos aprovados e Artigos KB expirados.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Calendarizador da fila do Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Remover ficheiros da ferramenta de diagnósticos',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Remover ficheiros temporários',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Executar toda a noite campanhas de e-mail massivo',
 'LBL_ASYNCMASSUPDATE' => 'Realizar actualizações em massa de forma assíncrona',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Actualizar Tabelas de Sessões de Trackers',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Criar Períodos de Tempo Futuros',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'Correr os Lembretes de Emails a Enviar',
+'LBL_SENDEMAILREMINDERS'=> 'Executar Envio de lembretes por E-mail',
 'LBL_CLEANJOBQUEUE' => 'Limpar a Fila de Trabalhos',
 'LBL_CLEANOLDRECORDLISTS' => 'Limpar Listas de Registos Antigos',
 );

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -13,14 +13,14 @@
 $mod_strings = array (
 
     //module strings.
-    'LBL_MODULE_NAME' => 'Arkusze robocze prognoz',
-    'LBL_MODULE_NAME_SINGULAR' => 'Arkusz roboczy prognoz',
+    'LBL_MODULE_NAME' => 'Arkusze prognoz',
+    'LBL_MODULE_NAME_SINGULAR' => 'Arkusz prognoz',
     'LNK_NEW_OPPORTUNITY' => 'Utwórz szansę',
-    'LBL_MODULE_TITLE' => 'Arkusze robocze prognoz',
+    'LBL_MODULE_TITLE' => 'Arkusze prognoz',
     'LBL_LIST_FORM_TITLE' => 'Przeprowadzone prognozy',
-    'LNK_UPD_FORECAST' => 'Arkusz roboczy prognozy',
-    'LNK_QUOTA' => 'Kwoty',
-    'LNK_FORECAST_LIST' => 'Historia prognoz',
+    'LNK_UPD_FORECAST' => 'Arkusz prognoz',
+    'LNK_QUOTA' => 'Wyświetl targety',
+    'LNK_FORECAST_LIST' => 'Wyświetl historię prognoz',
     'LBL_FORECAST_HISTORY' => 'Prognozy: Historia',
     'LBL_FORECAST_HISTORY_TITLE' => 'Historia',
     'LBL_ACCOUNT_NAME' => 'Nazwa kontrahenta:',
@@ -39,8 +39,8 @@ $mod_strings = array (
     'LBL_FORECAST_ID' => 'ID prognozy',
     'LBL_FORECAST_TIME_ID' => 'ID przedziału czasu',
     'LBL_FORECAST_TYPE' => 'Typ prognozy',
-    'LBL_FORECAST_OPP_COUNT' => 'Całkowita wartość szans sprzedażowych',
-    'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Wartość szans sprzedażowych',
+    'LBL_FORECAST_OPP_COUNT' => 'Łączna liczba szans',
+    'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Liczba szans sprzedażowych',
     'LBL_FORECAST_OPP_WEIGH'=> 'Ważona kwota',
     'LBL_FORECAST_USER' => 'Użytkownik',
     'LBL_DATE_COMMITTED'=> 'Data wykonania',
@@ -48,23 +48,23 @@ $mod_strings = array (
     'LBL_DATE_MODIFIED' => 'Data modyfikacji',
     'LBL_CREATED_BY' => 'Utworzono przez',
     'LBL_DELETED' => 'Usunięto',
-    'LBL_MODIFIED_USER_ID'=>'Zmodyfikowane przez',
+    'LBL_MODIFIED_USER_ID'=>'Zmodyfikowano przez',
     'LBL_WK_VERSION' => 'Wersja',
-    'LBL_WK_REVISION' => 'Wydanie',
+    'LBL_WK_REVISION' => 'Wersja',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Przedział czasu:',
     'LBL_QC_OPPORTUNITY_COUNT' => 'Liczba szans:',
     'LBL_QC_WEIGHT_VALUE' => 'Ważona kwota:',
-    'LBL_QC_COMMIT_VALUE' => 'Zatwierdź kwotę:',
+    'LBL_QC_COMMIT_VALUE' => 'Zadeklaruj kwotę:',
     'LBL_QC_COMMIT_BUTTON' => 'Wykonaj',
-    'LBL_QC_WORKSHEET_BUTTON' => 'Arkusz roboczy',
-    'LBL_QC_ROLL_COMMIT_VALUE' => 'Wykonaj prognozę:',
+    'LBL_QC_WORKSHEET_BUTTON' => 'Arkusz',
+    'LBL_QC_ROLL_COMMIT_VALUE' => 'Rozwinięcie — zadeklarowana kwota:',
     'LBL_QC_DIRECT_FORECAST' => 'Moje bezpośrednie prognozy:',
     'LBL_QC_ROLLUP_FORECAST' => 'Moje grupowe prognozy:',
     'LBL_QC_UPCOMING_FORECASTS' => 'Moje prognozy',
     'LBL_QC_LAST_DATE_COMMITTED' => 'Data ostatniego wykonania:',
-    'LBL_QC_LAST_COMMIT_VALUE' => 'Ostatnia wykonana kwota:',
+    'LBL_QC_LAST_COMMIT_VALUE' => 'Ostatnia zadeklarowana kwota:',
     'LBL_QC_HEADER_DELIM'=> 'Do',
 
     //opportunity worksheet list view labels
@@ -72,21 +72,21 @@ $mod_strings = array (
     'LBL_OW_ACCOUNTNAME' => "Kontrahent",
     'LBL_OW_REVENUE' => "Kwota",
     'LBL_OW_WEIGHTED' => "Ważona kwota",
-    'LBL_OW_MODULE_TITLE'=> 'Arkusz roboczy szansy',
+    'LBL_OW_MODULE_TITLE'=> 'Arkusz szansy',
     'LBL_OW_PROBABILITY'=>'Prawdopodobieństwo',
     'LBL_OW_NEXT_STEP'=>'Następny krok',
     'LBL_OW_DESCRIPTION'=>'Opis',
     'LBL_OW_TYPE'=>'Typ',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Zwierzchnik',
+    'LBL_FDR_USER_NAME'=>'Raport bezpośredni',
     'LBL_FDR_OPPORTUNITIES'=>'Prognozowane szanse:',
     'LBL_FDR_WEIGH'=>'Ważona kwota szans:',
     'LBL_FDR_COMMIT'=>'Zadeklarowana kwota',
     'LBL_FDR_DATE_COMMIT'=>'Data wykonania',
 
     //detail view.
-    'LBL_DV_HEADER' => 'Prognozy: Akrusz roboczy',
+    'LBL_DV_HEADER' => 'Prognozy: arkusz',
     'LBL_DV_MY_FORECASTS' => 'Moje prognozy',
     'LBL_DV_MY_TEAM' => "Prognozy mojego zespołu" ,
     'LBL_DV_TIMEPERIODS' => 'Przedziały czasu:',
@@ -96,11 +96,11 @@ $mod_strings = array (
     'LBL_SEARCH_LABEL' => 'Wybierz',
     'LBL_COMMIT_HEADER' => 'Wykonaj prognozę',
     'LBL_DV_LAST_COMMIT_DATE' =>'Data ostatniego wykonania:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Ostatnia zadeklarowana kwota:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Ostatnie zadeklarowane kwoty:',
     'LBL_DV_FORECAST_ROLLUP' => 'Rozwinięcie prognozy',
     'LBL_DV_TIMEPERIOD' => 'Przedział czasu:',
     'LBL_DV_TIMPERIOD_DATES' => 'Zakres dat:',
-    'LBL_LOADING_COMMIT_HISTORY' => 'Ładowanie historii dodawania...',
+    'LBL_LOADING_COMMIT_HISTORY' => 'Ładowanie historii wykonania...',
 
     //list view
     'LBL_LV_TIMPERIOD'=> 'Przedział czasu',
@@ -112,20 +112,20 @@ $mod_strings = array (
     'LBL_LV_WEIGH'=> 'Ważona kwota',
     'LBL_LV_COMMIT'=> 'Zadeklarowana kwota',
 
-    'LBL_COMMIT_NOTE'=> 'Wprowadź kwoty, które chcesz dodać dla wybranego przedziału czasu:',
+    'LBL_COMMIT_NOTE'=> 'Wprowadź kwoty, które chcesz zadeklarować dla wybranego przedziału czasu:',
 
-    'LBL_COMMIT_MESSAGE'=> 'Czy chcesz dodać te kwoty?',
-    'ERR_FORECAST_AMOUNT' => 'Zadeklarowanie kwoty jest wymagane. Kwota powinna być liczbą.',
+    'LBL_COMMIT_MESSAGE'=> 'Czy chcesz zadeklarować te kwoty?',
+    'ERR_FORECAST_AMOUNT' => 'Zadeklarowana kwota jest wymagana i powinna ona być liczbą.',
 
     // js error strings
     'LBL_FC_START_DATE' => 'Data rozpoczęcia',
-    'LBL_FC_USER' => 'Zaplanuj dla',
+    'LBL_FC_USER' => 'Harmonogram dla',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Nie ma aktywnych przedziałów czasowych dla prognozowania.',
+    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Brak aktywnych przedziałów czasowych dla prognozowania.',
     'LBL_FDR_ADJ_AMOUNT'=>'Skorygowana kwota',
-    'LBL_SAVE_WOKSHEET'=>'Zapisz arkusz roboczy',
-    'LBL_RESET_WOKSHEET'=>'Resetuj arkusz roboczy',
-    'LBL_SHOW_CHART'=>'Zobacz wykres',
+    'LBL_SAVE_WOKSHEET'=>'Zapisz arkusz',
+    'LBL_RESET_WOKSHEET'=>'Resetuj arkusz',
+    'LBL_SHOW_CHART'=>'Wyświetl wykres',
     'LBL_RESET_CHECK'=>'Wszystkie dane arkuszy dla wybranych przedziałów czasowych i zalogowanych użytkowników zostaną usunięte. Kontynuować?',
 
     'LBL_CURRENCY' => 'Waluta',
@@ -148,7 +148,7 @@ $mod_strings = array (
     'LBL_LIST_PRICE' => 'Cena katalogowa',
     'LBL_COST_PRICE' => 'Cena kosztów własnych',
     'LBL_DISCOUNT_PRICE' => 'Cena jednostkowa',
-    'LBL_TOTAL_DISCOUNT_AMOUNT' => 'Rabat od kwoty całkowitej',
+    'LBL_TOTAL_DISCOUNT_AMOUNT' => 'Całkowita kwota rabatu',
     'LBL_QUANTITY' => 'Ilość',
     'LBL_CATEGORY_NAME' => 'Kategoria',
     'LBL_CALCULATED_LINE_ITEM_AMOUNT' => 'Łączna kwota pozycji',
@@ -158,6 +158,6 @@ $mod_strings = array (
 
     'LBL_EDITABLE_INVALID' => 'Nieprawidłowa wartość dla {{field_name}}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Wartość musi zawierać się między {{min}} i {{max}}',
-    'LBL_MANAGER_NOTIFY' => 'Nestępująca {0} {1} nie została wzięta pod uwagę podczas ostatniego wykonania, po tym jak została wzięta pod uwagę poprzednim razem',
+    'LBL_MANAGER_NOTIFY' => 'Następująca {0} {1} nie została wzięta pod uwagę podczas ostatniego wykonania, po tym jak została wzięta pod uwagę poprzednim razem',
     'LBL_MANAGER_NOTIFY_NAME' => '{0} — zmiana zaangażowania'
 );

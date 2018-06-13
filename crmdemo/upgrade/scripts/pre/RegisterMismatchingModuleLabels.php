@@ -5,13 +5,15 @@ if (!defined('sugarEntry') || !sugarEntry) {
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 /**
  * Store mismatching module labels before the instance has been upgraded
@@ -81,7 +83,7 @@ class SugarUpgradeRegisterMismatchingModuleLabels extends UpgradeScript
         }
 
         $mod_strings = array();
-        include clean_path("modules/{$module}/language/{$language}.lang.php");
+        include FileLoader::validateFilePath("modules/{$module}/language/{$language}.lang.php");
 
         // check if either of the label in module list and LBL_MODULE_NAME is customized
         if ((empty($default_app_list_strings['moduleList'][$module])

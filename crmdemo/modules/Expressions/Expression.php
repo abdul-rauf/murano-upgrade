@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -142,14 +142,6 @@ class Expression extends SugarBean {
 	// This is the list of fields that are required
 	var $required_fields =  array();
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Expression()
-    {
-        self::__construct();
-    }
-
 	public function __construct() {
 		parent::__construct();
 
@@ -259,7 +251,7 @@ class Expression extends SugarBean {
 					$temp_module = BeanFactory::getBean($dom_name);
 					$temp_module->call_vardef_handler("rel_filter");
 
-                    $select_array = $temp_module->vardef_handler->get_vardef_array(true, true, false, false);
+                    $select_array = $temp_module->vardef_handler->get_vardef_array(true, true, false, false, true);
 			}
 			else if($meta_filter_name == "singular"){
 				$select_array = convert_module_to_singular(get_module_map(false));

@@ -33,7 +33,7 @@ require_once('modules/A1234_murano/A1234_murano_sugar.php');
 class A1234_murano extends A1234_murano_sugar {
 	
 	function A1234_murano(){	
-		parent::A1234_murano_sugar();
+		parent::__construct();
 	}
 	
 }

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,6 +20,7 @@ global $timedate;
  
 $mod_strings = array (
     'LBL_GOOD_FILE' => 'Επιτυχής Εισαγωγή Αναγνωσμένου Αρχείου',
+    'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Το αρχείο που καταχωρήσατε συμμετέχει σε μια διαδικασία και δεν μπορεί να τροποποιηθεί επειδή ορισμένα πεδία είναι κλειδωμένα για επεξεργασία από τη διαδικασία.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'γραμμές δεν εισήχθησαν, λόγω λάθους',
     'LBL_UPDATE_SUCCESSFULLY' => 'οι εγγραφές ενημερώθηκαν με επιτυχία',
     'LBL_SUCCESSFULLY_IMPORTED' => 'δημιουργήθηκαν εγγραφές',
@@ -203,7 +204,7 @@ $mod_strings = array (
     'LBL_ACCOUNTS_NOTE_1' => 'Τα πεδία που λήγουν σε Διεύθυνση, Οδός 2 και σε Διεύθυνση, Οδός 3 συνδέονται μαζί με το κύριο Πεδίο Διεύθυνση, Οδός όταν εισάγονται στη βάση δεδομένων.',
     'LBL_REQUIRED_NOTE' => 'Υποχρεωτικό Πεδίο(α):',
     'LBL_IMPORT_NOW' => 'Εισαγωγή Τώρα',
-    'LBL_' => ' ',
+    'LBL_' => '',
     'LBL_CANNOT_OPEN' => 'Δεν μπορεί να ανοίξει το εισαγόμενο αρχείο για την ανάγνωση',
     'LBL_NOT_SAME_NUMBER' => 'Δεν ήταν ίδιος ο αριθμός πεδίων ανά γραμμή στο αρχείο σας',
     'LBL_NO_LINES' => 'Δεν ανιχνεύθηκαν σειρές στο αρχείο εισαγωγής σας. Παρακαλούμε βεβαιωθείτε ότι δεν υπάρχουν κενές σειρές στο αρχείο σας και προσπαθήστε ξανά.',

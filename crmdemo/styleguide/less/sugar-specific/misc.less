@@ -42,9 +42,7 @@ dl.list {
 }
 
 .more, .less {
-  border: none !important;
-  padding-left: 0;
-  margin: 0;
+  margin-left: 0;
   &.padded {
     padding: 8px 6px;
     display: inline-block;
@@ -64,15 +62,20 @@ dl.list {
   }
 }
 
-.main-content .more.padded.btn-link {
-  display: inline-block;
-  width: 100%;
-  margin-left: 0;
-  padding-left: 15px;
-  text-align: left;
-  &:hover {
-    text-decoration: none;
-    background: @dropdownLinkBackgroundHover;
+.main-content {
+  > div > div > .block-footer {
+    border-top: none;
+  }
+  .more.padded.btn-link {
+    display: inline-block;
+    width: 100%;
+    margin-left: 0;
+    padding-left: 15px;
+    text-align: left;
+    &:hover {
+      text-decoration: none;
+      background: @dropdownLinkBackgroundHover;
+    }
   }
 }
 
@@ -122,6 +125,7 @@ img.pull-left {
 .ui-draggable-dragging {
   @shadow: 0 2px 10px rgba(0,0,0,.1), 0 0 10px rgba(0,0,0,.4), -1px -1px 20px rgba(0,0,0,.1), 1px 1px 20px rgba(0,0,0,.1);
   .box-shadow(@shadow);
+  z-index: 2;
 }
 
 .titlebar {
@@ -466,6 +470,19 @@ hr.soften {
   padding-top: 36px;
 }
 
+.controls.has-refresh {
+  &.btn-group-fit {
+    &.controls-two {
+      padding-right: 93px;
+    }
+    .btn-group {
+      &.refresh {
+        right: 60px;
+      }
+    }
+  }
+}
+
 .feedback.popover {
   background: @white;
   width: 370px;
@@ -526,5 +543,32 @@ hr.soften {
     font-size: 11px;
     color: @grayLight;
     text-align: justify;
+  }
+}
+
+// RTL and left-aligned tooltips cause problems re-arranging words
+.force-ltr {
+  direction: ltr;
+}
+.force-rtl {
+  direction: rtl;
+}
+// Bidirectional fix
+.bidi-override {
+  unicode-bidi: bidi-override;
+}
+
+/*
+  Temporary hack for BWC SC-4732:
+    - first line targets webkit on windows;
+    - second line targets firefox on windows.
+*/
+@media only screen and (-webkit-min-device-pixel-ratio:0),
+only screen and (-moz-os-version:windows-win8) {
+  html.touch {
+    .bwc-frame,
+    .bwc.layout {
+      overflow: hidden;
+    }
   }
 }

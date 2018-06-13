@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,6 +16,8 @@ require_once('include/upload_file.php');
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
+SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
 
 ////////////////
 ////  GLOBAL utility
@@ -213,7 +215,6 @@ function commitLanguagePack($uninstall=false) {
 }
 
 function commitPatch($unlink = false, $type = 'patch'){
-    require_once('ModuleInstall/ModuleInstaller.php');
     require_once('include/entryPoint.php');
 
 
@@ -230,7 +231,8 @@ function commitPatch($unlink = false, $type = 'patch'){
     $old_mod_strings = $mod_strings;
     if(is_dir($base_upgrade_dir)) {
             $files = findAllFiles("$base_upgrade_dir/$type", $files);
-            $mi = new ModuleInstaller();
+            $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+            $mi = new $moduleInstallerClass();
             $mi->silent = true;
             $mod_strings = return_module_language('en', "Administration");
 
@@ -282,7 +284,6 @@ function commitPatch($unlink = false, $type = 'patch'){
 }
 
 function commitModules($unlink = false, $type = 'module'){
-    require_once('ModuleInstall/ModuleInstaller.php');
     require_once('include/entryPoint.php');
 
 
@@ -299,7 +300,8 @@ function commitModules($unlink = false, $type = 'module'){
     $old_mod_strings = $mod_strings;
     if(is_dir(sugar_cached("upload/upgrades"))) {
             $files = findAllFiles(sugar_cached("upload/upgrades/$type"), $files);
-            $mi = new ModuleInstaller();
+            $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+            $mi = new $moduleInstallerClass();
             $mi->silent = true;
             $mod_strings = return_module_language('en', "Administration");
 
@@ -849,8 +851,8 @@ function handleSugarConfig() {
        require_once('modules/UpgradeWizard/uw_utils.php');
        merge_config_si_settings(false, 'config.php', 'config_si.php');
     }
-    require_once 'ModuleInstall/ModuleInstaller.php';
-    ModuleInstaller::handleBaseConfig();
+    $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+    $moduleInstallerClass::handleBaseConfig();
     ////    END $sugar_config
     ///////////////////////////////////////////////////////////////////////////////
     return $bottle;
@@ -889,8 +891,8 @@ function getFtsSettings()
 
 function handleSidecarConfig()
 {
-    require_once 'ModuleInstall/ModuleInstaller.php';
-    return ModuleInstaller::handleBaseConfig();
+    $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
+    return $moduleInstallerClass::handleBaseConfig();
 }
 
 /**
@@ -1584,7 +1586,6 @@ function validate_dbConfig() {
     global $mod_strings;
     require_once('install/checkDBSettings.php');
     return checkDBSettings(true);
-
 }
 
 function validate_siteConfig($type){
@@ -1687,7 +1688,7 @@ function pullSilentInstallVarsIntoSession() {
         $derived['oc_password'] = $sugar_config_si['oc_password'];
     if(isset($sugar_config_si['install_method']))
         $derived['install_method'] = $sugar_config_si['install_method'];
-
+    
     $needles = array(
         'setup_db_create_database',
         'setup_db_create_sugarsales_user',

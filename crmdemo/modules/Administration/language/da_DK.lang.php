@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -275,7 +275,8 @@ $mod_strings = array (
     'LBL_EDIT_CUSTOM_FIELDS' => 'Rediger brugerdefinerede felter',
     'LBL_EDIT_TABS'=>'Rediger faner',
     'LBL_EMAIL_TITLE' => 'E-mail',
-    'LBL_EMAIL_DESC' => 'Administrer udgående og indgående e-mails. E-mail-indstillingerne skal konfigureres, for at brugerne kan udsende e-mails og nyhedsbreve i forbindelse med kampagner.',
+    'LBL_EMAIL_DESC' => 'Administrer indstillinger for ind- og udgående e-mails. E-mail-indstillingerne skal konfigureres for at ' .
+                        'give brugerne mulighed at sende e-mail og nyhedsbrevskampagner.',
     'LBL_EMAIL_ADDRESS_REQUIRED_FOR_FEATURE' => 'En primær e-mail-adresse kræves til hver bruger, for at denne funktion kan bruges.',
 	'LBL_ENABLE_MAILMERGE' => 'Vil du aktivere brevfletning?',
 	'LBL_ENABLED' => 'Aktiveret',
@@ -404,7 +405,8 @@ $mod_strings = array (
     'LBL_LOCALE' => 'Angiv standardlokaliseringsindstillinger for systemet',
     'LBL_LOGIN_SUGAR_SERVER_DESC'          => 'Brugernavnet på den person, der skal køre denne offlineklient',
     'LBL_LOGIN_SUGAR_SERVER'                => 'Slutbrugernavn:',
-    'LBL_MAILBOX_DESC' => 'Konfigurer gruppe-e-mail-konti, der skal overvåges for indgående e-mail',
+    'LBL_MAILBOX_DESC' => 'Opret gruppe-e-mail-konti for at overvåge indgående e-mail ' .
+        'og håndter personlige indgående e-mail-kontooplysninger for brugere',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE'=>'Kontrakttyper',
     'LBL_MANAGE_CURRENCIES' => 'Valutaer',
     'LBL_MANAGE_GROUPS_TITLE'   => 'Administrer grupper',
@@ -627,6 +629,8 @@ $mod_strings = array (
 
     'LBL_REBUILD_CONCAT_JS_FILES_TITLE' => 'Gendan JS-grupperingsfiler',
     'LBL_REBUILD_CONCAT_JS_FILES_DESC_SHORT' => 'Sammenkæder eksisterende gruppefiler igen og overskriver dem med de nyeste versioner af gruppefiler',
+    'LBL_REPAIR_JS_FILES_TITLE' => 'Reparer Javascript-filer',
+    'LBL_REPAIR_JS_FILES_DESC_SHORT' => 'Reparer JS-filer',
     'LBL_REPAIR_JS_FILES_PROCESSING' => 'Behandler filer. Dette kan tage flere minutter. Selvom du går væk fra denne side, annulleres processen ikke, så du roligt fortsætte eller vente på en bekræftelse...',
     'LBL_REPAIR_JS_FILES_DONE_PROCESSING' => 'Behandlingen af filerne er udført.',
     'LBL_REPAIR_FIELD_CASING_TITLE' => 'Reparer felter, som ikke er med små bogstaver',
@@ -1005,7 +1009,7 @@ $mod_strings = array (
     'LBL_QR_CLEAR_ADD_CACHE' => 'Sletning af ekstra cache filer...udført',
 	'LBL_UPDATE_CHECK_LOCKOUT_NOTICE' => 'Hvis dette felt ikke er markeret, skal en administrator validere igen manuelt, når systemlicensen udløber. Ellers kan brugerne ikke logge på.',
 	'LBL_TRACKER_SETTINGS' => 'Sporingsindstillinger',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Vælg hvilket system og brugerdata, der skal spores',
+	'LBL_TRACKER_SETTINGS_DESC' => 'Aktiver/deaktiver sporing',
 	'LBL_REPAIR_SEED_USERS_TITLE'	=> 'Aktivér/deaktivér startbrugere',
 	'LBL_REPAIR_SEED_USERS_ACTIVATE'	=> 'Aktivér',
 	'LBL_REPAIR_SEED_USERS_DECACTIVATE'	=> 'Deaktivér',
@@ -1158,6 +1162,10 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_SPRITES_ADDED' => 'Tilføjer sprite {0}',
     'LBL_SPRITES_EXCLUDING_FILE' => 'Ekskluderer filen: {0}',
 
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Teambaserede tilladelser',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Aktiverer teamadgang, og administrer adgang pr. modul.',
+
     //FTS
     'LBL_FTS_TYPE' => 'System type',
     'LBL_FTS_HOST' => 'Host',
@@ -1227,5 +1235,6 @@ For more information, refer to the <a href="http://www.sugarcrm.com/crm/product_
     'LBL_CONVERT_DISC_CLIENT_SYNC_SUBMIT' => 'Hvis du klikker Submit synkroniseres du med master serveren.',
     'LBL_OFFLINE_ENABLED' => 'Offline er aktiveret',
     'LBL_OFFLINE_SETTINGS' => 'Offline Indstillinger',
+
 
 );

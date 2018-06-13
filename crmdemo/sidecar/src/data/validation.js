@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -148,7 +148,7 @@
                         if (emails.length > 0) {
                             _.each(emails, function(email) {
                                 // if email is blank but not required, let it go
-                                if (email.email_address === '' && (_.isUndefined(field.required) || field.required == false)) {
+                                if (email.email_address === '' && (_.isUndefined(field.required) || !field.required)) {
                                     return;
                                 }
                                 if (!app.utils.isValidEmailAddress(email.email_address)) {
@@ -343,7 +343,7 @@
                  */
                 number: function(field, value) {
                     if (_.indexOf(['int', 'float', 'currency'], field.type) != -1) {
-                        return (_.isBoolean(value) || (_.isString(value) && value.trim().length == 0) ||
+                        return (_.isBoolean(value) || (_.isString(value) && !value.trim().length) ||
                             isNaN(parseFloat(value)) || !_.isFinite(value)) ?
                             true : undefined;
                     }
@@ -387,15 +387,18 @@
          * @method
          */
         requiredValidator: function(field, fieldName, model, value) {
-            //Image type fields have their own requiredValidator
-            if ((field.required === true) && (fieldName !== "id") && (field.type !== "image") && _.isUndefined(field.auto_increment)) {
+            // Image type fields have their own requiredValidator
+            if ((field.required === true) && (fieldName !== 'id') &&
+                (field.type !== 'image') &&
+                _.isUndefined(field.auto_increment)
+            ) {
                 var currentValue = model.get(fieldName);
                 var currentUndefined = _.isUndefined(currentValue);
-                var valueEmpty = _.isNull(value)
-                    || value === ""
-                    || value === false
-                    || (_.isArray(value) && this._isArrayEmpty(value))
-                    || (value instanceof Backbone.Collection && value.length == 0);
+                var valueEmpty = _.isNull(value) ||
+                    value === '' ||
+                    value === false ||
+                    (_.isArray(value) && this._isArrayEmpty(value)) ||
+                    (value instanceof Backbone.Collection && !value.length);
                 if ((currentUndefined && _.isUndefined(value)) || valueEmpty) {
                     return true;
                 }

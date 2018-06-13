@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Αποστολή Email υπενθύμισης σε όλους τους προσκεκλημένους',
     'LBL_POPUP_REMINDER' => 'Popup Υπενθύμιση',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup Ώρα Υπενθύμισης',
+    'LBL_POPUP_REMINDER_TIME' => 'Ώρα υπενθύμισης αναδυόμενου',
     'LBL_EMAIL_REMINDER' => 'Email Υπενθύμισης',
-    'LBL_EMAIL_REMINDER_TIME' => 'Ώρα αποστολής υπενθύμισης με Email',
+    'LBL_EMAIL_REMINDER_TIME' => 'Ώρα υπενθύμισης ηλεκτρονικού ταχυδρομείου',
     'LBL_REMOVE' => 'αφαίρ.',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Προγραμματισμός',
 	'LBL_SEARCH_BUTTON'=> 'Αναζήτηση',
@@ -87,7 +87,7 @@ $mod_strings = array (
     'LBL_TYPE' => 'Τύπος Συνάντησης',
     'LBL_PASSWORD' => 'Κωδικός Συνάντησης',
     'LBL_URL' => 'Έναρξη/Συμμετοχή στη Συνάντηση',
-    'LBL_HOST_URL' => 'Διεύθυνση URL',
+    'LBL_HOST_URL' => 'URL κεντρικού υπολογιστή',
     'LBL_DISPLAYED_URL' => 'Εμφάνιση URL',
     'LBL_CREATOR' => 'Δημιουργός Συνάντησης',
     'LBL_EXTERNALID' => 'Εξωτερική Ταυτότητα Εφαρμογής',
@@ -128,7 +128,7 @@ $mod_strings = array (
 
   //For export labels
     'LBL_EXPORT_JOIN_URL' => 'Url Συμμετοχής',
-    'LBL_EXPORT_HOST_URL' => 'Διεύθυνση Url',
+    'LBL_EXPORT_HOST_URL' => 'Url κεντρικού υπολογιστή',
     'LBL_EXPORT_DISPLAYED_URL' => 'Εμφανιζόμενο URL',
     'LBL_EXPORT_ASSIGNED_USER_ID' => 'Ταυτότητα Ανατεθειμένου Χειριστή',
     'LBL_EXPORT_EXTERNAL_ID' => 'Εξωτερική Ταυτότητα',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Διαγραφή Όλων των Επαναλαμβανόμενων',
     'LBL_DATE_END_ERROR' => 'Η ημερομηνία λήξης είναι πριν από την ημερομηνία έναρξης',
     'LBL_REPEAT_PARENT_ID' => 'Επανάληψη Γονικής Ταυτότητας',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Επανεμφανιζόμενη ταυτότητα σύσκεψης. Αρχική ημερομηνία έναρξης σύσκεψης',
     'LBL_RECURRING_SOURCE' => 'Επαναλαμβανόμενη Πηγή',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Είστε βέβαιοι ότι θέλετε να αφαιρέσετε όλες τις επαναλαμβανόμενες εγγραφές;',
     'LBL_RECURRENCE' => 'Επαναλαμβανόμενο',

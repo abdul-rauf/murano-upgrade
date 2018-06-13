@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -16,7 +16,7 @@ $mod_strings = array(
 
 	'ERR_UW_CANNOT_DETERMINE_GROUP'				=> 'Nie można określić grupy',
 	'ERR_UW_CANNOT_DETERMINE_USER'				=> 'NIe można określić właściciela',
-	'ERR_UW_CONFIG_WRITE'						=> 'Błąd uaktualnienia informacji odnośnie nowej wersji w pliku config.php.',
+	'ERR_UW_CONFIG_WRITE'						=> 'Błąd aktualizacji informacji o wersji w pliku config.php.',
 	'ERR_UW_CONFIG'								=> 'Ustaw możliwość zapisu w pliku config.php i załaduj ponownie tę stronę.',
 	'ERR_UW_DIR_NOT_WRITABLE'					=> 'Katalog uniemożliwia zapis',
 	'ERR_UW_FILE_NOT_COPIED'					=> 'Plik nie został skopiowany',
@@ -34,11 +34,11 @@ $mod_strings = array(
 	'ERR_UW_NO_MANIFEST'						=> 'Archiwum zip nie zawiera pliku manifest.php. Nie można kontynuować.',
 	'ERR_UW_NO_VIEW'							=> 'Określono nieprawidłowy widok.',
 	'ERR_UW_NO_VIEW2'							=> 'Widok nie został zdefiniowany. Idź do głównej strony panelu administracyjnego, aby przejść do tej strony.',
-	'ERR_UW_NOT_VALID_UPLOAD'					=> 'Nieprawidłowy plik do załadownia.',
+	'ERR_UW_NOT_VALID_UPLOAD'					=> 'Nieprawidłowa zawartość do załadownia.',
 	'ERR_UW_NO_CREATE_TMP_DIR'					=> 'Nie można utworzyć katalogu tymczasowego. Sprawdź prawa do plików.',
-	'ERR_UW_ONLY_PATCHES'						=> 'Tylko na tej stronie możesz załadować poprawki.',
-    'ERR_UW_PREFLIGHT_ERRORS'					=> 'Znaleziono błędy podzczas wstępnej weryfikacji',
-	'ERR_UW_UPLOAD_ERR'							=> 'Wystąpił problem podczas załadowania pliku. Spróbuj jeszcze raz!<br>\n',
+	'ERR_UW_ONLY_PATCHES'						=> 'Na tej stronie można przesłać jedynie poprawki systemowe.',
+    'ERR_UW_PREFLIGHT_ERRORS'					=> 'Znaleziono błędy podczas sprawdzania wstępnego',
+	'ERR_UW_UPLOAD_ERR'							=> 'Wystąpił problem podczas ładowania pliku. Spróbuj jeszcze raz!<br>\n',
 	'ERR_UW_VERSION'							=> 'Wersja systemu SugarCRM:',
     'ERR_UW_WRONG_TYPE'							=> 'Nie można uruchomić tej strony ',
 	'ERR_UW_PHP_FILE_ERRORS'					=> array(
@@ -62,10 +62,10 @@ $mod_strings = array(
     'ERR_NOT_ADMIN'                             => "Nieautoryzowany dostęp do modułu administracyjnego.",
     'ERR_NO_VIEW_ACCESS_REASON'                 => 'Nie posiadasz uprawnień dostępu do tej strony.',
 
-    'LBL_BUTTON_BACK'							=> '< Powrót',
+    'LBL_BUTTON_BACK'							=> '< Wstecz',
 	'LBL_BUTTON_CANCEL'							=> 'Anuluj',
 	'LBL_BUTTON_DELETE'							=> 'Usuń pakiet',
-	'LBL_BUTTON_DONE'							=> 'Zrobione',
+	'LBL_BUTTON_DONE'							=> 'Wykonano',
 	'LBL_BUTTON_EXIT'							=> 'Wyjdź',
 	'LBL_BUTTON_INSTALL'						=> 'Wstępne uaktualnienie',
 	'LBL_BUTTON_NEXT'							=> 'Dalej >',
@@ -111,7 +111,7 @@ $mod_strings = array(
 
 	'LBL_UW_DB_CHOICE1'							=> 'Kreator aktualizacji wywołuje SQL',
 	'LBL_UW_DB_CHOICE2'							=> 'Ręczne zapytania SQL',
-	'LBL_UW_DB_INSERT_FAILED'					=> 'Operacja INSERT nie powiodła się — wyniki porównania róznią się',
+	'LBL_UW_DB_INSERT_FAILED'					=> 'Operacja INSERT nie powiodła się — wyniki porównania różnią się',
 	'LBL_UW_DB_ISSUES_PERMS'					=> 'Brak uprawnień',
 	'LBL_UW_DB_ISSUES'							=> 'Problemy z bazą danych',
 	'LBL_UW_DB_METHOD'							=> 'Metoda aktualizacji bazy danych',
@@ -128,7 +128,7 @@ $mod_strings = array(
 	'LBL_UW_DB_PERMS'							=> 'Niezbędne uprawnienia',
 
 	'LBL_UW_DESC_MODULES_INSTALLED'				=> 'Zainstalowano następujące pakiety aktualizacyjne:',
-	'LBL_UW_END_DESC'							=> 'Twój system został zaktualizwoany.',
+	'LBL_UW_END_DESC'							=> 'Twój system został zaktualizowany.',
 	'LBL_UW_END_DESC2'							=> 'Jeżeli wybrano ręczne wykonanie kroków, takich jak łączenie plików lub zapytania SQL, należy zrobić to teraz. System będzie niestabilny, dopóki nie przeprowadzisz tych kroków.',
 	'LBL_UW_END_LOGOUT_PRE'						=> 'Aktualizacja została zakończona.',
 	'LBL_UW_END_LOGOUT_PRE2'					=> 'Wybierz Zrobione, aby wyjść z Kreatora uaktualnień.',
@@ -151,7 +151,7 @@ $mod_strings = array(
 	'LBL_UW_NEXT_TO_UPLOAD'						=> "<b>Wybierz Dalej, aby załadować pakiety uaktualnień.</b>",
 	'LBL_UW_FROZEN'								=> 'Załaduj pakiet przed kontynuacją.',
 	'LBL_UW_HIDE_DETAILS'						=> 'Ukryj szczegóły',
-	'LBL_UW_IN_PROGRESS'						=> 'W trakcie',
+	'LBL_UW_IN_PROGRESS'						=> 'W toku',
 	'LBL_UW_INCLUDING'							=> 'Włączając',
 	'LBL_UW_INCOMPLETE'							=> 'Niekompletny',
 	'LBL_UW_INSTALL'							=> 'INSTALACJA pliku',
@@ -169,10 +169,10 @@ $mod_strings = array(
 	'LBL_UW_PATCH_READY2'						=> '<h2>Uwaga: znaleziono zmodyfikowane układy</h2><br />Następujące pliki zawierają nowe pola lub modyfikacje układów ekranu wykonane przez Sugar Studio. Poprawka, która chcesz zainstalować, również zawiera modyfikacje plików. Dla <u>każdego pliku </u> możesz:<br><ul><li>[<b>Domyślne</b>] Zachować swoje wersje, pozostawiając puste pole wyboru. Zmiany zawarte w poprawce zostaną zignorowane. </li>lub<li>Zatwierdzić zmiany z plików poprawki przez zaznaczenie pola wyboru. Wtedy Twoje zmiany będą wymagały ponownego załadowania poprzez Sugar Studio.</li></ul>',
 
 	'LBL_UW_PREFLIGHT_ADD_TASK'					=> 'Utworzyć zadanie dla łączenia ręcznego?',
-	'LBL_UW_PREFLIGHT_COMPLETE'					=> 'Wstępne sprawdzanie',
+	'LBL_UW_PREFLIGHT_COMPLETE'					=> 'Sprawdzanie wstępne',
 	'LBL_UW_PREFLIGHT_DIFF'						=> 'Różniące się',
 	'LBL_UW_PREFLIGHT_EMAIL_REMINDER'			=> 'Czy wysłać wiadomość e-mail przypominającą o ręcznym scaleniu?',
-	'LBL_UW_PREFLIGHT_FILES_DESC'				=> 'Pliki wyminenione poniżej zostały zmodfikowane. Odznacz elementy, które wymagają ręcznego scalenia. <i>Wszystkie wykryte zmiany widoku zostaną automatycznie odznaczone; wszystkie zaznaczone zostaną nadpisane.',
+	'LBL_UW_PREFLIGHT_FILES_DESC'				=> 'Pliki wymienione poniżej zostały zmodyfikowane. Odznacz elementy, które wymagają ręcznego scalenia. <i>Wszystkie wykryte zmiany widoku zostaną automatycznie odznaczone; wszystkie zaznaczone zostaną nadpisane.',
 	'LBL_UW_PREFLIGHT_NO_DIFFS'					=> 'Nie jest wymagane ręczne scalanie.',
 	'LBL_UW_PREFLIGHT_NOT_NEEDED'				=> 'Niewymagane.',
 	'LBL_UW_PREFLIGHT_PRESERVE_FILES'			=> 'Automatycznie zabezpieczone Pliki:',
@@ -207,14 +207,14 @@ $mod_strings = array(
 	'LBL_UW_SYSTEM_CHECK_FILES'					=> 'Plików',
 	'LBL_UW_SYSTEM_CHECK_FOUND'					=> 'Znaleziono',
 
-	'LBL_UW_TITLE_CANCEL'						=> 'Usuń',
+	'LBL_UW_TITLE_CANCEL'						=> 'Anuluj',
 	'LBL_UW_TITLE_COMMIT'						=> 'Wykonaj aktualizację',
 	'LBL_UW_TITLE_END'							=> 'Sprawozdanie',
 	'LBL_UW_TITLE_PREFLIGHT'					=> 'Sprawdzanie wstępne',
-	'LBL_UW_TITLE_START'						=> 'Start',
+	'LBL_UW_TITLE_START'						=> 'Witaj',
 	'LBL_UW_TITLE_SYSTEM_CHECK'					=> 'Sprawdzanie systemu',
 	'LBL_UW_TITLE_UPLOAD'						=> 'Załaduj pakiet',
-	'LBL_UW_TITLE'								=> 'Kreator uaktualniania',
+	'LBL_UW_TITLE'								=> 'Kreator aktualizacji',
 	'LBL_UW_UNINSTALL'							=> 'Odinstaluj',
 	//500 upgrade labels
 	'LBL_UW_ACCEPT_THE_LICENSE' 				=> 'Zaakceptuj licencję',
@@ -226,7 +226,7 @@ $mod_strings = array(
 	'LBL_START_UPGRADE_IN_PROGRESS'             => 'Trwa rozpoczynanie',
 	'LBL_SYSTEM_CHECKS_IN_PROGRESS'             => 'Sprawdzanie systemu w toku',
 	'LBL_LICENSE_CHECK_IN_PROGRESS'             => 'Sprawdzanie licencji w toku',
-	'LBL_PREFLIGHT_CHECK_IN_PROGRESS'           => 'Testowanie wstępne w toku',
+	'LBL_PREFLIGHT_CHECK_IN_PROGRESS'           => 'Sprawdzanie wstępne w toku',
     'LBL_PREFLIGHT_FILE_COPYING_PROGRESS'       => 'Kopiowanie plików w toku',
 	'LBL_COMMIT_UPGRADE_IN_PROGRESS'            => 'Trwa wykonywanie aktualizacji',
     'LBL_UW_COMMIT_DESC'						=> 'Wybierz Dalej, aby uruchomić dodatkowe skrypty uaktualniania.',
@@ -244,9 +244,9 @@ $mod_strings = array(
 	'LBL_UW_DROP_SCHEMA_METHOD'					=> 'Metoda usunięcia starych schematów',
 	'LBL_UW_SHOW_OLD_SCHEMA_TO_DROP'			=> 'Pokaż stare schematy, które mogą zostać usunięte',
 	'LBL_UW_SKIPPED_QUERIES_ALREADY_EXIST'      => 'Pominięte zapytania',
-	'LBL_INCOMPATIBLE_PHP_VERSION'              => 'PHP w wersji nie niższej niż 5 jest wymagane',
+	'LBL_INCOMPATIBLE_PHP_VERSION'              => 'Wymagana jest wersja PHP 5 lub wyższa.',
 	'ERR_CHECKSYS_PHP_INVALID_VER'      => 'Twoja wersja PHP nie jest obsługiwana przez SugarCRM. Należy zainstalować wersję, która jest kompatybilna z aplikacją Sugar.  Sprawdź Macierz kompatybilności w Notatkach o wydaniu (Release Notes) w celu sprawdzenia, które wersje for PHP są obsługiwane. Twoja wersja to ',
-	'LBL_BACKWARD_COMPATIBILITY_ON' 			=> 'Tryb wstecznej kompatybilności php jest włączony. Ustaw dyrektywę zend.ze1_compatibility_mode na wartość Off, aby kontynuować',
+	'LBL_BACKWARD_COMPATIBILITY_ON' 			=> 'Tryb zgodności z poprzednimi wersjami PHP jest włączony. Wyłącz tryb zend.ze1_compatibility_mode, aby przejść dalej',
 	//including some strings from moduleinstall that are used in Upgrade
 	'LBL_ML_ACTION' => 'Akcja',
     'LBL_ML_CANCEL'             => 'Anuluj',
@@ -263,12 +263,12 @@ $mod_strings = array(
 	'LBL_HOME_PAGE_4_NAME' => 'Śledzenie',
 	'LBL_CURRENT_PHP_VERSION' => '(Twoja aktualna wersja PHP to',
 	'LBL_RECOMMENDED_PHP_VERSION' => '. Zalecamy wersję PHP 5.2.1 lub nowszą)',
-	'LBL_MODULE_NAME' => 'Kreator uaktualniania',
-	'LBL_MODULE_NAME_SINGULAR' => 'Kreator uaktualniania',
+	'LBL_MODULE_NAME' => 'Kreator aktualizacji',
+	'LBL_MODULE_NAME_SINGULAR' => 'Kreator aktualizacji',
 	'LBL_UPLOAD_SUCCESS' => 'Pakiet uaktualnień pomyślnie załadowany. Kliknij Dalej w celu przeprowadzenia ostatecznego sprawdzenia.',
-	'LBL_UW_TITLE_LAYOUTS' => 'Zatwierdzanie układów',
+	'LBL_UW_TITLE_LAYOUTS' => 'Zatwierdź układy',
 	'LBL_LAYOUT_MODULE_TITLE' => 'Układy',
-	'LBL_LAYOUT_MERGE_DESC' => 'Dostępne są nowe pola, które zostały dodane jako część uaktualnienia i mogą zostać automatycznie uwzględnione w aktualnych układach modułów. Aby dowiedzieć się więcej o nowych polach przeczytaj Release Notes dla wersji, dla której przeprowadzasz uaktualnienie.<br><br>Jeśli nie chcesz dodawać nowych pól, odznacz moduł, a układy pozostaną niezmienione. Pola będą dostępne w Studio po zakończeniu procesu uaktualnienia. <br><br>',
+	'LBL_LAYOUT_MERGE_DESC' => 'Dostępne są nowe pola, które zostały dodane jako część uaktualnienia i mogą zostać automatycznie uwzględnione w aktualnych układach modułów. Aby dowiedzieć się więcej o nowych polach, przeczytaj Release Notes dla wersji, dla której przeprowadzasz uaktualnienie.<br><br>Jeśli nie chcesz dodawać nowych pól, odznacz moduł, a układy pozostaną niezmienione. Pola będą dostępne w Studio po zakończeniu procesu uaktualnienia. <br><br>',
 	'LBL_LAYOUT_MERGE_TITLE' => 'Kliknij Dalej, aby potwierdzić zmiany i dokończyć uaktualnienie.',
 	'LBL_LAYOUT_MERGE_TITLE2' => 'Kliknij Dalej, aby dokończyć uaktualnienie.',
 	'LBL_UW_CONFIRM_LAYOUTS' => 'Zatwierdź układy',
@@ -277,10 +277,10 @@ $mod_strings = array(
 	'LBL_SELECT_FILE' => 'Wybierz plik:',
 	'LBL_LANGPACKS' => 'Pakiety językowe' /*for 508 compliance fix*/,
 	'LBL_MODULELOADER' => 'Zarządzanie modułami' /*for 508 compliance fix*/,
-	'LBL_PATCHUPGRADES' => 'Poprawki' /*for 508 compliance fix*/,
+	'LBL_PATCHUPGRADES' => 'Aktualizacje poprawek' /*for 508 compliance fix*/,
 	'LBL_THEMES' => 'Motywy' /*for 508 compliance fix*/,
 	'LBL_WORKFLOW' => 'Workflow' /*for 508 compliance fix*/,
-	'LBL_UPGRADE' => 'Uaktualnienie' /*for 508 compliance fix*/,
+	'LBL_UPGRADE' => 'Aktualizacja' /*for 508 compliance fix*/,
 	'LBL_PROCESSING' => 'Przetwarzanie' /*for 508 compliance fix*/,
-    'LBL_GLOBAL_TEAM_DESC'                      => 'Widoczne dla wszystkich',
+    'LBL_GLOBAL_TEAM_DESC'                      => 'Widoczne globalnie',
 );

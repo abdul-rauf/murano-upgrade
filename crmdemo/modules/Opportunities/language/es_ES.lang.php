@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Si hace clic en Confirmar borrará TODOS los datos de Previsiones y cambiará la Vista de Oportunidades. Si esto no es lo que desea hacer, haga clic en cancelar para volver a la configuración anterior.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Al hacer clic en Confirmar, borrará TODOS los datos de previsiones y cambiará la vista Oportunidades. '
+        .'Además, se deshabilitarán TODAS las definiciones de procesos con un módulo de público objetivo de las líneas de ingresos. '
+        .'Si no es lo que desea, haga clic en Cancelar para volver a la configuración anterior.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Si todos las líneas de ingresos están cerrados y al menos se ha ganado uno,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'la Fase de ventas de oportunidades se define como "Ganada".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Si todas las líneas de ingresos están en la Fase de ventas "Cerrado perdido",',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite seguir ventas individuales y los elementos de línea que pertenecen a estas ventas desde el principio hasta el final. Cada registro {{module_name}} representa una cabecera para un grupo de {{revenuelineitems_module}} además de estar relacionado con otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc. Cada {{revenuelineitems_singular_module}} es una venta potencial de un producto específico e incluye los datos relevantes de la venta correspondiente. Cada {{revenuelineitems_singular_module}} normalmente avanzará a través de varios pasos de ventas hasta que se marca como "Ganada" o "Perdida". El registro {{module_name}} refleja la cantidad y la fecha prevista de cierre de su {{revenuelineitems_module}}. {{plural_module_name}} y {{revenuelineitems_module}} se pueden aprovechar aún más si se utiliza el módulo {{forecasts_singular_module}} de Sugar para entender y predecir las tendencias de venta, además de dirigir el trabajo de manera específica para conseguir las cuotas de venta.',
+    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite seguir ventas individuales de principio a fin. Cada registro {{module_name}} representa una venta prospectiva e incluye los datos relevantes de venta, además de relacionarse con otros registros importantes como el {{quotes_module}}, el {{contacts_module}}, etc. Normalmente un {{module_name}} pasará a través de varias etapas de venta hasta que se marque como "Cerrado" o "Perdida". {{plural_module_name}} puede sacar más provecho mediante el uso del módulo de Sugar {{forecasts_singular_module}} para comprender y predecir tendencias de ventas, así como para concentrar sus esfuerzos y lograr las cuotas de ventas.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite seguir ventas individuales y elementos de línea que pertenecen a dichas ventas de principio a fin. Cada registro de {{module_name}} representa una cabecera para un grupo de {{revenuelineitems_module}} además de estar relacionado con otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y los artículos pertenecientes a esas ventas de principio a fin. Cada registro {{module_name}} representa una venta futura e incluye datos de venta relevantes, además de relacionarse con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc.
 
-- Para editar los campos de este registro haga clic en un campo individual o en el botón de Editar.
-- Vea o modifique los enlaces con otros registros en los subpaneles, incluido {{revenuelineitems_module}}, cambiando el panel izquierdo inferior a "Vista de datos".
-- Escriba y vea comentarios de usuarios y el historial de cambios del registro en el {{activitystream_singular_module}} cambiando el panel izquierdo inferior a "Flujo de Actividades".
-- Siga o marque como favorito este registro mediante los iconos a la derecha del nombre del registro.
-- Hay acciones adicionales en el menú desplegable de acciones a la derecha del botón de Editar.',
+-Edite los campos de este registro haciendo clic en un campo individual o en el botón Editar. 
+- Vea o modifique enlaces a otros registros en los subpaneles cambiando el panel inferior izquierdo a "Vista de Datos". 
+- Haga y vea los comentarios de los usuarios y el historial de cambios del registro en el {{activitystream_singular_module}} cambiando el panel inferior izquierdo a "Flujo de actividades". 
+- Siga o añada a favoritos este registro utilizando los iconos a la derecha del nombre del registro. 
+- Las acciones adicionales se encuentran disponibles en el menú desplegable Acciones a la derecha del botón Editar.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de ventas individuales y las línea relacionadas con esas ventas de principio a fin. Cada registro de {{module_name}} representa una cabecera de un grupo de {{revenuelineitems_module}} y además está relacionado con otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y los artículos pertenecientes a esas ventas de principio a fin. Cada registro {{module_name}} representa una venta futura e incluye datos de venta relevantes, además de relacionarse con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc.
 
 Para crear un {{module_name}}:
-1. Proporcione valores para los campos tal y como desee.
- - Los campos marcados como "Obligatorios" se deben completar antes de guardar.
- - Haga clic en "Mostrar más" para mostrar campos adicionales si fuera necesario.
-2. Haga clic en "Guardar" para finalizar el nuevo registro y volver a la página anterior.
-3. Después de guardar utilice el subpanel {{revenuelineitems_module}} para añadir elementos de línea al {{module_name}}.',
+1. Introduzca los valores para los campos según su preferencia.
+- Los campos marcados como "requeridos" deben completarse antes de guardar.
+- Haga clic en "Mostrar más" para exponer campos adicionales si fuese necesario.
+2. Haga clic en "Guardar" para finalizar el registro nuevo y volver a la página anterior.',
 
 // END PRO/CORP
 

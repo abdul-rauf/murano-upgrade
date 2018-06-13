@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,27 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => 'Er du sikker på, at du vil slette denne post?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Er du sikker på, at du vil fjerne denne brugers medlemskab?',
     'LBL_EDITLAYOUT' => 'Rediger layout' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Teambaserede tilladelser',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Aktiverer teamadgang, og administrer adgang pr. modul.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Aktiver team-baserede tilladelser',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Vælg moduler der skal aktiveres',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'Aktivering af team-baserede tilladelser vil gøre dig i stand til at tildele specifikke adgangsrettigheder til teams og brugere af individuelle moduler gennem rollestyring.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+Deaktivering af team-baserede tilladelser for et modul vil still alle data i forbindelse med team-baserede tilladelser til dette modul tilbage, herunder alle procesdefinitioner eller processer, der bruger funktionen. Dette omfatter alle roller, der anvender indstillingen "Ejer & valgte team" til dette modul, og alle team-baserede tilladelsesdata for poster i det pågældende modul. Det anbefales også, at du bruger værktøjet til hurtig reparation og genopbygning for at rydde systemcachen efter deaktivering af team-baserede tilladelser for ethvert modul.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Advarsel:</strong> Deaktivering af team-baserede tilladelser for et modul vil still alle data i forbindelse med team-baserede tilladelser til dette modul tilbage, herunder alle procesdefinitioner eller processer, der bruger funktionen. Dette omfatter alle roller, der anvender indstillingen "Ejer & valgte team" til dette modul, og alle team-baserede tilladelsesdata for poster i det pågældende modul. Det anbefales også, at du bruger værktøjet til hurtig reparation og genopbygning for at rydde systemcachen efter deaktivering af team-baserede tilladelser for ethvert modul.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+Deaktivering af team-baserede tilladelser for et modul vil still alle data i forbindelse med team-baserede tilladelser til dette modul tilbage, herunder alle procesdefinitioner eller processer, der bruger funktionen. Dette omfatter alle roller, der anvender indstillingen "Ejer & valgte team" til dette modul, og alle team-baserede tilladelsesdata for poster i det pågældende modul. Det anbefales også, at du bruger værktøjet til hurtig reparation og genopbygning for at rydde systemcachen efter deaktivering af team-baserede tilladelser for ethvert modul. Hvis du ikke har adgang til hurtig reparation og genopretning, så kontakt en administrator med adgang til reparationsmenuen.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Advarsel:</strong> Deaktivering af team-baserede tilladelser for et modul vil still alle data i forbindelse med team-baserede tilladelser til dette modul tilbage, herunder alle procesdefinitioner eller processer, der bruger funktionen. Dette omfatter alle roller, der anvender indstillingen "Ejer & valgte team" til dette modul, og alle team-baserede tilladelsesdata for poster i det pågældende modul. Det anbefales også, at du bruger værktøjet til hurtig reparation og genopbygning for at rydde systemcachen efter deaktivering af team-baserede tilladelser for ethvert modul. Hvis du ikke har adgang til hurtig reparation og genopretning, så kontakt en administrator med adgang til reparationsmenuen.
+STR
+,
 );

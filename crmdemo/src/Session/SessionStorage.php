@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -123,12 +123,6 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
      */
     public function sessionHasId()
     {
-        //Grab the PHP session name
-        $session_name = session_name();
-        if (!empty($_GET[$session_name])) {
-            return true;
-        }
-
         $session_id = $this->getId();
 
         return empty($session_id) ? true : false;

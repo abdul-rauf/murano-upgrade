@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -194,8 +194,6 @@ $mod_strings = array (
     'LBL_HOMEPAGE_TITLE' => '我的連絡人',
     'LBL_OPPORTUNITIES' => '商機',
 
-    'LBL_PASSWORD_CHANGE_FORM_TITLE' => '密碼變更',
-    'LBL_OLD_PORTAL_PASSWORD' => '舊入口網站密碼',
     'LBL_PORTAL_PASSWORD' => '入口網站密碼',
     'LBL_CONFIRM_PORTAL_PASSWORD' => '確認入口網站密碼',
     'LBL_LANG_PREF_TOOLTIP' => '支持入口網站使用者介面將轉換為此處選擇的語言。',

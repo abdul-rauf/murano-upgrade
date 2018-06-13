@@ -36,7 +36,7 @@ class Worksheet extends SugarBean {
     var $module_dir = 'Forecasts';
     function Worksheet() {
         global $current_user;
-        parent::SugarBean();
+        parent::__construct();
         $this->disable_row_level_security =true;
     }
 

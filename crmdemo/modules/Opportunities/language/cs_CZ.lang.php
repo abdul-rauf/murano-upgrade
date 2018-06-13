@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Pokud zmáčknete potvrdit, vymažete veškerá data obchodních předpovědi a změníte celkový přehled o obchodních příležitostech. Jestliže toto nezamýšlíte, klikněte na tlačítko zrušit a vrátíte se k předchozímu nastavení.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Kliknutím na tlačítko Potvrdit smažete VŠECHNA data prognóz a změníte své Zobrazení obchodních příležitostí. '
+        .'Také budou zakázány VŠECHNY definice procesů s modulem cílů u položek tržeb. '
+        .'Pokud to není to, co jste chtěli, klikněte na tlačítko Zrušit a vrátíte se k předchozímu nastavení.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Pokud všechny položky obchodní předpovědi jsou uzavřené a alespoň jedna je vyhraná,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'fáze obchodní předpovědi je určena jako "vyhraná"',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Pokud všechny položky obchodní příležitosti jsou označeny jako "prohráno",',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a položky linky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje záhlaví pro skupinu {{revenuelineitems_module}} a souvisí s jinými důležitými záznamy, jako jsou například {{quotes_module}}, {{contacts_module}} atd. Všechny {{revenuelineitems_singular_module}} jsou retrospektivní prodeje konkrétního produktu a zahrnují příslušná data o prodeji. Každý {{revenuelineitems_singular_module}} bude běžně procházet skrze několik fází prodeje, dokud nebude označen jako „Úspěšně uzavřeno“ nebo „Neúspěšně uzavřeno“. Záznam {{module_name}} odráží částku a očekávané datum uzavření {{revenuelineitems_module}}. {{plural_module_name}} a {{revenuelineitems_module}} lze využívat ještě více, a to pomocí modulu {{forecasts_singular_module}} řešení Sugar, který pomůže pochopit a předpovědět trendy prodeje nebo soustředit práci za účelem dosažení prodejních kvót.',
+    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} umožňuje sledovat jednotlivé prodeje od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a zahrnuje relevantní prodejní údaje i údaje týkající se dalších důležitých záznamů jako například {{quotes_module}}, {{contacts_module}} atd. {{module_name}} bude typicky ukazovat průběh několika fázemi prodeje, dokud nebude označen buď „Uzavřeno úspěšně“, nebo „Uzavřeno neúspěšně“. {{plural_module_name}} lze využít ještě více použitím modulu {{forecasts_singular_module}} Sugar pro porozumění a předpovídání prodejních trendů, stejně jako pro zaměření práce na dosažení prodejních kvót.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a položky linky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje záhlaví pro skupinu {{revenuelineitems_module}} a souvisí s jinými důležitými záznamy, jako jsou například {{quotes_module}}, {{contacts_module}} atd.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} umožňuje sledovat jednotlivé prodeje a položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a zahrnuje relevantní prodejní údaje i údaje týkající se dalších důležitých záznamů jako například {{quotes_module}}, {{contacts_module}} atd.
 
 - Pole záznamu lze upravovat kliknutím na jednotlivá pole nebo na tlačítko Upravit.
-- Odkazy na jiné záznamy v dílčích panelech, včetně {{revenuelineitems_module}}, lze zobrazovat nebo upravovat přepnutím levého spodního podokna na „Zobrazení dat“.
-- Historii komentářů uživatelů a změn záznamů lze vytvářet a zobrazovat v {{activitystream_singular_module}} přepnutím levého spodního podokna na „Kanál aktivit“.
+- Odkazy na jiné záznamy v dílčích panelech lze zobrazovat nebo upravovat přepnutím levého spodního podokna na „Zobrazení dat“.
+- Komentáře uživatelů a historii změn záznamů lze vytvářet a zobrazovat v {{activitystream_singular_module}} přepnutím levého spodního podokna na „Přehled aktivit“.
 - Tento záznam lze sledovat nebo označit jako oblíbený pomocí ikon vpravo od názvu záznamu.
 - Další akce jsou k dispozici v rozevírací nabídce Akce vpravo od tlačítka Upravit.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje záhlaví pro skupinu {{revenuelineitems_module}} a souvisí s jinými důležitými záznamy, jako jsou například {{quotes_module}}, {{contacts_module}} atd.
+    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} umožňuje sledovat jednotlivé prodeje a položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a zahrnuje relevantní prodejní údaje i údaje týkající se dalších důležitých záznamů jako například {{quotes_module}}, {{contacts_module}} atd.
 
 Vytvoření {{module_name}}:
 1. Vyplňte hodnoty polí dle potřeby.
- - Pole označená jako „Povinné“ musí být vyplněna před uložením.
- - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí.
-2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.
-3. Po uložení lze pomocí dílčího panelu {{revenuelineitems_module}} přidat řádkové položky do {{module_name}}.',
+ - Pole označená jako „Povinné“ musí být před uložením vyplněna.
+ - V případě potřeby klikněte pro zobrazení dalších polí na položku „Zobrazit více“.
+2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
 
 // END PRO/CORP
 

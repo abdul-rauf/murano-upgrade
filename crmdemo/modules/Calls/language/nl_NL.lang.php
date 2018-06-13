@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'LBL_BLANK'	=> '-leeg-',
+	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Telefoongesprekken',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Telefoongesprek',
     'LBL_MODULE_TITLE' => 'Telefoongesprekken: Start',
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'E-mail',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'E-Mail alle genodigden',
     'LBL_EMAIL_REMINDER' => 'E-mail Reminder',
-    'LBL_EMAIL_REMINDER_TIME' => 'E-mail Reminder Tijd',
+    'LBL_EMAIL_REMINDER_TIME' => 'Tijd e-mail herinnering',
     'LBL_POPUP_REMINDER_TIME' => 'Tijd pop-up herinnering',
     'LBL_SEND_BUTTON_TITLE'=>'Verstuur Uitnodigingen [ALT+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Opslaan & Versturen Uitnodigingen',
 	'LBL_DATE_END'=>'Einddatum',
 	'LBL_TIME_END'=>'Eindtijd',
-	'LBL_REMINDER_TIME'=>'Remindertijd',
+    'LBL_REMINDER_TIME'=>'Remindertijd',
     'LBL_EMAIL_REMINDER_SENT' => 'E-mail reminder verstuurd',
     'LBL_SEARCH_BUTTON'=> 'Zoeken',
     'LBL_ACTIVITIES_REPORTS' => 'Activiteitenrapport',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Verwijder alle herhaalde afspraken',
     'LBL_DATE_END_ERROR' => 'Einddatum ligt voor de Startdatum',
     'LBL_REPEAT_PARENT_ID' => 'Herhaal Bovenliggend ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Herhalings-ID van oproep. Originele startdatum oproep',
     'LBL_RECURRING_SOURCE' => 'Bron Herhaling',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Weet u het zeker dat u alle records in de reeks wilt verwijderen?',
     'LBL_RECURRING_LIMIT_ERROR' => 'Deze herhaalde afspraak kan niet opgeslagen worden, omdat het maximale toegestane aantal ($limit) herhaalde afspraken overschreven wordt.',

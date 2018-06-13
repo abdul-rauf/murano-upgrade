@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => '电子邮件',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => '所有受邀者的电子邮件',
     'LBL_EMAIL_REMINDER' => '电邮提醒',
-    'LBL_EMAIL_REMINDER_TIME' => '电邮提醒时间',
+    'LBL_EMAIL_REMINDER_TIME' => '电子邮件提醒时间',
     'LBL_POPUP_REMINDER_TIME' => '弹出提醒时间',
     'LBL_SEND_BUTTON_TITLE'=>'保存并发送邀请 [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'保存和发送邀请',
 	'LBL_DATE_END'=>'结束日期',
 	'LBL_TIME_END'=>'结束时间',
-	'LBL_REMINDER_TIME'=>'提醒时间',
+    'LBL_REMINDER_TIME'=>'提醒时间',
     'LBL_EMAIL_REMINDER_SENT' => '已发送邮件提醒',
     'LBL_SEARCH_BUTTON'=> '查找',
     'LBL_ACTIVITIES_REPORTS' => '活动报表',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => '删除所有复发',
     'LBL_DATE_END_ERROR' => '结束日期在开始日期之前',
     'LBL_REPEAT_PARENT_ID' => '重复父 ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => '电话复发 ID。原始电话开始日期',
     'LBL_RECURRING_SOURCE' => '重复出现的资源',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => '您确定要删除所有的重复记录吗?',
     'LBL_RECURRING_LIMIT_ERROR' => '无法计划此定期通话，因为它超出允许的最大重复周期 $limit.',

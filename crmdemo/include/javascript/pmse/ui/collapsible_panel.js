@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -197,7 +197,7 @@ CollapsiblePanel.prototype.isCollapsed = function () {
 CollapsiblePanel.prototype.collapse = function (noAnimation) {
 	this._collapsed = true;
 	if(this._htmlBody) {
-		jQuery(this._htmlCollapsibleIcon).removeClass('fa-caret-down').addClass('fa-caret-right');
+		jQuery(this._htmlCollapsibleIcon).removeClass('fa-caret-up').addClass('fa-caret-down');
 		if(isInDOM(this.html)) {
 			if (!this._enabledAnimations || noAnimation) {
 				jQuery(this._htmlBody).stop(true, true).hide();
@@ -217,7 +217,7 @@ CollapsiblePanel.prototype.collapse = function (noAnimation) {
 CollapsiblePanel.prototype.expand = function (noAnimation) {
 	this._collapsed = false;
 	if(this._htmlBody) {
-		jQuery(this._htmlCollapsibleIcon).removeClass('fa-caret-right').addClass('fa-caret-down');
+		jQuery(this._htmlCollapsibleIcon).removeClass('fa-caret-down').addClass('fa-caret-up');
 		if (!this._enabledAnimations || noAnimation) {
 			jQuery(this._htmlBody).stop(true, true).show();
 		} else {

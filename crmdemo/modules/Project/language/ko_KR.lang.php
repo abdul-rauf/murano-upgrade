@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -57,7 +57,7 @@ $mod_strings = array (
 
 	'LBL_PROJECT_SUBPANEL_TITLE' => '프로젝트목록',
 	'LBL_PROJECT_TASK_SUBPANEL_TITLE' => '프로젝트 과제',
-	'LBL_CONTACT_SUBPANEL_TITLE' => '연락처목록',
+	'LBL_CONTACT_SUBPANEL_TITLE' => '연락처',
 	'LBL_ACCOUNT_SUBPANEL_TITLE' => '고객 목록',
 	'LBL_OPPORTUNITY_SUBPANEL_TITLE' => '예비고객 목록',
 	'LBL_QUOTE_SUBPANEL_TITLE' => '견적 목록',
@@ -84,7 +84,7 @@ $mod_strings = array (
 	'LBL_QUICK_NEW_PROJECT'	=> '신규 프로젝트',
 	
 	'LBL_PROJECT_TASKS_SUBPANEL_TITLE' => '프로젝트 과제',
-	'LBL_CONTACTS_SUBPANEL_TITLE' => '연락처목록',
+	'LBL_CONTACTS_SUBPANEL_TITLE' => '연락처',
 	'LBL_ACCOUNTS_SUBPANEL_TITLE' => '고객목록',
 	'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => '예비고객 목록',
     'LBL_CASES_SUBPANEL_TITLE' => '사례 목록',
@@ -180,8 +180,8 @@ $mod_strings = array (
     'NTC_NO_ACTIVE_PROJECTS' => '귀하의 활동중인 프로젝트나 프로젝트 과제가 없습니다.',
     'NTC_ASSIGN_RIGHT_TEAM' => '모든 프로젝트 자원이 이 팀의 구성원인지 확인하십시오',
        
-    'LBL_RESOURCE_NAME' => '리소스 이름',
-    'LBL_RESOURCE_TYPE' => '리소스 유형',
+    'LBL_RESOURCE_NAME' => '이름',
+    'LBL_RESOURCE_TYPE' => '종류',
     
     'LBL_GRID_ONLY' => 'Grid',
     'LBL_GANTT_ONLY' => 'Gantt',

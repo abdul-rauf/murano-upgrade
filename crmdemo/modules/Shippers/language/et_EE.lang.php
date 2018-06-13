@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -19,31 +19,31 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 $mod_strings = array (
-  'LBL_MODULE_NAME' => 'Tarnijad',
-  'LBL_MODULE_NAME_SINGULAR' => 'Shipping Provider',
-  'LBL_MODULE_TITLE' => 'Tarnepakkuja: Avaleht',
-  'LBL_SEARCH_FORM_TITLE' => 'Tarnepakkuja otsing',
-  'LBL_LIST_FORM_TITLE' => 'Tarnepakkujate loend',
-  'LBL_NEW_FORM_TITLE' => 'Uus tarnepakkuja',
-  'LBL_SHIPPER' => 'Tarnepakkuja:',
-  'LBL_LIST_NAME' => 'Tarnepakkuja:',
-  'LBL_NAME' => 'Tarnepakkuja:',
+  'LBL_MODULE_NAME' => 'Vedajad',
+  'LBL_MODULE_NAME_SINGULAR' => 'Vedaja',
+  'LBL_MODULE_TITLE' => 'Vedaja: avaleht',
+  'LBL_SEARCH_FORM_TITLE' => 'Vedaja otsing',
+  'LBL_LIST_FORM_TITLE' => 'Vedajate loend',
+  'LBL_NEW_FORM_TITLE' => 'Uus vedaja',
+  'LBL_SHIPPER' => 'Vedaja:',
+  'LBL_LIST_NAME' => 'Vedaja',
+  'LBL_NAME' => 'Vedaja:',
   'LBL_LIST_LIST_ORDER' => 'Tellimus',
   'LBL_LIST_ORDER' => 'Tellimus:',
   'LBL_LIST_STATUS' => 'Olek',
   'LBL_STATUS' => 'Olek:',
-  'LNK_NEW_SHIPPER' => 'Tarnepakkujate loend',
+  'LNK_NEW_SHIPPER' => 'Vedajate loend',
   'LNK_NEW_TAXRATE' => 'Maksumäärade loend',
-  'NTC_DELETE_CONFIRMATION' => 'Kas oled kindel, et soovid seda kirjet kustutada?',
-  'ERR_DELETE_RECORD' => 'Tarnija kustutamiseks täpsusta kirje numbrit.',
-  'NTC_STATUS' => 'Selle tarnepakkuja eemaldamiseks rippmenüü loenditest määra staatus mitteaktiivseks.',
-  'NTC_LIST_ORDER' => 'Määra järjekord, mitmendana see tarnepakkuja kuvatakse Tarnepakkujate rippmenüü loendites',
+  'NTC_DELETE_CONFIRMATION' => 'Kas olete kindel, et soovite selle kirje kustutada?',
+  'ERR_DELETE_RECORD' => 'Vedaja kustutamiseks täpsustage kirje numbrit.',
+  'NTC_STATUS' => 'Selle vedaja eemaldamiseks Vedaja ripploenditest määrake olekuks Inaktiivne',
+  'NTC_LIST_ORDER' => 'Määrake järjekord, milles see vedaja Vedaja ripploendites kuvatakse',
   'shipper_status_dom' => 
   array (
     'Active' => 'Aktiivne',
-    'Inactive' => 'Mitteaktiivne',
+    'Inactive' => 'Inaktiivne',
 ),
-	'LBL_EDITLAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
+	'LBL_EDITLAYOUT' => 'Muuda paigutust' /*for 508 compliance fix*/,
 );
 
 

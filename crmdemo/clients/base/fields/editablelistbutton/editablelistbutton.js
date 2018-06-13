@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -62,7 +62,7 @@
             },
             options = {
                 success: successCallback,
-                error: function(error) {
+                error: function(model, error) {
                     if (error.status === 409) {
                         app.utils.resolve409Conflict(error, self.model, function(model, isDatabaseData) {
                             if (model) {
@@ -105,11 +105,21 @@
         return {};
     },
 
+    /**
+     * Initiates validation on the model with fields that the user has edit
+     * access to.
+     */
     saveModel: function() {
         this.setDisabled(true);
+
         var fieldsToValidate = this.view.getFields(this.module, this.model);
+        fieldsToValidate = _.pick(fieldsToValidate, function(vardef, fieldName) {
+            return app.acl.hasAccessToModel('edit', this.model, fieldName);
+        }, this);
+
         this.model.doValidate(fieldsToValidate, _.bind(this._validationComplete, this));
     },
+
     cancelEdit: function() {
         if (this.isDisabled()) {
             this.setDisabled(false);

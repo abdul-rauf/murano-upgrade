@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,8 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'clients/base/api/FilterApi.php';
-require_once 'include/SugarFields/SugarFieldHandler.php';
+require_once('clients/base/api/FilterApi.php');
+require_once('include/SugarFields/SugarFieldHandler.php');
+require_once 'modules/Teams/TeamSetManager.php';
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
@@ -92,6 +93,7 @@ function export($type, $records = null, $members = false, $sample = false)
             ACLController::displayNoAccess();
             sugar_die('');
         }
+        $access = ACLAction::getUserAccessLevel($current_user->id, $focus->module_dir, 'export');
         if (ACLController::requireOwner($focus->module_dir, 'export')) {
             if (!empty($where)) {
                 $where .= ' AND ';
@@ -213,6 +215,7 @@ function exportFromApi($args, $sample = false)
     }
 
     if ($focus->bean_implements('ACL')) {
+        $access = ACLAction::getUserAccessLevel($current_user->id, $focus->module_dir, 'export');
         if (ACLController::requireOwner($focus->module_dir, 'export')) {
             if (!empty($where)) {
                 $where .= ' AND ';
@@ -511,12 +514,18 @@ function getExportContentFromResult(
                 }
 
                 if (isset($focus->field_name_map[$fields_array[$key]]['custom_type']) &&
-                    $focus->field_name_map[$fields_array[$key]]['custom_type'] == 'teamset'
+                    $focus->field_name_map[$fields_array[$key]]['custom_type'] == 'teamset' &&
+                    isset(Team::$nameTeamsetMapping[$fields_array[$key]])
                 ) {
-                    require_once('modules/Teams/TeamSetManager.php');
+                    $primaryTeamId = '';
+                    $fieldDefs = $focus->getFieldDefinition($fields_array[$key]);
+
+                    if (!empty($fieldDefs['id_name']) && !empty($val[$fieldDefs['id_name']])) {
+                        $primaryTeamId = $val[$fieldDefs['id_name']];
+                    }
                     $value = TeamSetManager::getCommaDelimitedTeams(
-                        $val['team_set_id'],
-                        !empty($val['team_id']) ? $val['team_id'] : ''
+                        $val[Team::$nameTeamsetMapping[$fields_array[$key]]],
+                        $primaryTeamId
                     );
                 }
 

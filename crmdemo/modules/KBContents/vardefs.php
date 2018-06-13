@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -34,6 +34,7 @@ $dictionary['KBContent'] = array(
             ),
             'audited' => true,
             'duplicate_on_record_copy' => 'always',
+            'sortable' => false,
         ),
         'language' => array(
             'name' => 'language',
@@ -163,13 +164,6 @@ $dictionary['KBContent'] = array(
             'module' => 'Notes',
             'bean_name' => 'Note',
             'source' => 'non-db',
-        ),
-        'cases' => array(
-            'name' => 'cases',
-            'type' => 'link',
-            'relationship' => 'relcases_kbcontents',
-            'source' => 'non-db',
-            'vname' => 'LBL_CASE',
         ),
         'attachments' => array(
             'name' => 'attachments',
@@ -367,12 +361,12 @@ $dictionary['KBContent'] = array(
             'studio' => true,
         ),
 
-        'relcases_kbcontents' => array(
-            'name' => 'relcases_kbcontents',
+        'cases' => array(
+            'name' => 'cases',
             'type' => 'link',
-            'vname' => 'LBL_KBSCASES',
             'relationship' => 'relcases_kbcontents',
             'source' => 'non-db',
+            'vname' => 'LBL_KBSCASES',
         ),
         'kbscase_id' => array(
             'name' => 'kbscase_id',

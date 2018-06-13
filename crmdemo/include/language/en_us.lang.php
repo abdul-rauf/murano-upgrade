@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Filter',
     'Comments' => 'Comment',
     'Currencies' => 'Currency',
-    'Project' => 'Project',
     'ProductTemplates' => 'Product Template',
-    'ProductCategories' => 'Product Category',
     'ProductTypes' => 'Product Type',
     'Shippers' => 'Shipping Provider',
     'Subscriptions' => 'Subscription',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Fri",
                 '7'=>"Sat",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Su",
+            '2'=>"Mo",
+            '3'=>"Tu",
+            '4'=>"We",
+            '5'=>"Th",
+            '6'=>"Fr",
+            '7'=>"Sa",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Sun',
         '1' => 'Mon',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'year(s)',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Until',
+        'Occurrences' => 'Occurrences',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'None',
+        'Each' => 'Each',
+        'On' => 'On the',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'first',
+        'second' => 'second',
+        'third' => 'third',
+        'fourth' => 'fourth',
+        'fifth' => 'fifth',
+        'last' => 'last',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Sunday',
+        'Mon' => 'Monday',
+        'Tue' => 'Tuesday',
+        'Wed' => 'Wednesday',
+        'Thu' => 'Thursday',
+        'Fri' => 'Friday',
+        'Sat' => 'Saturday',
+        'Day' => 'Day',
+        'WD'  => 'Weekday',
+        'WE'  => 'Weekend Day'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Middle',
         'end' => 'End',
         'top' => 'Top',
+        'total' => 'Total',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Funnel',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Light',
       'dark' => 'Dark',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Move',
@@ -7859,10 +7978,13 @@ $app_strings = array (
   'LBL_TOGGLE_VISIBILITY' => 'Toggle Visibility', // Record view header panel element
   'LBL_ACTIVITIES' => 'Activity Stream',
   'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
-  'LBL_TRADEMARK' => 'SugarCRM is a trademark of SugarCRM, Inc. All other company and product names may be trademarks of the respective companies with which they are associated.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ are trademarks of SugarCRM Inc.',
-  'LBL_SEND_INVITE' => 'Send invite',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar and the 3-D Cube are registered trademarks of SugarCRM Inc. '.
+        'All other company and product names used or appearing in this product may be trademarks of the '.
+        'respective companies with which they are associated.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ are trademarks of SugarCRM Inc.',
+    'LBL_SEND_INVITE' => 'Send invite',
   'LBL_INVITEES' => 'Guests',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Guest will not receive your invite',
   'LBL_SELECT_ACTION_LABEL' => 'Select Action',
   'LBL_TOGGLE_DRAWER' => 'Toggle Drawer',
   'LBL_TOUR_NEXT' => 'Next',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Add' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Company logo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Calendar' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'main module navigation',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'toggle subpanel',
+
     'LBL_ADVANCED' => 'Advanced',
     'LBL_BASIC' => 'Basic',
     'LBL_MODULE_FILTER' => 'Filter by...',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Teams',
     'LBL_TEAM_SET_ID' => 'Team Set ID',
     'LBL_TEAM_SET'=>'Team Set',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Selected Teams',
     'LBL_SEARCH_UNAVAILABLE' => 'Search unavailable, please try again later.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'No Primary Team specified',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Error attempting to remove primary team id [{0}] for [{1}] module with id [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Search engine is temporarily unavailable.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'A search engine runtime error occurred. Please contact your System Administrator.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'A field that is locked by a process cannot be edited.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'A condition was encountered because of a general failure or error. The reasons for this exception range but generally fall outside the scope of a more specific API exception.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Indicates that the server is busy, overloaded or down.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'The search engine backend is currently unavailable due to a connection issue. Verify connectivity and configuration in Admin->search->test.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'A runtime exception occured in SearchEngine. See sugarcrm.log for more details.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'A field that is currently locked by a running process cannot be edited.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s is locked by a running process and cannot be edited.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s are locked by a running process and cannot be edited.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'A file with the same name already exists in the system.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'This TimePeriod already has sub-periods',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Sub Time Periods cannot have sub-periods',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Unable to retrieve any Time Periods of type: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'No active Time Periods for the current settings.',
     'LBL_CURRENT_TIMEPERIOD' => 'Current Time Period',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Previous Time Period',
     'LBL_NEXT_TIMEPERIOD' => 'Next Time Period',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Select field...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Select operator...',
     'LBL_FILTER_CREATE_NEW' => 'Create',
+    'LBL_FILTER_CREATE_FILTER' => 'Create new filter',
+    'LBL_FILTER_EDIT_FILTER' => 'Edit filter',
     'LBL_FILTER_ALL_RECORDS' => 'All Records',
     'TPL_FILTER_SAVE' => 'You successfully created the filter {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'From',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'State:',
     'LBL_STATUS_UPDATED'=>'Your Status for this event has been updated!',
+    'LBL_STATUS_NOT_UPDATED' => 'Your Status for this event has not been updated.',
     'LBL_STATUS'=>'Status:',
     'LBL_STREET'=>'Street',
     'LBL_SUBJECT' => 'Subject',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> All Rights Reserved.<br />SugarCRM is a trademark of SugarCRM, Inc. All other company and product names may be trademarks of the respective companies with which they are associated.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'All Rights Reserved.<br />SugarCRM, Sugar and the 3-D Cube are registered trademarks of SugarCRM Inc. '.
+        'All other company and product names used or appearing in this product may be trademarks of the '.
+        'respective companies with which they are associated.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Scheduled Job Completed',
@@ -9182,6 +9321,7 @@ Sincerely, SugarCRM',
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Error. You entered an invalid operator.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Error. You entered an invalid filter.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Import failed. A group field is partially locked in the Process Definition. These fields must be unlocked in the Process Definition in order for the definition to be imported.',
     'ERROR_EXP_DATE_LOW' => 'Error. Expiration Date can not be before the date of publishing.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Error. The Approved status requires publishing date.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'The Publish Date is empty.',
@@ -9312,6 +9452,7 @@ Sincerely, SugarCRM',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => ' columns can be displayed.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Dashboard',
     'LBL_DASHBOARD_BWC' => 'My Legacy Dashboard',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'My Dashboard',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Help Dashboard',
@@ -9344,9 +9485,6 @@ Sincerely, SugarCRM',
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'My {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'News',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Google News feed for Related Account',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Opportunity Metrics',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Opportunity Metrics for Related Account.  Requires D&B subscription.',
@@ -9417,7 +9555,6 @@ Sincerely, SugarCRM',
 
     'LBL_DASHLET_NO_RECORDS' => 'No records were found at this time.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Case Summary',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'News Feed',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interactions',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Notes & Attachments',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notes & Attachments belongs to the record',
@@ -10028,6 +10165,13 @@ Sincerely, SugarCRM',
     'ERR_BLANK_PAGE_NAME' => 'Please enter a page name.',
     /* End MySugar Framework strings */
 
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'My Pipeline',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "My Team's Pipeline",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Sales Pipeline Chart',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Displays current pipeline chart.',
+    /* End Sales Pipeline Dashlet */
+
     'LBL_NO_IMAGE' => 'No Image',
 
     'LBL_MODULE' => 'Module',
@@ -10297,6 +10441,8 @@ Sincerely, SugarCRM',
     'LBL_SELECT_THIS_ROW_TITLE' => 'Select this row',
     'LBL_TEAM_SELECTED_TITLE' => 'Team Selected ',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Select to make this team primary',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Team marked as Team-Based Selected ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Mark this team as Team-Based Selected',
     'LBL_SEARCH_AND_SELECT' => 'Search and Select {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Search and Add {{module}}',
 
@@ -10385,6 +10531,9 @@ Sincerely, SugarCRM',
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Preview disabled: No data available',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Preview disabled: In view as current record',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Preview disabled: Record removed or no access to record',
+    'LBL_PREVIEW_PREVIOUS' => 'Preview previous',
+    'LBL_PREVIEW_NEXT' => 'Preview next',
+    'LBL_PREVIEW_CLOSE' => 'Preview close',
     'LBL_STREAM_NO_RECORDS' => 'This record has no notes at this time. Please add a note by clicking on the add note link.',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}} duplicates found.',
     'LBL_NO_DUPLICATES_FOUND' => 'No duplicates found.',
@@ -10404,6 +10553,7 @@ Sincerely, SugarCRM',
         'Invalid number of records passed. The valid range is from {{minRecords}} to {{maxRecords}} records.',
     'LBL_MERGE_NO_ACCESS' =>
         'You have no access to perform this action. At least one record must be editable.',
+    'LBL_MERGE_LOCKED' => 'Some of the records selected for merge contain fields that are locked for editing by a process and cannot be merged at this time.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10874,10 +11024,9 @@ Sincerely, SugarCRM',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'System Settings',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Password',
     'LBL_CURRENT_PASSWORD'				=> 'Current Password',
-    'LBL_SET_NEW_PASSWORD'              => 'Enter Password',
     'LBL_NEW_PASSWORD1'                 => 'New Password',
     'LBL_NEW_PASSWORD2'                 => 'Confirm Password',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Please enter your password confirmation.',
@@ -10885,7 +11034,6 @@ Sincerely, SugarCRM',
     'ERR_ENTER_OLD_PASSWORD'			=> 'Please enter your current password.',
     'ERR_REENTER_PASSWORDS' => 'The passwords must match.',
     'ERR_PASSWORD_MISMATCH' => 'Password entered does not match that in our system.',
-    'LBL_NEW_USER_PASSWORD_1' => 'Your password has been successfully updated.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Cannot send password',
     'LBL_REQUEST_PASSWORD' => 'Request Password',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Error: There was a problem updating password for this user.',
@@ -10921,6 +11069,18 @@ Sincerely, SugarCRM',
     'ERR_HTTP_500_TEXT_LINE1' => 'The server encountered an error and could not complete your request.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Please try again. If the error persists, please contact your Sugar Administrator.',
     'ERR_HTTP_500_ACTION' => 'Please contact technical support.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 Internal Server Error',
+    'ERR_HTTP_502_TEXT_LINE1' => 'The server encountered a temporary error and could not complete your request.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Please try again. If the error persists, please contact your Sugar Administrator.',
+    'ERR_HTTP_502_ACTION' => 'Please contact technical support.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 Internal Server Error',
+    'ERR_HTTP_503_TEXT_LINE1' => 'The server is unavailable to complete your request.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Please try again later. If the error persists, please contact your Sugar Administrator.',
+    'ERR_HTTP_503_ACTION' => 'Please contact technical support.',
 
     'ERR_RENDER_FAILED_TITLE' => 'View Render Failed',
     'ERR_RENDER_FAILED_MSG' => 'Failed to render a view',
@@ -11108,6 +11268,9 @@ Sincerely, SugarCRM',
     'ERR_GENERIC_SERVER_ERROR' => 'There was an error while connecting to the server. Please try again.',
     'ERR_RESOLVE_ERRORS' => 'Please resolve any errors before proceeding.',
 
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Refresh list',
+
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'more',
     'LBL_TEXTAREA_LESS' => 'less',
@@ -11215,10 +11378,13 @@ To create a new record using the values you have entered, click "Ignore Duplicat
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM enables power users to quickly perform certain tasks with keyboard shortcuts to increase productivity. The tables on the right describe available shortcuts along with the keys and the actions they perform.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Supported keys</h1><ul><li>all alphanumeric characters and symbols</li><li>shift, ctrl, alt, command, mod (ctrl in Windows/Linux and command in Macs)</li><li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>Supported features</h1><ul><li>Key combination: ctrl+m</li><li>Multiple keys: m,ctrl+m</li><li>Key sequence: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Global Shortcuts',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Contextual Shortcuts',
     'LBL_SHORTCUT_KEY_KEY' => 'Key',
     'LBL_SHORTCUT_FUNCTION' => 'Function',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Configure Contextual Shortcuts',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'No contextual shortcuts to configure',
     'LBL_SHORTCUT_HELP' => 'Show shortcuts help page',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Toggle the quick create menu',
     'LBL_SHORTCUT_SEARCH' => 'Focus on global search field',
@@ -11266,6 +11432,9 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Select all items in a multi-select field',
     'LBL_SHORTCUT_SWEETSPOT' => 'Toggle the Sweet Spot bar',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Hide the Sweet Spot bar',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Save configuration',
+    'LBL_SHORTCUT_RESTORE' => 'Restore default',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'An error occurred while saving custom shortcut keys on the server. Please try again.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} Settings',
@@ -11288,13 +11457,20 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     'LBL_CALENDAR_RECURRENCE' => "Recurrence",
     'LBL_CALENDAR_REMINDERS' => "Reminders",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Custom Date",
     'LBL_CALENDAR_REPEAT_TYPE' => "Repeat Type",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Repeat Interval",
     'LBL_CALENDAR_REPEAT_DOW' => "Repeat on Days of Week",
+    'LBL_CALENDAR_REPEAT' => "Repeat",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Repeat Until",
     'LBL_CALENDAR_REPEAT_COUNT' => "Repeat Occurrences",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Repeat Selector",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Day(s) of Month",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Repeat Ordinal",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Repeat Unit",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Recurrence changes must be made using the first record in the series.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Recurrence rules do not result in an event being generated.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Attending',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Declined',
@@ -11314,17 +11490,23 @@ To create a new record using the values you have entered, click "Ignore Duplicat
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'Sugar 7 requires javascript. Please enable Javascript in your browser to use Sugar 7.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Serialized data could not be unserialized',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Serialized data could not be unserialized because it contains references to objects or classes',
 
     'LBL_FIELD_TRIMMED' => 'Field was trimmed, due to exceeding the maximum character limit.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Field exceeds maximum character limit.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Last 7 Days',
     '30' => 'Last 30 Days',
     '90' => 'Last Quarter',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -12331,4 +12513,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Bio',
     'Both' => 'Both'
 );
-

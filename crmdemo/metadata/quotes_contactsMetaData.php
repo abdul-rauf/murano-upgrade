@@ -3,18 +3,20 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['quotes_contacts'] = array ( 'table' => 'quotes_contacts'
-                                  , 'fields' => array (
-       array('name' =>'id', 'type' =>'varchar', 'len'=>'36')
-      , array('name' =>'contact_id', 'type' =>'varchar', 'len'=>'36', )
-      , array('name' =>'quote_id', 'type' =>'varchar', 'len'=>'36', )
+
+$dictionary['quotes_contacts'] = array(
+    'table' => 'quotes_contacts',
+    'fields' => array(
+        array('name' => 'id', 'type' => 'id'),
+        array('name' => 'contact_id', 'type' => 'id'),
+        array('name' => 'quote_id', 'type' => 'id')
       , array('name' =>'contact_role', 'type' =>'varchar', 'len'=>'20', )
       , array ('name' => 'date_modified','type' => 'datetime')
       , array('name' =>'deleted', 'type' =>'bool', 'len'=>'1', 'default'=>'0', 'required'=>false)

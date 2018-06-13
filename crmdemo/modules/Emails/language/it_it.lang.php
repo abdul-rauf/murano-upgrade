@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -95,7 +95,7 @@ $mod_strings = array (
 	'LBL_EMAILS_TASKS_REL'		=> 'Email: Compiti',
 	'LBL_EMAILS_USERS_REL'		=> 'Email: Utenti',
     'LBL_EMAILS_PRODUCTS_REL' => 'Email: Prodotti',
-    'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Email: Elementi dell´Opportunità',
+    'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Email: elementi dell&#39;opportunità',
     'LBL_EMPTY_FOLDER'          => 'Nessuna Email da visualizzare',
 	'LBL_ERROR_SENDING_EMAIL'	=> 'Errore durante l´invio',
 	'LBL_ERROR_SAVING_DRAFT'	=> 'Errore durante il salvataggio della bozza',
@@ -116,7 +116,7 @@ $mod_strings = array (
     'LBL_MY_EMAILS'            => 'Le mie Email',
 	'LBL_NEW_FORM_TITLE'		=> 'Scrivi Email',
 	'LBL_NONE'                  => 'Nessuno',
-	'LBL_NOT_SENT'				=> 'Errore di Invio',
+	'LBL_NOT_SENT'				=> 'Errore di invio',
 	'LBL_NOTE_SEMICOLON'		=> 'Nota: per più indirizzi email usa la virgola o il punto e virgola come separatore.',
 	'LBL_NOTES_SUBPANEL_TITLE'	=> 'Allegati',
 	'LBL_OPPORTUNITY_SUBPANEL_TITLE' => 'Opportunità',
@@ -163,7 +163,7 @@ $mod_strings = array (
 	'LNK_EMAIL_TEMPLATE_LIST'	=> 'Visualizza Modelli Email',
 	'LNK_MEETING_LIST'			=> 'Riunioni',
 	'LNK_NEW_ARCHIVE_EMAIL'		=> 'Nuova Email Archiviata',
-	'LNK_NEW_CALL'				=> 'Nuova Chiamata',
+	'LNK_NEW_CALL'				=> 'Log chiamata',
 	'LNK_NEW_EMAIL_TEMPLATE'	=> 'Nuovo Modello Email',
 	'LNK_NEW_EMAIL'				=> 'Nuova Email',
 	'LNK_NEW_MEETING'			=> 'Nuova Riunione',
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'errore: credenziali mancanti',
     'ERR_NO_UID' => 'errore: nessun UID',
     'ERR_NO_IEID' => 'errore: nessun ieID',
+    'ERR_INVALID_RECIPIENTS' => 'L&#39;indirizzo di posta elettronica di uno o più destinatari non è valido. ' .
+        'Correggere e riprovare.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Indirizzo email non valido',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'nessun destinatario specificato',

@@ -10,5 +10,6 @@ return array(
     'Moontoast\\Math' => array($vendorDir . '/moontoast/math/src'),
     'Guzzle\\Tests' => array($vendorDir . '/guzzle/guzzle/tests'),
     'Guzzle' => array($vendorDir . '/guzzle/guzzle/src'),
+    'Etechnika\\IdnaConvert' => array($vendorDir . '/etechnika/idna-convert/src'),
     'Aws' => array($vendorDir . '/aws/aws-sdk-php/src'),
 );

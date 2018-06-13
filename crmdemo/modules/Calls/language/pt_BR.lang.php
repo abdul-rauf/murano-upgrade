@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'LBL_BLANK'	=> '-Nenhuma-',
+	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Chamadas',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Chamada',
     'LBL_MODULE_TITLE' => 'Chamadas: Tela Principal',
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'E-mail',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'E-mail para todos os convidados',
     'LBL_EMAIL_REMINDER' => 'Aviso de E-mail',
-    'LBL_EMAIL_REMINDER_TIME' => 'Hora do Aviso de E-mail',
-    'LBL_POPUP_REMINDER_TIME' => 'Horário do Aviso Pop-up',
+    'LBL_EMAIL_REMINDER_TIME' => 'Hora do lembrete por e-mail',
+    'LBL_POPUP_REMINDER_TIME' => 'Hora do lembrete por popup',
     'LBL_SEND_BUTTON_TITLE'=>'Salvar e enviar convites [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Salvar e Enviar convites',
 	'LBL_DATE_END'=>'Data de conclusão',
 	'LBL_TIME_END'=>'Hora de conclusão',
-	'LBL_REMINDER_TIME'=>'Hora do aviso',
+    'LBL_REMINDER_TIME'=>'Hora do aviso',
     'LBL_EMAIL_REMINDER_SENT' => 'Aviso de E-mail Enviado',
     'LBL_SEARCH_BUTTON'=> 'Pesquisar',
     'LBL_ACTIVITIES_REPORTS' => 'Relatório de Atividades',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Remover todas recorrências',
     'LBL_DATE_END_ERROR' => 'Data final está antes de data inicial',
     'LBL_REPEAT_PARENT_ID' => 'Repetir o ID de Origem',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Recorrência do ID da chamada. Data de início da chamada original',
     'LBL_RECURRING_SOURCE' => 'Fonte recorrente',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Tem certeza de que deseja remover todos os registros recorrentes?',
     'LBL_RECURRING_LIMIT_ERROR' => 'Esta chamada recorrente não pode ser programada porque excede o máximo permitido de recorrência do $limit.',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -22,6 +22,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Document;
  */
 class ACLVisibility extends SugarVisibility implements StrategyInterface
 {
+
     /**
      * {@inheritdoc}
      */
@@ -29,15 +30,25 @@ class ACLVisibility extends SugarVisibility implements StrategyInterface
     {
         $action = $this->getOption('action', 'list');
         if ($this->bean->bean_implements('ACL') &&
-            !empty($GLOBALS['current_user']->id) &&
-            ACLController::requireOwner($this->bean->module_dir, $action))
-        {
-            $parts = array(
-                $query,
-                $this->bean->getOwnerWhere($GLOBALS['current_user']->id, $this->getOption('table_alias')),
+            !empty($GLOBALS['current_user']->id)
+        ) {
+            $queryPart = '';
+            $actualAccess = ACLAction::getUserAccessLevel(
+                $GLOBALS['current_user']->id,
+                $this->bean->module_dir,
+                $action
             );
-            $parts = array_filter($parts);
-            $query = implode(' AND ', $parts);
+            if (ACLController::requireOwner($this->bean->module_dir, $action)) {
+                $queryPart = $this->bean->getOwnerWhere(
+                    $GLOBALS['current_user']->id,
+                    $this->getOption('table_alias')
+                );
+            }
+            if ($query && $queryPart) {
+                $query .= " AND $queryPart";
+            } elseif ($queryPart) {
+                $query = $queryPart;
+            }
         }
         return $query;
     }
@@ -85,9 +96,11 @@ class ACLVisibility extends SugarVisibility implements StrategyInterface
      */
     public function elasticGetBeanIndexFields($module, Visibility $provider)
     {
+        $result = array();
         // retrieve the owner field directly from the bean
         $ownerField = $provider->getFilter('Owner')->getOwnerField($this->bean);
-        return array($ownerField => 'id');
+        $result[$ownerField] = 'id';
+        return $result;
     }
 
     /**
@@ -95,12 +108,17 @@ class ACLVisibility extends SugarVisibility implements StrategyInterface
      */
     public function elasticAddFilters(\User $user, \Elastica\Filter\Bool $filter, Visibility $provider)
     {
-        if ($this->bean->bean_implements('ACL') && ACLController::requireOwner($this->bean->module_dir, 'list')) {
-            $options = array(
-                'bean' => $this->bean,
-                'user' => $user,
-            );
-            $filter->addMust($provider->createFilter('Owner', $options));
+        $accessToHandle = 'list';
+        if ($this->bean->bean_implements('ACL')) {
+            $actualAccess = ACLAction::getUserAccessLevel($user->id, $this->bean->module_dir, $accessToHandle);
+
+            if (ACLController::requireOwner($this->bean->module_dir, $accessToHandle)) {
+                $options = array(
+                    'bean' => $this->bean,
+                    'user' => $user,
+                );
+                $filter->addMust($provider->createFilter('Owner', $options));
+            }
         }
     }
 }

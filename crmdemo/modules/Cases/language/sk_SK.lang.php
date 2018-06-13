@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,123 +11,123 @@
  */
 
 $mod_strings = array (
-	'ERR_DELETE_RECORD'					=> 'K odstráneniu účtu, musíte zadať číslo záznamu.',
+	'ERR_DELETE_RECORD'					=> 'Ak chcete zmazať účet, musíte zadať číslo záznamu.',
 	'LBL_ACCOUNT_ID'					=> 'ID účtu',
 	'LBL_ACCOUNT_NAME'					=> 'Názov účtu:',
 	'LBL_ACCOUNTS_SUBPANEL_TITLE'		=> 'Účty',
 	'LBL_ACTIVITIES_SUBPANEL_TITLE'		=> 'Aktivity',
 	'LBL_ATTACH_NOTE' 					=> 'Pripojiť poznámku',
 	'LBL_BUGS_SUBPANEL_TITLE'			=> 'Chyby',
-	'LBL_CASE_NUMBER'					=> 'Číslo udalosti',
-	'LBL_CASE_SUBJECT'					=> 'Predmet udalosti:',
-	'LBL_CASE'							=> 'Udalosť:',
-	'LBL_CONTACT_CASE_TITLE'			=> 'Kontak k udalosti:',
+	'LBL_CASE_NUMBER'					=> 'Číslo prípadu:',
+	'LBL_CASE_SUBJECT'					=> 'Predmet prípadu:',
+	'LBL_CASE'							=> 'Prípad:',
+	'LBL_CONTACT_CASE_TITLE'			=> 'Kontakt prípadu:',
 	'LBL_CONTACT_NAME'					=> 'Meno kontaktu:',
 	'LBL_CONTACT_ROLE'					=> 'Rola:',
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontakty',
-	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Udalosti',
+	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Prípady',
 	'LBL_DESCRIPTION'					=> 'Popis:',
 	'LBL_FILENANE_ATTACHMENT' 			=> 'Pripojený súbor',	
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'História',
 	'LBL_INVITEE'						=> 'Kontakty',
 	'LBL_MEMBER_OF'						=> 'Účet',
-    'LBL_MODULE_NAME'					=> 'Udalosti',
+    'LBL_MODULE_NAME'					=> 'Prípady',
     'LBL_MODULE_NAME_SINGULAR'			=> 'Prípad',
-	'LBL_MODULE_TITLE'					=> 'Udalosti: Hlavná stránka',
-	'LBL_NEW_FORM_TITLE'				=> 'Nová udalosť',
+	'LBL_MODULE_TITLE'					=> 'Prípad: Hlavná stránka',
+	'LBL_NEW_FORM_TITLE'				=> 'Nový prípad',
 	'LBL_NUMBER'						=> 'Číslo:',
 	'LBL_PRIORITY'						=> 'Priorita:',
 	'LBL_PROJECTS_SUBPANEL_TITLE' 		=> 'Projekty',
 	'LBL_DOCUMENTS_SUBPANEL_TITLE' 		=> 'Dokumenty',
-	'LBL_RESOLUTION'					=> 'Rozlíšenie:',
-	'LBL_SEARCH_FORM_TITLE'				=> 'Prehľadávanie udalostí',
+	'LBL_RESOLUTION'					=> 'Riešenie:',
+	'LBL_SEARCH_FORM_TITLE'				=> 'Prehľadávanie prípadov',
 	'LBL_STATUS'						=> 'Stav:',
-    'LBL_SOURCE' => 'Source:',
+    'LBL_SOURCE' => 'Zdroj:',
 	'LBL_SUBJECT'						=> 'Predmet:',
-	'LBL_SYSTEM_ID'						=> 'Systém ID',
+	'LBL_SYSTEM_ID'						=> 'ID systému',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Názov účtu',
-	'LBL_LIST_ASSIGNED'					=> 'Priradený k',
+	'LBL_LIST_ASSIGNED'					=> 'Priradené k',
 	'LBL_LIST_CLOSE'					=> 'Zavrieť',
-	'LBL_LIST_FORM_TITLE'				=> 'Zoznam udalostí',
+	'LBL_LIST_FORM_TITLE'				=> 'Zoznam prípadov',
 	'LBL_LIST_LAST_MODIFIED'			=> 'Naposledy zmenené',
-	'LBL_LIST_MY_CASES'					=> 'Moje otvorené udalosti',
-	'LBL_LIST_NUMBER'					=> 'Poč.',
+	'LBL_LIST_MY_CASES'					=> 'Moje otvorené prípady',
+	'LBL_LIST_NUMBER'					=> 'Č.',
 	'LBL_LIST_PRIORITY'					=> 'Priorita',
 	'LBL_LIST_STATUS'					=> 'Stav',
 	'LBL_LIST_SUBJECT'					=> 'Predmet',
-	'LBL_LIST_ASSIGNED_TO_NAME'   		=> 'Pridelený uživateľ',
+	'LBL_LIST_ASSIGNED_TO_NAME'   		=> 'Priradený používateľ',
 	'LBL_SHOW_MORE'				        => 'Zobraziť viac prípadov',
-	'LNK_CASE_LIST'						=> 'Zobrazenie udalostí',
-    'LNK_NEW_CASE'						=> 'Vytvoriť udalosť',
+	'LNK_CASE_LIST'						=> 'Zobraziť prípady',
+    'LNK_NEW_CASE'						=> 'Vytvoriť prípad',
     'LBL_CASE_FROM_TWITTER_TITLE'		=> 'Tweet',
     'LNK_CREATE'                        => 'Vytvoriť prípad',
-    'LNK_CREATE_WHEN_EMPTY'             => 'Vytvorte prípad teraz.',
-	'NTC_REMOVE_FROM_BUG_CONFIRMATION'	=> 'Skutočne chcete odstániť tento prípad z chybára?',
-	'NTC_REMOVE_INVITEE'				=> 'Skutočne, chcete odstrániť tento kontakt z udalosti?',
-	'LBL_LIST_DATE_CREATED'			=> 'Dátum vloženia',
-	'LBL_ASSIGNED_TO_NAME' => 'Pridelený k',
-	'LBL_TYPE' => 'Typ:',
-	'LBL_WORK_LOG' => 'Záznam práce',
-	'LNK_IMPORT_CASES' => 'Import udalostí',
-	'LNK_CASE_REPORTS' => 'Zobrazenie výkazu o udalosti',
-	'LBL_SHOW_IN_PORTAL' => 'Ukázať na Portáli',
+    'LNK_CREATE_WHEN_EMPTY'             => 'Vytvorte prípad.',
+	'NTC_REMOVE_FROM_BUG_CONFIRMATION'	=> 'Naozaj chcete odstrániť tento prípad z chýb?',
+	'NTC_REMOVE_INVITEE'				=> 'Naozaj chcete odstrániť tento kontakt z prípadu?',
+	'LBL_LIST_DATE_CREATED'			=> 'Dátum vytvorenia',
+	'LBL_ASSIGNED_TO_NAME' => 'Priradené k',
+	'LBL_TYPE' => 'Typ',
+	'LBL_WORK_LOG' => 'Denník práce',
+	'LNK_IMPORT_CASES' => 'Importivať prípady',
+	'LNK_CASE_REPORTS' => 'Zobraziť hlásenia o prípadoch',
+	'LBL_SHOW_IN_PORTAL' => 'Zobraziť na portáli',
 	'LBL_CREATE_KB_DOCUMENT' => 'Vytvoriť článok',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Báza znalostí',
 
-    'LBL_CREATED_USER' => 'Vytvorený užívateľ',
-    'LBL_MODIFIED_USER' => 'Upravený užívateľ',
+    'LBL_CREATED_USER' => 'Vytvorený používateľ',
+    'LBL_MODIFIED_USER' => 'Upravený používateľ',
     'LBL_PROJECT_SUBPANEL_TITLE' => 'Projekty',
-    'LBL_CASE_INFORMATION' => 'Prehľad o udalosti',
+    'LBL_CASE_INFORMATION' => 'Prehľad',
 
     //For export labels
-    'LBL_MODIFIED_BY_NAME_OWNER' => 'Upravené podľa mena vlastníka',
-    'LBL_MODIFIED_BY_NAME_MOD' => 'Upravené podľa názvu módu',
-    'LBL_CREATED_BY_NAME_OWNER' => 'Vytvorené podľa mena vlastníka',
-    'LBL_CREATED_BY_NAME_MOD' => 'Vytvorené podľa názvu módu',
-    'LBL_ASSIGNED_USER_NAME_OWNER' => 'Pridelené užívateľské meno vlastníka',
-    'LBL_ASSIGNED_USER_NAME_MOD' => 'Pridelené užívateľské meno MOD',
-    'LBL_TEAM_COUNT_OWNER' => 'Vlastník Team Count',
-    'LBL_TEAM_COUNT_MOD' => 'tímové módové počítadlo',
+    'LBL_MODIFIED_BY_NAME_OWNER' => 'Upravené vlastníkom s menom',
+    'LBL_MODIFIED_BY_NAME_MOD' => 'Upravené používateľom s menom',
+    'LBL_CREATED_BY_NAME_OWNER' => 'Vytvorené vlastníkom s menom',
+    'LBL_CREATED_BY_NAME_MOD' => 'Vytvorené vlastníkom s menom',
+    'LBL_ASSIGNED_USER_NAME_OWNER' => 'Priradený používateľ – vlastník',
+    'LBL_ASSIGNED_USER_NAME_MOD' => 'Priradené meno používateľa',
+    'LBL_TEAM_COUNT_OWNER' => 'Vlastník počtu tímov',
+    'LBL_TEAM_COUNT_MOD' => 'Počet tímov',
     'LBL_TEAM_NAME_OWNER' => 'Vlastník názvu tímu',
-    'LBL_TEAM_NAME_MOD' => 'Mod názvu tímu',
+    'LBL_TEAM_NAME_MOD' => 'Názov tímu',
     'LBL_ACCOUNT_NAME_OWNER' => 'Vlastník názvu účtu',
-    'LBL_ACCOUNT_NAME_MOD' => 'Mod názvu účtu',
-    'LBL_MODIFIED_USER_NAME' => 'Upravené užívateľské meno',
-    'LBL_MODIFIED_USER_NAME_OWNER' => 'Vlastník upraveného užívateľského mena',
-    'LBL_MODIFIED_USER_NAME_MOD' => 'Mod upraveného užívateľského mena',
-    'LBL_PORTAL_VIEWABLE' => 'Dostupný portál',
-    'LBL_EXPORT_ASSIGNED_USER_ID' => 'Pridelené užívateľské ID',
-    'LBL_EXPORT_MODIFIED_USER_ID' => 'Upravené podľa ID',
-    'LBL_EXPORT_CREATED_BY' => 'Vytvorené podľa ID',
-    'LBL_EXPORT_CREATED_BY_NAME' => 'Vytvorené podľa mena užívateľa',
-    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Pridelené meno užívateľa',
-    'LBL_EXPORT_TEAM_COUNT' => 'tímové počítadlo',
+    'LBL_ACCOUNT_NAME_MOD' => 'Názov účtu',
+    'LBL_MODIFIED_USER_NAME' => 'Upravené meno používateľa',
+    'LBL_MODIFIED_USER_NAME_OWNER' => 'Vlastník upraveného mena používateľa',
+    'LBL_MODIFIED_USER_NAME_MOD' => 'Upravené meno používateľa',
+    'LBL_PORTAL_VIEWABLE' => 'Viditeľné na portáli',
+    'LBL_EXPORT_ASSIGNED_USER_ID' => 'Priradené používateľské ID',
+    'LBL_EXPORT_MODIFIED_USER_ID' => 'Upravené používateľom s ID',
+    'LBL_EXPORT_CREATED_BY' => 'Vytvorené používateľom s ID',
+    'LBL_EXPORT_CREATED_BY_NAME' => 'Vytvorené používateľom',
+    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Priradené meno používateľa',
+    'LBL_EXPORT_TEAM_COUNT' => 'Počet tímov',
 
     // SNIP
-	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'E-maily súvisiace kontakty',
+	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'E-maily súvisiacich kontaktov',
 
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Poznámky',
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module is used to track and manage product or service related problems reported to your organization by customers. {{plural_module_name}} are typically related to an {{accounts_singular_module}} record, and multiple {{plural_module_name}} may be associated to a single {{accounts_singular_module}}. There are various ways you can create {{plural_module_name}} in Sugar such as via the {{plural_module_name}} module, importing {{plural_module_name}}, or converted from email. Once the {{module_name}} is created, you can view and edit information pertaining to the {{module_name}} via the {{module_name}}&#39;s record view. Each {{module_name}} record may then relate to other Sugar records such as {{calls_module}}, {{contacts_module}}, {{bugs_module}}, and many others.',
+    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} sa používa na sledovanie a správu problémov týkajúcich sa produktov a služieb, ktoré vašej organizácii nahlásili zákazníci. {{plural_module_name}} sú zvyčajne prepojené so záznamom v module {{accounts_singular_module}}, pričom s jedným {{accounts_singular_module}} môže byť prepojených viac {{plural_module_name}}. K dispozícii sú rôzne spôsoby, ako môžete vytvoriť {{plural_module_name}} v aplikácii Sugar, napr. pomocou modulu {{plural_module_name}}, importom {{plural_module_name}} alebo konverziou z e-mailu. Po vytvorení {{module_name}} môžete informácie o {{module_name}} zobrazovať a meniť z náhľadu záznamu {{module_name}}. Každý záznam v module {{module_name}} potom možno naviazať na ďalšie záznamy v aplikácii Sugar, ako {{calls_module}}, {{contacts_module}}, {{bugs_module}} a mnoho ďalších.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'The {{plural_module_name}} module is used to track and manage product or service related problems reported to your organization by customers.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} sa používa na sledovanie a správu problémov týkajúcich sa produktov a služieb, ktoré vašej organizácii nahlásili zákazníci.
 
-- Edit this record&#39;s fields by clicking an individual field or the Edit button.
-- View or modify links to other records in the subpanels by toggling the bottom left pane to "Data View".
-- Make and view user comments and record change history in the {{activitystream_singular_module}} by toggling the bottom left pane to "Activity Stream".
-- Follow or favorite this record using the icons to the right of the record name.
-- Additional actions are available in the dropdown Actions menu to the right of the Edit button.',
+- Tieto polia záznamu môžete upraviť kliknutím na jednotlivé polia alebo pomocou tlačidla Upraviť.
+- Prepojenia na iné záznamy môžete zobraziť alebo upraviť v podpaneloch prepnutím spodného ľavého poľa na možnosť "Zobrazenie údajov".
+- Vytvorte a zobrazte používateľské komentáre a históriu zmien záznamu v module {{activitystream_singular_module}} prepnutím spodného ľavého poľa na "Aktivity".
+- Sledujte alebo označte tento záznam ako obľúbený pomocou ikon vpravo od názvu záznamu.
+- Ďalšie akcie sú k dispozícii v rozbaľovacej ponuke Akcie umiestnenej napravo od tlačidla Upraviť.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'The {{plural_module_name}} module is used to track and manage product or service related problems reported to your organization by customers.
+    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} sa používa na sledovanie a správu problémov týkajúcich sa produktov a služieb, ktoré vašej organizácii nahlásili zákazníci.
 
-To create a {{module_name}}:
-1. Provide values for the fields as desired.
- - Fields marked "Required" must be completed prior to saving.
- - Click "Show More" to expose additional fields if necessary.
-2. Click "Save" to finalize the new record and return to the previous page.',
+Ak chcete vytvoriť modul {{module_name}}:
+1. Zadajte požadované hodnoty do polí.
+ - Polia označené ako "Povinné" je pred uložením treba vyplniť.
+ - Ak chcete rozbaliť dodatočné polia, kliknite na možnosť "Zobraziť viac".
+2. Kliknite na možnosť "Uložiť" na dokončenie nového záznamu a návrat na predchádzajúcu stránku.',
 );

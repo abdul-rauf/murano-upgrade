@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -34,7 +34,7 @@ $mod_strings = array (
     'LBL_FORECAST_TIME_ID' => 'ID przedziału czasu',
     'LBL_FORECAST_TYPE' => 'Typ prognozy',
     'LBL_FORECAST_OPP_COUNT' => 'Łączna liczba szans',
-    'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Wartość szans sprzedażowych',
+    'LBL_FORECAST_PIPELINE_OPP_COUNT' => 'Liczba szans sprzedażowych',
     'LBL_FORECAST_OPP_WEIGH'=> 'Ważona kwota',
     'LBL_FORECAST_OPP_COMMIT' => 'Prawdopodobny przypadek',
     'LBL_FORECAST_OPP_BEST_CASE'=>'Najlepszy przypadek',
@@ -43,17 +43,17 @@ $mod_strings = array (
     'LBL_DATE_COMMITTED'=> 'Data wykonania',
     'LBL_DATE_ENTERED' => 'Data wprowadzenia',
     'LBL_DATE_MODIFIED' => 'Data modyfikacji',
-    'LBL_CREATED_BY' => 'Utworzone przez',
+    'LBL_CREATED_BY' => 'Utworzono przez',
     'LBL_DELETED' => 'Usunięto',
-    'LBL_MODIFIED_USER_ID'=>'Zmodyfikowane przez',
+    'LBL_MODIFIED_USER_ID'=>'Zmodyfikowano przez',
     'LBL_WK_VERSION' => 'Wersja',
-    'LBL_WK_REVISION' => 'Wydanie',
+    'LBL_WK_REVISION' => 'Wersja',
 
     //Quick Commit labels.
     'LBL_QC_TIME_PERIOD' => 'Przedział czasu:',
     'LBL_QC_OPPORTUNITY_COUNT' => 'Liczba szans:',
     'LBL_QC_WEIGHT_VALUE' => 'Ważona kwota:',
-    'LBL_QC_COMMIT_VALUE' => 'Zadeklarowana kwota:',
+    'LBL_QC_COMMIT_VALUE' => 'Zadeklaruj kwotę:',
     'LBL_QC_COMMIT_BUTTON' => 'Wykonaj',
     'LBL_QC_WORKSHEET_BUTTON' => 'Arkusz',
     'LBL_QC_ROLL_COMMIT_VALUE' => 'Rozwinięcie — zadeklarowana kwota:',
@@ -76,7 +76,7 @@ $mod_strings = array (
     'LBL_OW_TYPE'=>'Typ',
 
     //forecast worksheet direct reports forecast
-    'LBL_FDR_USER_NAME'=>'Zwierzchnik',
+    'LBL_FDR_USER_NAME'=>'Raport bezpośredni',
     'LBL_FDR_OPPORTUNITIES'=>'Prognozowane szanse:',
     'LBL_FDR_WEIGH'=>'Ważona kwota szans:',
     'LBL_FDR_COMMIT'=>'Zadeklarowana kwota',
@@ -93,11 +93,11 @@ $mod_strings = array (
     'LBL_SEARCH_LABEL' => 'Wybierz',
     'LBL_COMMIT_HEADER' => 'Wykonaj prognozę',
     'LBL_DV_LAST_COMMIT_DATE' =>'Data ostatniego wykonania:',
-    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Ostatnia zadeklarowana kwota:',
+    'LBL_DV_LAST_COMMIT_AMOUNT' =>'Ostatnie zadeklarowane kwoty:',
     'LBL_DV_FORECAST_ROLLUP' => 'Rozwinięcie prognozy',
     'LBL_DV_TIMEPERIOD' => 'Przedział czasu:',
-    'LBL_DV_TIMPERIOD_DATES' => 'Zakres danych:',
-    'LBL_LOADING_COMMIT_HISTORY' => 'Ładowanie historii dodawania...',
+    'LBL_DV_TIMPERIOD_DATES' => 'Zakres dat:',
+    'LBL_LOADING_COMMIT_HISTORY' => 'Ładowanie historii wykonania...',
 
     //list view
     'LBL_LV_TIMPERIOD'=> 'Przedział czasu',
@@ -118,11 +118,11 @@ $mod_strings = array (
     'LBL_FC_START_DATE' => 'Data rozpoczęcia',
     'LBL_FC_USER' => 'Harmonogram dla',
 
-    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Nie ma aktywnych przedziałów czasowych dla Prognozowania.',
+    'LBL_NO_ACTIVE_TIMEPERIOD'=>'Brak aktywnych przedziałów czasowych dla prognozowania.',
     'LBL_FDR_ADJ_AMOUNT'=>'Skorygowana kwota',
     'LBL_SAVE_WOKSHEET'=>'Zapisz arkusz',
     'LBL_RESET_WOKSHEET'=>'Resetuj arkusz',
-    'LBL_SHOW_CHART'=>'Zobacz wykresy',
+    'LBL_SHOW_CHART'=>'Wyświetl wykres',
     'LBL_RESET_CHECK'=>'Wszystkie dane arkuszy dla wybranych przedziałów czasowych i zalogowanych użytkowników zostaną usunięte. Kontynuować?',
 
     'LB_FS_LIKELY_CASE'=>'Prawdopodobny przypadek',
@@ -165,7 +165,7 @@ $mod_strings = array (
     'LBL_GRAPH_COMMIT_LEGEND'=>'Zadeklarowana prognoza',
     'LBL_GRAPH_OPPS_LEGEND'=>'Zamknięte szanse',
     'LBL_TP_QUOTA'=>'Target:',
-    'LBL_CHART_FOOTER'=>'Historia prognoz<br/> Target/Prognozowana kwota/Zamknięta wartość szans',
+    'LBL_CHART_FOOTER'=>'Historia prognoz<br> Target/Prognozowana kwota/Zamknięta wartość szans',
     'LBL_TOTAL_VALUE'=>'Sumy całkowite:',
     'LBL_COPY_AMOUNT'=>'Suma kwot',
     'LBL_COPY_WEIGH_AMOUNT'=>'Suma ważonych kwot',
@@ -178,7 +178,7 @@ $mod_strings = array (
     'LBL_CHART_TITLE'=>'Target/Zadeklarowane/Wykonane',
 
     'LBL_FORECAST' => 'Prognoza',
-    'LBL_COMMIT_STAGE' => 'Etap zaangażowania',
+    'LBL_COMMIT_STAGE' => 'Etap wykonania',
     'LBL_SALES_STAGE' => 'Etap',
     'LBL_AMOUNT' => 'Ilość',
     'LBL_PERCENT' => 'Procent',
@@ -219,7 +219,7 @@ $mod_strings = array (
     //Labels for worksheet items
     'LBL_EXPECTED_OPPORTUNITIES' => 'Oczekiwane szanse',
     'LBL_DISPLAYED_TOTAL' => 'Wyświetlona suma',
-    'LBL_TOTAL' => 'Suma całkowita',
+    'LBL_TOTAL' => 'Suma',
     'LBL_OVERALL_TOTAL' => 'Łączna suma',
     'LBL_EDITABLE_INVALID' => 'Nieprawidłowa wartość dla {0}',
     'LBL_EDITABLE_INVALID_RANGE' => 'Wartość musi zawierać się między {0} a {1}',
@@ -249,7 +249,7 @@ $mod_strings = array (
     'LBL_DISTANCE_LEFT_BEST_TO_QUOTA' => 'Najlepsze poniżej targetu',
     'LBL_DISTANCE_ABOVE_WORST_FROM_QUOTA' => 'Najgorsze powyżej targetu',
     'LBL_DISTANCE_LEFT_WORST_TO_QUOTA' => 'Najgorsze poniżej targetu',
-    'LBL_CLOSED' => 'Zrealizowano',
+    'LBL_CLOSED' => 'Zakończone sukcesem',
     'LBL_DISTANCE_ABOVE_LIKELY_FROM_CLOSED' => 'Prawdopodobne powyżej Zrealizowanych',
     'LBL_DISTANCE_LEFT_LIKELY_TO_CLOSED' => 'Prawdopodobne poniżej Zrealizowanych',
     'LBL_DISTANCE_ABOVE_BEST_FROM_CLOSED' => 'Najlepsze powyżej Zrealizowanych',
@@ -263,7 +263,7 @@ $mod_strings = array (
     'LBL_IN_FORECAST' => 'W prognozie',
 
     // Actions Dropdown
-    'LBL_ACTIONS' => 'Akcje',
+    'LBL_ACTIONS' => 'Czynności',
     'LBL_EXPORT_CSV' => 'Eksport do CSV',
     'LBL_CANCEL' => 'Anuluj',
 
@@ -272,7 +272,7 @@ $mod_strings = array (
     'LBL_CHART_INCLUDED' => 'Uwzględniono',
     'LBL_CHART_NOT_INCLUDED' => 'Nie uwzględniono',
     'LBL_CHART_ADJUSTED' => '(Dostosowane)',
-    'LBL_SAVE_DRAFT' => 'Zapisz jako wersję roboczą',
+    'LBL_SAVE_DRAFT' => 'Zapisz wersję roboczą',
     'LBL_CHANGES_BY' => 'Zmodyfikowano przez {0}',
     'LBL_FORECAST_SETTINGS' => 'Ustawienia',
 
@@ -298,8 +298,8 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_TIMEPERIODS' => 'Przedział czasu',
     'LBL_FORECASTS_CONFIG_TITLE_RANGES' => 'Zakresy prognoz',
     'LBL_FORECASTS_CONFIG_TITLE_SCENARIOS' => 'Scenariusze',
-    'LBL_FORECASTS_CONFIG_TITLE_WORKSHEET_COLUMNS' => 'Kolumny robocze',
-    'LBL_FORECASTS_CONFIG_TITLE_FORECAST_BY' => 'Wyświetl arkusze robocze prognoz wg',
+    'LBL_FORECASTS_CONFIG_TITLE_WORKSHEET_COLUMNS' => 'Kolumny arkuszy',
+    'LBL_FORECASTS_CONFIG_TITLE_FORECAST_BY' => 'Wyświetl arkusze prognoz wg',
 
     'LBL_FORECASTS_CONFIG_HOWTO_TITLE_FORECAST_BY' => 'Prognozy wg',
 
@@ -326,10 +326,10 @@ $mod_strings = array (
     'LBL_FISCAL_YEAR' => 'Rok podatkowy',
 
     // worksheet layout config
-    'LBL_FORECASTS_CONFIG_GENERAL_FORECAST_BY_TEXT' => 'Wybierz sposób wypełnienia arkusza roboczego prognozy:',
+    'LBL_FORECASTS_CONFIG_GENERAL_FORECAST_BY_TEXT' => 'Wybierz sposób wypełnienia arkusza prognozy:',
     'LBL_FORECASTS_CONFIG_GENERAL_FORECAST_BY_OPPORTUNITIES' => 'Szanse',
     'LBL_FORECASTS_CONFIG_GENERAL_FORECAST_BY_PRODUCT_LINE_ITEMS' => 'Pozycje szansy',
-    'LBL_REVENUELINEITEM_NAME' => 'Nazwa produktu',
+    'LBL_REVENUELINEITEM_NAME' => 'Nazwa pozycji szansy',
     'LBL_FORECASTS_CONFIG_WORKSHEET_LAYOUT_DETAIL_MESSAGE' => 'Arkusze zostaną wypełnione przez:',
 
     // ranges config
@@ -388,7 +388,7 @@ $mod_strings = array (
     'LBL_CATEGORY' => 'Kategoria',
     'LBL_COST_PRICE' => 'Cena kosztów własnych',
     'LBL_TOTAL_DISCOUNT_AMOUNT' => 'Całkowita kwota rabatu',
-    'LBL_FORECASTS_CONFIG_WORKSHEET_TEXT' => 'Wybierz, które kolumny powinny zostać wyświetlone w widoku arkusza roboczego. Domyślnie zostaną uzupełnione następujące pola:',
+    'LBL_FORECASTS_CONFIG_WORKSHEET_TEXT' => 'Wybierz, które kolumny powinny zostać wyświetlone w widoku arkusza. Domyślnie zostaną uzupełnione następujące pola:',
 
     // forecast details dashlet
     'LBL_DASHLET_FORECAST_NOT_SETUP' => 'Aby można było korzystać z tego widżetu, prognoza musi zostać skonfigurowana. Skontaktuj się z administratorem.',

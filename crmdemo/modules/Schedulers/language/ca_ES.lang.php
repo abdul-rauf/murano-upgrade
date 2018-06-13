@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Esborra arxius d&#39;eines de diagnòstic',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Esborra arxius PDF temporals',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Actualitzar taula tracker_sessions',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Executar Notificacions de recordatori per correu electrònic',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Executa les notificacions dels recordatoris per correu electrònic',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Netejar cua de treball',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Crear períodes futurs de temps',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Actualització d&#39;articles KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicar articles aprovats i fer que caduquin articles de la base de coneixement.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Tasca programada de l&#39;Autor de processos',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Tasca planifica de l&#39;Advanced Workflow',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intèrval:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Actualitzar Treballs',
 'LBL_POLLMONITOREDINBOXES' => 'Comprovar Comptes de Correu Entrant',
 'LBL_PERFORMFULLFTSINDEX' => 'Cerca de text complet Sistema d&#39;Índex',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Esborra els arxius PDF temporals',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Publiqueu articles aprovats i feu que caduquin articles de la base de coneixement.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Planificador de tasques de cerca d&#39;Elasticsearch',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Esborra els arxius de les eines de diagnòstic',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Esborra els arxius temporals',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Executar campanyes de Correu Massiu Nocturnes',
 'LBL_ASYNCMASSUPDATE' => 'Fer actualitzacions massives asíncrones',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Actualitzar Taules de Sessió de Monitorització',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Crear períodes futurs de temps',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'Executar Envia recordatoris per correu electrònic',
+'LBL_SENDEMAILREMINDERS'=> 'Executa l&#39;enviament de recordatoris per correu electrònic',
 'LBL_CLEANJOBQUEUE' => 'Alliberar espai en cua de treball',
 'LBL_CLEANOLDRECORDLISTS' => 'Netejar antigues llistes de registres',
 );

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -349,6 +349,17 @@ class RelateRecordApi extends SugarApi
         // updateBean may remove the relationship. see PAT-337 for details
         $this->updateBean($relatedBean, $api, $args);
         $relatedBean->retrieve($args['remote_id']);
+
+        //if a filename guid exists, then use moduleapi to make final move from tmp dir if applicable
+        if (isset($args['filename_guid'])) {
+            $moduleApi = $this->getModuleApi($api, $linkName);
+            $relArgs = array(
+                'module' => $relatedBean->module_name,
+                'record' => $relatedBean->id,
+                'filename_guid' => $args['filename_guid'],
+            );
+            $moduleApi->updateRecord($api, $relArgs);
+        }
 
         $relatedArray = array();
 

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -95,10 +95,13 @@ $mod_strings = array (
     'LBL_KB_STATUS_BACK_TO_DRAFT' => '문서 상태가 초고로 다시 변경되었습니다.',
     'LBL_OPERATOR_CONTAINING_THESE_WORDS' => '이 단어를 포함',
     'LBL_OPERATOR_EXCLUDING_THESE_WORDS' => '이 단어 제외',
-    'ERROR_EXP_DATE_LOW' => 'The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_EXP_DATE_LOW' => '만료 일자를 발매 일자 이전으로 설정할 수 없습니다.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => '승인된 상태는 게시일을 요구합니다.',
     'ERROR_ACTIVE_DATE_LOW' => 'The Publish Date must occur on a later date than today&#39;s date.',
     'ERROR_ACTIVE_DATE_EMPTY' => '게시 날짜가 비었습니다.',
     'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>을(를) 성공적으로 만들었습니다.', // use when a model is available
+    'ERROR_IS_BEFORE' => '오류. 이 필드에 입력된 일자는 {{this}} 필드에 입력된 일자 이후여야 합니다.',
     'TPL_SHOW_MORE_MODULE' => '더 많은 {{module}} 기사...',
+    'LBL_LIST_FORM_TITLE' => '지식 기반 목록',
+    'LBL_SEARCH_FORM_TITLE' => '지식 기반 검색',
 );

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -311,7 +311,7 @@ $mod_strings = array (
   'LBL_SCHEDULER_CHECK_BAD' =>   'Nici o programatoare detectata',
   'LBL_SCHEDULER_CHECK1_BAD'  => 'Scheduler nu a fost setat pentru a procesa  emailuri returnate de campanie.',
   'LBL_SCHEDULER_CHECK2_BAD'  => 'Scheduler nu a fost setat pentru a procesa emailuri de campanie.',
-  'LBL_SCHEDULER_NAME' =>   'Progamator',
+  'LBL_SCHEDULER_NAME' =>   'Programator',
   'LBL_SCHEDULER_STATUS' =>   'Status',
   'LBL_MARKETING_CHECK1_GOOD' => 'Componente E-mail marketing componente detectate.',
   'LBL_MARKETING_CHECK1_BAD'  => 'Nu există componente e-mail marketing detectate, va trebui să creaţi una la mail o campanie.',

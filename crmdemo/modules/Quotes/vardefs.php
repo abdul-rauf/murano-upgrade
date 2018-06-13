@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -62,6 +62,12 @@ $dictionary['Quote'] = array(
             'hideacl' => true,
             'reportable' => false,
             'massupdate' => false,
+            'processes' => array(
+                'types' => array(
+                    'RR' => false,
+                    'ALL' => true,
+                ),
+            ),
         ),
         'calc_grand_total' => array(
             'name' => 'calc_grand_total',
@@ -71,6 +77,12 @@ $dictionary['Quote'] = array(
             'default' => 1,
             'hideacl' => true,
             'massupdate' => false,
+            'processes' => array(
+                'types' => array(
+                    'RR' => false,
+                    'ALL' => true,
+                ),
+            ),
         ),
         'name' => array(
             'name' => 'name',
@@ -429,6 +441,7 @@ $dictionary['Quote'] = array(
             'type' => 'text',
             'dbType' => 'varchar',
             'group' => 'billing_address',
+            'group_label' => 'LBL_BILLING_ADDRESS',
             'len' => '150',
             'full_text_search' => array(
                 'enabled' => true,
@@ -470,6 +483,7 @@ $dictionary['Quote'] = array(
             'type' => 'text',
             'dbType' => 'varchar',
             'group' => 'shipping_address',
+            'group_label' => 'LBL_SHIPPING_ADDRESS',
             'len' => '150',
             'full_text_search' => array(
                 'enabled' => true,
@@ -518,7 +532,6 @@ $dictionary['Quote'] = array(
             'type' => 'relate',
             'table' => 'shipping_accounts',
             'isnull' => 'true',
-            'group' => 'shipping_address',
             'link' => 'shipping_accounts',
             'module' => 'Accounts',
             'source' => 'non-db',
@@ -526,7 +539,6 @@ $dictionary['Quote'] = array(
         'shipping_account_id' => array(
             'name' => 'shipping_account_id',
             'type' => 'id',
-            'group' => 'shipping_address',
             'vname' => 'LBL_SHIPPING_ACCOUNT_ID',
             'source' => 'non-db',
         ),
@@ -536,7 +548,6 @@ $dictionary['Quote'] = array(
             'id_name' => 'shipping_contact_id',
             'vname' => 'LBL_SHIPPING_CONTACT_NAME',
             'type' => 'relate',
-            'group' => 'shipping_address',
             'link' => 'shipping_contacts',
             'table' => 'shipping_contacts',
             'isnull' => 'true',
@@ -546,7 +557,6 @@ $dictionary['Quote'] = array(
         'shipping_contact_id' => array(
             'name' => 'shipping_contact_id',
             'rname' => 'last_name',
-            'group' => 'shipping_address',
             'id_name' => 'shipping_contact_id',
             'vname' => 'LBL_SHIPPING_CONTACT_ID',
             'type' => 'relate',
@@ -563,7 +573,6 @@ $dictionary['Quote'] = array(
             'id_name' => 'account_id',
             'vname' => 'LBL_ACCOUNT_NAME',
             'type' => 'relate',
-            'group' => 'billing_address',
             'link' => 'billing_accounts',
             'table' => 'billing_accounts',
             'isnull' => 'true',
@@ -581,16 +590,16 @@ $dictionary['Quote'] = array(
             'type' => 'relate',
             'link' => 'billing_accounts',
             'rname' => 'id',
-            'group' => 'billing_address',
             'vname' => 'LBL_ACCOUNT_ID',
             'source' => 'non-db',
             'massupdate' => false,
+            'module' => 'Accounts',
             'studio' => 'false',
+            'id_name' => 'account_id',
         ),
         'billing_account_name' => array(
             'name' => 'billing_account_name',
             'rname' => 'name',
-            'group' => 'billing_address',
             'id_name' => 'billing_account_id',
             'vname' => 'LBL_BILLING_ACCOUNT_NAME',
             'type' => 'relate',
@@ -605,14 +614,12 @@ $dictionary['Quote'] = array(
         'billing_account_id' => array(
             'name' => 'billing_account_id',
             'type' => 'id',
-            'group' => 'billing_address',
             'vname' => 'LBL_BILLING_ACCOUNT_ID',
             'source' => 'non-db',
         ),
         'billing_contact_name' => array(
             'name' => 'billing_contact_name',
             'rname' => 'full_name',
-            'group' => 'billing_address',
             'id_name' => 'billing_contact_id',
             'vname' => 'LBL_BILLING_CONTACT_NAME',
             'type' => 'relate',
@@ -628,7 +635,6 @@ $dictionary['Quote'] = array(
             'id_name' => 'billing_contact_id',
             'vname' => 'LBL_BILLING_CONTACT_ID',
             'type' => 'relate',
-            'group' => 'billing_address',
             'link' => 'billing_contacts',
             'table' => 'billing_contacts',
             'isnull' => 'true',

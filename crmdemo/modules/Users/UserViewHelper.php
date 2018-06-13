@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -364,14 +364,14 @@ class UserViewHelper {
             $this->ss->assign('MAILMERGE_ON', 'checked');
         }
 
-	$reminder_time = $this->bean->getPreference('reminder_time');
-	if(empty($reminder_time)){
-		$reminder_time = -1;
-	}
-	$email_reminder_time = $this->bean->getPreference('email_reminder_time');
-	if(empty($email_reminder_time)){
-		$email_reminder_time = -1;
-	}
+        $reminder_time = $this->bean->getPreference('reminder_time');
+        if (empty($reminder_time)) {
+            $reminder_time = -1;
+        }
+        $email_reminder_time = $this->bean->getPreference('email_reminder_time');
+        if (empty($email_reminder_time)) {
+            $email_reminder_time = -1;
+        }
 
         $this->ss->assign("REMINDER_TIME_OPTIONS", $app_list_strings['reminder_time_options']);
         $this->ss->assign("EMAIL_REMINDER_TIME_OPTIONS", $app_list_strings['reminder_time_options']);
@@ -444,9 +444,7 @@ class UserViewHelper {
 
             $this->ss->assign('DEFAULT_TEAM_OPTIONS', $teamsWidget->get_code());
 
-            require_once('modules/Teams/TeamSetManager.php');
-            $default_teams = TeamSetManager::getCommaDelimitedTeams($this->bean->team_set_id, $this->bean->team_id, true);
-            $this->ss->assign("DEFAULT_TEAM_LIST", $default_teams);
+            $this->ss->assign("DEFAULT_TEAM_LIST", TeamSetManager::getFormattedTeamsFromSet($this->bean, true));
         }
 
         $this->ss->assign('SHOW_TEAM_SELECTION', !empty($this->bean->id));

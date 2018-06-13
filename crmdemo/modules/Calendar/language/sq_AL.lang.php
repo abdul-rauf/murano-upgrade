@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -15,15 +15,15 @@ $mod_strings = array (
 	'LBL_MODULE_NAME' => 'Kalendari',
 	'LBL_MODULE_NAME_SINGULAR' => 'Kalendar',
 	'LBL_MODULE_TITLE' => 'Kalendari',
-	'LNK_NEW_CALL' => 'Cakto thirje',
+	'LNK_NEW_CALL' => 'Cakto thirrje',
 	'LNK_NEW_MEETING' => 'Cakto mbledhje',
 	'LNK_NEW_APPOINTMENT' => 'krijo takim',
 	'LNK_NEW_TASK' => 'Krijo detyrë',
-	'LNK_CALL_LIST' => 'Thirjet',
+	'LNK_CALL_LIST' => 'Thirrjet',
 	'LNK_MEETING_LIST' => 'Mbledhjet',
 	'LNK_TASK_LIST' => 'Detyrat',
 	'LNK_VIEW_CALENDAR' => 'Sot',
-	'LNK_IMPORT_CALLS' => 'Thirje të rëndësishme',
+	'LNK_IMPORT_CALLS' => 'Thirrje të rëndësishme',
 	'LNK_IMPORT_MEETINGS' => 'Mbledhje të rëndësishme',
 	'LNK_IMPORT_TASKS' => 'Detyra të rëndësishme',
 	'LBL_MONTH' => 'Muaji',
@@ -56,7 +56,7 @@ $mod_strings = array (
 	'LBL_ASSIGNED_TO_NAME' => 'Drejtuar',
 	'LBL_DATE' => 'Data dhe ora e nisjes',  
 	'LBL_CREATE_MEETING' => 'Cakto mbledhje',
-	'LBL_CREATE_CALL' => 'Thirje identifikuese',
+	'LBL_CREATE_CALL' => 'Thirrje identifikuese',
 	'LBL_HOURS_ABBREV' => 'h',
 	'LBL_MINS_ABBREV' => 'm',
 
@@ -101,7 +101,7 @@ $mod_strings = array (
 	'LBL_SETTINGS_DISPLAY_TIMESLOTS' => 'Shfaq kohën e lojërave elektronike në ditë dhe pikëpamjet e javës:',
 	'LBL_SETTINGS_TIME_STARTS'=>'Ora e nisjes', 
 	'LBL_SETTINGS_TIME_ENDS'=>'Ora e përfundimit', 
-	'LBL_SETTINGS_CALLS_SHOW' => 'trego thirjet',
+	'LBL_SETTINGS_CALLS_SHOW' => 'Trego thirrjet:',
 	'LBL_SETTINGS_TASKS_SHOW' => 'trego detyrat', 
 
 	'LBL_SAVE_BUTTON' => 'Ruaj',
@@ -137,6 +137,7 @@ $mod_strings = array (
     'LBL_CALENDAR_EVENT_NOT_A_RECURRING_EVENT' => "{0} nuk është një ngjarje që ndodh",
     'LBL_CALENDAR_EVENT_NOT_A_PARENT_OCCURRENCE' => "{0} nuk është prindër ndodhie",
     'LBL_CALENDAR_EVENT_RECURRENCE_MODULE_NOT_SUPPORTED' => "{0} nuk është ngjohur si modul i ngjerjeve që po ndodh",
+
 );
 
 $mod_list_strings = array(

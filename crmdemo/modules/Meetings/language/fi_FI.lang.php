@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'Sähköposti',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Lähetä kaikille kutsutuille',
     'LBL_POPUP_REMINDER' => 'Popup-muistutus',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup-muistutuksen aika',
+    'LBL_POPUP_REMINDER_TIME' => 'Ponnahdusviestimuistutuksen aika',
     'LBL_EMAIL_REMINDER' => 'Sähköpostimuistutus',
-    'LBL_EMAIL_REMINDER_TIME' => 'Sähköpostimuistutusaika',
+    'LBL_EMAIL_REMINDER_TIME' => 'Sähköpostimuistutuksen aika',
     'LBL_REMOVE' => 'Poista',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Ajoitus',
 	'LBL_SEARCH_BUTTON'=> 'Haku',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Poista kaikki toistot',
     'LBL_DATE_END_ERROR' => 'Päättymispäivä on ennen aloituspäivää',
     'LBL_REPEAT_PARENT_ID' => 'Toista Parent ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Kokouksen toistuva tunnus. Alkuperäisen kokuksen aloituspäivä',
     'LBL_RECURRING_SOURCE' => 'Toistuva lähde',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Oletko varma, että haluat poistaa kaikki toistuvat tietueet?',
     'LBL_RECURRENCE' => 'Toistuminen',

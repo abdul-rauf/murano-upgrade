@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -13,9 +13,8 @@
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
-//session_destroy();
-if (version_compare(phpversion(),'5.2.0') < 0) {
-	$msg = 'Minimum PHP version required is 5.2.0.  You are using PHP version  '. phpversion();
+if (version_compare(phpversion(),'5.4.0') < 0) {
+	$msg = 'Minimum PHP version required is 5.4.0.  You are using PHP version  '. phpversion();
     die($msg);
 }
 $session_id = session_id();
@@ -36,10 +35,11 @@ require_once('include/Localization/Localization.php');
 require_once('include/SugarTheme/SugarTheme.php');
 require_once('include/utils/LogicHook.php');
 require_once('data/SugarBean.php');
+require_once 'src/Util/Files/FileLoader.php';
 //check to see if the script files need to be rebuilt, add needed variables to request array
 $_REQUEST['root_directory'] = getcwd();
 $_REQUEST['js_rebuild_concat'] = 'rebuild';
-if (isset($_REQUEST['goto']) && $_REQUEST['goto'] != 'SilentInstall' && empty($_SESSION['js_minified'])) {    
+if (isset($_REQUEST['goto']) && $_REQUEST['goto'] != 'SilentInstall' && empty($_SESSION['js_minified'])) {
     require_once('jssource/minify.php');
     $_SESSION['js_minified'] = true;
 }
@@ -113,7 +113,7 @@ if(isset($_POST['language'])) {
 $current_language = isset($_SESSION['language']) ? $_SESSION['language'] : $default_lang;
 
 if(file_exists("install/language/{$current_language}.lang.php")) {
-    require_once FileLoader::validateFilePath("install/language/{$current_language}.lang.php");
+    require_once Sugarcrm\Sugarcrm\Util\Files\FileLoader::validateFilePath("install/language/{$current_language}.lang.php");
 } else {
 	require_once("install/language/{$default_lang}.lang.php");
 }
@@ -580,8 +580,8 @@ EOQ;
             $sugar_config['unique_key'] = get_unique_key();
         }
 
-        $validation_errors = validate_dbConfig('a');
-        if(count($validation_errors) > 0) {
+        $db_errors = validate_dbConfig('a');
+        if(count($db_errors) > 0) {
             $the_file = 'dbConfig_a.php';
             $si_errors = true;
         }

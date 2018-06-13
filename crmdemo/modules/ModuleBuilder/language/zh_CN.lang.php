@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -305,7 +305,7 @@ $mod_strings = array(
         'layoutsHelp'=> '选择一个 <b>布局来编辑</b>。<br/<br/>如需更改包含数据输入字段的布局，请点击<b>编辑视图</b>。<br/><br/>如需更改显示在编辑视图中输入字段的数据的布局， 请点击<b>细节视图</b>。<br/><br/>如需更改显示在默认列表中的列，情点击 <b>列表视图</b>。<br/><br/> 如需更改基本和高级查找表格布局，请点击<b>查找</b>。',
         'subpanelHelp'=> '选择一个<b>子面板</b> 来编辑。',
         'searchHelp' => '选择一个<b>查找</b> 布局来编辑。',
-        'labelsBtn'	=> '点击<b>保存</b>以保存您的自定义标签。',
+        'labelsBtn'	=> '编辑<b>标签</b>，显示该模块的数值。',
         'newPackage'=>'单击<b>新文件包</b>来创建一个新文件包。',
         'mbHelp'    => '<b>欢迎来到模块生成器。</b><br/><br/>用 <b>模块生成器</b> 来创建文件包，其中包含基于标准或自定义对象的自定义模块。<br/><br/>如需开始 ，请点击<b>新文件包</b> 来创建新文件包或者选择一个文件包来编辑。<br/><br/> <b>文件包</b> 作为自定义模块的容器，其所有部分都是项目的一部分。文件包可以包含一个或多个自定义模块，这些模块相互关联，或与应用程序中现有的其他模块相关联。 <br/><br/>例如：您可能想要创建一个文件包，其中包含与标准账户模块相关的自定义模块。或者，您可能想要创建一个文件包，其中包含多个新模块，联合发挥项目作用且相互关联，并与应用程序中现有的其他模块相关联。',
         'exportBtn' => '点击 <b>导出定制项</b> 来创建一个包含在工作室中为指定模块创建的定制项的文件包。',
@@ -711,6 +711,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'名称-必须以字母开头并可能只能包含字母、 数字和下划线。不能使用空格或其他特殊字符。',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'程序包密匙已存在',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'程序包名称已存在',
+'LBL_JS_PACKAGE_NAME'=>'文件包名称-必须以字母开头并可能只能包含字母、 数字和下划线。不能使用空格或其他特殊字符。',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'关键值-必须是含有字母数字，且以字母开头。',
 'LBL_JS_VALIDATE_KEY'=>'关键值 - 必须为字母数字且以字母开头，并无空格。',
 'LBL_JS_VALIDATE_LABEL'=>'请输入将用作此模块的显示名称的一个标签',
@@ -735,8 +736,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'您确定要删除这种关系？<br>注意：此操作可能无法几分钟内完成。',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'将使这种关系永久化，您确定要部署这种关系吗？',
 'LBL_CONFIRM_DONT_SAVE' => '自上次保存已做更改，您想要保存吗？',

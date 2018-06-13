@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,15 +14,15 @@
 {{#if collection.models}}
     {{#each collection.models}}
         <li class="search-result">
-            <a href="{{link}}" tabindex="-1">
+            {{#if viewAccess}}<a href="#{{buildRoute model=this}}" tabindex="-1">{{else}}<div class="qs-row">{{/if}}
                 {{#if ../layout.v2}}
-                    {{partial 'row' ../../this ../this model=this module=module}}
+                    {{partial 'row' ../../this view=../../this model=this module=module}}
                 {{else}}
                     <span class="label label-module label-module-mini label-{{module}}" title="{{getModuleName module plural=true}}">
                         {{moduleIconLabel module}}
                     </span>{{name}}{{#if field_name}}, {{field_name}}: {{field_value}}{{/if}}
                 {{/if}}
-            </a>
+            {{#if viewAccess}}</a>{{else}}</div>{{/if}}
         </li>
     {{/each}}
     {{#notEq collection.next_offset "-1"}}

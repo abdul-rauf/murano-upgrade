@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Door op Bevestigen te klikken wist u ALLE Voorspellingen en wijzigt u uw Mogelijkhedenweergave. Als dit niet is wat u wilde klikt u op Annuleren om terug te keren naar de eerdere instellingen.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Door op Bevestigen te klikken, wist u ALLE voorspellingen en wijzigt u uw Opportunities weergave.'
+        .'Ook ALLE procesdefinities met een doelmodule of omzetregels worden uitgeschakeld.'
+        .'Als dit niet uw bedoeling is, klikt u op annuleren om terug te keren naar de vorige instellingen.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Wanneer alle Revenue Line Items gesloten zijn en tenminste één is Gewonnen,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'dan zal de Opportunity Verkoopstadium op "Gewonnen" worden gezet.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Wanneer alle Revenue Line Items het Verkoopstadium &#39;Verloren&#39; hebben,',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'De {{plural_module_name}} module stelt u in staat om afzonderlijke verkopen en de regelitems behorende bij deze verkopen te volgen van begin tot het einde van het verkooptraject. Elk {{module_name}} record is een overkoepeling voor een groep {{revenuelineitems_module}} en andere belangrijke gegevens, zoals bijvoorbeeld {{quotes_module}}, {{contacts_module}}, etc. Elke {{revenuelineitems_singular_module}} is de potentiële verkoop van een bepaald product en behelst relevante verkoop informatie. Elke {{revenuelineitems_singular_module}} doorloopt normaal gesproken enkele verkoopstadia totdat deze "Gesloten - Gewonnen" óf "Gesloten - Verloren" wordt. Het {{module_name}} record vertegenwoordigt de waarde en de verwachte sluitingsdatum van de bijbehorende {{revenuelineitems_module}}. Het gebruik van {{plural_module_name}} en {{revenuelineitems_module}} kan nog verder verbeterd worden door gebruik te maken van Sugar&#39;s {{forecasts_singular_module}}ing module om daarmee beter grip te krijgen op verkooptrends en vraagvoorspelling als ook om de focus te krijgen op het behalen van verkoopquotas.',
+    'LBL_HELP_RECORDS' => 'Met de module {{plural_module_name}} kunt u individuele verkoop van start tot einde volgen. Elk {{module_name}} record vertegenwoordigt een verwachte verkoop en omvat relevante verkoopgegevens, evenals gegevens die betrekking hebben op andere records, zoals {{quotes_module}}, {{contacts_module}}, etc. Een {{module_name}} doorloopt doorgaans meerdere verkoopfases tot deze gemarkeerd wordt als "Gesloten gewonnen" of "Gesloten verloren". {{plural_module_name}} kan verder worden bekeken door middel van de {{forecasts_singular_module}} module van Sugar om verkooptrends te begrijpen en te voorspellen, evenals werk zo uit te voeren dat verkoopquota&#39;s worden gehaald.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'De {{plural_module_name}} module stelt u in staat om afzonderlijke verkopen en de regelitems behorende bij deze verkopen te volgen van begin tot het einde van het verkooptraject. Elk {{module_name}} record is een overkoepeling voor een groep {{revenuelineitems_module}} en andere belangrijke gegevens, zoals bijvoorbeeld {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'De {{plural_module_name}} module stelt u in staat om afzonderlijke verkopen en de regelitems behorende bij deze verkopen te volgen van begin tot het einde van het verkooptraject. Elk {{module_name}} record bevat een mogelijke verkoop en omvat relevante verkoopgegevens, evenals gegevens die betrekking hebben op andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc.
 
 - Pas de gegevens aan door op een individueel veld of op de Wijzigen knop te klikken.
-- Bekijk of pas koppelingen met andere records aan in de subpanels, inclusief {{revenuelineitems_module}}, door de "Data View" in te schakelen in het paneel linksonder..
+- Bekijk of pas koppelingen met andere records aan in de subpanels door de "Data View" in te schakelen in het paneel linksonder..
 - Maak en bekijk opmerkingen van gebruikers en de wijzigingshistorie in de {{activitystream_singular_module}} door "Activity Stream" in te schakelen in het paneel linksonder.
 - Volg of maak het record favoriet door gebruik te maken van de icoontjes rechts naast de naam van het record.
 - Extra acties zijn beschikbaar via het dropdown actie menu rechts naast de Wijzigen knop.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'De {{plural_module_name}} module stelt u in staat om afzonderlijke verkopen en de regelitems behorende bij deze verkopen te volgen van begin tot het einde. Elk {{module_name}} record stelt een koptitel voor een groep {{revenuelineitems_module}} voor, en verwijst ook naar andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, enz.
+    'LBL_HELP_CREATE' => 'De {{plural_module_name}} module stelt u in staat om afzonderlijke verkopen en de regelitems behorende bij deze verkopen te volgen van begin tot het einde. Elk {{module_name}} record stelt mogelijke verkoopgegevens voor en omvat relevantie verkoopgegevens en heeft betrekking op andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, enz.
 
 Een {{module_name}} maken:
 1. Noteer waarden voor de velden, zoals gewenst.
  - Velden die gemarkeerd zijn met "Vereist" moeten voor het opslaan worden ingevuld.
  - Klik op "Meer weergeven" om extra velden weer te geven, indien nodig.
-2. Klik op "Opslaan" om het nieuwe record te voltooien en terug te keren naar de vorige pagina.
-3. Na het opslaan, gebruik het {{revenuelineitems_module}} subpaneel om regelitems toe te voegen aan {{module_name}}.',
+2. Klik op "Opslaan" om het nieuwe record te voltooien en terug te keren naar de vorige pagina.',
 
 // END PRO/CORP
 

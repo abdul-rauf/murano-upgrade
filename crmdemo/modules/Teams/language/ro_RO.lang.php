@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,45 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => 'Esti sigur ca vrei sa stergi aceasta inregistrare?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Esti sigura ca vrei sa stergi acest angajat \\ membru?',
     'LBL_EDITLAYOUT' => 'Editeaza Plan General' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Permisiuni bazate pe echipă',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Permiteţi accesul echipei şi gestionaţă accesul după modul.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Activaţi permisiunile bazate pe echipă',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Selectaţi modulele de activat',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'Activarea permisiunilor bazate pe echipă vă va permite să atribuiţi drepturi specifice de acces echipelor şi utilizatorilor pentru module individuale, prin Gestionarea rolurilor.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+Dezactivarea permisiunilor bazate pe echipă pentru un modul va returna datele asociate permisiunilor bazate pe echipă pentru respectivul
+ modul, inclusiv Definiţiile de proces sau Procesele ce folosesc funcţia. Acestea includ Rolurile care folosesc
+ opţiunea "Proprietar şi echipă selectată" pentru modulul respectiv şi datele permisiunilor bazate pe echipă pentru înregistrările din modulul respectiv.
+ De asemenea, vă recomandăm să utilizaţi instrumentul Reparare şi reconstruire rapidă pentru a goli memoria cache a sistemului după ce dezactivaţi
+ permisiunile bazate pe echipă pentru orice modul.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Avertizare:</strong> Dezactivarea permisiunilor bazate pe echipă pentru un modul va returna datele asociate
+ permisiunilor bazate pe echipă pentru respectivul modul, inclusiv Definiţiile de proces sau Procesele ce folosesc funcţia. Acestea
+ includ Rolurile care folosesc opţiunea „Proprietar şi echipă selectată" pentru modulul respectiv şi datele permisiunilor bazate pe echipă
+ pentru înregistrările din modulul respectiv. De asemenea, vă recomandăm să utilizaţi instrumentul Reparare şi reconstruire rapidă pentru a goli memoria cache a sistemului după
+ ce dezactivaţi permisiunile bazate pe echipă pentru orice modul.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+Dezactivarea permisiunilor bazate pe echipă pentru un modul va returna datele asociate permisiunilor bazate pe echipă pentru respectivul
+ modul, inclusiv Definiţiile de proces sau Procesele ce folosesc funcţia. Acestea includ Rolurile care folosesc
+ opţiunea „Proprietar şi echipă selectată" pentru modulul respectiv şi datele permisiunilor bazate pe echipă pentru înregistrările din modulul respectiv.
+ De asemenea, vă recomandăm să utilizaţi instrumentul Reparare şi reconstruire rapidă pentru a goli memoria cache a sistemului după ce dezactivaţi
+ permisiunile bazate pe echipă pentru orice modul. Dacă nu aveţi acces la instrumentul Reparare şi reconstruire rapidă, contactaţi un administrator care are
+ acces la meniul Reparare.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Avertizare:</strong> Dezactivarea permisiunilor bazate pe echipă pentru un modul va returna datele asociate
+ permisiunilor bazate pe echipă pentru respectivul modul, inclusiv Definiţiile de proces sau Procesele ce folosesc funcţia. Acestea
+ includ Rolurile care folosesc opţiunea "Proprietar şi echipă selectată" pentru modulul respectiv şi datele permisiunilor bazate pe echipă pentru
+ înregistrările din modulul respectiv. De asemenea, vă recomandăm să utilizaţi instrumentul Reparare şi reconstruire rapidă pentru a goli memoria cache a sistemului după 
+ce dezactivaţi permisiunile bazate pe echipă pentru orice modul. Dacă nu aveţi acces la instrumentul Reparare şi reconstruire rapidă, contactaţi
+ un administrator care are acces la meniul Reparare.
+STR
+,
 );

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'E-mail',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Отправить Email-сообщение всем приглашенным',
     'LBL_EMAIL_REMINDER' => 'Email-напоминание',
-    'LBL_EMAIL_REMINDER_TIME' => 'Время Email-напоминания',
-    'LBL_POPUP_REMINDER_TIME' => 'Всплывающее окно напоминания времени',
+    'LBL_EMAIL_REMINDER_TIME' => 'Время напоминания по электронной почте',
+    'LBL_POPUP_REMINDER_TIME' => 'Время всплывающего напоминания по электронной почте',
     'LBL_SEND_BUTTON_TITLE'=>'Отправить приглашение [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Отправка приглашений',
 	'LBL_DATE_END'=>'Дата окончания',
 	'LBL_TIME_END'=>'Время окончания',
-	'LBL_REMINDER_TIME'=>'Время напоминания',
+    'LBL_REMINDER_TIME'=>'Время напоминания',
     'LBL_EMAIL_REMINDER_SENT' => 'Email-напоминание отправлено',
     'LBL_SEARCH_BUTTON'=> 'Поиск',
     'LBL_ACTIVITIES_REPORTS' => 'Отчеты по мероприятиям',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Удалить все повторения',
     'LBL_DATE_END_ERROR' => 'Дата окончания должна выбираться из диапазона до даты начала',
     'LBL_REPEAT_PARENT_ID' => 'Родительский ID повторений',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID повторения звонка. Дата первоначального звонка',
     'LBL_RECURRING_SOURCE' => 'Источник повторений',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Вы действительно хотите удалить все повторяющиеся записи?',
     'LBL_RECURRING_LIMIT_ERROR' => 'Этот повторяющийся звонок не может быть запланирован, т.к. он превышает максимально разрешенное повторение $limit.',

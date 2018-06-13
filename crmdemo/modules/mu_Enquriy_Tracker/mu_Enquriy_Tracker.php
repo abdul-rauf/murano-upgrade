@@ -33,7 +33,7 @@ require_once('modules/mu_Enquriy_Tracker/mu_Enquriy_Tracker_sugar.php');
 class mu_Enquriy_Tracker extends mu_Enquriy_Tracker_sugar {
 	
 	function mu_Enquriy_Tracker(){	
-		parent::mu_Enquriy_Tracker_sugar();
+		parent::__construct();
 	}
 	
 }

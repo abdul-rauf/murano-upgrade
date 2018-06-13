@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -46,13 +46,6 @@ class EmailMan extends SugarBean{
     // This is used to retrieve related fields from form posts.
 	var $additional_column_fields = array();
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function EmailMan()
-    {
-        self::__construct();
-    }
 
 	public function __construct() {
 		parent::__construct();
@@ -281,6 +274,9 @@ class EmailMan extends SugarBean{
      * this function will create an email if one does not exist. also the function will load these relationships leads, accounts, contacts
      * users and targets
      *
+     * The Message-ID is not stored on the reference email because the reference email is a single Emails record that
+     * represents N emails, all with their own Message-ID values.
+     *
      * @param varchar marketing_id message id
      * @param string $subject email subject
      * @param string $body_text Email Body Text
@@ -447,6 +443,7 @@ class EmailMan extends SugarBean{
         $email->date_start       = $timedate->nowDbDate();
         $email->time_start       = $timedate->asDbTime($timedate->getNow());
         $email->status           = 'sent';
+        $email->message_id = $mail->getHeader(EmailHeaders::MessageId);
         $retId                   = $email->save();
 
         foreach ($this->notes_array as $note) {

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -44,9 +44,10 @@
     extendsFrom: 'FieldsetField',
 
     events: {
-        'click [data-toggle=dropdown]' : 'renderDropdown'
+        'click [data-toggle=dropdown]' : 'renderDropdown',
+        'shown.bs.dropdown': '_toggleAria',
+        'hidden.bs.dropdown': '_toggleAria'
     },
-    plugins: ['Tooltip'],
 
     /**
      * @inheritdoc
@@ -96,6 +97,13 @@
          */
         this.showNoData = false;
 
+        /**
+         * @inheritdoc
+         *
+         * This field's user action is enabled.
+         */
+        this.tabIndex = 0;
+
         this._super('initialize', [options]);
 
         /**
@@ -113,11 +121,24 @@
         }
 
         //shortcut keys
-        app.shortcuts.register('Dropdown:More', 'm', function() {
-            var $primaryDropdown = this.$('.btn-primary[data-toggle=dropdown]');
-            if ($primaryDropdown.is(':visible') && !$primaryDropdown.hasClass('disabled')) {
-                $primaryDropdown.click();
+        app.shortcuts.register({
+            id: 'Dropdown:More',
+            keys: 'm',
+            component: this,
+            description: 'LBL_SHORTCUT_OPEN_MORE_ACTION',
+            handler: function() {
+                var $primaryDropdown = this.$('.btn-primary[data-toggle=dropdown]');
+                if ($primaryDropdown.is(':visible') && !$primaryDropdown.hasClass('disabled')) {
+                    $primaryDropdown.click();
+                }
             }
+        });
+        this.model.on('acl:change', function() {
+            if (this.disposed) {
+                return;
+            }
+            this._orderButtons();
+            this.render();
         }, this);
     },
 
@@ -207,6 +228,17 @@
             }
             field.render();
         }, this);
+    },
+
+    /**
+     * Sets a button accessibility class 'aria-expanded' to true or false
+     * depending on if the dropdown menu is open or closed.
+     *
+     * @private
+     */
+    _toggleAria: function() {
+        var $button = this.$(this.actionDropDownTag);
+        $button.attr('aria-expanded', this.$el.hasClass('open'));
     },
 
     /**
@@ -339,7 +371,11 @@
             }
             return false;
         });
-        this.$('.' + this.caretIcon).closest('a').toggleClass('disabled', !caretEnabled);
+        this.$('.' + this.caretIcon)
+            .closest('a')
+                .toggleClass('disabled', !caretEnabled)
+                .attr('aria-haspopup', caretEnabled)
+                .attr('tabindex', caretEnabled ? 0 : -1);
     },
 
     /**
@@ -348,7 +384,11 @@
     setDisabled: function(disable) {
         this._super('setDisabled', [disable]);
         disable = _.isUndefined(disable) ? true : disable;
-        this.$(this.actionDropDownTag).toggleClass('disabled', disable);
+        this.tabIndex = disable ? -1 : 0;
+        this.$(this.actionDropDownTag)
+            .toggleClass('disabled', disable)
+            .attr('aria-haspopup', !disable)
+            .attr('tabindex', this.tabIndex);
     },
 
     /**
@@ -356,7 +396,9 @@
      */
     _dispose: function() {
         _.each(this.fields, function(field) {
-            field.$el.off('click.' + this.cid);
+            if (!field.disposed) {
+                field.$el.off('click.' + this.cid);
+            }
         }, this);
         this.defaultActionBtn = null;
         this.dropdownFields = null;

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -91,14 +91,14 @@ $mod_strings = array (
     'LBL_TWEETTOCASE_ON_DESC' => '사용자가 트윗(Tweets)에서 사례를 만들 수 있습니다',
     'LBL_TWEETTOCASE_ON' => '통합을 구분하는 Tweet®를 사용합니다',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet® 사례',
-    'LBL_PREVIEW_SETTINGS' => 'Preview Pane Settings',
+    'LBL_PREVIEW_SETTINGS' => '미리보기 화면 설정',
     'LBL_PREVIEW_EDIT' => 'Enable edit in Preview pane',
     'LBL_PREVIEW_EDIT_HELP' => 'Allows users to edit fields in the Preview pane',
-	'LBL_USE_REAL_NAMES'	=> '전체 이름목록 보여주기',
+	'LBL_USE_REAL_NAMES'	=> '전체 이름 보여주기',
 	'LBL_USE_REAL_NAMES_DESC'			=> '배정 필드의 사용자명 대신 사용자의 전체 이름을 전시합니다.',
     'LBL_DISALBE_CONVERT_LEAD' => '전환된 주 예비고객의 활동을 중지합니다.',
     'LBL_DISALBE_CONVERT_LEAD_DESC' => '주 예비고객이 이미 전환되었다면 이 항목의 적용은 전환된 고객 활동을 제거합니다.',
-    'LBL_ENABLE_ACTION_MENU' => '메뉴안의 활동 전시',
+    'LBL_ENABLE_ACTION_MENU' => '메뉴 내 활동 전시',
     'LBL_ENABLE_ACTION_MENU_DESC' => '세부사항 보기와 내려보기 메뉴안의 하위패널 액션을 선택합니다. 선택을 취소하면 이는 별개의 버튼을 나타냅니다.',
     'LBL_LOCK_SUBPANELS_DESC' => '이 설정은 레거시 모드에서 모듈에 적용합니다',
     'LBL_COLLAPSE_SUBPANELS_DESC' => '옵션을 선택하면, 레코드 보기에 있는 모든 서브패널에 기본값이 적용되어 성능이 향상됩니다. 서브 데이터를 확인하고자 하는 사용자는 레코드에 액세스할 때마다 서브패널을 확장해야 합니다. 참고:이 설정은 레거시 모듈에 적용되지 않습니다.',
@@ -139,6 +139,7 @@ $mod_strings = array (
     'LBL_OC_STATUS_DESC' => '다른 사용자가 오프라인 고객에 접속하도록 하려면 이곳을 확인하십시오. 아니면 사용자 단계를 설정할수 있습니다.',
     'SESSION_TIMEOUT' => '포탈 세션 시간 초과',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => '포털 세션 만료시간설정은 슈가버젼 6.5이전버젼에서만 가능합니다.',
+    'UPLOAD_MAXSIZE_UNITS' => '바이트',
     'SESSION_TIMEOUT_UNITS' => '초',
     'LBL_LDAP_TITLE'=>'LDAP 인증 지원',
     'LBL_LDAP_ENABLE'=>'LDAP작동',
@@ -183,7 +184,7 @@ $mod_strings = array (
     'LBL_NEXT_' => '다음',
     'LBL_REFRESH_FROM_MARK' => '표시로부터 재생',
     'LBL_SEARCH' => '검색',
-    'LBL_REG_EXP' => 'Reg Exp:',
+    'LBL_REG_EXP' => '정규표현:',
     'LBL_IGNORE_SELF' => 'Ignore Self:',
     'LBL_MARKING_WHERE_START_LOGGING'=>'어디서 로그인 시작인지 표시',
     'LBL_DISPLAYING_LOG'=>'일지 전시중',
@@ -205,7 +206,7 @@ $mod_strings = array (
     'LBL_LEAD_CONV_OPTION' => '사용자 전환 선택사항',
     'LEAD_CONV_OPT_HELP' => "<b>이동</b> - 대화중생성된연락처로리드의모든활동을이동합니다..<br><br><b>아무것도안함</b> - 대화중리드의활동에대해아무것도하지않습니다. 해당활동은리드에만관련된상태를유지합니다.",
 	'LBL_LOGGER_MAX_LOGS'=>'접속 허용 최대 번호(진행전)',
-	'LBL_LOGGER_FILENAME_SUFFIX' =>'파일명뒤에 첨부',
+	'LBL_LOGGER_FILENAME_SUFFIX' =>'파일명 뒤에 첨부',
 	'LBL_VCAL_PERIOD' => 'vCal 업데이트 기간',
     'LBL_NO_PRIVATE_TEAM_UPDATE' => '개인적 팀 이름들이 사용자의 이름 필드를 상속하지 못하도록 방지',
     'LBL_IMPORT_MAX_RECORDS' => '가져오기-최대 허용 줄번호',
@@ -327,24 +328,24 @@ $mod_strings = array (
     'LBL_FONT_LIST_CIDINFO_INFO' => "Examples :".
 "<ul><li>".
 "Chinese Traditional :<br>".
-"<pre>\$enc=&#39;UniCNS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;CNS1&#39;,&#39;Supplement&#39;=>0);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ac15.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniCNS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'CNS1\\',\\'Supplement\\'=>0);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ac15.php\\');</pre>".
 "</li><li>".
 "Chinese Simplified :<br>".
-"<pre>\$enc=&#39;UniGB-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;GB1&#39;,&#39;Supplement&#39;=>2);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ag15.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniGB-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'GB1\\',\\'Supplement\\'=>2);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ag15.php\\');</pre>".
 "</li><li>".
 "Korean :<br>".
-"<pre>\$enc=&#39;UniKS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;Korea1&#39;,&#39;Supplement&#39;=>0);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_ak12.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniKS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'Korea1\\',\\'Supplement\\'=>0);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_ak12.php\\');</pre>".
 "</li><li>".
 "Japanese :<br>".
-"<pre>\$enc=&#39;UniJIS-UTF16-H&#39;;<br>".
-"\$cidinfo=array(&#39;Registry&#39;=>&#39;Adobe&#39;, &#39;Ordering&#39;=>&#39;Japan1&#39;,&#39;Supplement&#39;=>5);<br>".
-"include(&#39;vendor/tcpdf/fonts/uni2cid_aj16.php&#39;);</pre>".
+"<pre>\\$enc=\\'UniJIS-UTF16-H\\';<br>".
+"\\$cidinfo=array(\\'Registry\\'=>\\'Adobe\\', \\'Ordering\\'=>\\'Japan1\\',\\'Supplement\\'=>5);<br>".
+"include(\\'vendor/tcpdf/fonts/uni2cid_aj16.php\\');</pre>".
 "</li></ul>".
 "More help : www.tcpdf.org",
     'LBL_FONT_LIST_FILESIZE' => '글자체 크기',

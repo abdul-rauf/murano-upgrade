@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,6 +20,7 @@ global $timedate;
  
 $mod_strings = array (
     'LBL_GOOD_FILE' => 'Lettura di importazione del file avvenuta con successo.',
+    'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Il record importato sta partecipando a un flusso e non può essere modificato perché alcuni campi sono bloccati per la modifica dal flusso.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Records saltato a causa di un errore',
     'LBL_UPDATE_SUCCESSFULLY' => 'Record creati o aggiornati con successo',
     'LBL_SUCCESSFULLY_IMPORTED' => 'Record creati con successo',
@@ -71,7 +72,7 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_INT' => 'Numero intero non valido',
     'LBL_ERROR_INVALID_NUM' => 'Valore numerico non valido',
     'LBL_ERROR_INVALID_TIME' => 'Ora non valida',
-    'LBL_ERROR_INVALID_EMAIL'=>'Indirizzo Email non valido',
+    'LBL_ERROR_INVALID_EMAIL'=>'Indirizzo email non valido',
     'LBL_ERROR_INVALID_BOOL'=>'Valore non valido (dovrebbe essere 1 o 0)',
     'LBL_ERROR_INVALID_DATE'=>'Invalid date dtring',
     'LBL_ERROR_INVALID_USER'=>'Nome utente o Id non validi',
@@ -79,7 +80,7 @@ $mod_strings = array (
     'LBL_ERROR_INVALID_ACCOUNT' => 'Nome azienda o Id non validi',
     'LBL_ERROR_INVALID_RELATE' => 'Campo invalido',
     'LBL_ERROR_INVALID_CURRENCY' => 'Valore della valuta non valido',
-    'LBL_ERROR_INVALID_FLOAT' => 'Numero punto di galleggiamento non valido',
+    'LBL_ERROR_INVALID_FLOAT' => 'Numero a virgola mobile non valido',
     'LBL_ERROR_NOT_IN_ENUM' => 'Il valore non è nell´elenco DropDown. I valori permessi sono:',
     'LBL_ERROR_ENUM_EMPTY' => 'Valore non presente nell&#39;elenco dropDown. L&#39;elenco dropDown è vuoto',
     'LBL_NOT_MULTIENUM' => 'Non un MultiEnum',
@@ -243,7 +244,7 @@ $mod_strings = array (
     'LBL_IMPORT_FIELDDEF_TEXT' => 'Qualsiasi Testo',
     'LBL_IMPORT_FIELDDEF_TIME' => 'Ora',
     'LBL_IMPORT_FIELDDEF_DATE' => 'Date',
-    'LBL_IMPORT_FIELDDEF_DATETIME' => 'Dataora',
+    'LBL_IMPORT_FIELDDEF_DATETIME' => 'Data/ora',
     'LBL_IMPORT_FIELDDEF_ASSIGNED_USER_NAME' => 'Nome utente o ID',
     'LBL_IMPORT_FIELDDEF_BOOL' => '´0´ o ´1´',
     'LBL_IMPORT_FIELDDEF_ENUM' => 'Elenco',

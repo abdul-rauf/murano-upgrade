@@ -22,7 +22,7 @@ class zr2_ReportParameterLink extends Basic {
 	
 	
 	function zr2_ReportParameterLink() {
-		parent::Basic();
+		parent::__construct();
 	}
 
 	function get_summary_text() {

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,115 +11,111 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME' => 'Job Queue',
-    'LBL_MODULE_NAME_SINGULAR' => 'Job Queue',
-    'LBL_MODULE_TITLE' => 'Job Queue: Home',
-    'LBL_MODULE_ID' => 'Job Queue',
-    'LBL_TARGET_ACTION' => 'Action',
+    'LBL_MODULE_NAME' => 'Tööde järjekord',
+    'LBL_MODULE_NAME_SINGULAR' => 'Tööde järjekord',
+    'LBL_MODULE_TITLE' => 'Tööde järjekord: avaleht',
+    'LBL_MODULE_ID' => 'Tööde järjekord',
+    'LBL_TARGET_ACTION' => 'Tegevus',
     'LBL_FALLIBLE' => 'Fallible',
-    'LBL_RERUN' => 'Rerun',
-    'LBL_INTERFACE' => 'Interface',
-    'LINK_SCHEDULERSJOBS_LIST' => 'View Job Queue',
-    'LBL_SCHEDULERS_JOBS_ADMIN_MENU' => 'Configuration',
-    'LBL_CONFIG_PAGE' => 'Job Queue Settings',
+    'LBL_RERUN' => 'Käivita uuesti',
+    'LBL_INTERFACE' => 'Liides',
+    'LINK_SCHEDULERSJOBS_LIST' => 'Kuva tööde järjekord',
+    'LBL_SCHEDULERS_JOBS_ADMIN_MENU' => 'Konfiguratsioon',
+    'LBL_CONFIG_PAGE' => 'Tööde järjekorra sätted',
     'LBL_JOB_CANCEL_BUTTON' => 'Tühista',
-    'LBL_JOB_PAUSE_BUTTON' => 'Pause',
-    'LBL_JOB_RESUME_BUTTON' => 'Resume',
-    'LBL_JOB_RERUN_BUTTON' => 'Requeue',
+    'LBL_JOB_PAUSE_BUTTON' => 'Peata',
+    'LBL_JOB_RESUME_BUTTON' => 'Jätka',
+    'LBL_JOB_RERUN_BUTTON' => 'Pane uuesti järjekorda',
     'LBL_LIST_NAME' => 'Nimi',
-    'LBL_LIST_ASSIGNED_USER' => 'Requested by',
+    'LBL_LIST_ASSIGNED_USER' => 'Taotleja',
     'LBL_LIST_STATUS' => 'Olek',
-    'LBL_LIST_RESOLUTION' => 'Resolution',
-    'LBL_NAME' => 'Job Name',
+    'LBL_LIST_RESOLUTION' => 'Resolutsioon',
+    'LBL_NAME' => 'Töö nimi',
     'LBL_EXECUTE_TIME' => 'Täitmisaeg',
-    'LBL_SCHEDULER_ID' => 'Scheduler',
-    'LBL_STATUS' => 'Job Status',
-    'LBL_RESOLUTION' => 'Result',
-    'LBL_MESSAGE' => 'Messages',
-    'LBL_DATA' => 'Job Data',
-    'LBL_REQUEUE' => 'Retry on failure',
-    'LBL_RETRY_COUNT' => 'Maximum retries',
-    'LBL_FAIL_COUNT' => 'Failures',
-    'LBL_INTERVAL' => 'Minimum interval between tries',
-    'LBL_CLIENT' => 'Owning client',
-    'LBL_PERCENT' => 'Pecent complete',
-    'LBL_JOB_GROUP' => 'Job group',
-    'LBL_RESOLUTION_FILTER_QUEUED' => 'Resolution Queued',
-    'LBL_RESOLUTION_FILTER_PARTIAL' => 'Resolution Partial',
-    'LBL_RESOLUTION_FILTER_SUCCESS' => 'Resolution Complete',
-    'LBL_RESOLUTION_FILTER_FAILURE' => 'Resolution Failure',
-    'LBL_RESOLUTION_FILTER_CANCELLED' => 'Resolution Cancelled',
-    'LBL_RESOLUTION_FILTER_RUNNING' => 'Resolution Running',
+    'LBL_SCHEDULER_ID' => 'Planeerija',
+    'LBL_STATUS' => 'Töö olek',
+    'LBL_RESOLUTION' => 'Tulemus',
+    'LBL_MESSAGE' => 'Sõnumid',
+    'LBL_DATA' => 'Töö andmed',
+    'LBL_REQUEUE' => 'Tõrke korral proovige uuesti',
+    'LBL_RETRY_COUNT' => 'Maksimaalsed uued katsed',
+    'LBL_FAIL_COUNT' => 'Tõrked',
+    'LBL_INTERVAL' => 'Minimaalne proovimiste vaheline vahemik',
+    'LBL_CLIENT' => 'Omav klient',
+    'LBL_PERCENT' => 'Lõpetamise protsent',
+    'LBL_JOB_GROUP' => 'Töögrupp',
+    'LBL_RESOLUTION_FILTER_QUEUED' => 'Resolutsioon järjekorda pandud',
+    'LBL_RESOLUTION_FILTER_PARTIAL' => 'Resolutsioon osaline',
+    'LBL_RESOLUTION_FILTER_SUCCESS' => 'Resolutsioon täielik',
+    'LBL_RESOLUTION_FILTER_FAILURE' => 'Resolutsiooni tõrge',
+    'LBL_RESOLUTION_FILTER_CANCELLED' => 'Tühistatud resolutsioon',
+    'LBL_RESOLUTION_FILTER_RUNNING' => 'Resolutsioon töötab',
     // Errors
-    'ERR_CALL' => "Cannot call function: %s",
-    'ERR_CURL' => "No CURL - cannot run URL jobs",
-    'ERR_FAILED' => "Unexpected failure, please check PHP logs and sugarcrm.log",
-    'ERR_PHP' => "%s [%d]: %s in %s on line %d",
-    'ERR_NOUSER' => "No User ID specified for the job",
-    'ERR_NOSUCHUSER' => "User ID %s not found",
-    'ERR_JOBTYPE' => "Unknown job type: %s",
-    'ERR_TIMEOUT' => "Forced failure on timeout",
-    'ERR_JOB_FAILED_VERBOSE' => 'Job %1$s (%2$s) failed in CRON run',
-    'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Cannot load bean with id: %s',
-    'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Cannot find handler for route %s',
-    'ERR_CONFIG_MISSING_EXTENSION' => 'Extension for this queue is not installed',
-    'ERR_CONFIG_EMPTY_FIELDS' => 'Some of the fields are empty',
+    'ERR_CALL' => "Funktsiooni kutse pole võimalik: %s",
+    'ERR_CURL' => "CURL puudub – URL-töid ei saa käivitada",
+    'ERR_FAILED' => "Ootamatu tõrge, kontrollige PHP logisid ja suvandit sugarcrm.log",
+    'ERR_PHP' => "%s [%d]: %s suvandis %s real %d",
+    'ERR_NOUSER' => "Ühtegi kasutaja ID-d pole töö puhul määratud",
+    'ERR_NOSUCHUSER' => "Kasutaja ID-d %s ei leitud",
+    'ERR_JOBTYPE' => "Tundmatu töö tüüp: %s",
+    'ERR_TIMEOUT' => "Sunnitud tõrge ajalõpul",
+    'ERR_JOB_FAILED_VERBOSE' => 'Töö %1$s (%2$s) nurjus CRON-i käivitamisel',
+    'ERR_WORKER_CANNOT_LOAD_BEAN' => 'Ei saa laadida uba ID-ga: %s',
+    'ERR_WORKER_NO_REGISTERED_FUNCTIONS' => 'Marsruudi %s draiverit pole võimalik leida',
+    'ERR_CONFIG_MISSING_EXTENSION' => 'Selle järjekorra laiend pole installitud',
+    'ERR_CONFIG_EMPTY_FIELDS' => 'Mõni väli on tühi',
     //    Configuration
-    'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Job Queue Settings',
-    'LBL_CONFIG_MAIN_SECTION' => 'Main Configuration',
-    'LBL_CONFIG_GEARMAN_SECTION' => 'Gearman Configuration',
-    'LBL_CONFIG_AMQP_SECTION' => 'AMQP Configuration',
-    'LBL_CONFIG_AMAZON_SQS_SECTION' => 'Amazon-sqs Configuration',
-    'LBL_CONFIG_SERVERS_TITLE' => 'Job Queue Configuration Help',
-    'LBL_CONFIG_SERVERS_TEXT' => "<p><b>Main Configuration Section.</b></p>
+    'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Tööde järjekorra sätted',
+    'LBL_CONFIG_MAIN_SECTION' => 'Põhikonfiguratsioon',
+    'LBL_CONFIG_GEARMAN_SECTION' => 'Gearmani konfiguratsioon',
+    'LBL_CONFIG_AMQP_SECTION' => 'AMQP konfiguratsioon',
+    'LBL_CONFIG_AMAZON_SQS_SECTION' => 'Amazon-sqs konfiguratsioon',
+    'LBL_CONFIG_SERVERS_TITLE' => 'Tööde järjekorra konfiguratsiooni spikker',
+    'LBL_CONFIG_SERVERS_TEXT' => "<p><b>Jaotis Põhikonfiguratsioon.</b></p>
 <ul>
-    <li>Runner:
-    <ul>
-    <li><i>Standard</i> - use only one process for workers.</li>
-    <li><i>Parallel</i> - use a few processes for workers.</li>
-    </ul>
-    </li>
-    <li>Adapter:
-    <ul>
-    <li><i>Default Queue</i> - This will use only Sugar's Database without any message queue.</li>
-    <li><i>Amazon SQS</i> - Amazon Simple Queue Service is a distributed queue
-    messaging service introduced by Amazon.com.
-    It supports programmatic sending of messages via web service applications as a way to
-    communicate over the Internet.</li>
-    <li><i>RabbitMQ</i> - is open source message broker software (sometimes called message-oriented middleware)
-    that implements the Advanced Message Queuing Protocol (AMQP).</li>
-    <li><i>Gearman</i> - is an open source application framework designed to distribute appropriate computer
-    tasks to multiple computers, so large tasks can be done more quickly.</li>
-    <li><i>Immediate</i> - Like the default queue but executes task immediately after adding.</li>
-    </ul>
-    </li>
+<li>Käivitaja:
+<ul>
+<li><i>Standardne</i> – kasutage töötajate puhul ainult ühte protsessi.</li>
+<li><i>Paralleelne</i> – kasutage töötajate puhul paari protsessi.</li>
+</ul>
+</li>
+<li>Adapter:
+<ul>
+<li><i>Vaikejärjekord</i> – see kasutab ainult Sugari andmebaasi ilma teate järjekorrata.</li>
+<li><i>Amazon SQS</i> – Amazon Simple Queue Service on Amazon.com-i kehtestatud järjekorra teatamise hajusteenus.
+See toetab teadete programmilist saatmist veebiteenuse kaudu interneti teel suhtlemise viisina.</li>
+<li><i>RabbitMQ</i> – on avatud lähtekoodiga teate vahendaja tarkvara (mõnikord kutsutakse ka nimetusega teatekeskne vahevara), mis rakendab protokolli Advanced Message Queuing Protocol (AMQP).</li>
+<li><i>Gearman</i> – on avatud lähtekoodiga rakenduse raamistik, mis on loodud asjakohaste arvutitoimingute levitamiseks mitmele arvutile, nii et suuri toiminguid oleks võimalik teha kiiremini.</li>
+<li><i>Kohene</i> – nagu vaikejärjekord, kuid täidab ülesande kohe pärast lisamist.</li>
+</ul>
+</li>
 </ul>",
-    'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS Configuration Help',
-    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Amazon SQS Configuration Section.</b></p>
+    'LBL_CONFIG_AMAZON_SQS_TITLE' => 'Amazon SQS-i konfiguratsiooni spikker',
+    'LBL_CONFIG_AMAZON_SQS_TEXT' => "<p><b>Jaotis Amazon SQS konfiguratsioon.</b></p>
 <ul>
-    <li>Access Key ID: <i>Enter your access key id number for Amazon SQS</i></li>
-    <li>Secret Access Key: <i>Enter your secret access key for Amazon SQS</i></li>
-    <li>Region: <i>Enter the region of Amazon SQS server</i></li>
-    <li>Queue Name: <i>Enter queue name of Amazon SQS server</i></li>
+<li>Pääsuvõtme ID: <i>sisestage Amazon SQS-i puhul oma pääsuvõtme ID</i></li>
+<li>Salajane pääsuvõti: <i>sisestage Amazon SQS-i puhul salajane pääsuvõti</i></li>
+<li>Piirkond: <i>sisestage Amazon SQS-i serveri piirkond</i></li>
+<li>Järjekorra nimi: <i>sisestage Amazon SQS-i serveri järjekorra nimi</i></li>
 </ul>",
-    'LBL_CONFIG_AMQP_TITLE' => 'AMQP Configuration Help',
-    'LBL_CONFIG_AMQP_TEXT' => "<p><b>AMQP Configuration Section.</b></p>
+    'LBL_CONFIG_AMQP_TITLE' => 'AMQP konfiguratsiooni spikker',
+    'LBL_CONFIG_AMQP_TEXT' => "<p><b>Jaotis AMQP konfiguratsioon.</b></p>
 <ul>
-    <li>Server URL: <i>Enter your message queue server's URL.</i></li>
-    <li>Login: <i>Enter your login for RabbitMQ</i></li>
-    <li>Password: <i>Enter your password for RabbitMQ</i></li>
+<li>Serveri URL: <i>sisestage oma teadete järjekorra serveri URL.</i></li>
+<li>Logi sisse: <i>sisestage oma RabbitMQ sisselogimisandmed</i></li>
+<li>Parool: <i>sisestage oma RabbitMQ parool</i></li>
 </ul>",
-    'LBL_CONFIG_GEARMAN_TITLE' => 'Gearman Configuration Help',
-    'LBL_CONFIG_GEARMAN_TEXT' => "<p><b>Gearman Configuration Section.</b></p>
+    'LBL_CONFIG_GEARMAN_TITLE' => 'Gearmani konfiguratsiooni spikker',
+    'LBL_CONFIG_GEARMAN_TEXT' => "<p><b>Jaotis Gearmani konfiguratsioon.</b></p>
 <ul>
-    <li>Server URL: <i>Enter your message queue server's URL.</i></li>
+<li>Serveri URL: <i>sisestage oma teadete järjekorra serveri URL.</i></li>
 </ul>",
     'LBL_CONFIG_QUEUE_TYPE' => 'Adapter',
-    'LBL_CONFIG_QUEUE_MANAGER' => 'Runner',
-    'LBL_SERVER_URL' => 'Server URL',
-    'LBL_LOGIN' => 'Login',
-    'LBL_ACCESS_KEY' => 'Access Key ID',
-    'LBL_REGION' => 'Region',
-    'LBL_ACCESS_KEY_SECRET' => 'Secret Access Key',
-    'LBL_QUEUE_NAME' => 'Adapter Name',
+    'LBL_CONFIG_QUEUE_MANAGER' => 'Käitaja',
+    'LBL_SERVER_URL' => 'Serveri URL',
+    'LBL_LOGIN' => 'Logi sisse',
+    'LBL_ACCESS_KEY' => 'Pääsuvõtme ID',
+    'LBL_REGION' => 'Piirkond',
+    'LBL_ACCESS_KEY_SECRET' => 'Salajane pääsuvõti',
+    'LBL_QUEUE_NAME' => 'Adapteri nimi',
 );

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -105,8 +105,6 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
             // get the recipient name that accompanies the email address
             $recipientName = $locale->formatName($current_user);
 
-            $result = false;
-
             try {
                 $GLOBALS["log"]->debug("-----> Generating Mailer");
                 $mailer = MailerFactory::getSystemDefaultMailer();
@@ -153,8 +151,6 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                 $GLOBALS["log"]->debug("-----> Sending PDF via Email to [ {$recipientEmailAddress} ]");
                 $mailer->send();
 
-                $result = true;
-
                 $GLOBALS["log"]->debug("-----> Send successful");
                 $reportSchedule->update_next_run_time(
                     $report_schedule_id,
@@ -175,11 +171,9 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
             $GLOBALS["log"]->debug("-----> Removing temporary PDF file");
             unlink($reportFilename);
 
-            if ($result) {
-                $this->job->succeedJob();
-            }
+            $this->job->succeedJob();
 
-            return $result;
+            return true;
         }
     }
 }

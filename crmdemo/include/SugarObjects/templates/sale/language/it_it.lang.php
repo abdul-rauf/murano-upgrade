@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -69,7 +69,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   'LBL_AMOUNT' => 'Importo:',
   'LBL_AMOUNT_USDOLLAR' => 'Importo in USD:',
   'LBL_CURRENCY' => 'Valuta:',
-  'LBL_DATE_CLOSED' => 'Data Chiusura Prevista:',
+  'LBL_DATE_CLOSED' => 'Data di chiusura prevista:',
   'LBL_TYPE' => 'Tipo:',
   'LBL_CAMPAIGN' => 'Campagna:',
   'LBL_LEADS_SUBPANEL_TITLE' => 'Lead',
@@ -109,8 +109,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   'LBL_CURRENCY_NAME'=>'Nome Valuta',
   'LBL_CURRENCY_SYMBOL'=>'Simbolo Valuta',
   'LBL_EDIT_BUTTON' => 'Modifica',
-   'LBL_REMOVE' => 'Rimuovi',
-
+  'LBL_REMOVE' => 'Rimuovi',
+  'LBL_CURRENCY_RATE' => 'Tasso di valuta',
 
 );
 

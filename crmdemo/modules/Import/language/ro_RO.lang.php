@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,6 +20,7 @@ global $timedate;
  
 $mod_strings = array (
     'LBL_GOOD_FILE' => 'Fisierul importat a fost citit cu succes',
+    'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'Înregistrarea importată participă într-un proces şi nu poate fi editată deoarece unele câmpuri sunt blocate pentru editare de către proces.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'Inregistrari sarite datorita unei erori',
     'LBL_UPDATE_SUCCESSFULLY' => 'Inregistrari actualizate cu succes',
     'LBL_SUCCESSFULLY_IMPORTED' => 'Inregistrari create cu succes',
@@ -203,7 +204,7 @@ $mod_strings = array (
     'LBL_ACCOUNTS_NOTE_1' => 'Domenii care se termină în Adresa Strada 2 şi Strada 3 sunt concatenate, împreună cu principalele Adresa Strada câmp, atunci când introduce în baza de date.',
     'LBL_REQUIRED_NOTE' => 'Camp obligatoriu (i):',
     'LBL_IMPORT_NOW' => 'Importa acum',
-    'LBL_' => 'LBL_',
+    'LBL_' => '',
     'LBL_CANNOT_OPEN' => 'Nu pot deschide fişierul de importat pentru lectură',
     'LBL_NOT_SAME_NUMBER' => 'Nu s-au acelaşi număr de domenii pe linie în fişierul dvs.',
     'LBL_NO_LINES' => 'Nu au existat randuri în fişierul de import dvs.',

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -102,7 +102,7 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
         }
 
         // Save the module list
-        $this->saveModifiedTabs($tc, $tabs);
+        $this->saveModifiedTabs($tc, $tabs[0]);
     }
 
     /**
@@ -218,8 +218,8 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
      */
     public function getExistingTabs(TabController $tc)
     {
-        // Get the existing tabs
-        return $tc->get_system_tabs();
+        // Get all the tabs - enabled and disabled
+        return $tc->get_tabs_system();
     }
 
     /**
@@ -232,7 +232,9 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
     {
         // Add in our new modules
         foreach ($def['modules'] as $m) {
-            $tabs[$m] = $m;
+            if (!isset($tabs[0][$m]) && !isset($tabs[1][$m])) {
+                $tabs[0][$m] = $m;
+            }
         }
 
         return $tabs;

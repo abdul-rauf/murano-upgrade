@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Selektoni paraqitjen për të ndryshuar.<br />Për të ndryshuar paraqitjen që përmban fushat e të dhënave për regjistrimin e të dhënave, kliko pamjen e ndryshimit.<br /><br />Për të ndryshuar paraqitjen që shfaq të dhënat e regjistruara në fushat e pamjes së ndryshimit, klikoni pamje të detajit.<br /><br />Për të ndryshuar kolonat të cilat shfaqen në listën e parazgjedhur, klikoni Listën e pamjes.<br /><br />Për të ndryshuar bazën dhe formën e kërkimit të paraqitjeve të avancuara, kliko Kërko.',
         'subpanelHelp'=> 'Selektoni nënpanelin për të ndryshuar.',
         'searchHelp' => 'Selektoni kërkimin e paraqitjes për të ndryshuar.',
-        'labelsBtn'	=> 'Kliko <b>Ruaj</b> për të ruajtur etiketat e tua të personalizuara.',
+        'labelsBtn'	=> 'Ndrysho <b>Etiketat</b> që të shfaqen për vlerat në këtë modul.',
         'newPackage'=>'Kliko paketa e re të krijuar një paketë të re.',
         'mbHelp'    => '<b>Mirë se vjen në Ndërtuesin e modulit.</b><br/><br/>Përdorni <b>Ndërtuesin e modulit</b> për të krijuar paketa që përmbajnë module të personalizuara bazuar në objekte standarde ose të personalizuara. <br/><br/>Për të filluar, klikoni <b>Paketë e re</b> për të krijuar një paketë të re ose zgjidhni një paketa për ta modifikuar.<br/><br/> Një <b>paketë</b> vepron si mbajtëse e moduleve të personalizuara, ku të gjitha janë pjesë e një projekti. Paketa mund të përmbajë një ose më shumë modulesh të personalizuara që mund të lidhen me njëra-tjetrën ose me modulet në aplikacion. <br/><br/>Shembuj: Mund t&#39;ju duhet të krijoni një paketë që përmban një modul të personalizuar që lidhet me modulin standard të Llogarive. Ose nëse dëshironi të krijoni një paketë që përmban disa module të reja që funksionojnë bashkë si projekt dhe që lidhen me njëra-tjetrën dhe me modulet e aplikacionit.',
         'exportBtn' => 'Klikoni <b>Eksporto personalizimet</b> për të krijuar një paketë që përmban personalizimet e bëra në Studio për module specifike.',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Emri - Duhet të jetë alfanumerik, të fillojë me letrën dhe mos të përmbaje hapësira.',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Çelësi i paketës ekziston tashmë',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Emri paketës tashmë ekziston',
+'LBL_JS_PACKAGE_NAME'=>'Emri i paketës - Duhet të fillojë me një germë dhe mund të përbëhet vetëm nga germa, numra dhe karaktere nënvijëzimi. Nuk mund të përdoren hapësira ose karaktere të tjera të veçanta.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'LBL_JS_VALIDIM_KYC_ME_HAPESIRE',
 'LBL_JS_VALIDATE_KEY'=>'Çelësi - Duhet të jetë alfanumerik, të fillojë me letrën dhe mos të përmbaje hapësira.',
 'LBL_JS_VALIDATE_LABEL'=>'Ju lutemi shkruani etiketën që do të përdoret si Emër i Shfaqjes për këtë modul',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'A jeni të sigurtë që dëshironi të fshini këtë lidhje?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Kjo do të bëjë këtë lidhje të përhershme. A jeni të sigurtë që dëshironi të vendosni këtë lidhje?',
 'LBL_CONFIRM_DONT_SAVE' => 'Ndryshimet janë bërë që nga ruajtja e juaj e fundit, Dëshironi të ruani?',

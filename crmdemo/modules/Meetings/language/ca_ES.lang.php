@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'Adreça electrònica',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Enviar correu electrònic a tots els convidats',
     'LBL_POPUP_REMINDER' => 'Recordatori emergent',
-    'LBL_POPUP_REMINDER_TIME' => 'Hora de recordatori emergent',
+    'LBL_POPUP_REMINDER_TIME' => 'Hora de recordatori per correu electrònic emergent',
     'LBL_EMAIL_REMINDER' => 'Recordatori per correu electrònic',
-    'LBL_EMAIL_REMINDER_TIME' => 'Hora del recordatori per correu electrònic',
+    'LBL_EMAIL_REMINDER_TIME' => 'Hora de recordatori per correu electrònic',
     'LBL_REMOVE' => 'sup',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Planificació',
 	'LBL_SEARCH_BUTTON'=> 'Cerca',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Eliminar totes les recurrències',
     'LBL_DATE_END_ERROR' => 'Data de finalització és abans de la data d&#39;inici',
     'LBL_REPEAT_PARENT_ID' => 'Repetiu l&#39;ID principal',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Recurrència de ID de la reunió. Data d&#39;inici de la reunió original',
     'LBL_RECURRING_SOURCE' => 'Font periódico',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Està segur de voler eliminar tots els registres que es repeteixen?',
     'LBL_RECURRENCE' => 'Reaparició',

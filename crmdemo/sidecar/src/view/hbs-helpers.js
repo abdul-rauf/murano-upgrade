@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -29,13 +29,14 @@
      * @param {View.View} view Parent view
      * @param {Object} [options] Optional params to pass to the field.
      * @param {Backbone.Model} [options.model] The model associated with the field.
-     * @param {check type } [options.template] The name of the template to be used.
+     * @param {string} [options.template] The name of the template to be used.
      * @param {Field} [options.parent] The parent field of this field.
      * @return {Object} HTML placeholder for the widget as handlebars safe string.
      */
     Handlebars.registerHelper('field', function(view, options) {
         var field = app.view.createField({
             def: this,
+            viewDefs: this,
             view: view,
             model: options.hash.model,
             viewName: options.hash.template
@@ -71,6 +72,41 @@
         });
 
         return field.getPlaceholder();
+    });
+
+    /**
+     * Create a layout or a view in a given layout.
+     * @method component
+     * @param {View.Layout} layout Layout that the new layout should be created in
+     * @param {string} name Name of the component to be created
+     */
+    Handlebars.registerHelper('component', function(layout, name) {
+        var viewDef,
+            newComponent,
+            placeholder = '';
+
+        viewDef = _.find(layout.meta.components, function(defs) {
+            var componentName,
+                componentDef;
+
+            componentDef = defs.layout || defs.view;
+
+            if (_.isString(componentDef)) {
+                componentName = componentDef;
+            } else {
+                componentName = componentDef.name || componentDef.type;
+            }
+
+            return componentName === name;
+        });
+
+        if (_.isObject(viewDef) && !_.isEmpty(viewDef)) {
+            newComponent = layout.initComponents([viewDef])[0];
+            viewDef.initializedInTemplate = true;
+            placeholder = newComponent.getPlaceholder();
+        }
+
+        return placeholder;
     });
 
     /**
@@ -152,23 +188,6 @@
     });
 
     /**
-     * Extracts bean field value.
-     * @method getFieldValue
-     * @param {Data.Bean} bean Bean instance.
-     * @param {String} field Field name.
-     * @param {String} defaultValue(optional) Default value to return if field is not set on a bean.
-     * @return {String} Field value of the given bean. If field is not set the default value or empty string.
-     *
-     * @deprecated since 7.2.0. Please use {@link #fieldValue} helper.
-     */
-    Handlebars.registerHelper('getFieldValue', function(bean, field, defaultValue) {
-        app.logger.warn('getFieldValue handlebars helper is deprecated and will be removed in 7.8. ' +
-            'Please use the fieldValue handlebars helper instead.');
-        defaultValue = _.isObject(defaultValue) ? '' : defaultValue;
-        return bean.get(field) || defaultValue || '';
-    });
-
-    /**
      * @method fieldValue
      *
      * Extracts bean field value.
@@ -188,9 +207,9 @@
     /**
      * Executes a given block if a given array has a value.
      * @method has
-     * @param {String/Object} val value
-     * @param {Object/Array} array or hash object
-     * @return {String} Result of the `block` execution if the `array` contains `val` or the result of the inverse block.
+     * @param {string|Object} val value
+     * @param {Object|Array} array or hash object
+     * @return {string} Result of the `block` execution if the `array` contains `val` or the result of the inverse block.
      */
     Handlebars.registerHelper('has', function(val, array, options) {
         // Since we need to check both just val = val 2 and also if val is in an array, we cast
@@ -205,16 +224,16 @@
     /**
      * Executes a given block if a given array doesn't have a value.
      * @method notHas
-     * @param {String/Object} val value
-     * @param {Object/Array} array or hash object
-     * @return {String} Result of the `block` execution if the `array` doesn't contain `val` or the result of the inverse block.
+     * @param {string|Object} val value
+     * @param {Object|Array} array or hash object
+     * @return {string} Result of the `block` execution if the `array` doesn't contain `val` or the result of the inverse block.
      */
     Handlebars.registerHelper('notHas', function(val, array, options) {
         var fn = options.fn, inverse = options.inverse;
         options.fn = inverse;
         options.inverse = fn;
 
-        return Handlebars.helpers['has'].call(this, val, array, options);
+        return Handlebars.helpers.has.call(this, val, array, options);
     });
 
     /**
@@ -411,8 +430,7 @@
      * @return {string} The formatted date.
      */
     Handlebars.registerHelper('formatDate', function(date, options) {
-        var date = app.date(date);
-
+        date = app.date(date);
         return date.formatUser(options.hash.dateOnly);
     });
 
@@ -454,11 +472,11 @@
      * @return {string} The module name.
      */
     Handlebars.registerHelper('getModuleName', function(module, options) {
-        var options = {
+        var opts = {
             plural: options.hash.plural,
             defaultValue: options.hash.defaultValue
         };
-        return app.lang.getModuleName(module, options);
+        return app.lang.getModuleName(module, opts);
     });
 
     /**

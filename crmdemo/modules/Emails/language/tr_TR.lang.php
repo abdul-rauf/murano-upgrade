@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -290,7 +290,7 @@ $mod_strings = array (
 	'LNK_VIEW_MY_INBOX'			=> 'E-Postalarımı görüntüle',
 	'LNK_QUICK_REPLY'			=> 'Yanıtla',
 	'LNK_MY_ARCHIVED_LIST'		=> 'Arşivlerim',
-    'LBL_EMAILS_NO_PRIMARY_TEAM_SPECIFIED' =>'Asıl Takım belirtilmedi',
+    'LBL_EMAILS_NO_PRIMARY_TEAM_SPECIFIED' =>'Birincil adresi alternatif adrese kopyala',
 
 	// advanced search
 	'LBL_ASSIGNED_TO'			=> 'Atanan Kişi:',
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'hata: eksik kimlik bilgileri',
     'ERR_NO_UID' => 'hata: UID yok',
     'ERR_NO_IEID' => 'hata: ieID yok',
+    'ERR_INVALID_RECIPIENTS' => 'Geçersiz bir e-posta adresine sahip bir veya daha fazla alıcı var. ' .
+        'Lütfen bunu düzelterek tekrar deneyin.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Geçersiz E-posta Adresi',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'hiçbir alıcı belirtilmemiş',

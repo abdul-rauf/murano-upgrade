@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,6 +20,7 @@ global $timedate;
  
 $mod_strings = array (
     'LBL_GOOD_FILE' => 'تمت قراءة ملف الاستيراد بنجاح',
+    'LBL_RECORD_CONTAIN_LOCK_FIELD' => 'السجل المستورد يشارك في عملية ولا يمكن تحريره لأن بعض الحقول مؤمنة للتحرير بواسطة العملية.',
     'LBL_RECORDS_SKIPPED_DUE_TO_ERROR' => 'لم يتم استيراد صفوف بسبب حدوث خطأ',
     'LBL_UPDATE_SUCCESSFULLY' => 'تم تحديث السجلات بنجاح',
     'LBL_SUCCESSFULLY_IMPORTED' => 'تم إنشاء السجلات',

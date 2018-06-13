@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -26,14 +26,14 @@ $mod_strings = array (
 		  'ShowMyModuleUsage' => 'Wykorzystanie moich modułów',
 		  'ShowMyWeeklyActivities' => 'Moja tygodniowa aktywność',
 		  'ShowTop3ModulesUsed' => 'Moje trzy najczęściej używane moduły',
-		  'ShowLoggedInUserCount' => 'Licznik aktywnych użytkowników',
+		  'ShowLoggedInUserCount' => 'Liczba aktywnych użytkowników',
 		  'ShowMyCumulativeLoggedInTime' => 'Sumaryczny czas mojego zalogowania (w tym tygodniu)',
 		  'ShowUsersCumulativeLoggedInTime' => 'Sumaryczny czas zalogowania wszystkich użytkowników (w tym tygodniu)',
 		  
 		  //Column header mapping
 		  'action' => 'Akcja',
 		  'active_users' => 'Liczba aktywnych użytkowników',
-		  'date_modified' => 'Data ostatniej akcji',
+		  'date_modified' => 'Data ostatniej czynności',
 		  'different_modules_accessed' => 'Liczba wykorzystywanych modułów',
 		  'first_name' => 'Imię',
 		  'item_id' => 'ID',
@@ -49,20 +49,20 @@ $mod_strings = array (
 		  'users' => 'Użytkownicy',
 		  
 		  //Administration related labels
-		  'LBL_ENABLE' => 'Tak',
+		  'LBL_ENABLE' => 'Włączone',
 		  'LBL_MODULE_NAME_TITLE' => 'Śledzenie',
 		  'LBL_MODULE_NAME' => 'Śledzenie',
 		  'LBL_MODULE_NAME_SINGULAR' => 'Śledzenie',
 		  'LBL_TRACKER_SETTINGS' => 'Ustawienia śledzenia',
-		  'LBL_TRACKER_QUERIES_DESC' => 'Śledzenie zapytań',
-		  'LBL_TRACKER_QUERIES_HELP' => 'Śledź zapytania SQL, gdy jest włączona funkcja "Śledź wolne zapytania", a wartość wykonania zapytania przekracza, wartość funkcji "Przekroczenie wartości czasu wolnego zapytania" w config.php',
-		  'LBL_TRACKER_PERF_DESC' => 'Śledzenie wydajności',
-		  'LBL_TRACKER_PERF_HELP' => 'Śledzenie osiągów wykonywania zapytań bazy danych, lczby otwartych plików i wykorzystania pamięci)',
-		  'LBL_TRACKER_SESSIONS_DESC' => 'Śledzenie sesji',
-		  'LBL_TRACKER_SESSIONS_HELP' => 'Informacje o śledzeniu sesji aktywnego użytkownika(ów)',
-		  'LBL_TRACKER_DESC' => 'Śledzenie akcji',
-		  'LBL_TRACKER_HELP' => 'Strona widoku śledzenia dla użytkownika(ów) (modułów i dostępu do plików) i zachowanych rekordów',
-		  'LBL_TRACKER_PRUNE_INTERVAL' => 'Interwał liczby dni dla harmonogramu oczyszczania tabeli bazy z danych przechowywania danych śledzenia',
+		  'LBL_TRACKER_QUERIES_DESC' => 'Zapytania dotyczące śledzenia',
+		  'LBL_TRACKER_QUERIES_HELP' => 'Śledź zapytania SQL, gdy funkcja Śledź wolne zapytania jest włączona, a wartość wykonania zapytania przekracza wartość funkcji Przekroczenie wartości czasu wolnego zapytania',
+		  'LBL_TRACKER_PERF_DESC' => 'Wydajność śledzenia',
+		  'LBL_TRACKER_PERF_HELP' => 'Śledzenie wykonywania zapytań bazy danych, liczby otwartych plików i użycia pamięci',
+		  'LBL_TRACKER_SESSIONS_DESC' => 'Sesje śledzenia',
+		  'LBL_TRACKER_SESSIONS_HELP' => 'Śledzenie informacji o aktywnych użytkownikach i sesjach użytkowników',
+		  'LBL_TRACKER_DESC' => 'Czynności śledzenia',
+		  'LBL_TRACKER_HELP' => 'Śledź wyświetlenia stron przez użytkownika (dostępu do modułów i plików) i zachowanych rekordów',
+		  'LBL_TRACKER_PRUNE_INTERVAL' => 'Liczba dni danych śledzenia do zachowania przy czyszczeniu tabel przez harmonogram',
 		  'LBL_TRACKER_PRUNE_RANGE' => 'Liczba dni',
 );
 ?>

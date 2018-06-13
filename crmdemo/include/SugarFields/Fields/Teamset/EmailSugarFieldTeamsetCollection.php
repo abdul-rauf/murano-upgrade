@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -18,6 +18,7 @@
  */
 
 require_once('include/SugarFields/Fields/Teamset/ViewSugarFieldTeamsetCollection.php');
+require_once 'modules/Teams/TeamSetManager.php';
 
 class EmailSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection {
 
@@ -68,28 +69,39 @@ class EmailSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection {
      * Retrieve the related module and load the bean and the relationship
      * call retrieve values()
      */
-    function setup() {
-		$this->related_module = 'Teams';
-		$this->value_name = 'team_set_id_values';
-		$this->vardef['name'] = $this->name;
-		$secondaries = array();
-		$primary = false;
-		$this->bean->{$this->value_name} = array('role_field'=>'team_name');
-	    if(!empty($this->bean->team_set_id)) {
-	    	require_once('modules/Teams/TeamSetManager.php');
-	    	$teams = TeamSetManager::getTeamsFromSet($this->bean->team_set_id);
-	    	foreach($teams as $row){
-	    		if(empty($primary) && $this->bean->team_id == $row['id']){
-	    			$this->bean->{$this->value_name}=array_merge($this->bean->{$this->value_name}, array('primary'=>array('id'=>$row['id'], 'name'=>$row['display_name'])));
-	    			$primary = true;
-	    		}else{
-	    			$secondaries['secondaries'][]=array('id'=>$row['id'], 'name'=>$row['display_name']);
-	    		}
-	    	} //foreach
-	    }
-		$this->bean->{$this->value_name}=array_merge($this->bean->{$this->value_name}, $secondaries);
-		$this->skipModuleQuickSearch = true;
-		$this->showSelectButton = false;
+    function setup()
+    {
+        $this->related_module = 'Teams';
+        $this->value_name = 'team_set_id_values';
+        $this->vardef['name'] = $this->name;
+        $secondaries = array();
+        $primary = false;
+        $this->bean->{$this->value_name} = array('role_field' => 'team_name');
+        if (!empty($this->bean->team_set_id)) {
+            $teams = TeamSetManager::getTeamsFromSet($this->bean->team_set_id);
+            foreach ($teams as $row) {
+                if (empty($primary) && $this->bean->team_id == $row['id']) {
+                    $this->bean->{$this->value_name} = array_merge(
+                        $this->bean->{$this->value_name},
+                        array(
+                            'primary' => array(
+                                'id' => $row['id'],
+                                'name' => $row['display_name'],
+                            )
+                        )
+                    );
+                    $primary = true;
+                } else {
+                    $secondaries['secondaries'][] = array(
+                        'id' => $row['id'],
+                        'name' => $row['display_name'],
+                    );
+                }
+            } //foreach
+        }
+        $this->bean->{$this->value_name} = array_merge($this->bean->{$this->value_name}, $secondaries);
+        $this->skipModuleQuickSearch = true;
+        $this->showSelectButton = false;
     }
 
 

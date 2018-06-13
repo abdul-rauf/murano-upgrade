@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -36,7 +36,7 @@ $dictionary['Styleguide'] = array(
         ),
         'parent_name' => array(
             'name'=> 'parent_name',
-            'parent_type' => 'record_type_display' ,
+            'parent_type' => 'record_type_display',
             'type_name' => 'parent_type',
             'id_name' => 'parent_id',
             'vname' => 'LBL_PARENT_OF',
@@ -86,8 +86,9 @@ $dictionary['Styleguide'] = array(
         ),
         'picture' => array (
             'name' => 'picture',
-            'vname' => 'LBL_PICTURE',
-            'type' => 'varchar',
+            'vname' => 'LBL_PICTURE_FILE',
+            'type' => 'image',
+            'dbtype' => 'varchar',
             'len' => 255,
             'comment' => 'Image to be used as an avatar',
             'help' => 'Click to edit it.',
@@ -215,4 +216,4 @@ $dictionary['Styleguide'] = array(
 if (!class_exists('VardefManager')){
     require_once('include/SugarObjects/VardefManager.php');
 }
-VardefManager::createVardef('Styleguide','Styleguide', array('person', 'default', 'assignable'));
+VardefManager::createVardef('Styleguide', 'Styleguide', array('default', 'person', 'assignable'));

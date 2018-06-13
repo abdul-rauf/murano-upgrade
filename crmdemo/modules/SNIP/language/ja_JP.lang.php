@@ -4,7 +4,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -21,7 +21,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Eメールアーカイブ',
-    'LBL_SNIP_SUMMARY' => "Eメールアーカイブは、Sugarが提供するメEールアドレスにEメールを送信することによって、メールクライアントやサービスからSugarに自動的にEメールをインポートすることが可能なサービスです。それぞれのSugarインスタンスはユニークなEメールアドレスを持ちます。Eメールをインポートするには、TO, CC, BCCフィールドに提供されたEメールアドレスを追加してEメールを送信します。EメールアーカイブサービスはSugarインスタンスにEメールをインポートします。サービスはアプリケーションにEメール、添付ファイル、画像、カレンダーイベントをインポートし、Eメールアドレスがマッチする既存のレコードに関連付けます。<br><br>例: ユーザが取引先を閲覧する場合、取引先レコードのEメールアドレスに基づいて関連付けたEメールをすべて閲覧することができます。取引先に関連付けられている取引先担当者のEメールもすべて閲覧することができます。<br><br>サービスの使用を開始するには以下の規約に同意し、サービスを有効にしてください。サービスはいつでも無効にできます。サービスが有効になるとサービスで使用するメールアドレスが表示されます。<br><br>",
+    'LBL_SNIP_SUMMARY' => "Eメールアーカイブは、Sugarが提供するEメールアドレスにEメールを送信することによって、メールクライアントやサービスからSugarに自動的にEメールをインポートすることが可能なサービスです。それぞれのSugarインスタンスはユニークなEメールアドレスを持ちます。Eメールをインポートするには、TO, CC, BCCフィールドに提供されたEメールアドレスを追加してEメールを送信します。EメールアーカイブサービスはSugarインスタンスにEメールをインポートします。サービスはアプリケーションにEメール、添付ファイル、画像、カレンダーイベントをインポートし、Eメールアドレスがマッチする既存のレコードに関連付けます。<br><br>例: ユーザが取引先を閲覧する場合、取引先レコードのEメールアドレスに基づいて関連付けたEメールをすべて閲覧することができます。取引先に関連付けられている取引先担当者のEメールもすべて閲覧することができます。<br><br>サービスの使用を開始するには以下の規約に同意し、サービスを有効にしてください。サービスはいつでも無効にできます。サービスが有効になるとサービスで使用するメールアドレスが表示されます。<br><br>",
 	'LBL_REGISTER_SNIP_FAIL' => 'Eメールアーカイブサービスへのコンタクトに失敗しました: %s!<br>',
 	'LBL_CONFIGURE_SNIP' => 'Eメールアーカイブ',
     'LBL_DISABLE_SNIP' => '無効',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -390,10 +390,13 @@ function process_action_new_rel($focus, $action_array){
 
             //target module has been saved, now relate it to the original related bean
             $relName = $rel_handler->base_vardef_field;
-            $target_module->load_relationship($relName);
-            $relatedIds = $target_module->$relName->get();
-            if (empty($relatedIds) || !in_array($rel_object->id, $relatedIds)) {
-                $target_module->$relName->add($rel_object->id);
+
+            // But only if the relationship exists
+            if ($target_module->load_relationship($relName)) {
+                $relatedIds = $target_module->$relName->get();
+                if (empty($relatedIds) || !in_array($rel_object->id, $relatedIds)) {
+                    $target_module->$relName->add($rel_object->id);
+                }
             }
 
 		//end for loop of all,first, filter

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -83,7 +83,6 @@
         view = app.view.createView({
             context: this.context,
             layout: this,
-            name: 'convert-options',
             type: 'convert-options',
             platform: this.options.platform
         });
@@ -104,10 +103,9 @@
             moduleMeta.moduleNumber = moduleNumber++;
             var view = app.view.createLayout({
                 context: this.context,
-                name: 'convert-panel',
+                type: 'convert-panel',
                 layout: this,
                 meta: moduleMeta,
-                type: 'convert-panel',
                 platform: this.options.platform
             });
             view.initComponents();
@@ -361,7 +359,7 @@
         if (!this.disposed && doClose) {
             this.context.trigger('lead:convert:exit');
             app.drawer.close();
-            app.navigate(this.context, leadsModel, 'record');
+            app.router.record('Leads', leadsModel.id);
         }
     },
 

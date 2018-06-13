@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Nytt passord',
 	'LBL_NEW_PASSWORD1'					=> 'Passord',
 	'LBL_NEW_PASSWORD2'					=> 'Bekreft passord',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Passordet ble endret.',
+    'LBL_NEW_USER_PASSWORD_1' => 'Passordet ble endret.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'En e-post ble sendt til brukeren med et system-generert passord.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Passordet ble opprettet.',
+    'LBL_NEW_USER_PASSWORD_3' => 'Passordet ble opprettet.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Ny bruker',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Ny bruker [Alt+N]',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Budsjetter',
     'LBL_FORECASTS'                     => 'Prognoser',
     'LBL_WORKSHEETS'                    => 'Regneark',
+	'LBL_CALENDARS'                     => 'Kalendere',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Få en annen CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> 'Bytt til lyd',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Bytt til bilde',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Telefonnummer på kontor',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Publisér på min plassering',
     'LBL_ICAL_PUB_URL'                  => 'Nettadresse for iCal-integrasjon',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Bruk denne nettadressen for å abonnere på Sugar-kalenderen med iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Bruk denne URL-adressen for å abonnere på Sugar-kalenderen i iCal-støttede ' .
+                                           'programmer. Sugar-kalenderhendelser er skrivebeskyttet ' .
+                                           'i eksterne kalenderprogrammer og endringer av hendelser ' .
+                                           '(f.eks møter, samtaler osv.) kan bare gjøres i Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'Din forespurte URL',
 	'LNK_NEW_USER'						=> 'Opprett ny bruker',
 	'LNK_NEW_PORTAL_USER'				=> 'Opprett ny Portal API bruker',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'Brukernes rapporter',
     'LBL_CONTACTS_SYNC' => 'Kontakter',
-
+    'LBL_DETAIL' => 'Brukerprofil',
 ); // END STRINGS DEFS
 
 ?>

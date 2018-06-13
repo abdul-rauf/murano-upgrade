@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -1109,6 +1109,12 @@ class MetaDataFiles
                                 $results[$fileInfo['subPath']]['meta'] = $viewdefs[$fileInfo['platform']][$type][$fileInfo['subPath']];
                             }
                         } else {
+                            if ($fileInfo['subPath'] == 'header' && $type == 'menu') {
+                                $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']] =
+                                    array_values(
+                                        $viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']]
+                                    );
+                            }
                             if ( !isset($viewdefs[$module][$fileInfo['platform']][$type][$fileInfo['subPath']]) ) {
                                 $GLOBALS['log']->error('No viewdefs for module: '.$module.' viewdefs @ '.$fileInfo['path']);
                             } else {
@@ -1274,6 +1280,25 @@ class MetaDataFiles
         }
 
         return null;
+    }
+
+    /**
+     * Loads a specific client router's contents
+     *
+     * @param string $module   The name of the module to get metadata for
+     * @param string $platform The platform to search for the client data (defaults to base)
+     *
+     * @return string          Contents of the metadata file
+     */
+    public static function loadRouterFile($module, $platform = 'base')
+    {
+        $routerFile = 'modules/' . $module . '/clients/' . $platform . '/routes/routes.js';
+        if (file_exists($routerFile)) {
+            return self::trimLicense(
+                file_get_contents($routerFile)
+            );
+        }
+        return '';
     }
 
     /**

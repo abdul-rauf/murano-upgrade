@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -20,6 +20,7 @@ $mod_strings = array (
 'LBL_ACCESS_DISABLED'=>'已停用',
 'LBL_ACCESS_DEV'=>'開發者',
 'LBL_ACCESS_ADMIN_DEV'=>'管理員和開發者',
+'LBL_ACCESS_SELECTED_TEAMS' => '擁有者與選定的小組',
 'LBL_NAME'=>'名稱',
 'LBL_DESCRIPTION'=>'描述',
 'LIST_ROLES'=>'清單角色',

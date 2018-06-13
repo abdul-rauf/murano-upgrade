@@ -1,6 +1,5 @@
 <?php
-
-/* This file was updated by 7_FixNameLink.php */
+// created: 2018-06-13 11:25:41
 $viewdefs['Users']['base']['view']['list'] = array (
   'panels' => 
   array (

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -50,8 +50,7 @@ $dictionary['kbusefulness'] = array(
         ),
         'ssid' => array(
             'name' => 'ssid',
-            'type' => 'varchar',
-            'len' => 36,
+            'type' => 'id',
             'isnull' => 'true',
         ),
 
@@ -91,7 +90,9 @@ $dictionary['kbusefulness'] = array(
             'join_key_rhs' => 'kbarticle_id',
             'join_key_lhs' => 'user_id',
             'true_relationship_type' => 'many-to-many',
-            'primary_flag_column' => 'zeroflag'
+            'primary_flag_column' => 'zeroflag',
+            'relationship_class' => 'KBUsefulnessRelationship',
+            'relationship_file' => 'modules/KBContents/KBUsefulnessRelationship.php',
         ),
     )
 );

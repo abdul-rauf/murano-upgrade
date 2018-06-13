@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Ved at klikke Bekræft, vil du blive slette ALLE data og prognosedata og ændre dine mulighedsvisning. Hvis dette ikke er, hvad du havde tænkt dig, skal du klikke på Annullér for at vende tilbage til tidligere indstillinger.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Ved at klikke på bekræft sletter du ALLE prognosedata og ændrer din visning af salgsmuligheder. '
+        .'ALLE procesdefinitioner med et målmodul af omsætningsenheder vil også blive slået fra. '
+        .'Klik på annuller for at vende tilbage til de tidligere indstillinger, hvis det ikke var hvad du havde tænkt dig.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Hvis alle indtægt linje-emner er lukket og mindst én blev vundet',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'bliver mulighedssalgsfasen indstillet til "Lukket vundet".',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Hvis alle indtægt linje-emner er i "Lukket tabt" salgsfasen,',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Dette {{plural_module_name}} modul giver dig mulighed for at spore individuelle salg og linjeelementer, der hører til disse salg fra start til slut. Hver {{MODULE_NAME}} post repræsenterer en overskrift for en gruppe af {{revenuelineitems_module}} samt andre vigtige elementer, såsom {{quotes_module}}, {{contacts_module}}, osv. Hver {{revenuelineitems_singular_module}} er det potentielle salg i flere salgsfaser, indtil det mærkes enten "Closed Won" eller "Closed Lost". Dette {{MODULE_NAME}} element afspejler beløbet og den forventede Lukkedato for dens {{revenuelineitems_module}}. {{plural_module_name}} og {{revenuelineitems_module}} kan endda udnyttes yderligere ved at bruge Sugars {{forecasts_singular_module}} modul til at forstå og forudsige salgstendenser samt holde fokus på arbejdet med salgskvoter.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} modulet giver dig mulighed at spore individuelle salg fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg, og omfatter relevante salgsdata samt vedrørende andre vigtige poster, såsom {{quotes_module}}, {{contacts_module}}, osv. En {{module_name}} vil typisk fortsætte gennem flere salgsfaser indtil det markeres enten "Lukket vandt" eller "Lukket tabt". {{plural_module_name}} kan udnyttes yderligere ved hjælp af Sugar&#39;s {{forecasts_singular_module}} modul til at forstå og forudsige salgstendenser samt fokusere arbejde for at opnå salgskvoter.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Dette {{plural_module_name}} modul giver dig mulighed for at spore individuelle salg og linjeposter, der hører til disse salg fra start til slut. Hver {{MODULE_NAME}} post repræsenterer en overskrift for en gruppe af {{revenuelineitems_module}} samt andre vigtige poster, såsom {{quotes_module}}, {{contacts_module}} osv. - Rediger 
+    'LBL_HELP_RECORD' => 'Dette {{plural_module_name}} modul giver dig mulighed for at spore individuelle salg og linjeposter, der hører til disse salg fra start til slut. Hver {{module_name}} post repræsenterer et muligt salg samt andre vigtige poster, såsom {{quotes_module}}, {{contacts_module}} osv. 
 
 -Rediger denne posts felter ved at klikke på et felt eller på knappen Rediger.
-- Vis eller ændr links til andre poster i underpanelerne, herunder {{revenuelineitems_module}} ved at skifte den nederste venstre rude til "Data View".
+- Vis eller ændr links til andre poster i underpanelerne, herunder ved at skifte den nederste venstre rude til "Data View".
 - Foretag og vis brugernes kommentarer og post ændringer i {{activitystream_singular_module}} ved at skifte den nederste venstre rude til "Activity Stream". 
 - Følg eller lad denne post være favorit med ikonerne til højre for posten navn.
-- Yderligere handlinger er tilgængelige i dropdown menuen Actions til højre for redigeringsknappen.',
+- Yderligere handlinger er tilgængelige i dropdown-menuen Actions til højre for redigeringsknappen.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Dette {{plural_module_name}} modul giver dig mulighed for at spore individuelle salg og tilhørende linjeposter, der hører til disse salg fra start til slut. Hver {{module_name}} post repræsenterer en overskrift for en gruppe af {{revenuelineitems_module}} samt ancre vigtige poster såsom {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} modulet giver dig mulighed for at spore individuelle salg og tilhørende linjeposter, der hører til disse salg fra start til slut. Hver {{module_name}} post repræsenterer et muligt salg samt andre vigtige poster såsom {{quotes_module}}, {{contacts_module}}, etc.
 
 For at oprette et {{module_name}}:
 1. Angiv værdier i felterne som ønsket.
  - Felter markeret som "krævet" skal være udfyldt, før der gemmes.
  - Klik på¨"Vis mere" for at vise yderligere felter, om nødvendigt.
-2. Klik på "Gem" for at færdiggøre den nye post og vende tilbage til forrige side.
-3. Efter, der er gemt, anvend {{revenuelineitems_module}} underpanelet til at tilføje linjeposter til {{module_name}}.',
+2. Klik på "Gem" for at færdiggøre den nye post og vende tilbage til forrige side.',
 
 // END PRO/CORP
 

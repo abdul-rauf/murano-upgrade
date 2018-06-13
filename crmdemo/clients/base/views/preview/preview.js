@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -15,7 +15,6 @@
  */
 ({
     extendsFrom: 'RecordView',
-
     plugins: ['ToggleMoreLess', 'Editable', 'ErrorDecoration', 'SugarLogic'],
     fallbackFieldTemplate: 'detail',
     /**
@@ -36,11 +35,20 @@
     hiddenPanelExists: false,
 
     initialize: function(options) {
-        app.view.View.prototype.initialize.call(this, options);
+        // Use preview view if available, otherwise fallback to record view
+        this.dataView = 'preview';
+        var previewMeta = app.metadata.getView(options.module, 'preview');
+        var recordMeta = app.metadata.getView(options.module, 'record');
+
+        if (_.isEmpty(previewMeta) || _.isEmpty(previewMeta.panels)) {
+            this.dataView = 'record';
+        }
+
+        this._super('initialize', [options]);
+        this.meta = _.extend(this.meta, this._previewifyMetadata(_.extend({}, recordMeta, previewMeta)));
         this.action = 'detail';
         this._delegateEvents();
         this.delegateButtonEvents();
-        this.collection = app.data.createBeanCollection(this.module);
 
         /**
          * An array of the {@link #alerts alert} names in this view.
@@ -126,6 +134,7 @@
         this.layout.trigger('preview:edit:complete');
         this.unsetContextAction();
         this.toggleFields(this.editableFields, false);
+        this.toggleLocks(false);
     },
 
     /**
@@ -137,6 +146,7 @@
     cancelClicked: function() {
         this.model.revertAttributes();
         this.toggleFields(this.editableFields, false);
+        this.toggleLocks(false);
         this._dismissAllAlerts();
         this.clearValidationErrors(this.editableFields);
         this.unsetContextAction();
@@ -149,9 +159,7 @@
      * @private
      */
     _delegateEvents: function() {
-        app.events.on('preview:render', this._renderPreview, this);
-        app.events.on('preview:collection:change', this.updateCollection, this);
-        app.events.on('preview:close', this.closePreview, this);
+        app.events.on('preview:collection:change', this.showPreviousNextBtnGroup, this);
 
         // TODO: Remove when pagination on activity streams is fixed.
         app.events.on('preview:module:update', this.updatePreviewModule, this);
@@ -175,11 +183,17 @@
         }
     },
 
+    /**
+     * Calls `View.Views.Base.PreviewView#showPreviousNextBtnGroup`.
+     *
+     * @deprecated since 7.8, will be removed in 7.9.
+     * @param {Data.BeanCollection} collection the given collection (unused)
+     */
     updateCollection: function(collection) {
-        if( this.collection ) {
-            this.collection.reset(collection.models);
-            this.showPreviousNextBtnGroup();
-       }
+        app.logger.warn('View.Views.Base.PreviewView#updateCollection is deprecated since 7.8 and will be' +
+            ' removed in 7.9. Since the preview layout now share the view collection, this method is obsolete.');
+
+        this.showPreviousNextBtnGroup();
     },
 
     // TODO: Remove when pagination on activity streams is fixed.
@@ -208,13 +222,18 @@
      * of if statements.
      */
     showPreviousNextBtnGroup: function () {
-        if (!this.model || !this.layout || !this.collection) {
+        if (!this.model || !this.layout) {
             return;
         }
+
         var collection = this.collection;
-        if (!collection.size()) {
+        if (!collection || !collection.size()) {
             this.layout.hideNextPrevious = true;
+            // Need to rerender the preview header
+            this.layout.trigger('preview:pagination:update');
+            return;
         }
+
         var recordIndex = collection.indexOf(collection.get(this.model.id));
         this.layout.previous = collection.models[recordIndex-1] ? collection.models[recordIndex-1] : undefined;
         this.layout.next = collection.models[recordIndex+1] ? collection.models[recordIndex+1] : undefined;
@@ -226,6 +245,8 @@
 
     /**
      * Renders the preview dialog with the data from the current model and collection.
+     *
+     * @deprecated Deprecated since 7.8.0. Will be removed in 7.10.0.
      * @param model Model for the object to preview
      * @param collection Collection of related objects to the current model
      * @param {Boolean} fetch Optional Indicates if model needs to be synched with server to populate with latest data
@@ -234,6 +255,9 @@
      * @private
      */
     _renderPreview: function(model, collection, fetch, previewId) {
+        app.logger.warn('`Base.PreviewView#_renderPreview` has been deprecated since 7.8.0 and' +
+            'will be removed in 7.10.0.');
+
         var self = this;
 
         // If there are drawers there could be multiple previews, make sure we are only rendering preview for active drawer
@@ -292,10 +316,15 @@
     },
     /**
      * Renders the preview dialog with the data from the current model and collection
+     *
+     * @deprecated Deprecated since 7.8.0. Will be removed in 7.10.0.
      * @param model Model for the object to preview
      * @param collection Collection of related objects to the current model
      */
     renderPreview: function(model, newCollection) {
+        app.logger.warn('`Base.PreviewView#renderPreview` has been deprecated since 7.8.0 and' +
+            'will be removed in 7.10.0.');
+
         if(newCollection) {
             this.collection.reset(newCollection.models);
         }
@@ -377,12 +406,18 @@
             data.direction === 'left' ? currIndex -= 1 : currIndex += 1;
 
             //Reset the preview
-            app.events.trigger('preview:render', this.collection.models[currIndex], null, true);
+            app.events.trigger('preview:render', this.collection.models[currIndex], this.collection, true);
             this.switching = false;
         }
     },
 
+    /**
+     * @deprecated Deprecated since 7.8.0. Will be removed in 7.10.0.
+     */
     closePreview: function() {
+        app.logger.warn('`Base.PreviewView#closePreview` has been deprecated since 7.8.0 and' +
+            ' will be removed in 7.10.0.');
+
         if(_.isUndefined(app.drawer) || app.drawer.isActive(this.$el)){
             this.switching = false;
             delete this.model;
@@ -403,6 +438,15 @@
                 }
             }, this);
         }
+        // When the preview layout sets the new model in the context, the view
+        // needs to switch the model and render for the fields to listen to the new
+        // model changes.
+        // Since the layout calls loadData, the fields will rerender when the data comes back
+        // from the sever.
+        this.context.on('change:model', function(ctx, model) {
+            this.switchModel(model);
+            this.render();
+        }, this);
     },
 
     /**
@@ -413,6 +457,31 @@
         this.setEditableFields();
         this.toggleFields(this.editableFields, true);
         this.toggleButtons(true);
+        this.setButtonStates(this.STATE.EDIT);
+        this.toggleLocks(true);
+    },
+
+    /**
+     * Show or hide lock icons for locked fields
+     *
+     * @param {boolean} activate `true` to show lock icon on locked fields
+     */
+    toggleLocks: function(activate) {
+        // Get the locked fields from the model
+        var lockedFields = this.model.get('locked_fields') || [];
+
+        if (!this._hasLockedFields) {
+            return;
+        }
+
+        if (activate) {
+            this.warnLockedFields();
+        }
+        _.each(this.fields, function(field) {
+            if (_.contains(lockedFields, field.name)) {
+                this.$('.preview-lock-link-wrapper[data-name=' + field.name + ']').toggleClass('hide', !activate);
+            }
+        }, this);
     },
 
     /**
@@ -422,15 +491,25 @@
      * is allowed
      */
     setEditableFields: function() {
-        var self = this;
+        // Get the locked fields from the model
+        var lockedFields = this.model.get('locked_fields') || [];
+
+        // Clear any old locked fields that may have been set
+        this._hasLockedFields = false;
+
         // we only want to edit non readonly fields
         this.editableFields = _.reject(this.fields, function(field) {
+            // Locked fields should not be editable
+            if (_.contains(lockedFields, field.name)) {
+                this._hasLockedFields = true;
+                return true;
+            }
             return field.def.readOnly || field.def.calculated ||
                 //Added for SugarLogic fields since they are not supported
                 //Fixme: PAT-2241 will remove this
                 field.def.previewEdit === false ||
-                !app.acl.hasAccessToModel('edit', self.model, field.name);
-        });
+                !app.acl.hasAccessToModel('edit', this.model, field.name);
+        }, this);
     },
 
     /**

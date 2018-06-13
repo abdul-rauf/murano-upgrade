@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'LBL_BLANK'	=> '-празен-',
+	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Обаждания',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Обаждане',
     'LBL_MODULE_TITLE' => 'Обаждания',
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'Електронна поща',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Изпращане на поща до всички поканени',
     'LBL_EMAIL_REMINDER' => 'Електронна поща',
-    'LBL_EMAIL_REMINDER_TIME' => 'Напомняне по електронна поща',
-    'LBL_POPUP_REMINDER_TIME' => 'Напомняне',
+    'LBL_EMAIL_REMINDER_TIME' => 'Час на напомняне по електронната поща',
+    'LBL_POPUP_REMINDER_TIME' => 'Час на напомняне с изскачащ прозорец',
     'LBL_SEND_BUTTON_TITLE'=>'Изпращане на покани [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'И',
     'LBL_SEND_BUTTON_LABEL'=>'Изпращане на покани',
 	'LBL_DATE_END'=>'Крайна дата',
 	'LBL_TIME_END'=>'Краен час',
-	'LBL_REMINDER_TIME'=>'Напомняне през',
+    'LBL_REMINDER_TIME'=>'Напомняне през',
     'LBL_EMAIL_REMINDER_SENT' => 'Изпратено напомняне по е-мейл',
     'LBL_SEARCH_BUTTON'=> 'Търси',
     'LBL_ACTIVITIES_REPORTS' => 'Отчет за справката',
@@ -131,6 +131,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Изтрий всички повторения',
     'LBL_DATE_END_ERROR' => 'Въведенета крайна дата е преди началната',
     'LBL_REPEAT_PARENT_ID' => 'Родителски идентификатор',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Идентификатор на повторението на обаждането. Дата на първото обаждане',
     'LBL_RECURRING_SOURCE' => 'Източник на повторение',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Сигурни ли сте, че искате да премахнете всички периодично повтарящи се записи?',
     'LBL_RECURRING_LIMIT_ERROR' => 'Повтарящото се обаждане не може да бъде насрочено от системата, защото превишава максималния брой от $limit разрешени повторения.',

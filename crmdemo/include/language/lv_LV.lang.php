@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -48,7 +48,7 @@ $app_list_strings = array (
     'Manufacturers' => 'Ražotāji',
     'Activities' => 'Darbības',
     'Comments' => 'Komentāri',
-    'Subscriptions' => 'Abonamenti',
+    'Subscriptions' => 'Abonementi',
     'Bugs' => 'Kļūdas',
     'Feeds' => 'RSS barotnes',
     'iFrames'=>'Manas vietnes',
@@ -56,7 +56,7 @@ $app_list_strings = array (
     'TaxRates'=>'Nodokļa likmes',
     'ContractTypes' => 'Līgumu veidi',
     'Schedulers'=>'Plānotāji',
-    'Project'=>'Projekts',
+    'Project'=>'Projekti',
     'ProjectTask'=>'Projekta uzdevumi',
     'Campaigns'=>'Kampaņas',
     'CampaignLog'=>'Kampaņas žurnāls',
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => 'Filtrs',
     'Comments' => 'Komentārs',
     'Currencies' => 'Valūta',
-    'Project' => 'Projekts',
     'ProductTemplates' => 'Produkta veidne',
-    'ProductCategories' => 'Produktu kategorija',
     'ProductTypes' => 'Produkta veids',
     'Shippers' => 'Piegādātājs',
     'Subscriptions' => 'Pierakstīšanās',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"Pie",
                 '7'=>"Se",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"Sv",
+            '2'=>"Pr",
+            '3'=>"Ot",
+            '4'=>"Tr",
+            '5'=>"Ce",
+            '6'=>"Pie",
+            '7'=>"Se",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => 'Sv',
         '1' => 'Pi',
@@ -1064,7 +1072,7 @@ $app_list_strings = array (
     'document_subcategory_dom' =>
     array (
     '' => '',
-    'Marketing Collateral' => 'Marketinga materiāli',
+    'Marketing Collateral' => 'Mārketinga materiāli',
     'Product Brochures' => 'Produktu brošūras',
     'FAQ' => 'BUJ',
   ),
@@ -1076,7 +1084,7 @@ $app_list_strings = array (
     'FAQ' => 'BUJ',
     'Expired' => 'Izbeidzies',
     'Under Review' => 'Caurskatē',
-    'Pending' => 'Nepabeigta',
+    'Pending' => 'Nepabeigts',
   ),
   'document_template_type_dom' =>
   array(
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => 'gads(i)',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => 'Līdz',
+        'Occurrences' => 'Parādīšanās',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => 'Nav',
+        'Each' => 'Katrs',
+        'On' => 'Precīzi',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => 'pirmais',
+        'second' => 'otrais',
+        'third' => 'trešais',
+        'fourth' => 'ceturtais',
+        'fifth' => 'piektais',
+        'last' => 'pēdējais',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => 'Svētdiena',
+        'Mon' => 'Pirmdiena',
+        'Tue' => 'Otrdiena',
+        'Wed' => 'Trešdiena',
+        'Thu' => 'Ceturtdiena',
+        'Fri' => 'Piektdiena',
+        'Sat' => 'Sestdiena',
+        'Day' => 'Diena',
+        'WD'  => 'Nedēļas diena',
+        'WE'  => 'Nedēļas nogales diena'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'Vidus',
         'end' => 'Beigas',
         'top' => 'Augša',
+        'total' => 'Kopā',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'Piltuve',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => 'Gaišs',
       'dark' => 'Tumšs',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => 'Pārvietot',
@@ -2100,8 +2219,8 @@ $app_list_strings = array (
         ),
         /* Barbados */
         "BB" => array(
-            "1" => array("code" => "CC", "name" => "Christ Church"),
-            "2" => array("code" => "AND", "name" => "Saint Andrew"),
+            "1" => array("code" => "Kopija", "name" => "Christ Church"),
+            "2" => array("code" => "UN", "name" => "Saint Andrew"),
             "3" => array("code" => "GEO", "name" => "Saint George"),
             "4" => array("code" => "JAM", "name" => "Saint James"),
             "5" => array("code" => "JOH", "name" => "Saint John"),
@@ -2247,7 +2366,7 @@ $app_list_strings = array (
             "1" => array("code" => "AC", "name" => "Acre"),
             "2" => array("code" => "AL", "name" => "Alagoas"),
             "3" => array("code" => "AP", "name" => "Amapa"),
-            "4" => array("code" => "AM", "name" => "Amazonas"),
+            "4" => array("code" => "No rīta", "name" => "Amazonas"),
             "5" => array("code" => "BA", "name" => "Bahia"),
             "6" => array("code" => "CE", "name" => "Ceara"),
             "7" => array("code" => "DF", "name" => "Distrito Federal"),
@@ -2595,7 +2714,7 @@ $app_list_strings = array (
             "21" => array("code" => "MET", "name" => "Meta"),
             "22" => array("code" => "NAR", "name" => "Narino"),
             "23" => array("code" => "NDS", "name" => "Norte de Santander"),
-            "24" => array("code" => "PUT", "name" => "Putumayo"),
+            "24" => array("code" => "IEVIETOT", "name" => "Putumayo"),
             "25" => array("code" => "QUI", "name" => "Quindio"),
             "26" => array("code" => "RIS", "name" => "Risaralda"),
             "27" => array("code" => "SAP", "name" => "San Andres y Providencia"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "UN", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2852,7 +2971,7 @@ $app_list_strings = array (
             "25" => array("code" => "SC", "name" => "San Cristobal"),
             "26" => array("code" => "JO", "name" => "San Jose de Ocoa"),
             "27" => array("code" => "SJ", "name" => "San Juan"),
-            "28" => array("code" => "PM", "name" => "San Pedro de Macoris"),
+            "28" => array("code" => "Pēcpusdienā", "name" => "San Pedro de Macoris"),
             "29" => array("code" => "SA", "name" => "Santiago"),
             "30" => array("code" => "ST", "name" => "Santiago Rodriguez"),
             "31" => array("code" => "SD", "name" => "Santo Domingo"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "VAI", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Southern Nations - Nationalities"),
             "9" => array("code" => "TG", "name" => "Tigray"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "Sumba"),
+            "22" => array("code" => "SUMMA", "name" => "Sumba"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3448,7 +3567,7 @@ $app_list_strings = array (
             "4" => array("code" => "EC", "name" => "East Berbice-Corentyne"),
             "5" => array("code" => "EW", "name" => "Essequibo Islands-West Demerara"),
             "6" => array("code" => "MB", "name" => "Mahaica-Berbice"),
-            "7" => array("code" => "PM", "name" => "Pomeroon-Supenaam"),
+            "7" => array("code" => "Pēcpusdienā", "name" => "Pomeroon-Supenaam"),
             "8" => array("code" => "PI", "name" => "Potaro-Siparuni"),
             "9" => array("code" => "UD", "name" => "Upper Demerara-Berbice"),
             "10" => array("code" => "UT", "name" => "Upper Takutu-Upper Essequibo")
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "Meghalaya"),
             "22" => array("code" => "MI", "name" => "Mizoram"),
             "23" => array("code" => "NA", "name" => "Nagaland"),
-            "24" => array("code" => "OR", "name" => "Orissa"),
+            "24" => array("code" => "VAI", "name" => "Orissa"),
             "25" => array("code" => "PO", "name" => "Pondicherry"),
             "26" => array("code" => "PU", "name" => "Punjab"),
             "27" => array("code" => "RA", "name" => "Rajasthan"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "Napoli"),
             "57" => array("code" => "NO", "name" => "Novara"),
             "58" => array("code" => "NU", "name" => "Nuoro"),
-            "59" => array("code" => "OR", "name" => "Oristano"),
+            "59" => array("code" => "VAI", "name" => "Oristano"),
             "60" => array("code" => "PD", "name" => "Padova"),
             "61" => array("code" => "PA", "name" => "Palermo"),
             "62" => array("code" => "PR", "name" => "Parma"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "Kingston Parish"),
             "4" => array("code" => "MAN", "name" => "Manchester Parish"),
             "5" => array("code" => "POR", "name" => "Portland Parish"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "UN", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "Saint Ann Parish"),
             "8" => array("code" => "CAT", "name" => "Saint Catherine Parish"),
             "9" => array("code" => "ELI", "name" => "Saint Elizabeth Parish"),
@@ -3897,7 +4016,7 @@ $app_list_strings = array (
             "28" => array("code" => "NR", "name" => "Nara"),
             "29" => array("code" => "NI", "name" => "Niigata"),
             "30" => array("code" => "OI", "name" => "Oita"),
-            "31" => array("code" => "OK", "name" => "Okayama"),
+            "31" => array("code" => "Labi", "name" => "Okayama"),
             "32" => array("code" => "ON", "name" => "Okinawa"),
             "33" => array("code" => "OS", "name" => "Osaka"),
             "34" => array("code" => "SA", "name" => "Saga"),
@@ -3917,7 +4036,7 @@ $app_list_strings = array (
         ),
         /* Jordan */
         "JO" => array(
-            "1" => array("code" => "AM", "name" => "'Amman"),
+            "1" => array("code" => "No rīta", "name" => "'Amman"),
             "2" => array("code" => "AJ", "name" => "Ajlun"),
             "3" => array("code" => "AA", "name" => "Al'Aqabah"),
             "4" => array("code" => "AB", "name" => "Al Balqa'"),
@@ -3934,7 +4053,7 @@ $app_list_strings = array (
         "KZ" => array(
             "1" => array("code" => "AL", "name" => "Almaty"),
             "2" => array("code" => "AC", "name" => "Almaty City"),
-            "3" => array("code" => "AM", "name" => "Aqmola"),
+            "3" => array("code" => "No rīta", "name" => "Aqmola"),
             "4" => array("code" => "AQ", "name" => "Aqtobe"),
             "5" => array("code" => "AS", "name" => "Astana City"),
             "6" => array("code" => "AT", "name" => "Atyrau"),
@@ -3964,7 +4083,7 @@ $app_list_strings = array (
         /* Kiribati */
         "KI" => array(
             "1" => array("code" => "AG", "name" => "Abaiang"),
-            "2" => array("code" => "AM", "name" => "Abemama"),
+            "2" => array("code" => "No rīta", "name" => "Abemama"),
             "3" => array("code" => "AK", "name" => "Aranuka"),
             "4" => array("code" => "AO", "name" => "Arorae"),
             "5" => array("code" => "BA", "name" => "Banaba"),
@@ -4109,7 +4228,7 @@ $app_list_strings = array (
             "11" => array("code" => "BAT", "name" => "Batroun"),
             "12" => array("code" => "BSH", "name" => "Bsharri"),
             "13" => array("code" => "KOU", "name" => "Koura"),
-            "14" => array("code" => "MIN", "name" => "Miniyeh-Danniyeh"),
+            "14" => array("code" => "MIN.", "name" => "Miniyeh-Danniyeh"),
             "15" => array("code" => "TRI", "name" => "Tripoli"),
             "16" => array("code" => "ZGH", "name" => "Zgharta"),
             "17" => array("code" => "ALE", "name" => "Aley"),
@@ -4575,7 +4694,7 @@ $app_list_strings = array (
             "1" => array("code" => "AG", "name" => "Agalega Islands"),
             "2" => array("code" => "BL", "name" => "Black River"),
             "3" => array("code" => "BR", "name" => "Beau Bassin-Rose Hill"),
-            "4" => array("code" => "CC", "name" => "Cargados Carajos Shoals (Saint B)"),
+            "4" => array("code" => "Kopija", "name" => "Cargados Carajos Shoals (Saint B)"),
             "5" => array("code" => "CU", "name" => "Curepipe"),
             "6" => array("code" => "FL", "name" => "Flacq"),
             "7" => array("code" => "GP", "name" => "Grand Port"),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "VAI", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -4791,7 +4910,7 @@ $app_list_strings = array (
             "6" => array("code" => "KH", "name" => "Khomas"),
             "7" => array("code" => "KU", "name" => "Kunene"),
             "8" => array("code" => "OW", "name" => "Ohangwena"),
-            "9" => array("code" => "OK", "name" => "Omaheke"),
+            "9" => array("code" => "Labi", "name" => "Omaheke"),
             "10" => array("code" => "OT", "name" => "Omusati"),
             "11" => array("code" => "ON", "name" => "Oshana"),
             "12" => array("code" => "OO", "name" => "Oshikoto"),
@@ -5027,7 +5146,7 @@ $app_list_strings = array (
         ),
         /* Palau */
         "PW" => array(
-            "1" => array("code" => "AM", "name" => "Aimeliik"),
+            "1" => array("code" => "No rīta", "name" => "Aimeliik"),
             "2" => array("code" => "AR", "name" => "Airai"),
             "3" => array("code" => "AN", "name" => "Angaur"),
             "4" => array("code" => "HA", "name" => "Hatohobei"),
@@ -5048,7 +5167,7 @@ $app_list_strings = array (
         "PA" => array(
             "1" => array("code" => "BT", "name" => "Bocas del Toro"),
             "2" => array("code" => "CH", "name" => "Chiriqui"),
-            "3" => array("code" => "CC", "name" => "Cocle"),
+            "3" => array("code" => "Kopija", "name" => "Cocle"),
             "4" => array("code" => "CL", "name" => "Colon"),
             "5" => array("code" => "DA", "name" => "Darien"),
             "6" => array("code" => "HE", "name" => "Herrera"),
@@ -5084,14 +5203,14 @@ $app_list_strings = array (
         "PY" => array(
             "1" => array("code" => "AG", "name" => "Alto Paraguay"),
             "2" => array("code" => "AN", "name" => "Alto Parana"),
-            "3" => array("code" => "AM", "name" => "Amambay"),
+            "3" => array("code" => "No rīta", "name" => "Amambay"),
             "4" => array("code" => "AS", "name" => "Asuncion"),
             "5" => array("code" => "BO", "name" => "Boqueron"),
             "6" => array("code" => "CG", "name" => "Caaguazu"),
             "7" => array("code" => "CZ", "name" => "Caazapa"),
             "8" => array("code" => "CN", "name" => "Canindeyu"),
             "9" => array("code" => "CE", "name" => "Central"),
-            "10" => array("code" => "CC", "name" => "Concepcion"),
+            "10" => array("code" => "Kopija", "name" => "Concepcion"),
             "11" => array("code" => "CD", "name" => "Cordillera"),
             "12" => array("code" => "GU", "name" => "Guaira"),
             "13" => array("code" => "IT", "name" => "Itapua"),
@@ -5103,7 +5222,7 @@ $app_list_strings = array (
         ),
         /* Peru */
         "PE" => array(
-            "1" => array("code" => "AM", "name" => "Amazonas"),
+            "1" => array("code" => "No rīta", "name" => "Amazonas"),
             "2" => array("code" => "AN", "name" => "Ancash"),
             "3" => array("code" => "AP", "name" => "Apurimac"),
             "4" => array("code" => "AR", "name" => "Arequipa"),
@@ -5227,7 +5346,7 @@ $app_list_strings = array (
             "8" => array("code" => "OP", "name" => "Opolskie"),
             "9" => array("code" => "PP", "name" => "Podkarpackie"),
             "10" => array("code" => "PL", "name" => "Podlaskie"),
-            "11" => array("code" => "PM", "name" => "Pomorskie"),
+            "11" => array("code" => "Pēcpusdienā", "name" => "Pomorskie"),
             "12" => array("code" => "SL", "name" => "Śląskie"),
             "13" => array("code" => "SW", "name" => "Świętokrzyskie"),
             "14" => array("code" => "WM", "name" => "Warmińsko-Mazurskie"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "Novgorod"),
             "48" => array("code" => "NV", "name" => "Novosibirsk"),
             "49" => array("code" => "OM", "name" => "Omsk"),
-            "50" => array("code" => "OR", "name" => "Orel"),
+            "50" => array("code" => "VAI", "name" => "Orel"),
             "51" => array("code" => "OE", "name" => "Orenburg"),
             "52" => array("code" => "PA", "name" => "Palana"),
             "53" => array("code" => "PE", "name" => "Penza"),
@@ -5712,14 +5831,14 @@ $app_list_strings = array (
             "2" => array("code" => "AL", "name" => "Álava"),
             "3" => array("code" => "AB", "name" => "Albacete"),
             "4" => array("code" => "AC", "name" => "Alicante"),
-            "5" => array("code" => "AM", "name" => "Almeria"),
+            "5" => array("code" => "No rīta", "name" => "Almeria"),
             "6" => array("code" => "AS", "name" => "Asturias"),
             "7" => array("code" => "AV", "name" => "Ávila"),
             "8" => array("code" => "BJ", "name" => "Badajoz"),
             "9" => array("code" => "IB", "name" => "Baleares"),
             "10" => array("code" => "BA", "name" => "Barcelona"),
             "11" => array("code" => "BU", "name" => "Burgos"),
-            "12" => array("code" => "CC", "name" => "Cáceres"),
+            "12" => array("code" => "Kopija", "name" => "Cáceres"),
             "13" => array("code" => "CZ", "name" => "Cádiz"),
             "14" => array("code" => "CT", "name" => "Cantabria"),
             "15" => array("code" => "CL", "name" => "Castellón"),
@@ -5735,7 +5854,7 @@ $app_list_strings = array (
             "25" => array("code" => "HS", "name" => "Huesca"),
             "26" => array("code" => "JN", "name" => "Jaén"),
             "27" => array("code" => "RJ", "name" => "La Rioja"),
-            "28" => array("code" => "PM", "name" => "Las Palmas"),
+            "28" => array("code" => "Pēcpusdienā", "name" => "Las Palmas"),
             "29" => array("code" => "LE", "name" => "León"),
             "30" => array("code" => "LL", "name" => "Lérida"),
             "31" => array("code" => "LG", "name" => "Lugo"),
@@ -5821,7 +5940,7 @@ $app_list_strings = array (
             "4" => array("code" => "MA", "name" => "Marowijne"),
             "5" => array("code" => "NI", "name" => "Nickerie"),
             "6" => array("code" => "PA", "name" => "Para"),
-            "7" => array("code" => "PM", "name" => "Paramaribo"),
+            "7" => array("code" => "Pēcpusdienā", "name" => "Paramaribo"),
             "9" => array("code" => "SA", "name" => "Saramacca"),
             "10" => array("code" => "SI", "name" => "Sipaliwini"),
             "11" => array("code" => "WA", "name" => "Wanica")
@@ -5923,7 +6042,7 @@ $app_list_strings = array (
             "16" => array("code" => "TT", "name" => "T'ai-tung"),
             "17" => array("code" => "TY", "name" => "T'ao-yuan"),
             "18" => array("code" => "YL", "name" => "Yun-lin"),
-            "19" => array("code" => "CC", "name" => "Chia-i city"),
+            "19" => array("code" => "Kopija", "name" => "Chia-i city"),
             "20" => array("code" => "CL", "name" => "Chi-lung"),
             "21" => array("code" => "HC", "name" => "Hsin-chu"),
             "22" => array("code" => "TH", "name" => "T'ai-chung"),
@@ -6443,7 +6562,7 @@ $app_list_strings = array (
             "7" => array("code" => "AA", "name" => "Armed Forces Americas"),
             "8" => array("code" => "AC", "name" => "Armed Forces Canada"),
             "9" => array("code" => "AE", "name" => "Armed Forces Europe"),
-            "10" => array("code" => "AM", "name" => "Armed Forces Middle East"),
+            "10" => array("code" => "No rīta", "name" => "Armed Forces Middle East"),
             "11" => array("code" => "AP", "name" => "Armed Forces Pacific"),
             "12" => array("code" => "CA", "name" => "California"),
             "13" => array("code" => "CO", "name" => "Colorado"),
@@ -6481,8 +6600,8 @@ $app_list_strings = array (
             "45" => array("code" => "ND", "name" => "North Dakota"),
             "46" => array("code" => "MP", "name" => "Northern Mariana Islands"),
             "47" => array("code" => "OH", "name" => "Ohio"),
-            "48" => array("code" => "OK", "name" => "Oklahoma"),
-            "49" => array("code" => "OR", "name" => "Oregon"),
+            "48" => array("code" => "Labi", "name" => "Oklahoma"),
+            "49" => array("code" => "VAI", "name" => "Oregon"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "Pennsylvania"),
             "52" => array("code" => "PR", "name" => "Puerto Rico"),
@@ -6562,7 +6681,7 @@ $app_list_strings = array (
         ),
         /* Venezuela */
         "VE" => array(
-            "1" => array("code" => "AM", "name" => "Amazonas"),
+            "1" => array("code" => "No rīta", "name" => "Amazonas"),
             "2" => array("code" => "AN", "name" => "Anzoategui"),
             "3" => array("code" => "AP", "name" => "Apure"),
             "4" => array("code" => "AR", "name" => "Aragua"),
@@ -6639,7 +6758,7 @@ $app_list_strings = array (
         "YE" => array(
             "1" => array("code" => "AB", "name" => "Abyan"),
             "2" => array("code" => "AD", "name" => "Adan"),
-            "3" => array("code" => "AM", "name" => "Amran"),
+            "3" => array("code" => "No rīta", "name" => "Amran"),
             "4" => array("code" => "BA", "name" => "Al Bayda"),
             "5" => array("code" => "DA", "name" => "Ad Dali"),
             "6" => array("code" => "DH", "name" => "Dhamar"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "VAI", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Sekot saitei',
   'LBL_TOGGLE_VISIBILITY' => 'Pārslēgt redzamību', // Record view header panel element
   'LBL_ACTIVITIES' => 'Darbības',
-  'LBL_COPYRIGHT' => 'Autortiesības © 2004-2015 SugarCRM Inc. Visas tiesības aizsargātas.',
-  'LBL_TRADEMARK' => 'SugarCRM ir SugarCRM, Inc preču zīme. Visi uzņēmuma nosaukumi un produktu nosaukumi var būt preču zīmes no attiecīgajiem uzņēmumiem, ar kuriem tie ir saistīti.',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ ir SugarCRM Inc preču zīmes.',
-  'LBL_SEND_INVITE' => 'Sūtīt ielūgumu',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM, Sugar un 3-D kubs ir SugarCRM Inc. reģistrētas preču zīmes. '.
+        'Visi citi uzņēmumu un produktu nosaukumi, kas tiek izmantoti vai parādās šajā produktā, var būt preču zīmes, '.
+        'kas pieder atbilstošiem uzņēmumiem, ar kuriem tie ir saistīti.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ ir SugarCRM Inc preču zīmes.',
+    'LBL_SEND_INVITE' => 'Sūtīt ielūgumu',
   'LBL_INVITEES' => 'Viesi',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Viesis nesaņems jūsu uzaicinājumu',
   'LBL_SELECT_ACTION_LABEL' => 'Izvēlieties darbību',
   'LBL_TOGGLE_DRAWER' => 'Pārslēgt',
   'LBL_TOUR_NEXT' => 'Nākamais',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => 'Pievienot' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => 'Uzņēmuma logo' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'Kalendārs' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'galvenā moduļa navigācija',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'pārslēgt apakšpaneli',
+
     'LBL_ADVANCED' => 'Uzlabots',
     'LBL_BASIC' => 'Pamata',
     'LBL_MODULE_FILTER' => 'Filtrēt pēc',
@@ -8200,7 +8327,7 @@ $app_strings = array (
     'LBL_EMAIL_ML_ADDRESSES_1'              => 'Izvēlētās saraksta adreses',
     'LBL_EMAIL_ML_ADDRESSES_2'              => 'Pieejamās saraksta adreses',
 
-    'LBL_EMAIL_MULTISELECT'                 => '<b>Ctrl-Click</b> lai izvēlētos vairākus<br />(Mac lietotājiem jāizmanto <b>CMD-Click</b>)',
+    'LBL_EMAIL_MULTISELECT'                 => '<b>Ctrl-Click</b>, lai izvēlētos vairākus<br />(Mac lietotājiem jāizmanto <b>CMD-Click</b>)',
 
     'LBL_EMAIL_NO'                          => 'No',
     'LBL_EMAIL_NOT_SENT'                    => 'Radusies problēma ar pieprasījuma e-pasta sūtīšanu. Lūdzu sazinieties ar sistēmas administratoru.',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'Darba grupas',
     'LBL_TEAM_SET_ID' => 'Darba grupu kopas ID',
     'LBL_TEAM_SET'=>'Darba grupu kopa',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => 'Atlasītās komandas',
     'LBL_SEARCH_UNAVAILABLE' => 'Meklēšana nav pieejama. Lūdzu mēģiniet vēlāk.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => 'Nav norādīta galvenā darba grupa',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Kļūda, mēģinot izņemt primāro darba grupu id [{0}] priekš moduļa [{1}] ar id [{2}]',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => 'Meklētājprogramma uz laiku nav pieejama.',
     'EXCEPTION_SEARCH_RUNTIME'          => 'Atgadījusies meklēšanas dziņa izpildlaika kļūda. Sazinieties ar savu sistēmas administratoru.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Nevar rediģēt procesa nobloķētu laiku.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Nosacījums, radās vispārīgas kļūmes vai kļūdas dēļ. Šā izņēmuma iemesli var būt dažādi, taču parasti neietilpst konkrētā API izņēmumā.',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'Norāda, ka serveris ir aizņemts, pārslogots vai nestrādā.',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => 'Meklētājprogrammas papildu procesors šobrīd nav pieejams savienojuma problēmu dēļ. Pārbaudiet savienojumu un konfigurāciju Admin-> meklēšana-> tests.',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'Meklētājprogrammā radās izpildlaika izņēmums. Skatīt sugarcrm.log, lai saņemtu sīkāku informāciju.',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Nevar rediģēt lauku, ko ir nobloķējis notiekošs process.',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s ir nobloķējis notiekošs process, un to nevar rediģēt.',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s ir nobloķējis notiekošs process, un tos nevar rediģēt.',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Fails ar tādu pašu nosaukumu jau sistēmā eksistē.',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'Šim laika periodam jau ir apakšperiodi',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'Pakārtotiem laika periodiem nevar būt apakšperiodu',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => 'Nevar ielādēt nevienu laika periodu ar tipu: {0}',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => 'Nav aktīvu laika posmu pašreizējiem iestatījumiem.',
     'LBL_CURRENT_TIMEPERIOD' => 'Tekošais laika periods',
     'LBL_PREVIOUS_TIMEPERIOD' => 'Iepriekšējais laika periods',
     'LBL_NEXT_TIMEPERIOD' => 'Nākošais laika periods',
@@ -8576,8 +8708,8 @@ $app_strings = array (
     'LBL_CLOSE_AND_CREATE_BUTTON_KEY' => 'C',
     'LBL_OPEN_ITEMS' => 'Atvērtie ieraksti:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
-    'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Rakstīt E-pastu',
-    'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Rakstīt E-pastu',
+    'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Rakstīt e-pastu',
+    'LBL_COMPOSE_EMAIL_BUTTON_TITLE' => 'Rakstīt e-pastu',
     'LBL_SEARCH_DROPDOWN_YES'=>'Jā',
     'LBL_SEARCH_DROPDOWN_NO'=>'Nē',
     'LBL_CONTACT_LIST' => 'Kontaktpersonu saraksts',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'Atlasīt lauku...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Atlasiet operatoru...',
     'LBL_FILTER_CREATE_NEW' => 'Izveidot jaunu',
+    'LBL_FILTER_CREATE_FILTER' => 'Izveidot jaunu filtru',
+    'LBL_FILTER_EDIT_FILTER' => 'Rediģēt filtru',
     'LBL_FILTER_ALL_RECORDS' => 'Visi ieraksti',
     'TPL_FILTER_SAVE' => 'Jūs veiksmīgi izveidojāt filtru {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'No',
@@ -8926,7 +9060,7 @@ $app_strings = array (
     'LBL_SELECT_APPEND_TAGS' => 'Pievienot birku(as)',
     'LBL_BROWSE_DOCUMENTS_BUTTON_KEY' => 'B',
     'LBL_BROWSE_DOCUMENTS_BUTTON_LABEL' => 'Pārlūkot dokumentus',
-    'LBL_BROWSE_DOCUMENTS_BUTTON_TITLE' => 'pārlūkot dokumentus',
+    'LBL_BROWSE_DOCUMENTS_BUTTON_TITLE' => 'Pārlūkot dokumentus',
     'LBL_SELECT_CONTACT_BUTTON_KEY' => 'T',
     'LBL_SELECT_CONTACT_BUTTON_LABEL' => 'Izvēlēties kontaktpersonu',
     'LBL_SELECT_CONTACT_BUTTON_TITLE' => 'Izvēlēties kontaktpersonu',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Novads:',
     'LBL_STATUS_UPDATED'=>'Jūsu statuss šim notikumam ir izmainīts!',
+    'LBL_STATUS_NOT_UPDATED' => 'Jūsu statuss šim notikumam nav atjaunināts.',
     'LBL_STATUS'=>'Statuss',
     'LBL_STREET'=>'Iela',
     'LBL_SUBJECT' => 'Temats',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> Visas tiesības aizsargātas.<br />SugarCRM ir  SugarCRM, Inc. preču zīme. Visi pārējie uzņēmumu un produkta nosaukumi var būt attiecīgo kompāniju, ar kurām tie ir saistīti, preču zīmes.',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        'Visas tiesības aizsargātas.<br />SugarCRM, Sugar un 3-D kubs ir SugarCRM Inc. reģistrētas preču zīmes. '.
+        'Visi citi uzņēmumu un produktu nosaukumi, kas tiek izmantoti vai parādās šajā produktā, var būt preču zīmes, '.
+        'kas pieder atbilstošiem uzņēmumiem, ar kuriem tie ir saistīti.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'Ieplānotais darbs izpildīts',
@@ -9176,7 +9315,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'Kļūda. Esat ievadījis nederīgu operatoru.',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'Kļūda. Esat ievadījis nederīgu filtru.',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'Importēšana neizdevās. Grupas lauks ir daļēji nobloķēts procesa definīcijā. Šie lauki ir jāatbloķē procesa definīcijā, lai varētu importēt definīciju.',
+    'ERROR_EXP_DATE_LOW' => 'Kļūda. Beigu datums nevar būt pirms publicēšanas datuma.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'Kļūda. Apstiprinātajam statusam nepieciešams publicēšanas datums.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Publicēšanas datums ir tukšs.',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9306,6 +9446,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'kolonna var parādīt.',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'Instrumentu panelis',
     'LBL_DASHBOARD_BWC' => 'Mans pamata panelis',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Mans instrumentu panelis',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'Palīdzības panelis',
@@ -9338,9 +9479,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Manas {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'Ziņas',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => 'Google News barotne saistītajam Uzņēmumam',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Iespēju metrikas',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Iespēju Metrikas saistītajam Uzņēmumam',
@@ -9409,7 +9547,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => 'Tagad netika atrasts  neviens ieraksts.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Pieteikumu kopsavilkums',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'Ziņu barotne',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Mijiedarbības',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Piezīmes un pielikumi',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Piezīmes & Pielikumi pieder ierakstam',
@@ -9977,7 +10114,7 @@ $app_strings = array (
 
     // Most Useful Knowledge Base Articles dashlet
     'LBL_DASHLET_MOST_USEFUL_NAME' => 'Noderīgākie publicētie zināšanu bāzes raksti',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Displays the most liked and viewed knowledge base articles',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => 'Attēlo populārākos un biežāk apskatītos zināšanu bāzes rakstus',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtrēts pēc {{label}} "{{value}}"',
 
@@ -10016,6 +10153,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'Ievadiet lapas nosakumu.',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => 'Mana piltuve',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "Manas darba grupas piltuve",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => 'Pārdošanas piltuves diagramma',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => 'Parāda pašreizējās piltuves diagrammu.',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => 'Nav attēla',
 
@@ -10270,6 +10414,8 @@ $app_strings = array (
     'LBL_SELECT_THIS_ROW_TITLE' => 'Izvēlēties šo ierakstu',
     'LBL_TEAM_SELECTED_TITLE' => 'Darba grupa izvēlēta',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'Izvēlieties, lai padarītu šo darba grupu par primāro',
+    'LBL_TEAM_TBSELECTED_TITLE' => 'Darba grupa ir atzīmēta kā izvēlētā darba grupa ',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => 'Atzīmējiet šo darba grupu kā izvēlēto darba grupu',
     'LBL_SEARCH_AND_SELECT' => 'Meklēt un atlasīt {{module}}',
     'TPL_SEARCH_AND_ADD' => 'Meklēt un pievienot {{module}}',
 
@@ -10358,6 +10504,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Priekšskatījums atslēgts: Dati nav pieejami',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'Priekšskatījums atspējots: Tiek aplūkots kā pašreizējais ieraksts',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'Priekšskatījums atslēgts: Ieraksts ir izņemts vai nav piekļuves tiesību',
+    'LBL_PREVIEW_PREVIOUS' => 'Skatīt iepriekšējo',
+    'LBL_PREVIEW_NEXT' => 'Skatīt nākamo',
+    'LBL_PREVIEW_CLOSE' => 'Aizvērt priekšskatījumu',
     'LBL_STREAM_NO_RECORDS' => 'Šim ierakstam pagaidām nav piezīmju. Pievienojiet piezīmi spiežot uz saites pievienot piezīmi.',
     'LBL_DUPLICATES_FOUND' => 'Atrasti {{duplicateCount}} dublikāti.',
     'LBL_NO_DUPLICATES_FOUND' => 'Dublikāti nav atrasti.',
@@ -10377,6 +10526,7 @@ $app_strings = array (
         'Nederīgs ierakstu skaits. Derīgs ierakstu skaits ir intervālā no {{minRecords}} līdz {{maxRecords}}.',
     'LBL_MERGE_NO_ACCESS' =>
         'Jums nav pieejas tiesību lai veiktu šo darbību',
+    'LBL_MERGE_LOCKED' => 'Daži apvienošanai izvēlētie ieraksti satur laukus, ko process ir nobloķējis rediģēšanai, un tos šobrīd nevar apvienot.',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10847,10 +10997,9 @@ $app_strings = array (
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Sistēmas iestatījumi',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'Parole',
     'LBL_CURRENT_PASSWORD'				=> 'Pašreizējā parole',
-    'LBL_SET_NEW_PASSWORD'              => 'Ievadiet paroli',
     'LBL_NEW_PASSWORD1'                 => 'Jauna parole',
     'LBL_NEW_PASSWORD2'                 => 'Apstiprināt paroli',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> 'Ievadiet paroles apstiprinājumu.',
@@ -10858,13 +11007,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> 'Ievadiet veco paroli.',
     'ERR_REENTER_PASSWORDS' => 'Parolēm ir jāsakrīt.',
     'ERR_PASSWORD_MISMATCH' => 'Ievadītā parole neatbilst sistēmā sagabātajai',
-    'LBL_NEW_USER_PASSWORD_1' => 'Parole ir veiksmīgi nomainīta.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Nevar nosūtīt paroli',
     'LBL_REQUEST_PASSWORD' => 'Pieprasīt paroli',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Kļūda: Radās problēma, atjauninot paroli šim lietotājam.',
     'LBL_INCORRECT_PASSWORD' => 'Kļūda: Nepareiza parole.',
 
-    'LBL_PREFERRED_LANGUAGE' => 'Vēlamā valoda:',
+    'LBL_PREFERRED_LANGUAGE' => 'Valodas izvēle:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Izvēlieties atskaiti',
@@ -10894,6 +11042,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => 'Serverī ir radusies kļūda, tādēļ tas nevarēja izpildīt Jūsu pieprasījumu.',
     'ERR_HTTP_500_TEXT_LINE2' => 'Mēģiniet vēlreiz. Ja kļūda nav novērsta, sazinieties ar savu Sugar administratoru.',
     'ERR_HTTP_500_ACTION' => 'Lūdzu sazinieties ar tehnisko atbalstu.',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 Servera iekšējā kļūda',
+    'ERR_HTTP_502_TEXT_LINE1' => 'Serverī ir radusies pagaidu kļūda, tādēļ tas nevarēja izpildīt Jūsu pieprasījumu.',
+    'ERR_HTTP_502_TEXT_LINE2' => 'Mēģiniet vēlreiz. Ja kļūda nav novērsta, sazinieties ar savu Sugar administratoru.',
+    'ERR_HTTP_502_ACTION' => 'Sazinieties ar tehnisko atbalstu.',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 Servera iekšējā kļūda',
+    'ERR_HTTP_503_TEXT_LINE1' => 'Serveris nav pieejams jūsu pieprasījuma pabeigšanai.',
+    'ERR_HTTP_503_TEXT_LINE2' => 'Mēģiniet vēlāk vēlreiz. Ja kļūda nav novērsta, sazinieties ar savu Sugar administratoru.',
+    'ERR_HTTP_503_ACTION' => 'Sazinieties ar tehnisko atbalstu.',
 
     'ERR_RENDER_FAILED_TITLE' => 'Neveiksmīga skata veidošana',
     'ERR_RENDER_FAILED_MSG' => 'Neizdevās izveidot skatu',
@@ -10966,7 +11126,7 @@ $app_strings = array (
 
     // active tasks dashlet
     'LBL_ACTIVE_TASKS_DASHLET' => 'Aktīvie uzdevumi',
-    'LBL_ACTIVE_TASKS_DASHLET_DESCRIPTION' => 'The Active Tasks dashlet displays due now, upcoming  and to do tasks.',
+    'LBL_ACTIVE_TASKS_DASHLET_DESCRIPTION' => 'Aktīvo uzdevumu dašlets rāda uzdevumus, kas jāizpilda tagad, gaidāmos uzdevumus un veicamos uzdevumus.',
     'LBL_ACTIVE_TASKS_DASHLET_DUE_NOW' => 'Izpildīt tagad',
     'LBL_ACTIVE_TASKS_DASHLET_UPCOMING' => 'Gaidāms',
     'LBL_ACTIVE_TASKS_DASHLET_TODO' => 'Veicamie darbi',
@@ -11027,6 +11187,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => 'Kļūda:',
     'LBL_ALERT_TITLE_LOADING' => 'Ielādē ...',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'Jūsu pārlūkprogrammas versija vairs netiek atbalstīta vai Jūs izmantojat neatbalstītu pārlūkprogrammu.',
+    'LBL_ALERT_BROWSER_SUPPORT' => 'Ieteicamas šādas pārlūkprogrammas versijas: <ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => 'Lai aplūkotu ieteicamās pārlūkprogrammas, skat. {{link}} lapu.',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'Atbalstītās platformas',
 
@@ -11079,6 +11240,9 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'kļūda pieslēdzoties serverim. Mēģiniet vēlreiz..',
     'ERR_RESOLVE_ERRORS' => 'Pirms turpināt, izlabojiet kļūdas',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'Atjaunināt sarakstu',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'vairāk',
@@ -11143,7 +11307,7 @@ $app_strings = array (
     'LBL_RESOLVE_CONFLICT' => 'Atrisināt konfliktu ar {{name}}',
 
     // Generic Help Strings
-    'LBL_HELP_MORE_INFO' => 'Lai uzzinātu vairāk, skat. moduļa „{{{more_info_url}}} {{plural_module_name}}” dokumentāciju.{{{more_info_url_close}}}',
+    'LBL_HELP_MORE_INFO' => 'Lai uzzinātu vairāk, skat. moduļa „{{{more_info_url}}}{{plural_module_name}}” dokumentāciju.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'Dati nav pieejami',
 
     // Dashlet Preview Help String
@@ -11187,10 +11351,13 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM sniedz iespēju pieredzējušiem lietotājiem ātri veikt noteiktus uzdevumus, izmantojot tastatūras saīsnes, lai paaugstinātu produktivitāti. Tabulās labajā pusē aprakstīti pieejamie īsceļi kopā ar taustiņiem un to darbību.',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Atbalstītie taustiņi</h1><ul><li>visi burtcipari un simboli</li><li>shift, ctrl, alt, command, mod (ctrl sistēmā Windows/Linux un command sistēmā Macs)</li><li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>Atbalstītās funkcijas</h1><ul><li>Taustiņu kombinācija: ctrl+m</li><li>Vairāki taustiņi: m,ctrl+m</li><li>Taustiņu secība: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Globālie īsceļi',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Konteksta īsceļi',
     'LBL_SHORTCUT_KEY_KEY' => 'Atslēga',
     'LBL_SHORTCUT_FUNCTION' => 'Funkcija',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'Konfigurēt konteksta īsceļus',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => 'Nav konteksta īsceļu, ko konfigurēt',
     'LBL_SHORTCUT_HELP' => 'Parādīt saīsņu palīdzības lapu.',
     'LBL_SHORTCUT_QUICK_CREATE' => 'Pārslēgt ātrās izveides izvēlni.',
     'LBL_SHORTCUT_SEARCH' => 'Pievērsiet uzmanību globālās meklēšanas laukam.',
@@ -11238,6 +11405,9 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => 'Multi-izvēlēties laukā atlasiet visus vienumus',
     'LBL_SHORTCUT_SWEETSPOT' => 'Pārslēgt Sweet Spot joslu.',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'Slēpt Sweet Spot bar',
+    'LBL_SHORTCUT_SAVE_CONFIG' => 'Saglabāt konfigurāciju',
+    'LBL_SHORTCUT_RESTORE' => 'Atjaunot noklusējuma iestatījumus',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'Pielāgoto taustiņu kombināciju saglabāšanas laikā radās kļūda. Mēģiniet vēlreiz.',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}} iestatījumi',
@@ -11260,13 +11430,20 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
     'LBL_CALENDAR_RECURRENCE' => "Atkārtošanās",
     'LBL_CALENDAR_REMINDERS' => "Atgādinājumi",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "Pielāgot datumu",
     'LBL_CALENDAR_REPEAT_TYPE' => "Atkārtošanās veids",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "Atkārtošanās intervāls",
     'LBL_CALENDAR_REPEAT_DOW' => "Atkārtot noteiktās nedēļas dienās",
+    'LBL_CALENDAR_REPEAT' => "Atkārtot",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "Atkārtot kamēr",
     'LBL_CALENDAR_REPEAT_COUNT' => "Atkārtojumu skaits",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "Atkārtot selektoru",
+    'LBL_CALENDAR_REPEAT_DAYS' => "Mēneša diena(s)",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "Atkārtot pēc kārtas",
+    'LBL_CALENDAR_REPEAT_UNIT' => "Atkārtot elementu",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => 'Atkārtotu notikumu izmaiņas jāveic pirmajā atkārtojumu notikumā.',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => 'Atkārtošanās noteikumu ievērošana nenozīmē, ka tiek izveidots notikums.',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Piedalīšos',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Noraidīts',
@@ -11286,17 +11463,23 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRM nepieciešams javascript. Lūdzu iespējojiet javascript lai turpinātu lietot SugarCRM.',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'Sērializētos datus nevarēja atserializēt',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'Sērializētos datus nevarēja atserializēt, jo tajos ir atsauces uz objektiem vai klasēm',
 
     'LBL_FIELD_TRIMMED' => 'Lauks tika apgriezts, jo tika pārsniegts maksimālais simbolu limits.',
+    'LBL_FIELDSIZE_OVERFLOW' => 'Lauks pārsniedz maksimāli pieļaujamo simbolu skaitu.',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => 'Pēdējās 7 dienās',
     '30' => 'Pēdējās 30 dienās',
     '90' => 'Pēdējā ceturksnī',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11401,13 +11584,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => 'Izbeidzies',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'Uzmetums',
-    'Expired' => 'Izbeidzies',
-    'In Review' => 'Vērtēšanā',
-    'Published' => 'Nopublicēts',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--Administrēšanas darbības--',
@@ -11419,57 +11595,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'Izdzēst atlasītos rakstus',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => 'Satur pielikumus',
-        'none' => 'Nav neviena',
-        'mime' => 'Atzīmēt Mime tipu',
-        'name' => 'Norādīt nosaukumu',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'Vārdi';
   $app_list_strings['moduleListSingular']['Words'] = 'Vārds';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = 'Izveidot rakstu';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'Top 5',
-    'Top_10' => 'Top 10',
-    'Top_20' => 'Top 20',
-    'Bot_5'  => 'Bottom 5',
-    'Bot_10' => 'Bottom 10',
-    'Bot_20' => 'Bottom 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'Viss',
-        'added' => 'Pievienots pēdējās 30 dienās',
-        'pending' => 'Gaida manu apstiprinājumu',
-        'updated' =>'Atjaunināts pēdējās 30 dienās',
-        'faqs' => 'BUJ',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => 'Uz',
-    'before' => 'Pirms',
-    'after' => 'Pēc',
-    'between_dates' => 'Ir starp',
-    'last_7_days' => 'Pēdējās 7 dienās',
-    'next_7_days' => 'Nākošās 7 dienās',
-    'last_month' => 'Pēdējā mēnesī',
-    'this_month' => 'Šajā mēnesī',
-    'next_month' => 'Nākošā mēnesī',
-    'last_30_days' => 'Pēdējās 30 dienās',
-    'next_30_days' => 'Nākošās 30 dienās',
-    'last_year' => 'Pēdējā gadā',
-    'this_year' => 'Šajā gadā',
-    'next_year' => 'Nākošā gadā',
-    'isnull' => 'Ir tukšs',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12331,6 +12459,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "Visi kontakti",
+    "email" => "Tikai e-pasts",
+    "phone" => "Tikai tālrunis",
     "prem" => "Tikai Premium"
 );
 
@@ -12356,4 +12486,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => 'Bio',
     'Both' => 'Abi'
 );
-

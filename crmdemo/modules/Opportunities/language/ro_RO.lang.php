@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -153,6 +153,10 @@ $mod_strings = array(
 
     // Help Text
     'LBL_OPPS_CONFIG_ALERT' => 'Făcând clic pe Confirmare, veţi şterge TOATE datele cu previzionări şi veţi modifica Fereastra Oportunităţi. Dacă nu asta aţi dorit, faceţi clic pe Anulare pentru a reveni la setările anterioare.',
+    'LBL_OPPS_CONFIG_ALERT_TO_OPPS' =>
+        'Făcând clic pe Confirmare, veţi şterge TOATE datele Previziunilor şi veţi modifica Vizualizarea de oportunităţi. '
+        .'De asemenea, se vor dezactiva TOATE definiţiile procesului cu un modul ţintă de Elemente pe linia de venituri. '
+        .'Dacă nu aţi intenţionat acest lucru, faceţi clic pe revocare pentru a reveni la setările anterioare.',
     'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'Dacă toate elementele de venit sunt încheiate şi cel puţin unul a fost câştigat,',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => 'Stadiul de vânzări din Oportunităţi este setat la „Încheiat cu succes”.',
     'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'Dacă toate elementele de venit sunt în stadiul de vânzări „Încheiat în pierdere”,',
@@ -162,26 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulul {{plural_module_name}} vă permite să urmăriţi vânzările individuale şi elementele de linie aferente vânzărilor respective de la început până la sfârşit. Fiecare înregistrare {{module_name}} reprezintă un titlu pentru un grup de {{revenuelineitems_module}} şi se referă, de asemenea, la alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc. Fiecare {{revenuelineitems_singular_module}} este vânzarea potenţială a unui anumit produs şi include date de vânzări relevante. Fiecare {{revenuelineitems_singular_module}} va progresa în mod tipic prin mai multe Stadii de vânzări până când este marcat fie cu „Câştigat închis”, fie cu „Pierdut închis”. Înregistrarea {{module_name}} reflectă suma şi data de închidere aşteptată pentru {{revenuelineitems_module}}. {{plural_module_name}} şi {{revenuelineitems_module}} pot fi valorificate şi mai mult folosind modulul {{forecasts_singular_module}} de la Sugar pentru a înţelege şi a previziona tendinţele vânzărilor, precum şi pentru a concentra munca în vederea realizării cotelor de vânzări.',
+    'LBL_HELP_RECORDS' => 'Modulul {{plural_module_name}} vă permite să urmăriţi vânzările individuale de la început până la sfârşit. Fiecare înregistrare {{module_name}} reprezintă o vânzare potenţială şi include date de vânzare relevante, precum şi date referitoare la alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} va progresa în mod tipic prin mai multe Faze de vânzări până când este marcat cu "Câştig închis" sau "Pierdere închisă". {{plural_module_name}} poate fi valorificat şi mai mult folosind modulul {{forecasts_singular_module}} Sugar pentru a înţelege şi a previziona tendinţele de vânzări, preucm şi pentru a concentra munca în vederea realizării cotelor de vânzări.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulul {{plural_module_name}} vă permite să urmăriţi vânzările individuale şi elementele de linie aferente vânzărilor respective de la început până la sfârşit. Fiecare înregistrare {{module_name}} reprezintă un titlu pentru un grup de {{revenuelineitems_module}} şi se referă, de asemenea, la alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc.
+    'LBL_HELP_RECORD' => 'Modulul {{plural_module_name}} vă permite să urmăriţi vânzările individuale şi elementele de linie aferente vânzărilor respective de la început până la sfârşit. Fiecare înregistrare {{module_name}} reprezintă o vânzare potenţială şi include date de vânzare relevante, precum şi date referitoare la alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc.
 
 - Editaţi câmpurile acestei înregistrări făcând clic pe un câmp individual sau pe butonul Editare.
-- Vizualizaţi sau modificaţi linkurile pentru alte înregistrări din subpanouri, inclusiv {{revenuelineitems_module}}, comutând panoul din stânga jos la „Vizualizare date”.
+- Vizualizaţi sau modificaţi linkurile pentru alte înregistrări din subpanouri, comutând panoul din stânga jos la „Vizualizare date”.
 - Creaţi şi vizualizaţi comentarii de utilizator şi istoricul de modificări ale înregistrărilor în {{activitystream_singular_module}} comutând panoul din stânga jos la „Flux de activităţi”.
 - Urmăriţi sau setaţi ca preferată această înregistrare folosind pictogramele din dreapta numelui înregistrării.
 - Sunt disponibile acţiuni suplimentare în meniul vertical Acţiuni din dreapta butonului Editare.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulul {{plural_module_name}} vă permite să urmăriţi vânzările individuale şi elementele de linie aferente vânzărilor respective de la început până la sfârşit. Fiecare înregistrare {{module_name}} reprezintă un titlu pentru un grup de {{revenuelineitems_module}} şi se referă, de asemenea, la alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc.
+    'LBL_HELP_CREATE' => 'Modulul {{plural_module_name}} vă permite să urmăriţi vânzările individuale şi elementele de linie aferente vânzărilor respective de la început până la sfârşit. Fiecare înregistrare {{module_name}} reprezintă o vânzare potenţială şi include date de vânzare relevante, precum şi date referitoare la alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}}, etc.
 
-Pentru a crea {{module_name}}:
-1. Introduceţi valori pentru câmpuri după cum doriţi.
-- Câmpurile marcate cu "Obligatoriu" trebuie să fie completate înainte de a salva.
-- Faceţi clic pe "Afişare mai multe" pentru a afişa câmpuri suplimentare, dacă este necesar.
-2. Faceţi clic pe "Salvare" pentru a finaliza noua înregistrare şi pentru a reveni la pagina anterioară.
-3. După salvare, utilizaţi subpanoul {{revenuelineitems_module}} pentru a adăuga elemente de linie la {{module_name}}.',
+Pentru a crea un {{module_name}}:
+1. Furnizaţi valorile pentru câmpuri, după cum doriţi.
+ - Câmpurile marcate "Obligatoriu" trebuie completate înainte de a salva.
+ - Faceţi clic pe "Afişare mai multe" pentru a expune câmpurile suplimentare, dacă este necesar.
+2. Faceţi clic pe "Salvare" pentru a finaliza înregistrarea nouă şi pentru a reveni la pagina anterioară.',
 
 // END PRO/CORP
 

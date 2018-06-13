@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -41,7 +41,6 @@
         /**
          * Initializes this controller.
          * @private
-         * @constructor
          * @ignore
          */
         initialize: function() {
@@ -60,7 +59,7 @@
                     }
                     component.render();
                 });
-                app.router.start();
+                app.router.reset();
                 app.api.clearStateProperty("loadingAfterSync");
             });
 
@@ -154,15 +153,14 @@
                     if(component.layout) {
                         app.additionalComponents[name] = app.view.createLayout({
                             context: this.context,
-                            name: component.layout,
+                            type: component.layout,
                             el: $el
                         });
                         app.additionalComponents[name].initComponents();
                     } else {
                         app.additionalComponents[name] = app.view.createView({
-                            name: component.view || name,
-                            context: this.context,
-                            el: $el
+                            type: component.view || name,
+                            context: this.context
                         });
                     }
                     app.additionalComponents[name].render();

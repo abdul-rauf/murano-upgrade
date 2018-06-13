@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -136,6 +136,7 @@ class OpportunitiesSeedData {
             $opp->opportunity_type = array_rand($app_list_strings['opportunity_type_dom']);
             $amount = rand(1000, 7500);
             $opp->amount = $amount;
+            $opp->amount_usdollar = SugarMath::init($amount)->div($base_rate)->result();
             $opp->probability = $app_list_strings['sales_probability_dom'][$opp->sales_stage];
 
             //Setup forecast seed data
@@ -249,6 +250,7 @@ class OpportunitiesSeedData {
         $opp_date_closed = '';
         $opp_date_closed_timestamp = 0;
 
+
         //SugarBean::enterOperation('saving_related');
         while($rlis_created < $rlis_to_create) {
             $amount = rand(1000, 7500);
@@ -287,6 +289,7 @@ class OpportunitiesSeedData {
             $rli->sales_stage = array_rand($app_list_strings['sales_stage_dom']);
             $rli->probability = $app_list_strings['sales_probability_dom'][$rli->sales_stage];
             $isClosed = false;
+            $isClosedLost = false;
             if ($rli->sales_stage == Opportunity::STAGE_CLOSED_WON || $rli->sales_stage == Opportunity::STAGE_CLOSED_LOST) {
                 $isClosed = true;
                 $rli->best_case = $rli->likely_case;
@@ -294,6 +297,8 @@ class OpportunitiesSeedData {
                 if ($rli->sales_stage == Opportunity::STAGE_CLOSED_WON) {
                     $closedWon++;
                 } else {
+                    // closedLost shouldn't be added to the opp totals
+                    $isClosedLost = true;
                     $closedLost++;
                 }
                 $opp->closed_revenue_line_items++;
@@ -356,15 +361,24 @@ class OpportunitiesSeedData {
             $fwRows[] = $sqlValues;
 
             $opp_units += $rli->quantity;
-            $opp_amount += $amount;
-            $opp_best_case += $rli->best_case;
-            $opp_worst_case += $rli->worst_case;
-            $rlis_created++;
 
             if ($opp_date_closed_timestamp < $rli->date_closed_timestamp) {
                 $opp_date_closed_timestamp = $rli->date_closed_timestamp;
                 $opp_date_closed = $rli->date_closed;
             }
+
+            if (!$isClosedLost) {
+                $opp_amount = SugarMath::init($opp_amount)
+                                ->add(SugarCurrency::convertWithRate($rli->likely_case, $base_rate, $opp->base_rate))
+                                ->result();
+                $opp_best_case = SugarMath::init($opp_best_case)
+                                ->add(SugarCurrency::convertWithRate($rli->best_case, $base_rate, $opp->base_rate))
+                                ->result();
+                $opp_worst_case = SugarMath::init($opp_worst_case)
+                                ->add(SugarCurrency::convertWithRate($rli->worst_case, $base_rate, $opp->base_rate))
+                                ->result();
+            }
+            $rlis_created++;
         }
 
         if ($rlis_to_create > ($closedWon + $closedLost) || $rlis_to_create === 0) {

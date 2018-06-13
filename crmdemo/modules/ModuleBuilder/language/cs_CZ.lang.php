@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -307,7 +307,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Vyberte <b>Rozvržení k úpravě</b>.<br/<br/>Chcete-li změnit rozvržení, které obsahuje datová pole pro zadávání dat, klepněte na položku <b>Zobrazení úprav</b>.<br/><br/>Chcete-li změnit rozvržení, které zobrazuje data zadaná do polí v Zobrazení úprav, klepněte na položku <b>Zobrazení podrobností</b>.<br/><br/>Chcete-li změnit sloupce, které se zobrazují ve výchozím seznamu, klepněte na položku <b>Zobrazení seznamu</b>.<br/><br/>Chcete-li změnit rozvržení formulářů pro Základní a Rozšíření hledání, klepněte na volbu <b>Hledání</b>.',
         'subpanelHelp'=> 'Vyberte <b>Podpanel</b> k úpravě.',
         'searchHelp' => 'Vyberte rozvržení <b>Hledání</b> k úpravě.',
-        'labelsBtn'	=> 'Kliknutím na tlačítko <b>Uložit</b> uložte vlastní popisky.',
+        'labelsBtn'	=> 'Chcete-li zobrazit hodnoty v tomto modulu, upravte <b>popisky</b>.',
         'newPackage'=>'Klepněte na tlačítko Nový balíček pro vytvoření nového balíčku.',
         'mbHelp'    => '<b>Vítejte v nástroji Module Builder.</b><br/><br/>Pomocí nástroje <b>Module Builder</b> lze vytvářet balíčky obsahující vlastní moduly založené na standardních nebo vlastních objektech. <br/><br/>Chcete-li začít, klepnutím na položku <b>Nový balíček</b> vytvořte nový balíček, nebo vyberte balíček, který chcete upravit.<br/><br/> <b>Balíček</b> se chová jako nádoba na vlastní moduly, které jsou všechny součástí jednoho projektu. Balíček může obsahovat jeden nebo více vlastních modulů, jež mohou souviset mezi sebou navzájem nebo s jinými moduly v aplikaci. <br/><br/>Příklady: Můžete chtít vytvořit balíček obsahující jeden vlastní modul, který souvisí se standardním modulem Účty. Nebo můžete chtít vytvořit balíček obsahující několik nových modulů, které spolupracují jako projekt a které souvisí mezi sebou navzájem i s moduly v aplikaci.',
         'exportBtn' => 'Klepnutím na volbu <b>Exportovat vlastní úpravy</b> vytvoříte balíček obsahující vlastní úpravy provedené v nástroji Studio pro specifické moduly.',
@@ -454,7 +454,7 @@ $mod_strings = array(
 'LBL_ROLLUP' => 'Kumulativní',
 'LBL_RELATED_FIELD' => 'Související pole',
 'LBL_CONFIG_PORTAL_URL'=>'URL pro vlastní obrázek loga. Doporučené rozměry jsou 163 × 18 pixelů.',
-'LBL_PORTAL_ROLE_DESC' => 'Neodstraňujte tuto roli. Customer Self-Service Portálu Role je generovaná systémem v průběhu aktivace Sugar Portálu . Neupravujte žádné jiné řízení přístupy pro tuto roli, aby se zabránilo neznámému a nepředvídatelnému chování systému. V případě náhodného vymazání této role, ji znovuvytvořte vypnutím a zapnutím Sugar Portálu.',
+'LBL_PORTAL_ROLE_DESC' => 'Tuto roli neodstraňujte. Role samoobslužného portálu zákazníka je role vygenerovaná systémem v průběhu aktivace portálu Sugar. Pomocí ovládacích prvků přístupu v rámci této role můžete v portálu Sugar povolit nebo zakázat moduly Chyby, Případy nebo Znalostní báze. Neupravujte žádné jiné ovládací prvky přístupu pro tuto roli, aby se zabránilo neznámému a nepředvídatelnému chování systému. V případě náhodného vymazání této role ji znovuvytvořte vypnutím a zapnutím portálu Sugar.',
 
 //RELATIONSHIPS
 'LBL_MODULE' => 'Modul',
@@ -713,6 +713,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Název - Musí být alfanumerické bez mezer a začínající písmenem',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Klíč balíčku již existuje',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Jméno balíčku již existuje',
+'LBL_JS_PACKAGE_NAME'=>'Název balíčku – musí začínat písmenem a může obsahovat pouze písmena, číslice a podtržítka. Nesmí být použity mezery nebo jiné speciální znaky.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Klíč - Musí být alfanumerický a začínat písmenem',
 'LBL_JS_VALIDATE_KEY'=>'Klíč - musí být alfanumerické',
 'LBL_JS_VALIDATE_LABEL'=>'Prosím, zadejte popisek, který bude použit jako zobrazovaný název pro tento modul',
@@ -737,8 +738,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Jste si jisti, že chcete smazat tento vztah?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Toto vytvoří tento vztah trvalím. Jste si jisti, že chcete nasadit tento vztah?',
 'LBL_CONFIRM_DONT_SAVE' => 'Byly provedeny změny od posledního uložení, chcete je uložit?',

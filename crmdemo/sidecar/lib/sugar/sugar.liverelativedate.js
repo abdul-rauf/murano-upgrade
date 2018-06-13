@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -139,10 +139,10 @@
          * Sets the interval if the param is provided, returns the current
          * configured interval if no param is given.
          *
-         * @param {Number} [interval] The interval to set. Pass `undefined` to
+         * @param {number} [interval] The interval to set. Pass `undefined` to
          *   get the current value.
          *
-         * @return {Number/Undefined} The current interval or `undefined` if
+         * @return {number|undefined} The current interval or `undefined` if
          *   setting the value.
          */
         interval: function(interval) {

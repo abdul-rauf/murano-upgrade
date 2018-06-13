@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'エラー: 資格情報が不足しています',
     'ERR_NO_UID' => 'エラー: UIDがありません',
     'ERR_NO_IEID' => 'エラー: ieIDがありません',
+    'ERR_INVALID_RECIPIENTS' => '無効なEメールアドレスの受信者が一人以上います。 ' .
+        'この問題を解決して、もう一度やり直してください。',
+    'ERR_INVALID_EMAIL_ADDRESS' => '無効なEメールアドレス',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => '受信者が指定されていません',

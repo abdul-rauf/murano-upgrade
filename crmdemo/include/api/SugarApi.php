@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -54,6 +54,7 @@ abstract class SugarApi {
             if ( ! in_array('id',$fieldList ) ) {
                 $fieldList[] = 'id';
             }
+
         } else {
             $fieldList = array();
         }
@@ -656,14 +657,14 @@ abstract class SugarApi {
      * @param int $limit List limit passed to API
      * @return int
      */
-    public function checkMaxListLimit($limit) 
+    public function checkMaxListLimit($limit)
     {
         $maxListLimit = SugarConfig::getInstance()->get('max_list_limit');
-                
+
         if ($maxListLimit && ($limit < 1 || $limit > $maxListLimit)) {
             return $maxListLimit;
         }
-        
+
         return $limit;
     }
 }

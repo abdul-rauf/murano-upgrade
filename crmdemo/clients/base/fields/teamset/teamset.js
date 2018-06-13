@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -22,7 +22,7 @@
         'click .btn[name=primary]': 'setPrimaryItem',
         'change input.select2': 'inputChanged'
     },
-    plugins: ['QuickSearchFilter', 'EllipsisInline', 'Tooltip', 'FieldDuplicate'],
+    plugins: ['FieldDuplicate', 'TbACLs'],
 
     /**
      * HTML tag of the append team checkbox.
@@ -30,6 +30,20 @@
      * @property {String}
      */
     appendTeamTag: 'input[name=append_team]',
+
+    /**
+     * Group fit class.
+     *
+     * @property {String}
+     */
+    fitGroupClass: 'three',
+
+    /**
+     * Button fit class.
+     *
+     * @property {String}
+     */
+    fitButtonClass: 'third',
 
     initialize: function (options) {
         this._super('initialize', [options]);
@@ -157,10 +171,20 @@
 
             _.each(allTeams, function(team) {
                 if (model === this.view.primaryRecord || _.contains(teamIds, team.id)) {
-                    teams.push(_.extend(app.utils.deepCopy(team), {
-                        checked: (model === this.view.primaryRecord && _.contains(teamIds, team.id) === true),
-                        primary: (primaryTeam && primaryTeam.id === team.id)
-                    }));
+                    var extendedTeam = _.extend(
+                        app.utils.deepCopy(team),
+                        {
+                            checked: (model === this.view.primaryRecord && _.contains(teamIds, team.id) === true),
+                            primary: (primaryTeam && primaryTeam.id === team.id)
+                        }
+                    );
+                    if (this.isTBAEnabled) {
+                        extendedTeam.selected = (
+                            _.contains(teamIds, team.id) === true &&
+                            _.where(model.get(this.name), {id: team.id})[0].selected
+                        );
+                    }
+                    teams.push(extendedTeam);
                 } else {
                     teams.push({
                         checked: false,
@@ -203,6 +227,11 @@
     _loadTemplate: function() {
         this._super("_loadTemplate");
 
+        if (!_.isUndefined(this.isTBAEnabled) && this.isTBAEnabled) {
+            this.fitGroupClass = 'four';
+            this.fitButtonClass = 'fourth';
+        }
+
         var template = app.template.getField(
             this.type,
             this.view.name + '-' + this.tplName,
@@ -235,7 +264,7 @@
     _render: function () {
         var self = this;
 
-        if (_.isEmpty(this.value) && this.action == 'edit') {
+        if (_.isEmpty(this.value) && this.action == 'edit' && this._checkAccessToAction(this.action)) {
             // Leave an empty team set on list view in case of cancel.
             this.value = app.utils.deepCopy(app.user.getPreference('default_teams'));
             this._updateAndTriggerChange(this.value);
@@ -297,15 +326,16 @@
             return !_.isUndefined(primaryTeam) && !_.isUndefined(primaryTeam.name) ? primaryTeam.name : "";
         }
         // Place the add button as needed
-        if (_.isArray(value) && value.length > 0) {
-            _.each(value, function (team) {
+        if (_.isArray(value) && !_.isEmpty(value)) {
+            _.each(value, function(team, index, list) {
                 delete team.remove_button;
-                delete team.add_button;
+                if (!team.add_button && index === list.length - 1) {
+                    team.add_button = true;
+                } else {
+                    delete team.add_button;
+                }
             });
-            if (!value[this._currentIndex]) {
-                value[this._currentIndex] = {};
-            }
-            value[value.length - 1].add_button = true;
+
             // number of valid teams
             var numTeams = _.filter(value, function (team) {
                 return !_.isUndefined(team.id);
@@ -397,9 +427,17 @@
     bindDataChange: function() {
         if (this.model) {
             this.model.on('change:' + this.name, function() {
+                var teamList = this.model.get(this.name);
+
+                if (!_.isUndefined(teamList) && (this._currentIndex !== teamList.length - 1)) {
+                    this._currentIndex = teamList.length - 1;
+                }
+
                 this.render();
-                if (!_.isEmpty(this.$(this.fieldTag).data('select2'))) {
-                    this.$(this.$(this.fieldTag).get(this._currentIndex)).focus();
+
+                var $fieldTag = this.$(this.fieldTag);
+                if (!_.isEmpty($fieldTag.data('select2'))) {
+                    this.$($fieldTag.get(this._currentIndex)).focus();
                 }
             }, this);
         }
@@ -424,7 +462,7 @@
             delete team.remove_button;
         });
         this.model.unset(this.name, {silent: true}).set(this.name, value);//force changedAttributes
-        this.model.trigger("change");
+        this.model.trigger('change');
     },
     addItem: _.debounce(function (evt) {
         var index = $(evt.currentTarget).data('index');

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -53,6 +53,7 @@ $mod_strings = array (
   'LBL_API_OAUTHTOKEN' => '권한 표시',
   'LBL_AUTH_UNSUPPORTED' => "이 권한 방식은 어플리케이션에 의해 지원되지 않습니다.",
   'LBL_AUTH_ERROR' => '이 계정에 연결 시도가 실패했습니다.',
+  'LBL_CHANGE_APPLICATION_ERROR' => '사용자는 어플리케이션 이름을 변경할 수 없습니다.',
   'LBL_VALIDATED' => '연결되었습니다.',
   'LBL_ACTIVE' => '작동중',
   'LBL_OAUTH_NAME' => '%s',

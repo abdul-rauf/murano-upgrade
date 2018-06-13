@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -84,29 +84,61 @@
         },
 
         /**
-         * Extends a Class
+         * Extends a Class based on the given controller.
          *
-         * @param {Object} cache object cache to add controller to
-         * @param {Object} base class to be extended from
-         * @param {String} className class name to be used for new class
-         * @param {Object} controller properties for new class
-         * @param {String} platformNamespace platform name
-         * @return {Object} extended class
+         * If the controller has an `extendsFrom` property, it will be used to
+         * define its parent class. It should be defined as a string in order
+         * for the system to detect if there is any customization on that
+         * parent (normally prefixed with `Custom` like `Custom<ClassName>`).
+         *
+         * If the parent class defined in the `extendsFrom` property doesn't
+         * exist or the controller isn't specifying one, it will fallback to
+         * the supplied `defaultBase` param which has it's own set of fallback
+         * strategy defined by the components that call this method. See
+         * {@link View.ViewManager} and {@link Data.DataManager}.
+         *
+         * @param {Object} cache Object cache to add controller to.
+         * @param {Object} defaultBase Class to be extended from if no override
+         *   (`extendsFrom`) is defined in the controller.
+         * @param {string} className Class name to be used for new Class.
+         * @param {Object|undefined} controller Properties for new Class.
+         * @param {string} platformNamespace Platform name.
+         * @return {Object} the new extended class.
          */
-        extendClass: function(cache, base, className, controller, platformNamespace) {
-            var klass = null, evaledController = null;
-            if (_.isObject(controller)) {
-                base = _.isObject(controller.extendsFrom) ?
-                    controller.extendsFrom :
-                    cache[platformNamespace + "Custom" + controller.extendsFrom] ||
-                    cache[platformNamespace + controller.extendsFrom] ||
-                        cache["Custom" + controller.extendsFrom] ||
-                        cache[controller.extendsFrom] ||
-                        base;
-                klass = cache[className] = base.extend(controller);
-            } else{
-                klass = cache[className] = base;
+        extendClass: function(cache, defaultBase, className, controller, platformNamespace) {
+            var klass;
+
+            if (!_.isObject(controller)) {
+                // nothing to extend from, use default
+                klass = cache[className] = defaultBase;
+                return klass;
             }
+
+            if (_.isObject(controller.extendsFrom)) {
+                //should be avoided due to chain breakage - aka custom fallback
+                klass = cache[className] = controller.extendsFrom.extend(controller);
+                return klass;
+            }
+
+            if (!controller.extendsFrom) {
+                // follow the default fallback flow
+                klass = cache[className] = defaultBase.extend(controller);
+                return klass;
+            }
+
+            // try to find the base using the name and following the fallback flow
+            var base = cache[platformNamespace + 'Custom' + controller.extendsFrom] ||
+                cache[platformNamespace + controller.extendsFrom] ||
+                cache['Custom' + controller.extendsFrom] ||
+                cache[controller.extendsFrom];
+
+            if (!base) {
+                app.logger.warn('The "' + controller.extendsFrom + '" component was not found to be used as ' +
+                    'the "' + className + '"\'s parent. Please update your code to point to an existing class.');
+                base = defaultBase;
+            }
+
+            klass = cache[className] = base.extend(controller);
             return klass;
         },
 
@@ -497,7 +529,7 @@
          * </code></pre>
 
 
-         * @param {Function/String} condition function/evaluatable string which must return a boolean value.
+         * @param {Function|string} condition function/evaluatable string which must return a boolean value.
          * @param {Function} callback function to execute when condition is met
          * @param {Object} [params] object to pass to the callback function
          * @param {Object} [scope] object to use as this when executing the callback
@@ -565,7 +597,10 @@
                 item = _doWhenStack[i];
                 if (item) {
                     test = item.check;
-                    if ((typeof(test) == "string" && eval(test)) || (typeof(test) == "function" && test())) {
+                    if ((typeof(test) == 'string' &&
+                         eval(test)) || // jshint ignore:line
+                        (typeof(test) == 'function' && test())
+                    ) {
                         executeItem(this, item);
                         _doWhenStack[i] = null;
                     }
@@ -597,17 +632,24 @@
         /**
          * Compares two version strings.
          *
-         * <pre><code>
-         * app.utils.versionCompare('8.2.5rc', '8.2.5a') === 1
-         * app.utils.versionCompare('8.2.50', '8.2.52', '<') === true
-         * app.utils.versionCompare('5.3.0-dev', '5.3.0') === -1
-         * app.utils.versionCompare('4.1.0.52','4.01.0.51') === 1
-         * </code></pre>
+         *     app.utils.versionCompare('8.2.5rc', '8.2.5a') === 1
+         *     app.utils.versionCompare('8.2.50', '8.2.52', '<') === true
+         *     app.utils.versionCompare('5.3.0-dev', '5.3.0') === -1
+         *     app.utils.versionCompare('4.1.0.52','4.01.0.51') === 1
          *
-         * @param {String} v1 First version string.
-         * @param {String} v2 Second version string.
-         * @param {String} operator(optional) Comparison operator.
-         * @return {Number/Boolean} Result of comparison. See examples for details.
+         * @param {string} v1 First version.
+         * @param {string} v2 Second version.
+         * @param {string} [operator] Operator argument, if specified, test for
+         *   a particular relationship. The possible operators are:
+         *   `<`, `lt`, `<=`, `le`, `>`, `gt`, `>=`, `ge`, `==`, `=`, `eq`,
+         *   `!=`, `<>`, and `ne`.
+         *   This parameter is case-sensitive, values should be lowercase.
+         *
+         * @return {number|boolean} By default, returns -1 if the first version
+         *   is lower than the second, 0 if they are equal, and 1 if the second
+         *   is lower. When using the optional operator argument, the function
+         *   will return `true` if the relationship is the one specified by the
+         *   operator, `false` otherwise.
          */
         versionCompare: function(v1, v2, operator) {
             // Use php.js implementation
@@ -616,7 +658,7 @@
         },
 
         extendFrom : function(subc, superc, overrides) {
-            subc.prototype = new superc;	// set the superclass
+            subc.prototype = new superc(); // set the superclass
             // overrides
             _.extend(subc.prototype, overrides);
         },
@@ -648,8 +690,8 @@
                 // skip id field and all fields that start with an underscore
                 if ((attribute !== 'id') && (attribute.indexOf('_') !== 0)) {
                     if (
-                        !this.areBeanValuesEqual(value, beanB.get(attribute))
-                            && this.hasDefaultValueChanged(attribute, beanA)
+                        !this.areBeanValuesEqual(value, beanB.get(attribute)) &&
+                            this.hasDefaultValueChanged(attribute, beanA)
                         ) {
                         memo.push(attribute);
                     }

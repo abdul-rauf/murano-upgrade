@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -44,7 +44,7 @@ $mod_strings = array (
     'LBL_DATE_ENTERED' => 'Data Inserimento',
     'LBL_DATE_MODIFIED' => 'Data Modifica',
     'LBL_CREATED_BY' => 'Creato da',
-    'LBL_DELETED' => 'Cancellato',
+    'LBL_DELETED' => 'Eliminato',
     'LBL_MODIFIED_USER_ID'=>'Modificato da',
     'LBL_WK_VERSION' => 'Versione',
     'LBL_WK_REVISION' => 'Revisione',
@@ -182,7 +182,7 @@ $mod_strings = array (
     'LBL_SALES_STAGE' => 'Fase',
     'LBL_AMOUNT' => 'Importo',
     'LBL_PERCENT' => 'Percentuale',
-    'LBL_DATE_CLOSED' => 'Data Chiusura Prevista',
+    'LBL_DATE_CLOSED' => 'Chiusura prevista',
     'LBL_PRODUCT_ID' => 'ID Prodotto',
     'LBL_QUOTA_ID' => 'ID Budget',
     'LBL_VERSION' => 'Versione',

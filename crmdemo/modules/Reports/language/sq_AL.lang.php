@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -34,7 +34,7 @@ $mod_strings = array (
   'LNK_NEW_OPPORTUNITY' => 'Krijo mundësi',
   'LNK_NEW_CASE' => 'Krijo rast',
   'LNK_NEW_NOTE' => 'Krijo shënim ose bashkëngjitje',
-  'LNK_NEW_CALL' => 'Thirje identifikuese',
+  'LNK_NEW_CALL' => 'Thirrje identifikuese',
   'LNK_NEW_EMAIL' => 'Emaili i arkivuar',
   'LNK_NEW_MEETING' => 'Cakto mbledhje',
   'LNK_NEW_TASK' => 'Krijo detyrë',
@@ -52,14 +52,14 @@ $mod_strings = array (
   'LBL_CONTACT' => 'Kontakt:',
   'LBL_LEAD' => 'udhëheqje',
   'LBL_DELETE_ERROR'=>'Vetëm pronarët e raporteve apo administratorët mund të fshinë raportet',
-  'LBL_ROWS_AND_COLUMNS_REPORT' => 'Raporti i reshtave dhe kolonave',
-  'LBL_ROWS_AND_COLUMNS_REPORT_DESC' => 'Krojo raport tabelor që përmban vlerat e fushave të shfaqura të selektuara për regjistrime në përputhje me kriteriumet e përcaktuara.',
-  'LBL_SUMMATION_REPORT' => 'Raporti i sumuar',
-  'LBL_SUMMATION_REPORT_DESC' => 'Krijo raport tabelor që mundëson të dhënat e llogaritura për regjistrimet e përputhjeve të kriteriumeve të përcaktuara. Të dhënat mund të paraqiten edhe në grafik.',
+  'LBL_ROWS_AND_COLUMNS_REPORT' => 'Raporti i rreshtave dhe kolonave',
+  'LBL_ROWS_AND_COLUMNS_REPORT_DESC' => 'Krijo raport tabelor që përmban vlerat e fushave të shfaqura të selektuara për regjistrime në përputhje me kriteret e përcaktuara.',
+  'LBL_SUMMATION_REPORT' => 'Raporti përmbledhës',
+  'LBL_SUMMATION_REPORT_DESC' => 'Krijo raport tabelor që mundëson të dhënat e llogaritura për regjistrimet e përputhjeve të kritereve të përcaktuara. Të dhënat mund të paraqiten edhe në grafik.',
   'LBL_MATRIX_REPORT'=>'Raport matrice',
   'LBL_MATRIX_REPORT_DESC'=>'Krijo raport përmbledhës që tregon rezultate në formë rrjeti dhe të grupuara nga maksimum tre fusha.',
   'LBL_SUMMATION_REPORT_WITH_DETAILS_DESC'=>'Krijo raport përmbledhës që tregon të dhëna plotësuese në lidhje me regjistrimet në rezultate.',
-  'LBL_SUMMATION_REPORT_WITH_DETAILS'=>'Raport përmledhës me detaje',
+  'LBL_SUMMATION_REPORT_WITH_DETAILS'=>'Raport përmbledhës me detaje',
   'LBL_SHOW_QUERY' => 'Trego pyetje',
   'LBL_DO_ROUND' => 'Numra të plotë mbi 100000',
   'LBL_SAVE_AS' => 'ruaj si',
@@ -91,7 +91,7 @@ $mod_strings = array (
   'LBL_DETAILED_FORECAST' => 'parashikime të detajuara',
   'LBL_PARTNER_ACCOUNT_LIST' => 'Lista e llogarive të partnerëve',
   'LBL_CUSTOMER_ACCOUNT_LIST' => 'Lista e llogarive të konsumatorëve',
-  'LBL_CALL_LIST_BY_LAST_DATE_CONTACTED' => 'Lista e thirjeve sipas datës së fundit të kontaktimit',
+  'LBL_CALL_LIST_BY_LAST_DATE_CONTACTED' => 'Lista e thirrjeve sipas datës së fundit të kontaktimit',
   'LBL_OPPORTUNITIES_BY_LEAD_SOURCE' => 'Mundësitë për nga burimi udhëheqës',
   'LBL_CURRENT_QUARTER_COMMITTED_DEALS' => 'Marrëveshjet e kryera të tremujorit aktual',
   'LBL_VIEW' => 'Pikëpamje',
@@ -121,7 +121,7 @@ $mod_strings = array (
   'LBL_LEAD_REPORTS' => 'raportet e udhëheqjeve',
   'LBL_QUOTE_REPORTS' => 'raportet e pyetjeve',
 
-  'LBL_CALL_REPORTS' => 'raportet e thirjeve',
+  'LBL_CALL_REPORTS' => 'Raportet e thirrjeve',
   'LBL_MEETING_REPORTS' => 'raportet e mbledhjeve',
   'LBL_TASK_REPORTS' => 'raportet e detyrave',
   'LBL_EMAIL_REPORTS' => 'raportet e emaileve',
@@ -140,7 +140,7 @@ $mod_strings = array (
   'LBL_MY_TEAM_LEAD_REPORTS' => 'raportet e udhëheqjeve të grupeve të mia',
   'LBL_MY_TEAM_QUOTE_REPORTS' => 'Raportet e kuotave të grupit tim',
 
-  'LBL_MY_TEAM_CALL_REPORTS' => 'raportet e thirjeve të grupeve të mia',
+  'LBL_MY_TEAM_CALL_REPORTS' => 'Raportet e thirrjeve të grupeve të mia',
   'LBL_MY_TEAM_MEETING_REPORTS' => 'Raportet e mbledhjeve të grupeve të mia',
   'LBL_MY_TEAM_TASK_REPORTS' => 'raportet e detyrave të grupeve të mia',
   'LBL_MY_TEAM_EMAIL_REPORTS' => 'raportet e emaileve të grupeve të mia',
@@ -159,7 +159,7 @@ $mod_strings = array (
   'LBL_MY_LEAD_REPORTS' => 'Raportet e udhëheqjeve të mia',
   'LBL_MY_QUOTE_REPORTS' => 'raportet e kuotave të mia',
 
-  'LBL_MY_CALL_REPORTS' => 'raportete e thirjeve të mia',
+  'LBL_MY_CALL_REPORTS' => 'Raportete e thirrjeve të mia',
   'LBL_MY_MEETING_REPORTS' => 'raportet e mbledhjeve të mia',
   'LBL_MY_TASK_REPORTS' => 'Raportet e detyrave të mia',
   'LBL_MY_EMAIL_REPORTS' => 'Raportet e emaileve të mia',
@@ -208,7 +208,7 @@ $mod_strings = array (
 
   'LBL_PUBLISHED_QUOTA_REPORTS' => 'raportet e publikuara te kuotave',
 
-  'LBL_PUBLISHED_CALL_REPORTS' => 'Raportet e publikuara të thirjeve',
+  'LBL_PUBLISHED_CALL_REPORTS' => 'Raportet e publikuara të thirrjeve',
   'LBL_PUBLISHED_MEETING_REPORTS' => 'Raportet e publikuara të mbledhjeve',
   'LBL_PUBLISHED_TASK_REPORTS' => 'Raportet e publikuara të detyrës',
   'LBL_PUBLISHED_EMAIL_REPORTS' => 'Raportet e publikuara të emaileve',
@@ -372,15 +372,15 @@ $mod_strings = array (
     'LBL_FILTER_AND' => 'dhe',
     'LBL_FILTERS_END' => 'nga filtrat në vijim',
     'LBL_SEARCH_FORM_TITLE' => 'Lista e raporteve',
-    'LBL_FAVORITE_REPORTS' => 'raportet e favoriteve të mia',
-    'LBL_FAVORITE_REPORTS_TITLE' => 'raportet e favoriteve të mia',
+    'LBL_FAVORITE_REPORTS' => 'Raportet e preferencave të mia',
+    'LBL_FAVORITE_REPORTS_TITLE' => 'Raportet e preferencave të mia',
     'LBL_ADDED_FAVORITES' => 'raporti(et) i shtuar në Raportet e mia favorite',
     'LBL_REMOVED_FAVORITES' => 'raporti(et) i larguar nga Raportet e mia favorite',
     'LBL_MODULE_TITLE' => 'Raportet: Ballina',
     'LBL_MODULE_VIEWER_TITLE' => 'Shikuesi i Raporteve: Ballina',
     'LBL_REPORT_MODULE_VIEWER_TITLE' => 'Shikuesi i Raporteve',
     'LBL_REPORT_SCHEDULE_TITLE' => 'Planifiko',
-    'LBL_FAVORITES_TITLE' => 'raportet e mia të favorizuara',
+    'LBL_FAVORITES_TITLE' => 'Raportet e preferencave të mia',
     'LBL_TABLE_CHANGED' => 'Lista e modulit është modifikuar, ju lutemi kontrolloni dyfishtë kriteret e futura në skedën e Grupit.',
     'LBL_OPTIONAL_HELP' => 'Selekto kutitë për të shfaqur regjistrimet primare të modulit edhe në qoftë se regjistrimet e lidhjes së modulit nuk ekzistojnë. Kur kutia nuk është selektuar, regjistrimet primare të modulit do të shfaqen vetëm nëse ata kanë një ose më shumë regjistrime të lidhura në module.',
     'LBL_RUNTIME_HELP' => 'Selekto këtë kuti për të lejuar përdoruesit të ndryshojnë vlerën e filterit para drejtimit të raportit.',
@@ -391,7 +391,7 @@ $mod_strings = array (
     'DEFAULT_REPORT_TITLE_2' => 'parashikime të detajuara',
     'DEFAULT_REPORT_TITLE_3' => 'Lista e llogarive të partnerëve',
     'DEFAULT_REPORT_TITLE_4' => 'Lista e llogarive të konsumatorëve',
-    'DEFAULT_REPORT_TITLE_5' => 'Lista e thirjeve sipas datës së fundit të konektimit',
+    'DEFAULT_REPORT_TITLE_5' => 'Lista e thirrjeve sipas datës së fundit të konektimit',
     'DEFAULT_REPORT_TITLE_6' => 'Mundësitë nga burimet udhëheqëse',
 
     // Cases
@@ -407,7 +407,7 @@ $mod_strings = array (
 
     // Activity
     'DEFAULT_REPORT_TITLE_13' => 'Detyrat sipas grupit të përdoruesve',
-    'DEFAULT_REPORT_TITLE_14' => 'Thirjet nga grupi për nga përdoruesi',
+    'DEFAULT_REPORT_TITLE_14' => 'Thirrjet nga grupi për nga përdoruesi',
     'DEFAULT_REPORT_TITLE_15' => 'Mbledhjet për nga grupi për nga përdoruesi',
 
     // Accounts
@@ -437,7 +437,7 @@ $mod_strings = array (
   	'DEFAULT_REPORT_TITLE_44' => 'Llogaritë e konsumatorëve të mi të ri',
   	'DEFAULT_REPORT_TITLE_45' => 'Mundësitë për nga faza e shitjes',
   	'DEFAULT_REPORT_TITLE_46' => 'Mundësitë për nga lloji',
-  	'DEFAULT_REPORT_TITLE_47' => 'Thirjet e hapura',
+  	'DEFAULT_REPORT_TITLE_47' => 'Thirrjet e hapura',
   	'DEFAULT_REPORT_TITLE_48' => 'Hap mbledhjet',
   	'DEFAULT_REPORT_TITLE_49' => 'Detyrat e hapura',
   	'DEFAULT_REPORT_TITLE_50' => 'mundësitë e fituara për nga llogaria',

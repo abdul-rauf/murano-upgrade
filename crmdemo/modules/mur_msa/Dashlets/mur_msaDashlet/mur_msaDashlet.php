@@ -26,7 +26,7 @@ class mur_msaDashlet extends DashletGeneric {
 		global $current_user, $app_strings;
 		require('modules/mur_msa/metadata/dashletviewdefs.php');
 
-        parent::DashletGeneric($id, $def);
+        parent::__construct($id, $def);
 
         if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', 'mur_msa');
 

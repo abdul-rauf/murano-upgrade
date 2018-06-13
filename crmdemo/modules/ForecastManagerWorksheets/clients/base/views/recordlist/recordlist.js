@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -157,7 +157,7 @@
         // we need to make a clone of the plugins and then push to the new object. this prevents double plugin
         // registration across ExtendedComponents
         this.plugins = _.without(this.plugins, 'ReorderableColumns', 'MassCollection');
-        this.plugins.push('CteTabbing');
+        this.plugins.push('ClickToEdit');
         this.plugins.push('DirtyCollection');
         this._super("initialize", [options]);
         this.template = app.template.getView('flex-list', this.module);
@@ -793,7 +793,7 @@
         options = app.data.parseOptionsForSync(method, model, options);
 
         // custom success handler
-        options.success = _.bind(function(model, data, options) {
+        options.success = _.bind(function(data) {
             this.collectionSuccess(data);
         }, this);
 
@@ -839,6 +839,10 @@
                 row.draft = (this.selectedUser.id == app.user.id) ? 1 : 0;
                 row.name = user.name;
             }
+            if (_.isEmpty(row.id)) {
+                row.id = app.utils.generateUUID();
+                row.fakeId = true;
+            }
             records.push(row);
         }, this);
 
@@ -872,7 +876,6 @@
         }
 
         this.collection.isEmpty = (_.isEmpty(data));
-
         this.collection.reset(records);
     },
 
@@ -1048,8 +1051,9 @@
      * @fires forecasts:worksheet:saved
      */
     _worksheetSaveHelper: function(saveObj, ctx) {
+        var id = (saveObj.model.get('fakeId')) ? null : saveObj.model.get('id');
         saveObj.model.set({
-            id: saveObj.model.get('id') || null,        // we have to set the id back to null if ID is not set
+            id: id,        // we have to set the id back to null if ID is not set
                                                         // so when the xhr runs it knows it's a new model and will use
                                                         // POST vs PUT
             current_user: saveObj.userId || this.selectedUser.id,

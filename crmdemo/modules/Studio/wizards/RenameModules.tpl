@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -124,9 +124,12 @@
     // this will cause module renames to be reflected on save
     // in the parent frames header menu etc
     // Get the parent api object
-    var api = parent.SUGAR.App.api;
-    // Call the ping api
-    api.call('read', api.buildURL('ping'));
+    // Also there is case where no parent window (Rename Module opened in new browser's tab)
+    if (typeof parent.SUGAR.App !== 'undefined') {
+        var api = parent.SUGAR.App.api;
+        // Call the ping api
+        api.call('read', api.buildURL('ping'));
+    }
 
     var lastField = '';
     var lastRowCount = -1;

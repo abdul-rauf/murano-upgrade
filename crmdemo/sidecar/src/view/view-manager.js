@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,12 +14,12 @@
  * The view manager's factory methods (`createView`, `createLayout`, and `createField`) first checks
  * `views`, `layouts`, and `fields` hashes respectively for custom class declaration before falling back the base class.
  *
- * Note the following is deprecated in favor of putting these controllers in the sugarcrm/clients/<platform> directory, or
+ * Note the following is deprecated in favor of putting these controllers in the `sugarcrm/clients/<platform>` directory, or
  * using one of the appropriate factories like `createView`, `createField`, or `createLayout`. Using either of these idioms,
  * your components will be internally namespaced by platform for you. If you do choose to use the following idiom of defining
- * your controller directly on app.view.<type>, please be forwarned that you will lose any automatic namespacing benefits and
- * possibly encounter naming collisions if you're controller names are not unique. If you must define directly, you may choose
- * to prefix your controller name by your application or platform e.g. MyappMyCustom<Type> where 'Myapp' is the platform prefix.
+ * your controller directly on `app.view.<type>`, please be forewarned that you will lose any automatic namespacing benefits and
+ * possibly encounter naming collisions if your controller names are not unique. If you must define directly, you may choose
+ * to prefix your controller name by your application or platform e.g. `MyappMyCustom<Type>` where 'Myapp' is the platform prefix.
  *
  * Put declarations of your custom views, layouts, fields in the corresponding hash (see note above; this is deprecated):
  * <pre><code>
@@ -90,185 +90,190 @@
         /**
          * Creates an instance of a component and binds data changes to it.
          *
-         * @param type Component type (`layout`, `view`, `field`).
-         * @param name Component name.
-         * @param params Parameters to pass to the Component's class constructor.
+         * @param {string} type Component type (`layout`, `view`, `field`).
+         * @param {string} name Component name.
+         * @param {Object} params Parameters to pass to the Component's class
+         *   constructor.
+         * @param {string} params.type The component type.
+         * @param {string} params.module The component's module.
+         * @param {string} [params.loadModule=params.module] The module to
+         *   create the component from.
          * @return {View.Component} New instance of a component.
          * @private
          */
         _createComponent: function(type, name, params) {
-            var Klass = this.declareComponent(type, params.type || name, params.module, params.controller, false, this._getPlatform(params));
+            var Klass = this.declareComponent(type, params.type || name, params.loadModule || params.module,
+                params.controller, false, this._getPlatform(params));
             var component = new Klass(params);
             component.trigger("init");
             component.bindDataChange();
-
             return component;
         },
 
         /**
          * Creates an instance of a view.
          *
-         * Parameters define creation rules as well as view properties.
-         * The `params` hash must contain at least `name` property which is the view name.
-         * Other parameters may be:
-         *
-         * - context: context to associate the newly created view with
-         * - module: module name
-         * - meta: custom metadata
-         *
-         * If context is not specified the controller's current context is assigned to the view (`SUGAR.App.controller.context`).
-         *
          * Examples:
          *
-         * * Create a list view. The view manager will use metadata for the view named 'list' defined in Contacts module.
+         * Create a list view. The view manager will use metadata for the view
+         * named 'list' defined in Contacts module.
          * The controller's current context will be set on the new view instance.
-         * <pre><code>
-         * var listView = app.view.createView({
-         *    name: 'list',
-         *    module: 'Contacts'
-         * });
-         * </code></pre>
          *
-         * * Create a custom view class.
+         *     var listView = app.view.createView({
+         *         type: 'list',
+         *         module: 'Contacts'
+         *     });
          *
-         * Note the following is deprecated in favor of putting these controllers in the sugarcrm/clients/<platform> directory, or
-         * using one of the appropriate factories like `createView`, `createField`, or `createLayout`. Using that idiom, the metadata
-         * manager will declare these components and take care of namespacing by platform for you. If you do choose to use the following
-         * idiom please be forwarned that you will lose any namespacing benefits and possibly encounter naming collisions!
-         * <pre><code>
-         * // Declare your custom view class.
-         * app.view.views.MyCustomView = app.view.View.extend({  //might cause collisions if another MyCustomView!
-         *  // Put your custom logic here
-         * });
-         * // if you must define directly on app.view.views, you may instead prefer to do:
-         * app.view.views.<YOUR_PLATFORM>MyCustomView = app.view.View.extend({
-         *  // Put your custom logic here
-         * });
+         * Create a custom view class. Note the following is deprecated in favor
+         * of putting these controllers in the `sugarcrm/clients/<platform>`
+         * directory, or using one of the appropriate factory methods like
+         * `createView`, `createField`, or `createLayout`. Using that idiom, the
+         * metadata manager will declare these components and take care of
+         * namespacing by platform for you. If you do choose to use the
+         * following idiom please be forwarned that you will lose any
+         * namespacing benefits and possibly encounter naming collisions!
          *
-         * var myCustomView = app.view.createView({
-         *    name: 'myCustom'
-         * });
-         * </code></pre>
+         *     // Declare your custom view class.
+         *     // might cause collisions if another MyCustomView!
+         *     app.view.views.MyCustomView = app.view.View.extend({
+         *         // Put your custom logic here
+         *     });
+         *     // if you must define directly on app.view.views, you may instead
+         *     // prefer to do:
+         *     `app.view.views.<YOUR_PLATFORM>MyCustomView` = app.view.View.extend({
+         *          // Put your custom logic here
+         *     });
          *
-         * * Create a view with custom metadata payload.
-         * <pre><code>
-         * var view = app.view.createView({
-         *     name: 'detail',
-         *     meta: { ... your custom metadata ... }
-         * });
-         * </code></pre>
+         *     var myCustomView = app.view.createView({
+         *         type: 'myCustom'
+         *     });
          *
-         * * Create a view via metadata
-         * <pre><code>
-         * $viewdefs['myplatform']['view']['my-record'] = array(
-         *     'type' => 'record',
-         *     // ... omitted for brevity
-         * );
-         * </code></pre>
-         * In the above example, the `type` property is being used to specify to the Sidecar framework that the base record
-         * view should be used as a complete "surrogate view" for the `my-record` view. Please note that this should only be
-         * done if the view for which the metadata is being defined (in this case `my-record`) does not, itself, have a controller
-         * defined. For example, if we had in the same directory a `my-record.js` view controller, defining the `type` property
-         * would not make sense. If this property is set in said metadata, the type will be set here before creating the component.
+         * Create a view with custom metadata payload.
          *
-         * Please note that related to the `type` discussion above, there is a `template` property that may be used if all you need
-         * is a "surrogate template" (not a fully different type). For example, if you have a controller, and metadata, but no corresponding
-         * `.hbs` template file, you may wish to utilize an existing template in your viewdef using the following metadata property:
-         * <pre><code>
-         *     'template' => 'record',
-         * </code></pre>
-         * Look at {@link View.View}, particularly the
-         * {@link View.View#initialize} and
-         * {@link View.View#getTemplateFromMeta} for more information on how the
+         *     var view = app.view.createView({
+         *         type: 'detail',
+         *         meta: { ... your custom metadata ... }
+         *     });
+         *
+         * Look at {@link View.View}, particularly
+         * {@link View.View#initialize} for more information on how the
          * `meta.template` property can be used.
          *
-         * @param params view parameters
-         * @return {View.View} new instance of view.
+         * @param {Object} params View parameters.
+         * @param {string} params.type The view identifier (`default`, `base`,
+         *   etc.). Matches the controller to be used.
+         * @param {string} [params.name=params.type] View name that
+         *   distinguishes between multiple instances of the same view type.This
+         *   matches the metadata to read from {@link Core.MetadataManager} and
+         *   it is the easier way to reuse view types with different
+         *   configurations.
+         * @param {Object} [params.context=app.controller.context] Context to
+         * associate the newly created view with.
+         * @param {string} [params.module] Module name.
+         * @param {string} [params.loadModule] The module that should be
+         *   considered the base.
+         * @param {Object} [params.meta] Custom metadata.
+         * @return {View.View} New instance of view.
          */
         createView: function(params) {
             // context is always defined on the controller
             params.context = params.context || app.controller.context;
-            params.module = params.module || params.context.get("module");
-            params.meta = params.meta || app.metadata.getView(params.module, params.name);
-            params.type = params.type || (params.meta && params.meta.type ? params.meta.type : (params.name || null));
+            params.module = params.module || params.context.get('module');
+            // name defines which metadata to load
+            params.name = params.name || params.type;
+            params.meta = params.meta || app.metadata.getView(params.module, params.name, params.loadModule);
 
             if (params.def && params.def.xmeta) {
                 params.meta = _.extend({}, params.meta, params.def.xmeta);
             }
 
-            return this._createComponent("view", params.name, params);
+            // type defines which controller to use
+            var meta = params.meta || {};
+            params.type = params.type || meta.type || params.name;
+
+            return this._createComponent('view', params.type, params);
         },
 
         /**
          * Creates an instance of a layout.
          *
          * Parameters define creation rules as well as layout properties.
-         * The factory needs either layout name or type.
-         * The layout type is retrieved either from `params` hash or layout metadata.
-         *
-         * Parameters may be:
-         *
-         * - name: layout name (list, simple, complex, etc.)
-         * - context: context to associate the newly created layout with
-         * - module: module name
-         * - meta: custom metadata
-         * - type: layout type (fluid, columns, etc.). If not specified, it is retrieved from metadata definition.
-         *
-         * If context is not specified the controller's current context is assigned to the layout (`SUGAR.App.controller.context`).
+         * The factory needs either layout name or type. Also, the layout type
+         * must be specified. The layout type is retrieved either from the
+         * `params` hash or layout metadata.
          *
          * Examples:
          *
-         * * Create a list layout. The view manager will use metadata for the layout named 'list' defined in Contacts module.
-         * The controller's current context will be set on the new layout instance.
-         * <pre><code>
-         * var listLayout = app.view.createLayout({
-         *    name: 'list',
-         *    module: 'Contacts'
-         * });
-         * </code></pre>
+         * Create a list layout. The view manager will use metadata for the
+         * `list` layout defined in the Contacts module.
+         * The controller's current context will be set on the new layout
+         * instance.
          *
-         * * Create a custom layout class.
-         * ** Note that following is deprecated in favor of using the `createLayout` factory or placing controller in
-         * sugarcrm/clients/<platform>/layouts in which case the metadata manager will take care of namespacing your
-         * controller by platform name for you (e.g. MyCustomLayout becomes app.view.layouts.MyappMyCustomLayout)
-         * <pre><code>
-         * // Declare your custom layout class.
-         * app.view.layouts.MyCustomLayout = app.view.Layout.extend({ //might cause collisions if already a MyCustomLayout!
-         *  // Put your custom logic here
-         * });
-         * // if you must define directly on app.view.layouts, you may instead prefer to do:
-         * app.view.layouts.<YOUR_PLATFORM>MyCustomLayout = app.view.Layout.extend({
-         *  // Put your custom logic here
-         * });
+         *     var listLayout = app.view.createLayout({
+         *         type: 'list',
+         *         module: 'Contacts'
+         *     });
          *
-         * var myCustomLayout = app.view.createLayout({
-         *    name: 'myCustom'
-         * });
-         * </code></pre>
          *
-         * * Create a layout with custom metadata payload.
-         * <pre><code>
-         * var layout = app.view.createLayout({
-         *     name: 'detail',
-         *     meta: { ... your custom metadata ... }
-         * });
-         * </code></pre>
+         * Create a custom layout class. Note that following is deprecated in
+         * favor of using the `createLayout` factory or placing controller in
+         * `sugarcrm/clients/<platform>/layouts` in which case the metadata
+         * manager will take care of namespacing your controller by platform
+         * name for you (e.g. MyCustomLayout becomes
+         * `app.view.layouts.MyappMyCustomLayout`).
          *
-         * @param params layout parameters
+         *     // Declare your custom layout class.
+         *     // might cause collisions if already a MyCustomLayout!
+         *     app.view.layouts.MyCustomLayout = app.view.Layout.extend({
+         *         // Put your custom logic here
+         *     });
+         *     // if you must define directly on app.view.layouts,
+         *     // you may instead prefer to do:
+         *     `app.view.layouts.<YOUR_PLATFORM>MyCustomLayout` = app.view.Layout.extend({
+         *         // Put your custom logic here
+         *     });
+         *
+         *     var myCustomLayout = app.view.createLayout({
+         *         type: 'myCustom'
+         *     });
+         *
+         * Create a layout with custom metadata payload.
+         *
+         *     var layout = app.view.createLayout({
+         *         type: 'detail',
+         *         meta: { ... your custom metadata ... }
+         *     });
+         *
+         * @param {Object} params layout parameters.
+         * @param {string} [params.type] Layout identifier (`default`, `base`,
+         *   etc.).
+         * @param {string} [params.name=params.type] Layout name that
+         *   distinguishes between multiple instances of the same layout type.
+         * @param {Object} [params.context=app.controller.context]
+         *   Context to associate the newly created layout with.
+         * @param {string} params.module Module name.
+         * @param {string} [params.loadModule] The module to load the Layout
+         *   from. Defaults to `params.module` or the context's module, in that
+         *   order.
+         * @param {Object} [params.meta] Custom metadata.
          * @return {View.Layout} New instance of the layout.
          */
         createLayout: function(params) {
             params.context = params.context || app.controller.context;
-            params.module = params.module || params.context.get("module");
-            params.meta = params.meta || app.metadata.getLayout(params.module, params.name);
+            params.module = params.module || params.context.get('module');
+            // name defines which metadata to load
+            params.name = params.name || params.type;
+            params.meta = params.meta || app.metadata.getLayout(params.module, params.name, params.loadModule);
 
             if (params.def && params.def.xmeta) {
                 params.meta = _.extend({}, params.meta, params.def.xmeta);
             }
 
-            params.type = params.type || (params.meta ? params.meta.type : null);
+            // type defines which controller to use
+            var meta = params.meta || {};
+            params.type = params.type || meta.type || params.name;
 
-            return this._createComponent("layout", params.name || params.type, params);
+            return this._createComponent('layout', params.type, params);
         },
 
         /**
@@ -297,14 +302,14 @@
          * is passed in the `params` hash.
          *
          * Note the following is deprecated in favor of placing custom field controllers in:
-         * sugarcrm/clients/<platform>/fields or using the `createField` factory.
+         * `sugarcrm/clients/<platform>/fields` or using the `createField` factory.
          * To create instances of custom fields, first declare its class in `app.view.fields` hash:
          * <pre><code>
          * app.view.fields.MyCustomField = app.view.Field.extend({ //might cause collision if MyCustomField already exists!
          *  // Put your custom logic here
          * });
          * // if you must define directly on app.view.fields, you may instead prefer to do:
-         * app.view.fields.<YOUR_PLATFORM>MyCustomField = app.view.Field.extend({ ...
+         * `app.view.fields.<YOUR_PLATFORM>MyCustomField` = app.view.Field.extend({ ...
          *
          * var myCustomField = app.view.createField({
          *   view: someView,
@@ -315,15 +320,18 @@
          * });
          * </code></pre>
          *
-         * @param params field parameters.
+         * @param {Object} params field parameters.
          * @return {View.Field} a new instance of field.
          */
         createField: function(params) {
-            var type = params.def.type;
+            var type = params.viewDefs ? params.viewDefs.type : params.def.type;
             params.context = params.context || params.view.context || app.controller.context;
             params.model = params.model || params.context.get("model");
             params.module = params.module || (params.model && params.model.module ? params.model.module : params.context.get('module')) || "";
-            params.meta = params.meta || app.metadata.getField(type, params.module);
+            if (params.meta) {
+                app.logger.warn('`params.meta` is deprecated in `View.ViewManager#createField` since 7.8 and will be removed in 7.9.');
+            }
+
             if (params.meta && params.meta.controller) params.controller = params.meta.controller;
             params.sfId = ++_sfId;
 
@@ -332,17 +340,29 @@
             params.view.fields[field.sfId] = field;
             return field;
         },
+
+        /**
+         * Returns the platform from the given params, falling back to
+         * `app.config.platform` or else 'base'.
+         *
+         * @param params
+         * @returns {string}
+         * @private
+         */
         _getPlatform: function(params) {
             return params.platform || (app.config && app.config.platform ? app.config.platform : 'base');
         },
+
         /**
-         * Gets a app.view.<TYPE> controller of type field, layout, or view.
-         * @param {Object} params An object literal with the following properties:
-         * - type: one of: 'layout', 'view', or 'field' (required)
-         * - name: the filename of the controller as a String (e.g. 'flex-list', 'record', etc.) (required)
-         * - platform: the platform e.g. 'portal' will first attempt to fallback to app.config.platform then 'base' (optional)
-         * - module: the module name (optional)
-         * @return {Object} The controller or null if not found
+         * Gets a controller of type field, layout, or view.
+         * @param {Object} params Parameters for the controller.
+         * @param {string} params.type The controller type.
+         * @param {string} params.name the filename of the controller
+         *   (e.g. 'flex-list', 'record', etc.).
+         * @param {string} [params.platform] The platform, e.g. 'portal'.
+         *   Will first attempt to fall back to app.config.platform, then 'base'.
+         * @param {string} [params.module] The module name.
+         * @return {Object|null} The controller or `null` if not found.
          */
         _getController: function(params) {
             var c = this._getBaseComponent(params.type, params.name, params.module, params.platform);
@@ -352,6 +372,7 @@
             }
             return c.baseClass;
         },
+
         /**
          *
          * @deprecated 7.2 and will be removed in 7.9. Use {@link View.Component#_super}.
@@ -365,15 +386,18 @@
          *     app.view.invokeParent(this, {type: 'view', name: 'flex-list', method: '_render', args:[foo,bar]});
          * </pre>
          * @param {Object} context The context to be used when we apply the method.
-         * @param {Object} params An object literal with the following properties:
-         * - type One of: 'layout', 'view', or 'field' (required)
-         * - name The filename of the controller (e.g. 'flex-list', 'record', etc.) (required)
-         * - method The name of the method to call e.g. 'initialize', '_renderHtml', etc. (required)
-         * - module: the module name (optional)
-         * - args: an Array of arguments to be passed through to the method being called. If not provided it will be
-         * assumed that you are not passing any arguments to the method. If not supplied no arguments is assumed (optional)
-         * - platform: optional platform e.g. 'portal' will first attempt to fallback to app.config.platform then 'base' (optional)
-         * @return {Array/String/Object/Boolean} returns whatever is returned by the method being invoked
+         * @param {Object} params Parameters for the controller.
+         * @param {string} params.type The controller type.
+         * @param {string} params.name The filename of the controller
+         *   (e.g. 'flex-list', 'record', etc.).
+         * @param {string} params.method The name of the method to call
+         *   e.g. 'initialize', '_renderHtml', etc.
+         * @param {string} [params.module] The module name.
+         * @param {Array} [params.args] An array of arguments to be passed to the
+         *   method being called.
+         * @param {string} [params.platform] The platform, e.g. 'portal'.
+         *   Will first attempt to fallback to app.config.platform then 'base'.
+         * @return {Mixed} Whatever is returned by the method being invoked.
          */
         invokeParent: function(context, params) {
             var controller, ret;
@@ -385,7 +409,7 @@
             if (!controller) {
                 return app.logger.error("invokeParent: Unable to load controller for " + params.type + ":" + params.name);
             }
-            //Maintain compatability with _super
+            // maintain compatibility with _super
             context._superStack = context._superStack || {};
             context._superStack[params.method] = context._superStack[params.method] || [];
             context._superStack[params.method].push(controller.prototype);
@@ -395,13 +419,14 @@
         },
 
         /**
-         * This function is used to verify if a given
+         * This function is used to verify if a component has a certain plugin.
          *
-         * @param params {Object} set of parameters passed to function. Can contain the following values:
-         * - type {String} type of component to check. Must be one of 'layout', 'view', or 'field' (required).
-         * - name {String} name of component to check (required).
-         * - plugin {String} name of plugin to check (required).
-         * - module {String=} name of module to check for custom components in (optional).
+         * @param {Object} params Set of parameters passed to function.
+         * @param {string} params.type Type of component to check.
+         * @param {string} params.name Name of component to check.
+         * @param {string} params.plugin Name of plugin to check.
+         * @param [String=''] params.module Name of module to check for custom
+         *   components in.
          *
          * @return {bool|null}
          */
@@ -412,9 +437,10 @@
                 return null;
             }
             controller = this._getController(params);
-            return controller && controller.prototype
-                && _.contains(controller.prototype.plugins, params.plugin);
+            return controller && controller.prototype &&
+                _.contains(controller.prototype.plugins, params.plugin);
         },
+
         /**
          * Retrieves class declaration for a component or creates a new component class.
          *
@@ -462,14 +488,15 @@
          * module specific counterparts like `ContactsListView` and `ContactsColumnsLayout`.
          * The "named" class name is checked first.
          *
-         * @param {String} type Lower-cased component type: layout, view, or field.
-         * @param {String} name Lower-cased component name. For example, list (layout or view), bool (field).
-         * @param {String} module(optional) Module name.
-         * @param {String} controller(optional) Controller source code string.
-         * @param {String} layoutType(optional) Layout type. For example, fluid, rows, columns.
-         * @param {Boolean} overwrite(optional) Will overwrite if duplicate custom class or layout is cached. Note,
-         * if no controller passed, overwrite is ignored since we can't create a meaningful component without a controller.
-         * @param {String} platform The platform e.g. 'base', 'portal', etc.
+         * @param {string} type Lower-cased component type: layout, view, or field.
+         * @param {string} name Lower-cased component name. For example, list (layout or view), bool (field).
+         * @param {string} [module] Module name.
+         * @param {string} [controller] Controller source code string.
+         * @param {boolean} [overwrite] Will overwrite if duplicate
+         *   custom class or layout is cached. Note that if no controller is
+         *   passed, overwrite is ignored since we can't create a meaningful
+         *   component without a controller.
+         * @param {string} platform The platform e.g. 'base', 'portal', etc.
          * @return {Function} Component class.
          */
         declareComponent: function(type, name, module, controller, overwrite, platform) {
@@ -481,16 +508,23 @@
                 app.utils.extendClass(c.cache, c.baseClass, c.moduleBasedClassName, controller, c.platformNamespace) ||
                 c.baseClass;
         },
+
         /**
-         * Internal helper function for getting a component (controller). Do not call directly and instead use
-         * `declareComponent` or `invokeParent`, etc., depending on your needs.
-         * @param {String} type Lower-cased component type: layout, view, or field.
-         * @param {String} name Lower-cased component name. For example, list (layout or view), bool (field).
-         * @param {String} module(optional) Module name.
-         * @param {String} platform The platform e.g. 'base', 'portal', etc.
-         * @param {Boolean} ignoreCustom when true, custom controller overrides will be ignored and only components
-         *                  that exactly match the name will be returned
-         * @return {Object} An object literal containing cache, platform namespace, module based class name, and base class.
+         * Internal helper function for getting a component (controller). Do not
+         * call directly and instead use `declareComponent` or `invokeParent`,
+         * etc., depending on your needs.
+         * @param {string} type Lower-cased component type: layout, view, or field.
+         * @param {string} name Lower-cased component name. For example, list (layout or view), bool (field).
+         * @param {string} [module] Module name.
+         * @param {string} platform The platform e.g. 'base', 'portal', etc.
+         * @param {boolean} ignoreCustom When true, custom controller overrides
+         *   will be ignored and only components that exactly match the name
+         *   will be returned.
+         * @return {Object} The base component information
+         * @return {Object} return.cache
+         * @return {string} return.platformNamespace
+         * @return {string} return.moduleBasedClassName
+         * @return {Object} return.baseClass
          * @private
          */
         _getBaseComponent: function(type, name, module, platform, ignoreCustom) {
@@ -519,7 +553,7 @@
                     app.view["Custom" + customBaseClassName] ||
                     app.view[customBaseClassName] ||
                     app.view[ucType];
-            //Override to use the custom class instead of the standard one if it exists.
+            // Override to use the custom class instead of the standard one if it exists.
             if (cache[customModuleBasedClassName] && !ignoreCustom) {
                 moduleBasedClassName = customModuleBasedClassName;
             }

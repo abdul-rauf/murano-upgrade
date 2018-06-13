@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -32,11 +32,17 @@
         this._super('initialize', [options]);
 
         //shortcut keys
-        app.shortcuts.register('List:Headerpane:Create', 'a', function() {
-            var $createButton = this.$('a[name=create_button]');
-            if ($createButton.is(':visible') && !$createButton.hasClass('disabled')) {
-                $createButton.get(0).click();
+        app.shortcuts.register({
+            id: 'List:Headerpane:Create',
+            keys: 'a',
+            component: this,
+            description: 'LBL_SHORTCUT_CREATE_RECORD',
+            handler: function() {
+                var $createButton = this.$('a[name=create_button]');
+                if ($createButton.is(':visible') && !$createButton.hasClass('disabled')) {
+                    $createButton.get(0).click();
+                }
             }
-        }, this);
+        });
     }
 })

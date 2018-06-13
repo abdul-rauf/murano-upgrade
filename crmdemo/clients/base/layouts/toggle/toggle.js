@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -35,8 +35,8 @@
     initialize: function(options) {
         this.toggleComponents = [];
         this.componentsList = {};
-        this.availableToggles = this.options.meta.available_toggles || this.availableToggles;
-        this.defaultToggle = this.options.meta.default_toggle || this.defaultToggle;
+        this.availableToggles = options.meta.available_toggles || this.availableToggles;
+        this.defaultToggle = options.meta.default_toggle || this.defaultToggle;
 
         this._super('initialize', [options]);
     },

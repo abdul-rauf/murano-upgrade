@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -163,8 +163,13 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
                         .showTitle(params.show_title)
                         .tooltips(params.show_tooltips)
                         .tooltipContent(function(key, x, y, e, graph) {
-                            return '<h3>' + key + '</h3>' +
-                                '<p>' + y + '</p>';
+                            var content = '';
+                            var percentString = '';
+                            if (x < 100) {
+                                percentString = ' - ' + x + '%';
+                            }
+                            content = '<h3>' + key + '</h3>' + '<p>' + y + percentString + '</p>';
+                            return content;
                         })
                         .direction(params.direction)
                         .showLegend(params.show_legend)
@@ -258,8 +263,6 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
 
                     var lineChart = nv.models.lineChart()
                         .id(d3ChartId)
-                        .x(function(d) { return d[0]; })
-                        .y(function(d) { return d[1]; })
                         .margin(params.margin)
                         .tooltips(params.show_tooltips)
                         .tooltipContent(function(key, x, y, e, graph) {
@@ -294,38 +297,32 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
                             .axisLabel(params.y_axis_label);
                     }
 
+                    var tickFormat = function(d) { return d; };
+                    var getX = function(d) { return d[0]; };
+                    var getY = function(d) { return d[1]; };
+
                     if (json.data.length) {
                         if (json.data[0].values.length && json.data[0].values[0] instanceof Array) {
-                            lineChart
-                                .x(function(d) { return d[0]; })
-                                .y(function(d) { return d[1]; });
-
                             if (nv.utils.isValidDate(json.data[0].values[0][0])) {
-                                lineChart.xAxis
-                                    .tickFormat(function(d) {
-                                        return d3.time.format('%x')(new Date(d));
-                                    });
+                                tickFormat = function(d) { return d3.time.format('%x')(new Date(d)); };
                             } else if (xTickLabels.length > 0) {
-                                lineChart.xAxis
-                                    .tickFormat(function(d) {
-                                        return xTickLabels[d] || ' ';
-                                    });
+                                tickFormat = function(d) { return xTickLabels[d] || ' '; };
                             }
                         } else {
-                            lineChart
-                                .x(function(d) { return d.x; })
-                                .y(function(d) { return d.y; });
-
+                            getX = function(d) { return d.x; };
+                            getY = function(d) { return d.y; };
                             if (xTickLabels.length > 0) {
-                                lineChart.xAxis
-                                    .tickFormat(function(d) {
-                                        return xTickLabels[d - 1] || ' ';
-                                    });
+                                tickFormat = function(d) { return xTickLabels[d - 1] || ' '; };
                             }
                         }
                     }
 
+                    lineChart
+                        .x(getX)
+                        .y(getY);
+
                     lineChart.xAxis
+                        .tickFormat(tickFormat)
                         .highlightZero(false)
                         .reduceXTicks(false);
 

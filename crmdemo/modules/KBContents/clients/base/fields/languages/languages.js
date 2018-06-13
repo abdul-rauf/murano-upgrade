@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  */
 
 ({
-    extendsFrom: 'FieldSet',
+    extendsFrom: 'FieldsetField',
 
     events: {
         'click .btn[data-action=add-field]': 'addItem',
@@ -21,8 +21,6 @@
     intKey: null,
 
     deletedLanguages: [],
-
-    plugins: ['Tooltip'],
 
     /**
      * @inheritdoc
@@ -278,7 +276,6 @@
             errorMessages = [value.message];
             $tooltip = $(this.exclamationMarkTemplate(errorMessages));
             $inp.after($tooltip);
-            this.createErrorTooltips($tooltip);
         }, this);
     },
 
@@ -287,7 +284,6 @@
      * @override
      */
     clearErrorDecoration: function () {
-        this.destroyAllErrorTooltips();
         this.$('.add-on.error-tooltip').remove();
         _.each(this.$('input[type=text]'), function(inp) {
             var $inp = this.$(inp);

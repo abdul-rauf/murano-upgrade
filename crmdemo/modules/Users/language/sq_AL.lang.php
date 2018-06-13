@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'Fjalëkalim i ri',
 	'LBL_NEW_PASSWORD1'					=> 'Fjalëkalimi',
 	'LBL_NEW_PASSWORD2'					=> 'Konfirmo fjalëkalimin',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'Ndryshimi i fjalëkalimit u krye me sukses',
+    'LBL_NEW_USER_PASSWORD_1' => 'Ndryshimi i fjalëkalimit u krye me sukses',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'Një email është dërguar për përdoruesin që përmban sistemin- e gjeneruar të fjalëkalimit.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'Fjalëkalimi u krijua me sukses',
+    'LBL_NEW_USER_PASSWORD_3' => 'Fjalëkalimi u krijua me sukses',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'Përdorues i ri',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'Përdorues i ri [Alt+N]',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'Kuotat',
     'LBL_FORECASTS'                     => 'Parashikimet',
     'LBL_WORKSHEETS'                    => 'fletët e punës',
+	'LBL_CALENDARS'                     => 'Kalendarët',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'Gjej një CAPTCHA tjetër',
 	'LBL_RECAPTCHA_SOUND'				=> 'Kalo në zë.',
 	'LBL_RECAPTCHA_IMAGE'				=> 'Kalo në figurë.',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'Telefoni i punës',
 	'LBL_YOUR_PUBLISH_URL'				=> 'Publiko në lokacionin tim',
     'LBL_ICAL_PUB_URL'                  => 'iCAL Integrimi URL',
-    'LBL_ICAL_PUB_URL_HELP'             => 'Përdorni këtë URL për tu abonuar në kalendarit Sugar brenda iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'Përdor këtë URL për t&#39;u abonuar në kalendarin tënd të Sugar me aplikacionet' .
+                                           'e mbështetura nga iCal. Ngjarjet e kalendarit të Sugar mund të shikohen si "vetëm për lexim" ' .
+                                           'në aplikacionet e kalendarëve të jashtëm dhe modifikimet e ngjarjeve ' .
+                                           '(p.sh. mbledhjet, thirrjet etj.) mund të kryhen vetëm në Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'URL juaj e kërkimi',
 	'LNK_NEW_USER'						=> 'Krijo përdorues të ri',
 	'LNK_NEW_PORTAL_USER'				=> 'Krijoni përdorues të ri të portalit',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'LBL_FILTRIM_PERDORUES_RAPORTE',
     'LBL_CONTACTS_SYNC' => 'Kontaktet',
-
+    'LBL_DETAIL' => 'Profili i përdoruesit',
 ); // END STRINGS DEFS
 
 ?>

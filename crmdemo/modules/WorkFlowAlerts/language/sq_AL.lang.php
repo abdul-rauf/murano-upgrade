@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -118,7 +118,7 @@ $mod_strings = array (
 	//Invite Labels
 	  'LBL_MODULE_NAME_INVITE' => 'Lista e të ftuarve',
 	'LBL_MODULE_NAME_SINGULAR_INVITE' => 'Lista e të ftuarve',
-	  'LBL_LIST_STATEMENT_INVITE' => 'T[ ftuarit e mbledhjes/thirjes',
+	  'LBL_LIST_STATEMENT_INVITE' => 'Të ftuarit e mbledhjes/thirrjes:',
 
 	'LBL_SELECT_VALUE' => 'Duhet selektuar vlerë valide',
 	'LBL_SELECT_NAME' => 'Ju duhet të selektoni fushën me porosi të emrit',

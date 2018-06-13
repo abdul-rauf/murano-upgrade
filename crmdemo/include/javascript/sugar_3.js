@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -167,9 +167,9 @@ function checkMaxSupported(c, s) {
 
 SUGAR.isSupportedBrowser = function(){
     var supportedBrowsers = {
-        msie : {min:11}, // IE 11
-        safari : {min:600}, // Safari 8.0.8, 9.0.1
-        mozilla : {min:41}, // Firefox 41, 42
+        msie : {min:9, max:11}, // IE 9, 10, 11
+        safari : {min:537}, // Safari 7.1
+        mozilla : {min:41}, // Firefox 41,42
         chrome : {min:537.36} // Chrome 47
     };
     var current = String($.browser.version);
@@ -990,7 +990,7 @@ var REQUIRED_VALIDATION_MESSAGE_CLASS = 'required validation-message';
 function remove_error_style(formName, input) {
     try
     {
-        inputHandle = typeof input === "object" ? input : document.forms[formname][input];
+        inputHandle = typeof input === "object" ? input : document.forms[formName][input];
 
         //  Find and remove all child error elements.
         var errorElements = $(inputHandle).parent().children().filter(function() {
@@ -1076,13 +1076,15 @@ function add_error_style(formname, input, txt, flash) {
  */
 function clear_all_errors() {
     for(var wp = 0; wp < inputsWithErrors.length; wp++) {
-        if(typeof(inputsWithErrors[wp]) !='undefined' && typeof inputsWithErrors[wp].parentNode != 'undefined' && inputsWithErrors[wp].parentNode != null) {
-            if ( inputsWithErrors[wp].parentNode.className.indexOf('x-form-field-wrap') != -1 )
-            {
-                inputsWithErrors[wp].parentNode.parentNode.removeChild(inputsWithErrors[wp].parentNode.parentNode.lastChild);
-            }
-            else
-            {
+        if (typeof(inputsWithErrors[wp]) != 'undefined' && typeof inputsWithErrors[wp].parentNode != 'undefined' &&
+            inputsWithErrors[wp].parentNode != null) {
+            if (inputsWithErrors[wp].parentNode.className.indexOf('x-form-field-wrap') != -1) {
+                inputsWithErrors[wp].parentNode.parentNode.removeChild(
+                    inputsWithErrors[wp].parentNode.parentNode.lastChild
+                );
+            } else if ($(inputsWithErrors[wp].parentNode.lastChild).hasClass('validation-message')) {
+                // removeChild(parentNode.lastChild) can remove actual input fields unless we check to
+                // make sure we're only removing those nodes with the 'validation-message' class
                 inputsWithErrors[wp].parentNode.removeChild(inputsWithErrors[wp].parentNode.lastChild);
             }
         }
@@ -1222,8 +1224,15 @@ function validate_form(formname, startsWith){
 
 					//If a field is hidden, skip validation.
 					var field = form[validate[formname][i][nameIndex]];
-					if ((isFieldHidden(field, validate[formname][i][typeIndex]) && validate[formname][i][typeIndex] != 'file' && field.id != 'tiny_vals') || field.disabled)
-					{
+                    if (isFieldHidden(field, validate[formname][i][typeIndex])
+                        && validate[formname][i][typeIndex] != "file"
+                        && field.id != "tiny_vals"
+                        && !field.hasAttribute("data-force-validate")
+                    ) {
+                        continue;
+                    }
+
+                    if (field.disabled) {
 						continue;
 					}
 
@@ -2927,8 +2936,11 @@ sugarListView.prototype.send_mass_update = function(mode, no_record_txt, del) {
 							ar.push(document.MassUpdate.elements[wp].value);
 				}
 			}
-			if(document.MassUpdate.uid.value != '') document.MassUpdate.uid.value += ',';
-			document.MassUpdate.uid.value += ar.join(',');
+            var uidAdd = ar.join(',');
+            if (uidAdd != '' && document.MassUpdate.uid.value != '') {
+                document.MassUpdate.uid.value += ',';
+            }
+            document.MassUpdate.uid.value += uidAdd;
 			if(document.MassUpdate.uid.value == '') {
 				alert(no_record_txt);
 				return false;
@@ -3275,46 +3287,44 @@ SUGAR.util = function () {
 	    evalScript:function(text){
             var elements = $.parseHTML(text, document, true);
             YUI({comboBase: 'index.php?entryPoint=getYUIComboFile&'}).use("io-base", "get", function(Y) {
-                _.each(elements, function(el) {
-                    if (el.tagName && el.tagName.toUpperCase() == "SCRIPT") {
-                        try {
-                            if (el.src) {
-                                // Check is ulr cross domain or not
-                                var r1 = /:\/\//igm;
-                                if (r1.test(el.src) && el.src.indexOf(window.location.hostname) == -1) {
-                                    // if script is cross domain it cannot be loaded via ajax request
-                                    // try load script asynchronous by creating script element in the body
-                                    // YUI 3.3 doesn't allow load scripts synchronously
-                                    // YUI 3.5 do it
-                                    Y.Get.script(el.src, {
-                                        autopurge: false,
-                                        onSuccess: function(o) {},
-                                        onFailure: function(o) {},
-                                        onTimeout: function(o) {}
-                                    });
-                                }
-                                else {
-                                    // Bug #49205 : Subpanels fail to load when selecting subpanel tab
-                                    // Create a YUI instance using the io-base module.
-                                    Y.io(el.src, {
-                                        method: 'GET',
-                                        sync: true,
-                                        on: {
-                                            success: function(transactionid, response, arguments) {
-                                                SUGAR.util.globalEval(response.responseText);
-                                            }
-                                        }
-                                    });
-                                }
+                var scripts = $("<div/>").append(elements).find("script");
+                _.each(scripts, function(el) {
+                    try {
+                        if (el.src) {
+                            // Check if the URL is absolute and thus possibly points to another origin
+                            var r1 = /:\/\//igm;
+                            if (r1.test(el.src) && el.src.indexOf(window.location.hostname) == -1) {
+                                // if script is cross domain it cannot be loaded via ajax request
+                                // try load script asynchronous by creating script element in the body
+                                // YUI 3.3 doesn't allow load scripts synchronously
+                                // YUI 3.5 do it
+                                Y.Get.script(el.src, {
+                                    autopurge: false,
+                                    onSuccess: function(o) {},
+                                    onFailure: function(o) {},
+                                    onTimeout: function(o) {}
+                                });
                             } else {
-                                SUGAR.util.globalEval(el.innerHTML || el.innerText);
+                                // Bug #49205 : Subpanels fail to load when selecting subpanel tab
+                                // Create a YUI instance using the io-base module.
+                                Y.io(el.src, {
+                                    method: 'GET',
+                                    sync: true,
+                                    on: {
+                                        success: function(transactionid, response, arguments) {
+                                            SUGAR.util.globalEval(response.responseText);
+                                        }
+                                    }
+                                });
                             }
-                        } catch (e) {
-                            if (typeof(console) != "undefined" && typeof(console.log) == "function") {
-                                console.log("error adding script");
-                                console.log(e);
-                                console.log(el.src || el.innerHTML || el.innerText);
-                            }
+                        } else {
+                            SUGAR.util.globalEval(el.innerHTML || el.innerText);
+                        }
+                    } catch (e) {
+                        if (typeof(console) != "undefined" && typeof(console.log) == "function") {
+                            console.log("error adding script");
+                            console.log(e);
+                            console.log(el.src || el.innerHTML || el.innerText);
                         }
                     }
                 });

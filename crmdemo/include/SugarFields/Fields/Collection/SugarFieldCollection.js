@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -206,7 +206,6 @@ if(typeof(SUGAR.collection) == "undefined") {
          * Create the new row from a cloned row. 
          */
         init_clone: function(values){
-        	
         	//Safety check, this means that the clone field was not created yet
         	if(typeof this.cloneField[0] == 'undefined') {
         	   return;
@@ -216,6 +215,7 @@ if(typeof(SUGAR.collection) == "undefined") {
                 values = new Array();
                 values['name'] = "";
                 values['id'] = "";
+                values['selected'] = '';
             }
             
             var count = this.fields_count;
@@ -254,7 +254,15 @@ if(typeof(SUGAR.collection) == "undefined") {
                 parentNode.innerHTML = parentNode.innerHTML.replace(re, this.field + "_collection_extra_" + this.fields_count);
             } else if (currentNode.tagName && currentNode.tagName == 'SPAN') { 
                 //If it is our div element, recursively find all input elements to process
-                currentNode.id = /_input/.test(currentNode.id) ? this.field_element_name + '_input_div_' + this.fields_count :  this.field_element_name + '_radio_div_' + this.fields_count;         	
+                if (/_input/.test(currentNode.id)) {
+                    currentNode.id = this.field_element_name + '_input_div_' + this.fields_count;
+                } else {
+                    if (/_radio_div_/.test(currentNode.id)) {
+                        currentNode.id = this.field_element_name + '_radio_div_' + this.fields_count;
+                    } else {
+                        currentNode.id = this.field_element_name + '_checkbox_div_' + this.fields_count;
+                    }
+                }
 				if (/_input/.test(currentNode.id)) {
 					currentNode.name = 'teamset_div';
 				}
@@ -331,6 +339,18 @@ if(typeof(SUGAR.collection) == "undefined") {
                         currentNode.checked = false; //Firefox
                         currentNode.setAttribute('defaultChecked', '');
                         break;
+                    case "selected_" + toreplace:
+                        currentNode.name = new_name.replace(RegExp('_0', 'g'), "_" + this.fields_count);
+                        currentNode.id = new_id.replace(RegExp('_0', 'g'), "_" + this.fields_count);
+                        if (this.form !== 'MassUpdate') {
+                            currentNode.value = values['id'];
+                        }
+                        if (values.selected) {
+                            currentNode.setAttribute('checked', 'checked');
+                        } else {
+                            currentNode.removeAttribute('checked');
+                        }
+                        break;
                     default:
                         alert(toreplace + '|' + currentNode.name + '|' + name + '|' + new_name);
                         break;
@@ -385,10 +405,14 @@ if(typeof(SUGAR.collection) == "undefined") {
                     var model = window.parent.SUGAR.App.controller.layout.getComponent('bwc').bwcModel;
                     model.set($(arrow).attr('name'), arrow.value);
                 }
-
 	            var more_div = document.getElementById('more_div_'+this.field_element_name);
 	            if(more_div) {
 	              more_div.innerHTML = arrow.value == 'show' ? SUGAR.language.get('app_strings','LBL_HIDE') : SUGAR.language.get('app_strings','LBL_SHOW');
+                    if (radios.length == 1) {
+                        more_div.parentNode.parentNode.style.display = 'none';
+                    } else {
+                        more_div.parentNode.parentNode.style.display = '';
+                    }
 	            }
 	            
 	        }
@@ -470,6 +494,30 @@ if(typeof(SUGAR.collection) == "undefined") {
 			} // if
 			return '';	
 		},
+        /**
+         * return an array of selected team ids for a team field
+         */
+        getSelectedTeamIdsFromUI: function(formname, fieldname) {
+            var team_ids = [];
+            var table_element_id = formname + '_' + fieldname + '_table';
+            if (document.getElementById(table_element_id)) {
+                var inputElements = YAHOO.util.Selector.query(
+                    'input[type=hidden][name^=id_' + fieldname + ']',
+                    document.getElementById(table_element_id)
+                );
+                var checkboxes = YAHOO.util.Selector.query(
+                    'input[type=checkbox]',
+                    document.getElementById(table_element_id)
+                );
+                for (var t = 0; t < checkboxes.length; t++) {
+                    if ($(checkboxes[t]).prop('checked')
+                            && checkboxes[t].id.match("selected_" + fieldname + "_collection_") != null) {
+                        team_ids.push(inputElements[t].value);
+                    } // if
+                } // for
+            } // if
+            return team_ids;
+        },
         /*
          * Change the primary row onchange of the radio button.
          */
@@ -565,7 +613,7 @@ if(typeof(SUGAR.collection) == "undefined") {
         show_arrow_label: function(show) {
             var more_div = document.getElementById('more_div_'+this.field_element_name);
             if(more_div) {
-               more_div.style.display = show ? '' : 'none';
+               more_div.parentNode.parentNode.style.display = show ? '' : 'none';
             }        	
         },
         
@@ -576,7 +624,7 @@ if(typeof(SUGAR.collection) == "undefined") {
         is_expanded: function() {
             var more_div = document.getElementById('more_div_'+this.field_element_name);
             if(more_div) {
-               return more_div.style.display == '';
+               return more_div.parentNode.parentNode.style.display == '' ;
             }
             return false;
         }

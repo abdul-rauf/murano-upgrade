@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -19,8 +19,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 $mod_strings = array (
-  'LBL_REPLY_ADDR' => '"Atsakyti-kam" Adresas:',
-  'LBL_REPLY_NAME' => '"Atsakyti-kam" Vardas:',
+  'LBL_REPLY_ADDR' => 'Gavėjo adresas:',
+  'LBL_REPLY_NAME' => '"Atsakyti-kam" vardas: ',
 
   'LBL_MODULE_NAME' => 'Kampanijos',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Kampanija',
@@ -47,7 +47,7 @@ $mod_strings = array (
   'LBL_ASSIGNED_TO' => 'Atsakingas:',
   'LBL_ASSIGNED_TO_ID' => 'Atsakingas:',
   'LBL_ASSIGNED_TO_NAME'=> 'Atsakingas:',
-  'LBL_CAMPAIGN_START_DATE' => 'Pradžios laikas:',
+  'LBL_CAMPAIGN_START_DATE' => 'Pradžios data: ',
   'LBL_CAMPAIGN_END_DATE' => 'Pabaigos data:',
   'LBL_CAMPAIGN_STATUS' => 'Statusas:',
   'LBL_CAMPAIGN_BUDGET' => 'Biudžetas:',
@@ -160,7 +160,7 @@ $mod_strings = array (
   'LBL_FROM_NAME' => 'Siuntėjo vardas:',
   'LBL_START_DATE_TIME' => 'Pradžios data ir laikas:',
   'LBL_DATE_START' => 'Pradžios laikas',
-  'LBL_TIME_START' => 'Pražios laikas',
+  'LBL_TIME_START' => 'Pradžios laikas: ',
   'LBL_TEMPLATE' => 'Laiško šablonas:',
   'LBL_CREATE_EMAIL_TEMPLATE'=> 'Sukurti',
   'LBL_MESSAGE_FOR' => 'Siųsti žinutę kam:',

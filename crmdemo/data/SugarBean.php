@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -29,6 +29,8 @@ require_once 'include/utils.php';
 require_once 'include/Expressions/Expression/Parser/Parser.php';
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\ProcessManager;
+
 /**
  * SugarBean is the base class for all business objects in Sugar.  It implements
  * the primary functionality needed for manipulating business objects: create,
@@ -331,6 +333,12 @@ class SugarBean
     public $name_format_map = array();
 
     /**
+     * Locked fields
+     * @var array
+     */
+    protected $lockedFields = null;
+
+    /**
      * Specification of fields containing names of related users
      *
      * @var array
@@ -438,7 +446,7 @@ class SugarBean
         'nestedset',
     );
 
-    /*
+    /**
      * @var \Sugarcrm\Sugarcrm\Security\InputValidation\Request
      */
     protected $request;
@@ -454,14 +462,6 @@ class SugarBean
         'pmse_htmleditable_tinymce',
     );
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    protected function SugarBean()
-    {
-        self::__construct();
-    }
-    
     // FIXME: this will be removed, needed for ensuring BeanFactory is always used
     protected function checkBacktrace()
     {
@@ -499,8 +499,16 @@ class SugarBean
         global  $dictionary, $current_user;
 
         $this->db = DBManagerFactory::getInstance();
-        if (empty($this->module_name))
-            $this->module_name = $this->module_dir;
+        if (empty($this->module_name)) {
+            // is it a sub module
+            $slash = strrpos($this->module_dir, '/');
+            if ($slash !== false) {
+                $GLOBALS["log"]->warning('module_name is not set for ' . $this->module_dir);
+                $this->module_name = substr($this->module_dir, $slash + 1);
+            } else {
+                $this->module_name = $this->module_dir;
+            }
+        }
 
         if(isset($this->disable_team_security)){
             $this->disable_row_level_security = $this->disable_team_security;
@@ -572,7 +580,7 @@ class SugarBean
             self::$loadedDefs[$this->object_name]['list_fields'] =& $this->list_fields;
             self::$loadedDefs[$this->object_name]['required_fields'] =& $this->required_fields;
             self::$loadedDefs[$this->object_name]['field_name_map'] =& $this->field_name_map;
-            self::$loadedDefs[$this->object_name]['field_defs'] =& $this->field_defs;
+            self::$loadedDefs[$this->object_name]['field_defs'] = $this->field_defs;
             self::$loadedDefs[$this->object_name]['name_format_map'] =& $this->name_format_map;
         }
         else
@@ -581,7 +589,8 @@ class SugarBean
             $this->list_fields =& self::$loadedDefs[$this->object_name]['list_fields'];
             $this->required_fields =& self::$loadedDefs[$this->object_name]['required_fields'];
             $this->field_name_map =& self::$loadedDefs[$this->object_name]['field_name_map'];
-            $this->field_defs =& self::$loadedDefs[$this->object_name]['field_defs'];
+            $this->field_defs = isset(self::$loadedDefs[$this->object_name]['field_defs']) ?
+                self::$loadedDefs[$this->object_name]['field_defs'] : null;
             $this->name_format_map =& self::$loadedDefs[$this->object_name]['name_format_map'];
             $this->added_custom_field_defs = true;
 
@@ -593,6 +602,10 @@ class SugarBean
             if(!empty($dictionary[$this->object_name]['optimistic_locking']))
             {
                 $this->optimistic_lock=true;
+            }
+
+            if (isset($dictionary[$this->object_name]['importable'])) {
+                $this->importable = isTruthy($dictionary[$this->object_name]['importable']);
             }
         }
 
@@ -753,32 +766,33 @@ class SugarBean
      * Before calling this function, check whether audit has been enabled for the table/module or not.
      * You would set the audit flag in the implemting module's vardef file.
      *
+     * @param bool $includeRelateIdFields true if we also want return the id fields for relate fields
      * @return array
      * @see is_AuditEnabled
      *
      * Internal function, do not override.
      */
-    function getAuditEnabledFieldDefinitions()
+    function getAuditEnabledFieldDefinitions($includeRelateIdFields = false)
     {
-        if (!isset($this->audit_enabled_fields))
-        {
-            $this->audit_enabled_fields=array();
-            foreach ($this->field_defs as $field => $properties)
-            {
-                if (
-                (
-                $field == 'team_id' or
-                !empty($properties['Audited']) || !empty($properties['audited']))
-                && SugarACL::checkField($this->module_dir, $field, "access", array("bean" => $this))
-                )
-                {
-
-                    $this->audit_enabled_fields[$field]=$properties;
+        if (!isset($this->audit_enabled_fields) || !isset($this->auditEnabledRelateFields)) {
+            $this->audit_enabled_fields = array();
+            $this->auditEnabledRelateFields = array();
+            foreach ($this->field_defs as $field => $properties) {
+                if (($field === 'team_id' || !empty($properties['Audited']) || !empty($properties['audited']))
+                    && SugarACL::checkField($this->module_dir, $field, 'access', array('bean' => $this))) {
+                    $this->audit_enabled_fields[$field] = $properties;
+                    if ($properties['type'] === 'relate' && !empty($properties['id_name'])) {
+                        // we need this id_field => relate_field mapping for 'view change log'
+                        $this->auditEnabledRelateFields[$properties['id_name']] = $properties;
+                    }
                 }
             }
-
         }
-        return $this->audit_enabled_fields;
+        if ($includeRelateIdFields) {
+            return array_merge($this->audit_enabled_fields, $this->auditEnabledRelateFields);
+        } else {
+            return $this->audit_enabled_fields;
+        }
     }
 
     /**
@@ -970,7 +984,7 @@ class SugarBean
         }
 
         $fields = array_filter($this->field_defs, function($def) use ($property, $filter) {
-            return in_array($def[$property], $filter);
+            return (isset($def[$property]) && in_array($def[$property], $filter));
         });
         return $fields;
     }
@@ -1824,6 +1838,7 @@ class SugarBean
         global $current_user, $action;
 
         $isUpdate = $this->isUpdate();
+        $prev_date_modified = isset($this->date_modified) ? $this->date_modified : null;
         $this->setModifiedDate();
         $this->_checkOptimisticLocking($action, $isUpdate);
         $this->setModifiedUser();
@@ -1869,6 +1884,10 @@ class SugarBean
         $this->call_custom_logic("before_save", $custom_logic_arguments);
         unset($custom_logic_arguments);
 
+        if (!$this->update_date_modified) {
+            $this->date_modified = $prev_date_modified;
+        }
+
         if(isset($this->custom_fields))
         {
             $this->custom_fields->bean = $this;
@@ -1898,7 +1917,7 @@ class SugarBean
             if ($isUpdate && !isset($this->fetched_row)) {
                 $GLOBALS['log']->debug('Auditing: Retrieve was not called, audit record will not be created.');
             } else {
-                $auditFields = $this->getAuditEnabledFieldDefinitions();
+                $auditFields = $this->getAuditEnabledFieldDefinitions(true);
                 $auditDataChanges = array_intersect_key($this->dataChanges, $auditFields);
             }
         }
@@ -1962,6 +1981,12 @@ class SugarBean
         {
             if ($dep->getFireOnLoad())
             {
+                $dep->fire($this);
+            }
+        }
+        $deps = DependencyManager::getDependentFieldDependencies($this->field_defs, 'save');
+        foreach($deps as $dep) {
+            if ($dep->getFireOnLoad()) {
                 $dep->fire($this);
             }
         }
@@ -2477,18 +2502,22 @@ class SugarBean
                     }
                     $GLOBALS['log']->debug('save_relationship_changes(): From relationship_field array - adding a relationship record: '.$rel_name . ' = ' . $this->$id);
                     //already related the new relationship id so let's set it to false so we don't add it again using the _REQUEST['relate_i'] mechanism in a later block
-                    $this->load_relationship($rel_name);
-                    $rel_add = $this->$rel_name->add($this->$id);
-                    // move this around to only take out the id if it was save successfully
-                    if ($this->$id == $new_rel_id && $rel_add == true) {
-                        $new_rel_id = false;
+                    //ut exempt to be used with unit tests that mock link classes
+                    if ($this->load_relationship($rel_name)) {
+                        $rel_add = $this->$rel_name->add($this->$id);
+                        // move this around to only take out the id if it was save successfully
+                        if ($this->$id == $new_rel_id && $rel_add == true) {
+                            $new_rel_id = false;
+                        }
                     }
                 } else {
                     //if before value is not empty then attempt to delete relationship
                     if (!empty($this->rel_fields_before_value[$id])) {
                         $GLOBALS['log']->debug('save_relationship_changes(): From relationship_field array - attempting to remove the relationship record, using relationship attribute' . $rel_name);
-                        $this->load_relationship($rel_name);
-                        $this->$rel_name->delete($this->id, $this->rel_fields_before_value[$id]);
+                        //ut exempt to be used with unit tests that mock link classes
+                        if ($this->load_relationship($rel_name)) {
+                            $this->$rel_name->delete($this->id, $this->rel_fields_before_value[$id]);
+                        }
                     }
                 }
             }
@@ -2520,16 +2549,25 @@ class SugarBean
         {
             if ($def ['type'] == 'relate' && isset ($def ['id_name']) && isset ($def ['link'])) {
                 $linkField = $def ['link'];
-                if (isset ($def['save']))
+                if (isset($def['save']))
                 {
-                    if (in_array($def['id_name'], $exclude) || in_array($def['id_name'], $this->relationship_fields))
+                    if (in_array($def['id_name'], $exclude) || in_array($def['id_name'], $this->relationship_fields)) {
                         continue; // continue to honor the exclude array and exclude any relationships that will be handled by the relationship_fields mechanism
+                    }
+
+                    if (isset($this->rel_fields_before_value[$def['id_name']]) &&
+                        $this->rel_fields_before_value[$def['id_name']] === $this->$def['id_name']) {
+                        // the values didn't change, so ignore it.
+                        continue;
+                    }
 
                     if (isset($this->field_defs[$linkField])) {
                         if ($this->load_relationship($linkField)) {
                             $idName = $def['id_name'];
+                            // we need to store the new value, since if the delete() runs, the value will equal NULL
+                            $newValue = $this->$idName;
 
-                            if (!empty($this->rel_fields_before_value[$idName]) && empty($this->$idName)) {
+                            if (!empty($this->rel_fields_before_value[$idName])) {
                                 //if before value is not empty then attempt to delete relationship
                                 $GLOBALS['log']->debug("save_relationship_changes(): From field_defs - attempting to remove the relationship record: {$def [ 'link' ]} = {$this->rel_fields_before_value[$def [ 'id_name' ]]}");
                                 $success = $this->{$def['link']}->delete($this->id, $this->rel_fields_before_value[$def['id_name']]);
@@ -2542,10 +2580,10 @@ class SugarBean
                                 $GLOBALS['log']->debug("save_relationship_changes(): From field_defs - attempting to remove the relationship record returned " . var_export($success, true));
                             }
 
-                            if (!empty($this->$idName) && is_string($this->$idName)) {
+                            if (!empty($newValue) && is_string($newValue)) {
                                 $GLOBALS['log']->debug("save_relationship_changes(): From field_defs - attempting to add a relationship record - {$def [ 'link' ]} = {$this->{$def['id_name']}}");
 
-                                $success = $this->$linkField->add($this->$idName);
+                                $success = $this->$linkField->add($newValue);
 
                                 // just need to make sure it's true and not an array as it's possible to return an array
                                 if($success == true) {
@@ -3020,9 +3058,9 @@ class SugarBean
      * date/time and numeric values.
      *
      * @param string $id Optional, default -1, is set to -1 id value from the bean is used, else, passed value is used
-     * @param boolean $encode Optional, default true, encodes the values fetched from the database. 
-     *                        Replaces special characters including single and double qoutes with their  
-     *                        HTML entity values using htmlspecialchars. 
+     * @param boolean $encode Optional, default true, encodes the values fetched from the database.
+     *                        Replaces special characters including single and double qoutes with their
+     *                        HTML entity values using htmlspecialchars.
      *                        See php documentation for more information on htmlspecialchars().
      * @param boolean $deleted Optional, default true, if set to false deleted filter will not be added.
      *
@@ -3153,7 +3191,7 @@ class SugarBean
         //clear relationship.
         foreach ( $this->field_defs as $key => $def )
         {
-            if ($def [ 'type' ] == 'relate' && isset ( $def [ 'id_name'] ) && isset ( $def [ 'link'] ) && isset ( $def[ 'save' ])) {
+            if ($def [ 'type' ] == 'relate' && isset ( $def [ 'id_name'] ) && isset ( $def [ 'link'] ) && isset($def['save'])) {
                 if (isset($this->$key)) {
                     $this->rel_fields_before_value[$key]=$this->$key;
                     if (isset($this->{$def['id_name']})) {
@@ -3494,7 +3532,7 @@ class SugarBean
             count($beans)
         );
 
-        $GLOBALS['log']->fatal($msg);
+        $GLOBALS['log']->error($msg);
 
         // detailed logging
         $counts = array();
@@ -5491,7 +5529,8 @@ class SugarBean
 	function track_view($user_id, $current_module, $current_view='')
 	{
 	    $trackerManager = TrackerManager::getInstance();
-		if($monitor = $trackerManager->getMonitor('tracker')){
+        $monitor = $trackerManager->getMonitor('tracker');
+		if($monitor && $trackerManager->isMonitorEnabled($monitor)){
 	        $monitor->setValue('team_id', $GLOBALS['current_user']->getPrivateTeamID());
 	        $monitor->setValue('date_modified', $GLOBALS['timedate']->nowDb());
 	        $monitor->setValue('user_id', $user_id);
@@ -5768,7 +5807,15 @@ class SugarBean
                 }
             }
 
+            // creator should be present after removal
+            $createdBy = null;
+            if (isset($this->field_defs['created_by'])) {
+                $createdBy = $this->created_by;
+            }
             $this->mark_relationships_deleted($id);
+            if ($createdBy) {
+                $this->created_by = $createdBy;
+            }
             if (isset($this->field_defs['modified_user_id'])) {
                 if (!empty($current_user)) {
                     $this->modified_user_id = $current_user->id;
@@ -7192,8 +7239,10 @@ class SugarBean
 
     /**
     * Send assignment notifications and invites for meetings and calls
+     * @param bool $check_notify
     */
-    private function _sendNotifications($check_notify){
+    protected function _sendNotifications($check_notify)
+    {
         if($check_notify || (isset($this->notify_inworkflow) && $this->notify_inworkflow == true) // cn: bug 5795 - no invites sent to Contacts, and also bug 25995, in workflow, it will set the notify_on_save=true.
            && !$this->isOwner($this->created_by) )  // cn: bug 42727 no need to send email to owner (within workflow)
         {
@@ -7392,7 +7441,20 @@ class SugarBean
             if ($this->is_relate_field($field)) {
 
                 //check to see if the related field name is part of the passed in 'where' statement
-                if (!empty($where) && strpos($where,"$field ") !== false) {
+                $inWhere = (!empty($where) && preg_match("/(^|\W)$field($|\W)/", $where));
+
+                //in some cases, the field is composed of table'.'field rname, check to see if this is one of those cases
+                if(!$inWhere &&
+                    !empty($fields[$field]) &&
+                    !empty($fields[$field]['table']) &&
+                    !empty($fields[$field]['rname']) &&
+                    strpos($where, $fields[$field]['table'].'.'.$fields[$field]['rname'])
+                ) {
+                    $inWhere = true;
+                }
+
+                //process if the field was found in the 'where' statement
+                if ($inWhere) {
 
                     //initialize fields to exclude array element if not set
                     $module_name_lower = strtolower($this->module_dir);
@@ -7597,7 +7659,7 @@ class SugarBean
         foreach ($fieldDefs as $def) {
             if (!empty($def['formula'])) {
                 $expr = Parser::evaluate($def['formula'], $this);
-                $fields = $this->get_formula_related_fields($expr, $relatedLinkName);
+                $fields = Parser::getFormulaRelateFields($expr, $relatedLinkName);
                 $result = array_merge($result, $fields);
             }
         }
@@ -7608,52 +7670,16 @@ class SugarBean
     /**
      * Retrieve names of fields of the bean related by the given link included
      * in expression
-     *
+     * @deprecated
+     * @see Praser::getFormulaRelateFields
      * @param AbstractExpression $expr Parsed formula expression or nested expression
      * @param string $linkName Name of the link to filter "related" expressions by
      * @return array
      */
     protected function get_formula_related_fields(AbstractExpression $expr, $linkName)
     {
-        $result = array();
-
-        if ($expr instanceof RelatedFieldExpression
-            || $expr instanceof MinRelatedExpression
-            || $expr instanceof MaxRelatedExpression
-            || $expr instanceof AverageRelatedExpression
-            || $expr instanceof SumRelatedExpression
-            || $expr instanceof CurrencySumRelatedExpression
-        ) {
-            /** @var AbstractExpression[] $params */
-            $params = $expr->getParameters();
-
-            // here we don't evaluate the first param since we need the field name
-            // but not it's value
-            if ($params[0] instanceof SugarFieldExpression
-                && $params[0]->varName == $linkName
-            ) {
-                $result[] = $params[1]->evaluate();
-            }
-            return $result;
-        }
-
-        $params = $expr->getParameters();
-        if (is_array($params)) {
-            /** @var AbstractExpression $param */
-            foreach ($params as $param) {
-                $result = array_merge(
-                    $result,
-                    $this->get_formula_related_fields($param, $linkName)
-                );
-            }
-        } else if ($params instanceof AbstractExpression) {
-             $result = array_merge(
-                 $result,
-                 $this->get_formula_related_fields($params, $linkName)
-             );
-        }
-
-        return array_unique($result);
+        SugarAutoLoader::load('include/Expressions/Expression/Parser/Parser.php');
+        return Parser::getFormulaRelateFields($expr, $linkName);
     }
 
     /**
@@ -8055,4 +8081,121 @@ class SugarBean
     {
         return $this->htmlFieldTypes;
     }
+
+    /**
+     * @return string
+     */
+    public function getModuleName()
+    {
+        $properties = (new ReflectionClass($this))->getDefaultProperties();
+        if (!empty($properties['module_name'])) { // changed in child class
+            $moduleName = $properties['module_name'];
+        } else { // default case, empty SugarBean::module_name
+            $moduleName = $this->module_name;
+        }
+        return $moduleName;
+    }
+
+    /**
+     * All module types have a "name" type field that is central to the module.
+     * This method returns that name. This could be a different value depending
+     * on the module type. For example, Person type modules should return a full
+     * name. File type modules would return document name.
+     *
+     * This method is very similar to {@see get_summary_text} but behaves differently.
+     *
+     * @return string
+     */
+    public function getRecordName()
+    {
+        return isset($this->name) ? trim($this->name) : '';
+    }
+
+    /**
+     * Gets the locked fields for a bean, if there are any
+     * @return array
+     */
+    public function getLockedFields()
+    {
+        // if no id, return immediately, do not cache
+        if (empty($this->id)) {
+            return array();
+        }
+
+        if ($this->lockedFields !== null) {
+            return $this->lockedFields;
+        }
+
+        // Set the locked field array now
+        $this->lockedFields = array();
+
+        // Get the related beans
+        $relBeans = $this->getLockedFieldRelBeans();
+
+        // And from each bean, get the locked fields property, making sure to transform
+        // it into an array
+        foreach ($relBeans as $relBean) {
+            $merge = empty($relBean->pro_locked_variables) ? array() : json_decode($relBean->pro_locked_variables);
+            $this->lockedFields = array_merge($this->lockedFields, $merge);
+        }
+
+        // Make the field list unique
+        $this->lockedFields = array_unique($this->lockedFields);
+
+        // Send it back
+        return $this->lockedFields;
+    }
+
+    /**
+     * Gets related process definition beans, if there are any
+     * @return array
+     */
+    public function getLockedFieldRelBeans()
+    {
+        // Check to see if this bean implements locked fields
+        if ($this->id
+            && ($relField = $this->getLockedFieldRelField())
+            && PMSEEngineUtils::doesModuleHaveLockedFields($this->getModuleName())
+        ) {
+            // If there is a relationship, grab the beans from it
+            if ($this->load_relationship($relField)) {
+                return $this->$relField->getBeans([], ['encode' => false]);
+            }
+        }
+
+        return array();
+    }
+
+    /**
+     * Gets the locked field link field
+     * @return string
+     */
+    public function getLockedFieldRelField()
+    {
+        return isset($this->field_defs['locked_fields']['link']) ? $this->field_defs['locked_fields']['link'] : '';
+    }
+
+    /**
+     * Checks whether email notification should be send or not
+     * @return bool
+     */
+    public function isEmailNotificationNeeded()
+    {
+        global $current_user;
+
+        $sendingEmailNeeded = false;
+        $old_assigned_user_id = CalendarEvents::getOldAssignedUser($this->module_dir, $this->id);
+        $isInstalling = isset($GLOBALS['installing']) && $GLOBALS['installing'] === true;
+
+        if (!$isInstalling &&                                       // this is not installing process
+            !empty($this->assigned_user_id) &&                      // assigned user exists
+            $this->assigned_user_id != $old_assigned_user_id &&     // assigned user is changed
+            $this->assigned_user_id != $current_user->id            // assigned user is not a current user
+        ) {
+            $sendingEmailNeeded = true;
+        }
+
+        return $sendingEmailNeeded;
+    }
+
 }

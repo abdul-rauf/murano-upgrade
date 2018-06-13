@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-	'LBL_BLANK'	=> '-Tuščia-',
+	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Skambučiai',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Skambutis',
     'LBL_MODULE_TITLE' => 'Skambučiai: Pradžia',
@@ -19,7 +19,7 @@ $mod_strings = array (
     'LBL_NEW_FORM_TITLE' => 'Sukurti paskyrimą',
     'LBL_LIST_CLOSE' => 'Uždaryti',
     'LBL_LIST_SUBJECT' => 'Tema',
-    'LBL_LIST_CONTACT' => 'Kontaktai',
+    'LBL_LIST_CONTACT' => 'Kontaktas',
     'LBL_LIST_RELATED_TO' => 'Susijęs su',
     'LBL_LIST_RELATED_TO_ID' => 'Susiję su ID',
     'LBL_LIST_DATE' => 'Pradžios data',
@@ -33,7 +33,7 @@ $mod_strings = array (
     'LBL_DESCRIPTION' => 'Aprašymas:',
     'LBL_STATUS' => 'Statusas:',
     'LBL_DIRECTION' => 'Kryptis:',
-    'LBL_DATE' => 'Pradžios laikas:',
+    'LBL_DATE' => 'Pradžios data:',
     'LBL_DURATION' => 'Trukmė',
     'LBL_DURATION_HOURS' => 'Trukmė valandomis:',
     'LBL_DURATION_MINUTES' => 'Trukmė minutėmis:',
@@ -65,14 +65,14 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'El. paštas',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Siųsti el. laišką visiems dalyviams',
     'LBL_EMAIL_REMINDER' => 'Priminimas el. paštu',
-    'LBL_EMAIL_REMINDER_TIME' => 'El. paštu priminimo laikas',
-    'LBL_POPUP_REMINDER_TIME' => 'Popup Reminder Time',
+    'LBL_EMAIL_REMINDER_TIME' => 'Siųsti priminimo laiką el. paštu',
+    'LBL_POPUP_REMINDER_TIME' => 'Iššokantis priminimo laiko langas',
     'LBL_SEND_BUTTON_TITLE'=>'Siųsti pakvietimus [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Siųsti pakvietimus',
 	'LBL_DATE_END'=>'Pabaigos data',
 	'LBL_TIME_END'=>'Pabaigos laikas',
-	'LBL_REMINDER_TIME'=>'Priminimo laikas',
+    'LBL_REMINDER_TIME'=>'Priminimo laikas',
     'LBL_EMAIL_REMINDER_SENT' => 'Priminimas el. paštu išsiųstas',
     'LBL_SEARCH_BUTTON'=> 'Ieškoti',
     'LBL_ACTIVITIES_REPORTS' => 'Priminimų ataskaita',
@@ -131,10 +131,11 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Ištrinti visus pasikartojimus',
     'LBL_DATE_END_ERROR' => 'Pabaigos data yra anksčiau nei pradžios data.',
     'LBL_REPEAT_PARENT_ID' => 'Pasikartojantis tėvo ID',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Skambučio pasikartojimo ID. Pradinė skambučio pradžios data',
     'LBL_RECURRING_SOURCE' => 'Pasikartojantis šaltinis',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Ar tikrai norite ištrinti pasikartojančius įrašus?',
     'LBL_RECURRING_LIMIT_ERROR' => 'Šis pasikartojantis skambutis nebegali būti daug suplanuotas, kadangi jis viršija leistina pasikartojimų $limit skaičių.',
-    'LBL_RECURRENCE' => 'Pasikartojimas',
+    'LBL_RECURRENCE' => 'Pasikartojimai',
     'LBL_SYNCED_RECURRING_MSG' => 'Šis skambutis buvo užregistruotas kitoje sistemoje ir po to buvo įkeltas į SugarCRM. Jei norite koreguoti šį skambutį, prašome tai atlikti kitoje sistemoje.',
     'LBL_RELATED_TO' => 'Susiję su:',
     'LBL_CREATE_MODULE' => 'Suplanuoti skambutį',

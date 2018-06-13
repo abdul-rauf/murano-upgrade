@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'A kompatibilitás ellenőrzése során a rendszer hibákat talált. A hibátlan telepítés érdekében kérem, tekintse át az alább felsorolt problémákat és orvosolja őket, majd ellenőrizze az elemeket újra, esetleg ismételje meg a telepítést!',
     'ERR_CHECKSYS_CALL_TIME'            => 'Hívásidő referencia engedélyezése bekapcsolva (kikapcsolása a php.ini fájlban történik)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nincs találat: a Sugar időzítő korlátozott funkcionalitással fog futni. Az email archiváló szolgáltatás egyáltalán nem fog működni.',
+	'ERR_CHECKSYS_CURL'					=> 'Nem található: A Sugar ütemező csak korlátozott funkcionalitással futható. Az e-mail archiváló funkció nem fog működni.',
     'ERR_CHECKSYS_IMAP'					=> 'Nincs találat: a bejövő emailek és az email kampányok megkövetelik az IMAP könyvtárak használatát. Egyik sem fog működni.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'A Magic Quotes GPC nem kapcsolható be az MS SQL szerver használatakor.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Figyelmeztetés:',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'Adatbázis nem elérhető',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Adatbázis-támogatás nem található. Kérem, győződjön meg arról, hogy rendelkezik a megfelelő meghajtóval a következő adatbázis típusok legalább egyikére vonatkozóan: MySQL vagy MS SQLServer. Az Ön PHP verziójától függően vagy a php-ini fájlban kell módosításokat végezni, vagy a vonatkozó bináris fájlt kell ismételten összeállítani. Kérem, olvasson utána a PHP felhasználói kézikönyvében, hogy lehet bekapcsolni az adatbázis-támogatást!.<br><br>A SugarCRM PRO esetében az Oracle és DB2 nem támogatott adatbázisok. A támogatott adatbázisok és más platformok listáját itt találja: <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Egyes XML-feldolgozó könyvtárakhoz kapcsolódó funkciók, amelyek szükségesek a SugarCRM-hez, nem találhatók. Az Ön PHP verziójától függően vagy a php-ini fájlban kell módosításokat végezni, vagy a vonatkozó bináris fájlt kell ismételten összeállítani. Kérem, olvasson utána a PHP felhasználói kézikönyvében!',
+    'LBL_CHECKSYS_CSPRNG' => 'Véletlenszerű számgenerátor',
     'ERR_CHECKSYS_MBSTRING'             => 'Egyes Multibyte Strings (mbstring) PHP kiterjesztéshez kapcsolódó funkciók, amelyek szükségesek a SugarCRM-hez, nem találhatók. <br /><br />Az alapértelmezett beállítások szerint az mbstring modul le van tiltva a PHP-ben, amit aktiválni kell az --enable-mbstring kifejezéssel. Kérem, olvasson utána a PHP felhasználói kézikönyvében, hogy lehet bekapcsolni az mbstring támogatást!',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'A session.save_path beállítások hiányoznak vagy helytelenek a PHP konfigurációs fájlban (php.ini). Be kell állítania a save_path definíciót a php.ini fájlban vagy igazolnia kell, hogy a save_path-ban megjelölt könyvtárak léteznek.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'ZIP támogatás nem található: a SugarCRM igényli a ZIP támogatást a tömörített fájlok feldolgozásához.',
     'ERR_CHECKSYS_BCMATH'				=> 'Nem található BCMATH támogatás: BCMATH támogatás szükséges a tetszőleges pontosságú matematika alkalmazásához.',
     'ERR_CHECKSYS_HTACCESS'             => 'A .htaccess teszt sikertelen. Ez általában azt jelenti, hogy a Sugar könyvtárra vonatkozó AllowOverride beállítások hiányosak.',
+    'ERR_CHECKSYS_CSPRNG' => 'CSPRNG kivétel',
 	'ERR_DB_ADMIN'						=> 'A megadott adatbázis adminisztrátor felhasználónév és / vagy jelszó érvénytelen, illetve a kapcsolódás az adatbázishoz sikertelen. Kérem, adjon meg egy érvényes felhasználónevet és jelszót! (Hiba:',
     'ERR_DB_ADMIN_MSSQL'                => 'A megadott adatbázis adminisztrátor felhasználónév és / vagy jelszó érvénytelen, illetve a kapcsolódás az adatbázishoz sikertelen. Kérem, adjon meg egy érvényes felhasználónevet és jelszót!',
 	'ERR_DB_EXISTS_NOT'					=> 'A megadott adatbázis nem létezik.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'A kulcs kötelező az alkalmazás funkcióinak használatához, de magához a telepítéshez nem. Most nem kell beírnia semmit, de a telepítés befejezése után igen.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Minimális információk a telepítéshez. Új felhasználóknak ajánlott.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Több választási lehetőség felkínálása a telepítés során. A legtöbb opció később az admin felületen lesz elérhető a telepítés után. Haladóknak ajánlott.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Több választási lehetőség felkínálása a telepítés során. A legtöbb opció később az admin felületen lesz elérhető a telepítés után. Haladóknak ajánlott.',
 	'LBL_LANG_1'						=> 'Ha az alapértelmezettel (US-angol) nem egyező nyelvi csomagot kíván használni, most feltöltheti a kívánt csomagot. Később az alkalmazásból közvetlen is telepíthet nyelvi csomagot. Amennyiben átugraná ezt a lépést, kattintson a Tovább gombra!',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Telepít',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Eltávolítás',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'Licenc elfogadása',
     'LBL_LICENSE_CHECKING'              => 'Rendszer kompatibilitásának ellenőrzése.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Környezet ellenőrzése',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'Adatbázis tanúsítványok ellenőrzése.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'DB, FTS hitelesítő adatok ellenőrzése.',
     'LBL_LICENSE_CHECK_PASSED'          => 'A rendszer kompatibilisnek tűnik.',
     'LBL_LICENSE_REDIRECT'              => 'Átirányítás ennyi idő múlva:',
 	'LBL_LICENSE_DIRECTIONS'			=> 'Ha kéznél vannak a licencadatai, adja meg őket alább!',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'A telepítés előtt, kérem, olvassa el az alábbi fontos információkat! Az információk segítenek meghatározni, hogy készen áll-e az alkalmazás telepítésére.',
 
 
-	'LBL_WELCOME_2'						=> 'A telepítési dokumentáció megtekintéséhez kérem, látogasson el a <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a> oldalra!<br /><br />Amennyiben kapcsolatba szeretne lépni a SugarCRM Support kollégáival, kérem, jelentkezzen be a <a target="_blank" href="http://support.sugarcrm.com">SugarCRM Support Portal</a> oldalon és és írja meg kérdését!',
+	'LBL_WELCOME_2'						=> 'A dokumentáció telepítéséhez, kérjük látpgasson el az alábbi oldalra<a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>.<BR><BR>Ha Sugar CRM támogató mérnöki segítségre van szüksége a telepítéshez, jelentkezzen be a <a target="_blank" href="http://support.sugarcrm.com">Sugar CRM Támogatás Portáljára</a> és nyújtson be egy támogatást igénylő esetet.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> 'Válasszon nyelvet',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Telepítő Varázsló',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Üdvözöljük a SugarCRM-ben',
@@ -452,7 +455,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'Éjszakai email-kampány indítása',
 	'LBL_OOTB_PRUNE'		=> 'Adatbázis vágása a hónap első napján',
     'LBL_OOTB_TRACKER'		=> 'Követő táblázatok vágása',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Email emlékeztető figyelmeztetések futtatása',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Futtassa az Email Emlékeztető Értesítéseket',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'tracker_sessions tábla frissítése',
     'LBL_OOTB_CLEANUP_QUEUE' => 'Munkalista törlése',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'Keresőmotor típusa',
     'LBL_FTS_HELP'      => 'A teljes szövegre vonatkozó keresés engedélyezéséhez válassza ki a keresőmotor típusát és adja meg  annak portját és kiszolgálóját! A Sugar beépített támogatást tartalmaz az elasticsearch motorhoz.',
     'LBL_FTS_REQUIRED'    => 'Elastic Search szükséges.',
-    'LBL_FTS_ERROR'    => 'A teljes szövegre vonatkozó keresés szerveréhez nem lehet kapcsolódni. Kérem, tekintse át a beállításait!',
+    'LBL_FTS_CONN_ERROR'    => 'Nem sikerült csatlakozni a teljes szövegű keresés szerverre, kérjük ellenőrízze beállításait.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'Nem elérhető a teljes szövegű keresés szerver verziója, kérjük ellenőrízze beállításait.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'A rugalmas keresés nem támogatott verzióját észleltük. Kérjük használja az alábbi változatokat: %s',
 
     'LBL_PATCHES_TITLE'     => 'Legutolsó javító csomagok telepítése',
     'LBL_MODULE_TITLE'      => 'Nyelvi csomagok telepítése',

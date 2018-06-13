@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 10:45:20
+// created: 2018-06-13 11:24:59
 $viewdefs['Leads']['DetailView'] = array (
   'templateMeta' => 
   array (
@@ -182,7 +182,7 @@ $viewdefs['Leads']['DetailView'] = array (
         ),
         1 => 
         array (
-          'name' => 'email1',
+          'name' => 'email',
           'studio' => 
           array (
             'editField' => true,

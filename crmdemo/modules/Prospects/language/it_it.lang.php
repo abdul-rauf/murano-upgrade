@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -81,7 +81,7 @@ $mod_strings = array (
   'LBL_ASSISTANT' => 'Assistente:',
   'LBL_ASSISTANT_PHONE' => 'Telefono Assistente:',
   'LBL_DO_NOT_CALL' => 'Non chiamare:',
-  'LBL_EMAIL_OPT_OUT' => 'Non vuole ricevere email:',
+  'LBL_EMAIL_OPT_OUT' => 'Scelta esclusione email:',
   'LBL_PRIMARY_ADDRESS' => 'Indirizzo principale:',
   'LBL_ALTERNATE_ADDRESS' => 'Altro Indirizzo:',
   'LBL_ANY_ADDRESS' => 'Altro Indirizzo:',
@@ -105,7 +105,7 @@ $mod_strings = array (
   'LNK_NEW_OPPORTUNITY' => 'Nuova Opportunità',
   'LNK_NEW_CASE' => 'Nuovo Reclamo',
   'LNK_NEW_NOTE' => 'Nuova Nota o Allegato',
-  'LNK_NEW_CALL' => 'Nuova Chiamata',
+  'LNK_NEW_CALL' => 'Log chiamata',
   'LNK_NEW_EMAIL' => 'Archivia Email',
   'LNK_NEW_MEETING' => 'Nuova Riunione',
   'LNK_NEW_TASK' => 'Nuovo Compito',
@@ -135,14 +135,14 @@ $mod_strings = array (
   'LBL_DEFAULT_SUBPANEL_TITLE'=>'Obiettivi',
   'LBL_PROSPECT_LIST' => 'Lista Obiettivi',
   'LBL_CONVERT_BUTTON_KEY' => 'V',
-  'LBL_CONVERT_BUTTON_TITLE' => 'Converti Obiettivo',
-  'LBL_CONVERT_BUTTON_LABEL' => 'Converti Obiettivo',
-  'LBL_CONVERTPROSPECT'=>'Converti Obiettivo',
+  'LBL_CONVERT_BUTTON_TITLE' => 'Converti obiettivo',
+  'LBL_CONVERT_BUTTON_LABEL' => 'Converti obiettivo',
+  'LBL_CONVERTPROSPECT'=>'Converti obiettivo',
   'LNK_NEW_CONTACT'=>'Nuovo Contatto',
   'LBL_CREATED_CONTACT'=>"Creato un nuovo contatto",
   'LBL_BACKTO_PROSPECTS'=>'Torna agli Obiettivi',
   'LBL_CAMPAIGNS'=>'Campagne',
-  'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Log Campagna',
+  'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Log campagne',
   'LBL_TRACKER_KEY'=>'Chiave Tracker',
   'LBL_LEAD_ID'=>'ID Lead',
   'LBL_LEAD' => 'Lead',
@@ -197,5 +197,5 @@ Per creare un {{module_name}}:
  - Cliccare "Visualizza di più" per visualizzare ulteriori campi se necessario.
 2. Cliccare "Salva" per finalizzare il nuovo record e ritornare alla pagina precedenter.',
 
-    'LBL_FILTER_PROSPECTS_REPORTS' => 'Report Target',
+    'LBL_FILTER_PROSPECTS_REPORTS' => 'Report degli obiettivi',
 );

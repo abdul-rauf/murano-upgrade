@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -282,7 +282,7 @@ $mod_strings = array (
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} содержит потенциальных клиентов, которые могут быть заинтересованы в продукте или услуге, предоставляемой Вашей компанией. Как только {{module_name}} квалифицирован как продажа {{opportunities_singular_module}}, {{plural_module_name}} могут быть конвертированы в {{contacts_module}}, {{opportunities_module}}, и {{accounts_module}}. Вы можете разными способами создать {{plural_module_name}} в Sugar, как через модуль {{plural_module_name}}, дублирование, импорт {{plural_module_name}}, и т. п. Как только создана запись {{module_name}}, Вы можете просмотреть и редактировать информацию, касающуюся {{module_name}}, используя режим просмотра записи {{plural_module_name}}.',
+    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} содержит потенциальных клиентов, которые могут быть заинтересованы в продукте или услуге, предоставляемой Вашей компанией. Как только {{module_name}} квалифицирован как {{opportunities_singular_module}} продажи, {{plural_module_name}} могут быть конвертированы в {{contacts_module}}, {{opportunities_module}}, и {{accounts_module}}. Существует множество способов создания записи {{plural_module_name}} в Sugar, используя модуль {{plural_module_name}}, дублирование, импорт данных модуля {{plural_module_name}} и т. п. После создания записи {{module_name}} можно просматривать и редактировать информацию, касающуюся модуля {{module_name}}, используя режим просмотра записи {{plural_module_name}}.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{plural_module_name}} модуль содержит потенциальных клиентов, которые могут быть заинтересованы в продукте или услуге, предоставляемые Вашей компанией.

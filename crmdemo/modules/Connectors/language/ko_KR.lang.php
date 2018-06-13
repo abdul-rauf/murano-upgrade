@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,10 +14,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $mod_strings = array(
 
     'LBL_ADD_MODULE' => '추가',
-    'LBL_ADDRCITY' => '시:',
+    'LBL_ADDRCITY' => '시',
     'LBL_ADDRCOUNTRY' => '국가:',
     'LBL_ADDRCOUNTRY_ID' => '국가ID',
-    'LBL_ADDRSTATEPROV' => '도:',
+    'LBL_ADDRSTATEPROV' => '도',
     'LBL_ADMINISTRATION' => '관리자 연결기',
     'LBL_ADMINISTRATION_MAIN' => '설정 연결기',
     'LBL_AVAILABLE' => '사용가능',
@@ -43,10 +43,10 @@ $mod_strings = array(
     'LBL_MODIFY_DISPLAY_PAGE_TITLE' => '연결기 설정: 연결기 작동',
     'LBL_MODULE_FIELDS' => '모듈 필드',
     'LBL_MODIFY_MAPPING_TITLE' => '지도 연결 필드',
-    'LBL_MODIFY_MAPPING_DESC' => '어떠한 연결 데이타가 보여지고 모듈기록으로 통합될지 결정하기위한 모듈필드의 연결 필드를 배치합니다.',
+    'LBL_MODIFY_MAPPING_DESC' => '어떠한 연결 데이타가 보여지고 모듈 기록으로 통합될지 결정하기 위한 모듈 필드의 연결 필드를 배치합니다.',
     'LBL_MODIFY_MAPPING_PAGE_TITLE' => '연결기 설정:연결 필드 배치',
     'LBL_MODIFY_PROPERTIES_TITLE' => '연결기 소유권 설정',
-    'LBL_MODIFY_PROPERTIES_DESC' => 'URLs 과 API키를 포함한 각각의 연결기의 소유권 만들기',
+    'LBL_MODIFY_PROPERTIES_DESC' => 'URL과 API키를 포함한 각각의 연결기의 소유권 만들기',
     'LBL_MODIFY_PROPERTIES_PAGE_TITLE' => '연결기 설정: 연결기 소유권 설정',
     'LBL_MODIFY_SEARCH_TITLE' => '연결기 검색 관리',
     'LBL_MODIFY_SEARCH' => '검색',

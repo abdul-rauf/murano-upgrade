@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -146,5 +146,23 @@ class SugarFieldFloat extends SugarFieldInt
         }
 
         return true;
+    }
+
+    /**
+     * Currently not supported.
+     * {@inheritDoc}
+     */
+    public function apiValidate(SugarBean $bean, array $params, $field, $properties)
+    {
+        return true;
+    }
+
+    /**
+     * Currently not supported.
+     * {@inheritDoc}
+     */
+    protected function getFieldRange($vardef)
+    {
+        return false;
     }
 }

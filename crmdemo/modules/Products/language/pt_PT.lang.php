@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -168,6 +168,6 @@ Para criar um {{module_name}}:
  - Clique em "Mostrar Mais" para mostrar campos adicionais se necessário.
 2. Clique em "Gravar" para finalizar o novo registo e regressar à página anterior.',
 
-    'LBL_MANUFACTURERS' => 'Fornecedores',
+    'LBL_MANUFACTURERS' => 'Fabricantes',
     'LBL_PRODUCT_POSITION' => 'Posição do pacote de produtos',
 );

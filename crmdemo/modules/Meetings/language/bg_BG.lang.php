@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'Електронна поща',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Изпращане на поща до всички поканени',
     'LBL_POPUP_REMINDER' => 'Напомняне с изскачащ прозорец',
-    'LBL_POPUP_REMINDER_TIME' => 'Напомняне',
+    'LBL_POPUP_REMINDER_TIME' => 'Час на напомняне с изскачащ прозорец',
     'LBL_EMAIL_REMINDER' => 'Напомняне по електронна поща',
-    'LBL_EMAIL_REMINDER_TIME' => 'Напомняне по електронна поща',
+    'LBL_EMAIL_REMINDER_TIME' => 'Час на напомняне по електронната поща',
     'LBL_REMOVE' => 'изтрий',
 	'LBL_SCHEDULING_FORM_TITLE' => 'График на дейностите',
 	'LBL_SEARCH_BUTTON'=> 'Търси',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Изтрий всички повторения',
     'LBL_DATE_END_ERROR' => 'Въведенета крайна дата е преди началната',
     'LBL_REPEAT_PARENT_ID' => 'Родителски идентификатор',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'Идентификатор на повторението на срещата. Начална дата на първата среща',
     'LBL_RECURRING_SOURCE' => 'Източник на повторение',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'Сигурни ли сте, че искате да премахнете всички периодично повтарящи се записи?',
     'LBL_RECURRENCE' => 'Регулярност',

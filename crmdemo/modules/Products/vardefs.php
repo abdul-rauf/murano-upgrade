@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -40,7 +40,8 @@ $dictionary['Product'] = array(
             'len' => '255',
             'source' => 'non-db',
             'source' => 'non-db',
-            'studio' => false
+            'studio' => false,
+            'massupdate' => false,
         ),
         'product_template_id' => array(
             'name' => 'product_template_id',
@@ -176,11 +177,6 @@ $dictionary['Product'] = array(
             'type' => 'id',
             'required' => false,
             'reportable' => false,
-            'function' => array(
-                'name' => 'getProductTypes',
-                'returns' => 'html',
-                'include' => 'modules/ProductTemplates/ProductTemplate.php'
-            ),
             'comment' => 'Product type (ex: hardware, software)'
         ),
         'quote_id' => array(
@@ -512,7 +508,7 @@ $dictionary['Product'] = array(
             'type' => 'decimal',
             'len' => '12',
             'precision' => '2',
-            'validation' => array('type' => 'range', 'greaterthan' => 0),
+            'validation' => array('type' => 'range', 'greaterthan' => -1),
             'comment' => 'Quantity in use',
             'default' => 1.0
         ),
@@ -542,11 +538,6 @@ $dictionary['Product'] = array(
             'vname' => 'LBL_SUPPORT_TERM',
             'type' => 'varchar',
             'len' => 100,
-            'function' => array(
-                'name' => 'getSupportTerms',
-                'returns' => 'html',
-                'include' => 'modules/ProductTemplates/ProductTemplate.php'
-            ),
             'comment' => 'Term (length) of support contract'
         ),
         'date_support_expires' => array(
@@ -653,9 +644,12 @@ $dictionary['Product'] = array(
         'date_closed_timestamp' => array(
             'name' => 'date_closed_timestamp',
             'vname' => 'LBL_DATE_CLOSED_TIMESTAMP',
-            'type' => 'int',
+            'type' => 'ulong',
             'reportable' => false,
-            'studio' => false
+            'studio' => false,
+            'enforced' => true,
+            'calculated' => true,
+            'formula' => 'timestamp($date_closed)',
         ),
         'next_step' => array(
             'name' => 'next_step',

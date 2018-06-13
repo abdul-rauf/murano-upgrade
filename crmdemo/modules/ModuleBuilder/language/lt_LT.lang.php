@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -11,27 +11,27 @@
  */
 
 $mod_strings = array(
-    'LBL_LOADING' => 'Kraunama' /*for 508 compliance fix*/,
-    'LBL_HIDEOPTIONS' => 'Paslėpti pasirinkimus' /*for 508 compliance fix*/,
-    'LBL_DELETE' => 'Trinti' /*for 508 compliance fix*/,
-    'LBL_POWERED_BY_SUGAR' => 'Sukurta SugarCRM' /*for 508 compliance fix*/,
+    'LBL_LOADING' => 'Įkeliama' /*for 508 compliance fix*/,
+    'LBL_HIDEOPTIONS' => 'Slėpti parinktis' /*for 508 compliance fix*/,
+    'LBL_DELETE' => 'Naikinti' /*for 508 compliance fix*/,
+    'LBL_POWERED_BY_SUGAR' => 'Teikia „SugarCRM“' /*for 508 compliance fix*/,
 'help'=>array(
     'package'=>array(
-            'create'=>'Nurodykite <b>Pavadinimą</b> paketui.  Pavadinimas turi būti su skaitmenimis ir raidėmis, ir be tarpų. (Pavyzdžiui: HR_Management)<br/><br/> Jūs galitete nurodyti <b>Autorių</b> ir <b>Aprašymą</b> informacijos paketui. <br/><br/>Paspauskite <b>Išsaugoti</b> , kad sukurtumėte paketą.',
-            'modify'=>'Savybės ir galimi veiksmai  <b>Paketui</b> yra čia.<br><br>Jūs galite redaguoti  <b>Pavadinimą</b>, <b>autorių</b> ir <b>Aprašymą</b> paketo, taip pat galite pritaikyti ir kitus modulius.<br><br>Paspauskite <b>Naujas modulis</b> sukurti naują modulį paketui.<br><br>Jei paketas turi nors vieną modulį, jūs galite <b>Paskelbti</b> ir <b>Išdėstyti</b>  paketą, taip pat kaip  <b>Eksportavimas</b> pritaikymai padaryti  pakete.',
-            'name'=>'Tai yra <b>Pavadinimas</b> esamo paketo. <br/><br/>Pavadinimą, kurį įvedate turi būti su raidėmis ir skaičiais, pradėkite su raidėmis ir be tarpų. (Pavyzdys: HR_Management)',
-            'author'=>'Tai yra autorius <b>Autorius</b> ,kuris rodomas instaliavimo metu, kuris sukūrė paketą.<br><br>Autorius gali būti individualus asmuo arba įmonė.',
-            'description'=>'Tai yra <b>Aprašymas</b> paketo, kuris rodomas instaliavimo metu.',
-            'publishbtn'=>'Paspauskite <b>Paskelbti</b> išsaugoti visus įvestus duomenis ir sukurti .zip failą, kuris yra nestabili paketo versija.<br><br>Naudoti <b>Modulio užkrovėją</b> išsiųsti .zip failąe ir instaliuoti paketą.',
-            'deploybtn'=>'Paspauskite <b>Išdėstyti</b> išsaugoti visus įvestus duomenis ir instaliuoti paketą, įskaitant visus modulius, šiuo atveju.',
-            'duplicatebtn'=>'Paspauskite <b>Dublikuoti</b> kopijuoti paketo turinį į naują paketą ir parodyti naują paketą. <br/><br/>Naujam paketui pavadinimas bus sugeneruotas automatiškai. Galite pervadinti paketą įvedant naują <b>Pavadinimą</b> ir paspaudžiant <b>Saugoti</b>.',
-            'exportbtn'=>'Paspauskite <b>Eksportuoti</b> , kad sukurtumėte .zip failą talpinantį padarytus pritaikymus paketui.<br><br> Sugeneruotas failas nėra nestabili paketo versija. <br><br>Naudoti <b>Modulio užkrovėją</b> imoprtavimui .zip failo, įskaitant pritaikymus, randami Module Builder.',
-            'deletebtn'=>'Paspauskite <b>Ištrinti</b> tam, kad ištrintumėte šį paketą ir visus failus susijusius su juo.',
-            'savebtn'=>'Paspauskite <b>Išsaugoti</b> tam, kad išsaugotumėte visus įvestus duomenis susijusius su šiuo paketu.',
-            'existing_module'=>'Paspauskite  <b>Modulis</b> ikoną redaguoti savybes, laukus, ryšius ir išdėstymus asocijuotus su moduliu.',
-            'new_module'=>'Paspauskite <b>Naujas modulis</b> sukurti naują modulį šiam paketui.',
-            'key'=>'Šis 5 raidžių, skaitinis raidinis <b>raktas</b> bus naudojamas kaip prefiksas visiems katalogams, klasių vardams ir duomenų bazių lentelėms ir visiems moduliams esantiems tame pakete.<br><br> Raktas naudojamas lentelių unikalumui pasiekti.',
-            'readme'=>'Paspauskite pridėti <b>Pervadinti</b> tekstą šiam paketui.<br><br> Informacijos failas bus galimas instaliavimo metu.',
+            'create'=>'Suteikite paketui <b>Pavadinimą</b>. Pavadinimas turi prasidėti raide, o jį sudaryti gali tik raidės, skaitmenys ir pabraukimo brūkšniai. Tarpų ar kitų specialiųjų simbolių naudoti negalima. (Pvz.: Personalo_valdymas)<br/><br/> Galite nurodyti paketo <b>Autorių</b> ir <b>Aprašą</b>. <br/><br/>Paketą sukursite spustelėdami <b>Įrašyti</b>.',
+            'modify'=>'Čia rodomos <b>Paketo</b> ypatybės ir galimi veiksmai.<br><br>Galite modifikuoti paketo <b>Pavadinimą</b>, <b>Autorių</b> ir <b>Aprašą</b>, taip pat galite peržiūrėti ir tinkinti visus pakete esančius modulius.<br><br>Spustelėdami <b>Naujas modulis</b> sukursite paketo modulį.<br><br>Jei pakete yra bent vienas modulis, paketą galite <b>Publikuoti</b> ir <b>Visuotinai diegti</b>, taip pat galite <b>Eksportuoti</b> padarytus paketo tinkinimus.',
+            'name'=>'Tai yra dabartinio paketo <b>Pavadinimas</b>. <br/><br/>Pavadinimas turi prasidėti raide, o jį sudaryti gali tik raidės, skaitmenys ir pabraukimo brūkšniai. Tarpų ar kitų specialiųjų simbolių naudoti negalima. (Pvz.: Personalo_valdymas)',
+            'author'=>'Tai yra <b>Autorius</b>, kuris diegimo metu rodomas kaip paketą sukūrusio subjekto vardas.<br><br>Autoriumi gali būti asmuo arba įmonė.',
+            'description'=>'Tai yra paketo <b>Aprašas</b>, rodomas diegimo metu.',
+            'publishbtn'=>'Spustelėkite <b>Publikuoti</b>, jei norite įrašyti visus įvestus duomenis ir sukurti .zip failą, kaip diegiamąją paketo versiją.<br><br>Naudodamiesi <b>Modulių įkelties programa</b>, nusiųskite .zip failą ir įdiekite paketą.',
+            'deploybtn'=>'Spustelėkite <b>Visuotinai diegti</b>, jei norite įrašyti visus įvestus duomenis ir į dabartinį egzempliorių įdiegti paketą su visais moduliais.',
+            'duplicatebtn'=>'Spustelėkite <b>Dubliuoti</b>, jei norite paketo turinį nukopijuoti į naują paketą ir matyti tą naują paketą ekrane. <br/><br/>Naujojo paketo pavadinimas bus sugeneruotas automatiškai, pridedant numerį to paketo pavadinimo gale, kurį naudojant buvo sukurtas naujasis paketas. Naujojo paketo pavadimą galite pakeisti, įvesdami naują <b>Pavadinimą</b> ir spustelėdami <b>Įrašyti</b>.',
+            'exportbtn'=>'Spustelėkite <b>Eksportuoti</b>, jei norite sukurti .zip failą su padarytais paketo tinkinimais.<br><br> Sugeneruotas failas nėra diegiamoji paketo versija.<br><br>Naudodamiesi <b>Modulių darykle</b>, importuokite .zip failą, ir paketas su tinkinimais atsiras modulių daryklėje.',
+            'deletebtn'=>'Spustelėkite <b>Naikinti</b>, jei norite ištrinti šį paketą ir visus su juo susijusius failus.',
+            'savebtn'=>'Spustelėkite <b>Įrašyti</b>, jei norite išsaugoti visus įvestus duomenis, susijusius su šiuo paketu.',
+            'existing_module'=>'Spustelėkite piktogramą <b>Modulis</b>, jei norite redaguoti su moduliu susietas ypatybes, laukus, ryšius ir išdėstymus.',
+            'new_module'=>'Spustelėkite <b>Naujas modulis</b>, jei norite sukurti naują šio paketo modulį.',
+            'key'=>'Šis 5 raidžių, raidinis-skaitinis <b>Raktas</b> bus naudojamas kaip priešvardis visuose kataloguose, klasių pavadinimuose ir duomenų bazių lentelėse, esančiose visuose dabartinio paketo moduliuose.<br><br> Šis raktas naudojamas norint suteikti lentelėms unikalius pavadinimus.',
+            'readme'=>'Spustelėkite, norėdami įtraukti <b>Readme</b> tekstą į šį paketą.<br><br> Diegimo metu failas „Readme“ bus pasiekiamas.',
 
 ),
     'main'=>array(
@@ -82,7 +82,7 @@ $mod_strings = array(
 
     ),
     'listViewEditor'=>array(
-        'modify'	=> 'All of the fields that can be displayed in the <b>ListView</b> appear here.<br><br>The <b>Default</b> column contains the fields that are displayed in the ListView by default.<br/><br/>The <b>Available</b> column contains fields that a user can select in the Search to create a custom ListView. <br/><br/>The <b>Hidden</b> column contains fields that can be added to the Default or Available column.'
+        'modify'	=> 'Visi laukai, kurie gali būti rodomi <b>ListView</b>, pateikiami čia.<br><br>Stulpelyje <b>Default</b> yra laukai, kurie pagal numatytuosius parametrus rodomi „ListView“.<br/><br/>Stulpelyje <b>Available</b> yra laukai, kuriuos naudotojas gali rinktis ieškoje ir kurti savo pasirinktinį „ListView“. <br/><br/>Stulpelyje <b>Hidden</b> yra laukai, kuriuos galima įtraukti į stulpelius „Default“ ir „Available“.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Indicates a Dependent field that may or may not be visible based on the value of a formula.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Indicates a Calculated field whose value will be automatically determined based on a formula.'
     ,
         'savebtn'	=> 'Paspauskite <b>Išsaugoti ir išdėstyti</b> norint išsaugoti pakeitimus, kuriuos padarėte ir padaryti juos aktyvius modulyje.',
@@ -148,7 +148,7 @@ $mod_strings = array(
         'exportHelp'=>'Eksportuoti pritaikymus padarytus su Studio, sukuriant paketus, kurie gali būti išsiųsti į kitą Sugar vietą per  <b>Module Loader</b>.<br><br>  Pirmiausia, nurodykite <b>Paketo vardą</b>.  Jūs galite nurodyti <b>Autorių</b> ir <b>Aprašymą</b> ir visą kitą informaciją paketui. <br><br>Pasirinkite  modulį(-ius) kurie talpina pritaikymus ir juos norite eksportuoti. Tik moduliai turintys pritaikymus bus matomi jums.<br><br>Tada paspauskite <b>Exportuoti</b>, norint sukurti .zip failą paketui talpinančiam pritaikymus.',
         'exportCustomBtn'=>'Paspauskite <b>Exportuoti</b> norint sukurti .zip failą paketui talpinančiam pritaikymus.',
         'name'=>'Tai yra paketo <b>Pavadinimas</b>. Šis pavadinimas bus rodomas instaliavimo metu.',
-        'author'=>'Tai yra  <b>Autorius</b>, kuris sukūrė paketa ir bus rodomas instaliavimo metu Autorius gali būti individualus asmuo arba įmonė.',
+        'author'=>'Tai yra <b>Autorius</b>, kuris sukūrė paketa ir bus rodomas instaliavimo metu Autorius gali būti individualus asmuo arba įmonė.',
         'description'=>'Tai yra <b>Aprašymas</b> paketo, kuris rodomas instaliavimo metu.',
     ),
     'studioWizard'=>array(
@@ -164,7 +164,7 @@ $mod_strings = array(
         'moduleBtn'	=> 'Paspauskite redaguoti modulį.',
         'moduleHelp'=> 'Komponentai, kuriuos galite pritaikyti, yra čia.<br><br>Paspauskite ikoną, norint pasirinkti komponentą redagavimui.',
         'fieldsBtn'	=> 'Sukurti ir pritaikyti <b>Laukus</b> tam, kad talpintų informaciją moduluje.',
-        'labelsBtn' => 'Redaguoti  <b>Etiketes</b>, kurios vaizduoja laukus ir kitus pavadinimus modulyje.'	,
+        'labelsBtn' => 'Redaguoti <b>Etiketes</b>, kurios vaizduoja laukus ir kitus pavadinimus modulyje.'	,
         'relationshipsBtn' => 'Pridėti naujus arba rodyti esamus modulio <b>Ryšius</b>.' ,
         'layoutsBtn'=> 'Pritaikyti modulių <b>Išdėstymą</b>.  Išdėstymai skiriasi moduliuose.<br><br>Jūs galite nuspręsti kaip laukai turi atrodyti ir organizuoti kiekviename išdėstyme.',
         'subpanelBtn'=> 'Nuspręskite, kurie laukai bus rodomi modulio <b>Subpanelyje</b>.',
@@ -174,7 +174,7 @@ $mod_strings = array(
         'newPackage'=>'Norėdami sukurti naują paketą paspauskite <b>Naujas paketas</b>.',
         'exportBtn' => 'Paspauskite <b>Eksportuoti pritaikymus</b>, norint sukurti ir parsisiųsti paketą su aptarnavimais sukurtą su Studio specifiniams moduliams.',
         'mbHelp'    => 'Norint sukurti paketus su pasirinktais moduliais ir standartiniais arba pasirinktais objektais, paspauskite <b>Module Builder</b>.',
-        'viewBtnEditView' => 'Pritaikyti modulį(-ius)  <b>EditView</b> išdėstymui.<br><br>EditView yra forma talpinanti įvedimo laukus, skirtus vartotojo duomenų įvedimui.',
+        'viewBtnEditView' => 'Pritaikyti modulį(-ius) <b>EditView</b> išdėstymui.<br><br>EditView yra forma talpinanti įvedimo laukus, skirtus vartotojo duomenų įvedimui.',
         'viewBtnDetailView' => 'Pritaikyti modulį(-ius) <b>DetailView</b> išdėstymui.<br><br>DetailView atvaizduoja vartoto įvestus duomenis.',
         'viewBtnDashlet' => 'Pritaikyti modulį(-ius) <b>paneliams</b>, įskaitant  panelių ListView ir paiešką.<br><br> Panelius bus galima pridėti į puslapius Pradžios modulyje.',
         'viewBtnListView' => 'Pritaikyti modulį(-ius) <b>ListView</b> išdėstymui.<br><br>Paieškos rezultatai matomi ListView.',
@@ -189,11 +189,11 @@ $mod_strings = array(
         'PopupListViewBtn' => '<b>Popup ListView</b> rodo įrašus pagal Popup search views.',
         'PopupSearchViewBtn' => '<b>Popup Search</b> atvaizduoja įrašus Popup listview.',
         'BasicSearchBtn' => 'Pritaikyti <b>Bazinės paieškos</b> formą, kuri matoma bazinės paieškos kortelėje.',
-        'AdvancedSearchBtn' => 'Pritaikyti  <b>Detalios paieškos</b> formos, kuri matoma detalios paieškos kortelėje.',
+        'AdvancedSearchBtn' => 'Pritaikyti <b>Detalios paieškos</b> formos, kuri matoma detalios paieškos kortelėje.',
         'portalHelp' => 'Valdyti ir pritaikyti <b>Sugar portalą</b>.',
         'SPUploadCSS' => 'Išsiųsti <b>Stiliaus lapą</b> Sugar portalui.',
         'SPSync' => '<b>Sinchronizuoti</b> pritaikymus Sugar portalui.',
-        'Layouts' => 'Pritaikyti Sugar portalo modulių  <b>Išdėstymus</b>.',
+        'Layouts' => 'Pritaikyti Sugar portalo modulių <b>Išdėstymus</b>.',
         'portalLayoutHelp' => 'Moduliai Sugar portalo rodomi šiame plote.<br><br>Pasirinkite modulį redagavimui <b>Išdėstymuose</b>.',
         'relationshipsHelp' => 'Visi <b>Ryšiai</b>, kurie egzistuoja tarp vieno modulio ir kito yra čia.<br><br>Ryšio <b>Pavadinimas</b> yra sugeneruotas sistemos ryšiui.<br><br><b>Pagrindinis modulis</b> yra tas, kuris turi ryšius. Pavyzdžiui, visos Kliento modulio ryšių savybės yra sudėtos modulio Klientas duomenų bazės lentelėse.<br><br>Paspauskite eilutę ryšių lentelėje norint pažiūrėti savybes susietas su ryšiu.<br><br>Norėdami sukurti naują ryšį paspauskite <b>Pridėti ryšį</b>.<br><br>Ryšiai gali būti sukurti tarp bet kokių modulių.',
         'relationshipHelp'=>'<b>Ryšiai</b> gali būti sukurti tarp pagrindinio modulio ir bet kokio kito modulio.<br><br> Ryšiai vizualiai išreikšti naudojant subpanelius ir susijusius laukus modulio įrašuose.<br><br> Jeigu ryšys yra tarp dviejų modulių, bet koks naujas sukurtas ryšys tarp jų nebus vizualiai išreikštas.<br><br> Pasirinkite vieną iš šių ryšių<b>Types</b>moduliui:<br><br> <b>Vienas-su-Vienu</b> - Abu modulių&#39; įrašai talpins susijusius laukus.<br><br> <b>Vienas-su-daug</b> - Pirminio modulio įrašas talpins subpanelę ir  susieto modulio įrašas talpins susijusį lauką.<br><br> <b>Daug-su-Daug</b> - Abiejų modulių įrašai rodys subpaneles.<br><br> Pasirinkite  <b>Sisijusį modulį</b> ryšio sukūrimui. <br><br> Jei ryšio tipas įtraukia subpanelius, pasirinkite  subpanelio rodymą atitinkamiems moduliams.<br><br> Paspauskite <b>Išsaugoti</b> tam, kad sukurtumėte ryšį. Kai  ryšys sukurtas, jis negali būti redaguojamas arba ištrintas.',
@@ -228,24 +228,24 @@ $mod_strings = array(
 'assistantHelp'=>array(
     'package'=>array(
             //custom begin
-            'nopackages'=>'Norint pradėti naują projektą, jūs turite paspausti  <b>Naujas paketas</b> tam, kad sukurtumėte naują paketą vartotojo moduliams talpinti. <br/><br/>Kiekvienas paketas gali talpinti vieną arba kelis modulius.<br/><br/>Pavyzdžiui, jūs galite norėti sukurti paketą talpinantį vieną  pritaikomą modulį, kuris yra susijęs su standartiniu Kliento moduliu. Arbajūs galite norėti sukurti paketą talpinantį kelis modulius, kurie veikia kartu kaip projektas ir vienas su kitu susiję.',
+            'nopackages'=>'Norint pradėti naują projektą, jūs turite paspausti <b>Naujas paketas</b> tam, kad sukurtumėte naują paketą vartotojo moduliams talpinti. <br/><br/>Kiekvienas paketas gali talpinti vieną arba kelis modulius.<br/><br/>Pavyzdžiui, jūs galite norėti sukurti paketą talpinantį vieną  pritaikomą modulį, kuris yra susijęs su standartiniu Kliento moduliu. Arbajūs galite norėti sukurti paketą talpinantį kelis modulius, kurie veikia kartu kaip projektas ir vienas su kitu susiję.',
             'somepackages'=>'<b>Paketas</b> veikia kaip konteineris pritaikytiems moduliams, esantiems projekto dalimi. Paketas gali talpinti vieną ar daugiau pritaikytų <b>modulių</b>, kurie gali būti susiję vienas su kitu.<br/><br/>Sukūrus paketą vartotojo projektui, jūs galite kūrti modulius paketui, arba galite grįžti į Module Builder kitu laiku, kad pabaigtumėte projektą.<br><br>Kada projektas yra baigtas, jūs galite <b>išdėstyti</b> peketus instaliavimui pritaikytiems moduliams.',
             'afterSave'=>'Vartotojo nauji paketai turėtų talpinti bent vieną modulį. Jūs galite sukurti vieną arba daugiau pritaikytų modulių paketui.<br/><br/>Paspauskite <b>Naujas modulis</b> pritaikyto modulio paketui sukūrimo.<br/><br/> Sukūrus bent vieną modulį, jūs galite paskelbti arba išdėstyti packetą, kad jis būtų prieinamas vartotojui ir/arba kitam vartotojams.<br/><br/> Išdėstyti paketą per vieną Sugar vartotojo žingsnį, paspauskite <b>Išdėstyti</b>.<br><br>Paspauskite <b>Paskelbti</b>, norint išsaugoti kaip .zip failą. Kai .zip failas yra išsaugotas vartotojo sistemoje, naudoti  <b>Module Loader</b> išsiuntimui ir instaliavimui paketo į vartotojo Sugar programą.  <br/><br/>Jūs galite distribute  file to Kitas USERs to upload ir install within their own Sugar instances.',
             'create'=>'<b>Paketas</b> veikia kaip konteineris pritaikytiems moduliams, esantiems projekto dalimi. Paketas gali talpinti vieną ar daugiau pritaikytų <b>modulių</b> kurie gali būti susiję vienas su kitu.<br/><br/>Sukūrus paketą vartotojo projektui, jūs galite kūrti modulius paketui, arba galite grįžti į Module Builder kitu laiku, kad pabaigtumėte projektą.',
             ),
     'main'=>array(
-        'welcome'=>'Naudoti  <b>Kūrėjo įrankius</b> sukūrimui ir valdymui standartinių ir pritaikytus modulius ir laukus. <br/><br/>Valdyti modulius programoje, paspauskite <b>Studio</b>. <br/><br/>TPritaikytų modulių sukūrimui, paspauskite <b>Module Builder</b>.',
+        'welcome'=>'Naudoti <b>Kūrėjo įrankius</b> sukūrimui ir valdymui standartinių ir pritaikytus modulius ir laukus. <br/><br/>Valdyti modulius programoje, paspauskite <b>Studio</b>. <br/><br/>TPritaikytų modulių sukūrimui, paspauskite <b>Module Builder</b>.',
         'studioWelcome'=>'Visi jau instaliuoti moduliai, įskaitant standartinį ir modulio-užkrovėjo objektus, pritaikoma naudojant Studio.'
     ),
     'module'=>array(
-        'somemodules'=>"Nuo tada, kai esamas projektas talpina mažiausiai bent vieną modulį, jūs galite <b>Išdėstyti</b>  modulius pakete in  paketas viduje vartotojo Sugar sistemos arba <b>Paskelbti</b> apie paketo instaliavimą į Sugar arba pridėti naudojant  <b>Module Loader</b>.<br/><br/>Norint instaliuoti paketą tiesiogiai į vartotojo Sugar vietą, paspauskite <b>Išdėstyti</b>.<br><br>.zip failo sukūrimui paketui, kuris gali būti užkrautas ir instaliuotas įesamą Sugar atvejį ir kitus atvejus naudojant <b>Module Loader</b>, paspauskite <b>Paskelbti</b>.<br/><br/> Jūs galite sukurti modulius paketui lygiais, ir paskelbti arba išdėstyti, kai esate tam pasiruošę. <br/><br/>paskelbus arba išdėsčius paketą, jūs galite atlikti pakeitimus paketo savybėms ir pritaikyti moduliui.  Tada vėl vėl paskelbti arba išdėstyti  paketus, kad pritaikytumėte pakeitimus." ,
+        'somemodules'=>"Nuo tada, kai esamas projektas talpina mažiausiai bent vieną modulį, jūs galite <b>Išdėstyti</b> modulius pakete in paketas viduje vartotojo Sugar sistemos arba <b>Paskelbti</b> apie paketo instaliavimą į Sugar arba pridėti naudojant <b>Module Loader</b>.<br/><br/>Norint instaliuoti paketą tiesiogiai į vartotojo Sugar vietą, paspauskite <b>Išdėstyti</b>.<br><br>.zip failo sukūrimui paketui, kuris gali būti užkrautas ir instaliuotas įesamą Sugar atvejį ir kitus atvejus naudojant <b>Module Loader</b>, paspauskite <b>Paskelbti</b>.<br/><br/> Jūs galite sukurti modulius paketui lygiais, ir paskelbti arba išdėstyti, kai esate tam pasiruošę. <br/><br/>paskelbus arba išdėsčius paketą, jūs galite atlikti pakeitimus paketo savybėms ir pritaikyti moduliui. Tada vėl vėl paskelbti arba išdėstyti  paketus, kad pritaikytumėte pakeitimus." ,
         'editView'=> 'Čia galite redaguoti esančius laukus. Jūs galite išmesti bet kokį esamą lauką arba pridėti galimus laukus, esančius kairėje panelėje.',
         'create'=>'Pasirenkant modulio <b>Tipą</b>, kurį jūs norite sukurti, žinokite laukų tipus kokius norite turėti modulyje. <br/><br/>Kiekvienas modulio šablonas talpina rinkinį laukų susijusių su modulio tipu aprašomu pavadinimu.<br/><br/><b>Pagrindai</b> - pateikia bazinius laukus, kurie yra standartiniuose moduliuose,tokiuose kaip Vardas, Atsakingas, Komanda, Sukūrimo Data ir Aprašymas.<br/><br/> <b>Įmonė</b> - pateikia organizacijos specifinius laukus, tokius kaip Įmonė, Vardas, Pramonė, Sąskaitų siuntimo adresas.  Naudoti šį šabloną modulių sukūrimui, kurie yra panašūs standartiniamd Klientas moduliui.<br/><br/> <b>Asmuo</b> - pateikia individualius specifinius laukus, tokius kaip Sveikinimas, Pavadinimas, Vardas, Adresas ir Telefono numeris.  Naudoti šį šabloną modulių sukūrimui, kurie yra panašūs į standartinį Kontaktų ir Potencialus kontaktas modulius.<br/><br/><b>Svarbūs dalykai</b> - Pateikia  case ir klaidų specifinius laukus, tokius kaip Numeris, Statusas, Svarbumas ir Aprašymas. Naudoti šį šabloną modulių sukūrimui, kurie yra panašūs į standartinius Cases ir Klaidų sekėjų modulius.<br/><br/>Pastaba: Sukūrus modulį, jūs galite redaguoti laukų etiketes pateikiamas šablone, taip pat sukurti, pridėti ir pritaikyti laukus modulio Išdėstymui.',
-        'afterSave'=>'Pritaikyti  modulį patenkinti vartotojo poreikius redaguojant ir sukuriant laukus, nustatant ryšius su kitais moduliais ir surūšiuojant laukus išdėstyme.<br/><br/>Norint rodyti šablono laukus ir valdyti pritaikytus laukus modulyje, paspauskite <b>Rodyti laukus</b>.<br/><br/>Sukurti ir valdyti ryšius tarp modulio ir kitų modulių, kai moduliai yra programoje arba kiti moduliai pritaikyti tame pačiame pakete, paspauskite <b>Rodyti ryšius</b>.<br/><br/>Redaguoti modulio išdėstymus, paspauskite <b>Rodyti išdėstymus</b>. Jūs galite pakeisti detalų rodymą, redaguoti rodymą ir sąrašą. <br/><br/> Norėdami sukurti modulį su tokiomis pačiomis savybėmis kaip esamas modulis, paspauskite <b>Dublikuoti</b>.  Toliau galite pritaikyti naują modulį.',
-        'viewfields'=>'Laukai jūsų modulyje gali būti pritaikyti pagal poreikius.<br/><br/>Jūs galite netrinti standartinių laukų, o  išmesti juos iš atitinkamų išdėstymų puslapių. <br/><br/>Jūs galite redaguoti etiketes standartiniams laukams. Kitas savybės standartinių laukų neredaguojamos. Tačiau, jūs galite greitai sukurti naujus laukus, kurie turi panašias savybes paspaudžiant lauko pavadinamą ir tada paspausti <b>Klonuoti</b> į  <b>Savybes</b> iš.  Įveskite bet kokias naujas savybes ir paspauskite <b>Išsaugoti</b>.<br/><br/>Jeigu jūs pritaikote naują modulį, tai kai modulis bus instaliuotas, tai ne visos laukų savybės bus redaguojamos.  Nustatyti savybes standartiniams laukams ir pritaikyti laukus prieš paskelbiant ir instaliuojant paketą talpinantį pritaikytus modulius.',
+        'afterSave'=>'Pritaikyti modulį patenkinti vartotojo poreikius redaguojant ir sukuriant laukus, nustatant ryšius su kitais moduliais ir surūšiuojant laukus išdėstyme.<br/><br/>Norint rodyti šablono laukus ir valdyti pritaikytus laukus modulyje, paspauskite <b>Rodyti laukus</b>.<br/><br/>Sukurti ir valdyti ryšius tarp modulio ir kitų modulių, kai moduliai yra programoje arba kiti moduliai pritaikyti tame pačiame pakete, paspauskite <b>Rodyti ryšius</b>.<br/><br/>Redaguoti modulio išdėstymus, paspauskite <b>Rodyti išdėstymus</b>. Jūs galite pakeisti detalų rodymą, redaguoti rodymą ir sąrašą. <br/><br/> Norėdami sukurti modulį su tokiomis pačiomis savybėmis kaip esamas modulis, paspauskite <b>Dublikuoti</b>. Toliau galite pritaikyti naują modulį.',
+        'viewfields'=>'Laukai jūsų modulyje gali būti pritaikyti pagal poreikius.<br/><br/>Jūs galite netrinti standartinių laukų, o išmesti juos iš atitinkamų išdėstymų puslapių. <br/><br/>Jūs galite redaguoti etiketes standartiniams laukams. Kitas savybės standartinių laukų neredaguojamos. Tačiau, jūs galite greitai sukurti naujus laukus, kurie turi panašias savybes paspaudžiant lauko pavadinamą ir tada paspausti <b>Klonuoti</b> į <b>Savybes</b> iš.  Įveskite bet kokias naujas savybes ir paspauskite <b>Išsaugoti</b>.<br/><br/>Jeigu jūs pritaikote naują modulį, tai kai modulis bus instaliuotas, tai ne visos laukų savybės bus redaguojamos. Nustatyti savybes standartiniams laukams ir pritaikyti laukus prieš paskelbiant ir instaliuojant paketą talpinantį pritaikytus modulius.',
         'viewrelationships'=>'Jūs galite sukurti daug-su-daug ryšį tarp esamų modulių irkitų modulių pakete ir/arba tarp instaliuotų modulių programoje.<br><br> Norint sukurti vienas-su-daug ir vienas-su-vienu  ryšius, sukurkite  <b>Susiejimą</b> ir <b>Lankstų susiejimą</b> laukus moduliams.',
         'viewlayouts'=>'You can control what fields are available for capturing data within the <b>Edit View</b>.  You can also control what data displays within the <b>Detail View</b>.  The views do not have to match. <br/><br/>The Quick Create form is displayed when the <b>Create</b> is clicked in a module subpanel. By default, the <b>Quick Create</b> form layout is the same as the default <b>Edit View</b> layout. You can customize the Quick Create form so that it contains less and/or different fields than the Edit View layout. <br><br>You can determine the module security using Layout customization along with <b>Role Management</b>.<br><br>',
-        'existingModule' =>'Sukūrus ir pritaikius modulį, Jūs galite sukurti papildomus modulius arba grįžti į paketą <b>Paskelbti</b> arba <b>Išdėstyti</b>  paketą.<br><br>Sukurti papildomus modulius, paspauskite <b>Dubliuoti</b>, norint sukurti modulį su tokiomis pačiomis savybėmis, kaip esamas modulis, eikite atgal į paketą ir paspauskite <b>Naujas modulis</b>.<br><br> Jeigu jūs esate pasiruošęs <b>Paskelbti</b> arba <b>Išdėstyti</b>  paketą talpinantį šį modulį, eikite atgal į paketą tam, akd atliktumėte šaias funkcijas. Jūs galite paskelbti ir išdėstyti paketus talpinančius mažiausiai vieną modulį.',
+        'existingModule' =>'Sukūrus ir pritaikius modulį, Jūs galite sukurti papildomus modulius arba grįžti į paketą <b>Paskelbti</b> arba <b>Išdėstyti</b> paketą.<br><br>Sukurti papildomus modulius, paspauskite <b>Dubliuoti</b>, norint sukurti modulį su tokiomis pačiomis savybėmis, kaip esamas modulis, eikite atgal į paketą ir paspauskite <b>Naujas modulis</b>.<br><br> Jeigu jūs esate pasiruošęs <b>Paskelbti</b> arba <b>Išdėstyti</b> paketą talpinantį šį modulį, eikite atgal į paketą tam, akd atliktumėte šaias funkcijas. Jūs galite paskelbti ir išdėstyti paketus talpinančius mažiausiai vieną modulį.',
         'labels'=> 'Etiketės standartinių laukų taip pat kaip ir pritaikyti laukai gali būti pakeisti. Pakeičiant lauko etiketę nepaveiks duomenų sukauptų laukuose.',
     ),
     'listViewEditor'=>array(
@@ -257,7 +257,7 @@ $mod_strings = array(
     ),
 
     'searchViewEditor'=>array(
-        'modify'	=> 'Kairėje pavaizduoti du stulpeliai. Stulpelis "Numatytas" talpina  laukus, kurie bus rodomi paieškoje, ir  "Paslėptas" stulpelis talpina laukus, galimus jums, kaip administratoriui, norint pridėti žiūrėjimui.',
+        'modify'	=> 'Kairėje pavaizduoti du stulpeliai. Stulpelis "Numatytas" talpina laukus, kurie bus rodomi paieškoje, ir "Paslėptas" stulpelis talpina laukus, galimus jums, kaip administratoriui, norint pridėti žiūrėjimui.',
         'savebtn'	=> 'Paspaudžiant <b>Išsaugoti ir išdėstyti</b> išsaugos visus pakeitimus ir padarys juos aktyvius.',
         'Hidden' 	=> 'Paslėpti laukai yra laukai, kurie nebus rodomi paieškoje.',
         'Default'	=> 'Numatyti laukai bus rodomi vartotojui paieškoje.'
@@ -275,7 +275,7 @@ $mod_strings = array(
 
     ),
     'exportcustom'=>array(
-        'exportHelp'=>'Pritaikymai atlikti Studio gali būti supakuoti ir padėti kitoje vietoje.  <br><br>Nurodykite a <b>paketo pavadinimą</b>.  Jūs galite nurodyti <b>Autorių</b> ir <b>Aprašymą</b>, bei visą kitą paketo informaciją.<br><br>Pasirinkite  modulį(-ius), kurie turi pritaikymus eksportavimui. (Tik moduliai ,turintys pritaikymus, bus rodomi jums pasirenkant)<br><br>Paspauskite <b>Eksportuoti</b> tam, kad sukurtumėte .zip failą paketui turinčiam pritaikymus. .zip failas gali būti išsiųstas į kitą vietą per <b>Module Loader</b>.',
+        'exportHelp'=>'Pritaikymai atlikti Studio gali būti supakuoti ir padėti kitoje vietoje. <br><br>Nurodykite a <b>paketo pavadinimą</b>.  Jūs galite nurodyti <b>Autorių</b> ir <b>Aprašymą</b>, bei visą kitą paketo informaciją.<br><br>Pasirinkite  modulį(-ius), kurie turi pritaikymus eksportavimui. (Tik moduliai ,turintys pritaikymus, bus rodomi jums pasirenkant)<br><br>Paspauskite <b>Eksportuoti</b> tam, kad sukurtumėte .zip failą paketui turinčiam pritaikymus. .zip failas gali būti išsiųstas į kitą vietą per <b>Module Loader</b>.',
         'exportCustomBtn'=>'Paspauskite <b>Eksportuoti</b> tam, kad sukurtumėte .zip failą paketui turinčiam pritaikymus, kuriuos norite eksportuoti.',
         'name'=>'Paketo <b>Pavadinimas</b> bus rodomas Module Loader tada, kai paketas yra išsiųstas instaliacijai į Studio.',
         'author'=>'<b>Autoriaus</b> vardas yra to kas sukūrė visą paketą. Autorius gali būti individualus asmuo arba įmonė.<br><br>Autorius bus rodomas Module Loaderpo to, kai paketas bus išsiųstas instaliavimui į Studio.',
@@ -292,14 +292,14 @@ $mod_strings = array(
         'moduleHelp'=> 'Pasirinkite  modulio komponentą redagavimui',
         'fieldsBtn'	=> 'Redaguoti informaciją, kuri yra laikoma modulio <b>Laukuose</b>.<br/><br/>Jūs galite redaguoti ir sukurti pritaikomus laukus čia.',
         'labelsBtn' => 'Click <b>Save</b> to save your custom labels.'	,
-        'layoutsBtn'=> 'Pritaikyti  <b>Išdėstymus</b>  Redagavimo, Detalaus, sąrašų ir paieškos rodymų.',
+        'layoutsBtn'=> 'Pritaikyti <b>Išdėstymus</b> Redagavimo, Detalaus, sąrašų ir paieškos rodymų.',
         'subpanelBtn'=> 'Redaguoti, kokią informacija rodoma šių modulių subpaneliuose.',
         'layoutsHelp'=> 'Pasirinkite redagavimui <b>Išdėstymą </b>.<br/<br/>Pakeisti išdėstymą, kuris talpina duomenų laukus, paspauskite <b>Redaguoti rodymą</b>.<br/><br/>Pakeisti išdėstymą, kuris vaizduoja duomenis įvestus į laukus Redaguoti rodymą, paspauskite <b>Detalus rodymas</b>.<br/><br/>Pakeisti stulpelius, kurie rodomi numatytame sąrašes, paspauskite <b>Rodyti sąrašą</b>.<br/><br/>Norint pakeisti bazinę ir detalią paiešką formos išdėstymus,paspauskite <b>Ieškoti</b>.',
         'subpanelHelp'=> 'Pasirinkite redagavimui <b>Subpanelį</b>.',
         'searchHelp' => 'Pasirinkite išdėstymo redagavimuia <b>Ieškoti</b>.',
-        'labelsBtn'	=> 'Click <b>Save</b> to save your custom labels.',
+        'labelsBtn'	=> 'Redaguokite rodytinas šio modulių reikšmių <b>etiketes</b>.',
         'newPackage'=>'Norėdami sukurti naują paketą paspauskite <b>Naujas paketas</b>.',
-        'mbHelp'    => '<b>Module Builder.</b><br/><br/>Naudoti <b>Module Builder</b> paketų sukūrimui, talpinantiems pritaikytus modulius, paremtus standartiniais arba pritaikytais objektais. <br/><br/>Norėdami pradėti, paspauskite <b>Naujas paketas</b> naujo paketo sukūrimui arba pasirinkite redaguoti paketą.<br/><br/>  <b>Paketas</b> veikia kai konteineris atitinkamiems moduliams ir kitiems, kurie yra projekto dalis. Paketas gali turėti vieną arba daugiau pitaikytų modulių, kurie gali būti susiję vienas su kitų programoje. <br/><br/>Pavyzdys: Jūs galite sukurti paketą, talpinantį vieną pritaikytą modulį, kuris yra susijęs su standartiniu Kliento moduliu arba galite sukurti paketą talpinantį kelis naujus modulius, kurie veikia kartu kaip projektas, bei yra susiję vienas su kitu ir kitais moduliais programoje.',
+        'mbHelp'    => '<b>Module Builder.</b><br/><br/>Naudoti <b>Module Builder</b> paketų sukūrimui, talpinantiems pritaikytus modulius, paremtus standartiniais arba pritaikytais objektais. <br/><br/>Norėdami pradėti, paspauskite <b>Naujas paketas</b> naujo paketo sukūrimui arba pasirinkite redaguoti paketą.<br/><br/> <b>Paketas</b> veikia kai konteineris atitinkamiems moduliams ir kitiems, kurie yra projekto dalis. Paketas gali turėti vieną arba daugiau pitaikytų modulių, kurie gali būti susiję vienas su kitų programoje. <br/><br/>Pavyzdys: Jūs galite sukurti paketą, talpinantį vieną pritaikytą modulį, kuris yra susijęs su standartiniu Kliento moduliu arba galite sukurti paketą talpinantį kelis naujus modulius, kurie veikia kartu kaip projektas, bei yra susiję vienas su kitu ir kitais moduliais programoje.',
         'exportBtn' => 'Paspauskite <b>Eksportuoti pritaikymus</b> tam, kad sukurtumėte paketą talpinančius pritaikymus, padarytus su Studio specifiniams moduliams.',
     ),
 
@@ -410,11 +410,11 @@ $mod_strings = array(
 'LBL_DROPDOWN_BLANK_WARNING' => 'Elemento vardas ir Rodyti etiketę laukeliai turi būti užpildyti. Norėdami įterpti tuščią pasirinkimą paspauskite Pridėti palikdami tuščius abu laukelius.',
 'LBL_DROPDOWN_KEY_EXISTS' => 'Key already exists in list',
 'LBL_NO_SAVE_ACTION' => 'Could not find the save action for this view.',
-'LBL_BADLY_FORMED_DOCUMENT' => 'Studio2:establishLocation: badly formed document',
+'LBL_BADLY_FORMED_DOCUMENT' => 'Studio2:establishLocation: netinkamas dokumento formatas',
 // @TODO: Remove this lang string and uncomment out the string below once studio
 // supports removing combo fields if a member field is on the layout already.
-'LBL_INDICATES_COMBO_FIELD' => '** Indicates a combination field. A combination field is a collection of individual fields. For example, "Address" is a combination field that contains "Street address", "City", "Zip Code","State" and "Country".<br><br>Doubleclick a combination field to see which fields it contains.',
-'LBL_COMBO_FIELD_CONTAINS' => 'contains:',
+'LBL_INDICATES_COMBO_FIELD' => '** Reiškia sudėtinį lauką. Sudėtinis laukas yra atskirų laukų rinkinys. Pvz., sudėtinį lauką „Address“ sudaro laukai „Street address“, „City“, „Zip Code“, „State“ ir „Country".<br><br>Norėdami pamatyti, kokie laukai sudaro sudėtinį lauką, jį dukart spustelėkite.',
+'LBL_COMBO_FIELD_CONTAINS' => 'sudaro:',
 
 'LBL_WIRELESSLAYOUTS'=>'Mobilios versijos išdėstymas',
 'LBL_WIRELESSEDITVIEW'=>'Mobili redagavimo forma',
@@ -437,7 +437,7 @@ $mod_strings = array(
 'LBL_SEARCH_FIELDS' => 'Ieškoti laukų...',
 'LBL_FORMULA' => 'Formulė',
 'LBL_DYNAMIC_VALUES_CHECKBOX' => 'Priklausomas',
-'LBL_DEPENDENT_DROPDOWN_HELP' => 'Prašome nurodyti kokios reikšmės turi matytis priklausančiame sąraše, kai tėvinis sąrašas yra pažymėtas.',
+'LBL_DEPENDENT_DROPDOWN_HELP' => 'Nuvilkite parinktis iš galimų parinkčių išplečiamojo sąrašo kairėje į dešinėje esantį sąrašą, kad tas parinktis būtų galima rinktis pasirinkus pagrindinę parinktį. Jei pagrindinės parinkties sudėtinių elementų nėra, pasirinkus pagrindinę parinktį priklausantis išplečiamasis sąrašas nerodomas.',
 'LBL_AVAILABLE_OPTIONS' => 'Galimi pasirinkimai',
 'LBL_PARENT_DROPDOWN' => 'Tėvinis dropdown',
 'LBL_VISIBILITY_EDITOR' => 'Matomumo redaktorius',
@@ -594,9 +594,9 @@ $mod_strings = array(
 
 'LBL_PORTAL'=>'Portalas',
 'LBL_PORTAL_LAYOUTS'=>'Portalo išdėstymas',
-'LBL_SYNCP_WELCOME'=>'Prašome įvesti portalo adresą',
+'LBL_SYNCP_WELCOME'=>'Įveskite portalo egzemplioriaus, kurį norite naujinti, adresą.',
 'LBL_SP_UPLOADSTYLE'=>'Pasirinkite stiliaus lapą kurį norite užkrauti iš savo kompiuterio .<br> Kai kitą kartą sinchronizuosite duomenis Sugar portalas pradės naudoti šį stiliaus lapą.',
-'LBL_SP_UPLOADED'=> 'Įkelta',
+'LBL_SP_UPLOADED'=> 'Nusiųsta',
 'ERROR_SP_UPLOADED'=>'Prašome pasitikrinti, kad Jūs keliate CSS failą.',
 'LBL_SP_PREVIEW'=>'Štai taip atrodys Sugar portalas su šiuo stiliaus lapu',
 'LBL_PORTALSITE'=>'Sugar portalo adresas:',
@@ -655,12 +655,12 @@ $mod_strings = array(
 'LBL_ACTIVITIES'=>'Priminimai',
 'LBL_SEARCH'=>'Paieška',
 'LBL_NEW'=>'Naujas',
-'LBL_TYPE_BASIC'=>'Bazinė',
+'LBL_TYPE_BASIC'=>'pagrindinis',
 'LBL_TYPE_COMPANY'=>'Įmonė',
-'LBL_TYPE_PERSON'=>'Asmuo',
+'LBL_TYPE_PERSON'=>'asmeninis',
 'LBL_TYPE_ISSUE'=>'problema',
 'LBL_TYPE_SALE'=>'pardavimas',
-'LBL_TYPE_FILE'=>'Failas',
+'LBL_TYPE_FILE'=>'failas',
 'LBL_RSUB'=>'Tai subpanelis, kuris bus rodomas jūsų modulyje',
 'LBL_MSUB'=>'Tai yra subpanelis, kurį vartotojo modulis pateikia rodymui susijusiam moduliui.',
 'LBL_MB_IMPORTABLE'=>'Leisti importuoti',
@@ -679,12 +679,12 @@ $mod_strings = array(
 'LBL_EC_CHECKERROR'=>'Prašome pasirinkite modulį.',
 'LBL_EC_CUSTOMFIELD'=>'nestandartiniai laukai',
 'LBL_EC_CUSTOMLAYOUT'=>'nestandartiniai išdėstymai',
-'LBL_EC_CUSTOMDROPDOWN' => 'customized dropdown(s)',
+'LBL_EC_CUSTOMDROPDOWN' => 'tinkintas (-i) išplečiamasis (-ieji) sąrašas (-ai)',
 'LBL_EC_NOCUSTOM'=>'Jokie moduliai nebuvo adaptuoti.',
 'LBL_EC_EXPORTBTN'=>'Eksportas',
 'LBL_MODULE_DEPLOYED' => 'Moduliai buvo išdėstyti.',
 'LBL_UNDEFINED' => 'neapibrėžtas',
-'LBL_EC_CUSTOMLABEL'=>'customized label(s)',
+'LBL_EC_CUSTOMLABEL'=>'tinkinta (-os) žymė (-ės)',
 
 //AJAX STATUS
 'LBL_AJAX_FAILED_DATA' => 'Nepavyko išgauti duomenų',
@@ -701,59 +701,60 @@ $mod_strings = array(
 
 'LBL_DEPLOY_IN_PROGRESS' => 'Išdėstomas paketas',
 'LBL_JS_VALIDATE_NAME'=>'Pavadinimas turi būti iš raidžių ir skaičių be tarpų ir turi prasidėti iš raidžių',
-'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Package Key already exists',
+'LBL_JS_VALIDATE_PACKAGE_KEY'=>'Paketo raktas jau yra',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Paketo pavadinimas jau egzistuoja',
-'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Key - Must be alphanumeric and begin with a letter.',
+'LBL_JS_PACKAGE_NAME'=>'Paketo pavadinimas. Turi prasidėti raide ir jį gali sudaryti tik raidės, skaitmenys ir pabraukimo brūkšniai. Tarpų ar kitų specialių simbolių naudoti negalima.',
+'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Raktas – jis gali būti sudarytas iš skaitmenų ir raidžių; jis turi prasidėti raide.',
 'LBL_JS_VALIDATE_KEY'=>'Raktas - turi būti raidinis skaitmeninis.',
 'LBL_JS_VALIDATE_LABEL'=>'Prašome įvesti etiketę, kuri bus naudojama pavadinimo vaizdavimui šiam moduliui',
 'LBL_JS_VALIDATE_TYPE'=>'Prašome pasirinkti modulio tipą, kurį jūs norite sukurti iš sąrašo',
-'LBL_JS_VALIDATE_REL_NAME'=>'Pavadinimas privalo būti iš raidžių ir ir/arba skaičių ir tarpų',
+'LBL_JS_VALIDATE_REL_NAME'=>'Pavadinimas – jis turi būti sudarytas iš raidžių ir skaitmenų; jame negali būti tarpų',
 'LBL_JS_VALIDATE_REL_LABEL'=>'Etiketė - prašome pridėti etiketę, kuri bus matoma subpanelyje',
 
 // Dropdown lists
-'LBL_JS_DELETE_REQUIRED_DDL_ITEM' => 'Are you sure you wish to delete this required dropdown list item? This may affect the functionality of your application.',
+'LBL_JS_DELETE_REQUIRED_DDL_ITEM' => 'Ar tikrai norite pašalinti šį būtiną išskleidžiamojo sąrašo elementą? Tai gali paveikti jūsų programos funkcijų veikimą.',
 
 // Specific dropdown list should be:
 // LBL_JS_DELETE_REQUIRED_DDL_ITEM_(UPPERCASE_DDL_NAME)
-'LBL_JS_DELETE_REQUIRED_DDL_ITEM_SALES_STAGE_DOM' => 'Are you sure you wish to delete this dropdown list item? Deleting the Closed Won or Closed Lost stages will cause the Forecasting module to not work properly',
+'LBL_JS_DELETE_REQUIRED_DDL_ITEM_SALES_STAGE_DOM' => 'Ar tikrai norite pašalinti šį būtiną išskleidžiamojo sąrašo elementą? Pašalinus etapus „Closed Won“ arba „Closed Lost“ prognozavimo modulis neveiks tinkamai',
 
 // Specific list items should be:
 // LBL_JS_DELETE_REQUIRED_DDL_ITEM_(UPPERCASE_ITEM_NAME)
 // Item name should have all special characters removed and spaces converted to
 // underscores
-'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_WON' => 'Are you sure you wish to delete the Closed Won sales stage? Deleting this stage will cause the Forecasting module to not work properly',
-'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Are you sure you wish to delete the Closed Lost sales stage? Deleting this stage will cause the Forecasting module to not work properly',
+'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_WON' => 'Ar tikrai norite pašalinti etapą „Closed Won sales“? Pašalinus šį etapą prognozavimo modulis neveiks tinkamai',
+'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Ar tikrai norite pašalinti etapą „Closed Lost sales“? Pašalinus šį etapą prognozavimo modulis neveiks tinkamai',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>"Pašalinus šį pasirinktinį lauką bus pašalintas ir laukas, ir visi su pasirinktiniu lauku susiję duomenys duomenų bazėje. Laukas nebebus rodomas nė viename modulio makete."
+        . " Jei šis laukas bus įtrauktas į formulę skaičiuoti bet kurių laukų vertėms, formulė nebeveiks."
+        . "\n\nLauko nebebus galima naudoti ataskaitose; šis pakeitimas įsigalios atsijungus ir vėl prisijungus prie programos. Visos ataskaitos, kuriose yra laukas, turės būti atnaujintos, kad būtų galima jas vykdyti."
+        . "\n\nAr norite tęsti?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ar tikrai norite ištrinti šį ryšį?',
-'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tai padarys šį ryšį pastovų. Ar tikrai norite išdėstyti šį ryšį?',
+'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tai padarys šį ryšį pastovų. Ar tikrai norite sukurti šį ryšį?',
 'LBL_CONFIRM_DONT_SAVE' => 'pakeitimai buvo atlikti nuo paskutinio išsaugojimo, ar norėtumėte išsaugoti?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Išsaugoti pakeitimus?',
 'LBL_CONFIRM_LOWER_LENGTH' => 'Duomenys gali būti ištrinti negrįžtamai, ar norite tęsti?',
 
 //POPUP HELP
 'LBL_POPHELP_FIELD_DATA_TYPE'=>'Pasirinkite  atitinkamą duomenų tipą, paremtą duomenimis, kurie bus įvedami į lauką.',
-'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configure the field to be full text searchable.',
-'LBL_POPHELP_FTS_FIELD_BOOST' => 'Boosting is the process of enhancing the relevancy of a record\\\'s fields.<br />Fields with a higher boost level will be given greater weight when the search is performed. When a search is performed, matching records containing fields with a greater weight will be appear higher in the search results.<br />The default value is 1.0 which stands for a neutral boost. To apply a positive boost any float value higher than 1 is accepted. For a negative boost use values lower than 1. For example a value of 1.35 will positively boost a field by 135%. Using a value of 0.60 will apply a negative boost.<br />Note that in previous versions it was required to perform a full text search reindex. This is no longer required.',
+'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Konfigūruokite lauką, kad būtų galima ieškoti viso teksto.',
+'LBL_POPHELP_FTS_FIELD_BOOST' => 'Padidinimas yra įrašo laukų tinkamumo padidinimo procesas.<br />Vykdant iešką suteikiama pirmenybė laukams, kurių padidinimo lygis yra didesnis. Vykdant iešką laukai, kuriuose yra atitinkančių įrašų ir kurių svoris didesnis, bus rodomi ieškos rezultatų viršuje.<br />Numatytoji reikšmė yra 1,0, tai reiškia neutralų padidinimą. Norėdami didinti pasirinkite bet kokią už 1 didesnę srauto reikšmę. Norėdami mažinti didinimą pasirinkite bet kokią už 1 mažesnę reikšmę. Pavyzdžiui, reikšmė 1,35 teigiamai padidina lauką iki 135 %. Naudojant reikšmę 0,60 didinimas mažinamas.<br />Nepamirškite, kad ankstesnėse versijose reikėjo iš naujo sukurti viso teksto ieškos rodyklę. Dabar to nebereikia.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Taip</b>: Laukas bus įtrauktas importavimui.<br><b>Ne</b>: Laukas nebus įtrauktas importavimui.<br><b>Privalomas</b>: reikšmė importavimui privalo būti pateikta visiems importavimams.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Įveskite plotį pikseliais.<br> Užkraunamas paveiksliukas bus sumažintas iki tokio pločio.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Įveskite aukštį pikseliais.<br> Užkraunamas paveiksliukas bus sumažintas iki tokio aukščio.',
-'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'
-. '<br><b>In Filter</b>: The field will appear in the Merge Duplicates feature, and will also be available in the Find Duplicates feature.<br><b>Filter Only</b>: The field will not appear in the Merge Duplicates feature, but will be available in the Find Duplicates feature.<br><b>Default Selected Filter</b>: The field will be used for a filter condition by default in the Find Duplicates page, and will also appear in the Merge Duplicates feature.'
+'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: laukas rodomas dublikatų suliejimo funkcijoje, tačiau jo negalima naudoti filtro sąlygai dublikatų ieškos funkcijoje.<br><b>Disabled</b>: laukas nerodomas dublikatų suliejimo funkcijoje ir jo negalima naudoti filtro sąlygai dublikatų ieškos funkcijoje.'
+. '<br><b>In Filter</b>: laukas rodomas dublikatų suliejimo funkcijoje ir galima jį naudoti dublikatų ieškos funkcijoje.<br><b>Filter Only</b>: laukas neveikia dublikatų suliejimo funkcijoje, tačiau jį galima naudoti dublikatų ieškos funkcijoje.<br><b>Default Selected Filter</b>: laukas pagal numatytuosius parametrus naudojamas filtro sąlygai dublikatų ieškos puslapyje, jis rodomas ir dublikatų suliejimo funkcijoje.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Create a formula to determine the value in this field.<br>"
-   . "Workflow definitions containing an action that are set to update this field will no longer execute the action.<br>"
-   . "Fields using formulas will not be calculated in real-time in "
-   . "Mobile EditView layouts.",
+'LBL_POPHELP_CALCULATED'=>"Sukurkite formulę, kad būtų nustatyta šio lauko reikšmė.<br>"
+   . "Darbo eigos apibrėžimai, kuriuose yra veiksmas ir kurie nustatyti atnaujinti šį lauką, šio veiksmo nebeatliks.<br>"
+   . "Laukai, kuriuose yra formulės, neskaičiuos realiuoju laiku "
+   . "„Mobile EditView“ maketai.",
 
-'LBL_POPHELP_DEPENDENT'=>"Create a formula to determine whether this field is visible in layouts.<br/>"
-        . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
-        . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
-        . "They will not follow the formula in the Sugar Self-Service Portal.",
+'LBL_POPHELP_DEPENDENT'=>"Sukurkite formulę, kad būtų nustatyta, ar šis laukas matomas maketuose.<br/>"
+        . "Po priklausomų laukų eis priklausomybės formulė naršyklėje veikiančiame mobiliajame rodinyje, <br/>"
+        . "tačiau nebus formulės vietinėse programose, pvz., „Sugar Mobile for iPhone“. <br/>"
+        . "Po jų nebus pateikiama formulė „Sugar“ savitarnos portale.",
 'LBL_POPHELP_GLOBAL_SEARCH'=>'Pasirinkite šį lauką, kai norėsite ieškosite įrašų šiame modulyje per globalią paiešką.',
 //Revert Module labels
 'LBL_RESET' => 'Atstatyti',
@@ -761,7 +762,7 @@ $mod_strings = array(
 'LBL_REMOVE_CUSTOM' => 'Išmesti pakeitimus',
 'LBL_CLEAR_RELATIONSHIPS' => 'Išvalyti ryšius',
 'LBL_RESET_LABELS' => 'Atstatyti pavadinimus',
-'LBL_RESET_LAYOUTS' => 'Reset Layouts',
+'LBL_RESET_LAYOUTS' => 'Maketus nustatyti iš naujo',
 'LBL_REMOVE_FIELDS' => 'Išmesti pridėtus laukus',
 'LBL_CLEAR_EXTENSIONS' => 'Išvalyti išplėtimus',
 
@@ -771,38 +772,38 @@ $mod_strings = array(
 'fieldTypes' => array(
                 'varchar'=>'Tekstas',
                 'int'=>'Skaičius',
-                'float'=>'Float',
-                'bool'=>'Checkbox',
+                'float'=>'Slankusis simbolis',
+                'bool'=>'Žymimasis langelis',
                 'enum'=>'Iššokantis sąrašas',
-                'multienum' => 'MultiSelect',
-                'date'=>'Data:',
+                'multienum' => 'Kelių pasirinkimas',
+                'date'=>'Data',
                 'phone' => 'Telefonas',
                 'currency' => 'Valiuta',
                 'html' => 'HTML',
                 'radioenum' => 'Radio',
                 'relate' => 'Susijęs',
                 'address' => 'Adresas',
-                'text' => 'TextArea',
+                'text' => 'Teksto sritis',
                 'url' => 'URL',
                 'iframe' => 'IFrame',
                 'image' => 'Paveikslėlis',
-                'encrypt'=>'Encrypt',
-                'datetimecombo' =>'Datetime',
-                'decimal'=>'Decimal',
+                'encrypt'=>'Šifruoti',
+                'datetimecombo' =>'Data ir laikas',
+                'decimal'=>'Dešimtainis',
 ),
 'labelTypes' => array(
     "" => "Anksčiau naudoti pavadinimai",
     "all" => "Visi",
 ),
 
-'parent' => 'Flex Relate',
+'parent' => 'Lankstusis ryšys',
 
 'LBL_ILLEGAL_FIELD_VALUE' =>"Iššokantis sąrašo raktas negali turėti kabučių.",
-'LBL_CONFIRM_SAVE_DROPDOWN' =>"Jūs pasirinkote išmesti šį elementą iš iššokančio sąrašo. Atlikus ištrynimą šis elementas nebus matomas jokiuose iššokančiuose sąrašuose. Ar norite tęsti?",
+'LBL_CONFIRM_SAVE_DROPDOWN' =>"Jūs pasirinkote pašalinti šį elementą iš išskleidžiamojo sąrašo. Visuose išskleidžiamuosiuose laukuose, kuriuose naudojamas šis sąrašas su šiuo elementu, nebebus rodoma reikšmė ir jos nebebus galima pasirinkti išskleidžiamuosiuose laukuose. Ar norite tęsti?",
 'LBL_POPHELP_VALIDATE_US_PHONE'=>"Select to validate this field for the entry of a 10-digit<br>" .
                                  "phone number, with allowance for the country code 1, and<br>" .
                                  "to apply a U.S. format to the phone number when the record<br>" .
-                                 "is saved. The following format will be applied: (xxx) xxx-xxxx.",
+                                 "išsaugota. Bus pritaikytas toks formatas: (xxx) xxx-xxxx.",
 'LBL_ALL_MODULES'=>'Visi moduliai',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (related {1} ID)',
 );

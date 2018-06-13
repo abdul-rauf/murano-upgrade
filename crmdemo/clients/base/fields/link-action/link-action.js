@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -103,14 +103,14 @@
                 //Show alerts for this request
                 showAlerts: true,
                 relate: true,
-                success: _.bind(function(model) {
+                success: _.bind(function() {
                     //We've just linked a related, however, the list of records from
                     //loadData will come back in DESC (reverse chronological order
                     //with our newly linked on top). Hence, we reset pagination here.
                     this.context.get('collection').resetPagination();
                     this.context.set('collapsed', false);
                 }, this),
-                error: function(error) {
+                error: function() {
                     app.alert.show('server-error', {
                         level: 'error',
                         messages: 'ERR_GENERIC_SERVER_ERROR'

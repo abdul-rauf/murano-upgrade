@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -1358,9 +1358,10 @@ var jCore = (function ($, window) {
      * 2. Append the html of the ports
      * 3. Add the connection html to the canvas
      * 4. Trigger the create event *
+     * @param {Boolean} fromUndo
      * @chainable
      */
-    CommandConnect.prototype.buildConnection = function() {
+    CommandConnect.prototype.buildConnection = function(fromUndo) {
         var connection = this.receiver,
             canvas = connection.canvas,
             srcPort = connection.getSrcPort(),
@@ -1374,8 +1375,15 @@ var jCore = (function ($, window) {
         srcPort.parent.html.appendChild(srcPort.getHTML());
         destPort.parent.html.appendChild(destPort.getHTML());
 
+        // This tells the addElement action to not redraw connecting lines after
+        // placement back on the canvase
+        connection.inUndo = fromUndo === true;
+
         // add the connection to the canvas (its html is appended)
         canvas.addConnection(connection);
+
+        // Undo what was done up above to keep this object clean
+        connection.inUndo = !connection.inUndo;
         canvas.updatedElement = connection;
         return connection;
     };
@@ -2300,8 +2308,7 @@ var jCore = (function ($, window) {
         }
         // reconnect using the stack of commandConnect
         for (i = this.stackCommandConnect.length - 1; i >= 0; i -= 1) {
-            //this.stackCommandConnect[i].redo();
-            this.stackCommandConnect[i].buildConnection();
+            this.stackCommandConnect[i].buildConnection(true);
         }
 
         this.receiver.triggerCreateEvent(mainShape, this.relatedElements);
@@ -12611,10 +12618,12 @@ var jCore = (function ($, window) {
                 $(currentLabel.textField).focusout();
             }
             customShape.wasDragged = false;
-//        customShape.canvas.setCurrentShape(customShape);
+
             e.stopPropagation();
             //select in list item for element panel with errors
-            if ( listPanelError !== undefined ) {
+            // Add defensive coding to ensure we are not calling methods on
+            // undefined properties
+            if (listPanelError !== undefined && customShape.BPMNError) {
                 erros = customShape.BPMNError.asArray();
                 if ( erros.length ) {
                     id = customShape.getID();
@@ -15736,6 +15745,9 @@ var jCore = (function ($, window) {
         $canvas.on("contextmenu", function (e) {
             e.preventDefault();
         });
+        /* Activate Keyboard Events */
+        $(document).on('keydown', onCanvasKeyDown)
+            .on('keyup', onCanvasKeyUp);
 
         this.updateBehaviors();
         return this;
@@ -17226,6 +17238,9 @@ var jCore = (function ($, window) {
 
     CustomLine.prototype.createDiv = function(x, y, w, h, transform){
         var orientation = (w === 1 ? 1 : (h === 1 ? 0: -1)), offset;
+        // making the lines two pixels wide instead of one
+        var lineWidth = w === 1 ? 2 : w;
+        var lineHeight = h === 1 ? 2 : h;
 
         if (transform) {
             offset = {
@@ -17245,8 +17260,8 @@ var jCore = (function ($, window) {
                 'animation':'none',
                 'position': 'absolute'
             })
-            .width(w)
-            .height(h)
+            .width(lineWidth)
+            .height(lineHeight)
             .offset(offset);
         if (transform) {
             $(this.html).css({
@@ -17397,11 +17412,6 @@ var jCore = (function ($, window) {
                 break;
         }
     }
-    /**
-     * KEYBOARD EVENTS
-     */
-    $(document).on('keydown', onCanvasKeyDown)
-        .on('keyup', onCanvasKeyUp);
 
     return {
         ArrayList: ArrayList,
@@ -17501,5 +17511,3 @@ var jCore = (function ($, window) {
     };
 
 }(jQuery, window));
-
-//@ sourceURL=pmse.jcore.js

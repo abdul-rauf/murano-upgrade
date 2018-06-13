@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -90,7 +90,7 @@ $mod_strings = array (
   'LBL_TRACKED_URLS'=>'Tracker URL',
   'LBL_TRACKED_URLS_SUBPANEL_TITLE'=>'Tracker URL',
   'LBL_CAMPAIGN_ACCOUNTS_SUBPANEL_TITLE'=>'Aziende',
-  'LBL_PROSPECT_LIST_SUBPANEL_TITLE' => 'Liste Obiettivi',
+  'LBL_PROSPECT_LIST_SUBPANEL_TITLE' => 'Elenco obiettivi',
   'LBL_EMAIL_MARKETING_SUBPANEL_TITLE' => 'Marketing e-mail',
   'LNK_NEW_EMAIL_TEMPLATE' => 'Nuovo Modello Email',
   'LNK_EMAIL_TEMPLATE_LIST' => 'Modelli Email',
@@ -117,13 +117,13 @@ $mod_strings = array (
   'LBL_LOG_ENTRIES_TARGETED_TITLE'=>'Messaggio Inviato/Tentato',
   'LBL_LOG_ENTRIES_SEND_ERROR_TITLE'=>'Messaggi non consegnati, Altro',
   'LBL_LOG_ENTRIES_INVALID_EMAIL_TITLE'=>'Messaggi non consegnati, Indirizzo non valido',
-  'LBL_LOG_ENTRIES_LINK_TITLE'=>'Click sui Link',
+  'LBL_LOG_ENTRIES_LINK_TITLE'=>'Fai clic sul link',
   'LBL_LOG_ENTRIES_VIEWED_TITLE'=>'Messaggio Letto',
   'LBL_LOG_ENTRIES_REMOVED_TITLE'=>'Optato per l&#39;uscita',
-  'LBL_LOG_ENTRIES_LEAD_TITLE'=>'Leads Creati',
+  'LBL_LOG_ENTRIES_LEAD_TITLE'=>'Lead creati',
   'LBL_CAMPAIGN_LEAD_SUBPANEL_TITLE'=>'Lead',
   'LBL_OPPORTUNITY_SUBPANEL_TITLE'=>'Opportunità',
-  'LBL_LOG_ENTRIES_CONTACT_TITLE'=>'Contatti Creati',
+  'LBL_LOG_ENTRIES_CONTACT_TITLE'=>'Contatti creati',
 
   'LBL_BACK_TO_CAMPAIGNS'=>'Torna alle Campagne',
   //error messages.
@@ -257,7 +257,7 @@ $mod_strings = array (
   'LBL_USERS_CANNOT_OPTOUT' => 'Gli utenti di sistema non hanno la possibilità di disiscriversi dalle email ricevute.',
   'LBL_ELECTED_TO_OPTOUT' => 'Hai scelto di disiscriverti e di non ricevere più messaggi email.',
   'LBL_COPY_OF' => 'Copia di',
-  'LBL_SAVED_SEARCH' => 'Ricerca &amp; Layout salvati',
+  'LBL_SAVED_SEARCH' => 'Ricerca e layout salvati',
   //email setup wizard
   'LBL_WIZ_FROM_NAME'                         => 'Mittente:',
   'LBL_WIZ_FROM_ADDRESS'                      => 'Destinatario:',
@@ -394,7 +394,7 @@ $mod_strings = array (
     'LBL_LINK_SUBPANEL_TITLE' => 'Collegamento',
     'LBL_LEAD_SUBPANEL_TITLE' => 'Lead',
     'LBL_CONTACT_SUBPANEL_TITLE' => 'Contatto',
-    'LBL_INVALID EMAIL_SUBPANEL_TITLE' => 'Email Non Valida',
+    'LBL_INVALID EMAIL_SUBPANEL_TITLE' => 'Email non valida',
     'LBL_SEND ERROR_SUBPANEL_TITLE' => 'Errore Invio',
     'LBL_REMOVED_SUBPANEL_TITLE' => 'Cancellato',
     'LBL_BLOCKED_SUBPANEL_TITLE' => 'Bloccato',

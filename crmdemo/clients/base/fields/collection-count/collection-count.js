@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -14,8 +14,6 @@
  * @extends View.Fields.Base.BaseField
  */
 ({
-    plugins: ['Tooltip'],
-
     events: {
         'click [data-action="count"]': 'fetchCount'
     },
@@ -119,7 +117,7 @@
             // FIXME: When SC-3681 is ready, we will no longer have the need for
             // this link, since the total will be displayed by default.
             context.total = new Handlebars.SafeString(
-                '<a data-action="count" rel="tooltip" data-placement="right" title="' + tooltipLabel +'">' +
+                '<a href="javascript:void(0);" data-action="count" rel="tooltip" data-placement="right" title="' + tooltipLabel + '" role="button" tabindex="0">' +
                 Handlebars.Utils.escapeExpression(
                     app.lang.get('TPL_LIST_HEADER_COUNT_PARTIAL', this.module, {num: context.num + 1})
                 ) + '</a>'

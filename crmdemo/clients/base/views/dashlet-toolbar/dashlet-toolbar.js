@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -23,8 +23,12 @@
         'dashlet:delete:clicked' : 'removeClicked',
         'dashlet:toggle:clicked' : 'toggleMinify'
     },
-    plugins: ['Tooltip'],
-    initialize: function (options) {
+    events: {
+        'shown.bs.dropdown': '_toggleAria',
+        'hidden.bs.dropdown': '_toggleAria'
+    },
+
+    initialize: function(options) {
         _.extend(options.meta, app.metadata.getView(null, 'dashlet-toolbar'), options.meta.toolbar);
         app.view.View.prototype.initialize.call(this, options);
     },
@@ -33,13 +37,13 @@
      * Change to the spinning icon to indicate that loading process is triggered
      */
     refreshClicked: function() {
-        var $el = this.$("[data-action=loading]"),
-            self = this,
-            options = {};
-        if($el.length > 0) {
+        var $el = this.$('[data-action=loading]');
+        var self = this;
+        var options = {};
+        if ($el.length > 0) {
             $el.removeClass(this.cssIconDefault).addClass(this.cssIconRefresh);
             options.complete = function() {
-                if(self.disposed) {
+                if (self.disposed) {
                     return;
                 }
                 $el.removeClass(self.cssIconRefresh).addClass(self.cssIconDefault);
@@ -72,24 +76,38 @@
      * @param {Event} mouse event.
      */
     toggleClicked: function(evt) {
-        var $btn = $(evt.currentTarget),
-            expanded = _.isUndefined($btn.data('expanded')) ? true : $btn.data('expanded'),
-            label = expanded ? 'LBL_DASHLET_MAXIMIZE' : 'LBL_DASHLET_MINIMIZE';
+        var $btn = $(evt.currentTarget);
+        var expanded = _.isUndefined($btn.data('expanded')) ? true : $btn.data('expanded');
+        var label = expanded ? 'LBL_DASHLET_MAXIMIZE' : 'LBL_DASHLET_MINIMIZE';
 
         $btn.html(app.lang.get(label, this.module));
         this.layout.collapse(expanded);
         $btn.data('expanded', !expanded);
     },
+
     /**
      * Toggle current dashlet frame when user clicks chevron icon
      *
      * @param {Window.Event} mouse event.
      */
     toggleMinify: function(evt) {
-        var $el = this.$('.dashlet-toggle > i'),
-            collapsed = $el.is('.fa-chevron-up');
+        var $el = this.$('.dashlet-toggle > i');
+        var collapsed = $el.is('.fa-chevron-up');
         this.layout.collapse(collapsed);
         //firing an event to notify dashlet expand / collapse
-        this.layout.trigger('dashlet:collapse',collapsed);
+        this.layout.trigger('dashlet:collapse', collapsed);
+    },
+
+    /**
+     * Sets a button accessibility class 'aria-expanded' to true or false
+     * depending on if the dropdown menu is open or closed.
+     *
+     * @private
+     */
+    _toggleAria: function() {
+        var $button = this.$('[data-toggle=dropdown]');
+        var $group = $button.parent();
+        $button.attr('aria-expanded', $group.hasClass('open'));
     }
+
 })

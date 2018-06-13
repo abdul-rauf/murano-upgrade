@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -30,6 +30,22 @@
  */
 ({
     extendsFrom: 'HistoryView',
+
+    /**
+     * Besides defining new DOM events that will be later bound to methods
+     * through {@link #delegateEvents, the events method also makes sure parent
+     * classes events are explicitly inherited.
+     *
+     * @property {Function}
+     */
+    events: function() {
+        var prototype = Object.getPrototypeOf(this);
+        var parentEvents = _.result(prototype, 'events');
+
+        return _.extend({}, parentEvents, {
+            'click [data-action=date-switcher]': 'dateSwitcher'
+        });
+    },
 
     /**
      * @inheritdoc
@@ -94,10 +110,6 @@
      * the invitation collection by calling {@link #updateInvitation}.
      */
     _initEvents: function() {
-        this.events = _.extend(this.events, {
-            'click [data-action=date-switcher]': 'dateSwitcher'
-        });
-
         this._super('_initEvents');
         this.on('planned-activities:close-record:fire', this.heldActivity, this);
         this.on('linked-model:create', this.loadData, this);
@@ -306,6 +318,23 @@
         }
 
         this._super('tabSwitcher', [event]);
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Additional logic on switch visibility event.
+     */
+    visibilitySwitcher: function() {
+        var activeVisibility;
+        if (!this.isManager) {
+            return;
+        }
+        activeVisibility = this.getVisibility();
+        this.$el.find('[data-action=visibility-switcher]')
+            .attr('aria-pressed', function() {
+                return $(this).val() === activeVisibility;
+            });
     },
 
     /**

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -145,7 +145,11 @@ class SugarWidgetReportField extends SugarWidgetField
             }
 
         }
-	}
+    } elseif (isset($layout_def['type']) && $layout_def['type'] == 'enum') {
+        // NULL and '' are displayed as None at least for enum fields
+        $db = $this->reporter->db;
+        $alias = $db->convert($alias, 'IFNULL', array($db->emptyValue($layout_def['type'])));
+    }
 
 	$reportAlias[$alias] = $layout_def;
 	return $alias;

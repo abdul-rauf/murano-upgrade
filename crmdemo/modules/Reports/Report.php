@@ -3,7 +3,7 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -1588,7 +1588,7 @@ class Report
 
     function create_order_by()
     {
-
+        $generated_order_by = '';
         $this->layout_manager->setAttribute('context', 'OrderBy');
         $this->order_by = '';
         $this->order_by_arr = array();
@@ -1598,8 +1598,10 @@ class Report
 
             $this->register_field_for_query($order_by);
 
-            array_push($this->order_by_arr, $this->layout_manager->widgetQuery($order_by));
-
+            $generated_order_by = $this->layout_manager->widgetQuery($order_by);
+            if($generated_order_by != "") {
+                array_push($this->order_by_arr, $generated_order_by);
+            }
         }
         $this->summary_order_by = '';
         //$this->summary_order_by_arr= array();
@@ -1672,7 +1674,9 @@ class Report
                     }
                 }
                 // Changed the sort order, so it would sort by the initial options first
-                array_unshift($this->group_order_by_arr, $order_by);
+                if (!empty($order_by)) {
+                    array_unshift($this->group_order_by_arr, $order_by);
+                }
             }
         }
     }
@@ -1910,11 +1914,15 @@ class Report
         if (!is_admin($current_user)) {
             $list_action = ACLAction::getUserAccessLevel($current_user->id, $this->focus->module_dir, 'list', $type = 'module');
             $view_action = ACLAction::getUserAccessLevel($current_user->id, $this->focus->module_dir, 'view', $type = 'module');
-    
-            if ($list_action == ACL_ALLOW_NONE || $view_action == ACL_ALLOW_NONE)
+
+            if ($list_action == ACL_ALLOW_NONE || $view_action == ACL_ALLOW_NONE) {
                 $this->handleException($mod_strings['LBL_NO_ACCESS']);
-            if ($list_action == ACL_ALLOW_OWNER || $view_action == ACL_ALLOW_OWNER)
-                $where_auto .= " AND " . $this->focus->table_name . ".assigned_user_id='" . $current_user->id . "' \n";
+            }
+            $aclVisibility = new ACLVisibility($this->focus);
+            $aclVisibility->setOptions(array('action' => 'view'));
+            $aclVisibility->addVisibilityWhere($where_auto);
+            $aclVisibility->setOptions(array('action' => 'list'));
+            $aclVisibility->addVisibilityWhere($where_auto);
         }
         // End ACL check
 
@@ -2432,13 +2440,13 @@ class Report
 
         $row['cells'] = $cells;
 
-        // calculate summary rows count as the product of all count fields in summary
+        // calculate summary rows count by returning the highest number of 'count' fields for the given db row
         $count = 1;
         $count_exists = false;
         foreach ($db_row as $count_column => $count_value)
         {
             if (substr($count_column, -10) == "__allcount" || $count_column == 'count') {
-                $count *= max($count_value, 1);
+                $count = max(array($count,$count_value, 1));
                 $count_exists = true;
             }
         }
@@ -2511,7 +2519,9 @@ class Report
             $this->report_def_str,
             0,
             $saved_report->team_id,
-            $chart_type);
+            $chart_type,
+            $saved_report->acl_team_set_id
+        );
         $this->saved_report = $saved_report;
 
         if (!empty($this->saved_report)) {

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -55,7 +55,7 @@ $mod_strings = array (
   'LNK_NEW_LEAD' => 'krijo udhëheqje',
   'LNK_NEW_CASE' => 'Krijo rast',
   'LNK_NEW_NOTE' => 'Krijo shënim ose bashkëngjitje',
-  'LNK_NEW_CALL' => 'Thirje identifikuese',
+  'LNK_NEW_CALL' => 'Thirrje identifikuese',
   'LNK_NEW_EMAIL' => 'Emaili i arkivuar',
   'LNK_COMPOSE_EMAIL' => 'Ndërto email',
   'LNK_NEW_MEETING' => 'Cakto mbledhje',
@@ -173,7 +173,7 @@ $mod_strings = array (
   'LBL_BASIC_CHARTS' => 'Grafik bazik',
   'LBL_REPORT_CHARTS' => 'Raport grafikat',
 
-  'LBL_MY_FAVORITE_REPORT_CHARTS' => 'raportet e favoriteve të mia',
+  'LBL_MY_FAVORITE_REPORT_CHARTS' => 'Raportet e preferencave të mia',
   'LBL_GLOBAL_REPORT_CHARTS' => 'Raportet e grupit global',
   'LBL_MY_TEAM_REPORT_CHARTS' => 'Raportet e grupit tim',
   'LBL_MY_SAVED_REPORT_CHARTS' => 'Raportet e mia të ruajtura',

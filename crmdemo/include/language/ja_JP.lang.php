@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -199,9 +199,7 @@ $app_list_strings = array (
     'Filters' => '絞り込み',
     'Comments' => 'コメント',
     'Currencies' => '通貨',
-    'Project' => 'プロジェクト',
     'ProductTemplates' => '製品テンプレート',
-    'ProductCategories' => '商品カテゴリ',
     'ProductTypes' => '商品タイプ',
     'Shippers' => '発送元',
     'Subscriptions' => '購読',
@@ -945,6 +943,16 @@ $app_list_strings = array (
                 '6'=>"金",
                 '7'=>"土",
         ),
+        'dom_cal_day_min'=>array(
+            '0'=>"",
+            '1'=>"日",
+            '2'=>"月",
+            '3'=>"火",
+            '4'=>"水",
+            '5'=>"木",
+            '6'=>"金",
+            '7'=>"土",
+        ),
     'dom_cal_day_of_week' => array(
         '0' => '日',
         '1' => '月',
@@ -1293,6 +1301,11 @@ $app_list_strings = array (
         'Yearly' => '年',
     ),
 
+    'repeat_end_types' => array(
+        'Until' => '終了日',
+        'Occurrences' => '繰り返す間隔',
+    ),
+
     'duration_hours_intervals' => array(
       0 => '0',
       1 => '1',
@@ -1340,6 +1353,103 @@ $app_list_strings = array (
         28 => '28',
         29 => '29',
         30 => '30',
+        31 => '31',
+        32 => '32',
+        33 => '33',
+        34 => '34',
+        35 => '35',
+        36 => '36',
+        37 => '37',
+        38 => '38',
+        39 => '39',
+        40 => '40',
+        41 => '41',
+        42 => '42',
+        43 => '43',
+        44 => '44',
+        45 => '45',
+        46 => '46',
+        47 => '47',
+        48 => '48',
+        49 => '49',
+        50 => '50',
+        51 => '51',
+        52 => '52',
+        53 => '53',
+        54 => '54',
+        55 => '55',
+        56 => '56',
+        57 => '57',
+        58 => '58',
+        59 => '59',
+        60 => '60',
+        61 => '61',
+        62 => '62',
+        63 => '63',
+        64 => '64',
+        65 => '65',
+        66 => '66',
+        67 => '67',
+        68 => '68',
+        69 => '69',
+        70 => '70',
+        71 => '71',
+        72 => '72',
+        73 => '73',
+        74 => '74',
+        75 => '75',
+        76 => '76',
+        77 => '77',
+        78 => '78',
+        79 => '79',
+        80 => '80',
+        81 => '81',
+        82 => '82',
+        83 => '83',
+        84 => '84',
+        85 => '85',
+        86 => '86',
+        87 => '87',
+        88 => '88',
+        89 => '89',
+        90 => '90',
+        91 => '91',
+        92 => '92',
+        93 => '93',
+        94 => '94',
+        95 => '95',
+        96 => '96',
+        97 => '97',
+        98 => '98',
+        99 => '99',
+    ),
+
+    'repeat_selector_dom' => array(
+        'None' => '未設定',
+        'Each' => '毎',
+        'On' => '曜日',
+    ),
+
+    'repeat_ordinal_dom' => array(
+        'first' => '1回目',
+        'second' => '2回目',
+        'third' => '3回目',
+        'fourth' => '4回目',
+        'fifth' => '5回目',
+        'last' => '最後',
+    ),
+
+    'repeat_unit_dom' => array(
+        'Sun' => '日曜日',
+        'Mon' => '月曜日',
+        'Tue' => '火曜日',
+        'Wed' => '水曜日',
+        'Thu' => '木曜日',
+        'Fri' => '金曜日',
+        'Sat' => '土曜日',
+        'Day' => '日',
+        'WD'  => '平日',
+        'WE'  => '週末'
     ),
 
     'duration_dom' => array(
@@ -1520,6 +1630,7 @@ $app_list_strings = array (
         'middle'       => 'ミドル',
         'end' => 'リピート終了',
         'top' => 'トップ',
+        'total' => '合計',
     ),
     'pipeline_chart_dom' => array (
         'fun'   => 'ファンネル',
@@ -1666,7 +1777,15 @@ $app_list_strings = array (
       'light' => '明るい',
       'dark' => '暗い',
   ),
-
+    'repeat_days_dom' => array(
+        array(1, 8, 15, 22, 29),
+        array(2, 9, 16, 23, 30),
+        array(3, 10, 17, 24, 31),
+        array(4, 11, 18, 25, ''),
+        array(5, 12, 19, 26, ''),
+        array(6, 13, 20, 27, ''),
+        array(7, 14, 21, 28, '')
+    ),
   'lead_conv_activity_opt' =>
   array(
         'move' => '移動',
@@ -1810,7 +1929,7 @@ $app_list_strings = array (
             "31" => array("code" => "NAA", "name" => "ナアマ"),
             "32" => array("code" => "OEB", "name" => "ウメル・ブアーギ"),
             "33" => array("code" => "ORA", "name" => "オラン"),
-            "34" => array("code" => "OUA", "name" => "ワルグラ"),
+            "34" => array("code" => "OUA-ワガドゥグー空港", "name" => "ワルグラ"),
             "35" => array("code" => "REL", "name" => "ルリザンヌ"),
             "36" => array("code" => "SAH", "name" => "スーク・アフラース"),
             "37" => array("code" => "SAI", "name" => "サイダ"),
@@ -2101,7 +2220,7 @@ $app_list_strings = array (
         /* Barbados */
         "BB" => array(
             "1" => array("code" => "CC", "name" => "クライストチャーチ"),
-            "2" => array("code" => "AND", "name" => "聖アンドリュー"),
+            "2" => array("code" => "すべての条件を満たす", "name" => "聖アンドリュー"),
             "3" => array("code" => "GEO", "name" => "聖ジョージ"),
             "4" => array("code" => "JAM", "name" => "聖 James"),
             "5" => array("code" => "JOH", "name" => "聖ジョン"),
@@ -2419,7 +2538,7 @@ $app_list_strings = array (
         "CM" => array(
             "1" => array("code" => "ADA", "name" => "アダマワ"),
             "2" => array("code" => "CEN", "name" => "センター"),
-            "3" => array("code" => "EST", "name" => "東 (東部標準時)"),
+            "3" => array("code" => "米国東部標準時刻", "name" => "東 (東部標準時)"),
             "4" => array("code" => "EXN", "name" => "極北"),
             "5" => array("code" => "LIT", "name" => "リトラル"),
             "6" => array("code" => "NOR", "name" => "北"),
@@ -2812,7 +2931,7 @@ $app_list_strings = array (
         ),
         /* Dominica */
         "DM" => array(
-            "1" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "1" => array("code" => "すべての条件を満たす", "name" => "Saint Andrew Parish"),
             "2" => array("code" => "DAV", "name" => "Saint David Parish"),
             "3" => array("code" => "GEO", "name" => "Saint George Parish"),
             "4" => array("code" => "JOH", "name" => "Saint John Parish"),
@@ -2989,7 +3108,7 @@ $app_list_strings = array (
             "3" => array("code" => "BG", "name" => "Benishangul-Gumaz"),
             "4" => array("code" => "GB", "name" => "Gambela"),
             "5" => array("code" => "HR", "name" => "Hariai"),
-            "6" => array("code" => "OR", "name" => "Oromia"),
+            "6" => array("code" => "いずれかの条件を満たす", "name" => "Oromia"),
             "7" => array("code" => "SM", "name" => "Somali"),
             "8" => array("code" => "SN", "name" => "Southern Nations - Nationalities"),
             "9" => array("code" => "TG", "name" => "ティグレ"),
@@ -3020,7 +3139,7 @@ $app_list_strings = array (
             "19" => array("code" => "SAN", "name" => "Sandur"),
             "20" => array("code" => "SKO", "name" => "Skopun"),
             "21" => array("code" => "HVA", "name" => "Hvannasund"),
-            "22" => array("code" => "SUM", "name" => "スンバ島"),
+            "22" => array("code" => "合計", "name" => "スンバ島"),
             "23" => array("code" => "VIð", "name" => "Viðareiði"),
             "24" => array("code" => "POR", "name" => "Porkeri"),
             "25" => array("code" => "SKá", "name" => "Skálavík"),
@@ -3189,7 +3308,7 @@ $app_list_strings = array (
             "8" => array("code" => "MAR", "name" => "Maripasoula"),
             "9" => array("code" => "CAM", "name" => "Camopi"),
             "10" => array("code" => "SAI", "name" => "サン ・ ジョルジュ"),
-            "11" => array("code" => "OUA", "name" => "Ouanary"),
+            "11" => array("code" => "OUA-ワガドゥグー空港", "name" => "Ouanary"),
             "12" => array("code" => "RéG", "name" => "レジーナ"),
             "13" => array("code" => "ROU", "name" => "Roura"),
             "14" => array("code" => "SAI", "name" => "Saint-élie"),
@@ -3592,7 +3711,7 @@ $app_list_strings = array (
             "21" => array("code" => "ME", "name" => "メガラヤ州"),
             "22" => array("code" => "MI", "name" => "ミゾラム州"),
             "23" => array("code" => "NA", "name" => "ナガランド"),
-            "24" => array("code" => "OR", "name" => "オリッサ州"),
+            "24" => array("code" => "いずれかの条件を満たす", "name" => "オリッサ州"),
             "25" => array("code" => "PO", "name" => "ポンディシェリ連邦直轄地域"),
             "26" => array("code" => "PU", "name" => "パンジャブ"),
             "27" => array("code" => "RA", "name" => "ラージャス ターン州"),
@@ -3640,7 +3759,7 @@ $app_list_strings = array (
         ),
         /* Iran */
         "IR" => array(
-            "1" => array("code" => "ARD", "name" => "アルダビール"),
+            "1" => array("code" => "アード", "name" => "アルダビール"),
             "2" => array("code" => "BSH", "name" => "ブシェール"),
             "3" => array("code" => "CMB", "name" => "Chahar Mahaal and Bakhtiari"),
             "4" => array("code" => "EAZ", "name" => "東アーザルバーイジャーン"),
@@ -3795,7 +3914,7 @@ $app_list_strings = array (
             "56" => array("code" => "NA", "name" => "ナポリ"),
             "57" => array("code" => "NO", "name" => "ノヴァーラ"),
             "58" => array("code" => "NU", "name" => "ヌーオロ"),
-            "59" => array("code" => "OR", "name" => "オリスターノ"),
+            "59" => array("code" => "いずれかの条件を満たす", "name" => "オリスターノ"),
             "60" => array("code" => "PD", "name" => "パドヴァ"),
             "61" => array("code" => "PA", "name" => "パレルモ"),
             "62" => array("code" => "PR", "name" => "パルマ"),
@@ -3855,7 +3974,7 @@ $app_list_strings = array (
             "3" => array("code" => "KIN", "name" => "キングストン教区"),
             "4" => array("code" => "MAN", "name" => "マンチェスター教区"),
             "5" => array("code" => "POR", "name" => "ポートランド教区"),
-            "6" => array("code" => "AND", "name" => "Saint Andrew Parish"),
+            "6" => array("code" => "すべての条件を満たす", "name" => "Saint Andrew Parish"),
             "7" => array("code" => "ANN", "name" => "セント ・ アン教区"),
             "8" => array("code" => "CAT", "name" => "セント ・ キャサリン教区"),
             "9" => array("code" => "ELI", "name" => "セント ・ エリザベス教区"),
@@ -4109,7 +4228,7 @@ $app_list_strings = array (
             "11" => array("code" => "BAT", "name" => "Batroun"),
             "12" => array("code" => "BSH", "name" => "ブシャッレ"),
             "13" => array("code" => "KOU", "name" => "Koura"),
-            "14" => array("code" => "MIN", "name" => "Miniyeh-Danniyeh"),
+            "14" => array("code" => "最小", "name" => "Miniyeh-Danniyeh"),
             "15" => array("code" => "TRI", "name" => "トリポリ"),
             "16" => array("code" => "ZGH", "name" => "Zgharta"),
             "17" => array("code" => "ALE", "name" => "アレイ"),
@@ -4358,15 +4477,15 @@ $app_list_strings = array (
         ),
         /* Malaysia */
         "MY" => array(
-            "1" => array("code" => "Johor", "name" => "ジョホール州"),
-            "2" => array("code" => "Kedah", "name" => "ケダ州"),
-            "3" => array("code" => "Kelantan", "name" => "クランタン"),
-            "4" => array("code" => "Labuan", "name" => "ラブアン"),
-            "5" => array("code" => "Melaka", "name" => "マラッカ"),
-            "6" => array("code" => "Negeri Sembilan", "name" => "ヌグリ ・ スンビラン州"),
-            "7" => array("code" => "Pahang", "name" => "パハン州"),
-            "8" => array("code" => "Perak", "name" => "ペラ州"),
-            "9" => array("code" => "Perlis", "name" => "ペルリス"),
+            "1" => array("code" => "ジョホール州", "name" => "ジョホール州"),
+            "2" => array("code" => "ケダ州", "name" => "ケダ州"),
+            "3" => array("code" => "クランタン", "name" => "クランタン"),
+            "4" => array("code" => "ラブアン", "name" => "ラブアン"),
+            "5" => array("code" => "マラッカ", "name" => "マラッカ"),
+            "6" => array("code" => "ヌグリ ・ スンビラン州", "name" => "ヌグリ ・ スンビラン州"),
+            "7" => array("code" => "パハン州", "name" => "パハン州"),
+            "8" => array("code" => "ペラ州", "name" => "ペラ州"),
+            "9" => array("code" => "ペルリス", "name" => "ペルリス"),
             "10" => array("code" => "Pulau Pinang", "name" => "Pulau Pinang"),
             "11" => array("code" => "Sabah", "name" => "Sabah"),
             "12" => array("code" => "Sarawak", "name" => "Sarawak"),
@@ -4602,7 +4721,7 @@ $app_list_strings = array (
             "7" => array("code" => "BOU", "name" => "Bouéni"),
             "8" => array("code" => "CHI", "name" => "Chirongui"),
             "9" => array("code" => "SAD", "name" => "Sada"),
-            "10" => array("code" => "OUA", "name" => "Ouangani"),
+            "10" => array("code" => "OUA-ワガドゥグー空港", "name" => "Ouangani"),
             "11" => array("code" => "CHI", "name" => "Chiconi"),
             "12" => array("code" => "TSI", "name" => "Tsingoni"),
             "13" => array("code" => "MTS", "name" => "M'Tsangamouji"),
@@ -4661,7 +4780,7 @@ $app_list_strings = array (
             "4" => array("code" => "CA", "name" => "Cahul"),
             "5" => array("code" => "ED", "name" => "Edinet"),
             "6" => array("code" => "LA", "name" => "Lapusna"),
-            "7" => array("code" => "OR", "name" => "Orhei"),
+            "7" => array("code" => "いずれかの条件を満たす", "name" => "Orhei"),
             "8" => array("code" => "SO", "name" => "Soroca"),
             "9" => array("code" => "TI", "name" => "Tighina"),
             "10" => array("code" => "UN", "name" => "Ungheni"),
@@ -5448,7 +5567,7 @@ $app_list_strings = array (
             "47" => array("code" => "NO", "name" => "ノヴゴロド"),
             "48" => array("code" => "NV", "name" => "ノボシビルスク"),
             "49" => array("code" => "OM", "name" => "オムスク"),
-            "50" => array("code" => "OR", "name" => "オリョール"),
+            "50" => array("code" => "いずれかの条件を満たす", "name" => "オリョール"),
             "51" => array("code" => "OE", "name" => "オレンブルク"),
             "52" => array("code" => "PA", "name" => "パラナ"),
             "53" => array("code" => "PE", "name" => "ペンザ"),
@@ -5969,57 +6088,57 @@ $app_list_strings = array (
         /* Thailand */
         "TH" => array(
             "1" => array("code" => "Amnat Charoen", "name" => "Amnat Charoen"),
-            "2" => array("code" => "Ang Thong", "name" => "アントン"),
-            "3" => array("code" => "Ayutthaya", "name" => "アユタヤ"),
-            "4" => array("code" => "Bangkok", "name" => "バンコク"),
-            "5" => array("code" => "Buriram", "name" => "ブリーラム県"),
-            "6" => array("code" => "Chachoengsao", "name" => "チャチェンサオ"),
-            "7" => array("code" => "Chai Nat", "name" => "チャイナート"),
-            "8" => array("code" => "Chaiyaphum", "name" => "チャイヤプーム"),
-            "9" => array("code" => "Chanthaburi", "name" => "チャンタブリー"),
-            "10" => array("code" => "Chiang Mai", "name" => "チェンマイ"),
-            "11" => array("code" => "Chiang Rai", "name" => "チェンライ"),
-            "12" => array("code" => "Chon Buri", "name" => "チョンブリー県"),
-            "13" => array("code" => "Chumphon", "name" => "チュンポン"),
-            "14" => array("code" => "Kalasin", "name" => "カーラシン県"),
-            "15" => array("code" => "Kamphaeng Phet", "name" => "カムペーン ペット県"),
-            "16" => array("code" => "Kanchanaburi", "name" => "カンチャナブリ"),
-            "17" => array("code" => "Khon Kaen", "name" => "コンケン"),
-            "18" => array("code" => "Krabi", "name" => "クラビ"),
-            "19" => array("code" => "Lampang", "name" => "ランパーン"),
-            "20" => array("code" => "Lamphun", "name" => "ランプーン"),
-            "21" => array("code" => "Loei", "name" => "ルーイ"),
+            "2" => array("code" => "アントン", "name" => "アントン"),
+            "3" => array("code" => "アユタヤ", "name" => "アユタヤ"),
+            "4" => array("code" => "バンコク", "name" => "バンコク"),
+            "5" => array("code" => "ブリーラム県", "name" => "ブリーラム県"),
+            "6" => array("code" => "チャチェンサオ", "name" => "チャチェンサオ"),
+            "7" => array("code" => "チャイナート", "name" => "チャイナート"),
+            "8" => array("code" => "チャイヤプーム", "name" => "チャイヤプーム"),
+            "9" => array("code" => "チャンタブリー", "name" => "チャンタブリー"),
+            "10" => array("code" => "チェンマイ", "name" => "チェンマイ"),
+            "11" => array("code" => "チェンライ", "name" => "チェンライ"),
+            "12" => array("code" => "チョンブリー県", "name" => "チョンブリー県"),
+            "13" => array("code" => "チュンポン", "name" => "チュンポン"),
+            "14" => array("code" => "カーラシン県", "name" => "カーラシン県"),
+            "15" => array("code" => "カムペーン ペット県", "name" => "カムペーン ペット県"),
+            "16" => array("code" => "カンチャナブリ", "name" => "カンチャナブリ"),
+            "17" => array("code" => "コンケン", "name" => "コンケン"),
+            "18" => array("code" => "クラビ", "name" => "クラビ"),
+            "19" => array("code" => "ランパーン", "name" => "ランパーン"),
+            "20" => array("code" => "ランプーン", "name" => "ランプーン"),
+            "21" => array("code" => "ルーイ", "name" => "ルーイ"),
             "22" => array("code" => "Lop Buri", "name" => "Lop Buri"),
             "23" => array("code" => "Mae Hong Son", "name" => "Mae Hong Son"),
             "24" => array("code" => "Maha Sarakham", "name" => "Maha Sarakham"),
-            "25" => array("code" => "Mukdahan", "name" => "ムクダハン"),
-            "26" => array("code" => "Nakhon Nayok", "name" => "ナコーンナーヨック"),
-            "27" => array("code" => "Nakhon Pathom", "name" => "ナコーン ・ パトム"),
-            "28" => array("code" => "Nakhon Phanom", "name" => "ナコーンパノム県"),
-            "29" => array("code" => "Nakhon Ratchasima", "name" => "ナコンラチャシマ"),
-            "30" => array("code" => "Nakhon Sawan", "name" => "ナコンサワン"),
-            "31" => array("code" => "Nakhon Si Thammarat", "name" => "ナコンシータマラート"),
-            "32" => array("code" => "Nan", "name" => "ナン"),
-            "33" => array("code" => "Narathiwat", "name" => "ナラーティワート"),
-            "34" => array("code" => "Nong Bua Lamphu", "name" => "ノーンブワラムプー"),
-            "35" => array("code" => "Nong Khai", "name" => "ノンカイ"),
-            "36" => array("code" => "Nonthaburi", "name" => "ノンタブリ"),
-            "37" => array("code" => "Pathum Thani", "name" => "パトゥムターニー県"),
-            "38" => array("code" => "Pattani", "name" => "パタニ"),
-            "39" => array("code" => "Phangnga", "name" => "パンガー"),
-            "40" => array("code" => "Phatthalung", "name" => "パッタルン"),
-            "41" => array("code" => "Phayao", "name" => "パヤオ"),
-            "42" => array("code" => "Phetchabun", "name" => "ペッチャブーン県"),
-            "43" => array("code" => "Phetchaburi", "name" => "ペッチャブリー"),
-            "44" => array("code" => "Phichit", "name" => "ピチット"),
-            "45" => array("code" => "Phitsanulok", "name" => "ピサヌローク"),
-            "46" => array("code" => "Phrae", "name" => "プレー"),
-            "47" => array("code" => "Phuket", "name" => "プーケット"),
-            "48" => array("code" => "Prachin Buri", "name" => "プラチンブリ"),
+            "25" => array("code" => "ムクダハン", "name" => "ムクダハン"),
+            "26" => array("code" => "ナコーンナーヨック", "name" => "ナコーンナーヨック"),
+            "27" => array("code" => "ナコーン ・ パトム", "name" => "ナコーン ・ パトム"),
+            "28" => array("code" => "ナコーンパノム県", "name" => "ナコーンパノム県"),
+            "29" => array("code" => "ナコンラチャシマ", "name" => "ナコンラチャシマ"),
+            "30" => array("code" => "ナコンサワン", "name" => "ナコンサワン"),
+            "31" => array("code" => "ナコンシータマラート", "name" => "ナコンシータマラート"),
+            "32" => array("code" => "ナン", "name" => "ナン"),
+            "33" => array("code" => "ナラーティワート", "name" => "ナラーティワート"),
+            "34" => array("code" => "ノーンブワラムプー", "name" => "ノーンブワラムプー"),
+            "35" => array("code" => "ノンカイ", "name" => "ノンカイ"),
+            "36" => array("code" => "ノンタブリ", "name" => "ノンタブリ"),
+            "37" => array("code" => "パトゥムターニー県", "name" => "パトゥムターニー県"),
+            "38" => array("code" => "パタニ", "name" => "パタニ"),
+            "39" => array("code" => "パンガー", "name" => "パンガー"),
+            "40" => array("code" => "パッタルン", "name" => "パッタルン"),
+            "41" => array("code" => "パヤオ", "name" => "パヤオ"),
+            "42" => array("code" => "ペッチャブーン県", "name" => "ペッチャブーン県"),
+            "43" => array("code" => "ペッチャブリー", "name" => "ペッチャブリー"),
+            "44" => array("code" => "ピチット", "name" => "ピチット"),
+            "45" => array("code" => "ピサヌローク", "name" => "ピサヌローク"),
+            "46" => array("code" => "プレー", "name" => "プレー"),
+            "47" => array("code" => "プーケット", "name" => "プーケット"),
+            "48" => array("code" => "プラチンブリ", "name" => "プラチンブリ"),
             "49" => array("code" => "Prachuap Khiri Khan", "name" => "Prachuap Khiri Khan"),
-            "50" => array("code" => "Ranong", "name" => "ラノーン"),
-            "51" => array("code" => "Ratchaburi", "name" => "ラチャブリ"),
-            "52" => array("code" => "Rayong", "name" => "ラヨーン"),
+            "50" => array("code" => "ラノーン", "name" => "ラノーン"),
+            "51" => array("code" => "ラチャブリ", "name" => "ラチャブリ"),
+            "52" => array("code" => "ラヨーン", "name" => "ラヨーン"),
             "53" => array("code" => "Roi Et", "name" => "Roi Et"),
             "54" => array("code" => "Sa Kaeo", "name" => "Sa Kaeo"),
             "55" => array("code" => "Sakon Nakhon", "name" => "Sakon Nakhon"),
@@ -6120,7 +6239,7 @@ $app_list_strings = array (
             "6" => array("code" => "AMA", "name" => "Amasya"),
             "7" => array("code" => "ANK", "name" => "Ankara"),
             "8" => array("code" => "ANT", "name" => "Antalya"),
-            "9" => array("code" => "ARD", "name" => "Ardahan"),
+            "9" => array("code" => "アード", "name" => "Ardahan"),
             "10" => array("code" => "ART", "name" => "Artvin"),
             "11" => array("code" => "AYI", "name" => "Aydin"),
             "12" => array("code" => "BAL", "name" => "Balikesir"),
@@ -6482,7 +6601,7 @@ $app_list_strings = array (
             "46" => array("code" => "MP", "name" => "Northern Mariana Islands"),
             "47" => array("code" => "OH", "name" => "オハイオ"),
             "48" => array("code" => "OK", "name" => "オクラホマ"),
-            "49" => array("code" => "OR", "name" => "オレゴン"),
+            "49" => array("code" => "いずれかの条件を満たす", "name" => "オレゴン"),
             "50" => array("code" => "PW", "name" => "Palau"),
             "51" => array("code" => "PA", "name" => "ペンシルベニア"),
             "52" => array("code" => "PR", "name" => "Puerto Rico"),
@@ -6675,7 +6794,7 @@ $app_list_strings = array (
             "7" => array("code" => "KW", "name" => "Kasai-Occidental"),
             "8" => array("code" => "MA", "name" => "Maniema"),
             "9" => array("code" => "NK", "name" => "Nord-Kivu"),
-            "10" => array("code" => "OR", "name" => "Orientale"),
+            "10" => array("code" => "いずれかの条件を満たす", "name" => "Orientale"),
             "11" => array("code" => "SK", "name" => "Sud-Kivu")
         ),
         /* Zambia */
@@ -7858,11 +7977,14 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'リンクをフォローする',
   'LBL_TOGGLE_VISIBILITY' => '表示/非表示', // Record view header panel element
   'LBL_ACTIVITIES' => 'アクティビティストリーム',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2015 SugarCRM Inc. All Rights Reserved.',
-  'LBL_TRADEMARK' => 'SugarCRMはSugarCRM, Incの登録商標です。その他の会社名、製品名は関連する企業各社の登録商標である可能性があります。',
-  'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ そしてSugar™は、SugarCRM Inc.の登録商標です。',
-  'LBL_SEND_INVITE' => '招待を送る',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. All Rights Reserved.',
+    'LBL_TRADEMARK' => 'SugarCRM、Sugarおよび3-DキューブはSugarCRM Inc. の登録商標です。 '.
+        'この製品に使用される、または出現するその他すべての会社名および製品名は '.
+        'それらが関連する各会社の登録商標である可能性があります。',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ そしてSugar™は、SugarCRM Inc.の登録商標です。',
+    'LBL_SEND_INVITE' => '招待を送る',
   'LBL_INVITEES' => '参加者',
+    'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'ゲストには招待状は送信されません',
   'LBL_SELECT_ACTION_LABEL' => 'アクション選択',
   'LBL_TOGGLE_DRAWER' => '開く/閉じる',
   'LBL_TOUR_NEXT' => '次へ',
@@ -7902,6 +8024,11 @@ $app_strings = array (
   'LBL_ADD' => '追加' /*for 508 compliance fix*/,
   'LBL_COMPANY_LOGO' => '会社ロゴ' /*for 508 compliance fix*/,
   'LBL_JS_CALENDAR' => 'カレンダー' /*for 508 compliance fix*/,
+
+  // ARIA label additions (should be lowercase)
+  'LBL_ARIA_MODULENAVIGATION' => 'メインモジュールのナビゲーション',
+  'LBL_ARIA_TOGGLE_SUBPANEL_VISIBILITY' => 'サブパネルの切り替え',
+
     'LBL_ADVANCED' => '高度な設定',
     'LBL_BASIC' => '基本設定',
     'LBL_MODULE_FILTER' => '絞る',
@@ -8368,6 +8495,7 @@ $app_strings = array (
     'LBL_TEAMS' =>'チーム',
     'LBL_TEAM_SET_ID' => 'チームセットID',
     'LBL_TEAM_SET'=>'チームセット',
+    'LBL_TEAM_SET_SELECTED_TEAMS' => '選択したチーム',
     'LBL_SEARCH_UNAVAILABLE' => '検索は利用できません。もう一度後でお試しください。',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => '主チームが設定されていません。',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => '[{1}] モジュールのID [{2}] の主チーム [{0}] をはずしている途中でエラーが発生しました。',
@@ -8460,6 +8588,7 @@ $app_strings = array (
     'EXCEPTION_SEARCH_UNAVAILABLE'      => '検索エンジンは一時的に利用できません。',
     'EXCEPTION_SEARCH_RUNTIME'          => '検索エンジンのランタイム エラーが発生しました。システム管理者に問い合わせてください。',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'プロセスによりロックされているフィールドは編集できません。',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => '一般的な失敗もしくはエラーにより条件が発生しました。この除外範囲の理由は、一般的により具体的なAPI除外の範囲外であることです。',
@@ -8484,9 +8613,11 @@ $app_strings = array (
     'EXCEPTION_SERVICE_UNAVAILABLE_DESC'   => 'サーバーがビジー状態、オーバー ロードまたはダウンしていることを示します。',
     'EXCEPTION_SEARCH_UNAVAILABLE_DESC'    => '検索エンジンのバックエンドは接続の問題のため現在利用できません。接続と管理-> 検索-> テストの設定を確認します。',
     'EXCEPTION_SEARCH_RUNTIME_DESC'        => 'サーチ エンジンでランタイム例外が発生しました。詳細については、sugarcrm.log を参照してください。',
+    'EXCEPTION_INVALID_PLATFORM_DESC'      => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
+    'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => '実行中のプロセスにより現在ロックされているフィールドは編集できません。',
+    'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s は実行中のプロセスによりロックされており、編集できません。',
+    'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s は実行中のプロセスによりロックされており、編集できません。',
 
-    'EXCEPTION_INVALID_PLATFORM_DESC'   => 'Indicates the platform specified during authenication is unknown. Custom platforms must be added to custom/client/platforms.php',
-    
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => '名称の同じファイルがシステムに存在します。',
 
@@ -8495,6 +8626,7 @@ $app_strings = array (
     'ERR_TIMEPERIOD_ALREADY_HAS_LEAVES' => 'この期間は既にサブピリオドがあります',
     'ERR_TIMEPERIOD_ALREADY_LEAF' => 'サブピリオドはサブピリオドを持つ事はできません',
     'ERR_TIMEPERIOD_TYPE_DOES_NOT_EXIST' => '{0}のタイプの期間を検索できません',
+    'ERR_NO_ACTIVE_TIMEPERIOD' => '現在の設定にはアクティブな期間がありません。',
     'LBL_CURRENT_TIMEPERIOD' => '現在の期間',
     'LBL_PREVIOUS_TIMEPERIOD' => '以前の期間',
     'LBL_NEXT_TIMEPERIOD' => '次の期間',
@@ -8532,7 +8664,7 @@ $app_strings = array (
     'LBL_ADDITIONAL_DETAILS_CLOSE' => '完了',
     'LBL_ADDITIONAL_DETAILS' => '詳細情報',
     'LBL_ADMIN' => '管理',
-    'LBL_ALT_HOT_KEY' => 'Alt+',
+    'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => '保存',
     'LBL_ASSIGNED_TO_USER'=>'アサイン先',
     'LBL_ASSIGNED_TO' => 'アサイン先:',
@@ -8621,6 +8753,8 @@ $app_strings = array (
     'LBL_FILTER_SELECT_FIELD' => 'フィールドを選択',
     'LBL_FILTER_SELECT_OPERATOR' => 'オペレーターを選択',
     'LBL_FILTER_CREATE_NEW' => '作成',
+    'LBL_FILTER_CREATE_FILTER' => '新規フィルターの作成',
+    'LBL_FILTER_EDIT_FILTER' => 'フィルターの編集',
     'LBL_FILTER_ALL_RECORDS' => '全てのレコード',
     'TPL_FILTER_SAVE' => 'フィールド{{name}}の作成に成功しました。',
     'LBL_FILTER_BETWEEN_FROM' => 'から',
@@ -8997,6 +9131,7 @@ $app_strings = array (
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => '都道府県:',
     'LBL_STATUS_UPDATED'=>'このイベントのステータスがアップデートされました。',
+    'LBL_STATUS_NOT_UPDATED' => 'このイベントのステータスは更新されていません。',
     'LBL_STATUS'=>'ステータス:',
     'LBL_STREET'=>'番地',
     'LBL_SUBJECT' => '件名',
@@ -9005,7 +9140,11 @@ $app_strings = array (
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
-    'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2016 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> All Rights Reserved.<br />SugarCRM は SugarCRM, Inc. の商標です。すべてのその他の会社および製品・商品の名称はそれらが関連する関係各会社の登録商標である場合があります。',
+    'LBL_SUGAR_COPYRIGHT_SUB' =>
+        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '無断複写・転載を禁じます。<br />SugarCRM、Sugarおよび3-DキューブはSugarCRM Inc. の登録商標です。 '.
+        'この製品に使用される、または出現するその他すべての会社名および製品名は '.
+        'それらが関連する各会社の登録商標である可能性があります。',
 
     // GENERIC JOB NOTIFICATIONS LABELS
     'LBL_JOB_NOTIFICATION_SUBJECT_GENERIC' => 'スケジュールされたジョブが完了しました',
@@ -9178,7 +9317,8 @@ $app_strings = array (
     'ERROR_PA_FILTER_INVALID_OPERATOR' => 'エラーです。無効な演算子が入力されました。',
     'ERROR_PA_FILTER_UNSUPPORTED_FILTER' => 'エラーです。無効なフィルターを入力します。',
     'ERROR_PA_UNSUPPORTED_FILE' => 'Import failed. Please check your sugar log for more details.',
-    'ERROR_EXP_DATE_LOW' => 'Error. The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_AWF_PARTIAL_LOCKED_GROUP' => 'インポートに失敗しました。グループ フィールドは、プロセス定義で部分的にロックされます。定義がインポートされるには、これらのフィールドがプロセス定義でロックを解除される必要があります。',
+    'ERROR_EXP_DATE_LOW' => 'エラー。有効期限は公開日より前に設定できません。',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'エラーです。承認ステータスには、発行年月日が必要です。',
     'ERROR_ACTIVE_DATE_EMPTY' => '発行日が空です。',
     'ERROR_ACTIVE_DATE_LOW' => 'Error. The Publish Date must occur on a later date than today&#39;s date.',
@@ -9308,6 +9448,7 @@ $app_strings = array (
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => '表示できるカラム',
 
     /* Sugar7 Dashboard */
+    'LBL_DASHBOARD' => 'ダッシュボード',
     'LBL_DASHBOARD_BWC' => '私のレガシーダッシュボード',
     'LBL_DEFAULT_DASHBOARD_TITLE' => '私のダッシュボード',
     'LBL_DEFAULT_HELP_DASHBOARD_TITLE' => 'ヘルプダッシュボード',
@@ -9340,9 +9481,6 @@ $app_strings = array (
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => '私の {{module}}',
-
-    'LBL_DASHLET_NEWS_NAME' => 'ニュース',
-    'LBL_DASHLET_NEWS_DESCRIPTION' => '関連するアカウントのGoogleニュースフィード',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => '商談メトリックス',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => '関連する取引先の商談メトリックス。D&Bのサブスクリプションが必要。',
@@ -9411,7 +9549,6 @@ $app_strings = array (
 
     'LBL_DASHLET_NO_RECORDS' => '今回はレコードは見つかりませんでした。',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'ケースサマリー',
-    'LBL_DASHLET_NEWS_FEED_NAME' => 'ニュースフィード',
     'LBL_DASHLET_ITERACTIONS_NAME' => '交流',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'ノート＆添付ファイル',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'レコードに属するメモと添付',
@@ -9920,7 +10057,7 @@ $app_strings = array (
     'LBL_DNB_BAL_JOBCD_PH' => 'ジョブ機能を選択',
     'LBL_DNB_BAL_ORG_NAME' => '組織名',
     'LBL_DNB_BAL_IMPORT_AS' => '以下としてインポート',
-    'LBL_DNB_BAL_ORG_NAME' => '組織名',
+    'LBL_DNB_BAL_ORG_NAME' => '会社名',
 
     /*Tool tips for BAL*/
     'LBL_TT_DNB_BAL_MILLIONS' => '百万USドル',
@@ -10018,6 +10155,13 @@ $app_strings = array (
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
     'ERR_BLANK_PAGE_NAME' => 'ページ名を入力してください',
     /* End MySugar Framework strings */
+
+    /* Sales Pipeline Dashlet */
+    'LBL_DASHLET_MY_PIPELINE' => '私のパイプライン',
+    'LBL_DASHLET_MY_TEAMS_PIPELINE' => "チームのパイプライン",
+    'LBL_DASHLET_SALES_PIPELINE_CHART_NAME' => '営業のパイプラインチャート',
+    'LBL_DASHLET_SALES_PIPELINE_CHART_DESC' => '現在のパイプラインチャートを表示します。',
+    /* End Sales Pipeline Dashlet */
 
     'LBL_NO_IMAGE' => '画像がありません',
 
@@ -10287,6 +10431,8 @@ $app_strings = array (
     'LBL_SELECT_THIS_ROW_TITLE' => 'この行を選択',
     'LBL_TEAM_SELECTED_TITLE' => 'チームを選択',
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => 'このチームを主に選択',
+    'LBL_TEAM_TBSELECTED_TITLE' => '選択済みチームベースとしてマークされたチーム',
+    'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => '選択済みのチームベースとしてこのチームをマーク',
     'LBL_SEARCH_AND_SELECT' => '{{module}}を検索して選択',
     'TPL_SEARCH_AND_ADD' => '検索して {{module}} を追加',
 
@@ -10375,6 +10521,9 @@ $app_strings = array (
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'プレビューは無効：データがありません',
     'LBL_PREVIEW_DISABLED_SAME_RECORD' => 'プレビューは無効：現在のレコードで表示',
     'LBL_PREVIEW_DISABLED_DELETED_OR_NO_ACCESS' => 'プレビューは無効：レコードは削除されたかアクセスがありません',
+    'LBL_PREVIEW_PREVIOUS' => '以前のものをプレビュー',
+    'LBL_PREVIEW_NEXT' => '次をプレビュー',
+    'LBL_PREVIEW_CLOSE' => 'プレビュー終了',
     'LBL_STREAM_NO_RECORDS' => 'このレコードには今メモがありません。メモを追加リンクをクリックしてメモを追加してください。',
     'LBL_DUPLICATES_FOUND' => '{{duplicateCount}}重複が見つかりました。',
     'LBL_NO_DUPLICATES_FOUND' => '重複が見つかりません。',
@@ -10394,6 +10543,7 @@ $app_strings = array (
         '渡されたレコードの数が無効です。有効範囲は{{minRecords}}から{{MaxRecords}}まで。',
     'LBL_MERGE_NO_ACCESS' =>
         'このアクションを実行するためにアクセスすることができません。少なくとも一つのレコードが編集可能である必要があります。',
+    'LBL_MERGE_LOCKED' => 'マージ対象として選択されたレコードの一部に、編集中のためプロセスによりロックされたフィールドが含まれているため、今回はマージできません。',
     'LBL_MERGE_NO_ACCESS_TO_A_FEW_RECORDS' =>
         'One or more selected records cannot be deleted. ' .
         'Those records have been removed from the list to merge.',
@@ -10864,10 +11014,9 @@ $app_strings = array (
     'LBL_WIZ_APPLICATION_SETTINGS' => 'システム設定',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'スタジオ',
 
-    // For passwordmodal widget
+    // For password related labels
     'LBL_PASSWORD'						=> 'パスワード',
     'LBL_CURRENT_PASSWORD'				=> '今のパスワード',
-    'LBL_SET_NEW_PASSWORD'              => 'パスワードを入力',
     'LBL_NEW_PASSWORD1'                 => '新パスワード',
     'LBL_NEW_PASSWORD2'                 => 'パスワードの確認',
     'ERR_ENTER_CONFIRMATION_PASSWORD'	=> '確認のため再度パスワードを入力してください。',
@@ -10875,13 +11024,12 @@ $app_strings = array (
     'ERR_ENTER_OLD_PASSWORD'			=> '古いパスワードを入力してください。',
     'ERR_REENTER_PASSWORDS' => '新しいパスワードと確認パスワードが一致しません。',
     'ERR_PASSWORD_MISMATCH' => 'パスワードがシステム内でマッチしません。',
-    'LBL_NEW_USER_PASSWORD_1' => 'パスワードは正常に変更されました。',
     'LBL_CANNOT_SEND_PASSWORD' => 'パスワードを送信できません',
     'LBL_REQUEST_PASSWORD' => 'パスワードをリクエストする',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'エラー：このユーザーのパスワードアップデートに問題がありました。',
     'LBL_INCORRECT_PASSWORD' => 'エラー：パスワード間違い',
 
-    'LBL_PREFERRED_LANGUAGE' => '優先言語',
+    'LBL_PREFERRED_LANGUAGE' => '言語の設定:',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'レポートを選択',
@@ -10911,6 +11059,18 @@ $app_strings = array (
     'ERR_HTTP_500_TEXT_LINE1' => 'サーバー エラーのため要求を完了できませんでした。',
     'ERR_HTTP_500_TEXT_LINE2' => 'もう一度やり直してください。エラーが引き続き発生する場合は、Sugar の管理者に問い合わせてください。',
     'ERR_HTTP_500_ACTION' => 'テクニカルサポートに連絡してください。',
+
+    'ERR_HTTP_502_TYPE' => '502',
+    'ERR_HTTP_502_TITLE' => 'HTTP: 502 内部サーバエラー',
+    'ERR_HTTP_502_TEXT_LINE1' => 'サーバーで一時的なエラーが発生したため、要求を完了できませんでした。',
+    'ERR_HTTP_502_TEXT_LINE2' => 'もう一度やり直してください。エラーが引き続き発生する場合は、Sugar の管理者に問い合わせてください。',
+    'ERR_HTTP_502_ACTION' => 'テクニカルサポートに連絡してください。',
+
+    'ERR_HTTP_503_TYPE' => '503',
+    'ERR_HTTP_503_TITLE' => 'HTTP: 503 内部サーバエラー',
+    'ERR_HTTP_503_TEXT_LINE1' => 'サーバーが利用できないため、要求を完了できません。',
+    'ERR_HTTP_503_TEXT_LINE2' => '後ほどもう一度やり直してください。エラーが引き続き発生する場合は、Sugar の管理者に問い合わせてください。',
+    'ERR_HTTP_503_ACTION' => 'テクニカルサポートに連絡してください。',
 
     'ERR_RENDER_FAILED_TITLE' => 'レンダーリング閲覧に失敗',
     'ERR_RENDER_FAILED_MSG' => 'レンダーリングを見るのに失敗',
@@ -11044,6 +11204,7 @@ $app_strings = array (
     'LBL_ALERT_TITLE_ERROR' => 'エラー：',
     'LBL_ALERT_TITLE_LOADING' => '読み込み中',
     'LBL_ALERT_BROWSER_NOT_SUPPORTED' => 'ブラウザのバージョンがサポートされていないか、サポートされていないブラウザを使用しています。',
+    'LBL_ALERT_BROWSER_SUPPORT' => '以下のブラウザーバージョンを推奨します。<ul><li>Internet Explorer 11</li><li>Firefox 41</li><li>Safari 7.1</li><li>Chrome 47</li></ul>',
     'TPL_ALERT_BROWSER_SUPPORT' => '推奨ブラウザーについては、{{link}} ページをご覧ください。',
     'LBL_ALERT_SUPPORTED_PLATFORMS_LINK' => 'サポートされているプラットフォーム',
 
@@ -11096,6 +11257,9 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'サーバーに接続中にエラーが生じました。もう一度行ってください。',
     'ERR_RESOLVE_ERRORS' => '進める前にエラーを解決してください。',
+
+    // Refresh button on list views
+    'LBL_LIST_REFRESH' => 'リストの更新',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'さらに',
@@ -11201,10 +11365,13 @@ $app_strings = array (
 
     // shortcut keys help
     'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRMは生産性を高めるためにキーボードショートカットでタスクをすぐに実行できるようにしています。右のテーブルには使用可能なショートカットとアクションのキーがあります。',
+    'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>対応キー</h1><ul><li>英数字および記号すべて</li><li>shift、ctrl、alt、command、mod (Windows/Linux は ctrl、Mac はcommand)</li><li>enter、esc、space、tab、pageup、pagedown、end、home、ins、del、backspace</li></ul><h1>対応の機能</h1><ul><li>キーの組み合わせ: ctrl+m</li><li>複数キー: m、ctrl+m</li><li>キーシーケンス: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'グローバルショートカット',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'コンテクストショートカット',
     'LBL_SHORTCUT_KEY_KEY' => 'キー',
     'LBL_SHORTCUT_FUNCTION' => '機能',
+    'LBL_SHORTCUT_CONFIG_HEADERPANE' => 'コンテクストショートカットの設定',
+    'LBL_SHORTCUT_CONFIG_DISABLED' => '設定するコンテクストショートカットがありません',
     'LBL_SHORTCUT_HELP' => 'ショートカットヘルプページを表示',
     'LBL_SHORTCUT_QUICK_CREATE' => 'クイック作成メニューをトグル',
     'LBL_SHORTCUT_SEARCH' => 'グローバル検索フィールドをフォーカス',
@@ -11252,6 +11419,9 @@ $app_strings = array (
     'LBL_SHORTCUT_DRAGDROPSELECT2_SELECTALL' => '複数選択フィールドのすべての項目を選択します',
     'LBL_SHORTCUT_SWEETSPOT' => 'スイート スポット バーを切り替える',
     'LBL_SHORTCUT_SWEETSPOT_HIDE' => 'スイート スポット バーを隠す',
+    'LBL_SHORTCUT_SAVE_CONFIG' => '設定の保存',
+    'LBL_SHORTCUT_RESTORE' => 'デフォルトに復元',
+    'LBL_SHORTCUT_CONFIG_ERROR' => 'サーバーでカスタムのショートカットキーを保存中にエラーが発生しました。もう一度お試しください。',
 
     // config drawer
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '{{module}}設定',
@@ -11274,13 +11444,20 @@ $app_strings = array (
     'LBL_CALENDAR_RECURRENCE' => "定期的な予定",
     'LBL_CALENDAR_REMINDERS' => "リマインダ",
 
+    'LBL_CALENDAR_CUSTOM_DATE' => "カスタム日",
     'LBL_CALENDAR_REPEAT_TYPE' => "繰り返しタイプ",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "繰り返しの間隔",
     'LBL_CALENDAR_REPEAT_DOW' => "曜日毎に繰り返し",
+    'LBL_CALENDAR_REPEAT' => "繰り返し",
     'LBL_CALENDAR_REPEAT_UNTIL_DATE' => "以下まで繰り返し",
     'LBL_CALENDAR_REPEAT_COUNT' => "繰り返し回数",
+    'LBL_CALENDAR_REPEAT_SELECTOR' => "繰り返しセレクタ",
+    'LBL_CALENDAR_REPEAT_DAYS' => "日",
+    'LBL_CALENDAR_REPEAT_ORDINAL' => "繰り返し (通常)",
+    'LBL_CALENDAR_REPEAT_UNIT' => "繰り返し (ユニット)",
 
     'ERR_CALENDAR_CANNOT_UPDATE_FROM_CHILD' => '定期的な予定の変更は、一連の最初のレコードを使用しなければなりません。',
+    'ERR_CALENDAR_NO_EVENTS_GENERATED' => '繰り返しルールではイベントは作成されません。',
 
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => '参加',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => '不参加',
@@ -11300,17 +11477,23 @@ $app_strings = array (
     // Javascript enable string
     'LBL_ENABLE_JAVASCRIPT' => 'SugarCRMはjavascriptが必要です。SugarCRMを使用するためにjavascriptを有効にしてください。',
 
-    // Failure handling in Process Author upgraders
+    // Failure handling in Advanced Workflow upgraders
     'LBL_PA_UNSERIALIZE_DATA_FAILURE' => 'シリアル化されたデータをシリアル解除できませんでした。',
     'LBL_PA_UNSERIALIZE_OBJECT_FAILURE' => 'オブジェクトやクラスへの参照が含まれているためシリアル化されたデータを解除できませんでした',
 
     'LBL_FIELD_TRIMMED' => '最大文字数を超えたため、フィールドはカットされました。',
+    'LBL_FIELDSIZE_OVERFLOW' => 'フィールドの最大文字数制限を超えています。',
 );
 
 $app_list_strings['activity_user_options'] = array (
     '7' => '過去7日間',
     '30' => '過去30日間',
     '90' => '前四半期',
+);
+
+$app_list_strings['http_type_protocol_options'] = array(
+    'http' => 'http',
+    'https' => 'https'
 );
 
 $app_list_strings['planned_activities_filter_options'] = array (
@@ -11415,13 +11598,6 @@ $app_list_strings['kbdocument_status_dom'] = array(
     'expired' => '期限切れ',
 );
 
-$app_list_strings['kbolddocument_status_dom'] = array (
-    'Draft' => 'ドラフト',
-    'Expired' => '期限切れ',
-    'In Review' => 'レビュー中',
-    'Published' => '公開済み',
-  );
-
    $app_list_strings['kbadmin_actions_dom'] =
     array (
     ''          => '--管理者のアクション--',
@@ -11433,57 +11609,9 @@ $app_list_strings['kbolddocument_status_dom'] = array (
     'Delete Selected Articles'=>'選択された記事を削除',
   );
 
-
-  $app_list_strings['kbolddocument_attachment_option_dom'] =
-    array(
-        ''=>'',
-        'some' => '添付あり',
-        'none' => '添付ファイルなし',
-        'mime' => 'Mime の種類を指定する',
-        'name' => '名前を指定する',
-    );
-
   $app_list_strings['moduleList']['Words'] = 'ワード';
   $app_list_strings['moduleListSingular']['Words'] = 'ワード';
   $app_strings['LBL_CREATE_KB_DOCUMENT'] = '記事作成';
-  $app_list_strings['kbolddocument_viewing_frequency_dom'] =
-  array(
-    ''=>'',
-    'Top_5'  => 'トップ 5',
-    'Top_10' => 'トップ 10',
-    'Top_20' => 'トップ 20',
-    'Bot_5'  => 'ボトム 5',
-    'Bot_10' => 'ボトム 10',
-    'Bot_20' => 'ボトム 20',
-  );
-
-   $app_list_strings['kbolddocument_canned_search'] =
-    array(
-        'all'=>'すべての',
-        'added' => '過去30日以内に追加',
-        'pending' => '私の承認を保留',
-        'updated' =>'過去30日以内に更新',
-        'faqs' => 'よくあるご質問',
-    );
-    $app_list_strings['kbolddocument_date_filter_options'] =
-        array(
-    '' => '',
-    'on' => '次の値と一致する',
-    'before' => '以前',
-    'after' => '以降',
-    'between_dates' => '次の範囲内',
-    'last_7_days' => '過去7日間',
-    'next_7_days' => '翌7日間',
-    'last_month' => '昨月',
-    'this_month' => '今月',
-    'next_month' => '翌月',
-    'last_30_days' => '過去30日間',
-    'next_30_days' => '翌30日間',
-    'last_year' => '昨年',
-    'this_year' => '今年',
-    'next_year' => '翌年',
-    'isnull' => '空値です',
-        );
 
     $app_list_strings['countries_dom'] = array(
         '' => '',
@@ -12345,6 +12473,8 @@ $app_list_strings['dnb_sic_naics_code'] = array(
 
 $app_list_strings['dnb_bal_cntct_type'] = array(
     "all" => "すべての連絡先",
+    "email" => "E メールのみ",
+    "phone" => "電話のみ",
     "prem" => "プレミアムのみ"
 );
 
@@ -12370,4 +12500,3 @@ $app_list_strings['dnb_contact_kw_scope'] = array(
     'Bio' => '略歴',
     'Both' => '両方'
 );
-

@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -85,7 +85,7 @@ $mod_strings = array(
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'The {{plural_module_name}} module consists of individual {{plural_module_name}} that contain text or an attachment pertinent to the related record. {{module_name}} records can be related to one record in most modules via the flex relate field and can also be related to a single {{contacts_singular_module}}. {{plural_module_name}} can hold generic text about a record or even an attachment related to the record. There are various ways you can create {{plural_module_name}} in Sugar such as via the {{plural_module_name}} module, importing {{plural_module_name}}, via History subpanels, etc. Once the {{module_name}} record is created, you can view and edit information pertaining to the {{module_name}} via the {{plural_module_name}} record view. Each {{module_name}} record may then relate to other Sugar records such as {{accounts_module}}, {{contacts_module}}, {{opportunities_module}}, and many others.',
+    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} obsahuje jednotlivé {{plural_module_name}}, ktoré obsahujú text alebo prílohu súvisiacu s prílušným záznamom. Záznamy modulu {{module_name}} môžu súvisieť s jedným záznamom vo väčšine modulov prostredníctvom poľa flexibilnej väzby a tiež môžu súvisieť s jedným modulom {{contacts_singular_module}}. Záznam {{plural_module_name}} môže obsahovať všeobecný text o zázname alebo aj prílohu súvisiacu so záznamom. Modul {{plural_module_name}} môžete v aplikácii Sugar vytvoriť rôznymi spôsobmi, napríklad prostredníctvom modulu {{plural_module_name}}, importovania modulu {{plural_module_name}}, prostredníctvom podpanelov História atď. Po vytvorení záznamu {{module_name}} môžete zobraziť a upraviť informácie týkajúce sa modulu {{module_name}} prostredníctvom zobrazenia záznamu {{plural_module_name}}. Každý záznam {{module_name}} môže potom súvisieť s inými záznamami v aplikácii Sugar, ako sú napríklad moduly {{accounts_module}}, {{contacts_module}}, {{opportunities_module}} a mnohé ďalšie.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'The {{plural_module_name}} module consists of individual {{plural_module_name}} that contain text or an attachment pertinent to the related record.

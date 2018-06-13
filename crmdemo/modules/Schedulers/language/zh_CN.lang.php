@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => '移除诊断工具文件',
 'LBL_OOTB_REMOVE_PDF_FILES' => '移除临时 PDF 文件',
 'LBL_UPDATE_TRACKER_SESSIONS' => '更新 tracker_sessions 表',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> '运行邮件提醒通知',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => '运行电子邮件提醒通知',
 'LBL_OOTB_CLEANUP_QUEUE' => '清理任务队列',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => '创建未来时段',
 'LBL_OOTB_HEARTBEAT' => 'Sugar 中心',
 'LBL_OOTB_KBCONTENT_UPDATE' => '更新 KBContent 文章。',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => '发布已核准的文章和过期的知识库文章。',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => '流程撰写器已计划的作业',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => '间隔：',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => '刷新任务',
 'LBL_POLLMONITOREDINBOXES' => '检查收件帐户',
 'LBL_PERFORMFULLFTSINDEX' => '全文搜索索引系统',
+'LBL_SUGARJOBREMOVEPDFFILES' => '移除临时 PDF 文件',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => '发布已核准的文章和过期的知识库文章。',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch 队列工作计划',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => '移除诊断工具文件',
+'LBL_SUGARJOBREMOVETMPFILES' => '移除临时文件',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '运行每晚批量运行邮件市场活动',
 'LBL_ASYNCMASSUPDATE' => '执行异步大规模更新',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => '更新跟踪器会话表',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => '创建未来时段',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar 中心',
-'LBL_SENDEMAILREMINDERS'=> '运行发送邮件提醒',
+'LBL_SENDEMAILREMINDERS'=> '运行电子邮件提醒发送',
 'LBL_CLEANJOBQUEUE' => '清理任务队列',
 'LBL_CLEANOLDRECORDLISTS' => '清除旧记录列表',
 );

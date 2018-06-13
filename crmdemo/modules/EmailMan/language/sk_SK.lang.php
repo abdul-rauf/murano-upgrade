@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -84,10 +84,10 @@ $mod_strings = array (
 	'LBL_CONFIGURE_CAMPAIGN_EMAIL_SETTINGS'    => 'Konfigurovať nastavenia pošty kampane',
 	'LBL_MODULE_TITLE'							=> 'mažment odchádzajúcich emailov na front',
 	'LBL_NOTIFICATION_ON_DESC' 					=> 'Ak je povolené, sú e-maily odoslané užívateľom pri záznamy k nim priradené.',
-	'LBL_NOTIFY_FROMADDRESS' 					=> '"Od" adresy:',
-	'LBL_NOTIFY_FROMNAME' 						=> '"Od" mena:',
+	'LBL_NOTIFY_FROMADDRESS' 					=> 'Adresa pre "Odosielateľ":',
+	'LBL_NOTIFY_FROMNAME' 						=> 'Meno pre "Odosielateľ":',
 	'LBL_NOTIFY_ON'								=> 'Hlásenia úloh',
-	'LBL_ALLOW_USER_EMAIL_ACCOUNT'				=> 'Allow users to configure email accounts',
+	'LBL_ALLOW_USER_EMAIL_ACCOUNT'				=> 'Povoliť užívateľom konfigurovať e-mailové účty',
 	'LBL_NOTIFY_SEND_BY_DEFAULT'				=> 'Poslať hlásenia novým užívateľom',
 	'LBL_NOTIFY_TITLE'							=> 'Možnosti pošty',
 	'LBL_OLD_ID'								=> 'Staré ID',
@@ -106,7 +106,7 @@ $mod_strings = array (
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Poslať upozornenia z priradenej užívateľovej adresy',
 
 	'LBL_SECURITY_TITLE'						=> 'Bezpečnostné nastavenia správy',
-	'LBL_SECURITY_DESC'							=> 'Skontrolujte nasledujúce, ktorá by mala byť zakázané cez InboundEmail alebo zobrazená v e-mailoch modulu.',
+	'LBL_SECURITY_DESC'							=> 'Skontrolujte nasledujúce nastavenia, ktoré by mali byť zakázané cez prichádzajúce e-maily alebo zobrazené v module E-maily.',
 	'LBL_SECURITY_APPLET'						=> 'Applet tag',
 	'LBL_SECURITY_BASE'							=> 'Základný stítok',
 	'LBL_SECURITY_EMBED'						=> 'vložiť štítok',
@@ -118,7 +118,7 @@ $mod_strings = array (
 	'LBL_SECURITY_LAYER'						=> 'vrstvový štítok',
 	'LBL_SECURITY_LINK'							=> 'linkový štítok',
 	'LBL_SECURITY_OBJECT'						=> 'štítok objektu',
-	'LBL_SECURITY_OUTLOOK_DEFAULTS'				=> 'Vyberte Outlook predvolené nastavenie minimálneho zabezpečenia (chybuje na strane správne zobrazenie).',
+	'LBL_SECURITY_OUTLOOK_DEFAULTS'				=> 'Vyberte predvolené nastavenie minimálneho zabezpečenia aplikácie Outlook (chyby správneho zobrazenia).',
 	'LBL_SECURITY_SCRIPT'						=> 'skriptový štítok',
 	'LBL_SECURITY_STYLE'						=> 'štítok štýlu',
 	'LBL_SECURITY_TOGGLE_ALL'					=> 'Prepnúť všetky možnosti',
@@ -127,7 +127,7 @@ $mod_strings = array (
     'LBL_NO'                                    => 'Nie',
     'LBL_PREPEND_TEST'                          => '[Test]:',
 	'LBL_SEND_ATTEMPTS'							=> 'Odoslať pokusy',
-	'LBL_OUTGOING_SECTION_HELP'                 => 'Konfigurácia predvoleného servera odchádzajúcej pošty pre zasielanie e-mailových upozornení, vrátane  záznamov toku práce.',
+	'LBL_OUTGOING_SECTION_HELP'                 => 'Konfigurácia predvoleného servera odchádzajúcej pošty pre zasielanie e-mailových upozornení vrátane záznamov toku práce.',
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Povoliť užívateľom používať tento účet pre odchádzajúce správy:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Pokiaľ je vybraná táto možnosť, všetci užívatelia budú môcť posielať správy pomocou jedného účtu odchádzajúcej pošty, používaného pre odosielanie systémových  hlásení a upozornení. Ak možnosť nie je vybraná, užívatelia stále môžu používať server pre odchádzajúcu poštu po poskytnutí ich vlastných informácii o účte.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Ak je povolené, bude priradenie používateľa \\ &#39;s meno a e-mailovú adresu zahrnuté v poli Od e-mailu. Táto funkcia nemusí pracovať s SMTP serverov, ktoré neumožňujú zaslanie z iného e-mailového konta, než na serveri účet.',

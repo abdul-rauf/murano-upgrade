@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_RECENTLY_VIEWED' => '최근에 본 항목',
     'LBL_NEW_RECORDS' => '최근에 생성',
     'LBL_FAVORITES' => '내 즐겨찾기 목록:',
-    'LBL_CLOSED_WON' => '계약성공',
+    'LBL_CLOSED_WON' => '계약 성공',
     'LBL_CLOSING_THIS_QUARTER' => '현재 분기 종료',
     'LBL_CLOSING_THIS_MONTH' => '이번달 종료',
     'LBL_TEAM_ASSIGNED_OPPORTUNITIES' => '본인 팀에 지정',

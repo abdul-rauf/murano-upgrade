@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -35,7 +35,7 @@ $mod_strings = array (
     'NTC_LIST_ORDER' => 'Nustatykite kokia tvarka norite matyti iššokančiame sąraše prekės tipo galimas reikšmes.',
     'LNK_IMPORT_PRODUCT_TYPES'=>'Importuoti prekių tipus',
     'LBL_CREATED_BY'=>'Sukūrė',
-    'LBL_EDITLAYOUT' => '-Tuščia-' /*for 508 compliance fix*/,
+    'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
     'LBL_EXPORT_MODIFIED_USER_ID'=> 'Atsakingo ID:',
     'LBL_EXPORT_CREATED_BY'=>'Sukūrėjo ID',

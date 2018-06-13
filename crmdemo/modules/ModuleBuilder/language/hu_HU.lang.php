@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -297,7 +297,7 @@ $mod_strings = array(
         'layoutsHelp'=> 'Válassza ki az elrendezést szerkesztéshez!<br />Az adatokat tartalmazó mezők elrendezésének megváltoztatásához, kattintson a Szerkesztési nézetre!<br />Ha a Szerkesztési nézetben bevitt adatok megjelenítését kívánja módosítani, kattintson a Részletes nézetre!<br />Az alapértelmezett lista oszlopainak megváltoztatásához, kattintson a Lista nézetre!<br />Az elrendezésben elérhető egyszerű és részletes keresés megváltoztatásához kattintson a Keresésre!',
         'subpanelHelp'=> 'Válassza ki az Alpanelt szerkesztésre!',
         'searchHelp' => 'Válassza ki a Keresés nézetet szerkesztésre!',
-        'labelsBtn'	=> 'Az egyéni címkék mentéséhez kattintson a <b>Mentés</b> gombra.',
+        'labelsBtn'	=> 'Szerkessze a <b>Címkéket</b> a modulon belüli értékek megjelenítéséhez.',
         'newPackage'=>'Kattintosn az Új csomagra egy új csomag létrehozásához!',
         'mbHelp'    => 'Üdvözöljük a Module Builder eszköz felületén!<br /><br />Használja a Module Buildert egyedi csomagok létrehozására, amelyek standard vagy egyéni tárgyakon alapulnak.<br /><br />A kezdéshez kattintson az Új csomagra egy új csomag létrehozásához, vagy jelöljön ki egy korábban létrehozott csomagot szerkesztésre.<br /><br />A csomagok a projektekhez kapcsolódó egyedi modulok tárhelyei. Egy csomag tartalmazhat egy vagy több modult, amelyek egymáshoz, vagy a már meglévő modulokhoz kapcsolódnak.<br /><br />Példa: elképzelhető, hogy Ön egy olyan csomagot szeretne létrehozni, amely egyetlen modult tartalmaz a Kliensek modulhoz hasonlóan. Az is megoldható azonban, hogy a csomag egyszerre több modult tartalmazzon, amelyek egymáshoz, vagy a már meglévő modulokhoz kapcsolódnak.',
         'exportBtn' => 'Kattintson a Testre szabott elemek exportálása gombra, hogy létrehozza és lementse a Stúdióban megalkotott egyedi elemeket tartalmazó csomagot.',
@@ -703,6 +703,7 @@ $mod_strings = array(
 'LBL_JS_VALIDATE_NAME'=>'Név - csak alfanumerikus karakterek, szóköz nélkül, szókezdő betűvel',
 'LBL_JS_VALIDATE_PACKAGE_KEY'=>'A csomagkulcs már létezik',
 'LBL_JS_VALIDATE_PACKAGE_NAME'=>'Csomagnév már létezik',
+'LBL_JS_PACKAGE_NAME'=>'Csomag neve - Mindenképp betűvel kell kezdődnie, és csak betűket, számokat és alulvonást tartalmazhat. Ne használjon szüneteket vagy speciális karaktereket.',
 'LBL_JS_VALIDATE_KEY_WITH_SPACE'=>'Kulcs - alfanumerikusnak kell lennie és betűvel kell kezdődnie.',
 'LBL_JS_VALIDATE_KEY'=>'Kulcs - csak alfanumerikus karakterek, szóköz nélkül, szókezdő betűvel',
 'LBL_JS_VALIDATE_LABEL'=>'Kérem, adja meg a címkét, amelyet ez a modul megjelenő névként fog használni!',
@@ -727,8 +728,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
         . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\\n\\nDo you wish to continue?",
+        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
+        . "\n\nDo you wish to continue?",
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Biztosan törölni akarja ezt a kapcsolatot?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'A kapcsolat ezzel állandóvá válik. Biztos benne, hogy állandósítja a kapcsolatot?',
 'LBL_CONFIRM_DONT_SAVE' => 'Változások történtek, mióta utoljára mentett. Szeretne menteni?',

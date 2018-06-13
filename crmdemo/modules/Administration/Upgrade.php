@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -98,6 +98,20 @@ if(strpos($server_software,'Microsoft-IIS') === false) {
     <td> <?php echo $mod_strings['LBL_REBUILD_SPRITES_DESC_SHORT'] ; ?> </td>
 </tr>
 <?php } ?>
+<tr>
+    <td scope="row"><?php
+        echo SugarThemeRegistry::current()->getImage(
+            'Repair',
+            'align="absmiddle" border="0"',
+            null,
+            null,
+            '.gif',
+            $mod_strings['LBL_REPAIR_JS_FILES_TITLE']
+        ); ?>&nbsp;<a href="./index.php?module=Administration&action=RepairJSFile&type=repair"><?php
+            echo $mod_strings['LBL_REPAIR_JS_FILES_TITLE']; ?></a>
+    </td>
+    <td> <?php echo $mod_strings['LBL_REPAIR_JS_FILES_DESC_SHORT']; ?> </td>
+</tr>
 <tr>
     <td scope="row"><?php echo SugarThemeRegistry::current()->getImage('Repair','align="absmiddle" border="0"', null,null,'.gif',$mod_strings['LBL_REPAIR_FIELD_CASING_TITLE']); ?>&nbsp;<a href="./index.php?module=Administration&action=RepairFieldCasing&type=repair"><?php echo $mod_strings['LBL_REPAIR_FIELD_CASING_TITLE']; ?></a></td>
     <td> <?php echo $mod_strings['LBL_REPAIR_FIELD_CASING_DESC_SHORT'] ; ?> </td>

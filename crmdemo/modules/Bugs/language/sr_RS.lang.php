@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -69,7 +69,7 @@ $mod_strings = array (
   'LBL_LIST_PHONE' => 'Telefon',
   'NTC_DELETE_CONFIRMATION' => 'Da li ste sigurni da želite da uklonite ovog kontakta iz ovog defekta?',
 
-  'LBL_DEFAULT_SUBPANEL_TITLE' => 'Praćenje defekata',
+  'LBL_DEFAULT_SUBPANEL_TITLE' => 'Praćenje grešaka',
   'LBL_ACTIVITIES_SUBPANEL_TITLE'=>'Aktivnosti',
   'LBL_HISTORY_SUBPANEL_TITLE'=>'Istorija',
   'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontakti',

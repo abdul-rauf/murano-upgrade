@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -17,10 +17,8 @@
     className: "block filtered activitystream-layout",
 
     initialize: function(opts) {
-        this.opts = opts;
         this.renderedActivities = {};
-
-        app.view.Layout.prototype.initialize.call(this, opts);
+        this._super('initialize', [opts]);
 
         this.setCollectionOptions();
         this.exposeDataTransfer();
@@ -41,7 +39,9 @@
         if (_.isUndefined(app.drawer) || app.drawer.isActive(this.$el)) {
             var activities = this.$('.activitystream-posts-comments-container');
             activities.removeClass('highlighted');
-            activities.find('.preview-btn').removeClass('active');
+            activities.find('.preview-btn')
+                .removeClass('active')
+                .attr('aria-pressed', false);
         }
     },
 
@@ -77,7 +77,7 @@
                     self.renderPost(model);
                 });
             },
-            error: function(error) {
+            error: function() {
                 self.collection.dataFetched = true;
                 self.collection.reset();
             }
@@ -149,7 +149,7 @@
         } else {
             view = app.view.createView({
                 context: this.context,
-                name: "activitystream",
+                type: "activitystream",
                 module: this.module,
                 layout: this,
                 model: model,

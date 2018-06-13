@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -73,9 +73,9 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Dërgoni një email të gjithë ftuarit',
     'LBL_POPUP_REMINDER' => 'Shfaqje e kujtuesit',
-    'LBL_POPUP_REMINDER_TIME' => 'Koha e shfaqjes së kujtuesit',
+    'LBL_POPUP_REMINDER_TIME' => 'Ora e shfaqjes së rikujtesës',
     'LBL_EMAIL_REMINDER' => 'Përkujtuesi i Emailit',
-    'LBL_EMAIL_REMINDER_TIME' => 'Koha e përkujtimit të Emailit',
+    'LBL_EMAIL_REMINDER_TIME' => 'Ora e rikujtesës me email',
     'LBL_REMOVE' => 'Largo',
 	'LBL_SCHEDULING_FORM_TITLE' => 'Planifikimi',
 	'LBL_SEARCH_BUTTON'=> 'Kërkim',
@@ -165,6 +165,7 @@ $mod_strings = array (
     'LBL_REMOVE_ALL_RECURRENCES' => 'Fshi të gjitha përsëritjet',
     'LBL_DATE_END_ERROR' => 'Data e fundit është para se data e fillimit takimit',
     'LBL_REPEAT_PARENT_ID' => 'Përsërit ID e Prindit',
+    'LBL_CALENDAR_RECURRENCE_ID' => 'ID-ja e përsëritjes së mbledhjes. Data e fillimit të mbledhjes fillestare',
     'LBL_RECURRING_SOURCE' => 'Burimi Periodik',
     'LBL_CONFIRM_REMOVE_ALL_RECURRENCES' => 'A jeni të sigurt që dëshironi të largoni të gjtha regjistrimet periodike?',
     'LBL_RECURRENCE' => 'Përsërit',

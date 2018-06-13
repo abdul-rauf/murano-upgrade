@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'λάθος: λείπουν διαπιστευτήρια',
     'ERR_NO_UID' => 'λάθος: κανένα UID',
     'ERR_NO_IEID' => 'λάθος: κανένα ieID',
+    'ERR_INVALID_RECIPIENTS' => 'Υπάρχουν ένας ή περισσότεροι παραλήπτες με μη-έγκυρη διεύθυνση ηλεκτρονικού ταχυδρομείου. ' .
+        'Παρακαλώ διορθώστε το και προσπαθήστε ξανά.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Άκυρη διεύθυνση ηλεκτρονικού ταχυδρομείου',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'δεν προσδιορίστηκαν παραλήπτες',

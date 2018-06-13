@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -17,6 +17,7 @@ use Sugarcrm\Sugarcrm\Session\SessionStorage;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
 
 /**
  * SugarCRM application
@@ -155,7 +156,15 @@ class SugarApplication
             if (parent.location == window.location) {
                 window.location = ' . json_encode($location) . ';
             } else {
-                window.top.SUGAR.App.bwc.login(' . json_encode($loginRedirect) . ');
+                try {
+                    window.top.SUGAR.App.bwc.login(' . json_encode($loginRedirect) . ');
+                } catch (e) {
+                    try {
+                        parent.SUGAR.App.bwc.login(' . json_encode($loginRedirect) . ');
+                    } catch (e) {
+                        window.location = ' . json_encode($location) . ';
+                    }
+                }
             }
             </script>';
             return;
@@ -1040,7 +1049,7 @@ EOF;
     public function createLoginVars()
     {
         $ret = array();
-        $req = $this->getRequestVars();
+        $req = $this->filterCsrfToken($this->getRequestVars());
         foreach (array_keys($req) as $var) {
             if(!empty($this->controller->$var)){
                 $ret["login_" . $var] = $this->controller->$var;
@@ -1136,5 +1145,18 @@ EOF;
         }
 
         return $url;
+    }
+
+    /**
+     * Filter csrf_token from request array
+     * @param array $request
+     * @return array
+     */
+    protected function filterCsrfToken(array $request)
+    {
+        if (isset($request[CsrfAuthenticator::FORM_TOKEN_FIELD])) {
+            unset($request[CsrfAuthenticator::FORM_TOKEN_FIELD]);
+        }
+        return $request;
     }
 }

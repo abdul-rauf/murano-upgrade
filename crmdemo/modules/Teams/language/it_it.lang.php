@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -56,4 +56,41 @@ $mod_strings = array(
     'NTC_DELETE_CONFIRMATION' => 'Sei sicuro di voler eliminare questo record?',
     'NTC_REMOVE_TEAM_MEMBER_CONFIRMATION' => 'Sei sicuro di voler eliminare questo utente come membro?',
     'LBL_EDITLAYOUT' => 'Modifica Layout' /*for 508 compliance fix*/,
+
+    // Team-Based Permissions
+    'LBL_TBA_CONFIGURATION' => 'Autorizzazioni basate sul gruppo',
+    'LBL_TBA_CONFIGURATION_DESC' => 'Abilita l&#39;accesso del gruppo e gestisci l&#39;accesso per modulo.',
+    'LBL_TBA_CONFIGURATION_LABEL' => 'Abilita autorizzazioni basate sul gruppo',
+    'LBL_TBA_CONFIGURATION_MOD_LABEL' => 'Seleziona i moduli da abilitare',
+    'LBL_TBA_CONFIGURATION_TITLE' => 'L&#39;abilitazione delle autorizzazioni basate sul gruppo permetterà di assegnare diritti specifici di accesso ai gruppi e agli utenti per i singoli moduli, tramite la gestione dei ruoli.',
+    'LBL_TBA_CONFIGURATION_WARNING' => <<<STR
+La disabilitazione delle autorizzazioni basate sul gruppo per un modulo annullerà tutti i dati associati ad esse per quel
+ modulo, comprese le Definizioni dei processi o i Processi che utilizzano la funzione. Sono compresi i Ruoli che utilizzano l'opzione
+ "Proprietario e gruppo selezionato" per quel modulo e tutti i dati relativi alle autorizzazioni basate sul gruppo per i record di quel modulo.
+ Consigliamo anche di utilizzare lo strumento Quick Repair e Rebuild per cancellare la cache del sistema dopo aver disabilitato le autorizzazioni
+ basate sul gruppo per tutti i moduli.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC' => <<<STR
+<strong>Avvertenza:</strong> la disabilitazione delle autorizzazioni basate sul gruppo per un modulo annullerà tutti i dati associati ad esse per quel modulo, comprese le Definizioni dei processi o i Processi che utilizzano la funzione. Sono compresi i Ruoli che utilizzano l'opzione "Proprietario e gruppo selezionato" per quel modulo e tutti i dati relativi alle autorizzazioni basate sul gruppo 
+per i record di quel modulo. Consigliamo anche di utilizzare lo strumento Quick Repair and Rebuild per cancellare la cache 
+del sistema dopo aver disabilitato le autorizzazioni basate sul gruppo per tutti i moduli.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_NO_ADMIN' => <<<STR
+La disabilitazione delle autorizzazioni basate sul gruppo per un modulo annullerà tutti i dati associati ad esse per quel 
+modulo, comprese le Definizioni dei processi o i Processi che utilizzano la funzione. Sono compresi i Ruoli che utilizzano l'opzione "Proprietario e gruppo selezionato" per quel modulo e tutti i dati relativi alle autorizzazioni basate sul gruppo per i record di quel modulo.
+ Consigliamo anche di utilizzare lo strumento Quick Repair and Rebuild per cancellare la cache del sistema dopo aver disabilitato le autorizzazioni 
+basate sul gruppo per tutti i moduli. Se non si ha l'accesso all'utilizzo di Quick Repair and Rebuild, contattare un amministratore con
+ accesso al menu Ripara.
+STR
+,
+    'LBL_TBA_CONFIGURATION_WARNING_DESC_NO_ADMIN' => <<<STR
+<strong>Avvertenza:</strong> la disabilitazione delle autorizzazioni basate sul gruppo per un modulo annullerà tutti i dati associati ad esse per quel modulo, comprese le Definizioni dei processi o i Processi che utilizzano la funzione. Sono compresi i Ruoli che utilizzano l'opzione "Proprietario e gruppo selezionato" per quel modulo e tutti i dati relativi alle autorizzazioni basate sul gruppo per i record di quel modulo.
+ Consigliamo anche di utilizzare lo strumento Quick Repair and Rebuild per cancellare la cache del sistema dopo
+aver disabilitato le autorizzazioni 
+basate sul gruppo per tutti i moduli. Se non si ha l'accesso all'utilizzo di Quick Repair and Rebuild, contattare 
+un amministratore con accesso al menu Ripara.
+STR
+,
 );

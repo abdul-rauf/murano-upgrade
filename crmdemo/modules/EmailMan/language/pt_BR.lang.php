@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -48,7 +48,7 @@ $mod_strings = array (
 	'LBL_LIST_FORM_PROCESSED_TITLE'				=> 'Processado',
 	'LBL_LIST_FORM_TITLE'						=> 'Fila',
 	'LBL_LIST_FROM_EMAIL'						=> 'E-mail do remetente',
-	'LBL_LIST_FROM_NAME'						=> 'Nome em "De"',
+	'LBL_LIST_FROM_NAME'						=> 'Nome em &quot;De&quot;',
 	'LBL_LIST_IN_QUEUE'							=> 'Em Processamento',
 	'LBL_LIST_MESSAGE_NAME'						=> 'Mensagem de Marketing',
 	'LBL_LIST_RECIPIENT_EMAIL'					=> 'E-mail do Destinatário',

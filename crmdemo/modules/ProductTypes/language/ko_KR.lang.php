@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -35,7 +35,7 @@ $mod_strings = array (
     'NTC_LIST_ORDER' => '제조자 내려보기 목록에 나타나도록 이 제조자의 순서를 설정하니다.',
     'LNK_IMPORT_PRODUCT_TYPES'=>'상품 유형 가져오기',
     'LBL_CREATED_BY'=>'생성자',
-    'LBL_EDITLAYOUT' => '지면 배치 편집하기' /*for 508 compliance fix*/,
+    'LBL_EDITLAYOUT' => '' /*for 508 compliance fix*/,
     //For export labels
     'LBL_EXPORT_MODIFIED_USER_ID'=> '담당자 ID',
     'LBL_EXPORT_CREATED_BY'=>'생성자 ID',

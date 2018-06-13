@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -269,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'The key is required for general application functionality, but it is not required for installation. You do not need to enter the key at this time, but you will need to provide the key after you have installed the application.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Requires minimum information for the installation. Recommended for new users.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Provides additional options to set during the installation. Most of these options are also available after installation in the admin screens. Recommended for advanced users.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Provides additional options to set during the installation. Most of these options are also available after installation in the admin screens. Recommended for advanced users.',
 	'LBL_LANG_1'						=> 'To use a language in Sugar other than the default language (US-English), you can upload and install the language pack at this time. You will be able to upload and install language packs from within the Sugar application as well.  If you would like to skip this step, click Next.',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Install',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Remove',
@@ -284,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'License Acceptance',
     'LBL_LICENSE_CHECKING'              => 'Checking system for compatibility.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Checking Environment',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'Verifying DB Credentials.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'Verifying DB, FTS Credentials.',
     'LBL_LICENSE_CHECK_PASSED'          => 'System passed check for compatibility.',
     'LBL_LICENSE_REDIRECT'              => 'Redirecting in ',
 	'LBL_LICENSE_DIRECTIONS'			=> 'If you have your license information, please enter it in the fields below.',
@@ -532,7 +533,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'Run Nightly Mass Email Campaigns',
 	'LBL_OOTB_PRUNE'		=> 'Prune Database on 1st of Month',
     'LBL_OOTB_TRACKER'		=> 'Prune tracker tables',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Run Email Reminder Notifications',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Run Email Reminder Notifications',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'Update tracker_sessions table',
     'LBL_OOTB_CLEANUP_QUEUE' => 'Clean Jobs Queue',
 
@@ -543,7 +544,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'Search Engine Type',
     'LBL_FTS_HELP'      => 'To enable full-text searching, enter the Host and Port where the search engine is hosted. Sugar includes built-in support for the elasticsearch engine.',
     'LBL_FTS_REQUIRED'    => 'Elastic Search is required.',
-    'LBL_FTS_ERROR'    => 'Unable to connect to Full Text Search server, please verify your settings.',
+    'LBL_FTS_CONN_ERROR'    => 'Unable to connect to Full Text Search server, please verify your settings.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'No full text search server version available, please verify your settings.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'Unsupported version of Elastic search detected. Please use versions: %s',
 
     'LBL_PATCHES_TITLE'     => 'Install Latest Patches',
     'LBL_MODULE_TITLE'      => 'Install Language Packs',

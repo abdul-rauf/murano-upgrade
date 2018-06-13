@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -37,12 +37,23 @@
     app.augment('BeanCollection', Backbone.Collection.extend({
 
         /**
+         * The default model of a bean collection is a {@link Data.Bean}.
+         *
+         * **Note:** Please do not manipulate this property directly.
+         * This property should never be modified directly.
+         *
+         * @property {Data.Bean}
+         * @override
+         */
+        model: app.Bean,
+
+        /**
          * Prepare related bean collections and attach collection plugins.
          *
-         * @inheritdoc
-         * @constructor
-         * @param {Array} models initial array of models
-         * @param {Object} options
+         * @override
+         *
+         * @param {Array} models initial array of models.
+         * @param {Object} [options]
          */
         constructor: function(models, options) {
             app.plugins.attach(this, 'collection');
@@ -56,7 +67,6 @@
         /**
          * Saves a private copy of initial options for reset
          *
-         * @constructor
          * @param {Array} models initial array of models
          * @param {Object} options
          */
@@ -217,6 +227,11 @@
             options.favorites = _.isUndefined(options.favorites) ? this.favorites : options.favorites;
             options.query = _.isUndefined(options.query) ? this.query : options.query;
 
+            // FIXME SC-5596: This option is temporary, and was added as part of
+            // SC-2703. It will be removed when we update our sidecar components
+            // to listen on `update` instead of reset.
+            options.reset = _.isUndefined(options.reset) ? true : options.reset;
+
             this._activeFetchRequest = Backbone.Collection.prototype.fetch.call(this, options);
             return this._activeFetchRequest;
         },
@@ -290,6 +305,10 @@
             options = options || {};
             var maxSize = options.limit || app.config.maxQueryResult;
             options.page = options.page || 1;
+
+            // Since we're paginating, we want the Collection.set method to be
+            // invoked instead of `reset`.
+            options.reset = _.isUndefined(options.reset) ? false : options.reset;
 
             // fix page number since our offset is already at the end of the collection subset
             options.page--;
@@ -568,13 +587,13 @@
         },
 
         /**
-         * @inheritdoc
-         *
          * Clones the {@link #link} and all the persistent options of the
          * Collection.
          *
          * @return {Data.BeanCollection} The new collection with an identical
          * list of models as this one.
+         *
+         * @override
          */
         clone: function() {
             var newCol = Backbone.Collection.prototype.clone.call(this);

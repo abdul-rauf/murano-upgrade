@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Bestanden diagnostisch middel verwijderen',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Tijdelijke PDF bestanden verwijderen',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Tracker_sessions tabel bijwerken',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Meldingen e-mailherinnering uitvoeren',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Herinneringsberichten per e-mail uitvoeren',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Gooi de wachtrij voor taken leeg',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Toekomstige tijdperioden aanmaken',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent artikelen bijwerken.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Goedgekeurde artikelen & verlopen KB-artikelen publiceren.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Geplande taak auteur verwerken',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Geplande Taak Advanced Workflow',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -72,7 +72,7 @@ $mod_strings = array (
 'LBL_HOUR'		=> 'hours',
 'LBL_HOUR_SING'	=> 'hour',
 'LBL_MONTH'		=> 'month',
-'LBL_OFTEN'		=> 'As often as possible.',
+'LBL_OFTEN'		=> ' Zo vaak mogelijk.',
 'LBL_MIN_MARK'	=> 'minute mark',
 
 
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Taken vernieuwen',
 'LBL_POLLMONITOREDINBOXES' => 'Inkomende mailaccounts controleren',
 'LBL_PERFORMFULLFTSINDEX' => 'Volledig tekst zoeken indexsysteem',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Tijdelijke PDF bestanden verwijderen',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Goedgekeurde artikelen & vervallen KB artikelen publiceren',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch rijplanning',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Bestanden van het diagnostische middel verwijderen',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Tijdelijke bestanden verwijderen',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Massa e-mailcampagnes &#39;s nachts uitvoeren',
 'LBL_ASYNCMASSUPDATE' => 'Asynchrone massa-updates uitvoeren',

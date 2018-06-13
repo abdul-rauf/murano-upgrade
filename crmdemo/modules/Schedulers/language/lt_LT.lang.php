@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -33,13 +33,13 @@ $mod_strings = array (
 'LBL_OOTB_REMOVE_DIAGNOSTIC_FILES' => 'Remove diagnostic tool files',
 'LBL_OOTB_REMOVE_PDF_FILES' => 'Remove temporary PDF files',
 'LBL_UPDATE_TRACKER_SESSIONS' => 'Atnaujinti tracker_sessions lentelę',
-'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Vykdyti priminimus el. paštu',
+'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Paleisti el. pašto priminimų pranešimus',
 'LBL_OOTB_CLEANUP_QUEUE' => 'Išvalyti suplanuotą darbų eilę',
 'LBL_OOTB_CREATE_NEXT_TIMEPERIOD' => 'Sukurti laiko periodus ateičiai',
 'LBL_OOTB_HEARTBEAT' => 'Sugar Heartbeat',
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Update KBContent articles.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publish approved articles & Expire KB Articles.',
-'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Process Author Scheduled Job',
+'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Išplėstinės darbo eigos suplanuota užduotis',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervalas:',
@@ -138,6 +138,11 @@ $mod_strings = array (
 'LBL_REFRESHJOBS' => 'Atnaujinti darbus',
 'LBL_POLLMONITOREDINBOXES' => 'Patikrinti įeinančias pašto dėžutes',
 'LBL_PERFORMFULLFTSINDEX' => 'Pilnos teksto paieškos indeksavimo sistema',
+'LBL_SUGARJOBREMOVEPDFFILES' => 'Pašalinkite laikinus PDF failus',
+'LBL_SUGARJOBKBCONTENTUPDATEARTICLES' => 'Paskelbkite patvirtintus straipsnius ir „Expire KB“ straipsnius.',
+'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => '„Elasticsearch“ eilės planavimo priemonė',
+'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Pašalinkite diagnostikos įrankio failus',
+'LBL_SUGARJOBREMOVETMPFILES' => 'Pašalinkite laikinus failus',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Vykdyti masinių laiškų siuntimą',
 'LBL_ASYNCMASSUPDATE' => 'Perform Asynchronous Mass Updates',
@@ -149,7 +154,7 @@ $mod_strings = array (
 'LBL_UPDATETRACKERSESSIONS' => 'Atnaujinti audito lentelės',
 'LBL_SUGARJOBCREATENEXTTIMEPERIOD' => 'Sukurti laiko periodus ateičiai',
 'LBL_SUGARJOBHEARTBEAT' => 'Sugar Heartbeat',
-'LBL_SENDEMAILREMINDERS'=> 'Vykdyti priminimus el. paštu',
+'LBL_SENDEMAILREMINDERS'=> 'Siųsti priminimus el. paštu',
 'LBL_CLEANJOBQUEUE' => 'Išvalyti suplanuotą darbų eilę',
 'LBL_CLEANOLDRECORDLISTS' => 'Cleanup Old Record Lists',
 );

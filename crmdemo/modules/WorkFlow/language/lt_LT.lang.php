@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -94,6 +94,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipas',
 
   // Workflow sunsetting message, added in 7.6.1
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Pastaba.</strong> Ši funkcija bus pašalinta būsimame Sugar leidime, kuris planuojamas 2017 m. Sugar Enterprise leidimo klientai turėtų pradėti naudotis pažangiomis darbo sekos galimybėmis, kurias suteikia proceso autorius. Spustelėkite <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">čia</a>, kad gautumėte daugiau informacijos.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Pastaba:</strong> šios funkcijos būsimoje „Sugar“ versijoje, šiuo metu suplanuotoje 2017 metams, nebebus. „Sugar Enterprise“ klientai turi pradėti naudoti išplėstinės darbo eigos galimybes, teikiamas išplėstinės darbo eigos. Daugiau informacijos rasite spustelėję <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">čia</a>.',
 );
 

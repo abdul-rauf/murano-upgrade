@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -156,16 +156,6 @@ $viewdefs['Emails']['base']['view']['compose'] = array(
                     'type'          => 'htmleditable_tinymce',
                     'dismiss_label' => true,
                     'span'          => 12,
-                    'fieldSelector' => 'compose_html_body',
-                    'tinyConfig'    => array(
-                        'height' => '100%',
-                        'width' => '100%',
-                        'plugins' => 'style,paste,inlinepopups',
-                        'forced_root_block' => false,
-                        'theme_advanced_buttons1' => "code,separator,bold,italic,underline,strikethrough,separator,bullist,numlist,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,forecolor,backcolor,separator,fontsizeselect",
-                        'theme_advanced_buttons2' => null,
-                        'theme_advanced_resizing' => false,
-                    ),
                 ),
             ),
         ),

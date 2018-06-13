@@ -2,22 +2,16 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*
- * Created on May 29, 2007
- *
- * To change the template for this generated file go to
- * Window - Preferences - PHPeclipse - PHP - Code Templates
- */
   $searchdefs['Users'] = array(
-  					'templateMeta' => array('maxColumns' => '3', 'maxColumnsBasic' => '4', 
-                            'widths' => array('label' => '10', 'field' => '30'), 
+  					'templateMeta' => array('maxColumns' => '3', 'maxColumnsBasic' => '4',
+                            'widths' => array('label' => '10', 'field' => '30'),
                            ),
                     'layout' => array(
                     	'basic_search' => array(
@@ -32,7 +26,7 @@
                     	    'title',
                     	    'is_group',
                     	    'department',
-                    	    'phone' => 
+                    	    'phone' =>
                               array (
                                 'name' => 'phone',
                                 'label' => 'LBL_ANY_PHONE',
@@ -40,7 +34,7 @@
                                 'default' => true,
                                 'width' => '10%',
                               ),
-                    	    'address_street' => 
+                    	    'address_street' =>
                               array (
                                 'name' => 'address_street',
                                 'label' => 'LBL_ANY_ADDRESS',
@@ -48,7 +42,7 @@
                                 'default' => true,
                                 'width' => '10%',
                               ),
-                    	    'email' => 
+                    	    'email' =>
                               array (
                                 'name' => 'email',
                                 'label' => 'LBL_ANY_EMAIL',
@@ -56,7 +50,7 @@
                                 'default' => true,
                                 'width' => '10%',
                               ),
-                              'address_city' => 
+                              'address_city' =>
                               array (
                                 'name' => 'address_city',
                                 'label' => 'LBL_CITY',
@@ -64,7 +58,7 @@
                                 'default' => true,
                                 'width' => '10%',
                               ),
-                    	    'address_state' => 
+                    	    'address_state' =>
                               array (
                                 'name' => 'address_state',
                                 'label' => 'LBL_STATE',
@@ -72,7 +66,7 @@
                                 'default' => true,
                                 'width' => '10%',
                               ),
-                              'address_postalcode' => 
+                              'address_postalcode' =>
                               array (
                                 'name' => 'address_postalcode',
                                 'label' => 'LBL_POSTAL_CODE',
@@ -80,8 +74,8 @@
                                 'default' => true,
                                 'width' => '10%',
                               ),
-                             
-                    	    'address_country' => 
+
+                    	    'address_country' =>
                               array (
                                 'name' => 'address_country',
                                 'label' => 'LBL_COUNTRY',
@@ -89,6 +83,6 @@
                                 'default' => true,
                                 'width' => '10%',
                               ),
-                    		),				
+                    		),
 					),
  			   );

@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -131,7 +131,7 @@
                     return this;
                 }
 
-                this._before || (this._before = {});
+                this._before = this._before || {};
                 var events = this._before[name] || (this._before[name] = []);
 
                 events.push({
@@ -175,7 +175,7 @@
                 if (eventSplitter.test(name)) {
                     var names = name.split(eventSplitter);
                     for (var i = 0, l = names.length; i < l; i++) {
-                        stop = !this['triggerBefore'].apply(this, [names[i]].concat(args)) || stop;
+                        stop = !this.triggerBefore.apply(this, [names[i]].concat(args)) || stop;
                     }
                     return !stop;
                 }
@@ -233,7 +233,8 @@
                 names = name ? [name] : _.keys(this._before);
                 for (i = 0, l = names.length; i < l; i++) {
                     name = names[i];
-                    if (events = this._before[name]) {
+                    events = this._before[name];
+                    if (events) {
                         this._before[name] = retain = [];
                         if (callback || context) {
                             for (j = 0, k = events.length; j < k; j++) {

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -105,13 +105,7 @@ class SugarQuery_Builder_Field_Select extends SugarQuery_Builder_Field
         if (!empty($this->def['rname']) && !empty($this->jta)) {
             $field = array("{$this->jta}.{$this->def['rname']}", $this->def['name']);
             $this->addToSelect(array($field));
-            if (isset($this->def['module'])
-                && ($this->def['rname'] === 'full_name'
-                    || $this->def['rname'] === 'document_name'
-                    || $this->def['rname'] === 'name'
-                    || $this->def['rname'] === 'user_name'
-                )
-            ) {
+            if (isset($this->def['module'])) {
                 $rBean = BeanFactory::getBean($this->def['module']);
                 $ownerField = $rBean->getOwnerField();
                 if ($ownerField) {

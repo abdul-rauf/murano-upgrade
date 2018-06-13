@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Savietojamības pārbaudes laikā atklātas kļūdas.  Lai SugarCRM instalācija funkcionētu korekti, veic atbilstošus pasākumus, lai atrisinātu zemāk esošās problēmas vai spied pogu Atkārtoti pārbaudīt, vai mēģini instalēt no jauna.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference ir stāvoklī On (šo vajadzētu uzstādīt stāvoklī Off failā php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Netika atrasts: Sugar Plānotājam būs ierobežota funkcionalitāte. E-pasta arhivēšanas serviss netiks izpildīts.',
+	'ERR_CHECKSYS_CURL'					=> 'Nav atrasts: Sugar plānotājs darbosies ar ierobežotu funkcionalitāti. E-pasta arhivēšanas pakalpojums nedarbosies.',
     'ERR_CHECKSYS_IMAP'					=> 'Netika atrasts: Ienākošajiem e-pastiem un Kampaņām (E-pasta) nepieciešamas IMAP bibliotēkas. Pretējā gadījumā funkcionalitāte nedarbosies.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC nevar uzstādīt "On" stāvoklī, ja lieto MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Brīdinājums:',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'Datubāze nav pieejama',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Datu bāze netiek atbalstīta. Pārliecinieties, ka ir uzstādīti draiveri kādai no šādām atbalstītajām datu bāzēm: MySQL vai MS SQLServer. Iespējams, atkarībā no PHP versijas, ir jānoņem komentārs paplašinājumam php.ini failā vai jāpārkompilē, izmantojot pareizu bināro failu. Sīkāka informācija par to, kā nodrošināt datu bāzes atbalstu, pieejama PHP rokasgrāmatā.<br><br>SugarCRM PRO neatbalsta Oracle un DB2 datu bāzes. Lai apskatītu atbalstīto datu bāzu sarakstu un citu informāciju par platformām, dodieties uz <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Nav atrastas Sugar nepieciešamās XML Parser Libraries funkcijas.  Iespējams, ka atkarībā no izmantotās PHP versijas, jānoņem komentārs paplašinājumam php.ini datnē, vai jāpārkompilē ar pareizu bināro failu.  Detalizētaka informācija pieejama PHP rokasgrāmatā.',
+    'LBL_CHECKSYS_CSPRNG' => 'Nejaušu skaitļu ģenerators',
     'ERR_CHECKSYS_MBSTRING'             => 'Nav atrastas funkcijas, kas nepieciešamas, lai Sugar  varētu izmantot PHP  Multibyte Strings paplašinājumu (mbstring). <br/><br/>Parasti pēc noklusējuma PHP mbstring modulis nav spējīgots un tā aktivizēšanai jāveic PHP būvējums, izmantojot  --enable-mbstring. Detalizētāka informācija par mbstring atbalstu pieejama PHP rokasgrāmatā.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'Parametrs session.save_path Jūsu php konfigurācijas failā (php.ini) nav uzstādīts, vai ir uzstādīts uz neeksistējošu katalogut. Uzstādiet save_path parametru php.inifailā, vai pārbaudiet save_path norādītā kataloga eksistenci.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'ZIP atbalsts netika atrasts: SugarCRM nepieciešams ZIP atbalsts, lai apstrādātu saspiestus failus.',
     'ERR_CHECKSYS_BCMATH'				=> 'BCMATH atbalsts nav atrasts: SugarCRM nepieciešams BCMATH atbalsts aprēķinu veikšanai ar pieņemto precizitāti.',
     'ERR_CHECKSYS_HTACCESS'             => 'Tets par .htaccess faila pārrakstīšanu neizdevās. Tas parasti nozīmē, ka jums nav ieststīts AllowOverride Sugar direktorijai.',
+    'ERR_CHECKSYS_CSPRNG' => 'CSPRNG izņēmums',
 	'ERR_DB_ADMIN'						=> 'Datubāzes administratora lietotāja vārds un/vai parole nav nederīga, un nevar izveidot savienojumu ar datubāzi. Lūdzu ievadiet derīgu lietotāja vārdu un paroli. (Kļūda:',
     'ERR_DB_ADMIN_MSSQL'                => 'Datubāzes administratora lietotāja vārds un/vai parole nav nederīga. Nevar izveidot savienojumu ar datubāzi. Lūdzu ievadiet derīgu lietotāja vārdu un paroli.',
 	'ERR_DB_EXISTS_NOT'					=> 'Norādītā Datubāze neeksistē.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'Atslēga ir nepieciešama galvenā lietojuma funkcionalitātei, bet nav nepieciešama instalācijai. Atslēga šoreiz nav obligāti jāievada, bet tā būs nepieciešama pēc lietojuma instalācijas.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Instalācijai ir nepieciešama minimāla informācija. Iesakāms jauniem lietotājiem.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Nodrošina papildu iespējas instalācijas laikā. Vairums šo iespēju ir pieejamas pēc instalācijas administrācijas ekrānos. Ieteicams tikai pieredzējušiem lietotājiem.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Nodrošina papildu iespējas instalācijas laikā. Vairums šo iespēju ir pieejamas pēc instalācijas administrācijas ekrānos. Ieteicams tikai pieredzējušiem lietotājiem.',
 	'LBL_LANG_1'						=> 'Lai lietotu kādu citu nevis noklusēto Sugar valodu (US_angļu), tagad variet augšuplādēt un instalēt valodu paku. Valodu pakas ielāde un instalēšana ir iespējama arī no paša Sugar lietojuma. Ja vēlaties šo soli izlaist, spiediet Nākošais.',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Instalēt',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Noņemt',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'Licences apstiprināšana',
     'LBL_LICENSE_CHECKING'              => 'Pārbauda sistēmas savietojamību.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Pārbauda vidi',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'Pārbauda DB pilnvaras.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'Pārbauda DB, FTS pilnvaras.',
     'LBL_LICENSE_CHECK_PASSED'          => 'Sistēmas savietojamības pārbaude pabeigta.',
     'LBL_LICENSE_REDIRECT'              => 'Pāradresē',
 	'LBL_LICENSE_DIRECTIONS'			=> 'Ja jums ir licences informācija, lūdzu ievadiet to zemāk esošajos laukos.',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'Pirms turpināt instalāciju, Lūdzu izlasiet sekojošu svarīgu informāciju. Informācija palīdzēs noteikt vai jūs šobrīd esat gatavs lietojuma instalācijai.',
 
 
-	'LBL_WELCOME_2'						=> '<a href="http://www.sugarcrm.com/forums/" target="_blank">Instalēšanas dokumentācija pieejama <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>.  <BR><BR> Lai instalēšanas jautājumos saņemtu palīdzību no SugarCRM atbalsta inženiera, lūdzu ielogojieties <a target="_blank" href="http://support.sugarcrm.com">SugarCRM atbalsta portālā</a> un iesniedziet atbalsta pieprasījumu.',
+	'LBL_WELCOME_2'						=> 'Instalēšanas dokumentācija pieejama <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>. <BR><BR> Lai instalēšanas jautājumos saņemtu palīdzību no SugarCRM atbalsta inženiera, lūdzu ielogojieties <a target="_blank" href="http://support.sugarcrm.com">SugarCRM atbalsta portālā</a> un iesniedziet atbalsta pieprasījumu.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>Izvēlieties valodu</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Uzstādīšanas vednis',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Sveicināti SugarCRM vidē',
@@ -452,7 +455,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'Masu e-pasta kampaņas izpildīt pa nakti',
 	'LBL_OOTB_PRUNE'		=> 'Attīrīt datubāzi 1. mēneša dienā',
     'LBL_OOTB_TRACKER'		=> 'Arhivēt sekotāja tabulas',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Izpildīt e-pasta atgādinājuma paziņojumus',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Ieslēgt e-pasta atgādinājumu paziņojumus',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'Atjaunināt tracker_sessions tabulu',
     'LBL_OOTB_CLEANUP_QUEUE' => 'Attīrīt uzdevumu rindu',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'Meklēšanas dzinēja tips',
     'LBL_FTS_HELP'      => 'Lai aktivizētu pilna teksta meklēšanu, izvēlieties meklēšanas dziņa tipu un ievadiet dziņa hostu un portu . Sugar ietver iebūvētu atbalstu elastīgās meklēšanas dzinējam.',
     'LBL_FTS_REQUIRED'    => 'Nepieciešama elastīgā meklēšana.',
-    'LBL_FTS_ERROR'    => 'Nevar pieslēgties Pilna teksta meklēšanas serverim, lūdzu pārbaudiet iestatījumus.',
+    'LBL_FTS_CONN_ERROR'    => 'Nevar pieslēgties Pilna teksta meklēšanas serverim, lūdzu pārbaudiet iestatījumus.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'Nav pieejama neviena Pilna teksta meklēšanas servera versija, pārbaudiet iestatījumus.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'Atklāta Elastīgās meklēšanas neatbalstīta versija. Izmantojiet versijas: %s',
 
     'LBL_PATCHES_TITLE'     => 'Instalēt jaunākos ielāpus',
     'LBL_MODULE_TITLE'      => 'Instalēt valodu pakas',

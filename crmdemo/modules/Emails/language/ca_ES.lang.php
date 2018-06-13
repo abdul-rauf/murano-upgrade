@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'error: credencials perdudes',
     'ERR_NO_UID' => 'error: no UID',
     'ERR_NO_IEID' => 'error: no ieID',
+    'ERR_INVALID_RECIPIENTS' => 'Hi ha un o més destinataris amb una adreça electrònica no vàlida. ' .
+        'Arregleu-lo i torneu-lo a provar.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Adreça electrònica no vàlida',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'no s&#39;han especificat destinataris',

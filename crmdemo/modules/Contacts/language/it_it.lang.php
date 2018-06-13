@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -66,7 +66,7 @@ $mod_strings = array (
     'LBL_DO_NOT_CALL' => 'Non chiamare:',
     'LBL_DUPLICATE' => 'Possibili Contatti Duplicati',
     'LBL_EMAIL_ADDRESS' => 'Email:',
-    'LBL_EMAIL_OPT_OUT' => 'Non vuole ricevere email:',
+    'LBL_EMAIL_OPT_OUT' => 'Scelta esclusione email:',
     'LBL_EMPTY_VCARD' => 'Si prega di selezionare un file vCard',
     'LBL_EXISTING_ACCOUNT' => 'Usata un´azienda esistente',
     'LBL_EXISTING_CONTACT' => 'Usato un contatto esistente',
@@ -131,7 +131,7 @@ $mod_strings = array (
     'LBL_PRIMARY_ADDRESS_STREET' => 'Indirizzo Primario, Via:',
     'LBL_PRIMARY_ADDRESS' => 'Indirizzo principale:',
     'LBL_PRODUCTS_TITLE'=>'Prodotti',
-    'LBL_REVENUELINEITEMS_TITLE'=>'Elementi dell´Opportunità',
+    'LBL_REVENUELINEITEMS_TITLE'=>'Elementi dell&#39;opportunità',
     'LBL_RELATED_CONTACTS_TITLE'=>'Contatti Correlati',
     'LBL_REPORTS_TO_ID'=>'Dipende da ID',
     'LBL_REPORTS_TO' => 'Dipende da:',
@@ -151,7 +151,7 @@ $mod_strings = array (
     'LNK_IMPORT_VCARD' => 'Crea Contatto da vCard',
     'LNK_NEW_ACCOUNT' => 'Nuova Azienda',
     'LNK_NEW_APPOINTMENT' => 'Nuovo Appuntamento',
-    'LNK_NEW_CALL' => 'Nuova Chiamata',
+    'LNK_NEW_CALL' => 'Log chiamata',
     'LNK_NEW_CASE' => 'Nuovo Reclamo',
     'LNK_NEW_CONTACT' => 'Nuovo Contatto',
     'LNK_NEW_EMAIL' => 'Archivia Email',
@@ -188,14 +188,12 @@ $mod_strings = array (
     'LBL_PROJECTS_RESOURCES' => 'Risorse dei Progetti',
     'LBL_TARGET_OF_CAMPAIGNS' => 'Campagne (Obiettivo di):',
     'LBL_CAMPAIGNS'    =>    'Campagne',
-    'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Campagne',
+    'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Log campagne',
     'LBL_LIST_CITY' => 'Comune',
     'LBL_LIST_STATE' => 'Provincia',
     'LBL_HOMEPAGE_TITLE' => 'I miei Contatti',
     'LBL_OPPORTUNITIES' => 'Opportunità',
 
-    'LBL_PASSWORD_CHANGE_FORM_TITLE' => 'Modifica della Password',
-    'LBL_OLD_PORTAL_PASSWORD' => 'Vecchia Password del Portale',
     'LBL_PORTAL_PASSWORD' => 'Password del Portale',
     'LBL_CONFIRM_PORTAL_PASSWORD' => 'Conferma Password del Portale',
     'LBL_LANG_PREF_TOOLTIP' => 'L´interfaccia utente del Portale di Supporto è resa nella lingua selezionata qui',

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -94,6 +94,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Тип',
 
   // Workflow sunsetting message, added in 7.6.1
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Примечание.</strong>Данная функция будет удалена в следующей версии Sugar, выход которой ожидается в 2017 г. Клиентам, использующим версию Sugar Enterprise, следует начать использовать расширенные возможности рабочего процесса, предоставленные автором процесса. Для получения дополнительной информации щелкните <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">здесь</a>.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Примечание.</strong>Данная функция будет удалена в следующей версии Sugar, выход которой ожидается в 2017 году. Клиентам, использующим версию Sugar Enterprise, следует начать использовать расширенные возможности рабочего процесса, предоставляемые Advanced Workflow. Для получения дополнительной информации щелкните <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">здесь</a>.',
 );
 

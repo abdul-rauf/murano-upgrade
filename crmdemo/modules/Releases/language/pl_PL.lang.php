@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -19,7 +19,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 $mod_strings = array (
-  'LBL_MODULE_NAME' => 'Wydanie',
+  'LBL_MODULE_NAME' => 'Wydania',
   'LBL_MODULE_NAME_SINGULAR' => 'Wydanie',
   'LBL_MODULE_TITLE' => 'Wydanie: Strona główna',
   'LBL_SEARCH_FORM_TITLE' => 'Wyszukiwanie wydania',
@@ -34,16 +34,16 @@ $mod_strings = array (
   'LBL_STATUS' => 'Status:',
   'LNK_NEW_RELEASE' => 'Lista wydań',
   'NTC_DELETE_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten rekord?',
-  'ERR_DELETE_RECORD' => 'Musisz podać numer rekordu, aby usunąć to wydanie.',
-  'NTC_STATUS' => 'Ustaw status Nieaktywny, aby usunąć to wydanie z listy rozwijalnej wydań',
-  'NTC_LIST_ORDER' => 'Ustawia kolejność dla tego wydania na liście rozwijalnej wydań',
-  'LBL_ACTIVE_RELEASES' => 'Aktywne wersje',
+  'ERR_DELETE_RECORD' => 'Aby usunąć wydanie, należy podać numer rekordu.',
+  'NTC_STATUS' => 'Ustaw status Nieaktywny, aby usunąć to wydanie z listy rozwijanej wydań',
+  'NTC_LIST_ORDER' => 'Ustawia kolejność dla tego wydania na liście rozwijanej wydań',
+  'LBL_ACTIVE_RELEASES' => 'Aktywne wydania',
   'release_status_dom' =>
   array (
     'Active' => 'Aktywny',
     'Inactive' => 'Nieaktywny',
 ),
-	'LBL_EDITLAYOUT' => 'Edytuj widok' /*for 508 compliance fix*/,
+	'LBL_EDITLAYOUT' => 'Edytuj układ' /*for 508 compliance fix*/,
 );
 
 

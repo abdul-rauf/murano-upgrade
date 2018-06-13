@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -94,8 +94,8 @@ $mod_strings = array (
 	'LBL_EMAILS_PROSPECT_REL'	=> 'Email:Prospekt',
 	'LBL_EMAILS_TASKS_REL'		=> 'Email:Uppgifter',
 	'LBL_EMAILS_USERS_REL'		=> 'Email:Användare',
-    'LBL_EMAILS_PRODUCTS_REL' => 'E-poster: Produkter',
-    'LBL_EMAILS_REVENUELINEITEMS_REL' => 'E-post: Indtäktsposter',
+    'LBL_EMAILS_PRODUCTS_REL' => 'Email: Produkter',
+    'LBL_EMAILS_REVENUELINEITEMS_REL' => 'Email: Indtäktsposter',
     'LBL_EMPTY_FOLDER'          => 'Inga mail att visa',
 	'LBL_ERROR_SENDING_EMAIL'	=> 'Ett fel uppstod när mailet skickades!',
 	'LBL_ERROR_SAVING_DRAFT'	=> 'Fel vid sparande av draft',
@@ -129,18 +129,18 @@ $mod_strings = array (
 	'LBL_SEARCH_FORM_DRAFTS_TITLE'=> 'Sök utkast',
 	'LBL_SEARCH_FORM_SENT_TITLE'=> 'Sök i skickade mail',
 	'LBL_SEARCH_FORM_TITLE'		=> 'Sök email',
-    'LBL_SEARCH_IMPORTED_EMAIL' => 'Sök importerad e-post',
+    'LBL_SEARCH_IMPORTED_EMAIL' => 'Sök importerad email',
 	'LBL_SEND_ANYWAYS'			=> 'Mailet saknar ämne. Skicka/spara ändå?',
-	'LBL_NO_BODY_SEND_ANYWAYS'	=> 'Är du säker på att du vill skicka/spara e-post utan innehåll?',
-	'LBL_NO_SUBJECT_NO_BODY_SEND_ANYWAYS' => 'Är du säker på att du vill skicka/spara e-post utan ämne och innehåll?',
+	'LBL_NO_BODY_SEND_ANYWAYS'	=> 'Är du säker på att du vill skicka/spara email utan innehåll?',
+	'LBL_NO_SUBJECT_NO_BODY_SEND_ANYWAYS' => 'Är du säker på att du vill skicka/spara email utan ämne och innehåll?',
 	'LBL_SEND_BUTTON_KEY'		=> 'S',
 	'LBL_SEND_BUTTON_LABEL'		=> 'Send',
 	'LBL_SEND_BUTTON_TITLE'		=> 'Send [Alt+S]',
 	'LBL_SEND'					=> 'SKICKA',
 	'LBL_SENT_MODULE_NAME'		=> 'Skickade email',
-	'LBL_SENT_MODULE_NAME_SINGULAR' => 'Skickat e-post',
+	'LBL_SENT_MODULE_NAME_SINGULAR' => 'Skickat email',
 	'LBL_SHOW_ALT_TEXT'			=> 'Visa oformaterad text',
-    'LBL_SELECT_FROM_SENDER'    => 'Välj från e-postkonto',
+    'LBL_SELECT_FROM_SENDER'    => 'Välj från emailkonto',
     'LBL_SELECT_SIGNATURE_TITLE' => 'Välj signatur',
 	'LBL_SIGNATURE'				=> 'Signatur',
     "LBL_DEFAULT_SIGNATURE_TITLE" => "Standard signatur",
@@ -361,7 +361,7 @@ $mod_strings = array (
 	'LBL_YAHOOMAIL_SMTPPASS'					=> 'Yahoo! Mail Lösenord',
 	'LBL_YAHOOMAIL_SMTPUSER'					=> 'Yahoo! Mail ID',
 	'LBL_GMAIL_SMTPPASS'					=> 'Gmail Lösenord',
-	'LBL_GMAIL_SMTPUSER'					=> 'Gmail Epost Adress',
+	'LBL_GMAIL_SMTPUSER'					=> 'Gmailadress:',
 	'LBL_EXCHANGE_SMTPPASS'					=> 'Exchange Lösenord',
 	'LBL_EXCHANGE_SMTPUSER'					=> 'Exchange Användarnamn',
 	'LBL_EXCHANGE_SMTPPORT'					=> 'Exchange Server port',
@@ -382,26 +382,26 @@ $mod_strings = array (
 	'LBL_YAHOO_MAIL' => 'Yahoo' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Utbyte' /*for 508 compliance fix*/,
 	'LBL_WAIT' => 'Vänta' /*for 508 compliance fix*/,
-	'LBL_CHECKEMAIL' => 'Kolla Epost' /*for 508 compliance fix*/,
-	'LBL_COMPOSEEMAIL' => 'Skriv e-postmeddelande' /*for 508 compliance fix*/,
-	'LBL_EMAILSETTINGS' => 'Epost Inställningar' /*for 508 compliance fix*/,
+	'LBL_CHECKEMAIL' => 'Kolla email' /*for 508 compliance fix*/,
+	'LBL_COMPOSEEMAIL' => 'Skriv emailmeddelande' /*for 508 compliance fix*/,
+	'LBL_EMAILSETTINGS' => 'Emailinställningar' /*for 508 compliance fix*/,
 
 	// SNIP
-	'LBL_CONTACTS_SUBPANEL_TITLE_SNIP' => 'Epost Kontakter',
-	'LBL_EMAILS_MEETINGS_REL' => 'Epost:Möten',
+	'LBL_CONTACTS_SUBPANEL_TITLE_SNIP' => 'Emailkontakter',
+	'LBL_EMAILS_MEETINGS_REL' => 'Email:Möten',
 	'LBL_DATE_CREATED' => 'Datum skapat',
 	'LBL_DATE_MODIFIED' => 'Senast ändrad',
 
     // Email Error Messages
     'LBL_INTERNAL_ERROR' => 'Det uppstod ett internt fel server. Försök igen.',
-    'LBL_INVALID_CONFIGURATION' => 'E-post har inte varit inställt korrekt. Ange rätt konfiguration.',
+    'LBL_INVALID_CONFIGURATION' => 'Email har inte varit inställt korrekt. Ange rätt konfiguration.',
     'LBL_INVALID_HEADER' => 'Ange alla obligatoriska uppgifter.',
-    'LBL_INVALID_EMAIL' => 'Lämna korrekta e-postadresser.',
-    'LBL_FAILED_TO_CONNECT' => 'Det gick inte att ansluta till e-postservern. Kontrollera att e-postkonfiguration har ställts in på rätt sätt.',
+    'LBL_INVALID_EMAIL' => 'Lämna korrekta emailadresser.',
+    'LBL_FAILED_TO_CONNECT' => 'Det gick inte att ansluta till e-postservern. Kontrollera att emailkonfiguration har ställts in på rätt sätt.',
     'LBL_INVALID_ATTACHMENT' => 'Det gick inte att bifoga filen tillgänglig. Försök igen.',
     'LBL_EXECUTABLE_ATTACHMENT' => 'Din SMTP-server tillåter inte att bifoga körbara filer. Mailet kunde inte skickas.',
-    'LBL_MISSING_CONFIGURATION' => 'E-post konfiguration har inte angetts. Ange en giltig e-konfiguration.',
-    'LBL_INVALID_MAILAPI_STATUS' => 'Ogiltig e-post status skickades på begäran. Ange en giltig status.',
+    'LBL_MISSING_CONFIGURATION' => 'Email konfiguration har inte angetts. Ange en giltig e-konfiguration.',
+    'LBL_INVALID_MAILAPI_STATUS' => 'Ogiltig email status skickades på begäran. Ange en giltig status.',
     'LBL_EXCEPTION' => 'Undantag inträffade',
     'LBL_ASSIGNMNT_ACT_RESULT' => 'Uppdrag åtgärd resultat',
     'LBL_INVALID_OPS' => 'Ogiltig operation',
@@ -411,11 +411,14 @@ $mod_strings = array (
     'LBL_NOT_SUGAR_FOLDER' => 'NOOP - inte en Sugar Mapp',
     'LBL_ID_MISMATCH' => 'NOOP: ID stämmer inte',
     'LBL_NO_SEARCH_CRITERIA' => 'NOOP: inga sökkriterier hittade',
-    'ERR_RCD_NUM_TO_DEL' => 'Ett post nummer måste anges för att radera e-postmeddelandet.',
+    'ERR_RCD_NUM_TO_DEL' => 'Ett post nummer måste anges för att radera emailmeddelandet.',
     'ERR_MSG_FAILED' => 'Meddelande No: {0} misslyckades. Orsak: Meddelande redan importerad',
     'ERR_MISSING_CREDENTIALS' => 'Fel: saknas referenser',
     'ERR_NO_UID' => 'Fel: ingen UID',
     'ERR_NO_IEID' => 'Fel: ingen ieID',
+    'ERR_INVALID_RECIPIENTS' => 'Det finns en eller flera mottagare med en ogiltig emailadress. ' .
+        'Vänligen rätta till detta och försök igen.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Ogiltig emailadress',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'ingen mottagare angivna',
@@ -427,7 +430,7 @@ $mod_strings = array (
     'LBL_HELP_COMPOSE_TITLE' => 'Komponera ett email',
     'LBL_HELP_COMPOSE' => 'Komponera ett mail genom att tillhandahålla ett ämne och text. Klicka på "Skicka" för att skicka e-posten eller välj "Spara utkast" från menyn åtgärder för att spara e-posten för senare redigering från dina utkast mapp i e-post modulen. Du kan använda en fördefinierad mall med hjälp av Mall knappen eller inkludera en av dina signaturer med hjälp av knappen Signatur. Använd knappen Ladda upp nytt för att lägga till en bilaga till e-posten.',
 
-    'LBL_EMAIL_INVALID_USER_CONFIGURATION' => 'Dina e-postinställningar är inte korrekt konfigurerad för att skicka e-post. En SMTP-server måste konfigureras i <a href="#bwc/index.php?module=Users">User Profile Email Settings</a>.',
+    'LBL_EMAIL_INVALID_USER_CONFIGURATION' => 'Dina e-postinställningar är inte korrekt konfigurerad för att skicka email. En SMTP-server måste konfigureras i <a href="#bwc/index.php?module=Users">User Profile Email Settings</a>.',
     'LBL_EMAIL_INVALID_SYSTEM_CONFIGURATION' => 'Systemets standard SMTP-servern är inte konfigurerad. Kontakta systemadministratören för ytterligare hjälp.',
 );
 

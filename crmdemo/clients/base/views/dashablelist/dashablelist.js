@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -45,12 +45,23 @@
  * //...
  * </code></pre>
  *
+ * Note that there are two concepts of "intelligence" for this dashlet.
+ *
+ * The intelligence property on the controller `this.intelligent` indicates
+ * if the dashlet is allowed to link to a record.
+ *
+ * The intelligent setting retrieved by `this.settings.get('intelligent')` is
+ * only relevant if the intelligence property `this.intelligent` is true. This
+ * setting indicates if the dashlet is actively linking to a record.
+ *
  * @class View.Views.Base.DashablelistView
  * @alias SUGAR.App.view.views.BaseDashablelistView
  * @extends View.Views.Base.ListView
  */
 ({
     extendsFrom: 'ListView',
+
+    dataView: '',
 
     /**
      * The plugins used by this view.
@@ -119,6 +130,9 @@
 
     /**
      * Flag indicates if dashlet is intelligent.
+     *
+     * If the dashlet is intelligent, it can be linked to a record on the main
+     * context, e.g. on the Record View.
      */
     intelligent: null,
 
@@ -225,10 +239,10 @@
                     link: {
                         name: link,
                         bean: model
-                    },
-                    relate: true
+                    }
                 };
             this.collection = app.data.createBeanCollection(module, null, options);
+            this.collection.setOption('relate', true);
             this.context.set('collection', this.collection);
             this.context.set('link', link);
         } else {
@@ -271,7 +285,7 @@
                     var filterDef = filter && filter.get('filter_definition');
                     this._displayDashlet(filterDef);
                 }, this),
-                error: _.bind(function(err) {
+                error: _.bind(function() {
                     if (this.disposed) {
                         return;
                     }
@@ -411,6 +425,9 @@
             module = this.context.parent.get('module');
             if (_.contains(this.moduleBlacklist, module)) {
                 module = _.first(availableModules);
+                // On 'initialize' model is set to context's model - that model can have no access at all
+                // and we'll result in 'no-access' template after render. So we change it to default model.
+                this.model = app.data.createBean(module);
             }
             this.settings.set('module', module);
         } else {
@@ -725,6 +742,19 @@
         if (this._timerId) {
             clearInterval(this._timerId);
         }
+    },
+
+    /**
+     * @override
+     * @private
+     */
+    _render: function() {
+        if (!this.meta || !this.meta.config) {
+            return this._super('_render');
+        }
+
+        this.action = 'list';
+        return this._super('_render');
     },
 
     /**

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -21,25 +21,12 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Visibility;
  */
 class TeamSetFilter implements FilterInterface
 {
-    // Awaiting PHP 5.4+ support
-    //use FilterTrait;
-
-    ///// Start trait
+    use FilterTrait;
 
     /**
-     * @var Visibility
+     * @var string
      */
-    protected $provider;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setProvider(Visibility $provider)
-    {
-        $this->provider = $provider;
-    }
-
-    ///// End trait
+    protected $defaultField = 'team_set_id';
 
     /**
      * {@inheritdoc}
@@ -47,7 +34,8 @@ class TeamSetFilter implements FilterInterface
     public function buildFilter(array $options = array())
     {
         $teamSetIds = $this->getTeamSetIds($options['user']);
-        return new \Elastica\Filter\Terms('team_set_id', $teamSetIds);
+        $field = !empty($options['field']) ? $options['field'] : $this->defaultField;
+        return new \Elastica\Filter\Terms($field, $teamSetIds);
     }
 
     /**

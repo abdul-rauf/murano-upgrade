@@ -3,7 +3,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -85,7 +85,7 @@ $mod_strings = array(
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} содержит отдельные {{plural_module_name}}, которые содержат текст или вложение, которое привязывается к конкретной записи. Записи {{module_name}} могут быть связаны с одной записью во многих модулях через поле "flex relate field" и с единичным {{contacts_singular_module}}. {{plural_module_name}} может содержать общий текст о записи или даже вложение, относящееся к записи. Существуют различные способы создания {{plural_module_name}} в Sugar как через {{plural_module_name}} модуль, импорт {{plural_module_name}}, через субпанели История и т. п. Как только {{module_name}} запись создана, Вы можете просмотреть и редактировать информацию, относящуюся к {{module_name}} в режиме просмотра записи {{plural_module_name}}. Каждая запись {{module_name}} может быть связана с другими записями Sugar, такими как {{accounts_module}}, {{contacts_module}}, {{opportunities_module}}, и многими другими.',
+    'LBL_HELP_RECORDS' => 'Модуль {{plural_module_name}} содержит отдельные {{plural_module_name}}, которые содержат текст или вложение, относящиеся к конкретной записи. Записи {{module_name}} могут быть связаны с одной записью во многих модулях через поле "flex relate field" и с одной записью {{contacts_singular_module}}. Запись {{plural_module_name}} может содержать общий текст о записи или даже вложение, относящееся к записи. Существуют различные способы создания {{plural_module_name}} в Sugar, используя модуль {{plural_module_name}}, импорт {{plural_module_name}}, через субпанели История и т. п. После создания записи {{module_name}} можно просматривать и редактировать информацию, относящуюся к модулю {{module_name}}, в режиме просмотра записи {{plural_module_name}}. Каждая запись {{module_name}} может быть связана с другими записями Sugar, такими как {{accounts_module}}, {{contacts_module}}, {{opportunities_module}} и многими другими.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{plural_module_name}} модуль включает контакты {{plural_module_name}}, которые содержат текст или вложение, относящееся к связанной записи.

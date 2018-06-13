@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> 'סיסמה חדשה',
 	'LBL_NEW_PASSWORD1'					=> 'סיסמה',
 	'LBL_NEW_PASSWORD2'					=> 'אשר סיסמה',
-	'LBL_NEW_USER_PASSWORD_1'			=> 'הסיסמה שונתה בהצלחה.',
+    'LBL_NEW_USER_PASSWORD_1' => 'הסיסמה שונתה בהצלחה.',
 	'LBL_NEW_USER_PASSWORD_2'			=> 'הודעת דוא"ל שמכילה את הסיסמה שיצרה המערכת נשלחה למשתמש.',
-	'LBL_NEW_USER_PASSWORD_3'			=> 'הסיסמה נוצרה בהצלחה.',
+    'LBL_NEW_USER_PASSWORD_3' => 'הסיסמה נוצרה בהצלחה.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> 'משתמש חדש',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> 'משתמש חדש',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => 'מיכסות',
     'LBL_FORECASTS'                     => 'תחזיות',
     'LBL_WORKSHEETS'                    => 'גליונות עבודה',
+	'LBL_CALENDARS'                     => 'לוחות שנה',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => 'השג CAPTCHA אחרת',
 	'LBL_RECAPTCHA_SOUND'				=> 'החלף לשמע',
 	'LBL_RECAPTCHA_IMAGE'				=> 'החלף לתמונה',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> 'טלפון עבודה',
 	'LBL_YOUR_PUBLISH_URL'				=> 'פרסם במיקום שלי',
     'LBL_ICAL_PUB_URL'                  => 'URL להטמעת iCal',
-    'LBL_ICAL_PUB_URL_HELP'             => 'השתמש בכתובת URL זו כדי להירשם כמנוי ללוח השנה של Sugar בתוך iCal.',
+    'LBL_ICAL_PUB_URL_HELP'             => 'השתמש בכתובת URL זו כדי להירשם כמנוי ללוח השנה שלך ב-Sugar באפליקציות הנתמכות על ידי iCal.' .
+                                           ' אירועי לוח השנה של Sugar ניתנים להצגה לקריאה בלבד ' .
+                                           'באפליקציות לוח שנה חיצוניות וכל פעולת עריכה באירועים ' .
+                                           '(למשל ישיבות, שיחות ועוד) ניתן לבצע רק ב-Sugar.',
 	'LBL_YOUR_QUERY_URL'				=> 'URL של השאילתא שלך',
 	'LNK_NEW_USER'						=> 'צור משתמש חדש',
 	'LNK_NEW_PORTAL_USER'				=> 'צור משתמש שער API',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => 'דוחות משתמש',
     'LBL_CONTACTS_SYNC' => 'אנשי קשר',
-
+    'LBL_DETAIL' => 'פרופיל משתמש',
 ); // END STRINGS DEFS
 
 ?>

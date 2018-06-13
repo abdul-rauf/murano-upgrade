@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -58,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'S´han detectat errors durant les comprovacions de compatibilitat. Perquè la seva Instal·lació de SugarCRM funcioni correctament, du a terme els següents passos per corregir els problemes llistats a continuació i faci clic al botó comprovar de nou, o iniciï de nou la instal·lació, si us plau.',
     'ERR_CHECKSYS_CALL_TIME'            => '"Allow Call Time Pass Reference" està Habilitat (si us plau, ho estableixi a Off en php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'No trobat: El Planificador de Sugar tindrà funcionalitat limitada.',
+	'ERR_CHECKSYS_CURL'					=> 'No s&#39;ha trobat: el Planificador de tasques Sugar s&#39;executarà amb funcionalitat limitada. El servei d&#39;arxiu de correu electrònic no funcionarà.',
     'ERR_CHECKSYS_IMAP'					=> 'No trobat: Correu Entrant i Campanyes (Correu Electrònic) requereixen les biblioteques d´IMAP. Cap no serà funcional .',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC no pot ser activat quan s´usa  MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Avís:',
@@ -76,6 +76,7 @@ $mod_strings = array(
     'LBL_DB_UNAVAILABLE'                => 'Base de dades no disponible',
     'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'No s&#39;ha trobat el suport de base de dades. Si us plau, asseguri&#39;s que té els controladors necessaris per a algun dels següents tipus de Base de Dades: MySQL o MS SQLServer. És possible que hagi de desconnectar l&#39;extensió a l&#39;arxiu php.ini, o recompilar-lo amb l&#39;arxiu binari apropiat, depenent de la versió de PHP. Si us plau, consulti el manual de PHP per a més informació sobre com habilitar el Suport de Base de Dades.<br><br>Oracle i DB2 no són bases de dades compatibles amb SugarCRM PRO. Per a veure la llista de bases de dades compatibles i més informació de la plataforma, visiti <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Les funcions associades amb les Biblioteques d´Anàlisi de l´XML que són requerides per l´aplicació Sugar no han estat trobades. És possible que hagi de descomentar l´extensió a l´arxiu php.ini, o recompilar-lo amb l´arxiu binari apropiat, depenent de la versió de PHP. Si us plau, consulti el manual de PHP per a més informació.',
+    'LBL_CHECKSYS_CSPRNG' => 'Generador de nombres aleatoris',
     'ERR_CHECKSYS_MBSTRING'             => 'Les funcions associades amb l´extensió de PHP per a Cadenes Multibyte (mbstring) que són requerides per l´aplicació Sugar no han estat trobades. <br/><br/> Normalment, el mòdul mbstring no està habilitat per defecte en PHP i ha de ser activat amb --enable-mbstring en la compilació de PHP. Si us plau, consulti el manual de PHP per a més informació sobre com habilitar el suport de mbstring.',
     'ERR_CHECKSYS_MCRYPT'               => "Mcrypt module isn't loaded. Please refer to your PHP Manual for more information on how to load mcrypt module.",
     'ERR_CHECKSYS_SESSION_SAVE_PATH_NOT_SET'       => 'L´opció session.save_path del seu arxiu de configuració php (php.ini) no ha estat establerta o ha estat establerta a una carpeta que no existeix. És possible que hagi d´establir l´opció save_path setting en php.ini o verificar que existeix la carpeta establerta en save_path.',
@@ -89,6 +90,7 @@ $mod_strings = array(
     'ERR_CHECKSYS_ZIP'					=> 'Suport ZIP que no es troben: el suport SugarCRM ZIP necessita per a processar arxius comprimits.',
     'ERR_CHECKSYS_BCMATH'				=> 'No s&#39;ha troba l&#39;assistència de BCMATH: SugarCRM necessita l&#39;assistència de BCMATH per les matemàtiques de precisió arbitrària.',
     'ERR_CHECKSYS_HTACCESS'             => 'Prova de reescriptures .htaccess va fallar. Això en general vol dir que vostè no te AllowOverride configurat per al directori de Sugar.',
+    'ERR_CHECKSYS_CSPRNG' => 'Excepció de CSPRNG',
 	'ERR_DB_ADMIN'						=> 'El nom d´usuari o contrasenya de l´administrador de base de dades no són vàlids, i la connexió a base de dades no ha pogut ser establerta. Si us plau, introdueixi un nom d´usuari i contrasenya vàlids. (Error:',
     'ERR_DB_ADMIN_MSSQL'                => 'El nom d´usuari o contrasenya de l´administrador de base de dades no són vàlids, i la connexió a base de dades no ha pogut ser establerta. Si us plau, introdueixi un nom d´usuari i contrasenya vàlids.',
 	'ERR_DB_EXISTS_NOT'					=> 'La base de dades especificada no existeix.',
@@ -267,6 +269,7 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'La clau es requereix per a la funcionalitat general de l´aplicació, però no és necessària per a la instal·lació. No necessita introduir una clau vàlida en aquests moments, però haurà d´introduir-la després de la instal·lació de l´aplicació.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Requereix la mínima informació possible per a la instal·lació. Recomanada per a usuaris faci una novació de ells.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Proveeix opcions addicionals a establir durant la instal·lació. La majoria d´aquestes estan també disponibles després de la instal·lació a les pantalles d´adminitración. Recomanat per a usuaris avançats.',
+    'LBL_INSTALL_TYPE_MSG3'             => 'Proveeix opcions addicionals a establir durant la instal·lació. La majoria d´aquestes estan també disponibles després de la instal·lació a les pantalles d´adminitración. Recomanat per a usuaris avançats.',
 	'LBL_LANG_1'						=> 'Per utilitzar un llenguatge a Sugar diferent al del llenguatge per defecte (Anglès EUA), pot pujar i instal·lar ara el paquet de llenguatge. També podrà pujar i instal·lar paquets de llenguatge des de l´aplicació Sugar. Si vol saltar-se aquest pas, faci clic a Següent.',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Instal·lar',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Suprimir',
@@ -282,7 +285,7 @@ $mod_strings = array(
 	'LBL_LICENSE_ACCEPTANCE'			=> 'Aceptació de Llicència',
     'LBL_LICENSE_CHECKING'              => 'Fent comprobacions de compatibilitat del sistema.',
     'LBL_LICENSE_CHKENV_HEADER'         => 'Comprovant Entorn',
-    'LBL_LICENSE_CHKDB_HEADER'          => 'Validant Credenciales de BD.',
+    'LBL_LICENSE_CHKDB_HEADER'          => 'Verificació de la DB, credencials FTS.',
     'LBL_LICENSE_CHECK_PASSED'          => 'El sistema ha pasat les proves de compatibilitat.',
     'LBL_LICENSE_REDIRECT'              => 'Redirigint a',
 	'LBL_LICENSE_DIRECTIONS'			=> 'Si té informació sobre el seu llicència, si us plau introdueixi-la en els següents camps.',
@@ -436,7 +439,7 @@ $mod_strings = array(
     'LBL_WELCOME_PLEASE_READ_BELOW' => 'Si us plau, llegeixi la següent informació important abans de procedir amb la instal·lació. La informació li ajudarà a determinar si està o no preparat en aquests moments per instal·lar l´aplicació.',
 
 
-	'LBL_WELCOME_2'						=> 'Per trobar documentació sobre la instal·lació, si us plau visiti el < a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a >. < BR><BR > Per contactar amb un enginyer de suport de SugarCRM per a ajut sobre la instal·lació, si us plau iniciï una sessió en <a target="_blank" href="http://support.sugarcrm.com">Portal de Suport SugarCRM</a> i creu un cas de suport.',
+	'LBL_WELCOME_2'						=> 'Per consultar la documentació de la instal·lació, visiteu el <a href="http://www.sugarcrm.com/crm/installation" target="_blank">wiki de Sugar</a>.  <BR><BR>Per posar-vos en contacte amb un enginyer de suport de SugarCRM per a la instal·lació, accediu al <a target="_blank" href="http://support.sugarcrm.com">Portal de suport de SugarCRM</a> i presenteu un cas de suport.',
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>Triï el seu idioma</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Assistent de Instal·lació',
 	'LBL_WELCOME_TITLE_WELCOME'			=> 'Benvingut a SugarCRM',
@@ -452,7 +455,7 @@ $mod_strings = array(
     'LBL_OOTB_CAMPAIGN'		=> 'Executar Procés Nocturn de Campanyes de Correu Massiu',
 	'LBL_OOTB_PRUNE'		=> 'Truncar Base de dades al Inici del Mes',
     'LBL_OOTB_TRACKER'		=> 'Netejar la Taula de Històrial d´Usuari a primer de Mes',
-    'LBL_OOTB_SEND_EMAIL_REMINDERS'	=> 'Executar Notificacions de recordatori per correu electrònic',
+    'LBL_OOTB_SEND_EMAIL_REMINDERS' => 'Executa les notificacions dels recordatoris per correu electrònic',
     'LBL_UPDATE_TRACKER_SESSIONS' => 'Actualitzar taula tracker_sessions',
     'LBL_OOTB_CLEANUP_QUEUE' => 'Netejar cua de treball',
 
@@ -463,7 +466,9 @@ $mod_strings = array(
     'LBL_FTS_TYPE'     => 'FTS Tipus',
     'LBL_FTS_HELP'      => 'Per activar la cerca de text complet, seleccioneu el tipus de motor de cerca i escriviu el host i el port on s&#39;allotja el motor de cerca. Sugar inclou una funció de suport per al motor elasticsearch.',
     'LBL_FTS_REQUIRED'    => 'Elastic Search es requerit.',
-    'LBL_FTS_ERROR'    => 'No es pot connectar al servidor de recerca de text, si us plau, comproveu la configuració.',
+    'LBL_FTS_CONN_ERROR'    => 'No es pot connectar al servidor de recerca de text, si us plau, comproveu la configuració.',
+    'LBL_FTS_NO_VERSION_AVAILABLE'    => 'No hi ha cap servidor de cerca de text complet disponible, comproveu la configuració.',
+    'LBL_FTS_UNSUPPORTED_VERSION'    => 'S&#39;ha detectat una versió incompatible de cerca Elastic. Utilitzeu les següents versions: %s',
 
     'LBL_PATCHES_TITLE'     => 'Instal·lar Últims Pegats',
     'LBL_MODULE_TITLE'      => 'Instal·lar els paquets d&#39;idioma',

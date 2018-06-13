@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -121,7 +121,7 @@ $mod_strings = array (
 	'LBL_SYSTEM_SIG_DIGITS_DESC' 		=> '소수 자릿수의 수는 보고서에서 통화 및 평균으로 시스템 전반에 걸쳐 소수와 수레를 위해 표시합니다.',
     'LBL_CURRENCY_SHOW_PREFERRED'       => '선호 통화 보기',
     'LBL_CURRENCY_SHOW_PREFERRED_TEXT'  => '목록에서 사용자 선호하는 기본 통화 교환하고 의견을 기록합니다',
-	'LBL_NUMBER_GROUPING_SEP'			=> '천단위 분리기',
+	'LBL_NUMBER_GROUPING_SEP'			=> '천 단위 분리기',
 	'LBL_NUMBER_GROUPING_SEP_TEXT'		=> '천단위 분리위해 사용된 기호',
 	'LBL_DECIMAL_SEP'					=> '소수 기호',
 	'LBL_DECIMAL_SEP_TEXT'				=> '소수점 분리를 위해 사용된 기호',
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> '새 비밀번호',
 	'LBL_NEW_PASSWORD1'					=> '비밀번호:',
 	'LBL_NEW_PASSWORD2'					=> '비밀번호 확인',
-	'LBL_NEW_USER_PASSWORD_1'			=> '비밀번호가 성공적으로 변경되었습니다',
+    'LBL_NEW_USER_PASSWORD_1' => '비밀번호가 성공적으로 변경되었습니다',
 	'LBL_NEW_USER_PASSWORD_2'			=> '시스템 생성 비밀번호를 포함한 이메일이 사용자에 발송되었습니다.',
-	'LBL_NEW_USER_PASSWORD_3'			=> '비밀번호가 성공적으로 생성되었습니다.',
+    'LBL_NEW_USER_PASSWORD_3' => '비밀번호가 성공적으로 생성되었습니다.',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> '신규 사용자',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> '신규 사용자',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => '견적',
     'LBL_FORECASTS'                     => '예상',
     'LBL_WORKSHEETS'                    => '참고 자료지',
+	'LBL_CALENDARS'                     => '캘린더',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => '또 다른 CAPTCHA 갖기',
 	'LBL_RECAPTCHA_SOUND'				=> '소리로 전환',
 	'LBL_RECAPTCHA_IMAGE'				=> '이미지로 전환',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> '사무실 전화번호',
 	'LBL_YOUR_PUBLISH_URL'				=> '내 위치 발표',
     'LBL_ICAL_PUB_URL'                  => 'iCal 통합 URL',
-    'LBL_ICAL_PUB_URL_HELP'             => 'iCal.안 Sugar 달력 구독신청을 하려면 이 URL을 이용하십시오',
+    'LBL_ICAL_PUB_URL_HELP'             => 'iCal 지원 어플리케이션에서 Sugar 캘린더를 구독하려면 이 URL을 이용하십시오. ' .
+                                           'Sugar 캘린더 내 이벤트는 외부 캘린더 어플리케이션에서 읽기 전용으로 표시되며, ' .
+                                           '회의, 전화 등의 이벤트에 대한 모든 수정은 ' .
+                                           'Sugar 내에서만 편집할 수 있습니다.',
 	'LBL_YOUR_QUERY_URL'				=> '귀하의 문의 URL',
 	'LNK_NEW_USER'						=> '신규 사용자 말들기',
 	'LNK_NEW_PORTAL_USER'				=> 'Portal API 사용자 만들기',
@@ -610,8 +614,8 @@ $mod_strings = array (
     'LBL_SHOWOPTIONS' => '선택사항 보이기',
 
     'LBL_FILTER_USERS_REPORTS' => '사용자 보고서',
-    'LBL_CONTACTS_SYNC' => '연락처목록',
-
+    'LBL_CONTACTS_SYNC' => '연락처',
+    'LBL_DETAIL' => '사용자 프로필',
 ); // END STRINGS DEFS
 
 ?>

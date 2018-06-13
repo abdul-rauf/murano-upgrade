@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -40,7 +40,6 @@ $vardef_meta_array = array(
                 'pmse_bpmthread_link',
                 'pmse_bpmnotes_link',
                 'pmse_bpmrelateddependency_link',
-                'pmse_bpmcasedata_link',
                 'pmse_bpmactivityuser_link',
                 'pmse_bpmeventdefinition_link',
                 'pmse_bpmgatewaydefinition_link',
@@ -52,7 +51,6 @@ $vardef_meta_array = array(
                 'pmse_bpmconfig_link',
                 'pmse_bpmgroup_link',
                 'pmse_bpmgroupuser_link',
-                'pmse_bpmaccessmanagement_link',
             ),
         ),
     ),
@@ -213,6 +211,7 @@ $vardef_meta_array = array(
                 'archived_emails',
                 'reportees',
                 'tasks_parent',
+                'locked_fields_link',
             ),
             'module' => array(
                 'Forecasts',
@@ -263,6 +262,7 @@ $vardef_meta_array = array(
                 'queueitems',
                 'log_entries',
                 'contract_types',
+                'locked_fields_link',
             ),
             'module' => array(
                 'Users',
@@ -301,7 +301,8 @@ $vardef_meta_array = array(
                 'queueitems',
                 'log_entries',
                 'contract_types',
-                'reports_to_link'
+                'reports_to_link',
+                'locked_fields_link',
             ),
             'module' => array(
                 'Users',

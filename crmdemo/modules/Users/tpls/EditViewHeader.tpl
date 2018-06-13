@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -30,15 +30,6 @@ var ERR_REENTER_PASSWORDS = '{$MOD.ERR_REENTER_PASSWORDS}';
 <script type='text/javascript' src='{sugar_getjspath file='modules/Users/PasswordRequirementBox.js'}'></script>
 {$ERROR_STRING}
 <span id="ajax_error_string" class="error"></span>
-<!-- This is here for the external API forms -->
-<form name="DetailView" id="DetailView" method="POST" action="index.php">
-{sugar_csrf_form_token}
-	<input type="hidden" name="record" id="record" value="{$ID}">
-	<input type="hidden" name="module" value="Users">
-	<input type="hidden" name="return_module" value="Users">
-	<input type="hidden" name="return_id" value="{$RETURN_ID}">
-	<input type="hidden" name="return_action" value="EditView">
-</form>
 
 <form name="EditView" enctype="multipart/form-data" id="EditView" method="POST" action="index.php">
 {sugar_csrf_form_token}

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -165,7 +165,7 @@ $mod_strings = array (
   'LBL_MY_EMAIL_REPORTS' => 'Minu e-posti aruanded',
   'LBL_MY_FORECAST_REPORTS' => 'Minu prognooside aruanded',
   'LBL_EXPORT' => 'Eksport',
-  'LBL_OF' => 'of',
+  'LBL_OF' => '/',
   'LBL_SUCCESS_REPORT' => 'Korras: Aruanne',
   'LBL_MY_PROSPECT_REPORTS' =>'Minu eesmärkide aruanded',
 // report_name
@@ -346,7 +346,7 @@ $mod_strings = array (
   'LBL_FUNNEL'=>'Funnel',
   'LBL_GROUP_BY_REQUIRED'=>'Diagrammi loomiseks on vaja vähemalt ühe rühma ning kokkuvõtte veergu.',
 	'MSG_NO_PERMISSIONS' => 'Selle aruande redigeerimiseks puuduvad sul õigused',
-	'LBL_NONE' => '-- none --',
+	'LBL_NONE' => '-- puudub --',
 	'LBL_NONE_STRING' => 'None',
   	'LBL_DATE_BASED_FILTERS' => 'Date filters are relative to the time zone of the report&#39;s Assigned To user',
 	'LBL_CONTRACT_REPORTS'=>'Lepingute aruanded',

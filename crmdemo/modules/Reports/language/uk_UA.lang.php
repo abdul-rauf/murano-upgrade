@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -126,7 +126,7 @@ $mod_strings = array (
   'LBL_TASK_REPORTS' => 'Звіти по задачам',
   'LBL_EMAIL_REPORTS' => 'Звіти по Email-повідомленням',
   'LBL_ALL_REPORTS' => 'Переглянути звіти',
-  'LBL_ACTIVITIES_REPORTS' => 'Звіт по активностям',
+  'LBL_ACTIVITIES_REPORTS' => 'Звіт за активностями',
   'LBL_NO_REPORTS' => 'Результатів немає.',
 
   'LBL_SAVED_SEARCH' => 'Збережений пошук та розташування',
@@ -286,17 +286,17 @@ $mod_strings = array (
 	'LBL_TODAY'=>'Сьогодні',
 	'LBL_TOMORROW'=>'Завтра',
 	'LBL_LAST_WEEK'=>'Минулого тижня',
-	'LBL_NEXT_WEEK'=>'Наступного тижня',
+	'LBL_NEXT_WEEK'=>'Наступний тиждень',
 	'LBL_LAST_N_DAYS' => 'Минулі # дня/днів',
 	'LBL_NEXT_N_DAYS' => 'Наступні # дня/днів',
 	'LBL_LAST_7_DAYS'=>'Минулі 7 днів',
 	'LBL_NEXT_7_DAYS'=>'Наступні 7 днів',
 	'LBL_LAST_MONTH'=>'Минулого місяця',
-	'LBL_NEXT_MONTH'=>'Наступного місяця',
+	'LBL_NEXT_MONTH'=>'Наступний місяць',
 	'LBL_LAST_QUARTER'=>'Минулої чверті',
 	'LBL_THIS_QUARTER'=>'Цієї чверті',
 	'LBL_LAST_YEAR'=>'Минулого року',
-	'LBL_NEXT_YEAR'=>'Наступного року',
+	'LBL_NEXT_YEAR'=>'Наступний рік',
     'LBL_PREVIOUS_FISCAL_YEAR' => 'Попередній фінансовий рік',
     'LBL_PREVIOUS_FISCAL_QUARTER' => 'Попередня фінансова чверть',
     'LBL_CURRENT_FISCAL_YEAR' => 'Поточний фінансовий рік',

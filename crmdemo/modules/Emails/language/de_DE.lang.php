@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -416,6 +416,9 @@ $mod_strings = array (
     'ERR_MISSING_CREDENTIALS' => 'Fehler: fehlende Anmeldeinformationen',
     'ERR_NO_UID' => 'Fehler: keine Benutzererkennung',
     'ERR_NO_IEID' => 'Fehler: keine ieID',
+    'ERR_INVALID_RECIPIENTS' => 'Es gibt einen oder mehrere Empfänger mit einer ungültigen E-Mail-Adresse. ' .
+        'Bitte korrigieren Sie dies und versuchen Sie es erneut.',
+    'ERR_INVALID_EMAIL_ADDRESS' => 'Ungültige E-Mail-Adresse',
 
     // Mail API Messages
     'LBL_MAILAPI_NO_RECIPIENTS'           => 'keine Empfänger angegeben',

@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -95,10 +95,13 @@ $mod_strings = array (
     'LBL_KB_STATUS_BACK_TO_DRAFT' => 'Document status has been changed back to draft.',
     'LBL_OPERATOR_CONTAINING_THESE_WORDS' => 'containing these words',
     'LBL_OPERATOR_EXCLUDING_THESE_WORDS' => 'excluding these words',
-    'ERROR_EXP_DATE_LOW' => 'The Expiration Date must occur on a date after the Publish Date.',
+    'ERROR_EXP_DATE_LOW' => 'Dátum vypršania platnosti nemôže byť skorší než dátum zverejnenia.',
     'ERROR_ACTIVE_DATE_APPROVE_REQUIRED' => 'The Approved status requires publishing date.',
     'ERROR_ACTIVE_DATE_LOW' => 'The Publish Date must occur on a later date than today&#39;s date.',
     'ERROR_ACTIVE_DATE_EMPTY' => 'Dátum zverejnenia je prázdny.',
     'LBL_RECORD_SAVED_SUCCESS' => 'Úspešne ste vytvorili {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'ERROR_IS_BEFORE' => 'Chyba. Dátum v tomto poli musí nasledovať až po dátume poľa {{this}}.',
     'TPL_SHOW_MORE_MODULE' => 'More {{module}} articles...',
+    'LBL_LIST_FORM_TITLE' => 'Zoznam báz znalostí',
+    'LBL_SEARCH_FORM_TITLE' => 'Vyhľadať v báze znalostí',
 );

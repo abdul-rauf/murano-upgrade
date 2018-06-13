@@ -2,7 +2,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -112,6 +112,12 @@ class QueryBuilder
      * @var array
      */
     protected $sort = array('_score');
+
+    /**
+     * Set explain flag
+     * @var boolean
+     */
+    protected $explain = false;
 
     /**
      * Ctor
@@ -268,6 +274,17 @@ class QueryBuilder
     }
 
     /**
+     * Set explain flag
+     * @param boolean $flag
+     * @return QueryBuilder
+     */
+    public function setExplain($flag)
+    {
+        $this->explain = (bool) $flag;
+        return $this;
+    }
+
+    /**
      * Set aggregation filter definitions
      * @param array $aggFilterDefs
      */
@@ -354,6 +371,7 @@ class QueryBuilder
 
         // Build query
         $query = $this->build();
+        $query->setExplain($this->explain);
 
         // Wrap query in search API object
         $search = $this->newSearchObject();

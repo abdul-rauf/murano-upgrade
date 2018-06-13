@@ -1,7 +1,7 @@
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -191,9 +191,6 @@
                         self.model.unset(self.name);
                         self.model.set(self.name + '_guid', fileId);
                     }
-
-                    //Trigger a change event with param "image" so the view can detect that the dom changed.
-                    self.model.trigger("change", "image");
                 },
                 error: function(resp) {
                     var errors = errors || {},
@@ -412,7 +409,6 @@
             errorMessages.push(app.error.getErrorString(errorName, errorContext));
         });
         this.$('.image_field').append(this.exclamationMarkTemplate(errorMessages));
-        this.createErrorTooltips(this.$('.error-tooltip'));
     },
 
     /**

@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
  * If you do not agree to all of the applicable terms or do not have the
  * authority to bind the entity as an authorized representative, then do not
  * install or use this SugarCRM file.
@@ -255,9 +255,9 @@ $mod_strings = array (
 	'LBL_NEW_PASSWORD'					=> '新密码',
 	'LBL_NEW_PASSWORD1'					=> '密码',
 	'LBL_NEW_PASSWORD2'					=> '确认密码',
-	'LBL_NEW_USER_PASSWORD_1'			=> '已成功更改密码。',
+    'LBL_NEW_USER_PASSWORD_1' => '已成功更改密码。',
 	'LBL_NEW_USER_PASSWORD_2'			=> '包含有系统生成密码的电子邮件已发送到该用户。',
-	'LBL_NEW_USER_PASSWORD_3'			=> '密码成功创建。',
+    'LBL_NEW_USER_PASSWORD_3' => '密码成功创建。',
 	'LBL_NEW_USER_BUTTON_KEY'			=> 'N',
 	'LBL_NEW_USER_BUTTON_LABEL'			=> '新用户',
 	'LBL_NEW_USER_BUTTON_TITLE'			=> '新用户',
@@ -291,6 +291,7 @@ $mod_strings = array (
     'LBL_QUOTAS'                        => '定额',
     'LBL_FORECASTS'                     => '预测',
     'LBL_WORKSHEETS'                    => '工作表',
+	'LBL_CALENDARS'                     => '日历',
 	'LBL_RECAPTCHA_NEW_CAPTCHA'         => '获取另一个 CAPTCHA',
 	'LBL_RECAPTCHA_SOUND'				=> '切换到声音',
 	'LBL_RECAPTCHA_IMAGE'				=> '切换到图像',
@@ -367,7 +368,10 @@ $mod_strings = array (
 	'LBL_WORK_PHONE'					=> '办公电话',
 	'LBL_YOUR_PUBLISH_URL'				=> '在我的位置发布',
     'LBL_ICAL_PUB_URL'                  => 'iCal 集成 URL',
-    'LBL_ICAL_PUB_URL_HELP'             => '使用这个 URL 来在 iCal 内订阅 Sugar 日程安排。',
+    'LBL_ICAL_PUB_URL_HELP'             => '使用此 URL 在 iCal 支持的 ' .
+                                           '应用程序中订阅您的日历。Sugar 日历事件可以作为只读事件在 ' .
+                                           '外部日历应用程序中查看，任何对于事件的编辑 ' .
+                                           '（例如，会议、电话等等），只能在 Sugar 中创建。',
 	'LBL_YOUR_QUERY_URL'				=> '您的查询 URL',
 	'LNK_NEW_USER'						=> '创建新用户',
 	'LNK_NEW_PORTAL_USER'				=> '创建门户网站 API 用户',
@@ -611,7 +615,7 @@ $mod_strings = array (
 
     'LBL_FILTER_USERS_REPORTS' => '用户报告',
     'LBL_CONTACTS_SYNC' => '联系人',
-
+    'LBL_DETAIL' => '用户配置文件',
 ); // END STRINGS DEFS
 
 ?>
