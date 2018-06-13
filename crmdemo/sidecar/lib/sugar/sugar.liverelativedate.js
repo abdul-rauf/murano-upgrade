@@ -45,7 +45,7 @@
  *
  */
 (function(plugin) {
-    plugin(jQuery || Zepto, SUGAR.App.date);
+    plugin(window.jQuery || window.Zepto, SUGAR.App.date);
 }(function($, date) {
 
     var updateInterval = 6e4, // every minute
@@ -180,7 +180,7 @@
             }
             options = options || {};
 
-            $el.data('liveRelativeDate', options);
+            $el.data('liveRelativeDate', JSON.stringify(options));
             $liveDates = $liveDates.add($el);
 
             liveRelativeDateGlobal.resume();
@@ -201,9 +201,7 @@
         destroy: function($el) {
 
             $liveDates = $liveDates.not($el);
-            $el.each(function(el) {
-                $(el).removeData('liveRelativeDate');
-            });
+            $el.removeAttr('data-live-relative-date');
             return $el;
         },
 

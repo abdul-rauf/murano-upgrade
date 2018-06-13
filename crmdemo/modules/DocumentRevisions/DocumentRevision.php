@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,7 +20,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 
-require_once('include/upload_file.php');
 
 // User is used to store Forecast information.
 class DocumentRevision extends SugarBean {
@@ -172,7 +170,7 @@ class DocumentRevision extends SugarBean {
 		$localLabels = return_module_language($current_language, 'DocumentRevisions');
 		
 		// prep - get source Document
-		$document = BeanFactory::getBean('Documents');
+		$document = BeanFactory::newBean('Documents');
 		
 		// use passed revision ID
 		if(!empty($revId)) {

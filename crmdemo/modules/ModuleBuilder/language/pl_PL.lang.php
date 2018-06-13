@@ -116,7 +116,7 @@ $mod_strings = array(
         'defaultdetailview'=>'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach formularza <b>Widok szczegółowy</b>.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz z samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Określa pole zależne, które może być widoczne lub niewidoczne w zależności od wartości wzoru.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Określa obliczone pole, którego wartość zostanie automatycznie określona na podstawie wzoru.'
     ,
-        'defaultquickcreate'=>'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach formularza <b>Szybkie tworzenie</b>.<br><br>Formularz Szybkie tworzenie jest wyświetlany w panelach podrzędnych dla modułu po kliknięciu przycisku Utwórz.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz z samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
+        'defaultquickcreate'=>'Obszar <b>Układ</b> zawiera pola aktualnie wyświetlane w ramach formularza <b>Szybkie tworzenie</b>.<br><br>Formularz Szybkie tworzenie jest wyświetlany w panelach podrzędnych dla modułu po naciśnięciu przycisku Utwórz.<br/><br/>W obszarze <b>Narzędzia</b> znajduje się <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz z samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Określa pole zależne, które może być widoczne lub niewidoczne w zależności od wartości wzoru.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Określa obliczone pole, którego wartość zostanie automatycznie określona na podstawie wzoru.'
     ,
         //this defualt will be used for edit view
@@ -300,7 +300,6 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
         'moduleBtn'	=> 'Kliknij, aby edytować ten moduł.',
         'moduleHelp'=> 'Wybierz element modułu, który chcesz edytować',
         'fieldsBtn'	=> 'Wybierz informacje przechowywane w module, określając <b>Pola</b> w module.<br/><br/> W tym obszarze możesz także edytować i tworzyć niestandardowe pola.',
-        'labelsBtn' => 'Kliknij <b>Zapisz</b>, aby zapisać niestandardowe etykiety.'	,
         'layoutsBtn'=> 'Dostosuj <b>Układy</b> widoków wyszukiwania, edycji, szczegółów oraz listy.',
         'subpanelBtn'=> 'Edytuj, które informacje są wyświetlane w panelach podrzędnych modułów.',
         'layoutsHelp'=> 'Wybierz <b>Układy do edycji</b>.<br/<br/>Aby zmienić układ zawierający pola danych do wprowadzania danych, kliknij <b>Widok edycji</b>. <br/><br/>Aby zmienić układ, w którym wyświetlane są dane wprowadzone w polach w widoku edycji, kliknij <b>Widok szczegółowy</b>.<br/><br/>Aby zmienić kolumny wyświetlane na domyślnej liście, kliknij <b>Widok listy</b>.<br/><br/>Aby zmienić układ formularzy wyszukiwania podstawowego i zaawansowanego, kliknij <b>Wyszukaj</b>.',
@@ -735,11 +734,11 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Czy na pewno chcesz usunąć etap Zakończone porażką? Usunięcie tego etapu spowoduje nieprawidłowe działanie modułu Prognozy',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Usunięcie tego pola niestandardowego spowoduje usunięcie zarówno pola niestandardowego, jak i danych powiązanych z polem niestandardowym w bazie danych. Pole nie będzie dłużej wyświetlane w żadnym układzie modułu."
-        . " Jeśli to pole jest uwzględnione we wzorze obliczania wartości dla jakichkolwiek pól, wzór tej przestanie działać."
-        . "\n\nTo pole nie będzie już dostępne do użycia w Raportach; ta zmiana będzie obowiązywać od wylogowania i ponownego zalogowania do aplikacji. Wszelkie raporty zawierające to pole należy zaktualizować, aby można je było uruchomić."
-        . "\n\nCzy chcesz kontynuować?",
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Czy na pewno chcesz usunąć tę relację?<br>Uwaga: ta czynność może nie zostać ukończona przez kilka minut.',
+'LBL_CONFIRM_FIELD_DELETE'=>'Usunięcie tego pola niestandardowego spowoduje usunięcie zarówno pola niestandardowego, jak i danych powiązanych z polem niestandardowym w bazie danych. Pole nie będzie dłużej wyświetlane w żadnym układzie modułu.'
+        . ' Jeśli to pole jest uwzględnione we wzorze obliczania wartości dla jakichkolwiek pól, wzór tej przestanie działać.'
+        . '\n\nTo pole nie będzie już dostępne do użycia w Raportach; ta zmiana będzie obowiązywać od wylogowania i ponownego zalogowania do aplikacji. Wszelkie raporty zawierające to pole należy zaktualizować, aby można je było uruchomić.'
+        . '\n\nCzy chcesz kontynuować?',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Czy na pewno chcesz usunąć tę relację?<br>Uwaga: Ta operacja może zakończyć się przez kilka minut.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Spowoduje to ustawienie relacji jako trwałej. Czy na pewno chcesz zamieścić tę relację?',
 'LBL_CONFIRM_DONT_SAVE' => 'Od ostatniego zapisu zostały wprowadzone zmiany. Czy chcesz zapisać je teraz?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Zapisać zmiany?',
@@ -755,16 +754,16 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Włączone</b>: to pole będzie wyświetlane w funkcji Scalanie duplikatów, ale nie będzie go można użyć dla warunków filtra w funkcji Znajdź duplikaty.<br><b>Wyłączone</b>: to pole nie będzie wyświetlane w funkcji Scalanie duplikatów i nie będzie dostępne do użycia dla warunków filtra w funkcji Znajdź duplikaty.'
 . '<br><b>W filtrze</b>: pole będzie wyświetlane w funkcji Scalanie duplikatów, a także będzie dostępne w funkcji Znajdź duplikaty.<br><b>Tylko filtr</b>: pole nie będzie wyświetlane w funkcji Scalanie duplikatów, ale będzie dostępne w funkcji Znajdź duplikaty.<br><b>Domyślny wybrany filtr</b>: pole będzie użyte dla warunku filtra domyślnie na stronie Znajdź duplikaty i będzie również wyświetlane w funkcji Scalanie duplikatów.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Utwórz wzór do określenia wartości w tym polu.<br>"
-   . "Definicje workflow zawierające czynność, które ustawiono na aktualizację tego pola, nie będą już wywoływać tej czynności.<br>"
-   . "Pola wykorzystujące wzory nie będą obliczane w czasie rzeczywistym w "
-   . "układach widoku edycji wersji mobilnej.",
+'LBL_POPHELP_CALCULATED'=>"Utwórz wzór określający wartość w tym polu.<br>"
+   . "Definicje przepływu pracy zawierające czynność ustawioną tak, aby aktualizować to pole, nie będą już wykonywać tej czynności. <br>"
+   . "Pola, w których zastosowano wzory, nie będą obliczane w czasie rzeczywistym w "
+   . "Mobilne układy EditView.",
 
-'LBL_POPHELP_DEPENDENT'=>"Utwórz wzór do określenia, czy to pole jest widoczne w układach.<br/>"
-        . "Pola zależna będą uwzględniać wzór zależności w widoku mobilnym na podstawie przeglądarki, <br/>"
-        . "ale nie będą uwzględniać wzoru w aplikacjach natywnych, takich jak Sugar Mobile for iPhone. <br/>"
-        . "Nie będą zgodne z wzorem w portalu samoobsługowym Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Zaznacz tę opcję, aby móc wyszukiwać po tym polu za pomocą Globalnego wyszukiwania.',
+'LBL_POPHELP_DEPENDENT'=>"Utwórz wzór do określania, czy to pole jest widoczne w układach.<br/>"
+        . "Pola zależne będą uwzględniać wzór zależności w widoku mobilnym na podstawie przeglądarki,<br/>"
+        . "ale nie będą uwzględniać wzoru w aplikacjach natywnych, takich jak Sugar Mobile for iPhone.<br/>"
+        . "Nie będą uwzględniać wzoru w portalu Sugar Self-Service Portal.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Zaznacz, aby użyć tego pola podczas wyszukiwania rekordów przy użyciu wyszukiwania globalnego w module.',
 //Revert Module labels
 'LBL_RESET' => 'Resetuj',
 'LBL_RESET_MODULE' => 'Przywróć moduł',

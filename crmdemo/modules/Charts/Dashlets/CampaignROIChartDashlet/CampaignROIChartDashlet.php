@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,7 +13,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  // $Id: MyPipelineBySalesStageDashlet.php 24275 2007-07-13 04:26:44Z awu $
 
 
-require_once('include/Dashlets/DashletGenericChart.php');
 
 class CampaignROIChartDashlet extends DashletGenericChart 
 {
@@ -47,7 +45,6 @@ class CampaignROIChartDashlet extends DashletGenericChart
      */
     public function display()
     {
-        require_once('modules/Campaigns/Charts.php');
 
         $roi_chart = new campaign_charts();
         $chartStr = $roi_chart->campaign_response_roi(

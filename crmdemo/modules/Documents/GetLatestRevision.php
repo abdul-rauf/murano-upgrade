@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 //updates the link between contract and document with latest revision of
 //the document and sends the control back to calling page.
 
-require_once('modules/Documents/Document.php');
 require_once('include/formbase.php');
 if (!empty($_REQUEST['record'])) {
 

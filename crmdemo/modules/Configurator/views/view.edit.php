@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,9 +11,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 require_once('modules/Configurator/Forms.php');
 require_once('modules/Administration/Forms.php');
-require_once('modules/Configurator/Configurator.php');
-require_once('include/SugarLogger/SugarLogger.php');
-require_once('modules/Leads/Lead.php');
 
 class ConfiguratorViewEdit extends ViewEdit
 {
@@ -51,12 +47,6 @@ class ConfiguratorViewEdit extends ViewEdit
         $sugarConfig = SugarConfig::getInstance();
         $configurator->parseLoggerSettings();
         $focus = Administration::getSettings();
-
-        /*
-        if(!empty($_POST['restore'])){
-            $configurator->restoreConfig();
-        }
-        */
 
         $this->ss->assign('MOD', $mod_strings);
         $this->ss->assign('APP', $app_strings);

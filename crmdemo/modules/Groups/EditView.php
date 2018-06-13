@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,7 @@ global $mod_strings;
 global $theme;
 
 
-$focus = BeanFactory::getBean('Groups');
+$focus = BeanFactory::newBean('Groups');
 
 if (!is_admin($current_user) && $_REQUEST['record'] != $current_user->id) sugar_die("Unauthorized access to administration.");
 if(isset($_REQUEST['record'])) {

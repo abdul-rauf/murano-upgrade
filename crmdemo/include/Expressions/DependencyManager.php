@@ -9,10 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once("include/Expressions/Dependency.php");
-require_once("include/Expressions/Trigger.php");
-require_once("include/Expressions/Expression/Parser/Parser.php");
-require_once("include/Expressions/Actions/ActionFactory.php");
 
 /**
  * Dependent field manager
@@ -45,7 +41,6 @@ class DependencyManager
 
         $deps = array();
         $ro_deps = array();
-        require_once("include/Expressions/Actions/SetValueAction.php");
         //In order to make sure the deps are returned in an order such that fields that used by other formulas are calculated first,
         //we keep track of how many times a field is used and what fields that field references.
         $formulaFields = array();
@@ -430,15 +425,6 @@ class DependencyManager
 
     private static function getModuleDependencyMetadata($module)
     {
-        /* //Disable caching for now
-        $cacheLoc = create_cache_directory("modules/$module/dependencies.php");
-        //If the cache file exists, use it.
-        if(inDeveloperMode() && empty($_SESSION['developerMode']) && is_file($cacheLoc)) {
-            include($cacheLoc);
-        }
-        //Otherwise load all the def locations and create the cache file.
-        else {
-        */
         $dependencies = array($module => array());
         foreach (SugarAutoLoader::existingCustom("modules/$module/metadata/dependencydefs.php") as $loc)
         {
@@ -448,11 +434,6 @@ class DependencyManager
         if($defs) {
             require $defs;
         }
-        /*  //More disabled cache code
-            $out = "<?php\n // created: " . date('Y-m-d H:i:s') . "\n"
-                 . override_value_to_string('dependencies', $module, $dependencies[$module]);
-            file_put_contents($cacheLoc, $out);
-        }*/
 
         return $dependencies[$module];
     }
@@ -480,7 +461,6 @@ class DependencyManager
      */
     public static function getJSUserVariables($user)
     {
-        require_once("include/TimeDate.php");
         $ts = TimeDate::getInstance();
         return "SUGAR.expressions.userPrefs = " . json_encode(array(
             "num_grp_sep" => $user->getPreference("num_grp_sep"),

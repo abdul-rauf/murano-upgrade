@@ -119,7 +119,7 @@
          *   model, collection).
          */
         attach: function(component, type) {
-            _.each(component.plugins, function(pluginName, o) {
+            _.each(component.plugins, function(pluginName) {
                 var prop = null;
                 if (_.isObject(pluginName)) {
                     var n = _.keys(pluginName)[0];

@@ -1,7 +1,4 @@
 <?php
-if ( !defined('sugarEntry') || !sugarEntry ) {
-	die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,9 +10,7 @@ if ( !defined('sugarEntry') || !sugarEntry ) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/ModuleApi.php');
 
-require_once('modules/Forecasts/ForecastOpportunities.php');
 
 class ForecastsProgressApi extends ModuleApi
 {
@@ -81,12 +76,12 @@ class ForecastsProgressApi extends ModuleApi
     /**
      * loads data and passes back an array to communicate data that may be missing.  The array is the same
      *
-     * @param $api
-     * @param $args
+     * @param ServiceBase $api
+     * @param array $args
      * @return array
      */
-	public function progressRep( $api, $args )
-	{
+    public function progressRep(ServiceBase $api, array $args)
+    {
         $args['user_id'] = clean_string($args["user_id"]);
         $args['timeperiod_id'] = clean_string($args["timeperiod_id"]);
 
@@ -107,12 +102,12 @@ class ForecastsProgressApi extends ModuleApi
     /**
      * loads data and passes back an array to communicate data that may be missing.  The array is the same
      *
-     * @param $api
-     * @param $args
+     * @param ServiceBase $api
+     * @param array $args
      * @return array
      */
-	public function progressManager( $api, $args )
-	{
+    public function progressManager(ServiceBase $api, array $args)
+    {
         $args['user_id'] = clean_string($args["user_id"]);
         $args['timeperiod_id'] = clean_string($args["timeperiod_id"]);
 

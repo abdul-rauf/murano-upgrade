@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -55,7 +54,6 @@ if($focus->has_records_in_modules()) {
 	}
 
 	//Call mark_deleted function
-	$focus->mark_deleted();
+    $focus->mark_deleted($focus->id);
 	header("Location: index.php?module=Teams&action=index");	
 }
-?>

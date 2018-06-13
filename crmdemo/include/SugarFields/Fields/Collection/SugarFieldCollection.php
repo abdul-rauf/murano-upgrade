@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarFields/Fields/Base/SugarFieldBase.php');
 class SugarFieldCollection extends SugarFieldBase {
 	var $tpl_path;
 
@@ -107,7 +106,6 @@ class SugarFieldCollection extends SugarFieldBase {
                 $link_field[$primary]['primary']=true;
             }
             // Create or update record and take care of the extra_field
-            require_once('data/Link.php');
        	 	$class = load_link_class($bean->field_defs[$field]);
 
             $link_obj = new $class($bean->field_defs[$field]['relationship'], $bean, $bean->field_defs[$field]);
@@ -115,7 +113,7 @@ class SugarFieldCollection extends SugarFieldBase {
             foreach($link_field as $k=>$v){
                 $save = false;
                 $update_fields = array();
-                $obj = BeanFactory::getBean($module);
+                $obj = BeanFactory::newBean($module);
                 if(!isset($link_field[$k]['name']) || empty($link_field[$k]['name'])){
                     // There is no name so it is an empty record -> ignore it!
                     unset($link_field[$k]);
@@ -306,7 +304,6 @@ class SugarFieldCollection extends SugarFieldBase {
     protected function getCollectionApi()
     {
         if (!$this->collectionApi) {
-            require_once 'clients/base/api/RelateCollectionApi.php';
             $this->collectionApi = new RelateCollectionApi();
         }
 

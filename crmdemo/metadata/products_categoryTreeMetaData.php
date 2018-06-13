@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,30 +10,46 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['products_category_tree'] =
-        array('table' => 'category_tree',
-                'fields' => array(
-                    array('name' => 'self_id',
-                          'type' => 'id',
-                          'len' => '36'
-                    ),
-                    array('name' => 'node_id',
-                          'type' => 'int',
-                          'auto_increment' => true,
-                          'required' => true,
-                          'isnull' => false         // Making sure it's not NULLABLE since it is the primary key.
-                    ),
-                    array('name' => 'parent_node_id',
-                          'type' => 'int',
-                          'default' => '0'
-                    ),
-                    array('name' => 'type',
-                          'type' => 'varchar',
-                          'len' => '36'
-                    )
-                ),
-                'indices' => array(
-                    array('name' => 'categorytreepk', 'type' => 'primary', 'fields' => array('node_id')),
-                    array('name' => 'idx_categorytree', 'type' => 'index', 'fields' => array('self_id'))
-                )
-        );
+$dictionary['products_category_tree'] = array(
+    'table' => 'category_tree',
+    'fields' => array(
+        'self_id' => array(
+            'name' => 'self_id',
+            'type' => 'id',
+            'len' => '36',
+        ),
+        'node_id' => array(
+            'name' => 'node_id',
+            'type' => 'int',
+            'auto_increment' => true,
+            'required' => true,
+            'isnull' => false,
+        ),
+        'parent_node_id' => array(
+            'name' => 'parent_node_id',
+            'type' => 'int',
+            'default' => '0',
+        ),
+        'type' => array(
+            'name' => 'type',
+            'type' => 'varchar',
+            'len' => '36',
+        ),
+    ),
+    'indices' => array(
+        array(
+            'name' => 'categorytreepk',
+            'type' => 'primary',
+            'fields' => array(
+                'node_id',
+            ),
+        ),
+        array(
+            'name' => 'idx_categorytree',
+            'type' => 'index',
+            'fields' => array(
+                'self_id',
+            ),
+        ),
+    ),
+);

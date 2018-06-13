@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -41,7 +40,7 @@ $mod_strings = array (
   'LBL_LIST_COST_PRICE' => 'Вартість:',
   'LBL_LIST_DISCOUNT_PRICE' => 'Ціна:',
   'LBL_LIST_FORM_TITLE' => 'Список каталогу продуктів',
-  'LBL_LIST_LBL_MFT_PART_NUM' => 'Внутрішній код виробника',
+  'LBL_LIST_LBL_MFT_PART_NUM' => 'Номер частини',
   'LBL_LIST_LIST_PRICE' => 'Список',
   'LBL_LIST_MANUFACTURER' => 'Виробник',
   'LBL_LIST_MANUFACTURER_ID' => 'Виробник (ID):',
@@ -54,7 +53,7 @@ $mod_strings = array (
   'LBL_LIST_USDOLLAR' => 'Прайс-лист (в доларах US)',
   'LBL_MANUFACTURER_NAME'=>'Виробник:',
   'LBL_MANUFACTURER' => 'Виробник:',
-  'LBL_MFT_PART_NUM' => 'Внутрішній код виробника:',
+  'LBL_MFT_PART_NUM' => 'Номер частини:',
   'LBL_MODULE_NAME' => 'Каталог продукту',
   'LBL_MODULE_NAME_SINGULAR' => 'Каталог продукту',
   'LBL_MODULE_ID' => 'Шаблони продуктів',

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'clients/base/api/FilterApi.php';
 
 class RelateApi extends FilterApi {
     public function registerApiRest() {
@@ -78,7 +76,7 @@ class RelateApi extends FilterApi {
             throw new SugarApiExceptionNotFound('Could not find a relationship named: ' . $args['link_name']);
         }
         $linkModuleName = $record->$linkName->getRelatedModuleName();
-        $linkSeed = BeanFactory::getBean($linkModuleName);
+        $linkSeed = BeanFactory::newBean($linkModuleName);
         if (!$linkSeed->ACLAccess('list')) {
             throw new SugarApiExceptionNotAuthorized('No access to list records for module: ' . $linkModuleName);
         }
@@ -108,6 +106,8 @@ class RelateApi extends FilterApi {
         // into account instead of every bean property.
         if (!empty($args['view'])) {
             $args['fields'] = $options['select'];
+        } elseif (!empty($args['fields'])) {
+            $args['fields'] = $this->normalizeFields($args['fields'], $options['displayParams']);
         }
 
 
@@ -147,16 +147,21 @@ class RelateApi extends FilterApi {
 
     public function filterRelatedCount(ServiceBase $api, array $args)
     {
-
         $api->action = 'list';
 
-        list($args, $q, $options, $linkSeed) = $this->filterRelatedSetup($api, $args);
+        /** @var SugarQuery $q */
+        list(, $q) = $this->filterRelatedSetup($api, $args);
 
         $q->select->selectReset()->setCountQuery();
         $q->limit = null;
-        $q->order_by = null;
+        $q->orderByReset();
 
-        return reset($q->execute());
+        $stmt = $q->compile()->execute();
+        $count = (int) $stmt->fetchColumn();
+
+        return array(
+            'record_count' => $count,
+        );
     }
 
 }

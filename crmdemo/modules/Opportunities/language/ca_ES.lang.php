@@ -166,19 +166,19 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El mòdul de {{plural_module_name}} us permet seguir les vendes individuals de principi a fi. Cada registre {{module_name}} representa una venda prospectiva i inclou dades importants de la venda i de registres importants com ara {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} típicament progressa a través de diverses etapes de venda fins que es marca com "Tancat guanyat" o "Tancat perdut". {{plural_module_name}} es pot aprofitar encara més utilitzant el mòdul de {{forecasts_singular_module}} de Sugar per entendre i predir tendències de vendes i per centrar-se en assolir quotes de vendes.',
+    'LBL_HELP_RECORDS' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals de principi a fi. Cada registre de {{module_name}} representa una venda potencial i inclou dades rellevants de la venda així com altres registres importants com ara {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalment evoluciona per diferents Fases de venda fins que es marca amb "Tancada guanyada" o "Tancada perduda". {{plural_module_name}} es poden aprofitar fins i tot més tard utilitzant el mòdul {{forecasts_singular_module}} de Sugar per entendre i anticipar tendències de vendes i per assolir quotes de venda.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de vendes individuals i dels elements de línia que pertanyen a aquestes vendes des del principi fins al final. Cada registre de {{module_name}} representa una possible venda i inclou dades relevants d&#39;aquesta, a més d&#39;estar relacionat amb altres registres importants, com ara {{quotes_module}}, {{contacts_module}}, etc. 
+    'LBL_HELP_RECORD' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de vendes individuals i dels elements de línia que pertanyen a les vendes des del principi fins al final. Cada registre de {{module_name}} representa una venda potencial i n&#39;inclou dades rellevants, a més d&#39;altres registres importants com {{quotes_module}}, {{contacts_module}}, etc.
 
 - Editeu els camps d&#39;aquest registre fent clic a un camp individual o amb el botó Edita.
 - Vegeu o modifiqueu enllaços a altres registres als subpanells mitjançant la commutació de la subfinestra inferior esquerra a la "Vista de dades".
-- Feu i vegeu comentaris d&#39;usuari i l&#39;historial de canvis del registre al {{activitystream_singular_module}} mitjançant la commutació de la subfinestra inferior esquerra a la "Seqüència d&#39;activitats".
-- Feu el seguiment d&#39;aquest registre o marqueu-lo com a favorit amb les icones que hi ha a la dreta del nom del registre.
-- Hi ha accions addicionals disponibles al menú desplegable d&#39;accions, a la dreta del botó Edita.',
+- Feu i vegeu comentaris d&#39;usuari i l&#39;historial de canvis del registre al {{activitystream_singular_module}} mitjançant la commutació de la subfinestra inferior esquerra al "Canal d&#39;activitat".
+- Feu el seguiment d&#39;aquest favorit o marqueu-lo com a favorit amb les icones que hi ha a la dreta del nom del registre.
+- Hi ha accions addicionals disponibles al menú desplegable d&#39;accions a la dreta del botó Edita.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals i dels elements de línia que pertanyen a aquestes vendes de principi a fi. Cada registre {{module_name}} representa una possible venda i inclou dades relevants de la mateixa i també d&#39;altres registres importants com ara {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de vendes individuals i dels elements de línia que pertanyen a les vendes des del principi fins al final. Cada registre de {{module_name}} representa una venda potencial i n&#39;inclou dades rellevants, a més d&#39;altres registres importants com {{quotes_module}}, {{contacts_module}}, etc.
 
 Per crear un {{module_name}}:
 1. Proporcioneu els valors desitjats per als camps.

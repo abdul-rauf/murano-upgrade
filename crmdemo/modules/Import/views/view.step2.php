@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,7 +16,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * All Rights Reserved.
  ********************************************************************************/
 
-require_once('modules/Import/views/ImportView.php');
 
 class ImportViewStep2 extends ImportView
 {
@@ -70,7 +68,7 @@ class ImportViewStep2 extends ImportView
         $this->ss->assign('savedMappingHelpText',$savedMappingHelpText);
         $this->ss->assign('is_admin',$is_admin);
 
-        $import_map_seed = BeanFactory::getBean('Import_1');
+        $import_map_seed = BeanFactory::newBean('Import_1');
         $custom_imports_arr = $import_map_seed->retrieve_all_by_string_fields( array('assigned_user_id' => $current_user->id, 'is_published' => 'no','module' => $importModule));
 
         if( count($custom_imports_arr) )

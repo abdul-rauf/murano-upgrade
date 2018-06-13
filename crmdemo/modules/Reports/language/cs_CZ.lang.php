@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'Reporty společností',
   'LBL_CONTACT_REPORTS' => 'Reporty kontaktů',
   'LBL_OPPORTUNITY_REPORTS' => 'Reporty obchodů',
+    'LBL_RECENTLY_MODIFIED' => 'Nedávno změněno',
 
   'LBL_CASE_REPORTS' => 'Reporty případů',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'Příštích 30 dní',
   'LBL_THIS_YEAR'=>'Tento rok',
   'LBL_LIST_FORM_TITLE' =>'Reporty',
+  'LBL_LIST_REPORT_NAME' => 'Název',
   'LBL_PROSPECT_REPORTS'=>'Reporty cílů',
   'LBL_CHART_TYPE'=>'Typ grafu',
   'LBL_IS_EMPTY'=>'Je prázdný',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"Kroky pro definici filtrů:<br />1, Vyberte modul v Souvisejících modulech pro definici filtru. Primární modul bude nastaven jako výchozí.<br />2, Vyberte pole v Dostupných polích pro přidání do filtru. Můžete vyhledat pole přimo v textové oblasti.<br />3, Vyberte AND nebo OR pro určení zdali filtr využívá všechny nebo jakoukoliv z podmínek.<br />4, [Nepovinné] Můžete Vytvořit skupinu filtrů a jakkoliv je větvit.<br />5, [Nepovinné] Vyberte možnost Run-time čímž umožníte uživatelům další upravy filtrů.",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>Kroky, jak definovat skupinu podle::</b><br/><br/>1) Klikněte na moduly v panelu<b>Související moduly</b>, které chcete použít k seskupení záznamů v reportu. Ve výchozím nastavení je vybrán primární modul (horní uzel ve stromové struktuře). <br/><br/>Můžete si vybrat související modul (členský uzel ve stromové struktuře), kliknutím na modul. Rozbalte uzel k zobrazení dalších modulů, které jsou navázany na související modul. Modul, který zvolíte označuje, jaká políčka, která lze reportovat se zobrazí v panelu <b>Dostupná pole</b>.<br/><br/> 2) Klikněte na <b>Dostupná pole</b> k seskupení záznamů dle políčka ve Vašem reportu. Můžete také hledat oblasti zadáním do textového pole v podokně.<br/><br/>Po výběru libovolného počtu polí z modulu v okně <b>Související moduly</b> si můžete vybrat jiný modul, ze kterého si můžete vybrat libovolný počet polí k seskupení záznamů. Výsledný report se však stává méně čitelný, pokud je seskupen z více polí.<br/><br/>Můžete změnit pořadí polí přetažením na požadovanou pozici. Změna pořadí ovlivňuje způsob zobrazení výsledků.<br/><br/>Pro Matrix reporty můžete použít maximálně tří pole k seskupení záznamů.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>Kroky k volbě zobrazení sloupců:</b><br/><br/><br /><br />1) Vyberte modul v okně \"Související moduly\", který chcete použít k zobrazení dat ve Vašem reportu. Ve výchozím nastavení je vybrán primární modul (horní uzel ve stromové struktuře), který jste zvolili v prvním kroku \"Vyberte modul\".<br /><br/><br/>	<br />Můžete si vybrat z polí ve navazeném modulu (členský uzel ve stromové struktuře), kliknutím na modul. Moduly navázané na modul týkající se primárního modulu mohou být také zvoleny. Modul, který zvolíte označuje, jaká políčka, která lze reportovat se zobrazí v panelu <b>Dostupná pole</b>.<br /><br/><br/>	<br />2) Click on the Field in the <b>Available Fields</b> pane to display the field data in the records in your report. You can also search for the field by typing in the text box in the pane.<br /><br/><br/>	<br />After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields. You can select any number of fields, but the report is generated more slowly and becomes less readable when you add more than necessary fields in the report.<br /><br/><br/>	<br />You can change the order fields by dragging and dropping them to the desired position. Changing the field order changes the order in which the columns are displayed in the results." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Kroky ke Zvolení zobrazení shrnutí:</b><br/><br/>1) Klikněte v podokně <b>Související moduly</b> na modul, který byste chtěli použít pro shrnutí ve své zprávě. Ve výchozím nastavení je vybrán primární modul (nejvyšší uzel ve stromové struktuře).<br/><br/>	Kliknutím na modul můžete vybrat související modul (podřízený uzel ve stromové struktuře). Rozbalte uzel, abyste zobrazili další moduly vztahující se k souvisejícímu modulu. Modul, který vyberete, určuje, která vykazovatelná pole se zobrazí v podokně <b>Dostupná pole</b>.<br/><br/>	2) Chcete-li vybrat shrnutí pro vaši zprávu, klikněte na pole v podokně <b>Dostupná pole</b>. Můžete také hledat pole zadáním do textového pole v podokně.<br/><br/>	Po zvolení libovolného počtu polí z modulu vybraného v podokně <b>Související moduly</b> si můžete zvolit jiný modul, ze kterého můžete vybrat další pole pro shrnutí ve své zprávě.<br/><br/> Pro maticové zprávy můžete vybrat více než jedno pole, abyste ve své zprávě zobrazili více hodnot v rámci jedné buňky." ,
 
 	'LBL_ALT_SHOW' => 'ukaž',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'Tento report obsahuje data v následujícím pořadí sloupců:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'Nahoru' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'Informace',
     'LBL_REPORT_GRAND_TOTAL' => "Celkový součet",
+    'LBL_EDIT_REPORT_BUTTON' => 'Upravit sestavu',
 
     'LBL_REPORTS_TO' => 'Nadřízený',
     'LBL_LESS_THAN_EQUAL' => 'Rovný nebo menší než',

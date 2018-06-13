@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 define('CONNECTOR_DISPLAY_CONFIG_FILE', 'custom/modules/Connectors/metadata/display_config.php');
-require_once('include/connectors/ConnectorFactory.php');
 
 /**
  * Connector utilities
@@ -35,6 +33,12 @@ class ConnectorUtils
         'cust' => 'custom/modules/Connectors/connectors/sources',
         'conn' => 'custom/modules/Connectors/metadata/connectors.php',
     );
+
+    /**
+     * Path where the search defs are stored, if there are any
+     * @var string
+     */
+    protected static $searchDefsPath = 'custom/modules/Connectors/metadata/searchdefs.php';
 
     /**
      * Get connector data by ID
@@ -205,11 +209,31 @@ class ConnectorUtils
     }
 
     /**
+     * Verifies the metadata in the connectors config
+     * @param array $connectors List of connectors in the connectors config
+     * @return array
+     */
+    protected static function verifyConnectors(array $connectors)
+    {
+        // Loop over the connectors
+        foreach ($connectors as $id => $meta) {
+            // If there is no directory setting, or the connector has no config,
+            // it isn't valid
+            if (empty($meta['directory']) || !file_exists($meta['directory'] . '/config.php')) {
+                unset($connectors[$id]);
+                continue;
+            }
+        }
+
+        return $connectors;
+    }
+
+    /**
      * getConnectors
      * Returns an Array of the connectors that have been loaded into the system
      * along with attributes pertaining to each connector.
      *
-     * @param boolean $refresh boolean flag indicating whether or not to force 
+     * @param boolean $refresh boolean flag indicating whether or not to force
      *                         rewriting the file; defaults to false
      * @param boolean $save Flag indicating whether this process should save the
      *                      connector array
@@ -229,7 +253,7 @@ class ConnectorUtils
 
         if ($refresh || !SugarAutoLoader::existing(self::$sourcePaths['conn'])) {
             $sources = array_merge(
-                self::getSources(self::$sourcePaths['base']), 
+                self::getSources(self::$sourcePaths['base']),
                 self::getSources(self::$sourcePaths['cust'], true)
             );
 
@@ -242,6 +266,10 @@ class ConnectorUtils
                     $err_str = string_format($GLOBALS['app_strings']['ERR_CONNECTOR_NOT_ARRAY'],array(self::$sourcePaths['conn']));
                     $GLOBALS['log']->error($err_str);
                 }
+
+                // Verify our connectors, as static caches might not be updated
+                // to reflect the state of the instance in all situations
+                $connectors = self::verifyConnectors($connectors);
 
                 // Sources need to be merged onto connectors since source files
                 // can change
@@ -557,8 +585,6 @@ class ConnectorUtils
                      //Insert the hover field if available
                      if(!empty($mapping)) {
 
-                        require_once('include/connectors/sources/SourceFactory.php');
-                        require_once('include/connectors/formatters/FormatterFactory.php');
                         $shown_formatters = array();
                         foreach($mapping as $id) {
                                 $source = SourceFactory::getSource($id, false);
@@ -629,7 +655,6 @@ class ConnectorUtils
 
     public static function removeHoverField(&$viewdefs, $module)
     {
-        require_once('include/SugarFields/Parsers/MetaParser.php');
         if (!MetaParser::hasMultiplePanels($viewdefs[$module]['DetailView']['panels'])) {
             $keys = array_keys($viewdefs[$module]['DetailView']['panels']);
             if(!empty($keys) && count($keys) != 1) {
@@ -653,10 +678,9 @@ class ConnectorUtils
         return false;
     }
 
-    public function setHoverField(&$viewdefs, $module, $hover_field, $source_id)
+    public static function setHoverField(&$viewdefs, $module, $hover_field, $source_id)
     {
        //Check for metadata files that aren't correctly created
-       require_once('include/SugarFields/Parsers/MetaParser.php');
        if (!MetaParser::hasMultiplePanels($viewdefs[$module]['DetailView']['panels'])) {
             $keys = array_keys($viewdefs[$module]['DetailView']['panels']);
             if(!empty($keys) && count($keys) != 1) {
@@ -759,7 +783,6 @@ class ConnectorUtils
               }
 
 
-            require_once('include/connectors/utils/ConnectorHtmlHelperFactory.php');
             $code = ConnectorHtmlHelperFactory::build()->getConnectorButtonCode($shown_sources, $module, $smarty);
         } //if
         return $code;
@@ -870,6 +893,115 @@ class ConnectorUtils
         return true;
     }
 
+    /**
+     * Removes a connector source config from the connector cache
+     * @param string $source The source ID
+     * @return bool True on success
+     */
+    protected static function removeConnectorMeta($source)
+    {
+        // The connector cache file
+        $connectorsFile = 'custom/modules/Connectors/metadata/connectors.php';
+
+        // Expectation upon completion
+        $return = true;
+
+        // If there is a connector cache
+        if (file_exists($connectorsFile)) {
+            // Load it
+            require $connectorsFile;
+
+            // And if this connector was set in the cache
+            if (isset($connectors[$source])) {
+                // Remove it
+                unset($connectors[$source]);
+
+                // And try to save the cache
+                if (!write_array_to_file('connectors', $connectors, $connectorsFile)) {
+                    // Log error
+                    LoggerManager::getLogger()->fatal('Cannot write connectors to file');
+                    $return = false;
+                }
+            }
+        }
+
+        return $return;
+    }
+
+    /**
+     * Removes a connector display config from the config display cache file
+     * @param string $source The source ID
+     * @return bool True on success
+     */
+    protected static function removeConnectorConfig($source)
+    {
+        // Default expectation
+        $return = true;
+
+        if (file_exists(CONNECTOR_DISPLAY_CONFIG_FILE)) {
+            // Set a marker so we don't write when we don't need to
+            $save = false;
+
+            // Initialize our array data in case the config file is empty
+            $modules_sources = array();
+            require CONNECTOR_DISPLAY_CONFIG_FILE;
+
+            // Loop and check
+            foreach ($modules_sources as $module => $mapping) {
+                foreach ($mapping as $id => $src) {
+                    if ($src == $source) {
+                        unset($modules_sources[$module][$id]);
+                        $save = true;
+                    }
+                }
+            }
+
+            // Only save if there is a need to
+            if ($save) {
+                if (!write_array_to_file('modules_sources', $modules_sources, CONNECTOR_DISPLAY_CONFIG_FILE)) {
+                    // Log error
+                    LoggerManager::getLogger()->fatal(sprintf(
+                        'Cannot write $modules_sources to %s',
+                        CONNECTOR_DISPLAY_CONFIG_FILE
+                    ));
+                    $return = false;
+                }
+            }
+        }
+
+        return $return;
+    }
+
+    /**
+     * Removes search defs from the custom search def file if there is a need to
+     * @param string $source The source ID
+     * @return bool True on success
+     */
+    protected static function removeConnectorSearchDefs($source)
+    {
+        // Default expectation
+        $return = true;
+
+        // Only do this if there is a search def custom file already
+        if (file_exists(self::$searchDefsPath)) {
+            // Get our current defs
+            $searchdefs = ConnectorUtils::getSearchDefs();
+
+            // If we have a def for this source...
+            if (!empty($searchdefs[$source])) {
+                // Remove it...
+                unset($searchdefs[$source]);
+
+                // Handle updating the cache file
+                if (!write_array_to_file('searchdefs', $searchdefs, self::$searchDefsPath)) {
+                    LoggerManager::getLogger()->fatal('Cannot write file ' . self::$searchDefsPath);
+                    $return = false;
+                }
+            }
+        }
+
+        return $return;
+    }
 
     /**
      * uninstallSource
@@ -879,58 +1011,21 @@ class ConnectorUtils
      */
     public static function uninstallSource($source)
     {
-        if(empty($source)) {
+        // Simple early validation
+        if (empty($source)) {
            return false;
         }
 
-        //Remove the source from the connectors.php file
-        $connectorsFile = 'custom/modules/Connectors/metadata/connectors.php';
-        if (file_exists($connectorsFile)) {
-            require($connectorsFile);
-            if (isset($connectors[$source])) {
-                unset($connectors[$source]);
-                if (!write_array_to_file('connectors', $connectors, $connectorsFile)) {
-                   //Log error and return empty array
-                   $GLOBALS['log']->fatal("Cannot write connectors to file");
-                   return false;
-                }
-            }
-        }
+        // Remove the source from the connectors.php file
+        $remove = self::removeConnectorMeta($source);
 
-        //Update the display_config.php file to remove this source
-        $modules_sources = array();
-        require(CONNECTOR_DISPLAY_CONFIG_FILE);
-        foreach($modules_sources as $module=>$mapping) {
-            foreach($mapping as $id=>$src) {
-                if($src == $source) {
-                   unset($modules_sources[$module][$id]);
-                }
-            }
-        }
+        // Update the display_config.php file to remove this source
+        $update = self::removeConnectorConfig($source);
 
-        //Make the directory for the config file
-        if(!file_exists('custom/modules/Connectors/metadata')) {
-           mkdir_recursive('custom/modules/Connectors/metadata');
-        }
+        // Remove from searchdefs
+        $search = self::removeConnectorSearchDefs($source);
 
-        if(!write_array_to_file('modules_sources', $modules_sources, CONNECTOR_DISPLAY_CONFIG_FILE)) {
-           //Log error and return empty array
-           $GLOBALS['log']->fatal("Cannot write \$modules_sources to " . CONNECTOR_DISPLAY_CONFIG_FILE);
-           return false;
-        }
-
-        //Remove from searchdefs
-        $searchdefs = ConnectorUtils::getSearchDefs();
-        if(!empty($searchdefs[$source])) {
-           unset($searchdefs[$source]);
-        }
-
-        if(!write_array_to_file('searchdefs', $searchdefs, 'custom/modules/Connectors/metadata/searchdefs.php')) {
-           $GLOBALS['log']->fatal("Cannot write file custom/modules/Connectors/metadata/searchdefs.php");
-           return false;
-        }
-
-        return true;
+        return $remove && $update && $search;
     }
 
     /**
@@ -946,7 +1041,6 @@ class ConnectorUtils
     private static function hasWizardSourceEnabledForModule($module = '')
     {
         if(file_exists(CONNECTOR_DISPLAY_CONFIG_FILE)) {
-           require_once('include/connectors/sources/SourceFactory.php');
            require(CONNECTOR_DISPLAY_CONFIG_FILE);
            if(!empty($modules_sources) && !empty($modules_sources[$module])) {
               foreach($modules_sources[$module] as $id) {

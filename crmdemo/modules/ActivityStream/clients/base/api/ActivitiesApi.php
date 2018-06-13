@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'clients/base/api/FilterApi.php';
 
 class ActivitiesApi extends FilterApi
 {
@@ -86,32 +84,32 @@ class ActivitiesApi extends FilterApi
             throw new SugarApiExceptionNotAuthorized('No access to view records for module: '.$args['module']);
         }
 
-        $query = self::getQueryObject($api, $params, $record);
+        $query = self::getQueryObject($record, $params, $api);
         return $this->formatResult($api, $args, $query, $record);
     }
 
     public function getModuleActivities(ServiceBase $api, array $args)
     {
         $params = $this->parseArguments($api, $args);
-        $record = BeanFactory::getBean($args['module']);
+        $record = BeanFactory::newBean($args['module']);
         if (!$record->ACLAccess('view')) {
             throw new SugarApiExceptionNotAuthorized('No access to view records for module: '.$args['module']);
         }
 
-        $query = self::getQueryObject($api, $params, $record);
+        $query = self::getQueryObject($record, $params, $api);
         return $this->formatResult($api, $args, $query, $record);
     }
 
     public function getHomeActivities(ServiceBase $api, array $args)
     {
         $params = $this->parseArguments($api, $args);
-        $query = self::getQueryObject($api, $params);
+        $query = self::getQueryObject(new EmptyBean(), $params, $api, true);
         return $this->formatResult($api, $args, $query);
     }
 
-    public function parseArguments(ServiceBase $api, array $args)
+    public function parseArguments(ServiceBase $api, array $args, SugarBean $seed = null)
     {
-        $params = parent::parseArguments($api, $args);
+        $params = parent::parseArguments($api, $args, $seed);
         if (isset($args['filter'])) {
             $params['filter'] = $args['filter'];
         }
@@ -195,7 +193,7 @@ class ActivitiesApi extends FilterApi
         return $response;
     }
 
-    protected function checkParentPreviewEnabled($user, $module, $id)
+    protected function checkParentPreviewEnabled(User $user, $module, $id)
     {
         $previewCheckKey = $module . '.' . $id;
         $previewCheckResult = array();
@@ -220,7 +218,7 @@ class ActivitiesApi extends FilterApi
         if (isset(self::$beanList[$module])) {
             $bean = self::$beanList[$module];
         } else {
-            $bean = BeanFactory::getBean($module);
+            $bean = BeanFactory::newBean($module);
             if (!is_null($bean)) {
                 self::$beanList[$module] = $bean;
             }
@@ -228,9 +226,13 @@ class ActivitiesApi extends FilterApi
         return $bean;
     }
 
-    public static function getQueryObject(ServiceBase $api, array $params, SugarBean $record = null)
-    {
-        $seed = BeanFactory::getBean('Activities');
+    protected static function getQueryObject(
+        SugarBean $record,
+        array $options,
+        ServiceBase $api = null,
+        $homeActivities = false
+    ) {
+        $seed = BeanFactory::newBean('Activities');
         $query = new SugarQuery();
         $query->from($seed);
 
@@ -238,7 +240,7 @@ class ActivitiesApi extends FilterApi
         $query->orderBy('date_modified', 'DESC');
 
         // +1 used to determine if we have more records to show.
-        $query->limit($params['limit'] + 1)->offset($params['offset']);
+        $query->limit($options['limit'] + 1)->offset($options['offset']);
 
         $columns = array('activities.*', 'users.first_name', 'users.last_name', 'users.picture');
 
@@ -251,7 +253,7 @@ class ActivitiesApi extends FilterApi
             ->on()->equalsField("activities_users.activity_id", 'activities.id')
             ->equals("activities_users.deleted", 0);
 
-        if (!$record || !$record->id) {
+        if ($homeActivities || !$record->id) {
             // Join with cached list of activities to show.
             $columns[] = 'activities_users.fields';
             $join = $join->queryOr();
@@ -261,14 +263,14 @@ class ActivitiesApi extends FilterApi
                 ->equals('activities_users.parent_id', 1);
             $join->queryAnd()->equals('activities_users.parent_type', 'Users')
                 ->equals('activities_users.parent_id', $api->user->id);
-            if ($record) {
-                $query->where()->equals('activities.parent_type', $record->module_name);
-            } else {
+            if ($homeActivities) {
                 $homeActivityFilter = $query->where()->queryOr();
                 $homeActivityFilter->isNull('activities.parent_type');
                 $homeActivityFilter->equals('activities.parent_type', 'Activities');
                 $homeActivityFilter->equals('activities.parent_type', 'Home');
                 $homeActivityFilter->equals('activities_users.parent_type', 'Users');
+            } else {
+                $query->where()->equals('activities.parent_type', $record->module_name);
             }
         } else {
             // If we have a relevant bean, we add our where condition.
@@ -279,8 +281,8 @@ class ActivitiesApi extends FilterApi
         }
 
         // We only support filtering on activity_type.
-        if (!empty($params['filter'])) {
-            self::addFilters($params['filter'], $query->where(), $query);
+        if (!empty($options['filter'])) {
+            self::addFilters($options['filter'], $query->where(), $query);
         }
 
         $query->where()->equals('deleted', 0);

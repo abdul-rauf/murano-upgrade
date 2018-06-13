@@ -1,14 +1,5 @@
 <?php
-/*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
- */
+// created: 2018-06-13 14:44:36
 $mod_strings = array (
   'LBL_TEAM' => '团队',
   'LBL_TEAMS' => '团队',
@@ -58,7 +49,6 @@ $mod_strings = array (
   'LBL_CITY' => '城市:',
   'LBL_CONTACTS_SUBPANEL_TITLE' => '联系人',
   'LBL_COUNTRY' => '国家：',
-  'LBL_DEFAULT_SUBPANEL_TITLE' => '账户：',
   'LBL_DESCRIPTION_INFORMATION' => '描述信息',
   'LBL_DUPLICATE' => '可能重复账户',
   'LBL_EMAIL' => '邮件地址：',

@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'รายการบรรทัดการเสนอราคา',
     'LBL_LIST_MANUFACTURER' => 'ผู้ผลิต',
     'LBL_MANUFACTURERS' => 'ผู้ผลิต',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'เลขที่ผู้ผลิต',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'เลขที่ชิ้นส่วน',
     'LBL_LIST_QUANTITY' => 'ปริมาณ',
     'LBL_LIST_COST_PRICE' => 'ต้นทุน',
     'LBL_LIST_DISCOUNT_PRICE' => 'ราคา',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'เลือกส่วนลด',
     'LBL_LIST_PRICE' => 'ราคาตามบัญชี:',
     'LBL_VENDOR_PART_NUM' => 'เลขที่ชิ้นส่วนของผู้ขาย:',
-    'LBL_MFT_PART_NUM' => 'เลขที่ชิ้นส่วนของผู้ผลิต:',
+    'LBL_MFT_PART_NUM' => 'เลขที่ชิ้นส่วน:',
     'LBL_NEXT_STEP' => 'ขั้นตอนถัดไป:',
     'LBL_DISCOUNT_PRICE_DATE' => 'วันที่ของราคาส่วนลด:',
     'LBL_WEIGHT' => 'น้ำหนัก:',
@@ -168,6 +168,8 @@ $mod_strings = array(
  - คลิก "แสดงเพิ่มเติม" เพื่อแสดงฟิลด์อื่นๆ หากจำเป็น
 2. คลิก "บันทึก" เพื่อสิ้นสุดการสร้างระเบียนใหม่ และกลับสู่เพจก่อนหน้า',
 
-    'LBL_MANUFACTURERS' => 'ผู้ผลิต',
     'LBL_PRODUCT_POSITION' => 'ตำแหน่งของชุดผลิตภัณฑ์',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'รายการข้อมูลการเสนอราคาของรายการบรรทัดการเสนอราคา',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (รายการบรรทัดการเสนอราคาใหม่)',
+    'LBL_DISCOUNT_PERCENT' => '% เปอร์เซ็นต์',
 );

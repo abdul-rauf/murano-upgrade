@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -54,7 +53,7 @@ class ReportsViewBuildreportmoduletree extends SugarView
         $ACLAllowedModules = getACLAllowedModules();
         $module_array = array();
 
-        $module = BeanFactory::getBean($_REQUEST['report_module']);
+        $module = BeanFactory::newBean($_REQUEST['report_module']);
         $bean_name = $module->object_name;
         $linked_fields = $module->get_linked_fields();
 

@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/SugarFields/Fields/Base/SugarFieldBase.php');
 
 class SugarFieldImage extends SugarFieldBase
 {
@@ -44,7 +43,6 @@ class SugarFieldImage extends SugarFieldBase
 
     public function save($bean, $params, $field, $properties, $prefix = '')
     {
-        require_once('include/upload_file.php');
         $upload_file = new UploadFile($field);
 
         //remove file
@@ -92,10 +90,9 @@ class SugarFieldImage extends SugarFieldBase
                 $imgInfo = !empty($_FILES[$field]['tmp_name']) ? getimagesize($_FILES[$field]['tmp_name']) : false;
                 // if file is image then this image is no longer supported.
                 if (false !== $imgInfo) {
-                    $ext         = end(explode('.', $_FILES[$field]['name']));
                     $this->error = string_format(
                         $GLOBALS['app_strings']['LBL_UPLOAD_IMAGE_FILE_NOT_SUPPORTED'],
-                        array($ext)
+                        array($imgInfo['mime'])
                     );
                 } else {
                     $this->error = $GLOBALS['app_strings']["LBL_UPLOAD_IMAGE_FILE_INVALID"];

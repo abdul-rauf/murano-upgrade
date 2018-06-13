@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,16 +13,4 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 class SugarWidgetFieldDouble extends SugarWidgetFieldInt
 {
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarWidgetFieldDouble(&$layout_manager)
-    {
-        self::__construct($layout_manager);
-    }
-
-    public function __construct(&$layout_manager)
-    {
-        parent::__construct($layout_manager);
-    }
 }

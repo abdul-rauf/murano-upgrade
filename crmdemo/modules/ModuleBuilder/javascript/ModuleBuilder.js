@@ -72,9 +72,6 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			Connect.method = 'POST';
 			Connect.timeout = 300000; 
 			
-			//Setup and read cookie settings
-			//Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
-			
 			if (SUGAR.themes.tempHideLeftCol)
 				SUGAR.themes.tempHideLeftCol();
 			
@@ -379,7 +376,6 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			save_url_for_current_view: null,
 			popup_window: null,
 			setupState: function(){
-				//ModuleBuilder.state.popup();
 				document.body.setAttribute("onclose", "ModuleBuilder.state.popup(); ModuleBuilder.state.popup_window.show()");
 				return;
 			},
@@ -689,8 +685,6 @@ if (typeof(ModuleBuilder) == 'undefined') {
             }
         },
 		submitForm: function(formname, successCall){
-			// Make sure the session cookie is always fresh
-			ModuleBuilder.ensureSessionCookie();
             ModuleBuilder.toggleButtons();
 			ajaxStatus.showStatus(SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_LOADING'));
 			if (typeof(successCall) == 'undefined') {
@@ -821,7 +815,6 @@ if (typeof(ModuleBuilder) == 'undefined') {
 					children[i].onmouseover = function(){
 						ModuleBuilder.helpToggle(this.id)
 					};
-					//children[i].onmouseover = function(){alert(this.id)};
 					children[i].onmouseout = function(){
 						ModuleBuilder.helpToggle('default')
 					};
@@ -1217,36 +1210,6 @@ if (typeof(ModuleBuilder) == 'undefined') {
                 SUGAR.util.paramsToUrl(postFields)
             );
 		},
-		/**
-		 * Makes sure the session cookie is up to date. This supports being in 
-		 * studio and being idle while the main app refreshes the oauth token. 
-		 * This also eliminates the need to a BWC login while in studio.
-		 */
-		ensureSessionCookie: function() {
-			var sessionName = parent.SUGAR.App.cache.get("SessionName"),
-			    cookiePattern = "(" + sessionName + "=)([a-f0-9\-]*)",
-			    matches = document.cookie.match(cookiePattern),
-			    matched = false,
-                currentSID = parent.SUGAR.App.api.getOAuthToken();
-
-			// If there is a current session id cookie (which would happen for
-			// bwc logins) but it does not match the current auth token then 
-			// update the document cookie to the auth token to allow studio to 
-			// continue to function
-                if (currentSID && matches) {
-				for (var i in matches) {
-					if (matches[i] == currentSID) {
-						matched = true;
-						break;
-					}
-				}
-				
-				// There is a session cookie but it doesn't match the auth token
-				if (!matched) {
-					document.cookie = sessionName + "=" + currentSID;
-				}
-			}
-		},
 		asyncRequest : function (params, callback, showLoading) {
 			// Used to normalize request arguments needed for the async request
 			// as well as for setting into the requestElements object
@@ -1271,9 +1234,6 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			ModuleBuilder.requestElements.method = cMethod;
 			ModuleBuilder.requestElements.url = cUrl;
 			ModuleBuilder.requestElements.callbacks = {success: callback, failure: ModuleBuilder.failed};
-			
-			// Make sure the session cookie is always fresh if that is possible
-			ModuleBuilder.ensureSessionCookie();
 
             if (typeof(showLoading) == 'undefined' || showLoading == true) {
                 ajaxStatus.showStatus(SUGAR.language.get('app_strings', 'LBL_LOADING_PAGE'));
@@ -1418,15 +1378,19 @@ if (typeof(ModuleBuilder) == 'undefined') {
                 childList: child_options,
                 targetId:targetId,
                 mode:2,
-                mapping: Dom.get(targetId).value
+                mapping: Dom.get(targetId).value,
+                csrf_token: SUGAR.csrf.form_token
             };
-            win.load(ModuleBuilder.paramsToUrl(win.params), "GET", function() {
+            win.load('', 'POST', function() {
                 SUGAR.util.evalScript(win.body.innerHTML);
                 //firefox will ignore the left panel size, so we need to manually force the windows height and width
                 win.body.style.height = "570px";
                 win.body.style.minWidth = "880px";
                 win.center();
-            });
+            },
+                //POST parameters
+                ModuleBuilder.paramsToUrl(win.params)
+            );
             win.show();
             win.center();
         },

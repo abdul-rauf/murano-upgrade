@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -196,7 +195,7 @@ class TemplateEnum extends TemplateText{
      */
     function delete($df){
         //If a dropdown uses the field that is being delted as a parent dropdown, we need to remove that dependency
-        $seed = BeanFactory::getBean($df->getModuleName());
+        $seed = BeanFactory::newBean($df->getModuleName());
         if ($seed)
         {
             $fields = $seed->field_defs;
@@ -212,7 +211,6 @@ class TemplateEnum extends TemplateText{
                     else
                     {
                         //Out of the box field that we need to use a StandardField rather than DynamicFIeld object to save
-                        require_once ('modules/ModuleBuilder/parsers/StandardField.php') ;
                         $sf = new StandardField ( $df->getModuleName() ) ;
                         $sf->setup ( $seed ) ;
                         $field->module = $seed;

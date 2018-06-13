@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,14 +20,8 @@ $sugar_smarty = new Sugar_Smarty();
 $sugar_smarty->assign('MOD', $mod_strings);
 $sugar_smarty->assign('APP', $app_strings);
 //mass localization
-/*foreach($modInvisList as $modinvisname){
-    $app_list_strings['moduleList'][$modinvisname] = $modinvisname;
-}*/
 $sugar_smarty->assign('APP_LIST', $app_list_strings);
-/*foreach($modInvisList as $modinvisname){
-    unset($app_list_strings['moduleList'][$modinvisname]);
-}*/
-$role = BeanFactory::getBean('ACLRoles');
+$role = BeanFactory::newBean('ACLRoles');
 $role_name = '';
 $return= array('module'=>'ACLRoles', 'action'=>'index', 'record'=>'');
 
@@ -113,7 +106,6 @@ echo $sugar_smarty->fetch('modules/ACLRoles/EditRole.tpl');
 if (!isset($dictionary[$categoryName]['hide_fields_to_edit_role']) ||
     $dictionary[$categoryName]['hide_fields_to_edit_role'] === false
 ) {
-    require_once('modules/ACLFields/EditView.php');
     echo ACLFieldsEditView::getView($categoryName, $role->id);
 }
 echo '</form>';

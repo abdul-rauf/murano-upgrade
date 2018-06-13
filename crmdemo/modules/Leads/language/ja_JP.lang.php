@@ -71,7 +71,7 @@ $mod_strings = array (
     'LBL_CONVERTED_ACCOUNT'=>'コンバート済み取引先:',
     'LBL_CONVERTED_CONTACT' => 'コンバート済み取引先担当者:',
     'LBL_CONVERTED_OPP'=>'コンバート済み商談:',
-    'LBL_CONVERTED'=> 'コンバート済み',
+    'LBL_CONVERTED'=> '変換済',
     'LBL_CONVERTLEAD_BUTTON_KEY' => 'V',
     'LBL_CONVERTLEAD_TITLE' => 'リードのコンバート [Alt+V]',
     'LBL_CONVERTLEAD' => 'リードのコンバート',
@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => '編集' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B プリンシパルID',
-    'LBL_DNB_BAL_PREVIEW' => 'リードプレビュー',
-    'LBL_DNB_BAL_RSLT_CNT' => 'リード',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: リード情報',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => '商談',
 

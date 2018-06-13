@@ -17,8 +17,8 @@ $connector_strings = array(
 <br/><br/>
 <ol>
 <li>前往 Google 開發者站點：
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>使用您將用於註冊應用程式的 Google 帳戶登入。</li>
 <li>建立新專案</li>

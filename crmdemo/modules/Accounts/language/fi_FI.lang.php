@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Liite',
     'LBL_REVENUELINEITEMS' => 'Tuoterivit',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Asiakkaiden esikatselu',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Muistiot',
 
     // Help Text

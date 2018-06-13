@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Calendar/Calendar.php');
 
 class vCal extends SugarBean {
 
@@ -85,10 +83,16 @@ class vCal extends SugarBean {
         // combines all freebusy vcals and returns just the FREEBUSY lines as a string
 	function get_freebusy_lines_cache(&$user_bean)
 	{
+        global $sugar_config;
         $ical_array = array();
+
+        if (empty($sugar_config['freebusy_use_vcal_cache'])) {
+            return ''; // VCal FreeBusy Cache Is Not Enabled - No Data will be returned from vcals table
+        }
+
 		// First, get the list of IDs.
 		$query = "SELECT id from vcals where user_id='{$user_bean->id}' AND type='vfb' AND deleted=0";
-		$vcal_arr = $this->build_related_list($query, BeanFactory::getBean('vCals'));
+		$vcal_arr = $this->build_related_list($query, BeanFactory::newBean('vCals'));
 
 		foreach ($vcal_arr as $focus)
 		{
@@ -234,32 +238,37 @@ class vCal extends SugarBean {
         }
 
 	// static function:
-        // caches vcal for Activities in Sugar database
-        public static function cache_sugar_vcal_freebusy(&$user_focus)
-        {
-            if (!static::$cacheUpdate_enabled) {
-                return;
-            }
-
-            $focus = BeanFactory::getBean('vCals');
-
-            if (static::$backtrace_log_enabled == 'cache' || static::$backtrace_log_enabled == 'all') {
-                $trace = $focus->getBackTrace("VCAL:CACHE - ");
-                $GLOBALS['log']->fatal("VCAL:CACHE - cache_sugar_vcal_freebusy()\n" . $trace);
-            }
-
-            // set freebusy members and save
-            $arr = array('user_id'=>$user_focus->id,'type'=>'vfb','source'=>'sugar');
-            $focus->retrieve_by_string_fields($arr);
-
-
-            $focus->content = $focus->get_vcal_freebusy($user_focus,false);
-            $focus->type = 'vfb';
-            $focus->date_modified = null;
-            $focus->source = 'sugar';
-            $focus->user_id = $user_focus->id;
-            $focus->save();
+    // caches vcal for Activities in Sugar database
+    public static function cache_sugar_vcal_freebusy(&$user_focus)
+    {
+        global $sugar_config;
+        if (!static::$cacheUpdate_enabled) {
+            return;
         }
+
+        if (empty($sugar_config['freebusy_use_vcal_cache'])) {
+            return; // VCal FreeBusy Cache Not Enabled - No Updates to vcals table will Occur
+        }
+
+        $focus = BeanFactory::newBean('vCals');
+
+        if (static::$backtrace_log_enabled == 'cache' || static::$backtrace_log_enabled == 'all') {
+            $trace = $focus->getBackTrace("VCAL:CACHE - ");
+            $GLOBALS['log']->fatal("VCAL:CACHE - cache_sugar_vcal_freebusy()\n" . $trace);
+        }
+
+        // set freebusy members and save
+        $arr = array('user_id' => $user_focus->id, 'type' => 'vfb', 'source' => 'sugar');
+        $focus->retrieve_by_string_fields($arr);
+
+
+        $focus->content = $focus->get_vcal_freebusy($user_focus, false);
+        $focus->type = 'vfb';
+        $focus->date_modified = null;
+        $focus->source = 'sugar';
+        $focus->user_id = $user_focus->id;
+        $focus->save();
+    }
 
     /*
      * Lines of text SHOULD NOT be longer than 75 octets, excluding the line break.

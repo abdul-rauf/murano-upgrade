@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'Firmenberichte',
   'LBL_CONTACT_REPORTS' => 'Kontaktberichte',
   'LBL_OPPORTUNITY_REPORTS' => 'Verkaufschancen Berichte',
+    'LBL_RECENTLY_MODIFIED' => 'Kürzlich verändert',
 
   'LBL_CASE_REPORTS' => 'Ticket-Berichte',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'Nächsten 30 Tage',
   'LBL_THIS_YEAR'=>'Dieses Jahr',
   'LBL_LIST_FORM_TITLE' =>'Berichte',
+  'LBL_LIST_REPORT_NAME' => 'Name',
   'LBL_PROSPECT_REPORTS'=>'Zielkontakte-Berichte',
   'LBL_CHART_TYPE'=>'Diagrammtyp',
   'LBL_IS_EMPTY'=>'Ist leer',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>Wie man Filter definiert:</b><br/><br/>1) Klicken Sie auf das Modul im Bereich <b>Verknüpfte Module</b>, welches Sie für die Filterdefinition verwenden möchten. Standardmäßig wird das Primärmodul (oberstes) in der Strukturansicht ausgewählt. <br/><br/>Sie können ein verknüpftes Modul durch Klicken des Moduls auswählen. Erweitern Sie den Knoten, um zusätzliche verknüpfte Module aufzulisten. Das Modul, welches Sie wählen, bestimmt welche <b>verfügbaren Felder</b> Sie für den Bericht zur Verügung haben.<br/><br/>2) Klicken Sie auf ein Feld unter <b>verfügbare Felder</b>, um es Ihren Filtern hinzuzufügen. Sie können nach Feldern mit der Textbox auch suchen.<br/><br/>Nach dem Auswählen einer beliebigen Anzahl an Feldern können Sie das ausgewählte Modul im Bereich <b>Verknüpfte Module</b> ändern, indem Sie wieder eine beliebige Anzahl an Felder als Filter konfigurieren.<br/><br/>3) Wählen Sie <b>ALLE</b> oder <b>BELIEBIG</b>, um zu bestimmen, wie die Filter für den Bericht verwendet werden.<br/><br/> 4) [Optional] Klicken Sie auf <b>Filtergruppe hinzufügen</b>, um Filtergruppen zu erstellen. Sie können unbegrenzt viele Filtergruppen erstellen und unbegrenzt viele Filter in einer Gruppe erstellen.<br/><br/> 5) [Optional] Wählen Sie die Laufzeit-Option für einen Filter, um Benutzern den Zugriff auf den Filter zu erlauben, um diesen bei der Ansicht des Berichts anzupassen.",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>Wie man eine Gruppierung definiert:</b><br></br>1) Klicken Sie auf ein Modul im Bereich <b>Verknüpfte Module</b>, das Sie für die Gruppierung Ihrer Datensätze in Ihrem Bericht verwenden möchten. Standardmäßig wird das Primärmodul (oberstes) in der Strukturansicht ausgewählt. <br/><br/>Sie können ein verknüpftes Modul durch Klicken des Moduls auswählen. Erweitern Sie den Knoten, um zusätzliche verknüpfte Module aufzulisten. Das Modul, welches Sie wählen, bestimmt, welche <b>verfügbaren Felder<b> Sie für den Bericht haben.<br/><br/> 2) Klicken Sie auf ein Feld im Bereich <b>Verfügbare Felder<b>, um die Datensätze nach diesem Feld in Ihrem Bericht zu gruppieren. Sie können nach Feldern mit der Textbox auch suchen.<br/><br/> Nach der Auswahl einer beliebigen Anzahl von Feldern unter <b>Verknüpfte Module</b> können Sie ein anderes Modul auswählen, von dem Sie eine beliebige Zahl weiterer Felder zum Gruppieren auswählen können. Allerdings wird der Bericht schlechter lesbar, wenn Sie ihn nach zu vielen Feldern gruppieren.<br/><br/> Sie können die Reihenfolge durch Ziehen und Ablegen ändern, was die Art der Darstellung beeinflusst.<br/><br/> Für Matrix-Berichte können maximal drei Felder zum Gruppieren verwendet werden.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>Schritte, um Displayspalten zu wählen:</b><br/><br/>1) Klicken Sie auf ein Modul im Bereich <b>Verknüpfte Module</b>, das Sie für die Darstellung der Daten in Ihrem Bericht verwenden möchten. Standardmäßig wird das Primärmodul (oberstes) in der Strukturansicht ausgewählt. <br/><br/>Sie können ein verknüpftes Modul durch Klicken des Moduls auswählen. Erweitern Sie den Knoten, um zusätzliche verknüpfte Module aufzulisten. Das Modul, welches Sie wählen, bestimmt, welche <b>verfügbaren Felder<b> Sie für den Bericht haben.<br/><br/> 2) Klicken Sie auf ein Feld im Bereich <b>Verfügbare Felder<b>, um die Datensätze nach diesem Feld in Ihrem Bericht zu gruppieren. Sie können nach Feldern mit der Textbox auch suchen.<br/><br/> Nach der Auswahl einer beliebigen Anzahl von Feldern unter <b>Verknüpfte Module</b> können Sie ein anderes Modul auswählen, von dem Sie eine beliebige Zahl weiterer Felder zum Gruppieren auswählen können. Allerdings wird der Bericht schlechter lesbar, wenn Sie ihn nach zu vielen Feldern gruppieren.<br/><br/> Sie können die Reihenfolge durch Ziehen und Ablegen ändern, was die Art der Darstellung beeinflusst." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Wie man eine Anzeigenzusammenfassung auswählt:</b><br/><br/>1) Klicken Sie auf ein Modul im Bereich <b>Verknüpfte Module</b>, das Sie für die Zusammenfassungen in Ihrem Bericht verwenden möchten. Standardmäßig wird das Primärmodul (oberster Knoten in der Strukturansicht) ausgewählt.<br/><br/>	Sie können ein verknüpftes Modul (untergeordneter Knoten in der Strukturansicht) durch Klicken des Moduls auswählen. Erweitern Sie den Knoten, um zusätzliche verknüpfte Module aufzulisten. Das ausgewählte Modul bestimmt, welche Berichtsfelder unter <b>Verfügbare Felder</b> angezeigt werden.<br/><br/> 2) Klicken Sie auf ein Feld im Bereich <b>Verfügbare Felder</b>, um die Zusammenfassungen für Ihrem Bericht auszuwählen. Sie können auch mithilfe der Textbox nach Feldern suchen.<br/><br/> Nach der Auswahl einer beliebigen Anzahl von Feldern unter <b>Verknüpfte Module</b> können Sie ein anderes Modul auswählen, von dem Sie eine beliebige Zahl weiterer Felder für die Zusammenfassungen Ihres Berichts auswählen können.<br/><br/> Für Matrix-Berichte kann mehr als ein Feld für die Anzeige mehrerer Werte in einer einzelnen Zelle in Ihrem Bericht ausgewählt werden." ,
 
 	'LBL_ALT_SHOW' => 'Anzeigen',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'Der Bericht enthält Daten in der folgender Spaltenreihenfolge:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'nach oben' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'Informationen',
     'LBL_REPORT_GRAND_TOTAL' => "Gesamtbetrag",
+    'LBL_EDIT_REPORT_BUTTON' => 'Bericht bearbeiten',
 
     'LBL_REPORTS_TO' => 'Berichtet an',
     'LBL_LESS_THAN_EQUAL' => 'ist kleiner oder gleich',

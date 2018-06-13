@@ -1,8 +1,5 @@
 <?php
 
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,7 +11,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/SchedulersJobs/SchedulersJob.php');
 
 /**
  * SugarJobUpdateForecastWorksheets
@@ -56,7 +52,7 @@ class SugarJobUpdateForecastWorksheets implements RunnableSchedulerJob
 
         $args = json_decode(html_entity_decode($data), true);
         $this->job->runnable_ran = true;
-        $worksheet = BeanFactory::getBean('ForecastWorksheets');
+        $worksheet = BeanFactory::newBean('ForecastWorksheets');
 
         // use the processWorksheetDataChunk to run the code.
         $worksheet->processWorksheetDataChunk($args['forecast_by'], $args['data']);

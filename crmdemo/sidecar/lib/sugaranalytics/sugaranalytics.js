@@ -8,12 +8,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*;
- * SugarCRM Analytics API
- */
-
-//create the SUGAR namespace if one does not exist already
-var SUGAR = SUGAR || {};
 
 /**
  * SugarCRM Analytics API allows user actions to be tracked via an analytics engine.
@@ -235,96 +229,6 @@ var SUGAR = SUGAR || {};
                 label: this.currentViewId,
                 value: value
             });
-        },
-
-        /**
-         * Detach analytics in an element based on having the track attribute.
-         *
-         * @param {jQuery} $el Element to detach analytics from.
-         * @member SUGAR.analytics
-         * @deprecated since 7.7. Will be removed in 7.9.
-         */
-        detachAnalytics: function($el) {
-            app.logger.warn('`app.analytics.detachAnalytics()` is deprecated and will be removed in 7.9.');
-            var $els = this.getTrackableElements($el);
-            $els.unbind('.analytics');
-        },
-
-        /**
-         * Attach analytics in an element based on having the 'track' attribute.
-         *
-         * @param {jQuery} $el Element to attach analytics to.
-         * @member SUGAR.analytics
-         * @deprecated since 7.7. Will be removed in 7.9.
-         */
-        attachAnalytics: function($el) {
-            app.logger.warn('`app.analytics.attachAnalytics()` is deprecated and will be removed in 7.9.');
-            var self = this;
-            var $els = this.getTrackableElements($el);
-            $els.unbind('.analytics');
-            $els.each(function(i, el) {
-                self._attachAnalytics(el);
-            });
-        },
-
-        /**
-         * Find all trackable child elements of the given element.
-         *
-         * @param {jQuery} $el Element to search.
-         * @member SUGAR.analytics
-         * @deprecated since 7.7. Will be removed in 7.9.
-         */
-        getTrackableElements: function($el) {
-            app.logger.warn('`app.analytics.getTrackableElements()` is deprecated and will be removed in 7.9.');
-            var items = this._getTrackableElements($el);
-            if ($el.attr('track')) {
-                items = items.add($el);
-            }
-            return items;
-        },
-
-        /**
-         * @private
-         * @member SUGAR.analytics
-         */
-        _getTrackableElements: function(scope) {
-            return $('[track]', scope);
-        },
-
-        /**
-         * @private
-         * @member SUGAR.analytics
-         */
-        _attachAnalytics: function(el) {
-            var $el = $(el);
-            var track = ($el.attr('track') || '').trim();
-            if (track === '') return;
-            var eventArgs = this.parseTrackTag(track);
-            this._attachEvents(eventArgs.events, eventArgs.action, eventArgs.css, $el);
-        },
-
-        /**
-         * Parses track tags.
-         * @param {string} track.
-         * @return {Object}
-         * @deprecated since 7.7. Will be removed in 7.9.
-         */
-        parseTrackTag: function(track) {
-            app.logger.warn('`app.analytics.parseTrackTag()` is deprecated and will be removed in 7.9.');
-            var result = {events:'', action:'', css:''};
-            var pieces = track.split(':');
-            var actionCss = pieces[1] ? pieces[1].split('.'):pieces[0].split('.');
-            result.events = pieces[0];
-            result.action = actionCss[0];
-            result.css = actionCss[1] || '';
-            var ee = result.events.replace(this.eventSplitter,' ').split(' ');
-
-            ee = _.map(ee, function(e) {
-                return e + '.analytics';
-            });
-
-            result.events = ee.join(' ');
-            return result;
         },
 
         /**

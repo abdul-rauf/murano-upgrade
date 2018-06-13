@@ -17,8 +17,8 @@ Merr kodin API dhe atë sekret nga Google duke e regjistruar rastin tënd Sugar 
 <br/><br/>
 <ol>
 <li>Shko te faqja Zhvilluesit e Google:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Identifikohu me llogarinë në Google me të cilën dëshiron të regjistrosh aplikimin.</li>
 <li>Krijo projekt të ri</li>

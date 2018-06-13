@@ -15,6 +15,7 @@ namespace Sugarcrm\Sugarcrm\Security\Validator\Constraints;
 use Sugarcrm\Sugarcrm\Security\Validator\ConstraintReturnValueInterface;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints as Assert;
+use Sugarcrm\Sugarcrm\Security\Validator\ConstraintReturnValueTrait;
 
 /**
  *
@@ -23,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ArrayRecursive extends All implements ConstraintReturnValueInterface
 {
+    use ConstraintReturnValueTrait;
 
     /**
      * {@inheritdoc}
@@ -35,26 +37,5 @@ class ArrayRecursive extends All implements ConstraintReturnValueInterface
         }
 
         parent::__construct($options);
-    }
-
-    /**
-     * @var mixed
-     */
-    protected $formattedReturnValue;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFormattedReturnValue()
-    {
-        return $this->formattedReturnValue;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFormattedReturnValue($value)
-    {
-        $this->formattedReturnValue = $value;
     }
 }

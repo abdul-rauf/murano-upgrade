@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/connectors/ConnectorFactory.php');
 /**
  * Formatter factory
  * @api
@@ -32,7 +30,6 @@ class FormatterFactory {
 	 * @return $instance The formatter instance
 	 */
 	public static function getInstance($source_name, $formatter_name=''){
-		require_once('include/connectors/formatters/default/formatter.php');
 		$key = $source_name . $formatter_name;
 		if(empty(self::$formatter_map[$key])) {
 

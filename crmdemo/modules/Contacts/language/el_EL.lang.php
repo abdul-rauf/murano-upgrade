@@ -237,9 +237,6 @@ $mod_strings = array (
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Κύρια Ταυτότητα',
-    'LBL_DNB_BAL_PREVIEW' => 'Προεπισκόπηση Επαφών',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Επαφές',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: Πληροφορίες Επαφής',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Σημειώσεις',
 

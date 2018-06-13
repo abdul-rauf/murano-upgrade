@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! Lietotāja saskarnes bibliotēka - Lietotāja saskarnes bibliotēkas utilītprogrammas, lai realizētu bagātīgas klienta puses iespējas.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Pilnas funkcionalitātes e-pasta sūtīšanas klase priekš PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - Javascript minimizētājs, kurš izveidots izmantojot PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Ātrai divu virzienu blowfish šifrēšanai nepieprasot MCrypt paplašinājumu.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - A SAX parsētājs priekš HTML un citiem slikti veidotiem XML dokumentiem',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! Lietotāja saskarnes paplašinājumu bibliotēka - Jack Slocum izveidoti Yahoo! Lietotāja saskarnes paplašinājumi.',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Javascript Flash Player atklāšana un iebūvēts skripts.',
@@ -274,8 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Sveicināti „Sugar 7” palīdzības panelī!',
-    'LBL_HELP_RECORD' => 'Palīdzības infopaneļa sīklietotne parāda detalizētu informāciju par jūsu apskatāmo moduli, sniedz vispusīgi izstrādātus pasākumus dažu darbību veikšanai modulī un norāda jums, kurp doties, lai saņemtu pilnīgāku informāciju un atbalstu. Palīdzības infopaneļa sīklietotne paliek atvērta, tādējādi jūs varat skatīt soļus, pildot darbības modulī. Palīdzības infopaneļa sīklietotne ir pieejama visiem „Sugar 7” moduļiem, un to var turēt pozīcijā „atvērts” un „slēgts”, noklikšķinot uz ikonas „Palīdzība” lietotnes kājenē.',
+    'LBL_HELP_RECORD_TITLE' => 'Palīdzība',
+    'LBL_HELP_RECORD' => 'Palīdzība satur konkrētu informāciju par apskatāmo moduli, precīzus norādījumus dažu darbību veikšanai modulī un informāciju par to, kur var uzzināt plašāku informāciju un saņemt atbalstu.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtrs',
 );

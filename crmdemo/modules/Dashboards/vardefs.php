@@ -72,14 +72,6 @@ $dictionary['Dashboard'] = array(
             'merge_filter' => 'disabled',
             'calculated' => false,
         ),
-        'dashboard_type' => array(
-            'name' => 'dashboard_type',
-            'vname' => 'LBL_DASHBOARD_TYPE',
-            'type' => 'varchar',
-            'len' => '100',
-            'comment' => 'The type of dashboard: dashboard, help-dashboard, etc',
-            'default' => 'dashboard'
-        ),
     ),
     'indices' => array(
         array(
@@ -93,6 +85,5 @@ $dictionary['Dashboard'] = array(
 );
 
 if (!class_exists('VardefManager')) {
-    require_once('include/SugarObjects/VardefManager.php');
 }
 VardefManager::createVardef('Dashboards', 'Dashboard', array('basic', 'assignable'));

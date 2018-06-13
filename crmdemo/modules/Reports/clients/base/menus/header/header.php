@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,14 +19,7 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'icon' => 'fa-plus',
     ),
     array(
-        'route'=>'#bwc/index.php?module=Reports&favorite=1&action=index',
-        'label' =>'LBL_FAVORITE_REPORTS',
-        'acl_action'=>'list',
-        'acl_module'=>$module_name,
-        'icon' => 'fa-favorite',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=Reports&action=index',
+        'route'=>'#' . $module_name,
         'label' =>'LBL_ALL_REPORTS',
         'acl_action'=>'list',
         'acl_module'=>$module_name,

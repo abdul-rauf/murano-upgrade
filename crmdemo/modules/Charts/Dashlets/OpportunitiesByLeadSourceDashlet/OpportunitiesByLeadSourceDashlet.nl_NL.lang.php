@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,6 +14,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $dashletStrings['OpportunitiesByLeadSourceDashlet'] = array('LBL_TITLE'       => 'Alle Opportunities per Leadbron',
-                                                       'LBL_DESCRIPTION' => 'Taartgrafiek van Opportunity&#39;s per Leadbron',
+                                                       'LBL_DESCRIPTION' => 'Taartgrafiek van Opportunity\'s per Leadbron',
                                                        'LBL_REFRESH'     => 'Ververs');
 ?>

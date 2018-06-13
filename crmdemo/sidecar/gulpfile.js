@@ -10,6 +10,7 @@
  */
 
 var _ = require('lodash');
+var babel = require('gulp-babel');
 var commander = require('commander');
 var concat = require('gulp-concat');
 var os = require('os');
@@ -21,6 +22,7 @@ var sourceMaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var watch = require('gulp-watch');
 var utils = require('./gulp/util.js');
+var webpack = require('webpack');
 
 gulp.task('jscs', function () {
     var filesToLint = utils.getFilesToLint();
@@ -36,7 +38,9 @@ gulp.task('jshint', function () {
     var filesToLint = utils.getFilesToLint();
 
     return gulp.src(filesToLint)
-        .pipe(jshint())
+        .pipe(jshint({
+            esversion: 6,
+        }))
         .pipe(jshint.reporter('default'))
         .pipe(jshint.reporter('fail'));
 });
@@ -63,6 +67,10 @@ gulp.task('build:min', function() {
 
     return gulp.src(sidecarFiles, {base: 'sidecar'})
         .pipe(sourceMaps.init())
+        .pipe(babel({
+            only: utils.getFirstPartyFiles(),
+            presets: ['es2015'],
+        }))
         .pipe(concat('sidecar.min.js'))
         .pipe(uglify({
             compress: false, // FIXME SC-4953 - compressor disabled for now for performance reasons
@@ -72,12 +80,19 @@ gulp.task('build:min', function() {
         .pipe(gulp.dest('minified'));
 });
 
+gulp.task('build', function (done) {
+    return webpack(require('./webpack.config.js'), function (err) {
+        return done(err ? err : undefined);
+    });
+});
+
 gulp.task('karma', function(done) {
 
     var Server = require('karma').Server;
 
     // get command-line arguments (only relevant for karma tests)
     commander
+        .option('--zepto', 'Use zepto instead of jQuery')
         .option('-d, --dev', 'Set Karma options for debugging')
         .option('--coverage', 'Enable code coverage')
         .option('--ci', 'Enable CI specific options')
@@ -118,11 +133,14 @@ gulp.task('karma', function(done) {
         karmaOptions.browsers = commander.browsers;
     }
 
-    if (commander.coverage) {
-        karmaOptions.preprocessors = {};
+    karmaOptions.preprocessors = {};
+    _.each(_.union(firstPartyFiles, defaultTests), function (value) {
+        karmaOptions.preprocessors[value] = ['babel'];
+    });
 
+    if (commander.coverage) {
         _.each(firstPartyFiles, function (value) {
-            karmaOptions.preprocessors[value] = ['coverage'];
+            karmaOptions.preprocessors[value].push('coverage');
         });
 
         karmaOptions.reporters.push('coverage');
@@ -188,5 +206,4 @@ gulp.task('karma', function(done) {
 });
 
 gulp.task('lint', ['jscs', 'jshint']);
-gulp.task('build', ['build:min']);
 gulp.task('default', ['jshint', 'build']);

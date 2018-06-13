@@ -200,9 +200,9 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
         // must be upgrading from between 710 to 722
         if (version_compare($this->from_version, '7.1.0', '>') && version_compare($this->from_version, '7.2.2', '<')) {
             // can be files or directories
-            $this->fileToDelete('modules/WebLogicHooks/clients/base/layouts/record/record.php');
-            $this->fileToDelete('modules/WebLogicHooks/clients/base/layouts/records/records.php');
-            $this->fileToDelete('modules/WebLogicHooks/clients/base/views/list-headerpane/headerpane.php');
+            $files[] = 'modules/WebLogicHooks/clients/base/layouts/record/record.php';
+            $files[] = 'modules/WebLogicHooks/clients/base/layouts/records/records.php';
+            $files[] = 'modules/WebLogicHooks/clients/base/views/list-headerpane/headerpane.php';
         }
 
         if (version_compare($this->from_version, '7.2', '<')) {
@@ -213,7 +213,7 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             $files[] = 'modules/Notifications/clients/base/views/raw/raw.php';
         }
 
-        $this->fileToDelete($this->getStaleFilesBy7220());
+        $this->upgrader->fileToDelete($this->getStaleFilesBy7220(), $this);
 
         if (version_compare($this->from_version, '7.5', '<=')) {
             $files[] = 'sidecar/lib/jquery/jquery.placeholder.min.js';
@@ -511,7 +511,45 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             $files[] = 'upgrade/scripts/post/7_FixCallsMeetingsReminderSelection.php';
             $files[] = 'vendor/sabre';
         }
-        $this->fileToDelete($files);
+
+        if (version_compare($this->from_version, '7.9.0.0', '<')) {
+            $files[] = 'sidecar/src/utils/file.js';
+            $files[] = 'clients/base/fields/dnb-bal-import-menu-label';
+            $files[] = 'clients/base/fields/dnbenum';
+            $files[] = 'clients/base/layouts/dnb-bal';
+            $files[] = 'clients/base/views/dnb';
+            $files[] = 'clients/base/views/dnb-account-create';
+            $files[] = 'clients/base/views/dnb-bal-header';
+            $files[] = 'clients/base/views/dnb-bal-params';
+            $files[] = 'clients/base/views/dnb-bal-results';
+            $files[] = 'clients/base/views/dnb-company-info';
+            $files[] = 'clients/base/views/dnb-competitors';
+            $files[] = 'clients/base/views/dnb-contact-info';
+            $files[] = 'clients/base/views/dnb-family-tree';
+            $files[] = 'clients/base/views/dnb-financial-info';
+            $files[] = 'clients/base/views/dnb-industry-info';
+            $files[] = 'clients/base/views/dnb-lite-company-info';
+            $files[] = 'clients/base/views/dnb-meter';
+            $files[] = 'clients/base/views/dnb-news-and-media';
+            $files[] = 'clients/base/views/dnb-premium-company-info';
+            $files[] = 'clients/base/views/dnb-standard-company-info';
+            $files[] = 'clients/base/api/DnbApi.php';
+            $files[] = 'include/api/help/dnb_bulkimport_help.html';
+            $files[] = 'include/api/help/dnb_get_help.html';
+            $files[] = 'include/api/help/dnb_post_help.html';
+            $files[] = 'include/externalAPI/Dnb';
+            $files[] = 'modules/Accounts/clients/base/views/dnb-bal-params';
+            $files[] = 'modules/Accounts/clients/base/views/dnb-bal-results';
+            $files[] = 'modules/Connectors/connectors/formatters/ext/rest/dnb';
+            $files[] = 'modules/Connectors/connectors/sources/ext/rest/dnb';
+            $files[] = 'styleguide/less/clients/base/components/dnb-dashlets.less';
+        }
+
+        if (version_compare($this->from_version, '7.9.0.0', '<')) {
+            $files[] = 'modules/Reports/clients/base/layouts/records';
+        }
+
+        $this->upgrader->fileToDelete($files, $this);
     }
 
     /**
@@ -819,7 +857,7 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
                 'modules/ProductBundleNotes/clients',
                 'modules/ProductBundles/clients',
                 'modules/Products/clients/base/views/list-headerpane',
-                'modules/ProjectResources/clients',
+                'modules/ProjectResources',
                 'modules/ProjectTask/clents',
                 'modules/Relationships/clients',
                 'modules/RevenueLineItems/clients/base/views/list-headerpane',

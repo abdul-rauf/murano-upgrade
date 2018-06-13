@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 require_once("include/EditView/EditView2.php");
-require_once("include/upload_file.php");
 
 class ViewConvertLead extends SugarView
 {
@@ -71,11 +69,10 @@ class ViewConvertLead extends SugarView
         $ev->view = "ConvertLead";
         echo $this->getModuleTitle();
 
-        require_once("include/QuickSearchDefaults.php");
         $qsd = QuickSearchDefaults::getQuickSearchDefaults();
         $qsd->setFormName("ConvertLead");
 
-        $this->contact = BeanFactory::getBean('Contacts');
+        $this->contact = BeanFactory::newBean('Contacts');
         // Bug #50126 We have to fill account_name & add ability to select account from popup with pre populated name
         
         /*
@@ -149,7 +146,7 @@ class ViewConvertLead extends SugarView
 
         foreach($this->defs as $module => $vdef)
         {
-            $focus = BeanFactory::getBean($module);
+            $focus = BeanFactory::newBean($module);
 
             // skip if we aren't allowed to save this bean
             if (empty($focus) || !$focus->ACLAccess('save'))
@@ -225,7 +222,7 @@ class ViewConvertLead extends SugarView
 
     protected function getRecord()
     {
-    	$this->focus = BeanFactory::getBean('Leads');
+    	$this->focus = BeanFactory::newBean('Leads');
     	if (isset($_REQUEST['record']))
     	{
     		$this->focus->retrieve($_REQUEST['record']);
@@ -342,7 +339,7 @@ class ViewConvertLead extends SugarView
         $selectedBeans = array();
         $selects = array();
         //Make sure the contact object is availible for relationships.
-        $beans['Contacts'] = BeanFactory::getBean('Contacts');
+        $beans['Contacts'] = BeanFactory::newBean('Contacts');
         $beans['Contacts']->id = create_guid();
         $beans['Contacts']->new_with_id = true;
 
@@ -359,7 +356,6 @@ class ViewConvertLead extends SugarView
         }
         elseif (!empty($_REQUEST["convert_create_Contacts"]) && $_REQUEST["convert_create_Contacts"] != "false" && !isset($_POST['ContinueContact']))
         {
-            require_once('modules/Contacts/ContactFormBase.php');
             $contactForm = new ContactFormBase();
             $duplicateContacts = $contactForm->checkForDuplicates('Contacts');
 
@@ -381,7 +377,6 @@ class ViewConvertLead extends SugarView
         }
         elseif (!empty($_REQUEST["convert_create_Accounts"]) && $_REQUEST["convert_create_Accounts"] != "false" && empty($_POST['ContinueAccount']))
         {
-            require_once('modules/Accounts/AccountFormBase.php');
             $accountForm = new AccountFormBase();
             $duplicateAccounts = $accountForm->checkForDuplicates('Accounts');
             if (isset($duplicateAccounts))
@@ -398,7 +393,7 @@ class ViewConvertLead extends SugarView
             {
                 //Save the new record
 	            if (empty($beans[$module]))
-	            	$beans[$module] = BeanFactory::getBean($module);
+	            	$beans[$module] = BeanFactory::newBean($module);
 
             	$this->populateNewBean($module, $beans[$module], $beans['Contacts'], $lead);
 
@@ -529,7 +524,7 @@ class ViewConvertLead extends SugarView
             }
 
             //iterate through each field in field map and check meta for calculated fields
-            foreach ($bean->field_name_map as $calcFieldDefs) {
+            foreach ($bean->field_defs as $calcFieldDefs) {
                 if (!empty($calcFieldDefs['calculated'])) {
                     //bean has a calculated field, lets add it to the array for later processing
                     $calcFieldBeans[] = $bean;

@@ -17,8 +17,8 @@ Obţineţi o Cheie API şi Secret de la Google înregistrându-vă instanţa Sug
 <br/><br/>
 <ol>
 <li>Accesaţi Site-ul pentru dezvoltatori Google:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Faceţi sign in folosind contul Google pentru care aţi dori să înregistraţi aplicaţia.</li>
 <li>Creaţi un proiect nou</li>

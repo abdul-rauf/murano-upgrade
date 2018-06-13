@@ -28,18 +28,10 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'icon' => 'fa-bars',
     ),
     array(
-        'route' => '#bwc/index.php?' . http_build_query(
-            array(
-                'module' => 'Reports',
-                'action' => 'index',
-                'view' => $module_name,
-                'query' => 'true',
-                'report_module' => $module_name,
-            )
-        ),
+        'route' => '#Reports?filterModule=' . $module_name,
         'label' =>'LNK_ACCOUNT_REPORTS',
         'acl_action'=>'list',
-        'acl_module'=>$module_name,
+        'acl_module' => 'Reports',
         'icon' => 'fa-bar-chart-o',
     ),
     array(
@@ -54,11 +46,5 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'acl_action'=>'import',
         'acl_module'=>$module_name,
         'icon' => 'fa-arrow-circle-o-up',
-    ),
-    array(
-        'type' => 'dnb-bal-import-menu-label',
-        'default_value' => 'LBL_BAL',
-        'icon' => 'fa-arrow-circle-o-up',
-        'route' => '#'.$module_name.'/layout/dnb-bal',
     ),
 );

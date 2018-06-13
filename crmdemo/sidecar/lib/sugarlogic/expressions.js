@@ -543,19 +543,9 @@ var SEP = SUGAR.expressions.ExpressionParser = function() {
 
 SEP.prototype.getFieldsFromExpression = function(expression)
 {
-    var i,
-        len,
-        matches = [],
-        re = /\$\w+/g,
-        result = expression.match(re);
-    if (null === result) {
-        return [];
-    }
-    len = result.length;
-    for (i = 0; i < len; i++) {
-        matches.push(result[i].substr(1));
-    }
-    return matches;
+    return _.map(expression.match(/\$(\w+)/g), function (match) {
+        return match.replace(/\$/g, '');
+    });
 }
 
 

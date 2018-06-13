@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,9 +10,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('data/BeanFactory.php');
 require_once('include/download_file.php');
-require_once('modules/Reports/ReportCache.php');
 /**
  * @api
  */
@@ -41,7 +38,7 @@ class ReportsExportApi extends SugarApi {
      * @param array $args Arguments array built by the service base
      * @return binary file
      */
-    public function exportRecord($api, $args)
+    public function exportRecord(ServiceBase $api, array $args)
     {
 
         $this->requireArgs($args,array('record', 'export_type'));

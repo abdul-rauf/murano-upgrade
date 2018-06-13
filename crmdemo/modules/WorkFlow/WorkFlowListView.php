@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -25,8 +24,8 @@ if (!is_admin($current_user) && empty($workflow_modules))
    sugar_die("Unauthorized access to WorkFlow.");
 }
 
-$seedEmailTemplate = BeanFactory::getBean('EmailTemplates');
-$workflow_object = BeanFactory::getBean('WorkFlow');
+$seedEmailTemplate = BeanFactory::newBean('EmailTemplates');
+$workflow_object = BeanFactory::newBean('WorkFlow');
 global $app_strings;
 global $app_list_strings;
 global $mod_strings;
@@ -43,7 +42,6 @@ global $focus_list;
 
 echo getClassicModuleTitle($mod_strings['LBL_MODULE_ID'], array($mod_strings['LBL_ALERT_TEMPLATES']), true); 
 
-require_once('modules/MySettings/StoreQuery.php');
 $storeQuery = new StoreQuery();
 if(!isset($_REQUEST['query'])){
 	$storeQuery->loadQuery($currentModule);

@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarFields/Fields/Base/SugarFieldBase.php');
 
 class SugarFieldEncrypt extends SugarFieldBase
 {
@@ -31,7 +27,7 @@ class SugarFieldEncrypt extends SugarFieldBase
     {
         if ($this->allowRead($vardef)) {
             // Uncrypt the value
-            $account = BeanFactory::getBean('Empty');
+            $account = BeanFactory::newBean('Empty');
 
             return $account->decrypt_after_retrieve($inputField);
         }

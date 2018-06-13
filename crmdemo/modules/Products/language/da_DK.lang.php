@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Angiven linjepost',
     'LBL_LIST_MANUFACTURER' => 'Producent',
     'LBL_MANUFACTURERS' => 'Producenter',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Prod.nr.',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Artikelnummer',
     'LBL_LIST_QUANTITY' => 'Mængde',
     'LBL_LIST_COST_PRICE' => 'Omkostninger',
     'LBL_LIST_DISCOUNT_PRICE' => 'Pris',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Vælg rabat',
     'LBL_LIST_PRICE' => 'Listepris:',
     'LBL_VENDOR_PART_NUM' => 'Leverandørs artikelnummer:',
-    'LBL_MFT_PART_NUM' => 'Prod. artikelnummer:',
+    'LBL_MFT_PART_NUM' => 'Artikelnummer:',
     'LBL_NEXT_STEP' => 'Næste trin:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Rabatpris, dato:',
     'LBL_WEIGHT' => 'Vægt:',
@@ -168,6 +168,8 @@ For at oprette en {{module_name}}:.
 - Klik på "Vis mere" for at eksponere yderligere felter, hvis det er nødvendigt. 
 2. Klik på "Gem" for at færdiggøre den nye post og vend tilbage til den forrige side.',
 
-    'LBL_MANUFACTURERS' => 'Producenter',
     'LBL_PRODUCT_POSITION' => 'Produkt bundt placering',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Angivne linjepunkter tilbudsdataliste',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nyt angivet linjepunkt)',
+    'LBL_DISCOUNT_PERCENT' => '% procent',
 );

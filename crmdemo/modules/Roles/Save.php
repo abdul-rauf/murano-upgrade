@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,7 +16,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 
 
-$focus = BeanFactory::getBean('Roles');
+$focus = BeanFactory::newBean('Roles');
 
 $tabs_def = urldecode($_REQUEST['display_tabs_def']);
 $tabs_hide = urldecode($_REQUEST['hide_tabs_def']);

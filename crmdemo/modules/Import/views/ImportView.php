@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/MVC/View/SugarView.php');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
@@ -174,7 +172,7 @@ class ImportView extends SugarView
     protected function getSavedImportSourceOptions($published = true)
     {
         $results = array();
-        $import_map_seed = BeanFactory::getBean('Import_1');
+        $import_map_seed = BeanFactory::newBean('Import_1');
         $publishedImportOptions = $import_map_seed->retrieve_all_by_string_fields(array(
             'is_published' => $published ? 'yes' : 'no',
             'module' => $this->importModule

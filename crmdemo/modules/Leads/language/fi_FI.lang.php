@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Muokkaa' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B-esimiehen Id',
-    'LBL_DNB_BAL_PREVIEW' => 'Liidien esikatselu',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Liidit',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: liiditiedot',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Myyntimahdollisuudet',
 

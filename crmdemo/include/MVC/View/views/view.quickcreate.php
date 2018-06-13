@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,7 +13,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
-require_once('include/MVC/View/views/view.ajax.php');
 require_once('include/EditView/EditView2.php');
 
 class ViewQuickcreate extends ViewAjax
@@ -48,7 +46,7 @@ class ViewQuickcreate extends ViewAjax
     public function preDisplay()
     {
     	if(!empty($_REQUEST['source_module']) && $_REQUEST['source_module'] != 'undefined' && !empty($_REQUEST['record'])) {
-			$this->bean = BeanFactory::getBean($_REQUEST['source_module']);
+			$this->bean = BeanFactory::newBean($_REQUEST['source_module']);
 			if ( $this->bean instanceOf SugarBean
 			        && !in_array($this->bean->object_name,array('EmailMan')) ) {
                 $this->bean->retrieve($_REQUEST['record']);
@@ -60,7 +58,7 @@ class ViewQuickcreate extends ViewAjax
 
                 //Now preload any related fields
 			    if(isset($_REQUEST['module'])) {
-                	$target_bean = BeanFactory::getBean($_REQUEST['module']);
+                	$target_bean = BeanFactory::newBean($_REQUEST['module']);
 	                foreach($target_bean->field_defs as $fields) {
 	                	if($fields['type'] == 'relate' && isset($fields['module']) && $fields['module'] == $_REQUEST['source_module'] && isset($fields['rname'])) {
 	                	   $rel_name = $fields['rname'];
@@ -131,7 +129,7 @@ class ViewQuickcreate extends ViewAjax
 
 		            $view->ev = $this->ev;
 		            $view->ss = $this->ev->ss;
-		            $view->bean = BeanFactory::getBean($module);
+		            $view->bean = BeanFactory::newBean($module);
 					$view->ev->formName = 'form_DC'.$view->ev->view .'_'.$module;
 					$view->showTitle = false; // Do not show title since this is for subpanel
 		            $view->display();

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,8 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
-require_once('include/ListView/ListViewDisplay.php');
-require_once('include/contextMenus/contextMenu.php');
 
 class ListViewSmarty extends ListViewDisplay{
 
@@ -37,14 +34,6 @@ class ListViewSmarty extends ListViewDisplay{
     var $contextMenus = true;
     var $showMassupdateFields = true;
     var $menu_location = 'top';
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ListViewSmarty(Request $request = null)
-    {
-        self::__construct($request);
-    }
 
     /**
      * Constructor, Smarty object immediately available after
@@ -242,3 +231,4 @@ class ListViewSmarty extends ListViewDisplay{
         return $str;
     }
 }
+

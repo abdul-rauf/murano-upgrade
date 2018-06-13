@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -52,10 +51,6 @@ $xtpl->assign('BASE_MODULE', $focus->base_module);
 
 global $current_user;
 
-//if(is_admin($current_user) && $_REQUEST['module'] != 'DynamicLayout' && !empty($_SESSION['editinplace'])){
-//	$xtpl->assign("ADMIN_EDIT","<a href='index.php?action=index&module=DynamicLayout&from_action=".$_REQUEST['action'] ."&from_module=".$_REQUEST['module'] ."&record=".$_REQUEST['record']. "'>".SugarThemeRegistry::current()->getImage("EditLayout","border='0' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDITLAYOUT'])."</a>");
-//}
-
 // adding custom fields:
 require_once('modules/DynamicFields/templates/Files/DetailView.php');
 
@@ -70,7 +65,6 @@ $sub_xtpl = $xtpl;
 $old_contents = ob_get_contents();
 ob_end_clean();
 
-//if(array_key_exists('WorkFlowTriggers', $modListHeader)){
 if($sub_xtpl->var_exists('subpanel', 'SUBTRIGGERS')){
 	ob_start();
 echo "<p>\n";
@@ -83,7 +77,6 @@ echo "</p>\n";
 $subtriggers =  ob_get_contents();
 ob_end_clean();
 }
-//}
 
 echo "ALERT SUB PANEL<BR>";
 

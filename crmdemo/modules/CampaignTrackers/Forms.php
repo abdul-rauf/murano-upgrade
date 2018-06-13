@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -95,7 +94,7 @@ function get_new_record_form () {
 	$the_form .= $form->text('main');
 
 	
-	$focus = BeanFactory::getBean('Campaigns');
+	$focus = BeanFactory::newBean('Campaigns');
 	
 	
 	$javascript = new javascript();

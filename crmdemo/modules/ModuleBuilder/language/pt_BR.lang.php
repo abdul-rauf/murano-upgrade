@@ -301,7 +301,6 @@ Se Oportunidades estiver incluído, Contas ou deve ser obrigatório ou deve ser 
         'moduleBtn'	=> 'Clique para editar este módulo.',
         'moduleHelp'=> 'Selecione o componente do módulo que deseja editar',
         'fieldsBtn'	=> 'Edite a informação que está armazenada no módulo controlando os <b>Campos</b> no módulo.<br/><br/>Você pode editar e criar campos personalizados aqui.',
-        'labelsBtn' => 'Clique em <b>Salvar</b> para salvar os rótulos personalizados.'	,
         'layoutsBtn'=> 'Personalize os <b>Layouts</b> das visualizações de Edição, Detalhe, Lista e pesquisa.',
         'subpanelBtn'=> 'Edite qual a informação será exibida nos subpainéis deste módulo.',
         'layoutsHelp'=> 'Selecione o <b>Layout a editar</b>.<br/<br/>Para alterar o layout que contém campos de dados para inserir dados, clique em <b>Visualização de edição</b>.<br/><br/>Para alterar o layout que exibe os dados inseridos nos campos da Visualização de edição, clique em <b>Visualização de detalhes</b>.<br/><br/>Para alterar as colunas que aparecem na lista por padrão, clique na <b>Visualização de Lista</b>.<br/><br/>Para alterar o layout do formulário de pesquisa Básica e Avançada, clique <b>Pesquisa</b>.',
@@ -736,10 +735,10 @@ Se Oportunidades estiver incluído, Contas ou deve ser obrigatório ou deve ser 
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Tem certeza de que deseja excluir a fase de vendas Fechadas perdidas? Excluir esta fase fará com que o módulo Previsão não funcione corretamente',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Tem certeza de que deseja excluir este relacionamento?<br>Nota: Esta operação pode levar alguns minutos para ser concluída.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Isso tornará este relacionamento permanente. Tem certeza de que pretende implementar este relacionamento?',
 'LBL_CONFIRM_DONT_SAVE' => 'Foram feitas alterações desde o último salvamento, gostaria de salvar?',

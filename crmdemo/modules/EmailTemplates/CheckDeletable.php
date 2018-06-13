@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,9 +17,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-require_once('modules/EmailTemplates/EmailTemplate.php');
 
-$focus = BeanFactory::getBean('EmailTemplates');
+$focus = BeanFactory::newBean('EmailTemplates');
 if($_REQUEST['from'] == 'DetailView') {
 	if(!isset($_REQUEST['record']))
 		sugar_die("A record number must be specified to delete the template.");

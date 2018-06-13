@@ -17,8 +17,8 @@ Regisztrálja Sugar példányát új alkalmazásként, és szerezzen a Google-t�
 <br/><br/>
 <ol>
 <li>Látogasson el a Google Developers oldalra:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Jelentkezzen be azzal a Google fiókkal, amely alá regisztrálni szeretné az alkalmazást.</li>
 <li>Hozzon létre új projektet.</li>

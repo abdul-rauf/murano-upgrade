@@ -17,8 +17,8 @@ Uzyskaj klucz API i tajny klucz od firmy Google, rejestrując swoją instancję 
 <br/><br/>
 <ol>
 <li>Przejdź do strony Google Developers:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Zaloguj się do konta Google, dla którego chcesz zarejestrować aplikację.</li>
 <li>Utwórz nowy projekt</li>

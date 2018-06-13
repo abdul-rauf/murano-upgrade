@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -438,7 +437,7 @@ EOQ;
 
 				global $current_language;
 				$mods = return_module_language($current_language, 'DynamicLayout');
-				$mod = BeanFactory::getBean($module);
+				$mod = BeanFactory::newBean($module);
 
 				$this->populateRequestFromBuffer($file);
 				$mod->assign_display_fields($module);

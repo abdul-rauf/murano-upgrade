@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'Kliens jelentések',
   'LBL_CONTACT_REPORTS' => 'Kapcsolat jelentések',
   'LBL_OPPORTUNITY_REPORTS' => 'Lehetőségek kimutatásai',
+    'LBL_RECENTLY_MODIFIED' => 'Nemrégiben módosítva',
 
   'LBL_CASE_REPORTS' => 'Eset jelentések',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'Következő 30 nap',
   'LBL_THIS_YEAR'=>'Aktuális év',
   'LBL_LIST_FORM_TITLE' =>'Jelentések',
+  'LBL_LIST_REPORT_NAME' => 'Név',
   'LBL_PROSPECT_REPORTS'=>'Cél jelentések',
   'LBL_CHART_TYPE'=>'Diagramtípus',
   'LBL_IS_EMPTY'=>'Üres',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"Szűrők meghatározásának lépései:<br />1. Kattintson arra Modulra a Kapcsolódó modulok mezőben, amelyet a szűrők meghatározására kíván használni. Az alapértelmezés szerint az első modul kerül kiválasztásra.<br />Választhat egy kapcsolódó modult a modulra kattintással, illetve választhat a kapcsolódó modulhoz kapcsolódó modulok közül is. A kiválasztott modul meghatározza az Elérhető mezők-ben megjelenő mezőket.<br />2. Kattintson egy mezőre az Elérhető mezők-ben a szűrőkhöz való hozzáadáshoz. Egy mező kereséséhez írja be a nevét a Keresőbe!<br />Miután kiválasztott tetszőleges számú mezőt a modulból, választhat másik modul mezői közül is.<br />3. Válassza az AND vagy OR logikai műveletet annak meghatározására, hogy a szűrési feltételek egyszerre, vagy egyenként teljesüljenek a keresés során!<br />4. [Nem kötelező] Kattintson a Szűrőcsoport hozzáadása gombra szűrőcsoport létrehozásához. Tetszőleges számú csoportot és azokon belül tetszőleges számú szűrőt hozhat létre.<br />5. [Nem kötelező] Válassza a Run-time beállítást, ha engedélyezi a felhasználóknak hogy a megjelenő eredményen további szűréseket végezzenek, és azok valós időben alkalmazásra kerüljenek.",
 	'LBL_GROUP_BY_HELP_DESC'=>"Csoport meghatározásának lépései:<br />1. Kattintson arra a Modulra a Kapcsolódó modulok mezőben, amelyet a rekordok csoportosítására kíván használni. Az alapértelmezés szerint az első modul kerül kiválasztásra.<br />Választhat egy kapcsolódó modult a modulra kattintással, illetve választhat a kapcsolódó modulhoz kapcsolódó modulok közül is. A kiválasztott modul meghatározza az Elérhető mezők-ben megjelenő mezőket.<br />2. Kattintson egy Mezőre az Elérhető mezők-ben a rekordok jelentésben megjelenítendő csoportosításához. Egy mező kereséséhez írja be a nevét a Keresőbe!<br />Miután kiválasztott tetszőleges számú mezőt a modulból, választhat másik modul mezői közül is. Elképzelhető azonban, hogy a jelentés olvashatatlanná válik, ha a szükségesnél több mezőt csoportosít.<br />Megváltoztathatja a mezők sorrendjét, azok kívánt sorrendbe húzásával. A sorrend megváltoztatása kihat az eredmények megjelenítésére.<br />A Mátrix jelentéseknél legfeljebb három mező csoportosítására van lehetőség.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"Megjelenítendő oszlopok kiválasztásának lépései:<br />1. Kattintson arra a Modulra a Kapcsolódó modulok mezőben, amelyet az adatok megjelenítésére kíván használni. Az alapértelmezés szerint az az első modul kerül kiválasztásra, amit a Modul kiválasztása lépésnél ad meg.<br />Választhat egy kapcsolódó modult a modulra kattintással, illetve választhat a kapcsolódó modulhoz kapcsolódó modulok közül is. A kiválasztott modul meghatározza az Elérhető mezők-ben megjelenő mezőket.<br />2. Kattintson egy Mezőre az Elérhető mezők-ben a mező adatainak jelentésben szereplő rekordos megjelenítéséhez. Egy mező kereséséhez írja be a nevét a Keresőbe!<br />Miután kiválasztott tetszőleges számú mezőt a modulból, választhat másik modul mezői közül is. Tetszőleges számú mezőt választhat ki, viszont a jelentés összeállítása nagyon lelassulhat vagy a végeredmény olvashatatlanná válhat, ha a szükségesnél több mezőt ad hozzá.<br />Megváltoztathatja a mezők sorrendjét, azok kívánt sorrendbe húzásával. A sorrend megváltoztatása kihat az eredmény oszlopainak megjelenítésére." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Megjelenítendő összesítés-összegzések kiválasztásának lépései:</b><br/><br/>1) Kattintson arra a Modulra a <b>Kapcsolódó modulok </b> mezőben, amelyet a jelentésben lévő összegzésekhez kíván használni. Az alapértelmezés szerint az elsődleges modul (a fa nézetben a legfelső) kerül kiválasztásra.<br/><br/> Választhat egy kapcsolódó modult (fa nézetben gyermek modul) a modulra kattintással. A kiválasztott modul meghatározza az <b>Elérhető mezők</b>-ben megjelenő mezőket.<br/><br/>2) Kattintson egy Mezőre az <b>Elérhető mezők</b> panelen az összegzések kiválasztásához a jelentéshez. Az adott mezőre rákereshet úgy is, hogy beír a szövegdobozba a panelen.<br/><br/> Miután kiválasztott tetszőleges számú mezőt a <b>Kapcsolódó modulok</b> panelen kiválasztott modul mezőiből, választhat egy másik modult, amelyből kiválaszthat további mezőket a jelentése összegzéseihez.<br/><br/> Mátrixjelentések esetében egynél több mezőt is kiválaszthat, így több értéket jeleníthet meg egyetlen cellán belül a jelentésében." ,
 
 	'LBL_ALT_SHOW' => 'Mutat',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'Ez a jelentés az adatokat a következő oszloprendezettség szerint tartalmazza:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'Fel' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'Információ',
     'LBL_REPORT_GRAND_TOTAL' => "Mindösszesen",
+    'LBL_EDIT_REPORT_BUTTON' => 'Jelentés szerkesztése',
 
     'LBL_REPORTS_TO' => 'Jelentést tesz neki:',
     'LBL_LESS_THAN_EQUAL' => 'egyenlőnél kevesebbet',

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -70,7 +69,6 @@ $xtpl->assign("LIST_ORDER", $focus->list_order);
 $xtpl->parse("main");
 $xtpl->out("main");
 
-require_once('include/SubPanel/SubPanelTiles.php');
 $subpanel = new SubPanelTiles($focus, 'ContractTypes');
 echo $subpanel->display();
 ?>

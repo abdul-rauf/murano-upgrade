@@ -85,14 +85,6 @@ class SugarView
     protected $request;
 
     /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarView($bean = null, $view_object_map = array(), Request $request = null)
-    {
-        self::__construct($bean, $view_object_map, $request);
-    }
-
-    /**
      * Ctor
      * @param SugarBean $bean
      * @param array $view_object_map
@@ -173,35 +165,6 @@ class SugarView
         if ($this->_getOption('show_footer')) $this->displayFooter();
         $GLOBALS['logic_hook']->call_custom_logic('', 'after_ui_footer');
 
-
-        // TODO no more ajaxUI?
-        /*
-        if ($this->_getOption('json_output'))
-        {
-            $content = ob_get_clean();
-            $module = $this->module;
-            $ajax_ret = array(
-                'content' => mb_detect_encoding($content) == "UTF-8" ? $content : utf8_encode($content),
-                 'menu' => array(
-                     'module' => $module,
-                     'label' => translate($module),
-                     $this->getMenu($module),
-                 ),
-                'title' => $this->getBrowserTitle(),
-                'action' => isset($_REQUEST['action']) ? $_REQUEST['action'] : "",
-                'record' => isset($_REQUEST['record']) ? $_REQUEST['record'] : "",
-                'favicon' => $this->getFavicon(),
-            );
-
-            if(empty($this->responseTime))
-                $this->_calculateFooterMetrics();
-            $ajax_ret['responseTime'] = $this->responseTime;
-            $json = getJSONobj();
-            echo $json->encode($ajax_ret);
-            $GLOBALS['app']->headerDisplayed = false;
-            ob_flush();
-        }
-        */
         //Do not track if there is no module or if module is not a String
         $this->_track();
     }
@@ -293,7 +256,7 @@ class SugarView
      * Displays the header on section of the page; basically everything before the content
      * @deprecated since 7.0, will be removed from 7.2.
      */
-    public function displayHeader($retModTabs=false)
+    public function displayHeader()
     {
         global $theme;
         global $max_tabs;
@@ -460,7 +423,7 @@ class SugarView
             $ss->assign("CURRENT_USER_ID", $current_user->id);
 
             // get the last viewed records
-            $tracker = BeanFactory::getBean('Trackers');
+            $tracker = BeanFactory::newBean('Trackers');
             $history = $tracker->get_recently_viewed($current_user->id);
             $ss->assign("recentRecords",$this->processRecentRecords($history));
         }
@@ -540,7 +503,6 @@ class SugarView
         echo '<script>jscal_today = 1000*' . $timedate->asUserTs($timedate->getNow()) . '; if(typeof app_strings == "undefined") app_strings = new Array();</script>';
         if (!is_file(sugar_cached("include/javascript/sugar_grp1.js"))) {
             $_REQUEST['root_directory'] = ".";
-            require_once("jssource/minify_utils.php");
             $minifyUtils = new SugarMinifyUtils();
             $minifyUtils->ConcatenateFiles(".");
         }
@@ -588,13 +550,16 @@ EOQ;
         $time_separator = $timedate->timeSeparator();
         $hour_offset = $timedate->getUserUTCOffset() * 60;
 
+        // Escape the time separator if it is a period.
+        $timeFormat = $time_separator === '.' ? preg_replace('/\./', '\\.', $timereg['format']) : $timereg['format'];
+
         // Add in the number formatting styles here as well, we have been handling this with individual modules.
         require_once ('modules/Currencies/Currency.php');
         list ($num_grp_sep, $dec_sep) = get_number_seperators();
 
         $the_script = "<script type=\"text/javascript\">\n" . "\tvar time_reg_format = '" .
-             $timereg['format'] . "';\n" . "\tvar date_reg_format = '" .
-             $datereg['format'] . "';\n" . "\tvar date_reg_positions = { $date_pos };\n" .
+             addslashes($timeFormat) . "';\n" . "\tvar date_reg_format = '" .
+             addslashes($datereg['format']) . "';\n" . "\tvar date_reg_positions = { $date_pos };\n" .
              "\tvar time_separator = '$time_separator';\n" .
              "\tvar cal_date_format = '$cal_date_format';\n" .
              "\tvar time_offset = $hour_offset;\n" . "\tvar num_grp_sep = '$num_grp_sep';\n" .
@@ -662,7 +627,6 @@ EOHTML;
             echo '<script type="text/javascript">var name_format = "' . $locale->getLocaleFormatMacro() . '";</script>';
             echo self::getJavascriptValidation();
             if (!is_file(sugar_cached('jsLanguage/') . $GLOBALS['current_language'] . '.js')) {
-                require_once ('include/language/jsLanguage.php');
                 jsLanguage::createAppStringsCache($GLOBALS['current_language']);
             }
             echo getVersionedScript('cache/jsLanguage/'. $GLOBALS['current_language'] . '.js', $GLOBALS['sugar_config']['js_lang_version']);
@@ -682,7 +646,6 @@ EOHTML;
                 : 'cache/Expressions/functions_cache_debug.js';
             echo getVersionedScript($path);
 
-            require_once("include/Expressions/DependencyManager.php");
             echo "\n" . '<script type="text/javascript">' . DependencyManager::getJSUserVariables($GLOBALS['current_user']) . "</script>\n";
 
             //echo out the $js_vars variables as javascript variables
@@ -697,7 +660,6 @@ EOHTML;
 
 	protected function _getModLanguageJS(){
 		if (!is_file(sugar_cached('jsLanguage/') . $this->module . '/' . $GLOBALS['current_language'] . '.js')) {
-			require_once ('include/language/jsLanguage.php');
 			jsLanguage::createModuleStringsCache($this->module, $GLOBALS['current_language']);
 		}
 		return getVersionedScript("cache/jsLanguage/{$this->module}/". $GLOBALS['current_language'] . '.js', $GLOBALS['sugar_config']['js_lang_version']);
@@ -840,7 +802,6 @@ EOHTML;
         $ss->assign('COPYRIGHT',$copyright);
         if(isset($GLOBALS['current_user']) && !empty($GLOBALS['current_user']->id))
         {
-            require_once('include/DashletContainer/DCFactory.php');
             $dcm = DCFactory::getContainer(null, 'DCMenu');
             $ss->assign('DYNAMICDCACTIONS',$dcm->getPartnerIconMenus());
         }
@@ -876,7 +837,6 @@ EOHTML;
             (SugarAutoLoader::existingCustom('modules/' . $this->module . '/metadata/subpaneldefs.php') ||
              SugarAutoLoader::loadExtension("layoutdefs", $this->module))) {
             $GLOBALS['focus'] = $this->bean;
-            require_once ('include/SubPanel/SubPanelTiles.php');
             $subpanel = new SubPanelTiles($this->bean, $this->module);
             echo $subpanel->display();
         }
@@ -981,7 +941,6 @@ EOHTML;
         $deltaTime = $endTime - $GLOBALS['startTime'];
         $response_time_string = $GLOBALS['app_strings']['LBL_SERVER_RESPONSE_TIME'] . ' ' . number_format(round($deltaTime, 2), 2) . ' ' . $GLOBALS['app_strings']['LBL_SERVER_RESPONSE_TIME_SECONDS'];
         $return = $response_time_string;
-       // $return .= '<br />';
         if (!empty($GLOBALS['sugar_config']['show_page_resources'])) {
             // Print out the resources used in constructing the page.
             $included_files = get_included_files();
@@ -1133,8 +1092,6 @@ EOHTML;
         // Default anonymous pages to be under Home
         elseif ( !isset($app_list_strings['moduleList'][$this->module]) )
             return $defaultTab;
-//        elseif ( isset($_REQUEST['action']) && $_REQUEST['action'] == "ajaxui" )
-//        	return $defaultTab;
         else
             return $this->module;
     }
@@ -1183,7 +1140,14 @@ EOHTML;
         if($show_help) {
             $theTitle .= "<span class='utils'>";
             $createImageURL = SugarThemeRegistry::current()->getImageURL('create-record.gif');
-            $url = ajaxLink("index.php?module=$module&action=EditView&return_module=$module&return_action=DetailView");
+            $url = 'index.php?' . http_build_query(
+                array(
+                    'module' => $module,
+                    'action' => 'EditView',
+                    'return_module' => $module,
+                    'return_action' => 'DetailView',
+                )
+            );
             $theTitle .= <<<EOHTML
 &nbsp;
 <a id="create_image" href="{$url}" class="utilsLink">
@@ -1224,7 +1188,6 @@ EOHTML;
     protected function _getModuleTitleParams($browserTitle = false)
     {
         $params = array($this->_getModuleTitleListParam($browserTitle));
-		//$params = array();
         if (isset($this->action)){
             switch ($this->action) {
             case 'EditView':
@@ -1261,36 +1224,28 @@ EOHTML;
      */
     protected function _getModuleTitleListParam( $browserTitle = false )
     {
-    	global $current_user;
-    	global $app_strings;
+        global $current_user;
+        global $app_strings;
 
-    	if(!empty($GLOBALS['app_list_strings']['moduleList'][$this->module]))
-    		$firstParam = $GLOBALS['app_list_strings']['moduleList'][$this->module];
-    	else
-    		$firstParam = $this->module;
+        if (!empty($GLOBALS['app_list_strings']['moduleList'][$this->module])) {
+            $firstParam = $GLOBALS['app_list_strings']['moduleList'][$this->module];
+        } else {
+            $firstParam = $this->module;
+        }
 
     	$iconPath = $this->getModuleTitleIconPath($this->module);
-    	if($this->action == "ListView" || $this->action == "index") {
-    	    if (!empty($iconPath) && !$browserTitle) {
-    	    	if (SugarThemeRegistry::current()->directionality == "ltr") {
-    	    		return $app_strings['LBL_SEARCH']."&nbsp;"
-    	    			 . "$firstParam";
 
-    	    	} else {
-					return "$firstParam"
-					     . "&nbsp;".$app_strings['LBL_SEARCH'];
-    	    	}
-			} else {
-				return $firstParam;
-			}
-    	}
-    	else {
-		    if (!empty($iconPath) && !$browserTitle) {
-				//return "<a href='index.php?module={$this->module}&action=index'>$this->module</a>";
-			} else {
-				return $firstParam;
-			}
-    	}
+        if ($this->action == "ListView" || $this->action == "index") {
+            if (empty($iconPath) || $browserTitle) {
+                return $firstParam;
+            } elseif (SugarThemeRegistry::current()->directionality == "ltr") {
+                return $app_strings['LBL_SEARCH']. "&nbsp;" . $firstParam;
+            } else {
+                return $firstParam . "&nbsp;" . $app_strings['LBL_SEARCH'];
+            }
+        } elseif (empty($iconPath) || $browserTitle) {
+            return $firstParam;
+        }
     }
 
     protected function getModuleTitleIconPath($module)
@@ -1417,7 +1372,14 @@ EOHTML;
     protected function getHelpText($module)
     {
         $createImageURL = SugarThemeRegistry::current()->getImageURL('create-record.gif');
-        $url = ajaxLink("index.php?module=$module&action=EditView&return_module=$module&return_action=DetailView");
+        $url = 'index.php?' . http_build_query(
+            array(
+                'module' => $module,
+                'action' => 'EditView',
+                'return_module' => $module,
+                'return_action' => 'DetailView',
+            )
+        );
         $theTitle = <<<EOHTML
 &nbsp;
 <img src='{$createImageURL}' alt='{$GLOBALS['app_strings']['LNK_CREATE']}'>

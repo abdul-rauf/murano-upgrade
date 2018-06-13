@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -29,13 +28,6 @@ class Chart_pipeline_by_sales_stage
 {
 	  var $modules = array('Opportunities');
 	  var $order = 0;
-
-    /**
-     * @deprecated
-     */
-    public function Chart_pipeline_by_sales_stage()
-    {
-    }
 
 function draw($extra_tools)
 {
@@ -314,7 +306,7 @@ echo get_validate_chart_js();
 			$GLOBALS['log']->debug("user_id is: ");
 			$GLOBALS['log']->debug($user_id);
 			$GLOBALS['log']->debug("cache_file_name is: $cache_file_name");
-			$opp = BeanFactory::getBean('Opportunities');
+			$opp = BeanFactory::newBean('Opportunities');
 			$where="";
 			//build the where clause for the query that matches $user
 			$count = count($user_id);
@@ -567,7 +559,7 @@ $GLOBALS['log']->debug($datax);
 		}
 
 		$user_id = $ids;
-		$opp = BeanFactory::getBean('Opportunities');
+		$opp = BeanFactory::newBean('Opportunities');
 		$where="";
 		//build the where clause for the query that matches $user
 		$count = count($user_id);

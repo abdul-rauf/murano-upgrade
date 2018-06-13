@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Офериран продукт',
     'LBL_LIST_MANUFACTURER' => 'Производител',
     'LBL_MANUFACTURERS' => 'Производители',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Партиден No.',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Партиден номер',
     'LBL_LIST_QUANTITY' => 'Количество',
     'LBL_LIST_COST_PRICE' => 'Себестойност',
     'LBL_LIST_DISCOUNT_PRICE' => 'Цена',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Отстъпка в %',
     'LBL_LIST_PRICE' => 'Каталожна цена:',
     'LBL_VENDOR_PART_NUM' => 'Партиден номер(доставчик):',
-    'LBL_MFT_PART_NUM' => 'Партиден номер:(производител)',
+    'LBL_MFT_PART_NUM' => 'Партиден номер:',
     'LBL_NEXT_STEP' => 'Следваща стъпка:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Дата на предоставяне на отстъпка:',
     'LBL_WEIGHT' => 'Тегло:',
@@ -168,6 +168,8 @@ $mod_strings = array(
  - Натиснете върху "Покажи повече", за да бъдат визуализирани допълнителни полета ако е необходимо.
 2. Натиснете "Съхрани", за да запазите новия запис и да се върнете на предходната страница.',
 
-    'LBL_MANUFACTURERS' => 'Производители',
     'LBL_PRODUCT_POSITION' => 'Позиция на пакета на продукта',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Списък с данни за оферираните продукти',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Нов офериран продукт)',
+    'LBL_DISCOUNT_PERCENT' => '% Процент',
 );

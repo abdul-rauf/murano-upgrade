@@ -1,8 +1,5 @@
 <?php
 
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,8 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'modules/ModuleBuilder/parsers/views/GridLayoutMetaDataParser.php';
-require_once 'modules/ModuleBuilder/parsers/views/History.php';
 
 class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
 {
@@ -60,7 +55,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
             'name' => MBConstants::$FILLER['name'],
             'label' => translate(MBConstants::$FILLER['label'])
         );
-        $this->seed = BeanFactory::getBean($module);
+        $this->seed = BeanFactory::newBean($module);
         $this->_moduleName = $module;
         $this->_view = MB_EDITVIEW;
         $this->_fielddefs = $this->seed->field_defs;

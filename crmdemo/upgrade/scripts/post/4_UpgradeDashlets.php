@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -33,7 +32,6 @@ class SugarUpgradeUpgradeDashlets extends UpgradeScript
             require 'modules/Home/dashlets.php';
         }
 
-        require_once 'include/MySugar/MySugar.php';
 
         $prefstomove = array('mypbss_date_start' => 'MyPipelineBySalesStageDashlet',
             'mypbss_date_end' => 'MyPipelineBySalesStageDashlet',

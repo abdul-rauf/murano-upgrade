@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Quoted Line Item',
     'LBL_LIST_MANUFACTURER' => 'Výrobca',
     'LBL_MANUFACTURERS' => 'Výrobcovia',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Číslo výrobcu',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Číslo dielu',
     'LBL_LIST_QUANTITY' => 'Množstvo',
     'LBL_LIST_COST_PRICE' => 'Výdavky',
     'LBL_LIST_DISCOUNT_PRICE' => 'Cena',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Zľava v %',
     'LBL_LIST_PRICE' => 'Cenník:',
     'LBL_VENDOR_PART_NUM' => 'Číslo dielu predajcu:',
-    'LBL_MFT_PART_NUM' => 'Číslo dielu výrobcu:',
+    'LBL_MFT_PART_NUM' => 'Číslo dielu:',
     'LBL_NEXT_STEP' => 'Ďalší krok:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Dátum zľavy:',
     'LBL_WEIGHT' => 'Váha:',
@@ -168,6 +168,8 @@ To create a {{module_name}}:
  - Click "Show More" to expose additional fields if necessary.
 2. Click "Save" to finalize the new record and return to the previous page.',
 
-    'LBL_MANUFACTURERS' => 'Výrobcovia',
     'LBL_PRODUCT_POSITION' => 'Product Bundle Position',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Zoznam údajov ponúk pre ponúkané položky',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nová ponúkaná položka)',
+    'LBL_DISCOUNT_PERCENT' => '% percent',
 );

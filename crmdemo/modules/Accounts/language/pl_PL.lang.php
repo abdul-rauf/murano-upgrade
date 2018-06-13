@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Załącznik',
     'LBL_REVENUELINEITEMS' => 'Pozycje szansy',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Podgląd kontrahentów',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notatki',
 
     // Help Text

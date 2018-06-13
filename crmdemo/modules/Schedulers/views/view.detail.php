@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,14 +10,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/MVC/View/views/view.detail.php');
 
 class SchedulersViewDetail extends ViewDetail {
 
     /**
-	 * @see SugarView::_getModuleTitleListParam()
+     * {@inheritDoc}
+     *
+     * @param bool $browserTitle Ignored
 	 */
-	protected function _getModuleTitleListParam()
+    protected function _getModuleTitleListParam($browserTitle = false)
 	{
 	    global $mod_strings;
 

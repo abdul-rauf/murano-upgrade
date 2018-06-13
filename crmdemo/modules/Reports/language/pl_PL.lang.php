@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'Raporty kontrahentów',
   'LBL_CONTACT_REPORTS' => 'Raporty kontaktów',
   'LBL_OPPORTUNITY_REPORTS' => 'Raporty szans',
+    'LBL_RECENTLY_MODIFIED' => 'Ostatnio zmodyfikowane',
 
   'LBL_CASE_REPORTS' => 'Raporty zgłoszeń',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'Następne 30 dni',
   'LBL_THIS_YEAR'=>'Ten rok',
   'LBL_LIST_FORM_TITLE' =>'Raporty',
+  'LBL_LIST_REPORT_NAME' => 'Nazwa',
   'LBL_PROSPECT_REPORTS'=>'Raporty celów',
   'LBL_CHART_TYPE'=>'Typ wykresu',
   'LBL_IS_EMPTY'=>'Jest pusty',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>Kroki definiujące filtry</b><br/><br/>1) Kliknij moduł w <b>Modułach powiązanych</b>, którego zamierzasz użyć w filtrach. Domyślnie jest wybrany pierwszy moduł (najwyższy listek w widoku drzewa). <br/><br/>Możesz wybrać powiązane moduły (katalogi podrzędne w widoku drzewa), klikając moduł. Rozwiń węzeł, aby wyświetlić dodatkowe moduły powiązane z modułem. Moduł, który wybierzesz określa które pola raportowalne pojawią się w tabeli <b>Dostępne pola</b>.<br/><br/> 2) Kliknij pole w tabeli <b>Dostępne pola</b>, aby dodać je do filtru. Możesz również wyszukać pola poprzez wpisanie tekstu w polu tekstowym.<br/><br/> Po wybraniu dowolnej liczby pól z modułu wybranego w tabeli <b>Moduły powiązane</b>, możesz wybrać inny moduł z którego możesz wybrać dowolną liczbę pól do użycia w filtrowaniu.<br/><br/>	3) Wybierz <b>I</b> lub <b>LUB</b>, aby wskazać czy wszystkie (I) lub dowolne (LUB) kryteria muszą zostać spełnione przez dane wyświetlone jako wyniki raportu.<br/><br/>	4) [Opcjonalne] Kliknij <b>Dodaj grupę filtrów</b>, aby utworzyć grupę filtrów. Możesz utworzyć dowolną liczbę grup filtrów, a także grupy zagnieżdżone.<br/><br/> 5) [Opcjonalne] Zaznacz opcję Czas uruchomienia dla wybranego filtra, aby dalej dostosować wyniki raportów podczas wyświetlania raportu.",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>Kroki do zdefiniowania grupowania</b><br/><br/>1) Kliknij moduł, którego chcesz używać do grupowania rekordów w tabeli <b>Moduły powiązane</b>. Domyślnie wybrany jest nadrzędny moduł (katalog nadrzędny w widoku drzewa). <br/><br/> Możesz wybrać powiązany moduł (katalog podrzędny w widoku drzewa), klikając moduł. Rozszerz węzeł, aby wyświetlić dodatkowe moduły powiązane z modułem. Moduł, który wybierzesz określa które pola raportowalne pojawią się w tabeli <b>Dostępne pola</b>.<br/><br/> 2) Kliknij <b>Dostępne pola</b>, aby pogrupować rekordy wg wybranych atrybutów w raporcie. Możesz również wyszukać pole poprzez wpisanie jego nazwy w polu tekstowym.<br/><br/>Po wybraniu dowolnej liczby pól z wybranego modułu z <b>Modułów powiązanych</b> możesz kliknąć inny moduł, z którego możesz również wybrać pola, na podstawie których grupowane będą rekordy. Zalecany jest wybór maksymalnie kilku pól, aby zachować czytelność raportu.<br/><br/> Możesz zmieniać kolejność pól przez przeciąganie i upuszczanie ich w żądane miejsce. Zmiana kolejności wymusza zmianę sposobu wyświetlania wyników.<br/><br/> W przypadku raportów macierzowych możesz wybrać maksymalnie trzy pola grupujące.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>Kroki do wyboru wyświetlanych kolumn:</b><br/><br/>1) Kliknij moduł, którego chcesz używać do grupowania rekordów w tabeli <b>Moduły powiązane</b>. Domyślnie wybrany jest nadrzędny moduł (katalog nadrzędny w widoku drzewa), który został wybrany podczas kroku Wybierz moduł. <br/><br/> Możesz wybrać pola z powiązanego modułu (katalog podrzędny w widoku drzewa), klikając moduł. Można również wybrać moduły powiązane z modułami powiązanymi z modułem podstawowym. Moduł, który wybierzesz określa które pola raportowalne pojawią się w tabeli <b>Dostępne pola</b>.<br/><br/> 2) Kliknij pole w oknie <b>Dostępne pola</b>, aby wyświetlić dane pola w rekordach raportu. Możesz również wyszukać pole, wpisując jego nazwę w polu tekstowym.<br/><br/> Po wybraniu dowolnej liczby pól z wybranego modułu z <b>Modułów powiązanych</b> możesz wybrać inny moduł, z którego możesz również wybrać dodatkowe pola. Można wybrać dowolną liczbę pól, ale raport jest generowany wolniej i staje się mniej czytelny w przypadku dodania większej liczby pól niż to konieczne.<br/><br/> Istnieje możliwość zmiany kolejności pól poprzez przeciąganie pól i upuszczanie ich w odpowiednim miejscu. Zmiana kolejności pól powoduje kolejność, w której wyświetlane są kolumny w widoku wyniku." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Kroki do wyboru podsumowania wyświetlania =:</b><br/><br/>1) Kliknij w tabeli <b>Moduły powiązane</b> moduł, którego chcesz używać do podsumowań w raporcie. Domyślnie wybrany jest nadrzędny moduł (katalog nadrzędny w widoku drzewa). <br/><br/> Możesz wybrać powiązany moduł (katalog podrzędny w widoku drzewa), klikając moduł. Rozszerz węzeł, aby wyświetlić dodatkowe moduły powiązane z modułem. Moduł, który wybierzesz określa które pola raportowalne pojawią się w tabeli <b>Dostępne pola</b>.<br/><br/> 2) Kliknij <b>Dostępne pola</b>, aby wybrać podsumowania dla raportu. Możesz również wyszukać pole poprzez wpisanie jego nazwy w polu tekstowym.<br/><br/>Po wybraniu dowolnej liczby pól z wybranego modułu z <b>Modułów powiązanych</b> możesz kliknąć inny moduł, z którego możesz wybrać dodatkowe pola do podsumowania w raporcie.<br/><br/>" .	"W przypadku raportów macierzy można wybrać więcej niż jedno pole do wyświetlania kilku wartości w ramach poszczególnej komórki w raporcie." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Kroki do wyboru podsumowania wyświetlania =:</b><br/><br/>1) Kliknij w tabeli <b>Moduły powiązane</b> moduł, którego chcesz używać do podsumowań w raporcie. Domyślnie wybrany jest nadrzędny moduł (katalog nadrzędny w widoku drzewa). <br/><br/> Możesz wybrać powiązany moduł (katalog podrzędny w widoku drzewa), klikając moduł. Rozszerz węzeł, aby wyświetlić dodatkowe moduły powiązane z modułem. Moduł, który wybierzesz określa które pola raportowalne pojawią się w tabeli <b>Dostępne pola</b>.<br/><br/> 2) Kliknij <b>Dostępne pola</b>, aby wybrać podsumowania dla raportu. Możesz również wyszukać pole poprzez wpisanie jego nazwy w polu tekstowym.<br/><br/>Po wybraniu dowolnej liczby pól z wybranego modułu z <b>Modułów powiązanych</b> możesz kliknąć inny moduł, z którego możesz wybrać dodatkowe pola do podsumowania w raporcie.<br/><br/> W przypadku raportów macierzy można wybrać więcej niż jedno pole do wyświetlania kilku wartości w ramach poszczególnej komórki w raporcie." ,
 
 	'LBL_ALT_SHOW' => 'Pokaż',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'Ten raport zawiera dane w następującej kolejności kolumn:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'Góra' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'Informacje',
     'LBL_REPORT_GRAND_TOTAL' => "Suma całkowita",
+    'LBL_EDIT_REPORT_BUTTON' => 'Edytuj raport',
 
     'LBL_REPORTS_TO' => 'Zwierzchnik',
     'LBL_LESS_THAN_EQUAL' => 'Mniejsze lub równe',

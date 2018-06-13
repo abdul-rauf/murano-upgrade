@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -45,7 +44,7 @@ class SugarWidgetFieldcurrency_id extends SugarWidgetFieldEnum
      * @param array $layout_def
      * @return string for display
      */
-    public function &displayListPlain($layout_def)
+    public function displayListPlain($layout_def)
     {
         static $currencies;
         $value = $this->_get_list_value($layout_def);

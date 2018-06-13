@@ -12,18 +12,6 @@
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
-// Used in findRelatableModules
-require_once 'modules/ModuleBuilder/Module/StudioBrowser.php';
-
-// Used in addFromPost 
-require_once 'modules/ModuleBuilder/parsers/relationships/AbstractRelationship.php';
-
-// Used in parseDeployedModuleName
-require_once 'modules/ModuleBuilder/MB/ModuleBuilder.php';
-
-// Metadata API cache clearing
-require_once 'include/MetaDataManager/MetaDataManager.php';
-
 /*
  * Abstract class for managing a set of Relationships
  * The Relationships we're managing consist of metadata about relationships, rather than relationship implementations used by the application
@@ -144,7 +132,6 @@ class AbstractRelationships
     function addFromPost ()
     {
         $definition = array ( ) ;
-        require_once 'modules/ModuleBuilder/parsers/relationships/AbstractRelationship.php' ;
 
         foreach (AbstractRelationship::$definitionKeys as $key) {
             if (!empty($_REQUEST[$key])) {
@@ -270,7 +257,6 @@ class AbstractRelationships
 
         foreach ( $relationships as $relationship )
         {
-            // if (! $relationship->readonly ())
             $definitions [ $relationship->getName () ] = $relationship->getDefinition () ;
         }
 
@@ -487,7 +473,9 @@ class AbstractRelationships
         $filename = "$basepath/relationships/{$relationshipName}MetaData.php" ;
         $GLOBALS [ 'log' ]->debug ( get_class ( $this ) . "->saveRelationshipMetaData(): saving the following to {$filename}" . print_r ( $properties, true ) ) ;
         write_array_to_file ( 'dictionary["' . $relationshipName . '"]', $properties, "{$filename}", 'w' ) ;
-        $installDefs [ $relationshipName ] = array ( /*'module' => $rhs_module , 'module_vardefs' => "<basepath>/Vardefs/{$relationshipName}.php" ,*/ 'meta_data' => "{$installDefPrefix}/relationships/relationships/{$relationshipName}MetaData.php" ) ;
+        $installDefs[$relationshipName] = array(
+            'meta_data' => "{$installDefPrefix}/relationships/relationships/{$relationshipName}MetaData.php",
+        );
 
         return $installDefs ;
     }
@@ -599,7 +587,6 @@ class AbstractRelationships
                 }
 
                 if ($definition['subpanel_name'] !== 'default') {
-                    require_once('include/MetaDataManager/MetaDataConverter.php');
                     $mc = new MetaDataConverter();
                     $override_array = array(
                         'override_subpanel_list_view' => array(
@@ -670,7 +657,7 @@ class AbstractRelationships
                 $from = "{$basepath}/{$moduleName}/".$fileName;
                 $to = "modules/{$moduleName}/".$fileName;
                 $installDefs[$moduleName][$to] = $from;
-                SugarAutoloader::ensureDir(dirname($from));
+                SugarAutoLoader::ensureDir(dirname($from));
                 sugar_file_put_contents($from, $contents);
             }
         }
@@ -729,7 +716,7 @@ class AbstractRelationships
 
         foreach ( $vardefs as $moduleName => $definitions )
         {
-            $module = BeanFactory::getBean($moduleName);
+            $module = BeanFactory::newBean($moduleName);
             if(!empty($module)) {
             	$object = $module->object_name ;
             } else {

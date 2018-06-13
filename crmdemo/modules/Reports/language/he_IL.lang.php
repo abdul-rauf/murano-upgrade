@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'דוחות על חשבונות',
   'LBL_CONTACT_REPORTS' => 'דוחות על אנשי קשר',
   'LBL_OPPORTUNITY_REPORTS' => 'דוחות על הזדמנויות',
+    'LBL_RECENTLY_MODIFIED' => 'עודכן לאחרונה',
 
   'LBL_CASE_REPORTS' => 'דוחות על אירועים',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'בשלושים הימים הבאים',
   'LBL_THIS_YEAR'=>'השנה',
   'LBL_LIST_FORM_TITLE' =>'דוחות',
+  'LBL_LIST_REPORT_NAME' => 'שם',
   'LBL_PROSPECT_REPORTS'=>'דוחות על מטרות',
   'LBL_CHART_TYPE'=>'סוג תרשים',
   'LBL_IS_EMPTY'=>'ריק',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>Steps to Define Filters:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use to define filters. By default, the primary module (top node in the tree view) is selected. <br/><br/><br />	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/><br />	2) Click on a Field in the <b>Available Fields</b> pane to add it to the filters. You can also search for the field by typing in the text box in the pane.<br/><br/><br />	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select any number of fields to use as filters.<br/><br/><br />	3) Choose <b>AND</b> or <b>OR</b> to designate whether all filters or any filters, respectively, are used to find results for the report.<br/><br/><br />	4) [Optional] Click on <b>Add Filter Group</b> to create groups of filters. You can have any number of filter groups and any number of filters in a group to create nested filters.<br/><br/><br />	5) [Optional] Select the Run-time option for a Filter to allow users to use the filter to further customize the results of the reports while viewing the report.",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>Steps to Define Group By:</b><br></br>1) Click on a Module in the <b>Related Modules</b> pane that you would like to use to group records in your report. By default, the primary module (top node in the tree view) is selected. <br/><br/><br />	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/><br />	2) Click on the Field in the <b>Available Fields</b> pane to group records by the field in your report. You can also search for the field by typing in the text box in the pane.<br/><br/><br />	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select any number of fields to group records. However, the report becomes less readable when you group by more than several fields.<br/><br/><br />	You can change the order of the fields by dragging and dropping them to the desired position.  Changing the order affects the way the results are displayed.<br/><br/>  For Matrix Reports, you can use a maximum of three fields to group records.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>Steps to Choose Display Columns:</b><br/><br/>1) Click on a Module in the <b>Related Modules</b> pane that you would like to use to display data in your report. By default, the primary module (top node in the tree view) that you chose during the &#39;Select Module&#39; step is selected.<br/><br/><br />	You can select fields from a related module (child node in the tree view) by clicking on the module. Modules related to the modules related to the primary module can also be selected. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/><br />	2) Click on the Field in the <b>Available Fields</b> pane to display the field data in the records in your report. You can also search for the field by typing in the text box in the pane.<br/><br/><br />	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields. You can select any number of fields, but the report is generated more slowly and becomes less readable when you add more than necessary fields in the report.<br/><br/><br />	You can change the order fields by dragging and dropping them to the desired position. Changing the field order changes the order in which the columns are displayed in the results." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>פירוט השלבים לבחירת תקצירי תצוגה:</b><br/><br/>1) לחץ על המודול בחלון <b>מודולים קשורים</b> שבו תרצה להשתמש עבור התקצירים שבדוח שלך. כברירת מחדל, המודול העיקרי (הצומת העליונה בתצוגת העץ) ייבחר.<br/><br/>	תוכל לבחור במודול קשור (צומת ילד בתצוגת העץ) בלחיצה על המודול. הרחב את הצומת כדי לצפות במודולים נוספים הקשורים למודול הקשור. המודול שבו תבחר יקבע אילו שדות ברי דיווח יופיעו בחלון <b>שדות זמינים</b>.<br/><br/>	2) לחץ על שדה בחלון <b>שדות זמינים</b> כדי לבחור בתקצירים לדוח שלך. תוכל גם לחפש שדה אם תקליד בתיבת הטקסט שבחלון.<br/><br/> לאחר שבחרת מספר שדות לפי רצונך מתוך המודול הנבחר בחלון <b>מודולים קשורים</b>, תוכל לבחור במודול אחר, שמתוכו תוכל לבחור בשדות נוספים עבור התקצירים בדוח שלך.<br/><br/> עבור דוחות מטריצה, תוכל לבחור ביותר משדה אחד כדי להציג ערכים מרובים בתא יחיד בדוח שלך." ,
 
 	'LBL_ALT_SHOW' => 'הצג',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'דו"ח זה מכיל נתונים לפי סדר העמודות הבא:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'למעלה' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'מידע',
     'LBL_REPORT_GRAND_TOTAL' => "סך-הכל כללי",
+    'LBL_EDIT_REPORT_BUTTON' => 'ערוך דו"ח',
 
     'LBL_REPORTS_TO' => 'מדווח אל',
     'LBL_LESS_THAN_EQUAL' => 'פחות או שווה ל-',

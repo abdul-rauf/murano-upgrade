@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -55,7 +54,7 @@ class SavedSearch extends SugarBean {
 		$this->sortOrder = $sortOrder;
 		$this->setupCustomFields('SavedSearch');
 		foreach ($this->field_defs as $field) {
-			$this->field_name_map[$field['name']] = $field;
+            $this->field_defs[$field['name']] = $field;
 		}
 	}
 
@@ -232,7 +231,7 @@ class SavedSearch extends SugarBean {
 
 		global $current_user, $timedate;
 
-		$focus = BeanFactory::getBean('SavedSearch');
+		$focus = BeanFactory::newBean('SavedSearch');
 		if($id) $focus->retrieve($id);
 
 		if($useRequired && !checkRequired($prefix, array_keys($focus->required_fields))) {
@@ -342,7 +341,7 @@ class SavedSearch extends SugarBean {
 
         if(isset($this->contents['search_module']))
         {
-           $searchModuleBean = BeanFactory::getBean($this->contents['search_module']);
+           $searchModuleBean = BeanFactory::newBean($this->contents['search_module']);
         }
 
         foreach($this->contents as $key=>$val){

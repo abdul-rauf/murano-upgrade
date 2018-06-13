@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -87,7 +86,7 @@ if($focus->campaign_type =='NewsLetter'){
             //default prospect lists as these are required for newsletters.
 
              //create subscription list
-             $subs = BeanFactory::getBean('ProspectLists');
+             $subs = BeanFactory::newBean('ProspectLists');
              $subs->name = $focus->name.' '.$mod_strings['LBL_SUBSCRIPTION_LIST'];
              $subs->assigned_user_id= $current_user->id;
              $subs->list_type = "default";
@@ -95,7 +94,7 @@ if($focus->campaign_type =='NewsLetter'){
              $focus->prospectlists->add($subs->id);
 
              //create unsubscription list
-             $unsubs = BeanFactory::getBean('ProspectLists');
+             $unsubs = BeanFactory::newBean('ProspectLists');
              $unsubs->name = $focus->name.' '.$mod_strings['LBL_UNSUBSCRIPTION_LIST'];
              $unsubs->assigned_user_id= $current_user->id;
              $unsubs->list_type = "exempt";
@@ -103,7 +102,7 @@ if($focus->campaign_type =='NewsLetter'){
              $focus->prospectlists->add($unsubs->id);
 
              //create unsubscription list
-             $test_subs = BeanFactory::getBean('ProspectLists');
+             $test_subs = BeanFactory::newBean('ProspectLists');
              $test_subs->name = $focus->name.' '.$mod_strings['LBL_TEST_LIST'];
              $test_subs->assigned_user_id= $current_user->id;
              $test_subs->list_type = "test";

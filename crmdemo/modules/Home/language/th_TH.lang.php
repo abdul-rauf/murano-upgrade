@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - ยูทิลิตีไลบรารี UI ที่ช่วยให้สามารถนำคุณลักษณะด้านไคลเอ็นต์ที่มีความสมบูรณ์มาใช้',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - คลาสการโอนอีเมลที่มีคุณลักษณะสมบูรณ์สำหรับ PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - เครื่องมือย่อขนาด Javascript ที่เขียนเป็น PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - ใช้สำหรับการเข้ารหัส blowfish แบบสองทางได้อย่างรวดเร็วโดยไม่ต้องมีส่วนขยาย MCrypt PHP',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - เครื่องมือแยกวิเคราะห์ SAX สำหรับ HTML และเอกสาร XML ที่มีรูปแบบไม่ถูกต้องอื่นๆ',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - ส่วนขยายของไลบรารีอินเทอร์เฟซผู้ใช้ Yahoo! โดย Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - สคริปต์ในการตรวจหา Javascript Flash Player และฝังสคริปต์',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'ยินดีต้อนรับสู่แดชบอร์ดความช่วยเหลือของ Sugar 7',
-    'LBL_HELP_RECORD' => 'ส่วนข้อมูลความช่วยเหลือจะแสดงข้อมูลที่เจาะจงเกี่ยวกับโมดูลที่คุณกำลังดู แสดงขั้นตอนโดยละเอียดสำหรับการดำเนินการบางอย่างในโมดูล และให้คำแนะนำว่าจะต้องไปที่ไหนเพื่อดูข้อมูลเพิ่มเติมและรับการสนับสนุนที่ครอบคลุมยิ่งขึ้น ส่วนข้อมูลความช่วยเหลือจะเปิดอยู่ เพื่อให้คุณสามารถดูขั้นตอนต่างๆ ได้ในขณะที่ทำตามขั้นตอนนั้นๆ ในโมดูล
-
-ส่วนข้อมูลความช่วยเหลือสามารถใช้ได้ในโมดูลทั้งหมดของ Sugar 7 และสามารถสลับ "เปิด" และ "ปิด" ด้วยการคลิกไอคอนความช่วยเหลือในส่วนท้ายของแอปพลิเคชัน',
+    'LBL_HELP_RECORD_TITLE' => 'ความช่วยเหลือ',
+    'LBL_HELP_RECORD' => 'ความช่วยเหลือจะแสดงข้อมูลที่เจาะจงเกี่ยวกับโมดูลซึ่งคุณกำลังดู และแสดงขั้นตอนโดยละเอียดสำหรับการดำเนินการในโมดูล ตลอดจนแนะนำส่วนต่างๆ ซึ่งคุณสามารถดูข้อมูลที่ครอบคลุมมากขึ้นรวมถึงการสนับสนุน',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'ตัวกรอง',
 );

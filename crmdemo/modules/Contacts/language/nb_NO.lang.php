@@ -237,9 +237,6 @@ $mod_strings = array (
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Principal Id',
-    'LBL_DNB_BAL_PREVIEW' => 'Kontakter forhåndsvisning',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Kontaker',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: Kontakt informasjon',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notater',
 

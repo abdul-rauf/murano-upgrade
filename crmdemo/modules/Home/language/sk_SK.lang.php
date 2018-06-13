@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library – Nástroje používateľského rozhrania knižnice uľahčujú implementáciu množstva funkcií na strane klienta.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer – Trieda emailového prenosu s množstvom funkcií pre PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink – Javascript minifier napísaný v PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish – Umožňuje rýchle obojsmerné šifrovanie blowfish bez potreby rozšírenia PHP MCrypt.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 – SAX analýza pre HTML a iné chybne naformátované dokumenty XML',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library – Rozšírenia pre používateľské rozhranie knižnice Yahoo!, ktorých autorom je Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject – Detekcia prehrávača Javascript Flash Player a vložený skript.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Vitajte v informačnom paneli pomocníka Sugar 7',
-    'LBL_HELP_RECORD' => 'Prvok pomocníka zobrazuje špecifické informácie o module, ktorý prezeráte, poskytuje podrobné kroky na vykonanie niektorých akcií v module a poskytuje informácie o tom, kde možno získať podrobnejšie informácie a podporu. Prvok pomocníka zostáva otvorený, takže pri vykonávaní krokov v module postup zostáva zobrazený.
-
-Informačný panel pomocníka je k dispozícii pre všetky moduly Sugar 7 a možno ho otvoriť a zavrieť kliknutím na ikonu pomocníka v päte.',
+    'LBL_HELP_RECORD_TITLE' => 'Pomocník',
+    'LBL_HELP_RECORD' => 'Pomocník zobrazuje špecifické informácie o module, ktorý prezeráte, poskytuje podrobné kroky na vykonanie niektorých akcií v module a poskytuje informácie o tom, kde možno získať podrobnejšie informácie a podporu.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filter',
 );

@@ -1,6 +1,6 @@
 <?php
-// created: 2016-01-19 11:43:11
-$dictionary["notes_mur_client_n_list_1"] = array (
+// created: 2018-06-13 14:43:30
+$dictionary['notes_mur_client_n_list_1'] = array (
   'true_relationship_type' => 'many-to-many',
   'from_studio' => true,
   'relationships' => 
@@ -22,18 +22,18 @@ $dictionary["notes_mur_client_n_list_1"] = array (
   'table' => 'notes_mur_client_n_list_1_c',
   'fields' => 
   array (
-    0 => 
+    'id' => 
     array (
       'name' => 'id',
       'type' => 'varchar',
       'len' => 36,
     ),
-    1 => 
+    'date_modified' => 
     array (
       'name' => 'date_modified',
       'type' => 'datetime',
     ),
-    2 => 
+    'deleted' => 
     array (
       'name' => 'deleted',
       'type' => 'bool',
@@ -41,13 +41,13 @@ $dictionary["notes_mur_client_n_list_1"] = array (
       'default' => '0',
       'required' => true,
     ),
-    3 => 
+    'notes_mur_client_n_list_1notes_ida' => 
     array (
       'name' => 'notes_mur_client_n_list_1notes_ida',
       'type' => 'varchar',
       'len' => 36,
     ),
-    4 => 
+    'notes_mur_client_n_list_1mur_client_n_list_idb' => 
     array (
       'name' => 'notes_mur_client_n_list_1mur_client_n_list_idb',
       'type' => 'varchar',

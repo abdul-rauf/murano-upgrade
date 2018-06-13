@@ -1,6 +1,5 @@
 <?php
 
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,17 +14,26 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtener la clave API de Citrix Online GoToMeeting al registrar una nueva aplicación.<br>
+Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
 &nbsp;<br>
-Pasos para registrar su instancia:<br>
+Steps to register your instance:<br>
 &nbsp;<br>
 <ol>
-<li>Inicie sesión en su cuenta de desarrollador de Citrix Online: <a href=&#39;https://developer.citrixonline.com/&#39; target=&#39;_blank&#39;>https://developer.citrixonline.com/</a></li>
-<li>Haga clic en Apply for Developer Key (Solicitar clave de desarrollador)</li>
-<li>En API de producto seleccione GoToMeeting e ingrese a la URL de su instancia en URL de aplicación</li>
-<li>Verá una columna llamada Clave API debajo de (Sus aplicaciones)</li>
-<li>Cópiela a continuación.</li>
+    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Click on My Apps</li>
+    <li>Click on Add a new App</li>
+    <li>Complete all fields on the Add App form:</li>
+        <ul>
+            <li>App Name</li>
+            <li>Description</li>
+            <li>Product API: Select GoToMeeting</li>
+            <li>Application URL: Enter your instance URL</li>
+        </ul>
+    <li>Click the Create App Button</li>
+    <li>From the list of apps, click on the name of your app</li>
+    <li>Click on the Keys tab</li>
+    <li>Copy the Consumer Key value and enter it below</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Clave API',
+    'oauth_consumer_key' => 'Consumer Key',
 );

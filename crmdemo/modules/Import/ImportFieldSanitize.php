@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,8 +15,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
-require_once('modules/Import/sources/ImportFile.php');
-require_once 'include/SugarFields/SugarFieldHandler.php';
 
 class ImportFieldSanitize
 {
@@ -153,7 +149,7 @@ class ImportFieldSanitize
         // cache this object since we'll be reusing it a bunch
         if ( !($focus_user instanceof User) ) {
 
-            $focus_user = BeanFactory::getBean('Users');
+            $focus_user = BeanFactory::newBean('Users');
         }
 
         static $focus_team;
@@ -161,7 +157,7 @@ class ImportFieldSanitize
         // cache this object since we'll be reusing it a bunch
         if ( !($focus_team instanceof Team) ) {
 
-            $focus_team = BeanFactory::getBean('Teams');
+            $focus_team = BeanFactory::newBean('Teams');
         }
 
         if ( !empty($value) && strtolower($value) != "all" ) {
@@ -240,7 +236,12 @@ class ImportFieldSanitize
 
         $dateparts = array();
         $reg = $timedate->get_regular_expression($format);
-        preg_match('@'.$reg['format'].'@', $value, $dateparts);
+
+        // Escape the time separator if it is a period.
+        $timeSeparator = $timedate->timeSeparator();
+        $timeFormat = $timeSeparator === '.' ? preg_replace('/\./', '\\.', $reg['format']) : $reg['format'];
+
+        preg_match('@' . $timeFormat . '@', $value, $dateparts);
 
         if ( empty($dateparts) )
             return false;

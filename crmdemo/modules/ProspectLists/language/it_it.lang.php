@@ -76,7 +76,7 @@ $mod_strings = array (
 Per creare un {{module_name}}:
 1. Fornire i valori desiderati per i campi.
 - I campi contrassegnati come "Obbligatorio" devono essere compilati prima del salvataggio.
-- Cliccare "Mostra più" per visualizzare ulteriori campi se necessario.
+- Cliccare "Altri dettagli" per visualizzare ulteriori campi se necessario.
 2. Cliccare "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.
 3. Dopo il salvataggio, usare il sottopannello disponibile nella vista di dettaglio degli obiettivi per aggiungere destinatari alla {{campaigns_singular_module}}.',
 );

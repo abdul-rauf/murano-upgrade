@@ -1,8 +1,5 @@
 <?php
 
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -15,7 +12,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'clients/base/api/CollectionApi.php';
 
 /**
  * Collection API
@@ -72,21 +68,20 @@ class RelateCollectionApi extends CollectionApi
         $this->requireArgs($args, array('module', 'collection_name'));
         $bean = $this->bean = BeanFactory::newBean($args['module']);
 
-        require_once 'clients/base/api/CollectionApi/CollectionDefinition/RelateCollectionDefinition.php';
         $definition = new RelateCollectionDefinition($bean, $args['collection_name']);
 
         return $definition;
     }
 
     /** {@inheritDoc} */
-    protected function getSourceData($api, $source, $args)
+    protected function getSourceData(ServiceBase $api, $source, array $args)
     {
         $args['link_name'] = $source;
         return $this->getRelateApi()->filterRelated($api, $args);
     }
 
     /** {@inheritDoc} */
-    protected function getSourceCount($api, $source, $args)
+    protected function getSourceCount(ServiceBase $api, $source, array $args)
     {
         $args['link_name'] = $source;
         return $this->getRelateApi()->filterRelatedCount($api, $args);

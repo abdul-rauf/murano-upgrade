@@ -168,9 +168,6 @@ $mod_strings = array (
   'LBL_RECORD_SAVED_SUCCESS' => 'יצרת בהצלחה את {{moduleSingularLower}} {{full_name}}.',
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Id עיקרי',
-    'LBL_DNB_BAL_PREVIEW' => 'תצוגה מקדימה של מטרות',
-    'LBL_DNB_BAL_RSLT_CNT' => 'מטרות',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: פרטי יצירת קשר',
     //Document title
     'TPL_BROWSER_SUGAR7_RECORDS_TITLE' => '{{module}} &raquo; {{appId}}',
     'TPL_BROWSER_SUGAR7_RECORD_TITLE' => '{{#if last_name}}{{#if first_name}}{{first_name}} {{/if}}{{last_name}} &raquo; {{/if}}{{module}} &raquo; {{appId}}',

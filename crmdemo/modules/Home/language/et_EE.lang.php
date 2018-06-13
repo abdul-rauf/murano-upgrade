@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! kasutajaliidese teek – kasutajaliidese teegi utiliidid hõlbustavad rikaste kliendipoolsete funktsioonide juurutamist.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer – täisfunktsionaalne e-kirja teisaldamise klass PHP puhul',
   'LBL_SOURCE_JSHRINK' => 'JShrink – PHP-s kirjutatud Javascripti minimeerija',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish – võimaldab kiiret kahesuunalist blowfishi krüptimist, nõudmata MCrypt PHP laiendit.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 – SAX-parser HTML-i ja muude halvasti vormindatud XML-dokumentide puhul',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! kasutalaiidese laiendite teek – Jack Slocumi loodud Yahoo! kasutajaliidese teegi laiendid',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject – Javascript Flash Playeri tuvastus ja manusskript.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Tere tulemast Sugar 7 abi töölauale',
-    'LBL_HELP_RECORD' => 'Abi dashlet kuvab konkreetse teabe teie vaadatava mooduli kohta, pakub üksikasjalikke juhiseid mooduli teatud toimingute sooritamiseks ja suunab teid kohtadesse, kust leida põhjalikumat teavet ja tuge. Abi dashlet jääb avatuks, nii et saate moodulis etappide läbimisel neid vaadata.
-
-Abi töölaud on saadaval kõigi Sugar 7 moodulite puhul ja sea saab avada ja sulgeda, klõpsates rakenduse jaluses olevat abi ikooni.',
+    'LBL_HELP_RECORD_TITLE' => 'Spikker',
+    'LBL_HELP_RECORD' => 'Spikker kuvab üksikasjaliku teabe mooduli kohta, mida vaatate, annab täpsed juhised moodulis teatud toimingute tegemiseks ja suunab teid, kui vajate täpsemat teavet ja tuge.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtri',
 );

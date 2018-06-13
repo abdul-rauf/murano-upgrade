@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,14 +15,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 global $theme;
 
 class Popup_Picker {
-
-    /**
-     * @deprecated
-     */
-    public function Popup_Picker()
-    {
-    }
-
 	/*
 	 * 
 	 */
@@ -97,7 +88,7 @@ class Popup_Picker {
 		$form->reset('main.SearchHeader');
 
 		// create the listview
-		$seed_bean = BeanFactory::getBean('Emails');
+		$seed_bean = BeanFactory::newBean('Emails');
 		$ListView = new ListView();
 		$ListView->show_export_button = false;
 		$ListView->process_for_popups = true;

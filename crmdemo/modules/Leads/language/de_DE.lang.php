@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Bearbeiten' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Principal-IP',
-    'LBL_DNB_BAL_PREVIEW' => 'Interessenten-Vorschau',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Interessenten',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: Interessenten-Informationen',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Verkaufschancen',
 

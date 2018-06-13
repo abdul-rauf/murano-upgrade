@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,7 +14,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *  EmailTemplate is used to store email email_template information.
  */
 class EmailTemplate extends SugarBean {
-	var $field_name_map = array();
 	// Stored fields
 	var $id;
 	var $date_entered;
@@ -104,10 +102,10 @@ class EmailTemplate extends SugarBean {
 	function generateFieldDefsJS() {
 		global $current_user;
 
-		$contact = BeanFactory::getBean('Contacts');
-		$account = BeanFactory::getBean('Accounts');
-		$lead = BeanFactory::getBean('Leads');
-		$prospect = BeanFactory::getBean('Prospects');
+		$contact = BeanFactory::newBean('Contacts');
+		$account = BeanFactory::newBean('Accounts');
+		$lead = BeanFactory::newBean('Leads');
+		$prospect = BeanFactory::newBean('Prospects');
 
 		$loopControl = array(
 			'Contacts' => array(
@@ -296,7 +294,7 @@ class EmailTemplate extends SugarBean {
 		global $beanFiles, $beanList, $app_list_strings;
 
 		// generate User instance that owns this "Contact" for contact_user_* macros
-		$user = BeanFactory::getBean('Users');
+		$user = BeanFactory::newBean('Users');
         if(!empty($focus->assigned_user_id)){
 		  $user->retrieve($focus->assigned_user_id);
         }
@@ -379,62 +377,118 @@ class EmailTemplate extends SugarBean {
 	}
 
     /**
-     * Convenience method to convert raw value into appropriate type format
+     * Convenience method to convert raw value into appropriate type format.
+     *
+     * @deprecated Use {@link EmailTemplate::convertToType()} instead.
      * @param string $type
      * @param string $value
      * @return string
      */
-    function _convertToType($type,$value) {
-        switch($type) {
-            case 'currency' : return currency_format_number($value);
-            default: return $value;
+    public function _convertToType($type, $value)
+    {
+        LoggerManager::getLogger()->deprecated('EmailTemplate::_convertToType() has been deprecated. Use ' .
+            'EmailTemplate::convertToType() instead.');
+
+        return self::convertToType($type, $value);
+    }
+
+    /**
+     * Convenience method to convert raw value into appropriate type format.
+     *
+     * @param string $type
+     * @param string $value
+     * @param bool $htmlTarget text values only get converted if true
+     * @return string
+     */
+    private static function convertToType($type, $value, $htmlTarget = false)
+    {
+        switch ($type) {
+            case 'currency':
+                return currency_format_number($value);
+            case 'text':
+            case 'longtext':
+                return $htmlTarget ? nl2html($value) : $value;
+            default:
+                return $value;
         }
     }
 
-	/**
-	 * Convenience method to parse for user's values in a template
-	 * @param array $repl_arr
-	 * @param object $user
-	 * @return array
-	 */
-	function _parseUserValues($repl_arr, &$user) {
-		foreach($user->field_defs as $field_def) {
-			if(($field_def['type'] == 'relate' && empty($field_def['custom_type'])) || $field_def['type'] == 'assigned_user_name') {
-         		continue;
-			}
+    /**
+     * Convenience method to parse for user's values in a template.
+     *
+     * @deprecated Use {@link EmailTemplate::parseUserValues()} instead.
+     * @param array $repl_arr
+     * @param User $user
+     * @return array
+     */
+    public function _parseUserValues($repl_arr, &$user)
+    {
+        LoggerManager::getLogger()->deprecated('EmailTemplate::_parseUserValues() has been deprecated. Use ' .
+            'EmailTemplate::parseUserValues() instead.');
 
-			if($field_def['type'] == 'enum') {
-                $translated = translate($field_def['options'], 'Users', $user->{$field_def['name']});
+        return self::parseUserValues($repl_arr, $user);
+    }
 
-				if(isset($translated) && ! is_array($translated)) {
-					$repl_arr["contact_user_".$field_def['name']] = $translated;
-				} else { // unset enum field, make sure we have a match string to replace with ""
-					$repl_arr["contact_user_".$field_def['name']] = '';
-				}
-			} else {
-                if (isset($user->{$field_def['name']})) {
+    /**
+     * Convenience method to parse for user's values in a template.
+     *
+     * @param array $replacementsArray
+     * @param User $user
+     * @return array
+     */
+    private static function parseUserValues(array $replacementsArray, User $user)
+    {
+        foreach ($user->field_defs as $def) {
+            if (($def['type'] == 'relate' && empty($def['custom_type'])) ||
+                $def['type'] == 'assigned_user_name'
+            ) {
+                continue;
+            }
+
+            $fieldName = "contact_user_{$def['name']}";
+
+            if ($def['type'] == 'enum') {
+                $translated = translate($def['options'], 'Users', $user->{$def['name']});
+
+                if (isset($translated) && !is_array($translated)) {
+                    $replacementsArray[$fieldName] = $translated;
+                } else {
+                    // unset enum field, make sure we have a match string to replace with ""
+                    $replacementsArray[$fieldName] = '';
+                }
+            } else {
+                if (isset($user->{$def['name']})) {
                     // bug 47647 - allow for fields to translate before adding to template
-                    $repl_arr['contact_user_' . $field_def['name']] = self::_convertToType($field_def['type'], $user->{$field_def['name']});
-				} else {
-					$repl_arr["contact_user_".$field_def['name']] = "";
-				}
-			}
-		}
+                    $replacementsArray[$fieldName] = self::convertToType($def['type'], $user->{$def['name']});
+                } else {
+                    $replacementsArray[$fieldName] = '';
+                }
+            }
+        }
 
-		return $repl_arr;
-	}
+        return $replacementsArray;
+    }
 
-    public static function parse_template_bean($string, $bean_name, &$focus)
+    /**
+     * Process template variables replacing them with their appropriate data values from supplied bean
+     *
+     * @param string $string
+     * @param string $bean_name
+     * @param SugarBean $focus
+     * @param bool $htmlTarget - set to true only if the destination of the merge is an html field
+     * @return mixed
+     */
+    public static function parse_template_bean($string, $bean_name, &$focus, $htmlTarget = false)
     {
 		global $current_user;
 		global $beanFiles, $beanList;
 		$repl_arr = array();
 
 		// cn: bug 9277 - create a replace array with empty strings to blank-out invalid vars
-		$acct = BeanFactory::getBean('Accounts');
-		$contact = BeanFactory::getBean('Contacts');
-		$lead = BeanFactory::getBean('Leads');
-		$prospect = BeanFactory::getBean('Prospects');
+		$acct = BeanFactory::newBean('Accounts');
+		$contact = BeanFactory::newBean('Contacts');
+		$lead = BeanFactory::newBean('Leads');
+		$prospect = BeanFactory::newBean('Prospects');
 
 		foreach($lead->field_defs as $field_def) {
 			if(($field_def['type'] == 'relate' && empty($field_def['custom_type'])) || $field_def['type'] == 'assigned_user_name') {
@@ -504,7 +558,7 @@ class EmailTemplate extends SugarBean {
 						}
 					} else {
                         // bug 47647 - allow for fields to translate before adding to template
-                        $translated = self::_convertToType($field_def['type'], $acct->{$field_def['name']});
+                        $translated = self::convertToType($field_def['type'], $acct->{$field_def['name']}, $htmlTarget);
                         $repl_arr = EmailTemplate::add_replacement($repl_arr, $field_def, array(
                             'account_'         . $field_def['name'] => $translated,
                             'contact_account_' . $field_def['name'] => $translated,
@@ -515,7 +569,7 @@ class EmailTemplate extends SugarBean {
 
 			if(!empty($focus->assigned_user_id)) {
 				$user = BeanFactory::getBean('Users', $focus->assigned_user_id);
-				$repl_arr = EmailTemplate::_parseUserValues($repl_arr, $user);
+                $repl_arr = self::parseUserValues($repl_arr, $user);
 			}
 		} elseif($bean_name == 'Users') {
 			/**
@@ -523,7 +577,7 @@ class EmailTemplate extends SugarBean {
 			 * etc. is passed in to parse the contact_* vars.  At this point,
 			 * $current_user will be used to fill in the blanks.
 			 */
-			$repl_arr = EmailTemplate::_parseUserValues($repl_arr, $current_user);
+            $repl_arr = self::parseUserValues($repl_arr, $current_user);
 		} else {
 			// assumed we have an Account in focus
 			foreach($contact->field_defs as $field_def) {
@@ -547,7 +601,7 @@ class EmailTemplate extends SugarBean {
 					}
                 } elseif (isset($contact->{$field_def['name']})) {
                     // bug 47647 - allow for fields to translate before adding to template
-                    $translated = self::_convertToType($field_def['type'], $contact->{$field_def['name']});
+                    $translated = self::convertToType($field_def['type'], $contact->{$field_def['name']}, $htmlTarget);
                     $repl_arr = EmailTemplate::add_replacement($repl_arr, $field_def, array(
                         'contact_'         . $field_def['name'] => $translated,
                         'contact_account_' . $field_def['name'] => $translated,
@@ -580,7 +634,7 @@ class EmailTemplate extends SugarBean {
                     // bug 47647 - translate currencies to appropriate values
                     $repl_arr = EmailTemplate::add_replacement($repl_arr, $field_def, array(
                         strtolower($beanList[$bean_name]) . '_' . $field_def['name']
-                            => self::_convertToType($field_def['type'], $focus->{$field_def['name']}),
+                            => self::convertToType($field_def['type'], $focus->{$field_def['name']}, $htmlTarget),
                     ));
 				}
 			} else {
@@ -638,7 +692,15 @@ class EmailTemplate extends SugarBean {
         return $data;
     }
 
-    public static function parse_template($string, $bean_arr)
+    /**
+     * Iterate over an array of Beans and invoke parse_template_bean for each Bean in array
+     *
+     * @param string $string
+     * @param array $bean_arr
+     * @param bool $htmlTarget - indicates whether the destination field is an Html field
+     * @return mixed
+     */
+    public static function parse_template($string, $bean_arr, $htmlTarget = false)
     {
 		foreach($bean_arr as $bean_name => $bean_id) {
 		    $focus = BeanFactory::getBean($bean_name, $bean_id);
@@ -647,7 +709,7 @@ class EmailTemplate extends SugarBean {
 				$bean_name = 'Contacts';
 			}
 
-            $string = EmailTemplate::parse_template_bean($string, $bean_name, $focus);
+            $string = EmailTemplate::parse_template_bean($string, $bean_name, $focus, $htmlTarget);
 		}
 		return $string;
 	}
@@ -660,7 +722,7 @@ class EmailTemplate extends SugarBean {
 	}
 
     static function getTypeOptionsForSearch(){
-        $template = BeanFactory::getBean('EmailTemplates');
+        $template = BeanFactory::newBean('EmailTemplates');
         $optionKey = $template->field_defs['type']['options'];
         $options = $GLOBALS['app_list_strings'][$optionKey];
         if( ! is_admin($GLOBALS['current_user']) && isset($options['workflow']))

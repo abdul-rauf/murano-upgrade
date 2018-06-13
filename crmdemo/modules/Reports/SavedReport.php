@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 // Contact is used to store customer information.
-class SavedReport extends SugarBean
+class SavedReport extends Basic
 {
 	// Stored fields
 	var $id;
@@ -122,7 +121,6 @@ class SavedReport extends SugarBean
 	}
 
 	function mark_deleted($id){
-	    require_once('modules/Reports/schedule/ReportSchedule.php');
 	    $report_schedule = new ReportSchedule();
 	    $scheduled_reports = $report_schedule->get_report_schedule($id);
 	    foreach($scheduled_reports as $rs_row){
@@ -176,7 +174,7 @@ class SavedReport extends SugarBean
 
 		while ($row = $this->db->fetchByAssoc($result,FALSE) )
 		{
-			$focus = BeanFactory::getBean('Reports');
+			$focus = BeanFactory::newBean('Reports');
 
 			foreach($this->column_fields as $field)
 			{
@@ -207,6 +205,7 @@ class SavedReport extends SugarBean
 		parent::fill_in_additional_detail_fields();
 		$this->get_scheduled_query();
 	}
+
 
 	function get_scheduled_query(){
 		global $current_user;
@@ -303,17 +302,14 @@ class SavedReport extends SugarBean
 		//set the following four buttons.
 
 		if(isset($this->schedule_id) && $this->active == 1){
-			//$is_scheduled_img = SugarThemeRegistry::current()->getImage('scheduled_inline','border="0" align="absmiddle"',null,null,'.gif',$mod_strings['LBL_SCHEDULE_EMAIL']);
 			$is_scheduled = $timedate->to_display_date_time($this->next_run);
 		} else {
-			//$is_scheduled_img = SugarThemeRegistry::current()->getImage('unscheduled_inline','border="0" align="absmiddle"',null,null,$mod_strings['LBL_SCHEDULE_EMAIL']);
 			$is_scheduled = $mod_strings['LBL_NONE'];
 		}
 
 		$view = sprintf("%s %s", SugarThemeRegistry::current()->getImage('view_inline','border="0" align="absmiddle"',null,null,'.gif',$mod_strings['LBL_VIEW']), $mod_strings['LBL_VIEW']);
 
 	//logic for showing delete, publish, and unpublish buttons
-//		if (isset($_REQUEST['view'])) {
 			$delete_img = SugarThemeRegistry::current()->getImage('delete_inline','border="0" align="absmiddle"',null,null,'.gif',$mod_strings['LBL_DELETE']);
 			$delete_line = "<a href=\"index.php?module=Reports&action=index&delete_report_id=".$this->id."\" class=\"listViewTdToolsS1\"> $delete_img ". $mod_strings['LBL_DELETE']."</a>";
 
@@ -321,11 +317,6 @@ class SavedReport extends SugarBean
 			$publish_img = SugarThemeRegistry::current()->getImage('publish_inline','border="0" align="absmiddle"',null,null,'.gif',$mod_strings['LBL_PUBLISH']);
 			$unpublish_line = "<a title='{$mod_strings['LBL_UN_PUBLISH']}' href=\"index.php?module=Reports&action=index&publish=no&publish_report_id=$this->id\" class=\"listViewTdToolsS1\">$unpublish_img</a>";
 			$publish_line = "<a title='{$mod_strings['LBL_PUBLISH']}' href=\"index.php?module=Reports&action=index&publish=yes&publish_report_id=$this->id\" class=\"listViewTdToolsS1\">$publish_img</a>";
-//		} else {
-//			$delete_line = "<SPAN></SPAN>";
-//			$unpublish_line = "<SPAN></SPAN>";
-//			$publish_line = "<SPAN></SPAN>";
-//		}
 
 		if ( is_admin($current_user) ){
 			$delete = $delete_line;
@@ -425,7 +416,6 @@ class SavedReport extends SugarBean
      */
     public function runReportQuery()
     {
-        require_once('modules/Reports/SubpanelFromReports.php');
         $records = array();
         $report = new SubpanelFromReports($this);
         if(!empty($report)){
@@ -460,7 +450,7 @@ function getACLAllowedModules($ignoreSessionCache = false) {
      $report_modules = getAllowedReportModules($modListHeader);
 
      foreach($report_modules as $module=>$class_name) {
-         $seed = BeanFactory::getBean($module);
+         $seed = BeanFactory::newBean($module);
 
          if(empty($seed) || !$seed->ACLAccess('DetailView')) {
                 unset($report_modules[$module]);
@@ -485,7 +475,7 @@ function getACLAllowedModules($ignoreSessionCache = false) {
 
 	 $unallowed_modules = array();
      foreach($report_modules as $module=>$class_name) {
-         $seed = BeanFactory::getBean($module);
+         $seed = BeanFactory::newBean($module);
          if(empty($seed) || !$seed->ACLAccess('DetailView')) {
                 $unallowed_modules[$module] = $class_name;
         }
@@ -509,5 +499,6 @@ function getModulesDropdown()
     foreach ($report_modules as $module => $value) {
         $allowed_modules[$module] = $app_list_strings['moduleList'][$module];
     }
+    asort($allowed_modules);
     return $allowed_modules;
 }

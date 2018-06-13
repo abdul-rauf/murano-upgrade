@@ -69,7 +69,7 @@ function authenticate() {
 		return null;
 	}
 
-	$current_user = BeanFactory::getBean('Users');
+	$current_user = BeanFactory::newBean('Users');
 
 	$result = $current_user->retrieve($_SESSION['authenticated_user_id']);
 	$GLOBALS['log']->debug("JSON_SERVER: retrieved user from SESSION");
@@ -148,11 +148,7 @@ if(strtolower($_SERVER['REQUEST_METHOD'])== 'get') {
 	}
 
 	// extract request
-	if(isset($GLOBALS['HTTP_RAW_POST_DATA']))
-		$request = $json->decode($GLOBALS['HTTP_RAW_POST_DATA'], true);
-	else
-		$request = $json->decode(file_get_contents("php://input"), true);
-
+    $request = $json->decode(file_get_contents("php://input"), true);
 
 	if(!is_array($request)) {
 		$response['error'] = array("error_msg"=>"malformed request");

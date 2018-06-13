@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'include/Expressions/Actions/AbstractAction.php';
 
 class AssignToAction extends AbstractAction
 {
@@ -19,14 +18,6 @@ class AssignToAction extends AbstractAction
      * array Array of actions on which the Expression Action is not allowed
      */
     protected $disallowedActions = array('view');
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function AssignToAction($params)
-    {
-        self::__construct($params);
-    }
 
     public function __construct($params)
     {
@@ -133,14 +124,13 @@ class AssignToAction extends AbstractAction
         // No-op for sidecar
         if (isModuleBWC($target)) {
             require_once 'modules/Home/quicksearchQuery.php';
-            require_once 'include/QuickSearchDefaults.php';
             $json = getJSONobj();
             $userName = Parser::evaluate($this->expression, $target)->evaluate();
             $qsd = QuickSearchDefaults::getQuickSearchDefaults();
             $data = $qsd->getQSUser();
             $data['modules'] = array('Users');
             $data['conditions'][0]['value'] = $userName;
-            $qs = new quicksearchQuery();
+            $qs = new QuickSearchQuery();
             $result = $qs->query($data);
             $resultBean = $json->decodeReal($result);
             print_r($resultBean);

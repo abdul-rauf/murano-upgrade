@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,9 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/connectors/sources/SourceFactory.php');
-require_once('include/connectors/ConnectorFactory.php');
-require_once('include/MVC/Controller/SugarController.php');
 
 class ConnectorsController extends SugarController {
 
@@ -138,7 +133,7 @@ class ConnectorsController extends SugarController {
 		    require_once('include/connectors/utils/ConnectorUtils.php');
             $searchdefs = ConnectorUtils::getSearchDefs();
 			$merge_module = $this->request->getValidInputRequest('merge_module', 'Assert\Mvc\ModuleName', '');
-			$seed = BeanFactory::getBean($merge_module);
+			$seed = BeanFactory::newBean($merge_module);
 			$_searchDefs = isset($searchdefs) ? $searchdefs : array();
 			$_trueFields = array();
 			$source = $this->request->getValidInputRequest('source_id', 'Assert\ComponentName');
@@ -185,7 +180,6 @@ class ConnectorsController extends SugarController {
 	 *
 	 */
 	function action_save(){
-		require_once ('modules/Connectors/ConnectorRecord.php');
 		$ds_record = new ConnectorRecord();
 		$ds_record->load_merge_bean($_REQUEST['merge_module'], false, $_REQUEST['record']);
 		foreach($ds_record->merge_bean->column_fields as $field){
@@ -194,7 +188,8 @@ class ConnectorsController extends SugarController {
 				$value = $_POST[$field];
 
 				$ds_record->merge_bean->$field = $value;
-			}elseif (isset($ds_record->merge_bean->field_name_map[$field]['type']) && $ds_record->merge_bean->field_name_map[$field]['type'] == 'bool') {
+            } elseif (isset($ds_record->merge_bean->field_defs[$field]['type'])
+                && $ds_record->merge_bean->field_defs[$field]['type'] == 'bool') {
 				$ds_record->merge_bean->$field = 0;
 			}
 		}
@@ -220,7 +215,6 @@ class ConnectorsController extends SugarController {
         if(!empty($_REQUEST['source_id']))
         {
             $source_id = $this->request->getValidInputRequest('source_id', 'Assert\ComponentName');
-            require_once('include/connectors/sources/SourceFactory.php');
             $source = SourceFactory::getSource($source_id);
 
             $method = 'ext_'.$_REQUEST['source_func'];
@@ -238,30 +232,7 @@ class ConnectorsController extends SugarController {
 
 	function action_CallRest() {
 		$this->view = 'ajax';
-
-        $previousSoftFail = $this->request->getSoftFail();
-        $this->request->setSoftFail(false);
-
-        $remoteUrl = $this->request->getValidInputRequest('url', array(
-            'Assert\Url' => array(
-                'protocols' => array('http', 'https'),
-            ),
-        ));
-
-        $this->request->setSoftFail($previousSoftFail);
-
-		if(false === ($result=@file_get_contents($remoteUrl))) {
-           echo '';
-		} else if(!empty($_REQUEST['xml'])){
-		   $values = array();
-		   $p = xml_parser_create();
-		   xml_parse_into_struct($p, $result, $values);
-		   xml_parser_free($p);
-		   $json = getJSONobj();
-		   echo $json->encode($values);
-		} else {
-		   echo $result;
-		}
+        echo '';
 	}
 
 	function action_CallSoap() {
@@ -269,7 +240,6 @@ class ConnectorsController extends SugarController {
 	    $source_id = $this->request->getValidInputRequest('source_id', 'Assert\ComponentName');
 	    $module = $this->request->getValidInputRequest('module_id', 'Assert\Mvc\ModuleName');
 	    $return_params = explode(',', $_REQUEST['fields']);
-	    require_once('include/connectors/ConnectorFactory.php');
 	    $component = ConnectorFactory::getInstance($source_id);
 	    $beans = $component->fillBeans($_REQUEST, $module);
 		if(!empty($beans) && !empty($return_params)) {
@@ -302,7 +272,6 @@ class ConnectorsController extends SugarController {
 	    //Load bean
 	    $bean = BeanFactory::getBean($module, $id);
 
-	    require_once('include/connectors/ConnectorFactory.php');
 	    $component = ConnectorFactory::getInstance($source_id);
 	    //Create arguments
 	    $args = array();
@@ -332,7 +301,6 @@ class ConnectorsController extends SugarController {
 	}
 
 	function action_SaveModifyProperties() {
-		require_once('include/connectors/sources/SourceFactory.php');
 		$sources = array();
 		$properties = array();
 		foreach($_REQUEST as $name=>$value) {
@@ -357,7 +325,6 @@ class ConnectorsController extends SugarController {
 		ConnectorUtils::updateMetaDataFiles();
 
         // refresh connector
-        require_once('include/connectors/ConnectorManager.php');
         $cm = new ConnectorManager();
         $connectors = $cm->buildConnectorsMeta();
 
@@ -377,7 +344,6 @@ class ConnectorsController extends SugarController {
 			}
 
 			require_once('include/connectors/utils/ConnectorUtils.php');
-			require_once('include/connectors/sources/SourceFactory.php');
 
 			$connectors = ConnectorUtils::getConnectors();
 			$connector_keys = array_keys($connectors);
@@ -568,7 +534,6 @@ class ConnectorsController extends SugarController {
 
 
             // refresh connector cache
-            require_once('include/connectors/ConnectorManager.php');
             $cm = new ConnectorManager();
             $connectors = $cm->buildConnectorsMeta();
 		    // BEGIN SUGAR INT
@@ -666,7 +631,6 @@ class ConnectorsController extends SugarController {
 	    }
 
         // refresh connector cache
-        require_once('include/connectors/ConnectorManager.php');
         $cm = new ConnectorManager();
         $connectors = $cm->buildConnectorsMeta();
 
@@ -715,7 +679,6 @@ class ConnectorsController extends SugarController {
 		require_once('include/connectors/utils/ConnectorUtils.php');
 		$source_entries = ConnectorUtils::getConnectors();
 
-		require_once('include/connectors/sources/SourceFactory.php');
 		foreach($source_modules_fields as $id=>$mapping_entry) {
 			    //Insert the id mapping
 			    foreach($mapping_entry as $module=>$entry) {
@@ -746,7 +709,6 @@ class ConnectorsController extends SugarController {
 		ConnectorUtils::updateMetaDataFiles();
 
         // refresh connectors
-        require_once('include/connectors/ConnectorManager.php');
         $cm = new ConnectorManager();
         $connectors = $cm->buildConnectorsMeta();
 

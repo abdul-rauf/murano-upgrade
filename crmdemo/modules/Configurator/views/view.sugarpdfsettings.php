@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,6 +9,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\Crypto\Blowfish;
 
 class ConfiguratorViewSugarpdfsettings extends SugarView
 {
@@ -59,11 +60,11 @@ class ConfiguratorViewSugarpdfsettings extends SugarView
             // Save the logos
             $error=$this->checkUploadImage();
             if(empty($error)){
-                $focus = BeanFactory::getBean('Administration');
+                $focus = BeanFactory::newBean('Administration');
                 foreach($SugarpdfSettings as $k=>$v){
                     if($v['type'] == 'password'){
                         if(isset($_POST[$k])){
-                            $_POST[$k] = blowfishEncode(blowfishGetKey($k), $_POST[$k]);
+                            $_POST[$k] = Blowfish::encode(Blowfish::getKey($k), $_POST[$k]);
                         }
                     }
                 }
@@ -79,7 +80,7 @@ class ConfiguratorViewSugarpdfsettings extends SugarView
         }
 
         if(!empty($_POST['restore'])){
-            $focus = BeanFactory::getBean('Administration');
+            $focus = BeanFactory::newBean('Administration');
             foreach($_POST as $key => $val) {
                 $prefix = $focus->get_config_prefix($key);
                 if(in_array($prefix[0], $focus->config_categories)) {
@@ -127,7 +128,6 @@ class ConfiguratorViewSugarpdfsettings extends SugarView
 
         $this->ss->display('modules/Configurator/tpls/SugarpdfSettings.tpl');
 
-        require_once("include/javascript/javascript.php");
         $javascript = new javascript();
         $javascript->setFormName("ConfigureSugarpdfSettings");
         foreach($SugarpdfSettings as $k=>$v){

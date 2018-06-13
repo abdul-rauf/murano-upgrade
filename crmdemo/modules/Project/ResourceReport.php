@@ -1,6 +1,4 @@
 <?php
-
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -43,39 +41,38 @@ $sugar_smarty->assign("CURRENT_USER", $current_user->id);
 $sugar_smarty->assign("CALENDAR_LANG_FILE", getJSPath(sugar_cached('jsLanguage/'.$GLOBALS['current_language'].'.js')));
 
 
-$focus = BeanFactory::getBean('Project');
+$focus = BeanFactory::newBean('Project');
 
 $request = InputValidation::getService();
-if(!empty($_REQUEST['record']))
-{
+if (!empty($_REQUEST['record'])) {
     $id = $request->getValidInputRequest('record', 'Assert\Guid');
     $focus->retrieve($id);
     $sugar_smarty->assign('ID', $id);
 }
 
-$userBean = BeanFactory::getBean('Users');
+$userBean = BeanFactory::newBean('Users');
 $focus->load_relationship("user_resources");
 $users = $focus->user_resources->getBeans($userBean);
-$contactBean = BeanFactory::getBean('Contacts');
+$contactBean = BeanFactory::newBean('Contacts');
 $focus->load_relationship("contact_resources");
 $contacts = $focus->contact_resources->getBeans($contactBean);
 
 $resources = array();
-foreach($users as $user) {
+foreach ($users as $user) {
     $resources[$user->full_name] = $user;
 }
-foreach($contacts as $contact) {
+foreach ($contacts as $contact) {
     $resources[$contact->full_name] = $contact;
 }
 ksort($resources);
 $sugar_smarty->assign("RESOURCES", $resources);
 
 $projectTasks = array();
-$projectTaskBean = BeanFactory::getBean('ProjectTask');
-$holidayBean = BeanFactory::getBean('Holidays');
+$projectTaskBean = BeanFactory::newBean('ProjectTask');
+$holidayBean = BeanFactory::newBean('Holidays');
 $holidays = array();
 $projects= array();
-$projectBean = BeanFactory::getBean('Project');
+$projectBean = BeanFactory::newBean('Project');
 $dateRangeArray = array();
 
 if (!empty($_REQUEST['resource'])) {
@@ -95,8 +92,8 @@ if (!empty($_REQUEST['resource'])) {
         . ' ORDER BY project_task.date_start';
 
     $result = $projectTaskBean->db->query($query, true, "");
-    while(($row = $projectTaskBean->db->fetchByAssoc($result)) != null) {
-        $projectTask = BeanFactory::getBean('ProjectTask');
+    while (($row = $projectTaskBean->db->fetchByAssoc($result)) != null) {
+        $projectTask = BeanFactory::newBean('ProjectTask');
         $projectTask->id = $row['id'];
         $projectTask->retrieve();
         $projectTasks[] = $projectTask;
@@ -104,8 +101,8 @@ if (!empty($_REQUEST['resource'])) {
 
     //Projects //////////////////////
     $result = $projectBean->db->query($query, true, "");
-    while(($row = $projectBean->db->fetchByAssoc($result)) != null) {
-        $project = BeanFactory::getBean('Project');
+    while (($row = $projectBean->db->fetchByAssoc($result)) != null) {
+        $project = BeanFactory::newBean('Project');
         $project->id = $row['project_id'];
         $project->retrieve();
         $projects[$project->id] = $project;
@@ -115,7 +112,7 @@ if (!empty($_REQUEST['resource'])) {
     $query = "select holidays.*, holidays.holiday_date AS hol_date, project.name AS project_name from holidays, project where ";
     $query .= "person_id like ". $db->quoted($_REQUEST['resource']);
     $query .= ' and holiday_date between ' . $db->quoted($dateStartDb) . ' and ' . $db->quoted($dateFinishDb) .
-    	" AND holidays.related_module_id = project.id AND holidays.deleted=0 ";
+        " AND holidays.related_module_id = project.id AND holidays.deleted=0 ";
     $query .= "UNION ALL ";
     $query .= "select holidays.*, holidays.holiday_date AS hol_date, " . $db->quoted($mod_strings['LBL_PERSONAL_HOLIDAY']) . " AS project_name from holidays where ";
     $query .= "person_id like ". $db->quoted($_REQUEST['resource']);
@@ -126,7 +123,7 @@ if (!empty($_REQUEST['resource'])) {
     $i = 0;
     $isHoliday = array();
     while (($row = $holidayBean->db->fetchByAssoc($result)) != null) {
-        $holiday = BeanFactory::getBean('Holidays');
+        $holiday = BeanFactory::newBean('Holidays');
         $holiday->id = $row['id'];
         $holiday->retrieve();
         $holidayDate = $timedate->fromUserDate($holiday->holiday_date, false);
@@ -154,7 +151,7 @@ if (!empty($_REQUEST['resource'])) {
         }
     }
 
-    foreach($projectTasks as $projectTask) {
+    foreach ($projectTasks as $projectTask) {
         $duration = $projectTask->duration;
         $dateStart = $timedate->fromDbFormat($timedate->to_db_date($projectTask->date_start, false), TimeDate::DB_DATE_FORMAT);
         $dateFinish = $timedate->fromDbFormat($timedate->to_db_date($projectTask->date_finish, false), TimeDate::DB_DATE_FORMAT);
@@ -167,18 +164,20 @@ if (!empty($_REQUEST['resource'])) {
 
         while ($remainingDuration > 0) {
             // We don't need to look at tasks that start outside our selected date range.
-            if ($dateStart->ts > $dateRangeFinishTs)
+            if ($dateStart->ts > $dateRangeFinishTs) {
                 break;
+            }
 
             $displayDate = $timedate->asUserDate($dateStart, false);
             if (isset($dateRangeArray[$displayDate])) {
-                if ($remainingDuration > $workDayHours)
+                if ($remainingDuration > $workDayHours) {
                     $dateRangeArray[$displayDate] += $workDayHours;
-                else
+                } else {
                     $dateRangeArray[$displayDate] += $remainingDuration;
+                }
             }
-            if (!isset($isHoliday[$dateStart->ts])){
-	            $remainingDuration -= $workDayHours;
+            if (!isset($isHoliday[$dateStart->ts])) {
+                $remainingDuration -= $workDayHours;
             }
             $dateStart->modify("+1 day");
             while ($dateStart->day_of_week == 6 || $dateStart->day_of_week == 0 || isset($isHoliday[$dateStart->ts])) {
@@ -188,7 +187,7 @@ if (!empty($_REQUEST['resource'])) {
     }
 
     // Calculate the percentage
-    foreach($dateRangeArray as $index=>$eachDay){
+    foreach ($dateRangeArray as $index => $eachDay) {
         if ($eachDay > 0) {
             $eachDay = round(($eachDay / $workDayHours) * 100);
             $dateRangeArray[$index] = $eachDay;

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/SugarQueue/SugarJobQueue.php');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
@@ -26,7 +24,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
       */
      public function lookupCurrencies($activeOnly = false)
      {
-         $this->focus = BeanFactory::getBean('Currencies');
+         $this->focus = BeanFactory::newBean('Currencies');
          $db = DBManagerFactory::getInstance();
          $where = '';
          if ($activeOnly === true) {
@@ -55,7 +53,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
             if(isset($_POST['edit']) && $_POST['edit'] == 'true' && isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['conversion_rate']) && !empty($_POST['conversion_rate']) && isset($_POST['symbol']) && !empty($_POST['symbol']))
             {
 
-                $currency = BeanFactory::getBean('Currencies');
+                $currency = BeanFactory::newBean('Currencies');
                 $isUpdate = false;
                 if(isset($_POST['record']) && !empty($_POST['record'])){
                    $isUpdate = true;
@@ -77,7 +75,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
                 {
                     global $timedate;
                     // use bean factory here
-                    $job = BeanFactory::getBean('SchedulersJobs');
+                    $job = BeanFactory::newBean('SchedulersJobs');
                     $job->name = "SugarJobUpdateCurrencyRates: " . $timedate->getNow()->asDb();
                     $job->target = "class::SugarJobUpdateCurrencyRates";
                     $job->data = $currency->id;
@@ -105,7 +103,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 				return;	
 			}
 			
-				$temp = BeanFactory::getBean('Currencies');
+				$temp = BeanFactory::newBean('Currencies');
 			for($i = 0; $i < $size; $i++){
 				$temp->id = $ids[$i];
 				$temp->name = $names[$i];

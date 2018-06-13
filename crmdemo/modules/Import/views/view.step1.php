@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,9 +15,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
-require_once('modules/Import/views/ImportView.php');
-require_once('include/externalAPI/ExternalAPIFactory.php');
-require_once('modules/Import/Importer.php');
 
 class ImportViewStep1 extends ImportView
 {
@@ -123,7 +119,6 @@ class ImportViewStep1 extends ImportView
         $apis = ExternalAPIFactory::listAPI('Import', true);
         foreach ($apis as $name => $_) {
             if ($name == 'Google') {
-                require_once 'include/externalAPI/Google/ExtAPIGoogle.php';
                 $api = new ExtAPIGoogle();
                 $client = $api->getClient();
                 $loginUrl = $client->createAuthUrl();
@@ -146,7 +141,7 @@ class ImportViewStep1 extends ImportView
         $results = array();
         foreach ($beanList as $moduleName => $beanName)
         {
-            $tmp = BeanFactory::getBean($moduleName);
+            $tmp = BeanFactory::newBean($moduleName);
             if( !empty($tmp->importable) && ($tmp instanceof Person)) {
                 $results[$moduleName] = $moduleName;
             }

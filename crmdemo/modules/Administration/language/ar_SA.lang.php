@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -764,7 +763,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'سمات غير متاحة',
     'LBL_TIMEZONE' => 'المنطقة الزمنية',
     'LBL_TO'    => ' إلى ',
-	'LBL_TRACKER_SETTINGS_DESC' => 'حدد بيانات النظام وبيانات المستخدم التي يتم تعقبها',
     'LBL_UPDATE_CHECK_AUTO'=>'تلقائيًا',
     'LBL_UPDATE_CHECK_MANUAL'=>'يدويًا',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>التحقق التلقائي للتحديثات</B>- إذا تم التحقق، فسيقوم النظام بالتحقق بشكل دوري للبحث عن توفر إصدارات محدثة للتطبيق.',
@@ -934,8 +932,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'تمت إعادة إنشاء config.php بنجاح.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'تحذير: يجب تغيير تكوين PHP الخاص بك للسماح بتنزيل الملفات التي يكون حجمها 6 ميجابايت على الأقل.  يُرجى تعديل قيمة upload_max_filesize في php.ini الموجودة في:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'يُرجى جعل config.php قابلاً للكتابة والمحاولة مرة أخرى.',
-    'MSG_REBUILD_EXTENSIONS' => 'يُرجى الانتقال إلى <a href="index.php?module=Administration&action=Upgrade">شاشة</a> الإصلاح والنقر فوق ملاحق إعادة الإنشاء.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'يُرجى الانتقال إلى <a href="index.php?module=Administration&action=Upgrade">شاشة</a> الإصلاح والنقر فوق علاقات إعادة الإنشاء.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'لا يوجد حاليًا عملاء غير متصلين ممكنين.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'هل تريد بالتأكيد تعطيل هذا العميل غير المتصل؟',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'هل تريد بالتأكيد تمكين هذا العميل غير المتصل؟',
@@ -1046,7 +1042,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'مشاكل',
 'ML_MANIFEST_ISSUE'=>'مشاكل مع البيان',
 'ML_CONFIG_OVERRIDE'=>'لا يسمح بتعديل Config',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'المفتاح - يمكن أن يتألف فقط من حروف، وأرقام، وشرطات سفلية. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'تكوين شريط التنقل إنشاء سريع',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'حدد أي الوحدات موجودة في شريط التنقل إنشاء سريع',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'اختر أي الوحدات التي يمكن للمستخدمين إنشاء سجلات سريعًا باستخدام رمز Plus أعلى شريط التنقل. سحب الوحدات وإسقاطها بين مربعات الوحدات الممكنة والوحدات المعطلة.',
@@ -1094,7 +1090,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'الشركة المصنعة',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'العلاقة',
 	'Releases'       => 'الإصدار',
@@ -1104,7 +1099,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'الشاحن',
 	'TaxRates'       => 'TaxRate',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

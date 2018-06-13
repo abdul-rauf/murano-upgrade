@@ -1,8 +1,5 @@
 <?php
 
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,9 +11,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/ModuleBuilder/MB/AjaxCompose.php');
-require_once('modules/Leads/ConvertLayoutMetadataParser.php');
-require_once('include/MetaDataManager/MetaDataManager.php');
 
 class ViewEditConvert extends SugarView
 {
@@ -79,7 +73,6 @@ class ViewEditConvert extends SugarView
         $modules = $this->getModulesFromDefs();
         $smarty->assign('modules', $this->jsonHelper->encode($modules));
 
-        require_once 'modules/ModuleBuilder/parsers/relationships/DeployedRelationships.php';
         $relatableModules = DeployedRelationships::findRelatableModules();
 
         //pull out modules that have already been chosen

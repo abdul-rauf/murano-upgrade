@@ -45,11 +45,13 @@
         },
 
         /**
-         * Used to register a template src without compiling the template yet. The template will be
-         * compiled the first time it is used (requested with getView/getLayout/getField)
-         * @param tpl
-         * @param src
-         * @param force
+         * Used to register a template src without compiling the template yet.
+         * The template will be compiled the first time it is used (requested
+         * with getView/getLayout/getField).
+         *
+         * @param {Array} tpl The template as `[key, compiled]` pair.
+         * @param {string} src The template content (.hbs file).
+         * @param {boolean} [force=false] `true` to force recompilation on it.
          * @private
          */
         _add: function(tpl, src, force) {
@@ -67,11 +69,12 @@
 
         /**
          * Conditionally compiles a template.
-         * @param {Array} tpl First item is template key, the second is compiled template.
-         * @param {String} src Template source code.
-         * @param {Boolean} force Flag indicating if the template must be re-compiled.
+         * @param {Array} tpl First item is template key, the second is
+         *   compiled template.
+         * @param {string} src Template source code.
+         * @param {boolean} [force=false] Flag indicating if the template must
+         *   be re-compiled.
          * @private
-         * @ignore
          */
         _compile: function(tpl, src, force) {
             Handlebars.templates = Handlebars.templates || {};
@@ -82,11 +85,12 @@
         /**
          * Compiles a template.
          *
-         * This method puts the precompiled version of the template in cache and returns the compiled template.
-         * The template can be accessed directly via `Handlebars.templates[key]` statement.
+         * This method puts the precompiled version of the template in cache
+         * and returns the compiled template. The template can be accessed
+         * directly via `Handlebars.templates[key]` statement.
          *
-         * @param {String} key Template identifier.
-         * @param {String} src The actual template source to be compiled.
+         * @param {string} key Template identifier.
+         * @param {string} src The actual template source to be compiled.
          * @return {Function} Compiled template.
          */
         compile: function(key, src) {
@@ -102,9 +106,9 @@
 
         /**
          * Retrieves a compiled handlebars template.
-         * @param {String} key Identifier of the template to be retrieved.
-         * @param {boolean} (optional) compile force the template to compile if we have uncompiled source.
-         *  Defaults to true.
+         * @param {string} key Identifier of the template to be retrieved.
+         * @param {boolean} [compile=true] Force the template to compile if we
+         *   have uncompiled source.
          * @return {Function} Compiled Handlebars template.
          */
         get: function(key, compile) {
@@ -124,8 +128,8 @@
 
         /**
          * Gets compiled template for a view.
-         * @param {String} name View name.
-         * @param {String} module (optional) Module name.
+         * @param {string} name View name.
+         * @param {string} module (optional) Module name.
          * @return {Function} Compiled template.
          */
         getView: function(name, module) {
@@ -156,11 +160,12 @@
 
         /**
          * Gets compiled template for a field.
-         * @param {String} type Field type.
-         * @param {String} view View name.
-         * @param {String} module The Module where the field is from
-         * @param {Boolean} fallbackTemplate(optional) Template name to fallback to if template for `view` is not found.
-         * if view specific is not found. Defaults to `true`.
+         * @param {string} type Field type.
+         * @param {string} view View name.
+         * @param {string} module The Module where the field is from
+         * @param {boolean} [fallbackTemplate=true] Template name to fallback
+         *   to if template for `view` is not found. If view specific is not
+         *   found.
          * @return {Function} Compiled template.
          */
         getField: function(type, view, module, fallbackTemplate) {
@@ -175,9 +180,8 @@
 
         /**
          * Gets compiled template for a layout.
-         * @param {String} type Layout Type
-         * @param {String} name (optional) Layout name.
-         * @param {String} moduleName (optional) Module name.
+         * @param {string} [name] Layout name.
+         * @param {string} [moduleName] Module name.
          * @return {Function} Compiled template.
          */
         getLayout: function(name, moduleName) {
@@ -186,10 +190,11 @@
 
         /**
          * Compiles and puts into local storage a view template.
-         * @param {String} name View name.
-         * @param {String} module Module name.
-         * @param {String} src Template source code.
-         * @param {Boolean} force Flag indicating if the template must be re-compiled.
+         * @param {string} name View name.
+         * @param {string} module Module name.
+         * @param {string} src Template source code.
+         * @param {boolean} [force=false] Flag indicating if the template must
+         *   be re-compiled.
          * @return {Function} Compiled template.
          */
         setView: function(name, module, src, force) {
@@ -198,11 +203,12 @@
 
         /**
          * Compiles and puts into local storage a field template.
-         * @param {String} type Field type.
-         * @param {String} view View name.
-         * @param {String} module Module where field came from
-         * @param {String} src Template source code.
-         * @param {Boolean} force Flag indicating if the template must be re-compiled.
+         * @param {string} type Field type.
+         * @param {string} view View name.
+         * @param {string} module Module where field came from.
+         * @param {string} src Template source code.
+         * @param {boolean} [force=false] Flag indicating if the template must
+         *   be re-compiled.
          * @return {Function} Compiled template.
          */
         setField: function(type, view, module, src, force) {
@@ -212,10 +218,11 @@
 
         /**
          * Compiles and stores layout templates
-         * @param {String} name Layout Name
-         * @param {String} moduleName Module Name (optional)
-         * @param {String} src Raw template source
-         * @param {Boolean} force Flag indicating if the template must be re-compiled
+         * @param {string} name Layout Name.
+         * @param {string} [moduleName] Module Name.
+         * @param {string} src Raw template source.
+         * @param {boolean} [force=false] Flag indicating if the template must
+         *   be re-compiled.
          * @return {Function} Compiled template
          */
         setLayout: function(name, moduleName, src, force) {
@@ -223,7 +230,9 @@
         },
 
         /**
-         * Registers view, layout, and field templates from metadata payload for later "lazy" on-demand compilation.
+         * Registers view, layout, and field templates from metadata payload
+         * for later "lazy" on-demand compilation.
+         *
          * The metadata must contain the following sections:
          *
          * <pre>
@@ -261,7 +270,8 @@
          * </pre>
          *
          * @param {Object} metadata Metadata payload.
-         * @param {Boolean} force (optional) Flag indicating if the cache is ignored and the templates are to be recompiled.
+         * @param {boolean} [force=false] Flag indicating if the cache is
+         *   ignored and the templates are to be recompiled.
          */
         set: function(metadata, force) {
             if (metadata.views) {

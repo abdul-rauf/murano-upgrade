@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/api/SugarApi.php');
 class TimePeriodsCurrentApi extends SugarApi
 {
     public function registerApiRest()
@@ -40,7 +36,7 @@ class TimePeriodsCurrentApi extends SugarApi
         );
     }
 
-    public function getCurrentTimePeriod(ServiceBase $api, $args)
+    public function getCurrentTimePeriod(ServiceBase $api, array $args)
     {
         $tp = TimePeriod::getCurrentTimePeriod();
 
@@ -52,7 +48,7 @@ class TimePeriodsCurrentApi extends SugarApi
         return $tp->toArray();
     }
 
-    public function getTimePeriodByDate(ServiceBase $api, $args)
+    public function getTimePeriodByDate(ServiceBase $api, array $args)
     {
         if(!isset($args["date"]) || $args["date"] == 'undefined') {
             // return a 404

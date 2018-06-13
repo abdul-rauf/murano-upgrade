@@ -17,8 +17,8 @@ $connector_strings = array(
 <br/><br/>
 <ol>
 <li>ไปที่ไซต์ Google Developers:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>ลงชื่อเข้าสู่ระบบโดยใช้บัญชี Google ที่คุณต้องการใช้ลงทะเบียนแอปพลิเคชัน</li>
 <li>สร้างโครงการใหม่</li>

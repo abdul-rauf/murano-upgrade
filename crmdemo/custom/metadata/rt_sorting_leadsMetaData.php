@@ -1,6 +1,6 @@
 <?php
-// created: 2017-11-23 11:10:41
-$dictionary["rt_sorting_leads"] = array (
+// created: 2018-06-13 14:43:30
+$dictionary['rt_sorting_leads'] = array (
   'true_relationship_type' => 'one-to-many',
   'relationships' => 
   array (
@@ -21,18 +21,18 @@ $dictionary["rt_sorting_leads"] = array (
   'table' => 'rt_sorting_leads_c',
   'fields' => 
   array (
-    0 => 
+    'id' => 
     array (
       'name' => 'id',
       'type' => 'varchar',
       'len' => 36,
     ),
-    1 => 
+    'date_modified' => 
     array (
       'name' => 'date_modified',
       'type' => 'datetime',
     ),
-    2 => 
+    'deleted' => 
     array (
       'name' => 'deleted',
       'type' => 'bool',
@@ -40,13 +40,13 @@ $dictionary["rt_sorting_leads"] = array (
       'default' => '0',
       'required' => true,
     ),
-    3 => 
+    'rt_sorting_leadsleads_ida' => 
     array (
       'name' => 'rt_sorting_leadsleads_ida',
       'type' => 'varchar',
       'len' => 36,
     ),
-    4 => 
+    'rt_sorting_leadsrt_sorting_idb' => 
     array (
       'name' => 'rt_sorting_leadsrt_sorting_idb',
       'type' => 'varchar',

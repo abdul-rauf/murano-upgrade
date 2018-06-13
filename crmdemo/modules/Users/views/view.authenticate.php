@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,10 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/MVC/View/SidecarView.php';
-require_once "include/api/RestService.php";
-require_once 'clients/base/api/OAuth2Api.php';
-require_once 'include/SugarOAuth2/SugarOAuth2Server.php';
 
 use Sugarcrm\Sugarcrm\Session\SessionStorage;
 
@@ -26,7 +21,7 @@ class UsersViewAuthenticate extends SidecarView
      */
     protected $dataOnly = false;
 
-    public function preDisplay()
+    public function preDisplay($params = array())
     {
         $sess = SessionStorage::getInstance();
         if ($sess->getId()) {
@@ -73,17 +68,17 @@ class UsersViewAuthenticate extends SidecarView
         if (!empty($_REQUEST['platform'])) {
             $this->platform = $_REQUEST['platform'];
         }
-        parent::preDisplay();
+        parent::preDisplay($params);
     }
 
-    public function display()
+    public function display($params = array())
     {
         if($this->dataOnly) {
             $this->ss->assign("siteUrl", $GLOBALS['sugar_config']['site_url']);
             $template = $this->getAuthenticateTemplate();
             $this->ss->display($template);
         } else {
-            parent::display();
+            parent::display($params);
         }
     }
 

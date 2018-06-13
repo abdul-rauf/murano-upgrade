@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,27 +12,16 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 class SugarWidgetFieldVarchar extends SugarWidgetReportField
 {
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarWidgetFieldVarchar(&$layout_manager)
-    {
-        self::__construct($layout_manager);
-    }
-
-    public function __construct(&$layout_manager)
-    {
-        parent::__construct($layout_manager);
-    }
-
- function queryFilterEquals(&$layout_def)
+    public function queryFilterEquals($layout_def)
  {
 		return $this->_get_column_select($layout_def)."='".$GLOBALS['db']->quote($layout_def['input_name0'])."'\n";
  }
 
- function queryFilterNot_Equals_Str(&$layout_def)
+    public function queryFilterNot_Equals_Str($layout_def)
  {
-		return $this->_get_column_select($layout_def)."!='".$GLOBALS['db']->quote($layout_def['input_name0'])."'\n";
+        $field_name = $this->_get_column_select($layout_def);
+        $input_name0 = $GLOBALS['db']->quote($layout_def['input_name0']);
+        return "{$field_name} != '{$input_name0}' OR ({$field_name} IS NULL)\n";
  }
 
  function queryFilterContains(&$layout_def)
@@ -42,7 +30,9 @@ class SugarWidgetFieldVarchar extends SugarWidgetReportField
  }
   function queryFilterdoes_not_contain(&$layout_def)
  {
-		return $this->_get_column_select($layout_def)." NOT LIKE '%".$GLOBALS['db']->quote($layout_def['input_name0'])."%'\n";
+        $field_name = $this->_get_column_select($layout_def);
+        $input_name0 = $GLOBALS['db']->quote($layout_def['input_name0']);
+        return "{$field_name} NOT LIKE '%{$input_name0}%' OR ({$field_name} IS NULL)\n";
  }
 
  function queryFilterStarts_With(&$layout_def)

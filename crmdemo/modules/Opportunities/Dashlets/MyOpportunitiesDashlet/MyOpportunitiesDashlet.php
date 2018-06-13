@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,19 +13,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  // $Id: MyOpportunitiesDashlet.php 45763 2009-04-01 19:16:18Z majed $
 
 
-require_once('include/Dashlets/DashletGeneric.php');
 
 
 class MyOpportunitiesDashlet extends DashletGeneric { 
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function MyOpportunitiesDashlet($id, $def = null)
-    {
-        self::__construct($id, $def);
-    }
-
     public function __construct($id, $def = null)
     {
         global $current_user, $app_strings, $dashletData;
@@ -39,7 +28,7 @@ class MyOpportunitiesDashlet extends DashletGeneric {
         $this->searchFields = $dashletData['MyOpportunitiesDashlet']['searchFields'];
         $this->columns = $dashletData['MyOpportunitiesDashlet']['columns'];
         
-        $this->seedBean = BeanFactory::getBean('Opportunities');        
+        $this->seedBean = BeanFactory::newBean('Opportunities');        
     }
     
     //4.5.0g fix for upgrade issue where user_preferences table still refer to column as 'amount'

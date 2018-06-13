@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -95,8 +94,6 @@ $mod_strings = array (
 	'LBL_QUOTES_SUBPANEL_TITLE' => 'Tarjoukset',
 	
 	'LBL_RESOURCES_SUBPANEL_TITLE' => 'Resurssit',
-	'LBL_RESOURCE_NAME' => 'Resurssin nimi',
-	'LBL_RESOURCE_TYPE' => 'Resurssin tyyppi',
 
     'LBL_TASK_ID' => 'ID',
     'LBL_TASK_NAME' => 'Tehtävän nimi',

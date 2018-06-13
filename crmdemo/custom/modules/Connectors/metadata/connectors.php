@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 11:26:20
+// created: 2018-06-13 14:44:40
 $connectors = array (
   'ext_rest_twitter' => 
   array (
@@ -98,22 +98,6 @@ $connectors = array (
     ),
     'modules' => 
     array (
-    ),
-  ),
-  'ext_rest_dnb' => 
-  array (
-    'id' => 'ext_rest_dnb',
-    'configured' => false,
-    'name' => 'D&B',
-    'enabled' => true,
-    'directory' => 'modules/Connectors/connectors/sources/ext/rest/dnb',
-    'eapm' => 
-    array (
-      'enabled' => true,
-    ),
-    'modules' => 
-    array (
-      0 => 'Accounts',
     ),
   ),
 );

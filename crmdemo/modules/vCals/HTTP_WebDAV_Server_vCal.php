@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/Calendar/Calendar.php';
 
 require_once 'vendor/HTTP_WebDAV_Server/Server.php';
 
@@ -36,18 +34,10 @@ class HTTP_WebDAV_Server_vCal extends HTTP_WebDAV_Server
         var $source = "";
         var $publish_key = "";
 
-        /**
-         * @deprecated Use __construct() instead
-         */
-        public function HTTP_WebDAV_Server_vCal()
-        {
-            self::__construct();
-        }
-
     public function __construct()
         {
-           $this->vcal_focus = BeanFactory::getBean('vCals');
-           $this->user_focus = BeanFactory::getBean('Users');
+           $this->vcal_focus = BeanFactory::newBean('vCals');
+           $this->user_focus = BeanFactory::newBean('Users');
         }
 
 
@@ -426,5 +416,4 @@ class HTTP_WebDAV_Server_vCal extends HTTP_WebDAV_Server
         parent::http_status($status);
         header('Content-Type: text/calendar; charset=' . $GLOBALS['sugar_config']['default_charset']);
     }
-
 }

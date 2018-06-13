@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Pozycja oferty',
     'LBL_LIST_MANUFACTURER' => 'Producent',
     'LBL_MANUFACTURERS' => 'Producenci',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Numer producenta',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Numer partii',
     'LBL_LIST_QUANTITY' => 'Ilość',
     'LBL_LIST_COST_PRICE' => 'Koszt',
     'LBL_LIST_DISCOUNT_PRICE' => 'Cena',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Wybór rabatu',
     'LBL_LIST_PRICE' => 'Cena katalogowa:',
     'LBL_VENDOR_PART_NUM' => 'Nr katalogowy sprzedawcy:',
-    'LBL_MFT_PART_NUM' => 'Numer katalogowy producenta:',
+    'LBL_MFT_PART_NUM' => 'Numer partii:',
     'LBL_NEXT_STEP' => 'Następny krok:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Data obniżki ceny:',
     'LBL_WEIGHT' => 'Masa:',
@@ -168,6 +168,8 @@ Aby utworzyć {{module_name}}:
 - Kliknij Pokaż więcej, aby w razie konieczności wyświetlić dodatkowe pola.
 2. Kliknij Zapisz, aby zapisać nowy rekord i powrócić do poprzedniej strony.',
 
-    'LBL_MANUFACTURERS' => 'Producenci',
     'LBL_PRODUCT_POSITION' => 'Pozycja pakietu produktów',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista danych ofert dla pozcyzji linii oferty',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nowa pozycja oferty)',
+    'LBL_DISCOUNT_PERCENT' => '% procent',
 );

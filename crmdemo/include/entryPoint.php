@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -107,30 +106,37 @@ if(empty($GLOBALS['installing']) &&empty($sugar_config['dbconfig']['db_name']))
 	    exit ();
 }
 
-if (!empty($sugar_config['xhprof_config']))
-{
-    require_once 'include/SugarXHprof/SugarXHprof.php';
+require_once('include/utils.php');
+require_once 'include/dir_inc.php';
+
+require_once 'include/utils/array_utils.php';
+require_once 'include/utils/file_utils.php';
+require_once 'include/utils/security_utils.php';
+require_once 'include/utils/logic_utils.php';
+require_once 'include/utils/sugar_file_utils.php';
+require_once 'include/utils/mvc_utils.php';
+require_once 'include/utils/db_utils.php';
+require_once 'include/utils/encryption_utils.php';
+
+require_once 'include/SugarCache/SugarCache.php';
+require_once 'include/utils/autoloader.php';
+SugarAutoLoader::init();
+
+if (empty($GLOBALS['installing'])) {
+    $GLOBALS['log'] = LoggerManager::getLogger('SugarCRM');
+}
+
+if (!empty($sugar_config['xhprof_config'])) {
     SugarXHprof::getInstance()->start();
 }
 
-// make sure SugarConfig object is available
-require_once 'include/SugarObjects/SugarConfig.php';
-
-require_once('include/utils.php');
 register_shutdown_function('sugar_cleanup');
 
-require_once('include/clean.php');
 
 // cn: set php.ini settings at entry points
 setPhpIniSettings();
 
 require_once('sugar_version.php'); // provides $sugar_version, $sugar_db_version, $sugar_flavor
-
-require_once('include/utils/sugar_file_utils.php');
-require_once('include/utils/autoloader.php');
-
-// Initialize autoloader
-SugarAutoLoader::init();
 
 // Initialize InputValdation service as soon as possible. Up to this point
 // it is expected that no code has altered any input superglobals.
@@ -142,37 +148,11 @@ foreach (SugarAutoLoader::existing('include/custom_utils.php', 'custom/include/c
     require_once $file;
 }
 
-require_once('include/database/DBManagerFactory.php');
-require_once('include/dir_inc.php');
-
-require_once('include/Localization/Localization.php');
-require_once('include/TimeDate.php');
 require_once('include/modules.php'); // provides $moduleList, $beanList, $beanFiles, $modInvisList, $adminOnlyList, $modInvisListActivities
-
-require_once('data/SugarBean.php');
-require_once('include/utils/mvc_utils.php');
-require_once('include/SugarObjects/LanguageManager.php');
-require_once('include/SugarObjects/VardefManager.php');
-
-require_once('include/utils/file_utils.php');
-require_once('include/SugarLogger/LoggerManager.php');
-require_once('modules/Trackers/BreadCrumbStack.php');
-require_once('modules/Trackers/Tracker.php');
-require_once('modules/Trackers/TrackerManager.php');
 require_once('modules/Administration/updater_utils.php');
-require_once('modules/Users/User.php');
-require_once('modules/Users/authentication/AuthenticationController.php');
-require_once('include/utils/LogicHook.php');
-require_once('include/MVC/SugarModule.php');
-require_once('include/SugarCache/SugarCache.php');
-require_once('modules/Currencies/Currency.php');
-require_once('include/MVC/SugarApplication.php');
-require_once 'data/SugarACL.php';
+require_once 'modules/Currencies/Currency.php';
 
-require_once('include/upload_file.php');
 UploadStream::register();
-//
-//SugarApplication::startSession();
 
 ///////////////////////////////////////////////////////////////////////////////
 ////    Handle loading and instantiation of various Sugar* class
@@ -182,7 +162,6 @@ if (!defined('SUGAR_PATH')) {
 if(empty($GLOBALS['installing'])){
 ///////////////////////////////////////////////////////////////////////////////
 ////	SETTING DEFAULT VAR VALUES
-$GLOBALS['log'] = LoggerManager::getLogger('SugarCRM');
 $error_notice = '';
 $use_current_user_login = false;
 
@@ -215,7 +194,7 @@ if (!isset ($_SERVER['REQUEST_URI'])) {
 	$_SERVER['REQUEST_URI'] = '';
 }
 
-$current_user = BeanFactory::getBean('Users');
+$current_user = BeanFactory::newBean('Users');
 $current_entity = null;
 $system_config = Administration::getSettings();
 
@@ -225,5 +204,3 @@ LogicHook::initialize()->call_custom_logic('', 'after_entry_point');
 
 ////	END SETTING DEFAULT VAR VALUES
 ///////////////////////////////////////////////////////////////////////////////
-
-?>

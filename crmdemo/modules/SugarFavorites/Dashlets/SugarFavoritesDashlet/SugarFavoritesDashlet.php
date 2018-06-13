@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,8 +17,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-require_once('include/Dashlets/DashletGeneric.php');
-require_once('modules/SugarFavorites/SugarFavorites.php');
 
 class SugarFavoritesDashlet extends DashletGeneric 
 { 
@@ -38,14 +35,14 @@ class SugarFavoritesDashlet extends DashletGeneric
         $this->searchFields = $dashletData['SugarFavoritesDashlet']['searchFields'];
         $this->columns = $dashletData['SugarFavoritesDashlet']['columns'];
         $this->isConfigurable = true;
-        $this->seedBean = BeanFactory::getBean('SugarFavorites');   
+        $this->seedBean = BeanFactory::newBean('SugarFavorites');   
         $this->filters = array();
     }
-    
-    public function process()
+
+    public function process($lvsParams = array())
     {
         $this->lvs->quickViewLinks = false;
-        parent::process();
+        parent::process($lvsParams);
     }
     
     /**

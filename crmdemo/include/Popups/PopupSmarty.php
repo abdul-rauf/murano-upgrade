@@ -12,9 +12,7 @@
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
-require_once('include/ListView/ListViewSmarty.php');
 
-require_once('include/TemplateHandler/TemplateHandler.php');
 require_once('include/SearchForm/SearchForm2.php');
 define("NUM_COLS", 2);
 class PopupSmarty extends ListViewSmarty{
@@ -43,14 +41,6 @@ class PopupSmarty extends ListViewSmarty{
     var $searchForm;
     var $module;
     var $massUpdateData = '';
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function PopupSmarty($seed, $module)
-    {
-        self::__construct($seed, $module);
-    }
 
     public function __construct($seed, $module)
     {
@@ -183,7 +173,6 @@ class PopupSmarty extends ListViewSmarty{
         global $app_strings;
 
         if(!is_file(sugar_cached("jsLanguage/{$GLOBALS['current_language']}.js"))) {
-            require_once('include/language/jsLanguage.php');
             jsLanguage::createAppStringsCache($GLOBALS['current_language']);
         }
         $jsLang = getVersionedScript("cache/jsLanguage/{$GLOBALS['current_language']}.js",  $GLOBALS['sugar_config']['js_lang_version']);
@@ -245,9 +234,18 @@ class PopupSmarty extends ListViewSmarty{
 
 	/*
 	 * Setup up the smarty template. we added an extra step here to add the order by from the popupdefs.
+     * All parameters except first one are ignored
 	 */
-	function setup($file) {
-
+    public function setup(
+        $file,
+        $fileParent = '',
+        $where = '',
+        $params = array(),
+        $offset = 0,
+        $limit = -1,
+        $filter_fields = array(),
+        $id_field = 'id'
+    ) {
 	    if(isset($this->_popupMeta)){
 			if(isset($this->_popupMeta['create']['formBase'])) {
 				require_once FileLoader::validateFilePath('modules/' . $this->seed->module_dir . '/' . $this->_popupMeta['create']['formBase']);
@@ -537,8 +535,8 @@ EOQ;
 	}
 
 	function getQuickCreate(){
-		require_once("include/EditView/PopupQuickCreate.php");
 		$qc = new PopupQuickCreate($this->module);
 		return $qc->process($this->module);
 	}
 }
+

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -130,9 +129,9 @@ class SugarWidgetSubPanelTopCreateNoteButton extends SugarWidgetSubPanelTopButto
 	}
 
 
-	function display($defines, $additionalFormFields = null)
+    public function display(array $defines, $additionalFormFields = array())
 	{
-	    $focus = BeanFactory::getBean('Notes');
+	    $focus = BeanFactory::newBean('Notes');
 		if ( !$focus->ACLAccess('EditView') ) {
 		    return '';
 	    }
@@ -140,4 +139,3 @@ class SugarWidgetSubPanelTopCreateNoteButton extends SugarWidgetSubPanelTopButto
 		return parent::display($defines, $additionalFormFields);
 	}
 }
-?>

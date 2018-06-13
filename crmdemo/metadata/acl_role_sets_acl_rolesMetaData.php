@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,60 +9,71 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 $dictionary['acl_role_sets_acl_roles'] = array(
     'table' => 'acl_role_sets_acl_roles',
-    'fields' => array (
+    'fields' => array(
         'id' => array(
             'name' => 'id',
             'vname' => 'LBL_ID',
             'type' => 'id',
             'required' => true,
         ),
-        array(
-            'name' =>'acl_role_set_id',
-            'type' =>'id',
+        'acl_role_set_id' => array(
+            'name' => 'acl_role_set_id',
+            'type' => 'id',
         ),
-        array(
-            'name' =>'acl_role_id',
-            'type' =>'id',
+        'acl_role_id' => array(
+            'name' => 'acl_role_id',
+            'type' => 'id',
         ),
-        array(
+        'date_modified' => array(
             'name' => 'date_modified',
             'type' => 'datetime',
         ),
-        array(
-            'name' =>'deleted',
-            'type' =>'bool',
+        'deleted' => array(
+            'name' => 'deleted',
+            'type' => 'bool',
         ),
     ),
-    'indices' => array (
+    'indices' => array(
         array(
             'name' => 'idx_rsr_id',
-            'type' =>'primary',
-            'fields'=>array('id'),
+            'type' => 'primary',
+            'fields' => array(
+                'id',
+            ),
         ),
         array(
-            'name' =>'idx_rsr_set_id',
-            'type' =>'index',
-            'fields' => array('acl_role_set_id', 'acl_role_id')),
+            'name' => 'idx_rsr_set_id',
+            'type' => 'index',
+            'fields' => array(
+                'acl_role_set_id',
+                'acl_role_id',
+            ),
+        ),
         array(
-            'name' =>'idx_rsr_role_id',
-            'type' =>'index',
-            'fields' => array('acl_role_id'),
+            'name' => 'idx_rsr_role_id',
+            'type' => 'index',
+            'fields' => array(
+                'acl_role_id',
+            ),
         ),
         array(
             'name' => 'idx_rsr_acl_role_set_id',
-            'type' =>'index',
-            'fields' => array('acl_role_set_id'),
+            'type' => 'index',
+            'fields' => array(
+                'acl_role_set_id',
+            ),
         ),
     ),
     'relationships' => array(
         'acl_role_sets_acl_roles' => array(
-            'lhs_module'=> 'ACLRoleSets',
-            'lhs_table'=> 'acl_role_sets',
+            'lhs_module' => 'ACLRoleSets',
+            'lhs_table' => 'acl_role_sets',
             'lhs_key' => 'id',
-            'rhs_module'=> 'ACLRoles',
-            'rhs_table'=> 'acl_roles',
+            'rhs_module' => 'ACLRoles',
+            'rhs_table' => 'acl_roles',
             'rhs_key' => 'id',
             'relationship_type' => 'many-to-many',
             'join_table' => 'acl_role_sets_roles',

@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Rediger' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Principal-id',
-    'LBL_DNB_BAL_PREVIEW' => 'Leads visning',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Leads',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: Lead information',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Salgsmuligheder',
 

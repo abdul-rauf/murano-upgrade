@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,8 +18,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 
-require_once('include/upload_file.php');
-require_once('include/DetailView/DetailView.php');
 
 //Old DetailView compares wrong session variable against new view.list.  Need to sync so that
 //the pagination on the DetailView page will show.
@@ -30,7 +27,7 @@ if(isset($_SESSION['EMAILTEMPLATE_FROM_LIST_VIEW']))
 global $app_strings;
 global $mod_strings;
 
-$focus = BeanFactory::getBean('EmailTemplates');
+$focus = BeanFactory::newBean('EmailTemplates');
 
 $detailView = new DetailView();
 $offset=0;
@@ -144,7 +141,7 @@ $xtpl->assign("PUBLISHED","CHECKED");
 ///////////////////////////////////////////////////////////////////////////////
 ////	NOTES (attachements, etc.)
 ///////////////////////////////////////////////////////////////////////////////
-$note = BeanFactory::getBean('Notes');
+$note = BeanFactory::newBean('Notes');
 $where = "notes.parent_id='{$focus->id}'";
 $notes_list = $note->get_full_list("notes.name", $where,true);
 

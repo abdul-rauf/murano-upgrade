@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/connectors/ConnectorFactory.php');
 /**
  * Filter factory
  * @api
@@ -22,7 +20,6 @@ class FilterFactory
 
 	public static function getInstance($source_name, $filter_name='')
 	{
-		require_once('include/connectors/filters/default/filter.php');
 		$key = $source_name . $filter_name;
 		if(empty(self::$filter_map[$key])) {
 

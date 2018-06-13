@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,13 +9,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('modules/Import/views/ImportView.php');
-require_once('modules/Import/sources/ImportFile.php');
-require_once('modules/Import/ImportFileSplitter.php');
-require_once('modules/Import/ImportCacheFiles.php');
-require_once('modules/Import/ImportDuplicateCheck.php');
 
-require_once('include/upload_file.php');
 
 /**
  * Description: view handler for step 3 of the import process
@@ -44,7 +37,7 @@ class ImportViewStep3 extends ImportView
         $this->ss->assign("CURRENT_STEP", $this->currentStep);
         // attempt to lookup a preexisting field map
         // use the custom one if specfied to do so in step 1
-        $mapping_file = BeanFactory::getBean('Import_1');
+        $mapping_file = BeanFactory::newBean('Import_1');
         $field_map = $mapping_file->set_get_import_wizard_fields();
         $default_values = array();
 		$ignored_fields = array();
@@ -384,7 +377,6 @@ class ImportViewStep3 extends ImportView
                 $required[$name] = str_replace(":","",translate($properties['name'] ,$this->bean->module_dir));
         }
         // include anything needed for quicksearch to work
-        require_once("include/TemplateHandler/TemplateHandler.php");
         // Bug #46879 : createQuickSearchCode() function in IBM RTC call function getQuickSearchDefaults() to get instance and then getQSDLookup() function
         // if we call this function as static it replaces context and use ImportViewStep3 as $this in getQSDLookup()
         $template_handler = new TemplateHandler();

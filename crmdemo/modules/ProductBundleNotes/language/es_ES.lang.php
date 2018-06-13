@@ -10,5 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-    'LBL_BUNDLE_NOTE_POSITION' => 'Posición del paquete de producto'
+    'LBL_BUNDLE_NOTE_POSITION' => 'Posición del paquete de producto',
+    'LBL_PRODUCT_BUNDLE_NOTES_QUOTE_DATA_LIST' => 'Lista de datos del presupusto de las notas del juego de productos',
 );

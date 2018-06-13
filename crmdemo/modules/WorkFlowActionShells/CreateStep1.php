@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -33,7 +32,7 @@ global $urlPrefix;
 global $currentModule;
 
 
-$seed_object = BeanFactory::getBean('WorkFlow');
+$seed_object = BeanFactory::newBean('WorkFlow');
 
 if(!empty($_REQUEST['workflow_id']) && $_REQUEST['workflow_id']!="") {
     $seed_object->retrieve($_REQUEST['workflow_id']);
@@ -60,7 +59,7 @@ else {
 $form->assign("MOD", $mod_strings);
 $form->assign("APP", $app_strings);
 
-$focus = BeanFactory::getBean('WorkFlowActionShells');
+$focus = BeanFactory::newBean('WorkFlowActionShells');
 //Add When Expressions Object is availabe
 //$exp_object = new Expressions();
 
@@ -69,17 +68,14 @@ if(isset($_REQUEST['record']) && isset($_REQUEST['record'])) {
 }
 		//Bug 12335: We need to include the javascript language file first. And also the language file in WorkFlow is needed.
         if(!is_file(sugar_cached('jsLanguage/') . $GLOBALS['current_language'] . '.js')) {
-            require_once('include/language/jsLanguage.php');
             jsLanguage::createAppStringsCache($GLOBALS['current_language']);
         }
         $javascript_language_files = getVersionedScript("cache/jsLanguage/{$GLOBALS['current_language']}.js",  $GLOBALS['sugar_config']['js_lang_version']);
         if(!is_file(sugar_cached('jsLanguage/') . $this->module . '/' . $GLOBALS['current_language'] . '.js')) {
-                require_once('include/language/jsLanguage.php');
                 jsLanguage::createModuleStringsCache($this->module, $GLOBALS['current_language']);
         }
         $javascript_language_files .= getVersionedScript("cache/jsLanguage/{$this->module}/{$GLOBALS['current_language']}.js", $GLOBALS['sugar_config']['js_lang_version']);
         if(!is_file(sugar_cached('jsLanguage/WorkFlow/') . $GLOBALS['current_language'] . '.js')) {
-            require_once('include/language/jsLanguage.php');
             jsLanguage::createModuleStringsCache('WorkFlow', $GLOBALS['current_language']);
         }
         $javascript_language_files .= getVersionedScript("cache/jsLanguage/WorkFlow/{$GLOBALS['current_language']}.js", $GLOBALS['sugar_config']['js_lang_version']);
@@ -121,7 +117,6 @@ $form->out("embeded");
 //////////New way of processing page
 
 
-	require_once('include/ListView/ProcessView.php');
 	$ProcessView = new ProcessView($seed_object, $focus);
 	$ProcessView->no_count = true;
 	$ProcessView->write("ActionsCreateStep1");

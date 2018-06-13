@@ -17,8 +17,8 @@ Få en API-nyckel och tillhörande hemlighet från Google genom att registrera d
 <br/><br/>
 <ol>
 <li>Gå till sidan för Google Developers:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Logga in med Google-kontot du vill registrera applikationen på.</li>
 <li>Skapa ett nytt projekt</li>

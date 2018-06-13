@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - Властивості UI Library полегшують застосування клієнтських властивостей.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Повнофункціональний клас пересилання e-mail для PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - мінімізатор Javascript, написаний на PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Дає можливість швидкого двостороннього шифрування blowfish без запитів розширення MCrypt PHP.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - синтаксичний аналізатор SAX для HTML та інших погано сформованих XML-документів.',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - Розширення  бібліотеки інтерфейсу користувача, автор: Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - скрипт для виявлення і зупинки Javascript Flash Player.',
@@ -274,8 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Ласкаво просимо в панель Довідки Sugar 7',
-    'LBL_HELP_RECORD' => 'Довідка відображає конкретну інформацію про модуль, яку Ви переглядаєте, відображає детальні кроки для виконання деяких дій у модулі і вказує шлях для отримання більш повної інформації та підтримки. Довідкова панель залишається відкритою для того, щоб Ви переглядали кроки тоді, коли Ви проходите ці кроки в модулі. Довідкова панель доступна для всіх модулів Sugar 7 і може перемикатися на "відкриту" та "закриту" натисканням на кнопку "Допомога" у нижньому колонтитулі програми.',
+    'LBL_HELP_RECORD_TITLE' => 'Довідка',
+    'LBL_HELP_RECORD' => 'Довідка містить інформацію про модуль, який ви переглядаєте, надає детальні інструкції щодо виконання певних дій у модулі, а також указівки для отримання більш повної інформації та підтримки.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Фільтр',
 );

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +17,7 @@ $notices = array(
 
 
 foreach($notices as $notice){
-	$teamNotice = BeanFactory::getBean('TeamNotices');
+	$teamNotice = BeanFactory::newBean('TeamNotices');
 	$teamNotice->name = $notice['name'];
 	$teamNotice->description = $notice['description'];
 	if(!empty($notice['url'])){

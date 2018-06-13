@@ -1,24 +1,23 @@
 {
     "buildFiles": {
         "sidecar": [
-            "lib/handlebars/handlebars.min.js",
+            "node_modules/handlebars/dist/handlebars.min.js",
             "lib/jquery/jquery.min.js",
             "lib/jquery/jquery-migrate-1.2.1.min.js",
             "lib/jquery-ui/js/jquery-ui-1.11.4.custom.min.js",
-            "lib/backbone/underscore.min.js",
+            "node_modules/underscore/underscore-min.js",
             "lib/backbone/backbone.min.js",
-            "lib/stash/stash.min.js",
-            "lib/async/async.min.js",
+            "node_modules/store/store.min.js",
+            "node_modules/async/lib/async.js",
             "lib/jquery/jquery.iframe.transport.js",
             "lib/php-js/version_compare.js",
-            "lib/momentjs/min/moment.min.js",
-            "lib/crosstab/src/crosstab.js",
-            "lib/bigjs/big.js",
+            "node_modules/moment/min/moment.min.js",
+            "node_modules/crosstab/src/crosstab.js",
+            "node_modules/big.js/big.js",
             "lib/sugarapi/sugarapi.js",
             "src/app.js",
             "src/utils/utils.js",
             "src/utils/date.js",
-            "src/utils/file.js",
             "src/utils/math.js",
             "src/utils/currency.js",
             "src/core/before-event.js",
@@ -50,9 +49,7 @@
             "src/view/alert.js",
             "lib/sugaranalytics/sugaranalytics.js",
             "lib/sugaranalytics/googleanalyticsconnector.js",
-            "lib/sugar/sugar.searchahead.js",
             "lib/sugar/sugar.liverelativedate.js",
-            "lib/sugar/sugar.ajaxcallInprogress.js",
             "src/utils/underscore-mixins.js"
         ]
     }

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,10 +10,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once("modules/Calendar/CalendarUtils.php");
 
 class Call extends SugarBean {
-	var $field_name_map;
 	// Stored fields
 	var $id;
 	var $json_id;
@@ -114,7 +111,7 @@ class Call extends SugarBean {
 			if(empty($field['name'])) {
 		        continue;
 		    }
-		    $this->field_name_map[$field['name']] = $field;
+            $this->field_defs[$field['name']] = $field;
 		}
 
          if(!empty($GLOBALS['app_list_strings']['duration_intervals']))
@@ -206,7 +203,7 @@ class Call extends SugarBean {
 		// First, get the list of IDs.
 		$query = "SELECT contact_id as id from calls_contacts where call_id='$this->id' AND deleted=0";
 
-		return $this->build_related_list($query, BeanFactory::getBean('Contacts'));
+		return $this->build_related_list($query, BeanFactory::newBean('Contacts'));
 	}
 
 
@@ -530,18 +527,7 @@ class Call extends SugarBean {
             return parent::get_notification_recipients();
         }
 
-        $inviteesList = CalendarUtils::buildInvitesList($this);
-
-        $list = array();
-        foreach ($inviteesList as $id => $module) {
-            $notify_user = BeanFactory::getBean($module, $id);
-            if(!empty($notify_user->id)) {
-                $notify_user->new_assigned_user_name = $notify_user->full_name;
-                $list[$notify_user->id] = $notify_user;
-            }
-        }
-
-        return $list;
+        return CalendarUtils::buildInvitesList($this);
 	}
 
     function bean_implements($interface){

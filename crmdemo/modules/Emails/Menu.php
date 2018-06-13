@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,7 +15,7 @@ global $current_user;
 
 $default = 'index.php?module=Emails&action=ListView&assigned_user_id='.$current_user->id;
 
-$e = BeanFactory::getBean('Emails');
+$e = BeanFactory::newBean('Emails');
 
 // my inbox
 if(ACLController::checkAccess('Emails', 'edit', true)) {

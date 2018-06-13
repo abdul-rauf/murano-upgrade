@@ -35,7 +35,7 @@
             'edit': 'write',
             'detail': 'read',
             'list': 'read',
-            'disabled': 'write',
+            'disabled': 'read',
         },
 
         /**

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,9 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('data/BeanFactory.php');
-require_once('include/SugarFields/SugarFieldHandler.php');
-require_once('include/api/SugarApi.php');
 
 class RegisterLeadApi extends SugarApi {
     public function registerApiRest() {
@@ -33,12 +29,12 @@ class RegisterLeadApi extends SugarApi {
     /**
      * Fetches data from the $args array and updates the bean with that data
      * @param $bean SugarBean The bean to be updated
-     * @param $api ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param array $args The arguments array passed in from the API
      * @return id Bean id
      */
-    protected function updateBean(SugarBean $bean,ServiceBase $api, $args) {
-
+    protected function updateBean(SugarBean $bean, ServiceBase $api, array $args)
+    {
         // Bug 54515: Set modified by and created by users to assigned to user. If not set default to admin.
         $bean->update_modified_by = false;
         $bean->set_created_by = false;
@@ -55,18 +51,16 @@ class RegisterLeadApi extends SugarApi {
         $bean->save(true);
 
         return parent::updateBean($bean, $api, $args);
-
     }
 
     /**
      * Creates lead records
-     * @param $apiServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $apiServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param array $args The arguments array passed in from the API
      * @return array properties on lead bean formatted for display
      */
-    public function createLeadRecord($api, $args) {
-
-
+    public function createLeadRecord(ServiceBase $api, array $args)
+    {
         // Bug 54647 Lead registration can create empty leads
         if (!isset($args['last_name'])) {
             throw new SugarApiExceptionMissingParameter();

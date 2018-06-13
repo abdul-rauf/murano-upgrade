@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,8 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/externalAPI/Base/ExternalAPIBase.php');
-require_once('include/externalAPI/Base/WebFeed.php');
 
 
 class ExtAPIFacebook extends ExternalAPIBase implements WebFeed {
@@ -160,7 +157,6 @@ class ExtAPIFacebook extends ExternalAPIBase implements WebFeed {
     {
         try {
             // This will throw exceptions if either the curl or json libraries aren't available.
-            require_once('include/externalAPI/Facebook/FacebookLib.php');
 
         } catch ( Exception $e ) { return false; }
 

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -350,7 +349,9 @@ class SchedulersJob extends Basic
      */
     public function mark_deleted($id)
     {
-        return $this->db->query("DELETE FROM {$this->table_name} WHERE id=".$this->db->quoted($id));
+        $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
+        $conn = $this->db->getConnection();
+        return $conn->executeQuery($query, array($id));
     }
 
     /**
@@ -434,7 +435,7 @@ class SchedulersJob extends Basic
      * Change current user to given user
      * @param User $user
      */
-    protected function sudo($user)
+    protected function sudo(User $user)
     {
         $GLOBALS['current_user'] = $user;
         // Reset the session

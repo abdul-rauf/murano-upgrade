@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library－用於實施豐富的用戶端功能的使用者介面庫公用程式。',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer－適用於 PHP 的全功能電子郵件傳送類',
   'LBL_SOURCE_JSHRINK' => 'JShrink－ 以 PHP 編寫的簡化器',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish－允許快速雙向 Blowfish 加密算法，而無需使用 MCrypt PHP 擴充。',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3－適用於 HTML 和其他格式錯誤的 XML 文件的 SAX 剖析器',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library－Jack Slocum 推出的 Yahoo! 使用者介面庫的擴充',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject－Javascript Flash Player 偵測和內嵌指令碼',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => '歡迎來到 Sugar 7 說明儀表板',
-    'LBL_HELP_RECORD' => '說明 Dashlet 顯示您正在檢視頁面的特定資訊，提供在此模組中執行某些操作的詳細步驟，並指示您何處可獲取全面的資訊和支援。說明 Dashlet 將保持打開狀態，您可以一邊檢視步驟，一邊在模組中執行步驟。 
-
-說明 Dashboard 適用於所有 Sugar 7 模組，並可透過按一下應用程式頁尾的說明標記在「打開」和「關閉」之間切換。',
+    'LBL_HELP_RECORD_TITLE' => '說明',
+    'LBL_HELP_RECORD' => '説明顯示您正在檢視的模組的具體資訊，提供在模組中執行某些操作所需的詳細步驟，並告訴您如何獲得更全面的資訊和支援。',
 
     'LBL_FACETS_DASHBOARD_TITLE' => '篩選器',
 );

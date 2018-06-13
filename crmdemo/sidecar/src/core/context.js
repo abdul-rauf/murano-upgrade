@@ -55,8 +55,9 @@
         },
 
         /**
-         * Clears context's attributes and calls {@link Core.Context#resetLoadFlag} method.
-         * @param {Object} [options] Standard Backbone.Model options
+         * Clears context's attributes. See {@link Core.Context#resetLoadFlag}.
+         *
+         * @param {Object} [options] Standard `Backbone.Model` options.
          */
         clear: function(options) {
             var collection = this.get('collection');
@@ -65,16 +66,9 @@
                 collection.abortFetchRequest();
             }
 
-            if (_.has(options, 'clearAllListeners')) {
-                app.logger.warn('Core.Context::clear has deprecated support for the `clearAllListeners` option ' +
-                    'since 7.8 and will remove it in 7.9');
-            }
-
             _.each(this.children, function(child) {
                 child.clear(options);
             });
-
-            options = _.extend({clearAllListeners: true}, options || {});
 
             this.children = [];
             this.parent = null;
@@ -83,17 +77,13 @@
             // before clearing them.
             _.each(this.attributes, function(value) {
                 if (value && (value.off === Backbone.Events.off)) {
-                    if (options.clearAllListeners) {
-                        value.off(); //remove all
-                        if(_.isFunction(value.dispose)) {
-                            value.dispose();
-                        }
-                    } else {
-                        value.off(null, null, this); //only remove events with context object as the context
+                    value.off();
+                    value.stopListening();
+                    if (_.isFunction(value.dispose)) {
+                        value.dispose();
                     }
                 }
             }, this);
-            delete options.clearAllListeners;
 
             this.off();
             Backbone.Model.prototype.clear.call(this, options);
@@ -208,19 +198,24 @@
          * This method does nothing if this context already contains an instance of a model or a collection.
          * Pass `true` to re-create model and collection.
          *
-         * @param {Boolean} force(optional) Flag indicating if data instances must be re-created.
+         * @param {boolean} force(optional) Flag indicating if data instances must be re-created.
          */
-        prepare: function(force) {
-            if (!force && (this.get("model") || this.get("collection"))) return;
+        prepare: function (force, prepareRelated) {
+            var link;
+            if (force || (!this.get('model') && !this.get('collection'))) {
+                var modelId = this.get('modelId');
+                var create = this.get('create');
+                link = this.get('link');
 
-            var modelId = this.get("modelId"),
-                create = this.get("create"),
-                link = this.get("link");
+                this.set(link ?
+                    this._prepareRelated(link, modelId, create) :
+                    this._prepare(modelId, create)
+                );
+            }
 
-            this.set(link ?
-                this._prepareRelated(link, modelId, create) :
-                this._prepare(modelId, create)
-            );
+            if ((force || !this._relatedCollectionsPopulated) && (!link || prepareRelated)) {
+                this._populateRelatedContexts();
+            }
 
             return this;
         },
@@ -241,9 +236,7 @@
             this.set('fetch', fetch);
             var recursive = options.recursive === void 0 ? true : options.recursive;
             if (recursive) {
-                _.each(this.children, function(child) {
-                    child.setFetch(fetch);
-                });
+                _.each(this.children, (child) => { child.setFetch(fetch); });
             }
         },
 
@@ -413,6 +406,41 @@
             } else {
                 app.logger.warn("Skipping fetch because model is not Bean, Bean Collection, or it is not defined, module: " + this.get("module"));
             }
+        },
+
+        /**
+         * Creates child context for each `link` of each `collection` field
+         * present on the bean.
+         *
+         * @private
+         */
+        _populateRelatedContexts: function () {
+            if (!this.get('collection')) {
+                return;
+            }
+
+            this.get('collection').each(function(bean) {
+                var collectionFields = bean.fieldsOfType('collection');
+                if (!_.isEmpty(collectionFields)) {
+                    _.each(collectionFields, function (field) {
+                        var links = field.links;
+                        if (_.isString(links)) {
+                            links = [links];
+                        }
+
+                        var linkCollections = {};
+                        _.each(links, function (link) {
+                            var rc = this.getChildContext({ link:link });
+                            rc.prepare();
+                            linkCollections[link] = rc.get('collection');
+                        }, this);
+
+                        bean.set(field.name, app.data.createMixedBeanCollection([], { links:linkCollections }));
+                    }, this);
+                }
+            }, this);
+
+            this._relatedCollectionsPopulated = true;
         },
 
         /**

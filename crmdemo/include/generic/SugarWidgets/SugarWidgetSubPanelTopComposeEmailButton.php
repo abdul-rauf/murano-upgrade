@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -26,7 +25,7 @@ class SugarWidgetSubPanelTopComposeEmailButton extends SugarWidgetSubPanelTopBut
     	return parent::getWidgetId();
     }
 
-	function display($defines)
+    public function display(array $defines, $additionalFormFields = array())
 	{
 		if((ACLController::moduleSupportsACL($defines['module'])  && !ACLController::checkAccess($defines['module'], 'edit', true) ||
 			$defines['module'] == "Activities" & !ACLController::checkAccess("Emails", 'edit', true))){
@@ -70,7 +69,6 @@ class SugarWidgetSubPanelTopComposeEmailButton extends SugarWidgetSubPanelTopBut
 		} else {
 			//Generate the compose package for the quick create options.
     		$composeData = array("parent_id" => $parent_id, "parent_type"=>$parent_type);
-            require_once('modules/Emails/EmailUI.php');
             $eUi = new EmailUI();
             $j_quickComposeOptions = $eUi->generateComposePackageForQuickCreate($composeData, http_build_query($composeData), false, $defines['focus']);
 

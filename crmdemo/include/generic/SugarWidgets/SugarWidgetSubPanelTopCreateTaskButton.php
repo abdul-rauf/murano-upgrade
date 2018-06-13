@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,7 +16,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 class SugarWidgetSubPanelTopCreateTaskButton extends SugarWidgetSubPanelTopButtonQuickCreate
 {
-	function &_get_form($defines, $additionalFormFields = null)
+    public function &_get_form($defines, $additionalFormFields = null, $asUrl = false)
 	{
 		global $app_strings;
 		global $currentModule;
@@ -130,10 +129,9 @@ class SugarWidgetSubPanelTopCreateTaskButton extends SugarWidgetSubPanelTopButto
 		return $button;
 	}
 
-
-	function display($defines, $additionalFormFields = null)
+    public function display(array $defines, $additionalFormFields = array())
 	{
-	    $focus = BeanFactory::getBean('Tasks');
+	    $focus = BeanFactory::newBean('Tasks');
 		if ( !$focus->ACLAccess('EditView') ) {
 		    return '';
 	    }
@@ -141,4 +139,3 @@ class SugarWidgetSubPanelTopCreateTaskButton extends SugarWidgetSubPanelTopButto
 		return parent::display($defines, $additionalFormFields);
 	}
 }
-?>

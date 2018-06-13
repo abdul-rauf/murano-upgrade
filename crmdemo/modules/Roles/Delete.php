@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,7 +21,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 
-$focus = BeanFactory::getBean('Roles');
+$focus = BeanFactory::newBean('Roles');
 
 if(!isset($_REQUEST['record']))
 	sugar_die("A record number must be specified to delete the role.");

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,7 +14,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 $listViewDefs['Contacts'] = array(
 	'NAME' => array(
-		'width' => '20%', 		
+        'width' => '20',
 		'label' => 'LBL_LIST_NAME', 
 		'link' => true,
         'contextMenu' => array('objectType' => 'sugarPerson', 
@@ -35,11 +34,11 @@ $listViewDefs['Contacts'] = array(
         'related_fields' => array('first_name', 'last_name', 'salutation', 'account_name', 'account_id'),
 		), 
 	'TITLE' => array(
-		'width' => '15%', 
+        'width' => '15',
 		'label' => 'LBL_LIST_TITLE',
         'default' => true), 
 	'ACCOUNT_NAME' => array(
-		'width' => '34%', 
+        'width' => '34',
 		'label' => 'LBL_LIST_ACCOUNT_NAME', 
 		'module' => 'Accounts',
 		'id' => 'ACCOUNT_ID',
@@ -59,7 +58,7 @@ $listViewDefs['Contacts'] = array(
         'ACLTag' => 'ACCOUNT',
         'related_fields' => array('account_id')),
 	'EMAIL' => array(
-		'width' => '15%', 
+        'width' => '15',
 		'label' => 'LBL_LIST_EMAIL_ADDRESS',
 		'sortable' => false,
 		'link' => true,
@@ -67,7 +66,7 @@ $listViewDefs['Contacts'] = array(
         'default' => true
 		),  
 	'PHONE_WORK' => array(
-		'width' => '15%', 
+        'width' => '15',
 		'label' => 'LBL_OFFICE_PHONE',
         'default' => true),
     'DEPARTMENT' => array(
@@ -146,7 +145,7 @@ $listViewDefs['Contacts'] = array(
     'SYNC_CONTACT' => array (
         'type' => 'bool',
         'label' => 'LBL_SYNC_CONTACT',
-        'width' => '10%',
+        'width' => '10',
         'default' => false,
         'sortable' => false,
         ),
@@ -155,4 +154,3 @@ $listViewDefs['Contacts'] = array(
         'label' => 'LBL_DATE_ENTERED',
 		'default' => true)       
 );
-?>

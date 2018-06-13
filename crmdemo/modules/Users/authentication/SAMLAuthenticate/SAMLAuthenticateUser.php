@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/Users/authentication/SugarAuthenticate/SugarAuthenticateUser.php';
-require_once 'modules/Users/authentication/SAMLAuthenticate/SAMLAuthenticate.php';
 require_once 'modules/Users/authentication/SAMLAuthenticate/saml.php';
 
 /**
@@ -239,7 +236,7 @@ class SAMLAuthenticateUser extends SugarAuthenticateUser
             return '';
         }
         $GLOBALS['log']->debug("Called createUser");
-        $user = BeanFactory::getBean('Users');
+        $user = BeanFactory::newBean('Users');
         $user->user_name = $name;
         $user->email1 = $name;
         $user->last_name = $name;
@@ -342,7 +339,7 @@ class SAMLAuthenticateUser extends SugarAuthenticateUser
      */
     protected function fetch_user($id, $field = null)
     {
-        $user = BeanFactory::getBean('Users');
+        $user = BeanFactory::newBean('Users');
 
         if (null !== $field) {
             switch ($field) {
@@ -379,7 +376,7 @@ class SAMLAuthenticateUser extends SugarAuthenticateUser
      * @param array $params
      * @return boolean
      */
-    public function loadUserOnLogin($name, $password, $fallback = false, $params = array())
+    public function loadUserOnLogin($name, $password, $fallback = false, array $params = array())
     {
         // provide dummy login and password to parent class so that
         // authentication
@@ -406,7 +403,6 @@ class SAMLAuthenticateUser extends SugarAuthenticateUser
     protected function getRequestRegistry()
     {
         if (!$this->requestRegistry) {
-            require_once 'modules/Users/authentication/SAMLAuthenticate/SAMLRequestRegistry.php';
             $this->requestRegistry = new SAMLRequestRegistry();
         }
 

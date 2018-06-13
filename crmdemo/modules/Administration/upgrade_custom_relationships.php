@@ -19,8 +19,6 @@ function upgrade_custom_relationships($modules = array())
 	global $current_user, $moduleList;
 	if (!is_admin($current_user)) sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']); 
 	
-	require_once("modules/ModuleBuilder/parsers/relationships/DeployedRelationships.php");
-	require_once("modules/ModuleBuilder/parsers/relationships/OneToManyRelationship.php");
 	
 	if (empty($modules))
 		$modules = $moduleList;
@@ -75,7 +73,7 @@ function upgrade_custom_relationships($modules = array())
 						$filePath = "custom/Extension/modules/$module/Ext/Layoutdefs/$file";
 						include($filePath);
 
-						$bean = BeanFactory::getBean($module);
+						$bean = BeanFactory::newBean($module);
 						$fields = $bean->getFieldDefinitions();
 
 						foreach ($layout_defs[$module]["subpanel_setup"] as $key => $subDef) {

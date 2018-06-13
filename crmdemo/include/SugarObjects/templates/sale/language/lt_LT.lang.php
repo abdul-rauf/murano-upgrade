@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -88,7 +87,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   'LBL_TOP_SALES' => 'Mano geriausi atidaryti pardavimai',
   'NTC_REMOVE_OPP_CONFIRMATION' => 'Ar tikrai norite pašalinti šį kontaktą iš šio pardavimo?',
 	'SALE_REMOVE_PROJECT_CONFIRM' => 'Ar tikrai norite pašalinti šį pardavimą iš šio projekto?',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Pardavimas',
 	'LBL_ACTIVITIES_SUBPANEL_TITLE'=>'Veiklos',
 	'LBL_HISTORY_SUBPANEL_TITLE'=>'Istorija',
     'LBL_RAW_AMOUNT'=>'Pradinė suma',

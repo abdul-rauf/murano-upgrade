@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -763,7 +762,6 @@ Wenn Sie fortgesetzte Probleme mit der automatischen Validierung haben, prüfen 
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Nicht verfügbare Designs',
     'LBL_TIMEZONE' => 'Zeitzone',
     'LBL_TO'    => 'an',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Wählen Sie, welche System- und Benutzerdaten überwacht werden sollen',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatisch',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manuell',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Automatische Prüfung auf Updates</B> - Wenn aktiviert, überprüft das System regelmäßig, ob neue Updates vorhanden sind.',
@@ -930,8 +928,6 @@ Wenn Sie fortgesetzte Probleme mit der automatischen Validierung haben, prüfen 
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'config.php wurde erfolgreich neu aufgebaut.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Warnung: Ihre PHP-Konfiguration muss geändert werden, damit Sie mindestens 6 MB große Dateien hochladen können. Bitte ändern sie upload_max_filesize in php.ini hier:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Bitte machen Sie config.php beschreibbar und versuchen Sie es erneut.',
-    'MSG_REBUILD_EXTENSIONS' => 'Bitte gehen Sie zu <a href="index.php?module=Administration&action=Upgrade">Reparieren</a> und klicken Sie auf "Erweiterungen neu aufbauen".',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Bitte gehen Sie zu <a href="index.php?module=Administration&action=Upgrade">Reparieren</a> und klicken Sie auf "Beziehungen neu aufbauen".',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Es sind zur Zeit keine Offline-Clients aktiviert.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Sind Sie sicher, dass Sie diesen Offline-Client deaktivieren möchten?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Sind Sie sicher, dass Sie diesen Offline-Client aktivieren möchten?',
@@ -1041,7 +1037,7 @@ Wenn Sie fortgesetzte Probleme mit der automatischen Validierung haben, prüfen 
 'ML_ISSUES'=>'Probleme',
 'ML_MANIFEST_ISSUE'=>'Problem mit dem Manifest',
 'ML_CONFIG_OVERRIDE'=>'Konfigurationsänderung ist nicht gestattet',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Schlüssel - besteht evtl. nur aus Buchstaben, Zahlen und Unterstrichen. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Konfigurieren Sie die Schnellzugriffsleiste',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Legen Sie fest, welche Module in der Schnellzugriffsleiste verfügbar sein sollen',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Hier die Module auswählen, die mit dem Plus-Symbol (+) schnell erstellt werden können. Platzieren Sie die Module entweder in der Gruppe der aktivierten oder in jener der deaktivierten Module.',
@@ -1089,7 +1085,6 @@ Wenn Sie fortgesetzte Probleme mit der automatischen Validierung haben, prüfen 
 	'Manufacturers'  => 'Manufacturer',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'Projektressource',
 
 	'Relationships' => 'Beziehung',
 	'Releases'       => 'Release',
@@ -1099,7 +1094,6 @@ Wenn Sie fortgesetzte Probleme mit der automatischen Validierung haben, prüfen 
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'Absender',
 	'TaxRates'       => 'TaxRate',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

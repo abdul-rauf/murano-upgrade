@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,6 +27,7 @@ $mod_strings = array (
   'LBL_TAXRATE' => 'Taux taxes :',
   'LBL_LIST_NAME' => 'Taux de taxe',
   'LBL_NAME' => 'Nom du taux de taxe :',
+  'LBL_FILTER_ACTIVE' => 'Taux actif de taxe',
   'LBL_LIST_LIST_ORDER' => 'Ordre',
   'LBL_LIST_ORDER' => 'Ordre :',
   'LBL_LIST_STATUS' => 'Statut',

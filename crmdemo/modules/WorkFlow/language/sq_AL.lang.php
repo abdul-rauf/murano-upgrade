@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -93,7 +92,7 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Rrjedha e punës'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Lloji',
 
-  // Workflow sunsetting message, added in 7.6.1
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Shënim:</strong> Ky funksion do të hiqet në versionin e ardhshëm të "Sugar", aktualisht i planifikuar për vitin 2017. Klientët e edicionit "Sugar Enterprise" duhet të fillojnë të përdorin funksionalitetet e rrjedhës së avancuar të punës, të ofruara nga "Advanced Workflow". Klikoni <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">këtu</a> për më shumë informacion.',
+  // Workflow sunsetting message, updated for 7.9
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Shënim:</strong> Funksioni "Rrjedha e punës" dhe "Administrimi i rrjedhës së punës" të "Sugar" do të hiqen në versionin e ardhshëm të "Sugar". Klientët e versionit "Sugar Enterprise" duhet të fillojnë të përdorin funksionin "Advanced Workflow" të "Sugar". Kliko <a href="http://www.sugarcrm.com/wf-eol" target="_blank">këtu</a> për më shumë informacion.',
 );
 

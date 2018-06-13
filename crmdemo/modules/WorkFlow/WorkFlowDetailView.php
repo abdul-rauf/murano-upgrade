@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,14 +17,12 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-require_once('include/upload_file.php');
-require_once('include/DetailView/DetailView.php');
 
 
 global $app_strings;
 global $mod_strings;
 
-$focus = BeanFactory::getBean('EmailTemplates');
+$focus = BeanFactory::newBean('EmailTemplates');
 
 $detailView = new DetailView();
 $offset=0;
@@ -105,7 +102,7 @@ $xtpl->assign("PUBLISHED","CHECKED");
 ////	NOTES (attachements, etc.)
 ///////////////////////////////////////////////////////////////////////////////
 $attachments = '';
-$note = BeanFactory::getBean('Notes');
+$note = BeanFactory::newBean('Notes');
 $notes_list = $note->get_full_list("notes.name", "notes.parent_id=" . $GLOBALS['db']->quoted($focus->id), true);
 if(!empty($notes_list)) {
     for($i=0; $i<count($notes_list); $i++) {

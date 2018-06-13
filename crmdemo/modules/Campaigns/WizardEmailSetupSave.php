@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -24,7 +23,7 @@ global $mod_strings;
 
 
 //get new administration bean for setup
-$focus = BeanFactory::getBean('Administration');
+$focus = BeanFactory::newBean('Administration');
 $camp_steps[] = 'wiz_step_';
 $camp_steps[] = 'wiz_step1_';
 $camp_steps[] = 'wiz_step2_';

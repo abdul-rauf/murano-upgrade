@@ -30,7 +30,7 @@
  */
 (function(app) {
 
-    app.augment("logger", {
+    app.augment('logger', {
 
         /**
          * Logging levels.
@@ -45,7 +45,7 @@
              */
             TRACE: {
                 value: 1,
-                name: "TRACE"
+                name: 'TRACE'
             },
             /**
              * Debug log level
@@ -53,7 +53,7 @@
              */
             DEBUG: {
                 value: 2,
-                name: "DEBUG"
+                name: 'DEBUG'
             },
             /**
              * Info log level
@@ -61,7 +61,7 @@
              */
             INFO: {
                 value: 3,
-                name: "INFO"
+                name: 'INFO'
             },
             /**
              * Warn log level
@@ -69,7 +69,7 @@
              */
             WARN: {
                 value: 4,
-                name: "WARN"
+                name: 'WARN'
             },
             /**
              * Error log level
@@ -77,7 +77,7 @@
              */
             ERROR: {
                 value: 5,
-                name: "ERROR"
+                name: 'ERROR'
             },
             /**
              * Fatal log level
@@ -85,7 +85,7 @@
              */
             FATAL: {
                 value: 6,
-                name: "FATAL"
+                name: 'FATAL'
             }
         },
 
@@ -125,7 +125,7 @@
             write: function(level, message) {
                 // work around for browsers without console
                 if (!window.console) window.console = {};
-                if (!window.console.log) window.console.log = function () { };
+                if (!window.console.log) window.console.log = function() { };
                 if (level.value <= app.logger.levels.INFO.value) {
                     console.log(message);
                 }
@@ -213,9 +213,9 @@
              * @method
              */
             format: function(level, message, date) {
-                var dateString = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate() +
-                    " " + date.getUTCHours() + ":" + date.getUTCMinutes() + ":" + date.getUTCSeconds();
-                return level.name + "[" + dateString + "]: " + message;
+                var dateString = date.getUTCFullYear() + '-' + (date.getUTCMonth() + 1) + '-' + date.getUTCDate() +
+                    ' ' + date.getUTCHours() + ':' + date.getUTCMinutes() + ':' + date.getUTCSeconds();
+                return level.name + '[' + dateString + ']: ' + message;
             }
         },
 
@@ -370,7 +370,7 @@
                 serverWriter.write(level, message);
 
             } catch (e) {
-                console.log("Failed to log message {" + message + "} due to exception: " + e);
+                console.log('Failed to log message {' + message + '} due to exception: ' + e);
             }
         }
     }, false);

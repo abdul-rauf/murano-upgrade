@@ -86,7 +86,7 @@
         $js_groupings = array(
            $sugar_grp1 = array(
                 //scripts loaded on first page
-                "sidecar/lib/backbone/underscore.js" => "include/javascript/sugar_grp1.js",
+                'sidecar/node_modules/underscore/underscore-min.js' => 'include/javascript/sugar_grp1.js',
                 'include/javascript/sugar_3.js'         => 'include/javascript/sugar_grp1.js',
                 'include/javascript/ajaxUI.js'          => 'include/javascript/sugar_grp1.js',
                 'include/javascript/cookie.js'          => 'include/javascript/sugar_grp1.js',
@@ -222,12 +222,6 @@
             'modules/Emails/javascript/composeEmailTemplate.js' => 'include/javascript/sugar_grp_quickcomp.js',
             'modules/Emails/javascript/complexLayout.js' => 'include/javascript/sugar_grp_quickcomp.js',
             ),
-
-            $sugar_grp_jsolait = array(
-                'include/javascript/jsclass_base.js'    => 'include/javascript/sugar_grp_jsolait.js',
-                'include/javascript/jsclass_async.js'   => 'include/javascript/sugar_grp_jsolait.js',
-                'modules/Meetings/jsclass_scheduler.js'   => 'include/javascript/sugar_grp_jsolait.js',
-            ),
            $sugar_grp_sidecar = array_merge(
                 array('include/javascript/phpjs/base64_encode.js' => 'include/javascript/sugar_sidecar.min.js',
                'sidecar/lib/jquery-placeholder/jquery.placeholder.js' => 'include/javascript/sugar_sidecar.min.js'),
@@ -252,7 +246,7 @@
                    'include/javascript/nprogress/nprogress.js' => 'include/javascript/sugar_sidecar.min.js',
 
                    'include/javascript/select2/language.js' => 'include/javascript/sugar_sidecar.min.js',
-                   'sidecar/lib/momentjs/min/locales.min.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'sidecar/node_modules/moment/min/locales.min.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/favicon.js' => 'include/javascript/sugar_sidecar.min.js',
 
                    //Expression Engine
@@ -263,7 +257,6 @@
                     'include/javascript/sugar7/plugins/FieldErrorCollection.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/Dashlet.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/Connector.js' => 'include/javascript/sugar_sidecar.min.js',
-                    'include/javascript/sugar7/plugins/Tooltip.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/Audit.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/CommittedDeleteWarning.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/FindDuplicates.js'  => 'include/javascript/sugar_sidecar.min.js',
@@ -271,7 +264,6 @@
                     'include/javascript/sugar7/plugins/DragdropAttachments.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/FileDragoff.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/Dropdown.js'  => 'include/javascript/sugar_sidecar.min.js',
-                    'include/javascript/sugar7/plugins/EllipsisInline.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ListColumnEllipsis.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/MassCollection.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ReorderableColumns.js'  => 'include/javascript/sugar_sidecar.min.js',
@@ -286,6 +278,8 @@
                     //load SFA specific plugins. Remove this in favor of a custom plugin loader.
                     'modules/Forecasts/clients/base/plugins/DisableDelete.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'modules/Forecasts/clients/base/plugins/DisableMassDelete.js'  => 'include/javascript/sugar_sidecar.min.js',
+                   'modules/Quotes/clients/base/plugins/QuotesLineNumHelper.js'  => 'include/javascript/sugar_sidecar.min.js',
+                   'modules/Quotes/clients/base/plugins/QuotesViewSaveHelper.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/MassQuote.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/Taggable.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/RelativeTime.js'  => 'include/javascript/sugar_sidecar.min.js',

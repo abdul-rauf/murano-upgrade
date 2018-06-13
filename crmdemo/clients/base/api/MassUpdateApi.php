@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,8 +11,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 
-require_once('include/SugarQueue/jobs/SugarJobMassUpdate.php');
-require_once('include/api/SugarApi.php');
 
 /*
  * Mass Update API implementation
@@ -63,11 +60,11 @@ class MassUpdateApi extends SugarApi {
 
     /**
      * To perform mass delete
-     * @param $api ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param array $args The arguments array passed in from the API
      * @return String
      */
-    public function massDelete($api, $args)
+    public function massDelete(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('massupdate_params', 'module'));
         $this->delete = true;
@@ -82,11 +79,11 @@ class MassUpdateApi extends SugarApi {
 
     /**
      * To perform massupdate, either update or delete, based on the args parameter
-     * @param $api ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param array $args The arguments array passed in from the API
      * @return String
      */
-    public function massUpdate($api, $args)
+    public function massUpdate(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('massupdate_params', 'module'));
 

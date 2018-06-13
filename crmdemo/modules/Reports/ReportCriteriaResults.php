@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,19 +19,17 @@ require_once('modules/Reports/templates/templates_reports.php');
 require_once('modules/Reports/templates/templates_reports_index.php');
 require_once('modules/Reports/templates/templates_pdf.php');
 require_once('modules/Reports/templates/templates_export.php');
-require_once('modules/Reports/templates/templates_chart.php');
 
 require_once('modules/Reports/config.php');
 global $current_language, $report_modules, $modules_report, $current_user, $app_strings, $mod_strings;
 
-require_once('modules/Reports/Report.php');
 
 $reporterName = InputValidation::getService()->getValidInputRequest('save_report_as');
 
 $args = array();
 $jsonObj = getJSONobj();
 if (isset($_REQUEST['id']) && !isset($_REQUEST['record'])) {
-	$saved_report_seed = BeanFactory::getBean('Reports');
+	$saved_report_seed = BeanFactory::newBean('Reports');
 	$saved_report_seed->disable_row_level_security = true;
 	$saved_report_seed->retrieve($_REQUEST['id'], false);
 
@@ -58,14 +54,10 @@ if (isset($_REQUEST['id']) && !isset($_REQUEST['record'])) {
 	} // if
 	$args['reporter'] = new Report($saved_report_seed->content);
 	$args['reporter']->saved_report = $saved_report_seed;
-	//if (hasRuntimeFilter($args['reporter'])) {
 		$savedReportContent = $jsonObj->decode($saved_report_seed->content);
 		$newArray = array();
 		$newArray['filters_def'] = $savedReportContent['filters_def'];
 		$reportCache = saveReportFilters($saved_report_seed->id, $jsonObj->encode($newArray));
-	//} else {
-		//saveReportFilters($saved_report_seed->id, '');
-	//}
 
 	if ( isset($_REQUEST['filter_key']) && isset($_REQUEST['filter_value'])) {
 		$new_filter = array();
@@ -86,7 +78,7 @@ if (isset($_REQUEST['id']) && !isset($_REQUEST['record'])) {
 	$args['reportCache'] = $reportCache;
 }
 else if (isset($_REQUEST['record'])){
-    $saved_report_seed = BeanFactory::getBean('Reports');
+    $saved_report_seed = BeanFactory::newBean('Reports');
     $saved_report_seed->disable_row_level_security = true;
     $saved_report_seed->retrieve($_REQUEST['record'], false);
 
@@ -96,8 +88,6 @@ else if (isset($_REQUEST['record'])){
 	$report_def = InputValidation::getService()->getValidInputRequest('report_def', null, array());
 
     if (!empty($_REQUEST['reset_filters'])) {
-//        $rCache = new ReportCache();
- //       $rCache->delete($_REQUEST['record']);
         $newArray = array();
         $newArray['filters_def'] = $reportObj->report_def['filters_def'];
         $reportCache = saveReportFilters($_REQUEST['record'], $jsonObj->encode($newArray));
@@ -120,9 +110,6 @@ else if (isset($_REQUEST['record'])){
         $newArray['filters_def'] = $resuestFilterDef['filters_def'];
         $reportCache = saveReportFilters($_REQUEST['record'], $jsonObj->encode($newArray));
                 $args['reportCache'] = $reportCache;
-        //} else {
-                //saveReportFilters($saved_report_seed->id, '');
-        //}
 
         if (!empty($reporterName)) {
                 $args['reporter']->name = $reporterName;

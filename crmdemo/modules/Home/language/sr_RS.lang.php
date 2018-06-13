@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - The UI Library Utilities omogućava implementaciju klijentskog interfejsa bogatih mogućnosti.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Klasa za rad sa Email-om za PHP sa svim funkcionalnostima',
   'LBL_SOURCE_JSHRINK' => 'JShrink - Javascript minimizator napisan u PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Omogućava dvosmernu "blowfish" enkripciju, bez korišćenja MCrypt PHP ekstenzije.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - SAX parser za HTML i ostale loše formirane XML dokumente',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - Ekstanzija za Yahoo! Biblioteka korisničkog interfejsa, autor Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Javascript Flash Player detekcija i ugrađivanje skripti.',
@@ -274,8 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Dobordošli na Sugar 7 pomoćnu tablu sa dašletima',
-    'LBL_HELP_RECORD' => 'Dashlet Pomoć prikazuje određene informacije o modulu koje gledate, pruža detaljne korake za izvršavanje akcija u modulu, i upućuje ves gde da možete naći obuhvatnije informacije i podršku. Dashlet Pomoć ostaje otvoren tako da možete videti korake dok izvršavate korake u modulu. Dashlet Pomoć je dostupan za sve Sugar 7 module i može biti označen "Otvoren" i " Zatvoren" klikom na ikonicu Pomoć u aplikacionom podnožju.',
+    'LBL_HELP_RECORD_TITLE' => 'Pomoć',
+    'LBL_HELP_RECORD' => 'U odeljku „Pomoć“ su prikazane posebne informacije o modulu koji pregledate, navedene su informacije o obavljanju određenih radnji u modulu, kao i uputstva za pronalaženje detaljnijih informacija i podrške.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filter',
 );

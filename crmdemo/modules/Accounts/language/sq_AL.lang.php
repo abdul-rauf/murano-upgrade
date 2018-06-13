@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Bashkëngjitje',
     'LBL_REVENUELINEITEMS' => 'Rreshti i llojeve të të ardhurave',
     'LBL_DUNS_NUM' => 'Kërkesë borxhi:',
-    'LBL_DNB_BAL_PREVIEW' => 'Shikimi i llogarive',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Shënime',
 
     // Help Text

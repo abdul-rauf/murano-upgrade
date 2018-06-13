@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Teme Nedisponibile',
     'LBL_TIMEZONE' => 'Timpul curent',
     'LBL_TO'    => 'Catre:',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Selectaţi ce sistem şi ce date de utilizator sunt urmărite',
     'LBL_UPDATE_CHECK_AUTO'=>'Automat',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manual',
     'LBL_UPDATE_CHECK_TYPE'=>'Veriffica automat pentru actualizari - Daca este bifat, sistemul va verifica periodic daca sunt versiuni actualizate ala aplicatiei.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Config.php a fost reconstruit cu succes.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Atentie: configuraţia dvs. de PHP trebuie să fie schimbata pentru a permite fisiere de cel puţin 6MB să fie încărcate. Vă rugăm să modificati valoarea upload_max_filesize în fişierul php.ini localizat la:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Vă rugăm să faceti config.php inscriptibil şi încercaţi din nou.',
-    'MSG_REBUILD_EXTENSIONS' => 'Vă rugăm să mergeţi la ecranul de reparare şi faceţi clic pe Reconstruire Extensii .',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Vă rugăm să mergeţi la ecranul de reparare şi faceţi clic pe Reconstruire Relaţii .',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Nu există în prezent este nu este activata Client Offline.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Sunteţi sigur că doriţi să dezactivaţi acest client Offline?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Sunteţi sigur că doriţi să activaţi această optine client offline?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Probleme',
 'ML_MANIFEST_ISSUE'=>'Problemă cu manifestul',
 'ML_CONFIG_OVERRIDE'=>'Modificarea Configurarrii nu este permisa',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Cheie - poate fi formată numai din litere, cifre și linii de subliniere. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Configurare creare rapidă din bara de navigare',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Selectaţi care module sunt disponibile în opţiunea de creare rapidă din bara de navigare',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Alegeţi ce module pentru care utilizatorii pot crea rapid înregistrări folosind pictograma Plus în bara de navigare de sus. Glisati& fixati module dintre modulele activate şi cutii vu module dezactivate',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Producator',
 	'ProductBundleNotes' => 'NotaPachetProdus',
 	'ProductBundles'   => 'NotaPachet',
-	'ProjectResources' => 'ResursaProiect',
 
 	'Relationships' => 'Relatii',
 	'Releases'       => 'Lansare',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'JobProgamatori',
 	'Shippers'       => 'Transportator',
 	'TaxRates'       => 'Ritmul taxelor',
-	'TeamHierarchies'  => 'IerarhieEchipa',
 	'TeamMemberships'   => 'MembruEchipa',
 	'TeamNotices'    => 'Anunturile Echipei',
 	'TeamSetModules'   => 'ModuleSetateEchipa',

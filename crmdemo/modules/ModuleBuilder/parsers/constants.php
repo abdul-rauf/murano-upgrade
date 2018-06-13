@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,6 +18,7 @@ define('MB_GRIDLAYOUTMETADATA', 'gridLayoutMetaData');
 define('MB_LISTLAYOUTMETADATA', 'listLayoutMetaData');
 define('MB_LISTVIEW', 'listview');
 define('MB_SIDECARLISTVIEW', 'list');
+define('MB_SIDECARQUOTEDATAGROUPLIST', 'quote-data-group-list');
 define('MB_SIDECARPOPUPVIEW', 'selection-list');
 define('MB_SIDECARDUPECHECKVIEW', 'dupecheck-list');
 define('MB_SEARCHVIEW', 'searchview');
@@ -50,6 +50,8 @@ define('MB_RECORDVIEW', 'recordview');
 define('MB_FILTERVIEW', 'filter');
 define('MB_BWCFILTERVIEW', 'searchfields');
 define('MB_DROPDOWN', 'dropdown');
+define('MB_PACKAGE_PATH', 'custom/modulebuilder/packages');
+define('MB_PACKAGE_BUILD', 'custom/modulebuilder/builds');
 
 class MBConstants
 {

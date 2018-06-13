@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Produkt',
     'LBL_LIST_MANUFACTURER' => 'Produsent',
     'LBL_MANUFACTURERS' => 'Produsenter',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Prod. num.',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Delenummer',
     'LBL_LIST_QUANTITY' => 'Antall',
     'LBL_LIST_COST_PRICE' => 'Kostnad',
     'LBL_LIST_DISCOUNT_PRICE' => 'Pris',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Rabatt i %',
     'LBL_LIST_PRICE' => 'Listepris:',
     'LBL_VENDOR_PART_NUM' => 'Delnummer til automat:',
-    'LBL_MFT_PART_NUM' => 'Prod. delnummer:',
+    'LBL_MFT_PART_NUM' => 'Delenummer:',
     'LBL_NEXT_STEP' => 'Neste skritt',
     'LBL_DISCOUNT_PRICE_DATE' => 'Dato for prisrabatt:',
     'LBL_WEIGHT' => 'Vekt:',
@@ -162,6 +162,8 @@ For å opprette {{module_name}}:
 - Klikk "Vis mer" for å avsløre flere felt hvis det er nødvendig. 
 2. Klikk "Lagre" for å sluttføre den nye posten og gå tilbake til forrige side.',
 
-    'LBL_MANUFACTURERS' => 'Produsenter',
     'LBL_PRODUCT_POSITION' => 'Produktpakkeposisjon',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Tilbudt Linjeelementer Tilbud Dataliste',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nytt tilbudt linjeelement)',
+    'LBL_DISCOUNT_PERCENT' => '% prosent',
 );

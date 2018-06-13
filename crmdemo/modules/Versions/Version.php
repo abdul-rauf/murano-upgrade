@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -34,7 +33,6 @@ class Version extends SugarBean {
 	var $created_by;
 	var $created_by_name;
 	var $modified_by_name;
-	var $field_name_map;
 	var $name;
 	var $file_version;
 	var $db_version;
@@ -93,15 +91,11 @@ function is_expected_version($expected_version){
 function mark_upgraded($name, $dbVersion, $fileVersion){
 	$query = "DELETE FROM versions WHERE name='$name'";
 	$GLOBALS['db']->query($query);
-	$version = BeanFactory::getBean('Versions');
+	$version = BeanFactory::newBean('Versions');
 	$version->name = $name;
 	$version->file_version = $fileVersion;
 	$version->db_version = $dbVersion;
 	$version->save();
-	
-	if(isset($_SESSION['invalid_versions'][$name])) {
-		unset($_SESSION['invalid_versions'][$name]);
-	}
 }
 
 function get_profile(){
@@ -114,5 +108,3 @@ function get_profile(){
 
 
 }
-
-?>

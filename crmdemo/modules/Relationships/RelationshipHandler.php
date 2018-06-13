@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +17,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 
-class RelationshipHandler extends Relationship {
+class RelationshipHandler
+{
 
 	var $db;							//Database link by reference
 
@@ -41,8 +41,6 @@ class RelationshipHandler extends Relationship {
 	var $base_array;					//Info array
 	var $rel1_array;					//Info array
 	var $rel2_array;					//Info array
-
-
 	/*
 
 	info arrays contain:
@@ -54,21 +52,18 @@ class RelationshipHandler extends Relationship {
 
 	*/
 
+    /**
+     * @var Relationship Relationship object
+     */
+    protected $relationship;
 
 ///////////////////////////Setup and populate functions//////////////////////////////
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function RelationshipHandler($db, $base_module = '')
-    {
-        self::__construct($db, $base_module);
-    }
-
     public function __construct($db, $base_module = '')
     {
+        $this->db = $db;
         $this->base_module = $base_module;
-        parent::__construct();
+        $this->relationship = new Relationship();
     }
 
 	function set_rel_vardef_fields($base_vardef_field, $rel1_vardef_field=""){
@@ -104,7 +99,7 @@ class RelationshipHandler extends Relationship {
 	*/
 	function build_info($build_rel2=false){
 		if($this->base_bean == null){
-			$this->base_bean = BeanFactory::getBean($this->base_module);
+			$this->base_bean = BeanFactory::newBean($this->base_module);
 		}
 
 		if(empty($this->rel1_bean)){
@@ -125,10 +120,10 @@ class RelationshipHandler extends Relationship {
 
     function build_rel1_info()
     {
-        $bean = BeanFactory::getBean($this->base_module);
+        $bean = BeanFactory::newBean($this->base_module);
         $rel_attribute1_name = $bean->field_defs[strtolower($this->base_vardef_field)]['relationship'];
-        $rel_module1 = $this->get_other_module($rel_attribute1_name, $this->base_module);
-        $this->rel1_bean = BeanFactory::getBean($rel_module1);
+        $rel_module1 = $this->relationship->get_other_module($rel_attribute1_name, $this->base_module);
+        $this->rel1_bean = BeanFactory::newBean($rel_module1);
     }
 
     function build_rel2_info()
@@ -142,8 +137,8 @@ class RelationshipHandler extends Relationship {
             $this->rel2_bean = $this->rel1_bean;
         } else {
             $rel_attribute2_name = $this->rel1_bean->field_defs[strtolower($this->rel1_vardef_field)]['relationship'];
-            $rel_module2 = $this->get_other_module($rel_attribute2_name, $this->rel1_bean->module_dir);
-            $this->rel2_bean = BeanFactory::getBean($rel_module2);
+            $rel_module2 = $this->relationship->get_other_module($rel_attribute2_name, $this->rel1_bean->module_dir);
+            $this->rel2_bean = BeanFactory::newBean($rel_module2);
         }
     }
 
@@ -256,10 +251,10 @@ function get_relationship_information(& $target_bean, $get_upstream_rel_field_na
 	$current_module_name = $this->base_module;
 
 	//Look for downstream connection
-	$rel_array = $this->retrieve_by_sides($current_module_name, $target_module_name, $this->db);
+    $rel_array = $this->relationship->retrieve_by_sides($current_module_name, $target_module_name, $this->db);
     $flip_sides = false;
     if (empty($rel_array)) {
-        $rel_array = $this->retrieve_by_sides($target_module_name, $current_module_name, $this->db);
+        $rel_array = $this->relationship->retrieve_by_sides($target_module_name, $current_module_name, $this->db);
         $flip_sides = true;
     }
     //No relationship found, abort
@@ -301,7 +296,7 @@ function get_relationship_information(& $target_bean, $get_upstream_rel_field_na
 
 
 	//Look for upstream connection
-	$rel_array = $this->retrieve_by_sides($target_module_name, $current_module_name, $this->db);
+    $rel_array = $this->relationship->retrieve_by_sides($target_module_name, $current_module_name, $this->db);
 
 	//Does an upstream relationship exist
 	if($rel_array!=null){
@@ -383,9 +378,13 @@ function get_id_name(& $target_bean, $field_name){
 
 function process_by_rel_bean($rel1_module){
 
-	$this->rel1_relationship_name = $this->retrieve_by_modules($this->base_module, $rel1_module, $this->db);
+    $this->rel1_relationship_name = $this->relationship->retrieve_by_modules(
+        $this->base_module,
+        $rel1_module,
+        $this->db
+    );
 	$this->rel1_module = $rel1_module;
-	$this->rel1_bean = BeanFactory::getBean($this->rel1_module);
+	$this->rel1_bean = BeanFactory::newBean($this->rel1_module);
 
 //end function process_by_rel_bean
 }
@@ -427,3 +426,4 @@ function get_farthest_reach(){
 
 //end class RelationshipHandler
 }
+

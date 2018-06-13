@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -248,9 +247,6 @@ function set_custom_field($session, $module_name, $type, $properties, $add_to_la
 	$_REQUEST = array_merge($_REQUEST, $request_arr);
 	$_POST = array_merge($_POST, $request_arr);
 
-	require_once('include/MVC/Controller/SugarController.php');
-	require_once('modules/ModuleBuilder/controller.php');
-	require_once('modules/ModuleBuilder/parsers/ParserFactory.php');
 
 	$mbc = new ModuleBuilderController();
 	$mbc->setup();

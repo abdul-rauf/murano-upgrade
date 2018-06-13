@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,11 +15,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * For subpanels we must make use of the SubPanelDefinitions class to do this; this also means that the history mechanism,
  * which tracks files, not objects, needs us to create an intermediate file representation of the definition that it can manage and restore
  */
-
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
-require_once 'modules/ModuleBuilder/parsers/views/MetaDataImplementationInterface.php' ;
-require_once 'modules/ModuleBuilder/parsers/views/AbstractMetaDataImplementation.php' ;
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
 class DeployedSubpanelImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
@@ -44,7 +40,7 @@ class DeployedSubpanelImplementation extends AbstractMetaDataImplementation impl
         $this->_subpanelName = $subpanelName ;
         $this->_moduleName = $moduleName ;
 
-        $module = BeanFactory::getBean($moduleName);
+        $module = BeanFactory::newBean($moduleName);
         // BEGIN ASSERTIONS
         if (empty($module))
         {
@@ -55,7 +51,6 @@ class DeployedSubpanelImplementation extends AbstractMetaDataImplementation impl
         $this->historyPathname = 'custom/history/modules/' . $moduleName . '/subpanels/' . $subpanelName . '/' . self::HISTORYFILENAME ;
         $this->_history = new History ( $this->historyPathname ) ;
 
-        require_once ('include/SubPanel/SubPanelDefinitions.php') ;
         // retrieve the definitions for all the available subpanels for this module from the subpanel
         $spd = new SubPanelDefinitions ( $module ) ;
 
@@ -132,7 +127,6 @@ class DeployedSubpanelImplementation extends AbstractMetaDataImplementation impl
 
         $this->_viewdefs = $defs ;
 
-        require_once 'include/SubPanel/SubPanel.php' ;
         $subpanel = new SubPanel ( $this->_moduleName, 'fab4', $this->_subpanelName , $this->_aSubPanelObject ) ;
 
         $subpanel->saveSubPanelDefOverride ( $this->_aSubPanelObject, 'list_fields', $defs ) ;

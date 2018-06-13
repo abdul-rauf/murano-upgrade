@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 // ProductType is used to store customer information.
 class TeamNotice extends SugarBean {
-	var $field_name_map = array();
 	// Stored fields
 	var $id;
 	var $deleted;
@@ -47,7 +45,7 @@ class TeamNotice extends SugarBean {
 	public function __construct() {
 		parent::__construct();
 		foreach ($this->field_defs as $field) {
-			$this->field_name_map[$field['name']] = $field;
+            $this->field_defs[$field['name']] = $field;
 		}
 
 		$this->team_id = 1; // make the item globally accessible
@@ -116,5 +114,3 @@ class TeamNotice extends SugarBean {
 
 
 }
-
-?>

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -35,7 +34,9 @@ class SugarWidgetFieldInt extends SugarWidgetReportField
 
  function queryFilterNot_Equals(&$layout_def)
  {
-                return $this->_get_column_select($layout_def)."!=".$GLOBALS['db']->quote($layout_def['input_name0'])."\n";
+        $field_name = $this->_get_column_select($layout_def);
+        $input_name0 = $GLOBALS['db']->quote($layout_def['input_name0']);
+        return "{$field_name} != {$input_name0} OR ({$field_name} IS NULL)\n";
  }
 
  function queryFilterGreater(&$layout_def)
@@ -73,17 +74,4 @@ class SugarWidgetFieldInt extends SugarWidgetReportField
  	 return '<input type="text" size="20" value="' . $layout_def['input_name0'] . '" name="' . $layout_def['name'] . '">';
 
  }
- 
- function display($layout_def)
- {
-	   //Bug40995
-	   if(isset($obj->layout_manager->defs['reporter']->focus->field_name_map[$layout_def['name']]['precision']))
-	   {
-		   $precision=$obj->layout_manager->defs['reporter']->focus->field_name_map[$layout_def['name']]['precision'];
-		   $layout_def['precision']=$precision;
-	   }
-	   //Bug40995
-       return parent::display($layout_def);
- } 
-
 }

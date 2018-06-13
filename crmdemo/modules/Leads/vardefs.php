@@ -206,6 +206,7 @@ $dictionary['Lead'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_LEADS',
             'reportable' => false,
+            'side' => 'right',
         ),
         'contact_name' => array(
             'name' => 'contact_name',
@@ -442,7 +443,7 @@ $dictionary['Lead'] = array(
             'type' => 'link',
             'relationship' => 'lead_meetings',
             'source' => 'non-db',
-            'vname' => 'LBL_CALLS',
+            'vname' => 'LBL_MEETINGS',
             'reportable' => false,
         ),
         'calls' => array(

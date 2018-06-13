@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Вкладення',
     'LBL_REVENUELINEITEMS' => 'Доходи за продукти',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Попередній перегляд контрагентів',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Примітки',
 
     // Help Text

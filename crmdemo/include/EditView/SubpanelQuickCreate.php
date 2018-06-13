@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -25,14 +24,6 @@ class SubpanelQuickCreate{
      */
     public $viewType = 'QuickCreate';
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SubpanelQuickCreate($module, $view = 'QuickCreate', $proccessOverride = false)
-    {
-        self::__construct($module, $view, $proccessOverride);
-    }
-
     public function __construct($module, $view = 'QuickCreate', $proccessOverride = false)
     {
         $this->viewType = $view;
@@ -52,7 +43,7 @@ class SubpanelQuickCreate{
 		$this->ev->view = $this->viewType;
 		$this->ev->ss = new Sugar_Smarty();
 
-		$bean = BeanFactory::getBean($module);
+		$bean = BeanFactory::newBean($module);
         if($bean && !empty($_REQUEST['record'])) {
             $bean->retrieve($_REQUEST['record']);
         }
@@ -71,7 +62,6 @@ class SubpanelQuickCreate{
             $this->ev->defs['templateMeta']['form']['footerTpl'] = 'include/EditView/footer.tpl';
         }
 		// Comment below, breaks many out of the box viewdefs
-		/*if (empty($this->ev->defs['templateMeta']['form']['buttons'])) $this->ev->defs['templateMeta']['form']['buttons'] = array('SUBPANELSAVE', 'SUBPANELCANCEL', 'SUBPANELFULLFORM');*/
 		$this->ev->defs['templateMeta']['form']['buttons'] = array('SUBPANELSAVE', 'SUBPANELCANCEL', 'SUBPANELFULLFORM');
 
         //Load the parent view class if it exists.  Check for custom file first
@@ -95,7 +85,7 @@ class SubpanelQuickCreate{
 
 		            $view->ev = $this->ev;
 		            $view->ss = $this->ev->ss;
-		            $view->bean = BeanFactory::getBean($module);
+		            $view->bean = BeanFactory::newBean($module);
 					$this->ev->formName = 'form_Subpanel'.$this->ev->view .'_'.$module;
 					$view->showTitle = false; // Do not show title since this is for subpanel
 		            $view->display();

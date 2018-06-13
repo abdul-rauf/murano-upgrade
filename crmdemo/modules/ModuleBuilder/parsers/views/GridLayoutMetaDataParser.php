@@ -1,6 +1,4 @@
 <?php
-if (! defined ( 'sugarEntry' ) || ! sugarEntry)
-    die ( 'Not A Valid Entry Point' ) ;
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,10 +10,7 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/ModuleBuilder/parsers/views/AbstractMetaDataParser.php' ;
-require_once 'modules/ModuleBuilder/parsers/views/MetaDataParserInterface.php' ;
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;
-require_once 'modules/ModuleBuilder/parsers/MetaDataFiles.php' ;
 
 class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDataParserInterface
 {
@@ -73,22 +68,17 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
 
         if (empty ( $packageName ))
         {
-            require_once 'modules/ModuleBuilder/parsers/views/DeployedMetaDataImplementation.php' ;
             $this->implementation = new DeployedMetaDataImplementation($view, $moduleName, $client, $params);
         } else
         {
-            require_once 'modules/ModuleBuilder/parsers/views/UndeployedMetaDataImplementation.php' ;
             $this->implementation = new UndeployedMetaDataImplementation ( $view, $moduleName, $packageName, $client ) ;
         }
 
         $viewdefs = $this->implementation->getViewdefs () ;
-        //if (!isset(self::$variableMap [ $view ]))
-        //    self::$variableMap [ $view ] = $view;
         if (MetaDataFiles::getViewDefVar($view) === null) {
             MetaDataFiles::setViewDefVar($view, $view);
         }
 
-        //if (!isset($viewdefs [ self::$variableMap [ $view ]])){
         if (!$this->hasViewVariable($viewdefs, $view)) {
             sugar_die ( get_class ( $this ) . ": incorrect view variable for $view" ) ;
         }
@@ -162,7 +152,7 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
      * Deploy the layout
      * @param boolean $populate If true (default), then update the layout first with new layout information from the $_REQUEST array
      */
-    function handleSave ($populate = true)
+    function handleSave ($populate = true, $clearCache = true)
     {
     	$GLOBALS [ 'log' ]->info ( get_class ( $this ) . "->handleSave()" ) ;
 
@@ -172,7 +162,9 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
         $viewdefs = $this->_viewdefs ;
         $viewdefs [ 'panels' ] = $this->_convertToCanonicalForm ( $this->_viewdefs [ 'panels' ] , $this->_fielddefs ) ;
         $this->implementation->deploy(MetaDataFiles::mapPathToArray(MetaDataFiles::getViewDefVar($this->_view),$viewdefs));
-        $this->_clearCaches();
+        if ($clearCache) {
+            $this->_clearCaches();
+        }
     }
 
     /*
@@ -937,7 +929,7 @@ class GridLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
         return false;
     }
 
-    public static function _trimFieldDefs ($def)
+    public static function _trimFieldDefs(array $def)
 	{
         $requiredProps = array(
             'studio' => true,

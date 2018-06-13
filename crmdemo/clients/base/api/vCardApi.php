@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/vCard.php');
 /*
  * vCard API implementation
  */
@@ -61,12 +57,12 @@ class vCardApi extends SugarApi
     /**
      * vCardSave
      *
-     * @param $api  ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api  ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param array $args The arguments array passed in from the API
      *
      * @return String
      */
-    public function vCardSave($api, $args)
+    public function vCardSave(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('id', 'module'));
         $args['record'] = $args['id'];
@@ -77,12 +73,12 @@ class vCardApi extends SugarApi
     /**
      * vCardDownload
      *
-     * @param $api  ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api  ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param array $args The arguments array passed in from the API
      *
      * @return String
      */
-    public function vCardDownload($api, $args)
+    public function vCardDownload(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('record', 'module'));
 
@@ -92,16 +88,16 @@ class vCardApi extends SugarApi
     /**
      * vCardImport
      *
-     * @param $api  ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api  ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param array $args The arguments array passed in from the API
      *
      * @return String
      */
-    public function vCardImport($api, $args)
+    public function vCardImport(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module'));
 
-        $bean = BeanFactory::getBean($args['module']);
+        $bean = BeanFactory::newBean($args['module']);
         if (!$bean->ACLAccess('save') || !$bean->ACLAccess('import')) {
             throw new SugarApiExceptionNotAuthorized('EXCEPTION_NOT_AUTHORIZED');
         }
@@ -145,12 +141,12 @@ class vCardApi extends SugarApi
     /**
      * Retrieves the generated vcard for a record
      *
-     * @param $api  ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api  ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param array $args The arguments array passed in from the API
      *
      * @return String
      */
-    protected function getVcardForRecord($api, $args)
+    protected function getVcardForRecord(ServiceBase $api, array $args)
     {
         $bean = $this->loadBean($api, $args);
         if (!$bean->ACLAccess('view')) {

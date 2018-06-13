@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -766,7 +765,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'ธีมที่ไม่สามารถใช้ได้',
     'LBL_TIMEZONE' => 'เขตเวลา',
     'LBL_TO'    => ' ถึง ',
-	'LBL_TRACKER_SETTINGS_DESC' => 'เลือกว่าจะติดตามข้อมูลของระบบและผู้ใช้ใดบ้าง',
     'LBL_UPDATE_CHECK_AUTO'=>'อัตโนมัติ',
     'LBL_UPDATE_CHECK_MANUAL'=>'ด้วยตนเอง',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>ตรวจหาการอัปเดตโดยอัตโนมัติ</B> - ถ้าเลือกไว้ ระบบจะตรวจสอบเป็นระยะว่ามีเวอร์ชันที่อัปเดตของแอปพลิเคชันหรือไม่',
@@ -933,8 +931,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'สร้าง config.php ใหม่สำเร็จแล้ว',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'คำเตือน: ต้องแก้ไขการกำหนดค่า PHP ของคุณเพื่อให้สามารถอัปโหลดไฟล์อย่างน้อย 6 เมกะไบต์ โปรดปรับเปลี่ยนค่า upload_max_filesize ใน php.ini ซึ่งอยู่ที่:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'โปรดกำหนดให้ config.php เขียนได้ และลองอีกครั้ง',
-    'MSG_REBUILD_EXTENSIONS' => 'โปรดไปที่หน้าจอ <a href="index.php?module=Administration&action=Upgrade">ซ่อมแซม</a> และคลิกที่สร้างส่วนขยายใหม่',
-    'MSG_REBUILD_RELATIONSHIPS' => 'โปรดไปที่หน้าจอ <a href="index.php?module=Administration&action=Upgrade">ซ่อมแซม</a> และคลิกที่สร้างความสัมพันธ์ใหม่',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'ไม่มีไคลเอนต์แบบออฟไลน์ที่เปิดใช้งานในขณะนี้',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'คุณแน่ใจหรือไม่ว่าต้องการปิดใช้งานไคลเอนต์แบบออฟไลน์นี้',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'คุณแน่ใจหรือไม่ว่าต้องการเปิดใช้งานไคลเอนต์แบบออฟไลน์นี้',
@@ -1044,7 +1040,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'ปัญหา',
 'ML_MANIFEST_ISSUE'=>'มีปัญหากับไฟล์แสดงรายการ',
 'ML_CONFIG_OVERRIDE'=>'ไม่อนุญาตให้ปรับเปลี่ยนการกำหนดค่า',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'คีย์ - มีได้เฉพาะตัวอักษร ตัวเลข และขีดเส้นใต้ ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'กำหนดค่าการสร้างอย่างรวดเร็วในแถบการนำทาง',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'เลือกโมดูลที่สามารถใช้ได้ในการสร้างอย่างรวดเร็วของแถบการนำทาง',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'เลือกโมดูลที่ผู้ใช้สามารถสร้างระเบียนได้อย่างรวดเร็วโดยใช้ไอคอน Plus ที่แถบการนำทางด้านบน ลากและวางโมดูลระหว่างช่องของโมดูลที่เปิดใช้งานและโมดูลที่ปิดใช้งาน',
@@ -1092,7 +1088,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'ผู้ผลิต',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'ความสัมพันธ์',
 	'Releases'       => 'รีลีส',
@@ -1102,7 +1097,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'ผู้ส่งสินค้า',
 	'TaxRates'       => 'TaxRate',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

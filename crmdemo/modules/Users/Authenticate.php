@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -82,10 +81,6 @@ if(isset($_SESSION['authenticated_user_id'])) {
 
 // construct redirect url
 $url = 'Location: '.$url;
-// check for presence of a mobile device, redirect accordingly
-//if(isset($_SESSION['isMobile'])){
-//    $url = $url . '&mobile=1';
-//}
 
 //adding this for bug: 21712.
 if(!empty($GLOBALS['app'])) {
@@ -93,5 +88,4 @@ if(!empty($GLOBALS['app'])) {
 }
 if (!defined('SUGAR_PHPUNIT_RUNNER')) {
     sugar_cleanup();
-//    header($url);
 }

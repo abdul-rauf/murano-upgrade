@@ -237,9 +237,6 @@ $mod_strings = array (
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B 사용자 Id',
-    'LBL_DNB_BAL_PREVIEW' => '연락처 미리보기',
-    'LBL_DNB_BAL_RSLT_CNT' => '연락처',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D & B : 연락처 정보',
 
     'LBL_NOTES_SUBPANEL_TITLE' => '메모 목록',
 

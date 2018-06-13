@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/SugarFields/Fields/Base/SugarFieldBase.php';
 
 /**
  * SugarField implementation for link fields
@@ -29,6 +28,15 @@ class SugarFieldRelateLink extends SugarFieldBase
      * Does nothing since link field data is fetched by internal API call
      */
     public function addFieldToQuery($field, array &$fields)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * Does nothing since link field data can't be processed or saved here.
+     */
+    public function apiSave(SugarBean $bean, array $params, $field, $properties)
     {
     }
 
@@ -116,7 +124,6 @@ class SugarFieldRelateLink extends SugarFieldBase
     protected function getRelateApi()
     {
         if (!$this->relateApi) {
-            require_once 'clients/base/api/RelateApi.php';
             $this->relateApi = new RelateApi();
         }
 

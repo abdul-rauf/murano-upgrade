@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,10 +21,8 @@ interface Store {
     /**
      * flush
      * This is the method implementations need to provide to store a monitor instance
-     * @param $monitor An instance of Monitor
+     * @param Monitor $monitor The monitor whose data need to be flushed
      */
     public function flush($monitor);
 
 }
-
-?>

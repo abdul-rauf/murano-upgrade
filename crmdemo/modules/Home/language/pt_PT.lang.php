@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - As UI Library Utilities facilitam a implementação de funcionalidades ricas do lado do cliente.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Uma classe de transferência de e-mail totalmente completa para PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - Um minificador de Javascript escrito em PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Permite uma rápida encriptação bilateral blowfish sem necessitar da extensão MCrypt PHP.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - Um parser SAX para HTML e outros documentos XML erradamente criados',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - Extensões para Yahoo! User Interface Library por Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - script de detecção e Flash Player de javascript embebido.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Bem-vindo ao Dashboard de Ajuda do Sugar 7',
-    'LBL_HELP_RECORD' => 'O Dashlet de Ajuda mostra informações específicas sobre o módulo que está a visualizar, fornecendo passos detalhados para realizar algumas ações no módulo e direcioná-lo para onde poderá obter informações e suporte mais completos. O Dashlet de Ajuda permanece aberto para que possa visualizar os passos à medida que os executa no módulo.
-
-O Dashboard de Ajuda está disponível para todos os módulos do Sugar 7, e poderá ser mantido "aberto" ou "fechado" clicando no ícone Ajuda no rodapé da aplicação.',
+    'LBL_HELP_RECORD_TITLE' => 'Ajuda',
+    'LBL_HELP_RECORD' => 'A Ajuda exibe informações específicas sobre o módulo que está a visualizar, disponibiliza os passos detalhados para executar algumas ações no módulo e encaminha-o para obter informações mais abrangentes e para apoio.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtro',
 );

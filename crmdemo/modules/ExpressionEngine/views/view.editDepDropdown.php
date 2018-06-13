@@ -13,14 +13,6 @@
 
 class ViewEditDepDropdown extends SugarView
 {
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ViewEditDepDropdown()
-    {
-        self::__construct();
-    }
-
     public function __construct()
     {
         $this->options['show_footer'] = false;
@@ -34,7 +26,6 @@ class ViewEditDepDropdown extends SugarView
     function display(){
         global $app_strings, $current_user, $mod_strings, $app_list_strings;
         $smarty = new Sugar_Smarty();
-        require_once('include/JSON.php');
         //Load the field list from the target module
         if (!empty($_SESSION["authenticated_user_language"])) {
             $selected_lang = $_SESSION["authenticated_user_language"];
@@ -55,7 +46,7 @@ class ViewEditDepDropdown extends SugarView
             $this->module->mblanguage->generateAppStrings(false) ;
             $my_list_strings = array_merge( $my_list_strings, $this->module->mblanguage->appListStrings[$selected_lang.'.lang.php'] );
         } else {
-            $vardef = BeanFactory::getBean($_REQUEST['view_module'])->field_defs;
+            $vardef = BeanFactory::newBean($_REQUEST['view_module'])->field_defs;
         }
 
         foreach($my_list_strings as $key=>$value){
@@ -96,3 +87,4 @@ class ViewEditDepDropdown extends SugarView
         return $ret;
     }
 }
+

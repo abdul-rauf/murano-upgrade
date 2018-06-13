@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Μη Διαθέσιμα Θέματα',
     'LBL_TIMEZONE' => 'Ζώνη Ωρας',
     'LBL_TO'    => 'σε',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Επιλέξτε το σύστημα και τα δεδομένα χρήστη που παρακολουθούνται',
     'LBL_UPDATE_CHECK_AUTO'=>'Αυτόματα',
     'LBL_UPDATE_CHECK_MANUAL'=>'Χειροκίνητα',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Αυτόματος Ελεγχος Για Αναβαθμίσεις </B> - Εάν επιλεχθεί, το σύστημα περιοδικά θα ελέγχει για διαθέσιμες νέες αναβαθμισμένες εκδόσεις της εφαρμογής.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Το αρχείο config.php ανοικοδομήθηκε επιτυχώς.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Προειδοποίηση: Η διαμόρφωση PHP  θα πρέπει να τροποποιηθεί για να επιτραπούν αρχεία τουλάχιστον 6MB για να φορτωθούν. Παρακαλώ τροποποιήστε το upload_max_filesize που βρίσκεται στο php.ini:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Παρακαλώ να δοθούν δικαιώματα εγγραφής στο αρχείο config.php και δοκιμάστε ξανά.',
-    'MSG_REBUILD_EXTENSIONS' => 'Παρακαλώ πηγαίνετε στην οθόνη <a href="index.php?module=Administration&action=Upgrade">Επιδιόρθωση</a> και πατήστε στο κουμπί Ανοικοδόμηση Επεκτάσεων.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Παρακαλώ πηγαίνετε στην οθόνη <a href="index.php?module=Administration&action=Upgrade">Επιδιόρθωση</a> και πατήστε στο κουμπί Ανοικοδόμηση Σχέσεων.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Αυτή την στιγμή δεν υπάρχει ενεργοποιημένος Offline Clients.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Είστε σίγουροι ότι θέλετε να απενεργοποιήσετε αυτόν τον Offline Client?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Είστε σίγουροι ότι θέλετε να ενεργοποιήσετε αυτόν τον Offline Client?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Ζητήματα',
 'ML_MANIFEST_ISSUE'=>'Ζήτημα με την προκήρυξη',
 'ML_CONFIG_OVERRIDE'=>'Η τροποποίηση της διαμόρφωσης, δεν επιτρέπεται',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Κλειδί - μπορεί να αποτελείται μόνο από γράμματα, αριθμούς και χαρακτήρες υπογράμμισης. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Διαμόρφωση Μπάρας Πλοήγησης Γρήγορης Δημιουργίας',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Επιλέξτε ποιες ενότητες είναι διαθέσιμες στην μπάρα πλοήγησης γρήγορης δημιουργίας',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Επιλέξτε ποιες ενότητες για ποιους χειριστές μπορούν να δημιουργήσουν γρήγορες εγγραφές, χρησιμοποιώντας το Plus εικονίδιο στην πάνω μπάρα πλοήγησης. Σύρτε (με το ποντίκι) και αποθέστε  ενότητες, μεταξύ των Ενεργοποιημένων Ενοτήτων και των Απενεργοποιημένων Ενοτήτων.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Κατασκευαστής',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'Σχέση',
 	'Releases'       => 'Αναβάθμιση:',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'Αποστολέας',
 	'TaxRates'       => 'Φορολογικοί Συντελεστές',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

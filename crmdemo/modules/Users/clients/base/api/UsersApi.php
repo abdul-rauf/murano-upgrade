@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/ModuleApi.php');
 
 class UsersApi extends ModuleApi
 {
@@ -42,11 +41,11 @@ class UsersApi extends ModuleApi
      *
      * The non-api User deletion logic is handled in /modules/Users/controller.php::action_delete()
      *
-     * @param  RestService $api
+     * @param  ServiceBase $api
      * @param  array       $args
      * @return array
      */
-    public function deleteUser($api, $args)
+    public function deleteUser(ServiceBase $api, array $args)
     {
         // Ensure we have admin access to this module
         if (!($api->user->isAdmin() || $api->user->isAdminForModule('Users'))) {
@@ -71,11 +70,11 @@ class UsersApi extends ModuleApi
 
     /**
      * Retrieve a list of calendar event start and end times for specified person
-     * @param $api
-     * @param $args
+     * @param ServiceBase $api
+     * @param array $args
      * @return array
      */
-    public function getFreeBusySchedule($api, $args)
+    public function getFreeBusySchedule(ServiceBase $api, array $args)
     {
         $bean = $this->loadBean($api, $args, 'view');
         return array(

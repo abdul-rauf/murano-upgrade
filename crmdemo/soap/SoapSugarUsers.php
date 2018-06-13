@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +11,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 require_once('soap/SoapHelperFunctions.php');
 require_once('soap/SoapTypes.php');
-require_once('modules/Reports/Report.php');
 
 use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 
@@ -67,7 +65,7 @@ function login($user_auth, $application){
 	global $sugar_config, $system_config;
 
 	$error = new SoapError();
-	$user = BeanFactory::getBean('Users');
+	$user = BeanFactory::newBean('Users');
 	$success = false;
     $authController = AuthenticationController::getInstance();
 
@@ -302,7 +300,7 @@ function get_entry_list($session, $module_name, $query, $order_by,$offset, $sele
 		$sugar_config['list_max_entries_per_page'] = $max_results;
 	}
 
-    $seed = BeanFactory::getBean($module_name);
+    $seed = BeanFactory::newBean($module_name);
 	if(empty($seed)){
 		$error->set_error('no_module');
 		return array('result_count'=>-1, 'entry_list'=>array(), 'error'=>$error->get_soap_array());
@@ -313,7 +311,6 @@ function get_entry_list($session, $module_name, $query, $order_by,$offset, $sele
 		return array('result_count'=>-1, 'entry_list'=>array(), 'error'=>$error->get_soap_array());
 	}
 
-	require_once 'include/SugarSQLValidate.php';
 	$valid = new SugarSQLValidate();
 	if(!$valid->validateQueryClauses($query, $order_by)) {
         $GLOBALS['log']->error("Bad query: $query $order_by");
@@ -466,7 +463,7 @@ function get_entries($session, $module_name, $ids,$select_fields ){
 	//perhaps also add a select_fields to this, so we only get the fields we need
 	//and not do a select *
 	foreach($ids as $id){
-		$seed = BeanFactory::getBean($module_name);
+		$seed = BeanFactory::newBean($module_name);
 
 
     if($using_cp){
@@ -537,7 +534,7 @@ function set_entry($session,$module_name, $name_value_list){
 		return array('id'=>-1, 'error'=>$error->get_soap_array());
 	}
 
-	$seed = BeanFactory::getBean($module_name);
+	$seed = BeanFactory::newBean($module_name);
 	if(empty($seed)){
 		$error->set_error('no_module');
 		return array('id'=>-1, 'error'=>$error->get_soap_array());
@@ -571,7 +568,7 @@ function set_entry($session,$module_name, $name_value_list){
 	}
     if ($module_name == 'Opportunities') {
         /* @var $admin Administration */
-        $admin = BeanFactory::getBean('Administration');
+        $admin = BeanFactory::newBean('Administration');
         $config = $admin->getConfigForModule('Forecasts');
 
         if ($config['is_setup'] == 1 && $seed->deleted == 1) {
@@ -665,7 +662,6 @@ function set_note_attachment($session,$note)
 		return array('id'=>-1, 'error'=>$error->get_soap_array());
 	}
 
-	require_once('modules/Notes/NoteSoap.php');
 	$ns = new NoteSoap();
 	return array('id'=>$ns->saveFile($note), 'error'=>$error->get_soap_array());
 
@@ -704,7 +700,6 @@ function get_note_attachment($session,$id)
 		$error->set_error('no_access');
 		return array('result_count'=>-1, 'entry_list'=>array(), 'error'=>$error->get_soap_array());
 	}
-	require_once('modules/Notes/NoteSoap.php');
 	$ns = new NoteSoap();
 	if(!isset($note->filename)){
 		$note->filename = '';
@@ -890,7 +885,7 @@ function get_module_fields($session, $module_name){
 		$error->set_error('no_access');
 		return array('module_fields'=>$module_fields, 'error'=>$error->get_soap_array());
 	}
-	$seed = BeanFactory::getBean($module_name);
+	$seed = BeanFactory::newBean($module_name);
 
 	if(empty($seed))
 	{
@@ -956,7 +951,7 @@ function update_portal_user($session,$portal_name, $name_value_list){
 		$error->set_error('invalid_session');
 		return $error->get_soap_array();
 	}
-	$contact = BeanFactory::getBean('Contacts');
+	$contact = BeanFactory::newBean('Contacts');
 
 	$searchBy = array('deleted'=>0);
 	foreach($name_value_list as $name_value){
@@ -1131,7 +1126,7 @@ function get_relationships($session, $module_name, $module_id, $related_module, 
 	$error = new SoapError();
 
 	$mod = BeanFactory::getBean($module_name, $module_id);
-    $related_mod = BeanFactory::getBean($related_module);
+    $related_mod = BeanFactory::newBean($related_module);
 
 	if(empty($mod) || empty($related_mod)){
 		$error->set_error('no_module');
@@ -1142,7 +1137,6 @@ function get_relationships($session, $module_name, $module_id, $related_module, 
 		return array('ids'=>$ids, 'error'=>$error->get_soap_array());
 	}
 
-	require_once 'include/SugarSQLValidate.php';
 	$valid = new SugarSQLValidate();
 	if(!$valid->validateQueryClauses($related_module_query)) {
         $GLOBALS['log']->error("Bad query: $related_module_query");
@@ -1451,7 +1445,6 @@ function set_document_revision($session,$document_revision)
 		return array('id'=>-1, 'error'=>$error->get_soap_array());
 	}
 
-	require_once('modules/Documents/DocumentSoap.php');
 	$dr = new DocumentSoap();
 	return array('id'=>$dr->saveFile($document_revision), 'error'=>$error->get_soap_array());
 
@@ -1517,7 +1510,7 @@ function search_by_module($user_name, $password, $search_string, $modules, $offs
 	foreach($modules as $module) {
 	    if (!array_key_exists($module, $query_array)) {
 	        $lc_module = strtolower($module);
-            $seed = BeanFactory::getBean($module);
+            $seed = BeanFactory::newBean($module);
             $table_name = $seed->table_name;
             if (!empty($seed->field_defs['name']['db_concat_fields'])) {
                 $namefield = $seed->db->concat($table_name, $seed->field_defs['name']['db_concat_fields']);
@@ -1545,7 +1538,7 @@ function search_by_module($user_name, $password, $search_string, $modules, $offs
 
 	if(!empty($search_string) && isset($search_string)){
 		foreach($modules as $module_name){
-		    $seed = BeanFactory::getBean($module_name);
+		    $seed = BeanFactory::newBean($module_name);
 			if(empty($seed)){
 				continue;
 			}
@@ -1685,11 +1678,11 @@ function get_mailmerge_document($session, $file_name, $fields)
         include($file_name);
 
         $class1 = $merge_array['master_module'];
-        $seed1 = BeanFactory::getBean($merge_array['master_module']);
+        $seed1 = BeanFactory::newBean($merge_array['master_module']);
 
         if(!empty($merge_array['related_module']))
         {
-            $seed2 = BeanFactory::getBean($merge_array['related_module']);
+            $seed2 = BeanFactory::newBean($merge_array['related_module']);
         }
 
         //parse fields
@@ -1731,9 +1724,11 @@ function get_mailmerge_document($session, $file_name, $fields)
             $html .= '<tr>';
             foreach($master_fields as $master_field){
                 if(isset($seed1->$master_field)){
-                    if($seed1->field_name_map[$master_field]['type'] == 'enum'){
+                    if ($seed1->field_defs[$master_field]['type'] == 'enum') {
                         //pull in the translated dom
-                         $html .='<td>'.$app_list_strings[$seed1->field_name_map[$master_field]['options']][$seed1->$master_field].'</td>';
+                         $html .= '<td>'
+                             . $app_list_strings[$seed1->field_defs[$master_field]['options']][$seed1->$master_field]
+                             . '</td>';
                     }else{
                         $html .='<td>'.$seed1->$master_field.'</td>';
                     }
@@ -1746,9 +1741,13 @@ function get_mailmerge_document($session, $file_name, $fields)
                 $seed2->retrieve($value);
                 foreach($related_fields as $related_field){
                     if(isset($seed2->$related_field)){
-                        if($seed2->field_name_map[$related_field]['type'] == 'enum'){
+                        if ($seed2->field_defs[$related_field]['type'] == 'enum') {
                             //pull in the translated dom
-                            $html .='<td>'.$app_list_strings[$seed2->field_name_map[$related_field]['options']][$seed2->$related_field].'</td>';
+                            $html .= '<td>'
+                                . $app_list_strings[
+                                    $seed2->field_defs[$related_field]['options']
+                                ][$seed2->$related_field]
+                                . '</td>';
                         }else{
                             $html .= '<td>'.$seed2->$related_field.'</td>';
                         }
@@ -1809,12 +1808,12 @@ function get_mailmerge_document2($session, $file_name, $fields)
         include($file_name);
 
         $class1 = $merge_array['master_module'];
-        $seed1 = BeanFactory::getBean($merge_array['master_module']);
+        $seed1 = BeanFactory::newBean($merge_array['master_module']);
 
         if(!empty($merge_array['related_module']))
         {
             $class2 = $merge_array['related_module'];
-            $seed2 = BeanFactory::getBean($merge_array['related_module']);
+            $seed2 = BeanFactory::newBean($merge_array['related_module']);
         }
 
         //parse fields
@@ -1861,22 +1860,19 @@ function get_mailmerge_document2($session, $file_name, $fields)
             $html .= '<tr>';
             foreach($master_fields as $master_field){
                 if(isset($seed1->$master_field)){
-                    if($seed1->field_name_map[$master_field]['type'] == 'enum'){
+                    if ($seed1->field_defs[$master_field]['type'] == 'enum') {
                         //pull in the translated dom
-                         $html .='<td>'.$app_list_strings[$seed1->field_name_map[$master_field]['options']][$seed1->$master_field].'</td>';
-                    } else if ($seed1->field_name_map[$master_field]['type'] == 'multienum') {
-
-                        if(isset($app_list_strings[$seed1->field_name_map[$master_field]['options']]) )
-                        {
+                         $html .= '<td>'
+                             . $app_list_strings[$seed1->field_defs[$master_field]['options']][$seed1->$master_field]
+                             . '</td>';
+                    } elseif ($seed1->field_defs[$master_field]['type'] == 'multienum') {
+                        if (isset($app_list_strings[$seed1->field_defs[$master_field]['options']])) {
                             $items = unencodeMultienum($seed1->$master_field);
                             $output = array();
                             foreach($items as $item) {
-                                if ( !empty($app_list_strings[$seed1->field_name_map[$master_field]['options']][$item]) )
-                                {
-                                    array_push($output, $app_list_strings[$seed1->field_name_map[$master_field]['options']][$item]);
-
+                                if (!empty($app_list_strings[$seed1->field_defs[$master_field]['options']][$item])) {
+                                    $output[] = $app_list_strings[$seed1->field_defs[$master_field]['options']][$item];
                                 }
-
                             } // foreach
 
                             $encoded_output = encodeMultienumValue($output);
@@ -1896,9 +1892,13 @@ function get_mailmerge_document2($session, $file_name, $fields)
 				$seed2->retrieve($value);
                 foreach($related_fields as $related_field){
                     if(isset($seed2->$related_field)){
-                        if($seed2->field_name_map[$related_field]['type'] == 'enum'){
+                        if ($seed2->field_defs[$related_field]['type'] == 'enum') {
                             //pull in the translated dom
-                            $html .='<td>'.$app_list_strings[$seed2->field_name_map[$related_field]['options']][$seed2->$related_field].'</td>';
+                            $html .= '<td>'
+                                . $app_list_strings[
+                                    $seed2->field_defs[$related_field]['options']
+                                ][$seed2->$related_field]
+                                . '</td>';
                         }else{
                             $html .= '<td>'.$seed2->$related_field.'</td>';
                         }
@@ -2020,7 +2020,7 @@ function get_entries_count($session, $module_name, $query, $deleted) {
 		);
 	}
 
-	$seed = BeanFactory::getBean($module_name);
+	$seed = BeanFactory::newBean($module_name);
 	if (empty($seed)) {
 		$error->set_error('no_module');
 		return array(
@@ -2047,7 +2047,6 @@ function get_entries_count($session, $module_name, $query, $deleted) {
 	// build WHERE clauses, if any
 	$where_clauses = array();
 	if (!empty($query)) {
-	    require_once 'include/SugarSQLValidate.php';
 	    $valid = new SugarSQLValidate();
 	    if(!$valid->validateQueryClauses($query)) {
             $GLOBALS['log']->error("Bad query: $query");
@@ -2130,7 +2129,7 @@ function handle_set_entries($module_name, $name_value_lists, $select_fields = FA
 	$total = sizeof($name_value_lists);
 
 	foreach($name_value_lists as $name_value_list){
-		$seed = BeanFactory::getBean($module_name);
+		$seed = BeanFactory::newBean($module_name);
 
 		$seed->update_vcal = false;
 
@@ -2151,9 +2150,9 @@ function handle_set_entries($module_name, $name_value_lists, $select_fields = FA
         {
 			$val = $value['value'];
 
-			if($seed->field_name_map[$value['name']]['type'] == 'enum' || $seed->field_name_map[$value['name']]['type'] == 'radioenum')
-            {
-				$vardef = $seed->field_name_map[$value['name']];
+            if ($seed->field_defs[$value['name']]['type'] == 'enum'
+                || $seed->field_defs[$value['name']]['type'] == 'radioenum') {
+                $vardef = $seed->field_defs[$value['name']];
 				if(isset($app_list_strings[$vardef['options']]) && !isset($app_list_strings[$vardef['options']][$val]) )
                 {
 		            if ( in_array($val,$app_list_strings[$vardef['options']]) )
@@ -2161,10 +2160,8 @@ function handle_set_entries($module_name, $name_value_lists, $select_fields = FA
 		                $val = array_search($val,$app_list_strings[$vardef['options']]);
 		            }
 		        }
-
-			} else if($seed->field_name_map[$value['name']]['type'] == 'multienum') {
-
-                $vardef = $seed->field_name_map[$value['name']];
+            } elseif ($seed->field_defs[$value['name']]['type'] == 'multienum') {
+                $vardef = $seed->field_defs[$value['name']];
 
                 if(isset($app_list_strings[$vardef['options']]) && !isset($app_list_strings[$vardef['options']][$value]) )
                 {
@@ -2283,7 +2280,7 @@ function handle_set_entries($module_name, $name_value_lists, $select_fields = FA
             static $config;
             if (!is_array($config)) {
                 /* @var $admin Administration */
-                $admin = BeanFactory::getBean('Administration');
+                $admin = BeanFactory::newBean('Administration');
                 $config = $admin->getConfigForModule('Forecasts');
             }
 

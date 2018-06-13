@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -42,7 +41,6 @@ $mod_strings = array (
 	'LBL_COUNTRY' => 'Šalis:',
 	'LBL_DATE_ENTERED' => 'Sukūrimo data:',
 	'LBL_DATE_MODIFIED' => 'Modifikavimo data:',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Klientai',
 	'LBL_DESCRIPTION_INFORMATION' => 'Aprašo informacija',
 	'LBL_DESCRIPTION' => 'Aprašas:',
 	'LBL_DUPLICATE' => 'Galimas kliento dubliavimasis',

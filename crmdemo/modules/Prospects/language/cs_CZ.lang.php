@@ -168,9 +168,6 @@ $mod_strings = array (
   'LBL_RECORD_SAVED_SUCCESS' => 'Úspěšně jste vytvořili {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B hlavní Id',
-    'LBL_DNB_BAL_PREVIEW' => 'Náhled cílů',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Seznam adresátů',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: Kontaktní informace',
     //Document title
     'TPL_BROWSER_SUGAR7_RECORDS_TITLE' => '{{module}} &raquo; {{appId}}',
     'TPL_BROWSER_SUGAR7_RECORD_TITLE' => '{{#if last_name}}{{#if first_name}}{{first_name}} {{/if}}{{last_name}} &raquo; {{/if}}{{module}} &raquo; {{appId}}',

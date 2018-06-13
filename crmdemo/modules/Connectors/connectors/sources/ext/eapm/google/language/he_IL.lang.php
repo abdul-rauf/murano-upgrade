@@ -17,19 +17,19 @@ $connector_strings = array(
 <br/><br/>
 <ol>
 <li>עבור לאתר של Google Developers:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>היכנס באמצעות חשבון Google שבו אתה רוצה לרשום את האפליקציה.</li>
 <li>צור פרויקט חדש </li>
-<li>הזן שם פרוייקט ולחץ &#39;צור&#39;.</li>
+<li>הזן שם פרוייקט ולחץ \'צור\'.</li>
 <li>ברגע שהפרויקט נוצר, אפשר ה-Google Drive וה- Google Contacts API</li>
 <li>תחת חלק APIs ואימות > בחלק אישורים, צור מזהה לקוח חדש </li>
-<li>בחר Web Application ולחץ על &#39;קבע תצורת מסך הסכמה&#39;</li>
-<li>הזן שם מוצר ולחץ על &#39;שמור&#39;</li>
+<li>בחר Web Application ולחץ על \'קבע תצורת מסך הסכמה\'</li>
+<li>הזן שם מוצר ולחץ על \'שמור\'</li>
 <li>תחת החלק רכיבי URI ניתוב מחדש מורשים, הזן את כתובת ה-url הבאה:
 {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>לחץ &#39;צור מזהה לקוח&#39;</li>
+<li>לחץ \'צור מזהה לקוח\'</li>
 <li>העתק את מזהה הלקוח וסוד הלקוח בתיבות להלן</ 5>
 
 </li>

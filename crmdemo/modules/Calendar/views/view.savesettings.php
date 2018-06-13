@@ -9,10 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/MVC/View/SugarView.php');
 
 class CalendarViewSaveSettings extends SugarView {
-	function process(){
+    /**
+     * {@inheritDoc}
+     *
+     * @param array $params Ignored
+     */
+    public function process($params = array())
+    {
 		$this->display();
 	}
 	

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -766,7 +765,6 @@ Kui teie süsteemi keskkond keelab teie süsteemil suhtlust litsentsi valideerim
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Mittesaadaolevad teemad',
     'LBL_TIMEZONE' => 'Ajavöönd',
     'LBL_TO'    => 'kellele',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Valimine, millise süsteemi ja kasutaja andmeid jälgitakse',
     'LBL_UPDATE_CHECK_AUTO'=>'Automaatselt',
     'LBL_UPDATE_CHECK_MANUAL'=>'Käsitsi',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Kontrolli värskendusi automaatselt</B> – valimisel kontrollib süsteem perioodiliselt, kas rakenduse värskendatud versioone on saadaval.',
@@ -933,8 +931,6 @@ Kui teie süsteemi keskkond keelab teie süsteemil suhtlust litsentsi valideerim
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Fail config.php taastati edukalt.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Hoiatus: vähemalt 6 MB failide üleslaadimise lubamiseks tuleb teie PHP konfiguratsiooni muuta. Muutke suvandi upload_max_filesize väärtust failis php.ini, mille asukoht on järgmine:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Muutke config.php kirjutatavaks ja proovige uuesti.',
-    'MSG_REBUILD_EXTENSIONS' => 'Minge ekraanile <a href="index.php?module=Administration&action=Upgrade">Parandus</a> ja klõpsake suvandit Taasta laiendid.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Minge ekraanile <a href="index.php?module=Administration&action=Upgrade">Parandus</a> a klõpsake suvandit Taasta seosed.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Praegu pole ühtegi ühenduseta klienti lubatud.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Kas olete kindel, et soovite selle ühenduseta kliendi keelata?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Kas olete kindel, et soovite selle ühenduseta kliendi lubada?',
@@ -1044,7 +1040,7 @@ Kui teie süsteemi keskkond keelab teie süsteemil suhtlust litsentsi valideerim
 'ML_ISSUES'=>'Probleemid',
 'ML_MANIFEST_ISSUE'=>'Probleem manifestiga',
 'ML_CONFIG_OVERRIDE'=>'Konfiguratsiooni muutus pole lubatud',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Võti – võib sisaldada ainult tähti, numbreid ja allkriipse. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Konfigureerige navigeerimisriba kiire loomine',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Valige, millised moodulid on navigeerimisriba kiirloomisel saadaval',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Valige moodulid, mille puhul kasutajad saavad ülemisel navigeerimisribal oleva plussikooniga kiiresti kirjeid luua. Pukseerige mooduleid kastide Lubatud moodulid ja keelatud moodulid vahel.',
@@ -1092,7 +1088,6 @@ Kui teie süsteemi keskkond keelab teie süsteemil suhtlust litsentsi valideerim
 	'Manufacturers'  => 'Tootja',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'Seos',
 	'Releases'       => 'Redaktsioon',
@@ -1102,7 +1097,6 @@ Kui teie süsteemi keskkond keelab teie süsteemil suhtlust litsentsi valideerim
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'Saatja',
 	'TaxRates'       => 'Maksumäär',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

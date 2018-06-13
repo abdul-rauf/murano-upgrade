@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,8 +20,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 
-require_once('include/ListView/ListViewSmarty.php');
-require_once('include/MVC/View/views/view.list.php');
 global $app_strings;
 global $app_list_strings;
 global $current_language;
@@ -33,7 +30,7 @@ global $theme;
 $current_module_strings = return_module_language($current_language, 'MergeRecords');
 
 
-$focus = BeanFactory::getBean('MergeRecords');
+$focus = BeanFactory::newBean('MergeRecords');
 $focus->load_merge_bean($_REQUEST['merge_module'], true, $_REQUEST['record']);
 
 $this->bean = $focus->merge_bean;

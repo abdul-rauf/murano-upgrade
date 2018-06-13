@@ -20,7 +20,7 @@ $mod_strings = array (
   'LBL_LIST_FORM_TITLE' => 'Elenco Obiettivi',
   'LBL_NEW_FORM_TITLE' => 'Crea Obiettivo',
   'LBL_PROSPECT' => 'Obiettivo:',
-  'LBL_BUSINESSCARD' => 'Biglietto da Visita',
+  'LBL_BUSINESSCARD' => 'Generale',
   'LBL_LIST_NAME' => 'Nome',
   'LBL_LIST_LAST_NAME' => 'Cognome',
   'LBL_LIST_PROSPECT_NAME' => 'Nome Obiettivo',
@@ -168,9 +168,6 @@ $mod_strings = array (
   'LBL_RECORD_SAVED_SUCCESS' => 'Hai creato con successo {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'ID Principale DNB',
-    'LBL_DNB_BAL_PREVIEW' => 'Anteprima Obiettivi',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Obiettivi',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: Informazioni Target',
     //Document title
     'TPL_BROWSER_SUGAR7_RECORDS_TITLE' => '{{module}} &raquo; {{appId}}',
     'TPL_BROWSER_SUGAR7_RECORD_TITLE' => '{{#if last_name}}{{#if first_name}}{{first_name}} {{/if}}{{last_name}} &raquo; {{/if}}{{module}} &raquo; {{appId}}',
@@ -194,7 +191,7 @@ $mod_strings = array (
 Per creare un {{module_name}}:
 1. Fornire valori per i campi come desiderato.
  - I campi marcati come "Obbligatorio" devono essere compilati prima di salvare.
- - Cliccare "Visualizza di più" per visualizzare ulteriori campi se necessario.
+ - Cliccare "Altri dettagli" per visualizzare ulteriori campi se necessario.
 2. Cliccare "Salva" per finalizzare il nuovo record e ritornare alla pagina precedenter.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Report degli obiettivi',

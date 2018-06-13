@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -42,7 +41,6 @@ $mod_strings = array (
 	'LBL_COUNTRY' => 'Χώρα:',
 	'LBL_DATE_ENTERED' => 'Ημερομηνία Δημιουργίας:',
 	'LBL_DATE_MODIFIED' => 'Ημερομηνία Τροποποίησης:',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Λογαριασμοί',
 	'LBL_DESCRIPTION_INFORMATION' => 'Περιγραφή Πληροφορίας',
 	'LBL_DESCRIPTION' => 'Περιγραφή:',
 	'LBL_DUPLICATE' => 'Πιθανά Αντίγραφο Εγγραφής Λογαριασμού',

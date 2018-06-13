@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Modülü değiştirmek için tıklayın.',
         'moduleHelp'=> 'Değiştirmek istediğiniz modül bileşenini seçin',
         'fieldsBtn'	=> 'Modüldeki <b>Alanları</b> kontrol ederek, modülde depolanmış bilgiyi değiştirin.<br/><br/>Burada özel alanları düzenleyebilir ve oluşturabilirsiniz.',
-        'labelsBtn' => 'Özel etiketlerinizi kaydetmek için <b>Kaydet</b> düğmesine tıklayın.'	,
         'layoutsBtn'=> 'Değiştir, Detay, Liste ve arama görünümlerinin <b>Yerleşimini</b> özelleştirin.',
         'subpanelBtn'=> 'Bu modüldeki alt panellerde hangi bilgilerin gösterileceğini değiştir.',
         'layoutsHelp'=> '<b>Değiştirmek için bir Yerleşim</b> seçin.<br/><br/> Data girilen alanları içeren yerleşimi değiştirmek için <b>DeğişiklikGörünümü</b>&#39;nü tıklayın.<br/><br/>DeğişiklikGörünümü&#39;nde girilen dataları gösteren yerleşimi düzenlemek için <b>DetaylıGörünüm</b>&#39;ü tıklayın.<br/><br/>Varsayılan listede deki sütunları değiştirmek için, <b>ListeGörünümü</b>&#39;i tıklayın.<br/><br/>Temel ve Gelişmiş arama form seçeneklerini değiştirmek içinse, <b>Arama</b>&#39;yı tıklayın.',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Kaybederek Kapanmış satış aşamasını silmek istediğinizden emin misiniz? Bu aşamada silinmesi Tahmin modülünün düzgün çalışmamasına neden olacaktır',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'İlişkiyi silmek istediğinizden emin misiniz?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Bu işlem ilişkiyi sürekli kılacaktır. İlgili ilişkiyi uygulamak istediğinizden emin misiniz?',
 'LBL_CONFIRM_DONT_SAVE' => 'En son kayıt işleminizden sonraki değişiklikler yapıldı, ilgili değişiklikleri kaydetmek ister misiniz?',

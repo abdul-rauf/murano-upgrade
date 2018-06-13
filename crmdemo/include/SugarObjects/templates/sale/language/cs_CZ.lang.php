@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -88,7 +87,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   'LBL_TOP_SALES' => 'Mé otevřené prodeje',
   'NTC_REMOVE_OPP_CONFIRMATION' => 'Jste si jisti, že chcete odstranit tento kontakt z prodeje?',
 	'SALE_REMOVE_PROJECT_CONFIRM' => 'Jste si jisti, že chcete odstranit tuto prodeji od projektu?',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Sleva',
 	'LBL_ACTIVITIES_SUBPANEL_TITLE'=>'Aktivity',
 	'LBL_HISTORY_SUBPANEL_TITLE'=>'Historie',
     'LBL_RAW_AMOUNT'=>'hrubá částka',

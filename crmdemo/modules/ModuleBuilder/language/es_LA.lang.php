@@ -302,7 +302,6 @@ Si se incluye Oportunidades, Cuentas puede requerirse o eliminarse de convertir 
         'moduleBtn'	=> 'Haga clic para editar este módulo.',
         'moduleHelp'=> 'Seleccione el componente del módulo que desea editar',
         'fieldsBtn'	=> 'Editar la información que se almacena en el módulo mediante el control de los <b> Campos </b> del módulo. <br/><br/> Puede editar y crear campos personalizados aquí.',
-        'labelsBtn' => 'Haga clic en <b>Guardar</b> para guardar las etiquetas personalizadas.'	,
         'layoutsBtn'=> 'Personalizar los <b> Diseños </b> de las vistas de búsqueda de Edición, Detalle y Lista.',
         'subpanelBtn'=> 'Editar la información que se muestra en los subpaneles de los módulos.',
         'layoutsHelp'=> 'Seleccione un <b>Diseño a editar</b>.<br/<br/> Para cambiar el diseño que contiene los campos de datos para introducir los datos, haga clic en<b>Vista de Edición</b>.<br/><br/>Para cambiar el diseño que muestra los datos introducidos en los campos en la vista de edición, haga clic en <b>Vista de Detalle</b>.<br/><br/>Para cambiar las columnas que aparecen en la lista predeterminada, haga clic en <b>Vista de Lista</b>.<br/><br/>Para cambiar los diseños del formulario de búsqueda Básico y Avanzado, haga clic en <b>Buscar</b>.',
@@ -737,10 +736,10 @@ Si se incluye Oportunidades, Cuentas puede requerirse o eliminarse de convertir 
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => '¿Está seguro de que desea eliminar la etapa de ventas Cerradas Perdidas? Eliminar esta etapa hará que el módulo de Previsión no funcione correctamente',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'¿Está seguro de que desea eliminar esta relación?
 <br>Nota: Esta operación puede demorar unos minutos.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Esto hará la relación permantente. ¿Está seguro de que desea desplegar esta relación?',

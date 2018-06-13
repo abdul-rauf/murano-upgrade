@@ -1,6 +1,6 @@
 <?php
-// created: 2013-01-18 09:00:48
-$dictionary["mr_consultant_leads"] = array (
+// created: 2018-06-13 14:43:30
+$dictionary['mr_consultant_leads'] = array (
   'true_relationship_type' => 'many-to-many',
   'relationships' => 
   array (
@@ -21,18 +21,18 @@ $dictionary["mr_consultant_leads"] = array (
   'table' => 'mr_consultant_leads_c',
   'fields' => 
   array (
-    0 => 
+    'id' => 
     array (
       'name' => 'id',
       'type' => 'varchar',
       'len' => 36,
     ),
-    1 => 
+    'date_modified' => 
     array (
       'name' => 'date_modified',
       'type' => 'datetime',
     ),
-    2 => 
+    'deleted' => 
     array (
       'name' => 'deleted',
       'type' => 'bool',
@@ -40,13 +40,13 @@ $dictionary["mr_consultant_leads"] = array (
       'default' => '0',
       'required' => true,
     ),
-    3 => 
+    'mr_consultant_leadsmr_consultant_ida' => 
     array (
       'name' => 'mr_consultant_leadsmr_consultant_ida',
       'type' => 'varchar',
       'len' => 36,
     ),
-    4 => 
+    'mr_consultant_leadsleads_idb' => 
     array (
       'name' => 'mr_consultant_leadsleads_idb',
       'type' => 'varchar',

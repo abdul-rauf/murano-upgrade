@@ -436,7 +436,6 @@ class UserViewHelper {
         }
 
         if(!empty($this->bean->id)) {
-            require_once('include/SugarFields/Fields/Teamset/EmailSugarFieldTeamsetCollection.php');
 
             // Display only the teams the user we're editing belongs to
             $teamsWidget = new EmailSugarFieldTeamsetCollection($this->bean, $this->bean->field_defs, 'get_non_private_teams_array', $this->viewType);
@@ -462,7 +461,6 @@ class UserViewHelper {
 
         /* Module Tab Chooser */
         require_once('include/templates/TemplateGroupChooser.php');
-        require_once('modules/MySettings/TabController.php');
         $chooser = new TemplateGroupChooser();
         $controller = new TabController();
 
@@ -569,7 +567,6 @@ class UserViewHelper {
         $this->ss->assign("FDOWDISPLAY", $fdowDays[$currentFDOW]);
 
         //// Numbers and Currency display
-        require_once('modules/Currencies/ListCurrency.php');
         $currency = new ListCurrency();
 
         // 10/13/2006 Collin - Changed to use Localization.getConfigPreference
@@ -596,7 +593,7 @@ class UserViewHelper {
         $currencySymbolJSON = json_encode($currencyList);
         $this->ss->assign('currencySymbolJSON', $currencySymbolJSON);
 
-        $currencyDisplay = BeanFactory::getBean('Currencies');
+        $currencyDisplay = BeanFactory::newBean('Currencies');
         if(isset($cur_id) ) {
             $currencyDisplay->retrieve($cur_id);
             $this->ss->assign('CURRENCY_DISPLAY', $currencyDisplay->iso4217 .' '.$currencyDisplay->symbol );
@@ -658,7 +655,6 @@ class UserViewHelper {
             $this->ss->assign('PDF_MARGIN_LEFT',PDF_MARGIN_LEFT);
             $this->ss->assign('PDF_MARGIN_RIGHT',PDF_MARGIN_RIGHT);
 
-            require_once('include/Sugarpdf/FontManager.php');
             $fontManager = new FontManager();
             $fontlist = $fontManager->getSelectFontList();
             $this->ss->assign('PDF_FONT_NAME_MAIN',get_select_options_with_id($fontlist, PDF_FONT_NAME_MAIN));

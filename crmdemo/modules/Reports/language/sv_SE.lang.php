@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'Organisationsrapporter',
   'LBL_CONTACT_REPORTS' => 'Kontaktrapporter',
   'LBL_OPPORTUNITY_REPORTS' => 'Affärsmöjlighetsrapproter',
+    'LBL_RECENTLY_MODIFIED' => 'Nyligen ändrad',
 
   'LBL_CASE_REPORTS' => 'Ärenderapporter',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'Kommande 30 dagarna',
   'LBL_THIS_YEAR'=>'Det här året',
   'LBL_LIST_FORM_TITLE' =>'Rapporter',
+  'LBL_LIST_REPORT_NAME' => 'Namn',
   'LBL_PROSPECT_REPORTS'=>'Target raporter',
   'LBL_CHART_TYPE'=>'Diagram typ',
   'LBL_IS_EMPTY'=>'Är tom',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>Steg för att definiera filter:</b><br/><br/>1) Klicka på modulen i <b>Relaterade Moduler</b> som du vill använda för att definiera filter. Som standard är den primära modulen (övre nod i trädvyn) vald. <br/><br/>	Du kan välja en relaterad modul (barn nod i trädvyn) genom att klicka på modulen. Expandera noden för att visa ytterligare moduler relaterade till den relaterade modulen. Modulen som du väljer avgör vilka rapporterbara fält visas i rutan <b>Tillgängliga fält</b>.<br/><br/>	2) Klicka på ett fält i rutan <b>Tillgängliga fält</b> för att lägga till det till filter. Du kan även söka efter fältet genom att skriva i textrutan i rutan.<br/><br/>	När du har valt ett antal fält från modulen som valts i moduler rutan <b>Relaterade Moduler</b>, kan du välja en annan modul som du kan välja valfritt antal fält som ska användas som filter.<br/><br/>	3) Välj <b>OCH</b> eller <b>ELLER</b> för att ange om alla filter eller några filter, respektive, används för att hitta resultat för rapporten.<br/><br/>	4) [Valfri] Klicka på <b>Lägg till filter Grupp</b> för att skapa grupper av filter. Du kan ha ett obegränsat antal filter grupper och ett antal filter i en grupp för att skapa kapslade filter.<br/><br/>	5) [Valfri] Markera Kör-tid alternativ för ett filter för att tillåta användare att använda filtret för att ytterligare anpassa resultaten av rapporterna medan du tittar på rapporten.",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>Steg för att definiera Gruppering:</b><br/><br/>1) Klicka på modulen i <b>Relaterade Moduler</b> som du vill använda för gruppera protokoll i din rapport. Som standard är den primära modulen (övre nod i trädvyn) vald. <br/><br/>	Du kan välja en relaterad modul (barn nod i trädvyn) genom att klicka på modulen. Expandera noden för att visa ytterligare moduler relaterade till den relaterade modulen. Modulen som du väljer avgör vilka rapporterbara fält visas i rutan <b>Tillgängliga fält</b>.<br/><br/>	2) Klicka på ett fält i rutan <b>Tillgängliga fält</b> för att gruppera protokollen av fältet i din rapport. Du kan även söka efter fältet genom att skriva i textrutan i rutan.<br/><br/>	När du har valt ett antal fält från modulen som valts i moduler rutan <b>Relaterade Moduler</b>, kan du välja en annan modul som du kan välja valfritt antal fält som ska gruppera rapporter.<br/><br/>	 Hursomhelst, rapporten kommer bli svårare att läsa om den grupperas av mer än ett par fält.<br/><br/>	Du kan ändra ordningen av fält genom add dra och släppa dem i önskad position.  Ändring av ordning kan ändra hur resultatet visas.<br/><br/>  För Matris Rapporter, kan du använda max tre fält för att gruppera protokoll.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>Steg för att definiera Välja Visade Kolumner:</b><br/><br/>1) Klicka på modulen i <b>Relaterade Moduler</b> som du vill använda för att visa data i din rapport. Som standard är den primära modulen (övre nod i trädvyn) som du valt under &#39;Välj Modul&#39; steget vald.<br/><br/>	Du kan välja fält från en relaterad modul (barn nod i trädvyn) genom att klicka på modulen. Moduler relaterade till modulerna som är relaterade till den primära modulen kan också väljas. Modulen som du väljer avgör vilka rapporterbara fält visas i rutan <b>Tillgängliga fält</b><br/><br/>	2) Klicka på fältet i rutan <b>Tillgängliga Fält>/b> för att visa fältdatan i protokollen i din rapport. Du kan även söka efter fältet genom att skriva i textrutan i rutan<br/><br/>	När du har valt ett antal fält från modulen som valts i moduler rutan <b>Relaterade Moduler</b>, kan du välja en annan modul som du kan välja ytterligare fält. Du kan välja obegränsat antal fält, men rapporten kommer genereras saktare och kommer bli svårare att läsa när du lägger till fler än nödvändiga fält i rapporten.<br/><br/>	Du kan ändra ordningen av fält genom add dra och släppa dem i önskad position.  Ändring av ordning kan ändra hur resultatet visas." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steg för att välja sammanfattningar:</b> <br/> <br/>1) Klicka på modulen i panelen <b>Relaterade moduler</b> som du vill använda för sammanfattningarna i din rapport. Den primära modulen (översta noden i trädvyn) är vald som standard. <br/> <br/> Du kan välja en relaterad modul (underordnad nod i trädvyn) genom att klicka på modulen. Expandera noden för att visa ytterligare relaterade moduler. Modulen du väljer avgör vilka rapporterbara fält som visas i rutan <b>Tillgängliga fält</b>. <br/> <br/> 2) Klicka på ett fält i panelen <b>Tillgängliga fält</b> för att välja sammanfattningar för din rapport. Du kan också söka efter fältet genom att skriva i textrutan i panelen. <br/> <br/> Efter att du valt valfritt antal fält från modulen markerad på panelen <b>Relaterade moduler</b>, kan du välja en annan modul där du kan fortsätta välja ytterligare fält för sammanfattningarna i din rapport. <br/> <br/> För matrisrapporter kan du välja fler än ett fält för att visa flera värden i en enskild cell." ,
 
 	'LBL_ALT_SHOW' => 'Visa',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'Denna rapport innehåller data i följande kolumn ordning:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'Upp' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'Information',
     'LBL_REPORT_GRAND_TOTAL' => "Totaltsumma",
+    'LBL_EDIT_REPORT_BUTTON' => 'Redigera rapport',
 
     'LBL_REPORTS_TO' => 'Rapporterar till',
     'LBL_LESS_THAN_EQUAL' => 'Mindre än Lika med',

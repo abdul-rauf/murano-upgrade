@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,9 +16,10 @@ class SugarWidgetFieldteam_set_id extends SugarWidgetReportField{
  * Format the display to be similiar to what we do in a listview
  * Difference is since we already have the team_set_id we will grab all of the teams and not do an ajax request like
  * we do in a list view.
- * @param string $cell
- */
-function & displayListPlain($layout_def){
+    * @param array $layout_def
+    */
+    public function displayListPlain($layout_def)
+    {
 		$value = $this->_get_list_value($layout_def);
 		if(!empty($value)){
 			$teams = TeamSetManager::getTeamsFromSet($value);
@@ -65,7 +64,6 @@ function & displayListPlain($layout_def){
  * @return string the subquery to be run
  */
  function queryFilterany(&$layout_def){
-		require_once('include/SugarFields/SugarFieldHandler.php');
 		$sfh = new SugarFieldHandler();
         $sf = $sfh->getSugarField('teamset');
         $teams = array();
@@ -92,7 +90,6 @@ function & displayListPlain($layout_def){
   * @return string the subquery to be run
   */
  function queryFilterall(&$layout_def){
-		require_once('include/SugarFields/SugarFieldHandler.php');
 		$sfh = new SugarFieldHandler();
         $sf = $sfh->getSugarField('teamset');
         $teams = array();
@@ -119,7 +116,6 @@ function & displayListPlain($layout_def){
   * @return string the subquery to be run
   */
  function queryFilterexact(&$layout_def){
- 	require_once('include/SugarFields/SugarFieldHandler.php');
 	$sfh = new SugarFieldHandler();
     $sf = $sfh->getSugarField('teamset');
     $teams = array();

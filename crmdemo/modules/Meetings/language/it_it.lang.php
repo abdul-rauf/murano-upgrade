@@ -208,7 +208,7 @@ Gli utenti Sugar, i contatti e leads possono essere aggiunti come invitati nelle
 Per creare una {{meetings_singular_module}}:
 1. Fornire i valori desiderati per i campi.
     - I campi contrassegnati come "Obbligatorio" devono essere compilati prima del salvataggio.
-    - Cliccare "Mostra più Moduli" per visualizzare ulteriori campi se necessario.
+    - Cliccare "Altri dettagli" per visualizzare ulteriori campi se necessario.
 2. Aggiungere invitati alla {{meetings_singular_module}}.
     - Clicca "Seleziona un invitato" per aggiungere un utente esistente, contatto e lead alla {{meetings_singular_module}}
     - Clicca l´icona Più a destra del pulsante "Seleziona un invitato" per inserire l´invitato della {{meetings_singular_module}} come nuovo record in Sugar.

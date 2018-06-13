@@ -18,7 +18,7 @@ abstract class SugarQuery_Builder_Where
     public $raw = null;
 
     /**
-     * @var array
+     * @var SugarQuery_Builder_Condition[]
      */
     public $conditions = array();
 
@@ -27,27 +27,57 @@ abstract class SugarQuery_Builder_Where
      */
     public $query = false;
 
+    /**
+     * Constructor
+     *
+     * @param SugarQuery $query
+     * @throws SugarQueryException
+     */
     public function __construct(SugarQuery $query)
     {
         $this->query = $query;
     }
 
     /**
-     * @param $field
-     * @param $value
-     * @param bool $bean
+     * Returns the operator for joining conditions
      *
-     * @return SugarQuery_Builder_Where
+     * @return string
      */
-    public function equals($field, $value, $bean = false)
+    abstract public function operator();
+
+    /**
+     * Generic condition
+     *
+     * @param string $field Field name
+     * @param string $operator Operator
+     * @param mixed $value Value
+     * @param SugarBean|null $bean SugarBean, optional
+     *
+     * @return $this
+     */
+    public function condition($field, $operator, $value, SugarBean $bean = null)
     {
         $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('=')->setField($field)->setValues($value);
-        if ($bean instanceof SugarBean) {
+        $condition->setOperator($operator)
+            ->setField($field)
+            ->setValues($value);
+        if ($bean) {
             $condition->setBean($bean);
         }
-        $this->conditions[] = $condition;
+        $this->add($condition);
         return $this;
+    }
+
+    /**
+     * @param string $field Field name
+     * @param mixed $value Value
+     * @param SugarBean|null $bean SugarBean, optional
+     *
+     * @return $this
+     */
+    public function equals($field, $value, SugarBean $bean = null)
+    {
+        return $this->condition($field, '=', $value, $bean);
     }
 
     /**
@@ -55,19 +85,15 @@ abstract class SugarQuery_Builder_Where
      *
      * @param string $field1
      * @param string $field2
-     * @param bool|object $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return object
+     * @return $this
      */
-    public function equalsField($field1, $field2, $bean = false)
+    public function equalsField($field1, $field2, SugarBean $bean = null)
     {
-        $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('EQUALFIELD')->setField($field1)->setValues($field2);
-        if ($bean instanceof SugarBean) {
-            $condition->setBean($bean);
-        }
-        $this->conditions[] = $condition;
-        return $this;
+        return $this->equals($field1, array(
+            '$field' => $field2,
+        ), $bean);
     }
 
     /**
@@ -75,19 +101,13 @@ abstract class SugarQuery_Builder_Where
      *
      * @param string $field
      * @param string $value
-     * @param bool|object $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return object
+     * @return $this
      */
-    public function notEquals($field, $value, $bean = false)
+    public function notEquals($field, $value, SugarBean $bean = null)
     {
-        $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('!=')->setField($field)->setValues($value);
-        if ($bean instanceof SugarBean) {
-            $condition->setBean($bean);
-        }
-        $this->conditions[] = $condition;
-        return $this;
+        return $this->condition($field, '!=', $value, $bean);
     }
 
     /**
@@ -95,19 +115,15 @@ abstract class SugarQuery_Builder_Where
      *
      * @param string $field1
      * @param string $field2
-     * @param bool|object $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return object
+     * @return $this
      */
-    public function notEqualsField($field1, $field2, $bean = false)
+    public function notEqualsField($field1, $field2, SugarBean $bean = null)
     {
-        $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('NOTEQUALFIELD')->setField($field1)->setValues($field2);
-        if ($bean instanceof SugarBean) {
-            $condition->setBean($bean);
-        }
-        $this->conditions[] = $condition;
-        return $this;
+        return $this->notEquals($field1, array(
+            '$field' => $field2,
+        ), $bean);
     }
 
     /**
@@ -115,10 +131,11 @@ abstract class SugarQuery_Builder_Where
      * to the DBManagers since Oracle has to handle empty differently than all
      * other DBs.
      * @param mixed $field The field
-     * @param SugarBean $bean SugarBean
-     * @return SugarQuery_Builder_Where
+     * @param SugarBean|null $bean SugarBean, optional
+     *
+     * @return $this
      */
-    public function isEmpty($field, $bean = false)
+    public function isEmpty($field, SugarBean $bean = null)
     {
         $this->query->getDBManager()->setEmptyWhere($this, $field, $bean);
         return $this;
@@ -129,10 +146,11 @@ abstract class SugarQuery_Builder_Where
      * to the DBManagers since Oracle has to handle empty differently than all
      * other DBs.
      * @param mixed $field The field
-     * @param SugarBean $bean SugarBean
-     * @return SugarQuery_Builder_Where
+     * @param SugarBean|null $bean SugarBean, optional
+     *
+     * @return $this
      */
-    public function isNotEmpty($field, $bean = false)
+    public function isNotEmpty($field, SugarBean $bean = null)
     {
         $this->query->getDBManager()->setNotEmptyWhere($this, $field, $bean);
         return $this;
@@ -140,15 +158,15 @@ abstract class SugarQuery_Builder_Where
 
     /**
      * @param $field
-     * @param bool $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      */
-    public function isNull($field, $bean = false)
+    public function isNull($field, SugarBean $bean = null)
     {
         $condition = new SugarQuery_Builder_Condition($this->query);
         $condition->setField($field)->isNull();
-        if ($bean instanceof SugarBean) {
+        if ($bean) {
             $condition->setBean($bean);
         }
         $this->conditions[] = $condition;
@@ -157,15 +175,15 @@ abstract class SugarQuery_Builder_Where
 
     /**
      * @param $field
-     * @param bool $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      */
-    public function notNull($field, $bean = false)
+    public function notNull($field, SugarBean $bean = null)
     {
         $condition = new SugarQuery_Builder_Condition($this->query);
         $condition->setField($field)->notNull();
-        if ($bean instanceof SugarBean) {
+        if ($bean) {
             $condition->setBean($bean);
         }
         $this->conditions[] = $condition;
@@ -175,55 +193,37 @@ abstract class SugarQuery_Builder_Where
     /**
      * @param $field
      * @param $value
-     * @param bool $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      */
-    public function contains($field, $value, $bean = false)
+    public function contains($field, $value, SugarBean $bean = null)
     {
-        $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('CONTAINS')->setField($field)->setValues($value);
-        if ($bean instanceof SugarBean) {
-            $condition->setBean($bean);
-        }
-        $this->conditions[] = $condition;
-        return $this;
+        return $this->condition($field, 'CONTAINS', $value, $bean);
     }
 
     /**
      * @param $field
      * @param $value
-     * @param bool $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      */
-    public function notContains($field, $value, $bean = false)
+    public function notContains($field, $value, SugarBean $bean = null)
     {
-        $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('DOES NOT CONTAIN')->setField($field)->setValues($value);
-        if ($bean instanceof SugarBean) {
-            $condition->setBean($bean);
-        }
-        $this->conditions[] = $condition;
-        return $this;
+        return $this->condition($field, 'DOES NOT CONTAIN', $value, $bean);
     }
 
     /**
      * @param $field
      * @param $value
-     * @param bool $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      */
-    public function starts($field, $value, $bean = false)
+    public function starts($field, $value, SugarBean $bean = null)
     {
-        $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('STARTS')->setField($field)->setValues($value);
-        if ($bean instanceof SugarBean) {
-            $condition->setBean($bean);
-        }
-        $this->conditions[] = $condition;
-        return $this;
+        return $this->condition($field, 'STARTS', $value, $bean);
     }
 
     /**
@@ -231,29 +231,23 @@ abstract class SugarQuery_Builder_Where
      *
      * @param string $field
      * @param string $value
-     * @param bool|object $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return object
+     * @return $this
      */
-    public function ends($field, $value, $bean = false)
+    public function ends($field, $value, SugarBean $bean = null)
     {
-        $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('ENDS')->setField($field)->setValues($value);
-        if ($bean instanceof SugarBean) {
-            $condition->setBean($bean);
-        }
-        $this->conditions[] = $condition;
-        return $this;
+        return $this->condition($field, 'ENDS', $value, $bean);
     }
 
     /**
      * @param $field
      * @param array|SugarQuery $vals
-     * @param bool $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      */
-    public function in($field, $vals, $bean = false)
+    public function in($field, $vals, SugarBean $bean = null)
     {
         $isNull = false;
         if (is_array($vals)) {
@@ -265,29 +259,23 @@ abstract class SugarQuery_Builder_Where
             if (count($vals) > 0) {
                 $where = $this->queryOr();
                 $where->isNull($field, $bean);
-                $where->in($field, $vals, $bean = false);
+                $where->in($field, $vals, $bean);
             } else {
                 $this->isNull($field, $bean);
             }
-        } else {
-            $condition = new SugarQuery_Builder_Condition($this->query);
-            $condition->setOperator('IN')->setField($field)->setValues($vals);
-            if ($bean instanceof SugarBean) {
-                $condition->setBean($bean);
-            }
-            $this->conditions[] = $condition;
+            return $this;
         }
-        return $this;
+        return $this->condition($field, 'IN', $vals, $bean);
     }
 
     /**
      * @param $field
      * @param array|SugarQuery $vals
-     * @param bool $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      */
-    public function notIn($field, $vals, $bean = false)
+    public function notIn($field, $vals, SugarBean $bean = null)
     {
         $isNull = in_array('', $vals);
         if ($isNull) {
@@ -295,110 +283,74 @@ abstract class SugarQuery_Builder_Where
             if (count($vals) > 0) {
                 $where = $this->queryAnd();
                 $where->notNull($field, $bean);
-                $where->notIn($field, $vals, $bean = false);
+                $where->notIn($field, $vals, $bean);
             } else {
                 $this->notNull($field, $bean);
             }
-        } else {
-            $condition = new SugarQuery_Builder_Condition($this->query);
-            $condition->setOperator('NOT IN')->setField($field)->setValues($vals);
-            if ($bean instanceof SugarBean) {
-                $condition->setBean($bean);
-            }
-            $this->conditions[] = $condition;
+            return $this;
         }
-        return $this;
+        return $this->condition($field, 'NOT IN', $vals, $bean);
     }
 
     /**
      * @param $field
      * @param $min
      * @param $max
-     * @param bool $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      */
-    public function between($field, $min, $max, $bean = false)
+    public function between($field, $min, $max, SugarBean $bean = null)
     {
-        $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('BETWEEN')->setField($field)->setValues(array('min' => $min, 'max' => $max));
-        if ($bean instanceof SugarBean) {
-            $condition->setBean($bean);
-        }
-        $this->conditions[] = $condition;
-        return $this;
+        return $this->condition($field, 'BETWEEN', array('min' => $min, 'max' => $max), $bean);
     }
 
     /**
      * @param $field
      * @param $value
-     * @param bool $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      */
-    public function lt($field, $value, $bean = false)
+    public function lt($field, $value, SugarBean $bean = null)
     {
-        $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('<')->setField($field)->setValues($value);
-        if ($bean instanceof SugarBean) {
-            $condition->setBean($bean);
-        }
-        $this->conditions[] = $condition;
-        return $this;
+        return $this->condition($field, '<', $value, $bean);
     }
 
     /**
      * @param $field
      * @param $value
-     * @param bool $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      */
-    public function lte($field, $value, $bean = false)
+    public function lte($field, $value, SugarBean $bean = null)
     {
-        $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('<=')->setField($field)->setValues($value);
-        if ($bean instanceof SugarBean) {
-            $condition->setBean($bean);
-        }
-        $this->conditions[] = $condition;
-        return $this;
+        return $this->condition($field, '<=', $value, $bean);
     }
 
     /**
      * @param $field
      * @param $value
-     * @param bool $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      */
-    public function gt($field, $value, $bean = false)
+    public function gt($field, $value, SugarBean $bean = null)
     {
-        $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('>')->setField($field)->setValues($value);
-        if ($bean instanceof SugarBean) {
-            $condition->setBean($bean);
-        }
-        $this->conditions[] = $condition;
-        return $this;
+        return $this->condition($field, '>', $value, $bean);
     }
 
     /**
      * @param $field
      * @param $value
-     * @param bool $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      */
-    public function gte($field, $value, $bean = false)
+    public function gte($field, $value, SugarBean $bean = null)
     {
-        $condition = new SugarQuery_Builder_Condition($this->query);
-        $condition->setOperator('>=')->setField($field)->setValues($value);
-        if ($bean instanceof SugarBean) {
-            $condition->setBean($bean);
-        }
-        $this->conditions[] = $condition;
-        return $this;
+        return $this->condition($field, '>=', $value, $bean);
     }
 
     /**
@@ -406,11 +358,11 @@ abstract class SugarQuery_Builder_Where
      *
      * @param string $field
      * @param string $value
-     * @param $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Andwhere
+     * @return $this
      */
-    public function dateRange($field, $value, $bean = false)
+    public function dateRange($field, $value, SugarBean $bean = null)
     {
         //Gets us an array with "from/to" dates, each set to very beginning or end of day as appropriate
         $timeDate = $this->timeDateInstance();
@@ -418,7 +370,7 @@ abstract class SugarQuery_Builder_Where
         if (is_array($dates)) {
             $where = $this->queryAnd();
             $type = '';
-            if ($bean && $bean instanceof SugarBean) {
+            if ($bean) {
                 $type = $bean->getFieldDefinition($field);
                 $type = !empty($type['type']) ? $type['type'] : '';
             }
@@ -431,6 +383,40 @@ abstract class SugarQuery_Builder_Where
             }
         }
         return $this;
+    }
+
+    /**
+     * Creates a condition to check if the field value matches the pattern
+     *
+     * Use this method only in case if the pattern is expected to contain arbitrary wildcards.
+     * Otherwise, use starts(), ends() or contains().
+     *
+     * @param string $field
+     * @param string $pattern
+     * @param SugarBean|null $bean SugarBean, optional
+     *
+     * @return $this
+     */
+    public function like($field, $pattern, SugarBean $bean = null)
+    {
+        return $this->condition($field, 'LIKE', $pattern, $bean);
+    }
+
+    /**
+     * Creates a condition to check if the field value does not match the pattern
+     *
+     * Use this method only in case if the pattern is expected to contain arbitrary wildcards.
+     * Otherwise, use notContains().
+     *
+     * @param string $field
+     * @param string $pattern
+     * @param SugarBean|null $bean SugarBean, optional
+     *
+     * @return $this
+     */
+    public function notLike($field, $pattern, SugarBean $bean = null)
+    {
+        return $this->condition($field, 'NOT LIKE', $pattern, $bean);
     }
 
     /**
@@ -448,12 +434,12 @@ abstract class SugarQuery_Builder_Where
      *
      * @param string $field
      * @param array $value
-     * @param $bean
+     * @param SugarBean|null $bean SugarBean, optional
      *
-     * @return SugarQuery_Builder_Where
+     * @return $this
      * @throws SugarApiExceptionInvalidParameter If invalid dates
      */
-    public function dateBetween($field, $value, $bean = false)
+    public function dateBetween($field, $value, SugarBean $bean = null)
     {
         //Skip filter if a value is empty
         if (empty($value[0]) || empty($value[1])) {
@@ -477,9 +463,8 @@ abstract class SugarQuery_Builder_Where
             "Y-m-d H:i:s",
             mktime(0, 0, 0, $leftDate['month'], $leftDate['day'], $leftDate['year'])
         );
-        $this->gte($field, $leftDate);
-        $this->lte($field, $rightDate);
-        return $this;
+        return $this->gte($field, $leftDate, $bean)
+                    ->lte($field, $rightDate, $bean);
     }
 
     /**

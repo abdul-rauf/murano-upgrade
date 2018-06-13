@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -41,7 +39,7 @@ switch($_REQUEST['adminAction']) {
 			}
 
 			foreach($options as $module) {
-			    $bean = BeanFactory::getBean($module);
+			    $bean = BeanFactory::newBean($module);
 			    if(empty($bean)) continue;
 
 				$q = "SELECT count(*) as count FROM {$bean->table_name}";
@@ -60,7 +58,7 @@ switch($_REQUEST['adminAction']) {
 				$toRepair[$module] = $ids;
 			}
 		} elseif(in_array($target, $moduleList)) {
-		    $bean = BeanFactory::getBean($target);
+		    $bean = BeanFactory::newBean($target);
 			$q = "SELECT count(*) as count FROM {$bean->table_name}";
 			$r = $bean->db->query($q);
 			$a = $bean->db->fetchByAssoc($r);
@@ -70,7 +68,7 @@ switch($_REQUEST['adminAction']) {
 			// populate to_repair array
 			$q2 = "SELECT id FROM {$bean->table_name}";
 			$r2 = $bean->db->query($q2);
-			$ids = '';
+            $ids = array();
 			while($a2 = $bean->db->fetchByAssoc($r2)) {
 				$ids[] = $a2['id'];
 			}

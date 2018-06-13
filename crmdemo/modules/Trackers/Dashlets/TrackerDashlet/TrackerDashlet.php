@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,9 +10,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/Dashlets/Dashlet.php');
 
-require_once('modules/Trackers/TrackerReporter.php');
 
 class TrackerDashlet extends Dashlet {
     var $savedText; // users's saved text
@@ -21,15 +18,6 @@ class TrackerDashlet extends Dashlet {
 	var $tReporter;
 	var $column_widths = array('item_id'=>210,
 	                           'module_name'=>125);
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function TrackerDashlet($id, $def)
-    {
-        self::__construct($id, $def);
-    }
-
     /**
      * Constructor
      *
@@ -62,7 +50,8 @@ class TrackerDashlet extends Dashlet {
      *
      * @return string html to display dashlet
      */
-    function display() {
+    public function display($text = '')
+    {
         $ss = new Sugar_Smarty();
         $ss->assign('savedText', $this->savedText);
         $ss->assign('saving', $this->dashletStrings['LBL_SAVING']);
@@ -70,7 +59,7 @@ class TrackerDashlet extends Dashlet {
         $ss->assign('id', $this->id);
         $ss->assign('height', $this->height);
         $str = $ss->fetch('modules/Trackers/Dashlets/TrackerDashlet/TrackerDashlet.tpl');
-        return parent::display() . $str . '<br />'; // return parent::display for title and such
+        return parent::display($text) . $str . '<br />'; // return parent::display for title and such
     }
 
     /**

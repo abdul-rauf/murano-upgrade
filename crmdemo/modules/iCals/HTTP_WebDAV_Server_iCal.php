@@ -11,9 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/Calendar/Calendar.php';
-require_once 'modules/iCals/iCal.php';
-require_once 'modules/vCals/HTTP_WebDAV_Server_vCal.php';
 
     /**
      * Calendar access using WebDAV
@@ -33,7 +30,7 @@ require_once 'modules/vCals/HTTP_WebDAV_Server_vCal.php';
         public function __construct()
         {
            $this->vcal_focus = new iCal();
-           $this->user_focus = BeanFactory::getBean('Users');
+           $this->user_focus = BeanFactory::newBean('Users');
         }
 
         /**

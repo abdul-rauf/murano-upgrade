@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Otillgängliga teman',
     'LBL_TIMEZONE' => 'Tidszon',
     'LBL_TO'    => 'till',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Välj vilken system- och användardata som ska spåras',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatiskt',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manuelt',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Sök Automatiskt Efter Nya Uppdateringar</B> - Om ikryssad, kommer systemet periodvis att söka efter nyare versioner av applikationen.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'config.php återskapades korrekt.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'VARNING: Din PHP konfiguration måste ändras för att tillåta filer om minst 6MB att kunna laddas upp till servern. Vänligen ändra variablen: upload_max_filesize in din php.ini lokaliserad i:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Var god kontrollera att config.php är skrivbar och försök igen.',
-    'MSG_REBUILD_EXTENSIONS' => 'Vänligen gå till <a href="index.php?module=Administration&action=Upgrade">Reparera</a>  och klicka Återskapa Utbyggnader.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Vänligen gå till <a href="index.php?module=Administration&action=Upgrade">Reparera</a> och klicka Återskapa Relationer.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'För tillfället finns inga offline klienter aktiverade.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Är du säker på att du vill inaktivera den här offline klienten?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Är du säker på att du vill aktivera den här offline klienten?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Problem',
 'ML_MANIFEST_ISSUE'=>'Problem med manifestet',
 'ML_CONFIG_OVERRIDE'=>'Konfig modifiering är inte tillåtet',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Nyckel - får endast bestå av bokstäver, siffror och understreck. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Konfigurera verktygsfältet för genvägar',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Välj vilka moduler som finns tillgängliga i verktygsfältet för genvägar',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Välj vilka moduler för vilka användare som kan snabbt skapa protokoll genom Plusikonen i översta navigationslisten. Drag & släpp modulen mellan de Aktiverade Modulernas och Avaktiverade Modulernas rutor.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Tillverkare',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'Relation',
 	'Releases'       => 'Release',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'Schemaläggare',
 	'Shippers'       => 'Speditör',
 	'TaxRates'       => 'Momssatser',
-	'TeamHierarchies'  => 'Teamrangordning',
 	'TeamMemberships'   => 'Teammedlemskap',
 	'TeamNotices'    => 'Teammeddelanden',
 	'TeamSetModules'   => 'Modul för teamuppsätting',

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,7 +18,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 
-require_once('modules/Home/UnifiedSearchAdvanced.php');
 global $mod_strings, $modListHeader, $app_strings, $beanList, $beanFiles;
 $usa = new UnifiedSearchAdvanced();
 $usa->search();

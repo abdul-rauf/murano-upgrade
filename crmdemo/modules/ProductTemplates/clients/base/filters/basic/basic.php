@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +11,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 $viewdefs['ProductTemplates']['base']['filter']['basic'] = array(
     'create' => true,
-    'quicksearch_field' => array('name'),
+    'quicksearch_field' => array('name', 'category_name', 'type_name'),
     'quicksearch_priority' => 1,
     'filters' => array(
         array(

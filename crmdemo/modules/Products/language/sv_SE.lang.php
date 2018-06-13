@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Produkt',
     'LBL_LIST_MANUFACTURER' => 'Tillverkare',
     'LBL_MANUFACTURERS' => 'Tillverkare',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Tillverkningsnummer',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Delnummer',
     'LBL_LIST_QUANTITY' => 'Kvantitet',
     'LBL_LIST_COST_PRICE' => 'Kostnad',
     'LBL_LIST_DISCOUNT_PRICE' => 'Pris',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Rabatt i %',
     'LBL_LIST_PRICE' => 'Listpris:',
     'LBL_VENDOR_PART_NUM' => 'Leverantörens artikelnummer:',
-    'LBL_MFT_PART_NUM' => 'Tillverkarens artikelnummer:',
+    'LBL_MFT_PART_NUM' => 'Delnummer:',
     'LBL_NEXT_STEP' => 'Nästa steg:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Datum för rabatterat pris:',
     'LBL_WEIGHT' => 'Vikt:',
@@ -163,6 +163,8 @@ För att skapa en {{module_name}}:
  - Klicka på &#39;Visa fler&#39; för att få fler fält om det behövs.
 2. Klicka på &#39;Spara&#39; för att färdigställa posten och gå tillbaks till den förra sidan.',
 
-    'LBL_MANUFACTURERS' => 'Tillverkare',
     'LBL_PRODUCT_POSITION' => 'Projektpaketsposition',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Offererade radartiklar Offert Datalista',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Ny offererad radartikel)',
+    'LBL_DISCOUNT_PERCENT' => '% Procent',
 );

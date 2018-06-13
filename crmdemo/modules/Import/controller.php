@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,9 +17,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 require_once("modules/Import/Forms.php");
-require_once("include/MVC/Controller/SugarController.php");
-require_once('modules/Import/sources/ImportFile.php');
-require_once('modules/Import/views/ImportListView.php');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
@@ -51,7 +46,7 @@ class ImportController extends SugarController
 
         $this->importModule = $_REQUEST['import_module'];
 
-        $this->bean = BeanFactory::getBean($this->importModule);
+        $this->bean = BeanFactory::newBean($this->importModule);
         if ( $this->bean ) {
             if ( !$this->bean->importable )
                 $this->bean = false;
@@ -116,8 +111,6 @@ class ImportController extends SugarController
     function action_RefreshMapping()
     {
         global $mod_strings;
-        require_once('modules/Import/sources/ImportFile.php');
-        require_once('modules/Import/views/view.confirm.php');
         $v = new ImportViewConfirm();
         $fileName = $this->request->getValidInputRequest('importFile', null, '');
         $delim = $_REQUEST['delim'];
@@ -237,7 +230,7 @@ class ImportController extends SugarController
     {
         $module = $this->request->getValidInputRequest('import_module', 'Assert\Mvc\ModuleName');
         $fieldName = $this->request->getValidInputRequest('field_name');
-        echo getControl($module, $fieldName);
+        echo getControl($module, $fieldName, null, '', array('idName' => "default_value_$fieldName"));
         exit;
     }
 

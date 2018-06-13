@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/externalAPI/Base/ExternalAPIBase.php';
-require_once 'include/externalAPI/Base/WebDocument.php';
 require_once 'vendor/Zend/Gdata/Contacts.php';
 
 /**
@@ -76,7 +74,7 @@ class ExtAPIGoogle extends ExternalAPIBase implements WebDocument
         global $current_user;
         $bean = EAPM::getLoginInfo('Google');
         if (!$bean) {
-            $bean = BeanFactory::getBean('EAPM');
+            $bean = BeanFactory::newBean('EAPM');
             $bean->assigned_user_id = $current_user->id;
             $bean->application = 'Google';
             $bean->validated = true;

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,13 +16,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
-require_once('include/DetailView/DetailView.php');
 $detailView = new DetailView();
 
-$focus = BeanFactory::getBean($_REQUEST['loadModule']);
+$focus = BeanFactory::newBean($_REQUEST['loadModule']);
 $focus->id = $_REQUEST['record'];
 
-require_once('include/SubPanel/SubPanelTiles.php');
 $loadModule = InputValidation::getService()->getValidInputRequest('loadModule', 'Assert\Mvc\ModuleName');
 $subpanel = new SubPanelTiles($focus, $loadModule);
 

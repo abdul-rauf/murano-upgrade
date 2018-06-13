@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,13 +13,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('modules/Reports/config.php');
 
 
-require_once('modules/Reports/Report.php');
 require_once('modules/Reports/templates/templates_reports.php');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 if (!empty($this->bean)) {
     $context = array('bean' => $this->bean);
+    if (!empty($_REQUEST['save_as'])) {
+        $context['owner_override'] = true;
+    }
 } else {
     $context = array();
 }
@@ -41,7 +42,6 @@ uksort($ACLAllowedModules,"juliansort");
 
 $buttons = array();
 
-require_once("modules/MySettings/TabController.php");
 $controller = new TabController();
 $tabs = $controller->get_user_tabs($current_user, $type='display');
 //$ACLAllowedModulesAdded = array();
@@ -65,11 +65,10 @@ foreach ($tabs as $tabModuleKey=>$tabModuleKeyValue)
 	}
 }
 */
+$fullModuleList = array_merge($GLOBALS['moduleList'], $GLOBALS['modInvisList']);
 // Add the remaining modules.
 foreach ($ACLAllowedModules as $module=>$singular) {
-    $fullModuleList = array_merge($GLOBALS['moduleList'], $GLOBALS['modInvisList']);
-    if ($module == 'Currencies' ||
-    (!isset($app_list_strings['moduleList'][$module]) && !in_array($module, $fullModuleList))) {
+    if (!isset($app_list_strings['moduleList'][$module]) && !in_array($module, $fullModuleList)) {
         continue;
     }
         $icon_name = _getIcon($module."_32");
@@ -101,7 +100,7 @@ $sugar_smarty->assign("js_custom_version", $sugar_config['js_custom_version']);
 $sugar_smarty->assign("sugar_version", $sugar_version);
 
 // Set fiscal start date
-$admin = BeanFactory::getBean('Administration');
+$admin = BeanFactory::newBean('Administration');
 $config = $admin->getConfigForModule('Forecasts', 'base');
 if (!empty($config['is_setup']) && !empty($config['timeperiod_start_date'])) {
     $sugar_smarty->assign("fiscalStartDate", $config['timeperiod_start_date']);
@@ -120,7 +119,6 @@ $chart_types = array(
 $sugar_smarty->assign('chart_types', $chart_types);
 //$sugar_smarty->assign('chart_description', $chart_description);
 
-require_once('include/SugarCharts/SugarChartFactory.php');
 $sugarChart = SugarChartFactory::getInstance();
 $resources = $sugarChart->getChartResources();
 $sugar_smarty->assign('chartResources', $resources);
@@ -189,7 +187,6 @@ if ($runQuery == 1) {
 	if ($assignedUserId == $current_user->id)
 		$isOwner = 1;
 	$sugar_smarty->assign("IS_OWNER", $isOwner);
-	require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
 	$teamSetField = new SugarFieldTeamset('Teamset');
 	$field_defs = VardefManager::loadVardef('Reports', 'SavedReport');
 	$teamSetField->initClassicView($GLOBALS['dictionary']['SavedReport']['fields'], 'ReportsWizardForm');
@@ -221,7 +218,7 @@ else if ($saveReport !== null && ($saveReport == 'on')) {
 	}
 
 	if (!empty($id)) {
-		$saved_report_seed = BeanFactory::getBean('Reports');
+		$saved_report_seed = BeanFactory::newBean('Reports');
 		$saved_report_seed->disable_row_level_security = true;
 		$saved_report_seed->retrieve($id, false);
 	   	$args['reporter'] =  new Report($report_def, $filters_def, $panels_def);
@@ -268,7 +265,6 @@ else if ($saveReport !== null && ($saveReport == 'on')) {
 		if ($assignedUserId == $current_user->id)
 			$isOwner = 1;
 		$sugar_smarty->assign("IS_OWNER", $isOwner);
-		require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
 		$teamSetField = new SugarFieldTeamset('Teamset');
 		$field_defs = VardefManager::loadVardef('Reports', 'SavedReport');
 		$teamSetField->initClassicView($GLOBALS['dictionary']['SavedReport']['fields'], 'ReportsWizardForm');
@@ -294,12 +290,12 @@ else if ($isDelete !== null && ($isDelete == '1')) {
     $report = BeanFactory::getBean('Reports', $id);
     if($report->ACLAccess('Delete')){
         $report->mark_deleted($id);
-		header('location:index.php?action=index&module=Reports');
+        SugarApplication::redirect('location:index.php?action=index&module=Reports');
     }
 
 }
 else if (!empty($id)) {
-	$saved_report_seed = BeanFactory::getBean('Reports');
+	$saved_report_seed = BeanFactory::newBean('Reports');
 	$saved_report_seed->disable_row_level_security = true;
 	$saved_report_seed->retrieve($id, false);
 	$args['reporter'] = new Report($saved_report_seed->content);
@@ -379,7 +375,6 @@ else if (!empty($id)) {
 	if ($saved_report_seed->assigned_user_id == $current_user->id)
 		$isOwner = 1;
 	$sugar_smarty->assign("IS_OWNER", $isOwner);
-	require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
 	$teamSetField = new SugarFieldTeamset('Teamset');
 	$field_defs = VardefManager::loadVardef('Reports', 'SavedReport');
 	$teamSetField->initClassicView($GLOBALS['dictionary']['SavedReport']['fields'], 'ReportsWizardForm');
@@ -406,7 +401,6 @@ else {
 	$assigned_user_html = get_select_related_html($assigned_user_html_def);
 
 	$sugar_smarty->assign("do_round", 1);
-	require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
 	$teamSetField = new SugarFieldTeamset('Teamset');
 	$field_defs = VardefManager::loadVardef('Reports', 'SavedReport');
 	$teamSetField->initClassicView($GLOBALS['dictionary']['SavedReport']['fields'], 'ReportsWizardForm');
@@ -456,16 +450,3 @@ function setSortByInfo(&$reporter, &$smarty) {
 	$smarty->assign('summary_sort_dir', $summary_sort_dir);
 
 } // fn
-
-/*
-function juliansort($a,$b)
-{
-	global $app_list_strings;
- 	if ($app_list_strings['moduleList'][$a] > $app_list_strings['moduleList'][$b])
- 	{
-  		return 1;
- 	}
- 	return -1;
-}
-*/
-?>

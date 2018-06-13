@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -69,7 +68,12 @@ class SugarACLStatic extends SugarACLStrategy
             $context['owner_override'] = true;
         }
 
-        return ACLController::checkAccessInternal($module, $action, !empty($context['owner_override']));
+        if (isset(self::$non_module_acls[$module])) {
+            $type = self::$non_module_acls[$module];
+        } else {
+            $type = 'module';
+        }
+        return ACLController::checkAccessInternal($module, $action, !empty($context['owner_override']), $type);
     }
 
     static $edit_actions = array(
@@ -83,8 +87,6 @@ class SugarACLStatic extends SugarACLStrategy
     static $action_translate = array(
         'listview' => 'list',
         'index' => 'list',
-//        'popupeditview' => 'edit',
-//        'editview' => 'edit',
         'detail' => 'view',
         'detailview' => 'view',
         'save' => 'edit',
@@ -178,13 +180,17 @@ class SugarACLStatic extends SugarACLStrategy
                 return ACLController::checkAccessInternal($module, $action, $is_owner, $aclType);
             case 'edit':
                 if(!isset($context['owner_override']) && !empty($bean->id)) {
-                    if(!empty($bean->fetched_row) && !empty($bean->fetched_row['id']) && !empty($bean->fetched_row['assigned_user_id']) && !empty($bean->fetched_row['created_by'])){
+                    if (!empty($bean->fetched_row['id']) && (
+                        !empty($bean->fetched_row['assigned_user_id']) || !empty($bean->fetched_row['created_by'])
+                    )) {
                         $temp = BeanFactory::newBean($bean->module_dir);
+                        $temp->createLocaleFormattedName = false;
                         $temp->populateFromRow($bean->fetched_row);
                     }else{
                         if($bean->new_with_id) {
                             $is_owner = true;
                         } else {
+                            $GLOBALS['log']->warn('The bean does not have owner fields populated. Re-retrieving');
                             $temp = BeanFactory::getBean($bean->module_dir, $bean->id);
                         }
                     }

@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,8 +19,24 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" 
-class="dataLabel">A Sugar termék Twitter felületen való regisztrálásával fogyasztói kulcshoz és fogyasztói titokhoz juthat.<br/><br>A regisztrálás lépései:<br/><br/><ol><li>Látogassa meg a Twitter fejlesztői oldalát az alábbi linken:<a href=&#39;http://dev.twitter.com/apps/new&#39; target=&#39;_blank&#39;>http://dev.twitter.com/apps/new</a>.</li><li>Jelentkezzen be abba a Twitter fiókba, amelyhez hozzá szeretné rendelni az alkalmazást.</li><li>A regisztrációs űrlapon belül adjon nevet az alkalmazásnak. Ez a név lesz látható azok számára, akik a Sugar-on belül a lépnek be Twitter fiókjukba.</li><li>Adjon meg egy leírást!</li><li>Adjon meg egy alkalmazás URL-címet.</li><li>Adjon meg egy visszahívó URL-t (ez bármi lehet, mivel a Sugar ezt figyelmen kívül hagyja hitelesítéskor. Példa: adja meg a Sugar webhely URL-címét).</li><li>Fogadja el a Twitter API Felhasználási feltételek opciót.</li><li>Kattintson a Twitter-alkalmazás létrehozása gombra.</li><li>Az alkalmazás oldalon belül, az API kulcsok fül alatt látja a Fogyasztói kulcs és a Fogyasztói titok azonosítókat. Gépelje be azokat.</li></ol></td></tr></table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
+								<tr>
+									<td valign="top" width="35%" class="dataLabel">
+										A Sugar termék Twitter felületen való regisztrálásával fogyasztói kulcshoz és fogyasztói titokhoz juthat.<br/><br>A regisztrálás lépései:<br/><br/>
+										<ol>
+											<li>Látogassa meg a Twitter fejlesztői oldalát az alábbi linken:<a href=\'https://apps.twitter.com\' target=\'_blank\'>https://apps.twitter.com</a>.</li>
+											<li>Jelentkezzen be abba a Twitter fiókba, amelyhez hozzá szeretné rendelni az alkalmazást..</li>
+											<li>A regisztrációs űrlapon belül adjon nevet az alkalmazásnak. Ez a név lesz látható azok számára, akik a Sugar-on belül a lépnek be Twitter fiókjukba..</li>
+											<li>Adjon meg egy leírást!.</li>
+											<li>Adjon meg egy alkalmazás URL-címet.</li>
+											<li>Adjon meg egy visszahívó URL-t (ez bármi lehet, mivel a Sugar ezt figyelmen kívül hagyja hitelesítéskor. Példa: adja meg a Sugar webhely URL-címét).</li>
+											<li>Fogadja el a Twitter API Felhasználási feltételek opciót.</li>
+											<li>Kattintson a Twitter-alkalmazás létrehozása gombra.</li>
+											<li>Az alkalmazás oldalon belül, az API kulcsok fül alatt látja a Fogyasztói kulcs és a Fogyasztói titok azonosítókat. Gépelje be azokat.</li>
+										</ol>
+									</td>
+								</tr>
+							</table>',
     'LBL_NAME' => 'Twitter felhasználónév',
     'LBL_ID' => 'Twitter felhasználónév',
 	'company_url' => 'URL',

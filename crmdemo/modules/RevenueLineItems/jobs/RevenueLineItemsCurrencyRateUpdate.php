@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarCurrency/CurrencyRateUpdateAbstract.php');
 
 /**
  * OpportunitiesCurrencyRateUpdate
@@ -149,10 +148,9 @@ class RevenueLineItemsCurrencyRateUpdate extends CurrencyRateUpdateAbstract
     {
         static $rli;
         if (!isset($rli)) {
-            $rli = BeanFactory::getBean('RevenueLineItems');
+            $rli = BeanFactory::newBean('RevenueLineItems');
         }
         return $rli->getClosedStages();
     }
-
 
 }

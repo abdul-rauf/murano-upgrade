@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 // $Id$
 
-require_once('include/MySugar/MySugar.php');
 
 $mySugar = new MySugar($_REQUEST['module']);
 if (!isset($_REQUEST['DynamicAction'])) {

@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Teklif Kalemi',
     'LBL_LIST_MANUFACTURER' => 'Üretici',
     'LBL_MANUFACTURERS' => 'Üreticiler',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Ürtc No',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Parça Numarası',
     'LBL_LIST_QUANTITY' => 'Miktar',
     'LBL_LIST_COST_PRICE' => 'Maliyet',
     'LBL_LIST_DISCOUNT_PRICE' => 'Fiyat',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'İndirim %',
     'LBL_LIST_PRICE' => 'Liste Fiyatı:',
     'LBL_VENDOR_PART_NUM' => 'Satıcı Parça Numarası:',
-    'LBL_MFT_PART_NUM' => 'Ürtc Parça Numarası:',
+    'LBL_MFT_PART_NUM' => 'Parça Numarası:',
     'LBL_NEXT_STEP' => 'Bir Sonraki Adım:',
     'LBL_DISCOUNT_PRICE_DATE' => 'İndirimli Fiyat Tarihi:',
     'LBL_WEIGHT' => 'Ağırlık:',
@@ -168,6 +168,8 @@ $mod_strings = array(
 - Gerek duyulursa ek alanları açmak için "Daha Fazlasına" tıklayın.
 2. "Kaydet" tuşuna basarak yeni kayıt oluşturma işlemini tamamlayın ve önceki sayfaya dönün.',
 
-    'LBL_MANUFACTURERS' => 'Üreticiler',
     'LBL_PRODUCT_POSITION' => 'Ürün Paketi Konumu',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Teklif Kalemleri Teklif Veri Listesi',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Yeni Kalem)',
+    'LBL_DISCOUNT_PERCENT' => 'Yüzde % ',
 );

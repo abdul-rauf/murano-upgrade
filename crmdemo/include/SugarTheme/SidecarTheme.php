@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,8 +17,6 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 
-require_once 'vendor/lessphp/lessc.inc.php';
-require_once 'include/api/SugarApiException.php';
 
 /**
  * Class that provides tools for working with a theme.
@@ -155,7 +152,7 @@ class SidecarTheme
                 $css[$lessFile] = $this->compileFile($lessFile, $min, false);
             }
             return implode('', array_values($css));
-        } catch (exception $e) {
+        } catch (Exception $e) {
             throw new SugarApiExceptionError('lessc fatal error:<br />' . $e->getMessage());
         }
     }
@@ -209,7 +206,7 @@ class SidecarTheme
             sugar_mkdir($this->paths['cache'], null, true);
             sugar_file_put_contents($this->getCssFileLocation($lessFile, $hash), $css);
             return $hash;
-        } catch (exception $e) {
+        } catch (Exception $e) {
             throw new SugarApiExceptionError('lessc fatal error:<br />' . $e->getMessage());
         }
     }

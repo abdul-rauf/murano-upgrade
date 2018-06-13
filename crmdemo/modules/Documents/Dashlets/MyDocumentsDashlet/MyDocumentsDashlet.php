@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,17 +10,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/Dashlets/DashletGeneric.php');
 
 class MyDocumentsDashlet extends DashletGeneric { 
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function MyDocumentsDashlet($id, $def = null)
-    {
-        self::__construct($id, $def);
-    }
 
     public function __construct($id, $def = null)
 	{
@@ -35,12 +25,11 @@ class MyDocumentsDashlet extends DashletGeneric {
         $this->searchFields = $dashletData['MyDocumentsDashlet']['searchFields'];
         $this->columns = $dashletData['MyDocumentsDashlet']['columns'];
 
-        $this->seedBean = BeanFactory::getBean('Documents');        
+        $this->seedBean = BeanFactory::newBean('Documents');        
     }
 
     function displayOptions() {
         $this->processDisplayOptions();
-        require_once('modules/Documents/Document.php');
 
         $types = getDocumentsExternalApiDropDown();
         $this->currentSearchFields['doc_type']['input'] = '<select size="3" multiple="true" name="doc_type[]">'

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,13 +10,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/api/ServiceBase.php');
-require_once('include/api/ServiceDictionaryRest.php');
-require_once('include/SugarOAuth2/SugarOAuth2Server.php');
-require_once('include/api/RestResponse.php');
-require_once('include/api/RestRequest.php');
-
-use Sugarcrm\Sugarcrm\Logger\LoggerTransition;
+use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
 
 /** @noinspection PhpInconsistentReturnPointsInspection */
 class RestService extends ServiceBase
@@ -121,8 +114,7 @@ class RestService extends ServiceBase
         $this->max_version = $apiSettings['maxVersion'];
         $this->api_settings = $apiSettings;
 
-        $logger = new LoggerTransition(\LoggerManager::getLogger());
-        $this->setLogger($logger);
+        $this->setLogger(LoggerFactory::getLogger('rest'));
     }
 
     /**
@@ -130,7 +122,6 @@ class RestService extends ServiceBase
      */
     public function execute()
     {
-        ob_start();
         $this->response = $this->getResponse();
         try {
             $this->request = $this->getRequest();
@@ -258,15 +249,9 @@ class RestService extends ServiceBase
             $apiClass = $this->loadApiClass($route);
             $apiMethod = $route['method'];
 
-            $this->handleErrorOutput('php_error_before_api');
-
             $this->response->setContent($apiClass->$apiMethod($this,$argArray));
 
             $this->respond($route, $argArray);
-
-            if (empty($route['rawReply'])) {
-                $this->handleErrorOutput('php_error_after_api');
-            }
         } catch ( Exception $e ) {
             $this->handleException($e);
         }

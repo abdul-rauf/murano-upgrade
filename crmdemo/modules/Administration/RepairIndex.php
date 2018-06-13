@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -170,7 +169,7 @@ if((count($drop_index) > 0 or count($add_index) > 0 or count($change_index) > 0)
 		echo ($_REQUEST['silent']) ? "" : "<a href='index.php?module=Administration&action=RepairIndex&mode=execute'>Execute Script</a>";
 	}
 
-	$focus = BeanFactory::getBean('Accounts');
+	$focus = BeanFactory::newBean('Accounts');
 	if(count($drop_index) > 0) {
 		if(isset($_REQUEST['mode']) and $_REQUEST['mode']=='execute') {
 			echo ($_REQUEST['silent']) ? "" : $mod_strings['LBL_REPAIR_INDEX_DROPPING'];

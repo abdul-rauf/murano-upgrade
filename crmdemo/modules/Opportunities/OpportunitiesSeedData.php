@@ -64,7 +64,7 @@ class OpportunitiesSeedData {
 
         $now = $GLOBALS['timedate']->nowDb();
         /* @var $opp Opportunity */
-        $opp = BeanFactory::getBean('Opportunities');
+        $opp = BeanFactory::newBean('Opportunities');
         $oppFieldDefs = $opp->getFieldDefinitions();
         $oppSql = 'INSERT INTO '. $opp->table_name . ' ('. join(',', array_keys($opp->toArray(true))) . ') VALUES';
         $oppRows = array();
@@ -82,7 +82,7 @@ class OpportunitiesSeedData {
 
 
         /* @var $fw ForecastWorksheet */
-        $fw = BeanFactory::getBean('ForecastWorksheets');
+        $fw = BeanFactory::newBean('ForecastWorksheets');
         $fw->parent_type = 'Opportunities';
         $fw->draft = 1;
         $fw->date_entered = $now;
@@ -229,14 +229,14 @@ class OpportunitiesSeedData {
         $now = $timedate->nowDb();
 
         /* @var $rli RevenueLineItem */
-        $rli = BeanFactory::getBean('RevenueLineItems');
+        $rli = BeanFactory::newBean('RevenueLineItems');
         $rliFieldDefs = $rli->getFieldDefinitions();
         $rliSql = array();
         $sqlRli = 'INSERT INTO '. $rli->table_name . '('. join(',', array_keys($rli->toArray(true))) . ') VALUES';
 
 
         /* @var $fw ForecastWorksheet */
-        $fw = BeanFactory::getBean('ForecastWorksheets');
+        $fw = BeanFactory::newBean('ForecastWorksheets');
         $fw->parent_type = 'RevenueLineItems';
         $fw->draft = 1;
         $fw->date_entered = $now;

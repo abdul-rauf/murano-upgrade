@@ -9,10 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once("include/Expressions/Dependency.php");
-require_once("include/Expressions/Actions/AbstractAction.php");
-require_once("include/Expressions/Expression/Parser/Parser.php");
-require_once("include/Expressions/Expression/AbstractExpression.php");
 
 /**
  * Expression trigger
@@ -23,14 +19,6 @@ class Trigger
 	public $triggerFields = array();
 	public $conditionFunction = "";
 	static $ValueNotSetError = -1;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Trigger($condition, $fields = array())
-    {
-        self::__construct($condition, $fields);
-    }
 
     public function __construct($condition, $fields = array())
     {
@@ -69,3 +57,4 @@ class Trigger
         return $this->triggerFields;
     }
 }
+

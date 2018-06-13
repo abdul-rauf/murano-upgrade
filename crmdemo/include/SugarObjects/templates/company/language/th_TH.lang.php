@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -42,7 +41,6 @@ $mod_strings = array (
 	'LBL_COUNTRY' => 'ประเทศ:',
 	'LBL_DATE_ENTERED' => 'วันที่สร้าง:',
 	'LBL_DATE_MODIFIED' => 'วันที่แก้ไข:',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'บัญชี',
 	'LBL_DESCRIPTION_INFORMATION' => 'ข้อมูลคำอธิบาย',
 	'LBL_DESCRIPTION' => 'คำอธิบาย:',
 	'LBL_DUPLICATE' => 'บัญชีอาจซ้ำกัน',

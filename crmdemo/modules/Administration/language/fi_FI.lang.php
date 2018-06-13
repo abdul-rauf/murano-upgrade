@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Ei-saatavilla olevat teemat',
     'LBL_TIMEZONE' => 'Aikavyöhyke',
     'LBL_TO'    => '->',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Valitse, mitä järjestelmä- ja käyttäjätietoja seurataan',
     'LBL_UPDATE_CHECK_AUTO'=>'Automaattisesti',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manuaalisesti',
     'LBL_UPDATE_CHECK_TYPE'=>'<strong>Automaattisesti tarkista päivitykset</strong> - Jos valittuna, järjestelmä säännöllisesti tarkistaa, onko sovellukseta saatavilla uudempia versioita.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => '<code>config.php</code> jälleenrakennettiin.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Varoitus: PHP:n konfiguraatiota on muutettava, jotta vähintään 6 Mt:n tiedostoja voidaan ladata. Muokkaa upload_max_filesize -arvoa <code>php.ini</code>-tiedostossa, joka sijaitsee osoitteessa:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Tee <code>config.php</code>:stä kirjoitettava ja yritä uudelleen.',
-    'MSG_REBUILD_EXTENSIONS' => 'Siirry <a href="index.php?module=Administration&action=Upgrade">korjaus</a>sivulle ja klikkaa “Jälleenrakenna lisäosat”-painiketta.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Siirry <a href="index.php?module=Administration&action=Upgrade">korjaus</a>sivulle ja klikkaa “Jälleenrakenna suhteet”-painiketta.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Tällä hetkellä ei ole käytössä offline clienteja.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Oletko varma, että haluat poistaa käytöstä tämän Offline Clientin?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Oletko varma, että haluat ottaa käyttöön tämän Offline Clientin?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Ongelmia',
 'ML_MANIFEST_ISSUE'=>'Ongelma manifestissa',
 'ML_CONFIG_OVERRIDE'=>'Konfiguroinnin muokkaus on kielletty',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Avain - saa sisältää ainoastaan kirjaimia, numeroita ja alaviivoja. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Konfiguroi navigointipalkin pikaluonti',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Valitse, mitkä moduulit ovat saatavilla navigointipalkin pikaluonnissa',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Navigointipalkissa on plus-kuvake. Valitse, mitkä moduulit ovat käytettävissä tämän kuvakkeen kautta. Raahaa moduuleita <i>Käytettävissä olevat moduulit-</i> ja <i>Käytöstä poistetut moduulit-</i>laadikoiden välillä.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Valmistaja',
 	'ProductBundleNotes' => 'Tuotenippumerkintä',
 	'ProductBundles'   => 'Tuotenippu',
-	'ProjectResources' => 'Projektiresurssi',
 
 	'Relationships' => 'Suhde',
 	'Releases'       => 'Julkaisut',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'Ajastustehtävät',
 	'Shippers'       => 'Kuljettaja',
 	'TaxRates'       => 'Verokannat',
-	'TeamHierarchies'  => 'Tiimihierarkkia',
 	'TeamMemberships'   => 'Tiimijäsenyys',
 	'TeamNotices'    => 'Tiimimuistutus',
 	'TeamSetModules'   => 'Tiimisettimoduuli',

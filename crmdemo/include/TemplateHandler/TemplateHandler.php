@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once("include/Expressions/DependencyManager.php");
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 /**
  * TemplateHandler builds templates using SugarFields and a generic view.
@@ -23,15 +23,6 @@ class TemplateHandler {
     var $cacheDir;
     var $templateDir = 'modules/';
     var $ss;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function TemplateHandler()
-    {
-        self::__construct();
-    }
-
     public function __construct()
     {
       $this->cacheDir = sugar_cached('');
@@ -171,9 +162,9 @@ class TemplateHandler {
                       }
             } //foreach
 
-            //Create a base class with field_name_map property
+            //Create a base class with field_defs property
             $sugarbean = new stdClass;
-            $sugarbean->field_name_map = $defs;
+            $sugarbean->field_defs = $defs;
             $sugarbean->module_dir = $module;
 
             $javascript = new javascript();
@@ -194,8 +185,7 @@ class TemplateHandler {
             //3) not have validateDepedency set to false in metadata
             //4) have id_name in vardef entry
             //5) not already been added to Array
-            foreach($sugarbean->field_name_map as $name=>$def) {
-
+            foreach ($sugarbean->field_defs as $name => $def) {
                if($def['type']=='relate' &&
                   isset($defs2[$name]) &&
                   (!isset($defs2[$name]['validateDependency']) || $defs2[$name]['validateDependency'] === true) &&
@@ -304,7 +294,8 @@ class TemplateHandler {
             $cache_file_name = $this->ss->_get_compile_path($this->cacheDir . $this->templateDir . $module . '/' .$view . '.tpl');
             SugarCache::cleanFile($cache_file_name);
 
-            return unlink($this->cacheDir . $this->templateDir . $module . '/' .$view . '.tpl');
+            $file = FileLoader::validateFilePath($this->cacheDir . $this->templateDir . $module . '/' .$view . '.tpl');
+            return unlink($file);
         }
         return false;
     }
@@ -324,7 +315,6 @@ class TemplateHandler {
     public function createQuickSearchCode($defs, $defs2, $view = '', $module='')
     {
         $sqs_objects = array();
-        require_once('include/QuickSearchDefaults.php');
         if(isset($this) && $this instanceof TemplateHandler) //If someone calls createQuickSearchCode as a static method (@see ImportViewStep3) $this becomes anoter object, not TemplateHandler
         {
             $qsd = QuickSearchDefaults::getQuickSearchDefaults($this->getQSDLookup());

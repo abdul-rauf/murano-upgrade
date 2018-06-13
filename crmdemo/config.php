@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 11:26:22
+// created: 2018-06-13 14:44:37
 $sugar_config = array (
   'SAML_SLO' => '',
   'SAML_X509Cert' => '',
@@ -88,10 +88,13 @@ $sugar_config = array (
   'dbconfig' => 
   array (
     'db_host_name' => 'localhost',
+    'db_host_instance' => 'SQLEXPRESS',
     'db_user_name' => 'root',
     'db_password' => '@UGARcrm00700',
-    'db_name' => 'crmdemo1306',
+    'db_name' => 'sugar7822',
     'db_type' => 'mysql',
+    'db_port' => '',
+    'db_manager' => 'MysqliManager',
   ),
   'dbconfigoption' => 
   array (
@@ -282,7 +285,7 @@ $sugar_config = array (
     'timeout' => 3600,
   ),
   'js_custom_version' => 1,
-  'js_lang_version' => 1220,
+  'js_lang_version' => 1221,
   'languages' => 
   array (
     'en_us' => 'English (US)',
@@ -439,11 +442,12 @@ $sugar_config = array (
   'show_download_tab' => true,
   'site_url' => 'https://staging.rtlabs.co.uk:44336/',
   'slow_query_time_msec' => '100',
+  'smtp_mailer_debug' => 0,
   'snip_url' => 'https://ease.sugarcrm.com/',
   'stack_trace_errors' => false,
   'sugar_max_int' => 2147483647,
   'sugar_min_int' => -2147483648,
-  'sugar_version' => '7.8.2.2',
+  'sugar_version' => '7.9.4.0',
   'sync_post_mail_settings' => 
   array (
     'host' => 'smtp.gmail.com',

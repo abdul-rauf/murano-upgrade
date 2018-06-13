@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/api/SugarApi.php');
-require_once('modules/ExpressionEngine/formulaHelper.php');
 
 class SugarLogicFunctionsApi extends SugarApi
 {
@@ -47,13 +44,15 @@ class SugarLogicFunctionsApi extends SugarApi
      * @param ServiceBase $api
      * @param array       $args
      */
-    public function getSugarLogicFunctions($api, $args){
+    public function getSugarLogicFunctions(ServiceBase $api, array $args)
+    {
         $useDebug = (!shouldResourcesBeMinified() || !empty($args['debug']));
         $phpCacheFile = sugar_cached("Expressions/functionmap.php");
         $jsCacheFile = $useDebug ?
             sugar_cached("Expressions/functions_cache_debug.js") :
             sugar_cached('Expressions/functions_cache.js');
-        if (SugarAutoLoader::fileExists($phpCacheFile) || !SugarAutoLoader::fileExists($jsCacheFile)) {
+        // @jvink - check with @dwheeler
+        if (!SugarAutoLoader::fileExists($phpCacheFile) || !SugarAutoLoader::fileExists($jsCacheFile)) {
             $GLOBALS['updateSilent'] = true;
             include("include/Expressions/updatecache.php");
         }

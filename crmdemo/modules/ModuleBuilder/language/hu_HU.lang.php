@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Kattintson ennek a modulnak a szerkesztéséhez.',
         'moduleHelp'=> 'Válassza ki azt a modulkomponenst, amelyet szerkeszteni kíván.',
         'fieldsBtn'	=> 'A mezők beállításain keresztül adja meg, hogy a modul milyen információkat fog tartalmazni.<br /><br />Egyedi mezőket hozhat létre és szerkesztheti is őket.',
-        'labelsBtn' => 'Az egyéni címkék mentéséhez kattintson a <b>Mentés</b> gombra.'	,
         'layoutsBtn'=> 'Testreszabhatja a szerkesztési, részletes és lista nézetet, továbbá a keresési megjelenítést.',
         'subpanelBtn'=> 'Adja meg, hogy a modul alpaneleiben milyen információk fognak szerepelni!',
         'layoutsHelp'=> 'Válassza ki az elrendezést szerkesztéshez!<br />Az adatokat tartalmazó mezők elrendezésének megváltoztatásához, kattintson a Szerkesztési nézetre!<br />Ha a Szerkesztési nézetben bevitt adatok megjelenítését kívánja módosítani, kattintson a Részletes nézetre!<br />Az alapértelmezett lista oszlopainak megváltoztatásához, kattintson a Lista nézetre!<br />Az elrendezésben elérhető egyszerű és részletes keresés megváltoztatásához kattintson a Keresésre!',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Biztos benne, hogy törölni kívánja a "Lezárt, elvesztett" értékesítési fázist? Az opció törlése kihatással van az Előrejelzések modul helyes működésére.',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Biztosan törölni akarja ezt a kapcsolatot?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'A kapcsolat ezzel állandóvá válik. Biztos benne, hogy állandósítja a kapcsolatot?',
 'LBL_CONFIRM_DONT_SAVE' => 'Változások történtek, mióta utoljára mentett. Szeretne menteni?',

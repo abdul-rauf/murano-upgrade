@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -24,7 +23,7 @@ function checkForDuplicates($prefix){
 	global $local_log;
 	require_once('include/formbase.php');
         $db = DBManagerFactory::getInstance();
-	$focus = BeanFactory::getBean('Prospects');
+	$focus = BeanFactory::newBean('Prospects');
 	if(!checkRequired($prefix, array_keys($focus->required_fields))){
 		return null;
 	}
@@ -151,7 +150,7 @@ function getWideFormBody($prefix, $mod='',$formname='',  $prospect = ''){
 	}
 	
 	if(empty($prospect)){
-		$prospect = BeanFactory::getBean('Prospects');
+		$prospect = BeanFactory::newBean('Prospects');
 	}
 	global $mod_strings;
 $temp_strings = $mod_strings;
@@ -267,7 +266,7 @@ EOQ;
 
 $javascript = new javascript();
 $javascript->setFormName($formname);
-$javascript->setSugarBean(BeanFactory::getBean('Prospects'));
+$javascript->setSugarBean(BeanFactory::newBean('Prospects'));
 $javascript->addField('email1','false',$prefix);
 $javascript->addField('email2','false',$prefix);
 $javascript->addRequiredFields($prefix);
@@ -331,7 +330,7 @@ EOQ;
 
 $javascript = new javascript();
 $javascript->setFormName($formname);
-$javascript->setSugarBean(BeanFactory::getBean('Prospects'));
+$javascript->setSugarBean(BeanFactory::newBean('Prospects'));
 $javascript->addField('email1','false',$prefix);
 $javascript->addRequiredFields($prefix);
 
@@ -388,7 +387,7 @@ function handleSave($prefix,$redirect=true, $useRequired=false){
 	global $timedate;
 	
 	
-	$focus = BeanFactory::getBean('Prospects');
+	$focus = BeanFactory::newBean('Prospects');
 	if($useRequired &&  !checkRequired($prefix, array_keys($focus->required_fields))){
 		return null;
 	}
@@ -401,52 +400,6 @@ function handleSave($prefix,$redirect=true, $useRequired=false){
 	if (!isset($_POST[$prefix.'email_opt_out'])) $focus->email_opt_out = 0;
 	if (!isset($_POST[$prefix.'do_not_call'])) $focus->do_not_call = 0;
 	
-	if (empty($_POST['record']) && empty($_POST['dup_checked'])) {
-		/*
-		// we don't check dupes on Prospects - this is the dirtiest data in the system
-		//$duplicateProspects = $this->checkForDuplicates($prefix);
-		if(isset($duplicateProspects)){
-			$get='module=Prospects&action=ShowDuplicates';
-			
-			//add all of the post fields to redirect get string
-			foreach ($focus->column_fields as $field) 
-			{
-				if (!empty($focus->$field))
-				{
-					$get .= "&Prospects$field=".urlencode($focus->$field);
-				}	
-			}
-			
-			foreach ($focus->additional_column_fields as $field) 
-			{
-				if (!empty($focus->$field))
-				{
-					$get .= "&Prospects$field=".urlencode($focus->$field);
-				}	
-			}
-
-			//create list of suspected duplicate prospect id's in redirect get string
-			$i=0;
-			foreach ($duplicateProspects as $prospect)
-			{
-				$get .= "&duplicate[$i]=".$prospect['id'];
-				$i++;
-			}
-
-			//add return_module, return_action, and return_id to redirect get string
-			$get .= "&return_module=";
-			if(!empty($_POST['return_module'])) $get .= $_POST['return_module'];
-			else $get .= "Prospects";
-			$get .= "&return_action=";
-			if(!empty($_POST['return_action'])) $get .= $_POST['return_action'];
-			else $get .= "DetailView";
-			if(!empty($_POST['return_id'])) $get .= "&return_id=".$_POST['return_id'];
-
-			//now redirect the post to modules/Prospects/ShowDuplicates.php
-			header("Location: index.php?$get");
-			return null;
-		}*/
-	}
 	global $current_user;
 
 	$focus->save($GLOBALS['check_notify']);

@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once("include/Expressions/Actions/AbstractAction.php");
 
 class SetRequiredAction extends AbstractAction
 {
@@ -19,14 +18,6 @@ class SetRequiredAction extends AbstractAction
      * array Array of actions on which the Expression Action is not allowed
      */
     protected $disallowedActions = array('view');
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SetRequiredAction($params)
-    {
-        self::__construct($params);
-    }
 
     public function __construct($params)
     {
@@ -161,3 +152,4 @@ SUGAR.util.extend(SUGAR.forms.SetRequiredAction, SUGAR.forms.AbstractAction, {
     }
 
 }
+

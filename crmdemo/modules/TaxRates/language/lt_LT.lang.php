@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,6 +27,7 @@ $mod_strings = array (
   'LBL_TAXRATE' => 'Mokesčių tarifas:',
   'LBL_LIST_NAME' => 'Mokesčių tarifo pavadinimas',
   'LBL_NAME' => 'Mokesčių tarifo pavadinimas:',
+  'LBL_FILTER_ACTIVE' => 'Aktyvūs mokesčių tarifai',
   'LBL_LIST_LIST_ORDER' => 'Pozicija sąraše',
   'LBL_LIST_ORDER' => 'Pozicija sąraše:',
   'LBL_LIST_STATUS' => 'Statusas',

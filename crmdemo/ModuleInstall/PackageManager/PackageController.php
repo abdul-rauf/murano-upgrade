@@ -9,18 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
- require_once('ModuleInstall/PackageManager/PackageManagerDisplay.php');
  require_once('ModuleInstall/PackageManager/PackageManager.php');
  class PackageController{
         var $_pm;
-
-     /**
-      * @deprecated Use __construct() instead
-      */
-     public function PackageController()
-     {
-         self::__construct();
-     }
 
     /**
      * Constructor: this class is called from the the ajax call and handles invoking the correct
@@ -335,6 +326,11 @@
             	foreach(array("manifest", "icon") as $meta) {
             	    $this->rmMetaFile($file, $meta);
             	}
+                $realpath = UploadFile::realpath($file);
+                $md5_file = $realpath . '.md5';
+            if (file_exists($md5_file)) {
+                unlink($md5_file);
+            }
             }
             $this->sendJsonOutput(array('result' => 'true'));
         }
@@ -351,3 +347,4 @@
         echo $json->encode($output);
     }
 }
+

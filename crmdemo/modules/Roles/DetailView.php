@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -23,7 +22,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 require_once('modules/Roles/Forms.php');
-require_once('include/DetailView/DetailView.php');
 
 global $mod_strings;
 global $app_strings;
@@ -32,7 +30,7 @@ global $current_user;
 
 if (!is_admin($current_user)) sugar_die("Unauthorized access to administration.");
 
-$focus = BeanFactory::getBean('Roles');
+$focus = BeanFactory::newBean('Roles');
 
 $detailView = new DetailView();
 $offset=0;
@@ -65,7 +63,6 @@ $xtpl->assign("DESCRIPTION", nl2br(url2html($focus->description)));
 $detailView->processListNavigation($xtpl, "ROLE", $offset);
 
 require_once("include/templates/TemplateGroupChooser.php");
-require_once("modules/MySettings/TabController.php");
 
 $chooser = new TemplateGroupChooser();
 $controller = new TabController();
@@ -121,7 +118,6 @@ ob_end_clean();
 ob_start();
 echo $old_contents;
 
-require_once('include/SubPanel/SubPanelTiles.php');
 $subpanel = new SubPanelTiles($focus, 'Roles');
 echo $subpanel->display();
 ?>

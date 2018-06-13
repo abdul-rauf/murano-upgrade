@@ -299,7 +299,6 @@ $mod_strings = array(
         'moduleBtn'	=> '单击以编辑此模块。',
         'moduleHelp'=> '选择您想要编辑的模块组件',
         'fieldsBtn'	=> '通过控制模块中的 <b>字段</b>来编辑模块中储存的信息。<br/><br/>您可以在此处编辑和创建自定义字段。',
-        'labelsBtn' => '点击<b>保存</b>以保存您的自定义标签。'	,
         'layoutsBtn'=> '自定义编辑，细节，列表和查找视图的<b>布局</b> 。',
         'subpanelBtn'=> '编辑模块子面板中显示的信息。',
         'layoutsHelp'=> '选择一个 <b>布局来编辑</b>。<br/<br/>如需更改包含数据输入字段的布局，请点击<b>编辑视图</b>。<br/><br/>如需更改显示在编辑视图中输入字段的数据的布局， 请点击<b>细节视图</b>。<br/><br/>如需更改显示在默认列表中的列，情点击 <b>列表视图</b>。<br/><br/> 如需更改基本和高级查找表格布局，请点击<b>查找</b>。',
@@ -734,10 +733,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => '您确定要删除丢单结束销售阶段吗？删除这一阶段将会导致预测模块不能正常工作',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'您确定要删除这种关系？<br>注意：此操作可能无法几分钟内完成。',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'将使这种关系永久化，您确定要部署这种关系吗？',
 'LBL_CONFIRM_DONT_SAVE' => '自上次保存已做更改，您想要保存吗？',

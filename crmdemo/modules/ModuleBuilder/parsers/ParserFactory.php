@@ -1,7 +1,4 @@
 <?php
-if (! defined ( 'sugarEntry' ) || ! sugarEntry)
-    die ( 'Not A Valid Entry Point' ) ;
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,6 +11,8 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
  */
 
 require_once 'modules/ModuleBuilder/parsers/constants.php';
+
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 class ParserFactory
 {
@@ -221,16 +220,16 @@ class ParserFactory
 
     protected static function checkForStudioParserOverride($view, $moduleName, $packageName)
     {
-        require_once 'modules/ModuleBuilder/Module/StudioModuleFactory.php';
         $sm = StudioModuleFactory::getStudioModule($moduleName);
         foreach ($sm->sources as $file => $def) {
             if (!empty($def['view']) && $def['view'] == strtolower($view) && !empty($def['parser'])) {
                 $pName = $def['parser'];
                 $path = "modules/ModuleBuilder/parsers/views/{$pName}.php";
-                if (file_exists("custom/$path"))
-                    require_once("custom/$path");
-                else if (file_exists($path))
-                    require_once($path);
+                if (file_exists("custom/$path")) {
+                    require_once FileLoader::validateFilePath("custom/$path");
+                } elseif (file_exists($path)) {
+                    require_once FileLoader::validateFilePath($path);
+                }
                 if (class_exists ( $pName ))
                     return new $pName($view, $moduleName, $packageName);
                 //If it wasn't defined directly, check for a generic parser name for the view

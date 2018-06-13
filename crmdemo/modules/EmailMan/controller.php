@@ -14,8 +14,6 @@ class EmailManController extends SugarController
 {
     function action_Save()
     {
-        require_once('include/OutboundEmail/OutboundEmail.php');
-        require_once('modules/Configurator/Configurator.php');
 
         $configurator = new Configurator();
         global $sugar_config;
@@ -38,7 +36,7 @@ class EmailManController extends SugarController
             $oe->saveSystem();
         }
 
-        $focus = BeanFactory::getBean('Administration');
+        $focus = BeanFactory::newBean('Administration');
 
         if(isset($_POST['tracking_entities_location_type'])) {
             if ($_POST['tracking_entities_location_type'] != '2') {
@@ -59,7 +57,7 @@ class EmailManController extends SugarController
 
         // mark user metadata changed so the user preferences get refreshed
         // (user preferences contain email client preference)
-        $mm = MetadataManager::getManager();
+        $mm = MetaDataManager::getManager();
         $mm->setUserMetadataHasChanged($current_user);
 
         // save User defaults for emails

@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -39,97 +37,11 @@ function template_groups_chooser(&$args) {
 	$smarty->assign('leftarrow_big', $leftarrow_big);
 	$smarty->assign('rightarrow_big', $rightarrow_big);
 	$smarty->assign('table_style', $table_style);
-	//echo $smarty->fetch("modules/Reports/templates/_template_groups_chooser.tpl");
  	if ($js_loaded == false) {
   		$js_loaded = true; 		
  	}
 	return $smarty->fetch("modules/Reports/templates/_template_groups_chooser.tpl");
 } // fn
-
-/*
-function template_groups_chooser(&$args)
-{
-global $mod_strings,$js_loaded;
- if ( $js_loaded == false)
- {
-  template_groups_chooser_js($args);
-  $js_loaded = true;
- }
-  $table_style = '';
-  if ( ! empty($args['display']))
-  {
-  	$table_style = "style=\"display: ".$args['display']."\"";
-  }
-
-
-?>
-<script>
-<?php
-	if ( ! empty($args['onmoveleft']) ) 
-	{ 
-		echo "\n var onmoveleft_".$args['id']." = function() {\n ".$args['onmoveleft']."\n}\n" ;
-	}
-	if ( ! empty($args['onmoveright']) ) 
-	{ 
-		echo "\n var onmoveright_".$args['id']." = function() {\n ".$args['onmoveright']."\n}\n" ;
-	}
-?>
-</script>
-<div id="<?php echo $args['id']; ?>" <?php echo $table_style;?>>
-<table cellpadding="0" cellspacing="0" border='0'>
-<tr>
-<td scope="row">
-<h5><?php echo $args['title']; ?></h5>
-</td>
-</tr>
-<tr>
-<td>
-<table border="0" cellspacing=0 cellpadding="0">
-<tr>
-	<td>&nbsp;</td>
-	<td  scope="row" id="chooser_<?php echo $args['left_name'];?>_text"r><nobr><b><?php echo $args['left_label']; ?></b></nobr></td>
-	<td>&nbsp;</td>
-	<td  scope="row" id="chooser_<?php echo $args['right_name'];?>"><nobr><b><?php echo $args['right_label']; ?></b></nobr></td>
-</tr>
-<tr>
-	<td valign="top" style="padding-right: 2px; padding-left: 2px;">
-
-<a onclick="javascript:up('<?php echo $args['left_name'];?>','<?php echo $args['id']; ?>');"><?php echo SugarThemeRegistry::current()->getImage('uparrow_big','border="0" style="margin-bottom: 1px;",null,null,'.gif',$mod_strings['LBL_SORT']);?></a><br>
-<a onclick="javascript:down('<?php echo $args['left_name'];?>','<?php echo $args['id']; ?>');"><?php echo SugarThemeRegistry::current()->getImage('downarrow_big','border="0" style="margin-top: 1px;" ',null,null,'.gif',$mod_strings['LBL_SORT']);?></a>
-			</td>
-	<td>
-		<table border="0" cellspacing=0 cellpadding="0">
-		<tr>
-			<td id="<?php echo $args['left_name'];?>_td">
-			<select id="<?php echo $args['left_name'];?>" name="<?php echo $args['left_name'];?>[]"  size="10" width="300" multiple="multiple"></select></td>
-
-		</tr>
-		</table>
-	</td>
-	<td valign="top" style="padding-right: 2px; padding-left: 2px;"><a onclick="javascript:right_to_left('<?php echo $args['left_name'];?>','<?php echo $args['right_name'];?>','<?php echo $args['id']; ?>');"><?php echo SugarThemeRegistry::current()->getImage('leftarrow_big','border="0" style="margin-right: 1px;" alt="Sort"');?></a><a onclick="javascript:left_to_right('<?php echo $args['left_name'];?>','<?php echo $args['right_name'];?>','<?php echo $args['id']; ?>');"><?php echo SugarThemeRegistry::current()->getImage('rightarrow_big','border="0" style="margin-left: 1px;"',null,null,'.gif',$mod_strings['LBL_SORT']);?></a></td>
-	<td id="<?php echo $args['right_name']; ?>_td">
-<select id="<?php echo $args['right_name']; ?>" name="<?php echo $args['right_name']; ?>[]" size="10" multiple="multiple"/>
-	<td valign="top" style="padding-right: 2px; padding-left: 2px;">
-<!--
-<a onclick="javascript:up('<?php echo $args['right_name'];?>');"><?php echo SugarThemeRegistry::current()->getImage('uparrow_big','border="0" style="margin-bottom: 1px;"',null,null,'.gif',$mod_strings['LBL_SORT']);?></a><br>
-<a onclick="javascript:down('<?php echo $args['right_name'];?>');"><?php echo SugarThemeRegistry::current()->getImage('downarrow_big','border="0" style="margin-top: 1px;"',null,null,'.gif',$mod_strings['LBL_SORT']);?></a>
--->
-
-			</td>
-</tr>
-</table>
-			</td>
-</tr>
-</table>
-</div>
-
-<script language="javascript">
-object_refs['<?php echo $args['left_name']; ?>'] = document.EditView['<?php echo $args['left_name']; ?>']; 
-object_refs['<?php echo $args['right_name']; ?>'] = document.EditView['<?php echo $args['right_name']; ?>'];
-</script>
-<?php
-}
-*/
 
 ////////////////////////////////////////////// 
 // TEMPLATE:
@@ -227,11 +139,6 @@ function left_to_right(left_name,right_name,id)
 
 	object_refs[left_name] = left_td.getElementsByTagName('select')[0];
 	object_refs[right_name] = right_td.getElementsByTagName('select')[0];
-	if(left_name == 'display_columns' && getReportType() == 'summary'){
-		//deleteAllGroups(0);
-		//remakeGroups();
-	}
-
 	try
 	{
 		eval("onmoveright_"+id+"();");
@@ -324,10 +231,6 @@ function right_to_left(left_name,right_name,id)
 
 	object_refs[left_name] = left_td.getElementsByTagName('select')[0];
 	object_refs[right_name] = right_td.getElementsByTagName('select')[0];
-	if(left_name == 'display_columns' && getReportType() == 'summary'){
-	//deleteAllGroups(0);
-	//remakeGroups();
-	}
 	try
 	{
 		eval("onmoveleft_"+id+"();");

@@ -11,12 +11,8 @@
  */
 
 // also imports OutboundEmailConfiguration.php
-require_once "modules/OutboundEmailConfiguration/OutboundSmtpEmailConfiguration.php";
 
 // external imports
-require_once "include/OutboundEmail/OutboundEmail.php";
-require_once "modules/InboundEmail/InboundEmail.php";
-require_once "modules/Users/User.php";
 
 use Sugarcrm\Sugarcrm\Util\Serialized;
 
@@ -64,7 +60,7 @@ class OutboundEmailConfigurationPeer
     public static function getSystemDefaultMailConfiguration(Localization $locale = null, $charset = null)
     {
         global $app_strings;
-        $systemUser = BeanFactory::getBean("Users");
+        $systemUser = BeanFactory::newBean("Users");
         $systemUser->getSystemUser();
 
         $systemMailerConfiguration = static::loadOutboundEmail();
@@ -349,7 +345,7 @@ class OutboundEmailConfigurationPeer
             }
         }
 
-        $systemUser = BeanFactory::getBean("Users");
+        $systemUser = BeanFactory::newBean("Users");
         $systemUser->getSystemUser();
 
         $oe                        = static::loadOutboundEmail();
@@ -440,7 +436,7 @@ class OutboundEmailConfigurationPeer
         }
 
 
-        $systemUser = BeanFactory::getBean("Users");
+        $systemUser = BeanFactory::newBean("Users");
         $systemUser->getSystemUser();
 
         $oe                        = static::loadOutboundEmail();

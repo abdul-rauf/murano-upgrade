@@ -12,9 +12,6 @@
 
  // $Id: disc_client_utils.php 51719 2009-10-22 17:18:00Z mitani $
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
-
 require_once ('include/utils/zip_utils.php');
 
 function convert_disc_client(){
@@ -184,7 +181,7 @@ function convert_disc_client(){
                        $errors[] =  $result['error']['description'];
                     }else{
 
-					   $admin = BeanFactory::getBean('Administration');
+					   $admin = BeanFactory::newBean('Administration');
 					   $system_id = $result['id'];
 					   if(!isset($system_id)){
 						  $system_id = 1;
@@ -201,7 +198,6 @@ function convert_disc_client(){
                 $sugar_config['oc_converted'] = true;
 
 			    echo 'Updating Local Information<br>';
-			 	//echo 'Done - will auto logout in <div id="seconds_left">10</div> seconds<script> function logout_countdown(left){document.getElementById("seconds_left").innerHTML = left; if(left == 0){document.location.href = "index.php?module=Users&action=Logout";}else{left--; setTimeout("logout_countdown("+ left+")", 1000)}};setTimeout("logout_countdown(10)", 1000)</script>';
                 // done with soap calls
                 $result = $soapclient->call( 'logout', array('session'=>$session) );
 	            ksort( $sugar_config );
@@ -344,7 +340,6 @@ function get_required_upgrades($soapclient, $session){
     $upgrade_history->disable_row_level_security = true;
     $installeds = $upgrade_history->getAllOrderBy('date_entered ASC');
     $history = array();
-    require_once('soap/SoapError.php');
 	$error = new SoapError();
     foreach($installeds as $installed)
 	{

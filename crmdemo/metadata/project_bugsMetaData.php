@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,23 +9,66 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-// adding project-to-bugs relationship
+
 $dictionary['projects_bugs'] = array(
     'table' => 'projects_bugs',
     'fields' => array(
-        array('name' => 'id', 'type' => 'id'),
-        array('name' => 'bug_id', 'type' => 'id'),
-        array('name' => 'project_id', 'type' => 'id'),
-        array('name' => 'date_modified', 'type' => 'datetime'),
-        array('name' => 'deleted', 'type' => 'bool', 'len' => '1', 'default' => '0', 'required' => false),
+        'id' => array(
+            'name' => 'id',
+            'type' => 'id',
+        ),
+        'bug_id' => array(
+            'name' => 'bug_id',
+            'type' => 'id',
+        ),
+        'project_id' => array(
+            'name' => 'project_id',
+            'type' => 'id',
+        ),
+        'date_modified' => array(
+            'name' => 'date_modified',
+            'type' => 'datetime',
+        ),
+        'deleted' => array(
+            'name' => 'deleted',
+            'type' => 'bool',
+            'len' => '1',
+            'default' => '0',
+            'required' => false,
+        ),
     ),
-    'indices' => array (
-        array('name' => 'projects_bugs_pk', 'type' =>'primary', 'fields'=>array('id')),
-        array('name' => 'idx_proj_bug_proj', 'type' =>'index', 'fields'=>array('project_id')),
-        array('name' => 'idx_proj_bug_bug', 'type' =>'index', 'fields'=>array('bug_id')),
-        array('name' => 'projects_bugs_alt', 'type'=>'alternate_key', 'fields'=>array('project_id','bug_id')),
+    'indices' => array(
+        array(
+            'name' => 'projects_bugs_pk',
+            'type' => 'primary',
+            'fields' => array(
+                'id',
+            ),
+        ),
+        array(
+            'name' => 'idx_proj_bug_proj',
+            'type' => 'index',
+            'fields' => array(
+                'project_id',
+            ),
+        ),
+        array(
+            'name' => 'idx_proj_bug_bug',
+            'type' => 'index',
+            'fields' => array(
+                'bug_id',
+            ),
+        ),
+        array(
+            'name' => 'projects_bugs_alt',
+            'type' => 'alternate_key',
+            'fields' => array(
+                'project_id',
+                'bug_id',
+            ),
+        ),
     ),
-    'relationships' => array (
+    'relationships' => array(
         'projects_bugs' => array(
             'lhs_module' => 'Project',
             'lhs_table' => 'project',
@@ -41,4 +83,3 @@ $dictionary['projects_bugs'] = array(
         ),
     ),
 );
-?>

@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -38,7 +37,6 @@ class SugarUpgradeAddModulesToCE extends UpgradeScript
         $newModuleList = $moduleList;
 
         //include tab controller
-        require_once('modules/MySettings/TabController.php');
         $newTB = new TabController();
 
         //make sure new modules list has a key we can reference directly

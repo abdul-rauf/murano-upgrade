@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -64,8 +63,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 * Contributor(s): ______________________________________..
 ********************************************************************************/
 
-require_once('include/database/MysqlManager.php');
-require_once 'include/database/MysqliPreparedStatement.php';
 
 /**
  * MySQL manager implementation for mysqli extension
@@ -79,7 +76,6 @@ class MysqliManager extends MysqlManager
 	public $variant = 'mysqli';
 	public $priority = 10;
 	public $label = 'LBL_MYSQLI';
-	public $preparedStatementClass = 'MysqliPreparedStatement';
 
     /**
      * Array of options used for mysqli::real_connect()
@@ -98,10 +94,9 @@ class MysqliManager extends MysqlManager
      */
 	public function __construct()
 	{
-        parent::__construct();
         $this->capabilities["recursive_query"] = true;
-        $this->capabilities["prepared_statements"] = true;
         $this->capabilities["ssl"] = true;
+        parent::__construct();
 	}
 
 	/**
@@ -143,7 +138,7 @@ class MysqliManager extends MysqlManager
             $result = mysqli_use_result($this->database);
 
             // Clear any remaining recordsets
-            while (mysqli_next_result($this->database))  {
+            while (mysqli_more_results($this->database) && mysqli_next_result($this->database)) {
                 $tmp_result = mysqli_use_result($this->database);
                 mysqli_free_result($tmp_result);
             }
@@ -157,30 +152,6 @@ class MysqliManager extends MysqlManager
 
         // slow query logging
         $this->dump_slow_queries($sql);
-
-        // This is some heavy duty debugging, leave commented out unless you need this:
-        /*
-          $bt = debug_backtrace();
-          $line['file'] = 'NO_FILE';
-          $line['line'] = 'NO_LINE';
-          $line['function'] = 'NO_FUNCTION';
-          $i = 0;
-          foreach ( $bt as $i => $tryLine ) {
-              if ( strpos($tryLine['file'],'include/database') === false && strpos($tryLine['file'],'include/SugarQuery') === false ) {
-                  $line = $tryLine;
-                  // Go function line up to find the real function
-                  if ( isset($bt[($i+1)]['function']) ) {
-                      $line['function'] = $bt[($i+1)]['function'];
-                  }
-                  break;
-              }
-          }
-        $dumpQuery = str_replace(array('      ','     ','    ','   ','  ',"\n","\t","\r"),
-                                 array(' ',     ' ',    ' ',   ' ',  ' ', ' ', ' ', ' ',),
-                                 $sql);
-
-        $this->log->fatal("{$line['file']}:{$line['line']} ${line['function']} \nQuery: $dumpQuery\n");
-        */
 
 		if($keepResult) {
 			$this->lastResult = $result;
@@ -241,6 +212,8 @@ class MysqliManager extends MysqlManager
         }
 
         $this->connected = false;
+
+        parent::disconnect();
     }
 
 	/**
@@ -514,7 +487,7 @@ class MysqliManager extends MysqlManager
 	 */
 	public function valid()
 	{
-		return function_exists("mysqli_connect") && empty($GLOBALS['sugar_config']['mysqli_disabled']);
+        return function_exists('mysqli_connect');
 	}
 
 

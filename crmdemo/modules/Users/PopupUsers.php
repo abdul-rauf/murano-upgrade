@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -33,7 +32,7 @@ global $currentModule;
 
 
 $current_module_strings = return_module_language($current_language, 'Users');
-$seed_object = BeanFactory::getBean('Users');
+$seed_object = BeanFactory::newBean('Users');
 
 $where = "";
 if(isset($_REQUEST['query']))

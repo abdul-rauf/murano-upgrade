@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,8 +16,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * @property Link2 $contacts
  */
 class Task extends SugarBean {
-        var $field_name_map;
-
 	// Stored fields
 	var $id;
 	var $date_entered;
@@ -121,7 +118,7 @@ class Task extends SugarBean {
 		$this->parent_name = '';
 		global $app_strings, $locale;
 
-		$parent = BeanFactory::getBean($this->parent_type);
+		$parent = BeanFactory::newBean($this->parent_type);
 		if ( empty($parent))
 		{
 			return;

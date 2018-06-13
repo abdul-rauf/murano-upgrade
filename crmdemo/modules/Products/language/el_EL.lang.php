@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Εισηγμένα Στοιχεία Γραμμής',
     'LBL_LIST_MANUFACTURER' => 'Κατασκευαστής',
     'LBL_MANUFACTURERS' => 'Κατασκευαστές',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Αριθμός Παραγωγής Κατασκευαστή',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Αριθμός Παρτίδας',
     'LBL_LIST_QUANTITY' => 'Ποσότητα',
     'LBL_LIST_COST_PRICE' => 'Κόστος',
     'LBL_LIST_DISCOUNT_PRICE' => 'Τιμή',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Επιλογή Έκπτωσης',
     'LBL_LIST_PRICE' => 'Τιμοκατάλογος:',
     'LBL_VENDOR_PART_NUM' => 'Αριθμός Παρτίδας Πωλητή:',
-    'LBL_MFT_PART_NUM' => 'Αριθμός Παρτίδας Κατασκευαστή:',
+    'LBL_MFT_PART_NUM' => 'Αριθμός Παραγωγής:',
     'LBL_NEXT_STEP' => 'Επόμενο Βήμα:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Ημερομηνία Τιμής Έκπτωσης:',
     'LBL_WEIGHT' => 'Βάρος:',
@@ -169,6 +169,8 @@ $mod_strings = array(
  - Κάντε κλικ στην επιλογή "Εμφάνιση Περισσότερων" για να εμφανιστούν πρόσθετα πεδία, εάν είναι απαραίτητο.
 2. Κάντε κλικ στην επιλογή "Αποθήκευση" για να οριστικοποιήσετε τη νέα εγγραφή και να επιστρέψετε στην προηγούμενη σελίδα.',
 
-    'LBL_MANUFACTURERS' => 'Κατασκευαστές',
     'LBL_PRODUCT_POSITION' => 'Product Bundle Position',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Λίστα Δεδομένων Γραμμής Εισηγμένων Ειδών',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Νέα Γραμμή Εισηγμένων Ειδών)',
+    'LBL_DISCOUNT_PERCENT' => 'Ποσοστό %',
 );

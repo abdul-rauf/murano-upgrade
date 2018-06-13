@@ -15,11 +15,16 @@
  * 
  * */
  
-require_once('include/MVC/View/SugarView.php');
 require_once('modules/Contacts/Popup_picker.php');
 
 class ContactsViewMailMergePopup extends SugarView {
- 	function process() {
+    /**
+     * {@inheritDoc}
+     *
+     * @param array $params Ignored
+     */
+    public function process($params = array())
+    {
 		$this->display();
  	}
 

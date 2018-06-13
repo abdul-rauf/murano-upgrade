@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Quotes/sugarpdf/sugarpdf.quotes.php');
 
 class QuotesSugarpdfStandard extends QuotesSugarpdfQuotes{
     /**
@@ -125,7 +123,6 @@ class QuotesSugarpdfStandard extends QuotesSugarpdfQuotes{
         global $mod_strings, $app_strings, $app_list_strings;
         global $locale;
 
-        require_once('modules/Quotes/Quote.php');
         require('modules/Quotes/config.php');
 
         parent::display();
@@ -162,7 +159,7 @@ class QuotesSugarpdfStandard extends QuotesSugarpdfQuotes{
         $this->writeHTMLTable($addressBS, false, $this->addressOptions);
 
         require_once('modules/Currencies/Currency.php');
-        $currency = BeanFactory::getBean('Currencies');
+        $currency = BeanFactory::newBean('Currencies');
         ////    settings
         $format_number_array = array(
             'currency_symbol' => true,

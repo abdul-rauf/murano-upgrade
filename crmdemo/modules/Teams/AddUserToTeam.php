@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -34,7 +33,7 @@ if ((empty($record) && empty($records)) || empty($user_id)) {
 
     sugar_die($mod_strings['ERR_ADD_RECORD']);
 } else {
-    $focus = BeanFactory::getBean('Teams');
+    $focus = BeanFactory::newBean('Teams');
 
     if (!is_array($records)) {
         $records = array();

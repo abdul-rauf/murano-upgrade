@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Uitgeschakelde Thema&#39;s',
     'LBL_TIMEZONE' => 'Tijdzone',
     'LBL_TO'    => 'to',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Selecteer welke systeem- en gebruikersgegevens worden getraceerd',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatisch',
     'LBL_UPDATE_CHECK_MANUAL'=>'Handmatig',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Automatische controle voor updates</B> - Indien aangevinkt, zal het systeem periodiek controleren of er updates beschikbaar zijn.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Het CONFIG.PHP bestand is succesvol ververst',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Waarschuwing: Je PHP configuratie moet veranderd worden zodat bestanden van minstens 6 MB kunnen worden ingelezen. Verander de upload_max_filesize waarde in je php.ini bestand dat staat in:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Maak uw configuratiebestand schrijfbaar zo dat het kan worden geupgrade naar het nieuwste formaat.',
-    'MSG_REBUILD_EXTENSIONS' => 'Ga naar het Reparatie scherm en kies Ververs Extensies.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Ga naar het Reparatie scherm en kies Ververs Relaties.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Er zijn nu geen Offline Clients ingeschakeld.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Weet u zeker dat u deze Offline Client wilt uitschakelen?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Weet u zeker dat u deze Offline Client wilt inschakelen?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Problemen',
 'ML_MANIFEST_ISSUE'=>'Probleem met het manifest',
 'ML_CONFIG_OVERRIDE'=>'Config wijzigen is niet toegestaan',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Sleutel - mag alleen bestaan uit letters, cijfers en liggende streepjes. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Werkbalk sneltoetsenbalk aanpassen',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Kies welke modules toegankelijk zijn in de sneltoetsenbalk',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Kies welke modules voor welke gebruikers snel records kunnen aanmaken met het plus-pictogram in de navigatiebalk bovenin. Modules voor verslepen tussen de velden Ingeschakelde modules en Uitgeschakelde modules.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Manufacturer',
 	'ProductBundleNotes' => 'OpmerkingProductbundel',
 	'ProductBundles'   => 'Productbundel',
-	'ProjectResources' => 'Project resource',
 
 	'Relationships' => 'Relaties',
 	'Releases'       => 'Release',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'Geplande taken',
 	'Shippers'       => 'Expediteur',
 	'TaxRates'       => 'BTW-tarieven',
-	'TeamHierarchies'  => 'Team hiërarchie',
 	'TeamMemberships'   => 'Team lidmaatschap',
 	'TeamNotices'    => 'Teambericht',
 	'TeamSetModules'   => 'TeamSetmodule',

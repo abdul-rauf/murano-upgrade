@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,7 +21,7 @@ function get_node_data($params,$get_array=false) {
 	foreach ($nodes as $node) {
 		$ret['nodes'][]=$node->get_definition();
 	}
-	$json = new JSON(JSON_LOOSE_TYPE);
+	$json = new JSON();
 	$str=$json->encode($ret);
 	return $str;
 }
@@ -70,4 +69,3 @@ function get_categories_and_products($parent_id) {
     }
     return $nodes;
 }
-?>

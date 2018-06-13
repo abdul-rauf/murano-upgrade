@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -43,7 +40,7 @@ class ActivityQueueManager
     public function eventDispatcher(SugarBean $bean, $event, $args)
     {
         if (Activity::isEnabled()) {
-            $activity       = BeanFactory::getBean('Activities');
+            $activity       = BeanFactory::newBean('Activities');
             $eventTriggered = false;
             if ($event == 'after_save' && self::isEnabledForModule($bean->getModuleName())) {
                 $eventTriggered = $this->createOrUpdate($bean, $args, $activity);
@@ -57,7 +54,7 @@ class ActivityQueueManager
             // join table. This has been moved to the job queue as it's a
             // potentially slow operation.
             if ($eventTriggered) {
-                $subscriptionsBeanName = BeanFactory::getBeanName('Subscriptions');
+                $subscriptionsBeanName = BeanFactory::getBeanClass('Subscriptions');
                 $subscriptionsBeanName::processSubscriptions($bean, $activity, $args, array('disable_row_level_security' => true));
             }
         }
@@ -80,7 +77,7 @@ class ActivityQueueManager
             return true;
         }
 
-        $bean = BeanFactory::getBean($moduleName);
+        $bean = BeanFactory::newBean($moduleName);
         return ($bean instanceof SugarBean) && $bean->isActivityEnabled() && $bean->is_AuditEnabled();
     }
 
@@ -537,7 +534,7 @@ class ActivityQueueManager
      */
     protected function subscribeUserToRecord(User $user, SugarBean $bean)
     {
-        $subs = BeanFactory::getBeanName('Subscriptions');
+        $subs = BeanFactory::getBeanClass('Subscriptions');
         $subs::subscribeUserToRecord($user, $bean, array('disable_row_level_security' => true));
     }
 }

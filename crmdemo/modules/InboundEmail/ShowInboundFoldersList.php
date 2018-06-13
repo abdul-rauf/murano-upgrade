@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -89,7 +88,7 @@ if (!empty($searchField)) {
 } // else
 
 
-$ie = BeanFactory::getBean('InboundEmail');
+$ie = BeanFactory::newBean('InboundEmail');
 if(!empty($_REQUEST['ie_id'])) {
     $ie->disable_row_level_security = true;
     $ie->retrieve($_REQUEST['ie_id']);

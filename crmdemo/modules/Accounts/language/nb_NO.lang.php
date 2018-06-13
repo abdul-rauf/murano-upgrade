@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Vedlegg',
     'LBL_REVENUELINEITEMS' => 'Omsetning linjeelementer',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Bedrifter forhåndsvisning',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notater',
 
     // Help Text

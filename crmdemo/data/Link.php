@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -39,40 +38,29 @@ class Link {
 	var $ignore_role_filter=false;
 	//if set to true distinct clause will be added to the select list.
 	var $add_distinct=false;
-	//value of this variable dictates the action to be taken when a duplicate relationship record is found.
-	//1-ignore,2-update,3-delete.
-	//var $when_dup_relationship_found=2; // deprecated - only used by Queues, which is also no longer used
 
 	// a value for duplicate variable is stored by the _relatinship_exists method.
 	var $_duplicate_key;
 	var $_duplicate_where;
 
     /**
-     * @deprecated Use __construct() instead
+     *  $relName: use this relationship key.
+     *  $bean: the bean that instantiated this class.
+     *  $fieldDef: vardef entry for the field.
+     *  $tableName: optional, fetch from the bean's table name property.
+     *  $keyName: optional, name of the primary key column for _table_name
      */
-    public function Link($_rel_name, &$_bean, $fieldDef, $_table_name = '', $_key_name = '')
-    {
-        self::__construct($_rel_name, $_bean, $fieldDef, $_table_name, $_key_name);
-    }
-
-	/* Parameters:
-	 * 		$_rel_name: use this relationship key.
-	 * 		$_bean: reference of the bean that instantiated this class.
-	 * 		$_fieldDef: vardef entry for the field.
-	 * 		$_table_name: optional, fetch from the bean's table name property.
-	 * 		$_key_name: optional, name of the primary key column for _table_name
-	 */
-    public function __construct($_rel_name, &$_bean, $fieldDef, $_table_name='', $_key_name='')
+    public function __construct($relName, $bean, $fieldDef, $tableName = '', $keyName = '')
     {
 		global $dictionary;
         require_once("modules/TableDictionary.php");
-        $GLOBALS['log']->debug("Link Constructor, relationship name: ".$_rel_name);
-		$GLOBALS['log']->debug("Link Constructor, Table name: ".$_table_name);
-		$GLOBALS['log']->debug("Link Constructor, Key name: ".$_key_name);
+        $GLOBALS['log']->debug("Link Constructor, relationship name: " . $relName);
+        $GLOBALS['log']->debug("Link Constructor, Table name: " . $tableName);
+        $GLOBALS['log']->debug("Link Constructor, Key name: " . $keyName);
 
-        $this->_relationship_name=$_rel_name;
+        $this->_relationship_name = $relName;
 		$this->relationship_fields = (!empty($fieldDef['rel_fields']))?$fieldDef['rel_fields']: array();
-		$this->_bean = $_bean;
+        $this->_bean = $bean;
 		$this->_relationship = SugarRelationshipFactory::getInstance()->getRelationship($this->_relationship_name);
 
 		$this->_db = DBManagerFactory::getInstance();
@@ -88,20 +76,19 @@ class Link {
 			}
 		}
 
-		$this->_bean_table_name=(!empty($_table_name)) ? $_table_name : $_bean->table_name;
-		if (!empty($key_name)) {
-			$this->_bean_key_name=$_key_name;
-		} else {
+        $this->_bean_table_name = (!empty($tableName)) ? $tableName : $bean->table_name;
+        if (!empty($key_name)) {
+            $this->_bean_key_name = $keyName;
+        } else {
+            if ($this->_relationship->lhs_table != $this->_relationship->rhs_table) {
+                if ($bean->table_name == $this->_relationship->lhs_table) {
+                    $this->_bean_key_name = $this->_relationship->lhs_key;
+                }
 
-			if ($this->_relationship->lhs_table != $this->_relationship->rhs_table) {
-
-				if ($_bean->table_name == $this->_relationship->lhs_table)
-					$this->_bean_key_name=$this->_relationship->lhs_key;
-
-				if ($_bean->table_name == $this->_relationship->rhs_table)
-					$this->_bean_key_name=$this->_relationship->rhs_key;
-
-			}
+                if ($bean->table_name == $this->_relationship->rhs_table) {
+                    $this->_bean_key_name = $this->_relationship->rhs_key;
+                }
+            }
 		}
 
 		if ($this->_relationship->lhs_table == $this->_relationship->rhs_table && isset($fieldDef['side']) && $fieldDef['side'] == 'right'){
@@ -637,7 +624,6 @@ class Link {
 
 		//make a copy of this bean to avoid recursion.
 		$bean = clone $this->_bean;
-		// BeanFactory::getBean($this->_bean->module_dir, $this->_bean->id);
 
 	   	$bean->{$this->_relationship->lhs_key}=$key;
 
@@ -790,24 +776,7 @@ class Link {
 
 		//check whether duplicate exist or not.
 		if ($this->relationship_exists($this->_relationship->join_table,$add_values)) {
-
-/*			switch($this->when_dup_relationship_found) {
-
-				case 1: //do nothing.
-					$GLOBALS['log']->debug("Executing default option, no action.");
-					break;
-
-				case 3: //delete the record first, then create a new entry.
-					$this->_delete_row($this->_relationship->join_table,$this->_duplicate_key);
-					$this->_insert_row($add_values);
-					break;
-
-				default:
-				case 2: //update the record.
-*/					$this->_update_row($add_values,$this->_relationship->join_table,$this->_duplicate_where);
-/*					break;
-			}*/
-
+                    $this->_update_row($add_values, $this->_relationship->join_table, $this->_duplicate_where);
 		} else {
 			$this->_insert_row($add_values);
 		}
@@ -968,7 +937,7 @@ class Link {
 		}
 
         if (empty($this->_bean->id)) {
-            $this->_bean->retrieve($id);//!$bean_is_lhs || empty($related_id) ? $id : $related_id);
+            $this->_bean->retrieve($id);
         }
         $this->_bean->call_custom_logic('after_relationship_delete', $custom_logic_arguments);
 		//NOW THE REVERSE WAY SINCE A RELATIONSHIP TAKES TWO
@@ -1098,3 +1067,4 @@ class Link {
 
 
 }
+

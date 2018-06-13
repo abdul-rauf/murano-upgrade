@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Príloha',
     'LBL_REVENUELINEITEMS' => 'Položky krivky výnosu',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Náhľad účtov',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Poznámky',
 
     // Help Text

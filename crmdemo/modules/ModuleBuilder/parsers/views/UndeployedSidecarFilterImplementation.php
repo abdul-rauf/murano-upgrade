@@ -10,10 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/ModuleBuilder/parsers/views/MetaDataImplementationInterface.php';
-require_once 'modules/ModuleBuilder/parsers/views/AbstractMetaDataImplementation.php';
 require_once 'modules/ModuleBuilder/parsers/constants.php';
-require_once 'include/MetaDataManager/MetaDataConverter.php';
 
 class UndeployedSidecarFilterImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
@@ -73,7 +70,10 @@ class UndeployedSidecarFilterImplementation extends AbstractMetaDataImplementati
         if (isset($GLOBALS['current_language']) && !empty($GLOBALS['current_language'])) {
             $selected_lang = $GLOBALS['current_language'];
         }
-        $GLOBALS ['mod_strings'] = array_merge($GLOBALS['mod_strings'], $this->module->getModStrings($selected_lang));
+        $GLOBALS['mod_strings'] = array_merge(
+            $GLOBALS['mod_strings'] ?: array(),
+            $this->module->getModStrings($selected_lang)
+        );
     }
 
     /**

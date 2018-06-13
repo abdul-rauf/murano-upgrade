@@ -75,16 +75,98 @@ UpdaterField.prototype.initObject = function (options) {
         language: {
             LBL_ERROR_ON_FIELDS: 'Please, correct the fields with errors'
         },
-        hasCheckbox : false,
+        hasCheckbox: false,
         decimalSeparator: ".",
-        numberGroupingSeparator: ","
+        numberGroupingSeparator: ',',
+        actionType: null,
+        meta: {
+            DropDown: {
+                fallback: [
+                    {
+                        'text': 'LBL_PMSE_FORM_OPTION_CURRENT_USER',
+                        'value': 'currentuser'
+                    },
+                    {
+                        'text': 'LBL_PMSE_FORM_OPTION_RECORD_OWNER',
+                        'value': 'owner'
+                    },
+                    {
+                        'text': 'LBL_PMSE_FORM_OPTION_SUPERVISOR',
+                        'value': 'supervisor'
+                    }
+                ]
+            },
+            user: {
+                addRelatedRecord: [
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_CURRENT_USER',
+                        value: 'currentuser'
+                    },
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_RECORD_OWNER',
+                        value: 'owner'
+                    },
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_SUPERVISOR',
+                        value: 'supervisor'
+                    },
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_CREATED_BY_USER',
+                        value: 'created_by'
+                    },
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER',
+                        value: 'modified_user_id'
+                    }
+                ],
+                changeField: [
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_CURRENT_USER',
+                        value: 'currentuser'
+                    },
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_RECORD_OWNER',
+                        value: 'owner'
+                    },
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_SUPERVISOR',
+                        value: 'supervisor'
+                    },
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_CREATED_BY_USER',
+                        value: 'created_by'
+                    },
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER',
+                        value: 'modified_user_id'
+                    }
+                ],
+                fallback: [
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_CURRENT_USER',
+                        value: 'currentuser'
+                    },
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_RECORD_OWNER',
+                        value: 'owner'
+                    },
+                    {
+                        text: 'LBL_PMSE_FORM_OPTION_SUPERVISOR',
+                        value: 'supervisor'
+                    }
+                ]
+            }
+        }
     };
+
     $.extend(true, defaults, options);
     this.language = defaults.language;
     this.setFields(defaults.fields);
     this.hasCheckbox = defaults.hasCheckbox;
     this._decimalSeparator = defaults.decimalSeparator;
     this._numberGroupingSeparator = defaults.numberGroupingSeparator;
+    this.actionType = defaults.actionType;
+    this.meta = defaults.meta;
 };
 
 /**
@@ -191,11 +273,12 @@ UpdaterField.prototype.setOptions = function (settings) {
                 aUsers = [];
                 if (currentSetting.options instanceof Array) {
                     if (currentSetting.value === 'assigned_user_id') {
-                        aUsers = [
-                            {'text': translate('LBL_PMSE_FORM_OPTION_CURRENT_USER'), 'value': 'currentuser'},
-                            {'text': translate('LBL_PMSE_FORM_OPTION_RECORD_OWNER'), 'value': 'owner'},
-                            {'text': translate('LBL_PMSE_FORM_OPTION_SUPERVISOR'), 'value': 'supervisor'}
-                        ];
+                        var dropdownMeta = this.meta.DropDown[this.actionType] || this.meta.DropDown.fallback;
+                        dropdownMeta = _.map(dropdownMeta, function(option) {
+                            return {'text': translate(option.text), 'value': option.value};
+                        });
+                        aUsers = _.sortBy(dropdownMeta, 'text');
+
                         customUsers = aUsers.concat(currentSetting.options);
                         currentSetting.options = customUsers;
                     }
@@ -224,11 +307,11 @@ UpdaterField.prototype.setOptions = function (settings) {
             case 'user':
                 currentSetting.searchUrl = PMSE_USER_SEARCH.url;
                 currentSetting.searchLabel = PMSE_USER_SEARCH.text;
-                currentSetting.defaultSearchOptions = [
-                    {text: translate('LBL_PMSE_FORM_OPTION_CURRENT_USER'), value: 'currentuser'},
-                    {text: translate('LBL_PMSE_FORM_OPTION_RECORD_OWNER'), value: 'owner'},
-                    {text: translate('LBL_PMSE_FORM_OPTION_SUPERVISOR'), value: 'supervisor'}
-                ];
+                var defaultSearchOptions = this.meta.user[this.actionType] || this.meta.user.fallback;
+                defaultSearchOptions = _.map(defaultSearchOptions, function(option) {
+                    return {'text': translate(option.text), 'value': option.value};
+                });
+                currentSetting.defaultSearchOptions = _.sortBy(defaultSearchOptions, 'text');
                 newOption =  new SearchUpdaterItem(currentSetting);
                 break;
             case 'team_list':
@@ -511,6 +594,83 @@ UpdaterField.prototype._onValueGenerationHandler = function (module) {
 };
 
 /**
+ * Get the panel type filter
+ * @param {Object} self
+ * @param {Object} field
+ * @param {Object} fieldType
+ * @param {Object} constantPanelCfg
+ */
+UpdaterField.prototype._getPanelTypeFilter = function(self, field, fieldType, constantPanelCfg) {
+    var panelTypeFilter = field._fieldType === 'Datetime' ? ['Date', 'Datetime'] : field._fieldType;
+    this.setOperatorPanelForm(self, field, fieldType, constantPanelCfg, panelTypeFilter);
+    return panelTypeFilter;
+};
+
+/**
+ * Set the operator panel form
+ * @param {Object} self
+ * @param {Object} field
+ * @param {Object} fieldType
+ * @param {Object} constantPanelCfg
+ * @param {Object} panelTypeFilter
+ */
+UpdaterField.prototype.setOperatorPanelForm = function(self, field, fieldType, constantPanelCfg, panelTypeFilter) {
+    if (self._datePanel && (!self.currentField || self.currentField !== field)) {
+        if (field instanceof DateUpdaterItem) {
+            if (fieldType === 'Date') {
+                constantPanelCfg = {
+                    date: true,
+                    datespan: true
+                };
+            } else {
+                constantPanelCfg = {
+                    datetime: true,
+                    timespan: true
+                };
+            }
+            self._datePanel.setOperators({
+                arithmetic: ['+', '-']
+            }).setConstantPanel(constantPanelCfg);
+        } else {
+            self._datePanel.setOperators({
+                arithmetic: true,
+                group: true
+            });
+            if (field.isCurrency()) {
+                self._datePanel.setConstantPanel({
+                    currency: true,
+                    basic: {
+                        number: true
+                    }
+                });
+            } else {
+                self._datePanel.setConstantPanel({
+                    basic: {
+                        number: true
+                    }
+                });
+            }
+        }
+        self._datePanel.setVariablePanel({
+            data: [{
+                name: App.lang.getModuleName(PROJECT_MODULE),
+                value: PROJECT_MODULE,
+                items: self._variables
+            }],
+            dataFormat: 'hierarchical',
+            typeField: 'type',
+            typeFilter: panelTypeFilter,
+            textField: 'text',
+            valueField: 'value',
+            dataChildRoot: 'items',
+            moduleTextField: 'name',
+            moduleValueField: 'value'
+        });
+    }
+    return self;
+};
+
+/**
  * Displays and create the control panel with filled with the possibilities
  * of the sugar variables, change the panel z-index to show correctly,
  * finally add a windows close event for close the control panel
@@ -519,7 +679,8 @@ UpdaterField.prototype._onValueGenerationHandler = function (module) {
 UpdaterField.prototype.openPanelOnItem = function (field) {
     var that = this, settings, inputPos, textSize, subjectInput, i,
         variablesDataSource = project.getMetadata("targetModuleFieldsDataSource"), currentFilters, list, targetPanel,
-        currentOwner, fieldType = field.getFieldType(), constantPanelCfg;
+        currentOwner, fieldType = field.getFieldType();
+    var constantPanelCfg = {};
     if (!(field instanceof DateUpdaterItem || field instanceof NumberUpdaterItem)) {
         if (!this._variablesList) {
             this._variablesList = new FieldPanel({
@@ -565,6 +726,7 @@ UpdaterField.prototype.openPanelOnItem = function (field) {
     } else {
         if (!this._datePanel) {
             this._datePanel = new ExpressionControl({
+                parent: this,
                 className: "updateritem-panel",
                 onChange: this._onValueGenerationHandler(PROJECT_MODULE),
                 appendTo: (this.parent && this.parent.parent && this.parent.parent.html) || null,
@@ -581,60 +743,7 @@ UpdaterField.prototype.openPanelOnItem = function (field) {
                 }
             });
         }
-        //Check if the panel is already configured for the current field's type
-        //in order to do it, we verify if the current field class is the same that the previous field's.
-        if (!this.currentField || this.currentField !== field) {
-            if (field instanceof DateUpdaterItem) {
-                if (fieldType === 'Date') {
-                    constantPanelCfg = {
-                        date: true,
-                        datespan: true
-                    };
-                } else {
-                    constantPanelCfg = {
-                        datetime: true,
-                        timespan: true
-                    };
-                }
-                this._datePanel.setOperators({
-                    arithmetic: ["+", "-"]
-                }).setConstantPanel(constantPanelCfg);
-            } else {
-                this._datePanel.setOperators({
-                    arithmetic: true,
-                    group: true
-                });
-                if (field.isCurrency()) {
-                    this._datePanel.setConstantPanel({
-                        currency: true,
-                        basic: {
-                            number: true
-                        }
-                    });
-                } else {
-                    this._datePanel.setConstantPanel({
-                        basic: {
-                            number: true
-                        }
-                    });
-                }
-            }
-            this._datePanel.setVariablePanel({
-                data: [{
-                    name: App.lang.getModuleName(PROJECT_MODULE),
-                    value: PROJECT_MODULE,
-                    items: this._variables
-                }],
-                dataFormat: "hierarchical",
-                typeField: "type",
-                typeFilter: field._fieldType,
-                textField: "text",
-                valueField: "value",
-                dataChildRoot: "items",
-                moduleTextField: "name",
-                moduleValueField: "value"
-            });
-        }
+        var panelTypeFilter = this._getPanelTypeFilter(this, field, fieldType, constantPanelCfg);
         this.currentField = field;
         //We can't send an empty string since JSON can't parse it
         this._datePanel.setValue(field.getValue() || [], true);
@@ -953,13 +1062,15 @@ UpdaterItem.prototype.getData = function () {
 UpdaterItem.prototype.attachListeners = function () {
     var that = this;
     if (this.html && !this._attachedListeners) {
-        jQuery(this._activationControl).on("change", function (e) {
-            if (e.target.checked) {
-                that.enable();
-            } else {
-                that.disable();
-            }
-        });
+        if (this._activationControl) {
+            jQuery(this._activationControl).on('change', function(e) {
+                if (e.target.checked) {
+                    that.enable();
+                } else {
+                    that.disable();
+                }
+            });
+        }
         jQuery(this._configButton).on("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -994,9 +1105,14 @@ UpdaterItem.prototype.createHTML = function () {
         controlContainer = this.createHTMLElement("div");
         controlContainer.className = "adam-itemupdater-controlcontainer";
 
-        activationControl = this.createHTMLElement("input");
-        activationControl.type = "checkbox";
-        activationControl.className = "adam-itemupdater-activation";
+        if (this._parent.hasCheckbox) {
+            activationControl = this.createHTMLElement('input');
+            activationControl.type = 'checkbox';
+            activationControl.className = 'adam-itemupdater-activation';
+
+            label.appendChild(activationControl);
+            this._activationControl = activationControl;
+        }
 
         labelContent = this.createHTMLElement("span");
         labelContent.className = "adam-itemupdater-labelcontent";
@@ -1015,7 +1131,6 @@ UpdaterItem.prototype.createHTML = function () {
         labelContent.appendChild(labelText);
         labelContent.appendChild(requiredContainer);
 
-        label.appendChild(activationControl);
         label.appendChild(labelContent);
 
         controlContainer.appendChild(this._createControl());
@@ -1027,7 +1142,6 @@ UpdaterItem.prototype.createHTML = function () {
         this._dom.labelText = labelText;
         this._dom.requiredContainer = requiredContainer;
 
-        this._activationControl = activationControl;
         this._controlContainer = controlContainer;
         this.html.appendChild(label);
         this.html.appendChild(controlContainer);
@@ -1289,26 +1403,35 @@ TeamUpdaterItem.prototype._getValueFromControl = function () {
     return value;
 };
 
-TeamUpdaterItem.prototype._getTeamName = function (value) {
-    var teams = (project && project.getMetadata("teams_details")) || [],
-        i;
-
-    for(i = 0; i < teams.length; i += 1) {
-        if (teams[i].id === value) {
-            return jQuery.trim(teams[i].name + " " + teams[i].name_2);
+TeamUpdaterItem.prototype._getTeamName = function(value, callback) {
+    var proxy = new SugarProxy();
+    proxy.url = 'Teams?filter[0][id][$equals]=' + value;
+    proxy.getData(null, {
+        success: function(data) {
+            var teamName = jQuery.trim(data.records[0].name + ' ' + data.records[0].name_2);
+            callback({
+                id: value,
+                text: teamName
+            });
+        },
+        error: function() {
+            return value;
         }
-    }
-    return value;
+    });
 };
 
 TeamUpdaterItem.prototype._initSelection = function () {
     var that = this;
     return function (element, callback) {
         var value = element.val();
-        callback({
-            id: value,
-            text: that._getTeamName(value)
-        });
+        if (!_.isEmpty(value)) {
+            that._getTeamName(value, callback);
+        } else {
+            callback({
+                id: value,
+                text: value
+            });
+        }
     };
 };
 
@@ -1825,6 +1948,120 @@ DateUpdaterItem.prototype.clear = function () {
     return this;
 };
 
+/**
+ * Validate the current content of the date field
+ *
+ * @return Boolean Whether the field content is valid
+ */
+DateUpdaterItem.prototype.isValid = function() {
+    var valid = UpdaterItem.prototype.isValid.call(this);
+    if (valid && Array.isArray(this._value) && this._value.length > 0) {
+        valid = this.validateExpression(this._value);
+    }
+    return valid;
+};
+
+/**
+ * Utility function to validate a date value expression
+ *
+ * @param Array An array of tokens that form an expression
+ *
+ * @return Boolean Whether the expression is valid
+ */
+DateUpdaterItem.prototype.validateExpression = function(value) {
+    var exp;
+    var val;
+    var curr;
+    var i;
+    var left;
+    var right;
+    var leftType;
+    var rightType;
+    var type;
+    if (Array.isArray(value) && value.length > 0) {
+        // only expected operators are + and -
+        exp = value.slice(0);
+        val = [];
+        for (i = 0; i < exp.length; i++) {
+            curr = exp[i];
+            if (curr.expType == 'ARITHMETIC' && (curr.expValue == '+' || curr.expValue == '-')) {
+                // needs to have a left hand operand
+                if (val.length < 1) {
+                    return false;
+                }
+                left = val.pop();
+                // left hand operand needs to be of a value type
+                if (left.expType != 'CONSTANT' && left.expType != 'VARIABLE') {
+                    return false;
+                }
+                // needs to have a right hand operand
+                if (i >= exp.length - 1) {
+                    return false;
+                }
+                right = exp[i + 1];
+                // right hand operand needs to be of a value type
+                if (right.expType != 'CONSTANT' && right.expType != 'VARIABLE') {
+                    return false;
+                }
+                // check the validity of the expression now
+                leftType = left.expSubtype.toLowerCase();
+                rightType = right.expSubtype.toLowerCase();
+                if (leftType == 'date' || leftType == 'datetime') {
+                    if (rightType == 'date' || rightType == 'datetime') {
+                        // can only do subtraction
+                        if (curr.expValue != '-') {
+                            return false;
+                        }
+                        curr = _.extend({}, left);
+                        curr.expSubtype = 'timespan';
+                        val.push(curr);
+                        i++;
+                    } else if (rightType == 'timespan') {
+                        // all good
+                        val.push(left);
+                        i++;
+                    } else {
+                        // bad type
+                        return false;
+                    }
+                } else if (leftType == 'timespan') {
+                    if (rightType == 'date' || rightType == 'datetime') {
+                        // can only do addition
+                        if (curr.expValue != '+') {
+                            return false;
+                        }
+                        val.push(right);
+                        i++;
+                    } else if (rightType == 'timespan') {
+                        // all good
+                        val.push(left);
+                        i++;
+                    } else {
+                        // bad type
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                val.push(curr);
+            }
+        }
+        // should have only one token left
+        if (val.length == 1) {
+            curr = val[0];
+            // check the type
+            if (curr.expType == 'CONSTANT' || curr.expType == 'VARIABLE') {
+                type = curr.expSubtype.toLowerCase();
+                if (type == 'date' || type == 'datetime' || type == 'timespan') {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+};
+
 DateUpdaterItem.prototype._createControl = function () {
     var control = this.createHTMLElement("input");
     control.type = "text";
@@ -2117,7 +2354,8 @@ NumberUpdaterItem.prototype.evaluateExpression = function (value) {
                             // right hand operand needs to be of a value type
                             if (right.expType == 'CONSTANT' || right.expType == 'VARIABLE') {
                                 // the two operands should be of the same value type
-                                if (left.expSubtype.toLowerCase() != right.expSubtype.toLowerCase()) {
+                                if (left.expSubtype.toLowerCase() != right.expSubtype.toLowerCase() &&
+                                    !(this.checkNumerical(left) && this.checkNumerical(right))) {
                                     return result;
                                 }
                                 val.push(left);
@@ -2145,6 +2383,12 @@ NumberUpdaterItem.prototype.evaluateExpression = function (value) {
         }
     }
     return result;
+};
+
+NumberUpdaterItem.prototype.checkNumerical = function(operand) {
+    var numericalTypes = ['decimal', 'float', 'integer', 'number'];
+    var subtype = operand.expSubtype.toLowerCase();
+    return numericalTypes.indexOf(subtype) != -1;
 };
 
 NumberUpdaterItem.prototype._createControl = function () {

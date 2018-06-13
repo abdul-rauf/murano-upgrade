@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,12 +18,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
-
-require_once 'include/SugarObjects/SugarConfig.php';
-require_once 'include/utils/security_utils.php';
-require_once 'include/utils/array_utils.php';
-
-
 
 function make_sugar_config(&$sugar_config)
 {
@@ -308,6 +301,7 @@ function get_sugar_config_defaults()
     'email_default_client' => 'sugar',
     'email_default_delete_attachments' => true,
     'email_mailer_timeout' => 10,
+    'smtp_mailer_debug' => 0,
     'history_max_viewed' => 50,
     'installer_locked' => true,
     'import_max_records_per_file' => 100,
@@ -345,7 +339,6 @@ function get_sugar_config_defaults()
     'asp', 'cfm', 'js', 'vbs', 'html', 'htm' ),
     'upload_maxsize' => 30000000,
     'import_max_execution_time' => 3600,
-//	'use_php_code_json' => returnPhpJsonStatus(),
     'verify_client_ip' => true,
     'js_custom_version' => '',
     'js_lang_version' => 1,
@@ -627,6 +620,9 @@ function get_language_display($key)
     return $sugar_config['languages'][$key];
 }
 
+/**
+ * @deprecated
+ */
 function get_assigned_user_name($assigned_user_id, $is_group = '')
 {
 	// Declare static early so PSR-2 parser doesn't choke
@@ -717,7 +713,7 @@ function get_team_array($add_blank = false)
             . "'" . $current_user->id . "'";
     }
 
-    $team = BeanFactory::getBean('Teams');
+    $team = BeanFactory::newBean('Teams');
     $team->addVisibilityFrom($query);
     $query .= " WHERE $where ";
     $team->addVisibilityWhere($query);
@@ -774,7 +770,7 @@ function get_user_name($id)
 function get_user_array($add_blank=true, $status="Active", $user_id='', $use_real_name=false, $user_name_filter='', $portal_filter=' AND portal_only=0 ', $from_cache = true, $order_by = array())
 {
     $GLOBALS['log']->deprecated('get_user_array() is deprecated');
-    return BeanFactory::getBean('Users')->getUserArray(
+    return BeanFactory::newBean('Users')->getUserArray(
         $add_blank,
         $status,
         $user_id,
@@ -1150,7 +1146,7 @@ function return_module_language($language, $module, $refresh=false)
     }
 
     if (!$refresh) {
-        $cache_key = LanguageManager::getLanguageCacheKey($module, $language);
+        $cache_key = "return_mod_lang_{$module}_{$language}";
         // Check for cached value
         $cache_entry = sugar_cache_retrieve($cache_key);
         if (!empty($cache_entry) && is_array($cache_entry)) {
@@ -1162,7 +1158,7 @@ function return_module_language($language, $module, $refresh=false)
     $loaded_mod_strings = array();
     $language_used = $language;
     $default_language = !empty($sugar_config['default_language']) ? $sugar_config['default_language'] : $language;
-    $bean = BeanFactory::getBean($module);
+    $bean = BeanFactory::newBean($module);
 
     if (empty($language)) {
         $language = $default_language;
@@ -1226,7 +1222,7 @@ function return_module_language($language, $module, $refresh=false)
     } else
         $mod_strings = $temp_mod_strings;
 
-    $cache_key = LanguageManager::getLanguageCacheKey($module, $language);
+    $cache_key = "return_mod_lang_{$module}_{$language}";
     sugar_cache_put($cache_key, $return_value);
 
     return $return_value;
@@ -2491,7 +2487,6 @@ function clone_history(&$db, $from_id,$to_id, $to_type)
     global $timedate;
     $old_note_id=null;
     $old_filename=null;
-    require_once 'include/upload_file.php';
     $tables = array('calls'=>'Call', 'meetings'=>'Meeting', 'notes'=>'Note', 'tasks'=>'Task');
 
     $location=array('Email'=>"modules/Emails/Email.php",
@@ -2700,7 +2695,6 @@ function get_emails_by_assign_or_link($params)
 
     $return_array['where']=" WHERE emails.deleted=0 ";
 
-        //$return_array['join'] = '';
         $return_array['join_tables'][0] = '';
 
         if ($bean->object_name == "Case" && !empty($bean->case_number)) {
@@ -2825,7 +2819,6 @@ function skype_formatted($number)
     } else {
         return substr($number, 0, 1) == '+' || substr($number, 0, 2) == '00' || substr($number, 0, 3) == '011';
     }
-//	return substr($number, 0, 1) == '+' || substr($number, 0, 2) == '00' || substr($number, 0, 2) == '011';
 }
 
 function format_skype($number)
@@ -2902,6 +2895,19 @@ function br2nl($str)
     $str = str_ireplace($brs, "\n", $str); // to retrieve it
 
     return $str;
+}
+
+/**
+ * Convert New Lines to Html
+ * This works slightly different than PHP's builtin nl2br in that it replaces
+ * the New Lines with the <br /> tags rather than simply inserting a <br /> tag.
+ * Since the <br /> characters are a replacement for the existing New line character(s),
+ * the function can be safely called multiple times while processing a source string
+ * without inadvertently adding additional blank lines.
+ */
+function nl2html($str)
+{
+    return str_replace(["\r\n", "\n\r", "\n", "\r"], '<br />', $str);
 }
 
 /**
@@ -3016,15 +3022,15 @@ function check_php_version($sys_php_version = '')
     // versions below $min_considered_php_version considered invalid by default,
     // versions equal to or above this ver will be considered depending
     // on the rules that follow
-    $min_considered_php_version = '5.4.0';
+    $min_considered_php_version = '5.6.0';
     //always use .unsupported to make sure that the dev/beta/rc releases are excluded as well
 
-    $version_threshold  = '7.0.unsupported';
+    $version_threshold  = '7.2.unsupported';
 
     // only the supported versions,
     // should be mutually exclusive with $invalid_php_versions
     $supported_php_versions = array (
-        //'5.3.0'
+        //'5.6.0'
     );
 
     // invalid versions above the $min_considered_php_version,
@@ -3133,28 +3139,6 @@ function check_iis_version($sys_iis_version = '')
 
     return $retval;
 }
-// no longer needed
-//function pre_login_check(){
-//	global $action, $login_error;
-//	if (!empty($action)&& $action == 'Login') {
-//
-//		if (!empty($login_error)) {
-//			$login_error = htmlentities($login_error);
-//			$login_error = str_replace(array("&lt;pre&gt;","&lt;/pre&gt;","\r\n", "\n"), "<br>", $login_error);
-//			$_SESSION['login_error'] = $login_error;
-//			echo '<script>
-//						function set_focus() {}
-//						if (document.getElementById("post_error")) {
-//							document.getElementById("post_error").innerHTML="'. $login_error. '";
-//							document.getElementById("cant_login").value=1;
-//							document.getElementById("login_button").disabled = true;
-//							document.getElementById("user_name").disabled = true;
-//							//document.getElementById("user_password").disabled = true;
-//						}
-//						</script>';
-//		}
-//	}
-//}
 
 /**
  * Get Sugar root directory
@@ -3181,14 +3165,7 @@ function sugar_cleanup($exit = false)
     }
     chdir($root_path);
 
-    // if cleanup runs before autoloader was loaded then init autoloader.
-    if(!class_exists('SugarAutoLoader')) {
-        require_once('include/utils/autoloader.php');
-        SugarAutoLoader::init();
-    }
-
     global $sugar_config;
-    require_once 'include/utils/LogicHook.php';
     LogicHook::initialize();
     $GLOBALS['logic_hook']->call_custom_logic('', 'server_round_trip');
 
@@ -3197,9 +3174,6 @@ function sugar_cleanup($exit = false)
         if ($exit) exit; else return;
     }
 
-    if (!class_exists('Tracker', true)) {
-        require_once 'modules/Trackers/Tracker.php';
-    }
     Tracker::logPage();
     // Now write the cached tracker_queries
     if (class_exists("TrackerManager")) {
@@ -3249,7 +3223,6 @@ function sugar_cleanup($exit = false)
  */
 function check_logic_hook_file($module_name, $event, $action_array)
 {
-    require_once 'include/utils/logic_utils.php';
     $add_logic = false;
 
     if (file_exists("custom/modules/$module_name/logic_hooks.php")) {
@@ -3285,7 +3258,6 @@ function check_logic_hook_file($module_name, $event, $action_array)
     if ($add_logic == true) {
 
         //reorder array by element[0]
-        //$hook_array = reorder_array($hook_array, $event);
         //!!!Finish this above TODO
 
         $new_contents = replace_or_add_logic_type($hook_array);
@@ -3298,7 +3270,6 @@ function check_logic_hook_file($module_name, $event, $action_array)
 
 function remove_logic_hook($module_name, $event, $action_array)
 {
-    require_once 'include/utils/logic_utils.php';
     $add_logic = false;
 
     if (file_exists("custom/modules/".$module_name."/logic_hooks.php")) {
@@ -3490,15 +3461,10 @@ function return_bytes($val)
 {
     $val = trim($val);
     $last = strtolower($val{strlen($val)-1});
-
-    switch ($last) {
-        // The 'G' modifier is available since PHP 5.1.0
-        case 'g':
-            $val *= 1024;
-        case 'm':
-            $val *= 1024;
-        case 'k':
-            $val *= 1024;
+    $multiplers = array('k' => 1024, 'm' => 1048576, 'g' => 1073741824);
+    if (isset($multiplers[$last])) {
+        $val = substr($val, 0, -1);
+        return $val*$multiplers[$last];
     }
 
     return $val;
@@ -3670,9 +3636,8 @@ function search_filter_rel_info(& $focus, $tar_rel_module, $relationship_name)
 
     foreach ($focus->relationship_fields as $rel_key => $rel_value) {
         if ($rel_value == $relationship_name) {
-            $temp_bean = BeanFactory::getBean($tar_rel_module);
+            $temp_bean = BeanFactory::newBean($tar_rel_module);
             $temp_bean->disable_row_level_security = true;
-    //		echo $focus->$rel_key;
             $temp_bean->retrieve($focus->$rel_key);
             if ($temp_bean->id!="") {
 
@@ -3690,7 +3655,7 @@ function search_filter_rel_info(& $focus, $tar_rel_module, $relationship_name)
         && !empty($focus->field_defs[$field_def['id_name']]['relationship'])
         && $focus->field_defs[$field_def['id_name']]['relationship'] == $relationship_name)
         {
-            $temp_bean = BeanFactory::getBean($tar_rel_module);
+            $temp_bean = BeanFactory::newBean($tar_rel_module);
             $temp_bean->disable_row_level_security = true;
             $temp_bean->retrieve($focus->{$field_def['id_name']});
             if ($temp_bean->id!="") {
@@ -3701,7 +3666,7 @@ function search_filter_rel_info(& $focus, $tar_rel_module, $relationship_name)
             }
         //Check if the relationship_name matches a "link" in a relate field
         } elseif (!empty($rel_value['link']) && !empty($rel_value['id_name']) && $rel_value['link'] == $relationship_name) {
-            $temp_bean = BeanFactory::getBean($tar_rel_module);
+            $temp_bean = BeanFactory::newBean($tar_rel_module);
             $temp_bean->disable_row_level_security = true;
             $temp_bean->retrieve($focus->{$rel_value['id_name']});
             if ($temp_bean->id!="") {
@@ -3718,7 +3683,7 @@ function search_filter_rel_info(& $focus, $tar_rel_module, $relationship_name)
     }
     // special case for unlisted parent-type relationships
     if ( !empty($focus->parent_type) && $focus->parent_type == $tar_rel_module && !empty($focus->parent_id)) {
-        $temp_bean = BeanFactory::getBean($tar_rel_module);
+        $temp_bean = BeanFactory::newBean($tar_rel_module);
         $temp_bean->disable_row_level_security = true;
         $temp_bean->retrieve($focus->parent_id);
         if ($temp_bean->id!="") {
@@ -3741,7 +3706,7 @@ function search_filter_rel_info(& $focus, $tar_rel_module, $relationship_name)
  */
 function get_module_info($module_name)
 {
-    return BeanFactory::getBean($module_name);
+    return BeanFactory::newBean($module_name);
 }
 
 /**
@@ -3753,12 +3718,6 @@ function get_valid_bean_name($module_name)
 {
     return BeanFactory::getObjectName($module_name);
 }
-
-function  checkAuthUserStatus()
-{
-    //authUserStatus();
-}
-
 
 /**
  * This function returns an array of phpinfo() results that can be parsed and
@@ -3931,35 +3890,17 @@ function getJSONobj()
     return $json;
 }
 
-require_once 'include/utils/db_utils.php';
-
 /**
  * Set default php.ini settings for entry points
  */
 function setPhpIniSettings()
 {
-    // zlib module
-    // Bug 37579 - Comment out force enabling zlib.output_compression, since it can cause problems on certain hosts
-    /*
-    if (function_exists('gzclose') && headers_sent() == false) {
-        ini_set('zlib.output_compression', 1);
-    }
-    */
-    // mbstring module
-    //nsingh: breaks zip/unzip functionality. Commenting out 4/23/08
-
-    /*if (function_exists('mb_strlen')) {
-        ini_set('mbstring.func_overload', 7);
-        ini_set('mbstring.internal_encoding', 'UTF-8');
-    }*/
-
     // http://us3.php.net/manual/en/ref.pcre.php#ini.pcre.backtrack-limit
     // starting with 5.2.0, backtrack_limit breaks JSON decoding
     $backtrack_limit = ini_get('pcre.backtrack_limit');
     if (!empty($backtrack_limit)) {
         ini_set('pcre.backtrack_limit', '-1');
     }
-    ini_set('always_populate_raw_post_data', '-1');
 }
 
 /**
@@ -4232,7 +4173,6 @@ function generate_search_where ($field_list=array(),$values=array(),&$bean,$add_
         }
     }
     if ($add_custom_fields) {
-        require_once 'modules/DynamicFields/DynamicField.php';
         $bean->setupCustomFields($module);
         $bean->custom_fields->setWhereClauses($where_clauses);
     }
@@ -4358,7 +4298,7 @@ function array_depth($array, $depth_count=-1, $depth_array=array())
  */
 function createGroupUser($name)
 {
-    $group = BeanFactory::getBean('Users');
+    $group = BeanFactory::newBean('Users');
     $group->user_name	= $name;
     $group->last_name	= $name;
     $group->is_group	= 1;
@@ -4504,14 +4444,6 @@ if (version_compare(phpversion(), '5.0.0', '<')) {
     }
 }
 
-/*
- * @deprecated use DBManagerFactory::isFreeTDS
- */
-function is_freetds()
-{
-    return DBManagerFactory::isFreeTDS();
-}
-
 /**
  * Chart dashlet helper function that returns the correct CSS file, dependent on the current theme.
  *
@@ -4582,7 +4514,7 @@ function getAbsolutePath(
  */
 function loadBean($module)
 {
-    return BeanFactory::getBean($module);
+    return BeanFactory::newBean($module);
 }
 
 /**
@@ -4706,7 +4638,7 @@ function load_link_class($properties)
 {
     $class = 'Link2';
     if (!empty($properties['link_class']) && !empty($properties['link_file'])) {
-        require_once($properties['link_file']);
+        require_once $properties['link_file'];
         $class = $properties['link_class'];
     }
 
@@ -4828,7 +4760,7 @@ function create_export_query_relate_link_patch($module, $searchFields, $where)
 
         return $ret_array;
     }
-    $seed = BeanFactory::getBean($module);
+    $seed = BeanFactory::newBean($module);
     foreach ($seed->field_defs as $name=>$field) {
 
         if ( $field['type'] == 'relate' && isset($field['link']) && !empty($searchFields[$name]['value']) ) {
@@ -4907,16 +4839,7 @@ function getVariableFromQueryString($variable, $string)
  */
 function should_hide_iframes()
 {
-   //Remove the MySites module
-   if (file_exists('modules/iFrames/iFrame.php')) {
-        if (!class_exists("iFrame")) {
-                require_once 'modules/iFrames/iFrame.php';
-        }
-
-        return false;
-   }
-
-   return true;
+    return !class_exists("iFrame");
 }
 
 /**
@@ -5061,28 +4984,33 @@ function verify_image_file($path, $jpeg = false)
 }
 
 /**
- * Verify uploaded image
- * Verifies that image has proper extension, MIME type and doesn't contain hostile content
+ * Verifies that image has proper MIME type and doesn't contain hostile content
+ *
  * @param string $path  Image path
  * @param bool $jpeg_only  Accept only JPEGs?
+ *
+ * @return bool
  */
 function verify_uploaded_image($path, $jpeg_only = false)
 {
-    $supportedExtensions = array('jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg');
-    if (!$jpeg_only) {
-        $supportedExtensions['png'] = 'image/png';
-    }
-
-    if (!file_exists($path) || !is_file($path)) {
+    if (strpos($path, '..') !== false) {
         return false;
     }
 
+    if (!is_file($path)) {
+        return false;
+    }
+
+    $supportedTypes = array('image/jpeg');
+
+    if (!$jpeg_only) {
+        $supportedTypes[] = 'image/png';
+    }
+
     $img_size = getimagesize($path);
-    $filetype = $img_size['mime'];
-    $ext = end(explode(".", $path));
-    if(substr_count('..', $path) > 0 || ($ext !== $path && !isset($supportedExtensions[strtolower($ext)])) ||
-        !in_array($filetype, array_values($supportedExtensions))) {
-            return false;
+
+    if (!in_array($img_size['mime'], $supportedTypes)) {
+        return false;
     }
 
     return verify_image_file($path, $jpeg_only);
@@ -5405,7 +5333,6 @@ function assignConcatenatedValue(SugarBean $bean, $fieldDef, $value)
     if (count($valueParts) == 1 && $fieldDef['db_concat_fields'] == array('first_name', 'last_name')) {
         $bean->last_name = $value;
     }
-    // elseif ($fieldNum >= count($valueParts))
     else {
         for ($i = 0; $i < $fieldNum; $i++) {
             $fieldValue = array_shift($valueParts);
@@ -5494,7 +5421,6 @@ function ensureJSCacheFilesExist($files = array(), $root = '.', $addPath = true)
         // FIXME: setting $_REQUEST parameters ourselves ...
         // Build the concatenated files
         $_REQUEST['root_directory'] = $root;
-        require_once("jssource/minify_utils.php");
         $minifyUtils = new SugarMinifyUtils();
         $minifyUtils->ConcatenateFiles($root);
 
@@ -5646,7 +5572,7 @@ function get_js_version_key()
 function getFunctionValue($bean, $function, $args = array())
 {
     if (is_string($bean) && !empty($bean)) {
-        $bean = BeanFactory::getBean($bean);
+        $bean = BeanFactory::newBean($bean);
     }
 
     if (is_array($function)) {

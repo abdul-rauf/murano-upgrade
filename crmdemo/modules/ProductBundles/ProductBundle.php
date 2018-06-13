@@ -22,7 +22,6 @@ class ProductBundle extends SugarBean
     public $created_by;
     public $created_by_name;
     public $modified_by_name;
-    public $field_name_map;
     public $name;
     public $currency_id;
     public $base_rate;
@@ -419,7 +418,7 @@ class ProductBundle extends SugarBean
 
         global $current_user;
 
-        $currency = BeanFactory::getBean('Currencies');
+        $currency = BeanFactory::newBean('Currencies');
         if ($current_user->getPreference('currency')) {
             $currency->retrieve($current_user->getPreference('currency'));
             $symbol = $currency->symbol;
@@ -524,7 +523,8 @@ class ProductBundle extends SugarBean
         $this->load_relationship('quotes');
 
         // get the beans
-        $quote = array_pop($this->quotes->getBeans());
+        $beans = $this->quotes->getBeans();
+        $quote = array_pop($beans);
 
         if (empty($quote)) {
             return true;
@@ -533,5 +533,10 @@ class ProductBundle extends SugarBean
         // if the quote is not closed, we should update the base rate
         return !$quote->isClosed();
 
+    }
+
+    public function get_summary_text()
+    {
+        return $this->name;
     }
 }

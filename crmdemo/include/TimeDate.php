@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'include/SugarDateTime.php';
 
 /**
   * New Time & Date handling class
@@ -40,21 +38,21 @@ class TimeDate
      * @var array
      */
     protected static $format_to_regexp = array(
-    	'a' => '[ ]*[ap]m',
-    	'A' => '[ ]*[AP]M',
-    	'd' => '[0-9]{1,2}',
-    	'j' => '[0-9]{1,2}',
-    	'h' => '[0-9]{1,2}',
-    	'H' => '[0-9]{1,2}',
-    	'g' => '[0-9]{1,2}',
-    	'G' => '[0-9]{1,2}',
-   		'i' => '[0-9]{1,2}',
-    	'm' => '[0-9]{1,2}',
-    	'n' => '[0-9]{1,2}',
-    	'Y' => '[0-9]{4}',
-        's' => '[0-9]{1,2}',
-    	'F' => '\w+',
-    	"M" => '[\w]{1,3}',
+        'a' => '[ ]*[ap]m',
+        'A' => '[ ]*[AP]M',
+        'd' => '0[1-9]|[12]\d|3[01]',
+        'j' => '[12]\d|3[01]|[1-9]',
+        'h' => '0[1-9]|1[0-2]',
+        'H' => '[01]\d|2[0-3]',
+        'g' => '1[0-2]|[1-9]',
+        'G' => '1\d|2[0-3]|\d',
+        'i' => '[0-5]\d',
+        'm' => '0[1-9]|1[0-2]',
+        'n' => '1[0-2]|[1-9]',
+        'Y' => '\d{4}',
+        's' => '[0-5]\d',
+        'F' => '\w+',
+        'M' => '[\w]{1,3}',
     );
 
     /**
@@ -1711,7 +1709,7 @@ class TimeDate
             }
         }
 
-        return array('format' => $newFormat, 'positions' => $regPositions);
+        return array('format' => "^\\s*{$newFormat}\\s*$", 'positions' => $regPositions);
     }
 
     // format - date expression ('' means now) for start and end of the range

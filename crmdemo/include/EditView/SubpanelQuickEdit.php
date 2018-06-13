@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,14 +18,6 @@ require_once('include/EditView/EditView2.php');
  */
 class SubpanelQuickEdit{
 	var $defaultProcess = true;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SubpanelQuickEdit($module, $view = 'QuickEdit', $proccessOverride = false)
-    {
-        self::__construct($module, $view, $proccessOverride);
-    }
 
     public function __construct($module, $view = 'QuickEdit', $proccessOverride = false)
 	{
@@ -89,7 +80,7 @@ class SubpanelQuickEdit{
 
 		            $view->ev = $this->ev;
 		            $view->ss = $this->ev->ss;
-					$view->bean = BeanFactory::getBean($module);
+					$view->bean = BeanFactory::newBean($module);
 					$this->ev->formName = 'form_Subpanel'.$this->ev->view .'_'.$module;
 					$view->showTitle = false; // Do not show title since this is for subpanel
 		            $view->display();
@@ -109,3 +100,4 @@ class SubpanelQuickEdit{
 		echo $this->ev->display(false, true);
 	}
 }
+

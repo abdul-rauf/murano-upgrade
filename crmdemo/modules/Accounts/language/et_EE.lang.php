@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Manus',
     'LBL_REVENUELINEITEMS' => 'Tulude rea üksused',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Kontode eelvaade',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Märkused',
 
     // Help Text

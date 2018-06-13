@@ -1,6 +1,4 @@
 <?php
-if (! defined ( 'sugarEntry' ) || ! sugarEntry)
-    die ( 'Not A Valid Entry Point' ) ;
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,8 +11,6 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
  */
 
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;
-require_once ('include/SubPanel/SubPanel.php') ;
-require_once 'modules/ModuleBuilder/parsers/views/SidecarListLayoutMetaDataParser.php';
 
 class ViewListView extends SugarView
 {
@@ -58,7 +54,6 @@ class ViewListView extends SugarView
     function display ($preview = false)
     {
         $subpanelName = (!empty($this->subpanel)) ? $this->subpanel : null;
-        require_once 'modules/ModuleBuilder/parsers/ParserFactory.php' ;
         $parser = ParserFactory::getParser($this->editLayout, $this->editModule, $this->package, $subpanelName);
         $smarty = $this->constructSmarty ( $parser ) ;
 
@@ -76,7 +71,6 @@ class ViewListView extends SugarView
 
     function constructAjax ()
     {
-        require_once ('modules/ModuleBuilder/MB/AjaxCompose.php') ;
         $ajax = new AjaxCompose ( ) ;
 
         $layoutLabel = 'LBL_LAYOUTS' ;

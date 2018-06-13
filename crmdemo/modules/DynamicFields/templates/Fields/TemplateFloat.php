@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('modules/DynamicFields/templates/Fields/TemplateRange.php');
 
 class TemplateFloat extends TemplateRange
 {
@@ -19,14 +17,6 @@ class TemplateFloat extends TemplateRange
     var $default_value = null;
     var $len = '18';
     var $precision = '8';
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function TemplateFloat()
-    {
-        self::__construct();
-    }
 
     public function __construct()
     {

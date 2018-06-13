@@ -21,7 +21,6 @@ class Opportunity extends SugarBean
     const STATUS_CLOSED_WON = 'Closed Won';
     const STATUS_CLOSED_LOST = 'Closed Lost';
 
-    public $field_name_map;
     // Stored fields
     public $id;
     public $lead_source;
@@ -284,7 +283,7 @@ class Opportunity extends SugarBean
             'opportunity_role',
             'opportunity_rel_id'
         );
-        return $this->build_related_list2($query, BeanFactory::getBean('Contacts'), $temp);
+        return $this->build_related_list2($query, BeanFactory::newBean('Contacts'), $temp);
     }
 
 
@@ -577,7 +576,7 @@ class Opportunity extends SugarBean
         // For now, get them from forecasting.
         static $stages;
         if (!isset($stages)) {
-            $admin = BeanFactory::getBean('Administration');
+            $admin = BeanFactory::newBean('Administration');
             $settings = $admin->getConfigForModule('Forecasts');
 
             // get all possible closed stages
@@ -605,16 +604,10 @@ class Opportunity extends SugarBean
     {
         /* @var $admin Administration */
         if (empty(static::$settings) || $reload === true) {
-            $admin = BeanFactory::getBean('Administration');
+            $admin = BeanFactory::newBean('Administration');
             static::$settings = $admin->getConfigForModule('Opportunities');
         }
 
         return static::$settings;
     }
-}
-
-
-function getTimePeriodsDropDown()
-{
-    return TimePeriod::get_timeperiods_dom();
 }

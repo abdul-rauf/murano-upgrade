@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('clients/base/api/ModuleApi.php');
 
 class ForecastsModuleApi extends ModuleApi
 {
@@ -44,7 +42,7 @@ class ForecastsModuleApi extends ModuleApi
      * @param array $args
      * @return SugarForecasting_Committed
      */
-    protected function getClass($args)
+    protected function getClass(array $args)
     {
         // base file and class name
         $file = 'include/SugarForecasting/Committed.php';

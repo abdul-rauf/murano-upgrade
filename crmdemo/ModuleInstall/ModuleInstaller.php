@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -26,10 +25,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 require_once 'include/utils/progress_bar_utils.php';
-require_once 'ModuleInstall/ModuleScanner.php';
-require_once 'modules/ModuleBuilder/parsers/ParserFactory.php';
-require_once 'modules/UpgradeWizard/SidecarUpdate/SidecarMetaDataUpgrader.php';
-require_once 'modules/MySettings/TabController.php';
 
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
@@ -63,14 +58,6 @@ class ModuleInstaller{
      * @var array
      */
     protected $patch = array();
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ModuleInstaller()
-    {
-        self::__construct();
-    }
 
     public function __construct()
     {
@@ -224,7 +211,6 @@ class ModuleInstaller{
             require_once("modules/Administration/upgrade_custom_relationships.php");
             upgrade_custom_relationships($this->installed_modules);
             $this->rebuild_all(true);
-            require_once('modules/Administration/QuickRepairAndRebuild.php');
             $rac = new RepairAndClear();
             $rac->repairAndClearAll($selectedActions, $this->installed_modules,true, false);
             $this->updateSystemTabs('Add',$this->tab_modules);
@@ -235,7 +221,6 @@ class ModuleInstaller{
             sugar_cache_reset();
 
             //clear the unified_search_module.php file
-            require_once('modules/Home/UnifiedSearchAdvanced.php');
             UnifiedSearchAdvanced::unlinkUnifiedSearchModulesFile();
 
             // Rebuild roles so the ACLs for new modules are fresh immediately
@@ -258,7 +243,6 @@ class ModuleInstaller{
             //Doing this inline is prohibitively expensive
             //MetaDataManager::setupMetadata();
 
-            require_once 'include/api/ServiceDictionaryRest.php';
             $dict = new ServiceDictionaryRest();
             $dict->buildAllDictionaries();
 
@@ -333,7 +317,6 @@ class ModuleInstaller{
             foreach($this->installdefs['copy'] as $cp){
                 $GLOBALS['log']->debug("Copying ..." . $cp['from'].  " to " .$cp['to'] );
                 /* BEGIN - RESTORE POINT - by MR. MILK August 31, 2005 02:22:11 PM */
-                //$this->copy_path($cp['from'], $cp['to']);
                 $this->copy_path($cp['from'], $cp['to'], $backup_path);
                 /* END - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
             }
@@ -349,7 +332,6 @@ class ModuleInstaller{
                 $cp['from'] = clean_path(str_replace('<basepath>', $this->base_dir, $cp['from']));
                 $GLOBALS['log']->debug('Unlink ' . $cp['to']);
                 /* BEGIN - RESTORE POINT - by MR. MILK August 31, 2005 02:22:11 PM */
-                //rmdir_recursive($cp['to']);
 
                 $backup_path = clean_path( remove_file_extension(urldecode(hashToFile($this->validateInstallFile())))."-restore/".$cp['to'] );
                 $this->uninstall_new_files($cp, $backup_path);
@@ -699,7 +681,7 @@ class ModuleInstaller{
             return true;
         }
 
-        $user = BeanFactory::getBean('Users');
+        $user = BeanFactory::newBean('Users');
         $users = get_user_array();
         $unified_search_modules_display = array();
         require('custom/modules/unified_search_modules_display.php');
@@ -761,7 +743,7 @@ class ModuleInstaller{
             $modules[] = $definition['module'];
         }
 
-        $filter = BeanFactory::getBean('Filters');
+        $filter = BeanFactory::newBean('Filters');
         $query = new SugarQuery();
         $query->select('id');
         $query->from($filter)->where()->in('module_name', $modules);
@@ -1052,7 +1034,6 @@ class ModuleInstaller{
             ConnectorUtils::installSource($cp['name']);
 
             // refresh connector cache
-            require_once('include/connectors/ConnectorManager.php');
             $cm = new ConnectorManager();
             $connectors = $cm->buildConnectorsMeta();
 
@@ -1283,7 +1264,6 @@ class ModuleInstaller{
 
     /* BEGIN - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
     function copy_path($from, $to, $backup_path='', $uninstall=false){
-        //function copy_path($from, $to){
         /* END - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
         $to = str_replace('<basepath>', $this->base_dir, $to);
 
@@ -1293,7 +1273,6 @@ class ModuleInstaller{
         }
         else {
             $from = str_replace('<basepath>', $backup_path, $from);
-            //$GLOBALS['log']->debug('Restore ' . $from);
         }
         $from = clean_path($from);
         $to = clean_path($to);
@@ -1347,7 +1326,7 @@ class ModuleInstaller{
                     }
                 }
 
-                $mod = BeanFactory::getBean($field['module']);
+                $mod = BeanFactory::newBean($field['module']);
 
                 if(!empty($mod)){
                     $installed = true;
@@ -1364,11 +1343,10 @@ class ModuleInstaller{
     }
 
     function uninstall_custom_fields($fields){
-        require_once('modules/DynamicFields/DynamicField.php');
         $dyField = new DynamicField();
 
         foreach($fields as $field){
-            $mod = BeanFactory::getBean($field['module']);
+            $mod = BeanFactory::newBean($field['module']);
             if(!empty($mod)) {
                 $dyField->bean = $mod;
                 $dyField->module = $field['module'];
@@ -1702,12 +1680,10 @@ class ModuleInstaller{
                             foreach($this->modulesInPackage as $removed_mod) {
                                 if ($def['module'] == $removed_mod)
                                 {
-                                    require_once 'modules/ModuleBuilder/Module/StudioModule.php' ;
                                     $studioMod = new StudioModule ( $mod );
                                     $studioMod->removeFieldFromLayouts( $field );
                                     if (isset($def['custom_module'])) {
-                                        require_once ('modules/DynamicFields/DynamicField.php') ;
-                                        $seed = BeanFactory::getBean($mod);
+                                        $seed = BeanFactory::newBean($mod);
                                         $df = new DynamicField ( $mod ) ;
                                         $df->setup ( $seed ) ;
                                         //Need to load the entire field_meta_data for some field types
@@ -1840,7 +1816,6 @@ class ModuleInstaller{
             $this->updateSystemTabs('Restore',$installed_modules);
 
             //clear the unified_search_module.php file
-            require_once('modules/Home/UnifiedSearchAdvanced.php');
             UnifiedSearchAdvanced::unlinkUnifiedSearchModulesFile();
 
             // Destroy all metadata caches and rebuild the base metadata. This
@@ -1849,7 +1824,6 @@ class ModuleInstaller{
             MetaDataManager::clearAPICache(true, true);
             MetaDataManager::setupMetadata();
 
-            require_once 'include/api/ServiceDictionaryRest.php';
             $dict = new ServiceDictionaryRest();
             $dict->buildAllDictionaries();
 
@@ -2160,9 +2134,6 @@ class ModuleInstaller{
                     $class = $bean['class'];
                     $path = $bean['path'];
 
-                    // Handle the autoloader add first
-                    SugarAutoLoader::$moduleMap[$class] = $path;
-
                     // Handle the globals. This will ultimately be rerun after
                     // several other tasks, but some of the relationship installation
                     // needs this next
@@ -2211,7 +2182,7 @@ class ModuleInstaller{
             $_SESSION['developerMode'] = true;
 
             $this->log( translate('LBL_MI_IN_BEAN') . " $bean");
-            $mod = BeanFactory::getBean($bean);
+            $mod = BeanFactory::newBean($bean);
             if(!empty($mod) && $mod instanceof SugarBean && empty($mod->disable_vardefs)) { //#30273
                 $GLOBALS['log']->debug( "Creating Tables Bean : $bean");
                 $mod->create_tables();
@@ -2226,7 +2197,7 @@ class ModuleInstaller{
     function uninstall_beans($beans){
         foreach($beans as $bean){
             $this->log( translate('LBL_MI_UN_BEAN') . " $bean");
-            $mod = BeanFactory::getBean($bean);
+            $mod = BeanFactory::newBean($bean);
             if(!empty($mod) && $mod instanceof SugarBean) {
                 $GLOBALS['log']->debug( "Drop Tables : $bean");
                 if(isset($GLOBALS['mi_remove_tables']) && $GLOBALS['mi_remove_tables']) {
@@ -2376,7 +2347,6 @@ class ModuleInstaller{
         $_SESSION['MODULEINSTALLER_ERRORS'] = $errors;
         echo '<META HTTP-EQUIV="Refresh" content="0;url=index.php?module=Administration&action=UpgradeWizard&view=module">';
         die();
-        //header('Location: index.php?module=Administration&action=UpgradeWizard&view=module');
     }
 
     /**
@@ -2907,30 +2877,22 @@ class ModuleInstaller{
         //but we should check the version in the module install against the version on the file system
         //if they match then we can copy the file back, but otherwise we should ask the user.
 
-//		$GLOBALS['log']->debug('ModuleInstaller.php->disable_copy()');
         if(isset($GLOBALS['mi_overwrite_files']) && $GLOBALS['mi_overwrite_files']){
-//		$GLOBALS['log']->debug('ModuleInstaller.php->disable_copy():mi_overwrite_files=true');
             if(!empty($this->installdefs['copy'])){
-//				$GLOBALS['log']->debug('ModuleInstaller.php->disable_copy(): installdefs not empty');
                 foreach($this->installdefs['copy'] as $cp){
                     $cp['to'] = clean_path(str_replace('<basepath>', $this->base_dir, $cp['to']));
                     $cp['from'] = clean_path(str_replace('<basepath>', $this->base_dir, $cp['from']));
                     $backup_path = clean_path( remove_file_extension(urldecode(hashToFile($this->validateInstallFile())))."-restore/".$cp['to'] ); // bug 16966 tyoung - replaced missing assignment to $backup_path
                     //check if this file exists in the -restore directory
-//					$GLOBALS['log']->debug("ModuleInstaller.php->disable_copy(): backup_path=".$backup_path);
                     $this->uninstall_new_files($cp, $backup_path);
                     if(file_exists($backup_path)){
                         //since the file exists, then we want do an md5 of the install version and the file system version
                         $from = str_replace('<basepath>', $this->base_dir, $cp['from']);
 
-                        //if(is_file($from) && md5_file($from) == md5_file($cp['to'])){
                         //since the files are the same then we can safely move back from the -restore
                         //directory into the file system
                         $GLOBALS['log']->debug("DISABLE COPY:: FROM: ".$backup_path. " TO: ".$cp['to']);
                         $this->copy_path($backup_path, $cp['to']);
-                        /*}else{
-                            //since they are not equal then we need to prompt the user
-                        }*/
                     }//fi
                 }//rof
             }//fi
@@ -3038,6 +3000,7 @@ class ModuleInstaller{
                 "filters",
                 "logo_url",
             ),
+            'uniqueKey' => $config->get('unique_key'),
         );
 
         $jsConfig = $config->get('additional_js_config', array());
@@ -3194,11 +3157,11 @@ class ModuleInstaller{
 
         foreach ($copyList as $to => $from) {
             $contents = file_get_contents($from);
-            SugarAutoloader::ensureDir(dirname($to));
-            SugarAutoloader::put($to, $contents, false);
+            SugarAutoLoader::ensureDir(dirname($to));
+            SugarAutoLoader::put($to, $contents, false);
         }
 
-        SugarAutoloader::saveMap();
+        SugarAutoLoader::saveMap();
     }
 
     /**

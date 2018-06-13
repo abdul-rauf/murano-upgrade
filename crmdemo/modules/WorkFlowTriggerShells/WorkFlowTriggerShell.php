@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,8 +18,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 require_once('include/workflow/workflow_utils.php');
-//require_once('modules/QueryBuilder/QueryBuilder.php');
-require_once('include/workflow/glue.php');
 
 
 
@@ -30,7 +27,6 @@ require_once('modules/WorkFlowTriggerShells/MetaArray.php');
 
 // WorkFlowTriggerShell is used to store the shell trigger information.
 class WorkFlowTriggerShell extends SugarBean {
-	var $field_name_map;
 	// Stored fields
 	var $id;
 	var $deleted;

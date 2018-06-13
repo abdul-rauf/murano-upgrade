@@ -1,8 +1,5 @@
 <?php
 
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -15,7 +12,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'clients/base/api/CollectionApi/CollectionDefinition/CollectionDefinitionInterface.php';
 
 /**
  * Base implementation of collection definition

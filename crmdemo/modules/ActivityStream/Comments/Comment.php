@@ -43,7 +43,6 @@ class Comment extends Basic
         $this->retrieve();
         $sfh = new SugarFieldHandler();
         $data = array();
-        require_once 'include/api/RestService.php';
         $service = new RestService();
         $service->user = $current_user;
         foreach ($this->field_defs as $fieldName => $properties) {
@@ -126,7 +125,7 @@ class Comment extends Basic
     /**
      * Overwrite the notifications handler.
      */
-    public function _sendNotifications()
+    public function _sendNotifications($check_notify)
     {
         return false;
     }

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -32,17 +31,5 @@ $dashletData['MyReportsDashlet']['columns'] = array('name' => array('width'   =>
                                                                 'orderBy' => 'report_type',
                                                                 'related_fields' => array('report_type'),
                                                                 ),
-                                                         /*
-                                                          'team_name' => array('width'   => '15', 
-                                                                               'label'   => 'LBL_LIST_TEAM',
-                                                                               'default' => true,
-                                                                               'related_fields' => array('team_id'),
-                                                                               'orderBy' => 'team_id'),
-                                                          'assigned_user_name' => array('width'   => '8', 
-                                                                                        'label'   => 'LBL_LIST_ASSIGNED_USER',
-                                                                                        'default' => true,
-                                                                                        
-                                                                                        'orderBy' => 'assigned_user_id'),
-                                                           */
                                                            );
 ?>

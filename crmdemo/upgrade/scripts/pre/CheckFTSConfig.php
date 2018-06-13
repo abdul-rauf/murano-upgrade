@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -34,7 +31,6 @@ class SugarUpgradeCheckFTSConfig extends UpgradeScript
             $this->error('Access Full Text Search configuration under Administration > Search.');
         } else {
             // Test Elastic FTS connection
-            require_once('include/SugarSearchEngine/SugarSearchEngineFactory.php');
             $searchEngine = SugarSearchEngineFactory::getInstance('Elastic', $ftsConfig['Elastic']);
             $status = $this->getServerStatusElastic($searchEngine, $ftsConfig['Elastic']);
 

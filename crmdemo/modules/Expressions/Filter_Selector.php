@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,6 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 require_once('include/utils/expression_utils.php');
 
-require_once('include/ListView/ProcessView.php');
 require_once('modules/WorkFlowTriggerShells/MetaArray.php');
 
 global $current_user;
@@ -32,7 +30,7 @@ global $selector_meta_array;
 
 
 
-	$exp_object = BeanFactory::getBean('Expressions');
+	$exp_object = BeanFactory::newBean('Expressions');
 
 
 
@@ -64,7 +62,6 @@ $xtpl->assign("MOD", $mod_strings);
 $xtpl->assign("APP", $app_strings);
 $xtpl->assign("RETURN_PREFIX", $exp_object->return_prefix);
 
-require_once('include/language/jsLanguage.php');
 if (!is_file(sugar_cached('jsLanguage/') . $GLOBALS['current_language'] . '.js')) {
 	jsLanguage::createAppStringsCache($GLOBALS['current_language']);
 }
@@ -93,7 +90,7 @@ $xtpl->assign('EXP_META_TYPE', $exp_meta_type);
 	$xtpl->assign('PARENT_TYPE', $exp_object->parent_type);
 $form_name = "FieldView";
 if(isset($exp_meta_array['select_field']) && $exp_meta_array['select_field']===true) {
-	$temp_module = BeanFactory::getBean($exp_object->lhs_module);
+	$temp_module = BeanFactory::newBean($exp_object->lhs_module);
 	$temp_module->call_vardef_handler("normal_trigger");
 	$temp_module->vardef_handler->start_none = true;
 	$field_array = $temp_module->vardef_handler->get_vardef_array();
@@ -166,7 +163,7 @@ if($exp_object->lhs_field != ""){
 	$xtpl->out("main");
 
 	//rsmith
-	$temp_module = BeanFactory::getBean($exp_object->lhs_module);
+	$temp_module = BeanFactory::newBean($exp_object->lhs_module);
 	$field = $exp_object->lhs_field;
 
 	//now build toggle js
@@ -175,13 +172,18 @@ if($exp_object->lhs_field != ""){
 	$javascript = new javascript();
 	$javascript->setFormName('FieldViewNonSelector');
 	$javascript->setSugarBean($temp_module);
-	$type = $temp_module->field_name_map[$field]['type'];
+    $type = $temp_module->field_defs[$field]['type'];
 	$js = "";
-    if (isset($temp_module->field_name_map[$field]['required']))
-    {
+    if (isset($temp_module->field_defs[$field]['required'])) {
 	if($type == 'date' || $type == 'time'){
 		$js = "<script type=\"text/javascript\">";
-		$js .= "addToValidate('EditView', '".$exp_object->parent_type."__field_value', 'assigned_user_name', 1,'". $javascript->stripEndColon(translate($temp_module->field_name_map[$field]['vname'])) . "' )";
+        $js .= "addToValidate("
+            . "'EditView', "
+            . "'" . $exp_object->parent_type . "__field_value', "
+            . "'assigned_user_name', "
+            . "1, "
+            . "'" . $javascript->stripEndColon(translate($temp_module->field_defs[$field]['vname'])) . "'"
+            . ")";
 		$js .= "</script>";
 	}
 	else if(in_array($type, ProcessView::get_js_exception_fields()) == 1){
@@ -195,5 +197,3 @@ if($exp_object->lhs_field != ""){
 	echo $js;
 	//rsmith
 }
-
-?>

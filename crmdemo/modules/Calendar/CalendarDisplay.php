@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -340,7 +339,8 @@ class CalendarDisplay {
 		global $cal_strings,$image_path;
 		$str = "";
 		if($_REQUEST['module'] == "Calendar"){
-			$str .= "<a href='".ajaxLink("index.php?action=index&module=Calendar&view=".$this->cal->view."&".$this->cal->get_neighbor_date_str("next"))."'>";
+            $str .= "<a href='index.php?action=index&module=Calendar&view=" . $this->cal->view
+                . "&" . $this->cal->get_neighbor_date_str("next") . "'>";
 
 		}else{
 			$str .= "<a href='#' onclick='return SUGAR.mySugar.retrieveDashlet(\"".$this->dashlet_id."\", \"index.php?module=Home&action=DynamicAction&DynamicAction=displayDashlet&sugar_body_only=1&".$this->cal->get_neighbor_date_str("next")."&id=".$this->dashlet_id."\")'>";
@@ -359,7 +359,8 @@ class CalendarDisplay {
 		global $cal_strings,$image_path;
 		$str = "";
 		if($_REQUEST['module'] == "Calendar"){
-			$str .= "<a href='".ajaxLink("index.php?action=index&module=Calendar&view=".$this->cal->view."&".$this->cal->get_neighbor_date_str("previous")."")."'>";
+            $str .= "<a href='index.php?action=index&module=Calendar&view=" . $this->cal->view
+                 . "&" . $this->cal->get_neighbor_date_str("previous") . "'>";
 		}else{
 			$str .= "<a href='#' onclick='return SUGAR.mySugar.retrieveDashlet(\"".$this->dashlet_id."\", \"index.php?module=Home&action=DynamicAction&DynamicAction=displayDashlet&sugar_body_only=1&".$this->cal->get_neighbor_date_str("previous")."&id=".$this->dashlet_id."\")'>";
 		}
@@ -389,7 +390,8 @@ class CalendarDisplay {
 			foreach($tabs as $tab){
 				$tabs_params[$tab]['title'] = $cal_strings["LBL_".strtoupper($tab)];
 				$tabs_params[$tab]['id'] = $tab . "-tab";
-				$tabs_params[$tab]['link'] = "window.location.href='".ajaxLink("index.php?module=Calendar&action=index&view=". $tab . $this->cal->date_time->get_date_str())."'";
+                $tabs_params[$tab]['link'] = "window.location.href='index.php?module=Calendar&action=index&view="
+                    . $tab . $this->cal->date_time->get_date_str() . "'";
 			}
 			$ss->assign('controls',$controls);
 			$ss->assign('tabs',$tabs);

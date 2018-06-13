@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,20 +10,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/Dashlets/Dashlet.php');
 
 
 class InvadersDashlet extends Dashlet {
     var $savedText; // users's saved text
     var $height = '100'; // height of the pad
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function InvadersDashlet($id, $def)
-    {
-        self::__construct($id, $def);
-    }
 
     /**
      * Constructor
@@ -51,11 +41,11 @@ class InvadersDashlet extends Dashlet {
     }
 
     /**
-     * Displays the dashlet
-     *
-     * @return string html to display dashlet
+     * {@inheritDoc}
+     * @param string $text Ignored
      */
-    function display() {
+    public function display($text = '')
+    {
         $ss = new Sugar_Smarty();
         $ss->assign('id', $this->id);
         $ss->assign('height', $this->height);
@@ -142,3 +132,4 @@ class InvadersDashlet extends Dashlet {
         echo $json->encode(array('id' => $guid, 'savedText' => $optionsArray['savedText']));
     }
 }
+

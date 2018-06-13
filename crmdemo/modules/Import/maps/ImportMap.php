@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -131,7 +130,8 @@ class ImportMap extends SugarBean
 	}
 
     /**
-     * Save
+     * {@inheritDoc}
+     * If one argument passed - calls standard SugarBean::save
      *
      * @param  string $owner_id
      * @param  string $name
@@ -142,16 +142,14 @@ class ImportMap extends SugarBean
      * @param  string $enclosure
      * @return bool
      */
-    public function save(
-        $owner_id,
-        $name,
-        $module,
-        $source,
-        $has_header,
-        $delimiter,
-        $enclosure
-        )
+    public function save($check_notify = false)
     {
+        if (func_num_args() <= 1) {
+            // calling SugarBean::save()
+            return call_user_func_array(array('parent', __FUNCTION__), func_get_args());
+        }
+        // keep backwards compatibility, old method expected these arguments
+        list($owner_id, $name, $module, $source, $has_header, $delimiter, $enclosure) = func_get_args();
         $olddefault_values = $this->default_values;
         $oldcontent = $this->content;
 
@@ -178,8 +176,9 @@ class ImportMap extends SugarBean
         $this->content          = $oldcontent;
         parent::save();
 
-        // Bug 29365 - The enclosure character isn't saved correctly if it's a tab using MssqlManager, so resave it
-        if ( $enclosure == '\\t' && $this->db instanceOf MssqlManager ) {
+        // Bug 29365 - The enclosure character isn't saved correctly if it's a tab using SQL Server adapter,
+        // so resave it
+        if ($enclosure == '\\t' && $this->db->dbType == 'mssql') {
             $this->enclosure = $enclosure;
             parent::save();
         }
@@ -200,7 +199,7 @@ class ImportMap extends SugarBean
         global $current_user;
 
         if ( !is_admin($current_user) ) {
-            $other_map = BeanFactory::getBean('Import_1');
+            $other_map = BeanFactory::newBean('Import_1');
             $other_map->retrieve_by_string_fields(array('id'=> $id), false);
 
             if ( $other_map->assigned_user_id != $current_user->id )
@@ -246,7 +245,7 @@ class ImportMap extends SugarBean
                 'is_published'     => 'no'
                 );
         }
-        $other_map = BeanFactory::getBean('Import_1');
+        $other_map = BeanFactory::newBean('Import_1');
         $other_map->retrieve_by_string_fields($query_arr, false);
 
         // if we find this other map, quit
@@ -282,7 +281,7 @@ class ImportMap extends SugarBean
         $obj_arr = array();
 
         while ($row = $this->db->fetchByAssoc($result,true) ) {
-            $focus = BeanFactory::getBean('Import_1');
+            $focus = BeanFactory::newBean('Import_1');
 
             foreach($this->column_fields as $field) {
                 if(isset($row[$field])) {

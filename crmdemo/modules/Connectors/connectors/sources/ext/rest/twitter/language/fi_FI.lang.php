@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,24 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => '<table border=&#39;0&#39; cellspacing=&#39;1&#39;><tr><td valign=&#39;top&#39; width=&#39;35%&#39; class=&#39;dataLabel&#39;>Hae API-avain ja salasana Twitteristä rekisteröimällä Sugar-instanssisi uutena sovelluksena.<br/><br>Sugar-instanssisi rekisteröinti tapahtuu seuraavasti:<br/><br/><ol><li>Mene Twitter Developers -sivulle: <a href=&#39;http://dev.twitter.com/apps/new&#39; target=&#39;_blank&#39;>http://dev.twitter.com/apps/new</a>.</li><li>Kirjaudu sisään sillä Twitter-tilillä, jolla haluat rekisteröidä sovelluksen.</li><li>Syötä rekisteröintilomakkeeseen sovelluksen nimi. Käyttäjät näkevät tämän nimen, kun he autentikoivat Twitter-tilinsä Sugarista.</li><li>Syötä kuvaus.</li><li>Syötä sovelluksen web-sivun URL-osoite.</li><li>Syötä Callback URL. Tämä voi olla mikä tahansa, sillä Sugar ohittaa tämän autentikoitaessa. Voisit esimerkiksi syöttää Sugar-sivusi URL:n.</li><li>Hyväksy Twitter API:n käyttöehdot.</li><li>Napsauta "Create your Twitter application".</li><li>Etsi sovellussivun "API Keys" -välilehdeltä API-avain ("API Key") ja API-salasana ("API Secret"). Syötä avain ja salasana alle.</li></ol></td></tr></table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
+								<tr>
+									<td valign="top" width="35%" class="dataLabel">
+										Hanki API-avain ja Secret Twitteristä rekisteröimällä Sugar-instanssisi uudeksi sovellukseksi:<br/><br/>Instanssin rekisteröinti:<br/><br/>
+										<ol>
+											<li>Siirry Twitter-kehittäjien sivustolle: <a href=\'https://apps.twitter.com\' target=\'_blank\'>https://apps.twitter.com</a>.</li>
+											<li>Kirjaudu sisään Twitter-tilille, johon haluat rekisteröidä sovelluksen.</li>
+											<li>Kirjoita rekisteröintilomakkeelle sovelluksen nimi. Tämä on nimi, jonka käyttäjät näkevät varmentaessaan Twitter-tilinsä Sugarista.</li>
+											<li>Kirjoita kuvaus.</li>
+											<li>Kirjoista sovelluksen verkkosivuston URL-osoite.</li>
+											<li>Kirjoita URL-takaisinkutsuosoite (tämä voi olla mikä tahansa, sillä Sugar ohittaa tämän varmennuksen yhteydessä. Esimerkki: Kirjoita Sugar-sivustosi URL-osoite).</li>
+											<li>Hyväksy Twitter API:n palveluehdot.</li>
+											<li>Napsauta "Luo oma Twitter-sovellus".</li>
+											<li>Etsi sovelluksen sivulta API-avain ja API Secret "API-avaimet"-välilehdellä. Kirjoita avain ja Secret alle.</li>
+										</ol>
+									</td>
+								</tr>
+							</table>',
     'LBL_NAME' => 'Twitter-käyttäjänimi',
     'LBL_ID' => 'Twitter-käyttäjänimi',
 	'company_url' => 'URL',

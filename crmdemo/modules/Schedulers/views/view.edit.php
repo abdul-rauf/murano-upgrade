@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/MVC/View/views/view.edit.php');
 
 class SchedulersViewEdit extends ViewEdit {
 	protected static $xtDays = array(
@@ -29,11 +27,13 @@ class SchedulersViewEdit extends ViewEdit {
  		$this->useForSubpanel = true;
  		//$this->useModuleQuickCreateTemplate = true;
  	}
- 	
+
     /**
-	 * @see SugarView::_getModuleTitleListParam()
-	 */
-	protected function _getModuleTitleListParam()
+     * {@inheritDoc}
+     *
+     * @param bool $browserTitle Ingored
+     */
+    protected function _getModuleTitleListParam($browserTitle = false)
 	{
 	    global $mod_strings;
 

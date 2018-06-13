@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - リッチクライアントを実装するUIライブラリ。',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - PHP用のEメール送信クラス。',
   'LBL_SOURCE_JSHRINK' => 'JShrink -PHPで記載されたJavascript最小化ツール。',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - MCrypt PHPエクステンションを用いずに双方向blowfish暗号化を実現。',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - HTMLやフォーマットされていないXML用のSAXパーサ。',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - Jack Slocumによって開発されたYahoo! User Interface Libraryの拡張。',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Javascript Flash Player検出・組み込みスクリプト。',
@@ -274,8 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Sugar7ヘルプダッシュボードへようこそ',
-    'LBL_HELP_RECORD' => 'ヘルプダッシュボードは閲覧しているモジュールの特定の情報を表示し、モジュール内でのアクションの詳細のステップを説明し、どこに行けばもっと総合的な情報とサポートがあるかを示します。ヘルプダッシュレットはオープンされたままにされ、モジュール内で実行するステップを見ることができます。ヘルプダッシュボードはSugar7の全てのモジュールで使用可能であり、アプリケーションフッターでヘルプアイコンをクリックすることによりオープン・クローズをトグルすることができます。',
+    'LBL_HELP_RECORD_TITLE' => 'ヘルプ',
+    'LBL_HELP_RECORD' => 'ヘルプは、現在閲覧中のモジュールに関する特定の情報の表示、モジュール内でいくつかのアクションを実行するための詳細な手順の提供、より包括的な情報とサポートを得られる参照先の指示をします。',
 
     'LBL_FACETS_DASHBOARD_TITLE' => '絞り込み',
 );

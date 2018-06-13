@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -42,7 +41,6 @@ $mod_strings = array (
 	'LBL_COUNTRY' => '國家：',
 	'LBL_DATE_ENTERED' => '建立日期：',
 	'LBL_DATE_MODIFIED' => '修改日期：',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => '帳戶',
 	'LBL_DESCRIPTION_INFORMATION' => '描述資訊',
 	'LBL_DESCRIPTION' => '描述：',
 	'LBL_DUPLICATE' => '可能重複的帳戶',

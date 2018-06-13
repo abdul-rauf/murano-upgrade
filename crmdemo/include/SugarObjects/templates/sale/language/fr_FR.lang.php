@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -88,7 +87,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   'LBL_TOP_SALES' => 'Top des Ventes',
   'NTC_REMOVE_OPP_CONFIRMATION' => 'Êtes-vous sûr(e) de vouloir supprimer ce contact de cette vente ?',
 	'SALE_REMOVE_PROJECT_CONFIRM' => 'Êtes-vous sûr(e) de vouloir supprimer cette vente de ce projet ?',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Ventes',
 	'LBL_ACTIVITIES_SUBPANEL_TITLE'=>'Activités à réaliser',
 	'LBL_HISTORY_SUBPANEL_TITLE'=>'Historique et Activités terminées',
     'LBL_RAW_AMOUNT'=>'Montant Brut',

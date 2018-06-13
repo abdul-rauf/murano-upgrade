@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/ModuleApi.php');
 
 class ConfigModuleApi extends ModuleApi
 {
@@ -62,14 +61,14 @@ class ConfigModuleApi extends ModuleApi
      *
      * @throws SugarApiExceptionNotAuthorized
      * @param ServiceBase $api
-     * @param $args 'module' is required, 'platform' is optional and defaults to 'base'
+     * @param array $args 'module' is required, 'platform' is optional and defaults to 'base'
      * @return array
      */
-    public function config(ServiceBase $api, $args)
+    public function config(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module'));
         $seed = BeanFactory::newBean($args['module']);
-        $adminBean = BeanFactory::getBean("Administration");
+        $adminBean = BeanFactory::newBean("Administration");
 
         //acl check
         if (!$seed->ACLAccess('access')) {
@@ -103,7 +102,7 @@ class ConfigModuleApi extends ModuleApi
      * @param array $args           'module' is required, 'platform' is optional and defaults to 'base'
      * @return array
      */
-    public function configSave(ServiceBase $api, $args)
+    public function configSave(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module'));
 
@@ -138,7 +137,7 @@ class ConfigModuleApi extends ModuleApi
             MetaDataManager::refreshModulesCache(array($module));
         }
 
-        $admin = BeanFactory::getBean('Administration');
+        $admin = BeanFactory::newBean('Administration');
         return $admin->getConfigForModule($module, $api->platform, true);
     }
 
@@ -151,7 +150,7 @@ class ConfigModuleApi extends ModuleApi
      */
     protected function save(ServiceBase $api, $params, $module)
     {
-        $admin = BeanFactory::getBean('Administration');
+        $admin = BeanFactory::newBean('Administration');
         
         $platform = $this->getPlatform($api->platform);
 
@@ -171,7 +170,7 @@ class ConfigModuleApi extends ModuleApi
     protected function getPlatform($platform)
     {
         // if the platform is not a valid registered platform, default it back to base
-        $platforms = MetadataManager::getPlatformList();
+        $platforms = MetaDataManager::getPlatformList();
 
         if (!in_array($platform, $platforms)) {
             $platform = 'base';

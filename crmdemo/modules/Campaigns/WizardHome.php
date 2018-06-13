@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -23,7 +22,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once('modules/Campaigns/utils.php');
 
-$focus = BeanFactory::getBean('Campaigns');
+$focus = BeanFactory::newBean('Campaigns');
 if(isset($_REQUEST['record']) &&  !empty($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
 
@@ -212,8 +211,8 @@ function create_campaign_summary  ($focus){
     $colorclass = '';
     foreach($fields as $key){
 
-                if(!empty($focus->$key) && !empty($mod_strings[$focus->field_name_map[$key]['vname']])){
-                    $cmpgn_tbl .= "<tr><td scope='row' width='15%'>".$mod_strings[$focus->field_name_map[$key]['vname']]."</td>\n";
+        if (!empty($focus->$key) && !empty($mod_strings[$focus->field_defs[$key]['vname']])) {
+            $cmpgn_tbl .= "<tr><td scope='row' width='15%'>".$mod_strings[$focus->field_defs[$key]['vname']]."</td>\n";
                     if($key == 'team_name') {
                         require_once 'modules/Teams/TeamSetManager.php';
                         $cmpgn_tbl .= "<td scope='row'>" .
@@ -258,7 +257,7 @@ function create_marketing_summary  ($focus){
     $mrkt_tbl .= "<tr  class='listViewHRS1'><td scope='col' width='15%'><b>".$mod_strings['LBL_MRKT_NAME']."</b></td><td width='15%' scope='col'><b>".$mod_strings['LBL_FROM_MAILBOX_NAME']."</b></td><td width='15%' scope='col'><b>".$mod_strings['LBL_STATUS_TEXT']."</b></td><td scope='col' colspan=2>&nbsp;</td></tr>";
 
     if(count($mrkt_lists)>0){
-            $mrkt_focus = BeanFactory::getBean('EmailMarketing');
+            $mrkt_focus = BeanFactory::newBean('EmailMarketing');
             foreach($mrkt_lists as $mrkt_id){
                 $mrkt_focus->retrieve($mrkt_id);
 
@@ -345,7 +344,7 @@ function create_target_summary  ($focus){
     if(count($pl_lists)>0){
 
             
-            $pl_focus = BeanFactory::getBean('ProspectLists');
+            $pl_focus = BeanFactory::newBean('ProspectLists');
             foreach($pl_lists as $pl_id){
 
              if( $colorclass== "class='evenListRowS1'"){
@@ -464,5 +463,3 @@ function create_wiz_menu_items($type,$mrkt_string,$camp_url,$summ_url){
 
     return $nav_html;
 }
-
-?>

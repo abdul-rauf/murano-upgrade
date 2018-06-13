@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -35,7 +34,7 @@ if(!$focus->ACLAccess('Delete')){
 }
 if (isset($_REQUEST['object']) && $_REQUEST['object']="documentrevision") {
 	//delete document revision.
-	$focus = BeanFactory::getBean('DocumentRevisions');
+	$focus = BeanFactory::newBean('DocumentRevisions');
 	UploadFile::unlink_file($_REQUEST['revision_id'],$_REQUEST['filename']);
 } else {
 	//delete document and its revisions.

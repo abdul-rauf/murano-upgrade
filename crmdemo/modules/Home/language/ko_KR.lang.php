@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo!  사용자 인터페이스 자료실 - UI자료실 시설은 풍부한 고객중심 기능을 촉진시킵니다.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - PHP를 위한 전체 기능의 이메일 수송 종류',
   'LBL_SOURCE_JSHRINK' => 'JShrink - PHP에 씌인 Javascript minifier',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - MCrypt PHP 확장 없이 빠른 쌍방의 blowfish 코드화를 허용합니다.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - HTML를 위한 SAX 구문해석과 기타 부정확하게 형성된 XML 문서',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI 확장 자료실-Jack Slocum에 의한 Yahoo! 사용자 인터페이스 자료실 확장',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Javascript Flash Player 발견과 삽입된 스크립트.',
@@ -274,8 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => '슈거(Sugar) 7 도움말 대시 보드에 오신 것을 환영합니다',
-    'LBL_HELP_RECORD' => '도움말 대시 렛창 당신이보고있는 모듈에 대한 특정 정보를 표시하는 모듈에서 일부 작업을 수행하기위한 자세한 단계를 제공하고, 위치를보다 포괄적 인 정보와 지원을 위해 이동하는 방법을 지시한다. 당신은 모듈의 단계를 실행대로 단계를 볼 수 있도록 도움말 대시 렛창은 열려 있습니다.도움말 대시 보드는 모든 설탕 7 모듈을 사용할 수 있습니다 응용 프로그램의 하단에있는 도움말 아이콘을 클릭하여 "개방"과 "폐쇄"전환 할 수 있습니다.',
+    'LBL_HELP_RECORD_TITLE' => '도움말',
+    'LBL_HELP_RECORD' => '도움말이 현재 보고 있는 모듈에 대한 구체적인 정보를 보여주고, 모듈의 일부 작업 수행에 필요한 자세한 단계를 제공하며, 더 포괄적인 정보와 지원를 구할 수 있는 곳으로 안내합니다.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => '필터',
 );

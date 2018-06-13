@@ -23,7 +23,7 @@ $mod_strings = array(
     'LBL_LEAD_SOURCE' => 'Fonte del Lead',
     'LBL_LIST_NAME' => 'Elemento dell´Opportunità',
     'LBL_LIST_MANUFACTURER' => 'Produttore',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Numero Mft',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Numero parte',
     'LBL_LIST_QUANTITY' => 'Quantità',
     'LBL_LIST_COST_PRICE' => 'Costo',
     'LBL_LIST_DISCOUNT_PRICE' => 'Prezzo Scontato',
@@ -57,7 +57,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Sconto %',
     'LBL_LIST_PRICE' => 'Prezzo di Listino',
     'LBL_VENDOR_PART_NUM' => 'Numero componente fornitore:',
-    'LBL_MFT_PART_NUM' => 'Numero componente Mft:',
+    'LBL_MFT_PART_NUM' => 'Numero parte:',
     'LBL_NEXT_STEP' => 'Passo Successivo:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Data del Prezzo Scontato:',
     'LBL_WEIGHT' => 'Peso:',
@@ -149,12 +149,14 @@ $mod_strings = array(
     'LBL_SALES_STAGE' => 'Fase di Vendita',
     'LBL_SALES_STATUS' => 'Stato degli elementi dell´Opportunità',
     'LBL_PIPELINE_TOTAL_IS' => 'La Pipeline Totale è',
+    'LBL_CONVERT_RLI_TO_QUOTE' => 'Genera offerta da voce Ricavo',
     'LBL_CONVERT_TO_QUOTE' => 'Genera Offerta',
     'LBL_CONVERT_TO_QUOTE_INFO' => 'Attendere Prego',
     'LBL_CONVERT_TO_QUOTE_INFO_MESSAGE' => 'Genera Offerta Da Elemento dell´Opportunità',
     'LBL_CONVERT_INVALID_RLI' => 'Uno o più Elementi dell´Opportunità tra quelli selezionati non possono essere convertiti in Offerta:<br /><br />',
     'LBL_CONVERT_INVALID_RLI_PRODUCT' => 'L´Elemento dell´Opportunità necessita di selezionare un Prodotto dal Catalogo Prodotti prima che un´Offerta possa essere generata.',
     'LBL_CONVERT_INVALID_RLI_PRODUCT_PLURAL' => 'Uno o più tra gli Elementi dell´Opportunità necessitano di un Prodotto dal Catalogo Prodotti prima di poter generare un´Offerta.',
+    'LBL_CONVERT_INVALID_RLI_ALREADYQUOTED' => 'La voce Ricavo è già quotata.',
     'LBL_CONVERT_INVALID_RLI_ALREADYQUOTED_PLURAL' => 'Uno o più tra gli Elementi dell´Opportunità sono già quotati.',
 
     'LBL_CONVERT_TO_QUOTE_ERROR' => 'Errore:',
@@ -182,7 +184,7 @@ $mod_strings = array(
 Per creare un {{module_name}}: 
 1. Fornire i valori desiderati per i campi. 
 - I campi contrassegnati come "Obbligatorio" devono essere compilati prima del salvataggio. 
-- Cliccare "Mostra più" per visualizzare ulteriori campi se necessario. 
+- Cliccare "Altri dettagli" per visualizzare ulteriori campi se necessario. 
 2. Cliccare "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
 
     'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => 'Top 10 Elementi dell´Opportunità',

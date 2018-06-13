@@ -360,11 +360,11 @@
 
         /**
          * Extracts the field names from the metadata for directly related views/panels.
-         * @param {String} module(optional) Module name.
-         * @param {Boolean} onlyDataFields when true, only fields that specifically need to be retrived from the server are returned
+         *
+         * @param {string} [module] Module name. Defaults to the Context module.
          * @return {Array} List of fields used on this view
          */
-        getFieldNames: function(module, onlyDataFields) {
+        getFieldNames: function(module) {
             var fields = [];
             module = module || this.context.get('module');
 
@@ -459,7 +459,7 @@
          * @inheritdoc
          */
         _show: function() {
-            this._super('_show');
+            app.view.Component.prototype._show.call(this);
             _.each(this.fields, function(component) {
                 component.updateVisibleState(true);
             });
@@ -469,7 +469,7 @@
          * @inheritdoc
          */
         _hide: function() {
-            this._super('_hide');
+            app.view.Component.prototype._hide.call(this);
             _.each(this.fields, function(component) {
                 component.updateVisibleState(true);
             });

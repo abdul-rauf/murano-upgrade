@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +16,6 @@ require_once('modules/Reports/templates/templates_modules_def_js.php');
 require_once('modules/Reports/templates/templates_reports_request_js.php');
 
 require_once('modules/Reports/config.php');
-require_once('modules/Reports/schedule/ReportSchedule.php');
 
 
 
@@ -80,7 +77,6 @@ global $modules_report;
 // grab information for tab access to show only reports relative to modules a user has access to
 if(isset($current_user))
 {
-	require_once('modules/MySettings/TabController.php');
 	$tabs = new TabController();
 	$tabArray = $tabs->get_user_tabs($current_user);
 	
@@ -100,7 +96,7 @@ if(isset($current_user))
 }
 	
 
-$saved_reports_seed = BeanFactory::getBean('Reports');
+$saved_reports_seed = BeanFactory::newBean('Reports');
 
 //determine the where query for the published reports
 	if (isset($_REQUEST['view']) && $_REQUEST['view']!="all"){
@@ -126,7 +122,6 @@ $saved_reports_seed = BeanFactory::getBean('Reports');
 			$module_value = 'value="'.$modules_report[$module_map[$_REQUEST['view']]].'"';
 		}	
 		echo '<form action="index.php"><input type=hidden name="module" value="Reports"/><input type=hidden name="report_module" '.$module_value.'/><input type=hidden name="action" value="index"/><input type=hidden name="page" value="report"/><input type=submit class=button name=\'Create Custom Report\' value=\''.$mod_strings['LBL_CREATE_CUSTOM_REPORT'].'\'></form>';
-		//echo get_form_header($my_header_title, $button_form, false);
 
 //my reports list	
 $ListView = new ListView();
@@ -163,7 +158,6 @@ $module_value = '';
 // grab information for tab access to show only reports relative to modules a user has access to
 if(isset($current_user))
 {
-	require_once('modules/MySettings/TabController.php');
 	$tabs = new TabController();
 	$tabArray = $tabs->get_user_tabs($current_user);
 }
@@ -223,7 +217,7 @@ function schedulePOPUP(id){
 
 <?php
 
-$saved_reports_seed = BeanFactory::getBean('Reports');
+$saved_reports_seed = BeanFactory::newBean('Reports');
 
 $custom_reports_arr = $saved_reports_seed->retrieve_all_by_string_fields($query_arr,$order_by);
 $shownRows = false;

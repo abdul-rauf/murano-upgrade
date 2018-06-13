@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Επισύναψη:',
     'LBL_REVENUELINEITEMS' => 'Γραμμή Στοιχείων Εσόδων',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Προεπισκόπηση Λογαριασμού',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Σημειώσεις',
 
     // Help Text

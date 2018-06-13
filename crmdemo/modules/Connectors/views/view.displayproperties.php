@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,8 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/MVC/View/views/view.list.php';
-require_once 'include/connectors/sources/SourceFactory.php';
 require_once 'include/connectors/utils/ConnectorUtils.php';
 
 class ViewDisplayProperties extends ViewList
@@ -21,13 +17,13 @@ class ViewDisplayProperties extends ViewList
  	/**
 	 * @see SugarView::process()
 	 */
-	public function process()
+    public function process($params = array())
 	{
  		$this->options['show_all'] = false;
  		$this->options['show_javascript'] = true;
  		$this->options['show_footer'] = false;
  		$this->options['show_header'] = false;
- 	    parent::process();
+        parent::process($params);
  	}
 
     /**

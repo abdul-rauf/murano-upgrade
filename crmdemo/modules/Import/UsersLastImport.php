@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -84,8 +83,9 @@ class UsersLastImport extends SugarBean
      */
     public function mark_deleted_by_user_id($user_id)
     {
-        $query = "DELETE FROM $this->table_name WHERE assigned_user_id = '$user_id'";
-        $this->db->query($query,true,"Error marking last imported records deleted: ");
+        $query = "DELETE FROM {$this->table_name} WHERE assigned_user_id = ? ";
+        $conn = $this->db->getConnection();
+        $conn->executeQuery($query, array($user_id));
     }
 
     /**

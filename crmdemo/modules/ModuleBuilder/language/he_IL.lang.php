@@ -292,7 +292,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'לחץ כדי לערוך מודול זה.',
         'moduleHelp'=> 'בחר את רכיב המודול שברצונך לערוך',
         'fieldsBtn'	=> 'ערוך את המידע שמאוחסן במודול על ידי בקרת <b>שדות</b> במודול.<br/><br/>כאן תוכל לערוך וליצור שדות מותאמים אישית.',
-        'labelsBtn' => 'לחץ על <b>שמור</b> כדי לשמור התוויות המותאמות אישית שלך.'	,
         'layoutsBtn'=> 'התאם אישית את <b>התצורות</b> של התצוגות עריכה, פירוט ורשימה.',
         'subpanelBtn'=> 'ערוך את המידע שמופיע בפאנלים משנה אלה של המודול.',
         'layoutsHelp'=> 'בחר <b>תצורה לעריכה</b>.<br/<br/>כדי לשנות את התצורה שמכילה את שדות הנתונים להזנת נתונים, לחץ על <b>ערוך תצוגה</b>.<br/><br/>כדי לשנות את התצורה שמציגה את הנתונים שהוזנו בתוך השדות בעריכת תצוגה, לחץ על <b>תצוגה מפורטת</b>.<br/><br/>כדי לשנות את העמודות שמופיעות ברשימת ברירת מחדל, לחץ על <b>תצוגת רשימה</b>.<br/><br/>כדי לשנות את התצורות הבסיסיות והמתקדמות של טופס החיפוש, לחץ על <b>חיפוש</b>.',
@@ -727,10 +726,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'אתה בטוח שברצונך למחוק את שלב המכירות שנסגרו בכשלון? מחיקת שלבי הנסגר בהצלחה או נסגר בכשלון יגרום למודול תחזית לעבוד בצורה לקויה',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Are you sure you wish to delete this relationship?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'זה יהפוך את מערכת היחסים לקבועה. האם אתה בטוח שברצונך לפרוש מערכת יחסים זו?',
 'LBL_CONFIRM_DONT_SAVE' => 'שינויים נעשו מאז השמירה האחרונה שלך, האם ברצונך לשמור?',

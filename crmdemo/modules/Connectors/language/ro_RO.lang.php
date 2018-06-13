@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -92,5 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Eroare: Nu sunt campuri de module care sa fi fost puse pe harta pentru a arata rezultate.Va rigam contactati administratorul sistemului',
     'LBL_INFO_INLINE' => 'Informaţii' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Inchide:' /*for 508 compliance fix*/,
+    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
 );
 

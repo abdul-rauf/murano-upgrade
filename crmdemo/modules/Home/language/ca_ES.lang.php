@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - La Biblioteca d´Utilitats de Interfície Gráfica facilita la implementació de característiques per un cliente amb una interfície rica.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Una clase per transferencia de correu per PHP amb característiques completes.',
   'LBL_SOURCE_JSHRINK' => 'JShrink - Un Minifier Javascript escrit en PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Permet una ràpida encriptació blowfish en ambos sentits sense necessitar la extensió PHP MCrypt.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - Un analitzador SAX per HTML i altres documents amb XML mal format',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - Extensions per Yahoo! User Interface Library, per Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - detecció JavaScript i script de incrustació del reproductor de Flash.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Benvingut al Dashboard d&#39;Ajuda de Sugar 7',
-    'LBL_HELP_RECORD' => 'Al Dashlet d&#39;ajuda es mostra informació específica sobre el mòdul que esteu veient, s&#39;hi indiquen els passos detallats per fer algunes accions al mòdul i es mostra a on heu d&#39;anar per obtenir informació més detallada i assistència tècnica. El Dashlet d&#39;ajuda roman obert perquè pugueu veure els passos que aneu executant en el mòdul.
-
-El Dashled d&#39;ajuda està disponible per a tots els mòduls de Sugar 7 i es pot "obrir" i "tancar" fent clic a la icona Ajuda al peu de pàgina de l&#39;aplicació.',
+    'LBL_HELP_RECORD_TITLE' => 'Ajuda',
+    'LBL_HELP_RECORD' => 'L&#39;ajuda mostra informació concreta sobre el mòdul que esteu veient, ofereix etapes detallades per dur a terme algunes acciones del mòdul i us marca a on anar per obtenir informació més detallada i assistència técnica.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtre',
 );

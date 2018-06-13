@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,7 +16,7 @@ echo getClassicModuleTitle('Administration', array($mod_strings['LBL_REBUILD_SCH
 if(isset($_REQUEST['perform_rebuild']) && $_REQUEST['perform_rebuild'] == 'true') {
 	
 	require_once('install/install_utils.php');
-	$focus = BeanFactory::getBean('Schedulers');
+	$focus = BeanFactory::newBean('Schedulers');
 	$focus->rebuildDefaultSchedulers();
 	
 $admin_mod_strings = return_module_language($current_language, 'Administration');	

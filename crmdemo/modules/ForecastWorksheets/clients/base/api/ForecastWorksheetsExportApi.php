@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/ExportApi.php');
 class ForecastWorksheetsExportApi extends ExportApi
 {
     /**
@@ -32,11 +31,11 @@ class ForecastWorksheetsExportApi extends ExportApi
         );
     }
 
-    public function export(ServiceBase $api, $args = array())
+    public function export(ServiceBase $api, array $args = array())
     {
         ob_start();
         // Load up a seed bean
-        $seed = BeanFactory::getBean('ForecastWorksheets');
+        $seed = BeanFactory::newBean('ForecastWorksheets');
 
         if (!$seed->ACLAccess('list')) {
             throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $seed->object_name);

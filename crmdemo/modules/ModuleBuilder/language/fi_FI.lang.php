@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Klikkaa muokataksesi tätä moduulia.',
         'moduleHelp'=> 'Valitse moduulin komponentti, jota haluat muokata.',
         'fieldsBtn'	=> 'Muuta moduulin tallentamia tietoja hallitsemalla moduulin <b>kenttiä</b>.',
-        'labelsBtn' => 'Tallenna mukautetut tunnisteet napsauttamalla <b>Save</b> (Tallenna).'	,
         'layoutsBtn'=> 'Muokkaa moduulin muokkaus-, tieto- ja listanäkymien <b>asetteluja</b>.',
         'subpanelBtn'=> 'Muokkaa, mitä tietoja näytetään tämän moduulin alapaneeleissa.',
         'layoutsHelp'=> 'Valitse <b>muokattava asettelu</b>.<br /><br />Muuttaaksesi sitä asettelua, joka sisältää tietojensyöttökenttiä, klikkaa <b>muokkausnäkymä</b>.<br /><br />Muuttaaksesi sitä asettelua, joka näyttää muokkausnäkymässä syötettyjä tietoja, klikkaa <b>tietonäkymä</b>.<br /><br />Muuttaaksesi oletuslistassa näytettäviä sarakkeita, klikkaa <b>listanäkymä</b>.<br /><br />Muuttaaksesi perus- ja edistyneiden hakulomakkeiden asetteluja, klikkaa <b>haku</b>.',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Haluatko varmasti poistaa <i>Suljettu / hävitty</i>-myyntivaiheen? Tämän vaiheen poistaminen rikkoo Ennusteet-moduulin.',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Oletko varma, että haluat poistaa tämän suhteen?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tämä tekee suhteesta pysyvän. Oletko varma, että haluat ottaa tämän suhteen käyttöön?',
 'LBL_CONFIRM_DONT_SAVE' => 'Muutoksia on tehty sitten viime tallentamisen, haluatko tallentaa?',

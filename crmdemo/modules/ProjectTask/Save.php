@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,7 +13,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 // $Id: Save.php 49350 2009-07-08 16:37:37Z eddy $
 
 
-$project = BeanFactory::getBean('ProjectTask');
+$project = BeanFactory::newBean('ProjectTask');
 if(!empty($_POST['record']))
 {
 	$project->retrieve($_POST['record']);

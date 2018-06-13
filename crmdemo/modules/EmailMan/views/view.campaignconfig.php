@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +17,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-require_once('include/MVC/View/SugarView.php');
 require_once('modules/EmailMan/Forms.php');
 
 class ViewCampaignconfig extends SugarView
@@ -96,7 +94,7 @@ class ViewCampaignconfig extends SugarView
             $this->ss->assign("no_checked", "checked='checked'");
         }
         
-        $email = BeanFactory::getBean('Emails');
+        $email = BeanFactory::newBean('Emails');
         $this->ss->assign('ROLLOVER', $email->rolloverStyle);
         
         $this->ss->assign("JAVASCRIPT",get_validate_record_js());

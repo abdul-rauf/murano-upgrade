@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => '見積済商品',
     'LBL_LIST_MANUFACTURER' => '製造元',
     'LBL_MANUFACTURERS' => '製造元',
-    'LBL_LIST_LBL_MFT_PART_NUM' => '製造元番号',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'パートナンバー',
     'LBL_LIST_QUANTITY' => '数量',
     'LBL_LIST_COST_PRICE' => '原価',
     'LBL_LIST_DISCOUNT_PRICE' => '単価',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => '値引%',
     'LBL_LIST_PRICE' => '表示価格:',
     'LBL_VENDOR_PART_NUM' => '販売元パートナンバー:',
-    'LBL_MFT_PART_NUM' => '製造元パートナンバー:',
+    'LBL_MFT_PART_NUM' => 'パートナンバー:',
     'LBL_NEXT_STEP' => '次のステップ:',
     'LBL_DISCOUNT_PRICE_DATE' => '値引日:',
     'LBL_WEIGHT' => '重量:',
@@ -162,6 +162,8 @@ $mod_strings = array(
 - 必要に応じて、追加のフィールドを展開する「更に表示」をクリックします。
 2. 新しいレコードを確定し、前のページに戻るには「保存」をクリックします。',
 
-    'LBL_MANUFACTURERS' => '製造元',
     'LBL_PRODUCT_POSITION' => '製品バンドルポジション',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => '見積済商品の見積データリスト',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (新規見積り済み商品)',
+    'LBL_DISCOUNT_PERCENT' => '% パーセント',
 );

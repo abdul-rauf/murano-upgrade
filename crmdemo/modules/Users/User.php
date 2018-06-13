@@ -13,8 +13,6 @@
 use \Sugarcrm\Sugarcrm\Security\Password\Hash;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 
-require_once 'include/SugarObjects/templates/person/Person.php';
-require_once 'modules/ACL/AclCache.php';
 
 /**
  * User is used to store customer information.
@@ -254,7 +252,7 @@ class User extends Person {
 	 */
 	public function hasPersonalEmail()
 	{
-	    $focus = BeanFactory::getBean('InboundEmail');
+	    $focus = BeanFactory::newBean('InboundEmail');
         $focus->disable_row_level_security = true;
 	    $focus->retrieve_by_string_fields(array('group_id' => $this->id));
 
@@ -283,7 +281,6 @@ class User extends Person {
 
 	function setUserPrivGuid() {
 		$privGuid = create_guid();
-		//($name, $value, $nosession=0)
 		$this->setPreference('userPrivGuid', $privGuid, 0, 'global', $this);
 	}
 
@@ -585,11 +582,9 @@ class User extends Person {
 			        unset($_SESSION['license_seats_needed']);
 		     	if ($this->portal_only != 1 && $this->is_group != 1 && (empty($this->fetched_row) || $this->fetched_row['status'] == 'Inactive' || $this->fetched_row['status'] == '') && $this->status == 'Active'){
 			        global $sugar_flavor;
-					//if((isset($sugar_flavor) && $sugar_flavor != null) && ($sugar_flavor=='CE')){
 			            $license_users = $admin->settings['license_users'];
 			            if ($license_users != '') {
 	            			global $db;
-	            			//$query = "SELECT count(id) as total from users WHERE status='Active' AND deleted=0 AND is_group=0 AND portal_only=0";
 							$result = $db->query($query, true, "Error filling in user array: ");
 							$row = $db->fetchByAssoc($result);
 				            $license_seats_needed = $row['total'] - $license_users;
@@ -597,7 +592,6 @@ class User extends Person {
 				        else
 				        	$license_seats_needed = -1;
 				        if( $license_seats_needed >= 0 ){
-				           // displayAdminError( translate('WARN_LICENSE_SEATS_MAXED', 'Administration'). ($license_seats_needed + 1) . translate('WARN_LICENSE_SEATS2', 'Administration')  );
 						    if (isset($_REQUEST['action']) && $_REQUEST['action'] != 'MassUpdate' && $_REQUEST['action'] != 'Save') {
 					            die(translate('WARN_LICENSE_SEATS_EDIT_USER', 'Administration'). ' ' . translate('WARN_LICENSE_SEATS2', 'Administration'));
 						    }
@@ -612,7 +606,6 @@ class User extends Person {
 							    die();
 						  	}
 				        }
-			        //}
 		     	}
 			}
             // End Express License Enforcement Check
@@ -663,7 +656,7 @@ class User extends Person {
             if (!$isUpdate) {
                 // If this is a new user, make sure to add them to the appriate default teams
                 if (!$this->team_exists) {
-                    $team = BeanFactory::getBean('Teams');
+                    $team = BeanFactory::newBean('Teams');
                     $team->new_user_created($this);
                 }
             } else if (empty($GLOBALS['sugar_config']['noPrivateTeamUpdate'])) {
@@ -752,7 +745,6 @@ class User extends Person {
 	}
 
     function get_summary_text() {
-        //$this->_create_proper_name_field();
         return $this->name;
 	}
 
@@ -764,13 +756,14 @@ class User extends Person {
 	 */
 	public function authenticate_user($password)
 	{
-	    $row = self::findUserPassword($this->user_name, $password);
-	    if(empty($row)) {
-	        return false;
-		} else {
-			$this->id = $row['id'];
-			return true;
-		}
+        $data = self::getUserDataByNameAndPassword($this->user_name, $password);
+
+        if ($data) {
+            $this->id = $data['id'];
+            return true;
+        } else {
+            return false;
+        }
 	}
 
     /**
@@ -804,24 +797,24 @@ class User extends Person {
 		return $ret;
 	}
 
-	function retrieve_by_email_address($email) {
-
-                $email1= strtoupper($this->db->quote($email));
-		$q=<<<EOQ
-
-		select id from users where id in ( SELECT  er.bean_id AS id FROM email_addr_bean_rel er,
-			email_addresses ea WHERE ea.id = er.email_address_id
-		    AND ea.deleted = 0 AND er.deleted = 0 AND er.bean_module = 'Users' AND email_address_caps IN ('{$email1}') )
-EOQ;
-
-
-		$res=$this->db->query($q);
-		$row=$this->db->fetchByAssoc($res);
-
-		if (!empty($row['id'])) {
-			return $this->retrieve($row['id']);
-		}
-		return '';
+    /**
+     * retrieve user by email
+     * @param $email
+     * @return User|null
+     */
+    public function retrieve_by_email_address($email)
+    {
+        $query = 'SELECT u.id FROM users u 
+                  INNER JOIN email_addr_bean_rel eabr ON eabr.bean_id = u.id
+                  INNER JOIN email_addresses ea ON ea.id = eabr.email_address_id
+                  WHERE ea.email_address_caps = ? AND eabr.bean_module = ? AND ea.deleted = 0 AND eabr.deleted = 0 ';
+        $stmt = $this->db->getConnection()->executeQuery(
+            $query,
+            [strtoupper($this->db->quote($email)), $this->module_name]
+        );
+        $id = $stmt->fetchColumn();
+        // retrieve returns User or null so keep null instead of FALSE for compatibility
+        return $id ? $this->retrieve($id) : null;
 	}
 
    function bean_implements($interface) {
@@ -860,8 +853,8 @@ EOQ;
 	    if(!$password_encoded) {
 	        $user_password = md5($user_password);
 	    }
-        $row = self::findUserPassword($this->user_name, $user_password);
-		if(empty($row) || !empty ($GLOBALS['login_error'])) {
+        $row = self::getUserDataByNameAndPassword($this->user_name, $user_password);
+        if (empty($row) || !empty($GLOBALS['login_error'])) {
 			$GLOBALS['log']->fatal('SECURITY: User authentication for '.$this->user_name.' failed - could not Load User from Database');
 			return null;
 		}
@@ -870,26 +863,6 @@ EOQ;
 		$this->loadFromRow($row);
 		$this->loadPreferences();
 
-		require_once ('modules/Versions/CheckVersions.php');
-		$invalid_versions = get_invalid_versions();
-
-		if (!empty ($invalid_versions)) {
-			if (isset ($invalid_versions['Rebuild Relationships'])) {
-				unset ($invalid_versions['Rebuild Relationships']);
-
-				// flag for pickup in DisplayWarnings.php
-				$_SESSION['rebuild_relationships'] = true;
-			}
-
-			if (isset ($invalid_versions['Rebuild Extensions'])) {
-				unset ($invalid_versions['Rebuild Extensions']);
-
-				// flag for pickup in DisplayWarnings.php
-				$_SESSION['rebuild_extensions'] = true;
-			}
-
-			$_SESSION['invalid_versions'] = $invalid_versions;
-		}
 		if ($this->status != "Inactive")
 			$this->authenticated = true;
 
@@ -954,6 +927,29 @@ EOQ;
 		return false;
 	}
 
+    /**
+     * return user data by name with password check
+     * @param $name
+     * @param $password
+     * @return NULL|array
+     */
+    public static function getUserDataByNameAndPassword($name, $password)
+    {
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+        $qb->select('*')
+            ->from('users')
+            ->where($qb->expr()->eq('user_name', $qb->createPositionalParameter($name)))
+            ->andWhere($qb->expr()->eq('status', "'Active'"))
+            ->setMaxResults(1);
+
+        $data = $qb->execute()->fetch();
+        if ($data && self::checkPasswordMD5($password, $data['user_hash'])) {
+            return $data;
+        } else {
+            return null;
+        }
+    }
+
 	/**
 	 * Sets new password and resets password expiration timers
 	 * @param string $new_password
@@ -991,13 +987,12 @@ EOQ;
 
         if ($hashBackend->needsRehash($this->user_hash)) {
             if ($newHash = $hashBackend->hash($password)) {
-                $update = sprintf(
-                    'UPDATE %s SET user_hash = %s WHERE id = %s',
+                $this->db->updateParams(
                     $this->table_name,
-                    $this->db->quoted($newHash),
-                    $this->db->quoted($this->id)
+                    $this->field_defs,
+                    ['user_hash' => $newHash],
+                    ['id' => $this->id]
                 );
-                $this->db->query($update);
                 $GLOBALS['log']->info("Rehashed password for user id '{$this->id}'");
             } else {
                 $GLOBALS['log']->warn("Error trying to rehash password for user id '{$this->id}'");
@@ -1033,7 +1028,7 @@ EOQ;
 
 		if (!$current_user->isAdminForModule('Users')) {
 			//check old password first
-			$row = self::findUserPassword($this->user_name, md5($user_password));
+            $row = self::getUserDataByNameAndPassword($this->user_name, md5($user_password));
             if (empty($row)) {
 				$GLOBALS['log']->warn("Incorrect old password for ".$this->user_name."");
 				$this->error_string = $mod_strings['ERR_PASSWORD_INCORRECT_OLD_1'].$this->user_name.$mod_strings['ERR_PASSWORD_INCORRECT_OLD_2'];
@@ -1105,11 +1100,13 @@ EOQ;
         // ~jmorais@dri
 		global $locale;
 
-        $query = "SELECT u1.first_name, u1.last_name from users u1, users u2 where u1.id=u2.reports_to_id AND u2.id=" .
-            $this->db->quoted($this->id) . " and u1.deleted=0";
-		$result = $this->db->query($query, true, "Error filling in additional detail fields");
-
-		$row = $this->db->fetchByAssoc($result);
+        $query = 'SELECT u1.first_name, u1.last_name
+            FROM users u1, users u2
+            WHERE u1.id = u2.reports_to_id
+                AND u2.id = ?
+                AND u1.deleted = 0';
+        $stmt = $this->db->getConnection()->executeQuery($query, [$this->id]);
+        $row = $stmt->fetch();
 
 		if ($row != null) {
             global $locale;
@@ -1142,7 +1139,7 @@ EOQ;
 
 	public function retrieve_user_id($user_name)
 	{
-	    $userFocus = BeanFactory::getBean('Users');
+	    $userFocus = BeanFactory::newBean('Users');
 	    $userFocus->retrieve_by_string_fields(array('user_name'=>$user_name));
 	    if ( empty($userFocus->id) )
 	        return false;
@@ -1162,28 +1159,36 @@ EOQ;
 		global $mod_strings, $current_user;
 		$verified = true;
 
+        $conn = $this->db->getConnection();
 		if (!empty ($this->id)) {
 			// Make sure the user doesn't report to themselves.
 			$reports_to_self = 0;
 			$check_user = $this->reports_to_id;
 			$already_seen_list = array ();
-			while (!empty ($check_user)) {
-				if (isset ($already_seen_list[$check_user])) {
-					// This user doesn't actually report to themselves
-					// But someone above them does.
-					$reports_to_self = 1;
-					break;
-				}
-				if ($check_user == $this->id) {
-					$reports_to_self = 1;
-					break;
-				}
-				$already_seen_list[$check_user] = 1;
-				$query = "SELECT reports_to_id FROM users WHERE id='".$this->db->quote($check_user)."'";
-				$result = $this->db->query($query, true, "Error checking for reporting-loop");
-				$row = $this->db->fetchByAssoc($result);
-				$check_user = $row['reports_to_id'];
-			}
+            if (!empty($check_user)) {
+                $query = 'SELECT reports_to_id
+                    FROM users
+                    WHERE id = ?';
+                $stmt = $conn->prepare($query);
+                while (!empty($check_user)) {
+                    if (isset($already_seen_list[$check_user])) {
+                        // This user doesn't actually report to themselves
+                        // But someone above them does.
+                        $reports_to_self = 1;
+                        break;
+                    }
+                    if ($check_user == $this->id) {
+                        $reports_to_self = 1;
+                        break;
+                    }
+                    $already_seen_list[$check_user] = 1;
+                    $stmt->bindValue(1, $check_user);
+                    $stmt->execute();
+                    $row = $stmt->fetch();
+                    $check_user = $row['reports_to_id'];
+                }
+                $stmt->closeCursor();
+            }
 
 			if ($reports_to_self == 1) {
 				$this->error_string .= $mod_strings['ERR_REPORT_LOOP'];
@@ -1196,10 +1201,16 @@ EOQ;
 			}
 		}
 
-		$query = "SELECT user_name from users where user_name='".$this->db->quote($this->user_name)."' AND deleted=0";
-		if(!empty($this->id))$query .=  " AND id<>'$this->id'";
-		$result = $this->db->query($query, true, "Error selecting possible duplicate users: ");
-		$dup_users = $this->db->fetchByAssoc($result);
+        $qb = $conn->createQueryBuilder();
+        $query = $qb->select('user_name')
+            ->from($this->table_name)
+            ->where($qb->expr()->eq('user_name', $qb->createPositionalParameter($this->user_name)))
+            ->andWhere('deleted = 0');
+        if (!empty($this->id)) {
+            $query->andWhere($qb->expr()->neq('id', $qb->createPositionalParameter($this->id)));
+        }
+        $stmt = $query->execute();
+        $dup_users = $stmt->fetch();
 
 		if (!empty($dup_users)) {
             // Due to the amount of legacy code and no clear separation between logic and presentation layers, this is
@@ -1214,7 +1225,8 @@ EOQ;
 		}
 
 		if (is_admin($current_user)) {
-		    $remaining_admins = $this->db->getOne("SELECT COUNT(*) as c from users where is_admin = 1 AND deleted=0");
+            $query = 'SELECT COUNT(*) AS c FROM users WHERE is_admin = 1 AND deleted = 0';
+            $remaining_admins = $conn->fetchColumn($query);
 
 			if (($remaining_admins <= 1) && ($this->is_admin != '1') && ($this->id == $current_user->id)) {
 				$GLOBALS['log']->debug("Number of remaining administrator accounts: {$remaining_admins}");
@@ -1296,18 +1308,17 @@ EOQ;
 
 
 	function get_my_teams($return_obj = false) {
-		$query = "SELECT DISTINCT rel.team_id, teams.name, teams.name_2, rel.implicit_assign FROM team_memberships rel RIGHT JOIN teams ON (rel.team_id = teams.id) WHERE rel.user_id = '{$this->id}' AND rel.deleted = 0 ORDER BY teams.name ASC";
-		$result = $this->db->query($query, false, "Error retrieving user ID: ");
-		$out = Array ();
 
-		if ($return_obj) {
+        $query = 'SELECT DISTINCT rel.team_id, teams.name, teams.name_2, rel.implicit_assign' .
+            ' FROM team_memberships rel RIGHT JOIN teams ON (rel.team_id = teams.id)' .
+            ' WHERE rel.user_id = ? AND rel.deleted = 0 ORDER BY teams.name ASC';
+        $stmt = $this->db->getConnection()->executeQuery($query, [$this->id]);
 
-			$x = 0;
-		}
-
-		while ($row = $this->db->fetchByAssoc($result)) {
+        $out = [];
+        $x = 0;
+        while ($row = $stmt->fetch()) {
 			if ($return_obj) {
-				$out[$x] = BeanFactory::getBean('Teams');
+				$out[$x] = BeanFactory::newBean('Teams');
 				$out[$x]->retrieve($row['team_id']);
 				$out[$x++]->implicit_assign = $row['implicit_assign'];
 			} else {
@@ -1337,7 +1348,7 @@ EOQ;
 	 */
 	function update_team_memberships($old_reports_to_id) {
 
-		$team = BeanFactory::getBean('Teams');
+		$team = BeanFactory::newBean('Teams');
 		$team->user_manager_changed($this->id, $old_reports_to_id, $this->reports_to_id);
 	}
 
@@ -1366,12 +1377,12 @@ EOQ;
 	function get_meetings() {
 		// First, get the list of IDs.
 		$query = "SELECT meeting_id as id from meetings_users where user_id='$this->id' AND deleted=0";
-		return $this->build_related_list($query, BeanFactory::getBean('Meetings'));
+		return $this->build_related_list($query, BeanFactory::newBean('Meetings'));
 	}
 	function get_calls() {
 		// First, get the list of IDs.
 		$query = "SELECT call_id as id from calls_users where user_id='$this->id' AND deleted=0";
-		return $this->build_related_list($query, BeanFactory::getBean('Calls'));
+		return $this->build_related_list($query, BeanFactory::newBean('Calls'));
 	}
 
 	/**
@@ -1465,7 +1476,7 @@ EOQ;
 
 	function getSystemDefaultNameAndEmail() {
 
-		$email = BeanFactory::getBean('Emails');
+		$email = BeanFactory::newBean('Emails');
 		$return = $email->getSystemDefaultEmail();
 		$prefAddr = $return['email'];
 		$fullName = $return['name'];
@@ -1594,10 +1605,6 @@ EOQ;
 				'&return_action='.$ret_action.
 				'&return_id='.$ret_id;
 
-    		//Generate the compose package for the quick create options.
-    		//$json = getJSONobj();
-    		//$composeOptionsLink = $json->encode( array('composeOptionsLink' => $emailLinkUrl,'id' => $focus->id) );
-			require_once('modules/Emails/EmailUI.php');
             $eUi = new EmailUI();
             $j_quickComposeOptions = $eUi->generateComposePackageForQuickCreateFromComposeUrl($emailLinkUrl, true);
 
@@ -1665,7 +1672,6 @@ EOQ;
 				'&return_id='.$ret_id;
 
 			//Generate the compose package for the quick create options.
-    		require_once('modules/Emails/EmailUI.php');
             $eUi = new EmailUI();
             $j_quickComposeOptions = $eUi->generateComposePackageForQuickCreateFromComposeUrl($emailLinkUrl, true);
     		$emailLink = "<a href='javascript:void(0);' onclick='SUGAR.quickCompose.init($j_quickComposeOptions);' class='$class'>";
@@ -1722,16 +1728,12 @@ EOQ;
 
     public static function staticGetPrivateTeamID($user_id)
 	{
-        global $db;
-
-        $query = sprintf(
-            'SELECT id FROM teams WHERE associated_user_id = %s AND deleted = 0',
-            $db->quoted($user_id)
+        $conn = DBManagerFactory::getConnection();
+        $query = $conn->getDatabasePlatform()->modifyLimitQuery(
+            'SELECT id FROM teams WHERE associated_user_id = ? AND deleted = 0',
+            1
         );
-        $query = $db->limitQuerySql($query, 0, 1);
-        $result = $db->fetchOne($query);
-
-        return $result ? $result['id'] : '';
+        return $conn->executeQuery($query, [$user_id])->fetchColumn() ?: null;
 	}
     /*
      *
@@ -1797,7 +1799,7 @@ EOQ;
             // in $GLOBALS['ACLActions'] that we need to account for.
             // TODO: In the future these should be migrated to a custom ACL strategy for those modules.
             if (in_array($module, array('Tracker', 'TrackerPerfs', 'TrackerQueries', 'TrackerSessions'))) {
-                $focus = BeanFactory::getBean($module);
+                $focus = BeanFactory::newBean($module);
                 if ($focus instanceOf SugarBean) {
                     $key = $focus->acltype;
                 }
@@ -2182,7 +2184,7 @@ EOQ;
             'message' => ''
         );
 
-        $emailTemplate                             = BeanFactory::getBean('EmailTemplates');
+        $emailTemplate                             = BeanFactory::newBean('EmailTemplates');
         $emailTemplate->disable_row_level_security = true;
 
         if ($emailTemplate->retrieve($templateId) == '') {
@@ -2309,13 +2311,15 @@ EOQ;
      */
     public static function isManager($user_id, $include_deleted=false)
     {
-        $db = DBManagerFactory::getInstance();
-        $query = 'SELECT count(id) as total FROM users
-                WHERE reports_to_id = ' .  $db->quoted($user_id) . ' AND status = ' . $db->quoted('Active');
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+        $expr = $qb->expr();
+        $where = $expr->andX()
+            ->add($expr->eq('reports_to_id', $qb->createPositionalParameter($user_id)))
+            ->add($expr->eq('status', $qb->createPositionalParameter('Active')));
         if (!$include_deleted) {
-            $query .= " AND deleted=0";
+            $where->add($expr->eq('deleted', 0));
         }
-        $count = $db->getOne($query);
+        $count = $qb->select('count(id)')->from('users')->where($where)->execute()->fetchColumn();
         return $count > 0;
     }
 
@@ -2325,44 +2329,45 @@ EOQ;
      * passed in, the return will contain the whole row vs just the key => total value pair that is returned when no
      * additional_fields are defined
      *
-     * @param String $user_id The id of the user to check
-     * @param boolean $include_deleted Boolean Value indicating whether or not to include deleted records (defaults to false)
-     * @param array $additional_fields      Additional Fields you want returned
+     * @param String $userId The id of the user to check
+     * @param boolean $includeDeleted indicating whether or not to include deleted records (defaults to false)
+     * @param array $additionalFields
      * @return array Array of reportee IDs and their leaf count
      */
-    public static function getReporteesWithLeafCount($user_id, $include_deleted = false, $additional_fields = array())
+    public static function getReporteesWithLeafCount($userId, $includeDeleted = false, $additionalFields = [])
     {
-        $db = DBManagerFactory::getInstance();
-        $deleted = ($include_deleted ? 1 : 0);
-        $returnArray = array();
+        $qb = DBManagerFactory::getConnection()->createQueryBuilder();
+        $expr = $qb->expr();
+        $qb->select(['u.id', 'sum(CASE WHEN u2.id IS NULL THEN 0 ELSE 1 END) total'])
+            ->from('users', 'u')
+            ->where($expr->eq('u.reports_to_id', $qb->createPositionalParameter($userId)))
+            ->andWhere("u.status = 'Active'")
+            ->groupBy('u.id');
 
-        $_fields = join(',u.', $additional_fields);
-        if (!empty($_fields)) {
-            $_fields = ", u." . $_fields;
+        $joinWhere = $expr->andX()
+            ->add('u.id = u2.reports_to_id')
+            ->add("u2.status = 'Active'");
+
+        if (!$includeDeleted) {
+            $qb->andWhere('u.deleted = 0');
+            $joinWhere->add('u2.deleted = 0');
         }
 
-        $query = "SELECT u.id, sum(CASE WHEN u2.id IS NULL THEN 0 ELSE 1 END) as total{$_fields} FROM users u " .
-            "LEFT JOIN users u2 " .
-            "ON u.id = u2.reports_to_id AND u2.status = 'Active' ";
-        if (!$include_deleted) {
-            $query .= "AND u2.deleted = 0 ";
-        }
-        $query .= "WHERE u.reports_to_id = {$db->quoted($user_id)} ";
-        if (!$include_deleted) {
-            $query .= "AND u.deleted = {$deleted} AND u.status = 'Active' ";
-        }
-        $query .= "GROUP BY u.id". $_fields;
+        $qb->leftJoin('u', 'users', 'u2', $joinWhere);
 
-        $result = $db->query($query);
-        while ($row = $db->fetchByAssoc($result)) {
-            if (!empty($additional_fields)) {
-                $returnArray[$row["id"]] = $row;
-            } else {
-                $returnArray[$row["id"]] = $row["total"];
-            }
+        foreach ($additionalFields as $field) {
+            $qb->addSelect('u.' . $field);
+            $qb->addGroupBy('u.' . $field);
         }
 
-        return $returnArray;
+        $stmt = $qb->execute();
+
+        $result = [];
+        while ($row = $stmt->fetch()) {
+            $result[$row["id"]] = empty($additionalFields) ? $row["total"] : $row;
+        }
+
+        return $result;
     }
 
      /**
@@ -2420,23 +2425,26 @@ EOQ;
     {
         if(User::isManager($user_id, $include_deleted))
         {
-            $query = 'SELECT reports_to_id FROM users WHERE id = ' . $GLOBALS['db']->quoted($user_id);
-            $reports_to_id = $GLOBALS['db']->getOne($query);
+            $stmt = DBManagerFactory::getConnection()->executeQuery(
+                'SELECT reports_to_id FROM users WHERE id = ?',
+                [$user_id]
+            );
+            $reports_to_id = $stmt->fetchColumn();
             return empty($reports_to_id);
         }
         return false;
     }
 
     /**
-     * Sets value from fetched row into the bean.  Special case override for Users module otherwise we incur the
+     * {@inheritDoc}
+     *
+     * Special case override for Users module otherwise we incur the
      * unnecessary check for user_preferences field for all SugarBean instances.
      *
-     * @param array $row Fetched row
      * @todo loop through vardefs instead
      * @internal runs into an issue when populating from field_defs for users - corrupts user prefs
-     *
      */
-    function populateFromRow($row, $convert = false)
+    public function populateFromRow(array $row, $convert = false)
     {
         unset($row['user_preferences']);
         return parent::populateFromRow($row, $convert);
@@ -2511,9 +2519,13 @@ EOQ;
     {
 		// need to call a direct db query
 		// if we do not the email address is removed
-		$db = DBManagerFactory::getInstance();
 		$this->last_login = TimeDate::getInstance()->nowDb();
-		$db->query("UPDATE users SET last_login = '{$this->last_login}' WHERE id = '{$this->id}'");
+        $this->db->updateParams(
+            $this->table_name,
+            $this->field_defs,
+            ['last_login' => $this->last_login],
+            ['id' => $this->id]
+        );
 		return $this->last_login;
 	}
 
@@ -2547,7 +2559,7 @@ EOQ;
         if (empty($locale)) {
             $locale = Localization::getObject();
         }
-
+        $params = [];
         $db = DBManagerFactory::getInstance();
 
         // Pre-build query for use as cache key
@@ -2557,10 +2569,11 @@ EOQ;
             $where = "1=1" . $portal_filter;
         } else {
             $query = "SELECT id, first_name, last_name, user_name FROM users ";
-            $where = "status='$status'" . $portal_filter;
+            $where = "status = ?" . $portal_filter;
+            $params[] = $status;
         }
 
-        $user = BeanFactory::getBean('Users');
+        $user = BeanFactory::newBean('Users');
         $options = array('action' => 'list');
         $user->addVisibilityFrom($query, $options);
         $query .= " WHERE $where ";
@@ -2568,10 +2581,12 @@ EOQ;
 
         if (!empty($user_name_filter)) {
             $user_name_filter = $db->quote($user_name_filter);
-            $query .= " AND user_name LIKE '$user_name_filter%' ";
+            $query .= " AND user_name LIKE ? ";
+            $params[] = $user_name_filter . '%';
         }
         if (!empty($user_id)) {
-            $query .= " OR id='{$user_id}'";
+            $query .= " OR id = ?";
+            $params[] = $user_id;
         }
 
         $orderQuery = array();
@@ -2620,11 +2635,10 @@ EOQ;
         if (empty($user_array)) {
             $temp_result = array();
 
-            $GLOBALS['log']->debug("get_user_array query: $query");
-            $result = $db->query($query, true, "Error filling in user array: ");
+            $stmt = $db->getConnection()->executeQuery($query, $params);
 
             // Get the id and the name.
-            while ($row = $db->fetchByAssoc($result)) {
+            while ($row = $stmt->fetch()) {
                 if ($use_real_name == true || showFullName()) {
                     // We will ALWAYS have both first_name and last_name (empty value if blank in db)
                     if (isset($row['last_name'])) {

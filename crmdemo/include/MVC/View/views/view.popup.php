@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -191,7 +190,6 @@ class ViewPopup extends SugarView{
      */
     protected function getPopupSmarty($bean, $module)
     {
-        require_once 'include/Popups/PopupSmarty.php';
         return new PopupSmarty($bean, $module);
     }
 }

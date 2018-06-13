@@ -1,8 +1,5 @@
 <?php
 
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -15,7 +12,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'clients/base/api/CollectionApi.php';
 
 /**
  * Module collection API
@@ -72,21 +68,20 @@ class ModuleCollectionApi extends CollectionApi
     {
         $this->requireArgs($args, array('collection_name'));
 
-        require_once 'clients/base/api/CollectionApi/CollectionDefinition/ModuleCollectionDefinition.php';
         $definition = new ModuleCollectionDefinition($args['collection_name']);
 
         return $definition;
     }
 
     /** {@inheritDoc} */
-    protected function getSourceData($api, $source, $args)
+    protected function getSourceData(ServiceBase $api, $source, array $args)
     {
         $args['module'] = $source;
         return $this->getFilterApi()->filterList($api, $args);
     }
 
     /** {@inheritDoc} */
-    protected function getSourceCount($api, $source, $args)
+    protected function getSourceCount(ServiceBase $api, $source, array $args)
     {
         $args['module'] = $source;
         return $this->getFilterApi()->filterListCount($api, $args);

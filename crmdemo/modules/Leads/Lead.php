@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,13 +10,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarObjects/templates/person/Person.php');
 
 /**
  *  Lead is used to store profile information for people who may become customers.
  */
 class Lead extends Person {
-	var $field_name_map;
 	// Stored fields
 	var $id;
 	var $date_entered;
@@ -270,7 +267,7 @@ class Lead extends Person {
 
 		if(!empty($this->campaign_id)){
 
-			$camp = BeanFactory::getBean('Campaigns');
+			$camp = BeanFactory::newBean('Campaigns');
 			$where = "campaigns.id='$this->campaign_id'";
 			$campaign_list = $camp->get_full_list("campaigns.name", $where, true);
 			if(!empty($campaign_list))
@@ -519,7 +516,6 @@ class Lead extends Person {
      */
     public function call_vardef_handler($meta_array_type=null)
     {
-        require_once('modules/Leads/LeadsVarDefHandler.php');
         $this->vardef_handler = new LeadsVarDefHandler($this, $meta_array_type);
     }
 }

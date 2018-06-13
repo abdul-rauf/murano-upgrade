@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -31,15 +30,8 @@ class BreadCrumbStack {
     * @var 
     */
    private $deleteInvisible = false;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function BreadCrumbStack($user_id, $modules = '')
-    {
-        self::__construct($user_id, $modules);
-    }
-
+   
+   
    /**
     * BreadCrumbStack
     * Constructor for BreadCrumbStack that builds list of breadcrumbs using tracker table
@@ -232,3 +224,4 @@ class BreadCrumbStack {
       return $s;
    }
 }
+

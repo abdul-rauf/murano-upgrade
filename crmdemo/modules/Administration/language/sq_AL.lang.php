@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Temat e padisponueshme',
     'LBL_TIMEZONE' => 'Ora e zonës',
     'LBL_TO'    => 'deri',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Zgjidh arsyen e gjurmimit të sistemit dhe të dhënave të përdoruesit',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatikisht',
     'LBL_UPDATE_CHECK_MANUAL'=>'manuale',
     'LBL_UPDATE_CHECK_TYPE'=>'Automatikisht Kontrolloni për Azhurnimet - Nëse kontrolloni, sistemi do të kontrollojë periodikisht për të parë nëse versionet e azhurnuar të aplikimit janë në dispozicion.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Konfigurimi.php është rindërtuar me sukses.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Paralajmërim: Konfigurimi juaj PHP duhet të ndryshohet për të lejuar dosjet të paktën 6MB për t$#39;u ngarkuar së fundi. Ju lutemi modifikoni vlerën e max_ të ngarkimit_të madhësisë së dosjes në php.ini tuaj që gjendet në:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Ju lutemi të bëni konfigurimin.php të shkrueshëm dhe provoni përsëri.',
-    'MSG_REBUILD_EXTENSIONS' => 'Ju lutemi shkoni në riparimin e ekranit dhe klikoni në rindërtimin e zgjerimeve.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Ju lutemi shkoni në riparimin e ekranit dhe klikoni në rindërtimin e lidhjeve.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Aktualisht nuk ka klientë të aktivizuar offline.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'A jeni te sigurtë që doni të disaktivizoni këtë Klientë Offline?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'A jeni te sigurtë që doni të aktivizoni këtë Klientë Offline?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'çështjet',
 'ML_MANIFEST_ISSUE'=>'Çështja me manifestin',
 'ML_CONFIG_OVERRIDE'=>'Modifikim i konfigurimit nuk është e lejuar',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Kodi - mund të përbëhet vetëm nga germa, numra dhe vija të poshtme. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Konfiguroni navigacionin e krijimit të shtyllës së shpejtë',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Selektoni se cilat module janë në dispozicion në krijimit e shtyllës së shpejtë të navigacionit',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Zgjidhni se cilat module për përdoruesit mund të krijojnë shpejtë regjistrimet duke përdorur ikonën Plus në krye të shtyllës së navigacionit. Tërheqja & lëshimi i moduleve ndërmjet Moduleve të aktivizuar dhe Moduleve jo të aktivizuara të kutisë.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Prodhuesi',
 	'ProductBundleNotes' => 'Parapagesa e produktit të shënimit',
 	'ProductBundles'   => 'Parapagesa e produktit',
-	'ProjectResources' => 'Burimi i projektit',
 
 	'Relationships' => 'Lidhja',
 	'Releases'       => 'publikimi',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'Planifikimet e punës',
 	'Shippers'       => 'Transportuesit',
 	'TaxRates'       => 'Norma tatimore',
-	'TeamHierarchies'  => 'Hierarkia e grupit',
 	'TeamMemberships'   => 'Antarsimi i grupit',
 	'TeamNotices'    => 'Shënimet grupore',
 	'TeamSetModules'   => 'Vendosja e grupit të modulit',

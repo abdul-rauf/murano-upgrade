@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,25 +10,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
-
-require_once('modules/Users/UserViewHelper.php');
-
 class UsersViewDetail extends ViewDetail {
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function UsersViewDetail($bean = null, $view_object_map = array(), Request $request = null)
-    {
-        self::__construct($bean, $view_object_map, $request);
-    }
-
-    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
-    {
-        parent::__construct($bean, $view_object_map, $request);
-    }
-
     function preDisplay() {
         global $current_user, $app_strings, $sugar_config;
 
@@ -129,21 +110,19 @@ class UsersViewDetail extends ViewDetail {
 
     }
 
-    public function getMetaDataFile() {
+    /**
+     * {@inheritDoc}
+     *
+     * @param string $type Ignored
+     */
+    public function getMetaDataFile($type = null)
+    {
         $userType = 'Regular';
         if($this->bean->is_group == 1){
             $userType = 'Group';
         }
 
-        if ( $userType != 'Regular' ) {
-            $oldType = $this->type;
-            $this->type = $oldType.'group';
-        }
-        $metadataFile = parent::getMetaDataFile();
-        if ( $userType != 'Regular' ) {
-            $this->type = $oldType;
-        }
-        return $metadataFile;
+        return parent::getMetaDataFile(($userType != 'Regular') ? $this->type . 'group' : null);
     }
 
     function display() {
@@ -174,7 +153,14 @@ class UsersViewDetail extends ViewDetail {
         if($GLOBALS['current_user']->isAdminForModule('Users')
         ) {
         $createImageURL = SugarThemeRegistry::current()->getImageURL('create-record.gif');
-        $url = ajaxLink("index.php?module=$module&action=EditView&return_module=$module&return_action=DetailView");
+            $url = 'index.php?' . http_build_query(
+                array(
+                    'module' => $module,
+                    'action' => 'EditView',
+                    'return_module' => $module,
+                    'return_action' => 'DetailView',
+                )
+            );
         $theTitle = <<<EOHTML
 &nbsp;
 <img src='{$createImageURL}' alt='{$GLOBALS['app_strings']['LNK_CREATE']}'>

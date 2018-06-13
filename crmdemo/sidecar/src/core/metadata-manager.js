@@ -898,7 +898,7 @@
                 if (_.isFunction(cb)) cb(p);
             };
 
-            app.api.getMetadata(self.getHash(options.getPublic), metadataTypes, [], {
+            app.api.getMetadata({types: metadataTypes, callbacks: {
                 success: function(metadata) {
                     var compatible;
                     options = options || {};
@@ -949,7 +949,7 @@
                     }
                 },
                 error: errorCallback
-            }, options);
+            }, public: options.getPublic, params: options.params});
         },
 
         /**
@@ -1003,7 +1003,7 @@
                         }
                     });
                 }
-            ], function(err, results) {
+            ], () => {
                 if (callback) {
                     callback.call(self);
                 }

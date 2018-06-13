@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('data/BeanFactory.php');
-require_once('include/api/SugarApi.php');
 
 class DashboardApi extends SugarApi
 {
@@ -51,7 +48,8 @@ class DashboardApi extends SugarApi
      * @param array $args           Service Call Arguments
      * @return mixed
      */
-    public function createDashboard($api, $args) {
+    public function createDashboard(ServiceBase $api, array $args)
+    {
         $args['dashboard_module'] = empty($args['module']) ? 'Home' : $args['module'];
         $bean = BeanFactory::newBean('Dashboards');
         

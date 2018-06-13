@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/MVC/View/SugarView.php');
 
 class ViewModulelistmenu extends SugarView
 {
@@ -28,7 +27,7 @@ class ViewModulelistmenu extends SugarView
  	
  	public function display()
  	{
- 	    $tracker = BeanFactory::getBean('Trackers');
+ 	    $tracker = BeanFactory::newBean('Trackers');
         $history = $tracker->get_recently_viewed($GLOBALS['current_user']->id,$this->module);
         foreach ( $history as $key => $row ) {
             $history[$key]['item_summary_short'] = getTrackerSubstring($row['item_summary']);

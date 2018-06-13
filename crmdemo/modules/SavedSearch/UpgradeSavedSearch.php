@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,14 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 class UpgradeSavedSearch {
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function UpgradeSavedSearch()
-    {
-        self::__construct();
-    }
 
     public function __construct()
     {
@@ -43,8 +34,8 @@ class UpgradeSavedSearch {
 			  	 	$field_map = $searchFields[$module];
 			  	 } else {
 				  	
-				  	$bean = BeanFactory::getBean($module);
-				  	$field_map = $bean->field_name_map;	 	 
+				  	$bean = BeanFactory::newBean($module);
+                    $field_map = $bean->field_defs;
 			  	 }
 
 			  	 //Special case for team_id field (from 4.5.x)
@@ -109,4 +100,3 @@ class UpgradeSavedSearch {
 		} //while
 	}
 }
-

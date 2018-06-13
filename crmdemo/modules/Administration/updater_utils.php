@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,8 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*********************************************************************************
 
 ********************************************************************************/
-require_once 'include/utils/encryption_utils.php';
-require_once 'include/SugarSystemInfo/SugarSystemInfo.php';
 
 /**
  * Proxy to SugarSystemInfo::getInstance()->getInfo()
@@ -197,7 +194,7 @@ function compareVersions($ver1, $ver2)
 function set_CheckUpdates_config_setting($value) {
 
 
-	$admin = BeanFactory::getBean('Administration');
+	$admin = BeanFactory::newBean('Administration');
 	$admin->saveSetting('Update','CheckUpdates',$value);
 }
 /* return's value for the 'CheckUpdates' config setting
@@ -220,7 +217,7 @@ function get_CheckUpdates_config_setting() {
 function set_last_check_version_config_setting($value) {
 
 
-	$admin = BeanFactory::getBean('Administration');
+	$admin = BeanFactory::newBean('Administration');
 	$admin->saveSetting('Update','last_check_version',$value);
 }
 function get_last_check_version_config_setting() {
@@ -239,7 +236,7 @@ function get_last_check_version_config_setting() {
 function set_last_check_date_config_setting($value) {
 
 
-	$admin = BeanFactory::getBean('Administration');
+	$admin = BeanFactory::newBean('Administration');
 	$admin->saveSetting('Update','last_check_date',$value);
 }
 function get_last_check_date_config_setting() {
@@ -312,7 +309,7 @@ function authenticateDownloadKey()
 		shouldCheckSugar()) {
 		check_now(get_sugarbeat());
 	}
-	
+
     // Validation key is required
     if (!is_array($licenseSettings) ||
         empty($licenseSettings['license_validation_key'])) {
@@ -828,8 +825,7 @@ function isAboutToExpire($expire_date, $days_before_warning = 7){
 }
 
 function hasExceededOfflineClientLicenses($num_oc_lic){
-	if (file_exists('modules/Administration/System.php')) {
-	    require_once('modules/Administration/System.php');
+    if (class_exists('System')) {
 	    $system = new System();
 	    $where = "systems.system_id != 1 AND systems.deleted = 0";
 	    $GLOBALS['log']->debug("CHECKING SYSTEMS TABLE");

@@ -237,9 +237,6 @@ $mod_strings = array (
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Id עיקרי',
-    'LBL_DNB_BAL_PREVIEW' => 'תצוגה מקדימה אנשי קשר',
-    'LBL_DNB_BAL_RSLT_CNT' => 'אנשי קשר',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: פרטי יצירת קשר',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'הערות',
 

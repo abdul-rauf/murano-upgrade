@@ -43,7 +43,7 @@ $mod_strings = array (
     'LBL_ASSISTANT_PHONE' => 'Telefono Assistente:',
     'LBL_ASSISTANT' => 'Assistente:',
     'LBL_BIRTHDATE' => 'Data di nascita:',
-    'LBL_BUSINESSCARD' => 'Biglietto da Visita',
+    'LBL_BUSINESSCARD' => 'Generale',
     'LBL_CITY' => 'Comune:',
     'LBL_CONTACT_INFORMATION' => 'Informazioni sul Contatto',
     'LBL_CONTACT_NAME' => 'Nome Contatto:',
@@ -237,9 +237,6 @@ $mod_strings = array (
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'ID Principale DNB',
-    'LBL_DNB_BAL_PREVIEW' => 'Anteprima Contatti',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Contatti',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'DNB: Informazioni Contatto',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Note',
 
@@ -261,7 +258,7 @@ $mod_strings = array (
  Per creare un {{module_name}}: 
  1. Compila i campi con i valori desiderari. 
  - I campi contrassegnati come "Obbligatorio" devono essere compilati prima del salvataggio. 
- - Clicca "Mostra più Moduli" per visualizzare ulteriori campi se necessario. 
+ - Clicca "Altri dettagli" per visualizzare ulteriori campi se necessario. 
  2. Clicca "Salva" per salvare il nuovo record e tornare alla pagina precedente.',
 
     //Marketo

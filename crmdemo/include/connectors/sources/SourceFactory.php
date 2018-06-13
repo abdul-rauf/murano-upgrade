@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/connectors/ConnectorFactory.php');
 /**
  * Provides a factory to loading a connector along with any key->value options to initialize on the
  * source.  The name of the class to be loaded, corresponds to the path on the file system. For example a source
@@ -31,7 +29,6 @@ class SourceFactory{
 		$parts = explode("/", $dir);
 		$file = $parts[count($parts)-1];
 		$pos = strrpos($file, '/');
-		require_once('include/connectors/sources/default/source.php');
 		if(ConnectorFactory::load($class, 'sources')) {
 			if (!class_exists($class)) {
             	return null;

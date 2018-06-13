@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'Hlásenia o účtoch',
   'LBL_CONTACT_REPORTS' => 'Hlásenia kontaktov',
   'LBL_OPPORTUNITY_REPORTS' => 'Hlásenia o príležitostiach',
+    'LBL_RECENTLY_MODIFIED' => 'Naposledy upravené',
 
   'LBL_CASE_REPORTS' => 'Hlásenia o prípadoch',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'Ďalších 30 dní',
   'LBL_THIS_YEAR'=>'Tento rok',
   'LBL_LIST_FORM_TITLE' =>'Hlásenia',
+  'LBL_LIST_REPORT_NAME' => 'Názov',
   'LBL_PROSPECT_REPORTS'=>'Hlásenia o cieľoch',
   'LBL_CHART_TYPE'=>'Typ grafu',
   'LBL_IS_EMPTY'=>'Je prázdny',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>Kroky pri definovaní filtrov:</b><br/><br/>1) Kliknite na modul v karte <b>Súvisiace moduly</b>, ktoré by ste chceli použiť na definovanie filtrov. Predvolene je zvolený primárny modul (vrchol v stromovom zobrazení). <br/><br/>Kliknutím na modul môžete vybrať súvisiaci modul (podradený uzol v stromovom zobrazení). Rozbaľte uzol a zobrazia sa rozširujúce moduly prepojené so súvisiacim modulom. Modul, ktorý ste vybrali, určuje, ktoré reportovateľné polia sa objavia v karte <b>Dostupné polia</b>.<br/><br/>2) Kliknite na pole v karte <b>Dostupné polia</b> a pridajte ho do filtrov. Pole môžete takisto vyhľadať jeho zadaním do textového poľa v karte.<br/><br/>Po výbere ľubovoľného počtu polí z modulu vybratého v karte <b>Súvisiace moduly</b> môžete vybrať iný modul, z ktorého môžete vybrať ľubovoľný počet polí, ktoré možno použiť ako filtre.<br/><br/>	3) Vyberte <b>AND</b> alebo <b>OR</b> a určte, či všetky filtre alebo nejaký filter budú použité pri vyhľadávaní výsledkov pre toto hlásenie.<br/><br/>4) [Optional] Kliknite na možnosť<b>Pridať skupinu filtrov</b> a vytvorte skupiny filtrov. Môžete vytvoriť ľubovoľný počet skupín filtrov a ľubovoľný počet filtrov v skupine na vytváranie vnorených filtrov.<br/><br/>5) [Optional] Vyberte možnosť Čas spustenia pre filter a povoľte používateľom použiť filter na ďalšie prispôsobenie výsledkov hlásenia počas prezerania hlásenia.",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>Kroky pri definovaní kritéria Zoskupiť podľa:</b><br/><br/>1) Kliknite na modul v karte <b>Súvisiace moduly</b>, ktorý by ste chceli použiť na zoskupenie záznamov vo vašom hlásení. Predvolene je nastavený primárny modul (vrcholový uzol v stromovom zobrazení) <br/><br/>Kliknutím na modul môžete vybrať súvisiaci modul (podradený uzol v stromovom zobrazení). Rozbaľte uzol a zobrazia sa rozširujúce moduly prepojené so súvisiacim modulom. Vybratý modul určuje, ktoré reportovateľné polia sa objavia v karte <b>Dostupné polia</b>.<br/><br/>2) Kliknite na pole <b>Dostupné polia</b> a zoskupte záznamy podľa poľa vo vašom hlásení. Pole môžete takisto vyhľadať jeho zadaním do textového poľa v karte.<br/><br/>Po výbere ľubovoľného počtu polí z modulu vybratého v karte <b>Súvisiace moduly</b> môžete vybrať iný modul, z ktorého môžete zvoliť ľubovoľný počet polí na zoskupenie záznamov. Hlásenie sa však stáva horšie čitateľným, keď zoskupujete podľa viacerých polí.<br/><br/>Poradie polí môžete zmeniť ich potiahnutím na požadovanú pozíciu. Zmena poradia ovplyvní spôsob zobrazenia výsledkov.<br/><br/> Pri maticovom hlásení môžete na zoskupenie záznamov použiť maximálne tri polia.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>Kroky pri výbere zobrazenia stĺpcov:</b><br/><br/>1) Kliknite na modul v karte <b>Súvisiace moduly</b>, ktoré by ste chceli použiť na zobrazenie údajov vo vašom hlásení. Predvolene je nastavený primárny modul (vrcholový uzol v stromovom zobrazení), ktorý ste zvolili v kroku 'Výber modulu'.<br/><br/>Kliknutím na modul môžete vybrať polia zo súvisiaceho modulu (podradený uzol v stromovom zobrazení). Moduly prepojené s modulmi prepojenými s primárnym modulom môžu byť takisto vybraté. Modul, ktorý ste vybrali, určuje, ktoré reportovateľné polia sa objavia v karte<b>Dostupné polia</b>.<br/><br/>2) Kliknite na pole v karte <b>Dostupné polia</b> a zobrazia sa údaje poľa v záznamoch vo vašom hlásení. Pole môžete takisto vyhľadávať jeho zadaním do textového poľa v karte.<br/><br/>Po výbere ľubovoľného počtu polí z modulu vybratého v karte <b>Súvisiace moduly</b> môžete zvoliť iný modul, z ktorého môžete vybrať rozširujúce polia. Môžete vybrať ľubovoľný počet polí, ale hlásenie je generované omnoho pomalšie a je neprehľadnejšie, keď pridáte viac polí, než je potrebné.<br/><br/>Poradie polí môžete zmeniť ich potiahnutím na požadovanú pozíciu. Zmenou poradia polí sa zmení aj poradie, v ktorom budú stĺpce zobrazené vo výsledku." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Kroky pri výbere zobrazených súhrnov:</b><br/><br/>1) Kliknite na modul v karte <b>Súvisiace moduly</b>, ktorý chcete použiť na súhrny vo vašom hlásení. Predvolene je zvolený primárny modul (vrcholový uzol v stromovom zobrazení).<br/><br/>Kliknutím na modul môžete vybrať súvisiaci modul (podradený uzol v stromovom zobrazení). Rozbaľte uzol a zobrazia sa rozširujúce moduly prepojené s týmto súvisiacim modulom. Vybratý modul určuje, ktoré reportovateľné polia sa zobrazia v karte <b>Dostupné polia</b>.<br/><br/>2) Kliknite na pole v karte <b>Dostupné polia</b> a vyberte súhrny pre svoje hlásenie. Pole môžete takisto vyhľadávať jeho zadaním do textového poľa v karte.<br/><br/>Po výbere ľubovoľného počtu polí z modulu vybratého v karte <b>Súvisiace moduly</b> môžete zvoliť iný modul, z ktorého môžete vybrať rozširujúce polia pre súhrny vo svojom hlásení.<br/><br/>" .	"V prípade maticových hlásení môžete vybrať viac ako jedno pole na zobrazenie viacerých hodnôt v jednej bunke v hlásení." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Kroky pri výbere zobrazených súhrnov:</b><br/><br/>1) Kliknite na modul v karte <b>Súvisiace moduly</b>, ktorý chcete použiť na súhrny vo vašom hlásení. Predvolene je zvolený primárny modul (vrcholový uzol v stromovom zobrazení).<br/><br/>Kliknutím na modul môžete vybrať súvisiaci modul (podradený uzol v stromovom zobrazení). Rozbaľte uzol a zobrazia sa rozširujúce moduly prepojené s týmto súvisiacim modulom. Vybratý modul určuje, ktoré reportovateľné polia sa zobrazia v karte <b>Dostupné polia</b>.<br/><br/>2) Kliknite na pole v karte <b>Dostupné polia</b> a vyberte súhrny pre svoje hlásenie. Pole môžete takisto vyhľadávať jeho zadaním do textového poľa v karte.<br/><br/>Po výbere ľubovoľného počtu polí z modulu vybratého v karte <b>Súvisiace moduly</b> môžete zvoliť iný modul, z ktorého môžete vybrať rozširujúce polia pre súhrny vo svojom hlásení.<br/><br/> V prípade maticových hlásení môžete vybrať viac ako jedno pole na zobrazenie viacerých hodnôt v jednej bunke v hlásení." ,
 
 	'LBL_ALT_SHOW' => 'Zobraziť',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'Toto hlásenie obsahuje údaje v nasledujúcom poradí stĺpcov:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'Hore' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'Informácie',
     'LBL_REPORT_GRAND_TOTAL' => "Celkový súčet",
+    'LBL_EDIT_REPORT_BUTTON' => 'Upraviť prehľad',
 
     'LBL_REPORTS_TO' => 'Nadriadený',
     'LBL_LESS_THAN_EQUAL' => 'Menej ako rovná sa',

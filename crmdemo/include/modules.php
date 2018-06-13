@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -155,11 +154,10 @@ $beanList['Expressions']  = 'Expression';
 $beanList['Contracts']  = 'Contract';
 $beanList['ContractTypes']  = 'ContractType';
 $beanList['Holidays'] = 'Holiday';
-$beanList['ProjectResources'] = 'ProjectResource';
 $beanList['System'] = 'System';
+$beanList['SessionManager'] = 'SessionManager';
 
 $beanList['Empty'] = 'EmptyBean';
-$beanList['TeamHierarchy'] = 'TeamHierarchy';
 $beanList['UpgradeHistory'] = 'UpgradeHistory';
 
 // this list defines all of the files that contain the SugarBean class definitions from $beanList
@@ -276,7 +274,6 @@ $beanFiles['Expression']  = 'modules/Expressions/Expression.php';
 $beanFiles['System']      = 'modules/Administration/System.php';
 $beanFiles['SessionManager']      = 'modules/Administration/SessionManager.php';
 $beanFiles['ContractType']  = 'modules/ContractTypes/ContractType.php';
-$beanFiles['ProjectResource'] = 'modules/ProjectResources/ProjectResource.php';
 $beanFiles['Holiday'] = 'modules/Holidays/Holiday.php';
 
 $beanFiles['Configurator']          = 'modules/Configurator/Configurator.php';
@@ -351,7 +348,6 @@ $modInvisList[] = 'Connectors';
 $modInvisList[] = 'Styleguide';
 
 $report_include_modules = array();
-$report_include_modules['Currencies']='Currency';
 //add prospects
 $report_include_modules['Prospects']='Prospect';
 $report_include_modules['DocumentRevisions'] = 'DocumentRevision';
@@ -435,7 +431,6 @@ $modInvisList[] = 'Filters';
 
 $beanList['Dashboards'] = 'Dashboard';
 $beanFiles['Dashboard'] = 'modules/Dashboards/Dashboard.php';
-$modInvisList[] = 'Dashboards';
 
 // Make Tags a visible module since all should have at least access to it
 $moduleList[] = 'Tags';
@@ -451,9 +446,10 @@ $modInvisList[] = 'Categories';
 //No future module should need an entry here.
 $objectList = array();
 $objectList['Cases'] =  'Case';
-$objectList['Groups'] =  'User';
+$objectList['Groups'] =  'Group';
 $objectList['Users'] =  'User';
 $objectList['ActivityStream/Activities'] = 'Activities';
+$objectList['ActivityStream/Comments'] = 'Comments';
 $objectList['TrackerSessions'] =  'tracker_sessions';
 $objectList['TrackerPerfs'] =  'tracker_perf';
 $objectList['TrackerQueries'] =  'tracker_queries';
@@ -507,18 +503,12 @@ $bwcModules = array(
     'OptimisticLock',
     'OutboundEmailConfiguration',
     'PdfManager',
-    'ProductBundleNotes',
-    'ProductBundles',
-    'ProductTypes',
     'Project',
-    'ProjectResources',
     'ProjectTask',
     'Quotas',
-    'Quotes',
     'QueryBuilder',
     'Relationships',
     'Releases',
-    'Reports',
     'Roles',
     'SavedSearch',
     'Schedulers',

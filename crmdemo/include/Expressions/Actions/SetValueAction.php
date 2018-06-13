@@ -9,8 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'include/Expressions/Actions/AbstractAction.php';
-require_once 'include/Expressions/Expression/Date/DateExpression.php';
 
 /**
  * Class SetValueAction
@@ -39,14 +37,6 @@ class SetValueAction extends AbstractAction
      * @var null|string
      */
     protected $errorValue = null;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SetValueAction($params)
-    {
-        self::__construct($params);
-    }
 
     /**
      * Constructor
@@ -126,7 +116,10 @@ JS;
      */
     public function fire(&$target)
     {
-        set_error_handler('handleExpressionError', E_ERROR);
+        set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+            $GLOBALS['log']->fatal("Error evaluating expression: {$errstr}\nLine {$errline} of file {$errfile}");
+        }, E_ERROR);
+
         try {
             $result = Parser::evaluate($this->expression, $target)->evaluate();
         } catch (Exception $e) {

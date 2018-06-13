@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -764,7 +763,6 @@ Se o seu ambiente de sistema o impede de comunicar com o servidor da validação
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Temas Indisponíveis',
     'LBL_TIMEZONE' => 'Fuso Horário',
     'LBL_TO'    => 'para',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Selecione qual o sistema e os dados de utilizador a acompanhar',
     'LBL_UPDATE_CHECK_AUTO'=>'Automaticamente',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manualmente',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Verificar Automaticamente Por Actualizações</B> - Se verificado, o sistema irá periodicamente verificar se estão disponíveis versões actualizadas da aplicação.',
@@ -931,8 +929,6 @@ Se o seu ambiente de sistema o impede de comunicar com o servidor da validação
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'O ficheiro config.php foi reconstruido com sucesso.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Aviso: A sua configuração PHP deve ser modificada para permitir o carregamento de ficheiros com pelo menos 6MB. Por favor modifique o valor upload_max_filesize no seu php.ini localizado em:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Por favor torne o config.php editável e tente de novo.',
-    'MSG_REBUILD_EXTENSIONS' => 'Por favor aceda ao ecrã <a href="index.php?module=Administration&action=Upgrade">Reparar</a> e clique em Reconstruir Extensões.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Por favor aceda ao ecrã <a href="index.php?module=Administration&action=Upgrade">Reparar</a> e clique em Reconstruir Relacionamentos.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Não existem atualmente Clientes Offline habilitados.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Tem a certeza que pretende desactivar este Cliente Offline?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Tem a certeza que pretende activar este Cliente Offline?',
@@ -1042,7 +1038,7 @@ Se o seu ambiente de sistema o impede de comunicar com o servidor da validação
 'ML_ISSUES'=>'Problemas',
 'ML_MANIFEST_ISSUE'=>'Problema com o manifesto',
 'ML_CONFIG_OVERRIDE'=>'Modificações à configuração não é permitido.',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Chave - só pode conter letras, números e linhas. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Configurar barra de atalhos',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Selecionar que módulos estão disponíveis na criação rápida da barra de navegação',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Escolha que módulos que os utilizadores possam usar para criar registos rapidamente usando o ícone  Mais na barra de navegação de topo. Arraste e largue os módulos entre as caixas de Módulos Habilitados e Desabilitados.',
@@ -1090,7 +1086,6 @@ Se o seu ambiente de sistema o impede de comunicar com o servidor da validação
 	'Manufacturers'  => 'Fabricante',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'Relacionamento',
 	'Releases'       => 'Lançamento',
@@ -1100,7 +1095,6 @@ Se o seu ambiente de sistema o impede de comunicar com o servidor da validação
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'Fornecedor',
 	'TaxRates'       => 'TaxRate',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

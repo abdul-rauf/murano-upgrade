@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('vendor/Smarty/Smarty.class.php');
 
 if(!defined('SUGAR_SMARTY_DIR'))
 {
@@ -25,15 +23,6 @@ if(!defined('SUGAR_SMARTY_DIR'))
 class Sugar_Smarty extends Smarty
 {
     protected static $_plugins_dir;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Sugar_Smarty()
-    {
-        self::__construct();
-    }
-
     public function __construct()
 	{
 		if(!file_exists(SUGAR_SMARTY_DIR))mkdir_recursive(SUGAR_SMARTY_DIR, true);

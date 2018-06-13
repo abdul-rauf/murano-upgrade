@@ -300,7 +300,6 @@ If Opportunities is included, Accounts must either be required or removed from t
         'moduleBtn'	=> 'Щракнете тук, за да редактирате този модул.',
         'moduleHelp'=> 'Изберете компонента на модула, който желаете да редактирате',
         'fieldsBtn'	=> 'Редактирайте съхраняваната информация в модула чрез контролиране на <b>Полетата</b> в модула.<br/><br/>Тук можете да редактирате и създадете потребителски полета.',
-        'labelsBtn' => 'Щракнете върху <b>Запиши</b>, за да запишете вашите потребителски етикети.'	,
         'layoutsBtn'=> 'Персонализиране на <b>Подредбите</b> на изгледите Редактиране, Подробности и Търсене.',
         'subpanelBtn'=> 'Редактирайте показваната в модулите на панелите със свързани записи информация.',
         'layoutsHelp'=> 'Изберете <b>Подредба за редактиране</b>.<br/<br/>За да промените подредбата, която съдържа полета за данни за въвеждане на данни, щракнете върху <b>Форма за редактиране</b>.<br/><br/>За да промените подредбата, която показва данните, въведени в полетата във Формата за редактиране, щракнете върху <b>Форма за визуализиране на детайли</b>.<br/><br/>За да промените колоните, които се появяват в списъка по подразбиране, щракнете върху <b>Списък на записите</b>.<br/><br/>За да промените подредбите на формите за основно и разширено търсене, щракнете върху <b>Търсене</b>.',
@@ -735,10 +734,10 @@ If Opportunities is included, Accounts must either be required or removed from t
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Сигурни ли сте, че искате да изтриете етапa на преговори Загубени? Изтриването на този етап ще наруши функционалността на модул Прогнози',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Сигурни ли сте, че искате да изтриете връзката с другия модул?<br>Note: This operation may not complete for several minutes.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Връзката с модула ще бъде записана в базата. Сигурни ли сте, че искате да съхраните тази връзка?',
 'LBL_CONFIRM_DONT_SAVE' => 'Има налични промени от момента на последното Ви запазване. Искате ли да запазите?',

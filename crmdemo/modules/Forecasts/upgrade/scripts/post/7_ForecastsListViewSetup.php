@@ -33,9 +33,6 @@ class SugarUpgradeForecastsListViewSetup extends UpgradeScript
     public function run()
     {
         // setup the forecast columns based on the config
-        require_once('include/api/RestService.php');
-        require_once('modules/Forecasts/clients/base/api/ForecastsConfigApi.php');
-        require_once('modules/Forecasts/ForecastsDefaults.php');
 
         $this->api = new RestService();
         $this->api->user = $this->context['admin'];
@@ -43,7 +40,7 @@ class SugarUpgradeForecastsListViewSetup extends UpgradeScript
         $this->client = new ForecastsConfigApi();
 
         /* @var $admin Administration */
-        $admin = BeanFactory::getBean('Administration');
+        $admin = BeanFactory::newBean('Administration');
         $config = $admin->getConfigForModule('Forecasts');
 
         // Check if we're upgrading from 6 to 7 and if-so run the column schema converter.

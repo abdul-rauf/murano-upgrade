@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,8 +13,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
-require_once('include/ListView/ListViewData.php');
-require_once('include/MassUpdate.php');
 
 class ListViewDisplay {
     static $listViewCounter = 0;
@@ -44,14 +41,6 @@ class ListViewDisplay {
      * @var Request
      */
     protected $request;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ListViewDisplay(Request $request = null)
-    {
-        self::__construct($request);
-    }
 
 	/**
 	 * Constructor
@@ -103,7 +92,16 @@ class ListViewDisplay {
         $params['handleMassupdate'] = true by default, have massupdate.php handle massupdates?
 	 * @param string:'id' $id_field
 	 */
-	function setup($seed, $file, $where, $params = array(), $offset = 0, $limit = -1,  $filter_fields = array(), $id_field = 'id') {
+    public function setup(
+        $seed,
+        $file = '',
+        $where = '',
+        $params = array(),
+        $offset = 0,
+        $limit = -1,
+        $filter_fields = array(),
+        $id_field = 'id'
+    ) {
         $this->should_process = true;
         if(isset($seed->module_dir) && !$this->shouldProcess($seed->module_dir)){
         		return false;

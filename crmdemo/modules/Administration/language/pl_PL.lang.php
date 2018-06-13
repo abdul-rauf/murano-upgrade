@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -765,7 +764,6 @@ Jeżeli występują problemy z automatyczną weryfikacją, sprawdź konfiguracj�
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Nieodstępne motywy',
     'LBL_TIMEZONE' => 'Strefa czasowa',
     'LBL_TO'    => 'do',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Wybierz, który system i które dane użytkownika mają być śledzone',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatycznie',
     'LBL_UPDATE_CHECK_MANUAL'=>'Ręcznie',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Automatycznie sprawdzaj dostępność aktualizacji</B> — Jeżeli ta opcja jest zaznaczona, system będzie okresowo sprawdzał, czy są dostępne zaktualizowane wersje aplikacji.',
@@ -932,8 +930,6 @@ Jeżeli występują problemy z automatyczną weryfikacją, sprawdź konfiguracj�
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Plik config.php został pomyślnie ponownie skonfigurowany.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Uwaga: Twój plik konfiguracyjny PHP musi zostać zmieniony tak, aby było możliwe przesyłanie plików o wielkości co najmniej 6 MB.  Zmodyfikuj wartość zmiennej upload_max_filesize w pliku php.ini znajdującym się w:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Zmień plik config.php na zapisywalny i spróbuj ponownie.',
-    'MSG_REBUILD_EXTENSIONS' => 'Przejdź do <a href="index.php?module=Administration&action=Upgrade">Napraw</a>, a następnie kliknij opcję Skonfiguruj ponownie rozszerzenia.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Przejdź do <a href="index.php?module=Administration&action=Upgrade">Napraw</a>, a następnie kliknij opcję Skonfiguruj ponownie relacje.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Obecnie nie ma włączonych Klientów offline.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Czy na pewno chcesz wyłączyć tego Klienta offline?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Czy na pewno chcesz włączyć tego Klienta offline?',
@@ -1043,7 +1039,7 @@ Jeżeli występują problemy z automatyczną weryfikacją, sprawdź konfiguracj�
 'ML_ISSUES'=>'Zgłoszenia',
 'ML_MANIFEST_ISSUE'=>'Problem związany z manifestem',
 'ML_CONFIG_OVERRIDE'=>'Modyfikacja konfiguracji jest niedozwolona',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Klucz — może składać się tylko z liter, cyfr i znaków podkreślenia. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Konfigurowanie opcji Szybkie tworzenie w pasku nawigacji',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Wybierz moduły, które będą dostępne poprzez szybkie tworzenie w pasku nawigacji',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Wybierz, które moduły dla określonych użytkowników będą mieć dostępną możliwość szybkiego tworzenia rekordów za pomocą ikonki Plus w górnym pasku nawigacyjnym. Przeciągaj i upuszczaj moduły pomiędzy okienkami włączonych i wyłączonych modułów.',
@@ -1091,7 +1087,6 @@ Jeżeli występują problemy z automatyczną weryfikacją, sprawdź konfiguracj�
 	'Manufacturers'  => 'Producent',
 	'ProductBundleNotes' => 'Uwaga do pakietu produktów',
 	'ProductBundles'   => 'Pakiet produktów',
-	'ProjectResources' => 'Zasób projektu',
 
 	'Relationships' => 'Relacja',
 	'Releases'       => 'Wydanie',
@@ -1101,7 +1096,6 @@ Jeżeli występują problemy z automatyczną weryfikacją, sprawdź konfiguracj�
 	'SchedulersJobs'  => 'Zadanie harmonogramu',
 	'Shippers'       => 'Spedytor',
 	'TaxRates'       => 'Stawka podatku',
-	'TeamHierarchies'  => 'Hierarchia w zespole',
 	'TeamMemberships'   => 'Przynależność do zespołu',
 	'TeamNotices'    => 'Powiadomienie zespołu',
 	'TeamSetModules'   => 'Moduł zestawu zespołów',

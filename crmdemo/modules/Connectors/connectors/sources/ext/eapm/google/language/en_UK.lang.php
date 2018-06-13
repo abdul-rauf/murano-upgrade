@@ -15,8 +15,8 @@ $connector_strings = array(
 Obtain a API Key and Secret from Google by registering your Sugar instance as a new application.
 <br/> <br>Steps to register your instance:
 <br/><br/> <ol>
-<li>Go to the Google Developers site: <a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<li>Go to the Google Developers site: <a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Sign In using the Google account under which you would like to register the application.</li>
 <li>Create a new project</li>

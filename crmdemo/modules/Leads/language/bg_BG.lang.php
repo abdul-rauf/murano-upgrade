@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Редактирай' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Идентификатор',
-    'LBL_DNB_BAL_PREVIEW' => 'Преглед на потенциалните клиенти',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Потенциални клиенти',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: Информация за потенциалния клиент',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Възможности',
 

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library – UI Library Utilities usnadňuje implementaci bohatých funkcí klienta.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer – Plnohodnotná třída pro přenos e-mailů pro PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - A Javascriptový minimalizátor napsaný v PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish – Umožňuje rychlé obousměrné šifrování blowfish bez potřeby rozšíření PHP MCrypt.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 – SAX analýza pro HTML a jiné obtížně formátované dokumenty XML',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library – Rozšíření pro Yahoo! User Interface Library od Jacka Slocuma',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject – Detekce přehrávače Javascript Flash Player a vložený skript.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Vítejte v nápovědě Sugar 7',
-    'LBL_HELP_RECORD' => 'Prvek nástěnky Nápověda zobrazuje specifické informace o modulu, na který koukáte, poskytuje detailní kroky k provedení akcí v modulu a směřuje vás, kam jít pro komplexní informace a podporu. Prvek Nápověda zůstává otevřený, takže můžete sledovat jednotlivé kroky tak, jak je provádíte v modulu.
-
-Nástěnka nápověda je dostupná pro všechny moduly Sugar 7 a může být otevřena nebo zavřena kliknutím na ikonu Nápověda v zápatí aplikace.',
+    'LBL_HELP_RECORD_TITLE' => 'Nápověda',
+    'LBL_HELP_RECORD' => 'Nápověda zobrazuje konkrétní informace o modulu, který si právě prohlížíte, poskytuje podrobné kroky k provádění některých akcí v modulu a ukazuje, kam přejít, pokud si přejete získat ucelenější informace a podporu.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtr',
 );

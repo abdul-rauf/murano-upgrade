@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -27,15 +26,15 @@ $focus = 0;
 if(isset($_REQUEST['return_module'])){
     if($_REQUEST['return_module'] == 'Contacts'){
 
-        $focus = BeanFactory::getBean('Contacts');
+        $focus = BeanFactory::newBean('Contacts');
     }
     if($_REQUEST['return_module'] == 'Leads'){
 
-        $focus = BeanFactory::getBean('Leads');
+        $focus = BeanFactory::newBean('Leads');
     }
     if($_REQUEST['return_module'] == 'Prospects'){
 
-        $focus = BeanFactory::getBean('Prospects');
+        $focus = BeanFactory::newBean('Prospects');
     }
 }
 
@@ -121,7 +120,6 @@ $this->ss->display('modules/Campaigns/Subscriptions.tpl');
  *This function constructs Drag and Drop multiselect box of subscriptions for display in manage subscription form
 */
 function constructDDSubscriptionList($focus,$classname=''){
-    require_once("include/templates/TemplateDragDropChooser.php");
     global $mod_strings;
     $unsubs_arr = '';
     $subs_arr =  '';
@@ -157,7 +155,7 @@ function printOriginalValues($focus){
     global $app_strings;
     $unsubs_arr = '';
     $subs_arr =  '';
-    $return_arr =  '';
+    $return_arr =  [];
 
      // Lets start by creating the subscription and unsubscription arrays
         $subscription_arrays = get_subscription_lists($focus);

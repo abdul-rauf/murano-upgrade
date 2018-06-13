@@ -11,24 +11,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/resource/Observers/ResourceObserver.php');
 
 class SoapResourceObserver extends ResourceObserver {
 
 private $soapServer;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SoapResourceObserver($module)
-    {
-        self::__construct($module);
-    }
-
-    public function __construct($module)
-    {
-        parent::__construct($module);
-    }
 
 /**
  * set_soap_server

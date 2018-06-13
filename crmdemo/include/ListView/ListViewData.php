@@ -13,7 +13,6 @@
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
-require_once 'include/EditView/SugarVCR.php';
 
 /**
  * Data set for ListView
@@ -37,14 +36,6 @@ class ListViewData {
      * otherwise leave it empty and it will use SugarBean::create_list_count_query
      */
     var $count_query = '';
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ListViewData(Request $request = null)
-    {
-        self::__construct($request);
-    }
 
 	/**
 	 * Constructor sets the limitName to look up the limit in $sugar_config
@@ -301,7 +292,6 @@ class ListViewData {
             $params['favorites'] = !empty($_REQUEST['my_favorites'])?2:1;
 		}
         //Make sure all dependent fields have thier required data
-        require_once("include/Expressions/DependencyManager.php");
         $triggers = DependencyManager::getDependentFieldTriggerFields($filter_fields, $this->seed->field_defs);
         foreach($triggers as $field)
         {

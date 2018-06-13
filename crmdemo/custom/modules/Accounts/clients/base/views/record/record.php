@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 10:47:53
+// created: 2018-06-13 14:44:00
 $viewdefs['Accounts']['base']['view']['record'] = array (
   'buttons' => 
   array (
@@ -141,10 +141,6 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         1 => 
         array (
           'name' => 'name',
-          'events' => 
-          array (
-            'keyup' => 'update:account',
-          ),
         ),
         2 => 
         array (

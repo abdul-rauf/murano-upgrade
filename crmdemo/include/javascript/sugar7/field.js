@@ -355,6 +355,19 @@
             /**
              * @inheritdoc
              *
+             * Set the viewname for readonly fields to be detail
+             * @override
+             */
+            setViewName: function(view) {
+                if (this.def.readonly) {
+                    view = 'detail';
+                }
+                this.options.viewName = view;
+            },
+
+            /**
+             * @inheritdoc
+             *
              * Override setMode to remove any stale view action CSS classes.
              * @override
              */
@@ -427,23 +440,6 @@
 
                 $tooltip = $(this.exclamationMarkTemplate(errorMessages));
                 $ftag.after($tooltip);
-            },
-
-            /**
-             * Create error tooltips.
-             * @param {jQuery} $element
-             */
-            createErrorTooltips: function($element) {
-                app.logger.warn('View.Field#createErrorTooltips: This method has been' +
-                    ' deprecated since 7.8.0 and will be removed in 7.9.0.');
-            },
-
-            /**
-             * Destroy all error tooltips.
-             */
-            destroyAllErrorTooltips: function() {
-                app.logger.warn('View.Field#destroyAllErrorTooltips: This method has been' +
-                    ' deprecated since 7.8.0 and will be removed in 7.9.0.');
             },
 
             /**

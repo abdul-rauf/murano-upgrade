@@ -12,19 +12,19 @@
 
 $mod_strings = array(
     'LBL_CAMPAIGN_PRODUCT' => 'Rreshti i kuotuar i kampanjës',
-    'LBL_MODULE_NAME' => 'Artikujt e rreshtave të cituar',
-    'LBL_MODULE_NAME_SINGULAR' => 'Artikujt e rreshtave të cituar',
+    'LBL_MODULE_NAME' => 'Artikujt e rreshtave të kuotuar',
+    'LBL_MODULE_NAME_SINGULAR' => 'Artikujt e rreshtave të kuotuar',
     'LBL_MODULE_TITLE' => 'Artikujt e rreshtave të cituar: Ballina',
     'LBL_SEARCH_FORM_TITLE' => 'Kërkimi i produktit',
     'LBL_LIST_FORM_TITLE' => 'Lista e produkteve',
     'LBL_NEW_FORM_TITLE' => 'Krijo produkt',
-    'LBL_PRODUCT' => 'Artikujt e rreshtave të cituar:',
+    'LBL_PRODUCT' => 'Artikujt e rreshtave të kuotuar:',
     'LBL_RELATED_PRODUCTS' => 'Rreshti i të ardhurave të lidhura',
     'LBL_LEAD_SOURCE' => 'Burimi i udhëheqjes',
-    'LBL_LIST_NAME' => 'Artikujt e rreshtave të cituar:',
+    'LBL_LIST_NAME' => 'Artikujt e rreshtave të kuotuar',
     'LBL_LIST_MANUFACTURER' => 'Prodhuesi',
     'LBL_MANUFACTURERS' => 'Prodhuesit',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'MFT numri',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Numri i pjesës',
     'LBL_LIST_QUANTITY' => 'Sasia',
     'LBL_LIST_COST_PRICE' => 'shpenzimi',
     'LBL_LIST_DISCOUNT_PRICE' => 'çmimi',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Lirimi në %',
     'LBL_LIST_PRICE' => 'Lista e çmimeve',
     'LBL_VENDOR_PART_NUM' => 'Numri i pjesës së shitësit',
-    'LBL_MFT_PART_NUM' => 'Numri i pjesës së MFT',
+    'LBL_MFT_PART_NUM' => 'Numri i pjesës:',
     'LBL_NEXT_STEP' => 'Hapi vijues:',
     'LBL_DISCOUNT_PRICE_DATE' => 'data e çmimit në lirim',
     'LBL_WEIGHT' => 'pesha',
@@ -126,7 +126,7 @@ $mod_strings = array(
     'LBL_DISCOUNT_AMOUNT' => 'Vlera e zbritur',
     'LBL_EXT_PRICE' => 'Çmimi i pritur',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Emri i simbloit të monedhës',
-    'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Artikujt e rreshtave të cituar:',
+    'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Artikujt e rreshtave të kuotuar',
     'LNK_IMPORT_PRODUCTS' => 'Produkte të rëndësishme',
     'LBL_EDITLAYOUT' => 'Ndrysho formatin' /*for 508 compliance fix*/,
     //For export labels
@@ -162,6 +162,8 @@ Për të krijuar një {{module_name}}:
  - Kliko "Trego më shumë" për të paraqitur fushat shtesë nëse është e nevojshme. 
 2. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
 
-    'LBL_MANUFACTURERS' => 'Prodhuesit',
     'LBL_PRODUCT_POSITION' => 'Pozicioni i grupit të produktit',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista e të dhënave të citimit të artikujve në rreshtin e kuotuar',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Artikull i ri në rreshtin e kuotuar)',
+    'LBL_DISCOUNT_PERCENT' => '% për qind',
 );

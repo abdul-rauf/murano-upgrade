@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -41,7 +40,7 @@ $mod_strings = array (
   'LBL_LIST_COST_PRICE' => 'Költség:',
   'LBL_LIST_DISCOUNT_PRICE' => 'Egységár:',
   'LBL_LIST_FORM_TITLE' => 'Termékkatalógus lista',
-  'LBL_LIST_LBL_MFT_PART_NUM' => 'Gyárt.szám',
+  'LBL_LIST_LBL_MFT_PART_NUM' => 'Cikkszám',
   'LBL_LIST_LIST_PRICE' => 'Lista',
   'LBL_LIST_MANUFACTURER' => 'Gyártó',
   'LBL_LIST_MANUFACTURER_ID' => 'Gyártó azonosítója:',
@@ -54,7 +53,7 @@ $mod_strings = array (
   'LBL_LIST_USDOLLAR' => 'Listaár (USD):',
   'LBL_MANUFACTURER_NAME'=>'Gyártó neve:',
   'LBL_MANUFACTURER' => 'Gyártó:',
-  'LBL_MFT_PART_NUM' => 'Gyártó cikkszáma:',
+  'LBL_MFT_PART_NUM' => 'Cikkszám:',
   'LBL_MODULE_NAME' => 'Termékkatalógus',
   'LBL_MODULE_NAME_SINGULAR' => 'Termékkatalógus',
   'LBL_MODULE_ID' => 'Terméksablon',

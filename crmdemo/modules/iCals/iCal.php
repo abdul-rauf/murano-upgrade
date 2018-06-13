@@ -11,8 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Calendar/Calendar.php');
-require_once('modules/vCals/vCal.php');
 
 /**
 * Class for constructing the iCal response string for the current user.
@@ -230,7 +228,7 @@ class iCal extends vCal {
                     $ical_array[] = array("LOCATION", $event->location);
                     $eventUsers = $event->get_meeting_users();
                     $query = "SELECT contact_id as id from meetings_contacts where meeting_id='$event->id' AND deleted=0";
-                    $eventContacts = $event->build_related_list($query, BeanFactory::getBean('Contacts'));
+                    $eventContacts = $event->build_related_list($query, BeanFactory::newBean('Contacts'));
                     $eventAttendees = array_merge($eventUsers, $eventContacts);
                     if (is_array($eventAttendees))
                     {
@@ -310,7 +308,6 @@ class iCal extends vCal {
 
         $str = vCal::create_ical_string_from_array($ical_array);
 
-        require_once('include/TimeDate.php');
         $timedate = new TimeDate();
         $today = gmdate("Y-m-d");
         $today = $timedate->handle_offset($today, $timedate->dbDayFormat, false);
@@ -319,7 +316,7 @@ class iCal extends vCal {
         $where = "project_task.assigned_user_id='{$user_bean->id}' ".
             "AND (project_task.status IS NULL OR (project_task.status!='Deferred')) ".
             "AND (project_task.date_start IS NULL OR " . CalendarActivity::get_occurs_within_where_clause('project_task', '', $start_date_time, $end_date_time, 'date_start', 'month') . ")";
-        $seedProjectTask = BeanFactory::getBean('ProjectTask');
+        $seedProjectTask = BeanFactory::newBean('ProjectTask');
         $projectTaskList = $seedProjectTask->get_full_list("", $where);
         if (is_array($projectTaskList))
         {
@@ -333,7 +330,7 @@ class iCal extends vCal {
             $where = "tasks.assigned_user_id='{$user_bean->id}' ".
                 "AND (tasks.status IS NULL OR (tasks.status!='Deferred')) ".
                 "AND (tasks.date_start IS NULL OR " . CalendarActivity::get_occurs_within_where_clause('tasks', '', $start_date_time, $end_date_time, 'date_start', 'month') . ")";
-            $seedTask = BeanFactory::getBean('Tasks');
+            $seedTask = BeanFactory::newBean('Tasks');
             $taskList = $seedTask->get_full_list("", $where);
             if (is_array($taskList))
             {

@@ -1,8 +1,6 @@
 <?php
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\ComponentName;
 
-if (! defined ( 'sugarEntry' ) || ! sugarEntry)
-    die ( 'Not A Valid Entry Point' ) ;
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,7 +13,6 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
  */
 
 
-require_once ('modules/ModuleBuilder/views/view.listview.php') ;
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
 class ViewPopupview extends ViewListView
@@ -49,12 +46,15 @@ class ViewPopupview extends ViewListView
     	   );
     }
 
-    /*
+    /**
+     * {@inheritDoc}
      * Pseudo-constructor to enable subclasses to call a parent's constructor without knowing the parent in PHP4
+     *
+     * @param SugarBean $bean            Ignored
+     * @param array     $view_object_map Ignored
      */
-    function init()
+    public function init($bean = null, $view_object_map = array())
     {
-
     }
 
     function preDisplay()
@@ -65,7 +65,6 @@ class ViewPopupview extends ViewListView
         $preview = false
         )
     {
-        require_once 'modules/ModuleBuilder/parsers/ParserFactory.php' ;
         $parser = ParserFactory::getParser ( $this->editLayout, $this->editModule, $this->editPackage) ;
 
         $smarty = $this->constructSmarty ( $parser ) ;
@@ -82,7 +81,6 @@ class ViewPopupview extends ViewListView
 
     function constructAjax()
     {
-        require_once ('modules/ModuleBuilder/MB/AjaxCompose.php') ;
         $ajax = new AjaxCompose ( ) ;
 
         if ($this->fromModuleBuilder)

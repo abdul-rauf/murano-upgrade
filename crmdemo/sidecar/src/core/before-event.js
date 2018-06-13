@@ -73,7 +73,7 @@
      */
     var triggerEvents = function(events, args) {
         var stop = false;
-        var ev, tmp, i = -1,
+        var ev, i = -1,
             l = events.length;
         switch (args.length) {
             case 0:

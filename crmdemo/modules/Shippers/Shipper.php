@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -77,15 +76,12 @@ class Shipper extends SugarBean {
 		if ($add_blank) {
 			$list['']='';
 		}
-		//if($this->db->getRowCount($result) > 0){
 			// We have some data.
 			while (($row = $this->db->fetchByAssoc($result)) != null) {
-			//while ($row = $this->db->fetchByAssoc($result)) {
 				$list[$row['id']] = $row['name'];
 				$GLOBALS['log']->debug("row id is:".$row['id']);
 				$GLOBALS['log']->debug("row name is:".$row['name']);
 			}
-		//}
 		return $list;
 	}
 
@@ -96,8 +92,6 @@ class Shipper extends SugarBean {
 
 	function clear_product_shipper_relationship($shipper_id)
 	{
-		//$query = "UPDATE $this->rel_products set shipper_id='' where (shipper_id='$shipper_id') and deleted=0";
-		//$this->db->query($query,true,"Error clearing shipper to shipper relationship: ");
 	}
 
 	function mark_relationships_deleted($id)
@@ -118,7 +112,6 @@ class Shipper extends SugarBean {
 		$temp_array = $this->get_list_view_array();
 
         $temp_array["ENCODED_NAME"]=$this->name;
-//    	$temp_array["ENCODED_NAME"]=htmlspecialchars($this->name, ENT_QUOTES);
     	return $temp_array;
 
 	}
@@ -144,5 +137,3 @@ class Shipper extends SugarBean {
 
 
 }
-
-?>

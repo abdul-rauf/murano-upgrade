@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -766,7 +765,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => '不可用主題',
     'LBL_TIMEZONE' => '時區',
     'LBL_TO'    => '至',
-	'LBL_TRACKER_SETTINGS_DESC' => '選取追蹤的系統和使用者資料',
     'LBL_UPDATE_CHECK_AUTO'=>'自動',
     'LBL_UPDATE_CHECK_MANUAL'=>'手動',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>自動檢查更新</B> - 若核取，系統會定期檢查是否有可用更新應用程式版本。',
@@ -933,8 +931,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'config.php 已成功重建。',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => '警告：您的 PHP 設定必須變更為允許上載至少 6MB 的檔案。請在 php.ini 中修改 upload_max_filesize 值，php.ini 位於以下位置：',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => '請使得 config.php 可寫入並重試。',
-    'MSG_REBUILD_EXTENSIONS' => '請前往<a href="index.php?module=Administration&action=Upgrade">「修復」</a>螢幕並按一下「重建延伸模組」。',
-    'MSG_REBUILD_RELATIONSHIPS' => '請前往<a href="index.php?module=Administration&action=Upgrade">「修復」</a>螢幕並按一下「重建關係」。',
     'NO_ENABLED_OFFLINE_CLIENTS' => '目前無啟用的「離線用戶端」。',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => '您確定要停用此「離線用戶端」嗎？',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => '您確定要啟用此「離線用戶端」嗎？',
@@ -1044,7 +1040,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'問題',
 'ML_MANIFEST_ISSUE'=>'資訊清單問題',
 'ML_CONFIG_OVERRIDE'=>'不允許進行設定修改',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'金鑰 — 僅可包含字母、數字和底線。',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => '設定導覽列快速建立',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => '選擇導覽列快速建立中可用的模組',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => '選擇哪類使用者的哪些模組可使用上方導覽列的「加號」圖示來快速建立記錄。在「啟用模組」和「停用模組」方塊中拖放模組。',
@@ -1092,7 +1088,6 @@ $mod_strings = array (
 	'Manufacturers'  => '製造商',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => '關係',
 	'Releases'       => '發行版本',
@@ -1102,7 +1097,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => '運輸服務供應商',
 	'TaxRates'       => 'TaxRate',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

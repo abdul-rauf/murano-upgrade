@@ -166,25 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite seguir ventas individuales de principio a fin. Cada registro {{module_name}} representa una venta prospectiva e incluye los datos relevantes de venta, además de relacionarse con otros registros importantes como el {{quotes_module}}, el {{contacts_module}}, etc. Un {{module_name}} pasará típicamente a través de varias Etapas de Ventas hasta que se lo marque como "Cerrado/Ganado" o "Cerrado/Perdido". {{plural_module_name}} puede aprovecharse aún más mediante el uso del módulo de Sugar {{forecasts_singular_module}} para entender y predecir tendencias de ventas, además de concentrar el trabajo para lograr las cuotas de ventas.',
+    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite monitorizar las ventas individuales desde el principio hasta el final. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes de la venta, así como otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalmente progresará a través de las distintas etapas de venta, hasta que se marque como "Ganada" o "Perdida". Los {{plural_module_name}} se pueden aprovechar aun más utilizando el módulo de {{forecasts_singular_module}} de Sugar para entender y predecir tendencias de ventas, además de dirigir el trabajo de manera específica para conseguir las cuotas de venta.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y los artículos pertenecientes a esas ventas de principio a fin. Cada registro {{module_name}} representa una cabecera de una venta prospecitiva e incluye datos de venta relevantes, además de relacionarse con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite seguir ventas individuales y elementos de línea que pertenecen a dichas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes a la venta, además de estar relacionado con otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
--Edite los campos de este registro haciendo clic en un campo individual o en el botón Modificar. 
-- Vea o modifique enlaces a otros registros en los subpaneles, alternando el panel inferior izquierdo a "Vista de Datos". 
-- Haga y vea los comentarios de los usuarios y el historial de cambios del registro en el{{activitystream_singular_module}} alternando el panel inferior izquierdo a "Últimas acciones". 
-- Siga o añada a favoritos este registro utilizando los iconos a la derecha del nombre del registro. 
-- Las acciones adicionales se encuentran disponibles en el menú desplegable Acciones a la derecha del botón Editar.',
+- Para editar los campos de este registro haga clic en un campo individual o en el botón de Editar.
+- Vea o modifique los enlaces con otros registros en los subpaneles cambiando el panel izquierdo inferior a "Vista de datos".
+- Escriba y vea comentarios de usuarios y el historial de cambios del registro en el {{activitystream_singular_module}} cambiando el panel izquierdo inferior a "Flujo de Actividades".
+- Siga o marque como favorito este registro mediante los iconos a la derecha del nombre del registro.
+- Hay acciones adicionales en el menú desplegable de acciones a la derecha del botón de Editar.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y los artículos pertenecientes a esas ventas de principio a fin. Cada registro {{module_name}} representa una cabecera de una venta prospecitiva e incluye datos de venta relevantes, además de relacionarse con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de ventas individuales y las líneas relacionadas con esas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes para la venta, además de estar relacionado con otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
 Para crear un {{module_name}}:
-1. Provea valores para los campos según su preferencia.
-- Los campos marcados como "requeridos" deben completarse antes de guardar.
-- Haga clic en "Mostrar más" para exponer campos adicionales, de ser necesario.
-2. Haga clic en "Guardar" para finalizar el registro nuevo y volver a la página anterior.',
+1. Proporcione valores para los campos tal y como desee.
+ - Los campos marcados como "Obligatorios" se deben completar antes de guardar.
+ - Haga clic en "Mostrar más" para mostrar campos adicionales si fuera necesario.
+2. Haga clic en "Guardar" para finalizar el nuevo registro y volver a la página anterior.',
 
 // END PRO/CORP
 

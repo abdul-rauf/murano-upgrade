@@ -237,9 +237,6 @@ $mod_strings = array (
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'Glavni ID baze D&B',
-    'LBL_DNB_BAL_PREVIEW' => 'Pregled kontakta',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Kontakti',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: podaci o kontaktu',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Bilješke',
 

@@ -10,21 +10,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 require_once('vendor/nusoap//nusoap.php');
-require_once('ModuleInstall/PackageManager/PackageManagerDownloader.php');
 
-define("HTTPS_URL", "https://depot.sugarcrm.com/depot/SugarDepotSoap.php");
-define("ACTIVE_STATUS", "ACTIVE");
+class PackageManagerComm
+{
+    const HTTPS_URL = 'https://depot.sugarcrm.com/depot/SugarDepotSoap.php';
 
-class PackageManagerComm{
-     /**
-      * Initialize the soap client and store in the $GLOBALS object for use
-      *
-      * @param login    designates whether we want to try to login after we initialize or not
-      */
-     function initialize($login = true){
+
+    /**
+     * Initialize the soap client and store in the $GLOBALS object for use
+     *
+     * @param login    designates whether we want to try to login after we initialize or not
+     */
+    protected static function initialize($login = true)
+    {
         if(empty($GLOBALS['SugarDepot'])){
             $GLOBALS['log']->debug('USING HTTPS TO CONNECT TO HEARTBEAT');
-            $soap_client = new nusoapclient(HTTPS_URL, false);
+            $soap_client = new nusoapclient(self::HTTPS_URL, false);
             $ping = $soap_client->call('sugarPing', array());
             $GLOBALS['SugarDepot'] = $soap_client;
         }
@@ -284,7 +285,7 @@ class PackageManagerComm{
         PackageManagerComm::initialize(false);
 
         $status = $GLOBALS['SugarDepot']->call('sugarPing', array());
-        if(empty($status) || $GLOBALS['SugarDepot']->getError() || $status != ACTIVE_STATUS){
+        if (empty($status) || $GLOBALS['SugarDepot']->getError() || $status != 'ACTIVE') {
             return false;
         }else{
             return true;
@@ -293,5 +294,3 @@ class PackageManagerComm{
      ////////// END: Base Functions for Communicating with the depot
      ////////////////////////////////////////////////////////
 }
-
-?>

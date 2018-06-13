@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +17,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-require_once('include/SugarObjects/forms/FormBase.php');
 
 class MeetingFormBase extends FormBase {
 
@@ -88,7 +86,7 @@ EOF;
 
 $javascript = new javascript();
 $javascript->setFormName($formname);
-$javascript->setSugarBean(BeanFactory::getBean('Meetings'));
+$javascript->setSugarBean(BeanFactory::newBean('Meetings'));
 $javascript->addRequiredFields($prefix);
 $form .=$javascript->getScript();
 $mod_strings = $temp_strings;
@@ -154,7 +152,7 @@ function handleSave($prefix,$redirect=true, $useRequired=false) {
 	global $current_user;
 	global $timedate;
 
-	$focus = BeanFactory::getBean('Meetings');
+	$focus = BeanFactory::newBean('Meetings');
 
 	if($useRequired && !checkRequired($prefix, array_keys($focus->required_fields))) {
 		return null;
@@ -373,7 +371,6 @@ function handleSave($prefix,$redirect=true, $useRequired=false) {
      */
     protected function processRecurring(Meeting $focus)
     {
-            require_once "modules/Calendar/CalendarUtils.php";            
             if (!empty($_REQUEST['edit_all_recurrences'])) {
                 // flush existing recurrence
                 CalendarUtils::markRepeatDeleted($focus);
@@ -391,7 +388,6 @@ function handleSave($prefix,$redirect=true, $useRequired=false) {
      */
     public function prepareRecurring()
     {       
-        require_once "modules/Calendar/CalendarUtils.php";
         
         if (empty($_REQUEST['edit_all_recurrences'])) {        
             $repeatFields = array('type', 'interval', 'count', 'until', 'dow', 'parent_id');

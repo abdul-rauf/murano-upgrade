@@ -97,7 +97,7 @@ function template_cal_tabs($args) {
 		}
 		foreach($args['slice']->acts_arr[$current_user->id] as $act) {
 			$fields = array();
-			foreach($act->sugar_bean->field_name_map as $field) {
+			foreach($act->sugar_bean->field_defs as $field) {
 					if(!empty($act->sugar_bean->$field['name']))
 						$fields[strtoupper($field['name'])] = $act->sugar_bean->$field['name'];
 			}

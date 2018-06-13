@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'ערכות נושא לא זמינות',
     'LBL_TIMEZONE' => 'אזור זמן',
     'LBL_TO'    => 'to',
-	'LBL_TRACKER_SETTINGS_DESC' => 'בחר איזה מערכת ונתוני משתמש הם במעקב',
     'LBL_UPDATE_CHECK_AUTO'=>'אוטומטית',
     'LBL_UPDATE_CHECK_MANUAL'=>'ידנית',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>בדוק עדכונים אוטומטית</B> - אם סומן, המערכת תבדוק מפעם לפעם אם קיימות גרסאות מעודכנות של היישום.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'הקובץ config.php נבנה מחדש בהצלחה.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'אזהרה: יש לשנות את תצורת ה-PHP שלך כדי לאפשר העלאת קבצים בגודל מינימום של 6 מ"ב. אנא ערוך את הערך של upload_max_filesize בקובץ php.ini שלך שנמצא ב:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'אנא הפעל את הרשאות הכתיבה בקובץ config.php ונסה שוב.',
-    'MSG_REBUILD_EXTENSIONS' => 'אנא עבור אל המסך <a href="index.php?module=Administration&action=Upgrade">תיקון</a> ולחץ על בנה מחדש הרחבות.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'אנא עבור אל המסך <a href="index.php?module=Administration&action=Upgrade">תיקון</a> ולחץ על בנה מחדש מערכות יחסים.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'לא מופעלים כרגע חשבונות משתמשים לא מקוונים.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'האם אתה בטוח שברצונך להשבית חשבון משתמש לא מקוון זה?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'האם אתה בטוח שברצונך להפעיל חשבון משתמש לא מקוון זה?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'סוגיות',
 'ML_MANIFEST_ISSUE'=>'סוגיה במנשר',
 'ML_CONFIG_OVERRIDE'=>'שינוי Config לא מאושר',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'מפתח - חייב להכיל אותיות, מספרים וקווים תחתונים בלבד. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Shortcut Bar',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Select which modules are available in the Shortcut Bar',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'בחר אילו מודולים עבור אילו משתמשים יכולים ליצור במהרה רישומים באמצעות הסמל פלוס בסרגל הניווט העליון. גרור ושחרר מודולים בין תיבות המודולים המופעלים והמודולים המושבתים.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Manufacturer',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'מערכת יחסים',
 	'Releases'       => 'Release',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'משרות Scheduler',
 	'Shippers'       => 'Shipper',
 	'TaxRates'       => 'TaxRate',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

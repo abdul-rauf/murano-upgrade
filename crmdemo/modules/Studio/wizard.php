@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,7 +16,6 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 require_once 'modules/Studio/config.php';
-require_once 'modules/Studio/wizards/StudioWizard.php';
 
 $wizard = InputValidation::getService()->getValidInputRequest('wizard', null, 'StudioWizard');
 

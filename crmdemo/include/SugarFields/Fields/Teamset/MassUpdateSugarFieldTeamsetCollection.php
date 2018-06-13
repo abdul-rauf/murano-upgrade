@@ -17,18 +17,8 @@
  * 
  */
 
-require_once('include/SugarFields/Fields/Collection/SugarFieldCollection.php');
-require_once('include/SugarFields/Fields/Teamset/ViewSugarFieldTeamsetCollection.php');
 
 class MassUpdateSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection {
-
-    /**
-     * @deprecated
-     */
-    public function MassUpdateSugarFieldTeamsetCollection($fill_data = false)
-    {
-        self::__construct($fill_data);
-    }
 
     public function __construct($fill_data = false)
     {
@@ -57,3 +47,4 @@ class MassUpdateSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollect
     }    
     
 }
+

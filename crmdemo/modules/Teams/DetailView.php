@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 require_once('modules/Teams/Forms.php');
-require_once('include/DetailView/DetailView.php');
 
 global $mod_strings;
 global $app_strings;
@@ -29,7 +27,7 @@ global $current_user;
 
 if (!$GLOBALS['current_user']->isAdminForModule('Users')) sugar_die("Unauthorized access to administration.");
 
-$focus = BeanFactory::getBean('Teams');
+$focus = BeanFactory::newBean('Teams');
 
 $detailView = new DetailView();
 $offset=0;
@@ -93,7 +91,6 @@ ob_end_clean();
 ob_start();
 echo $old_contents;
 
-require_once('include/SubPanel/SubPanelTiles.php');
 $subpanel = new SubPanelTiles($focus, 'Teams');
 echo $subpanel->display();
 

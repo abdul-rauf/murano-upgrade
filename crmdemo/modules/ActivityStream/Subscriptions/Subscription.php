@@ -158,7 +158,7 @@ class Subscription extends Basic
         $params['add_deleted'] = false;
         $sub = self::checkSubscription($user, $record, $params);
         if (!$sub) {
-            $seed = BeanFactory::getBean('Subscriptions');
+            $seed = BeanFactory::newBean('Subscriptions');
             $seed->parent_type = $record->module_name;
             $seed->parent_id = $record->id;
             $seed->set_created_by = false;
@@ -187,7 +187,7 @@ class Subscription extends Basic
     {
         $sub = self::getSubscription($user, $record);
         if ($sub) {
-            $sub->mark_deleted();
+            $sub->mark_deleted($sub->id);
             return true;
         }
         return false;
@@ -201,7 +201,7 @@ class Subscription extends Basic
      */
     protected static function getQueryObject($params = array())
     {
-        $subscription = BeanFactory::getBean('Subscriptions');
+        $subscription = BeanFactory::newBean('Subscriptions');
         // Pro+ versions able to override visibility on subscriptions (Portal)
         // to allow Contact change activity messages to be linked to subscribers
         if (!empty($params['disable_row_level_security'])) {
@@ -224,7 +224,7 @@ class Subscription extends Basic
     /**
      * Override mark_deleted().
      */
-    public function mark_deleted()
+    public function mark_deleted($id)
     {
         $this->deleted = 1;
         $this->save();
@@ -263,7 +263,7 @@ class Subscription extends Basic
         if (count($userPartials) < 5) {
             self::addActivitySubscriptions($data);
         } else {
-            $job                   = BeanFactory::getBean('SchedulersJobs');
+            $job                   = BeanFactory::newBean('SchedulersJobs');
             $job->requeue          = 1;
             $job->name             = "ActivityStream add";
             $job->data             = serialize($data);

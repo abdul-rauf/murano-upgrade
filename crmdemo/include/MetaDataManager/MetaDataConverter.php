@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'data/Link2.php';
 /**
  * Assists in backporting 6.6 Metadata formats to legacy style in order to
  * maintain backward compatibility with old clients consuming the V3 and V4 apis.
@@ -193,7 +189,7 @@ class MetaDataConverter
         $viewdefs['panels'][0]['label'] = 'LBL_PANEL_1';
 
         $viewdefs['panels'][0]['fields'] = array();
-        $bean = BeanFactory::getBean($module);
+        $bean = BeanFactory::newBean($module);
 
         foreach ($defs['list_fields'] as $fieldName => $details) {
             if (isset($details['vname'])) {

@@ -1,4 +1,5 @@
 <?php
+// created: 2018-06-13 14:44:00
 $viewdefs['Calls']['mobile']['view']['list'] = array (
   'panels' => 
   array (

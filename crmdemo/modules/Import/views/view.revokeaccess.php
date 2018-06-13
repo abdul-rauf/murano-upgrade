@@ -12,8 +12,12 @@
 
 class ImportViewRevokeAccess extends SugarView
 {
-    /** {@inheritdoc} */
-    public function process()
+    /**
+     * {@inheritDoc}
+     *
+     * @param array $params Ignored
+     */
+    public function process($params = array())
     {
         if (isset($_REQUEST['application'])) {
             $response = array(
@@ -33,7 +37,6 @@ class ImportViewRevokeAccess extends SugarView
     private function revokeAccess($application)
     {
         if ($application == 'Google') {
-            require_once 'include/externalAPI/Google/ExtAPIGoogle.php';
             $api = new ExtAPIGoogle();
             return $api->revokeToken();
         }

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,21 +10,12 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/Dashlets/Dashlet.php');
 
 
 class ChartsDashlet extends Dashlet {
     var $width = '400';
     var $height = '480';
     var $report_id;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ChartsDashlet($id, $report_id, $def)
-    {
-        self::__construct($id, $report_id, $def);
-    }
 
     /**
      * Constructor
@@ -53,9 +43,8 @@ class ChartsDashlet extends Dashlet {
      *
      * @return string html to display dashlet
      */
-    function display() {
-    	require_once("modules/Reports/Report.php");
-
+    public function display($text = '')
+    {
         $chartReport = BeanFactory::getBean(
             'Reports', $this->report_id, array('encode' => false, 'strict_retrieve' => true)
         );
@@ -71,7 +60,6 @@ class ChartsDashlet extends Dashlet {
 			$reporter->run_chart_queries();
 
 			ob_start();
-            require_once("include/SugarCharts/ChartDisplay.php");
             $chartDisplay = new ChartDisplay();
             $chartDisplay->setReporter($reporter);
             echo $chartDisplay->legacyDisplay($this->id, true);
@@ -79,17 +67,8 @@ class ChartsDashlet extends Dashlet {
 			$str = ob_get_contents();
 			ob_end_clean();
 
-			$xmlFile = $chartDisplay->get_cache_file_name($reporter);
-
-			$html = parent::display() . "<div align='center'>" . $str . "</div>" . "<br />"; // return parent::display for title and such
-
-			$ss = new Sugar_Smarty();
-	        $ss->assign('chartName', $this->id);
-	        $ss->assign('chartXMLFile', $xmlFile);
-	        $script = $ss->fetch('modules/Home/Dashlets/ChartsDashlet/ChartsDashletScript.tpl');
-			$json = getJSONobj();
-
-	        return parent::display() . "<div align='center'>" . $str . "</div>" . "<br />"; // return parent::display for title and such
+            return parent::display($text)
+                . "<div align='center'>" . $str . "</div>" . "<br />"; // return parent::display for title and such
 		}
     }
 
@@ -99,19 +78,14 @@ class ChartsDashlet extends Dashlet {
      * @return string javascript to use with this dashlet
      */
     function displayScript() {
-    	require_once("modules/Reports/Report.php");
-        require_once("include/SugarCharts/ChartDisplay.php");
 
         $chartReport = BeanFactory::getBean('Reports', $this->report_id, array("encode" => false));
 
 		if (!empty($chartReport)){
 	        $this->title = $chartReport->name;
 
-			require_once("modules/Reports/templates/templates_chart.php");
-			require_once('include/SugarCharts/SugarChartFactory.php');
 
 			$sugarChart = SugarChartFactory::getInstance();
-
 
 			$reporter = new Report($chartReport->content);
 			$reporter->is_saved_report = true;

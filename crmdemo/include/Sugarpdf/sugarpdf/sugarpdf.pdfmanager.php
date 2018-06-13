@@ -1,7 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 
-require_once 'include/Sugarpdf/sugarpdf/sugarpdf.smarty.php';
 
 class SugarpdfPdfmanager extends SugarpdfSmarty
 {
@@ -101,10 +98,9 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
 
         if ($this->module == 'Quotes' && $previewMode === FALSE) {
             global $locale;
-            require_once 'modules/Quotes/Quote.php';
             require_once 'modules/Quotes/config.php';
             require_once 'modules/Currencies/Currency.php';
-            $currency = BeanFactory::getBean('Currencies');
+            $currency = BeanFactory::newBean('Currencies');
             $format_number_array = array(
                 'currency_symbol' => true,
                 'type' => 'sugarpdf',
@@ -263,7 +259,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
             $email_object->team_id  = $current_user->getPrivateTeamID();
         }
         if (isset($email_object->team_set_id)) {
-            $teamSet = BeanFactory::getBean('TeamSets');
+            $teamSet = BeanFactory::newBean('TeamSets');
             $teamIdsArray = array($current_user->getPrivateTeamID());
             $email_object->team_set_id = $teamSet->addTeams($teamIdsArray);
         }
@@ -288,7 +284,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         
         //teams
         $note->team_id = $current_user->getPrivateTeamID();
-        $noteTeamSet = BeanFactory::getBean('TeamSets');
+        $noteTeamSet = BeanFactory::newBean('TeamSets');
         $noteteamIdsArray = array($current_user->getPrivateTeamID());
         $note->team_set_id = $noteTeamSet->addTeams($noteteamIdsArray);
         

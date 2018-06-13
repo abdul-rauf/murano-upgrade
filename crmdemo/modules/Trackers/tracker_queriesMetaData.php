@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -103,6 +102,6 @@ $dictionary['tracker_queries'] = array(
                 'query_id'
        	    )
         )
-
-    )
+    ),
+    'acls' => array('SugarACLStatic' => true),
 );

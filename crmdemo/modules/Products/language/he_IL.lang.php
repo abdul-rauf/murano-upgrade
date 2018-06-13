@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'הצעת מחיר לשורת פריט',
     'LBL_LIST_MANUFACTURER' => 'יצרן',
     'LBL_MANUFACTURERS' => 'יצרנים',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'מספר יצרן',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'מספר החלק',
     'LBL_LIST_QUANTITY' => 'כמות',
     'LBL_LIST_COST_PRICE' => 'עלות',
     'LBL_LIST_DISCOUNT_PRICE' => 'מחיר',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'הנחה ב %',
     'LBL_LIST_PRICE' => 'מחיר מחירון:',
     'LBL_VENDOR_PART_NUM' => 'מספר חלק אצל ספק:',
-    'LBL_MFT_PART_NUM' => 'מספר חלק אצל יצרן:',
+    'LBL_MFT_PART_NUM' => 'מספר החלק:',
     'LBL_NEXT_STEP' => 'השלב הבא',
     'LBL_DISCOUNT_PRICE_DATE' => 'מחיר לאחר הנחה:',
     'LBL_WEIGHT' => 'משקל:',
@@ -168,6 +168,8 @@ $mod_strings = array(
  - לחץ על "הצג עוד" כדי להציג שדות אחרים לפי הצורך.
 2. לחץ על "שמור" כדי להשלים את הרישום החדש ולחזור לדף הקודם.',
 
-    'LBL_MANUFACTURERS' => 'יצרנים',
     'LBL_PRODUCT_POSITION' => 'מיקום חבילת מוצר',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'רשימת נתונים של הצעות מחיר ושורות פריט עם הצעות מחיר',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (שורת פריט עם הצעת מחיר חדשה)',
+    'LBL_DISCOUNT_PERCENT' => '% אחוז',
 );

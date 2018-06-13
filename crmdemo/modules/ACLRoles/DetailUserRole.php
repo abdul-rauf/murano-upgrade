@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -58,7 +57,6 @@ if ( !is_admin($focus) ) {
     
     
     //this gets its layout_defs.php file from the user not from ACLRoles so look in modules/Users for the layout defs
-    require_once('include/SubPanel/SubPanelTiles.php');
     $modules_exempt_from_availability_check=array('Users'=>'Users','ACLRoles'=>'ACLRoles',);
     $subpanel = new SubPanelTiles($focus, 'UserRoles');
     

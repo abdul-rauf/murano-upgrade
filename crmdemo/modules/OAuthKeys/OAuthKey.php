@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -70,8 +69,12 @@ class OAuthKey extends Basic
 	 */
 	public function mark_deleted($id)
 	{
-        $this->db->query("DELETE from {$this->table_name} WHERE id=".$this->db->quoted($id));
-        $this->db->query("DELETE from oauth_tokens WHERE consumer=".$this->db->quoted($id));
+        $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
+        $qoat = "DELETE FROM oauth_tokens WHERE consumer = ? ";
+
+        $conn = $this->db->getConnection();
+        $conn->executeQuery($query, array($id));
+        $conn->executeQuery($qoat, array($id));
 	}
 
 }

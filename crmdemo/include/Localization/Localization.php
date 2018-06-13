@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -63,14 +62,6 @@ class Localization {
      * @var array
      */
     protected $parsedFormats = array();
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Localization()
-    {
-        self::__construct();
-    }
 
 	/**
 	 * sole constructor
@@ -199,9 +190,10 @@ class Localization {
 		    );
 
             $q = "SELECT id, name, symbol, conversion_rate FROM currencies WHERE status = 'Active' and deleted = 0";
-            $r = $db->query($q);
+            $conn = $db->getConnection();
+            $stmt = $conn->executeQuery($q);
 
-            while($a = $db->fetchByAssoc($r)) {
+            while ($a = $stmt->fetch()) {
                 $load = array();
                 $load['name'] = $a['name'];
                 $load['symbol'] = $a['symbol'];
@@ -948,7 +940,7 @@ eoq;
             if ($beanOrModuleName == 'Users' && $current_user) {
                 $bean = $current_user;
             } else {
-                $bean = BeanFactory::getBean($beanOrModuleName);
+                $bean = BeanFactory::getDefinition($beanOrModuleName);
             }
         } elseif ($beanOrModuleName instanceof SugarBean) {
             $bean = $beanOrModuleName;
@@ -1139,3 +1131,4 @@ eoq;
         return $GLOBALS['sugar_config']['default_language'];
     }
 } // end class def
+

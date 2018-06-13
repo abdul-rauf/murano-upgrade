@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -93,7 +92,7 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Töövoog'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Tüüp',
 
-  // Workflow sunsetting message, added in 7.6.1
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Märkus.</strong> See funktsioon eemaldatakse Sugari tulevasest väljalaskest, mis on hetkel plaanitud aastaks 2017. Väljalaske Sugar Enterprise kliendid peaksid hakkama kasutama Täiustatud töövoo pakutavaid täiustatud töövoo võimalusi. Lisateabe saamiseks klõpsake <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">siin</a>.',
+  // Workflow sunsetting message, updated for 7.9
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Märkus.</strong> Sugari tulevases väljalaskes eemaldatakse Sugari töövoo ja töövoo halduse funktsioon. Sugar Enterprise’i väljaande kliendid saavad hakata kasutama Sugari täiustatud töövoo funktsiooni. Lisateabe saamiseks klõpsake <a href="http://www.sugarcrm.com/wf-eol" target="_blank">siin</a>.',
 );
 

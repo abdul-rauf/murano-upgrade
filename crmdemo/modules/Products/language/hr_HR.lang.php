@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Prodana stavka',
     'LBL_LIST_MANUFACTURER' => 'Proizvođač',
     'LBL_MANUFACTURERS' => 'Proizvođači',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Br. proizvođ.',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Broj dijela',
     'LBL_LIST_QUANTITY' => 'Količina',
     'LBL_LIST_COST_PRICE' => 'Trošak',
     'LBL_LIST_DISCOUNT_PRICE' => 'Cijena',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Odabir popusta',
     'LBL_LIST_PRICE' => 'Kataloška cijena:',
     'LBL_VENDOR_PART_NUM' => 'Broj dijela dobavljača:',
-    'LBL_MFT_PART_NUM' => 'Broj dijela proizvođača:',
+    'LBL_MFT_PART_NUM' => 'Broj dijela:',
     'LBL_NEXT_STEP' => 'Sljedeći korak:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Datum snižene cijene:',
     'LBL_WEIGHT' => 'Težina:',
@@ -168,6 +168,8 @@ Da biste stvorili {{module_name}}:
  - Kliknite na „Prikaži više” da biste otkrili dodatna polja ako je potrebno.
 2. Kliknite na „Spremi” da biste završili novi zapis i vratili se na prethodnu stranicu.',
 
-    'LBL_MANUFACTURERS' => 'Proizvođači',
     'LBL_PRODUCT_POSITION' => 'Položaj paketa proizvoda',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Popis podataka o ponudama s prodanim stavkama',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nova prodana stavka)',
+    'LBL_DISCOUNT_PERCENT' => '% posto',
 );

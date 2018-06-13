@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Ndrysho' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B ID',
-    'LBL_DNB_BAL_PREVIEW' => 'Shikimi i targetimeve',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Udhëheqjet',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: Informacion i udhëheqjeve',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Mundësitë',
 

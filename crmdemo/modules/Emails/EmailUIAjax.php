@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,28 +19,24 @@ $request = InputValidation::getService();
   if (ini_get('max_execution_time') > 0 && ini_get('max_execution_time') < 300) {
       ini_set('max_execution_time', 300);
   }
-  //ajaxInit();
 
-
-  require_once("include/OutboundEmail/OutboundEmail.php");
   require_once("vendor/ytree/Tree.php");
   require_once("vendor/ytree/ExtNode.php");
   global $mod_strings, $current_user;
 
 
 
-  $email = BeanFactory::getBean('Emails');
+  $email = BeanFactory::newBean('Emails');
   if (!$email->ACLAccess('view')) {
       ACLController::displayNoAccess(true);
       sugar_cleanup(true);
   }
   $email->email2init();
-  $ie = BeanFactory::getBean('InboundEmail');
+  $ie = BeanFactory::newBean('InboundEmail');
   $ie->disable_row_level_security = true;
   $ie->email = $email;
   $json = getJSONobj();
 
-  require_once("include/SugarRouting/SugarRouting.php");
   $rules = new SugarRouting($ie, $current_user);
 
   $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
@@ -147,9 +141,9 @@ $request = InputValidation::getService();
             $email->type = 'out';
             $email->status = 'sent';
         }
-        if(isset($_REQUEST['email_id']) && !empty($_REQUEST['email_id'])) {// && isset($_REQUEST['saveDraft']) && !empty($_REQUEST['saveDraft'])) {
-            $email->retrieve($_REQUEST['email_id']); // uid is GUID in draft cases
-        }
+            if (isset($_REQUEST['email_id']) && !empty($_REQUEST['email_id'])) {
+                $email->retrieve($_REQUEST['email_id']); // uid is GUID in draft cases
+            }
         if (isset($_REQUEST['uid']) && !empty($_REQUEST['uid'])) {
         	$email->uid = $_REQUEST['uid'];
         }
@@ -223,7 +217,6 @@ $request = InputValidation::getService();
         }
 
         $out['signatures'] = $sigs;
-        // $out['fromAccounts']  = $email->et->getFromAccountsArray($ie);
         $out['fromAccounts'] = $configArray;
         $out['errorArray'] = array();
 
@@ -257,7 +250,6 @@ $request = InputValidation::getService();
     case "deleteSignature":
         $GLOBALS['log']->debug("********** EMAIL 2.0 - Asynchronous - at: deleteSignature");
         if(isset($_REQUEST['id'])) {
-  			require_once("modules/UserSignatures/UserSignature.php");
 
   			BeanFactory::deleteBean('UserSignatures', $_REQUEST['id']);
             $signatureArray = $current_user->getSignaturesArray();
@@ -285,7 +277,7 @@ $request = InputValidation::getService();
 
             $where = "parent_id='{$_REQUEST['parent_id']}'";
             $order = "";
-            $seed = BeanFactory::getBean('Notes');
+            $seed = BeanFactory::newBean('Notes');
             $fullList = $seed->get_full_list($order, $where, '');
             $all_fields = array_merge($seed->column_fields, $seed->additional_column_fields);
 
@@ -362,7 +354,7 @@ $request = InputValidation::getService();
         		break;
         	}
             $people = array("Users", "Contacts", "Leads", "Prospects");
-            $showSaveToAddressBookButton = false;//(in_array($_REQUEST['qc_module'], $people)) ? true : false;
+                $showSaveToAddressBookButton = false;
 
             if(isset($_REQUEST['sugarEmail']) && !empty($_REQUEST['sugarEmail'])) {
                 $ie->email->retrieve($uid); // uid is a sugar GUID in this case
@@ -387,7 +379,6 @@ $request = InputValidation::getService();
 
     case 'saveQuickCreate':
         $GLOBALS['log']->debug("********** EMAIL 2.0 - Asynchronous - at: saveQuickCreate");
-        require_once('include/MVC/Controller/ControllerFactory.php');
         if (isset($_REQUEST['qcmodule'])) {
             $GLOBALS['log']->debug("********** QCmodule was set: {$_REQUEST['qcmodule']}");
         }
@@ -458,7 +449,6 @@ $request = InputValidation::getService();
         $ieId = $request->getValidInputRequest('ieId', 'Assert\Guid');
 
         $ie->retrieve($ieId);
-        //            $ie->mailbox = $_REQUEST['mailbox'];
         $ie->setEmailForDisplay($uid);
         $ret = $email->et->getImportForm($_REQUEST, $ie->email);
         $out = trim($json->encode($ret, false));
@@ -739,7 +729,6 @@ $request = InputValidation::getService();
         $ie->retrieve($_REQUEST['ieId']);
         $ie->setReadFlagOnFolderCache($_REQUEST['mbox'], $_REQUEST['uid']);
         $email->et->getListEmails($_REQUEST['ieId'], $_REQUEST['mbox'], 0, 'true');
-        //unlink("{$cacheRoot}/{$_REQUEST['ieId']}/folders/{$_REQUEST['mbox']}.php");
         break;
 
     case "deleteMessage":
@@ -777,7 +766,6 @@ $request = InputValidation::getService();
         $GLOBALS['log']->debug("********** EMAIL 2.0 - Asynchronous - at: getSingleMessageFromSugar");
         if(isset($_REQUEST['uid']) && !empty($_REQUEST['uid'])) {
             $email->retrieve($_REQUEST['uid']);
-            //$email->description_html = from_html($email->description_html);
             $ie->email = $email;
 
             if($email->status == 'draft' || $email->type == 'draft') {
@@ -788,7 +776,6 @@ $request = InputValidation::getService();
                 $ret = $ie->email->et->getDraftAttachments($ret, $ie);
             	$ret = $ie->email->et->getFromAllAccountsArray($ie, $ret);
 
-				require_once('include/SugarFields/Fields/Teamset/EmailSugarFieldTeamsetCollection.php');
 				$teamSetField = new EmailSugarFieldTeamsetCollection($ie->email, $ie->email->field_defs, "get_non_private_teams_array", 'composeEmailForm');
 				$teamSetField->user_id = $current_user->id;
 				$sqs_objects = $teamSetField->createQuickSearchCode(true);
@@ -911,7 +898,6 @@ eoq;
             ob_start();
             echo $out;
             ob_end_flush();
-            //die();
         } else {
             echo $mod_strings['ERR_NO_IEID'];
         }
@@ -1141,10 +1127,8 @@ eoq;
             $ret['folderId'] = $email->et->folder->id;
             $ret['folderName'] = $email->et->folder->name;
             $ret['parentFolderId'] = $email->et->folder->parent_folder;
-			require_once('include/SugarFields/Fields/Teamset/EmailSugarFieldTeamsetCollection.php');
 			$teamSetField = new EmailSugarFieldTeamsetCollection($email->et->folder, $ie->field_defs, "get_non_private_teams_array", 'EditViewGroupFolder');
 			$sqs_objects = $teamSetField->createQuickSearchCode(true);
-			//$quicksearch_js = '<script type="text/javascript" language="javascript">sqs_objects = ' . $json->encode($sqs_objects) . '</script>';
 			$code = $teamSetField->get_code();
             $ret['team_id'] = $code . $sqs_objects;
             $out = $json->encode($ret);
@@ -1288,7 +1272,7 @@ eoq;
    		global $current_user;
     	$GLOBALS['log']->debug("********** EMAIL 2.0 - Asynchronous - at: saveDefaultOutbound");
     	$outbound_id = empty($_REQUEST['id']) ? "" : $_REQUEST['id'];
-    	$ie = BeanFactory::getBean('InboundEmail');
+    	$ie = BeanFactory::newBean('InboundEmail');
         $ie->disable_row_level_security = true;
    		$ie->setUsersDefaultOutboundServerId($current_user, $outbound_id);
     	break;
@@ -1525,7 +1509,6 @@ eoq;
         $GLOBALS['log']->debug("********** EMAIL 2.0 - Asynchronous - at: saveSettingsGeneral");
         $emailSettings = array();
         $emailSettings['emailCheckInterval'] = $_REQUEST['emailCheckInterval'];
-        //$emailSettings['autoImport'] = isset($_REQUEST['autoImport']) ? '1' : '0';
         $emailSettings['alwaysSaveOutbound'] = '1';
         $emailSettings['sendPlainText'] = isset($_REQUEST['sendPlainText']) ? '1' : '0';
         $emailSettings['showNumInList'] = $_REQUEST['showNumInList'];
@@ -1604,7 +1587,6 @@ eoq;
         if (isset($_REQUEST['contactData'])) {
             $contacts = $json->decode(from_HTML($_REQUEST['contactData']));
             if ($contacts) {
-            	//_ppd($contacts);
                 $email->et->setContacts($contacts);
             }
         }

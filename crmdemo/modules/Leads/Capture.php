@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
-require_once('modules/Leads/LeadFormBase.php');
 
 global $app_strings, $app_list_strings;
 
@@ -44,7 +42,7 @@ $redirect = InputValidation::getService()->getValidInputPost(
 
 if (!empty($_POST['user']) && !empty($users[$_POST['user']])) {
 
-    $current_user = BeanFactory::getBean('Users');
+    $current_user = BeanFactory::newBean('Users');
 	$current_user->user_name = $users[$_POST['user']]['name'];
 
 	if($current_user->load_user($users[$_POST['user']]['pass'], true)){

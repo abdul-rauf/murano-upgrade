@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 if(!empty($_REQUEST['save_schedule_msi'])){
 	global $current_user, $timedate, $app_strings;
-require_once('modules/Reports/schedule/ReportSchedule.php');
 $rs = new ReportSchedule();
 global $timedate;
 if(!empty($_REQUEST['schedule_id'])){

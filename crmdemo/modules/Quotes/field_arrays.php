@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -33,7 +32,6 @@ $fields_array['Quote'] = array ('column_fields' => Array("id"
 		, "total"
 		, "total_usdollar"
 		,'show_line_nums'
-		, 'calc_grand_total'
 		, "date_entered"
 		, "date_modified"
 		, "modified_user_id"

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once("include/SugarForecasting/Progress/AbstractProgress.php");
 class SugarForecasting_Progress_Individual extends SugarForecasting_Progress_AbstractProgress
 {
     /**
@@ -32,7 +31,7 @@ class SugarForecasting_Progress_Individual extends SugarForecasting_Progress_Abs
     {
         //get the quota data for user
         /* @var $quota Quota */
-        $quota = BeanFactory::getBean('Quotas');
+        $quota = BeanFactory::newBean('Quotas');
         $quotaData = $quota->getRollupQuota($this->getArg('timeperiod_id'), $this->getArg('user_id'));
 
         $progressData = array(
@@ -41,7 +40,7 @@ class SugarForecasting_Progress_Individual extends SugarForecasting_Progress_Abs
 
         // get what we are forecasting on
         /* @var $admin Administration */
-        $admin = BeanFactory::getBean('Administration');
+        $admin = BeanFactory::newBean('Administration');
         $settings = $admin->getConfigForModule('Forecasts');
 
         $forecast_by = $settings['forecast_by'];
@@ -50,7 +49,7 @@ class SugarForecasting_Progress_Individual extends SugarForecasting_Progress_Abs
         $timeperiod_id = $this->getArg('timeperiod_id');
 
         /* @var $worksheet ForecastWorksheet */
-        $worksheet = BeanFactory::getBean('ForecastWorksheets');
+        $worksheet = BeanFactory::newBean('ForecastWorksheets');
         $totals = $worksheet->worksheetTotals($timeperiod_id, $user_id,  $forecast_by);
 
         $acl = new SugarACLForecastWorksheets();

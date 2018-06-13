@@ -10,53 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/ModuleBuilder/MB/ModuleBuilder.php';
-require_once 'modules/ModuleBuilder/parsers/ParserFactory.php';
-require_once 'modules/ModuleBuilder/Module/StudioModuleFactory.php';
-require_once 'modules/ModuleBuilder/parsers/constants.php';
-
-// Used in several actions
-require_once 'modules/ModuleBuilder/parsers/parser.label.php';
-SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
-require_once 'modules/DynamicFields/FieldCases.php';
-require_once 'modules/DynamicFields/DynamicField.php';
-
-// Used in action_ViewTree
-require_once 'modules/ModuleBuilder/MB/AjaxCompose.php';
-require_once 'modules/ModuleBuilder/MB/MBPackageTree.php';
-require_once 'modules/ModuleBuilder/Module/StudioTree.php';
-
-// Used in action_DeployPackage
-require_once 'ModuleInstall/PackageManager/PackageManager.php';
-require_once 'modules/Home/UnifiedSearchAdvanced.php';
-
-// Used in action_SaveSugarField
-require_once 'modules/ModuleBuilder/parsers/StandardField.php';
-require_once 'include/TemplateHandler/TemplateHandler.php';
-
-// Used in relationship actions
-require_once 'modules/ModuleBuilder/parsers/relationships/DeployedRelationships.php';
-require_once 'modules/ModuleBuilder/parsers/relationships/UndeployedRelationships.php';
-
-// Used in action_SaveDropDown
-require_once 'modules/ModuleBuilder/parsers/parser.dropdown.php';
-
-// Used in action_searchViewSave
-// Bug56789 - Without a client, the wrong viewdef file was getting picked up
-require_once 'modules/ModuleBuilder/parsers/views/SearchViewMetaDataParser.php';
-require_once 'modules/ModuleBuilder/parsers/views/SidecarFilterLayoutMetaDataParser.php';
-require_once 'modules/ModuleBuilder/parsers/MetaDataFiles.php';
-require_once 'modules/DynamicFields/templates/Fields/TemplateRange.php';
-
-// Used in action_get_app_list_strings
-require_once 'include/JSON.php';
-
-
-// Used in metadata API cache clear
-require_once 'include/MetaDataManager/MetaDataManager.php';
-include_once 'modules/Administration/QuickRepairAndRebuild.php';
-
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
+
+require_once 'modules/DynamicFields/FieldCases.php';
 
 class ModuleBuilderController extends SugarController
 {
@@ -269,6 +225,8 @@ class ModuleBuilderController extends SugarController
         $load = $this->request->getValidInputRequest('package', 'Assert\ComponentName');
         $message = $GLOBALS ['mod_strings'] ['LBL_MODULE_DEPLOYED'];
         if (!empty ($load)) {
+            // there may be temp files left over for unknown reason
+            $this->removeTempFiles($load);
             $zip = $mb->getPackage($load);
             $pm = new PackageManager ();
             $info = $mb->packages [$load]->build(false);
@@ -483,7 +441,7 @@ class ModuleBuilderController extends SugarController
                     $module = 'Users';
                 }
 
-                $bean = BeanFactory::getBean($module);
+                $bean = BeanFactory::newBean($module);
                 if (!empty($bean)) {
                     $field_defs = $bean->field_defs;
                     if (isset($field_defs[$field->name . '_c'])) {
@@ -493,7 +451,7 @@ class ModuleBuilderController extends SugarController
                 }
 
                 $df = new DynamicField ($module);
-                $mod = BeanFactory::getBean($module);
+                $mod = BeanFactory::newBean($module);
                 $obj = BeanFactory::getObjectName($module);
                 $df->setup($mod);
 
@@ -568,7 +526,7 @@ class ModuleBuilderController extends SugarController
         $module = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
 
         $df = new StandardField ($module);
-        $mod = BeanFactory::getBean($module);
+        $mod = BeanFactory::newBean($module);
         $obj = BeanFactory::getObjectName($module);
         $df->setup($mod);
 
@@ -583,6 +541,7 @@ class ModuleBuilderController extends SugarController
         $GLOBALS ['mod_strings']['LBL_ALL_MODULES'] = 'all_modules';
         $_REQUEST['execute_sql'] = true;
 
+        SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
         $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
         $mi = new $moduleInstallerClass();
         $mi->silent = true;
@@ -757,7 +716,7 @@ class ModuleBuilderController extends SugarController
                 if ($moduleName == 'Employees')
                     $moduleName = 'Users';
 
-                $seed = BeanFactory::getBean($moduleName);
+                $seed = BeanFactory::newBean($moduleName);
                 $df = new DynamicField ($moduleName);
                 $df->setup($seed);
                 //Need to load the entire field_meta_data for some field types
@@ -769,7 +728,6 @@ class ModuleBuilderController extends SugarController
                 include_once 'modules/Administration/QuickRepairAndRebuild.php';
                 $repair = new RepairAndClear();
                 $repair->repairAndClearAll(array('rebuildExtensions', 'clearVardefs', 'clearTpls'), array($moduleName), true, false);
-                require_once 'modules/ModuleBuilder/Module/StudioModuleFactory.php';
 
                 $module = StudioModuleFactory::getStudioModule($moduleName);
             }
@@ -953,7 +911,6 @@ class ModuleBuilderController extends SugarController
         // for backwards compatibility we need to parse the subpanel the old way as well
         // TODO: Remove this when all BWC Modules are converted
         if($parser instanceof SidecarSubpanelLayoutMetaDataParser) {
-            require_once('modules/ModuleBuilder/parsers/views/SubpanelMetaDataParser.php');
             $oldSubpanelParser = new SubpanelMetaDataParser($subpanelName, $_REQUEST ['view_module'], $packageName);
             $oldSubpanelParser->handleSave();
             unset($oldSubpanelParser);
@@ -1123,6 +1080,24 @@ class ModuleBuilderController extends SugarController
             $add  = '<br><br><b>' . StudioModule::$bwcIndicator . '</b>';
             $add .= $mod_strings['help']['studioWizard']['studioBCHelp'];
             $mod_strings['help']['studioWizard']['studioHelp'] .= $add;
+        }
+    }
+
+    /**
+     * Remove temp files created by modulebuilder.
+     * @param string $name package name
+     */
+    protected function removeTempFiles($name)
+    {
+        $path = MB_PACKAGE_PATH . '/' . $name;
+        // tempnam() allows ony three characeters on windows for file name prefix
+        $prefix = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' ? 'tem' : 'temp';
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
+        foreach ($files as $filePath => $info) {
+            if (preg_match('/^' . $prefix . '[a-zA-Z0-9]+$/', $info->getFilename())) {
+                @unlink($filePath);
+                $GLOBALS['log']->warning('ModuleBuilder deleted a temp file: ' . $filePath);
+            }
         }
     }
 }

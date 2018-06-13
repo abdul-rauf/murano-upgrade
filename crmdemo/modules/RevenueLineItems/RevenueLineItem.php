@@ -26,7 +26,6 @@ class RevenueLineItem extends SugarBean
     public $created_by;
     public $created_by_name;
     public $modified_by_name;
-    public $field_name_map;
     public $name;
     public $product_template_id;
     public $description;
@@ -133,7 +132,7 @@ class RevenueLineItem extends SugarBean
             $this->team_id = 1; // make the item globally accessible
         }
 
-        $currency = BeanFactory::getBean('Currencies');
+        $currency = BeanFactory::newBean('Currencies');
         $this->default_currency_symbol = $currency->getDefaultCurrencySymbol();
     }
 
@@ -375,7 +374,7 @@ class RevenueLineItem extends SugarBean
     public function convertToQuotedLineItem()
     {
         /* @var $product Product */
-        $product = BeanFactory::getBean('Products');
+        $product = BeanFactory::newBean('Products');
         $product->id = create_guid();
         $product->new_with_id = true;
         foreach ($this->getFieldDefinitions() as $field) {
@@ -399,6 +398,24 @@ class RevenueLineItem extends SugarBean
         }
 
         return $product;
+    }
+
+    /**
+     * Test if this rli can be converted to a quote.
+     *
+     * @return bool|string  Returns true if it can be converted, otherwise it returns
+     *                      a string with the reason it couldn't be converted.
+     */
+    public function canConvertToQuote()
+    {
+        $mod_strings = return_module_language($GLOBALS['current_language'], $this->module_dir);
+        if (empty($this->product_template_id) && !empty($this->category_id)) {
+            return $mod_strings['LBL_CONVERT_INVALID_RLI_PRODUCT'];
+        } elseif (!empty($this->quote_id)) {
+            return $mod_strings['LBL_CONVERT_INVALID_RLI_ALREADYQUOTED'];
+        }
+
+        return true;
     }
 
     /**

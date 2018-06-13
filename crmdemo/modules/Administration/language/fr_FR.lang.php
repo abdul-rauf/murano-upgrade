@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -764,7 +763,6 @@ Si la configuration de votre réseau interdit la communication avec le serveur d
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Thèmes non disponibles',
     'LBL_TIMEZONE' => 'Fuseau horaire',
     'LBL_TO'    => 'à',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Choisir les données système et utilisateur suivies',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatiquement',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manuellement',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Vérifier automatiquement les mises à jour</B> - Si l&#39;option est cochée, le système vérifiera périodiquement si des mises à jour sont disponibles.',
@@ -931,8 +929,6 @@ Si la configuration de votre réseau interdit la communication avec le serveur d
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Le fichier config.php a été reconstruit avec succés.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'ATTENTION : Votre fichier de configuration PHP doit être modifié pour permettre le téléchargement de fichier d&#39;au moins 6MB. Pour cela veuillez modifier la valeur du paramètre upload_max_filesize dans votre fichier php.ini situé a priori ici :',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Veuillez autoriser l&#39;écriture sur le fichier config.php et recommencez.',
-    'MSG_REBUILD_EXTENSIONS' => 'Veuillez aller dans la rubrique <a href="index.php?module=Administration&action=Upgrade">Réparation</a> et cliquez sur "Reconstruire les extensions".',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Veuillez aller dans la rubrique <a href="index.php?module=Administration&action=Upgrade">Réparation</a> et cliquez sur "Reconstruire les relations".',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Actuellement aucun Offline Client n&#39;est activé.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Êtes-vous sûr(e) de vouloir désactiver ce Client Offline?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Êtes-vous sûr(e) de vouloir activer ce Client Offline?',
@@ -1042,7 +1038,7 @@ Si la configuration de votre réseau interdit la communication avec le serveur d
 'ML_ISSUES'=>'erreur',
 'ML_MANIFEST_ISSUE'=>'Problème(s) avec le manifest',
 'ML_CONFIG_OVERRIDE'=>'Modification du fichier config non permise',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Clé - peut uniquement être composée de lettres, chiffres et tirets bas. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Barre de raccourcis',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Sélectionner les modules disponibles dans la Barre de raccourcis',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Choisissez les modules pour lesquels les utilisateurs peuvent rapidement créer des enregistrements à partir du + dans la barre de navigation. Glisser et Déposer les modules entre les encadrés modules activés et modules désactivés',
@@ -1090,7 +1086,6 @@ Si la configuration de votre réseau interdit la communication avec le serveur d
 	'Manufacturers'  => 'Manufacturer',
 	'ProductBundleNotes' => 'Note sur lot produit',
 	'ProductBundles'   => 'Lot produit',
-	'ProjectResources' => 'Ressource de projet',
 
 	'Relationships' => 'Relation',
 	'Releases'       => 'Version',
@@ -1100,7 +1095,6 @@ Si la configuration de votre réseau interdit la communication avec le serveur d
 	'SchedulersJobs'  => 'Tâche du planificateur',
 	'Shippers'       => 'Expéditeur',
 	'TaxRates'       => 'Taux de taxe',
-	'TeamHierarchies'  => 'Hiérarchie de l&#39;équipe',
 	'TeamMemberships'   => 'Membre de l&#39;équipe',
 	'TeamNotices'    => 'Remarque équipe',
 	'TeamSetModules'   => 'Module de configuration de l&#39;équipe',

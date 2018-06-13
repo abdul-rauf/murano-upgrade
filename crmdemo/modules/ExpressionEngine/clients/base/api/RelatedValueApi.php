@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,8 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/api/SugarApi.php');
-require_once('modules/ExpressionEngine/formulaHelper.php');
 
 /**
  * Used to evaluate related expressions on the front end for arbitrary (possibly unsaved) records.
@@ -45,7 +40,7 @@ class RelatedValueApi extends SugarApi
      * Used by the dependency manager to pre-load all the related fields required
      * to load an entire view.
      */
-    public function getRelatedValues($api, $args)
+    public function getRelatedValues(ServiceBase $api, array $args)
     {
         if (empty($args['module']) || empty($args['fields'])) {
             return;
@@ -151,24 +146,14 @@ class RelatedValueApi extends SugarApi
                                 ACLField::hasAccess($rField, $bean->module_dir, $GLOBALS['current_user']->id, true)
                             ) {
                                 if(is_null($isCurrency)) {
-                                    $def = $bean->getFieldDefinition($bean->$rField);
-                                    // start by just using the type in the def
-                                    $def_type = $def['type'];
-                                    // but if custom_type is set, use it, when it's not set and dbType is, use dbType
-                                    if (isset($def['custom_type']) && !empty($def['custom_type'])) {
-                                        $def_type = $def['custom_type'];
-                                    } elseif (isset($def['dbType']) && !empty($def['dbType'])) {
-                                        $def_type = $def['dbType'];
-                                    }
-                                    // always lower case the type just to make sure.
-                                    $isCurrency = (strtolower($def_type) === 'currency');
+                                    $isCurrency = $this->isFieldCurrency($bean, $rField);
                                 }
 
                                 $count++;
 
                                 $value = $bean->$rField;
                                 if ($isCurrency) {
-                                    $value = SugarCurrency::convertAmountToBase($value, $bean->base_rate);
+                                    $value = SugarCurrency::convertWithRate($value, $bean->base_rate);
                                 }
 
                                 $sum = SugarMath::init($sum)->add($value)->result();
@@ -208,7 +193,7 @@ class RelatedValueApi extends SugarApi
                         $relBeans = $focus->$link->getBeans(array("enforce_teams" => true));
 
                         foreach ($relBeans as $bean) {
-                            if (in_array($bean->$rfDef['condition_field'], $condition_values)) {
+                            if (in_array($bean->{$rfDef['condition_field']}, $condition_values)) {
                                 $sum++;
                             }
                         }
@@ -223,6 +208,7 @@ class RelatedValueApi extends SugarApi
                     break;
                 case "rollupConditionalSum":
                     $ret[$link][$type][$rField] = '0';
+                    $values = [];
 
                     if ($focus->load_relationship($link)) {
                         if (preg_match('/^[a-zA-Z0-9_\-$]+\(.*\)$/', $rfDef['condition_expr'])) {
@@ -233,19 +219,29 @@ class RelatedValueApi extends SugarApi
                         $toRate = isset($focus->base_rate) ? $focus->base_rate : null;
                         $relBeans = $focus->$link->getBeans(array("enforce_teams" => true));
                         $sum = '0';
+                        $isCurrency = null;
                         foreach ($relBeans as $bean) {
                             if (!empty($bean->$rField) && is_numeric($bean->$rField) &&
                                 //ensure the user can access the fields we are using.
                                 ACLField::hasAccess($rField, $bean->module_dir, $GLOBALS['current_user']->id, true)
                             ) {
-                                if (in_array($bean->$rfDef['condition_field'], $condition_values)) {
+                                if (in_array($bean->{$rfDef['condition_field']}, $condition_values)) {
+                                    if (is_null($isCurrency)) {
+                                        $isCurrency = $this->isFieldCurrency($bean, $rField);
+                                    }
+                                    $value = $bean->$rField;
+                                    if ($isCurrency) {
+                                        $value = SugarCurrency::convertWithRate($value, $bean->base_rate, $toRate);
+                                    }
                                     $sum = SugarMath::init($sum)->add(
-                                        SugarCurrency::convertWithRate($bean->$rField, $bean->base_rate, $toRate)
+                                        $value
                                     )->result();
+                                    $values[$bean->id] = $value;
                                 }
                             }
                         }
                         $ret[$link][$type][$rField] = $sum;
+                        $ret[$link][$type][$rField . '_values'] = $values;
                     }
                     break;
                 case 'maxRelatedDate':
@@ -310,5 +306,27 @@ class RelatedValueApi extends SugarApi
         }
 
         return $ret;
+    }
+
+    /**
+     * Test if the current field is a currency field
+     *
+     * @param SugarBean $bean The Bean to which the Field Belongs
+     * @param string $field The name of the field
+     * @return bool
+     */
+    protected function isFieldCurrency(SugarBean $bean, $field)
+    {
+        $def = $bean->getFieldDefinition($field);
+        // start by just using the type in the def
+        $def_type = $def['type'];
+        // but if custom_type is set, use it, when it's not set and dbType is, use dbType
+        if (isset($def['custom_type']) && !empty($def['custom_type'])) {
+            $def_type = $def['custom_type'];
+        } elseif (isset($def['dbType']) && !empty($def['dbType'])) {
+            $def_type = $def['dbType'];
+        }
+        // always lower case the type just to make sure.
+        return (strtolower($def_type) === 'currency');
     }
 }

@@ -247,9 +247,10 @@
                                 // 23.12.2010, d.m.Y
                                 // 12.23.2010, m.d.Y
                                 parts = value.replace(/[\.\-]/g, '/').split('/');
-                                invalidNumberOfDigits = _.filter(parts, function(part, index) { 
-                                    return part.length === 3 || part.length > 4; 
-                                });
+                                invalidNumberOfDigits = _.filter(parts,
+                                    (part) => part.length === 3 || part.length > 4
+                                );
+
                                 if (invalidNumberOfDigits.length) {
                                     return value;
                                 }
@@ -342,7 +343,7 @@
                  * @return {Boolean} true if value is invalid, undefined otherwise
                  */
                 number: function(field, value) {
-                    if (_.indexOf(['int', 'float', 'currency'], field.type) != -1) {
+                    if (_.indexOf(['int', 'float', 'decimal', 'currency'], field.type) != -1) {
                         return (_.isBoolean(value) || (_.isString(value) && !value.trim().length) ||
                             isNaN(parseFloat(value)) || !_.isFinite(value)) ?
                             true : undefined;

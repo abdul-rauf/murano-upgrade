@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Biblioteca Interfata Utilizator Yahoo! - Utilitatile Bibliotecii IU faciliteaza implementarea unor bogate caracteristici pe partea de client.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - O atractiva clasa de transfer email pentru PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - Un minifier Javascript scris în PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Permite o rapida criptare cu doua cai tip blowfish, fara a necesita extensia MCrypt PHP',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTML_Sax3 - Unparser SAX pentru HTML si alte documente XML gresit formate',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Extensii Biblioteca IU Yahoo! - Extensii la Biblioteca Inerfata Utilizator Yahoo! elaborate de Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Detectie Flash Player JavaScript si incorporare script.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Bine aţi venit la Tabloul de ajutor din Sugar 7',
-    'LBL_HELP_RECORD' => 'Componenta Ajutor afişează informaţii specifice despre modulul pe care îl vizualizaţi, prezintă etapele detaliate pentru realizarea unor acţiuni în modul şi vă ghidează unde să mergeţi pentru a obţine informaţii şi asistenţă mai cuprinzătoare. Tabloul Ajutor rămâne deschis, astfel încât puteţi vizualiza etapele pe măsură ce le executaţi în modul.
-
-Tabloul Ajutor este disponibil pentru toate modulele Sugar 7 şi poate fi trecut de la "deschis" la "închis" prin atingerea pictogramei Ajutor din antetul aplicaţiei.',
+    'LBL_HELP_RECORD_TITLE' => 'Ajutor',
+    'LBL_HELP_RECORD' => 'Secțiunea Ajutor afișează informații specifice despre modul pe care îl vizualizați, indică în detaliu pașii pentru efectuarea anumitor acțiuni în modul și vă indică unde trebuie să mergeți pentru informații mai detaliate și asistență.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtru',
 );

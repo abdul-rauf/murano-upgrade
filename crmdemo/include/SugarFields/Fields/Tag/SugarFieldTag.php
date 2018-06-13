@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'include/SugarFields/Fields/Relatecollection/SugarFieldRelatecollection.php';
 
 /**
  * The SugarFieldTag handles the tag field
@@ -88,7 +87,7 @@ class SugarFieldTag extends SugarFieldRelatecollection
     protected function getTagBean($record)
     {
         // We'll need this no matter what
-        $tagBean = BeanFactory::getBean('Tags');
+        $tagBean = BeanFactory::newBean('Tags');
 
         if (is_array($record)) {
             if (!empty($record['id'])) {

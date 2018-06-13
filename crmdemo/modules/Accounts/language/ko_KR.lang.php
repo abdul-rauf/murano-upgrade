@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => '첨부',
     'LBL_REVENUELINEITEMS' => '매출 라인아이템',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => '계정 미리보기',
     'LBL_NOTES_SUBPANEL_TITLE' => '메모 목록',
 
     // Help Text

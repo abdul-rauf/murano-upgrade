@@ -15,7 +15,7 @@
  * @singleton
  * @alias SUGAR.App.cookie
  */
-(function(app, location, cookie) {
+(function(app, location) {
 
     var path = location.pathname.replace(/\/[^\/]*$/, "/cookie.html"),
         getCookie = function() {

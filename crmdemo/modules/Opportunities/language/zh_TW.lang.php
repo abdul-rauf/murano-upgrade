@@ -166,19 +166,19 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模組可以從頭至尾追蹤單個銷售。每個 {{module_name}} 記錄都代表一次未來的銷售，並包含相關銷售資料，且與其他重要記錄有關，如 {{quotes_module}}、{{contacts_module}} 等等。{{module_name}} 一般會經歷數個「銷售階段」，直到它標記為「結束並贏得客戶」或「結束但客戶流失」。甚至可以透過使用 Sugar 的 {{forecasts_singular_module}} 模組來了解和預測銷售趨勢以及實現銷售配額的工作重心，對 {{plural_module_name}} 和進一步加以利用。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 可讓您從頭至尾追蹤單個銷售。各 {{module_name}} 記錄代表一項預期銷售，包含相關銷售資料，並已關聯至其他重要記錄，如 {{quotes_module}}、{{contacts_module}} 等。{{module_name}} 一般會經歷數個「銷售階段」，直到它標記為「結束並贏得客戶」或「結束但客戶流失」。透過使用 Sugar 的 {{forecasts_singular_module}} 模組來了解和預測銷售趨勢以及實現銷售配額的工作重心，可對 {{plural_module_name}} 進一步加以利用。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '透過 {{plural_module_name}} 模組，您可從頭至尾追蹤單個銷售及其所屬項目。各 {{module_name}} 記錄都代表一次未來的銷售，並包含相關銷售資料，且與其他重要記錄有關，比如 {{quotes_module}}、{{contacts_module}} 等。
+    'LBL_HELP_RECORD' => '透過 {{plural_module_name}} 模組，您可從頭至尾追蹤單個銷售及其所屬項目。各 {{module_name}} 記錄代表一項預期銷售，包含相關銷售資料，並已關聯至其他重要記錄，比如 {{quotes_module}}、{{contacts_module}} 等。
 
 - 透過按一下單個欄位或「編輯」按鈕，編輯此記錄的欄位。
-- 透過切換左下角窗格至「資料檢視」，檢視或修改子面板其他記錄的連結
+- 透過切換左下角窗格至「資料檢視」，檢視或修改子面板其他記錄的連結。
 - 透過切換左下角窗格至「活動流」，在 {{activitystream_singular_module}} 中執行和檢視使用者註解和記錄變更歷史。
 - 使用記錄名稱右側的圖示追蹤此記錄或將此記錄新增至我的最愛。
 - 「編輯」按鈕右側的下拉式「動作」功能表提供其他動作選項。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '透過 {{plural_module_name}} 模組，您可從頭至尾追蹤單個銷售及其所屬項目。各 {{module_name}} 記錄都代表一次未來的銷售，並包含相關銷售資料，且與其他重要記錄有關，比如 {{quotes_module}}、{{contacts_module}} 等。
+    'LBL_HELP_CREATE' => '透過 {{plural_module_name}} 模組，您可從頭至尾追蹤單個銷售及其所屬項目。各 {{module_name}} 記錄代表一項預期銷售，包含相關資料，且已關聯至其他重要記錄，比如 {{quotes_module}}、{{contacts_module}} 等。
 
 建立 {{module_name}}：
 1. 按需提供欄位值。

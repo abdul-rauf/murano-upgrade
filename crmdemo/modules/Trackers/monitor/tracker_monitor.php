@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,23 +10,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Trackers/monitor/Monitor.php');
-
 class tracker_monitor extends Monitor
 {
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function tracker_monitor($name = '', $monitorId = '', $metadata = '', $store = '')
-    {
-        self::__construct($name, $monitorId, $metadata, $store);
-    }
-
-    public function __construct($name = '', $monitorId = '', $metadata = '', $store = '')
-    {
-        parent::__construct($name, $monitorId, $metadata, $store);
-    }
-
     /**
      * save
      * This method retrieves the Store instances associated with monitor and calls

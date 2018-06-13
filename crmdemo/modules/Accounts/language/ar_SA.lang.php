@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'المرفق',
     'LBL_REVENUELINEITEMS' => 'بنود العائدات',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'معاينة الحسابات',
     'LBL_NOTES_SUBPANEL_TITLE' => 'ملاحظات',
 
     // Help Text

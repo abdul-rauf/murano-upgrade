@@ -39,6 +39,21 @@ $viewdefs['Quotes']['base']['view']['list'] = array(
                     'sortable'          => false,
                 ),
                 array(
+                    'label' => 'LBL_QUOTE_STAGE',
+                    'enabled' => true,
+                    'default' => true,
+                    'name' => 'quote_stage',
+                ),
+                array(
+                    'label'   => 'LBL_AMOUNT',
+                    'enabled' => true,
+                    'default' => true,
+                    'name'    => 'total',
+                    'related_fields' => array(
+                        'currency_id',
+                    ),
+                ),
+                array(
                     'label'   => 'LBL_LIST_AMOUNT_USDOLLAR',
                     'enabled' => true,
                     'default' => true,
@@ -58,6 +73,16 @@ $viewdefs['Quotes']['base']['view']['list'] = array(
                     'enabled'           => true,
                     'default'           => true,
                     'sortable'          => false,
+                ),
+                array(
+                    'name' => 'date_modified',
+                    'enabled' => true,
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'date_entered',
+                    'enabled' => true,
+                    'default' => true,
                 ),
             ),
         ),

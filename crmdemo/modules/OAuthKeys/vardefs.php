@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -31,7 +30,6 @@ $dictionary['OAuthKey'] = array('table' => 'oauth_consumer',
           array (
             'name' => 'c_secret',
             'vname' => 'LBL_CONSSECRET',
-            //'type' => 'encrypt',
             'type' => 'varchar',
           	'required' => true,
             'comment' => 'Consumer secret key',
@@ -80,6 +78,5 @@ $dictionary['OAuthKey'] = array('table' => 'oauth_consumer',
     )
 );
 if (!class_exists('VardefManager')){
-        require_once('include/SugarObjects/VardefManager.php');
 }
 VardefManager::createVardef('OAuthKeys','OAuthKey', array('basic','assignable'));

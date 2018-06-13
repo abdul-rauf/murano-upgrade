@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $past_remove = false;
 
 
-$focus = BeanFactory::getBean('WorkFlowActionShells');
+$focus = BeanFactory::newBean('WorkFlowActionShells');
 
 
 if(!empty($_POST['record'])){
@@ -49,7 +48,7 @@ $parent_id = $focus->id;
 	} else {
 		$rel1_filter_id = "";
 	}
-	$rel1_object = BeanFactory::getBean('Expressions');
+	$rel1_object = BeanFactory::newBean('Expressions');
 
 	//Checked if there is an advanced filter
 	if($focus->rel_module_type!="filter"){
@@ -78,7 +77,7 @@ $parent_id = $focus->id;
 for ($i = 0; $i <= $total_field_count; $i++) {
     if (!empty($_REQUEST['set_type'][$i])) {
         //this attribute is set, so lets store or update
-        $action_object = BeanFactory::getBean('WorkFlowActions');
+        $action_object = BeanFactory::newBean('WorkFlowActions');
         if (!empty($_REQUEST['action_id'][$i])) {
             $action_object->retrieve($_REQUEST['action_id'][$i]);
             //end if action id is already present

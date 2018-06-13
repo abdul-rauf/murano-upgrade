@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - UI-biblioteksverktygen hjälper dig att skapa lysande klientbaserade funktioner.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - En fullfjädrad emailöverföringsklass för PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - En Javascript minimerare skriven i PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Tillåter snabb tvåvägskryptering utan att kräva PHP-tillägget MCrypt.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - En SAX-parser för HTML och andra kasst formaterade XML-dokument',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - Tillägg till Yahoo! User Interface Library av Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Skript för att hitta och bädda in Javascript Flash Player.',
@@ -274,8 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Välkommen till Sugar 7 Hjälp Dashboard',
-    'LBL_HELP_RECORD' => 'Hjälp Dashlet visar specifik information om modulen du visar, ger detaljerade steg för att utföra vissa åtgärder i modulen, och leder dig vart man ska gå för mer omfattande information och stöd. Hjälp Dashlet förblir öppen så du kan granska de steg som du utför i modulen. Hjälpdashboard är tillgänglig för alla Sugar 7 moduler och det kan väljas mellan "öppna" och "stängda" genom att klicka på Hjälp i programmets sidfot.',
+    'LBL_HELP_RECORD_TITLE' => 'Hjälp',
+    'LBL_HELP_RECORD' => 'Hjälpen visar specifik information om modulen du använder, ger detaljerade steg för att utföra vissa åtgärder i modulen, och visar dig vart du kan gå för att få mer omfattande information och stöd.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filter',
 );

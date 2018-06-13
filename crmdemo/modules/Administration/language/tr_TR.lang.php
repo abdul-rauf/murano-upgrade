@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Mevcut Olmayan Temalar',
     'LBL_TIMEZONE' => 'Zaman Dilimi',
     'LBL_TO'    => 'kime',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Hangi sistem ve kullanıcı verilerinin izleneceğini seçin',
     'LBL_UPDATE_CHECK_AUTO'=>'Otomatikman',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manuel',
     'LBL_UPDATE_CHECK_TYPE'=>'<b>Güncellemeleri Otomatik Olarak Kontrol Et</b> - Eğer seçilmiş ise, sistem periyodik olarak uygulamanın yeni sürümünün olup olmadığını kontrol edecektir.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'config.php başarıyla yeniden kuruldu.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Uyarı: Dosyaların en az 6MB&#39;ın üzerine çıkılmasına izin verecek şekilde PHP yapılandırmanız değiştirilebilmeli. Lütfen php.ini dosyasında yer alan upload_max_filesize değerinizi güncelleyin:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Lütfen config.php&#39;yi yazılabilir yapınız ve yeniden deneyin.',
-    'MSG_REBUILD_EXTENSIONS' => '<a href="index.php?module=Administration&action=Upgrade">Onar</a> ekranına git ve Uzantıları Yeniden Kur&#39;a tıklayın.',
-    'MSG_REBUILD_RELATIONSHIPS' => '<a href="index.php?module=Administration&action=Upgrade">Onar</a> ekranına git ve İlişkileri Yeniden Kur&#39;a tıklayın.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Şu anda etkin Çevrimdışı İstemci bulunmamaktadır.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Çevrimdışı İstemciyi görüntülemek istediğinizden emin misiniz?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Çevrimdışı İstemciyi seçmek istediğinizden emin misiniz?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Problemler',
 'ML_MANIFEST_ISSUE'=>'Manifestli Problem',
 'ML_CONFIG_OVERRIDE'=>'Konfigürasyonda değişiklik yapılmasına izin verilmemektedir.',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Anahtar - sadece harflerden, sayılardan ve alt tirelerden oluşabilir. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Navigasyon Barda Hızlı Oluşturu Yapılandır',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Hızlı Oluştur navigasyon barında hangi modüllerin mevcut olacağını belirleyin',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Kullanıcıların hızlı şekilde navigasyon barda Artı simgesini kullanarak kayıt oluşturabileceği modülleri seçin. Etkin Modül ve Devre dışı Modül kutucukları arasında sürükleyip bırakın.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Üretici',
 	'ProductBundleNotes' => 'ÜrünSepetNot&#39;u',
 	'ProductBundles'   => 'ÜrünSepeti',
-	'ProjectResources' => 'ProjeKaynağı',
 
 	'Relationships' => 'İlişki',
 	'Releases'       => 'Sürüm',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'Planlayıcı İşi',
 	'Shippers'       => 'Nakliyatçı',
 	'TaxRates'       => 'Vergi Oranı',
-	'TeamHierarchies'  => 'Takım Hiyerarşisi',
 	'TeamMemberships'   => 'Takım Üyeliği',
 	'TeamNotices'    => 'Takım Bildirimi',
 	'TeamSetModules'   => 'Takım Küme Modülü',

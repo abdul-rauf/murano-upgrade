@@ -11,8 +11,6 @@
  */
 
  // $Id: zip_utils.php 16276 2006-08-22 18:56:15Z awu $
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 function unzip( $zip_archive, $zip_dir)
 {
    return unzip_file($zip_archive, null, $zip_dir);
@@ -72,7 +70,8 @@ function zip_dir( $zip_dir, $zip_archive )
     }
     $zip = new ZipArchive();
     // we need this for shadow path resolution to work
-    $zip->open(UploadFile::realpath($zip_archive), ZIPARCHIVE::CREATE|ZIPARCHIVE::OVERWRITE); // we need realpath here for PHP streams support
+    // we need realpath here for PHP streams support
+    $zip->open(UploadFile::realpath($zip_archive), ZipArchive::CREATE|ZipArchive::OVERWRITE);
     $path = UploadFile::realpath($zip_dir);
 
     /** @var RecursiveIteratorIterator|RecursiveDirectoryIterator $it */

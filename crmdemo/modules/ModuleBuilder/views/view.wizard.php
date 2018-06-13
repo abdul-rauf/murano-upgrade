@@ -9,9 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'modules/ModuleBuilder/MB/AjaxCompose.php' ;
-require_once 'modules/ModuleBuilder/Module/StudioModuleFactory.php' ;
-require_once 'include/MVC/View/SugarView.php' ;
 
 class ModuleBuilderViewWizard extends SugarView
 {
@@ -224,7 +221,6 @@ class ModuleBuilderViewWizard extends SugarView
 
     public function generateStudioModuleButtons()
     {
-        require_once 'modules/ModuleBuilder/Module/StudioBrowser.php' ;
         $sb = new StudioBrowser ( ) ;
         $sb->loadModules () ;
         $nodes = $sb->getNodes () ;

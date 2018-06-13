@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -39,11 +38,5 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'acl_action'=>'import',
         'acl_module'=>$module_name,
         'icon' => 'fa-arrow-circle-o-up',
-    ),
-    array(
-        'type' => 'dnb-bal-import-menu-label',
-        'default_value' => 'LBL_BAL',
-        'icon' => 'fa-arrow-circle-o-up',
-        'route' => '#'.$module_name.'/layout/dnb-bal',
     ),
 );

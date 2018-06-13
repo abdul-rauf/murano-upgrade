@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,27 +10,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-require_once('modules/Trackers/monitor/Monitor.php');
-require_once('modules/Trackers/Metric.php');
-require_once('modules/Trackers/Trackable.php');
-
 class tracker_queries_monitor extends Monitor implements Trackable {
 
     var $cached_data = array();
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function tracker_queries_monitor($name = '', $monitorId = '', $metadata = '', $store = '')
-    {
-        self::__construct($name, $monitorId, $metadata, $store);
-    }
-
-    public function __construct($name = '', $monitorId = '', $metadata = '', $store = '')
-    {
-        parent::__construct($name, $monitorId, $metadata, $store);
-    }
 
     /**
      * save
@@ -46,7 +27,6 @@ class tracker_queries_monitor extends Monitor implements Trackable {
         $this->cached_data[] = $this->toArray();
 
     	if($flush && empty($GLOBALS['tracker_' . $this->table_name]) && !empty($this->cached_data)) {
-            require_once('modules/Trackers/TrackerUtility.php');
             $write_entries = array();
 
             foreach($this->cached_data as $entry) {
@@ -113,3 +93,4 @@ class tracker_queries_monitor extends Monitor implements Trackable {
     	} //if
    } //save
 }
+

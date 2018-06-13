@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/ListView/ListViewSmarty.php');
 
 global $app_strings, $app_list_strings, $current_language, $currentModule, $mod_strings;
 
@@ -33,7 +31,7 @@ if (!isset($where)) $where = "assigned_user_id = {$current_user->id}";
 
 echo '<br />' .get_form_header($mod_strings['LBL_LIST_FORM_TITLE'], '', false);
 
-$savedSearch = BeanFactory::getBean('SavedSearch');
+$savedSearch = BeanFactory::newBean('SavedSearch');
 $lv = new ListViewSmarty();
 require SugarAutoLoader::loadWithMetafiles('SavedSearch', 'listviewdefs');
 

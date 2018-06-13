@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - Свойства UI Library облегчают применение широких возможностей клиентских свойств.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Полнофункциональный класс пересылки e-mail для PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - минимизатор Javascript, написанный на PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Дает возможность быстрого двустороннего шифрования blowfish без запросов расширения MCrypt PHP.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - синтаксический анализатор SAX  для HTML и других плохо сформированных XML-документов',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - Расширения к библиотеке пользовательского интерфейса, автор: Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - скрипт для обнаружения и остановки Javascript Flash Player.',
@@ -274,8 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Добро пожаловать в Справочную панель Sugar 7',
-    'LBL_HELP_RECORD' => 'Справка отображает конкретную просматриваемую информацию о модуле, предусматривает детальные шаги для выполнения некоторых действий в модуле и указывает путь для получения более полной информации и поддержки. Справочная панель остается открытой для того, чтобы Вы просматривали шаги тогда, когда Вы выполняете шаги в модуле. Справочная панель доступна для всех модулей Sugar 7 и может переключаться на "открытую" и "закрытую" нажатием на иконку "Помощь" в нижнем колонтитуле приложения.',
+    'LBL_HELP_RECORD_TITLE' => 'Справка',
+    'LBL_HELP_RECORD' => 'Справка содержит сведения о просматриваемом модуле, предоставляет подробные инструкции для выполнения конкретных действий в модуле, а также указания для получения более полной информации и поддержки.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Фильтр',
 );

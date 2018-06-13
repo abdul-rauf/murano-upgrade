@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -100,7 +99,7 @@ EOQ;
 	
 	$javascript = new javascript();
 	$javascript->setFormName($formname);
-	$javascript->setSugarBean(BeanFactory::getBean('ProspectLists'));
+	$javascript->setSugarBean(BeanFactory::newBean('ProspectLists'));
 	$javascript->addRequiredFields($prefix);
 	$form .=$javascript->getScript();
 	$mod_strings = $temp_strings;
@@ -113,7 +112,7 @@ EOQ;
 		require_once('include/formbase.php');
 	
 		
-		$focus = BeanFactory::getBean('ProspectLists');
+		$focus = BeanFactory::newBean('ProspectLists');
 		if($useRequired &&  !checkRequired($prefix, array_keys($focus->required_fields))){
 			return null;
 		}

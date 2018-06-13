@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarFields/Fields/Base/SugarFieldBase.php');
 
 class SugarFieldRelate extends SugarFieldBase {
 
@@ -107,7 +106,6 @@ class SugarFieldRelate extends SugarFieldBase {
                 'call_back_function' => $call_back_function,
                 'form_name' => $form_name,
                 'field_to_name_array' => array(
-                          //'id' => (empty($displayParams['idName']) ? $vardef['id_name'] : ($displayParams['idName'] . '_' . $vardef['id_name'])) ,
                           //bug 43770: Assigned to value could not be saved during lead conversion
                           'id' => (empty($displayParams['idNameHidden']) ? $vardef['id_name'] : ($displayParams['idNameHidden'] . $vardef['id_name'])) ,
                           ((empty($vardef['rname'])) ? 'name' : $vardef['rname']) => (empty($displayParams['idName']) ? $vardef['name'] : $displayParams['idName']),
@@ -296,13 +294,17 @@ class SugarFieldRelate extends SugarFieldBase {
             // check if the ACL metadata has been already populated by another relate field
             if (isset($properties['module'])) {
                 // trying to reconstruct relate bean from the fetched data
-                $relate = BeanFactory::getBean($properties['module']);
-                $relate->id = $bean->{$properties['id_name']};
+                $relate = BeanFactory::newBean($properties['module']);
+                $row = array('id' => $bean->{$properties['id_name']});
+
                 $ownerField = $relate->getOwnerField();
                 $ownerAlias = $fieldName . '_owner';
                 if ($ownerField && isset($bean->$ownerAlias)) {
-                    $relate->$ownerField = $bean->$ownerAlias;
+                    $row[$ownerField] = $bean->$ownerAlias;
                 }
+
+                // make sure fetched row is populated as SugarACLStatic::beanACL() may use it
+                $relate->fetched_row = $relate->populateFromRow($row);
 
                 $mm = MetaDataManager::getManager($service->platform);
                 $data[$link]['_acl'] = $mm->getAclForModule($relate->module_dir, $service->user, $relate);
@@ -322,7 +324,7 @@ class SugarFieldRelate extends SugarFieldBase {
     {
         if ( !isset($vardef['module']) )
             return false;
-        $newbean = BeanFactory::getBean($vardef['module']);
+        $newbean = BeanFactory::newBean($vardef['module']);
 
         // Bug 32869 - Assumed related field name is 'name' if it is not specified
         if ( !isset($vardef['rname']) )
@@ -345,7 +347,7 @@ class SugarFieldRelate extends SugarFieldBase {
 
             // Bug 24075 - clear out id field value if it is invalid
             if ( isset($focus->$idField) ) {
-                $checkfocus = BeanFactory::getBean($vardef['module']);
+                $checkfocus = BeanFactory::newBean($vardef['module']);
                 if ( $checkfocus && is_null($checkfocus->retrieve($focus->$idField)) )
                     $focus->$idField = '';
             }

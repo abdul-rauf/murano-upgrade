@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -52,7 +51,7 @@ else if(isset($_REQUEST['uid'])) {
 }
 else if(isset($_REQUEST['entire']) && $_REQUEST['entire'] == 'true') {
 	// do entire list
-	$focus = BeanFactory::getBean( $_SESSION['MAILMERGE_MODULE']);
+	$focus = BeanFactory::newBean( $_SESSION['MAILMERGE_MODULE']);
 
 	if(isset($_SESSION['export_where']) && !empty($_SESSION['export_where'])) { // bug 4679
 		$where = $_SESSION['export_where'];
@@ -104,13 +103,13 @@ if(isset($_SESSION['MAILMERGE_RECORD']))
 	$_SESSION['MAILMERGE_MODULE'] = $rModule;
 	if(!empty($rModule) && $rModule != "MailMerge")
 	{
-	    $seed = BeanFactory::getBean($rModule);
+	    $seed = BeanFactory::newBean($rModule);
 	    $selected_objects = '';
     	foreach($_SESSION['MAILMERGE_RECORD'] as $record_id)
     	{
     		if($rModule == 'Campaigns'){
 
-    			$prospect = BeanFactory::getBean('Prospects');
+    			$prospect = BeanFactory::newBean('Prospects');
     			$prospect_module_list = array('leads', 'contacts', 'prospects', 'users');
     			foreach($prospect_module_list as $mname){
                     $query = sprintf(
@@ -193,18 +192,9 @@ if ($user_merge != 'on' || !isset($admin->settings['system_mailmerge_on']) || !$
 $xtpl->parse("main");
 $xtpl->out("main");
 
-/*function get_user_module_list($user){
-	global $app_list_strings, $current_language;
-	$app_list_strings = return_app_list_strings_language($current_language);
-	$modules = query_module_access_list($user);
-	global $modInvisList;
-
-	return $modules;
-}*/
-
 function getDocumentRevisions()
 {
-	$document = BeanFactory::getBean('Documents');
+	$document = BeanFactory::newBean('Documents');
 
 	$currentDate = $document->db->now();
 	$empty_date = $document->db->emptyValue("date");

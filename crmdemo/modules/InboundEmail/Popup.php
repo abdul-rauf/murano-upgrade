@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -87,7 +86,7 @@ if(isset($_REQUEST['ssl']) && ($_REQUEST['ssl'] == "true" || $_REQUEST['ssl'] ==
 }
 
 
-$ie = BeanFactory::getBean('InboundEmail');
+$ie = BeanFactory::newBean('InboundEmail');
 if(!empty($_REQUEST['ie_id'])) {
     $ie->disable_row_level_security = true;
     $ie->retrieve($_REQUEST['ie_id']);
@@ -115,22 +114,7 @@ if($popupBoolean) {
 
 ///////////////////////////////////////////////////////////////////////////////
 ////	COMMON CODE
-echo /*'
-<HTML>
-	<HEAD>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>SugarCRM - Commercial Open Source CRM</title>
-		'.SugarThemeRegistry::current()->getCSS().'
-		<script type="text/javascript">
-				function setMailbox(box) {
-					var mb = opener.document.getElementById("mailbox");
-					mb.value = box;
-				}
-		</script>
-
-	</HEAD>
-	<body style="margin: 10px">*/'
-	<p>
+echo '<p>
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">
 			<tr>
 				<td>
@@ -150,22 +134,8 @@ echo /*'
 					<div id="testSettingsErr">'.$iniError.'</div>
 				</td>
 			</tr>';
-
-if($popupBoolean) {
-/*	echo '	<tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr>
-				<td></td>
-				<td>
-					<form name="form">
-					<input name="close" type="button" title="'.$mod_strings['LBL_CLOSE_POPUP'].'"  value="    '.$mod_strings['LBL_CLOSE_POPUP'].'    " onClick="window.close()">
-					</form>
-				</td>
-			</tr>';*/
-}
-
 echo '	</table>';
 
 
 ////	END COMMON CODE
 ///////////////////////////////////////////////////////////////////////////////
-
-?>

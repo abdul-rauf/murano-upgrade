@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'Klientų ataskaitos',
   'LBL_CONTACT_REPORTS' => 'Kontaktų ataskaitos',
   'LBL_OPPORTUNITY_REPORTS' => 'Pardavimų ataskaitos',
+    'LBL_RECENTLY_MODIFIED' => 'Neseniai modifikuoti',
 
   'LBL_CASE_REPORTS' => 'Aptarnavimo ataskaitos',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'Ateinančias 30 dienų',
   'LBL_THIS_YEAR'=>'Šiais metais',
   'LBL_LIST_FORM_TITLE' =>'Ataskaitos',
+  'LBL_LIST_REPORT_NAME' => 'Pavadinimas',
   'LBL_PROSPECT_REPORTS'=>'Adresatų ataskaitos',
   'LBL_CHART_TYPE'=>'Grafiko tipas',
   'LBL_IS_EMPTY'=>'Yra tuščias',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>Žingsniai kaip nurodyti filtrus:</b><br/><br/>1) <b>Susiję moduliai</b> langelyje pasirinkite modulį, kurio filtrus Jūs norėsite naudoti. Pagal nutylėjimą, pagrindinis modulis yra pažymėtas. <br/><br/><br />	Jūs galite pasirinkti susijusį modulį, paspausdami ant to modulio. Galite išplėsti visą pavaldžią hierarchiją ir pamatyti kitus modulius susijusius su pasirinktu moduliu.  Pasirinkus tam tikrą modulį, jo laukai matysis langelyje <b>Galimi laukai</b>.<br/><br/><br />	2) Paspauskite ant lauko <b>Galimi laukai</b> langelyje, kad jis būtų įtrauktas į filtrus. Jūs taip pat galite lengvai surasti Jums reikalingą lauką, jei jo įvesite jo pavadinimą į paieškos langelį.<br/><br/><br />	Pasirinkus iš tam tikro modulio reikalingus laukus filtrams, Jūs galite imti kitą modulį <b>Susiję moduliai</b> langelyje ir jo laukus taip pat įtraukti į filtrus.<br/><br/><br />	3) Pasirinkite <b>IR</b> arba <b>ARBA</b>, kad nurodyti ar sąlygai patenkinti užtenka vieno ar visų filtrų validavimo vienu metu.<br/><br/><br />	4) [Papildomai] Paspauskite <b>Įdėti filtrų grupę</b>, kad sukurti filtrų grupes. Jūs galite sukurti neribotą skaičių filtrų grupių ir neribotą skaičių filtrų pačiose filtrų grupėse.<br/><br/><br />	5) [Papildomai] Pažymėkite varnelę <b>dinaminis</b> ant filtro, jei norite, kad vartotojas galėtų sugeneruotą ataskaitą toliau filtruotis savo nuožiūra.",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>Žingsniai kaip nurodyti grupavimą pagal:</b><br></br>1) <b>Susiję moduliai</b> langelyje pasirinkite modulį, kurį norėsite panaudoti įrašų grupavime. Pagal nutylėjimą, pagrindinis modulis yra pažymėtas. <br/><br/><br />	Jūs galite pasirinkti susijusį modulį, paspausdami ant to modulio. Galite išplėsti visą pavaldžią hierarchiją ir pamatyti kitus modulius susijusius su pasirinktu moduliu. Pasirinkus tam tikrą modulį, jo laukai matysis langelyje <b>Galimi laukai.</b><br/><br/><br />	2) Paspauskite ant lauko <b>Galimi laukai</b> langelyje, kad būtent pagal šį lauką būtų grupuojama ataskaita. Jūs taip pat galite lengvai surasti Jums reikalingą lauką, jei jo įvesite jo pavadinimą į paieškos langelį.<br/><br/><br />	Pasirinkus iš tam tikro modulio reikalingus laukus, Jūs galite imti kitą modulį <b>Susiję moduliai</b> langelyje ir jo laukus taip pat įtraukti į ataskaitos grupavimą. Tačiau atminkite, kad ataskaita bus sunku suprasti, jei bus grupuojama daugiau nei dviem lygiais<br/><br/><br />	Jūs taip pat galite keisti laukų seką, juos nutempdami į norimą poziciją.  Pakeitus seką, pasikeis ir rezultatų pateikimas.<br/><br/> Matricinėse ataskaitos, Jūs galite grupuoti duomenis iki trijų laukų.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>Žingsniai kaip nurodyti kokius stulpelius atvaizduoti:</b><br/><br/>1) <b>Susiję moduliai</b> langelyje pasirinkite modulį, kurį norėsite panaudoti įrašų atvaizdavime. Pagal nutylėjimą, pagrindinis modulis yra pažymėtas.<br/><br/><br />	Jūs galite pasirinkti susijusį modulį, paspausdami ant to modulio. Galite išplėsti visą pavaldžią hierarchiją ir pamatyti kitus modulius susijusius su pasirinktu moduliu. Pasirinkus tam tikrą modulį, jo laukai matysis langelyje <b>Galimi laukai</b><br/><br/><br />	2) Paspauskite ant lauko <b>Galimi laukai</b> langelyje, kad būtent pagal šis laukas būtų atvaizduotas ataskaitoje. Jūs taip pat galite lengvai surasti Jums reikalingą lauką, jei jo įvesite jo pavadinimą į paieškos langelį.<br/><br/><br />	Pasirinkus iš tam tikro modulio reikalingus laukus, Jūs galite imti kitą modulį <b>Susiję moduliai</b> langelyje ir jo laukus taip pat įtraukti į ataskaitos atvaizdavimą. Jūs galite pasirinkti neribotą skaičių laukų, tačiau per daug laukų įdėjus, ataskaitos ilgiau užtruks susigeneruoti ir pačią ataskaitą bus sunkiau suprasti.<br/><br/><br />	Jūs taip pat galite keisti laukų seką, juos nutempdami į norimą poziciją. Pakeitus laukų seką, pasikeis stulpelių seka ir ataskaitoje." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Rodytinų santraukų pasirinkimo veiksmai:</b><br/><br/>1) Srityje <b>Susiję moduliai</b> spustelėkite modulį, kurį norite naudoti santraukoms ataskaitoje. Pagal numatytuosius parametrus pasirinktas yra pagrindinis modulis (viršutinis mazgas medžio rodinyje).<br/><br/>	Galite pasirinkti susijusį modulį (antrinį modulį medžio rodinyje) jį spustelėdami. Išplėskite mazgą norėdami peržiūrėti papildomus modulius, susijusius su tuo moduliu. Jūsų pasirinktas modulis lemia, kurie laukai bus rodomi srityje <b>Galimi laukai</b>.<br/><br/>	2) Srityje <b>Galimi laukai</b> spustelėkite lauką, kad pasirinktumėte santraukas ataskaitai. Lauko galite ieškoti ir srityje rašydami teksto lauke.<br/><br/>	Modulyje, pasirinktame srityje <b>Susiję moduliai</b>, pasirinkę norimą skaičių laukų galite pasirinkti kitą modulį, kuriame galite pasirinkti papildomų laukų ataskaitos santraukoms.<br/><br/> Matricų ataskaitų atveju galite pasirinkti daugiau nei vieną lauką, kuriuose būtų rodomos kelios reikšmės viename ataskaitos langelyje." ,
 
 	'LBL_ALT_SHOW' => 'Rodyti',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'Ši ataskaita atvaizduoja duomenis šia stulpelių seka:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'Aukštyn' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'Informacija',
     'LBL_REPORT_GRAND_TOTAL' => "Bendra suma",
+    'LBL_EDIT_REPORT_BUTTON' => 'Redaguoti ataskaitą',
 
     'LBL_REPORTS_TO' => 'Pavaldus:',
     'LBL_LESS_THAN_EQUAL' => 'Mažiau lygu nei',

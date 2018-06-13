@@ -10,12 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/SugarQuery/Builder/Field/Condition.php';
-require_once 'include/SugarQuery/Builder/Field/Groupby.php';
-require_once 'include/SugarQuery/Builder/Field/Having.php';
-require_once 'include/SugarQuery/Builder/Field/Orderby.php';
-require_once 'include/SugarQuery/Builder/Field/Raw.php';
-require_once 'include/SugarQuery/Builder/Field/Select.php';
 
 /**
  * SugarQuery_Builder_Field
@@ -115,8 +109,8 @@ class SugarQuery_Builder_Field
         // if its a linking table let it slide
         if (!empty($this->query->join[$this->table]->options['linkingTable'])){
             $this->nonDb = 0;
-        } elseif (empty($this->def) && $this->field != '*') {
-            $this->nonDb = 1;
+        } elseif (empty($this->def) && $this->field != 'id_c' && $this->field != '*') {
+            $this->markNonDb();
             return;
         }
 
@@ -154,10 +148,16 @@ class SugarQuery_Builder_Field
             $this->moduleName = $bean->module_name;
         } else {
             $bean = $this->query->getTableBean($this->table);
-
-            if (!empty($bean->field_defs[$this->field])) {
-                $this->moduleName = $bean->module_name;
-                $def = $bean->field_defs[$this->field];
+            if ($bean) {
+                if (!empty($bean->field_defs[$this->field])) {
+                    $this->moduleName = $bean->module_name;
+                    $def = $bean->field_defs[$this->field];
+                }
+            } else {
+                $metadata = $this->query->getTableMetadata($this->table);
+                if (isset($metadata['fields'][$this->field])) {
+                    $def = $metadata['fields'][$this->field];
+                }
             }
         }
 
@@ -181,7 +181,7 @@ class SugarQuery_Builder_Field
                 $def = $defs[$this->field];
             }
             if ((isset($def['source']) && $def['source'] == 'custom_fields') || $this->field == 'id_c') {
-                $bean = empty($bean) ? BeanFactory::getBean($this->moduleName) : $bean;
+                $bean = empty($bean) ? BeanFactory::getDefinition($this->moduleName) : $bean;
                 $this->custom = true;
                 $this->custom_bean_table = $bean->get_custom_table_name();
                 $this->bean_table = $bean->getTableName();
@@ -228,7 +228,7 @@ class SugarQuery_Builder_Field
                 }
                 // we may need to put on our detective hat and see if we can
                 // hunt down a relationship
-                $farBean = BeanFactory::newBean($this->def['module']);
+                $farBean = BeanFactory::getDefinition($this->def['module']);
 
                 // check if relate field refers some other field as id_name, otherwise we may get infinite recursion
                 if ($this->def['id_name'] != $this->def['name']
@@ -245,11 +245,13 @@ class SugarQuery_Builder_Field
                     }
                     //Now actually join the related table
                     $jta = $this->query->getJoinTableAlias($this->def['name']);
-                    $join = $this->query->joinRaw(
-                        " LEFT JOIN {$farBean->table_name} {$jta} ON ({$idField->table}.{$this->def['id_name']} = {$jta}.id AND {$jta}.deleted = 0) ",
-                        array('alias' => $jta)
-                    );
-                    $join->bean = $farBean;
+                    $this->query->joinTable($farBean->table_name, array(
+                        'joinType' => 'LEFT',
+                        'bean' => $farBean,
+                        'alias' => $jta,
+                    ))
+                        ->on()->equalsField("{$idField->table}.{$this->def['id_name']}", "{$jta}.id")
+                        ->equals("{$jta}.deleted", 0);
                 }
             }
             if (!empty($this->def['link']) && !$this->query->getJoinAlias($this->def['link'])) {
@@ -335,5 +337,4 @@ class SugarQuery_Builder_Field
         $parts = explode('.', $field);
         return $parts[1];
     }
-
 }

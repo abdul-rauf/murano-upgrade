@@ -1,6 +1,4 @@
 <?php
-if (! defined ( 'sugarEntry' ) || ! sugarEntry)
-die ( 'Not A Valid Entry Point' ) ;
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +10,6 @@ die ( 'Not A Valid Entry Point' ) ;
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 // $Id: ListViewParser.php 23721 2007-06-15 23:52:36Z clee $
-require_once ('modules/ModuleBuilder/parsers/ModuleBuilderParser.php') ;
 class ParserModifyListView extends ModuleBuilderParser
 {
 	var $listViewDefs = false ;
@@ -22,12 +19,13 @@ class ParserModifyListView extends ModuleBuilderParser
 	var $reserved = array(); // fields marked by 'studio'=>false in the listviewdefs; need to be preserved
 	//	var $language_module = '';
 	var $columns = array ( 'LBL_DEFAULT' => 'getDefaultFields' , 'LBL_AVAILABLE' => 'getAdditionalFields' , 'LBL_HIDDEN' => 'getAvailableFields' ) ;
-	function init ( $module_name , $submodule = '' )
+
+    public function init($module_name)
 	{
 		global $app_list_strings ;
 		$this->module_name = $module_name ;
 		$mod_strings = return_module_language ( $GLOBALS [ 'current_language' ], $this->module_name ) ; // needed solely so that listviewdefs that reference this can be included without error
-		$this->module = BeanFactory::getBean($this->module_name);
+		$this->module = BeanFactory::newBean($this->module_name);
 
 		$loaded = $this->_loadFromFile('ListView','modules/' . $this->module_name . '/metadata/listviewdefs.php',$this->module_name);
 		$this->originalListViewDefs = $loaded['viewdefs'] [ $this->module_name ] ;
@@ -133,7 +131,7 @@ class ParserModifyListView extends ModuleBuilderParser
 			}
 		}
 		$GLOBALS['log']->debug('parser.modifylistview.php->getAvailableFields(): field_defs='.print_r($this->availableFields,true));
-		$modFields = !empty($this->module->field_name_map) ? $this->module->field_name_map : $this->module->field_defs;
+        $modFields = !empty($this->module->field_defs) ? $this->module->field_defs : $this->module->field_defs;
 		foreach ( $modFields as $key => $def )
 		{
 			$fieldName = strtolower ( $key ) ;

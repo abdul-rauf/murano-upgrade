@@ -150,11 +150,13 @@ $viewdefs['Products']['base']['view']['record'] = array(
                 array(
                     'name' => 'account_name',
                     'label' => 'LBL_ACCOUNT_NAME',
+                    'readonly' => true,
                     'related_fields' => array('account_id'),
                 ),
                 array(
                     'name' => 'quote_name',
                     'label' => 'LBL_QUOTE_NAME',
+                    'readonly' => true,
                     'related_fields' => array('quote_id'),
                 ),
                 array(
@@ -177,7 +179,6 @@ $viewdefs['Products']['base']['view']['record'] = array(
                 ),
                 array(
                     'name' => 'cost_price',
-                    'readonly' => true,
                     'type' => 'currency',
                     'related_fields' => array(
                         'cost_price',
@@ -190,7 +191,6 @@ $viewdefs['Products']['base']['view']['record'] = array(
                     'base_rate_field' => 'base_rate',
                 ),array(
                     'name' => 'list_price',
-                    'readonly' => true,
                     'type' => 'currency',
                     'related_fields' => array(
                         'list_price',
@@ -216,7 +216,33 @@ $viewdefs['Products']['base']['view']['record'] = array(
                     'currency_field' => 'currency_id',
                     'base_rate_field' => 'base_rate',
                 ),
-                'discount_select',
+                array(
+                    'name' => 'discount',
+                    'type' => 'fieldset',
+                    'css_class' => 'quote-discount-percent',
+                    'label' => 'LBL_DISCOUNT_AMOUNT',
+                    'fields' => array(
+                        array(
+                            'type' => 'discount-select',
+                            'name' => 'discount_select',
+                            'no_default_action' => true,
+                            'buttons' => array(
+                                array(
+                                    'type' => 'rowaction',
+                                    'name' => 'select_discount_amount_button',
+                                    'label' => 'LBL_DISCOUNT_AMOUNT',
+                                    'event' => 'button:discount_select_change:click',
+                                ),
+                                array(
+                                    'type' => 'rowaction',
+                                    'name' => 'select_discount_percent_button',
+                                    'label' => 'LBL_DISCOUNT_PERCENT',
+                                    'event' => 'button:discount_select_change:click',
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
                 'contact_name',
                 array(
                     'name' => 'tag',

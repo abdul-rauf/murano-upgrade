@@ -17,8 +17,8 @@ $connector_strings = array(
 <br/><br/>
 <ol>
 <li>اذهب إلى موقع مطوري Google:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>قم بتسجيل الدخول إلى حساب Google الذي ترغب في تسجيل التطبيق ضمنه.</li>
 <li>إنشاء مشروع جديد</li>

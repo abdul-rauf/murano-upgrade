@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -30,15 +29,16 @@ class SugarAuthenticateUser{
 	 */
 	function authenticateUser($name, $password, $fallback=false)
 	{
-	    $row = User::findUserPassword($name, $password, "(portal_only IS NULL OR portal_only !='1') AND (is_group IS NULL OR is_group !='1') AND status !='Inactive'");
+        $row = User::getUserDataByNameAndPassword($name, $password);
 
 	    // set the ID in the seed user.  This can be used for retrieving the full user record later
 		//if it's falling back on Sugar Authentication after the login failed on an external authentication return empty if the user has external_auth_disabled for them
-		if (empty ($row) || !empty($row['external_auth_only'])) {
-			return '';
-		} else {
-			return $row['id'];
-		}
+
+        if ($row && empty($row['external_auth_only']) && $row['portal_only'] != 1 && $row['is_group'] != 1) {
+            return $row['id'];
+        } else {
+            return '';
+        }
 	}
 	/**
 	 * Checks if a user is a sugarLogin user
@@ -50,8 +50,8 @@ class SugarAuthenticateUser{
 	 */
 	function isSugarLogin($name, $password)
 	{
-	    $row = User::findUserPassword($name, $password, "(portal_only IS NULL OR portal_only !='1') AND (is_group IS NULL OR is_group !='1') AND status !='Inactive' AND sugar_login=1");
-	    return !empty($row);
+        $row = User::getUserDataByNameAndPassword($name, $password);
+        return $row && $row['portal_only'] != 1 && $row['is_group'] != 1 && $row['sugar_login'] == 1;
 	}
 
     /**
@@ -60,10 +60,11 @@ class SugarAuthenticateUser{
      * @param STRING $name
      * @param STRING $password
      * @param STRING $fallback - is this authentication a fallback from a failed authentication
+     * @param array  $params
      *
      * @return boolean
      */
-    function loadUserOnLogin($name, $password, $fallback = false, $PARAMS = array())
+    public function loadUserOnLogin($name, $password, $fallback = false, array $params = array())
     {
         $passwordEncrypted = false;
         if (empty($name) && empty($password) && !empty($_REQUEST['MSID'])) {
@@ -74,7 +75,7 @@ class SugarAuthenticateUser{
                 return false;
             }
             $input_hash = $password;
-            if (!empty($PARAMS) && isset($PARAMS['passwordEncrypted']) && $PARAMS['passwordEncrypted']) {
+            if (!empty($params) && isset($params['passwordEncrypted']) && $params['passwordEncrypted']) {
                 $passwordEncrypted = true;
             }// if
             if (!$passwordEncrypted) {
@@ -150,7 +151,7 @@ class SugarAuthenticateUser{
 		}
 
 		if(!empty($_SESSION['authenticated_user_id']) || !empty($user_id)){
-			$GLOBALS['current_user'] = BeanFactory::getBean('Users');
+			$GLOBALS['current_user'] = BeanFactory::newBean('Users');
 			if($GLOBALS['current_user']->retrieve($_SESSION['authenticated_user_id'])){
 				return true;
 			}

@@ -1,6 +1,5 @@
 <?php
 
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,17 +14,26 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obteniu la clau API del Citrix Online GoToMeeting registrant una aplicació nova.<br>
+Obtenir una clau de consumidor de LogMeIn registrant una nova aplicació GoToMeeting.<br>
 &nbsp;<br>
-Passos per registrar la vostra instància:<br>
+Passos per registrar el seu exemple:<br>
 &nbsp;<br>
 <ol>
-<li>Inicieu sessió amb el compte de desenvolupador Citrix Online: <a href=&#39;https://developer.citrixonline.com/&#39; target=&#39;_blank&#39;>https://developer.citrixonline.com/</a></li>
-<li>Feu clic a Sol·licita la clau de desenvolupador</li>
-<li>A Producte API seleccioneu GoToMeeting i introduïu l&#39;URL de la instància a l&#39;URL d&#39;aplicació</li>
-<li>Veureu una columna anomenada Clau AI a Les vostres aplicacions</li>
-<li>Copieu-la a continuació.</li>
+    <li>Accedir al seu compte de LogMeIn Developer Center: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Feu clic a Les meves Apps</li>
+    <li>Feu clic a Afegir una nova App</li>
+    <li>Ompliu tots els camps del formulari Afegir App:</li>
+        <ul>
+            <li>Nom de l\'App</li>
+            <li>Descripció</li>
+            <li>Producte API: Seleccioneu GoToMeeting</li>
+            <li>URL de l\'aplicació: Entreu la vostra URL exemple</li>
+        </ul>
+    <li>Feu clic al botó Crear App</li>
+    <li>A la llista d\'apps, feu clic al nom de la vostra</li>
+    <li>Feu clic a la pestanya Claus</li>
+    <li>Copieu el valor de la Clau de consumidor i afegiu-la a continuació</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Clau API',
+    'oauth_consumer_key' => 'Clau de consumidor',
 );

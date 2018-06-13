@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,9 +13,8 @@ global $app_strings; // coming from an include in a method call
 global $current_user;
 
 
-require_once("include/SugarRouting/SugarRouting.php");
 
-$ie = BeanFactory::getBean('InboundEmail');
+$ie = BeanFactory::newBean('InboundEmail');
 $rules = new SugarRouting($ie, $current_user);
 $actions = $rules->getActionsDOM();
 

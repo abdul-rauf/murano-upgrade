@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Import/ImportCacheFiles.php');
 
 
 
@@ -151,7 +148,7 @@ abstract class ImportDataSource implements Iterator
      */
     public static function writeRowToLastImport($import_module, $module, $id)
     {
-        $last_import = BeanFactory::getBean('Import_2');
+        $last_import = BeanFactory::newBean('Import_2');
 
         $last_import->assigned_user_id = $GLOBALS['current_user']->id;
         $last_import->import_module = $import_module;

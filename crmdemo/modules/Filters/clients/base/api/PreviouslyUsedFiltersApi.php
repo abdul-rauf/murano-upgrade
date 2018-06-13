@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('data/BeanFactory.php');
 
 /**
  * @api
@@ -55,11 +53,12 @@ class PreviouslyUsedFiltersApi extends SugarApi {
     }
     /**
      * Set filters as used
-     * @param RestService $api 
+     * @param ServiceBase $api
      * @param array $args 
      * @return array of formatted Beans
      */
-    public function setUsed($api, $args) {
+    public function setUsed(ServiceBase $api, array $args)
+    {
         $user_preference = new UserPreference($GLOBALS['current_user']);
         
         $used_filters = $args['filters'];
@@ -74,11 +73,12 @@ class PreviouslyUsedFiltersApi extends SugarApi {
     }
     /**
      * Get filters from previously used
-     * @param RestService $api 
+     * @param ServiceBase $api
      * @param array $args 
      * @return array of formatted Beans
      */
-    public function getUsed($api, $args) {
+    public function getUsed(ServiceBase $api, array $args)
+    {
         $user_preference = new UserPreference($GLOBALS['current_user']);
         $used_filters = $user_preference->getPreference($args['module_name'], 'filters');
         // UserPreference::getPreference returns null if the preference does not exist
@@ -97,11 +97,12 @@ class PreviouslyUsedFiltersApi extends SugarApi {
 
     /**
      * Delete a filter from previously used
-     * @param RestService $api 
+     * @param ServiceBase $api
      * @param array $args 
      * @return array of formatted Beans
      */
-    public function deleteUsed($api, $args) {
+    public function deleteUsed(ServiceBase $api, array $args)
+    {
         $data = array();
         $user_preference = new UserPreference($GLOBALS['current_user']);
         $used_filters = $user_preference->getPreference($args['module_name'], 'filters');

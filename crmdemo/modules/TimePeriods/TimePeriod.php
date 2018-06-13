@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarQueue/SugarJobQueue.php');
 
 // User is used to store customer information.
 class TimePeriod extends SugarBean
@@ -320,7 +319,7 @@ class TimePeriod extends SugarBean
     public static function getCurrentName($type = '')
     {
         if (empty($type)) {
-            $admin = BeanFactory::getBean('Administration');
+            $admin = BeanFactory::newBean('Administration');
             $config = $admin->getConfigForModule('Forecasts', 'base');
             $type = $config['timeperiod_leaf_interval'];
         }
@@ -372,14 +371,14 @@ class TimePeriod extends SugarBean
         $retVal = false;
 
         if (empty($type)) {
-            $admin = BeanFactory::getBean("Administration");
+            $admin = BeanFactory::newBean("Administration");
             $config = $admin->getConfigForModule("Forecasts", "base");
             $type = $config["timeperiod_leaf_interval"];
         }
 
         $sq = new SugarQuery();
         $sq->select(array('id'));
-        $sq->from(BeanFactory::getBean('TimePeriods'))->where()
+        $sq->from(BeanFactory::newBean('TimePeriods'))->where()
             ->equals('type', $type)
             ->lte('start_date_timestamp', $timestamp)
             ->gte('end_date_timestamp', $timestamp);
@@ -387,7 +386,7 @@ class TimePeriod extends SugarBean
         $timeperiod_id = $sq->getOne();
 
         if (!empty($timeperiod_id)) {
-            $tp = BeanFactory::getBean('TimePeriods');
+            $tp = BeanFactory::newBean('TimePeriods');
             $tp->retrieve($timeperiod_id);
 
             $retVal = $tp;
@@ -407,16 +406,19 @@ class TimePeriod extends SugarBean
     {
         static $timeperiods;
 
-        if (empty($timeperiods)) {
-            $db = DBManagerFactory::getInstance();
+        if ($timeperiods === null) {
             $timeperiods = array();
-            $result = $db->query('SELECT id, name FROM timeperiods WHERE deleted=0');
-            while (($row = $db->fetchByAssoc($result))) {
+            $query = 'SELECT id, name FROM timeperiods WHERE deleted = 0';
+            $stmt = DBManagerFactory::getConnection()
+                ->executeQuery($query);
+
+            while (($row = $stmt->fetch())) {
                 if (!isset($timeperiods[$row['id']])) {
                     $timeperiods[$row['id']] = $row['name'];
                 }
             }
         }
+
         return $timeperiods;
     }
 
@@ -446,19 +448,26 @@ class TimePeriod extends SugarBean
      */
     public function getNextTimePeriod()
     {
-        $timedate = TimeDate::getInstance();
-        $queryDate = $timedate->fromDbDate($this->end_date);
+        $timeDate = TimeDate::getInstance();
+        $queryDate = $timeDate->fromDbDate($this->end_date);
         $queryDate = $queryDate->modify('+1 day');
-        $query = sprintf(
-            "SELECT id FROM timeperiods WHERE type = %s AND start_date = %s AND deleted = 0 ",
-            $this->db->quoted($this->type),
-            $this->db->convert($this->db->quoted($queryDate->asDbDate()), 'date')
-        );
 
-        $result = $this->db->query($query);
-        $row = $this->db->fetchByAssoc($result);
+        $query = 'SELECT id
+FROM timeperiods
+WHERE start_date = ' . $this->db->convert('?', 'date') . '
+AND type = ?
+AND deleted = 0';
+        $id = $this->db->getConnection()
+            ->executeQuery($query, array(
+                $queryDate->asDbDate(),
+                $this->type,
+            ))->fetchColumn();
 
-        return ($row != null) ? TimePeriod::getByType($this->type, $row['id']) : null;
+        if (!$id) {
+            return null;
+        }
+
+        return TimePeriod::getByType($this->type, $id);
     }
 
 
@@ -469,19 +478,26 @@ class TimePeriod extends SugarBean
      */
     public function getPreviousTimePeriod()
     {
-        $timedate = TimeDate::getInstance();
-        $queryDate = $timedate->fromDbDate($this->start_date);
+        $timeDate = TimeDate::getInstance();
+        $queryDate = $timeDate->fromDbDate($this->start_date);
         $queryDate = $queryDate->modify('-1 day');
-        $query = sprintf(
-            "SELECT id FROM timeperiods WHERE type = %s AND end_date = %s AND deleted = 0 ",
-            $this->db->quoted($this->type),
-            $this->db->convert($this->db->quoted($queryDate->asDbDate()), 'date')
-        );
 
-        $result = $this->db->query($query);
-        $row = $this->db->fetchByAssoc($result);
+        $query = 'SELECT id
+FROM timeperiods
+WHERE end_date = ' . $this->db->convert('?', 'date') . '
+AND type = ?
+AND deleted = 0';
+        $id = $this->db->getConnection()
+            ->executeQuery($query, array(
+                $queryDate->asDbDate(),
+                $this->type,
+            ))->fetchColumn();
 
-        return ($row != null) ? TimePeriod::getByType($this->type, $row['id']) : null;
+        if (!$id) {
+            return null;
+        }
+
+        return TimePeriod::getByType($this->type, $id);
     }
 
     /**
@@ -500,8 +516,10 @@ class TimePeriod extends SugarBean
         $timedate = TimeDate::getInstance();
         $currentDate = $timedate->getNow();
 
-        $db = DBManagerFactory::getInstance();
-        $count = $db->getOne('SELECT count(id) FROM timeperiods WHERE parent_id IS NULL AND deleted = 0');
+        $query = 'SELECT COUNT(id) FROM timeperiods WHERE parent_id IS NULL AND deleted = 0';
+        $count = $this->db->getConnection()
+            ->executeQuery($query)
+            ->fetchColumn();
 
         $isUpgrade = !empty($currentSettings['is_upgrade']);
 
@@ -521,18 +539,20 @@ class TimePeriod extends SugarBean
     public function upgradeLegacyTimePeriods()
     {
         $sql = "SELECT id FROM timeperiods
-                WHERE deleted = 0
-                    AND (start_date_timestamp IS NULL OR end_date_timestamp IS NULL)";
-        $result = $this->db->query($sql);
+                WHERE (start_date_timestamp IS NULL OR end_date_timestamp IS NULL)
+                    AND deleted = 0";
+        $stmt = $this->db->getConnection()
+            ->executeQuery($sql);
 
         $updated = 0;
-        while ($row = $this->db->fetchByAssoc($result)) {
-            $tp = BeanFactory::getBean('TimePeriods');
-            $tp->retrieve($row['id']);
+        while (($id = $stmt->fetchColumn())) {
+            $tp = BeanFactory::newBean('TimePeriods');
+            $tp->retrieve($id);
             $tp->save();
 
             $updated++;
         }
+
         return $updated;
     }
 
@@ -1058,71 +1078,65 @@ class TimePeriod extends SugarBean
      */
     public static function getBean($id)
     {
-        $db = DBManagerFactory::getInstance();
-        $result = $db->query(sprintf("SELECT id, type FROM timeperiods WHERE id = '%s' AND deleted = 0", $id));
-        if ($result) {
-            $row = $db->fetchByAssoc($result);
-            if ($row) {
-                return BeanFactory::getBean($row['type'] . 'TimePeriods', $id);
-            }
+        $query = 'SELECT type FROM timeperiods WHERE id = ? AND deleted = 0';
+        $type = DBManagerFactory::getConnection()
+            ->executeQuery($query, array($id))
+            ->fetchColumn();
+
+        if (!$type) {
+            return null;
         }
 
-        return null;
+        return BeanFactory::getBean($type . 'TimePeriods', $id);
     }
 
 
     /**
      * Returns the earliest TimePeriod bean instance for the given TimePeriod interval type
      *
-     * @param $type String value of the TimePeriod interval type
-     * @return $bean The earliest TimePeriod bean instance; null if none found
+     * @param string $type TimePeriod interval type
+     * @return TimePeriod|null The earliest TimePeriod bean instance; null if none found
      */
     public static function getEarliest($type)
     {
-        $db = DBManagerFactory::getInstance();
-        $result = $db->limitQuery(
-            sprintf(
-                "SELECT * FROM timeperiods WHERE type = '%s' AND deleted = 0 ORDER BY start_date_timestamp ASC",
-                $type
-            ),
-            0,
-            1
-        );
-        if ($result) {
-            $row = $db->fetchByAssoc($result);
-            if (!empty($row)) {
-                $bean = BeanFactory::getBean("{$type}TimePeriods");
-                $bean->retrieve($row['id']);
-                return $bean;
-            }
+        $conn = DBManagerFactory::getConnection();
+        $platform = $conn->getDatabasePlatform();
+
+        $query = 'SELECT id FROM timeperiods WHERE type = ? AND deleted = 0 ORDER BY start_date_timestamp ASC';
+        $query = $platform->modifyLimitQuery($query, 1);
+
+        $id = $conn->executeQuery($query, array($type))
+            ->fetchColumn();
+
+        if (!$id) {
+            return null;
         }
-        return null;
+
+        return TimePeriod::getByType($type, $id);
     }
 
     /**
      * Returns the latest TimePeriod bean instance for the given timeperiod interval type
      *
-     * @param $type String value of the TimePeriod interval type
-     * @return $bean The latest TimePeriod bean instance; null if none found
+     * @param string $type TimePeriod interval type
+     * @return TimePeriod|null The latest TimePeriod bean instance; null if none found
      */
     public static function getLatest($type)
     {
-        $db = DBManagerFactory::getInstance();
-        $result = $db->limitQuery(
-            sprintf(
-                "SELECT * FROM timeperiods WHERE type = '%s' AND deleted = 0 ORDER BY start_date_timestamp DESC",
-                $type
-            ),
-            0,
-            1
-        );
-        if ($result) {
-            $row = $db->fetchByAssoc($result);
-            if (!empty($row)) {
-                return TimePeriod::getByType($type, $row['id']);
-            }
+        $conn = DBManagerFactory::getConnection();
+        $platform = $conn->getDatabasePlatform();
+
+        $query = 'SELECT id FROM timeperiods WHERE type = ? AND deleted = 0 ORDER BY start_date_timestamp DESC';
+        $query = $platform->modifyLimitQuery($query, 1);
+
+        $id = $conn->executeQuery($query, array($type))
+            ->fetchColumn();
+
+        if (!$id) {
+            return null;
         }
-        return null;
+
+        return TimePeriod::getByType($type, $id);
     }
 
     /**
@@ -1136,7 +1150,7 @@ class TimePeriod extends SugarBean
     public static function getByType($type, $id = '')
     {
         if (empty($id)) {
-            return BeanFactory::getBean("{$type}TimePeriods");
+            return BeanFactory::newBean("{$type}TimePeriods");
         }
         return BeanFactory::getBean("{$type}TimePeriods", $id);
     }
@@ -1152,7 +1166,7 @@ class TimePeriod extends SugarBean
         if (is_null($type)) {
             // fetch the type
             /* @var $admin Administration */
-            $admin = BeanFactory::getBean('Administration');
+            $admin = BeanFactory::newBean('Administration');
             $settings = $admin->getConfigForModule('Forecasts', 'base');
             $type = $settings['timeperiod_leaf_interval'];
             unset($admin, $settings);
@@ -1160,7 +1174,7 @@ class TimePeriod extends SugarBean
 
         $sq = new SugarQuery();
         $sq->select(array('id'));
-        $sq->from(BeanFactory::getBean('TimePeriods'))->where()
+        $sq->from(BeanFactory::newBean('TimePeriods'))->where()
             ->equals('is_fiscal_year', 0)
             ->equals('type', $type)
             ->lte('start_date_timestamp', $timestamp)

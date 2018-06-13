@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => '账户报表',
   'LBL_CONTACT_REPORTS' => '联系人报表',
   'LBL_OPPORTUNITY_REPORTS' => '商业机会报表',
+    'LBL_RECENTLY_MODIFIED' => '最新修改',
 
   'LBL_CASE_REPORTS' => '客户反馈报表',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'未来 30 天',
   'LBL_THIS_YEAR'=>'今年',
   'LBL_LIST_FORM_TITLE' =>'报表',
+  'LBL_LIST_REPORT_NAME' => '名称',
   'LBL_PROSPECT_REPORTS'=>'目标报表',
   'LBL_CHART_TYPE'=>'图表类型',
   'LBL_IS_EMPTY'=>'空白',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>定义过滤器的步骤：</b><br/><br/>1) 在 <b>相关模块</b>窗格中单击您定义过滤器要使用的模块。默认情况下主模块（树视图的根节点）已选中。<br/><br/>您可以在通过单击此模块来选择相关模块（树视图的子节点）。展开这个节点就可以看到和这个相关模块关联的其他模块。您选择的模块将决定出现在<b> 可用字段 </b>窗格中的可报告字段。<br/><br/>2) 在 <b>可用字段</b>窗格中单击一个字段，将其添加到过滤器中。您也可以通过在窗格的文本框中输入文字来查询字段。<br/><br/>在从<b>相关模块</b>窗格中选择的模块中选择任意数量的字段后，您可以选择一个不同的模块，您可以从这个模块中选择任意数量的字段作为过滤器。<br/><br/>3) 选择 <b>AND</b> 或 <b>OR</b> 来依次指定将所有过滤器或任意过滤器用于查找报表结果。<br/><br/>4) [可选] 单击<b>添加过滤器组</b>以创建一个过滤器组。过滤器组的数量无限制，在一个组中也可以有任意数量的过滤器来创建嵌套过滤器。<br/><br/>5) [可选] 为一个过滤器选择运行时选项，允许用户在查看报表时进一步定制结果。",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>定义分组的步骤：</b><br/><br/>1) 当您想在报表中使用模块来对纪录进行分组时，请单击<b>相关模块</b> 窗格中的模块。默认情况下，主模块（树视图的根节点）已选择。<br/><br/>您可以通过单击该模块来选择一个相关模块（树视图的子节点）。 展开这个节点就可以看到和这个相关模块关联的其他模块。您选择的模块将决定出现在<b> 可用字段 </b>窗格中的可报告字段。<br/><br/>2) 单击<b>可用字段</b>窗格，按字段对报表中的记录进行分组。 您也可以通过在窗格的文本框中输入文字来查询字段。<br/><br/>在从<b>相关模块 </b>窗格中选择的模块中选择任意数量的字段后，您可以选择一个不同的模块，并从这个模块中选择任意数量的字段对记录进行分组。但是，字段分组较多时，报表的可读性会降低。<br/><br/>您可以通过拖放字段到期望的位置来排序。更改顺序会影响结果的显示方式。<br/><br/>对矩阵报表，您最多只能用三个字段来对记录分组。",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>选择显示列的步骤：</b><br/><br/>1) 在 <b>相关模块</b> 窗格中单击一个模块，将其用于在报表中显示数据。默认情况下，您在‘选择模块’步骤中选择的主模块（树视图的根节点）已选择。<br/><br/>您可以通过单击模块来从相关模块（树视图的子节点）中选择字段。您还可以选择与主模块相关的模块的相关模块。您选择的模块将决定出现在<b>可用字段</b>窗格中的可报告字段。<br/><br/>2) 单击<b>可用字段</b>窗格中的字段来显示报表中记录的字段数据。您也可以通过在窗格的文本框中输入文字来查询字段。<br/><br/>在从<b>相关模块</b> 窗格中选择的模块中选择任意数量的字段后，您可以选择一个不同的模块，并从这个模块中选择其他字段。您可以选择任意数量的字段，但是当添加的字段数量超过报表所需的字段之后，报表的生成速度会很慢，并且可读性会降低。<br/><br/>您可以通过拖放字段到期望的位置来排序。更改字段顺序会改变结果中显示列的顺序。" ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>选择显示概要的步骤：</b><br/><br/>1) 在 <b>相关模块</b> 窗格中单击模块，将其用于报表中的概要。默认情况下，主模块（树视图的根节点）已选择。<br/><br/>您可以通过单击模块来选择相关模块（树视图的子节点）。展开节点，查看与相关模块有关的其他模块。您选择的模块将决定出现在<b>可用字段</b>窗格中的可报告字段。<br/><br/> 2) 单击<b>可用字段</b>窗格中的字段为您的报表选择概要。您也可以通过在窗格的文本框中输入文字来查询字段。<br/><br/>在从<b>相关模块</b> 窗格中选择的模块中选择任意数量的字段后，您可以选择一个不同的模块，并从这个模块中为报表中的概要选择其他字段。<br/><br/>对于矩阵报表，您可以在一个报表单元格中选择多个字段来显示多个数值。" ,
 
 	'LBL_ALT_SHOW' => '显示',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => '此报表所包含的数据基于以下列排序',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => '上移' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => '信息',
     'LBL_REPORT_GRAND_TOTAL' => "总和",
+    'LBL_EDIT_REPORT_BUTTON' => '编辑报告',
 
     'LBL_REPORTS_TO' => '汇报对象',
     'LBL_LESS_THAN_EQUAL' => '小于等于',

@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,24 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Verkrijg een API Key en Secret van Twitter door uw Sugar-verzoek te registreren als een nieuwe applicatie.<br/><br>Stappen om uw aanmelding te registreren:<br/><br/><ol><li>Ga naar de ontwikkelaarssite van Twitter: <a href=&#39;http://dev.twitter.com/apps/new&#39; target=&#39;_blank&#39;>http://dev.twitter.com/apps/new</a>.</li><li>Login met gebruik van uw Twitter-account waaronder u de applicatie wilt registreren.</li><li>Typ in het registratieformulier een naam in voor de applicatie. Dit is de naam die gebruikers zien als zij hun Twitter-accounts binnen Sugar autoriseren.</li><li>Typ een beschrijving in.</li><li>Typ een applicatiewebsite-URL in.</li><li>Typ een callback-URL in (kan van alles zijn aangezien Sugar dit omzeilt bij authenticatie. Voorbeeld: uw Sugarsite-URL).</li><li>Ga akkoord met de Twitter API-servicevoorwaarden.</li><li>Klik op "Maak uw Twitter-applicatie aan".</li><li>Binnen de applicatiepagina vindt u de API Key en API Secret onder de "API Keys"-tab. Typ hieronder de Key en Secret in.</li></ol></td></tr></table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
+								<tr>
+									<td valign="top" width="35%" class="dataLabel">
+										Verkrijg een API-sleutel en geheim van Twitter door uw versie van Sugar te registreren als nieuwe toepassing.<br/><br>Stappen voor het registreren van uw versie van Sugar:<br/><br/>
+										<ol>
+											<li>Ga naar de Twitter Developers site: <a href=\'https://apps.twitter.com\' target=\'_blank\'>https://apps.twitter.com</a>.</li>
+											<li>Meld u aan met het Twitter account waaronder u de toepassing wilt registreren.</li>
+											<li>Voer op het registratieformulier een naam in voor de toepassing. Dit is de naam die gebruikers zien als zij hun Twitter accounts authenticeren vanuit Sugar.</li>
+											<li>Voer een beschrijving in.</li>
+											<li>Voer een website URL in van de toepassing.</li>
+											<li>Voer een terugbel-URL in (kan alles zijn, gezien Sugar deze omzeilt bij authenticatie. Voorbeeld: de URL van uw Sugar website).</li>
+											<li>Accepteer de Twitter API Servicevoowaarden.</li>
+											<li>Klik op "Maak uw Twitter toepassing aan".</li>
+											<li>Zoek op de pagina van de toepassing de API-sleutel en het API geheim onder het tabblad "API sleutels". Voer de sleutel en het geheim hieronder in.</li>
+										</ol>
+									</td>
+								</tr>
+							</table>',
     'LBL_NAME' => 'Twitter-gebruikersnaam',
     'LBL_ID' => 'Twitter-gebruikersnaam',
 	'company_url' => 'URL',

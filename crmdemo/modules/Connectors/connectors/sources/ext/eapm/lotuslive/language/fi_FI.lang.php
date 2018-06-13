@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => '<table border=&#39;0&#39; cellspacing=&#39;1&#39;><tr><td valign=&#39;top&#39; width=&#39;35%&#39; class=&#39;dataLabel&#39;>Hae avain ja salasana IBM SmartCloud -palvelusta rekisteröimällä Sugar-instanssisi uutena sovelluksena. Rekisteröinti on mahdollista 8. toukokuuta 2011 alkaen.<br>
+    'LBL_LICENSING_INFO' => '<table border=\'0\' cellspacing=\'1\'><tr><td valign=\'top\' width=\'35%\' class=\'dataLabel\'>Hae avain ja salasana IBM SmartCloud -palvelusta rekisteröimällä Sugar-instanssisi uutena sovelluksena. Rekisteröinti on mahdollista 8. toukokuuta 2011 alkaen.<br>
 &nbsp;<br>
 Instanssisi rekisteröinnin vaiheet:<br>
 &nbsp;<br>

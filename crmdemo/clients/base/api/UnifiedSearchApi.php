@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/SearchForm/SugarSpot.php';
-require_once 'include/api/SugarListApi.php';
 
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 
@@ -48,8 +46,8 @@ class UnifiedSearchApi extends SugarListApi {
 
     /**
      * This function pulls all of the search-related options out of the $args array and returns a fully-populated array with either the defaults or the provided settings
-     * @param $api ServiceBase The API class of the request
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request
+     * @param array $args The arguments array passed in from the API
      * @return array Many elements containing each setting the search engine uses
      */
     public function parseSearchOptions(ServiceBase $api, array $args)
@@ -108,12 +106,7 @@ class UnifiedSearchApi extends SugarListApi {
                     $column = $order;
                     $direction = 'ASC';
                 }
-/*
-  // Need to extend this to do field security on all modules that we are searching by.
-                if ( !$api->security->canAccessField($seed,$column,'list') || !isset($seed->field_defs[$column]) ) {
-                    throw new SugarApiExceptionNotAuthorized('No access to view field: '.$column.' in module: '.$args['module']);
-                }
-*/
+
                 // If this field has already been added, don't do it again
                 // Common cause of this was the id field, since we always add it
                 // by default.
@@ -208,13 +201,12 @@ class UnifiedSearchApi extends SugarListApi {
 
     /**
      * This function is the global search
-     * @param $api ServiceBase The API class of the request
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request
+     * @param array $args The arguments array passed in from the API
      * @return array result set
      */
     public function globalSearch(ServiceBase $api, array $args) {
         $api->action = 'list';
-        require_once('include/SugarSearchEngine/SugarSearchEngineFactory.php');
 
         // This is required to keep the loadFromRow() function in the bean from making our day harder than it already is.
         $GLOBALS['disable_date_format'] = true;
@@ -239,14 +231,13 @@ class UnifiedSearchApi extends SugarListApi {
 
     /**
      * This function is used to determine the search engine to use
-     * @param $api ServiceBase The API class of the request
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request
+     * @param array $args The arguments array passed in from the API
      * @param $options array An array of options to pass through to the search engine, they get translated to the $searchOptions array so you can see exactly what gets passed through
      * @return string name of the Search Engine
      */
     protected function determineSugarSearchEngine(ServiceBase $api, array $args, array $options)
     {
-        require_once('include/SugarSearchEngine/SugarSearchEngineMetadataHelper.php');
         /*
             How to determine which Elastic Search
             1 - Not Portal
@@ -295,8 +286,8 @@ class UnifiedSearchApi extends SugarListApi {
 
     /**
      * This function is used to hand off the global search to the FTS Search Emgine
-     * @param $api ServiceBase The API class of the request
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request
+     * @param array $args The arguments array passed in from the API
      * @param $searchEngine SugarSearchEngine The SugarSpot search engine created using the Factory in the caller
      * @param $options array An array of options to pass through to the search engine, they get translated to the $searchOptions array so you can see exactly what gets passed through
      * @return array Two elements, 'records' the list of returned records formatted through FormatBean, and 'next_offset' which will indicate to the user if there are additional records to be returned.
@@ -344,7 +335,6 @@ class UnifiedSearchApi extends SugarListApi {
             $formattedRecord = $this->formatBean($api, $moduleArgs, $bean);
 
             // add additional parameters expected to be returned
-            //$formattedRecord['_module'] = $module;
             $formattedRecord['_search']['score'] = $result->getScore();
             $formattedRecord['_search']['highlighted'] = $result->getHighlightedHitText();
 
@@ -364,15 +354,14 @@ class UnifiedSearchApi extends SugarListApi {
 
     /**
      * This function is used to hand off the global search to the built-in SugarSearchEngine (aka SugarSpot)
-     * @param $api ServiceBase The API class of the request
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request
+     * @param array $args The arguments array passed in from the API
      * @param $searchEngine SugarSearchEngine The SugarSpot search engine created using the Factory in the caller
      * @param $options array An array of options to pass through to the search engine, they get translated to the $searchOptions array so you can see exactly what gets passed through
      * @return array Two elements, 'records' the list of returned records formatted through FormatBean, and 'next_offset' which will indicate to the user if there are additional records to be returned.
      */
     public function globalSearchSpot(ServiceBase $api, array $args, $searchEngine, array $options)
     {
-        require_once('modules/Home/UnifiedSearchAdvanced.php');
 
 
         $searchOptions = array(
@@ -401,7 +390,6 @@ class UnifiedSearchApi extends SugarListApi {
 
         if(empty($options['moduleList']))
         {
-            require_once('modules/ACL/ACLController.php');
             $usa = new UnifiedSearchAdvanced();
             $moduleList = $usa->getUnifiedSearchModules();
 
@@ -417,7 +405,7 @@ class UnifiedSearchApi extends SugarListApi {
         if (!empty($options['searchFields'])) {
             $customWhere = array();
             foreach ($options['moduleList'] as $module) {
-                $seed = BeanFactory::getBean($module);
+                $seed = BeanFactory::newBean($module);
                 $fields = array_keys($seed->field_defs);
                 $existingfields = array_intersect($fields, $options['searchFields']);
                 if (!empty($existingfields)) {

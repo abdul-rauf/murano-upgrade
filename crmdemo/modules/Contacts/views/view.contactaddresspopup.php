@@ -10,32 +10,21 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
-
 /**
  * ContactsViewContactAddressPopup
  * 
  * */
  
-require_once('include/MVC/View/SugarView.php');
 require_once('modules/Contacts/Popup_picker.php');
 
 class ContactsViewContactAddressPopup extends SugarView {
-
     /**
-     * @deprecated Use __construct() instead
+     * {@inheritDoc}
+     *
+     * @param array $params Ignored
      */
-    public function ContactsViewContactAddressPopup()
+    public function process($params = array())
     {
-        self::__construct($bean, $view_object_map, $request);
-    }
-
-    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
-    {
-        parent::__construct($bean, $view_object_map, $request);
-    }
-
- 	function process() {
 		$this->display();
  	}
 

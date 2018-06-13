@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -384,7 +383,6 @@ class SugarUpgradeFixPARelatedModules extends UpgradeScript
             );
         }
         if (empty($this->relatedModules[$baseModule][$rel_type])) {
-            require_once 'modules/pmse_Inbox/engine/PMSERelatedModule.php';
             $relatedModule = new PMSERelatedModule();
             $relatedModules = $relatedModule->getRelatedBeans($baseModule, $rel_type);
             $this->relatedModules[$baseModule][$rel_type] = array();

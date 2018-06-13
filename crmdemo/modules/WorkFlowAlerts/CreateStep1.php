@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -33,7 +32,7 @@ global $urlPrefix;
 global $currentModule;
 
 
-$focus = BeanFactory::getBean('WorkFlowAlerts');
+$focus = BeanFactory::newBean('WorkFlowAlerts');
 
 if(!empty($_REQUEST['parent_id']) && $_REQUEST['parent_id']!="") {
 	$focus->parent_id = $_REQUEST['parent_id'];
@@ -61,17 +60,14 @@ $target_workflow_object = $workflow_object->get_parent_object();
 
 		//Bug 12335: We need to include the javascript language file first. And also the language file in WorkFlow is needed.
         if(!is_file(sugar_cached('jsLanguage/') . $GLOBALS['current_language'] . '.js')) {
-            require_once('include/language/jsLanguage.php');
             jsLanguage::createAppStringsCache($GLOBALS['current_language']);
         }
         $javascript_language_files = getVersionedScript("cache/jsLanguage/{$GLOBALS['current_language']}.js",  $GLOBALS['sugar_config']['js_lang_version']);
         if(!is_file(sugar_cached('jsLanguage/') . $this->module . '/' . $GLOBALS['current_language'] . '.js')) {
-                require_once('include/language/jsLanguage.php');
                 jsLanguage::createModuleStringsCache($this->module, $GLOBALS['current_language']);
         }
         $javascript_language_files .= getVersionedScript("cache/jsLanguage/{$this->module}/{$GLOBALS['current_language']}.js", $GLOBALS['sugar_config']['js_lang_version']);
         if(!is_file(sugar_cached('jsLanguage/WorkFlow/') . $GLOBALS['current_language'] . '.js')) {
-            require_once('include/language/jsLanguage.php');
             jsLanguage::createModuleStringsCache('WorkFlow', $GLOBALS['current_language']);
         }
         $javascript_language_files .= getVersionedScript("cache/jsLanguage/WorkFlow/{$GLOBALS['current_language']}.js", $GLOBALS['sugar_config']['js_lang_version']);
@@ -110,7 +106,6 @@ $form->out("embeded");
 
 
 //////////New way of processing page
-	require_once('include/ListView/ProcessView.php');
 
 	//Check to see if this workflow object is bridging, and if so, use its parent workflow object as the object
 

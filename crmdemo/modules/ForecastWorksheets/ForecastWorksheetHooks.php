@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Forecasts/AbstractForecastHooks.php');
 
 class ForecastWorksheetHooks extends AbstractForecastHooks
 {
@@ -108,7 +107,8 @@ class ForecastWorksheetHooks extends AbstractForecastHooks
                 // send a notification to their manager if they have a manager
                 /* @var $user User */
                 $bean->load_relationship('assigned_user_link');
-                $user = array_shift($bean->assigned_user_link->getBeans());
+                $beans = $bean->assigned_user_link->getBeans();
+                $user = array_shift($beans);
                 if (!empty($user->reports_to_id)) {
                     $worksheet_strings = static::getLanguageStrings($bean->module_name);
                     $mod_strings = static::getLanguageStrings($bean->parent_type);
@@ -144,7 +144,7 @@ class ForecastWorksheetHooks extends AbstractForecastHooks
      */
     public static function getNotificationBean()
     {
-        return BeanFactory::getBean('Notifications');
+        return BeanFactory::newBean('Notifications');
     }
 
     /**

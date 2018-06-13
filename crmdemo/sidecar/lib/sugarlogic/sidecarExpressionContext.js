@@ -20,17 +20,31 @@ SUGAR.forms.animation = SUGAR.forms.animation || {};
  * the default class only returns the empty string.
  */
 var SE = SUGAR.expressions;
-
+var App = SUGAR.App || App;
 /**
  * SugarLogic ExpressionContext for Sidecar.
  * @type {SUGAR.expressions.SidecarExpressionContext}
+ *
+ * @param view {App.view.View} Sidecar view to attach to
+ * @param model {App.data.Bean} optional Primary Bean object to operate on. If not provided it will be
+ * pulled from the view.
+ *
+ * @param collection {App.data.beanCollection} optional Collection object to use instead of a single primary
+ * model.
  */
-var SEC = SE.SidecarExpressionContext = function (view, model) {
+var SEC = SE.SidecarExpressionContext = function (view, model, collection) {
     this.view = view;
+    if (collection instanceof App.data.beanCollection) {
+        this.collection = collection;
+    } else {
+        this.collection = view.collection || view.context.get('collection');
+    }
+
     this.model = model || view.model || view.context.get('model');
 };
 
-SUGAR.util.extend(SEC, SE.ExpressionContext, {
+App.utils.extendFrom(SEC, SE.ExpressionContext, {
+
     /**
      * Ability to clean up error handlers
      */
@@ -60,18 +74,20 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
          * @param {Array} models
          * @param {Object} trigger
          */
-        var updateCollection = function (models, trigger) {
-                if (trigger.dependency.testOnLoad) {
+        var updateCollection = _.bind(function(models, trigger) {
+            _.each(models, function(model) {
+                if (trigger.dependency.testOnLoad || model.isNew()) {
                     trigger.context.isOnLoad = true;
-                    _.each(models, function (model) {
-                        SUGAR.forms.Trigger.fire.apply(trigger, [model]);
-                    });
-
+                    trigger.context.inCollection = true;
+                    SUGAR.forms.Trigger.fire.apply(trigger, [model]);
                     trigger.context.isOnLoad = null;
+                    trigger.context.inCollection = null;
                 }
-            };
+            }, this);
+        }, this);
 
-        _.each(depsMeta, function (dep) {
+
+        _.each(depsMeta, function(dep) {
             var newDep = SUGAR.forms.Dependency.fromMeta(dep, this);
             if (newDep) {
                 relatedFields = _.union(relatedFields, newDep.getRelatedFields());
@@ -84,33 +100,34 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
 
                 //We need to fire onLoad dependencies when a row toggles
                 if (newDep.testOnLoad) {
-                    scContext.on('list:editrow:fire', function () {
+                    scContext.on('list:editrow:fire', function() {
                         scContext.isOnLoad = true;
                         SUGAR.forms.Trigger.fire.apply(this.trigger, arguments);
                         scContext.isOnLoad = null;
                     }, newDep);
+                }
 
-                    if (this.view.collection instanceof SUGAR.App.data.beanCollection) {
+                if (this.collection instanceof SUGAR.App.data.beanCollection) {
+                    //For views with collections, we need to trigger onLoad dependencies during sync
+                    //For dependent fields and other actions which work outside of edit.
+                    this.collection.on('sync', function(synced, syncData) {
+                        var models;
+                        var ids;
+                        if (synced instanceof SUGAR.App.data.beanCollection) {
+                            //only update the changed set when we have a list
+                            ids = _.pluck(syncData, 'id');
+                            models = synced.filter(function(model) {
+                                return _.contains(ids, model.id);
+                            });
 
-                        //For views with collections, we need to trigger onLoad dependencies during sync
-                        //For dependent fields and other actions which work outside of edit.
-                        this.view.collection.on('sync', function (synced, syncData) {
-                            var models;
-                            var ids;
-                            if (synced instanceof SUGAR.App.data.beanCollection) {
-                                //only update the changed set when we have a list
-                                ids = _.pluck(syncData, 'id');
-                                models = synced.filter(function (model) {
-                                    return _.contains(ids, model.id);
-                                });
-
-                                //Use defer to prevent script timeouts on large lists
-                                _.defer(updateCollection, models, newDep.trigger);
-                            } else {
-                                SUGAR.forms.Trigger.fire.apply(newDep.trigger, [synced]);
-                            }
-                        }, this.view);
-                    }
+                            //Use defer to prevent script timeouts on large lists
+                            _.defer(updateCollection, models, newDep.trigger);
+                        } else {
+                            updateCollection([synced], newDep.trigger);
+                        }
+                    }, this);
+                    this.collection.on('add', function(model){updateCollection([model], newDep.trigger)}, this);
+                    updateCollection(this.collection.models, newDep.trigger);
                 }
 
                 this.dependencies.push(newDep);
@@ -139,9 +156,16 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
             def =   this.model.fields[varname],
             result;
 
+        if (!def) {
+            console.log("attempted to get a value for field " + varname
+                + " which is not a field in " + this.model.module);
+        }
+
         //Relate fields are only string on the client side, so return the variable name back.
-        if(def.type == "link")
+        // make sure def is defined first
+        if (def && def.type == 'link') {
             value = varname;
+        }
 
         if (typeof(value) == "string")
         {
@@ -242,11 +266,11 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
     },
     addListener : function(varname, callback, scope)
     {
-        //For lists, we need to listen to the collection to check for modifcations to any of the models.
-        if (this.view.collection) {
-            this.view.collection.off("change:" + varname, callback, scope);
-            this.view.collection.on("change:" + varname, callback, scope);
-        } else {
+        if (this.collection) {
+            this.collection.off("change:" + varname, callback, scope);
+            this.collection.on("change:" + varname, callback, scope);
+        }
+        if (this.model) {
             this.model.off("change:" + varname, callback, scope);
             this.model.on("change:" + varname, callback, scope);
         }
@@ -322,23 +346,28 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
     {
     	//TODO
     },
-    setRelatedFields : function(fields, silent){
+    setRelatedFields : function(fields, silent, model){
         silent = !!silent;
-        var model = this.model;
+        model = model || this.model;
         for (var link in fields)
         {
-            var currValue = model.get(link),
+            var linkVar = this._linkValueVarname(link),
+                currValue = model.get(linkVar),
                 forceChangeEvent = !!currValue, //Force the change event if the model already had an object for the link
                 value = currValue || {};
             _.each(fields[link], function(values, type) {
                 if (_.isObject(values)) {
+                    //Convert any array values to objects.
+                    values = _.mapObject(values, function(val) {
+                        return _.isArray(val) ? _.object(val) : val;
+                    });
                     value[type] = _.extend(value[type] || {}, values);
                 } else {
                     value[type] = values;
                 }
             });
             var toSet = {};
-            toSet[link] = value;
+            toSet[linkVar] = value;
             model.set(toSet, {silent:silent});
             if (!silent && forceChangeEvent) {
                 model.trigger("change:" + link, model);
@@ -348,18 +377,19 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
     getRelatedFieldValues : function(fields, module, record, silent)
     {
         var self = this,
-            api = App.api;
+            api = App.api,
+            model = record instanceof App.data.beanModel ? record : this.model;
         if (fields.length > 0) {
-            module = module || this.model.module || this.view.context.get('module');
-            record = record || this.model.get("id");
+            module = module || model.module || this.view.context.get('module');
+            record = _.isString(record) ? record : model.get("id");
             for (var i = 0; i < fields.length; i++) {
                 var link = fields[i].link,
                     toSet = {};
                 //Related fields require a current related id
                 if (fields[i].type == "related") {
-                    var linkDef = this.model.fields[link];
+                    var linkDef = model.fields[link];
                     if (linkDef && linkDef.id_name && linkDef.module) {
-                        var relId = this.model.get(linkDef.id_name);
+                        var relId = model.get(linkDef.id_name);
                         if (relId) {
                             fields[i].relId = relId
                             fields[i].relModule = linkDef.module;
@@ -371,7 +401,7 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
                     toSet[link] = {};
                     toSet[link][fields[i].type] = {};
                     toSet[link][fields[i].type][fields[i].relate] = "";
-                    self.setRelatedFields(toSet, true);
+                    self.setRelatedFields(toSet, true, model);
                 }
             }
             var data = {id: record, action: "related"},
@@ -379,7 +409,7 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
 
             api.call("read", api.buildURL("ExpressionEngine", "related", data, params), data, params, {
                 success: function(resp) {
-                    self.setRelatedFields(resp, silent);
+                    self.setRelatedFields(resp, silent, model);
                     return resp;
                 }});
         }
@@ -395,7 +425,7 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
      * @param {Boolean} isNew Are we created a new record?
      */
     updateRelatedFieldValue: function(link, ftype, field, value, isNew) {
-        var linkValues = this.model.get(link) || {},
+        var linkValues = this.model.get(this._linkValueVarname(link)) || {},
             isNew = isNew || false,
             newValues = {};
         if (!_.isUndefined(linkValues[ftype]) || isNew) {
@@ -415,8 +445,88 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
 
         this.setRelatedFields(newValues, true);
     },
+
+    /**
+     * FixMe: Right now we need to do this so the Rollup SugarLogic doesn't break the saving on creates
+     * @param {string} link
+     * @return {string}
+     * @private
+     */
+    _linkValueVarname: function(link) {
+        return '_' + link + '-rel_exp_values';
+    },
+
+    getRelatedCollectionValues: function(model, link, ftype, field) {
+        model = model || this.model;
+        var linkValues = model.get(this._linkValueVarname(link)) || {};
+        var fieldVal = field + '_values';
+        if (ftype) {
+            if (linkValues[ftype] && linkValues[ftype][fieldVal]) {
+                return linkValues[ftype][fieldVal];
+            }
+            return [];
+        }
+        return linkValues;
+    },
+
+    updateRelatedCollectionValues: function(model, link, ftype, field, relModel, operation) {
+        model = model || this.model;
+        var link = this._linkValueVarname(link);
+        var linkValues = model.get(link) || {};
+        var fTypes = [ftype];
+        var fields = [field];
+        if (!ftype) {
+            fTypes = _.keys(linkValues);
+        }
+        _.each(fTypes, function(fType) {
+            //related link values don't apply to collections
+            if (fType == 'related') {
+                return;
+            }
+            if (!field) {
+                fields = _.filter(_.keys(linkValues[fType]), function(field) {
+                    return field.substr(-7) != '_values';
+                });
+            }
+            _.each(fields, function(field) {
+                var fieldVal = field + '_values';
+                var isCurrency = relModel.fields[field] && relModel.fields[field].type === 'currency';
+                var current = linkValues[fType] && linkValues[fType][fieldVal] || {};
+                if (!_.isEmpty(current) && operation == 'remove') {
+                    if (current[relModel.id]) {
+                        delete current[relModel.id];
+                    }
+                    if (current[relModel.cid]) {
+                        delete current[relModel.cid];
+                    }
+                }
+                if (!operation || operation == 'add') {
+                    //Cleanup references to a model's CID if it now has an ID
+                    if (current[relModel.cid] && relModel.id) {
+                        delete current[relModel.cid];
+                    }
+                    var id = relModel.id ? relModel.id : relModel.cid;
+                    var value = relModel.get(field);
+                    if (isCurrency) {
+                        value = App.currency.convertToBase(
+                            value,
+                            relModel.get('currency_id')
+                        );
+                    }
+                    current[id] = value;
+
+                }
+                linkValues[fType] = linkValues[fType] || {};
+                linkValues[fType][fieldVal] = current;
+            }, this);
+        }, this);
+
+        model.set(link, linkValues);
+    },
+
     getRelatedField : function(link, ftype, field){
-        var linkValues = this.model.get(link) || {};
+        var linkVar = this._linkValueVarname(link);
+        var linkValues = this.model.get(linkVar) || {};
 
         if (ftype == "related" && !this.inCollection) {// except subpanels. see explanation below RE:updating a full collection of models
             return this._handleRelateExpression(link, field);
@@ -439,7 +549,7 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
             linkValues[ftype][field] = linkValues[ftype][field] || "";
             // Setting with the silent flag to prevent change events from firing
             // downstream and forcing recalculations based on those changes
-            this.model.set(link, linkValues, {silent: true});
+            this.model.set(linkVar, linkValues, {silent: true});
             return "";
         }
 
@@ -455,10 +565,18 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
 
         this.getRelatedFieldValues([params]);
 
-        if (typeof(linkValues[ftype]) == "undefined")
-            return "";
-
-        return linkValues[ftype];
+        // since the call above potentially created the values,
+        // get them form the model again and try to find them again.
+        linkValues = this.model.get(linkVar) || {};
+        //Check if we already have this value
+        if (!_.isUndefined(linkValues[ftype])) {
+            if (!field) {
+                return linkValues[ftype];
+            } else if (!_.isUndefined(linkValues[ftype][field])) {
+                return linkValues[ftype][field];
+            }
+        }
+        return '';
 
     },
     _handleRelateExpression : function(link, field){
@@ -601,17 +719,17 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
             relContext.resetLoadFlag();
         }
 
-        //don't use the link api if we are forcing an id pulled from a field on the current model.
-        if (rField) relContext.attributes.link = null;
         var model = this.model;
         //need up update the related context's bean to the current list bean before we can load it.
         //relContext.set("parentModel", model);
         //relContext.attributes.collection.link.bean = model;
-        relContext.loadData({success:function(){
-            // We will fire the link change event once the load is complete to re-fire the dependency with the correct data.
-            model.trigger("change:" + link, model);
-        }});
-        if (rField) relContext.attributes.link = link;
+        relContext.loadData({
+            relate: !rField, //don't use the link api if we are forcing an id pulled from a field on the current model.
+            success: function() {
+                // We will fire the link change event once the load is complete to re-fire the dependency with the correct data.
+                model.trigger("change:" + link, model);
+            }
+        });
 
     },
     //PreSetup but don't load any related contexts we might need
@@ -626,9 +744,10 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
         }, this);
     },
     //Preload (but don't trigger changes) related field data
-    _requestRollups :  function(relatedFields){
-        if (!this.model.isNew()) {
-            this.getRelatedFieldValues(relatedFields, null, null, true);
+    _requestRollups :  function(relatedFields, model){
+        model = model || this.model;
+        if (!model.isNew()) {
+            this.getRelatedFieldValues(relatedFields, model.module, model, true);
         }
     },
     fireOnLoad : function(dep) {
@@ -812,21 +931,22 @@ SUGAR.util.extend(SEC, SE.ExpressionContext, {
      * @param {String} linkName
      * @return {undefined|SUGAR.App.data.beanCollection|string}
      */
-    getNestedCollectionFromModel: function(linkName) {
+    getNestedCollectionFromModel: function(linkName, model) {
         // this will check to see if a collection exists
         // if one does, it will be returned
         var nestedCollection;
+        model = model || this.model;
 
         // first check for collection fields
-        var collectionFields = _.pluck(this.model.fieldsOfType('collection'), 'name');
+        var collectionFields = _.pluck(model.fieldsOfType('collection'), 'name');
         if (!_.isEmpty(collectionFields)) {
             var collectionField = _.chain(collectionFields)
-                .filter(function(f) { return _.contains(this.model.fields[f].links, linkName); }, this)
+                .filter(function(f) { return _.contains(model.fields[f].links, linkName); }, this)
                 .value();
             if (_.size(collectionField) === 1) {
                 var cf = _.first(collectionField);
-                if (this.model.has(cf)) {
-                    nestedCollection = this.model.get(cf);
+                if (model.has(cf)) {
+                    nestedCollection = model.get(cf);
 
                     if (!(nestedCollection instanceof SUGAR.App.data.beanCollection)) {
                         nestedCollection = undefined;
@@ -881,13 +1001,12 @@ SUGAR.forms.Dependency = function(trigger, actions, falseActions, testOnLoad, co
 	this.falseActions = falseActions;
 	this.context = context;
     this.testOnLoad = testOnLoad;
+    this.trigger = trigger;
     trigger.setContext(this.context);
     trigger.setDependency(this);
-	this.trigger = trigger;
 	if (testOnLoad) {
 	    context.fireOnLoad(this);
 	}
-
 }
 
     /**
@@ -1043,7 +1162,7 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
             //Iterate over all the properties of the action to see if they are formulas with relate fields
             if (typeof action.exec == "function") {
                 for (var p in action) {
-                    if (typeof action[p] == "string") {
+                    if (typeof action[p] == "string" && action[p].indexOf('$') > -1) {
                         fields = $.merge(fields, parser.getRelatedFieldsFromFormula(action[p], actionTarget));
                     }
                 }
@@ -1084,7 +1203,7 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
             return false;
         }
 
-        if (context.isOnLoad) {
+        if (context.isOnLoad && !context.model.isNew()) {
             return false;
         }
 
@@ -1107,9 +1226,7 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
         this.context = context;
         this.relatedFields = relatedFields || [];
         // track if the collection was found on the model
-        this._collectionOnModel = false;
         this.dependency = { };
-        this._attachListeners();
     };
 
     /**
@@ -1123,21 +1240,15 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
      * @return {undefined|Backbone.Collection|string}
      * @private
      */
-    SUGAR.forms.Trigger.prototype._findRelatedCollection = function(link_name)
+    SUGAR.forms.Trigger.prototype._findRelatedCollection = function(link_name, model)
     {
-        var varContextCollection = this.context.getNestedCollectionFromModel(link_name);
+        model = model || this.context.model;
+        var varContextCollection = this.context.getNestedCollectionFromModel(link_name, model);
         if (_.isUndefined(varContextCollection)) {
             var varContext = this.context.getLinkContext(this.context.view, link_name);
             if (varContext && varContext.has('collection')) {
                 varContextCollection = varContext.get('collection');
-                this._collectionOnModel = false;
             }
-        } else if (_.isString(varContextCollection)) {
-            // Adding Listener to re-run the _attachListeners once the field is set.
-            this.context.model.once('change:' + varContextCollection, this._attachListeners, this);
-            return;
-        } else {
-            this._collectionOnModel = true;
         }
 
         return varContextCollection;
@@ -1146,6 +1257,9 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
     /**
      * Attaches a 'change' listener to all the fields that cause
      * the condition to be re-evaluated again.
+     * FIXME: Listeners attached here should be disposed by sugarlogic itself.
+     * Currently the disposing of listeners relies on context.clear()
+     * from sidecar.
      */
     SUGAR.forms.Trigger.prototype._attachListeners = function() {
         if (!(this.variables instanceof Array)) {
@@ -1154,87 +1268,122 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
 
         for (var i = 0; i < this.variables.length; i++) {
             this.context.addListener(this.variables[i], SUGAR.forms.Trigger.fire, this, true);
+        }
+
+        var models = [this.context.model];
+        //Collections require extra listeners to handle models being added or removed
+        if (this.context.useCollection) {
+            models = this.context.collection.models;
+            //When the collection gets new models, we need to listen to thier child collections
+            this.context.collection.off('add', null, this);
+            this.context.collection.off('remove', null, this);
+            this.context.collection.on('add', function(model, collection, options) {
+                this._attachCollectionListeners(model);
+            }, this);
+            //When a model is removed, we need to remove all the listeners to that model
+            this.context.collection.on('remove', function(model, collection, options) {
+                _.each(model._relatedCollections, function(collection) {
+                    collection.off(null, null, this);
+                })
+                model.off(null, null, this);
+            }, this);
+        }
+        _.each(models, function(model) {
+            this._attachCollectionListeners(model);
+        }, this);
+    };
+
+    SUGAR.forms.Trigger.prototype._attachCollectionListeners = function(model, triggerLink, relModel) {
+        var relFields = this.relatedFields,
+            linkFields = [],
+            changingField,
+            isRemoveEvent = false;
+        triggerLink = triggerLink || false;
+
+        // get all the related fields for the links in this formula
+        _.each(this.dependency.getRelatedFields(), function(field) {
+            linkFields[field.link] = _.union(linkFields[field.link] || [], [field.relate]);
+        });
+
+        var colChangeCallback = _.bind(function(relModel, value, event) {
+            // what field on the model actually changed,
+            // this is useful for the rollupCondition checks.
+            if (value !== null && !_.isUndefined(value)) {
+                _.find(relModel.changed, function(v, k) {
+                    if (_.contains(relFields, k) && v === value) {
+                        changingField = k;
+                        return true;
+                    }
+                });
+            } else if (event && event.type == 'remove') {
+                this.context.isRemoveEvent = true;
+            }
+            if (event && event.link) {
+                this.context.updateRelatedCollectionValues(model, event.link, null, null, relModel, event.type);
+            }
+            var prevModel = this.context.model;
+            this.context.model = model;
+            this.context.changingField = changingField;
+            SUGAR.forms.Trigger.fire.call(this, relModel, null, {
+                fromRelated: true,
+                changingField: changingField,
+                isRemoveEvent: isRemoveEvent
+            });
+            // remove the field from the context after the trigger has fired
+            this.context.model = prevModel;
+            delete this.context.isRemoveEvent
+            delete this.context.changingField;
+        }, this);
+
+        for (var i = 0; i < this.variables.length; i++) {
             // this is an action with a target and we are one a new model,
             // find the LinkContext and add the listener to the collection since there are no relatedFields
-            if (this.relatedFields.length === 0 && this.context.model.isNew() && !_.isUndefined(this.context.target)) {
-                var varContextCollection = this._findRelatedCollection(this.variables[i]);
-                if (varContextCollection instanceof Backbone.Collection) {
-                    varContextCollection.off('add', null, this);
-                    varContextCollection.on('add', function(model, collection, options) {
-                        this.context.fromRelated = true;
-                        var f = _.bind(SUGAR.forms.Trigger.fire, this);
-                        f(model);
-                        delete this.context.fromRelated;
-                    }, this);
+            var link = this.variables[i];
+            var linkRelatedFields = linkFields[link] || [];
 
-                    varContextCollection.off('remove', null, this);
-                    varContextCollection.on('remove', function(model, collection, options) {
-                        this.context.isRemoveEvent = true;
-                        this.context.fromRelated = true;
-                        var f = _.bind(SUGAR.forms.Trigger.fire, this);
-                        f(model);
-                        // remove it from the context after the trigger has fired
-                        delete this.context.fromRelated;
-                        delete this.context.isRemoveEvent;
-                    }, this);
-                }
-            }
+            var varContextCollection = this._findRelatedCollection(link, model);
+            if (varContextCollection instanceof Backbone.Collection) {
+                //First bind updates of the collection (models added or removed)
+                varContextCollection.off('add', null, this);
+                varContextCollection.on('add', function(relModel) {
+                    colChangeCallback(relModel, null, {
+                        type: 'add',
+                        link: link
+                    });
+                }, this);
 
-            // if we have variableFields and the context does not have a parent (aka non-subpanel)
-            // find the relationship context and add listeners to the collection so we can get live updating
-            if (this.relatedFields.length > 0 && _.isUndefined(this.context.view.parent)) {
-                var varContextCollection = this._findRelatedCollection(this.variables[i]);
-                if (varContextCollection instanceof Backbone.Collection) {
-                    var selfRelFields = this.relatedFields;
+                varContextCollection.off('remove', null, this);
+                varContextCollection.on('remove', function(relModel) {
+                    colChangeCallback(relModel, null, {
+                        type: 'remove',
+                        link: link
+                    });
+                }, this);
 
-                    // create an anonymous function because of what needs to happen inside of it
-                    var func = function(model, value, options) {
-                        // what field on the model actually changed,
-                        // this is useful for the rollupCondition checks.
-                        var field;
-                        _.find(model.changed, function(v, k) {
-                            field = k;
-                            return (_.contains(selfRelFields, k) && v === value);
-                        });
-                        this.context.changingField = field;
-                        this.context.fromRelated = true;
-                        var f = _.bind(SUGAR.forms.Trigger.fire, this);
-
-                        f(model);
-                        // remove the field from the context after the trigger has fired
-                        delete this.context.fromRelated;
-                        delete this.context.changingField;
-                    };
-
-                    // change event handles
-                    // make sure we are dealing with a unique list of relatedFields
-                    var events = 'change:' + _.unique(this.relatedFields).join(' change:');
+                //Now bind changes of any related field of models in the collection
+                if (!_.isEmpty(linkRelatedFields)) {
+                    var events = 'change:' + _.unique(linkRelatedFields).join(' change:');
                     // remove all listeners from this context regardless of the function
                     varContextCollection.off(events, null, this);
-                    varContextCollection.on(events, func, this);
-
-                    // listen for the add events on the context collection
-                    varContextCollection.off('add', null, this);
-                    varContextCollection.on('add', func, this);
-
-                    if (this.context.model.isNew() || this._collectionOnModel === true) {
-                        // remove handler is only valid for create views or when the collection is found on
-                        // the model.
-                        varContextCollection.off('remove', null, this);
-                        varContextCollection.on('remove', function(model, collection, optoins) {
-                            this.context.isRemoveEvent = true;
-                            this.context.fromRelated = true;
-                            var f = _.bind(SUGAR.forms.Trigger.fire, this);
-                            f(model);
-                            // remove it from the context after the trigger has fired
-                            delete this.context.fromRelated;
-                            delete this.context.isRemoveEvent;
-                        }, this);
-                    }
+                    varContextCollection.on(events, colChangeCallback, this);
                 }
+            } else if (_.isString(varContextCollection)) {
+                //Adding Listener to re-run the _attachListeners once the field is set and changes
+                model.once('change:' + varContextCollection, function(parentModel, changedRelatedModel) {
+                    this._attachListeners();
+                    //If this event was caused by a model in the collection changing, trigger the dependency
+                    if (_.isObject(changedRelatedModel) && _.intersection(_.keys(changedRelatedModel.changed), relFields).length > 0) {
+                        SUGAR.forms.Trigger.fire.call(this, model);
+                    }
+                }, this);
+                return varContextCollection;
             }
         }
+        if(triggerLink && _.contains(this.variables, triggerLink)) {
+            colChangeCallback(relModel, null, 'add');
+        }
     };
+
 
     /**
      * Attaches a 'change' listener to all the fields that cause
@@ -1242,6 +1391,7 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
      */
     SUGAR.forms.Trigger.prototype.setDependency = function (dep) {
         this.dependency = dep;
+        this._attachListeners();
     }
 
     SUGAR.forms.Trigger.prototype.setContext = function (context) {
@@ -1255,15 +1405,19 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
      * all the dependencies.
      */
     SUGAR.forms.Trigger.fire = function (model, value, options) {
+        options = options || {};
         // eval the condition
-        var evaluation, val;
+        var evaluation, val, prevModel, prevRelatedModel;
         if (model) {
             // if the context doesn't have a model or the current model.module is equal to the new model.module
             // do we have a context or not?
-            var fromRelated = this.context.fromRelated || false;
+            var fromRelated = options.fromRelated || false;
+
             if (!fromRelated && model) {
+                prevModel = this.context.model;
                 this.context.setModel(model);
             } else if (fromRelated) {
+                prevRelatedModel = this.context.relatedModel;
                 // set the related module as the trigger is coming from a rollup formula
                 // since the model doesn't match was it on the context
                 this.context.setRelatedModel(model);
@@ -1288,14 +1442,21 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
             // single dependency
             if (this.dependency instanceof SUGAR.forms.Dependency) {
                 this.dependency.fire(false);
-                return;
             }
         } else if (val == SUGAR.expressions.Expression.FALSE) {
             // single dependency
             if (this.dependency instanceof SUGAR.forms.Dependency) {
                 this.dependency.fire(true);
-                return;
             }
+        }
+
+        //Cleanup and changes we made to the expression context
+        if (!fromRelated && model) {
+            this.context.setModel(prevModel);
+        }
+
+        if (fromRelated) {
+            this.context.setRelatedModel(prevModel);
         }
     };
 
@@ -1389,109 +1550,132 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
         SUGAR.forms.markedField[key] = null;
     };
 
-    //Register SugarLogic as a plugin to sidecar.
-    if (SUGAR.App && SUGAR.App.plugins) {
-        SUGAR.App.plugins.register('SugarLogic', 'view', {
-            onAttach: function() {
-                this.on('init', function() {
-                    var sl = this.initSugarLogic();
-                    /**
-                     * Reference to the `SugarLogic` plugin context on the view.
-                     *
-                     * @deprecated Deprecated since 7.9.
-                     * @type {SUGAR.expressions.ExpressionContext}
-                     */
-                    Object.defineProperty(this, 'slContext', {
-                        get: function () {
-                            SUGAR.App.logger.warn('`View.slContext` has been deprecated since 7.9.');
-                            return sl;
-                        },
-                        configurable: true,
-                        enumerable: true,
-                    });
-
-                    this.context.addFields(this._getDepFields());
-                }, this);
-            },
-
-            /**
-             * Init SugarLogic on a passed in model or the default one to the view that this plugin is attached to
-             *
-             * @param {Data.Bean} [model] The Model we want to enable SugarLogic on
-             * @param {Array} [dependencies] Any dependencies that should be used.
-             * @param {Bool} [isCreate] Trigger the dependencies on model that is in create mode.
-             * @return {SUGAR.expressions.SidecarExpressionContext}
-             */
-            initSugarLogic: function(model, dependencies, isCreate) {
-                // set the defaults if they are not already set
-                model = model || this.model;
-                dependencies = dependencies || this.getApplicableDeps();
-                isCreate = isCreate || false;
-                var slContext = new SUGAR.expressions.SidecarExpressionContext(this, model);
-                slContext.initialize(dependencies, isCreate);
-
-                return slContext;
-            },
-
-            /**
-             * Gets the list of dependent/calculated fields with SugarLogic
-             * expressions, to be included in the list of fields fetched by the
-             * view's context.
-             *
-             * @protected
-             * @return {Array} The list of SugarLogic fields.
-             */
-            _getDepFields: function() {
-                var fields;
-                // Parses the expression for fields (beginning with `$`).
-                var getFields = SE.ExpressionParser.prototype.getFieldsFromExpression;
-                var deps = this.getApplicableDeps();
-
-                _.each(deps, function(dep) {
-                    if (dep.trigger) {
-                        fields = _.union(fields, getFields(dep.trigger));
-                    }
-                    _.each(dep.actions, function(action) {
-                        _.each(action.params, function(param) {
-                            if (_.isString(param)) {
-                                fields = _.union(fields, getFields(param));
-                            }
-                        });
-                    });
+    SE.plugin = {
+        onAttach: function() {
+            this.on('init', function() {
+                this._slCtx = this.initSugarLogic();
+                /**
+                 * Reference to the `SugarLogic` plugin context on the view.
+                 *
+                 * @deprecated Deprecated since 7.9.
+                 * @type {SUGAR.expressions.ExpressionContext}
+                 */
+                Object.defineProperty(this, 'slContext', {
+                    get: function () {
+                        SUGAR.App.logger.warn('`View.slContext` has been deprecated since 7.9.');
+                        return this._slCtx;
+                    },
+                    configurable: true,
+                    enumerable: true,
                 });
 
-                if (this.model) {
-                    fields = _.filter(fields, function(field) {
-                        return this.model.fields[field] && this.model.fields[field].type !== 'link';
-                    }, this);
-                }
+                this.context.addFields(this._getDepFields());
+            }, this);
+        },
 
-                return fields;
-            },
-            getApplicableDeps: function() {
-                var meta = _.extend({}, this.meta, this.options.meta),
-                    // module level dependencies
-                    modDeps = SUGAR.App.metadata.getModule(this.context.get("module"), "dependencies"),
-                    action = (_.contains(this.plugins, "Editable")
-                        || this.slContext.view.name == 'edit'
-                        || this.slContext.view.name == 'create')
-                            ? "edit" : "view",
-                    deps = meta.dependencies;
-
-                if (!_.isEmpty(modDeps)) {
-                    // to merge with view level dependencies
-                    var filteredModDeps = _.filter(modDeps, function(dep) {
-                        if (_.contains(dep.hooks, "all") || _.contains(dep.hooks, action)) {
-                            return true;
-                        }
-                        return false;
-                    });
-                    deps = (!_.isEmpty(deps)) ? _.union(deps, filteredModDeps) : filteredModDeps;
-                }
-
-                return deps;
+        /**
+         * Init SugarLogic on a passed in model or the default one to the view that this plugin is attached to
+         *
+         * @param {Data.Bean} [model] The Model we want to enable SugarLogic on
+         * @param {Array} [dependencies] Any dependencies that should be used.
+         * @param {Bool} [isCreate] Trigger the dependencies on model that is in create mode.
+         * @return {SUGAR.expressions.SidecarExpressionContext}
+         */
+        initSugarLogic: function(model, dependencies, isCreate) {
+            // set the defaults if they are not already set
+            model = model || this.model;
+            this._dependencies = dependencies || this.getApplicableDeps();
+            isCreate = isCreate || false;
+            var slContext = new SUGAR.expressions.SidecarExpressionContext(this, model, this.collection);
+            if (_.isEmpty(this._dependencies)) {
+                return slContext;
             }
-       });
+
+            slContext.initialize(this._dependencies, isCreate);
+            return slContext;
+        },
+
+        /**
+         * Gets the list of dependent/calculated fields with SugarLogic
+         * expressions, to be included in the list of fields fetched by the
+         * view's context.
+         *
+         * @protected
+         * @return {Array} The list of SugarLogic fields.
+         */
+        _getDepFields: function() {
+            var fields;
+            // Parses the expression for fields (beginning with `$`).
+            var getFields = SE.ExpressionParser.prototype.getFieldsFromExpression;
+            var deps = this.getApplicableDeps();
+
+            _.each(deps, function(dep) {
+                if (dep.trigger) {
+                    fields = _.union(fields, getFields(dep.trigger));
+                }
+                _.each(dep.actions, function(action) {
+                    _.each(action.params, function(param) {
+                        if (_.isString(param)) {
+                            fields = _.union(fields, getFields(param));
+                        }
+                    });
+                });
+            });
+
+            if (this.model) {
+                fields = _.filter(fields, function(field) {
+                    return this.model.fields[field] && this.model.fields[field].type !== 'link';
+                }, this);
+            }
+
+            return fields;
+        },
+
+        getApplicableDeps: function() {
+            var meta = _.extend({}, this.meta, this.options.meta),
+                // module level dependencies
+                modDeps = SUGAR.App.metadata.getModule(this.context.get("module"), "dependencies"),
+                // FIXME sugarplugin shouldn't depend on info from other plugins...
+                action = (_.contains(this.plugins, 'Editable')
+                    || this.name == 'edit'
+                    || this.name == 'create')
+                        ? "edit" : "view",
+                deps = meta.dependencies;
+
+            if (!_.isEmpty(modDeps)) {
+                // to merge with view level dependencies
+                var filteredModDeps = _.filter(modDeps, function(dep) {
+                    if (_.contains(dep.hooks, "all") || _.contains(dep.hooks, action)) {
+                        return true;
+                    }
+                    return false;
+                });
+                deps = (!_.isEmpty(deps)) ? _.union(deps, filteredModDeps) : filteredModDeps;
+            }
+
+            return deps;
+        },
+
+        /**
+         * Unbinds event listeners bound by SidecarExpressionContext class.
+         */
+        onDetach: function () {
+            this.off(null, null, this._slCtx);
+            this.model && this.model.off(null, null, this._slCtx);
+            this.collection && this.collection.off(null, null, this._slCtx);
+
+            _.each(this._slCtx.dependencies, function (dep) {
+                this.context.off('list:editrow:fire', null, dep);
+                _.each(dep.actions, function (action) {
+                    this.off(null, null, action);
+                }, this);
+            }, this);
+        },
+    };
+
+    //Register SugarLogic as a plugin to sidecar.
+    if (SUGAR.App && SUGAR.App.plugins) {
+        SUGAR.App.plugins.register('SugarLogic', 'view', SE.plugin);
     } else if (console.error) {
         console.error("unable to find the plugin manager");
     }

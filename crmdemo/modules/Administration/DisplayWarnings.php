@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -29,23 +28,12 @@ if(!empty($_SESSION['display_lotuslive_alert'])){
 
 if( is_admin($current_user) && SugarAutoLoader::fileExists('include/SugarSearchEngine/SugarSearchEngineFactory.php') )
 {
-    require_once('include/SugarSearchEngine/SugarSearchEngineFactory.php');
     $ftsType = SugarSearchEngineFactory::getFTSEngineNameFromConfig();
     if(!empty($ftsType) && isset($GLOBALS['sugar_config']['full_text_engine'][$ftsType]['valid']) && !$GLOBALS['sugar_config']['full_text_engine'][$ftsType]['valid'])
     {
         displayAdminError(translate('LBL_FTS_CONNECTION_INVALID', 'Administration'));
     }
 
-}
-
-
-
-if(isset($_SESSION['rebuild_relationships'])){
-	displayAdminError(translate('MSG_REBUILD_RELATIONSHIPS', 'Administration'));
-}
-
-if(isset($_SESSION['rebuild_extensions'])){
-	displayAdminError(translate('MSG_REBUILD_EXTENSIONS', 'Administration'));
 }
 
 if (empty($license)){
@@ -96,7 +84,6 @@ if(!empty($_SESSION['EXCEEDING_OC_LICENSES']) && $_SESSION['EXCEEDING_OC_LICENSE
 if(isset($license) && !empty($license->settings['license_msg_admin'])){
     // UUDDLRLRBA
 	$GLOBALS['log']->fatal(base64_decode($license->settings['license_msg_admin']));
-    //displayAdminError(base64_decode($license->settings['license_msg_admin']));
 	return;
 }
 
@@ -112,7 +99,7 @@ if(trim($admin->settings['mail_smtpserver']) == '' && !$sendMailEnabled) {
         $smtp_error = true;
     }
     else {
-        $workflow = BeanFactory::getBean('WorkFlow');
+        $workflow = BeanFactory::newBean('WorkFlow');
         if($workflow->getActiveWorkFlowCount()>0) {
             $smtp_error = true;
         }
@@ -185,13 +172,6 @@ if($smtp_error) {
         }
         //END REQUIRED CODE DO NOT MODIFY
         if(empty($GLOBALS['sugar_config']['admin_access_control'])){
-			if(isset($_SESSION['invalid_versions'])){
-				$invalid_versions = $_SESSION['invalid_versions'];
-				foreach($invalid_versions as $invalid){
-					displayAdminError(translate('WARN_UPGRADE', 'Administration'). $invalid['name'] .translate('WARN_UPGRADE2', 'Administration'));
-				}
-			}
-
 			if (isset($_SESSION['available_version'])){
 				if($_SESSION['available_version'] != $sugar_version)
 				{
@@ -199,19 +179,6 @@ if($smtp_error) {
 				}
 			}
         }
-
-//		if (!isset($_SESSION['dst_fixed']) || $_SESSION['dst_fixed'] != true) {
-//			$qDst = "SELECT count(*) AS dst FROM versions WHERE name = 'DST Fix'";
-//			$rDst = $db->query($qDst);
-//			$rowsDst = $db->fetchByAssoc($rDst);
-//			if($rowsDst['dst'] > 0) {
-//				$_SESSION['dst_fixed'] = true;
-//			} else {
-//				$_SESSION['dst_fixed'] = false;
-//				displayAdminError($app_strings['LBL_DST_NEEDS_FIXIN']);
-//			}
-//
-//		}
 
 		if(isset($_SESSION['administrator_error']))
 		{
@@ -222,5 +189,3 @@ if($smtp_error) {
 
 		unset($_SESSION['administrator_error']);
 }
-
-?>

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/ConfigModuleApi.php');
 
 class KBContentsConfigApi extends ConfigModuleApi
 {
@@ -54,7 +53,7 @@ class KBContentsConfigApi extends ConfigModuleApi
     protected function save(ServiceBase $api, $params, $module)
     {
         /** @var Administration $admin */
-        $admin = BeanFactory::getBean('Administration');
+        $admin = BeanFactory::newBean('Administration');
 
         $deletedLanguages = array();
         if (isset($params['deleted_languages'])) {
@@ -110,13 +109,13 @@ class KBContentsConfigApi extends ConfigModuleApi
     /**
      * Update documents.
      *
-     * @param Array $values Pairs {key=>value} for update.
-     * @param Array $lang Languages which should be updated.
+     * @param array $values Pairs {key=>value} for update.
+     * @param array $lang Languages which should be updated.
      */
     protected function updateDocuments($values, $lang)
     {
         $db = DBManagerFactory::getInstance();
-        $bean = BeanFactory::getBean('KBContents');
+        $bean = BeanFactory::newBean('KBContents');
 
         if (!empty($lang) && !empty($values)) {
             $inString = implode(',', array_map(array($db, 'quoted'), $lang));

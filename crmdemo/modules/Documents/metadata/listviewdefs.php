@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,7 +15,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $listViewDefs['Documents'] = array(
     'DOCUMENT_NAME' =>
         array (
-            'width' => '20%',
+            'width' => '20',
             'label' => 'LBL_DOCUMENT_NAME',
             'link' => true,
             'default' => true,
@@ -24,7 +23,7 @@ $listViewDefs['Documents'] = array(
         ),
     'FILENAME' =>
         array (
-            'width' => '20%',
+            'width' => '20',
             'label' => 'LBL_FILENAME',
             'link' => true,
             'default' => true,
@@ -40,20 +39,20 @@ $listViewDefs['Documents'] = array(
                 ),
         ),
     'DOC_TYPE' => array (
-        'width' => '5%',
+        'width' => '5',
         'label' => 'LBL_DOC_TYPE',
         'link' => false,
         'default' => true,
     ),
     'CATEGORY_ID' =>
         array (
-            'width' => '10%',
+            'width' => '10',
             'label' => 'LBL_LIST_CATEGORY',
             'default' => true,
         ),
     'SUBCATEGORY_ID' =>
         array (
-            'width' => '15%',
+            'width' => '15',
             'label' => 'LBL_LIST_SUBCATEGORY',
             'default' => true,
         ),
@@ -66,7 +65,7 @@ $listViewDefs['Documents'] = array(
         ),
     'LAST_REV_CREATE_DATE' =>
         array (
-            'width' => '10%',
+            'width' => '10',
             'label' => 'LBL_LIST_LAST_REV_DATE',
             'default' => true,
             'sortable' => false,
@@ -78,7 +77,7 @@ $listViewDefs['Documents'] = array(
         ),
     'EXP_DATE' =>
         array (
-            'width' => '10%',
+            'width' => '10',
             'label' => 'LBL_LIST_EXP_DATE',
             'default' => true,
         ),
@@ -91,7 +90,7 @@ $listViewDefs['Documents'] = array(
             'default' => true),
     'MODIFIED_BY_NAME' =>
         array (
-            'width' => '10%',
+            'width' => '10',
             'label' => 'LBL_MODIFIED_USER',
             'module' => 'Users',
             'id' => 'USERS_ID',
@@ -103,7 +102,7 @@ $listViewDefs['Documents'] = array(
                 ),
         ),
     'DATE_ENTERED' => array (
-        'width' => '10%',
+        'width' => '10',
         'label' => 'LBL_DATE_ENTERED',
         'default' => true,
     ),

@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'البند المسعر',
     'LBL_LIST_MANUFACTURER' => 'الشركة المصنعة',
     'LBL_MANUFACTURERS' => 'الشركات المصنعة',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'رقم التصنيع',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'رقم الجزء',
     'LBL_LIST_QUANTITY' => 'الكمية',
     'LBL_LIST_COST_PRICE' => 'التكلفة',
     'LBL_LIST_DISCOUNT_PRICE' => 'السعر',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'تحديد الخصم',
     'LBL_LIST_PRICE' => 'سعر القائمة:',
     'LBL_VENDOR_PART_NUM' => 'رقم الجزء للبائع:',
-    'LBL_MFT_PART_NUM' => 'رقم الجزء للشركة المصنعة:',
+    'LBL_MFT_PART_NUM' => 'رقم الجزء:',
     'LBL_NEXT_STEP' => 'الخطوة التالية:',
     'LBL_DISCOUNT_PRICE_DATE' => 'تاريخ سعر الخصم:',
     'LBL_WEIGHT' => 'الوزن:',
@@ -168,6 +168,8 @@ $mod_strings = array(
  - انقر فوق "إظهار المزيد" لعرض حقول إضافية إذا لزم الأمر.
 2. انقر فوق "حفظ" لإنهاء السجل الجديد والعودة إلى الصفحة السابقة.',
 
-    'LBL_MANUFACTURERS' => 'الشركات المصنعة',
     'LBL_PRODUCT_POSITION' => 'موضع حزمة المنتج',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'قائمة بيانات عرض أسعار بنود مسعرة',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (بنود مسعرة جديدة)',
+    'LBL_DISCOUNT_PERCENT' => '% بالمائة',
 );

@@ -31,19 +31,13 @@ module.exports = function (config) {
         },
     };
 
-    var dockerLaunchers = {
-        docker_chrome: {
-            base: 'Chrome',
-            flags: ['--no-sandbox'],
-        },
-    };
-
     config.set({
         basePath: '../',
         frameworks: [
             'jasmine',
         ],
         plugins: [
+            'karma-babel-preprocessor',
             'karma-jasmine',
             'karma-chrome-launcher',
             'karma-firefox-launcher',
@@ -69,6 +63,6 @@ module.exports = function (config) {
         sauceLabs: {
             testName: 'Sidecar Karma Tests',
         },
-        customLaunchers: Object.assign(sauceLaunchers, dockerLaunchers),
+        customLaunchers: sauceLaunchers,
     });
 };

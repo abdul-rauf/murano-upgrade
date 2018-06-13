@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -42,7 +41,6 @@ $mod_strings = array (
 	'LBL_COUNTRY' => 'Země:',
 	'LBL_DATE_ENTERED' => 'Datum zadání:',
 	'LBL_DATE_MODIFIED' => 'Datum změny:',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Společnosti',
 	'LBL_DESCRIPTION_INFORMATION' => 'Popis',
 	'LBL_DESCRIPTION' => 'Popis:',
 	'LBL_DUPLICATE' => 'Možný duplicitní účet',

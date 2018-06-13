@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 require_once('include/workflow/workflow_utils.php');
-require_once('include/VarDefHandler/VarDefHandler.php');
 global $current_user;
 //Only allow admins to enter this screen
 if (!is_admin($current_user)&& !is_admin_for_any_module($current_user)) {
@@ -31,7 +29,7 @@ if(empty($workflow_object)) {
 	sugar_die("You shouldn't be here");
 }
 
-$focus = BeanFactory::getBean('WorkFlowTriggerShells');
+$focus = BeanFactory::newBean('WorkFlowTriggerShells');
 
 if(!empty($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
@@ -83,7 +81,7 @@ if(empty($focus->parent_id)){
 		$meta_array_type = "time_trigger";
 	}
 
-	$temp_module = BeanFactory::getBean($workflow_object->base_module);
+	$temp_module = BeanFactory::newBean($workflow_object->base_module);
 	$temp_module->call_vardef_handler($meta_array_type);
 	$field_array = $temp_module->vardef_handler->get_vardef_array();
 

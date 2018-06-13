@@ -1,6 +1,5 @@
 <?php
 
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'modules/ModuleBuilder/parsers/views/ListLayoutMetaDataParser.php';
-require_once 'include/MetaDataManager/MetaDataManager.php';
 
 class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
 {
@@ -40,6 +37,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
         MB_SIDECARPOPUPVIEW,
         MB_SIDECARDUPECHECKVIEW,
         MB_WIRELESSLISTVIEW,
+        MB_SIDECARQUOTEDATAGROUPLIST,
     );
 
     /*
@@ -195,7 +193,7 @@ class SidecarListLayoutMetaDataParser extends ListLayoutMetaDataParser
             if ($this->isValidField($key, $def)) {
                 if (!$this->panelHasField($key)) {
                     $availableFields[$key] = self::_trimFieldDefs($this->_fielddefs[$key]);
-                } elseif (isset($def['default']) && !$def['default']) {
+                } elseif (isset($def['default']) && !$def['default'] && !$this->isAdditionalField($def)) {
                     // if the panel has the field, but it's not displayed by default,
                     // add it to the list of available field and keep the effective definition
                     $availableFields[$key] = $def;

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +17,6 @@ if(is_admin($current_user)){
     if(is_file($cachedfile = sugar_cached('dashlets/dashlets.php'))) {
         unlink($cachedfile);
     }
-    require_once('include/Dashlets/DashletCacheBuilder.php');
 
     $dc = new DashletCacheBuilder();
     $dc->buildCache();

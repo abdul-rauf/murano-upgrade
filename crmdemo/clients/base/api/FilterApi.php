@@ -11,10 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/api/SugarApi.php';
-require_once 'include/SugarQuery/SugarQuery.php';
-require_once 'data/Relationships/RelationshipFactory.php';
-require_once 'include/SugarFields/SugarFieldHandler.php';
 
 class FilterApi extends SugarApi
 {
@@ -442,7 +438,6 @@ class FilterApi extends SugarApi
                 throw new SugarApiExceptionInvalidParameter();
             }
             // We need to use unified search for this for compatibilty with Nomad
-            require_once('clients/base/api/UnifiedSearchApi.php');
             $search = new UnifiedSearchApi();
             $args['module_list'] = $args['module'];
             return $search->globalSearch($api, $args);
@@ -458,12 +453,11 @@ class FilterApi extends SugarApi
      * Returns the number of records for the module and filter provided:
      *
      * Example:
-     *     {'record_count': '50'}
+     *     {"record_count": 50}
      *
      * @param ServiceBase $api
      * @param array $args
-     * @return Object The number of filtered/unfiltered records for the module
-     *   provided.
+     * @return array The number of filtered/unfiltered records for the module provided.
      * @throws SugarApiExceptionError If retrieving a predefined filter failed.
      * @throws SugarApiExceptionInvalidParameter if any of the parameters are
      *  invalid.
@@ -471,14 +465,21 @@ class FilterApi extends SugarApi
      */
     public function getFilterListCount(ServiceBase $api, array $args)
     {
-        list($args, $q, $options, $seed) = $this->filterListSetup($api, $args);
         $api->action = 'list';
 
+        /** @var SugarQuery $q */
+        list(, $q) = $this->filterListSetup($api, $args);
+
         $q->select->selectReset()->setCountQuery();
-        $q->order_by = null;
+        $q->orderByReset();
         $q->limit = null;
 
-        return reset($q->execute());
+        $stmt = $q->compile()->execute();
+        $count = (int) $stmt->fetchColumn();
+
+        return array(
+            'record_count' => $count,
+        );
     }
 
     /**
@@ -556,8 +557,12 @@ class FilterApi extends SugarApi
         if (!empty($options['order_by'])) {
             self::addOrderBy($q, $options['order_by']);
         }
-        // Add an extra record to the limit so we can detect if there are more records to be found
-        $q->limit($options['limit'] + 1);
+
+        // nagative limit means no limit
+        if ($options['limit'] >= 0) {
+            // Add an extra record to the limit so we can detect if there are more records to be found
+            $q->limit($options['limit'] + 1);
+        }
         $q->offset($options['offset']);
 
         return $q;
@@ -587,7 +592,7 @@ class FilterApi extends SugarApi
      * @param SugarBean $bean
      * @param array $data
      */
-    protected function populateRelatedFields($bean, $data)
+    protected function populateRelatedFields(SugarBean $bean, $data)
     {
         $relates = array();
         // fill in related rows data by field
@@ -607,7 +612,7 @@ class FilterApi extends SugarApi
                 if (!empty($fieldDef['link'])) {
                     $rbean = $bean->getRelatedBean($fieldDef['link']);
                 } else {
-                    $rbean = BeanFactory::getBean($fieldDef['module']);
+                    $rbean = BeanFactory::newBean($fieldDef['module']);
                 }
 
                 if (empty($rbean)) {
@@ -767,10 +772,10 @@ class FilterApi extends SugarApi
 
         foreach ($options['relate_collections'] as $name => $def) {
             // Parent bean
-            $bean = BeanFactory::getBean($options['module']);
+            $bean = BeanFactory::newBean($options['module']);
 
             // Related bean
-            $relate_bean = BeanFactory::getBean($def['module']);
+            $relate_bean = BeanFactory::newBean($def['module']);
 
             // If the related bean has the necessary method to get related records
             // then call it
@@ -847,7 +852,7 @@ class FilterApi extends SugarApi
                 $bean = $q->getTableBean($linkName);
             }
             if (empty($bean) && $q->getFromBean() && $q->getFromBean()->$linkName) {
-                $bean = BeanFactory::getBean($q->getFromBean()->$linkName->getRelatedModuleName());
+                $bean = BeanFactory::newBean($q->getFromBean()->$linkName->getRelatedModuleName());
             }
             if (empty($bean)) {
                 throw new SugarApiExceptionInvalidParameter("Cannot use condition against $linkName - unknown module");
@@ -1137,17 +1142,17 @@ class FilterApi extends SugarApi
 
         // Have to do a subselect because MAX() and GROUP BY don't get along with
         // databases other than MySQL
-        $q->joinRaw(
-            ' INNER JOIN ( SELECT t.item_id item_id, MAX(t.date_modified) track_max ' .
+        $join = $q->joinTable(
+            '(SELECT t.item_id item_id, MAX(t.date_modified) track_max ' .
             ' FROM tracker t ' .
-            " WHERE t.module_name = '" . $db->quote($q->from->module_name) . "' " .
-            " AND t.user_id = '" . $db->quote($GLOBALS['current_user']->id) . "' " .
+            ' WHERE t.module_name = ' . $db->quoted($q->from->module_name) . ' ' .
+            ' AND t.user_id = ' . $db->quoted($GLOBALS['current_user']->id) . ' ' .
             ' AND t.date_modified >= ' . $db->convert("'$min_date'", 'datetime') . ' ' .
             ' AND t.deleted = 0 ' .
-            ' GROUP BY t.item_id ' .
-            ' ) tracker ON tracker.item_id = ' . $q->from->getTableName() . '.id ',
+            ' GROUP BY t.item_id)',
             array('alias' => 'tracker')
         );
+        $join->on()->equalsField('tracker.item_id', $q->from->getTableName() . '.id');
 
         if (empty($q->order_by)) {
             // Now, if they want tracker records without specific order, so let's order it by the tracker date_modified
@@ -1200,7 +1205,7 @@ class FilterApi extends SugarApi
                 if ((count($fields) == 0 || in_array($def['name'], $fields)) && !empty($def['relate_collection'])) {
                     $options['relate_collections'][$def['name']] = $def;
                     if (!isset($options['module'])) {
-                        $options['module'] = $bean->module_dir;
+                        $options['module'] = $bean->getModuleName();
                     }
                 }
             }
@@ -1217,7 +1222,7 @@ class FilterApi extends SugarApi
      * @param $options array of options to use
      * @return mixed the options without any relate collections
      */
-    protected function removeRelateCollectionsFromSelect($options)
+    protected function removeRelateCollectionsFromSelect(array $options)
     {
         if (isset($options['select'])) {
             foreach ($options['select'] as $index => $field) {

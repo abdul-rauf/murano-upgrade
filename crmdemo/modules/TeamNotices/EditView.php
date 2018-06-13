@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,7 @@ $_REQUEST['edit']='true';
 
 
 
-$focus = BeanFactory::getBean('TeamNotices');
+$focus = BeanFactory::newBean('TeamNotices');
 if(!empty($_REQUEST['record'])) $focus->retrieve($_REQUEST['record']);
 
 $GLOBALS['log']->info("Team Notice edit view");
@@ -65,7 +64,6 @@ $action_button = smarty_function_sugar_action_menu(array(
 
 $xtpl->assign('ACTION_BUTTON', $action_button);
 
-require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
 $teamSetField = new SugarFieldTeamset('Teamset');
 $code = $teamSetField->getClassicView($focus->field_defs);
 $xtpl->assign("TEAM_SET_FIELD", $code);

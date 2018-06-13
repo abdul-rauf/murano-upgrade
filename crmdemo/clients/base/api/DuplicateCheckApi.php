@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -39,7 +38,11 @@ class DuplicateCheckApi extends SugarApi
         //create a new bean & check ACLs
         $bean = BeanFactory::newBean($args['module']);
 
-        $this->handleEmptyBean($bean);
+        if (!$bean) {
+            throw new SugarApiExceptionInvalidParameter(
+                'Module ' . $args['module'] . ' cannot be used for duplicate check'
+            );
+        }
 
         $args=$this->trimArgs($args);
 
@@ -66,14 +69,7 @@ class DuplicateCheckApi extends SugarApi
 
     }
 
-    protected function handleEmptyBean($bean)
-    {
-        if (empty($bean)) {
-            throw new SugarApiExceptionInvalidParameter('Unable to run duplicate check. Bean was empty after attempting to populate from API');
-        }
-    }
-
-    protected function trimArgs($args)
+    protected function trimArgs(array $args)
     {
         $args2 = array();
         foreach($args as $key => $value) {
@@ -82,7 +78,7 @@ class DuplicateCheckApi extends SugarApi
         return $args2;
     }
 
-    protected function populateFromApi($api, $bean, $args, $options=array())
+    protected function populateFromApi(ServiceBase $api, SugarBean $bean, array $args, array $options = array())
     {
         $errors = ApiHelper::getHelper($api, $bean)->populateFromApi($bean, $args, $options);
 

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Ikke-tilgængelige temaer',
     'LBL_TIMEZONE' => 'Tidszone',
     'LBL_TO'    => 'til',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Vælg hvilket system og brugerdata, der skal spores',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatisk',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manuelt',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Søg automatisk efter opdateringer</B> - Hvis dette felt er markeret, tjekker systemet jævnligt, om der er opdaterede versioner af programmet tilgængelige.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Filen config.php blev gendannet.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Advarsel: Din PHP-konfiguration skal ændres, hvis du vil tillade upload af filer på mindst 6 MB. Rediger værdien upload_max_filesize i din php.ini på:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Gør config.php skrivbar, og prøv igen.',
-    'MSG_REBUILD_EXTENSIONS' => '"Gå til skærmen <a href=""index.php?module=Administration&action=Upgrade"">Reparer</a>, og klik på Gendan udvidelser."',
-    'MSG_REBUILD_RELATIONSHIPS' => '"Gå til skærmen <a href=""index.php?module=Administration&action=Upgrade"">Reparer</a>, og klik på Gendan relationer."',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Der er ingen aktiverede offlineklienter.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Er du sikker på, at du vil deaktivere denne offlineklient?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Er du sikker på, at du vil aktivere denne offlineklient?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Problemer',
 'ML_MANIFEST_ISSUE'=>'Problem med manifestet',
 'ML_CONFIG_OVERRIDE'=>'Konfig modifikation er ikke tilladt',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Nøgle - kan kun bestå af bogstaver, tal og understregningstegn. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Konfigurer genvejspanel',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Vælg hvilke moduler der er synlige i genvejspanelet',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Vælg, hvilke moduler, hvor brugerne hurtigt kan oprette poster ved hjælp af plus-ikonet i den øverste navigationslinje. Træk og slip moduler mellem de aktiverede og deaktiverede kasser.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Producent',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'Relation',
 	'Releases'       => 'Udgivelse',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'Afsender',
 	'TaxRates'       => 'TaxRate',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

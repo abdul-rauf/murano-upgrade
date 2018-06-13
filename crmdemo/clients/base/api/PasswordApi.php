@@ -10,9 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('data/BeanFactory.php');
-require_once('include/SugarFields/SugarFieldHandler.php');
-require_once('include/api/SugarApi.php');
 
 
 class PasswordApi extends SugarApi
@@ -35,13 +32,13 @@ class PasswordApi extends SugarApi
 
     /**
      * Resets password and sends email to user
-     * @param $api
+     * @param ServiceBase $api
      * @param array $args
      * @return bool
      * @throws SugarApiExceptionRequestMethodFailure
      * @throws SugarApiExceptionMissingParameter
      */
-    public function requestPassword($api, $args)
+    public function requestPassword(ServiceBase $api, array $args)
     {
         require_once('modules/Users/language/en_us.lang.php');
         $res = $GLOBALS['sugar_config']['passwordsetting'];

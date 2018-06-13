@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 require_once('include/workflow/workflow_utils.php');
 /**
  * Vardef Handler Object
@@ -48,13 +46,6 @@ class VarDefHandler {
         'all_meta_array',
     );
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function VarDefHandler($module, $meta_array_name = null)
-    {
-        self::__construct($module, $meta_array_name);
-    }
 
     public function __construct($module, $meta_array_name = null)
     {

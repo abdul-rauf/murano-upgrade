@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,11 +18,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-$focus = BeanFactory::getBean('EmailTemplates');
+$focus = BeanFactory::newBean('EmailTemplates');
 require_once('include/formbase.php');
 $focus = populateFromPost('', $focus);
 
-require_once('modules/EmailTemplates/EmailTemplateFormBase.php');
 $form = new EmailTemplateFormBase();
 sugar_cache_clear('select_array:'.$focus->object_name.'namebase_module=\''.$focus->base_module.'\'name');
 if(isset($_REQUEST['inpopupwindow']) and $_REQUEST['inpopupwindow'] == true) {

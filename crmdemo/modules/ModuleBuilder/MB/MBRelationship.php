@@ -11,10 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/ModuleBuilder/parsers/relationships/UndeployedRelationships.php' ;
-require_once 'modules/ModuleBuilder/parsers/relationships/AbstractRelationships.php' ;
-require_once 'modules/ModuleBuilder/parsers/relationships/AbstractRelationship.php' ;
-require_once 'modules/ModuleBuilder/parsers/relationships/ManyToManyRelationship.php' ;
 
 /*
  * This is an Adapter for the new UndeployedRelationships Class to allow ModuleBuilder to use the new class without change
@@ -27,14 +23,7 @@ class MBRelationship
     public $relatableModules = array ( ) ; // required by MBModule
     public $relationships = array ( ) ; // required by view.relationships.php; must be kept in sync with the implementation
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function MBRelationship($name, $path, $key_name)
-    {
-        self::__construct($name, $path, $key_name);
-    }
-
+    
     /*
      * Constructor
      * @param string $name      The name of this module (not used)
@@ -78,19 +67,6 @@ class MBRelationship
         return $this->implementation->get ( $relationshipName ) ;
     }
 
-    /*
-     * Deprecated
-     * Add a relationship to this set
-     * Original MBRelationships could only support one relationship between this module and any other
-     */
-    /*    
-    function addRelationship ($name , $relatedTo , $relatedSubpanel = 'default' , $mysubpanel = 'default' , $type)
-    {
-        $this->implementation->add ( new ManyToManyRelationship ( $name, $this->moduleName, $relatedTo, $mysubpanel, $relatedSubpanel ) ) ;
-        $this->updateRelationshipVariable () ;
-    }
-*/
-    
     /* Add a relationship to this set
      * Original MBRelationships could only support one relationship between this module and any other
      * @param array $rel    Relationship definition in the old format (defined by self::oldFormatKeys)
@@ -133,13 +109,6 @@ class MBRelationship
     }
 
     /*
-    function load ()
-    {
-        $this->implementation->load () ;
-        $this->updateRelationshipVariable () ;
-    }
-*/
-    /*
      * Transitional function to keep the public relationship variable in sync with the implementation master copy
      * We have to do this as various things refer directly to MBRelationship->relationships...
      */
@@ -154,3 +123,4 @@ class MBRelationship
     }
 
 }
+

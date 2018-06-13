@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,14 +9,13 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/SugarFolders/SugarFolders.php');
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 global $current_user;
 
-$focus = BeanFactory::getBean('InboundEmail');
+$focus = BeanFactory::newBean('InboundEmail');
 $focus->disable_row_level_security = true;
 if(!empty($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
@@ -133,7 +131,6 @@ if(!empty($_REQUEST['team_id'])) {
 	$focus->team_id = $_REQUEST['team_id'];
 }
 
-require_once('include/SugarFields/SugarFieldHandler.php');
 $sfh = new SugarFieldHandler();
 
 foreach($focus->field_defs as $field=>$def) {

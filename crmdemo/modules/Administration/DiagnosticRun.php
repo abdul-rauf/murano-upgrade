@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -300,7 +299,6 @@ function executesugarlog()
     //BEGIN COPY SUGARCRM.LOG
     //Copies the Sugarcrm log to our diagnostic directory
     global $cacheDir, $mod_strings;
-	require_once('include/SugarLogger/SugarLogger.php');
 	$logger = new SugarLogger();
     if(!copy($logger->getLogFileNameWithPath(), $cacheDir.'/'.$logger->getLogFileName())) {
         $data = array($cacheDir);

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -59,7 +58,6 @@ return $the_script;
  */
 function get_new_record_form () {
 
-	require_once('modules/ProspectLists/ProspectListFormBase.php');
 	$accountForm = new ProspectListFormBase();
 	return $accountForm->getForm('','ProspectLists');
 }

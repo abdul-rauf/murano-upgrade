@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -27,7 +26,6 @@ require_once('modules/Expressions/MetaArray.php');
 
 // Expression is a general object for expressions, filters, and calculations
 class Expression extends SugarBean {
-	var $field_name_map;
 	// Stored fields
 	var $id;
 	var $deleted;
@@ -214,10 +212,8 @@ class Expression extends SugarBean {
 		}
 
 		if($type=='field'){
-		    $temp_module = BeanFactory::getBean($dom_name);
+		    $temp_module = BeanFactory::newBean($dom_name);
 		    if ( !is_object($temp_module) ) {
-		        //var_dump($dom_name);
-		        //display_stack_trace(true);
 		        $GLOBALS['log']->fatal("get_selector_array: Unknown module: $dom_name");
 		        return null;
 		    }
@@ -248,10 +244,10 @@ class Expression extends SugarBean {
 		if($type=='module_list'){
 			if($only_related_modules){
 					global $beanList;
-					$temp_module = BeanFactory::getBean($dom_name);
+					$temp_module = BeanFactory::newBean($dom_name);
 					$temp_module->call_vardef_handler("rel_filter");
 
-                    $select_array = $temp_module->vardef_handler->get_vardef_array(true, true, false, false, true);
+                    $select_array = $temp_module->vardef_handler->get_vardef_array(true, true, true, true, true);
 			}
 			else if($meta_filter_name == "singular"){
 				$select_array = convert_module_to_singular(get_module_map(false));
@@ -283,7 +279,7 @@ class Expression extends SugarBean {
 	function build_field_filter($base_module, $target_field, $enum_multi=false){
 
 			////Begin - New Code call to workflow_utils
-		$temp_module = BeanFactory::getBean($base_module);
+		$temp_module = BeanFactory::newBean($base_module);
 		//Build Selector Array
 		$selector_array = array(
 							'value' => $this->rhs_value,
@@ -315,9 +311,9 @@ class Expression extends SugarBean {
 	//you can either build using lhs_module or override with your own
 
 		if($target_module==""){
-			$target_bean = BeanFactory::getBean($this->lhs_module);
+			$target_bean = BeanFactory::newBean($this->lhs_module);
 		} else {
-			$target_bean = BeanFactory::getBean($target_module);
+			$target_bean = BeanFactory::newBean($target_module);
 		}
 
 		return $this->get_display_array($target_bean);
@@ -375,11 +371,6 @@ class Expression extends SugarBean {
 			$this->display_array['rhs_value'] = $this->get_display_rhs_value($this->rhs_value);
 		//end if not enum multi value
 		}
-
-		//if blank value then set to "NONE"
-		//if($this->display_array['rhs_value']==""){
-		//	$this->display_array['rhs_value'] = "none";
-		//}
 
 		return $this->display_array;
 

@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'include/api/SugarApi.php';
 
 /**
  * API class for fetching the contents of an RSS feed and returning relevant, 
@@ -61,11 +60,11 @@ class RSSFeedApi extends SugarApi
     /**
      * Gets an RSS feed
      * 
-     * @param RestService $api The service object
+     * @param ServiceBase $api The service object
      * @param array $args The request arguments
      * @return array Feed data
      */
-    public function getFeed($api, $args)
+    public function getFeed(ServiceBase $api, array $args)
     {
         // Simple sanity checking
         $this->requireArgs($args, array('feed_url'));
@@ -112,7 +111,7 @@ class RSSFeedApi extends SugarApi
      * @param array $args Request arguments
      * @return int
      */
-    public function getFeedLimit($args)
+    public function getFeedLimit(array $args)
     {
         global $sugar_config;
 

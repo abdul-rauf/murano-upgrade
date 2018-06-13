@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -764,7 +763,6 @@ Ak váš systém neumožňuje komunikáciu so serverom na overenie licencie pros
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Nedostupné Témy',
     'LBL_TIMEZONE' => 'Časové pásmo',
     'LBL_TO'    => ' pre ',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Vyberte, ktorý systém a používateľské údaje sú sledované',
     'LBL_UPDATE_CHECK_AUTO'=>'Automaticky',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manuálne',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Automaticky kontrolovať aktualizácie</B> - Ak je táto možnosť začiarknutá, systém bude pravidelne kontrolovať dostupnosť aktualizovaných verzií aplikácie.',
@@ -931,8 +929,6 @@ Ak váš systém neumožňuje komunikáciu so serverom na overenie licencie pros
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Súbor config.php bol úspešne obnovený.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Upozornenie: Je potrebné zmeniť vašu PHP konfiguráciu, aby bolo možné nahrávať súbory s veľkosťou aspoň 6 MB. Upravte hodnotu upload_max_filesize v súbore php.ini na adrese:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Umožnite zápis do súboru config.php a skúste to znova.',
-    'MSG_REBUILD_EXTENSIONS' => 'Prejdite na obrazovku <a href="index.php?module=Administration&action=Upgrade">Oprava</a> a kliknite na možnosť Rozšírenia obnovy.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Prejdite na obrazovku <a href="index.php?module=Administration&action=Upgrade">Oprava</a> a kliknite na možnosť Obnoviť vzťahy.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Momentálne nie sú dostupní žiadni povolení Offline klienti.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Naozaj chcete zakázať tohto Offline klienta?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Naozaj chcete povoliť tohto Offline klienta?',
@@ -1042,7 +1038,7 @@ Ak váš systém neumožňuje komunikáciu so serverom na overenie licencie pros
 'ML_ISSUES'=>'Problémy',
 'ML_MANIFEST_ISSUE'=>'Problém so súborom manifest',
 'ML_CONFIG_OVERRIDE'=>'Úprava konfigurácie nie je povolená',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Kľúč – môže obsahovať len písmená, čísla a znaky podčiarknutia. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Konfigurácia rýchleho vytvárania z navigačného panelu',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Vybrať moduly na rýchle vytváranie z navigačného panelu',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Vyberte, pre ktoré moduly môžu používatelia rýchlo vytvárať záznamy pomocou ikony Plus v hornej navigačnej lište. Potiahnite a vložte moduly do poľa Povolené moduly alebo Blokované moduly.',
@@ -1090,7 +1086,6 @@ Ak váš systém neumožňuje komunikáciu so serverom na overenie licencie pros
 	'Manufacturers'  => 'Výrobca',
 	'ProductBundleNotes' => 'Poznámka o produktovom balíku',
 	'ProductBundles'   => 'Produktový balík',
-	'ProjectResources' => 'Zdroje projektu',
 
 	'Relationships' => 'Vzťah',
 	'Releases'       => 'Vydanie',
@@ -1100,7 +1095,6 @@ Ak váš systém neumožňuje komunikáciu so serverom na overenie licencie pros
 	'SchedulersJobs'  => 'Úloha v plánovači',
 	'Shippers'       => 'Prepravca',
 	'TaxRates'       => 'Daňová sadzba',
-	'TeamHierarchies'  => 'Hierarchia tímu',
 	'TeamMemberships'   => 'Členstvo v tíme',
 	'TeamNotices'    => 'Tímové oznamy',
 	'TeamSetModules'   => 'Nastavenia modulu pre tímy',

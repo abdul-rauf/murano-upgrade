@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,19 +13,6 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 {
 	var $reporter;
 	var $assigned_user=null;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarWidgetFieldDateTime(&$layout_manager)
-    {
-        self::__construct($layout_manager);
-    }
-
-    public function __construct(&$layout_manager)
-    {
-        parent::__construct($layout_manager);
-    }
 
 	// get the reporter attribute
     // deprecated, now called in the constructor
@@ -45,7 +31,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 
 		if(empty($report_def_str['assigned_user_id'])) return null;
 
-		$this->assigned_user = BeanFactory::getBean('Users');
+		$this->assigned_user = BeanFactory::newBean('Users');
 		$this->assigned_user->retrieve($report_def_str['assigned_user_id']);
 		return $this->assigned_user;
 	}
@@ -229,7 +215,6 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 
         $begin = TimeDate::getInstance()->nowDb();
         //kbrill bug #13884
-       	//$begin = $timedate->to_display_date_time($begin,true,true,$this->assigned_user);
 		$begin = $timedate->handle_offset($begin, $timedate->get_db_date_time_format(), false, $this->assigned_user);
 
         if (!$timestamp) {
@@ -253,7 +238,6 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 
         $begin = date($GLOBALS['timedate']->get_db_date_time_format(), time()+(86400 * $days));  //gmt date with day adjustment applied.
         //kbrill bug #13884
-        //$begin = $timedate->to_display_date_time($begin,true,true,$this->assigned_user);
 		$begin = $timedate->handle_offset($begin, $timedate->get_db_date_time_format(), false, $this->assigned_user);
 
         if ($time=='start') {
@@ -618,17 +602,8 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 		return parent :: querySelect($layout_def)." \n";
 	}
 	function & displayListday(& $layout_def) {
-        global $timedate;
-        $field_name = strtoupper($this->_get_column_alias($layout_def));
-        $tmp_field_name = str_replace('_DAY_', '_DAYREAL_', $field_name);
-        if($tmp_field_name != $field_name && isset($layout_def['fields'][$tmp_field_name]))
-        {
-            return $timedate->to_display_date($layout_def['fields'][$tmp_field_name], true);
-        }
-        else
-        {
-		    return parent:: displayListPlain($layout_def);
-        }
+        $value = parent:: displayListPlain($layout_def);
+        return $value;
 	}
 
 	function & displayListyear(& $layout_def) {
@@ -670,7 +645,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
     private function getFiscalStartDate()
     {
         // Pick fiscal start date
-        $admin = BeanFactory::getBean('Administration');
+        $admin = BeanFactory::newBean('Administration');
         $config = $admin->getConfigForModule('Forecasts', 'base');
 
         $timedate = TimeDate::getInstance();
@@ -763,9 +738,6 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 
             // Find the quarter in regard to the fiscal month
             $monthDiff = $currentMonth - $tempFiscalMonth;
-            if ($monthDiff < 0) {
-                $monthDiff -= 1;
-            }
             $monthDiff = 3 * floor($monthDiff / 3);
 
             // Update the month
@@ -941,17 +913,6 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
         {
             return $orderBy . " DESC\n";
         }
-    }
-
-    /**
-     * Select addon datetime field for "day" field in reports
-     *
-     * @param $layout_def array definition of new field
-     * @return string piece for creation "select" query
-     */
-    function querySelectdayreal($layout_def)
-    {
-        return $this->reporter->db->convert($this->_get_column_select($layout_def), "date_format", array('%Y-%m-%d %H:%i:%s'))." ".$this->_get_column_alias($layout_def)."\n";
     }
 
     /**
@@ -1146,9 +1107,6 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
         $cal_dateformat = $timedate->get_cal_date_format();
         $str = "<select name='type_{$layout_def['name']}'>";
         $str .= get_select_options_with_id($filterTypes, (empty($layout_def['input_name0']) ? '' : $layout_def['input_name0']));
-//        foreach($filterTypes as $value => $label) {
-//            $str .= '<option value="' . $value . '">' . $label. '</option>';
-//        }
         $str .= "</select>";
 
 

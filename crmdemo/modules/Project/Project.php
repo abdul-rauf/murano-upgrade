@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -191,6 +190,37 @@ class Project extends SugarBean {
 		return false;
 	}
 
+    /** {@inheritDoc} */
+    public function mark_deleted($id)
+    {
+        $this->markTasksDeleted($id);
+
+        parent::mark_deleted($id);
+    }
+
+    /**
+     * Marks project tasks deleted
+     *
+     * @param string $id
+     */
+    protected function markTasksDeleted($id)
+    {
+        if ($this->id != $id) {
+            $bean = BeanFactory::newBean($this->module_name, $id);
+            $bean->id = $id;
+        } else {
+            $bean = $this;
+        }
+
+        if (!$bean->load_relationship('projecttask')) {
+            return;
+        }
+
+        foreach ($bean->projecttask->getBeans() as $task) {
+            $task->mark_deleted($task->id);
+        }
+    }
+
 	function getProjectHolidays()
 	{
 	    $firstName = $this->db->convert($this->db->convert('users.first_name', "IFNULL", array('contacts.first_name')), "IFNULL", array("''"));
@@ -228,8 +258,8 @@ class Project extends SugarBean {
 	}
 	/* helper function for UserHoliday subpanel -- display javascript that cannot be achieved through AJAX call */
 	function resourceSelectJS(){
-       	$userBean = BeanFactory::getBean('Users');
-    	$contactBean = BeanFactory::getBean('Contacts');
+       	$userBean = BeanFactory::newBean('Users');
+    	$contactBean = BeanFactory::newBean('Contacts');
 
     	$this->load_relationship("user_resources");
     	$userResources = $this->user_resources->getBeans($userBean);
@@ -310,4 +340,3 @@ function constructContactSelect(){
 ";
 	}
 }
-?>

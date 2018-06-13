@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'クリックしてこのモジュールを編集してください。',
         'moduleHelp'=> '編集したいモジュールコンポーネントを選択してください。',
         'fieldsBtn'	=> '<b>フィールド</b>を管理することで、モジュールが格納する情報を編集することができます。<br/><br/>ここではカスタムフィールドを編集したり作成したりできます。',
-        'labelsBtn' => '<b>保存</b> をクリックしてカスタム ラベルを保存します。'	,
         'layoutsBtn'=> '編集ビュー、詳細ビュー、一覧ビュー、そして検索ビューの<b>レイアウト</b>を編集',
         'subpanelBtn'=> 'サブパネルに表示される情報を編集',
         'layoutsHelp'=> '<b>編集するレイアウト</b>を選択してください。<br/<br/>データを入力する画面を変更する場合は<b>編集ビュー</b>をクリックしてください。<br/><br/>入力されたデータを表示する画面を変更する場合は<b>詳細ビュー</b>をクリックしてください。<br/><br/>デフォルトの一覧画面を変更する場合は<b>一覧画面</b>をクリックしてください。<br/><br/>基本検索や詳細検索のレイアウトを変更する場合は<b>検索</b>をクリックしてください。',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'この失注セールスステージを本当に削除しますか？このステージを削除すると売上予測モジュールが正しく機能しなくなります。',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'本当にこの関連を削除してよいですか？',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'この関連付けを永続化します。本当にこの関連付けを配置してよいですか？',
 'LBL_CONFIRM_DONT_SAVE' => '最後に保存された状態から変更が加えられています。保存しますか？',

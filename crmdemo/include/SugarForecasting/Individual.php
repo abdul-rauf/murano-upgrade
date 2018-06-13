@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarForecasting/AbstractForecast.php');
 class SugarForecasting_Individual extends SugarForecasting_AbstractForecast implements SugarForecasting_ForecastSaveInterface
 {
     /**
@@ -51,9 +50,8 @@ class SugarForecasting_Individual extends SugarForecasting_AbstractForecast impl
      */
     public function save()
     {
-        require_once('include/SugarFields/SugarFieldHandler.php');
         /* @var $seed ForecastWorksheet */
-        $seed = BeanFactory::getBean("ForecastWorksheets");
+        $seed = BeanFactory::newBean("ForecastWorksheets");
         $seed->loadFromRow($this->args);
         $sfh = new SugarFieldHandler();
 

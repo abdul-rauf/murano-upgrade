@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
-require_once('include/EditView/QuickCreate.php');
 
 
 
@@ -34,11 +32,10 @@ class ProjectQuickCreate extends QuickCreate {
         $this->javascript = new javascript();
         $this->javascript->setFormName('projectQuickCreate');
         
-        $focus = BeanFactory::getBean('Project');
+        $focus = BeanFactory::newBean('Project');
         $this->javascript->setSugarBean($focus);
         $this->javascript->addAllFields('');
 
-		//$this->ss->assign("STATUS_OPTIONS", get_select_options_with_id($app_list_strings['project_status_dom'], $focus->status));
         $this->ss->assign('additionalScripts', $this->javascript->getScript(false));
         $this->ss->assign('CALENDAR_DATEFORMAT', $timedate->get_cal_date_format());
         
@@ -69,4 +66,3 @@ class ProjectQuickCreate extends QuickCreate {
         
     }   
 }
-?>

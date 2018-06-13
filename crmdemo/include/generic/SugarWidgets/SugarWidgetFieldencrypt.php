@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,33 +9,19 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Security\Crypto\Blowfish;
 
 class SugarWidgetFieldEncrypt extends SugarWidgetReportField
 {
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarWidgetFieldEncrypt(&$layout_manager)
-    {
-        self::__construct($layout_manager);
-    }
-
-    public function __construct(&$layout_manager)
-    {
-        parent::__construct($layout_manager);
-    }
-
     function queryFilterEquals(&$layout_def)
     {
-        require_once("include/utils/encryption_utils.php");
-        $search_value = blowfishEncode(blowfishGetKey('encrypt_field'),$layout_def['input_name0']);
+        $search_value = Blowfish::encode(Blowfish::getKey('encrypt_field'), $layout_def['input_name0']);
         return $this->_get_column_select($layout_def)."='".$GLOBALS['db']->quote($search_value)."'\n";
     }
 
     function queryFilterNot_Equals_Str(&$layout_def)
     {
-        require_once("include/utils/encryption_utils.php");
-        $search_value = blowfishEncode(blowfishGetKey('encrypt_field'),$layout_def['input_name0']);
+        $search_value = Blowfish::encode(Blowfish::getKey('encrypt_field'), $layout_def['input_name0']);
         return $this->_get_column_select($layout_def)."!='".$GLOBALS['db']->quote($search_value)."'\n";
     }
 
@@ -48,9 +32,7 @@ class SugarWidgetFieldEncrypt extends SugarWidgetReportField
     function displayListPlain($layout_def) {
             $value= $this->_get_list_value($layout_def);
 
-            require_once("include/utils/encryption_utils.php");
-
-            $value = blowfishDecode(blowfishGetKey('encrypt_field'), $value);
+            $value = Blowfish::decode(Blowfish::getKey('encrypt_field'), $value);
             return $value;
     }
        

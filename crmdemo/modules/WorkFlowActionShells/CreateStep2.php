@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,6 +10,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 require_once('include/workflow/field_utils.php');
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 global $theme;
 global $app_strings;
@@ -45,7 +46,7 @@ else {
 $form->assign("MOD", $mod_strings);
 $form->assign("APP", $app_strings);
 
-$focus = BeanFactory::getBean('WorkFlowActionShells');
+$focus = BeanFactory::newBean('WorkFlowActionShells');
 //Add When Expressions Object is availabe
 //$exp_object = new Expressions();
 
@@ -55,17 +56,14 @@ if(!empty($_REQUEST['record'])) {
 }
 		//Bug 12335: We need to include the javascript language file first. And also the language file in WorkFlow is needed.
         if(!is_file(sugar_cached('jsLanguage/') . $GLOBALS['current_language'] . '.js')) {
-            require_once('include/language/jsLanguage.php');
             jsLanguage::createAppStringsCache($GLOBALS['current_language']);
         }
         $javascript_language_files = getVersionedScript("cache/jsLanguage/{$GLOBALS['current_language']}.js",  $GLOBALS['sugar_config']['js_lang_version']);
         if(!is_file(sugar_cached('jsLanguage/') . $this->module . '/' . $GLOBALS['current_language'] . '.js')) {
-                require_once('include/language/jsLanguage.php');
                 jsLanguage::createModuleStringsCache($this->module, $GLOBALS['current_language']);
         }
         $javascript_language_files .= getVersionedScript("cache/jsLanguage/{$this->module}/{$GLOBALS['current_language']}.js", $GLOBALS['sugar_config']['js_lang_version']);
         if(!is_file(sugar_cached('jsLanguage/WorkFlow/') . $GLOBALS['current_language'] . '.js')) {
-            require_once('include/language/jsLanguage.php');
             jsLanguage::createModuleStringsCache('WorkFlow', $GLOBALS['current_language']);
         }
         $javascript_language_files .= getVersionedScript("cache/jsLanguage/WorkFlow/{$GLOBALS['current_language']}.js", $GLOBALS['sugar_config']['js_lang_version']);
@@ -74,9 +72,12 @@ if(isset($_REQUEST['action_type']) && $_REQUEST['action_type']!=""){
 	$focus->action_type = $_REQUEST['action_type'];
 }
 
-if(isset($_REQUEST['action_module']) && $_REQUEST['action_module']!=""){
-	$focus->action_module = $_REQUEST['action_module'];
+// This cannot be converted to using the IVF since this is not always a module.
+// Many times this is a link name, or relationship name
+if (isset($_REQUEST['action_module']) && $_REQUEST['action_module'] != "") {
+    $focus->action_module = $_REQUEST['action_module'];
 }
+
 if(isset($_REQUEST['rel_module']) && $_REQUEST['rel_module']!=""){
 	$focus->rel_module = $_REQUEST['rel_module'];
 }
@@ -102,7 +103,6 @@ $focus->parent_id = $_REQUEST['workflow_id'];
 	$form->out("embeded");
 
     	//rsmith
-    	require_once('include/ListView/ProcessView.php');
 		$ProcessView = new ProcessView($seed_object, $focus);
 		$results = $ProcessView->get_action_shell_display_text($focus, true);
 		$result = $results["RESULT_ARRAY"];

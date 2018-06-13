@@ -17,8 +17,8 @@ Obtenga una clave de API y un código secreto de Google mediante el registro de 
 <br/><br/>
 <ol>
 <li>Vaya al sitio de desarrolladores de Google:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Inicie sesión con la cuenta de Google que desea utilizar para registrar la aplicación.</li>
 <li>Cree un proyecto nuevo</li>

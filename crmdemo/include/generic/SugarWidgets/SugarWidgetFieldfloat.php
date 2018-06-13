@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -37,7 +36,9 @@ class SugarWidgetFieldFloat extends SugarWidgetFieldInt
                                                                                  
  function queryFilterNot_Equals(&$layout_def)
  {
-	return $this->_get_column_select($layout_def)."!=".$GLOBALS['db']->quote(unformat_number($layout_def['input_name0']))."\n";
+        $field_name = $this->_get_column_select($layout_def);
+        $input_name0 = $GLOBALS['db']->quote(unformat_number($layout_def['input_name0']));
+        return "{$field_name} != {$input_name0} OR ({$field_name} IS NULL)\n";
  }
                                                                                  
  function queryFilterGreater(&$layout_def)

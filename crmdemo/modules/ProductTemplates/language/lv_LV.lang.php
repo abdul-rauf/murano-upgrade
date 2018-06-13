@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -41,7 +40,7 @@ $mod_strings = array (
   'LBL_LIST_COST_PRICE' => 'Izmaksas:',
   'LBL_LIST_DISCOUNT_PRICE' => 'Cena:',
   'LBL_LIST_FORM_TITLE' => 'Produktu kataloga saraksts',
-  'LBL_LIST_LBL_MFT_PART_NUM' => 'Izgat. Nr.',
+  'LBL_LIST_LBL_MFT_PART_NUM' => 'Daļas numurs',
   'LBL_LIST_LIST_PRICE' => 'Saraksts',
   'LBL_LIST_MANUFACTURER' => 'Izgatavotājs',
   'LBL_LIST_MANUFACTURER_ID' => 'Ražotāja ID:',
@@ -54,7 +53,7 @@ $mod_strings = array (
   'LBL_LIST_USDOLLAR' => 'Kataloga cena (pamatvalūtā):',
   'LBL_MANUFACTURER_NAME'=>'Ražotāja nosaukums:',
   'LBL_MANUFACTURER' => 'Ražotājs:',
-  'LBL_MFT_PART_NUM' => 'Raž. detaļas numurs:',
+  'LBL_MFT_PART_NUM' => 'Daļas numurs:',
   'LBL_MODULE_NAME' => 'Produktu katalogs',
   'LBL_MODULE_NAME_SINGULAR' => 'Produktu katalogs',
   'LBL_MODULE_ID' => 'Produkta veidnes',

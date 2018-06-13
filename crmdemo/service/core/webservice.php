@@ -18,10 +18,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 ob_start();
 chdir(dirname(__FILE__).'/../../');
 define('ENTRY_POINT_TYPE', 'api');
-require('include/entryPoint.php');
-require_once('soap/SoapError.php');
+require 'soap/SoapErrorDefinitions.php';
 require_once 'service/core/SoapHelperWebService.php';
-require_once 'service/core/SugarRestUtils.php';
 require_once($webservice_path);
 require_once($registry_path);
 if(isset($webservice_impl_class_path))
@@ -32,7 +30,7 @@ $service->registerClass($registry_class);
 $service->register();
 $service->registerImplClass($webservice_impl_class);
 
-SugarMetric_Manager::getInstance()->setTransactionName('soap_' . $_REQUEST['method']);
+SugarMetric_Manager::getInstance()->setTransactionName('soap_' . (isset($_REQUEST['method'])? $_REQUEST['method'] : ""));
 
 // set the service object in the global scope so that any error, if happens, can be set on this object
 global $service_object;

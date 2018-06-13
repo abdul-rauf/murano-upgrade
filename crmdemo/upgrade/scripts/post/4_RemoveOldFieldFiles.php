@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -40,7 +39,7 @@ class SugarUpgradeRemoveOldFieldFiles extends UpgradeScript
                 'modules/Notifications/clients/base/fields/datetimecombo/detail.hbs',
             );
 
-            $this->fileToDelete($files);
+            $this->upgrader->fileToDelete($files, $this);
         }
 
         $this->log('Done removing old field files');

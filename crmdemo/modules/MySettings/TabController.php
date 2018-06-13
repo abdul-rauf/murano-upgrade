@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -120,7 +117,7 @@ class TabController
 
     public function set_system_tabs($tabs)
     {
-        $administration = BeanFactory::getBean('Administration');
+        $administration = BeanFactory::newBean('Administration');
         // TODO: encode in JSON rather than base64
         $serialized = base64_encode(serialize($tabs));
         $administration->saveSetting('MySettings', 'tab', $serialized);
@@ -143,7 +140,7 @@ class TabController
     {
         global $current_user;
         if (is_admin($current_user)) {
-            $administration = BeanFactory::getBean('Administration');
+            $administration = BeanFactory::newBean('Administration');
             if ($boolean) {
                 $administration->saveSetting('MySettings', 'disable_useredit', 'no');
             } else {

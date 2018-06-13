@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Produkt',
     'LBL_LIST_MANUFACTURER' => 'Hersteller',
     'LBL_MANUFACTURERS' => 'Hersteller',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Herst.-Nummer',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Teilenummer',
     'LBL_LIST_QUANTITY' => 'Menge',
     'LBL_LIST_COST_PRICE' => 'Kosten',
     'LBL_LIST_DISCOUNT_PRICE' => 'Preis',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Rabatt in %',
     'LBL_LIST_PRICE' => 'Listenpreis:',
     'LBL_VENDOR_PART_NUM' => 'Verkäufer-Artikelnummer:',
-    'LBL_MFT_PART_NUM' => 'Herst.-Artikelnummer:',
+    'LBL_MFT_PART_NUM' => 'Teilenummer:',
     'LBL_NEXT_STEP' => 'Nächster Schritt:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Rabatt-Preis-Datum:',
     'LBL_WEIGHT' => 'Gewicht:',
@@ -167,6 +167,8 @@ So erstellen Sie ein Modul {{module_name}}:
 - Klicken Sie auf "Mehr anzeigen", um weitere Felder zu erfassen. 
 2. Klicken Sie auf "Speichern", um den Datensatz fertigzustellen und auf die letzte Seite zurück zu kommen.',
 
-    'LBL_MANUFACTURERS' => 'Hersteller',
     'LBL_PRODUCT_POSITION' => 'Produktpaket-Position',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Angebotene Produkte Angebotsdatenliste',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Neues angebotenes Produkt)',
+    'LBL_DISCOUNT_PERCENT' => '% Prozent',
 );

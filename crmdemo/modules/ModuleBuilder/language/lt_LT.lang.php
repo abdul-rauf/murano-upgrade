@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Paspauskite redaguoti modulį.',
         'moduleHelp'=> 'Pasirinkite  modulio komponentą redagavimui',
         'fieldsBtn'	=> 'Redaguoti informaciją, kuri yra laikoma modulio <b>Laukuose</b>.<br/><br/>Jūs galite redaguoti ir sukurti pritaikomus laukus čia.',
-        'labelsBtn' => 'Click <b>Save</b> to save your custom labels.'	,
         'layoutsBtn'=> 'Pritaikyti <b>Išdėstymus</b> Redagavimo, Detalaus, sąrašų ir paieškos rodymų.',
         'subpanelBtn'=> 'Redaguoti, kokią informacija rodoma šių modulių subpaneliuose.',
         'layoutsHelp'=> 'Pasirinkite redagavimui <b>Išdėstymą </b>.<br/<br/>Pakeisti išdėstymą, kuris talpina duomenų laukus, paspauskite <b>Redaguoti rodymą</b>.<br/><br/>Pakeisti išdėstymą, kuris vaizduoja duomenis įvestus į laukus Redaguoti rodymą, paspauskite <b>Detalus rodymas</b>.<br/><br/>Pakeisti stulpelius, kurie rodomi numatytame sąrašes, paspauskite <b>Rodyti sąrašą</b>.<br/><br/>Norint pakeisti bazinę ir detalią paiešką formos išdėstymus,paspauskite <b>Ieškoti</b>.',
@@ -726,11 +725,11 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Ar tikrai norite pašalinti etapą „Closed Lost sales“? Pašalinus šį etapą prognozavimo modulis neveiks tinkamai',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Pašalinus šį pasirinktinį lauką bus pašalintas ir laukas, ir visi su pasirinktiniu lauku susiję duomenys duomenų bazėje. Laukas nebebus rodomas nė viename modulio makete."
-        . " Jei šis laukas bus įtrauktas į formulę skaičiuoti bet kurių laukų vertėms, formulė nebeveiks."
-        . "\n\nLauko nebebus galima naudoti ataskaitose; šis pakeitimas įsigalios atsijungus ir vėl prisijungus prie programos. Visos ataskaitos, kuriose yra laukas, turės būti atnaujintos, kad būtų galima jas vykdyti."
-        . "\n\nAr norite tęsti?",
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ar tikrai norite ištrinti šį ryšį?',
+'LBL_CONFIRM_FIELD_DELETE'=>'Pašalinus šį pasirinktinį lauką bus pašalintas ir laukas, ir visi su pasirinktiniu lauku susiję duomenys duomenų bazėje. Laukas nebebus rodomas nė viename modulio makete.'
+        . ' Jei šis laukas bus įtrauktas į formulę skaičiuoti bet kurių laukų vertėms, formulė nebeveiks.'
+        . '\n\nLauko nebebus galima naudoti ataskaitose; šis pakeitimas įsigalios atsijungus ir vėl prisijungus prie programos. Visos ataskaitos, kuriose yra laukas, turės būti atnaujintos, kad būtų galima jas vykdyti.'
+        . '\n\nAr norite tęsti?',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ar tikrai norite panaikinti šį ryšį?<br>Pastaba: ši operacija gali trukti keletą minučių.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tai padarys šį ryšį pastovų. Ar tikrai norite sukurti šį ryšį?',
 'LBL_CONFIRM_DONT_SAVE' => 'pakeitimai buvo atlikti nuo paskutinio išsaugojimo, ar norėtumėte išsaugoti?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Išsaugoti pakeitimus?',
@@ -746,16 +745,16 @@ $mod_strings = array(
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: laukas rodomas dublikatų suliejimo funkcijoje, tačiau jo negalima naudoti filtro sąlygai dublikatų ieškos funkcijoje.<br><b>Disabled</b>: laukas nerodomas dublikatų suliejimo funkcijoje ir jo negalima naudoti filtro sąlygai dublikatų ieškos funkcijoje.'
 . '<br><b>In Filter</b>: laukas rodomas dublikatų suliejimo funkcijoje ir galima jį naudoti dublikatų ieškos funkcijoje.<br><b>Filter Only</b>: laukas neveikia dublikatų suliejimo funkcijoje, tačiau jį galima naudoti dublikatų ieškos funkcijoje.<br><b>Default Selected Filter</b>: laukas pagal numatytuosius parametrus naudojamas filtro sąlygai dublikatų ieškos puslapyje, jis rodomas ir dublikatų suliejimo funkcijoje.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Sukurkite formulę, kad būtų nustatyta šio lauko reikšmė.<br>"
-   . "Darbo eigos apibrėžimai, kuriuose yra veiksmas ir kurie nustatyti atnaujinti šį lauką, šio veiksmo nebeatliks.<br>"
-   . "Laukai, kuriuose yra formulės, neskaičiuos realiuoju laiku "
-   . "„Mobile EditView“ maketai.",
+'LBL_POPHELP_CALCULATED'=>"Sukurkite formulę, pagal kurią būtų apskaičiuota šio lauko reikšmė.<br>"
+   . "Darbo eigos apibrėžimai, kuriuose yra veiksmas ir kurie nustatyti atnaujinti šį lauką, daugiau nebevykdys to veiksmo.<br>"
+   . "Laukai, kuriuose naudojamos formulės, nebus apskaičiuoti realiuoju laiku "
+   . "Mobilieji EditView išdėstymai.",
 
-'LBL_POPHELP_DEPENDENT'=>"Sukurkite formulę, kad būtų nustatyta, ar šis laukas matomas maketuose.<br/>"
-        . "Po priklausomų laukų eis priklausomybės formulė naršyklėje veikiančiame mobiliajame rodinyje, <br/>"
-        . "tačiau nebus formulės vietinėse programose, pvz., „Sugar Mobile for iPhone“. <br/>"
-        . "Po jų nebus pateikiama formulė „Sugar“ savitarnos portale.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Pasirinkite šį lauką, kai norėsite ieškosite įrašų šiame modulyje per globalią paiešką.',
+'LBL_POPHELP_DEPENDENT'=>"Sukurkite formulę, pagal kurią būtų nustatyta, ar šis laukas turi būti matomas išdėstymuose.<br/>"
+        . "Naršyklės mobiliajame rodinyje priklausomi laukai eis po priklausomybės formulės, <br/>"
+        . "tačiau vietinėse programose, pvz., „Sugar Mobile“, skirtoje „iPhone“, jų po formulės nebus. <br/>"
+        . "Jie neis po formulės ir „Sugar“ savitarnos portale.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Pasirinkite naudoti šį lauką, kai ieškote įrašų naudodami šio modulio visuotinės ieškos funkciją.',
 //Revert Module labels
 'LBL_RESET' => 'Atstatyti',
 'LBL_RESET_MODULE' => 'Atstatyti modulį',

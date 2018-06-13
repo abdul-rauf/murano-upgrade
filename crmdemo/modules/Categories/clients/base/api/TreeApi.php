@@ -11,8 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'clients/base/api/FilterApi.php';
-require_once 'modules/Categories/NestedBeanInterface.php';
 
 /**
  * Api to work with data in tree-like format.
@@ -196,17 +194,16 @@ class TreeApi extends FilterApi
     protected function retrieveBean($module, $id = null)
     {
         $bean = BeanFactory::retrieveBean($module, $id);
-        
+
+        if (null === $bean) {
+            throw new SugarApiExceptionNotFound('Could not find record in module: ' . $module);
+        }
         if (false === ($bean instanceof NestedBeanInterface)) {
             throw new SugarApiExceptionInvalidParameter(
                 'Requested module "' . $module . '" should be instance of NestedBeanInterface'
             );
         }
-        
-        if (null === $bean) {
-            throw new SugarApiExceptionNotFound('Could not find record in module: ' . $module);
-        }
-        
+
         return $bean;
     }
 
@@ -251,7 +248,7 @@ class TreeApi extends FilterApi
      * @throws SugarApiExceptionInvalidParameter Provided module doesn't implement `NestedBeanInterface`.
      * @throws SugarApiExceptionEditConflict Server and client timestamps are different.
      */
-    protected function createNewBean($api, $args)
+    protected function createNewBean(ServiceBase $api, array $args)
     {
         $bean = BeanFactory::newBean($args['module']);
         
@@ -283,7 +280,7 @@ class TreeApi extends FilterApi
      * @throws SugarApiExceptionNotFound
      * @throws SugarApiExceptionInvalidParameter
      */
-    public function prepend($api, $args)
+    public function prepend(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'target'));
         $bean = $this->createNewBean($api, $args);
@@ -302,7 +299,7 @@ class TreeApi extends FilterApi
      * @throws SugarApiExceptionNotFound
      * @throws SugarApiExceptionInvalidParameter
      */
-    public function append($api, $args)
+    public function append(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'target'));
         $bean = $this->createNewBean($api, $args);
@@ -321,7 +318,7 @@ class TreeApi extends FilterApi
      * @throws SugarApiExceptionNotFound
      * @throws SugarApiExceptionInvalidParameter
      */
-    public function insertBefore($api, $args)
+    public function insertBefore(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'target'));
         $bean = $this->createNewBean($api, $args);
@@ -340,7 +337,7 @@ class TreeApi extends FilterApi
      * @throws SugarApiExceptionNotFound
      * @throws SugarApiExceptionInvalidParameter
      */
-    public function insertAfter($api, $args)
+    public function insertAfter(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'target'));
         $bean = $this->createNewBean($api, $args);
@@ -357,7 +354,7 @@ class TreeApi extends FilterApi
      * @param array $args The arguments array passed in from the API.
      * @return array An array version of the SugarBean with only the requested fields (also filtered by ACL).
      */
-    public function moveBefore($api, $args)
+    public function moveBefore(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record', 'target'));
         list ($bean, $target) = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
@@ -371,7 +368,7 @@ class TreeApi extends FilterApi
      * @param array $args The arguments array passed in from the API.
      * @return array An array version of the SugarBean with only the requested fields (also filtered by ACL).
      */
-    public function moveAfter($api, $args)
+    public function moveAfter(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record', 'target'));
         list ($bean, $target) = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
@@ -385,7 +382,7 @@ class TreeApi extends FilterApi
      * @param array $args The arguments array passed in from the API.
      * @return array An array version of the SugarBean with only the requested fields (also filtered by ACL).
      */
-    public function moveFirst($api, $args)
+    public function moveFirst(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record', 'target'));
         list ($bean, $target) = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
@@ -399,7 +396,7 @@ class TreeApi extends FilterApi
      * @param array $args The arguments array passed in from the API.
      * @return array An array version of the SugarBean.
      */
-    public function moveLast($api, $args)
+    public function moveLast(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record', 'target'));
         list ($bean, $target) = $this->loadBoundBeans($args['module'], $args['record'], $args['target']);
@@ -414,12 +411,12 @@ class TreeApi extends FilterApi
      * @param array $args The arguments array passed in from the API.
      * @return array Formatted collection.
      */
-    public function tree($api, $args)
+    public function tree(ServiceBase $api, array $args)
     {
         $api->action = 'list';
         $this->requireArgs($args, array('module', 'root'));
         // Load up a seed bean
-        $seed = BeanFactory::getBean($args['module']);
+        $seed = BeanFactory::newBean($args['module']);
         if (!$seed->ACLAccess($api->action)) {
             throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $args['module']);
         }
@@ -464,7 +461,7 @@ class TreeApi extends FilterApi
      * @param array $args The arguments array passed in from the API.
      * @return array List of children nodes.
      */
-    public function children($api, $args)
+    public function children(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record'));
         $record = $this->retrieveBean($args['module'], $args['record']);
@@ -477,7 +474,7 @@ class TreeApi extends FilterApi
      * @param array $args The arguments array passed in from the API.
      * @return array Node data.
      */
-    public function next($api, $args)
+    public function next(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record'));
         $record = $this->retrieveBean($args['module'], $args['record']);
@@ -490,7 +487,7 @@ class TreeApi extends FilterApi
      * @param array $args The arguments array passed in from the API.
      * @return array Node data.
      */
-    public function prev($api, $args)
+    public function prev(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record'));
         $record = $this->retrieveBean($args['module'], $args['record']);
@@ -503,7 +500,7 @@ class TreeApi extends FilterApi
      * @param array $args The arguments array passed in from the API.
      * @return array Node data.
      */
-    public function getParent($api, $args)
+    public function getParent(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record'));
         $bean = $this->retrieveBean($args['module'], $args['record']);
@@ -516,7 +513,7 @@ class TreeApi extends FilterApi
      * @param array $args The arguments array passed in from the API.
      * @return array List of parent nodes.
      */
-    public function path($api, $args)
+    public function path(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record'));
         $record = $this->retrieveBean($args['module'], $args['record']);
@@ -577,7 +574,7 @@ class TreeApi extends FilterApi
      * @throws SugarApiExceptionNotAuthorized
      * @throws SugarApiExceptionNotFound
      */
-    public function filterSubTree($api, $args)
+    public function filterSubTree(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record', 'link_name'));
         // Load the parent bean.
@@ -605,7 +602,7 @@ class TreeApi extends FilterApi
         if ($linkModuleName != $record->module_name) {
             throw new SugarApiExceptionNotFound('Could not find self referencing in relationship named: ' . $linkName);
         }
-        $linkSeed = BeanFactory::getBean($linkModuleName);
+        $linkSeed = BeanFactory::newBean($linkModuleName);
         if (!$linkSeed->ACLAccess('list')) {
             throw new SugarApiExceptionNotAuthorized('No access to list records for module: ' . $linkModuleName);
         }
@@ -656,11 +653,11 @@ class TreeApi extends FilterApi
      * @throws SugarApiExceptionNotAuthorized
      * @throws SugarApiExceptionNotFound
      */
-    public function filterTree($api, $args)
+    public function filterTree(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'link_name'));
         // Load up a seed bean
-        $seed = BeanFactory::getBean($args['module']);
+        $seed = BeanFactory::newBean($args['module']);
         if (!$seed->ACLAccess('list')) {
             throw new SugarApiExceptionNotAuthorized('No access to view records for module: ' . $args['module']);
         }

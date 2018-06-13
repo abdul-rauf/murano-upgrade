@@ -17,8 +17,8 @@ Získejte klíč rozhraní API a tajný klíč rozhraní API od společnosti Goo
 <br/><br/>
 <ol>
 <li>Přejděte na stránku Google Developers:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Přihlaste se pomocí účtu Google, pod kterým chcete zaregistrovat aplikaci.</li>
 <li>Vytvořte nový projekt.</li>

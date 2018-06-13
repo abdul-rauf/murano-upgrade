@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,10 +10,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarObjects/templates/person/Person.php');
 
 class Prospect extends Person {
-    var $field_name_map;
 	// Stored fields
 	var $id;
 	var $name = '';
@@ -181,7 +178,7 @@ class Prospect extends Person {
         }
 
         $module_name = ucfirst($module_name);
-        $seed = BeanFactory::getBean($module_name);
+        $seed = BeanFactory::newBean($module_name);
         if(empty($sel_fields)){
             $sel_fields = $seed->table_name.'.*';
         }

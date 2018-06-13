@@ -116,11 +116,11 @@ $mod_strings = array(
         'defaultdetailview'=>'Područje <b>izgleda</b> sadrži polja koja se trenutačno prikazuju unutar <b>Prikaza detalja</b>.<br/><br/><b>Alatni okvir</b> sadrži <b>Koš za smeće</b> te polja i elemente izgleda koji se mogu dodati izgledu.<br><br>Promijenite izgled tako da povučete i ispustite elemente i polja između <b>alatnog okvira</b> i <b>izgleda</b> te unutar samog izgleda.<br><br>Da biste uklonili polje iz izgleda, dovucite polje u <b>koš za smeće</b>. Polje će zatim biti dostupno u alatnom okviru za dodavanje izgledu.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Označava zavisno polje koje može ili ne mora biti vidljivo na temelju vrijednosti formule.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označava izračunato polje čija će se vrijednost automatski odrediti na temelju formule.'
     ,
-        'defaultquickcreate'=>'Područje <b>izgleda</b> sadrži polja koja se trenutačno prikazuju unutar obrasca za <b>brzo stvaranje</b>.<br><br>Obrazac za brzo stvaranje prikazuje se u podpločama za modul kada se klikne na gumb za stvaranje.<br/><br/><b>Alatni okvir</b> sadrži <b>Koš za smeće</b> te polja i elemente izgleda koji se mogu dodati izgledu.<br><br>Promijenite izgled tako da povučete i ispustite elemente i polja između <b>alatnog okvira</b> i <b>izgleda</b> te unutar samog izgleda.<br><br>Da biste uklonili polje iz izgleda, dovucite polje u <b>koš za smeće</b>. Polje će zatim biti dostupno u alatnom okviru za dodavanje izgledu.'
+        'defaultquickcreate'=>'Područje <b>izgleda</b> sadrži polja koja se trenutačno prikazuju unutar obrasca <b>brzog stvaranja</b>.<br><br>Obrazac brzog stvaranja prikazuje se u podpločama za modul kada se klikne gumb Stvori.<br/><br/><b>Alatni okvir</b> sadrži <b>Koš za smeće</b> te polja i elemente izgleda koji se mogu dodati izgledu.<br><br>Promijenite izgled tako da povučete i ispustite elemente i polja između <b>alatnog okvira</b> i <b>izgleda</b> te unutar samog izgleda.<br><br>Da biste uklonili polje iz izgleda, dovucite polje u <b>koš za smeće</b>. Polje će zatim biti dostupno u alatnom okviru za dodavanje izgledu.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Označava zavisno polje koje može ili ne mora biti vidljivo na temelju vrijednosti formule.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označava izračunato polje čija će se vrijednost automatski odrediti na temelju formule.'
     ,
         //this defualt will be used for edit view
-        'default'	=> 'Područje <b>izgleda</b> sadrži polja koja se trenutačno prikazuju unutar <b>Prikaza za uređivanje</b>.<br/><br/><b>Alatni okvir</b> sadrži <b>Koš za smeće</b> te polja i elemente izgleda koji se mogu dodati izgledu.<br><br>Promijenite izgled tako da povučete i ispustite elemente i polja između <b>alatnog okvira</b> i <b>izgleda</b> te unutar samog izgleda.<br><br>Da biste uklonili polje iz izgleda, dovucite polje u <b>koš za smeće</b>. Polje će zatim biti dostupno u alatnom okviru za dodavanje izgledu.'
+        'default'	=> 'Područje <b>izgleda</b> sadrži polja koja se trenutačno prikazuju unutar <b>prikaza za uređivanje</b>.<br/><br/><b>Alatni okvir</b> sadrži <b>Koš za smeće</b> te polja i elemente izgleda koji se mogu dodati izgledu.<br><br>Promijenite izgled tako da povučete i ispustite elemente i polja između <b>alatnog okvira</b> i <b>izgleda</b> te unutar samog izgleda.<br><br>Da biste uklonili polje iz izgleda, dovucite polje u <b>koš za smeće</b>. Polje će zatim biti dostupno u alatnom okviru za dodavanje izgledu.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Označava zavisno polje koje može ili ne mora biti vidljivo na temelju vrijednosti formule.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označava izračunato polje čija će se vrijednost automatski odrediti na temelju formule.'
     ,
         //this defualt will be used for edit view
@@ -302,7 +302,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Kliknite za uređivanje ovog modula.',
         'moduleHelp'=> 'Odaberite komponentu modula koju želite urediti',
         'fieldsBtn'	=> 'Uredite informacije koje se pohranjuju u modulu tako da upravljate <b>poljima</b> u modulu.<br/><br/>Ovdje možete urediti i stvoriti prilagođena polja.',
-        'labelsBtn' => 'Kliknite na <b>Spremi</b> da biste spremili svoje prilagođene oznake.'	,
         'layoutsBtn'=> 'Prilagodite <b>izglede</b> prikaza za uređivanje, prikaza detalja, prikaza popisa i prikaza za pretraživanje.',
         'subpanelBtn'=> 'Uredite informacije koje se prikazuju u podpločama ovoga modula.',
         'layoutsHelp'=> 'Odaberite <b>izgled za uređivanje</b>.<br/<br/>Da biste promijenili izgled koji sadrži polja podataka za unos podataka, kliknite na <b>Prikaz za uređivanje</b>.<br/><br/>Da biste promijenili izgled koji prikazuje podatke unesene u polja u prikazu za uređivanje, kliknite na <b>Prikaz detalja</b>.<br/><br/>Da biste promijenili stupce koji se prikazuju na zadanom popisu, kliknite na <b>Prikaz popisa</b>.<br/><br/>Da biste promijenili izglede obrazaca za osnovno i napredno pretraživanje, kliknite na <b>Pretraživanje</b>.',
@@ -737,11 +736,11 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Jeste li sigurni da želite izbrisati fazu prodaje Zatvoreno kao neuspjelo? Brisanje ove faze uzrokovat će neispravan rad modula predviđanja',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Brisanjem ovog prilagođenog polja izbrisat će se prilagođeno polje i svi podaci povezani s prilagođenim poljem u bazi podataka. Polje se više neće pojavljivati u izgledima modula."
-        . " Ako je polje uključeno u formulu za izračunavanje vrijednosti za polja, formula više neće raditi."
-        . "\n\nPolje više neće biti dostupno za upotrebu u izvješćima; ova će se promjena primijeniti nakon odjave i ponovne prijave u aplikaciju. Izvješća koja sadrže polje morat će se ažurirati da bi mogla raditi."
-        . "\n\nŽelite li nastaviti?",
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Jeste li sigurni da želite izbrisati ovaj odnos?<br>Napomena: ova radnja možda će potrajati nekoliko minuta.',
+'LBL_CONFIRM_FIELD_DELETE'=>'Brisanjem ovog prilagođenog polja izbrisat će se prilagođeno polje i svi podaci povezani s prilagođenim poljem u bazi podataka. Polje se više neće pojavljivati u izgledima modula.'
+        . ' Ako je polje uključeno u formulu za izračunavanje vrijednosti za polja, formula više neće raditi.'
+        . '\n\nPolje više neće biti dostupno za upotrebu u izvješćima; ova će se promjena primijeniti nakon odjave i ponovne prijave u aplikaciju. Izvješća koja sadrže polje morat će se ažurirati da bi mogla raditi.'
+        . '\n\nŽelite li nastaviti?',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Jeste li sigurni da želite izbrisati ovaj odnos?<br>Napomena: ova radnja može potrajati nekoliko minuta.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Ovo će odnos učiniti trajnim. Jeste li sigurni da želite implementirati ovaj odnos?',
 'LBL_CONFIRM_DONT_SAVE' => 'Napravljene su promjene od posljednjeg spremanja, želite li spremiti?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Spremiti promjene?',
@@ -757,16 +756,16 @@ $mod_strings = array(
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Omogućeno</b>: polje će se prikazati u značajki Spajanje duplikata, no neće biti dostupno za upotrebu za uvjete filtra u značajki Traženje duplikata.<br><b>Onemogućeno</b>: polje se neće prikazati u značajki Spajanje duplikata i neće biti dostupno za upotrebu za uvjete filtra u značajki Traženje duplikata.'
 . '<br><b>U filtru</b>: polje će se prikazati u značajki Spajanje duplikata i bit će dostupno za upotrebu u značajki Traženje duplikata.<br><b>Samo filtar</b>: polje se neće prikazati u značajki Spajanje duplikata, no bit će dostupno za upotrebu u značajki Traženje duplikata.<br><b>Zadani odabrani filtar</b>: polje će se zadano upotrijebiti za uvjet filtra na stranici traženja duplikata te će se prikazati u značajki Spajanje duplikata.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Stvorite formulu za određivanje vrijednosti u ovom polju.<br>"
-   . "Definicije tijeka rada koje sadrže radnju, a koje su postavljene na ažuriranje ovog polja, neće više izvršavati tu radnju.<br>"
-   . "Polja koja upotrebljavaju formule neće biti izračunata u stvarnom vremenu na "
-   . "u izgledima prikaza za uređivanje Mobile.",
+'LBL_POPHELP_CALCULATED'=>"Stvorite formulu da biste odredili vrijednost u ovom polju.<br>"
+   . "Definicije tijeka rada koje sadrže neku radnju i koje su postavljene da ažuriraju ovo polje više neće vršiti tu radnju. <br>"
+   . "Polja koja upotrebljavaju formule neće se izračunavati u stvarnom vremenu na "
+   . "mobilnim prikazima za uređivanje.",
 
-'LBL_POPHELP_DEPENDENT'=>"Stvorite formulu za određivanje vidljivosti ovog polja u izgledima.<br/>"
-        . "Zavisna polja slijedit će formulu zavisnosti u mobilnom prikazu utemeljenom na pregledniku, <br/>"
-        . "no neće slijediti formulu u izvornim aplikacijama, poput aplikacije Sugar Mobile za iPhone. <br/>"
-        . "Neće slijediti formulu na samouslužnom Sugar Portalu.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Odaberite upotrebu ovog polja pri pretraživanju zapisa s pomoću globalnog pretraživanja na ovom modulu.',
+'LBL_POPHELP_DEPENDENT'=>"Stvorite formulu da biste utvrdili je li ovo polje vidljivo u izgledima.<br/>"
+        . "Zavisna polja slijedit će formulu zavisnosti u mobilnom prikazu utemeljenom na pregledniku,<br/>"
+        . "no neće slijediti formulu u izvornim aplikacijama, kao što je Sugar Mobile za iPhone.<br/>"
+        . "Neće slijediti formulu na Sugarovu samouslužnom portalu.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Odaberite uporabu ovog polja kada pretražujete zapise s pomoću globalnog pretraživanja u ovom modulu.',
 //Revert Module labels
 'LBL_RESET' => 'Pon. post.',
 'LBL_RESET_MODULE' => 'Ponovno postavi modul',

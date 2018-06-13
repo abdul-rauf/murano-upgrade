@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -48,6 +47,7 @@ include("metadata/recordListMetaData.php");
 include("metadata/project_bugsMetaData.php");
 include("metadata/project_casesMetaData.php");
 include("metadata/project_productsMetaData.php");
+include "metadata/project_resourcesMetaData.php";
 include("metadata/projects_accountsMetaData.php");
 include("metadata/projects_contactsMetaData.php");
 include("metadata/projects_opportunitiesMetaData.php");

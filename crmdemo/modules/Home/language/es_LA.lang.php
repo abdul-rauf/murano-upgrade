@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! Biblioteca de Interfaz del Usuario - La Biblioteca de Utilidades de Interfaz Gráfica facilita la implementación de las ricas prestaciones del cliente.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Una clase para transferencia de correo para PHP con características completas.',
   'LBL_SOURCE_JSHRINK' => 'JShrink - Un Minifier Javascript escrito en PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Permite una rápida encriptación blowfish en ambos sentidos sin requerir la extensión PHP MCrypt.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - Un analizador SAX para HTML y otros documentos con formato XML erróneo',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! Biblioteca de Extensión de IU - Extensiones para la Biblioteca de Interfaz del usuario de Yahoo! por Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - detección JavaScript y script de incrustación del reproductor de Flash.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Bienvenido al Panel de Ayuda Sugar 7',
-    'LBL_HELP_RECORD' => 'El Dashlet de Ayuda muestra información especifica acerca del módulo visualizado, provee pasos detallados para mejorar algunas acciones en el módulo, y lo dirige a donde usted necesite para una mayor información integral y soporte. El Dashlet de Ayuda permanece abierto para que pueda ver los pasos a medida que ejecuta el módulo.
-
-El Dashboard de Ayuda está disponible para todos los módulos de Sugar 7 y puede "abrirse" y "cerrar" al hacer clic en el ícono de Ayuda en la parte inferior de la aplicación.',
+    'LBL_HELP_RECORD_TITLE' => 'Ayuda',
+    'LBL_HELP_RECORD' => 'La ayuda muestra información específica sobre el módulo que está visualizando, brinda pasos detallados para realizar algunas acciones en el módulo y le indica donde ir para recibir mayor información y soporte.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtro',
 );

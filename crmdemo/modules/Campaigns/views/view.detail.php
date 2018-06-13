@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,17 +20,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once('include/json_config.php');
 
-require_once('include/MVC/View/views/view.detail.php');
 
 class CampaignsViewDetail extends ViewDetail {
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function CampaignsViewDetail()
-    {
-        self::__construct();
-    }
 
     public function __construct()
     {
@@ -80,7 +69,7 @@ class CampaignsViewDetail extends ViewDetail {
 	        $this->ss->assign("TARGET_BUTTON_STATE", "submit");
 	    }
 
-	    $currency = BeanFactory::getBean('Currencies');
+	    $currency = BeanFactory::newBean('Currencies');
 	    if(!empty($this->bean->currency_id))
 	    {
 	    	$currency->retrieve($this->bean->currency_id);
@@ -98,7 +87,6 @@ class CampaignsViewDetail extends ViewDetail {
         //We want to display subset of available, panels, so we will call subpanel
         //object directly instead of using sugarview.
         $GLOBALS['focus'] = $this->bean;
-        require_once('include/SubPanel/SubPanelTiles.php');
         $subpanel = new SubPanelTiles($this->bean, $this->module);
         //get available list of subpanels
         $alltabs=$subpanel->subpanel_definitions->get_available_tabs();
@@ -123,3 +111,4 @@ class CampaignsViewDetail extends ViewDetail {
 
     }
 }
+

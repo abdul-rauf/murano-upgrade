@@ -17,10 +17,10 @@ Ottenere una chiave API Key e Secret da Google registrando la propria istanza Su
 <br/><br/>
 <ol>
 <li>Andare al sito degli Sviluppatori Google:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
-<li>Accedere usando l&#39;account Google nel quale si desidera registrare l&#39;applicazione.</li>
+<li>Accedere usando l\'account Google nel quale si desidera registrare l\'applicazione.</li>
 <li>Crea un nuovo progetto</li>
 <li>Inserisci un Nome progetto e fai clic su crea.</li>
 <li>Dopo aver creato il progetto, attivare gli API Google Drive e Google Contacts</li>
@@ -29,7 +29,7 @@ target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
 <li>Inserire un nome di prodotto, quindi fare clic su Salva</li>
 <li>Nella sezione URI di redirect autorizzati inserire il seguente url: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
 <li>Fare clic su crea id cliente</li>
-<li>Copiare l&#39;id cliente e client secret nelle seguenti caselle</li>
+<li>Copiare l\'id cliente e client secret nelle seguenti caselle</li>
 
 </li>
 </ol>

@@ -1,14 +1,5 @@
 <?php
-/*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
- */
+// created: 2018-06-13 14:44:36
 $mod_strings = array (
   'LBL_TEAM' => 'Teams',
   'LBL_TEAMS' => 'Teams',
@@ -58,7 +49,6 @@ $mod_strings = array (
   'LBL_CITY' => 'Town/City:',
   'LBL_CONTACTS_SUBPANEL_TITLE' => 'Contacts',
   'LBL_COUNTRY' => 'Country:',
-  'LBL_DEFAULT_SUBPANEL_TITLE' => 'Accounts',
   'LBL_DESCRIPTION_INFORMATION' => 'Description Information',
   'LBL_DUPLICATE' => 'Possible Duplicate Account',
   'LBL_EMAIL' => 'Email Address:',

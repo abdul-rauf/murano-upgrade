@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 // $Id: date.php 30233 2007-12-05 00:31:22Z majed $
-require_once('modules/DynamicFields/templates/Fields/TemplateDate.php');
 
 function get_body(&$ss, $vardef){
 	$td = new TemplateDate();

@@ -15,19 +15,13 @@ require_once('include/entryPoint.php');
 require_once('include/utils/file_utils.php');
 ob_start();
 
-require_once('soap/SoapError.php');
+require 'soap/SoapErrorDefinitions.php';
 require_once('vendor/nusoap//nusoap.php');
-require_once('modules/Contacts/Contact.php');
-require_once('modules/Accounts/Account.php');
-require_once('modules/Opportunities/Opportunity.php');
-require_once('modules/Cases/Case.php');
 //ignore notices
 error_reporting(E_ALL ^ E_NOTICE);
 
 checkSystemLicenseStatus();
 checkSystemState();
-
-global $HTTP_RAW_POST_DATA;
 
 $administrator = Administration::getSettings();
 
@@ -52,11 +46,6 @@ require_once('soap/SoapUpgradeUtils.php');
 /* Begin the HTTP listener service and exit. */
 ob_clean();
 
-if (!isset($HTTP_RAW_POST_DATA)){
-    $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-}
-
-require_once('include/resource/ResourceManager.php');
 $resourceManager = ResourceManager::getInstance();
 $resourceManager->setup('Soap');
 $observers = $resourceManager->getObservers();
@@ -67,10 +56,10 @@ foreach($observers as $observer) {
    }
 }
 
-$HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : '';
 global $soap_server_object;
 $soap_server_object = $server;
-$server->service($HTTP_RAW_POST_DATA);
+$body = file_get_contents('php://input');
+$server->service($body);
 
 $action = substr($server->SOAPAction, strpos($server->SOAPAction, 'soap.php/') + 9);
 SugarMetric_Manager::getInstance()->setTransactionName('soap_' . $action);

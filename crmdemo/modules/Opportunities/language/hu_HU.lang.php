@@ -166,19 +166,19 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'A {{plural_module_name}} lehetővé teszi az ön számára, hogy nyomon kövesse az egyéni eladásait elejétől-végéig. Minden {{module_name}} rekord képvisel egy leendő eladást és magába foglal jelentős eladási adatokat olyan egyéb fontos rekordokkal kapcsolatban is, mint például {{quotes_module}}, {{contacts_module}}, stb. Egy {{module_name}} fokozatosan fejlődik majd bizonyos eladási státusokon belül, amíg meg nem kapja a "Lezárt" vagy a "Lezárt, elvesztett" jelzést. A {{plural_module_name}} ennél jobban is ellenőzírhető a Sugar {{forecasts_singular_module}}ing modul használatával, mely által megértheti és előrejelezheti az eladások trendjét és fókuszálhat a munkára értékesítési kvóták elérése céljából.',
+    'LBL_HELP_RECORDS' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a végéig nyomon követheti az egyedi értékesítéseket. Minden {{module_name}} rekord egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos rekordokhoz kapcsolódó adatokat, mint a {{quotes_module}}, {{contacts_module}} stb. Egy {{module_name}} jellemzően több értékesítési fázison megy át, amíg "Lezárt, megnyert" vagy "Lezárt, elveszített" minősítést nem kap. A(z) {{plural_module_name}} ennél tovább is emelhető a Sugar {{forecasts_singular_module}} használatával, amelynek segítségével megértheti és képes lesz előre jelezni az értékesítési trendeket, és fókuszálhatja a munkáját annak érdekében, hogy elérje az értékesítési kvótákat.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'A(z) {{plural_module_name}} modul segítségével nyomon követheti az egyéni értékesítéseket, és az adott értékesítéshez tartozó tételeket elejétől a végéig. Minden {{module_name}} rekord egy leendő eladást képvisel, emellett más fontos rekordokhoz (pl. {{quotes_module}}, {{contacts_module}} stb.) is kapcsolódik.
+    'LBL_HELP_RECORD' => 'A(z) {{plural_module_name}} modul segítségével nyomon követheti az egyedi eladásokat és az azokhoz tartozó sorokat elejétől-végig. Minden {{module_name}} rekord egy prospektív értékesítést képvisel, és olyan más, fontos rekordokhoz kapcsolódik, mint pl. {{quotes_module}}, {{contacts_module}} stb. 
 
-- Szerkessze a rekord mezőit, ehhez kattintson egy egyéni mezőre vagy a Szerkesztés gombra.
-- Tekintse meg vagy módosítsa a többi rekordra mutató hivatkozást az alpaneleken, ehhez húzza a bal alsó panelt "Adatnézet"-re.
-- Vigyen be felhasználói bejegyzéseket és rekordmódosítási előzményeket, illetve tekintse meg ezeket itt: {{activitystream_singular_module}}, ehhez húzza a bal alsó panelt "Tevékenységek" nézetre.
-- A rekordnév jobb oldalán található gombokkal kövesse vagy kedvelje ezt a rekordot.
-- További műveletek elérhetők a legördülő Tevékenységek menüben a Szerkesztés gomb jobb oldalán.',
+- A rekord mezőinek szerkesztéséhez kattintson egy adott mezőre vagy a Szerkesztés gombra.
+- Az alpanelekben lévő más rekordok megtekintéséhez vagy módosításához húzza a bal alsó panelt "Adatnézet" állásba.
+- A felhasználói megjegyzések beszúrásához vagy megtekintéséhez a(z) {{activitystream_singular_module}} modulban húzza a bal alsó panelt "Tevékenységek" állásba.
+- A rekord követéséhez vagy kedvencként történő kiemeléséhez használja a rekord nevének jobb oldalán lévő ikonokat.
+- A további műveletek a legördülő, a Szerkesztés gomb jobb oldalán lévő Műveletek menüből elérhetőek.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'A(z) {{plural_module_name}} modul segítségével nyomon követheti az egyedi eladásokat és az azokhoz tartozó tételeket elejétől-végig. Minden {{module_name}} rekord egy leendő eladást képvisel, és olyan más rekordhoz kapcsolódó eladási adatokat tartalmaz, mint pl. {{quotes_module}}, {{contacts_module}} stb.
+    'LBL_HELP_CREATE' => 'A(z) {{plural_module_name}} modul segítségével nyomon követheti az egyedi eladásokat és az azokhoz tartozó sorokat elejétől-végig. Minden {{module_name}} rekord egy prospektív értékesítést képvisel, és olyan más, fontos rekordokhoz kapcsolódik, mint pl. {{quotes_module}}, {{contacts_module}} stb.
 
 {{module_name}} modul létrehozásához:
 1. Vigye be a mezőkbe a kívánt értékeket.

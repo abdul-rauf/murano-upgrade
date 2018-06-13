@@ -1,14 +1,5 @@
 <?php
-/*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
- */
+// created: 2018-06-13 14:44:36
 $mod_strings = array (
   'LBL_TEAM' => 'Týmy',
   'LBL_TEAMS' => 'Týmy',
@@ -58,7 +49,6 @@ $mod_strings = array (
   'LBL_CITY' => 'Město:',
   'LBL_CONTACTS_SUBPANEL_TITLE' => 'Kontakty',
   'LBL_COUNTRY' => 'Země:',
-  'LBL_DEFAULT_SUBPANEL_TITLE' => 'Společnosti',
   'LBL_DESCRIPTION_INFORMATION' => 'Informace o pipisu',
   'LBL_DUPLICATE' => 'Možná duplicitní společnost',
   'LBL_EMAIL' => 'E-mailová adresa:',

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -32,7 +31,7 @@ class charts {
      */
     function campaign_response_chart($targets,$campaign_id) {
 
-        $focus = BeanFactory::getBean('Campaigns');
+        $focus = BeanFactory::newBean('Campaigns');
         $leadSourceArr = array();
 
         $query = "SELECT activity_type,target_type, count(*) hits ";

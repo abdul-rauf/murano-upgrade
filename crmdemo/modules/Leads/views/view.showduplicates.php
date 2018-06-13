@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -41,8 +40,7 @@ class ViewShowDuplicates extends SugarView
         }
         unset($_SESSION['SHOW_DUPLICATES']);
 
-        $lead = BeanFactory::getBean('Leads');
-        require_once('modules/Leads/LeadFormBase.php');
+        $lead = BeanFactory::newBean('Leads');
         $leadForm = new LeadFormBase();
         $GLOBALS['check_notify'] = FALSE;
 
@@ -96,7 +94,7 @@ class ViewShowDuplicates extends SugarView
 
         $input .= get_teams_hidden_inputs('Leads');
 
-        $emailAddress = BeanFactory::getBean('EmailAddresses');
+        $emailAddress = BeanFactory::newBean('EmailAddresses');
         $input .= $emailAddress->getEmailAddressWidgetDuplicatesView($lead);
 
         $this->ss->assign('RETURN_MODULE', $this->request->getValidInputPost('return_module', 'Assert\Mvc\ModuleName'));

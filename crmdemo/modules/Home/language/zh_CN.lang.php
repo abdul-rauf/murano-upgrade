@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - 用于实施丰富的客户端功能的用户界面库实用程序。',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer-PHP 全功能的电子邮件传送类',
   'LBL_SOURCE_JSHRINK' => 'JShrink-以 PHP 编写的 Javascript minifier',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - 允许快速地双工 blowfish 加密，无需mcrypt PHP 扩展。',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - HTML 的SAX 解析器和其他格式的 XML 文档',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - Yahoo 的扩展功能! 用户界面库由 Jack Slocum 创建',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Javascript Flash 播放器检测和嵌入脚本。',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => '欢迎使用 Sugar 7 帮助仪表板',
-    'LBL_HELP_RECORD' => '帮助仪表板显示您正在查看该模块的特定信息，提供在模块中执行某些操作的详细步骤和指示您转到哪里获取更全面的信息和支持。帮助仪表板保持打开状态，以便您可以查看步骤，如在该模块中执行的步骤。
-
-帮助仪表板可用于所有 Sugar 7 模块，可以通过单击应用页脚中的帮助图标切换"开放"和"关闭"。',
+    'LBL_HELP_RECORD_TITLE' => '说明',
+    'LBL_HELP_RECORD' => '说明显示您正查看的模块的具体信息，提供在该模块中执行某些操作所需的详细步骤，并向您说明如何寻找更多综合信息和支持。',
 
     'LBL_FACETS_DASHBOARD_TITLE' => '筛选器',
 );

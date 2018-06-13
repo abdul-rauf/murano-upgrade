@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Kliknite da izmenite ovaj modul.',
         'moduleHelp'=> 'Izaberite komponentu modula koju želite da promenite.',
         'fieldsBtn'	=> 'Izmenite koje informacije se čuvaju u modulu kontrolišući <Polja</b> u modulu.<br><br>Možete da izmenite i dodate prilagođena polja ovde.',
-        'labelsBtn' => 'Kliknite <b>Snimi</b>da snimite prilagođene oznake.'	,
         'layoutsBtn'=> 'Prilagodite <b>Rasporede</b> pregleda za izmenu, detaljan pregled, pregled u vidu liste i pretragu.',
         'subpanelBtn'=> 'Izmenite informacije koje se prikazuju u podpanelima modula.',
         'layoutsHelp'=> 'Odaberite <b>Rasored za izmenu</b>.<br><br>Da bi izmenili raspored koji sadrži polja sa podacima za unos podataka, kliknite <b>Pregled za izmenu</b>.<br><br>Da bi izmenili raspored koji prikazuje podatke unesene u polja u Pregledu za izmenu, kliknite <b>Detaljan pregled</b>.<br><br>Da bi promenili kolone koje se pojavljuju na podrazumevanoj listi, kliknite <b>Pregled u vidu liste</b>.<br><br>Da bi promenili raspored formi za osnovnu i naprednu pretragu, kliknite <b>Pretraga</b>.',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Da li ste sigurni da želite da izbrišete zatvorenu izgubljenu fazu prodaje? Zbog brisanja ove faze vaš modul za prognozu neće funkcionisati kako treba.',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Da li ste sigurni da želite da obrišete ovu vezu?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Ova veza će postati trajna. Da li ste sigurni da želite da rasporedite ovu vezu?',
 'LBL_CONFIRM_DONT_SAVE' => 'Da li želite da sačuvate promene koje su nastale nakon poslednjeg čuvanja?',

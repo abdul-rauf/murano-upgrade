@@ -17,8 +17,8 @@ Gaukite API raktą ir slaptažodį iš „Google“ užregistravę savo „Sugar
 <br/><br/>
 <ol>
 <li>Įeikite į svetainę „Google Developers“:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Prisijunkite naudodami „Google“ paskyrą, pagal kurią norite registruoti programą.</li>
 <li>Sukurkite naują projektą.</li>

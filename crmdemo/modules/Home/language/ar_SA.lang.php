@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! مكتبة واجهة المستخدم - تسهل الأدوات المساعدة لمكتبة واجهة المستخدم تنفيذ سمات متنوعة على جانب العميل.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - فئة نقل شاملة المميزات للبريد الإلكتروني لـ PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - منظم Javascript مكتوب بلغة PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - يسمح بتشفير blowfish ثنائي الاتحاد السريع بدون المطالبة بامتداد MCrypt PHP.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - محلل SAX لـ HTML ووثائق XML المكونة بشكل سيئ',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! مكتبة امتدادات واجهة المستخدم - امتدادات لـ Yahoo! مكتب واجهة المستخدم من خلال Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - اسكربت اكتشاف وتضمين مشغل فلاش Javascript.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'مرحبًا بكم في لوحة معلومات تعليمات Sugar 7',
-    'LBL_HELP_RECORD' => 'تعرض لوحة معلومات المساعدة معلومات محددة حول الوحدة التي تعرضها، وتوفر خطوات تفصيلية حيال تنفيذ بعض الإجراءات في الوحدة، وتوجهك إلى المكان الذي يجب أن تتوجه إليه للحصول على المزيد من المعلومات والدعم الشاملين. وتبقى لوحة المعلومات مفتوحة حتى يمكنك عرض الخطوات أثناء تنفيذ الخطوات في الوحدة.
-
-وتتاح لوحة معلومات المساعدة لكل وحدات Sugar 7 ويمكن التبديل بين "فتحها" و"إغلاقها" من خلال النقر على أيقونة التعليمات في تذييل التطبيق.',
+    'LBL_HELP_RECORD_TITLE' => 'تعليمات',
+    'LBL_HELP_RECORD' => 'تعرض التعليمات معلومات معينة تتعلق بالوحدة التي تشاهدها، وتوفر خطوات تفصيلية لتنفيذ بعض الإجراءات في الوحدة، وتشير عليك بالاتجاه المطلوب السير فيه، وذلك للحصول على مزيد من المعلومات الشاملة والدعم.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'الفلتر',
 );

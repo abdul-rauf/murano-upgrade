@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,9 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/Dashlets/Dashlet.php');
-require_once('include/ListView/ListViewSmarty.php');
-require_once('include/generic/LayoutManager.php');
 
 /**
  * Generic Dashlet class
@@ -85,14 +81,6 @@ class DashletGeneric extends Dashlet {
      */
     var $lvs;
     var $layoutManager;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function DashletGeneric($id, $options = null)
-    {
-        self::__construct($id, $options);
-    }
 
     public function __construct($id, $options = null)
     {
@@ -524,3 +512,4 @@ class DashletGeneric extends Dashlet {
         }
     }
 }
+

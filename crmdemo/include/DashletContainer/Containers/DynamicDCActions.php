@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -26,7 +25,6 @@ if (isset($_SESSION['current_db_version']) && isset($_SESSION['target_db_version
 
 
 require_once('include/connectors/utils/ConnectorUtils.php');
-require_once('include/connectors/sources/SourceFactory.php');
 $connector = SourceFactory::getSource('ext_eapm_ibmsmartcloud', false);
 
 // Check if IBM SmartCloud (was Lotus Live) is configured and enabled

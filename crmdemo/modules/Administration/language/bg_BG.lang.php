@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -763,7 +762,6 @@ If you experience persistent problems with automatic validation, please check yo
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Скрити теми',
     'LBL_TIMEZONE' => 'Часова зона',
     'LBL_TO'    => 'to',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Изберете кои системни и потребителски данни да се проследяват',
     'LBL_UPDATE_CHECK_AUTO'=>'Автоматично',
     'LBL_UPDATE_CHECK_MANUAL'=>'Ръчно',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Автоматична проверка за актуализации</B> - при маркиране на опцията, сървърът на системата периодично ще проверява дали има актуализации на Вашата текуща версия на SugarCRM.',
@@ -930,8 +928,6 @@ If you experience persistent problems with automatic validation, please check yo
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Файлът config.php беше успешно генериран отново.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Предупреждение: Настройките на PHP интерпретатора трябва да бъдат променени така, че да позволяват качване на файлове с размер поне 6MB.  Моля модифицирайте директивата upload_max_filesize value във файла php.ini, който се намира в:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Дайде права за модифициране на файла config.php и опитайте отново.',
-    'MSG_REBUILD_EXTENSIONS' => 'Моля, отидете до екрана <a href="index.php?module=Administration&action=Upgrade">Поправи</a> и щракнете върху Възстанови разширенията.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Моля, отидете до екрана <a href="index.php?module=Administration&action=Upgrade">Поправи</a> и щракнете върху Възстанови връзките.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Не са намерени "Offline" клиенти, свързани към системата.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Сигурни ли сте, че искате да забраните този "Offline Client"?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Сигурни ли сте, че искате да разрешите този "Offline Client"?',
@@ -1041,7 +1037,7 @@ If you experience persistent problems with automatic validation, please check yo
 'ML_ISSUES'=>'Казуси',
 'ML_MANIFEST_ISSUE'=>'Казуси с файла manifest',
 'ML_CONFIG_OVERRIDE'=>'Не е разрешено изменение на въведената конфигурация',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Код – може да се състои само от букви, цифри и долни черти. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Меню за бърз достъп',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Дефиниране на модулите, за които записи могат да бъдат създавани през менюто за бърз достъп',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Изберете кои модули за кои потребители могат бързо да създадат записи с помощта на иконата Плюс в горната навигационна лента. Издърпайте & пуснете модулите между кутийките на Активираните модули и Деактивираните модули.',
@@ -1089,7 +1085,6 @@ If you experience persistent problems with automatic validation, please check yo
 	'Manufacturers'  => 'Производител',
 	'ProductBundleNotes' => 'Бележка за продуктовия асортимент',
 	'ProductBundles'   => 'Продуктов асортимент',
-	'ProjectResources' => 'Проектен Ресурс',
 
 	'Relationships' => 'Връзки с други модули',
 	'Releases'       => 'Версия',
@@ -1099,7 +1094,6 @@ If you experience persistent problems with automatic validation, please check yo
 	'SchedulersJobs'  => 'Автоматизирани задачи',
 	'Shippers'       => 'Транспортна фирма',
 	'TaxRates'       => 'Данъчна Ставка',
-	'TeamHierarchies'  => 'Екипна Йерархия',
 	'TeamMemberships'   => 'Членство в екип',
 	'TeamNotices'    => 'Уведомления за екипи',
 	'TeamSetModules'   => 'Модул на списъка с екипи',

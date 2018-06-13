@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -26,9 +25,8 @@ class SugarUpgradeConnectors extends UpgradeScript
         }
 
         //Delete the custom connectors.php file if it exists so that it may be properly rebuilt
-        if(file_exists('custom/modules/Connectors/metadata/connectors.php'))
-        {
-            unlink('custom/modules/Connectors/metadata/connectors.php');
+        if (SugarAutoLoader::fileExists('custom/modules/Connectors/metadata/connectors.php')) {
+            SugarAutoLoader::unlink('custom/modules/Connectors/metadata/connectors.php');
         }
     }
 }

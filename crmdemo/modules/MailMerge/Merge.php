@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 require_once('soap/SoapHelperFunctions.php');
-require_once('modules/MailMerge/MailMerge.php');
-require_once('include/upload_file.php');
 
 global $app_strings;
 global $app_list_strings;
@@ -51,21 +48,18 @@ if($module == 'CampaignProspects'){
     	campaign_log_mail_merge($_SESSION['MAILMERGE_CAMPAIGN_ID'],$targets);
     }
 }
-$seed = BeanFactory::getBean($module);
+$seed = BeanFactory::newBean($module);
 $fields =  get_field_list($seed);
 
 $document = BeanFactory::getBean('DocumentRevisions', $document_id);
 
 if(!empty($relModule)){
-    $rel_seed = BeanFactory::getBean($relModule);
+    $rel_seed = BeanFactory::newBean($relModule);
 }
 
 global $sugar_config;
 
 $filter = array();
-if(array_key_exists('mailmerge_filter', $sugar_config)){
- //   $filter = $sugar_config['mailmerge_filter'];
-}
 array_push($filter, 'link');
 
 $merge_array = array();
@@ -96,7 +90,6 @@ write_array_to_file('merge_array', $merge_array, $dataDir.$dataFileName);
 //Save the temp file so we can remove when we are done
 $_SESSION['MAILMERGE_TEMP_FILE_'.$mTime] = $dataDir.$dataFileName;
 $site_url = $sugar_config['site_url'];
-//$templateFile = $site_url . '/' . UploadFile::get_upload_url($document);
 $templateFile = $site_url.'/'.UploadFile::get_url(from_html($document->filename),$document->id);
 $dataFile =$dataFileName;
 $redirectUrl = 'index.php?action=index&step=5&module=MailMerge&mtime='.$mTime;

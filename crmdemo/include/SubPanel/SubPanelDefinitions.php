@@ -1,6 +1,4 @@
 <?php
-if (! defined ( 'sugarEntry' ) || ! sugarEntry)
-	die ( 'Not A Valid Entry Point' ) ;
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -50,20 +48,6 @@ class aSubPanel
 	var $db_fields ;
 	var $bean_name ;
 	var $template_instance ;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function aSubPanel(
-        $name,
-        $instance_properties,
-        $parent_bean,
-        $reload = false,
-        $original_only = false,
-        $forApi = false
-    ) {
-        self::__construct($name, $instance_properties, $parent_bean, $reload, $original_only, $forApi);
-    }
 
     public function __construct($name, $instance_properties, $parent_bean, $reload = false, $original_only = false, $forApi = false)
 	{
@@ -501,7 +485,7 @@ class aSubPanel
 		$module_name = $this->get_module_name () ;
 		if (! empty ( $module_name ))
 		{
-		    $this->template_instance = BeanFactory::getBean($module_name);
+		    $this->template_instance = BeanFactory::newBean($module_name);
 		    if(empty($this->template_instance)) {
 		        $GLOBALS['log']->fatal("Bad module name for subpanel: $module_name");
 		        return null;
@@ -620,14 +604,6 @@ class SubPanelDefinitions
 	var $layout_defs ;
 	var $platform ;
     static $refreshHiddenSubpanels = false;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SubPanelDefinitions($focus, $layout_def_key = '', $layout_def_override = '', $platform = null)
-    {
-        self::__construct($focus, $layout_def_key, $layout_def_override, $platform);
-    }
 
 	/**
 	 * Enter description here...
@@ -780,7 +756,6 @@ class SubPanelDefinitions
      */
     function open_layout_defs($reload = false, $layout_def_key = '', $original_only = false)
     {
-        require_once 'include/MetaDataManager/MetaDataManager.php';
 
         $mm = MetaDataManager::getManager();
 
@@ -805,7 +780,6 @@ class SubPanelDefinitions
             $layoutDefsKey = !empty($layout_def_key) ? $layout_def_key : $this->_focus->module_dir;
             // convert sidecar subpanels to the array the SubpanelDefinitions are looking for
             if ($this->_focus instanceof SugarBean && !isModuleBWC($this->_focus->module_dir) && isset($viewdefs)) {
-                require_once('include/MetaDataManager/MetaDataConverter.php');
                 $metaDataConverter = new MetaDataConverter();
                 $layout_defs[$layoutDefsKey] = $metaDataConverter->toLegacySubpanelLayoutDefs($viewdefs, $this->_focus);
             }
@@ -850,7 +824,6 @@ class SubPanelDefinitions
 		global $moduleList;
 
 		//use tab controller function to get module list with named keys
-		require_once("modules/MySettings/TabController.php");
 		$modules_to_check = TabController::get_key_array($moduleList);
 
 		//change case to match subpanel processing later on
@@ -866,7 +839,7 @@ class SubPanelDefinitions
 		//iterate through modules and build subpanel array
 		foreach($modules_to_check as $mod_name){
 
-		    $bean_class = BeanFactory::getBean($mod_name);
+		    $bean_class = BeanFactory::newBean($mod_name);
             if(empty($bean_class)) continue;
 
 			//create new subpanel definition instance and get list of tabs
@@ -898,7 +871,7 @@ class SubPanelDefinitions
 	 */
     public static function set_hidden_subpanels($panels)
     {
-		$administration = BeanFactory::getBean('Administration');
+		$administration = BeanFactory::newBean('Administration');
 		$serialized = base64_encode(serialize($panels));
 		$administration->saveSetting('MySettings', 'hide_subpanels', $serialized);
         // Allow the hidden subpanel cache to refresh

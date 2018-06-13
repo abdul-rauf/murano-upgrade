@@ -300,7 +300,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Faceţi clic pentru a edita acest modul.',
         'moduleHelp'=> 'Selectaţi componenta modulului pe care doriţi să o editaţi',
         'fieldsBtn'	=> 'Editaţi ce informaţii sunt stocate în modul controlând <b>Câmpuri</b> în modul.<br/><br/>Puteţi edita şi crea câmpuri personalizate aici.',
-        'labelsBtn' => 'Faceţi clic pe <b>Salvare</b> pentru a salva etichetele personalizate.'	,
         'layoutsBtn'=> 'Personalizaţi <b>Aspecte</b> în vizualizările Editare, Detalii, Listă şi căutare.',
         'subpanelBtn'=> 'Editaţi ce informaţii sunt afişate în subpanourile acestui modul.',
         'layoutsHelp'=> 'Selectaţi un <b>Aspect de editat</b>.<br/<br/>Pentru a modifica aspectul care conţine câmpuri de date pentru introducerea datelor, faceţi clic pe <b>Vizualizare editare</b>.<br/><br/>Pentru a modifica aspectul care afişează datele introduse în câmpuri în Vizualizare editare, faceţi clic pe <b>Vizualizare editare</b>.<br/><br/>Pentru a modifica coloanele care apar în lista implicită, faceţi clic pe <b>Vizualizare listă</b>.<br/><br/>Pentru a modifica aspectele formularelor de căutare de bază şi avansate, faceţi clic pe <b>Căutare</b>.',
@@ -735,10 +734,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Sigur doriţi ştergerea etapei de vânzări Closed Lost (Afacere încheiată în pierdere)? Ştergerea acestei etape va duce la funcţionarea necorespunzătoare a modulului Previzionare',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Sigur stergeti aceasta relatie?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Aceasta va determina ca relatia sa devina permanenta. Sunteti sigur ca doriti sa desfasurati aceasta  relatie?',
 'LBL_CONFIRM_DONT_SAVE' => 'S-au facut modificari de cand ati salvat ultima oara, doriti sa salvati?',

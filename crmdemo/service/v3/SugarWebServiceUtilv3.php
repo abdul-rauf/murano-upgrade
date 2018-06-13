@@ -64,7 +64,6 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
 
     function getRelationshipResults($bean, $link_field_name, $link_module_fields, $optional_where = '', $order_by = '') {
 		$GLOBALS['log']->info('Begin: SoapHelperWebServices->getRelationshipResults');
-		require_once('include/TimeDate.php');
 		global  $beanList, $beanFiles, $current_user;
 		global $disable_date_format, $timedate;
 
@@ -182,8 +181,7 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
 		} //if
 
 		if($value->module_dir == 'Bugs'){
-			require_once('modules/Releases/Release.php');
-			$seedRelease = BeanFactory::getBean('Releases');
+			$seedRelease = BeanFactory::newBean('Releases');
 			$options = $seedRelease->get_releases(TRUE, "Active");
 			$options_ret = array();
 			foreach($options as $name=>$value){
@@ -257,7 +255,7 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
 	    foreach ($layout_defs[$module]['subpanel_setup'] as $subpanel => $subpaneldefs)
 	    {
 	        $moduleToCheck = $subpaneldefs['module'];
-	        $bean = BeanFactory::getBean($moduleToCheck);
+	        $bean = BeanFactory::newBean($moduleToCheck);
 	        if(empty($bean)) continue;
 	        if($bean->ACLAccess('list'))
 	            $results[$subpanel] = $subpaneldefs;
@@ -268,7 +266,6 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
 	}
 
     function get_module_view_defs($module_name, $type, $view){
-        require_once('include/MVC/View/SugarView.php');
         $metadataFile = null;
         $view = strtolower($view);
         if ($view == 'subpanel') {
@@ -319,7 +316,6 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
      * @return array Modules enabled within the application.
      */
     function get_visible_modules($availModules) {
-        require_once("modules/MySettings/TabController.php");
         $controller = new TabController();
         $tabs = $controller->get_tabs_system();
         $enabled_modules= array();
@@ -355,7 +351,7 @@ class SugarWebServiceUtilv3 extends SoapHelperWebServices {
                 continue;
             }
 
-	        $seed = BeanFactory::getBean($module);
+	        $seed = BeanFactory::newBean($module);
             $query = $this->generateUpcomingActivitiesWhereClause($seed, $meta);
 
             $response = $seed->get_list(/* Order by date field */"{$meta['date_field']} ASC",  /*Where clause */$query, /* No Offset */ 0,

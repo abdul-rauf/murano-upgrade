@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/TimePeriods/TimePeriodInterface.php');
 /**
  * Implements the fiscal quarter representation of a time period where the monthly
  * leaves are split by the longest month occurring at the end of the quarter
@@ -35,10 +33,10 @@ class Quarter445TimePeriod extends TimePeriod implements TimePeriodInterface {
     /**
      * build leaves for the timeperiod by creating the specified types of timeperiods
      *
-     * @param string $timePeriodType ignored for now as current requirements only allow monthly for quarters.  Left in place in case it is used in the future for weeks/fortnights/etc
      * @return mixed
      */
-    public function buildLeaves($timePeriodType) {
+    public function buildLeaves($shownBackwardDifference, $shownForwardDifference)
+    {
         if($this->hasLeaves()) {
             throw new Exception("This TimePeriod already has leaves");
         }

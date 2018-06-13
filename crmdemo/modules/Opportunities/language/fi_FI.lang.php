@@ -166,24 +166,24 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}}-moduulin avulla voit seurata yksittäisiä myyntejä alusta loppuun. Kukin {{module_name}} edustaa mahdollista myyntiä ja sisältää asiaankuuluvat myyntitiedot sekä muut liittyvät tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}}, jne. {{module_name}} etenee yleensä useissa myyntivaiheissa, kunnes se merkitään joko "Suljettu voitettu" tai "Suljettu hävitty". {{plural_module_name}} voidaan tehostaa edelleen käyttämällä Sugarin {{forecasts_singular_module}}-moduulia myyntitrendien ymmärtämiseksi ja ennustamiseksi sekä työn keskittämiseksi myyntitavoitteiden saavuttamiseen.',
+    'LBL_HELP_RECORDS' => 'Moduulin {{plural_module_name}} avulla voit seurata henkilökohtaista myyntiä alusta loppuun. Tietueet {{module_name}} edustavat prospektiivista myyntiä ja sisältävät vastaavat myyntitiedot sekä muut tärkeät tietueet, kuten {{quotes_module}}, {{contacts_module}} jne. {{module_name}} etenee yleensä useiden myyntivaiheiden kautta, kunnes se merkitään joko "Suljettu voitettu" tai "Suljettu menetetty". Moduulia {{plural_module_name}} voidaan hyödyntää lisää käyttämällä Sugarin {{forecasts_singular_module}} -moduulia ymmärtääksesi ja ennustaaksesi myyntitrendejä sekä työn kohdistamiseksi myyntitavoitteiden saavuttamiseksi.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moduulilla {{plural_module_name}} voidaan seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}} edustaaa mahdollista myyntiä ja sisältää asiaankuuluvat myyntitiedot sekä muiden tärkeiden tietueiden, kuten {{quotes_module}}, {{contacts_module}} jne., liittyvät tiedot.
+    'LBL_HELP_RECORD' => '{{plural_module_name}}-moduulilla voidaan seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue edustaa prospektiivista myyntiä ja sisältää vastaavat myyntitiedot sekä muihin tärkeisiin tietuesiin, kuten {{quotes_module}}, {{contacts_module}} jne., liittyviä tietoja.
 
-- Muokkaa tietueen kenttiä napsauttamalla yksittäistä kenttää tai Muokkaa-painiketta.
-- Näytä tai muokkaa linkkejä muihin tietueisiin alapaneeleissa vaihtamalla vasemmanpuoleinen alapaneeli "Tietonäkymään".
-- Luo ja näytä käyttäjien kommentteja ja tallenna muutoshistoria {{activitystream_singular_module}}-moduulissa vaihtamalla vasemmanpuoleinen alapaneeli "Aktiviteettivirta"-näkymään.
-- Seuraa tietuetta ja merkitse se suosikiksi käyttämällä tietueen nimen oikealla puolella olevia kuvakkeita.
-- Muita toimintoja löytyy Toiminno"-pudotusvalikosta Muokkaa-painikkeen oikealla puolella.',
+- Muokkaa tämän tietueen kenttiä napsauttamalla yksittäistä kenttää tai Muokkaa-painiketta.
+- Näytä tai muokkaa linkkejä muihin tietueisiin alapaneeleissa vaihtamalla vasen alapaneeli "Tietonäkymään".
+- Luo ja näytä käyttäjien kommentteja ja tallenna muutoshistoria {{activitystream_singular_module}}-moduulissa vaihtamalla vasen alapaneeli "Aktiviteettivirta"-näkymään.
+- Seuraa tietuetta tai merkitse se suosikiksi käyttämällä tietueen nimen oikealla puolella olevia kuvakkeita.
+- Muita toimintoja löytyy Toiminnot-pudotusvalikosta Muokkaa-painikkeen oikealla puolella.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduulilla {{plural_module_name}} voidaan seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}} edustaa mahdollista myyntiä ja sisältää asiaanmuuluvat myyntitiedot sekä muiden tärkeiden tietueiden, kuten {{quotes_module}}, {{contacts_module}} jne. liittyvät tiedot.
+    'LBL_HELP_CREATE' => '{{plural_module_name}}-moduulilla voidaan seurata yksittäisiä myyntejä ja niihin kuuluvia tuoterivejä alusta loppuun. Kukin {{module_name}}-tietue edustaa prospektiivista myyntiä ja sisältää vastaavat myyntitiedot sekä muihin tärkeisiin tietueisiin, kuten {{quotes_module}}, {{contacts_module}} jne., liittyviä tietoja.
 
 {{module_name}} -tietueen luominen:
 1. Anna kentille haluamasi arvot.
  - "Pakollinen"-kentät tulee täyttää ennen tallentamista.
- - Tarvittaessa saat esille lisää kenttiä napsauttamalla "Näytä lisää".
+ - Saat esille lisää kenttiä tarvittaessa napsauttamalla "Näytä lisää".
 2. Napsauta "Tallenna" viimeistelläksesi uuden tietueen ja palataksesi edelliselle sivulle.',
 
 // END PRO/CORP

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,14 +17,6 @@ class ReportSchedule{
 var $table_name='report_schedules';
     /** @var DBManager */
 var $db;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ReportSchedule()
-    {
-        self::__construct();
-    }
 
     public function __construct()
     {
@@ -207,7 +198,6 @@ function get_report_schedule($report_id){
             $owner = BeanFactory::retrieveBean('Users', $schedule['owner_id']);
             $subscriber = BeanFactory::retrieveBean('Users', $schedule['subscriber_id']);
 
-            require_once 'modules/Reports/utils.php';
             $utils = new ReportsUtilities();
             $utils->sendNotificationOfDisabledReport($schedule['report_id'], $owner, $subscriber);
         }
@@ -344,8 +334,9 @@ function update_next_run_time($schedule_id, $next_run, $interval){
     }
 
 function mark_deleted($id){
-        $query = "UPDATE {$this->table_name} SET deleted = '1' WHERE id = " . $this->db->quoted($id);
-    $GLOBALS['db']->query($query);
+        $query = "UPDATE {$this->table_name} SET deleted = '1' WHERE id = ?";
+        $conn = $this->db->getConnection();
+        $conn->executeQuery($query, array($id));
 }
 
     /**

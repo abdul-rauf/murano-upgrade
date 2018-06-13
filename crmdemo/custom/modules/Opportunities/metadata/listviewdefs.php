@@ -1,16 +1,16 @@
 <?php
-// created: 2018-06-13 11:24:59
+// created: 2018-06-13 14:43:59
 $listViewDefs['Opportunities'] = array (
   'NAME' => 
   array (
-    'width' => '30%',
+    'width' => '30',
     'label' => 'LBL_LIST_OPPORTUNITY_NAME',
     'link' => true,
     'default' => true,
   ),
   'ACCOUNT_NAME' => 
   array (
-    'width' => '20%',
+    'width' => '20',
     'label' => 'LBL_LIST_ACCOUNT_NAME',
     'id' => 'ACCOUNT_ID',
     'module' => 'Accounts',
@@ -39,13 +39,13 @@ $listViewDefs['Opportunities'] = array (
   ),
   'SALES_STAGE' => 
   array (
-    'width' => '10%',
+    'width' => '10',
     'label' => 'LBL_LIST_SALES_STAGE',
     'default' => true,
   ),
   'AMOUNT_USDOLLAR' => 
   array (
-    'width' => '10%',
+    'width' => '10',
     'label' => 'LBL_LIST_AMOUNT_USDOLLAR',
     'align' => 'right',
     'default' => true,
@@ -53,13 +53,13 @@ $listViewDefs['Opportunities'] = array (
   ),
   'DATE_ENTERED' => 
   array (
-    'width' => '10%',
+    'width' => '10',
     'label' => 'LBL_DATE_ENTERED',
     'default' => true,
   ),
   'NEXT_STEP' => 
   array (
-    'width' => '10%',
+    'width' => '10',
     'label' => 'LBL_NEXT_STEP',
     'default' => true,
   ),
@@ -71,7 +71,7 @@ $listViewDefs['Opportunities'] = array (
   ),
   'ASSIGNED_USER_NAME' => 
   array (
-    'width' => '5%',
+    'width' => '5',
     'label' => 'LBL_LIST_ASSIGNED_USER',
     'module' => 'Employees',
     'id' => 'ASSIGNED_USER_ID',
@@ -79,37 +79,37 @@ $listViewDefs['Opportunities'] = array (
   ),
   'OPPORTUNITY_TYPE' => 
   array (
-    'width' => '15%',
+    'width' => '15',
     'label' => 'LBL_TYPE',
     'default' => false,
   ),
   'LEAD_SOURCE' => 
   array (
-    'width' => '15%',
+    'width' => '15',
     'label' => 'LBL_LEAD_SOURCE',
     'default' => false,
   ),
   'PROBABILITY' => 
   array (
-    'width' => '10%',
+    'width' => '10',
     'label' => 'LBL_PROBABILITY',
     'default' => false,
   ),
   'CREATED_BY_NAME' => 
   array (
-    'width' => '10%',
+    'width' => '10',
     'label' => 'LBL_CREATED',
     'default' => false,
   ),
   'TEAM_NAME' => 
   array (
-    'width' => '5%',
+    'width' => '5',
     'label' => 'LBL_LIST_TEAM',
     'default' => false,
   ),
   'MODIFIED_BY_NAME' => 
   array (
-    'width' => '5%',
+    'width' => '5',
     'label' => 'LBL_MODIFIED',
     'default' => false,
   ),

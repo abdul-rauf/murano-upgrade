@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! Përdoruesi i ndërfaqes së Bibliotekës - Shërbimet e Bibliotekës UI lehtësojnë implementimin e pasur të klientit-anësorë të karakteristikave.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Paraqitja e emailit të plotë transferimi i klasës për PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink -Javascript minifier i shkruar në PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Lejon enkriptim të shpejtë të dyanshëm me goditje të peshkut pa kërkuar zgjatjen e  MCrypt PHP.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - Sax parser për HTML dhe dokumentet e tjera të formuara keq XML',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Zgjerimet e Bibliotekës - Zgjerimet në Yahoo! Përdoruesi i ndërfaqës së Bibliotekës nga Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Javascript Blic Lojtari zbulon dhe vendos shkrimin.',
@@ -274,8 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Mirë se vjen në panelin e ndihmës të Sugar 7',
-    'LBL_HELP_RECORD' => 'Minipaneli i ndihmës tregon informacion specifik në lidhje me modulin që po shihni, ofron hapa të detajuara për kryerjen e disa veprimeve në modul dhe ju drejton për informacion më të plotë dhe mbështetje. Minipaneli i ndihmës mbetet i hapur në mënyrë që të mund t&#39;i shikoni hapat ndërkohë që i ekzekutoni në modul. Paneli i ndihmës është në dispozicion për të gjitha modulet e Sugar 7 dhe mund të ndërrohet midis "hapur" dhe "mbyllur" duke klikuar ikonën "Ndihmë" në fund të aplikacionit.',
+    'LBL_HELP_RECORD_TITLE' => 'Ndihmë',
+    'LBL_HELP_RECORD' => 'Ndihma tregon informacione përkatëse për modulin e shfaqur, ofron hapa të detajuar për kryerjen e disa veprimeve në modul dhe të ridrejton në informacionin dhe mbështetjen e mëtejshme.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtri',
 );

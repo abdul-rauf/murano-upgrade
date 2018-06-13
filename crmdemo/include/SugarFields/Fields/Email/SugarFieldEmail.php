@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/SugarFields/Fields/Base/SugarFieldBase.php';
 
 class SugarFieldEmail extends SugarFieldBase
 {
@@ -67,7 +66,7 @@ class SugarFieldEmail extends SugarFieldBase
         }
 
         if (!isset($bean->emailAddress)) {
-            $bean->emailAddress = BeanFactory::getBean('EmailAddresses');
+            $bean->emailAddress = BeanFactory::newBean('EmailAddresses');
         }
         if (empty($bean->emailAddress->addresses) 
             && !isset($bean->emailAddress->hasFetched)) {
@@ -99,7 +98,6 @@ class SugarFieldEmail extends SugarFieldBase
 
             $email = array_merge($mergeAddr, $email);
             if (!SugarEmailAddress::isValidEmail($email['email_address'])) {
-                require_once 'include/api/SugarApiException.php';
                 throw new SugarApiExceptionInvalidParameter("{$email['email_address']} is an invalid email address");
             }
             $bean->emailAddress->addAddress($email['email_address'],
@@ -164,7 +162,7 @@ class SugarFieldEmail extends SugarFieldBase
         }
 
         if (!isset($seed->emailAddress)) {
-            $seed->emailAddress = BeanFactory::getBean('EmailAddresses');
+            $seed->emailAddress = BeanFactory::newBean('EmailAddresses');
         }
         
         $query = $seed->emailAddress->getEmailsQuery($seed->module_name);
@@ -176,7 +174,7 @@ class SugarFieldEmail extends SugarFieldBase
 
         foreach ($beans as $bean) {
             if (!isset($bean->emailAddress)) {
-                $bean->emailAddress = BeanFactory::getBean('EmailAddresses');
+                $bean->emailAddress = BeanFactory::newBean('EmailAddresses');
             }
             // This way if there are no email addresses attached to a bean we don't double-fetch
             $bean->emailAddress->hasFetched = true;

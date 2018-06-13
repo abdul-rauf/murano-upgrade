@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once("modules/Calendar/CalendarUtils.php");
 
 class Meeting extends SugarBean {
 	// Stored fields
@@ -38,7 +36,6 @@ class Meeting extends SugarBean {
 	var $parent_type;
 	var $parent_type_options;
 	var $parent_id;
-	var $field_name_map;
 	var $contact_id;
 	var $user_id;
 	var $meeting_id;
@@ -118,7 +115,7 @@ class Meeting extends SugarBean {
 		    if(empty($field['name'])) {
 		        continue;
 		    }
-			$this->field_name_map[$field['name']] = $field;
+            $this->field_defs[$field['name']] = $field;
 		}
 
         if(!empty($GLOBALS['app_list_strings']['duration_intervals'])) {
@@ -194,7 +191,6 @@ class Meeting extends SugarBean {
         }
 
         if (!empty($this->type) && $this->type != 'Sugar' ) {
-            require_once('include/externalAPI/ExternalAPIFactory.php');
             $api = ExternalAPIFactory::loadAPI($this->type);
         }
 
@@ -578,7 +574,6 @@ class Meeting extends SugarBean {
 
 		$path = SugarConfig::getInstance()->get('upload_dir','upload/') . $this->id;
 
-        require_once 'modules/vCals/vCal.php';
         $content = vCal::get_ical_event($this, $GLOBALS['current_user']);
 
         if (file_put_contents($path, $content)) {
@@ -674,18 +669,7 @@ class Meeting extends SugarBean {
 			return parent::get_notification_recipients();
 		}
 
-        $inviteesList = CalendarUtils::buildInvitesList($this);
-
-        $list = array();
-        foreach ($inviteesList as $id => $module) {
-            $notify_user = BeanFactory::getBean($module, $id);
-            if(!empty($notify_user->id)) {
-                $notify_user->new_assigned_user_name = $notify_user->full_name;
-                $list[$notify_user->id] = $notify_user;
-            }
-        }
-
-		return $list;
+        return CalendarUtils::buildInvitesList($this);
 	}
 
 
@@ -817,7 +801,6 @@ class Meeting extends SugarBean {
     public function setContactInvitees($contactInvitees, $existingContacts = array())
     {
         $this->contacts_arr = $contactInvitees;
-
         $this->upgradeAttachInvitees('contacts', $contactInvitees, $existingContacts);
     }
 
@@ -830,7 +813,6 @@ class Meeting extends SugarBean {
     public function setLeadInvitees($leadInvitees, $existingLeads = array())
     {
         $this->leads_arr = $leadInvitees;
-
         $this->upgradeAttachInvitees('leads', $leadInvitees, $existingLeads);
     }
 
@@ -907,7 +889,6 @@ function getMeetingsExternalApiDropDown($focus = null, $name = null, $value = nu
     $cacheKeyName = 'meetings_type_drop_down';
     $apiList = sugar_cache_retrieve($cacheKeyName);
     if ($apiList === null) {
-        require_once('include/externalAPI/ExternalAPIFactory.php');
 
         $apiList = ExternalAPIFactory::getModuleDropDown('Meetings');
         $apiList = array_merge(array('Sugar' => $app_list_strings['eapm_list']['Sugar']), $apiList);

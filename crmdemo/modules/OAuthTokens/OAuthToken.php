@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 require_once 'vendor/Zend/Oauth/Provider.php';
-require_once 'modules/OAuthKeys/OAuthKey.php';
 
 /**
  * OAuth token
@@ -41,17 +39,6 @@ class OAuthToken extends SugarBean
     const REQUEST = 1;
     const ACCESS = 2;
     const INVALID = 3;
-
-    /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
-     */
-    public function OAuthToken($token = '', $secret = '')
-    {
-        self::__construct($token, $secret);
-    }
 
     public function __construct($token='', $secret='')
 	{
@@ -309,7 +296,9 @@ class OAuthToken extends SugarBean
 	 */
 	public function mark_deleted($id)
 	{
-	    $this->db->query("DELETE from {$this->table_name} WHERE id='".$this->db->quote($id)."'");
+        $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
+        $conn = $this->db->getConnection();
+        $conn->executeQuery($query, array($id));
 	}
 
 	/**

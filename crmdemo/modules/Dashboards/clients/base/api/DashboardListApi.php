@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('data/BeanFactory.php');
-require_once('clients/base/api/FilterApi.php');
 
 class DashboardListApi extends FilterApi
 {
@@ -36,6 +34,7 @@ class DashboardListApi extends FilterApi
                 'method' => 'getDashboards',
                 'shortHelp' => 'Get dashboards for a module',
                 'longHelp' => 'include/api/help/get_dashboards.html',
+                'cacheEtag' => true,
                 'exceptions' => array(
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionError',
@@ -62,6 +61,7 @@ class DashboardListApi extends FilterApi
                 'method' => 'getDashboards',
                 'shortHelp' => 'Get dashboards for home',
                 'longHelp' => 'include/api/help/get_dashboards.html',
+                'cacheEtag' => true,
                 'exceptions' => array(
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionError',
@@ -85,7 +85,7 @@ class DashboardListApi extends FilterApi
      * @throws SugarApiExceptionInvalidParameter If any arguments are invalid.
      * @throws SugarApiExceptionNotAuthorized If we lack ACL access.
      */
-    public function getDashboards($api, $args)
+    public function getDashboards(ServiceBase $api, array $args)
     {
         if (empty($args['filter']) || !is_array($args['filter'])) {
             $args['filter'] = array();
@@ -104,7 +104,7 @@ class DashboardListApi extends FilterApi
         if (!empty($args['view_name'])) {
             $args['filter'][]['view_name'] = $args['view_name'];
         }
-        $args['fields'] = 'id,name,view_name,dashboard_type';
+        $args['fields'] = 'id,name,view_name';
 
         $ret = $this->filterList($api, $args);
 
@@ -122,7 +122,7 @@ class DashboardListApi extends FilterApi
     protected function parseArguments(ServiceBase $api, array $args, SugarBean $seed = null)
     {
         if (!isset($args['order_by'])) {
-            $args['order_by'] = 'dashboard_type:DESC,date_entered:DESC';
+            $args['order_by'] = 'date_entered:DESC';
         }
         $options = parent::parseArguments($api, $args, $seed);
         

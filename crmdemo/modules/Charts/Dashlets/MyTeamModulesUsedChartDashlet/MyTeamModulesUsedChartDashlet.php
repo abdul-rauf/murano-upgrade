@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +17,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 
-require_once('include/Dashlets/DashletGenericChart.php');
 
 class MyTeamModulesUsedChartDashlet extends DashletGenericChart
 {
@@ -47,7 +45,6 @@ class MyTeamModulesUsedChartDashlet extends DashletGenericChart
         require("modules/Charts/chartdefs.php");
         $chartDef = $chartDefs['my_team_modules_used_last_30_days'];
 
-        require_once('include/SugarCharts/SugarChartFactory.php');
         $sugarChart = SugarChartFactory::getInstance();
         $sugarChart->forceHideDataGroupLink = true;
         $sugarChart->setProperties('', $chartDef['chartUnits'], $chartDef['chartType']);

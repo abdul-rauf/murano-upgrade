@@ -1,7 +1,4 @@
 <?php
-if (! defined ( 'sugarEntry' ) || ! sugarEntry)
-    die ( 'Not A Valid Entry Point' ) ;
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +9,6 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'include/MetaDataManager/MetaDataManager.php';
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
@@ -43,14 +39,6 @@ class DynamicField {
         ),
     );
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function DynamicField($module = '')
-    {
-        self::__construct($module);
-    }
-
     public function __construct($module = '') {
         $this->request = InputValidation::getService();
         if (!empty($module)) {
@@ -58,7 +46,9 @@ class DynamicField {
         } else {
             $this->module = $this->request->getValidInputRequest('module', 'Assert\ComponentName', '');
         }
-        $this->base_path = "custom/Extension/modules/{$this->module}/Ext/Vardefs";
+
+        $moduleDir = BeanFactory::getModuleDir($this->module);
+        $this->base_path = "custom/Extension/modules/{$moduleDir}/Ext/Vardefs";
     }
 
    function getModuleName()
@@ -99,7 +89,6 @@ class DynamicField {
     function setLabel( $language='en_us' , $key , $value )
     {
         $params [ "label_" . $key ] = $value;
-        require_once 'modules/ModuleBuilder/parsers/parser.label.php' ;
         $parser = new ParserLabel ( $this->module ) ;
         $parser->handleSave( $params , $language);
     }
@@ -131,9 +120,7 @@ class DynamicField {
 
         static $results = array ( ) ;
 
-        $where = '';
         if (! empty ( $module )) {
-            $where .= " custom_module='$module' AND ";
             unset( $results[ $module ] ) ; // clear out any old results for the module as $results is declared static
         }
         else
@@ -142,15 +129,20 @@ class DynamicField {
         }
 
         $GLOBALS['log']->debug('rebuilding cache for ' . $module);
-        $query = "SELECT * FROM fields_meta_data WHERE $where deleted = 0";
+        $builder = $db->getConnection()->createQueryBuilder();
+        $query = $builder
+            ->select('*')
+            ->from('fields_meta_data');
 
-        $result = $GLOBALS['db']->query ( $query );
-        require_once ('modules/DynamicFields/FieldCases.php');
+        if ($module) {
+            $query->where('custom_module = ' . $builder->createPositionalParameter($module));
+        }
 
-        // retrieve the field definition from the fields_meta_data table
-        // using 'encode'=false to fetchByAssoc to prevent any pre-formatting of the base metadata
-        // for immediate use in HTML. This metadata will be further massaged by get_field_def() and so should not be pre-formatted
-        while ( $row = $GLOBALS['db']->fetchByAssoc ( $result, false ) ) {
+        $query->andWhere('deleted = 0');
+        $stmt = $query->execute();
+
+        require_once 'modules/DynamicFields/FieldCases.php';
+        while ($row = $stmt->fetch()) {
             $field = get_widget ( $row ['type'] );
 
             foreach ( $row as $key => $value ) {
@@ -186,13 +178,14 @@ class DynamicField {
     * Returns the widget for a custom field from the fields_meta_data table.
     */
     function getFieldWidget($module, $fieldName) {
+        global $db;
         if (empty($module) || empty($fieldName)){
             sugar_die("Unable to load widget for '$module' : '$fieldName'");
         }
-        $query = "SELECT * FROM fields_meta_data WHERE custom_module='$module' AND name='$fieldName' AND deleted = 0";
-        $result = $GLOBALS['db']->query ( $query );
-        require_once ('modules/DynamicFields/FieldCases.php');
-        if ( $row = $GLOBALS['db']->fetchByAssoc ( $result ) ) {
+        $query = "SELECT * FROM fields_meta_data WHERE custom_module=? AND name=? AND deleted = 0";
+        $stmt = $db->getConnection()->executeQuery($query, array($module, $fieldName));
+        require_once 'modules/DynamicFields/FieldCases.php';
+        if ($row = $stmt->fetch()) {
             $field = get_widget ( $row ['type'] );
             $field->populateFromRow($row);
             return $field;
@@ -332,7 +325,7 @@ class DynamicField {
             return false;
         }
 
-        $rel_mod = BeanFactory::getBean($field_def['module']);
+        $rel_mod = BeanFactory::newBean($field_def['module']);
         if(empty($rel_mod)) {
             return false;
         }
@@ -395,7 +388,7 @@ class DynamicField {
                 $name = $field['name'];
                 if (empty($this->bean->$name)) { //Don't load the relationship twice
                     $id_name = $field['id_name'];
-                    $mod = BeanFactory::getBean($related_module);
+                    $mod = BeanFactory::newBean($related_module);
 
                     if(!empty($mod) && isset($this->bean->$name)){
                             $mod->relDepth = $this->bean->relDepth + 1;
@@ -471,24 +464,11 @@ class DynamicField {
                 }
             }
             if ($isUpdate) {
-                $db->updateParams(
-                    $this->bean->table_name . "_cstm",
-                    $fields,
-                    $values,
-                    array('id_c' => $values['id_c']),
-                    null,
-                    true,
-                    $db->usePreparedStatements
-                );
+                $db->updateParams($this->bean->table_name . "_cstm", $fields, $values, array(
+                    'id_c' => $values['id_c'],
+                ));
             } else {
-                $db->insertParams(
-                    $this->bean->table_name . "_cstm",
-                    $fields,
-                    $values,
-                    null,
-                    true,
-                    $db->usePreparedStatements
-                );
+                $db->insertParams($this->bean->table_name . "_cstm", $fields, $values);
             }
         }
     }
@@ -567,7 +547,7 @@ class DynamicField {
         $object_name = $this->module;
         $db_name = $field->name;
 
-        $fmd = BeanFactory::getBean('EditCustomFields');
+        $fmd = BeanFactory::newBean('EditCustomFields');
         $id =  $fmd->retrieve($object_name.$db_name,true, false);
         $is_update = false;
         $label = strtoupper( $field->label );
@@ -647,8 +627,7 @@ class DynamicField {
 
     public function saveExtendedAttributes($field, $column_fields)
     {
-        require_once ('modules/ModuleBuilder/parsers/StandardField.php') ;
-        require_once ('modules/DynamicFields/FieldCases.php') ;
+        require_once 'modules/DynamicFields/FieldCases.php';
         global $beanList;
 
         $to_save = array();
@@ -759,7 +738,7 @@ class DynamicField {
      * @return boolean
      */
     function addField($name,$label='', $type='Text',$max_size='255',$required_option='optional', $default_value='', $ext1='', $ext2='', $ext3='',$audited=0, $mass_update = 0 , $ext4='', $help='',$duplicate_merge=0, $comment=''){
-        require_once('modules/DynamicFields/templates/Fields/TemplateField.php');
+        require_once 'modules/DynamicFields/FieldCases.php';
         $field = new TemplateField();
         $field->label = $label;
         if(empty($field->label)){
@@ -922,7 +901,6 @@ class DynamicField {
             $selMod = $this->module;
         }
         $viewPackage = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName', null);
-        require_once 'modules/ModuleBuilder/parsers/parser.label.php' ;
         $parser = new ParserLabel ( $selMod , $viewPackage) ;
         $parser->handleSave ( array('label_'. $systemLabel => $displayLabel ) , $GLOBALS [ 'current_language' ] ) ;
 
@@ -1045,7 +1023,7 @@ class DynamicField {
     }
 
     function getAllFieldsView($view, $type){
-         require_once ('modules/DynamicFields/FieldCases.php');
+        require_once 'modules/DynamicFields/FieldCases.php';
          $results = array();
          foreach($this->bean->field_defs as $name=>$data){
             if(empty($data['source']) || $data['source'] != 'custom_fields')
@@ -1072,3 +1050,4 @@ class DynamicField {
 
     ////////////////////////////END BACKWARDS COMPATIBILITY MODE FOR PRE 5.0 MODULES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 }
+

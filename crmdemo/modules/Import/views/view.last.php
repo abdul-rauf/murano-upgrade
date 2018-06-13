@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,11 +15,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
-require_once('modules/Import/views/ImportView.php');
-require_once('modules/Import/ImportCacheFiles.php');
-require_once('modules/Import/sources/ImportFile.php');
-require_once('modules/Import/views/ImportListView.php');
-require_once('include/ListView/ListViewFacade.php');
 
 class ImportViewLast extends ImportView
 {
@@ -273,7 +267,7 @@ EOJAVASCRIPT;
 				WHERE users_last_import.assigned_user_id = '{$current_user->id}' AND users_last_import.bean_type='Prospect' AND users_last_import.bean_id=prospects.id
 				AND users_last_import.deleted=0 AND prospects.deleted=0";
 
-        $prospect_id='';
+        $prospect_id=[];
         if(!empty($query)){
             $res=$GLOBALS['db']->query($query);
             while($row = $GLOBALS['db']->fetchByAssoc($res))

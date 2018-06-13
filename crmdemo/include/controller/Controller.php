@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,14 +27,6 @@ class Controller extends SugarBean {
 	var $type;  //defines id this is a new list order or existing, or delete
 				// New, Save, Delete
 	
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Controller()
-    {
-        self::__construct();
-    }
-
     public function __construct()
     {
 		parent::__construct();
@@ -315,3 +306,4 @@ function delete_adjust_order($parent_id){
 //End Delete Functions/////////////////////////
 //end class Controller
 }	
+

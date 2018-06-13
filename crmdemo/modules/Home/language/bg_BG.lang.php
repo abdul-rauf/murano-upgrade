@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - Yahoo библиотека за улесняване прилагането на богати функции от страна на клиента.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Пълен клас за имейл трансфер на PHP.',
   'LBL_SOURCE_JSHRINK' => 'JShrink - Програма за компресиране на Javascript, написана в PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Дава възможност за бързо двупосочно Blowfish криптиране, без да изисква Mcrypt PHP разширение.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - Анализаторите SAX за HTML и други за формиране на XML документи.',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Разширена библиотека - Разширение на Yahoo! Потребителски интерфейс библиотека от Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Javascript Flash Player за откриване и съставяне на скрипт.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Добре дошли в електронното табло за помощна информация на Sugar 7',
-    'LBL_HELP_RECORD' => 'Панелът с помощна информация визуализира конкретни данни за разглеждания от вас модул, като описва стъпки при работа със записите в него и посочва къде можете да получите допълнителна информация и поддръжка. Панелът с помощна информация е постоянно отворен и вие имате достъп до него докато работите в модула.
-
-Панелът с помощна информация е наличен за всички модули в Sugar 7 като можете да го визуализирате и скривате ката натискате бутона Помощ в долния десен ъгъл на екрана.',
+    'LBL_HELP_RECORD_TITLE' => 'Помощ',
+    'LBL_HELP_RECORD' => 'Помощ показва конкретна информация за модула, който разглеждате, предоставя подробни стъпки за извършване на някои действия в модула и ви насочва къде да отидете за по-подробна информация и поддръжка.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Филтър',
 );

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -75,14 +74,13 @@ if(!empty($_REQUEST['assigned_user_id'])){
 
 
 if(isset($_REQUEST['team_name']) && !empty($_REQUEST['team_name'])){
-	require_once('include/SugarFields/SugarFieldHandler.php');
 	$sfh = new SugarFieldHandler();
 	$sf = $sfh->getSugarField('Teamset', true);
 
     $teams = $sf->getTeamsFromRequest('team_name');
     $web_team_user = $sf->getPrimaryTeamIdFromRequest('team_name', $_POST);
 
-    $teamSet = BeanFactory::getBean('TeamSets');
+    $teamSet = BeanFactory::newBean('TeamSets');
     $web_team_set_id_user = $teamSet->addTeams(array_keys($teams));
 
 
@@ -90,8 +88,8 @@ if(isset($_REQUEST['team_name']) && !empty($_REQUEST['team_name'])){
     TeamSetManager::add($web_team_set_id_user, 'leads');
 }
 
- $lead = BeanFactory::getBean('Leads');
- $fieldsMetaData = BeanFactory::getBean('EditCustomFields');
+ $lead = BeanFactory::newBean('Leads');
+ $fieldsMetaData = BeanFactory::newBean('EditCustomFields');
  $xtpl=new XTemplate ('modules/Campaigns/WebToLeadForm.html');
  $xtpl->assign("MOD", $mod_strings);
  $xtpl->assign("APP", $app_strings);
@@ -600,7 +598,6 @@ if(isset($Web_To_Lead_Form_html)) $xtpl->assign("BODY", $Web_To_Lead_Form_html);
 if(isset($Web_To_Lead_Form_html)) $xtpl->assign("BODY_HTML", $Web_To_Lead_Form_html); else $xtpl->assign("BODY_HTML", "");
 
 
-require_once('include/SugarTinyMCE.php');
 $tiny = new SugarTinyMCE();
 $tiny->defaultConfig['height']=400;
 $tiny->defaultConfig['apply_source_formatting']=true;

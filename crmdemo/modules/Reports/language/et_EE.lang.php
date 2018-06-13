@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'Ettevõtte aruanded',
   'LBL_CONTACT_REPORTS' => 'Kontakti aruanded',
   'LBL_OPPORTUNITY_REPORTS' => 'Müügivõimaluste aruanded',
+    'LBL_RECENTLY_MODIFIED' => 'Hiljuti muudetud',
 
   'LBL_CASE_REPORTS' => 'Juhtumi aruanded',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'Järgmised 30 päeva',
   'LBL_THIS_YEAR'=>'Sel aastal',
   'LBL_LIST_FORM_TITLE' =>'Aruanded',
+  'LBL_LIST_REPORT_NAME' => 'Nimi',
   'LBL_PROSPECT_REPORTS'=>'Eesmärgi aruanded',
   'LBL_CHART_TYPE'=>'Diagrammi tüüp',
   'LBL_IS_EMPTY'=>'On tühi',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"1) Kliki moodulil Seotud Moodulid, mida soovid kasutada filtrite määratlemisel. Vaikimisi on valitud peamoodul (ülasõlm puuvaates ülal).<br /><br />Sa saad valida seotud mooduli klikates sellel (alamsõlm puuvaates) Laienda sõlme seotud moodulite lisamoodulite vaatamiseks. Moodul, mille valid määrab, millised aruandeväljad kuvatakse Saadaolevad väljad paneelil.<br /><br />2) Kliki Saadaolevad väljad filtrite lisamiseks. Samuti on võimalik otsida välju tekstilahtri abil.<br /><br />Pärast valitud moodulil ükskõik millise koguse väljade valimist Seotud Moodulites, saab valida erineva mooduli, millest saab valida ükskõik kui palju välju filtritena kasutamiseks.<br /><br />3) Vali JAH või VÕI, et määrata, kas kõik või mõni filter on kasutusel aruande tulemuste leidmiseks.<br /><br />4) [Optional] Kliki Lisa filtri grupp filtrite grupi loomiseks. <br /><br />valides ükskõik, millise väljavumbri filtritena kasutamiseks.",
 	'LBL_GROUP_BY_HELP_DESC'=>"Steps to Define Group By:<br />1) Click on a Module in the Related Modules pane that you would like to use to group records in your report. By default, the primary module (top node in the tree view) is selected.<br /><br />You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the Available Fields pane.<br /><br />2) Click on the Field in the Available Fields pane to group records by the field in your report. You can also search for the field by typing in the text box in the pane.<br /><br />After selecting any number of fields from the module selected in the Related Modules pane, you can choose a different module from which you can select any number of fields to group records. However, the report becomes less readable when you group by more than several fields.<br /><br />You can change the order of the fields by dragging and dropping them to the desired position. Changing the order affects the way the results are displayed.<br /><br />For Matrix Reports, you can use a maximum of three fields to group records.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"Steps to Choose Display Columns:<br /><br />1) Click on a Module in the Related Modules pane that you would like to use to display data in your report. By default, the primary module (top node in the tree view) that you chose during the 'Select Module' step is selected.<br /><br />You can select fields from a related module (child node in the tree view) by clicking on the module. Modules related to the modules related to the primary module can also be selected. The module that you select determines which reportable fields appear in the Available Fields pane.<br /><br />2) Click on the Field in the Available Fields pane to display the field data in the records in your report. You can also search for the field by typing in the text box in the pane.<br /><br />After selecting any number of fields from the module selected in the Related Modules pane, you can choose a different module from which you can select additional fields. You can select any number of fields, but the report is generated more slowly and becomes less readable when you add more than necessary fields in the report.<br /><br />You can change the order fields by dragging and dropping them to the desired position. Changing the field order changes the order in which the columns are displayed in the results." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Sammud kuvatavate kokkuvõtete valimiseks:</b><br/><br/>1) Klõpsake paanil <b>Seotud moodulid</b> moodulil, mida soovite oma aruandes kokkuvõtete jaoks kasutada. Vaikimisi on valitud peamoodul (ülasõlm puuvaates ülal).<br/><br/> Saate valida seotud mooduli (alamsõlm puuvaates) sellel klõpsates. Laiendage sõlme seotud moodulite lisamoodulite vaatamiseks. Valitud moodul määrab, millised aruandeväljad kuvatakse paneelil <b>Saadaolevad väljad</b>.<br/><br/>	2) Klõpsake paanil <b>Saadaolevad väljad</b> sobival väljal, et valida oma aruande jaoks kokkuvõtted. Samuti on võimalik otsida välju tekstilahtri abil.<br/><br/>	Pärast paanil <b>Seotud moodulid</b> valitud moodulist mis tahes arvul väljade valimist saate valida erineva mooduli, millest saate valida täiendavaid välju oma aruande kokkuvõtete jaoks.<br/><br/> Maatriksaruannete jaoks saate valida rohkem kui ühe välja, et kuvada oma aruandes ühes lahtris mitu väärtust." ,
 
 	'LBL_ALT_SHOW' => 'Näita',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'See aruanne sisaldab andmeid järgnevatess veerutellimustes:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'Up' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'Information',
     'LBL_REPORT_GRAND_TOTAL' => "Kõik kokku",
+    'LBL_EDIT_REPORT_BUTTON' => 'Redigeeri aruannet',
 
     'LBL_REPORTS_TO' => 'Juhataja',
     'LBL_LESS_THAN_EQUAL' => 'Less Than Equal To',

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/ModuleBuilder/parsers/relationships/AbstractRelationship.php' ;
-require_once 'modules/ModuleBuilder/parsers/relationships/OneToManyRelationship.php' ;
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
 /*
@@ -51,11 +48,11 @@ class ManyToOneRelationship extends AbstractRelationship
         $this->one_to_many = new OneToManyRelationship($onetomanyDef);
     }
 
-    /*
+    /**
      * BUILD methods called during the build
+     * @param bool $update Ignored
      */
-	
-	function buildLabels ()
+    public function buildLabels($update = false)
     {
         return $this->one_to_many->buildLabels();
     }
@@ -108,11 +105,11 @@ class ManyToOneRelationship extends AbstractRelationship
         parent::setName($relationshipName);
     	$this->one_to_many->setname($relationshipName);
     }
-    
-    public function setReadonly ()
+
+    public function setReadonly($set = true)
     {
-        parent::setReadonly();
-    	$this->one_to_many->setReadonly();
+        parent::setReadonly($set);
+        $this->one_to_many->setReadonly($set);
     }
     
     public function delete ()

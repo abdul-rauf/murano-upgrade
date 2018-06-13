@@ -1,6 +1,6 @@
 <?php
-// created: 2012-03-05 15:22:36
-$dictionary["cl_client_list_leads"] = array (
+// created: 2018-06-13 14:43:30
+$dictionary['cl_client_list_leads'] = array (
   'relationships' => 
   array (
     'cl_client_list_leads' => 
@@ -20,18 +20,18 @@ $dictionary["cl_client_list_leads"] = array (
   'table' => 'cl_client_list_leads_c',
   'fields' => 
   array (
-    0 => 
+    'id' => 
     array (
       'name' => 'id',
       'type' => 'varchar',
       'len' => 36,
     ),
-    1 => 
+    'date_modified' => 
     array (
       'name' => 'date_modified',
       'type' => 'datetime',
     ),
-    2 => 
+    'deleted' => 
     array (
       'name' => 'deleted',
       'type' => 'bool',
@@ -39,13 +39,13 @@ $dictionary["cl_client_list_leads"] = array (
       'default' => '0',
       'required' => true,
     ),
-    3 => 
+    'cl_client_2c69nt_list_ida' => 
     array (
       'name' => 'cl_client_2c69nt_list_ida',
       'type' => 'varchar',
       'len' => 36,
     ),
-    4 => 
+    'cl_client_b14ddsleads_idb' => 
     array (
       'name' => 'cl_client_b14ddsleads_idb',
       'type' => 'varchar',

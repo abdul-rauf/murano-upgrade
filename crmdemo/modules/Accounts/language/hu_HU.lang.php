@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Melléklet',
     'LBL_REVENUELINEITEMS' => 'Bevételi sor tételek',
     'LBL_DUNS_NUM' => 'DUN:',
-    'LBL_DNB_BAL_PREVIEW' => 'Számla Előnézete',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Feljegyzések',
 
     // Help Text

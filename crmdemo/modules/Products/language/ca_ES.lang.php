@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Element de línia d&#39;oferta',
     'LBL_LIST_MANUFACTURER' => 'Proveïdor',
     'LBL_MANUFACTURERS' => 'Fabricants',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Nº Peça',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Número de referència',
     'LBL_LIST_QUANTITY' => 'Quantitat',
     'LBL_LIST_COST_PRICE' => 'Cost',
     'LBL_LIST_DISCOUNT_PRICE' => 'Preu',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => '% de Descompte',
     'LBL_LIST_PRICE' => 'Preu de Llista:',
     'LBL_VENDOR_PART_NUM' => 'Número de Parte del Vendedor:',
-    'LBL_MFT_PART_NUM' => 'Número de Parte del Fabricant:',
+    'LBL_MFT_PART_NUM' => 'Número de referència:',
     'LBL_NEXT_STEP' => 'Pas següent:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Data de Preu amb Descompte:',
     'LBL_WEIGHT' => 'Pes:',
@@ -168,6 +168,8 @@ Per crear un {{module_name}}:
  - Feu clic a "Mostra més" per exposar camps addicionals si és necessari.
 2. Feu clic a "Desa" per finalitzar el nou registre i tornar a la pàgina anterior.',
 
-    'LBL_MANUFACTURERS' => 'Fabricants',
     'LBL_PRODUCT_POSITION' => 'Posició de pack de producte',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Llistat de dades del pressupost dels elements de línia pressupostats',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nou element de línia pressupostat)',
+    'LBL_DISCOUNT_PERCENT' => '% Per cent',
 );

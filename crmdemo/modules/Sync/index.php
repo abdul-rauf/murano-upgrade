@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -36,7 +35,7 @@ if(isset($_REQUEST['go_online'])){
 
 	if(!isset($current_user)){
 
-		$current_user = BeanFactory::getBean('Users');
+		$current_user = BeanFactory::newBean('Users');
 		if(isset($_SESSION['authenticated_user_id']))
 		{
 			$result = $current_user->retrieve($_SESSION['authenticated_user_id']);

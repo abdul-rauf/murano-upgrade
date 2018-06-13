@@ -9,8 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'include/SugarSearchEngine/Interface.php';
-require_once 'include/SugarSearchEngine/SugarSearchEngineMetadataHelper.php';
 
 /**
  * Base class for search engine drivers
@@ -61,7 +59,7 @@ abstract class SugarSearchEngineAbstractBase implements SugarSearchEngineInterfa
      */
     public static function markSearchEngineStatus($isDown = true)
     {
-        $admin = BeanFactory::getBean('Administration');
+        $admin = BeanFactory::newBean('Administration');
         $admin->saveSetting('info', 'fts_down', $isDown? 1: 0);
     }
 }

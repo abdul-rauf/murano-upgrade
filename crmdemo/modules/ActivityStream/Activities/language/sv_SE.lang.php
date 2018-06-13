@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,7 @@
 
 $mod_strings = array(
     'TPL_ACTIVITY_CREATE' => 'Skapad {{{str "TPL_ACTIVITY_RECORD" "Activities" object}}} {{str "LBL_MODULE_NAME_SINGULAR" object.module}}.',
-    'TPL_ACTIVITY_POST' => '{{{value}}}{{{str "TPL_ACTIVITY_ON" "Aktiviteter" this}}}',
+    'TPL_ACTIVITY_POST' => '{{{value}}}{{{str "TPL_ACTIVITY_ON" "Activities" this}}}',
     'TPL_ACTIVITY_UPDATE' => 'Uppdaterad {{#if updateStr}}{{{updateStr}}} på {{/if}}{{{str "TPL_ACTIVITY_RECORD" "Activities" object}}}.',
     'TPL_ACTIVITY_UPDATE_FIELD' => '<a rel="tooltip" title="Changed: {{before}} To: {{after}}">{{field_label}}</a>',
     'TPL_ACTIVITY_LINK' => 'Kopplat {{{str "TPL_ACTIVITY_RECORD" "Activities" subject}}} till {{{str "TPL_ACTIVITY_RECORD" "Activities" object}}}.',

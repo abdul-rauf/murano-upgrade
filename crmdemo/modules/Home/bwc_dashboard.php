@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,11 +12,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 global $current_user, $sugar_version, $sugar_config, $beanFiles;
 
-require_once('include/MySugar/MySugar.php');
 
 // build dashlet cache file if not found
 if(!is_file($cachefile = sugar_cached('dashlets/dashlets.php'))) {
-    require_once('include/Dashlets/DashletCacheBuilder.php');
 
     $dc = new DashletCacheBuilder();
     $dc->buildCache();
@@ -145,7 +142,7 @@ if(!$hasUserPreferences){
     }
 
     foreach ($defaultSalesChartDashlets as $salesChartDashlet=>$module){
-		$savedReport = BeanFactory::getBean('Reports');
+		$savedReport = BeanFactory::newBean('Reports');
 		$reportId = $savedReport->retrieveReportIdByName($salesChartDashlet);
 		// clint - fixes bug #20398
 		// only display dashlets that are from visibile modules and that the user has permission to list
@@ -196,7 +193,7 @@ if(!$hasUserPreferences){
 	// BEGIN 'Marketing Page'
 	$marketingDashlets = array();
     foreach ($defaultMarketingChartDashlets as $marketingChartDashlet=>$module){
-		$savedReport = BeanFactory::getBean('Reports');
+		$savedReport = BeanFactory::newBean('Reports');
 		$reportId = $savedReport->retrieveReportIdByName($marketingChartDashlet);
 		// clint - fixes bug #20398
 		// only display dashlets that are from visibile modules and that the user has permission to list
@@ -249,7 +246,7 @@ if(!$hasUserPreferences){
 	// BEGIN 'Support Page'
 	$supportDashlets = array();
     foreach ($defaultSupportChartDashlets as $supportChartDashlet=>$module){
-		$savedReport = BeanFactory::getBean('Reports');
+		$savedReport = BeanFactory::newBean('Reports');
 		$reportId = $savedReport->retrieveReportIdByName($supportChartDashlet);
 		// clint - fixes bug #20398
 		// only display dashlets that are from visibile modules and that the user has permission to list
@@ -321,7 +318,7 @@ if(!$hasUserPreferences){
     }
 
     foreach($defaultTrackingReportDashlets as $name=>$module) {
-    	$savedReport = BeanFactory::getBean('Reports');
+    	$savedReport = BeanFactory::newBean('Reports');
         $reportId = $savedReport->retrieveReportIdByName($name);
 
     	$myDashlet = new MySugar($module);
@@ -572,7 +569,6 @@ $sugar_smarty->assign('mod', return_module_language($GLOBALS['current_language']
 $sugar_smarty->assign('app', $GLOBALS['app_strings']);
 $sugar_smarty->assign('module', 'Home');
 //custom chart code
-require_once('include/SugarCharts/SugarChartFactory.php');
 $sugarChart = SugarChartFactory::getInstance();
 $resources = $sugarChart->getChartResources();
 $mySugarResources = $sugarChart->getMySugarChartResources();

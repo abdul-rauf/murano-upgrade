@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -59,38 +58,6 @@ class SugarModule
      */
     public function loadBean($beanList = null, $beanFiles = null, $returnObject = true)
     {
-        return BeanFactory::getBean($this->_moduleName);
-//         // Populate these reference arrays
-//         if ( empty($beanList) ) {
-//             global $beanList;
-//         }
-//         if ( empty($beanFiles) ) {
-//             global $beanFiles;
-//         }
-//         if ( !isset($beanList) || !isset($beanFiles) ) {
-//             require('include/modules.php');
-//         }
-
-//         if ( isset($beanList[$this->_moduleName]) ) {
-//             $bean = $beanList[$this->_moduleName];
-//             if (isset($beanFiles[$bean])) {
-//                 if ( !$returnObject ) {
-//                     return true;
-//                 }
-//                 if ( !sugar_is_file($beanFiles[$bean]) ) {
-//                     return false;
-//                 }
-//                 require_once($beanFiles[$bean]);
-//                 $focus = new $bean;
-//             }
-//             else {
-//                 return false;
-//             }
-//         }
-//         else {
-//             return false;
-//         }
-
-//         return $focus;
+        return BeanFactory::newBean($this->_moduleName);
     }
 }

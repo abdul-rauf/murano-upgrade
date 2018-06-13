@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,8 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
-require_once('include/connectors/utils/ConnectorUtils.php');
-require_once('include/connectors/sources/SourceFactory.php');
 /**
  * Provides a factory to list, discover and create external API calls
  *

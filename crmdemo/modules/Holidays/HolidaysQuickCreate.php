@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
-require_once('include/EditView/QuickCreate.php');
 
 
 
@@ -27,8 +25,8 @@ class HolidaysQuickCreate extends QuickCreate {
 			
         	$projectBean = BeanFactory::getBean('Project', $_REQUEST['return_id']);
         	
-        	$userBean = BeanFactory::getBean('Users');
-        	$contactBean = BeanFactory::getBean('Contacts');
+        	$userBean = BeanFactory::newBean('Users');
+        	$contactBean = BeanFactory::newBean('Contacts');
         	
         	$projectBean->load_relationship("user_resources");
         	$userResources = $projectBean->user_resources->getBeans($userBean);
@@ -57,7 +55,7 @@ class HolidaysQuickCreate extends QuickCreate {
         $this->javascript = new javascript();
         $this->javascript->setFormName('holidayQuickCreate');
         
-        $focus = BeanFactory::getBean('Holidays');
+        $focus = BeanFactory::newBean('Holidays');
         $this->javascript->setSugarBean($focus);
         $this->javascript->addAllFields('');
 

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
  // $Id: MyOpportunitiesDashlet.php 24647 2007-07-26 00:21:25Z awu $
 
-require_once('include/Dashlets/Dashlet.php');
 
 class TopCampaignsDashlet extends Dashlet 
 { 
@@ -40,7 +38,7 @@ class TopCampaignsDashlet extends Dashlet
         
         if(isset($def['autoRefresh'])) $this->autoRefresh = $def['autoRefresh'];
         
-        $this->seedBean = BeanFactory::getBean('Opportunities');      
+        $this->seedBean = BeanFactory::newBean('Opportunities');      
 
        	$qry = "SELECT C.name AS campaign_name, SUM(O.amount) AS revenue, C.id as campaign_id " .
 			   "FROM campaigns C, opportunities O " .
@@ -61,14 +59,15 @@ class TopCampaignsDashlet extends Dashlet
     /**
 	 * @see Dashlet::display()
 	 */
-	public function display()
+    public function display($text = '')
 	{
     	$ss = new Sugar_Smarty();
     	$ss->assign('lbl_campaign_name', translate('LBL_TOP_CAMPAIGNS_NAME', 'Campaigns'));
     	$ss->assign('lbl_revenue', translate('LBL_TOP_CAMPAIGNS_REVENUE', 'Campaigns'));    	
     	$ss->assign('top_campaigns', $this->top_campaigns);
     	
-    	return parent::display() . $ss->fetch('modules/Campaigns/Dashlets/TopCampaignsDashlet/TopCampaignsDashlet.tpl');
+        return parent::display($text)
+            . $ss->fetch('modules/Campaigns/Dashlets/TopCampaignsDashlet/TopCampaignsDashlet.tpl');
     }
     
     /**

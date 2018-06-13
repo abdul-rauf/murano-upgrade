@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 10:47:53
+// created: 2018-06-13 14:44:00
 $viewdefs['Accounts']['mobile']['view']['list'] = array (
   'panels' => 
   array (

@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,24 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Nabavite potrošački ljuč i tajnu sa Twitter registrovanjem vaše Sugar instance kao nove aplikacije.<br/><br>Koraci za registraciju Vaše instance:<br/><br/><ol><li>Idite na Twitter sajt programera: <a href="http://dev.twitter.com/apps/new" target="_blank">http://dev.twitter.com/apps/new</a>.</li><li>Prijavite se koristeći Twitter nalog sa kojim želite da registrujete aplikaciju.</li><li>U formi za registraciju, unesite naziv za aplikaciju. Ovo je naziv koji će korisnici videti kada potvrde svoje Twitter naloge u Sugar-u.</li><li>Unesite opis</li><li>Unesite web sajt URL aplikacije.</li><li>Unesite Callback URL (može biti bilo šta jer Sugar zaobilazi ovo pri autentifikaciji. Na primer: Unesite svoju URL adresu Sugar-a).</li><li>Prihvatite Twitter API uslove korišćenja.</li><li>U okviru strane aplikacije pronađite potrošački ključ i tajnu pod karticom "Potrošački ključevi". Unesite ključ i tajnu ispod.</li></ol></td></tr></table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
+								<tr>
+									<td valign="top" width="35%" class="dataLabel">
+										Nabavite API ključ i tajnu sa Twitter-a tako što ćete registrovati Sugar instancu kao novu aplikaciju.<br/><br>Koraci za registrovanje instance:<br/><br/>
+										<ol>
+											<li>Idite na Twitter sajt za programere: <a href=\'https://apps.twitter.com\' target=\'_blank\'>https://apps.twitter.com</a>.</li>
+											<li>Prijavite se koristeći Twitter nalog pod kojim želite da registrujete aplikaciju.</li>
+											<li>Unesite naziv aplikacije u okviru formulara za registraciju. To je naziv koji će korisnici videti kada budu potvrđivali Twitter naloge u okviru Sugar-a.</li>
+											<li>Unesite opis.</li>
+											<li>Unesite URL veb-sajta aplikacije.</li>
+											<li>Unesite Callback URL (može da bude bilo šta, pošto Sugar ovo zaobilazi prilikom autentifikacije.Primer: unesite URL Sugar sajta).</li>
+											<li>Prihvatite Twitter API uslove korišćenja usluge.</li>
+											<li>Kliknite na „Kreirajte Twitter aplikaciju“.</li>
+											<li>Pronađite API ključ i API tajnu na stranici aplikacije u okviru kartice „API ključevi“. Unesite ključ i tajnu u nastavku.</li>
+										</ol>
+									</td>
+								</tr>
+							</table>',
     'LBL_NAME' => 'Twitter korisničko ime',
     'LBL_ID' => 'Twitter korisničko ime',
 	'company_url' => 'URL',

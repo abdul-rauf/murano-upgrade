@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -499,13 +498,8 @@ class TemplateField{
      *
      * @param $row The Array key/value pairs from fields_meta_data table
      */
-    function populateFromRow($row=array()) {
-        if (!is_array($row)) {
-            // Make it an array so as to prevent issues later on in this method
-            $row = (array) $row;
-            $GLOBALS['log']->error("Error: TemplateField->populateFromRow expecting Array");
-        }
-
+    public function populateFromRow(array $row)
+    {
         //Bug 24189: Copy fields from FMD format to Field objects and vice versa
         $fmd_to_dyn_map = $this->getFieldMetaDataMapping();
         foreach ($fmd_to_dyn_map as $fmd_key => $dyn_key) {
@@ -621,7 +615,7 @@ class TemplateField{
      */
     protected function get_field_name($module, $name)
     {
-       $bean = BeanFactory::getBean($module);
+       $bean = BeanFactory::newBean($module);
        if(empty($bean) || is_null($bean))
        {
        	  return $name;
@@ -644,7 +638,6 @@ class TemplateField{
 		//	    $GLOBALS['log']->debug('saving field: '.print_r($this,true));
 		$df->addFieldObject($this);
 
-        require_once('modules/ModuleBuilder/parsers/parser.searchfields.php');
         $searchFieldParser = new ParserSearchFields( $df->getModuleName() , $df->getPackageName() ) ;
 	    //If unified_search is enabled for this field, then create the SearchFields entry
 	    $fieldName = $this->get_field_name($df->getModuleName(), $this->name);

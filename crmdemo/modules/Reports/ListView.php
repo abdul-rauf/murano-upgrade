@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,11 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
-require_once('include/contextMenus/contextMenu.php');
-require_once('modules/Reports/schedule/ReportSchedule.php');
-require_once('modules/Reports/ListViewReports.php');
-require_once('modules/Reports/SearchFormReports.php');
-require_once('include/ListView/ListViewSmarty.php');
 
 require SugarAutoLoader::loadWithMetafiles('Reports', 'listviewdefs');
 
@@ -30,7 +23,7 @@ global $mod_strings;
 global $module_map;
 global $report_modules;
 
-$savedReportsSeed = BeanFactory::getBean('Reports');
+$savedReportsSeed = BeanFactory::newBean('Reports');
 $lv = new ListViewReports();
 
 
@@ -68,7 +61,7 @@ if(isset($_REQUEST['Reports2_SAVEDREPORT_offset'])) {//if you click the paginati
 
 if(!empty($_REQUEST['saved_search_select']) && $_REQUEST['saved_search_select']!='_none') {
     if(empty($_REQUEST['button']) && (empty($_REQUEST['clear_query']) || $_REQUEST['clear_query']!='true')) {
-        $saved_search = BeanFactory::getBean('SavedSearch');
+        $saved_search = BeanFactory::newBean('SavedSearch');
         $saved_search->retrieveSavedSearch($_REQUEST['saved_search_select']);
         $saved_search->populateRequest();
     }
@@ -79,7 +72,6 @@ if(!empty($_REQUEST['saved_search_select']) && $_REQUEST['saved_search_select']!
     }
 }
 
-require_once('modules/MySettings/StoreQuery.php');
 $storeQuery = new StoreQuery();
 
 if(!isset($_REQUEST['query']) && empty($_GET['favorite'])){// when we click the 'My Favorate Reports', it should not populate the StoredQuery
@@ -195,7 +187,6 @@ if (!isset($displayColumns['LAST_RUN_DATE'])) {
 
 $lv->export = false;
 $lv->displayColumns = $displayColumns;
-//if(empty($_REQUEST['favorite'])) { // display search form for non-favorite views
 	if(!isset($_REQUEST['search_form']) || $_REQUEST['search_form'] != 'false') {
 	    $searchForm->setup();
 	    if(isset($_REQUEST['searchFormTab']) && $_REQUEST['searchFormTab'] == 'advanced_search') {
@@ -216,13 +207,12 @@ $lv->displayColumns = $displayColumns;
 	        $searchForm->displayBasic();
 	    }
 	}
-//}
 $params = array('massupdate' => true, 'handleMassupdate' => false);
 
 // handle add to favorites request
 $favoritesText = '';
 if((!empty($_POST['addtofavorites']) || !empty($_POST['delete'])) && !empty($_POST['mass'])) {
-    $report = BeanFactory::getBean('Reports');
+    $report = BeanFactory::newBean('Reports');
     if(isset($_POST['Delete'])) {
        	$couldNotDelete = 0;
         foreach($_POST['mass'] as $id) {
@@ -284,24 +274,13 @@ $lv->setup($savedReportsSeed, 'include/ListView/ListViewGeneric.tpl', implode(' 
 if(empty($_REQUEST['favorite'])) { // display search form for non-favorite views
 	// start display
 	// which tab of search form to display
-    //echo get_form_header($mod_strings['LBL_SEARCH_FORM_TITLE'], "", false);
     $lv->displayEndTpl = 'modules/Reports/tpls/MassUpdate.tpl';
 }
 else { // display different ending (with remove from my favorites button);
-    //echo get_form_header($mod_strings['LBL_SEARCH_FORM_TITLE'], "", false);
     $lv->displayEndTpl = 'modules/Reports/tpls/FavoritesEnd.tpl';
 }
 
 echo $lv->display();
-
-$savedSearch = BeanFactory::getBean('SavedSearch');
-$json = getJSONobj();
-// fills in saved views select box on shortcut menu
-$savedSearchSelects = $json->encode(array($GLOBALS['app_strings']['LBL_SAVED_SEARCH_SHORTCUT'] . '<br>' . $savedSearch->getSelect('Reports')));
-$str = "<script>
-YAHOO.util.Event.addListener(window, 'load', SUGAR.util.fillShortcuts, $savedSearchSelects);
-</script>";
-echo $str;
 
 echo <<<EOQ
 <script>

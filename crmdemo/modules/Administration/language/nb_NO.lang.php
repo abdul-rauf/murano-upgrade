@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Utilgjengelig Tema',
     'LBL_TIMEZONE' => 'Tidssone',
     'LBL_TO'    => 'til',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Velg hvilket system og brukerdata som skal følges',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatiskt',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manuellt',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Let etter oppdateringer automatisk</B> - Hvis det er valgt slik, så kommer systemet selv til å lete etter oppdateringer av programmet med jevne mellomrom.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Config.php-filen ble gjenoppbygget vellykket.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Advarsel: Din PHP-konfigurering må endre slik at den tillater at filer som er minst 6MB kan lades opp. Vennligst forandre upload_max_filesize-verdien i din php.ini som finnes:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Vennligst gjør config.php-filen skrivbar og prøv igjen.',
-    'MSG_REBUILD_EXTENSIONS' => 'Vennligst gå til <a href="index.php?module=Administration&action=Upgrade">Repair</a>  og klikk på Gjenoppbygg-forlengelsen.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Vennligst gå til <a href="index.php?module=Administration&action=Upgrade">Repair</a> og klikk på Gjenoppbygg forhold.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Det finnes ingen aktiverte offline-klienter for øyeblikket.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Er du sikker på at du vil koble ut denne Offline-klienten?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Er du sikker på at du vil sette i stand denne Offline-klienten?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Problemer',
 'ML_MANIFEST_ISSUE'=>'Problem med manifestet',
 'ML_CONFIG_OVERRIDE'=>'Konfig endringer er ikke tillatt',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Nøkkel - kan bare bestå av bokstaver, tall og understrek. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Konfigurer snarveilinje',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Velg hvilke moduler som er tilgjengelig i snarveilinjen',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Velg hvilke moduler som brukerne raskt kan oppføringer i ved å bruke Pluss-ikonet i menylinjen. Dra & slipp moduler mellom Aktiverte Moduler- og Deaktiverte Moduler-boksene.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Produsent',
 	'ProductBundleNotes' => 'ProduktPakkeNotis',
 	'ProductBundles'   => 'ProduktPakke',
-	'ProjectResources' => 'ProsjektRessurs',
 
 	'Relationships' => 'Relasjon',
 	'Releases'       => 'Release',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'PlanleggerJobb',
 	'Shippers'       => 'Avsender',
 	'TaxRates'       => 'Skattesatser',
-	'TeamHierarchies'  => 'TeamHierarki',
 	'TeamMemberships'   => 'TeamMedlemskap',
 	'TeamNotices'    => 'Team merknader',
 	'TeamSetModules'   => 'TeamSettModul',

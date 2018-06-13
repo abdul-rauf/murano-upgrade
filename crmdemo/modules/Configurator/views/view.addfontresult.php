@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/MVC/View/SugarView.php');
 class ConfiguratorViewAddFontResult extends SugarView {
    var $log="";
     /**
@@ -71,7 +68,6 @@ class ConfiguratorViewAddFontResult extends SugarView {
                 )
             );
             $embedded = (bool) $this->request->getValidInputRequest('pdf_embedded');
-            require_once('include/Sugarpdf/FontManager.php');
             $fontManager = new FontManager();
             $error = $fontManager->addFont(
                 $uploadFileNames["pdf_font_file"],

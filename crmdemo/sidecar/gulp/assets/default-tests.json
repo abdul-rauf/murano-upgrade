@@ -7,6 +7,7 @@
     // 'tests/suites/offline/*.js', 
     "tests/suites/sugar/*.js",
     "tests/suites/sugarapi/*.js",
+    "tests/suites/sugarlogic/*.js",
     "tests/suites/utils/*.js",
     "tests/suites/view/*.js"
 ]

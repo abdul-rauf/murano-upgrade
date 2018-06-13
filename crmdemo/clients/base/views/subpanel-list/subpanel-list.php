@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,7 +21,6 @@ $viewdefs['base']['view']['subpanel-list'] = array(
                 'event' => 'list:preview:fire',
                 'icon' => 'fa-eye',
                 'acl_action' => 'view',
-                'allow_bwc' => false,
             ),
             array(
                 'type' => 'rowaction',
@@ -31,7 +29,6 @@ $viewdefs['base']['view']['subpanel-list'] = array(
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',
-                'allow_bwc' => true,
             ),
             array(
                 'type' => 'unlink-action',

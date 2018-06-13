@@ -1,6 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,21 +17,16 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  */
 
-require_once('modules/Users/authentication/SugarAuthenticate/SugarAuthenticateUser.php');
-require_once "modules/Mailer/MailerFactory.php"; // imports all of the Mailer classes that are needed
 
 class EmailAuthenticateUser extends SugarAuthenticateUser
 {
     private $passwordLength = 4;
 
     /**
-     * This is called when a user logs in.
-     *
-     * @param string $name
-     * @param string $password
-     * @return boolean
+     * @inheritDoc
      */
-    public function loadUserOnLogin($name, $password) {
+    public function loadUserOnLogin($name, $password, $fallback = false, array $params = array())
+    {
         global $login_error;
 
         $GLOBALS['log']->debug("Starting user load for {$name}");

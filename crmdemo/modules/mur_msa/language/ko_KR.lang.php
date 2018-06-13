@@ -1,14 +1,5 @@
 <?php
-/*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
- */
+// created: 2018-06-13 14:44:36
 $mod_strings = array (
   'LBL_TEAM' => '팀',
   'LBL_TEAMS' => '팀',
@@ -58,7 +49,6 @@ $mod_strings = array (
   'LBL_CITY' => '시:',
   'LBL_CONTACTS_SUBPANEL_TITLE' => '연락처',
   'LBL_COUNTRY' => '국가:',
-  'LBL_DEFAULT_SUBPANEL_TITLE' => '고객',
   'LBL_DESCRIPTION_INFORMATION' => '정보설명',
   'LBL_DUPLICATE' => '중복 가능한 고객',
   'LBL_EMAIL' => '이메일 주소:',

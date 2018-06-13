@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/Users/authentication/SugarAuthenticate/SugarAuthenticate.php';
-require_once 'modules/Users/authentication/SugarAuthenticate/SugarAuthenticateExternal.php';
 require_once 'modules/Users/authentication/SAMLAuthenticate/saml.php';
 
 use Sugarcrm\Sugarcrm\Security\Crypto\CSPRNG;
@@ -290,7 +287,6 @@ class SAMLAuthenticate extends SugarAuthenticate implements SugarAuthenticateExt
     protected function getRequestRegistry()
     {
         if (!$this->requestRegistry) {
-            require_once 'modules/Users/authentication/SAMLAuthenticate/SAMLRequestRegistry.php';
             $this->requestRegistry = new SAMLRequestRegistry();
         }
 

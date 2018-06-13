@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -59,7 +58,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
     function prepare_string($string){
         global $locale;
         $string = html_entity_decode($string, ENT_QUOTES);
-        // return $locale->translateCharset($string, 'UTF-8', $locale->getExportCharset());
         return $string;
     }
      /**
@@ -101,7 +99,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
                     }
 
                 } elseif(!isset($current_users_currency)) { // else use current user's
-                    $currency = $current_users_currency = BeanFactory::getBean('Currencies')->getUserCurrency();
+                    $currency = $current_users_currency = BeanFactory::newBean('Currencies')->getUserCurrency();
                 }
         }
         if(!empty($params['convert']) && $params['convert']) {
@@ -113,16 +111,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
                 $symbol = $params['symbol_override'];
             }
 
-            // BEGIN SUGARPDF
-            /*elseif(!empty($params['type']) && $params['type'] == 'pdf') {
-                $symbol = $currency->getPdfCurrencySymbol();
-                $symbol_space = false;
-            }*/
             elseif(!empty($params['type']) && $params['type'] == 'sugarpdf') {
                 $symbol = $currency->symbol;
                 $symbol_space = false;
             }
-            // END SUGARPDF
 
             else {
                 if(empty($currency->symbol))

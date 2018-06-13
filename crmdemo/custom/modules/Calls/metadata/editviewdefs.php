@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 11:24:59
+// created: 2018-06-13 14:43:24
 $viewdefs['Calls']['EditView'] = array (
   'templateMeta' => 
   array (
@@ -42,15 +42,10 @@ $viewdefs['Calls']['EditView'] = array (
         'field' => '30',
       ),
     ),
-    'javascript' => '<script type="text/javascript" src="include/JSON.js?s=94932f0dc915603816562a2cc59dbcd0&c=1"></script>
-<script type="text/javascript" src="include/jsolait/init.js?s=94932f0dc915603816562a2cc59dbcd0&c=1"></script>
-<script type="text/javascript" src="include/jsolait/lib/urllib.js?s=94932f0dc915603816562a2cc59dbcd0&c=1"></script>
-<script type="text/javascript">{$JSON_CONFIG_JAVASCRIPT}</script>
-<script type="text/javascript" src="include/javascript/jsclass_base.js?s=94932f0dc915603816562a2cc59dbcd0&c=1"></script>
-<script type="text/javascript" src="include/javascript/jsclass_async.js?s=94932f0dc915603816562a2cc59dbcd0&c=1"></script>
-<script type="text/javascript" src="modules/Meetings/jsclass_scheduler.js?s=94932f0dc915603816562a2cc59dbcd0&c=1"></script>
-<script>toggle_portal_flag();function toggle_portal_flag()  {ldelim} {$TOGGLE_JS} {rdelim} 
-function formSubmitCheck(){ldelim}if(check_form(\'EditView\') && isValidDuration()){ldelim}document.forms[\'EditView\'].submit();{rdelim}{rdelim}</script>',
+    'javascript' => '<script type="text/javascript">{$JSON_CONFIG_JAVASCRIPT}</script>
+<script>toggle_portal_flag();function toggle_portal_flag()  {ldelim} {$TOGGLE_JS} {rdelim}
+function disableSaveBtn() {ldelim}document.getElementById(\'SAVE_HEADER\').disabled=true; document.getElementById(\'SAVE_FOOTER\').disabled=true; document.getElementById(\'SAVE_SEND_HEADER\').disabled=true; document.getElementById(\'SAVE_SEND_FOOTER\').disabled=true;{rdelim}
+function formSubmitCheck(){ldelim}var duration=true;if(typeof(isValidDuration)!="undefined"){ldelim}duration=isValidDuration();{rdelim}if(check_form(\'EditView\') && duration && CAL.checkRecurrenceForm()){ldelim}disableSaveBtn();SUGAR.ajaxUI.submitForm("EditView");{rdelim}{rdelim}</script>',
     'useTabs' => true,
     'tabDefs' => 
     array (

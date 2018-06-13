@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,8 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 use Sugarcrm\Sugarcrm\ProcessManager;
 
-require_once 'include/SugarFields/SugarFieldHandler.php';
-require_once 'include/MetaDataManager/MetaDataManager.php';
 
 /**
  * This class is here to provide functions to easily call in to the individual module api helpers
@@ -249,6 +246,9 @@ class SugarBeanApiHelper
             $context['owner_override'] = true;
         }
 
+        // Sanitize the data if needed
+        $submittedData = $this->sanitizeSubmittedData($submittedData);
+
         // check ACLs first
         $acl = !empty($options['acl']) ? $options['acl'] : 'save';
         foreach ($bean->field_defs as $fieldName => $properties) {
@@ -320,6 +320,17 @@ class SugarBeanApiHelper
         }
 
         return $check_notify;
+    }
+
+    /**
+     * Handles cleaning up submitted data for child classes that need that functionality
+     *
+     * @param array $data Submitted data array
+     * @return array
+     */
+    public function sanitizeSubmittedData($data)
+    {
+        return $data;
     }
 
     /**

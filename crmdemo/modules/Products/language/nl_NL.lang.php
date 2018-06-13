@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Geoffreerd product',
     'LBL_LIST_MANUFACTURER' => 'Fabrikant',
     'LBL_MANUFACTURERS' => 'Fabrikanten',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Fab. Nr.',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Onderdeelnummer',
     'LBL_LIST_QUANTITY' => 'Hoeveelheid',
     'LBL_LIST_COST_PRICE' => 'Kostprijs',
     'LBL_LIST_DISCOUNT_PRICE' => 'Netto verkoopprijs',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Korting in %',
     'LBL_LIST_PRICE' => 'Bruto verkoopprijs:',
     'LBL_VENDOR_PART_NUM' => 'Leveranciers artikelnummer:',
-    'LBL_MFT_PART_NUM' => 'Fab. Artikelnummer:',
+    'LBL_MFT_PART_NUM' => 'Onderdeelnummer:',
     'LBL_NEXT_STEP' => 'Volgende stap:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Datum netto verkoopprijs:',
     'LBL_WEIGHT' => 'Gewicht:',
@@ -168,6 +168,8 @@ Om een {{module_name}} aan te maken:
  - Klik op "Toon meer" om extra velden te tonen.
 2. Klik op "Opslaan" om het nieuwe record op te slaan en terug te keren naar de voorgaande pagina.',
 
-    'LBL_MANUFACTURERS' => 'Fabrikanten',
     'LBL_PRODUCT_POSITION' => 'Positie productbundel',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Geoffreerde regelitems offerte gegevenslijst',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => '(Nieuw geoffreerd regelitem)',
+    'LBL_DISCOUNT_PERCENT' => '% Procent',
 );

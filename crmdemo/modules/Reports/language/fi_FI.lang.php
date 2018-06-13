@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'Asiakasraportit',
   'LBL_CONTACT_REPORTS' => 'Kontaktiraportit',
   'LBL_OPPORTUNITY_REPORTS' => 'Myyntimahdollisuusraportit',
+    'LBL_RECENTLY_MODIFIED' => 'Äskettäin muokattu',
 
   'LBL_CASE_REPORTS' => 'Palvelupyyntöraportit',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'Seuraavat 30 päivää',
   'LBL_THIS_YEAR'=>'Tämä vuosi',
   'LBL_LIST_FORM_TITLE' =>'Raportit',
+  'LBL_LIST_REPORT_NAME' => 'Nimi',
   'LBL_PROSPECT_REPORTS'=>'Tavoiteraportit',
   'LBL_CHART_TYPE'=>'Kaavion tyyppi:',
   'LBL_IS_EMPTY'=>'On tyhjä',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>Suodattimien määrittämisen vaiheet:</b><ol><li><p>Klikkaa <b>Liittyvät moduulit</b> -paneelissa olevaa moduulia, jota haluat käyttää suodattimien määrittämiseen. Oletuksena valittuna on ensisijainen moduuli (puunäkymän ylin noodi).</p><p>Voit valita liittyvän moduulin (puunäkymän lapsinoodit) klikkaamalla moduulia. Suurenna noodia nähdäksesi lisää liittyvään moduuliin liittyviä moduuleja.</p><p>Valitsemasi moduuli määrittää, mitkä raportoitavat kentät näkyvät <b>Saatavilla olevat kentät</b> -paneelissa.</p></li><li><p>Klikkaa kenttää <b>Saatavilla olevat kentät</b> -paneelissa lisätäksesi sen suodattimiin. Voit myös etsiä kenttää kirjoittamalla paneelissa olevaan tekstikenttään.</p><p>Edellisessä kohdassa valitun moduulin kenttien valinnan jälkeen, voit valita toisen moduulin mistä valita lisäkenttiä suodattimeen.</p></li><li><p>Käytä <b>JA</b>- ja <b>TAI</b>-operaattoreita määrittääksesi käytetäänkö kaikkia tai mitä tahansa kenttiä raportoitavien tulosten hakemiseen.</p></li><li><p>[Valinnainen] Klikkaa <b>Lisää suodatinryhmä</b> luodaksesi ryhmän suodattimia. Sinulla voi olla rajattomasti suodatinryhmiä ja rajattomasti suodattimia ryhmässä. Näin voidaan luoda sisäkkäisiä suodattimia.</b></li><li><p>[Valinnainen] Valitse suodattimen <b>Ajonaikainen</b>-valinta salliaksesi käyttäjän käyttää suodatinta kustomoidakseen raportin tuloksia katsoessaan raporttia.</p></li></ol>",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>Ryhmityslausekkeen määrityksen vaiheet:</b><ol><li><p>Klikkaa sitä moduulia <b>Liittyvät moduulit</b> -paneelissa, jolla haluaisit ryhmittää raporttisi tietueita.</p><p>Oletuksena on valittu ensisijainen moduuli (puunäkymän ylin noodi).</p><p>Voit valita liittyvän moduulin (puunäkymän lapsinoodit) klikkaamalla moduulia.</p><p>Suurenna noodia nähdäksesi lisää liittyvään moduuliin liittyviä moduuleja.</p><p>Valitsemasi moduuli määrittää, mitkä raportoitavat kentät näkyvät <b>Saatavilla olevat kentät</b> -paneelissa.</p></li><br /><li><p>Klikkaa kenttää <b>Saatavilla olevat kentät</b> -paneelissa ryhmittääksesi raportin tietueita kentän mukaan.</p><p>Voit myös etsiä kenttää kirjoittamalla paneelissa olevaan tekstikenttään.</p><p>Edellisessä kohdassa valitun moduulin kenttien valinnan jälkeen, voit valita toisen moduulin mistä valita lisää kenttiä, joilla ryhmittää tietueita. Huomaa kuitenkin, että raportista tulee vähemmän luettava, mitä enemmän kenttiä käytät ryhmittämiseen.</p><p>Voit muuttaa kenttien järjestystä raahaamalla ne toivottulle paikalle. Järjestyksen muuttaminen muuttaa tulosten esitystapaa.</p><p>Matriisiraporteissa voit käyttää enintään kolmea ryhmityskenttää.</p></li></ol>",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>Näytettävien sarakkeiden valinta:</b><ol><li><p>Klikkaa sitä moduulia <b>Liittyvät moduulit</b> -paneelissa, jolla haluaisit näyttää dataa raportissasi.Oletuksena on valittu ensisijainen moduuli (puunäkymän ylin noodi).</p><p>Voit valita liittyvän moduulin kenttiä (puunäkymän lapsinoodit) klikkaamalla moduulia. Voit myös valita liittyvään moduuliin liittyviä moduuleja.</p><p>Valitsemasi moduuli määrittää, mitkä raportoitavat kentät näkyvät <b>Saatavilla olevat kentät</b> -paneelissa.</p></li><li><p>Klikkaa kenttää <b>Saatavilla olevat kentät</b> -paneelissa näyttääksesi kentän datan raporttisi tietueissa. Voit myös etsiä kenttää kirjoittamalla paneelissa olevaan tekstikenttään.</p><p>Voit valita moduulista niin monta kenttää kuin haluat. Kenttien valinnan jälkeen voit valita uuden moduulin <b>Liittyvät moduulit</b> -paneelista, ja valita uudesta moduulista kenttiä.</p><p>Raporttiin voi lisätä rajattomasti kenttiä, mutta raporttien generoinnista tulee hitaampaa ja raporttien lukeminen hankaloittuu, mitä enemmän kenttiä raportissa on.</p><p>Voit muuttaa kenttien järjestystä raahaamalla ne toivottulle paikalle. Järjestyksen muuttaminen muuttaa tulosten esittelyä.</p></li></ol>" ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Näytettävien yhteenvetojen valitseminen:</b><br/><br/>1) Napsauta <b>Liittyvät moduulit</b> -paneelissa moduulia, jota haluat käyttää raporttisi yhteenvedoissa. Oletuksena on valittu ensisijainen moduuli (puunäkymän lapsisolmu).<br/><br/> Voit valita liittyvän moduulin (puunäkymän lapsisolmut) napsauttamalla moduulia. Suurenna solmua nähdäksesi lisää liittyvään moduuliin liittyviä moduuleja. Valitsemasi moduuli määrittää, mitkä raportoitavat kentät näkyvät <b>Saatavilla olevat kentät</b> -paneelissa.<br/><br/> 2) Napsauta kenttää <b>Saatavilla olevat kentät</b> -paneelissa ja valitse raporttiisi lisättävät yhteenvedot. Voit myös etsiä kenttää kirjoittamalla paneelissa olevaan tekstikenttään.<br/><br/> Kun olet valinnut<b>Liittyvät moduulit</b> -paneelista haluamasi kentät, voit valita toisen moduulin, josta voit valita lisää kenttiä raporttisi yhteenvetoihin.<br/><br/> Matriisiraportteja varten voit valita useampia kenttiä useampien arvojen näyttämiseksi raporttisi yksittäisessä solussa." ,
 
 	'LBL_ALT_SHOW' => 'Näytä',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'Tässä raportissa on dataa seuraavissa sarakejärjestyksissä:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'Ylös' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'Tietoa',
     'LBL_REPORT_GRAND_TOTAL' => "Loppusumma",
+    'LBL_EDIT_REPORT_BUTTON' => 'Muokkaa raporttia',
 
     'LBL_REPORTS_TO' => 'Raportoi henkilölle',
     'LBL_LESS_THAN_EQUAL' => 'Vähemmän tai yhtä kuin',

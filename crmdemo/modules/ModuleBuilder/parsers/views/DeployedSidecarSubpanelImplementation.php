@@ -12,13 +12,7 @@
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
-require_once 'modules/ModuleBuilder/parsers/views/MetaDataImplementationInterface.php';
-require_once 'modules/ModuleBuilder/parsers/views/AbstractMetaDataImplementation.php';
 require_once 'modules/ModuleBuilder/parsers/constants.php';
-require_once 'include/MetaDataManager/MetaDataConverter.php';
-require_once 'include/MetaDataManager/MetaDataManager.php';
-require_once 'include/SubPanel/SubPanelDefinitions.php';
-require_once 'modules/ModuleBuilder/parsers/MetaDataFiles.php';
 
 class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
@@ -53,7 +47,7 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
         $linkName = $this->linkName = $this->detectLinkName($subpanelName, $loadedModule);
 
         // get the link and the related module name as the module we need the subpanel from
-        $bean = BeanFactory::getBean($loadedModule);
+        $bean = BeanFactory::newBean($loadedModule);
         // Get the linkdef, but make sure to tell VardefManager to use name instead by passing true
         $linkDef = VardefManager::getLinkFieldForRelationship($bean->module_dir, $bean->object_name, $subpanelName, true);
         if ($bean->load_relationship($linkName)) {
@@ -62,7 +56,7 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
             $link = new Link2($linkName, $bean);
         }
         $this->_moduleName = $link->getRelatedModuleName();
-        $this->bean = BeanFactory::getBean($this->_moduleName);
+        $this->bean = BeanFactory::newBean($this->_moduleName);
 
         $subpanelFixed = true;
         if(empty($this->bean)) {
@@ -152,12 +146,12 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
     {
         // getting here usually means that the link passed in is from an oldschool layoutdef
         // get the name, get the key, get the link, then we work the magic
-        $spd = new SubPanelDefinitions(BeanFactory::getBean($this->loadedModule));
+        $spd = new SubPanelDefinitions(BeanFactory::newBean($this->loadedModule));
         if (! empty ( $spd->layout_defs )) {
             if (array_key_exists(strtolower($this->linkName), $spd->layout_defs ['subpanel_setup'])) {
                 $aSubPanelObject = $spd->load_subpanel($this->linkName);
                 $this->_moduleName = $aSubPanelObject->get_module_name();
-                $this->bean = BeanFactory::getBean($this->_moduleName);
+                $this->bean = BeanFactory::newBean($this->_moduleName);
                 // convert the old viewdef on the fly
                 $this->convertLegacyViewDef($aSubPanelObject->get_list_fields());
                 return true;
@@ -395,7 +389,7 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
      * @param array defs Layout definition in the same format as received by the constructor
      */
 
-    public function deploy($defs)
+    public function deploy($defs, $clearCache = true)
     {
         // Make a viewdefs variable for saving
         $varname = "viewdefs['{$this->_moduleName}']['{$this->_viewClient}']['view']['{$this->sidecarSubpanelName}']";
@@ -425,8 +419,10 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
         );
 
         $this->saveSidecarSubpanelDefOverride();
-        // clear the cache for this modules only
-        MetaDataManager::refreshModulesCache(array($this->loadedModule, $this->_moduleName));
+        if ($clearCache) {
+            // clear the cache for this modules only
+            MetaDataManager::refreshModulesCache(array($this->loadedModule, $this->_moduleName));
+        }
     }
 
     /**

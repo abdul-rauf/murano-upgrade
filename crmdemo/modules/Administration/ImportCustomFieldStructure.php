@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -27,7 +26,7 @@ if (empty($_FILES)) {
 </form>
 EOQ;
 } else {
-    $fmd = BeanFactory::getBean('EditCustomFields');
+    $fmd = BeanFactory::newBean('EditCustomFields');
 
     echo $mod_strings['LBL_ICF_DROPPING'] . '<br>';
     $lines = file($_FILES['sugfile']['tmp_name']);
@@ -39,7 +38,7 @@ EOQ;
                  $fmd->name . '<br>';
             $fmd->db->query("DELETE FROM $fmd->table_name WHERE id=".$fmd->db->quoted($fmd->id));
             $fmd->save(false);
-            $fmd = BeanFactory::getBean('EditCustomFields');
+            $fmd = BeanFactory::newBean('EditCustomFields');
         } else {
 
             $ln = explode(':::', $line, 2);

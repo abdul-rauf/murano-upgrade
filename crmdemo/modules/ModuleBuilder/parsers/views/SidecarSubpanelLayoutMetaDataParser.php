@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/ModuleBuilder/parsers/views/SidecarListLayoutMetaDataParser.php';
-require_once 'include/MetaDataManager/MetaDataManager.php';
 
 class SidecarSubpanelLayoutMetaDataParser extends SidecarListLayoutMetaDataParser
 {
@@ -36,10 +34,8 @@ class SidecarSubpanelLayoutMetaDataParser extends SidecarListLayoutMetaDataParse
         }
 
         if (empty($packageName)) {
-            require_once 'modules/ModuleBuilder/parsers/views/DeployedSidecarSubpanelImplementation.php';
             $this->implementation = new DeployedSidecarSubpanelImplementation($subpanelName, $moduleName, $client);
         } else {
-            require_once 'modules/ModuleBuilder/parsers/views/UndeployedSidecarSubpanelImplementation.php';
             $this->implementation = new UndeployedSidecarSubpanelImplementation($subpanelName, $moduleName, $packageName, $client);
         }
 
@@ -129,6 +125,15 @@ class SidecarSubpanelLayoutMetaDataParser extends SidecarListLayoutMetaDataParse
     }
 
     /**
+     * Subpanel doesn't support this.
+     * {@inheritDoc}
+     */
+    protected function isAdditionalField(array $field)
+    {
+        return false;
+    }
+
+    /**
      * Returns the name of the relationship corresponding to the given field
      *
      * @param array $def
@@ -153,7 +158,7 @@ class SidecarSubpanelLayoutMetaDataParser extends SidecarListLayoutMetaDataParse
         $linkName = $this->implementation->getLinkName();
         if ($linkName) {
             $moduleName = $this->implementation->getPrimaryModuleName();
-            $bean = BeanFactory::getBean($moduleName);
+            $bean = BeanFactory::newBean($moduleName);
             $def = $bean->getFieldDefinition($linkName);
             if (isset($def['relationship'])) {
                 return $def['relationship'];

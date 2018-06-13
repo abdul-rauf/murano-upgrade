@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -23,7 +22,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * @see LeadFormBase.php, ContactFormBase.php, ProspectFormBase.php
  */
-require_once('include/SugarObjects/forms/FormBase.php');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
@@ -175,8 +173,7 @@ function buildTableForm($rows)
 function checkForDuplicates($prefix='')
 {
 	require_once('include/formbase.php');
-    require_once('include/MVC/SugarModule.php');
-    $focus = BeanFactory::getBean($this->moduleName);
+    $focus = BeanFactory::newBean($this->moduleName);
 
 	$query = $this->getDuplicateQuery($focus, $prefix);
 

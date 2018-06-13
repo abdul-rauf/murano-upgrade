@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/SchedulersJobs/SchedulersJob.php';
-require_once 'include/SugarQueue/jobs/AbstractJobNotification.php';
 
 /**
  * SugarJobUpdateOpportunities.php
@@ -104,7 +102,7 @@ class SugarJobUpdateOpportunities extends JobNotification implements RunnableSch
     {
         $sq = new SugarQuery();
         $sq->select(array('id'));
-        $sq->from(BeanFactory::getBean('Opportunities'));
+        $sq->from(BeanFactory::newBean('Opportunities'));
         $sq->orderBy('date_closed');
 
         $rows = $sq->execute();
@@ -150,7 +148,7 @@ class SugarJobUpdateOpportunities extends JobNotification implements RunnableSch
         global $current_user;
 
         /* @var $job SchedulersJob */
-        $job = BeanFactory::getBean('SchedulersJobs');
+        $job = BeanFactory::newBean('SchedulersJobs');
         $job->name = "Update Old Opportunities";
         $job->target = "class::SugarJobUpdateOpportunities";
         $job->data = json_encode($data);
@@ -159,7 +157,6 @@ class SugarJobUpdateOpportunities extends JobNotification implements RunnableSch
         if (!is_null($job_group)) {
             $job->job_group = $job_group;
         }
-        require_once('include/SugarQueue/SugarJobQueue.php');
         $job_queue = new SugarJobQueue();
         $job_queue->submitJob($job);
 

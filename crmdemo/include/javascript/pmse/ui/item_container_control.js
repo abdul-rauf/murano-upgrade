@@ -49,6 +49,7 @@ ItemContainer.prototype.init = function (settings) {
 		items: [],
 		onAddItem: null,
 		onRemoveItem: null,
+        onMoveItem: null,
 		width: 200,
 		height: 80,
 		textInputMode: this.textInputMode.ALL,
@@ -209,6 +210,20 @@ ItemContainer.prototype.setOnRemoveItemHandler = function (handler) {
 	return this;
 };
 
+/**
+ * Set a function to be called when you move a SingleItem
+ *
+ * @param {Function} handler
+ * @return {ItemContainer}
+ */
+ItemContainer.prototype.setOnMoveChangeHandler = function(handler) {
+    if (!(handler === null || typeof handler === 'function')) {
+        throw new Error('setOnMoveChangeHandler(): The parameter must be a function or null.');
+    }
+    this.onMoveItem = handler;
+    return this;
+};
+
 ItemContainer.prototype._addInputText = function (reference) {
 	var input = this.createHTMLElement("input");
 	input.className = 'adam item-container-input';
@@ -231,6 +246,7 @@ ItemContainer.prototype.clearItems = function () {
 	jQuery(this.html).empty();
 	this._items.clear();
 	this._textInputs.clear();
+    this._selectedIndex = 0;
 	if (this._textInputMode !== this.textInputMode.NONE) {
 		this._addInputText();
 	}
@@ -242,7 +258,6 @@ ItemContainer.prototype.isParentOf = function (item) {
 };
 
 ItemContainer.prototype._paintItem = function (item, index) {
-	var referenceItem;
 	if (this.html) {
 		if(this.isParentOf(item)) {
 			if (typeof index === 'number') {
@@ -263,6 +278,7 @@ ItemContainer.prototype._paintItem = function (item, index) {
 			if(this._textInputMode === this.textInputMode.ALL) {
 				this._addInputText(index || item);
 			}
+            this.fixInputWidths();
 		}
 	}
 	return this;
@@ -271,7 +287,7 @@ ItemContainer.prototype._paintItem = function (item, index) {
 ItemContainer.prototype._paintItems = function () {
 	var i, items = this._items.asArray();
 	if (this.html) {
-		if (this._textInputMode === this.textInputMode.ALL) {
+        if (this._textInputMode === this.textInputMode.ALL && this._textInputs.getSize() === 0) {
 	    	this._addInputText();
 	    }
     	for(i = 0; i < items.length; i++) {
@@ -312,10 +328,17 @@ ItemContainer.prototype.addItem = function(item, index, noFocusNext, skipCallbac
 	}
 	item.setParent(this);
 	item.setOnRemoveHandler(this._onRemoveItemHandler());
+
+    if (_.isUndefined(index)) {
+        index = this._selectedIndex;
+    }
+
 	if (typeof index === 'number' && index >= 0) {
 		this._items.insertAt(item, index);
+        this._selectedIndex = index + 1;
 	} else {
 		this._items.insert(item);
+        this._selectedIndex = this._items.getSize();
 	}
 
 	if (!this._massiveAction) {
@@ -349,6 +372,24 @@ ItemContainer.prototype.removeItem = function (item) {
 			.end().remove();
 	}
 	return this;
+};
+
+/**
+ * Add an item to a specific location
+ *
+ * @param {SingleItem} item
+ * @param {number} newIndex where to put the item
+ * @return {ItemContainer}
+ */
+ItemContainer.prototype.moveItem = function(item, newIndex) {
+    if (!(item instanceof SingleItem || typeof item === 'object')) {
+        throw new Error('The paremeter must be of type SingleItem.');
+    }
+
+    this._items.remove(item);
+    this._items.insertAt(item, newIndex);
+    this.onMoveItem(this);
+    return this;
 };
 
 ItemContainer.prototype.setVisible = function (value) {
@@ -445,6 +486,43 @@ ItemContainer.prototype._onBlur = function () {
 	};
 };
 
+/**
+ * Change the input widths to extend to end of line
+ */
+ItemContainer.prototype.fixInputWidths = function() {
+    var elements = $(this.html).children();
+
+    if (elements.length === 0) {
+        return;
+    }
+    var lineWidth = 0;
+
+    // Subtract 17px from width to allow room for the scroll bar
+    var totalWidth = $(this.html).width() - 17;
+
+    _.each(elements, function(element) {
+        var $element = $(element);
+        if ($element.hasClass('item-container-input')) {
+            $element.width(1);
+        }
+        var elementWidth = $element.outerWidth(true);
+
+        if (lineWidth + elementWidth >= totalWidth) {
+            if ($element.hasClass('single-item')) {
+                var prevInput = $element.prev();
+                var newWidth = totalWidth - lineWidth;
+                if (newWidth < 1) {
+                    newWidth = 1;
+                }
+                prevInput.width(newWidth);
+                lineWidth = elementWidth;
+            }
+        } else {
+            lineWidth += elementWidth;
+        }
+    }, this);
+};
+
 ItemContainer.prototype._attachListeners = function () {
 	var that, _tempValue = "";
 	if(this.html) {
@@ -455,17 +533,15 @@ ItemContainer.prototype._attachListeners = function () {
 			}
 		}).on('click', function () {
 			that._blurSemaphore = true;
+            that.fixInputWidths();
 			that.select();
 		}).on('focusin', function(e) {
-			//console.log("focusin");
 			clearInterval(that._blurTimer);
 			if(that._blurred && typeof that.onFocus === 'function' && that._blurSemaphore) {
 				that._blurred = false;
 				that.onFocus(that);
 			}
 		}).on('focusout', function(e) {
-			//console.log("focusout");
-			//console.log(that._blurSemaphore);
 			if (!that._blurred) {
 				that._blurTimer = setInterval(that._onBlur(), 20);
 			}
@@ -580,6 +656,7 @@ ItemContainer.prototype._attachListeners = function () {
 };
 
 ItemContainer.prototype.createHTML = function() {
+    var self = this;
 	if (!this.html) {
 		this.html = this.createHTMLElement('ul');
 		this.html.className = "adam item-container";
@@ -591,9 +668,37 @@ ItemContainer.prototype.createHTML = function() {
             height: this.height,
             zIndex: this.zOrder
         });
+        this._textInputs.clear();
         this._paintItems();
         this._attachListeners();
         this.setVisible(this.visible);
+
+        // Let pills be moveable
+        $(this.html).sortable({
+            items: 'li',
+            opacity: 1,
+            forcePlaceholderSize: true,
+            placeholder: 'adam single-item pill-placeholder',
+            tolerance: 'pointer',
+            start: function(e, ui) {
+                var inputs = $(self.html).find('input');
+                _.each(inputs, function(input) {
+                    $(input).width(1);
+                });
+            },
+            update: function(e, ui) {
+                var movedItem = self._items.find('id', ui.item.context.id);
+                var newIndex = ui.item.parent().children('li').index(ui.item[0]);
+                self.moveItem(movedItem, newIndex);
+                var items = self._items.asArray();
+                self.setItems(items);
+                // Reset the event listeners for each of the SingleItems
+                _.each(items, function(item) {
+                    item._eventListenersAttached = false;
+                    item._attachListeners();
+                });
+            }
+        });
 	}
 	return this.html;
 };

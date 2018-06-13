@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,7 +13,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  // $Id: MyPipelineBySalesStageDashlet.php 55931 2010-04-09 18:25:11Z jmertic $
 
 
-require_once('include/Dashlets/DashletGenericChart.php');
 
 class MyPipelineBySalesStageDashlet extends DashletGenericChart
 {
@@ -73,7 +71,6 @@ class MyPipelineBySalesStageDashlet extends DashletGenericChart
     {
         global $sugar_config, $current_user, $timedate;
 
-        require_once('include/SugarCharts/SugarChartFactory.php');
 		$sugarChart = SugarChartFactory::getInstance();
 		$sugarChart->base_url = array( 	'module' => 'Opportunities',
 								'action' => 'index',

@@ -10,5 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-    'LBL_BUNDLE_NOTE_POSITION' => 'Position du lot produit'
+    'LBL_BUNDLE_NOTE_POSITION' => 'Position du lot produit',
+    'LBL_PRODUCT_BUNDLE_NOTES_QUOTE_DATA_LIST' => 'Liste de données de devis pour les notes sur le groupe de produits',
 );

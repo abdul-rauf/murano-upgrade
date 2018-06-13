@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,8 +27,6 @@ abstract class ServiceBase implements LoggerAwareInterface
     abstract protected function handleException(Exception $exception);
 
     protected function loadServiceDictionary($dictionaryName) {
-        require_once("include/api/{$dictionaryName}.php");
-
         $dict = new $dictionaryName();
 
         // Load the dictionary, because if the dictionary isn't there it will generate it.
@@ -86,12 +83,6 @@ abstract class ServiceBase implements LoggerAwareInterface
     {
         global $current_language;
         $current_language = $GLOBALS['sugar_config']['default_language'];
-        if (!empty($GLOBALS['HTTP_RAW_POST_DATA'])) {
-            $postContents = json_decode($GLOBALS['HTTP_RAW_POST_DATA'], true);
-            if (!empty($postContents['current_language'])) {
-                $current_language = $postContents['current_language'];
-            }
-        }
 
         $GLOBALS['app_strings'] = return_application_language($current_language);
         $GLOBALS['app_list_strings'] = return_app_list_strings_language($current_language);
@@ -171,33 +162,6 @@ abstract class ServiceBase implements LoggerAwareInterface
     }
 
     /**
-     * Capture PHP error output and handle it
-     *
-     * @param string $errorType The error type to hand down through the exception (default: 'php_error')
-     * @throw SugarApiExceptionError
-     */
-    public function handleErrorOutput($errorType = 'php_error')
-    {
-        if (ob_get_level() > 0 && ob_get_length() > 0) {
-            // Looks like something errored out first
-            $errorOutput = ob_get_clean();
-            if (trim(str_replace("\xEF\xBB\xBF", '', $errorOutput)) == '') {
-                // whitespace only and BOM
-                // we may let it slide on account of 6.x having broken templates with whitespace
-                // See BR-1038
-                return;
-            }
-            $GLOBALS['log']->error("A PHP error occurred:\n" . $errorOutput);
-            $e = new SugarApiExceptionError();
-            $e->errorLabel = $errorType;
-            if (inDeveloperMode()) {
-                $e->setExtraData('error_output', $errorOutput);
-            }
-            throw $e;
-        }
-    }
-
-    /**
      * Validate the given platform name against the known platform list.
      *
      * As the platform has not been enforced in the past, this functionality
@@ -231,7 +195,7 @@ abstract class ServiceBase implements LoggerAwareInterface
                         $this->logger->alert($violation->getMessage());
                         $raiseException = true;
                     } else {
-                        $this->logger->alert($violation->getMessage());
+                        $this->logger->warning($violation->getMessage());
                     }
                     break;
                 default:

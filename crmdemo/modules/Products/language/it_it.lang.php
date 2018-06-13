@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Prodotto',
     'LBL_LIST_MANUFACTURER' => 'Produttore',
     'LBL_MANUFACTURERS' => 'Produttori',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Numero Mft',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Numero parte',
     'LBL_LIST_QUANTITY' => 'Quantità',
     'LBL_LIST_COST_PRICE' => 'Costo',
     'LBL_LIST_DISCOUNT_PRICE' => 'Prezzo Scontato',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Sconto in %',
     'LBL_LIST_PRICE' => 'Prezzo di listino:',
     'LBL_VENDOR_PART_NUM' => 'Numero componente fornitore:',
-    'LBL_MFT_PART_NUM' => 'Numero componente Mft:',
+    'LBL_MFT_PART_NUM' => 'Numero parte:',
     'LBL_NEXT_STEP' => 'Prossimo Passo:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Data del prezzo scontato:',
     'LBL_WEIGHT' => 'Peso:',
@@ -164,9 +164,11 @@ $mod_strings = array(
 Per creare un {{module_name}}: 
 1. Compila i campi con i valori desiderati 
 - I campi contrassegnati come "Obbligatorio" devono essere compilati prima del salvataggio. 
-- Clicca "Mostra più Moduli" per visualizzare ulteriori campi se necessario. 
+- Clicca "Altri dettagli" per visualizzare ulteriori campi se necessario. 
 2. Clicca "Salva" per salvare il nuovo record e tornare alla pagina precedente.',
 
-    'LBL_MANUFACTURERS' => 'Produttori',
     'LBL_PRODUCT_POSITION' => 'Posizione Pacchetto Prodotto',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Voci quotate Elenco dati dell&#39;offerta',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nuova voce quotata)',
+    'LBL_DISCOUNT_PERCENT' => '% percentuale',
 );

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +11,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 
-require_once('include/Sugarpdf/Sugarpdf.php');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
@@ -190,7 +188,13 @@ class ProjectSugarpdfProjectgrid extends Sugarpdf{
         $this->fileName = "{$filename}.pdf";
     }
 
-    public function Output()
+    /**
+     * {@inheritDoc}
+     *
+     * @param string $name Ignored
+     * @param string $dest Ignored
+     */
+    public function Output($name = 'doc.pdf', $dest = 'I')
     {
         // the "D" will ensure forced download instead of displayed in browser
         return parent::Output($this->fileName,"D");

@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,7 +27,13 @@ class SugarUpgradeRemoveFiles extends UpgradeScript
         }
 
         $caseInsensitiveFS = $this->upgrader->context['case_insensitive_fs'];
+        $foldersToCheck = array();
+
         foreach ($this->state['files_to_delete'] as $file) {
+            $deleter = isset($this->state['files_deleter'][$file]) ?
+                implode('/', $this->state['files_deleter'][$file]) :
+                'N/A';
+
             $file = SugarAutoLoader::normalizeFilePath($file);
             // If we're using a case-insensitive file-system and the
             // file is not present as we specified it, don't remove it.
@@ -37,12 +42,30 @@ class SugarUpgradeRemoveFiles extends UpgradeScript
             }
 
             $this->backupFile($file);
-            $this->log("Removing $file");
+            $this->log("[$deleter] Removing $file");
 
             if (is_dir($file)) {
                 $this->removeDir($file);
+                $foldersToCheck[$file] = false;
             } else {
                 $this->unlink($file);
+                $folder = dirname($file);
+
+                if (!isset($foldersToCheck[$folder])) {
+                    $foldersToCheck[$folder] = true;
+                }
+            }
+        }
+
+        foreach ($foldersToCheck as $folder => $remove) {
+            if (!$remove) {
+                continue;
+            }
+
+            $numberOfFiles = count(glob($folder . '/*'));
+
+            if ($numberOfFiles === 0) {
+                $this->removeDir($folder);
             }
         }
 

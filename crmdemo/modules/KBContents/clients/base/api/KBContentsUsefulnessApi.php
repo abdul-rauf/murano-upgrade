@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/ModuleApi.php');
 
 class KBContentsUsefulnessApi extends ModuleApi
 {
@@ -47,7 +46,7 @@ class KBContentsUsefulnessApi extends ModuleApi
      *
      * @return array An array version of the SugarBean with only the requested fields (also filtered by ACL)
      */
-    protected function vote(ServiceBase $api, $args, $isUseful)
+    protected function vote(ServiceBase $api, array $args, $isUseful)
     {
         $this->requireArgs($args, array('module', 'record'));
         $bean = $this->loadBean($api, $args, 'view');
@@ -105,7 +104,7 @@ class KBContentsUsefulnessApi extends ModuleApi
      *
      * @return array An array version of the SugarBean with only the requested fields (also filtered by ACL)
      */
-    public function voteUseful($api, $args)
+    public function voteUseful(ServiceBase $api, array $args)
     {
         return $this->vote($api, $args, true);
     }
@@ -118,7 +117,7 @@ class KBContentsUsefulnessApi extends ModuleApi
      *
      * @return array An array version of the SugarBean with only the requested fields (also filtered by ACL)
      */
-    public function voteNotUseful($api, $args)
+    public function voteNotUseful(ServiceBase $api, array $args)
     {
         return $this->vote($api, $args, false);
     }

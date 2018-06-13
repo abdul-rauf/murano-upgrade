@@ -12,7 +12,6 @@
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
-require_once('include/tabs.php');
 /**
  * Old search form
  * @api
@@ -58,14 +57,6 @@ class SearchForm {
       * @var Request
       */
      protected $request;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SearchForm($module, $seedBean, $tpl = null)
-    {
-        self::__construct($module, $seedBean, $tpl);
-    }
 
     /**
      * loads SearchFields MetaData, sets member variables
@@ -138,7 +129,7 @@ class SearchForm {
                         }
                     }
                     if($addAllBeanFields) {
-                        foreach($this->bean->field_name_map as $key => $params) {
+                        foreach ($this->bean->field_defs as $key => $params) {
                             if(in_array($key . '_basic' , $arrayKeys) && !in_array($key, $searchFieldsKeys)) {
 
                                 $this->searchFields[$key] = array('query_type' => 'default',
@@ -154,7 +145,7 @@ class SearchForm {
                         }
                     }
                     if((empty($array['massupdate']) || $array['massupdate'] == 'false') && $addAllBeanFields) {
-                        foreach($this->bean->field_name_map as $key => $params) {
+                        foreach ($this->bean->field_defs as $key => $params) {
                             if(in_array($key, $arrayKeys) && !in_array($key, $searchFieldsKeys)) {
                                 $this->searchFields[$key] = array('query_type' => 'default',
                                                                   'value'      => $array[$key]);
@@ -172,7 +163,7 @@ class SearchForm {
                         }
                     }
                     if($addAllBeanFields) {
-                        foreach($this->bean->field_name_map as $key => $params) {
+                        foreach ($this->bean->field_defs as $key => $params) {
                             if(!in_array($key, $searchFieldsKeys)) {
                                 if(in_array($key . '_basic', $arrayKeys) ) {
                                     $this->searchFields[$key] = array('query_type' => 'default',
@@ -229,8 +220,9 @@ class SearchForm {
             // Jenny - Bug 7462: We need a type check here to avoid database errors
             // when searching for numeric fields. This is a temporary fix until we have
             // a generic search form validation mechanism.
-            $type = (!empty($this->bean->field_name_map[$field]['type']))?$this->bean->field_name_map[$field]['type']:'';
-        	if(!empty($this->bean->field_name_map[$field]['source']) && $this->bean->field_name_map[$field]['source'] == 'custom_fields'){
+            $type = !empty($this->bean->field_defs[$field]['type']) ? $this->bean->field_defs[$field]['type'] : '';
+            if (!empty($this->bean->field_defs[$field]['source'])
+                && $this->bean->field_defs[$field]['source'] == 'custom_fields') {
                 $customField = true;
               }
 
@@ -269,7 +261,7 @@ class SearchForm {
                     $field_value = '';
 
                     // If it is a custom field of multiselect we have to do some special processing
-                    if($customField && !empty($this->bean->field_name_map[$field]['isMultiSelect']) && $this->bean->field_name_map[$field]['isMultiSelect']) {
+                    if ($customField && !empty($this->bean->field_defs[$field]['isMultiSelect'])) {
 	                    $operator = 'custom_enum';
 	                    $db_field = $this->bean->table_name .  "_cstm." . $field;
 	                    foreach($parms['value'] as $key => $val) {
@@ -429,7 +421,7 @@ class SearchForm {
         $tabPanel = new SugarWidgetTabs($this->tabs, $currentKey, 'SUGAR.searchForm.searchFormSelect');
 
         if(isset($_REQUEST['saved_search_select']) && $_REQUEST['saved_search_select']!='_none') {
-            $saved_search = BeanFactory::getBean('SavedSearch');
+            $saved_search = BeanFactory::newBean('SavedSearch');
             $saved_search->retrieveSavedSearch($_REQUEST['saved_search_select']);
         }
 
@@ -549,7 +541,6 @@ class SearchForm {
         echo "<div id='{$this->module}saved_viewsSearchForm' " . (($view == 'saved_views') ? '' : "style='display: none'") . ">" . $saved_views_text . "</div>";
         echo $this->getButtons();
         echo '</form>';
-       // echo '<script type="text/javascript">Calendar.setup ({inputField : "search_jscal_field", ifFormat : "'.$timedate->get_cal_date_format().'", showsTime : false, button : "search_jscal_trigger", singleClick : true, step : 1});</script>';
     }
 
     /**
@@ -595,7 +586,7 @@ class SearchForm {
         $this->bean->custom_fields->populateAllXTPL($this->xtpl, 'search' );
         if(!empty($listViewDefs) && !empty($lv)){
             $GLOBALS['log']->debug('SearchForm.php->displayAdvanced(): showing saved search');
-            $savedSearch = BeanFactory::getBean('SavedSearch');
+            $savedSearch = BeanFactory::newBean('SavedSearch');
             $savedSearch->init($listViewDefs[$this->module], $lv->data['pageData']['ordering']['orderBy'], $lv->data['pageData']['ordering']['sortOrder']);
             $this->xtpl->assign('SAVED_SEARCH', $savedSearch->getForm($this->module, false));
             $this->xtpl->assign('MOD_SAVEDSEARCH', return_module_language($current_language, 'SavedSearch'));
@@ -632,7 +623,7 @@ class SearchForm {
     function displaySavedViews($listViewDefs, $lv, $header = true, $return = false) {
         global $current_user;
 
-        $savedSearch = BeanFactory::getBean('SavedSearch');
+        $savedSearch = BeanFactory::newBean('SavedSearch');
         $savedSearch->init($listViewDefs[$this->module], $lv->data['pageData']['ordering']['orderBy'], $lv->data['pageData']['ordering']['sortOrder']);
 
         if($header) {
@@ -653,7 +644,7 @@ class SearchForm {
         global $app_strings;
 
         $SAVED_SEARCHES_OPTIONS = '';
-        $savedSearch = BeanFactory::getBean('SavedSearch');
+        $savedSearch = BeanFactory::newBean('SavedSearch');
         $SAVED_SEARCHES_OPTIONS = $savedSearch->getSelect($this->module);
         $str = "<input tabindex='2' title='{$app_strings['LBL_SEARCH_BUTTON_TITLE']}' onclick='SUGAR.savedViews.setChooser()' class='button' type='submit' name='button' value='{$app_strings['LBL_SEARCH_BUTTON_LABEL']}' id='search_form_submit'/>&nbsp;";
         $str .= "<input tabindex='2' title='{$app_strings['LBL_CLEAR_BUTTON_TITLE']}' onclick='SUGAR.searchForm.clear_form(this.form); return false;' class='button' type='button' name='clear' value=' {$app_strings['LBL_CLEAR_BUTTON_LABEL']} ' id='search_form_clear'/>";
@@ -691,3 +682,4 @@ class SearchForm {
         return $str;
     }
 }
+

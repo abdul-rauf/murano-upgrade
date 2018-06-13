@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,24 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Obţineţi Cheia API şi API Secret de pe Twitter, înregistrându-vă instanţa Sugar ca aplicaţie nouă.<br/><br>Paşi pentru înregistrarea instanţei:<br/><br/><ol><li>Accesaţi site-ul Twitter Developers: <a href=&#39;http://dev.twitter.com/apps/new&#39; target=&#39;_blank&#39;>http://dev.twitter.com/apps/new</a>.</li><li>Conectaţi-vă folosind contul Twitter în care doriţi să înregistraţi aplicaţia.</li><li>În formularul de înregistrare, introduceţi un nume pentru aplicaţie. Acesta este numele pe care îl vor vedea utilizatorii când se autentifică în conturile lor Twitter din Sugar.</li><li>Introduceţi o descriere.</li><li>Introduceţi un URL pentru site-ul web al aplicaţiei.</li><li>Introduceţi un URL de apelare inversă (poate fi orice fel de URL, deoarece Sugar îl omite la autentificare. Exemplu: Introduceţi adresa URL a site-ului dvs. Sugar)</li><li>Acceptaţi Termenii serviciului API Twitter</li><li>Faceţi clic pe „Creaţi-vă aplicaţia Twitter”.</li><li>În pagina aplicaţiei, găsiţi Cheia API şi API Secret în fila „Chei API”. Introduceţi Cheia API şi API Secret mai jos.</li></ol></td></tr></table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
+								<tr>
+									<td valign="top" width="35%" class="dataLabel">
+										Obțineți API Key și API Secret de la Twitter înregistrând instanța Sugar ca aplicație nouă.<br/><br>Pași pentru înregistrarea instanței:<br/><br/>
+										<ol>
+											<li>Accesați site-ul pentru dezvoltatori Twitter: <a href=\'https://apps.twitter.com\' target=\'_blank\'>https://apps.twitter.com</a>.</li>
+											<li>Conectați-vă folosind contul Twitter cu care doriți să înregistrați aplicația.</li>
+											<li>În formularul de înregistrare, introduceți un nume pentru aplicație. Acesta este numele pe care utilizatorii îl vor vedea când se vor autentifica cu conturile lor Twitter din Sugar.</li>
+											<li>Introduceți o Descriere.</li>
+											<li>Introduceți o adresă URL pentru site-ul web al aplicației.</li>
+											<li>Introduceți o adresă URL de apelare inversă (poate fi oricare, deoarece Sugar o omite la autentificare. Exemplu: Introduceți adresa URL a site-ului dvs. Sugar).</li>
+											<li>Acceptați Termenii de utilizare pentru API Twitter.</li>
+											<li>Faceți clic pe „Creați aplicația dvs. Twitter”.</li>
+											<li>În pagina aplicației, găsiți API Key și API Secret în fila „Chei API”. Introduceți Key și Secret mai jos.</li>
+										</ol>
+									</td>
+								</tr>
+							</table>',
     'LBL_NAME' => 'Nume utilizator Twitter',
     'LBL_ID' => 'Nume utilizator Twitter',
 	'company_url' => 'URL',

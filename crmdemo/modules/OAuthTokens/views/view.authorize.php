@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +11,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 
-require_once 'include/SugarOAuthServer.php';
 
 class OauthTokensViewAuthorize extends SugarView
 {
@@ -38,13 +36,6 @@ class OauthTokensViewAuthorize extends SugarView
 
         if(empty($_REQUEST['confirm'])) {
             $sugar_smarty->assign('consumer', sprintf($GLOBALS['mod_strings']['LBL_OAUTH_CONSUMERREQ'], $token->consumer_obj->name));
-// SM: roles disabled for now
-//            $roles = array('' => '');
-//            $allroles = ACLRole::getAllRoles();
-//            foreach($allroles as $role) {
-//                $roles[$role->id] = $role->name;
-//            }
-//            $sugar_smarty->assign('roles', $roles);
             $hash = md5(rand());
             $_SESSION['oauth_hash'] = $hash;
             $sugar_smarty->assign('hash', $hash);

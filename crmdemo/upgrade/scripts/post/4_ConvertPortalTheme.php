@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -40,7 +39,7 @@ class SugarUpgradeConvertPortalTheme extends UpgradeScript
             sugar_file_put_contents($path . '/variables.php', $write);
 
             // Delete old defs
-            $this->fileToDelete($path . '/variables.less');
+            $this->upgrader->fileToDelete($path . '/variables.less', $this);
         }
     }
     

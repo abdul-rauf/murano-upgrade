@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,6 +9,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 global $theme;
 
 
@@ -28,7 +30,7 @@ global $urlPrefix;
 global $currentModule;
 
 
-$seed_object = BeanFactory::getBean('WorkFlow');
+$seed_object = BeanFactory::newBean('WorkFlow');
 
 if(!empty($_REQUEST['workflow_id']) && $_REQUEST['workflow_id']!="") {
     $seed_object->retrieve($_REQUEST['workflow_id']);
@@ -55,7 +57,7 @@ else {
 $form->assign("MOD", $mod_strings);
 $form->assign("APP", $app_strings);
 
-$focus = BeanFactory::getBean('WorkFlowActionShells');
+$focus = BeanFactory::newBean('WorkFlowActionShells');
 //Add When Expressions Object is availabe
 //$exp_object = new Expressions();
 
@@ -69,10 +71,12 @@ if(isset($_REQUEST['action_type']) && $_REQUEST['action_type']!=""){
 
 }
 
-if(isset($_REQUEST['action_module']) && $_REQUEST['action_module']!=""){
-	$focus->action_module = $_REQUEST['action_module'];
-
+// This cannot be converted to using the IVF since this is not always a module.
+// Many times this is a link name, or relationship name
+if (isset($_REQUEST['action_module']) && $_REQUEST['action_module'] != "") {
+    $focus->action_module = $_REQUEST['action_module'];
 }
+
 if(isset($_REQUEST['rel_module']) && $_REQUEST['rel_module']!=""){
 	$focus->rel_module = $_REQUEST['rel_module'];
 
@@ -85,19 +89,19 @@ if(isset($_REQUEST['rel_module']) && $_REQUEST['rel_module']!=""){
     $form->assign("REL_MODULE", $focus->rel_module);
 
    if($focus->action_type=="update"){
-   	 	$temp_module = BeanFactory::getBean($seed_object->base_module);
+   	 	$temp_module = BeanFactory::newBean($seed_object->base_module);
    	 	$meta_filter = "action_filter";
 	}
 
 	if($focus->action_type=="update_rel"){
 		$rel_module = $seed_object->get_rel_module($focus->rel_module);
-		$temp_module = BeanFactory::getBean($rel_module);
+		$temp_module = BeanFactory::newBean($rel_module);
     	$meta_filter = "action_filter";
 	}
 
 	if($focus->action_type=="new"){
 		$rel_module = $seed_object->get_rel_module($focus->action_module);
-		$temp_module = BeanFactory::getBean($rel_module);
+		$temp_module = BeanFactory::newBean($rel_module);
    		$meta_filter = "action_filter";
 	}
 

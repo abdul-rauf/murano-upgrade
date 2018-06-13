@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Anexo',
     'LBL_REVENUELINEITEMS' => 'Itens da linha de receita',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Visualização de contas',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Anotaçãoes:',
 
     // Help Text

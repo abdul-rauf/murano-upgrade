@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 10:47:59
+// created: 2018-06-13 14:44:08
 $viewdefs['base']['view']['profileactions'] = array (
   0 => 
   array (
@@ -8,7 +8,6 @@ $viewdefs['base']['view']['profileactions'] = array (
     'css_class' => 'profileactions-profile',
     'acl_action' => 'view',
     'icon' => 'fa-user',
-    'submenu' => '',
   ),
   1 => 
   array (
@@ -17,16 +16,12 @@ $viewdefs['base']['view']['profileactions'] = array (
     'css_class' => 'profileactions-employees',
     'acl_action' => 'list',
     'icon' => 'fa-users',
-    'submenu' => '',
   ),
   2 => 
   array (
-    'route' => '#bwc/index.php?module=Administration&action=index',
-    'label' => 'LBL_ADMIN',
-    'css_class' => 'administration',
+    'label' => 'Admin',
     'acl_action' => 'admin',
-    'icon' => 'fa-cogs',
-    'submenu' => '',
+    'route' => '#bwc/index.php?module=Administration&action=index',
   ),
   3 => 
   array (
@@ -34,7 +29,6 @@ $viewdefs['base']['view']['profileactions'] = array (
     'label' => 'LBL_LOGOUT',
     'css_class' => 'profileactions-logout',
     'icon' => 'fa-sign-out',
-    'submenu' => '',
   ),
   4 => 
   array (
@@ -43,6 +37,5 @@ $viewdefs['base']['view']['profileactions'] = array (
     'css_class' => 'profileactions-about',
     'acl_action' => 'view',
     'icon' => 'fa-info-circle',
-    'submenu' => '',
   ),
 );

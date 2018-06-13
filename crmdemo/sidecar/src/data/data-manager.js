@@ -294,7 +294,7 @@
             // Bug 54814 init fields to something sane if module metadata is empty
             platform = platform || app.config.platform || 'base';
 
-            var model = this.declareModelClass(moduleName, module, platform, modelController);
+            this.declareModelClass(moduleName, module, platform, modelController);
             this.declareCollectionClass(moduleName, platform, collectionController);
         },
 
@@ -629,6 +629,8 @@
                 isNew: true
             };
 
+            beanOrId2.setOption('relate', true);
+
             return beanOrId2;
         },
 
@@ -686,8 +688,8 @@
          * @return {Data.MixedBeanCollection} Collection of mixed module
          *   collection.
          */
-        createMixedBeanCollection: function(models) {
-            return new app.data.mixedBeanCollection(models);
+        createMixedBeanCollection: function(models, options) {
+            return new app.data.mixedBeanCollection(models, options);
         },
 
         /**
@@ -733,15 +735,22 @@
          * </code></pre>
          * would return definition of `Cases.account_name` field.
          *
-         * @param {String} parentModule Name of the module that has a link field named `link`.
+         * @param {String} parentModuleName Name of the module that has a link field named `link`.
          * @param {String} link Link name.
          * @return {Array} Definitions of the `relate` fields if found or empty array if not found.
          * The array will contain one item most of the time. However, some modules have multiple
          * `relate` fields that have the same link.
          */
-        getRelateFields: function(parentModule, link) {
-            var relationship = app.metadata.getModule(parentModule).fields[link].relationship;
-            var relatedModule = this.getRelatedModule(parentModule, link);
+        getRelateFields: function(parentModuleName, link) {
+            //Overridden to provide safeguard against exception filed in NOMAD-2979
+            //We couldn't reproduce the issue or find out exact place where data/metadata is inconsistent
+            var parentModuleDef = app.metadata.getModule(parentModuleName);
+            if (!parentModuleDef.fields[link]) {
+                return [];
+            }
+
+            var relationship = parentModuleDef.fields[link].relationship;
+            var relatedModule = this.getRelatedModule(parentModuleName, link);
             var fields = app.metadata.getModule(relatedModule).fields;
 
             // Find the opposite link field on related module
@@ -836,14 +845,26 @@
                 relationship.lhs_module : relationship.rhs_module);
         },
 
+        /*
+         * Returns field definition of related name field
+         * @param {String} module Name of the field's module
+         * @param {String} idFieldName Name of the id field
+         */
+        getRelatedNameField: function(module, idFieldName) {
+            return _.find(app.metadata.getModule(module).fields, function(field) {
+                if (field.name !== idFieldName && field.id_name === idFieldName) {
+                    return field;
+                }
+            }, this);
+        },
+
         /**
          * Gets editable fields.
          * @param {Data.Bean|Data.BeanCollection} model to get fields from.
          * @param {Array} [fields] Names to be checked.
-         * @param {Object} [options]
          * @return {Object} Hash of editable fields.
          */
-        getEditableFields: function(model, fields, options) {
+        getEditableFields: function(model, fields) {
             var editableFields = ['id'], //Always have the id included (without the id, the routing will not work correctly)
                 ignoreTypeList = ["parent", "relate"];
 
@@ -870,7 +891,11 @@
                     app.acl.hasAccessToModel("edit", model, fieldName)) { // The user has access to edit the field
 
                     fieldValue = model.get(fieldName);
-                    if (fieldValue && (model.fields[fieldName].type === 'collection')) {
+                    //FIXME: This if condition is deprecated. It relies on a
+                    //format created by VirtualCollection Mango plugin which
+                    //sidecar does not know about and needs to be be removed.
+                    if (fieldValue && (model.fields[fieldName].type === 'collection') &&
+                        !_.isEmpty(fieldValue.links)) {
                         _.each(fieldValue.links, function(link) {
                             editableFields.push(link.link.name);
                         });
@@ -947,6 +972,13 @@
                         method = "create";
                     }
                 }
+
+                if (!model.link.bean.id) {
+                    console.error("Attempted to load linked context with no id on the linked bean");
+                    console.log(model.link.bean);
+                    return false;
+                }
+
                 request = app.api.relationships(
                     method,
                     model.link.bean.module,
@@ -1122,6 +1154,7 @@
                     }
                     data = data.records || [];
 
+                    // Update collection filter/search properties on success
                     self._updateCollectionProperties(model, options);
                 }
 
@@ -1183,11 +1216,10 @@
          */
         getSyncErrorCallback: function(method, model, options) {
             return _.bind(function(error) {
-                if (error.request.aborted) {
+                if (error.request && error.request.aborted) {
                     var abortCallback = this.getSyncAbortCallback(method, model, options);
                     return abortCallback(error.request);
                 }
-
                 app.error.handleHttpError(error, model, options);
                 this.trigger('data:sync:error', method, model, options, error);
                 /**
@@ -1257,6 +1289,10 @@
                 if (_.isFunction(options.complete)) {
                     options.complete(request);
                 }
+
+                // Prevent memory leaking
+                options.previousModels = null;
+                options = {};
             }, this);
         },
 
@@ -1279,6 +1315,7 @@
          */
         getSyncAbortCallback: function(method, model, options) {
             return _.bind(function(request) {
+                this._updateCollectionProperties(model, options);
                 this.trigger('data:sync:abort', method, model, options, request);
                 /**
                  * Fires on model when the sync operation ends.

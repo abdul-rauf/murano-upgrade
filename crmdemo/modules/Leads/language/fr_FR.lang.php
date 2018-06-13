@@ -71,7 +71,7 @@ $mod_strings = array (
     'LBL_CONVERTED_ACCOUNT'=>'Compte converti :',
     'LBL_CONVERTED_CONTACT' => 'Contact converti :',
     'LBL_CONVERTED_OPP'=>'Affaire convertie :',
-    'LBL_CONVERTED'=> 'Converti',
+    'LBL_CONVERTED'=> 'Converti(e)',
     'LBL_CONVERTLEAD_BUTTON_KEY' => 'V',
     'LBL_CONVERTLEAD_TITLE' => 'Convertir lead [Alt+V]',
     'LBL_CONVERTLEAD' => 'Convertir Lead',
@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Éditer' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'ID principal D&B',
-    'LBL_DNB_BAL_PREVIEW' => 'Aperçu de leads',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Leads',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B : Information de lead',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Affaires',
 

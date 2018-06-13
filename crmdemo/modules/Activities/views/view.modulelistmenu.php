@@ -11,13 +11,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/MVC/View/views/view.modulelistmenu.php');
 
 class ActivitiesViewModulelistmenu extends ViewModulelistmenu
 {
  	public function display()
  	{
- 	    $tracker = BeanFactory::getBean('Trackers');
+ 	    $tracker = BeanFactory::newBean('Trackers');
         $history = $tracker->get_recently_viewed($GLOBALS['current_user']->id, array('Calls','Meetings','Tasks','Notes','Emails'));
         foreach ( $history as $key => $row ) {
             $history[$key]['item_summary_short'] = getTrackerSubstring($row['item_summary']);

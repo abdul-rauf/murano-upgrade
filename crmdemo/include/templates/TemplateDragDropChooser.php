@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,17 +10,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once("include/templates/Template.php");
 
 class TemplateDragDropChooser extends Template {
     var $args;
-
-    /**
-     * @deprecated
-     */
-    public function TemplateDragDropChooser()
-    {
-    }
 
 /*
  * This function creates the html and uses the args parameter to call the class file
@@ -272,3 +262,4 @@ class TemplateDragDropChooser extends Template {
     }
 
 }
+

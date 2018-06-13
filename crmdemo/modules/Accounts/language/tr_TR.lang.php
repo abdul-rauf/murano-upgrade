@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Ek',
     'LBL_REVENUELINEITEMS' => 'Gelir Kalemleri',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Müşteri Önizleme',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notlar',
 
     // Help Text

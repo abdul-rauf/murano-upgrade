@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/TemplateHandler/TemplateHandler.php');
 require_once('include/EditView/EditView2.php');
 
 /**
@@ -36,7 +35,7 @@ class DetailView2 extends EditView
      */
     function setup(
         $module,
-        $focus,
+        $focus = null,
         $metadataFile = null,
         $tpl = 'include/DetailView/DetailView.tpl',
         $createFocus = true

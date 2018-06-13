@@ -9,9 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 
 /**
  * Retrieves the requested js language file, building it if it doesn't exist.
@@ -22,7 +19,6 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 function getJSLanguage()
 {
 
-    require_once ('include/language/jsLanguage.php');
 
     global $app_list_strings;
 

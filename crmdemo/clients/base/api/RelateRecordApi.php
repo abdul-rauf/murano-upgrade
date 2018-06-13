@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/api/SugarApi.php');
-require_once('include/RecordListFactory.php');
 
 class RelateRecordApi extends SugarApi
 {
@@ -80,8 +77,8 @@ class RelateRecordApi extends SugarApi
 
     /**
      * Fetches data from the $args array and updates the bean with that data
-     * @param $api ServiceBase The API class of the request, used in cases where the API changes how security is applied
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request, used in cases where the API changes how security is applied
+     * @param array $args The arguments array passed in from the API
      * @param $primaryBean SugarBean The near side of the link
      * @param $securityTypeLocal string What ACL to check on the near side of the link
      * @param $securityTypeRemote string What ACL to check on the far side of the link
@@ -89,8 +86,13 @@ class RelateRecordApi extends SugarApi
      * @throws SugarApiExceptionNotAuthorized
      * @throws SugarApiExceptionNotFound
      */
-    protected function checkRelatedSecurity(ServiceBase $api, $args, SugarBean $primaryBean, $securityTypeLocal='view', $securityTypeRemote='view')
-    {
+    protected function checkRelatedSecurity(
+        ServiceBase $api,
+        array $args,
+        SugarBean $primaryBean,
+        $securityTypeLocal = 'view',
+        $securityTypeRemote = 'view'
+    ) {
         $this->requireArgs($args, array('link_name'));
         if ( ! $primaryBean->ACLAccess($securityTypeLocal) ) {
             throw new SugarApiExceptionNotAuthorized('No access to '.$securityTypeLocal.' records for module: '.$args['module']);
@@ -103,7 +105,7 @@ class RelateRecordApi extends SugarApi
         }
         // Figure out what is on the other side of this relationship, check permissions
         $linkModuleName = $primaryBean->$linkName->getRelatedModuleName();
-        $linkSeed = BeanFactory::getBean($linkModuleName);
+        $linkSeed = BeanFactory::newBean($linkModuleName);
 
         // FIXME: No create ACL yet
         if ( $securityTypeRemote == 'create' ) { $securityTypeRemote = 'edit'; }
@@ -120,15 +122,21 @@ class RelateRecordApi extends SugarApi
     /**
      * This function is used to popluate an fields on the relationship from the request
      *
-     * @param $api ServiceBase The API class of the request, used in cases where the API changes how security is applied
-     * @param $args array The arguments array passed in from the API
-     * @param $primaryBean SugarBean The near side of the link
-     * @param $linkName string What is the name of the link field that you want to get the related fields for
+     * @param ServiceBase $api The API class of the request, used in cases where the API changes how security is applied
+     * @param array $args The arguments array passed in from the API
+     * @param SugarBean $primaryBean The near side of the link
+     * @param string $linkName What is the name of the link field that you want to get the related fields for
+     * @param SugarBean $seed Related bean seed
      *
      * @return array A list of the related fields pulled out of the $args array
      */
-    protected function getRelatedFields(ServiceBase $api, $args, SugarBean $primaryBean, $linkName, $seed = null)
-    {
+    protected function getRelatedFields(
+        ServiceBase $api,
+        array $args,
+        SugarBean $primaryBean,
+        $linkName,
+        SugarBean $seed = null
+    ) {
         $relatedData = array();
         if (!empty($primaryBean->$linkName) || $primaryBean->load_relationship($linkName)) {
             $otherLink = $primaryBean->$linkName->getLinkForOtherSide();
@@ -150,8 +158,8 @@ class RelateRecordApi extends SugarApi
 
     /**
      * This function is here temporarily until the Link2 class properly handles these for the non-subpanel requests
-     * @param $api ServiceBase The API class of the request, used in cases where the API changes how security is applied
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request, used in cases where the API changes how security is applied
+     * @param array $args The arguments array passed in from the API
      * @param $primaryBean SugarBean The near side of the link
      * @param $relatedArray array The data for the related fields (such as the contact_role in opportunities_contacts relationship)
      * @return array Two elements, 'record' which is the formatted version of $primaryBean, and 'related_record' which is the formatted version of $relatedBean
@@ -171,8 +179,8 @@ class RelateRecordApi extends SugarApi
         );
     }
 
-
-    function getRelatedRecord($api, $args) {
+    public function getRelatedRecord(ServiceBase $api, array $args)
+    {
         $primaryBean = $this->loadBean($api, $args);
         
         list($linkName, $relatedBean) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'view');
@@ -208,7 +216,7 @@ class RelateRecordApi extends SugarApi
      * @return array Two elements, 'record' which is the formatted version of $primaryBean, and 'related_record' which is the formatted version of $relatedBean
      * @throws SugarApiExceptionError In case if the module API has improper interface
      */
-    public function createRelatedRecord($api, $args)
+    public function createRelatedRecord(ServiceBase $api, array $args)
     {
         $primaryBean = $this->loadBean($api, $args);
         list($linkName) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view','create');
@@ -231,7 +239,8 @@ class RelateRecordApi extends SugarApi
         return $this->formatNearAndFarRecords($api, $args, $primaryBean, $relatedArray);
     }
 
-    function createRelatedLink($api, $args) {
+    public function createRelatedLink(ServiceBase $api, array $args)
+    {
         $api->action = 'save';
         $args['ids'] = array($args['remote_id']);
         $return = $this->createRelatedLinks($api, $args);
@@ -252,8 +261,12 @@ class RelateRecordApi extends SugarApi
      * @throws SugarApiExceptionInvalidParameter If wrong arguments are passed
      * @throws SugarApiExceptionNotFound If bean can't be retrieved.
      */
-    public function createRelatedLinks($api, $args, $securityTypeLocal = 'view', $securityTypeRemote = 'view')
-    {
+    public function createRelatedLinks(
+        ServiceBase $api,
+        array $args,
+        $securityTypeLocal = 'view',
+        $securityTypeRemote = 'view'
+    ) {
         $this->requireArgs($args, array('ids'));
         $ids = $this->normalizeLinkIds($args['ids']);
 
@@ -278,7 +291,9 @@ class RelateRecordApi extends SugarApi
             if (!$relatedBean || $relatedBean->deleted) {
                 throw new SugarApiExceptionNotFound('Could not find the related bean');
             }
-            $primaryBean->$linkName->add(array($relatedBean), $additionalValues);
+
+            $relatedData = $this->getRelatedFields($api, $args, $primaryBean, $linkName, $relatedBean);
+            $primaryBean->$linkName->add(array($relatedBean), array_merge($relatedData, $additionalValues));
 
             $result['related_records'][] = $this->formatBean($api, $args, $relatedBean);
         }
@@ -325,7 +340,8 @@ class RelateRecordApi extends SugarApi
         return $normalized;
     }
 
-    function updateRelatedLink($api, $args) {
+    public function updateRelatedLink(ServiceBase $api, array $args)
+    {
         $api->action = 'save';
         $primaryBean = $this->loadBean($api, $args);
 
@@ -408,7 +424,8 @@ class RelateRecordApi extends SugarApi
         return $this->formatNearAndFarRecords($api,$args,$primaryBean,$relatedArray);
     }
 
-    function deleteRelatedLink($api, $args) {
+    public function deleteRelatedLink(ServiceBase $api, array $args)
+    {
         $primaryBean = $this->loadBean($api, $args);
 
         list($linkName, $relatedBean) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view','view');
@@ -442,7 +459,7 @@ class RelateRecordApi extends SugarApi
      * @return array Array of formatted fields.
      * @throws SugarApiExceptionNotFound If bean can't be retrieved.
      */
-    public function createRelatedLinksFromRecordList($api, $args)
+    public function createRelatedLinksFromRecordList(ServiceBase $api, array $args)
     {
         Activity::disable();
 
@@ -492,7 +509,6 @@ class RelateRecordApi extends SugarApi
             return $moduleApi;
         }
 
-        require_once 'clients/base/api/ModuleApi.php';
         return new ModuleApi();
     }
 

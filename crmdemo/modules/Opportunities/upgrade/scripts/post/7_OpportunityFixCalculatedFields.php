@@ -31,11 +31,10 @@ class SugarUpgradeOpportunityFixCalculatedFields extends UpgradeScript
 
         // get the get_widget helper and the StandardField Helper
         require_once('modules/DynamicFields/FieldCases.php');
-        require_once('modules/ModuleBuilder/parsers/StandardField.php');
 
         // we are working with opportunities
         $module = 'Opportunities';
-        $bean = BeanFactory::getBean('Opportunities');
+        $bean = BeanFactory::newBean('Opportunities');
 
         // the field set we need
         $fields = array(

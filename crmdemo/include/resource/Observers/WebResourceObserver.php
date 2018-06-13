@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/resource/Observers/ResourceObserver.php');
 
 /**
  * WebResourceObserver.php
@@ -19,20 +18,6 @@ require_once('include/resource/Observers/ResourceObserver.php');
  * for web clients.
  */
 class WebResourceObserver extends ResourceObserver {
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function WebResourceObserver($module)
-    {
-        self::__construct($module);
-    }
-
-    public function __construct($module)
-    {
-        parent::__construct($module);
-    }
-
 /**
  * notify
  * Web implementation to notify the browser

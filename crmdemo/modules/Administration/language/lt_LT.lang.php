@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Nematomos temos',
     'LBL_TIMEZONE' => 'Laiko juosta',
     'LBL_TO'    => 'į',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Select what system and user data is tracked',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatiškai',
     'LBL_UPDATE_CHECK_MANUAL'=>'Rankiniu būdu',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Automatiškai tikrinti atnaujinimus</B> - Jeigu pažymėta, sistema periodiškai tikrins ar yra naujesnių versijų.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Failas config.php buvo sėkmingai atstatytas.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Dėmesio: Jūsų PHP konfigūracija turi būti pakeista, kad leistų išsiųsti mažiausiai 6MB.  Prašome pakeisti failo php.ini upload_max_filesize reikšmę esančią:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Prašome padaryti failą config.php rašomą ir bandyti dar kartą.',
-    'MSG_REBUILD_EXTENSIONS' => 'Prašome eiti į <a href="index.php?module=Administration&action=Upgrade">Taisyti</a> langą ir paspauskite Atstatyti plėtinius.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Prašome eiti į <a href="index.php?module=Administration&action=Upgrade">Taisyti</a> ir spauskite Atstatyti ryšius.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'šiuo metu nėra įjungtų klientinių versijų.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Ar tikrai norite išjungti šią klientinę versiją?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Ar tikrai norite įjungti šią klientinę versiją?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Problemos',
 'ML_MANIFEST_ISSUE'=>'Problemos su manifest failu',
 'ML_CONFIG_OVERRIDE'=>'Config redagavimas nėra leistinas',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Kodą gali sudaryti tik raidės, skaičiai ir pabraukimo brūkšniai. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Nustatyti nuorodų bloką',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Pasirinkite kurie moduliai matytųsi Nuorodų bloke',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Nurodykite, kuriems moduliams vartotojai galės greitu būdu sukurti naujus įrašus.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Gamintojas',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'Relationship',
 	'Releases'       => 'Versija',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'Vežėjas',
 	'TaxRates'       => 'TaxRate',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

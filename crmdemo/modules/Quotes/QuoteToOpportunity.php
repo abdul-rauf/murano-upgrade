@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -118,7 +115,7 @@ if ($quote->getRelatedOpportunityCount() > 0) {
     $oppSettings = Opportunity::getSettings();
 
     /* @var $opp Opportunity */
-    $opp = BeanFactory::getBean('Opportunities');
+    $opp = BeanFactory::newBean('Opportunities');
     $opp->id = create_guid();
     $opp->new_with_id = true;
     printf("%s<br><br>", $opp->id);

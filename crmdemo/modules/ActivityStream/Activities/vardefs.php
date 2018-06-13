@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -180,6 +179,13 @@ $dictionary['Activity'] = array(
             'relationship' => 'kbcontenttemplate_activities',
             'source' => 'non-db',
             'vname' => 'LBL_KBTEMPLATES',
+        ),
+        'campaigns' => array(
+            'name' => 'campaigns',
+            'type' => 'link',
+            'relationship' => 'campaign_activities',
+            'source' => 'non-db',
+            'vname' => 'LBL_CAMPAIGN',
         ),
 
 

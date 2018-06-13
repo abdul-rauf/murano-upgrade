@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Sun, 27 Aug 2017 19:55:29 GMT
+# Thu, 08 Feb 2018 22:09:41 GMT
 index.html
 
 # cache fonts
@@ -19,6 +19,7 @@ img/offline-list.svg
 img/touch-icon.png
 img/touch-icon-152.png
 img/touch-icon-196.png
+img/pattern-tiled.svg
 
 # javascripts
 js/nomad.js

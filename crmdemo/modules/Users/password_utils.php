@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -24,7 +23,6 @@ function canSendPassword() {
            $current_user,
            $app_strings;
 
-    require_once "modules/OutboundEmailConfiguration/OutboundEmailConfigurationPeer.php";
 
     if ($current_user->is_admin) {
         $emailTemplate                             = new EmailTemplate();
@@ -75,7 +73,7 @@ function canSendPassword() {
 function hasPasswordExpired($user, $updateNumberLogins = false)
 {
     if (!$user instanceof User) {
-        $usr_id = BeanFactory::getBean('Users')->retrieve_user_id($user);
+        $usr_id = BeanFactory::newBean('Users')->retrieve_user_id($user);
         $user = BeanFactory::getBean('Users', $usr_id);
     }
     $type = '';

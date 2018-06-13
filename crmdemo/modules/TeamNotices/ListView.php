@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,7 +20,7 @@ global $app_strings;
 global $current_user;
 $GLOBALS['displayListView'] = true; 
 $header_text = '';
-$focus = BeanFactory::getBean('TeamNotices');
+$focus = BeanFactory::newBean('TeamNotices');
 //$is_edit = true;
 
 $GLOBALS['log']->info("TeamNotice list view");

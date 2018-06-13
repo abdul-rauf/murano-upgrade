@@ -1,9 +1,5 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 
-require_once 'modules/ModuleBuilder/MB/MBHelper.php';
 
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -23,8 +19,12 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
  */
 class ViewMapRoles extends SugarView
 {
-    /** {@inheritDoc} */
-    protected function _getModuleTitleParams()
+    /**
+     * {@inheritDoc}
+     *
+     * @param bool $browserTitle Ignored
+     */
+    protected function _getModuleTitleParams($browserTitle = false)
     {
         global $mod_strings;
 

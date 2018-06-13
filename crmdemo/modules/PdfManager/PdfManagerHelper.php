@@ -70,7 +70,6 @@ class PdfManagerHelper
         $bannedModules = PdfManagerHelper::getBannnedModules();
 
         $module_names = array_change_key_case ($GLOBALS['app_list_strings']['moduleList']);
-        require_once 'modules/ModuleBuilder/Module/StudioBrowser.php';
         $studio_browser = new StudioBrowser();
         $studio_browser->loadModules();
         $studio_modules = array_keys($studio_browser->modules);
@@ -112,13 +111,11 @@ class PdfManagerHelper
             if (!empty($fieldsForSelectedModule) && $addLinks) {
                 $linksForSelectedModule = PdfManagerHelper::getLinksForModule($moduleName);
                 if (count($linksForSelectedModule) > 0) {
-                    //$fieldsForSelectedModule[''] = '-----';
                     $linksFieldsForSelectedModule = array();
                     foreach ($linksForSelectedModule as $linkName => $linkDef) {
                         $linksFieldsForSelectedModule['pdfManagerRelateLink_' . $linkName] = $linkDef['label'];
                     }
                     asort($linksFieldsForSelectedModule);
-                    //$fieldsForSelectedModule += $linksFieldsForSelectedModule;
                     $fieldsForSelectedModule = array(
                         translate('LBL_FIELDS_LIST', 'PdfManager') => $fieldsForSelectedModule,
                         translate('LBL_LINK_LIST', 'PdfManager') => $linksFieldsForSelectedModule,
@@ -223,7 +220,7 @@ class PdfManagerHelper
         }
         //First, create a dummy bean to access the relationship info
         if (empty($mbModule)) {
-            $relatedBean = BeanFactory::getBean($relatedModule);
+            $relatedBean = BeanFactory::newBean($relatedModule);
             $field_defs = $relatedBean->field_defs;
         } else {
             $field_defs = $mbModule->getVardefs(false);
@@ -482,7 +479,7 @@ class PdfManagerHelper
                 count($module_instance->$name->get()) == 1
                ) {
                 $related_module = $module_instance->$name->getRelatedModuleName();
-                $related_instance = BeanFactory::getBean($related_module);
+                $related_instance = BeanFactory::newBean($related_module);
                 $related_instance_id = $module_instance->$name->get();
                 if ($related_instance->retrieve($related_instance_id[0]) === null) {
                     $GLOBALS['log']->fatal(__FILE__ . ' Failed loading module ' . $related_module . ' with id ' . $related_instance_id[0]);

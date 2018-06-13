@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -95,7 +94,7 @@ function commitAjaxFinalTouches($persistence) {
 		if($_REQUEST['addTaskReminder'] == 'remind') {
 			logThis('Adding Task for admin for manual merge.');
 
-			$task = BeanFactory::getBean('Tasks');
+			$task = BeanFactory::newBean('Tasks');
 			$task->name = $mod_strings['LBL_UW_COMMIT_ADD_TASK_NAME'];
 			$task->description = $desc;
 			$task->date_due = $nowDate;
@@ -113,7 +112,7 @@ function commitAjaxFinalTouches($persistence) {
 		if($_REQUEST['addEmailReminder'] == 'remind') {
 			logThis('Sending Reminder for admin for manual merge.');
 
-			$email = BeanFactory::getBean('Emails');
+			$email = BeanFactory::newBean('Emails');
             $email->id = create_guid();
             $email->new_with_id = true;
 			$email->assigned_user_id = $current_user->id;
@@ -288,9 +287,6 @@ function commitAjaxPostInstall($persistence) {
 function preflightCheckJsonFindUpgradeFiles($persistence) {
 	global $sugar_config;
 	global $mod_strings;
-
-	unset($persistence['rebuild_relationships']);
-	unset($persistence['rebuild_extensions']);
 
 	// don't bother if are rechecking
 	$manualDiff			= array();
@@ -665,8 +661,6 @@ function preflightCheckJsonGetSchemaErrors($persistence) {
 
 	// reset errors if Rechecking
 	if(isset($persistence['sql_errors']))
-		//unset($persistence['sql_errors']);
-
 	echo $out;
 
 	return $persistence;
@@ -820,8 +814,6 @@ function systemCheckJsonCheckFiles($persistence) {
 
 	$isWindows = is_windows();
 	foreach($persistence['files_to_check'] as $file) {
-	//	while($file = array_pop($persistence['files_to_check'])) {
-
 		// admin deletes a bad file mid-check:
 		if(!file_exists($file))
 			continue;

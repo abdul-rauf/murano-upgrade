@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 require_once('soap/SoapHelperFunctions.php');
-require_once('modules/MailMerge/MailMerge.php');
 
 $module = $_POST['mailmerge_module'];
 $document_id = $_POST['document_id'];
@@ -20,7 +18,7 @@ $selObjs = urldecode($_POST['selected_objects_def']);
 $item_ids = array();
 parse_str($selObjs,$item_ids);
 
-$seed = BeanFactory::getBean($module);
+$seed = BeanFactory::newBean($module);
 $fields =  get_field_list($seed);
 
 $document = BeanFactory::getBean('Documents', $document_id);

@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry)
-	die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry)
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 function getDocumentsExternalApiDropDown($focus = null, $name = null, $value = null, $view = null) {
-    require_once('include/externalAPI/ExternalAPIFactory.php');
 
     $apiList = ExternalAPIFactory::getModuleDropDown('Documents');
 

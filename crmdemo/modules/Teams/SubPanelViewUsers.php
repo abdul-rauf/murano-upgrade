@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -38,11 +37,6 @@ class SubPanelViewUsers {
 	function setHideNewButton($value){
 		$this->hideNewButton = $value;
 	}
-
-	function SubPanelViewUsers() 
-    {
-	}
-
 	function getHeaderText($action, $currentModule){
 		global $app_strings;
 		global $current_user;
@@ -108,3 +102,4 @@ class SubPanelViewUsers {
 		$ListView->processListView($this->teams_list, "teams", "TEAM");
 	}
 }
+

@@ -27,8 +27,8 @@ $mod_strings = array(
     'LBL_SEARCH_TREE' => 'Suche nach Titel...',
     'LBL_DEFAULT_TITLE' => 'Standardtitel',
     'LBL_ADD_NEW' => 'Hinzufügen',
-    'NTC_DELETE_CONFIRMATION_FORMATTED_PLURAL' => 'Are you sure you want to delete the {0}?
-All nested categories will be removed as well',
+    'NTC_DELETE_CONFIRMATION_FORMATTED_PLURAL' => 'Möchten Sie {0} wirklich löschen?
+Alle untergeordneten Kategorien werden auch entfernt',
     'LBL_WRONG_MOVE_PATH' => 'You cannot move a folder into itself.',
     'ERR_EMPTY_NODE_NAME' => 'You cannot add a category without title',
 );

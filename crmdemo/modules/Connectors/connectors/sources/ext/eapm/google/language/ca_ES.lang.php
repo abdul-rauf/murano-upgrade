@@ -17,10 +17,10 @@ Obtenir una clau secreta dels consumidors i Google mitjançant el registre de la
 <br/><br/>
 <ol>
 <li>Vagi al web de desenvolupament de Google:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
-<li>Iniciï sessió amb el compte de Google en el qual vol registrar l&#39;aplicació.</li>
+<li>Iniciï sessió amb el compte de Google en el qual vol registrar l\'aplicació.</li>
 <li>Creï un projecte nou</li>
 <li>Indiqui un Nom de projecte i faci clic a Crear.</li>
 <li>Un cop creat el projecte, activi Google Drive i Google Contacts API</li>
@@ -29,7 +29,7 @@ target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
 <li>Escrigui un nom de producte i faci clic a Guardar</li>
 <li>A la secció URL de redirecció autoritzades escrigui la següent url: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
 <li>Faci clic a crear ID de client</li>
-<li>Copiï l&#39;ID de client i el secret als quadres següents</li>
+<li>Copiï l\'ID de client i el secret als quadres següents</li>
 
 </li>
 </ol>

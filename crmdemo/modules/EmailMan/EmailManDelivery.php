@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once "modules/Mailer/MailerFactory.php"; // imports all of the Mailer classes that are needed
 
 global $current_user;
 
@@ -58,7 +56,7 @@ if (isset($_REQUEST['campaign_id']) && !empty($_REQUEST['campaign_id'])) {
 
 $db = DBManagerFactory::getInstance();
 $timedate = TimeDate::getInstance();
-$emailman = BeanFactory::getBean('EmailMan');
+$emailman = BeanFactory::newBean('EmailMan');
 
     if($test){
         //if this is in test mode, then
@@ -105,7 +103,7 @@ do {
 	if(isset($current_user)){
 		$temp_user = $current_user;
 	}
-	$current_user = BeanFactory::getBean('Users');
+	$current_user = BeanFactory::newBean('Users');
 	$startTime = microtime(true);
 
 	while(($row = $db->fetchByAssoc($result))!= null){

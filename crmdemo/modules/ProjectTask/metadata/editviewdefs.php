@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -97,9 +96,6 @@ $viewdefs['ProjectTask']['EditView'] = array(
       
       array (
         'name' => 'percent_complete',
-        /*
-        'customCode' => '<input type="text" name="{$fields.percent_complete.name}" id="{$fields.percent_complete.name}" size="30" value="{$fields.percent_complete.value}" title="" tabindex="0" onChange="update_status(this.value);" /></tr>',
-        */
 		'customCode' => '<span id="percent_complete_text">{$fields.percent_complete.value}</span><input type="hidden" name="{$fields.percent_complete.name}" id="{$fields.percent_complete.name}" value="{$fields.percent_complete.value}" /></tr>',
       ),
     ),
@@ -153,8 +149,6 @@ $viewdefs['ProjectTask']['EditView'] = array(
         'name' => 'description',
       ),
     ),
-    /*
-     */
   ),
 )
 

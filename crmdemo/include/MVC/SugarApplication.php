@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/MVC/Controller/ControllerFactory.php';
-require_once 'include/MVC/View/ViewFactory.php';
 
 use Sugarcrm\Sugarcrm\Session\SessionStorage;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
@@ -40,15 +38,6 @@ class SugarApplication
      * @var Request 
      */
     protected $request;
-
-    /**
-     * Use __construct
-     * @deprecated
-     */
-    protected function SugarApplication()
-    {
-        self::__construct();
-    }
 
     /**
      * Ctor
@@ -410,7 +399,7 @@ EOF;
         }
 
 		$authController = AuthenticationController::getInstance();
-		$GLOBALS['current_user'] = BeanFactory::getBean('Users');
+		$GLOBALS['current_user'] = BeanFactory::newBean('Users');
 		if(isset($_SESSION['authenticated_user_id'])){
 			// set in modules/Users/Authenticate.php
 			if(!$authController->sessionAuthenticate()){
@@ -444,7 +433,6 @@ EOF;
      */
     function setupResourceManagement($module)
     {
-        require_once('include/resource/ResourceManager.php');
         $resourceManager = ResourceManager::getInstance();
         $resourceManager->setup($module);
     }
@@ -1028,11 +1016,13 @@ EOF;
      */
     public function filterRequestVars($prefix, $request, $add_empty = true) {
         $vars = array();
+        $decode = SugarConfig::getInstance()->get('validation.compat_mode', true);
 
         foreach ($request as $key => $value) {
             if (strpos($key, $prefix) === 0) {
                 if ($value !== '' || $add_empty) {
-                    $vars[substr($key, strlen($prefix))] = $value;
+                    $vars[substr($key, strlen($prefix))] =
+                        $decode ? htmlspecialchars_decode($value, ENT_QUOTES) : $value;
                 }
             }
         }
@@ -1048,6 +1038,7 @@ EOF;
      */
     public function createLoginVars()
     {
+        $decode = SugarConfig::getInstance()->get('validation.compat_mode', true);
         $ret = array();
         $req = $this->filterCsrfToken($this->getRequestVars());
         foreach (array_keys($req) as $var) {
@@ -1055,7 +1046,7 @@ EOF;
                 $ret["login_" . $var] = $this->controller->$var;
                 continue;
             }
-            $ret["login_" . $var] = $req[$var];
+            $ret["login_" . $var] = $decode ? htmlspecialchars_decode($req[$var], ENT_QUOTES) : $req[$var];
         }
         if (isset($req['mobile'])) {
             $ret['mobile'] = $req['mobile'];

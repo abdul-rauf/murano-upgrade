@@ -213,7 +213,7 @@ $(window).bind("load", function () {
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
                 var displayNumber = typeof item.displayNumber == 'undefined' ? true : item.displayNumber;
-                var html = ["<h1><i class='", flagToIcon[parseInt(item.flag)], "'></i> "];
+                var html = ["<h1><i class='fa ", flagToIcon[parseInt(item.flag)], "'></i> "];
                 if (displayNumber) {
                     html.push(i + 1, ". ");
                 }
@@ -236,29 +236,6 @@ $(window).bind("load", function () {
                 uploader.updateProgress('healthcheck', 100);
             }
 
-        };
-
-        uploader.sendLogToSugar = function() {
-            $.ajax({
-                type: 'POST',
-                url: 'UpgradeWizard.php',
-                data: {
-                    token: uploader.token,
-                    action: 'sendlog'
-                },
-                dataType: 'json',
-                success: function (e) {
-                    if (e.status == 'error' || e.status == undefined) {
-                        uploader.displayError(e.message || "A server error occurred, please check your logs");
-                    } else {
-                        uploader.displaySuccess('Log was sent successfully.');
-                        $('a[name="send_to_sugar"]').hide();
-                    }
-                },
-                error: function (e) {
-                    uploader.displayError("A server error occurred, please check your logs");
-                }
-            })
         };
 
         uploader.upload = function(evt) {
@@ -377,10 +354,6 @@ $(window).bind("load", function () {
             $('#exportForm').submit();
         });
 
-        $('a[name="send_to_sugar"]').on('click', function() {
-            uploader.sendLogToSugar();
-        });
-
         $('input[type="file"]').on('change', function() {
             var $this = $(this),
                 text = ($this.val().split('\\').pop() || 'No file chosen...');
@@ -495,7 +468,6 @@ $(window).bind("load", function () {
         <div class="modal-footer">
           <span class="version">Upgrader version <?php echo $upgraderVesion?></span>
           <span sfuuid="25" class="detail">
-            <a class="btn btn-invisible btn-link send-logs" href="javascript:void(0);" name="send_to_sugar">Send Log to Sugar</a>
             <a class="btn btn-invisible btn-link" href="javascript:void(0);" name="export_button">Export Log</a>
             <a class="btn btn-primary" href="index.php" data-action="gohome">Go to Home Page</a>
             <a class="btn btn-primary disabled" href="javascript:void(0);" name="next_button">Confirm</a>

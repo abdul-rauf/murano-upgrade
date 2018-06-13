@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - könyvtár a gazdag kliensoldali funkciók megvalósításához.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - mindenre kiterjedő email továbbítás PHP-hez',
   'LBL_SOURCE_JSHRINK' => 'JShrink - PHP kódban megírt Javascript alkalmazás',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - lehetővé teszi a kétirányú szimmetrikus blokkrejtjel titkosítást anélkül, hogy megkövetelné a MCrypt PHP bővítést.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - SAX szintaktikai elemző HTML-hez és hibásan formázott XML dokumentumokhoz',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - kiterjesztés a Yahoo! User Interface Library könyvtárhoz, Jack Slocum ötlete alapján',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Javascript Flash Player parancsfájlok felismerése és beágyazása.',
@@ -274,8 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Üdvözli a Sugar 7 Súgó',
-    'LBL_HELP_RECORD' => 'A Súgó az aktuális modullal kapcsolatos információkat jeleníti meg, részletesen bemutat bizonyos kapcsolódó tevékenységeket, illetőleg ötleteket ad további információk beszerzésére. A Súgó panel nyitva marad, így Önnek lehetősége van a modul használata közben is megtekintenie azt. A Súgó a Sugar 7 szerves részeként a lábléc megfelelő ikonjával hívható elő.',
+    'LBL_HELP_RECORD_TITLE' => 'Súgó',
+    'LBL_HELP_RECORD' => 'A súgó az éppen megtekintett modullal kapcsolatos információkat jeleníti meg, részletes lépéseket ad bizonyos műveletek elvégzéséhez a modulon belül, és ötleteket ad ahhoz, hogy hol talál átfogóbb információt és támogatást.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Szűrő',
 );

@@ -23,8 +23,8 @@ $mod_strings = array(
     'LBL_LEAD_SOURCE' => 'Zdrojový zájemce',
     'LBL_LIST_NAME' => 'Produkt',
     'LBL_LIST_MANUFACTURER' => 'Výrobce',
-    'LBL_MANUFACTURERS' => 'Zboží',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Výrobní číslo',
+    'LBL_MANUFACTURERS' => 'Výrobci',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Číslo dílu',
     'LBL_LIST_QUANTITY' => 'Množství',
     'LBL_LIST_COST_PRICE' => 'Náklady',
     'LBL_LIST_DISCOUNT_PRICE' => 'Cena',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Sleva v %',
     'LBL_LIST_PRICE' => 'Ceníková cena:',
     'LBL_VENDOR_PART_NUM' => 'Prodejní číslo:',
-    'LBL_MFT_PART_NUM' => 'Výrobní číslo:',
+    'LBL_MFT_PART_NUM' => 'Číslo dílu:',
     'LBL_NEXT_STEP' => 'Další krok:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Datum slevy:',
     'LBL_WEIGHT' => 'Váha:',
@@ -168,6 +168,8 @@ Vytvoření {{module_name}}:
  - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí.
 2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
 
-    'LBL_MANUFACTURERS' => 'Výrobci',
     'LBL_PRODUCT_POSITION' => 'Pozice balíčku produktů',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Seznam údajů nabídky a nabízené řádkové položky',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nová nabízená řádková položka)',
+    'LBL_DISCOUNT_PERCENT' => '% procent',
 );

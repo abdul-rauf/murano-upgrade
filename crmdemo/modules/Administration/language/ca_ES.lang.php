@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Temes no disponibles',
     'LBL_TIMEZONE' => 'Zona Horària',
     'LBL_TO'    => 'a',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Habilitar/Deshabilitar Monitoratge',
     'LBL_UPDATE_CHECK_AUTO'=>'Automàticament',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manualment',
     'LBL_UPDATE_CHECK_TYPE'=>'<b>Comprovar actualitzacions automáticamente</b> - Si està seleccionat, el sistema comprovarà periòdicament si hi ha disponibles versions actualitzades de l´aplicació .',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'L´arxiu config.php ha estat reconstruït amb èxit.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Avís: La seva configuració de PHP ha de ser canviada per permetre la pujada d´arxius d´almenys 6 MB. Si us plau, modifiqui el valor de upload_max_filesize en el seu php.ini localitzat en:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Si us plau, doni permisos d´escriptura a config.php i ho intenti de nou.',
-    'MSG_REBUILD_EXTENSIONS' => 'Por favor, vaya a la pantalla de <a href="index.php?module=Administration&action=Upgrade">Reparación</a> i faci clic a Reconstruir Extensiones.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Por favor, vaya a la pantalla de <a href="index.php?module=Administration&action=Upgrade">Reparación</a> i faci clic a Reconstruir Relaciones.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Actualmente no hay Clients Desconectados habilitados.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => '¿Está seguro de que desea deshabilitar este Cliente Desconectado?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => '¿Está seguro de que desea habilitar este Cliente Desconectado?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Problemes',
 'ML_MANIFEST_ISSUE'=>'Problema amb el manifest',
 'ML_CONFIG_OVERRIDE'=>'Modificació de configuració no permesa',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Clau - Només pot incloure lletres, xifres i guions baixos. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Barra de Dreceres',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Seleccioni els mòduls disponibles a la barra de dreceres',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Trieu els mòduls dels quals els usuaris poden crear registres utilitzant la icona més a la barra de navegació superior. Arrossegueu i deixeu anar els mòduls entre els mòduls habilitats i les caixes dels mòduls de mobilitat reduïda.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Manufacturer',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'Relationship',
 	'Releases'       => 'Versió',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'Shipper',
 	'TaxRates'       => 'TaxRate',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

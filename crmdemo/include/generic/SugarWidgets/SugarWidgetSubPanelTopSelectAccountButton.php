@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,12 +10,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-
-
-
 class SugarWidgetSubPanelTopSelectAccountButton extends SugarWidgetSubPanelTopSelectButton {
-    public function display($widget_data)
+    public function display(array $widget_data, $additionalFormFields = array())
 	{
 		/*
 		* i.dymovsky
@@ -31,6 +26,6 @@ class SugarWidgetSubPanelTopSelectAccountButton extends SugarWidgetSubPanelTopSe
 		* Bug25633 code change end
 		*/
 		
-		return parent::display($widget_data);
+        return parent::display($widget_data, $additionalFormFields);
 	}
 }

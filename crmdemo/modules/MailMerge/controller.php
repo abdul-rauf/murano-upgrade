@@ -9,25 +9,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
-
 require_once('soap/SoapHelperFunctions.php');
 class MailMergeController extends SugarController{
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function MailMergeController(Request $request = null)
-    {
-        self::__construct($request);
-    }
-
-    public function __construct(Request $request = null)
-    {
-        parent::__construct($request);
-    }
-
     public function action_search(){
         //set ajax view
         $this->view = 'ajax';
@@ -74,7 +57,7 @@ class MailMergeController extends SugarController{
                     $where .= " AND related_type = #".$lmodule."#";
             }
 
-            $seed = BeanFactory::getBean($module);
+            $seed = BeanFactory::newBean($module);
 
             if($using_cp){
                 $fields = array('id', 'first_name', 'last_name');
@@ -101,3 +84,4 @@ class MailMergeController extends SugarController{
         print $json_response;
     }
 }
+

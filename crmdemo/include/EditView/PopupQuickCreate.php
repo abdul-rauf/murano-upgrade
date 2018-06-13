@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,20 +9,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/EditView/SubpanelQuickCreate.php');
 /**
  * Quick create form as a pop-up window
  * @api
  */
 class PopupQuickCreate extends SubpanelQuickCreate{
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function PopupQuickCreate($module, $view = 'QuickCreate')
-    {
-        self::__construct($module, $view);
-    }
 
     public function __construct($module, $view = 'QuickCreate')
     {

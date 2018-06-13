@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -135,7 +134,7 @@ class SugarUpgradeRepairVendors extends UpgradeScript
                         }
 
                         if (copy_recursive($file, $correctCustomSmartyPluginsPath . $item->getFilename())) {
-                            $this->upgrader->fileToDelete($file);
+                            $this->upgrader->fileToDelete($file, $this);
                         } else {
                             $failedToCopySmartyPluginsList[] = $file;
                         }

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -242,7 +241,7 @@ class EmailMan extends SugarBean{
 
 			//create new campaign log record.
 
-			$campaign_log = BeanFactory::getBean('CampaignLog');
+			$campaign_log = BeanFactory::newBean('CampaignLog');
 			$campaign_log->campaign_id=$this->campaign_id;
 			$campaign_log->target_tracker_key=$this->target_tracker_key;
 			$campaign_log->target_id= $this->related_id;
@@ -293,7 +292,7 @@ class EmailMan extends SugarBean{
        global $mod_Strings, $timedate;
        $upd_ref_email=false;
        if ($newmessage or empty($this->ref_email->id)) {
-           $this->ref_email = BeanFactory::getBean('Emails');
+           $this->ref_email = BeanFactory::newBean('Emails');
            $this->ref_email->retrieve($marketing_id, true, false);
 
            //the reference email should be updated when user swithces from test mode to regular mode,and, for every run in test mode, and is user
@@ -339,7 +338,7 @@ class EmailMan extends SugarBean{
 
                 foreach($notes as $note) {
                     list($filename, $mime_type) = $this->getFileInfo($note);
-                    $noteAudit = BeanFactory::getBean('Notes');
+                    $noteAudit = BeanFactory::newBean('Notes');
                     $noteAudit->parent_id = $retId;
                     $noteAudit->parent_type = $this->ref_email->module_dir;
                     $noteAudit->description = "[".$note->filename."] ".$mod_strings['LBL_ATTACHMENT_AUDIT'];
@@ -423,7 +422,7 @@ class EmailMan extends SugarBean{
         global $timedate,
                $mod_strings;
 
-        $email = BeanFactory::getBean('Emails');
+        $email = BeanFactory::newBean('Emails');
 
         $email->team_id = 1;
 
@@ -449,7 +448,7 @@ class EmailMan extends SugarBean{
         foreach ($this->notes_array as $note) {
             list($filename, $mime_type) = $this->getFileInfo($note);
             // create "audit" email without duping off the file to save on disk space
-            $noteAudit              = BeanFactory::getBean('Notes');
+            $noteAudit              = BeanFactory::newBean('Notes');
             $noteAudit->parent_id   = $retId;
             $noteAudit->parent_type = $email->module_dir;
             $noteAudit->name        = $note->name;
@@ -500,7 +499,7 @@ class EmailMan extends SugarBean{
             if (!class_exists('EmailMarketing')) {
 
             }
-            $email_marketing = BeanFactory::getBean('EmailMarketing');
+            $email_marketing = BeanFactory::newBean('EmailMarketing');
             $ret=$email_marketing->retrieve($marketing_id);
             if (empty($ret)) {
                 $GLOBALS['log']->fatal('Error retrieving marketing message for the email campaign. marketing_id = ' .$marketing_id);
@@ -516,7 +515,7 @@ class EmailMan extends SugarBean{
             if (!class_exists('EmailTemplate')) {
 
             }
-            $emailtemplate = BeanFactory::getBean('EmailTemplates');
+            $emailtemplate = BeanFactory::newBean('EmailTemplates');
 
             $ret=$emailtemplate->retrieve($email_marketing->template_id);
             if (empty($ret)) {
@@ -609,15 +608,11 @@ class EmailMan extends SugarBean{
 				}
 			}
 
-			//test for duplicate email address by marketing id.
-            $dup_query="select id from campaign_log where more_information='".$module->email1."' and marketing_id='".$this->marketing_id."'";
-			$dup=$this->db->query($dup_query);
-			$dup_row=$this->db->fetchByAssoc($dup);
-			if (!empty($dup_row)) {
-				//we have seen this email address before
-				$this->set_as_sent($module->email1,true,null,null,'blocked');
-				return true;
-			}
+            if ($this->hasEmailBeenSent($module->email1, $this->marketing_id)) {
+                // A non-Test version of this marketing email was previously sent to this Email address
+                $this->set_as_sent($module->email1, true, null, null, 'blocked');
+                return true;
+            }
 
 			$this->target_tracker_key=create_guid();
 
@@ -627,7 +622,7 @@ class EmailMan extends SugarBean{
 
 				}
 
-				$this->current_emailmarketing = BeanFactory::getBean('EmailMarketing');
+				$this->current_emailmarketing = BeanFactory::newBean('EmailMarketing');
 
 			}
 			if (empty($this->current_emailmarketing->id) or $this->current_emailmarketing->id !== $this->marketing_id) {
@@ -640,7 +635,7 @@ class EmailMan extends SugarBean{
 				if (!class_exists('EmailTemplate')) {
 
 				}
-				$this->current_emailtemplate = BeanFactory::getBean('EmailTemplates');
+				$this->current_emailtemplate = BeanFactory::newBean('EmailTemplates');
 
 				$this->current_emailtemplate->retrieve($this->current_emailmarketing->template_id);
 
@@ -655,7 +650,6 @@ class EmailMan extends SugarBean{
 				// cn: bug 4684 - initialize the notes array, else old data is still around for the next round
 				$this->notes_array = array();
                 if (!class_exists('Note')){
-                	require_once('modules/Notes/Note.php');
 				}
 				while($a = $this->db->fetchByAssoc($r)) {
 					$noteTemplate = BeanFactory::getBean('Notes', $a['id']);
@@ -668,7 +662,7 @@ class EmailMan extends SugarBean{
 				if (!class_exists('InboundEmail')) {
 
 				}
-				$this->current_mailbox = BeanFactory::getBean('InboundEmail');
+				$this->current_mailbox = BeanFactory::newBean('InboundEmail');
                 $this->current_mailbox->disable_row_level_security = true;
 			}
 			if (empty($this->current_mailbox->id) or $this->current_mailbox->id !== $this->current_emailmarketing->inbound_email_id) {
@@ -682,7 +676,7 @@ class EmailMan extends SugarBean{
 				if (!class_exists('Campaign')) {
 
 				}
-				$this->current_campaign = BeanFactory::getBean('Campaigns');
+				$this->current_campaign = BeanFactory::newBean('Campaigns');
 			}
 			if (empty($this->current_campaign->id) or $this->current_campaign->id !== $this->current_emailmarketing->campaign_id) {
 				$this->current_campaign->retrieve($this->current_emailmarketing->campaign_id);
@@ -910,7 +904,33 @@ class EmailMan extends SugarBean{
      * @param int $id
      */
     public function mark_deleted($id)
-	{
-	    $this->db->query("DELETE FROM {$this->table_name} WHERE id=".intval($id));
-	}
+    {
+        $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
+        $conn = $this->db->getConnection();
+        $conn->executeQuery($query, array($id));
+    }
+
+    /**
+     * Determine whether a non-Test email has already been sent to the supplied Email Address
+     * as part of the supplied EmailMarketing instance
+     *
+     * @param string $email Email Address
+     * @param string $marketingId EmailMarketing Id
+     * @return bool  true if a Non-Test Email Has Already Been Sent
+     * @throws SugarQueryException
+     */
+    protected function hasEmailBeenSent($email, $marketingId)
+    {
+        $q = new SugarQuery();
+        $q->select(array('id'));
+        $q->from(BeanFactory::newBean('CampaignLog'));
+        $q->where()->queryAnd()
+            ->equals('more_information', $email)
+            ->equals('activity_type', 'targeted')
+            ->equals('marketing_id', $marketingId)
+            ->equals('deleted', 0);
+        $q->limit(1);
+        $rows = $q->execute();
+        return !empty($rows);
+    }
 }

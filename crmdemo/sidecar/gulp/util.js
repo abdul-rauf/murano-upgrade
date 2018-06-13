@@ -59,6 +59,7 @@ module.exports = {
     getFilesToLint: function () {
         var sidecarFiles = this.getSidecarFiles();
         var filesToLint = _.clone(sidecarFiles);
+        filesToLint.push('!node_modules/**/*.js'); // ignore external dependencies
         filesToLint.push('!lib/**/*.min.js'); // ignore minified files
         filesToLint.push('!lib/!(sugar*)/**/*.js'); // ignore non-sugarcrm library files
 

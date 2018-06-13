@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library – käyttöliittymäkirjastotyökalut helpottaa rikkaiden asiakaspuolen ominaisuuksien toteuttamisessa.',
   'LBL_SOURCE_PHPMAILER' => 'Phpmailer – täysin varusteltu sähköpostin välitysluokka PHP:lle',
   'LBL_SOURCE_JSHRINK' => 'JShrink – JavaScript minifier kirjoitettu PHP:lla',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish – mahdollistaa nopean kaksisuuntaisen Blowfish-salauksen ilman mcrypt PHP-laajennusta.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 – SAX-jäsennin HTML:lle ja muille huonosti muodostetuille XML-dokumenteille',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library – Laajennukset Yahoo!-käyttöliittymäkirjastoihin. Tehnyt Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject – Skripti Javascript Flash Player:in havaitsemiseen ja upottamiseen.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Tervetuloa Sugar 7:n ohjedashletiin',
-    'LBL_HELP_RECORD' => 'Ohjedashlet näyttää käytössäsi olevaan moduuliin liittyvää tietoa, tarkkoja ohjeita joillekin toiminnoille, ja kertoo, mistä löytyy lisätukea.
-
-Ohjedashlet on saatavilla kaikille Sugar 7: n moduuleille, ja se voidaan avata ja sulkea klikkaamalla näytön alapalkissa olevaa ohjekuvaketta.',
+    'LBL_HELP_RECORD_TITLE' => 'Ohje',
+    'LBL_HELP_RECORD' => 'Ohje näyttää tarkastelemasi moduulin tarkat tiedot, antaa yksityiskohtaiset ohjeet moduulin joidenkin toimintojen suorittamiseksi ja ohjaa sinut kattavampiin tietoihin ja tukeen.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Suodatin',
 );

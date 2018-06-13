@@ -26,7 +26,6 @@ class Product extends SugarBean
     public $created_by;
     public $created_by_name;
     public $modified_by_name;
-    public $field_name_map;
     public $name;
     public $product_template_id;
     public $description;
@@ -153,7 +152,7 @@ class Product extends SugarBean
 
         $this->team_id = 1; // make the item globally accessible
 
-        $currency = BeanFactory::getBean('Currencies');
+        $currency = BeanFactory::newBean('Currencies');
         $this->default_currency_symbol = $currency->getDefaultCurrencySymbol();
     }
 
@@ -448,7 +447,7 @@ class Product extends SugarBean
     public function convertToRevenueLineItem()
     {
         /* @var $rli RevenueLineItem */
-        $rli = BeanFactory::getBean('RevenueLineItems');
+        $rli = BeanFactory::newBean('RevenueLineItems');
         $rli->id = create_guid();
         $rli->new_with_id = true;
         $rli->fetched_row = array();
@@ -580,7 +579,8 @@ class Product extends SugarBean
         // need to go though product bundles
         $this->load_relationship('product_bundles');
         // grab the first and only one
-        $bundle = array_pop($this->product_bundles->getBeans());
+        $bundles = $this->product_bundles->getBeans();
+        $bundle = array_pop($bundles);
 
         // make sure we have a bundle
         if (empty($bundle)) {
@@ -591,7 +591,8 @@ class Product extends SugarBean
         $bundle->load_relationship('quotes');
 
         // get the beans
-        $quote = array_pop($bundle->quotes->getBeans());
+        $quotes = $bundle->quotes->getBeans();
+        $quote = array_pop($quotes);
 
         if (empty($quote)) {
             return true;

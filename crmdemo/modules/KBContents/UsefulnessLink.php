@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once("data/Link2.php");
 
 class UsefulnessLink extends Link2
 {
@@ -69,7 +68,7 @@ class UsefulnessLink extends Link2
      */
     public function isValidSugarUser($user)
     {
-        $portalUserId = BeanFactory::getBean('Users')->retrieve_user_id('SugarCustomerSupportPortalUser');
+        $portalUserId = BeanFactory::newBean('Users')->retrieve_user_id('SugarCustomerSupportPortalUser');
         return $user->id !== $portalUserId;
     }
 

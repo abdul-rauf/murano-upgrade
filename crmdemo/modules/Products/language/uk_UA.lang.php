@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Продукт комерційної пропозиції',
     'LBL_LIST_MANUFACTURER' => 'Виробник',
     'LBL_MANUFACTURERS' => 'Виробники',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Внутрішній код виробника',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Номер частини',
     'LBL_LIST_QUANTITY' => 'Кількість',
     'LBL_LIST_COST_PRICE' => 'Вартість',
     'LBL_LIST_DISCOUNT_PRICE' => 'Ціна',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Обрати знижку',
     'LBL_LIST_PRICE' => 'Прайс-лист:',
     'LBL_VENDOR_PART_NUM' => 'Внутрішній код постачальника:',
-    'LBL_MFT_PART_NUM' => 'Внутрішній код виробника:',
+    'LBL_MFT_PART_NUM' => 'Номер частини:',
     'LBL_NEXT_STEP' => 'Наступний крок:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Дата ціни зі знижкою:',
     'LBL_WEIGHT' => 'Вага:',
@@ -168,6 +168,8 @@ $mod_strings = array(
  - Щоб переглянути додаткові поля, натисніть "Показати більше".
 2. Натисніть кнопку "Зберегти", щоб завершити створення нового запису й повернутися до попередньої сторінки.',
 
-    'LBL_MANUFACTURERS' => 'Виробники',
     'LBL_PRODUCT_POSITION' => 'Product Bundle Position',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Список даних комерційної пропозиції продуктів',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Новий продукт)',
+    'LBL_DISCOUNT_PERCENT' => '%, відсотки',
 );

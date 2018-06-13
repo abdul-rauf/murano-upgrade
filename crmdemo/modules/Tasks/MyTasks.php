@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +17,7 @@ $current_module_strings = return_module_language($current_language, 'Tasks');
 $tomorrow = $timedate->getNow()->get("+1 day")->asDb();
 
 $ListView = new ListView();
-$seedTasks = BeanFactory::getBean('Tasks');
+$seedTasks = BeanFactory::newBean('Tasks');
 $where = "tasks.assigned_user_id='". $current_user->id ."' and (tasks.status is NULL or (tasks.status!='Completed' and tasks.status!='Deferred')) ";
 $where .= "and (tasks.date_start is NULL or ";
 $where .= $seedTasks->db->convert($seedTasks->db->convert("tasks.date_start", "date_format", '%Y-%m-%d'),  "CONCAT",

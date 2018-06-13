@@ -9,10 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once("include/Expressions/Trigger.php");
-require_once("include/Expressions/Dependency.php");
-require_once("include/Expressions/Expression/Parser/Parser.php");
-require_once("include/Expressions/Expression/AbstractExpression.php");
 
 /**
  * Base action class
@@ -26,14 +22,6 @@ abstract class AbstractAction {
      * array Array of actions for which the Expression Action is not allowed
      */
     protected $disallowedActions = array();
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function AbstractAction($params)
-    {
-        self::__construct($params);
-    }
 
 	/**
 	 * Actions are expressions which modify data or layouts.
@@ -56,7 +44,10 @@ abstract class AbstractAction {
 	 *
 	 * @return string javascript.
 	 */
-	abstract static function getJavascriptClass() ;
+    public static function getJavascriptClass()
+    {
+        throw new BadMethodCallException(__METHOD__ . ' is not implemented');
+    }
 
     /**
      * Checks if the Expression Action is allowed for the given action
@@ -97,11 +88,8 @@ abstract class AbstractAction {
 	    );
 	}
 
-	abstract static function getActionName();
-
-}
-
-function handleExpressionError($errno, $errstr, $errfile, $errline, array $errcontext)
-{
-    $GLOBALS['log']->fatal("Error evaluating expression: {$errstr}\nLine {$errline} of file {$errfile}");
+    public static function getActionName()
+    {
+        throw new BadMethodCallException(__METHOD__ . ' is not implemented');
+    }
 }

@@ -17,8 +17,8 @@ $connector_strings = array(
 <br/><br/>
 <ol>
 <li>Μπείτε στην ιστοσελίδα των προγραμματιστών της Google:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Συνδεθείτε μέσω του λογαριασμού Google μέσω του οποίου θέλετε να εγγράψετε την εφαρμογή.</li>
 <li>Δημιουργήστε νέο έργο</li>

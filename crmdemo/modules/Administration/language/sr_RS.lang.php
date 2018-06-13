@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Nedostupne Teme',
     'LBL_TIMEZONE' => 'Vremenska zona',
     'LBL_TO'    => 'za',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Odaberite sistem i podatke korisnika koji se prate',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatski',
     'LBL_UPDATE_CHECK_MANUAL'=>'Ručno',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Automatski traži novije verzije</B> - Ako je označeno, sistem će s vremena na vreme proveravati da li su dostupne novije verzije aplikacije.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Fajl config.php je uspešno rekonsturisan.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Upozorenje: Vaša PHP konfiguracija mora biti promenjena da omogući bar 6MB otpremanje. Molim, promenite upload_max_filesize vrednost u Vašem php.ini fajlu lociranom na:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Podesite da je config.php pisiv i pokušajte ponovo.',
-    'MSG_REBUILD_EXTENSIONS' => 'Molim idite na <a href="index.php?module=Administration&action=Upgrade">Popravi</a> i kliknite na Rekonstruiši ekstenzije.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Molim idite na <a href="index.php?module=Administration&action=Upgrade">Popravi</a> i kliknite na Rekonstruiši ekstenzije.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Trenutno nema omogućenih Offline klijenata.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Da li sigurno želite da onemogućite Offline klijenta?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Da li sigurno želite da omogućite Offline klijenta?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Problemi',
 'ML_MANIFEST_ISSUE'=>'Problemi sa manifestom',
 'ML_CONFIG_OVERRIDE'=>'Modifikacija konfiguracije nije dozvoljena',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Ključ – može da se sastoji samo od slova, brojeva i podvlaka. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Podesite Paletu Prečice',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Izaberite koji su moduli dostupni u Paleti Prečica',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Odaberite koji moduli za koje korisnike mogu da brzo prave nove zapise korišćenjem plus ikonice u gornjoj navigaciji. Prevucite module između omogućenih i onemogučenih.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Proizvođač',
 	'ProductBundleNotes' => 'Napomena o grupi proizvoda',
 	'ProductBundles'   => 'Grupa proizvoda',
-	'ProjectResources' => 'ResursProjekta',
 
 	'Relationships' => 'Veza',
 	'Releases'       => 'Izdanje',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'PlaniraniPosao',
 	'Shippers'       => 'Pošiljalac',
 	'TaxRates'       => 'PoreskaStopa',
-	'TeamHierarchies'  => 'TimskaHijerarhija',
 	'TeamMemberships'   => 'TimskoČlanstvo',
 	'TeamNotices'    => 'TimskaBeleška',
 	'TeamSetModules'   => 'TimskaPostavkaModula',

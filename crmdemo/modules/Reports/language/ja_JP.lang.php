@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => '取引先レポート',
   'LBL_CONTACT_REPORTS' => '取引先担当者レポート',
   'LBL_OPPORTUNITY_REPORTS' => '商談レポート',
+    'LBL_RECENTLY_MODIFIED' => '最近の更新',
 
   'LBL_CASE_REPORTS' => 'ケースレポート',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'翌30日間',
   'LBL_THIS_YEAR'=>'今年',
   'LBL_LIST_FORM_TITLE' =>'レポート',
+  'LBL_LIST_REPORT_NAME' => '名前',
   'LBL_PROSPECT_REPORTS'=>'ターゲットレポート',
   'LBL_CHART_TYPE'=>'グラフタイプ',
   'LBL_IS_EMPTY'=>'空である',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>フィルタ定義の手順:</b><br/><br/>1) <b>関連するモジュール</b>領域からフィルタに利用したいモジュールをクリックしてください。デフォルトでは、主モジュール(ツリービューのトップノード)が選択されています。 <br/><br/><br />	モジュール(ツリービューの子ノード)をクリックすることにより、関連モジュールを選択することができます。ノードを開き、関連するモジュールに関連する追加のモジュールを表示します。選択したモジュールにあわせて<b>利用可能なフィールド</b>領域にレポート可能なフィールドが表示されます。<br/><br/><br />	2) <b>利用可能なフィールド</b>領域のフィールドをクリックしてそのフィールドをフィルタに追加します。その領域のテキストボックスにフィールド名を入力することによりフィールドを検索することもできます。<br/><br/><br />	<b>関連するモジュール</b>領域から選択したモジュールのいくつかのフィールドを選択後、他のモジュールのフィールドを選択してフィルタとして利用することもできます。<br/><br/><br />	3) <b>AND</b>か<b>OR</b>を選択し、すべてかその中の１つのフィルタがレポートの結果を検索するために満たさなければいけないかを決定します。<br/><br/><br />	4) [任意] <b>フィルタグループの追加</b>をクリックし、フィルタのグループを作成します。フィルタグループやグループの中に含まれるフィルタはいくつでも作成できます。<br/><br/><br />	5) [任意] ランタイム オプションを選択し、レポートを閲覧するときにレポートの結果をカスタマイズするためにフィルタをユーザが変更できるようにします。",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>グループ定義の手順:</b><br></br>1) <b>関連するモジュール</b>領域からレポートでレコードをグループ化したいモジュールをクリックします。デフォルトでは、主モジュール(ツリービューのトップノード)が選択されています。<br/><br/><br />	モジュール(ツリービューの子ノード)をクリックすることにより、関連モジュールを選択することができます。ノードを開き、関連するモジュールに関連する追加のモジュールを表示します。選択したモジュールにあわせて<b>利用可能なフィールド</b>領域にレポート可能なフィールドが表示されます。<br/><br/><br />	2) <b>利用可能なフィールド</b>領域からレポートのレコードをグループ化するフィールドをクリックします。その領域のテキストボックスにフィールド名を入力することによりフィールドを検索することもできます。<br/><br/><br />	<b>関連するモジュール</b>領域から選択したモジュールのいくつかのフィールドを選択後、他のモジュールのフィールドを選択してグループ化の条件として利用することもできます。ただし、あまり多くのフィールドでグループ化するとレポートが読み難くなります。<br/><br/><br />	ドラッグアンドドロップでフィールドの順番を配置したい場所に変更することができます。順番を変更すると、表示される結果に影響が出ます。<br/><br/> マトリックスレポートでは、最大３つのフィールドをレコードをグループ化する際に利用できます。",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>表示カラム選択の手順:</b><br/><br/>1) <b>関連するモジュール</b>領域からレポートにデータを表示したいモジュールをクリックします。デフォルトでは、「モジュールの選択」の際に選択した主モジュール(ツリービューのトップノード)が選択されています。<br/><br/><br />	モジュールをクリックすることにより関連するモジュール(ツリービューの子ノード)からフィールドを選択できます。主モジュールに関連するモジュールに関連するモジュールも選択できます。選択したモジュールにあわせて<b>利用可能なフィールド</b>領域にレポート可能なフィールドが表示されます。<br/><br/><br />	2) <b>利用可能なフィールド</b>領域からレポートのレコードにデータを表示するフィールドをクリックします。その領域のテキストボックスにフィールド名を入力することによりフィールドを検索することもできます。<br/><br/><br />	<b>関連するモジュール</b>領域から選択したモジュールのいくつかのフィールドを選択後、他のモジュールのフィールドを選択して利用することもできます。任意の個数のフィールドを選択できますが、レポートに不必要なフィールドを追加すると、レポートの生成が遅くなり、読み難くなります。<br/><br/><br />	ドラッグアンドドロップでフィールドの順番を配置したい場所に変更することができます。フィールドの順番を変更することにより、結果に表示されるカラムの順番が変更されます。" ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>集計表示の選択手順：</b><br/><br/>1) <b>Related Modules</b>ペインで、レポートの集計表示に使用したいモジュールをクリックします。デフォルトでは、最初のモジュール (ツリー表示の最初に出現するノード) が選択されます。<br/><br/>	モジュールをクリックすることで、関連モジュール (ツリー表示の子ノード) を選択できます。ノードを展開して、関連モジュールに関連する追加モジュールを表示します。選択されたモジュールにより、<b>未選択フィールド</b>ペインで現れるレポート可能なフィールドが決定されます。<br/><br/>	2) <b>未選択フィールド</b>ペインでフィールドをクリックしてレポートの集計表示を選択します。ペインのテキストボックスに入力してフィールドを検索することもできます。<br/><br/>	<b>関連モジュール</b>ペインの選択されたモジュールからいくつかのフィールドを選択した後に、別のモジュールを選択してレポートに追加するフィールドをさらに選択することができます。<br/><br/> マトリックスレポートでは、1つ以上のフィールドを選択してレポートの単一セル内に複数の値を表示することができます。" ,
 
 	'LBL_ALT_SHOW' => '表示',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'このレポートには以下のカラム順でデータが含まれています。',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => '上へ' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => '情報',
     'LBL_REPORT_GRAND_TOTAL' => "総計",
+    'LBL_EDIT_REPORT_BUTTON' => 'レポートの編集',
 
     'LBL_REPORTS_TO' => '上司',
     'LBL_LESS_THAN_EQUAL' => '以下',

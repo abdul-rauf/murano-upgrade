@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -42,7 +41,6 @@ $mod_strings = array (
 	'LBL_COUNTRY' => 'Ország:',
 	'LBL_DATE_ENTERED' => 'Létrehozás dátuma:',
 	'LBL_DATE_MODIFIED' => 'Módosítás dátuma:',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Kliensek',
 	'LBL_DESCRIPTION_INFORMATION' => 'Leírás',
 	'LBL_DESCRIPTION' => 'Leírás:',
 	'LBL_DUPLICATE' => 'Lehet, hogy többször előforduló kliens',

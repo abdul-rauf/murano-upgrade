@@ -17,8 +17,8 @@ Obtenha uma Chave de API e um Segredo do Google registando a sua instância de S
 <br/><br/>
 <ol>
 <li>Dirija-se ao site Google Developers:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Inicie sessão com a conta Google na qual pretende registar a aplicação.</li>
 <li>Crie um novo projeto</li>

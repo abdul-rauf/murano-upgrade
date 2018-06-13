@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Prilog',
     'LBL_REVENUELINEITEMS' => 'Stavke prihoda',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Pregled računa',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Bilješke',
 
     // Help Text

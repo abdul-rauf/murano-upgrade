@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Allegato',
     'LBL_REVENUELINEITEMS' => 'Elementi dell&#39;opportunità',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Anteprima Aziende',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Note',
 
     // Help Text
@@ -188,7 +187,7 @@ $mod_strings = array (
 Per creare un record del modulo {{module_name}}:
 1. Compila i campi con i valori desiderati
 - I campi contrassegnati come "Obbligatorio" devono essere compilati prima di salvare.
-- Cliccare "Mostra più Moduli" per visualizzare ulteriori campi se necessario.
+- Cliccare "Altri dettagli" per visualizzare ulteriori campi se necessario.
 2. Cliccare "Salva" per salvare il nuovo record e ritornare alla pagina precedente.',
 
     'LBL_FILTER_ACCOUNTS_REPORTS' => 'Report sul modulo Aziende',

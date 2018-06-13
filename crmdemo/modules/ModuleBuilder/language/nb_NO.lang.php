@@ -299,7 +299,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Klikk for å redigere modulen.',
         'moduleHelp'=> 'Velg modulkomponentene du vil redigere',
         'fieldsBtn'	=> 'Rediger hvilken informasjon som lagres i modulen ved å kontrollere <b>feltene</b> i modulen.<br/><br/>Du kan redigere og opprette tilpassede felt her.',
-        'labelsBtn' => 'Klikk på <b>Lagre</b> for å lagre de tilpassede etikettene dine.'	,
         'layoutsBtn'=> 'Tilpass <b>grensesnittene</b> til visningene Rediger, Detalj, Liste og Søk.',
         'subpanelBtn'=> 'Rediger hvilken informasjon som vises i modulenes underpaneler.',
         'layoutsHelp'=> 'Velg <b>Grensesnitt å redigere</b>.<br/><br/>For å endre grensesnittet som inneholder datafelt for dataangivelse, klikk på <b>Rediger-visning</b>.<br/><br/>For å endre grensesnittet som viser de angitte dataene i feltene i rediger-visningen, klikk på <b>Detaljvisning</b>.<br/><br/>For å endre kolonnene som vises i standardlisten, klikk på <b>Listevisning</b>.<br/><br/>For å endre grunnleggende og avansert søkeskjemagrensesnitt, klikk på <b>Søk</b>.',
@@ -734,10 +733,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Er du sikker på at du ønsker å slette Lukket Mistet salgstrinnet? Sletting av dette trinnet vil føre til at Prognose modulen ikke vil fungere ordentlig.',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Er du sikker på at du vil slette dette forholdet?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Dette vil gjøre dette forholdet permanent. Er du sikker på at du vil distribuere dette forholdet?',
 'LBL_CONFIRM_DONT_SAVE' => 'Endringer har blitt gjort siden din siste lagring, vil du lagre?',

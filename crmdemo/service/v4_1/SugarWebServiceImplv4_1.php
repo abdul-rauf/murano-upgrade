@@ -20,7 +20,6 @@ if (!defined('sugarEntry')) define('sugarEntry', true);
  *
  */
 require_once('service/v4/SugarWebServiceImplv4.php');
-require_once('service/v4_1/SugarWebServiceUtilv4_1.php');
 
 class SugarWebServiceImplv4_1 extends SugarWebServiceImplv4
 {
@@ -101,7 +100,7 @@ class SugarWebServiceImplv4_1 extends SugarWebServiceImplv4
     		if (sizeof($list) > 0) {
     			// get the related module name and instantiate a bean for that
     			$submodulename = $mod->$link_field_name->getRelatedModuleName();
-                $submoduletemp = BeanFactory::getBean($submodulename);
+                $submoduletemp = BeanFactory::newBean($submodulename);
 
     			foreach($list as $row) {
     				$submoduleobject = @clone($submoduletemp);
@@ -204,9 +203,7 @@ class SugarWebServiceImplv4_1 extends SugarWebServiceImplv4
             $query .= " AND m2.id = '".$GLOBALS['db']->quote($module_user_id)."'";
         }
 
-        //if($related_module == 'Meetings' || $related_module == 'Calls' || $related_module = 'Contacts'){
         $query = string_format($query, array('m1'));
-        //}
 
         require_once('soap/SoapRelationshipHelper.php');
         $results = retrieve_modified_relationships($module_name, $related_module, $query, $deleted, $offset, $max_results, $select_fields, $relationship_name);

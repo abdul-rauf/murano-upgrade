@@ -1,5 +1,5 @@
 <?php
-// created: 2018-06-13 11:24:59
+// created: 2018-06-13 14:43:24
 $viewdefs['Calls']['QuickCreate'] = array (
   'templateMeta' => 
   array (
@@ -44,7 +44,7 @@ $viewdefs['Calls']['QuickCreate'] = array (
         'field' => '30',
       ),
     ),
-    'javascript' => '<script type="text/javascript">{$JSON_CONFIG_JAVASCRIPT}</script>{sugar_getscript file="cache/include/javascript/sugar_grp_jsolait.js"}<script>toggle_portal_flag();function toggle_portal_flag()  {literal} { {/literal} {$TOGGLE_JS} {literal} } {/literal} </script>',
+    'javascript' => '<script type="text/javascript">{$JSON_CONFIG_JAVASCRIPT}</script><script>toggle_portal_flag();function toggle_portal_flag()  {literal} { {/literal} {$TOGGLE_JS} {literal} } {/literal} </script>',
     'useTabs' => false,
     'tabDefs' => 
     array (

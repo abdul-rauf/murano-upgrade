@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,6 +17,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 global $current_user;
 $workflow_modules = get_workflow_admin_modules_for_user($current_user);
 if (!is_admin($current_user) && empty($workflow_modules))
@@ -34,7 +35,7 @@ global $app_strings;
 global $app_list_strings;
 global $mod_strings;
 
-$focus = BeanFactory::getBean('EmailTemplates');
+$focus = BeanFactory::newBean('EmailTemplates');
 
 if(isset($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
@@ -116,7 +117,7 @@ if (!empty($focus->id)) {
     $etid = $old_id;
 }
 if(!empty($etid)) {
-    $note = BeanFactory::getBean('Notes');
+    $note = BeanFactory::newBean('Notes');
     $notes_list = $note->get_full_list("", "notes.parent_id=" . $GLOBALS['db']->quoted($etid) . " AND notes.filename IS NOT NULL", true);
     if (!empty($notes_list)) {
         for ($i = 0; $i < count($notes_list); $i++) {
@@ -143,10 +144,9 @@ $xtpl->assign('ATTACHMENTS_JAVASCRIPT', $attJs);
 
 
 
-
-if(!empty($_REQUEST['base_module']) && $_REQUEST['base_module']!=""){
-
-	$focus->base_module = $_REQUEST['base_module'];
+$base_module = InputValidation::getService()->getValidInputRequest('base_module', 'Assert\Mvc\ModuleName');
+if (!empty($base_module)) {
+    $focus->base_module = $base_module;
 }
 //
 $xtpl->assign("BASE_MODULE", $focus->base_module);
@@ -177,7 +177,6 @@ if (isset($focus->body)) $xtpl->assign("BODY", $focus->body); else $xtpl->assign
 if (isset($focus->body_html)) $xtpl->assign("BODY_HTML", $focus->body_html); else $xtpl->assign("BODY_HTML", "");
 
 //////////////////////////////////
-require_once('include/SugarTinyMCE.php');
 $tiny = new SugarTinyMCE();
 $tiny->defaultConfig['apply_source_formatting']=true;
 $tiny->defaultConfig['cleanup_on_startup']=true;

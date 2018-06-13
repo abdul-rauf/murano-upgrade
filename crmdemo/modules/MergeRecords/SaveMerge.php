@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,7 +15,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 $record = InputValidation::getService()->getValidInputRequest('record', 'Assert\Guid');
 $module = InputValidation::getService()->getValidInputRequest('merge_module', 'Assert\Mvc\ModuleName');
 
-$focus = BeanFactory::getBean('MergeRecords');
+$focus = BeanFactory::newBean('MergeRecords');
 $focus->load_merge_bean($module, true, $record);
 
 foreach($focus->merge_bean->column_fields as $field)
@@ -31,7 +30,8 @@ foreach($focus->merge_bean->column_fields as $field)
             $value = encodeMultienumValue($value);
         }
         $focus->merge_bean->$field = $value;
-	}elseif (isset($focus->merge_bean->field_name_map[$field]['type']) && $focus->merge_bean->field_name_map[$field]['type'] == 'bool'  ) {
+    } elseif (isset($focus->merge_bean->field_defs[$field]['type'])
+        && $focus->merge_bean->field_defs[$field]['type'] == 'bool') {
 		$focus->merge_bean->$field = 0;
 	}
 }
@@ -101,7 +101,6 @@ if (is_array($merged)) {
             	continue;
 
             if ($name == 'teams') {
-				require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
 				$teamSetField = new SugarFieldTeamset('Teamset');
 			    if($teamSetField != null){
 			       $teamSetField->save($focus->merge_bean, $_REQUEST, 'team_name', '');

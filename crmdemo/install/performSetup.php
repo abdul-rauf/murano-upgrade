@@ -51,7 +51,6 @@ $mi->silent = true;
 $mi->rebuild_tabledictionary();
 $mi->rebuild_vardefs();
 
-require_once 'include/MetaDataManager/MetaDataManager.php';
 MetaDataManager::disableCache();
 
 include "modules/Trackers/tracker_perfMetaData.php";
@@ -345,11 +344,9 @@ echo $mod_strings['LBL_PERFORM_DONE'];
 
 
 //Install forecasts configuration
-require_once('modules/Forecasts/ForecastsDefaults.php');
 $forecast_config = ForecastsDefaults::setupForecastSettings();
 
 //Install Opportunities configuration
-require_once('modules/Opportunities/OpportunitiesDefaults.php');
 $opps_config = OpportunitiesDefaults::setupOpportunitiesSettings();
 
 unset($opps_config);
@@ -449,8 +446,6 @@ create_default_roles();
 installerHook('post_addDefaultRoles');
 
 // Hide certain subpanels by default
-require_once('include/SubPanel/SubPanelDefinitions.php');
-require_once('modules/MySettings/TabController.php');
 
 $disabledTabs = array(
     "project",
@@ -490,7 +485,6 @@ $enabled_tabs[] = 'ProspectLists';
 $enabled_tabs[] = 'Tags';
 
 installerHook('pre_setSystemTabs');
-require_once('modules/MySettings/TabController.php');
 $tabs = new TabController();
 $tabs->set_system_tabs($enabled_tabs);
 installerHook('post_setSystemTabs');
@@ -574,10 +568,6 @@ if (isset($_SESSION['INSTALLED_LANG_PACKS']) && ArrayFunctions::is_array_access(
 ) {
     updateUpgradeHistory();
 }
-
-///////////////////////////////////////////////////////////////////////////
-////    HANDLE SUGAR VERSIONS
-require_once('modules/Versions/InstallDefaultVersions.php');
 
 
 

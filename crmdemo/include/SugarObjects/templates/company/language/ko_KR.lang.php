@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -42,7 +41,6 @@ $mod_strings = array (
 	'LBL_COUNTRY' => '국가:',
 	'LBL_DATE_ENTERED' => '생성일자:',
 	'LBL_DATE_MODIFIED' => '수정일자:',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => '고객',
 	'LBL_DESCRIPTION_INFORMATION' => '정보설명',
 	'LBL_DESCRIPTION' => '설명',
 	'LBL_DUPLICATE' => '중복 가능한 고객',

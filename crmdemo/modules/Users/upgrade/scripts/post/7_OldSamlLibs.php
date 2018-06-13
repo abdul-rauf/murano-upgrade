@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,6 +20,6 @@ class SugarUpgradeOldSamlLibs extends UpgradeScript
 
     public function run()
     {
-        $this->fileToDelete('modules/Users/authentication/SAMLAuthenticate/lib');
+        $this->upgrader->fileToDelete('modules/Users/authentication/SAMLAuthenticate/lib', $this);
     }
 }

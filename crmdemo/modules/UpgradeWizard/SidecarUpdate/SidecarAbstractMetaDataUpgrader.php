@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -290,7 +289,6 @@ abstract class SidecarAbstractMetaDataUpgrader
             return false;
         }
         return $this->save($newname, $content);
-        //return true;
     }
 
     /**
@@ -352,7 +350,7 @@ abstract class SidecarAbstractMetaDataUpgrader
     protected function getFieldDefs()
     {
         if(is_null($this->field_defs)) {
-            $bean = BeanFactory::getBean($this->module);
+            $bean = BeanFactory::newBean($this->module);
             if (empty($bean)) {
                 // broken state, don't try again
                 $this->field_defs = array();

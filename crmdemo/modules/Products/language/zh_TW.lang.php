@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => '報價項目',
     'LBL_LIST_MANUFACTURER' => '製造商',
     'LBL_MANUFACTURERS' => '製造商',
-    'LBL_LIST_LBL_MFT_PART_NUM' => '製造商編號',
+    'LBL_LIST_LBL_MFT_PART_NUM' => '部件編號',
     'LBL_LIST_QUANTITY' => '數量',
     'LBL_LIST_COST_PRICE' => '成本',
     'LBL_LIST_DISCOUNT_PRICE' => '價格',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => '折扣選擇',
     'LBL_LIST_PRICE' => '清單價格：',
     'LBL_VENDOR_PART_NUM' => '廠商部件編號：',
-    'LBL_MFT_PART_NUM' => '製造商部件編號：',
+    'LBL_MFT_PART_NUM' => '部件編號：',
     'LBL_NEXT_STEP' => '下一步：',
     'LBL_DISCOUNT_PRICE_DATE' => '折扣價格日期：',
     'LBL_WEIGHT' => '重量：',
@@ -168,6 +168,8 @@ $mod_strings = array(
  - 按一下「顯示更多」以顯示更多欄位（若需）。
 2. 按一下「儲存」以完成新記錄並返回至上一頁。',
 
-    'LBL_MANUFACTURERS' => '製造商',
     'LBL_PRODUCT_POSITION' => '產品搭售方案位置',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => '已報價項目報價資料清單',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' （新報價項目）',
+    'LBL_DISCOUNT_PERCENT' => '百分比',
 );

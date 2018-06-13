@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -25,13 +24,6 @@ class Chart_outcome_by_month
 {
 	var $modules = array('Opportunities');
 	var $order = 0;
-
-    /**
-     * @deprecated
-     */
-    public function Chart_outcome_by_month()
-    {
-    }
 
 function draw($extra_tools)
 {
@@ -216,7 +208,7 @@ echo get_validate_chart_js();
 			$GLOBALS['log']->debug($user_id);
 			$GLOBALS['log']->debug("cache_file_name is: $cache_file_name");
 
-            $opp = BeanFactory::getBean('Opportunities');
+            $opp = BeanFactory::newBean('Opportunities');
 			$where = "";
 			//build the where clause for the query that matches $user
 			$count = count($user_id);
@@ -423,7 +415,7 @@ echo get_validate_chart_js();
 		$dateStartDisplay = $timedate->asUserDate($timedate->fromString($date_start));
 		$dateEndDisplay = $timedate->asUserDate($timedate->fromString($date_end));
 
-		$opp = BeanFactory::getBean('Opportunities');
+		$opp = BeanFactory::newBean('Opportunities');
 		//build the where clause for the query that matches $date_start and $date_end
 		$where .= "AND opportunities.date_closed >= ".db_convert("'".$date_start."'",'date')." AND opportunities.date_closed <= ".db_convert("'".$date_end."'",'date')." AND opportunities.deleted=0";
 		$query = "SELECT sales_stage,".db_convert('opportunities.date_closed','date_format',array("'%Y-%m'"),array("'YYYY-MM'"))." as m, sum(amount_usdollar/1000) as total, count(*) as opp_count FROM opportunities ";

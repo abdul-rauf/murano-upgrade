@@ -26,7 +26,6 @@ class CliUpgrader extends UpgradeDriver
         "script_mask" => array(false, 'm', 'mask'),
         "stage" => array(false, 'S', 'stage'),
         "autoconfirm" => array(false, 'A', 'autoconfirm'),
-        "sendlog" => array(false, 'H', 'sendlog'),
         // Appears when stage was not specified and upgrader is running step by step.
         'all' => array(false, 'a', 'all'),
     );
@@ -133,7 +132,6 @@ Optional arguments:
                                            Supported types: core, db, custom, all, none. Default is all.
     -b/--backup 0/1                      : Create backup of deleted files? 0 means no backup, default is 1.
     -S/--stage stage                     : Run specific stage of the upgrader. 'continue' means start where it stopped last time.
-    -H/--sendlog 0/1                     : Automatic push HealthCheck logs to sugarcrm server, default to 0.
     -A/--autoconfirm 0/1                 : Automatic confirm health check results (use with caution !). Default is 0.
 
 eoq2;
@@ -207,14 +205,17 @@ eoq2;
      */
     public function fixupContext($context)
     {
+        $context['zip_as_dir'] = false;
+
         if (!empty($context['zip'])) {
             $context['zip'] = realpath($context['zip']);
+
+            if (is_dir($context['zip'])) {
+                $context['zip_as_dir'] = true;
+                $this->clean_on_fail = false;
+            }
         }
-        $context['zip_as_dir'] = false;
-        if (is_dir($context['zip'])) {
-            $context['zip_as_dir'] = true;
-            $this->clean_on_fail = false;
-        }
+
         if (!empty($context['source_dir'])) {
             $context['source_dir'] = realpath($context['source_dir']);
         }
@@ -548,9 +549,7 @@ eoq2;
         $this->state['healthcheck'] = $scanner->scan();
         $this->saveState();
         $this->getHelper()->pingHeartbeat(array('bucket' => $scanner->getStatus(), 'flag' => $scanner->getFlag()));
-        if ($this->context['sendlog']) {
-            $this->getHelper()->sendLog($this->context['log']);
-        }
+
         $scanner->dumpMeta();
         if ($scanner->isFlagRed()) {
             return $this->error(

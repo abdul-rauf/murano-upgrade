@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - As UI Library Utilities facilitam a implementação de funcionalidades ricas do lado do cliente.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Uma classe de transferência de e-mail completa para PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - Um minifier Javascript escrito em PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Permite uma rápida criptografia bilateral blowfish sem necessitar da extensão MCrypt PHP.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - Um parser SAX para HTML e outros documentos XML criados incorretamente',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - Extensões para Yahoo! User Interface Library por Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Script de detecção e Flash Player de javascript embutido.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Bem-vindo ao painel de ajuda do Sugar 7',
-    'LBL_HELP_RECORD' => 'O dashlet de ajuda exibe informações específicas sobre o módulo que você está visualizando, fornece etapas detalhadas para executar algumas ações no módulo e indica onde ir para obter informações e suporte mais completos. O dashlet de ajuda fica aberto para que possa ver as etapas conforme elas são executadas no módulo. 
-
-O painel de ajuda está disponível para todos os módulos do Sugar 7 e pode ser alternado entre "aberto" e "fechado" clicando no ícone Ajuda no rodapé do aplicativo.',
+    'LBL_HELP_RECORD_TITLE' => 'Ajuda',
+    'LBL_HELP_RECORD' => 'A Ajuda exibe informações específicas sobre o módulo que está sendo exibido, fornece etapas detalhadas para executar algumas ações no módulo e informa onde é possível receber suporte e informações mais completas.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtro',
 );

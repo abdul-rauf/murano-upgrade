@@ -8,10 +8,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Persistent cache manager.
  *
- * By default, cache manager uses stash.js to manipulate items in `window.localStorage` object.
+ * By default, cache manager uses store.js to manipulate items in `window.localStorage` object.
  * Use {@link Core.CacheManager#store} property to override the storage provider.
  * The value of the key which is passed as a parameter to `get/set/add` methods is prefixed with
  * `<env>:<appId>:` string to avoid clashes with other environments and applications running off the same domain name and port.
@@ -23,38 +24,92 @@
  */
 (function(app) {
 
-    var _keyPrefix = "";
+    let keyPrefix = '';
 
-    var _warnIfBadType = function (value) {
-        if (_.isFunction(value) || _.isDate(value) || _.isRegExp(value) || value instanceof HTMLElement) {
-            app.logger.warn('Core.CacheManager: Providing any of Function, Date, RegExp, or HTMLElement to ' +
-                'the cache manager is deprecated in 7.8 and will be removed in 7.9');
+    let buildKey = (key) => keyPrefix + key;
+
+    let sugarStore = _.extend({}, store, {
+        // make store compatible with stash
+        cut: store.remove,
+        cutAll: store.clear,
+    });
+
+    /**
+     * Helper method used by migrateOldKeys for removing quotes from previous localStorage library.
+     *
+     * @private
+     */
+    let unquote = (str) => (new Function('return ' + str))(); // jshint ignore:line
+
+    /**
+     * Attempts to migrate values from Stash to Store.
+     *
+     * `stash.js` used to set values with single quotes in the `localStorage`.
+     * `store.js` uses double quotes (standard JSON encode/decode(. Hence, we
+     * need to update current values in localStorage to be complaint with the
+     * new store.
+     *
+     * @param {Object} cache Cache object to work on.
+     * @private
+     */
+    let migrateStorage = function (cache) {
+
+        if (cache.has('uniqueKey')) {
+            return;
         }
+
+        // We need to clone the local storage to not mess up with it during the
+        // iterations.
+        let store = {};
+        for (let i = 0, len = localStorage.length; i < len; i++) {
+            let key = localStorage.key(i);
+            store[key] = localStorage[key];
+        }
+
+        _.each(store, function (value, key) {
+            try {
+                JSON.parse(value);
+                value = cache.store.deserialize(value);
+            } catch (e) {
+                value = unquote(value);
+            }
+
+            if (value === null) {
+                value = undefined;
+            }
+
+            cache.store.set(key, value);
+        });
+
+        cache.set('uniqueKey', app.config.uniqueKey);
     };
 
-    var _buildKey = function(key) {
-        return _keyPrefix + key;
-    };
-
-    var _cache = {
+    let cache = {
 
         /**
          * Storage provider.
          *
-         * Default: stash.js
+         * Default: store.js
          *
          * @cfg {Object}
          */
-        // Not all stash.js's methods are available on cache module
-        // We can add additional methods later if we need them (get, set, cut are the most used)
-        store: stash,
+        store: sugarStore,
 
         /**
          * Initializes cache manager.
          */
         init: function() {
-            _keyPrefix = app.config.env + ":" + app.config.appId + ":";
-            app.events.register("cache:clean", this);
+            keyPrefix = `${app.config.env}:${app.config.appId}:`;
+
+            migrateStorage(this);
+
+            if (this.get('uniqueKey') !== app.config.uniqueKey) {
+                // do not leak information to other instances
+                this.cutAll(true);
+                this.set('uniqueKey', app.config.uniqueKey);
+            }
+
+            app.events.register('cache:clean', this);
         },
 
         /**
@@ -62,13 +117,7 @@
          * @param {String} key Item key.
          */
         has: function(key) {
-            // Only if we're in fact using the stash.js lib do we directly shim the has method. 
-            // Otherwise, we delegate out to whatever this.store.has is.
-            if(this.store === stash) {
-                return window.localStorage.getItem(_buildKey(key)) !== null;
-            } else {
-                this.store.has(_buildKey(key));
-            }
+            return this.store.has(buildKey(key));
         },
 
         /**
@@ -77,8 +126,7 @@
          * @return {number|boolean|string|Array|Object} Item with the given key.
          */
         get: function(key) {
-            _warnIfBadType(key);
-            return this.store.get(_buildKey(key));
+            return this.store.get(buildKey(key));
         },
 
         /**
@@ -87,33 +135,15 @@
          * @param {number|boolean|string|Array|Object} value Item to put.
          */
         set: function(key, value) {
-            _warnIfBadType(value);
-            try {
-                this.store.set(_buildKey(key), value);
-            } catch(e) {
-                if (e.name.toLowerCase().indexOf("quota") > -1) {
-                    //Localstorage is full, the app needs to handle this.
-                    this.clean();
-                    this.store.set(_buildKey(key), value);
-                }
-            }
-        },
+            key = buildKey(key);
 
-        /**
-         * Add an item to an existing item.
-         * @param {string} key Item key.
-         * @param {number|boolean|string|Array|Object} value Item to add.
-         */
-        add: function(key, value) {
-            app.logger.warn('Core.CacheManager#add: This method has been deprecated since 7.8 ' +
-                'and will be removed in 7.9');
             try {
-                this.store.add(_buildKey(key), value);
+                this.store.set(key, value);
             } catch(e) {
-                if (e.name.toLowerCase().indexOf("quota") > -1) {
+                if (e.name.toLowerCase().indexOf('quota') > -1) {
                     //Localstorage is full, the app needs to handle this.
                     this.clean();
-                    this.store.add(_buildKey(key), value);
+                    this.store.set(key, value);
                 }
             }
         },
@@ -127,7 +157,7 @@
          * <pre><code>
          * ({
          *     initialize: function(options) {
-         *         app.events.on("cache:clean", function(callback) {
+         *         app.events.on('cache:clean', function(callback) {
          *             callback([
          *                 'my_important_cache_key',
          *                 'my_other_important_key',
@@ -142,7 +172,7 @@
                 preservedValues = {};
 
             //First get a list of all keys to keep
-            this.trigger("cache:clean", function(keys) {
+            this.trigger('cache:clean', function(keys) {
                 preserveKeys = _.union(keys, preserveKeys);
             });
             //Now get those values
@@ -165,9 +195,9 @@
          * @param {String} key Item key.
          */
         cut: function(key) {
-            // Stash does delete ls[e] and IE9 complains if doesn't exist 
-            if( this.store.has(_buildKey(key)) ) {
-                this.store.cut(_buildKey(key));
+            key = buildKey(key);
+            if (this.store.has(key)) {
+                this.store.cut(key);
             }
         },
 
@@ -179,22 +209,23 @@
          * @param {Boolean} all(optional) Flag indicating if all items must be deleted from this cache.
          */
         cutAll: function(all) {
-            if (all === true) return this.store.cutAll();
-            // FIXME when migrate stash.js to a newer lib in SC-3004
-            var obj = this.store.getAll();
-            var keys = _.keys(obj);
-            for (var i = 0, length = keys.length; i < length; i++) {
-                if (keys[i].indexOf(_keyPrefix) === 0) {
-                    this.store.cut(keys[i]);
-                }
+            if (all === true) {
+                return this.store.cutAll();
             }
+
+            var obj = this.store.getAll();
+            _.each(obj, function (value, key) {
+                if (key.indexOf(keyPrefix) === 0) {
+                    this.store.cut(key);
+                }
+            }, this);
         }
     };
 
     //Use eventing for cache cleaning
-    _.extend(_cache, Backbone.Events);
+    _.extend(cache, Backbone.Events);
 
-    app.augment("cache", _cache);
+    app.augment('cache', cache);
 
 
 })(SUGAR.App);

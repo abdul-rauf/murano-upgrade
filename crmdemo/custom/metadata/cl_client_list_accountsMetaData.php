@@ -1,6 +1,6 @@
 <?php
-// created: 2012-03-05 18:59:46
-$dictionary["cl_client_list_accounts"] = array (
+// created: 2018-06-13 14:43:30
+$dictionary['cl_client_list_accounts'] = array (
   'true_relationship_type' => 'many-to-many',
   'from_studio' => true,
   'relationships' => 
@@ -22,18 +22,18 @@ $dictionary["cl_client_list_accounts"] = array (
   'table' => 'cl_client_list_accounts_c',
   'fields' => 
   array (
-    0 => 
+    'id' => 
     array (
       'name' => 'id',
       'type' => 'varchar',
       'len' => 36,
     ),
-    1 => 
+    'date_modified' => 
     array (
       'name' => 'date_modified',
       'type' => 'datetime',
     ),
-    2 => 
+    'deleted' => 
     array (
       'name' => 'deleted',
       'type' => 'bool',
@@ -41,13 +41,13 @@ $dictionary["cl_client_list_accounts"] = array (
       'default' => '0',
       'required' => true,
     ),
-    3 => 
+    'cl_client_d88fnt_list_ida' => 
     array (
       'name' => 'cl_client_d88fnt_list_ida',
       'type' => 'varchar',
       'len' => 36,
     ),
-    4 => 
+    'cl_client_cd82ccounts_idb' => 
     array (
       'name' => 'cl_client_cd82ccounts_idb',
       'type' => 'varchar',

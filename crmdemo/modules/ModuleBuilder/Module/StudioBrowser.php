@@ -9,13 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'modules/ModuleBuilder/Module/StudioModuleFactory.php' ;
-
-function cmp($a, $b)
-{
-	// sort them by display names
-	return strcasecmp($a['name'], $b['name']);
-}
 
 class StudioBrowser{
 	var $modules = array();
@@ -52,7 +45,13 @@ class StudioBrowser{
 		foreach($this->modules as $module){
 		    $nodes[$module->module] = $module->getNodes();
 		}
-		usort($nodes,'cmp'); // bug 15103 - order is important - this array is later looped over by foreach to generate the module list
+
+        // bug 15103 - order is important - this array is later looped over by foreach to generate the module list
+        usort($nodes, function ($a, $b) {
+            // sort them by display names
+            return strcasecmp($a['name'], $b['name']);
+        });
+
 		return $nodes;
 	}
 
@@ -61,4 +60,3 @@ class StudioBrowser{
 	
 	
 }
-?>

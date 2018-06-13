@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -27,7 +26,6 @@ class ConnectorHtmlHelper
      */
     public function getConnectorButtonCode(array $shown_sources, $module, $smarty)
     {
-        require_once('include/connectors/formatters/FormatterFactory.php');
 
         return $this->getButton($shown_sources, $module, $smarty);
     }

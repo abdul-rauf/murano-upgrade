@@ -51,8 +51,10 @@ class SugarQuery_Builder_Field_Select extends SugarQuery_Builder_Field
 
         if ($this->field == '*') {
             // remove *
-            $this->moduleName = empty($this->moduleName) ? $this->query->getFromBean()->module_name : $this->moduleName;
-            $bean = BeanFactory::getBean($this->moduleName);
+            $bean = $this->query->getFromBean();
+            if (empty($this->moduleName)) {
+                $this->moduleName = $bean->module_name;
+            }
             foreach ($bean->field_defs AS $field => $def) {
                 if (!isset($def['source'])
                     || $def['source'] == 'db'
@@ -106,7 +108,7 @@ class SugarQuery_Builder_Field_Select extends SugarQuery_Builder_Field
             $field = array("{$this->jta}.{$this->def['rname']}", $this->def['name']);
             $this->addToSelect(array($field));
             if (isset($this->def['module'])) {
-                $rBean = BeanFactory::getBean($this->def['module']);
+                $rBean = BeanFactory::getDefinition($this->def['module']);
                 $ownerField = $rBean->getOwnerField();
                 if ($ownerField) {
                     $this->query->select->addField($this->jta . '.' . $ownerField, array(

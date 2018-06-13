@@ -17,8 +17,8 @@ Holen Sie sich den Google API-Key und Secret-Code, indem Sie Ihre Sugar-Instanz 
 <br/><br/>
 <ol>
 <li>Gehen Sie zur Google Developers-Webseite:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Melden Sie sich mit dem Google-Konto an, unter dem Sie diese Anwendung registrieren möchten.</li>
 <li>Legen Sie ein neues Projekt an</li>

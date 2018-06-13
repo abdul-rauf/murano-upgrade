@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Forecasts/AbstractForecastHooks.php');
 class OpportunityHooks extends AbstractForecastHooks
 {
     /**
@@ -35,7 +34,7 @@ class OpportunityHooks extends AbstractForecastHooks
     {
         if (static::isForecastSetup() && !static::useRevenueLineItems()) {
             /* @var $worksheet ForecastWorksheet */
-            $worksheet = BeanFactory::getBean('ForecastWorksheets');
+            $worksheet = BeanFactory::newBean('ForecastWorksheets');
             $worksheet->saveRelatedOpportunity($bean);
             return true;
         }

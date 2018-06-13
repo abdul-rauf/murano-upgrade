@@ -9,6 +9,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+// jscs:disable requireCamelCaseOrUpperCaseIdentifiers, validateIndentation
+
 var groups_arr=new Array();
 var chartTypesHolder = []; // storage for removed chart items
 var groups_count=-1;
@@ -62,8 +64,6 @@ function table_changed(obj) {
 		var parent_link_defs = getLinksByRelType(module_defs[parent_module].link_defs);
 
 		full_table_list[obj.id].link_def = parent_link_defs[full_table_list[obj.id].value];
-		//full_table_list[obj.id].rel_def = rel_defs[full_table_list[obj.id].link_def.relationship_name];
-		//full_table_list[obj.id].module = full_table_list[obj.id].label;
 		full_table_list[obj.id].module = getRelatedModule(full_table_list[obj.id].link_def);
 
 		full_table_list[obj.id].link_def.table_key = obj.id;
@@ -996,7 +996,6 @@ function set_current_parent(name,value) {
 function getModuleInFilter(filter) {
 	// select the first one if first time load
 	var selected_module = current_module;
-	//current_prefix = module_defs[selected_module].label;
 	current_prefix = 'self';
 	var view_join = filter.module_cell.getElementsByTagName('select')[0];
 	var selected_option = view_join.options[view_join.selectedIndex].value;
@@ -1051,7 +1050,6 @@ function addFilterInputRelate(row,field,filter) {
 	var cell = document.createElement('td');
 	var new_input = document.createElement("input");
 	new_input.title= lbl_select;
-//	new_input.accessKey="G";
 	new_input.type="button";
 	new_input.value=lbl_select;
 	new_input.name=field.module;
@@ -1132,6 +1130,7 @@ function addGroupQualify(cell, group) {
 
 function addFilterQualify(cell, filter) {
 	var filter_row = filters_arr[filters_count_map[current_filter_id]];
+    var module = filter_row.module;
 	var field_key = filter_row.column_select.options[filter_row.column_select.selectedIndex].value;
 
 	var field = new Object();
@@ -1148,9 +1147,14 @@ function addFilterQualify(cell, filter) {
 
 	field_type = field.type;
 
-	if ( typeof(field.custom_type) != 'undefined') {
-		field_type = field.custom_type;
-	}
+    if (typeof(field.custom_type) != 'undefined' && typeof(filter_defs[field.custom_type]) != 'undefined') {
+        field_type = field.custom_type;
+    } else if (typeof(filter_defs[module + ':' + field_type]) != 'undefined') {
+        // if we want to customize the dropdown for a specific module and field
+        // then use 'module:field' format. For example 'Tags:name' to customize
+        // the dropdown for tag names only.
+        field_type = module + ':' + field_type;
+    }
 
 	var qualifiers = filter_defs[field_type];
 	var selected = false;
@@ -1234,6 +1238,7 @@ function addGroupBy(group) {
 var default_filter = {column_name:'',qualifier_name:'',input_name0:'',input_name1:''};
 
 function addFilter(filter) {
+    var module = full_table_list[filter.table_key].module;
 	filters_arr[filters_arr.length] = new Object();
 	filters_count++;
 	filters_count_map[filters_count] = filters_arr.length - 1;
@@ -1246,6 +1251,8 @@ function addFilter(filter) {
 	var row = document.createElement('tr');
 	filters_arr[filters_count_map[filters_count]].row = row;
 	row.valign="top";
+
+    filters_arr[filters_count_map[filters_count]].module = module;
 
 	var module_cell = document.createElement('td');
 	module_cell.valign="top";
@@ -1739,9 +1746,6 @@ function reload_joins() {
 					option_selectbox.checked = false;
 				}
 			}
-			else {
-				//alert("option_selectbox is null (outer_" + index + ")");
-			}
 		}
 
 		var curr_select = document.getElementById(index);
@@ -2002,77 +2006,6 @@ function reload_join_rows( type ) {
 	// This function is now blank, in case someone wants to fill it in.
 }
 
-//FIXME: Delete, this is now unused
-function build_join_rows(module,joins_table,level) {
-	join_refs = new Array();
-	if ( typeof (level) == 'undefined') {
-		level = 0;
-	}
-	level++;
-
-	var link_defs = getLinksByRelType( module_defs[module].link_defs,'one');
-	if ( level == 1) {
-
-	}
-
-	if ( level < 5 ) {
-		var tr = joins_table.insertRow(joins_table.rows.length);
-		var td = tr.insertCell(tr.cells.length);
-		var hidden_input = '';
-		join_index = 0;
-		for (linked_field_name in  link_defs) {
-			var linked_field = link_defs[linked_field_name];
-			var input_elem =  document.createElement('input');
-			input_elem.type='hidden';
-			input_elem.name='link_'+linked_field['name'];
-			input_elem.id='link_'+linked_field['name'];
-			input_elem.value=linked_field['name'];
-
-			join_index++;
-
-			join_refs.push(input_elem);
-			td.appendChild(input_elem);
-		}
-	}
-
-	if ( level == 1 ) {
-		var options = new Array();
-		var option_info = new Object();
-		option_info['value'] = '';
-		option_info['text'] = lbl_none;
-		option_info['selected'] = selected;
-		options[options.length] = option_info;
-		var link_defs = getLinksByRelType( module_defs[module].link_defs,'many');
-
-		var selected_linked_field;
-		var first = true;
-		for (linked_field_name in  link_defs) {
-			if (first) {
-				selected_linked_field = link_defs[linked_field_name];
-				first = false;
-			}
-			var linked_field =  link_defs[linked_field_name];
-			var selected = false;
-			var option_info = new Object();
-			option_info['value'] = linked_field['name'];
-			option_info['text'] = linked_field_name.substring(0,1).toUpperCase() + linked_field_name.substring(1,linked_field_name.length);
-			option_info['selected'] = selected;
-			options[options.length] = option_info;
-		}
-
-		var select_html_info = new Object();
-		var select_info = new Object();
-		select_info['name'] = 'joined';
-		select_info['id'] = 'multijoin';
-		select_info['onchange'] = 'joinChecked(this);';
-		select_html_info['select'] = select_info;
-
-		var tr = joins_table.insertRow(joins_table.rows.length);
-		var td = tr.insertCell(tr.cells.length);
-		select_html_info['options'] = options;
-	}
-}
-
 function getSelectedLinkJoins( link_array ) {
 	var link_join_array = new Object();
 
@@ -2298,7 +2231,6 @@ function reload_columns( reload_type) {
 		if (reload_type == 'default') {
 			visible_fields_map = new Object();
 			document.EditView.show_details.checked = false;
-//			document.EditView.report_type[0].checked  = true;
 
 			document.getElementById('summary_table').style.display='none';
 			document.getElementById('summary_more_div').style.display='none';

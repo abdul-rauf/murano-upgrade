@@ -272,8 +272,8 @@
         updateLanguage: function(language) {
             app.cache.set('lang', language);
             app.user.setPreference('language', language);
-            app.trigger('app:locale:change');
             this.setCurrentLanguage(language);
+            app.trigger('app:locale:change', language);
         },
 
         /**

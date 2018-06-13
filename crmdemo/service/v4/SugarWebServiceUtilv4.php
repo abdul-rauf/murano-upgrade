@@ -9,13 +9,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('service/v3_1/SugarWebServiceUtilv3_1.php');
 
 class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 {
     function get_module_view_defs($moduleName, $type, $view)
     {
-        require_once 'include/MVC/View/SugarView.php';
         $metadataFile = null;
         $results = array();
         if (empty($moduleName)) {
@@ -71,8 +69,17 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
      * if the list should filter for favorites.  Should eventually update the SugarBean function as well.
      *
      */
-    function get_data_list($seed, $order_by = "", $where = "", $row_offset = 0, $limit=-1, $max=-1, $show_deleted = 0, $favorites = false)
-	{
+    public function get_data_list(
+        $seed,
+        $order_by = '',
+        $where = '',
+        $row_offset = 0,
+        $limit = -1,
+        $max = -1,
+        $show_deleted = 0,
+        $favorites = false,
+        $singleSelect = false
+    ) {
 		$GLOBALS['log']->debug("get_list:  order_by = '$order_by' and where = '$where' and limit = '$limit'");
 		if(isset($_SESSION['show_deleted']))
 		{
@@ -137,7 +144,7 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 	 */
 	function metdataAclParserWirelessEdit($module_name, $metadata)
 	{
-	    $seed = BeanFactory::getBean($module_name);
+	    $seed = BeanFactory::newBean($module_name);
 
 	    $results = array();
 	    $results['templateMeta'] = $metadata['templateMeta'];
@@ -189,7 +196,7 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 	 */
 	function metdataAclParserWirelessList($module_name, $metadata)
 	{
-	    $seed = BeanFactory::getBean($module_name);
+	    $seed = BeanFactory::newBean($module_name);
 
 	    $results = array();
 	    foreach ($metadata as $field_name => $entry)
@@ -311,8 +318,7 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 		}
 
 		if($value->module_dir == 'Bugs'){
-			require_once('modules/Releases/Release.php');
-			$seedRelease = BeanFactory::getBean('Releases');
+			$seedRelease = BeanFactory::newBean('Releases');
 			$options = $seedRelease->get_releases(TRUE, "Active");
 			$options_ret = array();
 			foreach($options as $name=>$value){
@@ -368,7 +374,7 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 		$count = 1;
 		$total = sizeof($name_value_lists);
 		foreach($name_value_lists as $name_value_list){
-			$seed = BeanFactory::getBean($module_name);
+			$seed = BeanFactory::newBean($module_name);
 
 			$seed->update_vcal = false;
 			foreach($name_value_list as $name => $value){
@@ -392,8 +398,8 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
                     $val = $value['value'];
                 }
 
-				if($seed->field_name_map[$field_name]['type'] == 'enum'){
-					$vardef = $seed->field_name_map[$field_name];
+                if ($seed->field_defs[$field_name]['type'] == 'enum') {
+                    $vardef = $seed->field_defs[$field_name];
 					if(isset($app_list_strings[$vardef['options']]) && !isset($app_list_strings[$vardef['options']][$val]) ) {
 						if ( in_array($val,$app_list_strings[$vardef['options']]) ){
 							$val = array_search($val,$app_list_strings[$vardef['options']]);
@@ -403,7 +409,7 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 				if($module_name == 'Users' && !empty($seed->id) && ($seed->id != $current_user->id) && $field_name == 'user_hash'){
 					continue;
 				}
-				if(!empty($seed->field_name_map[$field_name]['sensitive'])) {
+                if (!empty($seed->field_defs[$field_name]['sensitive'])) {
 					continue;
 				}
 				$seed->$field_name = $val;
@@ -541,7 +547,6 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 
     public function checkOAuthAccess($errorObject)
     {
-        require_once "include/SugarOAuthServer.php";
         try {
 	        $oauth = new SugarOAuthServer();
 	        $token = $oauth->authorizedToken();
@@ -625,7 +630,7 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 	    foreach ($layout_defs[$module]['subpanel_setup'] as $subpanel => $subpaneldefs)
 	    {
 	        $moduleToCheck = $subpaneldefs['module'];
-	        $bean = BeanFactory::getBean($moduleToCheck);
+	        $bean = BeanFactory::newBean($moduleToCheck);
 	        if(empty($bean)) continue;
 
 	        if($bean->ACLAccess('list'))

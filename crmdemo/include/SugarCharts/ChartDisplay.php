@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -105,7 +104,6 @@ class ChartDisplay
     public function getSugarChart()
     {
         if ($this->canDrawChart()) {
-            require_once('include/SugarCharts/SugarChartFactory.php');
 
             /* @var $sugarChart JitReports */
             $sugarChart = SugarChartFactory::getInstance('', 'Reports');
@@ -328,7 +326,7 @@ class ChartDisplay
         $report_defs = $this->reporter->report_def;
         $currency_symbol = '';
         if (isset($report_defs['numerical_chart_column_type']) && $report_defs['numerical_chart_column_type'] == 'currency') {
-            $currency = BeanFactory::getBean('Currencies')->getUserCurrency();
+            $currency = BeanFactory::newBean('Currencies')->getUserCurrency();
 
             $currency_symbol = $currency->symbol;
         } elseif (!isset($report_defs['numerical_chart_column_type'])) {

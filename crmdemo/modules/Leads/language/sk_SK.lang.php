@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Upraviť' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B hlavné Id',
-    'LBL_DNB_BAL_PREVIEW' => 'Prehľad záujemcov',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Záujemcovia',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: Informácie o záujemcoch',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Obchodné príležitosti',
 

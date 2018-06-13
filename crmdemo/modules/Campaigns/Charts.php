@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +17,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 
-require_once('include/SugarCharts/SugarChartFactory.php');
 
 
 class campaign_charts {
@@ -41,7 +39,7 @@ class campaign_charts {
 			$GLOBALS['log']->debug("user_id is: ");
 			$GLOBALS['log']->debug("cache_file_name is: $xmlFile");
 
-			$focus = BeanFactory::getBean('Campaigns');
+			$focus = BeanFactory::newBean('Campaigns');
 
 			$query = "SELECT activity_type,target_type, count(*) hits ";
 			$query.= " FROM campaign_log ";

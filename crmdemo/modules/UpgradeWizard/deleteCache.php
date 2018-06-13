@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,8 +15,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  //		PARAM prefixed properties: array of these property/values will be passed to the function as parameter.
 
 require_once('include/JSON.php');
-
-//require_once('modules/UpgradeWizard/uw_utils.php');
 
 $json = getJSONobj();
 
@@ -55,20 +52,5 @@ if(is_dir($cachedir)){
    }
 }
 
-$response = '';
-//$GLOBALS['log']->fatal('file name '.$file_name);
-//$GLOBALS['log']->fatal('file size loaded '.filesize($file_name));
-/*
-if($allModFiles != null){
-	foreach($allModFiles as $f){
-		$GLOBALS['log']->fatal('file name '.$f);
-		$response .= $f;
-	}
-}
-*/
-if (!empty($response)) {
-    echo $response;
-}
 sugar_cleanup();
 exit();
-?>

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 // $Id: action_utils.php 56841 2010-06-05 00:44:19Z smalyshev $
 
 include_once('include/workflow/workflow_utils.php');
@@ -44,7 +43,7 @@ function process_action_update($focus, $action_array){
 			//if we have a relate field, make sure the related record still exists.
 			if ($focus->field_defs[$field]['type'] == "relate")
 			{
-				$relBean = BeanFactory::getBean($focus->field_defs[$field]['module']);
+				$relBean = BeanFactory::newBean($focus->field_defs[$field]['module']);
 				$relBean->retrieve($new_value);
                 if (empty($relBean->id) && (!empty($focus->required_fields[$field]) && $focus->required_fields[$field] == true))
                 {
@@ -185,10 +184,10 @@ function process_action_update_rel($focus, $action_array){
 function process_action_new($focus, $action_array){
 
 	//find out if the action_module is related to this module or not.  If so make sure to connect
-	$seed_object = BeanFactory::getBean('WorkFlow');
+	$seed_object = BeanFactory::newBean('WorkFlow');
     $seed_object->base_module = $focus->module_dir;
     $rel_module = $seed_object->get_rel_module($action_array['action_module'], true);
-	$target_module = BeanFactory::getBean($rel_module);
+	$target_module = BeanFactory::newBean($rel_module);
 	$rel_handler = $focus->call_relationship_handler("module_dir", true);
 	//$rel_handler->base_bean = & $focus;
 	$rel_handler->get_relationship_information($target_module);

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -92,5 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Λάθος: Δεν υπάρχουν πεδία ενότητας που να έχουν χαρτογραφηθεί για εμφάνιση στα αποτελέσματα. Παρακαλούμε επικοινωνήστε με το διαχειριστή του συστήματος.',
     'LBL_INFO_INLINE' => 'Πληροφορίες' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Κλείσιμο' /*for 508 compliance fix*/,
+    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
 );
 

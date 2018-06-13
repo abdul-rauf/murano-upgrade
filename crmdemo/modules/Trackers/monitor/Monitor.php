@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/Trackers/Metric.php');
-require_once('modules/Trackers/Trackable.php');
 
 define('MAX_SESSION_LENGTH', 36);
 
@@ -33,14 +30,6 @@ class Monitor implements Trackable {
 	var $active;
 	var $seconds;
 	var $session_id;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Monitor($name = '', $monitorId = '', $metadata = '', $store = '')
-    {
-        self::__construct($name, $monitorId, $metadata, $store);
-    }
 
     /**
      * Monitor constructor
@@ -190,7 +179,7 @@ class Monitor implements Trackable {
 
  	/**
  	 * Returns the monitor's metrics/values as an Array
- 	 * @return An Array of data for the monitor's corresponding metrics
+     * @return array Monitor's metrics
  	 */
  	public function toArray() {
  		$to_arr = array();

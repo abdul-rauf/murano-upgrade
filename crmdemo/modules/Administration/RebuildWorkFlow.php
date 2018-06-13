@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -31,7 +30,7 @@ function remove_workflow_dir($dir) {
 
 
 
-$workflow_object = BeanFactory::getBean('WorkFlow');
+$workflow_object = BeanFactory::newBean('WorkFlow');
 
 
 	$module_array = $workflow_object->get_module_array();

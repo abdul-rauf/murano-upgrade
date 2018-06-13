@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,7 +13,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once('include/formbase.php');
 
-$focus = BeanFactory::getBean('Holidays');
+$focus = BeanFactory::newBean('Holidays');
 global $current_user;
 
 $focus->disable_row_level_security = true;	
@@ -33,7 +32,7 @@ if ($focus->id != $_REQUEST['relate_id']) {
 }
 
 if (!$focus->id && !empty($_REQUEST['duplicateId'])) {
-    $original_focus = BeanFactory::getBean('Holidays');
+    $original_focus = BeanFactory::newBean('Holidays');
     $original_focus->retrieve($_REQUEST['duplicateId']);
 
     $focus->person_id = $original_focus->person_id;

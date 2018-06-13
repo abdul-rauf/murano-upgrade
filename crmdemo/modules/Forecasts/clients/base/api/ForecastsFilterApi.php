@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/FilterApi.php');
 class ForecastsFilterApi extends FilterApi
 {
 
@@ -55,11 +51,11 @@ class ForecastsFilterApi extends FilterApi
     /**
      * forecastsCommitted -- only left in for testing purposes
      *
-     * @param $api
-     * @param $args
+     * @param ServiceBase $api
+     * @param array $args
      * @return array
      */
-    public function forecastsCommitted($api, $args)
+    public function forecastsCommitted(ServiceBase $api, array $args)
     {
 
         // if no timeperiod is set, just set it to false, and the current time period will be set
@@ -112,7 +108,8 @@ class ForecastsFilterApi extends FilterApi
         if (!empty($args['filter'])) {
             // todo-sfa: clean this up as it currently doesn't handle much in the way of nested arrays
             foreach ($args['filter'] as $key => $filter) {
-                $filter_key = array_shift(array_keys($filter));
+                reset($filter);
+                $filter_key = key($filter);
                 // if the key is assigned_user_id, take the value and save it for later
                 if ($found_assigned_user == false && $filter_key == 'user_id') {
                     $found_assigned_user = array_pop($filter);

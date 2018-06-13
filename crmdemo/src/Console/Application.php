@@ -174,7 +174,7 @@ class Application extends BaseApplication
             if (empty($sugar_version) ||
                 empty($sugar_flavor)  ||
                 empty($sugar_build)   ||
-                strpos($sugar_version, '@_SUGAR_VERSION') === 0
+                strpos($sugar_version, '7.9.4.0') === 0
             ) {
                 return $default;
             }

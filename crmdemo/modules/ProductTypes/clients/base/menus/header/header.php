@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,14 +12,14 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $module_name = 'ProductTypes';
 $viewdefs[$module_name]['base']['menu']['header'] = array(
     array(
-        'route'=>'#bwc/index.php?module=ProductTypes&action=EditView&return_module=ProductTypes&return_action=DetailView',
+        'route'=>'#ProductTypes/create',
         'label' =>'LNK_NEW_PRODUCT_TYPE',
         'acl_action'=>'',
         'acl_module'=>'',
         'icon' => 'fa-plus',
     ),
     array(
-        'route'=>'#bwc/index.php?module=ProductTypes&action=DetailView',
+        'route'=>'#ProductTypes',
         'label' =>'LNK_VIEW_PRODUCT_TYPES',
         'acl_action'=>'',
         'acl_module'=>'',

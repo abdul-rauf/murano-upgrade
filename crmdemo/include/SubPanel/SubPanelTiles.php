@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SubPanel/SubPanel.php');
-require_once('include/SubPanel/SubPanelDefinitions.php');
 
 /**
  * Subpanel tiles
@@ -32,14 +29,6 @@ class SubPanelTiles
 
 	var $hidden_tabs=array(); //consumer of this class can array of tabs that should be hidden. the tab name
 							//should be the array.
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SubPanelTiles(&$focus, $layout_def_key = '', $layout_def_override = '')
-    {
-        self::__construct($focus, $layout_def_key, $layout_def_override);
-    }
 
     public function __construct(&$focus, $layout_def_key = '', $layout_def_override = '')
 	{
@@ -129,7 +118,7 @@ if(document.DetailView != null &&
         	if (!class_exists('Relationship')) {
         		require('modules/Relationships/Relationship.php');
         	}
-        	$rel = BeanFactory::getBean('Relationships');
+        	$rel = BeanFactory::newBean('Relationships');
 	        $rel->load_relationship_meta();
         }
 
@@ -229,7 +218,7 @@ if(document.DetailView != null &&
 
  		 		$max_min = "<a name=\"" . htmlspecialchars($tab, ENT_QUOTES, 'UTF-8') . "\"> </a><span id=\"show_link_".htmlspecialchars($tab, ENT_QUOTES, 'UTF-8')."\" style=\"display: $opp_display\"><a href='#' class='utilsLink' onclick=\"current_child_field = ".htmlspecialchars(json_encode($tab), ENT_QUOTES, 'UTF-8').";showSubPanel(".htmlspecialchars(json_encode($tab), ENT_QUOTES, 'UTF-8').",null,null,'".$layout_def_key."');document.getElementById(".htmlspecialchars(json_encode('show_link_'.$tab), ENT_QUOTES, 'UTF-8').").style.display='none';document.getElementById(".htmlspecialchars(json_encode('hide_link_'.$tab), ENT_QUOTES, 'UTF-8').").style.display='';return false;\">"
  		 			. "" . $show_icon_html . "</a></span>";
-				$max_min .= "<span id=\"hide_link_".htmlspecialchars($tab, ENT_QUOTES, 'UTF-8')."\" style=\"display: $div_display\"><a href='#' class='utilsLink' onclick=\"hideSubPanel(".htmlspecialchars(json_encode($tab), ENT_QUOTES, 'UTF-8').");document.getElementById(".htmlspecialchars(json_encode('hide_link_'.$tab), ENT_QUOTES, 'UTF-8').").style.display='none';document.getElementById('".htmlspecialchars(json_encode('show_link_'.$tab), ENT_QUOTES, 'UTF-8')."').style.display='';return false;\">"
+                $max_min .= "<span id=\"hide_link_".htmlspecialchars($tab, ENT_QUOTES, 'UTF-8')."\" style=\"display: $div_display\"><a href='#' class='utilsLink' onclick=\"hideSubPanel(".htmlspecialchars(json_encode($tab), ENT_QUOTES, 'UTF-8').");document.getElementById(".htmlspecialchars(json_encode('hide_link_'.$tab), ENT_QUOTES, 'UTF-8').").style.display='none';document.getElementById(".htmlspecialchars(json_encode('show_link_'.$tab), ENT_QUOTES, 'UTF-8').").style.display='';return false;\">"
 				 . "" . $hide_icon_html . "</a></span>";
 				echo '<div id="subpanel_title_' . htmlspecialchars($tab, ENT_QUOTES, 'UTF-8') . '"';
                 if(empty($sugar_config['lock_subpanels']) || $sugar_config['lock_subpanels'] == false) echo ' onmouseover="this.style.cursor = \'move\';"';
@@ -333,7 +322,6 @@ EOQ;
 
 	function getLayoutManager()
 	{
-		require_once('include/generic/LayoutManager.php');
 	  	if ( $this->layout_manager == null) {
 	    	$this->layout_manager = new LayoutManager();
 	  	}

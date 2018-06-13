@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> '이 모듈을 편집하려면 클릭하십시오.',
         'moduleHelp'=> '편집하고자 하는 모듈의 구성요소를 선택하십시오.',
         'fieldsBtn'	=> '모듈에서 필드 조종으로 저장되는 정보를 편집합니다. <br />여기에 고객 필드를 새로 만들거나 편집할수 있습니다.',
-        'labelsBtn' => '<b>저장</b>을 클릭하여 사용자화 라벨을 저장하십시오.'	,
         'layoutsBtn'=> '편집, 세부사항, 목록 그리고 검색 보기의 지면배치를 주문제작합니다.',
         'subpanelBtn'=> '이 모듈 하위패널에 나타날 정보를 편집하십시오',
         'layoutsHelp'=> '편집할 지면배치를 선택하십시오.<br />데이타 입력을 위한 데이타 필드를 포함하는 지면배치를 변경하려면 편집보기를 클릭하십시오.<br />편집보기에서 필드로 입력되는 데이타를 전시하는 지면배치를 변경하려면 세부사항 보기를 클릭하십시오.<br />기본과 고급검색 형식 지면배치를 변경하려면 검색을 클릭하십시오.',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => '획득성공 영업단계를 삭제하시겠습니까? 이 단계를 삭제하는것은 예상모듈이 제대로 작동하지 않는 원인이 될수도 있습니다.',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'이 관계를 삭제하시겠습니까?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'이는 이 관계를 영구보관합니다. 이 관계를 배치하시겠습니까?',
 'LBL_CONFIRM_DONT_SAVE' => '마지막 저장후 다른 변경사항이 발생했습니다. 저장하시겠습니까?',

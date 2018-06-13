@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -518,7 +517,7 @@ class iCalendar {
 					continue;
 				}
 
-				$meeting = BeanFactory::getBean('Meetings');
+				$meeting = BeanFactory::newBean('Meetings');
 				// Hack - we don't care about this bean's permissions
 				$meeting->disable_row_level_security = true;
 				$prev_seq = 0;
@@ -589,7 +588,7 @@ class iCalendar {
 					        $relname = "meetings_$module";
                             $linkfields = VardefManager::getLinkFieldForRelationship("Meetings", "Meeting", $relname);
 
-                            $bean = BeanFactory::getBean($inv['bean_module']);
+                            $bean = BeanFactory::newBean($inv['bean_module']);
                             if(empty($bean)) {
                                 $GLOBALS['log']->info("createSugarEvents: Don't know how to create bean {$inv['bean_module']}");
                                 continue;

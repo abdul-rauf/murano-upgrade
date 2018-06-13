@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 //_ppd($_REQUEST);
-$focus = BeanFactory::getBean('Groups');
+$focus = BeanFactory::newBean('Groups');
 
 // New user
 	// track the current reports to id to be able to use it if it has changed

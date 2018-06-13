@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -48,7 +46,7 @@ function getControl(
             || !empty($_SESSION['developerMode']) ) {
 
         if ( !isset($vardef) ) {
-            $focus = BeanFactory::getBean($module);
+            $focus = BeanFactory::newBean($module);
             $vardef = $focus->getFieldDefinition($fieldname);
         }
 
@@ -83,7 +81,6 @@ function getControl(
         static $sfh;
 
         if(!isset($sfh)) {
-            require_once('include/SugarFields/SugarFieldHandler.php');
             $sfh = new SugarFieldHandler();
         }
 
@@ -142,7 +139,7 @@ function getControl(
     // populate the fieldlist from the vardefs
     $fieldlist = array();
     if ( !isset($focus) || !($focus instanceof SugarBean) )
-        $focus = BeanFactory::getBean($module);
+        $focus = BeanFactory::newBean($module);
     // create the dropdowns for the parent type fields
     if ( $vardef['type'] == 'parent_type' ) {
         $focus->field_defs[$vardef['name']]['options'] = $focus->field_defs[$vardef['group']]['options'];

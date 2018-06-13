@@ -544,6 +544,20 @@ SUGAR.App = (function() {
                     }], function(err) {
                     cbw(err);
                 });
+            }, function(callback) {
+                var serverInfo = self.metadata.getServerInfo();
+                self.config.sugarLogic = self.config.sugarLogic || {};
+
+                if (serverInfo &&
+                    self.config.sugarLogic.enabled &&
+                    self.utils.versionCompare(serverInfo.version, self.config.sugarLogic.minServerVersion, ">="))
+                {
+                    self.fetchSugarLogic(callback);
+                }
+                else {
+                    self.config.sugarLogic.enabled = false;
+                    callback();
+                }
             }],
                 function(err) {
                     if (err) {
@@ -618,7 +632,7 @@ SUGAR.App = (function() {
             info.current_language = _app.lang.getLanguage();
             _app.api.login(credentials, info, {
                 success: function(data) {
-                    _app.trigger('app:login:success', data);
+                    _app.trigger('app:login:success', data, credentials.username);
                     if (callbacks.success) callbacks.success(data);
                 },
                 error: function(error) {
@@ -642,7 +656,7 @@ SUGAR.App = (function() {
          *   must be deleted from cache.
          * @return {SUGAR.HttpRequest} XHR request object.
          */
-        logout: function(callbacks, clear) {
+        logout: function(callbacks, clear, options) {
             var originalComplete, originalError;
             callbacks = callbacks || {};
             originalComplete = callbacks.complete;
@@ -660,7 +674,57 @@ SUGAR.App = (function() {
                 if (originalError) originalError(error);
             };
 
-            return _app.api.logout(callbacks);
+            return _app.api.logout(callbacks, options);
+        },
+
+        fetchSugarLogic: function(callback) {
+            if (_app.config.sugarLogic.isDynamic) {
+                _app.api.call(
+                    'read',
+                    _app.api.buildURL('ExpressionEngine', 'functions'),
+                    null,
+                    {
+                        success: function(expressions) {
+                            _app.cacheSugarLogicExpressions(expressions);
+                            _app.loadSugarLogic(expressions, callback);
+                        },
+                        error: function(err) {
+                            // TODO: Consider turning off SL altogether
+                            callback(err);
+                        }
+                    },
+                    { dataType: 'application/text' }
+                );
+            }
+            else callback();
+
+        },
+
+        cacheSugarLogicExpressions: function(expressions) {
+            _app.cache.set("sugarlogic", expressions);
+        },
+
+        _loadSugarLogic: function() {
+            return _app.cache.get("sugarlogic");
+        },
+
+        loadSugarLogic: function(expressions, callback) {
+            return _app.compileJs(expressions || _app._loadSugarLogic(), callback);
+        },
+
+        compileJs: function(js, callback) {
+            try {
+                eval.call(window, js); // jshint ignore:line
+                if (callback) callback();
+            }
+            catch (e) {
+                _app.logger.fatal("Failed to compile js");
+                // TODO: Consider turning off SL altogether
+                if (callback) callback(e);
+                return e;
+            }
+
+            return null;
         },
 
         /**

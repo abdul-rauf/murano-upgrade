@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -41,7 +40,7 @@ $mod_strings = array (
   'LBL_LIST_COST_PRICE' => 'Náklady:',
   'LBL_LIST_DISCOUNT_PRICE' => 'Cena:',
   'LBL_LIST_FORM_TITLE' => 'Seznam katalog výrobků',
-  'LBL_LIST_LBL_MFT_PART_NUM' => 'Výrobní číslo',
+  'LBL_LIST_LBL_MFT_PART_NUM' => 'Číslo dílu',
   'LBL_LIST_LIST_PRICE' => 'Celk. cena',
   'LBL_LIST_MANUFACTURER' => 'Výrobce',
   'LBL_LIST_MANUFACTURER_ID' => 'ID výrobce:',
@@ -54,7 +53,7 @@ $mod_strings = array (
   'LBL_LIST_USDOLLAR' => 'Seznam USD:',
   'LBL_MANUFACTURER_NAME'=>'Jméno výrobce:',
   'LBL_MANUFACTURER' => 'Výrobce:',
-  'LBL_MFT_PART_NUM' => 'Výrobní číslo:',
+  'LBL_MFT_PART_NUM' => 'Číslo dílu:',
   'LBL_MODULE_NAME' => 'Katalog produktů',
   'LBL_MODULE_NAME_SINGULAR' => 'Katalog produktů',
   'LBL_MODULE_ID' => 'Šablony produktů',

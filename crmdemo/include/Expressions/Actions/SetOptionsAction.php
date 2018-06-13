@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once("include/Expressions/Actions/AbstractAction.php");
 
 class SetOptionsAction extends AbstractAction{
 	protected $keysExpression =  "";
@@ -19,14 +18,6 @@ class SetOptionsAction extends AbstractAction{
      * array Array of actions on which the Expression Action is not allowed
      */
     protected $disallowedActions = array('view');
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SetOptionsAction($params)
-    {
-        self::__construct($params);
-    }
 
     public function __construct($params)
     {
@@ -75,7 +66,7 @@ class SetOptionsAction extends AbstractAction{
 
                     selected = [].concat(field.model.get(this.target));
                     if (!this.canSetValue(context)) {
-                        keys = keys.concat(selected);
+                        keys = _.uniq(keys.concat(selected));
                     }
 
                     empty = (_.size(keys) === 0 || _.size(keys) === 1) && (keys[0] == undefined || keys[0] === '');

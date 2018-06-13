@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +11,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 $GLOBALS['log']->info("Email edit view");
 
-require_once('include/SugarTinyMCE.php');
 
 global $theme;
 global $app_strings;
@@ -26,7 +24,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 ///////////////////////////////////////////////////////////////////////////////
 ////	PREPROCESS BEAN DATA FOR DISPLAY
-$focus = BeanFactory::getBean('Emails');
+$focus = BeanFactory::newBean('Emails');
 $email_type = 'archived';
 
 $request = InputValidation::getService();
@@ -59,7 +57,7 @@ if(!empty($_REQUEST['load_id']) && !empty($beanList[$_REQUEST['load_module']])) 
         //Retrieve the email address.
         //If Opportunity or Case then Oppurtinity/Case->Accounts->(email_addr_bean_rel->email_addresses)
         //If Contacts, Leads etc.. then Contact->(email_addr_bean_rel->email_addresses)
-    	$sugarEmailAddress = BeanFactory::getBean('EmailAddresses');
+    	$sugarEmailAddress = BeanFactory::newBean('EmailAddresses');
     	if($contact->object_name == 'Opportunity' || $contact->object_name == 'aCase'){
     	    if(!empty($contact->account_id)) {
     		    $account = BeanFactory::retrieveBean('Accounts', $contact->account_id);
@@ -182,8 +180,6 @@ if(!empty($tmpUploadDir)) {
 	if(!is_writable($tmpUploadDir)) {
 		echo "<font color='red'>{$mod_strings['WARNING_UPLOAD_DIR_NOT_WRITABLE']}</font>";
 	}
-} else {
-	//echo "<font color='red'>{$mod_strings['WARNING_NO_UPLOAD_DIR']}</font>";
 }
 
 
@@ -371,13 +367,11 @@ if(empty($_REQUEST['return_id']) && !isset($_REQUEST['type'])) {
 
 	///////////////////////////////////////////////////////////////////////////////
 	////	QUICKSEARCH CODE
-	require_once('include/QuickSearchDefaults.php');
 	$qsd = QuickSearchDefaults::getQuickSearchDefaults();
 	$sqs_objects = array('EditView_parent_name' => $qsd->getQSParent(),
 						'EditView_assigned_user_name' => $qsd->getQSUser(),
 						);
 
-	require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
 	$teamSetField = new SugarFieldTeamset('Teamset');
 	$teamSetField->initClassicView($focus->field_defs);
 	$sqs_objects = array_merge($sqs_objects, $teamSetField->getClassicViewQS());
@@ -439,17 +433,14 @@ if($email_type != 'forward') {
 	$xtpl->assign('BCC_ADDRS_EMAILS', $focus->bcc_addrs_emails);
 }
 
-//$xtpl->assign('FROM_ADDR', $from['name'].' <'.$from['email'].'>');
 $xtpl->assign('FROM_ADDR_NAME', $from['name']);
 $xtpl->assign('FROM_ADDR_EMAIL', $from['email']);
 
 $xtpl->assign('NAME', from_html($name));
-//$xtpl->assign('DESCRIPTION_HTML', from_html($focus->description_html));
 $xtpl->assign('DESCRIPTION', $focus->description);
 $xtpl->assign('TYPE',$email_type);
 
 // Unimplemented until jscalendar language files are fixed
-// $xtpl->assign('CALENDAR_LANG',((empty($cal_codes[$current_language])) ? $cal_codes[$default_language] : $cal_codes[$current_language]));
 $xtpl->assign('CALENDAR_LANG', 'en');
 $xtpl->assign('CALENDAR_DATEFORMAT', $timedate->get_cal_date_format());
 $xtpl->assign('DATE_START', $focus->date_start);
@@ -608,7 +599,7 @@ if(!empty($focus->id) || (!empty($_REQUEST['record']) && $_REQUEST['type'] == 'f
 	$ids = '';
 
         $focusId = empty($focus->id) ? $recordId : $focus->id;
-        $note = BeanFactory::getBean('Notes');
+        $note = BeanFactory::newBean('Notes');
         $where = sprintf('notes.parent_id = %s AND notes.filename IS NOT NULL', $focus->db->quoted($focusId));
         $notes_list = $note->get_full_list("", $where, true);
 
@@ -631,7 +622,6 @@ if(!empty($focus->id) || (!empty($_REQUEST['record']) && $_REQUEST['type'] == 'f
 			<div id='noteDiv{$the_note->id}'>
 				" . SugarThemeRegistry::current()->getImage('delete_inline', "onclick='deletePriorAttachment(\"{$the_note->id}\");' value='{$the_note->id}'", null, null, ".gif", $mod_strings['LBL_DELETE_INLINE']) . "&nbsp;";
 		$attachments .= "<a href=\"index.php?entryPoint=download&id=".$the_note->id."&type=Notes\">".$the_note->name."</a><div />";
-		//$attachments .= '<a href="'.UploadFile::get_url($the_note->filename,$the_note->id).'&entryPoint=download&type=Notes' . '" target="_blank">'. $the_note->filename .'</a></div>';
 
 	}
 	// cn: bug 8034 - attachments from forwards/replies lost when saving drafts
@@ -688,7 +678,7 @@ if($parse_open) {
 ///////////////////////////////////////////////////////////////////////////////
 ////	EMAIL TEMPLATES
 if(ACLController::checkAccess('EmailTemplates', 'list', true) && ACLController::checkAccess('EmailTemplates', 'view', true)) {
-	$et = BeanFactory::getBean('EmailTemplates');
+	$et = BeanFactory::newBean('EmailTemplates');
 	$etResult = $focus->db->query($et->create_new_list_query('','',array(),array(),''));
 	$email_templates_arr[] = '';
 	while($etA = $focus->db->fetchByAssoc($etResult)) {

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,14 +15,6 @@ class Popup_Picker
 	var $_popupMeta;
 	var $_create = false;
 	var $_hide_clear_button = false;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Popup_Picker()
-    {
-        self::__construct();
-    }
 
 	/**
 	 * Creates a new Popup_Picker object. Controls displaying of single select and multi select popups
@@ -243,7 +234,9 @@ EOQ;
 
 		// assign search inputs to xtemplates
 		foreach(array_keys($searchInputs) as $key) {
-			if(!empty($_REQUEST[$key]) && (isset($seed_bean->field_name_map[$key]['type']) && $seed_bean->field_name_map[$key]['type'] == 'bool')) {
+            if (!empty($_REQUEST[$key])
+                && isset($seed_bean->field_defs[$key]['type'])
+                && $seed_bean->field_defs[$key]['type'] == 'bool') {
 				$form->assign(strtoupper($key), ' checked ');
 			} else {
 				$form->assign(strtoupper($key), $searchInputs[$key]);

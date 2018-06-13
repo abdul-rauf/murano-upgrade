@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library – Die Benutzeroberfläche-Tools erleichtern die Implementierung von umfassenden Client-seitigen Funktionen.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer – Eine funktionsstarke E-Mail-Transfer-Klasse für PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - Ein Javascript minifier geschrieben in PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish – Erlaubt eine schnelle zweiseitige Blowfish-Verschlüsselung ohne die Mcrypt PHP-Erweiterung.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - Ein SAX-Parser für HTML und andere inkorrekt gestaltete XML-Dokumente',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - Erweiterungen zu der Yahoo! User Interface Library von Jack Slocum.',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject – JavaScript Flash Player Erkennungs- und Einbettungsscript',
@@ -274,8 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Willkommen zum Sugar7-Hilfe-Dashboard',
-    'LBL_HELP_RECORD' => 'Das Hilfe-Dashboard zeigt bestimmte Informationen über das Modul an, in dem Sie sich gerade befinden. Es bietet detailierte Beschreibungen, um Aktionen durchzuführen. Es bleibt dabei immer geöffnet, damit Sie die entsprechenden Schritte nachlesen können. Das Hilfe-Dashboard ist in allen Sugar7-Modulen verfügbar und kann über die Statuszeile geöffnet oder geschlossen werden.',
+    'LBL_HELP_RECORD_TITLE' => 'Hilfe',
+    'LBL_HELP_RECORD' => 'Die Hilfe zeigt spezifische Informationen über das angezeigte Modul an, bietet eine ausführliche Anleitung für einige Aktionen im Modul und leitet Sie zu umfassenderen Informationen und Unterstützung weiter.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filter',
 );

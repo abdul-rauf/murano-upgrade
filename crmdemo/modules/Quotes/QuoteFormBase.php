@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -23,7 +22,7 @@ class QuoteFormBase{
 function checkForDuplicates($prefix){
 	require_once('include/formbase.php');
 
-	$focus = BeanFactory::getBean('Quotes');
+	$focus = BeanFactory::newBean('Quotes');
 	if(!checkRequired($prefix, array_keys($focus->required_fields))){
 		return null;
 	}
@@ -139,7 +138,7 @@ function getWideFormBody($prefix, $mod='Quotes', $formname='', $lead=''){
 	}
 
 	if(empty($lead)){
-		$lead = BeanFactory::getBean('Leads');
+		$lead = BeanFactory::newBean('Leads');
 	}
 
 if(!empty($mod)){
@@ -220,7 +219,7 @@ EOQ;
 
 $javascript = new javascript();
 $javascript->setFormName($formname);
-$javascript->setSugarBean(BeanFactory::getBean('Quotes'));
+$javascript->setSugarBean(BeanFactory::newBean('Quotes'));
 $javascript->addRequiredFields($prefix);
 $the_form .=$javascript->getScript();
 
@@ -309,7 +308,7 @@ EOQ;
 
 $javascript = new javascript();
 $javascript->setFormName($formname);
-$javascript->setSugarBean(BeanFactory::getBean('Quotes'));
+$javascript->setSugarBean(BeanFactory::newBean('Quotes'));
 $javascript->addRequiredFields($prefix);
 $javascript->addField('date_quote_expected_closed', true, $prefix);
 $the_form .=$javascript->getScript();
@@ -325,7 +324,7 @@ function handleSave($prefix,$redirect=true, $useRequired=false){
 
 	require_once('include/formbase.php');
 
-	$focus = BeanFactory::getBean('Quotes');
+	$focus = BeanFactory::newBean('Quotes');
 	if($useRequired &&  !checkRequired($prefix, array_keys($focus->required_fields))){
 		return null;
 	}

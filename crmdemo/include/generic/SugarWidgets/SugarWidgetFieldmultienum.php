@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -79,8 +78,10 @@ class SugarWidgetFieldMultiEnum extends SugarWidgetFieldEnum {
 		// Bug 50549
 		// IS NOT filter doesn't add the carets (^) to multienum custom field values  
 		$input_name0 = $this->encodeMultienumCustom($layout_def, $input_name0);
-		
-		return $this->_get_column_select($layout_def)." <> ".$this->reporter->db->quoted($input_name0)."\n";
+
+        $field_name = $this->_get_column_select($layout_def);
+        $input_name0 = $this->reporter->db->quoted($input_name0);
+        return "{$field_name} <> {$input_name0} OR ({$field_name} IS NULL)\n";
 	}
 	
     /**

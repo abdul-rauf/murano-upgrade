@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,21 +18,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * based on the users validation
  *
  */
-require_once('modules/Users/authentication/SugarAuthenticate/SugarAuthenticate.php');
 class LDAPAuthenticate extends SugarAuthenticate {
 	var $userAuthenticateClass = 'LDAPAuthenticateUser';
 	var $authenticationDir = 'LDAPAuthenticate';
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function LDAPAuthenticate()
-    {
-        self::__construct();
-    }
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 }

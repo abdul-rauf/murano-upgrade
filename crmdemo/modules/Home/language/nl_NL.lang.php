@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo User Interface Library - De UI Library Utilities faciliteert de uitvoering van rich client-side functies',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Een e-mail transfer klasse voor PHP.',
   'LBL_SOURCE_JSHRINK' => 'JShrink - Een Javascript minimaliseerder geschreven in PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Zorgt voor snelle twee-weg Blowfish encryptie zonder dat de PHP mcrypt extensie nodig is',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - Een SAX parser voor HTML en andere slecht gevormde XML-documenten',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo UI Extensions Bibliotheek - Uitbreidingen van de Yahoo! User Interface Library door Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Javascript Flash Player detectie en insluitscript',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Welkom bij het Sugar 7 help dashboard',
-    'LBL_HELP_RECORD' => 'Het help dashlet toont specifieke informatie over de module die u aan het bekijken bent, geeft uitgebreide stappen aan voor het uitvoeren van bepaalde acties in de module en  toont u waar u voor meer informatie en ondersteuning terecht kunt. Het help dashlet blijft openstaan, zodat u de informatie kunt bekijken terwijl u de stappen in de module doorloopt.
-
-Het help dashlet is beschikbaar voor alle Sugar 7 modules en kan "geopend" en "gesloten" worden door op het help icoontje te drukken (in de balk onderaan de applicatie).',
+    'LBL_HELP_RECORD_TITLE' => 'Hulp',
+    'LBL_HELP_RECORD' => 'De hulp geeft specifieke informatie weer over de module die u bekijkt, geeft gedetailleerde stappen voor uit uitvoeren van bepaalde acties in de module en leidt u naar de goede plaats voor meer informatie en ondersteuning.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filteren',
 );

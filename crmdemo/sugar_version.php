@@ -13,10 +13,10 @@
 
 
 
-$sugar_version      = '7.8.2.2';
-$sugar_db_version   = '7.8.2.2';
+$sugar_version      = '7.9.4.0';
+$sugar_db_version   = '7.9.4.0';
 $sugar_flavor       = 'PRO';
-$sugar_build		= '50';
-$sugar_timestamp    = '2017-08-27 01:01PM';
+$sugar_build        = '1130';
+$sugar_timestamp    = '2018-02-08 10:12pm';
 
 ?>

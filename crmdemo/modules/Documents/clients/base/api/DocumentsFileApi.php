@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'clients/base/api/FileApi.php';
 /**
  * API Class to handle file and image (attachment) interactions with a field in
  * a record.
@@ -48,7 +46,7 @@ class DocumentsFileApi extends FileApi {
      * (non-PHPdoc)
      * @see FileApi::checkFileAccess()
      */
-    protected function checkFileAccess($bean, $field, $args)
+    protected function checkFileAccess(SugarBean $bean, $field, array $args)
     {
         parent::checkFileAccess($bean, $field, $args);
         // Check that we can create revision
@@ -83,7 +81,7 @@ class DocumentsFileApi extends FileApi {
         $bean->fill_in_additional_detail_fields();
     }
 
-    protected function deleteIfFails($bean, $args)
+    protected function deleteIfFails(SugarBean $bean, array $args)
     {
         // if we already have the revision, we won't delete the document on failure to add another one
         if($bean->document_revision_id) {

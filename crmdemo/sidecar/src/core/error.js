@@ -21,7 +21,7 @@
         init: function() {
             this.initialize();
         },
-        
+
         /**
          * Setups the params for error module
          * @param opts
@@ -54,12 +54,12 @@
         // falls back to handleStatusCodesFallback.
         _callCustomHandler: function(error, fn, params) {
             if (fn) {
-                fn.apply(this, _.union([error], params || [ ]));
+                fn.apply(this, _.union([error], params || []));
             } else {
                 this.handleStatusCodesFallback(error);
             }
         },
-    
+
         /**
          * Authentication error.
          *
@@ -77,10 +77,10 @@
          *
          * **handleNeedLoginError**
          *
-         * The server shall use this in place of invalid_grant to tell client to handle 
-         * error specifically as caused due to invalid credentials being supplied. The 
-         * reason server needs to use this is because an invalid_grant oauth error may 
-         * also be caused by invalid or expired token. Using needs_login allows all 
+         * The server shall use this in place of invalid_grant to tell client to handle
+         * error specifically as caused due to invalid credentials being supplied. The
+         * reason server needs to use this is because an invalid_grant oauth error may
+         * also be caused by invalid or expired token. Using needs_login allows all
          * clients to provide proper messaging to end user without the need for extra logic.
          *
          * **handleInvalidClientError**
@@ -111,18 +111,18 @@
          *
          * @param {SUGAR.HttpError} error HTTP error.
          * @param {Function} alternativeCallback(optional) If this does not match an expected oauth error than this callback will be
-         * called (if provided). 
+         * called (if provided).
          * @method
          * @private
          */
         _handleFineGrainedError: function(error, alternativeCallback) {
-            var handlerName = "handle" + app.utils.classify(error.code) + "Error";
+            var handlerName = 'handle' + app.utils.classify(error.code) + 'Error';
             (this[handlerName] || alternativeCallback || this.handleStatusCodesFallback).call(this, error);
         },
 
         /**
          * An object of status code error handlers. If custom handler is defined by extending
-         * module, corresponding status code handler will attemp to use that, otherwise,
+         * module, corresponding status code handler will attempt to use that, otherwise,
          * handleStatusCodesFallback is used as a fallback just logging the error.
          *
          * @class Core.Error.statusCodes
@@ -130,16 +130,15 @@
          * @singleton
          */
         statusCodes: {
-
-            "0": function(error) {
+            '0': function(error, model, options) {
                 if(error.textStatus === 'timeout') {
                     this._callCustomHandler(error, this.handleTimeoutError);
                 } else {
                     // TODO: Need invalid url, and any other possible status: 0 conditions
-                    this.handleStatusCodesFallback(error);
+                    this.handleStatusCodesFallback(error, model, options);
                 }
             },
-            
+
             /**
              * Authentication or bad request error.
              *
@@ -151,7 +150,7 @@
              * Provide custom `handleInvalidRequestError` handler.
              * @method
              */
-            "400": function(error) {
+            '400': function(error) {
                 this._handleFineGrainedError(error, this.handleUnspecified400Error);
             },
 
@@ -159,14 +158,14 @@
              * Unauthorized.
              *
              * Since oauth server implementation might throw 401 (as well as 400)
-             * we route this to the {@link Core.Error#_handleFineGrainedError}. If no match for oauth error
-             * than handleOAuthError will try to use handleUnauthorizedError if 
-             * supplied.
+             * we route this to the {@link Core.Error#_handleFineGrainedError}.
+             * If no match for oauth error then handleOAuthError will try to use
+             * handleUnauthorizedError if supplied.
              *
              * Provide custom `handleUnauthorizedError` handler.
              * @method
              */
-            "401": function(error) {
+            '401': function(error) {
                 this._handleFineGrainedError(error, this.handleUnauthorizedError);
             },
 
@@ -176,7 +175,7 @@
              * Provide custom `handleForbiddenError` handler.
              * @method
              */
-            "403": function(error) {
+            '403': function(error) {
                 this._callCustomHandler(error, this.handleForbiddenError);
             },
 
@@ -186,7 +185,7 @@
              * Provide custom `handleNotFoundError` handler.
              * @method
              */
-            "404": function(error) {
+            '404': function(error) {
                 this._callCustomHandler(error, this.handleNotFoundError, _.rest(arguments));
             },
 
@@ -196,7 +195,7 @@
              * Provide custom `handleMethodNotAllowedError` handler.
              * @method
              */
-            "405": function(error) {
+            '405': function(error) {
                 this._callCustomHandler(error, this.handleMethodNotAllowedError);
             },
 
@@ -206,7 +205,7 @@
              * Provide custom `handleMethodConflictError` handler.
              * @method
              */
-            "409": function(error) {
+            '409': function(error) {
                 this._callCustomHandler(error, this.handleMethodConflictError);
             },
 
@@ -216,21 +215,21 @@
              * Provide custom `handleHeaderPreconditionFailed` handler.
              * @method
              */
-            "412": function(error) {
+            '412': function(error) {
                 this._callCustomHandler(error, this.handleHeaderPreconditionFailed);
             },
 
             /**
              * Precondition failure.
              *
-             * Clients can optionally sniff the error property in JSON for finer grained 
+             * Clients can optionally sniff the error property in JSON for finer grained
              * determination; the following values may be:
              * missing_parameter, invalid_parameter
              *
              * Provide custom `handleValidationError` handler.
              * @method
              */
-            "422": function(error, model) {
+            '422': function(error, model) {
                 error.model = model;
                 this._callCustomHandler(error, this.handleValidationError, _.rest(arguments));
 
@@ -241,7 +240,7 @@
              * Provide custom `handleMethodFailureError` handler.
              * @method
              */
-            "424": function(error, model) {
+            '424': function(error, model) {
                 error.model = model;
                 this._callCustomHandler(error, this.handleMethodFailureError, _.rest(arguments));
             },
@@ -252,7 +251,7 @@
              * Provide custom `handleServerError` handler.
              * @method
              */
-            "500": function(error) {
+            '500': function(error) {
                 this._callCustomHandler(error, this.handleServerError);
             },
 
@@ -262,8 +261,7 @@
              * Provide custom `handleServerError` handler.
              * @method
              */
-
-            "502": function(error) {
+            '502': function(error) {
                 this._callCustomHandler(error, this.handleServerError);
             },
 
@@ -273,7 +271,7 @@
              * Provide custom `handleServerError` handler.
              * @method
              */
-            "503": function(error) {
+            '503': function(error) {
                 this._callCustomHandler(error, this.handleServerError);
             }
         },
@@ -285,20 +283,20 @@
          * @member Core.Error
          */
         errorName2Keys: {
-            "maxValue":"ERROR_MAXVALUE",
-            "minValue":"ERROR_MINVALUE",
-            "maxLength":"ERROR_MAX_FIELD_LENGTH",
-            "minLength":"ERROR_MIN_FIELD_LENGTH",
-            "datetime":"ERROR_DATETIME",
-            "required":"ERROR_FIELD_REQUIRED",
-            "email":"ERROR_EMAIL",
-            "primaryEmail":"ERROR_PRIMARY_EMAIL",
-            "duplicateEmail":"ERROR_DUPLICATE_EMAIL",
-            "number":"ERROR_NUMBER",
-            "isBefore":"ERROR_IS_BEFORE",
-            "isAfter":"ERROR_IS_AFTER",
-            "greaterThan":"ERROR_IS_GREATER_THAN",
-            "lessThan":"ERROR_IS_LESS_THAN"
+            'maxValue': 'ERROR_MAXVALUE',
+            'minValue': 'ERROR_MINVALUE',
+            'maxLength': 'ERROR_MAX_FIELD_LENGTH',
+            'minLength': 'ERROR_MIN_FIELD_LENGTH',
+            'datetime': 'ERROR_DATETIME',
+            'required': 'ERROR_FIELD_REQUIRED',
+            'email': 'ERROR_EMAIL',
+            'primaryEmail': 'ERROR_PRIMARY_EMAIL',
+            'duplicateEmail': 'ERROR_DUPLICATE_EMAIL',
+            'number': 'ERROR_NUMBER',
+            'isBefore': 'ERROR_IS_BEFORE',
+            'isAfter': 'ERROR_IS_AFTER',
+            'greaterThan': 'ERROR_IS_GREATER_THAN',
+            'lessThan': 'ERROR_IS_LESS_THAN'
          },
 
         /**
@@ -320,8 +318,6 @@
          */
         handleValidationError: function(error) {
             var errors = error.responseText;
-            var model = error.model;
-            
             // TODO: Right now doesn't stringify the error, add it in when we finalize the
             // structure of the error.
 
@@ -334,7 +330,7 @@
                 var errorMsg = '';
                 if (_.isObject(fieldError)) {
                     _.each(fieldError, function(result, fieldName) {
-                        errorMsg +=  "(Message) " + this.getErrorString(fieldName, result) + "\n";
+                        errorMsg += '(Message) ' + this.getErrorString(fieldName, result) + '\n';
                     }, this);
                 } else {
                     errorMsg = fieldError;
@@ -373,9 +369,9 @@
          * @member Core.Error
          */
         handleUnhandledError: function(message, url, line) {
-            app.logger.fatal(message + " at " + url + " on line " + line);
+            app.logger.fatal(message + ' at ' + url + ' on line ' + line);
         },
-        
+
         /**
          * This is the fallback error handler if custom status code specific handler
          * not provided in application specific error handler. To define custom error
@@ -393,14 +389,14 @@
          *
          * })(SUGAR.App);
          * </pre></code>
-         * 
+         *
          * @param {String} error Ajax error.
          * @member Core.Error
          */
         handleStatusCodesFallback: function(error) {
             app.logger.error(error.toString());
         },
-        
+
         /**
          * Handles render related errors.
          * @param {String} component The reference to calling view's this
@@ -409,11 +405,11 @@
          * @member Core.Error
          */
         handleRenderError: function(component, method, additionalInfo) {
-            var id = 'render_error_'+ component.module + '_'+ component.name;
+            var id = 'render_error_' + component.module + '_' + component.name;
             var level = 'error'; //Default message level
             var title, messages;
             // TODO: Add corresponding language agnostic app strings for title/message and use that instead.
-            switch(method) {
+            switch (method) {
                 case '_renderHtml':
                     title = app.lang.get('ERR_RENDER_FAILED_TITLE');
                     messages = [app.lang.get('ERR_RENDER_FAILED_MSG'),
@@ -426,7 +422,7 @@
                     break;
                 case 'view_render_denied':
                     title = app.lang.get('ERR_NO_VIEW_ACCESS_TITLE');
-                    level = "warning";  // This isn't an application error, this is ACL enforcement.
+                    level = 'warning';  // This isn't an application error, this is ACL enforcement.
                     var module = app.lang.getModuleName(component.module, {plural: true});
                     messages = [app.utils.formatString(app.lang.get('ERR_NO_VIEW_ACCESS_MSG'),[module])];
                     break;
@@ -439,7 +435,7 @@
                     title = app.lang.get('ERR_GENERIC_TITLE');
                     messages = [app.lang.get('ERR_INTERNAL_ERR_MSG'),
                                 app.lang.get('ERR_CONTACT_TECH_SUPPORT')];
-                    app.logger.error('handleRenderError called for render error caught in ' + method +', but we have no corresponding handler!');
+                    app.logger.error('handleRenderError called for render error caught in ' + method + ', but we have no corresponding handler!');
                     break;
             }
 
@@ -450,7 +446,7 @@
             });
 
         },
-        
+
         /**
          * Overloads the window.onerror catch all function. Calls the original if any while
          * adding the framework's custom error handling logic. Pass in a custom callback to
@@ -461,8 +457,8 @@
          * @member Core.Error
          */
         enableOnError: function(handler, context) {
-            var originalHandler,
-                self = this;
+            var originalHandler;
+            var self = this;
 
             if (this.overloaded) {
                 return false;
@@ -485,11 +481,38 @@
             this.overloaded = true;
 
             return true;
-        }
+        },
+
+
+         /**
+          * Inserts call stack string to Error message.
+          * `window.onerror` handler is not provided with Error object
+          * (4th argument) [in Safari][1].
+          *
+          * [1]: https://bugs.webkit.org/show_bug.cgi?id=55092
+          *
+          * @param {string|Error} error Error text or Error object.
+          * @param {boolean} [skipThrow=false] Pass `true` to skip exception
+          *   raising.
+          * @return {Error} Error object with stack trace inserted into
+          *   `Error.message` property.
+          */
+         throwErrorWithCallStack: function(error, skipThrow) {
+             if (_.isString(error)) {
+                 error = new Error(error);
+             }
+             error.message = error.message + '; ' + error.stack;
+
+             if (skipThrow) {
+                 return error;
+             }
+
+             throw error;
+         }
     };
 
     // We don't want to initialize error handling immediately,
-    // because the handler may use code that have not been initialized yet
-    app.augment("error", module, false);
+    // because the handler may use code that has not been initialized yet
+    app.augment('error', module, false);
 
 })(SUGAR.App);

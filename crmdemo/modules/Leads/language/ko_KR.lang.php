@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => '수정하기' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D & B 교장 아이디',
-    'LBL_DNB_BAL_PREVIEW' => '리드 미리보기',
-    'LBL_DNB_BAL_RSLT_CNT' => '리드',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D & B : 납 정보',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => '영업기회 목록',
 

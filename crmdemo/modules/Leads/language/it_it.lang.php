@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Modifica' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'ID Principale DNB',
-    'LBL_DNB_BAL_PREVIEW' => 'Anteprima Lead',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Lead',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'DNB: Informazioni Lead',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Opportunità',
 
@@ -298,7 +295,7 @@ $mod_strings = array (
 Per creare un {{module_name}}: 
 1. Compila i campi con i valori desiderati. 
 - I campi contrassegnati con "Obbligatorio" devono essere compilati prima del salvataggio.
-- Clicca "Mostra più Moduli" per visualizzare campi aggiuntivi se necessario. 
+- Clicca "Altri dettagli" per visualizzare campi aggiuntivi se necessario. 
 2. Clicca "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
 
     // Convert View Help Text

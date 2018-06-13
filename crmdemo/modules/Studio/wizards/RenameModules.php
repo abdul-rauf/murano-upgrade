@@ -14,10 +14,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
-require_once 'modules/Studio/DropDowns/DropDownHelper.php';
-require_once 'modules/ModuleBuilder/parsers/parser.label.php';
 require_once 'modules/Administration/Common.php';
-require_once 'include/MetaDataManager/MetaDataManager.php';
 
 class RenameModules
 {
@@ -104,7 +101,6 @@ class RenameModules
     {
         global $app_list_strings, $mod_strings, $locale;
 
-        require_once('modules/Studio/parsers/StudioParser.php');
         $dh = new DropDownHelper();
 
         $smarty = new Sugar_Smarty();
@@ -166,11 +162,9 @@ class RenameModules
         $smarty->assign('deleteImage',$deleteImage);
         $smarty->display("modules/Studio/wizards/RenameModules.tpl");
         if (!is_file(sugar_cached('jsLanguage/') . $GLOBALS['current_language'] . '.js')) {
-            require_once ('include/language/jsLanguage.php');
             jsLanguage::createAppStringsCache($GLOBALS['current_language']);
         }
         if (!is_file(sugar_cached('jsLanguage/') . 'Studio' . '/' . $GLOBALS['current_language'] . '.js')) {
-            require_once ('include/language/jsLanguage.php');
             jsLanguage::createModuleStringsCache('Studio', $GLOBALS['current_language']);
         }
     }
@@ -182,7 +176,7 @@ class RenameModules
      */
     public function save($redirect = TRUE)
     {
-        global $locale;
+        global $locale, $current_language, $current_user;
         if (!empty($_REQUEST['dropdown_lang'])) {
             $this->selectedLanguage = $this->request->getValidInputRequest('dropdown_lang', 'Assert\Language');
         } else {
@@ -209,6 +203,11 @@ class RenameModules
 
         // Run the metadata cache refresh queue so changes take effect
         MetaDataManager::runCacheRefreshQueue();
+
+        $cacheDefsJs = sugar_cached('modules/modules_def_' . $current_language . '_' . md5($current_user->id) . '.js');
+        if (file_exists($cacheDefsJs)) {
+            unlink($cacheDefsJs);
+        }
 
         //Refresh the page again so module tabs are changed as the save process happens after module tabs are already generated.
         if($redirect) {
@@ -388,7 +387,7 @@ class RenameModules
     private function renameModuleSubpanel($moduleName, $beanName)
     {
         $GLOBALS['log']->info("About to rename subpanel for module: $moduleName");
-        $bean = BeanFactory::getBean($moduleName);
+        $bean = BeanFactory::newBean($moduleName);
         //Get the subpanel def
         $subpanelDefs = $this->getSubpanelDefs($bean);
 
@@ -593,7 +592,7 @@ class RenameModules
     private function renameModuleRelatedLinks($moduleName, $moduleClass)
     {
         $GLOBALS['log']->info("Begining to renameModuleRelatedLinks for $moduleClass\n");
-        $tmp = BeanFactory::getBean($moduleName);
+        $tmp = BeanFactory::newBean($moduleName);
         if (!method_exists($tmp, 'get_related_fields')) {
             $GLOBALS['log']->info("Unable to resolve linked fields for module $moduleClass ");
             return;
@@ -651,7 +650,6 @@ class RenameModules
     {
         //Load the Dashlet metadata so we know what needs to be changed
         if (!is_file(sugar_cached('dashlets/dashlets.php'))) {
-            require_once('include/Dashlets/DashletCacheBuilder.php');
             $dc = new DashletCacheBuilder();
             $dc->buildCache();
         }
@@ -1087,7 +1085,7 @@ class RenameModules
      */
     public function getModuleSingularKey($moduleName)
     {
-        $tmp = BeanFactory::getBean($moduleName);
+        $tmp = BeanFactory::newBean($moduleName);
         if (empty($tmp)) {
             $GLOBALS['log']->error("Unable to get module singular key for class: $moduleName");
             return $moduleName;

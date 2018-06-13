@@ -34,13 +34,11 @@ SugarWidgetListView.prototype.load = function(parentNode) {
 SugarWidgetListView.prototype.display = function() {
 
 	if(typeof GLOBAL_REGISTRY['result_list'] == 'undefined') {
-		this.display_loading();
 		return;
 	}
 
 	var div = document.getElementById('list_div_win');
 	div.style.display = 'block';
-	//div.style.height='125px';
 	var html = '<table width="100%" cellpadding="0" cellspacing="0" border="0" class="list view">';
 	html += '<tr>';
 	html += '<th width="2%" nowrap="nowrap">&nbsp;</th>';
@@ -50,7 +48,6 @@ SugarWidgetListView.prototype.display = function() {
     html += '<th width="20%" nowrap="nowrap">'+GLOBAL_REGISTRY['meeting_strings']['LBL_ACCOUNT_NAME']+'</th>';
 	html += '<th width="18%" nowrap="nowrap">&nbsp;</th>';
 	html += '</tr>';
-	//var html = '<table width="100%" cellpadding="0" cellspacing="0">';
 	for(var i=0;i<GLOBAL_REGISTRY['result_list'].length;i++) {
 		var bean = GLOBAL_REGISTRY['result_list'][i];
 		var disabled = false;
@@ -83,24 +80,15 @@ SugarWidgetListView.prototype.display = function() {
 		html += '<td>'+bean.fields.phone_work+'</td>';
         html += '<td>'+bean.fields.account_name+'</td>';
 		html += '<td align="right">';
-		//	hidden = 'hidden';
 		hidden = 'visible';
-		if(!disabled) {
-			//	hidden = 'visible';
-		}
 		html += '<input type="button" id="invitees_add_'+(i+1)+'" class="button" onclick="this.disabled=true;SugarWidgetSchedulerAttendees.form_add_attendee('+i+');" value="'+GLOBAL_REGISTRY['meeting_strings']['LBL_ADD_BUTTON']+'"/ style="visibility: '+hidden+'"/>';
 		html += '</td>';
 
 		html += '</tr>';
 	}
 	html += '</table>';
-	//this.parentNode.innerHTML = html;
 
 	div.innerHTML = html;
-}
-
-SugarWidgetListView.prototype.display_loading = function() {
-
 }
 
 //////////////////////////////////////////////////
@@ -178,12 +166,10 @@ SugarWidgetSchedulerSearch.prototype.display = function() {
 
 	html += '<table width="100%" cellpadding="0" cellspacing="0" width="100%" >'
 	html += '<tr>';
-	//html += '<form id="'+this.form_id+'"><table width="100%"><tbody><tr>';
 	html += '<td scope="col" nowrap><label for="search_first_name">'+GLOBAL_REGISTRY['meeting_strings']['LBL_FIRST_NAME']+':</label>&nbsp;&nbsp;<input  name="search_first_name" id="search_first_name" value="" type="text" size="10"></td>';
 	html += '<td scope="col" nowrap><label for="search_last_name">'+GLOBAL_REGISTRY['meeting_strings']['LBL_LAST_NAME']+':</label>&nbsp;&nbsp;<input  name="search_last_name" id="search_last_name" value="" type="text" size="10"></td>';
 	html += '<td scope="col" nowrap><label for="search_email">'+GLOBAL_REGISTRY['meeting_strings']['LBL_EMAIL']+':</label>&nbsp;&nbsp;<input name="search_email" id="search_email" type="text" value="" size="15"></td>';
 	html += '<td scope="col" nowrap><label for="search_account_name">'+GLOBAL_REGISTRY['meeting_strings']['LBL_ACCOUNT_NAME']+':</label>&nbsp;&nbsp;<input  name="search_account_name" id="search_account_name" type="text" value="" size="15"></td>';
-	//html += '<td valign="center"><input type="submit" onclick="SugarWidgetSchedulerSearch.submit(this.form);" value="Search" ></td></tr></tbody></table></form>';
 	html += '<td valign="center"><input id="invitees_search" type="submit" class="button" value="'+GLOBAL_REGISTRY['meeting_strings']['LBL_SEARCH_BUTTON']+'" ></td></tr>';
 	html += '</table>';
 	html += '</form>';
@@ -333,8 +319,6 @@ function SugarWidgetScheduler() {
 }
 
 SugarWidgetScheduler.prototype.init = function() {
-	//var row = new	SugarWidgetScheduleAttendees();
-	//row.load(this);
 }
 
 SugarWidgetScheduler.prototype.load = function(parentNode) {
@@ -428,7 +412,6 @@ SugarWidgetSchedulerAttendees.prototype.init = function() {
 	else
 		return;
 
-	// this.datetime = new SugarDateTime();
 	GLOBAL_REGISTRY.scheduler_attendees_obj = this;
 	var date_start = document.forms[form_name].date_start.value;
 	var hour_start = parseInt(date_start.substring(11,13), 10);
@@ -442,7 +425,6 @@ SugarWidgetSchedulerAttendees.prototype.init = function() {
 		GLOBAL_REGISTRY.focus.fields.time_start = hour_start + time_separator + minute_start + meridiem;
 	} else {
 		GLOBAL_REGISTRY.focus.fields.time_start = hour_start+time_separator+minute_start;
-		//GLOBAL_REGISTRY.focus.fields.time_start = document.forms[form_name].time_hour_start.value+time_separator+minute_start;
 	}
 
 	GLOBAL_REGISTRY.focus.fields.date_start = document.forms[form_name].date_start.value;
@@ -632,7 +614,6 @@ SugarWidgetScheduleRow.prototype.display = function() {
 
         td = document.createElement('td');
         tr.appendChild(td);
-        //insertCell(tr.cells.length);
 
         // icon + full name
         td.scope = 'row';
@@ -657,7 +638,6 @@ SugarWidgetScheduleRow.prototype.display = function() {
         td.className = 'schedulerAttendeeDeleteCell';
         td.noWrap = true;
         //CCL - Remove check to disallow removal of assigned user or current user
-        //if ( GLOBAL_REGISTRY.focus.fields.assigned_user_id != this.focus_bean.fields.id && GLOBAL_REGISTRY.current_user.fields.id != this.focus_bean.fields.id) {
        td.innerHTML = '<a title="'+ GLOBAL_REGISTRY['meeting_strings']['LBL_REMOVE']
                     + '" class="listViewTdToolsS1" style="text-decoration:none;" '
                     + 'href="javascript:SugarWidgetScheduleRow.deleteRow(\''+this.focus_bean.fields.id+'\');">&nbsp;'
@@ -671,12 +651,6 @@ SugarWidgetScheduleRow.prototype.display = function() {
 }
 
 SugarWidgetScheduleRow.deleteRow = function(bean_id) {
-	// can't delete organizer
-	/*
-	if(GLOBAL_REGISTRY.focus.users_arr.length == 1 || GLOBAL_REGISTRY.focus.fields.assigned_user_id == bean_id) {
-		return;
-	}
-    */
 	for(var i=0;i<GLOBAL_REGISTRY.focus.users_arr.length;i++) {
 		if(GLOBAL_REGISTRY.focus.users_arr[i]['fields']['id']==bean_id) {
 			delete GLOBAL_REGISTRY.focus.users_arr_hash[GLOBAL_REGISTRY.focus.users_arr[i]['fields']['id']];
@@ -747,7 +721,6 @@ SugarWidgetScheduleRow.prototype.add_freebusy_nodes = function(tr,attendee) {
 	for(var i=0;i < this.timeslots.length; i++) {
 		var td = document.createElement('td');
 		tr.appendChild(td);
-		//var td = tr.insertCell(tr.cells.length);
         td.innerHTML = '&nbsp;';
 		if(typeof(this.timeslots[i]['is_start']) != 'undefined') {
 			td.className = 'schedulerSlotCellStartTime';

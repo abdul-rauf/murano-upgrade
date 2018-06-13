@@ -16,8 +16,8 @@ Sugar インスタンスを新しいアプリケーションとして Google に
 <br/><br/>
 <ol>
 <li>Google Developers サイトにアクセスします。
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>アプリケーションを登録するために使用したい Google アカウントでサインインします。</li>
 <li>新しいプロジェクトの作成</li>

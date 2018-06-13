@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/MVC/View/SugarView.php');
 
 class HomeViewAdditionaldetailsretrieve extends SugarView
 {
@@ -38,7 +36,7 @@ class HomeViewAdditionaldetailsretrieve extends SugarView
             $bean = BeanFactory::getBean($moduleDir, $id);
 
             //bug38901 - shows dropdown list label instead of database value
-            foreach ($bean->field_name_map as $field => $value) {
+            foreach ($bean->field_defs as $field => $value) {
                 if ($value['type'] == 'enum' &&
                     !empty($value['options']) &&
                     !empty($app_list_strings[$value['options']]) &&

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +17,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-require_once('include/SugarObjects/forms/PersonFormBase.php');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
@@ -39,7 +37,7 @@ var $objectName = 'Contact';
  */
 public function getDuplicateQuery($focus, $prefix='')
 {
-    $db = DBManagerFactory::getInstance();
+        $db = DBManagerFactory::getInstance();
 	$query = 'SELECT contacts.id, contacts.first_name, contacts.last_name, contacts.title FROM contacts ';
 
     // Bug #46427 : Records from other Teams shown on Potential Duplicate Contacts screen during Lead Conversion
@@ -52,23 +50,23 @@ public function getDuplicateQuery($focus, $prefix='')
     $query .= ' where contacts.deleted = 0 AND ';
 
 	if(isset($_POST[$prefix.'first_name']) && strlen($_POST[$prefix.'first_name']) != 0 && isset($_POST[$prefix.'last_name']) && strlen($_POST[$prefix.'last_name']) != 0){
-        $query .= sprintf(
-            ' contacts.first_name LIKE %s AND contacts.last_name = %s',
-            $db->quoted($_POST[$prefix . 'first_name'] . '%'),
-            $db->quoted($_POST[$prefix . 'last_name'])
-        );
+            $query .= sprintf(
+                ' contacts.first_name LIKE %s AND contacts.last_name = %s',
+                $db->quoted($_POST[$prefix . 'first_name'] . '%'),
+                $db->quoted($_POST[$prefix . 'last_name'])
+            );
 	} else {
-        $query .= sprintf(
-            ' contacts.last_name = %s',
-            $db->quoted($_POST[$prefix . 'last_name'])
-        );
+            $query .= sprintf(
+                ' contacts.last_name = %s',
+                $db->quoted($_POST[$prefix . 'last_name'])
+            );
 	}
 
 	if(!empty($_POST[$prefix.'record'])) {
-        $query .= sprintf(
-            ' AND contacts.id != %s',
-            $db->quoted($_POST[$prefix . 'record'])
-        );
+            $query .= sprintf(
+                ' AND contacts.id != %s',
+                $db->quoted($_POST[$prefix . 'record'])
+            );
 	}
 
     return $query;
@@ -113,7 +111,7 @@ function getWideFormBody($prefix, $mod='',$formname='',  $contact = '', $portal 
 	}
 
 	//Retrieve Email address and set email1, email2
-	$sugarEmailAddress = BeanFactory::getBean('EmailAddresses');
+	$sugarEmailAddress = BeanFactory::newBean('EmailAddresses');
 	$sugarEmailAddress->handleLegacyRetrieve($contact);
   	if(!isset($contact->email1)){
     	$contact->email1 = '';
@@ -233,7 +231,6 @@ EOQ;
 
 $form .= $sugarEmailAddress->getEmailAddressWidgetEditView($contact->id, $_REQUEST['action']=='ConvertLead'?'Leads':'Contacts', false, 'include/SugarEmailAddress/templates/forWideFormBodyView.tpl');
 
-require_once('include/SugarFields/Fields/Text/SugarFieldText.php');
 $sugarfield = new SugarFieldText('Text');
 $description_text = $sugarfield->getClassicEditView('description', $contact->description, $prefix, true);
 
@@ -529,7 +526,7 @@ function handleSave($prefix, $redirect=true, $useRequired=false){
 			}
 
 
-			$emailAddress = BeanFactory::getBean('EmailAddresses');
+			$emailAddress = BeanFactory::newBean('EmailAddresses');
 			$get .= $emailAddress->getFormBaseURL($focus);
 
 			$get .= get_teams_url('Contacts');
@@ -692,7 +689,7 @@ function handleRedirect($return_id){
     */
     protected function getContact()
     {
-        return BeanFactory::getBean('Contacts');
+        return BeanFactory::newBean('Contacts');
     }
 }
 

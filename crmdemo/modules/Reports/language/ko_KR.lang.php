@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => '거래처 보고서',
   'LBL_CONTACT_REPORTS' => '연락처 보고서',
   'LBL_OPPORTUNITY_REPORTS' => '영업기회 보고서',
+    'LBL_RECENTLY_MODIFIED' => '최근 수정',
 
   'LBL_CASE_REPORTS' => '사례 보고서',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'다음 30일',
   'LBL_THIS_YEAR'=>'올해',
   'LBL_LIST_FORM_TITLE' =>'보고서',
+  'LBL_LIST_REPORT_NAME' => '이름',
   'LBL_PROSPECT_REPORTS'=>'목표고객 보고서',
   'LBL_CHART_TYPE'=>'도표 유형',
   'LBL_IS_EMPTY'=>'비었습니다.',
@@ -517,9 +518,9 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"필터 정의단계<br />1. 필터 정의에 사용할 관련 모듈틀의 모듈을 선택하고 초기설정에 의해 기본 모듈이 선택됩니다.(관계도의 상위 중심점)<br />모듈 클릭으로 관련 모듈을 선택할수 있습니다. 관련 모듈의 추가 관련 모듈을 보려면 중심점을 확장합니다. 선택한 모듈을 사용가능한 필드틀에 나타날 보고가능한 필드를 결정합니다.",
 	'LBL_GROUP_BY_HELP_DESC'=>"그룹 정의 단계<br />1. 보고서의 그룹기록에 사용할 관련 모듈판에서 모듈을 클릭합니다. 초기 설정에 의해 기본모듈이 선택됩니다.<br />모듈 클릭으로 관련 모듈을 선택할수 있습니다. 관련 모듈의 추가 관련 모듈을 보려면 중심점을 확장합니다. 선택한 모듈은 사용가능한 필드틀에 나타날 보고가능한 필드를 결정합니다. <br />2. 보고서의 필드에 의한 그룹<br />3. 보고서의 사용가능한 필드에서 필드를 클릭합니다. 또는 틀안의 문자상자에 필드를 입력하여 검색할수 있습니다.<br /> 선택된 관련 모듈틀의 모듈에서 필드 번호를 선택후에는 그룹기록 필드의 선택한 번호와 다른 모듈을 선택할수 있습니다. <br />원하는 위치에 끌어 내리기로 필드 순서를 변경할수 있습니다.  이는 전시 결과에 영향을 줄수 있습니다.<br />Matrix 보고서는 최대 그룹기록의 3개의 필드를 사용할수 있습니다.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"전시할 열 선택단계<br />1. 보고서에 데이타 전시을 위해 사용할 관련 모듈판에서 모듈을 클릭합니다. 초기 설정에의해 모듈선택단계에서 선택한 기본모듈이 선택됩니다. <br />모듈 클릭으로 관련 모듈에서 필드를 선택할수 있습니다. 기본 모듈에 관련된 기본 모듈또한 선택할수 있습니다. 선택한 모듈은 사용가능한 필드틀에 나타날 보고가능한 필드를 결정합니다. <br />2. 사용가능한 필드에서 보고서에 전시할 필드 데이타을 위한 사용가능한 필드 틀에서 필드를 클릭합니다.  또는 틀안의 문자상자에 필드를 입력하여 검색할수 있습니다.<br />선택된 관련 모듈틀의 모듈에서 필드 번호를 선택후에는 추가선택한 필드와 다른 모듈을 선택할수 있습니다.  필드의 번호를 선택할수 있지만 보고서 생성속도를 늦추며 보고서에 필요이상의 추가시 읽기가 쉽지 않아집니다. <br />원하는 위치에 끌어 내리기로 필드 순서를 변경할수 있습니다.  이는 전시 결과에 영향을 줄수 있습니다." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>요약 표시의 선택 단계:</b><br/><br/>1) 보고서에서 요약으로 사용하고 싶은 <b>관련 모듈</b> 창의 모듈을 클릭합니다. 기본 모듈(트리 보기의 최상위 노드)이 기본값으로 선택됩니다.<br/><br/>	관련 모듈(트리 보기의 하위 노드)을 클릭하여 모듈을 선택할 수 있습니다. 관련 모듈에 관련된 추가 모듈을 보려면 노드를 확장합니다. 선택한 모듈이 <b>사용가능한 필드</b> 창에 표시되는 보고 필드를 결정합니다.<br/><br/>	2) <b>사용가능한 필드</b> 창에서 필드를 클릭하여 보고서에 요약할 내용을 선택합니다. 창의 텍스트 상자에 입력하여 필드를 검색할 수도 있습니다.<br/><br/>	<b>관련 모듈</b> 창의 선택한 모듈에서 원하는 숫자만큼의 필드를 선택한 후, 보고서의 요약에 사용할 추가 필드를 선택할 수 있는 다른 모듈을 선택할 수 있습니다.<br/><br/> 매트릭스 보고서의 경우, 보고서의 하나의 셀 내에서 복수의 값을 표시하기 위해 둘 이상의 필드를 선택할 수 있습니다." ,
 
-	'LBL_ALT_SHOW' => '보이기',
+	'LBL_ALT_SHOW' => '보여주기',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => '이 보고서는 다음 열 순서를 포함합니다.',
 	'LBL_HELP' => '도움말' /*for 508 compliance fix*/,
 	'LBL_EDITLAYOUT' => '지면 배치 편집하기' /*for 508 compliance fix*/,
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => '위로' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => '정보',
     'LBL_REPORT_GRAND_TOTAL' => "최종 합계",
+    'LBL_EDIT_REPORT_BUTTON' => '보고서 수정하기',
 
     'LBL_REPORTS_TO' => '다음 담당자에 보고:',
     'LBL_LESS_THAN_EQUAL' => '보다 적음, 와 동일',

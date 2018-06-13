@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,27 +18,16 @@ require_once('modules/Reports/templates/templates_reports.php');
 require_once('modules/Reports/templates/templates_reports_index.php');
 require_once('modules/Reports/templates/templates_pdf.php');
 require_once('modules/Reports/templates/templates_export.php');
-require_once('modules/Reports/templates/templates_chart.php');
 
 require_once('modules/Reports/config.php');
 global $current_language, $report_modules, $modules_report, $mod_strings;
 
-
-
-//$mod_strings = return_module_language($current_language,"Reports");
-
-
-require_once('modules/Reports/Report.php');
-
 $args = array();
 
 // set default
-//if ( empty($_REQUEST['report_module'])) {
-//	$_REQUEST['report_module'] = $default_report_type;
-//}
 if ($_REQUEST['action'] == 'index') {
 if ( isset($_REQUEST['id'])) {
-	$saved_report_seed = BeanFactory::getBean('Reports');
+	$saved_report_seed = BeanFactory::newBean('Reports');
 	$saved_report_seed->disable_row_level_security = true;
 
 	$saved_report_seed->retrieve($_REQUEST['id'], false);
@@ -223,7 +210,7 @@ function checkSavedReportACL(&$reporter,&$args) {
 			$col_module = $full_table_list[$column['table_key']]['module'];
             $ACLenabled = false;
 			if(!isset($hashModules[$col_module])) {
-               $b = BeanFactory::getBean($col_module);
+               $b = BeanFactory::newBean($col_module);
                 // If the Module doesn't exist, just continue, and allow Report to show invalid field
                 if (empty($b)) {
                     continue;
@@ -263,13 +250,10 @@ function checkSavedReportACL(&$reporter,&$args) {
 			$is_owner = false;
 
         if ($reporter->saved_report) {
-            if (!$reporter->saved_report->ACLAccess('list') || !$reporter->saved_report->ACLAccess('view')) {
+            if (!$reporter->saved_report->ACLAccess('view')) {
                 sugar_die($mod_strings['LBL_NO_ACCESS']);
             }
-        } elseif (
-            !ACLController::checkAccess('Reports', 'list', $is_owner) ||
-            !ACLController::checkAccess('Reports', 'view', $is_owner)
-        ) {
+        } elseif (!ACLController::checkAccess('Reports', 'view', $is_owner)) {
             sugar_die($mod_strings['LBL_NO_ACCESS']);
         }
 	}
@@ -335,7 +319,7 @@ function control(&$args)
 					return;
 				}
 
-        $saved_report = BeanFactory::getBean('Reports');
+        $saved_report = BeanFactory::newBean('Reports');
         $result = 0;
 
         $saved_report = $saved_report->retrieve($_REQUEST['publish_report_id'], false);

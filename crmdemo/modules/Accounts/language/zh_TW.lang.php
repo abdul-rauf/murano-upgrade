@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => '附件',
     'LBL_REVENUELINEITEMS' => '營收項目',
     'LBL_DUNS_NUM' => 'DUNS：',
-    'LBL_DNB_BAL_PREVIEW' => '帳戶預覽',
     'LBL_NOTES_SUBPANEL_TITLE' => '附註',
 
     // Help Text

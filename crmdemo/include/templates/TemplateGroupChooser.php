@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,20 +11,12 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 $js_loaded = false;
-require_once("include/templates/Template.php");
 
 class TemplateGroupChooser extends Template {
     var $args;
     var $js_loaded = false;
     var $display_hide_tabs = true;
     var $display_third_tabs = false;
-
-    /**
-     * @deprecated
-     */
-    public function TemplateGroupChooser()
-    {
-    }
 
     function display() {
         global $app_strings, $mod_strings, $js_loaded;

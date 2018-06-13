@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +17,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-require_once('modules/MySettings/TabController.php');
 
 $tabs_def = urldecode(isset($_REQUEST['display_tabs_def']) ? $_REQUEST['display_tabs_def'] : '');
 $DISPLAY_ARR = array();
@@ -52,7 +50,7 @@ $focus->save();
 
 // Set default team for Employee as 'Global'
 if ($new === true) {
-    $team = BeanFactory::getBean('Teams');
+    $team = BeanFactory::newBean('Teams');
     $team->new_user_created($focus);
 }
 

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/FilterApi.php');
-require_once('clients/base/api/UnifiedSearchApi.php');
 
 class PersonFilterApi extends FilterApi {
     public function registerApiRest() {
@@ -74,8 +71,8 @@ class PersonFilterApi extends FilterApi {
 
         $args['module'] = $args['module_list'];
 
-        list($args, $q, $options, $seed) = $this->filterListSetup($api, $args);
         $api->action = 'list';
+        list($args, $q, $options, $seed) = $this->filterListSetup($api, $args);
 
         $this->getCustomWhereForModule($args['module_list'], $q);
 
@@ -84,8 +81,8 @@ class PersonFilterApi extends FilterApi {
 
     /**
      * This function is the global search
-     * @param $api ServiceBase The API class of the request
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request
+     * @param array $args The arguments array passed in from the API
      * @return array result set
      */
     public function globalSearch(ServiceBase $api, array $args) {

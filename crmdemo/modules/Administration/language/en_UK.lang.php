@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -764,7 +763,6 @@ If your system environment prohibits your system from communicating to the licen
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Unavailable Themes',
     'LBL_TIMEZONE' => 'Time Zone',
     'LBL_TO'    => 'to',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Select what system and user data is tracked',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatically',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manually',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Automatically Check For Updates</B> - If checked, the system will periodically check to see if updated versions of the application are available.',
@@ -931,8 +929,6 @@ If your system environment prohibits your system from communicating to the licen
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'The config.php was successfully rebuilt.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Warning: Your PHP configuration must be changed to allow files of at least 6MB to be uploaded.  Please modify the upload_max_filesize value in your php.ini located at:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Please make the config.php writable and try again.',
-    'MSG_REBUILD_EXTENSIONS' => 'Please go to the <a href="index.php?module=Administration&action=Upgrade">Repair</a> screen and click on Rebuild Extensions.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Please go to the <a href="index.php?module=Administration&action=Upgrade">Repair</a> screen and click on Rebuild Relationships.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'There currently are no enabled Offline Clients.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Are you sure you want to disable this Offline Client?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Are you sure you want to enable this Offline Client?',
@@ -1042,7 +1038,7 @@ If your system environment prohibits your system from communicating to the licen
 'ML_ISSUES'=>'Issues',
 'ML_MANIFEST_ISSUE'=>'Issue with the manifest',
 'ML_CONFIG_OVERRIDE'=>'Config modification is not allowed',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Key - may only consist of letters, numbers and underscores. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Configure Shortcut Bar',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Select which modules are available in the Shortcut Bar',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Choose which modules for which users can quickly create records using the Plus icon in the top navigation bar. Drag & drop modules between the Enabled Modules and Disabled Modules boxes.',
@@ -1090,7 +1086,6 @@ If your system environment prohibits your system from communicating to the licen
 	'Manufacturers'  => 'Manufacturer',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'Relationship',
 	'Releases'       => 'Release',
@@ -1100,7 +1095,6 @@ If your system environment prohibits your system from communicating to the licen
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'Shipper',
 	'TaxRates'       => 'TaxRate',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

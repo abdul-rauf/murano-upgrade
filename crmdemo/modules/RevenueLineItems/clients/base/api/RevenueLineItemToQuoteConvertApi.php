@@ -10,7 +10,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/api/SugarApi.php');
 class RevenueLineItemToQuoteConvertApi extends SugarApi
 {
     /**
@@ -58,7 +57,7 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
 
         // now that we have the product bundle, lets create the quote
         /* @var $quote Quote */
-        $quote = BeanFactory::getBean('Quotes');
+        $quote = BeanFactory::newBean('Quotes');
         $quote->id = create_guid();
         $quote->new_with_id = true;
         $quote->name = $opp->name;
@@ -117,7 +116,7 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
 
         // now that we have the product bundle, lets create the quote
         /* @var $quote Quote */
-        $quote = BeanFactory::getBean('Quotes');
+        $quote = BeanFactory::newBean('Quotes');
         $quote->id = create_guid();
         $quote->new_with_id = true;
         $quote->name = $opp->name;
@@ -149,22 +148,43 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
      *
      * @param array $rlis
      * @param string $quote_id      The id for the quote we are creating
+     * @throws SugarApiExceptionRequestMethodFailure
      * @return ProductBundle
      */
     protected function createProductBundleFromRLIList(array $rlis, $quote_id = null)
     {
-        /* @var $product_bundle ProductBundle */
-        $product_bundle = BeanFactory::getBean('ProductBundles');
-        $product_bundle->id = create_guid();
-        $product_bundle->new_with_id = true;
-        $subtotal = SugarMath::init(0);
-        $deal_tot = SugarMath::init(0);
-
+        $errors = array();
+        $rli_to_convert = array();
         foreach ($rlis as $key => $rli_id) {
 
             /* @var $rli RevenueLineItem */
             $rli = BeanFactory::getBean('RevenueLineItems', $rli_id);
 
+            $canConvert = $rli->canConvertToQuote();
+            if ($canConvert !== true) {
+                $errors[$rli->id] = $canConvert;
+            } else {
+                $rli_to_convert[$key] = $rli;
+            }
+        }
+
+        if (!empty($errors)) {
+            $mod_strings = return_module_language($GLOBALS['current_language'], 'RevenueLineItems');
+            $msg = str_replace('<br />', "\n", $mod_strings['LBL_CONVERT_INVALID_RLI']);
+
+            foreach ($errors as $id => $error) {
+                $msg .= "[{$id}]: {$error}\n";
+            }
+
+            throw new SugarApiExceptionRequestMethodFailure($msg);
+        }
+
+        /* @var $product_bundle ProductBundle */
+        $product_bundle = BeanFactory::newBean('ProductBundles');
+        $product_bundle->id = create_guid();
+        $product_bundle->new_with_id = true;
+
+        foreach ($rli_to_convert as $key => $rli) {
             /* @var $product Product */
             $product = $rli->convertToQuotedLineItem();
 

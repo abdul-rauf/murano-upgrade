@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Adjunt',
     'LBL_REVENUELINEITEMS' => 'Línia d&#39;impostos articles',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Vista prèvia de comptes',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
 
     // Help Text

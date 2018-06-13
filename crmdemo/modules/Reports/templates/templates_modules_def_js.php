@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -221,8 +219,7 @@ field_defs_<?php echo $module_name; ?>[ "<?php echo $field_def['name']; ?>"] = <
 
 				echo "{".implode(",",$js_defs_array)."};";
 
-				if(isset($field_def['options']))
-				{
+if (!empty($field_def['options'])) {
 ?>
 var option_arr_<?php echo $module_name; ?> = new Array();
 
@@ -317,7 +314,6 @@ field_defs_<?php echo $module_name; ?>[ "<?php echo $field_def['name']; ?>"].opt
 				}
                 elseif (isset($field_def['type']) && $field_def['type'] == 'currency_id')
                 {
-                    require_once('include/generic/SugarWidgets/SugarWidgetFieldcurrency_id.php');
                     $tmpList = SugarWidgetFieldcurrency_id::getCurrenciesList();
                     $currencyList = array();
                     foreach ($tmpList as $bean)
@@ -333,7 +329,6 @@ field_defs_<?php echo $module_name; ?>[ "<?php echo $field_def['name']; ?>"].opt
                 }
 			} //End foreach field
 		}
-//var default_table_columns_<php echo $module_name; > = ["<php echo implode("\",\"",$module->default_table_columns); >"];
 ?>
 var default_table_columns_<?php echo $module_name; ?> = ["<?php echo implode("\",\"",array());?>"];
 
@@ -512,7 +507,6 @@ filter_defs['fullname'] = qualifiers_name;
 
 
 var qualifiers_name = new Array();
-//qualifiers_name = qualifiers_name.concat(qualifiers);
 var is_not_empty_def = {name:'not_empty',value:'<?php echo $mod_strings['LBL_IS_NOT_EMPTY']; ?>'};
 var is_empty_def = {name:'empty',value:'<?php echo $mod_strings['LBL_IS_EMPTY']; ?>'};
 var reports_to_def = {name:'reports_to',value:'<?php echo $mod_strings['LBL_REPORTS_TO']; ?>'};

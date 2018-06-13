@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -23,9 +22,6 @@ class SugarUpgradeRepairWorkflow extends UpgradeScript
     {
         if (!$this->toFlavor('pro')) return;
 
-        require_once('modules/WorkFlow/WorkFlow.php');
-        require_once('modules/WorkFlowTriggerShells/WorkFlowTriggerShell.php');
-        require_once('include/workflow/glue.php');
 
         // Disable time-elapsed workflows that don't have a proper Primary trigger and change their description
         $query = "SELECT DISTINCT w.id as workflow_id

@@ -1,6 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +11,6 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 // requires OutboundEmailConfiguration in order to extend it
-require_once "modules/OutboundEmailConfiguration/OutboundEmailConfiguration.php";
 
 /**
  * Represents the configurations and contains the logic for setting the configurations for an SMTP Mailer.
@@ -235,7 +232,7 @@ class OutboundSmtpEmailConfiguration extends OutboundEmailConfiguration
      * @return string
      */
     public function getPassword() {
-        return $this->password;
+        return htmlspecialchars_decode($this->password, ENT_QUOTES);
     }
 
     /**

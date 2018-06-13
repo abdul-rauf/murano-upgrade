@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,27 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Skaff en API-nøkkel og hemmelig nøkkel fra Twitter ved å registrere Sugar-forekomsten din som en ny applikasjon.<br/><br>Fremgangsmåte for å registrere forekomsten din:<br/><br/><ol><li>Gå til nettsiden Twitter Developers: <a href=&#39;http://dev.twitter.com/apps/new&#39; target=&#39;_blank&#39;>http://dev.twitter.com/apps/new</a>.</li><li>Logg på med Twitter-kontoen som du ønsker å registrere applikasjonen under.</li><li>Skriv inn et navn for applikasjonen på registreringsskjemaet. Dette er navnet brukere vil se når de autentiserer Twitter-kontoene sine på Sugar.</li><li>Skriv inn en beskrivelse.</li><li>Skriv inn en nettadresse til applikasjonsnettsiden.</li><li>Skriv inn en retur-URL (dette kan være hva som helst siden Sugar hopper over dette ved autentisering. Du kan f.eks. skrive inn nettadressen til Sugar-siden din).</li><li>Godta tjenestevilkårene for Twitter API.</li><li>Klikk på «Create your Twitter application».</li><li>Finn API-nøkkelen og den hemmelige nøkkelen på applikasjonssiden under kategorien «API-nøkler». Skriv inn API-nøkkelen og den hemmelige nøkkelen nedenfor.</li></ol></td></tr></table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
+								<tr>
+									<td valign="top" width="35%" class="dataLabel">
+										Skaff en API-nøkkel og hemmelighet fra Twitter ved å registrere din Sugar-instans som en ny applikasjon.<br/><br>Trinn for å registrere instansen din:<br/><br/>
+										<ol>
+											<li>Gå til Twitter Developers-nettstedet: <a href=\'https://apps.twitter.com\' target=\'_blank\'>https://apps.twitter.com</a>.</li>
+											<li>Logg på med Twitter-kontoen du vil registrere applikasjonen under.</li>
+											<li>I registreringsskjemaet skirver du inn et navn for applikasjonen. Dette er navnet brukere vil se når de autentiserer Twitter-kontoene sine i Sugar.</li>
+											<li>Angi en beskrivelse.</li>
+											<li>Angi en URL-adresse for applikasjonen.</li>
+											<li>Angi en Callback URL (kan være hva som helst siden Sugar omgår denne under autentiseringen. Eksempel: Angi URL-adressen til ditt Sugar-nettsted).</li>
+											<li>Godta Twitters API-tjenestevilkår.</li>
+											<li>Klikk på "Opprett din Twitter-applikasjon".</li>
+											<li>På applikasjonssiden finner du API-nøkkelen og API-hemmeligheten under fanen "API Keys". Angi nøkkelen og hemmeligheten nedenfor.</li>
+										</ol>
+									</td>
+								</tr>
+							</table>
+ 
+Kontekst | Be om kontekst
+$connector_strings[\'LBL_LICENSING_INFO\']',
     'LBL_NAME' => 'Twitter-brukernavn',
     'LBL_ID' => 'Twitter-brukernavn',
 	'company_url' => 'Link',

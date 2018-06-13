@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Nedostupné téma',
     'LBL_TIMEZONE' => 'Časová zóna',
     'LBL_TO'    => 'do',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Vyberte, jaká systémová a uživatelská data jsou sledována',
     'LBL_UPDATE_CHECK_AUTO'=>'Automaticky',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manuálně',
     'LBL_UPDATE_CHECK_TYPE'=>'Kontrola updatů',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Config.php byl úspěšně sestaven.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Varování: Konfigurace PHP musí být upravena, aby bylo možné nahrávat soubory o velikosti minimálně 6MB. Upravte hodnotu upload_max_filesize v souboru php.ini umístěném zde:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Prosím nastavte práva pro zápis u konfiguračního souboru, aby mohl být aktualizován na nejnovější formát.',
-    'MSG_REBUILD_EXTENSIONS' => 'Jděte prosím na stránky <a href=\\"index.php?module=Administration&action=Upgrade\\">Opravy</a> a klikněte Oprava rozšíření.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Jděte prosím na stránky  <a href=\\"index.php?module=Administration&action=Upgrade\\">Opravy</a> a klikněte na tlačítko Oprava Vztahů',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Právě zde nejsou povoleni žádní offline klienti.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Jste si jisti, že chcete zakázat tohoto offline klienta?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Jste si jisti, že chcete povolit tohoto offline klienta?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Problémy',
 'ML_MANIFEST_ISSUE'=>'Problémy se souborem manifest',
 'ML_CONFIG_OVERRIDE'=>'Úprava konfigurace není povolena',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Klíč – může se skládat pouze z písmen, číslic a podtržítek. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Nastavit rychlé vytváření z navigačního menu',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Výběr modulů pro rychlé vytváření z navigačního menu',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Zvolte, pro které moduly mohou uživatelé rychle vytvářet záznamy pomocí ikony Plus v horní liště. Přetáhněte mezi povolenými a zakazanými moduly.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Výrobce',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'Vztahy',
 	'Releases'       => 'Verze',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'Plánovač aktivity',
 	'Shippers'       => 'Doručovatel',
 	'TaxRates'       => 'Daňová sazba',
-	'TeamHierarchies'  => 'Hierarchie týmu',
 	'TeamMemberships'   => 'Členství v týmu',
 	'TeamNotices'    => 'Týmové poznámky',
 	'TeamSetModules'   => 'Nastavení modulu pro týmy',

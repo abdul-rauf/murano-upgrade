@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -31,7 +30,7 @@ global $current_user;
 if (!is_admin($current_user) && !is_admin_for_module($current_user,'Forecasts')) sugar_die("Unauthorized access to administration.");
 
 global $focus;
-$focus = BeanFactory::getBean('TimePeriods');
+$focus = BeanFactory::newBean('TimePeriods');
 
 $GLOBALS['log']->info("in detail view");
 

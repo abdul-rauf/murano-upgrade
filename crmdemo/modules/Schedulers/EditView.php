@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -27,11 +26,11 @@ global $app_strings;
 global $current_user;
 global $timedate;
 
-$email = BeanFactory::getBean('Emails');
+$email = BeanFactory::newBean('Emails');
 
 /* Start standard EditView setup logic */
 $mod_strings = return_module_language($current_language, 'Schedulers');
-$focus = BeanFactory::getBean('Schedulers');
+$focus = BeanFactory::newBean('Schedulers');
 $focus->checkCurl();
 if(isset($_REQUEST['record'])) {
 	$GLOBALS['log']->debug("In Scheduler edit view, about to retrieve record: ".$_REQUEST['record']);

@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,63 +10,59 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
-
-require_once('include/MVC/View/views/view.list.php');
-
 class ViewSourceProperties extends ViewList {
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ViewSourceProperties($bean = null, $view_object_map = array(), Request $request = null)
-    {
-        self::__construct($bean, $view_object_map, $request);
-    }
-
-    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
-    {
-        parent::__construct($bean, $view_object_map, $request);
-    }
-
     public function display()
     {
         global $sugar_config;
 
-		require_once('include/connectors/sources/SourceFactory.php');
-		require_once('include/connectors/utils/ConnectorUtils.php');
-		
-		$source_id = $this->request->getValidInputRequest('source_id', 'Assert\ComponentName');
+        $source_id = $this->request->getValidInputRequest('source_id', 'Assert\ComponentName');
 
-		$connector_language = ConnectorUtils::getConnectorStrings($source_id);
-    	$source = SourceFactory::getSource($source_id);
-    	$properties = $source->getProperties();
-        
-    	$required_fields = array();
-    	$config_fields = $source->getRequiredConfigFields();
-	    $fields = $source->getRequiredConfigFields();
-	    foreach($fields as $field_id) {
-	    	$label = isset($connector_language[$field_id]) ? $connector_language[$field_id] : $field_id;
-	        $required_fields[$field_id]=$label;
-	    }
+        // Default needed variables
+        $required_fields = array();
+        $properties = array();
+        $hasTestingEnabled = false;
+        $noConnector = true;
 
-        // treat string as a template (the string resource plugin is unavailable in the current Smarty version)
-        if (isset($connector_language['LBL_LICENSING_INFO'])) {
-            $siteUrl = rtrim($sugar_config['site_url'], '/');
-            $connector_language['LBL_LICENSING_INFO'] = str_replace(
-                '{$SITE_URL}',
-                $siteUrl,
-                $connector_language['LBL_LICENSING_INFO']
-            );
+        // This will be an empty array if the connector isn't found
+        $connector_language = ConnectorUtils::getConnectorStrings($source_id);
+
+        // Now get to work on the connector
+        $source = SourceFactory::getSource($source_id);
+        if ($source !== null) {
+            // Set our no connector flag to false
+            $noConnector = false;
+
+            // Get the connector config properties
+            $properties = $source->getProperties();
+
+            // Get the required fields for the connector, if there are any
+            $fields = $source->getRequiredConfigFields();
+            foreach ($fields as $field_id) {
+                $label = isset($connector_language[$field_id]) ? $connector_language[$field_id] : $field_id;
+                $required_fields[$field_id] = $label;
+            }
+
+            // treat string as a template (the string resource plugin is unavailable in the current Smarty version)
+            if (isset($connector_language['LBL_LICENSING_INFO'])) {
+                $siteUrl = rtrim($sugar_config['site_url'], '/');
+                $connector_language['LBL_LICENSING_INFO'] = str_replace(
+                    '{$SITE_URL}',
+                    $siteUrl,
+                    $connector_language['LBL_LICENSING_INFO']
+                );
+            }
+
+            $hasTestingEnabled = $source->hasTestingEnabled();
         }
 
-    	$this->ss->assign('required_properties', $required_fields);
-    	$this->ss->assign('source_id', $source_id);
-    	$this->ss->assign('properties', $properties);
-    	$this->ss->assign('mod', $GLOBALS['mod_strings']);
-    	$this->ss->assign('app', $GLOBALS['app_strings']);
-    	$this->ss->assign('connector_language', $connector_language);
-    	$this->ss->assign('hasTestingEnabled', $source->hasTestingEnabled());
+        $this->ss->assign('no_connector', $noConnector);
+        $this->ss->assign('required_properties', $required_fields);
+        $this->ss->assign('source_id', $source_id);
+        $this->ss->assign('properties', $properties);
+        $this->ss->assign('mod', $GLOBALS['mod_strings']);
+        $this->ss->assign('app', $GLOBALS['app_strings']);
+        $this->ss->assign('connector_language', $connector_language);
+        $this->ss->assign('hasTestingEnabled', $hasTestingEnabled);
 
         echo $this->ss->fetch($this->getCustomFilePathIfExists('modules/Connectors/tpls/source_properties.tpl'));
     }

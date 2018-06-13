@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,19 +13,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  // $Id: MyEmailsDashlet.php 16537 2006-08-29 23:12:04Z wayne $
 
 
-require_once('include/Dashlets/DashletGeneric.php');
 
 
 class MyEmailsDashlet extends DashletGeneric {
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function MyEmailsDashlet($id, $def = null)
-    {
-        self::__construct($id, $def);
-    }
-
     public function __construct($id, $def = null)
     {
         global $current_user, $app_strings, $dashletData;
@@ -42,10 +31,11 @@ class MyEmailsDashlet extends DashletGeneric {
 
         $this->columns = $dashletData['MyEmailsDashlet']['columns'];
 
-        $this->seedBean = BeanFactory::getBean('Emails');
+        $this->seedBean = BeanFactory::newBean('Emails');
     }
 
-    function process() {
+    public function process($lvsParams = array())
+    {
         global $current_language, $app_list_strings, $image_path, $current_user;
         //$where = 'emails.deleted = 0 AND emails.assigned_user_id = \''.$current_user->id.'\' AND emails.type = \'inbound\' AND emails.status = \'unread\'';
         $mod_strings = return_module_language($current_language, 'Emails');
@@ -56,7 +46,6 @@ class MyEmailsDashlet extends DashletGeneric {
         $this->filters['type'] = array("inbound");
         $this->filters['status'] = array("unread");
 
-        $lvsParams = array();
         $lvsParams['custom_select'] = " ,emails_text.from_addr as from_addr ";
         $lvsParams['custom_from'] = " join emails_text on emails.id = emails_text.email_id ";
         parent::process($lvsParams);

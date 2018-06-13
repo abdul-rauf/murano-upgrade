@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -54,7 +53,6 @@ class SugarMinifyUtils
         $js_groupings = array();
         if(isset($_REQUEST['root_directory'])){
             require('jssource/JSGroupings.php');
-            require_once('jssource/jsmin.php');
         } else {
             require('JSGroupings.php');
             require_once('jsmin.php');
@@ -198,7 +196,6 @@ class SugarMinifyUtils
         }
         //assumes jsmin.php is in same directory
         if(isset($_REQUEST['root_directory']) || defined('INSTANCE_PATH')){
-            require_once('jssource/jsmin.php');
         }else{
             require_once('jsmin.php');
         }

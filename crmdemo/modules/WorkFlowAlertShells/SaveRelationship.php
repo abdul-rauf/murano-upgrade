@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,7 +18,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 
-$workflow = BeanFactory::getBean('WorkFlow');
+$workflow = BeanFactory::newBean('WorkFlow');
 if(isset($_REQUEST['workflow_id']) && isset($_REQUEST['record_id']))
 {
 	$alert_shell = BeanFactory::getBean('WorkFlowAlertShells', $_REQUEST['record_id']);

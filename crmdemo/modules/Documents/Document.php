@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry)
-	die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry)
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once ('include/upload_file.php');
 
 
 // User is used to store Forecast information.
@@ -75,10 +72,11 @@ class Document extends SugarBean {
 		$this->setupCustomFields('Documents'); //parameter is module name
 		$this->disable_row_level_security = false;
 	}
+
     /**
-     * @see SugarBean::populateFromRow
+     * {@inheritDoc}
      */
-    function populateFromRow($row, $convert = false)
+    public function populateFromRow(array $row, $convert = false)
     {
         $row = parent::populateFromRow($row, $convert);
 
@@ -95,7 +93,7 @@ class Document extends SugarBean {
      */
     public function createRevisionBean()
     {
-        $Revision = BeanFactory::getBean('DocumentRevisions');
+        $Revision = BeanFactory::newBean('DocumentRevisions');
         //save revision.
         $Revision->in_workflow = true;
         $Revision->not_use_rel_in_req = true;
@@ -307,14 +305,14 @@ class Document extends SugarBean {
 		$document_fields['FILE_URL_NOIMAGE'] = $this->file_url_noimage;
 		$document_fields['LAST_REV_CREATED_BY'] = $this->last_rev_created_name;
 
-        $category_id_key = isset($this->field_name_map['category_id']['options']) ?
-            $this->field_name_map['category_id']['options'] : 'document_category_dom';
+        $category_id_key = isset($this->field_defs['category_id']['options']) ?
+            $this->field_defs['category_id']['options'] : 'document_category_dom';
 
         $document_fields['CATEGORY_ID'] = empty ($this->category_id) ? "" :
             $app_list_strings[$category_id_key][$this->category_id];
 
-        $subcategory_id_key = isset($this->field_name_map['subcategory_id']['options']) ?
-            $this->field_name_map['subcategory_id']['options'] : 'document_subcategory_dom';
+        $subcategory_id_key = isset($this->field_defs['subcategory_id']['options']) ?
+            $this->field_defs['subcategory_id']['options'] : 'document_subcategory_dom';
 
         $document_fields['SUBCATEGORY_ID'] = empty ($this->subcategory_id) ? "" :
             $app_list_strings[$subcategory_id_key][$this->subcategory_id];

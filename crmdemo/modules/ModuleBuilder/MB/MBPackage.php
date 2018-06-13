@@ -13,8 +13,11 @@
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+use Sugarcrm\Sugarcrm\Security\Validator\ConstraintBuilder;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
 
-require_once('modules/ModuleBuilder/MB/MBModule.php');
+require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 class MBPackage{
     var $name;
@@ -54,14 +57,6 @@ class MBPackage{
             'varName' => 'app_list_strings',
         ),
     );
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function MBPackage($name)
-    {
-        self::__construct($name);
-    }
 
     public function __construct($name)
     {
@@ -338,7 +333,26 @@ function buildInstall($path){
     function populateFromPost(){
         $this->description = trim($this->request->getValidInputRequest('description'));
         $this->author = trim($this->request->getValidInputRequest('author'));
-        $this->key = trim($this->request->getValidInputRequest('key', 'Assert\ComponentName'));
+        $this->key = trim($this->request->getValidInputRequest('key'));
+
+        $constraintBuilder = new ConstraintBuilder();
+        $constraints = $constraintBuilder->build('Assert\ComponentName');
+
+        $violations = Validator::getService()->validate($this->key, $constraints);
+        if (count($violations) > 0) {
+            $sugarConfig = \SugarConfig::getInstance();
+            // Check softFail mode - enabled by default
+            $softFail = $sugarConfig->get('validation.soft_fail', true);
+            if (!$softFail) {
+                $GLOBALS['log']->fatal("InputValidation: Violation for REQUEST -> key");
+                throw new ViolationException(
+                    'Violation for REQUEST -> key',
+                    $violations
+                );
+            } else {
+                $GLOBALS['log']->warn("InputValidation: Violation for REQUEST -> key");
+            }
+        }
         $this->readme = trim($this->request->getValidInputRequest('readme'));
     }
 
@@ -626,7 +640,7 @@ function buildInstall($path){
     //return an array which contain the name of fields_meta_data table's columns
     function getColumnsName(){
 
-        $meta = BeanFactory::getBean('EditCustomFields');
+        $meta = BeanFactory::newBean('EditCustomFields');
         $arr = array();
          foreach($meta->getFieldDefinitions() as $key=>$value) {
             $arr[] = $key;
@@ -779,7 +793,7 @@ function buildInstall($path){
         $options = array();
         foreach($modules as $module)
         {
-            $bean = BeanFactory::getBean($module);
+            $bean = BeanFactory::newBean($module);
             if (!empty($bean))
             {
                 foreach($bean->field_defs as $field => $def)
@@ -809,7 +823,6 @@ function buildInstall($path){
         $modules = array_unique($modules);
 
         //Use StudioBrowser to grab list of modules that are customizeable through studio.
-        require_once('modules/ModuleBuilder/Module/StudioBrowser.php');
         $sb = new StudioBrowser();
         $sb->loadModules();
         $studioModules = array_keys($sb->modules);
@@ -937,7 +950,7 @@ function buildInstall($path){
         if (count($app_list_strings) > 0
         ) {
             foreach ($beanList as $module => $_) {
-                $bean = BeanFactory::getBean($module);
+                $bean = BeanFactory::newBean($module);
                 if (!isset($bean->field_defs) || !is_array($bean->field_defs)) {
                     continue;
                 }
@@ -970,8 +983,7 @@ function buildInstall($path){
      */
     protected function getExtensionsList($module, $includeRelationships = true)
     {
-        if (BeanFactory::getBeanName($module) === false)
-        {
+        if (BeanFactory::getBeanClass($module) === false) {
             return array();
         }
         
@@ -1110,9 +1122,9 @@ function buildInstall($path){
 
 
 
-    function exportProjectInstall($package, $for_export){
-        $pre = $for_export ? MB_EXPORTPREPEND : "";
-        $installdefs = array ('id' => $pre . $this->name);
+    private function exportProjectInstall()
+    {
+        $installdefs = array ('id' => MB_EXPORTPREPEND . $this->name);
         $installdefs['copy'][] = array(
             'from'=> '<basepath>/' . $this->name,
             'to'=> 'custom/modulebuilder/packages/'. $this->name,
@@ -1123,12 +1135,13 @@ function buildInstall($path){
 
 
 
-    function exportProject($package, $export=true, $clean = true){
+    public function exportProject()
+    {
         $tmppath="custom/modulebuilder/projectTMP/";
         if(file_exists($this->getPackageDir())){
             if(mkdir_recursive($tmppath)){
                 copy_recursive($this->getPackageDir(), $tmppath ."/". $this->name);
-                $manifest = $this->getManifest(true, $export).$this->exportProjectInstall($package, $export);
+                $manifest = $this->getManifest(true, true).$this->exportProjectInstall();
                 $fp = sugar_fopen($tmppath .'/manifest.php', 'w');
                 fwrite($fp, $manifest);
                 fclose($fp);
@@ -1152,10 +1165,10 @@ function buildInstall($path){
         chdir($tmppath);
         zip_dir('.',$cwd . '/'. $zipDir. '/project_'. $this->name. $date. '.zip');
         chdir($cwd);
-        if($clean && file_exists($tmppath))rmdir_recursive($tmppath);
-        if($export){
-            header('Location:' . $zipDir. '/project_'. $this->name. $date. '.zip');
+        if (file_exists($tmppath)) {
+            rmdir_recursive($tmppath);
         }
+            header('Location:' . $zipDir. '/project_'. $this->name. $date. '.zip');
         return $zipDir. '/project_'. $this->name. $date. '.zip';
     }
     
@@ -1168,8 +1181,7 @@ function buildInstall($path){
      */
     protected function getCustomRelationshipsByModuleName($moduleName, $lhs = false)
     {
-        if (BeanFactory::getBeanName($moduleName) === false)
-        {
+        if (BeanFactory::getBeanClass($moduleName) === false) {
             return false;
         }
         

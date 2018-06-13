@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Edita' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'ID Principal de D&B',
-    'LBL_DNB_BAL_PREVIEW' => 'Vista prèvia de clients potencials',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Clients potencials',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: informació de clients potencials',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Oportunitats',
 

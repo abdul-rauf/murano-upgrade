@@ -10,9 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarForecasting/ForecastProcessInterface.php');
-require_once('include/SugarForecasting/ForecastSaveInterface.php');
-require_once('include/SugarForecasting/AbstractForecastArgs.php');
 abstract class SugarForecasting_AbstractForecast extends SugarForecasting_AbstractForecastArgs implements SugarForecasting_ForecastProcessInterface
 {
     /**
@@ -64,8 +61,6 @@ abstract class SugarForecasting_AbstractForecast extends SugarForecasting_Abstra
     protected function getUserReportees($user_id)
     {
         $db = DBManagerFactory::getInstance();
-
-
         $sql = sprintf("SELECT id, user_name, first_name, last_name, title, reports_to_id FROM users WHERE (reports_to_id = '%s' OR id = '%s') AND " . User::getLicensedUsersWhere(), $user_id, $user_id);
 
         $result = $db->query($sql);

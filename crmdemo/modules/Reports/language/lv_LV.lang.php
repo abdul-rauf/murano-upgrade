@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'Uzņēmumu atskaites',
   'LBL_CONTACT_REPORTS' => 'Kontaktpersonas atskaites',
   'LBL_OPPORTUNITY_REPORTS' => 'Iespēju atskaites',
+    'LBL_RECENTLY_MODIFIED' => 'Nesen modificēts',
 
   'LBL_CASE_REPORTS' => 'Pieteikumu atskaites',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'Nākošās 30 dienās',
   'LBL_THIS_YEAR'=>'Šajā gadā',
   'LBL_LIST_FORM_TITLE' =>'Atskaites',
+  'LBL_LIST_REPORT_NAME' => 'Nosaukums',
   'LBL_PROSPECT_REPORTS'=>'Mērķa atskaites',
   'LBL_CHART_TYPE'=>'Diagrammas veids',
   'LBL_IS_EMPTY'=>'Ir tukšs',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>Soļi filtru definēšanai:</b><br/><br/>1) Nospiediet uz filtra definēšanai nepieciešamā moduļa <b>Saistītie moduļi</b> tabā. Pēc noklusējuma primārais modulis (augšējā virsotne koka skatā) ir izvēlēta. <br/><br/><br />	Jūs variet izvēlēties saistīto moduli (pēcteča virsotne koka skatā), nospiežot uz moduļa. Izvērsiet virsotni, lai apskatītu sasaistītos moduļus. Izvēlētais modulis nosaka, kuri atskaišu lauki parādās <b>Pieejamie lauki</b> rūtī.<br/><br/><br />	2) Nospiediet uz lauka <b>Pieejamie lauki</b> rūtī, lai tos pievienotu filtram. Jūs variet meklēt laukus pēc tipa teksta ieliktnē.<br/><br/><br />	Kad modulim ir izvēlēti lauki <b>Saistītie moduļi</b> rūtī, variet izvēlēties citu moduli, no kura iespējams papildināt izvēlēto lauku sarakstu izmantošanai filtros.<br/><br/><br />	3) Izvēlieties <b>UN</b> vai <b>VAI</b>, lai noteiktu lauku vērtību pielietojuma veidu filtrā. <br/><br/><br />	4) [Neobligāti] Nospiediet uz <b>Pievienot filtra grupu</b> lai izveidotu filtru grupas. Jūs variet sagatavot filtru grupas jebkādā skaitā un katrā no tām iekļaut jebkuru daudzumu filtra nosacījumu.<br/><br/><br />	5) [Neobligāti] Izvēlieties izpildes laika opciju filtram, lai atļautu lietotājam uzstādīt papildus fitrēšanas nosacījumus atskaite apskates gaitā.",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>Soļi, lai definētu grupēšanu pēc:</b><br/><br/>1)  <b>Saistītie moduļi</b> tabā izvēlieties moduli, kuru vēlaties lietot ierakstu grupēšanai atskaitē. Pēc noklusējuma, primārais modulis (augšējā virsotne koka skatā) ir izvēlēts.<br/><br/><br />	Jūs variet izvēlēties saistīto moduli (pēcteča virsotne koka skatā), nospiežot uz moduļa. Izpletiet atzarojumu, lai redzētu saistītos moduļus.Modulis nosaka, kuri izvēlētie lauki parādīsies <b>Pieejamie lauki</b> rūtī.<br/><br/><br />	2) Nospiediet uz lauka <b>Pieejamie lauki</b>, lai pēc tā grupētu ierakstus atskaitē. Jūs variet meklēt laukus pēc tipiem teksta ieliktņos<br/><br/><br />	Kad moduļa lauki ir atzīmēti <b>Saistītie moduļi</b> tabā, jūs variet izvēlēties citu moduli, no kura atlasīt papildus laukus ierakstu grupēšanai atskaitē. Atskaite kļūst nepārskatāma, kad tiek grupēts pēc vairākiem kritērijiem<br/><br/>Matricas atskaitēm var izvēlēties vairāk, nekā vienu lauku, lai attēlotu vairākas vērtības vienā atskaits šūnā.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>Soļi attēlojamo kolonnu izvēlei:</b><br/><br/>1)  <b>Saistīto moduļu</b> tabā uzklikšķiniet modulim, kura datus vēlaties izmantot savā atskaitē. Pēc noklusējuma kā primārais modulis ir izvēlēts tas, ko norādijāt \" Moduļa izvēles\" solī.<br/><br/>	Klikšķinot uz moduļa, variet izvēleties saistītā moduļa (apkšvirsotne koka attēlojumā) laukus. Var izvēlēties arī primārā moduļa saistīto moduļu saistītos moduļus. Moduļu izvēle nosaka, kuri atskaitēm piemēroti lauki parādās <b>Pieejamo lauku</b> tabā.<br/><br/>	2)  <b>Pieejamo lauku</b> tabā klikšķiniet uz laukiem, kuru datus jāatspoguļu Jūsu atskaitē. Laukus var meklēt arī, ievadot tekstu tabā izvietotajā teksta laukā.<br/><br/>	Kad izvēlēti visi nepieciešamie lauki no tekošā moduļa, varat izvēleties citu moduli, lai izvēlētos vēl papildus laukus. Variet izvēlēties jebkuru skitu lauku, taču jāņem vērā, ka atskaites ģenerēšana kļūs lēnāka un pasliktināsies tās lašamība.<br/><br/>	Lauku secību var mainīt tos \" velkot un nometot\" vajadzīgajās pozīcijās. Lauku secības maiņa nosaka rezultējošo kolonnu izvietojumu." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Soļi, lai izvēlētos parādāmos kopsavilkumus:</b><br/><br/>1) Panelī <b>Saistītie moduļi</b> uzklikšķiniet uz moduļa, kuru vēlaties izmantot kopsavilkumiem savā atskaitē. Pēc noklusējuma tiek izvēlēts primārais modulis (augšējais mezgls koka skatā).<br/><br/>	Varat izvēlēties saistīto moduli (pakārtotais mezgls koka skatā), noklikšķinot uz moduļa. Izvērsiet mezglu, lai aplūkotu papildu moduļus, kas ir saistīti ar saistīto moduli. Jūsu izvēlētais modulis nosaka, kuri atskaitēm pieejamie lauki parādās panelī <b>Pieejamie lauki</b>.<br/><br/>	2) Noklikšķiniet uz lauka panelī <b>Pieejamie lauki</b>, lai izvēlētos kopsavilkumus jūsu atskaitei. Tāpat varat meklēt lauku, ievadot tekstu teksta lauciņā panelī.<br/><br/>	Pēc tam, kad būsiet izvēlējies jebkādu lauku skaitu no moduļa, kas tika atlasīts panelī <b>Saistītie moduļi</b>, varat izvēlēties citu moduli, no kura varat atlasīt papildu laukus kopsavilkumiem savā atskaitē.<br/><br/> Matricas atskaitēm varat atlasīt vairāk kā vienu lauku, lai parādītu vairākus lielumus atsevišķā šūnā jūsu atskaitē." ,
 
 	'LBL_ALT_SHOW' => 'Rādīt',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'Šī atskaite satur datus šādā kolonu secībā:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'Uz augšu' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'Informācija',
     'LBL_REPORT_GRAND_TOTAL' => "Kopsumma",
+    'LBL_EDIT_REPORT_BUTTON' => 'Rediģēt atskaiti',
 
     'LBL_REPORTS_TO' => 'Tiešais vadītājs',
     'LBL_LESS_THAN_EQUAL' => 'Mazāks vai vienāds ar',

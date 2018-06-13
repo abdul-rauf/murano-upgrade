@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,10 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
-require_once('modules/DynamicFields/templates/Fields/TemplateField.php');
-require_once 'modules/ModuleBuilder/parsers/parser.label.php';
-require_once 'modules/ModuleBuilder/MB/ModuleBuilder.php';
 
 class TemplateRelatedTextField extends TemplateText{
     var $type = 'relate';
@@ -57,7 +52,7 @@ class TemplateRelatedTextField extends TemplateText{
 
     function get_html_search(){
         $searchable=array();
-        $def = $this->bean->field_name_map[$this->name];
+        $def = $this->bean->field_defs[$this->name];
         $searchable = array('team_id');
         if(!empty($def['id_name']) && in_array($def['id_name'], $searchable)){
             $name = $def['id_name'];
@@ -69,7 +64,7 @@ class TemplateRelatedTextField extends TemplateText{
 
     function get_xtpl_search(){
         $searchable=array();
-        $def = $this->bean->field_name_map[$this->name];
+        $def = $this->bean->field_defs[$this->name];
         $searchable = array('team_id');
         $returnXTPL = array();
         if(!empty($def['id_name']) && in_array($def['id_name'], $searchable)){
@@ -128,8 +123,6 @@ class TemplateRelatedTextField extends TemplateText{
             $this->ext1 => $name,
         ),
         );
-
-        //$GLOBALS['log']->fatal($this->bean);
 
         $json = getJSONobj();
         $encoded_contact_popup_request_data = $json->encode($popup_request_data);
@@ -245,7 +238,6 @@ class TemplateRelatedTextField extends TemplateText{
     protected function deleteIdLabel(TemplateField $fieldId, $df)
     {
         if ($df instanceof DynamicField) {
-            require_once 'modules/ModuleBuilder/parsers/parser.label.php';
             foreach (array_keys($GLOBALS['sugar_config']['languages']) AS $language) {
                 foreach (ModuleBuilder::getModuleAliases($df->module) AS $module) {
                     $mod_strings = return_module_language($language, $module);
@@ -272,7 +264,7 @@ class TemplateRelatedTextField extends TemplateText{
         if (!$df->fieldExists($this->name)) {
 	    	$id = new TemplateId();
 	        $id->len = 36;
-            $id->label = strtoupper("LBL_{$this->name}_".BeanFactory::getBeanName($this->ext2)."_ID");
+            $id->label = strtoupper("LBL_{$this->name}_".BeanFactory::getBeanClass($this->ext2)."_ID");
             $id->vname = $id->label;
             $this->saveIdLabel($id->label, $df);
 
@@ -314,7 +306,7 @@ class TemplateRelatedTextField extends TemplateText{
         $viewPackage = isset($df->package)?$df->package:null;
 
         $idLabelValue = string_format(
-            $GLOBALS['mod_strings']['LBL_RELATED_FIELD_ID_NAME_LABEL'],
+            translate('LBL_RELATED_FIELD_ID_NAME_LABEL', 'ModuleBuilder'),
             array($this->label_value, $GLOBALS['app_list_strings']['moduleListSingular'][$this->ext2])
         );
 
@@ -346,7 +338,7 @@ class TemplateRelatedTextField extends TemplateText{
     	return "";
     }
 
-    function populateFromRow($row=array()) 
+    public function populateFromRow(array $row)
     {
         parent::populateFromRow($row);
         // In some cases, MB Controller sets $this->module to a bean or mbmodule

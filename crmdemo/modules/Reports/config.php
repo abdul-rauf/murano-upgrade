@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -26,7 +25,6 @@ function getAllowedReportModules(&$local_modListHeader, $skipCache = false) {
 		return $reports_mod;
 	}
 
-	require_once("modules/MySettings/TabController.php");
 	$controller = new TabController();
 	$tabs = $controller->get_tabs_system();
 	$all_modules = array_merge($tabs[0],$tabs[1]);

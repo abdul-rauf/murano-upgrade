@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -41,7 +40,7 @@ $mod_strings = array (
   'LBL_LIST_COST_PRICE' => 'Κόστος:',
   'LBL_LIST_DISCOUNT_PRICE' => 'Τιμή:',
   'LBL_LIST_FORM_TITLE' => 'Κατάλογος Κατηγορίας Προϊόντος',
-  'LBL_LIST_LBL_MFT_PART_NUM' => 'Αριθμός Κατασκευαστή',
+  'LBL_LIST_LBL_MFT_PART_NUM' => 'Αριθμός Παρτίδας',
   'LBL_LIST_LIST_PRICE' => 'Λίστα',
   'LBL_LIST_MANUFACTURER' => 'Κατασκευαστής',
   'LBL_LIST_MANUFACTURER_ID' => 'Ταυτότητα Κατασκευαστή:',
@@ -54,7 +53,7 @@ $mod_strings = array (
   'LBL_LIST_USDOLLAR' => 'Λίστα USD',
   'LBL_MANUFACTURER_NAME'=>'Όνομα Κατασκευαστή:',
   'LBL_MANUFACTURER' => 'Κατασκευαστής:',
-  'LBL_MFT_PART_NUM' => 'Αριθμός Παρτίδας Κατασκευαστή:',
+  'LBL_MFT_PART_NUM' => 'Αριθμός Παραγωγής:',
   'LBL_MODULE_NAME' => 'Κατάλογος Προϊόντος',
   'LBL_MODULE_NAME_SINGULAR' => 'Κατάλογος Προϊόντος',
   'LBL_MODULE_ID' => 'Πρότυπα Προϊόντων',

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -58,7 +57,7 @@ if(count($relArray) > 0)
     $_SESSION['MAILMERGE_RELATED_CONTACTS'] = $relArray;
 
     $relModule = $_SESSION['MAILMERGE_CONTAINS_CONTACT_INFO'];
-	$seed = BeanFactory::getBean($relModule);
+	$seed = BeanFactory::newBean($relModule);
 	foreach($sel_obj as $key=>$value)
 	{
 		$builtArray[$key] = $value;

@@ -44,8 +44,8 @@ if($_REQUEST['step'] === '1')
 			
 			$mod->label = array();
 			
-			// loop through the field_name_map array to try and find any phone number fields
-			foreach($bean->field_name_map as $key => $field)
+			// loop through the field_defs array to try and find any phone number fields
+			foreach($bean->field_defs as $key => $field)
 			{
 				if($field['type'] == 'phone')
 				{

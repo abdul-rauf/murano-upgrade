@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Línea de Presupuesto',
     'LBL_LIST_MANUFACTURER' => 'Fabricante',
     'LBL_MANUFACTURERS' => 'Fabricantes',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Nº Pieza',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Número de Pieza',
     'LBL_LIST_QUANTITY' => 'Cantidad',
     'LBL_LIST_COST_PRICE' => 'Coste',
     'LBL_LIST_DISCOUNT_PRICE' => 'Precio',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Selección de Descuento',
     'LBL_LIST_PRICE' => 'Precio de venta:',
     'LBL_VENDOR_PART_NUM' => 'Número de Parte del Vendedor:',
-    'LBL_MFT_PART_NUM' => 'Número de Parte del Fabricante:',
+    'LBL_MFT_PART_NUM' => 'Número de Pieza:',
     'LBL_NEXT_STEP' => 'Siguiente paso:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Fecha de Precio con Descuento:',
     'LBL_WEIGHT' => 'Peso:',
@@ -168,6 +168,8 @@ Para crear un {{module_name}}:
 - Haga clic en "Mostrar más" para ver los campos adicionales si es necesario.
 2. Haga clic en "Guardar" para finalizar el nuevo registro y volver a la página anterior.',
 
-    'LBL_MANUFACTURERS' => 'Fabricantes',
     'LBL_PRODUCT_POSITION' => 'Posición del paquete de producto',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista de datos de presupuesto de los elementos de la línea de presupuesto',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nuevo elemento de las líneas de presupuesto)',
+    'LBL_DISCOUNT_PERCENT' => '% Porcentaje',
 );

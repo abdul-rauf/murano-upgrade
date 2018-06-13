@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,19 +9,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/upload_file.php');
 
 class NoteSoap
 {
     var $upload_file;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function NoteSoap()
-    {
-        self::__construct();
-    }
 
     public function __construct()
     {
@@ -33,7 +23,7 @@ class NoteSoap
     {
         global $sugar_config;
 
-        $focus = BeanFactory::getBean('Notes');
+        $focus = BeanFactory::newBean('Notes');
 
                 if($portal){
                         $focus->disable_row_level_security = true;
@@ -75,7 +65,7 @@ class NoteSoap
     function newSaveFile($note, $portal = false){
         global $sugar_config;
 
-        $focus = BeanFactory::getBean('Notes');
+        $focus = BeanFactory::newBean('Notes');
 
         if($portal){
         	$focus->disable_row_level_security = true;

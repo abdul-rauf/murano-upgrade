@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -88,7 +87,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   'LBL_TOP_SALES' => 'Κορυφαίες Ανοικτές Πωλήσεις Μου',
   'NTC_REMOVE_OPP_CONFIRMATION' => 'Είστε βέβαιοι ότι θέλετε να αφαιρέσετε αυτή την επαφή από την πώληση;',
 	'SALE_REMOVE_PROJECT_CONFIRM' => 'Είστε βέβαιοι ότι θέλετε να αφαιρέσετε αυτή την πώληση από το έργο;',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Πώληση',
 	'LBL_ACTIVITIES_SUBPANEL_TITLE'=>'Δραστηριότητες',
 	'LBL_HISTORY_SUBPANEL_TITLE'=>'Ιστορικό',
     'LBL_RAW_AMOUNT'=>'Ακαθάριστο Ποσό',

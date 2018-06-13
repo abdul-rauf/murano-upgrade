@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,6 @@ print( $mod_strings['LBL_CLEAR_ADDITIONAL_CACHE_FINDING'] . "<br>" );
 
 print( $mod_strings['LBL_CLEAR_ADDITIONAL_CACHE_DELETING'] . "<br>" );
 
-require_once('modules/Administration/QuickRepairAndRebuild.php');
 $repair = new RepairAndClear();
 $repair->show_output = false;
 $repair->module_list = array();

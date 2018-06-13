@@ -1,6 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,8 +10,6 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once "modules/Mailer/EmbeddedImage.php";                         // needed for converting inline images to embedded images
-require_once "modules/Administration/Administration.php"; // needed for getting the disclosure settings
 
 /**
  * This class implements the additional SugarCRM-specific email formatting that SmtpMailer lacks.

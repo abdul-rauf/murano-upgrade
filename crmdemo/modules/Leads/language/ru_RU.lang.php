@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Правка' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Основной Id',
-    'LBL_DNB_BAL_PREVIEW' => 'Предварительный просмотр предварительных контактов',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Предварительные контакты',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B. Информация о предварительном контакте.',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Продажи',
 

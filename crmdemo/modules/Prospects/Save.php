@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,7 +16,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-require_once('modules/Prospects/ProspectFormBase.php');
 $prospectForm = new ProspectFormBase();
 if (!isset($_REQUEST['return_module'])) $_REQUEST['return_module']='Prospects';
 if (!isset($_REQUEST['return_action'])) $_REQUEST['return_action']='index';

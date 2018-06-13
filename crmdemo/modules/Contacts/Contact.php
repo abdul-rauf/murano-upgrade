@@ -12,13 +12,11 @@
 
 use Sugarcrm\Sugarcrm\Security\Password\Hash;
 
-require_once 'include/SugarObjects/templates/person/Person.php';
 
 /**
  *  Contact is used to store customer information.
  */
 class Contact extends Person {
-    var $field_name_map;
 	// Stored fields
 	var $id;
 	var $name = '';
@@ -266,7 +264,7 @@ class Contact extends Person {
 		}
 
 		$this->addVisibilityWhere($where_query, array('where_condition' => true));
-		$acc = BeanFactory::getBean('Accounts');
+		$acc = BeanFactory::newBean('Accounts');
 		$acc->addVisibilityWhere($where_query, array('where_condition' => true, 'table_alias' => 'accounts'));
 
 		$ret_array['where'] = $where_query;
@@ -363,7 +361,7 @@ class Contact extends Person {
         // Set campaign name if there is a campaign id
 		if( !empty($this->campaign_id)){
 
-			$camp = BeanFactory::getBean('Campaigns');
+			$camp = BeanFactory::newBean('Campaigns');
 		    $where = "campaigns.id='{$this->campaign_id}'";
 		    $campaign_list = $camp->get_full_list("campaigns.name", $where, true);
 		    $this->campaign_name = $campaign_list[0]->name;
@@ -492,7 +490,7 @@ class Contact extends Person {
         // cache this object since we'll be reusing it a bunch
         if ( !($focus_user instanceof User) ) {
 
-            $focus_user = BeanFactory::getBean('Users');
+            $focus_user = BeanFactory::newBean('Users');
         }
 
         static $focus_team;
@@ -500,7 +498,7 @@ class Contact extends Person {
         // cache this object since we'll be reusing it a bunch
         if ( !($focus_team instanceof Team) ) {
 
-            $focus_team = BeanFactory::getBean('Teams');
+            $focus_team = BeanFactory::newBean('Teams');
         }
 
 		if ( empty($list_of_users) ) {

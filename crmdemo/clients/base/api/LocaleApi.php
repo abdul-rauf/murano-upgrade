@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -29,7 +28,7 @@ class LocaleApi extends SugarApi
         );
     }
 
-    public function localeOptions($api, $args)
+    public function localeOptions(ServiceBase $api, array $args)
     {
         global $locale, $sugar_config;
         return array(

@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,28 +10,12 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
-
 class EmployeesViewEdit extends ViewEdit {
     var $useForSubpanel = true;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function EmployeesViewEdit($bean = null, $view_object_map = array(), Request $request = null)
-    {
-        self::__construct($bean, $view_object_map, $request);
-    }
-
-    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
-    {
-        parent::__construct($bean, $view_object_map, $request);
-    }
 
  	function display() {
        	if(is_admin($GLOBALS['current_user'])) {
             $json = getJSONobj();
-            require_once('include/QuickSearchDefaults.php');
             $qsd = QuickSearchDefaults::getQuickSearchDefaults();
             $sqs_objects = array('EditView_reports_to_name' => $qsd->getQSUser());
             $sqs_objects['EditView_reports_to_name']['populate_list'] = array('reports_to_name', 'reports_to_id');

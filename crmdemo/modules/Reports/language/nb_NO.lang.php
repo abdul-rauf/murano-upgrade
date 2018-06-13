@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'Bedriftrapporter',
   'LBL_CONTACT_REPORTS' => 'Kontaktrapporter',
   'LBL_OPPORTUNITY_REPORTS' => 'Mulighetsrapporter',
+    'LBL_RECENTLY_MODIFIED' => 'Nylig endret',
 
   'LBL_CASE_REPORTS' => 'Saksrapporter',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'Neste 30 dager',
   'LBL_THIS_YEAR'=>'Dette år',
   'LBL_LIST_FORM_TITLE' =>'Rapporter',
+  'LBL_LIST_REPORT_NAME' => 'Navn',
   'LBL_PROSPECT_REPORTS'=>'Målrapporter',
   'LBL_CHART_TYPE'=>'Diagramtype',
   'LBL_IS_EMPTY'=>'Er tom',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>Fremgangsmåten for å angi filtere</b><br/><br/>1) Klikk på Modulen i <b>Beslektede Moduler</b> panelet som du vil bruke til å angi filtere. Som standard, er den primäre modulen (top node in the tree view) valgt. <br/><br/>Du kan velge en relatert modul(child node in the tree view) ved å klikke på modulen. Utvid noden for å vise tilleggsmoduler relatert til de beslektede modulene. Modulen som du velgert avgjør hvilke rapporteringspliktige felt som vises i panelet <b>Tilgjengelige felt</b>.<br/><br/><br />	2) Klikk på et felt i <b><Tilgjengelige Felt</b> panelet for å legge det til filterene. Du kan også søke etter feltet ved å skrive i tekstboksen i panelet.<br/><br/><br />	Etter å ha valgt ett antall felt i <b>Beslektede moduler</b> panelet, kan du velge en ulik modul der du kan velge et antall felt som skal brukes som filtre.<br/><br/><br />	3) Velg <b>Og</b> eller <b>ELLER</b> for å utpeke om alle filterene eller henholdsvis noen filtere, er brukt for å finne rapportens resultater.<br/><br/><br />	4) [Valgfri Klikk på <b>Legg til filtergruppe/b> for å opprette filtergrupper. Du kan ha ubegrensed antall filtergrupper, og hvilket som helst antall filtere i en gruppe, for å opprette nested filtere.<br/><br/><br />	5) [Valgfril] Velg Kjøretid valg for et Filter for å tillate  brukere å anvende filteret for å  tilpasse rapportens resultat underveis.",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b> Fremgangsmåten for å angi grupper: </b><br></br>1) Klikk på en modul i panelet <b>Beslektede moduler</b> som du vil bruke til å gruppere poster i din rapport.Som standard, er primärmodulen (top node in the tree view) valgt.<br/><br/> Du kan velge en beslektet modul (child node in the tree view) ved å klikke på modulen.Utvid noden for å vise tilleggsmoduler relatert til de beslektede modulene. Modulen du velgert avgjør hvilke rapporteringspliktige felt som vises i panelet<b>Tilgjengelige felt</b>.<br/><br/> 2) Klikk på feltet i panelet<b><Tilgjengelige felt</b> for å gruppere postene ved feltet i rapporten din.Du kan også søke etter feltet ved å skrive i tekstboksen i panelet.<br/><br/. Etter å ha valgt et antall felt i modulen valgt i panelet <b>Beslektede moduler</b>, kan du velge en ulik modul der du kan velge et hvilket som helst antall felt for å gruppere postene.<br/><br/> Men, rapporten blir mindre lesbar jo flere felt du grupperer med.<br/><br/>  Du kan endre rekkefølgen på feltene ved å dra og slippe dem til ønskede posisjoner. Forandring av rekkefølgen påvirker framvisningen av resultatene. <br/><br/>.For matriserapporter, kan maksimum tre felt brukes for å gruppere postene.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b> Fremgangsmåten for å angi visningskolonner:</b><br/><br/>1) Klikk på en modul i panelet \"Beslektede moduler\" som du vil bruke til å vise dataen i rapporten. Som standard, er primärmodulen(top node in the tree view) som du valgte under \"velg modul\"- trinnet valgt.<br/><br/> Du kan velge felt fra en beslekted modul  (child node in the tree view) ved å klikke på modulen. Moduler knyttet til moduler som igjen er knyttett til primärmodulen kan også bli valgt. Modulen du velger avgjør hvilke rapporteringspliktige felt som vises i panelet<b>Tilgjengelige felt</b>.<br/> 2) Klikk på feltet i panelet<b>Tilgjengelige felt</b> for å vise feltdataen i postene i din rapport.Du kan også søke etter feltet ved å skrive i tekstboksen i panelet.<br/><br/> Etter å ha valgt ett antall felt i panelet <b>Beslektede moduler</b>, kan du velge en annen modul der du kan velge flere felt. Du kan velge et hvilket som helst antall felt, men rapporten genereres saktere, og bli mindre lesbar dersom du legger til flere felt enn nødvendig. <br/><br/> Du kan endre rekkefølgen på feltene ved å dra og slippe dem på ønskede posisjoner. Endring av feltrekkefølgen, vil endre rekkefølgen kolonnene vises på i resultatet." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b> Fremgangsmåten for å vise oppsummeringer: </b><br></br>1) Klikk på en modul i panelet <b>Beslektede moduler</b> som du vil bruke til oppsummeringene i din rapport. Som standard, er primærmodulen (toppnode i trevisning) valgt.<br/><br/> Du kan velge en beslektet modul (underordnet node i trevisning) ved å klikke på modulen. Utvid noden for å vise tilleggsmoduler relatert til de beslektede modulene. Modulen du velger avgjør hvilke rapporteringspliktige felt som vises i panelet <b>Tilgjengelige felt</b>.<br/><br/> 2) Klikk på et felt i panelet<b>Tilgjengelige felt</b> for å velge oppsummeringer for rapporten din. Du kan også søke etter et felt ved å skrive i tekstboksen i panelet.<br/><br/. Etter å ha valgt et antall felt i modulen valgt i panelet <b>Beslektede moduler</b>, kan du velge en ulik modul der du kan velge et hvilket som helst antall felt for oppsummeringene i rapporten din.<br/><br/> For matriserapporter kan maksimum tre felt brukes for å vise flere verdier i én enkelt celle i rapporten din." ,
 
 	'LBL_ALT_SHOW' => 'Vis',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'Denne rapporten inneholder data i følgende kolonnerekker:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'Opp' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'Informasjon',
     'LBL_REPORT_GRAND_TOTAL' => "Totale",
+    'LBL_EDIT_REPORT_BUTTON' => 'Endre rapport',
 
     'LBL_REPORTS_TO' => 'Rapporterer til',
     'LBL_LESS_THAN_EQUAL' => 'Mindre enn eller lik med',

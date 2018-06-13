@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -23,19 +22,6 @@ class MailMerge
 	var $visible = false;
 	var $list;
 	var $fieldList;
-
-
-    /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
-     */
-    public function MailMerge($list = null, $fieldList = null, $data_dir = 'data')
-    {
-        self::__construct($list, $fieldList, $data_dir);
-    }
-
 
 	public function __construct($list = NULL, $fieldList = null, $data_dir = 'data') {
 		// this is the path to your data dir.

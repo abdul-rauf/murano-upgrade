@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +11,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 global $theme;
 
-require_once('include/ListView/ProcessView.php');
 
 global $app_strings;
 global $app_list_strings;
@@ -47,7 +45,7 @@ else {
 $form->assign("MOD", $mod_strings);
 $form->assign("APP", $app_strings);
 
-$focus = BeanFactory::getBean('WorkFlowActionShells');
+$focus = BeanFactory::newBean('WorkFlowActionShells');
 
 
 
@@ -59,7 +57,7 @@ $focus = BeanFactory::getBean('WorkFlowActionShells');
 
 //////////////////////////////////////////////////////////////////
 
-	$action_object = BeanFactory::getBean('WorkFlowActions');
+	$action_object = BeanFactory::newBean('WorkFlowActions');
 
 	if(!empty($_REQUEST['action_id'])){
 		$action_object->retrieve($_REQUEST['action_id']);
@@ -123,7 +121,7 @@ $form->out("embeded");
 $form->parse("main");
 $form->out("main");
 	//rsmith
-	$temp_module = BeanFactory::getBean($_REQUEST['target_module']);
+	$temp_module = BeanFactory::newBean($_REQUEST['target_module']);
 	global $mod_strings, $current_language;
 	$mod_strings = return_module_language($current_language, $temp_module->module_dir);
 	$field_num = $_REQUEST['field_num'];
@@ -163,8 +161,13 @@ function processJsForSelectorField(&$javascript, $field, $type, $tempModule, $fi
 
     if (in_array($type, array ('date', 'time', 'datetimecombo')))
     {
-        $jsString .=
-            "addToValidate('EditView', 'field_{$fieldNumber}__{$ifAdvanced}_value', 'assigned_user_name', 1,'{$javascript->stripEndColon(translate($tempModule->field_name_map[$field]['vname']))}' )";
+        $jsString .= "addToValidate("
+            . "'EditView', "
+            . "'field_{$fieldNumber}__{$ifAdvanced}_value', "
+            . "'assigned_user_name', "
+            . "1, "
+            . "'{$javascript->stripEndColon(translate($tempModule->field_defs[$field]['vname']))}'"
+            . ")";
     }
     else if (!(in_array($type, $workFlowActionsExceptionFields) == 1))
     {

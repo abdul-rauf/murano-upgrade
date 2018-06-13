@@ -20,13 +20,13 @@ class SugarUpgradeFixParentConstructorCalls extends UpgradeScript
 
     public function run()
     {
-        if (version_compare($this->from_version, '7.8.0.0', '>=')) {
+        if (version_compare($this->from_version, '7.9.0.0', '>=')) {
             return;
         }
 
         // these files should have been automatically removed by previous upgrades but still sometimes exist,
         // so we need to remove them manually
-        $this->fileToDelete(array(
+        $this->upgrader->fileToDelete(array(
             'include/SugarPDF.php',
             'modules/Opportunities/views/view.sidequickcreate.php',
             'include/database/MssqlManager2.php',
@@ -34,10 +34,10 @@ class SugarUpgradeFixParentConstructorCalls extends UpgradeScript
             'include/FCKeditor_Sugar/FCKeditor_Sugar.php',
             'include/database/OracleHelper.php',
             'modules/Documents/DocumentTreeView.php',
-        ));
+        ), $this);
 
         // remove old backups which potentially contain classes calling parent constructors the PHP4 way
-        $this->fileToDelete(glob('modules/*/.pre_500'));
+        $this->upgrader->fileToDelete(glob('modules/*/.pre_500'), $this);
 
         if (!file_exists('stock-parent-calls.json')) {
             $this->log('File stock-parent-calls.json does not exist. Skipping.');

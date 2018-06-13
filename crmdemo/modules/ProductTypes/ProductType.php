@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -69,15 +68,12 @@ class ProductType extends SugarBean {
 		if ($add_blank) {
 			$list['']='';
 		}
-		//if($this->db->getRowCount($result) > 0){
 			// We have some data.
 			while (($row = $this->db->fetchByAssoc($result)) != null) {
-			//while ($row = $this->db->fetchByAssoc($result)) {
 				$list[$row['id']] = $row['name'];
 				$GLOBALS['log']->debug("row id is:".$row['id']);
 				$GLOBALS['log']->debug("row name is:".$row['name']);
 			}
-		//}
 		return $list;
 	}
 
@@ -113,7 +109,6 @@ class ProductType extends SugarBean {
 	function get_list_view_data(){
 		$temp_array = $this->get_list_view_array();
         $temp_array["ENCODED_NAME"]=$this->name;
-//    	$temp_array["ENCODED_NAME"]=htmlspecialchars($this->name, ENT_QUOTES);
     	return $temp_array;
 
 	}
@@ -139,5 +134,3 @@ class ProductType extends SugarBean {
 
 
 }
-
-?>

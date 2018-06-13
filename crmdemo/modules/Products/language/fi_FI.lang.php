@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Tarjottu tuoterivi',
     'LBL_LIST_MANUFACTURER' => 'Valmistaja',
     'LBL_MANUFACTURERS' => 'Valmistajat',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Valmistusnumero',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Osanumero',
     'LBL_LIST_QUANTITY' => 'Määrä',
     'LBL_LIST_COST_PRICE' => 'Kustannus',
     'LBL_LIST_DISCOUNT_PRICE' => 'Hinta',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Valitse alennus',
     'LBL_LIST_PRICE' => 'Ohjehinta:',
     'LBL_VENDOR_PART_NUM' => 'Myyjän osanumero:',
-    'LBL_MFT_PART_NUM' => 'Valmistajan osanumero:',
+    'LBL_MFT_PART_NUM' => 'Osanumero:',
     'LBL_NEXT_STEP' => 'Seuraava vaihe:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Diskonttohinnan päivämäärä:',
     'LBL_WEIGHT' => 'Paino:',
@@ -172,6 +172,8 @@ $mod_strings = array(
 - Saat esille lisää kenttiä tarvittaessa napsauttamalla "Näytä lisää.
 2. Paina ‘Tallenna’ luodaksesi tietueen. Tämän jälkeen palaat edelliselle sivulle.',
 
-    'LBL_MANUFACTURERS' => 'Valmistajat',
     'LBL_PRODUCT_POSITION' => 'Tuoterymän sijainti',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Tarjottujen tuoterivien tarjouksen dataluettelo',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Uusi tarjottu tuoterivi)',
+    'LBL_DISCOUNT_PERCENT' => '% Prosenttia',
 );

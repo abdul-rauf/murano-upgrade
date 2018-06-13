@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => 'Izvješća o računima',
   'LBL_CONTACT_REPORTS' => 'Izvješća o kontaktima',
   'LBL_OPPORTUNITY_REPORTS' => 'Izvješća o prilikama',
+    'LBL_RECENTLY_MODIFIED' => 'Nedavno izmijenjeno',
 
   'LBL_CASE_REPORTS' => 'Izvješća o slučajevima',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'Sljedećih 30 dana',
   'LBL_THIS_YEAR'=>'Ove godine',
   'LBL_LIST_FORM_TITLE' =>'Izvješća',
+  'LBL_LIST_REPORT_NAME' => 'Naziv',
   'LBL_PROSPECT_REPORTS'=>'Izvješća o metama',
   'LBL_CHART_TYPE'=>'Vrsta grafikona',
   'LBL_IS_EMPTY'=>'Je prazno',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>Koraci za definiranje filtara:</b><br/><br/>1) kliknite na modul u oknu <b>Povezani moduli</b> koji biste željeli upotrijebiti za definiranje filtara. Prema zadanim postavkama označava se primarni modul (čvor najviše razine u prikazu stabla). <br/><br/> Možete odabrati povezani modul (podređeni čvor u prikazu stabla) tako da kliknete na modul. Proširite čvor za prikaz dodatnih modula povezanih s povezanim modulom. Modul koji odaberete određuje koja se polja za izvješća prikazuju u oknu <b>Dostupna polja</b>.<br/><br/> 2) Kliknite na polje u oknu <b>Dostupna polja</b> da biste ga dodali u filtre. Možete i pretraživati polja tako da tipkate u tekstni okvir u oknu.<br/><br/> Nakon odabira određenog broja polja iz modula odabranog u oknu <b>Povezani moduli</b>, možete izabrati različiti modul iz kojeg možete odabrati bilo koji broj polja koja ćete upotrijebiti kao filtre.<br/><br/> 3) Izaberite <b>I</b> ili <b>ILI</b> da biste odredili upotrebljavaju li se svi ili neki filtri za pretraživanje rezultata za izvješće.<br/><br/> 4) [Optional] Kliknite na <b>Dodaj grupu filtara</b> za stvaranje grupa filtara. Možete imati koliko god grupa filtara i koliko god filtara u grupi želite za stvaranje ugniježđenih filtara.<br/><br/> 5) [Optional] Odaberite mogućnost vremena izvođenja da biste dopustili korisnicima da upotrebljavaju filtar za dodatnu prilagodbu rezultata izvješća pri pregledavanju izvješća.",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>Koraci za definiranje grupe prema:</b><br/><br/>1) kliknite na modul u oknu <b>Povezani moduli</b> koji želite upotrijebiti za grupiranje zapisa u izvješću. Prema zadanim postavkama označava se primarni modul (čvor najviše razine u prikazu stabla). <br/><br/> Možete odabrati povezani modul (podređeni čvor u prikazu stabla) tako da kliknete na modul. Proširite čvor za prikaz dodatnih modula povezanih s povezanim modulom. Modul koji odaberete određuje koja se polja za izvješća prikazuju u oknu <b>Dostupna polja</b>.<br/><br/> 2) Kliknite na polje u oknu <b>Dostupna polja</b> da biste grupirali zapise prema polju u izvješću. Možete i pretraživati polja tako da tipkate u tekstni okvir u oknu.<br/><br/> Nakon odabira određenog broja polja iz modula odabranog u oknu <b>Povezani moduli</b>, možete odabrati drugi modul iz kojeg možete odabrati bilo koliko polja za grupiranje zapisa. Međutim, izvješće se teže čita kada grupirate prema više od nekoliko polja.<br/><br/> Možete promijeniti redoslijed polja tako da ih povučete i ispustite na željeni položaj. Promjenom redoslijeda polja mijenja se način na koji se prikazuju rezultati.<br/><br/> Za izvješća matrice možete upotrijebiti najviše tri polja za grupiranje zapisa.",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>Koraci za odabir stupaca za prikaz:</b><br/><br/>1) kliknite na modul u oknu <b>Povezani moduli</b> koji želite upotrijebiti za prikaz podataka u izvješću. Prema zadanim postavkama označava se primarni modul (čvor najviše razine u prikazu stabla) koji ste izabrali u koraku „Odabir modula”.<br/><br/> Možete odabrati polja iz povezanog modula (podređeni čvor u prikazu stabla) tako da kliknete na modul. Mogu se odabrati i moduli povezani s modulima povezanim s primarnim modulom. Modul koji odaberete određuje koja se polja za izvješća prikazuju u oknu <b>Dostupna polja</b>.<br/><br/>2) Kliknite na polje u oknu <b>Dostupna polja</b> da biste prikazali podatke polja u zapisima u izvješću. Možete i pretraživati polja tako da tipkate u tekstni okvir u oknu.<br/><br/> Nakon odabira određenog broja polja iz modula odabranog u oknu <b>Povezani moduli</b>, možete odabrati drugi modul iz kojeg možete odabrati dodatna polja. Možete odabrati koliko god polja želite, no izvješće se generira sporije i teže se čita ako u izvješće dodate više polja nego što je potrebno.<br/><br/> Možete promijeniti redoslijed polja tako da ih povučete i ispustite na željeni položaj. Promjenom redoslijeda polja mijenja se redoslijed kojim su stupci prikazani u rezultatima." ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Koraci za odabir prikaza sažetaka:</b><br/><br/>1) kliknite na modul u oknu <b>Povezani moduli</b> koji želite upotrijebiti za sažetke u izvješću. Prema zadanim postavkama označava se primarni modul (čvor najviše razine u prikazu stabla).<br/><br/> Možete odabrati povezani modul (podređeni čvor u prikazu stabla) tako da kliknete na modul. Proširite čvor za prikaz dodatnih modula povezanih s povezanim modulom. Modul koji odaberete određuje koja se polja za izvješća prikazuju u oknu <b>Dostupna polja</b>.<br/><br/> 2) Kliknite na polje u oknu <b>Dostupna polja</b> da biste odabrali sažetke za izvješće. Možete i pretraživati polja tako da tipkate u tekstni okvir u oknu.<br/><br/> Nakon odabira određenog broja polja iz modula odabranog u oknu <b>Povezani moduli</b>, možete odabrati drugi modul iz kojeg možete odabrati dodatna polja za sažetke u izvješću.<br/><br/>" .	"Za izvješća matrice možete odabrati više od jednog polja za prikaz više vrijednosti unutar jedne ćelije u izvješću." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Koraci za odabir prikaza sažetaka:</b><br/><br/>1) kliknite na modul u oknu <b>Povezani moduli</b> koji želite upotrijebiti za sažetke u izvješću. Prema zadanim postavkama označava se primarni modul (čvor najviše razine u prikazu stabla).<br/><br/> Možete odabrati povezani modul (podređeni čvor u prikazu stabla) tako da kliknete na modul. Proširite čvor za prikaz dodatnih modula povezanih s povezanim modulom. Modul koji odaberete određuje koja se polja za izvješća prikazuju u oknu <b>Dostupna polja</b>.<br/><br/> 2) Kliknite na polje u oknu <b>Dostupna polja</b> da biste odabrali sažetke za izvješće. Možete i pretraživati polja tako da tipkate u tekstni okvir u oknu.<br/><br/> Nakon odabira određenog broja polja iz modula odabranog u oknu <b>Povezani moduli</b>, možete odabrati drugi modul iz kojeg možete odabrati dodatna polja za sažetke u izvješću.<br/><br/> Za izvješća matrice možete odabrati više od jednog polja za prikaz više vrijednosti unutar jedne ćelije u izvješću." ,
 
 	'LBL_ALT_SHOW' => 'Prikaži',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => 'Ovo izvješće sadrži podatke prema sljedećem rasporedu stupaca:',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => 'Gore' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => 'Podaci',
     'LBL_REPORT_GRAND_TOTAL' => "Sveukupni zbroj",
+    'LBL_EDIT_REPORT_BUTTON' => 'Uredi izvješće',
 
     'LBL_REPORTS_TO' => 'Izvješća za',
     'LBL_LESS_THAN_EQUAL' => 'Manje od jednako',

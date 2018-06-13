@@ -11,7 +11,6 @@
  */
 
 require_once 'modules/OAuthTokens/OAuthToken.php';
-require_once 'modules/OAuthKeys/OAuthKey.php';
 /**
  * Sugar OAuth provider implementation
  * @api
@@ -234,7 +233,7 @@ class SugarOAuthServer
     }
 }
 
-if(!class_exists('OAuthException')) {
+if (!class_exists('OAuthException', false)) {
     // we will use this in case oauth extension is not loaded
     class OAuthException extends Exception {}
 }

@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Pielikums',
     'LBL_REVENUELINEITEMS' => 'Ieņēmumu posteņi',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Uzņēmuma apskate',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Piezīmes',
 
     // Help Text

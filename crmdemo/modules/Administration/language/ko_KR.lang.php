@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => '사용할수 없는 테마',
     'LBL_TIMEZONE' => '시간대',
     'LBL_TO'    => '수신인',
-	'LBL_TRACKER_SETTINGS_DESC' => '추적되는 시스템 및 사용자 데이터를 선택하십시오',
     'LBL_UPDATE_CHECK_AUTO'=>'자동으로',
     'LBL_UPDATE_CHECK_MANUAL'=>'수동으로',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>자동 업데이트 확인</B>-확인했다면, 시스템은 어플리케이션의 업데이트된 버전이 사용가능한지 주기적으로 확인합니다.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'config.php 가 성공적으로 다시 만들어졌습니다.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => '경고: 파일이 최소 6MB의 전송을 허용하도록 하기위해 귀하의 PHP구성이 변경되어야합니다. 다음에 위치한 php.ini 의 upload_max_filesize 가치를 수정하십시오.',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'config.php 를 쓰기가능하도록 만들고 다시 시도해주십시오.',
-    'MSG_REBUILD_EXTENSIONS' => '수리 화면으로 가서 확장부분을 다시 만듭니다.',
-    'MSG_REBUILD_RELATIONSHIPS' => '수리 화면으로 가서 관계 다시만들기를 클릭합니다.',
     'NO_ENABLED_OFFLINE_CLIENTS' => '현재 작동중인 오프라인 고객이 없습니다.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => '이 오프라인 고객을 정지하시겠습니까?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => '이 오프라인 고객을 작동하시겠습니까?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'결과',
 'ML_MANIFEST_ISSUE'=>'적하목록 결과',
 'ML_CONFIG_OVERRIDE'=>'설정을 변경할 수 없습니다.',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'키 - 문자, 숫자 및 밑줄로만 구성할 수 있습니다. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => '탐색 바의 빠른 만들기 구성하기',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => '탐색바의 빨리 만들기에 사용가능한 모듈을 선택하십시오.',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => '어느 사용자가 상위 탐색 바의 플러스의 아이콘을 사용해 빠르게 기록을 만들수 있는 모듈을 선택합니다. 사용 가능한 모듈과 사용할 수 없는 모듈 상자 사이에서 드래그 앤 드랍합니다.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => '제조자',
 	'ProductBundleNotes' => '상품묶음 노트',
 	'ProductBundles'   => '상품묶음',
-	'ProjectResources' => '프로젝트리소스',
 
 	'Relationships' => '관계',
 	'Releases'       => '발표',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => '일정관리 작업',
 	'Shippers'       => '배송자',
 	'TaxRates'       => '세율',
-	'TeamHierarchies'  => '팀 계급',
 	'TeamMemberships'   => '팀 멤버쉽',
 	'TeamNotices'    => '팀 공지',
 	'TeamSetModules'   => '팀 설정모듈',

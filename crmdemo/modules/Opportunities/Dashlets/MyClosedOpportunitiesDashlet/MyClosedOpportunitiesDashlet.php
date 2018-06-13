@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 // $Id: MyOpportunitiesDashlet.php 24647 2007-07-26 00:21:25Z awu $
 
-require_once('include/Dashlets/Dashlet.php');
 
 class MyClosedOpportunitiesDashlet extends Dashlet 
 { 
@@ -39,7 +37,7 @@ class MyClosedOpportunitiesDashlet extends Dashlet
         
         if(isset($def['autoRefresh'])) $this->autoRefresh = $def['autoRefresh'];
         
-        $this->seedBean = BeanFactory::getBean('Opportunities');      
+        $this->seedBean = BeanFactory::newBean('Opportunities');      
 
         $qry = "SELECT * from opportunities WHERE assigned_user_id = '" . $current_user->id . "' AND deleted=0";
 		$result = $this->seedBean->db->query($this->seedBean->create_list_count_query($qry));	
@@ -54,9 +52,10 @@ class MyClosedOpportunitiesDashlet extends Dashlet
     }
     
     /**
+     * @param string $text
 	 * @see Dashlet::display()
 	 */
-	public function display()
+    public function display($text = '')
     {	
     	$ss = new Sugar_Smarty();
     	$ss->assign('lblTotalOpportunities', translate('LBL_TOTAL_OPPORTUNITIES', 'Opportunities'));
@@ -65,7 +64,10 @@ class MyClosedOpportunitiesDashlet extends Dashlet
     	$ss->assign('total_opportunities', $this->total_opportunities);
     	$ss->assign('total_opportunities_won', $this->total_opportunities_won);    	
     	
-    	return parent::display() . $ss->fetch('modules/Opportunities/Dashlets/MyClosedOpportunitiesDashlet/MyClosedOpportunitiesDashlet.tpl');
+        return parent::display($text)
+            . $ss->fetch(
+                'modules/Opportunities/Dashlets/MyClosedOpportunitiesDashlet/MyClosedOpportunitiesDashlet.tpl'
+            );
     }
     
     /**

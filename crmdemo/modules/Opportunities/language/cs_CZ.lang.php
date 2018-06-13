@@ -166,25 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} umožňuje sledovat jednotlivé prodeje od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a zahrnuje relevantní prodejní údaje i údaje týkající se dalších důležitých záznamů jako například {{quotes_module}}, {{contacts_module}} atd. {{module_name}} bude typicky ukazovat průběh několika fázemi prodeje, dokud nebude označen buď „Uzavřeno úspěšně“, nebo „Uzavřeno neúspěšně“. {{plural_module_name}} lze využít ještě více použitím modulu {{forecasts_singular_module}} Sugar pro porozumění a předpovídání prodejních trendů, stejně jako pro zaměření práce na dosažení prodejních kvót.',
+    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd. {{module_name}} typicky postupuje přes několik prodejních fází, dokud není označen buď jako „Vyhráno“ nebo „Prohráno“. {{plural_module_name}} lze využít ještě dále pomocí modulu Sugar {{forecasts_singular_module}}, abyste mohli porozumět prodejním trendům a předpovídat je, jakož i zaměřit své úsilí na dosažení prodejních kvót.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} umožňuje sledovat jednotlivé prodeje a položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a zahrnuje relevantní prodejní údaje i údaje týkající se dalších důležitých záznamů jako například {{quotes_module}}, {{contacts_module}} atd.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
 
-- Pole záznamu lze upravovat kliknutím na jednotlivá pole nebo na tlačítko Upravit.
-- Odkazy na jiné záznamy v dílčích panelech lze zobrazovat nebo upravovat přepnutím levého spodního podokna na „Zobrazení dat“.
-- Komentáře uživatelů a historii změn záznamů lze vytvářet a zobrazovat v {{activitystream_singular_module}} přepnutím levého spodního podokna na „Přehled aktivit“.
-- Tento záznam lze sledovat nebo označit jako oblíbený pomocí ikon vpravo od názvu záznamu.
-- Další akce jsou k dispozici v rozevírací nabídce Akce vpravo od tlačítka Upravit.',
+- Upravte pole tohoto záznamu kliknutím na jednotlivé pole nebo na tlačítko Upravit.
+- Prohlížejte si nebo upravte odkazy na jiné záznamy v dílčím okně přepnutím levého podokna na „Zobrazení dat“.
+- Vytvářejte a prohlížejte si komentáře uživatelů a historii změn záznamů v {{activitystream_singular_module}} přepnutím levého podokna na „Přehled aktivit“.
+- Sledujte tento záznam nebo ho označte jako oblíbený pomocí ikony vpravo od názvu záznamu.
+- Další akce jsou dostupné v rozbalovací nabídce Akce vpravo od tlačítka Upravit.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} umožňuje sledovat jednotlivé prodeje a položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a zahrnuje relevantní prodejní údaje i údaje týkající se dalších důležitých záznamů jako například {{quotes_module}}, {{contacts_module}} atd.
+    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
 
-Vytvoření {{module_name}}:
-1. Vyplňte hodnoty polí dle potřeby.
- - Pole označená jako „Povinné“ musí být před uložením vyplněna.
- - V případě potřeby klikněte pro zobrazení dalších polí na položku „Zobrazit více“.
-2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
+Chcete-li vytvořit {{module_name}}:
+1. Zadejte hodnoty polí, jak je požadováno.
+ - Před uložením musí být vyplněna pole označená jako „Povinné“.
+ - Chcete-li v případě potřeby zobrazit další pole, klikněte na „Zobrazit další“.
+2. Chcete-li dokončit nový záznam a vrátit se na předchozí stránku, klikněte na „Uložit“.',
 
 // END PRO/CORP
 

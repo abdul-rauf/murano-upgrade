@@ -1,6 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry)
-    die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -29,17 +27,6 @@ class MergeRecord extends SugarBean {
 
     //store a copy of the merge bean related strings
     var $merge_bean_strings = Array ();
-
-    /**
-     * This is a depreciated method, please start using __construct() as this method will be removed in a future version
-     *
-     * @see __construct
-     * @deprecated
-     */
-    public function MergeRecord($merge_module = '', $merge_id = '')
-    {
-        self::__construct($merge_module, $merge_id);
-    }
 
     public function __construct($merge_module = '', $merge_id = '') {
         global $sugar_config;
@@ -317,4 +304,3 @@ class MergeRecord extends SugarBean {
         return false;
     }
 }
-?>

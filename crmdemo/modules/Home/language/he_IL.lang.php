@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - אפשרויות ספריית ממשק המשתמש מקדמות את היישום של תכונות צד-לקוח עשירות.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - קלאס העברת דוא"ל מומלץ עבור PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - ממזער javascript שכתוב ב-PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - מאפשר הצפנת blowfish דו-כיוונית מהירה ללא צורך בהרחבת PHP MCrypt.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - מנתח SAX עבור HTML ומסמכי XML אחרים שנוצרו בצורה פגומה',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'ספריית הרחבות של Yahoo! UI - הרחבות לספריית ממשק המשתמש של Yahoo! באמצעות jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - זיהוי javascript של נגן פלאש וסקריפט הטמעה.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'ברוך הבא ללוח מחוונים של שוגר 7',
-    'LBL_HELP_RECORD' => 'חלונית העזרה מציגה מידע מפורט אודות המודול שאתה צופה בו, מציגה שלבים מפורטים לביצוע פעולות מסוימות במודול, ומנחה אותך לאן לעבור כדי לקבל מידע נרחב יותר ותמיכה. חלונית העזרה נשארת פתוחה כך שתוכל לצפות בשלבים כאשר אתה מבצע אותם במודול.
-
-חלונית העזרה זמינה עבור כל המודולים של Sugar 7 וניתן לשנות אותה למצב "פתוח ו"סגור" בלחיצה על סמל העזרה בכותרת התחתונה של היישום.',
+    'LBL_HELP_RECORD_TITLE' => 'עזרה',
+    'LBL_HELP_RECORD' => 'העזרה מציגה מידע ספציפי אודות המודול המוצג, מספקת שלבים מפורטים לביצוע חלק מן הפעולות במודול ומכוונת אותך לאן לעבור על מנת לקבל מידע מקיף נוסף ותמיכה.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'פילטר',
 );

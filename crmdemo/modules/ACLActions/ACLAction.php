@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 require_once('modules/ACLActions/actiondefs.php');
-require_once 'modules/ACL/AclCache.php';
 
 /**
  * ACL actions
@@ -45,7 +43,7 @@ class ACLAction  extends SugarBean
         if(isset($ACLActions[$type])){
             foreach($ACLActions[$type]['actions'] as $action_name =>$action_def){
 
-                $action = BeanFactory::getBean('ACLActions');
+                $action = BeanFactory::newBean('ACLActions');
                 $query = "SELECT * FROM " . $action->table_name . " WHERE name='$action_name' AND category = '$category' AND acltype='$type' AND deleted=0 ";
                 $row = $db->fetchOne($query);
                 //only add if an action with that name and category don't exist
@@ -79,7 +77,7 @@ class ACLAction  extends SugarBean
         if(isset($ACLActions[$type])){
             foreach($ACLActions[$type]['actions'] as $action_name =>$action_def){
 
-                $action = BeanFactory::getBean('ACLActions');
+                $action = BeanFactory::newBean('ACLActions');
                 $query = "SELECT * FROM " . $action->table_name . " WHERE name='$action_name' AND category = '$category' AND acltype='$type' and deleted=0";
                 $result = $db->query($query);
                 //only add if an action with that name and category don't exist
@@ -184,7 +182,7 @@ class ACLAction  extends SugarBean
         $result = $db->query($query);
         $default_actions = array();
         while($row = $db->fetchByAssoc($result) ){
-            $acl = BeanFactory::getBean('ACLActions');
+            $acl = BeanFactory::newBean('ACLActions');
             $acl->populateFromRow($row);
             $default_actions[] = $acl;
         }
@@ -238,30 +236,57 @@ class ACLAction  extends SugarBean
             }
         }
         //if we don't have it loaded then lets check against the db
-        $additional_where = '';
         $db = DBManagerFactory::getInstance();
+        $conn = $db->getConnection();
+        $qbSubQuery = $conn->createQueryBuilder();
+        $qbSubQuery
+            ->select('acl_roles_users.user_id', 'acl_roles_actions.action_id', 'acl_roles_actions.access_override')
+            ->from('acl_roles_users')
+            ->leftJoin(
+                'acl_roles_users',
+                'acl_roles_actions',
+                'acl_roles_actions',
+                'acl_roles_actions.role_id = acl_roles_users.role_id AND acl_roles_actions.deleted=0'
+            )
+            ->where($qbSubQuery->expr()->eq(
+                'acl_roles_users.user_id',
+                $qbSubQuery->createPositionalParameter($user_id)
+            ))
+            ->andWhere($qbSubQuery->expr()->eq('acl_roles_users.deleted', '0'));
+
+        $qb = $conn->createQueryBuilder();
+        $qb->select(
+            'acl_actions.id',
+            'acl_actions.name',
+            'acl_actions.category',
+            'acl_actions.acltype',
+            'acl_actions.aclaccess',
+            'tt.access_override'
+        )
+            ->from('acl_actions')
+            ->leftJoin(
+                'acl_actions',
+                '(' . $qb->importSubQuery($qbSubQuery) . ')',
+                'tt',
+                'tt.action_id = acl_actions.id'
+            )
+            ->andWhere($qb->expr()->eq('acl_actions.deleted', 0))
+            ->addOrderBy('acl_actions.category')
+            ->addOrderBy('acl_actions.name');
+
         if(!empty($category)){
-            $additional_where .= " AND acl_actions.category = ".$db->quoted($category)." ";
+            $qb->andWhere($qb->expr()->eq('acl_actions.category', $qb->createPositionalParameter($category)));
         }
         if(!empty($action)){
-            $additional_where .= " AND acl_actions.name = ".$db->quoted($action)." ";
+            $qb->andWhere($qb->expr()->eq('acl_actions.name', $qb->createPositionalParameter($action)));
         }
         if(!empty($type)){
-            $additional_where .= " AND acl_actions.acltype = ".$db->quoted($type)." ";
+            $qb->andWhere($qb->expr()->eq('acl_actions.acltype', $qb->createPositionalParameter($type)));
         }
-        $query = "SELECT acl_actions.id, acl_actions.name, acl_actions.category, acl_actions.acltype, acl_actions.aclaccess, tt.access_override
-            FROM acl_actions
-            LEFT JOIN (
-            SELECT acl_roles_users.user_id, acl_roles_actions.action_id, acl_roles_actions.access_override
-            FROM acl_roles_users
-            LEFT JOIN acl_roles_actions
-            ON acl_roles_actions.role_id = acl_roles_users.role_id AND acl_roles_actions.deleted=0
-            WHERE acl_roles_users.user_id =".$db->quoted($user_id)." AND acl_roles_users.deleted =0) tt
-            ON tt.action_id = acl_actions.id
-            WHERE acl_actions.deleted=0 $additional_where ORDER BY acl_actions.category, acl_actions.name";
-        $result = $db->query($query);
+        $stmt = $qb->execute();
+
         $selected_actions = array();
-        while($row = $db->fetchByAssoc($result, FALSE) ){
+        while ($row = $stmt->fetch()) {
             $isOverride = !empty($row['access_override']);
             if ($isOverride) {
                 $row['aclaccess'] = $row['access_override'];

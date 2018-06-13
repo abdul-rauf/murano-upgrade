@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -765,7 +764,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => '不可用主题',
     'LBL_TIMEZONE' => '时区',
     'LBL_TO'    => 'to',
-	'LBL_TRACKER_SETTINGS_DESC' => '选择要追踪的系统和用户数据',
     'LBL_UPDATE_CHECK_AUTO'=>'自动',
     'LBL_UPDATE_CHECK_MANUAL'=>'手动',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>自动检查更新。</B> - 如果选择了此项，系统会定期检查应用程序是否有更新。',
@@ -932,8 +930,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'config.php已经被成功重建。',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => '警告：您的PHP配置必须修改至少6M的文件可被上传。请在php.ini文件中修改upload_max_filesize值。',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => '请让 config.php 可被编辑并重试。',
-    'MSG_REBUILD_EXTENSIONS' => '请到 <a href="index.php?module=Administration&action=Upgrade">修复</a> 屏幕选择重建扩展。',
-    'MSG_REBUILD_RELATIONSHIPS' => '请到 <a href="index.php?module=Administration&action=Upgrade">修复</a> 屏幕选择重建关系。',
     'NO_ENABLED_OFFLINE_CLIENTS' => '目前无可用离线客户端。',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => '您是否想要禁用离线客户端？',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => '您是否要启用离线客户端？',
@@ -1043,7 +1039,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'问题',
 'ML_MANIFEST_ISSUE'=>'清单问题',
 'ML_CONFIG_OVERRIDE'=>'不允许修改配置',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'密匙 — 可以只包含字母、数字和下划线。 ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => '配置导航栏的快速创建',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => '选择导航栏中快速创建的模块',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => '选择哪些模块可通过顶部导航栏的加号标志进行快速创建。在可用模块和不可用模块盒之间拖放模块。',
@@ -1091,7 +1087,6 @@ $mod_strings = array (
 	'Manufacturers'  => '制造商',
 	'ProductBundleNotes' => '产品包注意事项',
 	'ProductBundles'   => '产品包',
-	'ProjectResources' => '项目资源',
 
 	'Relationships' => '关系',
 	'Releases'       => '发布版本',
@@ -1101,7 +1096,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => '调度计划任务',
 	'Shippers'       => '运输供应商',
 	'TaxRates'       => '税率',
-	'TeamHierarchies'  => '团队等级制度',
 	'TeamMemberships'   => '团队成员资格',
 	'TeamNotices'    => '团队通知',
 	'TeamSetModules'   => '团队集模块',

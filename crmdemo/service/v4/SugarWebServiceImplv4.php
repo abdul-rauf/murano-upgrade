@@ -44,7 +44,7 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
         $GLOBALS['log']->info("Begin: SugarWebServiceImpl->login({$user_auth['user_name']}, $application, ". print_r($name_value_list, true) .")");
         global $sugar_config;
         $error = new SoapError();
-        $user = BeanFactory::getBean('Users');
+        $user = BeanFactory::newBean('Users');
         $success = false;
         $authController = AuthenticationController::getInstance();
 
@@ -184,13 +184,20 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
 	 * @param Array $ids -- An array of SugarBean IDs.
 	 * @param Array $select_fields -- A list of the fields to be included in the results. This optional parameter allows for only needed fields to be retrieved.
 	 * @param Array $link_name_to_fields_array -- A list of link_names and for each link_name, what fields value to be returned. For ex.'link_name_to_fields_array' => array(array('name' =>  'email_addresses', 'value' => array('id', 'email_address', 'opt_out', 'primary_address')))
+     * @param bool $trackView -- Should we track the record accessed.
 	 * @return Array
 	 *        'entry_list' -- Array - The records name value pair for the simple data types excluding link field data.
 	 *	     'relationship_list' -- Array - The records link field data. The example is if asked about accounts email address then return data would look like Array ( [0] => Array ( [name] => email_addresses [records] => Array ( [0] => Array ( [0] => Array ( [name] => id [value] => 3fb16797-8d90-0a94-ac12-490b63a6be67 ) [1] => Array ( [name] => email_address [value] => hr.kid.qa@example.com ) [2] => Array ( [name] => opt_out [value] => 0 ) [3] => Array ( [name] => primary_address [value] => 1 ) ) [1] => Array ( [0] => Array ( [name] => id [value] => 403f8da1-214b-6a88-9cef-490b63d43566 ) [1] => Array ( [name] => email_address [value] => kid.hr@example.name ) [2] => Array ( [name] => opt_out [value] => 0 ) [3] => Array ( [name] => primary_address [value] => 0 ) ) ) ) )
 	 * @exception 'SoapFault' -- The SOAP error, if any
 	 */
-	public function get_entries($session, $module_name, $ids, $select_fields, $link_name_to_fields_array)
-	{
+    public function get_entries(
+        $session,
+        $module_name,
+        $ids,
+        $select_fields,
+        $link_name_to_fields_array,
+        $track_view = false
+    ) {
 	    $result = parent::get_entries($session, $module_name, $ids, $select_fields, $link_name_to_fields_array);
 		$relationshipList = $result['relationship_list'];
 		$returnRelationshipList = array();
@@ -228,8 +235,18 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
      *	     		 'relationship_list' -- Array - The records link field data. The example is if asked about accounts email address then return data would look like Array ( [0] => Array ( [name] => email_addresses [records] => Array ( [0] => Array ( [0] => Array ( [name] => id [value] => 3fb16797-8d90-0a94-ac12-490b63a6be67 ) [1] => Array ( [name] => email_address [value] => hr.kid.qa@example.com ) [2] => Array ( [name] => opt_out [value] => 0 ) [3] => Array ( [name] => primary_address [value] => 1 ) ) [1] => Array ( [0] => Array ( [name] => id [value] => 403f8da1-214b-6a88-9cef-490b63d43566 ) [1] => Array ( [name] => email_address [value] => kid.hr@example.name ) [2] => Array ( [name] => opt_out [value] => 0 ) [3] => Array ( [name] => primary_address [value] => 0 ) ) ) ) )
     * @exception 'SoapFault' -- The SOAP error, if any
     */
-    function get_entry_list($session, $module_name, $query, $order_by,$offset, $select_fields, $link_name_to_fields_array, $max_results, $deleted, $favorites = false ){
-
+    public function get_entry_list(
+        $session,
+        $module_name,
+        $query,
+        $order_by,
+        $offset,
+        $select_fields,
+        $link_name_to_fields_array,
+        $max_results,
+        $deleted = 0,
+        $favorites = false
+    ) {
         $GLOBALS['log']->info('Begin: SugarWebServiceImpl->get_entry_list');
         global  $beanList, $beanFiles;
         $error = new SoapError();
@@ -254,7 +271,7 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
             $sugar_config['list_max_entries_per_page'] = $max_results;
         } // if
 
-        $seed = BeanFactory::getBean($module_name);
+        $seed = BeanFactory::newBean($module_name);
 
         if (!self::$helperObject->checkACLAccess($seed, 'list', $error, 'no_access')) {
             $GLOBALS['log']->error('End: SugarWebServiceImpl->get_entry_list - FAILED on checkACLAccess');
@@ -343,7 +360,7 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
             if( empty($module_name) )
                 continue;
 
-            $seed = BeanFactory::getBean($module_name);
+            $seed = BeanFactory::newBean($module_name);
             if( empty($seed) )
             	continue;
 
@@ -403,7 +420,6 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
     		$sugar_config['list_max_entries_per_page'] = $max_results;
     	}
 
-    	require_once('modules/Home/UnifiedSearchAdvanced.php');
     	require_once 'include/utils.php';
     	$usa = new UnifiedSearchAdvanced();
         if(!file_exists($cachefile = sugar_cached('modules/unified_search_modules.php'))) {
@@ -449,7 +465,7 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
     				$unifiedSearchFields[$name] [ $field ]['value'] = $search_string;
     			}
 
-    			$seed = BeanFactory::getBean($name);
+    			$seed = BeanFactory::newBean($name);
     			require_once 'include/SearchForm/SearchForm2.php' ;
     			if ($beanName == "User"
     			    || $beanName == "ProjectTask"
@@ -611,7 +627,6 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
         }
 
         $GLOBALS['disable_date_format'] = FALSE;
-        require_once('include/Sugarpdf/SugarpdfFactory.php');
         $bean = BeanFactory::getBean('Quotes', $quote_id);
         $sugarpdfBean = SugarpdfFactory::loadSugarpdf($pdf_format, 'Quotes', $bean, array() );
         $sugarpdfBean->process();
@@ -680,7 +695,6 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
     public function oauth_request_token()
     {
         $GLOBALS['log']->info('Begin: SugarWebServiceImpl->oauth_request_token');
-        require_once "include/SugarOAuthServer.php";
         try {
 	        $oauth = new SugarOAuthServer(rtrim($GLOBALS['sugar_config']['site_url'],'/').'/service/v4/rest.php');
 	        $result = $oauth->requestToken()."&oauth_callback_confirmed=true&authorize_url=".$oauth->authURL();
@@ -701,7 +715,6 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
     public function oauth_access_token()
     {
         $GLOBALS['log']->info('Begin: SugarWebServiceImpl->oauth_access_token');
-        require_once "include/SugarOAuthServer.php";
         try {
 	        $oauth = new SugarOAuthServer();
 	        $result = $oauth->accessToken();
@@ -747,7 +760,6 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
             $GLOBALS['log']->info('End: SugarWebServiceImpl->snip_import_emails denied.');
             return;
         } // if
-        require_once 'modules/SNIP/SugarSNIP.php';
         $snip = SugarSNIP::getInstance();
         $snip->importEmail($email);
         $GLOBALS['log']->info('End: SugarWebServiceImpl->snip_import_emails');
@@ -778,7 +790,7 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
 
         }
 
-        $seed = BeanFactory::getBean('Users');
+        $seed = BeanFactory::newBean('Users');
         $res = $seed->db->query($query);
         $emails = array();
         while($row = $seed->db->fetchByAssoc($res)) {
@@ -800,7 +812,6 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
             $GLOBALS['log']->info('End: SugarWebServiceImpl->job_queue_next denied.');
             return;
         }
-        require_once 'include/SugarQueue/SugarJobQueue.php';
         $queue = new SugarJobQueue();
         $job = $queue->nextJob($clientid);
         if(!empty($job)) {
@@ -825,7 +836,6 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
             $GLOBALS['log']->info('End: SugarWebServiceImpl->job_queue_cycle denied.');
             return;
         }
-        require_once 'include/SugarQueue/SugarJobQueue.php';
         $queue = new SugarJobQueue();
         $queue->cleanup();
         $queue->runSchedulers();
@@ -848,7 +858,6 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
             return;
         }
         $GLOBALS['log']->debug('Starting job $jobid execution as $clientid');
-        require_once 'modules/SchedulersJobs/SchedulersJob.php';
         $result = SchedulersJob::runJobId($jobid, $clientid);
         $GLOBALS['log']->info('End: SugarWebServiceImpl->job_queue_run');
         if($result === true) {

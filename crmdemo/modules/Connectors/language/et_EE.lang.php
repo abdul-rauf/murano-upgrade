@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -92,5 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Tõrge: tulemustes kuvamiseks pole vastendatud ühtegi mooduli välja. Võtke ühendust süsteemiadministraatoriga.',
     'LBL_INFO_INLINE' => 'Teave' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Sulge' /*for 508 compliance fix*/,
+    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
 );
 

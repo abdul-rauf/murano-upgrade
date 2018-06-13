@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,12 +9,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('modules/Import/views/ImportView.php');
-require_once('modules/Import/sources/ImportFile.php');
-require_once('modules/Import/ImportFileSplitter.php');
-require_once('modules/Import/CsvAutoDetect.php');
 
-require_once('include/upload_file.php');
 
 class ImportViewConfirm extends ImportView
 {
@@ -52,7 +46,7 @@ class ImportViewConfirm extends ImportView
         $importSource = $this->request->getValidInputRequest('source', array('Assert\Choice' => array('choices' => self::getImportSourceOptions())), 'csv');
 
         // Clear out this user's last import
-        $seedUsersLastImport = BeanFactory::getBean('Import_2');
+        $seedUsersLastImport = BeanFactory::newBean('Import_2');
         $seedUsersLastImport->mark_deleted_by_user_id($current_user->id);
         ImportCacheFiles::clearCacheFiles();
 
@@ -320,7 +314,6 @@ class ImportViewConfirm extends ImportView
         global $locale, $current_user;
         $cur_id = isset($field_map['importlocale_currency'])? $field_map['importlocale_currency'] : $locale->getPrecedentPreference('currency', $current_user);
         // get currency preference
-        require_once('modules/Currencies/ListCurrency.php');
         $currency = new ListCurrency();
         if($cur_id)
             $selectCurrency = $currency->getSelectOptions($cur_id);

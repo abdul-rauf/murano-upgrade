@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
- require_once('include/ListView/ListViewSmarty.php');
 
 
  /**
@@ -36,14 +34,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  	var $id_field = 'id';
  	var $prefix = '';
  	var $mod_strings = array();
-
-     /**
-      * @deprecated Use __construct() instead
-      */
-     public function ListViewFacade($focus, $module, $type = 0)
-     {
-         self::__construct($focus, $module, $type);
-     }
 
  	/**
  	 * Constructor
@@ -142,3 +132,4 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 		$this->title = $title;
 	}
  }
+

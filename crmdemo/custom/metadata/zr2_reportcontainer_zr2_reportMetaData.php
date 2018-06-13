@@ -1,6 +1,6 @@
 <?php
-// created: 2012-06-15 10:55:29
-$dictionary["zr2_reportcontainer_zr2_report"] = array (
+// created: 2018-06-13 14:43:30
+$dictionary['zr2_reportcontainer_zr2_report'] = array (
   'true_relationship_type' => 'one-to-many',
   'relationships' => 
   array (
@@ -21,18 +21,18 @@ $dictionary["zr2_reportcontainer_zr2_report"] = array (
   'table' => 'zr2_reportcontainer_zr2_report_c',
   'fields' => 
   array (
-    0 => 
+    'id' => 
     array (
       'name' => 'id',
       'type' => 'varchar',
       'len' => 36,
     ),
-    1 => 
+    'date_modified' => 
     array (
       'name' => 'date_modified',
       'type' => 'datetime',
     ),
-    2 => 
+    'deleted' => 
     array (
       'name' => 'deleted',
       'type' => 'bool',
@@ -40,13 +40,13 @@ $dictionary["zr2_reportcontainer_zr2_report"] = array (
       'default' => '0',
       'required' => true,
     ),
-    3 => 
+    'zr2_reportcontainer_zr2_reportzr2_reportcontainer_ida' => 
     array (
       'name' => 'zr2_reportcontainer_zr2_reportzr2_reportcontainer_ida',
       'type' => 'varchar',
       'len' => 36,
     ),
-    4 => 
+    'zr2_reportcontainer_zr2_reportzr2_report_idb' => 
     array (
       'name' => 'zr2_reportcontainer_zr2_reportzr2_report_idb',
       'type' => 'varchar',

@@ -306,7 +306,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '회계 연도 시작일',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '예측모듈에 사용될 기간을 구성하십시요. <br />회계연도의 시작일을 선택함으로 시작되며 예측 하고자하는 기간을 선택합니다. 날짜 기간은 자동으로 선택사항에 기초하여 계산됩니다. 하위 기간은 예측 워크시트에 근거합니다.<br />볼수있는 미래와 과거 기간은 보기가능한 예측모듈의 하위기간을 지정합니다. 사용자는 볼수있는 하위기간의 예측 숫자를 보거나 편집할수 있습니다.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}}을 태그할 방식을 구성하십시요. (예를 들어 어느 {{forecastByModule}}이 예측 번호에 포함될지 포함되지 않을지). 범위 개수와 범위별 가능성을 지정할수 있습니다. 어떠한 가능성은 상응하는 범위의 초기지정이 됩니다. 초기 태그후 사용자가 가치를 수동으로 조정할수 있습니다. 오직 포함된 범위의 {{forecastByModule}}만이 매니저에게 보고됩니다.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} 분류 방법을 설정하십시오. <br><br>레인지 설정은 1차 커밋 후 변경할 수 없다는 점을 참고하시기 바랍니다. 업그레이드된 인스턴스에 한하여, 범위 설정은 기존 예측 데이터에 잠겨 있습니다. <br><br>확률 기반 분류를 2가지 이상 선택할 수 있으며, 확률에 기반하지 않은 분류 생성 또한 가능합니다. <br><br>사용자 지정 분류의 좌측에 위치한 확인란은 사용된 예측량 내에서 어느 범위가 포함될 것인지 결정하고 관리자에게 보고될 것인지 결정할 때 사용하십시오. <br><br>사용자는 워크시트에서 수동으로 {{forecastByModule}}의 상태 및 범위 포함 여부를 결정할 수 있습니다.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => '각각의  {{forecastByModuleSingular}}를 위한 사용자가 예측지를 완성하도록 칼럼을 선택하십시요. 가능 금액은 {{forecastByModule}}에 나타나는 금액과 같으며 이러한 이유로 가능 금액을 숨길수 없습니다.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '예측모듈에서 보고자하는 칼럼을 선택하십시요. 필드목록을 기획자료를 포함하며 사용자가 보기을 구성하도록 선택할수 있게 합니다.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'how-to text!에 의한 예측 플레이스 홀더입니다.',

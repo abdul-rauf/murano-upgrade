@@ -587,7 +587,7 @@
             clear = (clear === "1");
             app.logger.debug("Logging out: " + clear);
             app.logout({
-                complete: function() {
+                complete() {
                     app.router.navigate("#");
                     if (clear) {
                         //We have to reload to clear any sensitive data from browser tab memory.
@@ -605,9 +605,9 @@
                         }
                     }
                 },
-                success: function(data, request) {
-                    app.events.trigger("app:logout:success", data);
-                }
+                success(data) {
+                    app.events.trigger('app:logout:success', data);
+                },
             }, clear);
         },
 

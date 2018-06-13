@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'انقر لتحرير هذه الوحدة.',
         'moduleHelp'=> 'حدد مكون الوحدة الذي ترغب في تحريره',
         'fieldsBtn'	=> 'قم بتحرير المعلومات المخزنة في الوحدة من خلال التحكم في <b>الحقول</b> الموجودة في الوحدة.<br/><br/>يمكنك تحرير وإنشاء الحقول المخصصة هنا.',
-        'labelsBtn' => 'انقر فوق <b>حفظ</b>لحفظ ملصقاتك المخصصة.'	,
         'layoutsBtn'=> 'قم بتخصيص <b>مخططات</b> عرض التحرير، والتفاصيل، والقائمة، والبحث.',
         'subpanelBtn'=> 'قم بتحرير المعلومات التي يتم عرضها في اللوحات الفرعية لهذه الوحدات.',
         'layoutsHelp'=> 'حدد <b>تصميمًا لتحريره</b>.<br/<br/>لتغيير التصميم الذي يحتوي على حقول البيانات لإدخال البيانات، انقر على <b>تحرير طريقة العرض</b>.<br/><br/>لتغيير التصميم الذي يعرض البيانات التي يتم إدخالها في الحقول في عرض التحرير، انقر على <b>عرض التفاصيل</b>.<br/><br/>لتغيير الأعمدة التي تظهر في القائمة الافتراضية، انقر على <b>عرض القائمة</b>.<br/><br/>لتغيير مخططات النموذج الأساسي والمتقدم، انقر على <b>بحث</b>.',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'هل أنت متأكد من رغبتك في حذف مرحلة مبيعات العملية المغلقة التي تمت خسارتها؟ يؤدي حذف هذه المرحلة إلى عدم عمل وحدة التوقعات بالشكل الصحيح',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'هل أنت متأكد من رغبتك في حذف هذه العلاقة؟<br>ملاحظة: قد لا تكتمل هذه العملية لعدة دقائق.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'وسيجعل ذلك هذه العلاقة دائمة. هل أنت متأكد من رغبتك في توزيع هذه العلاقة؟',
 'LBL_CONFIRM_DONT_SAVE' => 'تم إجراء تغييرات منذ أن قمت بحفظها، هل ترغب في حفظ تلك التغييرات؟',

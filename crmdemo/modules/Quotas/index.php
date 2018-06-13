@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -24,7 +23,6 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 /* Requires to get the Currencies available to use */
 
-require_once('modules/Currencies/ListCurrency.php');
 
 $header_text = '';
 global $mod_strings;
@@ -34,7 +32,7 @@ global $current_user;
 global $sugar_config;
 
 $db = DBManagerFactory::getInstance();
-$focus = BeanFactory::getBean('Quotas');
+$focus = BeanFactory::newBean('Quotas');
 $currency = new ListCurrency();
 $params = array();
 $params[] = "<a href='index.php?module=Forecasts&action=index'>{$mod_strings['LBL_MODULE_FORECASTS_NAME']}</a>";

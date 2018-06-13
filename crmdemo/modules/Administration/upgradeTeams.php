@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -23,12 +22,11 @@ if(isset($globalteam->name)){
     $globalteam->create_team("Global", $mod_strings['LBL_GLOBAL_TEAM_DESC'], $globalteam->global_team);
 }
 
-require_once 'modules/SNIP/SugarSNIP.php';
 $results = $GLOBALS['db']->query("SELECT id, user_name FROM users WHERE default_team != '' AND default_team IS NOT NULL
     AND user_name NOT IN (" . $GLOBALS['db']->quoted(SugarSNIP::SNIP_USER) . ", 'SugarCustomerSupportPortalUser')");
 
-$team = BeanFactory::getBean('Teams');
-$user = BeanFactory::getBean('Users');
+$team = BeanFactory::newBean('Teams');
+$user = BeanFactory::newBean('Users');
 while($row = $GLOBALS['db']->fetchByAssoc($results)) {
 	$results2 = $GLOBALS['db']->query("SELECT id, name FROM teams WHERE associated_user_id = '" . $row['id'] . "'");
 	$row2 = $GLOBALS['db']->fetchByAssoc($results2);

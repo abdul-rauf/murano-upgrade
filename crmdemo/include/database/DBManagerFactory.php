@@ -11,7 +11,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/database/DBManager.php');
+use Doctrine\DBAL\DriverManager as DoctrineDriverManager;
+use Sugarcrm\Sugarcrm\Dbal\Connection;
+use Sugarcrm\Sugarcrm\Dbal\Logging\SugarLogger;
+use Doctrine\DBAL\Logging\SQLLogger;
 
 /**
  * Database driver factory
@@ -20,7 +23,13 @@ require_once('include/database/DBManager.php');
  */
 class DBManagerFactory
 {
+    /**
+     * @var DBManager[]
+     */
     static $instances = array();
+
+    /** @var SQLLogger instance of Doctrine Dbal logger class */
+    protected static $dbalLogger;
 
     /**
      * Returns a reference to the DB object of specific type
@@ -34,33 +43,11 @@ class DBManagerFactory
         global $sugar_config;
 
         if(empty($config['db_manager'])) {
-            // standard types
-            switch($type) {
-                case "mysql":
-                    if (empty($sugar_config['mysqli_disabled']) && function_exists('mysqli_connect')) {
-                        $my_db_manager = 'MysqliManager';
-                    } else {
-                        $my_db_manager = "MysqlManager";
-                    }
-                    break;
-                case "mssql":
-                  	if ( function_exists('sqlsrv_connect')
-                                && (empty($config['db_mssql_force_driver']) || $config['db_mssql_force_driver'] == 'sqlsrv' )) {
-                        $my_db_manager = 'SqlsrvManager';
-                    } elseif (self::isFreeTDS()
-                                && (empty($config['db_mssql_force_driver']) || $config['db_mssql_force_driver'] == 'freetds' )) {
-                        $my_db_manager = 'FreeTDSManager';
-                    } else {
-                        $my_db_manager = 'MssqlManager';
-                    }
-                    break;
-                default:
-                    $my_db_manager = self::getManagerByType($type, false);
-                    if(empty($my_db_manager)) {
-                        display_stack_trace();
-                        $GLOBALS['log']->fatal("unable to load DB manager for: $type");
-                        sugar_die("Cannot load DB manager");
-                    }
+            $my_db_manager = self::getManagerByType($type, false);
+            if (empty($my_db_manager)) {
+                display_stack_trace();
+                $GLOBALS['log']->fatal("unable to load DB manager for: $type");
+                sugar_die("Cannot load DB manager");
             }
         } else {
             $my_db_manager = $config['db_manager'];
@@ -124,6 +111,84 @@ class DBManagerFactory
     }
 
     /**
+     * Returns Doctrine connection for the given database instance
+     *
+     * @param string $instanceName Name of the instance
+     * @return \Sugarcrm\Sugarcrm\Dbal\Connection
+     */
+    public static function getConnection($instanceName = '')
+    {
+        return self::getInstance($instanceName)->getConnection();
+    }
+
+    /**
+     * Creates Doctrine connection for the given database instance
+     *
+     * @param DBManager $instance Database instance
+     * @return Doctrine\DBAL\Connection
+     * @throws Exception
+     * @throws Doctrine\DBAL\DBALException
+     */
+    public static function createConnection(DBManager $instance)
+    {
+        static $driverMap = array(
+            'mysqli' => 'Sugarcrm\Sugarcrm\Dbal\Mysqli\Driver',
+            'sqlsrv' => 'Sugarcrm\Sugarcrm\Dbal\SqlSrv\Driver',
+        );
+
+        if (!isset($driverMap[$instance->variant])) {
+            throw new Exception('Unsupported DB driver ' . $instance->variant);
+        }
+
+        $params = array(
+            'wrapperClass' => Connection::class,
+            'driverClass' => $driverMap[$instance->variant],
+            'connection' => $instance->getDatabase(),
+        );
+
+        // we only need the to fix case on Oracle and IBM DB2, and we do not on SQL Server,
+        // as its built-in stored procedures produce upper-cased keys which SqlSrvManager expects and can handle
+        if ($instance->variant === 'oci8' || $instance->variant === 'ibm_db2') {
+            $params = array_merge($params, array(
+                'portability' => Connection::PORTABILITY_FIX_CASE,
+                'fetch_case' => PDO::CASE_LOWER,
+            ));
+        }
+
+        $conn = DoctrineDriverManager::getConnection($params);
+
+        $logger = self::getDbalLogger();
+        $conn->getConfiguration()->setSQLLogger($logger);
+
+        return $conn;
+    }
+
+    /**
+     * Get DbalLogger instance
+     *
+     * @return SQLLogger
+     */
+    public static function getDbalLogger()
+    {
+        if (!self::$dbalLogger) {
+            self::$dbalLogger = new SugarLogger($GLOBALS['log']);
+        }
+
+        return self::$dbalLogger;
+    }
+
+    /**
+     * Set Dbal logger instance for DBManagerFactory class
+     *
+     * @param SQLLogger $logger
+     */
+    public static function setDbalLogger(SQLLogger $logger)
+    {
+        self::$dbalLogger = $logger;
+    }
+
+
+    /**
      * Disconnect all DB connections in the system
      */
     public static function disconnectAll()
@@ -174,6 +239,10 @@ class DBManagerFactory
             require_once("$dir/$name");
             $classname = substr($name, 0, -4);
             if(!class_exists($classname)) continue;
+            $re = new ReflectionClass($classname);
+            if ($re->isAbstract()) {
+                continue;
+            }
             $driver = new $classname;
             if(!$validate || $driver->valid()) {
                 if(empty($drivers[$driver->dbType])) {
@@ -218,26 +287,4 @@ class DBManagerFactory
         }
         return $result;
     }
-
-    /**
-     * Check if we have freeTDS driver installed
-     * Invoked when connected to mssql. checks if we have freetds version of mssql library.
-	 * the response is put into a global variable.
-     * @return bool
-     */
-    public static function isFreeTDS()
-    {
-        static $is_freetds = null;
-
-        if($is_freetds === null) {
-    		ob_start();
-    		phpinfo(INFO_MODULES);
-    		$info=ob_get_contents();
-    		ob_end_clean();
-
-    		$is_freetds = (strpos($info,'FreeTDS') !== false);
-        }
-
-        return $is_freetds;
-     }
 }

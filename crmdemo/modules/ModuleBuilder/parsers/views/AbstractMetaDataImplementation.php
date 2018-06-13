@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,8 +18,6 @@ require_once 'modules/ModuleBuilder/parsers/constants.php';
  * - Deployed modules (such as OOB modules and deployed ModuleBuilder modules) that are located in the /modules directory and have metadata in modules/<name>/metadata and in the custom directory
  * - WIP modules which are being worked on in ModuleBuilder and that are located in custom
  */
-
-require_once 'modules/ModuleBuilder/parsers/views/History.php';
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
@@ -60,6 +57,7 @@ abstract class AbstractMetaDataImplementation
     MB_POPUPSEARCH              => 'popupMeta',
     MB_POPUPLIST                => 'popupMeta',
     MB_LISTVIEW                 => 'listViewDefs',
+    MB_SIDECARQUOTEDATAGROUPLIST => 'viewdefs',
     MB_SIDECARLISTVIEW          => 'viewdefs',
     MB_SIDECARPOPUPVIEW         => 'viewdefs',
     MB_SIDECARDUPECHECKVIEW     => 'viewdefs',
@@ -221,15 +219,6 @@ abstract class AbstractMetaDataImplementation
     public function setViewClientFromView()
     {
         if (!empty($this->_view)) {
-            /*
-            if (strpos($this->_view, 'portal') !== false) {
-                $this->_viewClient = 'portal';
-            } elseif (strpos($this->_view, 'wireless') !== false || strpos($this->_view, 'mobile') !== false) {
-                $this->_viewClient = 'mobile';
-            } else {
-                $this->_viewClient = 'base';
-            }
-            */
             $this->_viewClient = MetaDataFiles::getViewClient($this->_view);
         }
     }
@@ -441,7 +430,7 @@ abstract class AbstractMetaDataImplementation
         SugarAutoLoader::addToMap($filename);
     }
 
-    /*
+    /**
      * Fielddefs are obtained from two locations:
      *
      * 1. The starting point is the module's fielddefs, sourced from the Bean

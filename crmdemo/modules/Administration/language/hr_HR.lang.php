@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -769,7 +768,6 @@ s bilo kojim izrazom regexa. Uobičajeni izrazi ne smiju uključivati graničnik
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Nedostupne teme',
     'LBL_TIMEZONE' => 'Vremenska zona',
     'LBL_TO'    => ' za ',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Odaberite koji se sustav i podaci o korisniku prate',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatski',
     'LBL_UPDATE_CHECK_MANUAL'=>'Ručno',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Automatski provjeri ima li ažuriranja</B> - Ako je označeno, sustav će redovito provjeravati jesu li dostupne ažurirane verzije aplikacije.',
@@ -936,8 +934,6 @@ s bilo kojim izrazom regexa. Uobičajeni izrazi ne smiju uključivati graničnik
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Datoteka config.php uspješno je ponovno izgrađena.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Upozorenje: vaša konfiguracija PHP-a mora se promijeniti da bi se mogle slati datoteke od barem 6 MB. Izmijenite vrijednost upload_max_filesize u svojoj datoteci php.ini koja se nalazi u:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Omogućite zapisivanje u datoteku config.php i pokušajte ponovno.',
-    'MSG_REBUILD_EXTENSIONS' => 'Idite na zaslon <a href="index.php?module=Administration&action=Upgrade">Popravak</a> i kliknite na Ponovnu izgradnju proširenja.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Idite na zaslon <a href="index.php?module=Administration&action=Upgrade">Popravak</a> i kliknite na Ponovnu izgradnju odnosa.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Trenutno nema omogućenih izvanmrežnih klijenata.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Jeste li sigurni da želite onemogućiti ovaj izvanmrežni klijent?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Jeste li sigurni da želite omogućiti ovaj izvanmrežni klijent?',
@@ -1047,7 +1043,7 @@ s bilo kojim izrazom regexa. Uobičajeni izrazi ne smiju uključivati graničnik
 'ML_ISSUES'=>'Problemi',
 'ML_MANIFEST_ISSUE'=>'Problem u vezi s manifestom',
 'ML_CONFIG_OVERRIDE'=>'Izmjena konfiguracije nije dozvoljena',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Ključ - može se sastojati samo od slova, brojeva i podvlaka. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Konfigurirajte navigacijsku traku Brzo stvaranje',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Odaberite module koji su dostupni u navigacijskoj traci za brzo stvaranje',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Izaberite module za koje korisnike mogu brzo stvoriti zapise s pomoću ikone Plus na gornjoj navigacijskoj traci. Povucite i ispustite module između okvira Omogućeni moduli i Onemogućeni moduli.',
@@ -1095,7 +1091,6 @@ s bilo kojim izrazom regexa. Uobičajeni izrazi ne smiju uključivati graničnik
 	'Manufacturers'  => 'Proizvođač',
 	'ProductBundleNotes' => 'BilješkaPaketaProizvoda',
 	'ProductBundles'   => 'PaketProizvoda',
-	'ProjectResources' => 'IzvorProjekta',
 
 	'Relationships' => 'Odnos',
 	'Releases'       => 'Objava',
@@ -1105,7 +1100,6 @@ s bilo kojim izrazom regexa. Uobičajeni izrazi ne smiju uključivati graničnik
 	'SchedulersJobs'  => 'PosaoPlanera',
 	'Shippers'       => 'Otpremnik',
 	'TaxRates'       => 'PoreznaStopa',
-	'TeamHierarchies'  => 'HijerarhijaTima',
 	'TeamMemberships'   => 'ČlanstvoUTimu',
 	'TeamNotices'    => 'ObavijestZaTim',
 	'TeamSetModules'   => 'ModulSkupinaTima',

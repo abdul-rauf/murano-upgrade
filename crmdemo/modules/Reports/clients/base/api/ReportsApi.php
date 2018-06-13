@@ -10,9 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/RecordListFactory.php');
-require_once('modules/Reports/Report.php');
-require_once('clients/base/api/ModuleApi.php');
 
 class ReportsApi extends ModuleApi
 {
@@ -32,13 +29,13 @@ class ReportsApi extends ModuleApi
 
     /**
      * Creates a record list from a saved report
-     * @param $api ServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
-     * @param $args array The arguments array passed in from the API containing the module and the records
+     * @param ServiceBase $api The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
+     * @param array $args The arguments array passed in from the API containing the module and the records
      * @throws SugarApiExceptionNotAuthorized
      * @throws SugarApiException
      * @return array id, module, records
      */
-    public function createRecordList($api, $args)
+    public function createRecordList(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array("record"));
 

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -19,7 +18,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 
-require_once('include/SugarObjects/templates/person/Person.php');
 
 // Employee is used to store customer information.
 class Employee extends Person {
@@ -83,7 +81,7 @@ class Employee extends Person {
 		parent::__construct();
 		$this->setupCustomFields('Users');
 		$this->disable_row_level_security =true;
-		$this->emailAddress = BeanFactory::getBean('EmailAddresses');
+		$this->emailAddress = BeanFactory::newBean('EmailAddresses');
 	}
 
 
@@ -158,14 +156,13 @@ class Employee extends Person {
 	function update_team_memberships($old_reports_to_id)
 	{
 
-		$team = BeanFactory::getBean('Teams');
+		$team = BeanFactory::newBean('Teams');
 		$team->user_manager_changed($this->id, $old_reports_to_id, $this->reports_to_id);
 	}
 
 	function preprocess_fields_on_save(){
 		parent::preprocess_fields_on_save();
 
-        require_once('include/upload_file.php');
 		$upload_file = new UploadFile("picture");
 
 		//remove file

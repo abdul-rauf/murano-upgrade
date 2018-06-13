@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -33,7 +32,7 @@ $data = array(
 );
 
 if (!empty($_REQUEST['listViewExternalClient'])) {
-    $email = BeanFactory::getBean('Emails');
+    $email = BeanFactory::newBean('Emails');
 	$module = InputValidation::getService()->getValidInputRequest('action_module', 'Assert\Mvc\ModuleName');
 	$uid = InputValidation::getService()->getValidInputRequest('uid', array('Assert\Delimited' => array('constraints' => 'Assert\Guid')));
     echo $email->getNamePlusEmailAddressesForCompose($module, $uid);
@@ -116,7 +115,7 @@ function generateComposeDataPackage($data,$forFullCompose = TRUE, $bean = null)
 			$subject = str_replace('%1', $bean->case_number, $bean->getEmailSubjectMacro() . " ". from_html($bean->name)) ;//bug 41928
 			$bean->load_relationship("contacts");
 			$contact_ids = $bean->contacts->get();
-			$contact = BeanFactory::getBean('Contacts');
+			$contact = BeanFactory::newBean('Contacts');
 			foreach($contact_ids as $cid)
 			{
 				$contact->retrieve($cid);
@@ -146,19 +145,18 @@ function generateComposeDataPackage($data,$forFullCompose = TRUE, $bean = null)
 	);
 } else if(isset($_REQUEST['ListView'])) {
 
-	$email = BeanFactory::getBean('Emails');
+	$email = BeanFactory::newBean('Emails');
 	$namePlusEmail = $email->getNamePlusEmailAddressesForCompose($_REQUEST['action_module'], (explode(",", $_REQUEST['uid'])));
 	$ret = array(
 		'to_email_addrs' => $namePlusEmail,
 		);
 	} else if (isset($data['replyForward'])) {
 
-		require_once("modules/Emails/EmailUI.php");
 
 		$ret = array();
-		$ie = BeanFactory::getBean('InboundEmail');
+		$ie = BeanFactory::newBean('InboundEmail');
         $ie->disable_row_level_security = true;
-		$ie->email = BeanFactory::getBean('Emails');
+		$ie->email = BeanFactory::newBean('Emails');
 		$ie->email->email2init();
 		$replyType = $data['reply'];
 		$email_id = $data['record'];
@@ -238,7 +236,6 @@ function getQuotesRelatedData($bean,$data) {
 	$return = array();
 	$emailId = $data['recordId'];
 
-  	require_once("modules/Emails/EmailUI.php");
 	$email = BeanFactory::getBean('Emails', $emailId);
 	$return['subject'] = $email->name;
 	$return['body'] = from_html($email->description_html);

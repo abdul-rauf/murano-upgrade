@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point'); 
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -30,7 +29,7 @@ global $current_user;
 		
 <?php
 $current_row=1;
-$tracker = BeanFactory::getBean('Trackers');
+$tracker = BeanFactory::newBean('Trackers');
 $history = $tracker->get_recently_viewed($current_user->id);
 
 foreach($history as $row)

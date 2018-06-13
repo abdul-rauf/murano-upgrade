@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,7 +27,7 @@ global $app_list_strings;
 global $mod_strings;
 global $current_user;
 
-$focus = BeanFactory::getBean('Roles');
+$focus = BeanFactory::newBean('Roles');
 
 if(isset($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
@@ -60,7 +59,6 @@ $xtpl->assign("NAME", $focus->name);
 $xtpl->assign("DESCRIPTION", $focus->description);
 
 require_once("include/templates/TemplateGroupChooser.php");
-require_once("modules/MySettings/TabController.php");
 
 $chooser = new TemplateGroupChooser();
 $controller = new TabController();

@@ -1,6 +1,4 @@
 <?php
-if (! defined ( 'sugarEntry' ) || ! sugarEntry)
-    die ( 'Not A Valid Entry Point' ) ;
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +10,6 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once ('modules/ModuleBuilder/parsers/ModuleBuilderParser.php') ;
 
 class ParserLabel extends ModuleBuilderParser
 {
@@ -22,14 +19,6 @@ class ParserLabel extends ModuleBuilderParser
      * @var ModuleInstaller
      */
     protected static $moduleInstaller;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ParserLabel($moduleName, $packageName = '')
-    {
-        self::__construct($moduleName, $packageName);
-    }
 
     public function __construct($moduleName, $packageName = '')
     {
@@ -73,7 +62,6 @@ class ParserLabel extends ModuleBuilderParser
      */
     protected function saveModuleLists($language, array $labels)
     {
-        require_once 'modules/Studio/wizards/RenameModules.php';
         $wizard = new RenameModules();
         $moduleLists = array(
             'LBL_MODULE_NAME' => 'moduleList',
@@ -312,3 +300,4 @@ class ParserLabel extends ModuleBuilderParser
         self::$moduleInstaller->rebuild_languages(array($language => $language), array($moduleName));
     }
 }
+

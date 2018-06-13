@@ -10,5 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-    'LBL_BUNDLE_NOTE_POSITION' => '產品搭售方案位置'
+    'LBL_BUNDLE_NOTE_POSITION' => '產品搭售方案位置',
+    'LBL_PRODUCT_BUNDLE_NOTES_QUOTE_DATA_LIST' => '產品同捆記錄報價資料清單',
 );

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -146,7 +145,6 @@ class UnifiedSearchAdvanced {
 		$unified_search_modules_display = $this->getUnifiedSearchModulesDisplay();
 
 
-		require_once 'include/ListView/ListViewSmarty.php';
 
 		global $modListHeader, $beanList, $beanFiles, $current_language, $app_strings, $current_user, $mod_strings;
 		$home_mod_strings = return_module_language($current_language, 'Home');
@@ -200,7 +198,7 @@ class UnifiedSearchAdvanced {
 
 		if(!empty($this->query_string)) {
 			foreach($modules_to_search as $moduleName => $beanName) {
-			    $seed = BeanFactory::getBean($moduleName);
+			    $seed = BeanFactory::newBean($moduleName);
 
                 $lv = new ListViewSmarty();
                 $lv->lvd->additionalDetails = false;
@@ -277,7 +275,6 @@ class UnifiedSearchAdvanced {
                           $where_clauses[] = $dbfield . " LIKE '" . $this->query_string . "%'";
                           $params['custom_select'] .= ", $dbfield";
                           $params['distinct'] = true;
-                          //$filterFields[$dbfield] = $dbfield;
                     }
                 }
 
@@ -322,11 +319,9 @@ class UnifiedSearchAdvanced {
                 $module_counts[$moduleName] = $lv->data['pageData']['offsets']['total'];
 
                 if($lv->data['pageData']['offsets']['total'] == 0) {
-                    //$module_results[$moduleName] .= "<li class='noBullet' id='whole_subpanel_{$moduleName}'><div id='div_{$moduleName}'><h2>" . $home_mod_strings['LBL_NO_RESULTS_IN_MODULE'] . '</h2></div></li>';
                     $module_results[$moduleName] .= '<h2>' . $home_mod_strings['LBL_NO_RESULTS_IN_MODULE'] . '</h2>';
                 } else {
                     $has_results = true;
-                    //$module_results[$moduleName] .= "<li class='noBullet' id='whole_subpanel_{$moduleName}'><div id='div_{$moduleName}'>" . $lv->display(false, false) . '</div></li>';
                     $module_results[$moduleName] .= $lv->display(false, false);
                 }
 
@@ -443,8 +438,6 @@ class UnifiedSearchAdvanced {
         // Why do we have the 2nd foreach loop isn't the caching happening in getUnifiedSearchModulesDisplay already?
         // This code needs to be consolidated.
 
-        //require_once('modules/Home/UnifiedSearchAdvanced.php');
-        //$usa = new UnifiedSearchAdvanced();
         $modLists = $this->retrieveEnabledAndDisabledModules();
 
         foreach ($modLists as $list)
@@ -646,17 +639,4 @@ class UnifiedSearchAdvanced {
         SugarCache::cleanFile('custom/modules/unified_search_modules_display.php');
 	    return true;
 	}
-}
-
-
-function unified_search_modules_cmp($a, $b) {
-	if(!isset($a['translated']) || !isset($b['translated']))
-	{
-	   return 0;
-	}
-
-	$name1 = strtolower($a['translated']);
-	$name2 = strtolower($b['translated']);
-
-	return $name1 < $name2 ? -1 : 1;
 }

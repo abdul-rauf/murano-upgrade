@@ -10,11 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/ModuleBuilder/parsers/views/MetaDataImplementationInterface.php';
-require_once 'modules/ModuleBuilder/parsers/views/AbstractMetaDataImplementation.php';
 require_once 'modules/ModuleBuilder/parsers/constants.php';
-require_once 'include/MetaDataManager/MetaDataConverter.php';
-require_once 'include/MetaDataManager/MetaDataManager.php';
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
@@ -54,7 +50,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
      */
     public function __construct($loadedModule, $client = 'base')
     {
-        $this->bean = BeanFactory::getBean($loadedModule);
+        $this->bean = BeanFactory::newBean($loadedModule);
         if (empty($this->bean)) {
             throw new Exception("Bean was not provided");
         }
@@ -160,7 +156,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
      * @param array defs Layout definition in the same format as received by the constructor
      */
 
-    public function deploy($defs)
+    public function deploy($defs, $clearCache = true)
     {
         // We are saving to the custom file
         $savefile = $this->getMetadataFilename(MB_CUSTOMMETADATALOCATION);
@@ -202,8 +198,10 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
             SugarAutoLoader::unlink($workingFilename);
         }
 
-        // clear the cache for this module
-        MetaDataManager::refreshModulesCache(array($this->_moduleName));
+        if ($clearCache) {
+            // clear the cache for this module
+            MetaDataManager::refreshModulesCache(array($this->_moduleName));
+        }
         return $ret;
     }
 

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,7 +21,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 global $mod_strings;
 
-$focus = BeanFactory::getBean('EmailMarketing');
+$focus = BeanFactory::newBean('EmailMarketing');
 
 if(!isset($_REQUEST['record'])) {
 	sugar_die($mod_strings['LBL_SPECIFY_RECORD_NUM']);

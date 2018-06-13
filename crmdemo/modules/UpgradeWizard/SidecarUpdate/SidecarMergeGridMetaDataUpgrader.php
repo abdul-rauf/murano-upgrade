@@ -1209,7 +1209,7 @@ END;
     public function needsTwitterConversion()
     {
         // Get the bean for this module since we might need it
-        $bean = BeanFactory::getBean($this->module);
+        $bean = BeanFactory::newBean($this->module);
 
         if (!empty($bean)) {
             // Check our type

@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/api/SugarApi.php');
-require_once('include/SugarQuery/SugarQuery.php');
 
 class ReportsDashletsApi extends SugarApi
 {
@@ -41,11 +39,11 @@ class ReportsDashletsApi extends SugarApi
     /**
      * Retrieves all saved reports that meet args-driven criteria
      *
-     * @param $api ServiceBase The API class of the request
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request
+     * @param array $args The arguments array passed in from the API
      * @return array
      */
-    public function getSavedReports($api, $args)
+    public function getSavedReports(ServiceBase $api, array $args)
     {
         // Make sure the user isn't seeing reports they don't have access to
         require_once('modules/Reports/SavedReport.php');
@@ -53,7 +51,7 @@ class ReportsDashletsApi extends SugarApi
         $fieldList = array('id', 'name', 'module', 'report_type', 'content', 'chart_type', 'assigned_user_id');
 
         $sq = new SugarQuery();
-        $sq->from(BeanFactory::getBean('Reports'));
+        $sq->from(BeanFactory::newBean('Reports'));
         $sq->select($fieldList);
         $sq->orderBy('name', 'asc');
 
@@ -90,13 +88,12 @@ class ReportsDashletsApi extends SugarApi
     /**
      * Retrieves a saved report and chart data, given a report ID in the args
      *
-     * @param $api ServiceBase The API class of the request
-     * @param $args array The arguments array passed in from the API
+     * @param ServiceBase $api The API class of the request
+     * @param array $args The arguments array passed in from the API
      * @return array
      */
-    public function getSavedReportChartById($api, $args)
+    public function getSavedReportChartById(ServiceBase $api, array $args)
     {
-        require_once("include/SugarCharts/ChartDisplay.php");
 
         $chartReport = $this->getSavedReportById($args['reportId']);
 
@@ -113,7 +110,6 @@ class ReportsDashletsApi extends SugarApi
 
             $this->title = $chartReport->name;
 
-            require_once("modules/Reports/Report.php");
 
             $reporter = new Report($chartReport->content);
             $reporter->saved_report_id = $chartReport->id;
@@ -168,7 +164,7 @@ class ReportsDashletsApi extends SugarApi
      */
     protected function getSavedReportFromData($row)
     {
-        $savedReport = BeanFactory::getBean('Reports');
+        $savedReport = BeanFactory::newBean('Reports');
         $savedReport->populateFromRow($row);
         return $savedReport;
     }

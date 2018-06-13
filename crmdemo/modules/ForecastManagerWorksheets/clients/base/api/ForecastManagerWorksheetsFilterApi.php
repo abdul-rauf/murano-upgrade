@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/FilterApi.php');
 class ForecastManagerWorksheetsFilterApi extends FilterApi
 {
 
@@ -240,7 +239,7 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
         // check to see if we need to return the target quota with the chartData
         if (isset($args['target_quota']) && $args['target_quota'] == 1) {
             /* @var $quota Quota */
-            $quota = BeanFactory::getBean('Quotas');
+            $quota = BeanFactory::newBean('Quotas');
             $targetQuota = $quota->getRollupQuota($args['timeperiod_id'], $args['user_id'], true);
             $chartData['target_quota'] = $targetQuota['amount'];
         }
@@ -303,7 +302,8 @@ class ForecastManagerWorksheetsFilterApi extends FilterApi
         if (!empty($args['filter'])) {
             // todo-sfa: clean this up as it currently doesn't handle much in the way of nested arrays
             foreach ($args['filter'] as $key => $filter) {
-                $filter_key = array_shift(array_keys($filter));
+                $filterKeys = array_keys($filter);
+                $filter_key = array_shift($filterKeys);
                 // if the key is assigned_user_id, take the value and save it for later
                 if ($found_assigned_user == false && $filter_key == 'assigned_user_id') {
                     $found_assigned_user = array_pop($filter);

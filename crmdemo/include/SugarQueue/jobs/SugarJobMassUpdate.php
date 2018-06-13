@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,12 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 
-require_once('include/MassUpdate.php');
-require_once('include/SugarQueue/SugarJobQueue.php');
-require_once('modules/SchedulersJobs/SchedulersJob.php');
-require_once 'include/api/SugarApi.php';
-require_once('include/api/RestService.php');
-require_once('clients/base/api/FilterApi.php');
 
 /**
  * @api

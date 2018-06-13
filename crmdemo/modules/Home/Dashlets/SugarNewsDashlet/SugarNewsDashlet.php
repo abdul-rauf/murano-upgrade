@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/Dashlets/Dashlet.php');
 
 
 class SugarNewsDashlet extends Dashlet {
@@ -19,14 +17,6 @@ class SugarNewsDashlet extends Dashlet {
     var $configureTpl = 'modules/Home/Dashlets/SugarNewsDashlet/configure.tpl';
     var $defaultURL = 'http://apps.sugarcrm.com/dashlet/sugarcrm-news-dashlet.html?lang=@@LANG@@&edition=@@EDITION@@&ver=@@VER@@';
     var $url;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarNewsDashlet($id, $options = null)
-    {
-        self::__construct($id, $options);
-    }
 
     public function __construct($id, $options = null)
     {
@@ -92,13 +82,15 @@ class SugarNewsDashlet extends Dashlet {
         return $options;
     }
 
-    function display(){
+    public function display($text = '')
+    {
         $sugar_edition = 'PRO';
 
         $out_url = str_replace(
             array('@@LANG@@','@@VER@@','@@EDITION@@'),
             array($GLOBALS['current_language'],$GLOBALS['sugar_config']['sugar_version'],$sugar_edition),
             $this->url);
-        return parent::display() . "<iframe class='teamNoticeBox' title='{$out_url}' src='{$out_url}' height='{$this->height}px'></iframe>";
+        return parent::display($text)
+            . "<iframe class='teamNoticeBox' title='{$out_url}' src='{$out_url}' height='{$this->height}px'></iframe>";
     }
 }

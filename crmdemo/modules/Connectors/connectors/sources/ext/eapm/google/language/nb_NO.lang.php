@@ -17,8 +17,8 @@ Få en API-nøkkel og -hemmelighet fra Google ved å registrere Sugar-forekomste
 <br/><br/>
 <ol>
 <li>Gå til Google Developers-siden:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Logg på med Google-kontoen du vil registrere i programmet..</li>
 <li>Opprett et nytt prosjekt</li>

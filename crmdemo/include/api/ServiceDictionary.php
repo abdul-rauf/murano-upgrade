@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -143,8 +142,6 @@ class ServiceDictionary {
      */
     protected function loadAllDictionaryClasses() {
         // Currently hardcoded to just Soap and Rest
-        require_once('include/api/ServiceDictionaryRest.php');
-        // require_once('include/api/ServiceDictionarySoap.php');
         
 
         $apis = array();

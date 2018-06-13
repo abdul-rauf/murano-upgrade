@@ -34,9 +34,7 @@
          * @param {String} s The string to capitalize.
          * @return {String} Capitalized string or an empty string if `s` is undefined or null.
          */
-        capitalize: function(s) {
-            return s ? (s.charAt(0).toUpperCase() + (s.length > 1 ? s.substr(1) : "")) : "";
-        },
+        capitalize: s => s ? (s.charAt(0).toUpperCase() + (s.length > 1 ? s.substr(1) : "")) : "",
 
         /**
          * Capitalizes a hyphenated string.
@@ -230,7 +228,7 @@
                 //trim spaces
                 .trim();
         },
-        
+
         /**
          * Format a record's name (ie. full name) according to the name format
          * passed in parameters or defined in the user preferences.
@@ -326,25 +324,6 @@
             }
             return numberArray[0] + (numberArray.length > 1 &&
                 numberArray[1] !== '' ? decimalSeparator + numberArray[1] : '');
-        },
-
-        /**
-         * Adds number separators to a number string
-         * @param {String} numberString string of number to be modified of the
-         *   format nn.nnn
-         * @param {String} numberGroupSeparator character separator for number
-         *   groups of 3 digits to the left of the decimal to add
-         * @param {String} decimalSeparator character to replace decimal in arg
-         *   number with
-         * @return {String}
-         *
-         * @deprecated 7.7 and will be removed on 7.9. Please use
-         *   {@link #addNumberSeparators} instead.
-         */
-        addNumberSeperators: function(numberString, numberGroupSeparator, decimalSeparator) {
-            app.logger.warn('`addNumberSeperators` is deprecated since 7.7 and will be removed in 7.9.' +
-                'Please use `addNumberSeparators` instead.');
-            return this.addNumberSeparators(numberString, numberGroupSeparator, decimalSeparator);
         },
 
         /**
@@ -450,8 +429,10 @@
          */
         generateUUID: function() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
+                 /*jshint -W016 */ // "Unexpected use of '|'.",
+                 /*jshint -W116 */ // "Expected '===' and instead saw '=='."
+                 var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                 return v.toString(16);
             });
         },
 
@@ -507,7 +488,7 @@
          * @return {Boolean}
          */
         isValidEmailAddress: function(address) {
-            return /^.+@.+$/ig.test(address);
+            return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@\S+$/.test(address);
         },
 
         /**
@@ -738,6 +719,37 @@
         },
 
         /**
+         * Checks if the AJAX error is a network connectivity error: timeout, DNS, etc.
+         *
+         * @param ajaxError AJAX error.
+         * @returns {Boolean} true if the error is a network error.
+         */
+        isConnectivityError: function(ajaxError) {
+            // There can be situations when the status is not zero but the actual request times out.
+            return ((ajaxError.status === 0) ||
+                    (ajaxError.textStatus === "timeout"));
+        },
+
+        /**
+         * Returns ISO8601 timestamp in UTC time
+         * @param {String|Number} [dateValue] Date string or raw msec number
+         * @param {Object} [options]
+         * @returns {String} Passed date or current date converted to UTC timezone
+         */
+        getTimestamp: function(dateValue, options) {
+            options = options || {};
+            var date = dateValue ? new Date(dateValue) : new Date(),
+                dateString = date.toISOString();
+
+            if (!options.msecPrecision) {
+                dateString = dateString.replace(/\.\d{3}/, '');
+            }
+
+            //Z is replaced with +00:00 for unification with server
+            return dateString.replace(/Z/, '+00:00');
+        },
+
+        /**
          * Builds a good url based on `siteUrl` from configuration.
          *
          * It is ready for the several use cases that `siteUrl` can have:
@@ -756,6 +768,67 @@
                 url = app.config.siteUrl.replace(/\/+$/, "") + "/" + url;
             }
             return url;
+        },
+
+        /**
+
+         * Get diff between `data1` and `data2`.
+         * Note: this function is targeted to compare objects with the same properties.
+         * @param {Object} data1 Changed object
+         * @param {Object} data2 Original object
+         * @param {Boolean} [strict=false] By default values are compared property by property via non-strict comparison.
+         * @returns {Object} Hash of fields from `data1` which are different from `data2`
+         */
+        getChangedProps: function (data1, data2, strict) {
+
+            function getType (value) {
+                if (_.isObject(value)) {
+                    if (_.isArray(value)) {
+                        return 'array';
+                    }
+                    return 'object';
+                }
+                return 'other';
+            }
+
+            function isEqualProp (value1, value2) {
+
+                if (strict) return _.isEqual(value1, value2);
+
+                var value1Type = getType(value1),
+                    value2Type = getType(value2);
+
+                if (value1Type === value2Type && _.contains(['object', 'array'], value1Type)) {
+                    if (value1Type === 'array' && value1.length !== value2.length) {
+                        return false;
+                    }
+                    
+                    var keys1 = _.keys(value1),
+                        keys2 = _.keys(value2);
+
+                    if (keys1.length !== keys2.length || !_.isEqual(keys1.sort(), keys2.sort())) {
+                        return false;
+                    }
+
+                    return !_.any(value1, function (val, key) {
+                        return !isEqualProp(value1[key], value2[key]);
+                    });
+                }
+                else {
+                    return strict ? (value1 === value2) : (value1 == value2);
+                }
+            }
+
+
+            var diff = {};
+
+            _.each(data1, function (value, key) {
+                if (!isEqualProp(data1[key], data2[key])) {
+                    diff[key] = value;
+                }
+            });
+
+            return diff;
         },
 
         /**
@@ -788,6 +861,15 @@
             return isSortable;
         },
 
+        /**
+         * Returns url without hypertext http(s):// prefix
+         * @param {String} url - input url
+         * @returns {String} - url without http(s):// prefix
+         */
+        stripHttpPrefix: function (url) {
+            return url.replace(/^https?:\/\//, '');
+        },        
+    
         hardRefresh: function() {
             window.location.reload(true);
         },

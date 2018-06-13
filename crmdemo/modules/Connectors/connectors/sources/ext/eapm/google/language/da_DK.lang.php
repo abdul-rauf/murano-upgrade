@@ -17,8 +17,8 @@ Modtag en API-nøgle og en hemmelighed fra Google ved registrering af din Sugar-
 <br/><br/>
 <ol>
 <li>Gå til siden Google Developers:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Log ind på den Google konti, hvori du ønsker at registrere din applikation.</li>
 <li>Opret et nyt projekt</li>

@@ -1,6 +1,6 @@
 <?php
-// created: 2012-06-15 10:55:30
-$dictionary["zr2_reportparameterlink_zr2_reportparameter"] = array (
+// created: 2018-06-13 14:43:30
+$dictionary['zr2_reportparameterlink_zr2_reportparameter'] = array (
   'true_relationship_type' => 'one-to-many',
   'relationships' => 
   array (
@@ -21,18 +21,18 @@ $dictionary["zr2_reportparameterlink_zr2_reportparameter"] = array (
   'table' => 'zr2_reportparameterlink_zr2_reportparameter_c',
   'fields' => 
   array (
-    0 => 
+    'id' => 
     array (
       'name' => 'id',
       'type' => 'varchar',
       'len' => 36,
     ),
-    1 => 
+    'date_modified' => 
     array (
       'name' => 'date_modified',
       'type' => 'datetime',
     ),
-    2 => 
+    'deleted' => 
     array (
       'name' => 'deleted',
       'type' => 'bool',
@@ -40,13 +40,13 @@ $dictionary["zr2_reportparameterlink_zr2_reportparameter"] = array (
       'default' => '0',
       'required' => true,
     ),
-    3 => 
+    'zr2_report29aerameter_ida' => 
     array (
       'name' => 'zr2_report29aerameter_ida',
       'type' => 'varchar',
       'len' => 36,
     ),
-    4 => 
+    'zr2_report53a6terlink_idb' => 
     array (
       'name' => 'zr2_report53a6terlink_idb',
       'type' => 'varchar',

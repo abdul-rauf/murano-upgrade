@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -52,9 +51,14 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
             'file' => 'console.ext.php',
             'module' => 'application'
         ),
+        'platforms' => array(
+            'section' => 'platforms',
+            'extdir' => 'Platforms',
+            'file' => 'platforms.ext.php',
+            'module' => 'application',
+        ),
 );
 if(SugarAutoLoader::existing("custom/application/Ext/Extensions/extensions.ext.php")) {
     include("custom/application/Ext/Extensions/extensions.ext.php");
 }
-
 

@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 require_once('include/workflow/workflow_utils.php');
 
 
@@ -44,13 +42,6 @@ class WorkFlowGlue {
         'Is not empty' => 'LBL_IS_NOT_EMPTY',
     );
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function WorkFlowGlue()
-    {
-        self::__construct();
-    }
 
     public function __construct()
     {
@@ -586,6 +577,9 @@ class WorkFlowGlue {
      */
     function write_workflow_alerts_file($module, $contents){
         global $beanlist;
+        if (!\BeanFactory::getBeanClass($module)) {
+            throw new \RuntimeException(sprintf('Invalid module %s', $module));
+        }
         $file = "modules/".$module."/workflow/workflow_alerts.php";
         $file = create_custom_directory($file);
        $fp = sugar_fopen($file, 'wb');
@@ -653,7 +647,7 @@ include_once("include/workflow/alert_utils.php");
 
 		//Check to see if this action is new meeting or new call and add the appropriate bridge id
 
-		$action_shell = BeanFactory::getBean('WorkFlowActionShells');
+		$action_shell = BeanFactory::newBean('WorkFlowActionShells');
 		$action_shell_array .= $action_shell->check_for_invitee_bridge_meta($action_array);
 
 		return $action_shell_array;

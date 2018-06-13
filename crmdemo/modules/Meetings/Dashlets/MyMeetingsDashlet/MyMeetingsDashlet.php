@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,19 +13,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  // $Id: MyMeetingsDashlet.php 56115 2010-04-26 17:08:09Z kjing $
 
 
-require_once('include/Dashlets/DashletGeneric.php');
 
 
 class MyMeetingsDashlet extends DashletGeneric {
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function MyMeetingsDashlet($id, $def = null)
-    {
-        self::__construct($id, $def);
-    }
-
     public function __construct($id, $def = null)
     {
         global $current_user, $app_strings;
@@ -53,7 +42,7 @@ class MyMeetingsDashlet extends DashletGeneric {
                                               'related_fields' => array('status'));*/
         $this->hasScript = true;  // dashlet has javascript attached to it                
 
-        $this->seedBean = BeanFactory::getBean('Meetings');
+        $this->seedBean = BeanFactory::newBean('Meetings');
         $this->seedBean->disable_row_level_security = true;
     }
 

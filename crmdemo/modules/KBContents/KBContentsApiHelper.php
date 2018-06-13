@@ -15,7 +15,6 @@ use \Sugarcrm\Sugarcrm\SearchEngine\MetaDataHelper;
 use \Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\SearchFields;
 use \Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\MultiFieldHandler;
 
-require_once 'data/SugarBeanApiHelper.php';
 
 class KBContentsApiHelper extends SugarBeanApiHelper {
 
@@ -50,7 +49,7 @@ class KBContentsApiHelper extends SugarBeanApiHelper {
         $query->select(array('language'));
         $query->distinct(true);
         $fromOptions = array('team_security' => false);
-        $query->from(BeanFactory::getBean('KBContents'), $fromOptions);
+        $query->from(BeanFactory::newBean('KBContents'), $fromOptions);
         $query->where()
             ->equals('kbdocument_id', $bean->kbdocument_id);
         
@@ -180,7 +179,6 @@ class KBContentsApiHelper extends SugarBeanApiHelper {
      */
     public function checkStatus($bean)
     {
-        require_once 'include/SugarFields/Fields/Enum/SugarFieldEnum.php';
         $field = new SugarFieldEnum('enum');
         $opts = $field->getOptions($bean->getFieldDefinition('status'));
         return isset($opts[$bean->status]);

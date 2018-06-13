@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,6 +14,7 @@ $dictionary['ProductTemplate'] = array(
     'comment' => 'The Admin view of a Product in Product Catalog; used as template for a product instance',
     'audited' => true,
     'favorites' => false,
+    'full_text_search' => true,
     'fields' => array(
         'type_id' => array(
             'name' => 'type_id',

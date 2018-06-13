@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,8 +13,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\AdminSettings;
 
-require_once 'include/MetaDataManager/MetaDataManager.php';
-require_once 'modules/Configurator/Configurator.php';
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
@@ -23,8 +20,6 @@ class AdministrationController extends SugarController
 {
     public function action_savetabs()
     {
-        require_once('include/SubPanel/SubPanelDefinitions.php');
-        require_once('modules/MySettings/TabController.php');
 
 
         global $current_user, $app_strings, $modInvisList;
@@ -89,7 +84,6 @@ class AdministrationController extends SugarController
 
             // Clear the metadata cache so changes to languages are picked up right away
             MetaDataManager::refreshLanguagesCache($enabled_langs);
-            require_once('modules/Administration/QuickRepairAndRebuild.php');
             $repair = new RepairAndClear();
             $repair->clearLanguageCache();
         }
@@ -264,7 +258,6 @@ class AdministrationController extends SugarController
         }
 
         try {
-            require_once('modules/Home/UnifiedSearchAdvanced.php');
             $unifiedSearchAdvanced = new UnifiedSearchAdvanced();
             $unifiedSearchAdvanced->saveGlobalSearchSettings();
 

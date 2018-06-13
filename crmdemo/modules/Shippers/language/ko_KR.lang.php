@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -26,6 +25,7 @@ $mod_strings = array (
   'LBL_LIST_FORM_TITLE' => '배송 공급자 목록',
   'LBL_NEW_FORM_TITLE' => '신규 배송 공급자',
   'LBL_SHIPPER' => '배송 공급자',
+  'LBL_FILTER_ACTIVE' => '실제 배송 공급자',
   'LBL_LIST_NAME' => '배송 공급자',
   'LBL_NAME' => '배송 공급자',
   'LBL_LIST_LIST_ORDER' => '주문',

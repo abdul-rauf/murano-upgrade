@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,6 @@ class SugarUpgradeRebuildSprites extends UpgradeScript
 
     public function run()
     {
-        require_once('modules/Administration/SugarSpriteBuilder.php');
         $sb = new SugarSpriteBuilder();
         $sb->cssMinify = true;
         $sb->fromSilentUpgrade = true;

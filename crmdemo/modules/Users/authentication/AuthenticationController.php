@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -38,7 +37,6 @@ class AuthenticationController
 
         // check in custom dir first, in case someone want's to override an auth controller
         if(!SugarAutoLoader::requireWithCustom('modules/Users/authentication/'.$type.'/' . $type . '.php')) {
-            require_once('modules/Users/authentication/SugarAuthenticate/SugarAuthenticate.php');
             $type = 'SugarAuthenticate';
         }
 
@@ -103,9 +101,6 @@ class AuthenticationController
 		$this->loggedIn = true;
 
 		if($this->loginSuccess){
-			//Ensure the user is authorized
-			checkAuthUserStatus();
-
 			loginLicense();
 			if(!empty($GLOBALS['login_error'])){
 				unset($_SESSION['authenticated_user_id']);

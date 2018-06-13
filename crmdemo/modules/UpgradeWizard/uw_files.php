@@ -13,9 +13,6 @@
 
 
 global $sugar_version;
-if(!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 ////	DYNAMICALLY GENERATE UPGRADEWIZARD MODULE FILE LIST
@@ -63,8 +60,6 @@ $uw_files = array(
     // standard files we steamroll with no warning
     'log4php.properties',
     'include/utils/encryption_utils.php',
-    'vendor/Pear/Crypt_Blowfish/Blowfish.php',
-    'vendor/Pear/Crypt_Blowfish/Blowfish/DefaultKey.php',
     'include/utils.php',
     'include/language/en_us.lang.php',
     'include/modules.php',

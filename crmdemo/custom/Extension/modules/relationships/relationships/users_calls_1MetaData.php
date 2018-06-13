@@ -1,6 +1,6 @@
 <?php
-// created: 2017-05-25 07:04:05
-$dictionary["users_calls_1"] = array (
+// created: 2018-06-13 14:43:30
+$dictionary['users_calls_1'] = array (
   'true_relationship_type' => 'one-to-many',
   'from_studio' => true,
   'relationships' => 
@@ -22,18 +22,18 @@ $dictionary["users_calls_1"] = array (
   'table' => 'users_calls_1_c',
   'fields' => 
   array (
-    0 => 
+    'id' => 
     array (
       'name' => 'id',
       'type' => 'varchar',
       'len' => 36,
     ),
-    1 => 
+    'date_modified' => 
     array (
       'name' => 'date_modified',
       'type' => 'datetime',
     ),
-    2 => 
+    'deleted' => 
     array (
       'name' => 'deleted',
       'type' => 'bool',
@@ -41,13 +41,13 @@ $dictionary["users_calls_1"] = array (
       'default' => '0',
       'required' => true,
     ),
-    3 => 
+    'users_calls_1users_ida' => 
     array (
       'name' => 'users_calls_1users_ida',
       'type' => 'varchar',
       'len' => 36,
     ),
-    4 => 
+    'users_calls_1calls_idb' => 
     array (
       'name' => 'users_calls_1calls_idb',
       'type' => 'varchar',

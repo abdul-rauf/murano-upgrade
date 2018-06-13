@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -32,7 +31,7 @@ global $current_user;
 // global $default_language;
 // global $cal_codes;
 
-$focus = BeanFactory::getBean('EmailMarketing');
+$focus = BeanFactory::newBean('EmailMarketing');
 
 if(!empty($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
@@ -136,7 +135,6 @@ $javascript->setSugarBean($focus);
 $javascript->addAllFields('');
 echo $javascript->getScript();
 
-require_once('include/SubPanel/SubPanelTiles.php');
 $subpanel = new SubPanelTiles($focus, 'EmailMarketing');
 
 if ($focus->all_prospect_lists == 1) {

@@ -1,6 +1,4 @@
 <?php
-if (! defined('sugarEntry') || ! sugarEntry)
-die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +10,6 @@ die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once ('modules/ModuleBuilder/parsers/ModuleBuilderParser.php');
 
 class ParserModifyLayoutView extends ModuleBuilderParser
 {
@@ -32,10 +29,16 @@ class ParserModifyLayoutView extends ModuleBuilderParser
 
 
     /**
-     * Constructor
+     * {@inheritDoc}
+     *
+     * @param string $module
+     * @param string $view
      */
-    public function init($module = null, $view = null, $submittedLayout = false)
+    public function init($module, $view = '')
     {
+        if (empty($view)) {
+            throw new \BadMethodCallException('Missing required argument $view');
+        }
         $this->_view = ucfirst($view);
         $this->_module = $module;
         $this->language_module = $module;
@@ -77,7 +80,7 @@ class ParserModifyLayoutView extends ModuleBuilderParser
         }
 
         // get the fieldDefs from the bean
-        $bean = BeanFactory::getBean($module);
+        $bean = BeanFactory::newBean($module);
         $this->_fieldDefs = & $bean->field_defs;
 
         $this->loadModule($this->_module, $this->_sourceView);

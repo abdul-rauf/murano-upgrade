@@ -50,7 +50,7 @@ class ArchivedEmailsLink extends Link2
      * Get all beans from link
      * @see Link2::query()
      */
-    public function query($params)
+    public function query($params = array())
     {
         unset($params['return_as_array']);
         $query = $this->getQuery($params);
@@ -124,14 +124,19 @@ class ArchivedEmailsLink extends Link2
         if (!empty($options['joinTableAlias'])) {
             $jta = $joinParams['alias'] = $options['joinTableAlias'];
         }
-        if (!empty($options['reverse'])) {
-            $sugar_query->joinRaw($this->getEmailsJoin($options), $joinParams);
-            return $sugar_query->join[$jta];
+
+        if (!empty($options['myAlias'])) {
+            $fromAlias = $options['myAlias'];
+        } else {
+            $fromAlias = 'emails';
         }
 
-        $sugar_query->joinTable('emails', $joinParams);
-        $sugar_query->joinRaw($this->getEmailsJoin($options));
-        return $sugar_query->join[$jta];
+        if (!empty($options['reverse'])) {
+            return $this->joinEmails($sugar_query, $fromAlias, $jta);
+        } else {
+            $sugar_query->joinTable('emails', $joinParams);
+            return $this->joinEmails($sugar_query, $fromAlias, $jta);
+        }
     }
 
     /**
@@ -168,6 +173,53 @@ class ArchivedEmailsLink extends Link2
     }
 
     /**
+     * Builds SugarQuery main join for archived emails
+     *
+     * @param SugarQuery $query The query
+     * @param string $fromAlias The alias of the primary table
+     * @param string $alias The alias which the joined table needs to have
+     *
+     * @return SugarQuery_Builder_Join
+     */
+    protected function joinEmails(SugarQuery $query, $fromAlias, $alias)
+    {
+        $bean_id = $this->db->quoted($this->focus->id);
+
+        $table = <<<SQL
+(
+  /* directly assigned emails */
+  SELECT
+    bean_id id,
+    eb.email_id
+  FROM emails_beans eb
+  WHERE eb.bean_id = $bean_id
+        AND eb.bean_module = '{$this->focus->module_dir}'
+        AND eb.deleted = 0
+  UNION
+  /* related by email address */
+  SELECT DISTINCT
+    eabr.bean_id id,
+    eear.email_id
+  FROM
+    emails_email_addr_rel eear
+    INNER JOIN email_addr_bean_rel eabr
+      ON eabr.bean_id = $bean_id
+         AND eabr.bean_module = '{$this->focus->module_dir}'
+         AND eabr.email_address_id = eear.email_address_id
+         AND eabr.deleted = 0
+  WHERE eear.deleted = 0
+)
+SQL;
+
+        $join = $query->joinTable($table, array(
+            'alias' => $alias,
+        ));
+        $join->on()->equalsField($alias . '.email_id', $fromAlias . '.id');
+
+        return $join;
+    }
+
+    /**
      * Builds main join for archived emails
      * @param string $params
      * @return string JOIN clause
@@ -199,6 +251,8 @@ class ArchivedEmailsLink extends Link2
      *            optional parameters. Possible Values;
      *            'return_as_array': returns the query broken into
      * @return String/Array query to grab just ids for this relationship
+     *
+     * @deprecated Use ArchivedEmailsLink::query() instead
      */
     public function getQuery($params = array())
     {
@@ -215,7 +269,7 @@ class ArchivedEmailsLink extends Link2
         }
 
         if (!empty($params['enforce_teams'])) {
-            $seed = BeanFactory::getBean($this->getRelatedModuleName());
+            $seed = BeanFactory::newBean($this->getRelatedModuleName());
             $seed->addVisibilityFrom($query_array['join']);
             $seed->addVisibilityWhere($query_array['where']);
         }

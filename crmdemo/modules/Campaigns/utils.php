@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -27,10 +26,6 @@ use Sugarcrm\Sugarcrm\Util\Serialized;
  */
 function get_message_scope_dom($campaign_id, $campaign_name,$db=null, $mod_strings=array()) {
 
-    if (!$db) {
-        $db = DBManagerFactory::getInstance();
-    }
-
     //find prospect list attached to this campaign..
     $query =  "SELECT prospect_list_id, prospect_lists.name ";
     $query .= "FROM prospect_list_campaigns ";
@@ -41,9 +36,12 @@ function get_message_scope_dom($campaign_id, $campaign_name,$db=null, $mod_strin
 	$bean->add_team_security_where_clause($query, "prospect_lists");
     $query .= "WHERE prospect_lists.deleted = 0 ";
     $query .= "AND prospect_list_campaigns.deleted=0 ";
-    $query .= "AND campaign_id=" . $db->quoted($campaign_id);
+    $query .= "AND campaign_id='".$campaign_id."'";
     $query.=" and prospect_lists.list_type not like 'exempt%'";
 
+    if (empty($db)) {
+        $db = DBManagerFactory::getInstance();
+    }
     if (empty($mod_strings) or !isset($mod_strings['LBL_DEFAULT'])) {
         global $current_language;
         $mod_strings = return_module_language($current_language, 'Campaigns');
@@ -269,7 +267,7 @@ function log_campaign_activity($identifier, $activity, $update=true, $clicked_ur
 
                 //populate the primary email address into the more_info field
                 if (!empty($row['target_id']) && !empty($row['target_type'])) {
-                    $sugarEmailAddress = BeanFactory::getBean('EmailAddresses');
+                    $sugarEmailAddress = BeanFactory::newBean('EmailAddresses');
                     $primeEmail = $sugarEmailAddress->getPrimaryAddress(null, $row['target_id'], $row['target_type']);
                     if (!empty($primeEmail)) {
                         $data['more_information'] =  "'" . $primeEmail . "'";
@@ -328,7 +326,7 @@ function campaign_log_lead_or_contact_entry($campaign_id, $parent_bean,$child_be
     //create campaign tracker id and retrieve related bio bean
      $tracker_id = create_guid();
     //create new campaign log record.
-    $campaign_log = BeanFactory::getBean('CampaignLog');
+    $campaign_log = BeanFactory::newBean('CampaignLog');
     $campaign_log->campaign_id = $campaign_id;
     $campaign_log->target_tracker_key = $tracker_id;
     $campaign_log->related_id = $parent_bean->id;
@@ -349,7 +347,7 @@ function get_campaign_urls($campaign_id) {
 
         $db = DBManagerFactory::getInstance();
 
-        $query1 = "select * from campaign_trkrs where campaign_id=" . $db->quoted($campaign_id) . " and deleted=0";
+        $query1="select * from campaign_trkrs where campaign_id='$campaign_id' and deleted=0";
         $current=$db->query($query1);
         while (($row=$db->fetchByAssoc($current)) != null) {
             $return_array['{'.$row['tracker_name'].'}']=$row['tracker_name'] . ' : ' . $row['tracker_url'];
@@ -369,7 +367,7 @@ function get_subscription_lists_query($focus, $additional_fields = null) {
 
     // We need to confirm that the user is a member of the team of the item.
     global $current_user;
-    $bean = BeanFactory::getBean('Campaigns');
+    $bean = BeanFactory::newBean('Campaigns');
 
 
     $bean->add_team_security_where_clause($all_news_type_pl_query, 'c');
@@ -387,8 +385,7 @@ function get_subscription_lists_query($focus, $additional_fields = null) {
     while ($row = $focus->db->fetchByAssoc($all_news_type_list)){$news_type_list_arr[] = $row;}
 
     //now get all the campaigns that the current user is assigned to
-    $all_plp_current = "select prospect_list_id from prospect_lists_prospects where related_id = "
-        . $focus->db->quoted($focus->id) . " and deleted = 0 ";
+    $all_plp_current = "select prospect_list_id from prospect_lists_prospects where related_id = '$focus->id' and deleted = 0 ";
 
     //build array of prospect lists that this user belongs to
     $current_plp =$focus->db->query($all_plp_current );
@@ -574,7 +571,7 @@ function process_subscriptions($subscription_string_to_parse) {
 
             //--grab all the lists for the passed in campaign id
             $pl_qry ="select id, list_type from prospect_lists where id in (select prospect_list_id from prospect_list_campaigns ";
-            $pl_qry .= "where campaign_id = " . $focus->db->quoted($campaign) . ") and deleted = 0 ";
+            $pl_qry .= "where campaign_id = '$campaign') and deleted = 0 ";
             $GLOBALS['log']->debug("In Campaigns Util: subscribe function, about to run query: ".$pl_qry );
             $pl_qry_result = $focus->db->query($pl_qry);
 
@@ -584,7 +581,7 @@ function process_subscriptions($subscription_string_to_parse) {
 
             //--grab all the prospect_lists this user belongs to
             $curr_pl_qry ="select prospect_list_id, related_id  from prospect_lists_prospects ";
-            $curr_pl_qry .="where related_id = " . $focus->db->quoted($focus->id) . " and deleted = 0 ";
+            $curr_pl_qry .="where related_id = '$focus->id'  and deleted = 0 ";
             $GLOBALS['log']->debug("In Campaigns Util: subscribe function, about to run query: ".$curr_pl_qry );
             $curr_pl_qry_result = $focus->db->query($curr_pl_qry);
 
@@ -613,7 +610,7 @@ function process_subscriptions($subscription_string_to_parse) {
                         //--if we are in here then user is subscribing to a list in which they are exempt.
                         // we need to remove the user from this unsubscription list.
                         //Begin by retrieving unsubscription prospect list
-                        $exempt_subscription_list = BeanFactory::getBean('ProspectLists');
+                        $exempt_subscription_list = BeanFactory::newBean('ProspectLists');
 
 
                         $exempt_result = $exempt_subscription_list->retrieve($exempt_id);
@@ -642,7 +639,7 @@ function process_subscriptions($subscription_string_to_parse) {
                 //do nothing, user is already subscribed
             }else{
                 //user is not subscribed already, so add to subscription list
-                $subscription_list = BeanFactory::getBean('ProspectLists');
+                $subscription_list = BeanFactory::newBean('ProspectLists');
                 $subs_result = $subscription_list->retrieve($prospect_list);
                 if($subs_result == null)
                 {//error happened while retrieving this list, iterate and continue
@@ -664,7 +661,7 @@ function process_subscriptions($subscription_string_to_parse) {
         $relationship = strtolower($focus->getObjectName()).'s';
         //--grab all the list for this campaign id
         $pl_qry ="select id, list_type from prospect_lists where id in (select prospect_list_id from prospect_list_campaigns ";
-        $pl_qry .= "where campaign_id = " . $focus->db->quoted($campaign) . ") and deleted = 0 ";
+        $pl_qry .= "where campaign_id = '$campaign') and deleted = 0 ";
         $pl_qry_result = $focus->db->query($pl_qry);
         //build the array with list information
         $pl_arr = array();
@@ -673,7 +670,7 @@ function process_subscriptions($subscription_string_to_parse) {
 
         //retrieve lists that this user belongs to
         $curr_pl_qry ="select prospect_list_id, related_id  from prospect_lists_prospects ";
-        $curr_pl_qry .="where related_id = " . $focus->db->quoted($focus->id) . "  and deleted = 0 ";
+        $curr_pl_qry .="where related_id = '$focus->id'  and deleted = 0 ";
         $GLOBALS['log']->debug("In Campaigns Util, unsubscribe function about to run query: ".$curr_pl_qry );
         $curr_pl_qry_result = $focus->db->query($curr_pl_qry);
 
@@ -970,7 +967,7 @@ function write_mail_merge_log_entry($campaign_id,$pl_row) {
                      $rel_bean->retrieve($id);
 
                     //create new campaign log record.
-                    $campaign_log = BeanFactory::getBean('CampaignLog');
+                    $campaign_log = BeanFactory::newBean('CampaignLog');
                     $campaign_log->campaign_id = $campaign_id;
                     $campaign_log->target_tracker_key = $tracker_id;
                     $campaign_log->target_id = $rel_bean->id;

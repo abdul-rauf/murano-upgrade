@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'vendor/HTMLPurifier/HTMLPurifier.standalone.php';
-
 /**
  * cid: scheme implementation
  */
@@ -76,7 +74,6 @@ class SugarCleaner
         $config->set('AutoFormat.RemoveEmpty', false);
         $config->set('Cache.SerializerPermissions', 0775);
         // for style
-        //$config->set('Filter.ExtractStyleBlocks', true);
         $config->set('Filter.ExtractStyleBlocks.TidyImpl', false); // can't use csstidy, GPL
         if(!empty($GLOBALS['sugar_config']['html_allow_objects'])) {
             // for object
@@ -251,7 +248,6 @@ class SugarCleaner
 class SugarURIFilter extends HTMLPurifier_URIFilter
 {
     public $name = 'SugarURIFilter';
-//    public $post = true;
     protected $allowed = array();
 
     public function prepare($config)
@@ -261,12 +257,6 @@ class SugarURIFilter extends HTMLPurifier_URIFilter
         {
             $this->allowed = $sugar_config['security_trusted_domains'];
         }
-        /* Allow this host?
-        $def = $config->getDefinition('URI');
-        if(!empty($def->base) && !empty($this->base->host)) {
-            $this->allowed[] = $def->base->host;
-        }
-        */
     }
 
     public function filter(&$uri, $config, $context)
@@ -274,15 +264,11 @@ class SugarURIFilter extends HTMLPurifier_URIFilter
         // skip non-resource URIs
         if (!$context->get('EmbeddedURI', true)) return true;
 
-        //if(empty($this->allowed)) return false;
-
         if(!empty($uri->scheme) && strtolower($uri->scheme) != 'http' && strtolower($uri->scheme) != 'https') {
 	        // do not touch non-HTTP URLs
 	        return true;
 	    }
 
-    	// relative URLs permitted since email templates use it
-		// if(empty($uri->host)) return false;
 	    // allow URLs with no query
 		if(empty($uri->query)) return true;
 

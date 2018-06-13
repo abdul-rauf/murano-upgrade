@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Прикачен документ',
     'LBL_REVENUELINEITEMS' => 'Приходни позиции',
     'LBL_DUNS_NUM' => 'D&B номер:',
-    'LBL_DNB_BAL_PREVIEW' => 'Преглед на организациите',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Бележки',
 
     // Help Text

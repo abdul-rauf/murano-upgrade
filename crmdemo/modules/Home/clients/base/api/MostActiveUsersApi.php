@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/api/SugarApi.php');
 
 class MostActiveUsersApi extends SugarApi
 {
@@ -31,11 +29,13 @@ class MostActiveUsersApi extends SugarApi
 
     /**
      * Returns most active users for last n days
-     * @param $api
-     * @param $args
+     *
+     * @param ServiceBase $api
+     * @param array $args
      * @return array
      */
-    public function getMostActiveUsers($api, $args) {
+    public function getMostActiveUsers(ServiceBase $api, array $args)
+    {
         $days = isset($args['days']) ? (int) $args['days'] : 30;
         $db = DBManagerFactory::getInstance();
 

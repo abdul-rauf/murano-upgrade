@@ -18,6 +18,9 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var os = require('os');
 var todo = require('gulp-todo');
+const tslint = require('gulp-tslint');
+const path = require('path');
+const execa = require('execa');
 
 /**
  * A function that returns an object from a given JSON filename, which will also strip comments.
@@ -56,6 +59,7 @@ gulp.task('karma', function(done) {
         .option('-d, --dev', 'Set Karma options for debugging')
         .option('--coverage', 'Enable code coverage')
         .option('--ci', 'Enable CI specific options')
+        .option('--verbose', 'Show the running tests specifications')
         .option('--path <path>', 'Set base output path')
         .option('--manual', 'Start Karma and wait for browser to connect (manual tests)')
         .option('--team <name>', 'Filter by specified team', splitByCommas)
@@ -93,7 +97,7 @@ gulp.task('karma', function(done) {
                 value = value.replace(/^sugarcrm\//, '');
             } else {
                 // TODO: As soon as most of the teams add their tests to mentionbot, we will remove this
-                value = value.replace(/^sugarcrm/, 'tests');
+                value = value.replace(/^sugarcrm/, 'tests/unit-js');
             }
 
             memo.push(value);
@@ -136,6 +140,10 @@ gulp.task('karma', function(done) {
 
     if (commander.browsers) {
         karmaOptions.browsers = commander.browsers;
+    }
+
+    if (commander.verbose) {
+        karmaOptions.reporters = ['spec'];
     }
 
     if (commander.coverage) {
@@ -247,7 +255,6 @@ gulp.task('test:unit:php', function(done) {
         process.stdout.write('Coverage reports will be generated to: ' + path.join(workspace, 'coverage') + '\n');
     }
 
-    var execa = require('execa');
     var phpunitPath = path.join('..', 'vendor', 'bin', 'phpunit');
     var phpProcess = execa(phpunitPath, args, {
         maxBuffer: 1e6, // 1 MB
@@ -259,6 +266,155 @@ gulp.task('test:unit:php', function(done) {
     phpProcess.then(function(result) {
         done(result.code ? 'There are failing unit tests' : undefined);
     });
+});
+
+// Task to run REST API tests on an installed instance
+gulp.task('test:rest', function() {
+    /**
+     * Output usage text for this task and then exit.
+     */
+    function help() {
+        cmd.outputHelp((text) => text.replace('Usage: gulp', 'Usage: gulp test:rest'));
+        process.exit(1);
+    }
+
+    /**
+     * Retrieve an asset from the gulp REST test assets folder.
+     *
+     * @param {string} assetName File name of the desired asset.
+     * @return {Mixed} The result of parsing the asset as JSON.
+     */
+    function readAsset(assetName) {
+        var path = require('path');
+        var assetDirectory = 'gulp/assets/rest/';
+        var asset = path.join(assetDirectory, assetName);
+        return readJSONFile(asset);
+    }
+
+    /**
+     * Retrieve a test suite or cluster from a REST test asset.
+     * Aborts if the suite/cluster is not found.
+     *
+     * @param {string} assetName File name of the desired asset.
+     * @param {string} suiteName Name of the test suite/cluster.
+     * @return {string[]} A list of minimatch globs for tests in the suite/cluster.
+     */
+    function getSuiteFromAsset(assetName, suiteName) {
+        var tests = readAsset(assetName)[suiteName];
+        if (!tests) {
+            console.error('The test suite/cluster ' + suiteName + ' cannot be found.');
+            help();
+        }
+        return tests;
+    }
+
+    /**
+     * Get a list of all desired tests based on the given options.
+     *
+     * @param {Object} options Options specifying which tests you want to run.
+     * @param {string} [options.suite] Name of a test suite to run.
+     * @param {string} [options.cluster] Name of a test cluster to run.
+     * @param {boolean} [options.withoutSuite] If `true`, return tests not
+     *   present in any test suite.
+     * @param {boolean} [options.withoutCluster] If `true`, return tests not
+     *   present in any test cluster.
+     * @return {Array} A list of test file minimatch globs.
+     */
+    function getTestsToRun(options) {
+        if (options.suite) {
+            return getSuiteFromAsset('suites.json', options.suite);
+        } else if (options.cluster) {
+            return getSuiteFromAsset('clusters.json', options.cluster);
+        } else {
+            var baseTests = readAsset('default-tests.json');
+            if (options.withoutSuite || options.withoutCluster) {
+                var assetName = options.withoutSuite ? 'suites.json' : 'clusters.json';
+                return _.union(baseTests, _.map(_.flatten(_.values(readAsset(assetName))), function(glob) {
+                    return '!' + glob;
+                }));
+            }
+            return baseTests;
+        }
+    }
+
+    var mocha = require('gulp-spawn-mocha');
+    var cmd = commander
+        .option('--url <url>', 'Instance URL, ex: http://my.sugar.server/my/sugar/directory')
+        .option('-u, --username <username>', 'Administrator username')
+        .option('-p, --password <password>', 'Administrator password')
+        .option('-s, --suite <suite>', 'Run only the specified test suite')
+        .option('--without-suite', 'Print a list of all tests that aren\'t in a test suite')
+        .option('-c, --cluster <cluster>', 'Run only the specified test cluster')
+        .option('--without-cluster', 'Print a list of all tests that aren\'t in a test cluster')
+        .option('--ci', 'Enable CI specific options')
+        .option('--path <path>', 'Set base output path')
+        .parse(process.argv);
+
+    var testsToRun = getTestsToRun(commander);
+
+    // don't actually run the tests for --without-suite or --without-cluster, just print out what tests are not included
+    if (commander.withoutSuite || commander.withoutCluster) {
+        var globby = require('globby');
+        return globby(testsToRun).then(function(paths) {
+            if (_.isEmpty(paths)) {
+                process.stdout.write('All tests are currently part of a suite/cluster.' + os.EOL);
+                process.exit(0);
+            }
+            process.stdout.write('Tests not part of any suite/cluster:' + os.EOL);
+            process.stdout.write(paths.join(os.EOL) + os.EOL);
+            process.exit(1);
+        });
+    }
+
+    var env = {};
+
+    env.THORN_SERVER_URL = commander.url || process.env.THORN_SERVER_URL;
+    if (!env.THORN_SERVER_URL) {
+        console.error('Either setting $THORN_SERVER_URL or the --url flag is required.');
+        help();
+    }
+    env.THORN_SERVER_URL = env.THORN_SERVER_URL.replace(/\/+$/, '');
+
+    if (commander.username) {
+        env.THORN_ADMIN_USERNAME = commander.username;
+    } else if (!process.env.THORN_ADMIN_USERNAME) {
+        console.error('Either setting $THORN_ADMIN_USERNAME or the --username flag is required.');
+        help();
+    }
+
+    if (commander.password) {
+        env.THORN_ADMIN_PASSWORD = commander.password;
+    } else if (!process.env.THORN_ADMIN_PASSWORD) {
+        console.error('Either setting $THORN_ADMIN_PASSWORD or the --password flag is required.');
+        help();
+    }
+
+    if (_.compact([commander.suite, commander.cluster, commander.withoutSuite, commander.withoutCluster]).length > 1) {
+        console.error('The options --suite, --cluster, --without-suite, and --without-cluster are mutually exclusive.');
+        help();
+    }
+
+    var options = {
+        env: env,
+        timeout: 15000,
+        require: 'co-mocha',
+        reporter: 'spec',
+    };
+
+    if (commander.ci) {
+        var path = commander.path || process.env.WORKSPACE || os.tmpdir();
+        path += '/test-rest';
+        options.reporter = 'mocha-junit-reporter';
+        options.reporterOptions = 'mochaFile=' + path + '/test-results.xml';
+
+        options.bail = true;
+        options.timeout = 60000;
+
+        process.stdout.write('Test reports will be generated to: ' + path + '\n');
+    }
+
+    return gulp.src(testsToRun, {read: false})
+        .pipe(mocha(options));
 });
 
 // confirm our files have the desired license header
@@ -274,11 +430,13 @@ gulp.task('check-license', function(done) {
             'jpg',
             'png',
             'ico',
+            'tiff',
             // special system files
             'DS_Store',
             // Doc files
             'md',
             'txt',
+            'pdf',
             // vector files
             'svg',
             'svgz',
@@ -289,7 +447,28 @@ gulp.task('check-license', function(done) {
             'otf',
             // stylesheets
             'less',
-            'css'
+            'css',
+            // VCard files
+            'vcf',
+            // Git quirks
+            'git',
+            'gitkeep',
+            'gitignore',
+            // calendar files
+            'ics',
+            // data files
+            'csv',
+            // archives
+            'zip',
+            // dotfiles
+            'editorconfig',
+            'npmrc',
+            'jscsrc',
+            'babelrc',
+            // lock files
+            'lock',
+            // checksum lists
+            'md5'
         ],
         licenseFile: 'LICENSE',
         // Add paths you want to exclude in the whiteList file.
@@ -400,4 +579,17 @@ gulp.task('find-todos', function() {
     } catch (e) {
         console.error(e.toString());
     }
+});
+
+gulp.task('cukes-ts', function() {
+
+    var tsProcess = execa('./node_modules/.bin/gulp',
+        ['ts', '--color', '--cukes-path', `${path.resolve(__dirname, './tests/end-to-end/**/*.ts')}`],
+        {
+            stdio: 'inherit',
+            cwd: path.resolve(__dirname, './node_modules/@sugarcrm/seedbed'),
+        });
+
+    return tsProcess;
+
 });

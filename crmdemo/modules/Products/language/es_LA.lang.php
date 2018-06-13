@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Partida Individual Cotizada',
     'LBL_LIST_MANUFACTURER' => 'Fabricante',
     'LBL_MANUFACTURERS' => 'Fabricantes',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Núm. Fab',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Número de Pieza',
     'LBL_LIST_QUANTITY' => 'Cantidad',
     'LBL_LIST_COST_PRICE' => 'Costo',
     'LBL_LIST_DISCOUNT_PRICE' => 'Precio',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => '% de Descuento',
     'LBL_LIST_PRICE' => 'Precio de Lista:',
     'LBL_VENDOR_PART_NUM' => 'Número de Pieza del Proveedor:',
-    'LBL_MFT_PART_NUM' => 'Número de Pieza del Fabricante:',
+    'LBL_MFT_PART_NUM' => 'Número de Pieza:',
     'LBL_NEXT_STEP' => 'Siguiente Paso',
     'LBL_DISCOUNT_PRICE_DATE' => 'Fecha de Precio con Descuento:',
     'LBL_WEIGHT' => 'Peso:',
@@ -169,6 +169,8 @@ Para crear un {{module_name}}:
 2. Haga clic en "Guardar" para finalizar el nuevo registro y volver a la página anterior. 
  .',
 
-    'LBL_MANUFACTURERS' => 'Fabricantes',
     'LBL_PRODUCT_POSITION' => 'Posición de Juegos de Productos',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista de Datos Cotizados de los Artículos Cotizados',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nuevo Artículo Cotizado)',
+    'LBL_DISCOUNT_PERCENT' => '% Porcentaje',
 );

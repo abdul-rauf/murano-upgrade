@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -763,7 +762,6 @@ Se surgirem problemas persistentes com a validação automática, verifique a su
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Temas Indisponíveis',
     'LBL_TIMEZONE' => 'Fuso Horário',
     'LBL_TO'    => 'para',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Selecionar quais dados do usuário e do sistema serão rastreados',
     'LBL_UPDATE_CHECK_AUTO'=>'Automaticamente',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manualmente',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Verificar Atualizações Automaticamente</B> — Se verificado, o sistema periodicamente verificará se estão disponíveis versões atualizadas do aplicativo.',
@@ -930,8 +928,6 @@ Se surgirem problemas persistentes com a validação automática, verifique a su
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'O arquivo config.php foi reconstruído com sucesso.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Aviso: a sua configuração PHP deve ser modificada para permitir o carregamento de arquivos com pelo menos 6 MB. Modifique o valor upload_max_filesize no seu php.ini localizado em:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Torne o config.php gravável e tente de novo.',
-    'MSG_REBUILD_EXTENSIONS' => 'Vá para tela <a href="index.php?module=Administration&action=Upgrade">Reparar</a> e clique em Reconstruir Extensões.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Vá para tela <a href="index.php?module=Administration&action=Upgrade">Reparar</a> e clique em Reconstruir relações.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Não existem atualmente Clientes Offline habilitados.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Tem certeza de que pretende desativar este Cliente Offline?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Tem certeza de que pretende ativar este Cliente Offline?',
@@ -1041,7 +1037,7 @@ Se surgirem problemas persistentes com a validação automática, verifique a su
 'ML_ISSUES'=>'Problemas',
 'ML_MANIFEST_ISSUE'=>'Problema com o manifesto',
 'ML_CONFIG_OVERRIDE'=>'Modificação no Config não é permitida',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Chave - pode conter apenas letras, números e sublinhados. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Configurar criação rápida da barra de navegação',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Selecionar que módulos estão disponíveis na criação rápida da barra de navegação',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Escolha os módulos para os quais os usuários podem rapidamente criar registros usando o ícone Plus na barra de navegação superior. Arraste e solte módulos entre as caixas dos módulos habilitados e módulos desabilitados.',
@@ -1089,7 +1085,6 @@ Se surgirem problemas persistentes com a validação automática, verifique a su
 	'Manufacturers'  => 'Fabricante',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'Relacionamento',
 	'Releases'       => 'Versão',
@@ -1099,7 +1094,6 @@ Se surgirem problemas persistentes com a validação automática, verifique a su
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'Shipper',
 	'TaxRates'       => 'TaxRate',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

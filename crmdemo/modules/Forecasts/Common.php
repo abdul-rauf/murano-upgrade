@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -37,14 +36,6 @@ class Common {
 	var $end_date;
 	var $timeperiod_name;
 	var $timedate;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Common()
-    {
-        self::__construct();
-    }
 
 	//class constructor.
     public function __construct()

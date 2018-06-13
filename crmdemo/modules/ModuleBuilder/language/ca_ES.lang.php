@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Faci clic per editar aquest modul.',
         'moduleHelp'=> 'Seleccioni el component de mòdul que desitja editar',
         'fieldsBtn'	=> 'Editi quina informació és emmagatzemada al mòdul mitjançant el control dels <b>Camps</b> del mateix.<br/><br/>Pot editar i crear camps personalitzats aquí.',
-        'labelsBtn' => 'Faci clic a <b>Guardar</b> per guardar les seves etiquetes personalitzades.'	,
         'layoutsBtn'=> 'Personalitzi els <b>Dissenys</b> de les vistes d&#39;Edició, Detall, Llista i Recerca.',
         'subpanelBtn'=> 'Editi la informació que es mostra en els subpanells d&#39;aquests mòduls.',
         'layoutsHelp'=> 'Seleccioni un <b>Disseny a editar</b>.<br/<br/>Per canviar el disseny que conté els camps d&#39;introducció de dades, faci clic a <b>Vista d&#39;Edició</b>.<br/><br/>Per canviar el disseny que mostra les dades introduides en els camps a la Vista d&#39;Edició, faci clic a <b>Vista de Detall</b>.<br/><br/>Per canviar les columnes que apareixen a la llista per defecte, faci clic a <b>Vista de Llista</b>.<br/><br/>Per canviar els dissenys dels formularis de recerca Bàsica i Avançada, faci clic a <b>Recerca</b>.',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Està segur de que vol eliminar la etapa de ventes Perduda Tancada. Eliminant aquesta estapa causarà que el mòdul de Previsió no funcioni correctament.',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Està segur que desitja eliminar aquesta relació?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Això farà la relació permanent. Està segur que desitja desplegar aquesta relació?',
 'LBL_CONFIRM_DONT_SAVE' => 'Hi ha canvis pendents de ser guardats, desitja guardar-los ara?',

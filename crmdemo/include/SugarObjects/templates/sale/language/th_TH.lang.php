@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -88,7 +87,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   'LBL_TOP_SALES' => 'การขายที่เปิดอันดับสูงสุดของฉัน',
   'NTC_REMOVE_OPP_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการย้ายที่อยู่ติดต่อนี้ออกจากการขาย',
 	'SALE_REMOVE_PROJECT_CONFIRM' => 'คุณแน่ใจหรือไม่ว่าต้องการย้ายการขายนี้ออกจากโครงการ',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'การขาย',
 	'LBL_ACTIVITIES_SUBPANEL_TITLE'=>'กิจกรรม',
 	'LBL_HISTORY_SUBPANEL_TITLE'=>'ประวัติ',
     'LBL_RAW_AMOUNT'=>'จำนวนเงินขั้นต้น',

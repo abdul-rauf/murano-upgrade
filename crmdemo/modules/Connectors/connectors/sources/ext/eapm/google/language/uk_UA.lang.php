@@ -17,13 +17,13 @@ $connector_strings = array(
 <br/><br/>
 <ol>
 <li>Перейдіть на сайт розробника Google:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Увійдіть в обліковий запис Google, у якому потрібно зареєструвати додаток.</li>
 <li>Створіть новий проект.</li>
-<li><a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>Введіть назву проекту та натисніть Create (Створити).</li>
+<li><a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>Введіть назву проекту та натисніть Create (Створити).</li>
 <li>Коли проект буде створено, увімкніть Google Диск і API Контактів Google.</li>
 <li>У розділі APIs & Auth (API та авторизація) > Credentials (Облікові дані) створіть новий ідентифікатор клієнта.</li>
 <li>Виберіть пункт Web Application (Веб-додаток) та натисніть Configure conscent screen (Налаштувати екран погодження).</li>

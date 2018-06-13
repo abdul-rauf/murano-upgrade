@@ -58,8 +58,7 @@
 * default	This field sets the default value for the field definition.
 */
 
-include_once('include/database/MssqlManager.php');
-require_once 'include/database/SqlsrvPreparedStatement.php';
+use Doctrine\DBAL\Query\QueryBuilder;
 
 /**
  * SQL Server (sqlsrv) manager
@@ -77,10 +76,7 @@ class SqlsrvManager extends MssqlManager
         'create_user' => true,
         "create_db" => true,
         "recursive_query" => true,
-        "prepared_statements" => true,
     );
-
-    public $preparedStatementClass = 'SqlsrvPreparedStatement';
 
     protected $type_map = array(
             'int'      => 'int',
@@ -300,6 +296,8 @@ class SqlsrvManager extends MssqlManager
             sqlsrv_close($this->database);
             $this->database = null;
         }
+
+        parent::disconnect();
     }
 
     /**
@@ -350,13 +348,15 @@ class SqlsrvManager extends MssqlManager
         if (empty($tablename)) {
             $this->log->error(__METHOD__ . ' called with an empty tablename argument');
             return array();
-        }        
+        }
 
-        //find all unique indexes and primary keys.
-        $result = $this->query("sp_columns_90 $tablename");
+        $query = '{call sp_columns_90(?)}';
+
+        $stmt = $this->getConnection()
+            ->executeQuery($query, array($tablename));
 
         $columns = array();
-        while (($row=$this->fetchByAssoc($result)) !=null) {
+        while (($row = $stmt->fetch())) {
             $column_name = strtolower($row['COLUMN_NAME']);
             $columns[$column_name]['name']=$column_name;
             $columns[$column_name]['type']=strtolower($row['TYPE_NAME']);
@@ -387,7 +387,6 @@ class SqlsrvManager extends MssqlManager
             }
             if ( $column_def != 0 && ($row['COLUMN_DEF'] != null)) {	// NOTE Not using !empty as an empty string may be a viable default value.
                 $matches = array();
-                $row['COLUMN_DEF'] = html_entity_decode($row['COLUMN_DEF'],ENT_QUOTES);
                 if ( preg_match('/\([\(|\'](.*)[\)|\']\)/i',$row['COLUMN_DEF'],$matches) )
                     $columns[$column_name]['default'] = $matches[1];
                 elseif ( preg_match('/\(N\'(.*)\'\)/i',$row['COLUMN_DEF'],$matches) )

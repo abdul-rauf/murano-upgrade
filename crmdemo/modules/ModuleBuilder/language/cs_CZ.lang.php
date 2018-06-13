@@ -301,7 +301,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Klikněte pro editaci tohoto modulu.',
         'moduleHelp'=> 'Vyberte komponentu modulu, kterou chcete upravit',
         'fieldsBtn'	=> 'Upravte, jaké informace jsou uloženi v modulu, pomocí <b>Polí</b> v modulu.<br/><br/>Zde můžete upravovat a vytvářet vlastní pole.',
-        'labelsBtn' => 'Kliknutím na tlačítko <b>Uložit</b> uložte vlastní popisky.'	,
         'layoutsBtn'=> 'Upravte <b>Rozvržení</b> zobrazení úprav, podrobností, seznamů a hledání.',
         'subpanelBtn'=> 'Upravte, jaké informace se zobrazují v podpanelech modulů.',
         'layoutsHelp'=> 'Vyberte <b>Rozvržení k úpravě</b>.<br/<br/>Chcete-li změnit rozvržení, které obsahuje datová pole pro zadávání dat, klepněte na položku <b>Zobrazení úprav</b>.<br/><br/>Chcete-li změnit rozvržení, které zobrazuje data zadaná do polí v Zobrazení úprav, klepněte na položku <b>Zobrazení podrobností</b>.<br/><br/>Chcete-li změnit sloupce, které se zobrazují ve výchozím seznamu, klepněte na položku <b>Zobrazení seznamu</b>.<br/><br/>Chcete-li změnit rozvržení formulářů pro Základní a Rozšíření hledání, klepněte na volbu <b>Hledání</b>.',
@@ -736,10 +735,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Přejete si skutečně smazat prodejní fázi Uzavřeno - prohráno? Smazáním této fáze přestane modul Předpovědí fungovat správně.',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Jste si jisti, že chcete smazat tento vztah?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Toto vytvoří tento vztah trvalím. Jste si jisti, že chcete nasadit tento vztah?',
 'LBL_CONFIRM_DONT_SAVE' => 'Byly provedeny změny od posledního uložení, chcete je uložit?',

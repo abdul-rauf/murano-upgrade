@@ -1,6 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry)
-    die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +9,6 @@ if (!defined('sugarEntry') || !sugarEntry)
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once ('include/JSON.php');
 $timedate = TimeDate::getInstance();
 global $app_strings;
 global $mod_strings;
@@ -72,7 +69,7 @@ if (isset($_REQUEST['change_parent']) && $_REQUEST['change_parent']=='1') {
         $merge_ids_array[] = $id;
      }
 }
-$focus = BeanFactory::getBean('MergeRecords');
+$focus = BeanFactory::newBean('MergeRecords');
 $focus->load_merge_bean($_REQUEST['merge_module'], true, $base_id);
 $params = array();
 $params[] = "<a href='index.php?module={$focus->merge_bean->module_dir}&action=index'>{$GLOBALS['app_list_strings']['moduleList'][$focus->merge_bean->module_dir]}</a>";
@@ -118,7 +115,7 @@ if (!empty ($_REQUEST['return_id'])) {
 
 $temp_field_array = $focus->merge_bean->field_defs;
 $field_count = 1;
-$json = new JSON(JSON_LOOSE_TYPE);
+$json = new JSON();
 $diff_field_count=0;
 $focus->merge_bean->ACLFilterFieldList($temp_field_array, array(), array("min_access" => SugarACL::ACL_READ_WRITE));
 foreach ($temp_field_array as $field_array) {
@@ -263,7 +260,6 @@ foreach ($temp_field_array as $field_array) {
                 break;
             case ('teamset') :
 
-				require_once('include/SugarFields/Fields/Teamset/EmailSugarFieldTeamsetCollection.php');
 				$mod = isset($_REQUEST['action_module']) ? $_REQUEST['action_module'] : $_REQUEST['merge_module'];
 				$bean = BeanFactory::getBean($mod, $base_id);
 				$teamsWidget = new EmailSugarFieldTeamsetCollection($bean, $bean->field_defs, '', 'EditView');
@@ -486,7 +482,7 @@ function get_related_name($field_def,$id_value) {
             $col_name = $field_def['rname'];
             //if this module is non db and has a module set, then check to see if this field should be concatenated
             if (!empty($field_def['module']) && $field_def['source'] == 'non-db'){
-                  $focus = BeanFactory::getBean($field_def['module']);
+                  $focus = BeanFactory::newBean($field_def['module']);
                   if(!empty( $focus->field_defs[$field_def['rname']])){
 	                $related_def = $focus->field_defs[$field_def['rname']];
 	                //if field defs has concat field array set, then concatenate values
@@ -507,4 +503,3 @@ function get_related_name($field_def,$id_value) {
     }
     return false;
 }
-?>

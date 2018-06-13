@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Atasament',
     'LBL_REVENUELINEITEMS' => 'Articole linie de venituri',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Previzualizare conturi',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Note',
 
     // Help Text

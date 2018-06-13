@@ -24,6 +24,7 @@ if(file_exists("include/language/{$current_language}.lang.php")){
 else {
     require_once("include/language/en_us.lang.php");
 }
+
 require_once('install/UserDemoData.php');
 require_once('install/TeamDemoData.php');
 
@@ -40,6 +41,8 @@ $first_name_count = count($sugar_demodata['first_name_array']);
 $company_name_count = count($sugar_demodata['company_name_array']);
 $street_address_count = count($sugar_demodata['street_address_array']);
 $city_array_count = count($sugar_demodata['city_array']);
+$tags_array_count = count($sugar_demodata['tags_array']);
+
 //Turn disable_workflow to Yes so that we don't run workflow for any seed modules
 $_SESSION['disable_workflow'] = "Yes";
 global $app_list_strings;
@@ -130,9 +133,6 @@ $replacements[] = '';
 
 //create timeperiods - pro only
 
-require_once('modules/Forecasts/ForecastDirectReports.php');
-require_once('modules/Forecasts/Common.php');
-require_once('modules/TimePeriods/TimePeriodsSeedData.php');
 
 installLog("DemoData: Time Periods");
 $timedate = TimeDate::getInstance();
@@ -141,6 +141,56 @@ installLog("DemoData: Done Time Periods");
 
 echo '.';
 
+$tag_ids = createTags($sugar_demodata['tags_array']);
+
+/**
+ * Create demo data for tags
+ * @param $tags_array has tag names
+ * @return an array of tag ids
+ */
+function createTags($tags_array)
+{
+    $tag_ids = array();
+    for ($i = 0, $j = count($tags_array); $i < $j; $i++) {
+        $tagBean = BeanFactory::newBean('Tags');
+        $tagBean->name = $tags_array[$i];
+        $tagBean->save();
+        $tag_ids[$tagBean->id] = $tagBean;
+    }
+    return $tag_ids;
+}
+
+/**
+ * Gets random count for tags for each record
+ * @return int
+ */
+function getTagsCountForEachRecord()
+{
+    return mt_rand(0, 6);
+}
+
+/**
+ * Adds tags to a given bean
+ * @param $bean Bean to which tag is to be added
+ */
+function addTagsToBean($bean)
+{
+    global $tag_ids;
+    $tagCount = getTagsCountForEachRecord();
+    if ($tagCount) {
+        $bean->load_relationship('tag_link');
+        if ($tagCount > 1) {
+            $tagArray = array_rand($tag_ids, $tagCount);
+        } else {
+            // array_rand with a count of 1 returns just a single key, not an array of keys
+            $tagArray = array(array_rand($tag_ids, $tagCount));
+        }
+
+        foreach ($tagArray as $tag_id) {
+            $bean->tag_link->add($tag_ids[$tag_id]);
+        }
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 $titles = $sugar_demodata['titles'];
@@ -162,8 +212,8 @@ installLog("DemoData: Companies + Related Calls, Notes Meetings and Bugs");
 for($i = 0; $i < $number_companies; $i++) {
 
     if (count($accounts_companies_list) > 0) {
-	    // De-populate a copy of the company name list
-	    // as each name is used to prevent duplication.
+        // De-populate a copy of the company name list
+        // as each name is used to prevent duplication.
 	    $account_num = array_rand($accounts_companies_list);
 	    $account_name = $accounts_companies_list[$account_num];
 	    unset($accounts_companies_list[$account_num], $account_num);
@@ -243,7 +293,10 @@ for($i = 0; $i < $number_companies; $i++) {
 	$account->shipping_address_country = $account->billing_address_country;
 	$account->industry = array_rand($app_list_strings['industry_dom']);
 	$account->account_type = "Customer";
-	$account->save();
+
+    $account->save();
+    addTagsToBean($account);
+
 	$account_ids[] = $account->id;
 	$accounts[] = $account;
 
@@ -282,8 +335,11 @@ for($i = 0; $i < $number_companies; $i++) {
 	$case->assigned_user_name = $account->assigned_user_name;
 	$case->team_id = $account->team_id;
 	$case->team_set_id = $account->team_set_id;
-	$case->save();
+        $case->save();
+        $case->load_relationship('tag_link');
+        addTagsToBean($case);
     }
+
 	// Create a bug for the account
 	$bug = new Bug();
 	$bug->account_id = $account->id;
@@ -296,6 +352,7 @@ for($i = 0; $i < $number_companies; $i++) {
 	$bug->team_id = $account->team_id;
 	$bug->team_set_id = $account->team_set_id;
 	$bug->save();
+    addTagsToBean($bug);
 
 	$note = new Note();
 	$note->parent_type = 'Accounts';
@@ -307,7 +364,8 @@ for($i = 0; $i < $number_companies; $i++) {
 	$note->assigned_user_name = $account->assigned_user_name;
 	$note->team_id = $account->team_id;
 	$note->team_set_id = $account->team_set_id;
-	$note->save();
+    $note->save();
+    addTagsToBean($note);
 
 	$call = new Call();
     $call->set_created_by = false;
@@ -328,6 +386,7 @@ for($i = 0; $i < $number_companies; $i++) {
 	$call->team_set_id = $account->team_set_id;
     $call->contacts_arr[0] = $contact->id;
 	$call->save();
+    addTagsToBean($call);
     $call->setContactInvitees($call->contacts_arr);
 
     //Set the user to accept the call
@@ -361,19 +420,6 @@ for($i=0; $i<$number_contacts; $i++) {
 	$contact->emailAddress->addAddress(createEmailAddress(), false, false, false, true);
 	$assignedUser = new User();
 	$assignedUser->retrieve($contact->assigned_user_id);
-/* comment out the non-pro code
-for($i=0; $i<1000; $i++)
-{
-	$contact->assigned_user_id = $assigned_user_id;
-	$contact->email1 = createEmailAddress();
-	$key = array_rand($sugar_demodata['street_address_array']);
-	$contact->primary_address_street = $sugar_demodata['street_address_array'][$key];
-	$key = array_rand($sugar_demodata['city_array']);
-	$contact->primary_address_city = $sugar_demodata['city_array'][$key];
-	$contact->lead_source = array_rand($app_list_strings['lead_source_dom']);
-	$contact->title = $titles[array_rand($titles)];
-
-*/
 	$contact->phone_work = create_phone_number();
 	$contact->phone_home = create_phone_number();
 	$contact->phone_mobile = create_phone_number();
@@ -388,7 +434,10 @@ for($i=0; $i<1000; $i++)
 	$contact->assigned_user_name = $contacts_account->assigned_user_name;
 	$contact->primary_address_postalcode = mt_rand(10000,99999);
 	$contact->primary_address_country = 'USA';
+
 	$contact->save();
+    addTagsToBean($contact);
+
     $contacts[] = $contact->id;
 
     // Create a linking table entry to assign an account to the contact.
@@ -412,7 +461,9 @@ for($i=0; $i<1000; $i++)
 		$task->parent_id = $account_id;
 		$task->parent_type = 'Accounts';
 	}
+
 	$task->save();
+    addTagsToBean($task);
 
 	//Create new meetings
 	$meeting = new Meeting();
@@ -420,7 +471,6 @@ for($i=0; $i<1000; $i++)
 	$key = array_rand($sugar_demodata['meeting_seed_data_names']);
 	$meeting->name = $sugar_demodata['meeting_seed_data_names'][$key];
 	$meeting->date_start = create_date(). ' ' . create_time();
-	//$meeting->time_start = date("H:i",time());
 	$meeting->duration_hours = array_rand($possible_duration_hours_arr);
 	$meeting->duration_minutes = array_rand($possible_duration_minutes_arr);
 	$meeting->assigned_user_id = $assigned_user_id;
@@ -439,6 +489,7 @@ for($i=0; $i<1000; $i++)
     $meeting->update_vcal  = false;
     $meeting->contacts_arr[0] = $contact->id;
 	$meeting->save();
+    addTagsToBean($meeting);
     $meeting->setContactInvitees($meeting->contacts_arr);
 	// leverage the seed user to set the acceptance status on the meeting.
 	$seed_user->id = $meeting->assigned_user_id;
@@ -661,19 +712,6 @@ foreach($sugar_demodata['currency_seed_data'] as $v){
 
 echo '.';
 $dollar_id = '-99';
-//$tekkyware_id = $manufacturer->id;
-//$widgetworld_id = $manufacturer->id;
-//$fedex_id = $shipper->id;
-//$usps_id = $shipper->id;
-//$desktops_id = $category->id;
-//$laptops_id = $category->id;
-//$stationary_id = $category->id;
-//$wobbly_id = $category->id;
-//$widgets_id = $type->id;
-//$hardware_id = $type->id;
-//$support_id = $type->id;
-//$taxrate_id = $taxrate->id;
-//$euro_id = $currency->id;
 foreach($sugar_demodata['producttemplate_seed_data'] as $v){
 	$manufacturer_id_max = count($manufacturer_id_arr) - 1;
 	$productcategory_id_max = count($productcategory_id_arr) - 1;
@@ -739,7 +777,7 @@ foreach ($sugar_demodata['kbcategories_array'] as $name => $v) {
     $kbCategory = BeanFactory::newBean('Categories');
     $kbCategory->name = $name;
 
-    $KBContent = BeanFactory::getBean('KBContents');
+    $KBContent = BeanFactory::newBean('KBContents');
     $rootCategory = BeanFactory::getBean(
         'Categories',
         $KBContent->getCategoryRoot(),
@@ -754,7 +792,7 @@ foreach ($sugar_demodata['kbcategories_array'] as $name => $v) {
             $kbSubCategory = BeanFactory::newBean('Categories');
             $kbSubCategory->name = $subname;
 
-            $KBSubContent = BeanFactory::getBean('KBContents');
+            $KBSubContent = BeanFactory::newBean('KBContents');
             $rootSubCategory = BeanFactory::getBean(
                 'Categories',
                 $idCategory,
@@ -846,7 +884,6 @@ echo '.';
     include('install/seed_data/quotes_SeedData.php');
 
     installLog("DemoData: Opportunities");
-    require_once('modules/Opportunities/OpportunitiesSeedData.php');
     $opportunity_ids = OpportunitiesSeedData::populateSeedData($number_companies*3, $app_list_strings, $accounts, $sugar_demodata['users']);
 
     foreach($contacts as $id)
@@ -862,7 +899,6 @@ echo '.';
     echo '.';
 
     installLog("DemoData: Forecasts");
-    require_once('modules/Forecasts/ForecastsSeedData.php');
     ForecastsSeedData::populateSeedData($timeperiods);
 
     installLog("DemoData: Done Forecasts");

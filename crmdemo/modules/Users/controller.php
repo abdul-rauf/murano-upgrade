@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,7 +15,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
-require_once("include/OutboundEmail/OutboundEmail.php");
 
 class UsersController extends SugarController
 {
@@ -87,7 +85,7 @@ class UsersController extends SugarController
             // This will only be deleted if no user is assigned to the team.
             $t->delete_team();
 
-            $eapm = BeanFactory::getBean('EAPM');
+            $eapm = BeanFactory::newBean('EAPM');
             $eapm->delete_user_accounts($_REQUEST['record']);
             $GLOBALS['log']->info("Removing user's External Accounts");
             $u->mark_deleted($u->id);

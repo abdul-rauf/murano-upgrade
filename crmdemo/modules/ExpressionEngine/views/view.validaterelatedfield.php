@@ -9,8 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/MVC/View/views/view.ajax.php');
-require_once("data/BeanFactory.php");
 
 class ViewValidateRelatedField extends ViewAjax
 {
@@ -60,7 +58,7 @@ class ViewValidateRelatedField extends ViewAjax
 
         if (empty($mbModule)) {
             //If the related module is deployed, use create a seed bean with the bean factory
-            $relBean = BeanFactory::getBean($relatedModule);
+            $relBean = BeanFactory::newBean($relatedModule);
             $field_defs = $relBean->field_defs;
         } else {
             //Otherwise the mbModule will exist and we can pull the vardef from there

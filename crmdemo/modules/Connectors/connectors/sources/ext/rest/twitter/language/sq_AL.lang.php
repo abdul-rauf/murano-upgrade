@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,24 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Siguro një Çelës API dhe Sekret nga Twitter duke e regjistruar instancën tënde Sugar si aplikacion të ri.<br/><br>Hapat për regjistrimin e instancës tënde:<br/><br/><ol><li>Shko në faqen e zhvilluesve të Twitter:<a href=&#39;http://dev.twitter.com/apps/new&#39; target=&#39;_blank&#39;>http://dev.twitter.com/apps/new</a>.</li><li>Identifikohu me llogarinë e Twitter me të cilën dëshiron të regjistrosh aplikacionin.</li><li>Në formularin e regjistrimit, shkruaj emrin e aplikacionit. Ky është emri të cilin përdoruesit do të shohin kur të vërtetojnë llogaritë e tyre në Twitter nga Sugar.</li><li>Shkruaj përshkrimin.</li><li>Shkruaj URL-në e uebsajtit të aplikacionit.</li><li>Zgjidh një URL anulimi (mund të jetë gjithçka duke qenë se Sugar e anashkalon këtë gjatë vërtetimit. Shembull: Fut URL-në e sajtit tënd të Sugar).</li><li>Prano kushtet e shërbimit të API të Twitter.</li><li>Kliko "Krijo aplikacionin tënd të Twitter".</li><li>Brenda faqes së aplikacionit, gjej Çelësin API dhe Sekretin API te skeda "Çelësat e API". Shkruaj Çelësin dhe Sekretin më poshtë.</li></ol></td></tr></table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
+								<tr>
+									<td valign="top" width="35%" class="dataLabel">
+										Merr kod API dhe sekret nga "Twitter" duke e regjistruar instancën tënde të "Sugar" si aplikacion të ri.br/><br>Hapat për regjistrimin e instancës:<br/><br/>
+										<ol>
+											<li>Shko te faqja e zhvilluesve e "Twitter": <a href=\'https://apps.twitter.com\' target=\'_blank\'>https://apps.twitter.com</a>.</li>
+											<li>Identifikohu duke përdorur llogarinë në "Twitter", me të cilën dëshiron të regjistrosh aplikacionin.</li>
+											<li>Në formularin e regjistrimit, jep emrin për aplikacionin. Ky është emri që përdoruesit do të shohin kur autentifikojnë llogaritë e tyre në "Twitter" nga brenda "Sugar".</li>
+											<li>Jep një përshkrim.</li>
+											<li>Jep URL-në e faqes së internetit të aplikacionit.</li>
+											<li>Jep URL-në e kthimit të thirrjes (mund të jetë çdo gjë duke qenë se "Sugar" e shmang këtë me autentikimin. Shembull: Jep URL-në e faqes së "Sugar").</li>
+											<li>Prano kushtet e shërbimit të "Twitter API".</li>
+											<li>Kliko "Krijo aplikacionin tënd të Twitter".</li>
+											<li>Brenda faqes së aplikacionit, gjej kodin API dhe API sekret nën skedën "Kodet API". Jep kodin dhe sekret më poshtë.</li>
+										</ol>
+									</td>
+								</tr>
+							</table>',
     'LBL_NAME' => 'Emri i përdoruesit në Twitter',
     'LBL_ID' => 'Emri i përdoruesit në Twitter',
 	'company_url' => 'URL',

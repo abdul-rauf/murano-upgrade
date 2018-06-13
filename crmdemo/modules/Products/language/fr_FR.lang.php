@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Ligne de devis',
     'LBL_LIST_MANUFACTURER' => 'Fabricant',
     'LBL_MANUFACTURERS' => 'Fabricants',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'N° série Fabricant',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Numéro de pièce',
     'LBL_LIST_QUANTITY' => 'Quantité',
     'LBL_LIST_COST_PRICE' => 'Prix de Revient',
     'LBL_LIST_DISCOUNT_PRICE' => 'Prix remisé',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Remise en %',
     'LBL_LIST_PRICE' => 'Prix catalogue :',
     'LBL_VENDOR_PART_NUM' => 'N° série Revendeur:',
-    'LBL_MFT_PART_NUM' => 'N° série Fabricant:',
+    'LBL_MFT_PART_NUM' => 'Numéro de pièce :',
     'LBL_NEXT_STEP' => 'Prochaine étape:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Date promotion:',
     'LBL_WEIGHT' => 'Poids:',
@@ -168,6 +168,8 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
  - Cliquer sur "Afficher plus" pour afficher plus de champs, si nécessaire.
 2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
 
-    'LBL_MANUFACTURERS' => 'Fabricants',
     'LBL_PRODUCT_POSITION' => 'Position du lot produit',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Liste de données de devis pour lignes de devis',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nouvelle ligne de devis)',
+    'LBL_DISCOUNT_PERCENT' => 'Pourcentage',
 );

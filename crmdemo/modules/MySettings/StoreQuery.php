@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -34,7 +33,7 @@ class StoreQuery{
 		global $current_user, $timedate;
 		if(isset($this->query['module']))
 		{
-		   $bean = BeanFactory::getBean($this->query['module']);
+		   $bean = BeanFactory::newBean($this->query['module']);
 		   if(!empty($bean))
 		   {
 		   	  foreach($this->query as $key=>$value)
@@ -109,7 +108,7 @@ class StoreQuery{
 		
 		if(isset($this->query['module']))
 		{
-		   $bean = BeanFactory::getBean($this->query['module']);
+		   $bean = BeanFactory::newBean($this->query['module']);
 		}
 
 

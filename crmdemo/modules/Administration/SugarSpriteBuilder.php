@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -146,7 +145,6 @@ class SugarSpriteBuilder
 							}
 						} else if(preg_match('/\.(jpg|jpeg|gif|png|bmp|ico)$/i', $file)) {
                             $GLOBALS['log']->error('Unable to process image file ' . $file);
-                            //$this->logMessage('Unable to process image file ' . $file);
                         }
 	   	     		}
    		 		}
@@ -285,9 +283,6 @@ class SugarSpriteBuilder
 			// use separate class to arrange the images
 			$sp = new SpritePlacement($dirs, $config);
 			$sp->processSprites();
-
-			//if(! $this->silentRun)
-			//	echo " (size {$sp->width()}x{$sp->height()})<br />";
 
 			// we need a target image size
 			if($sp->width() && $sp->height())

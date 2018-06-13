@@ -1,7 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,19 +10,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/tabs.php');
 
 class ConnectorWidgetTabs extends SugarWidgetTabs
 {
  var $class;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ConnectorWidgetTabs(&$tabs, $current_key, $jscallback, $class = 'tablist')
-    {
-        self::__construct($tabs, $current_key, $jscallback);
-    }
 
     public function __construct(&$tabs,$current_key,$jscallback, $class='tablist')
     {

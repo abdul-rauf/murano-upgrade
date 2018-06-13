@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/ActivityStream/Activities/ActivityQueueManager.php';
 
 class Activity extends Basic
 {
@@ -51,7 +50,7 @@ class Activity extends Basic
     public function __construct()
     {
         parent::__construct();
-        $this->last_comment_bean = BeanFactory::getBean('Comments');
+        $this->last_comment_bean = BeanFactory::newBean('Comments');
     }
 
     /**
@@ -193,7 +192,7 @@ class Activity extends Basic
         }
 
         if (empty($this->parent_id)) {
-            return BeanFactory::getBean($this->parent_type);
+            return BeanFactory::newBean($this->parent_type);
         }
 
         $ignoreDeleted = true;
@@ -282,7 +281,7 @@ class Activity extends Basic
         if (empty($this->parent_type)) {
             return true;
         }
-        $aclActionBeanName = BeanFactory::getBeanName('ACLActions');
+        $aclActionBeanName = BeanFactory::getBeanClass('ACLActions');
         return $aclActionBeanName::userHasAccess($userId, $this->parent_type, 'view');
     }
 
@@ -347,7 +346,7 @@ class Activity extends Basic
     {
         if (isset($this->parent_type) && isset($this->parent_id)) {
             $bean = BeanFactory::getBean($this->parent_type, $this->parent_id);
-            $subscriptionsBeanName = BeanFactory::getBeanName('Subscriptions');
+            $subscriptionsBeanName = BeanFactory::getBeanClass('Subscriptions');
             $this->processRecord($bean);
             $subscriptionsBeanName::processSubscriptions($bean, $this, array());
         } else {
@@ -376,7 +375,7 @@ class Activity extends Basic
     /**
      * Overwrite the notifications handler.
      */
-    public function _sendNotifications()
+    public function _sendNotifications($check_notify)
     {
         return false;
     }

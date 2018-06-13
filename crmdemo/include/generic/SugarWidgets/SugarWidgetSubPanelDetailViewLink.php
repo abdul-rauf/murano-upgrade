@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -97,11 +96,13 @@ class SugarWidgetSubPanelDetailViewLink extends SugarWidgetField
 			||  $layout_def['DetailView'] && !ACLController::moduleSupportsACL($layout_def['owner_module']) 
 			|| ACLController::checkAccess($layout_def['owner_module'], 'view', $layout_def['owner_id'] == $current_user->id)))
         {
-            $link = ajaxLink("index.php?module=$module&action=$action&record={$record}{$parent}");
-            if ($module == 'EAPM')
-            {
-                $link = "index.php?module=$module&action=$action&record={$record}{$parent}";
-            }
+            $link = 'index.php?' . http_build_query(
+                array(
+                    'module' => $module,
+                    'action' => $action,
+                    'record' => $record,
+                )
+            ) . $parent;
             return '<a href="' . $link . '" >'."$value</a>";
 
 		}else{
@@ -110,5 +111,3 @@ class SugarWidgetSubPanelDetailViewLink extends SugarWidgetField
 		
 	}
 }
-
-?>

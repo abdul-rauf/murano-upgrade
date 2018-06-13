@@ -12,21 +12,16 @@
         "watched": false
     },
 
-    "lib/backbone/underscore.min.js",
-    "lib/jquery/jquery.min.js",
-    "lib/jquery/jquery-migrate-1.2.1.min.js",
-    "lib/jquery-ui/js/jquery-ui-1.11.4.custom.min.js",
+    "node_modules/underscore/underscore-min.js",
     "lib/backbone/backbone.min.js",
-    "lib/handlebars/handlebars.min.js",
+    "node_modules/handlebars/dist/handlebars.min.js",
     "lib/sugarapi/sugarapi.js",
-    "lib/sugar/sugar.searchahead.js",
-    "lib/stash/stash.min.js",
-    "lib/async/async.min.js",
+    "node_modules/store/store.min.js",
+    "node_modules/async/lib/async.js",
     "lib/php-js/version_compare.js",
-    "lib/momentjs/min/moment.min.js",
-    "lib/bigjs/big.js",
-
-    "lib/sinon/sinon.js",
+    "node_modules/moment/min/moment.min.js",
+    "node_modules/big.js/big.js",
+    "node_modules/sinon/pkg/sinon.js",
     "lib/jasmine-sinon/jasmine-sinon.js",
 
     "src/app.js",
@@ -45,6 +40,8 @@
 
     "lib/sugaranalytics/sugaranalytics.js",
     "lib/sugaranalytics/googleanalyticsconnector.js",
+
+    "lib/sugarlogic/*.js",
 
     "tests/fixtures/*.js",
 

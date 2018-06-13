@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -26,20 +25,19 @@ class SugarWidget
     protected $form_value;
     protected $parent_bean;
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarWidget(&$layout_manage)
-    {
-        self::__construct($layout_manage);
-    }
-
     public function __construct(&$layout_manager)
 	{
 		$this->layout_manager = $layout_manager;
 	}
 
-    public function display($layout_def)
+    /**
+     * Display widget
+     *
+     * @param array $layout_def Layout definitions
+     *
+     * @return string
+     */
+    public function display(array $layout_def)
 	{
 		return 'display class undefined';
 	}
@@ -104,8 +102,6 @@ class SugarWidget
             return false;
         }
 
-        require_once('modules/MySettings/TabController.php');
-        require_once('include/SubPanel/SubPanelDefinitions.php');
         $tabs = new TabController();
         if ( in_array(strtolower($moduleName), SubPanelDefinitions::get_hidden_subpanels()) )
         {
@@ -115,3 +111,4 @@ class SugarWidget
         return false;
     }
 }
+

@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => '附件：',
     'LBL_REVENUELINEITEMS' => '营收单项',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => '客户预览',
     'LBL_NOTES_SUBPANEL_TITLE' => '笔记',
 
     // Help Text

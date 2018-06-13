@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/SugarFields/Fields/Base/SugarFieldBase.php';
 require_once 'modules/Teams/TeamSetManager.php';
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
@@ -92,7 +91,6 @@ class SugarFieldTeamset extends SugarFieldBase {
 
         $this->fields = $this->smarty->get_template_vars('fields');
     	$team_name_vardef = $this->fields["{$this->field_name}"];
-		require_once('include/SugarFields/Fields/Teamset/ViewSugarFieldTeamsetCollection.php');
 		$this->view = new ViewSugarFieldTeamsetCollection();
 		$this->view->displayParams = $this->params;
 		$this->view->vardef = $team_name_vardef;
@@ -226,7 +224,6 @@ class SugarFieldTeamset extends SugarFieldBase {
 	function renderImportView() {
     	$this->fields = $this->smarty->get_template_vars('fields');
     	$team_name_vardef = $this->fields["{$this->field_name}"];
-		require_once('include/SugarFields/Fields/Teamset/ViewSugarFieldTeamsetCollection.php');
 		$this->view = new ViewSugarFieldTeamsetCollection();
 		$this->view->displayParams = $this->params;
 		$this->view->vardef = $team_name_vardef;
@@ -271,7 +268,6 @@ class SugarFieldTeamset extends SugarFieldBase {
 	}
 
 	function initClassicView($fields, $formName='EditView'){
-		require_once('include/SugarFields/Fields/Teamset/ViewSugarFieldTeamsetCollection.php');
 		$this->view = new ViewSugarFieldTeamsetCollection();
         if(!$this->add_user_private_team)
         {
@@ -355,7 +351,6 @@ class SugarFieldTeamset extends SugarFieldBase {
 	 */
 	function getMassUpdateViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex, $searchView = false) {
     	$_REQUEST['bean_id'] = isset($_REQUEST['record']) ? $_REQUEST['record'] : '';
-		require_once('include/SugarFields/Fields/Teamset/MassUpdateSugarFieldTeamsetCollection.php');
 		$this->view = new MassUpdateSugarFieldTeamsetCollection();
 		$displayParams['formName'] = 'MassUpdate';
 		$this->view->displayParams = $displayParams;
@@ -576,7 +571,7 @@ class SugarFieldTeamset extends SugarFieldBase {
     {
         static $teamBean;
         if ( !isset($teamBean) ) {
-            $teamBean = BeanFactory::getBean('Teams');
+            $teamBean = BeanFactory::newBean('Teams');
         }
 
     	if(!is_array($value)){
@@ -603,7 +598,7 @@ class SugarFieldTeamset extends SugarFieldBase {
                     continue;
                 }
                 //3) ok we did not find the id, so we need to create a team.
-                $newbean = BeanFactory::getBean('Teams');
+                $newbean = BeanFactory::newBean('Teams');
                  if ( $newbean->ACLAccess('save') ) {
                     $newbean->{$vardef['rname']} = $val;
 
@@ -633,7 +628,7 @@ class SugarFieldTeamset extends SugarFieldBase {
                 $focus->teams->replace($team_ids, array(), true);
                 $focus->team_id = $team_ids[0];
             } else {
-                $teamSet = BeanFactory::getBean('TeamSets');
+                $teamSet = BeanFactory::newBean('TeamSets');
                 $selectedTeamSet = Team::$nameTeamsetMapping[$vardef['name']];
                 $focus->$selectedTeamSet = $teamSet->addTeams($team_ids);
             }
@@ -644,7 +639,7 @@ class SugarFieldTeamset extends SugarFieldBase {
     }
 
     private function _isTeamId($value, $module){
-    	$checkfocus = BeanFactory::getBean($module);
+    	$checkfocus = BeanFactory::newBean($module);
         if ( $checkfocus && is_null($checkfocus->retrieve($value)) ){
         	return false;
         }

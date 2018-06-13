@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,20 +9,60 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 $dictionary['accounts_opportunities'] = array(
     'table' => 'accounts_opportunities',
     'fields' => array(
-        array('name' => 'id', 'type' => 'id'),
-        array('name' => 'opportunity_id', 'type' => 'id'),
-        array('name' => 'account_id', 'type' => 'id')
-      , array ('name' => 'date_modified','type' => 'datetime')
-      , array('name' =>'deleted', 'type' =>'bool', 'len'=>'1', 'default'=>'0', 'required'=>false)
-      )                                  
-      , 'indices' => array (
-       array('name' =>'accounts_opportunitiespk', 'type' =>'primary', 'fields'=>array('id'))
-      , array('name' => 'idx_account_opportunity', 'type'=>'alternate_key', 'fields'=>array('account_id','opportunity_id'))      
-      , array('name' => 'idx_oppid_del_accid', 'type' => 'index', 'fields'=> array('opportunity_id', 'deleted', 'account_id'))
-      ),
+        'id' => array(
+            'name' => 'id',
+            'type' => 'id',
+        ),
+        'opportunity_id' => array(
+            'name' => 'opportunity_id',
+            'type' => 'id',
+        ),
+        'account_id' => array(
+            'name' => 'account_id',
+            'type' => 'id',
+        ),
+        'date_modified' => array(
+            'name' => 'date_modified',
+            'type' => 'datetime',
+        ),
+        'deleted' => array(
+            'name' => 'deleted',
+            'type' => 'bool',
+            'len' => '1',
+            'default' => '0',
+            'required' => false,
+        ),
+    ),
+    'indices' => array(
+        array(
+            'name' => 'accounts_opportunitiespk',
+            'type' => 'primary',
+            'fields' => array(
+                'id',
+            ),
+        ),
+        array(
+            'name' => 'idx_account_opportunity',
+            'type' => 'alternate_key',
+            'fields' => array(
+                'account_id',
+                'opportunity_id',
+            ),
+        ),
+        array(
+            'name' => 'idx_oppid_del_accid',
+            'type' => 'index',
+            'fields' => array(
+                'opportunity_id',
+                'deleted',
+                'account_id',
+            ),
+        ),
+    ),
     'relationships' => array(
         'accounts_opportunities' => array(
             'lhs_module' => 'Accounts',

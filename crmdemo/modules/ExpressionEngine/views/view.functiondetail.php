@@ -11,14 +11,6 @@
  */
 class ViewFunctiondetail extends SugarView
 {
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ViewFunctionDetail()
-    {
-        self::__construct();
-    }
-
     public function __construct()
     {
 		$this->options['show_footer'] = false;
@@ -33,7 +25,6 @@ class ViewFunctiondetail extends SugarView
             include ('include/Expressions/updatecache.php');
         }
  		include $cachefile;
- 		require_once('include/JSON.php');
  		$desc = "";
 		$function = $this->request->getValidInputRequest('function', 'Assert\SugarLogic\FunctionName');
  		if (!empty($function) && !empty($FUNCTION_MAP[$function])){
@@ -78,3 +69,4 @@ class ViewFunctiondetail extends SugarView
 		));
  	}
 }
+

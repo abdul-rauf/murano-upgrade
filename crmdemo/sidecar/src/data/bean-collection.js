@@ -37,6 +37,19 @@
     app.augment('BeanCollection', Backbone.Collection.extend({
 
         /**
+         * The request object that is currently syncing against the server.
+         *
+         * This object is needed to determine if a fetch request should be
+         * aborted for the collection (e.g. if a new fetch request returns a
+         * response prior to a previous fetch request).
+         *
+         * @private
+         * @member Data.BeanCollection
+         * @property {SUGAR.Api.HttpRequest}
+         */
+        _activeFetchRequest: null,
+
+        /**
          * The default model of a bean collection is a {@link Data.Bean}.
          *
          * **Note:** Please do not manipulate this property directly.
@@ -81,6 +94,14 @@
             this._persistentOptions = {};
 
             /**
+             * Object keeping track of created models added into the collection
+             * that are not synced yet.
+             *
+             * @type {Array}
+             */
+            this._create = [];
+
+            /**
              * Initial fetch options.
              *
              * @deprecated 7.7 will be removed in 7.8. Please use {@link #setOption}
@@ -99,24 +120,7 @@
             }
             this._initOptions = options;
 
-            /**
-             * The request object that is currently syncing against the server.
-             *
-             * This object is needed to determine if a fetch request should be
-             * aborted for the collection (e.g. if a new fetch request returns a
-             * response prior to a previous fetch request).
-             *
-             * @private
-             * @member Data.BeanCollection
-             * @property {SUGAR.Api.HttpRequest}
-             */
-            this._activeFetchRequest = null;
-
-            this.on('data:sync:complete', function() {
-                this._activeFetchRequest = null;
-            }, this);
-
-            this.on('remove', this._decrementTotal, this);
+            this._bindCollectionEvents();
 
             Backbone.Collection.prototype.initialize.call(this, models, options);
 
@@ -130,6 +134,23 @@
         },
 
         /**
+         * Bind collection events to activeRequest.
+         *
+         * @private
+         */
+        _bindCollectionEvents: function() {
+
+            this.on('data:sync:complete', function() {
+                var activeFetchRequest = this.getFetchRequest();
+                if (activeFetchRequest) {
+                    this._activeFetchRequest = null;
+                }
+            }, this);
+
+            this.on('remove', this._decrementTotal, this);
+        },
+
+        /**
          * Decrements the {@link #total collection total}.
          *
          * @protected
@@ -138,6 +159,94 @@
             if (this.total) {
                 this.total--;
             }
+        },
+
+        /**
+         * @inheritdoc
+         *
+         * Keeps track of the added models.
+         *
+         * @param {Object|Object[]|Data.Bean|Data.Bean[]} models The models to add.
+         * @param {Object} options A hash of options.
+         */
+        add: function (models, options) {
+            models = Backbone.Collection.prototype.add.call(this, models, options);
+
+            if (_.isUndefined(models)) {
+                return models;
+            }
+
+            models = _.isArray(models) ? models : [models];
+
+            _.each(models, (model) => {
+                if (model instanceof this.model ? model.isNew() : !model.id) {
+                    this._create.push(model);
+                }
+            }, this);
+
+            return models.length === 1 ? models[0] : models;
+        },
+
+        /**
+         * @inheritdoc
+         *
+         * Keeps track of the removed models.
+         *
+         * @param {Object|Object[]|Data.Bean|Data.Bean[]} models The models to remove
+         * @param {Object} options A hash of options.
+         */
+        remove: function (models, options) {
+            models = Backbone.Collection.prototype.remove.call(this, models, options);
+
+            if (_.isUndefined(models)) {
+                return models;
+            }
+
+            models = _.isArray(models) ? models : [models];
+
+            _.each(models, (model) => {
+                if (model instanceof this.model ? model.isNew() : !model.id) {
+                    this._create = _.without(this._create, model);
+                }
+            }, this);
+
+            return models.length === 1 ? models[0] : models;
+        },
+
+        /**
+         * @inheritdoc
+         *
+         * Keeps track of the unsync changes on the collection.
+         *
+         * @param {Object|Object[]|Data.Bean|Data.Bean[]} models The models to
+         * reset the collection with.
+         * @param {Object} options A hash of options.
+         */
+        reset: function (models, options) {
+            this.resetDelta();
+            return Backbone.Collection.prototype.reset.call(this, models, options);
+        },
+
+        /**
+         * Gets a hash of unsynced changes operated on the collection.
+         *
+         * @return {Object} A hash representing the unsynced changes.
+         */
+        getDelta: function () {
+            if (_.isEmpty(this._create)) {
+                return {};
+            }
+
+            return {
+                create: _.invoke(this._create, 'toJSON'),
+            };
+        },
+
+        /**
+         * Resets the delta object representing the unsaved collection changes
+         */
+        resetDelta: function() {
+            this._create = [];
         },
 
         /**
@@ -196,13 +305,13 @@
          * requests will be aborted.
          *
          * @param {Object} [options] Fetch options.
-         * @param {bool} [options.relate] `true` if relationships should be
+         * @param {boolean} [options.relate] `true` if relationships should be
          *   fetched. `false` otherwise.
-         * @param {bool} [options.myItems] `true` if only records assigned to
+         * @param {boolean} [options.myItems] `true` if only records assigned to
          *   the current user should be fetched. `false` otherwise.
-         * @param {bool} [options.favorites] `true` if favorited records should
+         * @param {boolean} [options.favorites] `true` if favorited records should
          *   be fetched. `false` otherwise.
-         * @param {bool} [options.add] `true` if new records should be appended
+         * @param {boolean} [options.add] `true` if new records should be appended
          *   to the collection. `false` otherwise.
          * @param {string} [options.query] Search query string.
          * @param {Function} [options.success] The success callback to execute.
@@ -233,25 +342,29 @@
             options.reset = _.isUndefined(options.reset) ? true : options.reset;
 
             this._activeFetchRequest = Backbone.Collection.prototype.fetch.call(this, options);
-            return this._activeFetchRequest;
+            return this.getFetchRequest();
         },
 
         /**
-         * Getter for {@link #_activeFetchRequest}.
-         *
-         * @return {SUGAR.Api.HttpRequest} The active fetch request.
+         * Returns currently active fetch request
+         * @returns {SUGAR.Api.HttpRequest} - active http fetch request
          */
-        getFetchRequest: function() {
-            return this._activeFetchRequest;
+        getFetchRequest: function () {
+            if (_.isFunction(this._activeFetchRequest)) {
+                return this._activeFetchRequest();
+            } else {
+                return this._activeFetchRequest;
+            }
         },
 
         /**
-         * Aborts the {@link #_activeFetchRequest current fetch request}.
+         * Aborts currently active fetch request
          */
-        abortFetchRequest: function() {
-            var req = this.getFetchRequest();
-            if (req) {
-                app.api.abortRequest(req.uid);
+        abortFetchRequest: function () {
+            var activeFetchRequest = this.getFetchRequest();
+            if (activeFetchRequest) {
+                app.api.abortRequest(activeFetchRequest.uid);
+                this._activeFetchRequest = null;
             }
         },
 
@@ -472,17 +585,18 @@
          * if current model is last item in collection.
          */
         getNext: function(current, callback) {
-            var ind = -1,
-                result = null,
-                self = this;
+            var ind = -1;
+            var nextFn = () => { callback.apply(this, [this.at(ind + 1), 'next']); };
+
             if (this.hasNextModel(current)) {
                 ind = this.getModelIndex(current);
                 if (ind + 1 >= this.length) {
-                    this.paginate({add: true, success: function(collection, response, options) {
-                        callback.apply(self, [self.at(ind + 1), 'next']);
-                    }});
+                    this.paginate({
+                        add: true,
+                        success: nextFn,
+                    });
                 } else {
-                    callback.apply(self, [self.at(ind + 1), 'next']);
+                    nextFn();
                 }
             }
         },

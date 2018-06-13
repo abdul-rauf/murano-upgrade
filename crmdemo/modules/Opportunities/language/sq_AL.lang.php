@@ -166,25 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale nga fillimi në fund. Çdo regjistrim {{module_name}} përfaqëson një shitje të mundshme dhe përfshin datën përkatëse të shitjes, si dhe lidhjen me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj. Çdo {{module_name}} do të përpunohet si zakonisht përmes disa fazave të shitjes derisa të shënohet si "Fitim i mbyllur" ose "Humbje e mbyllur". {{plural_module_name}} mund të ngrihet edhe më tej me anë të modulit të Sugar {{forecasts_singular_module}} për të kuptuar dhe parashikuar tendencat e shitjeve si dhe fokusin e punës për të arritur kuotat e shitjeve.',
+    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale nga fillimi në fund. Çdo regjistrim {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhënat përkatëse të shitjes, si dhe lidhet me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj. Ecuria e një {{module_name}} kalon zakonisht nëpër disa faza shitjesh derisa shënohet si "Fitim i mbyllur" ose si "Humbje e mbyllur". {{plural_module_name}} mund të rritet edhe më tej duke përdorur modulin {{forecasts_singular_module}} të Sugar për të kuptuar dhe parashikuar tendencat e shitjeve si dhe për të fokusuar punën për të arritur kuotat e shitjeve.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe produktet që i përkasin atyre shitjeve nga fillimi në fund. Çdo regjistrim {{module_name}} përfaqëson një shitje të mundshme dhe përfshin datën përkatëse të shitjes, si dhe lidhjen me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj.
+    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe të artikujve të linjës që u përkasin këtyre shitjeve nga fillimi në fund. Çdo regjistrim {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhënat përkatëse të shitjes, si dhe lidhet me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj.
 
-- Ndrysho fushën e regjistrimit duke klikuar në fushë individuale ose butonin "Ndrysho".
-- Shiko ose modifiko lidhjet me regjistrimet e tjera në nënpanelet, duke e kaluar panelin majtas poshtë te "Shikimi i të dhënave".
-- Bëj dhe shiko komentet e përdoruesit dhe regjistro historikun e ndryshimit në {{activitystream_singular_module}} duke e kaluar panelin majtas poshtë tek "Aktivitetet".
-- Ndiqe ose shënoje si të preferuar këtë regjistrim me anë të ikonave në të djathtë të emrit të regjistrimit.
-- Veprimet shtesë disponohen te menyja në zbritje "Veprimet" në të djathtë të butonit "Ndrysho".',
+- Redakto fushat e këtij regjistrimi duke klikuar një fushë individuale ose butonin "Redakto".
+- Shfaq ose modifiko lidhjet për te regjistrimet e tjera në nënpanele, duke e lëvizur panelin e poshtëm majtas te "Pamja e të dhënave".
+- Bëj dhe shiko komente përdoruesi dhe regjistro historikun e ndryshimeve në {{activitystream_singular_module}}, duke e lëvizur panelin e poshtëm majtas tek "Transmetimi i aktiviteteve".
+- Ndiq ose bëje të preferuar këtë regjistrim duke përdorur ikonat në të djathtë të emrit të regjistrimit.
+- Veprime shtesë disponohen në menynë me zbritje të veprimeve në të djathë të butonit "Redakto".',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe produktet që i përkasin atyre shitjeve nga fillimi në fund. Çdo regjistrim {{module_name}} përfaqëson një shitje të mundshme dhe përfshin datën përkatëse të shitjes, si dhe lidhjen me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj.
+    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} mundëson gjurmimin e shitjeve individuale dhe të artikujve të linjës që u përkasin këtyre shitjeve nga fillimi në fund. Çdo regjistrim {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhënat përkatëse të shitjes, si dhe lidhet me regjistrime të tjera të rëndësishme si {{quotes_module}}, {{contacts_module}} etj.
 
 Për të krijuar një {{module_name}}:
 1. Jep vlerat për fushat sipas dëshirës.
- - Fushat e shënuara me "Patjetër" duhet të plotësohen para se të ruhen.
- - Kliko "Trego më shumë" për të paraqitur fushat shtesë nëse është e nevojshme.
-2. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
+ - Fushat e shënuar si "Të nevojshme" duhet të plotësohen përpara ruajtjes.
+ - Kliko "Shfaq më shumë" për të shfaqur fusha shtesë nëse është e nevojshme.
+2. Kliko "Ruaj" për të përfunduar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
 
 // END PRO/CORP
 

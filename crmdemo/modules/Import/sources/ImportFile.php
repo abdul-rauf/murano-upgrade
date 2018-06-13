@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,8 +16,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * All Rights Reserved.
  ********************************************************************************/
 
-require_once('modules/Import/CsvAutoDetect.php');
-require_once('modules/Import/sources/ImportDataSource.php');
 
 class ImportFile extends ImportDataSource
 {
@@ -191,9 +187,27 @@ class ImportFile extends ImportDataSource
         }
 
         if (!$clean) {
-            $this->_currentRow = fgets($this->_fp);
-            $this->_rowsCount++;
-            return $this->_currentRow;
+            $row = fgets($this->_fp, 8192);
+            if ($row) {
+                if (!empty($this->_enclosure)) {
+                    // check if this record is scattered in multiple lines
+                    // by counting enclosure character
+                    while (substr_count($row, $this->_enclosure) % 2) {
+                        $nextRow = fgets($this->_fp, 8192);
+                        if ($nextRow) {
+                            $row .= $nextRow;
+                        } else {
+                            // eof
+                            return false;
+                        }
+                    }
+                }
+                $this->_currentRow = $row;
+                $this->_rowsCount++;
+                return $this->_currentRow;
+            }
+            // eof
+            return false;
         }
 
         // explode on delimiter instead if enclosure is an empty string

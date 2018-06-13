@@ -60,6 +60,7 @@ CriteriaField.prototype.init = function(settings) {
     });
 
     this._panel = new ExpressionControl({
+        parent: this,
         itemContainer: this.controlObject,
         owner: this.controlObject,
         dateFormat: defaults.dateFormat,
@@ -249,19 +250,8 @@ CriteriaField.prototype.evalRequired = function () {
 
 CriteriaField.prototype.isValid = function () {
     var valid = this._panel.isValid();
-
     if (valid) {
-        $(this.errorTooltip.html).removeClass('adam-tooltip-error-on');
-        $(this.errorTooltip.html).addClass('adam-tooltip-error-off');
-        valid = valid && Field.prototype.isValid.call(this);
-    } else {
-        this.errorTooltip.setMessage(translate('LBL_PMSE_INVALID_EXPRESSION_SYNTAX', 'pmse_Project'));
-        $(this.errorTooltip.html).removeClass('adam-tooltip-error-off');
-        $(this.errorTooltip.html).addClass('adam-tooltip-error-on');
-    }
-
-    if (valid) {
-        return valid && Field.prototype.isValid.call(this);
+        valid = Field.prototype.isValid.call(this);
     }
     return valid;
 };
@@ -310,9 +300,6 @@ CriteriaField.prototype.createHTML = function() {
 
         //this.html.appendChild(this.controlObject.getHTML());
 
-        if (this.errorTooltip) {
-            this.html.appendChild(this.errorTooltip.getHTML());
-        }
         if (this.helpTooltip) {
             this.html.appendChild(this.helpTooltip.getHTML());
         }

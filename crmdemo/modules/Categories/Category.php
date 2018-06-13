@@ -11,8 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/Categories/NestedBeanInterface.php';
-require_once 'modules/Categories/exception/CategoriesRuntimeException.php';
 
 class Category extends SugarBean implements NestedBeanInterface
 {
@@ -166,7 +164,9 @@ class Category extends SugarBean implements NestedBeanInterface
     {
         $db = DBManagerFactory::getInstance();
         $query = $this->getQuery();
-        $query->joinRaw('INNER JOIN ' . $this->table_name . ' root ON root.id=node.root');
+        $query->joinTable($this->table_name, array(
+            'alias' => 'root',
+        ))->on()->equalsField('root.id', 'node.root');
 
         $condition = array(
             'node.lft < ' . $this->lft,
@@ -190,7 +190,8 @@ class Category extends SugarBean implements NestedBeanInterface
      */
     public function getParent()
     {
-        return array_shift($this->getParents(1, true));
+        $parents = $this->getParents(1, true);
+        return array_shift($parents);
     }
 
     /**
@@ -296,7 +297,9 @@ class Category extends SugarBean implements NestedBeanInterface
     {
         $db = DBManagerFactory::getInstance();
         $query = $this->getQuery();
-        $query->joinRaw('INNER JOIN ' . $this->table_name . ' root ON root.id=node.root');
+        $query->joinTable($this->table_name, array(
+            'alias' => 'root',
+        ))->on()->equalsField('root.id', 'node.root');
         $query->whereRaw('root.id = ' . $db->quoted($root) . ' AND node.lft > 1');
         $query->orderByRaw('node.lft', 'ASC');
         return $query->execute();
@@ -322,26 +325,22 @@ class Category extends SugarBean implements NestedBeanInterface
             $right += $delta;
         }
 
-        $this->update(array(
-            'lvl' => 'lvl' . sprintf('%+d', $levelDelta),
-        ), 'lft >= :left AND rgt <= :right AND root = :root', array(
-            ':left' => $left,
-            ':right' => $right,
-            ':root' => $this->root,
-        ));
+        $this->update(
+            array('lvl = lvl + ?'),
+            'lft >= ? AND rgt <= ? AND root = ?',
+            array($levelDelta, $left, $right, $this->root)
+        );
 
         foreach (array('lft', 'rgt') as $attribute) {
-            $condition = $attribute . ' >= :left'
-                . ' AND ' . $attribute . ' <= :right'
-                . ' AND root = :root';
+            $condition = $attribute . ' >= ?'
+                . ' AND ' . $attribute . ' <= ?'
+                . ' AND root = ?';
 
-            $this->update(array(
-                $attribute => $attribute . sprintf('%+d', $key - $left),
-            ), $condition, array(
-                ':left' => $left,
-                ':right' => $right,
-                ':root' => $this->root,
-            ));
+            $this->update(
+                array($attribute . ' = ' . $attribute . ' + ?'),
+                $condition,
+                array($key - $left, $left, $right, $this->root)
+            );
         }
 
         $this->shiftLeftRight($right + 1, -$delta);
@@ -401,36 +400,30 @@ class Category extends SugarBean implements NestedBeanInterface
     protected function shiftLeftRight($key, $delta)
     {
         foreach (array('lft', 'rgt') AS $attribute) {
-            $this->update(array(
-                $attribute => $attribute . sprintf('%+d', $delta),
-            ), $attribute . ' >= :key AND (root=:root) ', array(
-                ':key' => $key,
-                ':root' => $this->root,
-            ));
+            $this->update(
+                array($attribute . ' = ' . $attribute . ' + ?'),
+                $attribute . ' >= ? AND (root = ?)',
+                array($delta, $key, $this->root)
+            );
         }
     }
 
     /**
      * Creates and executes an UPDATE SQL statement.
-     * @param array $fields the fields data (name=>value) to be updated.
+     * @param array $fields the fields' expression to be updated.
      * @param mixed $conditions the conditions that will be put in the WHERE part.
      * @param array $params the parameters to be bound to the query.
-     * @return boolean db query result
      */
-    public function update($fields, $condition = '1', $params = array())
+    protected function update($fields, $condition, array $params)
     {
         $db = DBManagerFactory::getInstance();
-        $fieldSet = array();
 
-        foreach ($fields as $name => $value) {
-            $fieldSet[] = $name . '=' . $value;
-        }
+        $query = 'UPDATE ' . $this->table_name . ''
+            . ' SET ' . implode(', ', $fields)
+            . ' WHERE ' . $condition;
 
-        $sql = 'UPDATE ' . $this->table_name . ''
-            . ' SET ' . implode(', ', $fieldSet)
-            . ' WHERE ' . strtr($condition, array_map(array($db, 'quoted'), $params));
-
-        return $db->query($sql, true, 'Error updating table:' . $this->table_name . ':');
+        $conn = $db->getConnection();
+        $conn->executeUpdate($query, $params);
     }
 
     /**

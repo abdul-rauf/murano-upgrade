@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,15 +21,6 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 class SugarAuthenticate{
 	var $userAuthenticateClass = 'SugarAuthenticateUser';
 	var $authenticationDir = 'SugarAuthenticate';
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarAuthenticate()
-    {
-        self::__construct();
-    }
-
 	/**
 	 * Constructs SugarAuthenticate
 	 * This will load the user authentication class
@@ -57,7 +47,7 @@ class SugarAuthenticate{
 		global $app_strings;
 		unset($_SESSION['login_error']);
 		$res = $GLOBALS['sugar_config']['passwordsetting'];
-        $usr = BeanFactory::getBean('Users');
+        $usr = BeanFactory::newBean('Users');
         $usr->retrieve_by_string_fields(array('user_name'=>$username));
 		$_SESSION['login_error']='';
 		$_SESSION['waiting_error']='';
@@ -167,28 +157,6 @@ class SugarAuthenticate{
 	function postLoginAuthenticate(){
 
 		global $reset_theme_on_default_user, $reset_language_on_default_user, $sugar_config;
-		//THIS SECTION IS TO ENSURE VERSIONS ARE UPTODATE
-
-		require_once ('modules/Versions/CheckVersions.php');
-		$invalid_versions = get_invalid_versions();
-		if (!empty ($invalid_versions)) {
-			if (isset ($invalid_versions['Rebuild Relationships'])) {
-				unset ($invalid_versions['Rebuild Relationships']);
-
-				// flag for pickup in DisplayWarnings.php
-				$_SESSION['rebuild_relationships'] = true;
-			}
-
-			if (isset ($invalid_versions['Rebuild Extensions'])) {
-				unset ($invalid_versions['Rebuild Extensions']);
-
-				// flag for pickup in DisplayWarnings.php
-				$_SESSION['rebuild_extensions'] = true;
-			}
-
-			$_SESSION['invalid_versions'] = $invalid_versions;
-		}
-
 
 		//just do a little house cleaning here
 		unset($_SESSION['login_password']);
@@ -211,7 +179,6 @@ class SugarAuthenticate{
 		$GLOBALS['log']->debug("authenticated_user_language is $authenticated_user_language");
 
 		// Clear all uploaded import files for this user if it exists
-        require_once('modules/Import/ImportCacheFiles.php');
         $tmp_file_name = ImportCacheFiles::getImportDir()."/IMPORT_" . $GLOBALS['current_user']->id;
 
 		if (file_exists($tmp_file_name)) {

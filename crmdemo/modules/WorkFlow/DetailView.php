@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,14 +17,13 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 
-require_once('include/DetailView/DetailView.php');
 
 
 global $mod_strings;
 global $app_strings;
 global $app_list_strings;
 global $focus, $support_coming_due, $support_expired;
-$focus = BeanFactory::getBean('WorkFlow');
+$focus = BeanFactory::newBean('WorkFlow');
 $detailView = new DetailView();
 $offset=0;
 if (isset($_REQUEST['offset']) or isset($_REQUEST['record'])) {

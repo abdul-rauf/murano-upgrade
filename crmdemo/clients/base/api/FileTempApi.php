@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'clients/base/api/FileApi.php';
 
 /**
  * API Class to handle temporary image (attachment) interactions with a field in
@@ -55,7 +53,7 @@ class FileTempApi extends FileApi {
      * @return array
      * @throws SugarApiExceptionError
      */
-    public function saveTempImagePost($api, $args)
+    public function saveTempImagePost(ServiceBase $api, array $args)
     {
         if (!isset($args['record'])) {
             $args['record'] = null;
@@ -70,7 +68,7 @@ class FileTempApi extends FileApi {
      * @param ServiceBase $api The service base
      * @param array $args Arguments array built by the service base
      */
-    public function getTempImage($api, $args)
+    public function getTempImage(ServiceBase $api, array $args)
     {
         // Get the field
         if (empty($args['field'])) {
@@ -93,7 +91,6 @@ class FileTempApi extends FileApi {
                 'content-type' => $filedata['mime'],
                 'path' => $filepath,
             );
-            require_once "include/download_file.php";
             $dl = new DownloadFileApi($api);
             $dl->outputFile(false, $info);
 

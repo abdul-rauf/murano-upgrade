@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,7 +14,7 @@ $listViewDefs ['Schedulers'] =
 array (
   'NAME' =>
   array (
-    'width' => '35%',
+    'width' => '35',
     'label' => 'LBL_LIST_NAME',
     'link' => true,
     'sortable' => true,
@@ -23,14 +22,14 @@ array (
   ),
   'JOB_INTERVAL' =>
   array (
-    'width' => '20%',
+    'width' => '20',
     'label' => 'LBL_LIST_JOB_INTERVAL',
     'default' => true,
   	'sortable' => false,
   ),
   'DATE_TIME_START' =>
   array (
-    'width' => '25%',
+    'width' => '25',
     'label' => 'LBL_LIST_RANGE',
   	'customCode' => '{$DATE_TIME_START} - {$DATE_TIME_END}',
     'default' => true,
@@ -38,7 +37,7 @@ array (
   ),
   'STATUS' =>
   array (
-    'width' => '15%',
+    'width' => '15',
     'label' => 'LBL_LIST_STATUS',
     'default' => true,
   ),

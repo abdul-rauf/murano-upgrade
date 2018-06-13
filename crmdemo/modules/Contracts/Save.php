@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry)
-	die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -25,7 +23,7 @@ if(!empty($_POST['expiration_notice_time_meridiem']) && !empty($_POST['expiratio
 }
 
 
-$sugarbean = BeanFactory::getBean('Contracts');
+$sugarbean = BeanFactory::newBean('Contracts');
 $sugarbean = populateFromPost('', $sugarbean);
 
 if (!$sugarbean->ACLAccess('Save')) {
@@ -46,7 +44,7 @@ if (!empty($_POST['type']) && $_POST['type'] !== $_POST['old_type']) {
 	$ctype = BeanFactory::getBean('ContractTypes', $_POST['type']);
 	if (!empty($ctype->id)) {
 		$ctype->load_relationship('documents');
-		$doc = BeanFactory::getBean('Documents');
+		$doc = BeanFactory::newBean('Documents');
 		$documents=$ctype->documents->getBeans($doc);
 		if (count($documents) > 0) {
 			$sugarbean->load_relationship('contracts_documents');

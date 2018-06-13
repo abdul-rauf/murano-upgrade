@@ -14,7 +14,6 @@ use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
-require_once 'include/MVC/View/SugarView.php';
 
 /**
  * Main SugarCRM controller
@@ -146,16 +145,6 @@ class SugarController
      * @var Request
      */
     protected $request;
-
-    /**
-     * Constructor. This is meant to load up the module, action, record as well
-     * as the mapping arrays.
-     * @deprecated
-     */
-    protected function SugarController()
-    {
-        self::__construct();
-    }
 
     /**
      * Ctor
@@ -531,7 +520,6 @@ class SugarController
 			$this->bean->notify_on_save = true;
 		}
 		$GLOBALS['log']->debug("SugarController:: performing pre_save.");
-        require_once('include/SugarFields/SugarFieldHandler.php');
         $sfh = new SugarFieldHandler();
 		foreach($this->bean->field_defs as $field => $properties) {
 			$type = !empty($properties['custom_type']) ? $properties['custom_type'] : $properties['type'];
@@ -574,7 +562,6 @@ class SugarController
 
     public function action_spot()
     {
-        require_once('include/SugarSearchEngine/SugarSearchEngineFactory.php');
         $searchEngine = SugarSearchEngineFactory::getInstance('', array(), true);
         //Default db search will be handled by the spot view, everything else by fts.
         if($searchEngine instanceOf SugarSearchEngine)
@@ -658,8 +645,7 @@ class SugarController
             set_time_limit(0);//I'm wondering if we will set it never goes timeout here.
             // until we have more efficient way of handling MU, we have to disable the limit
             $GLOBALS['db']->setQueryLimit(0);
-            require_once('modules/MySettings/StoreQuery.php');
-            $seed = BeanFactory::getBean($_REQUEST['module']);
+            $seed = BeanFactory::newBean($_REQUEST['module']);
             SugarAutoLoader::requireWithCustom('include/MassUpdate.php');
             $massUpdateClass = SugarAutoLoader::customClass('MassUpdate');
             $mass = new $massUpdateClass();
@@ -750,13 +736,6 @@ class SugarController
 		$this->view_object_map['bean'] = $this->bean;
 		$this->view = 'list';
 	}
-
-/*
-
-	//THIS IS HANDLED IN ACTION_REMAP WHERE INDEX IS SET TO LISTVIEW
-	function action_index(){
-	}
-*/
 
 	/**
 	 * Action to handle when using a file as was done in previous versions of Sugar.

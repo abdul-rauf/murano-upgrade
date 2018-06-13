@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -24,11 +23,10 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 require_once 'include/formbase.php';
 
 $module = InputValidation::getService()->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
-$focus = BeanFactory::getBean($module);
+$focus = BeanFactory::newBean($module);
 
 $uids = array();
 if($_REQUEST['select_entire_list'] == '1'){
-	require_once('include/MassUpdate.php');
     $query = InputValidation::getService()->getValidInputRequest(
         'current_query_by_page',
         array('Assert\PhpSerialized' => array('base64Encoded' => true))

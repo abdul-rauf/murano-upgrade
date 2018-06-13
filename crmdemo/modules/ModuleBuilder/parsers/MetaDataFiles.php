@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,10 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'modules/ModuleBuilder/Module/StudioModuleFactory.php';
 require_once 'modules/ModuleBuilder/parsers/constants.php';
-require_once 'include/Expressions/DependencyManager.php';
-require_once 'jssource/jsmin.php';
 
 class MetaDataFiles
 {
@@ -103,6 +99,7 @@ class MetaDataFiles
         MB_WIRELESSADVANCEDSEARCH => 'search' ,
         MB_FILTERVIEW             => 'default',
         MB_BWCFILTERVIEW          => 'SearchFields',
+        MB_SIDECARQUOTEDATAGROUPLIST => 'quote-data-group-list',
     );
 
     /**
@@ -434,23 +431,18 @@ class MetaDataFiles
 
     public static function getFile($view, $module, array $params = array())
     {
-        require_once 'modules/ModuleBuilder/parsers/MetaDataFile.php';
         $file = new MetaDataFile($view, $module);
 
         if (!empty($params['client'])) {
-            require_once 'modules/ModuleBuilder/parsers/MetaDataFile/MetaDataFileSidecar.php';
             $file = new MetaDataFileSidecar($file, $params['client']);
         } else {
-            require_once 'modules/ModuleBuilder/parsers/MetaDataFile/MetaDataFileBwc.php';
             $file = new MetaDataFileBwc($file);
         }
 
         if (!empty($params['location'])) {
             if (!empty($params['package'])) {
-                require_once 'modules/ModuleBuilder/parsers/MetaDataFile/MetaDataFileUndeployed.php';
                 $file = new MetaDataFileUndeployed($file, $params['package'], $params['location']);
             } else {
-                require_once 'modules/ModuleBuilder/parsers/MetaDataFile/MetaDataFileDeployed.php';
                 $file = new MetaDataFileDeployed($file, $params['location']);
 
             }
@@ -544,8 +536,7 @@ class MetaDataFiles
      */
     public static function getSugarObjectFileDir($module, $client = '', $component = self::COMPONENTVIEW, $seed = null)
     {
-        require_once 'modules/ModuleBuilder/Module/StudioModule.php';
-        $sm = StudioModuleFactory::getStudioModule($module, $seed);
+        $sm = new StudioModule($module);
 
         $dirname = 'include/SugarObjects/templates/' . $sm->getType();
         if (!empty($client)) {
@@ -592,7 +583,7 @@ class MetaDataFiles
             // We need to preserve state on $module since we'll fall back to it if
             // there is no bean for this module. This can happen when upgrading
             // views for undeployed modules
-            $mod = BeanFactory::getBean($module);
+            $mod = BeanFactory::newBean($module);
 
             if ($mod === null) {
                 // No Bean for this $module, so use the module name
@@ -812,7 +803,7 @@ class MetaDataFiles
             $context = new MetaDataContextDefault();
         }
         foreach ($modules as $module) {
-            $seed = BeanFactory::getBean($module);
+            $seed = BeanFactory::newBean($module);
             $fileList = self::getClientFiles($platforms, $type, $module, $context, $seed);
             $moduleResults = self::getClientFileContents($fileList, $type, $module, $seed);
 
@@ -893,7 +884,7 @@ class MetaDataFiles
                 // is no longer a template file, but a real file.
                 // Use the module_dir if available to support submodules
                 if (!$bean) {
-                    $bean = BeanFactory::getBean($module);
+                    $bean = BeanFactory::newBean($module);
                 }
                 $module_path  = isset($bean->module_dir) ? $bean->module_dir : $module;
                 $checkPaths['custom/modules/'.$module_path.'/clients/'.$platform.'/'.$type.'s'] = array('platform'=>$platform,'template'=>false);
@@ -1080,7 +1071,7 @@ class MetaDataFiles
                         // This is a template file, not a real one.
                         require $fileInfo['path'];
                         if (!$bean) {
-                            $bean = BeanFactory::getBean($module);
+                            $bean = BeanFactory::newBean($module);
                         }
                         if ( !is_a($bean,'SugarBean') ) {
                             // I'm not sure what this is, but it's not something we can template

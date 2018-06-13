@@ -110,22 +110,22 @@
              * Module name (optional).
              * @property {String}
              */
-            this.module = options.module || this.context.get("module");
+            this.module = options.module || this.context.get('module');
 
             /**
              * Reference to the model this component is bound to.
              * @property {Data.Bean}
              */
-            this.model = options.model || this.context.get("model");
+            this.model = options.model || this.context.get('model');
 
             /**
              * Reference to the collection this component is bound to.
              * @property {Data.BeanCollection}
              */
-            this.collection = options.collection || this.context.get("collection");
+            this.collection = options.collection || this.context.get('collection');
 
             // Adds classes to the component based on the metadata.
-            if(this.meta && this.meta.css_class) {
+            if (this.meta && this.meta.css_class) {
                 this.$el.addClass(this.meta.css_class);
             }
 
@@ -162,14 +162,14 @@
          */
         render: function() {
             if (this.disposed === true) {
-                app.logger.error("Unable to render component because it's disposed " + this + "\n");
+                app.logger.error("Unable to render component because it's disposed " + this + '\n');
                 return false;
             }
-            if(!this.triggerBefore("render"))
+            if (!this.triggerBefore('render'))
                 return false;
             this._render();
 
-            this.trigger("render");
+            this.trigger('render');
 
             return this;
         },
@@ -300,10 +300,10 @@
          */
         toString: function() {
             return this.cid +
-                "-" + (this.$el && this.$el.id ? this.$el.id : "<no-id>") +
-                "/" + this.module +
-                "/" + this.model +
-                "/" + this.collection;
+                '-' + (this.$el && this.$el.id ? this.$el.id : '<no-id>') +
+                '/' + this.module +
+                '/' + this.model +
+                '/' + this.collection;
         },
 
         /**
@@ -324,10 +324,11 @@
          * Pass through function to jQuery's show to show view.
          */
         show: function() {
-            if(!this.isVisible()) {
-                if (!this.triggerBefore("show")) {
+            if (!this.isVisible()) {
+                if (!this.triggerBefore('show')) {
                     return false;
                 }
+
                 this._show();
                 this.trigger('show');
             }
@@ -337,10 +338,11 @@
          * Pass through function to jQuery's hide to hide view.
          */
         hide: function() {
-            if(this.isVisible()) {
-                if (!this.triggerBefore("hide")) {
+            if (this.isVisible()) {
+                if (!this.triggerBefore('hide')) {
                     return false;
                 }
+
                 this._hide();
                 this.trigger('hide');
             }
@@ -417,18 +419,19 @@
          * });
          * </code></pre>
          *
-         * @param method {String} The name of the method to call e.g. 'initialize', '_renderHtml', etc. (required)
-         * @param args {Array=} Arguments to pass to the parent method. Same syntax as .apply
+         * @param {string} method The name of the method to call (e.g.
+         *   `initialize`, `_renderHtml`).
+         * @param {Array} [args] Arguments to pass to the parent method.
          * @return {Mixed}
          * @protected
          */
         _super: function(method, args) {
             //Must be used to invoke parent methods
             if (!method || !_.isString(method)) {
-                return app.logger.error("tried to call _super without specifying a parent method in " + this.name);
+                return app.logger.error('tried to call _super without specifying a parent method in ' + this.name);
             }
 
-            var parent, resetSuper = null, thisProto = Object.getPrototypeOf(this);
+            var parent, thisProto = Object.getPrototypeOf(this);
             args = args || [];
 
             //_lastSuperClass is used to walk the prototype chain
@@ -437,7 +440,7 @@
             if (this._superStack[method].length > 0) {
                 parent = Object.getPrototypeOf(_.last(this._superStack[method]));
                 if (_.contains(this._superStack[method], parent)) {
-                    return app.logger.error("Loop detected calling " + method + " from " + this.name);
+                    return app.logger.error('Loop detected calling ' + method + ' from ' + this.name);
                 }
             } else {
                 parent = Object.getPrototypeOf(thisProto);
@@ -445,7 +448,7 @@
 
             //First verify that the method exists on the current object
             if (!thisProto[method]) {
-                return app.logger.error("Unable to find method " + method + " on class " + this.name);
+                return app.logger.error('Unable to find method ' + method + ' on class ' + this.name);
             }
 
             //Walk up the chain until we find a parent that implements the method.
@@ -462,10 +465,10 @@
 
             //Verify that we found a valid parent that implements this method
             if (!parent) {
-                return app.logger.error("Unable to find parent of component " + this.name);
+                return app.logger.error('Unable to find parent of component ' + this.name);
             }
             if (!parent[method]) {
-                return app.logger.error("Unable to find method " + method + " on parent class of " + this.name);
+                return app.logger.error('Unable to find method ' + method + ' on parent class of ' + this.name);
             }
 
             //Finally make the parent call

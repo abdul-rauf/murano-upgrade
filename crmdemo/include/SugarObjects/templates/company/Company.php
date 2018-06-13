@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/SugarObjects/templates/basic/Basic.php');
 
 class Company extends Basic
 {
@@ -21,7 +20,7 @@ class Company extends Basic
     public function __construct()
  	{
  		parent::__construct();
- 		$this->emailAddress = BeanFactory::getBean('EmailAddresses');
+ 		$this->emailAddress = BeanFactory::newBean('EmailAddresses');
  	}
 
     /**

@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Επεξεργασία' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Κύρια Ταυτότητα',
-    'LBL_DNB_BAL_PREVIEW' => 'Προεπισκόπηση Δυνητικών Πελατών',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Δυνητικοί Πελάτες',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: Πληροφορίες ΔυνητικούΠελάτη',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Ευκαιρίες',
 

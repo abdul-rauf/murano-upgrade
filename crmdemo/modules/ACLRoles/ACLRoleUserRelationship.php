@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -55,7 +54,6 @@ class ACLRoleUserRelationship extends M2MRelationship
     protected function registerUserAclRoles(User $user)
     {
         if (!$this->registrar) {
-            require_once 'modules/ACLRoles/AclRoleSetRegistrar.php';
             $this->registrar = new AclRoleSetRegistrar();
         }
 

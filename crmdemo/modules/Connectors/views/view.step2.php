@@ -1,7 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,8 +11,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/MVC/View/SugarView.php');
-require_once ('modules/Connectors/ConnectorRecord.php');
 
 class ViewStep2 extends SugarView
 {
@@ -78,7 +74,6 @@ class ViewStep2 extends SugarView
 		    $source_names = array();
 		    $source_names['module']['name'] = $this->_leadQual->merge_bean->name;
 		    $result_beans = array();
-		    require_once('include/connectors/ConnectorFactory.php');
 		    $index = 1;
 		    $viewdef_sources = array();
 		    foreach($sources as $source_id => $source_info){
@@ -119,7 +114,7 @@ class ViewStep2 extends SugarView
 		    }
 
 		    $merge_fields = array();
-            $focusBean = BeanFactory::getBean($module);
+            $focusBean = BeanFactory::newBean($module);
 		    foreach($viewdefs['Connector']['MergeView'][$module] as $field){
 		    	    if($focusBean->field_defs[$field]['type'] == 'relate') {
 		    	       continue;

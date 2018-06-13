@@ -20,7 +20,6 @@ $viewdefs['Documents']['EditView'] = array(
                                             array('label' => '10', 'field' => '30')
                                             ),
 'javascript' => '{sugar_getscript file="include/javascript/popup_parent_helper.js"}
-{sugar_getscript file="cache/include/javascript/sugar_grp_jsolait.js"}
 {sugar_getscript file="modules/Documents/documents.js"}',
 ),
  'panels' =>array (
@@ -100,4 +99,3 @@ $viewdefs['Documents']['EditView'] = array(
 
 
 );
-?>

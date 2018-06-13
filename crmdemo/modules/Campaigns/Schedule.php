@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -67,7 +66,7 @@ if ($campaign_id && isset($campaign) && $campaign->status == 'Inactive') {
 
 	$ss->display('modules/Campaigns/tpls/campaign-inactive.tpl');
 } else {
-	$focus = BeanFactory::getBean('EmailMarketing');
+	$focus = BeanFactory::newBean('EmailMarketing');
 	if($campaign_id)
 	{
 		$where_clauses = Array();

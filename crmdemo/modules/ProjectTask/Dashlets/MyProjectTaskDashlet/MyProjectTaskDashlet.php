@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,19 +13,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  // $Id: MyProjectTaskDashlet.php 45763 2009-04-01 19:16:18Z majed $
 
 
-require_once('include/Dashlets/DashletGeneric.php');
 
 
 class MyProjectTaskDashlet extends DashletGeneric { 
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function MyProjectTaskDashlet($id, $def = null)
-    {
-        self::__construct($id, $def);
-    }
-
     public function __construct($id, $def = null)
     {
         global $current_user, $app_strings;
@@ -39,7 +28,7 @@ class MyProjectTaskDashlet extends DashletGeneric {
         $this->searchFields = $dashletData['MyProjectTaskDashlet']['searchFields'];
         $this->columns = $dashletData['MyProjectTaskDashlet']['columns'];
         
-        $this->seedBean = BeanFactory::getBean('ProjectTask');        
+        $this->seedBean = BeanFactory::newBean('ProjectTask');        
     }
     
     function buildWhere()

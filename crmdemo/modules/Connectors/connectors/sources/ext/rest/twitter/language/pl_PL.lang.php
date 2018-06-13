@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,28 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">Zdobądź Poufny klucz klienta z serwisu Twitter, rejestrując swoją instancję Sugar jako nową aplikację.<br/><br>Etapy rejestracji instancji:<br/><br/><ol><li>Przejdź do strony programistów Twitter: <a href=&#39;http://dev.twitter.com/apps/new&#39; target=&#39;_blank&#39;>http://dev.twitter.com/apps/new</a>.</li><li>Zaloguj się na konto Twitter, za pomocą którego chcesz zarejestrować aplikację.</li><li>W formularzu rejestracji wprowadź nazwę dla aplikacji. Nazwa ta będzie widoczna dla użytkowników podczas autoryzacji kont Twitter z poziomu SugarCRM.</li><li>Wprowadź opis.</li><li>Wprowadź adres URL strony internetowej aplikacji.</li><li>Wprowadź adres URL wywołania zwrotnego (może być dowolny, ponieważ system Sugar omija podczas uwierzytelniania. Przykład: Wprowadź adres URL strony Sugar).</li><li>Zaakceptuj warunki korzystania z interfejsu API serwisu Twitter.</li><li>Kliknij opcję Utwórz aplikację Twitter.</li><li>Na stronie aplikacji znajdź Klucz API i Poufny klucz API w karcie Klucze API. Wprowadź je poniżej.</li></ol></td></tr></table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
+								<tr>
+									<td valign="top" width="35%" class="dataLabel">
+										Uzyskaj klucz API i poufny klucz z serwisu Twitter, rejestrując instancję Sugar jako nową aplikację.<br/><br>Kroki do rejestracji instancji:<br/><br/>
+										<ol>
+											<li>Przejdź do strony programistów w serwisie Twitter: <a href=\'https://apps.twitter.com\' target=\'_blank\'>https://apps.twitter.com</a>.</li>
+											<li>Zaloguj się na konto Twitter, za pomocą którego chcesz zarejestrować aplikację.</li>
+											<li>W formularzu rejestracji wprowadź nazwę aplikacji. Nazwa ta będzie widoczna dla użytkowników podczas autoryzacji kont Twitter z poziomu systemu Sugar.</li>
+											<li>Wprowadź opis.</li>
+											<li>Wprowadź adres URL do strony internetowej aplikacji.</li>
+											<li>Wprowadź adres URL wywołania zwrotnego (może być dowolny, ponieważ system Sugar omija podczas uwierzytelniania. Przykład: Wprowadź adres URL strony Sugar).</li>
+											<li>Zaakceptuj warunki korzystania z interfejsu API serwisu Twitter.</li>
+											<li>Kliknij opcję Utwórz aplikację Twitter.</li>
+											<li>Na stronie aplikacji znajdź Klucz API i Poufny klucz API w karcie Klucze API. Wprowadź je poniżej.</li>
+										</ol>
+									</td>
+								</tr>
+							</table>
+ 
+Context | Request Context
+$connector_strings[\'LBL_LICENSING_INFO\']
+File: en_us.lang.php',
     'LBL_NAME' => 'Nazwa użytkownika Twitter',
     'LBL_ID' => 'Nazwa użytkownika Twitter',
 	'company_url' => 'Adres URL',

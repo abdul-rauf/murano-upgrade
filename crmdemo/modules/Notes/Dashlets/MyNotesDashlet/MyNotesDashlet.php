@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/Dashlets/DashletGeneric.php');
 
 
 class MyNotesDashlet extends DashletGeneric { 
@@ -27,6 +25,6 @@ class MyNotesDashlet extends DashletGeneric {
         $this->searchFields = $dashletData['MyNotesDashlet']['searchFields'];
         $this->columns = $dashletData['MyNotesDashlet']['columns'];
         
-        $this->seedBean = BeanFactory::getBean('Notes');        
+        $this->seedBean = BeanFactory::newBean('Notes');        
     }    
 }

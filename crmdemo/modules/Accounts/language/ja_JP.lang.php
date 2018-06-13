@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => '添付ファイル',
     'LBL_REVENUELINEITEMS' => '商談品目',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => '取引先プレビュー',
     'LBL_NOTES_SUBPANEL_TITLE' => 'メモ',
 
     // Help Text

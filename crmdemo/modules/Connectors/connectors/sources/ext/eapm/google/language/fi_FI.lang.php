@@ -17,8 +17,8 @@ Hanki API-avain ja salasana Googlelta rekisteröimällä Sugar-instanssisi uudek
 <br/><br/>
 <ol>
 <li>Siirry Google Developers -sivulle:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Kirjaudu sisään Google-tilille, jolle haluat rekisteröidä sovelluksen.</li>
 <li>Luo uusi projekti</li>

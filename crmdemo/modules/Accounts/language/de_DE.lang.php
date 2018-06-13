@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Anlage',
     'LBL_REVENUELINEITEMS' => 'Umsatzposten',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Firmen-Vorschau',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notizen',
 
     // Help Text

@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -85,7 +84,7 @@ class SugarUpgradeTeamsCE extends UpgradeScript
         } //foreach
 
         //Upgrade users table
-        $bean = BeanFactory::getBean('Users');
+        $bean = BeanFactory::newBean('Users');
         $this->upgradeTeamColumn($bean, 'default_team');
         $result = $this->db->query("SELECT id FROM teams where deleted=0");
         while($row = $this->db->fetchByAssoc($result)) {
@@ -158,7 +157,7 @@ class SugarUpgradeTeamsCE extends UpgradeScript
     		//now let's merge back into vardefs.ext.php
     		$mi = new ModuleInstaller();
     		$mi->merge_files('Ext/Vardefs/', 'vardefs.ext.php');
-    		VardefManager::loadVardef($bean->module_dir, $bean->object_name, true);
+            VardefManager::loadVardef($bean->getModuleName(), $bean->object_name, true);
     		$bean->field_defs = $GLOBALS['dictionary'][$bean->object_name]['fields'];
     	}
 

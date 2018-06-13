@@ -15,7 +15,7 @@
  CheckboxField, CommandAdam, ItemUpdaterField, PROJECT_MODULE, FieldOption, MessagePanel, RestClient,
  NumberField, CheckboxGroup
  */
-
+// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 /**
  * @class AdamActivity
  * Handle BPMN Activities (Tasks)
@@ -2184,7 +2184,7 @@ AdamActivity.prototype.actionFactory = function(type) {
         proxy: actionDef.proxy,
         items: actionDef.items || [],
         closeContainerOnSubmit: true,
-        footerAlign: 'right',
+        footerAlign: 'left',
         buttons: [
             {
                 jtype: 'normal',
@@ -2494,7 +2494,8 @@ AdamActivity.prototype.getAction = function(type, w) {
                 }),
                 fieldWidth: 470,
                 fieldHeight: 260,
-                hasCheckbox: true
+                hasCheckbox: true,
+                actionType: 'changeField'
             });
 
             var actionText = translate('LBL_PMSE_CONTEXT_MENU_SETTINGS');
@@ -2531,6 +2532,7 @@ AdamActivity.prototype.getAction = function(type, w) {
                                         if (fields) {
                                             updater_field.setOptions(fields.result, true);
                                             updater_field.setValue(data.act_fields || null);
+                                            updater_field.isValid();
                                             App.alert.dismiss('upload');
                                             w.html.style.display = 'inline';
                                         }
@@ -2595,7 +2597,8 @@ AdamActivity.prototype.getAction = function(type, w) {
                     callback: null
                 }),
                 fieldWidth: 470,
-                fieldHeight: 260
+                fieldHeight: 260,
+                actionType: 'addRelatedRecord'
             });
             var actionText = translate('LBL_PMSE_CONTEXT_MENU_SETTINGS');
             var actionCSS = 'adam-menu-icon-configure';
@@ -2636,6 +2639,7 @@ AdamActivity.prototype.getAction = function(type, w) {
                                     success: function(fields) {
                                         updater_field.setOptions(fields.result);
                                         updater_field.setValue(data.act_fields || null);
+                                        updater_field.isValid();
                                         App.alert.dismiss('upload');
                                         w.html.style.display = 'inline';
                                     },

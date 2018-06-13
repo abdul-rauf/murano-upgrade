@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('data/Link.php');
 
 require_once('modules/Teams/TeamSetManager.php');
 
@@ -38,7 +36,7 @@ class TeamSetLink extends Link2 {
 
 	public function __construct($linkName, $bean, $linkDef = false){
 		parent::__construct($linkName, $bean, $linkDef);
-        $this->_teamSet = BeanFactory::getBean('TeamSets');
+        $this->_teamSet = BeanFactory::newBean('TeamSets');
 		$this->_teamList = array();
 	}
 

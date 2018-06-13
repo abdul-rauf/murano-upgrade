@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,6 +15,7 @@ require_once('vendor/tcpdf/tcpdf.php');
 require_once('include/Sugarpdf/SugarpdfHelper.php');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\Crypto\Blowfish;
 
 class Sugarpdf extends TCPDF
 {
@@ -133,7 +133,11 @@ class Sugarpdf extends TCPDF
             $protection=explode(",",PDF_PROTECTION);
         }
 
-        $this->SetProtection($protection,blowfishDecode(blowfishGetKey('sugarpdf_pdf_user_password'), PDF_USER_PASSWORD),blowfishDecode(blowfishGetKey('sugarpdf_pdf_owner_password'), PDF_OWNER_PASSWORD));
+        $this->SetProtection(
+            $protection,
+            Blowfish::decode(Blowfish::getKey('sugarpdf_pdf_user_password'), PDF_USER_PASSWORD),
+            Blowfish::decode(Blowfish::getKey('sugarpdf_pdf_owner_password'), PDF_OWNER_PASSWORD)
+        );
         $this->setCellHeightRatio(K_CELL_HEIGHT_RATIO);
         $this->setJPEGQuality(intval(PDF_JPEG_QUALITY));
         $this->setPDFVersion(PDF_PDF_VERSION);

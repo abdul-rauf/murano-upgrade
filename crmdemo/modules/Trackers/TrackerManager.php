@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('modules/Trackers/monitor/Monitor.php');
 
 class TrackerManager {
 
@@ -20,14 +18,6 @@ private $metadata = array();
 private $monitors = array();
 private $disabledMonitors = array();
 private static $paused = false;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function TrackerManager()
-    {
-        self::__construct();
-    }
 
     /**
      * Constructor for TrackerManager.  Declared private for singleton pattern.
@@ -129,14 +119,12 @@ public function getMonitor($name) {
        } catch (Exception $ex) {
        	   $GLOBALS['log']->error($ex->getMessage());
        	   $GLOBALS['log']->error($ex->getTraceAsString());
-       	   require_once('modules/Trackers/monitor/BlankMonitor.php');
        	   $this->monitors[$name] = new BlankMonitor();
        	   return $this->monitors[$name];
        }
 
     } else {
        $GLOBALS['log']->error($GLOBALS['app_strings']['ERR_MONITOR_NOT_CONFIGURED'] . "($name)");
-       require_once('modules/Trackers/monitor/BlankMonitor.php');
        $this->monitors[$name] = new BlankMonitor();
        return $this->monitors[$name];
     }
@@ -280,3 +268,4 @@ public function unsetMonitors() {
 }
 
 }
+

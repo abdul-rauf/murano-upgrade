@@ -168,9 +168,6 @@ $mod_strings = array (
   'LBL_RECORD_SAVED_SUCCESS' => 'คุณสร้าง {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a> สำเร็จแล้ว',
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'ID ตัวการของ D&B',
-    'LBL_DNB_BAL_PREVIEW' => 'ตัวอย่างเป้าหมาย',
-    'LBL_DNB_BAL_RSLT_CNT' => 'เป้าหมาย',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: ข้อมูลเป้าหมาย',
     //Document title
     'TPL_BROWSER_SUGAR7_RECORDS_TITLE' => '{{module}} &raquo; {{appId}}',
     'TPL_BROWSER_SUGAR7_RECORD_TITLE' => '{{#if last_name}}{{#if first_name}}{{first_name}} {{/if}}{{last_name}} &raquo; {{/if}}{{module}} &raquo; {{appId}}',

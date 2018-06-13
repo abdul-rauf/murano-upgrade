@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 
-class SchedulerDaemon extends Scheduler {
+class SchedulerDaemon extends SugarBean
+{
 	// schema columns
 	var $id;
 	var $deleted;
@@ -37,13 +37,6 @@ class SchedulerDaemon extends Scheduler {
 	var $uptimeMonitor;
 	var $shutdown = false;
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SchedulerDaemon()
-    {
-        self::__construct();
-    }
 
 	/**
 	 * Sole constructor.
@@ -99,7 +92,7 @@ class SchedulerDaemon extends Scheduler {
 
 		while($a = $this->db->fetchByAssoc($r)) {
 			
-			$job = BeanFactory::getBean('SchedulersJobs');
+			$job = BeanFactory::newBean('SchedulersJobs');
 			
 			$paramJob = $a['scheduler_id'];
 			$job->fire($sugar_config['site_url'].'/index.php?entryPoint=schedulers&type=job&job_id='.$paramJob.'&record='.$a['id']);
@@ -548,3 +541,4 @@ class SchedulerDaemon extends Scheduler {
 	}
 
 } // end SchedulerDaemon class desc.
+

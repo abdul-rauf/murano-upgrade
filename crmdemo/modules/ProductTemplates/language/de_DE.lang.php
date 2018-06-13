@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -41,7 +40,7 @@ $mod_strings = array (
   'LBL_LIST_COST_PRICE' => 'Kosten:',
   'LBL_LIST_DISCOUNT_PRICE' => 'Preis:',
   'LBL_LIST_FORM_TITLE' => 'Produktkatalog-Liste',
-  'LBL_LIST_LBL_MFT_PART_NUM' => 'Herst.-Nummer',
+  'LBL_LIST_LBL_MFT_PART_NUM' => 'Teilenummer',
   'LBL_LIST_LIST_PRICE' => 'Liste',
   'LBL_LIST_MANUFACTURER' => 'Hersteller',
   'LBL_LIST_MANUFACTURER_ID' => 'Hersteller-ID:',
@@ -54,7 +53,7 @@ $mod_strings = array (
   'LBL_LIST_USDOLLAR' => 'Liste USD:',
   'LBL_MANUFACTURER_NAME'=>'Herstellername:',
   'LBL_MANUFACTURER' => 'Hersteller:',
-  'LBL_MFT_PART_NUM' => 'Herst.-Artikelnummer:',
+  'LBL_MFT_PART_NUM' => 'Teilenummer:',
   'LBL_MODULE_NAME' => 'Produktkatalog',
   'LBL_MODULE_NAME_SINGULAR' => 'Produktkatalog',
   'LBL_MODULE_ID' => 'Produktvorlagen',

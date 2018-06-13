@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'קובץ מצורף',
     'LBL_REVENUELINEITEMS' => 'שורות פרטי הכנסה',
     'LBL_DUNS_NUM' => 'הסתיימו',
-    'LBL_DNB_BAL_PREVIEW' => 'תצוגה מקדימה של חשבונות',
     'LBL_NOTES_SUBPANEL_TITLE' => 'הערות',
 
     // Help Text

@@ -11,8 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarObjects/templates/person/Person.php');
-require_once('include/MVC/SugarModule.php');
 
 /**
  * quicksearchQuery class, handles AJAX calls from quicksearch.js
@@ -21,7 +19,7 @@ require_once('include/MVC/SugarModule.php');
  * @license    http://www.sugarcrm.com/crm/products/sugar-professional-eula.html  SugarCRM Professional End User License
  * @since      Class available since Release 4.5.1
  */
-class quicksearchQuery
+class QuickSearchQuery
 {
     /**
      * Condition operators
@@ -113,7 +111,6 @@ class quicksearchQuery
      */
     public function externalApi($args)
     {
-        require_once('include/externalAPI/ExternalAPIFactory.php');
         $data = array();
         try {
             $api = ExternalAPIFactory::loadAPI($args['api']);
@@ -128,7 +125,6 @@ class quicksearchQuery
 
     function fts_query()
     {
-        require_once('include/SugarSearchEngine/SugarSearchEngineFactory.php');
         $_REQUEST['q'] = trim($_REQUEST['term']);
         $view = new ViewFts();
         $view->init();
@@ -280,9 +276,10 @@ class quicksearchQuery
 
             foreach ($args['field_list'] as $field) {
                 // handle enums
-                if ((isset($results[$i]->field_name_map[$field]['type']) && $results[$i]->field_name_map[$field]['type'] == 'enum')
-                    || (isset($results[$i]->field_name_map[$field]['custom_type']) && $results[$i]->field_name_map[$field]['custom_type'] == 'enum')) {
-
+                if ((isset($results[$i]->field_defs[$field]['type'])
+                        && $results[$i]->field_defs[$field]['type'] == 'enum')
+                    || (isset($results[$i]->field_defs[$field]['custom_type'])
+                        && $results[$i]->field_defs[$field]['custom_type'] == 'enum')) {
                     // get fields to match enum vals
                     if(empty($app_list_strings)) {
                         if(isset($_SESSION['authenticated_user_language']) && $_SESSION['authenticated_user_language'] != '') $current_language = $_SESSION['authenticated_user_language'];
@@ -291,8 +288,9 @@ class quicksearchQuery
                     }
 
                     // match enum vals to text vals in language pack for return
-                    if(!empty($app_list_strings[$results[$i]->field_name_map[$field]['options']])) {
-                        $results[$i]->$field = $app_list_strings[$results[$i]->field_name_map[$field]['options']][$results[$i]->$field];
+                    if (!empty($app_list_strings[$results[$i]->field_defs[$field]['options']])) {
+                        $results[$i]->$field =
+                            $app_list_strings[$results[$i]->field_defs[$field]['options']][$results[$i]->$field];
                     }
                 }
 
@@ -372,7 +370,7 @@ class quicksearchQuery
         $data    = array();
 
         foreach ($args['modules'] as $module) {
-            $focus = BeanFactory::getBean($module);
+            $focus = BeanFactory::newBean($module);
 
             $orderBy = $focus->db->getValidDBName(($args['order_by_name'] && $focus instanceof Person && $args['order'] == 'name') ? 'last_name' : $orderBy);
 

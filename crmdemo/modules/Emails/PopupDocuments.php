@@ -1,6 +1,5 @@
 <?php
 //_pp($_REQUEST);
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -96,7 +95,7 @@ $output_html .= $form->text('main.SearchHeader');
 $form->reset('main.SearchHeader');
 
 // create the listview
-$seed_bean = BeanFactory::getBean('Documents');
+$seed_bean = BeanFactory::newBean('Documents');
 $ListView = new ListView();
 $ListView->show_export_button = false;
 $ListView->process_for_popups = true;

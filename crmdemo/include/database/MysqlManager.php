@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -65,10 +64,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 /**
  * MySQL manager implementation for mysql extension
- *
- * @deprecated Use MysqliManager instead.
  */
-class MysqlManager extends DBManager
+abstract class MysqlManager extends DBManager
 {
 	/**
 	 * @see DBManager::$dbType
@@ -146,90 +143,6 @@ class MysqlManager extends DBManager
 	    "fix:report_as_condition" => true,
         "short_group_by" => true, //set to true if not all the select fields are needed in the group by (currently mysql only)
 	);
-
-	/**
-	 * Parses and runs queries
-	 *
-	 * @param  string   $sql        SQL Statement to execute
-	 * @param  bool     $dieOnError True if we want to call die if the query returns errors
-	 * @param  string   $msg        Message to log if error occurs
-	 * @param  bool     $suppress   Flag to suppress all error output unless in debug logging mode.
-	 * @param  bool     $keepResult True if we want to push this result into the $lastResult array.
-	 * @return resource result set
-	 */
-	public function query($sql, $dieOnError = false, $msg = '', $suppress = false, $keepResult = false)
-	{
-		if(is_array($sql)) {
-			return $this->queryArray($sql, $dieOnError, $msg, $suppress);
-		}
-
-		parent::countQuery($sql);
-		$GLOBALS['log']->info('Query:' . $sql);
-		$this->checkConnection();
-		$this->query_time = microtime(true);
-		$this->lastsql = $sql;
-		$result = $suppress?@mysql_query($sql, $this->database):mysql_query($sql, $this->database);
-
-		$this->query_time = microtime(true) - $this->query_time;
-		$GLOBALS['log']->info('Query Execution Time:'.$this->query_time);
-
-        $this->dump_slow_queries($sql);
-
-		if($keepResult)
-			$this->lastResult = $result;
-
-		$this->checkError($msg.' Query Failed:' . $sql . '::', $dieOnError);
-		return $result;
-	}
-
-    /**
-     * Returns the number of rows affected by the last query
-     * @param $result
-     * @return int
-     */
-	public function getAffectedRowCount($result)
-	{
-		return mysql_affected_rows($this->getDatabase());
-	}
-
-	/**
-	 * Returns the number of rows returned by the result
-	 *
-	 * This function can't be reliably implemented on most DB, do not use it.
-	 * @abstract
-	 * @deprecated
-	 * @param  resource $result
-	 * @return int
-	 */
-	public function getRowCount($result)
-	{
-	    return mysql_num_rows($result);
-	}
-
-	/**
-	 * Disconnects from the database
-	 *
-	 * Also handles any cleanup needed
-	 */
-	public function disconnect()
-	{
-		$GLOBALS['log']->debug('Calling MySQL::disconnect()');
-		if(!empty($this->database)){
-			$this->freeResult();
-			mysql_close($this->database);
-			$this->database = null;
-		}
-	}
-
-	/**
-	 * @see DBManager::freeDbResult()
-	 */
-	protected function freeDbResult($dbResult)
-	{
-		if(is_resource($dbResult))
-			mysql_free_result($dbResult);
-	}
-
 
 	/**
 	 * @abstract
@@ -345,41 +258,6 @@ class MysqlManager extends DBManager
 	}
 
 	/**
-	 * @see DBManager::getFieldsArray()
-	 */
-	public function getFieldsArray($result, $make_lower_case=false)
-	{
-		$field_array = array();
-
-		if(empty($result))
-			return 0;
-
-		$fields = mysql_num_fields($result);
-		for ($i=0; $i < $fields; $i++) {
-			$meta = mysql_fetch_field($result, $i);
-			if (!$meta)
-				return array();
-
-			if($make_lower_case == true)
-				$meta->name = strtolower($meta->name);
-
-			$field_array[] = $meta->name;
-		}
-
-		return $field_array;
-	}
-
-	/**
-	 * @see DBManager::fetchRow()
-	 */
-	public function fetchRow($result)
-	{
-		if (empty($result))	return false;
-
-		return mysql_fetch_assoc($result);
-	}
-
-	/**
 	 * @see DBManager::getTablesArray()
 	 */
 	public function getTablesArray()
@@ -417,14 +295,20 @@ class MysqlManager extends DBManager
 		$this->log->info("tableExists: $tableName");
 
         if ($this->getDatabase() && !empty($this->connectOptions['db_name'])) {
-            $sql = sprintf(
-                "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES
-                  WHERE TABLE_TYPE='BASE TABLE' AND TABLE_SCHEMA = %s AND TABLE_NAME = %s",
-                $this->quoted($this->connectOptions['db_name']),
-                $this->quoted($tableName)
-            );
-            $row = $this->getOne($sql);
-            return !empty($row);
+            $query = 'SELECT TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA = ?
+    AND TABLE_NAME = ?
+    AND TABLE_TYPE = ?';
+
+            $result = $this->getConnection()
+                ->executeQuery($query, array(
+                    $this->connectOptions['db_name'],
+                    $tableName,
+                    'BASE TABLE',
+                ))->fetchColumn();
+
+            return !empty($result);
         }
 
 		return false;
@@ -464,87 +348,6 @@ class MysqlManager extends DBManager
         $str = str_replace("\\", "\\\\", $str);
         return $str;
     }
-
-	/**
-	 * @see DBManager::quote()
-	 */
-	public function quote($string)
-	{
-		if(is_array($string)) {
-			return $this->arrayQuote($string);
-		}
-		return mysql_real_escape_string($this->quoteInternal($string), $this->getDatabase());
-	}
-
-	/**
-	 * @see DBManager::connect()
-	 */
-	public function connect(array $configOptions = null, $dieOnError = false)
-	{
-		global $sugar_config;
-
-		if(is_null($configOptions))
-			$configOptions = $sugar_config['dbconfig'];
-
-		if ($this->getOption('persistent')) {
-			$this->database = @mysql_pconnect(
-				$configOptions['db_host_name'],
-				$configOptions['db_user_name'],
-				$configOptions['db_password']
-				);
-		}
-
-		if (!$this->database) {
-			$this->database = mysql_connect(
-					$configOptions['db_host_name'],
-					$configOptions['db_user_name'],
-					$configOptions['db_password']
-					);
-			if(empty($this->database)) {
-				$GLOBALS['log']->fatal("Could not connect to server ".$configOptions['db_host_name']." as ".$configOptions['db_user_name'].":".mysql_error());
-				if($dieOnError) {
-					if(isset($GLOBALS['app_strings']['ERR_NO_DB'])) {
-						sugar_die($GLOBALS['app_strings']['ERR_NO_DB']);
-					} else {
-						sugar_die("Could not connect to the database. Please refer to sugarcrm.log for details.");
-					}
-				} else {
-					return false;
-				}
-			}
-			// Do not pass connection information because we have not connected yet
-			if($this->database  && $this->getOption('persistent')){
-				$_SESSION['administrator_error'] = "<b>Severe Performance Degradation: Persistent Database Connections "
-					. "not working.  Please set \$sugar_config['dbconfigoption']['persistent'] to false "
-					. "in your config.php file</b>";
-			}
-		}
-		if(!empty($configOptions['db_name']) && !@mysql_select_db($configOptions['db_name'])) {
-			$GLOBALS['log']->fatal( "Unable to select database {$configOptions['db_name']}: " . mysql_error($this->database));
-			if($dieOnError) {
-				sugar_die($GLOBALS['app_strings']['ERR_NO_DB']);
-			} else {
-				return false;
-			}
-		}
-
-		// cn: using direct calls to prevent this from spamming the Logs
-	    mysql_query("SET CHARACTER SET utf8", $this->database);
-	    $names = "SET NAMES 'utf8'";
-	    $collation = $this->getOption('collation');
-	    if(!empty($collation)) {
-	        $names .= " COLLATE {$this->quoted($collation)}";
-		}
-	    mysql_query($names, $this->database);
-
-		if(!$this->checkError('Could Not Connect:', $dieOnError))
-			$GLOBALS['log']->info("connected to db");
-		$this->connectOptions = $configOptions;
-
-		$GLOBALS['log']->info("Connect:".$this->database);
-
-		return true;
-	}
 
 	/**
 	 * @see DBManager::repairTableParams()
@@ -770,6 +573,19 @@ class MysqlManager extends DBManager
         return in_array($type, array('blob','text','longblob', 'longtext'));
     }
 
+    /**
+     * Does this type represent blob value?
+     *
+     * @param string $type
+     * @return bool
+     */
+    public function isBlobType($type)
+    {
+        $type = strtolower($type);
+        $ctype = $this->getColumnType($type);
+        return $ctype === 'blob' || $ctype === 'longblob';
+    }
+
 	/**
 	 * @see DBManager::oneColumnSQLRep()
 	 */
@@ -945,16 +761,22 @@ class MysqlManager extends DBManager
         $query = 'SELECT ' . implode(', ', $columns) . '
 FROM information_schema.statistics';
 
-        $schema = $this->getOne('SELECT DATABASE()');
-        $where = array('table_schema = ' . $this->quoted($schema));
+        $conn = $this->getConnection();
+        $schema = $conn->getDatabase();
+
+        $where = array('table_schema = ?');
+        $params = array($schema);
+
         if ($filterByTable) {
-            $where[] = 'table_name = ' . $this->quoted($table_name);
+            $where[] = 'table_name = ?';
+            $params[] = $table_name;
         }
 
         if ($filterByIndex) {
-            $query_index_name = strtoupper($this->getValidDBName($index_name, true, 'index'));
-            $where[] = 'index_name = ' . $this->quoted($query_index_name);
+            $where[] = 'index_name = ?';
+            $params[] = strtoupper($this->getValidDBName($index_name, true, 'index'));
         }
+
         $query .= ' WHERE ' . implode(' AND ', $where);
 
         $order = array();
@@ -969,10 +791,10 @@ FROM information_schema.statistics';
         $order[] = 'seq_in_index';
         $query .= ' ORDER BY ' . implode(', ', $order);
 
-        $result = $this->query($query);
+        $stmt = $conn->executeQuery($query, $params);
 
         $data = array();
-        while ($row = $this->fetchByAssoc($result)) {
+        while (($row = $stmt->fetch())) {
             if (!$filterByTable) {
                 $table_name = $row['table_name'];
             }
@@ -1046,16 +868,16 @@ FROM information_schema.statistics';
 	 * @param  string   $sql        SQL Statement to execute
 	 * @param  bool     $dieOnError True if we want to call die if the query returns errors
 	 * @param  string   $msg        Message to log if error occurs
-	 * @param  bool     $suppress   Message to log if error occurs
+     * @param  bool     $encode     encode the result
 	 * @return array    single row from the query
 	 */
-	public function fetchOne($sql, $dieOnError = false, $msg = '', $suppress = false)
+    public function fetchOne($sql, $dieOnError = false, $msg = '', $encode = true)
 	{
 		if(stripos($sql, ' LIMIT ') === false) {
 			// little optimization to just fetch one row
 			$sql .= " LIMIT 0,1";
 		}
-		return parent::fetchOne($sql, $dieOnError, $msg, $suppress);
+        return parent::fetchOne($sql, $dieOnError, $msg, $encode);
 	}
 
 	/**
@@ -1175,10 +997,9 @@ FROM information_schema.statistics';
 		return "ALTER TABLE $tablename CHANGE COLUMN $column ".$this->oneColumnSQLRep($field);
 	}
 
-	/**
-	 * (non-PHPdoc)
-	 * @see DBManager::emptyValue()
-	 */
+    /**
+     * {@inheritDoc}
+     */
     public function emptyValue($type, $forPrepared = false)
    	{
    		$ctype = $this->getColumnType($type);
@@ -1193,25 +1014,6 @@ FROM information_schema.statistics';
    		}
    		return parent::emptyValue($type, $forPrepared);
    	}
-
-	/**
-	 * (non-PHPdoc)
-	 * @see DBManager::lastDbError()
-	 */
-	public function lastDbError()
-	{
-		if($this->database) {
-		    if(mysql_errno($this->database)) {
-			    return "MySQL error ".mysql_errno($this->database).": ".mysql_error($this->database);
-		    }
-		} else {
-			$err =  mysql_error();
-			if($err) {
-			    return $err;
-			}
-		}
-        return false;
-    }
 
 	/**
 	 * Quote MySQL search term
@@ -1260,35 +1062,6 @@ FROM information_schema.statistics';
 			$charsets[$row['Variable_name']] = $row['Value'];
 		}
 		return $charsets;
-	}
-
-	public function getDbInfo()
-	{
-        $charsets = $this->getCharsetInfo();
-        $charset_str = array();
-        foreach($charsets as $name => $value) {
-            $charset_str[] = "$name = $value";
-        }
-        $return = array(
-            'MySQL Version' => 'info is not present',
-            'MySQL Host Info' => 'info is not present',
-            'MySQL Server Info' => 'info is not present',
-            'MySQL Client Encoding' => 'info is not present',
-            'MySQL Character Set Settings' => implode(', ', $charset_str),
-        );
-        if (function_exists('mysql_get_client_info')) {
-            $return['MySQL Version'] = @mysql_get_client_info();
-        }
-        if (function_exists('mysql_get_host_info')) {
-            $return['MySQL Host Info'] = @mysql_get_host_info($this->database);
-        }
-        if (function_exists('mysql_get_server_info')) {
-            $return['MySQL Server Info'] = @mysql_get_server_info($this->database);
-        }
-        if (function_exists('mysql_client_encoding')) {
-            $return['MySQL Client Encoding'] = @mysql_client_encoding($this->database);
-        }
-        return $return;
 	}
 
 	public function validateQuery($query)
@@ -1442,15 +1215,6 @@ FROM information_schema.statistics';
 	}
 
 	/**
-	 * Select database
-	 * @param string $dbname
-	 */
-	protected function selectDb($dbname)
-	{
-		return mysql_select_db($dbname);
-	}
-
-	/**
 	 * Check if certain DB user exists
 	 * @param string $username
 	 */
@@ -1504,15 +1268,6 @@ FROM information_schema.statistics';
 	public function dropDatabase($dbname)
 	{
 		return $this->query("DROP DATABASE IF EXISTS `$dbname`", true);
-	}
-
-	/**
-	 * Check if this driver can be used
-	 * @return bool
-	 */
-	public function valid()
-	{
-		return function_exists("mysql_connect");
 	}
 
 	/**

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,11 +15,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * methods and variables.
  ********************************************************************************/
 
-require_once("include/SugarObjects/templates/company/Company.php");
 
 // Account is used to store account information.
 class Account extends Company {
-	var $field_name_map = array();
 	// Stored fields
 	var $date_entered;
 	var $date_modified;
@@ -153,14 +150,9 @@ class Account extends Company {
 	* We now automatically prefix http://
 	* @deprecated.
  	*/
-	function remove_redundant_http()
-	{	/*
-		if(preg_match("@http://@", $this->website))
-		{
-			$this->website = substr($this->website, 7);
-		}
-		*/
-	}
+    public function remove_redundant_http()
+    {
+    }
 
 	function fill_in_additional_detail_fields()
 	{

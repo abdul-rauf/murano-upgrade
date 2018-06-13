@@ -23,10 +23,9 @@ class SugarUpgradeOpportunityFixSalesStageDefault extends UpgradeScript
 
         // get the get_widget helper and the StandardField Helper
         require_once('modules/DynamicFields/FieldCases.php');
-        require_once('modules/ModuleBuilder/parsers/StandardField.php');
 
         // we are working with opportunities
-        $bean = BeanFactory::getBean('Opportunities');
+        $bean = BeanFactory::newBean('Opportunities');
 
         // get the field defs
         $field_defs = $bean->getFieldDefinition('sales_stage');
@@ -41,8 +40,9 @@ class SugarUpgradeOpportunityFixSalesStageDefault extends UpgradeScript
         if (isset($f->options) && isset($GLOBALS['app_list_strings'][$f->options])) {
             if (!in_array($f->default, array_keys($GLOBALS['app_list_strings'][$f->options]))) {
                 $this->log(var_export($f->default, true) . ' Is Not In The List Of Options');
-                $f->default = array_shift(array_keys($GLOBALS['app_list_strings'][$f->options]));
-                $f->default_value = array_shift(array_keys($GLOBALS['app_list_strings'][$f->options]));
+                $options = $GLOBALS['app_list_strings'][$f->options];
+                reset($options);
+                $f->default = $f->default_value = key($options);
                 $this->log('New Sales Stage Default Is: ' . var_export($f->default, true));
 
                 // save the changes to the field

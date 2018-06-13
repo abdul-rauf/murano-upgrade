@@ -88,6 +88,7 @@ abstract class UpgradeDriver
      * - stages - Stages success
      * - scripts - Scripts execution status
      * - files_to_delete - Files that upgrade scripts requested to be deleted
+     * - files_deleter - Hash that contains files as keys and which class::function requested delete
      * @var array
      */
     public $state = array();
@@ -945,12 +946,7 @@ abstract class UpgradeDriver
 
         // validate manifest
         list($this->from_version, $this->from_flavor) = $this->getFromVersion();
-        $db = DBManagerFactory::getInstance();
-        
-        // if (version_compare($this->from_version, 7, '<') && !$db instanceof MysqlManager) {
-        //    return $this->error("Can't upgrade version 6.x on non-Mysql database", true);
-        // }
-        
+
         $res = $this->validateManifest();
         if ($res !== true) {
             if ($this->clean_on_fail) {
@@ -1188,11 +1184,30 @@ abstract class UpgradeDriver
     }
 
     /**
-     * Retrieve current user
+     * Returns the user on whose behalf the upgrade should be performed
+     *
      * @return User
      */
     protected function getUser()
     {
+        return $this->loadUser(array(
+            'user_name' => $this->context['admin'],
+        ));
+    }
+
+    /**
+     * Loads user by parameters
+     *
+     * @param array $params
+     * @return User
+     */
+    protected function loadUser(array $params)
+    {
+        if (!$params) {
+            $this->error('Parameters for loading user cannot be empty');
+            return null;
+        }
+
         //Set globals installing to true to prevent bean_implements check for some modules
         if (isset($GLOBALS['installing'])) {
             $installing = $GLOBALS['installing'];
@@ -1200,7 +1215,7 @@ abstract class UpgradeDriver
 
         $GLOBALS['installing'] = true;
 
-        $user = BeanFactory::getBean('Users');
+        $user = BeanFactory::newBean('Users');
 
         if (isset($installing)) {
             $GLOBALS['installing'] = $installing;
@@ -1208,13 +1223,23 @@ abstract class UpgradeDriver
             unset($GLOBALS['installing']);
         }
 
-        $user_id = $this->db->getOne(
-            "select id from users where deleted=0 AND user_name = " . $this->db->quoted($this->context['admin']),
-            false
-        );
-        // Disable logic hooks.
-        $user->processed = true;
-        $user->retrieve($user_id);
+        $params['deleted'] = 0;
+
+        $where = array();
+        foreach ($params as $param => $value) {
+            $where[] = sprintf('%s = %s', $param, $this->db->quoted($value));
+        }
+
+        // using plain SQL instead of SugarBean::retrieve() as the DB schema
+        // may be inconsistent with vardefs at the beginning of the post stage
+        $query = 'SELECT * FROM users WHERE ' . implode(' AND ', $where);
+
+        $result = $this->db->query($query);
+
+        if (($row = $this->db->fetchRow($result))) {
+            $user->populateFromRow($row);
+        }
+
         return $user;
     }
 
@@ -1513,15 +1538,32 @@ abstract class UpgradeDriver
         return implode($delimiter, $parsedVersion);
     }
 
-    public function fileToDelete($file)
+    /**
+     * Marks file for removal in the upgrade process.
+     *
+     * @param string|array $files Single string or array of strings files to remove.
+     * @param UpgradeScript $caller Who calls this function.
+     */
+    public function fileToDelete($files, UpgradeScript $caller)
     {
         if (!isset($this->state['files_to_delete'])) {
             $this->state['files_to_delete'] = array();
         }
-        if (is_array($file)) {
-            $this->state['files_to_delete'] = array_merge($this->state['files_to_delete'], $file);
-        } else {
-            $this->state['files_to_delete'][] = $file;
+
+        if (!isset($this->state['files_deleter'])) {
+            $this->state['files_deleter'] = array();
+        }
+
+        if (!is_array($files)) {
+            $files = array($files);
+        }
+
+        $this->state['files_to_delete'] = array_merge($this->state['files_to_delete'], $files);
+
+        $caller = get_class($caller);
+
+        foreach ($files as $file) {
+            $this->state['files_deleter'][$file][] = $caller;
         }
     }
 
@@ -1796,6 +1838,7 @@ abstract class UpgradeDriver
             $this->saveState();
             switch ($stage) {
                 case "healthcheck":
+                    $this->initSugar();
                     if (!$this->healthcheck()) {
                         return false;
                     }

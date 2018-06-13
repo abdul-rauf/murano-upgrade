@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -80,7 +79,6 @@ class SugarWidgetSubPanelEmailLink extends SugarWidgetField {
                 } else {
                     $composeData['to_email_addrs'] = $layout_def['fields']['EMAIL'];
                 }
-                require_once('modules/Emails/EmailUI.php');
                 $eUi = new EmailUI();
                 $j_quickComposeOptions = $eUi->generateComposePackageForQuickCreate($composeData, http_build_query($composeData), true);
 

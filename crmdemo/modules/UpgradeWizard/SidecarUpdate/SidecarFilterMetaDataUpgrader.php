@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -91,6 +90,6 @@ class SidecarFilterMetaDataUpgrader extends SidecarAbstractMetaDataUpgrader
         $parser = ParserFactory::getParser(MB_BASICSEARCH, $module);
         $defs = $parser->getOriginalViewDefs();
 
-        return $defs['fields'];
+        return isset($defs['fields']) ? $defs['fields'] : array();
     }
 }

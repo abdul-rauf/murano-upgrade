@@ -154,13 +154,14 @@
                         app.additionalComponents[name] = app.view.createLayout({
                             context: this.context,
                             type: component.layout,
-                            el: $el
+                            el: $el,
                         });
                         app.additionalComponents[name].initComponents();
                     } else {
                         app.additionalComponents[name] = app.view.createView({
                             type: component.view || name,
-                            context: this.context
+                            context: this.context,
+                            el: $el,
                         });
                     }
                     app.additionalComponents[name].render();

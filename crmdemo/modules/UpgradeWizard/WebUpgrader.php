@@ -174,29 +174,18 @@ class WebUpgrader extends UpgradeDriver
     }
 
     /**
-     * Get user from state
-     * @see UpgradeDriver::getUser()
+     * {@inheritDoc}
      */
     protected function getUser()
     {
-        //Set globals installing to true to prevent bean_implements check for some modules
-        if (isset($GLOBALS['installing'])) {
-            $installing = $GLOBALS['installing'];
-        }
+        $user = $this->loadUser(array(
+            'id' => $this->state['admin'],
+        ));
 
-        $GLOBALS['installing'] = true;
-
-        $user = BeanFactory::getBean('Users', $this->state['admin']);
-
-        if (isset($installing)) {
-            $GLOBALS['installing'] = $installing;
-        } else {
-            unset($GLOBALS['installing']);
-        }
-
-        if ($user) {
+        if ($user->id) {
             $this->context['admin'] = $user->user_name;
         }
+
         return $user;
     }
 
@@ -269,25 +258,6 @@ class WebUpgrader extends UpgradeDriver
     }
 
     /**
-     * Sending HealthCheck log to sugar server
-     * @return bool|false
-     */
-    protected function sendHealthCheckLog()
-    {
-        $scanner = $this->getHealthCheckScanner('web');
-        if (!$scanner) {
-            return $this->error("Cannot find health check scanner", true);
-        }
-
-        $this->initSugar();
-
-        if ($this->getHelper()->sendLog($this->context['HealthCheckLog'])) {
-            return true;
-        }
-        return $this->error("Unable to send logs to HealthCheck server", true);
-    }
-
-    /**
      * Process upgrade action
      * @param string $action
      * @return next stage name or false on error
@@ -299,7 +269,9 @@ class WebUpgrader extends UpgradeDriver
         }
 
         if ($action == 'sendlog') {
-            return $this->sendHealthCheckLog();
+            // send Log to Sugar is disabled
+            $this->log('Warning: send log file to Sugar is disabled');
+            return true;
         }
 
         if (!in_array($action, $this->stages)) {
@@ -426,8 +398,6 @@ class WebUpgrader extends UpgradeDriver
         }
         $scanner->setLogFile($this->context['HealthCheckLog']);
 
-        $this->initSugar();
-
         $scanner->scan();
 
         $logsInfo = $scanner->getLogMeta();
@@ -468,7 +438,9 @@ class WebUpgrader extends UpgradeDriver
         require_once 'include/SugarSystemInfo/SugarSystemInfo.php';
         require_once 'include/SugarHeartbeat/SugarHeartbeatClient.php';
         require_once 'HealthCheckHelper.php';
-        require_once 'HealthCheckClient.php';
+        if (!class_exists('HealthCheckClient')) {
+            require_once 'HealthCheckClient.php';
+        }
         return HealthCheckHelper::getInstance();
     }
 }

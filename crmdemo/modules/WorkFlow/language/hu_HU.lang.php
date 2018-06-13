@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -93,7 +92,7 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE_LIST_WORKFLOW' => array('workflow' => 'Munkafolyamat'),
   'LBL_EMAILTEMPLATES_TYPE' => 'Típus',
 
-  // Workflow sunsetting message, added in 7.6.1
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Megjegyzés:</strong> Ez a szolgáltatás törlésre kerül majd a Sugar legújabb kiadásában, mely jelenleg 2017-re van tervezve. A Sugar vállalati kiadását használó ügyfelek számára ajánlott, hogy elkezdjék használni az Advanced Workflow által kínált haladó munkafolyamati lehetőségeket. Kattintson <a href="http://www.sugarcrm.com/wf-eol/" target="_blank">ide</a> további információkért.',
+  // Workflow sunsetting message, updated for 7.9
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
 );
 

@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,8 +16,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * All Rights Reserved.
  ********************************************************************************/
 
-require_once('include/MVC/View/SugarView.php');
-require_once('modules/Import/Importer.php');
 
 class ImportViewStep4 extends SugarView
 {
@@ -44,7 +40,8 @@ class ImportViewStep4 extends SugarView
             trigger_error($mod_strings['LBL_CANNOT_OPEN'],E_USER_ERROR);
         }
 
-        $currentPart = end(explode("-", $uploadFile));
+        $uploadFiles = explode("-", $uploadFile);
+        $currentPart = end($uploadFiles);
 
         // Open the import file
         $importSource = new ImportFile(

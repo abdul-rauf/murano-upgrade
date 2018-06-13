@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/api/SugarApi.php');
 
 class QuoteConvertApi extends SugarApi
 {
@@ -27,7 +26,7 @@ class QuoteConvertApi extends SugarApi
         );
     }
 
-    public function convertQuote(ServiceBase $api, $args)
+    public function convertQuote(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('record'));
         /* @var $quote Quote */

@@ -63,8 +63,11 @@
                         }
                         app.user.set(data.current_user);
                         var language = app.user.getPreference('language');
-                        if (app.lang.getLanguage() != language) {
-                            app.lang.setLanguage(language, null, {noUserUpdate: true, noSync: app.isSynced});
+                        if (app.lang.getLanguage() !== language) {
+                            app.lang.setLanguage(language, null, {
+                                noUserUpdate: true,
+                                noSync: app.isSynced || app.metadata.isSyncing()
+                            });
                         }
                     }
                     if (callback) callback();

@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Příloha',
     'LBL_REVENUELINEITEMS' => 'Řádky obchodu',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Náhled smlouvy',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Poznámky',
 
     // Help Text

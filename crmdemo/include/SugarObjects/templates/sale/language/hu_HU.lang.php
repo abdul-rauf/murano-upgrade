@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -88,7 +87,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
   'LBL_TOP_SALES' => 'Nyitott, Top eladásaim',
   'NTC_REMOVE_OPP_CONFIRMATION' => 'Biztosan törölni kívánja ezt a kapcsolatot ebből az eladásból?',
 	'SALE_REMOVE_PROJECT_CONFIRM' => 'Biztosan törölni kívánja ezt az eladást a projektből?',
-	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Eladás',
 	'LBL_ACTIVITIES_SUBPANEL_TITLE'=>'Tevékenységek',
 	'LBL_HISTORY_SUBPANEL_TITLE'=>'Előzmények',
     'LBL_RAW_AMOUNT'=>'Nyers összeg',

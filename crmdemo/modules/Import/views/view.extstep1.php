@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,8 +16,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  ********************************************************************************/
-require_once('modules/Import/views/view.step3.php');
-require_once('modules/Import/ImportCacheFiles.php');
 
 class ImportViewExtStep1 extends ImportViewStep3
 {
@@ -39,7 +36,7 @@ class ImportViewExtStep1 extends ImportViewStep3
         global $mod_strings, $app_strings, $current_user, $sugar_config;
 
         // Clear out this user's last import
-        $seedUsersLastImport = BeanFactory::getBean('Import_2');
+        $seedUsersLastImport = BeanFactory::newBean('Import_2');
         $seedUsersLastImport->mark_deleted_by_user_id($current_user->id);
         ImportCacheFiles::clearCacheFiles();
 
@@ -188,7 +185,6 @@ class ImportViewExtStep1 extends ImportViewStep3
 
     private function getImportableExternalEAPMs()
     {
-        require_once('include/externalAPI/ExternalAPIFactory.php');
 
         return ExternalAPIFactory::getModuleDropDown('Import', FALSE, FALSE, 'eapm_import_list');
     }

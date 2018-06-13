@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/MVC/Controller/SugarController.php';
 
 class ConfiguratorController extends SugarController
 {
@@ -74,7 +73,6 @@ class ConfiguratorController extends SugarController
         $urlSTR = 'index.php?module=Configurator&action=FontManager';
         $filename = $this->request->getValidInputRequest('filename', 'Assert\File');
         if ($filename) {
-            require_once('include/Sugarpdf/FontManager.php');
             $fontManager = new FontManager();
             $fontManager->filename = $filename;
             if(!$fontManager->deleteFont()){
@@ -157,7 +155,7 @@ class ConfiguratorController extends SugarController
         $configurator->saveConfig();
 
         // Bug 37310 - Delete any existing currency that matches the one we've just set the default to during the admin wizard
-        $currency = BeanFactory::getBean('Currencies');
+        $currency = BeanFactory::newBean('Currencies');
         $currency->retrieve_id_by_name($_REQUEST['default_currency_name']);
         if ( !empty($currency->id)
                 && $currency->symbol == $_REQUEST['default_currency_symbol']
@@ -191,7 +189,7 @@ class ConfiguratorController extends SugarController
         $configurator = new Configurator();
         $configurator->setAllowKeys($allowKeys);
 
-        $focus = BeanFactory::getBean('Administration');
+        $focus = BeanFactory::newBean('Administration');
         $focus->saveConfig();
 
         $configurator->saveConfig();
@@ -234,7 +232,7 @@ class ConfiguratorController extends SugarController
 
             $modules = array();
             foreach ($_POST['modules'] as $moduleName => $enabled) {
-                $bean = BeanFactory::getBean($moduleName);
+                $bean = BeanFactory::newBean($moduleName);
 
                 if (!($bean instanceof SugarBean)) {
                     continue;

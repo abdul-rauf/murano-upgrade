@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,14 +20,13 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 require_once('modules/Holidays/Forms.php');
-require_once('include/DetailView/DetailView.php');
 
 global $mod_strings;
 global $app_strings;
 global $app_list_strings;
 global $current_user;
 
-$focus = BeanFactory::getBean('Holidays');
+$focus = BeanFactory::newBean('Holidays');
 
 $detailView = new DetailView();
 $offset=0;

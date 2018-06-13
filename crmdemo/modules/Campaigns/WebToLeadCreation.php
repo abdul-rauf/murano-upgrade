@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,7 +27,7 @@ global $import_file_name, $theme;$app_list_strings;
 if (!empty($_REQUEST['lead_id'])) {
     $lead = BeanFactory::getBean('Leads',$_REQUEST['lead_id']);
 } else {
-    $lead = BeanFactory::getBean('Leads');
+    $lead = BeanFactory::newBean('Leads');
 }
 $fields = array();
 
@@ -164,7 +163,6 @@ foreach ($lead->field_defs as $field_def) {
 
     $field_def['vname'] = preg_replace('/:$/','',translate($field_def['vname'],'Leads'));
 
-     //$cols_name = "{'".$field_def['vname']."'}";
      $col_arr = array();
      if((isset($field_def['required']) && $field_def['required'] != null && $field_def['required'] != 0)
      	|| $field_def['name']=='last_name'
@@ -187,9 +185,7 @@ foreach ($lead->field_defs as $field_def) {
 }
 
 $xtpl->assign("WEB_POST_URL",$web_post_url);
-//$xtpl->assign("LEAD_SELECT_FIELDS",'MOD.LBL_SELECT_LEAD_FIELDS');
 
-require_once('include/QuickSearchDefaults.php');
 $qsd = QuickSearchDefaults::getQuickSearchDefaults();
 $sqs_objects = array('account_name' => $qsd->getQSParent(),
 					'assigned_user_name' => $qsd->getQSUser(),
@@ -199,7 +195,6 @@ $sqs_objects = array('account_name' => $qsd->getQSParent(),
 
 					);
 
-require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
 $teamSetField = new SugarFieldTeamset('Teamset');
 $teamSetField->initClassicView($lead->field_defs, 'WebToLeadCreation');
 $sqs_objects = array_merge($sqs_objects, $teamSetField->getClassicViewQS());
@@ -231,13 +226,12 @@ $xtpl->assign("ASSIGNED_USER_ID", $lead->assigned_user_id );
 $xtpl->assign("REDIRECT_URL_DEFAULT",'http://');
 
 //required fields on Webtolead form
-$campaign = BeanFactory::getBean('Campaigns');
+$campaign = BeanFactory::newBean('Campaigns');
 
 $javascript = new javascript();
 $javascript->setFormName('WebToLeadCreation');
 $javascript->setSugarBean($lead);
 $javascript->addAllFields('');
-//$javascript->addFieldGeneric('redirect_url', '', 'LBL_REDIRECT_URL' ,'true');
 $javascript->addFieldGeneric('campaign_name', '', 'LBL_RELATED_CAMPAIGN' ,'true');
 $javascript->addFieldGeneric('assigned_user_name', '', 'LBL_ASSIGNED_TO' ,'true');
 $javascript->addToValidateBinaryDependency('campaign_name', 'alpha', $app_strings['ERR_SQS_NO_MATCH_FIELD'] . $mod_strings['LBL_LEAD_NOTIFY_CAMPAIGN'], 'false', '', 'campaign_id');
@@ -257,16 +251,9 @@ $xtpl->assign("DRAG_DROP_CHOOSER_WEB_TO_LEAD",constructDDWebToLeadFields($fields
 $xtpl->parse("main");
 $xtpl->out("main");
 /*
-$str = "<script>
-WebToLeadForm.lead_fields = {$lead_fields};
-</script>";
-echo $str;
-*/
-/*
  *This function constructs Drag and Drop multiselect box of subscriptions for display in manage subscription form
 */
 function constructDDWebToLeadFields($fields,$classname){
-require_once("include/templates/TemplateDragDropChooser.php");
 global $mod_strings;
 $d2 = array();
     //now call function that creates javascript for invoking DDChooser object

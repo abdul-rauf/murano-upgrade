@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,19 +10,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/Dashlets/Dashlet.php');
 
 
 class CalendarDashlet extends Dashlet {
     var $view = 'week';
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function CalendarDashlet($id, $def)
-    {
-        self::__construct($id, $def);
-    }
 
     public function __construct($id, $def)
     {
@@ -50,9 +40,6 @@ class CalendarDashlet extends Dashlet {
 		if(isset($GLOBALS['cal_strings']))
 			return parent::display() . "Only one Calendar dashlet is allowed.";
 			
-		require_once('modules/Calendar/Calendar.php');
-		require_once('modules/Calendar/CalendarDisplay.php');
-		require_once("modules/Calendar/CalendarGrid.php");
 		
 		global $cal_strings, $current_language;
 		$cal_strings = return_module_language($current_language, 'Calendar');
@@ -102,3 +89,4 @@ class CalendarDashlet extends Dashlet {
 
 
 }
+

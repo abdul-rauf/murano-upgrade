@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,7 +20,7 @@ global $urlPrefix;
 global $currentModule;
 global $sugar_version, $sugar_config;
 
-$focus = BeanFactory::getBean('Expressions');
+$focus = BeanFactory::newBean('Expressions');
 
 if(!empty($_REQUEST['type'])) {
     $type = $_REQUEST['type'];

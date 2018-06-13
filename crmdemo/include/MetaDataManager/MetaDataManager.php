@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry'))define('sugarEntry', true);
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,15 +10,15 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Sugarcrm\Sugarcrm\MetaData\RefreshQueue;
+use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
 
 require_once 'soap/SoapHelperFunctions.php';
-require_once 'modules/ModuleBuilder/parsers/MetaDataFiles.php';
-require_once 'include/SugarFields/SugarFieldHandler.php';
 require_once 'include/SugarObjects/LanguageManager.php';
-require_once 'modules/ActivityStream/Activities/ActivityQueueManager.php';
-require_once 'include/SubPanel/SubPanelDefinitions.php';
-require_once 'modules/MySettings/TabController.php';
 
 SugarAutoLoader::requireWithCustom('include/MetaDataManager/MetaDataHacks.php');
 SugarAutoLoader::requireWithCustom('include/MetaDataManager/MetaDataCache.php');
@@ -36,8 +35,9 @@ SugarAutoLoader::requireWithCustom('include/MetaDataManager/MetaDataCache.php');
  *    for a given section or module and rewriting that data to the cache. In some
  *    cases there are rebuild* methods that are consumed by other rebuild* methods.
 */
-class MetaDataManager
+class MetaDataManager implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
     /**
      * Constants that define the sections of the metadata
      */
@@ -410,7 +410,7 @@ class MetaDataManager
             }
 
             // Let consumers know this isn't the correct use of this constuctor
-            $GLOBALS['log']->deprecated("MetaDataManager no longer accepts a User object as an arguments");
+            $this->logger->warning("MetaDataManager no longer accepts a User object as an arguments");
         }
 
         if ($platforms == null) {
@@ -439,10 +439,7 @@ class MetaDataManager
 
         $this->db = DBManagerFactory::getInstance();
 
-        //Here $this->db may be FALSE due to $sugar_config['dbconfig'] unavailable
-        if ($this->db !== false) {
-            $this->cache = new MetaDataCache($this->db);
-        }
+        $this->setLogger(new NullLogger());
     }
 
     /**
@@ -459,7 +456,7 @@ class MetaDataManager
             }
 
             if ($this->db !== false) {
-                $this->cache = new MetaDataCache($this->db);
+                $this->cache = static::newCache($this->db, $this->logger);
             }
         }
 
@@ -468,6 +465,34 @@ class MetaDataManager
         } else {
             return $this->cache;
         }
+    }
+
+    protected static function newCache(DBManager $db = null, LoggerInterface $logger = null)
+    {
+        $db = $db ? $db : DBManagerFactory::getInstance();
+        $cache = new MetaDataCache($db);
+        $logger = $logger ? $logger : LoggerFactory::getLogger('metadata');
+        $cache->setLogger($logger);
+
+        return $cache;
+    }
+
+    /**
+     * Logs message and context with stack trace and additional information
+     * such as user id, client type, request url.
+     * This method should only be used when called in-frequently as it has heavy logging.
+     *
+     * @param LoggerInterface $logger
+     * @param string $message
+     * @param MetaDataContextInterface $context
+     */
+    protected static function logDetails(LoggerInterface $logger, $message, MetaDataContextInterface $context = null)
+    {
+        if ($context) {
+            $message .= sprintf('; Context=%s', get_class($context));
+        }
+
+        $logger->info($message);
     }
 
     /**
@@ -519,6 +544,7 @@ class MetaDataManager
         if ($fresh || empty(self::$managers[$key])) {
             $manager = new $class($platform, $public);
 
+            $manager->setLogger(LoggerFactory::getLogger('metadata'));
             // Cache it and move on
             self::$managers[$key] = $manager;
         }
@@ -550,7 +576,7 @@ class MetaDataManager
      */
     public function getSubpanelDefs($moduleName)
     {
-        $parent_bean = BeanFactory::getBean($moduleName);
+        $parent_bean = BeanFactory::newBean($moduleName);
         //Hack to allow the SubPanelDefinitions class to check the correct module dir
         if (!$parent_bean) {
             $parent_bean = (object) array('module_dir' => $moduleName);
@@ -759,10 +785,8 @@ class MetaDataManager
      */
     public function getModuleData($moduleName, MetaDataContextInterface $context = null)
     {
-        require_once 'include/SugarSearchEngine/SugarSearchEngineMetadataHelper.php';
         $vardefs = $this->getVarDef($moduleName);
         if (!empty($vardefs['fields']) && is_array($vardefs['fields'])) {
-            require_once 'include/MassUpdate.php';
             $vardefs['fields'] = MassUpdate::setMassUpdateFielddefs($vardefs['fields'], $moduleName);
         }
 
@@ -837,7 +861,7 @@ class MetaDataManager
     public function getModuleConfig($moduleName)
     {
         /* @var $admin Administration */
-        $admin = BeanFactory::getBean('Administration');
+        $admin = BeanFactory::newBean('Administration');
 
         return $admin->getConfigForModule($moduleName, $this->platforms[0]);
     }
@@ -891,11 +915,9 @@ class MetaDataManager
      */
     public function getVarDef($moduleName)
     {
-        require_once 'data/BeanFactory.php';
         $obj = BeanFactory::getObjectName($moduleName);
 
         if ($obj) {
-            require_once 'include/SugarObjects/VardefManager.php';
             global $dictionary;
             VardefManager::loadVardef($moduleName, $obj);
             if (isset($dictionary[$obj])) {
@@ -1193,7 +1215,11 @@ class MetaDataManager
     public static function getPlatformList()
     {
         $platforms = array();
-        foreach (SugarAutoLoader::existingCustom('clients/platforms.php') as $file) {
+        $platformsDefs = SugarAutoLoader::existingCustom('clients/platforms.php');
+        if ($platformExtension = SugarAutoLoader::loadExtension('platforms')) {
+            $platformsDefs[] = $platformExtension;
+        }
+        foreach ($platformsDefs as $file) {
             require $file;
         }
 
@@ -1265,7 +1291,7 @@ class MetaDataManager
 
         // Get the listing of files in the cache directory
         $db = DBManagerFactory::getInstance();
-        $cache = new MetaDataCache($db);
+        $cache = static::newCache($db);
         $types = $cache->getKeys();
         foreach($types as $type) {
             // If the cache key fits the pattern of a metadata cache key get the
@@ -1440,7 +1466,7 @@ class MetaDataManager
      */
     protected function rebuildJssourceSection($data, MetaDataContextInterface $context)
     {
-
+        static::logDetails($this->logger, "rebuildJssourceSection", $context);
         $data['jssource'] = $this->buildJavascriptComponentFile($data, !$this->public);
         //If this is private meta, we will still need to build the public javascript to verify that it hasn't changed.
         //If it has changed, the client will need to refresh to load it.
@@ -1496,6 +1522,7 @@ class MetaDataManager
         // NOTE: Do not try to rebuild language cache files as this could be
         // problematic on installations with many installed languages, like OD
         if (!empty($data)) {
+            static::logDetails($this->logger, "rebuildLanguagesCache.", $context);
             $this->clearLanguagesCache();
             $data = $this->loadSectionMetadata(self::MM_LABELS, $data, $context);
             $data = $this->loadSectionMetadata(self::MM_ORDEREDLABELS, $data, $context);
@@ -1621,6 +1648,7 @@ class MetaDataManager
             $context = $this->getDefaultContext();
         }
 
+        static::logDetails($this->logger, "rebuildCache ", $context);
         // Delete our current supply of caches if there are any
         $deleted = $this->deletePlatformVisibilityCaches($context);
 
@@ -1651,6 +1679,9 @@ class MetaDataManager
         if (empty($platforms)) {
             $platforms = $this->getPlatformsWithCaches();
         }
+
+        static::logDetails($this->logger, "Invalidating cache. Platforms with caches " . print_r($platforms, true), $context);
+
         $deleted = $this->deletePlatformVisibilityCaches($context);
         if ($deleted) {
             foreach ($platforms as $platform) {
@@ -1691,6 +1722,8 @@ class MetaDataManager
 
         // Set our inProcess flag;
         static::$inProcess = true;
+
+        static::logDetails(LoggerFactory::getLogger('metadata'), "refreshCache ");
 
         // The basics are, for each platform, rewrite the cache for public and private
         if (empty($platforms)) {
@@ -2036,7 +2069,6 @@ class MetaDataManager
 
             if($auth->isExternal()) {
                 $configs['externalLogin'] = true;
-                $configs['externalLoginUrl'] = $auth->getLoginUrl(array('platform'=>$this->args['platform']));
                 $configs['externalLoginSameWindow'] = SugarConfig::getInstance()->get('SAML_SAME_WINDOW');
             }
         }
@@ -2047,7 +2079,7 @@ class MetaDataManager
             $configs['analytics'] = array('enabled' => false);
         }
 
-        $caseBean = BeanFactory::getBean('Cases');
+        $caseBean = BeanFactory::newBean('Cases');
         if(!empty($caseBean)) {
             $configs['inboundEmailCaseSubjectMacro'] = $caseBean->getEmailSubjectMacro();
         }
@@ -2055,6 +2087,10 @@ class MetaDataManager
         // System name setting for sidecar modules
         if (!empty($administration->settings['system_name'])) {
             $configs['systemName'] = $administration->settings['system_name'];
+        }
+
+        if (!empty($sugarConfig['unique_key'])) {
+            $configs['uniqueKey'] = $sugarConfig['unique_key'];
         }
 
         // Handle connectors
@@ -2461,7 +2497,7 @@ class MetaDataManager
         // construct time, so hand it an admin bean. This returns a list of
         // hidden subpanels in lowercase module name form:
         // array('accounts', 'bugs', 'contacts');
-        $spd = new SubPanelDefinitions(BeanFactory::getBean('Administration'));
+        $spd = new SubPanelDefinitions(BeanFactory::newBean('Administration'));
         return array_values($spd->get_hidden_subpanels());
     }
 
@@ -2919,7 +2955,6 @@ class MetaDataManager
     public function getSystemCurrencies()
     {
         $currencies = array();
-        require_once 'modules/Currencies/ListCurrency.php';
         $lcurrency = new ListCurrency();
         $lcurrency->lookupCurrencies(true);
         if (!empty($lcurrency->list)) {
@@ -3272,7 +3307,6 @@ class MetaDataManager
     {
         //Sets a flag that tells callers whether this action actually did something
         $deleted = false;
-
         // Get the hashes array
         $hashes = $this->getCache()->get('hashes');
         if (empty($hashes)) {
@@ -3296,6 +3330,7 @@ class MetaDataManager
                     }
 
                     $deleted = true;
+                    $this->logger->debug("deleted language cache for " . $m[1]);
                 }
             }
         }
@@ -3404,7 +3439,6 @@ class MetaDataManager
      */
     public function getUserModuleList() {
         // Loading a standard module list
-        require_once("modules/MySettings/TabController.php");
         $controller = new TabController();
         $tabs = $controller->get_tabs($this->getCurrentUser());
         $moduleList = array_keys($tabs[0]);
@@ -3750,7 +3784,6 @@ class MetaDataManager
      */
     protected function getViewIterator($module, array $fieldDefs)
     {
-        require_once 'include/MetaDataManager/ViewIterator.php';
         return new ViewIterator($module, $fieldDefs);
     }
 

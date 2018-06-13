@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -55,7 +54,7 @@ EOF;
 
 	$javascript = new javascript();
 	$javascript->setFormName($formname);
-	$javascript->setSugarBean(BeanFactory::getBean('EmailTemplates'));
+	$javascript->setSugarBean(BeanFactory::newBean('EmailTemplates'));
 	$javascript->addRequiredFields($prefix);
 	$form .=$javascript->getScript();
 	$mod_strings = $temp_strings;
@@ -100,12 +99,11 @@ EOQ;
 	function handleSave($prefix,$redirect=true, $useRequired=false)
 	{
 		require_once('include/formbase.php');
-		require_once('include/upload_file.php');
 		global $upload_maxsize;
 		global $mod_strings;
 		global $sugar_config;
 
-		$focus = BeanFactory::getBean('EmailTemplates');
+		$focus = BeanFactory::newBean('EmailTemplates');
 		if($useRequired && !checkRequired($prefix, array_keys($focus->required_fields))) {
 			return null;
 		}
@@ -168,7 +166,7 @@ EOQ;
 		$max_files_upload = count($_FILES);
 
 		if(!empty($focus->id)) {
-			$note = BeanFactory::getBean('Notes');
+			$note = BeanFactory::newBean('Notes');
             $where = sprintf(' notes.parent_id = %s', $focus->db->quoted($focus->id));
 			if(!empty($_REQUEST['old_id'])) { // to support duplication of email templates
                 $where .= sprintf(' OR notes.parent_id = %s', $focus->db->quoted($_REQUEST['old_id']));
@@ -187,11 +185,9 @@ EOQ;
 
 
 
-		//for($i = 0; $i < $max_files_upload; $i++) {
-
 		foreach ($_FILES as $key => $file)
 		{
-			$note = BeanFactory::getBean('Notes');
+			$note = BeanFactory::newBean('Notes');
 
 			//Images are presaved above so we need to prevent duplicate files from being created.
 			if( isset($preProcessedImages[$file['name']]) )
@@ -276,7 +272,7 @@ EOQ;
 			if(empty($doc)) continue;
 			$docRev = BeanFactory::retrieveBean('DocumentRevisions', $doc->document_revision_id);
 			if(empty($docRev)) continue;
-			$docNote = BeanFactory::getBean('Notes');
+			$docNote = BeanFactory::newBean('Notes');
 
 			array_push($focus->saved_attachments, $docRev);
 

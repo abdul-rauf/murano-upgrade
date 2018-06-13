@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -37,7 +36,7 @@ if (!empty($_REQUEST['wiz_home_next_step'])) {
 
 
 $prefix = 'wiz_step3_';
-$marketing = BeanFactory::getBean('EmailMarketing');
+$marketing = BeanFactory::newBean('EmailMarketing');
 if (!empty($_REQUEST['record'])) {
     $marketing->retrieve($_REQUEST['record']);
 }

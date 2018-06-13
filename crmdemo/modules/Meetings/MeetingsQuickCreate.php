@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
  
-require_once('include/EditView/QuickCreate.php');
 
 
 
@@ -43,7 +41,7 @@ class MeetingsQuickCreate extends QuickCreate {
         $this->javascript = new javascript();
         $this->javascript->setFormName('meetingsQuickCreate');
         
-        $focus = BeanFactory::getBean('Meetings');
+        $focus = BeanFactory::newBean('Meetings');
         $this->javascript->setSugarBean($focus);
         $this->javascript->addAllFields('');
 
@@ -58,7 +56,6 @@ class MeetingsQuickCreate extends QuickCreate {
         $date_start_array=explode(" ",trim($focus->date_start));
         if (count($date_start_array)==2) {
 			$focus->time_start = $timedate->to_db_time($date_start_array[1], false);
-        	//$focus->date_start = $date_start_array[0];
         }
 
 		$this->ss->assign("DATE_START", $focus->date_start);
@@ -91,14 +88,6 @@ class MeetingsQuickCreate extends QuickCreate {
 		   $num_of_hours = 13;
 		   $start_at = 1;	
 		} 
-		
-		/*
-		// Seems to be problematic... $time_meridiem is always empty
-		if (empty ($time_meridiem)) {
-			$num_of_hours = 24;
-			$start_at = 0;
-		}
-		*/
 		
 		for ($i = $start_at; $i < $num_of_hours; $i ++) {
 			$i = $i."";

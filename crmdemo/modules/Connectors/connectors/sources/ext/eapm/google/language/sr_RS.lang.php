@@ -17,8 +17,8 @@ Pribavite API ključ i Tajnu od Google-a tako što ćete registrovati Vašu Suga
 <br/><br/>
 <ol>
 <li>Idite na lokaciju Google programera:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Prijavite se pomoću Google naloga pod kojim biste želeli da registrujete aplikaciju.</li>
 <li>Kreirajte nov projekat</li>

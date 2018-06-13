@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Megajánlott Tétel',
     'LBL_LIST_MANUFACTURER' => 'Gyártó',
     'LBL_MANUFACTURERS' => 'Gyártók',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Gyártó cikksz.',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Cikkszám',
     'LBL_LIST_QUANTITY' => 'Mennyiség',
     'LBL_LIST_COST_PRICE' => 'Költség',
     'LBL_LIST_DISCOUNT_PRICE' => 'Ár',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Kedvezmény  %-ban',
     'LBL_LIST_PRICE' => 'Listaár:',
     'LBL_VENDOR_PART_NUM' => 'Eladó partnerszáma:',
-    'LBL_MFT_PART_NUM' => 'Gyártó partnerszáma:',
+    'LBL_MFT_PART_NUM' => 'Cikkszám:',
     'LBL_NEXT_STEP' => 'Következő lépés:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Kedvezményes ár dátuma:',
     'LBL_WEIGHT' => 'Súly:',
@@ -162,6 +162,8 @@ $mod_strings = array(
 - Ha hiányzó mezőt talál, kattintson a "Több mutatása" opcióra a további mezők felfedéséhez! 
 2. Kattintson a "Mentés" gombra a rekord mentéséhez és a korábbi oldalra való visszatéréshez.',
 
-    'LBL_MANUFACTURERS' => 'Gyártók',
     'LBL_PRODUCT_POSITION' => 'Termékköteg Pozíció',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Ajánlat sorelemei, ajánlat adatlista',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Új ajánlott sorelem)',
+    'LBL_DISCOUNT_PERCENT' => '% százalék',
 );

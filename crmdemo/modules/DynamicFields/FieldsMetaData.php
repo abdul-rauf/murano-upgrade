@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -77,7 +76,6 @@ class FieldsMetaData extends SugarBean {
         'reportable',
 	);
 
-	var $field_name_map;
 	var $new_schema = true;
 	public $disable_row_level_security = true;
 
@@ -94,8 +92,9 @@ class FieldsMetaData extends SugarBean {
 	
 	function mark_deleted($id)
 	{
-        $query = "DELETE FROM $this->table_name WHERE  id=" . $this->db->quoted($id);
-		$this->db->query($query, true,"Error deleting record: ");
+        $query = "DELETE FROM {$this->table_name} WHERE id = ? ";
+        $conn = $this->db->getConnection();
+        $conn->executeQuery($query, array($id));
 		$this->mark_relationships_deleted($id);
 
 	}

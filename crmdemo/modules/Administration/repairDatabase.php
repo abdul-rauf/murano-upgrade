@@ -1,6 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry)
-	die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -41,7 +39,6 @@ if (is_admin($current_user) || isset ($from_sync_client) || is_admin_for_any_mod
 		    //the html entity &#039; to a single quote, so we will use str_replace
 		    //instead
 		    $sql = str_replace('&#039;',"'", $_POST['sql']);
-		    //echo html_entity_decode($_POST['sql']);
 		    echo $sql;
 		}
 		elseif (isset ($_POST['raction']) && strtolower($_POST['raction']) == "execute") {

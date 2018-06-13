@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,9 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
-
-require_once('include/Dashlets/Dashlet.php');
-require_once('include/generic/LayoutManager.php');
 
 abstract class DashletGenericChart extends Dashlet
 {
@@ -129,7 +125,6 @@ abstract class DashletGenericChart extends Dashlet
     public function displayScript()
     {
 
-		require_once('include/SugarCharts/SugarChartFactory.php');
 		$sugarChart = SugarChartFactory::getInstance();
 		return $sugarChart->getDashletScript($this->id);
 
@@ -254,7 +249,7 @@ abstract class DashletGenericChart extends Dashlet
     protected function getSeedBean()
     {
         if ( !($this->_seedBean instanceof SugarBean) )
-            $this->_seedBean = BeanFactory::getBean($this->_seedName);
+            $this->_seedBean = BeanFactory::newBean($this->_seedName);
 
         return $this->_seedBean;
     }
@@ -284,9 +279,9 @@ abstract class DashletGenericChart extends Dashlet
      *
      * @return string HTML that displays Dashlet
      */
-    public function display($text = '')
+    public function display()
     {
-        return parent::display($text) . $this->processAutoRefresh();
+        return parent::display() . $this->processAutoRefresh();
     }
 
     /**

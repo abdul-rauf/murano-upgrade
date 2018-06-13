@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,13 +27,12 @@ if(!isset($_REQUEST['record']) || empty($_REQUEST['record'])) {
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
-require_once('include/DetailView/DetailView.php');
 global $gridline;
 global $app_strings;
 global $focus;
 
 // SETTING DEFAULTS
-$focus = BeanFactory::getBean('Emails');
+$focus = BeanFactory::newBean('Emails');
 $detailView	= new DetailView();
 $offset		= 0;
 $email_type	= 'archived';
@@ -210,15 +208,10 @@ if ($focus->type=='campaign' and !empty($_REQUEST['parent_id']) and !empty($_REQ
     $parent_module = InputValidation::getService()->getValidInputRequest('parent_module', 'Assert\Mvc\ModuleName');
 
 	// cn: bug 14300 - emails_beans schema refactor - fixing query
-    $query = sprintf(
-        'SELECT * FROM emails_beans WHERE email_id = %s AND bean_id = %s AND bean_module = %s',
-        $focus->db->quoted($focus->id),
-        $focus->db->quoted($parent_id),
-        $focus->db->quoted($parent_module)
-    );
-
-    $res=$focus->db->query($query);
-    $row=$focus->db->fetchByAssoc($res);
+    $query = 'SELECT * FROM emails_beans WHERE email_id = ? AND bean_id = ? AND bean_module = ?';
+    $conn = $focus->db->getConnection();
+    $stmt = $conn->executeQuery($query, array($focus->id, $parent_id, $parent_module));
+    $row = $stmt->fetch();
     if (!empty($row)) {
         $campaign_data=$row['campaign_data'];
         $macro_values=array();
@@ -450,7 +443,7 @@ if ($do_open) {
 ////	NOTES (attachements, etc.)
 ///////////////////////////////////////////////////////////////////////////////
 
-$note = BeanFactory::getBean('Notes');
+$note = BeanFactory::newBean('Notes');
 $where = "notes.parent_id='{$focus->id}'";
 //take in account if this is from campaign and the template id is stored in the macros.
 
@@ -487,7 +480,6 @@ echo $old_contents;
 ////    SUBPANELS
 ///////////////////////////////////////////////////////////////////////////////
 if ($show_subpanels) {
-    require_once('include/SubPanel/SubPanelTiles.php');
     $subpanel = new SubPanelTiles($focus, 'Emails');
     echo $subpanel->display();
 }

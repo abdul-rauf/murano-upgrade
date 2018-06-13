@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Klicka för att redigera denna modul.',
         'moduleHelp'=> 'Välj modulkomponenten du vill redigera',
         'fieldsBtn'	=> 'Välj vilken data som ska sparas i modulen genom att kontrollera modulens <b>Fält</b>.<br/><br/>Du kan redigera och skapa egna fält här.',
-        'labelsBtn' => 'Klicka på <b>Spara</b> för att spara dina anpassade titlar.'	,
         'layoutsBtn'=> 'Anpassa <b>Layouter</b> för Redigera-, Detalj-, List-, och Sökvyerna.',
         'subpanelBtn'=> 'Redigera vad som ska synas i modulens underpaneler.',
         'layoutsHelp'=> 'Välj vilken <b>Layout du vill redigera</b>.<br/<br/>Klicka <b>Redigeringsvy</b> för att ändra layouten som innehåller datafält för inmatning.<br/><br/> Klicka på <b>Detaljvy</b> för att välja layouten som visar datan inmatad i Redigeringsvyn.<br/><br/>Klicka <b>Listvy</b> för att välja välja vilka kolumner som syns i standardlistan.<br/><br/>Klicka på <b>Sök</b> för att ändra layouten på det vanliga och avancerade sökformuläret.',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Är du säker på att du vill ta bort Closed Förlorade försäljningsfas? Radera detta stadium kommer att orsaka att prognosmodulen inte fungerar korrekt',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Are you sure you wish to delete this relationship?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Detta kommer att göra relationen permanent. Är du säker på att du vill rulla ut relationen?',
 'LBL_CONFIRM_DONT_SAVE' => 'Ändringar har gjorts sedan du sparade senast, vill du spara?',

@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,10 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/Import/ImportCacheFiles.php';
-require_once 'modules/Import/ImportFieldSanitize.php';
-require_once 'modules/Import/ImportDuplicateCheck.php';
-require_once 'include/SugarFields/SugarFieldHandler.php';
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
@@ -199,7 +193,7 @@ class Importer
     {
         global $sugar_config, $mod_strings, $current_user, $current_language;
 
-        $focus = BeanFactory::getBean($this->bean->module_dir);
+        $focus = BeanFactory::newBean($this->bean->module_dir);
         $focus->unPopulateDefaultValues();
         $focus->save_from_post = false;
         $focus->team_id = null;
@@ -290,7 +284,6 @@ class Importer
 
                 if(!empty($fieldDef['custom_type']) && $fieldDef['custom_type'] == 'teamset' && empty($rowValue))
                 {
-                    require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
                     $rowValue = implode(', ', SugarFieldTeamset::getTeamsFromRequest($field));
                 }
 
@@ -876,7 +869,7 @@ class Importer
             array('Assert\PhpSerialized' => array('base64Encoded' => true))
         );
         $mappingValsArr = $this->importColumns;
-        $mapping_file = BeanFactory::getBean('Import_1');
+        $mapping_file = BeanFactory::newBean('Import_1');
         $mapping_file->delimiter = $_REQUEST['custom_delimiter'];
         $mapping_file->enclosure = html_entity_decode($_REQUEST['custom_enclosure'], ENT_QUOTES);
 
@@ -915,7 +908,6 @@ class Importer
                 $fieldDef = $this->bean->getFieldDefinition($field);
                 if(!empty($fieldDef['custom_type']) && $fieldDef['custom_type'] == 'teamset')
                 {
-                    require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
                     $teams = SugarFieldTeamset::getTeamsFromRequest($field);
                     if(isset($_REQUEST['primary_team_name_collection']))
                     {
@@ -1048,7 +1040,7 @@ class Importer
      */
     protected function _undoCreatedBeans( array $ids )
     {
-        $focus = BeanFactory::getBean('Import_2');
+        $focus = BeanFactory::newBean('Import_2');
         foreach ($ids as $id)
             $focus->undoById($id);
     }
@@ -1106,7 +1098,7 @@ class Importer
         $importableModules = array();
         foreach ($beanList as $moduleName => $beanName)
         {
-            $tmp = BeanFactory::getBean($moduleName);
+            $tmp = BeanFactory::newBean($moduleName);
             if( !empty($tmp->importable))
             {
                 $label = isset($GLOBALS['app_list_strings']['moduleList'][$moduleName]) ? $GLOBALS['app_list_strings']['moduleList'][$moduleName] : $moduleName;

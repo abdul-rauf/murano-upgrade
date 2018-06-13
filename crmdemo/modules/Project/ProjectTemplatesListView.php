@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +11,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/ListView/ListViewSmarty.php');
 require SugarAutoLoader::loadWithMetafiles('Project', 'projecttemplate_listviewdefs');
 
 require_once('include/SearchForm/SearchForm.php');
@@ -39,11 +37,9 @@ global $focus_list;
 if(!empty($_REQUEST['clear_query']) && $_REQUEST['clear_query'] == 'true')
     $current_user->setPreference('ListViewDisplayColumns', array(), 0, $currentModule);
 
-//$savedDisplayColumns = $current_user->getPreference('ListViewDisplayColumns', $currentModule); // get user defined display columns
-
 $json = getJSONobj();
 
-$seedProject = BeanFactory::getBean('Project'); // seed bean
+$seedProject = BeanFactory::newBean('Project'); // seed bean
 $searchForm = new SearchForm('Project', $seedProject); // new searchform instance
 
 // setup listview smarty
@@ -57,9 +53,6 @@ if(!empty($_REQUEST['displayColumns'])) {
             $displayColumns[$col] = $listViewDefs['ProjectTemplates'][$col];
     }
 }
-/*elseif(!empty($savedDisplayColumns)) { // use user defined display columns from preferences
-    $displayColumns = $savedDisplayColumns;
-}*/
 else { // use columns defined in listviewdefs for default display columns
 	foreach($listViewDefs['ProjectTemplates'] as $col => $params) {
         if(!empty($params['default']) && $params['default'])
@@ -94,7 +87,6 @@ if(!empty($_REQUEST['search_form_only']) && $_REQUEST['search_form_only']) { // 
 
 // use the stored query if there is one
 if (!isset($where)) $where = "";
-require_once('modules/MySettings/StoreQuery.php');
 $storeQuery = new StoreQuery();
 if(!isset($_REQUEST['query'])){
     $storeQuery->loadQuery($currentModule);
@@ -110,32 +102,11 @@ if(isset($_REQUEST['query']))
     $searchForm->populateFromRequest(); // gathers search field inputs from $_REQUEST
     $where_clauses = $searchForm->generateSearchWhere(true, "Project"); // builds the where clause from search field inputs
 
-    //if (count($where_clauses) > 0 )$where = implode(' and ', $where_clauses);
     $GLOBALS['log']->info("Here is the where clause for the list view: $where");
 }
 
 // list only the Project Templates
 $where .= 'is_template = 1 ';
-
-// start display
-// which tab of search form to display
-/*if(!isset($_REQUEST['search_form']) || $_REQUEST['search_form'] != 'false') {
-
-    $searchForm->setup();
-
-	if(isset($_REQUEST['searchFormTab']) && $_REQUEST['searchFormTab'] == 'advanced_search') {
-        $searchForm->displayAdvanced();
-    }
-    elseif(isset($_REQUEST['searchFormTab']) && $_REQUEST['searchFormTab'] == 'saved_views'){
-        $searchForm->displaySavedViews($listViewDefs, $lv);
-    }
-    else {
-        $searchForm->displayBasic();
-    }
-}
-*/
-
-//_pp($mod_strings);
 
 $seedProject->create_action = 'ProjectTemplatesEditView';
 
@@ -160,15 +131,6 @@ $savedSearchName = empty($_REQUEST['saved_search_select_name']) ? '' : (' - ' . 
 echo get_form_header($current_module_strings['LBL_LIST_FORM_TITLE'] . $savedSearchName, '', false);
 
 echo $lv->display();
-
-$savedSearch = BeanFactory::getBean('SavedSearch');
-$json = getJSONobj();
-// fills in saved views select box on shortcut menu
-$savedSearchSelects = $json->encode(array($GLOBALS['app_strings']['LBL_SAVED_SEARCH_SHORTCUT'] . '<br>' . $savedSearch->getSelect('Project')));
-$str = "<script>
-YAHOO.util.Event.addListener(window, 'load', SUGAR.util.fillShortcuts, $savedSearchSelects);
-</script>";
-echo $str;
 
 // awu: Bug 11452 - removing export for non-admin users without a mass update form
 // faking a massupdate form, which is expected on page load

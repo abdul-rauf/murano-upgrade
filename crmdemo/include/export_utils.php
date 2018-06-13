@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/FilterApi.php');
-require_once('include/SugarFields/SugarFieldHandler.php');
 require_once 'modules/Teams/TeamSetManager.php';
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
@@ -179,7 +177,6 @@ function exportFromApi($args, $sample = false)
 
     $type = clean_string($args['module']);
 
-    require_once 'include/RecordListFactory.php';
     $recordList = RecordListFactory::getRecordList($args['record_list_id']);
     if (empty($recordList)) {
         throw new SugarApiExceptionNotFound();
@@ -259,7 +256,7 @@ function exportFromApi($args, $sample = false)
         $result = $db->query($query, true, $app_strings['ERR_EXPORT_TYPE'].$type.": <BR>.".$query);
     }
 
-    $tagBean = BeanFactory::getBean("Tags");
+    $tagBean = BeanFactory::newBean("Tags");
     $relTags = $tagBean->getRelatedModuleRecords($focus, $records);
     if (isset($relTags)) {
         $options['relTags'] = $relTags;
@@ -369,8 +366,8 @@ function getExportContentFromFilter($args, $remove_from_members, $focus, $member
             // getting content values depending on their types
             $fieldNameMapKey = $fields_array[$key];
 
-            if (isset($focus->field_name_map[$fieldNameMapKey])  && $focus->field_name_map[$fieldNameMapKey]['type']) {
-                $sfh = SugarFieldHandler::getSugarField($focus->field_name_map[$fieldNameMapKey]['type']);
+            if (isset($focus->field_defs[$fieldNameMapKey])  && $focus->field_defs[$fieldNameMapKey]['type']) {
+                $sfh = SugarFieldHandler::getSugarField($focus->field_defs[$fieldNameMapKey]['type']);
                 $value = $sfh->exportSanitize($value, $focus->field_defs[$key], $focus);
             }
 
@@ -487,7 +484,6 @@ function getExportContentFromResult(
             }
             $pre_id = $is_id_exported ? $val['id'] : '';
 
-            require_once('include/SugarFields/SugarFieldHandler.php');
 
             // replace user_name with full name if use_real_name preference setting is enabled
             // and this is a user name field
@@ -501,10 +497,10 @@ function getExportContentFromResult(
                 // getting content values depending on their types
                 $fieldNameMapKey = $fields_array[$key];
 
-                if (isset($focus->field_name_map[$fieldNameMapKey]) &&
-                    $focus->field_name_map[$fieldNameMapKey]['type']
+                if (isset($focus->field_defs[$fieldNameMapKey]) &&
+                    $focus->field_defs[$fieldNameMapKey]['type']
                 ) {
-                    $sfh = SugarFieldHandler::getSugarField($focus->field_name_map[$fieldNameMapKey]['type']);
+                    $sfh = SugarFieldHandler::getSugarField($focus->field_defs[$fieldNameMapKey]['type']);
                     $sfh->setOptions($options);
                     $value = $sfh->exportSanitize($value, $focus->field_defs[$key], $focus, $val);
                 }
@@ -513,8 +509,8 @@ function getExportContentFromResult(
                     $options[$pre_id] = $value;
                 }
 
-                if (isset($focus->field_name_map[$fields_array[$key]]['custom_type']) &&
-                    $focus->field_name_map[$fields_array[$key]]['custom_type'] == 'teamset' &&
+                if (isset($focus->field_defs[$fields_array[$key]]['custom_type']) &&
+                    $focus->field_defs[$fields_array[$key]]['custom_type'] == 'teamset' &&
                     isset(Team::$nameTeamsetMapping[$fields_array[$key]])
                 ) {
                     $primaryTeamId = '';
@@ -777,12 +773,12 @@ function returnFakeDataRow($focus, $field_array, $rowsToReturn = 5)
         $counter++;
         // go through each field and populate with dummy data if possible
         foreach ($field_array as $field_name) {
-            if (empty($focus->field_name_map[$field_name]) || empty($focus->field_name_map[$field_name]['type'])) {
+            if (empty($focus->field_defs[$field_name]) || empty($focus->field_defs[$field_name]['type'])) {
                 // type is not set, fill in with empty string and continue;
                 $returnContent .= '"",';
                 continue;
             }
-            $field = $focus->field_name_map[$field_name];
+            $field = $focus->field_defs[$field_name];
 
             // fill in value according to type
             $type = $field['type'];
@@ -934,12 +930,12 @@ function returnFakeDataRow($focus, $field_array, $rowsToReturn = 5)
                     // get the associated enum if available
                     global $app_list_strings;
 
-                    if (isset($focus->field_name_map[$field_name]['type']) &&
-                        !empty($focus->field_name_map[$field_name]['options'])
+                    if (isset($focus->field_defs[$field_name]['type']) &&
+                        !empty($focus->field_defs[$field_name]['options'])
                     ) {
-                        if (!empty($app_list_strings[$focus->field_name_map[$field_name]['options']])) {
+                        if (!empty($app_list_strings[$focus->field_defs[$field_name]['options']])) {
                             // put the values into an array
-                            $dd_values = $app_list_strings[$focus->field_name_map[$field_name]['options']];
+                            $dd_values = $app_list_strings[$focus->field_defs[$field_name]['options']];
                             $dd_values = array_values($dd_values);
 
                             // grab the count
@@ -990,15 +986,15 @@ function translateForExport($field_db_name, $focus)
          // entry exists which means we are overriding this value for exporting, use this label
          $fieldLabel = $app_strings['LBL_EXPORT_'.strtoupper($field_db_name)];
     } // check to see if label exists in mapping and in mod strings
-    elseif (!empty($focus->field_name_map[$field_db_name]['vname']) &&
-        !empty($mod_strings[$focus->field_name_map[$field_db_name]['vname']])
+    elseif (!empty($focus->field_defs[$field_db_name]['vname']) &&
+        !empty($mod_strings[$focus->field_defs[$field_db_name]['vname']])
     ) {
-         $fieldLabel = $mod_strings[$focus->field_name_map[$field_db_name]['vname']];
+         $fieldLabel = $mod_strings[$focus->field_defs[$field_db_name]['vname']];
     } // check to see if label exists in mapping and in app strings
-    elseif (!empty($focus->field_name_map[$field_db_name]['vname']) &&
-        !empty($app_strings[$focus->field_name_map[$field_db_name]['vname']])
+    elseif (!empty($focus->field_defs[$field_db_name]['vname']) &&
+        !empty($app_strings[$focus->field_defs[$field_db_name]['vname']])
     ) {
-         $fieldLabel = $app_strings[$focus->field_name_map[$field_db_name]['vname']];
+         $fieldLabel = $app_strings[$focus->field_defs[$field_db_name]['vname']];
     } // field is not in mapping, so check to see if db can be uppercased and found in mod strings
     elseif (!empty($mod_strings['LBL_'.strtoupper($field_db_name)])) {
          $fieldLabel = $mod_strings['LBL_'.strtoupper($field_db_name)];
@@ -1232,7 +1228,7 @@ function get_field_order_mapping($name = '', $reorderArr = '', $exclude = true, 
             }
 
             // get an instance of the bean
-            $focus = BeanFactory::getBean($_REQUEST['module']);
+            $focus = BeanFactory::newBean($_REQUEST['module']);
 
             // set the name based on the module type. default to basic ('notes')
             if ($focus instanceof Person) {
@@ -1498,7 +1494,7 @@ function get_field_order_mapping2($name, $reorderArr = '', $exclude = true, $for
             }
 
             // get an instance of the bean
-            $focus = BeanFactory::getBean($name);
+            $focus = BeanFactory::newBean($name);
 
             // set the name based on the module type. default to basic ('notes')
             if ($focus instanceof Person) {
@@ -1574,14 +1570,14 @@ function formatRealNameField(SugarBean $focus, $fields_array, $key, $value)
 {
     global $locale;
 
-    if (!empty($focus->field_name_map[$fields_array[$key]]['type']) &&
-        $focus->field_name_map[$fields_array[$key]]['type'] == 'relate' &&
-        !empty($focus->field_name_map[$fields_array[$key]]['module']) &&
-        $focus->field_name_map[$fields_array[$key]]['module'] == 'Users' &&
-        !empty($focus->field_name_map[$fields_array[$key]]['rname']) &&
-        $focus->field_name_map[$fields_array[$key]]['rname'] == 'full_name'
+    if (!empty($focus->field_defs[$fields_array[$key]]['type']) &&
+        $focus->field_defs[$fields_array[$key]]['type'] == 'relate' &&
+        !empty($focus->field_defs[$fields_array[$key]]['module']) &&
+        $focus->field_defs[$fields_array[$key]]['module'] == 'Users' &&
+        !empty($focus->field_defs[$fields_array[$key]]['rname']) &&
+        $focus->field_defs[$fields_array[$key]]['rname'] == 'full_name'
     ) {
-        $userFocus = BeanFactory::getBean('Users');
+        $userFocus = BeanFactory::newBean('Users');
         $userFocus->retrieve_by_string_fields(array('user_name' => $value ));
         if (!empty($userFocus->id)) {
             $value = $locale->formatName($userFocus);

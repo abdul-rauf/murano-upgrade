@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,7 +15,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 class Campaign extends SugarBean {
-	var $field_name_map;
 
 	// Stored fields
 	var $id;
@@ -84,7 +82,6 @@ class Campaign extends SugarBean {
 		$result = $this->db->query($query);
 		$user = $this->db->fetchByAssoc($result);
 
-		//_ppd($user);
 		if(!empty($user)) {
             $fullName = $locale->formatName($user);
 			$listTmpl->assign('ASSIGNED_USER_NAME', $fullName);
@@ -113,6 +110,7 @@ class Campaign extends SugarBean {
 	function mark_relationships_deleted($id)
 	{
 		$this->clear_campaign_prospect_list_relationship($id);
+        parent::mark_relationships_deleted($id);
 	}
 
 	function fill_in_additional_list_fields()
@@ -123,13 +121,6 @@ class Campaign extends SugarBean {
 	function fill_in_additional_detail_fields()
 	{
         parent::fill_in_additional_detail_fields();
-		//format numbers.
-
-		//don't need additional formatting here.
-		//$this->budget=format_number($this->budget);
-		//$this->expected_cost=format_number($this->expected_cost);
-		//$this->actual_cost=format_number($this->actual_cost);
-		//$this->expected_revenue=format_number($this->expected_revenue);
 	}
 
 
@@ -185,18 +176,6 @@ class Campaign extends SugarBean {
         return parent::save($check_notify);
 
     }
-
-
-	function mark_deleted($id){
-        $query = "update contacts set campaign_id = null where campaign_id = '{$id}' ";
-        $this->db->query($query);
-        $query = "update accounts set campaign_id = null where campaign_id = '{$id}' ";
-        $this->db->query($query);
-        // bug49632 - delete campaign logs for the campaign as well
-        $query = "update campaign_log set deleted = 1 where campaign_id = '{$id}' ";
-        $this->db->query($query);
-		return parent::mark_deleted($id);
-	}
 
 	function set_notification_body($xtpl, $camp)
 	{
@@ -296,36 +275,11 @@ class Campaign extends SugarBean {
         }
 
 		//get select query from email man
-		$man = BeanFactory::getBean('EmailMan');
+		$man = BeanFactory::newBean('EmailMan');
 		$listquery= $man->create_queue_items_query('',str_replace(array("WHERE","where"),"",$query_array['where']),null,$query_array);
 		return $listquery;
 
 	}
-//	function get_prospect_list_entries() {
-//		$this->load_relationship('prospectlists');
-//		$query_array = $this->prospectlists->getQuery(true);
-//
-//		$query=<<<EOQ
-//			SELECT distinct prospect_lists.*,
-//			(case  when (email_marketing.id is null) then default_message.id else email_marketing.id end) marketing_id,
-//			(case  when  (email_marketing.id is null) then default_message.name else email_marketing.name end) marketing_name
-//
-//			FROM prospect_lists
-//
-//			INNER JOIN prospect_list_campaigns ON (prospect_lists.id=prospect_list_campaigns.prospect_list_id AND prospect_list_campaigns.campaign_id='{$this->id}')
-//
-//			LEFT JOIN email_marketing on email_marketing.message_for = prospect_lists.id and email_marketing.campaign_id = '{$this->id}'
-//			and email_marketing.deleted =0 and email_marketing.status='active'
-//
-//			LEFT JOIN email_marketing default_message on default_message.message_for = prospect_list_campaigns.campaign_id and
-//			default_message.campaign_id = '{$this->id}' and default_message.deleted =0
-//			and default_message.status='active'
-//
-//			WHERE prospect_list_campaigns.deleted=0 AND prospect_lists.deleted=0
-//
-//EOQ;
-//		return $query;
-//	}
 
 	 function bean_implements($interface){
 		switch($interface){

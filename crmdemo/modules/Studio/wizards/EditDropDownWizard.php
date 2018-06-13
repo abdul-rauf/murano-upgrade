@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
  // $Id: EditDropDownWizard.php 18703 2006-12-15 09:42:43Z majed $
 
-require_once('modules/Studio/DropDowns/DropDownHelper.php');
 class EditDropDownWizard extends StudioWizard {
 	var $wizard = 'EditDropDownWizard';
     function welcome(){
@@ -50,12 +48,15 @@ class EditDropDownWizard extends StudioWizard {
 		         parent::process($option);
 		}
 	}
-	
-	function display()
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param string $error Ignored
+     */
+    public function display($error = '')
 	{
 	    // override the parent display - don't display any wizard stuff
 	}
 	
 }
-
-?>

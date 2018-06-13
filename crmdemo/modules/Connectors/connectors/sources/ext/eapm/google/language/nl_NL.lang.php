@@ -17,14 +17,14 @@ U kunt van Google een API-sleutel en geheim krijgen door uw Sugar-exemplaar als 
 <br/><br/>
 <ol>
 <li>Ga naar de Google Developers-website:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Meld u aan met de Google-account waarmee u de applicatie wilt registreren.</li>
 <li>Maak een nieuw project</li>
 <li>Voer een projectnaam in en klik op aanmaken.</li>
 <li>Zodra het project werd gemaakt, activeer Google Drive en Google Contacts API</li>
-<li>In het gedeelte API&#39;s & Auth > Verificatiegegevens, maak een nieuwe klant-id </li>
+<li>In het gedeelte API\'s & Auth > Verificatiegegevens, maak een nieuwe klant-id </li>
 <li>Selecteer Web Application en klik op het scherm Configure conscent</li>
 <li>Voer een productnaam in en klik op opslaan</li>
 <li>In het gedeelte Authorized redirect URIs voert u de URL in: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>

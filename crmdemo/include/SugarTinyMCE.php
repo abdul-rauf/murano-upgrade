@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -77,13 +74,6 @@ class SugarTinyMCE
 
         );
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarTinyMCE()
-    {
-        self::__construct();
-    }
 
     /**
      * Sole constructor
@@ -125,12 +115,6 @@ class SugarTinyMCE
         $jsConfig = $json->encode($config);
 
         $instantiateCall = '';
-        if (!empty($targets)) {
-            $exTargets = explode(",", $targets);
-            foreach ($exTargets as $instance) {
-                //$instantiateCall .= "tinyMCE.execCommand('mceAddControl', false, document.getElementById('{$instance}'));\n";
-            }
-        }
         $path = getJSPath('include/javascript/tiny_mce/tiny_mce.js');
         $ret
                    = <<<eoq

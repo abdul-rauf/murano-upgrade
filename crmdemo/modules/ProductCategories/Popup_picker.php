@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -46,18 +45,11 @@ require_once('modules/ProductCategories/TreeData.php');
 
 class Popup_Picker
 {
-    /**
-     * @deprecated
-     */
-    public function Popup_Picker()
-    {
-    }
-
     function process_page()
     {
         global $mod_strings, $app_strings, $currentModule,
                $seed_object, $sugar_version, $sugar_config;
-        $focus = BeanFactory::getBean('ProductCategories');
+        $focus = BeanFactory::newBean('ProductCategories');
 
         if (!isset($_REQUEST['html'])) {
             $xtpl =new XTemplate ('modules/ProductCategories/Popup_picker.html');

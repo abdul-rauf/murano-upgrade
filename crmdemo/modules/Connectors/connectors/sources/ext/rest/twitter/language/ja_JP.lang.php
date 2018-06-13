@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,25 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">ツイッターで あなたの Sugar インスタンスを新規アプリケーションとして登録することにより、コンシューマーキーとコンシューマーシークレットを取得します。<br/><br>あなたのインスタンスを登録する手順は次の通りです。<br/><br/><ol><li>ツイッターデベロッパーサイト ： <a href=&#39;http://dev.twitter.com/apps/new&#39; target=&#39;_blank&#39;>http://dev.twitter.com/apps/new</a> へ移動します。</li><li>アプリケーションを登録したいツイッターアカウントを使用してサインインします。</li><li>登録フォーム内で、アプリケーションに関する名前を入力します。これはユーザーがそれぞれのツイッターアカウントを Sugar 内部から認証する時に確認することになる名前です。</li><li>備考を入力します。</li><li>アプリケーション Web サイトの URL を入力します。</li><li>コールバック  URL を入力します（Suger は認証時にこれをバイパスするため任意のものでかまいません。例：Sugar サイト URL など）。</li><li>ツイッターコンシューマーキー（API キー）の利用規約に同意します。</li><li>「使用するツイッターアプリケーションを作成」をクリックします。</li><li>そのアプリケーションページで、「コンシューマーキー」タブの下のコンシューマーキーとコンシューマーシークレットを見つけます。そのキーとシークレットを次に入力します。</li></ol></td></tr></table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
+								<tr>
+									<td valign="top" width="35%" class="dataLabel">
+										Sugarインスタンスを新しいアプリケーションとして登録することでTwitterからAPI KeyとSecretを取得しましょう：<br/><br>インスタンスの登録手順：<br/><br/>
+										<ol>
+											<li>Twitter Developersサイトを表示します。 <a href=\'https://apps.twitter.com\' target=\'_blank\'>https://apps.twitter.com</a>.</li>
+											<li>アプリケーションを登録したいTwitter アカウントでサインインします。</li>
+											<li>登録フォーム内に、アプリケーションの名称を入力します。ユーザーがSugarからTwitterアカウントを認証すると、この名称が表示されます。</li>
+											<li>[Description（説明）]を入力します。</li>
+											<li>[Application Website URL（アプリケーションウェブサイトURL）]を入力します。</li>
+											<li>[Callback URL（コールバックURL）
+]（どのURLでも問題ありません。Sugarは承認時ここをバイパスします。例えば、SugarウェブサイトのURLを入れます）を入力します。</li>
+											<li>Twitter API Terms of Service（TwitterのAPIサービス規約）に同意します。</li>
+											<li>[Create your Twitter application（Twitterアプリケーションの作成）]をクリックします。</li>
+											<li>アプリケーションページ内の[API Keys（APIキー）]タブでAPIキーおよびAPIの秘密を調べます。API KeyとSecretを下に入力します。</li>
+										</ol>
+									</td>
+								</tr>
+							</table>',
     'LBL_NAME' => 'ツイッターユーザー名',
     'LBL_ID' => 'ツイッターユーザー名',
 	'company_url' => 'URL',

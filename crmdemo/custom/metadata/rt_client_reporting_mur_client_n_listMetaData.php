@@ -1,6 +1,6 @@
 <?php
-// created: 2017-11-23 11:21:02
-$dictionary["rt_client_reporting_mur_client_n_list"] = array (
+// created: 2018-06-13 14:43:30
+$dictionary['rt_client_reporting_mur_client_n_list'] = array (
   'true_relationship_type' => 'one-to-many',
   'relationships' => 
   array (
@@ -21,18 +21,18 @@ $dictionary["rt_client_reporting_mur_client_n_list"] = array (
   'table' => 'rt_client_reporting_mur_client_n_list_c',
   'fields' => 
   array (
-    0 => 
+    'id' => 
     array (
       'name' => 'id',
       'type' => 'varchar',
       'len' => 36,
     ),
-    1 => 
+    'date_modified' => 
     array (
       'name' => 'date_modified',
       'type' => 'datetime',
     ),
-    2 => 
+    'deleted' => 
     array (
       'name' => 'deleted',
       'type' => 'bool',
@@ -40,13 +40,13 @@ $dictionary["rt_client_reporting_mur_client_n_list"] = array (
       'default' => '0',
       'required' => true,
     ),
-    3 => 
+    'rt_client_reporting_mur_client_n_listmur_client_n_list_ida' => 
     array (
       'name' => 'rt_client_reporting_mur_client_n_listmur_client_n_list_ida',
       'type' => 'varchar',
       'len' => 36,
     ),
-    4 => 
+    'rt_client_reporting_mur_client_n_listrt_client_reporting_idb' => 
     array (
       'name' => 'rt_client_reporting_mur_client_n_listrt_client_reporting_idb',
       'type' => 'varchar',

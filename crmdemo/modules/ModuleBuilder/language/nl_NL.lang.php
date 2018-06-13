@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Klik om deze module te bewerken.',
         'moduleHelp'=> 'Selecteer het onderdeel van de module die u wilt bewerken',
         'fieldsBtn'	=> 'Bewerk de informatie in de module is opgeslagen door naar <b>Velden</b> te gaan in de module.<br/><br/>Hier kunt u aangepaste velden bewerken en aanmaken.',
-        'labelsBtn' => 'Klik op <b>Opslaan</b> om uw aangepaste labels op te slaan.'	,
         'layoutsBtn'=> 'Wijzig de <b>Layouts</b> van de weergave Bewerken, Details, Lijst en Zoeken.',
         'subpanelBtn'=> 'Bewerk de informatie die in de subpanelen van deze modules wordt weergegeven.',
         'layoutsHelp'=> 'Selecteer <b>Te bewerken layout</b>.<br/<br/>Om de layout te bewerken die gegevensvelden bevat om gegevens in te voeren klikt u op <b>Bewerkingsweergave</b>.<br/><br/>Om de layout te wijzigen die de gegevens weergeeft in de velden in de Bewerkingsweergave klikt u op <b>Detailweergave</b>.<br/><br/>Om de kolommen te bewerken die in de standaard lijst verschijnen klikt u op <b>Lijstweergave</b>.<br/><br/>Om het Basis en Geavanceerde zoekformulier te wijzigen klikt u op <b>Zoeken</b>.',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Weet u zeker dat u de Gesloten verloren verkoopfase wilt verwijderen? Door deze fase te verwijderen werkt de Voorspellingsmodule wellicht niet goed',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Are you sure you wish to delete this relationship?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Hierdoor wordt deze relatie permanent gemaakt. Weet u zeker dat u deze relatie wilt inzetten?',
 'LBL_CONFIRM_DONT_SAVE' => 'Er zijn wijzigingen doorgevoerd sinds de laatste keer dat u heeft opgeslagen. Wilt u deze opslaan?',

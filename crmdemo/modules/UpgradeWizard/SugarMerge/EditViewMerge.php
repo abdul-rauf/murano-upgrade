@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -239,9 +238,6 @@ class EditViewMerge{
 	}
 	
 	/**
-	 * 
-	 */
-	/**
 	 * returns true if $val1 and $val2 match otherwise it returns false
 	 *
 	 * @param MULTI $val1 - a value to compare to val2
@@ -404,7 +400,6 @@ class EditViewMerge{
 					'loc'=>$this->customFields[$field]['loc']);
 				
 				$this->mergedFields[$field]['loc']['source'] = 'custom';
-				//echo var_export($this->mergedFields[$field], true);
 			}
 			
 			//then we clear out the field from 
@@ -460,7 +455,10 @@ class EditViewMerge{
 			if($field['loc']['source'] == 'new') {
 				if($this->bestMatch){
 					//for best match as long as the column is filled let's keep walking down till we can fill it
-					$row = end(array_keys($this->customData[$this->module][$this->viewDefs][$this->panelName][$field['loc']['panel']]));
+                    $keys = array_keys(
+                        $this->customData[$this->module][$this->viewDefs][$this->panelName][$field['loc']['panel']]
+                    );
+                    $row = end($keys);
 					$col = 0;
 					while(!empty($panels[$field['loc']['panel']][$row][$col])){
 						$col++;
@@ -549,11 +547,6 @@ class EditViewMerge{
 	 */
 	protected function setPanels(){
 		$this->newData[$this->module][$this->viewDefs][$this->panelName] = $this->buildPanels();
-		/*
-		if(!$this->isMultiPanel) {
-		   $this->newData[$this->module][$this->viewDefs][$this->panelName] = $this->newData[$this->module][$this->viewDefs][$this->panelName][$this->defaultPanel];
-		}
-        */
 	}
 	
 	/**
@@ -602,9 +595,6 @@ class EditViewMerge{
 			}
 		}
 		
-		//echo "---------------------------------------------------------\n";
-		//echo var_export($panels, true);
-		
 		foreach($panels as $panel_id=>$panel){	
 			foreach($panel as $row_id=>$rows){
 				foreach($rows as $col_id=>$col){
@@ -652,9 +642,6 @@ class EditViewMerge{
 				}
 			}		
 		}
-		
-		//echo "---------------------------------------------------------\n";
-		//echo var_export($fields, true);
 		
 		return $fields;
 	}

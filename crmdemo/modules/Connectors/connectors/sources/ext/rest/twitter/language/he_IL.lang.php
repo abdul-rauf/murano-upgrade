@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,24 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">השג מפתח API ו-Secret מ-Twitter על-ידי רישום הפעלת ה-Sugar שלך כיישום חדש.<br/><br>צעדים לרישום ההופעה שלך:<br/><br/><ol><li>עבור לאתר המפתחים של Twitter: <a href=&#39;http://dev.twitter.com/apps/new&#39; target=&#39;_blank&#39;>http://dev.twitter.com/apps/new</a>.</li><li>התחבר בעזרת חשבון ה-Twitter שדרכו תרצו לרשום את היישום.</li><li>בטופס הרישום, הזן את שם היישום. זה השם שמשתמשים יראו כאשר הם מאמתים את חשבונות Twitter שלהם בתוך Sugar.</li><li>הזן תיאור.</li><li>הזן כתובת URL של אתר היישום.</li><li>הזן כתובת URL לאיתות (תוכל להכניס כל דבר מפני ש-Sugar עוקפת כתובת זו בתהליך האימות. דוגמה: הכנס את כתובת ה-URL של אתר Sugar שלך).</li><li>קבל את תנאי השירות של ה-API של Twitter.</li><li>לחץ על "צור את יישום Twitter שלך".</li><li>בעמוד היישום, מצא את מפתח ה-API ואת ה-API Secret תחת הסימנייה "מפתחות API". הכנס את המפתח ואת ה-Secret להלן.</li></ol></td></tr></table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
+								<tr>
+									<td valign="top" width="35%" class="dataLabel">
+										השג מפתח API Key ו- Secret API מטוויטר על ידי רישום מופע Sugar כאפליקציה חדשה.<br/><br>שלבים לרשימת המופע שלך:<br/><br/>
+										<ol>
+											<li>עבור אל אתר מפתחי טוויטר (Twitter Developers): <a href=\'https://apps.twitter.com\' target=\'_blank\'>https://apps.twitter.com</a>.</li>
+											<li>הירשם באמצעות חשבון טוויטר שעמו תרצה לרשום את האפליקציה.</li>
+											<li>בטופס ההרשמה, הזן שם לאפליקציה. זהו השם שהמשתמשים יראו כשהם יאמתו את חשבונות הטוויטר שלהם מתוך Sugar.</li>
+											<li>הזן תיאור.</li>
+											<li>הזן כתובת URL של אתר האפליקציה.</li>
+											<li>הזן כתובת URL לחזרה (כל כתובת שהיא, כיוון ש- Sugar מדלג על שלב זה בעת האימות. לדוגמה: הזן את כתובת ה- URL של אתר Sugar שלך).</li>
+											<li>אשר את תנאי שימוש ה- API של טוויטר.</li>
+											<li>Click "צור את אפליקציית טוויטר שלך".</li>
+											<li>בתוך דף האפליקציה, מצא את מפתח API ואת Secret API תחת הלשונית "מפתחות API". הזן את המפתח ואת ה- Secret למטה.</li>
+										</ol>
+									</td>
+								</tr>
+							</table>',
     'LBL_NAME' => 'שם משתמש Twitter',
     'LBL_ID' => 'שם משתמש Twitter',
 	'company_url' => 'כתובת URL',

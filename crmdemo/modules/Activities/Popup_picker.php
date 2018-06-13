@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once("include/upload_file.php");
 require_once('include/utils/db_utils.php');
 
 global $currentModule;
@@ -26,17 +24,10 @@ global $current_language,$beanList,$beanFiles;
 $current_module_strings = return_module_language($current_language, 'Activities');
 
 // history_list is the means of passing data to a SubPanelView.
-$focus = BeanFactory::getBean($_REQUEST['module_name']);
+$focus = BeanFactory::newBean($_REQUEST['module_name']);
 
 class Popup_Picker
 {
-    /**
-     * @deprecated
-     */
-    public function Popup_Picker()
-    {
-    }
-
     /**
     *
     */
@@ -271,7 +262,7 @@ class Popup_Picker
             }
             $query .= $queryArray['join'];
             $query .= $queryArray['where'];
-            $emails = BeanFactory::getBean('Emails');
+            $emails = BeanFactory::newBean('Emails');
             $focus_unlinked_emails_list = $emails->process_list_query($query, 0);
             $focus_unlinked_emails_list = $focus_unlinked_emails_list['list'];
             foreach ($focus_unlinked_emails_list as $email)

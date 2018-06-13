@@ -37,7 +37,6 @@
     Backbone.Model.prototype.doValidate = function(fields, callback) {
         callback(this.isValid());
     };
-
     app.augment('Bean', Backbone.Model.extend({
         /**
          * Model plugins are attached in the constructor to allow initialize()
@@ -57,11 +56,12 @@
          */
         initialize: function(attributes) {
             Backbone.Model.prototype.initialize.call(this, attributes);
+
             // assume our attributes from creation are synced
-            this.setSyncedAttributes(attributes);
+            this.setSyncedAttributes(this.attributes);
 
             this._bindEvents();
-            this._relatedCollections = null;
+            this._relatedCollections = this._relatedCollections || null;
 
             /**
              * The request object that is currently syncing against the server.
@@ -126,6 +126,139 @@
             var req = this.getFetchRequest();
             if (req) {
                 app.api.abortRequest(req.uid);
+            }
+        },
+
+        /**
+         * Overrides Backbone method to add specific logic for `collection`
+         * fields.
+         *
+         * @param {string|Object} key The key. Can also be an object with the
+         * key/value pair.
+         * @param {string} val The value to set.
+         * @param {Object} options A hash of options
+         */
+        set: function (key, val, options) {
+            if (_.isUndefined(key) || _.isNull(key)) {
+                return this;
+            }
+
+            var attrs;
+            if (typeof key === 'object') {
+                attrs = key;
+                options = val;
+            } else {
+                (attrs = {})[key] = val;
+            }
+
+            options = options || {};
+
+            var collections = this.getCollectionFields(attrs);
+            attrs = _.omit(attrs, _.keys(collections));
+            Backbone.Model.prototype.set.call(this, attrs, options);
+            this._handleCollectionFieldValues(collections, options);
+
+            return this;
+        },
+
+        /**
+         * Adds `collection` fields records to the mixed bean collection. If
+         * a mixed bean collection does not exist yet, it will be created.
+         *
+         * @private
+         * @param {Object} collections Object containing collections fields
+         * attributes.
+         * @param {Object} options A hash of options.
+         */
+        _handleCollectionFieldValues: function (collections, options) {
+            _.each(collections, function (records, key) {
+                //If a collection field is being set to a collection, we should just accept it.
+                if (records instanceof app.MixedBeanCollection) {
+                    if (this.get(key) !== records) {
+                        this.stopListening(this.get(key));
+                        Backbone.Model.prototype.set.call(this, _.object([key], [records]), options);
+                        this.listenTo(records, 'update reset', function (collection, options) {
+                            this.trigger('change:' + key, this, collection, options);
+                        });
+
+                        this.off('sync', records.resetDelta, records);
+                        this.on('sync', records.resetDelta, records);
+                    }
+                } else {
+                    var colOptions = {};
+                    var collection = this.get(key);
+                    collection.reset();
+
+                    //Record list populated from a `collection` field response
+                    if (_.isObject(records) && records.records) {
+                        colOptions = _.extend(colOptions, _.omit(records, 'records'));
+                        records = records.records;
+                    }
+
+                    //We need a collection to add the models to.
+                    _.each(colOptions, function (v, k) {
+                        collection[k] = v;
+                    });
+
+                    collection.add(records, options);
+                }
+            }, this);
+        },
+
+        /**
+         * Creates a mixed bean collection for `collection` fields if there is
+         * none yet.
+         *
+         * @param {string} attr The attribute name.
+         */
+        get: function (attr) {
+            var value = Backbone.Model.prototype.get.call(this, attr);
+
+            // If the field is not a `collection` field
+            if (!this.fields || !this.fields[attr] || this.fields[attr].type !== 'collection' ||
+                value instanceof app.MixedBeanCollection) {
+                return value;
+            }
+
+            // If the field is a `collection` field and has not been initialized.
+            value = this._createMixedBeanCollectionField(attr);
+            Backbone.Model.prototype.set.call(this, _.object([attr], [value]), {silent: true});
+
+            return value;
+        },
+
+        /**
+         * Creates a mixed bean collection passing the related link bean
+         * collections of this `collection` field.
+         *
+         * @private
+         * @param {string} field  A `collection` type field.
+         * @param {Object[]|Data.Bean[]} models The models to add to the collection.
+         * @return {Data.MixedBeanCollection} The newly created mixed bean
+         * collection.
+         */
+        _createMixedBeanCollectionField: function (field, models) {
+            var fieldDef = this.fields[field];
+            if (fieldDef && fieldDef.links) {
+                var links = fieldDef.links;
+                if (_.isString(links)) {
+                    links = [links];
+                }
+
+                var linkCollections = {};
+                _.each(links, function (link) {
+                    linkCollections[link] = this.getRelatedCollection(link);
+                }, this);
+                var collection = app.data.createMixedBeanCollection(models || [], {links: linkCollections});
+
+                this.listenTo(collection, 'update reset', function(collection, options) {
+                    this.trigger('change:' + field, this, collection, options);
+                });
+
+                this.off('sync', collection.resetDelta, collection);
+                this.on('sync', collection.resetDelta, collection);
+
+                return collection;
             }
         },
 
@@ -399,26 +532,32 @@
         },
 
         /**
-         * Overloads standard bean save so we can run validation outside of the standard validation loop.
+         * Overrides [Backbone.Model#save](http://backbonejs.org/#Model-save)
+         * so we can run async validation outside of the
+         * [standard validation loop](http://backbonejs.org/#Model-validate).
          *
-         * This method checks if this bean is valid if `options` hash contains `fieldsToValidate` parameter.
+         * This method checks if this bean is valid only if `options` hash
+         * contains `fieldsToValidate` parameter.
          *
-         * @param {Object} attributes(optional) model attributes
-         * @param {Object} options(optional) standard save options as described by Backbone docs and
-         * optional `fieldsToValidate` parameter.
+         * @param {Object} [attributes] The model attributes.
+         * @param {Object} [options] standard save options as described by
+         *   Backbone docs.
+         * @param {Array} [options.fieldsToValidate] List of field names to
+         *   validate.
+         * @return {SUGAR.HttpRequest} Returns a {@link SUGAR.HttpRequest} if
+         *   There are no fields to validate, `undefined` if validation needs
+         *   to happen first.
          */
         save: function(attributes, options) {
-            var isValid = true,
-                self = this;
-
-            if (options && options.fieldsToValidate) {
-                this.doValidate(options.fieldsToValidate, function(isValid){
-                    if (isValid)
-                        Backbone.Model.prototype.save.call(self, attributes, options);
-                });
-                return;
+            if (!options || !options.fieldsToValidate) {
+                return Backbone.Model.prototype.save.call(this, attributes, options);
             }
-            return Backbone.Model.prototype.save.call(this, attributes, options);
+
+            this.doValidate(options.fieldsToValidate, (isValid) => {
+                if (isValid) {
+                    return Backbone.Model.prototype.save.call(this, attributes, options);
+                }
+            });
         },
 
         /**
@@ -566,9 +705,55 @@
         },
 
         /**
-         * Returns an object of attributes. This method is called when
-         * JSON.stringify() is called on the bean. When the bean's attribute
-         * has toJSON() method, it will call its function.
+         * Calculates difference between backup and changed model for restoring model.
+         * @param {Object} original Hash of original (backed up) values.
+         * @param {Array} exclude List of fields to exclude from comparison.
+         * @return {Object} Difference between original and the current model attributes.
+         */
+        getChangeDiff: function(original, exclude) {
+            var diff = {};
+            original = original || {};
+            exclude = exclude || [];
+
+            _.each(this.attributes, function(value, key) {
+                if (_.contains(exclude, key)) return;
+                var previousValue = original[key];
+                if (!_.isEqual(previousValue, value)) {
+                    diff[key] = previousValue;
+                }
+            });
+
+            return diff;
+        },
+
+        /**
+         * @inheritdoc
+         *
+         * Checks if the bean has changed
+         * @param {string} [attr] The attribute to check. if none is passed,
+         * checks all attributes and returne `true` if at least one has changed.
+         */
+        hasChanged: function(attr) {
+            if (_.isUndefined(attr)) {
+                let collections = this.getCollectionFields(this.attributes);
+                let hasChanged = _.some(collections, (coll, key) => {
+                    return !_.isEmpty(coll.getDelta());
+                }, this);
+
+                return hasChanged || Backbone.Model.prototype.hasChanged.call(this);
+            }
+
+            if (this.get(attr) instanceof app.MixedBeanCollection) {
+                return !_.isEmpty(this.get(attr).getDelta());
+            }
+
+            return Backbone.Model.prototype.hasChanged.call(this, attr);
+        },
+
+        /**
+         * Returns an object of attributes, containing what needs to be sent to
+         * the server when saving the bean . This method is called when
+         * JSON.stringify() is called on the bean.
          *
          * @inheritdoc
          *
@@ -582,11 +767,20 @@
                 json = {};
 
             _.each(fields, function(fieldName) {
-                var attributeValue = this.get(fieldName);
-                if (_.isObject(attributeValue) && _.isFunction(attributeValue.toJSON)) {
-                    attributeValue = attributeValue.toJSON(options);
+                let val = this.get(fieldName);
+                if (val instanceof app.MixedBeanCollection && !_.isEmpty(val.getDelta())) {
+                    _.each(val.getDelta(), (val, linkName) => {
+                        json[linkName] = val;
+                    });
+                } else {
+                    if (_.isObject(val) && _.isFunction(val.toJSON)) {
+                        app.logger.warn('Calling `toJSON` on object attributes is deprecated in 7.9 and will be ' +
+                            'removed in 7.10');
+                        val = val.toJSON(options);
+                    }
+
+                    json[fieldName] = val;
                 }
-                json[fieldName] = attributeValue;
             }, this);
 
             return json;
@@ -600,6 +794,7 @@
         toString: function() {
             return "bean:" + this.module + "/" + (this.id ? this.id : "<no-id>");
         },
+
         /**
          * Reverts model attributes to the last values from last sync or values on creation.
          *
@@ -616,6 +811,34 @@
                 this.trigger('attributes:revert');
             }
         },
+
+        /**
+         * Gets changed attributes.
+         *
+         * @param {Object} [attrs] A hash of attributes to compare the current
+         * bean attributes against
+         * @return {Object|boolean} `false` if nothing has changed. An object
+         * containing the attributes passed in parameters that are different
+         * from the bean ones.
+         */
+        changedAttributes: function (attrs) {
+            let collections = this.getCollectionFields(attrs);
+            if (!_.isUndefined(attrs)) {
+                attrs = _.omit(attrs, _.keys(collections));
+            }
+
+            let changed = Backbone.Model.prototype.changedAttributes.call(this, attrs);
+
+            _.each(collections, (val, key) => {
+                if (!_.isEmpty(this.get(key).getDelta())) {
+                    changed = changed || {};
+                    changed[key] = val;
+                }
+            }, this);
+
+            return changed;
+        },
+
         /**
          * Sets internal synced attribute hash that's used in revertAttributes.
          *
@@ -623,19 +846,6 @@
          */
         setSyncedAttributes: function(attributes) {
             this._syncedAttributes = attributes ? app.utils.deepCopy(attributes) : {};
-        },
-
-        /**
-         * Gets internal synced attribute hash.
-         * @return {Object}
-         *
-         * @deprecated since 7.7. Will be removed in 7.9.
-         * Use {@link #getSynced} instead.
-         */
-        getSyncedAttributes: function() {
-            app.logger.warn('Data.Bean.getSyncedAttributes is deprecated. ' +
-            'Please update your code to use Data.Bean.getSynced');
-            return this._syncedAttributes;
         },
 
         /**
@@ -655,7 +865,7 @@
          *
          * @param {string} [key] The name of the attribute.
          * @return {Mixed} The default value if you passed a `key`, or the hash of
-         *  default values.
+         * default values.
          */
         getDefault: function(key) {
             var defaults = _.clone(this._defaults) || {};
@@ -670,7 +880,7 @@
          * undefined attributes with the default values.
          *
          * @param {string|Object} key The name of the attribute, or an hash of
-         *  attributes.
+         * attributes.
          * @param {Mixed} [val] The default value for the `key` argument.
          *
          * @chainable
@@ -747,12 +957,37 @@
 
         /**
          * Return all fields of a given type.
+         *
          * @param {string} type The type of the field to search for.
          * @return {Array} List of fields filtered by the given type.
          */
-        fieldsOfType: function(typeOfField) {
-            return _.where(this.fields, {type: typeOfField});
+        fieldsOfType: function(type) {
+            return _.where(this.fields, {type: type});
+        },
+
+        /**
+         * Gets a hash of collection fields attributes.
+         * @param {Object} [attrs] The hash of attributes to get the collection
+         * fields from. If empty, we use `this.attributes`.
+         * @return {Object} A hash of collection fields attributes.
+         */
+        getCollectionFields: function(attrs) {
+            return _.pick(attrs, _.pluck(this.fieldsOfType('collection'), 'name'));
+        },
+
+        /**
+         * A helper that merges changes into a bean attributes.
+         *
+         * The default implementation overrides attributes with changes.
+         * @param attributes Bean attributes.
+         * @param changes Object hash with changed attributes.
+         * @param module(optional) Module name.
+         * @returns {Object} Merged attributes.
+         */
+        merge: function(attributes, changes, module) {
+            return _.extend(attributes, changes);
         }
+
     }), false);
 
     /**

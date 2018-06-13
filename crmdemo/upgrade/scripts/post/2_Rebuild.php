@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -23,7 +22,6 @@ class SugarUpgradeRebuild extends UpgradeScript
     {
         global $dictionary, $beanFiles;
         include "include/modules.php";
-        require_once("modules/Administration/QuickRepairAndRebuild.php");
         $rac = new RepairAndClear('', '', false, false);
         $rac->clearVardefs();
         $rac->rebuildExtensions();

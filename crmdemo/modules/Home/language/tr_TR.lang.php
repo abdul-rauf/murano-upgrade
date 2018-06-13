@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - Zengin istemci özellikleri sağlamak için kullanılan UI Destek Kütüphanesi.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - PHP için tüm yetenekleri barındıran e-posta nesnesi',
   'LBL_SOURCE_JSHRINK' => 'JShrink - PHP ile yazılmış bir Javascript minifier uygulamasıdır',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - MCrypt PHP ekine gerek kalmadan, iki yönlü blowfish şifreleme sağlamaktadır.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - HTML ve diğer kötü formatlanmış XML dosyaları için SAX yorumlayıcı',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - Jack Slocum tarafından hazırlanmış, Yahoo! User Interface Kütüphanesine ek',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Javascript Flash Player olup olmadığını bulan script.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Sugar 7 Yardım Bilgi Penceresine hoş geldiniz',
-    'LBL_HELP_RECORD' => 'Yardım Penceresi, incelemekte olduğunuz modül hakkında spesifik bilgi sağlar, modül içinde belirli aksiyonları gerçekleştirmek için gerekli adımları gösterir, daha fazla bilgi ve destek için yönlendirir. Modül içinde bu adımları gerçekleştirirken, Yardım Penceresi açık kalmaya devam edecektir.
-
-Yardım Penceresi, bütün Sugar 7 modülleri için var olup, uygulama altındaki Yardım ikonuna tıklayarak "açık" ve "kapalı" pozisyona getirilebilir.',
+    'LBL_HELP_RECORD_TITLE' => 'Yardım',
+    'LBL_HELP_RECORD' => 'Yardım, görmekte olduğunuz modül hakkındaki özel bilgileri görüntüler, modülde bazı işlemler gerçekleştirmeniz için ayrıntılı adımlar sunar ve sizi daha kapsamlı bilgi ve destek için gitmeniz gereken yere yönlendirir.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtre',
 );

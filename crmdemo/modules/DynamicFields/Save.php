@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('modules/DynamicFields/DynamicField.php');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
@@ -19,7 +17,7 @@ $request = InputValidation::getService();
 $module = $request->getValidInputRequest('module_name', 'Assert\Mvc\ModuleName');
 $custom_fields = new DynamicField($module);
 if(!empty($module)){
-    $mod = BeanFactory::getBean($module);
+    $mod = BeanFactory::newBean($module);
 	$custom_fields->setup($mod);
 }else{
 	echo "\n".$mod_strings['ERR_NO_MODULE_INCLUDED'];

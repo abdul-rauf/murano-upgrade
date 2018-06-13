@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -27,7 +26,6 @@ $focus = BeanFactory::getBean('Campaigns', $_REQUEST['record']);
 
 if (isset($_REQUEST['mode']) and $_REQUEST['mode']=='Test') {
 	//deletes all data associated with the test run.
-    require_once('modules/Campaigns/DeleteTestCampaigns.php');
     $deleteTest = new DeleteTestCampaigns();
     $deleteTest->deleteTestRecords($focus);
 } else {

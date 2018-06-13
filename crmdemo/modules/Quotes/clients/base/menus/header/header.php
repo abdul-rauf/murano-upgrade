@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $module_name = 'Quotes';
 $viewdefs[$module_name]['base']['menu']['header'] = array(
     array(
-        'route' => '#bwc/index.php?module=Quotes&action=EditView&return_module=Quotes&return_action=DetailView',
+        'route' => '#Quotes/create',
         'label' =>'LNK_NEW_QUOTE',
         'acl_action'=>'create',
         'acl_module'=>$module_name,
@@ -27,10 +26,10 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'icon' => 'fa-bars',
     ),
     array(
-        'route'=>'#bwc/index.php?module=Reports&action=index&view=quotes&query=true&report_module=Quotes',
+        'route' => '#Reports?filterModule=' . $module_name,
         'label' =>'LNK_QUOTE_REPORTS',
         'acl_action'=>'list',
-        'acl_module'=>$module_name,
+        'acl_module' => 'Reports',
         'icon' => 'fa-bar-chart-o',
     ),
 );

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,7 +21,6 @@ if(!defined('JSMIN_AS_LIB'))
     define('JSMIN_AS_LIB', true);
 
 require_once("include/SugarTheme/cssmin.php");
-require_once("jssource/jsmin.php");
 require_once('include/utils/sugar_file_utils.php');
 
 /**
@@ -735,7 +733,6 @@ EOHTML;
 		}
 
 		// load meta data, includes default images
-		require_once("include/SugarTheme/SugarSprites.php");
 		$meta = SugarSprites::getInstance();
 		// add current theme dir
 		$meta->loadSpriteMeta($this->dirName);
@@ -1319,9 +1316,10 @@ class SugarThemeRegistry
             }
         }
 
-        return array_pop(array_keys($availableThemes));
-    }
+        end($availableThemes);
 
+        return key($availableThemes);
+    }
 
     /**
      * Returns an array of available themes. Designed to be absorbed into get_select_options_with_id()

@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Натиність для редагування цього модуля',
         'moduleHelp'=> 'Виберіть компонент модуля , який Ви хотіли б змінити',
         'fieldsBtn'	=> 'Редагуйте яка інформація зберігається в модулі, контролюючи <b>Поля</b> в модулі.<br/><br/>Ви можете створювати і редагувати користувацькі поля тут.',
-        'labelsBtn' => 'Натисніть <b>Зберегти</b>, щоб зберегти користувацькі мітки.'	,
         'layoutsBtn'=> 'Налаштовуйте <b>Розмітки</b> переглядів Редагування, Деталей, Списку і Пошуку.',
         'subpanelBtn'=> 'Редагуйте яка інформація буде відображатися в цьому модулі підпанелей.',
         'layoutsHelp'=> 'Виберіть <b>Розмітку для редагування</b>.<br/<br/>Щоб змінити розмітку, яка містить поля даних для введення даних, натисніть <b>Редагувати перегляд</b>.<br/><br/>Щоб змінити розмітку, яка відображає дані, введені в поля в режимі редагування, натисніть<b>Детальний перегляд</b>.<br/><br/>Щоб змінити стовпці, які з&#39;являються в списку за замовчуванням, натисніть <b>Перегляд списку</b>.<br/><br/>Щоб змінити розмітки пошуку Базовий і Просунутий, натисніть <b>Пошук</b>.',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Ви точно хочете видалити стадію продажу Закрита втрачена продажа? Видалення цій стадії може привести до того, що модуль Прогнозів не працюватиме коректно',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ви впевнені, що хочете видалити цей зв&#39;язок?<br />Примітка: Ця операція не може завершити протягом декількох хвилин.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Це зробить зв&#39;язок постійним. Ви впевнені, що хочете встановити цей зв&#39;язок?',
 'LBL_CONFIRM_DONT_SAVE' => 'З моменту останнього збереження були внесені зміни. Хочете зберегти зміни зараз?',

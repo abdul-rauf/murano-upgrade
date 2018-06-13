@@ -17,8 +17,8 @@ Iegūstiet patērētāja atslēgu un paroli no Google, reģistrējot savu Sugar 
 <br/><br/>
 <ol>
 <li>Dodieties uz Google Developers vietni:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Piesakieties savā Google kontā, no kura vēlaties reģistrēt programmu.</li>
 <li>Izveidojiet jaunu projektu</li>

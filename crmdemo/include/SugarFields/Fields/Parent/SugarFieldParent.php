@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarFields/Fields/Relate/SugarFieldRelate.php');
 
 class SugarFieldParent extends SugarFieldRelate {
 
@@ -128,7 +127,7 @@ class SugarFieldParent extends SugarFieldRelate {
             if ( isset($focus->$moduleName) && isset($beanList[$focus->$moduleName]) ) {
                 $vardef['module'] = $focus->$moduleName;
                 $vardef['rname'] = 'name';
-                $relatedBean = BeanFactory::getBean($focus->$moduleName);
+                $relatedBean = BeanFactory::newBean($focus->$moduleName);
                 $vardef['table'] = $relatedBean->table_name;
                 return parent::importSanitize($value,$vardef,$focus,$settings);
             }
@@ -139,7 +138,6 @@ class SugarFieldParent extends SugarFieldRelate {
 
     function createQuickSearchCode($formName = 'EditView', $vardef){
 
-        require_once('include/QuickSearchDefaults.php');
         $json = getJSONobj();
 
         $dynamicParentTypePlaceHolder = "**@**"; //Placeholder for dynamic parent so smarty tags are not escaped in json encoding.
@@ -226,7 +224,7 @@ class SugarFieldParent extends SugarFieldRelate {
     {
         if ($bean->parent_type && $bean->parent_id) {
             // trying to reconstruct the parent bean from the fetched data
-            $parent = BeanFactory::getBean($bean->parent_type);
+            $parent = BeanFactory::newBean($bean->parent_type);
 
             //processing case when parent_type contains name of non-existing bean
             if ($parent === null) {
@@ -234,10 +232,13 @@ class SugarFieldParent extends SugarFieldRelate {
                 return;
             }
 
-            $parent->id = $bean->parent_id;
+            $row = array('id' => $bean->parent_id);
             if (isset($bean->parent_name_owner)) {
-                $parent->assigned_user_id = $bean->parent_name_owner;
+                $row['assigned_user_id'] = $bean->parent_name_owner;
             }
+
+            // make sure fetched row is populated as SugarACLStatic::beanACL() may use it
+            $parent->fetched_row = $parent->populateFromRow($row);
 
             $mm = MetaDataManager::getManager($service->platform);
             $data['parent'] = array(

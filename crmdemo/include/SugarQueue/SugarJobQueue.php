@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/SchedulersJobs/SchedulersJob.php';
 
 /**
  * Job queue driver
@@ -45,7 +43,7 @@ class SugarJobQueue
     public function __construct()
     {
         $this->db = DBManagerFactory::getInstance();
-        $job = BeanFactory::getBean('SchedulersJobs');
+        $job = BeanFactory::newBean('SchedulersJobs');
         $this->job_queue_table = $job->table_name;
         if(!empty($GLOBALS['sugar_config']['jobs']['max_retries'])) {
             $this->jobTries = $GLOBALS['sugar_config']['jobs']['max_retries'];
@@ -202,7 +200,7 @@ class SugarJobQueue
      */
     public function runSchedulers()
     {
-        $sched = BeanFactory::getBean('Schedulers');
+        $sched = BeanFactory::newBean('Schedulers');
         $sched->checkPendingJobs($this);
     }
 }

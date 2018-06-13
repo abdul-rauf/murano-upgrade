@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/api/SugarApi.php');
 
 class ForecastManagerWorksheetsApi extends SugarApi
 {
@@ -36,7 +35,7 @@ class ForecastManagerWorksheetsApi extends SugarApi
      * @param array $args               Args from the XHR Call
      * @return array
      */
-    public function assignQuota(ServiceBase $api, $args = array())
+    public function assignQuota(ServiceBase $api, array $args = array())
     {
         /* @var $mgr_worksheet ForecastManagerWorksheet */
         $mgr_worksheet = $this->getBean($args['module']);
@@ -52,6 +51,6 @@ class ForecastManagerWorksheetsApi extends SugarApi
      */
     protected function getBean($module)
     {
-        return BeanFactory::getBean($module);
+        return BeanFactory::newBean($module);
     }
 }

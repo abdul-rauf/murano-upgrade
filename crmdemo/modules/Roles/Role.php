@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -24,8 +23,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 class Role extends SugarBean {
 
-	var $field_name_map;
-	
 	var $id;
 	var $deleted;
 	var $date_entered;
@@ -155,7 +152,7 @@ class Role extends SugarBean {
 		
 		$query = "SELECT user_id as id FROM roles_users WHERE role_id='$this->id' AND deleted=0";
 		
-		return $this->build_related_list($query, BeanFactory::getBean('Users'));
+		return $this->build_related_list($query, BeanFactory::newBean('Users'));
 	}
 
 	function check_user_role_count($user_id)

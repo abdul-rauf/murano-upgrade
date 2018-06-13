@@ -237,9 +237,6 @@ $mod_strings = array (
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B peamine ID',
-    'LBL_DNB_BAL_PREVIEW' => 'Kontaktide eelvaade',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Kontaktid',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: kontaktandmed',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Märkused',
 

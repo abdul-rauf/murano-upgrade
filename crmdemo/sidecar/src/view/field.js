@@ -210,8 +210,16 @@
          * field. SC-3363 will address this.
          */
         handleAclChange: function() {
-            this.action = void 0;
+            this._resetAction();
             this.render();
+        },
+
+        /**
+         * Set field's action to undefined
+         * @protected
+         */
+        _resetAction: function () {
+            this.action = void 0;
         },
 
         /**
@@ -359,7 +367,7 @@
                 }
             }, this);
 
-            this._super('delegateEvents', [events]);
+            Backbone.View.prototype.delegateEvents.call(this, events);
         },
 
         /**

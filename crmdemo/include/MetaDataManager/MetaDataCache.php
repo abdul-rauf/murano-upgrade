@@ -9,13 +9,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerInterface;
+use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
 
 /**
  * Assists in modifying the Metadata in places that the core cannot handle at this time.
  *
  */
-class MetaDataCache
+class MetaDataCache implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     protected $db;
 
     /**
@@ -36,24 +42,35 @@ class MetaDataCache
         return $this->getFromCacheTable($key);
     }
 
+    /**
+     * Logs message with stack trace and additional information
+     * such as user id, client type, request url.
+     * This method should only be used when called in-frequently as it has heavy logging.
+     *
+     * @param LoggerInterface $logger
+     * @param string $message
+     */
+    protected static function logDetails(LoggerInterface $logger, $message)
+    {
+        $logger->info($message);
+    }
+
     public function set($key, $data)
     {
         if ($data == null) {
-            return $this->removeFromCacheTable($key);
+            static::logDetails($this->logger, "Removing key " . $key . " from cache table.. data is null.");
+            $this->removeFromCacheTable($key);
         } else {
-            return $this->storeToCacheTable($key, $data);
+            $this->storeToCacheTable($key, $data);
         }
     }
 
     public function getKeys()
     {
-        $ret = array();
-        $result = $this->db->query('SELECT type FROM ' . static::$cacheTable);
-        while ($row = $this->db->fetchByAssoc($result)) {
-            $ret[] = $row['type'];
-        }
-
-        return $ret;
+        return $this->db
+            ->getConnection()
+            ->executeQuery('SELECT type FROM ' . static::$cacheTable)
+            ->fetchAll(\PDO::FETCH_COLUMN);
     }
 
     public function reset()
@@ -86,24 +103,17 @@ class MetaDataCache
         $result = null;
         //During install/setup, this function might get called before the DB is setup.
         if (!empty($this->db)) {
-            $sqlResult = $this->db->query("SELECT id, data FROM " . static::$cacheTable . " WHERE type="
-                . $this->db->quoted($key) . " ORDER BY date_modified DESC");
-
-            if (($row = $this->db->fetchByAssoc($sqlResult))) {
+            $cacheResult = null;
+            $row = $this->getLastModifiedByType($key);
+            if (!empty($row['data'])) {
                 $cacheResult = $row['data'];
-            }
-            if ($row){
-                //If we have more than one entry for the same key, we need to remove the duplicate entries.
-                while (($row = $this->db->fetchByAssoc($sqlResult))) {
-                    $this->db->query("DELETE FROM " . static::$cacheTable . " WHERE id=" . $this->db->quoted($row['id']));
-                }
             }
 
             if (!empty($cacheResult)) {
                 try {
                     $result = unserialize(gzinflate(base64_decode($cacheResult)));
                 } catch (Exception $e) {
-                    $GLOBALS['log']->error("Exception when decompressing metadata hash for $key:" . $e->getMessage());
+                    $this->logger->error("Exception when decompressing metadata hash for $key:" . $e->getMessage());
                 }
             }
         }
@@ -117,7 +127,7 @@ class MetaDataCache
      * @param String $key key to store data with
      * @param mixed  $data Data to store in the cache table blob
      *
-     * @return bool
+     * @return void
      */
     protected function storeToCacheTable($key, $data)
     {
@@ -125,28 +135,23 @@ class MetaDataCache
             try {
                 $encoded = base64_encode(gzdeflate(serialize($data)));
             } catch (Exception $e) {
-                $GLOBALS['log']->fatal("Exception when compressing metadata for $key:" . $e->getMessage());
+                $this->logger->fatal("Exception when compressing metadata for $key:" . $e->getMessage());
 
-                return false;
+                return;
             }
 
             $id = null;
-            $result = $this->db->query("SELECT id FROM " . static::$cacheTable . " WHERE type="
-                            . $this->db->quoted($key) . " ORDER BY date_modified DESC");
-
-            if (($row = $this->db->fetchByAssoc($result)) && !empty($row['id'])) {
+            $row = $this->getLastModifiedByType($key);
+            if (!empty($row['id'])) {
                 $id = $row['id'];
-                //If we have more than one entry for the same key, we need to remove the duplicate entries.
-                while (($row = $this->db->fetchByAssoc($result))) {
-                    $this->db->query("DELETE FROM " . static::$cacheTable . " WHERE id=" . $this->db->quoted($row['id']));
-                }
             }
 
+            $now = new DateTime('now', new DateTimeZone('UTC'));
             $values = array(
                 'id' => $id,
                 'type' => $key,
                 'data' => $encoded,
-                'date_modified' => TimeDate::getInstance()->nowDb(),
+                'date_modified' => $now->format(TimeDate::DB_DATETIME_FORMAT),
                 'deleted' => 0,
             );
 
@@ -157,31 +162,42 @@ class MetaDataCache
             $this->db->commit();
             if (empty($values['id'])) {
                 $values['id'] = create_guid();
-                $return = $this->db->insertParams(
-                    static::$cacheTable,
-                    $fields,
-                    $values,
-                    null,
-                    true,
-                    $this->db->supports('prepared_statements')
-                );
+                $this->db->insertParams(static::$cacheTable, $fields, $values);
             } else {
-                $return = $this->db->updateParams(
-                    static::$cacheTable,
-                    $fields,
-                    $values,
-                    array('id' => $values['id']),
-                    null,
-                    true,
-                    $this->db->supports('prepared_statements')
-                );
+                $this->db->updateParams(static::$cacheTable, $fields, $values, array(
+                    'id' => $values['id'],
+                ));
             }
             $this->db->commit();
+        }
+    }
 
-            return $return;
+    /**
+     * return last modified db row by type
+     * @param $type
+     * @return array|null
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    protected function getLastModifiedByType($type)
+    {
+        $result = null;
+        if (empty($this->db)) {
+            return $result;
+        }
+        $conn = $this->db->getConnection();
+        $stmt = $conn->executeQuery(
+            sprintf('SELECT id, data FROM %s WHERE type = ? ORDER BY date_modified DESC', static::$cacheTable),
+            array($type)
+        );
+        $result = $stmt->fetch();
+        if ($result) {
+            //If we have more than one entry for the same key, we need to remove the duplicate entries.
+            while ($row = $stmt->fetch()) {
+                $conn->delete(static::$cacheTable, array('id' => $row['id']));
+            }
         }
 
-        return false;
+        return $result;
     }
 
     /**
@@ -189,15 +205,13 @@ class MetaDataCache
      *
      * @param String $key
      *
-     * @return mixed
+     * @return void
      */
     protected function removeFromCacheTable($key)
     {
-        if (!self::$isCacheEnabled) {
-            return true;
+        if (self::$isCacheEnabled) {
+            $this->db->getConnection()->delete(static::$cacheTable, array('type' => $key));
         }
-
-        return $this->db->query("DELETE FROM " . static::$cacheTable . " WHERE type=" . $this->db->quoted($key));
     }
 
     /**
@@ -209,6 +223,8 @@ class MetaDataCache
             return true;
         }
 
+        static::logDetails(LoggerFactory::getLogger('metadata'), "Clearing all entries from metadata cache table.");
+
         $db = DBManagerFactory::getInstance();
         $db->commit();
         $db->query($db->truncateTableSQL(static::$cacheTable));
@@ -216,7 +232,10 @@ class MetaDataCache
     }
 
     public function clearKeysLike($key) {
-        return $this->db->query("DELETE FROM " . static::$cacheTable . " WHERE type LIKE " . $this->db->quoted($key . '%'));
+        $qb = $this->db->getConnection()->createQueryBuilder();
+        return $qb->delete(static::$cacheTable)
+            ->where($qb->expr()->like('type', $qb->createPositionalParameter($key . '%')))
+            ->execute();
     }
 
 

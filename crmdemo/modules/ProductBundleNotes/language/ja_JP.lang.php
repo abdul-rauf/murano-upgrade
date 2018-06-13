@@ -10,5 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-    'LBL_BUNDLE_NOTE_POSITION' => '製品バンドルポジション'
+    'LBL_BUNDLE_NOTE_POSITION' => '製品バンドルポジション',
+    'LBL_PRODUCT_BUNDLE_NOTES_QUOTE_DATA_LIST' => '製品バンドルノート見積データリスト',
 );

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -137,7 +136,7 @@ function ConvertDiscClient(){
         		}
         		else{
 
-					$admin = BeanFactory::getBean('Administration');
+					$admin = BeanFactory::newBean('Administration');
 					$system_id = $result['id'];
 					if(!isset($system_id)){
 						$system_id = 1;

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,6 +9,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 class FontManager{
     /**
      * Contain all the errors generated during the process of FontManager
@@ -171,7 +173,7 @@ class FontManager{
         if(!file_exists($this->fontPath.$this->filename)){
             return false;
         }
-        @include($this->fontPath.$this->filename);
+        include FileLoader::validateFilePath($this->fontPath.$this->filename);
         if ((!isset($type)) OR (!isset($cw))) {
             //The font definition file has a bad format
             return false;

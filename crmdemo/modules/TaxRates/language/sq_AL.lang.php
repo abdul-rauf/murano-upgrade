@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,6 +27,7 @@ $mod_strings = array (
   'LBL_TAXRATE' => 'Norma tatimore:',
   'LBL_LIST_NAME' => 'Emri i normës tatimore',
   'LBL_NAME' => 'Emri i normës tatimore:',
+  'LBL_FILTER_ACTIVE' => 'Shkallët aktive tatimore',
   'LBL_LIST_LIST_ORDER' => 'Urdhëri',
   'LBL_LIST_ORDER' => 'Urdhëri',
   'LBL_LIST_STATUS' => 'Statusi',

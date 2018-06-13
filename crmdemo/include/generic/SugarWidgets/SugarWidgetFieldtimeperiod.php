@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,26 +12,13 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 class SugarWidgetFieldTimeperiod extends SugarWidgetFieldEnum
 {
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarWidgetFieldTimeperiod(&$layout_manager)
-    {
-        self::__construct($layout_manager);
-    }
-
-    public function __construct(&$layout_manager)
-    {
-        parent::__construct($layout_manager);
-    }
-
 	public function queryFilteris($layout_def) {
         $input_name0 = $this->getInputValue($layout_def);
 
         if($input_name0 == 'current') {
             $name = array_keys(TimePeriod::getCurrentName());
             $name = !empty($name) ? $name[0] : '';
-            return SugarWidgetFieldid::_get_column_select($layout_def)." = '". $name ."'\n";
+            return SugarWidgetFieldId::_get_column_select($layout_def)." = '". $name ."'\n";
         }
 
 		return parent::queryFilteris($layout_def);
@@ -44,7 +30,7 @@ class SugarWidgetFieldTimeperiod extends SugarWidgetFieldEnum
         if($input_name0 == 'current') {
             $name = array_keys(TimePeriod::getCurrentName());
             $name = !empty($name) ? $name[0] : '';
-            return SugarWidgetFieldid::_get_column_select($layout_def)." NOT IN ('" . $name . "')\n";
+            return SugarWidgetFieldId::_get_column_select($layout_def)." NOT IN ('" . $name . "')\n";
         }
 
 		return parent::queryFilteris_not($layout_def);

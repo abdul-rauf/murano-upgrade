@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +17,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-require_once('include/SugarObjects/forms/FormBase.php');
 
 class CallFormBase extends FormBase {
 
@@ -111,7 +109,7 @@ EOQ;
 
 $javascript = new javascript();
 $javascript->setFormName($formname);
-$javascript->setSugarBean(BeanFactory::getBean('Calls'));
+$javascript->setSugarBean(BeanFactory::newBean('Calls'));
 $javascript->addRequiredFields($prefix);
 $form .=$javascript->getScript();
 $form .= "<td align=\"left\" valign=top><input title='$lbl_save_button_title' accessKey='$lbl_save_button_key' class='button' type='submit' name='button' value=' $lbl_save_button_label ' ></td></tr></table></form>";
@@ -185,7 +183,7 @@ function handleSave($prefix,$redirect=true,$useRequired=false) {
 		$_POST[$prefix.'duration_hours'] = trim($_POST[$prefix.'duration_hours']);
 	}
 
-	$focus = BeanFactory::getBean('Calls');
+	$focus = BeanFactory::newBean('Calls');
 
 	if($useRequired && !checkRequired($prefix, array_keys($focus->required_fields))) {
 		return null;
@@ -486,7 +484,7 @@ EOQ;
 
 $javascript = new javascript();
 $javascript->setFormName($formname);
-$javascript->setSugarBean(BeanFactory::getBean('Calls'));
+$javascript->setSugarBean(BeanFactory::newBean('Calls'));
 $javascript->addRequiredFields($prefix);
 $form .=$javascript->getScript();
 $mod_strings = $temp_strings;
@@ -499,7 +497,6 @@ return $form;
      */
     protected function processRecurring(Call $focus)
     {
-            require_once "modules/Calendar/CalendarUtils.php";            
             if (!empty($_REQUEST['edit_all_recurrences'])) {
                 // flush existing recurrence
                 CalendarUtils::markRepeatDeleted($focus);
@@ -517,7 +514,6 @@ return $form;
      */
     public function prepareRecurring()
     {       
-        require_once "modules/Calendar/CalendarUtils.php";
         
         if (empty($_REQUEST['edit_all_recurrences'])) {        
             $repeatFields = array('type', 'interval', 'count', 'until', 'dow', 'parent_id');

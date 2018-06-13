@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,9 +17,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  */
 require_once('modules/Users/authentication/LDAPAuthenticate/LDAPConfigs/default.php');
-require_once('modules/Users/authentication/SugarAuthenticate/SugarAuthenticateUser.php');
 
 define('DEFAULT_PORT', 389);
+define('LDAP_INVALID_CREDENTIALS', 49);
 class LDAPAuthenticateUser extends SugarAuthenticateUser{
 
 	/**
@@ -29,11 +28,13 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 	 *
 	 * @param STRING $name
 	 * @param STRING $password
+     * @param bool $fallback Ignored
 	 * @return STRING id - used for loading the user
 	 *
 	 * Contributions by Erik Mitchell erikm@logicpd.com
 	 */
-	function authenticateUser($name, $password) {
+    public function authenticateUser($name, $password, $fallback = false)
+    {
         $server = isset($GLOBALS['ldap_config']->settings['ldap_hostname']) ? $GLOBALS['ldap_config']->settings['ldap_hostname'] : '';
         $port = isset($GLOBALS['ldap_config']->settings['ldap_port']) ? $GLOBALS['ldap_config']->settings['ldap_port'] : '';
 		if(!$port)
@@ -65,14 +66,14 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 		$bind_password = html_entity_decode($password,ENT_QUOTES);
 
         $GLOBALS['log']->info("ldapauth: Binding user " . $bind_user);
-        $bind = ldap_bind($ldapconn, $bind_user, $bind_password);
+        $bind = $this->bindToLdap($ldapconn, $bind_user, $bind_password);
         $error = ldap_errno($ldapconn);
         if ($this->loginError($error)) {
             $full_user = $GLOBALS['ldap_config']->settings['ldap_bind_attr'] . "=" . $bind_user
                 . "," . $GLOBALS['ldap_config']->settings['ldap_base_dn'];
 
             $GLOBALS['log']->info("ldapauth: Binding user " . $full_user);
-            $bind = ldap_bind($ldapconn, $full_user, $bind_password);
+            $bind = $this->bindToLdap($ldapconn, $full_user, $bind_password);
             $error = ldap_errno($ldapconn);
             if ($this->loginError($error)) {
                 return '';
@@ -182,10 +183,13 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 
 
 			ldap_close($ldapconn);
-			$dbresult = $GLOBALS['db']->query("SELECT id, status FROM users WHERE user_name='" . $name . "' AND deleted = 0");
+
+            $conn = DBManagerFactory::getInstance()->getConnection();
+            $stmt = $conn->executeQuery('SELECT id, status FROM users WHERE user_name=? AND deleted=0', array($name));
+            $row = $stmt->fetch();
 
 			//user already exists use this one
-			if($row = $GLOBALS['db']->fetchByAssoc($dbresult)){
+            if (!empty($row)) {
 				if($row['status'] != 'Inactive')
 					return $row['id'];
 				else
@@ -207,12 +211,36 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 		}
 	}
 
+    /**
+     * Filter username and perform ldap_bind with filtered value
+     * @param resource $ldapconn
+     * @param string $user
+     * @param string $password
+     * @return bool
+     */
+    protected function bindToLdap($ldapconn, $user, $password)
+    {
+        $user = $this->escapeLdapFilter($user);
+        return ldap_bind($ldapconn, $user, $password);
+    }
+
+    /**
+     * Escape special characters in LDAP filter, RFC-2254
+     * @param string $value
+     * @return string
+     */
+    protected function escapeLdapFilter($value)
+    {
+        return ldap_escape($value, null, LDAP_ESCAPE_FILTER);
+    }
+
 	/**
 	 * takes in a name and creates the appropriate search filter for that user name including any additional filters specified in the system settings page
 	 * @param $name
 	 * @return String
 	 */
 	function getUserNameFilter($name){
+        $name = $this->escapeLdapFilter($name);
 			$name_filter = "(" . $GLOBALS['ldap_config']->settings['ldap_login_attr']. "=" . $name . ")";
 			//add the additional user filter if it is specified
 			if(!empty($GLOBALS['ldap_config']->settings['ldap_login_filter'])){
@@ -234,7 +262,7 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 	 */
 	function createUser($name){
 
-			$user = BeanFactory::getBean('Users');
+			$user = BeanFactory::newBean('Users');
 			$user->user_name = $name;
 			foreach($this->ldapUserInfo as $key=>$value){
 				$user->$key = $value;
@@ -247,14 +275,9 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 			return $user->id;
 
 	}
-	/**
-	 * this is called when a user logs in
-	 *
-	 * @param STRING $name
-	 * @param STRING $password
-	 * @return boolean
-	 */
-	function loadUserOnLogin($name, $password) {
+
+    public function loadUserOnLogin($name, $password, $fallback = false, array $params = array())
+    {
 
 	    global $mod_strings;
 
@@ -270,7 +293,6 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 		$GLOBALS['ldap_config'] = Administration::getSettings('ldap');
 		$GLOBALS['log']->debug("Starting user load for ". $name);
 		if(empty($name) || empty($password)) return false;
-		checkAuthUserStatus();
 
 		$user_id = $this->authenticateUser($name, $password);
 		if(empty($user_id)) {
@@ -294,12 +316,12 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 		if(empty($error)) return false;
 		$errorstr = ldap_err2str($error);
 		// BEGIN SUGAR INT
-		$_SESSION['login_error'] = $errorstr;
-		/*
-		// END SUGAR INT
-		$_SESSION['login_error'] = translate('ERR_INVALID_PASSWORD', 'Users');
-		// BEGIN SUGAR INT
-		*/
+        // Trap ldap error 49 to make message same to authentication failure message for sugar user.
+        if ($error == LDAP_INVALID_CREDENTIALS) {
+            $_SESSION['login_error'] = translate('ERR_INVALID_PASSWORD', 'Users');
+        } else {
+            $_SESSION['login_error'] = $errorstr;
+        }
 		// END SUGAR INT
 		$GLOBALS['log']->fatal('[LDAP ERROR]['. $error . ']'.$errorstr);
 		return true;
@@ -338,11 +360,11 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
         ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0); // required for AD
         //if we are going to connect anonymously lets at least try to connect with the user connecting
         if(empty($admin_user)){
-			$bind = @ldap_bind($ldapconn, $user_name, $password);
+            $bind = $this->bindToLdap($ldapconn, $user_name, $password);
         	$error = ldap_errno($ldapconn);
         }
         if(empty($bind)){
-        	$bind = @ldap_bind($ldapconn, $admin_user, $admin_password);
+            $bind = $this->bindToLdap($ldapconn, $admin_user, $admin_password);
         	$error = ldap_errno($ldapconn);
         }
 

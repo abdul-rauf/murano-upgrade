@@ -2,7 +2,6 @@
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,7 +27,7 @@ if (!is_admin($current_user) && empty($workflow_modules))
    sugar_die("Unauthorized access to WorkFlow.");
 }
 
-$workflow_object = BeanFactory::getBean('WorkFlow');
+$workflow_object = BeanFactory::newBean('WorkFlow');
 global $app_strings;
 global $app_list_strings;
 global $mod_strings;
@@ -48,7 +47,6 @@ echo getClassicModuleTitle($mod_strings['LBL_MODULE_ID'], array($mod_strings['LB
 $request = InputValidation::getService();
 $target_base_module = $request->getValidInputRequest('base_module', 'Assert\Bean\ModuleName');
 
-require_once('modules/MySettings/StoreQuery.php');
 $storeQuery = new StoreQuery();
 if(!isset($_REQUEST['query'])){
 	$storeQuery->loadQuery($currentModule);

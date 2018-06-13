@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,7 +20,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $past_remove = false;
 
 
-$focus = BeanFactory::getBean('WorkFlowTriggerShells');
+$focus = BeanFactory::newBean('WorkFlowTriggerShells');
 
 
 if(!empty($_POST['record']) && $_POST['record']!=""){
@@ -66,7 +65,7 @@ foreach($focus->additional_column_fields as $field)
 			$base_id = "";	
 		}
 
-		$base_object = BeanFactory::getBean('Expressions');
+		$base_object = BeanFactory::newBean('Expressions');
 				
 		if(!empty($base_id) && $base_id!=""){
 			$base_object->retrieve($base_id);

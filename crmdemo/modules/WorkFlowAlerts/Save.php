@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -67,7 +66,7 @@ if(!empty($_POST['rel2_type']) && $_POST['rel2_type']!=""){
 		if (isset($_POST['mod_rel_custom2']) && $_POST['mod_rel_custom2']=="on"){
 		//filter, so an expression object is needed or present
 
-			$exp_object = BeanFactory::getBean('Expressions');
+			$exp_object = BeanFactory::newBean('Expressions');
 			if(!empty($_POST['rel_custom2_exp_id'])){
 				$exp_object->retrieve($_POST['rel_custom2_exp_id']);
 			}

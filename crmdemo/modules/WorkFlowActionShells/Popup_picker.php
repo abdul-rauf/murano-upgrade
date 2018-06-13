@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,14 +13,6 @@ global $theme;
 
 class Popup_Picker
 {
-
-    /**
-     * @deprecated
-     */
-    public function Popup_Picker()
-    {
-    }
-
 	function process_page()
 	{
 		global $theme;
@@ -31,7 +22,6 @@ class Popup_Picker
 		global $current_language;
 		global $current_module_strings;
         if(!is_file(sugar_cached('jsLanguage/WorkFlow/') . $GLOBALS['current_language'] . '.js')) {
-            require_once('include/language/jsLanguage.php');
             jsLanguage::createModuleStringsCache('WorkFlow', $GLOBALS['current_language']);
         }
         $javascript_language_files = getVersionedScript("cache/jsLanguage/WorkFlow/{$GLOBALS['current_language']}.js", $GLOBALS['sugar_config']['js_lang_version']);
@@ -46,7 +36,7 @@ class Popup_Picker
 			$workflow = BeanFactory::getBean('WorkFlow', $_REQUEST['workflow_id']);
 			//TODO GET ALL ALERTS HERE
 			//$focus_alerts_list = $workflow->get_linked_beans('wf_alerts','WorkFlowAlertShell');
-			$actions = BeanFactory::getBean('WorkFlowActionShells');
+			$actions = BeanFactory::newBean('WorkFlowActionShells');
 
 			$current_module_strings = return_module_language($current_language, $actions->module_dir);
 			insert_popup_header($theme);
@@ -81,3 +71,4 @@ class Popup_Picker
 		return $return_list;
 	}
 }
+

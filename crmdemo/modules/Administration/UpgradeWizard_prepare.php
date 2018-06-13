@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: UpgradeWizard_prepare.php 55665 2010-03-29 23:55:22Z dwheeler $
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
@@ -19,8 +18,6 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 require_once 'modules/Administration/UpgradeWizardCommon.php';
 require_once 'include/SugarSmarty/plugins/function.sugar_csrf_form_token.php';
 
-unset($_SESSION['rebuild_relationships']);
-unset($_SESSION['rebuild_extensions']);
 // process commands
 if(empty($_REQUEST['install_file'])){
     die( $mod_strings['LBL_UPGRADE_WIZARD_FILE_NOT_SPEC'] );
@@ -429,7 +426,6 @@ if( $show_files == true ){
 			}
 			if( !$forced_copy && is_file( $new_file ) && (md5_file( $unzip_file ) == md5_file( $new_file )) ){
 				$disabled = "disabled=\"true\"";
-				//$checked = "";
 			}
 			if( $checked != "" && $disabled != "" ){    // need to put a hidden field
 				print( "<input name=\"copy_$count\" type=\"hidden\" value=\"" . $the_file . "\">\n" );
@@ -454,7 +450,6 @@ if( $show_files == true ){
 	}
         print( "</ul>\n" );
 }
-//    echo '</div>';
 if($mode == "Disable" || $mode == "Enable"){
 	//check to see if any files have been modified
 	$modified_files = UpgradeWizardCommon::getDiffFiles($unzip_dir, $install_file, ($mode == 'Enable'), $previous_version);

@@ -14,8 +14,6 @@ use \Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use \Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
 use \Sugarcrm\Sugarcrm\Elasticsearch\Query\KBQuery;
 
-require_once 'include/api/SugarListApi.php';
-require_once 'data/BeanFactory.php';
 
 class KBContentsApi extends SugarListApi
 {
@@ -81,12 +79,12 @@ class KBContentsApi extends SugarListApi
     /**
      * Return related document using "more like this" query.
      *
-     * @param $api ServiceBase The API class of the request.
-     * @param $args array The arguments array passed in from the API.
+     * @param ServiceBase $api The API class of the request.
+     * @param array $args The arguments array passed in from the API.
      * @return array 'records' the list of returned records formatted through FormatBean, and 'next_offset'
      * which will indicate to the user if there are additional records to be returned.
      */
-    public function relatedDocuments($api, $args)
+    public function relatedDocuments(ServiceBase $api, array $args)
     {
         $targetBean = BeanFactory::getBean($args['module'], $args['record']);
         if (!$targetBean->ACLAccess('view')) {
@@ -132,7 +130,7 @@ class KBContentsApi extends SugarListApi
 
     /**
      * Get configured Elastic search builder.
-     * @param $args array The arguments array passed in from the API.
+     * @param array $args The arguments array passed in from the API.
      * @param $options array An array with the options limit, offset, fields and order_by set
      * @return QueryBuilder
      */
@@ -153,11 +151,11 @@ class KBContentsApi extends SugarListApi
 
     /**
      * Disable modules through RestService.
-     * @param RestService $api Service to work with.
+     * @param ServiceBase $api Service to work with.
      * @param mixed $args Parameters came from Service.
      * @throws SugarApiExceptionNotFound Thrown always.
      */
-    public function disableApi($api, $args)
+    public function disableApi(ServiceBase $api, array $args)
     {
         throw new SugarApiExceptionNotFound("The requested module is disabled in API.");
     }

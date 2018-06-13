@@ -17,8 +17,8 @@ Pribavite API ključ i tajni kod od Googlea tako da registrirate svoju instancu 
 <br/><br/>
 <ol>
 <li>Idite na web-mjesto Google Developers:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Prijavite se s pomoću Google računa pod kojim biste željeli registrirati aplikaciju.</li>
 <li>Stvorite novi projekt</li>

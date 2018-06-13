@@ -234,9 +234,13 @@
 
         /**
          *
-         * @param def array metadata defining this component
-         * @param context default context to pass to the new component (unless overriden by the metadata)
-         * @param module defualt module to create this component from (unless overriden by the metadata)
+         * @param {Object} def Metadata defining this component.
+         * @param {Core.Context} context Default context to pass to the new
+         *   component. (Will be overridden by the context in 'def' param, if
+         *   defined).
+         * @param {string} module The module to pass to the component.
+         *   (Will be overridden by the context's module in 'def' param, if
+         *   defined).
          * @return {Mixed}
          */
         createComponentFromDef: function(def, context, module){
@@ -252,7 +256,7 @@
                     context = context.getChildContext(def.context);
                     context.prepare();
                 }
-                module = context.get("module");
+                module = context.get('module');
             }
 
             // Layouts/Views can either by referenced by name or have metadata defined inline
@@ -498,7 +502,7 @@
          * @inheritdoc
          */
         _show: function() {
-            this._super('_show');
+            app.view.Component.prototype._show.call(this);
             _.each(this._components, function(component) {
                 component.updateVisibleState(true);
             });
@@ -508,7 +512,7 @@
          * @inheritdoc
          */
         _hide: function() {
-            this._super('_hide');
+            app.view.Component.prototype._hide.call(this);
             _.each(this._components, function(component) {
                 component.updateVisibleState(true);
             });
@@ -525,7 +529,7 @@
         _dispose: function() {
             app.plugins.detach(this, "layout");
             this._disposeComponents();
-            this._super('_dispose');
+            app.view.Component.prototype._dispose.call(this);
         },
 
         /**

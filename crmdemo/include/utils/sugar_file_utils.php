@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -132,7 +131,6 @@ function sugar_file_put_contents($filename, $data, $flags=null, $context=null){
     return $return;
 }
 
-
 /**
  * sugar_file_put_contents_atomic
  * This is an atomic version of sugar_file_put_contents.  It attempts to circumvent the shortcomings of file_put_contents
@@ -150,7 +148,11 @@ function sugar_file_put_contents_atomic($filename, $data, $mode='wb', $use_inclu
     $dir = dirname($filename);
     $temp = tempnam($dir, 'temp');
 
-    if (!($f = @fopen($temp, $mode))) {
+    if ($temp === false || !($f = @fopen($temp, $mode))) {
+        // delete the file created by tempnam
+        if ($temp) {
+            @unlink($temp);
+        }
         $temp =  $dir . DIRECTORY_SEPARATOR . uniqid('temp');
         if (!($f = @fopen($temp, $mode))) {
             trigger_error("sugar_file_put_contents_atomic() : error writing temporary file '$temp'", E_USER_WARNING);
@@ -377,9 +379,6 @@ function sugar_chgrp($filename, $group='') {
 function get_mode($key = 'dir_mode', $mode=null) {
 	if ( !is_int($mode) )
         $mode = (int) $mode;
-    if(!class_exists('SugarConfig', true)) {
-		require 'include/SugarObjects/SugarConfig.php';
-	}
 	if(!is_windows()){
 		$conf_inst=SugarConfig::getInstance();
 		$mode = $conf_inst->get('default_permissions.'.$key, $mode);

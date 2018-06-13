@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -25,7 +24,7 @@ global $current_language;
 global $current_user;
 global $hilite_bg;
 global $sugar_version, $sugar_config;
-$focus = BeanFactory::getBean('Project');
+$focus = BeanFactory::newBean('Project');
 
 $request = InputValidation::getService();
 
@@ -56,10 +55,10 @@ $sugar_smarty->assign("ID", $focus->id);
 $sugar_smarty->assign("NAME", $focus->name);
 $sugar_smarty->assign("IS_TEMPLATE", $focus->is_template);
 
-$userBean = BeanFactory::getBean('Users');
+$userBean = BeanFactory::newBean('Users');
 $focus->load_relationship("user_resources");
 $users = $focus->user_resources->getBeans($userBean);
-$contactBean = BeanFactory::getBean('Contacts');
+$contactBean = BeanFactory::newBean('Contacts');
 $focus->load_relationship("contact_resources");
 $contacts = $focus->contact_resources->getBeans($contactBean);
 
@@ -75,7 +74,7 @@ $sugar_smarty->assign("RESOURCES", $resources);
 
 // Get resource holidays ////////////////////////////////////////////////
 
-$holidayBean = BeanFactory::getBean('Holidays');
+$holidayBean = BeanFactory::newBean('Holidays');
 $holidays = array();
 
 if (count($resources) > 0){
@@ -133,7 +132,7 @@ if (isset($_REQUEST["view_filter_resource"]))
 
 
 
-$projectTaskBean = BeanFactory::getBean('ProjectTask');
+$projectTaskBean = BeanFactory::newBean('ProjectTask');
 $projectTasks = array();
 
 $queryPart = '';
@@ -250,7 +249,7 @@ elseif (isset($_REQUEST["selected_view"]) && $_REQUEST["selected_view"] == 9) {
 // My Overdue Tasks
 elseif (isset($_REQUEST["selected_view"]) && $_REQUEST["selected_view"] == 10) {
     $query = "SELECT * FROM project_task WHERE project_task.project_id=" .
-        $projectTaskBean->db->quoted($_REQUEST['record']) . " AND project_task.resource_id like ".
+        $projectTaskBean->db->quoted($_REQUEST['record']). " AND project_task.resource_id like ".
         $projectTaskBean->db->quoted($current_user->id) ." AND " .
              "project_task.date_finish < '". $today . "' AND project_task.percent_complete < 100 AND project_task.deleted=0 {$queryPart} order by project_task.project_task_id";
     $result = $projectTaskBean->db->query($query, true, "");
@@ -258,7 +257,7 @@ elseif (isset($_REQUEST["selected_view"]) && $_REQUEST["selected_view"] == 10) {
 // My Upcoming Tasks
 elseif (isset($_REQUEST["selected_view"]) && $_REQUEST["selected_view"] == 11) {
     $query = "SELECT * FROM project_task WHERE project_task.project_id=" .
-        $projectTaskBean->db->quoted($_REQUEST['record']) . " AND project_task.resource_id like " .
+        $projectTaskBean->db->quoted($_REQUEST['record']). " AND project_task.resource_id like " .
         $projectTaskBean->db->quoted($current_user->id) ." AND " .
         "(project_task.date_start BETWEEN '" . $today . "' AND '". $nextWeek . "' OR ".
         "project_task.date_finish BETWEEN '". $today . "' AND '". $nextWeek . "') AND project_task.deleted=0 {$queryPart} order by project_task.project_task_id";
@@ -288,7 +287,7 @@ if (!isset($_REQUEST["selected_view"]) || ($_REQUEST["selected_view"] == 0 || $_
 else {
     // Get all the tasks that participate in a parent relationship with any task.
     $query = "SELECT * from project_task WHERE project_task.project_id=" .
-        $projectTaskBean->db->quoted($_REQUEST['record']) .
+        $projectTaskBean->db->quoted($_REQUEST['record']).
         " AND project_task.project_task_id in (SELECT parent_task_id FROM project_task WHERE project_task.project_id=" .
         $projectTaskBean->db->quoted($_REQUEST['record']) . " AND project_task.deleted=0)";
     $parentResult = $projectTaskBean->db->query($query, true, "");
@@ -368,12 +367,11 @@ $sugar_smarty->assign("CANEDIT",$current_user->id == $focus->assigned_user_id ||
 // Based on teamset ID, get a list of teams, and use that to check if this user
 // can edit the gantt chart
 $GLOBALS['log']->debug('EditGridView.php: Getting list of teams to determine access for editing gantt chart');
-require_once("modules/Teams/TeamSet.php");
 
 $list_of_teams = array();
 
 if (isset($focus->team_set_id)) {
-    $teamSet = BeanFactory::getBean('TeamSets');
+    $teamSet = BeanFactory::newBean('TeamSets');
     $list_of_teams  = $teamSet->getTeamIds($focus->team_set_id);
 } else { // since no team_set_id exists, we can just use the current team id
     $list_of_teams[] = $focus->team_id;

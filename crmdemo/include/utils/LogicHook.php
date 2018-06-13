@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -39,13 +38,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 class LogicHook{
 
 	var $bean = null;
-
-    /**
-     * @deprecated
-     */
-    public function LogicHook()
-    {
-    }
 
 	/**
 	 * Static Function which returns and instance of LogicHook
@@ -146,7 +138,7 @@ class LogicHook{
 	function call_custom_logic($module_dir, $event, $arguments = array()){
         $origBean = $this->bean;
         if ($origBean === null) {
-            $bean = BeanFactory::getBean($module_dir);
+            $bean = BeanFactory::newBean($module_dir);
             if ($bean instanceOf SugarBean) {
                 $this->setBean($bean);
             }

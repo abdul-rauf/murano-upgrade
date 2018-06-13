@@ -122,6 +122,6 @@ $mod_strings = array (
 Per creare un {{module_name}}:
 1. Fornire i valori desiderati per i campi.
 - I campi contrassegnati con "Richiesto" devono essere compilati prima del salvataggio.
-- Fare clic su "Mostra altro" per visualizzare ulteriori campi, se necessario.
+- Fare clic su "Altri dettagli" per visualizzare ulteriori campi, se necessario.
 2. Fare clic su "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
 );

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Недоступні теми',
     'LBL_TIMEZONE' => 'Часовий пояс',
     'LBL_TO'    => 'до',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Виберіть дані системи та користувача, які потрібно відслідковувати',
     'LBL_UPDATE_CHECK_AUTO'=>'Автоматично',
     'LBL_UPDATE_CHECK_MANUAL'=>'Вручну',
     'LBL_UPDATE_CHECK_TYPE'=>'<B> Автоматично перевіряти доступні оновлення </B> - При виборі даної опції система періодично перевірятиме, чи доступні оновлені версії програми.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Файл config.php успішно відновлений.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Попередження: Ваша PHP-конфігурація має бути змінена таким чином, щоб була можливість завантаження файлів розміром не менше 6МБ. Будь ласка, виправте значення змінної upload_max_filesize у файлі php.ini знаходиться в:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Будь ласка, зробіть файл config.php доступним для запису і спробуйте ще раз.',
-    'MSG_REBUILD_EXTENSIONS' => 'Будь ласка, перейдіть за посиланням  <a href="index.php?module=Administration&action=Upgrade">Repair</a>  в панелі адміністратора і клацніть на посиланні "Відновлення розширень".',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Будь ласка, перейдіть за посиланням <a href="index.php?module=Administration&action=Upgrade"> Repair </a> в панелі адміністратора і клацніть на посиланні "Відновлення зв&#39;язків".',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'На даний момент немає активних автономних клієнтів.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Ви впевнені, що хочете відключити цього автономного клієнта?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Ви впевнені, що хочете включити цього автономного клієнта?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Проблеми',
 'ML_MANIFEST_ISSUE'=>'Проблема з файлом маніфесту',
 'ML_CONFIG_OVERRIDE'=>'Зміни конфігурацій заборонені',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Ключ може містити лише літери, цифри та символи підкреслення. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Налаштування навігаційної панелі',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Оберіть модулі для відображення в панелі ярликів',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Оберіть модулі, для яких користувачі зможуть швидко створювати записи, використовуючи іконку Плюс у верхньому навігаційному меню. Перетягніть модулі між секціями Включені модулі та Виключені модулі.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Виробник',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'ProjectResource',
 
 	'Relationships' => 'Зв&#39;язок',
 	'Releases'       => 'Випуск',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'Cлужба доставки',
 	'TaxRates'       => 'Податкова ставка',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Bijlage',
     'LBL_REVENUELINEITEMS' => 'Opportunityregels',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Voorvertoning organisaties',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notities',
 
     // Help Text

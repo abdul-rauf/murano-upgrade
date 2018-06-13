@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/generic/SugarWidgets/SugarWidgetFieldint.php';
 
 global $current_user;
 
@@ -22,7 +20,7 @@ function get_currency()
         global $global_currency_obj;
         if (empty($global_currency_obj))
         {
-            $global_currency_obj = BeanFactory::getBean('Currencies')->getUserCurrency();
+            $global_currency_obj = BeanFactory::newBean('Currencies')->getUserCurrency();
         }
         return $global_currency_obj;
 }
@@ -30,14 +28,6 @@ function get_currency()
 
 class SugarWidgetFieldCurrency extends SugarWidgetFieldInt
 {
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarWidgetFieldCurrency(&$layout_manager)
-    {
-        self::__construct($layout_manager);
-    }
-
     public function __construct(&$layout_manager)
     {
         parent::__construct($layout_manager);
@@ -45,8 +35,8 @@ class SugarWidgetFieldCurrency extends SugarWidgetFieldInt
     }
 
 
-    function & displayList($layout_def)
-        {
+    public function displayList($layout_def)
+    {
             global $current_user;
 
             if (empty($layout_def['group_function'])) {
@@ -249,3 +239,4 @@ class SugarWidgetFieldCurrency extends SugarWidgetFieldInt
         return array('currency_symbol' => $currency_symbol, 'currency_id' => $currency_id);
     }
 }
+

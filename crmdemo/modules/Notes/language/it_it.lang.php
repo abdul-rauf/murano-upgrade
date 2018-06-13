@@ -99,6 +99,6 @@ $mod_strings = array(
     'LBL_HELP_CREATE' => 'Per creare un {{module_name}}: 
  1. Compila i campi con i valori desiderati. 
  - I campi contrassegnati come "Obbligatorio" devono essere compilati prima del salvataggio. 
- - Clicca "Mostra più Moduli" per visualizzare ulteriori campi se necessario. 
+ - Clicca "Altri dettagli" per visualizzare ulteriori campi se necessario. 
  2. Cliccare "Salva" per salvare il nuovo record e tornare alla pagina precedente.',
 );

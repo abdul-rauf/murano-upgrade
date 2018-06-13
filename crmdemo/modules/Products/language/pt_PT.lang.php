@@ -23,8 +23,8 @@ $mod_strings = array(
     'LBL_LEAD_SOURCE' => 'Origem do Cliente Potencial',
     'LBL_LIST_NAME' => 'Item de Linha Cotado',
     'LBL_LIST_MANUFACTURER' => 'Fabricante',
-    'LBL_MANUFACTURERS' => 'Fornecedores',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Número do Fabricante',
+    'LBL_MANUFACTURERS' => 'Fabricantes',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Número da Peça',
     'LBL_LIST_QUANTITY' => 'Quantidade',
     'LBL_LIST_COST_PRICE' => 'Custo',
     'LBL_LIST_DISCOUNT_PRICE' => 'Preço',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Seleção do Desconto',
     'LBL_LIST_PRICE' => 'Preço:',
     'LBL_VENDOR_PART_NUM' => 'Número do Fornecedor',
-    'LBL_MFT_PART_NUM' => 'Número do Fabricante',
+    'LBL_MFT_PART_NUM' => 'Número da Peça:',
     'LBL_NEXT_STEP' => 'Próximo Passo:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Data do Desconto:',
     'LBL_WEIGHT' => 'Peso:',
@@ -168,6 +168,8 @@ Para criar um {{module_name}}:
  - Clique em "Mostrar Mais" para mostrar campos adicionais se necessário.
 2. Clique em "Gravar" para finalizar o novo registo e regressar à página anterior.',
 
-    'LBL_MANUFACTURERS' => 'Fabricantes',
     'LBL_PRODUCT_POSITION' => 'Posição do pacote de produtos',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista de Dados de Cotação dos Itens da Linha Cotados',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Novo Item da Linha Cotado)',
+    'LBL_DISCOUNT_PERCENT' => '% Percentagem',
 );

@@ -13,7 +13,6 @@
  * Data access class for the product_template table
  */
 class ProductTemplate extends SugarBean {
-	var $field_name_map;
 	// Stored fields
 	var $id;
 	var $deleted;
@@ -92,7 +91,7 @@ class ProductTemplate extends SugarBean {
 		parent::__construct();
 		$this->disable_row_level_security =true;
 
-		$currency = BeanFactory::getBean('Currencies');
+		$currency = BeanFactory::newBean('Currencies');
 		$this->default_currency_symbol = $currency->getDefaultCurrencySymbol();
 	}
 
@@ -108,11 +107,10 @@ class ProductTemplate extends SugarBean {
 	function clear_note_product_template_relationship($product_template_id)
 	{
         $GLOBALS['log']->deprecated('ProductTemplate::clear_note_product_template_relationship() has been deprecated in 7.8');
-		$query = sprintf(
+        $query = sprintf(
             "UPDATE notes SET parent_id='', parent_type='' WHERE parent_id = %s AND deleted = 0",
             $this->db->quoted($product_template_id)
         );
-
 		$this->db->query($query,true,"Error clearing note to product_template relationship: ");
 	}
 

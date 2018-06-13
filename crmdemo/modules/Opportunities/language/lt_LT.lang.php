@@ -166,25 +166,24 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} jums leidžia nuo pradžios iki pabaigos sekti atskirus pardavimus. Kiekviename {{module_name}} įraše nurodomas perspektyvus pardavimas ir jame pateikiami aktualūs pardavimo duomenys; įrašas taip pat susijęs su kitais svarbiais įrašais, pvz., {{quotes_module}}, {{contacts_module}} ir pan. {{module_name}} paprastai pereis keletą pardavimo etapų ir galiausiai bus pažymėtas kaip „Uždaryta kaip laimėta“ arba „Uždaryta kaip nelaimėta“. Naudojant „Sugar“ modulį {{forecasts_singular_module}}, {{plural_module_name}} galima panaudoti dar plačiau – siekiant suprasti ir prognozuoti pardavimo tendencijas bei, telkiant darbą, siekti pardavimo kvotų.',
+    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} suteikia jums galimybę sekti atskiras pardavimo operacijas nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą ir jį sudaro susiję pardavimo duomenys bei su kitais svarbiais įrašais susijusi informacija, pvz., {{quotes_module}}, {{contacts_module}} ir pan. {{module_name}} paprastai vykdomas per kelis pardavimo etapus, kol pažymimas kaip „Closed won“ arba „Closed Lost“. {{plural_module_name}} gali būti naudojamas ir toliau naudojant „Sugar {{forecasts_singular_module}}“ modulį norint sužinoti ir numatyti pardavimo tendencijas bei susitelkti ties pardavimo kvotos pasiekimo tikslu.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} jums leidžia nuo pradžios iki pabaigos sekti atskirus pardavimus ir tiems pardavimams priklausančias eilučių prekes. Kiekviename {{module_name}} įraše nurodomas perspektyvus pardavimas ir jame pateikiami aktualūs pardavimo duomenys; įrašas taip pat susijęs su kitais svarbiais įrašais, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
-
-- Šio įrašo laukus redaguoti galite spustelėję atskirą lauką arba mygtuką Redaguoti.
-- Apatinę kairiąją sritį perjungę į „Duomenų rodinys“, galite peržiūrėti ar modifikuoti saitus su kitais subpanelių įrašais.
-- Apatinę kairiąją sritį perjungę į „Veiklos“, galite komentuoti ar peržiūrėti vartotojų komentarus bei {{activitystream_singular_module}} įrašyti keitimų istoriją.
-- Naudodami įrašo pavadinimo dešinėje esančias piktogramas, galite šį įrašą sekti ar įtraukti prie mėgstamiausių.
-- Mygtuko Redaguoti dešinėje esančiame iškylančiajame meniu Veiksmai prieinami papildomi veiksmai.',
+    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} suteikia jums galimybę sekti atskiras pardavimo operacijas ir tam pardavimus priklausančias prekes nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą ir jį sudaro susiję pardavimo duomenys bei su kitais svarbiais įrašais susijusi informacija, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
+- Redaguokite šio įrašo laukus spustelėdami atskirą lauką arba mygtuką Redaguoti
+- Peržiūrėkite arba keiskite kitų įrašų saitus antriniuose skydeliuose perjungdami apatinę kairiąją sritį į Duomenų rodinys.
+- Komentuokite ir peržiūrėkite vartotojų komentarus ir įrašų keitimo retrospektyvą {{activitystream_singular_module}} perjungdami apatinę kairiąją sritį į Veiklos srautas.
+- Stebėkite arba įtraukite į parankinius šį įrašą naudodami įrašo autoriaus vardo dešinėje esančias piktogramas.
+- Mygtuko Redaguoti dešinėje esančiame išplečiamajame meniu Veiksmai rodomi papildomi galimi veiksmai.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} jums leidžia nuo pradžios iki pabaigos sekti atskirus pardavimus ir tiems pardavimams priklausančias eilučių prekes. Kiekviename {{module_name}} įraše nurodomas perspektyvus pardavimas ir jame pateikiami aktualūs pardavimo duomenys; įrašas taip pat susijęs su kitais svarbiais įrašais, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
+    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} suteikia jums galimybę sekti atskiras pardavimo operacijas ir tam pardavimus priklausančias prekes nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą ir jį sudaro susiję pardavimo duomenys bei su kitais svarbiais įrašais susijusi informacija, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
 
-Norėdami sukurti {{module_name}}, atlikite tolesnius veiksmus.
-1. Nurodykite norimas laukų reikšmes.
- - Laukus, pažymėtus „Reikiamas“, prieš įrašant reikia užpildyti.
- - Jei reikia, spustelėję „Rodyti daugiau“ galite matyti papildomų laukų.
-2. Spustelėję „Įrašyti“, baigsite naująjį įrašą ir grįšite į ankstesnį puslapį.',
+Norėdami sukurti {{module_name}}:
+1. Pateikite pageidaujamų laukų reikšmes.
+ - Laukai, pažymėti kaip Būtinas, prieš įrašant turi būti užpildyti.
+ - Jei reikia, kad būtų parodyti papildomi laukai, spustelėkite Rodyti daugiau.
+2. Spustelėję Įrašyti užbaigsite naują įrašą ir grįšite į ankstesnį puslapį.',
 
 // END PRO/CORP
 

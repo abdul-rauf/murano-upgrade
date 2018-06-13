@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -766,7 +765,6 @@ Si el entorno de su sistema impide que su sistema se comunique con el servidor d
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Temas no Disponibles',
     'LBL_TIMEZONE' => 'Zona horaria',
     'LBL_TO'    => 'a',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Seleccione qué datos de sistema y usuario son monitorizados',
     'LBL_UPDATE_CHECK_AUTO'=>'Automáticamente',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manualmente',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Comprobar actualizaciones automáticamente</B> - Si está seleccionada, el sistema comprobará periódicamente si hay versiones actualizadas disponibles de la aplicación.',
@@ -933,8 +931,6 @@ Si el entorno de su sistema impide que su sistema se comunique con el servidor d
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'El archivo config.php ha sido reconstruido con éxito.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Aviso: Su configuración de PHP debe ser cambiada para permitir la carga de archivos de al menos 6MB.  Por favor, modifique el valor de upload_max_filesize en su php.ini localizado en:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Por favor, dé permisos de escritura a config.php e inténtelo de nuevo.',
-    'MSG_REBUILD_EXTENSIONS' => 'Por favor, vaya a la pantalla de <a href="index.php?module=Administration&action=Upgrade">Reparación</a> y haga clic en Reconstruir Extensiones.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Por favor, vaya a la pantalla de <a href="index.php?module=Administration&action=Upgrade">Reparación</a> y haga clic en Reconstruir Relaciones.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Actualmente no hay Clientes Desconectados habilitados.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => '¿Está seguro de que desea deshabilitar este Cliente Desconectado?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => '¿Está seguro de que desea habilitar este Cliente Desconectado?',
@@ -1044,7 +1040,7 @@ Si el entorno de su sistema impide que su sistema se comunique con el servidor d
 'ML_ISSUES'=>'Problemas',
 'ML_MANIFEST_ISSUE'=>'Problema con el manifiesto',
 'ML_CONFIG_OVERRIDE'=>'No está permitido modificar la Config',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Clave - Solo puede estar formado por letras, números y guiones bajos. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Configurar Creación Rápida de Barra de Navegación',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Seleccione los módulos disponibles en la creación rápida de barra de navegación',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Elija los módulos para los cuales los usuarios pueden crear registros rápidamente utilizando el icono Más en la barra de navegación superior. Arrastre y suelte los módulos entre los Módulos Habilitados y las cajas de los Módulos Deshabilitados.',
@@ -1092,7 +1088,6 @@ Si el entorno de su sistema impide que su sistema se comunique con el servidor d
 	'Manufacturers'  => 'Fabricante',
 	'ProductBundleNotes' => 'NotaJuegoProductos',
 	'ProductBundles'   => 'JuegoProductos',
-	'ProjectResources' => 'Recursos del Proyecto',
 
 	'Relationships' => 'Relación',
 	'Releases'       => 'Release',
@@ -1102,7 +1097,6 @@ Si el entorno de su sistema impide que su sistema se comunique con el servidor d
 	'SchedulersJobs'  => 'TrabajodePlanificadores',
 	'Shippers'       => 'Transportista',
 	'TaxRates'       => 'TasaImpositiva',
-	'TeamHierarchies'  => 'JerarquíaEquipo',
 	'TeamMemberships'   => 'MembresíaEquipo',
 	'TeamNotices'    => 'AvisoEquipo',
 	'TeamSetModules'   => 'MóduloConfigEquipo',

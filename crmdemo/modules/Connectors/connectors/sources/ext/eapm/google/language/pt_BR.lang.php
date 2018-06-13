@@ -17,8 +17,8 @@ Obter uma chave de API e Segredo do Google registrando sua instância do Sugar c
 <br/><br/>
 <ol>
 <li>Vá para o site do Google Developers:
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>Entre usando a conta do Google com a qual você deseja registrar o aplicativo.</li>
 <li>Crie um novo projeto</li>

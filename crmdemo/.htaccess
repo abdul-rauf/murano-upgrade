@@ -1,20 +1,9 @@
-SetEnv DEFAULT_PHP_VERSION 5
-RLimitMEM max max
-
-#RedirectMatch 301 ^(.*)$ http://crm.muranoconnect.com
-
-
-
-
-
-
-
 
 
 # BEGIN SUGARCRM RESTRICTIONS
 RedirectMatch 403 .*\.log$
 RedirectMatch 403 /+not_imported_.*\.txt
-RedirectMatch 403 /+(soap|cache|xtemplate|data|examples|include|log4php|metadata|modules)/+.*\.(php|tpl)
+RedirectMatch 403 /+(soap|cache|xtemplate|data|examples|include|log4php|metadata|modules|clients|jssource|ModuleInstall)/+.*\.(php|tpl)
 RedirectMatch 403 /+emailmandelivery\.php
 RedirectMatch 403 /+upload/
 RedirectMatch 403 /+custom/+blowfish

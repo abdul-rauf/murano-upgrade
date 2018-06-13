@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,6 +13,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
  * Description:
  ********************************************************************************/
+
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 global $theme;
 
@@ -34,7 +35,7 @@ global $urlPrefix;
 global $currentModule;
 
 
-$focus = BeanFactory::getBean('WorkFlowAlerts');
+$focus = BeanFactory::newBean('WorkFlowAlerts');
 
 if(!empty($_REQUEST['record']) && $_REQUEST['record']!="") {
 	$focus->retrieve($_REQUEST['record']);
@@ -49,8 +50,9 @@ if(!empty($_REQUEST['parent_id']) && $_REQUEST['parent_id']!="") {
 	sugar_die("You shouldn't be here");
 }
 
-if(!empty($_REQUEST['base_module']) && $_REQUEST['base_module']!="") {
-   $focus->base_module = $_REQUEST['base_module'];
+$base_module = InputValidation::getService()->getValidInputRequest('base_module', 'Assert\Mvc\ModuleName');
+if (!empty($base_module)) {
+    $focus->base_module = $base_module;
 }
 if(!empty($_REQUEST['rel_module1']) && $_REQUEST['rel_module1']!="") {
    $focus->rel_module1 = $_REQUEST['rel_module1'];
@@ -66,8 +68,6 @@ if(!empty($_REQUEST['user_type']) && $_REQUEST['user_type']!="") {
 
 
 ///////Get the type of workflow object that this is///////
-//Remove below line, this is already determined above
-//$workflow_object = $focus->get_workflow_object();
 $base_type = $target_workflow_object->type;
 
 
@@ -81,17 +81,14 @@ $base_type = $target_workflow_object->type;
 
 		//Bug 12335: We need to include the javascript language file first. And also the language file in WorkFlow is needed.
         if(!is_file(sugar_cached('jsLanguage/') . $GLOBALS['current_language'] . '.js')) {
-            require_once('include/language/jsLanguage.php');
             jsLanguage::createAppStringsCache($GLOBALS['current_language']);
         }
         $javascript_language_files = getVersionedScript("cache/jsLanguage/{$GLOBALS['current_language']}.js",  $GLOBALS['sugar_config']['js_lang_version']);
         if(!is_file(sugar_cached('jsLanguage/') . $this->module . '/' . $GLOBALS['current_language'] . '.js')) {
-                require_once('include/language/jsLanguage.php');
                 jsLanguage::createModuleStringsCache($this->module, $GLOBALS['current_language']);
         }
         $javascript_language_files .= getVersionedScript("cache/jsLanguage/{$this->module}/{$GLOBALS['current_language']}.js", $GLOBALS['sugar_config']['js_lang_version']);
         if(!is_file(sugar_cached('jsLanguage/WorkFlow/') . $GLOBALS['current_language'] . '.js')) {
-            require_once('include/language/jsLanguage.php');
             jsLanguage::createModuleStringsCache('WorkFlow', $GLOBALS['current_language']);
         }
         $javascript_language_files .= getVersionedScript("cache/jsLanguage/WorkFlow/{$GLOBALS['current_language']}.js", $GLOBALS['sugar_config']['js_lang_version']);
@@ -137,7 +134,6 @@ if(		$focus->user_type=="rel_user_custom"){
 		$target_module = $rel_handler->get_farthest_reach();
 
 
-	//$target_module = get_rel_trace_results($focus->base_module, $focus->rel_module1, $focus->rel_module2);
 	$target_module_name = $target_module->module_dir;
 
 	$current_module_strings = return_module_language($current_language, $target_module_name);
@@ -213,10 +209,9 @@ if(		$focus->user_type=="rel_user_custom"){
 //end if user_type is rel_user_custom
 }elseif($focus->user_type=="trig_user_custom"){
 
-		$target_module = BeanFactory::getBean($focus->base_module);
+		$target_module = BeanFactory::newBean($focus->base_module);
 
 
-	//$target_module = get_rel_trace_results($focus->base_module, $focus->rel_module1, $focus->rel_module2);
 	$target_module_name = $target_module->module_dir;
 
 	$current_module_strings = return_module_language($current_language, $target_module_name);
@@ -337,7 +332,6 @@ if(		$focus->user_type=="rel_user_custom"){
 
 
 //SET Previous Display Text
-	require_once('include/ListView/ProcessView.php');
 	$ProcessView = new ProcessView($target_workflow_object, $focus);
 	$prev_display_text = $ProcessView->get_prev_text("AlertsCreateStep1", $focus->user_type);
 

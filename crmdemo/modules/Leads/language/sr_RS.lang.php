@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Izmeni' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Direktorski Id',
-    'LBL_DNB_BAL_PREVIEW' => 'Pregled kompanija.',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Potencijalni klijenti',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: informacije o potencijalnim klijentima',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Prodajne prilike',
 

@@ -778,7 +778,8 @@ EOREGEX
             return $sq;
 		}
 
-		private function process_from(&$tokens) {
+    private function process_from($tokens)
+    {
 
 			$expression = "";
 			$expr = array();
@@ -1065,7 +1066,7 @@ EOREGEX
 	           processes these sections.  Recursive.
 		*/
 		private function process_expr_list($tokens) {
-			$expr = "";
+			$expr = array();
 			$type = "";
 			$prev_token = "";
 			$skip_next = false;
@@ -1976,4 +1977,3 @@ EOREGEX
 		}
 
 	} // END CLASS
-

@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarForecasting/Chart/AbstractChart.php');
-require_once('include/SugarForecasting/Manager.php');
 class SugarForecasting_Chart_Manager extends SugarForecasting_Chart_AbstractChart
 {
     /**
@@ -138,7 +136,7 @@ class SugarForecasting_Chart_Manager extends SugarForecasting_Chart_AbstractChar
             // pull the worksheet data since we need the draft records if they exist to show what could be in draft
             // for the user, if they are the current user.
             /* @var $mgr_worksheet ForecastManagerWorksheet */
-            $mgr_worksheet = BeanFactory::getBean('ForecastManagerWorksheets');
+            $mgr_worksheet = BeanFactory::newBean('ForecastManagerWorksheets');
             $totals = $mgr_worksheet->worksheetTotals($targetedUser->id, $this->getArg('timeperiod_id'));
 
             return $totals['quota'];

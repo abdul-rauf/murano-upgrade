@@ -17,6 +17,9 @@ return array(
     'Sugarcrm\\Sugarcrm\\custom\\' => array($baseDir . '/custom/src', $baseDir . '/custom'),
     'Sugarcrm\\Sugarcrm\\' => array($baseDir . '/src', $baseDir . '/'),
     'Rhumsaa\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
-    'Elastica\\Test\\' => array($vendorDir . '/ruflin/elastica/test/lib/Elastica/Test'),
+    'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Elastica\\' => array($vendorDir . '/ruflin/elastica/lib/Elastica'),
+    'Doctrine\\Common\\Cache\\' => array($vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache'),
+    'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations'),
+    'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib/Doctrine/Common'),
 );

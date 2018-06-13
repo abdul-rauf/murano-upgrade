@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/FilterApi.php');
 class ForecastWorksheetsFilterApi extends FilterApi
 {
 
@@ -231,7 +230,8 @@ class ForecastWorksheetsFilterApi extends FilterApi
         if (!empty($args['filter'])) {
             // todo-sfa: clean this up as it currently doesn't handle much in the way of nested arrays
             foreach ($args['filter'] as $key => $filter) {
-                $filter_key = array_shift(array_keys($filter));
+                reset($filter);
+                $filter_key = key($filter);
                 // if the key is assigned_user_id, take the value and save it for later
                 if ($found_assigned_user == false && $filter_key == 'assigned_user_id') {
                     $found_assigned_user = array_pop($filter);
@@ -332,7 +332,7 @@ class ForecastWorksheetsFilterApi extends FilterApi
         if (empty($parent_type)) {
             // get the forecast_by setting
             /* @var $admin Administration */
-            $admin = BeanFactory::getBean('Administration');
+            $admin = BeanFactory::newBean('Administration');
             $settings = $admin->getConfigForModule('Forecasts', $api->platform);
             $parent_type = $settings['forecast_by'];
         }

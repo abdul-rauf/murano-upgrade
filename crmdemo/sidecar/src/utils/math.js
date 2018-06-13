@@ -154,9 +154,9 @@
          * This will compute the difference between the newValue and oldValue and figure out if it's changed
          * by at least 1 rounded out to the decimal precision that the users has set in their preferences
          *
-         * @param {String|Number} newValue      The New Value
-         * @param {String|Number} oldValue      The Old Value
-         * @param {Number} (precision)          What precision should we use (optional)
+         * @param {string|number} newValue      The New Value
+         * @param {string|number} oldValue      The Old Value
+         * @param {number} (precision)          What precision should we use (optional)
          * @return {boolean}
          */
         isDifferentWithPrecision: function(newValue, oldValue, precision) {
@@ -164,11 +164,7 @@
             var user_precision = precision || app.user.getPreference('decimal_precision');
             precision = (_.isFinite(user_precision)) ? user_precision : config.defaultCurrencySignificantDigits || 2;
             var diff = this._math('round', this.getDifference(newValue, oldValue, true), null, precision);
-
-            var diffPrecision = '0';
-            if (precision) {
-                diffPrecision = this._math('div', 0.1, Math.pow(10, precision - 1));
-            }
+            var diffPrecision = (precision === 0) ? '0' : this._math('div', 0.1, Math.pow(10, (precision-1)));
             
             // if the diff is 0 (zero) always return false, this should only happen when precision is 0
             return (diff === '0') ? false : (parseFloat(diff) >= parseFloat(diffPrecision));

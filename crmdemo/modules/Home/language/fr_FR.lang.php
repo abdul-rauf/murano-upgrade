@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - La librairie interface utilisateur pour faciliter l&#39;implentation de clients rîches.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Une classe de transfert de mail en PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink - Un "minifier" Javascript écrit en PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - Permet le code en blowfish même si l&#39;extension MCrypt n&#39;est pas installée.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - Un parseur SAX pour HTML et autres documents XML',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - Extensions pour Yahoo! User Interface Library de Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Javascript Flash Player detection.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Bienvenue sur l&#39;aide des tableaux de bord de Sugar 7',
-    'LBL_HELP_RECORD' => 'Le dashlet d&#39;aide affiche les informations spécifique concernant le module courant, les différentes actions possibles pour celui-ci, comment effectuer celles-ci, etc.
-
-Un dashlet d&#39;aide est disponible pour chacun des modules de Sugar 7 et peut être affiché ou masqué en cliquant simplement sur l&#39;îcone d&#39;aide présente dans le pied de page de l&#39;application.',
+    'LBL_HELP_RECORD_TITLE' => 'Aide',
+    'LBL_HELP_RECORD' => 'L&#39;aide affiche des informations spécifiques sur le module que vus visualisez, fournit des étapes détaillées pour la réalisation de certaines actions dans le module et vous indique où aller pour des informations plus complètes et du support.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtrer',
 );

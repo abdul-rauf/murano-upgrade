@@ -12,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 // $Id: process_workflow.php 56510 2010-05-17 18:54:49Z jenny $
 
-require_once('modules/WorkFlow/WorkFlowSchedule.php');
 
 global $app_list_strings, $app_strings, $current_language;
 
@@ -21,7 +20,7 @@ $mod_strings = return_module_language('en_us', 'WorkFlow');
 
 //run as admin
 global $current_user;
-$current_user = Scheduler::initUser();
+$current_user->getSystemUser();
 
 $process_object = new WorkFlowSchedule();
 $process_object->process_scheduled();

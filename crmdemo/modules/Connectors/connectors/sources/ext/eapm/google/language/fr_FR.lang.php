@@ -17,19 +17,19 @@ Obenez une clé et un secret API de Google en enregistrant votre instance Sugar 
 <br/><br/>
 <ol>
 <li>Allez sur le site des développeurs de Google :
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
-<li>Connectez-vous à l&#39;aide du compte Google avec lequel vous désirez enregistrer l&#39;application.</li>
+<li>Connectez-vous à l\'aide du compte Google avec lequel vous désirez enregistrer l\'application.</li>
 <li>Créez un nouveau projet</li>
 <li>Saisissez un nom de Projet et cliquez sur Créer.</li>
 <li>Une fois le projet créé, activez les API Google Drive et Google Contact</li>
 <li>Dans la section APIs & Auth > Credentials créez un nouvel id client </li>
 <li>Sélectionnez Web Application et cliquez sur Configure conscent screen</li>
 <li>Saisissez un nom de produit et cliquez sur Enregistrer</li>
-<li>Dans la section Authorized redirect URIs, saisissez l&#39;url suivante : {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
+<li>Dans la section Authorized redirect URIs, saisissez l\'url suivante : {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
 <li>Cliquez sur Créer id client</li>
-<li>Copiez l&#39;id client et le code secret du client dans les cases en-dessous</li>
+<li>Copiez l\'id client et le code secret du client dans les cases en-dessous</li>
 </li>
 </ol>
 </td></tr>

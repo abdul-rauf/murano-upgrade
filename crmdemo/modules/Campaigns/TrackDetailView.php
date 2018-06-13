@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,8 +19,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
-require_once('include/DetailView/DetailView.php');
-require_once('modules/Campaigns/Charts.php');
 
 
 global $mod_strings;
@@ -29,7 +26,7 @@ global $app_strings;
 global $app_list_strings;
 global $sugar_version, $sugar_config;
 
-$focus = BeanFactory::getBean('Campaigns');
+$focus = BeanFactory::newBean('Campaigns');
 
 $detailView = new DetailView();
 $offset = 0;
@@ -98,7 +95,7 @@ if(isset($focus->campaign_type) && $focus->campaign_type == "NewsLetter"){
         $smarty->assign("TRACK_DELETE_BUTTON","<input title=\"{$mod_strings['LBL_TRACK_DELETE_BUTTON_TITLE']}\" class=\"button\" onclick=\"this.form.module.value='Campaigns'; this.form.action.value='Delete';this.form.return_module.value='Campaigns'; this.form.return_action.value='TrackDetailView';this.form.mode.value='Test';return confirm('{$mod_strings['LBL_TRACK_DELETE_CONFIRM']}');\" type=\"submit\" name=\"button\" value=\"  {$mod_strings['LBL_TRACK_DELETE_BUTTON_LABEL']}  \">");
     }
 
-    	$currency = BeanFactory::getBean('Currencies');
+    	$currency = BeanFactory::newBean('Currencies');
     if(isset($focus->currency_id) && !empty($focus->currency_id))
     {
     	$currency->retrieve($focus->currency_id);
@@ -200,14 +197,12 @@ $chart= new campaign_charts();
 
 //end chart
 //custom chart code
-    require_once('include/SugarCharts/SugarChartFactory.php');
     $sugarChart = SugarChartFactory::getInstance();
 	$resources = $sugarChart->getChartResources();
 	$smarty->assign('chartResources', $resources);
 
 echo $smarty->fetch('modules/Campaigns/TrackDetailView.tpl');
 
-require_once('include/SubPanel/SubPanelTiles.php');
 $subpanel = new SubPanelTiles($focus, 'Campaigns');
     //if latest marketing id is empty, or if it is set to 'all'', then do no filtering, otherwise filter..
     //.. out the chart and subpanels by marketing id

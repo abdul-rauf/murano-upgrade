@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,7 +11,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 // For clearing the metadata API cache
-require_once "include/MetaDataManager/MetaDataManager.php";
 
 /**
  * Create relationship objects
@@ -225,7 +223,7 @@ class SugarRelationshipFactory {
         // DO rebuild the cache if there is a cache, there is an internal relationships
         // property and it is different than $relationships
         $rebuildApiCache = false;
-        $metaCacheKey = MetaDataManager::getManager()->getCachedMetadataHash();
+        $metaCacheKey = MetaDataManager::getManager()->getCachedMetadataHash(new MetaDataContextDefault());
         if (empty($metaCacheKey)) {
             $rebuildApiCache = !empty($this->relationships) && array_diff_key($this->relationships, $relationships) !== array();
         }
@@ -292,9 +290,25 @@ class SugarRelationshipFactory {
                         $relationships[$key] = array_merge(array('name' => $key), $def, $relDef);
                     } else {
                         $relationships[$relKey] = array_merge(array('name' => $relKey), $relDef);
-                        if(!empty($relationships[$relKey]['join_table']) && empty($relationships[$relKey]['fields'])
-                            && isset($dictionary[$relationships[$relKey]['join_table']]['fields'])) {
-                            $relationships[$relKey]['fields'] = $dictionary[$relationships[$relKey]['join_table']]['fields'];
+                        if (empty($relationships[$relKey]['fields'])) {
+                            if (isset($relationships[$relKey]['table'])) {
+                                $table = $relationships[$relKey]['table'];
+                            } elseif (isset($relationships[$relKey]['join_table'])) {
+                                $table = $relationships[$relKey]['join_table'];
+                            } else {
+                                $table = null;
+                            }
+
+                            if ($table) {
+                                if ($table == 'team_memberships') {
+                                    $tableKey = 'TeamMembership';
+                                } else {
+                                    $tableKey = $table;
+                                }
+                                if (isset($dictionary[$tableKey]['fields'])) {
+                                    $relationships[$relKey]['fields'] = $dictionary[$tableKey]['fields'];
+                                }
+                            }
                         }
                     }
                 }

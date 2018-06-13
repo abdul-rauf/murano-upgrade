@@ -17,20 +17,11 @@
  *
  */
 
-require_once('include/SugarFields/Fields/Teamset/ViewSugarFieldTeamsetCollection.php');
 require_once 'modules/Teams/TeamSetManager.php';
 
 class EmailSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection {
 
 	var $user_id;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function EmailSugarFieldTeamsetCollection($bean, $field_defs, $customMethod = '', $form_name = 'EditView')
-    {
-        self::__construct($bean, $field_defs, $customMethod, $form_name);
-    }
 
     public function __construct($bean, $field_defs, $customMethod = '', $form_name = 'EditView')
     {
@@ -140,7 +131,6 @@ class EmailSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection {
      */
     function createQuickSearchCode($returnAsJavascript=true){
         $sqs_objects = array();
-        require_once('include/QuickSearchDefaults.php');
         $qsd = QuickSearchDefaults::getQuickSearchDefaults();
         $qsd->setFormName($this->form_name);
         for($i=0; $i<$this->numFields; $i++) {
@@ -186,3 +176,4 @@ class EmailSugarFieldTeamsetCollection extends ViewSugarFieldTeamsetCollection {
     }
 
 }
+

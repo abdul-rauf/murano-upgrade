@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -35,13 +34,6 @@ class SubPanelViewTeams {
 		$this->hideNewButton = $value;
 	}
 
-    /**
-     * @deprecated
-     */
-    public function SubPanelViewTeams()
-    {
-	}
-
 	function getHeaderText($action, $currentModule){
 		///////////////////////////////////////
 		///
@@ -72,7 +64,6 @@ class SubPanelViewTeams {
 		$button .= "<input type='hidden' name='return_id' value='{$this->focus->id}'>\n";
 		$button .= "<input title='".$app_strings['LBL_SELECT_BUTTON_TITLE']
 			."' type='button' class='button' value='  ".$app_strings['LBL_SELECT_BUTTON_LABEL']
-//			."  ' name='button' onclick='window.open(\"index.php?module=Users&action=Popup&html=Popup_picker&form=TeamsDetailView&form_submit=true\",\"new\",\"width=600,height=400,resizable=1,scrollbars=1\");'>\n";
 			."  ' name='button' onclick='open_popup(\"Users\", 600, 400, \"\", false, true, {$encoded_popup_request_data});'>\n";
 		$button .= "</form>\n";
 		return $button;
@@ -96,3 +87,4 @@ class SubPanelViewTeams {
 		$ListView->processListView($this->users_list, "users", "USER");
 	}
 }
+

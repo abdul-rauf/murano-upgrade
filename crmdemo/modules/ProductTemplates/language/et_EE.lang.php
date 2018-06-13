@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -41,7 +40,7 @@ $mod_strings = array (
   'LBL_LIST_COST_PRICE' => 'Kulu:',
   'LBL_LIST_DISCOUNT_PRICE' => 'Hind:',
   'LBL_LIST_FORM_TITLE' => 'Tootekataloogide loend',
-  'LBL_LIST_LBL_MFT_PART_NUM' => 'Mft-nr',
+  'LBL_LIST_LBL_MFT_PART_NUM' => 'Osa number',
   'LBL_LIST_LIST_PRICE' => 'Loend',
   'LBL_LIST_MANUFACTURER' => 'Tootja',
   'LBL_LIST_MANUFACTURER_ID' => 'Tootja ID:',
@@ -54,7 +53,7 @@ $mod_strings = array (
   'LBL_LIST_USDOLLAR' => 'Loendi USD:',
   'LBL_MANUFACTURER_NAME'=>'Tootja nimi:',
   'LBL_MANUFACTURER' => 'Tootja:',
-  'LBL_MFT_PART_NUM' => 'Mft-osa number:',
+  'LBL_MFT_PART_NUM' => 'Osa number:',
   'LBL_MODULE_NAME' => 'Tootekataloog',
   'LBL_MODULE_NAME_SINGULAR' => 'Tootekataloog',
   'LBL_MODULE_ID' => 'Toote mallid',

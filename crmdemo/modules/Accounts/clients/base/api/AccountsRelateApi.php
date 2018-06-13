@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'clients/base/api/RelateApi.php';
 
 class AccountsRelateApi extends RelateApi
 {
@@ -69,7 +68,7 @@ class AccountsRelateApi extends RelateApi
         }
 
         $linkModuleName = $record->$linkName->getRelatedModuleName();
-        $linkSeed = BeanFactory::getBean($linkModuleName);
+        $linkSeed = BeanFactory::newBean($linkModuleName);
         if (!$linkSeed->ACLAccess('list')) {
             throw new SugarApiExceptionNotAuthorized(
                 sprintf(

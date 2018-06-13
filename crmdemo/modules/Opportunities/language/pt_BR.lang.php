@@ -166,24 +166,24 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'O módulo {{plural_module_name}} permite que você rastreie as vendas individuais do início ao fim. Cada registro de {{module_name}} representa uma possível venda e inclui dados de venda relevantes, bem como dados relativos a outros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc. Um {{module_name}} normalmente avança por vários estágios de vendas até seja marcado com "Fechado ganho" ou "Fechado perdido". {{plural_module_name}} pode ser aproveitado ainda mais usando o módulo Sugar de {{forecasts_singular_module}} para entender e prever as tendências de vendas, bem como focar o trabalho para atingir as cotas de vendas.',
+    'LBL_HELP_RECORDS' => 'O módulo {{plural_module_name}} permite rastrear vendas individuais do começo ao fim. Cada registro em {{module_name}} representa uma venda em potencial e inclui dados de venda relevantes, bem como dados relacionados a outros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc. O módulo {{module_name}} normamente avança pelas várias Etapas de Vendas até ser marcado como "Fechada ganha" or "Fechada perdida". O módulo {{plural_module_name}} pode ser aproveitado ainda mais com o módulo de {{forecasts_singular_module}} da Sugar para entender e prever as tendências de vendas, além de concentrar o trabalho no alcance das cotas de vendas.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'O módulo {{plural_module_name}} permite que você controle as vendas individuais e os itens de linha pertencentes a essas vendas do início ao fim. Cada registro {{module_name}} representa um possível venda e inclui dados de vendas relevantes, bem como dados referentes a outros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'O módulo {{plural_module_name}} permite que você controle as vendas individuais e os itens de linha pertencentes a essas vendas do início ao fim. Cada registro {{module_name}} representa uma venda em potencial e inclui dados de venda relevantes, bem como dados referentes a outros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
 - Edite os campos desse registro clicando em um campo individual ou no botão Editar.
 - Visualize ou modifique links para outros registros nos subpainéis, colocando o painel inferior esquerdo como "Visualização de dados".
-- Visualize e faça comentários de usuário e do histórico de alterações de registros em {{activitystream_singular_module}} colocando o painel esquerdo inferior como "Fluxo de atividades".
+- Visualize e faça comentários de usuário e o histórico de alterações de registro em {{activitystream_singular_module}} colocando o painel esquerdo inferior como "Cadeia de atividades".
 - Siga ou marque como favorito esse registro usando os ícones à direita do nome do registro.
 - Ações adicionais estão disponíveis no menu suspenso Ações, à direita do botão Editar.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'O módulo {{plural_module_name}} permite que você controle as vendas individuais e os itens de linha pertencentes a essas vendas do início ao fim. Cada registro {{module_name}} representa uma possível venda e inclui dados de vendas relevantes, bem como referente a outros registros importantes, tais como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'O módulo {{plural_module_name}} permite que você controle as vendas individuais e os itens de linha pertencentes a essas vendas do início ao fim. Cada registro {{module_name}} representa uma venda em otencial e dados de venda relevantes, bem como dados referentes a outros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
 Para criar um {{module_name}}:
 1. Forneça valores para os campos conforme desejado.
-  - Os campos marcados "Obrigatório" devem ser preenchidos antes de salvar.
-  - Clique em "Mostrar mais" para expor campos adicionais, se necessário.
+- Os campos marcados "Obrigatório" devem ser preenchidos antes de salvar.
+- Clique em "Mostrar mais" para expor campos adicionais, se necessário.
 2. Clique em "Salvar" para finalizar o novo registro e voltar à página anterior.',
 
 // END PRO/CORP

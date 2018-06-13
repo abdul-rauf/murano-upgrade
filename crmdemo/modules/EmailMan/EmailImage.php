@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,8 +14,7 @@ if(empty($_REQUEST['id']) || !preg_match("/^[\w\d\-]+$/", $_REQUEST['id'])) {
 	die("Not a Valid Entry Point");
 }
 global $mod_strings;
-require_once('modules/Notes/Note.php');
-$note = BeanFactory::getBean('Notes');
+$note = BeanFactory::newBean('Notes');
 //check if file is an email image
 if (!$note->retrieve_by_string_fields(array('id' => $_REQUEST['id'], 'parent_type' => "Emails"))) {
 	die($mod_strings['LBL_INVALID_ENTRY_POINT']);

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 // Check to see if we have already registered our upload stream wrapper
 if (!in_array('upload', stream_get_wrappers())) {
-    require_once 'include/upload_file.php';
     UploadStream::register();
 }
 
@@ -39,7 +37,6 @@ class DownloadFile {
             } elseif ($def['type'] == 'file') {
                 $info = $this->getFileInfo($bean, $field);
 
-                require_once 'include/SugarFields/SugarFieldHandler.php';
                 $sfh = new SugarFieldHandler();
                 /* @var $sf SugarFieldFile */
                 $sf = $sfh->getSugarField($def['type']);
@@ -250,7 +247,7 @@ class DownloadFile {
         }
 
         $zip = new ZipArchive();
-        $zip->open($archive, ZIPARCHIVE::OVERWRITE);
+        $zip->open($archive, ZipArchive::OVERWRITE);
         foreach ($files as $file => $path) {
             $zip->addFromString($file, file_get_contents($path));
         }

@@ -1,6 +1,4 @@
 <?php
-if (! defined ( 'sugarEntry' ) || ! sugarEntry)
-    die ( 'Not A Valid Entry Point' ) ;
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,7 +20,6 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
  * There are two relevant modules for every subpanel - the module whose detailview this subpanel will appear in ($module_name), and the module that is the source of the data for the subpanel ($subPanelParentModule)
  */
 
-require_once ('modules/ModuleBuilder/parsers/parser.modifylistview.php') ;
 
 class ParserModifySubPanel extends ParserModifyListView
 {
@@ -33,8 +30,17 @@ class ParserModifySubPanel extends ParserModifyListView
     var $available = array ( ) ;
     var $columns = array ( 'LBL_DEFAULT' => 'getDefaultFields' , 'LBL_HIDDEN' => 'getAvailableFields' ) ;
 
-    function init ($module_name , $subPanelName)
+    /**
+     * {@inheritDoc}
+     *
+     * @param string $module_name
+     * @param string $subPanelName
+     */
+    public function init($module_name, $subPanelName = '')
     {
+        if (empty($subPanelName)) {
+            throw new \BadMethodCallException('Missing required argument $subPanelName');
+        }
         $GLOBALS [ 'log' ]->debug ( "in ParserModifySubPanel: module_name={$module_name} child_module={$subPanelName}" ) ;
         $this->moduleName = $module_name ;
         $this->subPanelName = $subPanelName ;
@@ -46,7 +52,6 @@ class ParserModifySubPanel extends ParserModifyListView
         // Retrieve the definitions for all the available subpanels for this module
         $module = BeanFactory::newBeanByName($beanListLower[ strtolower( $this->moduleName )]);
 
-        require_once ('include/SubPanel/SubPanelDefinitions.php') ;
         $spd = new SubPanelDefinitions ( $module ) ;
 
         // Get the lists of fields already in the subpanel and those that can be added in
@@ -161,7 +166,6 @@ class ParserModifySubPanel extends ParserModifyListView
     function handleSave ()
     {
         $GLOBALS [ 'log' ]->debug ( "in ParserModifySubPanel->handleSave()" ) ;
-        require_once ('include/SubPanel/SubPanel.php') ;
         $subpanel = new SubPanel ( $this->moduleName, 'fab4', $this->subPanelName, $this->panel ) ;
 
         $newFields = array ( ) ;
@@ -192,8 +196,11 @@ class ParserModifySubPanel extends ParserModifyListView
                 {
                     $vname = $this->panel->template_instance->field_defs [ $field ] [ 'vname' ] ;
                 }
-                if (($this->subPanelParentModule != null) && (isset ( $this->subPanelParentModule->field_name_map [ $field ] ) && ($this->subPanelParentModule->field_name_map [ $field ] [ 'type' ] == 'bool' || (isset ( $this->subPanelParentModule->field_name_map [ $field ] [ 'custom_type' ] ) && $this->subPanelParentModule->field_name_map [ $field ] [ 'custom_type' ] == 'bool'))))
-                {
+                if ($this->subPanelParentModule != null
+                    && (isset($this->subPanelParentModule->field_defs[$field])
+                        && ($this->subPanelParentModule->field_defs[$field]['type'] == 'bool'
+                            || (isset($this->subPanelParentModule->field_defs[$field]['custom_type'])
+                                && $this->subPanelParentModule->field_defs[$field]['custom_type'] == 'bool')))) {
                     $newFields [ $field ] = array ( 'name' => $field , 'vname' => $vname , 'widget_type' => 'checkbox' ) ;
                 } else
                 {
@@ -223,4 +230,3 @@ class ParserModifySubPanel extends ParserModifyListView
     }
 
 }
-?>

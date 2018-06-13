@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -35,7 +34,6 @@ require_once('modules/WorkFlowAlerts/MetaArray.php');
 
 // WorkFlowAlert is used to store the workflow alert component information.
 class WorkFlowAlert extends SugarBean {
-	var $field_name_map;
 	// Stored fields
 	var $id;
 	var $deleted;
@@ -235,8 +233,7 @@ function get_rel_module($base_module, $var_rel_name){
 	
 	//get the vardef fields relationship name
 	//get the base_module bean
-	$module_bean = BeanFactory::getBean($base_module);
-	require_once('data/Link.php');
+	$module_bean = BeanFactory::newBean($base_module);
 	$rel_name = Relationship::retrieve_by_modules($var_rel_name, $this->base_module, $GLOBALS['db']);
 	if(!empty($module_bean->field_defs[$rel_name])){
 		$var_rel_name = $rel_name;
@@ -274,7 +271,7 @@ function handleFilterSave($prefix, $target_vardef_field, $target_rel_type){
 	} else {
 		$rel_filter_id = "";
 	}
-	$rel_object = BeanFactory::getBean('Expressions');
+	$rel_object = BeanFactory::newBean('Expressions');
 
 	//Checked if there is an advanced filter
 	if($this->$target_rel_type!="filter"){

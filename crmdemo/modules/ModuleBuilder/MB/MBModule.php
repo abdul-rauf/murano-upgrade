@@ -16,10 +16,8 @@ use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 define('MB_TEMPLATES', 'include/SugarObjects/templates');
 define('MB_IMPLEMENTS', 'include/SugarObjects/implements');
-require_once 'modules/ModuleBuilder/MB/MBVardefs.php';
-require_once 'modules/ModuleBuilder/MB/MBRelationship.php';
-require_once 'modules/ModuleBuilder/MB/MBLanguage.php';
-require_once 'include/MetaDataManager/MetaDataConverter.php';
+
+require_once 'modules/ModuleBuilder/parsers/constants.php';
 
 class MBModule
 {
@@ -707,7 +705,6 @@ class MBModule
         if (file_exists ( $subpanelDir ))
         {
             $f = dir ( $subpanelDir ) ;
-            require_once 'modules/ModuleBuilder/parsers/relationships/AbstractRelationships.php' ;
 
             while ( $g = $f->read () )
             {
@@ -1135,7 +1132,8 @@ class MBModule
     public function getModuleType()
     {
         // The last key in the template array it the type
-        return end(array_keys($this->config['templates']));
+        $templateKeys = array_keys($this->config['templates']);
+        return end($templateKeys);
     }
 
     /**

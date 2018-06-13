@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('clients/base/api/ConfigModuleApi.php');
 
 class ForecastsConfigApi extends ConfigModuleApi
 {
@@ -73,7 +72,7 @@ class ForecastsConfigApi extends ConfigModuleApi
             );
         }
 
-        $admin = BeanFactory::getBean('Administration');
+        $admin = BeanFactory::newBean('Administration');
         //track what settings have changed to determine if timeperiods need rebuilt
         $prior_forecasts_settings = $admin->getConfigForModule('Forecasts', $api->platform);
 

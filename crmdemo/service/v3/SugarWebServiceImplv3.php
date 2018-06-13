@@ -11,7 +11,6 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 require_once 'service/core/SugarWebServiceImpl.php';
-require_once 'service/v3/SugarWebServiceUtilv3.php';
 
 use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 
@@ -44,7 +43,7 @@ class SugarWebServiceImplv3 extends SugarWebServiceImpl {
         $GLOBALS['log']->info('Begin: SugarWebServiceImpl->login');
         global $sugar_config;
         $error = new SoapError();
-        $user = BeanFactory::getBean('Users');
+        $user = BeanFactory::newBean('Users');
         $success = false;
         if(!empty($user_auth['encryption']) && $user_auth['encryption'] === 'PLAIN')
         {
@@ -177,11 +176,15 @@ class SugarWebServiceImplv3 extends SugarWebServiceImpl {
      *
      * @param String $session -- Session ID returned by a previous call to login.
      * @param array $module_name(s) -- The name of the module(s) to return records from.  This name should be the name the module was developed under (changing a tab name is studio does not affect the name that should be passed into this method)..
+     * @param array $a_type
+     * @param array $a_view
+     * @param bool $md5
      * @return array $type The type(s) of views requested.  Current supported types are 'default' (for application) and 'wireless'
      * @return array $view The view(s) requested.  Current supported types are edit, detail, list, and subpanel.
      * @exception 'SoapFault' -- The SOAP error, if any
      */
-    function get_module_layout($session, $a_module_names, $a_type, $a_view,$md5 = FALSE){
+    public function get_module_layout($session, $a_module_names, $a_type, $a_view, $md5 = false)
+    {
     	$GLOBALS['log']->info('Begin: SugarWebServiceImpl->get_module_layout');
 
     	global  $beanList, $beanFiles;
@@ -195,7 +198,7 @@ class SugarWebServiceImplv3 extends SugarWebServiceImpl {
                 continue;
             }
 
-            $seed = BeanFactory::getBean($module_name);
+            $seed = BeanFactory::newBean($module_name);
 
             foreach ($a_view as $view)
             {
@@ -230,7 +233,7 @@ class SugarWebServiceImplv3 extends SugarWebServiceImpl {
      */
     function get_module_layout_md5($session, $module_name, $type, $view){
     	$GLOBALS['log']->info('Begin: SugarWebServiceImpl->get_module_layout_md5');
-    	$results = self::get_module_layout($session, $module_name, $type, $view, TRUE);
+        $results = $this->get_module_layout($session, $module_name, $type, $view, true);
             return array('md5'=> $results);
     	$GLOBALS['log']->info('End: SugarWebServiceImpl->get_module_layout_md5');
     }
@@ -301,7 +304,7 @@ class SugarWebServiceImplv3 extends SugarWebServiceImpl {
             }
 
             if($module == 'Home') $module = '';
-    	    $tracker = BeanFactory::getBean('Trackers');
+    	    $tracker = BeanFactory::newBean('Trackers');
             $entryList = $tracker->get_recently_viewed($GLOBALS['current_user']->id, $module);
             foreach ($entryList as $entry)
                 $results[] = $entry;
@@ -367,7 +370,6 @@ class SugarWebServiceImplv3 extends SugarWebServiceImpl {
     		$sugar_config['list_max_entries_per_page'] = $max_results;
     	}
 
-    	require_once('modules/Home/UnifiedSearchAdvanced.php');
     	require_once 'include/utils.php';
     	$usa = new UnifiedSearchAdvanced();
         if(!file_exists($cachedfile = sugar_cached('modules/unified_search_modules.php'))) {
@@ -398,7 +400,7 @@ class SugarWebServiceImplv3 extends SugarWebServiceImpl {
     				$unifiedSearchFields[$name] [ $field ]['value'] = $search_string;
     			}
 
-    			$seed = BeanFactory::getBean($name);
+    			$seed = BeanFactory::newBean($name);
     			require_once 'include/SearchForm/SearchForm2.php' ;
     			if ($beanName == "User"
     			    || $beanName == "ProjectTask"
@@ -575,7 +577,7 @@ class SugarWebServiceImplv3 extends SugarWebServiceImpl {
     			$submodulename = $mod->$link_field_name->getRelatedModuleName();
 
     			foreach($list as $row) {
-    				$submoduleobject = BeanFactory::getBean($submodulename);
+    				$submoduleobject = BeanFactory::newBean($submodulename);
     				// set all the database data to this object
     				foreach ($filterFields as $field) {
     					$submoduleobject->$field = $row[$field];

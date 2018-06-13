@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Element din ofertă',
     'LBL_LIST_MANUFACTURER' => 'Producator',
     'LBL_MANUFACTURERS' => 'Producători',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Mft Num',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Număr componentă',
     'LBL_LIST_QUANTITY' => 'Cantitate',
     'LBL_LIST_COST_PRICE' => 'Cost',
     'LBL_LIST_DISCOUNT_PRICE' => 'Pret',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Reducere in %',
     'LBL_LIST_PRICE' => 'Lista preturi:',
     'LBL_VENDOR_PART_NUM' => 'Nume parte furnizor:',
-    'LBL_MFT_PART_NUM' => 'Numarul parte al producatorului:',
+    'LBL_MFT_PART_NUM' => 'Număr componentă:',
     'LBL_NEXT_STEP' => 'Pasul următor:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Data discount pret',
     'LBL_WEIGHT' => 'Greutate:',
@@ -168,6 +168,8 @@ Pentru a crea {{module_name}}:
 - Faceţi clic pe "Afişare mai multe" pentru a afişa câmpuri suplimentare, dacă este necesar.
 2. Faceţi clic pe "Salvare" pentru a finaliza noua înregistrare şi pentru a reveni la pagina anterioară.',
 
-    'LBL_MANUFACTURERS' => 'Producători',
     'LBL_PRODUCT_POSITION' => 'Poziţie grup de produse',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Listă date ofertă articole de linie ofertate',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Articol de linie nou ofertat)',
+    'LBL_DISCOUNT_PERCENT' => 'Procentaj %',
 );

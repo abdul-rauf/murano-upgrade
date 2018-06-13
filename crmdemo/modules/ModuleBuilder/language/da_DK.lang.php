@@ -301,7 +301,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Klik for at redigere dette modul.',
         'moduleHelp'=> '<b>Vælg det modulkomponent, som du ønsker at redigere</b>',
         'fieldsBtn'	=> '<b>Du kan redigere og oprette brugerdefinerede felter her.</b>',
-        'labelsBtn' => 'Klik <b>Save</b> for at gemme dine brugerdefinerede labels.'	,
         'layoutsBtn'=> '<b>Tilpas layoutet for rediger-, detalje-, liste- og søgningsvisning.</b>',
         'subpanelBtn'=> '<b>Rediger hvilke oplysninger, der vises i dette moduls underpaneler.</b>',
         'layoutsHelp'=> 'Vælg et <b>Layout til redigering</b>. <br/<br/> For at ændre layoutet, der indeholder datafelter til indtastning af data, skal du klikke på <b>Redigér visning</b>. <br/> <br/> Hvis du vil ændre layoutet, der viser de indtastede data i felterne i Edit View klik på <b> Detaljeret visning</b>. <br/><br/> For at ændre kolonnerne, der vises i standard, klik på <b>Listevisning</b>. <br/><br/> For at ændre Basis og Avanceret søgning for layouts, klik på <b>Søg</b>.',
@@ -736,10 +735,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Er du sikker på du ønsker at slette Lukket Tabt salgsfase? Sletning af denne fase vil medføre at prognosemodulet ikke fungerer korrekt',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Er du sikker på, at du vil slette denne relation?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Derved bliver denne relation permanent. Er du sikker på, at du vil installere denne relation?',
 'LBL_CONFIRM_DONT_SAVE' => 'Der er foretaget ændringer, siden du sidst gemte. Vil du gemme?',

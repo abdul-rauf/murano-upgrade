@@ -1,6 +1,5 @@
 <?php
 
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,6 +13,27 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">새 어플리케이션을 등록하여 Citrix Online GoToMeeting에 API Key를 얻으십시오.<br> &nbsp;<br> 인스턴스 등록 단계는 다음과 같습니다:<br> &nbsp;<br> <ol> <li>Citrix Online 개발자 계정에 로그인합니다. <a href=&#39;https://developer.citrixonline.com/&#39; target=&#39;_blank&#39;>https://developer.citrixonline.com/</a></li> <li>개발자 키 신청 를 클릭합니다.</li> <li>제품 API 에서 GoToMeeting을 선택한 후 어플리케이션 URL 에 자신의 인스턴스 URL을 입력합니다.</li> <li>자신의 어플리케이션 에서 API Key라는 열이 표시됩니다.</li> <li>아래에 복사합니다.</li> </ol> </td></tr></table>',
-    'oauth_consumer_key' => 'API 키',
+'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
+Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+&nbsp;<br>
+Steps to register your instance:<br>
+&nbsp;<br>
+<ol>
+    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Click on My Apps</li>
+    <li>Click on Add a new App</li>
+    <li>Complete all fields on the Add App form:</li>
+        <ul>
+            <li>App Name</li>
+            <li>Description</li>
+            <li>Product API: Select GoToMeeting</li>
+            <li>Application URL: Enter your instance URL</li>
+        </ul>
+    <li>Click the Create App Button</li>
+    <li>From the list of apps, click on the name of your app</li>
+    <li>Click on the Keys tab</li>
+    <li>Copy the Consumer Key value and enter it below</li>
+</ol>
+</td></tr></table>',
+    'oauth_consumer_key' => 'Consumer Key',
 );

@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -28,7 +27,7 @@ function get_node_data($params,$get_array=false) {
 	foreach ($nodes as $node) {
 		$ret['nodes'][]=$node->get_definition();
 	}
-	$json = new JSON(JSON_LOOSE_TYPE);
+	$json = new JSON();
 	$str=$json->encode($ret);
 	return $str;
 }
@@ -85,24 +84,26 @@ function get_node_data($params,$get_array=false) {
  
 function get_documents($cat_id, $subcat_id,$href=true) {
     $db = DBManagerFactory::getInstance();
-    $query="select * from documents where deleted=0";
+    $builder = $db->getConnection()->createQueryBuilder();
+    $builder->select('*')->from('documents')->where('deleted = 0');
+
     if ($cat_id != 'null') {
-        $query.=" and category_id = " . $db->quoted($cat_id);
+        $builder->andWhere('category_id = ' . $builder->createPositionalParameter($cat_id));
     } else {
-        $query.=" and category_id is null";
+        $builder->andWhere('category_id IS NULL');
     }
-        
+
     if ($subcat_id != 'null') {
-        $query.=" and subcategory_id = " . $db->quoted($subcat_id);
+        $builder->andWhere('subcategory_id = ' . $builder->createPositionalParameter($subcat_id));
     } else {
-        $query.=" and subcategory_id is null";
+        $builder->andWhere('subcategory_id IS NULL');
     }
-    $result=$GLOBALS['db']->query($query);
-    $current_cat_id=null;
+
+    $stmt = $builder->execute();
 
     $nodes=array();
     $href_string = "javascript:select_document('doctree')";
-    while (($row=$GLOBALS['db']->fetchByAssoc($result))!= null) {
+    while ($row = $stmt->fetch()) {
         $node = new Node($row['id'], $row['document_name']);
         if ($href) {
             $node->set_property("href", $href_string);

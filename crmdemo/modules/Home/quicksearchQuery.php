@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -17,15 +16,15 @@ if(class_exists('quicksearchQueryCustom')) {
 }
 else
 {
-    $quicksearchQuery = new quicksearchQuery();
+    $quicksearchQuery = new QuickSearchQuery();
 }
 
 $json = getJSONobj();
 $data = $json->decode(html_entity_decode($_REQUEST['data']));
 if(isset($_REQUEST['query']) && !empty($_REQUEST['query'])){
     foreach($data['conditions'] as $k=>$v){
-        if (empty($data['conditions'][$k]['value']) && ($data['conditions'][$k]['op'] != quicksearchQuery::CONDITION_EQUAL))
-        {
+        if (empty($data['conditions'][$k]['value'])
+            && ($data['conditions'][$k]['op'] != QuickSearchQuery::CONDITION_EQUAL)) {
             $data['conditions'][$k]['value']=urldecode($_REQUEST['query']);
         }
     }

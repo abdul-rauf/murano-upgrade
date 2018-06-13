@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'Bilaga',
     'LBL_REVENUELINEITEMS' => 'Intäktsposter',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'Accounts förhandsvisning',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Anteckningar',
 
     // Help Text

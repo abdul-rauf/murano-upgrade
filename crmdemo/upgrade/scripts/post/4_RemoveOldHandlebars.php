@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -50,7 +49,7 @@ class SugarUpgradeRemoveOldHandlebars extends UpgradeScript
         $hbts = new RegexIterator($iter, '/.*\.hbt$/', RegexIterator::GET_MATCH);
         foreach ($hbts as $hbt) {
             list($filename) = $hbt;
-            $this->fileToDelete($filename);
+            $this->upgrader->fileToDelete($filename, $this);
         }
     }
 }

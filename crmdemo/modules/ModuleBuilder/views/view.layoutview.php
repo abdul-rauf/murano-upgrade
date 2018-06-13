@@ -1,7 +1,4 @@
 <?php
-if (! defined ( 'sugarEntry' ) || ! sugarEntry)
-    die ( 'Not A Valid Entry Point' ) ;
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,25 +10,12 @@ if (! defined ( 'sugarEntry' ) || ! sugarEntry)
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
-
-require_once ('modules/ModuleBuilder/parsers/ParserFactory.php') ;
-require_once ('modules/ModuleBuilder/MB/AjaxCompose.php') ;
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;
-require_once 'modules/ModuleBuilder/MB/MBHelper.php';
 
 class ViewLayoutView extends SugarView
 {
     /** @var GridLayoutMetaDataParser */
     protected $parser;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ViewLayoutView($bean = null, $view_object_map = array(), Request $request = null)
-    {
-        self::__construct($bean, $view_object_map, $request);
-    }
 
     public function __construct($bean = null, $view_object_map = array(), $request = null)
     {

@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,6 +14,8 @@
  * new non-MB modules. Move new non-MB modules into BWC mode.
  */
 require_once 'ModuleInstall/ModuleInstaller.php';
+
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 class SugarUpgradeScanModules extends UpgradeScript
 {
@@ -72,7 +73,7 @@ class SugarUpgradeScanModules extends UpgradeScript
         if(!is_readable($hookfile)) {
             return;
         }
-        include $hookfile;
+        include FileLoader::validateFilePath($hookfile);
         if(empty($hook_array)) {
             return;
         }
@@ -229,7 +230,7 @@ class SugarUpgradeScanModules extends UpgradeScript
         $status = true;
         $dictionary = array();
         if (is_file('modules/' . $module . '/vardefs.php')) {
-            include('modules/' . $module . '/vardefs.php');
+            include FileLoader::validateFilePath('modules/' . $module . '/vardefs.php');
         }
 
         foreach($GLOBALS['dictionary'][$object]['fields'] as $key => $value) {

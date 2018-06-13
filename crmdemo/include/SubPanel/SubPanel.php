@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -30,15 +29,6 @@ class SubPanel
 	var $subpanel_defs;
 	var $subpanel_query=null;
     var $layout_def_key='';
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SubPanel($module, $record_id, $subpanel_id, $subpanelDef, $layout_def_key = '')
-    {
-        self::__construct($module, $record_id, $subpanel_id, $subpanelDef, $layout_def_key);
-    }
-
     public function __construct($module, $record_id, $subpanel_id, $subpanelDef, $layout_def_key = '')
 	{
 		global $theme, $focus, $app_strings;
@@ -63,7 +53,6 @@ class SubPanel
 		if (empty($subpanelDef)) {
 			//load the subpanel by name.
 			if (!class_exists('MyClass')) {
-				require_once 'include/SubPanel/SubPanelDefinitions.php' ;
 			}
 			$panelsdef=new SubPanelDefinitions($result,$layout_def_key);
 			$subpanelDef=$panelsdef->load_subpanel($subpanel_id);
@@ -212,9 +201,7 @@ class SubPanel
 
   public static function getModuleSubpanels($module)
   {
-  	require_once('include/SubPanel/SubPanelDefinitions.php');
-
-  	$mod = BeanFactory::getBean($module);
+  	$mod = BeanFactory::newBean($module);
   	if(empty($mod)) {
 		return array();
 	}
@@ -363,3 +350,4 @@ class SubPanel
 		return $ret_val;
 	}
 }
+

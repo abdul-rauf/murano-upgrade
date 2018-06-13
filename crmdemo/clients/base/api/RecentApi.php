@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'data/BeanFactory.php';
-require_once 'include/api/SugarApi.php';
 
 class RecentApi extends SugarApi
 {
@@ -46,7 +44,7 @@ class RecentApi extends SugarApi
      * @param arrat $args Arguments from request.
      * @return array options after setup.
      */
-    protected function parseArguments($args)
+    protected function parseArguments(array $args)
     {
         $options = array();
         $options['limit'] = !empty($args['limit']) ? (int) $args['limit'] : 20;
@@ -104,7 +102,7 @@ class RecentApi extends SugarApi
      * @param string $acl (optional) ACL action to check, default is `list`.
      * @return array List of recently viewed records.
      */
-    public function getRecentlyViewed($api, $args, $acl = 'list')
+    public function getRecentlyViewed(ServiceBase $api, array $args, $acl = 'list')
     {
         $this->requireArgs($args, array('module_list'));
 
@@ -174,7 +172,7 @@ class RecentApi extends SugarApi
      * @param array $options Prepared options.
      * @return SugarQuery query to execute.
      */
-    protected function getRecentlyViewedQueryObject($seed, $options)
+    protected function getRecentlyViewedQueryObject(SugarBean $seed, array $options)
     {
         $currentUser = $this->getUserBean();
 
@@ -184,19 +182,10 @@ class RecentApi extends SugarApi
         // FIXME: FRM-226, logic for these needs to be moved to SugarQuery
 
         // Since tracker relationships don't actually exist, we're gonna have to add a direct join
-        $query->joinRaw(
-            sprintf(
-                " JOIN tracker ON tracker.item_id=%s.id AND tracker.module_name='%s' AND tracker.user_id='%s' ",
-                $query->from->getTableName(),
-                $query->from->module_name,
-                $currentUser->id
-            ),
-            array('alias' => 'tracker')
-        );
-
-        // we need to set the linkName to hack around tracker not having real relationships
-        /* TODO think about how to fix this so we can be less restrictive to raw joins that don't have a relationship */
-        $query->join['tracker']->linkName = 'tracker';
+        $join = $query->joinTable('tracker');
+        $join->on()->equalsField('tracker.item_id', $query->from->getTableName() . '.id')
+            ->equals('tracker.module_name', $query->from->module_name)
+            ->equals('tracker.user_id', $currentUser->id);
 
         $query->select(array('id', array('tracker.module_name', 'module_name')));
 
@@ -205,6 +194,9 @@ class RecentApi extends SugarApi
             $td->modify($options['date']);
             $query->where()->queryAnd()->gte('tracker.date_modified', $td->asDb());
         }
+
+        // We should only show recent items that are visible
+        $query->where()->queryAnd()->equals('tracker.visible', 1);
 
         foreach ($query->select()->select as $v) {
             $query->groupBy($v->table . '.' . $v->field);

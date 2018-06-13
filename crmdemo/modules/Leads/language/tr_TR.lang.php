@@ -267,9 +267,6 @@ $mod_strings = array (
 	'LBL_EDIT_INLINE' => 'Değiştir' /*for 508 compliance fix*/,
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Asıl Id',
-    'LBL_DNB_BAL_PREVIEW' => 'Potansiyelleri Önizleme',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Potansiyeller',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: Potansiyel Bilgisi',
     //Dashlet
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Fırsatlar',
 

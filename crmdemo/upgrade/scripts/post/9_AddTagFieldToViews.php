@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -212,7 +211,7 @@ class SugarUpgradeAddTagFieldToViews extends UpgradeScript
         if (isModuleBWC($module) || isset($this->skipModules[$module])) {
             return false;
         }
-        $bean = BeanFactory::getBean($module);
+        $bean = BeanFactory::newBean($module);
         if (isset($bean->field_defs['tag'])) {
             return true;
         }

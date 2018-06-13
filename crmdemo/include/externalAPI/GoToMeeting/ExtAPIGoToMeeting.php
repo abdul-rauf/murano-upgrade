@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/externalAPI/Base/OAuthPluginBase.php');
-require_once('include/externalAPI/Base/WebMeeting.php');
 
 /**
  * Class ExtAPIGoToMeeting
@@ -19,7 +17,7 @@ require_once('include/externalAPI/Base/WebMeeting.php');
 class ExtAPIGoToMeeting extends OAuthPluginBase implements WebMeeting
 {
     protected $dateFormat = 'Y-m-d\TH:i:s';
-    protected $url = 'https://api.citrixonline.com/';
+    protected $url = 'https://api.getgo.com/';
 
     public $supportedModules = array('Meetings');
     public $supportMeetingPassword = false;

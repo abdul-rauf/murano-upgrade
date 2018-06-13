@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - vartotojo interfeiso biblioteka',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - PHP klasė laiškams siųsti',
   'LBL_SOURCE_JSHRINK' => 'JShrink - Javascript kodo suspaudėjas, parašytas PHP kalba',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - užkodavimo įrankis',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - SAX analizatorius',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - praplėtimai skirti Yahoo! Sukūrė Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - Javascript Flash Player rodymas.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Welcome to the Sugar 7 Help Dashboard',
-    'LBL_HELP_RECORD' => 'The Help Dashlet displays specific information about the module you are viewing, provides detailed steps for performing some actions in the module, and directs you where to go for more comprehensive information and support. The Help Dashlet remains open so you can view the steps as you execute the steps in the module.
-
-The Help Dashboard is available for all Sugar 7 modules and can be toggled "open" and "closed" by clicking the Help icon in the application footer.',
+    'LBL_HELP_RECORD_TITLE' => 'Žinynas',
+    'LBL_HELP_RECORD' => 'Žinyne nurodoma tam tikra informacija apie šiuo metu peržiūrimą modulį, pateikiamas išsamus aprašymas, kaip atlikti kai kuriuos modulio veiksmus ir nukreipiama, kur ieškoti išsamesnės informacijos ir pagalbos.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtruoti',
 );

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -93,9 +92,7 @@ function sync_get_modified_relationships($session, $module_name, $related_module
 		$query .= "( {0}.deleted = 0)";
 	}
 	if(isset($module_id) && !empty($module_id)){
-		//if(isset($in) && !empty($in)){
 			$query .= " AND";
-		//}
         $query .= " m2.id = '".$GLOBALS['db']->quote($module_id)."'";
 	}
 	if($related_module == 'Meetings' || $related_module == 'Calls'){
@@ -149,7 +146,7 @@ function get_modified_entries($session, $module_name, $ids, $select_fields ){
 		return array('field_list'=>$field_list, 'entry_list'=>array(), 'error'=>$error->get_soap_array());
 	}
 
-	$seed = BeanFactory::getBean($module_name);
+	$seed = BeanFactory::newBean($module_name);
 	if(empty($seed)){
 		$error->set_error('no_module');
 		return array('field_list'=>$field_list, 'entry_list'=>array(), 'error'=>$error->get_soap_array());
@@ -244,7 +241,7 @@ function get_attendee_list($session, $module_name, $id){
 		return array('field_list'=>$field_list, 'entry_list'=>array(), 'error'=>$error->get_soap_array());
 	}
 
-	$seed = BeanFactory::getBean($module_name);
+	$seed = BeanFactory::newBean($module_name);
 	if(empty($seed)){
 		$error->set_error('no_module');
 		return array('field_list'=>$field_list, 'entry_list'=>array(), 'error'=>$error->get_soap_array());
@@ -261,7 +258,7 @@ function get_attendee_list($session, $module_name, $id){
 					$join_field = "call";
 				$xml .= '<attendees>';
 				$result = $seed->db->query("SELECT users.id, $table_name.date_modified, first_name, last_name FROM users INNER JOIN $table_name ON $table_name.user_id = users.id WHERE ".$table_name.".".$join_field."_id = '".$GLOBALS['db']->quote($id)."' AND $table_name.deleted = 0");
-				$user = BeanFactory::getBean('Users');
+				$user = BeanFactory::newBean('Users');
 				while($row = $seed->db->fetchByAssoc($result))
 				{
 					$user->id = $row['id'];
@@ -276,7 +273,7 @@ function get_attendee_list($session, $module_name, $id){
 				//now get contacts
 				$table_name = $l_module_name."_contacts";
 				$result = $seed->db->query("SELECT contacts.id, $table_name.date_modified, first_name, last_name FROM contacts INNER JOIN $table_name ON $table_name.contact_id = contacts.id INNER JOIN $seed->table_name ON ".$seed->table_name.".id = ".$table_name.".".$join_field."_id WHERE ".$table_name.".".$join_field."_id = '".$GLOBALS['db']->quote($id)."' AND ".$table_name.".deleted = 0 AND (contacts.id != ".$seed->table_name.".parent_id OR ".$seed->table_name.".parent_id IS NULL)");
-				$contact = BeanFactory::getBean('Contacts');
+				$contact = BeanFactory::newBean('Contacts');
 				while($row = $seed->db->fetchByAssoc($result))
 				{
 					$contact->id = $row['id'];

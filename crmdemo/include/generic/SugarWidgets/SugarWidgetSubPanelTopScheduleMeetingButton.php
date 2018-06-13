@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -127,18 +126,17 @@ class SugarWidgetSubPanelTopScheduleMeetingButton extends SugarWidgetSubPanelTop
 			}
 		}
 		$button .= getVersionedScript('include/SugarFields/Fields/Datetimecombo/Datetimecombo.js')."\n";
-		$button .= getVersionedScript('cache/include/javascript/sugar_grp_jsolait.js')."\n";
 
 		return $button;
 	}
 
-	function display($defines, $additionalFormFields = null)
+    public function display(array $defines, $additionalFormFields = array())
 	{
-	    $focus = BeanFactory::getBean('Meetings');
+	    $focus = BeanFactory::newBean('Meetings');
 		if ( !$focus->ACLAccess('EditView') ) {
 		    return '';
 	    }
 
 		return parent::display($defines, $additionalFormFields);
 	}
-}?>
+}

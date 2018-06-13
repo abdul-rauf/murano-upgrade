@@ -44,7 +44,7 @@ class ForecastReset
         }
 
         // truncate the forecast_manager_worksheets_audit table if it exists
-        $fmw = BeanFactory::getBean('ForecastManagerWorksheets');
+        $fmw = BeanFactory::newBean('ForecastManagerWorksheets');
         $audit_table = $fmw->get_audit_table_name();
         if ($db->tableExists($audit_table)) {
             $db->commit();
@@ -81,7 +81,7 @@ class ForecastReset
      *
      * @param String $forecast_by The Module that we are currently forecasting by
      */
-    public function setDefaultWorksheetColumns($forecast_by)
+    public function setDefaultWorksheetColumns($forecast_by, $rebuild = true)
     {
         SugarAutoLoader::load('modules/Forecasts/ForecastsDefaults.php');
         $edition = ($forecast_by === 'RevenueLineItems') ? 'ent' : 'pro';
@@ -105,7 +105,7 @@ class ForecastReset
         }
 
         /* @var $admin Administration */
-        $admin = BeanFactory::getBean('Administration');
+        $admin = BeanFactory::newBean('Administration');
         $admin->saveSetting('Forecasts', 'worksheet_columns', $columns, 'base');
 
 
@@ -125,12 +125,12 @@ class ForecastReset
         $listDefsParser->resetPanelFields();
 
         // get the proper order from the admin panel, where we defined what is displayed, in the order that we want it
-        $mm = MetadataManager::getManager();
+        $mm = MetaDataManager::getManager();
         $views = $mm->getModuleViews('Forecasts');
         $fields = $views['config-worksheet-columns']['meta']['panels'][0]['fields'];
 
         /* @var $forecastWorksheet ForecastWorksheet */
-        $forecastWorksheet = BeanFactory::getBean('ForecastWorksheets');
+        $forecastWorksheet = BeanFactory::newBean('ForecastWorksheets');
 
         // sort the fields correctly
         usort(

@@ -34,14 +34,6 @@ class UserDemoData {
 	*/
 	);
 
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function UserDemoData($seed_user, $large_scale_test = false)
-    {
-        self::__construct($seed_user, $large_scale_test);
-    }
-
 	/**
 	 * Constructor for creating user demo data
 	 */
@@ -96,7 +88,6 @@ class UserDemoData {
 		$u->user_hash = User::getPasswordHash($user_name);
 		$u->reports_to_id = $reports_to;
 		$u->reports_to_name = $reports_to_name;
-		//$u->email1 = $email;
 		$u->emailAddress->addAddress($email, true);
 		$u->emailAddress->addAddress("reply.".$email, false, true);
 		$u->emailAddress->addAddress("alias.".$email);
@@ -112,8 +103,7 @@ class UserDemoData {
 
         if($id == "seed_jim_id") {
             // add to Sales Administrator Role
-            $acl_roles = new ACLRole();
-            $arrRoles = $acl_roles->getAllRoles(true);
+            $arrRoles = ACLRole::getAllRoles(true);
 
             foreach($arrRoles as $role) {
                 if($role['name'] == "Sales Administrator") {
@@ -188,3 +178,4 @@ class UserDemoData {
 	}
 
 }
+

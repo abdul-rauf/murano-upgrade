@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'ενότητα<br />Πατήστε για να επεξεργαστείτε αυτή την ενότητα.',
         'moduleHelp'=> 'Βοήθεια ενότητα<br /><b>Επιλέξτε το στοιχείο ενότητας που θα θέλατε να επεξεργαστείτε</b>',
         'fieldsBtn'	=> 'πεδία<br /><b>Επεξεργαστείτε τις πληροφορίες που αποθηκεύονται στην ενότητα κατά τον έλεγχο των Πεδίων στην ενότητα. <br /><br />Μπορείτε να επεξεργαστείτε και να δημιουργήσετε προσαρμοσμένα πεδία εδώ.</b>',
-        'labelsBtn' => 'Κάντε κλικ στο <b>Αποθήκευση</b> για να αποθηκεύσετε τις τροποποιημένες ετικέτες σας.'	,
         'layoutsBtn'=> 'διατάξεις<br /><b>Προσαρμόστε τις Διατάξεις από Επεξεργασία, Λεπτομέρεια, Λίστα και αναζήτηση προβολών..</b>',
         'subpanelBtn'=> 'υπο-ομάδα<br />Επεξεργασία ποιες πληροφορίες εμφανίζονται σε αυτές τις ενότητες υπο-ομάδων.',
         'layoutsHelp'=> 'Βοήθεια διατάξεων<br /></b>Για να αλλάξετε τη διάταξη που περιέχει πεδία δεδομένων για την καταχώριση δεδομένων, πατήστε στο κουμπί Προβολή Επεξεργασίας. <br /><br />Για να αλλάξετε τη διάταξη που εμφανίζει τα δεδομένα που έχουν εισαχθεί στα πεδία στην Προβολή Επεξεργασίας, πατήστε στην επιλογή Προβολή Λεπτομέρειας. <br /><br />Για να αλλάξετε τις στήλες που εμφανίζονται στην προεπιλεγμένη λίστα, πατήστε  στην επιλογή Προβολή Λίστας. <br /><br />Για να αλλάξετε την Βασική και Προχωρημένη αναζήτηση φόρμας διάταξης, πατήστε στο κουμπί Αναζήτηση.</b>',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε το στάδιο πώλησης "Κλειστό Χαμένο"; Διαγράφοντας αυτό το στάδιο, η Ενότητα Πρόβλεψης δεν θα λειτουργεί σωστά',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή τη σχέση;',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Αυτό θα κάνει αυτή η σχέση μόνιμη. Είστε βέβαιοι ότι θέλετε να αναπτύξετε αυτήν την σχέση;',
 'LBL_CONFIRM_DONT_SAVE' => 'Αλλαγές έχουν γίνει από την τελευταία σας αποθήκευση, θα θέλατε να αποθηκεύσετε;',

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/ModuleBuilder/parsers/relationships/AbstractRelationship.php' ;
 
 /*
  * Class to manage the metadata for a One-To-Many Relationship
@@ -131,8 +129,6 @@ class OneToManyRelationship extends AbstractRelationship
         $leftLink['link-type'] = 'many';
         $leftLink['side'] = 'left';
 
-        //$rightLink['id_name'] = $this->getJoinKeyRHS();
-        
         if ( $this->rhs_module == $this->lhs_module ) {
             $rightLink['name'] = $rightLink['name'].'_right';
             $leftLink['id_name'] = $this->getJoinKeyRHS();
@@ -154,37 +150,6 @@ class OneToManyRelationship extends AbstractRelationship
             $vardefs [ $this->rhs_module ] [] = $relateNameField;
             $vardefs [ $this->rhs_module ] [] = $relateIdField;
         }
-        /*
-        if ($this->rhs_module != $this->lhs_module )
-        {
-        	$vardefs [ $this->lhs_module ] [] = 
-        }
-        else
-        {
-            $rightLink = $this->getLinkFieldDefinition ( $this->rhs_module, $this->relationship_name, true,
-                'LBL_' . strtoupper ( $this->relationship_name . '_FROM_' . $this->getRightModuleSystemLabel()  ) . '_TITLE');
-        }
-
-        if (! $this->relationship_only)
-        {
-            $relateField = 
-            $link2Field = 
-
-            if ( $this->rhs_module == $this->lhs_module ) {
-                // We need to fix up the links to use the alternate link
-                $relateField['link'] .= '_right';
-                $link2Field['link'] .= '_right';
-                $link2Field['side'] = 'right';
-                
-                $relateField['id_name'] = $this->getJoinKeyRHS();
-                $link2Field['id_name'] = $this->getJoinKeyRHS();
-                $link2Field['name'] = $this->getJoinKeyRHS();
-            } else {
-                unset($link2Field['id_name']);
-            }
-
-        }
-        */
         return $vardefs ;
     }
     
@@ -219,4 +184,3 @@ class OneToManyRelationship extends AbstractRelationship
     }
 
 }
-?>

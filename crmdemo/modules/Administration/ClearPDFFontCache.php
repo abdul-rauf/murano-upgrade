@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,7 +15,6 @@ $silent = isset($_REQUEST['silent']) ? true : false;
 if(is_admin($current_user)){
     global $mod_strings;
     if (!$silent) { echo $mod_strings['LBL_CLEAR_PDFFONTS_DESC']; }
-    require_once('include/Sugarpdf/FontManager.php');
     $fontManager = new FontManager();
     if($fontManager->clearCachedFile()){
         if( !$silent ) echo '<br><br><br><br>' . $mod_strings['LBL_CLEAR_PDFFONTS_DESC_SUCCESS'];

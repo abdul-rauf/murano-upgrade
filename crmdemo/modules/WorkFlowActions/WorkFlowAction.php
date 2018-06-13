@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -25,7 +24,6 @@ include_once('include/workflow/field_utils.php');
 
 // WorkFlowTrigger is used to trigger information.
 class WorkFlowAction extends SugarBean {
-	var $field_name_map;
 	// Stored fields
 	var $id;
 	var $deleted;
@@ -163,7 +161,7 @@ class WorkFlowAction extends SugarBean {
 
 	function build_field_selector($field_num, $base_module, $workflow_type="", $action_type=""){
 		////Begin - New Code call to workflow_utils
-		$temp_module = BeanFactory::getBean($base_module);
+		$temp_module = BeanFactory::newBean($base_module);
 		//Build Selector Array
 		$selector_array = array(
 							'value' => $this->value,

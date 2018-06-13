@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Quoted Line Item',
     'LBL_LIST_MANUFACTURER' => 'Tootja',
     'LBL_MANUFACTURERS' => 'Tootjad',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Mft Num',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Osa number',
     'LBL_LIST_QUANTITY' => 'Kogus',
     'LBL_LIST_COST_PRICE' => 'Hind',
     'LBL_LIST_DISCOUNT_PRICE' => 'Hind',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Allahindlus %',
     'LBL_LIST_PRICE' => 'Loendi hind:',
     'LBL_VENDOR_PART_NUM' => 'Müüja osa number:',
-    'LBL_MFT_PART_NUM' => 'Mft Part Number:',
+    'LBL_MFT_PART_NUM' => 'Osa number:',
     'LBL_NEXT_STEP' => 'Next Step:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Allahindlus hinna kuupäev:',
     'LBL_WEIGHT' => 'Kaal:',
@@ -168,6 +168,8 @@ To create a {{module_name}}:
  - Click "Show More" to expose additional fields if necessary.
 2. Click "Save" to finalize the new record and return to the previous page.',
 
-    'LBL_MANUFACTURERS' => 'Tootjad',
     'LBL_PRODUCT_POSITION' => 'Product Bundle Position',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Pakkumuse reaüksuste pakkumuse andmeloend',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => '(Uus pakkumuse reaüksus)',
+    'LBL_DISCOUNT_PERCENT' => '% protsenti',
 );

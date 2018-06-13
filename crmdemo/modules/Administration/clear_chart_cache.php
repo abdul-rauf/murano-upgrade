@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -29,20 +28,4 @@ foreach( $all_src_files as $src_file ){
 	}
 }
 
-include('modules/Versions/ExpectedVersions.php');
-
-
-global $expect_versions;
-
-if (isset($expect_versions['Chart Data Cache'])) {
-	$version = BeanFactory::getBean('Versions');
-	$version->retrieve_by_string_fields(array('name'=>'Chart Data Cache'));
-
-	$version->name = $expect_versions['Chart Data Cache']['name'];
-	$version->file_version = $expect_versions['Chart Data Cache']['file_version'];
-	$version->db_version = $expect_versions['Chart Data Cache']['db_version'];
-	$version->save();
-}
-
 echo "\n--- " . $mod_strings['LBL_DONE'] . "---<br />\n";
-?>

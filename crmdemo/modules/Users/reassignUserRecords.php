@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 Activity::disable();
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -11,8 +10,6 @@ Activity::disable();
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
-require_once('modules/Teams/TeamSet.php');
 require_once('modules/Teams/TeamSetManager.php');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
@@ -119,7 +116,7 @@ echo get_select_options_with_id($all_users, isset($_SESSION['reassignRecords']['
 
 <?php
 $teamSetField = new SugarFieldTeamset('Teamset');
-$lead = BeanFactory::getBean('Leads');
+$lead = BeanFactory::newBean('Leads');
 $teamSetField->initClassicView($lead->field_defs, 'EditView');
 $sqs_objects = $teamSetField->getClassicViewQS();
 
@@ -145,7 +142,7 @@ if(!isset($_SESSION['reassignRecords']['assignedModuleListCache'])){
         if (empty($beanFiles[$p])) {
             unset($beanListDup[$m]);
         } else {
-            $obj = BeanFactory::getBean($m);
+            $obj = BeanFactory::newBean($m);
             if (!isset($obj->field_defs['assigned_user_id']) || (
                     isset($obj->field_defs['assigned_user_id']) &&
                     isset($obj->field_defs['assigned_user_id']['source']) &&
@@ -227,7 +224,6 @@ foreach($moduleFilters as $modFilter => $fieldArray){
 				$extra .= "\n</select>";
 				break;
 			default:
-				//echo "Skipping field {$meta['name']} since the type is not supported<BR>";
 				continue;
 		}
 		echo "<$tag $size name=\"$name\" $multi>\n$extra";
@@ -280,7 +276,7 @@ else if(!isset($_GET['execute'])){
     $teams = $sugarFieldTeamSet->getTeamsFromRequest('team_name');
 	$team_ids = array_keys($teams);
     $team_id = SugarFieldTeamset::getPrimaryTeamIdFromRequest('team_name', $_REQUEST);
-	$teamSet = BeanFactory::getBean('TeamSets');
+	$teamSet = BeanFactory::newBean('TeamSets');
 	$team_set_id = $teamSet->addTeams($team_ids);
     $teamSetSelectedId = null;
 
@@ -307,7 +303,7 @@ else if(!isset($_GET['execute'])){
 			continue;
 		}
 
-        $object = BeanFactory::getBean($module);
+        $object = BeanFactory::newBean($module);
 
         if(empty($object->table_name)){
 			continue;
@@ -393,7 +389,6 @@ else if(!isset($_GET['execute'])){
 						$q_where .= " and ({$object->table_name}{$addcstm}.{$meta['dbname']} in ($in_string) $empty_check)";
 						break;
 					default:
-						//echo "Skipping field {$meta['name']} since the type is not supported<BR>";
 						continue;
 						break;
 				}
@@ -428,7 +423,6 @@ else if(!isset($_GET['execute'])){
 	echo "</form>\n";
 
 	// debug
-	//print_r($_SESSION['reassignRecords']);
 ///////////////////// END STEP 2 - Confirm Selections /////////////////////////
 }
 /////////////////// BEGIN STEP 3 - Execute reassignment ///////////////////////
@@ -440,8 +434,6 @@ else if(isset($_GET['execute']) && $_GET['execute'] == true) {
 	$toteam = $_SESSION['reassignRecords']['toteam'];
 	$toteamsetid = $_SESSION['reassignRecords']['toteamsetid'];
 	$toteamname = $_SESSION['reassignRecords']['toteamname'];
-
-	//$beanListFlip = array_flip($_SESSION['reassignRecords']['assignedModuleListCache']);
 
 	foreach($_SESSION['reassignRecords']['modules'] as $module => $queries){
 
@@ -463,7 +455,6 @@ else if(isset($_GET['execute']) && $_GET['execute'] == true) {
             $affected_rows = $db->getAffectedRowCount($res);
         }
 
-		//echo "<i>Workflow and Notifications <b>".($workflow ? "enabled" : "disabled")."</b> for this module record reassignment</i>\n<BR>\n";
 		echo "<table border='0' cellspacing='0' cellpadding='0'  class='detail view'>\n";
 		echo "<tr>\n";
 		echo "<td>\n";

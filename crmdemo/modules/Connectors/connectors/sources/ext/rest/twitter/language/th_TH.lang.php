@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,24 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 $connector_strings = array (
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">รับคีย์ API และข้อมูลลับจาก Twitter ด้วยการลงทะเบียนอินสแตนซ์ Sugar ของคุณเป็นแอปพลิเคชันใหม่<br/><br>ขั้นตอนในการลงทะเบียนอินสแตนซ์ของคุณ:<br/><br/><ol><li>ไปที่ไซต์ Twitter Developers: <a href=&#39;http://dev.twitter.com/apps/new&#39; target=&#39;_blank&#39;>http://dev.twitter.com/apps/new</a></li><li>ลงชื่อเข้าใช้โดยใช้บัญชี Twitter ที่คุณต้องการใช้ลงทะเบียนแอปพลิเคชัน</li><li>ภายในฟอร์มลงทะเบียน ให้ป้อนชื่อแอปพลิเคชัน ชื่อนี้คือชื่อที่ผู้ใช้เห็นเมื่อตรวจสอบสิทธิ์บัญชี Twitter จากภายใน Sugar</li><li>ป้อนคำอธิบาย</li><li>ป้อน URL ของเว็บไซต์แอปพลิเคชัน</li><li>ป้อน URL การติดต่อกลับ (สามารถระบุค่าใดก็ได้ เนื่องจาก Sugar จะข้ามค่านี้ในการตรวจสอบสิทธิ์: ป้อน URL ไซต์ของ Sugar)</li><li>ยอมรับข้อกำหนดในการให้บริการของ Twitter API</li><li>คลิก "Create your Twitter application"</li><li>ภายในเพจของแอปพลิเคชัน ให้ค้นหาคีย์ API และข้อมูล API ในแท็บ "API Keys" ป้อนคีย์และข้อมูลลับด้านล่าง</li></ol></td></tr></table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1">
+								<tr>
+									<td valign="top" width="35%" class="dataLabel">
+										รับคีย์ API และข้อมูลลับจาก Twitter ด้วยการลงทะเบียนอินสแตนซ์ Sugar เป็นแอปพลิเคชันใหม่<br/><br>ขั้นตอนในการลงทะเบียนอินสแตนซ์ของคุณ:<br/><br/>
+										<ol>
+											<li>ไปที่ไซต์นักพัฒนาของ Twitter: <a href=\'https://apps.twitter.com\' target=\'_blank\'>https://apps.twitter.com</a></li>
+											<li>เข้าสู่ระบบโดยใช้บัญชี Twitter ที่คุณต้องการใช้ลงทะเบียนแอปพลิเคชัน</li>
+											<li>ภายในฟอร์มการลงทะเบียน ให้ป้อนชื่อของแอปพลิเคชัน ซึ่งเป็นชื่อที่ผู้ใช้จะเห็นเมื่อตรวจสอบสิทธิ์บัญชี Twitter ของตนจากใน Sugar</li>
+											<li>ป้อนคำอธิบาย</li>
+											<li>ป้อน URL เว็บไซต์ของแอปพลิเคชัน</li>
+											<li>ป้อน URL การติดต่อกลับ (สามารถป้อนค่าใดก็ได้ เนื่องจาก Sugar จะข้ามค่านี้ในการตรวจสอบสิทธิ์ ตัวอย่างเช่น: ป้อน URL ของไซต์ Sugar)</li>
+											<li>ยอมรับข้อกำหนดในการให้บริการของ Twitter API</li>
+											<li>คลิก "สร้างแอปพลิเคชัน Twitter"</li>
+											<li>ภายในเพจแอปพลิเคชัน ให้ค้นหาคีย์ API และข้อมูลลับของ API ในแท็บ "API Keys" ป้อนคีย์และข้อมูลลับด้านล่าง</li>
+										</ol>
+									</td>
+								</tr>
+							</table>',
     'LBL_NAME' => 'ชื่อผู้ใช้ Twitter',
     'LBL_ID' => 'ชื่อผู้ใช้ Twitter',
 	'company_url' => 'URL',

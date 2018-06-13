@@ -166,25 +166,25 @@ $mod_strings = array(
 
 // BEGIN PRO/CORP
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} modulet giver dig mulighed at spore individuelle salg fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg, og omfatter relevante salgsdata samt vedrørende andre vigtige poster, såsom {{quotes_module}}, {{contacts_module}}, osv. En {{module_name}} vil typisk fortsætte gennem flere salgsfaser indtil det markeres enten "Lukket vandt" eller "Lukket tabt". {{plural_module_name}} kan udnyttes yderligere ved hjælp af Sugar&#39;s {{forecasts_singular_module}} modul til at forstå og forudsige salgstendenser samt fokusere arbejde for at opnå salgskvoter.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} modulet giver dig mulighed at spore individuelle salg fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg og omfatter relevante salgsdata samt andre relaterede vigtige poster, såsom {{quotes_module}}, {{contacts_module}}, osv. Et {{module_name}} vil typisk gå igennem flere salgsfaser indtil det enten markeres "Lukket vandt" eller "Lukket tabt". {{plural_module_name}} kan udnyttes yderligere ved hjælp af Sugar&#39;s {{forecasts_singular_module}} modul til at forstå og forudsige salgstendenser, såvel som fokusere arbejde med henblik på at opnå salgskvoter.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Dette {{plural_module_name}} modul giver dig mulighed for at spore individuelle salg og linjeposter, der hører til disse salg fra start til slut. Hver {{module_name}} post repræsenterer et muligt salg samt andre vigtige poster, såsom {{quotes_module}}, {{contacts_module}} osv. 
+    'LBL_HELP_RECORD' => '{{plural_module_name}} modulet giver dig mulighed for at spore individuelle salg og de linjeposter, der hører til disse salg, fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg og omfatter relevante salgsdata, samt relaterer sig til andre vigtige poster, såsom {{quotes_module}}, {{contacts_module}}, etc.
 
--Rediger denne posts felter ved at klikke på et felt eller på knappen Rediger.
-- Vis eller ændr links til andre poster i underpanelerne, herunder ved at skifte den nederste venstre rude til "Data View".
-- Foretag og vis brugernes kommentarer og post ændringer i {{activitystream_singular_module}} ved at skifte den nederste venstre rude til "Activity Stream". 
-- Følg eller lad denne post være favorit med ikonerne til højre for posten navn.
-- Yderligere handlinger er tilgængelige i dropdown-menuen Actions til højre for redigeringsknappen.',
+- Rediger denne posts felter ved at klikke på et individuelt felt eller på knappen Rediger.
+- Vis eller rediger links til andre poster i underpanelerne ved at skifte den nederste venstre rude til "Data View".
+- Opret og vis brugerkommentarer og postændringer i {{activitystream_singular_module}} ved at skifte den nederste venstre rude til "Activity Stream".
+- Følg eller sæt denne post til favorit med ikonerne til højre for postnavnet.
+- Yderligere handlinger er tilgængelige i dropdown-menuen Handlinger til højre for redigeringsknappen.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} modulet giver dig mulighed for at spore individuelle salg og tilhørende linjeposter, der hører til disse salg fra start til slut. Hver {{module_name}} post repræsenterer et muligt salg samt andre vigtige poster såsom {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} giver dig mulighed for at spore individuelle salg og de linjeposter, der hører til disse salg, fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg og omfatter relevante salgsdata, samt relaterer sig til andre vigtige poster, såsom {{quotes_module}}, {{contacts_module}}, etc.
 
 For at oprette et {{module_name}}:
 1. Angiv værdier i felterne som ønsket.
- - Felter markeret som "krævet" skal være udfyldt, før der gemmes.
- - Klik på¨"Vis mere" for at vise yderligere felter, om nødvendigt.
-2. Klik på "Gem" for at færdiggøre den nye post og vende tilbage til forrige side.',
+ - Felter med "Påkrævet" skal være udfyldte inden der gemmes.
+ - Klik "Se mere" for at vise yderligere felter hvis det er nødvendigt.
+2. Klik "Gem" for at afslutte den nye post og vende tilbage til den foregående side.',
 
 // END PRO/CORP
 

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => '利用不可能なテーマ',
     'LBL_TIMEZONE' => 'タイムゾーン',
     'LBL_TO'    => 'to',
-	'LBL_TRACKER_SETTINGS_DESC' => 'トラッキングを設定',
     'LBL_UPDATE_CHECK_AUTO'=>'自動',
     'LBL_UPDATE_CHECK_MANUAL'=>'手動',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>アップデートを自動的にチェック</B> - チェックすると、システムは自動的にアップデートをチェックします。',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'config.phpが正しく再構築されました。',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => '警告: 現在のPHPの設定を変更し、6MB以上のファイルをアップロードできるようにしてください。以下のphp.iniのupload_max_filesizeの値を変更することで設定できます。:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'config.phpを書き込み可能にして再度実行してください。',
-    'MSG_REBUILD_EXTENSIONS' => '<a href="index.php?module=Administration&action=Upgrade">リペア</a>画面で<b>拡張機能再構築</b>をクリックしてください。',
-    'MSG_REBUILD_RELATIONSHIPS' => '<a href="index.php?module=Administration&action=Upgrade">リペア</a>画面で<b>リレーションシップの再構築</b>をクリックしてください。',
     'NO_ENABLED_OFFLINE_CLIENTS' => '許可されているオフラインクライアントはありません。',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'このオフラインクライアントを無効にしますか？',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'このオフラインクライアントを有効にしますか？',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'問題',
 'ML_MANIFEST_ISSUE'=>'マニフェストの問題',
 'ML_CONFIG_OVERRIDE'=>'Configの変更は許可されていません',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'キー - 文字、数字およびアンダースコアしか利用できません。 ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'ショートカットバーの設定',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'ショートカットバーに表示するモジュールを選択',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => '画面上部のナビゲーションバーでプラスアイコンを使用することでクイック作成ができるモジュールを選択してください。モジュールを有効モジュールボックスと無効モジュールボックスにドラッグ＆ドロップすることで設定することができます。',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Manufacturer',
 	'ProductBundleNotes' => 'ProductBundleNote',
 	'ProductBundles'   => 'ProductBundle',
-	'ProjectResources' => 'プロジェクトリソース',
 
 	'Relationships' => 'Relationship',
 	'Releases'       => 'Release',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'SchedulersJob',
 	'Shippers'       => 'Shipper',
 	'TaxRates'       => 'TaxRate',
-	'TeamHierarchies'  => 'TeamHierarchy',
 	'TeamMemberships'   => 'TeamMembership',
 	'TeamNotices'    => 'TeamNotice',
 	'TeamSetModules'   => 'TeamSetModule',

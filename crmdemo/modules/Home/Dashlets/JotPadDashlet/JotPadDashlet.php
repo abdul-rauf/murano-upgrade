@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,20 +10,11 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/Dashlets/Dashlet.php');
 
 
 class JotPadDashlet extends Dashlet {
     var $savedText; // users's saved text
     var $height = '200'; // height of the pad
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function JotPadDashlet($id, $def)
-    {
-        self::__construct($id, $def);
-    }
 
     /**
      * Constructor
@@ -56,11 +46,11 @@ class JotPadDashlet extends Dashlet {
     }
 
     /**
-     * Displays the dashlet
-     *
-     * @return string html to display dashlet
+     * {@inheritDoc}
+     * @param string $text Ignored
      */
-    function display() {
+    public function display($text = '')
+    {
         $ss = new Sugar_Smarty();
         $ss->assign('savedText', SugarCleaner::cleanHtml($this->savedText));
         $ss->assign('saving', $this->dashletStrings['LBL_SAVING']);
@@ -148,3 +138,4 @@ class JotPadDashlet extends Dashlet {
                                        'savedText' => $optionsArray['savedText']));
     }
 }
+

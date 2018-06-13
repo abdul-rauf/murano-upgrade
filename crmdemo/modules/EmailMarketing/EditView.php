@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -23,7 +22,7 @@ global $current_user;
 // global $default_language;
 // global $cal_codes;
 
-$focus = BeanFactory::getBean('EmailMarketing');
+$focus = BeanFactory::newBean('EmailMarketing');
 if(!empty($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
 }
@@ -198,5 +197,12 @@ $javascript = new javascript();
 $javascript->setFormName('EditView');
 $javascript->setSugarBean($focus);
 $javascript->addAllFields('');
+$javascript->addFieldIsValidTime(
+    'time_start',
+    'time',
+    'LBL_TIME_START',
+    $javascript->stripEndColon(translate('LBL_START_DATE_TIME', $focus->module_dir)),
+    true
+);
 echo $javascript->getScript();
 ?>

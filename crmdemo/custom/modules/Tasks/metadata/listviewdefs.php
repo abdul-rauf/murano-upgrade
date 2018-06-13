@@ -1,9 +1,9 @@
 <?php
-// created: 2018-06-13 11:24:59
+// created: 2018-06-13 14:43:59
 $listViewDefs['Tasks'] = array (
   'SET_COMPLETE' => 
   array (
-    'width' => '5%',
+    'width' => '5',
     'label' => 'LBL_LIST_CLOSE',
     'link' => true,
     'sortable' => false,
@@ -17,19 +17,19 @@ $listViewDefs['Tasks'] = array (
   array (
     'type' => 'datetime',
     'label' => 'LBL_DATE_ENTERED',
-    'width' => '10%',
+    'width' => '10',
     'default' => true,
   ),
   'NAME' => 
   array (
-    'width' => '40%',
+    'width' => '40',
     'label' => 'LBL_LIST_SUBJECT',
     'link' => true,
     'default' => true,
   ),
   'PARENT_NAME' => 
   array (
-    'width' => '20%',
+    'width' => '20',
     'label' => 'LBL_LIST_RELATED_TO',
     'dynamic_module' => 'PARENT_TYPE',
     'id' => 'PARENT_ID',
@@ -45,7 +45,7 @@ $listViewDefs['Tasks'] = array (
   ),
   'ASSIGNED_USER_NAME' => 
   array (
-    'width' => '10%',
+    'width' => '10',
     'label' => 'LBL_LIST_ASSIGNED_TO_NAME',
     'module' => 'Employees',
     'id' => 'ASSIGNED_USER_ID',
@@ -53,27 +53,27 @@ $listViewDefs['Tasks'] = array (
   ),
   'DATE_DUE' => 
   array (
-    'width' => '15%',
+    'width' => '15',
     'label' => 'LBL_LIST_DUE_DATE',
     'link' => false,
     'default' => true,
   ),
   'TEAM_NAME' => 
   array (
-    'width' => '2%',
+    'width' => '2',
     'label' => 'LBL_LIST_TEAM',
     'default' => false,
   ),
   'DATE_START' => 
   array (
-    'width' => '5%',
+    'width' => '5',
     'label' => 'LBL_LIST_START_DATE',
     'link' => false,
     'default' => false,
   ),
   'CONTACT_NAME' => 
   array (
-    'width' => '20%',
+    'width' => '20',
     'label' => 'LBL_LIST_CONTACT',
     'link' => true,
     'id' => 'CONTACT_ID',
@@ -87,7 +87,7 @@ $listViewDefs['Tasks'] = array (
   ),
   'STATUS' => 
   array (
-    'width' => '10%',
+    'width' => '10',
     'label' => 'LBL_LIST_STATUS',
     'link' => false,
     'default' => false,

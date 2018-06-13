@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Nem elérhető témák',
     'LBL_TIMEZONE' => 'Időzóna',
     'LBL_TO'    => 'küldés',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Válassza ki, hogy milyen rendszer- és felhasználói adatokat követ nyomon',
     'LBL_UPDATE_CHECK_AUTO'=>'Automatikusan',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manuálisan',
     'LBL_UPDATE_CHECK_TYPE'=>'Automatikusan ellenőrzi a frissítéseket - ha be van jelölve, a rendszer bizonyos időközönként ellenőrzi, hogy van-e elérhető frissített változat.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'A config.php újjáépítése megtörtént.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Figyelmeztetés: A PHP konfigurációban engedélyezni kell a 6MB feletti állományok feltöltését. Kérjük módosítsa az upload_max_filesize értéket a php.ini állományban itt:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Kérem, állítsa a config.php állományt írhatóra és próbálja újra!',
-    'MSG_REBUILD_EXTENSIONS' => 'Kérem, menjen a Javítás oldalra és kattintson a Bővítmények újjáépítésére!',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Kérem, menjen a Javítás oldalra és kattintson a Kapcsolatok újjáépítésére!',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Pillanatnyilag nincs engedélyezett offline kliens.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Biztosan le szeretné tiltani ezt az offline klienst?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Biztosan engedélyezni szeretné ezt az offline klienst?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Kérdések',
 'ML_MANIFEST_ISSUE'=>'Kérdés a kimutatással kapcsolatban',
 'ML_CONFIG_OVERRIDE'=>'Config módosítás nem engedélyezett',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Kulcs – csak betűket, számokat és aláhúzást tartalmazhat. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Shortcut sáv konfigurálása',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Válassza ki, hogy mely modulok legyenek elérhetőek a Shortcut sávon',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Adja meg, mely modulokban lesz engedélyezett a gyors rekordhozzáadás a felső sávban található Plusz ikon lekattintásával! Húzza be a modulokat az Engedélyezett modulok és a Nem engedélyezett modulok csoportjaiba!',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Gyártó',
 	'ProductBundleNotes' => 'CsoportosTermékJegyzet',
 	'ProductBundles'   => 'TermékCsoport',
-	'ProjectResources' => 'ProjektForrás',
 
 	'Relationships' => 'Kapcsolat',
 	'Releases'       => 'Kiadás',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'ÜtemezésMunka',
 	'Shippers'       => 'Beszállító',
 	'TaxRates'       => 'Áfakulcs',
-	'TeamHierarchies'  => 'CsapatHierarchia',
 	'TeamMemberships'   => 'CsapatTagság',
 	'TeamNotices'    => 'Csapat közlemények',
 	'TeamSetModules'   => 'CsapatBeállításModul',

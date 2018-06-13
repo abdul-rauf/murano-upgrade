@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -27,7 +26,7 @@ global $app_list_strings;
 global $mod_strings;
 global $sugar_version, $sugar_config;
 
-$focus = BeanFactory::getBean('CampaignTrackers');
+$focus = BeanFactory::newBean('CampaignTrackers');
 
 if(isset($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);

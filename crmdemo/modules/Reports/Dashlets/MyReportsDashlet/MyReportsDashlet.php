@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,19 +13,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  // $Id: MyReportsDashlet.php 16981 2006-10-10 22:51:30 +0000 (Tue, 10 Oct 2006) clee $
 
 
-require_once('include/Dashlets/DashletGeneric.php');
 
 
 class MyReportsDashlet extends DashletGeneric { 
     
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function MyReportsDashlet($id, $def = null)
-    {
-        self::__construct($id, $def);
-    }
-
     public function __construct($id, $def = null)
     {
         global $current_user, $app_strings, $dashletData;
@@ -38,19 +28,20 @@ class MyReportsDashlet extends DashletGeneric {
         $this->isConfigurable = false;
         $this->searchFields = $dashletData['MyReportsDashlet']['searchFields'];
         $this->columns = $dashletData['MyReportsDashlet']['columns'];
-        $this->seedBean = BeanFactory::getBean('Reports');        
+        $this->seedBean = BeanFactory::newBean('Reports');        
     }
-    
-    function process() {
+
+    public function process($lvsParams = array())
+    {
         $this->lvs->quickViewLinks = false;
-        parent::process();
+        parent::process($lvsParams);
     }
     
     function buildWhere() {
         global $current_user;
         $where_clauses = array();
         
-        $sugaFav = BeanFactory::getBean('SugarFavorites');
+        $sugaFav = BeanFactory::newBean('SugarFavorites');
         $current_favorites_beans = $sugaFav->getUserFavoritesByModule('Reports', $current_user);
         $current_favorites = array();
         foreach ($current_favorites_beans as $key=>$val) {
@@ -65,3 +56,4 @@ class MyReportsDashlet extends DashletGeneric {
     }
     
 }
+

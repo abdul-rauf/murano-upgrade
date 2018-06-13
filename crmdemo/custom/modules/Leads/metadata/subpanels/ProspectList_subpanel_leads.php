@@ -1,111 +1,42 @@
 <?php
-// created: 2016-08-08 13:47:45
-$subpanel_layout['list_fields'] = array (
-  'account_name' => 
-  array (
-    'type' => 'varchar',
-    'vname' => 'LBL_ACCOUNT_NAME',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'full_name' => 
-  array (
-    'type' => 'fullname',
-    'link' => true,
-    'studio' => 
-    array (
-      'listview' => false,
-    ),
-    'vname' => 'LBL_NAME',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'feedback_c' => 
-  array (
-    'type' => 'enum',
-    'default' => true,
-    'studio' => 'visible',
-    'vname' => 'LBL_FEEDBACK',
-    'width' => '10%',
-  ),
-  'feedback2_c' => 
-  array (
-    'type' => 'enum',
-    'default' => true,
-    'studio' => 'visible',
-    'vname' => 'LBL_FEEDBACK2',
-    'width' => '10%',
-  ),
-  'feedback3_c' => 
-  array (
-    'type' => 'enum',
-    'default' => true,
-    'studio' => 'visible',
-    'vname' => 'LBL_FEEDBACK3',
-    'width' => '10%',
-  ),
-  'assigned_user_name' => 
-  array (
-    'name' => 'assigned_user_name',
-    'vname' => 'LBL_LIST_ASSIGNED_TO_NAME',
-    'widget_class' => 'SubPanelDetailViewLink',
-    'target_record_key' => 'assigned_user_id',
-    'target_module' => 'Employees',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'target_links' => 
-  array (
-    'type' => 'text',
-    'studio' => 
-    array (
-      'listview' => true,
-      'detailview' => true,
-    ),
-    'vname' => 'All Target Lists',
-    'sortable' => false,
-    'width' => '10%',
-    'default' => true,
-  ),
-  'primary_address_state' => 
-  array (
-    'type' => 'varchar',
-    'vname' => 'LBL_PRIMARY_ADDRESS_STATE',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'primary_address_country' => 
-  array (
-    'type' => 'varchar',
-    'vname' => 'LBL_PRIMARY_ADDRESS_COUNTRY',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'last_spoke_c' => 
-  array (
-    'type' => 'date',
-    'default' => true,
-    'vname' => 'LBL_LAST_SPOKE',
-    'width' => '10%',
-  ),
-  'status' => 
-  array (
-    'type' => 'enum',
-    'vname' => 'LBL_STATUS',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'first_name' => 
-  array (
-    'usage' => 'query_only',
-  ),
-  'last_name' => 
-  array (
-    'usage' => 'query_only',
-  ),
-  'salutation' => 
-  array (
-    'name' => 'salutation',
-    'usage' => 'query_only',
-  ),
-);
+// created: ' . date('Y-m-d H:i:s')
+$subpanel_layout['list_fields']['account_name']['type'] = 'varchar';
+$subpanel_layout['list_fields']['account_name']['vname'] = 'LBL_ACCOUNT_NAME';
+$subpanel_layout['list_fields']['account_name']['width'] = '10%';
+$subpanel_layout['list_fields']['account_name']['default'] = true;
+$subpanel_layout['list_fields']['full_name']['type'] = 'fullname';
+$subpanel_layout['list_fields']['full_name']['link'] = true;
+$subpanel_layout['list_fields']['full_name']['studio']['listview'] = false;
+$subpanel_layout['list_fields']['full_name']['vname'] = 'LBL_NAME';
+$subpanel_layout['list_fields']['full_name']['width'] = '10%';
+$subpanel_layout['list_fields']['full_name']['default'] = true;
+$subpanel_layout['list_fields']['assigned_user_name']['name'] = 'assigned_user_name';
+$subpanel_layout['list_fields']['assigned_user_name']['vname'] = 'LBL_LIST_ASSIGNED_TO_NAME';
+$subpanel_layout['list_fields']['assigned_user_name']['widget_class'] = 'SubPanelDetailViewLink';
+$subpanel_layout['list_fields']['assigned_user_name']['target_record_key'] = 'assigned_user_id';
+$subpanel_layout['list_fields']['assigned_user_name']['target_module'] = 'Employees';
+$subpanel_layout['list_fields']['assigned_user_name']['width'] = '10%';
+$subpanel_layout['list_fields']['assigned_user_name']['default'] = true;
+$subpanel_layout['list_fields']['target_links']['type'] = 'text';
+$subpanel_layout['list_fields']['target_links']['studio']['listview'] = true;
+$subpanel_layout['list_fields']['target_links']['studio']['detailview'] = true;
+$subpanel_layout['list_fields']['target_links']['vname'] = 'All Target Lists';
+$subpanel_layout['list_fields']['target_links']['sortable'] = false;
+$subpanel_layout['list_fields']['target_links']['width'] = '10%';
+$subpanel_layout['list_fields']['target_links']['default'] = true;
+$subpanel_layout['list_fields']['primary_address_state']['type'] = 'varchar';
+$subpanel_layout['list_fields']['primary_address_state']['vname'] = 'LBL_PRIMARY_ADDRESS_STATE';
+$subpanel_layout['list_fields']['primary_address_state']['width'] = '10%';
+$subpanel_layout['list_fields']['primary_address_state']['default'] = true;
+$subpanel_layout['list_fields']['primary_address_country']['type'] = 'varchar';
+$subpanel_layout['list_fields']['primary_address_country']['vname'] = 'LBL_PRIMARY_ADDRESS_COUNTRY';
+$subpanel_layout['list_fields']['primary_address_country']['width'] = '10%';
+$subpanel_layout['list_fields']['primary_address_country']['default'] = true;
+$subpanel_layout['list_fields']['status']['type'] = 'enum';
+$subpanel_layout['list_fields']['status']['vname'] = 'LBL_STATUS';
+$subpanel_layout['list_fields']['status']['width'] = '10%';
+$subpanel_layout['list_fields']['status']['default'] = true;
+$subpanel_layout['list_fields']['first_name']['usage'] = 'query_only';
+$subpanel_layout['list_fields']['last_name']['usage'] = 'query_only';
+$subpanel_layout['list_fields']['salutation']['name'] = 'salutation';
+$subpanel_layout['list_fields']['salutation']['usage'] = 'query_only';

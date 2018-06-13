@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -70,6 +69,9 @@ class UpgradeWizardCommon
         global $base_tmp_upgrade_dir;
         if (empty($base_tmp_upgrade_dir)) {
             $base_tmp_upgrade_dir = sugar_cached("upgrades/temp");
+        }
+        if (!file_exists($base_tmp_upgrade_dir)) {
+            mkdir_recursive($base_tmp_upgrade_dir, true);
         }
         $my_zip_dir = mk_temp_dir($base_tmp_upgrade_dir);
         register_shutdown_function('rmdir_recursive', $my_zip_dir);
@@ -179,7 +181,10 @@ class UpgradeWizardCommon
         // matches are acceptable. -rgonzalez
         if (!isset($acceptable_sugar_versions['exact_matches']) && !isset($acceptable_sugar_versions['regex_matches'])) {
             $acceptable_sugar_versions = self::addAcceptableVersionRegex($acceptable_sugar_versions);
-            if (empty($acceptable_sugar_versions['regex_matches']) && !empty($manifest['built_in_version'])) {
+            if (empty($acceptable_sugar_versions['regex_matches']) && !empty($manifest['built_in_version'])
+                // packages built prior to 7.7.1.0 (BR-4088) have incompatible relationship metadata structure
+                && version_compare($manifest['built_in_version'], '7.7.1.0', '>=')
+            ) {
                 $built_version = explode('.', $manifest['built_in_version']);
                 $acceptable_sugar_versions['regex_matches'] = array("^{$built_version[0]}\.([0-9]+)\.([0-9]+)");
             }

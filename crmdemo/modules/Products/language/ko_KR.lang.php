@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => '견적 라인아이템',
     'LBL_LIST_MANUFACTURER' => '제조자',
     'LBL_MANUFACTURERS' => '제조 업체',
-    'LBL_LIST_LBL_MFT_PART_NUM' => '제조 번호',
+    'LBL_LIST_LBL_MFT_PART_NUM' => '부분 번호',
     'LBL_LIST_QUANTITY' => '분량',
     'LBL_LIST_COST_PRICE' => '경비',
     'LBL_LIST_DISCOUNT_PRICE' => '가격',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => '할인율',
     'LBL_LIST_PRICE' => '가격 목록',
     'LBL_VENDOR_PART_NUM' => '공급자 번호',
-    'LBL_MFT_PART_NUM' => '제조자 번호',
+    'LBL_MFT_PART_NUM' => '부분 번호:',
     'LBL_NEXT_STEP' => '다음 단계:',
     'LBL_DISCOUNT_PRICE_DATE' => '할인 가격 날짜',
     'LBL_WEIGHT' => '무게',
@@ -162,6 +162,8 @@ $mod_strings = array(
 - 필요한경우추가필드를노출하려면 "더보기"를클릭합니다. 
 2. “저장하기”를 클릭하여 새 기록을 완성하고 이전 페이지로 돌아갑니다.',
 
-    'LBL_MANUFACTURERS' => '제조 업체',
     'LBL_PRODUCT_POSITION' => '제품 번들 위치',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => '견적 상품 견적 데이터 목록',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (새 견적 상품)',
+    'LBL_DISCOUNT_PERCENT' => '% 퍼센트',
 );

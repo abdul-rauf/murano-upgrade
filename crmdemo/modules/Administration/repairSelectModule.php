@@ -1,6 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry)
-	die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -27,8 +25,6 @@ if (!defined('sugarEntry') || !sugarEntry)
 			} else {
 				$output_local = $output;
 			}
-			//sort($output);
-			//sort($values);
 			$values=array_merge(array($mod_strings['LBL_ALL_MODULES']), $values);
 			$output= array_merge(array($mod_strings['LBL_ALL_MODULES']),$output_local);
 			$checkbox_values=array(
@@ -43,7 +39,6 @@ if (!defined('sugarEntry') || !sugarEntry)
 									 'clearLangFiles',
                                      'clearSearchCache',
 			                         'clearPDFFontCache',
-			                         //'repairDatabase'
 									 );
 			$checkbox_output = array(   $mod_strings['LBL_QR_CBOX_CLEARTPL'], 
                                         $mod_strings['LBL_QR_CBOX_CLEARJS'],
@@ -56,7 +51,6 @@ if (!defined('sugarEntry') || !sugarEntry)
                                         $mod_strings['LBL_QR_CBOX_CLEARLANG'],
                                         $mod_strings['LBL_QR_CBOX_CLEARSEARCH'],
                                         $mod_strings['LBL_QR_CBOX_CLEARPDFFONT'],
-                                        //$mod_strings['LBL_QR_CBOX_DATAB'],
 									 );
 			$smarty->assign('checkbox_values', $checkbox_values);
 			$smarty->assign('values', $values);

@@ -13,13 +13,8 @@
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
-require_once('include/tabs.php');
-require_once('include/ListView/ListViewSmarty.php');
-require_once('include/TemplateHandler/TemplateHandler.php');
-require_once('include/EditView/EditView2.php');
-
-
- class SearchForm extends EditView{
+class SearchForm
+{
  	var $seed = null;
  	var $module = '';
  	var $action = 'index';
@@ -60,14 +55,6 @@ require_once('include/EditView/EditView2.php');
       * @var Request
       */
      protected $request;
-
-     /**
-      * @deprecated Use __construct() instead
-      */
-     public function SearchForm($seed, $module, $action = 'index', $options = array())
-     {
-         self::__construct($seed, $module, $action, $options);
-     }
 
     public function __construct($seed, $module, $action = 'index', $options = array())
     {
@@ -137,7 +124,7 @@ require_once('include/EditView/EditView2.php');
         }
  	}
 
-    public function display($header = true, $ajaxSave = false)
+    public function display($header = true)
     {
     	global $theme, $timedate, $current_user;
  		$header_txt = '';
@@ -292,14 +279,14 @@ require_once('include/EditView/EditView2.php');
 
      function displaySavedSearch()
      {
-        $savedSearch = BeanFactory::getBean('SavedSearch');
+        $savedSearch = BeanFactory::newBean('SavedSearch');
         $savedSearch->init($this->listViewDefs[$this->module], $this->lv->data['pageData']['ordering']['orderBy'], $this->lv->data['pageData']['ordering']['sortOrder']);
         return $savedSearch->getForm($this->module, false);
     }
 
 
   function displaySavedSearchSelect(){
-        $savedSearch = BeanFactory::getBean('SavedSearch');
+        $savedSearch = BeanFactory::newBean('SavedSearch');
         $savedSearch->init($this->listViewDefs[$this->module], $this->lv->data['pageData']['ordering']['orderBy'], $this->lv->data['pageData']['ordering']['sortOrder']);
         return $savedSearch->getSelect($this->module);
     }
@@ -316,7 +303,7 @@ require_once('include/EditView/EditView2.php');
     function _displayTabs($currentKey)
     {
         if(isset($_REQUEST['saved_search_select']) && $_REQUEST['saved_search_select']!='_none') {
-            $saved_search=BeanFactory::getBean('SavedSearch');
+            $saved_search=BeanFactory::newBean('SavedSearch');
             $saved_search->retrieveSavedSearch($_REQUEST['saved_search_select']);
         } else {
             $saved_search = null;
@@ -431,7 +418,7 @@ require_once('include/EditView/EditView2.php');
 					}else{
 
                         if (isset($this->fieldDefs[$fvName]['function_bean'])) {
-                            $funcBean =  BeanFactory::getBean($this->fieldDefs[$fvName]['function_bean']);
+                            $funcBean =  BeanFactory::newBean($this->fieldDefs[$fvName]['function_bean']);
                             if (method_exists($funcBean, $function_name)) {
                                 $function_name = array($funcBean, $function_name);
                             }
@@ -496,7 +483,7 @@ require_once('include/EditView/EditView2.php');
                     }
                 }
                 if($addAllBeanFields) {
-                    foreach($this->seed->field_name_map as $key => $params) {
+                    foreach ($this->seed->field_defs as $key => $params) {
                         if(!in_array($key, $searchFieldsKeys)) {
                             foreach($this->tabs->name as $tabName){
                                 if(in_array($key . '_' . $tabName['name'], $arrayKeys) ) {
@@ -508,7 +495,6 @@ require_once('include/EditView/EditView2.php');
                     }
                 }
                 if(isset($array['team_name_advanced_new_on_update'])){
-                   	require_once('include/SugarFields/SugarFieldHandler.php');
 					$sfh = new SugarFieldHandler();
                    	$sf = $sfh->getSugarField('Teamset', true);
                    	$this->searchFields['team_set_id'] = $sf->getTeamSetIdSearchField('team_name_advanced');
@@ -557,7 +543,7 @@ require_once('include/EditView/EditView2.php');
                 }
 
                 if((empty($array['massupdate']) || $array['massupdate'] == 'false') && $addAllBeanFields) {
-                    foreach($this->seed->field_name_map as $key => $params) {
+                    foreach ($this->seed->field_defs as $key => $params) {
                     	if($key != 'assigned_user_name' && $key != 'modified_by_name')
                     	{
                     		$long_name = $key.'_'.$SearchName;
@@ -569,7 +555,6 @@ require_once('include/EditView/EditView2.php');
                                 if (!empty($params['type']) && $params['type'] == 'parent'
                                     && !empty($params['type_name']) && !empty($this->searchFields[$key]['value']))
                                 {
-                                	    require_once('include/SugarFields/SugarFieldHandler.php');
 										$sfh = new SugarFieldHandler();
                    						$sf = $sfh->getSugarField('Parent');
 
@@ -585,7 +570,6 @@ require_once('include/EditView/EditView2.php');
                     }
                 }
                 if(isset($array['team_name_advanced_new_on_update'])){
-                   	require_once('include/SugarFields/SugarFieldHandler.php');
 					$sfh = new SugarFieldHandler();
                    	$sf = $sfh->getSugarField('Teamset', true);
                    	$teamSearchType = ( isset( $array['team_name_advanced_type'] ) && $array['team_name_advanced_type'] == 'exact' ) ? 'exact' : 'any';
@@ -691,7 +675,7 @@ require_once('include/EditView/EditView2.php');
              // Jenny - Bug 7462: We need a type check here to avoid database errors
              // when searching for numeric fields. This is a temporary fix until we have
              // a generic search form validation mechanism.
-             $type = (!empty($this->seed->field_name_map[$field]['type']))?$this->seed->field_name_map[$field]['type']:'';
+             $type = !empty($this->seed->field_defs[$field]['type']) ? $this->seed->field_defs[$field]['type'] : '';
 
              //If range search is enabled for the field, we first check if this is the starting range
              if(!empty($parms['enable_range_search']) && empty($type))
@@ -709,7 +693,9 @@ require_once('include/EditView/EditView2.php');
                          $parms['value'] = $this->searchFields[$real_field]['value'];
                          $parms['operator'] = 'between';
 
-                         $field_type = isset($this->seed->field_name_map[$real_field]['type']) ? $this->seed->field_name_map[$real_field]['type'] : '';
+                         $field_type = isset($this->seed->field_defs[$real_field]['type'])
+                             ? $this->seed->field_defs[$real_field]['type']
+                             : '';
                          if($field_type == 'datetimecombo' || $field_type == 'datetime')
                          {
                                 $type = $field_type;
@@ -724,9 +710,13 @@ require_once('include/EditView/EditView2.php');
                      //Special case for datetime and datetimecombo fields.  By setting the type here we allow an actual between search
                      if(in_array($parms['operator'], array('=', 'between', "not_equal", 'less_than', 'greater_than', 'less_than_equals', 'greater_than_equals')))
                      {
-                        $field_type = isset($this->seed->field_name_map[$real_field]['type']) ? $this->seed->field_name_map[$real_field]['type'] : '';
-                        if(strtolower($field_type) == 'readonly' && isset($this->seed->field_name_map[$real_field]['dbType'])) {
-                           $field_type = $this->seed->field_name_map[$real_field]['dbType'];
+                        $field_type = isset($this->seed->field_defs[$real_field]['type'])
+                            ? $this->seed->field_defs[$real_field]['type']
+                            : '';
+
+                        if (strtolower($field_type) == 'readonly'
+                            && isset($this->seed->field_defs[$real_field]['dbType'])) {
+                            $field_type = $this->seed->field_defs[$real_field]['dbType'];
                         }
                         if($field_type == 'datetimecombo' || $field_type == 'datetime' || $field_type == 'int')
                         {
@@ -747,24 +737,22 @@ require_once('include/EditView/EditView2.php');
              }
 
              //Test to mark whether or not the field is a custom field
-             if(!empty($this->seed->field_name_map[$field]['source'])
-                 && ($this->seed->field_name_map[$field]['source'] == 'custom_fields' ||
+             if (!empty($this->seed->field_defs[$field]['source'])
+                 && ($this->seed->field_defs[$field]['source'] == 'custom_fields' ||
                      //Non-db custom fields, such as custom relates
-                     ($this->seed->field_name_map[$field]['source'] == 'non-db'
-                     && (!empty($this->seed->field_name_map[$field]['custom_module']) ||
-                          isset($this->seed->field_name_map[$field]['ext2']))))){
+                     ($this->seed->field_defs[$field]['source'] == 'non-db'
+                        && (!empty($this->seed->field_defs[$field]['custom_module'])
+                            || isset($this->seed->field_defs[$field]['ext2']))))) {
                  $customField = true;
              }
 
              if ($type == 'int' && isset($parms['value']) && !empty($parms['value'])) {
-                 require_once ('include/SugarFields/SugarFieldHandler.php');
                  $intField = SugarFieldHandler::getSugarField('int');
                  $newVal = $intField->getSearchWhereValue($parms['value']);
                  $parms['value'] = $newVal;
              } elseif($type == 'html' && $customField) {
                  continue;
              }
-
 
              if(isset($parms['value']) && $parms['value'] != "") {
 
@@ -777,7 +765,8 @@ require_once('include/EditView/EditView2.php');
                      $field_value = '';
 
                      // always construct the where clause for multiselects using the 'like' form to handle combinations of multiple $vals and multiple $parms
-                      if(!empty($this->seed->field_name_map[$field]['isMultiSelect']) && $this->seed->field_name_map[$field]['isMultiSelect']) {
+                      if (!empty($this->seed->field_defs[$field]['isMultiSelect'])
+                          && $this->seed->field_defs[$field]['isMultiSelect']) {
                          // construct the query for multenums
                          // use the 'like' query as both custom and OOB multienums are implemented with types that cannot be used with an 'in'
                          $operator = 'custom_enum';
@@ -859,12 +848,12 @@ require_once('include/EditView/EditView2.php');
                      foreach ($parms['db_field'] as $db_field) {
                          if (strstr($db_field, '.') === false) {
                              //Try to get the table for relate fields from link defs
-                             if ($type == 'relate' && !empty($this->seed->field_name_map[$field]['link'])
-                                 && !empty($this->seed->field_name_map[$field]['rname'])) {
-                                     $link = $this->seed->field_name_map[$field]['link'];
+                             if ($type == 'relate' && !empty($this->seed->field_defs[$field]['link'])
+                                 && !empty($this->seed->field_defs[$field]['rname'])) {
+                                     $link = $this->seed->field_defs[$field]['link'];
                                      if (($this->seed->load_relationship($link))){
                                          //Martin fix #27494
-                                         $db_field = $this->seed->field_name_map[$field]['name'];
+                                         $db_field = $this->seed->field_defs[$field]['name'];
                                      } else {
                                          //Best Guess for table name
                                          $db_field = strtolower($link['module']) . '.' . $db_field;
@@ -876,28 +865,37 @@ require_once('include/EditView/EditView2.php');
                                  if (!empty($this->searchFields['parent_type'])) {
                                      $parentType = $this->searchFields['parent_type'];
                                      $rel_module = $parentType['value'];
-                                     $rel_seed = BeanFactory::getBean($rel_module);
+                                     $rel_seed = BeanFactory::newBean($rel_module);
                                      if(!empty($rel_seed)) {
                                          $db_field = 'parent_' . $rel_module . '_' . $rel_seed->table_name . '.name';
                                      }
                                  }
                              }
                              // Relate fields in custom modules and custom relate fields
-                             else if ($type == 'relate' && $customField && !empty($this->seed->field_name_map[$field]['module'])) {
-                                 $db_field = !empty($this->seed->field_name_map[$field]['name'])?$this->seed->field_name_map[$field]['name']:'name';
+                             elseif ($type == 'relate'
+                                 && $customField
+                                 && !empty($this->seed->field_defs[$field]['module'])) {
+                                 $db_field = !empty($this->seed->field_defs[$field]['name'])?$this->seed->field_defs[$field]['name']:'name';
                              }
                             else if(!$customField){
-                                if ( !empty($this->seed->field_name_map[$field]['db_concat_fields']) )
-                                    $db_field = $db->concat($this->seed->table_name, $this->seed->field_name_map[$db_field]['db_concat_fields']);
-                                else
+                                if (!empty($this->seed->field_defs[$field]['db_concat_fields'])) {
+                                    $db_field = $db->concat(
+                                        $this->seed->table_name,
+                                        $this->seed->field_defs[$db_field]['db_concat_fields']
+                                    );
+                                } else {
                                     $db_field = $this->seed->table_name .  "." . $db_field;
+                                }
                              }else{
-                                 if ( !empty($this->seed->field_name_map[$field]['db_concat_fields']) )
-                                    $db_field = $db->concat($this->seed->table_name .  "_cstm.", $this->seed->field_name_map[$db_field]['db_concat_fields']);
-                                else
-                                    $db_field = $this->seed->table_name .  "_cstm." . $db_field;
+                                 if (!empty($this->seed->field_defs[$field]['db_concat_fields'])) {
+                                     $db_field = $db->concat(
+                                         $this->seed->table_name .  "_cstm.",
+                                         $this->seed->field_defs[$db_field]['db_concat_fields']
+                                     );
+                                 } else {
+                                     $db_field = $this->seed->table_name .  "_cstm." . $db_field;
+                                 }
                              }
-
                          }
 
                          if($type == 'date') {
@@ -1108,9 +1106,9 @@ require_once('include/EditView/EditView2.php');
                                      else
                                      {
                                          //Check if this is a first_name, last_name search
-                                         if(isset($this->seed->field_name_map) && isset($this->seed->field_name_map[$db_field]))
-                                         {
-                                             $vardefEntry = $this->seed->field_name_map[$db_field];
+                                         if (isset($this->seed->field_defs)
+                                             && isset($this->seed->field_defs[$db_field])) {
+                                             $vardefEntry = $this->seed->field_defs[$db_field];
                                              if(!empty($vardefEntry['db_concat_fields']) && in_array('first_name', $vardefEntry['db_concat_fields']) && in_array('last_name', $vardefEntry['db_concat_fields']))
                                              {
                                                    if(!empty($GLOBALS['app_list_strings']['salutation_dom']) && is_array($GLOBALS['app_list_strings']['salutation_dom']))
@@ -1200,8 +1198,12 @@ require_once('include/EditView/EditView2.php');
                              case 'this_year':
                              case 'last_year':
                              case 'next_year':
-                                 if (!empty($field) && !empty($this->seed->field_name_map[$field]['type'])) {
-                                     $where .= $this->parseDateExpression(strtolower($operator), $db_field, $this->seed->field_name_map[$field]['type']);
+                                 if (!empty($field) && !empty($this->seed->field_defs[$field]['type'])) {
+                                     $where .= $this->parseDateExpression(
+                                         strtolower($operator),
+                                         $db_field,
+                                         $this->seed->field_defs[$field]['type']
+                                     );
                                  } else {
                                      $where .= $this->parseDateExpression(strtolower($operator), $db_field);
                                  }

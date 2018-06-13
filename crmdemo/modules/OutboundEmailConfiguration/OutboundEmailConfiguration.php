@@ -1,6 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,11 +11,7 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 // external imports
-require_once "modules/Users/User.php";
-require_once "modules/Mailer/MailerException.php";    // requires MailerException in order to throw exceptions of that
                                                       // type
-require_once "modules/Mailer/Encoding.php";           // needs the valid encodings defined in Encoding
-require_once "include/Localization/Localization.php"; // required for using the global $locale, which is a Localization
 
 /**
  * Represents the base configurations and contains the logic for setting the configurations for a Mailer.

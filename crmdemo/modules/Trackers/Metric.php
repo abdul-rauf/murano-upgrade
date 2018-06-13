@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,14 +11,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 class Metric {
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function Metric($type, $name)
-    {
-        self::__construct($type, $name);
-    }
 
     public function __construct($type, $name)
     {

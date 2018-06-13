@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,7 +20,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 require_once("include/charts/Charts.php");
-require_once("modules/Charts/code/Chart_pipeline_by_sales_stage.php");
 
 global $app_list_strings, $current_language, $sugar_config, $currentModule, $action, $current_user, $theme, $timedate;
 $user_dateFormat = $timedate->get_date_format();
@@ -251,7 +249,7 @@ echo get_validate_chart_js();
 			$GLOBALS['log']->debug("user_id is: ");
 			$GLOBALS['log']->debug($user_id);
 			$GLOBALS['log']->debug("cache_file_name is: $cache_file_name");
-			$opp = BeanFactory::getBean('Opportunities');
+			$opp = BeanFactory::newBean('Opportunities');
             $db = $opp->db;
 			$where="";
 			//build the where clause for the query that matches $user
@@ -262,7 +260,7 @@ echo get_validate_chart_js();
 				$new_ids[$key] = $user_list[$key];
 			}
 			if ($count>0) {
-                foreach ($new_ids as $the_id => $_) {
+            foreach ($new_ids as $the_id => $_) {
                     $id[] = $db->quoted($the_id);
 				}
 				$ids = join(",",$id);
@@ -273,7 +271,7 @@ echo get_validate_chart_js();
 			$count = count($datax);
 			$dataxArr = array();
 			if ($count>0) {
-                foreach ($datax as $key => $_) {
+            foreach ($datax as $key => $_) {
                     $dataxArr[] = $db->quoted($key);
 				}
 				$dataxArr = join(",",$dataxArr);
@@ -441,7 +439,7 @@ echo get_validate_chart_js();
 
 		$user_id = array($current_user->id);
 
-		$opp = BeanFactory::getBean('Opportunities');
+		$opp = BeanFactory::newBean('Opportunities');
         $db = $opp->db;
 		$where="";
 		//build the where clause for the query that matches $user
@@ -452,7 +450,7 @@ echo get_validate_chart_js();
 			$new_ids[$key] = $user_list[$key];
 		}
 		if ($count>0) {
-            foreach ($new_ids as $the_id => $_) {
+        foreach ($new_ids as $the_id => $_) {
                 $id[] = $db->quoted($the_id);
 			}
 			$ids = join(",",$id);
@@ -462,7 +460,7 @@ echo get_validate_chart_js();
 		$count = count($datax);
 		$dataxArr = array();
 		if ($count>0) {
-            foreach ($datax as $key => $_) {
+        foreach ($datax as $key => $_) {
                 $dataxArr[] = $db->quoted($key);
 			}
 			$dataxArr = join(",",$dataxArr);

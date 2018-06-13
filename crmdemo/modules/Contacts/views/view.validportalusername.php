@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,14 +21,15 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * @author Collin Lee
  * */
  
-require_once('include/MVC/View/SugarView.php');
 
 class ContactsViewValidPortalUsername extends SugarView 
 {
- 	/**
-     * @see SugarView::process()
+    /**
+     * {@inheritDoc}
+     *
+     * @param array $params Ignored
      */
-    public function process() 
+    public function process($params = array())
  	{
 		$this->display();
  	}

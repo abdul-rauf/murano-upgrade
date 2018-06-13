@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'modules/ModuleBuilder/parsers/views/AbstractMetaDataParser.php' ;
-require_once 'modules/ModuleBuilder/parsers/views/MetaDataParserInterface.php' ;
 
 class ListLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDataParserInterface
 {
@@ -95,11 +92,9 @@ class ListLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
         
         if (empty ( $packageName ))
         {
-            require_once 'modules/ModuleBuilder/parsers/views/DeployedMetaDataImplementation.php' ;
             $this->implementation = new DeployedMetaDataImplementation ( $view, $moduleName, $client ) ;
         } else
         {
-            require_once 'modules/ModuleBuilder/parsers/views/UndeployedMetaDataImplementation.php' ;
             $this->implementation = new UndeployedMetaDataImplementation ( $view, $moduleName, $packageName, $client ) ;
         }
         $this->view = $view;
@@ -118,12 +113,14 @@ class ListLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
      * Deploy the layout
      * @param boolean $populate If true (default), then update the layout first with new layout information from the $_REQUEST array
      */
-    function handleSave($populate = true) {
+    function handleSave($populate = true, $clearCache = true) {
         if ($populate) {
             $this->_populateFromRequest();
         }
-        $this->implementation->deploy($this->_viewdefs); // force the field names back to upper case so the list view will work correctly
-        $this->_clearCaches();
+        $this->implementation->deploy($this->_viewdefs, $clearCache); // force the field names back to upper case so the list view will work correctly
+        if ($clearCache) {
+            $this->_clearCaches();
+        }
     }
 
     function getLayout ()
@@ -396,21 +393,19 @@ class ListLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
                 if (isset ( $_REQUEST [ strtolower ( $fieldname ) . 'width' ] ))
                 {
                     $width = substr ( $_REQUEST [ $fieldname . 'width' ], 6, 3 ) ;
-                    if (strpos ( $width, "%" ) != false)
-                    {
-                        $width = substr ( $width, 0, 2 ) ;
-                    }
+
 					if (!($width < 101 && $width > 0))
                     {
                         $width = 10;
                     }
-                    $newViewdefs [ $fieldname ] [ 'width' ] = $width."%" ;
+
+                    $newViewdefs[$fieldname]['width'] = $width;
                 } else if (isset ( $this->_viewdefs [ $fieldname ] [ 'width' ] ))
                 {
                     $newViewdefs [ $fieldname ] [ 'width' ] = $this->_viewdefs [ $fieldname ] [ 'width' ] ;
                 }
                 else {
-                	$newViewdefs [ $fieldname ] [ 'width' ] = "10%";
+                    $newViewdefs[$fieldname]['width'] = 10;
                 }
 
                 $newViewdefs [ $fieldname ] [ 'default' ] = ($i == 0) ;
@@ -479,7 +474,7 @@ class ListLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
         return array();
     }
 
-    public static function _trimFieldDefs($def)
+    public static function _trimFieldDefs(array $def)
     {
         if (isset($def['vname'])) {
             $def['label'] = $def['vname'];

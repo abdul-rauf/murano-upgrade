@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarForecasting/Export/AbstractExport.php');
-require_once('include/SugarForecasting/Manager.php');
 class SugarForecasting_Export_Manager extends SugarForecasting_Export_AbstractExport
 {
     /**
@@ -53,7 +51,7 @@ class SugarForecasting_Export_Manager extends SugarForecasting_Export_AbstractEx
             'name'=>'name'
         );
 
-        $admin = BeanFactory::getBean('Administration');
+        $admin = BeanFactory::newBean('Administration');
         $settings = $admin->getConfigForModule('Forecasts');
 
         if ($settings['show_worksheet_worst']) {
@@ -71,7 +69,7 @@ class SugarForecasting_Export_Manager extends SugarForecasting_Export_AbstractEx
             $fields_array['best_case_adjusted'] = 'best_case_adjusted';
         }
 
-        $seed = BeanFactory::getBean('ForecastManagerWorksheets');
+        $seed = BeanFactory::newBean('ForecastManagerWorksheets');
 
         return $this->getContent($data, $seed, $fields_array);
     }

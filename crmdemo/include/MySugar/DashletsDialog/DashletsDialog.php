@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -169,7 +168,7 @@ class DashletsDialog {
     	$chartsList = array();
         require_once('modules/Reports/SavedReport.php');
         $sq = new SugarQuery();
-        $savedReportBean = BeanFactory::getBean('Reports');
+        $savedReportBean = BeanFactory::newBean('Reports');
         $sq->from($savedReportBean);
 
         // Make sure the user isn't seeing reports they don't have access to
@@ -211,7 +210,7 @@ class DashletsDialog {
 
 		    case 'myFavorites':
                 global $current_user;
-                $sugaFav = BeanFactory::getBean('SugarFavorites');
+                $sugaFav = BeanFactory::newBean('SugarFavorites');
                 $current_favorites_beans = $sugaFav->getUserFavoritesByModule('Reports', $current_user);
                 $current_favorites = array();
                 foreach ((array)$current_favorites_beans as $key=>$val) {
@@ -237,7 +236,6 @@ class DashletsDialog {
 			foreach($savedReports as $savedReport){
 				// clint - fixes bug #20398
 				// only display dashlets that are from visibile modules and that the user has permission to list
-				require_once('include/MySugar/MySugar.php');
 				$myDashlet = new MySugar($savedReport->module);
 				$displayDashlet = $myDashlet->checkDashletDisplay();
 

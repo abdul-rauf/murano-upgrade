@@ -177,7 +177,7 @@ $mod_strings = array (
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Kuotat',
     'LBL_QUOTES_SHIP_TO' => 'Kuotat ( transport deri)',
     'LBL_QUOTES_BILL_TO' => 'Kuotat ( faturat deri)',
-    'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Artikujt e rreshtave të cituar',
+    'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Artikujt e rreshtave të kuotuar',
     'LBL_CONTRACTS_SUBPANEL_TITLE' => 'Kontratat',
     'LBL_COPY_ADDRESS_CHECKED_PRIMARY' => 'Kopjo në adresën primare',
     'LBL_COPY_ADDRESS_CHECKED_ALT' => 'Kopjo në adresat e tjera',
@@ -237,9 +237,6 @@ $mod_strings = array (
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B ID',
-    'LBL_DNB_BAL_PREVIEW' => 'Shikimi i kontakteve',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Kontaktet',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: informacion kontaktues',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Shënime',
 

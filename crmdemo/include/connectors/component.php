@@ -42,7 +42,7 @@ class component
             $args = $this->mapInput($args, $module);
             $item = $this->_source->getItem($args, $module);
             $result = $this->mapOutput($bean, $item);
-        } elseif (!empty($module) && ($bean = BeanFactory::getBean($module))) {
+        } elseif (!empty($module) && ($bean = BeanFactory::newBean($module))) {
             return $this->fillBean($args, $module, $bean);
         } else {
             throw new Exception("Invalid bean");
@@ -71,7 +71,6 @@ class component
             throw new Exception($GLOBALS['app_strings']['ERR_MISSING_MAPPING_ENTRY_FORM_MODULE']);
         }
 
-        require_once 'include/connectors/filters/FilterFactory.php';
         $filter = FilterFactory::getInstance(get_class($this->_source));
         $list = $filter->getList($args, $module);
 
@@ -83,7 +82,7 @@ class component
                 }
             } else {
                 for ($x=0; $x < $resultSize; $x++) {
-                    $beans[$x] = BeanFactory::getBean($module);
+                    $beans[$x] = BeanFactory::newBean($module);
                 }
             }
 

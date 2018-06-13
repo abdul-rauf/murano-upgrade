@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Quoted Line Item',
     'LBL_LIST_MANUFACTURER' => 'Gamintojas',
     'LBL_MANUFACTURERS' => 'Gamintojai',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Gamintojo Nr',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Tiekėjo prekės Nr.',
     'LBL_LIST_QUANTITY' => 'Kiekis',
     'LBL_LIST_COST_PRICE' => 'Savikaina',
     'LBL_LIST_DISCOUNT_PRICE' => 'Kaina',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Nuolaida procentais',
     'LBL_LIST_PRICE' => 'Rekomenduojama kaina:',
     'LBL_VENDOR_PART_NUM' => 'Tiekėjo prekės Nr:',
-    'LBL_MFT_PART_NUM' => 'Gamintojo prekės Nr:',
+    'LBL_MFT_PART_NUM' => 'Tiekėjo prekės Nr.:',
     'LBL_NEXT_STEP' => 'Next Step:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Nuolaidos data:',
     'LBL_WEIGHT' => 'Svoris:',
@@ -168,6 +168,8 @@ To create a {{module_name}}:
  - Click "Show More" to expose additional fields if necessary.
 2. Click "Save" to finalize the new record and return to the previous page.',
 
-    'LBL_MANUFACTURERS' => 'Gamintojai',
     'LBL_PRODUCT_POSITION' => 'Product Bundle Position',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Įvykdyto pasiūlymo eilučių prekių ir pasiūlymo duomenų sąrašas',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nauja įvykdyto pasiūlymo eilutės prekė)',
+    'LBL_DISCOUNT_PERCENT' => '% Procentai',
 );

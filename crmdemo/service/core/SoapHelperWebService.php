@@ -74,8 +74,7 @@ class SoapHelperWebServices {
 		} //if
 
 		if($value->module_dir == 'Bugs'){
-			require_once('modules/Releases/Release.php');
-			$seedRelease = BeanFactory::getBean('Releases');
+			$seedRelease = BeanFactory::newBean('Releases');
 			$options = $seedRelease->get_releases(TRUE, "Active");
 			$options_ret = array();
 			foreach($options as $name=>$value){
@@ -136,7 +135,7 @@ class SoapHelperWebServices {
 function validate_user($user_name, $password){
 	$GLOBALS['log']->info('Begin: SoapHelperWebServices->validate_user');
 	global $server, $current_user, $sugar_config;
-	$user = BeanFactory::getBean('Users');
+	$user = BeanFactory::newBean('Users');
 	$user->user_name = $user_name;
 	$authController = AuthenticationController::getInstance();
 	// Check to see if the user name and password are consistent.
@@ -183,7 +182,6 @@ function validate_user($user_name, $password){
 			if(!empty($_SESSION['is_valid_session']) && $this->is_valid_ip_address('ip_address') && $_SESSION['type'] == 'user'){
 
 				global $current_user;
-				require_once('modules/Users/User.php');
 				$current_user = BeanFactory::getBean('Users', $_SESSION['user_id']);
 				$this->login_success();
 				$GLOBALS['log']->info('Begin: SoapHelperWebServices->validate_authenticated - passed');
@@ -291,7 +289,6 @@ function validate_user($user_name, $password){
 
 	function checkQuery($errorObject, $query, $order_by = '')
     {
-        require_once 'include/SugarSQLValidate.php';
     	$valid = new SugarSQLValidate();
     	if(!$valid->validateQueryClauses($query, $order_by)) {
     		$GLOBALS['log']->error("SoapHelperWebServices->checkQuery - bad query: $query $order_by");
@@ -739,7 +736,7 @@ function validate_user($user_name, $password){
 		$count = 1;
 		$total = sizeof($name_value_lists);
 		foreach($name_value_lists as $name_value_list){
-			$seed = BeanFactory::getBean($module_name);
+			$seed = BeanFactory::newBean($module_name);
 			$seed->update_vcal = false;
 			foreach($name_value_list as $value){
 				if($value['name'] == 'id'){
@@ -750,8 +747,8 @@ function validate_user($user_name, $password){
 
 			foreach($name_value_list as $value) {
 				$val = $value['value'];
-				if($seed->field_name_map[$value['name']]['type'] == 'enum'){
-					$vardef = $seed->field_name_map[$value['name']];
+                if ($seed->field_defs[$value['name']]['type'] == 'enum') {
+                    $vardef = $seed->field_defs[$value['name']];
 					if(isset($app_list_strings[$vardef['options']]) && !isset($app_list_strings[$vardef['options']][$value]) ) {
 						if ( in_array($val,$app_list_strings[$vardef['options']]) ){
 							$val = array_search($val,$app_list_strings[$vardef['options']]);
@@ -761,7 +758,7 @@ function validate_user($user_name, $password){
 				if($module_name == 'Users' && !empty($seed->id) && ($seed->id != $current_user->id) && $value['name'] == 'user_hash'){
 					continue;
 				}
-                if(!empty($seed->field_name_map[$value['name']]['sensitive'])) {
+                if (!empty($seed->field_defs[$value['name']]['sensitive'])) {
                     continue;
                 }
                 $seed->{$value['name']} = $val;
@@ -1020,7 +1017,7 @@ function validate_user($user_name, $password){
 		$assigned_user_id = $current_user->id;
 
 		// check if it already exists
-	    $focus = BeanFactory::getBean('Accounts');
+	    $focus = BeanFactory::newBean('Accounts');
 	    if($focus->ACLAccess('Save')) {
 			if ( empty($account_name) && empty($account_id)) {
 				return;
@@ -1094,7 +1091,6 @@ function validate_user($user_name, $password){
 
 	function check_for_duplicate_contacts($seed){
 		$GLOBALS['log']->info('Begin: SoapHelperWebServices->check_for_duplicate_contacts');
-		require_once('modules/Contacts/Contact.php');
 
 		if(isset($seed->id)){
 			$GLOBALS['log']->info('End: SoapHelperWebServices->check_for_duplicate_contacts - no duplicte found');
@@ -1160,7 +1156,6 @@ function validate_user($user_name, $password){
 	function decrypt_string($string){
 		$GLOBALS['log']->info('Begin: SoapHelperWebServices->decrypt_string');
         if (extension_loaded('mcrypt')) {
-			require_once('modules/Administration/Administration.php');
 			$focus = Administration::getSettings();
 			$key = '';
 			if(!empty($focus->settings['ldap_enc_key'])){
@@ -1204,7 +1199,7 @@ function validate_user($user_name, $password){
         }
         //if the select fields array is empty, then use all the fields for this bean
         if(empty($select_fields)){
-            $fields = $seed->field_name_map;
+            $fields = $seed->field_defs;
             $select_fields = array_keys($fields);
         }
         //check to see if bean implements acl and this is not an admin so we can remove any restricted fields

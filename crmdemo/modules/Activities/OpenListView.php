@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -62,7 +61,7 @@ $dayEnd = $timedate->asDb($laterDate->get_day_end_time());
 $GLOBALS['log']->debug("filter $appointment_filter date $dayEnd");
 
 if(ACLController::checkAccess('Meetings', 'list', true)){
-	$meeting = BeanFactory::getBean('Meetings');
+	$meeting = BeanFactory::newBean('Meetings');
 	$where = '(';
 	$or = false;
 	foreach ($open_status as $status) {
@@ -92,7 +91,7 @@ if(ACLController::checkAccess('Meetings', 'list', true)){
 }
 
 if(ACLController::checkAccess('Calls', 'list', true)) {
-	$call = BeanFactory::getBean('Calls');
+	$call = BeanFactory::newBean('Calls');
 	$where = '(';
 	$or = false;
 

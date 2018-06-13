@@ -17,8 +17,8 @@ $connector_strings = array(
 <br/><br/>
 <ol>
 <li>다음의 Google 개발자 사이트로 이동하십시오.
-<a href=&#39;https://console.developers.google.com/project&#39;
-target=&#39;_blank&#39;>https://console.developers.google.com/project</a>.</li>
+<a href=\'https://console.developers.google.com/project\'
+target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
 
 <li>애플리케이션을 등록하고자 하는 Google 계정을 이용하여 로그인하십시오.</li>
 <li>새 프로젝트를 생성하십시오.</li>

@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -41,7 +38,6 @@ class ConnectorApi extends SugarApi
     public function getConnectorManager()
     {
         if (empty($this->connectorManger)) {
-            require_once('include/connectors/ConnectorManager.php');
             $this->connectorManager = new ConnectorManager();
         }
         return $this->connectorManager;
@@ -49,11 +45,12 @@ class ConnectorApi extends SugarApi
 
     /**
      * gets connector metadata
-     * @param Object $api api object
-     * @param Array $args arguments passed from api
+     *
+     * @param ServiceBase $api api object
+     * @param array $args arguments passed from api
      * @return array
      */
-    public function getConnectors($api, $args)
+    public function getConnectors(ServiceBase $api, array $args)
     {
         $cm = $this->getConnectorManager();
         // build cache
@@ -62,10 +59,10 @@ class ConnectorApi extends SugarApi
 
     /**
      * handles if given connector hash is valid
-     * @param Array $args arguments passed from api
+     * @param array $args arguments passed from api
      * @throws SugarApiExceptionInvalidHash
      */
-    public function validateHash($args)
+    public function validateHash(array $args)
     {
         if (!empty($args['connectorHash'])) {
             $cm = $this->getConnectorManager();

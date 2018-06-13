@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -26,6 +25,7 @@ $mod_strings = array (
   'LBL_LIST_FORM_TITLE' => 'Lista spedytorów',
   'LBL_NEW_FORM_TITLE' => 'Nowy spedytor',
   'LBL_SHIPPER' => 'Spedytor:',
+  'LBL_FILTER_ACTIVE' => 'Aktywni spedytorzy',
   'LBL_LIST_NAME' => 'Spedytor',
   'LBL_NAME' => 'Spedytor:',
   'LBL_LIST_LIST_ORDER' => 'Kolejność',

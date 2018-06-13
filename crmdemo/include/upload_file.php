@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/externalAPI/ExternalAPIFactory.php');
 
 use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 /**
@@ -58,14 +56,6 @@ class UploadFile
 			UPLOAD_ERR_CANT_WRITE => 'UPLOAD_ERR_CANT_WRITE - Failed to write file to disk.',
 			UPLOAD_ERR_EXTENSION => 'UPLOAD_ERR_EXTENSION - A PHP extension stopped the file upload.',
 			);
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function UploadFile($field_name = '')
-    {
-        self::__construct($field_name);
-    }
 
 	/**
 	 * Create upload file handler
@@ -244,12 +234,6 @@ class UploadFile
 		}
 
         // Added Sugar API Override flag to FILES to allow PUT API hits to work
-		//if(!is_uploaded_file($_FILES[$this->field_name]['tmp_name']) || !isset($_FILES[$this->field_name]['_SUGAR_API_UPLOAD']) || $_FILES[$this->field_name]['_SUGAR_API_UPLOAD'] !== true) {
-		//	return false;
-		//} elseif($_FILES[$this->field_name]['size'] > $sugar_config['upload_maxsize']) {
-		//    $GLOBALS['log']->fatal("ERROR: uploaded file was too big: max filesize: {$sugar_config['upload_maxsize']}");
-		//	return false;
-		//}
         if (is_uploaded_file($_FILES[$this->field_name]['tmp_name']) || (isset($_FILES[$this->field_name]['_SUGAR_API_UPLOAD']) && $_FILES[$this->field_name]['_SUGAR_API_UPLOAD'] === true)) {
             if($_FILES[$this->field_name]['size'] > $sugar_config['upload_maxsize']) {
                 $this->setError('fatal', "ERROR: uploaded file was too big: max filesize: {$sugar_config['upload_maxsize']}");
@@ -933,3 +917,4 @@ class UploadStream
     }
 
 }
+

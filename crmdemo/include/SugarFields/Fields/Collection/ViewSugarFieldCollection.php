@@ -9,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/SugarFields/Fields/Collection/SugarFieldCollection.php');
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
@@ -33,14 +32,6 @@ class ViewSugarFieldCollection{
     var $hideShowHideButton = false;
     var $action_type;
     var $form_name;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ViewSugarFieldCollection($fill_data = true)
-    {
-        self::__construct($fill_data);
-    }
 
     public function __construct($fill_data = true)
     {
@@ -68,7 +59,7 @@ class ViewSugarFieldCollection{
      * call retrieve values()
      */
     function setup(){
-        $rel = BeanFactory::getBean('Relationships');
+        $rel = BeanFactory::newBean('Relationships');
         if(!empty($this->vardef['relationship'])){
         	$rel->retrieve_by_name($this->vardef['relationship']);
         }
@@ -184,7 +175,7 @@ class ViewSugarFieldCollection{
         if(isset($this->displayParams['collection_field_list'])){
 
             $relatedObject = BeanFactory::getObjectName($this->related_module);
-            vardefmanager::loadVardef($this->related_module, $relatedObject);
+            VardefManager::loadVardef($this->related_module, $relatedObject);
             foreach($this->displayParams['collection_field_list'] as $k=>$v){
                 $javascript='';
                 $collection_field_vardef = $GLOBALS['dictionary'][$relatedObject]['fields'][$v['name']];
@@ -198,7 +189,6 @@ class ViewSugarFieldCollection{
 
                 // If relate field : enable quick search by creating the sqs_object array.
                 if($collection_field_vardef['type'] == 'relate'){
-                    require_once('include/TemplateHandler/TemplateHandler.php');
                     $tph = new TemplateHandler();
                     $javascript = $tph->createQuickSearchCode(array($collection_field_vardef['name']=>$collection_field_vardef), array($v), $this->form_name);
                     $javascript = str_replace('<script language="javascript">'."if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}sqs_objects['{$collection_field_vardef['name']}']=","",$javascript);
@@ -342,7 +332,6 @@ FRA;
      */
     function createQuickSearchCode($returnAsJavascript = true){
         $sqs_objects = array();
-        require_once('include/QuickSearchDefaults.php');
         $qsd = QuickSearchDefaults::getQuickSearchDefaults();
         $qsd->setFormName($this->form_name);
         for($i=0; $i<$this->numFields; $i++){

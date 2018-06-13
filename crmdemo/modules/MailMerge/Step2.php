@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -88,7 +87,7 @@ else
 	$xtpl->assign("STEP", "3");
 	//$xtpl->assign("MAIL_MERGE_CONTAINS_CONTACT_INFO", '<table><tr><td><input id="contains_contact_info" name="contains_contact_info" class="checkbox" type="checkbox" '.$checked.'/></td><td>'.$mod_strings['LBL_CONTAINS_CONTACT_INFO'].'</td></tr></table>');
 	$rel_options = array(""=>"--None--");
-	$seed = BeanFactory::getBean($_SESSION['MAILMERGE_MODULE']);
+	$seed = BeanFactory::newBean($_SESSION['MAILMERGE_MODULE']);
 	if($seed->load_relationship('contacts')){
 		$rel_options["Contacts"] = "Contacts";
 	}

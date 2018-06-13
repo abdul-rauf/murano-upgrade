@@ -291,7 +291,6 @@ $mod_strings = array(
         'moduleBtn'	=> 'Klikšķini la rediģētu šo moduli.',
         'moduleHelp'=> 'Izvēlieties moduļa komponenti rediģēšanai',
         'fieldsBtn'	=> 'Rediģējiet, kāda informācija tiek glabāta modulī, pārvaldot moduļa <b>Laukus</b>.<br/><br/>Šeit variet rediģēt un izveidot jaunus pielāgotos laukus.',
-        'labelsBtn' => 'Noklikšķiniet uz <b>Saglabāt</b>, lai saglabātu savas pielāgotās iezīmes.'	,
         'layoutsBtn'=> 'Pielāgojiet izkārtojumus Rediģēšanas, Detalizētajiem, Sarakstu un Meklēšanas skatījumiem.',
         'subpanelBtn'=> 'Rediģējiet, kāda informācija tiks parādīta šajos moduļu apakšpaneļos.',
         'layoutsHelp'=> 'Izvēlieties <b>Izkārtojumu rediģēšanai</b>.<br/<br/>Lai izmainītu datu ievadlaukus saturošu izkārtojumu, klikšķiniet <b>Rediģēšanas skatījums</b>.<br/><br/>Lai izmainītu izkārtojumu, kurš attēlo Rediģēšanas skatījumā ievadītos datus, klikšķiniet <b>Detalizēts skatījums</b>.<br/><br/>Lai izmainītu kolonnas, kuras parādās noklusētajā sarakstā, klikšķiniet <b>Saraksta skatījums</b>.<br/><br/>Lai izmainītu Pamata un Izvērstās meklēšanas formas izkārtojumus, klikšķiniet <b>Meklēšana</b>.',
@@ -726,10 +725,10 @@ $mod_strings = array(
 'LBL_JS_DELETE_REQUIRED_DDL_ITEM_CLOSED_LOST' => 'Vai tiešām vēlies dzēst pārdošanas stadiju "Aizvērts - zaudēts"? Dzēšot šo pārdošanas stadiju Prognožu modulis nedarbosies korekti.',
 
 //CONFIRM
-'LBL_CONFIRM_FIELD_DELETE'=>"Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts."
-        . " If the field is involved in a formula to calculate values for any fields, the formula will no longer work."
-        . "\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run."
-        . "\n\nDo you wish to continue?",
+'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
+        . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
+        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\n\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Vai tiešām vēlaties dzēst šo relāciju?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tādejādi tiks radīta pastāvīga relācija. Vai tiešām vēlaties izvietot šo relāciju?',
 'LBL_CONFIRM_DONT_SAVE' => 'Kopš pēdējās saglabāšanas ir veiktas izmaiņas, vai vēlaties saglabāt?',
@@ -746,16 +745,16 @@ $mod_strings = array(
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Iespējots</b>: Lauks parādīsies Dublikātu sapludināšanas funkcijā, taču nebūs pieejams izmantošanai filtra nosacījumu noteikšanai Dublikātu meklēšanas funkcijā.<br><b>Atspējots</b>: Lauks neparādīsies Dublikātu sapludināšanas funkcijā un nebūs pieejams izmantošanai filtra nosacījumu noteikšanai Dublikātu meklēšanas funkcijā.'
 . '<br><b>Filtrā</b>: Lauks parādīsies Dublikātu sapludināšanas funkcijā un būs pieejams arī Dublikātu meklēšanas funkcijā.<br><b>Tikai filtrs</b>: Lauks neparādīsies Dublikātu sapludināšanas funkcijā, taču būs pieejams Dublikātu meklēšanas funkcijā.<br><b>Pēc noklusējuma izvēlēts filtrs</b>: Lauks tiks izmantots filtra nosacījuma noteikšanai pēc noklusējuma Dublikāta meklēšanas lapā, kā arī parādīsies Dublikātu sapludināšanas funkcijā.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Izveidot formulu, lai noskaidrotu vērtību šajā laukā.<br>"
+'LBL_POPHELP_CALCULATED'=>"Izveidojiet formulu, lai noteiktu vērtību šajā laukā. <br>"
    . "Darbplūsmas definīcijas, kas satur darbību un ir iestatītas, lai atjauninātu šo lauku, vairs neveiks šo darbību.<br>"
    . "Lauki, kas izmanto formulas, netiks aprēķināti reālā laika režīmā "
-   . "Mobile EditView izkārtojumos.",
+   . "Mobilā rediģēšanas skatījuma izkārtojumos.",
 
 'LBL_POPHELP_DEPENDENT'=>"Izveidot formulu, lai noskaidrotu, vai šis lauks ir redzams izkārtojumos.<br/>"
         . "Atkarīgie lauki ievēros atkarības formulu uz pārlūka bāzētajā mobilajā skatā, <br/>"
         . "taču neievēros formulu vietējās lietotnēs, piemēram, Sugar Mobile tālruņiem iPhone. <br/>"
-        . "Tie neievēros formulu Sugar Self-Service portālā.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Izvēlieties, lai izmantotu šo laukus ierakstu meklēšanai modulī, izmantojot Globālās meklēšanas iespēju.',
+        . "Tie neievēros formulu Sugar Pašapkalpošanās portālā.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Izvēlieties izmantot šo lauku, lai meklētu ierakstus, izmantojot Globālo meklēšanu šajā modulī.',
 //Revert Module labels
 'LBL_RESET' => 'Atiestatīt',
 'LBL_RESET_MODULE' => 'Atiestatīt moduli',

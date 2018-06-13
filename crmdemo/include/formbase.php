@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -51,7 +50,6 @@ function populateFromPost($prefix, &$focus, $skipRetrieve=false) {
 	    ($_POST['assigned_user_id'] != $current_user->id)) {
 		$GLOBALS['check_notify'] = true;
 	}
-    require_once('include/SugarFields/SugarFieldHandler.php');
     $sfh = new SugarFieldHandler();
 
 	foreach($focus->field_defs as $field=>$def) {
@@ -89,7 +87,6 @@ function populateFromPostACL(SugarBean $focus)
 
     // set up a default bean as per bug 46448, without bringing EditView into the mix
     // bug 58730
-    require_once 'data/BeanFactory.php';
 
     if ($focus->new_with_id) {
         $beanId = null;
@@ -329,7 +326,6 @@ function isCloseAndCreateNewPressed() {
  * @return String URL format of teams sent to the form base code
  */
 function get_teams_url($module='') {
-	require_once('include/SugarFields/SugarFieldHandler.php');
 	$sfh = new SugarFieldHandler();
 	$sf = $sfh->getSugarField('Teamset', true);
     $teams = $sf->getTeamsFromRequest('team_name');
@@ -375,7 +371,6 @@ function get_teams_hidden_inputs($module='') {
 	}
 
 
-	require_once('include/SugarFields/SugarFieldHandler.php');
 	$sfh = new SugarFieldHandler();
 	$sf = $sfh->getSugarField('Teamset', true);
     $teams = $sf->getTeamsFromRequest('team_name');
@@ -404,7 +399,7 @@ function get_teams_hidden_inputs($module='') {
 
 function add_prospects_to_prospect_list($parent_id,$child_id)
 {
-    $focus=BeanFactory::getBean('Prospects');
+    $focus=BeanFactory::newBean('Prospects');
     if(is_array($child_id)){
         $uids = $child_id;
     }
@@ -440,7 +435,6 @@ function add_to_prospect_list($query_panel,$parent_module,$parent_type,$parent_i
     $GLOBALS['log']->debug('add_prospects_to_prospect_list:parameters:'.$child_id);
     $GLOBALS['log']->debug('add_prospects_to_prospect_list:parameters:'.$link_attribute);
     $GLOBALS['log']->debug('add_prospects_to_prospect_list:parameters:'.$link_type);
-    require_once('include/SubPanel/SubPanelTiles.php');
 
 
     if (!class_exists($parent_type)) {
@@ -520,7 +514,6 @@ function save_from_report($report_id,$parent_id, $module_name, $relationship_att
     $saved->retrieve($report_id, false);
 
     //initiailize reports engine with the report definition.
-    require_once('modules/Reports/SubpanelFromReports.php');
     $report = new SubpanelFromReports($saved);
     $report->run_query();
 

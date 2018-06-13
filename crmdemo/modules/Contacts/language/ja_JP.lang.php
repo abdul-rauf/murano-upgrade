@@ -237,9 +237,6 @@ $mod_strings = array (
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B プリンシパルID',
-    'LBL_DNB_BAL_PREVIEW' => '取引先担当者プレビュー',
-    'LBL_DNB_BAL_RSLT_CNT' => '取引先担当者',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B:担当者情報',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'メモ',
 

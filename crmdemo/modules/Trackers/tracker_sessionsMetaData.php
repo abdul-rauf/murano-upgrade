@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -120,5 +119,6 @@ $dictionary['tracker_sessions'] = array(
 		   		'rhs_module'=> 'TrackerSessions', 'rhs_table'=> 'tracker', 'rhs_key' => 'user_id',
 		   		'relationship_type'=>'one-to-many'
 		   )
-   	),          
+    ),
+    'acls' => array('SugarACLStatic' => true),
 );

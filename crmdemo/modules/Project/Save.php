@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -18,7 +17,7 @@ require_once('include/formbase.php');
 
 global $current_user;
 
-$sugarbean = BeanFactory::getBean('Project');
+$sugarbean = BeanFactory::newBean('Project');
 $sugarbean = populateFromPost('', $sugarbean);
 
 $projectTasks = array();
@@ -35,7 +34,7 @@ if(isset($_REQUEST['save_type']) || isset($_REQUEST['duplicateSave']) && $_REQUE
     $row = $sugarbean->db->fetchByAssoc($result);
 
     while ($row != null){
-        $projectTaskBean = BeanFactory::getBean('ProjectTask');
+        $projectTaskBean = BeanFactory::newBean('ProjectTask');
         $projectTaskBean->id = $row['id'];
         $projectTaskBean->retrieve();
         $projectTaskBean->date_entered = '';

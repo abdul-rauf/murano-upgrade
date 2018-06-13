@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,8 +9,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('include/externalAPI/Twitter/ExtAPITwitter.php');
-require_once('clients/base/api/ConnectorApi.php');
 // A simple example class
 class TwitterApi extends ConnectorApi
 {
@@ -77,13 +72,13 @@ class TwitterApi extends ConnectorApi
 
     /**
      * Gets Tweets for a user via proxy call to twitter
-     * @param $api
-     * @param $args
+     * @param ServiceBase $api
+     * @param array $args
      * @return mixed
      * @throws SugarApiExceptionRequestMethodFailure
      * @throws SugarApiExceptionMissingParameter
      */
-    public function getTweets($api, $args)
+    public function getTweets(ServiceBase $api, array $args)
     {
         $this->validateHash($args);
         $args2params = array(
@@ -127,13 +122,13 @@ class TwitterApi extends ConnectorApi
 
     /**
      * Gets Tweets for a user via proxy call to twitter
-     * @param $api
-     * @param $args
+     * @param ServiceBase $api
+     * @param array $args
      * @return mixed
      * @throws SugarApiExceptionRequestMethodFailure
      * @throws SugarApiExceptionMissingParameter
      */
-    public function getCurrentUser($api, $args)
+    public function getCurrentUser(ServiceBase $api, array $args)
     {
         $this->validateHash($args);
         $extApi = $this->getEAPM();

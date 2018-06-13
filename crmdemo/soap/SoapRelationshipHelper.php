@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once('soap/SoapError.php');
 
 function check_for_relationship($relationships, $module){
 	foreach($relationships as $table=>$rel){
@@ -81,7 +79,7 @@ function retrieve_relationships($module_name,  $related_module, $relationship_qu
 	$module_1 = $result['module_1'];
 	$table = $result['join_table'];
 
-	$mod = BeanFactory::getBean($module_1);
+	$mod = BeanFactory::newBean($module_1);
 
     $count_query = str_replace('rt.*', 'count(*) cnt', $query);
 	$result = $mod->db->query($count_query);
@@ -149,16 +147,22 @@ function retrieve_modified_relationships($module_name, $related_module, $relatio
 		$module_2 = $row['rhs_module'];
 		$mod2_key = $row['rhs_key'];
 		$has_join = false;
-	}
-	else{
-		$module_1 = $row['lhs_module'];
-		$mod_key = $row['join_key_lhs'];
-		$module_2 = $row['rhs_module'];
-		$mod2_key = $row['join_key_rhs'];
-	}
+    } else {
+        if ($row['lhs_module'] == 'Users') {
+            $module_1 = $row['rhs_module'];
+            $mod_key = $row['join_key_rhs'];
+            $module_2 = $row['lhs_module'];
+            $mod2_key = $row['join_key_lhs'];
+        } else {
+            $module_1 = $row['lhs_module'];
+            $mod_key = $row['join_key_lhs'];
+            $module_2 = $row['rhs_module'];
+            $mod2_key = $row['join_key_rhs'];
+        }
+    }
 
-	$mod = BeanFactory::getBean($module_1);
-	$mod2 = BeanFactory::getBean($module_2);
+	$mod = BeanFactory::newBean($module_1);
+	$mod2 = BeanFactory::newBean($module_2);
 
 	$table_alias = 'rt';
 	if($has_join == false){
@@ -399,8 +403,8 @@ function retrieve_relationship_query($module_name,  $related_module, $relationsh
 		return array('query' =>"", 'module_1'=>"", 'join_table' =>"", 'error'=>$error->get_soap_array());
 	}
 
-	$mod = BeanFactory::getBean($module_1);
-	$mod2 = BeanFactory::getBean($module_2);
+	$mod = BeanFactory::newBean($module_1);
+	$mod2 = BeanFactory::newBean($module_2);
 
 	$query = "SELECT rt.* FROM  $table rt ";
 	$query .= " inner join $mod->table_name m1 on rt.$mod_key = m1.id ";
@@ -448,7 +452,7 @@ function get_module_link_field($module_1, $module_2) {
 		return FALSE;
 	}
 
-	$obj_1 = BeanFactory::getBean($module_1);
+	$obj_1 = BeanFactory::newBean($module_1);
 
 	// loop through link fields of $module_1, checking for a link to $module_2
 	foreach ($obj_1->get_linked_fields() as $linked_field) {

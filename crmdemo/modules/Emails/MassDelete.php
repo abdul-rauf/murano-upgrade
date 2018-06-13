@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -13,7 +12,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 if(!empty($_REQUEST['grabbed'])) {
 	
-	$focus = BeanFactory::getBean('Emails');
+	$focus = BeanFactory::newBean('Emails');
 	
 	$emailIds = array();
 	// CHECKED ONLY:

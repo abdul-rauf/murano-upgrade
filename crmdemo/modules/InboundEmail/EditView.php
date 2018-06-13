@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -15,7 +14,6 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 $_REQUEST['edit']='true';
 
-require_once('include/SugarFolders/SugarFolders.php');
 require_once('include/templates/TemplateGroupChooser.php');
 
 use Sugarcrm\Sugarcrm\Util\Serialized;
@@ -30,10 +28,10 @@ if (!$current_user->isAdminForModule("InboundEmail")) {
     sugar_die(translate('ERR_NOT_ADMIN'));
 }
 
-$focus = BeanFactory::getBean('InboundEmail');
+$focus = BeanFactory::newBean('InboundEmail');
 $focus->checkImap();
-$javascript = new Javascript();
-$email = BeanFactory::getBean('Emails');
+$javascript = new javascript();
+$email = BeanFactory::newBean('Emails');
 /* Start standard EditView setup logic */
 
 $domMailBoxType = $app_list_strings['dom_mailbox_type'];
@@ -225,7 +223,6 @@ $xtpl->assign('RETURN_MODULE', 'InboundEmail');
 $xtpl->assign('RETURN_ID', $focus->id);
 $xtpl->assign('RETURN_ACTION', $return_action);
 // module specific
-//$xtpl->assign('ROLLOVER', $email->rolloverStyle);
 $xtpl->assign("EMAIL_OPTIONS", $mod_strings['LBL_EMAIL_OPTIONS']);
 $xtpl->assign('MODULE_TITLE', getClassicModuleTitle('InboundEmail', array($mod_strings['LBL_MODULE_NAME'],$focus->name), true));
 $xtpl->assign('ID', $focus->id);
@@ -358,8 +355,6 @@ $team_id = get_select_options_with_id($teamArr, $my_team_id);
 if($focus->is_personal) {
 	$code = "<select name='team_id' id ='team_id' tabindex='211' disabled >{$team_id}</select>";
 } else {
-//$xtpl->assign('TEAM_ID', $team_id);
-require_once('include/QuickSearchDefaults.php');
 $qsd = QuickSearchDefaults::getQuickSearchDefaults();
 
 $sqs_objects = array(
@@ -367,14 +362,12 @@ $sqs_objects = array(
 );
 
 
-require_once('include/SugarFields/Fields/Teamset/EmailSugarFieldTeamsetCollection.php');
 $teamSetField = new EmailSugarFieldTeamsetCollection($focus, $focus->field_defs, "get_non_private_teams_array");
 $sqs_objects = array_merge($sqs_objects, $teamSetField->createQuickSearchCode(false));
 $json = getJSONobj();
 $quicksearch_js = '<script type="text/javascript" language="javascript">sqs_objects = ' . $json->encode($sqs_objects) . '</script>';
 //add custom fields to validation
-foreach($javascript->sugarbean->field_name_map as $field=>$value)
-{
+foreach ($javascript->sugarbean->field_defs as $field => $value) {
     if(isset($value['custom_type']))
     {
         if ($value['custom_type'] != 'link')
@@ -394,7 +387,6 @@ $code = $teamSetField->get_code();
 }
 $xtpl->assign("TEAM_SET_FIELD", $code);
 
-//$javascript = get_set_focus_js(). $javascript->getScript() . $quicksearch_js;
 $xtpl->assign('JAVASCRIPT', get_set_focus_js(). $javascript->getScript() . $quicksearch_js);
 
 require_once('include/SugarSmarty/plugins/function.sugar_help.php');
@@ -423,11 +415,6 @@ foreach ($tipsStrings as $string)
 }
 $xtpl->assign('TIPS', $tips);
 
-// WINDOWS work arounds
-//if(is_windows()) {
-//	$xtpl->assign('MAYBE', '<style> div.maybe { display:none; }</style>');
-//}
-// PARSE AND PRINT
 //Overrides for bounce mailbox accounts
 if ($focus->mailbox_type == 'bounce')
 {
@@ -441,9 +428,6 @@ elseif ($focus->mailbox_type == 'createcase')
 
 else if( $focus->is_personal == '1')
      $xtpl->assign('MODULE_TITLE', getClassicModuleTitle('InboundEmail', array($mod_strings['LBL_PERSONAL_MODULE_NAME'],$focus->name), true));
-
-//else
-
 
 $xtpl->parse("main");
 $xtpl->out("main");

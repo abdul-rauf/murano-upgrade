@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -129,7 +128,7 @@ abstract class AbstractMetaDataParser
         );
     }
 
-	protected function _standardizeFieldLabels ( &$fielddefs )
+    protected function _standardizeFieldLabels(array &$fielddefs)
 	{
 		foreach ( $fielddefs as $key => $def )
 		{
@@ -140,7 +139,10 @@ abstract class AbstractMetaDataParser
 		}
 	}
 
-	abstract static function _trimFieldDefs ( $def ) ;
+    public static function _trimFieldDefs(array $def)
+    {
+        throw new BadMethodCallException(__METHOD__ . ' is not implemented');
+    }
 
 	public function getRequiredFields(){
 	    $fieldDefs = $this->implementation->getFielddefs();
@@ -171,8 +173,6 @@ abstract class AbstractMetaDataParser
         else{
             return ($val == true);
         }
-
-        return true;
     }
 
     /**
@@ -205,7 +205,7 @@ abstract class AbstractMetaDataParser
      * @param string $client The client for this request
      * @return bool|null Boolean if there is a setting for a client, null otherwise
      */
-    public static function getClientStudioValidation(Array $studio, $view, $client)
+    public static function getClientStudioValidation(array $studio, $view, $client)
     {
         // Handle client specific studio setting for a field
         if ($client && isset($studio[$client])) {

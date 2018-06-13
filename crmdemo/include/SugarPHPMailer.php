@@ -9,8 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'modules/Mailer/PHPMailerProxy.php';
-require_once 'include/OutboundEmail/OutboundEmail.php';
 
 /**
  * Sugar mailer
@@ -26,14 +24,6 @@ class SugarPHPMailer extends PHPMailerProxy
     var $disclosureText;
     var $isHostEmpty = false;
     var $opensslOpened = true;
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function SugarPHPMailer()
-    {
-        self::__construct();
-    }
 
     /**
      * Sole constructor
@@ -83,7 +73,6 @@ class SugarPHPMailer extends PHPMailerProxy
     public function setMailer() {
         global $current_user;
 
-        require_once("include/OutboundEmail/OutboundEmail.php");
         $oe = new OutboundEmail();
         $oe = $oe->getUserMailerSettings($current_user);
 
@@ -117,7 +106,6 @@ class SugarPHPMailer extends PHPMailerProxy
      * Prefills mailer for system
      */
     public function setMailerForSystem() {
-        require_once("include/OutboundEmail/OutboundEmail.php");
         $oe = new OutboundEmail();
         $oe = $oe->getSystemMailerSettings();
 
@@ -155,7 +143,6 @@ class SugarPHPMailer extends PHPMailerProxy
 
         if($this->preppedForOutbound == false) {
             //bug 28534. We should not set it to true to circumvent the following conversion as each email is independent.
-            //$this->preppedForOutbound = true; // flag so we don't redo this
             $OBCharset = $locale->getPrecedentPreference('default_email_charset');
 
             // handle disclosure
@@ -192,26 +179,7 @@ eoq;
 
             // Headers /////////////////////////////////
             // the below is done in PHPMailer::CreateHeader();
-            //$this->Subject			= $locale->translateCharsetMIME(trim($this->Subject), 'UTF-8', $locale->getPrecedentPreference('default_email_charset'));
             $this->FromName		= $locale->translateCharset(trim($this->FromName), 'UTF-8', $OBCharset);
-            /*
-               foreach($this->ReplyTo as $k => $v) {
-                   $this->ReplyTo[$k][1] = $locale->translateCharset(trim($v[1]), 'UTF-8', $OBCharset);
-               }
-               // TO: fields
-               foreach($this->to as $k => $toArr) {
-                   $this->to[$k][1]	= $locale->translateCharset(trim($toArr[1]), 'UTF-8', $OBCharset);
-               }
-               // CC: fields
-               foreach($this->cc as $k => $ccAddr) {
-                   $this->cc[$k][1]	= $locale->translateCharset(trim($ccAddr[1]), 'UTF-8', $OBCharset);
-               }
-               // BCC: fields
-               foreach($this->bcc as $k => $bccAddr) {
-                   $this->bcc[$k][1]	= $locale->translateCharset(trim($bccAddr[1]), 'UTF-8', $OBCharset);
-               }
-               */
-
         }
     }
 

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -75,9 +74,8 @@ function pollMonitoredInboxes() {
 	global $app_strings;
 
 
-	require_once('modules/Emails/EmailUI.php');
 
-	$ie = BeanFactory::getBean('InboundEmail');
+	$ie = BeanFactory::newBean('InboundEmail');
 	$emailUI = new EmailUI();
 	$r = $ie->db->query('SELECT id, name FROM inbound_email WHERE is_personal = 0 AND deleted=0 AND status=\'Active\' AND mailbox_type != \'bounce\'');
 	$GLOBALS['log']->debug('Just got Result from get all Inbounds of Inbound Emails');
@@ -111,7 +109,6 @@ function pollMonitoredInboxes() {
 				if(is_array($newMsgs)) {
 					$current = 1;
 					$total = count($newMsgs);
-					require_once("include/SugarFolders/SugarFolders.php");
 					$sugarFolder = new SugarFolder();
 					$groupFolderId = $ieX->groupfolder_id;
 					$isGroupFolderExists = false;
@@ -125,10 +122,8 @@ function pollMonitoredInboxes() {
 					$messagesToDelete = array();
 					if ($ieX->isMailBoxTypeCreateCase()) {
 						$users[] = $sugarFolder->assign_to_id;
-						require_once("modules/Teams/TeamSet.php");
-						require_once("modules/Teams/Team.php");
 						$GLOBALS['log']->debug('Getting users for teamset');
-						$teamSet = BeanFactory::getBean('TeamSets');
+						$teamSet = BeanFactory::newBean('TeamSets');
 						$usersList = $teamSet->getTeamSetUsers($sugarFolder->team_set_id, true);
 						$GLOBALS['log']->debug('Done Getting users for teamset');
 						$users = array();
@@ -205,7 +200,7 @@ function pollMonitoredInboxes() {
 									/*If the group folder doesn't exist then download only those messages
 									 which has caseid in message*/
 									$ieX->getMessagesInEmailCache($msgNo, $uid);
-									$email = BeanFactory::getBean('Emails');
+									$email = BeanFactory::newBean('Emails');
 									$header = imap_headerinfo($ieX->conn, $msgNo);
 									$email->name = $ieX->handleMimeHeaderDecode($header->subject);
 									$email->from_addr = $ieX->convertImapToSugarEmailAddress($header->from);
@@ -220,7 +215,7 @@ function pollMonitoredInboxes() {
 										if(!class_exists('aCase')) {
 
 										}
-										$c = BeanFactory::getBean('Cases');
+										$c = BeanFactory::newBean('Cases');
 										$GLOBALS['log']->debug('looking for a case for '.$email->name);
 										if ($ieX->getCaseIdFromCaseNumber($email->name, $c)) {
 											$ieX->importOneEmail($msgNo, $uid);
@@ -295,60 +290,29 @@ function runMassEmailCampaign() {
  */
 function pruneDatabase() {
 	$GLOBALS['log']->info('----->Scheduler fired job of type pruneDatabase()');
-	$backupDir	= sugar_cached('backups');
-	$backupFile	= 'backup-pruneDatabase-GMT0_'.gmdate('Y_m_d-H_i_s', strtotime('now')).'.php';
 
 	$db = DBManagerFactory::getInstance();
 	$tables = $db->getTablesArray();
-	$queryString = array();
 
 	if(!empty($tables)) {
-		foreach($tables as $kTable => $table) {
+        foreach ($tables as $table) {
 			// find tables with deleted=1
 			$columns = $db->get_columns($table);
 			// no deleted - won't delete
 			if(empty($columns['deleted'])) continue;
 
-			$custom_columns = array();
-			if(array_search($table.'_cstm', $tables)) {
+            if (in_array($table . '_cstm', $tables)) {
 			    $custom_columns = $db->get_columns($table.'_cstm');
 			    if(empty($custom_columns['id_c'])) {
-			        $custom_columns = array();
+                    $db->query('DELETE FROM ' . $table . '_cstm WHERE id_c IN'
+                        . ' (SELECT id FROM ' . $table . ' WHERE deleted = 1)');
 			    }
 			}
 
-			$qDel = "SELECT * FROM $table WHERE deleted = 1";
-			$rDel = $db->query($qDel);
-
-			// make a backup INSERT query if we are deleting.
-			while($aDel = $db->fetchByAssoc($rDel, false)) {
-				// build column names
-
-				$queryString[] = $db->insertParams($table, $columns, $aDel, null, false);
-
-				if(!empty($custom_columns) && !empty($aDel['id'])) {
-                    $qDelCstm = 'SELECT * FROM '.$table.'_cstm WHERE id_c = '.$db->quoted($aDel['id']);
-                    $rDelCstm = $db->query($qDelCstm);
-
-                    // make a backup INSERT query if we are deleting.
-                    while($aDelCstm = $db->fetchByAssoc($rDelCstm)) {
-                        $queryString[] = $db->insertParams($table, $custom_columns, $aDelCstm, null, false);
-                    } // end aDel while()
-
-                    $db->query('DELETE FROM '.$table.'_cstm WHERE id_c = '.$db->quoted($aDel['id']));
-                }
-			} // end aDel while()
 			// now do the actual delete
 			$db->query('DELETE FROM '.$table.' WHERE deleted = 1');
 		} // foreach() tables
 
-		if(!file_exists($backupDir) || !file_exists($backupDir.'/'.$backupFile)) {
-			// create directory if not existent
-			mkdir_recursive($backupDir, false);
-		}
-		// write cache file
-
-		write_array_to_file('pruneDatabase', $queryString, $backupDir.'/'.$backupFile);
 		return true;
 	}
 	return false;
@@ -358,11 +322,6 @@ function pruneDatabase() {
 ///**
 // * Job 4
 // */
-
-//function securityAudit() {
-//	// do something
-//	return true;
-//}
 
 function trimTracker()
 {
@@ -404,7 +363,7 @@ function pollMonitoredInboxesForBouncedCampaignEmails() {
 	global $dictionary;
 
 
-	$ie = BeanFactory::getBean('InboundEmail');
+	$ie = BeanFactory::newBean('InboundEmail');
 	$r = $ie->db->query('SELECT id FROM inbound_email WHERE deleted=0 AND status=\'Active\' AND mailbox_type=\'bounce\'');
 
 	while($a = $ie->db->fetchByAssoc($r)) {
@@ -477,7 +436,6 @@ function updateTrackerSessions() {
 function sendEmailReminders()
 {
     $GLOBALS['log']->info('----->Scheduler fired job of type sendEmailReminders()');
-    require_once "modules/Activities/EmailReminder.php";
     $reminder = new EmailReminder();
     return $reminder->process();
 }

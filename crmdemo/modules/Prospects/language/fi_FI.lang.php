@@ -168,9 +168,6 @@ $mod_strings = array (
   'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}}<a href="#{{buildRoute model=this}}">{{full_name}}</a> luotiin.',
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Principal ID',
-    'LBL_DNB_BAL_PREVIEW' => 'Kohteiden esikatselu',
-    'LBL_DNB_BAL_RSLT_CNT' => 'Kohteet',
-    'LBL_DNB_BAL_RSLT_HEADER' => 'D&B: Kohdetiedot',
     //Document title
     'TPL_BROWSER_SUGAR7_RECORDS_TITLE' => '{{module}} &raquo; {{appId}}',
     'TPL_BROWSER_SUGAR7_RECORD_TITLE' => '{{#if last_name}}{{#if first_name}}{{first_name}} {{/if}}{{last_name}} &raquo; {{/if}}{{module}} &raquo; {{appId}}',

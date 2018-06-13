@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -65,7 +64,6 @@ $dictionary['KBContent'] = array(
             'studio' => true,
             'duplicate_on_record_copy' => 'no',
             'massupdate' => false,
-            'default' => '',
             'validation' => array(
                 'type' => 'isbefore',
                 'compareto' => 'exp_date',
@@ -79,7 +77,6 @@ $dictionary['KBContent'] = array(
             'sortable' => true,
             'duplicate_on_record_copy' => 'no',
             'studio' => true,
-            'default' => '',
         ),
         'approved' => array(
             'name' => 'approved',

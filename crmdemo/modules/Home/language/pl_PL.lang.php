@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library — narzędzia biblioteki UI pozwalające na implementację funkcji grubego klienta.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer — klasa wspomagająca zarządzanie klientem e-mail dla PHP',
   'LBL_SOURCE_JSHRINK' => 'JShrink — narzędzie do minimalizacji plików Javascript napisany w PHP',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish — pozwala na dwustronne szyfrowanie bez konieczności wykorzystania rozszerzenia MCrypt PHP.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 — parser SAX dla HTML i innych niepoprawnie sformatowanych dokumentów XML',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library — rozszerzenia biblioteki interfejsu użytkownika Yahoo!, których twórcą jest Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject — wykrywanie Javascript Flash Player i zagnieżdżonych skryptów.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Witaj w Dashboardzie pomocy Sugar 7',
-    'LBL_HELP_RECORD' => 'Dashlet pomocy wyświetla określone informacje o wyświetlanym module, zawiera szczegółowe wskazówki do wykonania pewnych czynności w module oraz wskazuje, gdzie można uzyskać więcej informacji i wsparcie. Dashlet pomocy pozostaje otwarty, więc można wyświetlać kroki podczas ich wykonywania w module. 
-
-Dashboard pomocy jest dostępny dla wszystkich modułów Sugar 7 i można go włączać i wyłączać poprzez kliknięcie ikony Pomocy w stopce aplikacji.',
+    'LBL_HELP_RECORD_TITLE' => 'Pomoc',
+    'LBL_HELP_RECORD' => 'Pomoc wyświetla szczegółowe informacje na temat wyświetlanego modułu, przedstawia szczegółowe kroki do wykonania niektórych czynności w module i kieruje użytkownika do miejsc, gdzie może uzyskać więcej informacji i wsparcia.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtr',
 );

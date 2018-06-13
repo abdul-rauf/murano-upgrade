@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -44,8 +43,7 @@ if ($error_msg != '')
 if((isset($_REQUEST['popup']) && $_REQUEST['popup'] == 'true') ||(isset($_POST['popup']) && $_POST['popup']==true)) insert_popup_header($theme);
 
 
-$contact = BeanFactory::getBean('Contacts');
-require_once('modules/Contacts/ContactFormBase.php');
+$contact = BeanFactory::newBean('Contacts');
 $contactForm = new ContactFormBase();
 $GLOBALS['check_notify'] = FALSE;
 
@@ -103,7 +101,7 @@ if(!empty($_POST['Contactsrelate_id'])) {
 
 $input .= get_teams_hidden_inputs('Contacts');
 
-$emailAddress = BeanFactory::getBean('EmailAddresses');
+$emailAddress = BeanFactory::newBean('EmailAddresses');
 $input .= $emailAddress->getEmailAddressWidgetDuplicatesView($contact);
 
 $get = '';

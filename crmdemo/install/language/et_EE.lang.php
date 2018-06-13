@@ -74,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS-i/FastCGI sapi kasutamisel optimaalse kogemuse saamiseks seadke fastcgi.logging oma php.ini failis väärtusele 0.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Installitud mittetoetatud PHP versioon: (vers',
     'LBL_DB_UNAVAILABLE'                => 'Andmebaas pole saadaval',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Andmebaasi tuge ei leitud. Veenduge, et teil oleks vajalikud draiverid ühe järgmise toetatud andmebaasitüübi puhul: MySQL või MS SQLServer. Olenevalt teie PHP versioonist võib teil olla vaja php.ini failis laiend lahti kommenteerida või rekompileerida õige kahendfailiga. Lisateabe saamiseks andmebaasi toe lubamise kohta vaadake PHP juhendit.<br><br>Oracle ja DB2 poler SugarCRM PRO puhul toetatud andmeaasid. Toetatud andmebaaside loendi ja muu platvormi teabe saamiseks külastage lehte <a href="http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/">http://support.sugarcrm.com/05_Resources/03_Supported_Platforms/</a>.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Andmebaasi tuge ei leitud. Veenduge, et teil oleks vajalikud draiverid ühe järgmise toetatud andmebaasitüübi jaoks: MySQL, MS SQLServer, Oracle või DB2. Olenevalt teie PHP versioonist võib teil olla vaja php.ini failis laiend lahti kommenteerida või rekompileerida õige kahendfailiga. Lisateabe saamiseks andmebaasi toe lubamise kohta vaadake PHP juhendit.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugari rakenduseks vajaliku XML parseri teegiga seotud funktsioone ei leitud. Olenevalt teie PHP versioonist võib teil olla vaja php.ini failis laiend lahti kommenteerida või rekompileerida õige kahendfailiga. Lisateabe saamiseks vaadake PHP juhendit.',
     'LBL_CHECKSYS_CSPRNG' => 'Juhusliku arvu generaator',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugari rakenduseks vajaliku mitmebaidiste stringide PHP laiendiga (mbstring) seotud funktsioone ei leitud. <br/><br/>Üldjuhul pole moodul mbstring PHP-s vaikimisi lubatud ja tuleb aktiveerida suvandiga --enable-mbstring when the PHP-kahendfaili loomisel. Lisateabe saamiseks mbstring toe lubamise kohta vaadake PHP juhendit.',
@@ -107,7 +107,7 @@ $mod_strings = array(
 	'ERR_DB_NAME2'						=> "Andmebaasi nimi ei saa sisaldada märke \\, / või .",
     'ERR_DB_MYSQL_DB_NAME_INVALID'      => "Andmebaasi nimi ei saa sisaldada märke \\, / või .",
     'ERR_DB_MSSQL_DB_NAME_INVALID'      => "Andmebaasi nimi ei saa alata numbriga, märgiga # või @ ega saa sisaldada tühikut ega märke \", ', *, /, \\, ?, :, <, >, &, ! või -",
-    'ERR_DB_OCI8_DB_NAME_INVALID'       => "Andmebaasi nimi võib sisaldada ainult irjamärke ja sümboleid #, _, :, ., / või $",
+    'ERR_DB_OCI8_DB_NAME_INVALID'       => "Andmebaasi nimi võib sisaldada ainult tähtnumbrilisi märke ja sümboleid #, _, -, :, ., / või $",
 	'ERR_DB_PASSWORD'					=> 'Sugari andmebaasi administraatorile esitatud paroolid ei kattu. Sisestage samad paroolid parooli väljadele uuesti.',
 	'ERR_DB_PRIV_USER'					=> 'Esitage andmebaasi administaatori kasutajanimi. Kasutaja on nõutav esialgseks ühenduseks andmebaasiga.',
 	'ERR_DB_USER_EXISTS'				=> 'Sugari andmebaasi kasutajanimi on juba olemas – teist samanimelist ei saa luua. Sisestage uus kasutajanimi.',
@@ -269,7 +269,6 @@ $mod_strings = array(
     'LBL_INSTALL_TYPE_MSG1'             => 'Võti on nõutav üldiseks rakenduse toimimiseks, kuid mitte installimiseks. Te ei pea sel ajal võtit sisestama, kuid peate esitama võtme pärast rakenduse installimist.',
     'LBL_INSTALL_TYPE_MSG2'             => 'Installimiseks on vaja miinimumteavet. Soovitatav uutele kasutajatele.',
     'LBL_INSTALL_TYPE_MSG3'             => 'Pakub installimisel seadistatavaid lisasuvandeid. Enamik neist suvanditest on saadaval ka pärast installimist admini ekraanidel. Soovitatav edasijõudnud kasutajatele.',
-    'LBL_INSTALL_TYPE_MSG3'             => 'Pakub installimisel seadistatavaid lisasuvandeid. Enamik neist suvanditest on saadaval ka pärast installimist admini ekraanidel. Soovitatav edasijõudnud kasutajatele.',
 	'LBL_LANG_1'						=> 'Sugaris muu kui vaikekeele kasutamiseks (US-English) saate sel etapil üles laadida ja installida keelepaketi. Saate keelepakette üles laadida ja installida ka Sugari rakendusest. Kui soovite selle etapi vahele jätta, klõpsake nuppu Edasi.',
 	'LBL_LANG_BUTTON_COMMIT'			=> 'Installi',
 	'LBL_LANG_BUTTON_REMOVE'			=> 'Eemalda',
@@ -335,7 +334,6 @@ $mod_strings = array(
 	'LBL_ML_UNINSTALLABLE'				=> 'Mitteinstallitav',
 	'LBL_ML_VERSION'					=> 'Versioon',
 	'LBL_MSSQL'							=> 'SQL-server',
-	'LBL_MSSQL2'                        => 'SQL-server (FreeTDS)',
 	'LBL_MSSQL_SQLSRV'				    => 'SQL-server (Microsoft SQL-serveri draiver PHP puhul)',
 	'LBL_MYSQL'							=> 'MySQL',
     'LBL_MYSQLI'						=> 'MySQL (mysqli laiend)',
@@ -424,7 +422,6 @@ $mod_strings = array(
 	'LBL_STEP'							=> 'Samm',
 	'LBL_TITLE_WELCOME'					=> 'Tere tulemast SugarCRM-i ',
 	'LBL_WELCOME_1'						=> 'See installer loob SugarCRM-i andmebaasitabelid ja seadistab konfiguratsioonimuutjad, mille peate käivitama. Kogu protsessiks peaks kuluma umbes kümme minutit.',
-	'LBL_WELCOME_2'						=> 'Installidokumentide saamiseks külastage lehte <a href="http://www.sugarcrm.com/crm/installation" target="_blank">Sugar Wiki</a>. <BR><BR> Saate abi ka Sugari kooskonnast lehel <a href="http://www.sugarcrm.com/forums/" target="_blank">Sugari foorumid</a>.',
     //welcome page variables
     'LBL_TITLE_ARE_YOU_READY'            => 'Kas olete installimiseks valmis?',
     'REQUIRED_SYS_COMP' => 'Nõutavad süsteemikomponendid',
@@ -445,7 +442,7 @@ Süsteem kontrollib kõike järgmist.<br>
 <li><b>Seansi muutujad</b> &#8211; peavad õigesti töötama</li>
 <li> <b>MB stringid</b> &#8211; peavad olema installitud ja failis php.ini lubatud</li>
 
-<li> <b>Andmebaasi tugi</b> &#8211; peab olema MySQL-i, SQL-serveri, Oracle&#39;i või DB2 puhul olemas</li>
+<li> <b>Andmebaasi tugi</b> &#8211; peab olema MySQL-i, SQL-serveri, Oracle\'i või DB2 puhul olemas</li>
 
 <li> <b>Config.php</b> &#8211; peab olemas olema ja sel peavad olema asjakohased load selle kirjutatavaks muutmiseks</li>
 <li>Järgmised Sugari failid peavad olema kirjutatavad:<ul><li><b>/kohandatud</li>
@@ -538,9 +535,9 @@ Lisateabe saamiseks vaadake installijuhendit.                                ",
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Esitage Sugari eksemplari süsteemi nimi.',
 	'LBL_PATCH_UPLOAD' => 'Valige paiga fail kohalikust arvutist',
 	'LBL_INCOMPATIBLE_PHP_VERSION' => 'Nõutav PHP versioon 5 või uuem.',
-	'LBL_MINIMUM_PHP_VERSION' => 'Minimaalne nõutav PHP versioon on 5.3.0.',
+    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
 	'LBL_YOUR_PHP_VERSION' => '(Teie praegune php versioon on ',
-	'LBL_RECOMMENDED_PHP_VERSION' =>' Soovitatav php versioon on 5.3.x)',
+    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP tagasiühilduvuse režiim on sisse lülitatud. Jätkamiseks seadke zend.ze1_compatibility_mode suvandile Väljas',
 
     'advanced_password_new_account_email' => array(

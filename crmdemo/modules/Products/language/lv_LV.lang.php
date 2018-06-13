@@ -24,7 +24,7 @@ $mod_strings = array(
     'LBL_LIST_NAME' => 'Piedāvājuma rinda',
     'LBL_LIST_MANUFACTURER' => 'Ražotājs',
     'LBL_MANUFACTURERS' => 'Ražotāji',
-    'LBL_LIST_LBL_MFT_PART_NUM' => 'Raž. Nr.',
+    'LBL_LIST_LBL_MFT_PART_NUM' => 'Daļas numurs',
     'LBL_LIST_QUANTITY' => 'Daudzums',
     'LBL_LIST_COST_PRICE' => 'Izmaksas',
     'LBL_LIST_DISCOUNT_PRICE' => 'Cena',
@@ -52,7 +52,7 @@ $mod_strings = array(
     'LBL_SELECT_DISCOUNT' => 'Atlaide %',
     'LBL_LIST_PRICE' => 'Kataloga cena:',
     'LBL_VENDOR_PART_NUM' => 'Pārdevēja detaļas numurs:',
-    'LBL_MFT_PART_NUM' => 'Izgatavotāja detaļas numurs:',
+    'LBL_MFT_PART_NUM' => 'Daļas numurs:',
     'LBL_NEXT_STEP' => 'Nākamais solis:',
     'LBL_DISCOUNT_PRICE_DATE' => 'Cenas atlaidesi datums:',
     'LBL_WEIGHT' => 'Svars:',
@@ -168,6 +168,8 @@ Lai izveidotu {{module_name}}:
 - Ja nepieciešams redzēt papildu laukus, spiediet "Rādīt vairāk".
 2. Spiediet "Saglabāt", lai pabeigtu jauna ieraksta izveidi un atgrieztos iepriekšējā lapā.',
 
-    'LBL_MANUFACTURERS' => 'Ražotāji',
     'LBL_PRODUCT_POSITION' => 'Produkta pozīcija pakā',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Piedāvāto rindas produktu piedāvājuma datu saraksts',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (jauns piedāvātais rindas produkts)',
+    'LBL_DISCOUNT_PERCENT' => '% procenti',
 );

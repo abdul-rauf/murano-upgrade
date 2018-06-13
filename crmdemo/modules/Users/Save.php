@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,11 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'include/SugarFields/SugarFieldHandler.php';
-require_once 'modules/MySettings/TabController.php';
-require_once 'include/MetaDataManager/MetaDataManager.php';
-require_once 'include/api/SugarApi.php';
-require_once 'clients/base/api/CurrentUserApi.php';
 
 /**
  * Verifies the given user's data, sends the result as JSON, and then exits
@@ -115,7 +109,6 @@ foreach ($focus->field_defs as $fieldName => $field) {
     }
 }
 
-require_once 'include/SugarFields/Fields/Teamset/SugarFieldTeamset.php';
 $teamSetField = new SugarFieldTeamset('Teamset');
 if (!$newUser && $teamSetField != null) {
     $teamSetField->save($focus, $_POST, 'team_name', '');
@@ -506,7 +499,7 @@ if (!$focus->verify_data()) {
     ///////////////////////////////////////////////////////////////////////////
     ////	INBOUND EMAIL SAVES
     if (isset($_REQUEST['server_url']) && !empty($_REQUEST['server_url'])) {
-        $ie = BeanFactory::getBean('InboundEmail');
+        $ie = BeanFactory::newBean('InboundEmail');
         $ie->disable_row_level_security = true;
         if (false === $ie->savePersonalEmailAccount($return_id, $focus->user_name)) {
             header("Location: index.php?action=Error&module=Users&error_string=&ie_error=true&id=" . $return_id);
@@ -515,7 +508,7 @@ if (!$focus->verify_data()) {
     } elseif (isset($_REQUEST['ie_id']) && !empty($_REQUEST['ie_id']) && empty($_REQUEST['server_url'])) {
         // user is deleting their I-E
 
-        $ie = BeanFactory::getBean('InboundEmail');
+        $ie = BeanFactory::newBean('InboundEmail');
         $ie->disable_row_level_security = true;
         $ie->deletePersonalEmailAccount($_REQUEST['ie_id'], $focus->user_name);
     }

@@ -9,19 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once("include/Expressions/Actions/AbstractAction.php");
 
 class StyleAction extends AbstractAction{
 	protected $expression =  "";
 	
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function StyleAction($params)
-    {
-        self::__construct($params);
-    }
-
     public function __construct($params)
     {
 		$this->targetField = $params['target'];
@@ -116,3 +107,4 @@ SUGAR.util.extend(SUGAR.forms.StyleAction, SUGAR.forms.AbstractAction, {
 		return "Style";
 	}
 }
+

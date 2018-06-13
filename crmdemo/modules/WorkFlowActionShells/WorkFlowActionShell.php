@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -21,7 +20,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('include/workflow/workflow_utils.php');
 
 
-require_once('include/workflow/glue.php');
 
 
 
@@ -31,7 +29,6 @@ require_once('modules/WorkFlowActionShells/MetaArray.php');
 
 // WorkFlowActionShell is used to store the shell action information.
 class WorkFlowActionShell extends SugarBean {
-	var $field_name_map;
 	// Stored fields
 	var $id;
 	var $deleted;
@@ -126,7 +123,7 @@ class WorkFlowActionShell extends SugarBean {
         {
             $actions = $this->get_actions($this->id);
             $workflow_object = $this->get_workflow_object();
-            $temp_module = BeanFactory::getBean($workflow_object->base_module);
+            $temp_module = BeanFactory::newBean($workflow_object->base_module);
             $temp_module->call_vardef_handler("action_filter");
             $field_array = $temp_module->vardef_handler->get_vardef_array();
             foreach($actions as $action)
@@ -173,21 +170,6 @@ class WorkFlowActionShell extends SugarBean {
 
 		global $current_user;
 		
-		/*
-		///Determine Natural Language to display
-		if($this->action_type=='new'){
-			$natural_language = $current_module_strings['LBL_ACTION_NEW']." ".$beanList[$this->action_module];
-		}	
-		if($this->action_type=='update_rel'){
-			$workflow_object = $this->get_workflow_object();
-			$rel_module = $workflow_object->get_rel_module($this->rel_module);
-			$natural_language = $current_module_strings['LBL_ACTION_UPDATE_REL']." ".$rel_module;
-			unset($workflow_object);
-		}	
-		if($this->action_type=='update'){
-			$natural_language = $current_module_strings['LBL_ACTION_UPDATE']." ".$current_module_strings['LBL_RECORD'];
-		}		
-		*/
 		//begin - rsmith
     	include_once('include/ListView/ProcessView.php');
         $ProcessView = new ProcessView($this->get_workflow_object(), $this);
@@ -229,7 +211,6 @@ class WorkFlowActionShell extends SugarBean {
 		//END WFLOW PLUGINS		
 		$prev_display_text = $ProcessView->get_prev_text("ActionsCreateStep1", $this->action_type);
 		unset($ProcessView);
-		//$natural_language = "<i>".$current_module_strings['LBL_LIST_STATEMENT_CONTENT']."</i>";
 		$natural_language = "<b>".$prev_display_text."</b>";		
 		
 		
@@ -238,7 +219,6 @@ class WorkFlowActionShell extends SugarBean {
 		$temp_array['TYPE'] = $current_module_strings2['LBL_MODULE_NAME'];
 		$temp_array['STATEMENT'] = "<i>".$natural_language."</i>";
 		$temp_array['DETAILS_TABLE'] = $table_html;
-		//$temp_array['ACTION_DESCRIPTION'] = "<i>".$natural_language."</i>";
 		$temp_array['ID'] = $this->id;
 
 		
@@ -441,7 +421,7 @@ function copy($parent_id){
 				
 				
 			//Build bridging workflow object
-			$bridge_object = BeanFactory::getBean('WorkFlow');	
+			$bridge_object = BeanFactory::newBean('WorkFlow');	
 			$bridge_object->parent_id = $this->id;
 			$bridge_object->name = 'Meeting/Call Bridging Object';
 			$bridge_object->status = 'on';
@@ -456,7 +436,7 @@ function copy($parent_id){
 			
 			
 			//Predefine AlertShell Object
-			$alert_shell_object = BeanFactory::getBean('WorkFlowAlertShells');
+			$alert_shell_object = BeanFactory::newBean('WorkFlowAlertShells');
 			$alert_shell_object->name = 'Invite People';
 			$alert_shell_object->alert_type = 'Invite';
 			$alert_shell_object->source_type = 'System Default';

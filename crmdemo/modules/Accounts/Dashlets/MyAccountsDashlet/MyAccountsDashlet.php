@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -14,19 +13,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 // $Id: MyAccountsDashlet.php 56127 2010-04-27 00:03:05Z clee $
 
 
-require_once('include/Dashlets/DashletGeneric.php');
 
 
 class MyAccountsDashlet extends DashletGeneric { 
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function MyAccountsDashlet($id, $def = null)
-    {
-        self::__construct($id, $def);
-    }
-
     public function __construct($id, $def = null)
     {
 		global $current_user, $app_strings;
@@ -39,7 +28,7 @@ class MyAccountsDashlet extends DashletGeneric {
         $this->searchFields = $dashletData['MyAccountsDashlet']['searchFields'];
         $this->columns = $dashletData['MyAccountsDashlet']['columns'];
 
-        $this->seedBean = BeanFactory::getBean('Accounts');        
+        $this->seedBean = BeanFactory::newBean('Accounts');        
     }
     
     /**
@@ -66,3 +55,4 @@ class MyAccountsDashlet extends DashletGeneric {
     	parent::process($lvsParams);
     }
 }
+

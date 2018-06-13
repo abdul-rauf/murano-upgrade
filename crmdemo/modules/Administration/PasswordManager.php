@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,9 +10,9 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once "modules/OutboundEmailConfiguration/OutboundEmailConfigurationPeer.php";
 
 use Sugarcrm\Sugarcrm\Util\Serialized;
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 if(!is_admin($current_user)){
     sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
@@ -36,17 +35,17 @@ echo getClassicModuleTitle(
            ),
         false
         );
-require_once('modules/Configurator/Configurator.php');
 $configurator = new Configurator();
 $sugarConfig = SugarConfig::getInstance();
-$focus = BeanFactory::getBean('Administration');
+$focus = BeanFactory::newBean('Administration');
 $configurator->parseLoggerSettings();
 $config_strings = return_module_language($GLOBALS['current_language'], 'Configurator');
 $valid_public_key = true;
 if (!empty($_POST['saveConfig'])) {
     do {
         if ($_POST['captcha_on'] == '1') {
-    		$handle = @fopen("http://api.recaptcha.net/challenge?k=".$_POST['captcha_public_key']."&cachestop=35235354", "r");
+            $public_key = InputValidation::getService()->getValidInputPost('captcha_public_key');
+            $handle = @fopen("http://api.recaptcha.net/challenge?k=".$public_key."&cachestop=35235354", "r");
     		$buffer ='';
     		if ($handle) {
     		    while (!feof($handle)) {
@@ -154,7 +153,6 @@ if (!empty($focus->settings['ldap_admin_password'])) {
     $focus->settings['ldap_admin_password'] = Administration::$passwordPlaceholder;
 }
 
-require_once('include/SugarLogger/SugarLogger.php');
 $sugar_smarty = new Sugar_Smarty();
 
 // if no IMAP libraries available, disable Save/Test Settings
@@ -170,14 +168,6 @@ $sugar_smarty->assign('LANGUAGES', get_languages());
 $sugar_smarty->assign("settings", $focus->settings);
 
 $sugar_smarty->assign('saml_enabled_checked', false);
-
-//echo "sugar_config[authenticationClass]: " . $sugar_config['authenticationClass'];
-//if (array_key_exists('authenticationClass', $sugar_config) && $sugar_config['authenticationClass'] == 'SAMLAuthenticate') {
-//   $sugar_smarty->assign('saml_enabled_checked', true);
-//} else {
-//	$sugar_smarty->assign('saml_enabled_checked', false);
-//}
-
 
 if (!extension_loaded('mcrypt')) {
 	$sugar_smarty->assign("LDAP_ENC_KEY_READONLY", 'readonly');
@@ -207,7 +197,7 @@ $outboundMailConfig = OutboundEmailConfigurationPeer::getSystemDefaultMailConfig
 $smtpServerIsSet    = (OutboundEmailConfigurationPeer::isMailConfigurationValid($outboundMailConfig)) ? "0" : "1";
 $sugar_smarty->assign("SMTP_SERVER_NOT_SET", $smtpServerIsSet);
 
-$focus = BeanFactory::getBean('InboundEmail');
+$focus = BeanFactory::newBean('InboundEmail');
 $focus->checkImap();
 $storedOptions = Serialized::unserialize($focus->stored_options, array(), true);
 $email_templates_arr = get_bean_select_array(true, 'EmailTemplate','name', '','name',true);

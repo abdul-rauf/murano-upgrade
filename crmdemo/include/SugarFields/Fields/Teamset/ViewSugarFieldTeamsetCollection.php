@@ -9,8 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-require_once 'include/SugarFields/Fields/Collection/SugarFieldCollection.php';
-require_once 'include/SugarFields/Fields/Collection/ViewSugarFieldCollection.php';
 require_once 'modules/Teams/TeamSetManager.php';
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
@@ -21,14 +19,6 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
 	var $team_set_id = null;
 	var $team_id = null;
 	var $type = 'TeamsetCollection';
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ViewSugarFieldTeamsetCollection($fill_data = false)
-    {
-        self::__construct($fill_data);
-    }
 
     public function __construct($fill_data = false)
     {
@@ -103,7 +93,7 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
         	if(!empty($GLOBALS['beanList'][$this->module_dir])){
 	        	$class = $GLOBALS['beanList'][$this->module_dir];
 	            if(SugarAutoLoader::fileExists($GLOBALS['beanFiles'][$class])){
-		        	$this->bean = BeanFactory::getBean($this->module_dir);
+		        	$this->bean = BeanFactory::newBean($this->module_dir);
 					$secondaries = array();
 					$primary = false;
 
@@ -150,7 +140,6 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
                     // we should get teams from POST while preview report
                     elseif(empty($this->bean->team_id) && empty($this->bean->team_set_id))
                     {
-                        require_once('include/SugarFields/Fields/Teamset/SugarFieldTeamset.php');
                         $teams = SugarFieldTeamset::getTeamsFromRequest($this->bean->{$this->value_name}['role_field'], $_POST);
                         $primary_id = SugarFieldTeamset::getPrimaryTeamidFromRequest($this->bean->{$this->value_name}['role_field'], $_POST);
                         foreach($teams as $id => $name)
@@ -211,7 +200,6 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
      *
      */
     private function process_searchform() {
-        require_once('include/SugarFields/SugarFieldHandler.php');
         $sfh = new SugarFieldHandler();
         $sf = $sfh->getSugarField('Teamset', true);
         $teams = $sf->getTeamsFromRequest($this->name);
@@ -268,7 +256,7 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
     	if(empty($_REQUEST['record'])) {
            $isDuplicate = isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true' && $this->bean->aclAccess('edit');
            if($isDuplicate) {
-		        $dupBean = BeanFactory::getBean($_REQUEST['module']);
+		        $dupBean = BeanFactory::newBean($_REQUEST['module']);
 		        $dupBean->retrieve($_REQUEST['record']);
 		        $full_form_values = array();
 		        $full_form_values['primary'] = array('id'=>$dupBean->team_id, 'name'=>$dupBean->team_name);
@@ -283,7 +271,6 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
 	            $this->bean->{$this->value_name}=array_merge($this->bean->{$this->value_name}, $full_form_values);
 	            //If this request is coming from a subpanel quick create, we have to store the selected values
 	       } else if(isset($_REQUEST['full_form'])) {
-		        require_once('include/SugarFields/SugarFieldHandler.php');
 		        $sfh = new SugarFieldHandler();
 		        $sf = $sfh->getSugarField('Teamset', true);
 	            $teams = $sf->getTeamsFromRequest('team_name');
@@ -334,7 +321,6 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
     function createQuickSearchCode($returnAsJavascript = true){
         $fieldName = empty($this->displayParams['idName']) ? $this->name : $this->displayParams['idName'];
 		$sqs_objects = array();
-        require_once('include/QuickSearchDefaults.php');
         $qsd = QuickSearchDefaults::getQuickSearchDefaults();
         $qsd->setFormName($this->form_name);
         for($i=0; $i<$this->numFields; $i++){

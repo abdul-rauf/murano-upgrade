@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -89,7 +88,7 @@ else {
 		);
 
         $module = $current_query_by_page_array['module'];
-        $seed = BeanFactory::getBean($module);
+        $seed = BeanFactory::newBean($module);
         if(empty($seed)) sugar_die($GLOBALS['app_strings']['ERROR_NO_BEAN']);
  		$where_clauses = '';
  		require_once('include/SearchForm/SearchForm2.php');

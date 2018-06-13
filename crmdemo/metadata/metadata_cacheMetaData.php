@@ -1,7 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,18 +9,48 @@ if (!defined('sugarEntry') || !sugarEntry) {
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 $dictionary['metadata_cache'] = array(
     'table' => 'metadata_cache',
     'fields' => array(
-        array('name' => 'id', 'type' => 'id'),
-        array('name' => 'type', 'type' => 'varchar', 'len' => '255'),
-        array('name' => 'data', 'type' => 'longblob'),
-        array('name' => 'date_modified', 'type' => 'datetime'),
-        array('name' => 'deleted', 'type' => 'bool', 'len' => '1', 'default' => '0')
+        'id' => array(
+            'name' => 'id',
+            'type' => 'id',
+        ),
+        'type' => array(
+            'name' => 'type',
+            'type' => 'varchar',
+            'len' => '255',
+        ),
+        'data' => array(
+            'name' => 'data',
+            'type' => 'longblob',
+        ),
+        'date_modified' => array(
+            'name' => 'date_modified',
+            'type' => 'datetime',
+        ),
+        'deleted' => array(
+            'name' => 'deleted',
+            'type' => 'bool',
+            'len' => '1',
+            'default' => '0',
+        ),
     ),
     'indices' => array(
-        array('name' => 'matadata_cache_primary', 'type' => 'primary', 'fields' => array('id')),
-        array('name' => 'type_indx', 'type' => 'index', 'fields' => array('type')),
-    )
-)
-?>
+        array(
+            'name' => 'matadata_cache_primary',
+            'type' => 'primary',
+            'fields' => array(
+                'id',
+            ),
+        ),
+        array(
+            'name' => 'type_indx',
+            'type' => 'index',
+            'fields' => array(
+                'type',
+            ),
+        ),
+    ),
+);

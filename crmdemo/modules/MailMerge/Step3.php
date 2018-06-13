@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once ('include/JSON.php');
 require_once('modules/MailMerge/modules_array.php');
 require_once('modules/MailMerge/merge_query.php');
 
@@ -89,7 +87,7 @@ $xtpl->assign("STEP3_HEADER", "Set ".get_singular_bean_name($relModule)." Associ
 
 
 $select = "Select id, name from contacts";
-$seed = BeanFactory::getBean($relModule);
+$seed = BeanFactory::newBean($relModule);
 
 if(isset($_SESSION['MAILMERGE_SKIP_REL']) && $_SESSION['MAILMERGE_SKIP_REL'])
 {

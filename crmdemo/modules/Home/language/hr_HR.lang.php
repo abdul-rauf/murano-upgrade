@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -233,7 +232,6 @@ $mod_strings = array (
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - uslužni programi biblioteke za korisničko sučelje olakšavaju implementaciju obogaćenih značajki strane klijenta.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - klasa za prijenos e-pošte za PHP sa svim značajkama',
   'LBL_SOURCE_JSHRINK' => 'JShrink - alat za smanjivanje Javascripta napisan u PHP-u',
-  'LBL_SOURCE_CRYPT_BLOWFISH' => 'Crypt_Blowfish - omogućuje dvosmjerno šifriranje putem algoritma Blowfish bez potrebe za proširenjem MCrypt PHP.',
   'LBL_SOURCE_XML_HTMLSAX3' => 'XML_HTMLSax3 - raščlanjivač SAX za HTML i ostale neispravno oblikovane XML dokumente',
   'LBL_SOURCE_YAHOO_UI_LIB_EXT' => 'Yahoo! UI Extensions Library - proširenje za sustav Yahoo! User Interface Library koje je razvio Jack Slocum',
   'LBL_SOURCE_SWFOBJECT' => 'SWFObject - skripta za prepoznavanje i umetanje Javascript Flash Playera.',
@@ -274,10 +272,8 @@ $mod_strings = array (
 
 
     // Record View Help Text
-    'LBL_HELP_RECORD_TITLE' => 'Dobro došli u nadzornu ploču za pomoć aplikacije Sugar 7',
-    'LBL_HELP_RECORD' => 'Dashlet za pomoć prikazuje određene informacije o modulu koji prikazujete, navodi detaljne korake za izvođenje nekih radnji u modulu i usmjerava vas kako pronaći detaljnije informacije i podršku. Dashlet za pomoć ostaje otvoren tako da možete gledate korake dok ih izvršavate u modulu.
-
-Nadzorna ploča za pomoć dostupna je u svim modulima aplikacije Sugar 7 i može se prebacivati na „otvoreno” i „zatvoreno” klikom na ikonu za pomoć u podnožju aplikacije.',
+    'LBL_HELP_RECORD_TITLE' => 'Pomoć',
+    'LBL_HELP_RECORD' => 'Pomoć prikazuje određene informacije o modulu koji prikazujete, navodi detaljne korake za izvršavanje nekih radnji u modulu i usmjerava vas kako pronaći detaljnije informacije i podršku.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtar',
 );

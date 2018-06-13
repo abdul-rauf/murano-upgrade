@@ -81,7 +81,7 @@ function get_entries($session, $module_name, $ids, $select_fields, $link_name_to
 	}
 
 	foreach($ids as $id) {
-		$seed = BeanFactory::getBean($module_name);
+		$seed = BeanFactory::newBean($module_name);
 	    if($using_cp){
 	        $seed = $seed->retrieveTarget($id);
 	    }else{
@@ -149,7 +149,7 @@ function get_entry_list($session, $module_name, $query, $order_by,$offset, $sele
 		$sugar_config['list_max_entries_per_page'] = $max_results;
 	} // if
 
-	$seed = BeanFactory::getBean($module_name);
+	$seed = BeanFactory::newBean($module_name);
 
     if (!self::$helperObject->checkQuery($error, $query, $order_by)) {
 		$GLOBALS['log']->info('End: SugarWebServiceImpl->get_entry_list');
@@ -365,7 +365,7 @@ function get_relationships($session, $module_name, $module_id, $link_field_name,
 			$submodulename = $mod->$link_field_name->getRelatedModuleName();
 
 			foreach($list as $row) {
-				$submoduleobject = BeanFactory::getBean($submodulename);
+				$submoduleobject = BeanFactory::newBean($submodulename);
 				// set all the database data to this object
 				foreach ($filterFields as $field) {
 					$submoduleobject->$field = $row[$field];
@@ -409,7 +409,7 @@ function set_entry($session,$module_name, $name_value_list){
 		$GLOBALS['log']->info('End: SugarWebServiceImpl->set_entry');
 		return;
 	} // if
-	$seed = BeanFactory::getBean($module_name);
+	$seed = BeanFactory::newBean($module_name);
 	foreach($name_value_list as $name=>$value){
 		if(is_array($value) &&  $value['name'] == 'id'){
 			$seed->retrieve($value['value']);
@@ -424,7 +424,7 @@ function set_entry($session,$module_name, $name_value_list){
 		if($module_name == 'Users' && !empty($seed->id) && ($seed->id != $current_user->id) && $name == 'user_hash'){
 			continue;
 		}
-		if(!empty($seed->field_name_map[$name]['sensitive'])) {
+        if (!empty($seed->field_defs[$name]['sensitive'])) {
 			continue;
 		}
 		if(!is_array($value)){
@@ -505,7 +505,7 @@ public function login($user_auth, $application, $name_value_list){
 	$GLOBALS['log']->info('Begin: SugarWebServiceImpl->login');
 	global $sugar_config;
 	$error = new SoapError();
-	$user = BeanFactory::getBean('Users');
+	$user = BeanFactory::newBean('Users');
 	$success = false;
 	if(!empty($user_auth['encryption']) && $user_auth['encryption'] === 'PLAIN'){
 		$user_auth['password'] = md5($user_auth['password']);
@@ -615,7 +615,6 @@ function get_server_info(){
 	$GLOBALS['log']->info('Begin: SugarWebServiceImpl->get_server_info');
 	global $sugar_flavor;
 	require_once('sugar_version.php');
-	require_once('modules/Administration/Administration.php');
 
 	$admin = Administration::getSettings('info');
 	$sugar_version = '';
@@ -667,7 +666,7 @@ function get_module_fields($session, $module_name, $fields = array()){
 		return;
 	} // if
 
-	$seed = BeanFactory::getBean($module_name);
+	$seed = BeanFactory::newBean($module_name);
 	if($seed->ACLAccess('ListView', true) || $seed->ACLAccess('DetailView', true) || 	$seed->ACLAccess('EditView', true) ) {
     	$return = self::$helperObject->get_return_module_fields($seed, $module_name, $fields);
         $GLOBALS['log']->info('End: SugarWebServiceImpl->get_module_fields SUCCESS for ' . $module_name);
@@ -725,7 +724,6 @@ function set_note_attachment($session, $note) {
 		return;
 	} // if
 
-	require_once('modules/Notes/NoteSoap.php');
 	$ns = new NoteSoap();
 	$GLOBALS['log']->info('End: SugarWebServiceImpl->set_note_attachment');
 	return array('id'=>$ns->newSaveFile($note));
@@ -749,14 +747,12 @@ function get_note_attachment($session,$id) {
 		$GLOBALS['log']->info('End: SugarWebServiceImpl->get_note_attachment');
 		return;
 	} // if
-	require_once('modules/Notes/Note.php');
 	$note = BeanFactory::getBean('Notes', $id);
     if (!self::$helperObject->checkACLAccess($note, 'DetailView', $error, 'no_access')) {
 		$GLOBALS['log']->info('End: SugarWebServiceImpl->get_note_attachment');
     	return;
     } // if
 
-	require_once('modules/Notes/NoteSoap.php');
 	$ns = new NoteSoap();
 	if(!isset($note->filename)){
 		$note->filename = '';
@@ -791,7 +787,6 @@ function set_document_revision($session, $document_revision) {
 		return;
 	} // if
 
-	require_once('modules/Documents/DocumentSoap.php');
 	$dr = new DocumentSoap();
 	$GLOBALS['log']->info('End: SugarWebServiceImpl->set_document_revision');
 	return array('id'=>$dr->saveFile($document_revision));
@@ -820,12 +815,11 @@ function get_document_revision($session, $id) {
 		return;
 	} // if
 
-    require_once('modules/DocumentRevisions/DocumentRevision.php');
     $dr = BeanFactory::getBean('DocumentRevisions', $id);
     if(!empty($dr->filename)){
         $filename = "upload://{$dr->id}";
         if (filesize($filename) > 0) {
-        	$contents = sugar_file_get_contents($filename);
+                $contents = file_get_contents($filename);
         } else {
             $contents = '';
         }
@@ -869,7 +863,6 @@ function search_by_module($session, $search_string, $modules, $offset, $max_resu
 		$sugar_config['list_max_entries_per_page'] = $max_results;
 	}
 
-	require_once('modules/Home/UnifiedSearchAdvanced.php');
 	require_once 'include/utils.php';
 	$usa = new UnifiedSearchAdvanced();
     if(!file_exists($cachedfile = sugar_cached('modules/unified_search_modules.php'))) {
@@ -900,7 +893,7 @@ function search_by_module($session, $search_string, $modules, $offset, $max_resu
 				$unifiedSearchFields[$name] [ $field ]['value'] = $search_string;
 			}
 
-			$seed = BeanFactory::getBean($name);
+			$seed = BeanFactory::newBean($name);
 			require_once 'include/SearchForm/SearchForm2.php' ;
 			if ($beanName == "User"
 			    || $beanName == "ProjectTask"
@@ -1104,7 +1097,7 @@ function get_entries_count($session, $module_name, $query, $deleted) {
 
 	global $current_user;
 
-	$seed = BeanFactory::getBean($module_name);
+	$seed = BeanFactory::newBean($module_name);
     if (!self::$helperObject->checkQuery($error, $query)) {
 		$GLOBALS['log']->info('End: SugarWebServiceImpl->get_entries_count');
     	return;
@@ -1169,7 +1162,6 @@ function get_report_entries($session, $ids, $select_fields ){
 	} // if
 
 	require_once('modules/Reports/SavedReport.php');
-	require_once('modules/Reports/Report.php');
 
 	foreach($ids as $id) {
 		$seed = BeanFactory::getBean('Reports', $id);

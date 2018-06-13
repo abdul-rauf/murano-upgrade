@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -22,7 +21,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 
-require_once('include/JSON.php');
 
 global $app_strings;
 global $mod_strings;
@@ -31,13 +29,13 @@ global $current_language;
 global $currentModule;
 global $theme;
 
-$json=new JSON(JSON_LOOSE_TYPE);
+$json=new JSON();
 
 $current_module_strings = return_module_language($current_language, 'MergeRecords');
 
 if (!isset($where)) $where = "";
 
-$focus = BeanFactory::getBean('MergeRecords');
+$focus = BeanFactory::newBean('MergeRecords');
 
 ////////////////////////////////////////////////////////////
 //get instance of master record and retrieve related record

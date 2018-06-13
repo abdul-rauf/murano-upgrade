@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -24,7 +23,7 @@ function email_layout ($layout) {
 
 
 	//First Create e-mail draft
-	$email_object = BeanFactory::getBean('Emails');
+	$email_object = BeanFactory::newBean('Emails');
 	// set the id for relationships
 	$email_object->id = create_guid();
 	$email_object->new_with_id = true;
@@ -106,7 +105,7 @@ function email_layout ($layout) {
 
 	//Handle PDF Attachment
 	$file_name = get_quote_pdf($layout);
-	$note = BeanFactory::getBean('Notes');
+	$note = BeanFactory::newBean('Notes');
 	$note->filename = $file_name;
 	$note->team_id = "";
 	$note->file_mime_type = "application/pdf";

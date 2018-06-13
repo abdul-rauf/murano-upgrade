@@ -1,5 +1,4 @@
 <?php
- if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'clients/base/api/ModuleApi.php';
-require_once 'data/BeanFactory.php';
 
 class AccountsApi extends ModuleApi
 {
@@ -30,7 +27,7 @@ class AccountsApi extends ModuleApi
         );
     }
 
-    public function opportunityStats($api, $args)
+    public function opportunityStats(ServiceBase $api, array $args)
     {
         // TODO make all APIs wrapped on tries and catches
         // TODO: move this to own module (in this case accounts)

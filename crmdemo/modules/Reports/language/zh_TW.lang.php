@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -114,6 +113,7 @@ $mod_strings = array (
   'LBL_ACCOUNT_REPORTS' => '帳戶報表',
   'LBL_CONTACT_REPORTS' => '連絡人報表',
   'LBL_OPPORTUNITY_REPORTS' => '商機報表',
+    'LBL_RECENTLY_MODIFIED' => '最近修改',
 
   'LBL_CASE_REPORTS' => '實例報表',
 
@@ -318,6 +318,7 @@ $mod_strings = array (
   'LBL_NEXT_30_DAYS'=>'未來 30 天',
   'LBL_THIS_YEAR'=>'今年',
   'LBL_LIST_FORM_TITLE' =>'報表',
+  'LBL_LIST_REPORT_NAME' => '名稱',
   'LBL_PROSPECT_REPORTS'=>'目標報表',
   'LBL_CHART_TYPE'=>'圖表類型',
   'LBL_IS_EMPTY'=>'為空',
@@ -517,7 +518,7 @@ $mod_strings = array (
 	'LBL_FILTERS_HELP_DESC'=>"<b>定義篩選器的步驟：</b><br/><br/>1) 在<b>「相關模組」</b>窗格中按一下要用於定義篩選器的「模組」。預設狀態下，會選擇主模組（樹狀檢視頂端節點）。<br/><br/>您可透過按一下模組選擇相關模組（樹狀檢視子節點）。展開節點以檢視與相關模組有關的其他模組。所選模組決定<b>「可用欄位」</b>窗格中顯示的可報告欄位。<br/><br/>	2) 按一下<b>「可用欄位」</b>窗格中的「欄位」，以將其新增至篩選器。 您還可在窗格中的文字方塊中輸入來搜尋欄位。<br/><br/>	在<b>「相關模組」</b>窗格所選模組中選擇任意數目的欄位后，您可選擇不同的模組，可從該模組中選擇任意數目的欄位用作篩選器。<br/><br/>	3) 選擇<b>「和」</b>或<b>「或」</b>來指定是否使用所有篩選器或分別使用單個篩選器來尋找報表結果。<br/><br/>	4) [Optional] 按一下<b>「新增篩選器群組」</b>建立篩選器群組。您可擁有任意數目的篩選器群組，而且群組中可包含任意數目的篩選器，用於建立巢狀篩選器。<br/><br/>	5) [Optional] 選擇「篩選器」的「執行階段」選項，以讓使用者能夠使用篩選器來進一步自訂檢視報表時的報表結果。",
 	'LBL_GROUP_BY_HELP_DESC'=>"<b>定義分組依據的步驟：</b><br/><br/>1) 在<b>「相關模組」</b>窗格中按一下要用於分組報表記錄的「模組」。預設狀態下，會選擇主模組（樹狀檢視頂端節點）。<br/><br/>您可透過按一下模組選擇相關模組（樹狀檢視子節點）。展開節點以檢視與相關模組有關的其他模組。所選模組決定<b>「可用欄位」</b>窗格中顯示的可報告欄位。<br/><br/>	2) 按一下<b>「可用欄位」</b> 窗格中的「欄位」，以按報表欄位分組記錄。您還可在窗格中的文字方塊中輸入來搜尋欄位。<br/><br/>	在<b>「相關模組」</b>窗格所選模組中選擇任意數目的欄位后，您可選擇不同的模組，可從該模組中選擇任意數目的欄位來分組記錄。但是，若按多個欄位進行分組，則報表的可讀性會降低。<br/><br/>	您可透過拖放欄位至所需位置來變更欄位順序。變更順序會影響顯示結果的方式。<br/><br/>  對於「矩陣報表」，您最多可使用三個欄位來分組記錄。",
 	'LBL_DISPLAY_COLS_HELP_DESC'=>"<b>選擇顯示欄的步驟：</b><br/><br/>1) 在<b>「相關模組」</b>窗格中按一下要用於顯示報表資料的「模組」。 預設狀態下，會選擇在「選擇模組」步驟中所選主模組（樹狀檢視頂端節點）。<br/><br/>	您可透過按一下模組選擇相關模組（樹狀檢視子節點）的欄位。還可選擇與主模組相關之模組有關模組。所選模組決定<b>「可用欄位」</b>窗格中顯示的可報告欄位。<br/><br/>	2) 按一下<b>「可用欄位」</b>窗格中的「欄位」，以顯示報表記錄中的欄位資料。您還可在窗格中的文字方塊中輸入來搜尋欄位。 <br/><br/>	在<b>「相關模組」</b>窗格所選模組中選擇任意數目的欄位后，您可選擇不同的模組，可從該模組中選擇其他欄位。您可選擇任意數目的欄位，但是若在報表中新增的欄位超過所需欄位，則報表產生速度更慢，且可讀性會降低。<br/><br/>	您可透過拖放欄位至所需位置來變更順序欄位。變更欄位順序會變更欄在結果中的顯示順序。" ,
-	'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>Steps to Choose Display Summaries:</b><br/><br/>1) Click on the Module in the <b>Related Modules</b> pane that you would like to use for the summaries in your report. By default, the primary module (top node in the tree view) is selected.<br/><br/>	You can select a related module (child node in the tree view) by clicking on the module. Expand the node to view additional modules related to the related module. The module that you select determines which reportable fields appear in the <b>Available Fields</b> pane.<br/><br/>	2) Click on a Field in the <b>Available Fields</b> pane to select summaries for your report. You can also search for the field by typing in the text box in the pane.<br/><br/>	After selecting any number of fields from the module selected in the <b>Related Modules</b> pane, you can choose a different module from which you can select additional fields for the summaries in your report.<br/><br/>" .	"For Matrix Reports, you can select more than one field to display multiple values within a single cell in your report." ,
+    'LBL_DISPLAY_SUMMARY_HELP_DESC'=>"<b>選擇顯示摘要的步驟：</b><br/><br/>1) 在<b>「相關模組」</b>窗格中按一下要在報告摘要中顯示的「模組」。預設狀態下，會選擇主模組（樹狀檢視頂端節點）。<br/><br/>您可透過按一下模組選擇相關模組（樹狀檢視子節點）。展開節點以檢視與相關模組有關的其他模組。所選模組決定<b>「可用欄位」</b>窗格中顯示的可報告欄位。<br/><br/>	2) 按一下<b>「可用欄位」</b> 窗格中的「欄位」，以選取報告中的摘要。您還可在窗格中的文字方塊中輸入來搜尋欄位。<br/><br/>	在<b>「相關模組」</b>窗格所選模組中選擇任意數目的欄位后，您可選擇一個不同的模組，并從該模組中選擇報告摘要中使用的其他欄位。<br/><br/>  對於「矩陣報表」，您可以選取一個以上的欄位，以便在報告的單個儲存格內顯示多個值。" ,
 
 	'LBL_ALT_SHOW' => '顯示',
   	'LBL_REPORT_DATA_COLUMN_ORDERS' => '本報表以以下欄順序包含資料：',
@@ -533,6 +534,7 @@ $mod_strings = array (
 	'LBL_UP' => '向上' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => '資訊',
     'LBL_REPORT_GRAND_TOTAL' => "總計",
+    'LBL_EDIT_REPORT_BUTTON' => '編輯報表',
 
     'LBL_REPORTS_TO' => '報表發送對象',
     'LBL_LESS_THAN_EQUAL' => '小於等於',

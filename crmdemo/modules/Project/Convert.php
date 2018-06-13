@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -20,7 +19,7 @@ global $app_list_strings;
 global $current_language;
 global $current_user;
 global $sugar_version, $sugar_config;
-$focus = BeanFactory::getBean('Project');
+$focus = BeanFactory::newBean('Project');
 
 
 
@@ -55,8 +54,8 @@ $sugar_smarty->assign('NAME', $focus->name);
 
 // get date/time fields in correct display format to pass front end validation
 foreach ($focus->fetched_row as $field=>$value) {
-    if (isset($focus->field_name_map[$field]['type'])
-        && in_array($focus->field_name_map[$field]['type'], array('date','datetime','datetimecombo','time'))) {
+    if (isset($focus->field_defs[$field]['type'])
+        && in_array($focus->field_defs[$field]['type'], array('date','datetime','datetimecombo','time'))) {
         $focus->fetched_row[$field] = $focus->$field;
     }
 }

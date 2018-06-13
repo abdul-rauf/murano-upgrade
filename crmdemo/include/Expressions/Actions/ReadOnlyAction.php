@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once("include/Expressions/Actions/AbstractAction.php");
 
 class ReadOnlyAction extends AbstractAction
 {
@@ -20,14 +19,6 @@ class ReadOnlyAction extends AbstractAction
      * array Array of actions on which the Expression Action is not allowed
      */
     protected $disallowedActions = array('view');
-
-    /**
-     * @deprecated Use __construct() instead
-     */
-    public function ReadOnlyAction($params)
-    {
-        self::__construct($params);
-    }
 
     public function __construct($params)
     {

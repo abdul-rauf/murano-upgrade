@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -56,7 +55,6 @@ $current_date = $campaign->db->now();
 foreach ($_POST['mass'] as $message_id) {
 
 	//fetch email marketing definition.
-	if (!class_exists('EmailMarketing')) require_once('modules/EmailMarketing/EmailMarketing.php');
 
 
 	$marketing = BeanFactory::getBean('EmailMarketing', $message_id);

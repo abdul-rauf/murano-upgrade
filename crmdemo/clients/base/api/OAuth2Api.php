@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,7 +10,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('include/SugarOAuth2/SugarOAuth2Server.php');
+use Sugarcrm\Sugarcrm\Util\Uuid;
 
 class OAuth2Api extends SugarApi
 {
@@ -64,7 +63,7 @@ class OAuth2Api extends SugarApi
         );
     }
 
-    protected function getOAuth2Server($args)
+    protected function getOAuth2Server(array $args)
     {
         $platform = empty($args['platform']) ? 'base' : $args['platform'];
         $oauth2Server = SugarOAuth2Server::getOAuth2Server();
@@ -73,8 +72,15 @@ class OAuth2Api extends SugarApi
         return $oauth2Server;
     }
 
-    public function token($api, $args)
+    public function token(ServiceBase $api, array $args)
     {
+        //The token API supports setting a language for error messages as the user is not yet logged in.
+        global $current_language;
+
+        if (!empty($args['current_language'])) {
+            $current_language = $args['current_language'];
+        }
+
         $validVersion = $this->isSupportedClientVersion($api, $args);
 
         if ( !$validVersion ) {
@@ -131,15 +137,10 @@ class OAuth2Api extends SugarApi
         // manually adding a cookie header will break 3rd party apps that use cookies
         setcookie(RestService::DOWNLOAD_COOKIE.'_'.$platform, $authData['download_token'], time()+$authData['refresh_expires_in'], ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure'), true);
 
-        // For reauth requests we need to send back the session cookie as well to
-        // keep the client in sync if there was a session cookie to begin with
-        if (isset($_COOKIE[session_name()]) && !empty($args['grant_type']) && $args['grant_type'] == 'refresh_token' && !empty($args['refresh'])) {
-            $this->sendSessionCookie();
-        }
         return $authData;
     }
 
-    public function logout($api, $args)
+    public function logout(ServiceBase $api, array $args)
     {
         $oauth2Server = $this->getOAuth2Server($args);
         if(!empty($api->user)) {
@@ -159,7 +160,6 @@ class OAuth2Api extends SugarApi
 
         // The OAuth access token is actually just a session, so we can nuke that here.
         $_SESSION = array();
-        session_regenerate_id(true);
 
         // Whack the cookie that was set in BWC mode
         $this->killSessionCookie();
@@ -182,17 +182,48 @@ class OAuth2Api extends SugarApi
      *
      * Use the information supplied by oauth2 on $_SESSION.
      *
-     * @param $api
-     * @param $args
+     * @param ServiceBase $api
+     * @param array $args
      */
-    public function bwcLogin($api, $args)
+    public function bwcLogin(ServiceBase $api, array $args)
     {
+        $sendCookie = true;
+        $sessionName = session_name();
+
+        // At this point we are authenticated using the current access token
+        // and have the session for it. When we have already a BWC session
+        // cookie lets check if the user matches the current user. If so we
+        // do not need to send the BWC session cookie again.
+        if (isset($_COOKIE[$sessionName]) && !empty($_COOKIE[$sessionName])) {
+            // close current session
+            $tokenSession = session_id();
+            session_write_close();
+
+            // grab BWC session
+            ini_set('session.use_cookies', false);
+            session_id($_COOKIE[$sessionName]);
+            session_start();
+
+            if (!empty($_SESSION['user_id']) && $_SESSION['user_id'] === $GLOBALS['current_user']->id) {
+                $sendCookie = false;
+            }
+
+            // restore token session
+            session_write_close();
+            session_id($tokenSession);
+            session_start();
+        }
+
+        // Only send the cookie if there isn't one yet or if the current one
+        // does not match the current user.
+        if ($sendCookie) {
+            $this->sendSessionCookie();
+        }
+
         // Send back session_name so the client can use it for other bwc functions,
         // like studio, module builder, etc when sessions expire outside of the
         // ajax calls
-        $session_name = $this->sendSessionCookie();
-
-        return array('name' => $session_name);
+        return array('name' => $sessionName);
     }
 
     /**
@@ -268,21 +299,41 @@ class OAuth2Api extends SugarApi
      */
     protected function sendSessionCookie()
     {
-        // This needs to be sent back
-        $session_name = session_name();
-        $masSessionLifeTime = SugarConfig::getInstance()->get('oauth2.max_session_lifetime');
-        $lifetime = $masSessionLifeTime ?: ini_get('session.cookie_lifetime');
+        $sessionName = session_name();
+        $sessionId = Uuid::uuid4();
+
+        // Grab current session information which is supplied through the
+        // access token authentication and close it so we can start a new one.
+        $sessionData = $_SESSION;
+        session_write_close();
+
+        // Start new BWC session and populate it from token session
+        ini_set('session.use_cookies', false);
+        session_id($sessionId);
+        session_start();
+        $_SESSION = $sessionData;
+        session_write_close();
+
+        // Use the refresh token lifetime for bwc session cookies as the "session lifetime"
+        // for the end user is tied to this. This means that once we have a bwc session
+        // there is no need to refresh/replace it anymore in the future until after the
+        // user logs back in.
+        $expire = time() + SugarConfig::getInstance()->get(
+            'oauth2.max_session_lifetime',
+            OAuth2::DEFAULT_REFRESH_TOKEN_LIFETIME
+        );
+
         setcookie(
-            $session_name,
-            session_id(),
-            $lifetime?time()+$lifetime:0,
+            $sessionName,
+            $sessionId,
+            $expire,
             ini_get('session.cookie_path'),
             ini_get('session.cookie_domain'),
             ini_get('session.cookie_secure'),
             ini_get('session.cookie_httponly')
         );
 
-        return $session_name;
+        return $sessionName;
     }
 
     /**

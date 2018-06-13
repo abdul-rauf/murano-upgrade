@@ -1,6 +1,5 @@
 <?php
 
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -16,9 +15,6 @@ if(!ACLController::checkAccess('Calendar', 'list', true)){
 	ACLController::displayNoAccess(true);
 }
 
-require_once('modules/Calendar/Calendar.php');
-require_once('modules/Calendar/CalendarDisplay.php');
-require_once("modules/Calendar/CalendarGrid.php");
 
 global $cal_strings, $current_language;
 $cal_strings = return_module_language($current_language, 'Calendar');
@@ -31,18 +27,15 @@ $cal = new Calendar($_REQUEST['view']);
 
 if(in_array($cal->view,array('day','week','month'))){
 	$cal->add_activities($GLOBALS['current_user']);	
+    $cal->load_activities();
 }else if($cal->view == 'shared'){
 	$cal->init_shared();	
 	global $shared_user;				
-	$shared_user = BeanFactory::getBean('Users');	
+	$shared_user = BeanFactory::newBean('Users');	
 	foreach($cal->shared_ids as $member){
 		$shared_user->retrieve($member);
-		$cal->add_activities($shared_user);
+        $cal->loadActivitiesForUser($shared_user);
 	}
-}
-
-if(in_array($cal->view, array("day","week","month","shared"))){
-	$cal->load_activities();
 }
 
 if (!empty($_REQUEST['print']) && $_REQUEST['print'] == 'true') {

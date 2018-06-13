@@ -167,7 +167,6 @@ $mod_strings = array (
     'LBL_FILENAME' => 'ไฟล์แนบ',
     'LBL_REVENUELINEITEMS' => 'รายการบรรทัดรายได้',
     'LBL_DUNS_NUM' => 'DUNS:',
-    'LBL_DNB_BAL_PREVIEW' => 'ตัวอย่างบัญชี',
     'LBL_NOTES_SUBPANEL_TITLE' => 'บันทึก',
 
     // Help Text

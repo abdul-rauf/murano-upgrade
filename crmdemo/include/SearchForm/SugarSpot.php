@@ -1,5 +1,4 @@
 <?php
-//if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -255,7 +254,7 @@ class SugarSpot
                 continue;
             }
 
-            $seed = BeanFactory::getBean($moduleName);
+            $seed = BeanFactory::newBean($moduleName);
             if(!$seed->ACLAccess('ListView')) continue;
 
             foreach ($searchFields[$moduleName] as $k => $v) 
@@ -384,6 +383,7 @@ class SugarSpot
                 continue;
             }
 
+            $return_fields = array();
             if (isset($seed->field_defs['name'])) {
                 $return_fields['name'] = $seed->field_defs['name'];
             }
@@ -437,7 +437,7 @@ class SugarSpot
                 }
                 if (empty($extraFields)) {
                     // We set the 'fields' parameter, but left it blank, we should fetch all fields
-                    $return_fields = '';
+                    $return_fields = array();
                 } else {
 
                     foreach ( $extraFields as $extraField ) {

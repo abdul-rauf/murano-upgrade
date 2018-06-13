@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -762,7 +761,6 @@ $mod_strings = array (
     'LBL_THEME_SETTINGS_UNAVAILABLE_THEMES' => 'Nepieejamās tēmas',
     'LBL_TIMEZONE' => 'Laika zona',
     'LBL_TO'    => 'Kam:',
-	'LBL_TRACKER_SETTINGS_DESC' => 'Atlasiet, kādi sistēmas un lietotāja dati tiek izsekoti',
     'LBL_UPDATE_CHECK_AUTO'=>'Automātiski',
     'LBL_UPDATE_CHECK_MANUAL'=>'Manuāli',
     'LBL_UPDATE_CHECK_TYPE'=>'<B>Automātiski pārbaudīt atjauninājumus</B> - Ja atzīmēts, sistēma periodiski pārbaudīs, vai ir pieejamas atjaunotas programmas versijas.',
@@ -929,8 +927,6 @@ $mod_strings = array (
     'MSG_CONFIG_FILE_REBUILD_SUCCESS' => 'Fails config.php veiksmīgi pārģenerēts.',
     'MSG_INCREASE_UPLOAD_MAX_FILESIZE' => 'Brīdinājums: PHP konfigurācija jāizmaina tā lai būtu iespējams augšuplādēt vismaz 6MB lielus failus. Lūdzu modificējiet upload_max_filesize vērtību php.ini failā, kurš atrodas:',
     'MSG_MAKE_CONFIG_FILE_WRITABLE' => 'Atļaujiet rakstīšanu config.php failā un mēģiniet vēlreiz.',
-    'MSG_REBUILD_EXTENSIONS' => 'Dodies uz <a href="index.php?module=Administration&action=Upgrade">Labošana</a> sadaļu un uzklikšķini uz Pārģenerēt paplašinājumus.',
-    'MSG_REBUILD_RELATIONSHIPS' => 'Dodies uz <a href="index.php?module=Administration&action=Upgrade">Labošana</a> sadaļu un uzklikšķini uz Pārģenerēt saites.',
     'NO_ENABLED_OFFLINE_CLIENTS' => 'Pašreiz nav aktivizēti bezsaistes klienti.',
     'NTC_DISABLE_OFFLINE_CLIENT_ALERT' => 'Vai tu tiešām vēlies atslēgt šo bezsaistes klientu?',
     'NTC_ENABLE_OFFLINE_CLIENT_ALERT' => 'Vai tu tiešām vēlies pieslēgt šo bezsaistes klientu?',
@@ -1040,7 +1036,7 @@ $mod_strings = array (
 'ML_ISSUES'=>'Problēmas',
 'ML_MANIFEST_ISSUE'=>'problēma ar manifestu',
 'ML_CONFIG_OVERRIDE'=>'Config modificēšana nav atļauta',
-
+'ML_LANGUAGE_FILE_KEYS_INVALID'=>'Atslēga var sastāvēt tikai no burtiem, skaitļiem un pasvītrojumiem. ',
 	'LBL_CONFIGURE_SHORTCUT_BAR' => 'Konfigurēt Īsceļu joslu',
 	'LBL_CONFIGURE_SHORTCUT_BAR_DESC' => 'Atlasīt moduļus, kuri ir ieejami Īsceļu joslā',
     'LBL_CONFIGURE_SHORTCUT_BAR_HELP' => 'Izvēlies kuriem moduļiem lietotāji varēs izveidot ierakstus izmantojot Plus ikonu navigācijas joslas augšā. Velc un nomet moduļus starp iespējoto moduļu un atspējoto moduļu sarakstiem.',
@@ -1088,7 +1084,6 @@ $mod_strings = array (
 	'Manufacturers'  => 'Ražotājs',
 	'ProductBundleNotes' => 'Paziņojums par produktu paku',
 	'ProductBundles'   => 'Produktu paka',
-	'ProjectResources' => 'Projekta resursi',
 
 	'Relationships' => 'Relācija',
 	'Releases'       => 'Laidiens',
@@ -1098,7 +1093,6 @@ $mod_strings = array (
 	'SchedulersJobs'  => 'Plānotāja uzdevums',
 	'Shippers'       => 'Nosūtītājs',
 	'TaxRates'       => 'Nodokļu likme',
-	'TeamHierarchies'  => 'Darba grupas hierarhija',
 	'TeamMemberships'   => 'Dalība darba grupā',
 	'TeamNotices'    => 'Darba grupas paziņojums',
 	'TeamSetModules'   => 'Darba grupas kopas modulis',

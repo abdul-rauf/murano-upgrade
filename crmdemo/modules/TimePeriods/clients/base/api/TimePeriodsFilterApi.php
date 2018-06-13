@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once 'clients/base/api/FilterApi.php';
 class TimePeriodsFilterApi extends FilterApi
 {
     public function registerApiRest()
@@ -58,7 +57,7 @@ class TimePeriodsFilterApi extends FilterApi
         }
 
         // since forecast is not setup, we more than likely don't have timeperiods, so grab the default 3
-        $tp = BeanFactory::getBean('TimePeriods');
+        $tp = BeanFactory::newBean('TimePeriods');
         $data = array();
         $data['next_offset'] = -1;
         $data['records'] = array();

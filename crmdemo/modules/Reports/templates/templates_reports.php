@@ -1,6 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -12,15 +10,12 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 require_once('modules/Reports/templates/templates_group_chooser.php');
-require_once('modules/Reports/ReportCache.php');
 require_once('modules/Reports/templates/templates_reports_functions_js.php');
 require_once('modules/Reports/templates/templates_list_view.php');
-//require_once('modules/Reports/templates/templates_modules_def_js.php');
 require_once('modules/Reports/templates/templates_reports_request_js.php');
 
 require_once('modules/Reports/config.php');
 
-require_once('modules/Reports/schedule/ReportSchedule.php');
 global $global_json;
 $global_json = getJSONobj();
 
@@ -250,7 +245,6 @@ function reportCriteriaWithResult(&$reporter,&$args) {
 	$smarty->assign('current_user_id', $current_user->id);
 	$smarty->assign('md5_current_user_id', md5($current_user->id));
 	if (!hasRuntimeFilter($reporter)) {
-		//$showRunReportButton = false;
 		$smarty->assign('filterTabStyle', "display:none");
 	} else {
 		$smarty->assign('filterTabStyle', "display:''");
@@ -275,7 +269,6 @@ function reportCriteriaWithResult(&$reporter,&$args) {
     $smarty->assign('cache_path', sugar_cached(''));
 	template_reports_request_vars_js($smarty, $reporter,$args);
 	//custom chart code
-    require_once('include/SugarCharts/SugarChartFactory.php');
     $sugarChart = SugarChartFactory::getInstance();
 	$resources = $sugarChart->getChartResources();
 	$smarty->assign('chartResources', $resources);
@@ -290,11 +283,12 @@ EOD
     ;
 
     $reportName =  $args['reporter']->saved_report->name;
+    $reportNameEncoded = json_encode($reportName, JSON_HEX_APOS | JSON_HEX_QUOT);
 
-    $shareButtonCode = "parent.SUGAR.App.bwc.shareRecord('Reports', '$report_id', '".htmlspecialchars($reportName)."');";
+    $shareButtonCode = 'parent.SUGAR.App.bwc.shareRecord("Reports", "$report_id", '.$reportNameEncoded.");";
     $buttons[] = <<<EOD
         <input type="button" class="button" name="shareReportButton" id="shareReportButton" accessKey="{$app_strings['LBL_SHARE_BUTTON_KEY']}" value="{$app_strings['LBL_SHARE_BUTTON_LABEL']}" title="{$app_strings['LBL_SHARE_BUTTON_TITLE']}"
-               onclick="$shareButtonCode">
+               onclick='$shareButtonCode'>
 EOD;
 
     if ($report_edit_access) {
@@ -422,7 +416,7 @@ EOD
     $smarty->assign('summaryAndGroupDefData', $summaryAndGroupDefData);
 
     // Set fiscal start date
-    $admin = BeanFactory::getBean('Administration');
+    $admin = BeanFactory::newBean('Administration');
     $config = $admin->getConfigForModule('Forecasts', 'base');
     if (!empty($config['is_setup']) && !empty($config['timeperiod_start_date'])) {
         $smarty->assign("fiscalStartDate", $config['timeperiod_start_date']);
@@ -751,14 +745,11 @@ function template_reports_report(&$reporter,&$args) {
 	$ACLAllowedModules = getACLAllowedModules();
 	$smarty->assign('ACLAllowedModules', $global_json->encode(array_keys($ACLAllowedModules)));
 
-	require_once('include/tabs.php');
 
 	$tabs = array();
 
 	array_push($tabs,array('title'=>$mod_strings['LBL_1_REPORT_ON'],'link'=>'module_join_tab','key'=>'module_join_tab'));
 	array_push($tabs,array('title'=>$mod_strings['LBL_2_FILTER'],'link'=>'filters_tab','key'=>'filters_tab'));
-	//array_push($tabs,array('title'=>$mod_strings['LBL_3_GROUP'],'link'=>'group_by_tab','key'=>'group_by_tab'));
-	//array_push($tabs,array('title'=>$mod_strings['LBL_3_CHOOSE'],'link'=>'columns_tab','key'=>'columns_tab'));
 	if ( $args['reporter']->report_type == 'tabular') {
 	  array_push($tabs,array('title'=>$mod_strings['LBL_3_GROUP'],'hidden'=>true,'link'=>'group_by_tab','key'=>'group_by_tab'));
 	  array_push($tabs,array('title'=>$mod_strings['LBL_3_CHOOSE'],'link'=>'columns_tab','key'=>'columns_tab'));
@@ -816,7 +807,7 @@ function template_reports_report(&$reporter,&$args) {
 	$smarty->assign('cache_path', sugar_cached(''));
 
     // Set fiscal start date
-    $admin = BeanFactory::getBean('Administration');
+    $admin = BeanFactory::newBean('Administration');
     $config = $admin->getConfigForModule('Forecasts', 'base');
     if (!empty($config['is_setup']) && !empty($config['timeperiod_start_date'])) {
         $smarty->assign("fiscalStartDate", $config['timeperiod_start_date']);
@@ -832,49 +823,6 @@ if(typeof YAHOO != 'undefined') YAHOO.util.Event.addListener(window, 'load', loa
 </script>
 <?php
 reportResults($reporter, $args);
-/*
-$do_chart = false;
-
-$dbStart = microtime();
-
-if ($reporter->report_type == 'summary' && ! empty($reporter->report_def['summary_columns'])) {
-	if ($reporter->show_columns &&
-		!empty($reporter->report_def['display_columns']) &&
-        !empty($reporter->report_def['group_defs'])) {
-
-		template_summary_combo_view($reporter,$args);
-		$do_chart = true;
-
-    } else if($reporter->show_columns &&
-	          !empty($reporter->report_def['display_columns']) &&
-          	   empty($reporter->report_def['group_defs'])) {
-		template_detail_and_total_list_view($reporter,$args);
-	} else if (!empty($reporter->report_def['group_defs'])) {
-		template_summary_list_view($reporter,$args);
-		$do_chart = true;
-	} else {
-		template_total_view($reporter,$args);
-	} // else
-} else if (!empty($reporter->report_def['display_columns'])) {
-	template_list_view($reporter,$args);
-} // else if
-
-if ($reporter->report_def['chart_type']== 'none') {
-	$do_chart = false;
-}
-echo "time = " . microtime_diff($dbStart, microtime())."s ";
-?>
-</div>
-<?php
-	$contents = ob_get_contents();
-	ob_end_clean();
-
-	if ($do_chart) {
-   		template_chart($reporter);
-	} // if
-
-	print $contents;
-	*/
 } // fn
 
 function reportResults(&$reporter, &$args) {
@@ -963,7 +911,6 @@ if (isset($reporter->saved_report->id) ) {
 }
 
 	echo "<div class='reportChartContainer' id='{$report_id}_div' style='{$reportChartDivStyle}'>";
-     require_once("include/SugarCharts/ChartDisplay.php");
      $chartDisplay = new ChartDisplay();
      $chartDisplay->setReporter($reporter);
      echo "<div align='center'>".$chartDisplay->legacyDisplay(null, false)."</div>";
@@ -1001,7 +948,6 @@ function template_reports_filters(&$smarty, &$args) {
 	$smarty->assign('mod_strings', $mod_strings);
 	$smarty->assign('selectedAnd', $selectedAnd);
 	$smarty->assign('selectedOR', $selectedOR);
-	//echo $smarty->fetch("modules/Reports/templates/_template_reports_filters.tpl");
 
 } // fn
 
@@ -1011,7 +957,6 @@ function template_reports_filters(&$smarty, &$args) {
 function template_reports_group_by(&$smarty, &$args) {
 	global $mod_strings;
 	$smarty->assign('mod_strings', $mod_strings);
-	//echo $smarty->fetch("modules/Reports/templates/_template_reports_group_by.tpl");
 
 } // fn
 
@@ -1035,7 +980,6 @@ function template_reports_chart_options(&$smarty, &$args) {
 	$smarty->assign('chart_types', $chart_types);
 	$smarty->assign('$report_def', $reporter->report_def);
 	$smarty->assign('chart_description', $chart_description);
-	//echo $smarty->fetch("modules/Reports/templates/_template_reports_chart_options.tpl");
 
 } // fn
 
@@ -1055,16 +999,6 @@ function juliansort($a,$b)
  return -1;
 }
 
-/*
-  $assigned_user_html_def = array(
-    'parent_id'=>'assigned_user_id',
-    'parent_id_value'=>$focus->assigned_user_id,
-    'parent_name'=>'assigned_user_name',
-    'parent_name_value'=>$focus->assigned_user_name,
-    'real_parent_name'=>'user_name',
-    'module'=>'Users',
-  );
-*/
 function get_select_related_html(&$args)
 {
   global $global_json,$app_strings;
@@ -1085,8 +1019,8 @@ function get_select_related_html(&$args)
 
   $request_data = $global_json->encode($popup_request_data);
 
-
-  $content = "<input class='sqsEnabled' autocomplete='off' id='{$args['parent_name']}' name='{$args['parent_name']}' type='text' value='{$args['parent_name_value']}'>&nbsp;<input id='{$args['parent_id']}' name='{$args['parent_id']}' type='hidden' value='{$args['parent_id_value']}'/></slot>";
+    $sanitizedParentNameValue = htmlentities($args['parent_name_value'], ENT_QUOTES);
+    $content = "<input class='sqsEnabled' autocomplete='off' id='{$args['parent_name']}' name='{$args['parent_name']}' type='text' value='{$sanitizedParentNameValue}'>&nbsp;<input id='{$args['parent_id']}' name='{$args['parent_id']}' type='hidden' value='{$args['parent_id_value']}'/></slot>";
   $content .= "<input title='{$app_strings['LBL_SELECT_BUTTON_TITLE']}' type='button' class='button' value='{$app_strings['LBL_SELECT_BUTTON_LABEL']}' name=btn1 ";
 
   if ( isset($args['tabindex']))
@@ -1103,7 +1037,6 @@ function get_select_related_html(&$args)
 
 function js_setup(&$smarty) {
 	global $global_json;
-	require_once('include/QuickSearchDefaults.php');
 	$qsd = QuickSearchDefaults::getQuickSearchDefaults();
 	$qsd->form_name = "ReportsWizardForm";
 	$sqs_objects = array('ReportsWizardForm_assigned_user_name' => $qsd->getQSUser()); //, 'ReportsWizardForm_team_name_collection_0' => $qsd->getQSTeam());
@@ -1149,7 +1082,7 @@ function template_reports_tables(&$smarty, &$args) {
 	if (! empty($reporter->saved_report)) {
 		$focus = & $reporter->saved_report;
 	} else {
-		$focus = BeanFactory::getBean('Reports');
+		$focus = BeanFactory::newBean('Reports');
 		$focus->assigned_user_name = (empty($_REQUEST['assigned_user_name']) ? '' : $_REQUEST['assigned_user_name']);
 		$focus->assigned_user_id = (empty($_REQUEST['assigned_user_id']) ? '' : $_REQUEST['assigned_user_id']);
 		$focus->team_name = (empty($_REQUEST['team_name']) ? '' : $_REQUEST['team_name']);

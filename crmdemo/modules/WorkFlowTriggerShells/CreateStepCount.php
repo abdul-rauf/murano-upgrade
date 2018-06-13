@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -34,7 +33,7 @@ global $urlPrefix;
 global $currentModule;
 
 
-$workflow_object = BeanFactory::getBean('WorkFlow');
+$workflow_object = BeanFactory::newBean('WorkFlow');
 if(isset($_REQUEST['workflow_id']) && isset($_REQUEST['workflow_id'])) {
     $workflow_object->retrieve($_REQUEST['workflow_id']);
 } else {
@@ -43,7 +42,7 @@ if(isset($_REQUEST['workflow_id']) && isset($_REQUEST['workflow_id'])) {
 
 
 
-$focus = BeanFactory::getBean('WorkFlowTriggerShells');
+$focus = BeanFactory::newBean('WorkFlowTriggerShells');
 
 if(isset($_REQUEST['record']) && isset($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
@@ -70,17 +69,14 @@ if(!empty($_REQUEST['type']) && $_REQUEST['type']!="") {
 
 	//Bug 12335: We need to include the javascript language file first. And also the language file in WorkFlow is needed.
         if(!is_file(sugar_cached('jsLanguage/') . $GLOBALS['current_language'] . '.js')) {
-            require_once('include/language/jsLanguage.php');
             jsLanguage::createAppStringsCache($GLOBALS['current_language']);
         }
         $javascript_language_files = getVersionedScript("cache/jsLanguage/{$GLOBALS['current_language']}.js",  $GLOBALS['sugar_config']['js_lang_version']);
         if(!is_file(sugar_cached('jsLanguage/') . $this->module . '/' . $GLOBALS['current_language'] . '.js')) {
-                require_once('include/language/jsLanguage.php');
                 jsLanguage::createModuleStringsCache($this->module, $GLOBALS['current_language']);
         }
         $javascript_language_files .= getVersionedScript("cache/jsLanguage/{$this->module}/{$GLOBALS['current_language']}.js", $GLOBALS['sugar_config']['js_lang_version']);
         if(!is_file(sugar_cached('jsLanguage/WorkFlow/') . $GLOBALS['current_language'] . '.js')) {
-            require_once('include/language/jsLanguage.php');
             jsLanguage::createModuleStringsCache('WorkFlow', $GLOBALS['current_language']);
         }
         $javascript_language_files .= getVersionedScript("cache/jsLanguage/WorkFlow/{$GLOBALS['current_language']}.js", $GLOBALS['sugar_config']['js_lang_version']);
@@ -123,7 +119,6 @@ $form->out("embeded");
 ////////Middle Items/////////////////////////////
 
 //SET Previous Display Text
-	require_once('include/ListView/ProcessView.php');
 	$ProcessView = new ProcessView($workflow_object, $focus);
 	$prev_display_text = $ProcessView->get_prev_text("TriggersCreateStep1", $focus->type);
 
@@ -133,7 +128,7 @@ $form->out("embeded");
 ////////////////////Base expression object///////////////////////////////
 //store lhs_type, lhs_module (rel_module), operator, rhs_value (count_quantity)
 
-	$base_object = BeanFactory::getBean('Expressions');
+	$base_object = BeanFactory::newBean('Expressions');
 		$base_list = $focus->get_linked_beans('expressions','Expression');
 		if(isset($base_list[0]) && $base_list[0]!='') {
 			$base_id = $base_list[0]->id;
@@ -169,7 +164,7 @@ $form->out("embeded");
 
 //////////////////BEGIN 1st Filter Object	/////////////////////////////////
 
-		$filter1_object = BeanFactory::getBean('Expressions');
+		$filter1_object = BeanFactory::newBean('Expressions');
 		//only try to retrieve if there is a base object set
 		if(isset($base_id) && $base_id!="") {
 			$filter_list = $base_object->get_linked_beans('members','Expression');
@@ -205,7 +200,7 @@ $form->out("embeded");
 
 //////////////////BEGIN 2nd Filter Object	/////////////////////////////////
 
-		$filter2_object = BeanFactory::getBean('Expressions');
+		$filter2_object = BeanFactory::newBean('Expressions');
 		//only try to retrieve if there is a base object set
 		if(isset($base_id) && $base_id!="") {
 			if(isset($filter_list[1]) && $filter_list[1]!='') {
